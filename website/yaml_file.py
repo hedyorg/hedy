@@ -59,14 +59,7 @@ class YamlFile:
         return YAML_FILES_CACHE[filename]
 
     def __init__(self, filename):
-        """Create a new YamlFile for the given filename.
-
-        try_pickle controls on whether we pickle or not. Can be
-        `True`, `False` or `None` -- in case of `None` pickling is
-        determined automatically based on whether or not we appear
-        to be running on Heroku. We don't pickle on dev workstations
-        because it creates a mess of files.
-        """
+        """Create a new YamlFile for the given filename."""
         self.filename = filename
         self.pickle_filename = path.join(tempfile.gettempdir(), 'hedy_pickles',
                                          f"{pathname_slug(self.filename)}.pickle")
@@ -114,7 +107,7 @@ class YamlFile:
         yaml_ts = self._file_timestamp(self.filename)
         pickle_ts = self._file_timestamp(self.pickle_filename)
 
-        if pickle_ts and pickle_ts > yaml_ts:
+        if pickle_ts and yaml_ts and pickle_ts > yaml_ts:
             # Pickle file is newer than the YAML, just read that
             return self.load_pickle()
 
@@ -138,11 +131,46 @@ class YamlFile:
     @querylog.timed_as('load_yaml_uncached')
     def load_uncached(self):
         """Load the source YAML file."""
+        file = self._load_yaml(self.filename)
+        base_filename = path.join(path.dirname(self.filename), 'en.yaml')
+        if self.filename != base_filename:
+            base_file = self._load_yaml(base_filename)
+            merged = self.merge_yaml(file, base_file)
+            return merged
+        return file
+
+    def _load_yaml(self, filename):
         try:
-            with open(self.filename, "r", encoding="utf-8") as f:
+            with open(filename, 'r', encoding="utf-8") as f:
                 return yaml_loader.load(f)
         except IOError:
             return {}
+
+    @staticmethod
+    def merge_yaml(source, fallback):
+        """Merge the language file with the fallback file.
+
+        The source yaml is merged with the fallback yaml, so that the values missing in the source are taken from
+        the fallback. Note that if a mismatch occurs (the property is a list in the source but a dict in the fallback,
+        or the source file has an array with more elements than its counterpart in the target file), the fallback
+        content is preferred and the source content is discarded."""
+        if source and isinstance(source, dict):
+            if not isinstance(fallback, dict):
+                return fallback
+            for key, value in source.items():
+                if key in fallback:
+                    returned = YamlFile.merge_yaml(value, fallback.get(key))
+                    fallback[key] = returned
+        elif source and isinstance(source, list):
+            if not isinstance(fallback, list):
+                return fallback
+            for i, value in enumerate(source):
+                if i < len(fallback):
+                    returned = YamlFile.merge_yaml(value, fallback[i])
+                    fallback[i] = returned
+        else:
+            return source if source else fallback
+        return fallback
 
     def _file_timestamp(self, filename):
         try:

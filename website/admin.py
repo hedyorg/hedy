@@ -1,19 +1,20 @@
-from flask import request
-from flask_babel import gettext
+from flask import make_response, request
+from website.flask_helpers import gettext_with_fallback as gettext
 
-import hedyweb
 import utils
 from website.flask_helpers import render_template
 from website.auth import (
     create_verify_link,
     current_user,
     is_admin,
+    is_super_teacher,
     is_teacher,
     make_salt,
     password_hash,
     pick,
     requires_admin,
     send_localized_email_template,
+    refresh_current_user_from_db,
 )
 
 from .database import Database
@@ -30,7 +31,7 @@ class AdminModule(WebsiteModule):
     def get_admin_page(self):
         # Todo TB: Why do we check for the testing_request here? (09-22)
         if not utils.is_testing_request(request) and not is_admin(current_user()):
-            return utils.error_page(error=403, ui_message=gettext("unauthorized"))
+            return utils.error_page(error=401, ui_message=gettext("unauthorized"))
         return render_template("admin/admin.html", page_title=gettext("title_admin"), current_page="admin")
 
     @route("/users", methods=["GET"])
@@ -66,9 +67,9 @@ class AdminModule(WebsiteModule):
             "last_login",
             "verification_pending",
             "is_teacher",
+            "is_super_teacher",
             "program_count",
             "prog_experience",
-            "teacher_request",
             "experience_languages",
             "language",
             "keyword_language",
@@ -78,7 +79,6 @@ class AdminModule(WebsiteModule):
             data = pick(user, *fields)
             data["email_verified"] = not bool(data["verification_pending"])
             data["is_teacher"] = bool(data["is_teacher"])
-            data["teacher_request"] = True if data["teacher_request"] else None
             data["created"] = utils.timestamp_to_date(data["created"])
             data["last_login"] = utils.timestamp_to_date(data["last_login"]) if data.get("last_login") else None
             if category == "language":
@@ -117,6 +117,7 @@ class AdminModule(WebsiteModule):
             text_filter=substring,
             language_filter=language,
             keyword_language_filter=keyword_language,
+            prev_page_token=users.prev_page_token,
             next_page_token=users.next_page_token,
             current_page="admin",
             javascript_page_options=dict(page='admin-users'),
@@ -145,57 +146,51 @@ class AdminModule(WebsiteModule):
             current_page="admin",
         )
 
-    @route("/achievements", methods=["GET"])
-    @requires_admin
-    def get_admin_achievements_page(self, user):
-        stats = {}
-        achievements = hedyweb.AchievementTranslations().get_translations("en").get("achievements")
-        for achievement in achievements.keys():
-            stats[achievement] = {}
-            stats[achievement]["name"] = achievements.get(achievement).get("title")
-            stats[achievement]["description"] = achievements.get(achievement).get("text")
-            stats[achievement]["count"] = 0
-
-        user_achievements = self.db.get_all_achievements()
-        total = len(user_achievements)
-        for user in user_achievements:
-            for achieved in user.get("achieved", []):
-                stats[achieved]["count"] += 1
-
-        return render_template(
-            "admin/admin-achievements.html",
-            stats=stats,
-            current_page="admin",
-            total=total,
-            page_title=gettext("title_admin"),
-        )
-
-    @route("/markAsTeacher", methods=["POST"])
-    def mark_as_teacher(self):
+    @route("/mark-as-teacher/<username_teacher>", methods=["POST"])
+    def mark_as_teacher(self, username_teacher):
         user = current_user()
-        if not is_admin(user) and not utils.is_testing_request(request):
-            return utils.error_page(error=403, ui_message=gettext("unauthorized"))
+        # the user that wants to mark a teacher
+        if (not is_admin(user) and not is_super_teacher(user)) and not utils.is_testing_request(request):
+            return utils.error_page(error=401, ui_message=gettext("unauthorized"))
+        if not username_teacher:
+            return make_response(gettext("username_invalid"), 400)
 
-        body = request.json
+        # the user that is going to be a teacher
+        teacher = self.db.user_by_username(username_teacher.strip().lower())
+        if not teacher:
+            return make_response(gettext("username_invalid"), 400)
+        if utils.is_testing_request(request):
+            is_teacher_value = request.json['is_teacher']
+        else:
+            is_teacher_value = 0 if teacher.get("is_teacher") else 1
 
-        # Validations
-        if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
-        if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
-        if not isinstance(body.get("is_teacher"), bool):
-            return gettext("teacher_invalid"), 400
+        update_is_teacher(self.db, teacher, is_teacher_value)
 
-        user = self.db.user_by_username(body["username"].strip().lower())
+        return make_response('', 200)
 
-        if not user:
-            return gettext("username_invalid"), 400
+    @route("/mark-super-teacher/<username_teacher>", methods=["POST"])
+    @requires_admin
+    def mark_super_teacher(self, user, username_teacher):
+        # the user that wants to mark a teacher
+        if not user and not utils.is_testing_request(request):
+            return utils.error_page(error=401, ui_message=gettext("unauthorized"))
+        if not username_teacher:
+            return make_response(gettext("username_invalid"), 400)
+        if not is_teacher:
+            return make_response(gettext("teacher_invalid"), 400)
 
-        is_teacher_value = 1 if body["is_teacher"] else 0
-        update_is_teacher(self.db, user, is_teacher_value)
+        # the user that is going to be a teacher
+        teacher = self.db.user_by_username(username_teacher.strip().lower())
 
-        # Todo TB feb 2022 -> Return the success message here instead of fixing in the front-end
-        return "", 200
+        if not teacher:
+            return make_response(gettext("username_invalid"), 400)
+        elif not is_teacher(user):
+            return make_response("user must be a teacher.", 400)
+
+        self.db.update_user(username_teacher, {"is_super_teacher": 0 if teacher.get("is_super_teacher") else 1, })
+        refresh_current_user_from_db()
+
+        return make_response(f"{username_teacher} is now a super-teacher.", 200)
 
     @route("/changeUserEmail", methods=["POST"])
     @requires_admin
@@ -204,16 +199,16 @@ class AdminModule(WebsiteModule):
 
         # Validations
         if not isinstance(body, dict):
-            return gettext("ajax_error"), 400
+            return make_response(gettext("ajax_error"), 400)
         if not isinstance(body.get("username"), str):
-            return gettext("username_invalid"), 400
+            return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("email"), str) or not utils.valid_email(body["email"]):
-            return gettext("email_invalid"), 400
+            return make_response(gettext("email_invalid"), 400)
 
         user = self.db.user_by_username(body["username"].strip().lower())
 
         if not user:
-            return gettext("email_invalid"), 400
+            return make_response(gettext("email_invalid"), 400)
 
         token = make_salt()
         hashed_token = password_hash(token, make_salt())
@@ -224,7 +219,7 @@ class AdminModule(WebsiteModule):
 
         # If this is an e2e test, we return the email verification token directly instead of emailing it.
         if utils.is_testing_request(request):
-            return {"username": user["username"], "token": hashed_token}, 200
+            return make_response({"username": user["username"], "token": hashed_token}, 200)
         else:
             try:
                 send_localized_email_template(
@@ -235,9 +230,8 @@ class AdminModule(WebsiteModule):
                     username=user["username"],
                 )
             except BaseException:
-                return gettext("mail_error_change_processed"), 400
-
-        return {}, 200
+                return make_response(gettext("mail_error_change_processed"), 400)
+        return make_response('', 200)
 
     @route("/getUserTags", methods=["POST"])
     @requires_admin
@@ -245,8 +239,8 @@ class AdminModule(WebsiteModule):
         body = request.json
         user = self.db.get_public_profile_settings(body["username"].strip().lower())
         if not user:
-            return "User doesn't have a public profile", 400
-        return {"tags": user.get("tags", [])}, 200
+            return make_response(gettext("request_invalid"), 400)
+        return make_response({"tags": user.get("tags", [])}, 200)
 
     @route("/updateUserTags", methods=["POST"])
     @requires_admin
@@ -254,7 +248,7 @@ class AdminModule(WebsiteModule):
         body = request.json
         db_user = self.db.get_public_profile_settings(body["username"].strip().lower())
         if not user:
-            return "User doesn't have a public profile", 400
+            return make_response(gettext("request_invalid"), 400)
 
         tags = []
         if "admin" in user.get("tags", []):
@@ -273,14 +267,14 @@ class AdminModule(WebsiteModule):
         db_user["tags"] = tags
 
         self.db.update_public_profile(username, db_user)
-        return {}, 200
+        return make_response('', 204)
 
 
 def update_is_teacher(db: Database, user, is_teacher_value=1):
     user_is_teacher = is_teacher(user)
     user_becomes_teacher = is_teacher_value and not user_is_teacher
 
-    db.update_user(user["username"], {"is_teacher": is_teacher_value, "teacher_request": None})
+    db.update_user(user["username"], {"is_teacher": is_teacher_value})
 
     # Some (student users) may not have emails, and this code would explode otherwise
     if user_becomes_teacher and not utils.is_testing_request(request) and user.get('email'):

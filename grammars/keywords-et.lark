@@ -5,7 +5,7 @@ _DEF: ("def" | "def") _SPACE?
 _RETURN: ("return" | "return") _SPACE?
 _PRINT: ("prindi" | "print") _SPACE?
 _PLAY: ("play" | "play") _SPACE
-_ASK: ("küsi" | "ask") _SPACE?
+_ASK: ("küsi" | "ask")
 _ECHO: ("peegelda" | "echo") _SPACE?
 _FORWARD: ("edasi" | "forward") _SPACE?
 _TURN: ("pööra" | "turn") _SPACE?
@@ -26,16 +26,16 @@ _IS: _SPACE ("on" | "is") _SPACE
 _STANDALONE_IS: ("on" | "is")
 _SLEEP: ("oota" | "sleep") _SPACE?
 _ADD_LIST: ("lisa" | "add") _SPACE
-_TO_LIST: _SPACE ("nimistusse" | "to") _SPACE
+_TO_LIST: _SPACE? ("nimistusse" | "to")
 _REMOVE: ("kustuta" | "remove") _SPACE
-_FROM: _SPACE ("nimistust" | "from") _SPACE
+_FROM: _SPACE? ("nimistust" | "from")
 _AT: _SPACE ("täitsa" | "at") _SPACE
 random: ("juhuslikult" | "random") _SPACE?
 _IN: _SPACE ("nimistus" | "in") _SPACE
 _NOT_IN: _SPACE ("not in" | "not in") _SPACE
 _IF: ("kui" | "if") _SPACE
 _ELSE: "muidu" | "else"
-_AND: _SPACE ("ja" | "and") _SPACE
+_AND: _SPACE? ("ja" | "and") _SPACE
 _REPEAT: ("korda" | "repeat") _SPACE
 _TIMES: _SPACE ("korda" | "times")
 _FOR: ("jaoks" | "for") _SPACE
@@ -44,10 +44,11 @@ _TO: _SPACE ("kuni" | "to") _SPACE
 _STEP: "sammuga" | "step"
 _ELIF: _SPACE? ("muidukui" | "elif") _SPACE
 _INPUT: ("sisesta" | "input")
-_OR: _SPACE ("või" | "or") _SPACE
+_OR: _SPACE? ("või" | "or") _SPACE
 _WHILE: ("senikui" | "while") _SPACE
 _LENGTH: "pikkus" | "length"
 _COLOR : ("värv" | "color") _SPACE?
 _PRESSED: ("pressed" | "pressed") _SPACE?
-_BUTTON: ("button" | "button") _SPACE?
 clear: ("clear" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?

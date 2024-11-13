@@ -1,9 +1,8 @@
-command:+= assign_list | add | remove | error_add_missing_to | error_remove_missing_from > error_invalid
-_print_argument: (_SPACE | (list_access textwithoutspaces?) | textwithoutspaces)*
-ask: var _IS _ASK ((_SPACE | text_ask)*)?
+command:+= assign_list | add | remove | error_add_missing_to | error_remove_missing_from | error_add_missing_list | error_remove_missing_list >> error_invalid
+_print_ask_argument: (_SPACE | (list_access textwithoutspaces?) | textwithoutspaces)*
 
-assign: var _IS (list_access | text) -> assign
-assign_list: var _IS text_list (_COMMA text_list)+
+assign: var _IS (list_access | textwithinnerspaces) _SPACE? -> assign
+assign_list: var _IS textwithinnerspaces (_COMMA textwithinnerspaces)+ _SPACE?
 play: _PLAY (list_access | textwithoutspaces)
 
 list_access: var_access _AT (INT | random)
@@ -12,14 +11,17 @@ turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces))? -> forward | _TUR
 sleep: _SLEEP (INT | list_access | var_access)?
 // lists are introduced and list separators (comma and arabic comma) have to excluded from text.
 text: /([^\n،,，、#]+)/ -> text
-text_ask: /([^\n#]+)/ -> text // the ask command is an exception since it needs to include commas in its value
-text_list: /([^\n,،，、#]+)/ -> text // list elements are another exception since they can contain punctuation but not list separators
+// list elements are another exception since they can contain punctuation but not list separators. Also, they cannot end with space.
+textwithinnerspaces: /([^\n،,，、#]*[^\n،,，、# ])/ -> text
 
-// FH, jan 22: not exactly sure why this works, while textwithoutspaces parses the whole line in add/remove
-// leaving this for now
-some_spaces : /([^\r\n!?. ]+)/ (_SPACE /([^\r\n!?. ]+)/)* -> text
+// Values which are added or removed from lists can contain spaces, so we need to escape the 'to_list' and 'from' keywords
+// The part " (?!<expand_keyword to_list>|<expand_keyword from>)" will be processed to a space with a negative look ahead of all to_list and from values
+// It means that a space cannot be not followed by a 'to' or 'from' for the given language
+text_add_remove_list: /(?:[^\n,،，、# ]| (?!<expand_keyword to_list>|<expand_keyword from>))+/ -> text
 
-add: _ADD_LIST some_spaces _TO_LIST var_access
-remove: _REMOVE some_spaces _FROM var_access
-error_add_missing_to: _ADD_LIST var_access
-error_remove_missing_from: _REMOVE var_access
+add: _ADD_LIST text_add_remove_list _TO_LIST _SPACE var_access
+remove: _REMOVE text_add_remove_list _FROM _SPACE var_access
+error_add_missing_to: _ADD_LIST text_add_remove_list _SPACE?
+error_remove_missing_from: _REMOVE text_add_remove_list _SPACE?
+error_add_missing_list: _ADD_LIST text_add_remove_list _TO_LIST _SPACE?
+error_remove_missing_list: _REMOVE text_add_remove_list _FROM _SPACE?

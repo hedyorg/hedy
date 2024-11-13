@@ -59,6 +59,8 @@ export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
             editorType = EditorType.CHEATSHEET;
         } else if ($(preview).hasClass('parsons')) {
             editorType = EditorType.PARSONS;
+        } else if ($(preview).hasClass('workbook')){
+            editorType = EditorType.WORKBOOK
         } else {
             editorType = EditorType.EXAMPLE;
         }
@@ -169,6 +171,16 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     theme[".cm-scroller"] = { "overflow": "auto", "min-height": "3.5rem" }
                     extensions.push(EditorView.theme(theme));
                     break;
+                case EditorType.WORKBOOK:
+                    theme["&"] = {
+                        background: '#272822',
+                        fontSize: '15.2px',
+                        color: 'white',
+                        borderRadius: '4px',
+                        marginRight: '5px'
+                    }
+                    extensions.push([EditorView.theme(theme)])
+                    break;
                 case EditorType.COMMON_MISTAKES: 
                     theme["&"] = {
                         background: '#272822',
@@ -211,9 +223,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         // Contains all of the keywords for every level
         const hedyStyleTags: Record<string, Tag> = {
             "print forward turn play color ask is echo sleep Comma": t.keyword,
-            "at random remove from add to if else in not Op": t.keyword,
+            "at random remove from add to if else in not_in Op": t.keyword,
             "repeat times for range with return and or while": t.keyword,
-            "elif def input toList": t.keyword,
+            "elif def input to_list": t.keyword,
+            "true false True False": t.number,
             Comment: t.lineComment,
             "Text": t.name,
             "String": t.string,

@@ -1,11 +1,11 @@
-_DEFINE: ("define" | "define") _SPACE?
-_CALL: ("call" | "call") _SPACE?
-_WITH: ("with" | "with") _SPACE?
+_DEFINE: ("definiere" | "define") _SPACE?
+_CALL: ("aufruf" | "call") _SPACE?
+_WITH: ("mit" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
-_RETURN: ("return" | "return") _SPACE?
+_RETURN: ("zurück" | "return") _SPACE?
 _PRINT: ("drucke" | "print") _SPACE?
-_PLAY: ("play" | "play") _SPACE
-_ASK: ("frage" | "ask") _SPACE?
+_PLAY: ("spiele" | "play") _SPACE
+_ASK: ("frage" | "ask")
 _ECHO: ("echo" | "echo") _SPACE?
 _FORWARD: ("vorwärts" | "forward") _SPACE?
 _TURN: ("drehe" | "turn") _SPACE?
@@ -25,17 +25,17 @@ yellow: ("Gelb" | "yellow") _SPACE?
 _IS: _SPACE ("ist" | "is") _SPACE
 _STANDALONE_IS: ("ist" | "is")
 _SLEEP: ("schlafe" | "sleep") _SPACE?
-_ADD_LIST: ("addiere" | "add") _SPACE
-_TO_LIST: _SPACE ("zu" | "to") _SPACE
+_ADD_LIST: ("hinzufügen" | "add") _SPACE
+_TO_LIST: _SPACE? ("zu" | "to")
 _REMOVE: ("entferne" | "remove") _SPACE
-_FROM: _SPACE ("aus" | "from") _SPACE
+_FROM: _SPACE? ("aus" | "from")
 _AT: _SPACE ("an" | "at") _SPACE
 random: ("zufällig" | "random") _SPACE?
 _IN: _SPACE ("in" | "in") _SPACE
 _NOT_IN: _SPACE ("nicht in" | "not in") _SPACE
 _IF: ("falls" | "if") _SPACE
 _ELSE: "sonst" | "else"
-_AND: _SPACE ("und" | "and") _SPACE
+_AND: _SPACE? ("und" | "and") _SPACE
 _REPEAT: ("wiederhole" | "repeat") _SPACE
 _TIMES: _SPACE ("mal" | "times")
 _FOR: ("für" | "for") _SPACE
@@ -44,10 +44,11 @@ _TO: _SPACE ("bis" | "to") _SPACE
 _STEP: "schritt" | "step"
 _ELIF: _SPACE? ("sofalls" | "elif") _SPACE
 _INPUT: ("eingabe" | "input")
-_OR: _SPACE ("oder" | "or") _SPACE
+_OR: _SPACE? ("oder" | "or") _SPACE
 _WHILE: ("solange" | "while") _SPACE
 _LENGTH: "länge" | "length"
 _COLOR : ("farbe" | "color") _SPACE?
 _PRESSED: ("gedrückt" | "pressed") _SPACE?
-_BUTTON: ("knopf" | "button") _SPACE?
 clear: ("abwischen" | "clear") _SPACE?
+TRUE: ("wahr" | "Wahr" | "true" | "True") _SPACE?
+FALSE: ("falsch" | "Falsch" | "false" | "False") _SPACE?

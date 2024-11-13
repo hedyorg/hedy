@@ -1,0 +1,28 @@
+levels:
+    1:
+        1:
+            story: "Uganke so vaje, pri katerih so vrstice programa že napisane za vas. Vrstice morate le razvrstiti v pravilnem vrstnem redu. Vrstice kode povlecite v vnosno okno in zaženite kodo. Ali vam bo program deloval?\n\nSte stranka v pekarni Hedy.\nVstopite v pekarno, kjer vas pozdravi pek.\nVpraša vas, katero vrsto pite želite naročiti.\nNato vam ponovi vaš odgovor.\nNa koncu se vaše naročilo pripravi."
+            code: "{print} Dobrodošli v pekarni Hedy!\n{ask} Katero vrsto pite želite naročiti?\n{echo} Torej želite\n{print} Vaše naročilo se pripravlja!"
+        2:
+            story: Pri DJ-u prosite za pesem. Ustvarite program, ki vas vpraša, ali ste pripravljeni na zabavo, nato pa vas vpraša, katero skladbo bi radi slišali.
+            code: "{print} To je DJ Hedy\n{ask} Ste pripravljeni na zabavo?\n{ask} Katero pesem bi radi slišali?\n{echo} Odlična izbira! ta pesem mi je všeč"
+    2:
+        1:
+            story: "S prijatelji boste gledali Netflix.\nPokažite, kateri film boste gledali, in zaželite gledalcem veliko zabave!"
+            code: "{print} Čas je za Netflix večer\nfilm {is} Ježek Sonic 2\n{print} Ogledali si bomo film\n{print}. Zabavajte se!"
+        2:
+            story: To je spletna trgovina z igračami. Ustvarite program, v katerem lahko kupci dodajo predmet v nakupovalno košarico.
+            code: "{print} Dobrodošli v naši trgovini z igračami\nigrača {is} {ask} Kaj bi radi kupili?\n{print} igrača je dodana v vašo košarico.\n{print} Hvala, ker ste nakupovali pri nas!"
+    3:
+        2:
+            story: Ustvarite program, ki bo za vas izbral naključni obrok. Sestavite seznam jedi in seznam prelivov ter pustite programu, da odloči, kaj boste jedli!
+            code: "hrana {is} pica, sladoled, solata, sendvič\ndodatki {is} čokolada, sir, tuna, mrvice\n{print} Vaš naključni obrok za danes je...\n{sleep} 2\n{print} hrana {at} {random} z dodatki {at} {random}"
+        3:
+            story: "Na šahovskem turnirju ostanejo trije igralci.\nUstvarite program, ki odloči, katera dva igralca morata najprej igrati drug proti drugemu.\nZačnite tako, da natisnete dva igralca, ki igrata prvo tekmo, nato natisnite, proti kateremu igralcu bo igral zmagovalec."
+    6:
+        2:
+            story: Ustvarite program, ki vam pomaga izračunati, koliko tort morate kupiti za rojstnodnevno zabavo.
+            code: "{print} 'Danes imate rojstni dan!'\nljudje = {ask} 'Kolikim ljudem želite dati košček torte?'\nštevilo_tort = ljudje/8\n{print} 'Kupiti boste morali ' število_tort ' torte'"
+    7:
+        1:
+            story: Dokončajte pesem Baby Shark. Najprej pride Baby Shartk, nato njegova mama in na koncu še oče morski pes.

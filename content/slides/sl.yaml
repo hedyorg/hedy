@@ -1,0 +1,133 @@
+levels:
+    0:
+        1:
+            header: Dobrodošli v Hedy!
+            text: Hedy je programski jezik.
+        2:
+            header: Programiranje
+            text: "Programiranje je podajanje navodil računalniku z uporabo računalniku razumljivega jezika.\n\nTakšen jezik se imenuje \"programski jezik\"."
+        3:
+            header: Programski Jezik
+            text: "Morda že poznate kakšen programski jezik?\nNekaj primerov:\n* Scratch\n* Python\n* HTML"
+        4:
+            header: Programiranje
+            text: "Če znate programirati, lahko naredite veliko zanimivih stvari:\n* Zgradite interaktivne zgodbe ali kvize\n* Ustvarite računalniške risbe in jih narišite na papir ali blago\n* Ustvarite lastne aplikacije za uporabo v telefonu"
+        5:
+            header: Programiranje v Hedy
+            text: V Hedy uporabljamo posebne izraze, kot je `{print}`.
+            code: '{print} Dobrodošli v Hedy!'
+        6:
+            header: Programiranje v Hedy-ju
+            text: Ključni ukazi bodo prikazani v rožnati barvi.
+            code: '{print} Dobrodošli v Hedy!'
+        7:
+            header: Programiranje v Hedy-ju
+            text: Kodo zaženemo / začnemo izvajati z gumbom Zaženi program pod kodo.
+            code: '{print} Dobrodošli v Hedy!'
+        8:
+            header: Programiranje v Hedy-ju
+            text: Rezultat se prikaže na desni strani.
+            code: '{print} Dobrodošli v Hedy!'
+        9:
+            header: Programiranje v Hedy-ju
+            text: Rezultat je lahko tudi slika.
+    1:
+        1:
+            header: Dobrodošli v prvo stopnjo!
+            text: "1. stopnjo bomo začeli z ustvarjanjem zgodb v Hedy!\n\nZa ustvarjanje interaktivnih zgodb potrebujemo tri ukaze."
+        2:
+            text: "Prvi ukaz, ki ga lahko uporabite na ravni 1  je `{print}`.\n\n`{print}` se uporablja za prikaz besedila na zaslonu."
+            code: '{print} Izpiši besedilo na zaslonu'
+        3:
+            text: "Besedilo po ukazu za tiskanje lahko poljubno spremenite.\n\nLahko pa natisnete več vrstic tako, da dodate drugo vrstico kode, ki se prav tako začne z `{print}``."
+            code: "{print} Dobrodošli v Hedy!\n{print} Zdaj pa začnimo programirati!"
+        4:
+            text: "Drugi ukaz, ki jo lahko uporabite na prvi stopnji, je `{ask}`.\n\n`{ask}` se uporablja za zastavljanje vprašanja, na katerega je mogoče odgovoriti."
+            code: "{print} Dobrodošli v svojo igro kamen, škarje in papir!\n{ask} Kaj boste izbrali?"
+    2:
+        1:
+            text: "Na tej stopnji se boste naučili uporabljati spremenljivke.\n\nSpremenljivka je beseda, ki se lahko uporablja za shranjevanje informacij.\n\nNa primer: ime, starost ali najljubša športna ekipa."
+        2:
+            header: Spremenljivke
+        4:
+            header: Več spremenljivk
+            text: Zdaj, ko znamo uporabljati spremenljivke, lahko namesto enega ukaza `{echo}` uporabimo več spremenljivk.
+        5:
+            text: Z ukazom`{sleep}`lahko izvajnje programa za nekaj časa zaustavite.
+            code: "{print} Moja priljubljena barva je...\n{sleep} 2\n{print} zelena!"
+        6:
+            header: Zaspi 5
+            text: "Za ukazom `{sleep}` lahko dodate številko, če želite, da je premor daljši.\n\nČe želite, lahko celo uporabite spremenljivko namesto številke, da določite  koliko sekund naj program spi."
+        7:
+            header: Razhroščevanje
+            text: Razhroščevanje oziroma odpravljanje napak pomeni, da se znebite napak v programu. Skupaj razhroščimo to kodo. Kliknite na gumb pikapolonica, da zaženete razhroščevalnik.
+            code: "Dobrodošli v trgovini s krofi!\npolnilo {is} Kakšno polnilo bi radi?\n{print} Izbrali ste... polnilo, njam!\npreliv {ask} Kakšen preliv bi želeli?\npreliv je okusen!\n{print} Grem po tvoj krof. {sleep}\n{print} Izvolite! Nasiten krof s prelivom!\n{ask} Lep dan!"
+        8:
+            header: Naj se zabava ob programiranju začne!
+            text: Uživajte v dogodivščinah na 2. stopnji!
+    3:
+        1:
+            header: Dobrodošli na stopnjo 3
+            text: Na tej stopnji se boste naučili narediti seznam, dodati in odstraniti elemente s seznamov ter izbrati naključni element s tega seznama.
+        2:
+            header: Ustvarjanje seznama
+            text: "Seznam ustvarite z ukazom `{is}`.\n\nPredmete na seznamu ločite z vejico."
+            code: živali {is} psi, mačke, kenguruji
+        3:
+            header: Naključno
+            text: "Seznam lahko uporabite z ukazom `{at}` `{random}`.\nRačunalnik bo naključno izbral en element s seznama.\nVsakič, ko zaženete to kodo, se bo rezultat razlikoval."
+            code: "žival {is} pes, mačka, kenguru\n{print} žival {at} {random}"
+        4:
+            header: Naključno v stavku
+            text: Ukaz `{at}` `{random}` lahko uporabite tudi v stavku.
+        5:
+            text: "Elemente lahko dodate na seznam z ukazom `{add}` `{to}`.\n\nIzberete lahko, kaj boste dodali na seznam, ali pa uporabite ukaz `{add}` `{to}` v kombinaciji z ukazom `{ask}`.\nTako lahko igralcem omgoočilte, da se odločijo, kaj dodati na seznam."
+            code: "žival {is} pes, mačka, kenguru\nvšeč {is} {ask} Katera je vaša najljubša žival?\n{add} všeč {to_list} žival\n{print} Jaz izberem žival {at} {random}"
+        6:
+            header: Odstrani iz
+            text: "Nasprotje ukaza `{add}` `{to}` je ukaz `{remove}` `{from}`.\nTa ukaz odstrani element s seznama."
+            code: "žival {is} pes, mačka, kenguru\nne_maram {is} {ask} Katere živali ne marate?\n{remove} ne_maram {from} žival\n{print} Jaz izberem žival {at} {random}"
+        7:
+            header: Razhroševanje
+            text: Razhroščimo to kodo!
+        8:
+            header: Gremo na delo!
+            text: Uživajte v dogodivščinah na 3. stopnji!
+    4:
+        1:
+            header: Dobrodošli na stopnji 4
+            text: Na tej stopnji se boste naučili uporabljati narekovaje.
+            code: "{print} 'vprašaj z narekovaji'"
+        2:
+            header: Težava
+            text: 'V prejšnjih stopnjah ste morda naleteli na to težavo:'
+            code: "ime {is} Sofija\n{print} Moje ime je ime"
+        3:
+            header: Popravek z narekovaji
+            text: "Na tej stopnji bomo to težavo odpravili z uporabo narekovajev.\n\nZaradi tega je tudi naša koda bolj podobna \"pravi\" Python kodi."
+        4:
+            header: Narekovaji in izpisovanje
+            text: Vsakič, ko uporabite ukaz `{print}`, morate dodati besedilo, ki ga želite prikazati na zaslonu, v narekovaje.
+        6:
+            header: Narekovaji in spremenljivke
+            text: "Imena spremenljivk ne želite izpisati na zaslonu.\nZato je treba spremenljivke pustiti zunaj narekovajev, kot na primer:"
+        7:
+            header: Narekovaji in spremenljivke
+            text: "Če so imena spremenljivk uporabljena sredi stavka, jih morate pustiti zunaj narekovajev.\nZa preostali del stavka pa so potrebni narekovaji. To izgleda takole:"
+    6:
+        8:
+            header: Računanje s spremenljivkami
+            text: 'Izračune lahko izvajate neposredno s številkami, vendar lahko za računanje uporabljate tudi spremenljivke, kot je ta:'
+    11:
+        3:
+            text: "Na prejšnji strani je bila spremenljivka poimenovana 'števec', ker je odštevala.\nSeveda lahko za spremenljivko uporabite poljubno ime.\nObičajno ime za spremenljivke v takšni situaciji, ki se uporablja v programskih jezikih, kot je Python, je 'i'.\nTo izgleda takole:"
+    12:
+        2:
+            text: "Na tej stopnji je nekaj sprememb pri uporabi narekovajev.\nOdslej morajo biti **vsa besedila** v narekovajih. To vključuje vrednosti spremenljivk, elemente na seznamih in besedilo za ukazi {if}."
+    13:
+        7:
+            text: "Zdaj smo v funkcijo združili več vprašanj. V program vnesite to kodo in poglejte, kaj se bo zgodilo.\n\nUpoštevajte, da imajo spremenljivke in argumenti enako ime. To je dovoljeno.\nVas to moti? Uporabite različna imena, tudi to je dovoljeno.\n```\ndefiniraj pesem z ime, kraj\n    izpiši 'Moje ' ime ' je ' kraj\n\nime je vprašaj 'Kdo?'\nplace is vprašaj 'Kje so?'\npokliči pesmi z ime, kraj\n```"
+    14:
+        5:
+            text: V tej kodi bo na primer funkcija izračunaj_novo_ceno izračunala novo ceno katerega koli predmeta. Vrnila bo novo ceno.
+            code: "{define} izračunaj_novo_ceno {with} znesek, odstotek\n    odstotek = odstotek/ 100\n    znesek_popusta = znesek* odstotek\n    return znesek - znesek_popusta\n\nstara_cena = {ask} 'Kakšna je označena cena?'\npopust = {ask} 'Kakšen je odstotek popusta?'\n\nnova_cena = _ izračunaj_novo_ceno {with} stara_cena, _\n{print} 'Nova cena je ' nova_cena ' Eurov'"

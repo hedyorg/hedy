@@ -1,23 +1,23 @@
 1:
 -   name: '{print}'
-    explanation: Print something with `{print}`.
-    demo_code: '{print} Hello welcome to Hedy!'
+    explanation: Штампај нешто са `{print}`.
+    demo_code: '{print} Здраво, добродошли у Хеди!'
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: '{ask} What is your favorite color?'
+    explanation: Питај нешто са `{ask}`.
+    demo_code: '{ask} Која је твоја омиљена боја?'
 -   name: '{echo}'
-    explanation: Repeat something using `{echo}`.
+    explanation: Понови нешто користећи `{echo}`.
     demo_code: |-
-        {ask} What is your favorite color?
-        {echo} so your favorite color is
--   name: '{print} emojis'
-    explanation: Print an emoji with `{print}`.
+        {ask} Која је твоја омиљена боја?
+        {echo} дакле твоја омиљена боја је
+-   name: '{print} емотикони'
+    explanation: Штампај емотикон са `{print}`.
     demo_code: '{print} 🙋 🌍 ❗'
 -   name: '{forward}'
-    explanation: Draw a line with `{forward}`.
+    explanation: Нацртај линију са `{forward}`.
     demo_code: '{forward} 100'
 -   name: '{turn}'
-    explanation: Turn the drawing turtle with `{turn}`.
+    explanation: Окрени цртајућу корњачу са `{turn}`.
     demo_code: |-
         {forward} 25
         {turn} {left}
@@ -25,343 +25,343 @@
         {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
+    explanation: Дај речи име за коришћење у програму користећи `{is}`. Можеш сам изабрати име.
     demo_code: |-
         name {is} Hedy
-        {print} welcome name
+        {print} добродошао name
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
+    explanation: Питај нешто са `{ask}`. Пази! Мораш дати одговору име са `{is}`.
     demo_code: |-
-        color {is} {ask} What is your favorite color?
-        {print} color is your favorite!
+        color {is} {ask} Која је твоја омиљена боја?
+        {print} color је твоја омиљена!
 -   name: '{sleep}'
-    explanation: '`{sleep}` let Hedy pause for a (couple of) second(s).'
+    explanation: 'Са `{sleep}`, можеш дозволити Хеди да паузира на (неколико) секунди.'
     demo_code: |-
-        {print} Let me think for one second...
+        {print} Пустите ме да размислим једну секунду...
         {sleep}
-        {print} Hmm.. I need 3 more seconds...
+        {print} Хмм.. Требају ми још 3 секунде...
         {sleep} 3
-        {print} Eureka! Ive got it!
--   name: '{is} with turtle'
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
+        {print} Еурека! Схватио сам!
+-   name: '{is} са корњачом'
+    explanation: Дај броју име користећи `{is}`. Можеш сам изабрати име.
     demo_code: |-
         angle {is} 90
         {turn} angle
         {forward} 100
 3:
--   name: Choose random
-    explanation: Choose a random word from a group with `{at}` and `{random}`.
+-   name: Изабери насумично
+    explanation: Изабери насумичну реч из групе са `{at}` и `{random}`.
     demo_code: |-
-        animals {is} dog, cat, kangaroo
+        animals {is} пас, мачка, кенгур
         {print} animals {at} {random}
 -   name: '{add}'
-    explanation: '`{add}` an item `{to_list}` a list.'
+    explanation: '`{add}` ставку `{to_list}` листи.'
     demo_code: |-
-        animals {is} cow, cat
-        {add} dog {to_list} animals
+        animals {is} крава, мачка
+        {add} пас {to_list} animals
 -   name: '{remove}'
-    explanation: '`{remove}` an item `{from}` a list.'
+    explanation: '`{remove}` ставку `{from}` листе.'
     demo_code: |-
-        animals {is} cat, dog, cow
-        {remove} dog {from} animals
+        animals {is} мачка, пас, крава
+        {remove} пас {from} animals
 4:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''Hello welcome to Hedy.'''
+    explanation: Испиши тачно користећи наводнике.
+    demo_code: '{print} ''Здраво, добродошли у Хеди.'''
 -   name: '{is}'
-    explanation: Give a name to some text and `{print}` without quotation marks.
+    explanation: Дај име неком тексту и `{print}` без наводника.
     demo_code: |-
         name {is} Hedy
-        {print} 'my name is ' name
+        {print} 'моје име је ' name
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: Питај нешто са `{ask}`.
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        color {is} {ask} 'Која је твоја омиљена боја?'
+        {print} color ' је твоја омиљена!'
 5:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''Hello welcome to Hedy.'''
+    explanation: Испиши тачно користећи наводнике.
+    demo_code: '{print} ''Здраво, добродошли у Хеди.'''
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: Питај нешто са `{ask}`.
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        color {is} {ask} 'Која је твоја омиљена боја?'
+        {print} color ' је твоја омиљена!'
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
+    explanation: Направи избор са `{if}`.
     demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`.
+        color {is} {ask} 'Која је твоја омиљена боја?'
+        {if} color {is} зелена {print} 'лепа!' {else} {print} 'мех'
+-   name: '{if} са корњачом'
+    explanation: Направи избор са `{if}`.
     demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
+        answer {is} {ask} 'Колико далеко треба да ходам?'
+        {if} answer {is} далеко {forward} 100 {else} {forward} 5
 -   name: '{in}'
-    explanation: Check elements with `{in}`.
+    explanation: Провери елементе са `{in}`.
     demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+        pretty_colors {is} зелена, жута
+        color {is} {ask} 'Која је твоја омиљена боја?'
+        {if} color {in} pretty_colors {print} 'лепа!' {else} {print} 'мех'
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
+    explanation: Провери да ли је одређени тастер на тастатури `{pressed}`.
+    demo_code: '{if} a {is} {pressed} {print} ''Притиснуо си А!'' {else} {print} ''Притиснуо си други тастер!'''
 6:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
+    explanation: Испиши тачно користећи наводнике.
+    demo_code: '{print} ''5 пута 5 је '' 5 * 5'
 -   name: '{ask}'
-    explanation: Ask for a calculation and check whether it is correct.
+    explanation: Питај за израчунавање и провери да ли је тачно.
     demo_code: |-
-        answer = {ask} 'What is 10 plus 10?'
-        {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
--   name: '{ask} and {if} with turtle'
-    explanation: Ask the user how many angles they want.
+        answer = {ask} 'Колико је 10 плус 10?'
+        {if} answer {is} 20 {print} 'Да!' {else} {print} 'Упс'
+-   name: '`{ask}` и `{if}` са корњачом'
+    explanation: Питај корисника колико углова жели.
     demo_code: |-
-        angles = {ask} 'How many angles?'
+        angles = {ask} 'Колико углова?'
         angle = 360 / angles
         {forward} 50
 7:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''Hello welcome to Hedy.'''
+    explanation: Испиши тачно користећи наводнике.
+    demo_code: '{print} ''Здраво, добродошао у Хеди.'''
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+    explanation: Питај нешто са `{ask}`.
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        color = {ask} 'Која је твоја омиљена боја?'
+        {print} color ' је твоја омиљена!'
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
+    explanation: Направи избор са `{if}`.
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: '{repeat} with turtle'
-    explanation: Repeat a line of code with `{repeat}`.
+        color = {ask} 'Која је твоја омиљена боја?'
+        {if} color {is} зелена {print} 'лепа!' {else} {print} 'мех'
+-   name: '{repeat} са корњачом'
+    explanation: Понови линију кода са `{repeat}`.
     demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
+    explanation: Испиши нешто. Запамти да користиш наводнике за дословно исписивање.
+    demo_code: '{print} ''5 пута 5 је '' 5 * 5'
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    explanation: Питај за одговор на збир и провери да ли је тачан. Сада можемо исписати 2 линије.
     demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
+        answer = {ask} 'Колико је 5 плус 5?'
         {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
+            {print} 'Браво!'
+            {print} 'Заиста, одговор је ' answer
         {else}
-            {print} 'Oops!'
-            {print} 'The answer is 10'
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+            {print} 'Упс!'
+            {print} 'Одговор је 10'
+-   name: '{repeat} са корњачом'
+    explanation: Понови више линија.
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 -   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
+    explanation: Провери да ли је одређени тастер на тастатури `{pressed}`.
     demo_code: |-
         {if} a {is} {pressed}
-            {print} 'You pressed A!'
+            {print} 'Притиснуо си А!'
         {else}
-            {print} 'You pressed another key!'
+            {print} 'Притиснуо си други тастер!'
 9:
--   name: '{if} with multiple lines'
-    explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
+-   name: '{if} са више линија'
+    explanation: Одговор на збир питања са `{ask}` и види да ли је тачан. Сада исписујемо две линије.
     demo_code: |-
-        answer = {ask} 'What is 10 plus 10?'
+        answer = {ask} 'Колико је 10 плус 10?'
         {if} answer {is} 20
-            {print} 'Well done!!'
-            {print} 'The answer is indeed' answer
+            {print} 'Браво!!'
+            {print} 'Одговор је заиста' answer
         {else}
-            {print} 'Wrong'
-            {print} 'The answer is 20'
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+            {print} 'Погрешно'
+            {print} 'Одговор је 20'
+-   name: '{repeat} са корњачом'
+    explanation: Понови више линија.
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
 10:
 -   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
--   name: '{for} with a list'
-    explanation: Print all things in a list.
+    explanation: Одштампај нешто. Запамти да користиш наводнике за дословно штампање.
+    demo_code: '{print} ''5 пута 5 је '' 5 * 5'
+-   name: '{for} са листом'
+    explanation: Одштампај све ствари из листе.
     demo_code: |-
-        animals {is} dog, cat, blobfish
-        {for} animal {in} animals
-          {print} 'I love ' animal
+        животиње {is} пас, мачка, blobfish
+        {for} животиња {in} животиње
+          {print} 'Волим ' животиња
 11:
--   name: '{for} loop'
-    explanation: We can use `{for}` with a `{range}`.
+-   name: '{for} петља'
+    explanation: Можемо користити `{for}` са `{range}`.
     demo_code: |-
         {for} counter {in} {range} 1 {to} 5
             {print} counter
 -   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
+    explanation: Питај за одговор на збир и провери да ли је тачан. Сада можемо одштампати 2 линије.
     demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
+        одговор = {ask} 'Колико је 5 плус 5?'
+        {if} одговор {is} 10
+            {print} 'Браво!'
+            {print} 'Заиста, одговор је био ' одговор
         {else}
-            {print} 'Oops!'
-            {print} 'The answer is 10'
+            {print} 'Упс!'
+            {print} 'Одговор је 10'
 12:
--   name: float directly
-    explanation: Decimal numbers.
+-   name: директно са децималним бројевима
+    explanation: Децимални бројеви.
     demo_code: |-
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
+        {print} 'Израчунај!'
+        {print} 'Два и по плус два и по је...'
         {print} 2.5 + 2.5
--   name: assign text
-    explanation: Text with quotation marks after `=`
+-   name: додели текст
+    explanation: Текст са наводницима после `=`
     demo_code: |-
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: quotes after {if} comparison
-    explanation: Text with quotation marks after `{if}`.
+        име = 'Hedy the Robot'
+        {print} 'Здраво ' име
+-   name: наводници после `{if}` поређења
+    explanation: Текст са наводницима после `{if}`.
     demo_code: |-
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
--   name: quotes in list
-    explanation: A list with quotation marks.
+        име = {ask} 'Ко си ти?'
+        {if} име = 'Hedy'
+            {print} 'Здраво!'
+-   name: наводници у листи
+    explanation: Листа са наводницима.
     demo_code: |-
         superheroes = 'Iron Man', 'Batman', 'Superman'
         {print} superheroes {at} {random}
 13:
 -   name: '{and}'
-    explanation: Two parts both need to be correct.
+    explanation: Оба дела морају бити тачна.
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
+        одговор1 = {ask} 'Колико је 3+2?'
+        одговор2 = {ask} 'Колико је 2+2?'
+        {if} одговор1 {is} 5 {and} одговор2 {is} 4
+            {print} 'Оба одговора су тачна!'
         {else}
-            {print} 'At least one answer is wrong!'
+            {print} 'Бар један одговор је нетачан!'
 -   name: '{or}'
-    explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
+    explanation: Бар један од два дела мора бити тачан. Ако су оба тачна, такође је у реду.
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {or} answer2 {is} 4
-            {print} 'At least one answer is correct!'
+        одговор1 = {ask} 'Колико је 3+2?'
+        одговор2 = {ask} 'Колико је 2+2?'
+        {if} одговор1 {is} 5 {or} одговор2 {is} 4
+            {print} 'Бар један одговор је тачан!'
         {else}
-            {print} 'Both answers are wrong!'
+            {print} 'Оба одговора су нетачна!'
 14:
--   name: Smaller
-    explanation: We use the `<` to check if the first number is smaller than the second number.
+-   name: Мање
+    explanation: Користимо `<` да проверимо да ли је први број мањи од другог броја.
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age < 13
-            {print} 'You are younger than me!'
--   name: Bigger
-    explanation: We use the `>` to check if the first number is bigger than the second number.
+        године = {ask} 'Колико имаш година?'
+        {if} године < 13
+            {print} 'Млађи си од мене!'
+-   name: Веће
+    explanation: Користимо `>` да проверимо да ли је први број већи од другог броја.
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age > 13
-            {print} 'You are older than me!'
--   name: Equal
-    explanation: We use the `==` to check if two things are the same.
+        године = {ask} 'Колико имаш година?'
+        {if} године > 13
+            {print} 'Старији си од мене!'
+-   name: Једнако
+    explanation: Користимо `==` да проверимо да ли су две ствари исте.
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That is correct!'
--   name: Not equal
-    explanation: We use the `!=` to check if two things are not the same.
+        одговор = {ask} 'Колико је 5 * 5?'
+        {if} одговор == 25
+            {print} 'То је тачно!'
+-   name: Није једнако
+    explanation: Користимо `!=` да проверимо да ли две ствари нису исте.
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
--   name: Smaller or equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+        одговор = {ask} 'Колико је 5 * 5?'
+        {if} одговор != 25
+            {print} 'То није тачно!'
+-   name: Мање или једнако
+    explanation: Користимо `<=` да проверимо да ли је први број мањи или једнак другом броју.
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+        године = {ask} 'Колико имаш година?'
+        {if} године <= 12
+            {print} 'Млађи си од мене!'
+-   name: Веће или једнако
+    explanation: Користимо `>=` да проверимо да ли је први број већи или једнак другом броју.
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+        године = {ask} 'Колико имаш година?'
+        {if} године >= 14
+            {print} 'Старији си од мене!'
 15:
 -   name: '{while}'
-    explanation: We can use the `{while}` loop with not equal.
+    explanation: Можемо користити `{while}` петљу са није једнако.
     demo_code: |-
-        answer = 0
-        {while} answer != 25
-            answer = {ask} 'What is 5 times 5?'
-        {print} 'A correct answer has been given'
--   name: Smaller {while}
-    explanation: We can also use the `{while}` loop with `<` and `>`.
+        одговор = 0
+        {while} одговор != 25
+            одговор = {ask} 'Колико је 5 пута 5?'
+        {print} 'Дат је тачан одговор'
+-   name: Мање {while}
+    explanation: Такође можемо користити `{while}` петљу са `<` и `>`.
     demo_code: |-
-        count = 1
-        {while} count < 3
-            {print} 'We do this ' 3 - count ' more times'
-            count = count + 1
-        {print} 'We are done'
+        бројач = 1
+        {while} бројач < 3
+            {print} 'Ово радимо још ' 3 - бројач ' пута'
+            бројач = бројач + 1
+        {print} 'Завршили смо'
 16:
--   name: square brackets
-    explanation: Lists with square brackets.
+-   name: угласте заграде
+    explanation: Листе са угластим заградама.
     demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
--   name: Get an item from a list
-    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
+        воће = ['јабука', 'банана', 'трешња']
+        {print} воће
+-   name: Узми ставку из листе
+    explanation: Да узмемо ставку из листе користимо [број] тако да воће[1] значи, узми прво воће из листе!
     demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: Get a random item from a list
-    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
+        воће = ['банана', 'јабука', 'трешња']
+        прво_воће = воће[1]
+        {print} прво_воће
+-   name: Узми случајну ставку из листе
+    explanation: Да узмемо случајну ставку из листе користимо [{random}] тако да воће[{random}] значи, узми случајно воће из листе!
     demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[{random}]
-        {print} random_fruit
+        воће = ['банана', 'јабука', 'трешња']
+        случајно_воће = воће[{random}]
+        {print} случајно_воће
 17:
 -   name: '{elif}'
     explanation: '`{elif}`'
     demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a is 1'
-        {elif} a == 2:
-            {print} 'a is 2'
+        а = 2
+        {if} а == 1:
+            {print} 'а је 1'
+        {elif} а == 2:
+            {print} 'а је 2'
         {else}:
-            {print} 'a is not 1 or 2'
+            {print} 'а није 1 или 2'
 -   name: '{print}'
-    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
+    explanation: Када користимо `{for}`, морамо ставити `:` иза `{for}` изјаве!
     demo_code: |-
         {for} i {in} {range} 1 {to} 12:
             {print} i
         {print} 'Ready or not, here I come!'
 -   name: '{if}'
-    explanation: We need to do the same with all of our `{if}` statements.
+    explanation: Морамо урадити исто са свим нашим `{if}` изјавама.
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color == 'green':
-            {print} 'Your favorite color is green'
+        боја = {ask} 'Која је твоја омиљена боја?'
+        {if} боја == 'зелена':
+            {print} 'Твоја омиљена боја је зелена'
         {else}:
-            {print} 'Your favorite color is not green'
+            {print} 'Твоја омиљена боја није зелена'
 18:
 -   name: '{print}'
-    explanation: After `{print}` you need to use parentheses.
-    demo_code: '{print}(''hi!'')'
+    explanation: После `{print}` мораш користити заграде.
+    demo_code: '{print}(''здраво!'')'
 -   name: '{range}'
-    explanation: After `{range}` you need to use parentheses.
+    explanation: После `{range}` мораш користити заграде.
     demo_code: |-
         {for} i {in} {range} (1,10):
-            {print}('Hello, times ', i)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you print more items.
+            {print}('Здраво, пута ', i)
+-   name: '{print} са променљивом'
+    explanation: Са `{print}` мораш користити заграде и зарезе ако штампаш више ставки.
     demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something.
+        име = 'Hedy'
+        {print}('моје име је ', име)
+-   name: питај нешто са {input}
+    explanation: Користи `{input}` уместо `{ask}` да питаш нешто.
     demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)
+        име = {input}('Како се зовеш?')
+        {print}('Дакле, твоје име је ', име)

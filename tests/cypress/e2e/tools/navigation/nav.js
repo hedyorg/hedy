@@ -1,4 +1,5 @@
 import { loginForAdmin } from "../login/login";
+import { openAdventureView } from '../../tools/adventures/adventure.js';
 
 export function goToPage(page)
 {
@@ -17,14 +18,9 @@ export function goToHome()
     goToPage('/');
 }
 
-export function goToRegisterStudent()
+export function goToSignup()
 {
-    goToPage(Cypress.env('register_student_page'));
-}
-
-export function goToRegisterTeacher()
-{
-    goToPage(Cypress.env('register_teacher_page'));
+    goToPage(Cypress.env('signup_page'));
 }
 
 export function goToLogin()
@@ -62,14 +58,8 @@ export function goToProfilePage()
     goToPage(Cypress.env('profile_page'));
 }
 
-export function goToHedyLevel2Page()
-{
-    goToPage(Cypress.env('hedy_level2_page'));
-}
-
-export function goToHedyLevel5Page()
-{
-    goToPage(Cypress.env('hedy_level5_page'));
+export function goToHedyLevel(level) {
+    goToPage(`${Cypress.env('hedy_page')}/${level}#default`);
 }
 
 export function goToAdminUsersPage()
@@ -100,13 +90,27 @@ export function goToEditAdventure()
 
     // takes the first adventures and goes to its edit page
     // It does not matter which adventure we take (we choose the first one)
-    cy.get('#teacher_adventures tbody > :nth-child(1) [data-cy="edit-link"]')
-      .click();
+    openAdventureView();
+    cy.getDataCy('edit_link_adventure1').first().click();
 }
 
 export function goToExploreProgramsPage()
 {
    goToPage(Cypress.env('explore_programs_page'));
+}
+
+export function navigateHomeButton(button, path)
+{
+    goToHome();
+    cy.getDataCy(button).click();
+    cy.location().should((loc) => {
+      expect(loc.pathname).equal(path);
+    })
+}
+
+export function goToSubscribePage()
+{
+   goToPage(Cypress.env('subscribe_page'));
 }
 
 export default {goToPage}

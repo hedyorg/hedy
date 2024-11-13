@@ -1,0 +1,176 @@
+levels:
+    3:
+        1:
+            mp_choice_options:
+            -   option: '`{print}`'
+                feedback: '`{print}` is used to print text'
+            -   option: '`{ask}`'
+                feedback: '`{ask}` is used to ask a question'
+            -   option: '`{is}`'
+                feedback: '`{is}` is used to make a list'
+            -   option: '`{at}` `{random}`'
+                feedback: Correct!
+    11:
+        1:
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    counter
+                    ```
+                feedback: 'No'
+            -   option: '`{range}`'
+                feedback: Correct
+            -   option: '`{if}`'
+                feedback: 'No'
+            -   option: '`{for}`'
+                feedback: 'No'
+    12:
+        2:
+            mp_choice_options:
+            -   option: |-
+                    ```
+                    flavors {is} vanilla, strawberry, chocolate
+                    {print} 'I would like a ' flavors {at} {random} ' cake.'
+                    ```
+                feedback: All the different values of flavors should be in quotation marks.
+            -   option: |-
+                    ```
+                    'flavors = vanilla, strawberry, chocolate'
+                    {print} 'I would like a ' flavors {at} {random} ' cake.'
+                    ```
+                feedback: All the different values of flavors should be in quotation marks.
+            -   option: |-
+                    ```
+                    flavors = 'vanilla', 'strawberry', 'chocolate'
+                    {print} 'I would like a ' flavors {at} {random} ' cake.'
+                    ```
+                feedback: Alright!
+            -   option: |-
+                    ```
+                                    flavors = 'vanilla, strawberry, chocolate'
+                                    {print} 'I would like a ' flavors {at} {random} ' cake.'
+                                    ```
+                feedback: All the different values of flavors should be in quotation marks.
+        6:
+            question_text: Which line should be filled in at the ???
+            code: |-
+                {print} 'Welcome to McHedy!'
+                order = {ask} 'Would you like a hamburger or fries?'
+                {if} order = 'hamburger'
+                    price = 12
+                {if} order = 'fries'
+                    price = 4
+                drinks = {ask} 'Would you like a drink with that for 2 dollars?'
+                {if} drinks = 'yes'
+                    ???
+                {print} 'That will be ' price ' dollar please'
+        9:
+            question_text: Which code should be filled in in line 1 at the ???
+            code: |-
+                ???
+                {print} 'You won ' prizes {at} {random} '!'
+        10:
+            question_text: Which line of code should be filled in at the ??? to complete the song ?
+            code: |-
+                actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
+                ???
+                    {for} i {in} {range} 0 {to} 1
+                        {print} 'if youre happy and you know it'
+                        {print} action
+                    {print} 'if youre happy and you know it and you really want to show it'
+                    {print} 'if youre happy and you know it'
+                    {print} action
+    15:
+        4:
+            mp_choice_options:
+            -   option: In line 1 == should be used instead of =
+                feedback: No that's not it
+            -   option: Line 2 misses quotation marks
+                feedback: That's not right
+            -   option: In line 5 {if} should have been used instead of {while}
+                feedback: That's not it
+            -   option: In line 5 != should have been used instead of ==
+                feedback: You are correct
+        5:
+            mp_choice_options:
+            -   option: = wetness
+                feedback: That will not change anything
+            -   option: = wetness = 1
+                feedback: You can't have two times = in one line
+            -   option: = wetness - 1
+                feedback: You are correct!
+            -   option: = wetness + 1
+                feedback: The program should count down
+        6:
+            mp_choice_options:
+            -   option: '{while} should be {if}'
+                feedback: No that is not right
+            -   option: '{if} should be {while}'
+                feedback: No that is not right
+            -   option: Line 3 should start with more indentation
+                feedback: No that's not right
+            -   option: Line 2 should start with less indentation
+                feedback: That is correct
+        7:
+            mp_choice_options:
+            -   option: '... change the first {if} into a {while}'
+                feedback: Perfect!
+            -   option: '... change the second {if} into a {while}'
+                feedback: That's not quite right.
+            -   option: '... change the third {if} into a {while}'
+                feedback: That's not quite right.
+            -   option: '... change the fourth {if} into a {while}'
+                feedback: That's not quite right.
+        9:
+            mp_choice_options:
+            -   option: Nothing. 1600 is not programmed into the app.
+                feedback: 'No'
+            -   option: you could eat some more
+                feedback: 'No'
+            -   option: That is alright
+                feedback: Yes!
+            -   option: You have eaten enough for today
+                feedback: 'No'
+        10:
+            mp_choice_options:
+            -   option: name_player_1
+                feedback: You are right!
+            -   option: name_player_2
+                feedback: No they are losing!
+            -   option: points_player_1
+                feedback: You should fill in a name, not a number
+            -   option: points_player_2
+                feedback: You should fill in a name, not a number
+    16:
+        2:
+            code: |-
+                friends = ['Wesley', 'Eric', 'Kaylee']
+                chores = [the cooking, the cleaning, nothing]
+                {for} i {in} {range} 1 {to} 3
+                    {print}  _
+        3:
+            code: |-
+                friends = ['Wesley', 'Eric', 'Kaylee']
+                chore = [the cooking, the cleaning, nothing]
+                {for} i {in} {range} 1 {to} 3
+                    {print}  friends[i] has to do chores[i]
+        4:
+            mp_choice_options:
+            -   option: The variable in line 4 should be 'friend[i]', not 'friends[i]'
+                feedback: That is not right.
+            -   option: Line 3 should say 'in range 1 to 3' not 'in range 0 to 3'
+                feedback: Good catch!
+            -   option: Line 4 should say 'lucky_number', not 'lucky number
+                feedback: It's not a variable, it's just text.
+            -   option: '{in} in line 3 should be removed'
+                feedback: That's not it
+        5:
+            mp_choice_options:
+            -   option: noises = ['moo', 'woof', 'neigh']
+                feedback: Mind the variable name and the order of the sounds.
+            -   option: sounds = '[woof], [moo], [neigh]'.
+                feedback: Look at line one to see how brackets are supposed to be used.
+            -   option: sounds = [woof, moo, neigh]
+                feedback: Don't forget the quotation marks!
+            -   option: sounds = ['woof', 'moo', 'neigh']
+                feedback: Great job!

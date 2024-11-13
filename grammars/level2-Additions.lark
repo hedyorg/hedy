@@ -1,16 +1,18 @@
-//add the rules after += remove those after -= and the ones after > should be at the end
-command:+= error_ask_dep_2 | error_ask_missing_variable | assign | error_echo_dep_2 | error_non_decimal | sleep -= echo > error_invalid
-print: _PRINT (_print_argument)?
-_print_argument: (_SPACE | textwithoutspaces)*
-ask: var _IS _ASK ((_SPACE | text)*)?
-error_ask_missing_variable: _STANDALONE_IS _SPACE _ASK text
+//add the rules after += remove those after -= and the ones after >> should be at the end
+command: += error_ask_dep_2 | error_ask_missing_variable | assign | error_echo_dep_2 | error_non_decimal | sleep -= echo >> error_invalid
+print: _PRINT (_print_ask_argument)?
+ask: var _IS _ASK _SPACE? (_print_ask_argument)?
+_print_ask_argument: (_SPACE | textwithoutspaces)*
 
+error_ask_missing_variable: _STANDALONE_IS _SPACE _ASK _SPACE? text
 error_non_decimal: ((textwithoutspaces | _SPACE)*)? NON_DECIMAL (text*)?
-//level 1 deprecated commands, for now manually added for better errors
-error_ask_dep_2: _ASK (error_text_dep_2)?
-error_echo_dep_2: _ECHO (error_text_dep_2)?
+// old versions of ask and echo commands
+error_ask_dep_2: _ASK not_letter_or_numeral error_text_dep_2?
+error_echo_dep_2: _ECHO error_text_dep_2?
+
+not_letter_or_numeral: /[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/ -> text
 //text is also changed and these commands of course need the old text
-error_text_dep_2: /([^\n]+)/ -> text //anything can be parsed except for a newline
+error_text_dep_2: /([^\n#]+)/ -> text //anything can be parsed except for a newline and a comment hash
 
 //sleep
 sleep: _SLEEP (INT | var_access)?
@@ -18,10 +20,11 @@ sleep: _SLEEP (INT | var_access)?
 
 //in level 2, forward may also depend on a variable
 turtle: _FORWARD (NUMBER | textwithoutspaces)? -> forward | _TURN ((NUMBER | textwithoutspaces))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | textwithoutspaces))? -> color
-assign: var _IS text -> assign
+assign: var _IS textwithinnerspaces _SPACE? -> assign
 
 textwithoutspaces: /([^\n #]+)/ -> text
 text: /([^\n#]+)/ -> text
+textwithinnerspaces: /([^\n#]*[^\n# ])/ -> text
 
 var: NAME // used for variable definitions, e.g. a = 1
 var_access: NAME // used for variable references, e.g. for i in range. It parses the same as var, but does not result in a lookup table entry

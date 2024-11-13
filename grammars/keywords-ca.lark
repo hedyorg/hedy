@@ -4,8 +4,8 @@ _WITH: ("amb" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
 _RETURN: ("retorna" | "return") _SPACE?
 _PRINT: ("imprimeix" | "print") _SPACE?
-_PLAY: ("play" | "play") _SPACE
-_ASK: ("pregunta" | "ask") _SPACE?
+_PLAY: ("reprodueix" | "play") _SPACE
+_ASK: ("pregunta" | "ask")
 _ECHO: ("eco" | "echo") _SPACE?
 _FORWARD: ("avança" | "forward") _SPACE?
 _TURN: ("gira" | "turn") _SPACE?
@@ -26,16 +26,16 @@ _IS: _SPACE ("és" | "is") _SPACE
 _STANDALONE_IS: ("és" | "is")
 _SLEEP: ("dorm" | "sleep") _SPACE?
 _ADD_LIST: ("afegeix" | "add") _SPACE
-_TO_LIST: _SPACE ("a" | "to") _SPACE
+_TO_LIST: _SPACE? ("a" | "to")
 _REMOVE: ("esborra" | "remove") _SPACE
-_FROM: _SPACE ("de" | "from") _SPACE
+_FROM: _SPACE? ("de" | "from")
 _AT: _SPACE ("a" | "at") _SPACE
 random: ("aleatori" | "random") _SPACE?
 _IN: _SPACE ("dins" | "in") _SPACE
 _NOT_IN: _SPACE ("no dins" | "not in") _SPACE
 _IF: ("si" | "if") _SPACE
 _ELSE: "sino" | "else"
-_AND: _SPACE ("i" | "and") _SPACE
+_AND: _SPACE? ("i" | "and") _SPACE
 _REPEAT: ("repeteix" | "repeat") _SPACE
 _TIMES: _SPACE ("vegades" | "times")
 _FOR: ("per" | "for") _SPACE
@@ -44,10 +44,11 @@ _TO: _SPACE ("fins" | "to") _SPACE
 _STEP: "pas" | "step"
 _ELIF: _SPACE? ("sinosi" | "elif") _SPACE
 _INPUT: ("entra" | "input")
-_OR: _SPACE ("o" | "or") _SPACE
+_OR: _SPACE? ("o" | "or") _SPACE
 _WHILE: ("mentre" | "while") _SPACE
 _LENGTH: "mida" | "length"
 _COLOR : ("color" | "color") _SPACE?
 _PRESSED: ("pressionat" | "pressed") _SPACE?
-_BUTTON: ("boto" | "button") _SPACE?
 clear: ("neteja" | "clear") _SPACE?
+TRUE: ("cert" | "Cert" | "true" | "True") _SPACE?
+FALSE: ("fals" | "Fals" | "false" | "False") _SPACE?

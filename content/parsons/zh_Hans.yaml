@@ -15,60 +15,27 @@ levels:
                 {echo} 所以你想要
                 {print} 您的订单正在准备中！
         2:
-            story: You're at the DJ Booth requesting a song. Create a program that asks if you are ready to party and then asks which song you would like to hear.
             code: |-
                 {print} 这是DJ海蒂
                 {ask} 你准备好参加派对了吗？
                 {ask} 你想听什么歌？
                 {echo} 很棒的选择！我喜欢这首歌
+            story: 您在 DJ 台点播一首歌曲。创建一个程序，询问您是否准备好参加派对，然后询问您想听哪首歌。
     2:
         1:
-            story: |-
-                You and your friends are going to watch some Netflix.
-                Show which movie you're about to watch and wish the viewers lot of fun!
             code: |-
                 {print} 是时候度过一个晚上的网飞了
                 电影 {is} 刺猬索尼克2
                 {print} 我们要看电影
                 {print} 玩得愉快！
+            story: "你和你的朋友将要观看 Netflix。\n显示你将要观看的电影，并祝观众玩得开心！"
         2:
-            story: This is the webshop of a toy store. Create a program where costumers can add an item to their shopping cart.
             code: |-
                 {print} 欢迎来到我们的玩具店
                 玩具 {is} {ask} 你想买什么？
                 {print}玩具已添加到您的购物车中。
                 {print} 感谢您与我们一起购物！
-    3:
-        1:
-            story: "The new school year at Hogwarts is starting! \nIt is the job of the sorting hat to sort you into one of the houses.\nWhich house will you be sorted into? Are you a Gryffindor, Hufflepuff, Ravenclaw or Slytherin.\nBefore the sorting hat reveals your house, you can tell it to not pick\
-                \ one of the houses."
-            code: |-
-                {print} 分院帽已经准备好把你分到霍格沃茨的房子里了。
-                房子 {is} 格兰芬多、赫奇普夫、拉文克劳、斯莱特林
-                不喜欢{is} {ask} 有没有你不想成为其中一部分的房子？
-                {remove} 不喜欢{from} 房子
-                {print} 不是不喜欢吧？最好是...房子{at} {random}
-        2:
-            story: Create a program that chooses a random meal for you. Make a list of food and a list of toppings and let the program decide what you'll have!
-            code: |-
-                食物 {is} 披萨,冰激凌, 沙拉, 三明治
-                浇头 {is} 巧克力, 芝士, 金枪鱼, 洒
-                {print} 你今天的随机餐是...
-                {sleep} 2
-                {print} 食物 {at} {random} 和浇头 {at} {random}
-        3:
-            story: |-
-                在国际象棋锦标赛中，还剩下三名棋手。
-                创建一个程序，决定哪两个玩家必须首先相互对战。
-                首先打印参加第一场比赛的两名玩家，然后打印获胜者将与哪位玩家进行比赛。
-            code: |-
-                玩家 {is} 利亚姆、诺亚、苏菲
-                玩家_1 {is} 玩家 {at} {random}
-                {remove} 玩家_1 {from}玩家
-                玩家_2 {is} 玩家 {at} {random}
-                {print} 玩家_1 ' 第一次对阵' 玩家_2
-                {remove} 玩家_2 {from} 玩家
-                {print} '获胜者对战 ' 玩家 {at} {random}
+            story: 这是一家玩具店的网上商店。创建一个程序，让客户可以将商品添加到购物车中。
     4:
         1:
             story: |-
@@ -81,79 +48,32 @@ levels:
                 {sleep}
                 {print} 口袋妖怪 {at} {random}
         2:
-            story: 创建一个彩票，让你选择一个你可能赢得的额外奖品。
-            code: |-
-                奖品 {is}汽车，仓鼠，100万欧元
-                价格 {is} {ask} “你想赢什么？”
-                {add} 价格 {to_list} 奖品
-                {print} “你赢得了一个”价格 {at} {random}
-    5:
-        1:
-            story: |-
-                Make a program that checks if your favourite movie is already in the list of the computer.
-                If so, print that you have great taste, otherwise add the movie to the list.
-            code: |-
-                最喜欢的电影 {is} 蝙蝠侠、蜘蛛侠、复仇者联盟、侏罗纪公园
-                电影 {is} {ask} “你最喜欢的电影是什么？”
-                {if} 电影 {in} 最喜欢的电影 {print}“你的品味真高！”
-                {else} {print}“太可惜了，你最喜欢的电影不在列表中，我们会马上添加！”
-                {add} 电影{to_list} 最喜欢的电影
-        2:
-            story: Create a maths game.
-            code: |-
-                {print}“解决这个问题”
-                答案{is} {ask} '88 - 16 = ?'
-                {if} 回答 {is} 72 {print} “对！”
-                {else} {print}“错！答案是72”
+            story: 创建一个彩票，让您可以选择可能赢得的额外奖品。
+            code: "prizes {is} car, hamster, 1 million euros\nprize {is} {ask} 'What would you like to win?'\n{add} prize {to_list} prizes\n{print} 'You won a ' prizes {at} {random}"
     6:
         1:
-            story: |-
-                Make a program that calculates how old you are in dog and cat years.
-                First ask the age of the user and start calculating.
-                First calculate the dogyears then the catyears.
-                Show the user the different ages.
             code: |-
                 年龄 = {ask}“你多大了？”
                 狗的年龄 = 年龄 * 7
                 猫的年龄 = 年龄 * 5
                 {print}“在狗年里，你已经'dog_age'岁了。”
                 {print} “在猫年里，你已经'cat_age'岁了。”
+            story: "编写一个程序来计算您的狗和猫年龄。\n首先询问用户的年龄并开始计算。\n首先计算狗的年龄，然后计算猫的年龄。\n向用户显示不同的年龄。"
         2:
-            story: Create a program that helps you calculate how many cakes you should buy for your birthday party.
-            code: |-
-                {print} “今天是你的生日！”
-                人 = {ask} “你想给多少人一块蛋糕？”
-                蛋糕数量 = 人数/8
-                {print} “你将不得不购买蛋糕数量的蛋糕”
+            story: 创建一个程序，帮助您计算应该为生日聚会购买多少个蛋糕。
+            code: "{print} '今天是你的生日！'\npeople = {ask} '你想给多少人分一块蛋糕？'\ncakes_amount = people/8\n{print} '你将不得不购买 ' cakes_amount ' 个蛋糕'"
     7:
-        1:
-            story: Complete the baby shark song. First comes baby shark, then mommy and finally daddy shark.
-            code: |-
-                {repeat} 3 {times} {print} 'Baby shark tututututudu'
-                {print} 'Baby shark'
-                {repeat} 3 {times} {print} 'Mommy shark tututututudu'
-                {print} 'Mommy shark'
-                {repeat} 3 {times} {print} 'Daddy shark tututututudu'
-                {print} 'Daddy shark'
         2:
-            story: Create the song 'The wheels on the bus go round and round'
             code: |-
                 {print} “公共汽车上的轮子”
                 {repeat} 3 {times} {print} 'round and round'
                 {print} 'the wheels of the bus go round and round'
                 {print} 'all through the town'
-    8:
+            story: 创作歌曲《公共汽车的轮子转啊转》
         1:
-            story: |-
-                You and four other friends are playing Pokémon Go! Create a program that decides in which team each of you will play.
-                Either red, yellow or blue! Take a little pauze after announcing a team.
-            code: |-
-                团队 =红, 黄, 蓝
-                {print} '红, 黄，蓝?'
-                {repeat} 5 {times}
-                  {print} “你被选入了团队...'
-                  {print} 团队 {at} {random}
-                  睡眠 2
+            story: 完成小鲨鱼歌曲。首先是小鲨鱼，然后是妈妈，最后是爸爸鲨鱼。
+            code: "{repeat} 3 {times} {print} '小鲨鱼tututututudu'\n{print} '小鲨鱼'\n{repeat} 3 {times} {print} '妈妈鲨鱼tututututudu'\n{print} '妈妈鲨鱼'\n{repeat} 3 {times} {print} '爸爸鲨鱼tututututudu'\n{print} '爸爸鲨鱼'"
+    8:
         2:
             story: Print the countdown for a  game of hide and seek.
             code: |-
@@ -163,65 +83,32 @@ levels:
                   {print} 计数器
                   {sleep} 1
                 {print} “准备好了，我来不来！”
-    9:
         1:
-            story: 这个游戏会给你三个数学作业。每次的问题都不同。你能弄清楚顺序吗？
-            code: |-
-                数字= 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                {repeat} 3 {times}
-                    数字 =数字 {at} {random}
-                    正确回答= 5 * 数字
-                    回答 = {ask} “5倍数是多少？”
-                    {if} 回答 = 正确回答
-                        {print} “干得好！”
-                    {else}
-                        {print}“不！正确答案是”正确答案
+            story: "你和其他四个朋友正在玩 Pokémon Go！创建一个程序来决定你们每个人将加入哪个队伍。\n红色、黄色或蓝色！宣布队伍后稍作休息。"
+            code: "团队 = 红色,黄色,蓝色\n{print} '红色、黄色还是蓝色？'\n{repeat} 5 {times}\n     {print} '您被选入团队... '\n     {print} 团队 {at} {random}\n     {sleep} 2"
+    9:
         2:
             story: |-
                 此代码询问餐厅的顾客是否要订购甜点。如果他们这样做，它会问他们什么样的甜点。如果他们订购提拉米苏，他们会被告知提拉米苏已经售罄。
                 你能让代码工作吗？
-            code: |-
-                order = {ask} 'Would you like to order dessert?'
-                {if} order = yes
-                    dessert = {ask} 'What kind of dessert would you like?'
-                    {if} dessert = tiramisu
-                        {print} 'Sorry, we are out of tiramisu.'
-                    {else}
-                        {print} 'One ' dessert ' coming right up!'
-                {else}
-                    {print} 'You dont want a dessert. No problem!'
+            code: "order = {ask} 'Would you like to order dessert?'\n{if} order = yes\n    dessert = {ask} 'What kind of dessert would you like?'\n    {if} dessert = tiramisu\n        {print} 'Sorry, we are out of tiramisu.'\n    {else}\n        {print} 'One ' dessert ' coming right up!'\n{else}\n    {print} 'You dont want a dessert. No problem!'"
+        1:
+            story: 这个游戏会给你三道数学作业，每次的题目都不一样，你能找出顺序吗？
+            code: "numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    number = numbers {at} {random}\n    correct_answer = 5 * number\n    answer = {ask} '5 次' number ' 是多少？'\n    {if} answer = correct_answer\n        {print} '做得好！'\n    {else}\n        {print} '不！正确答案是 ' correct_answer"
     10:
         1:
             story: |-
                 通过制定一个时间表来帮助这个家庭摆脱困境，确定谁在做饭以及他们本周应该做什么。 `{remove}` 命令确保没有人需要做饭两次，这样每天都有不同的晚餐。
                 **注意！** 变量顺序应该是先是哪一天，然后是人，最后是晚餐选项。 这也适用于带有`{remove}` 命令的行。
-            code: |-
-                days = Monday, Tuesday, Wednesday, Thursday, Friday
-                people = mom, dad, Martin, Abby, Jesse
-                dinner_options = pizza, tacos, pancakes, a salad, lasagne
-                {for} day {in} days
-                    chosen_person = people {at} {random}
-                    chosen_dinner = dinner_options {at} {random}
-                    {print} 'On ' day ' ' chosen_person ' is making ' chosen_dinner
-                    {remove} chosen_person {from} people
-                    {remove} chosen_dinner {from} dinner_options
+            code: "days = 星期一,星期二,星期三,星期四,星期五\npeople = 妈妈,爸爸,马丁,艾比,杰西\ndinner_options = 披萨,玉米饼,煎饼,沙拉,千层面\n{for} day {in} days\n    chosen_person = people {at} {random}\n    chosen_dinner = dinner_options {at} {random}\n    {print} '在 ' day ' ' chosen_person ' 正在做 ' chosen_dinner\n    {remove} chosen_person {from} people\n    {remove} chosen_dinner {from} dinner_options"
         2:
             story: |-
                 这个化妆机器人将为您决定您的新发型。如果您不同意第一个选择，可以重试。
                 **头脑**变量人定义在第一行。第二个中的可变发型。
-            code: |-
-                people = Betty, Amanda, Marc
-                hairstyles = a bald head, a mohawk, a ponytail, spikes
-                {for} person {in} people
-                    {print} person ' will get ' hairstyles {at} {random}
-                    happy = {ask} person ', are you happy with this choice?'
-                    {if} happy {is} yes
-                        {print} 'Great'
-                    {else}
-                        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}
+            code: "people = Betty, Amanda, Marc\nhairstyles = a bald head, a mohawk, a ponytail, spikes\n{for} person {in} people\n    {print} person ' will get ' hairstyles {at} {random}\n    happy = {ask} person ', are you happy with this choice?'\n    {if} happy {is} yes\n        {print} 'Great'\n    {else}\n        {print} 'Lets try again... Then 'person ' will get ' hairstyles {at} {random}"
     11:
         1:
-            story: 为除夕夜创建倒计时时钟！该程序应该显示从 10 到 1 的数字一秒钟，然后祝您新年快乐。
+            story: 创建除夕倒计时！程序应该在一秒钟内显示从10到1的数字，然后祝你新年快乐。
             code: |-
                 {for} 数字 {in} {range} 10 {to} 1
                     {print} 数字
@@ -230,17 +117,9 @@ levels:
                 {print}“新年快乐！”
         2:
             story: |-
-                创建一个程序，告诉我们科学博览会的最终结果。首先定义可变参赛者，然后定义可变位置。
-                **提示** 第 5 行应该是睡眠命令，您应该以表示祝贺结束。
-            code: |-
-                {print} 'And now we will reveal the results of the science fair'
-                contestants = Vivienne, Paul, Trixy, Bianca, Katya
-                place = 5
-                {for} contestant {in} contestants
-                    {sleep} 2
-                    {print} 'On number ' place ' has ended... ' contestant
-                    place = place - 1
-                {print} 'Congratulations!'
+                创建一个程序，告诉我们科学集市的最终结果。首先定义变量参赛者，然后定义变量位置。
+                **提示** 第 5 行应该是睡眠命令，而且你应该以表示祝贺结束。
+            code: "{print} 'And now we will reveal the results of the science fair'\ncontestants = Vivienne, Paul, Trixy, Bianca, Katya\nplace = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} 'On number ' place ' has ended... ' contestant\n    place = place - 1\n{print} 'Congratulations!'"
     12:
         1:
             story: |-
@@ -254,17 +133,24 @@ levels:
                 她冉冉升起
                 她冉冉升起
                 清晨
-            code: |-
-                verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'
-                {for} verse {in} verses
-                    {for} count {in} {range} 1 {to} 3
-                        {print} verse
-                    {print} 'Early in the morning'
+            code: "verses = '我们该怎么处置这个醉酒的水手', '她好嗨，然后站了起来'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} '一大早'"
         2:
             story: 和我们一起玩龙卷风游戏！首先定义可变的人，然后是四肢，然后是颜色。
-            code: |-
-                people = 'Jess', 'Nick', 'Winston'
-                limbs = 'left hand', 'left foot', 'right hand', 'right foot'
-                colors = 'red', 'blue', 'green', 'yellow'
-                {for} person {in} people
-                    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}
+            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}"
+    3:
+        2:
+            story: 创建一个程序，为您随机选择一顿饭。列出食物和配料清单，让程序决定您要吃什么！
+            code: "食物 {is} 披萨、冰淇淋、沙拉、三明治\n配料 {is} 巧克力、奶酪、金枪鱼、糖屑\n{print} 您今天的随机餐是...\n{sleep} 2\n{print} 食物 {at} {random} 配料 {at} {random}"
+        1:
+            story: "霍格沃茨的新学年开始了！\n分院帽的工作就是把你分到不同的学院。\n你会被分到哪个学院？你是格兰芬多、赫奇帕奇、拉文克劳还是斯莱特林。\n在分院帽揭晓你的学院之前，你可以告诉它不要选择其中一个学院。"
+            code: "{print} 分院帽已准备好将您分入霍格沃茨学院。\nhouses {is} 格兰芬多、赫奇帕夫、拉文克劳、斯莱特林\ndislike {is} {ask} 有哪些学院您不想加入？\n{remove} dislike {from} houses\n{print} 不讨厌吧？最好是... houses {at} {random}"
+        3:
+            story: "在国际象棋锦标赛中，剩下三名选手。\n创建一个程序来决定哪两名选手必须先对决。\n首先打印参加第一场比赛的两名选手，然后打印获胜者将与哪名选手对决。"
+            code: "玩家 {is} Liam、Noah、Sophie\nplayer_1 {is} 玩家 {at} {random}\n{remove} player_1 {from} 玩家\nplayer_2 {is} 玩家 {at} {random}\n{print} player_1 ' 首先与 ' player_2 比赛\n{remove} player_2 {from} 玩家\n{print} ' 获胜者与 ' 玩家 {at} {random} 比赛"
+    5:
+        2:
+            story: 创建一个数学游戏。
+            code: "{print} '解答这个问题'\n答案 {is} {ask} '88 - 16 = ?'\n{if} 答案 {is} 72 {print} '正确！'\n{else} {print} '错误！答案是 72'"
+        1:
+            story: "编写一个程序来检查你最喜欢的电影是否已经在计算机的列表中。\n如果是，则打印出你很有品味，否则将电影添加到列表中。"
+            code: "favorite_movies {is} 蝙蝠侠、蜘蛛侠、复仇者联盟、侏罗纪公园\nmovie {is} {ask} “你最喜欢的电影是什么？”\n{if} movie {in} favorite_movies {print} “你很有品味！”\n{else} {print} “很遗憾你最喜欢的电影不在列表中，我们会立即添加它！”\n{add} movie {to_list} favorite_movies"

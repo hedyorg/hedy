@@ -7,9 +7,9 @@
         <h2>{{_('recover_password')}}</h2>
         <div class="w-full flex px-8 flex-row items-center justify-center gap-2">
             <label class="inline-block w-80" for="username">{{_('username')}} / {{_('email')}}</label>
-            <input class="inline-block w-full px-2 py-1 rounded-lg border-gray-400" id="username" name="username" required>
+            <input class="inline-block w-full px-2 py-1 rounded-lg border-gray-400" data-cy="username" name="username" required>
         </div>
-        <button type="submit" class="green-btn mt-2" id="send_recovery_button">{{_('send_password_recovery')}}</button>
+        <button type="submit" class="green-btn mt-2" data-cy="send_recovery_button">{{_('send_password_recovery')}}</button>
       </form>
     </div>
 </div>

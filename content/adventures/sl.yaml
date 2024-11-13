@@ -1,0 +1,304 @@
+adventures:
+    story:
+        name: Zgodba
+        default_save_name: Zgodba
+        description: Zgodba
+        levels:
+            1:
+                story_text: "Na 1. stopnji lahko ustvarite zgodbo z drugim glavnim likom, ki ga vpišete sami.\n\nV prvi vrstici uporabite `{ask}` in vprašajte, kdo bo glavni lik zgodbe.\n\nZa to prvo vrstico začnite z `{print}`, če je treba stavek natisniti.\nUporabite `{echo}`, če želite, da se glavni lik pojavi na koncu stavka.\n"
+                example_code: "```\n{ask} Glavni lik te zgodbe je\n{print} Glavni junak se bo zdaj sprehodil po gozdu\n{echo} Malo jih je strah,\n{print} Povsod slišijo čudne zvoke\n{print} Bojijo se, da je to gozd, v katerem straši\n```\n"
+                story_text_2: "### Naloga\nZdaj ustvarite svojo zgodbo z vsaj 6 vrsticami kode.\nTa zgodba ne sme biti enaka kodi iz primera.\nUporabite vsaj en ukaz `{ask}` in en ukaz `{echo}`.\nZgodba se lahko nanaša na poljubno temo.\nČe si ne morete spomniti teme, uporabite eno od naših možnosti: obisk kina, športna tekma ali dan v živalskem vrtu.\n"
+            2:
+                story_text: "Na drugi stopnji lahko zgodbo naredite bolj zabavno. Ime glavnega junaka se zdaj lahko pojavi kjer koli v stavku.\n\nZa to je treba dodatno programirati. Svojega glavnega junaka morate zdaj najprej poimenovati.\n\nTo ime lahko nato postavite na katero koli mesto v stavku.\n"
+                story_text_2: "### Vaja\nZdaj je čas, da v svojo zgodbo, ki ste jo ustvarili v prejšnji stopnji, dodate spremenljivke.\nPojdite v \"Moji programi\", poiščite svojo zgodbo iz 1. stopnje in prekopirajte kodo. Kodo prilepite na vnosno okno v tej stopnji.\n\nTa koda ne bo delovala v tej stopnji, ker še niste uporabili spremenljivk.\nUkaze `{ask}` in `{echo}` v kodi spremenite v pravilno obliko, ki ste se je naučili v tej stopnji.\n\n**Dodatno** V kodo dodajte ukaz `{sleep}` in tako povečajte napetost v zgodbi.\n"
+            3:
+                story_text: "V tretji stopnji lahko zgodbo naredite bolj zabavno. Pri vsaki pošasti, živali ali drugi oviri lahko uporabite naključja, kot je ta:\n"
+                example_code: "```\nživali {is} 🦔, 🐿, 🦉, 🦇\n{print} Sedaj slišijo zvok živali {at} {random}\n```\n"
+                story_text_2: "Ukaz`{add}` je lahko priročen za vašo zgodbo.\n"
+                story_text_3: "To je primer ukaza `{remove}` v vaši zgodbi\n\n### Vaja\nSvojo zgodbo iz prejšnjih stopenj kopirajte v to stopnjo.\nNa tej stopni ste se naučili 3 nove ukaze: `{at} {random}`, `{add} {to_list}` in `{remove} {from}`.\nDodajte nove vrstice kode v svojo zgodbo tako, da bodo vsi novi ukazi vsaj enkrat uporabljeni v vaši zgodbi.\n"
+            4:
+                story_text: "### Vaja\nKopirajte kodo primera in jo dokončajte tako, da dodate narekovaje na prazna mesta v vrsticah 1 in 2.\nPraznih mest v vrsticah 3 in 4 ne smete nadomestiti z narekovaji, temveč z ukazoma `{sleep}` in `{clear}`. Vam bo uspelo?\n\n### Vaja 2\nVrnite se na prejšnjo stopnjo in kopirajte kodo svoje zgodbe. Poskrbite, da bo program deloval na tej stopnji tako, da na prava mesta dodate narekovaje.\nPozor: Spremenljivke v vaši zgodbi morajo biti zunaj narekovajev. Tako kot v drugi vrstici kode iz primera. V tej vrstici je ime spremenljivke postavljeno zunaj narekovajev.\n"
+                example_code: "```\nime {is} {ask} _ Kako vam je ime? _\n{print}  _ Glavnemu junaku je ime _ name\n_\n_\n{print} ime  _ se bo sedaj sprehodil-a po gozdu _\n{print} name _ je nekoliko preplašen-a _\nživali {is} 🦔, 🐿, 🦉, 🦇\n{print} _ Sliši zvok _ živali {at} {random}\n{print} ime _ se boji tega zakletega gozda _\n```\n"
+            5:
+                story_text: "Na tej stopnji lahko programirate različne konce, s katerimi bo vaša zgodba še bolj zabavna.\nV primeru si lahko ogledate, kako ustvariti 2 različna konca.\n\n#### Vaja 1\nNapišite novo kratko zgodbo z vsaj 6 vrsticami kode o temi, ki jo izberete sami.\nNimate navdiha? Izberite eno od teh tem: superjunak, dolgočasen šolski dan, samotni otok.\n\nSedaj dajte igralcem možnost, da izberejo srečen ali nesrečen konec, tako kot je prikazano v primeru.\nSprogramirajte oba konca.\n\n#### Vaja 2\nKopirajte zgodbo, ki ste jo ustvarili v svoji dogodivščini v prejšnjih stopnjah.\nPoiščite način, kako zgodbi dodati vsaj dva ukaza `{if}` in `{else}`.\nTo je lahko s srečnim ali slabim koncem, lahko pa poskusite najti tudi druge načine za vključitev ukazov.\n"
+                example_code: "```\noseba {is} {ask}  'Kdo hodi po gozdu?'\n{print} oseba ' hodi po gozdu'\n{print} oseba ' naleti na pošast'\nkonec {is} {ask} 'Želiš dober ali slab zaključek?'\n{if} konec {is} dober {print} oseba ' vzame meč in pošast hitro pobegne'\n{else} {print} 'Pošast poje ' oseba\n```\n"
+            7:
+                story_text: "V zgodbi nekdo večkrat ponovi iste besede. Na primer, ko nekdo kliče na pomoč ali poje pesem.\nTakšna ponavljanja lahko vključite v svojo zgodbo, na tej stopnji z `{repeat}`.\n\n### Vaja\nV svojo zgodbo dodajte ponavljanje. Vrnite se v svoje shranjene programe, izberite program zgodbe s prejšnje stopnje,\npoiščite vrstico, ki vsebuje `{print}`, in jo ponovite!\n"
+                example_code: "```\n{print} 'Princ je ves čas klical na pomoč'\n{repeat} 5 {times} {print} 'Na pomoč!'\n{print} 'Zakaj mi nihče ne pomaga?'\n```\n"
+            8:
+                story_text: "Na tej stopnji lahko v ukazih `{if}` uporabite več vrstic, in tako nadgradite svoj srečni ali žalostni konec!\n\n### Vaja 1\nPrimer kode prikazuje dva različna konca: enega, v katerem liki skočijo v časovni stroj, in drugega, v katerem ne skočijo.\nDopolnite prazna mesta z vsaj enim stavkom za vsak konec.\n**Dodatek** Zgodbo podaljšajte. Kaj se zgodi v zgodbi? Dodate lahko tudi drugo `{ask}` z različnimi možnostmi.\n\n### Vaja 2\nVrnite se k shranjenim programom in izberite program zgodbe iz 5. stopnje. Zdaj napišite dober in slab konec, vsak v dolžini vsaj treh vrstic!\n"
+                example_code: "```\n{print} 'OH NE! T-rex se približuje!\nkonec = {ask} 'Želite srečen ali žalosten zaključek?'\n{if} konec {is} srečen\n    {print} 'Richard skoči nazaj v časovni stroj ravno dovolj zgodaj!'\n    {print}  _\n{else}\n    {print} 'Ojoj, Richard je prepočasen ...'\n    {print} _\n```\n"
+            9:
+                story_text: "Na tej stopnji lahko ukaza `{if}` in `{repeat}` uporabljate znotraj drugih `{if}` in `{repeat}` ukazov. \nTo vam daje veliko možnosti in resnično pomaga, da naredite svojo zgodbo interaktivno.\n\n### Vaja 1\nDokončajte kodo, da bo ukaz `{if}` deloval pravilno.\n\n### Vaja 2\nDodajte `{if}` in `{else}` za del zgodbe, v katerem gre domov tudi Robin.\n\n### Vaja 3\nVrnite se k zgodbi iz 8. stopnje in uporabite vsaj dva `{if}`-ja znotraj drugega `{if}`.\n"
+                example_code: "```\n{print} 'Robin se sprehaja po središču mesta'\nlokacija = {ask} 'Gre Robin v trgovino ali domov?'\n{if} lokacija {is} trgovina\n    {print} 'Vstopi v trgovino.'\n    {print} 'Robin vidi zanimivo knjigo'\n    kupi_knjigo = {ask} \"Ali Robin kupi knjigo?\n    {if}kupi_knjigo {is} da\n    _ {print} \"Robin kupi knjigo in gre domov\n    _ {else}\n    _ {print} 'Robin zapusti trgovino in gre domov praznih rok'\n{else}\n    {print} \"Robin gre domov\n```\n"
+            10:
+                story_text: "Na tej stopnji lahko v svoji zgodbi uporabite ukaz {for}. Na ta način bi lahko preprosto programirali otroško knjigo 'Rjavi medved, Rjavi medved, kaj vidiš'.\n\n### Telovadba\n\nČe zgodbe ne poznate, jo lahko pogledate na <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> zgodbo</a>,, in se prepričate, da je natisnjeno kot v knjigi.\n"
+                example_code: "```\nživali = _ , _ , _ \n{print} 'Rjavi medved, rjavi medved'\n{print} 'Kaj vidiš?'\n```\n"
+            12:
+                story_text: "Na tej stopnji bodo potrebni narekovaji za shranjevanje več besed v spremenljivko.\n\n### Telovadba\n\nPoiščite zgodbo iz prejšnje stopnje, katera koli raven je v redu. Zdaj pa se prepričajte, da so narekovaji dodani na prava mesta."
+                example_code: "```\nime = 'Kraljica Anglije'\n{print} ime ' je jedla torto, ko je nenadoma…'\n```\n"
+            13:
+                story_text: "Z uporabo ukazov `{and}` in `{or}` lahko svoje zgodbe naredite bolj vsestranske. Postavite lahko dve vprašanji in se odzovete na kombinacijo odgovorov.\n\n### Vaja 1\nOglejte si primer kode in ga dokončajte. Nato dodajte še vsaj dve vrstici `{if}` z `{and}` ali `{or}`.\n\n### Vaja 2\nPoiščite zgodbo iz prejšnje stopnje in dodajte eno `{and}` ali `{or}`.\n"
+                example_code: "```\n{print} 'Naš junak hodi po gozdu'\n{print} 'Pot se razcepi v dve smeri'\npot = {ask} 'Katero pot naj izbere, levo ali desno?'\norožje = {ask} 'Katero orožje si bo izbral?'\n{if} pot {is} 'levo' {and} orožje {is} 'meč'\n    _\n```\n"
+            15:
+                story_text: "Z uporabo zanke `{while}` lahko naredite svoje zgodbe bolj zanimive. Uporabite lahko na primer `{while} game == 'on'` (igra == 'vključena'), da lahko igrate, dokler se igra ne konča.\nLahko pa uporabite `{while} sword == 'lost'` (meč == 'izgubljen'), tako da igralec ne more nadaljevati igre, dokler nečesa ne najde.\n\n### Vaja\nPrimer prikazuje, kako uporabiti zanko `{while}` v zgodbi. **Sedaj si zamislite svoj scenarij**, v katerem mora igralec nekaj najti, preden lahko nadaljuje.\n"
+            18:
+                story_text: "Natisnili bomo še eno zgodbo, vendar moramo zdaj uporabiti oklepaje z `{print}`.\n\n### Vaja 1\nUstvarite zgodbo z vsaj petimi stavki. Zaenkrat vam še ni treba uporabiti spremenljivke 'ime'.\n"
+                example_code: "```\n{print}('Dobrodošel v to zgodbo!')\n```\n"
+                story_text_2: "### Vaja 2\nZa vas smo že pripravili `{input}`. Najprej v svoji zgodbi uporabite spremenljivko `name`.\nNato dodajte `{ask}` še enkrat in rezultat  prav tako shranite v spremenljivko.\nNasvet: Ne pozabite na vejice med besedilom in spremenljivkami pri ukazu `{print}`!\n"
+                example_code_2: "```\nime= {input}(\"Kako vam je ime?\")\n{print}('Dobrodošli v to zgodbo!')\n```\n"
+    add_remove_command:
+        default_save_name: ukaz_dodaj_odstrani
+        description: predstavitev {add} {to_list} in {remove} {from}
+        levels:
+            3:
+                story_text: "## Dodaj v\nNa seznam lahko dodajate elemente z ukazom `{add} {to_list}`. Če želite dodati objekt na seznam, lahko preprosto vnesete: `{add} penguin {to_list} animals` ali pa lahko uporabite ukaz `{ask}`, kot je prikazano v primeru.\n"
+                example_code: "```\nživali {is} pes, mačka, kenguru\nnajljubša {is} {ask} Katero žival imate najraje?\n{add} najljubša {to_list} živali\n{print} Jaz izberem živali {at} {random}\n```\n"
+                story_text_2: "## Odstrani iz\nČe lahko objekte dodajate na seznam, jih lahko seveda tudi odstranite. To storite z ukazom `{remove} {from}`.\n"
+                example_code_2: "```\nživali {is} pes, mačka, kenguru\nnajman_ljuba {is} {ask} Katere živali ne marate najbolj?\n{remove} najman_ljuba {from} živali\n{print} Jaz izberem živali {at} {random}\n```\n"
+                story_text_3: "#### Vaja\nPreizkusite nove ukaze v tej virtualni restavraciji. Na seznam dodajte okus, katerega ima obiskovalec rad, in odstranite okuse, na katere je alergičen.\n"
+                example_code_3: "```\n{print} Skrivnosten napitek\nokusi {is} jagoda, čokolada, vanilija\nupanje {is} {ask} Na kakšen okus upate?\n_\nalergije {is} {ask} Ali ste alergični na katere koli okuse?\n_\n{print} Dobiš napitek z okusom {at} {random} okusi\n```\n"
+    and_or_command:
+        default_save_name: in ali
+        description: predstavljamo {and} & {or}
+        levels:
+            13:
+                story_text: "Zdaj se bomo naučili `{and}` in `{or}`! Če želite preveriti dva stavka, vam ni treba uporabiti dveh `{if}` ukazov, ampak lahko uporabite `{and}` in `{or}`.\n\nČe uporabljate ukaz `{and}`, morata biti obe trditvi, levo in desno od `{and}`, resnični. Uporabimo lahko tudi `{or}`. Potem mora biti le ena trditev pravilna."
+    ask_command:
+        default_save_name: ukaz_vprašaj
+        description: Predstavitev ukaza {ask}
+        levels:
+            1:
+                story_text: "## Ukaz vprašaj\nZdaj, ko znate uporabljati ukaz `{print}`, ste pripravljeni na učenje naslednjega ukaza: `{ask}`. Z ukazom `{ask}` lahko postavite vprašanje. Oglejte si ga:\n"
+                example_code: "```\n{print} Pozdravljeni!\n{ask} Kako vam je ime?\n```\n"
+                story_text_2: "## Ukaz `{echo}`\nČe želite, da vam računalnik ponovi odgovor, lahko uporabite ukaz `{echo}`. Odgovor bo ponovljen na koncu stavka, v tem primeru torej za pozdravom.\n"
+                example_code_2: "```\n{print} Pozdravljeni!\n{ask} Kako vam je ime?\n{echo} zdravo\n```\n"
+                story_text_3: "#### Vaja\nPreizkusite ukaza `{ask}` in `{echo}`. Najprej izpolnite prazna mesta, da bo program deloval.\nNato postavite še dve vprašanji z ukazom `{ask}`, po vsakem ukazu `{ask}` pa dodajte še ukaz `{echo}` za izpis odgovora na zaslon.\n"
+                example_code_3: "```\n_ Kako ste?\n_\n```\n"
+            2:
+                story_text: "## Ukaz vprašaj\nZdaj, ko lahko uporabljamo **spremenljivke** v naših programih, ne potrebujemo več ukaza `{echo}`.\nSpremenljivke lahko uporabimo za shranjevanje odgovorov na vprašanja. Tako lahko uporabimo odgovor na več vprašanj v naših programih.\nPreverite:\n\nNa ta način vaša koda postaja interaktivna!\n"
+                example_code: "```\nime {is} {ask} Kako vam je ime?\n{print} Pozdravljeni ime\nstarost {is} {ask} Koliko ste stari?\n{print} ime je star-a starost let.\n```\n"
+                story_text_2: "### Vaja\nV prejšnjem zavihku ste vadili nastavljanje spremenljivk z ukazom `{is}`.\nUstvarili ste vsaj 3 spremenljivke in jih uporabili z ukazom za izpisovanje.\nZdaj, namesto da nastavite spremenljivke, želimo, da spremenljivke naredite interaktivne, kot smo mi storili v našem primeru.\n\nKopirajte svojo kodo iz prejšnjega zavihka in naredite spremenljivke interaktivne z uporabo ukazov `{ask}`.\n"
+                example_code_2: "```\npriljubljena_žival {is} {ask} Katera žival vam je najljubša?\n{print} Rad-a imam priljubljena_žival\n```\n"
+            18:
+                story_text: Zadnja sprememba, ki jo bomo morali narediti, da dobimo kodo Python, je sprememba iz `{ask}` v `{input}`.
+                example_code: "```\n{print}('Moje ime je Hedy!')\nime = {input}('Kako je pa vam ime?')\n{print}('Torej vam je ime ', ime)\n```\n"
+    blackjack:
+        description: Poskusite se čim bolj približati 21
+    calculator:
+        name: Kalkulator
+        default_save_name: Kalkulator
+        description: Ustvarite kalkulator
+        levels:
+            6:
+                story_text: "Zdaj, ko znate računati, lahko sami naredite kalkulator!\n"
+                example_code: "```\nštevilka_1 = {ask} 'Vnesite prvo številko:'\nštevilka_2 = {ask} 'Vnesite drugo številko:'\npravilen_odgovor = številka_1  * številka_2\n{print} številka_1 ' krat ' številka_2 ' je ' pravilen_odgovor\n```\n"
+                story_text_2: "### Vaja\nZgornji kalkulator bo namesto vas izračunal odgovor, lahko pa naredite tudi program za preverjanje lastnih matematičnih sposobnosti, kot je ta:\nIzpolnite prazna polja, da bo dokončana!\n"
+                example_code_2: "```\npravilen_odgovor = 11 * 27\nodgovor = {ask} 'Koliko je 11 krat 27?'\n{if} answer {is} _ {print} 'Dobro opravljeno!'\n{else} {print} 'Narobe, odgovor je ' _\n```\n"
+                story_text_3: "**Dodatno** Računalniku lahko tudi dovolite, da sam naredi naključne izdelke z uporabo `{random}`.\n"
+                example_code_3: "```\nštevilke = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nštevilka_1 = _\nštevilka_2 = _\npravilen_odgovor = številka_1 * številka_2\npodan_odgovor = {ask} 'Koliko je ' številka_1' krat ' številka_2'?'\n{if} _\n{else} _\n```"
+            9:
+                story_text: "Na prejšnji stopnji ste ustvarili kalkulator, na tej stopnji pa lahko to kodo razširite, tako da postavlja več vprašanj.\n\n### Vaja 1\nAli lahko končate vrstico 10, da bo koda delovala?\n\n### Vaja 2\nPosredujte igralcu povratne informacije, ko vnese odgovor, na primer `{print} 'Pravilno!'` ali pa `{print} 'Napačno! Pravilen odgovor je ' pravilen_odgovor`.\n"
+            14:
+                example_code: "```\n{define} calculate_mean_grade\n    total = 0\n    {for} i {in} {range} 1 {to} 4\n        grade = {ask} _\n        total = total + _\n        return _ / 4\n\nmean_grade = {call} _\n{print} 'Your mean grade is ' mean_grade\n```\n\n        total = total + _\n        return _ / 4\n\nmean_grade = {call} _\n{print} 'Your mean grade is ' mean_grade\n"
+    debugging:
+        name: Razhroščevanje
+        default_save_name: Razhroščevanje
+        description: Razhroščevalna dogodivšina
+        levels:
+            1:
+                story_text: "Dobrodošli na razhroščevalni dogodivščini. Razhroščevanje kode pomeni odpravljanje napak v programu.\nTo pomeni, da vam bomo v teh pustolovščinah razhroščevanja pokazali kodo, ki še ne deluje.\nUgotoviti boste morali, kaj je narobe, in odpraviti napake.\n\n### Vaja\nOdstranite napake v tej kodi. Srečno!"
+                example_code: "**Opozorilo! V tej kodi je treba odpraviti napake!**\n```\n{print} Obožujem programiranje\nAli tudi vi radi programirate?\n{echo}\n{print} Kateri so vaši hobiji?\n{echo} Vaši hobiji so\n```\n"
+            2:
+                story_text: "Dobrodošli na razhroščevalni dogodivščini. Razhroščevanje kode pomeni odpravljanje napak v programu.\nTo pomeni, da vam bomo v teh dogodivščinah razhroščevanja dali kodo, ki še ne deluje.\nUgotoviti boste morali, kaj je narobe, in odpraviti napake.\n\n### Vaja\nOdstranite napake v tej kodi. Srečno!"
+    default:
+        name: Uvod
+        levels:
+            1:
+                story_text: "Dobrodošli v Hedy! Tu se boste lahko korak za korakom naučili programirati.\n\nPreizkusite kodo tudi sami! Z rumenim gumbom kopirajte kodo primera v svoje programsko okno.\nNato pritisnite zeleni gumb \"Zaženi kodo\" pod oknom programa, da kodo zaženete .\n\nPripravljeni? Nato pojdite na naslednji zavihek in se naučite, kako izdelati svoj lasten program!\n"
+                example_code: "```\n{print} Pozdravljen svet!\n```\n"
+            2:
+                story_text: "Čestitamo! Dosegli ste 2. stopnjo. Upamo, da ste že izdelali nekaj odličnih programov!\nNa prvi stopnji ste morda opazili, da lahko ukaz `{echo}` naenkrat shrani le en podatek.\nNa primer v dogodivščini v restavraciji ste lahko ponavljali, kaj želi potnik jesti ali kaj želi piti, ne pa obojega v enem stavku.\n\nTo se spremeni na drugi stopnji, kjer se boste naučili delati s spremenljivkami, ki vam omogočajo, da shranite več informacij in jih izpišete na poljubno mesto.\nZato pojdimo na naslednji zavihek!\n"
+            4:
+                example_code: "```\nime {is} Sofija\n{print} Moje ime je ime\n```\n"
+            5:
+                story_text: "V prejšnjih stopnjah ste se že naučili uporabljati `{at} {random}`, zaradi česar so bile vaše igre vsakič, ko ste zagnali kodo, drugačne.\nVendar to ni zares interaktivno saj igralci nimajo nikakršnega vpliva na dogajanje v igri.\n\nV tej stopnji se boste naučili ukaza `{if}`, ki vam omogoča, da v svojem programu dodate različne odzive. Na ta način lahko na primer sprogramirate skrivno geslo za svoj računalnik.\nZato pojdimo na naslednji zavihek za nov ukaz!\n"
+                example_code: "```\ngeslo {is} {ask} 'Kakšno je pravilno geslo?'\n```\n"
+            13:
+                story_text: "V prejšnjih stopnjah ste se naučili, kako postaviti dva ukaza `{if}` drug v drugega. To sicer deluje dobro, vendar tako lahko nastane dolga koda, kot je ta:\n\nV tem sistemu morate navesti tako pravilno uporabniško ime kot geslo.\nV tej stopnji se boste naučili ukaza `{and}`, s katerim bo koda veliko krajša in bolj razumljiva!\nOglejte si primer!\n"
+                example_code: "```\nuporabniško_ime = {ask} 'Kakšno je vaše uporabniško ime?'\ngeslo = {ask} 'Kakšno je vaše geslo?'\n{if} uporabniško_ime {is} 'Hedy'\n    {if} geslo {is} 'skrivnost'\n        {print} 'Dobrodošel Hedy!'\n    {else}\n        {print} 'Dostop zavrnjen!'\n{else}\n    {print} 'Dostop zavrnjen!'\n```\n"
+    fortune:
+        name: Vedeževalec
+        default_save_name: Vedeževalec
+        levels:
+            1:
+                story_text: "Ste bili kdaj na karnevalu in vam je vedeževalec napovedal prihodnost? Ali pa ste se kdaj igrali s čarobno osmico?\nPotem verjetno veste, da vam v resnici ne morejo napovedati prihodnosti, kljub temu pa je igranje še vedno zabavno!\n\nV naslednjih stopnjah se lahko naučite, kako ustvariti svoj lastni stroj za napovedovanje prihodnosti!\nV prvi stopnji lahko začnete preprosto, tako da se Hedy predstavi kot vedeževalka in ji dovolite, da `{echo}` odgovore igralcev.\nTorej tako:\n"
+                story_text_2: "### Vaja\nKopirajte primer programa v vnosno okno in izpolnite prazna mesta, da bo program deloval.\n**Dodatno** Spremenite kodo in omogočite, da vedeževalec ne bo napovedal le vašega imena, temveč tudi vašo starost, vašo najljubšo športno ekipo ali kaj drugega o vas.\n"
+    functions:
+        levels:
+            12:
+                example_code: "```\nsides = 'left', 'right'\nlimbs = 'hand', 'foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n\n{define} turn\n    chosen_side = sides {at} {random}\n    chosen_limb = limbs _\n    chosen_color = colors _\n    {print} chosen_side ' ' chosen_limb ' on ' chosen_color\n\n{print} 'Lets play a game of Twister!'\n{for} i {in} {range} 1 to _\n    {call} turn\n    {sleep} 2\n```\n"
+            13:
+                story_text: "Now that you've learned how to use functions, you'll learn how to use a function with an argument.\nAn **argument** is a variable that is used within a function. It is not used outside the function.\n\nFor example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.\nIn this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.\nTo use `place` we have programmed the line `define song with place`.\nWhen the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.\n\n### Exercise\nThe next verse of this song goes:\n\nLast night as I lay on my pillow\nLast night as I lay on my bed\nLast night as I lay on my pillow\nI dreamed that my Bonnie is dead\n\nCan you program this verse in the same way as the example?\n"
+            14:
+                story_text: "V prejšnjih stopnjah ste se naučili ustvarjati funkcije in z njimi uporabljati argumente. Funkcijo lahko uporabite tudi tako, da ji dovolite, da nekaj izračuna namesto vas.\nFunkciji lahko podate formulo za izračun, ona pa vam bo podala odgovor. Ta odgovor se imenuje **vrnjena vrednost**.\n\nV tej kodi bo na primer funkcija izračunaj_novo_ceno izračunala novo ceno kateregakoli predmeta. Vrnjena vrednost bo nova cena.\n\n### Vaja\nDokončajte ta program. Spremenljivko nova_cena smo za vas že ustvarili, vi jo morate le še nastaviti.\nVrstico kode zaključite tako, da pokličete funkcijo, ki izračuna novo ceno.\n"
+                example_code: "```\n{define} izračunaj_novo_ceno {with} znesek, odstotek\n    odstotek = odstotek/ 100\n    znesek_popusta = znesek* odstotek\n    return znesek - znesek_popusta\n\nstara_cena = {ask} 'Kakšna je označena cena?'\npopust = {ask} 'Kakšen je odstotek popusta?'\n\nnova_cena = _ izračunaj_novo_ceno {with} stara_cena, _\n{print} 'Nova cena je ' nova_cena ' Eurov'\n```\n"
+    haunted:
+        name: Hiša strahov
+        levels:
+            1:
+                story_text: "V tej dogodivščini si boste ustvarili igro, v kateri morate pobegniti iz hiše strahov tako, da izberete prava vrata.\nČe boste izbrali prava vrata, boste preživeli, v nasprotnem primeru pa vas lahko ujame strašna pošast...\n\nV 1. stopnji začnemo igro o hiši strahov tako, da si izmislimo strašljivo zgodbo in vprašamo igralca, katero pošast bo videl v hiši strahov.\n"
+                example_code: "```\n{print} Kako smo prišli sem?\n{print} Spomnim se, da mi je prijatelj rekel, naj grem v stari dvorec...\n{print} in nenadoma je vse postalo črno.\n{print} Toda kako smo se znašli na tleh...?\n{print} Glava me boli, kot da bi me udaril bejzbolski kij!\n{print} Kaj je to za zvok?\n{print} O ne! Zdi se mi, da v tej hiši nismo sami!\n{print} Moramo pobegniti!\n{print} Pred mano so tri vrata..\n{ask} Katera vrata naj izberem?\n{echo} Izberem vrata\n{print} ...?\n```\n"
+                story_text_2: "### Vaja\nKopirajte vzorčno kodo na vnosno okno s klikom na rumeni gumb.\nZdaj dokončajte zgodbo tako, da dodate vsaj 5 vrstic kode.\nNe pozabite, da vsako vrstico programa začnete z ukazom `{print}`.\n"
+    is_command:
+        levels:
+            2:
+                story_text: "## Spremenljivke\nBesedo lahko poimenujete z `{is}`. To se imenuje **spremenljivka**. V tem primeru smo ustvarili dve spremenljivki, ki ju imenujemo ime in starost. Besedo ime lahko uporabite kjer koli v kodi in zamenjana bo s Hedy, kot v tem primeru:\n"
+                story_text_2: "### Vaja\nČas je za izdelavo lastnih spremenljivk!\nV vzorčni kodi smo naredili primer spremenljivke `priljubljena_žival`. V vrstici 1 je spremenljivka nastavljena, v 2. vrstici pa smo spremenljivko uporabili v ukazu `{print}`.\nNajprej dokončajte naš primer tako, da podčrtaj nadomestite z svojo najljubšo živaljo. Nato sami izdelajte še tri primere nastavljanja spremenljivke. Izberite spremenljivko in jo nastavite z ukazom `{is}`. Nato jo uporabite z ukazom `{print}`, tako kot smo to storili skupaj.\n"
+                example_code_2: "```\npriljubljena_žival {is} _\n{print} Všeč mi je priljubljena_žival\n```\n"
+    maths:
+        levels:
+            12:
+                example_code_2: "```\na = 'Pozdravljen '\nb = 'svet!'\n{print} a + b\n```\n"
+    music:
+        name: Glasba
+        default_save_name: Glasba
+        description: Zaigraj pesem!
+        levels:
+            1:
+                story_text: "Na tej stopnji se boste naučili, kako z ukazom `{play}` zaigrati melodijo!\n\nVtipkajte `{play}` in nato noto, ki jo želite zaigrati. Lestvica je C-D-E-F-G-A-B.\nKot lahko vidite, je na voljo 7 različnih črk, vendar lahko zaigramo več kot le 7 not.\nZa črko vnesite številko med 1 in 10, da izberete lestvico, na primer za B4 sledi C5.\nC1 je najnižja nota, ki jo lahko zaigramo, C10 pa je najvišja.\n\n### Vaja\nPreizkusite program iz primera in se nato z njim poigrajte! Ali lahko ustvarite svojo melodijo?\nV naslednji stopnji se boste naučili igrati nekaj obstoječih skladb."
+            5:
+                story_text: "Ukaza `{play}` ni treba vedno uporabiti za predvajanje celotne skladbe, včasih želite predvajati le eno noto.\nNa primer, če želite pripraviti kviz, lahko ob pravilnem odgovoru zaigramo veselo visoko noto, ob napačnem odgovoru pa žalostno nizko noto.\n\n### Vaja\nPrvo vprašanje dokončajte tako, da dodate vrstico kode, ki ob napačnem odgovoru zaigra noto C3.\nNato si zamislite še tri vprašanja, ki bi jih dodali temu kvizu.\n"
+            6:
+                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
+    parrot:
+        name: Papiga
+        description: Ustvarite svojo spletno papigo, ki vas bo posnemala!
+        levels:
+            1:
+                story_text: "Ustvarite svojo spletno papigo, ki vas bo posnemala!\n"
+                example_code: "```\n{print} Jaz sem papiga Hedy\n{ask} kako je pa tebi ime?\n{echo}\n{echo}\n```\n"
+                story_text_2: "### Vaja\nKopirajte kodo iz primera v vnosno okno s klikom na rumeni gumb.\nPapiga naj postavi drugačno vprašanje. Izpolnite prazna mesta v primeru!\n**Dodatek** Papagaju lahko dovolite, da postavi več vprašanj. Pod svoj program vnesite še nekaj vrstic kode.\n"
+                example_code_2: "```\n{print} Jaz sem papiga Hedy\n{ask} _\n{echo}\n{echo}\n"
+    print_command:
+        default_save_name: Izpiši
+        description: Uvod v ukaz izpiši
+        levels:
+            1:
+                story_text: "## Ukaz izpiši\nBesedilo lahko izpišete na zaslon z ukazom `{print}`.\n"
+                example_code: "```\n{print} Pozdravljeni programerji!\n{print} Dobrodošli v Hedy!\n```\n"
+                story_text_2: "### Vaja\nV Hedy boste v vsaki dogodivščini našli vaje. Vaja vam omogoča, da vadite nove ukaze in principe delovanja, ter vam omogoča, da primere kode preoblikujete po svoje.\nV tej vaji boste videli prazno okno. Preden se program lahko zažene, morate v prazno okno vpisati  kodo.\n\nNa prazno mesto vpišite ukaz `{print}` in nato dodajte še pet vrstic kode. Vsaka vrstica se mora začeti z ukazom `{print}`.\nZabavajte se!\n"
+                example_code_2: "```\n_ Živijo!\n```\n"
+    quizmaster:
+        name: Kvizmojster
+        default_save_name: Kvizmojster
+        description: Naredite svoj kviz!
+        levels:
+            14:
+                story_text: "### Vaja\nV tej dogodivščini lahko naredite svoj kviz! Izpolnite prazna mesta, dodajte več vprašanj in uživajte v svojem kvizu!\nSestavite lahko kviz o vsem, kar želite: o svojem hobiju, najljubši živali, najljubši knjigi ali karkoli drugega!\n"
+    quotation_marks:
+        levels:
+            12:
+                example_code: "```\nime = 'Hedy Robot'\n{print} 'Živijo ' ime\n```\n"
+                example_code_2: "```\nsuper_junaki = 'Spiderman', 'Batman', 'Črna Vdova'\n{print} super_junaki {at} {random}\n```\n"
+    random_command:
+        levels:
+            3:
+                example_code: "```\nživali {is} psi, mačke, kenguruji\n{print} živali {at} {random}\n```\n"
+            16:
+                example_code_2: "```\nsadje= ['jabolko', 'banana', 'češnja']\n{print} sadje[random]\n```"
+    repeat_command:
+        levels:
+            7:
+                story_text: "## Repeat! Repeat! Repeat!\nLevel 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times. Like this:\n\n### Exercise\nPlay around with the repeat command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?\n"
+                example_code: "```\n{repeat} 3 {times} {print} 'Hedy je zabaven!'\n```\n"
+            9:
+                story_text: "Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...\nGood news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.\n"
+                example_code: "```\nanswer = {ask} 'Are you ready to learn something new?'\n{if} answer {is} yes\n    {print} 'Great! You can learn to use the repeat command in the if command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Maybe you should practice some more in the previous level'\n"
+    restaurant:
+        name: Restavracija
+        default_save_name: Restavracija
+        description: Ustvarite svojo lastno virtualno restavracijo
+        levels:
+            1:
+                story_text: "V prvi stopnji lahko ustvarite svojo virtualno restavracijo in sprejemate naročila gostov.\n"
+                story_text_2: "### Vaja\nKopirajte kodo iz primera v vnosno okno s klikom na rumeni gumb.\nNajprej v prazna polja vpišite pravilne ukaze, da bo program deloval pravilno.\nNato programu za restavracijo dodajte vsaj še 4 vrstice kode.\nGosta vprašajte, kaj želi piti, in ga vprašajte, ali želi plačati z gotovino ali kartico.\nNa koncu si zamislite, kako bi se od svojega gosta lepo poslovili.\n"
+            3:
+                story_text: "Imate težave pri odločanju, kaj bi imeli za večerjo? Dovolite Hedy, da izbere za vas!\nPreprosto dodajte sezname vaših najljubših (ali najmanj priljubljenih) jedi in Hedy lahko naključno izbere vašo večerjo.\nLahko se tudi malo zabavate, tako da dovolite, da Hedy izbere ceno za vašo večerjo! Kaj boste dobili?\n"
+                story_text_2: "### Vaja\nSedaj ustvarite svojo različico naključne restavracije.\nUstvarite seznam predjedi, glavnih jedi, desertov, pijač in cen sami.\nNato uporabite ukaze `{print}` in `{at} {random}` da poveste stranki, kaj bo nocoj na njihovem jedilniku.\n"
+                example_code_2: "```\n{print} Dobrodošli v vaši lastni naključni restavraciji!\npredjedi {is} _\nglavne jedi {is} _\nsladice {is} _\npijače {is} _\ncene {is}_\n_\n```\n"
+            4:
+                story_text: "### Exercise\nAdd the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.\nThen, use the `{clear}` command to only show one line at a time in your output screen.\n\n### Exercise 2\nGo back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.\n"
+            7:
+                example_code: "```\n{print} 'Dobrodošli v restavracijo Chez Hedy'\nljudje= {ask} 'Koliko ljudi se nam bo pridružilo danes?'\n```\n"
+            10:
+                example_code: "```\nhodi = predjed, glavna jed, sladica\n{for} hod {in} hodi\n    {print} 'Kakšno je vaše naročilo za ' hod '?'\n    _ \n    _\n```\n"
+    rock:
+        name: Kamen, škarje in papir
+        default_save_name: Kamen_2
+        levels:
+            1:
+                story_text: "Na prvi stopnji lahko začnete z igro kamen, papir, škarje.\n\nZ `{ask}` se lahko odločite za svojo izbiro, z `{echo}` pa lahko to izbiro ponovite.\n"
+                example_code: "```\n{print} Kaj boste izbrali?\n{ask} Izberite med kamen, papir in škarje\n{echo} Torej vaša izbira je:\n```\n"
+                story_text_2: "### Vaja\nNamesto besed lahko uporabite tudi emoji-je: ✊✋✌\nAli lahko ustvarite kodo z uporabo emoji-jev?\n"
+                example_code_2: "```\n{print} Kaj boste izbrail?\n{ask} Izberite med _\n{echo} Torej vaša izibra je:\n```\n"
+            2:
+                story_text: "Na tej stopnji lahko vadite uporabo spremenljivk, da boste lahko na naslednji stopnji izvedli igro kamen, papir in škarje!\n### Vaja\nDokončajte program tako, da v prazna mesta vpišete **spremenljivko**.\nTa igra ni ravno interaktivna, vendar brez skrbi! V naslednjem zavihku se boste naučili, kako uporabiti spremenljivke z ukazom `{ask}` tako, da bo vaša igra postala interaktivna!\n"
+                example_code: "```\nIzbira {is} kamen\n{print} Jaz izberem _\n```"
+            3:
+                example_code: "```\nmožnosti {is} kamen, papir, škarje\n{print} možnosti  _\n```\n"
+            13:
+                example_code: "```\nmožnosti = 'kamen', 'papir', 'škarje'\nmoja_izbira = {ask} 'Kaj izberete?'\nračunalnikova_izbira = možnosti {at} {random}\n{print} 'Izbrali ste' moja_izbira \n{print} 'Računalnik izbere ' računalnikova_izbira \n{if} računalnikova_izbira {is} moja_izbira \n    {print} 'Neodločeno'\n{if} računalnikova_izbira {is} 'kamen' {and} moja_izbira {is} 'papir'\n    {print} 'Vi ste zmagali!'\n{if} computer_choice {is} 'kamen' {and} moja_izbira {is} 'škarje'\n    {print} 'Računalnik je zmagal!'\n_\n```\n"
+    rock_2:
+        name: Kamen, papir, škarje 2
+        default_save_name: kamen_2
+        description: Drugi del kamna, papirja in škarij
+        levels:
+            2:
+                example_code: "```\nizbira {is} _\n{print} Jaz izberem choice\n```\n"
+    secret:
+        levels:
+            12:
+                example_code: "```\nime = {ask} 'Kako vam je ime?'\n{if} ime {is} _\n    a = 'Pojdite na letališče '\n{else}\n    a = 'Pojdite na železniško postajo '\ngeslo = {ask} 'Kakšno je geslo?'\n{if} geslo {is} _\n    b = 'jutri ob 2:00.'\n{else}\n    b = 'danes ob 10:00'\n{print} _ _ _\n```\n"
+            13:
+                example_code: "```\nime = {ask} 'Kako vam je ime?'\ngeslo = {ask} 'Kakšno je vaše geslo?'\n{if} ime {is} 'Agent007' _ geslo {is} 'STROGO_ZAUPNO'\n    {print} 'Ob 2:00 pojdite na letališče.'\n{else}\n    {print} 'Ob 10:00 pojdite na železniško postajo.'\n ```\n"
+    sleep_command:
+        levels:
+            2:
+                example_code: "```\n{print} Moja najljubša barva je...\n{sleep} 2\n{print} zelena!\n```\n"
+    songs:
+        description: Izpiši pesem
+    turtle:
+        name: Želva
+        default_save_name: Želva
+        description: Naredi svojo sliko
+        levels:
+            1:
+                story_text: "Hedy lahko uporabite tudi za risanje. S kombiniranjem zavojev in črt lahko ustvarite kvadrat ali stopnice!\n\nZ uporabo `{forward}` narišite črto naprej. Številka za njo določa, kako daleč bo želva hodila. `{turn} {right}` zavrti želvo za četrt obrata v smeri urinega kazalca, `{turn} {left}` pa jo obrne v smeri nasprotni urinemu kazalcu.\n\nČe želite iti nazaj, uporabite ukaz `{forward}`, vendar z negativnim številom. Na primer tako `{forward} -100`\n"
+            2:
+                story_text: "In this level you can use variables to make the turtle interactive. For example you can ask the player how many steps the turtle must make.\n"
+                example_code: "```\nanswer {is} {ask} How many steps should the turtle make?\n{forward} answer\n```\n"
+                story_text_2: "Also, in level 1 the turtle could only turn left or right. That is a bit boring!\nIn level 2 he can point his nose in all directions.\n\nUse 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.\n\n### Exercise\nCan you make a figure with this code? Maybe a triangle or a circle?\n"
+                example_code_2: "```\n{print} Drawing figures\nangle {is} 90\n{turn} angle\n{forward} 25\n{turn} angle\n{forward} 25\n```\n"
+    turtle_draw_it:
+        name: Nariši!
+        levels:
+            1:
+                story_text: "### Vaja\nPoustvarite slike s pomočjo želve!\n\n<div class=\"w-full flex flex-row gap-2\">\n    Pravokotnik <img src=\"https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550\" width=\"100\">\n    Kvadrat <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"200\">\n    Stopnice <img src=\"https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106\" width=\"200\">\n</div>\n"
+            2:
+                story_text: "### Vaja\nPoustvarite slike s pomočjo želve!\n\n<div class=\"w-full flex flex-row gap-2\">\nTrikotnik <img src=\"https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204\" width=\"100\">\nPuščica <img src=\"https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9\" width=\"150\">\nČoln <img src=\"https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9\" width=\"150\">\n</div>\n"
+            3:
+                story_text: "### Vaja\nPoustvarite slike s pomočjo želve!\n\n<div class=\"w-full flex flex-row gap-2\">\nTrikotnik <img src=\"https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1\" width=\"150\">\nZvezda <img src=\"https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80\" width=\"150\">\nPuščica <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce\" width=\"200\">\n</div>\n"
+            4:
+                story_text: "### Vaja\nPoustvarite slike s pomočjo želve!\n\n<div class=\"w-full flex flex-row gap-2\">\nBarvna zvezda <img src=\"https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781\" width=\"150\">\nMavrica <img src=\"https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0\" width=\"500\">\nGnezdeni kvadrati <img src=\"https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7\" width=\"200\">\n</div>\n"
+            5:
+                story_text: "### Vaja\nPoustvarite slike s pomočjo želve!\n\n**Dodatno** Ustvarite samo eno kodo, ki igralcu omogoča, da se odloči, katero črko želi videti! In ali lahko dodate še več črk?\n\n<div class=\"w-full flex flex-row gap-2\">\nF <img src=\"https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20\" width=\"100\">\nE <img src=\"https://github.com/hedyorg/hedy/assets/80678586/12821803-6422-416a-8e36-9902d14e57a4\" width=\"100\">\nL <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24\" width=\"100\">\n</div>\n"
+            6:
+                story_text: "### Vaja\nPoustvarite slike s pomočjo želve!\n\n**Dodatno** Naj se igralec odloči kakšne barve naj bo kvadrat\n\n***Dodatno*** Ali lahko naredite tudi črko svojega imena in zastavo svoje države?\n\n<div class=\"w-full flex flex-row gap-2\">\nKvadrat <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"150\">\nČrke <img src=\"https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad\" width=\"100\">\nZastava <img src=\"https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e\" width=\"300\">\n</div>\n"
+            7:
+                story_text: "### Vaja\nPoustvarite slike s pomočjo želve!\n\n<div class=\"w-full flex flex-row gap-2\">\nŠestkotnik <img src=\"https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4\" width=\"200\">\nTrikotnik <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1\" width=\"200\">\nVentilator <img src=\"https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e\" width=\"200\">\n</div>\n"
+            9:
+                example_code: "Hint for the nested squares:\n```\ncolors = red, blue, orange, yellow, pink, purple, green, brown, black\ndistance = 120\nrepeat 5 times\n_\n```\nHint for the flags:\n```\ncountry = ask 'which country would you like to see the flag of?'\nif country is 'the Netherlands'\n    color_1 = red\n    color_2 = white\n    color_3 = blue\n```\n"
+            12:
+                story_text: "### Exercise\nRecreate the drawings with the turtle!\nHint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:\n</div>\nBracelet Designing program <img src=\"https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951\" width=\"500\">\n"
+                example_code: "```\n{define} draw_a_square\n_\n\n{color} white\n{turn} -90\n{forward} 300\n{turn} 180\n\n{for} i {in} {range} 1 {to} 5\n    {color} gray\n    {forward} 100\n    shape = {ask} 'What kind of shape would you like next on the bracelet?'\n    chosen_color = {ask} 'In which color?'\n    {color} chosen_color\n    {if} shape = 'square'\n        {call} draw_a_square\n```\n"

@@ -1,6 +1,5 @@
 import { Chart, registerables } from 'chart.js';
 import {modal} from "./modal";
-import {showAchievements} from "./app";
 if (registerables) {
   Chart.register(...registerables);
 }
@@ -13,12 +12,8 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
       url: '/live_stats/class/' + class_id + '/error/' + error_id,
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function(response) {
-      if (response.achievement) {
-          showAchievements(response.achievement, true, "");
-      } else {
-          location.reload();
-      }
+    }).done(function() {
+      location.reload();
     }).fail(function(err) {
         modal.notifyError(err.responseText);
     });
@@ -26,7 +21,7 @@ export function resolve_student(class_id: string, error_id: string, prompt: stri
 }
 
 export function InitLineChart(data: any[], labels: any[]){
-  const ctx = document.getElementById("runsOverTime") as HTMLCanvasElement;
+  const ctx = document.getElementById("runs_over_time") as HTMLCanvasElement;
   new Chart(ctx, {
     type: 'line',
     data: {

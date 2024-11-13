@@ -1,5 +1,12 @@
-COMMENT: _HASH /([^\n]*)/
+// If the comment takes up the whole line, it should also encompass its leading newline. In this way the whole
+// comment line can be skipped for the commands containing it. Comments should escape ENDBLOCKS not only in the start
+// but at any point, because if the body of a command (e.g. `if`) ends up with a comment, the ENDBLOCK would appear
+// right after it. Therefore, the ENDBLOCK should not be counted as a part of the comment.
+COMMENT: /[\n ]*\#(?!ENDBLOCK)(?:[^\n#]|#(?!ENDBLOCK))*/
 %ignore COMMENT
+
+// Internal symbol added by the preprocess_blocks function to indicate the end of blocks
+_END_BLOCK: "#ENDBLOCK"
 
 NEGATIVE_NUMBER: _MINUS /\p{Nd}+/ ("." /\p{Nd}+/)?
 POSITIVE_NUMBER: /\p{Nd}+/ ("." /\p{Nd}+/)?
@@ -13,10 +20,6 @@ NON_DECIMAL: _MINUS? /[\p{Nl}\p{No}]+/
 NAME: LETTER_OR_UNDERSCORE LETTER_OR_NUMERAL*
 LETTER_OR_UNDERSCORE: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
 LETTER_OR_NUMERAL: LETTER_OR_UNDERSCORE | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
-
-// Internal symbol added by the preprocess_blocks function to indicate the end of blocks
-_END_BLOCK: "#ENDBLOCK"
-
 
 //symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
 _EOL: "\r"?"\n"+

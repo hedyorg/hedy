@@ -35,7 +35,8 @@ ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
     Comment { "#" ![\n]* }
     eol { "\n" }
     space { " " }
-    Text { ![\n #]+ }
+    Text { ![\n #!?.]+ }
+    SpecialChar { "!" | "?" | "." }     
 }
 
-@skip { Comment | space }
+@skip { Comment | space | SpecialChar}

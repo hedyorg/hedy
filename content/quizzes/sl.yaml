@@ -1,0 +1,453 @@
+levels:
+    1:
+        1:
+            question_text: Kako se imenuje ta programski jezik?
+            mp_choice_options:
+            -   option: Hedy
+                feedback: Dobro opravljeno delo!
+            -   option: Heddy
+                feedback: Ne tega!
+            -   option: Haydie
+                feedback: Ne tega!
+            -   option: Heidi
+                feedback: Ne tega!
+            hint: Poimenovan je po igralki in inovatorki Hedy Lamarr.
+        2:
+            question_text: Kako je treba izpolniti na prazna polja, da se bo izpisalo besedilo "Pozdravljeni!"?
+            mp_choice_options:
+            -   option: '`{echo}`'
+                feedback: '`{echo}` repeats a given answer.'
+            -   option: '`{print}`'
+                feedback: Pravilno!
+            -   option: '`hello`'
+                feedback: Živijo ni ukaz.
+            -   option: '`{ask}`'
+                feedback: Z  ukazom `{ask}`, lahko kaj vprašate.
+            hint: _ Pozdravljen svet!
+        3:
+            question_text: Kako nekoga vprašate, katera je njegova najljubša barva?
+            mp_choice_options:
+            -   option: "```\n{print} Katera je vaša najljubša barva?\n```"
+                feedback: "`{print}` prints text, but it doesn't ask questions."
+            -   option: "```\n{ask} {print} What is your favorite color?\n```"
+                feedback: You only need one command, not two.
+            -   option: "```\n{ask} What is your favorite color?\n```"
+                feedback: Odlično!
+            -   option: "```\n{echo} What is your favorite color?\n```"
+                feedback: '`{echo}` repeats your answer back to you.'
+        4:
+            mp_choice_options:
+            -   option: '`{print}` in line 1 is missing.'
+                feedback: Pravilno!
+            -   option: The command in line 2 is spelled wrong.
+                feedback: The command is spelled correctly.
+            -   option: "`{echo}` isn't a command."
+                feedback: "`{echo}` is a command, there's another mistake."
+            -   option: Nothing! This is a perfect code!
+                feedback: Wrong, look carefully!
+            hint: Vrstica 1 se ne zdi v redu
+        6:
+            hint: Preveri `{print}` ukaze.
+        7:
+            mp_choice_options:
+            -   option: In line 1 `{print}` needs to be replaced with `{ask}`
+                feedback: Are you sure something is wrong?
+            -   option: In line 1 `{print}` needs to be replaced with `{echo}`
+                feedback: Are you sure something's wrong?
+            -   option: In line 3 `{echo}` needs to be replaced with `{print}`
+                feedback: Are you sure something is wrong?
+            -   option: Nothing! This is a perfect code!
+                feedback: Pravilno!
+        10:
+            mp_choice_options:
+            -   option: Are you ready to go to level 2?
+                feedback: There are two `{echo}` commands
+            -   option: "Yes!\nYes!"
+                feedback: Great job!
+            -   option: Da!
+                feedback: There are two `{echo}` commands
+            -   option: "Are you ready to go to level 2?\nYes!"
+                feedback: There are two `{echo}` commands
+            hint: Pa pojdimo!
+    2:
+        1:
+            mp_choice_options:
+            -   option: You can use the `{print}` command to ask questions.
+                feedback: That is what `{ask}` is for
+            -   option: You can use the `{ask}` command to echo answers.
+                feedback: That is not true
+            -   option: With the `{print}` command you can make text appear
+                feedback: Dobro
+            -   option: With the `{sleep}` command, you can remove text from the screen.
+                feedback: That's not how `{sleep}` works.
+        6:
+            mp_choice_options:
+            -   option: '`{sleep}`'
+                feedback: Popolno!
+            -   option: '`{echo}`'
+                feedback: There is nothing to repeat back here
+            -   option: '`{print}`'
+                feedback: There is no text there to `{print}` there
+            -   option: '`{ask}`'
+                feedback: There is no question there to be asked
+            hint: Premor za dramatičen učinek...
+        7:
+            mp_choice_options:
+            -   option: "```\n{print} 3\n```"
+                feedback: You don't need to `{print}`
+            -   option: "```\n{sleep} 3\n```"
+                feedback: Perfektno!
+            -   option: "```\n{sleep}\n```"
+                feedback: This way the bomb will explode in 1 second
+            -   option: "```\n{sleep} {sleep} {sleep}\n```"
+                feedback: Make it easier on yourself by using the number 3
+        9:
+            mp_choice_options:
+            -   option: 'Line 1 should say: dogs `{is}` animals'
+                feedback: The variable name is animal
+            -   option: 'Line 1 should say: animal `{is}` dogs'
+                feedback: Odlično!
+            -   option: 'Line 2 should say: `{print}` I love animals'
+                feedback: The variable name is animal
+            -   option: 'Line 2 should say: `{sleep}` I love animals'
+                feedback: Sleep is not used to `{print}` text
+    3:
+        1:
+            mp_choice_options:
+            -   option: '`{print}`'
+                feedback: '`{print}` is used to print text'
+            -   option: '`{ask}`'
+                feedback: '`{ask}` is used to ask a question'
+            -   option: '`{is}`'
+                feedback: '`{is}` is used to make a list'
+            -   option: '`{at}` `{random}`'
+                feedback: Pravilno!
+        4:
+            hint: Ime spremenljivke je cene
+        6:
+            mp_choice_options:
+            -   option: Line 2 needs to say question instead of answers
+                feedback: No that's not right
+            -   option: Line 2 needs the `{is}` command
+                feedback: Pravilno
+            -   option: Line 3 needs to say answer instead of answers
+                feedback: No the variable's called answers
+            -   option: Nothing! This code is great!
+                feedback: Actually, line 2 has a mistake.
+        7:
+            mp_choice_options:
+            -   option: The `{add}` command removes a random book from the list
+                feedback: The remove command removes, the add command adds
+            -   option: The `{add}` command adds a random book to a list
+                feedback: It doesn't. It adds your answer to the list!
+            -   option: The `{add}` command adds your favorite book to the list
+                feedback: Pravilno!
+            -   option: The `{add}` command prints your favorite book.
+                feedback: No, it adds your favorite book to the list
+        9:
+            hint: Poglejte vrstico 4
+    4:
+        2:
+            mp_choice_options:
+            -   option: "```\n{print} `hello`\n```"
+                feedback: This quotation mark is skewed, you need a straight one.
+            -   option: "```\n{print} 'hello'\n```"
+                feedback: Pravilno
+            -   option: "```\n{print} hello\n```"
+                feedback: There are no quotation marks here!
+            -   option: "```\n{print} ,hello,\n```"
+                feedback: This is a comma, you need quotation marks.
+            hint: Izberite prave znake za narekovaje.
+        3:
+            mp_choice_options:
+            -   option: "```\n{print} Hi Im Hedy\n```"
+                feedback: Add quotation marks please!
+            -   option: "```\n{print} 'Hi Im Hedy\n```"
+                feedback: Both before and after the words you want to print should be a quotation mark.
+            -   option: "```\n'{print} Hi Im Hedy'\n```"
+                feedback: The first quotation mark should be behind the word `{print}`
+            -   option: "```\n{print} 'Hi Im Hedy'\n```"
+                feedback: Perfektno!
+        7:
+            mp_choice_options:
+            -   option: Quotation marks are missing in line 1
+                feedback: Pravilno!
+            -   option: Quotation marks are missing in line 2
+                feedback: A variable doesn't need quotes
+            -   option: Quotation marks are missing in line 3
+                feedback: You don't want Hedy to literally print 'answers {at} {random}' so no quotation marks needed here!
+            -   option: Nothing, this code is good as is!
+                feedback: Look carefully. You missed a mistake!
+        10:
+            mp_choice_options:
+            -   option: Quotation marks are missing in line 1
+                feedback: A list doesn't need quotation marks
+            -   option: Quotation marks are missing in line 2
+                feedback: Pravilno
+            -   option: Quotation marks are missing in both line 2 and 3
+                feedback: Line 3 doesn't need quotation marks because it's not printed literally
+            -   option: Nothing, this code has no mistakes
+                feedback: You missed one!
+    5:
+        2:
+            mp_choice_options:
+            -   option: zabavno
+                feedback: That's right!
+            -   option: less fun
+                feedback: If the name is Hedy, it will say 'fun''
+            -   option: Hedy
+                feedback: No, it doesn't print the name
+            -   option: Napaka
+                feedback: Fortunately not!
+        3:
+            mp_choice_options:
+            -   option: Pravilno!
+                feedback: This is printed when you type in the correct password
+            -   option: SKRIVNOST
+                feedback: That's right!'
+            -   option: geslo
+                feedback: The password isn't password...
+            -   option: ALARM INTRUDER
+                feedback: This is printed when you type in the incorrect password!
+        4:
+            mp_choice_options:
+            -   option: Pravilno
+                feedback: That's printed if the correct answer is given, not the wrong one...
+            -   option: SKRIVNOST
+                feedback: That's not the right answer
+            -   option: Narobe!
+                feedback: No, this is not what Hedy will print
+            -   option: ALARM! INTRUDER!
+                feedback: Great job!
+        5:
+            mp_choice_options:
+            -   option: Because it needs to be in capitals, so SECRET
+                feedback: Prav zares!
+            -   option: Because the password is alarm
+                feedback: No, this is not the password.
+            -   option: Because it's spelled wrong.
+                feedback: That's not how you spell secret
+            -   option: Because Hedy makes a mistake
+                feedback: No, Hedy is right
+        6:
+            mp_choice_options:
+            -   option: "```\n{if}\n```"
+                feedback: '`{if}` is already in the line above'
+            -   option: "```\n{at} {random}\n```"
+                feedback: No, you need `{else}`.
+            -   option: "```\n{else}\n```"
+                feedback: Enkratno!
+            -   option: "```\n{print}\n```"
+                feedback: '`{print}` is already there, we need a word before it!'
+            hint: '`{if}` gre skupaj z...?'
+        7:
+            mp_choice_options:
+            -   option: '`{if}`'
+                feedback: '`{if}` is in the line above.'
+            -   option: '`{at}` `{random}`'
+                feedback: No, you don't need `{at} {random}`.
+            -   option: '`{else}`'
+                feedback: There already is an `{else}` command
+            -   option: '`{print}`'
+                feedback: Izjemno!
+        8:
+            hint: Kakšno je ime spremenljivke?
+        10:
+            mp_choice_options:
+            -   option: Hedy picks a random monster each time.
+                feedback: Imenitno!
+            -   option: vampir
+                feedback: Not always...
+            -   option: volkodlak
+                feedback: Not always...
+            -   option: giant spider
+                feedback: Not always...
+    6:
+        1:
+            mp_choice_options:
+            -   option: '20'
+                feedback: Pravilno!
+            -   option: '12'
+                feedback: No, the plus sign is used in addition
+            -   option: 2*10
+                feedback: No, Hedy will calculate the answer
+            -   option: '210'
+                feedback: Mind it's a calculation.
+        2:
+            mp_choice_options:
+            -   option: '`-`'
+                feedback: That's not it
+            -   option: plus
+                feedback: That's not it
+            -   option: '`*`'
+                feedback: That's not it
+            -   option: '`+`'
+                feedback: Brez napake!
+            hint: To je znak plus.
+        3:
+            hint: Pazite na narekovaje!
+        5:
+            mp_choice_options:
+            -   option: 5 dollars
+                feedback: Unfortunately, it's not that cheap.
+            -   option: 10 dollars
+                feedback: No, it's 10 dollars each.
+            -   option: 15 dollars
+                feedback: The * means multiplication.
+            -   option: 50 dollars
+                feedback: Sijajno!
+        6:
+            mp_choice_options:
+            -   option: 15 dollars
+                feedback: Vrhunsko!
+            -   option: 6 dollars
+                feedback: The fries are 6 dollars
+            -   option: 0 dollars
+                feedback: The hamburger isn't free!
+            -   option: 21 dollars
+                feedback: That's the price for a hamburger and fries!
+            hint: Bodite pozorni na četrto vrstico.
+        8:
+            mp_choice_options:
+            -   option: There shouldn't be quotation marks in line 2
+                feedback: No, there should be!
+            -   option: Spremenljivka se imenuje pravilen odgovor, vendar je ime spremenljivke lahko le ena beseda. Torej mora biti pravilen_odgovor
+                feedback: Pravilno!
+            -   option: The `{if}` and `{else}` commands should be in the same line.
+                feedback: No, that's not true.
+            -   option: Spremenljivka v vrstici 2 se ne more imenovati odgovor, ker je preveč podobna spremenljivki pravilen odgovor.
+                feedback: Variable names can be similar, but they can't be 2 words...
+        10:
+            mp_choice_options:
+            -   option: You can only fill in the word is on the `_`
+                feedback: You are allowed to use the `=` sign as well
+            -   option: You can fill in either the word is or the `=` sign on the `_`
+                feedback: Neverjetno!
+            -   option: You have to fill in =is= on the `_`
+                feedback: No, one `=` sign is enough
+            -   option: You can only use the `=` sign when working with numbers, not with words.
+                feedback: You can also use `=` with words.
+    7:
+        1:
+            mp_choice_options:
+            -   option: '0'
+                feedback: No you can repeat a line.
+            -   option: '1'
+                feedback: Correct, one line at a time
+            -   option: '3'
+                feedback: In this level only one line at a time
+            -   option: neskočno
+                feedback: In this level you can only repeat one line at a time
+        3:
+            mp_choice_options:
+            -   option: Desno
+                feedback: No, a word is missing
+            -   option: Wrong, the word `{repeat}` is missing
+                feedback: The word `{repeat}` is there, another word is missing
+            -   option: Wrong, the word `{times}` is missing
+                feedback: The word `{times}` is there, another word is missing.
+            -   option: Wrong, the word `{print}` is missing
+                feedback: Pravilno
+        5:
+            hint: Koda je pravilna!
+        7:
+            hint: Bodite pozorni na ukaz `{repeat}`.
+        9:
+            hint: "'Na  pomoč!' se ponovi 3-krat."
+    8:
+        1:
+            hint: Obe vrstice se ponovita dvakrat.
+        5:
+            hint: Nekaj je narobe z zamikanjem
+    9:
+        3:
+            hint: Sledite pravi poti
+        5:
+            hint: Pazite na zamike
+    11:
+        7:
+            hint: Uporabite spremenljivko 'ljudje'
+        8:
+            hint: Ne pravi `{print}` i
+        10:
+            hint: Bodite pozorni na zamike
+    12:
+        1:
+            hint: Obe vrstici sta izpisani!
+        2:
+            mp_choice_options:
+            -   option: "```\nflavors {is} vanilla, strawberry, chocolate\n{print} 'I would like a ' flavors {at} {random} ' cake.'\n```"
+                feedback: All the different values of flavors should be in quotation marks.
+            -   option: "```\n'flavors = vanilla, strawberry, chocolate'\n{print} 'I would like a ' flavors {at} {random} ' cake.'\n```"
+                feedback: All the different values of flavors should be in quotation marks.
+            -   option: "```\nflavors = 'vanilla', 'strawberry', 'chocolate'\n{print} 'I would like a ' flavors {at} {random} ' cake.'\n```"
+                feedback: Alright!
+            -   option: "```\n                flavors = 'vanilla, strawberry, chocolate'\n                {print} 'I would like a ' flavors {at} {random} ' cake.'\n                ```"
+                feedback: All the different values of flavors should be in quotation marks.
+        5:
+            hint: Pravilno geslo je  STROGO_ZAUPNO
+        6:
+            question_text: Which line should be filled in at the ???
+            code: "{print} 'Welcome to McHedy!'\norder = {ask} 'Would you like a hamburger or fries?'\n{if} order = 'hamburger'\n    price = 12\n{if} order = 'fries'\n    price = 4\ndrinks = {ask} 'Would you like a drink with that for 2 dollars?'\n{if} drinks = 'yes'\n    ???\n{print} 'That will be ' price ' dollar please'"
+        9:
+            question_text: Which code should be filled in in line 1 at the ???
+            code: "???\n{print} 'You won ' prizes {at} {random} '!'"
+        10:
+            question_text: Which line of code should be filled in at the ??? to complete the song ?
+            code: "actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'\n???\n    {for} i {in} {range} 0 {to} 1\n        {print} 'if youre happy and you know it'\n        {print} action\n    {print} 'if youre happy and you know it and you really want to show it'\n    {print} 'if youre happy and you know it'\n    {print} action"
+    13:
+        4:
+            hint: Papir premaga kamen
+    14:
+        4:
+            hint: Simboli so pravilni
+        5:
+            hint: '> pomeni je več kot'
+        6:
+            hint: "!= pomeni 'ni enako'"
+        8:
+            hint: '> pomeni je več kot'
+    15:
+        6:
+            hint: Pozorno poglejte na zamike
+    16:
+        1:
+            hint: Ne uporabljamo več {at}
+        3:
+            hint: Ni naključno...
+        10:
+            code: |-
+                {print} 'The book raffle will start soon'
+                {print} 'Get your tickets now!'
+                books = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']
+                people = {ask} 'How many raffle tickets are sold?'
+                list_of_numbers = [1, 2]
+                {for} i {in} {range} 3 {to} people
+                    {add} i {to} list_of_numbers
+                    {for} i {in} {range} 1 {to} 5
+    17:
+        1:
+            hint: Naredite zanko skozi vaš seznam.
+        2:
+            hint: Pozorno preberite kodo.
+        4:
+            hint: Pomislite na `{if}`, `{elif}`, `{else}`.
+        6:
+            code: |-
+                name = {ask} 'What is your name?'
+                {if} name == 'Hedy':
+                    password = {ask} 'What is your password?'
+                    {if} password =='turtle123':
+                        {print} 'Yey'
+                    {else}:
+                        {print} 'Access denied'
+                {else}:
+                 {print} 'Go fish'"
+        7:
+            hint: Razmišljajte o matematičnih znakih.
+        8:
+            hint: Pozorno preberite kodo.
+        9:
+            hint: Pozorno preberite kodo.
+        10:
+            hint: Pozorno preberite kodo.

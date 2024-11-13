@@ -11,21 +11,21 @@ import {
 import {
     print as print3, ask as ask3, play as play3, color as color3,
     forward as forward3, turn as turn3, sleep as sleep3, is as is3,
-    add as add3, remove as remove3, from as from3, toList as toList3,
+    add as add3, remove as remove3, from as from3, to_list as to_list3,
     at as at3, random as random3
 } from "./level3-parser.terms"
 
 import {
     print as print4, ask as ask4, play as play4, color as color4,
     forward as forward4, turn as turn4, sleep as sleep4, is as is4,
-    add as add4, remove as remove4, from as from4, toList as toList4,
+    add as add4, remove as remove4, from as from4, to_list as to_list4,
     at as at4, random as random4, clear as clear4
 } from "./level4-parser.terms"
 
 import {
     print as print5, ask as ask5, play as play5, color as color5,
     forward as forward5, turn as turn5, sleep as sleep5, is as is5,
-    add as add5, remove as remove5, from as from5, toList as toList5,
+    add as add5, remove as remove5, from as from5, to_list as to_list5,
     at as at5, random as random5, clear as clear5, ifs as if5,
     elses as else5, ins as in5, pressed as pressed5, not_in as not_in5
 } from "./level5-parser.terms"
@@ -33,7 +33,7 @@ import {
 import {
     print as print6, ask as ask6, play as play6, color as color6,
     forward as forward6, turn as turn6, sleep as sleep6, is as is6,
-    add as add6, remove as remove6, from as from6, toList as toList6,
+    add as add6, remove as remove6, from as from6, to_list as to_list6,
     at as at6, random as random6, clear as clear6, ifs as if6,
     elses as else6, ins as in6, pressed as pressed6, not_in as not_in6
 } from "./level6-parser.terms"
@@ -41,7 +41,7 @@ import {
 import {
     print as print7, ask as ask7, play as play7, color as color7,
     forward as forward7, turn as turn7, sleep as sleep7, is as is7,
-    add as add7, remove as remove7, from as from7, toList as toList7,
+    add as add7, remove as remove7, from as from7, to_list as to_list7,
     at as at7, random as random7, clear as clear7, ifs as if7,
     elses as else7, ins as in7, pressed as pressed7, not_in as not_in7,
     repeat as repeat7, times as times7, 
@@ -50,7 +50,7 @@ import {
 import {
     print as print8, ask as ask8, play as play8, color as color8,
     forward as forward8, turn as turn8, sleep as sleep8, is as is8,
-    add as add8, remove as remove8, from as from8, toList as toList8,
+    add as add8, remove as remove8, from as from8, to_list as to_list8,
     at as at8, random as random8, clear as clear8, ifs as if8,
     elses as else8, ins as in8, pressed as pressed8, not_in as not_in8,
     repeat as repeat8, times as times8, 
@@ -59,7 +59,7 @@ import {
 import {
     print as print10, ask as ask10, play as play10, color as color10,
     forward as forward10, turn as turn10, sleep as sleep10, is as is10,
-    add as add10, remove as remove10, from as from10, toList as toList10,
+    add as add10, remove as remove10, from as from10, to_list as to_list10,
     at as at10, random as random10, clear as clear10, ifs as if10,
     elses as else10, ins as in10, pressed as pressed10, not_in as not_in10,
     repeat as repeat10, times as times10, fors as for10
@@ -68,7 +68,7 @@ import {
 import {
     print as print11, ask as ask11, play as play11, color as color11,
     forward as forward11, turn as turn11, sleep as sleep11, is as is11,
-    add as add11, remove as remove11, from as from11, toList as toList11,
+    add as add11, remove as remove11, from as from11, to_list as to_list11,
     at as at11, random as random11, clear as clear11, ifs as if11,
     elses as else11, ins as in11, pressed as pressed11, not_in as not_in11,
     repeat as repeat11, times as times11, fors as for11, to as to11, range as range11
@@ -77,7 +77,7 @@ import {
 import {
     print as print12, ask as ask12, play as play12, color as color12,
     forward as forward12, turn as turn12, sleep as sleep12, is as is12,
-    add as add12, remove as remove12, from as from12, toList as toList12,
+    add as add12, remove as remove12, from as from12, to_list as to_list12,
     at as at12, random as random12, clear as clear12, ifs as if12,
     elses as else12, ins as in12, pressed as pressed12, not_in as not_in12,
     repeat as repeat12, times as times12, fors as for12, to as to12, range as range12,
@@ -87,7 +87,7 @@ import {
 import {
     print as print13, ask as ask13, play as play13, color as color13,
     forward as forward13, turn as turn13, sleep as sleep13, is as is13,
-    add as add13, remove as remove13, from as from13, toList as toList13,
+    add as add13, remove as remove13, from as from13, to_list as to_list13,
     at as at13, random as random13, clear as clear13, ifs as if13,
     elses as else13, ins as in13, pressed as pressed13, not_in as not_in13,
     repeat as repeat13, times as times13, fors as for13, to as to13, range as range13,
@@ -98,7 +98,7 @@ import {
 import {
     print as print14, ask as ask14, play as play14, color as color14,
     forward as forward14, turn as turn14, sleep as sleep14, is as is14,
-    add as add14, remove as remove14, from as from14, toList as toList14,
+    add as add14, remove as remove14, from as from14, to_list as to_list14,
     at as at14, random as random14, clear as clear14, ifs as if14,
     elses as else14, ins as in14, pressed as pressed14, not_in as not_in14,
     repeat as repeat14, times as times14, fors as for14, to as to14, range as range14,
@@ -109,34 +109,37 @@ import {
 import {
     print as print15, ask as ask15, play as play15, color as color15,
     forward as forward15, turn as turn15, sleep as sleep15, is as is15,
-    add as add15, remove as remove15, from as from15, toList as toList15,
+    add as add15, remove as remove15, from as from15, to_list as to_list15,
     at as at15, random as random15, clear as clear15, ifs as if15,
     elses as else15, ins as in15, pressed as pressed15, not_in as not_in15,
     repeat as repeat15, times as times15, fors as for15, to as to15, range as range15,
     define as define15, returns as returns15, _with as with15, call as call15,
-    and as and15, or as or15, _while as while15
+    and as and15, or as or15, _while as while15, low_true as true15, low_false as false15,
+    cap_true as True15, cap_false as False15
 } from "./level15-parser.terms"
 
 import {
     print as print16, ask as ask16, play as play16, color as color16,
     forward as forward16, turn as turn16, sleep as sleep16, is as is16,
-    add as add16, remove as remove16, from as from16, toList as toList16,
+    add as add16, remove as remove16, from as from16, to_list as to_list16,
     random as random16, clear as clear16, ifs as if16,
     elses as else16, ins as in16, pressed as pressed16, not_in as not_in16,
     repeat as repeat16, times as times16, fors as for16, to as to16, range as range16,
     define as define16, returns as returns16, _with as with16, call as call16,
-    and as and16, or as or16, _while as while16
+    and as and16, or as or16, _while as while16, low_true as true16, low_false as false16,
+    cap_true as True16, cap_false as False16
 } from "./level16-parser.terms"
 
 import {
     print as print17, ask as ask17, play as play17, color as color17,
     forward as forward17, turn as turn17, sleep as sleep17, is as is17,
-    add as add17, remove as remove17, from as from17, toList as toList17,
+    add as add17, remove as remove17, from as from17, to_list as to_list17,
     random as random17, clear as clear17, ifs as if17,
     elses as else17, ins as in17, pressed as pressed17, not_in as not_in17,
     repeat as repeat17, times as times17, fors as for17, to as to17, range as range17,
     define as define17, returns as returns17, _with as with17, call as call17,
-    and as and17, or as or17, _while as while17, elif as elif17
+    and as and17, or as or17, _while as while17, elif as elif17, low_true as true17, low_false as false17,
+    cap_true as True17, cap_false as False17
 } from "./level17-parser.terms"
 
 import {
@@ -145,11 +148,13 @@ import {
     remove as remove18, from as from18, clear as clear18, ifs as ifs18,
     elses as elses18, and as and18, or as or18, pressed as pressed18, notIn as notIn18, ins as ins18,
     repeat as repeat18, times as times18, range as range18, whiles as whiles18,
-    def as def18, returns as returns18, fors as fors18, toList as toList18, elif as elif18
+    def as def18, returns as returns18, fors as fors18, to_list as to_list18, elif as elif18,
+    low_true as true18, low_false as false18, cap_true as True18, cap_false as False18
 }  from "./level18-parser.terms";
 
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 import { Stack } from "@lezer/lr";
+import { convert } from "../utils";
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
     readonly level: number;
@@ -200,7 +205,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add3,
             "remove": remove3,
             "from": from3,
-            "to_list": toList3,
+            "to_list": to_list3,
         },
         specialize: {
             "ask": ask3,
@@ -220,7 +225,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add4,
             "remove": remove4,
             "from": from4,
-            "to_list": toList4,
+            "to_list": to_list4,
             "clear": clear4
         },
         specialize: {
@@ -241,7 +246,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add5,
             "remove": remove5,
             "from": from5,
-            "to_list": toList5,
+            "to_list": to_list5,
             "clear": clear5,
             "not_in": not_in5,
             "in": in5
@@ -267,7 +272,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add6,
             "remove": remove6,
             "from": from6,
-            "to_list": toList6,
+            "to_list": to_list6,
             "clear": clear6,
             "not_in": not_in6,
             "in": in6
@@ -293,7 +298,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add7,
             "remove": remove7,
             "from": from7,
-            "to_list": toList7,
+            "to_list": to_list7,
             "clear": clear7,
             "not_in": not_in7,
             "in": in7,
@@ -321,7 +326,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add8,
             "remove": remove8,
             "from": from8,
-            "to_list": toList8,
+            "to_list": to_list8,
             "clear": clear8,
             "not_in": not_in8,
             "in": in8,
@@ -350,7 +355,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add8,
             "remove": remove8,
             "from": from8,
-            "to_list": toList8,
+            "to_list": to_list8,
             "clear": clear8,
             "not_in": not_in8,
             "in": in8,
@@ -378,7 +383,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add10,
             "remove": remove10,
             "from": from10,
-            "to_list": toList10,
+            "to_list": to_list10,
             "clear": clear10,
             "not_in": not_in10,
             "in": in10,
@@ -407,7 +412,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add11,
             "remove": remove11,
             "from": from11,
-            "to_list": toList11,
+            "to_list": to_list11,
             "clear": clear11,
             "not_in": not_in11,
             "in": in11,
@@ -438,7 +443,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add12,
             "remove": remove12,
             "from": from12,
-            "to_list": toList12,
+            "to_list": to_list12,
             "clear": clear12,
             "not_in": not_in12,
             "in": in12,
@@ -473,7 +478,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add13,
             "remove": remove13,
             "from": from13,
-            "to_list": toList13,
+            "to_list": to_list13,
             "clear": clear13,
             "not_in": not_in13,
             "in": in13,
@@ -509,7 +514,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add14,
             "remove": remove14,
             "from": from14,
-            "to_list": toList14,
+            "to_list": to_list14,
             "clear": clear14,
             "not_in": not_in14,
             "repeat": repeat14,
@@ -547,7 +552,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add15,
             "remove": remove15,
             "from": from15,
-            "to_list": toList15,
+            "to_list": to_list15,
             "clear": clear15,
             "not_in": not_in15,
             "repeat": repeat15,
@@ -556,7 +561,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to15,
             "range": range15,
             "return": returns15,
-            "define": define15            
+            "define": define15,
         },
         specialize: {
             "if": if15,
@@ -571,7 +576,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "is": is15,
             "while": while15,
             "call": call15,
-            "with": with15
+            "with": with15,
+            "true": true15,
+            "false": false15,
+            "True": True15,
+            "False": False15,
         },
     },
     16: {
@@ -586,7 +595,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add16,
             "remove": remove16,
             "from": from16,
-            "to_list": toList16,
+            "to_list": to_list16,
             "clear": clear16,
             "not_in": not_in16,
             "repeat": repeat16,
@@ -595,7 +604,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to16,
             "range": range16,
             "return": returns16,
-            "define": define16            
+            "define": define16,
         },
         specialize: {
             "if": if16,
@@ -609,7 +618,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "is": is16,
             "while": while16,
             "call": call16,
-            "with": with16
+            "with": with16,
+            "true": true16,
+            "false": false16,
+            "True": True16,
+            "False": False16,
         },
     },
     17: {
@@ -624,7 +637,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "add": add17,
             "remove": remove17,
             "from": from17,
-            "to_list": toList17,
+            "to_list": to_list17,
             "clear": clear17,
             "not_in": not_in17,
             "repeat": repeat17,
@@ -633,7 +646,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to17,
             "range": range17,
             "return": returns17,
-            "define": define17
+            "define": define17,
         },
         specialize: {
             "if": if17,
@@ -648,7 +661,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "while": while17,
             "elif": elif17,
             "call": call17,
-            "with": with17
+            "with": with17,
+            "true": true17,
+            "false": false17,
+            "True": True17,
+            "False": False17,
         },
     },
     18 : {
@@ -666,7 +683,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "random": random18,
             "forward": forward18,
             "turn": turn18,
-            "to_list": toList18,
+            "to_list": to_list18,
             "remove": remove18,
             "from": from18,
             "if": ifs18,
@@ -681,7 +698,11 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "while": whiles18,
             "return": returns18,
             "for": fors18,
-            "elif": elif18
+            "elif": elif18,
+            "true": true18,
+            "false": false18,
+            "True": True18,
+            "False": False18,
         },
         extend: {}
     }
@@ -711,7 +732,7 @@ export function initializeTranslation(options: InitializeCodeMirrorSyntaxHighlig
 
 export function specializeKeyword(name: string, stack: Stack) {
     for (const [key, value] of specializeTranslations) {
-        const regexString =  value.replace(' ', '|');
+        const regexString =  value.replace(/ /g, '|');
         if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
             if (stack.canShift(keywordToToken[level].specialize[key])) {
                 return keywordToToken[level].specialize[key];
@@ -723,7 +744,7 @@ export function specializeKeyword(name: string, stack: Stack) {
 
 export function extendKeyword(name: string, stack: Stack) {
     for (const [key, value] of extendTranslations) {
-        const regexString =  value.replace(' ', '|');
+        const regexString =  value.replace(/ /g, '|');
         if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
             if (stack.canShift(keywordToToken[level].extend[key])) {
                 return keywordToToken[level].extend[key];
@@ -732,20 +753,3 @@ export function extendKeyword(name: string, stack: Stack) {
     }
     return -1;
 }
-
-// convert an objet in a map
-function convert(o:(object|undefined)) {
-    if (typeof o === 'object') {
-      let tmp:Map<string, object> = new Map(Object.entries(o));
-  
-      let ret:Map<string, (undefined|object)> = new Map();
-  
-      tmp.forEach((value, key) => {
-        ret.set(key, convert(value));
-      });
-  
-      return ret;
-    } else {
-      return o;
-    }
-  }

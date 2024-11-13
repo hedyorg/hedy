@@ -1,0 +1,18 @@
+levels:
+    3:
+        1:
+            mp_choice_options:
+            -   option: '`{print}`'
+                feedback: '`{print}` is used to print text'
+            -   feedback: '`{ask}` is used to ask a question'
+                option: '`{ask}`'
+            -   option: '`{is}`'
+                feedback: '`{is}` is used to make a list'
+            -   option: '`{at}` `{random}`'
+                feedback: Correct!
+    17:
+        6:
+            code: "name = {ask} 'What is your name?'\n{if} name == 'Hedy':\npassword = {ask} 'What is your password?'\n    {if} password =='turtle123':\n        {print} 'Yey'\n    {else}:\n        {print} 'Access denied'\n{else}:\n {print} 'Go fish'"
+    16:
+        10:
+            code: "{print} 'The book raffle will start soon'\n{print} 'Get your tickets now!'\n{books} = ['Narnia', 'The Hobbit', 'Oliver Twist', 'Harry Potter', 'Green eggs and ham']\npeople = {ask} 'How many raffle tickets are sold?'\nlist_of_raffle_numbers = [1, 2]\n{for} i {in} {range} 3 {to} people\n    {add} i {to} list_of_raffle_numbers\n{for} i {in} {range} 1 {to} 5"

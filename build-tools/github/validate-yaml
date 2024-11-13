@@ -23,26 +23,34 @@ echo "------> Validating YAML"
 # 'npx pajv validate' just hangs. Running the 'pajv' binary directly without the use of
 # 'npx' does work... so we're just going to ¯\_(ツ)_/¯ and do that.
 
-pajv=node_modules/.bin/pajv
-
-all_schemas=$(find content -name \*.schema.json)
+schemas=$(find content -name \*.schema.json)
 
 failures=false
 
-for schema in $all_schemas; do
+for schema in $schemas; do
     dir=$(dirname $schema)
-    echo "------> Validating $(basename $dir)"
 
-    # Run pajv, remove all the lines that end in the word ' valid' -- those are not interesting
-    # and just add noise.
-    if ! $pajv validate --errors=text -s $schema -d "$dir/*.yaml" > validate.txt; then
-        cat validate.txt | grep -vE ' valid$' || true
+    # The non-generated schema files that have required fields. They should be
+    # used for 'en.yaml' files. The generated schema files allow all fields to be
+    # optional, so they should be used to validate the rest of the yaml files.
+    if [[ $schema == *".generated."* ]]; then
+        files="*";
+        echo "------> Validating with optional fields $(basename $dir)/*.yaml"
+    else
+        files="en";
+        echo "------> Validating with required fields $(basename $dir)/en.yaml"
+    fi
+
+    # Run the validator.
+    if ! check-jsonschema -o text --schemafile $schema $dir/$files.yaml > validate.txt; then
+        cat validate.txt || true
         failures=true
     fi
     rm validate.txt
 done
 
 # Also run the structure validator which compares en.yaml to the other languages
+echo "------> Checking data completeness w.r.t en.yaml"
 python tools/check-yaml-structure.py
 
 if $failures; then

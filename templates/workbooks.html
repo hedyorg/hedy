@@ -1,0 +1,82 @@
+{% extends "auth.html" %}
+
+{% block full_width_content %}
+    <div class="bg-blue-200 mb-4">
+        <div class="py-4 flex items-center w-full copy-container mx-auto">
+            <div class="tracking-wide text-xl font-extralight">{{ page_title }}</div>
+        </div>
+    </div>
+    <div class="copy-container text-business-copy" id="teacher_documentation">
+        <div class="flex gap-8">
+            <div class="flex-1">
+                {% if workbook.intro %}
+                    <p>{{ workbook.intro|commonmark }}</p>
+                {% endif %}
+
+                {% for exercise in workbook.exercises %}
+                    {% if exercise.contents %}
+                        <p>{{ exercise.contents|commonmark }}</p>
+                        <!-- contents kan ook nog een code blok hebben -->
+                        {% if exercise.code %}
+                            <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+                                <pre class="workbook" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
+                            </div>
+                        {% endif %}
+
+                    {% else %}
+
+                        {% if exercise.type == 'output' or exercise.type =='question' or exercise.type =='define' or exercise.type == 'circle' or exercise.type == 'MC-code' %}
+                            <h4 id="{{exercise.title|slugify}}">{{ exercise.icon}} {{ exercise.title }}</h4>
+                            {{ exercise.text|commonmark }}
+
+                            <table>
+                                <tr>
+                                     <td width='5000px'>
+                                        {% if exercise.code %}
+                                        <div class="w-full lg:w-2/3 turn-pre-into-ace my-5">
+                                            <pre class="workbook" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
+                                        </div>
+                                        {% endif %}
+                                    </td>
+                                    <td width='600px' { text-align: left; }>
+                                        <!-- questions have lines OR options -->
+                                        {% if exercise.lines %}
+                                            {% for line in exercise.lines %}
+                                                {{ line }} <br>
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% if exercise.options %}
+                                            {{ exercise.options }} <br>
+                                        {% endif %}
+                                    </td></tr>
+                            </table>
+                        {% endif %}
+
+                        {% if exercise.type == 'input' %}
+                            <h4 id="{{exercise.title|slugify}}">{{ exercise.icon}} {{ exercise.title }}</h4>
+                            {{ exercise.text|commonmark }}
+                            <table>
+                                <tr>
+                                    <td width='800px'>
+                                        {% if exercise.lines %}
+                                            {% for line in exercise.lines %}
+                                                {{ line }} <br>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </td>
+                                    <td width='600px'>
+                                        {{ exercise.output|commonmark }}
+                                    </td></tr>
+                            </table>
+
+                        {% endif %}
+                    {% endif %}
+
+
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

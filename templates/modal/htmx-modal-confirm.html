@@ -1,4 +1,4 @@
-<div id="htmx-modal"
+<div id="htmx_modal" data-cy="htmx_modal"
     _="on closeModal remove me">
     <div _="on click trigger closeModal" class="fixed bg-black z-50 w-full h-full opacity-75"></div>
     <div class="fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center"
@@ -10,8 +10,14 @@
                     class="green-btn block m-4 w-40 pb-4 pt-4" 
                     hx-post="{{ htmx_endpoint }}"
                     hx-target="{{ htmx_target }}"
+                    hx-swap="{{ htmx_swap or 'innerHTML' }}"
                     {% if htmx_indicator is defined %}hx-indicator="{{ htmx_indicator }}" {% endif %}
-                    _="on click trigger closeModal ">
+                    _="
+                        on click trigger closeModal
+                        {% if hyperscript %}
+                        then {{ hyperscript }}
+                        {% endif %}
+                     ">
                 {{_('yes')}}
             </button>
             <button class="red-btn block m-4 w-40 pb-4 pt-4"

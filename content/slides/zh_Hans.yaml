@@ -43,9 +43,6 @@ levels:
         9:
             header: Hedy编程
             text: 输出也可以是一个图形。
-            code: |-
-                {forward} 100
-                {turn} 左
     1:
         1:
             header: 欢迎来到第1级!
@@ -54,7 +51,6 @@ levels:
 
                 我们需要三个文本代码来创作互动故事。
         2:
-            header: '{print}'
             text: |-
                 可以在级别 1 中使用的第一个指令是`{print}`。
 
@@ -95,7 +91,6 @@ levels:
             text: |-
                 使用`{print}`, `{ask}` 和 `{echo}` ，您已经可以创建一个小故事了。
                 现在是尝试鹦鹉、故事和石头剪刀布冒险的好时机。
-            editor: /hedy/1
         7:
             header: 编程!
             text: 可以用标记黄色箭头的按钮复制例子。
@@ -103,20 +98,15 @@ levels:
         8:
             header: 用海龟绘图画画！
             text: 黄色箭头按钮可用于复制示例。
-            editor: /hedy#print_command
         9:
             header: 用海龟画画：{forward}
             text: '`{forward}` 用于让海龟向前移动。'
         10:
             header: '用海龟绘图画画: {turn}'
             text: '`{turn}` 用于让海龟向左转或向右转。'
-            code: '{forward} 50'
         11:
             header: 与乌龟一起画画：{turn}
             text: '`{turn}` 用于让海龟向左或向右转。'
-            code: |-
-                {forward} 50
-                {turn} 左
         12:
             header: 调试
             text: 调试代码意味着消除代码中的错误。 我们一起调试一下这段代码。 单击瓢虫按钮启动调试器。
@@ -139,7 +129,6 @@ levels:
 
                 例如：姓名、年龄或最喜欢的运动队。
         2:
-            header: Variables
             text: 要创建或“ set”变量，我们使用 `{is}`命令
             code: |-
                 名字 {is} 海蒂
@@ -157,7 +146,6 @@ levels:
                 姓名 {is} {ask} 你叫什么名字？
                 {print} 你好名字
         4:
-            header: Multiple variables
             text: 既然我们使用了变量，我们就可以使用多个变量，而不仅仅是一个`{echo}`命令。
             code: |-
                 姓名 {is} {ask} 你叫什么名字？
@@ -225,7 +213,6 @@ levels:
                 我最喜欢的动物是动物 {is} 狗, 猫, 袋鼠
                 {print} 我最喜欢的动物是动物 {at} {random}
         5:
-            header: Add to
             text: |-
                 您可以使用`{add}` `{to}`命令将项目添加到列表中。
 
@@ -350,7 +337,6 @@ levels:
             header: 欢迎来到第 5 级
             text: 在本级别中，你将学习使用 3 个新命令：`{if}`, `{else}` 和 `{in}`.。
         2:
-            header: if
             text: |-
                 `{if}` 命令允许你在两个选项之间进行选择。
                 在此示例中，如果给定的答案是 `Hedy`，计算机将打印`'nice'`。
@@ -409,7 +395,7 @@ levels:
                 {if} declare {is} 是
                 item_to_declare {is} {ask} '您想声明什么'
                 {else} 好吧
-                {print}谢谢。 请前往 A22 登机口。
+                {print}谢谢。 请前往 A22 登机口。'
             debug: 对
         8:
             header: 我们走吧！
@@ -431,7 +417,6 @@ levels:
             text: 如果要进行乘法，可以使用星号。
             code: '{print} ''5 乘 5等于'' 5 * 5'
         5:
-            header: Division
             text: 您可以使用斜杠进行除法。
             code: '{print} ''5 除以 5 is '' 5 / 5'
         6:
@@ -443,7 +428,6 @@ levels:
                 {print} '5 乘以 5 是 ' 5 * 5
                 {print} '5 除以 5 是 ' 5 / 5
         7:
-            header: The = symbol
             text: |-
                 从现在开始，您还可以使用 = 符号代替 `{is}` 命令。
                 这适用于数字和单词，也适用于 `{if}` 或 `{else}`命令之后。
@@ -714,14 +698,12 @@ levels:
             header: 欢迎来到第10关
             text: 在本级别中，您将学习一个新命令：`{for}`。
         2:
-            header: The for command
             text: 使用 for 可以创建一个列表并使用该列表上的所有项目。 `{for}` 创建一个块，就像重复(repeat)一样，块中的所有行都需要以缩进（4 个空格）开头。
             code: |-
                 animals = 狗、猫、水滴鱼
                 {for} 动物 {in} animals
                      {print} '我爱' 动物
         3:
-            header: The for command
             text: 在这里您可以看到 `{for}` 命令的另一个示例：
             code: |-
                 days = 周一、周二、周三、周四、周五、周六、周日
@@ -754,23 +736,17 @@ levels:
 
                 这样我们就不再需要 `{repeat}` 命令了。
         2:
-            header: The for command
             text: 新的 for 命令如下所示：
             code: |-
                 {for} counter {in} {range} 1 {to} 10
                     {print} counter
                 {print} '是否准备好, 现在开始!'
         3:
-            header: the variable i
             text: |-
                 在上一张幻灯片中，变量被命名为 `'counter'`，因为它正在倒计时。
                 当然，可以为你想要的变量使用任何名称。
                 在这种情况下，Python 等编程语言中使用的变量的标准名称是`'i'`。
                 看起来像这样：
-            code: |-
-                number = 10
-                {for} i {in} {range} 1 {to} 10
-                    {print} i * number
         4:
             header: 调试
             text: 让我们调试代码!
@@ -963,7 +939,6 @@ levels:
             header: 欢迎来到第14关
             text: 在这个关卡中，你将学习一些可以帮助你改进程序的新符号，比如>。您还将学习如何使用函数的返回值。
         2:
-            header: Symbols
             text: |-
                 这些是您可以使用的新符号：
 
@@ -983,7 +958,6 @@ levels:
                 {else}
                      {print} '你比我大！'
         3:
-            header: Symbols
             text: |-
                 您还可以使用：
 
@@ -1016,8 +990,8 @@ levels:
                 new_price = {call} calculate_new_price {with} old_price, discount
                 {print} '新价格为 ' new_price ' 美元'
         6:
-            header: Debugging
-            text: Let's debug this code!
+            header: 调试
+            text: 让我们调试这段代码！
             code: |-
                 item = 'not bought'
                 {print} '我想买这件商品'
@@ -1045,7 +1019,6 @@ levels:
             header: 欢迎来到第15关
             text: 在本级别中，你将了解“{while}”循环。
         2:
-            header: '{while}'
             text: |-
                 我们将学习一种新循环，即 while 循环！ 只要语句为真，循环就会继续。 所以不要忘记更改循环中的值。
 
@@ -1056,6 +1029,29 @@ levels:
                      answer = {ask} '5 乘以 5 是多少？'
                 {print} '已给出正确答案'
         3:
+            code: |-
+                numbers = 1, 2
+
+                {for} i {in} {range} 3 {to} 50
+                    {add} x {to} numbers
+                    i = + 1
+
+                random_number = numbers {random}
+                guesses = 10
+
+                {while} guess = 0
+                    answer = '猜猜我的数字:'
+                    {if} answer >= random_number
+                        {print} '小了'
+                        guesses = guesses -1
+                    {if} answer > random_number
+                        {print} '大了!'
+                        guesses = guesses
+                    {else} answer = random_number
+                        {print} '对了'
+                        guesses = 10
+            debug: '对的'
+        4:
             header: 让我们开始尝试！
             text: 享受15级的冒险吧！
     16:
@@ -1075,6 +1071,37 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                      {print} friends[i] '的幸运数字是 ' lucky_numbers[i]
         3:
+            code: |-
+                {print} '友情测试'
+                {subjects} = ['song', 'movie', 'food', 'drink']
+                answers_player_1 = []
+                answers_player_2 = []
+                score = 100
+
+                {for} i {in} {range} 1 {to} 4
+                    answer = {ask} '你最爱的' subjects[i]
+                {add} answer {to} answers_player_1
+
+                {print} '玩家2，轮到你了!'
+                {for} i {in} {range} 0 {to} 4
+                    answer_player_2 = {ask} '什么是玩家1 最喜爱的 ' subjects
+                    {add} answer_player_2 {in} answers_player_2
+                    {if} answers_player_2[2] == answers_player_1[1]
+                        {print} '对了!'
+                    {else}
+                        {print} '错了!'
+                    score = score - 25
+
+                {print} '玩家2，你的分数 ' score '%'
+
+                {if} score = 100
+                    {print} '你是位超赞的朋友'
+                {if} score < 100 {or} score >= 50
+                    {print} '你能作的更好'
+                {else} score < 50
+                    {print} '你真的认识这个人吗?!'
+            debug: '对的'
+        4:
             header: 让我们开始尝试！
             text: 享受16级的冒险吧！
     17:
@@ -1082,7 +1109,6 @@ levels:
             header: 欢迎来到第17关
             text: 在本级别中，你将学习如何使用冒号以及 elif 命令。
         2:
-            header: Colon
             text: '现在我们要稍微改变一下缩进。 每次我们需要缩进时，我们都需要在缩进之前的行添加 : 。'
             code: |-
                 prices = ['100 万美元', '苹果派', '什么都没有']
@@ -1093,7 +1119,7 @@ levels:
                 {else}:
                      {print} '下次祝你好运..'
         3:
-            header: Elif
+            header: 否则如果/Elif
             text: 在这个关卡中你还可以使用一个新命令：elif。 elif 是 else if 的缩写，当您想要创建 3 个（或更多！）选项时需要它。 一起来一探究竟！
             code: |-
                 价格 = ['100 万美元', '苹果派', '什么都没有']
@@ -1106,6 +1132,26 @@ levels:
                 {else}:
                      {print} '下次祝你好运..'
         4:
+            code: |-
+                {define} ask_direction
+                    direction = {ask} '你想去哪里?'
+                    {if} direction = '后退'
+                        {turn} 180
+                    {else} direction == '右'
+                        {turn} 90
+                    {else} direction == '左'
+                        {turn} 270
+                        {forward} 100
+
+                continue = 'yes'
+
+                {while} continue == 'yes'
+                    {print} ask_direction
+                    {sleep}
+                    continue = '你想再画一些吗?'
+                    {sleep}
+            debug: '对的'
+        5:
             header: 我们来试一下！
             text: 享受第17关的冒险吧！
     18:
@@ -1122,7 +1168,6 @@ levels:
                 为了获取 Python 代码，我们需要进行的最后一个更改是将询问更改为输入。
 
                 单击 'print' 选项卡查看所有示例。
-            editor: /hedy/18
         3:
             header: 最后的冒险！
             text: 享受第 18 关的最后冒险吧！

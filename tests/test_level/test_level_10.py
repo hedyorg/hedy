@@ -20,7 +20,7 @@ class TestsLevel10(HedyTester):
     '''
 
     #
-    # for list command
+    # for list tests
     #
     def test_for_list(self):
         code = textwrap.dedent("""\
@@ -29,8 +29,8 @@ class TestsLevel10(HedyTester):
             print dier""")
 
         expected = textwrap.dedent("""\
-        dieren = ['hond', 'kat', 'papegaai']
-        for dier in dieren:
+        dieren = Value([Value('hond'), Value('kat'), Value('papegaai')])
+        for dier in dieren.data:
           print(f'{dier}')
           time.sleep(0.1)""")
 
@@ -64,8 +64,8 @@ class TestsLevel10(HedyTester):
             print काउंटर""")
 
         expected = textwrap.dedent("""\
-        क = ['hond', 'kat', 'papegaai']
-        for काउंटर in क:
+        क = Value([Value('hond'), Value('kat'), Value('papegaai')])
+        for काउंटर in क.data:
           print(f'{काउंटर}')
           time.sleep(0.1)""")
 
@@ -73,6 +73,28 @@ class TestsLevel10(HedyTester):
             code=code,
             expected=expected,
             expected_commands=['is', 'for', 'print'],
+            max_level=11
+        )
+
+    def test_for_list_diff_num_sys(self):
+        code = textwrap.dedent("""\
+        digits is 1, 𑁨, ३, ૪, ੫
+        for d in digits
+            print d""")
+
+        list_transpiled = ("Value([""Value('1', num_sys='Latin'), Value('2', num_sys='Brahmi'), "
+                           "Value('3', num_sys='Devanagari'), Value('4', num_sys='Gujarati'), "
+                           "Value('5', num_sys='Gurmukhi')])")
+        expected = textwrap.dedent(f"""\
+        digits = {list_transpiled}
+        for d in digits.data:
+          print(f'{{d}}')
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output="1\n𑁨\n३\n૪\n੫",
             max_level=11
         )
 
@@ -86,8 +108,8 @@ class TestsLevel10(HedyTester):
             print shark ' shark'""")
 
         expected = textwrap.dedent("""\
-        familie = ['baby', 'mommy', 'daddy', 'grandpa', 'grandma']
-        for shark in familie:
+        familie = Value([Value('baby'), Value('mommy'), Value('daddy'), Value('grandpa'), Value('grandma')])
+        for shark in familie.data:
           print(f'{shark} shark tudutudutudu')
           print(f'{shark} shark tudutudutudu')
           print(f'{shark} shark tudutudutudu')
@@ -133,26 +155,20 @@ class TestsLevel10(HedyTester):
         else
             print 'onbekend dier'""")
 
-        expected = HedyTester.dedent("""\
-        lijstje = ['kip', 'haan', 'kuiken']
-        pygame_end = False
-        while not pygame_end:
-          pygame.display.update()
-          event = pygame.event.wait()
-          if event.type == pygame.QUIT:
-            pygame_end = True
-            pygame.quit()
-            break
-          if event.type == pygame.KEYDOWN:
-            if event.unicode == 'x':
-              for dier in lijstje:
-                print(f'{dier}')
-                time.sleep(0.1)
-              break
-            # End of PyGame Event Handler    
-            else:
-              print(f'onbekend dier')
-              break""")
+        expected = self.dedent("""\
+         lijstje = Value([Value('kip'), Value('haan'), Value('kuiken')])
+         if_pressed_mapping = {"else": "if_pressed_default_else"}
+         if_pressed_mapping['x'] = 'if_pressed_x_'
+         def if_pressed_x_():
+           global dier, lijstje
+           for dier in lijstje.data:
+             print(f'{dier}')
+             time.sleep(0.1)
+         if_pressed_mapping['else'] = 'if_pressed_else_'
+         def if_pressed_else_():
+           global dier, lijstje
+           print(f'onbekend dier')
+         extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(
             code=code,

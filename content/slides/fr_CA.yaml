@@ -1,0 +1,212 @@
+levels:
+    0:
+        1:
+            header: Bienvenue sur Hedy !
+            text: Hedy est un langage de programmation.
+        2:
+            header: Programmation
+            text: |-
+                Programmer c'est donner des instructions à un ordinateur en utilisant la langue de l'ordinateur.
+
+                Ce type de langue s'appelle un "langage de programmation".
+        3:
+            header: Langage de programmation
+            text: |-
+                Peut-être connais tu quelques langages de programmation ?
+                Par exemple :
+                * Scratch
+                * Python
+                * HTML
+        4:
+            header: Programmation
+            text: |-
+                Si tu sais programmer, tu sais faire plein de super choses :
+                * Ecrire des histoires interactives
+                * Créer des dessins sur l'ordinateur et les transférer sur du papier ou du tissu
+                * Créer tes propres applications à installer sur ton smartphone
+        5:
+            header: Programmer en Hedy
+            text: 'Dans Hedy nous utilisons des codes speciaux comme : `{print}`.'
+            code: '{print} Bienvenue sur Hedy !'
+        6:
+            header: Programmer avec Hedy
+            text: Les mots du code seront affichés en rose.
+        7:
+            header: Programmer en Hedy
+            text: On lance le code avec le bouton « Exécuter le code » sous le code.
+        8:
+            header: Programmer en Hedy
+            text: Les sorties apparaissent sur le côté droit.
+        9:
+            header: Programmer en Hedy
+            text: La sortie peut également être une figure.
+            code: |-
+                {forward} 100
+                {turn} left
+    1:
+        1:
+            header: Bienvenue au niveau 1 !
+            text: |-
+                Commençons le niveau 1 en créant des histoires en Hedy !
+
+                Nous avons besoin de trois codes textuels pour créer des histoires interactives.
+        2:
+            text: |-
+                Le premier code que tu peux utiliser au niveau 1 est `{print}`.
+
+                `{print}` permet d'afficher du texte à l'écran.
+            code: '{print} Put text on the screen'
+        3:
+            header: La commande {print}
+            text: |-
+                Tu peux changer le texte après la commande affiche par ce que tu veux.
+
+                Tu peux également imprimer plusieurs lignes en ajoutant une autre ligne de code qui commence également par `{print}`.
+            code: |-
+                {print} Bienvenu sur Hedy !
+                {print} Commence à programmer dès maintenant !
+        4:
+            text: |-
+                Le deuxième code que tu peux utiliser au niveau 1 est `{ask}`.
+
+                `{ask}` est utilisé pour poser une question à laquelle on peut répondre.
+        5:
+            text: |-
+                Comme tu as pu le voir dans l'exemple précédent, si tu utilises la commande `{ask}`, tu peux poser une question.
+
+                Cependant, la réponse n'apparaît pas dans l'écran de sortie.
+
+                Si tu veux que la réponse s'affiche, tu peux utiliser la commande finale de ce niveau : `{echo}`.
+
+                `{echo}` est utilisée pour répéter la réponse d'une commande `{ask}`.
+            code: |-
+                {print} Hello !
+                {ask} What is your name ?
+                {echo} hello
+        6:
+            header: Programmons !
+            text: |-
+                Avec `{print}`, `{ask}` et `{echo}` tu peux déjà créer une petite histoire.
+                Il est temps d'essayer les aventures : Perroquet, Histoires, Pierre-papier-ciseaux, …
+        7:
+            header: Programmons !
+            text: Les aventures sont affichées dans des onglets.
+        8:
+            header: Programmons!
+            text: Les boutons en forme de flèches jaunes peuvent être utilisés pour copier des exemples.
+            editor: /hedy/
+        9:
+            header: Dessinons avec la tortue
+            text: Maintenant que nous avons vu les codes textuels, nous allons désormais nous attarder sur les codes en forme de dessins.
+        10:
+            header: 'Dessinons avec la tortue : {forward}'
+            text: '`{forward}` est utilisé pour faire avancer la tortue.'
+            code: |-
+                {forward} 50
+                {turn} left
+        11:
+            header: 'Dessinons avec la tortue: {turn}'
+            text: '`{turn}` est utilisée pour faire tourner la tortue vers la gauche ou la droite.'
+            code: |-
+                {forward} 50
+                {turn} left
+    2:
+        1:
+            header: Bienvenue au niveau 2
+            text: |-
+                Dans ce niveau tu vas apprendre à utiliser les variables.
+
+                Une variable est un mot qui peut être utilisé pour conserver des informations.
+
+                Par exemple: un nom, un âge ou ton équipe sportive favorite.
+        2:
+            text: Pour créer ou 'définir' une variable nous utilisons la commande `{is}`.
+        3:
+            header: Interactif
+            text: |-
+                Nous pouvons aussi définir une variable en posant des questions.
+
+                La réponse à la question posée est alors stockée dans la variable..
+
+                De cette façon nous n'avons pas besoin de la commande `{echo}`  .
+        4:
+            header: Variables multiples
+            text: Maintenant que nous utilisons les variables, nous pouvons utiliser des variables multiples au lieu d'une seule commande `{echo}`.
+        5:
+            text: Tu peux aussi utiliser la commande `{sleep}` pour mettre le code en pause pendant un moment.
+        6:
+            text: |-
+                Tu peux ajouter un nombre après la commande `{sleep}` si tu veux que la pause soit plus longue.
+
+                Si tu le veux, tu peux même utiliser une variable au lieu d'un nombre pour contrôler la durée de la commande sleep.
+        8:
+            header: Que le plaisir de programmer commence!
+            text: Profite des aventures du niveau 2!
+    3:
+        1:
+            header: Bienvenue au niveau 3
+            text: Dans ce niveau tu apprendras à faire une liste, à ajouter et retirer des éléments de tes listes et à choisir un élément au hasard parmi une liste.
+        2:
+            header: Créons une liste
+            text: |-
+                Tu crées une liste avec `{is}`
+                Sépare les éléments de ta liste avec une virgule.
+        3:
+            header: Au hasard
+            text: |-
+                Tu peux utiliser la liste avec la commande `{at}` `{random}`.
+                L'ordinateur tirera au hasard un élément de la liste.
+                A chaque fois que tu exécuteras le code, le tirage changera.
+        4:
+            header: Au hasard dans une phrase
+            text: Tu peux également utiliser la commande `{at}` `{random}` dans une phrase.
+        5:
+            header: Ajouter à
+            text: |-
+                Tu peux ajouter des éléments à une liste avec la commande `{add}` `{to}`.
+
+                Tu peux choisir ce qu'il faut ajouter à la liste ou tu peux combiner la commande `{add}` `{to}` avec la commande `{ask}` .
+                De cette façon, tu peux laisser le joueur décider de ce qu'il faut ajouter à la liste.
+        6:
+            header: Retirer de
+            text: |-
+                Le contraire de la commande `{add}` `{to}` est la commande  `{remove}` `{from}`.
+                Cette commande retire un élément d'une liste.
+        8:
+            header: Il est temps de passer à l'action!
+            text: Profite des aventures du niveau 3!
+    4:
+        1:
+            header: Bienvenue au niveau 4
+            text: Dans ce niveau, tu apprendras à te servir des guillemets.
+        2:
+            header: Problème
+            text: 'Dans les niveaux précédents, tu as peut-être été confronté à ce problème:'
+        3:
+            header: Résolvons-le avec les guillemets
+            text: |-
+                Dans ce niveau, nous résoudrons ce problème en utilisant des guillemets.
+
+                Notre code ressemblera aussi davantage à un "vrai" code Python.
+        4:
+            header: Guillemets avec print
+            text: A chaque fois que tu utilises la commande`{print}`, il faut que tu mettes le texte que tu veux voir apparaître à l'écran entre guillemets.
+        5:
+            header: Guillemets avec ask
+            text: C'est aussi valable pour la commande `{ask}`.
+        6:
+            header: Guillemets et variables
+            text: |-
+                Tu ne veux pas que le nom des variables soit affiché à l'écran.
+                C'est pourquoi les variables doivent être laissées en dehors des guillemets, comme ça:
+        7:
+            header: Guillemets et variables
+            text: |-
+                Quand les noms des variables sont utilisés au milieu d'une phrase, tu dois laisser les variables en dehors des guillemets.
+                Néanmoins, le reste de la phrase a besoin de guillemets. Cela ressemble à ça:
+        9:
+            header: Ready, Set, Go!
+            text: Enjoy the adventures in level 4!
+    8:
+        7:
+            code: "nom = {ask} \"Comment t'appelles-tu ?\"\n{if} nom {is} Hedy\n    {print} 'Bienvenue Hedy'\n{else}\n    {print} 'Bienvenu·e programmeur·se !' \n{print} '3… 2… 1… Programme !'"

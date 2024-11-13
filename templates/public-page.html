@@ -1,6 +1,6 @@
 {% extends "auth.html" %}
 {% block regular_content %}
-    <div id="general_info" class="flex flex-col md:flex-row gap-4 md:gap-8 justify-between md:items-center mt-8 mx-2 md:h-64">
+    <div data-cy="general_info" class="flex flex-col md:flex-row gap-4 md:gap-8 justify-between md:items-center mt-8 mx-2 md:h-64">
         <div class="h-full flex items-center justify-center">
             <div class="container flex flex-col items-center">
                 {% if user_info.image %}
@@ -8,7 +8,7 @@
                 {% else %}
                     <img src="{{static('/images/Hedy-logo.png')}}" class="w-64" alt="{{_('profile_logo_alt')}}">
                 {% endif %}
-                {% if user_achievements['achieved'] and 'hedy_certificate' in user_achievements['achieved'] %}
+                {% if has_certificate %}
                     <button class="green-btn text-white px-10 py-4" onclick="window.location={{'\'/certificate/'~user_info.username~'\''}}">
                         {{ certificate_message }}
                     </button>
@@ -37,55 +37,71 @@
             <div class="w-full bg-blue-200 flex flex-col rounded-lg border border-black">
                 <div class="w-full h-12 flex flex-row items-center bg-blue-600 rounded-t-lg px-4 font-medium">
                     <div class="text-white tracking-wide text-4xl">{{user_info.username[0]|upper}}{{user_info.username[1:]}}</div>
-                    {% if user_achievements['achieved'] and 'hedy_certificate' in user_achievements['achieved'] %}
+                    {% if has_certificate %}
                         <div class="text-white tracking-wide text-4xl">👑</div>
-                    {% endif%}
-                    {% if user_achievements['achieved'] %}
-                        <div class="text-white text-xl ml-auto">{{ user_achievements['achieved']|length }} {{_('achievements')}}</div>
-                    {% endif %}
+                    {% endif%}                    
                 </div>
                 {% if user_info.personal_text %}
                     <div class="my-4 px-8 text-xl italic flex flex-col justify-center h-full" rel="noreferrer">
                         {{ user_info.personal_text }}
                     </div>
                 {% endif %}
-                {% if achievements %}
-                    <div class="mt-auto">
-                        <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white w-full flex flex-row gap-2 px-2 justify-between rounded-b-lg items-center">
-                            {% if user_achievements.run_programs %}
-                                <div class="profile-nametag__stats">{{ user_achievements.run_programs }} {{_('amount_created')}}</div>
-                            {% else %}
-                                <div class="profile-nametag__stats">0 {{_('amount_created')}}</div>
-                            {% endif %}
-                            <div class="h-8 w-px border-r border-white relative"></div>
-                            {% if user_achievements.saved_programs %}
-                                <div class="profile-nametag__stats">{{ user_achievements.saved_programs }} {{_('amount_saved')}}</div>
-                            {% else %}
-                                <div class="profile-nametag__stats">0 {{_('amount_saved')}}</div>
-                            {% endif %}
-                            <div class="h-8 w-px border-r border-white relative"></div>
-                            {% if user_achievements.submitted_programs %}
-                                <div class="profile-nametag__stats">{{ user_achievements.submitted_programs }} {{_('amount_submitted')}}</div>
-                            {% else %}
-                                <div class="profile-nametag__stats">0 {{_('amount_submitted')}}</div>
-                            {% endif %}
-                        </div>
+                <div class="mt-auto">
+                    <div class="font-semibold bg-blue-600 pb-2 pt-2 text-white w-full flex flex-row gap-2 px-2 justify-between rounded-b-lg items-center">
+                        <div class="profile-nametag__stats">{{ user_program_count }} {{_('programs')|lower}}</div>
+                        <div class="h-8 w-px border-r border-white relative"></div>
                     </div>
-                {% endif %}
+                </div>                
             </div>
         </div>
-        {% if last_achieved %}
-        <div class="text-center rounded-lg bg-yellow-400 aspect-[2/3] h-64 border border-black self-center">
-            <h3>{{_('last_achievement')}}</h3>
-            <img class="w-full px-8 mt-2" src="{{static('/images/achievement.png')}}" alt="{{_('achievements_logo_alt')}}">
-            <h4>{{ achievements[last_achieved].title }}</h4>
-        </div>
-        {% endif %}
     </div>
     <h2 class="ml-4 text-3xl">{{_('programs')}}</h2>
-    {% if favourite_program or programs %}
+    <div class="w-full mb-8" id="program_filter">
+        <form>
+            <input type="hidden" name="page" value=""> <!-- Submitting the form resets the page -->
+            <input type="hidden" name="user" value="{{ from_user }}">
+            <div class="flex flex-row px-4 w-full items-center border border-gray-400 py-2 rounded-lg gap-4">
+                <select name="level" class="block appearance-none w-1/3 bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                    <option selected value="">&mdash; {{_('level')}} &mdash;</option>
+                    {% if not request.args.get('adventure') %}
+                        {% for i in sorted_level_programs %}
+                            <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    {% else %}
+                        {% for i in sorted_adventure_programs[request.args.get('adventure')] %}
+                            <option value="{{ i }}" {% if request.args.get('level') == i|string %}selected{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+                <select name="adventure" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded" data-autosubmit="true">
+                    <option selected value="">&mdash; {{ _('adventure') }} &mdash;</option>
+                    {% if request.args.get('level') %}
+                        {% for name in sorted_level_programs[request.args.get('level')|int] %}
+                            <option value="{{ name }}" {% if request.args.get('adventure') == name %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    {% else %}
+                        {% for name in sorted_adventure_programs %}
+                            <option value="{{ name }}" {% if request.args.get('adventure') == name %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+                <div class="flex flex-col mx-2">
+                    <div class="flex flex-row items-center gap-2">
+                        <input type="radio" name="filter" value="all" {% if request.args.get('filter') != "submitted" %}checked{% endif %} data-autosubmit="true">
+                        <label for="all">{{_('all')}}</label>
+                    </div>
+                    <div class="flex flex-row items-center gap-2">
+                        <input type="radio" name="filter" value="submitted" {% if request.args.get('filter') == "submitted" %}checked{% endif %} data-autosubmit="true">
+                        <label for="submitted">{{_('submitted')}}</label>
+                    </div>
+                </div>
+                <button type="submit" class="green-btn">{{_('search_button')}}</button>
+            </div>
+        </form>
+      </div>
+    {% if favorite_program or programs %}
         <div class="flex flex-wrap w-full turn-pre-into-ace">
-        {% if favourite_program %}
+        {% if favorite_program %}
             <div class="border rounded-lg border-yellow-500 mb-4 py-2 w-full">
                 <h3 class="text-center z-10 font-bold pb-0 mb-0 text-2xl">{{_('favorite_program')}}</h3>
                 <div class="flex flex-wrap mx-auto justify-center gap-4 turn-pre-into-ace" id="user_favourite_program">

@@ -4,61 +4,76 @@ import { loginForTeacher } from "../tools/login/login";
 describe("Able to browse all public adventures and use filters", () => {
     beforeEach(() => {
         loginForTeacher();
-        cy.get("#public-adventures-link").click()
+        cy.getDataCy('public_adventures_link').click()
     });
 
     it("should have level 1 as the default one", () => {
-        cy.get("#level-select").should('have.attr', 'data-value', '1')
+        cy.get("#level_select > div > div > div.option.selected").should('have.attr', 'data-value', '1')
     })
 
     it("should be able to filter by levels", () => {
-        cy.get("#level-select")
+        cy.getDataCy('level_select').click()
+
+        cy.get('#level_select > div > div.dropdown-menu').should('be.visible');
+
+        cy.getDataCy('adventures').should("contain.text", "adventure1")
+        cy.getDataCy('adventures').should("contain.text", "adventure2")
+        cy.get("#level_select > div > div > div.option[data-value='2']")
             .click()
 
-        cy.get('#level_dropdown').should('be.visible');
-
-        cy.get("#level_dropdown .option[data-value='2']")
-            .click()
-
-        cy.reload()
-        cy.url().should("include", "level=2")
+        cy.getDataCy('adventures').should("contain.text", "adventure1")
+        cy.getDataCy('adventures').should("not.contain.text", "adventure2")
     })
 
     it("should be able to filter by language", () => {
-        cy.get("#language-select")
+        cy.getDataCy('language_select').click()
+
+        cy.get('#language_select > div > div.dropdown-menu').should('be.visible');
+
+        cy.getDataCy('adventures').should("contain.text", "adventure1")
+        cy.getDataCy('adventures').should("contain.text", "adventure2")
+        cy.get("#language_select > div > div > div.option[data-value='English']")
             .click()
 
-        cy.get('#lang_dropdown').should('be.visible');
-
-        cy.get("#lang_dropdown .option[data-value='en']")
-            .click()
-
-        cy.reload()
-        cy.url().should("include", "lang=en")
+        cy.getDataCy('adventures').should("contain.text", "adventure1")
+        cy.getDataCy('adventures').should("not.contain.text", "adventure2")
     })
 
     it("should be able to filter by tags", () => {
-        cy.get("#tag-select")
+        cy.getDataCy('tag_select').click()
+
+        cy.get('#tag_select > div > div.dropdown-menu').should('be.visible');
+
+        cy.getDataCy('adventures').should("contain.text", "adventure1")
+        cy.getDataCy('adventures').should("contain.text", "adventure2")
+        cy.get("#tag_select > div > div.dropdown-menu > .option[data-value='test']")
             .click()
 
-        cy.get('#tags_dropdown').should('be.visible');
-
-        cy.get("#tags_dropdown .option[data-value='test']")
-            .click()
-
-        cy.reload()
-        cy.url().should("include", "tag=test")
+        cy.getDataCy('adventures').should("contain.text", "adventure1")
+        cy.getDataCy('adventures').should("not.contain.text", "adventure2")
     })
 
     it("should be able to filter by searching", () => {
-        cy.get('#search_adventure')
-            .type("adven")
+        cy.getDataCy('adventures').should("contain.text", "adventure1")
+        cy.getDataCy('adventures').should("contain.text", "adventure2")
 
-        cy.wait(500) // due to the debouncing attached on the input.
+        cy.getDataCy('search_adventure').type("adventure2")
+
+        cy.getDataCy('adventures').should("contain.text", "adventure2")
+        cy.getDataCy('adventures').should("not.contain.text", "adventure1")
+    })
+
+    it("should be able to clone another teacher's adventure", () => {
+        cy.getDataCy("adventure1").should("have.class", "tab-selected")
+        cy.getDataCy("adventure2").click()
+
+        cy.getDataCy("adventure2").should("have.class", "tab-selected")
+        cy.getDataCy("adventure1").should("not.have.class", "tab-selected")
+
+        cy.getDataCy("clone_adventure2").should("be.visible").click()
+
         cy.reload()
-        cy.url().should("include", "search=adven")
-
-        cy.get('#adventure1').should('be.visible');
-
+        cy.getDataCy("adventure2").click()
+        cy.getDataCy("edit_adventure2").should("be.visible")
     })
 });

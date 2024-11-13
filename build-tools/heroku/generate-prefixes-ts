@@ -10,7 +10,7 @@ cat <<EOF > $python_prefix_ts
 *
 * !!! THIS FILE HAS BEEN GENERATED. DO NOT EDIT !!!
 *
-* Make desired changes to prefixes/{normal,pygame,turtle,music}.py
+* Make desired changes to prefixes/{normal,pressed,turtle,music}.py
 *
 * Add/edit tests for those changes in tests/test_python_prefixes.py
 *
@@ -19,7 +19,7 @@ cat <<EOF > $python_prefix_ts
 *******************************************************************************/
 EOF
 
-for prefix in turtle pygame normal music; do
+for prefix in turtle pressed normal music; do
   echo >> $python_prefix_ts
   echo "export const ${prefix}_prefix = " >> $python_prefix_ts
   echo -n '`' >> $python_prefix_ts

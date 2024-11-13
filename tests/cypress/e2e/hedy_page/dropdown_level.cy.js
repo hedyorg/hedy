@@ -1,9 +1,10 @@
 import { loginForStudent, loginForTeacher, logout } from "../tools/login/login";
-import {goToHedyLevel2Page, goToTeachersPage} from "../tools/navigation/nav";
-import {createClassAndAddStudents} from '../tools/classes/class.js'
+import  { goToHedyLevel } from "../tools/navigation/nav";
+import { createClassAndAddStudents, addCustomizations } from '../tools/classes/class.js'
 
 describe('Go to level dropdown', () => {
-  it('Is not able to go to disabled level 5', () => {  
+  it('Is not able to go to disabled level 7', () => {  
+    cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
     
     loginForTeacher();
     cy.wait(500);
@@ -11,21 +12,14 @@ describe('Go to level dropdown', () => {
     let classname;
     let students;
     ({classname, students} = createClassAndAddStudents());
-    goToTeachersPage();
-
-    cy.get(".view_class").contains(new RegExp(`^${classname}$`)).click();
-    cy.get('body').then($b => $b.find("#survey")).then($s => $s.length && $s.hide());
-    cy.getBySel('customize_class_button').click();
-    cy.get('#enable_level_5').parent('.switch').click();
-    cy.getBySel('save_customizations').click();
-
+    addCustomizations(new RegExp(`^${classname}$`));
     logout()
     loginForStudent(students[0]);
     cy.wait(500);
-    goToHedyLevel2Page();
+    goToHedyLevel(2);
 
-    cy.get('#dropdown_level_button').click();
-    cy.get('#level_button_4').should('not.be.disabled');
-    cy.get('#level_button_5').should('be.disabled');
+    cy.getDataCy('dropdown_level_button').click();
+    cy.getDataCy('level_button_4').should('not.be.disabled');
+    cy.getDataCy('level_button_7').should('be.disabled');
   })
 })

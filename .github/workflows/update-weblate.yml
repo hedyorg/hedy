@@ -1,0 +1,102 @@
+# Get Weblate to commit and push changes to a PR,
+# which will be auto-approved.
+name: Update Weblate
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # 6 in the morning
+    - cron:  '0 6 * * *'
+
+jobs:
+  update-weblate:
+    runs-on: ubuntu-latest
+
+    steps:
+    # If an open Weblate/translations PR still exists, we shouldn't tell Weblate to push again.
+    # Because we ended our previous push with a 'reset', Weblate would otherwise force-push
+    # new changes over the unmerged old changes, causing them to lost.
+    - name: Check for existence of old Weblate PR
+      run: |
+        prs=$(gh pr -R hedyorg/hedy list -q '.[] | select(.title | contains("Translations update"))' --json title)
+        if [[ "$prs" != "" ]]; then
+          echo "Open Pull Request for Weblate!"
+          gh pr -R hedyorg/hedy list --search 'Translations update'
+          exit 1
+        fi
+      env:
+        GH_TOKEN: ${{ github.token }}
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.12
+    - name: Install Weblate Client
+      run: pip install wlc
+    - name: Prepare client config
+      run: |
+        echo '[weblate]' >> .weblate
+        echo 'url = https://hosted.weblate.org/api/' >> .weblate
+        echo 'translation = hedy' >> .weblate
+        echo '[keys]' >> .weblate
+        echo 'https://hosted.weblate.org/api/ = ${{ secrets.WEBLATE_API_KEY }}' >> .weblate
+    - name: Weblate commands
+      # Do a weblate pull, commit and push.
+      # After pushing, clean the Weblate remote. This is necessary because we squash merge the
+      # commits that Weblate pushes, and if the bytes aren't exactly equivalent (for example
+      # if we wrap or we revert a broken bit of code) it will trigger a merge
+      # conflict.
+      #
+      # To prevent merge conflicts, lock the repository while we're merging this; otherwise,
+      # any translations in the merge window will cause merge conflicts. Only lock if we're
+      # going to create a Pull Request while doing this, since unlocking will
+      # only happen as the result of a PR being merged.
+      run: |
+        set -x
+        wlc repo | tee repo.txt
+        if grep -q "needs_commit: False" repo.txt && grep -q "needs_push: False" repo.txt; then
+          echo "Nothing to do"
+          exit 0
+        fi
+
+        # Have to lock each component individually. Not in the UI, but using the CLI we do.
+        # (NOTE: this list is also below!)
+        for component in glossary adventures keywords quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+          wlc lock hedy/$component
+        done
+
+        wlc pull
+
+        # 'commit' seems to be an async process, as sometimes nothing is pushed if we run this
+        # too quickly in succession. Add a short sleep to reduce chances of this happening.
+        # https://github.com/WeblateOrg/weblate/issues/12400
+        wlc commit
+        sleep 30
+
+        wlc push
+        sleep 60
+
+    - name: Confirm that Weblate created a new PR
+      run: |
+        prs=$(gh pr -R hedyorg/hedy list -q '.[] | select(.title | contains("Translations update"))' --json title)
+        if [[ "$prs" == "" ]]; then
+          echo "Weblate didn't create a PR! Not resetting because that would lose changes!"
+
+          # Unlock each component again so we don't stay locked
+          # (NOTE: this list is also above!)
+          for component in glossary adventures keywords quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+            wlc unlock hedy/$component
+          done
+
+          exit 1
+        fi
+      env:
+        GH_TOKEN: ${{ github.token }}
+
+    - name: Make Weblate forget its commits
+      run: |
+        # 'wlc reset' always leads to ConnectionAborted, so don't wait for it.
+        # https://github.com/WeblateOrg/weblate/issues/11368
+        wlc reset &
+        sleep 10
+
+

@@ -30,7 +30,7 @@ levels:
             correct_answer: B
             question_score: '10'
         3:
-            question_text: ¿Cómo preguntas cuál el color favorito de alguien?
+            question_text: ¿Cómo le preguntas a alguien cuál es su color favorito?
             mp_choice_options:
             -   option: |-
                     ```
@@ -88,8 +88,8 @@ levels:
             -   option: '`{echo}`'
                 feedback: ¡Exacto!
             hint: Quieres ver la respuesta al final de la línea 2...
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         6:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -107,8 +107,8 @@ levels:
             -   option: En la línea 4, `{print}` está mal escrito.
                 feedback: No, hay un fallo en algún otro lugar
             hint: Comprueba los comandos `{print}`.
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         7:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -140,8 +140,8 @@ levels:
             -   option: Puedes utilizarlo para hacer que el texto desaparezca.
                 feedback: Eso no es correcto....
             hint: '`{echo}` de usa después de un comando para `{ask}`.'
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         9:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -158,8 +158,8 @@ levels:
             -   option: Nada. ¡El código está perfecto!
                 feedback: Busca con más cuidado por el error...
             hint: '`{ask}` te deja preguntar una pregunta'
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         10:
             question_text: ¿Qué resultado habrá en tu pantalla de salida después de ejecutar este código?
             code: |-
@@ -187,7 +187,7 @@ levels:
             question_text: ¿Qué sentencia es cierta?
             mp_choice_options:
             -   option: Puedes usar el comando `{print}`para hacer preguntas.
-                feedback: Para eso sirve preguntar
+                feedback: Y para esto sirve `{ask}`
             -   option: Puedes usar el comando `{ask}` para mostrar las respuestas.
                 feedback: Eso no es verdad
             -   option: Con el comando `{print}` puedes hacer que el texto aparezca
@@ -238,13 +238,13 @@ levels:
             -   option: Marleen va al mercado y Marleen compra una manzana.
                 feedback: No se le sustituye por el nombre
             hint: The palabra nombre es reemplazada com Marleen
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         4:
             question_text: ¿Qué verás en la pantalla de salida cuando ejecutes este código?
             code: |-
                 nombre {is} Hedy
-                {print} ¡Hola mi nombre es nombre!
+                {print} Hola mi nombre es nombre
             mp_choice_options:
             -   option: Hola mi nombre es nombre
                 feedback: El nombre de la variable se reemplaza por Hedy
@@ -287,8 +287,8 @@ levels:
             -   option: '`{ask}`'
                 feedback: No hay ninguna pregunta para hacer
             hint: Pausa para un efecto dramático...
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
         7:
             question_text: ¿Qué comando se debería usar en la línea 2?
             code: |-
@@ -317,8 +317,8 @@ levels:
                     ```
                 feedback: Póntelo más fácil usando el número 3
             hint: Quieres que el ordenador espere durante 3 segundos
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         8:
             question_text: ¿Cómo corregirías la primera línea de código?
             code: |-
@@ -394,8 +394,8 @@ levels:
                     ```
                 feedback: ¡Eso es correcto!
             hint: Quieres `{ask}` una pregunta
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
     3:
         1:
             question_text: ¿Qué comando(s) usas para dejar que Hedy elija algo arbitrariamente?
@@ -406,11 +406,11 @@ levels:
                 feedback: '`{ask}` se usa para hacer una pregunta'
             -   option: '`{is}`'
                 feedback: '`{is}` se usa para hacer una lista'
-            -   option: '`{at}` `{random}`'
+            -   option: '`{at} {random}`'
                 feedback: ¡Correcto!
             hint: Arbitrariamente significa sin planificar o de manera aleatoria.
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         2:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -478,8 +478,8 @@ levels:
             -   option: Nada, tu código está bien.
                 feedback: ¡Busca cuidadosamente el error que has pasado por alto!
             hint: El nombre de la variable es precios
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         5:
             question_text: ¿Qué falla en este código?
             code: |-
@@ -497,8 +497,8 @@ levels:
             -   option: Nada, el código está perfecto
                 feedback: ¡Eso es!
             hint: ¿Tiene algún error este código?
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         6:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -553,8 +553,8 @@ levels:
             -   option: crema agria
                 feedback: ¡Cierto!
             hint: Hay 3 sabores, pero 2 se han eliminado. ¿Cuál queda?
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         9:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -624,12 +624,12 @@ levels:
                     ```
                     {print} '¡Tengo muchas ganas de hacer este cuestionario!'
                     ```
-                feedback: no utilices apóstrofe o utiliza contracita en su lugar
+                feedback: no utilices apóstrofo o utiliza en su lugar el acento grave
             -   option: |-
                     ```
                     {print} '¡Tengo muchas ganas de hacer este cuestionario!
                     ```
-                feedback: cuidado al usar comillas y apóstrofe
+                feedback: cuidado al usar comillas y apóstrofo
             hint: En el nivel 4 necesitas comillas para 2 comandos.
             correct_answer: A
             question_score: '10'
@@ -750,8 +750,8 @@ levels:
                     ```
                 feedback: Hedy literalmente imprimirá 'precios {at} {random}''
             hint: 'Piénsalo bien: ¿Qué es una variable y debería estar fuera de las comillas?¿Y cuáles son las palabras que deberían estar dentro?'
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
         7:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -796,10 +796,10 @@ levels:
                     ```
                     {print} 'Así que eliges la puerta puerta'
                     ```
-                feedback: Hedy literalmente imprimirá 'Así que eliges la puerta puerta'
+                feedback: Hedy literalmente imprimirá 'Así que eliges la puerta puerta
             hint: La segunda palabra puerta se debe reemplazar con el número, la primera aun debe seguir siendo la palabra puerta...
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         9:
             question_text: ¿Qué no aparecerá nunca en tu pantalla de salida?
             code: |-
@@ -833,8 +833,8 @@ levels:
             -   option: Nada, este código no tiene fallos
                 feedback: ¡Te dejaste una!
             hint: Una línea necesita comillas, porque quieres que se imprima literalmente.
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
     5:
         1:
             question_text: ¿Qué comando debe rellenarse en el _?
@@ -868,9 +868,9 @@ levels:
                 feedback: No, no imprime el nombre
             -   option: Error
                 feedback: ¡Afortunadamente no!
-            hint: '`{if}` name `{is}` Hedy `{print}` ...?'
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
+            hint: '`{if}` name `{is}` Hedy `{print}` ...?'
         3:
             question_text: ¿Cuál es la contraseña correcta?
             code: |-
@@ -881,7 +881,7 @@ levels:
             -   option: ¡Correcto!
                 feedback: Esto se imprime cuando escribes la contraseña correcta
             -   option: SECRET
-                feedback: ¡Así es!
+                feedback: ¡Así es!'
             -   option: contraseña
                 feedback: La contraseña no es contraseña...
             -   option: ALARM INTRUDER
@@ -923,8 +923,8 @@ levels:
             -   option: Porque Because Hedy cometió un fallo
                 feedback: No, Hedy is right
             hint: La ortografía de la palabra tiene que ser exactamente la misma.
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
         6:
             question_text: ¿Qué palabra debe ir en el lugar del espacio en blanco en la última línea?
             code: |-
@@ -955,8 +955,8 @@ levels:
                     ```
                 feedback: '`{print}` ya está ahí, ¡necesitas una palabra antes de eso!'
             hint: '`{if}` va junto con...?'
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         7:
             question_text: ¿Qué palabra debe ir en el lugar del espacio en blanco?
             code: |-
@@ -974,8 +974,8 @@ levels:
             -   option: '`{print}`'
                 feedback: ¡Increible!
             hint: Tras `{else}` le sigue un comando `{print}`
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         8:
             question_text: ¿Qué palabra debe ir en el lugar del espacio en blanco?
             code: |-
@@ -1045,7 +1045,6 @@ levels:
     6:
         1:
             question_text: ¿Cuál es el resultado de Hedy cuando ejecutes este código?
-            code: '{print} 2*10'
             mp_choice_options:
             -   option: '20'
                 feedback: ¡Correcto!
@@ -1058,6 +1057,7 @@ levels:
             hint: El `*` se usa como signo de multiplicación
             correct_answer: A
             question_score: '10'
+            code: '{print} 2*10'
         2:
             question_text: ¿Qué signo usas para una suma?
             mp_choice_options:
@@ -1074,18 +1074,18 @@ levels:
             question_score: '10'
         3:
             question_text: ¿Cuál es el resultado de Hedy cuando ejecutes este código?
-            code: '{print} ''3*10'''
             mp_choice_options:
             -   option: '30'
                 feedback: Esta sería la respuesta correcta si no hubiera comillas.
             -   option: '13'
-                feedback: Inténtalo de nuevo…
+                feedback: Inténtalo de nuevo..
             -   option: 3*10
                 feedback: ¡Correcto! Hay comillas, así que Hedy las mostrará literalmente.
             -   option: Nada, Hedy mostrará un mensaje de error.
                 feedback: No, Hedy lo imprimirá literalmente.
             hint: ¡¡Cuidado con las comillas!!
             correct_answer: C
+            code: "{print} '3*10'"
             question_score: '10'
         4:
             question_text: Kim tiene 10 años. ¿Qué imprimirá Hedy para ella?
@@ -1122,9 +1122,9 @@ levels:
                 feedback: El * significa multiplicación.
             -   option: 50 dólares
                 feedback: ¡Genial!
-            hint: '`price` `is` `people` `times` 10'
             correct_answer: D
             question_score: '10'
+            hint: '`price` `is` `people` `times` 10'
         6:
             question_text: ¿Cuánto cuesta una hamburguesa en este restaurante virtual?
             code: |-
@@ -1153,7 +1153,7 @@ levels:
                 precio = 0
                 {if} comida {is} hamburguesa precio = precio + 15
                 {if} comida {is} patatas fritas precio = precio + 6
-                bebidas = {ask} '¿Qué le gustaría beber?'
+                bebidas {ask} '¿Qué le gustaría beber?'
                 {if} bebidas {is} refresco precio = precio + 3
                 {if} bebidas {is} agua precio = precio + 1
                 {print} precio ' dólares por favor'
@@ -1186,8 +1186,8 @@ levels:
             -   option: La variable en la línea 2 no se puede llamar respuesta, porque es muy similar a la variable respuesta correcta.
                 feedback: Los nombres de las variables pueden ser parecidos, pero no pueden ser 2 palabras...
             hint: Revisa como se llaman las variables.
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         9:
             question_text: Imagina que te gusta el fútbol un 10, te has comido 2 plátanos y te has lavado las manos 3 veces hoy. ¿Cómo de listo se cree que eres el necio adivino?
             code: |-
@@ -1226,11 +1226,11 @@ levels:
             -   option: Sólo puedes usar el signo `=` cuando trabajas con números, no con palabras.
                 feedback: También puedes usar `=` con palabras.
             hint: se permiten ambos `{is}` y `=`
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
     7:
         1:
-            question_text: ¿Cuántas líneas puedes repetir de una vez con el comando `{repeat}` en este nivel?
+            question_text: ¿Cuántas líneas puedes repetir de una vez con el comando repeat en este nivel?
             mp_choice_options:
             -   option: '0'
                 feedback: No, puedes repetir una línea.
@@ -1267,8 +1267,8 @@ levels:
                     ```
                 feedback: ¡Eso es!
             hint: Primero el comando `{repeat}`, luego el comando `{print}`
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         3:
             question_text: ¿Este código está bien o mal?
             code: '{repeat} 100 {times} ''¡Hola!'''
@@ -1298,9 +1298,9 @@ levels:
                 feedback: '`{repeat}` está mal escrito'
             -   option: '`{times}`'
                 feedback: '`{times}` está mal escrito'
-            hint: Estoy equivocado, no puedes usar apóstrofes en una oración
-            correct_answer: A
+            hint: Estoy equivocado, no puedes usar apóstrofos en una oración
             question_score: '10'
+            correct_answer: A
         5:
             question_text: ¿Este código está bien o mal?
             code: '{repeat} 100 {times} {print} ''¡Hedy es increíble!'''
@@ -1310,10 +1310,10 @@ levels:
             -   option: Incorrecto
                 feedback: No es eso
             hint: ¡El código es correcto!
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
         6:
-            question_text: ¿Cuál será la salida de este código?
+            question_text: ¿Cuál será el resultado de este código?
             code: |-
                 {print} 'las ruedas del bus'
                 {repeat} 3 {times} {print} ' giran y giran'
@@ -1351,8 +1351,8 @@ levels:
                     ```
                 feedback: ¡Por toda la ciudad! ¡Perfecto!
             hint: Sólo 'giran y giran' se repite 3 veces.
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         7:
             question_text: ¿Cuál será el resultado de este código?
             code: |-
@@ -1384,13 +1384,12 @@ levels:
                     ```
                     Vamos
                     ¡A SACUDIRTE!
-                    ```
                 feedback: Cuidado con el comando `{repeat}`
             hint: Cuidado con el comando `{repeat}`.
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         8:
-            question_text: ¿Qué código de Hedy corresponde a esta salida?
+            question_text: ¿Qué código de Hedy corresponde a este resultado?
             code: |-
                 Ahí viene el Sol
                 Do do do do
@@ -1412,7 +1411,6 @@ levels:
                     {repeat} 2 {times} {print} 'Ahí viene el Sol'
                     {print} 'Y digo'
                     {print} 'Todo está bien'
-                    ```
                 feedback: ¿Dónde dejaste 'Do do do do'?
             -   option: |-
                     ```
@@ -1421,7 +1419,7 @@ levels:
                     {print} 'Y digo'
                     {print} 'Todo está bien'
                     ```
-                feedback: Este no es el orden correcto.
+                feedback: Este no es el orden correcto..
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Ahí viene el Sol'
@@ -1429,7 +1427,7 @@ levels:
                     {print} 'Y digo'
                     {print} 'Todo está bien'
                     ```
-                feedback: Este no es el orden correcto.
+                feedback: Este no es el orden correcto..
             hint: '`{repeat}` sólo se puede usar si quieres ejecutar la misma línea varias veces seguidas.'
             correct_answer: A
             question_score: '10'
@@ -1446,7 +1444,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman estaba volando por Gotham. '
-                    {print} 'Cuando de repente oyó a alguien gritar…'
+                    {print} 'Cuando de repente oyó a alguien gritar!'
                     {print} '¡Ayuda!'
                     {repeat} 3 {times} {print} '¡Por favor ayúdadme!'
                     ```
@@ -1454,7 +1452,7 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman estaba volando por Gotham.'
-                    {print} 'Cuando de repente oyó a alguien gritar…'
+                    {print} 'Cuando de repente oyó a alguien gritar!'
                     {repeat} 3 {times} '¡Ayuda!'
                     {print} '¡Por favor ayúdadme!'
                     ```
@@ -1462,7 +1460,7 @@ levels:
             -   option: |-
                     ```
                     {print} Batman estaba volando por Gotham.
-                    {print} Cuando de repente oyó a alguien gritar…
+                    {print} Cuando de repente oyó a alguien gritar!
                     {repeat} 3 {times} {print} ¡Ayuda!
                     {print} ¡Por favor ayúdadme!
                     ```
@@ -1470,14 +1468,14 @@ levels:
             -   option: |-
                     ```
                     {print} 'Batman estaba volando por Gotham.'
-                    {print} 'Cuando de repente oyó a alguien gritar…'
+                    {print} 'Cuando de repente oyó a alguien gritar!'
                     {repeat} 3 {times} {print} '¡Ayuda!'
                     {print} '¡Por favor ayúdadme!'
                     ```
                 feedback: Perfecto
             hint: '''¡Ayuda!'' se repite 3 veces.'
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         10:
             question_text: ¿Qué código de Hedy corresponde a este resultado?
             code: |-
@@ -1568,10 +1566,6 @@ levels:
             question_score: '10'
         3:
             question_text: ¿Qué resultado se producirá al ejecutar este programa?
-            code: |-
-                {repeat} 3 {times}
-                    {print} 'Baby shark tututudutudu'
-                {print} 'Baby shark'
             mp_choice_options:
             -   option: |-
                     Baby shark tututudutudu
@@ -1598,8 +1592,9 @@ levels:
                     Baby shark
                 feedback: ¿Qué se repite y qué no ?
             hint: ¿Qué se está repitiendo y qué no?
-            correct_answer: C
+            code: "{repeat} 3 {times}\n    {print} 'Baby shark tututudutudu'\n{print} 'Baby shark'"
             question_score: '10'
+            correct_answer: C
         4:
             question_text: ¿Qué resultado es correcto?
             code: |-
@@ -1774,8 +1769,8 @@ levels:
             -   option: Línea 3 y 5
                 feedback: ¡Gran trabajo!
             hint: Las líneas tras un comando `{if}` o `{else}` deberían empezar con 4 espacios.
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         10:
             question_text: ¿Qué afirmación es cierta?
             code: |-
@@ -1817,8 +1812,8 @@ levels:
             -   option: La sangría está mal en el último comando `{if}`.
                 feedback: No es la sangría.
             hint: Todá la sangría está hecha correctamente.
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
         2:
             question_text: ¿Qué se imprimirá tras introducir la contraseña correcta?
             code: |-
@@ -1911,8 +1906,8 @@ levels:
             -   option: Cenicienta con talla 38 de calzado recibe el mensaje 'seguiré mirando'
                 feedback: No, ella conseguirá '❤️❤️❤️'
             hint: No importa como se llama, si tiene una talla 40 de calzado recibe el mensaje 'seguiré mirando'.
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         5:
             question_text: ¿Qué código produce este resultado?
             output: |-
@@ -2045,8 +2040,8 @@ levels:
             -   option: Infinito, siempre y cuando utilices la sangría correctamente
                 feedback: Eso es cierto
             hint: Puedes poner un comando `{if}` dentro de un comando `{if}`.
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         10:
             question_text: ¿Qué afirmación es cierta?
             code: |-
@@ -2063,8 +2058,8 @@ levels:
             -   option: la línea 2 debería empezar con 4 espacios y la línea 3 con 8
                 feedback: ¡Tienes razón!
             hint: La primera línea no empieza con ningún espacio
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
     10:
         1:
             question_text: ¿Qué tenemos que rellenar en el `_` si queremos imprimir cada cumplido?
@@ -2127,7 +2122,7 @@ levels:
             -   option: los perros son mascotas adorables
                 feedback: La línea 2 dice {for} cada animal en la lista de animales. Así que se {print} cada animal.
             -   option: perros, gatos, hámsteres, gallinas son mascotas adorables
-                feedback: Cada animal tiene su propia línea en la salida.
+                feedback: Cada animal tiene su propia línea en el resultado.
             -   option: |-
                     los perros son mascotas adorables
                     los gatos son mascotas adorables
@@ -2155,10 +2150,10 @@ levels:
             -   option: La línea 2 debería decir comestibles en vez de artículo
                 feedback: No, no es así.
             hint: La línea 2 dice `{for}` cada artículo en la lista de la compra
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         5:
-            question_text: ¿Qué palabra debería ir en el _ con estos dados digitales?
+            question_text: ¿Qué palabra debería ir en el `_` con estos dados digitales?
             code: |-
                 {print} '¡Bienvenido al dado digital!'
                 jugadores = Ann, John, Jesse
@@ -2185,23 +2180,27 @@ levels:
                 {for} jugador {in} jugadores
                     {print} jugador ' elige ' opciones {at} {random}
             mp_choice_options:
-            -   option: Kelly elige piedra
+            -   option: "```\nKelly elige piedra\n```"
                 feedback: ¡Meredith también quiere jugar!
             -   option: |-
+                    ```
                     Meredith elige tijeras
                     Kelly elige piedra
+                    ```
                 feedback: ¡Muy cerca! Pero Kelly es la primera en la lista, así que ella elige primero
-            -   option: Meredith elige papel
+            -   option: "```\nMeredith elige papel\n```"
                 feedback: ¡Kelly también quiere jugar!
             -   option: |-
+                    ```
                     Kelly elige papel
                     Meredith elige tijeras
+                    ```
                 feedback: ¡Increíble!
             hint: Cada jugador elegirá una opción. El jugador que esté primero en la lista escogerá primero.
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         7:
-            question_text: ¿Qué línea debería ir en el _ en este código que decide lo que cenarán estas personas?
+            question_text: ¿Qué línea debería ir en el `_` en este código que decide lo que cenarán estas personas?
             code: |-
                 nombres = Ron, Leslie, April, Andy
                 comida = pasta, patatas fritas, ensalada
@@ -2232,7 +2231,7 @@ levels:
             correct_answer: A
             question_score: '10'
         8:
-            question_text: ¿Qué debería ir en el _ en este código que decide qué color de camiseta recibes?
+            question_text: ¿Qué debería ir en el `_` en este código que decide qué color de camiseta recibes?
             code: |-
                 nombres = Donna, Tommy, Ben
                 colores = azul, rojo, morado
@@ -2281,11 +2280,11 @@ levels:
             -   option: No sabes eso. Hedy elegirá `{at} {random}`.
                 feedback: No hay `{at} {random}` en este código...
             hint: Se eligen las primeras opciones de ambas listas.
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
         10:
             question_text: ¿Qué hay de cierto en este código?
-            code: "premios = 1 millón dólares, coche, sandwich\nnombres = Bob, Patrick, Sandy, Larry\n{for} premio {in} premios\n\t{print} 'El ' premio 'lo gana ' nombres {at} {random}"
+            code: "premios = 1 millón dólares, coche, sandwich\nnombres = Bob, Patrick, Sandy, Larry\n{for} premio {in} premios\n    {print} 'El ' premio 'lo gana ' nombres {at} {random}"
             mp_choice_options:
             -   option: Todo el mundo siempre ganará un premio.
                 feedback: Eso no es cierto, puede que acabes sin llevarte un premio.
@@ -2296,19 +2295,14 @@ levels:
             -   option: Alguno podría ganar dos premios
                 feedback: ¡Lo conseguiste!
             hint: Intenta imaginar el resultado de este código.
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
     11:
         1:
             question_text: ¿Qué palabra debe ir en el lugar del espacio en blanco?
-            code: |-
-                {for} i {in} _ 1 {to} 10
-                    {print} i
             mp_choice_options:
             -   option: |-
-                    ```
-                    contador
-                    ```
+                    `counter`
                 feedback: 'No'
             -   option: '`{range}`'
                 feedback: Correcto
@@ -2317,28 +2311,33 @@ levels:
             -   option: '`{for}`'
                 feedback: 'No'
             hint: ¿Qué aprendiste en este nivel?
+            code: "{for} i {in} _ 1 {to} 10\n    {print} i"
             correct_answer: B
             question_score: '10'
         2:
             question_text: ¿Cuál será el resultado de este código?
-            code: |-
-                {for} i {in} {range} 1 {to} 3
-                    {print} i
             mp_choice_options:
             -   option: |-
+                    ```
                     1
                     2
                     3
+                    ```
                 feedback: ¡Correcto!
-            -   option: 1 2 3
+            -   option: "```\n1 2 3\n```"
                 feedback: No es eso
-            -   option: 1, 2, 3
+            -   option: "```\n1, 2, 3\n```"
                 feedback: No es eso
-            -   option: '123'
+            -   option: '```
+
+                    123
+
+                    ```'
                 feedback: No es eso
             hint: ¿Cómo aparecen los números en la pantalla?
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
+            code: "{for} i {in} {range} 1 {to} 3\n    {print} i"
         3:
             question_text: ¿Qué código se usó para conseguir este resultado?
             output: |-
@@ -2378,22 +2377,10 @@ levels:
                     ```
                 feedback: i es una variable y no debería llevar comillas
             hint: Primero todos los números, después la frase
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
         4:
             question_text: ¿Qué código se usó para conseguir este resultado?
-            output: |-
-                10
-                9
-                8
-                7
-                6
-                5
-                4
-                3
-                2
-                1
-                0
             mp_choice_options:
             -   option: |-
                     ```
@@ -2404,13 +2391,13 @@ levels:
             -   option: |-
                     ```
                     {for} i {in} {range} 0 {to} 10
-                        {print} - i
+                        {print} - 1 * i
                     ```
                 feedback: Hedy imprimiría números negativos en este caso.
             -   option: |-
                     ```
-                    {for} i {in} {range} 10 to 0
-                        {print} 10 9 8 7 6 5 4 3 2 1 0
+                    {for} i {in} {range} 10 {to} 0
+                        {print} i
                     ```
                 feedback: Por desgracia esto no existe.
             -   option: |-
@@ -2419,14 +2406,12 @@ levels:
                         {print} 10 - i
                     ```
                 feedback: ¡Eso es cierto!
-            hint: Tiene que ser un cálculo...
+            hint: Tiene que ser un cálculo…
             correct_answer: D
             question_score: '10'
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
         5:
             question_text: ¿Qué le pasa a este código?
-            code: |-
-                {for} i {in} {range} 1 {to} 10
-                {print} i
             mp_choice_options:
             -   option: La i en la última línea necesita comillas
                 feedback: No es cierto.
@@ -2439,6 +2424,7 @@ levels:
             hint: No hay nada mal con la sangría
             correct_answer: D
             question_score: '10'
+            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
         6:
             question_text: ¿Cuántas veces aparece la palabra Hola en tu pantalla cuando ejecutes el código?
             code: |-
@@ -2490,27 +2476,29 @@ levels:
             question_score: '10'
         8:
             question_text: ¿Cuál será el resultado de este código?
-            code: |-
-                {for} i {in} {range} 23 {to} 25
-                    {print} 'hi'
             mp_choice_options:
             -   option: |-
+                    ```
                     23
                     24
                     25
+                    ```
                 feedback: El número no aparece. No dice `{print}` i.
-            -   option: 23 hola 24 hola 25 hola
+            -   option: "```\n23 hola 24 hola 25 hola\n```"
                 feedback: El número no aparece. No dice `{print}` i
             -   option: |-
+                    ```
                     hola
                     hola
                     hola
+                    ```
                 feedback: Correcto
             -   option: La palabra 'hola' aparecerá 25 veces seguidas.
                 feedback: No, sólo aparecerá 3 veces.
             hint: No dice `{print}` i
             correct_answer: C
             question_score: '10'
+            code: "{for} i {in} {range} 23 {to} 25\n    {print} 'hi'"
         9:
             question_text: ¿Cuántas veces Hedy canta Hip Hip Hurra?
             code: |-
@@ -2531,11 +2519,6 @@ levels:
             question_score: '10'
         10:
             question_text: ¿Qué código pertenece a este resultado?
-            output: |-
-                Baby shark tututudutudu
-                Baby shark tututudutudu
-                Baby shark tututudutudu
-                Baby shark
             mp_choice_options:
             -   option: |-
                     ```
@@ -2566,8 +2549,9 @@ levels:
                     ```
                 feedback: '`{range}` 0 `{to}` 3 son 4 veces.'
             hint: Cuidado con la sangría
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
+            output: "Baby shark tututudutudu\nBaby shark tututudutudu\nBaby shark tututudutudu\nBaby shark"
     12:
         1:
             question_text: ¿Qué resultado es correcto?
@@ -2588,8 +2572,8 @@ levels:
                     5
                 feedback: ¡Gran trabajo!
             hint: ¡Se imprimen ambas líneas!
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         2:
             question_text: ¿Cuál de estos códigos es correcto?
             mp_choice_options:
@@ -2613,13 +2597,13 @@ levels:
                 feedback: ¡Muy bien!
             -   option: |-
                     ```
-                                  sabores = 'vainilla, fresa, chocolate'
-                                  {print} 'Me gustaría un pastel de ' sabores {at} {random} '.'
-                                  ```
+                    sabores = 'vainilla, fresa, chocolate'
+                    {print} 'Me gustaría un pastel de ' sabores {at} {random} '.'
+                    ```
                 feedback: Todos los diferentes valores de sabores deberían estar entre comillas.
             hint: La segunda línea es la misma en cada código, presta atención a la primera línea
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         3:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -2680,10 +2664,10 @@ levels:
             -   option: Ve al aeropuerto mañana a las 10.00
                 feedback: El agente no atrapará a ningún malo aquí
             hint: La contraseña correcta es TOPSECRET
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         6:
-            question_text: ¿Qué línea debe rellenarse en ???
+            question_text: ¿Qué línea debe rellenarse en `_`?
             code: |-
                 {print} '¡Bienvenido a McHedy!'
                 pedido = {ask} '¿Quieres una hamburguesa o patatas fritas?'
@@ -2693,7 +2677,7 @@ levels:
                     precio = 4
                 bebidas = {ask} '¿Quieres una bebida con eso por 2 dólares?'
                 {if} bebidas = 'sí'
-                    ???
+                    _
                 {print} 'Serán ' precio ' dólares por favor'
             mp_choice_options:
             -   option: |-
@@ -2757,11 +2741,10 @@ levels:
                     galletas
                 feedback: Ya casi está, pero mira el orden de los aperitivos de la lista
             hint: ¿Qué elemento se elimina de la lista cuando respondes 'vegano'?
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
         8:
             question_text: ¿Qué código se ha utilizado para crear este resultado?
-            code: '3.5'
             mp_choice_options:
             -   option: |-
                     ```
@@ -2786,10 +2769,11 @@ levels:
             hint: 7 dividido por 2 es 3.5
             correct_answer: B
             question_score: '10'
+            code: '3.5'
         9:
-            question_text: ¿Qué código debe rellenarse en la línea 1 en ???
+            question_text: ¿Qué código debe rellenarse en la línea 1 en la `_`?
             code: |-
-                ???
+                _
                 {print} 'Ganaste ' premios {at} {random} '!'
             mp_choice_options:
             -   option: |-
@@ -2816,10 +2800,10 @@ levels:
             correct_answer: C
             question_score: '10'
         10:
-            question_text: ¿Qué línea de código debe rellenarse en ??? para completar la canción ?
+            question_text: ¿Qué línea de código debe rellenarse en la `_` para completar la canción?
             code: |-
                 acciones = 'aplaude', 'pisa fuerte', 'grita ¡Hurra!'
-                ???
+                _
                     {for} i {in} {range} 0 {to} 1
                         {print} 'si estás feliz y lo sabes'
                         {print} accion
@@ -2903,10 +2887,10 @@ levels:
             -   option: '`{print}`'
                 feedback: 'No'
             hint: Ni los veganos ni los musulmanes pueden comer panecillos de salchichas.
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         3:
-            question_text: ¿Qué salida se le da a un miembro sin un código de descuento?
+            question_text: ¿Qué resultado se da a un miembro sin un código de descuento?
             code: |-
                 miembro = {ask} '¿Tienes tarjeta de socio?'
                 descuento = {ask} '¿Tienes un código de descuento?'
@@ -2951,8 +2935,8 @@ levels:
                     ```
                 feedback: ¡Inténtalo de nuevo!
             hint: Papel vence a piedra
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
         5:
             question_text: ¿Qué afirmación es cierta sobre este código?
             code: |-
@@ -2968,8 +2952,8 @@ levels:
             -   option: Toda persona que no se llama Cenicienta y no tiene una talla 38 de calzado es el amor verdadero del príncipe
                 feedback: ¡El príncipe es un poco más exigente que eso!
             hint: Ambas afirmaciones tienen que ser ciertas
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         6:
             question_text: ¿Qué afirmación sobre este código es cierta?
             code: |-
@@ -3021,10 +3005,10 @@ levels:
             -   option: El pájaro amarillo se alimentó esta mañana
                 feedback: Esto es verdad
             hint: Lee con atención las 4 últimas líneas
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         8:
-            question_text: ¿Qué salida recibes si pides palomitas sin bebida?
+            question_text: ¿Qué resultado obtienes si pides palomitas sin bebida?
             code: |-
                 {print} 'Bienvenido al cine'
                 palomitas = {ask} '¿Quieres palomitas?'
@@ -3060,8 +3044,8 @@ levels:
                     Disfruta de la película
                 feedback: ¡Tienes que pagar tus palomitas!
             hint: palomitas = sí y bebida = no
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         9:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -3129,8 +3113,8 @@ levels:
             -   option: '`{if}`'
                 feedback: 'No'
             hint: El artículo o está en la lista de aperitivos, o en la lista de bebidas
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
     14:
         1:
             question_text: ¿Qué símbolo se debería usar en el espacio en blanco?
@@ -3148,8 +3132,8 @@ levels:
             -   option: '`=`'
                 feedback: ¡Muy bien!
             hint: No comparamos nada, sólo estamos preguntando un nombre.
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         2:
             question_text: ¿Cuál de estos códigos han usado el símbolo correcto = o ==?
             mp_choice_options:
@@ -3162,8 +3146,8 @@ levels:
             -   option: respuesta == {ask} '¿Qué tal estás?'
                 feedback: 'No'
             hint: Cuando comparas dos respuestas debes usar ==
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         3:
             question_text: ¿Qué símbolo debe rellenarse en los dos espacios en blanco?
             code: |-
@@ -3182,9 +3166,9 @@ levels:
                 feedback: Tienes razón
             -   option: '`+` y `==`'
             hint: El club admite 130 personas
+            feedback: No es eso
             correct_answer: C
             question_score: '10'
-            feedback: No es eso
         4:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -3226,8 +3210,8 @@ levels:
             -   option: '`<= 12`'
                 feedback: Estos niños son muy jóvenes
             hint: '> significa mayor que'
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         6:
             question_text: ¿Cuántas veces tienes que decir que estás enfadado antes que este irritante juego pare?
             code: |-
@@ -3318,8 +3302,8 @@ levels:
             -   option: 9 o más
                 feedback: ¡Genial!
             hint: '> 8 significa más de 8'
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         10:
             question_text: ¿Qué debe rellenarse en los espacios en blanco?
             code: |-
@@ -3356,8 +3340,8 @@ levels:
             -   option: '`=`'
                 feedback: No es eso
             hint: Sigue adivinando hasta que digas Amsterdam
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         2:
             question_text: ¿Cuál de estos códigos ha usado el/los símbolo/s correcto/s?
             mp_choice_options:
@@ -3382,8 +3366,8 @@ levels:
                     ```
                 feedback: Falta una comilla
             hint: Cuando comparas dos respuestas debes usar ==
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         3:
             question_text: ¿Qué comando debe completar los espacio en blanco?
             code: |-
@@ -3414,17 +3398,17 @@ levels:
                     intentos = intentos + 1
                 {print} '¡Sí! Has lanzado 6 veces en ' intentos.'
             mp_choice_options:
-            -   option: En la línea 1 debe utilizarse == en vez de =
+            -   option: En la línea 1 debe utilizarse `==` en vez de `=`
                 feedback: No es eso
             -   option: Faltan comillas en la línea 2
                 feedback: Eso no es correcto
-            -   option: En la línea 5 debería haberse utilizado {if} en lugar de {while}
+            -   option: En la línea 5 debería haberse utilizado `{if}` en lugar de `{while}`
                 feedback: No es eso
-            -   option: En la línea 5 se debería haber usado != en vez de ==
+            -   option: En la línea 5 se debería haber usado `!=` en vez de `==`
                 feedback: Tienes razón
             hint: Hay algo mal en la línea 5
-            correct_answer: D
             question_score: '10'
+            correct_answer: D
         5:
             question_text: ¿Qué hay que poner en el espacio en blanco para hacer que este programa funcione correctamente?
             code: |-
@@ -3437,17 +3421,17 @@ levels:
 
                 {print} '¡Todo seco!'
             mp_choice_options:
-            -   option: = humedad
+            -   option: "```\n= humedad\n```"
                 feedback: Eso no cambiará nada
-            -   option: = humedad = 1
+            -   option: "```\n   = humedad = 1\n```"
                 feedback: No puedes tener dos veces = en una línea
-            -   option: = humedad - 1
+            -   option: "```\n   = humedad - 1\n```"
                 feedback: ¡Tienes razón!
-            -   option: = humedad + 1
+            -   option: "```\n   = humedad + 1\n```"
                 feedback: El programa debe contar hacia abajo
             hint: la humedad debería ser menor cada vez
-            correct_answer: C
             question_score: '10'
+            correct_answer: C
         6:
             question_text: ¿Qué le pasa a este código?
             code: |-
@@ -3457,9 +3441,9 @@ levels:
                     {if} respuesta == 'sí
                         vidas = vidas - 1
             mp_choice_options:
-            -   option: '{while} debería ser {if}'
+            -   option: '`{while}` debería ser `{if}`'
                 feedback: No, eso no es correcto
-            -   option: '{if} debería ser {while}'
+            -   option: '`{if}` debería ser `{while}`'
                 feedback: No, eso no es correcto
             -   option: La línea 3 debe empezar con más sangría
                 feedback: No, eso no es correcto
@@ -3485,13 +3469,13 @@ levels:
                         {print} _
                         juego = 'acabado'
             mp_choice_options:
-            -   option: '... cambia el primer {if} por un {while}'
+            -   option: '... cambia el primer `{if}` por un `{while}`'
                 feedback: ¡Perfecto!
-            -   option: '... cambia el segundo {if} por un {while}'
+            -   option: '... cambia el segundo `{if}` por un `{while}`'
                 feedback: Eso no es del todo correcto.
-            -   option: '... cambia el tercer {if} por un {while}'
+            -   option: '... cambia el tercer `{if}` por un `{while}`'
                 feedback: Eso no es del todo correcto.
-            -   option: '... cambia el cuarto {if} por un {while}'
+            -   option: '... cambia el cuarto `{if}` por un `{while}`'
                 feedback: Eso no es del todo correcto.
             hint: El último debe decir que ganaste.
             correct_answer: A
@@ -3515,8 +3499,8 @@ levels:
             -   option: Las luces siempre estarán encendidas.
                 feedback: Eso no estaría bien.
             hint: El bloqueo después del comando {while} sigue ocurriendo mientras el baño está ocupado.
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         9:
             question_text: ¿Qué dirá la aplicación de dieta si hoy te has comido 1600 calorías?
             code: |-
@@ -3530,7 +3514,7 @@ levels:
             mp_choice_options:
             -   option: Nada. 1600 no está programado en la aplicación.
                 feedback: 'No'
-            -   option: puedes comer algo más
+            -   option: Puedes comer algo más
                 feedback: 'No'
             -   option: Está bien
                 feedback: ¡Sí!
@@ -3547,17 +3531,17 @@ levels:
                 {while} puntos_jugador_1 > puntos_jugador_2
                     {print} _ ' esté en cabeza ahora mismo!'
             mp_choice_options:
-            -   option: name_player_1
+            -   option: "```\nnombre_jugador_1\n```"
                 feedback: ¡Tienes razón!
-            -   option: name_player_2
+            -   option: "```\nnombre_jugador_2\n```"
                 feedback: ¡No, están perdiendo!
-            -   option: puntos_jugador_1
+            -   option: "```\n   puntos_jugador_1\n```"
                 feedback: Debes rellenar un nombre, no un número
-            -   option: points_player_2
+            -   option: "```\n   points_player_2\n```"
                 feedback: Debes rellenar un nombre, no un número
             hint: Ganas el juego por tener más puntos. Tu nombe debe aparecer en la pantalla
-            correct_answer: A
             question_score: '10'
+            correct_answer: A
     16:
         1:
             question_text: ¿Qué comando debería rellenar los espacios en blancos para imprimir un snack aleatorio?
@@ -3580,7 +3564,7 @@ levels:
             question_text: ¿Qué debería rellenarse en los espacios en blanco si quieres una lista de qué tareas de casa son hechas por quien?
             code: |-
                 amigos = ['Wesley', 'Eric', 'Kaylee']
-                tareas = [cocinar, limpiar, nada]
+                tareas = ['cocinar', 'limpiar', 'nada']
                 {for} i {in} {range} 1 {to} 3
                     {print}  _
             mp_choice_options:
@@ -3611,7 +3595,7 @@ levels:
             question_text: ¿Cuál es un resultado posible para este programa?
             code: |-
                 amigos = ['Wesley', 'Eric', 'Kaylee']
-                tarea = [cocinar, limpiar, nada]
+                tarea = ['cocinar', 'limpiar', 'nada']
                 {for} i {in} {range} 1 {to} 3
                     {print}  amigos[i] tiene que tareas[i]
             mp_choice_options:
@@ -3655,9 +3639,9 @@ levels:
                     imprimir 'el número de la suerte de ' amigos[i]
                     imprimir 'es ' numeros_suerte[i]
             mp_choice_options:
-            -   option: En la línea 4 la variable debería ser 'amigo[i]', no 'amigos[i]'
+            -   option: En la línea 4 la variable debería ser `friend[i]`, no `friends[i]`
                 feedback: Eso no es correcto.
-            -   option: La línea 3 debería decir 'en rango 1 a 3' no 'en rango 0 a 3'
+            -   option: La línea 3 debería decir `in range 1 to 3` no `in range 0 to 3`
                 feedback: ¡Bien visto!
             -   option: La línea 4 debería decir 'numero_suerte', no 'número suerte
                 feedback: No es una variable, sólo es texto.
@@ -3674,13 +3658,13 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} 'el ' animales[i] ' dice ' sonidos[i]
             mp_choice_options:
-            -   option: ruidos = ['moo', 'woof', 'neigh']
+            -   option: "```\n   ruidos = ['moo', 'woof', 'neigh']\n```"
                 feedback: Cuidado con el nombre de la variable y el orden de los sonidos.
-            -   option: sonidos = '[woof], [moo], [neigh]'.
+            -   option: "```\n   sonidos = '[woof], [moo], [neigh]'.\n```"
                 feedback: Mira la línea uno para ver como se deben usar los corchetes.
-            -   option: sonidos = [woof, moo, neigh]
+            -   option: "```\n   sonidos = [woof, moo, neigh]\n```"
                 feedback: ¡No te olvides las comillas!
-            -   option: sonidos = ['woof', 'moo', 'neigh']
+            -   option: "```\n   sonidos = ['woof', 'moo', 'neigh']\n```"
                 feedback: ¡Buen trabajo!
             hint: Mira la línea 1 para ver el uso apropiado de los corchetes y las comillas.
             correct_answer: D
@@ -3763,8 +3747,8 @@ levels:
                     ```
                 feedback: ¡Esto no va a funcionar!
             hint: Si prestas atención a la primera línea, verás que sólo las primeras dos respuestas probablemente sean correctas.
-            correct_answer: B
             question_score: '10'
+            correct_answer: B
         9:
             question_text: ¿Qué resultado es probable para este código?
             code: |-
@@ -3803,11 +3787,11 @@ levels:
             code: |-
                 {print} 'El sorteo de libros va a empezar pronto'
                 {print} '¡Compra tus boletos ahora!'
-                {books} = ['Narnia', 'El Hobbit', 'Oliver Twist', 'Harry Potter', 'Huevos verdes con jamón']
+                books = ['Narnia', 'El Hobbit', 'Oliver Twist', 'Harry Potter', 'Huevos verdes con jamón']
                 gente = {ask} '¿Cuántos tickets has vendido?'
-                lista_numeros_sorteo = [1, 2]
+                lista_de_numeros = [1, 2]
                 {for} i {in} {range} 3 {to} gente
-                    {add} i {to} lista_numeros_sorteo
+                    {add} i {to} lista_de_numeros
                 {for} i {in} {range} 1 {to} 5
             mp_choice_options:
             -   option: |-
@@ -3841,70 +3825,63 @@ levels:
             question_score: '10'
     17:
         1:
-            question_text: What is the output of this code?
-            code: |-
-                minions = ['Bob', 'Kevin', 'Stuart']
-                {for} x in minions:
-                    {print} x
+            question_text: ¿Cuál es el resultado de este código?
             mp_choice_options:
             -   option: |-
                     ```
                     m i n i o n s
                     ```
-                feedback: This is not it.
+                feedback: Esto no es.
             -   option: |-
                     ```
                     Bob
                     Kevin
                     Stuart
                     ```
-                feedback: Correct!
+                feedback: ¡Correcto!
             -   option: |-
                     ```
                     minions
                     minions
                     minions
                     ```
-                feedback: Take a look at the content of your list.
+                feedback: Echa un vistazo al contenido de tu lista.
             -   option: |-
                     ```
                     B o b K e v i n S t u a r t
                     ```
-                feedback: Do not loop through the letters.
-            hint: Loop through your list.
+                feedback: No hace bucle a través de las letras.
+            hint: Bucle a través de tu lista.
+            code: "minions = ['Bob', 'Kevin', 'Stuart']\n{for} x en minions:\n    {print} x"
             correct_answer: B
             question_score: '10'
         2:
-            question_text: What is wrong with this code?
+            question_text: ¿Qué le pasa a este código?
             code: |-
-                seconds_minute = 60
-                minute_hour = 60
-                hour_day = 24
-                leap_year = 366
-                no_leap_year = 365
-                years = ask 'what year is it?'
-                {if} years = 2024:
-                 print seconds_minute * minute_hour * hour_day * leap_year
+                segundos_minuto = 60
+                minutos_hora = 60
+                horas_dia = 24
+                año_bisiesto = 366
+                no_año_bisiesto = 365
+                años = ask '¿En qué año estamos?'
+                {if} años = 2024:
+                 print segundos_minuto * minutos_hora * horas_dia * año_bisiesto
                 {else}:
-                 print seconds_minute * minute_hour * hour_day * noleap_year
+                 print segundos_minuto * minutos_hora * horas_dia * noaño_bisiesto
             mp_choice_options:
-            -   option: You cannot have so many variables.
-                feedback: This is not it.
-            -   option: The way the variables are multiplied is incorrect.
-                feedback: Not true!
-            -   option: One of the variables `noleap_year` does not belong with the `{if}` statement.
-                feedback: Keep looking for the mistake.
-            -   option: The `noleap_year` has to be identical in both cases.
-                feedback: Correct!
-            hint: Read the code carefully.
-            correct_answer: D
+            -   option: No puedes tener tantas variables.
+                feedback: Esto no es.
+            -   option: La forma en que se multiplican las variables es incorrecta.
+                feedback: ¡No es verdad!
+            -   option: Una de las variables `noleap_year` no pertenece a la declaración `{if}`.
+                feedback: Sigue buscando el error.
+            -   option: El `noleap_year` tiene que ser idéntico en ambos casos.
+                feedback: ¡Correcto!
+            hint: Lea cuidadosamente el código.
             question_score: '10'
+            correct_answer: D
         3:
-            question_text: How many hedgehogs will this code print?
-            code: |-
-                {for} x in range 1 to 3:
-                  {for} y in range 1 to 2:
-                    {print} 🦔
+            question_text: ¿Cuántos erizos se imprimirán en este código?
             mp_choice_options:
             -   option: |-
                     ```
@@ -3912,23 +3889,13 @@ levels:
                     🦔
                     🦔
                     ```
-                feedback: Try again.
+                feedback: Inténtalo de nuevo.
             -   option: |-
                     ```
                     🦔
                     🦔
                     ```
-                feedback: One more try.
-            -   option: |-
-                    ```
-                    🦔
-                    🦔
-                    🦔
-                    🦔
-                    🦔
-                    🦔
-                    ```
-                feedback: Well done!
+                feedback: Un intento más.
             -   option: |-
                     ```
                     🦔
@@ -3936,66 +3903,77 @@ levels:
                     🦔
                     🦔
                     🦔
+                    🦔
                     ```
-                feedback: That is not it.
-            hint: Think about how many times you need repeating.
+                feedback: ¡Bien hecho!
+            -   option: |-
+                    ```
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    🦔
+                    ```
+                feedback: No es eso.
+            hint: Piensa en cuántas veces lo necesitas repetir.
+            question_score: '10'
+            code: "{for} x en rango 1 a 3:\n  {for} y en rango 1 a 2:\n    {print} 🦔"
             correct_answer: C
-            question_score: '10'
         4:
-            question_text: What is wrong with code?
+            question_text: ¿Dónde está el error en el código?
             code: |-
-                name_color = {ask} 'What is your favorite color?'
-                {if} name_color == 'red':
-                  {print} 'the color of a tomato'
-                {elif} name_color == 'green':
-                  {print} 'the color of an apple'
-                {elif} name_color == 'blue':
-                  {print} 'the color of a blueberry'
-                {elif} name_color == 'yellow':
-                  {print} 'the color of a banana'
+                nombre_color = {ask} '¿Cuál es tu color favorito?'
+                {if} nombre_color == 'rojo':
+                  {print} 'el color de un tomate'
+                {elif} nombre_color == 'verde':
+                  {print} 'el color de una manzana'
+                {elif} nombre_color == 'azul':
+                  {print} 'el color de un arándano'
+                {elif} nombre_color == 'amarillo':
+                  {print} 'el color de un plátano'
                 {elif}:
-                  {print} 'this fruit-color does not exist'
+                  {print} 'esta fruta-color no existe'
             mp_choice_options:
-            -   option: The first `{elif}` should be used before the `print` command
-                feedback: Try again.
-            -   option: '`{elif}` can only be used once'
-                feedback: From now on we can use elif multiple times.
-            -   option: '`==` used with `{elif}` should be replaced by `=`'
-                feedback: Not correct.
-            -   option: '`{elif}` in the last line should be replaced by `{else}`'
-                feedback: Great!
-            hint: Think about `{if}`, `{elif}`, `{else}`.
-            correct_answer: D
+            -   option: El primer `{elif}` debe ser utilizado antes del comando `print`
+                feedback: Inténtalo de nuevo.
+            -   option: '`{elif}` solo se puede utilizar una vez'
+                feedback: A partir de ahora podemos utilizar elif varias veces.
+            -   option: '`==` usado con `{elif}` debe ser reemplazado por `=`'
+                feedback: No es correcto.
+            -   option: '`{elif}` en la última línea debe ser reemplazado por `{else}`'
+                feedback: ¡Genial!
+            hint: Piensa en `{if}`, `{elif}`, `{else}`.
             question_score: '10'
+            correct_answer: D
         5:
-            question_text: What is the output of this code?
+            question_text: ¿Cuál es el resultado de este código?
             code: |-
-                numbers = [7, 19, 29, 41, 53, 71, 79, 97]
-                {for} prime in numbers:
-                  {if} prime <= 10：
-                    {print} prime
-                  {elif} prime >= 60:
-                    {print} prime
-                  {elif} prime >= 90:
-                    {print} prime
+                números = [7, 19, 29, 41, 53, 71, 79, 97]
+                {for} primero in números:
+                  {if} primero <= 10：
+                    {print} primero
+                  {elif} primero >= 60:
+                    {print} primero
+                  {elif} primero >= 90:
+                    {print} primero
                   {else}:
-                    {print} 'another number'
+                    {print} 'otro número'
             mp_choice_options:
             -   option: |-
                     ```
                     7
-                    another number
-                    another number
-                    another number
-                    another number
+                    otro número
+                    otro número
+                    otro número
+                    otro número
                     71
                     79
                     97
                     ```
-                feedback: Well done!
+                feedback: ¡Bien hecho!
             -   option: |-
                     ```
-                    another number
+                    otro número
                     19
                     29
                     41
@@ -4004,19 +3982,7 @@ levels:
                     79
                     97
                     ```
-                feedback: Try again.
-            -   option: |-
-                    ```
-                    7
-                    19
-                    29
-                    41
-                    53
-                    71
-                    79
-                    another number
-                    ```
-                feedback: One more try.
+                feedback: Inténtalo de nuevo.
             -   option: |-
                     ```
                     7
@@ -4026,22 +3992,34 @@ levels:
                     53
                     71
                     79
+                    otro número
+                    ```
+                feedback: Un intento más.
+            -   option: |-
+                    ```
+                    7
+                    19
+                    29
+                    41
+                    53
+                    71
+                    79
                     97
                     ```
-                feedback: That is not it.
-            hint: Think about how many times you need repeating and the values of if and elif.
+                feedback: No es eso.
+            hint: Piensa en cuántas veces necesitas repetir y los valores de if y elif.
             correct_answer: A
             question_score: '10'
         6:
-            question_text: What is wrong with code?
+            question_text: ¿Qué tiene de malo el código?
             code: |-
-                name = {ask} 'What is your name?'
-                {if} name == 'Hedy':
-                password = {ask} 'What is your password?'
-                    {if} password =='turtle123':
-                        {print} 'Yey'
+                nombre = {ask} 'Cuál es tu nombre?'
+                {if} nombre == 'Hedy':
+                    contraseña = {ask} 'Cuál es tu contraseña?'
+                    {if} contraseña =='tortuga123':
+                        {print} 'Yeah'
                     {else}:
-                        {print} 'Access denied'
+                        {print} 'Acceso denegado'
                 {else}:
                  {print} 'Go fish'
             mp_choice_options:
@@ -4053,116 +4031,116 @@ levels:
                 feedback: There is a mistake. Look carefully!
             -   option: There is an indentation mistake in the last line.
                 feedback: Amazing!
-            hint: There is a mistake somewhere...
+            hint: Hay un error en alguna parte...
             correct_answer: D
             question_score: '10'
         7:
-            question_text: Which of the following codes will print five times 'the result is 3' on the screen?
+            question_text: ¿Cuál de los siguientes códigos imprimirá cinco veces "el resultado es 3" en la pantalla?
             mp_choice_options:
             -   option: |-
                     ```
-                     numbers = [1, 2 , 3, 4, 5]
-                     {for} n in numbers：
-                         result = n * 1
-                     {print} 'The result is ' result
+                     numeros = [1, 2 , 3, 4, 5]
+                     {for} n in numeros：
+                         resultado = n * 1
+                     {print} 'El resultado es ' resultado
                     ```
-                feedback: Try again!
+                feedback: ¡Inténtalo de nuevo!
             -   option: |-
                     ```
-                    numbers = [1, 2, 3, 4, 5]
-                     {for} u in numbers：
-                         number = u
-                     {print} 'The result is ' number
+                    numeros = [1, 2, 3, 4, 5]
+                     {for} u in numeros：
+                         numero = u
+                     {print} 'El resultado es ' numero
                     ```
-                feedback: That is not it.
+                feedback: No es eso.
             -   option: |-
                     ```
-                    numbers = [1, 2, 3, 4, 5]
-                     {for} number in numbers：
-                         number = 3
-                     {print} 'The result is ' number
+                    numeros = [1, 2, 3, 4, 5]
+                     {for} numero in numeros：
+                         numero = 3
+                     {print} 'El resultado es ' numero
                     ```
-                feedback: Very good!
+                feedback: ¡Muy bien!
             -   option: |-
                     ```
-                    numbers = [1, 2 , 3, 4, 5]
-                     {for} n in numbers：
-                         n = result
-                     {print} 'The result is ' result
+                    numeros = [1, 2 , 3, 4, 5]
+                     {for} n in numeros：
+                         n = resultado
+                     {print} 'El resultado es ' resultado
                     ```
-                feedback: That is not it.
-            hint: Think about mathematical symbols.
+                feedback: No es eso.
+            hint: Piensa en símbolos matemáticos.
             correct_answer: C
             question_score: '10'
         8:
-            question_text: What is wrong with code?
+            question_text: ¿Qué tiene de malo el código?
             code: |-
-                insects = ['🐝', '🦋', '🕷', '🐞']
-                your_favorite = {ask} 'what is your favorite insect?'
-                {for} insect in insects:
-                 {if} your_favorite == '🐝' {or} your_favorite == '🐞':
-                  {print} 'very useful'
-                 {elif} your_favorite == '🕷':
-                  {print} 'it can catch mosquitoes'
+                insectos = ['🐝', '🦋', '🕷', '🐞']
+                tu_favorito = {ask} '¿Cuál es tu insecto favorito?'
+                {for} insecto in insectos:
+                 {if} tu_favorito == '🐝' {or} tu_favorito == '🐞':
+                  {print} 'muy útil'
+                 {elif} tu_favorito == '🕷':
+                  {print} 'puede comer mosquitos'
                  {else}:
-                  {print} 'almost all insects can be useful one way or another'
+                  {print} 'casi todos los insectos pueden ser utiles de alguna manera'
             mp_choice_options:
-            -   option: '`{or}` cannot be used with `{if}`.'
-                feedback: Try again.
-            -   option: In the `{for}` command `insect` should be `insects`.
-                feedback: Not true.
-            -   option: Nothing!
-                feedback: Well done!
-            -   option: There is an indentation mistake in the last line.
-                feedback: Nope.
-            hint: Read the code carefully.
-            correct_answer: C
+            -   option: '`{or}` no se puede utilizar con `{if}`.'
+                feedback: Inténtalo de nuevo.
+            -   option: En el comando `{for}`, `insect` debe ser `insects`.
+                feedback: No es verdad.
+            -   option: ¡Nada!
+                feedback: ¡Bien hecho!
+            -   option: Hay un error de sangría en la última línea.
+                feedback: No.
+            hint: Lee cuidadosamente el código.
             question_score: '10'
+            correct_answer: C
         9:
-            question_text: Which one of the codes below gave this output?
+            question_text: ¿Cuál de los siguientes códigos produjo este resultado?
             code: |-
-                -5 is negative
-                -4 is negative
-                -3 is negative
-                -2 is negative
-                -1 is negative
-                0 is positive
-                1 is positive
-                2 is positive
-                3 is positive
+                -5 es negativo
+                -4 es negativo
+                -3 es negativo
+                -2 es negativo
+                -1 es negativo
+                0 es positivo
+                1 es positivo
+                2 es positivo
+                3 es positivo
             mp_choice_options:
-            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number < 0: \n      {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
-                feedback: Try again!
-            -   option: "```\n {for} number in range -5 to 3:\n     {if} number > 0: \n      {print} number ' is positive'\n     {elif} number <= 0: \n     {print} number ' is negative' \n    {else}: \n     {print} number ' is zero'\n```"
-                feedback: That is not it.
-            -   option: "```\n {for} number in range -5 to 3:\n     {if} number >= 0: \n     {print} number ' is positive'\n     {elif} number < 0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
-                feedback: Very good!
-            -   option: "```\n {for} number in range -5 to 3:\n     {if} number < 0: \n      {print} number ' is positive'\n     {elif} number <=0: \n     {print} number ' is negative' \n     {else}: \n     {print} number ' is zero'\n```"
-                feedback: That is not it.
-            hint: Read the code carefully.
-            correct_answer: C
+            -   option: "```\n {for} numero en rango -5 a 3:\n     {if} numero > 0: \n      {print} numero ' es positivo'\n     {elif} numero < 0: \n      {print} numero ' es negativo' \n    {else}: \n     {print} numero ' es cero'\n```"
+                feedback: ¡Inténtalo de nuevo!
+            -   option: "```\n {for} numero en rango -5 a 3:\n     {if} numero > 0: \n      {print} numero ' es positivo'\n     {elif} numero <= 0: \n     {print} numero ' es negativo' \n    {else}: \n     {print} numero ' es cero'\n```"
+                feedback: No es eso.
+            -   option: "```\n {for} numero en rango -5 a 3:\n     {if} numero >= 0: \n     {print} numero ' es positivo'\n     {elif} numero < 0: \n     {print} numero ' es negativo' \n     {else}: \n     {print} numero ' es cero'\n```"
+                feedback: ¡Muy bien!
+            -   option: "```\n {for} numero en rango -5 a 3:\n     {if} numero < 0: \n      {print} numero ' es positivo'\n     {elif} numero <=0: \n     {print} numero ' es negativo' \n     {else}: \n     {print} numero ' es cero'\n```"
+                feedback: Eso no es.
+            hint: Lee atentamente el código.
             question_score: '10'
+            correct_answer: C
         10:
-            question_text: What is wrong with this code?
+            question_text: ¿Qué le pasa a este código?
             code: |-
-                {for} number in range 1 to 5:
-                  volume_room = num * num * num
-                  {print} volume_room ' cubic meters'
-                    {if} volume_room > 100:
-                      {print} 'this is a large room'
-                    {elif} volume_room < 100:
-                      {print} 'small room but cosy'
+                {for} numero en rango 1 a 5:
+                  volumen_habitacion = num * num * num
+                  {print} volumen_habitacion ' metros cúbicos'
+                    {if} volumen_habitacion > 100:
+                      {print} 'es una habitación grande'
+                    {elif} volumen_habitacion < 100:
+                      {print} 'habitación pequeña pero acogedora'
                     {else}:
-                      {print} 'i will look for something else'
+                      {print} 'buscaré otra cosa'
             mp_choice_options:
-            -   option: The word num needs quotation marks.
-                feedback: Try again.
-            -   option: The `{if}` command is not used correctly.
-                feedback: Not true.
-            -   option: Line 3 should be `volume_room = number * number * number`.
-                feedback: Well done!
-            -   option: There is an indentation mistake in the last line.
-                feedback: Nope.
-            hint: Read the code carefully.
+            -   option: La palabara num necesita comillas.
+                feedback: Inténtalo de nuevo.
+            -   option: El comando `{if}` no se utiliza correctamente.
+                feedback: No es cierto.
+            -   option: La línea 3 debería ser `volume_room = number * number * number`.
+                feedback: ¡Bien hecho!
+            -   option: Hay un error de sangría en la última línea.
+                feedback: No.
+            hint: Lee atentamente el código.
             correct_answer: C
             question_score: '10'
