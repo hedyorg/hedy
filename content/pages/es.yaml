@@ -261,10 +261,10 @@ teacher-guide:
 -   title: Enseñar con Hedy
     key: enseñar
     subsections:
-    -   title: Enseñar con Hedy
+    -   title: Enseñando con Hedy
         text: |-
             Hedy contiene un montón de niveles diferentes que cada uno enseña una nueva habilidad diferente. Recomendamos enseñar un nivel por lección.
-            Esto da a tus estudiantes el tiempo para comprender plenamente un nuevo comando o concepto y practicar con él, antes de pasar al siguiente nivel.
+            Esto da a sus estudiantes el tiempo para comprender plenamente un nuevo comando o concepto y práctica con él, antes de pasar al siguiente nivel.
             Nosotros utilizamos esta estructura en nuestras lecciones: Introducción, nuevos conceptos y órdenes, manos a la obra, rompecabezas y pruebas.
     -   title: Diapositivas
         text: |-
@@ -391,7 +391,7 @@ teacher-guide:
             example:
                 error_text: El comando eco se utiliza para repetir una respuesta después de un comando preguntar. Sin preguntar, eco no hará nada.
                 error_code: '{echo} Tu nombre es'
-                solution_text: Añade un comando preguntar para que funcione.
+                solution_text: Añade un comando «pregunta» para que funcione.
                 solution_code: |-
                     {ask} ¿Cómo te llamas?
                     {echo} Tu nombre es
@@ -423,10 +423,10 @@ teacher-guide:
                 solution_code: '{forward} -100'
     -   level: '2'
         sections:
-        -   title: Los estudiantes cometen erratas en sus comandos
+        -   title: Los estudiantes cometen errores tipográficos en sus comandos
             example:
                 error_text: Hedy no puede reconocer un comando mal escrito.
-                error_code: 'prinnt No hagas erratas'
+                error_code: 'prinnt No cometas errores tipográficos'
                 solution_text: Enseña a tus estudiantes a leer los mensajes de error. De esta forma ellos pueden encontrar por sí solos que es lo que está mal.
                 solution_code: '{print} No cometas errores tipográficos'
         -   title: Los estudiantes olvidan que el comando preguntar ha cambiado
@@ -457,13 +457,13 @@ teacher-guide:
                     {print} Hola soy nombre
         -   title: Los estudiantes usan nombres de variables largos que contienen dos palabras.
             example:
-                error_text: Las variables deben nombrarse con una sola palabra. Puedes usar un guion bajo para conectar dos palabras. Eso cuenta como una.
-                error_code: puerta escogida es preguntar Qué puerta eliges
+                error_text: Una variable debe nombrarse con una palabra. Puede utilizar un guión bajo para unir dos palabras. Eso cuenta como una.
+                error_code: puerta escogida es preguntar ¿Qué puerta eliges?
                 solution_text: Añade un guion bajo.
                 solution_code: puerta_elegida {is} {ask} qué puerta escoges
         -   title: Es posible que los estudiantes usen dos nombres diferentes para la misma variable
             example:
-                error_text: En este ejemplo, el estudiante ha usado 'caballo' y 'nombre' para la misma variable.
+                error_text: En este ejemplo, el alumno ha utilizado 'caballo' y 'nombre' para las mismas variables.
                 error_code: |-
                     caballo {is} {ask} Cómo se llama tu caballo
                     {print} Tu caballo se llama nombre
@@ -531,9 +531,9 @@ teacher-guide:
             example:
                 error_text: En una lista los objetos están separados por una coma.
                 error_code: |-
-                    pizzas {is} setas de atún cuatro estaciones
+                    pizas {is} champiñones atún cuatro estaciones
                     {print} pizzas {at} {random}
-                solution_text: Tras cada objeto de tu lista, debería haber una coma
+                solution_text: Después de cada elemento de la lista, debe haber una coma
                 solution_code: |-
                     pizzas {is} setas, de atún, cuatro estaciones
                     {print} pizzas {at} {random}
@@ -549,7 +549,7 @@ teacher-guide:
                     {print} clubs {at} {random}
         -   title: Los alumnos intentan utilizar añadir/eliminar sin una lista
             example:
-                error_text: En el siguiente ejemplo. 'nombres' no es una lista, pero sí una variable. No puedes añadirle nada.
+                error_text: En el ejemplo siguiente 'nombres' no es una lista, sino una variable. No se le puede añadir nada.
                 error_code: |-
                     nombres {is} Jake
                     tu_nombre {is} {ask} ¿Quién eres tú?
