@@ -388,10 +388,12 @@ class HedyTester(unittest.TestCase):
         result = hedy.transpile(code, self.level, 'en')
         self.assertDictEqual(result.source_map.get_compressed_mapping(), expected_source_map)
 
-    def assert_translated_code_equal(self, orignal, translation):
+    def assert_translated_code_equal(self, original, translation):
         # When we translate a program we lose information about the whitespaces of the original program.
         # So when comparing the original and the translated code, we compress multiple whitespaces into one.
-        self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
+        # Also, we lose the trailing spaces, so we strip before comparing.
+        self.assertEqual(re.sub('\\s+', ' ', original).strip(),
+                         re.sub('\\s+', ' ', translation).strip())
 
     @staticmethod
     def validate_Python_code(parseresult):
