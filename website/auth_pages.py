@@ -102,7 +102,7 @@ class AuthModule(WebsiteModule):
             value=cookie,
             httponly=True,
             secure=is_heroku(),
-            samesite="Lax",
+            samesite="Strict",
             path="/",
             max_age=365 * 24 * 60 * 60,
         )
@@ -180,7 +180,8 @@ class AuthModule(WebsiteModule):
 
         # We receive the pre-processed user and response package from the function
         user, resp = self.store_new_account(body, body["email"].strip().lower())
-
+        print(user)
+        print(resp)
         if not is_testing_request(request) and "subscribe" in body:
             # If we have a Mailchimp API key, we use it to add the subscriber through the API
             if MAILCHIMP_API_URL:
@@ -205,7 +206,7 @@ class AuthModule(WebsiteModule):
             value=cookie,
             httponly=True,
             secure=is_heroku(),
-            samesite="Lax",
+            samesite="Strict",
             path="/",
             max_age=365 * 24 * 60 * 60,
         )
