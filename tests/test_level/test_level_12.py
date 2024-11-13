@@ -938,12 +938,7 @@ class TestsLevel12(HedyTester):
     def test_assign_comment(self):
         code = 'test = "Welkom bij Hedy" # This is a comment'
         expected = "test = Value('Welkom bij Hedy')"
-        self.multi_level_tester(
-            max_level=18,
-            code=code,
-            expected=expected,
-            unused_allowed=True
-        )
+        self.multi_level_tester(code=code, expected=expected, unused_allowed=True)
 
     #
     # ask tests

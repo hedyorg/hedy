@@ -517,7 +517,7 @@ class TestsLevel4(HedyTester):
 
     def test_assign_comment(self):
         code = 'test is "Welkom bij Hedy" # This is a comment'
-        expected = 'test = \'"Welkom bij Hedy" \''
+        expected = """test = '"Welkom bij Hedy"'"""
         self.multi_level_tester(
             max_level=5,
             unused_allowed=True,
