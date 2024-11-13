@@ -385,6 +385,32 @@ class TestsLevel8(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11, output='jahoor!')
 
+    def test_assign_var_in_if_trims_spaces(self):
+        code = self.dedent(
+            "if 1 = 1",
+            ("j = 4   ", "  "),
+            ("    print '[' j ']'", "  "))
+
+        expected = textwrap.dedent(f"""\
+        if localize('1') == localize('1'):
+          j = Value('4', num_sys='Latin')
+          print(f'[{{j}}]')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11, output='[4]')
+
+    def test_assign_var_in_if_trims_spaces_with_comment(self):
+        code = textwrap.dedent("""\
+        if 1 = 1
+            j = 4    # met comment
+            print '[' j ']'""")
+
+        expected = textwrap.dedent(f"""\
+        if localize('1') == localize('1'):
+          j = Value('4', num_sys='Latin')
+          print(f'[{{j}}]')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11, output='[4]')
+
     #
     # in/not in list
     #
