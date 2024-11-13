@@ -159,9 +159,9 @@ adventures:
                 example_code: |
                     ```
                     {print} "OH NO! El T-rex s'apropa!"
-                    end = {ask} "Quin final vols, trist o feliç?"
-                    {if} end {is} feliç
-                        {print} "En Ricard salta a temps dins la màquina del temps!"
+                    final = {ask} "Quin final vols, trist o feliç?"
+                    {if} final {is} feliç
+                        {print} "En Ricard torna a temps dins la màquina del temps!"
                         {print} _
                     {else}
                         {print} "Oh no! En Ricard és massa lent..."
@@ -1257,12 +1257,12 @@ adventures:
             6:
                 example_code: |
                     ```
-                    persones = mama, papa, Emma, Sofia
+                    gent = mama, papa, Emma, Sofia
                     emma_renta = 0
-                    netejadora = persones {at} {random}
-                    {print} 'Li toca rentar plats a ' netejadora 
-                    {if} rentadora {is} Emma emma_renta = emma_renta + 1
-                    {print} 'Emma farà els plats aquesta setmana' emma_renta 'vegades'
+                    netejador = persones {at} {random}
+                    {print} 'Li toca rentar plats a ' netejador 
+                    {if} netejador {is} Emma emma_renta = emma_renta + 1
+                    {print} "L'Emma rentarà els plats aquesta setmana" emma_renta "vegades"
                     ```
 
                     Ara pots copiar de la línia 3 a la 5 unes quantes vegades (pex. 7 vegades per fer una setmana).
@@ -1280,7 +1280,7 @@ adventures:
                     {print} "Dilluns renta: " netejador
                     {remove} netejador {from} gent
                     netejador = gent {at} {random}
-                    {print} "Dimarts renta:: " netejador
+                    {print} "Dimarts renta: " netejador
                     {remove} netejador {from} gent
                     ```
                 story_text: "Quantes vegades rentarà els plats cadascú? És just? Pots comptar-ho en aquest nivell.\n"
@@ -1293,7 +1293,7 @@ adventures:
                 example_code: |
                     ```
                     gent = mama, papa, Emma, Sofia
-                    {repeat} _ _ {print} 'Rentar plats li toca a ' _ _ _
+                    {repeat} _ _ {print} 'Li toca rentar plats a ' _ _ _
                     ```
             10:
                 story_text: |
