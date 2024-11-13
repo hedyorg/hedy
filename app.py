@@ -503,8 +503,6 @@ def setup_language(language=None):
     if request.args.get('keyword_language', None):
         session['keyword_lang'] = request.args.get('keyword_language', None)
     g.keyword_lang = session['keyword_lang']
-    logger.info(f'keyword lang {g.keyword_lang}')
-    logger.info(f'language {g.lang}')
     # Set the page direction -> automatically set it to "left-to-right"
     # Switch to "right-to-left" if one of the language is rtl according to Locale (from Babel) settings.
     # This is the only place to expand / shrink the list of RTL languages ->
