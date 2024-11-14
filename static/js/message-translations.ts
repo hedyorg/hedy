@@ -449,7 +449,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Empty_output": "Este código funciona pero no imprime nada. Agrega un comando print a tu código o usa una tortuga para mostrar el resultado.",
     "Errors_found": "¡Has cometido un error! No te preocupes, seguimos ejecutando el programa",
     "Execute_error": "Algo salió mal mientras se ejecutaba el programa.",
-    "Other_error": "¡Ups! Quizás hemos cometido un pequeño error.",
+    "Other_error": "¡Ups! Tal vez cometimos un pequeño error.",
     "Program_repair": "Este podría ser código correcto, ¿lo puedes arreglar?",
     "Program_too_long": "Tu programa toma demasiado tiempo en ejecutarse.",
     "ServerError": "Escribiste un programa que no esperábamos. Si quieres ayudar, envíanos un email con el nivel y tu programa a hello@hedy.org. Mientras tanto, intenta algo un poco diferente y échale otro vistazo a los ejemplos. ¡Gracias!",
@@ -479,7 +479,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "selected": "Seleccionado",
     "songs": "🎵,🎶",
     "successful_runs": "Ejecuciones exitosas: {successful_runs}",
-    "teacher_welcome": "¡Bienvenido/a a Hedy! Tu cuenta es de tipo profesor, por lo que puedes crear clases e invitar estudiantes.",
+    "teacher_welcome": "¡Bienvenido/a a Hedy! Ahora eres el orgulloso dueño de una cuenta de profesor, lo que te permite crear clases e invitar a alumnos.",
     "turtle": "🐢",
     "unsaved_class_changes": "Hay cambios sin guardar, ¿estás seguro de que quieres abandonar esta página?"
   },

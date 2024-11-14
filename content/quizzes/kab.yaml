@@ -7,9 +7,12 @@ levels:
             -   option: '`{print}`'
                 feedback: Swaswa!
             -   option: '`azul`'
-                feedback: Hello isn't a command.
+                feedback: Azul mačči d taladna.
             -   feedback: With `{ask}`, you can ask a question.
                 option: '`{ask}`'
+            code: _ Azul
+            correct_answer: 'B'
+            question_score: '10'
         10:
             mp_choice_options:
             -   option: Are you ready to go to level 2?
@@ -32,7 +35,7 @@ levels:
             mp_choice_options:
             -   {}
             -   {}
-            -   {}
+            -   feedback: Gedha!
             -   feedback: '`{echo}` yettales-d tiririt ɣef usteqsi-k.'
             question_score: '10'
             hint: Tzemreḍ ad tessutreḍ kra s tladna `{ask}`
@@ -47,6 +50,20 @@ levels:
                 feedback: D tuccḍa, wali akken ilaq!
             hint: Izirig 1 yettban ur iseḥḥa ara
             question_text: D acu-t wugur n tengalt-a?
+        8:
+            mp_choice_options:
+            -   {}
+            -   {}
+            -   feedback: D amahil igerrzen!
+            -   feedback: Ayagi d arameɣtu...
+        7:
+            hint: Senqed tangalt izirig s yizirig
+            mp_choice_options:
+            -   {}
+            -   {}
+            -   {}
+            -   feedback: Swaswa!
+            correct_answer: D
     9:
         10:
             mp_choice_options:
@@ -57,3 +74,14 @@ levels:
                 feedback: Izirig wis 2 ilaq ad ibdu s 4
             -   option: izirig wis 2 ilaq ad ibdu s 4 tallunin akked yizirig wis 3 s 8
             hint: Izirig amezwaru ur ilaq ara ad ibdu s tallunin
+    17:
+        9:
+            correct_answer: C
+            hint: Γeṛ tangalt s leεqel.
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   feedback: Ԑreḍ tikkelt niḍen.
+                option: '`{or}` ur tezmir ara ad tettwaseqdec akked `{if}`.'
+        10:
+            question_text: Acu i d ugur s tengalt-a?
