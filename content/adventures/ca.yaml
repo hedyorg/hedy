@@ -1257,16 +1257,16 @@ adventures:
             6:
                 example_code: |
                     ```
-                    gent = mama, papa, Emma, Sofia
-                    emma_renta = 0
-                    netejador = persones {at} {random}
-                    {print} 'Li toca rentar plats a ' netejador 
-                    {if} netejador {is} Emma emma_renta = emma_renta + 1
-                    {print} "L'Emma rentarà els plats aquesta setmana" emma_renta "vegades"
+                    people = mom, dad, Emma, Sophie
+                    emma_washes = 0
+                    dishwasher = people {at} {random}
+                    {print} 'The dishwasher is' dishwasher
+                    {if} dishwasher {is} Emma emma_washes = emma_washes + 1
+                    {print} 'Emma will do the dishes this week' emma_washes 'times'
                     ```
 
-                    Ara pots copiar de la línia 3 a la 5 unes quantes vegades (pex. 7 vegades per fer una setmana).
-                    Pots fer el codi per calcular tota una setmana?
+                    Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
+                    Do you make the code for the whole week?
                 story_text_2: |
                     Si tens molta mala sort, el programa anterior podria triar-te per a rentar plats de tota la setmana! I això no és just!
                     Per crear un sistema més just, pots utilitzar l'ordre `{remove}` per eliminar la persona escollida de la llista. D'aquesta manera no haureu de tornar a rentar els plats fins que tothom hagi tingut el seu torn.
