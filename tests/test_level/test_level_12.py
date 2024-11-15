@@ -2958,24 +2958,23 @@ class TestsLevel12(HedyTester):
         lijstje is 'kip', 'haan', 'kuiken'
         if x is pressed
             for dier in lijstje
-                print 'dier'
+                print dier
         else
             print 'onbekend dier'""")
 
         expected = self.dedent("""\
-        lijstje = Value([Value('kip'), Value('haan'), Value('kuiken')])
+        global_scope_ = dict()
+        global_scope_["lijstje"] = Value([Value('kip'), Value('haan'), Value('kuiken')])
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        global if_pressed_x_
         if_pressed_mapping['x'] = 'if_pressed_x_'
+        global if_pressed_x_
         def if_pressed_x_():
-          global dier, lijstje
-          for dier in lijstje.data:
-            print(f'''dier''')
+          for dier in (global_scope_.get("lijstje") or lijstje).data:
+            print(f'''{global_scope_.get("dier") or dier}''')
             time.sleep(0.1)
-        global if_pressed_else_
         if_pressed_mapping['else'] = 'if_pressed_else_'
+        global if_pressed_else_
         def if_pressed_else_():
-          global dier, lijstje
           print(f'''onbekend dier''')
         extensions.if_pressed(if_pressed_mapping)""")
 
@@ -2994,20 +2993,19 @@ class TestsLevel12(HedyTester):
         print x""")
 
         expected = self.dedent("""\
-        x = Value('a')
+        global_scope_ = dict()
+        global_scope_["x"] = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping[(global_scope_.get("x") or x).data] = 'if_pressed_x_'
         global if_pressed_x_
-        if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
-          global x
           print(f'''it is a letter key''')
-        global if_pressed_else_
         if_pressed_mapping['else'] = 'if_pressed_else_'
+        global if_pressed_else_
         def if_pressed_else_():
-          global x
           print(f'''it is another letter key''')
         extensions.if_pressed(if_pressed_mapping)
-        print(f'''{x}''')""")
+        print(f'''{global_scope_.get("x") or x}''')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
@@ -3021,20 +3019,19 @@ class TestsLevel12(HedyTester):
         print x""")
 
         expected = self.dedent("""\
-        x = Value('a')
+        global_scope_ = dict()
+        global_scope_["x"] = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping[(global_scope_.get("x") or x).data] = 'if_pressed_x_'
         global if_pressed_x_
-        if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
-          global x
-          x = Value('great')
-        global if_pressed_else_
+          global_scope_["x"] = Value('great')
         if_pressed_mapping['else'] = 'if_pressed_else_'
+        global if_pressed_else_
         def if_pressed_else_():
-          global x
-          x = Value('not great')
+          global_scope_["x"] = Value('not great')
         extensions.if_pressed(if_pressed_mapping)
-        print(f'''{x}''')""")
+        print(f'''{global_scope_.get("x") or x}''')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
@@ -3048,20 +3045,19 @@ class TestsLevel12(HedyTester):
         print m""")
 
         expected = self.dedent("""\
-        x = Value('a')
+        global_scope_ = dict()
+        global_scope_["x"] = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping[(global_scope_.get("x") or x).data] = 'if_pressed_x_'
         global if_pressed_x_
-        if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
-          global m, x
-          m = Value('great')
-        global if_pressed_else_
+          global_scope_["m"] = Value('great')
         if_pressed_mapping['else'] = 'if_pressed_else_'
+        global if_pressed_else_
         def if_pressed_else_():
-          global m, x
-          m = Value('not great')
+          global_scope_["m"] = Value('not great')
         extensions.if_pressed(if_pressed_mapping)
-        print(f'''{m}''')""")
+        print(f'''{global_scope_.get("m") or m}''')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
@@ -3427,22 +3423,157 @@ class TestsLevel12(HedyTester):
         print x""")
 
         expected = textwrap.dedent("""\
+        global_scope_ = dict()
         def turn():
+          local_scope_turn_ = dict()
           if_pressed_mapping = {"else": "if_pressed_default_else"}
-          global if_pressed_x_
-          if_pressed_mapping['x'] = 'if_pressed_x_'
-          def if_pressed_x_():
-            global x
+          if_pressed_mapping['x'] = 'if_pressed_turn_x_'
+          global if_pressed_turn_x_
+          def if_pressed_turn_x_():
             print(f'''good''')
-          global if_pressed_else_
-          if_pressed_mapping['else'] = 'if_pressed_else_'
-          def if_pressed_else_():
-            global x
+          if_pressed_mapping['else'] = 'if_pressed_turn_else_'
+          global if_pressed_turn_else_
+          def if_pressed_turn_else_():
             print(f'''bad''')
           extensions.if_pressed(if_pressed_mapping)
         turn()
-        x = Value(1 + 1, num_sys='Latin')
-        print(f'''{x}''')""")
+        global_scope_["x"] = Value(1 + 1, num_sys='Latin')
+        print(f'''{global_scope_.get("x") or x}''')""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=16,
+        )
+
+    def test_if_pressed_in_func(self):
+        code = textwrap.dedent("""\
+        define turnz
+            x is 'a'
+            if x is pressed
+                x is 'great'
+            else
+                x is 'not great'
+            print x
+        
+        call turnz""")
+
+        expected = textwrap.dedent("""\
+            global_scope_ = dict()
+            def turnz():
+              local_scope_turnz_ = dict()
+              local_scope_turnz_["x"] = Value('a')
+              if_pressed_mapping = {"else": "if_pressed_default_else"}
+              if_pressed_mapping[(local_scope_turnz_.get("x") or global_scope_.get("x") or x).data] = 'if_pressed_turnz_x_'
+              global if_pressed_turnz_x_
+              def if_pressed_turnz_x_():
+                local_scope_turnz_["x"] = Value('great')
+              if_pressed_mapping['else'] = 'if_pressed_turnz_else_'
+              global if_pressed_turnz_else_
+              def if_pressed_turnz_else_():
+                local_scope_turnz_["x"] = Value('not great')
+              extensions.if_pressed(if_pressed_mapping)
+              print(f'''{local_scope_turnz_.get("x") or global_scope_.get("x") or x}''')
+            turnz()""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=16,
+        )
+
+    def test_if_pressed_in_func_with_arg(self):
+        code = textwrap.dedent("""\
+        define make_turn with direction
+            if direction = 'left'
+                turn -90
+            else
+                turn 90
+        if l is pressed
+            call make_turn with 'left'
+        else
+            call make_turn with 'right'""")
+
+        expected = textwrap.dedent('''\
+        global_scope_ = dict()
+        def make_turn(direction):
+          local_scope_make_turn_ = {"direction": direction}
+          if (local_scope_make_turn_.get("direction") or global_scope_.get("direction") or direction).data == 'left':
+            __trtl = number_with_error(-90, """Runtime Value Error""")
+            t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+          else:
+            __trtl = number_with_error(90, """Runtime Value Error""")
+            t.right(min(600, __trtl) if __trtl > 0 else max(-600, __trtl))
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['l'] = 'if_pressed_l_'
+        global if_pressed_l_
+        def if_pressed_l_():
+          make_turn(Value('left'))
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        global if_pressed_else_
+        def if_pressed_else_():
+          make_turn(Value('right'))
+        extensions.if_pressed(if_pressed_mapping)''')
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=16,
+        )
+
+    def test_if_pressed_in_two_funcs(self):
+        code = textwrap.dedent("""\
+        x is 'a'
+        define turnz
+            if x is pressed
+                x is 'turn'
+            else
+                x is 'do not turn'
+            print x
+    
+        define forwardz
+            if x is pressed
+                x is 'go forward'
+            else
+                x is 'do not go forward'
+            print x
+    
+        call turnz
+        call forwardz
+        print x""")
+
+        expected = textwrap.dedent("""\
+        global_scope_ = dict()
+        global_scope_["x"] = Value('a')
+        def turnz():
+          local_scope_turnz_ = dict()
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          if_pressed_mapping[(local_scope_turnz_.get("x") or global_scope_.get("x") or x).data] = 'if_pressed_turnz_x_'
+          global if_pressed_turnz_x_
+          def if_pressed_turnz_x_():
+            local_scope_turnz_["x"] = Value('turn')
+          if_pressed_mapping['else'] = 'if_pressed_turnz_else_'
+          global if_pressed_turnz_else_
+          def if_pressed_turnz_else_():
+            local_scope_turnz_["x"] = Value('do not turn')
+          extensions.if_pressed(if_pressed_mapping)
+          print(f'''{local_scope_turnz_.get("x") or global_scope_.get("x") or x}''')
+        def forwardz():
+          local_scope_forwardz_ = dict()
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          if_pressed_mapping[(local_scope_forwardz_.get("x") or global_scope_.get("x") or x).data] = 'if_pressed_forwardz_x_'
+          global if_pressed_forwardz_x_
+          def if_pressed_forwardz_x_():
+            local_scope_forwardz_["x"] = Value('go forward')
+          if_pressed_mapping['else'] = 'if_pressed_forwardz_else_'
+          global if_pressed_forwardz_else_
+          def if_pressed_forwardz_else_():
+            local_scope_forwardz_["x"] = Value('do not go forward')
+          extensions.if_pressed(if_pressed_mapping)
+          print(f'''{local_scope_forwardz_.get("x") or global_scope_.get("x") or x}''')
+        turnz()
+        forwardz()
+        print(f'''{global_scope_.get("x") or x}''')""")
 
         self.multi_level_tester(
             code=code,

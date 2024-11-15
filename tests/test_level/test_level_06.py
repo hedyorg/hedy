@@ -2695,18 +2695,17 @@ class TestsLevel6(HedyTester):
         print x""")
 
         expected = self.dedent("""\
-        x = Value('a')
+        global_scope_ = dict()
+        global_scope_["x"] = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping[(global_scope_.get("x") or x).data] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_x_():
-          global x
           print(f'it is a letter key')
         def if_pressed_else_():
-          global x
           print(f'it is another letter key')
         extensions.if_pressed(if_pressed_mapping)
-        print(f'{x}')""")
+        print(f'{global_scope_.get("x") or x}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -2717,18 +2716,17 @@ class TestsLevel6(HedyTester):
         print x""")
 
         expected = self.dedent("""\
-        x = Value('a')
+        global_scope_ = dict()
+        global_scope_["x"] = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping[(global_scope_.get("x") or x).data] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_x_():
-          global x
-          x = Value('great')
+          global_scope_["x"] = Value('great')
         def if_pressed_else_():
-          global x
-          x = Value('not great')
+          global_scope_["x"] = Value('not great')
         extensions.if_pressed(if_pressed_mapping)
-        print(f'{x}')""")
+        print(f'{global_scope_.get("x") or x}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
@@ -2739,17 +2737,16 @@ class TestsLevel6(HedyTester):
         print m""")
 
         expected = self.dedent("""\
-        x = Value('a')
+        global_scope_ = dict()
+        global_scope_["x"] = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping[(global_scope_.get("x") or x).data] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_x_():
-          global m, x
-          m = Value('great')
+          global_scope_["m"] = Value('great')
         def if_pressed_else_():
-          global m, x
-          m = Value('not great')
+          global_scope_["m"] = Value('not great')
         extensions.if_pressed(if_pressed_mapping)
-        print(f'{m}')""")
+        print(f'{global_scope_.get("m") or m}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
