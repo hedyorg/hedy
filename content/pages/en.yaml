@@ -2173,20 +2173,20 @@ workbooks:
           lines     : 5
     -   level: '7'
         intro: |-
-            ## Herhalen!
-            Aan het einde van de les kan jij:
-            * een regel code meerdere keren uit kan voeren
+            ## Repeat!
+            By the end of this lesson, you can:
+            * run a line of code multiple times
         exercises:
         -   type: text
             contents: |-
-                ### Herhaling
-                Soms wil je één regel code meerdere keren herhalen, bijvoorbeeld in een liedje of verhaal.
+                ### Repetition
+                Sometimes you want to repeat a line of code multiple times, for example in a song or a story.
             code: |-
                 repeat 5 times print 'Baby shark!'
         -   type: text
             contents: |-
-                #### Opdracht 1: Voorspel de uitvoer
-                Wat is de uitvoer van deze programma's?
+                #### Exercise 1: Predict the output
+                What will be the output of these programs?
         -   type: output
             code: |-
                 repeat 3 times print 'Baby shark!'
@@ -2197,94 +2197,94 @@ workbooks:
             lines: 3
         -   type: output
             code: |-
-                repeat 1 times print 'Hallo allemaal!'
+                repeat 1 times print 'Hi everybody!'
             answer: |-
-              Hallo allemaal!
+              Hi everybody!
             lines: 1
         -   type: output
             code: |-
                 a is 4
-                repeat a times print 'Hallo allemaal!'
+                repeat a times print 'Hi everybody'
             answer: |-
-              Hallo allemaal!
-              Hallo allemaal!
-              Hallo allemaal!
-              Hallo allemaal!
+              Hi everybody!
+              Hi everybody!
+              Hi everybody!
+              Hi everybody!
             lines: 4
         -   type: text
             contents: |
-                ### Opdracht 2: Invoer
-                Je krijgt nu weer een uitvoer te zien. Schrijf een programma dat bij deze uitvoer kan horen.
-                
-                Let op: vaak zijn er meerdere antwoorden goed, je mag zelf iets kiezen, als het maar kan.
-                Kijk ook goed naar het aantal streepjes!
+                ### Exercise 2: Input
+                Take a look at the output. Write a program that could belong to this output.
+
+                Please note: Multiple answers can be correct. Choose whatever you want, as long as it's correct.
+                Fill up all the lines, so look carefully at the amount of lines!
         -   type: input
             answer: |-
-                print 'Hallo allemaal!'
-                repeat 2 times print 'Dit is een regel'
+                print 'Hi everybody!'
+                repeat 2 times print 'This is one line.'
             output: |-
-                Hallo allemaal!
-                Dit is een regel
-                Dit is een regel
+                Hi everybody!
+                This is one line.
+                This is one line.
             lines: 2
         -   type: input
             answer: |-
-                print 'Dit is regel 1'
-                print 'Dit is regel 2'
-                print 'Dit is regel 3'
+                print 'This is line 1'
+                print 'This is line 2'
+                print 'This is line 3'
             output: |-
-                Dit is regel 1
-                Dit is regel 2              
-                Dit is regel 3
+                This is line 1
+                This is line 2
+                This is line 3
             lines: 3
         -   type: text
             contents: |-
-                ### Opdracht 3: Goed of fout?
-                Lees de code goed, en bepaal of deze code een foutmelding oplevert.
+                ### Exercise 3: Correct or Incorrect
+                Take a careful look at the programs and decide if they will trigger an errormessage or not.
         -   type      : MC-code
-            options   : ["Goed" , "Fout"]
+            options   : ["Correct" , "Incorrect"]
             code      : |-
-              print 'De prins riep steeds om hulp'
+              print 'The prince kept screaming for help'
               repeat 3 times 'Help!'
-            answer    : Fout, print mist
+            answer    : Incorrect, print is missing
         -   type      : MC-code
-            options   : ["Goed" , "Fout"]
+            options   : ["Correct" , "Incorrect"]
             code      : |-
               forward 100
               repeat 3 times turn 90
-            answer    : Goed
+            answer    : Correct
         -   type      : MC-code
-            options   : ["Goed" , "Fout"]
+            options   : ["Correct" , "Incorrect"]
             code      : |-
-              mensen = mama, papa, Emma, Sophie
-              repeat 7 times print 'De afwasser is ' mensen
-            answer    : Fout, at random mist
+              people = mum, dad, Emma, Sophie
+              repeat 7 times print 'The dishes will be done by ' mensen
+            answer    : Incorrect, at random is missing
         -   type      : MC-code
-            options   : ["Goed" , "Fout"]
+            options   : ["Correct" , "Incorrect"]
             code      : |-
-              dobbel = 1, 2, 3, 4, 5, 6
-              repeat 5 times print 'Jij gooit: ' dobbel at random
-            answer    : Goed
+              options = 1, 2, 3, 4, 5, 6
+              repeat 5 times print 'You threw: ' options at random
+            answer    : Correct
         -   type: text
             contents: |-
-                #### Opdracht 4: Programmeerwoorden
-                We hebben deze les een nieuw programmeerwoord geleerd: `repeat`.
-        -   type: repeat
-            word: "keer"
-            answer: "een regel code herhalen"
+                #### Exercise 6: Programming words
+                We have learned a new programming word again! Explain in your own words.
+        -   type: define
+            word: "repeat"
+            answer: "repeating a line multiple times"
             lines: 1
         -   type: text
             contents: |-
-                #### Wat vond jij?
-        -   type: question
-            text: "Wat was de leukste opdracht van dit level?"
-            lines: 1
-        -   type: question
-            text: "Waarom vond je juist die opdracht leuk?"
-            lines: 5
-        -   type: question
-            text: "Welke opdracht was het minst leuk?"
-            lines: 1
-        -   type: question
-            text: "Waarom vond je juist die opdracht niet leuk?"
-            lines: 5
+              #### What did you think?
+        - type      : question
+          text      : "Which exercise did you like best this level?"
+          lines     : 1
+        - type      : question
+          text      : "What did you like about it?"
+          lines     : 5
+        - type      : question
+          text      : "Which exercise did you like least this level?"
+          lines     : 1
+        - type      : question
+          text      : "What didn't you like about it?"
+          lines     : 5
