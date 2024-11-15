@@ -339,7 +339,7 @@ class TestsLevel11(HedyTester):
 
         expected = self.dedent(
             "global_scope_ = dict()",
-            self.for_loop('i', 1, 10, scope='global_scope_'),
+            self.for_loop('i', 1, 10),
             ("""\
             if_pressed_mapping = {"else": "if_pressed_default_else"}
             if_pressed_mapping['p'] = 'if_pressed_p_'
@@ -368,7 +368,7 @@ class TestsLevel11(HedyTester):
 
         expected = self.dedent(
             "global_scope_ = dict()",
-            self.for_loop('i', 1, 10, scope='global_scope_'),
+            self.for_loop('i', 1, 10),
             ("""\
             print(f'{global_scope_.get("i") or i}')
             if_pressed_mapping = {"else": "if_pressed_default_else"}
