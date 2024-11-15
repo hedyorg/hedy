@@ -456,7 +456,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Transpile_error": "No podemos ejecutar este programa.",
     "Transpile_success": "¡Buen trabajo!\n¡Increible!\n¡Bien hecho!\n¡Excelente!\n¡Lo hiciste genial!",
     "Transpile_warning": "¡Cuidado!",
-    "Unsaved_Changes": "Tu programa no se ha guardado. ¿Deseas irte sin guardarlo?",
+    "Unsaved_Changes": "Tienes un programa sin guardar. ¿Quieres salir sin guardarlo?",
     "adventures_completed": "Aventuras completadas: {number_of_adventures}",
     "adventures_restored": "Se han restaurado las aventuras por defecto.",
     "adventures_tried": "Aventuras intentadas",
@@ -2164,7 +2164,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "unsaved_class_changes": "Kaydedilmemiş değişiklikler var, bu sayfadan ayrılmak istediğinize emin misiniz?"
   },
   "uk": {
-    "CheckInternet": "Перевірте, чи ваше підключення до Інтернету працює належним чином.",
+    "CheckInternet": "Перевірте, чи працює ваше підключення до Інтернету.",
     "Connection_error": "Не вдалося підключитися до сервера.",
     "Empty_output": "Цей код працює, але нічого не друкує. Додайте команду друку до свого коду або використовуйте черепаху, щоб отримати вивід.",
     "Errors_found": "Ви зробили помилку! Не турбуйтеся, ми продовимо виконувати програму",

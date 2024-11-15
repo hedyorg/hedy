@@ -44,11 +44,11 @@ levels:
                 Ви будите навчатися на Гриффіндорі, Хаффлпафі, Рейвенклову чи Слизерину?
                 Нехай програма почекає деякий час, перш ніж покаже ваш будинок.
             code: |-
-                {print} Сортувальний капелюх готовий розмістити вас у будинку Гоґвортсу.
-                будинки {є} Ґрифіндор, Хаффлпаф, Рейвенкло, Слизерин
-                не подобається {is} {ask} Чи є якісь будинки, частиною яких ви не хочете бути?
-                {remove} не подобається {from} будинків
-                {print} Не подобається? Краще бути... будинки {в} {випадково}
+                {print} The sorting hat is ready to sort you into a Hogwarts house.
+                houses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
+                dislike {is} {ask} Are there any houses you do not want to be part of?
+                {remove} dislike {from} houses
+                {print} Not dislike eh? Better be... houses {at} {random}
         2:
             story: Створіть програму, яка вибирає випадкову їжу для вас. Складіть список продуктів і список начинок та дозвольте програмі вирішити, що ви будете їсти!
             code: |-
@@ -58,7 +58,7 @@ levels:
                 {sleep} 2
                 {print} їжа {at} {random} начинки {at} {random}
         3:
-            code: "гравці {is} Ліам, Ной, Софі\nplayer_1 {is} гравців {at} {random}\n{remove} player_1 {from} гравців\nplayer_2 {is} гравців {at} {random}\n{print} player_1 ' спочатку грає проти ' player_2\n{remove} player_2 {from} гравців\n{print} \"Переможець грає проти\" гравців {at} {random}"
+            code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
             story: "У шаховому турнірі залишилося троє гравців.\nСтворіть програму, яка вирішує, хто з двох гравців має грати один проти одного першими.\nПочніть із друку двох гравців, які грають у першому матчі, а потім надрукуйте гравця, проти якого зіграє переможець."
     4:
         1:
@@ -112,10 +112,10 @@ levels:
         2:
             story: Створіть програму, яка допоможе вам підрахувати, скільки тортів ви повинні купити на свій день народження.
             code: |-
-                {print} "Це твій день народження!"
-                people = {ask} 'Скільком людям ви хочете дати шматочок торта?'
-                кількість тортів = людей/8
-                {print} 'Вам доведеться купити ' cakes_amount ' торти'
+                {print} 'It is your birthday!'
+                people = {ask} 'How many people do you want to give a slice of cake?'
+                cakes_amount = people/8
+                {print} 'You will have to buy ' cakes_amount ' cakes'
     7:
         1:
             story: |-
