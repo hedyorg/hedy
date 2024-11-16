@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-11-15 06:19+0000\n"
+"PO-Revision-Date: 2024-11-16 06:15+0000\n"
 "Last-Translator: Максим Горпиніч <mgorpinic2005@gmail.com>\n"
 "Language-Team: uk <LL@li.org>\n"
 "Language: uk\n"
@@ -103,83 +103,65 @@ msgstr "Ми виявили, що список {name} порожній або й
 msgid "Runtime Value Error"
 msgstr "Ми виявили, що `{command}` отримала заборонене значення `{value}`. {tip}."
 
-#, fuzzy
 msgid "Runtime Values Error"
-msgstr ""
+msgstr "Ми виявили, що `{command}` отримала заборонені значення `{value}` і `{value}`. {tip}."
 
-#, fuzzy
 msgid "Save Microbit code "
-msgstr ""
+msgstr "Збережіть код Microbit"
 
-#, fuzzy
 msgid "Too Big"
-msgstr "Ого! Ваша програма має вражаючу кількість {lines_of_code} рядків коду! Але ми можемо обробити лише {max_lines} рядків на цьому рівні. Зменште розмір програми та спробуйте ще раз."
+msgstr "Ми виявили, що програма містить {lines_of_code} рядків, але ми можемо обробити лише {max_lines} рядків. Чи можете ви спробувати скоротити свою програму?"
 
-#, fuzzy
 msgid "Too Few Indents"
-msgstr ""
+msgstr "Ми виявили, що в рядку {line_number} замало ({leading_spaces}) пробілів. Чи можете ви спробувати додати додатковий простір?"
 
-#, fuzzy
 msgid "Too Many Indents"
-msgstr ""
+msgstr "Ми виявили, що в рядку {line_number} забагато ({leading_spaces}) пробілів. Чи можете ви спробувати прибрати зайве місце?"
 
-#, fuzzy
 msgid "Unexpected Indentation"
-msgstr "У рядку {line_number} використано занадто багато пробілів. Ви використали {leading_spaces} пробілів, що є занадто багато. Починайте кожен новий блок з {indent_size} пробілів більше, ніж у попередньому рядку."
+msgstr "Ми виявили, що в рядку {line_number} забагато ({leading_spaces}) пробілів. Чи можете ви спробувати додати ще {indent_size} пробілів на новий блок?"
 
-#, fuzzy
 msgid "Unquoted Assignment"
-msgstr "З цього рівня потрібно розміщувати тексти праворуч від `{is}` між лапками. Ви забули, це для тексту {text}."
+msgstr "Ми виявили, що текст праворуч від `{is}` не написаний у лапках. Цей рівень вимагає, щоб ви почали писати текст між лапками. Спробуйте зробити це для тексту {text}"
 
-#, fuzzy
 msgid "Unquoted Equality Check"
-msgstr "Якщо потрібно перевірити, чи дорівнює змінна декільком словам, то слова повинні бути взяті в лапки!"
+msgstr "Ми виявили, що код намагається перевірити, чи дорівнює змінна кільком словам. Чи можете ви спробувати взяти в лапки слова, які ви хочете перевірити?"
 
-#, fuzzy
 msgid "Unquoted Text"
-msgstr "Будьте уважні. Якщо ви щось `{ask}` або `{print}`, то текст повинен починатися і закінчуватися лапками. Це ви забули для тексту {unquotedtext}."
+msgstr "Ми виявили, що в тексті для `{ask}` або `{print}`, схоже, відсутні лапки. Чи можете ви спробувати додати цитати для {unquotedtext}?"
 
-#, fuzzy
 msgid "Unsupported Float"
-msgstr "Нецілі числа поки що не підтримуються, але це буде через декілька рівнів. Наразі змініть `{value}` на ціле число."
+msgstr "Ми виявили, що код використовує нецілі числа, які ще не підтримуються. Чи можете ви спробувати змінити `{value}` на ціле число?"
 
-#, fuzzy
 msgid "Unsupported String Value"
-msgstr "Текстові значення не можуть містити `{invalid_value}`."
+msgstr "Ми виявили, що текст використовує значення, які не може містити `{invalid_value}`. Чи можете ви спробувати видалити записане значення або змінити його тип?"
 
-#, fuzzy
 msgid "Unused Variable"
-msgstr ""
+msgstr "Ми виявили, що змінна {variable_name} визначена в рядку {line_number}, але не використовується. Чи можете ви спробувати використати визначену змінну чи видалити її?"
 
-#, fuzzy
 msgid "Var Undefined"
-msgstr "Ви намагалися використати перемінну {name}, але не задали її. Також можливо, що ви намагалися використати слово {name}, але забули взяти лапки."
+msgstr "Ми виявили, що змінна `{name}` використовується до встановлення. Чи можете ви встановити змінну перед її використанням або взяти лапки для `{name}`?"
 
-#, fuzzy
 msgid "Wrong Level"
-msgstr "Це був правильний код Hedy, але не на тому рівні. Ви написали `{offending_keyword}` для рівня {working_level}. Підказка: {tip}"
+msgstr "Ми виявили, що написаний код є правильним кодом Hedy, але `{offending_keyword}` використовується на рівні {working_level}. {tip}"
 
-#, fuzzy
 msgid "Wrong Number of Arguments"
-msgstr ""
+msgstr "Ми виявили, що функція {name} має неправильну кількість аргументів: {used_number}. Чи можете ви замість цього спробувати написати {defined_number}?"
 
 msgid "account_overview"
 msgstr "Огляд облікового запису"
 
-#, fuzzy
 msgid "actions"
-msgstr ""
+msgstr "Дії"
 
-#, fuzzy
 msgid "add"
-msgstr ""
+msgstr "додати"
 
 msgid "add_students"
 msgstr "Додати учня"
 
-#, fuzzy
 msgid "add_your_language"
-msgstr ""
+msgstr "Додайте свою мову!"
 
 msgid "admin"
 msgstr "Адміністратор"
@@ -190,17 +172,14 @@ msgstr "Перейдіть на рівень {level}"
 msgid "adventure"
 msgstr "Пригода"
 
-#, fuzzy
 msgid "adventure_cloned"
-msgstr ""
+msgstr "Пригоди клоновані"
 
-#, fuzzy
 msgid "adventure_code_button"
-msgstr ""
+msgstr "Код пригод"
 
-#, fuzzy
 msgid "adventure_codeblock_button"
-msgstr ""
+msgstr "Використовуйте цю кнопку, якщо хочете створити блок коду, який студенти зможуть запускати у вашій пригоді. Порада: поставте виділення в кінці останнього рядка блоку коду та <kbd>введіть</kbd> 3 рази, щоб ввести після блоку коду."
 
 msgid "adventure_duplicate"
 msgstr "У вас вже є пригода з такою назвою."
@@ -211,13 +190,11 @@ msgstr "Ви не ввели назву пригоди!"
 msgid "adventure_exp_3"
 msgstr "Переконайтеся, що ви завжди оточуєте ключові слова символом { }, тоді вони будуть розпізнані правильно. Ви можете скористатися кнопкою \"попередній перегляд\", щоб переглянути стилізовану версію вашої пригоди. Щоб переглянути завдання на окремій сторінці, виберіть \"переглянути\" на сторінці вчителя."
 
-#, fuzzy
 msgid "adventure_exp_classes"
-msgstr ""
+msgstr "Ваша пригода використовується в наступних класах"
 
-#, fuzzy
 msgid "adventure_flagged"
-msgstr ""
+msgstr "Пригода була успішно позначена."
 
 msgid "adventure_id_invalid"
 msgstr "Цей ідентифікатор пригоди є недійсним."
@@ -237,29 +214,23 @@ msgstr "Я згоден з тим, що моя пригода може бути 
 msgid "adventure_updated"
 msgstr "Пригоду оновлено!"
 
-#, fuzzy
 msgid "adventures"
-msgstr ""
+msgstr "Пригоди"
 
-#, fuzzy
 msgid "adventures_completed"
-msgstr ""
+msgstr "Здійснено пригод: {number_of_adventures}"
 
-#, fuzzy
 msgid "adventures_info"
-msgstr ""
+msgstr "Кожен рівень Hedy має вбудовані вправи для учнів, які ми називаємо пригодами. Ви можете створювати власні пригоди та додавати їх до своїх класів. За допомогою власних пригод ви можете створювати пригоди, які будуть актуальними та цікавими для ваших учнів. Ви можете знайти більше інформації про створення власних пригод <a href=\"https://hedy.org/for-teachers/manual/features\">тут</a> ."
 
-#, fuzzy
 msgid "adventures_restored"
-msgstr ""
+msgstr "Стандартні пригоди відновлено."
 
-#, fuzzy
 msgid "adventures_ticked"
-msgstr ""
+msgstr "Пригоди відзначилися"
 
-#, fuzzy
 msgid "adventures_tried"
-msgstr ""
+msgstr "Пригоди пробували"
 
 msgid "ago"
 msgstr "{timestamp} тому"
@@ -279,9 +250,8 @@ msgstr "Всі"
 msgid "all_class_highscores"
 msgstr "Усіх учнів видно в рейтингу успішності класу"
 
-#, fuzzy
 msgid "all_rows_missing_separator"
-msgstr ""
+msgstr "Жоден із рядків не містить крапки з комою. Можливо, ви хочете дозволити нам автоматично генерувати паролі? Якщо так, натисніть перемикач паролів і створіть облікові записи знову. Якщо це не так, використовуйте крапку з комою, щоб розділити імена користувачів і паролі в таких рядках: {rows}"
 
 msgid "already_account"
 msgstr "Вже маєте обліковий запис?"
@@ -296,7 +266,7 @@ msgid "ask_needs_var"
 msgstr "Починаючи з рівня 2, `{ask}` потрібно використовувати із перемінною. Приклад: name `{is}` `{ask}` Як тебе звати?"
 
 msgid "available_in"
-msgstr ""
+msgstr "Доступний у:"
 
 msgid "back_to_class"
 msgstr "Поверніться до класу"
@@ -307,20 +277,17 @@ msgstr "Стати спонсором"
 msgid "birth_year"
 msgstr "Рік народження"
 
-#, fuzzy
 msgid "bug"
-msgstr ""
+msgstr "помилка"
 
-#, fuzzy
 msgid "by"
-msgstr ""
+msgstr "за"
 
 msgid "cancel"
 msgstr "Скасувати"
 
-#, fuzzy
 msgid "cant_parse_exception"
-msgstr ""
+msgstr "Не вдалося проаналізувати програму"
 
 msgid "certificate"
 msgstr "Свідоцтво про проходження курсу"

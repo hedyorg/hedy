@@ -63,8 +63,10 @@ levels:
                     ```
                     {echo} Який ваш улюблений колір?
                     ```
-                feedback: '`{echo}` repeats your answer back to you.'
+                feedback: '`{echo}` повторює вашу відповідь.'
             hint: Запитати щось можна за допомогою команди `{ask}`
+            question_score: '10'
+            correct_answer: C
         4:
             question_text: Що не так з цим кодом?
             code: |-
@@ -74,24 +76,26 @@ levels:
             mp_choice_options:
             -   option: У рядку 1 відсутній `{print}`.
                 feedback: Саме так!
-            -   option: Im in line 1 is spelled wrong.
-                feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
+            -   option: Команда в рядку 2 написана неправильно.
+                feedback: Команда написана правильно.
             -   option: '`{echo}` це не команда.'
                 feedback: '`{echo}` - це команда, тут ще одна помилка.'
             -   option: Нічого! Це ідеальний код!
                 feedback: Не так, дивись уважно!
             hint: Рядок 1 виглядає неправильним
+            question_score: '10'
+            correct_answer: A
         5:
             question_text: Яку команду пропущено в рядку 2?
             code: |-
-                {ask} Яка ваша улюблена домашня тварина?
-                _?_ Отже, ваш улюблений вихованець - це...
+                {ask} Яка ваша улюблена тварина?
+                _ Отже, твоя улюблена тварина...
             mp_choice_options:
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: No, you would like the answer to be repeated back to you.
+                feedback: Ні, ви хочете, щоб вам повторили відповідь.
             -   option: |-
                     ```
                     Hedy
@@ -107,16 +111,20 @@ levels:
                     {echo}
                     ```
                 feedback: Так!
+            hint: Ви хочете побачити відповідь у кінці рядка 2...
+            question_score: '10'
+            correct_answer: D
         8:
             mp_choice_options:
-            -   option: You can use it to `{ask}` a question.
-                feedback: That's what `{ask}` is for!
-            -   option: You can use it to print text.
-                feedback: That's what `{print}` is for!
-            -   option: You can use it to repeat an answer.
+            -   option: Ви можете використовувати його, щоб `{ask}` запитання.
+                feedback: Ось для чого `{ask}`!
+            -   option: Ви можете використовувати його точно так само, як `{print}`.
+                feedback: Ось для чого `{print}`!
+            -   option: Ви можете використовувати його, щоб повторити відповідь.
                 feedback: Good job!
             -   option: You can use it to make text disappear.
                 feedback: That's not right...
+            question_text: Як ви використовуєте команду `{echo}`?
         10:
             question_text: Which output will be in your outputscreen after you've run this code?
             mp_choice_options:
@@ -132,6 +140,36 @@ levels:
                     Are you ready to go to level 2?
                     Yes!
                 feedback: There are two echo commands
+        6:
+            question_text: Що не так з цим кодом?
+            mp_choice_options:
+            -   feedback: '`{print}` у рядку 1 правильний.'
+                option: У рядку 1 `{print}` слід замінити на `{ask}`.
+            -   feedback: Чудово! Ви звернули увагу!
+                option: У рядку 2 `{print}` слід замінити на `{ask}`.
+            -   feedback: '`{echo}` є правильним.'
+                option: Рядок 3 має починатися з `{print}` замість `{echo}`.
+            -   option: У рядку 4 `{print}` написано неправильно.
+                feedback: Ні, помилка в іншому місці
+            code: "{print} Привіт, я Хеді!\n{print} За яку футбольну команду ви вболіваєте?\n{echo} Ви підтримуєте...\n{print} Круто! Я теж!"
+            hint: Перевірте команди `{print}`.
+            correct_answer: B
+            question_score: '10'
+        7:
+            code: "{print} Ласкаво просимо в ресторан Hedys!\n{ask} Що б ти хотіла з'їсти?\n{echo} Отже, ви хочете замовити ...\n{print} Незабаром! Насолоджуйтесь!"
+            question_text: Що не так з цим кодом?
+            mp_choice_options:
+            -   option: У рядку 1 `{print}` потрібно замінити на `{ask}`
+                feedback: Ви впевнені, що щось не так?
+            -   feedback: Ви впевнені, що щось не так?
+                option: У рядку 1 `{print}` потрібно замінити на `{echo}`
+            -   feedback: Ви впевнені, що щось не так?
+                option: У рядку 3 `{echo}` потрібно замінити на `{print}`
+            -   option: нічого! Це ідеальний код!
+                feedback: Правильно!
+            question_score: '10'
+            hint: Перевірте код рядок за рядком
+            correct_answer: D
     2:
         1:
             mp_choice_options:

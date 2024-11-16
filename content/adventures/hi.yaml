@@ -243,6 +243,11 @@ adventures:
                             {print} 'नहीं, वे ' स्थान ' पर नहीं हैं'
                     {print} 'अब आप घर में प्रवेश कर सकते हैं!'
                     ```
+            18:
+                example_code: "```\n{print}('इस कहानी में आपका स्वागत है!')\n```\n"
+                story_text: "हम एक और कहानी छापने जा रहे हैं, लेकिन अब हमें `{print}` के साथ कोष्ठक का उपयोग करना होगा।\n\n### अभ्यास 1\nकम से कम 5 वाक्यों की एक कहानी बनाएँ। आपको अभी 'नाम' का उपयोग करने की आवश्यकता नहीं है।\n"
+                story_text_2: "### अभ्यास 2\nहमने आपके लिए पहले से ही एक `{input}` तैयार कर लिया है। सबसे पहले, अपनी कहानी में `name` वेरिएबल का उपयोग करें।\nफिर एक दूसरा `{ask}` जोड़ें और उस वेरिएबल का भी उपयोग करें।\nसुझाव: `{print}` में टेक्स्ट और वेरिएबल के बीच कॉमा को याद रखें!\n"
+                example_code_2: "```\nनाम = {input}(\"आपका नाम क्या है?\")\n{print}('इस कहानी में आपका स्वागत है!')\n```\n"
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         description: introducing add to and remove from
@@ -254,6 +259,9 @@ adventures:
                 story_text_3: |
                     ### Exercise
                     Try out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.
+                example_code_2: "```\nanimals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}\n```\n"
+                example_code: "```\nanimals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}\n```\n"
+                story_text_2: "## से हटाएँ\nयदि आप किसी सूची में आइटम जोड़ सकते हैं, तो निश्चित रूप से आप उन्हें हटा भी सकते हैं। यह `{remove} {from}` कमांड के साथ किया जाता है।\n"
     and_or_command:
         description: introducing and or
         levels:
@@ -262,6 +270,8 @@ adventures:
                     We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.
 
                     If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct।
+                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
+        default_save_name: और या
     ask_command:
         description: Introduction ask command
         levels:
@@ -275,6 +285,7 @@ adventures:
                     favorite_animal is ask What is your favorite animal?
                     print I like favorite_animal
                     ```
+        name: '{ask}'
     calculator:
         levels:
             6:
