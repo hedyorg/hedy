@@ -281,9 +281,9 @@ adventures:
                     ### Вправи
                     Спробуйте нові команди у цьому віртуальному ресторані. Додайте смак, на який гравець сподівається, до списку та видаліть смаки, на які у нього алергія.
                 story_text_2: "## Видалити з\nЯкщо ви можете додавати елементи до списку, ви, звичайно, можете їх і вилучати. Це робиться за допомогою команди `{remove} {from}`.\n"
-                example_code: "```\nтварини {is} собака, кіт, кенгуру\nlike {is} {ask} Яка твоя улюблена тварина?\n{add} як {to_list} тварин\n{print} Я вибираю тварин {at} {random}\n```\n"
+                example_code: "```\nanimals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}\n```\n"
                 example_code_3: "```\n{print} Mystery milkshake\nароматизатори{is} полуниця, шоколад, ваніль\nнадія {is} {ask} На який смак ти сподіваєшся?\n_\nалергія {is} {ask} У вас алергія на будь-які смаки?\n_\n{print} Ви отримуєте молочний коктейль зі смаком {at} {random}\n```\n"
-                example_code_2: "```\nтварини {is} собака, кіт, кенгуру\ndislike {is} {ask} Яка тварина тобі не подобається?\n{remove} не подобається {from} тварин\n{print} Я вибираю тварин {at} {random}\n```\n"
+                example_code_2: "```\nanimals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}\n```\n"
         name: '{add} {to_list} & {remove} {from}'
     and_or_command:
         description: представляємо {and} & {or}
@@ -309,10 +309,10 @@ adventures:
                 story_text: "## Команда ask\nТепер, коли ми можемо використовувати **змінні** у наших кодах, нам більше не потрібна команда `{echo}`.\nМи можемо використовувати змінні для зберігання відповідей на наші запитання, і таким чином ми можемо використовувати відповіді на кілька запитань у наших кодах.\nПеревірте це:\n\nТаким чином ваш код стає інтерактивним!\n"
                 example_code_2: "```\nfavorite_animal {is} {ask} Яка твоя улюблена тварина?\n{print} Мені подобається favorite_animal\n```\n"
                 story_text_2: "### Вправи\nНа попередній вкладці ви вправлялися в установці змінних за допомогою команди `{is}`.\nВи створили принаймні 3 змінні та використали їх у команді друку.\nТепер, замість встановлення змінних, ми хочемо, щоб ви зробили змінні інтерактивними, як ми зробили в нашому прикладі.\n\nСкопіюйте код із попередньої вкладки та зробіть змінні інтерактивними за допомогою команд `{ask}`.\n"
-                example_code: "```\nім'я {is} {ask} Як тебе звати?\n{print} Привіт ім'я\nage {is} {ask} Скільки тобі років?\n{print} ім'я вік років.\n```\n"
+                example_code: "```\nname {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old.\n```\n"
             18:
                 story_text: Остання зміна, яку нам потрібно буде зробити, щоб отримати код Python, це зміна `{ask}` на `{input}`.
-                example_code: "```\n{print}('Мене звати Хеді!')\nname = {input}('Як тебе звати?')\n{print}('Тебе звуть ', ім'я)\n```\n"
+                example_code: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
         default_save_name: ask_command
         name: '{ask}'
     calculator:
@@ -322,10 +322,10 @@ adventures:
                     Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
                 example_code: |
                     ```
-                    number_1 = {ask} 'Заповніть перше число:'
-                    number_2 = {ask} 'Заповніть друге число:'
-                    правильна_відповідь = число_1 * число_2
-                    {print} number_1 ' разів ' number_2 ' є ' правильною_відповіддю
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
                     ```
                 story_text_2: |
                     ### Вправи
@@ -941,12 +941,12 @@ adventures:
                     Чи можете ви створити код, щоб отримати загальну кількість балів за 8 кубиків? Для цього вам потрібно скопіювати та вставити кілька рядків коду.
                 example_code: |
                     ```
-                    вибір = 1, 2, 3, 4, 5, дощовий черв’як
-                    бали = 0
-                    кинути = вибір {на} {випадковий}
-                    {print} 'ви кинули' кинути
-                    {якщо} кинути {є} бали дощового черв’яка = бали + 5 {else} бали = бали + кинути
-                    {print} 'це ' точки ' точки'
+                    choices = 1, 2, 3, 4, 5, earthworm
+                    points = 0
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
                     ```
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
@@ -1015,13 +1015,13 @@ adventures:
                     І... чи можете ви придумати рішення, коли ваш список порожній?
                 example_code_2: |
                     ```
-                    люди = мама, тато, Емма, Софі
-                    посудомийна машина = люди {в} {випадково}
-                    {print} 'У понеділок посуд миє: ' посудомийна машина
-                    {прибрати} посудомийну машину {від} людей
-                    посудомийна машина = люди {в} {випадково}
-                    {print} 'Вівторок миє посуд: ' посудомийна машина
-                    {прибрати} посудомийну машину {від} людей
+                    people = mom, dad, Emma, Sophie
+                    dishwasher = people {at} {random}
+                    {print} 'Monday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
+                    dishwasher = people {at} {random}
+                    {print} 'Tuesday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
                     ```
             7:
                 story_text: |
@@ -1122,12 +1122,12 @@ adventures:
                     Ваша програма повинна складатися з принаймні 10 рядків коду та мати принаймні одну команду `{if}` і `{else}`.
                 example_code: |
                     ```
-                    друзі {є} Джордан, Люсі, Дейв
-                    {print} "Я можу передбачити, чи виграєте ви завтра в лотерею!"
-                    person {is} {ask} 'Хто ти?'
-                    good_answer {is} Ура! Ти виграв!, Ти обов'язково виграєш!, У нас є переможець!
-                    bad_answer {is} Не пощастило! Спробуйте ще раз!, Інша людина виграє, Ви програєте!
-                    {if} особа {in} друзі {print} good_answer {at} {random}
+                    friends {is} Jordan, Lucy, Dave
+                    {print} 'I can predict if you will win the lottery tomorrow!'
+                    person {is} {ask} 'Who are you?'
+                    good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
+                    bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
+                    {if} person {in} friends {print} good_answer {at} {random}
                     {else} {print} bad_answer {at} {random}
                     ```
             6:
@@ -1141,16 +1141,16 @@ adventures:
                     Чи можете ви придумати власну (безглузду) машину для ворожіння?
                 example_code: |
                     ```
-                    {print} 'Я ворожка Хеді!'
-                    {print} «Я можу передбачити, скільки дітей у вас буде, коли виростете!»
-                    age = {ask} 'Скільки тобі років?'
-                    siblings = {ask} 'Скільки у вас братів і сестер?'
-                    length = {ask} 'Який у вас зріст у сантиметрах?'
-                    діти = довжина / вік
-                    діти = діти - брати і сестри
-                    {print} "Ви отримаєте..."
-                    {сон}
-                    {print} діти 'діти!'
+                    {print} 'I am Hedy the fortune teller!'
+                    {print} 'I can predict how many kids youll get when you grow up!'
+                    age = {ask} 'How old are you?'
+                    siblings = {ask} 'How many siblings do you have?'
+                    length = {ask} 'How tall are you in centimetres?'
+                    kids = length / age
+                    kids = kids - siblings
+                    {print} 'You will get ...'
+                    {sleep}
+                    {print} kids ' kids!'
                     ```
             7:
                 story_text: |
@@ -1279,15 +1279,15 @@ adventures:
             2:
                 example_code: |
                     ```
-                    monster_1 {є} 👻
+                    monster_1 {is} 👻
                     monster_2 {is} 🤡
                     monster_3 {is} 👶
-                    {print} Ви входите в будинок з привидами.
-                    {print} Раптом ви бачите чудовисько_1
-                    {print} Ви біжите в іншу кімнату...
-                    {print} Але там на вас чекає чудовисько_2!
-                    {print} О ні! Швидше на кухню.
-                    {print} Але коли ви входите, monster_3 атакує вас!
+                    {print} You enter the haunted house.
+                    {print} Suddenly you see a monster_1
+                    {print} You run into the other room...
+                    {print} But a monster_2 is waiting there for you!
+                    {print} Oh no! Quickly get to the kitchen.
+                    {print} But as you enter monster_3 attacks you!
                     ```
                 example_code_2: |
                     ```
@@ -1415,16 +1415,16 @@ adventures:
             14:
                 example_code: |
                     ```
-                    age = {ask} 'Скільки тобі років?'
-                    {if} вік > 12
-                        {print} 'Ти старший за мене!'
+                    age = {ask} 'How old are you?'
+                    {if} age > 12
+                        {print} 'You are older than I am!'
                     ```
                     ```
-                    age = {ask} 'Скільки тобі років?'
-                    {if} вік < 12
-                        {print} 'Ти молодший за мене!'
-                    {інше}
-                        {print} 'Ти старший за мене!'
+                    age = {ask} 'How old are you?'
+                    {if} age < 12
+                        {print} 'You are younger than me!'
+                    {else}
+                        {print} 'You are older than me!'
                     ```
                 example_code_3: |
                     ```
@@ -1598,12 +1598,12 @@ adventures:
             18:
                 example_code_2: |
                     ```
-                    температура = 25
-                    {print}('Зараз ', температура, 'градуси на вулиці')
+                    temperature = 25
+                    {print}('It is ', temperature, ' degrees outside')
                     ```
                     ```
-                    ім'я = 'Hedy'
-                    {print}('Мене звати ', ім'я)
+                    name = 'Hedy'
+                    {print}('My name is ', name)
                     ```
     random_command:
         levels:
@@ -1690,10 +1690,10 @@ adventures:
             3:
                 example_code: |
                     ```
-                    страви {є} спагетті, брюссельська капуста, гамбургери
-                    {print} Сьогодні ввечері у вас будуть страви {at} {random}!
-                    ціни 1 євро, 10 євро, 100 євро
-                    {print} Це будуть ціни {at} {random}, будь ласка.
+                    dishes {is} spaghetti, brussels sprouts, hamburgers
+                    {print} You will have dishes {at} {random} tonight!
+                    prices {is} 1 euro, 10 euros, 100 euros
+                    {print} That will be prices {at} {random} please.
                     ```
                 story_text_2: |
                     ### Вправи
@@ -1731,10 +1731,10 @@ adventures:
                     Спробуйте додати `{if}` після кожної команди `{ask}` у вашому коді, щоб зробити код максимально інтерактивним!
                 example_code: |
                     ```
-                    drinks_in_stock {is} вода, лимонад, кола, апельсиновий сік
-                    drink {is} {ask} 'Що б ти хотів випити?'
-                    {if} drink {in} drinks_in_stock {print} 'Один ' напій 'незабаром!'
-                    {else} {print} "На жаль, ми це не продаємо"
+                    drinks_in_stock {is} water, lemonade, cola, orange juice
+                    drink {is} {ask} 'What would you like to drink?'
+                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'coming up!'
+                    {else} {print} 'Sorry, we do not sell that'
                     ```
             6:
                 story_text: |
@@ -1889,9 +1889,9 @@ adventures:
             1:
                 example_code: |
                     ```
-                    {print} що ти обираєш?
-                    {запитувати} вибрати камінь, папір або ножиці
-                    {echo}, тож ваш вибір був:
+                    {print} what do you choose?
+                    {ask} choose from rock, paper or scissors
+                    {echo} so your choice was:
                     ```
             2:
                 story_text: |
@@ -2092,13 +2092,13 @@ adventures:
                     Тепер ви можете повторювати рядки з 2 по 7 скільки завгодно разів, копіюючи рядки.
                 example_code: |
                     ```
-                    вірш = 99
-                    {print} verse 'пляшки пива на стіні'
-                    {print} verse 'bottles of beer'
-                    {print} "Візьміть один, передайте"
-                    бачити = бачити - 1
-                    {print} verse 'пляшки пива на стіні'
-                    {сон}
+                    verse = 99
+                    {print} verse ' bottles of beer on the wall'
+                    {print} verse ' bottles of beer'
+                    {print} 'Take one down, pass it around'
+                    verse = verse - 1
+                    {print} verse ' bottles of beer on the wall'
+                    {sleep}
                     ```
                 example_code_2: |
                     ```

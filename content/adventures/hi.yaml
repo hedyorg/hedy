@@ -259,8 +259,8 @@ adventures:
                 story_text_3: |
                     ### Exercise
                     Try out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.
-                example_code_2: "```\nजानवर {is} कुत्ता, बिल्ली, कंगारू\nनापसंद {is} {ask} आपको कौन-सा जानवर पसंद नहीं है?\n{remove} नापसंद {from} जानवर\n{print} मैं जानवरों को चुनता हूँ {at} {random}\n```\n"
-                example_code: "```\nजानवर {is} कुत्ता, बिल्ली, कंगारू\nपसंद {is} {ask} आपका पसंदीदा जानवर कौन सा है?\n{add} पसंद {to_list} जानवर\n{print} मैं जानवरों को चुनता हूँ {at} {random}\n```\n"
+                example_code_2: "```\nanimals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}\n```\n"
+                example_code: "```\nanimals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}\n```\n"
                 story_text_2: "## से हटाएँ\nयदि आप किसी सूची में आइटम जोड़ सकते हैं, तो निश्चित रूप से आप उन्हें हटा भी सकते हैं। यह `{remove} {from}` कमांड के साथ किया जाता है।\n"
     and_or_command:
         description: introducing and or
@@ -270,7 +270,7 @@ adventures:
                     We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use `{and}` and `{or}`.
 
                     If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct।
-                example_code: "```\nनाम = {ask} 'आपका नाम क्या है?'\nउम्र = {ask} 'आपकी उम्र क्या है?'\n{if} नाम {is} 'हेडी' {and} उम्र {is} 2\n{print} 'आप असली हेडी हैं!'\n```\n"
+                example_code: "```\nname = {ask} 'what is your name?'\nage = {ask} 'what is your age?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'You are the real Hedy!'\n```\n"
         default_save_name: और या
     ask_command:
         description: Introduction ask command
