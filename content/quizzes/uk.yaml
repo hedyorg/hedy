@@ -121,25 +121,32 @@ levels:
             -   option: Ви можете використовувати його точно так само, як `{print}`.
                 feedback: Ось для чого `{print}`!
             -   option: Ви можете використовувати його, щоб повторити відповідь.
-                feedback: Good job!
-            -   option: You can use it to make text disappear.
-                feedback: That's not right...
+                feedback: хороша робота!
+            -   option: Ви можете використовувати його, щоб змусити текст зникнути.
+                feedback: це не правильно...
             question_text: Як ви використовуєте команду `{echo}`?
+            question_score: '10'
+            correct_answer: C
+            hint: '`{echo}` використовується після команди `{ask}`.'
         10:
-            question_text: Which output will be in your outputscreen after you've run this code?
+            question_text: Який вихід буде на екрані виводу після виконання цього коду?
             mp_choice_options:
             -   option: Are you ready to go to level 2?
-                feedback: There are two echo commands
+                feedback: Є дві команди `{echo}`
             -   option: |-
                     Yes!
                     Yes!
                 feedback: Great job!
             -   option: Yes!
-                feedback: There are two echo commands
+                feedback: Є дві команди `{echo}`
             -   option: |-
                     Are you ready to go to level 2?
                     Yes!
-                feedback: There are two echo commands
+                feedback: Є дві команди `{echo}`
+            question_score: '10'
+            code: "{ask} Ви готові перейти на рівень 2?\n{echo}\n{echo}"
+            hint: ходімо!
+            correct_answer: B
         6:
             question_text: Що не так з цим кодом?
             mp_choice_options:
@@ -170,18 +177,36 @@ levels:
             question_score: '10'
             hint: Перевірте код рядок за рядком
             correct_answer: D
+        9:
+            mp_choice_options:
+            -   option: '`{print}` в лінії 1 слід `{ask}`'
+                feedback: Ні, `{print}` є право. Що таке питання?
+            -   feedback: Супер!
+                option: '`{print}` в рядку 2 слід `{ask}`'
+            -   feedback: Ні, `{echo}` має рацію. Де ставиться питання?
+                option: '`{echo}` в лінії 3 слід `{ask}`'
+            -   option: нічого! Це ідеальний код!
+                feedback: Дивись уважно для помилки...
+            question_score: '10'
+            code: "{print} Привіт!\n{print} Як ви робите?\n{echo} Так ви..."
+            hint: '`{ask}` дозволяє запитати питання'
+            question_text: Що неправильно з цим кодом?
+            correct_answer: B
     2:
         1:
             mp_choice_options:
-            -   option: Ви можете використовувати команду {print}, щоб поставити запитання.
-                feedback: Це те, про що ми просимо
-            -   option: Для повторення відповідей можна використовувати команду {ask}.
+            -   option: Ви можете використовувати команду `{print}`, щоб ставити запитання.
+                feedback: Ось для чого призначений `{ask}`
+            -   option: Ви можете використовувати команду `{ask}`, щоб повторити відповіді.
                 feedback: Це не так
-            -   option: З допомогою команди {print} можна зробити так, щоб текст виводився на екран
-                feedback: Good
-            -   option: За допомогою команди {sleep} можна прибрати текст з екрану.
-                feedback: No one command doesn't work anymore.
+            -   option: За допомогою команди `{print}` ви можете змусити текст відображатися
+                feedback: Чудово
+            -   option: За допомогою команди `{sleep}` ви можете видалити текст з екрана.
+                feedback: '`{sleep}` працює не так.'
             hint: '`{print}` працює так само, як і на рівні 1'
+            question_text: Яке твердження вірне?
+            question_score: '10'
+            correct_answer: C
         6:
             code: |-
                 {print} And the award for best programming language goes to...
@@ -219,6 +244,10 @@ levels:
                 {print} Your favorite icecream is...
                 {sleep}
                 {print} flavor
+        2:
+            mp_choice_options:
+            -   option: "```\nім'я {is} {ask} Як тебе звати?\n```"
+            question_text: Який код правильний?
     3:
         1:
             question_text: What command do you use to let Hedy pick something arbitrarily?
