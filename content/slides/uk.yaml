@@ -167,10 +167,10 @@ levels:
             code: "{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} \"СЮРПРИЗ!\""
         7:
             header: Лапки та змінні
-            code: "ім'я {is} Гаррі\n{print} 'Привіт ' name ', як справи?'"
+            code: "name {is} Harry\n{print} 'Hello ' name ', how are you?'"
             text: "Коли імена змінних використовуються в середині речення, ви повинні залишити змінні поза лапками.\nОднак решта речення потребує лапок. Це виглядає так:"
         5:
-            code: name {is} {ask} 'ім'я будь ласка?'
+            code: name {is} {ask} 'name please?'
             header: Лапки з запитом
             text: Це також стосується команди `{ask}`.
         11:
@@ -198,7 +198,7 @@ levels:
             code: "{очистити}\n{print} Який чудовий день, щоб піти на пляж!\n{ask} «Ви хочете побудувати замок з піску чи поплавати в океані?»\n{print} \"Ви хотіли б зайнятися\"\n{print} \"Я теж хотів би це зробити\"\n{print} «Погляньте на ці чудові черепашки!»\nкольори {is} 'помаранчевий, срібний, білий, коричневий'\n{print} 'Мені подобаються кольори {at} {random} one!'\nвибір {є} {питати} Який тобі подобається?"
             debug: 'True'
         6:
-            code: "ім'я {is} Гаррі\n{print} Ім'я \"Привіт\""
+            code: "name {is} Harry\n{print} 'Hello ' name"
             header: Лапки та змінні
             text: "Ви не хочете, щоб імена змінних друкувались на екрані.\nОсь чому змінні слід не брати в лапки, наприклад:"
         8:
@@ -225,7 +225,7 @@ levels:
         5:
             header: Додати до
             text: "Ви можете додати елементи до списку за допомогою команди `{add}` `{to}`.\n\nВи можете вибрати, що додати до списку, або скористатися командою `{add}` `{to}` у поєднанні з командою `{ask}`.\nТаким чином ви можете дозволити гравцеві вирішувати, що додати до списку."
-            code: "тварини {is} собака, кіт, кенгуру\nlike {is} {ask} Яка твоя улюблена тварина?\n{add} як {to_list} тварин\n{print} Я вибираю тварин {at} {random}"
+            code: "animals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}"
         7:
             debug: 'True'
             editor: "music_genres {is} рок, поп, метал, інді, джаз\nSelect_genre Музика {at} {random}\nДовідник Послухайте вибраний жанр\nкрасиві {ask} Ви любите цей жанр?\n{remove} обраний_genre {від} вибрано_genre\nРусскийУкраїнськаБеларускаяOʻzbek tiliEnglish\n{print} або ви віддаєте перевагу... Другий_хойсе {at} {random}\n0 товар(ов) - 0.00 р.\nДовідник Я люблю музику_genre {random} кращий!"
@@ -236,5 +236,5 @@ levels:
             text: Насолоджуйтесь пригодами на рівні 3!
         6:
             header: Видалити з
-            code: "тварини {is} собака, кіт, kangaroo\nНемовля {is} {ask} Що таке тварини?\n{remove} відключити {від} тварин\nДовідник Я обирає тварин {at} {random}"
+            code: "animals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
             text: "Протилежністю команди `{add}` `{to}` є команда `{remove}` `{from}`.\nЦя команда видаляє елемент зі списку."
