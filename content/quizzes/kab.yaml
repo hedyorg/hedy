@@ -25,6 +25,8 @@ levels:
                 feedback: There are two `{echo}` commands
             -   option: "Are you ready to go to level 2?\nYes!"
                 feedback: There are two `{echo}` commands
+            question_score: '10'
+            correct_answer: B
         1:
             question_text: Amek i as-qqaren i tutlayt-a n usihel?
             mp_choice_options:
@@ -74,6 +76,8 @@ levels:
             -   {}
             -   feedback: D amahil igerrzen!
             -   feedback: Ayagi d arameɣtu...
+            question_score: '10'
+            correct_answer: C
         7:
             hint: Senqed tangalt izirig s yizirig
             mp_choice_options:
@@ -102,6 +106,8 @@ levels:
             mp_choice_options:
             -   {}
             -   feedback: Ayyuz!
+            correct_answer: B
+            question_score: '10'
     9:
         10:
             mp_choice_options:
@@ -112,6 +118,10 @@ levels:
                 feedback: Izirig wis 2 ilaq ad ibdu s 4
             -   option: izirig wis 2 ilaq ad ibdu s 4 tallunin akked yizirig wis 3 s 8
             hint: Izirig amezwaru ur ilaq ara ad ibdu s tallunin
+        9:
+            mp_choice_options:
+            -   {}
+            -   option: Ala 1
     17:
         9:
             correct_answer: C
@@ -186,8 +196,8 @@ levels:
         6:
             code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Azul'"
             mp_choice_options:
-            -   {}
-            -   {}
+            -   option: 1 tikkelt
+            -   option: 2 n tikkal
             -   option: 3 tikkal
         5:
             code: "{for} i {in} {range} 1 {to} 10\n{print} i"
@@ -202,6 +212,10 @@ levels:
             -   {}
             -   {}
             -   option: '`{for}`'
+        9:
+            mp_choice_options:
+            -   feedback: Ɛreḍ tikkelt nniḍen
+            -   feedback: Ɛreḍ tikkelt nniḍen
     12:
         6:
             mp_choice_options:
@@ -241,6 +255,12 @@ levels:
             -   option: '`!=`'
             -   option: '`=`'
             correct_answer: D
+        5:
+            mp_choice_options:
+            -   option: '`> 12`'
+            -   option: '`>= 12`'
+            -   option: '`< 12`'
+            -   option: '`<= 12`'
     2:
         5:
             correct_answer: C
@@ -258,6 +278,9 @@ levels:
         9:
             question_score: '10'
             correct_answer: B
+            mp_choice_options:
+            -   {}
+            -   feedback: Gedha!
         6:
             mp_choice_options:
             -   feedback: '`{echo}`'
@@ -265,11 +288,30 @@ levels:
             -   option: '`{echo}`'
             -   option: '`{print}`'
             -   option: '`{ask}`'
+            correct_answer: A
+            question_score: '10'
         1:
             mp_choice_options:
             -   {}
             -   {}
             -   feedback: Igerrez
+            correct_answer: C
+            question_score: '10'
+        2:
+            question_score: '10'
+            correct_answer: A
+        3:
+            question_score: '10'
+            correct_answer: C
+        4:
+            correct_answer: D
+            question_score: '10'
+        8:
+            correct_answer: C
+            question_score: '10'
+        10:
+            question_score: '10'
+            correct_answer: D
     3:
         8:
             correct_answer: D
@@ -278,15 +320,43 @@ levels:
             question_score: '10'
             mp_choice_options:
             -   feedback: '`{print}` i usiggez n uḍris'
+                option: '`{print}`'
             -   feedback: '`{ask}` tettwaseqdac i umuddu n usteqsi'
                 option: '`{ask}`'
             -   option: '`{is}`'
             -   option: '`{at} {random}`'
+                feedback: Igerrez!
             correct_answer: D
         3:
             question_score: '10'
+            correct_answer: C
         9:
             correct_answer: C
+            question_score: '10'
+        4:
+            correct_answer: B
+            question_score: '10'
+        5:
+            question_score: '10'
+            correct_answer: D
+        6:
+            mp_choice_options:
+            -   {}
+            -   feedback: Igerrez
+            correct_answer: B
+            question_score: '10'
+        7:
+            correct_answer: C
+            mp_choice_options:
+            -   {}
+            -   {}
+            -   feedback: Igerrez!
+            question_score: '10'
+        2:
+            question_score: '10'
+            correct_answer: A
+        10:
+            correct_answer: A
             question_score: '10'
     4:
         2:
@@ -294,6 +364,9 @@ levels:
             -   {}
             -   {}
             -   option: "```\n{print} azul\n```"
+        1:
+            correct_answer: A
+            question_score: '10'
     5:
         1:
             question_score: '10'
@@ -308,6 +381,9 @@ levels:
         8:
             question_score: '10'
             correct_answer: B
+            mp_choice_options:
+            -   {}
+            -   feedback: Igerrez!
         9:
             correct_answer: C
             question_score: '10'
@@ -319,6 +395,8 @@ levels:
         4:
             mp_choice_options:
             -   option: '30'
+        7:
+            question_score: '10'
     7:
         4:
             mp_choice_options:
@@ -338,3 +416,8 @@ levels:
         6:
             correct_answer: D
             question_score: '10'
+        4:
+            mp_choice_options:
+            -   {}
+            -   {}
+            -   feedback: D amahil igerrzen!
