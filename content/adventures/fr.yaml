@@ -267,6 +267,7 @@ adventures:
                     naam = {input}("Quel est votre nom?")
                     {print}('Bienvenue dans cette histoire!')
                     ```
+        default_save_name: Histoire
     add_remove_command:
         description: Introduction {add} {to_list} et {remove} {from}
         levels:
@@ -826,8 +827,7 @@ adventures:
                 story_text: |-
                     ### Exercice
                     Déboguez ce code. Bonne chance !
-                example_code: "**Attention ! Ce code doit être débogué !**\n```\n{define}recommender_un_film {with} nom\n    films_d_action == \"Piège de cristal\", \"Fast and Furious\", \"Inglorious Bastards\"\n    films_romantiques = \"Love Actually\", \"Les Pages de notre amour\", \"Titanic\"\n    comédies = \"Mr Bean\" \"Barbie\"\"Deadpool\"\n    films_enfants = \"Les Minions\", \"Paddington\", \"Encanto\"\n    {if} nom {is} \"Camila\" {or} name {is} \"Emmanuel\"\n        film_recommandé = films_enfants {at} {random}\n    {if} nom {is} \"Pedro\" {or} \"Gabrielle\"\n            humeur = {ask} \"De quelle humeur êtes-vous ?\"\n        {if} humeur {is} \"energique\"\n            film_recommandé = comédies {at} {random}\n        {if} humeur {is} \"romantique\"\n            film_recommandé = films_romantiques\n    {if} humeur {is} \"joyeuse\"\n            film_recommandé = comédies {at} {random}\n\n{print} \"Je recommande \" film_recommandé \" à \" nom\n\nnom = {ask} \"Qui regarde ?\"\nrecommendation
-                    = {ask} \"Voulez-vous une recommandation ?\"\n{if} recommendation {is} \"oui\"\n{print} recommender_un_film {with} nom\n{else}\n{print} \"Pas de problème !\"\n```\n"
+                example_code: "**Attention ! Ce code doit être débogué !**\n```\n{define}recommender_un_film {with} nom\n    films_d_action == \"Piège de cristal\", \"Fast and Furious\", \"Inglorious Bastards\"\n    films_romantiques = \"Love Actually\", \"Les Pages de notre amour\", \"Titanic\"\n    comédies = \"Mr Bean\" \"Barbie\"\"Deadpool\"\n    films_enfants = \"Les Minions\", \"Paddington\", \"Encanto\"\n    {if} nom {is} \"Camila\" {or} name {is} \"Emmanuel\"\n        film_recommandé = films_enfants {at} {random}\n    {if} nom {is} \"Pedro\" {or} \"Gabrielle\"\n            humeur = {ask} \"De quelle humeur êtes-vous ?\"\n        {if} humeur {is} \"energique\"\n            film_recommandé = comédies {at} {random}\n        {if} humeur {is} \"romantique\"\n            film_recommandé = films_romantiques\n    {if} humeur {is} \"joyeuse\"\n            film_recommandé = comédies {at} {random}\n\n{print} \"Je recommande \" film_recommandé \" à \" nom\n\nnom = {ask} \"Qui regarde ?\"\nrecommendation = {ask} \"Voulez-vous une recommandation ?\"\n{if} recommendation {is} \"oui\"\n{print} recommender_un_film {with} nom\n{else}\n{print} \"Pas de problème !\"\n```\n"
             14:
                 story_text: |-
                     ### Exercice

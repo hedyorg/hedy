@@ -930,17 +930,17 @@ class TestsLevel16(HedyTester):
         lijstje is ['kip', 'haan', 'kuiken']
         if x is pressed
             for dier in lijstje
-                print 'dier'""")
+                print dier""")
 
         expected = self.dedent("""\
-        lijstje = Value([Value('kip'), Value('haan'), Value('kuiken')])
+        global_scope_ = dict()
+        global_scope_["lijstje"] = Value([Value('kip'), Value('haan'), Value('kuiken')])
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        global if_pressed_x_
         if_pressed_mapping['x'] = 'if_pressed_x_'
+        global if_pressed_x_
         def if_pressed_x_():
-          global dier, lijstje
-          for dier in lijstje.data:
-            print(f'''dier''')
+          for dier in (global_scope_.get("lijstje") or lijstje).data:
+            print(f'''{global_scope_.get("dier") or dier}''')
             time.sleep(0.1)
         extensions.if_pressed(if_pressed_mapping)""")
 

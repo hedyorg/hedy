@@ -159,9 +159,9 @@ adventures:
                 example_code: |
                     ```
                     {print} "OH NO! El T-rex s'apropa!"
-                    end = {ask} "Quin final vols, trist o feliç?"
-                    {if} end {is} feliç
-                        {print} "En Ricard salta a temps dins la màquina del temps!"
+                    final = {ask} "Quin final vols, trist o feliç?"
+                    {if} final {is} feliç
+                        {print} "En Ricard torna a temps dins la màquina del temps!"
                         {print} _
                     {else}
                         {print} "Oh no! En Ricard és massa lent..."
@@ -1257,16 +1257,16 @@ adventures:
             6:
                 example_code: |
                     ```
-                    persones = mama, papa, Emma, Sofia
+                    gent = mama, papa, Emma, Sofia
                     emma_renta = 0
-                    netejadora = persones {at} {random}
-                    {print} 'Li toca rentar plats a ' netejadora 
-                    {if} rentadora {is} Emma emma_renta = emma_renta + 1
-                    {print} 'Emma farà els plats aquesta setmana' emma_renta 'vegades'
+                    netejador = gent {at} {random}
+                    {print} 'Li toca rentar plats a ' netejador 
+                    {if} netejador {is} Emma emma_renta = emma_renta + 1
+                    {print} "L'Emma rentarà els plats aquesta setmana" emma_renta "vegades"
                     ```
 
-                    Ara pots copiar de la línia 3 a la 5 unes quantes vegades (pex. 7 vegades per fer una setmana).
-                    Pots fer el codi per calcular tota una setmana?
+                    Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
+                    Do you make the code for the whole week?
                 story_text_2: |
                     Si tens molta mala sort, el programa anterior podria triar-te per a rentar plats de tota la setmana! I això no és just!
                     Per crear un sistema més just, pots utilitzar l'ordre `{remove}` per eliminar la persona escollida de la llista. D'aquesta manera no haureu de tornar a rentar els plats fins que tothom hagi tingut el seu torn.
@@ -1280,7 +1280,7 @@ adventures:
                     {print} "Dilluns renta: " netejador
                     {remove} netejador {from} gent
                     netejador = gent {at} {random}
-                    {print} "Dimarts renta:: " netejador
+                    {print} "Dimarts renta: " netejador
                     {remove} netejador {from} gent
                     ```
                 story_text: "Quantes vegades rentarà els plats cadascú? És just? Pots comptar-ho en aquest nivell.\n"
@@ -1293,7 +1293,7 @@ adventures:
                 example_code: |
                     ```
                     gent = mama, papa, Emma, Sofia
-                    {repeat} _ _ {print} 'Rentar plats li toca a ' _ _ _
+                    {repeat} _ _ {print} 'Li toca rentar plats a ' _ _ _
                     ```
             10:
                 story_text: |

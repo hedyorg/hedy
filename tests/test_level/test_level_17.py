@@ -578,9 +578,10 @@ class TestsLevel17(HedyTester):
 
         expected = self.dedent(
             f"""\
+            global_scope_ = dict()
             if_pressed_mapping = {{"else": "if_pressed_default_else"}}
-            global if_pressed_x_
             if_pressed_mapping['x'] = 'if_pressed_x_'
+            global if_pressed_x_
             def if_pressed_x_():""",
             (self.color_transpiled('red'), '  '),
             "extensions.if_pressed(if_pressed_mapping)")
@@ -705,20 +706,21 @@ class TestsLevel17(HedyTester):
             print 'Other'""")
 
         expected = self.dedent("""\
-         if_pressed_mapping = {"else": "if_pressed_default_else"}
-         global if_pressed_a_
-         if_pressed_mapping['a'] = 'if_pressed_a_'
-         def if_pressed_a_():
-           print(f'''A''')
-         global if_pressed_b_
-         if_pressed_mapping['b'] = 'if_pressed_b_'
-         def if_pressed_b_():
-           print(f'''B''')
-         global if_pressed_else_
-         if_pressed_mapping['else'] = 'if_pressed_else_'
-         def if_pressed_else_():
-           print(f'''Other''')
-         extensions.if_pressed(if_pressed_mapping)""")
+        global_scope_ = dict()
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['a'] = 'if_pressed_a_'
+        global if_pressed_a_
+        def if_pressed_a_():
+          print(f'''A''')
+        if_pressed_mapping['b'] = 'if_pressed_b_'
+        global if_pressed_b_
+        def if_pressed_b_():
+          print(f'''B''')
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        global if_pressed_else_
+        def if_pressed_else_():
+          print(f'''Other''')
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(code=code, expected=expected)
 

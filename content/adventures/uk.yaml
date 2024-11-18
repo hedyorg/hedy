@@ -71,11 +71,12 @@ adventures:
                     {print} it was an animals {at} {random}
                     ```
                 story_text_3: |
-                    Ось приклад команди `{remove}` у вашій історії
+                    Це приклад команди `{remove}` у вашій історії
 
-                    Скопіюйте свою історію з попередніх рівнів у цей рівень.
-                    У цьому рівні ви вивчили 3 нові команди `{at} {random}`, `{add} {to_list}` та `{remove} {from}` .
-                    Додайте нові рядки коду до вашої історії, щоб усі нові команди з'явилися у ній хоча б один раз.
+                    ### Вправи
+                    Скопіюйте історію з попередніх рівнів на цей рівень.
+                    На цьому рівні ви вивчили 3 нові команди `{at} {random}`, `{add} {to_list}` і `{remove} {from}`.
+                    Додайте нові рядки коду до своєї історії, щоб усі нові команди були представлені у вашій історії принаймні один раз.
                 example_code_3: |
                     ```
                     {print} Його став занадто важким.
@@ -86,12 +87,13 @@ adventures:
                     ```
             4:
                 story_text: |
-                    ##Вправа
-                    Скопіюйте приклад коду і змусьте його працювати, додавши лапки в рядках.
+                    ### Вправи
+                    Скопіюйте приклад коду та завершіть його, додавши лапки до пропусків у рядках 1 і 2.
+                    Пробіли в рядках 3 і 4 слід замінювати не лапками, а командою `{sleep}` і `{clear}`. Ви можете змусити це працювати?
 
-                    ##Вправа2
-                    Поверніться на попередній рівень і скопіюйте код вашої історії. Зробіть так, щоб код працював на цьому рівні, додавши лапки в потрібних місцях.
-                    Зверніть увагу: Змінні у вашій історії повинні бути поза лапками. Так само, як у другому рядку прикладу коду. У цьому рядку ім'я змінної знаходиться поза лапками.
+                    ### Вправа 2
+                    Поверніться на попередній рівень і скопіюйте код історії. Змусьте код працювати на цьому рівні, додавши лапки в потрібні місця.
+                    Пам’ятайте: змінні у вашій історії не повинні бути взяті в лапки. Так само, як другий рядок прикладу коду. У цьому рядку назва змінної поміщена поза лапками.
                 example_code: |
                     ```
                     name {is} {ask} _ Як вас звати? _
@@ -132,11 +134,11 @@ adventures:
             7:
                 story_text: |
                     В історії хтось вимовляє слова кілька разів. Наприклад, коли хтось кличе на допомогу або співає пісню.
-                    Ви можете вставити такі повтори у свою історію на цьому рівні за допомогою `{repeat}`.
+                    Ви можете додати такі повтори у свою історію на цьому рівні за допомогою `{repeat}`.
 
-                    ### Вправа
-                    Додайте повторення до власної історії. Поверніться до збережених програм, виберіть свою програму розповіді з рівня 6 і
-                    знайдіть рядок, що містить `{print}` і повторіть його!
+                    ### Вправи
+                    Додайте повторення до власної історії. Поверніться до збережених програм, виберіть сюжетну програму з попереднього рівня та
+                    знайдіть рядок, що містить `{print}`, і повторіть його!
                 example_code: |
                     ```
                     {print} 'Принц продовжував кликати на допомогу!'
@@ -145,15 +147,15 @@ adventures:
                     ```
             8:
                 story_text: |
-                    У цьому рівні ви можете використовувати декілька рядків у командах `{if}`, таким чином ви можете покращити свій щасливий або сумний кінець!
+                    На цьому рівні ви можете використовувати кілька рядків у своїх командах `{if}`, таким чином ви можете покращити свій щасливий чи сумний кінець!
 
                     ### Вправа 1
-                    У прикладі коду показано дві різні кінцівки: одна, де герої стрибають у машині часу, а інша, де вони не стрибають.
-                    Заповніть пропуски принаймні одним реченням для кожної кінцівки.
-                    **(додатково)** Зробіть історію довшою. Що відбувається в історії? Ви також можете додати друге `{ask}` з різними варіантами.
+                    Приклад коду показує два різні закінчення; один, де герої стрибають у машині часу, а інший – ні.
+                    Заповніть пропуски принаймні одним реченням на кінцівку.
+                    **Екстра** Зробіть історію довшою. Що відбувається в оповіданні? Ви також можете додати другий `{ask}` з різними параметрами.
 
                     ### Вправа 2
-                    Поверніться до збережених програм, виберіть свою програму з 5-го рівня. Тепер напишіть гарну і погану кінцівки довжиною не менше трьох рядків кожна!
+                    Поверніться до збережених програм, оберіть свою сюжетну програму з рівня 5. Тепер напишіть хороший і поганий кінець, щонайменше три рядки кожен!
                 example_code: |
                     ```
                     {print} 'О, ні! Тиранозавр наближається!'
@@ -204,8 +206,8 @@ adventures:
                     Знайдіть історію з попереднього рівня, підійде будь-який рівень. Тепер переконайтеся, що лапки додані в потрібних місцях.
                 example_code: |
                     ```
-                    хто = 'Королева Англії'
-                    {print} хто ' їла шматок торта, як раптом...'
+                    name = 'Королева Англії'
+                    {print} name 'їв шматок пирога, коли раптом...'
                     ```
             13:
                 story_text: |
@@ -227,11 +229,11 @@ adventures:
                     ```
             15:
                 story_text: |
-                    Використання циклу `{while}` може зробити ваші історії цікавішими. Наприклад, ви можете використати `{while} гра == 'продовжується'`, щоб гравець міг грати, доки гра не закінчиться.
-                    Або ви можете використати `{while} меч == 'загублен'`, щоб гравець не міг продовжити гру, поки не знайде щось.
+                    Використання циклу `{while}` може зробити ваші історії цікавішими. Наприклад, ви можете використовувати `{while} game == 'on'`, щоб ви могли грати, поки гра не закінчиться.
+                    Або ви можете використати `{while} sword == 'lost'`, щоб гравець не міг продовжувати гру, поки щось не знайде.
 
-                    ### Exercise
-                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
+                    ### Вправи
+                    У прикладі коду показано, як використовувати цикл `{while}` в історії. Тепер **подумайте про власний сценарій**, у якому гравець повинен щось знайти, перш ніж продовжити.
                 example_code: |
                     ```
                     ключі = 'загублені'
@@ -259,9 +261,9 @@ adventures:
                     ```
                 story_text_2: |
                     ### Вправа 2
-                    Ми вже підготували для вас `{input}`. Спочатку використайте змінну `{ім\'я}` у вашій історії.
-                    Потім додайте друге `{ask}` і також використовуйте цю змінну.
-                    Порада: Пам'ятайте про коми у `{print}` між текстом і змінними!
+                    Ми вже підготували для вас `{input}`. По-перше, використовуйте змінну `name` у своїй історії.
+                    Потім додайте другий `{ask}` і також використовуйте цю змінну.
+                    Порада: пам’ятайте про коми в `{print}` між текстом і змінними!
                 example_code_2: |
                     ```
                     name = {input}('Як тебе звати?')
@@ -276,17 +278,43 @@ adventures:
                     ## Додати до
                     Ви можете додати елементи до списку за допомогою команди `{add} {to_list}`. Щоб додати елемент до списку, ви можете просто ввести: `{add} penguin {to_list} animals` або ви можете скористатися командою `{ask}`, як у прикладі коду.
                 story_text_3: |
-                    ### Exercise
-                    Try out the new commands in this virtual restaurant. Add the flavor the player is hpoing for to the list and remove the flavors they are allergic to.
+                    ### Вправи
+                    Спробуйте нові команди у цьому віртуальному ресторані. Додайте смак, на який гравець сподівається, до списку та видаліть смаки, на які у нього алергія.
+                story_text_2: "## Видалити з\nЯкщо ви можете додавати елементи до списку, ви, звичайно, можете їх і вилучати. Це робиться за допомогою команди `{remove} {from}`.\n"
+                example_code: "```\nanimals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}\n```\n"
+                example_code_3: "```\n{print} Mystery milkshake\nароматизатори{is} полуниця, шоколад, ваніль\nнадія {is} {ask} На який смак ти сподіваєшся?\n_\nалергія {is} {ask} У вас алергія на будь-які смаки?\n_\n{print} Ви отримуєте молочний коктейль зі смаком {at} {random}\n```\n"
+                example_code_2: "```\nanimals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}\n```\n"
+        name: '{add} {to_list} & {remove} {from}'
     and_or_command:
-        description: introducing and or
+        description: представляємо {and} & {or}
+        name: '{and} & {or}'
+        default_save_name: і або
+        levels:
+            13:
+                example_code: "```\nname = {ask} 'як тебе звати?'\nage = {ask} 'скільки твій вік?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'Ти справжня Хеді!'\n```\n"
+                story_text: "Зараз ми вивчимо `{and}` та `{or}`! Якщо ви хочете перевірити два твердження, вам не обов’язково використовувати два `{if}` {and} {or}.\n\nЯкщо ви використовуєте `{and}`, обидва твердження, ліворуч і праворуч від `{and}` `{or}`. Тоді лише одне твердження повинно бути правильним."
     ask_command:
-        description: Introduction ask command
+        description: Команда вступу {ask}
         levels:
             1:
                 story_text_2: |
-                    ## The echo command
-                    If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
+                    ## Команда `{echo}`
+                    Якщо ви хочете, щоб комп’ютер повторив вам відповідь, ви можете скористатися командою `{echo}`. Відповідь буде повторено в кінці речення, тому в цьому прикладі після hello.
+                story_text: "## Команда ask\nТепер, коли ви можете використовувати команду `{print}`, ви готові вивчити наступну команду: `{ask}`. За допомогою команди `{ask}` ви можете поставити запитання. Перевірте це:\n"
+                story_text_3: "### Вправи\nСпробуйте команди `{ask}` і `{echo}`. По-перше, заповніть порожні поля, щоб ця програма запрацювала.\nПотім поставте ще 2 запитання за допомогою команди `{ask}`, після кожного `{ask}` використовуйте `{echo}`, щоб вивести відповідь на екран.\n"
+                example_code: "```\n{print} Привіт!\n{ask} Як тебе звати?\n```\n"
+                example_code_2: "```\n{print} Привіт!\n{ask} Як тебе звати?\n{echo} привіт\n```\n"
+                example_code_3: "```\n_ Як справи?\n_\n```\n"
+            2:
+                story_text: "## Команда ask\nТепер, коли ми можемо використовувати **змінні** у наших кодах, нам більше не потрібна команда `{echo}`.\nМи можемо використовувати змінні для зберігання відповідей на наші запитання, і таким чином ми можемо використовувати відповіді на кілька запитань у наших кодах.\nПеревірте це:\n\nТаким чином ваш код стає інтерактивним!\n"
+                example_code_2: "```\nfavorite_animal {is} {ask} Яка твоя улюблена тварина?\n{print} Мені подобається favorite_animal\n```\n"
+                story_text_2: "### Вправи\nНа попередній вкладці ви вправлялися в установці змінних за допомогою команди `{is}`.\nВи створили принаймні 3 змінні та використали їх у команді друку.\nТепер, замість встановлення змінних, ми хочемо, щоб ви зробили змінні інтерактивними, як ми зробили в нашому прикладі.\n\nСкопіюйте код із попередньої вкладки та зробіть змінні інтерактивними за допомогою команд `{ask}`.\n"
+                example_code: "```\nname {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old.\n```\n"
+            18:
+                story_text: Остання зміна, яку нам потрібно буде зробити, щоб отримати код Python, це зміна `{ask}` на `{input}`.
+                example_code: "```\n{print}('My name is Hedy!')\nname = {input}('What is your name?')\n{print}('So your name is ', name)\n```\n"
+        default_save_name: ask_command
+        name: '{ask}'
     calculator:
         levels:
             6:
@@ -294,34 +322,34 @@ adventures:
                     Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
                 example_code: |
                     ```
-                    correct_answer = 11 * 27
-                    answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} correct_answer {print} 'good job!'
-                    {else} {print} 'Wrong! It was ' correct_answer
+                    number_1 = {ask} 'Fill in the first number:'
+                    number_2 = {ask} 'Fill in the second number:'
+                    correct_answer = number_1 * number_2
+                    {print} number_1 ' times ' number_2 ' is ' correct_answer
                     ```
                 story_text_2: |
-                    You can also let the computer do random calculations on its own using {random}.
+                    ### Вправи
+                    Наведений вище калькулятор обчислить відповідь за вас, але ви також можете створити програму для перевірки власних математичних навичок, наприклад таку:
+                    Заповніть пропуски, щоб завершити!
                 example_code_2: |
                     ```
-                    tables = 4, 5, 6, 8
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    table = tables {at} {random}
-                    number = numbers {at} {random}
-                    correct_answer = table * number
-                    answer = {ask} 'how much is ' table ' times ' number '?'
-                    {if} answer {is} correct_answer {print} 'okay'
-                    {else} {print} 'mistake! it was ' correct_answer
+                    правильна_відповідь = 11 * 27
+                    answer = {ask} 'Скільки буде 11 помножити на 27?'
+                    {if} answer {is} _ {print} "добра робота!"
+                    {else} {print} «Неправильно! Це було '_
                     ```
                 story_text_3: |
-                    You can also let the computer do random calculations on its own using {random}.
-                example_code_3: |
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number_1 = _
-                    number_2 = _
-                    correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
-                    {if} _
-                    {else} _
+                    **Додатково** Ви також можете дозволити комп’ютеру створювати випадкові продукти самостійно за допомогою `{random}`.
+                example_code_3: |-
+                    ```
+                    цифри = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    число_1 = _
+                    число_2 = _
+                    правильна_відповідь = число_1 * число_2
+                    given_answer = {ask} 'Чому дорівнює ' число_1 ', помножене на ' число_2 '?'
+                    {якщо} _
+                    {інше} _
+                    ```
             9:
                 story_text: |
                     In a previous level you've created a calculator, in this level you can expand that code so it asks multiple questions.
@@ -331,109 +359,133 @@ adventures:
 
                     ### Exercise 2
                     Give the player feedback when the enter an answer, like `{print} 'Correct!'` or `{print} 'Wrong! The correct answer is ' correct_answer`.
+                example_code: "```\nоцінка = 0\n{repeat} 10 {times}\n    цифри = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number_1 = числа {at} {random}\n    число_2 = числа {at} {random}\n    правильна_відповідь = число_1 * число_2\n    {print} «Чому дорівнює «число_1» помножене на «число_2»?\n    answer = {ask} 'Введіть свою відповідь тут...'\n    {print} \"Ваша відповідь - відповідь\".\n    {if} _ {is} _\n        оцінка = оцінка + 1\n{print} «Чудова робота! Ваша оцінка... \"оцінка\" з 10!'\n```\n"
             11:
                 example_code: |
-                    ```
-                    number = 10
-                    {for} i {in} {range} 1 to 10
-                        {print} i * number
-                    ```
+                    й й
+                    кількість = 10
+                    {for} i {in} {range} 1 {to} 10
+                    {print} i * номер
+                    й й
+                story_text: "За допомогою `{for}` ви можете спростити таблиці програми множення.\n\n### Вправа 1\nУдосконаліть приклад коду, щоб він друкував гарну таблицю множення:<br> «1 помножити на 10 — це 10», «2 помножити на 10 — це 20» тощо.\n\n### Вправа 2\nПоверніться до коду множення рівня 10 і змініть його так, щоб він використовував `{for}` і `{range}`.\n"
             12:
                 story_text: |
-                    Now you can make a calculator that works for decimal numbers.
+                    На цьому рівні ви можете створити калькулятор, який працює з десятковими числами.
+
+                    ### Вправа 1
+                    Заповніть порожні поля, щоб завершити калькулятор. Не забувайте використовувати крапку, а не кому для десяткових чисел.
+
+                    ### Вправа 2
+                    Створіть нову практичну програму з математики, але тепер використовуйте десяткові числа.
+                    Створіть список чисел, оберіть два до кількох і дозвольте гравцеві відповісти.
+                    І, звичайно, ви повинні підтвердити відповідь! **Екстра** Збільште складність, додавши життя: гравець втрачає життя за неправильну відповідь, і після трьох неправильних відповідей гра закінчується.
                 example_code: |
-                    ```
-                    number1 = {ask} 'What is the first number?'
-                    number2 = {ask} 'What is the second number?'
-                    answer = number1 + number2
-                    {print} number1 ' plus ' number2 ' is ' answer
-                    ```
+                    й й
+                    No1 = {ask} "Що таке перше число? Р
+                    No2 = {ask} 'Що таке другий номер? Р
+                    Контакти
+                    {print} номер1 ' плюс ' число2' - ' _
+                    й й
             14:
                 example_code: |
                     ```
-                    {define} calculate_mean_grade
-                        total = 0
-                        {for} i {in} {range} 1 {to} 4
-                            grade = {ask} _
-                            total = total + _
-                            return _ / 4
+                    {define}calculate_mean_grade
+                        всього = 0
+                        {для} я {в} {діапазон} 1 {до} 4
+                            оцінка = {питати} _
+                            загальна = загальна + _
+                            {повернення} _ / 4
 
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
+                    середня_оцінка = {дзвінок} _
+                    {print} 'Ваша середня оцінка ' mean_grade
                     ```
-
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
+                story_text: "У цій пригоді ви створите калькулятор, який обчислить середню оцінку за вас. Якщо ваш калькулятор запрацював, ви можете перейти до наступної пригоди, яка дозволить вам додати дві додаткові функції.\n\n### Вправа 1\nЗаповніть поля, щоб запрацював калькулятор.\n* Почніть з четвертого рядка, додайте запитання, щоб дізнатися, яку оцінку отримав учень.\n* У п’ятому рядку потрібно обчислити загальну суму всіх оцінок, тому загальна сума = загальна + оцінка.\n* Тоді ми можемо встановити значення, що повертається. Ми хочемо повернути середнє значення, тобто загальну суму поділено на кількість тестів (4).\n* Нарешті ми закінчуємо код, викликаючи функцію в рядку 8.\n\nВи зрозуміли? Чудово! Бажаєте додати ще більше до свого калькулятора? **Ця пригода продовжується в наступній вкладці!**\n"
+            10:
+                example_code: "```\nчисла = 1, 2, 3\n{for} _\n    {for} _\n        відповідь = {ask} _\n        правильно = число_1 * число_2\n        {if} відповідь {is} правильна\n            {print} \"Чудова робота!\"\n        {else}\n            {print} «Це неправильно. Правильна відповідь - «правильно».\n```\n"
+                story_text: "Ця гра-калькулятор допоможе вам відпрацювати таблиці множення!\n### Вправи\nЗаповніть пропуски. Ми хочемо, щоб ця програма ставила гравцеві такі запитання:\n```\nСкільки буде 1 помножити на 1?\nСкільки буде 1 помножити на 2?\nСкільки буде 1 помножити на 3?\nСкільки буде 2 помножити на 1?\nСкільки буде 2 помножити на 2?\nСкільки буде 2 помножити на 3?\nСкільки буде 3 помножити на 1?\nСкільки буде 3 помножити на 2?\nСкільки буде 3 помножити на 3?\n_\n```\n"
+            13:
+                example_code: "й й\nВідповідь1 = {ask} 'Що 10 разів 7? Р\nВідповідь2 = {ask} 'Що 6 разів 7? Р\n{if} _ _ _ _ _ _ _ _ _ _ _ _\n{print} _\nй й\n"
+                story_text: "### Вправа 1\nДавайте трохи ускладнимо програму практики. Тепер гравець повинен правильно відповісти на два запитання. Заповніть поля, щоб завершити програму.\n\n### Вправа 2\nІноді обчислення мають кілька правильних відповідей. Наприклад, 10 можна поділити на 5 і на 2. Отже, запитання «Яке число ділить 10?» можна відповісти 2 і 5.\nПопросіть обчислення, яке містить декілька правильних відповідей, попросіть гравця відповісти на нього та визначте, чи воно правильне, за допомогою `{or}``.\nОчистіть поле програмування та створіть власне рішення.\n"
+            15:
+                example_code: "```\n{define} нове_питання\n    цифри = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    number_1 = числа {at} {random}\n    число_2 = числа {at} {random}\n    правильно = число_1 * число_2\n    відповідь = 0\n    _\n    _\n    _\n    {print} \"Молодець!\"\n\n{print} \"Дайте 10 правильних відповідей, щоб виграти!\"\n{for} i {in} {range} 1 {to} 10\n    _\n{print} \"Ти виграв!\"\n```\n"
+                story_text: "Ви можете додати цикл `{while}` до гри-калькулятора, яку ви навчилися робити на попередньому рівні.\nЦе гарантує, що гравець не зможе перейти до наступного запитання, якщо він відповість неправильно.\n\n### Вправи\nДодайте цикл `{while}` у функцію, запитайте гравця, скільки дорівнює число_1, помножене на число_2, і надрукуйте його відповідь.\nПотім `{call}` функції.\n"
+        default_save_name: Калькулятор
+        name: Калькулятор
+        description: Створіть калькулятор
     clear_command:
-        description: clear command
+        description: '{clear} команда'
+        default_save_name: clear_command
+        levels:
+            4:
+                example_code: "```\n{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'зачекайте...'\n{sleep} 3\n{clear}\n{print} \"СЮРПРИЗ!\"\n```\n"
+                story_text: "Час для нової команди! За допомогою `{clear}` ви можете очистити весь текст з екрана виведення. Таким чином ви можете запобігти переповненню екрана текстом.\nОбережно! Якщо ви використовуєте команду `{clear}`, вам може знадобитися використати `{sleep}` над нею. Інакше Hedy очистить ваш екран, не даючи вам часу на читання, як ви бачите в прикладі!\n"
+        name: '{clear}'
     debugging:
         levels:
             3:
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **УВАГА! Цей код потрібно налагодити!**
                     ```
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
+                    movie_choices {is} dracula, fast and furious, one home, barbie
+                    selected_movie {is} фільми {at} {random}
+                    {print} Сьогодні ввечері ми дивимось вибрані _фільми
+                    like {ask} Тобі подобається цей фільм?
+                    {print} Завтра будемо дивитися щось інше.
+                    {add} selected_movie {to_list} movie_choices
+                    {print} Завтра будемо дивитися tomorrows_movie
                     tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
+                    Я піду за попкорном! {print}
                     ```
+                story_text: "Ласкаво просимо до пригоди налагодження. Налагодження коду означає позбавлення від помилок у коді.\nЦе означає, що в цих пригодах з налагодження ми дамо вам код, який ще не працює.\nВам доведеться з'ясувати, що не так, і виправити помилки.\n\n### Вправи\nНалагодити цей код. удачі!"
             7:
                 story_text: |-
-                    ### Exercise
-                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
+                    ### Вправи
+                    Сюрприз! Ця програма більше схожа на результат, ніж на код. І все ж ми не хочемо, щоб ви просто додавали команди `{print}` перед кожним рядком.
+                    Виправте цю програму, щоб перетворити її на дитячу пісню «Брат Джон (Frère Jacques)», використовуючи, звичайно, команду {repeat}!
+                example_code: "**УВАГА! Цей код потрібно налагодити!**\n```\nВи спите?\nБрате Джоне!\nРанкові дзвони лунають!\nДінь, данг, донг!\n```\n"
             8:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
+                example_code: |-
+                    **УВАГА! Цей код потрібно налагодити!**
                     ```
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
+                    {print} «Ласкаво просимо до манікюру та педикюру від Hedy»
+                    bodypart = {ask} «Ти сьогодні робиш собі нігті на руках чи ногах?» Або обидва?»
+                    {if} частини тіла {є} обидва
+                            {print} Це буде 25 доларів США
+                            ціна = 25
+                        {інше}
+                            {print} Це буде 18 доларів США
+                            ціна = 18
+                    color = {ask} Який колір ви хотіли б?
+                    sparkles = {ask} 'Хочеш трохи блискіток?'
+                    {if} виблискує {is} так
+                        {print} "Ми стягуємо за це додаткові 3 долари"
+                    ціна = ціна + 3
+                    {else} {print} "Без блискіток" {print} "Тож без додаткової плати"
+                    {сон} 5
+                    {print} «Готово! Це буде ціна $, будь ласка!'
+                    {print} «Дякую! До побачення!
                     ```
+                story_text: "### Вправи\nНалагодити цей код. удачі!"
             9:
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **УВАГА! Цей код потрібно налагодити!**
                     ```
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
-                    {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    {print} «Ласкаво просимо до нашої бутербродниці»
+                    сума «Скільки бутербродів ви б хотіли купити?»
+                    {повторити} кількість {разів}
+                    {ask} {is} {ask} "Якого сорту чи хліба ви хочете, щоб був ваш сендвіч?"
+                    види_хліба {є} білий, пшеничний, житній, часниковий, без глютену
+                    {if} вибраний_хліб у типах_хліба
+                    {print} "Чудово!"
+                    {інше}
+                    "Вибачте, ми цього не продаємо"
+                    topping {is} {ask} 'Яку начинку ви хотіли б?'
+                    sauce {is} {ask} 'Який соус ви б хотіли?'
+                    {print} Один вибраний_хліб з начинкою та соусом.
+                    ціна = сума * 6
+                    {print} "Це буде "ціна в доларах", будь ласка"
                     ```
-
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                story_text: "### Вправи\nНалагодити цей код. удачі!"
             10:
                 example_code: |
                     **Warning! This code needs to be debugged!**
@@ -538,50 +590,30 @@ adventures:
                     ```
             14:
                 example_code: |
-                    **Warning! This code needs to be debugged!**
+                    **УВАГА! Цей код потрібно налагодити!**
                     ```
-                    define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
+                    {define}calculate_heartbeat
+                        {print} «Обережно притисніть кінчики пальців до шиї»
+                        {print} '(просто під вашою щелепою)'
+                        {print} "Порахуйте кількість ударів, які ви відчуваєте протягом 15 секунд"
+                        beats == {ask} «Скільки ударів ви відчуваєте за 15 секунд?»
+                        серцебиття = ударів*4
+                        {print} "Ваше серцебиття - це" серцебиття
+                        {if} серцебиття >= 60 {або} серцебиття <= 100
+                            {print} "Ваше серцебиття здається нормальним"
+                        {інше}
+                            {if} серцебиття > 60
+                                {print} "Здається, ваше серцебиття занадто низьке"
+                            {if} серцебиття < 100
+                                {print} "Здається, ваше серцебиття занадто часте"
+                            {print} "Ви можете звернутися до медичного працівника"
 
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
+                    measure_heartbeat = {ask} 'Чи бажаєте ви виміряти своє серцебиття?'
+                    {if} measure_heartbeat = 'так'
+                        {call} вимірювання_серцебиття
+                    {інше}
+                        "без проблем"
                     ```
-
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
             15:
                 example_code: |
                     **Warning! This code needs to be debugged!**
@@ -685,110 +717,144 @@ adventures:
                         print 'there a ' sound
                         print 'everywhere a ' sound sound
                     ```
+            4:
+                story_text: "### Вправи\nНалагодити цей код. удачі!"
+                example_code: "**УВАГА! Цей код потрібно налагодити!**\n```\n{print} 'Ласкаво просимо до онлайн-бібліотеки!\n{ask} Який жанр книг тобі подобається?\n{print} Вам подобається жанр\nавтор {is} {ask} 'Хто твій улюблений автор?'\n{print} 'автор — ваш улюблений автор'\n{print} Хмм... я думаю, тобі варто спробувати... книги {at} {random}\n```\n"
+            5:
+                story_text: "### Вправи\nНалагодити цей код. удачі!"
+                example_code: "**УВАГА! Цей код потрібно налагодити!**\n```\n{print} Ласкаво просимо до Swimming Pool Hedy!\nclass {is} {ask} 'Ви тут, щоб приєднатися до класу сьогодні?'\n{if} клас так\n{print} \"Чудово! Ви приєднуєтеся до класу!\n{print} {else} \"Ви не приєднаєтеся до класу\"\ndiscount {is} 'У вас є код знижки?'\n{if} знижка {is} так\ndiscount_answer {is} {ask} 'Який у вас код знижки?'\ndiscount_codes = Senior4231, Student8786, NewMember6709\n{if} discount_answer {is} {in} discount_cods\n{print} \"Це буде $3,50\"\n\"Це буде $5,50\"\n{print} 'Приємного купання!'\n```\n"
+            1:
+                story_text: "Ласкаво просимо до пригоди налагодження. Налагодження коду означає позбавлення від помилок у коді.\nЦе означає, що в цих пригодах з налагодження ми покажемо вам код, який ще не працює.\nВам доведеться з'ясувати, що не так, і виправити помилки.\n\n### Вправи\nНалагодити цей код. удачі!"
+                example_code: "**УВАГА! Цей код потрібно налагодити!**\n```\n{print} Я люблю програмувати\nВи теж любите програмувати?\n{echo}\n{print} Які у вас захоплення?\n{echo} Ваші хобі\n```\n"
+            2:
+                story_text: "Ласкаво просимо до пригоди налагодження. Налагодження коду означає позбавлення від помилок у коді.\nЦе означає, що в цих пригодах з налагодження ми дамо вам код, який ще не працює.\nВам доведеться з'ясувати, що не так, і виправити помилки.\n\n### Вправи\nНалагодити цей код. удачі!"
+                example_code: "**УВАГА! Цей код потрібно налагодити!**\n```\nпризначення {запитати} Куди ти збираєшся у відпустку?\n{print} Рейс до пункту призначення відправляється о 15:00.\n{ask} Ви вже зареєстрували свій багаж?\n{echo}\n{print} Дозвольте мені роздрукувати ваш посадковий талон.\n{sleep}\nОсь вам! Приємної подорожі!\n```\n"
+            6:
+                story_text: "### Вправи\nНалагодити цей код. удачі!"
+                example_code: "**УВАГА! Цей код потрібно налагодити!**\n```\n{print} \"Торговельний автомат\"\nselected_product = {ask} 'Будь ласка, виберіть продукт'\n1_dollar_products = вода з апельсиновим соком кола\n2_dollar_products = шоколад, печиво, батончик museli\n3dollar_prodcuts = картопляні чіпси, в’ялена яловичина, банановий хліб\n{if} вибрано {is} {in} 1_dollar_products\nціна = 1\n{if} selected_product {is} 2_dollar_products\nціна = 2\n{else} selected_product {in} 3_dollar_products\nціна = 3\namount_of_products = '{ask} Скільки ' selected_product ви б хотіли мати?'\nзагальна сума = ціна + кількість_продукту\n{print} 'Це буде $' ціна 'будь ласка'\n```\n"
+        name: налагодження
+        default_save_name: налагодження
+        description: налагодження пригод
     default:
         name: Вступ
         default_save_name: Вступ
         description: Пояснення рівнів
         levels:
             1:
-                story_text: "На першому рівні ви можете використовувати команди `{print}`, `{ask}` та `{echo}`.\nНаберіть свій код у полі для програмування. Або натисніть зелену кнопку в блоці прикладу коду, і код буде набраний за вас!\nСпробуйте код самостійно, натиснувши зелену кнопку \"Запустити код\" під полем програмування.\n \nВивести текст на екран можна за допомогою команди `{print}`.     \n"
+                story_text: "Ласкаво просимо до Hedy! Тут ви можете навчитися програмувати крок за кроком.\n\nСпробуйте код самі! Жовта кнопка копіює приклад коду в поле програмування.\nПотім натисніть зелену кнопку «Виконати код» під полем програмування, щоб запустити код.\n\nготовий Потім перейдіть до наступної вкладки, щоб дізнатися, як створювати власні коди!\n"
             3:
                 story_text: |
-                    На рівні 3 ви можете скласти список. Ви можете дозволити комп'ютеру вибрати щось випадкове зі списку. Для цього використовується команда `{at} {random}`.
+                    На попередньому рівні ви дізналися, що таке змінна і як її використовувати, щоб зробити ваші пригоди більш інтерактивними.
+                    Але... це не єдине, що ви можете робити зі змінними! Ви також можете використовувати змінні для створення списків.
+                    Ви навіть можете дозволити Хеді вибрати випадкове слово зі списку, що дозволить вам створювати справжні ігри!
+                    Швидко подивіться на наступну вкладку!
             4:
                 story_text: |
-                    На 4-му рівні змінилися `{ask}` та `{print}`.
-                    Текст, який ви хочете надрукувати, необхідно брати в лапки.
-                    Це корисно, тому що тепер ви можете надрукувати всі слова, які хочете. Також слова, які ви використовували для зберігання чогось за допомогою `{is}`.
-                    Більшість мов програмування також використовують лапки при наборі, тож ми також стаємо на крок ближче до справжнього програмування!
+                    На попередніх рівнях ви вправлялися зі змінними, але, можливо, ви зіткнулися з цією проблемою.
+                    Можливо, ви намагалися запустити такий код:
+
+                    Звичайно, ви хотіли надрукувати
+
+                    «`My name is Sophie`
+
+                    але Хеді друкує
+
+                    "`My Sophie is Sophie`.
+
+                    На цьому рівні цю проблему вирішено за допомогою лапок.
                 example_code: |
                     ```
-                    {print} 'Тепер вам потрібно використовувати лапки!'
-                    відповідь {is} {ask} 'Що нам потрібно використовувати з цього моменту'
-                    {print} 'Нам потрібно використовувати ' відповідь
+                    ім'я {is} Софі
+                    {print} Мене звуть ім'я
                     ```
             5:
                 story_text: |
-                    У 5 рівні з'явилося дещо нове - `{if}`! За допомогою `{if}` ви можете вибирати між двома різними варіантами.
-                    Цей код чудово друкується, якщо ви введете Hedy як ім'я, і бум! Якщо ви введете щось інше.
-                    `{ask}` і `{print}` все ще працюють так само як і на 4-му рівні.
+                    На попередніх рівнях ви вже навчилися використовувати `{at} {random}`, що робило ваші ігри різними щоразу, коли ви запускали код.
+                    Але насправді він не інтерактивний, гравець не має жодного впливу на те, що відбувається в грі.
+
+                    На цьому рівні ви вивчите команду `{if}`, яка дозволить вам давати різні відповіді у вашій програмі. Таким чином ви можете, наприклад, запрограмувати секретний пароль для свого комп’ютера.
+                    Отже, перейдемо до наступної вкладки для нової команди!
                 example_code: |
                     ```
-                    імʼя {is} {ask} 'як тебе звати?'
-                    {if} імʼя {is} Хейді {print} 'класно' {else} {print} 'фе!'
+                    password {is} {ask} 'Який правильний пароль?'
                     ```
             6:
                 story_text: |
-                    У цьому рівні ви дізнаєтесь дещо нове: тепер ви вмієте ще й рахувати.
+                    На попередньому рівні ви вправлялися з `{ask}` і `{if}`. Наприклад, ви можете запитати гостей, що вони хотіли б з'їсти.
+                    Що ви ще не можете зробити, так це розрахувати ціну обіду для кожного.
 
-                    Плюс - це просто, ви пишете, як у математиці: `5 + 5`, наприклад. Мінус також працює добре, це `5 - 5`.
-
-                    З часом трохи інакше, адже на клавіатурі немає символу часу. Просто пошукайте, його дійсно немає!
-                    Ось чому ми множимо зірочкою над 8: `5 * 5`. Прочитайте це як "5 на 5", що допоможе вам запам'ятати це найкраще.
+                    Цей рівень дає змогу використовувати додавання, віднімання та множення у ваших програмах. Таким чином ви можете розрахувати ціни у своєму ресторані, але ви також можете додати секретний код, щоб надати друзям і родині знижку.
+                    Інший варіант на цьому рівні — програмування власної математичної гри, щоб ваш молодший брат чи сестра могли вправлятися в множенні.
+                    Піди подивись сам!
                 example_code: |
                     ```
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
+                    food_price {є} 0
+                    drink_price {є} 0
+                    total_price {є} 0
+                    {print} «Ласкаво просимо до McHedy»
+                    order {is} {ask} 'Що б ви хотіли з'їсти?'
+                    {if} order {is} гамбургер food_price {is} 5
+                    {if} замовлення {is} картопля фрі food_price {is} 2
+                    drink {is} {ask} 'Що б ти хотів випити?'
+                    {if} drink {is} water drink_price {is} 0
+                    {else} drink_price {is} 3
+                    total_price {is} food_price + drink_price
+                    {print} "Це буде " total_price " доларів, будь ласка"
                     ```
             7:
                 story_text: |
-                    Рівень 7 додає команду `{repeat}`.  Команда `{repeat}` може бути використана для виконання одного рядка коду декілька разів.
+                    Чудова робота! Ви досягли наступного рівня, а це означає, що ви тренувалися з `{if}` і `{else}`. Ви, мабуть, помітили, що ваші коди стають все довшими.
+                    Наприклад, якщо ви хочете запрограмувати «З днем народження».
+
+                    Це багато коду для переважно тих самих слів знову і знову. На щастя, на наступній вкладці ви дізнаєтесь про рішення за допомогою команди `{repeat}`, яка дозволяє повторювати рядок коду кілька разів.
                 example_code: |
                     ```
-                    {repeat} 3 {times} {print} 'Hedy is fun!'
+                    {print} 'вітаю тебе з днем народження'
+                    {print} 'вітаю тебе з днем народження'
+                    {print} 'з днем народження, дорога Хеді'
+                    {print} 'вітаю тебе з днем народження'
                     ```
             8:
                 story_text: |
-                    `{ask}` і `{print}` все ще працюють так, як ви їх знаєте. Але `{if}`, `{else}`, і `{repeat}` змінилися!
-                    Тепер ви можете виконувати групи коду разом, але вам потрібно буде зробити *відступ* у коді.
-                    Це означає поставити чотири пробіли на початку рядка. Вам також доведеться зробити відступ, якщо ви просто хочете створити блок з одного рядка.
+                    Тепер ви навчилися повторювати один рядок коду. Це корисно, але не завжди достатньо. Іноді хочеться повторити кілька рядків одночасно.
+                    Цей рівень дозволяє згрупувати пару рядків коду та повторити цю маленьку групу рядків одразу!
                 example_code: |
-                    Ось як тепер працює команда `{repeat}`:
                     ```
-                    {repeat} 5 {times}
-                        {print} 'Всім привіт'
-                        {print} 'Це все повторюється 5 разів'
-                    ```
-                    А ось як команди `{if}` і `{else}` тепер працюють:
-
-                    ```
-                    імʼя {is} {ask} 'Як тебе звати?'
-                    {if} імʼя {is} Хейді
-                        {print} 'Вітаємо Хейді'
-                        {print} 'Можеш гратися на своєму компʼютері!'
-                    {else}
-                        {print} 'ПОРУШНИК!'
-                        {print} 'Не можеш користуватись цим компʼютером!'
+                    {repeat} 5 {times} {print} 'На наступній вкладці ви можете повторити кілька рядків коду одночасно!'
                     ```
             9:
                 story_text: |
-                    У цьому рівні можна не тільки використовувати кілька рядків з `{if}` та `{repeat}`, але й об'єднувати їх разом!
-                    У прикладі ви бачите команду `{if}` всередині команди `{repeat}`. Також допускається і навпаки, і `{if}` також допускається в `{if}` і `{repeat}` в `{repeat}`.
-                    Спробуйте!
+                    Чудова робота! Ви вийшли на новий рівень! На попередньому рівні ви навчилися використовувати кілька рядків коду в команді {if} або {repeat}. Але ви ще не можете поєднати два...
+                    Хороші новини! На цьому рівні вам буде дозволено вставляти {if} у {if} або в команду {repeat}. Розміщення блоку коду всередині іншого блоку коду називається вкладенням. ``` Розміщення блоку коду всередині іншого блоку коду називається вкладенням.
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        {else}
-                            {print} 'pizza is better'
-                    ```
+                    answer = {ask} 'Чи готові ви дізнатися щось нове?'
+                    {if} відповідь {is} так
+                        {print} "Чудово! Ви можете навчитися використовувати команду повторення в команді if!'
+                        {print} "Ура!"
+                        {print} "Ура!"
+                        {print} "Ура!"
+                    {інше}
+                        {print} "Можливо, вам варто ще трохи потренуватися на попередньому рівні"
             10:
-                story_text: |-
-                    У цьому рівні ми вивчаємо новий код, який називається `{for}`. За допомогою `{for}` можна скласти список і використовувати всі елементи.
-                    `{for}` створює блок, як і `{repeat}` та `{if}`, тому всі рядки в блоці повинні починатися з пробілів.
+                story_text: |
+                    у вас все чудово! На попередніх рівнях ми все ще стикалися з невеликою проблемою. Ви навчилися повторювати рядки, але що, якщо вам захочеться трохи змінити рядок.
+                    Наприклад, якщо ви хочете заспівати пісню «Якщо ти щасливий і ти це знаєш». Це виглядало б так:
+
+                    Якщо ви також хочете, щоб наступний вірш «тупав ногами», і наступний, і наступний, вам доведеться повністю змінити код.
+                    На цьому рівні ви вивчите команду `{for}`, яка дозволить вам створити список дій і щоразу повторювати код з іншою дією!
+                    Будь ласка, подивіться!
                 example_code: |
                     ```
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
+                    {повторити} 2 {разів}
+                        {print} 'якщо ти щасливий і знаєш, що це плескає в долоні'
+                    {print} 'якщо ти щасливий, ти це знаєш і справді хочеш це показати'
+                    {print} 'якщо ти щасливий і знаєш, що це плескає в долоні'
                     ```
             12:
-                story_text: |-
-                    **Десяткові числа**
-                    До цього часу Hedy не дозволяла використовувати десяткові числа, такі як 1,5, але тепер ми це дозволяємо. Зауважте, що комп'ютери використовують символ `.` для десяткових чисел.
+                story_text: |
+                    Можливо, ви пробували використовувати десяткові числа у своїй ресторанній пригоді. Якщо ви це робили, то, мабуть, помітили, що Хеді ще не розуміла їх і завжди заокруглювала.
+                    З цього рівня ви можете використовувати десяткові числа.
                 example_code: |
                     й й
                     бургер = 5
@@ -798,22 +864,24 @@ adventures:
                     друк 'Чи коштує ' загальний ' доларів будь ласка Р
                     й й
             13:
-                story_text: "Зараз ми будемо вивчати `{and}` та `{or}`! Якщо ви хочете перевірити два оператори, вам не обов'язково використовувати два `{if}`, ви можете використовувати `{and}` і `{or}`. \n\nЯкщо ви використовуєте `{and}`, обидва оператори, зліва і справа від `{and}`, повинні бути істинними. Ми також можемо використовувати `{or}`. Тоді лише одне твердження має бути правильним."
+                story_text: "На попередніх рівнях ви навчилися вставляти дві команди `{if}` одна в одну. Це добре працює, але дає вам дуже довгі та незручні коди, як цей:\n\nУ цій системі ви повинні вказати як правильне ім'я користувача, так і правильний пароль.\nНа цьому рівні ви дізнаєтесь про команду `{and}`, яка зробить цей код набагато коротшим і зрозумілішим!\nПеревірте це!\n"
                 example_code: |
                     ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    username = {ask} 'Яке ваше ім'я користувача?'
+                    password = {ask} 'Який ваш пароль?'
+                    {if} ім'я користувача {is} 'Hedy'
+                        {if} пароль {is} 'секретний'
+                            {print} 'Ласкаво просимо, Хеді!'
+                        {інше}
+                            {print} "Доступ заборонено"
+                    {інше}
+                        {print} 'У доступі відмовлено!'
                     ```
             14:
                 story_text: |
-                    Ми з вами будемо вивчати нові елементи. Можливо, ви вже знаєте їх з математики - це `<` та `>`.
-                    Символ `<` перевіряє, чи перше число менше за друге, наприклад, вік `<` 12 перевіряє, чи вік менше за 12.
-                    Якщо потрібно перевірити, чи перше число менше або дорівнює другому, можна використовувати `<=`, наприклад, вік `<=` 11.
-                    Символ `>` перевіряє, чи є перше число більшим за друге, наприклад, `>` 10 перевіряє, чи є число більшим за 10.
-                    Якщо потрібно перевірити, чи перше число більше або дорівнює другому, можна використати `>=`, наприклад, пункти `>=` 11.
-                    Ви використовуєте ці порівняння в `{if}`, ось так:
+                    За допомогою прикладу коду ви можете підрахувати, чи склали ви предмет у школі (тобто на шість і вище).
+                    Ви бачите, що цей код надзвичайно неефективний через дуже довгий код у рядку 5.
+                    Усі різні оцінки від 1 до 5 потрібно було програмувати окремо. На щастя для вас, на цьому рівні ви навчитеся робити це без цього надзвичайно довгого коду!
                 example_code: |
                     ```
                     age = {ask} 'How old are you?'
@@ -826,46 +894,53 @@ adventures:
                     {else}
                         {print} 'You are older than me!'
             15:
-                story_text: |-
-                    Зараз ми вивчимо новий вид циклу - цикл `{while}`! Ми будемо виконувати цикл до тих пір, поки твердження буде правдивим.
-                    Тож не забувайте змінювати значення в циклі.
-
-                    У прикладі коду продовжуємо до тих пір, поки не буде дана правильна відповідь.
-                    Якщо правильна відповідь ніколи не буде дана, то цикл ніколи не закінчиться!
+                story_text: |
+                    У цій грі нижче створено код, який гарантує, що гравець може грати скільки завгодно...
+                    Але код неефективний і занадто довгий. Крім того, що, якщо гравець хоче зіграти 101 гру замість 100?
+                    Ви не можете грати до нескінченності?
+                    На цьому рівні ви дізнаєтесь про команду, яка робить усе це набагато легшим!
                 example_code: |
                     ```
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                    гра = 'увімкнено'
+                    {for} i {in} {range} 1 {to} 100
+                        {if} game == 'on'
+                            answer = {ask} 'Ви бажаєте продовжити?'
+                            {if} відповідь == 'ні'
+                                гра = 'завершено'
+                            {if} відповідь == 'так'
+                                {print} "Добре, ми продовжимо"
                     ```
             16:
-                story_text: |-
-                    Ми будемо складати списки у стилі Python, з квадратними дужками навколо списків! Ми також зберігаємо лапки навколо кожного елемента, як ми вже навчилися на попередніх рівнях.
-                    Ми використовуємо квадратні дужки, щоб вказати місце у списку. Команду {at} більше не можна використовувати.
-                example_code: |
+                story_text: |
+                    На цьому рівні ми трохи підростемо до реального коду Python. Ви також дізнаєтеся, як зіставити два списки.
+                    Таким чином ви можете запрограмувати код, у якому правильна тварина буде відповідати правильному звуку.
+                    Тому що два коди нижче... Очевидно, нісенітниця!
+                example_code: |-
                     ```
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
+                    тварини = 'курка', 'кінь', 'корова'
+                    звуки = "кудахтання", "ржання", "мукання"
+                    {для} тварин {у} тварин
+                        {print} «Тварина» каже «звуки {at} {random}
                     ```
+                    Ви також можете спробувати змусити це працювати таким чином, але....
+                    ```
+                    тварини = 'курка', 'кінь', 'корова'
+                    звуки = "кудахтання", "ржання", "мукання"
+                    {для} тварин {у} тварин
+                        {за} звук {в} звуки
+                            {print} «Тварина» каже «звук».
+                    ```
+                    Примітка: ці коди не працюватимуть таким чином на цьому рівні. Перейдіть до наступної вкладки, щоб побачити, які частини потрібно виправити.
             17:
-                story_text: |-
-                    Зараз ми трішки змінимо відступи. Кожного разу коли нам потрібен відступ, ми також повинні поставити `:` на лінії перед відступом.
+                story_text: |
+                    Тепер ми трохи змінимо відступ. Кожного разу, коли нам потрібен відступ, нам потрібен `:` у рядку перед відступом.
 
-                    На цьому рівні ти також отримаєш нову команду `{elif}`. Команда `{elif}` – це сполучення команд `{else}` і `{if}`, яка пригодиться тобі якщо в тебе буде три (або більше!) опцій.
-                    Випробуй її!
+                    На цьому рівні ви також можете використовувати нову команду: `{elif}`. `{elif}` є скороченням від ``{else} {if}`` і вам знадобиться, коли ви хочете зробити 3 (чи більше!) варіанти.
+                    Перевірте це!
             18:
-                story_text: |-
-                    Ми отримали справжній код Python! Це означає, що відтепер нам потрібно використовувати дужки з `{print}` і `{range}`.
-                    Це також означає, що ви можете використовувати код Hedy з цього рівня в будь-якому середовищі Python, якщо ви використовуєте англійські команди. Якщо ви цього ще не зробили, ви можете зробити це за допомогою перемикача в меню команд.
-
-                    {print}('Мене звати ', імʼя)
+                story_text: |
+                    Щиро вітаю! Ви досягли останнього рівня Hedy! Код, який ви створили тут, можна скопіювати в реальне середовище Python, наприклад replit або PyCharm, і ви можете продовжувати навчання там!
+                    Зауважте, однак, що Python може читати лише англійські команди, тому, якщо ви використовували інші мови, вам потрібно зараз перейти на англійську.
     dice:
         levels:
             3:
@@ -876,44 +951,51 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In this level we can make sentences with the die value in the sentence, with quotes of course.
-                    This time the sample code is not quite complete. Can you finish the code?
+                    На цьому рівні ви також можете створювати кубики. Але цього разу ви можете спробувати самі, без прикладу коду!
+
+                    ### Вправи
+                    Зробіть власні кубики на цьому рівні.
+                    Порада: якщо ви не знаєте, як робити кубики. Подивіться на свої кубики з попереднього рівня, але не забудьте додати лапки.
             5:
                 story_text: |
-                    You can also make a die again in this level using the `{if}`.
-                    Complete the sample code so that the code says "You can stop throwing" once you have thrown an earthworm.
+                    Ми збираємося додати команди `{if}` і `{else}` до наших кубиків!
 
-                    But maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction. Eg 'yes' for 6 and 'pity' for something {else}.
+                    ### Вправи
+                    Заповніть зразок коду так, щоб код казав «Ви можете припинити кидати», коли ви кинули дощового черв’яка. Має бути написано: «Ви повинні кинути знову», якщо ви кинули ще щось.
+                    **Екстра** Можливо, ви захочете відтворити кубик із зовсім іншої гри. Це теж добре! Потім придумайте власну реакцію, наприклад, «так» для 6 і «шкода» для чогось іншого.
                 example_code: |
                     ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    throw {is} _
-                    {print} 'you have' _ 'thrown'
-                    {if} _ {is} earthworm {print} 'You can stop throwing.' _ {print} 'You have to hear it again!'
+                    вибір {є} 1, 2, 3, 4, 5, дощовий черв'як
+                    кинути {є} варіанти {на} {випадковий}
+                    {print} 'ви кинули' кинути
+                    _ throw {is} дощовий черв'як {print} 'Ви можете припинити кидати.'
+                    _ {print} "Ти маєш кинути це знову!"
                     ```
             6:
                 story_text: |
-                    You can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.
-                    You may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.
-                    This is the code to calculate points for one die:
+                    Ви також можете змусити дощового хробака знову померти в цьому, але тепер ви також можете підрахувати, скільки очок було викинуто.
+                    Можливо, ви знаєте, що хробак нараховує 5 очок для Дощових хробаків. Тепер після кидка ви можете відразу підрахувати, скільки очок ви кинули.
+                    Це код для розрахунку очок за один кубик:
+
+                    ### Вправи
+                    Чи можете ви створити код, щоб отримати загальну кількість балів за 8 кубиків? Для цього вам потрібно скопіювати та вставити кілька рядків коду.
                 example_code: |
                     ```
                     choices = 1, 2, 3, 4, 5, earthworm
                     points = 0
                     throw = choices {at} {random}
-                    {print} 'you threw' throw
+                    {print} 'you threw ' throw
                     {if} throw {is} earthworm points = points + 5 {else} points = points + throw
-                    {print} 'those are' points ' point'
+                    {print} 'those are ' points ' points'
                     ```
-                    Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
             7:
                 story_text: |
-                    You can also make a die again in level 5. With the `{repeat}` code you can easily roll a whole hand of dice.
-                    Try to finish the sample code! The dashes should contain multiple commands and characters.
+                    Ви також можете знову зробити кубик на цьому рівні. За допомогою коду `{repeat}` ви можете легко кинути цілу руку кубиків.
 
-                    But maybe you want to make a completely different die. Of course you can!
+                    ### Вправи
+                    Спробуйте завершити зразок коду! **Екстра** Подумайте про відому вам гру, у якій використовуються кубики та програма, яка використовує `{repeat}`.
                 example_code: |
                     ```
                     choices = 1, 2, 3, 4, 5, earthworm
@@ -921,7 +1003,9 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
+                    ### Вправи
+                    Усі надто довго кидають кубики? На цьому рівні ви можете дозволити Хеді кинути всі кубики одночасно!
+                    Змініть імена на імена ваших друзів або родини та закінчіть код.
                 example_code: |
                     ```
                     players = Ann, John, Jesse
@@ -935,39 +1019,40 @@ adventures:
         levels:
             3:
                 story_text: |
-                    Do you always disagree at home about who should wash the dishes or change the litter box today?
-                    Then you can let the computer choose very fairly. You can program that in this level!
-                    You first make a list of the members of your family. Then choose '{at} {random}' from the list.
+                    Чи завжди ви вдома сперечаєтесь, хто має сьогодні помити посуд чи змінити лоток?
+                    Тоді ви можете дозволити комп’ютеру вибирати дуже справедливо. Ви можете запрограмувати це на цьому рівні!
                 example_code: |
                     ```
                     people {is} mom, dad, Emma, Sophie
                     {print} people {at} {random}
                     ```
                 story_text_2: |
-                    Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
+                    ### Вправи
+                    Зробіть власну версію програми посудомийної машини. Спочатку складіть список членів вашої родини.
+                    Потім подумайте про завдання, яке потрібно виконати, і дозвольте комп’ютеру вирішити, хто має виконати це завдання за допомогою команди `{at} {random}`.
+
+                    **Додатково** Не хочеться мити посуд самостійно? Зламай програму, видаливши своє ім’я зі списку за допомогою команди `{remove}` `{from}`.
             4:
                 story_text: |
-                    With quotation marks you can make your dishwashing planning more beautiful.
-                    This time the sample code is not quite complete.
+                    За допомогою лапок ви можете покращити свою програму миття посуду.
 
-                    Can you complete the code by filling the blanks? Every blank must be replaced with one word of symbol.
-
-                    Tip: Don't forget the quotation marks!
+                    ### Вправи
+                    Спочатку заповніть правильні символи або команди в порожніх полях, щоб цей приклад програми працював.
+                    Ви зрозуміли? Чудово! Тепер скопіюйте свій власний код із попереднього рівня та змусьте його працювати на цьому рівні, додавши лапки в потрібні місця.
             5:
                 story_text: |
-                    With the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.
-
-                    Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
-                    Don't forget the quotes!
+                    З `{if}` тепер ви можете отримати більше задоволення від вибору в програмі. Ви можете змусити свою програму реагувати на вибір, зроблений комп’ютером.
+                    ### Вправи
+                    Чи можете ви закінчити код так, щоб він друкував «дуже погано», коли настане ваша черга, а в іншому випадку «так!»?
+                    Не забувайте про цитати!
                 example_code: "```\npeople {is} mom, dad, Emma, Sophie\ndishwasher {is} people {at} {random}\n{if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ \n{else} {print} 'luckily no dishes because' _ 'is already washing up'\n```\n"
             6:
                 story_text_2: |
-                    Якщо ви не впевнені, що попередня програма може вибрати для вас, щоб зробити страви протягом всього тижня! Це не ярмарок!
-                    Щоб створити чесну систему, ви можете використовувати команду `{remove}` для видалення обраної особи зі списку. Так ви не повинні робити страви знову до тих пір, поки що кожен знайде щось.
+                    Якщо вам дуже не пощастить, попередня програма може запропонувати вам мити посуд цілий тиждень! Це не чесно!
+                    Щоб створити більш справедливу систему, ви можете скористатися командою `{remove}`, щоб видалити вибрану особу зі списку. Таким чином вам не доведеться знову мити посуд, доки всі не займуть свою чергу.
 
-                    З понеділка по п'ятницю! Чи можна додати решту тижня?
-                    І ви можете придумати, коли ваш список порожній?
-                    ?
+                    Понеділок і вівторок для вас готові! Чи можете ви додати решту тижня?
+                    І... чи можете ви придумати рішення, коли ваш список порожній?
                 example_code_2: |
                     ```
                     people = mom, dad, Emma, Sophie
@@ -977,11 +1062,13 @@ adventures:
                     dishwasher = people {at} {random}
                     {print} 'Tuesday the dishes are done by: ' dishwasher
                     {remove} dishwasher {from} people
-                    dishwasher = people {at} {random}
                     ```
             7:
                 story_text: |
-                    With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for the entire week.
+                    За допомогою `{repeat}` ви можете повторювати частини коду. Ви можете використовувати це, щоб обчислити, хто буде мити посуд протягом кількох днів!
+                    ### Вправи
+                    Використовуйте команду `{repeat}`, щоб вирішити, кому потрібно мити посуд цілий тиждень. Кожне поле потрібно заповнити однією командою або числом!
+                    **Додатково** Чи можете ви згадати інші завдання в домі? Адаптуйте код, щоб він вирішував три домашні справи. Не забудьте роздрукувати, про які завдання йдеться!
                 example_code: |
                     ```
                     people = mom, dad, Emma, Sophie
@@ -989,7 +1076,11 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you could make an even better dish washing shedule.
+                    На цьому рівні ви можете легко скласти розклад на весь тиждень!
+
+                    ### Вправи
+                    Додайте другу роботу, таку як пилосос або прибирання, і поділіть її також на весь тиждень.
+                    <br>**Екстра** Програма нечесна, можна не пощастити і прати весь тиждень. Як зробити програму більш справедливою?
     elif_command:
         description: elif
         levels:
@@ -1019,12 +1110,12 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Have you ever been to a carnival and had your future predicted by a fortune teller? Or have you ever played with a magic eight ball?
-                    Then you probably know that they can't really predict your future, but it's still fun to play!
+                    Ви коли-небудь були на карнавалі і вам ворожка передбачила майбутнє? Або ви коли-небудь грали з чарівною вісімкою?
+                    Тоді ви, мабуть, знаєте, що вони не можуть передбачити ваше майбутнє, але грати все одно цікаво!
 
-                    In the upcoming levels you can learn how to create your own fortune telling machine!
-                    In level 1 you can start off easy by letting Hedy introduce herself as a fortune teller and let her {echo} the players' answers.
-                    Like this:
+                    На наступних рівнях ви зможете навчитися створювати власну машину для ворожіння!
+                    На першому рівні ви можете почати легко, дозволивши Хеді представитися як ворожка та дозволити їй `{echo}` відповіді гравців.
+                    як це:
                 example_code: |
                     ```
                     {print} Hello, I'm Hedy the fortune teller!
@@ -1034,44 +1125,60 @@ adventures:
                     {echo} Your name is
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Hedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?
-                    Obviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!
-                    Take a look in level 2 to improve your fortune teller.
+                    ### Вправи
+                    Скопіюйте приклад коду на екран введення та заповніть пропуски, щоб код працював.
+                    **Додатково** Змініть код і дозвольте ворожці передбачити не лише ваше ім’я, а й вік, улюблену спортивну команду чи щось інше про вас.
             3:
                 story_text: |
-                    In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
-                    In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
+                    На попередніх рівнях ви створили свою першу машину для ворожіння, але Хеді не могла нічого передбачити, лише `{echo}`.
+                    На цьому рівні ви можете використовувати змінну та команду `{at} {random}`, щоб дійсно дозволити Хеді вибрати відповідь за вас. Подивіться, наприклад, цей код:
                 story_text_2: |
                     ### Exercises
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
             4:
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    question {is} {ask} 'What do you want to know?'
-                    {print} 'This is your question: ' question
-                    answers {is} yes, no, maybe
-                    {print} 'My crystal ball says...'
-                    {sleep} 2
-                    {print} answers {at} {random}
+                    _ Додайте лапки до цього коду _
+                    {print} Я Хеді ворожка!
+                    question {is} {ask} Що ти хочеш знати?
+                    {print} Це ваше запитання: запитання
+                    відповіді {є} так, ні, можливо
+                    {print} Моя кришталева куля говорить...
+                    {сон} 2
+                    {print} відповідає {at} {random}
                     ```
             5:
                 story_text: |
-                    In this level you'll learn to (secretly) tip the odds in your favor, when using the fortune teller!
-                    By using `{if}` and `{else}` you can make sure that you will always get a good fotune, while other people might not.
-                    Check out this example to find out how.
+                    ### Вправи
+                    У прикладі коду ви бачите, як створити програму-ворожку, яка дозволить вам схилити шанси на вашу користь. Ця шахрайська програма завжди повідомляє вам, що ви виграєте в лотерею, але ваші друзі ніколи не виграють.
+
+                    Використовуйте це, щоб створити власну програму, будьте креативними! Наприклад, ви можете створити код, який передбачає, що:
+                    * ваша улюблена спортивна команда переможе всіх конкурентів!
+                    * для кіновечору буде обрано ваш улюблений фільм!
+                    * Ви виграєте квитки на улюблене шоу!
+                    * ти найпрекрасніша з усіх, як чарівне дзеркало Білосніжки.
+                    Нехай ваша уява зробить свою роботу!
+
+                    Ваша програма повинна складатися з принаймні 10 рядків коду та мати принаймні одну команду `{if}` і `{else}`.
                 example_code: |
                     ```
-                    {print} 'Im Hedy the fortune teller!'
-                    {print} 'I can predict {if} youll win the lottery tomorrow!'
+                    friends {is} Jordan, Lucy, Dave
+                    {print} 'I can predict if you will win the lottery tomorrow!'
                     person {is} {ask} 'Who are you?'
-                    {if} person {is} Hedy {print} 'You will definitely win!🤩' {else} {print} 'Bad luck! Someone {else} will win!😭'
+                    good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
+                    bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
+                    {if} person {in} friends {print} good_answer {at} {random}
+                    {else} {print} bad_answer {at} {random}
                     ```
             6:
                 story_text: |
-                    In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
-                    For example you could calculate how rich you'll get or how many kids you will have when you grow up.
+                    На цьому рівні ви можете використовувати математику у своїх передбаченнях як ворожка. Це дозволяє вам складати (дурні) формули для розрахунку майбутнього.
+                    Наприклад, ви можете підрахувати, наскільки багатими ви станете або скільки дітей у вас буде, коли виростете.
+
+
+
+                    ### Вправи
+                    Чи можете ви придумати власну (безглузду) машину для ворожіння?
                 example_code: |
                     ```
                     {print} 'I am Hedy the fortune teller!'
@@ -1085,22 +1192,10 @@ adventures:
                     {sleep}
                     {print} kids ' kids!'
                     ```
-
-                    If the previous example wasn't silly enough for you, take a look at this one!
-
-                    ```
-                    {print} 'Im Hedy the silly fortune teller!'
-                    {print} 'I will predict how smart you are!'
-                    football = {ask} 'On a scale 1-10 how much do you love football?'
-                    bananas = {ask} 'How many bananas did you eat this week?'
-                    hygiene = {ask} 'How many times did you wash your hands today?'
-                    result = bananas + hygiene
-                    result = result * football
-                    {print} 'You are ' result ' percent smart.'
-                    ```
             7:
                 story_text: |
-                    In this level you can use the `{repeat}` command to make your machine tell multiple fortunes at once.
+                    ### Вправи
+                    Завершіть цю програму, яка скаже вам, чи любить ваша кохана відповідь чи ні.
                 example_code: |
                     ```
                     {print} 'Im Hedy the fortune teller!'
@@ -1111,9 +1206,10 @@ adventures:
                     ```
             8:
                 story_text: |
-                    In the previous levels you've learned how to use repeat to make the fortune teller answer 3 questions in a row, but we had a problem with printing the questions.
-                    Now that problem is solved, because of the new way of using the repeat command.
-                    In the next example you can have your fortune teller {ask} 3 questions and also print them!
+                    У наступному прикладі ви можете попросити ворожку поставити кілька запитань і також роздрукувати їх!
+
+                    ### Вправи
+                    Чи можете ви заповнити правильну команду в пропусках?
                 example_code: |
                     ```
                     {print} 'I am Hedy the fortune teller!'
@@ -1127,7 +1223,10 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
+                    На цьому рівні ви навчитеся програмувати гру MASH (особняк, квартира, халупа, будинок). У цій грі ви можете передбачити для всіх гравців відразу, як буде виглядати їх майбутнє.
+
+                    ### Вправи
+                    Заповніть пропуски, використовуючи нову команду, яку ви вивчили на цьому рівні.
                 example_code: |
                     ```
                     houses = mansion, apartment, shack, house
@@ -1141,8 +1240,11 @@ adventures:
                         {sleep}
                     ```
             12:
-                story_text: |
-                    In this level you can make your fortunes multiple words. Like in this example below:
+                story_text: |-
+                    Починаючи з рівня 12, вам також доведеться використовувати лапки в списках перед і після кожного елемента.
+
+                    ### Вправи
+                    Додайте два передбачення до списку
                 example_code: |
                     ```
                     fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
@@ -1173,23 +1275,25 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
-                    An **argument** is a variable that is used within a function. It is not used outside the function.
+                    Тепер, коли ви навчилися використовувати функції, ви навчитеся використовувати функцію з аргументом.
+                    **Аргумент** – це змінна, яка використовується у функції. Він не використовується поза функцією.
 
-                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
+                    Наприклад, у цьому коді ми запрограмували перший куплет пісні «My Bonnie is over the ocean».
+                    У цьому прикладі коду використовується аргумент "місце". Place — це змінна, яка використовується лише у функції, тому аргумент.
+                    Щоб використовувати 'place', ми розмістили `{with} place` після `{define} song`.
+                    Під час виклику функції комп’ютер замінить аргумент «place» фрагментом тексту після «{call} song {with}».
 
-                    ### Exercise
-                    The next verse of this song goes:
+                    ### Вправи
+                    Наступний куплет цієї пісні:
 
-                    Last night as I lay on my pillow
-                    Last night as I lay on my bed
-                    Last night as I lay on my pillow
-                    I dreamed that my Bonnie is dead
+                    ```not_hedy_code
+                    Вчора ввечері я лежав на подушці
+                    Вчора ввечері, коли я лежав на своєму ліжку
+                    Вчора ввечері я лежав на подушці
+                    Мені наснилося, що моя Бонні мертва
+                    ```
 
-                    Can you program this verse in the same way as the example?
+                    Чи можете ви запрограмувати цей вірш так само, як у прикладі?
             14:
                 example_code: |
                     ```
@@ -1208,8 +1312,10 @@ adventures:
         levels:
             1:
                 story_text_2: |
-                    ### Exercise
-                    Can you finish the scary story? Or make up your own haunted house story?
+                    ### Вправи
+                    Скопіюйте приклад коду на екран введення, натиснувши жовту кнопку.
+                    Тепер завершіть історію, додавши принаймні 5 рядків коду.
+                    Не забувайте починати кожен рядок коду з команди `{print}`.
             2:
                 example_code: |
                     ```
@@ -1218,46 +1324,63 @@ adventures:
                     monster_3 {is} 👶
                     {print} You enter the haunted house.
                     {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
+                    {print} You run into the other room...
+                    {print} But a monster_2 is waiting there for you!
                     {print} Oh no! Quickly get to the kitchen.
                     {print} But as you enter monster_3 attacks you!
                     ```
                 example_code_2: |
                     ```
-                    monster_1 {is} _
-                    monster_2 {is} _
-                    monster_3 {is} _
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster_3 attacks you!
+                    чудовисько_1 {є} _
+                    чудовисько_2 {є} _
+                    monster_3 {є} _
+                    {print} Ви входите в будинок з привидами.
+                    {print} Раптом ви бачите чудовисько_1
+                    {print} Ви біжите в іншу кімнату...
+                    {print} Але там на вас чекає чудовисько_2!
+                    {print} О ні! Швидше на кухню.
+                    {print} Але коли ви входите, monster_3 атакує вас!
                     ```
             3:
                 story_text: |
-                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
-                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
-                    Let Hedy decide randomly!
+                    На попередніх рівнях ви познайомилися зі своєю грою про будинок з привидами, але, як ви могли помітити, історія завжди матиме жахливий кінець.
+                    На цьому рівні ви можете зробити свою історію більш інтерактивною, змінивши результат гри; то з'їдять, то втечеш!
+                    Нехай Хеді вирішує навмання!
+
+                    ### Вправи
+                    Скопіюйте приклади кодів і заповніть пропуски, щоб це запрацювало!
+
+                    **Екстра** Ця історія досить проста, можливо, ви можете її трохи налякати, додавши більш захоплюючу історію.
+                    Крім того, зараз у вас дуже обмежені результати, є лише 3 варіанти того, що знаходиться за дверима. Можливо, ви придумаєте ще монстрів, щоб додати до списку!
             4:
                 story_text: |
-                    In this level you learn how to use quotation marks in your games.
-                    Can you make your Haunted House level 4 proof?
+                    На цьому рівні ви навчитеся використовувати лапки в іграх.
+
+                    ### Вправи
+                    Чи можете ви зробити свій Будинок з привидами 4 рівня доказом?
+
+                    ### Вправа 2
+                    Поверніться на попередній рівень і скопіюйте свій код будинку з привидами. Змусьте код працювати на цьому рівні, додавши лапки в потрібні місця.
                 example_code: |
                     ```
-                    {print} _Escape from the haunted house!_
-                    {print} _There are 3 doors in front of you..._
-                    choice {is} {ask} _Which door do you choose?_
-                    {print} _You picked door ..._ choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} _You see..._
-                    {sleep}
-                    {print} monsters {at} {random}
+                    _ Додайте цей код у лапки _
+                    {print} Втеча з дому з привидами!
+                    {print} Перед вами 3 двері...
+                    вибір {є} {питати} Які двері ви обираєте?
+                    {print} Ви вибрали двері ... вибір
+                    монстри {є} зомбі, вампір, НІЩО ВИ ВТІКЛИ
+                    {print} Бачите...
+                    {сон}
+                    {print} монстрів {at} {random}
                      ```
             5:
                 story_text: |
-                    Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
-                    If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
-                    In this level you can only win the game by picking the same door Hedy picked randomly.
+                    До цього рівня в грі «Будинок з привидами» гравець завжди просив вибрати двері, але, як ви могли помітити, їм не обов’язково відповідати правильно.
+                    Якщо гравець заповнив абсолютно випадкову відповідь, гра все одно працюватиме, і гравець може навіть виграти (не дивлячись на те, що не вибрав двері).
+                    На цьому рівні ви можете виграти гру, лише вибравши двері, які випадковим чином вибрала Хеді.
+
+                    ### Вправи
+                    Чи можете ви знайти 4 пропущених слова, щоб завершити код?
                 example_code: |
                     ```
                     {print} 'Escape from the haunted house!'
@@ -1273,42 +1396,42 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In this level you can use nesting, which allows you to make the haunted house even more interactive!
+                    На цьому рівні ви можете використовувати вкладення, що дозволяє зробити будинок з привидами ще більш інтерактивним!
 
-                    ### Exercise
-                    Now it's very hard to win this game, can you make it easier to win?
-                    For example by only having 1 wrong door and 2 correct doors instead of 1 correct door and 2 wrong ones?
+                    ### Вправи
+                    Зараз дуже важко виграти цю гру, чи можете ви полегшити перемогу?
+                    Змінити свій код, щоб він містив лише одні неправильні двері та двоє правильних, а не одні правильні двері та двоє неправильних? 
+                    Порада: це означає зміну змінної correct_door на wrong_door і перемикання кодів `{if}` і `{else}`.
+                    І, звичайно, ви також можете змінити історію та зробити її своєю. Змініть монстрів або зробіть веселе ігрове шоу, де ви отримаєте подарунок!
             11:
                 story_text: |
-                    In this level we've changed the repeat command and we've added a line to our haunted house that tells the player in which room they are.
+                    На цьому рівні ми змінили команду `{for}`, щоб ми могли повідомляти гравцеві, де він знаходиться. 
+
+                    ### Вправа 1
+                    Завершіть програму, щоб гравець знав, у якій кімнаті він знаходиться.
+
+                    ### Вправа 2
+                    Перетворіть програму на пригоду, виконавши такі дії:
+
+                    1. Складіть список варіантів (наприклад, битися чи втекти)
+                    2. Переконайтеся, що гравець може вибрати варіант за допомогою `{ask}`
+                    3. Чи правильна відповідь? Тоді вони можуть перейти до наступного монстра. Вони дають неправильну відповідь? Повідомте гравця про це за допомогою `{print}`. 
+
+                    **Екстра** Якщо ви зробили неправильний вибір, монстр все одно буде показаний! Як ти міг це змінити?
                 example_code: |
                     ```
-                    {print} 'Escape from the Haunted House!'
-                    player {is} alive
-                    doors = 1, 2, 3
-                    monsters = zombie, vampire, giant spider
-                    {for} i {in} {range} 1 {to} 3
-                        {if} player {is} alive
-                            correct_door = doors {at} {random}
-                            {print} 'Room ' i
-                            {print} 'There are 3 doors in front of you...'
-                            chosendoor = {ask} 'Which door do you choose?'
-                            {if} chosendoor {is} correct_door
-                                {print} 'No monsters here!'
-                            {else}
-                                {print} 'You are eaten by a ' monsters {at} {random}
-                                player = dead
-                        {else}
-                            {print} 'GAME OVER'
-                    {if} player {is} alive
-                        {print} 'Great! You survived!'
+                    {print} «Втеча з дому з привидами!»
+                    монстри = зомбі, вампір, гігантський павук
+                    _
+                        {print} «Кімната» i
+                        монстр = монстри {в} {випадково}
                     ```
     if_command:
         description: Introducing the if command
         levels:
             9:
                 story_text: |
-                    In this level you can also put an {if} command inside another {if} command.
+                    На цьому рівні ви також можете розмістити команду `{if}` всередині іншої команди `{if}`.
     in_command:
         description: Introducing the in command
         levels:
@@ -1336,40 +1459,45 @@ adventures:
                     {if} age > 12
                         {print} 'You are older than I am!'
                     ```
-                example_code_3: |
                     ```
-                    name = {ask} 'What is your name?'
-                    {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
-                    ```
-
-                    {if} age < 13
+                    age = {ask} 'How old are you?'
+                    {if} age < 12
                         {print} 'You are younger than me!'
                     {else}
                         {print} 'You are older than me!'
+                    ```
+                example_code_3: |
+                    ```
+                    name = {ask} 'Як тебе звати?'
+                    {if} name != 'Hedy'
+                        {print} "Ви не Хеді"
+                    ```
     language:
         levels:
             5:
                 story_text: |
-                    Make your own program to practice your vocabulary in a new language.
+                    Створіть власну програму для відпрацювання словникового запасу новою мовою.
+
+                    ### Вправи
+                    Зробіть код довшим, додавши принаймні ще 3 слова, які гравець може вивчити.
+                    **Додатково** Звичайно, ви можете вибрати мову, відмінну від французької. Ви можете змінити код на будь-яку мову, яку хочете вивчити.
     maths:
         levels:
             6:
                 example_code: |
                     ```
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
+                    {print} '5 плюс 5 це ' 5 + 5
+                    {print} '5 мінус 5 це ' 5 - 5
+                    {print} '5 помножити на 5 це ' 5 * 5
+                    {print} '5 поділити на 5 це ' 5 / 5
                     ```
             12:
                 example_code_2: |
                     ```
-                    a = 'Hello '
-                    b = 'world!'
+                    a = 'Привіт'
+                    b = 'світ!'
                     {print} a + b
                     ```
-
-                    {print} 2.5 + 2.5
     music:
         levels:
             6:
@@ -1396,14 +1524,14 @@ adventures:
                     **Додатково** Ви також можете дозволити папузі ставити кілька запитань. Введіть ще кілька рядків коду під вашим власним кодом.
                 example_code_2: |
                     ```
-                    {print} Я - папуга Хедi.
+                    {print} Папуга Ім Хеді
                     {ask} _
                     {echo}
-                    {echo}
-                    ```
+                    {exho}
             2:
                 story_text: |
-                    Створіть власного домашнього папугу, який буде копіювати вас!
+                    На попередньому рівні ви зробили папугу, який буде повторювати за вами. На цьому рівні ми зробимо папугу інтерактивним за допомогою змінної та команди `{ask}`.
+                    Ми також зробимо папугу більш живою, додавши команди `{sleep}` після того, як щось буде сказано.
                 example_code: |
                     ```
                     {print} Im Hedy the parrot
@@ -1415,11 +1543,16 @@ adventures:
                     {print} name
                     ```
                 story_text_2: |
-                    ### Exercise
-                    You can use variables to make the parrot say more than only your name. Can you complete this code?
+                    ### Вправи
+                    По-перше, завершіть рядок 2 командами `{is}` і `{ask}`.
+                    Потім заповніть команду `{sleep}` у рядках 4 і 6, щоб дозволити папузі трохи помовчати.
+
+                    **Додатково** Чи можете ви змусити папугу запитувати не лише ваше ім’я, додавши більше рядків коду?
             3:
                 story_text: |
-                    Teach your parrot a new word with `{add}`.
+                    Навчіть свого папугу новому слову за допомогою `{add}`.
+                    ### Вправи
+                    Чи можете ви додати команду `{add} {to_list}`, щоб код працював?
                 example_code: |
                     ```
                     words {is} squawk, Hedy
@@ -1431,11 +1564,15 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In this level we have to use quotation marks with the commands `{ask}` and `{print}`.
-                    Can you complete the code by adding quotation marks?
+                    На цьому рівні ми повинні використовувати лапки з командами `{ask}` і `{print}`.
+                    ### Вправи
+                    Доповніть код, заповнивши пробіли лапками.
             5:
                 story_text: |
-                    Reward your parrot if it says the correct word!
+                    Нагородіть свого папугу, якщо він скаже правильне слово!
+
+                    ### Вправи
+                    Завершіть код, заповнивши 4 відсутні команди.
                 example_code: |
                     ```
                     слова {is} крякай, Хеді.
@@ -1452,7 +1589,11 @@ adventures:
         levels:
             12:
                 story_text: |
-                    In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
+                    У цій пригоді ви дізнаєтеся, як зробити цифрову скарбничку.
+
+                    ### Вправи
+                    Завершіть код, щоб підрахувати, скільки у вас грошей і скільки часу вам потрібно накопичувати, щоб купити те, що ви хочете!
+                    **Додатково** Можливо, ви вже заощадили гроші? Відніміть це від суми, яку вам доведеться накопичити.
                 example_code: |
                     ```
                     {print} 'The digital piggy bank'
@@ -1500,14 +1641,17 @@ adventures:
                     temperature = 25
                     {print}('It is ', temperature, ' degrees outside')
                     ```
-
+                    ```
+                    name = 'Hedy'
                     {print}('My name is ', name)
+                    ```
     random_command:
         levels:
             16:
                 story_text: |-
-                    We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code. The second part of the example code shows you that we can also match 2 lists using the variable i.
+                    Ми збираємося створювати списки способом Python, з квадратними дужками навколо списків! Ми також зберігаємо лапки навколо кожного елемента, як ми навчилися на попередніх рівнях.
+                    Ми використовуємо квадратні дужки, щоб вказати місце в списку. Наприклад: `friends[1]` — це перше ім’я в списку друзів, як ви бачите в першій частині прикладу коду.
+                    Друга частина прикладу коду показує, що ми також можемо зіставити 2 списки за допомогою змінної i.
     repeat_command:
         description: repeat command
         levels:
@@ -1520,8 +1664,11 @@ adventures:
                     Пограйте з командою `{repeat}`. Чи можете ви створити пісню з днем народження лише в 3 рядках коду замість 4 зараз?
             9:
                 story_text: |
-                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
-                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
+                    Чудова робота! Ви вийшли на новий рівень! На попередньому рівні ви навчилися використовувати кілька рядків коду в команді `{if}` або `{repeat}`. 
+                    Але ви ще не можете поєднати два...
+
+                    Хороші новини! На цьому рівні вам буде дозволено розміщувати `{if}` всередині `{if}`, `{repeat}` всередині команди `{repeat}` і один в одному.
+                    Спробуйте!
                 example_code: |
                     й й
                     {repeat} 3 {times}
@@ -1542,8 +1689,12 @@ adventures:
         levels:
             1:
                 story_text_2: |
-                    ### Exercise
-                    Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
+                    ### Вправи
+                    Скопіюйте приклад коду на екран введення, натиснувши жовту кнопку.
+                    По-перше, заповніть правильну команду в порожніх полях, щоб код працював належним чином.
+                    Потім додайте ще принаймні 4 рядки коду до ресторанної програми.
+                    Запитайте клієнта, що він хоче випити, і запитайте, чи хоче він заплатити готівкою чи карткою.
+                    Нарешті, подумайте про гарний спосіб попрощатися зі своїм клієнтом.
                 example_code_2: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -1554,97 +1705,114 @@ adventures:
                     ```
             2:
                 story_text: |
-                    In level 2 you could expand your restaurant by using variables. In level 1 Hedy could only {echo} the order once and only remember the last thing that was ordered.
-                    Now you can use variables and Hedy can remember both the food and the drinks!
+                    На рівні 2 ви можете розширити свій ресторан за допомогою змінних. На рівні 1 Хеді могла лише `{echo}` наказати один раз і запам’ятати лише останнє, що було замовлено.
+                    Тепер ви можете використовувати змінні, і Хеді зможе запам’ятати як їжу, так і начинку!
                 example_code: |
                     ```
-                    {print} Welcome to Hedy's restaurant!
-                    {print} Today we're serving pizza or lasagna.
-                    food {is} {ask} What would you like to eat?
-                    {print} Great choice! The food is my favorite!
-                    topping {is} {ask} Would you like meat or veggies on that?
-                    {print} food with topping is on its way!
-                    drinks {is} {ask} What would you like to drink with that?
-                    {print} Thank you for your order.
-                    {print} Your food and drinks will be right there!
+                    {print} Ласкаво просимо до ресторану Hedy's!
+                    {print} Сьогодні подаємо піцу або лазанью.
+                    food {is} {ask} Що б ви хотіли з'їсти?
+                    {print} Чудовий вибір! Їжа моя улюблена!
+                    topping {is} {ask} Хочете м’яса чи овочів?
+                    {print} їжа з начинкою вже в дорозі!
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Can you make this code more elaborate? For example by adding drinks to the order? Or...?
+                    ### Вправи
+                    Скопіюйте власний код ресторану з попереднього рівня на екран введення нижче.
+                    Виправте код, замінивши команди `{ask}` і `{echo}` і використовуючи змінні, як ви навчилися на цьому рівні.
+
+                    Тепер, коли ваш код знову працює, настав час додати ще щось.
+                    Подивіться на останній рядок прикладу коду: `{print} їжа з начинкою вже в дорозі!`
+                    У цьому одному рядку 2 змінні були використані для створення підсумку замовлення.
+                    Тепер додайте власний короткий опис їжі та напоїв, замовлених клієнтом.
+
+                    **Додатково** Тепер, коли ви навчилися використовувати змінні, ви можете використовувати скільки завгодно змінних в одному рядку. Чи можете ви додати більше змінних до свого коду, як-от їжа в місці або на винос, готівка чи картка, із соломинкою чи без тощо?
             3:
                 example_code: |
                     ```
-                    {print} Welcome to Hedy's Random Restaurant!
-                    {print} The only restaurant that will randomly choose your meal and its price for you!
-                    starters {is} salad, soup, carpaccio
-                    mains {is} pizza, brussels sprouts, spaghetti
-                    desserts {is} brownies, ice cream, french cheeses
-                    drinks {is} cola, beer, water
-                    prices {is} 1 dollar, 10 dollars, 100 dollars
-                    {print} You will start with: starters {at} {random}
-                    {print} Then we'll serve: mains {at} {random}
-                    {print} And as dessert: desserts {at} {random}
-                    {print} You will get a drinks {at} {random} to drink
-                    {print} That will be: prices {at} {random}
-                    {print} Thank you and enjoy your meal!
+                    dishes {is} spaghetti, brussels sprouts, hamburgers
+                    {print} You will have dishes {at} {random} tonight!
+                    prices {is} 1 euro, 10 euros, 100 euros
+                    {print} That will be prices {at} {random} please.
                     ```
                 story_text_2: |
-                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
+                    ### Вправи
+                    Тепер створіть власну версію випадкового ресторану.
+                    Складіть список перших страв, основних страв, десертів, напоїв і цін самостійно.
+                    Потім використовуйте команди `{print}` і `{at} {random}`, щоб повідомити клієнту, що буде в його меню сьогодні ввечері.
                 example_code_2: |
                     ```
-                    {print} Mystery milkshake
-                    flavors {is} strawberry, chocolate, vanilla
-                    allergies {is} {ask} Are you allergic to any falvors?
-                    {remove} allergies {from} flavors
-                    {print} You get a flavors {at} {random} milkshake
+                    {print} Ласкаво просимо у ваш власний випадковий ресторан!
+                    початківці {є} _
+                    мережа {є} _
+                    десерти {є} _
+                    напої {є} _
+                    ціни {є} _
+                    _
                     ```
             4:
                 story_text: |
-                    ### Exercise
-                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
-                    Then, use the `{clear}` command to only show one line at a time in your output screen.
+                    У ресторані ви також повинні використовувати лапки під час використання команди `{print}` або `{ask}`.
 
-                    ### Exercise 2
-                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
+                    ### Вправи
+                    Додайте лапки до цього коду, щоб він працював! Будьте уважні: змінні не повинні бути взяті в лапки.
+                    Потім скористайтеся командою `{clear}`, щоб відображати лише один рядок на екрані виводу.
+
+                    ### Вправа 2
+                    Поверніться на попередній рівень і скопіюйте код свого ресторану. Змусьте код працювати на цьому рівні, додавши лапки в потрібні місця та додавши кілька команд `{clear}`.
             5:
                 story_text: |
-                    На цьому рівні команда `{if}` дозволяє вам `{ask}` питання клієнтам і давати різні реакції на відповіді.
-                    У наведеному нижче прикладі ви бачите, що ви можете `{ask}` клієнта `{if}`, якщо він хоче почути про спеціальні пропозиції, і Hedy може відповісти відповідно.
+                    ### Вправи
+                    Приклад коду показує, як можна запрограмувати, щоб у вашому ресторані закінчився пункт меню.
+                    Скопіюйте власний код ресторану з попередніх рівнів. Створіть проблему у своєму ресторані та закодуйте її, як у прикладі коду.
+                    Наприклад, у вас також може закінчитися пункт меню, або ви не приймаєте кредитні картки, або машина для морозива зламалася.
+
+                    **Додатково** Чи запрограмували ви проблему та відповідні відповіді? Потім спробуйте додати більше команд `{if}` і `{else}` у свій код.
+                    Спробуйте додати `{if}` після кожної команди `{ask}` у вашому коді, щоб зробити код максимально інтерактивним!
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    special {is} {ask} 'Would you like to hear our specials today?'
-                    {if} special {is} yes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
-                    food {is} {ask} 'What would you like to eat?'
-                    {print} 'One ' food ', coming right up!'
-                    drink {is} {ask} 'What would you like to drink with that?'
-                    {if} drink {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
-                    anything {is} {ask} 'Would you like anything {else}?'
-                    {print} 'Let me repeat your order...'
-                    {print} 'One ' food
-                    {if} drink {is} cola {print} 'and...' {else} {print} 'One ' drink
-                    {if} anything {is} no {print} 'Thats it!' {else} {print} 'One ' anything
-                    {print} 'Thank you for your order and enjoy your meal!'
+                    drinks_in_stock {is} water, lemonade, cola, orange juice
+                    drink {is} {ask} 'What would you like to drink?'
+                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'coming up!'
+                    {else} {print} 'Sorry, we do not sell that'
                     ```
             6:
                 story_text: |
-                    In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
+                    На цьому рівні ви можете використовувати математику, щоб обчислити загальну вартість замовлення вашого клієнта, що може зробити ваш віртуальний ресторан більш реалістичним.
+                    Але ви також можете додати багато іншого до свого віртуального ресторану, наприклад, більше страв.
+
+                    ### Вправи
+                    Ви можете додати багато іншого до свого віртуального ресторану. Наприклад, чи можете ви...
+                    - запитайте, скільки людей прийде і помножте ціну на цю суму?
+                    - додати інший курс?
+                    - надавати людям знижку, коли вони вводять (секретний) код купону?
+                    - додати дитяче меню?
+                    - подумайте про інші цікаві речі, які можна додати?
             7:
                 story_text: |
-                    У цьому рівні ви навчилися використовувати команду `{repeat}` для повторення рядка коду певну кількість разів.
-                    Ви можете використати це у своєму ресторані, щоб `{ask}` кількох людей, що вони хотіли б з'їсти. Ось так:
+                    На цьому рівні ви навчилися використовувати команду `{repeat}`, щоб повторити рядок коду певну кількість разів.
+                    Ви можете використовувати це у своєму ресторані, щоб `{ask}` кількох людей, що вони хочуть їсти.
+
+                    ### Вправи
+                    Чи можете ви завершити код? Хеді потрібно повторити це запитання стільки разів, скільки буде людей. Отже, якщо є 5 осіб, питання потрібно поставити 5 разів.
+                    **Екстра** Розширте свій код додатковими запитаннями, наприклад про напої чи соус.
                 example_code: |
                     ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people are joining us today?'
-                    {repeat} people times food = {ask} 'What would you like to eat?'
-                    {print} 'Thanks for your order! Its coming right up!'
+                    {print} «Ласкаво просимо до ресторану Chez Hedy»
+                    people = {ask} 'Скільки людей приєднаються до нас сьогодні?'
                     ```
             9:
                 story_text: |
-                    У цьому рівні ви можете використовувати кластеризацію, щоб зробити ваш ресторан більш реалістичним та веселим!
-                    Наприклад, ви можете "`{ask}` соус, `{if}` хтось замовить картоплю фрі, але ви не будете цього робити, `{if}` хтось замовить піцу!
-                    Перевірте приклад і спробуйте це у своєму власному віртуальному ресторані!
+                    На цьому рівні ви можете використовувати вкладення, щоб зробити свій ресторан більш реалістичним і веселішим!
+
+                    ### Вправи
+                    У прикладі коду видалено відступ. 
+                    Чи можете ви визначити, скільки відступів потрібно для кожного рядка, щоб код працював належним чином?
+                    Якщо клієнт замовляє піцу, Геді не слід запитувати, який соус хоче клієнт.
+
+                    **Екстра** У ресторані не є всі соуси. Складіть список доступних соусів і на кожне замовлення відповідайте, чи продаєте ви його.<br>
+                    **Екстра** Піца має начинку. Запитуйте клієнтів, чого вони хочуть.<br>
+                    **Додатково** Клієнти хочуть випити? Запитайте їх також!<br>
                 example_code: |
                     й й
                     {print} 'Велком в ресторан Chez Hedy! Р
@@ -1669,18 +1837,23 @@ adventures:
                     й й
             10:
                 story_text: |
-                    In this level you'll learn how to easily {ask} your guests' orders in a short code.
+                    На цьому рівні ви навчитеся легко отримувати замовлення на різні курси.
+
+                    ### Вправа 1
+                    Завершіть код `{ask}` на пустих місцях, щоб клієнт запитав, що він хоче їсти для кожної страви.
                 example_code: |
                     ```
-                    courses = appetizer, main course, dessert
-                    {for} course {in} courses
-                        food = {ask} 'What would you like to eat as your ' course '?'
-                        {print} food ' will be your ' course
+                    страви = закуска, основна страва, десерт
+                    {для} курсу {в} курсах
+                        {print} "Яке ваше замовлення на "курс"?"
+                        _ 
+                        _
                     ```
                 story_text_2: |
+                    ### Вправи
                     Звичайно, ви також можете замовити для кількох людей!
-                    Чи можна додати правильну кількість відступу до кожного рядка, щоб зробити роботу коду належним чином?
-                    Порада: деякі лінії не потребують відступу.
+                    Чи можете ви додати правильний відступ перед кожним рядком, щоб код працював належним чином?
+                    Порада: деякі рядки взагалі не потребують відступу.
                 example_code_2: |
                     ```
                     courses = appetizer, main course, dessert
@@ -1692,7 +1865,13 @@ adventures:
                     ```
             11:
                 story_text: |
-                    Ми можемо використовувати`{for} i {in} {range} 1 {to} 5` для `{print}` виведення замовлень від декількох клієнтів у впорядкованому вигляді.
+                    Ми можемо використовувати `{for}` з `{range}`, щоб надрукувати замовлення від кількох клієнтів упорядкованим чином.
+
+                    ### Вправи
+                    Закінчіть код ресторану, щоб ви могли запросити замовлення кількох людей. Щоразу друкуйте номер замовлення: «Замовлення 1», «Замовлення 2» тощо.
+                    Ви не знаєте, як це зробити? Подивіться на свій код рівня 8.
+
+                    **Екстра** На рівні 9 ресторан також використовував ціни. Ви також можете додати це сюди!
                 example_code: |
                     й й
                     {print} 'Велком до ресторану Hedy! Р
@@ -1702,7 +1881,10 @@ adventures:
                     й й
             12:
                 story_text: |
-                    From this level on you can use decimal numbers to make you menu more realistic.
+                    Починаючи з цього рівня, ви можете використовувати десяткові числа, щоб зробити своє меню більш реалістичним.
+
+                    ### Вправи
+                    Чи можете ви придумати код, щоб надати друзям і родині знижку 15%?
                 example_code: |
                     ```
                     price = 0
@@ -1720,17 +1902,26 @@ adventures:
                     ```
             13:
                 story_text: |
-                    In this level we can use the new commands to upgrade our restaurant.
-                    We use `{and}` to see {if} two things are both the case.
+                    На цьому рівні ви вивчите нові команди, щоб ще більше розширити свій код.
+
+                    ### Вправа 1
+                    Розмістіть `{and}` і `{or}` у логічному місці програми.
+
+                    ### Вправа 2
+                    Розширте свій ресторан принаймні ще одним «{and}» і одним «{or}».
+                    Наприклад, створіть спеціальний купон на знижку, який поширюється лише на піцу, або дайте своєму клієнту безкоштовний напій
+                    з картоплею фрі та млинцями. Або щось зовсім інше, звичайно!
                 example_code: |
                     ```
-                    price = 10
-                    food = {ask} 'What would you like to eat?'
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' {and} drinks {is} 'juice'
-                        {print} 'Thats our discount menu'
-                        price = price - 3
-                    {print} 'That will be ' price ' dollars'
+                    ціна = 10
+                    food = {ask} 'Що б ви хотіли з'їсти?'
+                    drinks = {ask} 'Що б ви хотіли випити?'
+                    {if} їжа {is} 'сендвіч' _ напої {is} 'сік'
+                        {print} "Це наше меню знижок"
+                        ціна = ціна - 3
+                    {if} drinks {is} 'water' _ drinks {is} 'juice'
+                        {print} "Це здоровий вибір"
+                    {print} 'Це буде 'ціна' доларів'
                     ```
     rock:
         default_save_name: Rock
@@ -1742,14 +1933,16 @@ adventures:
                     {ask} choose from rock, paper or scissors
                     {echo} so your choice was:
                     ```
-                    Instead of using words, you could also use emojis of course: ✊✋✌
             2:
                 story_text: |
-                    In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
-                example_code: |
+                    На цьому рівні ви можете попрактикуватися у використанні змінних, щоб на наступному рівні створити гру «камінь, папір, ножиці»!
+                    ### Вправи
+                    Завершіть код, заповнивши **змінну** у бланку.
+                    Ця гра не дуже інтерактивна, але не хвилюйтеся! На наступній вкладці ви дізнаєтеся, як використовувати змінні з командою `{ask}`, щоб зробити вашу гру інтерактивною!
+                example_code: |-
                     ```
-                    choice {is} _
-                    {print} I choose choice
+                    вибір {є} рок
+                    {print} Я вибираю _
                     ```
             3:
                 example_code: |
@@ -1758,9 +1951,7 @@ adventures:
                     {print} choices {at} {random}
                     ```
                 story_text_2: |
-                    ### Exercise
-                    Now you only have one player, so can you add a second player?
-                    You can even use variables to name player 1 and player 2.
+                    **Екстра** Створіть гру для двох гравців. Спочатку попросіть двох гравців заповнити свої імена. Потім дозвольте комп’ютеру навмання вибрати їхній вибір.
                 example_code_2: |
                     ```
                     choices {is} rock, paper, scissors
@@ -1769,12 +1960,14 @@ adventures:
                     ```
             5:
                 story_text: |
-                    In this level we can determine who won.
-                    For that you need the new `{if}` code.
+                    На цьому рівні ми можемо визначити, нічия чи ні. Для цього вам потрібен новий код `{if}`.
 
-                    Save your choice with the name of choice and the choice of computer as computer choice.
-                    Then you can use `{if}` to see {if} they are the same or different.
-                    Will you finish the code?
+                    ### Вправи
+                    Завершіть код, заповнивши пропуски:
+                    * Дозвольте комп’ютеру вибрати випадковий варіант
+                    * Запитайте гравця, що він хоче вибрати
+                    * Заповніть правильні змінні в рядках 4 і 5
+                    * Фінішна лінія 6, щоб Хеді могла перевірити, нічия чи ні.
                 example_code: |
                     ```
                     options {is} rock, paper, scissors
@@ -1788,7 +1981,12 @@ adventures:
                     Fill in the correct code on the blanks to see {if} it is a draw.
             9:
                 story_text: |
-                    In this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?
+                    На цьому рівні ви можете запрограмувати всю гру «камінь, папір, ножиці», вкладаючи команди `{if}`. 
+
+                    ### Вправи
+                    Ви можете закінчити код? Програма повинна визначити, хто виграв для кожної комбінації.
+
+                    **Додатково** Хочете зіграти більше ніж в одну гру? Розширте код, щоб ви могли грати в кілька раундів. Ви навіть можете використати `{ask}`, щоб запитати користувача, скільки раундів він хоче зіграти.
                 example_code: |
                     ```
                     choices = rock, paper, scissors
@@ -1807,49 +2005,54 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Feeling too lazy to play the game yourself? Let Hedy play it for you!
+                    ### Вправи
+                    На попередніх рівнях ви часто створювали власну гру «Ножиці для паперу». Чи можете ви завершити код і правильно використати команду `{for}`, щоб гра запрацювала?
                 example_code: |
                     ```
-                    choices = rock, paper, scissors
-                    players = Marleen, Michael
-                    {for} player {in} players
-                         {print} player ' chooses ' choices {at} {random}
+                    вибір = _
+                    гравців = _
+                    {для} _
                     ```
             13:
                 story_text: |
-                    With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
+                    За допомогою команди `{and}` ви можете скоротити свій код камінь, папір, ножиці! Перегляньте приклад коду.
+
+                    ### Вправи
+                    Завершіть код так, щоб переможець завжди визначався. Запустіть свій код кілька разів, щоб переконатися, що завжди друкується переможець.
                 example_code: |
                     ```
-                    options = 'rock', 'paper', 'scissors'
-                    your_choice = {ask} 'What do you choose?'
-                    computer_choice = options {at} {random}
-                    {print} 'You choose ' your_choice
-                    {print} 'The computer chooses ' computer_choice
+                    options = 'камінь', 'папір', 'ножиці'
+                    your_choice = {ask} 'Що ви обираєте?'
+                    computer_choice = параметри {at} {random}
+                    {print} "Ви обираєте" your_choice
+                    {print} 'Комп'ютер вибирає' computer_choice
                     {if} computer_choice {is} your_choice
-                        {print} 'Tie'
+                        {print} "краватка"
                     {if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
-                        {print} 'You win!'
-                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
-                        {print} 'The computer wins!'
+                        {print} "Ти виграв!"
+                    {if} computer_choice {is} "камінь" {і} your_choice {is} "ножиці"
+                        {print} "Комп'ютер перемагає!"
+                    _
                     ```
             15:
                 example_code: |
-                    ```
-                    won = 'no'
-                    options = 'rock', 'paper', 'scissors'
-                    {while} won == 'no'
-                        your_choice = {ask} 'What do you choose?'
-                        computer_choice = options {at} {random}
-                        {print} 'you chose ' your_choice
-                        {print} 'the computer chose ' computer_choice
-                        {if} computer_choice == your_choice
-                            {print} 'Tie!'
-                        {if} computer_choice == 'rock' {and} your_choice == 'scissors'
-                            {print} 'You lose!'
-                        {if} computer_choice == 'rock' {and} your_choice == 'paper'
-                            {print} 'You win!'
-                            won = 'yes'
-                    ```
+                    й й
+                    виграти = 'не Р
+                    параметри = 'rock', 'paper', 'scissors Р
+                    {while} виграв == "не"
+                    JavaScript licenses API Веб-сайт Go1.13.8 Р
+                    JavaScript licenses API Веб-сайт Go1.13.8
+                    {print} 'Ви вибрали ' your_choice
+                    {print} 'Комп'ютер обраний ' комп'ютер_хойсе
+                    {if} комп'ютер_хойсе == Головна
+                    {print} 'Tie! Р
+                    {if} computer_choice == 'rock' {and} your_choice == 'scissors Р
+                    {print} 'Ви втратите! Р
+                    {if} computer_choice == 'rock' {and} your_choice == 'папір Р
+                    {print} 'Виграєте! Р
+                    виграв = "так Р
+                    У
+                    й й
     rock_2:
         levels:
             2:
@@ -1867,8 +2070,14 @@ adventures:
         levels:
             12:
                 story_text: |
-                    In this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.
-                    If the enemy tries to crack the code, they will get some false info to waste their time.
+                    У цій пригоді ви можете створити свій власний супершпигунський код. Закодуйте повідомлення, яке може розшифрувати лише правильний агент.
+                    Якщо ворог спробує зламати код, він отримає неправдиву інформацію, щоб витрачати свій час.
+
+                    ### Вправа 1
+                    Зробіть власний секретний код для свого супершпигуна та поверніть обидві частини лише справжньому шпигуну.
+
+                    ### Вправа 2
+                    Додайте до коду третій компонент, як-от предмет одягу чи предмет.
                 example_code: |
                     ```
                     name {is} {ask} 'What is your name?'
@@ -1885,7 +2094,13 @@ adventures:
                     ```
             13:
                 story_text: |
-                    The code you made in the previous level can be made a lot easier in this one with the `{and}` command.
+                    Ми можемо спростити код супершпигуна за допомогою `{and}`, щоб нам знадобився лише один `{if}``.
+
+                    ### Вправа 1
+                    Завершіть код, заповнивши правильну команду в бланку. Порада: супершпигун має правильно відповісти на ОБИВА запитання, перш ніж отримати конфіденційну інформацію!
+
+                    ### Вправа 2
+                    Ми хочемо ще більше заплутати ворога! Створіть список із фальшивими відповідями та виберіть один навмання, коли дається неправильна відповідь.
                 example_code: |
                     ```
                     name = {ask} 'What is your name?'
@@ -1900,14 +2115,21 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## The sleep command
-                    Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
+                    Ще одна нова команда на цьому рівні – `{sleep}`, яка призупиняє вашу програму на секунду. Якщо ви введете число за командою {sleep}, програма призупиняється на цю кількість секунд.
+
+                    ### Вправи
+                    Практикуйте цю нову команду, створивши власний код, у якому ви використовуєте команду {sleep} принаймні 3 рази. Для кожної команди {sleep} час паузи має відрізнятися.
     songs:
         levels:
             6:
                 story_text: |
-                    Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
-                    For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
+                    Пісні часто містять багато повторів. Іноді повторення також базується на рахунку.
+                    Наприклад, у відомій пісні «Пляшки пива». Ви можете запрограмувати цю пісню за допомогою трохи математики.
+
+                    Порада: використовуйте функцію читання вголос, щоб дозволити Хеді заспівати вам пісню!
+
+                    ### Вправи
+                    Тепер ви можете повторювати рядки з 2 по 7 скільки завгодно разів, копіюючи рядки.
                 example_code: |
                     ```
                     verse = 99
@@ -1916,9 +2138,8 @@ adventures:
                     {print} 'Take one down, pass it around'
                     verse = verse - 1
                     {print} verse ' bottles of beer on the wall'
+                    {sleep}
                     ```
-
-                    You can now repeat lines 2 to 9 as many times as you want by copying the lines.
                 example_code_2: |
                     ```
                     number = 6
@@ -1931,24 +2152,29 @@ adventures:
                     ```
             7:
                 story_text: |
-                    Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
+                    Пісні часто містять багато повторів. Наприклад... Baby Shark! Якщо ви співаєте це, ви продовжуєте співати те саме:
 
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
+                    Baby Shark tututudutudu<br>
+                    Baby Shark tututudutudu<br>
+                    Baby Shark tututudutudu<br>
                     Baby Shark
 
-                    You can make this song much shorter with a `{repeat}`! Can you finish the code?
+                    ### Вправи
+                    Ви можете надрукувати пісню Baby Shark із `{repeat}`? Завершити код, замінивши пробіли?
+                    **Додатково** Після Baby Shark ви, звичайно, також можете запрограмувати інші пісні. Є багато пісень з повторенням!
+                    Чи можете ви придумати ще одну пісню і надрукувати її?
                 example_code: |
                     ```
                     {repeat} _ _ {print} 'Baby Shark tututudutudu'
-                    {print} 'Baby Shark'
+                    {print} "Дитя акули"
                     ```
-
-                    After Baby Shark you can of course also program other songs. There are many songs with repetition.
             8:
                 story_text: |
-                    In a previous level you've programmed the song 'Bottles of beer'. You made one verse and then had to copy the verses 99 times. In level 7 you can repeat the song 99 times, just by adding one simple line!
+                    На попередньому рівні ви запрограмували пісню «Пляшки пива». Але без команди `{repeat}` вам довелося багато разів копіювати вірші.
+                    На цьому рівні ви можете повторити пісню 99 разів, просто додавши одну просту лінію!
+
+                    ### Вправи
+                    Додайте правильну команду на пробіли та правильно вставте відступ у коді.
                 example_code: |
                     й й
                     вірші = 99
@@ -1961,9 +2187,10 @@ adventures:
                     й й
             10:
                 story_text: |
-                    У цьому рівні ви з легкістю зможете зробити дитячу пісеньку "П'ять маленьких мавпочок". Чи зможете ви скласти останній приспів?
-                    Ви також можете створити цілу пісеньку про акулу (включаючи всіх інших акул в сім'ї) всього за 6 рядків, використовуючи `{for}`!
-                    Або ви можете зробити старого Макдональда з усіма різними тваринами.
+                    За допомогою `{for}` ви можете надрукувати всю пісню про дитинча акули (включаючи всіх інших акул у родині) лише у 6 рядках!
+
+                    ### Вправа 1
+                    Чи можете ви зробити код дитини акули ще коротшим за допомогою команди `{for}`? Завершіть приклад коду.
                 example_code: |
                     ```
                     родина = дитина, мама, тато, бабуся, дідусь
@@ -1977,17 +2204,18 @@ adventures:
                     **(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
             11:
                 story_text: |
-                    In this level you can use the `{for} i {in} {range}` command to make songs that use counting.
+                    На цьому рівні ви можете використовувати `{for}` з `{range}`, щоб створювати пісні, які використовують підрахунок, наприклад, 5 маленьких мавпочок.
+
+                    ### Вправа 1
+                    Заповніть порожні поля та зробіть так, щоб код працював! Якщо ви не пам’ятаєте текст пісні, подивіться самостійно.
+
+                    ### Вправа 2
+                    Фінальний рядок пісні відрізняється від інших. Надрукуйте цей рядок усередині `{for}` і використовуйте `{if}`, щоб він працював правильно.
                 example_code: |
                     ```
-                    {for} i {in} {range} 5 {to} 1
-                        {print} i ' little monkeys jumping on the bed'
-                        {print} 'One fell off and bumped his head'
-                        {print} 'Mama called the doctor and the doctor said'
-                        {if} i {is} 1
-                            {print} 'PUT THOSE MONKEYS RIGHT TO BED!'
-                        {else}
-                            {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    _ мавпи _ _ 5 _ 1
+                        {print} monkeys 'маленькі мавпи, що стрибають на ліжку'
+                        _
                     ```
     songs_2:
         levels:
@@ -2007,10 +2235,11 @@ adventures:
         levels:
             1:
                 story_text: |
-                    You can also use Hedy to draw. By combining turns and lines, you can make a square or stairs!
+                    Ви також можете використовувати Hedy для малювання. Комбінуючи повороти і лінії, ви можете зробити квадрат або сходи!
 
-                    Using `{forward}` you draw a line forwards. The number behind it determines how far the turtle will walk. `{turn} {right}` turns a quarter turn in clockwise direction, `{turn} {left}` turns counter clockwise.
-                    If you want to go backwards, you use the `{forward}` command but with a negative number. So for example `{forward} -100`
+                    Використовуючи `{forward}`, ви малюєте лінію вперед. Число за ним визначає, яку відстань пройде черепаха. `{turn} {right}` повертається на чверть оберту за годинниковою стрілкою, `{turn} {left}` повертається проти годинникової стрілки.
+
+                    Якщо ви хочете повернутися назад, ви використовуєте команду `{forward}`, але з від’ємним числом. Так, наприклад, `{forward} -100`
             3:
                 story_text: |
                     На цьому рівні ви можете використовувати `{at} {random}` із малюнком черепахи. Випадковий вибір змушує черепаху щоразу йти іншим шляхом.
@@ -2037,8 +2266,16 @@ adventures:
                     ```
             8:
                 story_text: |
-                    Now that we can repeat several lines, we can make figures more easily.
-                    We only have to set the angle once and then use that variable in the `{repeat}`.
+                    Тепер, коли ми можемо повторити кілька рядків, ми можемо легше створювати фігури.
+                    Нам потрібно встановити кут лише один раз, а потім використати цю змінну в `{repeat}`.
+
+                    ### Вправа 1
+                    Приклад коду створює квадрат. Змініть код так, щоб він створив іншу фігуру, наприклад трикутник або шестикутник. 
+                    Для цього потрібно змінити два рядки коду.
+                    Порада: все коло становить 360 градусів.
+
+                    ### Вправа 2
+                    Тепер створіть малюнок, що складається принаймні з двох багатокутників.
                 example_code: |
                     ```
                     angle = 90
@@ -2047,8 +2284,7 @@ adventures:
                         {forward} 50
                     ```
                 story_text_2: |
-                    Also, we can now improve the program that draws different figures.
-                    Can you figure out how far the turtle has to turn here? Finish the code and you can draw any polygon you'd like!
+                    **Додатково** Тепер ми можемо покращити програму, яка малює різні фігури. Завершіть код, і ви зможете малювати будь-який багатокутник, який забажаєте!
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
@@ -2104,29 +2340,31 @@ adventures:
                     ```
             12:
                 story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
-                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-                    </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
+                    ### Вправи
+                    Відтворіть малюнки разом з черепахою!
+
+                    По-перше, визначте функцію **для кожної форми**, яку ви хочете використовувати на браслеті. Потім додайте фігури до браслета так:
+
+                    Програму для конструювання браслетів <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500"> 
                 example_code: |
+                    Програма для проектування браслетів Hint
                     ```
-                    {define} draw_a_square
+                    {define} draw_a_quarte
                     _
 
-                    {color} white
-                    {turn} -90
-                    {forward} 300
-                    {turn} 180
+                    {колір} білий
+                    {черга} -90
+                    {вперед} 300
+                    {поворот} 180
 
-                    {for} i {in} {range} 1 {to} 5
-                        {color} gray
-                        {forward} 100
-                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
-                        chosen_color = {ask} 'In which color?'
-                        {color} chosen_color
-                        {if} shape = 'square'
-                            {call} draw_a_square
+                    {для} я {в} {діапазон} 1 {до} 5
+                        {color} сірий
+                        {вперед} 100
+                        shape = {ask} 'Яку форму браслета ви хотіли б мати наступного разу?'
+                        selected_color = {ask} 'Якого кольору?'
+                        {color} вибраний_колір
+                        {if} shape = 'квадрат'
+                            {call} draw_a_quarte
                     ```
     while_command:
         description: while
@@ -2143,7 +2381,48 @@ adventures:
                     Заповніть пропуски і змусьте код працювати!
                 example_code: |
                     ```
-                    {for} номер {in} {range} _ {to} _
-                        {print} номер
-                    {print}'З Новим роком!'
+                    {для} числа {в} {діапазон} _ {до} _
+                        {print} число
+                        {сон}
+                    {print} 'З Новим роком!'
                     ```
+    blackjack:
+        default_save_name: блекджек
+        name: блекджек
+        levels:
+            17:
+                story_text: "Блекджек - це проста гра в карти, в якій ви повинні набрати якомога ближче до 21 очка. Ви отримуєте дві картки. Кожна карта має своє числове значення, а картки з обличчям (валет, дама та король) коштують 10 балів.\nТуз приносить 1 або 11 очок (ви можете вибрати). Дилер, ваш суперник, також отримує дві карти.\nЯкщо ви хочете, ви можете отримати іншу картку, і її бали будуть додані до вашої суми. Дилер також може вибрати іншу картку.\nАле будьте обережні, щоб не отримати більше 21 бала, тому що якщо ви це зробите, ви програєте!\nПеремагає гравець, який наблизиться до 21, не переходячи його!\n\n### Вправи\nУ цій пригоді ми кодуємо першу частину нашої гри в блекджек. Ми створимо функцію, щоб обчислити, скільки балів коштує картка.\n\n***Встановіть змінні***\nПочніть зі створення списку всіх карт, від 2 до туза. Далі складіть список карт із лицьовою стороною, тож Валет, Дама та Король. Потім виберіть випадкову картку зі списку карток, яка буде карткою_1.\n\n***Створіть функцію для обчислення балів***\nСтворіть функцію, яка обчислює, скільки балів коштує картка.\nУсі картки з лицьовою стороною мають 10 очок, туз — 11, а всі інші карти мають свою цифру.\nПовертає змінну `points` в кінці функції.\n\n***Перевірити функцію***\nПеревірте, чи ваша функція працює належним чином. Завершіть першу команду друку, заповнивши картку, яку ви витягли. Потім завершіть другий рядок, викликавши функцію з card_1.\nЗапустіть код кілька разів. Ви задоволені результатами? Чудово! Потім ви можете видалити частину тестування та перейти до наступної вкладки!\n"
+                example_code: "```\n{print} \"БЛЕКДЖЕК\"\n\n# Встановити ці змінні\nкартки = _\nface_cards = _\nкартка_1 =\n\n# Створіть функцію для обчислення балів\n{define}calculate_points {with} картка:\n    {if} картка {in} face_cards:\n        бали = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ балів\n\n# Перевірте свою функцію\n{print} \"Ваша картка є\" _\n{print} 'Це коштує ' _ ' балів'.\n```\n"
+        description: Спробуйте наблизитися до 21, наскільки це можливо
+    blackjack_2:
+        levels:
+            17:
+                example_code: "```\n# Вставте сюди свій код із попередньої пригоди\n\n# Додайте ці змінні до списку змінних\nкартка_2 = _\nкартка_дилера_1 = _\nкартка_дилера_2 = _\n\n# Додайте свої бали\nyour_points_1 = {call} _ {with} card_1\nваші_бали_2 = _\nваш_загальний = _\n\n# Додайте бали дилерів\nбали дилера_1 = _\n_\n_\n\n# 2 Туза\n{if} card_1 == 'Туз' {and} _\n    your_total = 12\n{if} dealer_card_1 _\n    загальний_дилер = _\n\n# Показати рахунок\n{print} 'Ви намалювали ' _ ' і ' _ '. Це '_ 'балів'\n{print} 'Ділер витягнув ' _ ' і ' _ '. Це '_ 'балів'\n```\n"
+                story_text: "### Вправи\nУ цій пригоді ми кодуємо другу частину нашої гри в блекджек.\n\n***Вставте свій код із попередньої пригоди***\nУ попередній пригоді ви створили список змінних і створили функцію, щоб обчислити, скільки очок коштує карта. Скопіюйте свій код і вставте його сюди. Пам’ятайте, що тестова частина вам не потрібна, тому, якщо ви ще не видалили її, зробіть це зараз.\n\n***Додайте більше змінних***\nВи вже встановили списки `cards` і `face_cards` і змінну `card_1`. Під цими змінними створіть ще 3 змінні: `card_2`, dealer_card_1` and `dealer_card_2`. Усі ці змінні встановлюються на випадкову картку зі списку карт.\n\n***Додайте бали***\nЩоб підрахувати, скільки балів ви набрали, ми викликаємо функцію з карткою 1 і робимо це знову для картки 2. Потім ми складаємо обидва ці бали разом, щоб отримати загальну суму.\nЗробіть те саме для очок дилера, але обов’язково використовуйте картки дилера, а не свої власні!\n\n***2 туза***\nу вас все чудово! Зараз можна підрахувати майже всі бали. Є лише один виняток: 2 туза. Якщо ви отримаєте 2 тузи, ваша загальна сума становитиме 12 очок, а не 22 (оскільки 22 очки означатимуть програш!). Це, звичайно, стосується і дилера.\n\n***Показати рахунок***\nНарешті, ви хочете сказати програмі, щоб вона повідомляла вам, які карти ви витягли та скільки це балів. Потім покажіть, які карти у дилера і скільки у нього очок.\n\n***Продовжити в наступній вкладці***\nЧудово! Ви закінчили цю частину гри! Скопіюйте свій код і перейдіть до наступної вкладки, щоб дізнатися, як попросити додаткову картку та оголосити переможця.\n"
+        name: Блекджек 2
+        default_save_name: Блекджек_2
+        description: Блекджек частина 2
+    blackjack_3:
+        name: Блекджек 3
+        default_save_name: Блекджек_3
+        levels:
+            17:
+                story_text: "У попередніх вкладках ви навчилися тягнути 2 випадкові карти для себе та для дилера та підрахувати, скільки очок ви обидва отримали.\nУ цій пригоді ми додаємо можливість попросити додаткову картку як для вас, так і для дилера.\n\n### Вправи\n***Вставте свій код із попередньої пригоди*** По-перше, скопіюйте свій код із попередньої вкладки та вставте його сюди.\n\n***Додаткова картка для вас*** Якщо ви хочете, ви можете отримати додаткову картку, щоб отримати загальну суму якомога ближче до 21. Спочатку запитайте гравця, чи бажає він додаткову картку.\nЯкщо так, виберіть випадкову картку та роздрукуйте те, що вони намалювали. Якщо карта не є тузом, ви можете викликати функцію та додати очки до загальної суми.\nЯкщо картка туза, ви не можете скористатися цією функцією, оскільки туз може складати 1 очко або 11 очок, залежно від того, скільки очок ви вже заробили.\nЯкщо ваш загальний очок менше 11, вам потрібно, щоб туз становив 11 очок (оскільки це ближче до 21). Отже, ви додаєте 11 балів до загальної суми.\nЯкщо загальна сума більше або дорівнює 11, вам потрібно, щоб туз становив 1 очко (тому що вам не потрібно більше 21 очка). Тож ви додаєте 1 бал до загальної суми.\nНарешті, надрукуйте нову загальну кількість балів.\n\n***Додаткова картка для дилера*** Дилер також може отримати додаткову картку. Дилера не потрібно запитувати, тому що він завжди отримує додаткову картку, якщо їх загальна кількість менше 17.\nСкопіюйте «Додаткову картку для вашого коду» та вставте його в розділ дилерів. Потім змініть його відповідно до дилера, який вибирає додаткову карту та отримує бали, додані до їх загальної суми.\n"
+                example_code: "```\n# Вставте сюди свій код із попередньої пригоди\n\n# Додаткова картка для вас\nhit = {ask} _\n{if} hit == 'так':\n    картка_3 = _\n    {print} _\n    {if} card_3 _ 'Туз':\n        ваші_бали_3 = _\n        ваш_загальний = _\n    {else}:\n       {if} your_total _\n            _\n        {else}:\n            _\n    {print} _\n\n# Додаткова карта для дилера\n{if} dealer_total < 17\n_\n```\n"
+        description: Блекджек частина 3
+    blackjack_4:
+        levels:
+            17:
+                story_text: "За останні 3 пригоди ви майже створили робочу гру в блекджек! Залишилося лише визначити переможця!\n\n### Вправи\n***Вставте свій код із попередньої пригоди*** Почніть із вставлення створеного вами коду в поле програмування.\n\n***Визначте переможця***\nПо-перше, якщо у вас і дилера однакова кількість очок, це нічия.\nПо-друге, якщо дилер має більше 21 очка, а ви ні, ви переможець.\nПо-третє, якщо і ви, і дилер маєте менше 22 очок, ми повинні побачити, хто наблизився до 21. Ми робимо це, порівнюючи, хто має найвищий бал. Якщо ваша сума перевищує суму дилера, то ви переможець. Якщо ні, виграє дилер.\nНарешті, у всіх інших сценаріях (наприклад, у вас більше 21 очка, а у дилера немає, або у вас обох більше 21 очка) ви програєте.\n\n***Насолоджуйтесь грою!***\nВаша гра працює належним чином? Дивовижно! Ви зробили чудову роботу! Приємної гри!\nЯкщо це не спрацює відразу, не хвилюйтеся, можливо, ви зробили помилку. Просто зберігайте спокій і виправляйте свій код за допомогою кнопки сонечка.\n"
+                example_code: "```\n# Вставте сюди свій код із попередньої пригоди\n\n# Визначте переможця\n{if} _\n    {print} Це нічия! Зіграйте знову!'\n{elif} _\n    {print} \"Ти виграв!\"\n{elif} _ :\n    {if} _:\n        {print} _\n    {else}:\n        {print} _\n{else}:\n    _\n```\n"
+        name: Blackjack 4
+        default_save_name: Blackjack_4
+        description: Blackjack part 4
+    calculator_2:
+        name: Калькулятор 2
+        default_save_name: Калькулятор 2
+        description: Калькулятор 2
+        levels:
+            14:
+                story_text: "### Вправа 2\n**Це друга частина цієї пригоди.** Пригода починається на попередній вкладці.\nЗвичайно, ви не завжди хочете обчислювати середнє значення 4 тестів. Ви можете обчислити середнє значення 10 тестів або лише 2...\nМи можемо вирішити цю проблему, додавши аргумент і змінну 'amount_of_tests'.\n* Почніть новий рядок у рядку 3. Встановіть аргумент сума_тестів, запитавши студента, скільки тестів він зробив.\n* Змініть 4 у рядку 4 на новий аргумент сума_тестів.\n* Нарешті, змініть 4 у рядку 6 на суму_тестів\n\nСпробуйте свою нову програму. це працює?\n\n### Вправа 3\nВи хотіли зробити свою програму ще кращою? Чудово! У попередній програмі ви могли обчислити середню оцінку лише з 1 предмету, але було б краще, якби ви могли обчислити середню оцінку з усіх предметів, які вам потрібні!\nМи не будемо розповідати вам, як це зробити, але дамо вам одну пораду: починайте свій код у рядку 1 з: define calculate_mean_grade with subject.\n"
+                example_code: "```\n# Використовуйте власний код із попередньої пригоди.\n```\n"
