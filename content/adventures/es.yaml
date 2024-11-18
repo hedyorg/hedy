@@ -1417,7 +1417,7 @@ adventures:
                     ```
             18:
                 example_code: "```\n{for} i {in} {range}(1,5):\n    {print} (i)\n```\n"
-                story_text: "Por último, convertiremos `{for} i {in} {range} 1 a 5` en código Python real, así:\n"
+                story_text: "Por último, vamos a convertir `{for} i {in} {range} 1 to 5`en código real de Python, como esto:\n"
         name: '{for}'
     fortune:
         name: El adivino
@@ -2595,15 +2595,18 @@ adventures:
                     ```
                 story_text_2: |
                     ## Contracciones
-                    ¡Importante! Ten en cuenta que estamos usando comillas, Hedy se confundirá cuando uses el apóstrofo para contracciones como I'm o What's.
-                    Asegúrate de eliminar esos apóstrofos y cambia la ortografía a I am o What is.
-                    Comprueba el código de ejemplo para ver la forma incorrecta de usar los apóstrofos.
+                    Importante! Ten en cuenta que ahora que estamos usando comillas, Hedy se confundirá cuando uses el apóstrofo para contracciones como I’m o What’s.
+                    ¡Asegúrese de usar comillas dobles cuando se está utilizando un apóstrofe en la línea!
+                    Echa un vistazo al código de ejemplo para ver la forma incorrecta de usar apóstrofos.
                 example_code_2: |
                     ```
                     _ Esta es la manera incorrecta de usar apóstrofos _
                     {print} 'I'm babysitting my sister's kids'
-                    {print} 'What's more fun than that?'
-                    ```
+                    {print} '¿Qué es más divertido que eso? '
+                    _ Así se resuelve el problema _
+                    {print} "I'm babysitting my sister's kids"
+                    {print} "¿Qué es más divertido que eso?"
+                    ``
             12:
                 story_text: |
                     **Todos los textos tienen que ir entre comillas**
