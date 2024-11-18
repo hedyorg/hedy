@@ -573,7 +573,7 @@ def add_hx_detection():
 
 
 @app.after_request
-def set_security_headers(response):
+def set_security_headers(response: Response):
     security_headers = {
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
         'X-XSS-Protection': '1; mode=block',
@@ -581,6 +581,7 @@ def set_security_headers(response):
     # Not X-Frame-Options on purpose -- we are being embedded by Online Masters
     # and that's okay.
     response.headers.update(security_headers)
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     return response
 
 
@@ -3203,7 +3204,7 @@ if __name__ == '__main__':
     app.config.update(
         SERVER_NAME=config['domain_name'],
         SESSION_COOKIE_DOMAIN=config['domain_name'],
-        SESSION_COOKIE_SAMESITE="Strict"
+        SESSION_COOKIE_SAMESITE="Lax"
     )
     # Set some default environment variables for development mode
     env_defaults = dict(
