@@ -2314,10 +2314,10 @@ else:{self.add_debug_breakpoint()}
     def if_pressed_else(self, meta, args):
         key = self.process_arg_for_data_access(args[0], meta.line)
 
-        if_code = self.if_pressed_code_prepend_global_vars(args[1])
+        if_code = args[1]
         if_function_name = self.make_function_name(args[0], meta.line)
 
-        else_code = self.if_pressed_code_prepend_global_vars(args[2])
+        else_code = args[2]
         else_function_name = self.make_function_name('else', meta.line)
 
         return (
@@ -2328,24 +2328,6 @@ else:{self.add_debug_breakpoint()}
             self.make_function(else_function_name, else_code) + '\n' +
             self.make_extension_call()
         )
-
-    def if_pressed_code_prepend_global_vars(self, lines):
-        """ Combines if_pressed arguments into a code snippet, which will be placed inside a function. To allow
-         assigning and reassigning variables, all lookup entries, except for funcs and list access, are marked as
-         global and prepended to the snippet. For example:
-            points = 5
-            def if_pressed():
-                global points <-- without this line, we get an error
-                points = points + 1
-         """
-        lines = lines if isinstance(lines, list) else [lines]
-        # variables = [e.name for e in self.lookup.get_only_vars()]
-        # if variables and lines:
-        #     variables = sorted(list(set(variables)))
-        #     global_vars = f"global {', '.join(variables)}"
-        #     lines.insert(0, global_vars)
-
-        return '\n'.join(lines)
 
 
 @v_args(meta=True)
@@ -2668,7 +2650,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
         key = self.process_arg_for_data_access(args[0], meta.line)
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
 
-        if_code = self.if_pressed_code_prepend_global_vars(args[1:])
+        if_code = '\n'.join(args[1:])
         if_function_name = self.make_function_name(args[0], meta.line)
 
         return (
@@ -2679,7 +2661,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
 
     def if_pressed_elses(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        else_code = self.if_pressed_code_prepend_global_vars(args)
+        else_code = '\n'.join(args)
         else_function_name = self.make_function_name('else', meta.line)
 
         return (
@@ -3303,7 +3285,7 @@ class ConvertToPython_17(ConvertToPython_16):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         key = self.process_arg_for_data_access(args[0], meta.line)
 
-        elif_code = self.if_pressed_code_prepend_global_vars(args[1:])
+        elif_code = '\n'.join(args[1:])
         elif_function_name = self.make_function_name(args[0], meta.line)
 
         return (
