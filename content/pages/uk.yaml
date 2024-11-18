@@ -253,11 +253,11 @@ teacher-guide:
                 error_code: |-
                     {forward} 300
                     {turn} 90
-                solution_text: "На прикладі: Учні схильні думати, що команда turn не працює. Незважаючи на те, що вона працює, бо ви не можете побачити, як це відбувається за екраном. Щоб цього не сталося, використовуйте менші числа."
+                solution_text: "У цьому прикладі студенти схильні думати, що команда повороту не вдалася; незважаючи на те, що він зробив те, що мав. Що сталося, черепаха вийшла за рамки екрана. Щоб цього не сталося, використовуйте менші числа."
                 solution_code: |-
                     {forward} 100
                     {turn} 90
-        -   title: "Черепаха: Учні використовують команду backward, але її не існує"
+        -   title: "Черепаха: Учні використовують команду назад, але такої команди немає."
             example:
                 error_text: Backward не є командою.
                 error_code: назад 100
@@ -403,7 +403,7 @@ teacher-guide:
                     your_name {is} {ask} Who are you?
                     {add} your_name {to_list} names
                     {print} names {at} {random}
-        -   title: Students forget to use to/from in add/remove
+        -   title: Студенти забувають використовувати `{to}`/`{from}` у `{add}`/`{remove}`
             example:
                 error_text: Without to/from the add/remove command won't work.
                 error_code: |-

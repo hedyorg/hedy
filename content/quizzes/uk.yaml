@@ -209,35 +209,52 @@ levels:
             correct_answer: C
         6:
             code: |-
-                {print} And the award for best programming language goes to...
-                _?_
-                {print} Hedy!
+                {print} А нагороду за найкращу мову програмування отримує...
+                _
+                {print} Привіт!
             mp_choice_options:
             -   option: |-
                     ```
                     {sleep}
                     ```
-                feedback: Perfect!
+                feedback: Ідеально!
             -   option: |-
                     ```
                     {echo}
                     ```
-                feedback: There is nothing to repeat back here
+                feedback: Тут нема чого повторюватися
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: There is no text there to `{print}` there
+                feedback: Там немає тексту для `{print}`
             -   option: |-
                     ```
                     {ask}
                     ```
-                feedback: There is no question there to be asked
+                feedback: Немає жодного питання, яке можна поставити
+            question_score: '10'
+            question_text: Що має бути на лініях?
+            correct_answer: A
+            hint: Пауза для драматичного ефекту...
         7:
             code: |-
-                {print} I will explode in 3 seconds!
-                _?_
-                {print} BOOM!
+                {print} Я вибухну через 3 секунди!
+                _
+                {print} БУМ!
+            mp_choice_options:
+            -   option: "```\n{print} 3\n```"
+                feedback: Вам не потрібно `{print}`
+            -   feedback: Ідеально!
+                option: "```\n{sleep} 3\n```"
+            -   option: "```\n{sleep}\n```"
+                feedback: Таким чином бомба вибухне за 1 секунду
+            -   feedback: Полегшіть собі завдання, використовуючи цифру 3
+                option: "```\n{sleep} {sleep} {sleep}\n```"
+            question_score: '10'
+            question_text: Яку команду слід використовувати в рядку 2?
+            correct_answer: B
+            hint: Ви хочете, щоб комп’ютер зачекав 3 секунди
         10:
             code: |-
                 flavor {is} _?_
@@ -247,7 +264,88 @@ levels:
         2:
             mp_choice_options:
             -   option: "```\nім'я {is} {ask} Як тебе звати?\n```"
+                feedback: супер!
+            -   option: "```\n{ask} {is} name Як тебе звуть\n```"
+                feedback: Слова правильні, наказ ні!
+            -   option: "```\n{ask} Як тебе звати?\n```"
+                feedback: Це працювало на рівні 1, але на рівні 2 і вище працює інакше.
+            -   option: "```\n{ask} Як тебе звати? {is} ім'я\n```"
+                feedback: Слова правильні, наказ ні!
             question_text: Який код правильний?
+            question_score: '10'
+            correct_answer: A
+            hint: '`{ask}` не працює, як на рівні 1'
+        3:
+            mp_choice_options:
+            -   feedback: Слово ім'я замінено на Марлен
+                option: Ім'я йде на ринок, і вона купує яблуко.
+            -   option: Марлен йде на базар.
+                feedback: Друга частина речення не пропущена!
+            -   feedback: Правильно!
+                option: Марлен йде на ринок і купує яблуко.
+            -   feedback: Вона не замінюється ім'ям
+                option: Марлен йде на ринок, і Марлен купує яблуко.
+            hint: Слово ім'я замінено на Марлен
+            correct_answer: C
+            question_score: '10'
+            question_text: Що з’являється на екрані виведення, коли ви запускаєте цей код?
+            code: "ім'я {is} Марлен\n{print} name йде на ринок і купує яблуко."
+        4:
+            mp_choice_options:
+            -   option: Привіт, мене звуть ім'я
+                feedback: Ім'я змінної замінено на Hedy
+            -   feedback: Ім'я змінної замінено на Hedy
+                option: Привіт, мене звати Хеді
+            -   option: Привіт, моє ім'я Хеді
+                feedback: Ім'я змінної замінено на Hedy
+            -   option: Привіт, моя Хеді - це Хеді
+                feedback: Правильно, ця помилка буде виправлена на 4 рівні!
+            hint: "'name' замінено на 'Hedy' в обох місцях"
+            correct_answer: D
+            question_score: '10'
+            question_text: Що ви побачите на екрані виведення, коли запустите цей код?
+            code: "ім'я {is} Хеді\n{print} Привіт, мене звати ім'я"
+        5:
+            mp_choice_options:
+            -   option: Це сповільнює ваш комп'ютер
+                feedback: на щастя ні!
+            -   option: Це закриває Хеді
+                feedback: на щастя ні!
+            -   option: Ваша програма зупиняється на секунду, а потім продовжується
+                feedback: Це вірно!
+            -   option: Ви ставите його в кінці, щоб Хеді знала, що ваша програма завершена
+                feedback: Ні, це було б марно в кінці вашого коду
+            hint: Комп’ютер чекає секунду на команду `{sleep}`
+            question_text: Що відбувається, коли ви використовуєте команду `{sleep}`?
+            question_score: '10'
+            correct_answer: C
+        8:
+            code: "{ask} {is} Скільки тобі років?\n{print} вік"
+            mp_choice_options:
+            -   option: "```\nage {ask} {is} Скільки тобі років?\n```"
+                feedback: Це неправильний порядок
+            -   option: "```\n{ask} {is} age Скільки тобі років?\n```"
+                feedback: Це неправильний порядок
+            -   option: "```\nage {is} {ask} Скільки тобі років?\n```"
+                feedback: Ви зрозуміли!
+            -   option: "```\nвік {is} Скільки тобі років?\n```"
+                feedback: Де знаходиться команда `{ask}`?
+            question_score: '10'
+            hint: Ім'я змінної має бути першим
+            correct_answer: C
+            question_text: Як би ви виправили перший рядок коду?
+        9:
+            code: "собаки {is} тварина\n{print} Я люблю тварин"
+            mp_choice_options:
+            -   feedback: Ім'я змінної тварина
+                option: 'У першому рядку має бути написано: собаки `{is}` тварини'
+            -   feedback: Чудово!
+                option: 'У рядку 1 має бути написано: тварина `{is}` собаки'
+            -   feedback: Ім'я змінної тварина
+                option: 'У рядку 2 має бути написано: `{print}` Я люблю тварин'
+            -   feedback: Режим сну не використовується для тексту `{print}`
+                option: 'Рядок 2 повинен містити: `{sleep}` Я люблю тварин'
+            question_text: Що не так у цьому коді?
     3:
         1:
             question_text: What command do you use to let Hedy pick something arbitrarily?
