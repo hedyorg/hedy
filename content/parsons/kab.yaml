@@ -2,7 +2,7 @@ levels:
     8:
         2:
             story: Siggez leḥsab n wurar n tuqqna_tuffra.
-            code: "amesmaḍan\n{repeat} 10 {times}\n…amesmaḍan = amesmaḍan - 1\n…{print} amesmaḍan\n…{sleep} 1\n{print} 'Twejdeḍ neɣ xaṭi, ad d-aseɣ! ''"
+            code: "counter = 11\n{repeat} 10 {times}\n    counter = counter - 1\n    {print} counter\n    {sleep} 1\n{print} 'Ready or not here I come!'"
         1:
             story: "Kečč d ukkuẓ n yimeddukkal niḍen la tetturarem Pokémon Go! Snulfut-d ahil ara yefrun anta tarbaεt ara yurar yal yiwen deg-wen.\nYa d azeggaɣ, d awraɣ neɣ d amidadi! Sgunfu cwiṭ seld mi ara d-tberḥeḍ ɣef terbaεt.."
-            code: "tirebbuyaɛ = azeggaɣ, awraɣ, azegzaw\n{print} 'Azeggaɣ, awraɣ neɣ azegzaw? ''\n{repeat} 5 {times}\n…{print} 'Tettwaferneḍ deg terbaεt... ''\n…Tirebbuyaɛ {print} {at} {random}\n…{sleep} 2"
+            code: "teams = red, yellow, blue\n{print} 'Red, Yellow or Blue?'\n{repeat} 5 {times}\n    {print} 'You are selected in team... '\n    {print} teams {at} {random}\n    {sleep} 2"
