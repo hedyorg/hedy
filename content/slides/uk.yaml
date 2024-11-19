@@ -255,7 +255,7 @@ levels:
             header: Множення
             text: Якщо ви хочете зробити множення, ви можете використовувати зірочку.
         7:
-            code: "ім'я = Хеді\nвідповідь = 20 + 4"
+            code: "name = Hedy\nanswer = 20 + 4"
             header: Символ =
             text: "Відтепер ви також можете використовувати символ = замість команди `{is}`.\nЦе стосується як чисел, так і слів, а також після команд `{if}` або `{else}`."
         6:
@@ -265,7 +265,7 @@ levels:
         8:
             header: Обчислення зі змінними
             text: 'Ви можете використовувати обчислення з числами, але ви також можете використовувати змінні для виконання обчислень, наприклад:'
-            code: "number_1 = {ask} 'Заповніть перше число:'\nnumber_2 = {ask} 'Заповніть друге число:'\nправильна_відповідь = число_1 * число_2\n{print} number_1 ' разів ' number_2 ' є ' правильною_відповіддю"
+            code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer"
         5:
             header: Поділ
             text: Ви можете використовувати косу риску для поділу.
@@ -291,7 +291,7 @@ levels:
         6:
             text: "Якщо ви тренувалися з командами `{if}` і `{else}`, ви також можете спробувати команду `{in}`.\n\nЗа допомогою `{in}` ви можете дозволити комп’ютеру перевірити, чи є елемент у списку, наприклад:\n\nЗверніть увагу, що Hedy чутливий до регістру. Це означає, що якщо ви відповісте «Green» замість «green», Hedy надрукує «meh»."
             header: Ще одна нова команда
-            code: "pretty_colors {є} зелений, жовтий\nfavorite_color {is} {ask} 'Який твій улюблений колір?'\n{if} favorite_color {in} pretty_colors {print} 'красиво!'\n{else} {print} 'мех'"
+            code: "pretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors {print} 'pretty!'\n{else} {print} 'meh'"
         8:
             header: ходімо!
             text: Насолоджуйтесь пригодами на рівні 5!
@@ -359,7 +359,7 @@ levels:
         6:
             header: якщо і інакше зараз
             text: "Тепер це команди `{if}` і `{else}`.\nКожен рядок після команд `{if}` і `{else}` починається з відступу."
-            code: "name = {ask} 'Як тебе звати?'\n{if} name {is} Hedy\n    {print} «Ласкаво просимо, Хеді»\n{інше}\n    {print} 'Ласкаво просимо програмісту!'"
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!'"
         5:
             text: "Те саме стосується команд `{if}` і `{else}`.\nЦе були команди раніше:"
             debug: 'True'
@@ -371,4 +371,4 @@ levels:
         3:
             header: '{repeat} команд зараз'
             text: "На цьому рівні ви можете повторювати кілька рядків коду. Для цього ви повинні повідомити комп’ютеру, які рядки належать разом і повинні повторюватися.\nЦе можна зробити за допомогою відступу.\n\nВикористовуйте 4 пробіли (або одну табуляцію) на початку кожного рядка, який потрібно повторити, наприклад:"
-            code: "{repeat} 5 {разів}\n    {print} \"Всім привіт\"\n    {print} \"Це буде надруковано 5 разів\""
+            code: "{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This will be printed 5 times'"

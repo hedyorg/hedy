@@ -1046,8 +1046,8 @@ adventures:
                     Тоді ви можете дозволити комп’ютеру вибирати дуже справедливо. Ви можете запрограмувати це на цьому рівні!
                 example_code: |
                     ```
-                    люди {is} мама, тато, Емма, Софі
-                    {print} людей {at} {random} має мити посуд
+                    people {is} mom, dad, Emma, Sophie
+                    {print} people {at} {random} has to do the dishes
                     ```
                 story_text_2: |
                     ### Вправи
@@ -1088,7 +1088,7 @@ adventures:
                     {remove} dishwasher {from} people
                     ```
                 story_text: "Як часто всі збираються мити посуд? Це справедливо? Ви можете порахувати це на цьому рівні.\n"
-                example_code: "```\nлюди = мама, тато, Емма, Софі\nemma_washes = 0\nпосудомийна машина = люди {at} {random}\n{print} Посудомийна машина - це посудомийна машина\n{if} посудомийна машина {is} Emma emma_washes = emma_washes + 1\n{print} \"Емма митиме посуд цього тижня\" emma_washes \"раз\"\n```\n\nТепер ви можете копіювати рядки з 3 по 5 кілька разів (наприклад, 7 разів за цілий тиждень), щоб знову обчислити цілий тиждень.\nВи робите код на весь тиждень?\n"
+                example_code: "```\npeople = mom, dad, Emma, Sophie\nemma_washes = 0\ndishwasher = people {at} {random}\n{print} 'The dishwasher is' dishwasher\n{if} dishwasher {is} Emma emma_washes = emma_washes + 1\n{print} 'Emma will do the dishes this week' emma_washes 'times'\n```\n\nNow you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.\nDo you make the code for the whole week?\n"
             7:
                 story_text: |
                     За допомогою `{repeat}` ви можете повторювати частини коду. Ви можете використовувати це, щоб обчислити, хто буде мити посуд протягом кількох днів!
@@ -1107,7 +1107,7 @@ adventures:
                     ### Вправи
                     Додайте другу роботу, таку як пилосос або прибирання, і поділіть її також на весь тиждень.
                     <br>**Екстра** Програма нечесна, можна не пощастити і прати весь тиждень. Як зробити програму більш справедливою?
-                example_code: "```\nднів = понеділок, вівторок, середа, четвер, п'ятниця, субота, неділя\nімена = мама, тато, Емма, Софі\n{for} день {in} днів\n    {print} іменує {at} {random} ' миє посуд у ' день\n```\n"
+                example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
         name: Посуд?
         default_save_name: Посуд
     elif_command:
@@ -1116,15 +1116,15 @@ adventures:
             17:
                 example_code: |
                     ```
-                    prizes = ['1 мільйон доларів', 'яблучний пиріг', 'нічого']
-                    ваш_приз = призи[{random}]
-                    {print} "Ви виграли" your_prize
-                    {if} your_prize == '1 мільйон доларів' :
-                        {print} 'Так! Ти багатий!'
-                    {elif} your_prize == 'яблучний пиріг' :
-                        {print} "Чудово, яблучний пиріг!"
+                    prizes = ['1 million dollars', 'an apple pie', 'nothing']
+                    your_prize = prizes[{random}]
+                    {print} 'You win ' your_prize
+                    {if} your_prize == '1 million dollars' :
+                        {print} 'Yeah! You are rich!'
+                    {elif} your_prize == 'an apple pie' :
+                        {print} 'Lovely, an apple pie!'
                     {else}:
-                        {print} "Удачі наступного разу..."
+                        {print} 'Better luck next time..'
                     ```
                 story_text: "На цьому рівні ви також можете використовувати нову команду: `{elif}`. `{elif}` — це комбінація ключових слів `{else}` і `{if}`, і вона потрібна вам, коли ви хочете зробити 3 (чи більше!) варіанти.\nПеревірте це!\n"
         default_save_name: elif
