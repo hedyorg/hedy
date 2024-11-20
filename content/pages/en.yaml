@@ -2171,3 +2171,120 @@ workbooks:
         - type      : question
           text      : "What didn't you like about it?"
           lines     : 5
+    -   level: '7'
+        intro: |-
+            ## Repeat!
+            By the end of this lesson, you can:
+            * run a line of code multiple times
+        exercises:
+        -   type: text
+            contents: |-
+                ### Repetition
+                Sometimes you want to repeat a line of code multiple times, for example in a song or a story.
+            code: |-
+                repeat 5 times print 'Baby shark!'
+        -   type: text
+            contents: |-
+                #### Exercise 1: Predict the output
+                What will be the output of these programs?
+        -   type: output
+            code: |-
+                repeat 3 times print 'Baby shark!'
+            answer: |-
+              Baby shark!
+              Baby shark!
+              Baby shark!
+            lines: 3
+        -   type: output
+            code: |-
+                repeat 1 times print 'Hi everybody!'
+            answer: |-
+              Hi everybody!
+            lines: 1
+        -   type: output
+            code: |-
+                a is 4
+                repeat a times print 'Hi everybody'
+            answer: |-
+              Hi everybody!
+              Hi everybody!
+              Hi everybody!
+              Hi everybody!
+            lines: 4
+        -   type: text
+            contents: |
+                ### Exercise 2: Input
+                Take a look at the output. Write a program that could belong to this output.
+
+                Please note: Multiple answers can be correct. Choose whatever you want, as long as it's correct.
+                Fill up all the lines, so look carefully at the amount of lines!
+        -   type: input
+            answer: |-
+                print 'Hi everybody!'
+                repeat 2 times print 'This is one line.'
+            output: |-
+                Hi everybody!
+                This is one line.
+                This is one line.
+            lines: 2
+        -   type: input
+            answer: |-
+                print 'This is line 1'
+                print 'This is line 2'
+                print 'This is line 3'
+            output: |-
+                This is line 1
+                This is line 2
+                This is line 3
+            lines: 3
+        -   type: text
+            contents: |-
+                ### Exercise 3: Correct or Incorrect
+                Take a careful look at the programs and decide if they will trigger an errormessage or not.
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              print 'The prince kept screaming for help'
+              repeat 3 times 'Help!'
+            answer    : Incorrect, print is missing
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              forward 100
+              repeat 3 times turn 90
+            answer    : Correct
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              people = mum, dad, Emma, Sophie
+              repeat 7 times print 'The dishes will be done by ' mensen
+            answer    : Incorrect, at random is missing
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              options = 1, 2, 3, 4, 5, 6
+              repeat 5 times print 'You threw: ' options at random
+            answer    : Correct
+        -   type: text
+            contents: |-
+                #### Exercise 6: Programming words
+                We have learned a new programming word again! Explain in your own words.
+        -   type: define
+            word: "repeat"
+            answer: "repeating a line multiple times"
+            lines: 1
+        -   type: text
+            contents: |-
+              #### What did you think?
+        - type      : question
+          text      : "Which exercise did you like best this level?"
+          lines     : 1
+        - type      : question
+          text      : "What did you like about it?"
+          lines     : 5
+        - type      : question
+          text      : "Which exercise did you like least this level?"
+          lines     : 1
+        - type      : question
+          text      : "What didn't you like about it?"
+          lines     : 5
