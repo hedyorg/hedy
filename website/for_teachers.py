@@ -103,7 +103,7 @@ class ForTeachersModule(WebsiteModule):
                 exercise['text'] = gettext('workbook_output_question_text')
 
                 # lines zou ik hier ook uit het antwoord kunnen uitrekenen!
-                exercise['lines'] = [line for x in range(exercise['lines'])]
+                exercise['lines'] = [line for x in range(int(exercise['lines']))]
 
             if exercise['type'] == 'circle':
                 exercise['title'] = gettext('workbook_circle_question_title')
@@ -131,12 +131,12 @@ class ForTeachersModule(WebsiteModule):
                 exercise['icon'] = '📖'
                 word = exercise['word']
                 exercise['text'] = safe_format(gettext('workbook_define_question_text'), word=word)
-                exercise['lines'] = [line for x in range(exercise['lines'])]
+                exercise['lines'] = [line for x in range(int(exercise['lines']))]
 
             elif exercise['type'] == 'question':
                 exercise['title'] = gettext('workbook_open_question_title')  # ''
                 exercise['icon'] = '✍️'
-                exercise['lines'] = [line for x in range(exercise['lines'])]
+                exercise['lines'] = [line for x in range(int(exercise['lines']))]
 
         return render_template("workbooks.html",
                                current_page="teacher-manual",
