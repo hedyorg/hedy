@@ -18,3 +18,19 @@ levels:
                     {print} 'Tettwaferneḍ deg terbaεt... '
                     {print} tirebbuyaɛ {at} {random}
                     {sleep} 2
+    4:
+        1:
+            code: "ipukimunen {is} Pikaču, Čarmander, Bulbasur, Sqertl\n{print} 'Apukimun-a ad yili d apukimun-ik!'\n{sleep}\n{print} ipukimunen {at} {random}"
+    9:
+        2:
+            code: "assuter = {ask} 'Tebɣiḍ ad tessutreḍ aẓidan?'\n{if} assuter = ih\n    aẓidan = {ask} 'Acu n uẓidan i tḥemmleḍ?'\n    {if} aẓidan= tiramisu\n        {print} 'Nesḥassaf, dayen yekfa iramisu.'\n    {else}\n        {print} 'Yiwen' uẓidan ' ur yettεeṭṭil ara ad yewjed!'\n{else}\n    {print} 'Ur tebɣiḍ ara aẓidan. Ulac fell-as!'"
+        1:
+            code: "imḍanen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n{repeat} 3 {times}\n    amḍan = imḍanen {at} {random}\n    tgerrez_tririt = 5 * amḍan\n    tiririt = {ask} 'Acḥal n 5 tikkal' amḍan '?'\n    {if} tiririt = tgerrez_tririt\n                 {print} 'D amahil igerrzeb!'\n    {else}\n        {print} 'Ala! Tiririt igerrzen d ' tgerrez_tririt"
+    10:
+        1:
+            code: "ussan = Letnayen, Ttlata, Larebεa, Lexmis, Lǧemεa\nimdanen = yemma, baba, Ferruǧa, Amnay, Ayrad\ntixtiṛiyin_yimekli = pizza, takus, pankayk, cclaḍa, lazany\n{for} ass {in} ussan\n    amdan_yettwafernen = imdanen {at} {random}\n    imekli_yettwafernen = imekli_tixtiṛiyin {at} {random}\n    {print} 'Deg ' wass ' ' amdan_yettwafernen ' ad d-iheyyi ' imekli_yettwafernen\n    {remove} amdan_yettwafernen {from} imdanen\n    {remove} imekli_yettwafernen {from} tixtiṛiyin_yimekli"
+        2:
+            code: "imdanen = Tilelli, Tiziri, Maziɣ\nanegzum_n_ucebbub = bulaziru, amuhawk, taseṭṭa n uεewdid, tineddicin\n{for} amdan {in} imdanen\n    {print} amdan ' ad yegzem ' acebbub {at} {random}\n    yefraḥ = {ask} amdan ', tferḥeḍ s ufran-a?'\n    {if} yefreḥ {is} ih\n        {print} 'Ayuz'\n    {else}\n        {print} 'Ad neεreḍ tikkelt niḍen... 'Amdan' ad yegzem acebbub-is akka {at} {random}"
+    11:
+        1:
+            code: "{for} amḍan {in} {range} 10 {to} 1\n    {print} amḍan\n    {sleep}\n    {clear}\n{print} 'Aseggas ameggaz!'"

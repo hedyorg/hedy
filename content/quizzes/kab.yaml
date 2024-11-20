@@ -84,14 +84,20 @@ levels:
             hint: Senqed tangalt izirig s yizirig
             mp_choice_options:
             -   feedback: D tidet yella wanda i tella tuccḍa?
+                option: Deg yizirig 1, `{print}` tesra ad tettwasmelsi s `{ask}`
             -   feedback: D tidet yella wanda i tella tuccḍa?
+                option: Deg yizirig 1, `{print}` tesra ad tettwasmelsi s `{echo}`
             -   feedback: D tidet yella wanda i tella tuccḍa?
+                option: Deg yizirig 3, `{echo}` tesra ad tettwasmelsi s `{print}`
             -   feedback: Swaswa!
+                option: Ulac! D tangalt izaden!
             correct_answer: D
             question_score: '10'
+            question_text: D acu i d ugur akked tengalt-a?
         5:
             mp_choice_options:
             -   option: '`{print}`'
+                feedback: Ala, tebɣiḍ ad ak-d-yales Hedy tiririt-ik.
             -   option: '`Hedy`'
                 feedback: Hedy mačči d taladna.
             -   option: '`{ask}`'
@@ -102,9 +108,20 @@ levels:
             correct_answer: D
             question_score: '10'
             code: "{ask} Anwa aɣersiw akk i tḥemmleḍ?\n_Aɣersiw akk i tḥemmleḍ..."
+            hint: Tebɣiḍ ad twaliḍ tiririt ɣer taggara n yizirig 2...
         6:
             correct_answer: B
             question_score: '10'
+            mp_choice_options:
+            -   {}
+            -   option: Deg yizizrig wis 2, `{print}` ilaq ad yettwasmelsi s `{ask}`.
+                feedback: Ayuz! Terriḍ ddehn-ik akken iwata!
+            -   option: Izirig wis 3 ilaq ad tebdu s `{print}` deg wadeg n `{echo}`.
+                feedback: '`{echo}` tṣeḥḥa.'
+            -   option: Deg yizirig wis 4, `{print}` ur yuri ara akken iwata.
+                feedback: Ala, yella wanda tella tuccḍa
+            question_text: Anda tella tuccḍa deg tengalt-a?
+            hint: Senqed tiludna `{print}`.
         9:
             mp_choice_options:
             -   feedback: Ala, `{print}` d amaeɣtu. Anida-t usteqsi i d-yettwamudden?
@@ -303,7 +320,7 @@ levels:
         5:
             correct_answer: C
             question_score: '10'
-            hint: '`{echo}`'
+            hint: 'Aselkim yettraǧu tasint mi ara d-yemlil taladna `{sleep}`'
         7:
             mp_choice_options:
             -   option: "```\n{print} 3\n```"
@@ -322,7 +339,7 @@ levels:
             -   feedback: Gedha!
         6:
             mp_choice_options:
-            -   feedback: '`{echo}`'
+            -   feedback: 'Ayuz!'
                 option: '`{sleep}`'
             -   option: '`{echo}`'
             -   option: '`{print}`'
