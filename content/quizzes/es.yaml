@@ -224,7 +224,7 @@ levels:
             correct_answer: A
             question_score: '10'
         3:
-            question_text: Que aparece en tu pantalla de producción cuando usas este código ?
+            question_text: ¿Qué aparece en la pantalla cuando ejecutas este código?
             code: |-
                 nombre {is} Marleen
                 {print} nombre va al mercado y compra una manzana.
@@ -398,7 +398,7 @@ levels:
             correct_answer: D
     3:
         1:
-            question_text: ¿Qué comando(s) usas para dejar que Hedy elija algo arbitrariamente?
+            question_text: ¿Qué comando(s) utiliza(s) para que Hedy elija algo arbitrariamente?
             mp_choice_options:
             -   option: '`{print}`'
                 feedback: '`{print}` se usa para imprimir texto'
@@ -429,7 +429,7 @@ levels:
             correct_answer: A
             question_score: '10'
         3:
-            question_text: How do you fix the mistake in line 2 of this code?
+            question_text: ¿Cómo se soluciona el error de la línea 2?
             code: |-
                 opciones {is} piedra, papel, tijeras
                 {print} piedra, papel, tijeras {at} {random}
@@ -624,12 +624,12 @@ levels:
                     ```
                     {print} '¡Tengo muchas ganas de hacer este cuestionario!'
                     ```
-                feedback: no utilices apóstrofe o utiliza contracita en su lugar
+                feedback: no utilices apóstrofo o utiliza en su lugar el acento grave
             -   option: |-
                     ```
                     {print} '¡Tengo muchas ganas de hacer este cuestionario!
                     ```
-                feedback: cuidado al usar comillas y apóstrofe
+                feedback: cuidado al usar comillas y apóstrofo
             hint: En el nivel 4 necesitas comillas para 2 comandos.
             correct_answer: A
             question_score: '10'
@@ -855,7 +855,7 @@ levels:
             correct_answer: D
             question_score: '10'
         2:
-            question_text: ¿Qué aparece en tu pantalla de salida cuando escribes Hedy en el nombre?
+            question_text: ¿Qué aparece en la pantalla de salida cuando escribe el nombre Hedy?
             code: |-
                 nombre {is} {ask} '¿Cómo te llamas?'
                 {if} nombre {is} Hedy {print} 'divertido' {else} {print} 'menos divertido'
@@ -929,7 +929,7 @@ levels:
             question_text: ¿Qué palabra debe ir en el lugar del espacio en blanco en la última línea?
             code: |-
                 {print} '¡Soy Hedy, el advino de fútbol!'
-                {print} '¡Voy a predecir en que posición acabará tu equipo!'
+                {print} '¡Voy a predecir en qué posición acabará tu equipo!'
                 equipo es {ask} '¿Cuál es tu equipo favorito?'
                 {if} equipo {is} ajax {print} '¡Ajax va a ganar por supuesto!'
                 _ {print} 'Lo siento, tu equipo va a quedar último...'
@@ -1059,7 +1059,7 @@ levels:
             question_score: '10'
             code: '{print} 2*10'
         2:
-            question_text: ¿Qué signo usas para una suma?
+            question_text: ¿Qué usas cuando quieres sumar dos números?
             mp_choice_options:
             -   option: '`-`'
                 feedback: Ese no
@@ -1298,7 +1298,7 @@ levels:
                 feedback: '`{repeat}` está mal escrito'
             -   option: '`{times}`'
                 feedback: '`{times}` está mal escrito'
-            hint: Estoy equivocado, no puedes usar apóstrofes en una oración
+            hint: Estoy equivocado, no puedes usar apóstrofos en una oración
             question_score: '10'
             correct_answer: A
         5:
@@ -1313,7 +1313,7 @@ levels:
             question_score: '10'
             correct_answer: A
         6:
-            question_text: ¿Cuál será la salida de este código?
+            question_text: ¿Cuál será el resultado de este código?
             code: |-
                 {print} 'las ruedas del bus'
                 {repeat} 3 {times} {print} ' giran y giran'
@@ -1389,7 +1389,7 @@ levels:
             question_score: '10'
             correct_answer: B
         8:
-            question_text: ¿Qué código de Hedy corresponde a esta salida?
+            question_text: ¿Qué código de Hedy corresponde a este resultado?
             code: |-
                 Ahí viene el Sol
                 Do do do do
@@ -2122,7 +2122,7 @@ levels:
             -   option: los perros son mascotas adorables
                 feedback: La línea 2 dice {for} cada animal en la lista de animales. Así que se {print} cada animal.
             -   option: perros, gatos, hámsteres, gallinas son mascotas adorables
-                feedback: Cada animal tiene su propia línea en la salida.
+                feedback: Cada animal tiene su propia línea en el resultado.
             -   option: |-
                     los perros son mascotas adorables
                     los gatos son mascotas adorables
@@ -2387,7 +2387,7 @@ levels:
                     {for} i {in} {range} 0 {to} 10
                         {print} i
                     ```
-                feedback: Ahora Hedy imprime los números del 0 al 10 en vez de de 10 a 0.
+                feedback: Ahora Hedy imprime los números de 0 a 10 en lugar de 10 a 0.
             -   option: |-
                     ```
                     {for} i {in} {range} 0 {to} 10
@@ -2890,7 +2890,7 @@ levels:
             question_score: '10'
             correct_answer: B
         3:
-            question_text: ¿Qué salida se le da a un miembro sin un código de descuento?
+            question_text: ¿Qué resultado se da a un miembro sin un código de descuento?
             code: |-
                 miembro = {ask} '¿Tienes tarjeta de socio?'
                 descuento = {ask} '¿Tienes un código de descuento?'
@@ -3008,7 +3008,7 @@ levels:
             question_score: '10'
             correct_answer: C
         8:
-            question_text: ¿Qué salida recibes si pides palomitas sin bebida?
+            question_text: ¿Qué resultado obtienes si pides palomitas sin bebida?
             code: |-
                 {print} 'Bienvenido al cine'
                 palomitas = {ask} '¿Quieres palomitas?'
@@ -3825,7 +3825,7 @@ levels:
             question_score: '10'
     17:
         1:
-            question_text: ¿Cuál es la salida de este código?
+            question_text: ¿Cuál es el resultado de este código?
             mp_choice_options:
             -   option: |-
                     ```
@@ -4097,7 +4097,7 @@ levels:
             question_score: '10'
             correct_answer: C
         9:
-            question_text: ¿Cuál de los códigos de abajo dio esta salida?
+            question_text: ¿Cuál de los siguientes códigos produjo este resultado?
             code: |-
                 -5 es negativo
                 -4 es negativo
@@ -4133,7 +4133,7 @@ levels:
                     {else}:
                       {print} 'buscaré otra cosa'
             mp_choice_options:
-            -   option: La palabara num necesita comillas.
+            -   option: La palabra num necesita comillas.
                 feedback: Inténtalo de nuevo.
             -   option: El comando `{if}` no se utiliza correctamente.
                 feedback: No es cierto.

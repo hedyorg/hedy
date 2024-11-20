@@ -2,7 +2,7 @@ levels:
     1:
         1:
             story: |-
-                Los puzles son ejercicios en los que las líneas de código ya están escritas para ti. Sólo tienes que colocar las líneas en el orden correcto. Arrastra las líneas de código a la pantalla de entrada y ejecuta el código. ¿Puedes hacer que el programa funcione?
+                Los rompecabezas son ejercicios en los que las líneas de código ya están escritas para ti. Sólo tienes que colocar las líneas en el orden correcto. Arrastra las líneas de código a la pantalla de entrada y ejecuta el código. ¿Puedes hacer que el programa funcione?
 
                 Eres un cliente de la panadería Hedy.
                 Entras en la panadería y te recibe el panadero.
@@ -15,7 +15,7 @@ levels:
                 {echo} Entonces quieres
                 {print} ¡Tu orden está siendo preparada!
         2:
-            story: Estás en la Cabina del DJ pidiendo una canción. Crea un programa que pregunte si estás listo para la fiesta y luego pregunte cuál canción te gustaría escuchar.
+            story: Estás en la cabina del DJ pidiendo una canción. Crea un programa que pregunte si estás listo para la fiesta y luego pregunte qué canción te gustaría escuchar.
             code: |-
                 {print} Esta es la DJ Hedy
                 {ask} ¿Estás listo para la fiesta?
@@ -24,8 +24,8 @@ levels:
     2:
         1:
             story: |-
-                Tú y tus amigos van a ver Netflix.
-                ¡Muestra qué película van a ver y deséales a los espectadores que se diviertan mucho!
+                Tú y tus amigos vais a ver Netflix.
+                ¡Muestra qué película vais a ver y deséales a los espectadores que se diviertan mucho!
             code: |-
                 {print} Es hora de una noche de Netflix
                 película {is} Sonic 2: La película
@@ -40,7 +40,7 @@ levels:
                 {print} ¡Gracias por comprar con nosotros!
     3:
         1:
-            story: "¡Comienza el nuevo curso escolar en Hogwarts! \nEl sombrero seleccionador es el encargado de clasificarte en una de las casas.\n¿En qué casa te van a clasificar? ¿Serás Gryffindor, Hufflepuff, Ravenclaw o Slytherin?\nAntes de que el sombrero clasificador revele tu casa, puedes decirle que no elija una de las casas."
+            story: "¡Comienza el nuevo curso escolar en Hogwarts! \nEl sombrero seleccionador es el encargado de clasificarte en una de las casas.\n¿En qué casa te van a clasificar? ¿Serás Gryffindor, Hufflepuff, Ravenclaw o Slytherin?\nAntes de que el sombrero seleccionador revele tu casa, puedes decirle que no elija una de las casas."
             code: |-
                 {print} El sombrero seleccionador está listo para clasificarte en una casa de Hogwarts.
                 casas {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin
@@ -107,7 +107,7 @@ levels:
     6:
         1:
             story: |-
-                Haz un programa que calcule que tan viejo eres en años perros y gatos.
+                Haz un programa que calcule cómo de viejo eres en años perros y gatos.
                 Primero pregunta la edad del usuario y empieza a calcular.
                 Primero calcula la edad en años perros y luego en años gatos.
                 Muestra al usuario las diferentes edades.
@@ -118,7 +118,7 @@ levels:
                 {print} 'En años perros tienes ' edad_perro ' años.'
                 {print} 'En años gatos tienes ' edad_gato ' años.'
         2:
-            story: Crea un programa que te ayude a calcular cuantas tortas deberías comprar para tu fiesta de cumpleaños.
+            story: Crea un programa que te ayude a calcular cuantos pasteles deberías comprar para tu fiesta de cumpleaños.
             code: |-
                 {print} '¡Es tu cumpleaños!'
                 personas = {ask} '¿A cuántas personas quieres dar un trozo de tarta?'
@@ -148,7 +148,7 @@ levels:
                   {print} equipos {at} {random}
                   {sleep} 2
         2:
-            story: Imprime la cuenta regresiva para un juego de escondidas.
+            story: Imprime la cuenta atrás para jugar al escondite.
             code: |-
                 contador = 11
                 {repeat} 10 {times}
@@ -220,7 +220,7 @@ levels:
                     {print} número
                     {sleep}
                     {clear}
-                {print} '¡Feliz Año Nueva!'
+                {print} '¡Feliz Año Nuevo!'
         2:
             story: |-
                 Crea un programa que te diga el resultado final de la feria de ciencia. Primero define la variable concursantes, después la variable posición.
@@ -243,9 +243,9 @@ levels:
                 ¿Qué haremos con el marinero borracho?
                 ¿Qué haremos con el marinero borracho?
                 Temprano en la mañana
-                Ella se levanta de un camino de heno
-                Ella se levanta de un camino de heno
-                Ella se levanta de un camino de heno
+                Camino del heno y arriba ella se levanta
+                Camino del heno y arriba ella se levanta
+                Camino del heno y arriba ella se levanta
                 Temprano en la mañana
             code: |-
                 versos = 'Qué haremos con el marinero borracho', 'Ella se levanta de un camino de heno'

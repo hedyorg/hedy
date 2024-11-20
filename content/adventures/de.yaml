@@ -87,13 +87,13 @@ adventures:
                     ```
             4:
                 story_text: |
-                    ### Übung
-                    Kopiere den Beispielcode und vervollständige ihn indem du Anführungszeichen in die Lücken in Zeile 1 und 2 einsetzt.
-                    Die Lücken in Zeile 3 und 4 sollen nicht durch Anführungszeichen ersetzt werden, sondern einem `{sleep}` und einem `{clear}` Befehl. Kannst du es zum Laufen bekommen?
+                    ### Übung 1
+                    Kopiere den Beispielcode und vervollständige ihn, indem du Anführungszeichen in die Lücken in Zeile 1 und 2 einsetzt.
+                    Die Lücken in Zeile 3 und 4 sollen nicht durch Anführungszeichen ersetzt werden, sondern mit einem `{sleep}` und mit einem `{clear}` Befehl. Kannst du es zum Laufen bekommen?
 
                     ### Übung 2
-                    Gehe zurück zum vorherigen Level und kopiere deinen Storycode. Bringe den Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen einfügst.
-                    Beachte: Die Variablen in deiner eigenen Geschichte sollten außerhalb der Anführungszeichen stehen. So wie in der zweiten Zeile des Beispielcodes. In dieser Zeile wird der Variablenname außerhalb der Anführungszeichen gesetzt.
+                    Gehe zurück zum vorherigen Level und kopiere deinen Geschichte-Code. Bringe den Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen einfügst.
+                    Beachte: Die Variablen in deiner eigenen Geschichte sollten ausserhalb der Anführungszeichen stehen. So wie in der zweiten Zeile des Beispielcodes. In dieser Zeile wird der Variablenname ausserhalb der Anführungszeichen gesetzt.
                 example_code: |
                     ```
                     Name {is} {ask} _ Was ist dein Name? _
@@ -238,8 +238,8 @@ adventures:
                     Mit der `{while}`-Schleife kannst du deine Geschichten noch interessanter gestalten. So kannst du zum Beispiel mit  `{while} game == 'on'``{while} sword == 'lost'` dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
                     Oder du lässt die Spieler mit  `{while} game == 'on'` so lange weiter suchen, bis sie etwas finden.
 
-                    ### Exercise
-                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
+                    ### Übung
+                    Der Beispiel Code zeigt dir, wie du eine `{while}` Schleife in einer Geschichte verwenden kannst. Denke dir jetzt **ein eigenes Szenario** aus, in dem die Spieler etwas finden müssen, bevor sie weitermachen können.
                 example_code: |
                     ```
                     Schlüssel = 'verloren'
@@ -276,8 +276,8 @@ adventures:
                     {print}('Willkommen in dieser Geschichte!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
-        description: Führt hinzufügen und entfernen ein
+        name: '{add} {to_list} & {remove} {from}'
+        description: Einführung von {add} {to_list} und {remove} {from}
         levels:
             3:
                 story_text: |
@@ -309,13 +309,13 @@ adventures:
                     geschmacksrichtungen {is} Erdbeere, Schokolade, Vanille
                     hoffnung {is} {ask} Auf welche Geschmacksrichtung hoffst du?
                     _
-                    allergien {is} {ask} Bist du auf eine Geschmacksrichtung allergisch?
+                    allergie {is} {ask} Bist du auf eine Geschmacksrichtung allergisch?
                     _
                     {print} Du bekommst einen geschmacksrichtungen {at} {random} Milchshake
                     ```
         default_save_name: hinzufügen_entfernen_Befehl
     and_or_command:
-        description: introducing and or
+        description: Einführung von {and} & {or}
         levels:
             13:
                 story_text: |-
@@ -613,7 +613,7 @@ adventures:
                     {else} {print} 'Falsch! Es war ' _
                     ```
                 story_text_3: |
-                    **Zusätzlich** Du kannst den Computer auch alleine zufällige Summen rechnen lassen, indem du zufällig benutzt.
+                    **Extra** Du kannst den Computer auch alleine zufällige Summen rechnen lassen, indem du zufällig benutzt.
                 example_code_3: |-
                     ```
                     zahlen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -752,13 +752,13 @@ adventures:
                     ```
             15:
                 story_text: |
-                    Du kannst die `{while}` Schleife zum Taschenrechnerspiel, was du im vorigen Level gelernt hast, hinzufügen.
+                    Du kannst die `{while}` Schleife zum Taschenrechnerspiel, das du im vorigen Level gelernt hast, hinzufügen.
                     Dies stellt sicher, dass der Spieler nicht zur nächsten Frage weiterkommt, wenn er falsch antwortet.
 
-                    ### Exercise
-                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
-                    Then `{call}` the function.
-                example_code: "```\n{define} neue_Frage\n    Zahlen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    Zahl_1 = Zahlen {at} {random}\n    Zahl_2 = Zahlen {at} {random}\n    richtig = Zahl_1 * Zahl_2\n    Antwort = 0\n    _\n    _\n    _\n    {print} 'Gut gemacht!'\n\n{print} 'Gib 10 richtige Antworten, um zu gewinnen!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} 'Gewonnen!'\n```\n"
+                    ### Übung
+                    Ergänze. die `{while}` Schleife in der Funktion, frage die Spieler, was zahl_1 mal zahl_2 ist und drucke ihre Antowrt.
+                    Dann mache einen `{call}` der Funktion.
+                example_code: "```\n{define} neue_frage\n    Zahlen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    Zahl_1 = Zahlen {at} {random}\n    Zahl_2 = Zahlen {at} {random}\n    richtig = Zahl_1 * Zahl_2\n    Antwort = 0\n    _\n    _\n    _\n    {print} 'Gut gemacht!'\n\n{print} 'Gib 10 richtige Antworten, um zu gewinnen!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} 'Gewonnen!'\n```\n"
     calculator_2:
         name: Taschenrechner 2
         levels:
@@ -788,7 +788,7 @@ adventures:
             4:
                 story_text: |
                     Zeit für einen neuen Befehl! Mit `{clear}` kann der gesamte Text vom Ausgabebildschirm gelöscht werden. Auf diese Weise wird verhindert, dass der Bildschirm zu voll mit Text wird.
-                    Achtung! Wenn du den `{clear}`-Befehl verwendest, denke daran, zuvor ein `{sleep}` zu verwenden. Andernfalls löscht Hedy den Bildschirm, ohne dass du Zeit zum Lesen hast!
+                    Achtung! Wenn du den `{clear}` Befehl verwendest, denke daran, zuvor ein `{sleep}` zu verwenden. Andernfalls löscht Hedy den Bildschirm, ohne dass du Zeit zum Lesen hast!
                 example_code: |
                     ```
                     {print} '3'
@@ -869,7 +869,7 @@ adventures:
                     ### Übung
                     Debugge dieses Programm. Viel Glück!
                 example_code: |
-                    **Warnung! Dieser Code muss gedebuggt werden!**
+                    **Warnung! Dieser Code muss korrigiert werden!**
                     ```
                     {print} 'Willkommen zur Online-Bibiliothe!
                     {ask} Welche Buchgenre magst du?
@@ -1426,15 +1426,15 @@ adventures:
                     Die Noten 1 bis 4 wurden getrennt programmiert. Aber - Glück für dich, in diesem Level wirst du lernen, wie du ohne diesen extrem langen Code zurecht kommst.
                 example_code: |
                     ```
-                    alter = {ask} 'Wie alt bist du?'
-                    {if} alter > 12
-                        {print} 'Du bist älter als ich!'
-                    ```
-
-                    {if} alter < 13
-                        {print} 'Du bist jünger als ich!'
+                    erste_note = {ask} 'Welche Note hast du für deinen ersten Test bekommen?'
+                    zweite_note = {ask} 'Welche Note hast du für deinen zweiten Test bekommen?'
+                    summe = erste_note + zweite_note
+                    durchschnitt = summe / 2
+                    {if} durchschnitt = 1 {or} durchschnitt = 2 {or} durchschnitt = 3 {or} durchschnitt = 4 {or} durchschnitt = 5
+                        {print} 'Oh nein! Du bist durchgefallen...'
                     {else}
-                        {print} 'Du bist älter als ich!'
+                        {print} 'Toll! Du hast bestanden!'
+                    ```
             15:
                 story_text: |
                     Im unten gezeigten Spiel wurde der Code so erstellt, dass der Spieler so lange spielen kann, wie er will …
@@ -1480,7 +1480,7 @@ adventures:
     dice:
         name: Würfel
         default_save_name: Würfel
-        description: Erstelle Deinen eigenen Würfel
+        description: Erstelle deinen eigenen Würfel
         levels:
             3:
                 story_text: |
@@ -1568,6 +1568,9 @@ adventures:
                         {print} Spieler ' würfelt ' Würfelseiten {at} {random}
                         {sleep}
                     ```
+            15:
+                story_text: "### Übung\nIn diesem Level kannst du ein kleines Spiel schreiben, bei dem du so schnell wie möglich eine 6 Würfeln musst.\nWir haben mit dem Code angefangen, deine Aufgabe ist, das Spiele zum funktionieren zu bringen.\n\nAls erstes, füge eine `{while}` Schleife hinzu, die prüft, ob eine 6 gewürfelt wurde oder nicht.\nSolange du keine 6 gewürfelt hast, würfle eine Zufallszahl.\nDrucke die Zahl, die der Spieler gewürfelt hat.\nAddiere den Versuch zu der Anzahl der Versuchen.\nWarte eine Sekunde, bevor du wieder würfelst, oder - falls du eine 6 gewürfelt hast - bevor das Spiel endet.\n"
+                example_code: "```\nmöglichkeiten = 1, 2, 3, 4, 5, 6\n{print} 'Würfle eine 6 so schnell du kannst!'\ngewürfelt = 0\nversuche = 0\n_\n_\n_\n_\n_\n{print} 'Ja! Du hast in ' versuche ' Versuchen eine 6 gewürfelt.'\n```\n"
     dishes:
         name: Abwasch?
         default_save_name: Abwasch
@@ -1677,6 +1680,9 @@ adventures:
                 story_text: |
                     In diesem Level kannst du auch einen neuen Befehl nutzen: `{elif}`. `{elif}` ist eine Kombination der Schlüsselwörter `{else}` und `{if}` und du brauchst es, wenn du 3 (oder mehr!) Optionen erstellen möchtest.
                     Guck es dir jetzt an!
+        default_save_name: sofalls
+        description: '{elif}'
+        name: '{elif}'
     for_command:
         default_save_name: für
         description: '{for} Befehl'
@@ -1731,6 +1737,7 @@ adventures:
             18:
                 story_text: |
                     Zuletzt, machen wir aus `{for} i {in} {range} 1 to 5` so richtigen Python Code:
+        name: '{for}'
     fortune:
         name: Wahrsagerin
         default_save_name: Wahrsagerin
@@ -1776,10 +1783,10 @@ adventures:
             4:
                 story_text: |
                     ### Übung 1
-                    Wir haben alle Anführungszeichen aus diesem Beispiel-Code entfernt. Kannst du sie alle an der richtigen Stelle hinzufügen?
+                    Wir haben alle Anführungszeichen aus diesem Beispiel-Code entfernt. Kannst du sie alle an den richtigen Stellen hinzufügen?
 
                     ### Übung 2
-                    Gehe zurück zum vorigen Level und kopiere deinen Wahrsagerin-Code. Bring diesen Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen hinzufügst.
+                    Gehe zum vorigen Level zurück und kopiere deinen Wahrsagerin-Code. Bring diesen Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen hinzufügst.
                 example_code: |
                     ```
                     _ Füge die Anführunszeichen in diesen Code ein _
@@ -2032,12 +2039,21 @@ adventures:
                                 {print} 'Gewonnen!'
                                 spiel = 'vorbei'
                     ```
+        default_save_name: Errate meine Zahl
+        name: Errate meine Zahl
+        description: Errate meine Zahl
     hangman:
         name: Galgenmännchen
+        default_save_name: Galgenmännchen
+        description: Errate das Wort
     hangman_2:
         name: Galgenmännchen 2
+        description: Galgenmännchen 2
+        default_save_name: Galgenmännchen_2
     hangman_3:
         name: Galgenmännchen 3
+        description: Galgenmännchen 3
+        default_save_name: Galgenmännchen_3
     harry_potter:
         description: Harry Potter Abenteuer
         levels:
@@ -2053,10 +2069,12 @@ adventures:
                     ängste = Voldemort, Spinnen, Durchfallen beim OWL Test
                     namen = Harry, Ron, Hermione
                     _
-                    _ {print} name ' is placed in ' häuser {at} {random}
-                    _ {print} name ' is great at ' fächer {at} {random}
-                    _ {print} name 's hat am meisten Angst vor ' ängste {at} {random}
+                    _ {print} name ' kommt nach ' häuser {at} {random}
+                    _ {print} name ' ist gut in ' fächer {at} {random}
+                    _ {print} name ' hat am meisten Angst vor ' ängste {at} {random}
                     ```
+        default_save_name: Harry Potter
+        name: Harry Potter
     haunted:
         name: Spukhaus
         default_save_name: Spukhaus
@@ -2141,13 +2159,13 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In diesem Level lernst du mit Anführungszeichen umzugehen.
+                    In diesem Level lernst du, mit Anführungszeichen umzugehen.
 
                     ### Übung 1
                     Kannst du dein Spukhaus für Level 4 fit machen?
 
                     ### Übung 2
-                    Gehe zurück zum vorigen Level und kopiere deinen Spukhaus-Code. Bring den Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen hinzufügst.
+                    Gehe zum vorigen Level zurück und kopiere deinen Spukhaus-Code. Bringe den Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen hinzufügst.
                 example_code: |
                     ```
                     _ Füge Anführungszeichen zu diesem Code hinzu _
@@ -2271,6 +2289,8 @@ adventures:
                     Du hast dich vielleicht gefragt, warum du eine Funktion verwenden solltest, weil die Funktionen im Beispiel nur eine Zeile lange sind.
                     Jetzt werden wir dir zeigen, wie größere Funktionen aussehen. Wir werden jetzt auch mehrere Argumente verwenden. Du wirst sehen, wie viel besser es ist, eine Funktion zu verwenden, wenn die Funktion größer wird.
                     Hier ist ein Beispiel einer Funktion mit Argumenten, kombiniert mit dem {ask} Befehl.
+        default_save_name: Hotel
+        description: Hotel
     if_command:
         description: Einführung des {if} Befehls
         levels:
@@ -2333,6 +2353,8 @@ adventures:
                     {else}
                         {print} 'Du willst nicht weiter machen.'
                     ```
+        default_save_name: if_Befehl
+        name: '{if} & {else}'
     in_command:
         default_save_name: in_Befehl
         description: Einführung des {in} Befehls
@@ -2360,6 +2382,7 @@ adventures:
                     _ antwort _ tiere _ 'Meines auch!'
                     _ _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
                     ```
+        name: '{in}'
     is_command:
         default_save_name: ist_Befehl
         description: Einführung des {is}-Befehls
@@ -2416,6 +2439,7 @@ adventures:
                     {if} name != 'Hedy'
                         {print} 'Du bist nicht Hedy'
                     ```
+        name: '{is}'
     language:
         name: Sprache
         default_save_name: Sprache
@@ -2819,13 +2843,13 @@ adventures:
                 story_text: |
                     Bringe Deinem Papageien mit dem Befehl `{add}` neue Wörter bei.
                     ### Übung
-                    Wie kannst Du deinen Papagei dazu bringen, mehrere Wörter zu sagen?
+                    Kannst du den `{add} {to_list}` Befehl hinzufügen, so dass der Code funktioniert?
                 example_code: |
                     ```
                     Wörter {is} Aaaaaaak, Hedy
                     {print} Bring deinem Papagei etwas bei!
                     neues_Wort {is} {ask} Welches Wort willst du ihm beibringen?
-                    {add} neues_Wort {to_list} Wörter
+                    _ neues_Wort _ Wörter
                     {print} 🧒 Sag neues_Wort, Hedy!
                     {print} 🦜 Wörter {at} {random}
                     ```
@@ -2833,7 +2857,7 @@ adventures:
                 story_text: |
                     In diesem Level müssen wir Anführungszeichen bei den Befehlen `{ask}` und `{print}` benutzen.
                     ### Übung
-                    Vervollständige den Code, indem du Anführungszeichen in die Lücken füllst?
+                    Vervollständige den Code, indem du Anführungszeichen in die Lücken füllst.
                 example_code: |
                     ```
                     wörter {is} krächz, Hedy
@@ -2975,6 +2999,9 @@ adventures:
                     ```
 
                     {print}('My name is ', name)
+        name: '{print}'
+        description: Einführung des {print} Befehls
+        default_save_name: drucke
     quizmaster:
         name: Quizmeister
         default_save_name: Quizmeister
@@ -3012,15 +3039,16 @@ adventures:
                 story_text: |
                     ## 'Anführungszeichen'
                     In Level 4 haben sich `{ask}` und `{print}` verändert.
-                    Du musst Text, den du drucken möchtest, zwischen Anführungszeichen schreiben.
-                    Das ist nützlich, weil du jetzt alle Wörter drucken kannst, die du möchtest. Auch die Wörter, die du benutzt hast um etwas mit `{is}` zu speichern.
-                    Die meisten Programmiersprachen verwenden Anführungszeichen, wenn sie ettwas drucken, wir kommen also einen Schritt weiter zum echten Programmieren!
+                    Du musst Text, den du drucken möchtest, zwischen einfache Anführungszeichen schreiben.
+                    Das ist nützlich, weil du jetzt alle Wörter drucken kannst, die du möchtest. Auch die Wörter, die du benutzt hast, um etwas mit `{is}` zu speichern.
+                    Die meisten Programmiersprachen verwenden Anführungszeichen, wenn sie etwas drucken, wir kommen also einen Schritt weiter zum echten Programmieren!
                 example_code: |
                     ```
-                    {print} 'Du musst abjetzt Anführungszeichen verwenden'
+                    {print} 'Du musst ab jetzt Anführungszeichen verwenden'
                     antwort {is} {ask} 'Was müssen wir ab jetzt benutzen?'
                     {print} 'Wir müssen ' antwort ' benutzen'
                     ```
+                story_text_2: "## Verkürzungen im Englischen\nWichtig! Da wir jetzt Anführungszeichen verwenden, wird Hedy verwirrt, wenn du bei englischen Texten das Apostroph für Verkürzungen wie I'm oder What's verwendest.\nEntferne diese Apostrophe und ändere die Schreibweise in I am oder What is sein.\nSchaue dir den Beispielcode an, um die falsche Verwendung von Apostrophen zu lernen.\n"
             12:
                 story_text: |
                     **Alle Texte müssen in Anführungszeichen stehen**
@@ -3055,9 +3083,11 @@ adventures:
                     punkte = 25
                     {print} 'Du hast ' punkte
                     ```
+        description: Einführung der Anführungszeichen
+        default_save_name: Anführungszeichen
     random_command:
-        default_save_name: zufällig-Befehl
-        description: Einführung des an zufällig Befehls
+        default_save_name: zufällig_Befehl
+        description: Einführung des {random} Befehls
         levels:
             3:
                 story_text: |
@@ -3102,6 +3132,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         {print} freunde[i] 's Glückszahl ist  ' glückszahl[i]
                     ```
+        name: '{random}'
     repeat_command:
         default_save_name: wiederhole_Befehl
         description: '{repeat} Befehl'
@@ -3146,6 +3177,7 @@ adventures:
                         {else}
                             {print} 'Pizza ist besser!'
                     ```
+        name: '{repeat}'
     repeat_command_2:
         default_save_name: wiederhole_Befehl_2
         description: '{repeat} Befehl 2'
@@ -3187,6 +3219,7 @@ adventures:
                     _ {print} 'Den Muffin Mann'
                     _ {print} 'Kennst du den Muffin Mann, der wohnt in Dury Lane.'
                     ```
+        name: '{repeat} 2'
     restaurant:
         description: Erstelle dein eigenes virtuelles Restaurant
         levels:
@@ -3261,11 +3294,13 @@ adventures:
                     ```
             4:
                 story_text: |
+                    In der Restaurant-Übung musst du auch Anführungszeichen benutzen, wenn du die `{print}` oder `{ask}` Befehle verwendest.
+
                     ### Übung 1
-                    Füge die Anführungszeichen zum Code hinzu, um ihn zum Laufen zu bringen! Sei vorsichtig: Variablen sollten nicht in Anführungszeichen sein.
+                    Füge die Anführungszeichen zum Code hinzu, um ihn zum Laufen zu bringen! Sei vorsichtig: Variablen sollten nicht in Anführungszeichen stehen.
 
                     ### Übung 2
-                    Gehe zurück zum vorigen Level und kopiere deinen Restaurant-Code. Bringe diesen Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen hinzufügst.
+                    Gehe zum vorigen Level zurück und kopiere deinen Restaurant-Code. Bringe diesen Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen hinzufügst.
                 example_code: |
                     ```
                     _ Füge Anführungszeichen in diesen Code ein _
@@ -3472,6 +3507,9 @@ adventures:
                         mehr = {ask} 'Würden Sie gerne noch etwas bestellen?'
                     {print} 'Dankeschön!'
                     ```
+                story_text: "Mit `{while}` kannst du sicherstellen, dass deine Kunden Bestellungen aufgeben bis sie fertig sind.\n\n### Übung\nFüge den `{while}` Befehl dem Code hinzu.\n"
+        default_save_name: Restaurant
+        name: Restaurant
     rock:
         name: Schere, Stein, Papier
         default_save_name: Stein_2
@@ -3508,7 +3546,7 @@ adventures:
                     ```
             3:
                 story_text: |
-                    Du kannst den `{at} {random}` Befehl verwenden, um den Computer Schere, Stein oder Papier!
+                    Du kannst den `{at} {random}` Befehl verwenden, um den Computer Schere, Stein oder Papier wählen zu lassen!
 
                     ### Übung
                     Vervollständige den Code, in dem du den `{at} {random}` Befehl verwendest.
@@ -3583,7 +3621,7 @@ adventures:
             10:
                 story_text: |
                     ### Übung
-                    In den vorherigen Leveln hast du oft dein eigenes Schere-Stein-Papier Spiel gemacht. Kann du den Code vervollständigen, indem du den `{for}`Befehl so zu verwenden, dass das Spiel funktioniert?
+                    In den vorherigen Leveln hast du oft dein eigenes Schere-Stein-Papier Spiel gemacht. Kann du den Code vervollständigen, indem du den `{for}` Befehl so zu verwenden, dass das Spiel funktioniert?
                 example_code: |
                     ```
                     Auswahl = Schere, Stein, Papier
@@ -3637,7 +3675,7 @@ adventures:
     rock_2:
         name: Schere, Stein, Papier 2
         default_save_name: Stein_2
-        description: Teil 2 von Stein, Schere, Papier
+        description: Teil 2 von Schere, Stein, Papier
         levels:
             2:
                 story_text: |
@@ -3652,7 +3690,7 @@ adventures:
                     ```
     secret:
         name: Superspion
-        default_save_name: Sprache
+        default_save_name: Superspion
         description: Schreibe deinen eigenen Spion-Code
         levels:
             12:
@@ -3699,12 +3737,18 @@ adventures:
                      ```
     simon:
         name: Simon sagt
+        description: Erstelle das Spiel Simon sagt
+        default_save_name: Simon
     simon_2:
         name: Simon sagt 2
+        description: Erstelle das Spiel Simon sagt
+        default_save_name: Simon
     simon_3:
         name: Simon sagt 3
+        description: Erstelle das Spiel Simon sagt
+        default_save_name: Simon
     sleep_command:
-        default_save_name: schlaf-Befehl
+        default_save_name: schlafe_Befehl
         description: Einführung des {sleep} Befehls
         levels:
             2:
@@ -3719,9 +3763,10 @@ adventures:
                     {sleep} 2
                     {print} Grün!
                     ```
+        name: '{sleep}'
     songs:
         name: Singe ein Lied!
-        description: Gib einen Songtext aus
+        description: Drucke einen Songtext
         levels:
             6:
                 story_text: |
@@ -3885,6 +3930,7 @@ adventures:
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
+        default_save_name: Lied
     songs_2:
         name: Singe ein Lied! 2
         levels:
@@ -3908,10 +3954,12 @@ adventures:
                     {call} _
                     {print} 'Aber nur meine Liebe Laterne nicht'
                     ```
+        default_save_name: Lied 2
+        description: Singe ein Lied 2
     turtle:
         name: Schildkröte
         default_save_name: Schildkröte
-        description: Mal dein eigenes Bild
+        description: Male dein eigenes Bild
         levels:
             1:
                 story_text: |
@@ -3962,7 +4010,7 @@ adventures:
                     ```
             4:
                 story_text: |
-                    In Level 4 musst Du bei `{print}` und `{ask}` Anführungszeichen nutzen. Das gilt auch für's Zeichnen!
+                    In Level 4 musst du bei `{print}` und `{ask}` Anführungszeichen nutzen. Das gilt auch für's Zeichnen!
                 example_code: |
                     ```
                     {print} _ Formen zeichnen _
@@ -3973,8 +4021,8 @@ adventures:
                     {forward} 25
                     ```
                 story_text_2: |
-                    Du kannst auch die Farben der Linien mit dem Befehl `{color}` ändern. Sieh dir das Beispiel an.
-                    Du kannst auch den Befehl `{color} {white}` benutzen, um unsichtbare Linien zu ziehen. Du kannst diese weißen Linien nutzen, um die Schildkröte irgendwo auf dem Bildschirm hin zu bewegen bevor du zu malen anfängst.
+                    Du kannst auch die Farben der Linien mit dem `{color}`  Befehl ändern. Sieh dir das Beispiel an.
+                    Du kannst auch den `{color} {white}` Befehl benutzen, um "unsichtbare" Linien zu ziehen. Du kannst diese weissen Linien nutzen, um die Schildkröte irgendwo auf dem Bildschirm hin zu bewegen bevor du zu malen anfängst.
             5:
                 story_text: |
                     In Level 5 kannst Du mit dem Befehl `{if}` Entscheidungen treffen. Du kannst Dich zum Beispiel zwischen verschiedenen Formen entscheiden.
@@ -4203,8 +4251,8 @@ adventures:
                     Mache die Zeichnungen mit der Schildkröte nach!
 
                     <div class="w-full flex flex-row gap-2">
-                    Hexagon <img src="https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4" width="200">
-                    Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
+                    Sechseck <img src="https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4" width="200">
+                    Dreieck <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
                     Fächer <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
                     </div>
             8:
@@ -4441,13 +4489,19 @@ adventures:
                     Stern <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
                 example_code_3: |
                     Stern
-                    Ein Star wird üblicherweise mit 144° Drehungen gezeichnet. Wenn du das zum Beispiel leicht in einen 143° Winkel abänderst und das Muster mehrfach mit einer {while} Schleife wiederholst, kannst du die gezeigte Figur zeichnen.
+                    Ein Stern wird üblicherweise mit 144° Drehungen gezeichnet. Wenn du das zum Beispiel leicht in einen 143° Winkel abänderst und das Muster mehrfach mit einer {while} Schleife wiederholst, kannst du die gezeigte Figur zeichnen.
     while_command:
-        description: while
+        description: '{while}'
+        levels:
+            15:
+                story_text: "Wir lernen jetzt eine neue Schleife, die `{while}` Schleife! Wir bleiben in der Schleife, so lange bis die Aussage wahr ist.\nDeswegen - vergiss nicht, den Wert in der Schleife zu verändern.\n\nIm Beispiel Code bleiben wir in der Schleife, bis eine richtige Antwort gegeben wurde.\nFalls die richtige Antwort nie gegeben wird, endet die Schleife nie!"
+                example_code: "```\nantwort = 0\n{while} antwort != 25\n    antwort = {ask} 'Was ist 5 mal 5?'\n{print} 'Eine richtige Antwort wurde gegeben'\n```\n"
+        default_save_name: solange_Befehl
+        name: '{while}'
     years:
         name: Neujahr
         default_save_name: Neujahrs-Countdown
-        description: Runterzählen zum neuen Jahr!
+        description: Countdown zum neuen Jahr!
         levels:
             11:
                 story_text: |
@@ -4461,3 +4515,15 @@ adventures:
                         {print} Zahl
                     {print} 'Frohes neues Jahr!'
                     ```
+    tic:
+        default_save_name: Drei
+        description: Spiele eine Runde Drei gewinnt!
+        name: Drei gewinnt
+    tic_2:
+        description: Spiele eine Runde Drei gewinnt!
+        name: Drei gewinnt 2
+        default_save_name: Drei
+    tic_3:
+        name: Drei gewinnt 3
+        description: Spiele eine Runde Drei gewinnt!
+        default_save_name: Drei
