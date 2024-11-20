@@ -257,10 +257,13 @@ levels:
             hint: Ви хочете, щоб комп’ютер зачекав 3 секунди
         10:
             code: |-
-                flavor {is} _?_
-                {print} Your favorite icecream is...
+                аромат {is} _
+                {print} Ваше улюблене морозиво...
                 {sleep}
-                {print} flavor
+                смак {print}
+            mp_choice_options:
+            -   option: "```\n{sleep} 3\n```"
+            question_text: Яку команду слід використовувати в рядку 1?
         2:
             mp_choice_options:
             -   option: "```\nім'я {is} {ask} Як тебе звати?\n```"
@@ -346,6 +349,9 @@ levels:
             -   feedback: Режим сну не використовується для тексту `{print}`
                 option: 'Рядок 2 повинен містити: `{sleep}` Я люблю тварин'
             question_text: Що не так у цьому коді?
+            hint: Ви хочете `{print}` 'Я люблю собак'
+            question_score: '10'
+            correct_answer: B
     3:
         1:
             question_text: What command do you use to let Hedy pick something arbitrarily?
