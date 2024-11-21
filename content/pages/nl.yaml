@@ -2429,12 +2429,12 @@ workbooks:
         -   type      : MC-code
             options   : ["Goed" , "Fout"]
             code      : |-
-                naam is 'Hermans'
-                if naam is 'Senkal'
-                print 'Hoera!'
+                naam is Hermans
+                if naam is Senkal
+                  print 'Hoera!'
                 else
                 print 'Pech'
-            answer    : Fout, er is niet ingesprongen
+            answer    : Fout, er is niet ingesprongen bij else
         -   type      : MC-code
             options   : ["Goed" , "Fout"]
             code      : |-
@@ -2450,19 +2450,51 @@ workbooks:
               mensen = mama, papa, Emma, Sophie
               repeat 7 times print 'De afwasser is ' mensen
             answer    : Fout, repeat mag niet meer op één regel
-
+        -   type      : MC-code
+            options   : ["Goed" , "Fout"]
+            code      : |-
+                dag is ask 'Welke dag is het?'
+                if dag is vrijdag
+                  print 'Hoera!'
+            answer    : Goed
         -   type: text
             contents: |-
-                #### Opdracht 4: Programmeerwoorden
+                #### Opdracht 5: Schrijf de code
+                Je krijgt uitvoer in beeld, en jij moet er kloppende code bij schrijven. Gebruik een `repeat` waar het kan
+                
+                Kijk ook goed naar het aantal regels code dat je nodig hebt!         
+        -   type: input
+            answer: |-
+                repeat 4 times
+                    print 'Joehoe!'
+            output: |-
+                Joehoe!<br>
+                Joehoe!<br>  
+                Joehoe!<br>
+                Joehoe!<br>
+        -   type: input
+            answer: |-
+                repeat 2 times
+                    print 'Vader Jacob...'
+                repeat 2 times
+                    print 'Leeft gij nog?'
+                repeat 2 times
+                    print 'Alle klokken luiden!'
+            output: |-
+                Vader Jacob...<br>
+                Vader Jacob...<br>  
+                Leeft gij nog?<br>
+                Leeft gij nog?<br>
+                Alle klokken luiden!<br>
+                Alle klokken luiden!<br>
+        -   type: text
+            contents: |-
+                #### Opdracht 6: Programmeerwoorden
                 We hebben deze les een nieuw programmeerwoord geleerd: inspringen.
         -   type: define
             word: "Hoe laat je een regel code inspringen?"
             answer: "een regel code laten beginnen met spaties"
             lines: 1
-        -   type: MC
-            options: ["repeat", "if", "else", 'print', 'ask']
-            question: "Bij welke codes moet je regels erna inspringen?"
-            answer: ["repeat", "if", "else"]
 
         -   type: text
             contents: |-
