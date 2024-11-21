@@ -124,8 +124,6 @@ class ForTeachersModule(WebsiteModule):
                 else:
                     pass
 
-
-
                 if 'output' in exercise.keys():
                     exercise['output'] = [x for x in exercise['output'].split('\n')]
                 else:
