@@ -30,7 +30,7 @@ You can also download Hedy and run it on your own machine. For more information,
 
 If you want to see what the core team will work on next, you can follow [our Project Board](https://github.com/orgs/hedyorg/projects/1/views/5), the [Discussions](https://github.com/hedyorg/hedy/discussions) or join our [Discord](https://discord.gg/8yY7dEme9r) channel.
 
-## Živjo Hedy! Привет Hedy! !Hedy سلام
+## Živjo Hedy! Привет Хеди! !سلام هيدي
 
 A simple way to help out Hedy is to [help us translate Hedy](https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial) using Weblate! You do not need programming experience or knowledge to translate Hedy. Below the current status, help us complete a language, or add a new one.
 
