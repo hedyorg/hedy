@@ -18,3 +18,55 @@ levels:
                     {print} 'Tettwaferneḍ deg terbaεt... '
                     {print} tirebbuyaɛ {at} {random}
                     {sleep} 2
+    4:
+        1:
+            code: "ipukimunen {is} Pikaču, Čarmander, Bulbasur, Sqertl\n{print} 'Apukimun-a ad yili d apukimun-ik!'\n{sleep}\n{print} ipukimunen {at} {random}"
+    9:
+        2:
+            code: |-
+                assuter = {ask} 'Tebɣiḍ ad tessutreḍ aẓidan?'
+                {if} assuter = ih
+                    aẓidan = {ask} 'Acu n uẓidan i tḥemmleḍ?'
+                    {if} aẓidan = tiramisu
+                        {print} 'Nesḥassaf, dayen yekfa iramisu.'
+                    {else}
+                        {print} 'Yiwen ' aẓidan ' ur yettεeṭṭil ara ad yewjed!'
+                {else}
+                    {print} 'Ur tebɣiḍ ara aẓidan. Ulac fell-as!'
+        1:
+            code: |-
+                imḍanen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                {repeat} 3 {times}
+                    amḍan = imḍanen {at} {random}
+                    tgerrez_tririt = 5 * amḍan
+                    tiririt = {ask} 'Acḥal n 5 tikkal' amḍan '?'
+                    {if} tiririt = tgerrez_tririt
+                        {print} 'D amahil igerrzeb!'
+                    {else}
+                        {print} 'Ala! Tiririt igerrzen d ' tgerrez_tririt
+    10:
+        1:
+            code: |-
+                ussan = Letnayen, Ttlata, Larebεa, Lexmis, Lǧemεa
+                imdanen = yemma, baba, Ferruǧa, Amnay, Ayrad
+                tixtiṛiyin_yimekli = pizza, takus, pankayk, cclaḍa, lazany
+                {for} ass {in} ussan
+                    amdan_yettwafernen = imdanen {at} {random}
+                    imekli_yettwafernen = tixtiṛiyin_yimekli {at} {random}
+                    {print} 'Deg ' ass ' ' amdan_yettwafernen ' ad d-iheyyi ' imekli_yettwafernen
+                    {remove} amdan_yettwafernen {from} imdanen
+                    {remove} imekli_yettwafernen {from} tixtiṛiyin_yimekli
+        2:
+            code: |-
+                imdanen = Tilelli, Tiziri, Maziɣ
+                anegzum_n_ucebbub = bulaziru, amuhawk, taseṭṭa n uεewdid, tineddicin
+                {for} amdan {in} imdanen
+                    {print} amdan ' ad yegzem ' anegzum_n_ucebbub {at} {random}
+                    yefraḥ = {ask} amdan ', tferḥeḍ s ufran-a?'
+                    {if} yefreḥ {is} ih
+                        {print} 'Ayuz'
+                    {else}
+                        {print} 'Ad neεreḍ tikkelt niḍen... 'amdan' ad yegzem acebbub-is akka' anegzum_n_ucebbub {at} {random}
+    11:
+        1:
+            code: "{for} amḍan {in} {range} 10 {to} 1\n    {print} amḍan\n    {sleep}\n    {clear}\n{print} 'Aseggas ameggaz!'"
