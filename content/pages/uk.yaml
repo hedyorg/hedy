@@ -433,7 +433,7 @@ teacher-guide:
                     mood {is} {ask} 'How are you?'
         -   title: Students use the wrong quotation marks
             example:
-                error_text: It is important to start your lesson by checking if the students know how to type a quotation mark properly. Else they might use the "double quotes" or the skewed one `.
+                error_text: Важливо почати урок з перевірки того, чи вміють учні правильно друкувати лапки. На Hedy студенти можуть використовувати одинарні лапки ('') і подвійні лапки (""). З іншого боку, зворотні галочки не вважаються дійсними лапками (``).
                 error_code: |-
                     {print} `Welcome to the restaurant`
                     food {is} {ask} "What would you like to order?"
@@ -493,19 +493,19 @@ teacher-guide:
                 solution_code: |-
                     {if} name {is} Hedy {print} 'fun'
                     {else} {print} 'meh!
-        -   title: Students use long variable names containing two words
+        -   title: Учні використовують довгі імена змінних, що містять два або більше слів
             example:
-                error_text: A variable should be named with one word. You could use an underscore to connect two words. That counts as one.
+                error_text: Змінні в Hedy не можуть містити пробіли, тому, щоб використовувати кілька слів разом, студенти повинні з’єднати їх за допомогою підкреслення (_)
                 error_code: chosen door is ask  Which door do you pick?
                 solution_text: Додати підкреслення
                 solution_code: chosen_door {is} {ask} 'which door do you pick?'
         -   title: Students want multiple answers to be correct
             example:
-                error_text: For example this student Hedy to tell all his friends that they are funny, but other classmates would be told that they are not.
+                error_text: Наприклад, цей учень хоче, щоб Хеді сказала всім його друзям, що вони смішні, а іншим однокласникам – ні.
                 error_code: "{if} name {is} Jesse, David, Souf print  You are funny  {else} {print} 'You are not funny'"
                 solution_text: |-
-                    You could use the `in` command for that. It is explained in a higher level, but it does already work in level 5.
-                    Another solution is to use multiple if commands and no else command. The disadvantage is that it won't tell the other classmates that they are not funny.
+                    Для цього можна використати команду `{in}`. Хоча це пояснюється на вищому рівні, воно вже працює на рівні 5. 
+                    Іншим рішенням є використання кількох команд `{if}` і жодної команди `{else}`. Недоліком є те, що він не скаже іншим однокласникам, що вони не смішні.
                 solution_code: |-
                     friends {is} Jesse, David, Souf
                     name {is} {ask} 'Who are you?'
