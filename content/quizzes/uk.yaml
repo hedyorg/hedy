@@ -12,6 +12,8 @@ levels:
             -   option: Heidi
                 feedback: Невірно!
             hint: Він названий на честь Хеді Ламарр.
+            correct_answer: A
+            question_score: '10'
         2:
             question_text: Що потрібно поставити замість прочерку, щоб з'явився текст "Привіт!"?
             code: ___ Hello!
@@ -36,7 +38,9 @@ levels:
                     {ask}
                     ```
                 feedback: За допомогою `{ask}` ви можете поставити запитання.
-            hint: _?_ Hello world!
+            hint: _ Hello world!
+            correct_answer: B
+            question_score: '10'
         3:
             question_text: Як запитати, який у людини улюблений колір?
             mp_choice_options:
@@ -59,8 +63,10 @@ levels:
                     ```
                     {echo} Який ваш улюблений колір?
                     ```
-                feedback: '`{echo}` repeats your answer back to you.'
+                feedback: '`{echo}` повторює вашу відповідь.'
             hint: Запитати щось можна за допомогою команди `{ask}`
+            question_score: '10'
+            correct_answer: C
         4:
             question_text: Що не так з цим кодом?
             code: |-
@@ -70,24 +76,26 @@ levels:
             mp_choice_options:
             -   option: У рядку 1 відсутній `{print}`.
                 feedback: Саме так!
-            -   option: Im in line 1 is spelled wrong.
-                feedback: Im is spelled wrong on purpose; Hedy doesn't understand the apostrophes yet.
+            -   option: Команда в рядку 2 написана неправильно.
+                feedback: Команда написана правильно.
             -   option: '`{echo}` це не команда.'
                 feedback: '`{echo}` - це команда, тут ще одна помилка.'
             -   option: Нічого! Це ідеальний код!
                 feedback: Не так, дивись уважно!
             hint: Рядок 1 виглядає неправильним
+            question_score: '10'
+            correct_answer: A
         5:
             question_text: Яку команду пропущено в рядку 2?
             code: |-
-                {ask} Яка ваша улюблена домашня тварина?
-                _?_ Отже, ваш улюблений вихованець - це...
+                {ask} Яка ваша улюблена тварина?
+                _ Отже, твоя улюблена тварина...
             mp_choice_options:
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: No, you would like the answer to be repeated back to you.
+                feedback: Ні, ви хочете, щоб вам повторили відповідь.
             -   option: |-
                     ```
                     Hedy
@@ -103,114 +111,297 @@ levels:
                     {echo}
                     ```
                 feedback: Так!
+            hint: Ви хочете побачити відповідь у кінці рядка 2...
+            question_score: '10'
+            correct_answer: D
         8:
             mp_choice_options:
-            -   option: You can use it to `{ask}` a question.
-                feedback: That's what `{ask}` is for!
-            -   option: You can use it to print text.
-                feedback: That's what `{print}` is for!
-            -   option: You can use it to repeat an answer.
-                feedback: Good job!
-            -   option: You can use it to make text disappear.
-                feedback: That's not right...
+            -   option: Ви можете використовувати його, щоб `{ask}` запитання.
+                feedback: Ось для чого `{ask}`!
+            -   option: Ви можете використовувати його точно так само, як `{print}`.
+                feedback: Ось для чого `{print}`!
+            -   option: Ви можете використовувати його, щоб повторити відповідь.
+                feedback: хороша робота!
+            -   option: Ви можете використовувати його, щоб змусити текст зникнути.
+                feedback: це не правильно...
+            question_text: Як ви використовуєте команду `{echo}`?
+            question_score: '10'
+            correct_answer: C
+            hint: '`{echo}` використовується після команди `{ask}`.'
         10:
-            question_text: Which output will be in your outputscreen after you've run this code?
+            question_text: Який вихід буде на екрані виводу після виконання цього коду?
             mp_choice_options:
             -   option: Are you ready to go to level 2?
-                feedback: There are two echo commands
+                feedback: Є дві команди `{echo}`
             -   option: |-
                     Yes!
                     Yes!
                 feedback: Great job!
             -   option: Yes!
-                feedback: There are two echo commands
+                feedback: Є дві команди `{echo}`
             -   option: |-
                     Are you ready to go to level 2?
                     Yes!
-                feedback: There are two echo commands
+                feedback: Є дві команди `{echo}`
+            question_score: '10'
+            code: "{ask} Ви готові перейти на рівень 2?\n{echo}\n{echo}"
+            hint: ходімо!
+            correct_answer: B
+        6:
+            question_text: Що не так з цим кодом?
+            mp_choice_options:
+            -   feedback: '`{print}` у рядку 1 правильний.'
+                option: У рядку 1 `{print}` слід замінити на `{ask}`.
+            -   feedback: Чудово! Ви звернули увагу!
+                option: У рядку 2 `{print}` слід замінити на `{ask}`.
+            -   feedback: '`{echo}` є правильним.'
+                option: Рядок 3 має починатися з `{print}` замість `{echo}`.
+            -   option: У рядку 4 `{print}` написано неправильно.
+                feedback: Ні, помилка в іншому місці
+            code: "{print} Привіт, я Хеді!\n{print} За яку футбольну команду ви вболіваєте?\n{echo} Ви підтримуєте...\n{print} Круто! Я теж!"
+            hint: Перевірте команди `{print}`.
+            correct_answer: B
+            question_score: '10'
+        7:
+            code: "{print} Ласкаво просимо в ресторан Hedys!\n{ask} Що б ти хотіла з'їсти?\n{echo} Отже, ви хочете замовити ...\n{print} Незабаром! Насолоджуйтесь!"
+            question_text: Що не так з цим кодом?
+            mp_choice_options:
+            -   option: У рядку 1 `{print}` потрібно замінити на `{ask}`
+                feedback: Ви впевнені, що щось не так?
+            -   feedback: Ви впевнені, що щось не так?
+                option: У рядку 1 `{print}` потрібно замінити на `{echo}`
+            -   feedback: Ви впевнені, що щось не так?
+                option: У рядку 3 `{echo}` потрібно замінити на `{print}`
+            -   option: нічого! Це ідеальний код!
+                feedback: Правильно!
+            question_score: '10'
+            hint: Перевірте код рядок за рядком
+            correct_answer: D
+        9:
+            mp_choice_options:
+            -   option: '`{print}` в лінії 1 слід `{ask}`'
+                feedback: Ні, `{print}` є право. Що таке питання?
+            -   feedback: Супер!
+                option: '`{print}` в рядку 2 слід `{ask}`'
+            -   feedback: Ні, `{echo}` має рацію. Де ставиться питання?
+                option: '`{echo}` в лінії 3 слід `{ask}`'
+            -   option: нічого! Це ідеальний код!
+                feedback: Дивись уважно для помилки...
+            question_score: '10'
+            code: "{print} Привіт!\n{print} Як ви робите?\n{echo} Так ви..."
+            hint: '`{ask}` дозволяє запитати питання'
+            question_text: Що неправильно з цим кодом?
+            correct_answer: B
     2:
         1:
             mp_choice_options:
-            -   option: Ви можете використовувати команду {print}, щоб поставити запитання.
-                feedback: Це те, про що ми просимо
-            -   option: Для повторення відповідей можна використовувати команду {ask}.
+            -   option: Ви можете використовувати команду `{print}`, щоб ставити запитання.
+                feedback: Ось для чого призначений `{ask}`
+            -   option: Ви можете використовувати команду `{ask}`, щоб повторити відповіді.
                 feedback: Це не так
-            -   option: З допомогою команди {print} можна зробити так, щоб текст виводився на екран
-                feedback: Good
-            -   option: За допомогою команди {sleep} можна прибрати текст з екрану.
-                feedback: No one command doesn't work anymore.
+            -   option: За допомогою команди `{print}` ви можете змусити текст відображатися
+                feedback: Чудово
+            -   option: За допомогою команди `{sleep}` ви можете видалити текст з екрана.
+                feedback: '`{sleep}` працює не так.'
             hint: '`{print}` працює так само, як і на рівні 1'
+            question_text: Яке твердження вірне?
+            question_score: '10'
+            correct_answer: C
         6:
             code: |-
-                {print} And the award for best programming language goes to...
-                _?_
-                {print} Hedy!
+                {print} А нагороду за найкращу мову програмування отримує...
+                _
+                {print} Привіт!
             mp_choice_options:
             -   option: |-
                     ```
                     {sleep}
                     ```
-                feedback: Perfect!
+                feedback: Ідеально!
             -   option: |-
                     ```
                     {echo}
                     ```
-                feedback: There is nothing to repeat back here
+                feedback: Тут нема чого повторюватися
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: There is no text there to `{print}` there
+                feedback: Там немає тексту для `{print}`
             -   option: |-
                     ```
                     {ask}
                     ```
-                feedback: There is no question there to be asked
+                feedback: Немає жодного питання, яке можна поставити
+            question_score: '10'
+            question_text: Що має бути на лініях?
+            correct_answer: A
+            hint: Пауза для драматичного ефекту...
         7:
             code: |-
-                {print} I will explode in 3 seconds!
-                _?_
-                {print} BOOM!
+                {print} Я вибухну через 3 секунди!
+                _
+                {print} БУМ!
+            mp_choice_options:
+            -   option: "```\n{print} 3\n```"
+                feedback: Вам не потрібно `{print}`
+            -   feedback: Ідеально!
+                option: "```\n{sleep} 3\n```"
+            -   option: "```\n{sleep}\n```"
+                feedback: Таким чином бомба вибухне за 1 секунду
+            -   feedback: Полегшіть собі завдання, використовуючи цифру 3
+                option: "```\n{sleep} {sleep} {sleep}\n```"
+            question_score: '10'
+            question_text: Яку команду слід використовувати в рядку 2?
+            correct_answer: B
+            hint: Ви хочете, щоб комп’ютер зачекав 3 секунди
         10:
             code: |-
                 flavor {is} _?_
                 {print} Your favorite icecream is...
                 {sleep}
                 {print} flavor
+            mp_choice_options:
+            -   feedback: Ви хочете знати улюблений смак!
+                option: "```\n{sleep} 3\n```"
+            -   option: "```\n{print} полуниця\n```"
+                feedback: Вам не потрібна команда `{print}` в середині рядка...
+            -   option: "```\nполуниця, шоколад, ваніль\n```"
+                feedback: Таким чином ви складаєте список. Ви не хочете цього зараз.
+            -   feedback: Це вірно!
+                option: "```\n{ask} Який смак морозива тобі подобається?\n```"
+            hint: Ви хочете `{ask}` запитання
+            question_score: '10'
+            question_text: Яку команду слід використати в рядку 1?
+            correct_answer: D
+        2:
+            mp_choice_options:
+            -   option: "```\nім'я {is} {ask} Як тебе звати?\n```"
+                feedback: супер!
+            -   option: "```\n{ask} {is} name Як тебе звуть\n```"
+                feedback: Слова правильні, наказ ні!
+            -   option: "```\n{ask} Як тебе звати?\n```"
+                feedback: Це працювало на рівні 1, але на рівні 2 і вище працює інакше.
+            -   option: "```\n{ask} Як тебе звати? {is} ім'я\n```"
+                feedback: Слова правильні, наказ ні!
+            question_text: Який код правильний?
+            question_score: '10'
+            correct_answer: A
+            hint: '`{ask}` не працює, як на рівні 1'
+        3:
+            mp_choice_options:
+            -   feedback: Слово ім'я замінено на Марлен
+                option: Ім'я йде на ринок, і вона купує яблуко.
+            -   option: Марлен йде на базар.
+                feedback: Друга частина речення не пропущена!
+            -   feedback: Правильно!
+                option: Марлен йде на ринок і купує яблуко.
+            -   feedback: Вона не замінюється ім'ям
+                option: Марлен йде на ринок, і Марлен купує яблуко.
+            hint: Слово ім'я замінено на Марлен
+            correct_answer: C
+            question_score: '10'
+            question_text: Що з’являється на екрані виведення, коли ви запускаєте цей код?
+            code: "ім'я {is} Марлен\n{print} name йде на ринок і купує яблуко."
+        4:
+            mp_choice_options:
+            -   option: Привіт, мене звуть ім'я
+                feedback: Ім'я змінної замінено на Hedy
+            -   feedback: Ім'я змінної замінено на Hedy
+                option: Привіт, мене звати Хеді
+            -   option: Привіт, моє ім'я Хеді
+                feedback: Ім'я змінної замінено на Hedy
+            -   option: Привіт, моя Хеді - це Хеді
+                feedback: Правильно, ця помилка буде виправлена на 4 рівні!
+            hint: "'name' замінено на 'Hedy' в обох місцях"
+            correct_answer: D
+            question_score: '10'
+            question_text: Що ви побачите на екрані виведення, коли запустите цей код?
+            code: "ім'я {is} Хеді\n{print} Привіт, мене звати ім'я"
+        5:
+            mp_choice_options:
+            -   option: Це сповільнює ваш комп'ютер
+                feedback: на щастя ні!
+            -   option: Це закриває Хеді
+                feedback: на щастя ні!
+            -   option: Ваша програма зупиняється на секунду, а потім продовжується
+                feedback: Це вірно!
+            -   option: Ви ставите його в кінці, щоб Хеді знала, що ваша програма завершена
+                feedback: Ні, це було б марно в кінці вашого коду
+            hint: Комп’ютер чекає секунду на команду `{sleep}`
+            question_text: Що відбувається, коли ви використовуєте команду `{sleep}`?
+            question_score: '10'
+            correct_answer: C
+        8:
+            code: "{ask} {is} Скільки тобі років?\n{print} вік"
+            mp_choice_options:
+            -   option: "```\nage {ask} {is} Скільки тобі років?\n```"
+                feedback: Це неправильний порядок
+            -   option: "```\n{ask} {is} age Скільки тобі років?\n```"
+                feedback: Це неправильний порядок
+            -   option: "```\nage {is} {ask} Скільки тобі років?\n```"
+                feedback: Ви зрозуміли!
+            -   option: "```\nвік {is} Скільки тобі років?\n```"
+                feedback: Де знаходиться команда `{ask}`?
+            question_score: '10'
+            hint: Ім'я змінної має бути першим
+            correct_answer: C
+            question_text: Як би ви виправили перший рядок коду?
+        9:
+            code: "собаки {is} тварина\n{print} Я люблю тварин"
+            mp_choice_options:
+            -   feedback: Ім'я змінної тварина
+                option: 'У першому рядку має бути написано: собаки `{is}` тварини'
+            -   feedback: Чудово!
+                option: 'У рядку 1 має бути написано: тварина `{is}` собаки'
+            -   feedback: Ім'я змінної тварина
+                option: 'У рядку 2 має бути написано: `{print}` Я люблю тварин'
+            -   feedback: Режим сну не використовується для тексту `{print}`
+                option: 'Рядок 2 повинен містити: `{sleep}` Я люблю тварин'
+            question_text: Що не так у цьому коді?
+            hint: Ви хочете `{print}` 'Я люблю собак
+            question_score: '10'
+            correct_answer: B
     3:
         1:
-            question_text: What command do you use to let Hedy pick something arbitrarily?
+            question_text: Які команди ви використовуєте, щоб дозволити Хеді вибирати щось довільно?
             mp_choice_options:
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: '`{print}` is used to print text'
+                feedback: '`{print}` використовується для друку тексту'
             -   option: |-
                     ```
                     {ask}
                     ```
-                feedback: '`{ask}` is used to ask a question'
+                feedback: '`{ask}` використовується для постановки запитання'
             -   option: |-
                     ```
                     {is}
                     ```
-                feedback: '`{is}` is used to make a list'
+                feedback: '`{is}` використовується для створення списку'
             -   option: |-
-                    ```
-                    {at} {random}
-                    ```
-                feedback: Correct!
+                    `{at} {random}`
+                feedback: Правильно!
+            hint: Довільно означає без плану або навмання.
+            correct_answer: D
+            question_score: '10'
         2:
             mp_choice_options:
-            -   option: 'You need commas in line 1: dog, cat, cow.'
-                feedback: Good job!
-            -   option: Line 1 needs to start with `{print}`.
-                feedback: No, you don't need `{print}`
-            -   option: Line 2 needs to say 'animal' instead of 'animals'',
-                feedback: animals is correct.
-            -   option: '`{at} {random}` is spelled incorrectly'
-                feedback: '`{at} {random}` is the correct spelling'
+            -   option: 'У першому рядку потрібні коми: собака, кішка, корова.'
+                feedback: хороша робота!
+            -   option: Рядок 1 має починатися з `{print}`.
+                feedback: немає, тобі не потрібно `{print}`
+            -   option: У рядку 2 потрібно сказати "тварини" замість "тварини"
+                feedback: тварин правильно.
+            -   option: '`{at} {random}` пишеться неправильно'
+                feedback: '`{at} {random}` є правильним написанням'
+            hint: У рядку 1 щось не так
+            question_text: Що не так з цим кодом?
+            correct_answer: A
+            question_score: '10'
+            code: "тварини {is} собака кішка корова\n{print} тварин {at} {random}"
         9:
             code: |-
                 colors {is} blue, purple, green
@@ -248,6 +439,15 @@ levels:
                     ```
                 feedback: This increased the change that the person who walked yesterday now has to do it again. That's mean.
             hint: The person who walked the dog yesterday should be removed from the list.
+        3:
+            mp_choice_options:
+            -   option: "```\n{at} {random} {print} параметри\n```"
+                feedback: Ви майже готові. Порядок слів ще неправильний.
+            -   option: "```\n{print} рок {at} {random}\n```"
+                feedback: ви не завжди хочете, щоб Hedy {print} камінь, іноді вам потрібні ножиці або папір.
+            -   option: "```\n{print} параметри {at} {random}\n```"
+            question_text: Як виправити помилку у рядку 2?
+            code: "параметри {is} камінь, папір, ножиці\n{print} камінь, папір, ножиці {at} {random}"
     4:
         1:
             question_text: Which of these is true?

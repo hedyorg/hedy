@@ -1164,14 +1164,15 @@ class TestsLevel8(HedyTester):
         else
             print 'other key'""")
         expected = self.dedent("""\
-         if_pressed_mapping = {"else": "if_pressed_default_else"}
-         if_pressed_mapping['x'] = 'if_pressed_x_'
-         def if_pressed_x_():
-           print(f'it is a letter key')
-         if_pressed_mapping['else'] = 'if_pressed_else_'
-         def if_pressed_else_():
-           print(f'other key')
-         extensions.if_pressed(if_pressed_mapping)""")
+        global_scope_ = dict()
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        def if_pressed_x_():
+          print(f'it is a letter key')
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_else_():
+          print(f'other key')
+        extensions.if_pressed(if_pressed_mapping)""")
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
     def test_if_pressed_x_is_var(self):
@@ -1184,18 +1185,17 @@ class TestsLevel8(HedyTester):
         print x""")
 
         expected = self.dedent("""\
-        x = Value('a')
+        global_scope_ = dict()
+        global_scope_["x"] = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping[(global_scope_.get("x") or x).data] = 'if_pressed_x_'
         def if_pressed_x_():
-          global x
           print(f'it is a letter key')
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_else_():
-          global x
           print(f'it is another letter key')
         extensions.if_pressed(if_pressed_mapping)
-        print(f'{x}')""")
+        print(f'{global_scope_.get("x") or x}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -1209,18 +1209,17 @@ class TestsLevel8(HedyTester):
         print x""")
 
         expected = self.dedent("""\
-        x = Value('a')
+        global_scope_ = dict()
+        global_scope_["x"] = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping[(global_scope_.get("x") or x).data] = 'if_pressed_x_'
         def if_pressed_x_():
-          global x
-          x = Value('great')
+          global_scope_["x"] = Value('great')
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_else_():
-          global x
-          x = Value('not great')
+          global_scope_["x"] = Value('not great')
         extensions.if_pressed(if_pressed_mapping)
-        print(f'{x}')""")
+        print(f'{global_scope_.get("x") or x}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -1234,18 +1233,17 @@ class TestsLevel8(HedyTester):
         print m""")
 
         expected = self.dedent("""\
-        x = Value('a')
+        global_scope_ = dict()
+        global_scope_["x"] = Value('a')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping[(global_scope_.get("x") or x).data] = 'if_pressed_x_'
         def if_pressed_x_():
-          global m, x
-          m = Value('great')
+          global_scope_["m"] = Value('great')
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_else_():
-          global m, x
-          m = Value('not great')
+          global_scope_["m"] = Value('not great')
         extensions.if_pressed(if_pressed_mapping)
-        print(f'{m}')""")
+        print(f'{global_scope_.get("m") or m}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -1261,22 +1259,23 @@ class TestsLevel8(HedyTester):
           print 'other key'""")
 
         expected = self.dedent("""\
-          if_pressed_mapping = {"else": "if_pressed_default_else"}
-          if_pressed_mapping['x'] = 'if_pressed_x_'
-          def if_pressed_x_():
-            print(f'first key')
-          if_pressed_mapping['else'] = 'if_pressed_else_'
-          def if_pressed_else_():
-            print(f'other key')
-          extensions.if_pressed(if_pressed_mapping)
-          if_pressed_mapping = {"else": "if_pressed_default_else"}
-          if_pressed_mapping['y'] = 'if_pressed_y_'
-          def if_pressed_y_():
-            print(f'second key')
-          if_pressed_mapping['else'] = 'if_pressed_else_'
-          def if_pressed_else_():
-            print(f'other key')
-          extensions.if_pressed(if_pressed_mapping)""")
+        global_scope_ = dict()
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        def if_pressed_x_():
+          print(f'first key')
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_else_():
+          print(f'other key')
+        extensions.if_pressed(if_pressed_mapping)
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['y'] = 'if_pressed_y_'
+        def if_pressed_y_():
+          print(f'second key')
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_else_():
+          print(f'other key')
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.maxDiff = None
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -1289,14 +1288,15 @@ class TestsLevel8(HedyTester):
             print 'it is something else'""")
 
         expected = self.dedent("""\
-         if_pressed_mapping = {"else": "if_pressed_default_else"}
-         if_pressed_mapping['1'] = 'if_pressed_1_'
-         def if_pressed_1_():
-           print(f'it is a number key')
-         if_pressed_mapping['else'] = 'if_pressed_else_'
-         def if_pressed_else_():
-           print(f'it is something else')
-         extensions.if_pressed(if_pressed_mapping)""")
+        global_scope_ = dict()
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['1'] = 'if_pressed_1_'
+        def if_pressed_1_():
+          print(f'it is a number key')
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_else_():
+          print(f'it is something else')
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
@@ -1313,23 +1313,24 @@ class TestsLevel8(HedyTester):
           print 'other'""")
 
         expected = textwrap.dedent("""\
-         if_pressed_mapping = {"else": "if_pressed_default_else"}
-         if_pressed_mapping['a'] = 'if_pressed_a_'
-         def if_pressed_a_():
-           print(f'A is pressed')
-         if_pressed_mapping['else'] = 'if_pressed_else_'
-         def if_pressed_else_():
-           print(f'other')
-         extensions.if_pressed(if_pressed_mapping)
-         print(f'Press another button')
-         if_pressed_mapping = {"else": "if_pressed_default_else"}
-         if_pressed_mapping['b'] = 'if_pressed_b_'
-         def if_pressed_b_():
-           print(f'B is pressed')
-         if_pressed_mapping['else'] = 'if_pressed_else_'
-         def if_pressed_else_():
-           print(f'other')
-         extensions.if_pressed(if_pressed_mapping)""")
+        global_scope_ = dict()
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['a'] = 'if_pressed_a_'
+        def if_pressed_a_():
+          print(f'A is pressed')
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_else_():
+          print(f'other')
+        extensions.if_pressed(if_pressed_mapping)
+        print(f'Press another button')
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['b'] = 'if_pressed_b_'
+        def if_pressed_b_():
+          print(f'B is pressed')
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_else_():
+          print(f'other')
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.maxDiff = None
         self.multi_level_tester(code=code, expected=expected, max_level=11)
@@ -1341,6 +1342,7 @@ class TestsLevel8(HedyTester):
           print 'missing else!'""")
 
         expected = textwrap.dedent("""\
+        global_scope_ = dict()
         pass
         pass""")
 

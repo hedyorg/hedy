@@ -4,3 +4,123 @@
     name: '{print}'
 -   name: '{ask}'
     explanation: Ssuter kra s `{ask}`.
+    demo_code: '{ask} D acu yini i tesmenyafayeḍ?'
+-   name: '{echo}'
+    explanation: Ales kra s useqdec n `{echo}`.
+    demo_code: "{ask} D anwa ini akk i tḥemmleḍ?\n{echo} Ihi, ini akk i tḥemmleḍ d"
+-   demo_code: '{print} 🙋 🌍 ❗'
+    name: '{print} imujiten'
+    explanation: Sken imujit s `{print}`.
+-   name: '{forward}'
+    explanation: Suɣen izirig s `{forward}`.
+    demo_code: '{forward} 100'
+-   name: '{turn}'
+    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+    explanation: Zzi ifker ara isunuɣen s `{turn}`.
+2:
+-   demo_code: "isem {is} Hedy\n{print} Ansuf ay isem"
+    name: '{is}'
+-   name: '{ask}'
+-   name: '{sleep}'
+    demo_code: "{print} Eǧǧ-iyi ad xemmemɣ yiwet n tasint...\n{sleep}\n{print} Hmm.. Sriɣ 3 niden n tsinin...\n{sleep} 3\n{print} Yay! Ufiɣ-tt-id!"
+-   demo_code: "tiɣmert {is} 90\n{turn} tiɣmert\n{forward} 100"
+    name: '{is} s yifker'
+3:
+-   name: S wudem yerwin
+    demo_code: "animals {is} dog, cat, kangaroo\n{print} animals {at} {random}"
+-   name: '{add}'
+    explanation: '`{add}` aferdis `{to_list}` tabdart.'
+    demo_code: "iɣersiwen {is} tafunast, amcic\n{add} aqjun {to_list} iɣersiwen"
+-   explanation: '`{remove}` aferdis `{from}` tabdart.'
+    name: '{remove}'
+4:
+-   name: '{print}'
+    demo_code: "{print} 'Azul, ansuf ɣer Hedy.'"
+-   demo_code: "isem {is} Hedy\n{print} 'isem-is d ' isem"
+    name: '{is}'
+-   name: '{ask}'
+7:
+-   demo_code: "{print} 'Azul, ansuf ɣer Hedy.'"
+    name: '{print}'
+-   name: '{ask}'
+-   name: '{if}'
+    explanation: Eg afran s `{if}`.
+-   demo_code: '{repeat} 3 {times} {forward} 10'
+    name: '{repeat} s yifker'
+    explanation: Ales i yizirig n tengalt s tladna `{repeat}`.
+9:
+-   {}
+-   demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+    name: '{repeat} s yifker'
+10:
+-   name: '{print}'
+    demo_code: "{print} '5 tikkal 5 d ' 5 * 5"
+-   name: '{for} s tebdart'
+11:
+-   explanation: Nezmer ad nesseqdec `{for}` s `{range}`.
+-   name: '{ask}'
+14:
+-   name: Amecṭuḥ
+-   name: Meqqer ugar
+-   {}
+-   {}
+-   demo_code: "leεmeṛ = {ask} 'Acḥal deg leεmeṛ-ik?'\n{if} leεmeṛ <= 12\n    {print} 'Meẓẓiyet aṭas fell-i!'"
+-   name: Meqqer ugar neɣ kifkif
+16:
+-   name: ikrucciyen
+    explanation: Tibdarin s yikrucciyen.
+-   name: Awi aferdis seg tebdart
+    demo_code: "agummu = ['tabananat', 'tatteffaḥt', 'areḍli']\nagummu_amezwaru = agummu[1]\n{print} agummu_amezwaru"
+-   name: Awi-d aferdis kan akka seg tebdart
+8:
+-   demo_code: "{print} '5 tikkal 5 d ' 5 * 5"
+    name: '{print}'
+-   name: '{ask}'
+-   name: '{repeat} s yifker'
+    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+-   name: '{pressed}'
+12:
+-   {}
+-   demo_code: "isem = 'Hedy aṛubut'\n{print} 'Azul ' isem"
+15:
+-   name: '{while}'
+-   demo_code: "count = 1\n{while} count < 3\n    {print} 'We do this ' 3 - count ' more times'\n    count = count + 1\n{print} 'We are done'"
+    name: Mecṭuḥ ugar {while}
+    explanation: Nezmer daɣen ad nesseqdec tineddict `{while}` s `<` akked `>`.
+5:
+-   name: '{print}'
+    demo_code: "{print} 'Azul, ansuf ɣer Hedy.'"
+-   name: '{ask}'
+-   name: '{if}'
+-   name: '{if} s yifker'
+-   name: '{in}'
+    explanation: Senqed iferdisen s `{in}`.
+-   name: '{pressed}'
+6:
+-   name: '{print}'
+    demo_code: "{print} '5 tikkal 5 d ' 5 * 5"
+-   name: '{ask}'
+-   name: '`{ask}` akked `{if}` s yifker'
+13:
+-   name: '{and}'
+-   name: '{or}'
+18:
+-   name: '{print}'
+    explanation: Seld `{print}` tesriḍ ad tesqedceḍ tacciwin.
+    demo_code: "{print}('azul!')"
+-   demo_code: "{for} i {in} {range} (1,10):\n    {print}('Hello, times ', i)"
+    name: '{range}'
+    explanation: Seld `{range}` tesriḍ ad tesqedceḍ tacciwin.
+-   demo_code: "isem = 'Hedy'\n{print}('isem-iw d ', isem)"
+-   name: ssuter kra s {input}
+    explanation: Seqdec `{input}` deg wadeg n `{ask}` i ussuter n kra.
+    demo_code: "isem = {input}('Isem-ik?')\n{print}('Ihi, isem-ik ', isem)"
+17:
+-   name: '{elif}'
+    explanation: '`{elif}`'
+    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a d 1'\n{elif} a == 2:\n    {print} 'a d 2'\n{else}:\n    {print} 'a mačči d 1 neɣ 2'"
+-   name: '{print}'
+    explanation: Mi ara nesseqdec `{for}`, nesra ad nerr `:` deffir n tuttra n `{for}`!
+    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Twejdeḍ neɣ mazal, nekk wwḍeɣ-d!'"
+-   name: '{if}'
+    explanation: Nesra ad neg kifkif akked meṛṛa issutar-nneɣ `{if}`.
