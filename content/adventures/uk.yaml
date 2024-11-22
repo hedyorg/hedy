@@ -1138,16 +1138,16 @@ adventures:
                     Ми робимо це, додаючи ім'я змінної, за яким слідує `{in}` `{range}`.  Потім ми пишемо число, з якого почнемо, `{to}` і число, на якому треба закінчити.
 
                     Спробуйте приклад і подивіться, що вийде! У цьому рівні вам знову потрібно буде використовувати відступи у рядках під `{for}` деклараціями.
-                example_code: "```\n{for} лічильника {in} {range} 1 {to} 10\n    Лічильник {print}\n{print} «Готові чи ні. Ось я іду!\n```\n"
+                example_code: "```\n{for} counter {in} {range} 1 {to} 10\n    {print} counter\n{print} 'Ready or not. Here I come!'\n```\n"
             17:
-                example_code: "```\n{for} я {in} {range} 1 {to} 10:\n    {print} i\n{print} «Готовий чи ні, я йду!»\n```\n"
+                example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Ready or not, here I come!'\n```\n"
                 story_text: "Тепер ми трохи змінимо відступ. Кожного разу, коли нам потрібен відступ, нам потрібен `:` у рядку перед відступом.\n"
             18:
                 story_text: "Нарешті, ми перетворимо `{for} i {in} {range} 1 to 5` на справжній код Python, ось так:\n"
                 example_code: "```\n{for} i {in} {range}(1,5):\n    {print} (i)\n```\n"
             10:
                 story_text: "## Для\nНа цьому рівні ми вивчаємо новий код під назвою `{for}`. За допомогою `{for}` ви можете створити список і використовувати всі елементи.\n`{for}` створює блок, як `{repeat}` і `{if}`, тому всі рядки в блоці повинні починатися з 4 пробілів."
-                example_code: "```\nтварини = собака, кішка, риба-крапля\n{for} тварин {in} тварин\n    {print} «Я люблю» тварин\n```\n"
+                example_code: "```\nanimals = dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal\n```\n"
                 story_text_2: "### Вправи\nЗавершіть цей код, додавши `{for} action {in} actions` до рядка 2.\n"
                 example_code_2: "``` \nдії = плескати в долоні, тупати ногами, кричати Ура!\n_\n    {repeat} 2 {times}\n        {print} \"Якщо ти щасливий і ти це знаєш,\" дія\n        {sleep} 2\n    {print} \"Якщо ти щасливий, ти це знаєш і справді хочеш це показати\"\n    {print} \"Якщо ти щасливий і ти це знаєш,\" дія\n    {sleep} 3\n```\n"
         default_save_name: for
@@ -1181,7 +1181,7 @@ adventures:
                 story_text_2: |
                     ### Exercises
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
-                example_code: "``` \n{print} Я Хеді ворожка! \nquestion {is} {ask} Що ти хочеш знати?\n{print} Ось що ви хочете знати: запитання \nвідповіді {is} так, ні, можливо\n{print} Моя кришталева куля говорить...\n{sleep} 2\n{print} відповідає {at} {random}\n```\n"
+                example_code: "```\n{print} I’m Hedy the fortune teller!\nquestion {is} {ask} What do you want to know?\n{print} This is what you want to know: question\nanswers {is} yes, no, maybe\n{print} My crystal ball says...\n{sleep} 2\n{print} answers {at} {random}\n```\n"
             4:
                 example_code: |
                     ```
@@ -1346,7 +1346,7 @@ adventures:
                     ```
 
                     Чи можете ви запрограмувати цей вірш так само, як у прикладі?
-                example_code: "```\n{define} пісня {with} місце\n    {print} «Моя Бонні тут».\n\n{call} пісня {with} 'ocean'\n{call} пісня {with} 'sea'\n{call} пісня {with} 'ocean'\n```\n"
+                example_code: "```\n{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'\n```\n"
             14:
                 example_code: |
                     ``` 
@@ -1364,7 +1364,7 @@ adventures:
                 story_text: "На попередніх рівнях ви навчилися створювати функції та використовувати аргументи з ними. Ще одне чудове використання функції — дозволити їй щось обчислити за вас. \nВи можете надати функції обчислення, і вона дасть вам відповідь обчислення. Ця відповідь називається **поверненим значенням**. \n\nНаприклад, у цьому коді функція calculate_new_price обчислить нову ціну будь-якого товару. Це дасть вам нову ціну як значення повернення. \n\n### Вправи\nЗавершіть цей код. Ми вже створили для вас змінну new_price, вам потрібно лише її встановити. \nВи повинні завершити рядок коду, викликавши функцію, яка обчислює нову ціну.\n"
             18:
                 story_text: "Давайте створювати функції на Pythons! Для визначення функції ми більше не використовуємо: \n\n`{define} name_function {with} argument_1, argument_2:` \n\nале ми використовуємо: \n\n`{def} name_function(argument_1, argument_2):`. \n\n\nЯкщо ви не хочете використовувати аргументи, просто залиште простір між круглими дужками порожнім. \nЩоб викликати функцію, нам більше не потрібна команда `{call}`. Ви просто вводите назву функції.\n"
-                example_code: "``` \n{def}calculate_score(відповідь, правильна_відповідь): \n    {if} відповідь == правильна_відповідь: \n        оцінка = 1 \n    {elif} відповідь == '?': \n        оцінка = 0 \n    {else}:\n        оцінка = -1 \n    {return} рахунок \n\nanswer = {input} ('Де можна знайти Ейфелеву вежу?') \ncorrect_answer = 'Париж' \nрахунок = обчислити_оцінку (відповідь, правильна_відповідь) \n{print} (\"Ваша оцінка... \", оцінка) \n```\n"
+                example_code: "```\n{def} calculate_score(answer, correct_answer):\n    {if} answer == correct_answer:\n        score = 1\n    {elif} answer == '?':\n        score = 0\n    {else}:\n        score = -1\n    {return} score\n\nanswer = {input} ('Where can you find the Eiffel Tower?')\ncorrect_answer = 'Paris'\nscore = calculate_score(answer, correct_answer)\n{print} ('Your score is... ', score)\n```\n"
         name: функції
         description: функції
         default_save_name: функції

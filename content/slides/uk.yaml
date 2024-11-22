@@ -406,7 +406,7 @@ levels:
             text: Насолоджуйтесь пригодами на 9 рівні!
             header: ходімо!
         6:
-            code: "{repeat} 3 {times}\n    food = {ask} 'Що ти хочеш?'\n    {if} їжа {is} піца\n        {print} 'приємно!'\n    {else \n        {print} \"піца краще\""
+            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
             header: '`{if}` всередині `{repeat}`'
             text: "Тепер, коли ви можете використовувати кілька рядків коду після цієї команди, ви також можете розмістити їх один в одному.\nПеревірте це:"
         5:
@@ -417,7 +417,7 @@ levels:
         2:
             header: Команда for
             text: За допомогою for ви можете створити список і використовувати всі елементи цього списку. `{for}` створює блок, як і повтор, і якщо так, то всі рядки в блоці повинні починатися з відступу (4 пробіли).
-            code: "тварини = собака, кішка, риба-крапля\n{for} тварин {у} тварин\n    {print} «Я люблю» тварин"
+            code: "animals = dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal"
         4:
             text: Давайте налагодимо цей код
             header: Налагодження
@@ -428,7 +428,7 @@ levels:
             header: Час програмувати!
         3:
             text: 'Ось ще один приклад команди `{for}`:'
-            code: "днів = понеділок, вівторок, середа, четвер, п'ятниця, субота, неділя\nімена = мама, тато, Емма, Софі\n{for} день {in} днів\n    {print} іменує {at} {random} ' миє посуд у ' день"
+            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day"
             header: Команда for
         1:
             header: Ласкаво просимо на 10 рівень
@@ -437,7 +437,7 @@ levels:
         2:
             header: Команда for
             text: 'Ось як виглядає нова команда for:'
-            code: "{for} лічильника {in} {range} 1 {to} 10\n    Лічильник {print}\n{print} «Готові чи ні. Ось я іду!"
+            code: "{for} counter {in} {range} 1 {to} 10\n    {print} counter\n{print} 'Ready or not. Here I come!'"
         1:
             header: Ласкаво просимо на 11 рівень
             text: "На цьому рівні ми додаємо нову форму команди `{for}`. На попередніх рівнях ми використовували для зі списком, але ми також можемо використовувати для з числами.\n\nТаким чином нам більше не потрібна команда `{repeat}`."
