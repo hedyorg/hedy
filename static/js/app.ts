@@ -583,7 +583,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
         console.log('Response', response);
         if (response.Warning && $('#editor').is(":visible")) {
           //storeFixedCode(response, level);
-          error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
+          error.showWarning(response.Warning);
         }
 
         
@@ -593,7 +593,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
         }
 
         if (response.Error) {
-          error.show(ClientMessages['Transpile_error'], response.Error);
+          error.show("", response.Error);
           if (response.Location && response.Location[0] != "?") {
             //storeFixedCode(response, level);
             // Location can be either [row, col] or just [row].
@@ -881,7 +881,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
       // Only show the warning box for the first error shown
       if (skip_faulty_found_errors && !warning_box_shown) {
-        error.showFadingWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
+        error.showFadingWarning(ClientMessages['Errors_found']);
         warning_box_shown = true;
       }
     }
@@ -1044,7 +1044,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
       // Check if the program was correct but the output window is empty: Return a warning
       if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {        
-        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
+        error.showWarning(ClientMessages['Empty_output']);
         return;
       }
       if (!hasWarnings && code !== last_code) {
@@ -1502,7 +1502,7 @@ export async function tryCatchErrorBox(cb: () => void | Promise<void>) {
     return await cb();
   } catch (e: any) {
     console.log('Error', e);
-    error.show(ClientMessages['Transpile_error'], e.message);
+    error.show("", e.message);
   }
 }
 

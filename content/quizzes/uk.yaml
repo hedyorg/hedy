@@ -261,6 +261,19 @@ levels:
                 {print} Your favorite icecream is...
                 {sleep}
                 {print} flavor
+            mp_choice_options:
+            -   feedback: Ви хочете знати улюблений смак!
+                option: "```\n{sleep} 3\n```"
+            -   option: "```\n{print} полуниця\n```"
+                feedback: Вам не потрібна команда `{print}` в середині рядка...
+            -   option: "```\nполуниця, шоколад, ваніль\n```"
+                feedback: Таким чином ви складаєте список. Ви не хочете цього зараз.
+            -   feedback: Це вірно!
+                option: "```\n{ask} Який смак морозива тобі подобається?\n```"
+            hint: Ви хочете `{ask}` запитання
+            question_score: '10'
+            question_text: Яку команду слід використати в рядку 1?
+            correct_answer: D
         2:
             mp_choice_options:
             -   option: "```\nім'я {is} {ask} Як тебе звати?\n```"
@@ -346,164 +359,365 @@ levels:
             -   feedback: Режим сну не використовується для тексту `{print}`
                 option: 'Рядок 2 повинен містити: `{sleep}` Я люблю тварин'
             question_text: Що не так у цьому коді?
+            hint: Ви хочете `{print}` 'Я люблю собак
+            question_score: '10'
+            correct_answer: B
     3:
         1:
-            question_text: What command do you use to let Hedy pick something arbitrarily?
+            question_text: Які команди ви використовуєте, щоб дозволити Хеді вибирати щось довільно?
             mp_choice_options:
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: '`{print}` is used to print text'
+                feedback: '`{print}` використовується для друку тексту'
             -   option: |-
                     ```
                     {ask}
                     ```
-                feedback: '`{ask}` is used to ask a question'
+                feedback: '`{ask}` використовується для постановки запитання'
             -   option: |-
                     ```
                     {is}
                     ```
-                feedback: '`{is}` is used to make a list'
+                feedback: '`{is}` використовується для створення списку'
             -   option: |-
-                    ```
-                    {at} {random}
-                    ```
-                feedback: Correct!
+                    `{at} {random}`
+                feedback: Правильно!
+            hint: Довільно означає без плану або навмання.
+            correct_answer: D
+            question_score: '10'
         2:
             mp_choice_options:
-            -   option: 'You need commas in line 1: dog, cat, cow.'
-                feedback: Good job!
-            -   option: Line 1 needs to start with `{print}`.
-                feedback: No, you don't need `{print}`
-            -   option: Line 2 needs to say 'animal' instead of 'animals'',
-                feedback: animals is correct.
-            -   option: '`{at} {random}` is spelled incorrectly'
-                feedback: '`{at} {random}` is the correct spelling'
+            -   option: 'У першому рядку потрібні коми: собака, кішка, корова.'
+                feedback: хороша робота!
+            -   option: Рядок 1 має починатися з `{print}`.
+                feedback: немає, тобі не потрібно `{print}`
+            -   option: У рядку 2 потрібно сказати "тварини" замість "тварини"
+                feedback: тварин правильно.
+            -   option: '`{at} {random}` пишеться неправильно'
+                feedback: '`{at} {random}` є правильним написанням'
+            hint: У рядку 1 щось не так
+            question_text: Що не так з цим кодом?
+            correct_answer: A
+            question_score: '10'
+            code: "тварини {is} собака кішка корова\n{print} тварин {at} {random}"
         9:
             code: |-
-                colors {is} blue, purple, green
-                chosen_color {is} {ask} Which haircolor wouldn't your like to have?
-                {remove} chosen_color {from} colors
-                {print} I will dye my hair color {at} {random}
-            hint: Look at line 3
+                кольори {is} синій, фіолетовий, зелений
+                selected_color {is} {ask} Якого кольору волосся ви б не хотіли мати?
+                {remove} selected_color {from} кольорів
+                {print} Я пофарбую волосся в колір {at} {random}
+            hint: Подивіться на рядок 4
+            mp_choice_options:
+            -   option: 'У рядку 3 має бути написано: `{remove}` blue `{from}` кольори'
+                feedback: Можливо, ви захочете блакитне волосся!
+            -   feedback: Ви хочете видалити вибраний колір, тому `{remove}` правильний.
+                option: У рядку 3 має бути команда `{add}` замість команди `{remove}`
+            -   feedback: Чудова робота!
+                option: У рядку 4 змінна повинна називатися colors замість color
+            -   option: Нічого, це правильний код!
+                feedback: Знайди помилку!
+            question_text: Що не так з цим кодом?
+            question_score: '10'
+            correct_answer: C
         10:
-            question_text: What should be on the _?_?
+            question_text: Що має бути на _?
             code: |-
-                walkers {is} dad, mom, Sam, Petra
-                walked_yesterday {is} {ask} Who walked the dogs yesterday?
-                {print} walked_yesterday shouldn't have to walk the dogs again today
-                _?_
-                {print} walkers {at} {random} , it's your turn to walk the dogs!
+                ходунки {is} тато, мама, Сем, Петра 
+                walked_yesterday {is} {ask} Хто вчора вигулював собак? 
+                {print} walked_yesterday сьогодні знову не доведеться вигулювати собак 
+                _
+                {print} walkers {at} {random} , ваша черга вигулювати собак!
             mp_choice_options:
             -   option: |-
                     ```
                     {remove} walked_yesterday {from} walkers
                     ```
-                feedback: Super!
+                feedback: супер!
             -   option: |-
                     ```
-                    {remove} walked yesterday {to} walkers
+                    {remove} walked_yesterday {to} пішоходів
                     ```
-                feedback: '`{remove} {from}` or `{add} {to}`, not `{remove} {to}`'
+                feedback: '`{remove} {from}` або `{add} {to}`, а не `{remove} {to}`'
             -   option: |-
                     ```
                     {remove} walkers {from} yesterday
                     ```
-                feedback: yesterday is not a variable
+                feedback: вчора не є змінною
             -   option: |-
                     ```
                     {add} walked_yesterday {to} walkers
                     ```
-                feedback: This increased the change that the person who walked yesterday now has to do it again. That's mean.
-            hint: The person who walked the dog yesterday should be removed from the list.
+                feedback: Це збільшило ймовірність того, що людині, яка ходила вчора, тепер доведеться зробити це знову. Це підло.
+            hint: Того, хто вчора вигулював собаку, треба викреслити зі списку.
+            question_score: '10'
+            correct_answer: A
+        3:
+            mp_choice_options:
+            -   option: "```\n{at} {random} {print} параметри\n```"
+                feedback: Ви майже готові. Порядок слів ще неправильний.
+            -   option: "```\n{print} рок {at} {random}\n```"
+                feedback: ви не завжди хочете, щоб Hedy {print} камінь, іноді вам потрібні ножиці або папір.
+            -   option: "```\n{print} параметри {at} {random}\n```"
+                feedback: Дуже добре!
+            -   feedback: Уважно шукайте помилку
+                option: Нічого, код правильний!
+            question_text: Як виправити помилку у рядку 2?
+            code: "параметри {is} камінь, папір, ножиці\n{print} камінь, папір, ножиці {at} {random}"
+            question_score: '10'
+            correct_answer: C
+            hint: Змінна (список) називається параметрами.
+        4:
+            mp_choice_options:
+            -   option: "```\n{print} price\n```"
+                feedback: Ви не хочете `{print}` слово ціна, але ви хочете `{print}` одну ціну зі свого списку `{at} {random}`
+            -   option: "```\n{print} prices {at} {random}\n```"
+                feedback: Чудово! Ви дійсно звернули увагу.
+            -   feedback: '`{at} {random}` розміщується за змінною.'
+                option: "```\n{print} {at} {random} price\n```"
+            -   option: Нічого, цей код правильний.
+                feedback: Уважно шукайте помилку, яку ви пропустили!
+            question_score: '10'
+            question_text: Що потрібно змінити в рядку 2, щоб надрукувати випадкову ціну?
+            code: "ціни {is} 1 долар, 100 доларів, 1 мільйон доларів\n{print} ціна {at} {random}"
+            hint: Ім'я змінної - ціни
+            correct_answer: B
+        5:
+            mp_choice_options:
+            -   option: У рядку 1 має бути `{print}` замість `{ask}`
+                feedback: Ні, це не так.
+            -   feedback: Ні, це не так.
+                option: У рядку 2 має бути `{ask}` замість `{print}`
+            -   feedback: Ні, це не так.
+                option: У рядку 2 потрібно сказати відповіді `{at} {random}` `{is}` так, ні, можливо
+            -   feedback: Це вірно!
+                option: нічого, цей код ідеальний
+            question_score: '10'
+            question_text: Що не так у цьому коді?
+            hint: Цей код взагалі містить помилку?
+            correct_answer: D
+            code: "question {is} {ask} Що ти хочеш знати?\n{print} питання\nвідповіді {is} так, ні, можливо\n{print} відповідає {at} {random}"
+        8:
+            mp_choice_options:
+            -   feedback: Подивіться на команди `{remove}`
+                option: Ви не можете сказати, тому що Хеді `{print}` один із 3 смаків `{at} {random}`
+            -   feedback: морська сіль вилучена зі списку
+                option: морська сіль
+            -   option: паприка
+                feedback: Паприка зі списку вилучена
+            -   feedback: Це вірно!
+                option: сметана
+            hint: Є 3 смаки, біт 2 видалено. Який залишився?
+            correct_answer: D
+            question_score: '10'
+            code: "чіпси {is} морська сіль, паприка, сметана\n{remove} морську сіль {from} чіпсів\n{remove} паприку {from} чіпсів\n{print} чіпсів {at} {random}"
+            question_text: Що є результатом цього коду?
+        6:
+            mp_choice_options:
+            -   option: У рядку 2 потрібно сказати питання замість відповідей
+                feedback: Ні, це неправильно
+            -   option: Для рядка 2 потрібна команда `{is}`
+                feedback: Правильно
+            -   option: У рядку 3 потрібно сказати відповідь замість відповідей
+                feedback: Немає відповідей викликаної змінної
+            -   feedback: Насправді рядок 2 містить помилку.
+                option: нічого! Цей код чудовий!
+            correct_answer: B
+            question_score: '10'
+            hint: З рядком 2 щось не так.
+            question_text: Що не так з цим кодом?
+            code: "question {is} {ask} Що ти хочеш знати?\nвідповіді так, ні, можливо\n{print} відповідає {at} {random}"
+        7:
+            mp_choice_options:
+            -   option: Команда `{add}` видаляє випадкову книгу зі списку
+                feedback: Команда remove видаляє, команда add додає
+            -   option: Команда `{add}` додає випадкову книгу до списку
+                feedback: Це не так. Це додає вашу відповідь до списку!
+            -   option: Команда `{add}` додає вашу улюблену книгу до списку
+                feedback: Правильно!
+            -   option: Команда `{add}` роздрукує вашу улюблену книгу.
+                feedback: Ні, це додає вашу улюблену книгу до списку
+            question_score: '10'
+            correct_answer: C
+            question_text: Що робить команда `{add}`?
+            code: "книги {is} Гаррі Поттер, Хоббіт, Зелені яйця та шинка\nyour_book {is} {ask} Яка твоя улюблена книга?\n{add} your_book {to} книг\n{print} книг {at} {random}"
+            hint: Команда `{add}` додає книгу, але яку?
     4:
         1:
-            question_text: Which of these is true?
+            question_text: Який із цих кодів правильний?
             mp_choice_options:
-            -   option: '`{print}` and `{ask}` now need quotation marks'
-                feedback: That's right
-            -   option: Only `{print}` needs quotation marks
-                feedback: '`{ask}` needs quotation marks too!'
-            -   option: '`{at} {random}` doesn''t work anymore in level 4'
-                feedback: '`{at} {random}` still works'
-            -   option: '`{at} {random}` now needs quotation marks'
-                feedback: No, but 2 other commands do.
+            -   option: '```
+
+                    {print} "Я дуже радий пройти цей тест!"
+
+                    ```'
+                feedback: Це вірно
+            -   option: "```\n{print} Я дуже радий пройти цей тест!\n```"
+                feedback: '{print} тепер потребує лапок!'
+            -   option: '```
+
+                    {print} "Я дуже радий пройти цей тест!"
+
+                    ```'
+                feedback: 'не використовуйте апостроф або зворотні галочки'
+            -   option: '```
+
+                    {print} «Я дуже радий взяти участь у цьому тесті!
+
+                    ```'
+                feedback: обережно вживайте лапки й апостроф
+            correct_answer: A
+            hint: На рівні 4 вам потрібні лапки для 2 команд.
+            question_score: '10'
         2:
             mp_choice_options:
             -   option: |-
                     ```
                     {print} `hello`
                     ```
-                feedback: This quotation mark is skewed, you need a straight one.
+                feedback: Ця лапка перекошена, вам потрібна пряма.
             -   option: |-
                     ```
                     {print} 'hello'
                     ```
-                feedback: Correct
+                feedback: Правильно
             -   option: |-
                     ```
                     {print} hello
                     ```
-                feedback: There are no quotation marks here!.
+                feedback: Тут немає лапок!
             -   option: |-
                     ```
                     {print} ,hello,
                     ```
-                feedback: This is a comma, you need quotation marks.
+                feedback: Це кома, потрібні лапки.
+            correct_answer: B
+            question_text: У якому коді використовуються відповідні лапки?
+            question_score: '10'
+            hint: Виберіть правильні лапки.
         3:
             mp_choice_options:
             -   option: |-
                     ```
                     {print} Hi Im Hedy
                     ```
-                feedback: Add quotation marks please!
+                feedback: Будь ласка, додайте лапки!
             -   option: |-
                     ```
                     {print} 'Hi Im Hedy
                     ```
-                feedback: Both before and after the words you want to print should be a quotation mark.
+                feedback: І перед, і після слів, які ви хочете надрукувати, повинні бути лапки.
             -   option: |-
                     ```
                     '{print} Hi Im Hedy'
                     ```
-                feedback: The first quotation mark should be behind the word {print}
+                feedback: Перші лапки мають стояти за словом `{print}`
             -   option: |-
                     ```
                     {print} 'Hi Im Hedy'
                     ```
-                feedback: Perfect!
+                feedback: ідеально!
+            question_score: '10'
+            question_text: Де правильно вжиті лапки?
+            hint: Як перед, так і після слів, які ви хочете надрукувати, слід поставити лапки.
+            correct_answer: D
         5:
             mp_choice_options:
             -   option: |-
                     ```
                     '{print} options {at} {random}'
                     ```
-                feedback: Never put the quotation mark in front of the {print} command.
+                feedback: Ніколи не беріть лапки перед командою `{print}`.
             -   option: |-
                     ```
                     {print} 'options' {at} {random}
                     ```
-                feedback: options is a variable. You don't literally want to print 'options {at} {random}'.
+                feedback: параметри є змінною. Ви не хочете буквально друкувати "параметри {at} {random}".
             -   option: |-
                     ```
                     {print} options {at} {random}
                     ```
-                feedback: That's right
-            -   option: Nothing, the game already works!
-                feedback: Look carefully. There is an error.
+                feedback: Це вірно
+            -   option: Нічого, гра вже працює!
+                feedback: Подивіться уважно. Є помилка.
+            correct_answer: C
+            question_score: '10'
+            question_text: Що потрібно змінити, щоб гра запрацювала?
+            hint: Ви не хочете, щоб Hedy буквально друкувала «параметри {at} {random}», ви хочете, щоб вона друкувала «камінь», «папір» або «ножиці».
+            code: "варіанти {is} камінь, папір, ножиці\n{print} 'параметри {at} {random}'"
         6:
-            hint: 'Think carefully: what is a variable and should be outside of the quotation marks? And what are normal words that should be inside?.'
+            hint: 'Добре подумайте: що таке змінна і має бути поза лапками? А які нормальні слова мають бути всередині?.'
+            question_text: Що було б хорошим наступним рядком у цьому коді?
+            mp_choice_options:
+            -   option: "```\n{print} 'Ви виграєте... ціни {at} {random}\n```"
+                feedback: Чудово! Ви зрозуміли!
+            -   option: "```\n{print} Ви виграти... 'ціни {at} {random}'\n```"
+                feedback: Hedy буквально надрукує "ціни {at} {random}"
+            -   feedback: Вам потрібні лапки!
+                option: "```\n{print} Ви виграєте... ціни {at} {random}\n```"
+            -   option: "```\n{print} 'Ви виграєте... ціни {at} {random}'\n```"
+                feedback: Hedy буквально надрукує "ціни {at} {random}"
+            correct_answer: A
+            code: ціни {is} 1 долар, 100 доларів, 1 мільйон доларів
+            question_score: '10'
         9:
             mp_choice_options:
-            -   option: Ajax is going to win the champions league
-                feedback: Hedy could `{print}` that
-            -   option: Real Madrid is going to win the champions league
-                feedback: Hedy could `{print}` that
-            -   option: Bayer Munchen is going to win the champions league
-                feedback: Hedy could `{print}` that
-            -   option: FC Barcelona is going to win the champions league
-                feedback: That's right. It's not in the list
+            -   option: Аякс збирається виграти Лігу чемпіонів
+                feedback: Хеді могла б `{print}` це
+            -   option: Реал Мадрид збирається виграти Лігу чемпіонів
+                feedback: Хеді могла б `{print}` це
+            -   option: Баварія збирається виграти Лігу чемпіонів
+                feedback: Хеді могла б `{print}` це
+            -   option: ФК "Барселона" збирається виграти Лігу чемпіонів
+                feedback: Це вірно. Його немає в списку
+            question_text: Що ніколи не з’явиться на екрані виводу?
+            code: "клуби {is} Реал Мадрид, Баварія Мюнхен, Манчестер Юнайтед, Аякс \n{print} clubs {at} {random} 'виграє Лігу чемпіонів'"
+            hint: Які варіанти Хеді вибрати навмання?
+        7:
+            mp_choice_options:
+            -   option: У першому рядку відсутні лапки
+                feedback: Правильно!
+            -   feedback: Змінна не потребує лапок
+                option: У рядку 2 відсутні лапки
+            -   option: У рядку 3 лапки відсутні
+                feedback: Ви ж не хочете, щоб Хеді буквально друкувала «відповіді {at} {random}», тому тут не потрібні лапки!
+            -   feedback: Подивіться уважно. Ви пропустили помилку!
+                option: Нічого, цей код хороший як є!
+            code: "question {is} {ask} Що ти хочеш знати?\nвідповіді {is} так, ні, можливо\n{print} відповідає {at} {random}"
+            hint: Перевірте кожен рядок, чи потрібні йому лапки чи ні.
+            correct_answer: A
+            question_text: Що не так з цим кодом?
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   option: "```\n{print} Отже, ви обираєте двері\n```"
+                feedback: Нам потрібні лапки
+            -   feedback: 'Якщо гравець обирає двері 3, Хеді скаже: «Тож ви вибираєте 3 3»'
+                option: "```\n{print} 'Отже, ви обираєте двері\n```"
+            -   feedback: супер!
+                option: "```\n{print} 'Отже, ви обираєте двері\n```"
+            -   option: "```\n{print} 'Отже, ви вибираєте двері\n```"
+                feedback: Хеді буквально надрукує «Отже, ви обираєте двері»
+            correct_answer: C
+            code: "{print} 'Ласкаво просимо на грошове шоу!'\n{print} «Перед вами 3 двері»\nдвері {is} {ask} 'Які двері ви обираєте?'"
+            question_text: Яким би був хороший наступний рядок для цього коду?
+            hint: Друге слово двері потрібно замінити на цифру, першим залишиться слово двері...
+            question_score: '10'
+        4:
+            hint: Починаючи з рівня 4, потрібно використовувати лапки.
+            mp_choice_options:
+            -   option: 'Слово `{print}` потрібно взяти в лапки, наприклад: `{print}`.'
+                feedback: Лапки не повинні бути навколо самої команди.
+            -   feedback: супер!
+                option: Слова, які потрібно надрукувати, потрібно взяти в лапки.
+            -   option: Під час використання команди `{ask}` вам не потрібні лапки
+                feedback: І `{print}`, і `{ask}` вимагають лапок
+            -   option: Ви можете самі вибрати, використовувати лапки чи ні.
+                feedback: На жаль, Хеді суворіша за це.
+            correct_answer: B
+            question_text: Яке твердження вірне?
+            question_score: '10'
     5:
         1:
             question_text: What is true?

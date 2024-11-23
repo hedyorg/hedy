@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-25 06:21+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2024-11-21 21:02+0000\n"
+"Last-Translator: aniollidon <aniollidon@gmail.com>\n"
 "Language-Team: ca <LL@li.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.2-dev\n"
+"X-Generator: Weblate 5.9-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -35,7 +35,7 @@ msgid "Has Blanks"
 msgstr "Hem detectat que el teu codi sembla incomplet. Pots assegurar-te que has omplert tots els espais en blanc?"
 
 msgid "Incomplete"
-msgstr ""
+msgstr "Hem detectat que falta part del codi a la comanda `{incomplete_command}` a la línia {line_number}. Pots provar d'afegir el que falta?"
 
 msgid "Incomplete Repeat"
 msgstr "Hem detectat que al `{repeat}` de la línia {line_number} li falta una comanda`{command}`. Pots afegir-la?"
@@ -65,7 +65,7 @@ msgid "Lonely Text"
 msgstr "Hem detectat al codi que fa falta una comanda dins el text de la línia {line_number}. Pots provar d'escriure dins el text la comanda que hi falta"
 
 msgid "Missing Additional Command"
-msgstr ""
+msgstr "Hem detectat que a la comanda `{command}` de la línia {line_number} li falta alguna cosa. Pots provar d'utilitzar `{missing_command}` al teu codi?"
 
 msgid "Missing Colon Error"
 msgstr "Hem detectat que `{command}` necessita dos punts (`:`) al final de la línia {line_number}. A partir del nivell 17, recordareu d'afegir `:` als finals de línies amb comandes?"
@@ -94,95 +94,74 @@ msgstr "A la línia {line_number}, has utilitzat un número que a Hedy no funcio
 msgid "Parse"
 msgstr "Hem detectat que `{character_found}` s'està utilitzant a la línia {location[0]} que no està permès. Pots buscar quin caràcter falta o quin caràcter addicional hi ha al teu codi?"
 
-#, fuzzy
 msgid "Pressit Missing Else"
-msgstr "T'has oblidat d'afegir el que passa quan prems una tecla diferent, afegiu un `{else}` al vostre codi"
+msgstr "Hem detectat que al codi li falta un `{else}` per gestionar altres pulsacions de tecles. Pots provar d'afegir un `{else}` al teu codi?"
 
-#, fuzzy
 msgid "Runtime Index Error"
-msgstr "Has provat d'accedir a la llista {name}, però està buida o falta l'índex."
+msgstr "Hem detectat que la llista {name} està buida o li falta l'índex. Pots assegurar-te que la llista no estigui buida o provar d'escriure un número dins de `[]` per l'índex que falta?"
 
-#, fuzzy
 msgid "Runtime Value Error"
-msgstr ""
+msgstr "Hem detectat que `{command}` ha rebut un valor no permès: `{value}`. {tip}."
 
-#, fuzzy
 msgid "Runtime Values Error"
-msgstr ""
+msgstr "Hem detectat que `{command}` ha rebut valors no permesos: `{value}` i `{value}`. {tip}."
 
-#, fuzzy
 msgid "Save Microbit code "
-msgstr ""
+msgstr "Desa codi Microbit"
 
-#, fuzzy
 msgid "Too Big"
-msgstr ""
+msgstr "Hem detectat que el programa té {lines_of_code} línies, però només podem processar {max_lines} línies. Pots provar d'escurçar el teu programa?"
 
-#, fuzzy
 msgid "Too Few Indents"
-msgstr ""
+msgstr "Hem detectat que la línia {line_number} té massa pocs ({leading_spaces}) espais. Pots provar d'afegir un espai extra?"
 
-#, fuzzy
 msgid "Too Many Indents"
-msgstr ""
+msgstr "Hem detectat que la línia {line_number} té massa espais ({leading_spaces}). Pots provar d'eliminar l'espai extra?"
 
-#, fuzzy
 msgid "Unexpected Indentation"
-msgstr "Has utilitzat massa espais a la línia {line_number}. N'has posat {leading_spaces}, i són massa. Inicia cada nou bloc amb {indent_size} espais més que la línia d'abans."
+msgstr "Hem detectat que la línia {line_number} té massa espais ({leading_spaces}). Pots provar d'afegir {indent_size} espais més per a cada nou bloc?"
 
-#, fuzzy
 msgid "Unquoted Assignment"
-msgstr "A partir d'aquest nivell, cal col·locar els textos de la dreta de `{is}` entre cometes. Te n'has oblidat al text {text}."
+msgstr "Hem detectat que el text a la dreta de `{is}` no està escrit entre cometes. Aquest nivell requereix que comencis a escriure el text entre cometes. Prova de fer-ho per al text {text}."
 
-#, fuzzy
 msgid "Unquoted Equality Check"
-msgstr "Si vols comprovar si una variable és igual a diverses paraules, les paraules han d'estar envoltades de cometes!"
+msgstr "Hem detectat que el codi està intentant comprovar si una variable és igual a diverses paraules. Pots provar d'utilitzar cometes per a les paraules que vols comprovar?"
 
-#, fuzzy
 msgid "Unquoted Text"
-msgstr "Ves amb compte! Si utilitzes les comandes `{ask}` o `{print}`, el text posterior s'haurà d'envoltar amb cometes. Te n'has oblidat al text {unquotedtext}."
+msgstr "Hem detectat que el text per a {ask} o {print} sembla que falta les seves cometes. Pots provar d'afegir cometes per a {unquotedtext}?"
 
-#, fuzzy
 msgid "Unsupported Float"
-msgstr "Els nombres no enters encara no estan disponibles, però ho estaran d'aquí pocs nivells. Per ara canvia `{value}` a un enter."
+msgstr "Hem detectat que el codi utilitza números no enters que encara no són compatibles. Pots provar de canviar `{value}` per un enter?"
 
-#, fuzzy
 msgid "Unsupported String Value"
-msgstr "Els valors de text no poden contenir `{invalid_value}`."
+msgstr "Hem detectat que el text utilitza valors que no pot contenir {invalid_value}. Pots provar de treure el valor escrit o canviar el seu tipus?"
 
-#, fuzzy
 msgid "Unused Variable"
-msgstr ""
+msgstr "Hem detectat que la variable {variable_name} està definida a la línia {line_number}, però no s'utilitza. Pots provar d'utilitzar la variable definida o treure-la?"
 
-#, fuzzy
 msgid "Var Undefined"
-msgstr "Has intentat utilitzar la variable `{name}`, però no l'has definit. També pot ser que intentessis utilitzar la paraula `{name}`, però t'hagis oblidat de les cometes."
+msgstr "Hem detectat que la variable `{name}` s'està utilitzant abans de ser definida. Pots definir la variable abans d'utilitzar-la o utilitzar cometes per a `{name}`?"
 
-#, fuzzy
 msgid "Wrong Level"
 msgstr "Això era codi Hedy correcte, però no pertany a aquest nivell. Has escrit `{offending_keyword}` que funcionaria al nivell {working_level}. Consell: {tip}"
 
-#, fuzzy
 msgid "Wrong Number of Arguments"
-msgstr ""
+msgstr "Hem detectat que la funció {name} té un nombre incorrecte d'arguments, que és {used_number}. Pots provar d'escriure {defined_number} en el seu lloc?"
 
 msgid "account_overview"
 msgstr "Visió general del compte"
 
-#, fuzzy
 msgid "actions"
-msgstr ""
+msgstr "Accions"
 
-#, fuzzy
 msgid "add"
-msgstr ""
+msgstr "Afegeix"
 
 msgid "add_students"
 msgstr "Afegeix estudiants"
 
-#, fuzzy
 msgid "add_your_language"
-msgstr ""
+msgstr "Afegeix la teva llengua!"
 
 msgid "admin"
 msgstr "Administrador"
@@ -193,17 +172,14 @@ msgstr "Anar al nivell {level}"
 msgid "adventure"
 msgstr "Aventura"
 
-#, fuzzy
 msgid "adventure_cloned"
-msgstr ""
+msgstr "L'aventura s'ha clonat"
 
-#, fuzzy
 msgid "adventure_code_button"
-msgstr ""
+msgstr "Codi d'Aventura"
 
-#, fuzzy
 msgid "adventure_codeblock_button"
-msgstr ""
+msgstr "Utilitza aquest botó quan vulguis crear un bloc de codi que els estudiants puguin executar en la teva aventura. Consell: posa la selecció al final de la darrera línia del bloc de codi i prem <kbd>Enter</kbd> 3 vegades per escriure després d'un bloc de codi."
 
 msgid "adventure_duplicate"
 msgstr "Ja tens una aventura amb aquest nom."
@@ -213,15 +189,13 @@ msgstr "No has introduït un nom d'aventura!"
 
 #, fuzzy
 msgid "adventure_exp_3"
-msgstr "Assegura't d'envoltar sempre les paraules clau amb { }, de manera que es reconeguin correctament. Pots utilitzar el botó \"Vista prèvia\" per veure la versió amb estil de la teva aventura. Per veure l'aventura en una pàgina independent, seleccioneu \"visualitzar\" des de la pàgina de professors."
+msgstr "Assegura't d'envoltar sempre les paraules clau amb { }, de manera que es reconeguin correctament. Pots utilitzar el botó \"Vista prèvia\" per veure la versió amb estil de la teva aventura. Per veure l'aventura en una pàgina independent, seleccioneu \"visualitza\" des de la pàgina de professors."
 
-#, fuzzy
 msgid "adventure_exp_classes"
-msgstr ""
+msgstr "La teva aventura es fa servir en les classes següents"
 
-#, fuzzy
 msgid "adventure_flagged"
-msgstr ""
+msgstr "L'aventura s'ha marcat amb èxit."
 
 msgid "adventure_id_invalid"
 msgstr "L'ID d'aventura no és vàlid."
@@ -241,28 +215,23 @@ msgstr "Estic d'acord amb el fet que la meva aventura estigui disponible públic
 msgid "adventure_updated"
 msgstr "L'aventura s'ha actualitzat!"
 
-#, fuzzy
 msgid "adventures"
-msgstr ""
+msgstr "Aventures"
 
-#, fuzzy
 msgid "adventures_completed"
-msgstr ""
+msgstr "Aventures completades: {number_of_adventures}"
 
-#, fuzzy
 msgid "adventures_info"
-msgstr ""
+msgstr "Cada nivell de Hedy té exercicis integrats per als estudiants, que anomenem aventures. Pots crear les teves pròpies aventures i afegir-les a les teves classes. Amb les teves pròpies aventures, pots crear aventures que siguin rellevants i interessants per als teus estudiants. Pots trobar més informació sobre la creació de les teves pròpies aventures <a href=\"https://hedy.org/for-teachers/manual/features\"> aquí </a>."
 
 msgid "adventures_restored"
 msgstr "Les aventures per defecte han estat restaurades."
 
-#, fuzzy
 msgid "adventures_ticked"
-msgstr ""
+msgstr "Tiquet d'aventura"
 
-#, fuzzy
 msgid "adventures_tried"
-msgstr ""
+msgstr "Aventures intentades"
 
 msgid "ago"
 msgstr "fa {timestamp}"
@@ -282,9 +251,8 @@ msgstr "Tot"
 msgid "all_class_highscores"
 msgstr "Fer visible tot l'alumnat al rànquing de la classe"
 
-#, fuzzy
 msgid "all_rows_missing_separator"
-msgstr ""
+msgstr "Cap de les files conté un punt i coma. Potser vols que generem automàticament les contrasenyes? Si és així, clica el botó de contrasenyes i crea els comptes de nou. Si no és així, utilitza un punt i coma per separar els noms d'usuari i les contrasenyes en les línies següents: {rows}"
 
 msgid "already_account"
 msgstr "Ja tens un compte?"
@@ -299,7 +267,7 @@ msgid "ask_needs_var"
 msgstr "A partir del nivell 2, cal utilitzar `{ask}` amb una variable. Exemple: nom `{is}` `{ask}` Com et dius?"
 
 msgid "available_in"
-msgstr ""
+msgstr "Disponible a:"
 
 msgid "back_to_class"
 msgstr "Torna a la classe"
@@ -310,9 +278,8 @@ msgstr "Fes-te patrocinador"
 msgid "birth_year"
 msgstr "Any de naixement"
 
-#, fuzzy
 msgid "bug"
-msgstr ""
+msgstr "Errada"
 
 msgid "by"
 msgstr "per"
@@ -341,12 +308,11 @@ msgstr "Ja ets alumne de la classe"
 msgid "class_customize_success"
 msgstr "Classe personalitzada amb èxit."
 
-#, fuzzy
 msgid "class_graph_explanation"
-msgstr ""
+msgstr "En aquest gràfic pots veure representats els nombres d'aventures que els teus estudiants han intentat (és a dir, que han fet feina significativa en aquesta aventura), en relació amb el nombre d'errors i execucions reeixides."
 
 msgid "class_logs"
-msgstr ""
+msgstr "Últim accés"
 
 msgid "class_name_duplicate"
 msgstr "Ja teniu una classe amb aquest nom."
@@ -360,21 +326,17 @@ msgstr "Aquest nom de la classe no és vàlid."
 msgid "class_name_prompt"
 msgstr "Si us plau, introdueix el nom de la nova classe"
 
-#, fuzzy
 msgid "class_performance_graph"
-msgstr ""
+msgstr "Gràfic del rendiment de la classe"
 
-#, fuzzy
 msgid "class_survey_description"
-msgstr ""
+msgstr "Ens agradaria obtenir una millor visió general dels nostres usuaris de Hedy. En proporcionar aquestes respostes, ajudaràs a millorar Hedy. Gràcies!"
 
-#, fuzzy
 msgid "class_survey_later"
-msgstr ""
+msgstr "Recorda-m'ho demà"
 
-#, fuzzy
 msgid "class_survey_question1"
-msgstr ""
+msgstr "Quin és el rang d'edat de la teva classe?"
 
 #, fuzzy
 msgid "class_survey_question2"
