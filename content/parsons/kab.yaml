@@ -21,6 +21,9 @@ levels:
     4:
         1:
             code: "ipukimunen {is} Pikaču, Čarmander, Bulbasur, Sqertl\n{print} 'Apukimun-a ad yili d apukimun-ik!'\n{sleep}\n{print} ipukimunen {at} {random}"
+        2:
+            story: Snulfu-d luṭu ara k-yeǧǧen ad tferneḍ arraz niḍen i tzemreḍ ad t-trebḥeḍ.
+            code: "arrazen {is} takeṛṛust, hamster, 1 umelyun n uṛu\narraz {is} {ask} 'Acu i tebɣiḍ ad t-trebḥeḍ?'\n{add} arraz {to_list} arrazen\n{print} 'Trebḥeḍ ' arrazen {at} {random}"
     9:
         2:
             code: |-
@@ -70,3 +73,7 @@ levels:
     11:
         1:
             code: "{for} amḍan {in} {range} 10 {to} 1\n    {print} amḍan\n    {sleep}\n    {clear}\n{print} 'Aseggas ameggaz!'"
+    5:
+        2:
+            story: Snulfu-d urar n tusnakt.
+            code: "{print} 'Fru ugur-a'\ntiririt {is} {ask} '88 - 16 = ?'\n{if} tiririt {is} 72 {print} 'Swaswa!'\n{else} {print} 'Yecceḍ! Tiririt d 72'"
