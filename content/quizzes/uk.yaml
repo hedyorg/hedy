@@ -674,6 +674,8 @@ levels:
             question_text: Що ніколи не з’явиться на екрані виводу?
             code: "клуби {is} Реал Мадрид, Баварія Мюнхен, Манчестер Юнайтед, Аякс \n{print} clubs {at} {random} 'виграє Лігу чемпіонів'"
             hint: Які варіанти Хеді вибрати навмання?
+            question_score: '10'
+            correct_answer: D
         7:
             mp_choice_options:
             -   option: У першому рядку відсутні лапки
@@ -718,91 +720,224 @@ levels:
             correct_answer: B
             question_text: Яке твердження вірне?
             question_score: '10'
+        10:
+            mp_choice_options:
+            -   feedback: Для списку не потрібні лапки
+                option: У рядку 1 відсутні лапки
+            -   option: У рядку 2 відсутні лапки
+                feedback: Правильно
+            -   option: Відмітки котирування відсутні в обох рядках 2 і 3
+                feedback: Лінія 3 не потребує міток, тому що вона не друкується буквально
+            -   feedback: Ви пропустили!
+                option: Ніщо цей код не має помилок
+            question_score: '10'
+            question_text: Яке твердження вірне?
+            code: "люди {is} мама, тато, Емма, Софі\n{print} Посуд готує...\n{print} людей {at} {random}"
+            hint: Один рядок потребує лапок, тому що ви хочете його друкувати буквально.
+            correct_answer: B
     5:
         1:
-            question_text: What is true?
+            question_text: Яка команда повинна бути заповнена в _?
             code: |-
-                number {is} {ask} 'What is your lucky number?'
-                {if} number {is} 5 {print} 'Mine too!'
-                _?_ {print} 'My lucky number is 5!'
+                {is} {ask} 'Що ваш щасливий номер? Р
+                {if} номер {is} 5 {print} 'Мінь теж! Р
+                _ {print} 'Я щасливий номер 5! Р
             mp_choice_options:
-            -   option: In level 5 `{print}` works differently than in level 4
+            -   option: '`{print}`'
                 feedback: '`{print}` is still the same'
-            -   option: In level 5 `{ask}` works differently than in level 4
+            -   option: '`{if}`'
                 feedback: '`{ask}` is still the same'
-            -   option: In level 5 `{ask}` and `{print}` work differently than in level 4
+            -   option: '`{sleep}`'
                 feedback: '`No these commands remain the same'
-            -   option: In level 5 `{ask}` and `{print}` work the same as in level 4
+            -   option: '`{else}`'
                 feedback: Correct!
             hint: We have only learned a new command in level 5.
+            correct_answer: D
+            question_score: '10'
         3:
-            hint: '`{if}` password `{is}` ... `{print}` ''Correct!''!'''
+            hint: '`{if}` пароль `{is}` ... `{print}` ''Correct! Р'
+            mp_choice_options:
+            -   option: Правильно!
+                feedback: Це друкується, коли ви введіть правильний пароль
+            -   feedback: Це вірно!'
+                option: СКЛАД
+            -   feedback: Пароль не пароль...
+                option: Пароль
+            -   option: ALARM INTRUDER
+                feedback: Цей файл друкується, коли ви вводите неправильний пароль!
+            correct_answer: B
+            question_score: '10'
+            question_text: Що таке правильний пароль?
+            code: "пароль {is} {ask} 'Що таке пароль? Р\n{if} пароль {is} SECRET {print} 'Correct! Р\n{else} {print} 'ALARM! INTRUDER! Р"
         6:
-            question_text: Which word should be on the place of the question mark in the last line?
+            question_text: Яке слово повинно бути на місці заготовки в останньому рядку?
             code: |-
-                {print} 'Im Hedy the football fortune teller!'
-                {print} 'I will predict what place your team will end up!'
-                club is {ask} 'Which club is your favorite?'
-                {if} club {is} ajax {print} 'Ajax is going to win of course!'
-                _?_ {print} 'Sorry, your club is gonna be in last place...'
+                {print} 'Ім Гейд футбольний фортунний казник! Р
+                {print} 'Я представить те, що ваша команда завершиться! Р
+                клуб {ask} 'Хіч клуб улюблений? Р
+                {if} клуб {is} ajax {print} 'Ajax збирається виграти курс! Р
+                _ {print} 'Соррі, ваш клуб знаходиться в останньому місці... Р
+            question_score: '10'
+            mp_choice_options:
+            -   feedback: '`{if}` вже в рядку вище'
+                option: "```\n{if}\n```"
+            -   option: "```\n{at} {random}\n```"
+                feedback: Ні, вам потрібно `{else}`.
+            -   option: "```\n{else}\n```"
+                feedback: Великий!
+            -   feedback: '`{print}` вже там, нам потрібно слово до нього!'
+                option: "```\n{print}\n```"
+            hint: '`{if}` йде разом з ..?'
+            correct_answer: C
         7:
-            question_text: Which word should be in the place of the question mark?
+            question_text: Яке слово повинно бути в місці заготовки?
             code: |-
-                {print} 'I can predict if you will be a millionair or not!'
-                name {is} {ask} 'Whats your name?'
-                {if} name {is} Hedy {print} 'You will be a millionair!'
-                {else} _?_ 'Unfortunately... No big money for you.'
+                {print} 'Я можу прогнозувати, якщо ви станете мільйонером або ні! Р
+                name {is} {ask} 'Що ваше ім'я? Р
+                {if} ім'я {is} Hedy {print} 'Ви будете мільйона! Р
+                {else} _ 'Несподівано... Немає великих грошей для вас. Р
             mp_choice_options:
             -   option: |-
                     ```
                     {if}
                     ```
-                feedback: '`{if}` is in the line above.'
+                feedback: '`{if}` знаходиться в рядку вище.'
             -   option: |-
                     ```
                     {at} {random}
                     ```
-                feedback: No, you don't need `{at} {random}`.
+                feedback: Не потрібно `{at} {random}`.
             -   option: |-
                     ```
                     {else}
                     ```
-                feedback: There already is an `{else}` command
+                feedback: Ось вже є команда `{else}`
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: Awesome!
+                feedback: Чудовий!
+            hint: Після `{else}` a `{print}` команда наступні
+            correct_answer: D
+            question_score: '10'
         8:
-            question_text: Which word should be on the place of the question mark?
+            question_text: Яке слово повинно бути на місці заготовки?
             code: |-
-                animal {is} {ask} 'What is your favorite animal?'
-                {if} _?_ {is} penguin {print} 'Thats my favorite animal too!'
-                {else} {print} 'Cool! I like penguins.'
+                тварини {is} {ask} 'Що таке улюблене тварина? Р
+                {if} _ {is} пінгвін {print} - Зробіть свою улюблену тварину! Р
+                {else} {print} 'Коло! Я люблю пінгвінів. Р
             mp_choice_options:
             -   option: |-
                     ```
                     favorite animal
                     ```
-                feedback: That's not the variable name.
+                feedback: Це не змінне ім'я.
             -   option: |-
                     ```
                     animal
                     ```
-                feedback: Great job!
+                feedback: Чудова робота!
             -   option: |-
                     ```
                     {if}
                     ```
-                feedback: '`{if}` is already there'
+                feedback: '`{if}` вже там'
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: No, that's not it.
+                feedback: Ні, що це не так.
+            hint: Яка змінна назва?
+            correct_answer: B
+            question_score: '10'
+        5:
+            mp_choice_options:
+            -   feedback: Дійсно!
+                option: Що потрібно бути в столицях, тому SECRET
+            -   feedback: Ні, це не пароль.
+                option: Оскільки пароль сигналізується
+            -   option: Тому що це неправдиво.
+                feedback: Це не те, що ви замовляєте секрет
+            -   feedback: Ні, Гей право
+                option: Бо Вінди помилиться
+            correct_answer: A
+            question_score: '10'
+            question_text: Чому скаже "ALARM"! INTRUDER, коли ви вводите в 'secret'?
+            code: "пароль {is} {ask} 'Що таке пароль? Р\n{if} пароль {is} SECRET {print} 'Correct! Р\n{else} {print} 'ALARM! INTRUDER! Р"
+            hint: Виписання слова має бути точно таким же.
+        9:
+            mp_choice_options:
+            -   option: '1'
+                feedback: Поганий вибір! Ви їсти
+            -   feedback: Супер! Ви втечу!
+                option: '2'
+            -   option: '3'
+                feedback: Поганий вибір! Ви їдете.
+            -   option: Ви завжди будете їсти!
+                feedback: Луккілька не!
+            code: "{print} 'Пейзаж з хатаного будинку! Р\n{print} 'Три 3 двері перед вами'\nДвері {is} {ask} 'Which двері вибрати? Р\nмонстри {is} вампір, вовк, гігантський павук\n{if} двері {is} 2 {print} 'Я, ви можете втекти! Р\n{else} {print} 'Ви позбавлені...' монстри {at} {random}"
+            hint: Один з дверей буде тримати вас безпечним.
+            question_text: Які двері ви повинні вибрати втечу?
+            correct_answer: B
+            question_score: '10'
+        10:
+            mp_choice_options:
+            -   option: Вінди забирає випадковий монстр кожного разу.
+                feedback: Чудовий!
+            -   option: вампір
+                feedback: Не завжди...
+            -   option: блюв
+                feedback: Не завжди...
+            -   feedback: Не завжди...
+                option: христина белла
+            question_text: Який монстр стоїть за двері 1?
+            code: "{print} 'Пейзаж з хатаного будинку! Р\n{print} 'Три 3 двері перед вами'\nДвері {is} {ask} 'Which двері вибрати? Р\nмонстри {is} вампір, вовк, гігантський павук\n{if} двері {is} 2 {print} 'Я, ви можете втекти! Р\n{else} {print} 'Ви позбавлені...' монстри {at} {random}"
+            correct_answer: A
+            question_score: '10'
+            hint: Подумайте останні 3 слова... монстри `{at} {random}`...
+        2:
+            mp_choice_options:
+            -   option: веселощі
+                feedback: Це вірно!
+            -   feedback: Якщо ім'я Hedy, це скажуть «хуна» Р
+                option: менш веселий
+            -   option: Геди
+                feedback: Ні, не друкуйте назву
+            -   option: Помилка
+                feedback: На щастя!
+            hint: "`{if}` ім'я `{is}` Hedy `{print}` ...?"
+            code: "name {is} {ask} 'Що ваше ім'я? Р\n{if} ім'я {is} Hedy {print} 'fun' {else} {print} 'less fun'"
+            question_score: '10'
+            question_text: Що з'являється в екрані виведення, коли ви введіть ім'я Hedy?
+            correct_answer: A
+        4:
+            mp_choice_options:
+            -   option: Правильно
+                feedback: Це надруковано, якщо дана права відповідь, не виправда...
+            -   feedback: Це не право відповісти
+                option: СКЛАД
+            -   option: неправильно!
+                feedback: Ні, це не те, що Hedy буде друкувати
+            -   feedback: Чудова робота!
+                option: АЛАРМ INTRUDER!
+            correct_answer: D
+            question_text: Що робить Вінди друк, коли ви введіть неправильний пароль?
+            code: "пароль {is} {ask} 'Що таке пароль? Р\n{if} пароль {is} SECRET {print} 'Correct! Р\n{else} {print} 'ALARM! INTRUDER! Р"
+            hint: Ваш комп’ютер озвучить сигнал тривоги для інтрудерів!
+            question_score: '10'
     6:
         6:
-            question_text: How much does a hamburger cost is this virtual restaurant?
+            question_text: Скільки коштує гамбургер в цьому віртуальному ресторані?
+            mp_choice_options:
+            -   option: 15 доларів
+                feedback: супер!
+            -   option: 6 доларів
+                feedback: Фрі - 6 доларів
+            -   option: 0 доларів
+                feedback: Гамбургер не безкоштовний!
+            -   feedback: Це ціна за гамбургер і картопля!
+                option: 21 доларів
+            code: "{print} 'Велком в Hedys diner Р\nїжа = {ask} 'Що б ви хотіли б їсти? Р\nціна = 0\n{if} їжа {is} гамбургер ціна = 15\n{if} їжа {is} фрі Ціна = 6"
         10:
             code: |-
                 name _?_ Hedy
@@ -816,6 +951,80 @@ levels:
                 feedback: No, one `=` sign is enough
             -   option: You can only use the `=` sign when working with numbers, not with words.
                 feedback: You can also use `=` with words.
+        2:
+            mp_choice_options:
+            -   option: '`-`'
+                feedback: Це не так
+            -   option: плюс
+                feedback: Це не так
+            -   feedback: Це не так
+                option: '`*`'
+            -   option: '`+`'
+                feedback: Правильно!
+            correct_answer: D
+            question_text: Що ви використовуєте, коли ви хочете додати два номери?
+            hint: Це знак плюса.
+            question_score: '10'
+        3:
+            correct_answer: C
+            mp_choice_options:
+            -   option: '30'
+                feedback: Це буде правою відповідь, якщо не було позначень цитат.
+            -   option: '13'
+                feedback: Спробуйте знову.
+            -   feedback: Корисно! Є цитатні знаки, тому Hedy буде друкувати його буквально.
+                option: 3*10
+            -   option: Ні, Він подарує повідомлення про помилку.
+                feedback: Ні, Вінди буде друкувати його буквально.
+            hint: Подумайте про те, що ми цінуємо!
+            question_text: Який вихід Hedy при запуску цього коду?
+            code: "{print} '3*10'"
+            question_score: '10'
+        1:
+            mp_choice_options:
+            -   option: '20'
+                feedback: Правильно!
+            -   option: '12'
+                feedback: Ні, знак плюс використовується додатково
+            -   option: 2*10
+                feedback: Ні, Хеді обчислить відповідь
+            -   option: '210'
+                feedback: Зрозуміти це розрахунок.
+            hint: '`*` використовується як знак багатозастосувань'
+            correct_answer: A
+            question_text: Який вихід Hedy при запуску цього коду?
+            code: '{print} 2*10'
+            question_score: '10'
+        5:
+            mp_choice_options:
+            -   feedback: На жаль, це не дивно.
+                option: 5 доларів
+            -   option: 10 доларів
+                feedback: Ні, це 10 доларів.
+            -   option: 15 доларів
+                feedback: '* означає багатозастосування.'
+            -   option: 50 доларів
+                feedback: Чудово!
+            question_text: Якщо 5 людей їсти в цьому ресторані, скільки потрібно оплатити всього?
+            code: "{print} 'Для богів! Р\nлюди = {ask} \"Як багато людей їдуть з нами на ніч? Р\nціна = люди * 10\n{print} 'Тай буде ' ціна 'доллар будь ласка Р"
+            hint: '`price` `is` `people` `times` 10'
+            correct_answer: D
+            question_score: '10'
+        4:
+            mp_choice_options:
+            -   option: '30'
+                feedback: Розум, Він також друкує "Ваша щаслива кількість... Р
+            -   option: '10'
+                feedback: Будь ласка, спробуйте знову.
+            -   option: Ваш щасливий номер... 30
+                feedback: Це вірно!
+            -   feedback: Її Удачливий номер є час...
+                option: Ваш щасливий номер... 30
+            question_score: '10'
+            code: "name = {ask} \"Як багато літер у Вашому імені? Р\nВік = {ask} \"Як старі? Р\nУдачливий * номер\n{print} 'Ваша щаслива кількість...' Удачливий"
+            question_text: Кім - 10 років. Що буде друкувати для неї?
+            hint: 'Кім має 3 листи, вона 10 років тому: літери раз віку = 3 * 10 = 30.'
+            correct_answer: C
     7:
         1:
             mp_choice_options:
