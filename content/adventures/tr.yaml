@@ -58,17 +58,17 @@ adventures:
                 example_code: |
                     ```
                     hayvanlar {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Şimdi şunun sesini duyuyor: bir hayvanlar {at} {random}
+                    {print} Şimdi hayvaların sesini duyuyorlar {at} {random}
                     ```
                 story_text_2: |
                     Hikayenizde `{add}` komutu da kullanışlı olabilir.
                 example_code_2: |
                     ```
-                    {print} Bir ses duyuyor
+                    {print} Bir ses duyarlar
                     hayvanlar {is} 🐿, 🦔, 🦇, 🦉
                     hayvan {is} {ask} Ne olduğunu düşünüyorsun?
                     {add} hayvan {to_list} hayvanlar
-                    {print} bu bir hayvanlar {at} {random}
+                    {print} bu bir hayvan {at} {random}
                     ```
                 story_text_3: |
                     Bu, hikayenizdeki `{remove}` komutunun bir örneğidir
@@ -278,7 +278,7 @@ adventures:
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: ekle_çıkar_komutu
-        description: ekle şuraya ve çıkar şuradan komutlarına giriş
+        description: '{add} {to_list} ve {remove} {from} giriş'
         levels:
             3:
                 story_text: |
@@ -396,6 +396,7 @@ adventures:
                     isim = {input}('Senin adın ne?')
                     {print}('Demek senin ismin ', isim)
                     ```
+        name: sor
     blackjack:
         name: Yirmibir
         default_save_name: Yirmibir
