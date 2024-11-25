@@ -3204,7 +3204,8 @@ if __name__ == '__main__':
     app.config.update(
         SERVER_NAME=config['domain_name'],
         SESSION_COOKIE_DOMAIN=config['domain_name'],
-        SESSION_COOKIE_SAMESITE="Strict"
+        SESSION_COOKIE_SAMESITE="Strict",
+        SESSION_COOKIE_NAME="n_session"
     )
     # Set some default environment variables for development mode
     env_defaults = dict(

@@ -103,6 +103,7 @@ class AuthModule(WebsiteModule):
             httponly=True,
             secure=is_heroku(),
             samesite="Strict",
+            domain=config["domain_name"],
             path="/",
             max_age=365 * 24 * 60 * 60,
         )
@@ -205,6 +206,7 @@ class AuthModule(WebsiteModule):
             secure=is_heroku(),
             samesite="Strict",
             path="/",
+            domain=config["domain_name"],
             max_age=365 * 24 * 60 * 60,
         )
 
