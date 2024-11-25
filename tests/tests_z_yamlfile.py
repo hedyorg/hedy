@@ -45,72 +45,128 @@ class TestYamlFile(unittest.TestCase):
     # Merging of YAML content
     # Key of type dict
     def test_merge_dicts_prefers_source(self):
-        result = YamlFile.merge_yaml({"key1": "source"}, {"key1": "fallback"})
+        result = YamlFile.validate_and_merge_yaml({"key1": "source"}, {"key1": "fallback"})
         self.assertEqual({"key1": "source"}, result)
 
     def test_merge_dicts_uses_fallback_if_source_key_not_present(self):
-        result = YamlFile.merge_yaml({}, {"key1": "fallback"})
+        result = YamlFile.validate_and_merge_yaml({}, {"key1": "fallback"})
         self.assertEqual({"key1": "fallback"}, result)
 
     def test_merge_dicts_skips_key_if_not_present_in_fallback_empty(self):
-        result = YamlFile.merge_yaml({"key1": "source"}, {})
+        result = YamlFile.validate_and_merge_yaml({"key1": "source"}, {})
         self.assertEqual({}, result)
 
     def test_merge_dicts_skips_key_if_not_present_in_fallback(self):
-        result = YamlFile.merge_yaml({"key2": "source"}, {"key1": "fallback"})
+        result = YamlFile.validate_and_merge_yaml({"key2": "source"}, {"key1": "fallback"})
         self.assertEqual({"key1": "fallback"}, result)
 
     # Key of type list
     def test_merge_lists_prefers_source(self):
-        result = YamlFile.merge_yaml({"key1": ["a", "b"]}, {"key1": ["c", "d"]})
+        result = YamlFile.validate_and_merge_yaml({"key1": ["a", "b"]}, {"key1": ["c", "d"]})
         self.assertEqual({"key1": ["a", "b"]}, result)
 
     def test_merge_lists_skips_key_if_not_present_in_fallback(self):
-        result = YamlFile.merge_yaml({"key1": ["a", "b"]}, {})
+        result = YamlFile.validate_and_merge_yaml({"key1": ["a", "b"]}, {})
         self.assertEqual({}, result)
 
     def test_merge_lists_uses_fallback_if_source_key_not_present_empty(self):
-        result = YamlFile.merge_yaml({}, {"key1": ["c", "d"]})
+        result = YamlFile.validate_and_merge_yaml({}, {"key1": ["c", "d"]})
         self.assertEqual({"key1": ["c", "d"]}, result)
 
     def test_merge_lists_uses_fallback_if_source_key_not_present(self):
-        result = YamlFile.merge_yaml({"key2": ["a", "b"]}, {"key1": ["c", "d"]})
+        result = YamlFile.validate_and_merge_yaml({"key2": ["a", "b"]}, {"key1": ["c", "d"]})
         self.assertEqual({"key1": ["c", "d"]}, result)
 
     # Elements in list
     def test_merge_lists_values_prefers_source(self):
-        result = YamlFile.merge_yaml({"key1": [None, "b"]}, {"key1": ["c", "d"]})
+        result = YamlFile.validate_and_merge_yaml({"key1": [None, "b"]}, {"key1": ["c", "d"]})
         self.assertEqual({"key1": ["c", "b"]}, result)
 
     def test_merge_lists_values_uses_fallback_if_value_is_empty(self):
-        result = YamlFile.merge_yaml({"key1": ["", "b"]}, {"key1": ["c", "d"]})
+        result = YamlFile.validate_and_merge_yaml({"key1": ["", "b"]}, {"key1": ["c", "d"]})
         self.assertEqual({"key1": ["c", "b"]}, result)
 
     def test_merge_lists_values_prefers_len_of_fallback(self):
-        result = YamlFile.merge_yaml({"key1": ["a", "b", "e"]}, {"key1": ["c", "d"]})
+        result = YamlFile.validate_and_merge_yaml({"key1": ["a", "b", "e"]}, {"key1": ["c", "d"]})
         self.assertEqual({"key1": ["a", "b"]}, result)
 
     def test_merge_lists_values_prefers_source_values(self):
-        result = YamlFile.merge_yaml({"key1": ["a"]}, {"key1": ["c", "d"]})
+        result = YamlFile.validate_and_merge_yaml({"key1": ["a"]}, {"key1": ["c", "d"]})
         self.assertEqual({"key1": ["a", "d"]}, result)
 
     # Keys with mismatched types
     def test_merge_dicts_prefers_fallback_type_dict(self):
-        result = YamlFile.merge_yaml({"key1": ["a", "b"]}, {"key1": {"a": "c", "b": "d"}})
+        result = YamlFile.validate_and_merge_yaml({"key1": ["a", "b"]}, {"key1": {"a": "c", "b": "d"}})
         self.assertEqual({"key1": {"a": "c", "b": "d"}}, result)
 
     def test_merge_dicts_prefers_fallback_type_str(self):
-        result = YamlFile.merge_yaml({"key1": ["a", "b"]}, {"key1": "string value"})
+        result = YamlFile.validate_and_merge_yaml({"key1": ["a", "b"]}, {"key1": "string value"})
         self.assertEqual({"key1": "string value"}, result)
 
     def test_merge_dicts_prefers_fallback_type_list(self):
-        result = YamlFile.merge_yaml({"key1": {"a": "c", "b": "d"}}, {"key1": ["a", "b"]})
+        result = YamlFile.validate_and_merge_yaml({"key1": {"a": "c", "b": "d"}}, {"key1": ["a", "b"]})
         self.assertEqual({"key1": ["a", "b"]}, result)
 
     def test_merge_dicts_prefers_fallback_type_string(self):
-        result = YamlFile.merge_yaml({"key1": {"a": "c", "b": "d"}}, {"key1": "string value"})
+        result = YamlFile.validate_and_merge_yaml({"key1": {"a": "c", "b": "d"}}, {"key1": "string value"})
         self.assertEqual({"key1": "string value"}, result)
 
     def test_merge_dicts_prefers_fallback_type_bool(self):
-        result = YamlFile.merge_yaml({"key1": True}, {"key1": "string value"})
+        result = YamlFile.validate_and_merge_yaml({"key1": True}, {"key1": "string value"})
         self.assertEqual({"key1": True}, result)
+
+    def test_process_html_content_dict(self):
+        result = YamlFile.validate_and_merge_yaml({"key1": 'clean content'}, {"key1": 'fallback'})
+        self.assertEqual({"key1": 'clean content'}, result)
+
+    def test_process_html_content_dict_invalid(self):
+        result = YamlFile.validate_and_merge_yaml(
+            {"key1": '<a href="//bad.com"></a>'},
+            {"key1": 'fallback'})
+        self.assertEqual({"key1": 'fallback'}, result)
+
+    def test_process_html_content_nested_dict_invalid(self):
+        result = YamlFile.validate_and_merge_yaml(
+            {"key1": {"key2": '<a href="//bad.com"></a>'}},
+            {"key1": {"key2": 'fallback'}})
+        self.assertEqual({"key1": {"key2": 'fallback'}}, result)
+
+    def test_process_html_content_dict_partial_invalid(self):
+        result = YamlFile.validate_and_merge_yaml(
+            {"key1": '<a #HREF_DISCORD_SERVER#></a>', "key2": '<a href="//bad.com"></a>'},
+            {"key1": '<a #HREF_DISCORD_SERVER#></a>', "key2": 'fallback'})
+        self.assertEqual({"key1": '<a href="https://discord.gg/8yY7dEme9r"></a>', "key2": 'fallback'}, result)
+
+    def test_process_html_content_list_partial_invalid(self):
+        result = YamlFile.validate_and_merge_yaml(
+            ['<a #HREF_DISCORD_SERVER#></a>', '<a href="//bad.com"></a>'],
+            ['<a #HREF_DISCORD_SERVER#></a>', 'fallback'])
+        self.assertEqual(['<a href="https://discord.gg/8yY7dEme9r"></a>', 'fallback'], result)
+
+    def test_process_html_content_bool(self):
+        result = YamlFile.validate_and_merge_yaml(True, False)
+        self.assertEqual(True, result)
+
+    # def test_process_html_content_bool(self):
+    #     result = YamlFile.process_html_content({"key1": True})
+    #     self.assertEqual({"key1": True}, result)
+    #
+    # def test_process_html_content_dict(self):
+    #     result = YamlFile.process_html_content({"key1": {'key2': 'test'}})
+    #     self.assertEqual({"key1": {'key2': 'test'}}, result)
+    #
+    # def test_process_html_content_list(self):
+    #     result = YamlFile.process_html_content({"key1": ['one', 'two', 'three']})
+    #     self.assertEqual({"key1": ['one', 'two', 'three']}, result)
+    #
+    # def test_process_html_content_string_with_anchor(self):
+    #     result = YamlFile.process_html_content({"key1": 'this <a href="//test.com">video</a>'})
+    #     self.assertEqual({"key1": 'this &lt;a href="//test.com"&gt;video&lt;/a&gt;'}, result)
+    #
+    # def test_process_html_content_string_with_script(self):
+    #     result = YamlFile.process_html_content({"key1": 'this <script>hello</script>'})
+    #     self.assertEqual({"key1": 'this &lt;script&gt;hello&lt;/script&gt;'}, result)
+
+    # def test_process_html_content_string_with_md_link(self):
+    #     result = YamlFile.process_html_content({"key1": 'this [video](//test.com).'})
+    #     self.assertEqual({"key1": r'this \[video]\(//test.com).'}, result)

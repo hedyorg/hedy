@@ -11,6 +11,7 @@ from ruamel import yaml
 
 from utils import atomic_write_file
 from flask import has_request_context, g
+from website.flask_helpers import validate_content
 
 yaml_loader = yaml.YAML(typ="safe", pure=True)
 logger = logging.getLogger(__name__)
@@ -135,9 +136,11 @@ class YamlFile:
         base_filename = path.join(path.dirname(self.filename), 'en.yaml')
         if self.filename != base_filename:
             base_file = self._load_yaml(base_filename)
-            merged = self.merge_yaml(file, base_file)
-            return merged
-        return file
+        else:
+            # when the file is 'en.yaml' we don't need to merge, but we still need to perform the validation
+            base_file = file
+        merged = self.validate_and_merge_yaml(file, base_file)
+        return merged
 
     def _load_yaml(self, filename):
         try:
@@ -147,7 +150,7 @@ class YamlFile:
             return {}
 
     @staticmethod
-    def merge_yaml(source, fallback):
+    def validate_and_merge_yaml(source, fallback):
         """Merge the language file with the fallback file.
 
         The source yaml is merged with the fallback yaml, so that the values missing in the source are taken from
@@ -159,18 +162,44 @@ class YamlFile:
                 return fallback
             for key, value in source.items():
                 if key in fallback:
-                    returned = YamlFile.merge_yaml(value, fallback.get(key))
+                    returned = YamlFile.validate_and_merge_yaml(value, fallback.get(key))
                     fallback[key] = returned
         elif source and isinstance(source, list):
             if not isinstance(fallback, list):
                 return fallback
             for i, value in enumerate(source):
                 if i < len(fallback):
-                    returned = YamlFile.merge_yaml(value, fallback[i])
+                    returned = YamlFile.validate_and_merge_yaml(value, fallback[i])
                     fallback[i] = returned
-        else:
-            return source if source else fallback
+        elif source:
+            if isinstance(source, str):
+                has_valid_content, content = validate_content(source)
+                if not has_valid_content:
+                    return content
+            else:
+                return source
+        if isinstance(fallback, str):
+            _, content = validate_content(fallback)
+            return content
         return fallback
+
+    # @staticmethod
+    # def process_html_content(tree):
+    #     if tree and isinstance(tree, dict):
+    #         for key, value in tree.items():
+    #             returned = YamlFile.process_html_content(value)
+    #             tree[key] = returned
+    #     elif tree and isinstance(tree, list):
+    #         for i, value in enumerate(tree):
+    #             returned = YamlFile.process_html_content(value)
+    #             tree[i] = returned
+    #     else:
+    #         if isinstance(tree, str):
+    #             _, escaped = validate_content(tree)
+    #             return escaped
+    #         else:
+    #             return tree
+    #     return tree
 
     def _file_timestamp(self, filename):
         try:
