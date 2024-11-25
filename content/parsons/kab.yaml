@@ -47,6 +47,7 @@ levels:
                         {print} 'D amahil igerrzeb!'
                     {else}
                         {print} 'Ala! Tiririt igerrzen d ' tgerrez_tririt
+            story: Urar-a ad ak-imudd kraḍet n yisteqdiyen n tusnakt. Yal tikelt asteqsi yemgarad. Tzemreḍ ad d-tafeḍ amizwer ilaqen?
     10:
         1:
             code: |-
@@ -85,3 +86,21 @@ levels:
     2:
         1:
             story: "Kečč d yimeddukkal-ik tebɣam ad twalim tura asaru deg Netflix.\nSken isem n usarau ara twalim, tessarmeḍ i wid ara inezhen ad asen-yeεǧeb!"
+    7:
+        2:
+            code: "{print} 'ṛṛwadi n usakal tteddun'\n{repeat} 3 {times} {print} 'dewwiṛent, dewwiṛent'\n{print} 'ṛṛwadi n usakal dewwiṛent, dewwiṛent'\n{print} 'deg meṛṛa tamdint'"
+            story: Rnu taɣect 'Ṛṛwadi n usakal dewwiṛent, dewwiṛent'
+        1:
+            story: Fak tizlit-nni n Baby Shark. Agrud Awqas yettas-d d amezwaru, syin yemma Tawqast, aneggaru d baba Awqas.
+            code: "{repeat} 3 {times} {print} 'Agrud awqas tututututudu'\n{print} 'Agrud awqas'\n{repeat} 3 {times} {print} 'Yemma tawqast tututututudu'\n{print} 'Yemma tawqast'\n{repeat} 3 {times} {print} 'Baba awqas tututututudu'\n{print} 'Baba awqas'"
+    6:
+        1:
+            code: "age = {ask} 'How old are you?'\ndog_age = age * 7\ncat_age = age * 5\n{print} 'In dog years you are ' dog_age ' years old.'\n{print} 'In cat years you are ' cat_age ' years old.'"
+        2:
+            story: Snulfu-d ahil ara k-iεawnen ad tḥesbeḍ acḥal n lgaṭu i ilaq ad d-taɣeḍ i tmeɣra n umulli-k.
+            code: "{print} 'It is your birthday!'\npeople = {ask} 'How many people do you want to give a slice of cake?'\ncakes_amount = people/8\n{print} 'You will have to buy ' cakes_amount ' cakes'"
+    12:
+        2:
+            story: Urar yid-neɣ urar n Twister! Bdu s usbadu n umutti "imdanen", syen iεeggalen, deg taggara d "initen".
+        1:
+            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'"

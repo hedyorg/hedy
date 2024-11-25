@@ -938,19 +938,26 @@ levels:
             -   feedback: Це ціна за гамбургер і картопля!
                 option: 21 доларів
             code: "{print} 'Велком в Hedys diner Р\nїжа = {ask} 'Що б ви хотіли б їсти? Р\nціна = 0\n{if} їжа {is} гамбургер ціна = 15\n{if} їжа {is} фрі Ціна = 6"
+            hint: Розуміть четверту лінію.
+            correct_answer: A
+            question_score: '10'
         10:
             code: |-
-                name _?_ Hedy
-                {print} name 'is walking trough the forrest'
+                ім'я _ Hedy
+                {print} ім'я 'is go trough the forrest Р
             mp_choice_options:
-            -   option: You can only fill in the word is on the `_?_`
-                feedback: You are allowed to use the `=` sign as well
-            -   option: You can fill in either the word is or the `=` sign on the `_?_`
-                feedback: Amazing!
-            -   option: You have to fill in =is= on the `_?_`
-                feedback: No, one `=` sign is enough
-            -   option: You can only use the `=` sign when working with numbers, not with words.
-                feedback: You can also use `=` with words.
+            -   option: Ви можете заповнити слово на `_`
+                feedback: Ви маєте право використовувати знак `=`, а також
+            -   option: Ви можете заповнити слово або знак `=` на `_`
+                feedback: Дивовижна!
+            -   option: Вам потрібно заповнити =is= на `_`
+                feedback: Ні, один `=` знак досить
+            -   option: Ви можете використовувати тільки знак `=` при роботі з цифрами, а не словами.
+                feedback: Ви також можете використовувати `=` з словами.
+            correct_answer: B
+            question_score: '10'
+            hint: '`{is}` і `=` обох дозволених'
+            question_text: Яка заява правда?
         2:
             mp_choice_options:
             -   option: '`-`'
@@ -1025,90 +1032,176 @@ levels:
             question_text: Кім - 10 років. Що буде друкувати для неї?
             hint: 'Кім має 3 листи, вона 10 років тому: літери раз віку = 3 * 10 = 30.'
             correct_answer: C
+        7:
+            mp_choice_options:
+            -   option: Це може бути `price = 3` так само, як і раніше.
+                feedback: Ні, що не вірно. Вінди необхідно додавати 3 долари до всього.
+            -   option: Бо він не розуміє `price = 3`.
+                feedback: Він не буде правим.
+            -   feedback: Це вірно!
+                option: Бо Вінди не забуває про попереднє замовлення. Ціна буде 3 долари в цілому.
+            -   option: Оскільки ціна 0 доларів для початку.
+                feedback: Це правда, але не причина
+            question_text: Чому лінія 7 кажуть «ціна ціна + 3» замість «ціна 3»?
+            correct_answer: C
+            question_score: '10'
+            code: "{print} 'Велком в Hedys diner Р\nїжа = {ask} 'Що б ви хотіли б їсти? Р\nціна = 0\n{if} їжа {is} гамбургер ціна = ціна + 15\n{if} їжа {is} фрі Ціна = ціна + 6\nнапої {ask} 'Що б ви хотіли б пити? Р\n{if} напої {is} кокс ціна = ціна + 3\n{if} напої {is} ціна води = ціна + 1\n{print} ціна ' доларів будь ласка Р"
+            hint: Ціна має бути не на 3, а на 3 долари більше, ніж була
+        8:
+            mp_choice_options:
+            -   option: Повинен бути вказаними в рядку 2
+                feedback: Ні, має бути!
+            -   feedback: Правильно!
+                option: Змінна називається правильною відповіддю, але ім’я змінної може складатися лише з 1 слова. Отже, має бути правильна_відповідь
+            -   feedback: Ні, що не вірно.
+                option: Команди `{if}` і `{else}` повинні бути в одній лінії.
+            -   feedback: Змінні імена можуть бути схожими, але вони не можуть бути 2 слова...
+                option: Змінна в рядку 2 не може бути викликана відповідь, тому що вона занадто схожа на змінну правильну відповідь.
+            question_text: Чому цей код невірно?
+            code: "відповідь = *12\nВідповідь = {ask} 'Що 3 рази 12? Р\n{if} відповідь {is} коректна відповідь {print} Найкраща робота Р\n{else} {print} 'No ... Це була вірна відповідь"
+            hint: Перевірте, які змінні називаються.
+            correct_answer: B
+            question_score: '10'
+        9:
+            hint: (2 банани + 3 гігієна) * 10 футбол = 5 * 10 =?
+            correct_answer: C
+            question_score: '10'
+            mp_choice_options:
+            -   feedback: (2 банани + 3 гігієна) * 10 футбол = 5 * 10 =?
+                option: 10%
+            -   option: 32%
+                feedback: (2 банани + 3 гігієна) * 10 футбол = 5 * 10 =?
+            -   option: 50%
+                feedback: Супер! Ви 100 відсотків смарт!
+            -   option: 100%
+                feedback: (2 банани + 3 гігієна) * 10 футбол = 5 * 10 =?
+            question_text: Уявіть, що ви любите футбол 10, ви їсти 2 банани і мити руки 3 рази сьогодні. Як смарт робить silly fortune скаже вам?
+            code: "{print} 'Ім Гейді silly fortune Р\n{print} 'Я продемонстрував, як смарт ви! Р\nfootball = {ask} 'На масштабі 0 до 10, скільки ви любите футбол? Р\nбанани = {ask} 'Як багато бананів ви їсти на цьому тижні? Р\nгігієна = {ask} 'Як багато разів ви вимити руки сьогодні?? Р\nрезультат = банани + гігієна\nрезультат = результат * футбол\n{print} 'Ви '' результат ''scent smart. Р"
     7:
         1:
             mp_choice_options:
             -   option: '0'
-                feedback: No you can repeat a line.
+                feedback: Не можна повторювати рядок.
             -   option: '1'
-                feedback: Correct, one line at a time
-            -   option: '2'
-                feedback: In this level only one line at a time
-            -   option: infinite
-                feedback: In this level you can only repeat one line at a time
-            hint: You can only repeat 1 line at a time
+                feedback: Правильний, один рядок в часі
+            -   option: '3'
+                feedback: У цьому рівні тільки одна лінія в часі
+            -   option: нескінченний
+                feedback: У цьому рівні можна повторити лише одну лінію в часі
+            hint: Ви можете повторити одну лінію в часі
+            question_score: '10'
+            question_text: Скільки рядків можна повторити відразу з повтором команди на цьому рівні?
+            correct_answer: B
         2:
-            hint: First the repeat command, then the `{print}` command
+            hint: Перший команду `{repeat}`, потім команду `{print}`
+            mp_choice_options:
+            -   option: "й й\n{print} 100 {times} 'hello Р\nй й"
+                feedback: "`{repeat}` 100 `{times}` `{print}` 'hello Р"
+            -   option: "й й\n{print} {repeat} 100 {times} 'hello Р\nй й"
+                feedback: "{repeat} 100 {times} {print} 'hello Р"
+            -   feedback: "{repeat} 100 {times} {print} 'hello Р"
+                option: "й й\n{repeat} 'hello' 100 {times}\nй й"
+            -   option: "й й\n{repeat} 100 {times} {print} 'hello Р\nй й"
+                feedback: Це вірно!
+            question_score: '10'
+            question_text: Який код правильно?
+            correct_answer: D
         4:
             mp_choice_options:
             -   option: |-
-                    ```
-                    I'm
-                    ```
-                feedback: That's right!
+                    `I'm`
+                feedback: Це вірно!
             -   option: |-
                     ```
                     {print}
                     ```
-                feedback: '`{print}` is spelled correctly'
+                feedback: '`{print}` писався правильно'
             -   option: |-
                     ```
                     {repeat}
                     ```
-                feedback: '`{repeat}` is spelled correctly'
+                feedback: '`{repeat}` писався правильно'
             -   option: |-
                     ```
                     {times}
                     ```
-                feedback: '`{times}` is spelled correctly'
-            hint: I'm is wrong, you can't use apostrophes
+                feedback: '`{times}` писався правильно'
+            hint: Я невірно, ви не можете використовувати апотрофії у вирокі
+            question_text: Яке слово неправильне в коді?
+            correct_answer: A
+            question_score: '10'
+            code: "{print} 'Я синий'\n{repeat} 7 {times} {print} 'da bae, da ba da'"
         6:
             mp_choice_options:
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                feedback: Only the second line is repeated 3 times
+                    й й
+                    колеса на автобусі
+                    круглий і круглий
+                    й й
+                feedback: Тільки другий рядок повторюється 3 рази
             -   option: |-
-                    the wheels on the bus go
-                    the wheels on the bus go
-                    the wheels on the bus go
-                    round and round
-                feedback: Only the second line is repeated 3 times
+                    й й
+                    колеса на автобусі
+                    колеса на автобусі
+                    колеса на автобусі
+                    круглий і круглий
+                    й й
+                feedback: Тільки другий рядок повторюється 3 рази
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                    the wheels on the bus go
-                    round and round
-                    the wheels on the bus go
-                    round and round
-                feedback: Only the second line is repeated 3 times
+                    й й
+                    колеса на автобусі
+                    круглий і круглий
+                    колеса на автобусі
+                    круглий і круглий
+                    колеса на автобусі
+                    круглий і круглий
+                    й й
+                feedback: Тільки другий рядок повторюється 3 рази
             -   option: |-
-                    the wheels on the bus go
-                    round and round
-                    round and round
-                    round and round
-                feedback: All though the town! Perfect!
+                    й й
+                    колеса на автобусі
+                    круглий і круглий
+                    круглий і круглий
+                    круглий і круглий
+                    й й
+                feedback: Все через місто! Дорогі!
+            hint: Тільки «круглий і круглий» повторюється 3 рази.
+            question_text: Що буде вихід з цього коду?
+            correct_answer: D
+            code: "{print} «Кільки на автобусі йдуть»\n{repeat} 3 {times} {print} ' круглий і круглий Р"
+            question_score: '10'
         7:
             mp_choice_options:
             -   option: |-
-                    We will We will
-                    ROCK YOU!
-                feedback: '''We will'' won''t appear twice in the same line'
+                    й й
+                    Ми будемо
+                    РОКУ ВАМ!
+                    й й
+                feedback: '''Ми не будемо з''являтися двічі в одному рядку'
             -   option: |-
-                    We will
-                    We will
-                    ROCK YOU!
-                feedback: Great!
+                    й й
+                    Ми будемо
+                    РОКУ ВАМ!
+                    й й
+                feedback: Чудово!
             -   option: |-
-                    We will
-                    ROCK YOU!
-                    We will
-                    ROCK YOU!
-                feedback: ROCK YOU! won't be repeated
+                    й й
+                    Ми будемо
+                    РОКУ ВАМ!
+                    Ми будемо
+                    РОКУ ВАМ!
+                    й й
+                feedback: РОКУ ВАМ! не повторюється
             -   option: |-
-                    We will
-                    ROCK YOU!
-                feedback: Mind the repeat command
+                    й й
+                    Ми будемо
+                    РОКУ ВАМ!
+                feedback: Mind the `{repeat}` команда
+            hint: Розуміть команду `{repeat}`.
+            code: "{repeat} 2 {times} {print} \"Ми будемо\"\n{print} РОКУ ВАМ! Р"
+            question_score: '10'
+            question_text: Що буде вихід з цього коду?
+            correct_answer: B
         8:
             mp_choice_options:
             -   option: |-
@@ -1119,13 +1212,13 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: Awesome, you can't use the `{repeat}` command here.
+                feedback: Ви не можете використовувати команду `{repeat}`.
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
                     {print} 'And I say'
                     {print} 'Its alright'"
-                feedback: Where did you leave 'Do do do do'?
+                feedback: Де ви залишаєте "Чому робити"?
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1133,7 +1226,7 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'
                     ```
-                feedback: This is not the correct order..
+                feedback: Це не правильне замовлення.
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'Here comes the sun'
@@ -1141,7 +1234,12 @@ levels:
                     {print} 'And I say'
                     {print} 'Its alright'"
                     ```
-                feedback: This is not the correct order..
+                feedback: Це не правильне замовлення.
+            question_score: '10'
+            hint: '`{repeat}` можна використовувати лише якщо ви хочете виконати однакову лінію кілька разів поспіль.'
+            correct_answer: A
+            question_text: Який код Hedy належить до цього виходу?
+            code: "Ось сонце\nЗробити це\nОсь сонце\nІ я кажу\nЙого шлях"
         9:
             mp_choice_options:
             -   option: |-
@@ -1151,7 +1249,7 @@ levels:
                     {print} 'Help!'
                     {repeat} 3 {times} {print} 'Please help me!'
                     ```
-                feedback: Your repeated line is incorrect.
+                feedback: Ваш повторний рядок невірний.
             -   option: |-
                     ```
                     {print} 'Batman was flying through Gotham.'
@@ -1159,7 +1257,7 @@ levels:
                     {repeat} 3 {times} 'Help!'
                     {print} 'Please help me!'
                     ```
-                feedback: The `{print}` command is missing on line 3.
+                feedback: Команда `{print}` відсутня на лінії 3.
             -   option: |-
                     ```
                     {print} Batman was flying through Gotham.
@@ -1167,7 +1265,7 @@ levels:
                     {repeat} 3 {times} {print} Help!
                     {print} Please help me!
                     ```
-                feedback: You're missing the quotation marks
+                feedback: Відсутні ціни
             -   option: |-
                     ```
                     {print} 'Batman was flying through Gotham.'
@@ -1175,9 +1273,14 @@ levels:
                     {repeat} 3 {times} {print} 'Help!'
                     {print} 'Please help me!'
                     ```
-                feedback: Perfect
+                feedback: Чудово
+            hint: "'Help!' повторюється 3 рази."
+            question_text: Який код Hedy належить до цього виходу?
+            code: "Бетмен був літати через Готам.\nКоли раптом почув когось кричу...\nДопомога\nДопомога\nДопомога\nБудь ласка, зв'яжіться з нами!"
+            correct_answer: D
+            question_score: '10'
         10:
-            question_text: What Hedy code belongs to this output?
+            question_text: Який код належить до цього виходу?
             mp_choice_options:
             -   option: |-
                     ```
@@ -1185,20 +1288,20 @@ levels:
                     {print} 'if youre happy and you know it and you really want to show it'
                     {print} 'if youre happy and you know it clap your hands'
                     ```
-                feedback: Almost! the first line needs an extra word
+                feedback: Потрібні! Перший рядок потребує додаткового слова
             -   option: |-
                     ```
                     {repeat} 2 {times} {print} 'if youre happy and you know it clap your hands'
                     {print} 'if youre happy and you know it and you really want to show it'
                     {print} 'if youre happy and you know it clap your hands'
                     ```
-                feedback: Great!
+                feedback: Чудово!
             -   option: |-
                     ```
                     {repeat} 3 {times} {print} 'if youre happy and you know it clap your hands'
                     {print} 'if youre happy and you know it and you really want to show it'
                     ```
-                feedback: This is not in the right order.
+                feedback: Це не в правому порядку.
             -   option: |-
                     ```
                     {repeat} 4 {times} 'if youre happy and you know it'
@@ -1206,47 +1309,87 @@ levels:
                     {print} 'and you really want to show it'
                     {print} 'clap your hands'
                     ```
-                feedback: This is not in the right order.
+                feedback: Це не в правому порядку.
+            question_score: '10'
+            code: "якщо ви щасливі, і ви знаєте, що це клапти руки\nякщо ви щасливі, і ви знаєте, що це клапти руки\nякщо ви щасливі і ви знаєте, що ви дійсно хочете показати його\nякщо ви щасливі, і ви знаєте, що це клапти руки"
+            hint: Розумити порядок вироків.
+            correct_answer: B
+        3:
+            mp_choice_options:
+            -   option: правильно
+                feedback: Ні, слово відсутні
+            -   option: Wrong, слово `{repeat}` відсутні
+                feedback: Слово `{repeat}` є там, інший слово відсутні
+            -   option: Wrong, слово `{times}` відсутні
+                feedback: Слово `{times}` є, інший слово відсутній.
+            -   feedback: Правильно
+                option: Wrong, слово `{print}` відсутні
+            question_text: Чи є цей код правильно або неправильно?
+            question_score: '10'
+            code: "{repeat} 100 {times} 'Привіт! Р"
+            correct_answer: D
+            hint: "`{repeat}` 100 `{times}` `{print}` 'Hello Р"
+        5:
+            question_score: '10'
+            mp_choice_options:
+            -   option: Правильно
+                feedback: Це вірно!
+            -   feedback: Це не так
+                option: неправильно
+            question_text: Чи є цей код правильно або неправильно?
+            code: '{repeat} 100 {times} {print} "Хеді чудова!"'
+            hint: Код правильний!
+            correct_answer: A
     8:
         1:
             mp_choice_options:
             -   option: |-
                     Hello
                     Im Hedy!
-                feedback: Everything is printed twice.
+                feedback: Все друкується двічі.
             -   option: |-
                     Hello
                     Hello
                     Im Hedy
-                feedback: The second line is repeated twice as well.
+                feedback: Друга лінія повторюється двічі.
             -   option: |-
                     Hello
                     Im Hedy!
                     Hello
                     Im Hedy!
-                feedback: Super!
+                feedback: супер!
             -   option: |-
                     Hello
                     Hello
                     Im Hedy!
                     Im Hedy!"
-                feedback: Everything is printed twice
+                feedback: Все друкується двічі
+            correct_answer: C
+            code: "{repeat} 2 {times}\n{print} 'Hello Р\n{print} 'Im Hedy! Р"
+            hint: Обидві лінії повторюються двічі.
+            question_score: '10'
+            question_text: Який вихід буде виробляти цей код?
         2:
             mp_choice_options:
-            -   option: This should be only one line, not 2.
-                feedback: No it should be 2 lines.
+            -   option: Це повинно бути тільки один рядок, не 2.
+                feedback: Не повинно бути 2 лінії.
             -   option: Ця команда `{print}` має бути видалена.
-                feedback: No, you need it.
-            -   option: There is a spelling mistake in the `{repeat}` command.
-                feedback: Nee, repeat is de goede spelling
-            -   option: The second line need to start with 4 spaces as indentation.
-                feedback: Correct!
+                feedback: Ні, вам потрібно.
+            -   option: У команди `{repeat}` є помилка.
+                feedback: Ні, `{repeat}` є правильним написанням
+            -   option: Друга лінія повинна починатися з 4 просторів як відступу.
+                feedback: Правильно!
+            correct_answer: D
+            question_score: '10'
+            question_text: Що неправильно з цим кодом?
+            code: "{repeat} 5 {times}\n{print} \"Хто круто! Р"
+            hint: Хтось відсутній у другому рядку?
         3:
             mp_choice_options:
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark
-                feedback: Mind the `{repeat}` command!
+                feedback: Розуміть команду `{repeat}`!
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark
@@ -1254,103 +1397,182 @@ levels:
                     Baby shark
                     Baby shark tututudutudu
                     Baby shark
-                feedback: The last line has no indentation, so it's not repeated.
+                feedback: Остання лінія не відступає, тому не повторюється.
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark tututudutudu
                     Baby shark tututudutudu
                     Baby shark
-                feedback: Right!
+                feedback: Право!
             -   option: |-
                     Baby shark tututudutudu
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: What is being repeated and what isn't.
-            hint: What is being repeated and what is not?.
+                feedback: Що таке повторне і що не ?
+            hint: Що таке повторне і що це не?
+            question_text: Який вихід буде вироблятися при запуску цієї програми?
+            code: "{repeat} 3 {times}\n{print} 'Baby shark tutudutudutudutudutudutudu Р\n{print} 'Baby shark Р"
+            correct_answer: C
+            question_score: '10'
         4:
             code: |-
-                {print} 'The children went:'
+                {print} 'Діти пішли:'
                 {repeat} 2 {times}
-                    {print} 'Yay!'
-                    {print} 'Were going on holiday!'
+                {print} 'Яй! Р
+                {print} 'Ми йдемо на відпочинок! Р
             mp_choice_options:
             -   option: |-
                     The children went:
                     Yay!
                     Were going on holiday!
-                feedback: Mind the `{repeat}` command!
+                feedback: Зверніть увагу на команду `{repeat}`!
             -   option: |-
                     The children went:
                     Yay!
                     Were going on holiday!
                     Yay!
                     Were going on holiday!
-                feedback: Correct!
+                feedback: Правильно!
             -   option: |-
                     The children went:
                     Yay!
                     Yay!
                     Were going on holiday!
                     Were going on holiday!
-                feedback: This order is incorrect.
+                feedback: Це замовлення невірно.
             -   option: |-
                     The children went:
                     Yay!
                     Yay!
                     Were going on holiday!
-                feedback: The last line is repeated too.
+                feedback: Остання лінія повторюється.
+            hint: Блок під командуванням `{repeat}` повторюється двічі.
+            question_score: '10'
+            question_text: Який вихід правильний?
+            correct_answer: B
         5:
             mp_choice_options:
-            -   option: The `{print}` commands on the last two lines should start on new lines en start with 4 spaces.
-                feedback: That's right!
-            -   option: '`{else}` is not a command!'
-                feedback: It is!
-            -   option: Lines that start with `{if}` should start with 4 spaces
-                feedback: That's not true
-            -   option: '`{ask}` is no longer a command'
-                feedback: That's not true
+            -   option: Команди `{print}` на останніх двох лініях повинні початися на нових лініях і почати з 4 просторів.
+                feedback: Це вірно!
+            -   option: '`{else}` не команда!'
+                feedback: Це!
+            -   option: Лінії, які починаються з `{if}`, повинні почати з 4 просторів
+                feedback: Не вірно
+            -   option: '`{ask}` більше команди'
+                feedback: Не вірно
+            question_score: '10'
+            correct_answer: A
+            hint: Щось неправильно з відступом
+            question_text: Що неправильно з цим кодом?
+            code: "end = {ask} 'Ви хочете щасливий або сумний кінець? Р\n{if} кінець {is} щасливий {print} 'Тай жив щасливо коли-небудь після'\n{else} {print} 'Світ вибухнув. Кінець. Р"
         7:
             code: |-
-                eten = {ask} 'What would you like to eat?'
-                {if} food {is} fries
-                sauce = {ask} 'What sauce would you like?'
-                    {print} 'One fries with ' sauce
-                {if} food {is} pizza
-                    topping = {ask} 'What topping would you like?'
-                    {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                їжа = {ask} 'Що б ви хотіли б їсти? Р
+                {if} їжа {is} картопля
+                соус = {ask} «Що б ви хотіли б? Р
+                {print} «Одно картопля з соусом «
+                {if} їжа {is} піца
+                topping = {ask} 'Що б ви хотіли б? Р
+                {print} "Одна піца з "підготовкою"
+                {print} 'Дякуй за замовлення Р
             mp_choice_options:
-            -   option: Nothing this code is correct!
-                feedback: Something is wrong!.
-            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!
-            -   option: You don't have to use indentation twice. Only in the first `{if}` command.
-                feedback: You always have to use indentation.
-            -   option: The indentation is wrong in the first `{if}` command.
-                feedback: That's right.
+            -   option: Ніщо. Цей код правильний!
+                feedback: Щось неправильно!
+            -   option: Ви не можете використовувати команду `{if}` після команди `{ask}`.
+                feedback: Ви!
+            -   option: Ви не повинні використовувати індентацію двічі. Тільки в першому `{if}` команди.
+                feedback: Ви завжди повинні використовувати відступ.
+            -   option: Виявлення неправильно в першому `{if}` команди.
+                feedback: Це вірно.
+            question_score: '10'
+            correct_answer: D
+            question_text: Що не так з цим кодом?
+            hint: Придбайте обережний погляд на відступ.
+        10:
+            mp_choice_options:
+            -   feedback: Не вірно
+                option: Всі лінії повинні починатися з 4 просторів
+            -   feedback: Не вірно
+                option: Лінія 2 і 3 повинні почати з 4 пробілів
+            -   feedback: Не вірно
+                option: Лінія 2 повинна починатися з 4 пробілів
+            -   option: Лінія 3 повинна починатися з 4 пробілів
+                feedback: Ви правильно!
+            question_score: '10'
+            correct_answer: D
+            question_text: Яка заява правда?
+            code: "1 рівень = {ask} \"Що ви на рівні? Р\n2 {if} рівень {is} 8\n3 {print} 'Велика робота! Р"
+            hint: Тільки один рядок починається з 4 просторів, але який один..?
+        9:
+            mp_choice_options:
+            -   feedback: Лінії після команди `{if}` та `{else}` повинні починатися з 4 просторів
+                option: Лінія 2 і 4
+            -   option: Тільки лінія 3
+                feedback: Не тільки 3 ...
+            -   option: Лінія 3, 4 та 5
+                feedback: Лінія 4 не повинна
+            -   option: Лінія 3 і 5
+                feedback: Great job!
+            question_text: Яка лінія (s) в цьому коді повинна початися з 4 просторів?
+            correct_answer: D
+            code: "1 музика = {ask} 'Що ваш улюблений музичний жанр? Р\n2 {if} музика {is} рок\n3 {print} '' Р\n4 {else}\n5 {print} '' Р"
+            question_score: '10'
+            hint: Лінії після команди `{if}` або `{else}` повинні починатися з 4 просторів.
+        6:
+            code: "{print} «Ласкаво просимо в ресторан Hedy»\n{repeat} 2 {times}\n    food {is} {ask} 'Що ти хочеш їсти?'\n    {print} їжа"
+            mp_choice_options:
+            -   option: "Ласкаво просимо до ресторану Геди\nМлинці"
+                feedback: Відповіді немає.
+            -   feedback: Ця відповідь також повторює вітання
+                option: "Ласкаво просимо до ресторану Геди\nЛаскаво просимо до ресторану Геди\nМлинці\nМлинці"
+            -   option: "Ласкаво просимо до ресторану Геди\nЩо потрібно їсти?\nЩо потрібно їсти?\nМлинці\nМлинці"
+                feedback: Потрібні! Але подивіться на питання, не повторюється.
+            -   option: "Ласкаво просимо до ресторану Геди\nМлинці\nМлинці"
+                feedback: Про нас!
+            question_text: Що буде вихід цього коду, коли ми вводимо млинці?
+            hint: Перше вирок і питання не буде повторюватися
+            correct_answer: D
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   option: "й й\n{if} відповідь {is} 32\n{print} 'Ви ... Р\n{sleep}\n{print} 'право! Р\n{else}\n{print} 'Ви неправильно! Р\nй й"
+                feedback: Ви неправильно!
+            -   option: "й й\n{if} відповідь {is} 32\n{print} 'Ви ... Р\n{sleep}\n{print} 'право! Р\n{else}\n{print} 'Ви неправильно! Р\nй й"
+                feedback: Ви неправильно!
+            -   feedback: Ви!
+                option: "й й\n{if} відповідь {is} 32\n{print} 'Ви ... Р\n{sleep}\n{print} 'право! Р\n{else}\n{print} 'Ви неправильно! Р\nй й"
+            -   feedback: Ви неправильно!
+                option: "й й\n{if} відповідь {is} 32\n{print} 'Ви ... Р\n{sleep}\n{print} 'право! Р\n{else}\n{print} 'Ви неправильно! Р\nй й"
+            correct_answer: C
+            question_text: У яких кодах є відмова?
+            hint: Що робити, якщо людина правий? А що ще?
+            question_score: '10'
     9:
         1:
             code: |-
                 {repeat} 3 {times}
-                   eten = {ask} 'What would you like to eat?'
-                   {if} food {is} fries
-                       sauce = {ask} 'What sauce would you like?'
-                       {print} 'One fries with ' sauce
-                   {if} food {is} pizza
-                       topping = {ask} 'What topping would you like?'
-                       {print} 'One pizza with ' topping
-                {print} 'That you for your order'
+                їжа = {ask} 'Що б ви хотіли б їсти? Р
+                {if} їжа {is} картопля
+                соус = {ask} «Що б ви хотіли б? Р
+                {print} 'Одно картопля з соусом '
+                {if} їжа {is} піца
+                topping = {ask} 'Що б ви хотіли б? Р
+                {print} 'Одна піца з 'підгортання
+                {print} 'Подаруйте замовлення Р
             mp_choice_options:
-            -   option: Nothing this code is correct!
-                feedback: That's right!.
-            -   option: You're not allowed to use an `{if}` command after an `{ask}` command.
-                feedback: You are!.
-            -   option: You don't have to use indentation twice.
-                feedback: You always have to use indentation.
-            -   option: The indentation is wrong in the last `{if}` command.
-                feedback: It not, though.
-            hint: all the indentation is done correctly.
+            -   option: Ніщо цей код правильний!
+                feedback: Це вірно!
+            -   option: Ви не можете використовувати команду `{if}` після команди `{ask}`.
+                feedback: Ви!
+            -   option: Ви не повинні використовувати індентацію двічі.
+                feedback: Ви завжди повинні використовувати відступ.
+            -   option: Виявлення неправильно в останній `{if}` команди.
+                feedback: Не відступає.
+            hint: Все відступ зроблено правильно.
+            question_text: Що не так з цим кодом?
+            question_score: '10'
+            correct_answer: A
         2:
             mp_choice_options:
             -   option: |-
@@ -1358,19 +1580,19 @@ levels:
                     Молодець!
                     Молодець!
                     ```
-                feedback: That's not it!
+                feedback: Це не так!
             -   option: |-
                     ```
                     Комп'ютер вибухне через 5... 4... 3... 2... 1...
                     ```
-                feedback: That's not it!
+                feedback: Це не так
             -   option: |-
                     ```
                     Молодець!
                     Молодець!
                     Можеш користуватися комп'ютером!
                     ```
-                feedback: That's not it!
+                feedback: Це не так!
             -   option: |-
                     ```
                     Молодець!
@@ -1378,43 +1600,65 @@ levels:
                     Молодець!
                     Ти можеш користуватися комп'ютером!
                     ```
-                feedback: Correct!
+                feedback: Правильно!
+            correct_answer: D
+            question_text: Що буде друкувати після введення правильний пароль?
+            code: "пароль = {ask} \"Що таке пароль? Р\nJavaScript licenses API Веб-сайт Геди\n{if} пароль {is} correct_password\n{repeat} 2 {times}\n{print} 'Добра робота! Р\n{print} \"Ви можете використовувати комп'ютер! Р\n{else}\n{print} 'У комп'ютері буде вибухнути в 5 ... 4... 3... 2... 1... Р"
+            hint: Все під командуванням `{repeat}` повторюється двічі.
+            question_score: '10'
         3:
             code: |-
-                {print} 'Choose the right case and win!'
-                case = {ask} 'Which case will you pick? 1 or 2?'
-                {if} case {is} 1
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell your case for 10 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win an apple pie'
-                {if} case {is} 2
-                     action = {ask} 'Open it or sell it?'
-                         {if} action {is} sell
-                             {print} 'You sell the case for 500 dollars'
-                         {if} action {is} open
-                             {print} 'You open the case and win a million dollars!'
+                {print} 'Вибрати правильний випадок і виграти! Р
+                Справа = {ask} 'Чижа вам забере? 1 або 2? Р
+                {if} корпус {is} 1 час
+                дію = {ask} 'Відкрити його або продати його? Р
+                {if} акція {is} продаж
+                {print} 'Ви продаєте свій чохол на 10 доларів Р
+                {if} дія {is} відкрита
+                {print} 'Ви відкриваєте чохол і виграйте яблучний пиріг'
+                {if} корпус {is} 2
+                дію = {ask} 'Відкрити його або продати його? Р
+                {if} дія {is} продаж
+                {print} 'Ви продаєте справу за 500 доларів Р
+                {if} дія {is} відкрита
+                {print} 'Ви відкриваєте кейс і виграйте мільйон доларів! Р
+            mp_choice_options:
+            -   option: корпус 1, продаж
+                feedback: Ви не можете виграти мільйон!
+            -   option: корпус 1, відкритий
+                feedback: Ви не можете виграти мільйон
+            -   option: випадок 2, продаж
+                feedback: Ви не можете виграти мільйон
+            -   option: випадок 2, відкритий
+                feedback: Чудова робота! Виграєте!
+            question_text: Який випадок потрібно виграти мільйон доларів?
+            question_score: '10'
+            correct_answer: D
+            hint: Дотримуйтесь правого шляху
         4:
             code: |-
-                name = {ask} 'What is your name?'
-                size = {ask} 'What is your shoe size?'
-                {if} size {is} 38
-                    {if} name {is} Cinderella
-                        {print} 'I was looking for you!'
-                    {else}
-                        {print} 'You are not the one!'
+                name = {ask} 'Що таке ім'я? Р
+                розмір = {ask} 'Що таке розмір взуття? Р
+                {if} розмір {is} 38
+                {if} ім'я {is} Циндерелла
+                {print} Р
                 {else}
-                    {print} 'Ill keep looking'
+                {print} 'Ви не один! Р
+                {else}
+                {print} 'Я буду дивитися'
             mp_choice_options:
-            -   option: Sleeping Beauty with shoe size 38 gets the output 'Ill keep looking'
-                feedback: No, she gets 'You are not the one!'
-            -   option: 'Cinderella with shoe size 40 gets the output: ''I was looking for you!'''
-                feedback: No, she gets 'Ill keep looking'
-            -   option: Sleeping Beauty with shoe size 40 gets the output 'Ill keep looking'
-                feedback: That's right!
-            -   option: Cinderella with shoe size 40 gets the output 'I was looking for you!'
-                feedback: No she gets 'Ill keep looking'
+            -   option: Сплячий Beauty з розміром взуття 38 отримує вихід 'Я буду тримати пошук'
+                feedback: Немає, вона отримує 'Ви не один! Р
+            -   option: 'Cinderella з розміром взуття 40 gets the вихід '' Р'
+                feedback: Ні, вона отримує 'Я буду дивитися'
+            -   option: Сплячий Beauty з розміром взуття 40 отримує вихід 'Я буду тримати пошук'
+                feedback: Це вірно!
+            -   option: Cinderella з розміром взуття 38 отримує вихід 'Я буду тримати пошук'
+                feedback: Немає вона отримує ' Р
+            question_score: '10'
+            question_text: Яка заява правда?
+            hint: Незалежно від того, що Ваше ім'я, якщо у вас є розмір взуття 40 ви отримаєте повідомлення 'Я буду тримати пошук'.
+            correct_answer: C
         5:
             mp_choice_options:
             -   option: |-
@@ -1424,7 +1668,7 @@ levels:
                         {repeat} 3 {times}
                         {print} 'Icecream is the best!'
                     ```
-                feedback: Don't forget the indentation after `{repeat}` commands.
+                feedback: Не забудьте відступ після команд `{repeat}`.
             -   option: |-
                     ```
                     desert = {ask} 'What is your favorite type of desert?'
@@ -1432,7 +1676,7 @@ levels:
                     {repeat} 3 {times}
                         {print} 'Icecream is the best!'
                     ```
-                feedback: Use indentation after an `{if}` command
+                feedback: Використовуйте відступ після команди `{if}`
             -   option: |-
                     ```
                     desert = {ask} 'What is your favorite type of desert?'
@@ -1440,7 +1684,7 @@ levels:
                         {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
-                feedback: Perfect
+                feedback: Чудово
             -   option: |-
                     ```
                     {repeat} 3 {times}
@@ -1449,24 +1693,33 @@ levels:
                             {repeat} 3 {times}
                             {print} 'Icecream is the best!'
                     ```
-                feedback: There are 2 `{repeat}` commands in this code.
+                feedback: Є 2 `{repeat}` команди в цьому коді.
+            question_score: '10'
+            hint: Дивитися відступ
+            question_text: Який код зробив цей вихід?
+            output: "Морозиво - найкращий!\nМорозиво - найкращий!\nМорозиво - найкращий!"
+            correct_answer: C
         6:
             mp_choice_options:
             -   option: '`{if}`'
-                feedback: Don't forget the others
+                feedback: Не забудьте інші
             -   option: '`{if}` `{repeat}`'
-                feedback: Don't forget `{else}`!
+                feedback: Не забудьте `{else}`!
             -   option: '`{if}` `{else}` `{repeat}`'
-                feedback: Keep it up!
+                feedback: Зареєструватися!
             -   option: '`{if}` `{else}` `{repeat}` `{print}`'
-                feedback: Not with print
+                feedback: Не з `{print}`
+            hint: Виявлення відбувається на лінії нижче деяких команд
+            correct_answer: C
+            question_score: '10'
+            question_text: Після чого потрібно використовувати відступ (починаючи наступний рядок з 4 пробілами)?
         7:
-            question_text: "In this code from a pizza restaurant. \nYoull get a 5 dollar discount if you order a medium pizza with coke.\n What should you do to debug this code?"
+            question_text: "Ви отримаєте знижку 5 долара, якщо ви замовляєте середню піцу з коксом.<br> Але код має помилку! Як розбити його?"
             code: |-
-                {if} food {is} pizza
-                {if} size {is} medium
-                {if} drink {is} coke
-                price = price - 2
+                {if} їжа {is} піца
+                {if} розмір {is} середа
+                {if} пити {is} кокс
+                ціна = ціна - 5
             mp_choice_options:
             -   option: |-
                     ```
@@ -1475,7 +1728,7 @@ levels:
                             {if} drink {is} coke
                                 price = price - 2
                     ```
-                feedback: Amazing!
+                feedback: Дивовижна!
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -1483,7 +1736,7 @@ levels:
                     {if} drink {is} coke
                         price = price - 2
                     ```
-                feedback: Try again!
+                feedback: Другий `{if}` пропускає код!
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -1491,7 +1744,7 @@ levels:
                     {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: Try again
+                feedback: Два послідовних `{if}` ніколи не вірно.
             -   option: |-
                     ```
                     {if} food {is} pizza
@@ -1499,24 +1752,30 @@ levels:
                             {if} drink {is} coke
                             price = price - 2
                     ```
-                feedback: Try again
+                feedback: Майже право. Візьміть ще один погляд на останню лінію
+            hint: Після кожної команди `{if}`, рядок нижче слід відступати
+            correct_answer: A
+            question_score: '10'
         8:
-            question_text: What is wrong is this code?
+            question_text: Що таке неправильно в цьому коді?
             code: |-
-                age = {ask} 'Happy Birthday! How old are you?'
-                singing = {ask} 'Would you like us to sing?'
-                    if singing {is} yes
-                        {repeat} years {times}
-                        {print} 'Hip Hip Hooray'
+                вік = {ask} "Щасливий день народження! Як старий ти? Р
+                співати = {ask} "Щоб ти співати? Р
+                {if} спів {is} так
+                {repeat} роки {times}
+                {print} "Hip Hip Hooray Р
             mp_choice_options:
-            -   option: You can't put two questions in a row
-                feedback: Yes you can.
-            -   option: The variable called 'age' is later on used as 'years'
-                feedback: Keen eye! Good job!
-            -   option: You're not allowed to start with 8 spaces, like line 4 and 5 do
-                feedback: You actually must start like that.
-            -   option: A code must always start with a `{print}` command in the first line
-                feedback: That's not true.
+            -   option: Ви не можете поставити два питання в рядку
+                feedback: Так ви можете.
+            -   option: Змінна названа 'age' пізніше на використанні як 'years Р
+                feedback: Клен око! Доброго дня!
+            -   option: Не допускається запуску з 8 просторами, такими як лінія 5
+                feedback: Ви насправді повинні почати так.
+            -   option: Код завжди повинен почати з команди `{print}` в першому рядку
+                feedback: Не вірно.
+            question_score: '10'
+            hint: Відступ здійснюється прямо в цей час
+            correct_answer: B
         10:
             code: |-
                 1 {repeat} 2 {times}
@@ -1532,6 +1791,13 @@ levels:
             -   option: line 2 should atart with 4 spaces and line 3 with 8
                 feedback: You are correct!
             hint: The first line doens't start with any spaces
+        9:
+            mp_choice_options:
+            -   option: Ні, що не дозволено
+                feedback: Допускається
+            -   feedback: Ви можете використовувати більше, якщо вам подобається
+                option: Тільки 1
+            question_text: Скільки команд `{if}` можна розмістити в іншому `{if}`?
     10:
         1:
             question_text: What do we need to fill in on the `_?_` if we want to print each compliment?
