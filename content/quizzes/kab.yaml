@@ -8,25 +8,27 @@ levels:
                 feedback: Swaswa!
             -   option: '`azul`'
                 feedback: Azul mačči d taladna.
-            -   feedback: With `{ask}`, you can ask a question.
+            -   feedback: S `{ask}`, tzemreḍ ad tmuddeḍ asteqsi.
                 option: '`{ask}`'
             code: _ Azul!
             correct_answer: 'B'
             question_score: '10'
             question_text: Anwi i ilaqen ad t-neččer seg yisumar-a i wakken ad d-iban uḍris "Azul"?
-            hint: _Azul Ay amaḍal!
+            hint: _Azul ay amaḍal!
         10:
             mp_choice_options:
-            -   option: Are you ready to go to level 2?
+            -   option: Twejdeḍ ad tεeddiḍ ɣer uswir wis 2?
                 feedback: There are two `{echo}` commands
-            -   feedback: Great job!
+            -   feedback: D amahil igerrzen!
                 option: "Ih!\nIh!"
             -   option: Ih!
-                feedback: There are two `{echo}` commands
-            -   option: "Are you ready to go to level 2?\nYes!"
-                feedback: There are two `{echo}` commands
+                feedback: Llant snat n tiludna `{echo}`
+            -   option: "Twejdeḍ ad tεeddiḍ ɣer uswir wis 2?\nIh!"
+                feedback: Llant snat n tiludna `{echo}`
             question_score: '10'
             correct_answer: B
+            hint: Aha ad nebdu!
+            code: "{ask} Twejdeḍ ad tεeddiḍ ɣer uswir wis 2?\n{echo}\n{echo}"
         1:
             question_text: Amek i as-qqaren i tutlayt-a n usihel?
             mp_choice_options:
@@ -35,18 +37,18 @@ levels:
             -   option: Heddy
                 feedback: Mačči d wa!
             -   option: Haydi
-                feedback: Ala, mačči d aya!
+                feedback: Mačči d wagi!
             -   option: Hyidi
                 feedback: Ala, mačči d aya!
             correct_answer: A
             question_score: '10'
-            hint: Yettwasemma s yisem n Hedi Lamar.
+            hint: Yettwasemma s yisem n Hedy Lamarr.
         3:
             correct_answer: C
             mp_choice_options:
-            -   feedback: '`{print}` yessigiz aḍris, d acu ur yettmuddu ara isteqsiyen.'
-                option: "```\n{print} Anwa akk ini i tḥemmleḍ?\n```"
-            -   option: "```\n{ask} {print} Anwa akk ini i tḥemmleḍ?\n```"
+            -   feedback: '`{print}` yessiggiz aḍris, maca ur yettmuddu ara isteqsiyen.'
+                option: "```\n{print} Anwa ini akk i tḥemmleḍ?\n```"
+            -   option: "```\n{ask} {print} Anwa ini akk i tḥemmleḍ?\n```"
                 feedback: Tesriḍ kan yiwet n tladna, mačči snat.
             -   feedback: Gedha!
                 option: "```\n{ask} Anwa akk ini i tḥemmleḍ?\n```"
@@ -54,7 +56,7 @@ levels:
                 option: "```\n{echo} Anwa akk ini i tḥemmleḍ?\n```"
             question_score: '10'
             hint: Tzemreḍ ad tessutreḍ kra s tladna `{ask}`
-            question_text: Amek ara testeqsiḍ albaεḍ anwa ini i iḥemmel?
+            question_text: Amek ara testeqsiḍ albaεḍ d acu n yini i iḥemmel?
         4:
             mp_choice_options:
             -   feedback: Igerrez!
@@ -72,7 +74,7 @@ levels:
             question_score: '10'
         8:
             mp_choice_options:
-            -   {}
+            -   option: Tzemreḍ ad t-tesqedceḍ `{ask}` i usteqsi.
             -   {}
             -   feedback: D amahil igerrzen!
             -   feedback: Ayagi d arameɣtu...
@@ -81,15 +83,21 @@ levels:
         7:
             hint: Senqed tangalt izirig s yizirig
             mp_choice_options:
-            -   {}
-            -   {}
-            -   {}
+            -   feedback: D tidet yella wanda i tella tuccḍa?
+                option: Deg yizirig 1, `{print}` tesra ad tettwasmelsi s `{ask}`
+            -   feedback: D tidet yella wanda i tella tuccḍa?
+                option: Deg yizirig 1, `{print}` tesra ad tettwasmelsi s `{echo}`
+            -   feedback: D tidet yella wanda i tella tuccḍa?
+                option: Deg yizirig 3, `{echo}` tesra ad tettwasmelsi s `{print}`
             -   feedback: Swaswa!
+                option: Ulac! D tangalt izaden!
             correct_answer: D
             question_score: '10'
+            question_text: D acu i d ugur akked tengalt-a?
         5:
             mp_choice_options:
             -   option: '`{print}`'
+                feedback: Ala, tebɣiḍ ad ak-d-yales Hedy tiririt-ik.
             -   option: '`Hedy`'
                 feedback: Hedy mačči d taladna.
             -   option: '`{ask}`'
@@ -99,15 +107,33 @@ levels:
             question_text: D cau n tladna i ixuṣṣen deg yizirig 2?
             correct_answer: D
             question_score: '10'
+            code: "{ask} Anwa aɣersiw akk i tḥemmleḍ?\n_Aɣersiw akk i tḥemmleḍ..."
+            hint: Tebɣiḍ ad twaliḍ tiririt ɣer taggara n yizirig 2...
         6:
             correct_answer: B
             question_score: '10'
-        9:
             mp_choice_options:
             -   {}
-            -   feedback: Ayyuz!
+            -   option: Deg yizizrig wis 2, `{print}` ilaq ad yettwasmelsi s `{ask}`.
+                feedback: Ayuz! Terriḍ ddehn-ik akken iwata!
+            -   option: Izirig wis 3 ilaq ad tebdu s `{print}` deg wadeg n `{echo}`.
+                feedback: '`{echo}` tṣeḥḥa.'
+            -   option: Deg yizirig wis 4, `{print}` ur yuri ara akken iwata.
+                feedback: Ala, yella wanda tella tuccḍa
+            question_text: Anda tella tuccḍa deg tengalt-a?
+            hint: Senqed tiludna `{print}`.
+        9:
+            mp_choice_options:
+            -   feedback: Ala, `{print}` d amaeɣtu. Anida-t usteqsi i d-yettwamudden?
+                option: '`{print}` deg yizirig 1 ilaq ad yili `{ask}`'
+            -   feedback: Waw!
+            -   feedback: Ala, `{echo}` d amaeɣtu. Anida-t usteqsi i d-yettwamudden?
+            -   feedback: Nadi s leεqel tuccḍa...
+                option: Ulac. D tangalt igerrzen!
             correct_answer: B
             question_score: '10'
+            code: "{print} Azul!\n{print} Amek i tettiliḍ?\n{echo} Ihi aql-ak..."
+            hint: '`{ask}` yessirig i umuddu n usteqsi'
     9:
         10:
             mp_choice_options:
@@ -122,6 +148,10 @@ levels:
             mp_choice_options:
             -   {}
             -   option: Ala 1
+        1:
+            correct_answer: A
+        7:
+            correct_answer: A
     17:
         9:
             correct_answer: C
@@ -132,8 +162,13 @@ levels:
             -   feedback: Ԑreḍ tikkelt niḍen.
                 option: '`{or}` ur tezmir ara ad tettwaseqdec akked `{if}`.'
             -   feedback: Ur iṣeḥḥa ara.
+            question_score: '10'
         10:
             question_text: Acu i d ugur s tengalt-a?
+            question_score: '10'
+            correct_answer: C
+            mp_choice_options:
+            -   feedback: Ԑreḍ tikkelt niḍen.
         5:
             mp_choice_options:
             -   {}
@@ -141,6 +176,7 @@ levels:
             -   feedback: Aneɛruḍ niḍen.
                 option: "```\n7\n19\n29\n41\n53\n71\n79\nuṭṭun niḍen\n```"
             -   option: "```\n7\n19\n29\n41\n53\n71\n79\n97\n```"
+            correct_answer: A
         1:
             correct_answer: B
             question_score: '10'
@@ -177,6 +213,8 @@ levels:
             correct_answer: D
         2:
             question_score: '10'
+        5:
+            correct_answer: A
     11:
         3:
             correct_answer: A
@@ -223,6 +261,7 @@ levels:
             -   option: "```\nssuma = '14'\n```"
             -   option: "```\nssuma = ssuma + 2\n```"
             -   option: "```\nssuma = + 2\n```"
+                feedback: Qrib!
             correct_answer: C
             question_score: '10'
         1:
@@ -241,12 +280,26 @@ levels:
             question_score: '10'
         3:
             question_score: '10'
+            correct_answer: A
+        7:
+            correct_answer: A
+        4:
+            mp_choice_options:
+            -   {}
+            -   {}
+            -   {}
+            -   option: Akk izirigen
     13:
         2:
             question_score: '10'
             correct_answer: B
         9:
             question_score: '10'
+            correct_answer: A
+        4:
+            correct_answer: A
+        3:
+            correct_answer: A
     14:
         1:
             mp_choice_options:
@@ -261,14 +314,17 @@ levels:
             -   option: '`>= 12`'
             -   option: '`< 12`'
             -   option: '`<= 12`'
+        8:
+            correct_answer: A
     2:
         5:
             correct_answer: C
             question_score: '10'
-            hint: '`{echo}`'
+            hint: 'Aselkim yettraǧu tasint mi ara d-yemlil taladna `{sleep}`'
         7:
             mp_choice_options:
             -   option: "```\n{print} 3\n```"
+                feedback: Ur tesriḍ ara `{print}`
             -   option: "```\n{sleep} 3\n```"
                 feedback: Igerrez!
             -   option: "```\n{sleep}\n```"
@@ -283,16 +339,17 @@ levels:
             -   feedback: Gedha!
         6:
             mp_choice_options:
-            -   feedback: '`{echo}`'
+            -   feedback: 'Ayuz!'
                 option: '`{sleep}`'
             -   option: '`{echo}`'
             -   option: '`{print}`'
             -   option: '`{ask}`'
+                feedback: Ulac asteqsi ara d-yettwamudden dagi
             correct_answer: A
             question_score: '10'
         1:
             mp_choice_options:
-            -   {}
+            -   option: Tzemreḍ ad tesqedceḍ taladna `{print}` i umuddu n yisteqsiyin.
             -   {}
             -   feedback: Igerrez
             correct_answer: C
@@ -300,18 +357,27 @@ levels:
         2:
             question_score: '10'
             correct_answer: A
+            question_text: Anta tangalt i d tameɣtut?
+            mp_choice_options:
+            -   option: "```\nname {is} {ask} Isem-ik?\n```"
         3:
             question_score: '10'
             correct_answer: C
         4:
             correct_answer: D
             question_score: '10'
+            mp_choice_options:
+            -   option: Azul isem-iw d isem
+            -   option: Azul isem-iw d Hedy
         8:
             correct_answer: C
             question_score: '10'
         10:
             question_score: '10'
             correct_answer: D
+            mp_choice_options:
+            -   option: "```\n{sleep} 3\n```"
+            hint: Tebɣiḍ ad testeqsiḍ `{ask}`
     3:
         8:
             correct_answer: D
@@ -339,12 +405,14 @@ levels:
         5:
             question_score: '10'
             correct_answer: D
+            code: "question {is} {ask} Acu i tebɣiḍ ad tissineḍ?\n{print} asteqsi\nanswers {is} ih, ala, ahat\n{print} tiririyin {at} {random}"
         6:
             mp_choice_options:
             -   {}
             -   feedback: Igerrez
             correct_answer: B
             question_score: '10'
+            code: "asteqsi {is} {ask} Acu i tebɣiḍ ad tissineḍ?\ntiririyin ih, ala, ahat\n{print} tiririyin {at} {random}"
         7:
             correct_answer: C
             mp_choice_options:
@@ -367,6 +435,11 @@ levels:
         1:
             correct_answer: A
             question_score: '10'
+        6:
+            correct_answer: A
+        7:
+            correct_answer: A
+            code: "asteqsi {is} {ask} Acu i tebɣiḍ ad tissineḍ?\ntiririyin {is} ih, ala, ahat\n{print} tiririyin {at} {random}"
     5:
         1:
             question_score: '10'
@@ -375,8 +448,13 @@ levels:
             -   {}
             -   {}
             -   feedback: Mačči kullas...
+            correct_answer: A
         6:
             question_score: '10'
+        2:
+            correct_answer: A
+        5:
+            correct_answer: A
     6:
         8:
             question_score: '10'
@@ -397,6 +475,10 @@ levels:
             -   option: '30'
         7:
             question_score: '10'
+        1:
+            correct_answer: A
+        6:
+            correct_answer: A
     7:
         4:
             mp_choice_options:
@@ -412,6 +494,8 @@ levels:
         5:
             correct_answer: A
             question_score: '10'
+        8:
+            correct_answer: A
     10:
         6:
             correct_answer: D
@@ -421,3 +505,36 @@ levels:
             -   {}
             -   {}
             -   feedback: D amahil igerrzen!
+        7:
+            correct_answer: A
+        1:
+            mp_choice_options:
+            -   {}
+            -   {}
+            -   {}
+            -   feedback: Qrib ad taweḍ!
+        9:
+            correct_answer: A
+            question_text: D anwa i d asteqsi amezwaru ara k-d-imudd Hedy mi ara teslekmeḍ ahil-a?
+    15:
+        10:
+            correct_answer: A
+        7:
+            correct_answer: A
+    16:
+        4:
+            question_score: '10'
+        6:
+            question_score: '10'
+        9:
+            correct_answer: A
+            question_score: '10'
+        3:
+            correct_answer: A
+            question_score: '10'
+        5:
+            question_score: '10'
+        7:
+            question_score: '10'
+        8:
+            question_score: '10'
