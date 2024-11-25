@@ -130,26 +130,26 @@ levels:
 
                 Таким чином нам не потрібна команда `{echo}`.
             header: Інтерактивний
-            code: "ім'я {є} {питати} Як тебе звати?\n{print} Привіт ім'я"
+            code: "name {is} {ask} What is your name?\n{print} Hello name"
         4:
             text: Тепер, коли ми використовуємо змінні, ми можемо використовувати декілька змінних замість однієї команди `{echo}`.
             header: Кілька змінних
-            code: "ім'я {is} {ask} Що таке ім'я?\nДовідник Ім'я\nВік {is} {ask} Як старий ти?\n{print} назва вікової категорії."
+            code: "name {is} {ask} What is your name?\n{print} Hello name\nage {is} {ask} How old are you?\n{print} name is age years old."
         1:
             header: Ласкаво просимо на рівень 2
             text: "На цьому рівні ви навчитеся використовувати змінні.\n\nЗмінна — це слово, яке можна використовувати для зберігання інформації.\n\nНаприклад: ім'я, вік або улюблена спортивна команда."
         2:
             header: Змінні
             text: Щоб створити або «встановити» змінну, ми використовуємо команду `{is}`
-            code: "ім'я {є} Хеді\nвік {є} 15\n{print} ім'я вік років"
+            code: "name {is} Hedy\nage {is} 15\n{print} name is age years old"
         5:
             header: сон
             text: Ви також можете використати команду `{sleep}`, щоб призупинити код на деякий час.
-            code: "Довідник Мій улюблений колір...\n{sleep} 2\n{print} зелений!"
+            code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
         6:
             header: Сон 5
             text: "Ви можете додати число після команди `{sleep}`, якщо хочете, щоб пауза була довшою.\n\nЯкщо ви хочете, ви навіть можете використовувати змінну замість числа, щоб визначити тривалість команди сну."
-            code: "пауза {is} 10 хв\nДовідник Мій улюблений колір...\n{sleep} пауза\n{print} зелений!"
+            code: "pause {is} 10\n{print} My favorite colour is...\n{sleep} pause\n{print} green!"
         7:
             header: Налагодження
             text: Налагодження коду означає позбавлення від помилок у коді. Давайте разом налагодимо цей код. Натисніть кнопку сонечка, щоб запустити налагоджувач.
@@ -165,10 +165,10 @@ levels:
             code: "{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} \"СЮРПРИЗ!\""
         7:
             header: Лапки та змінні
-            code: "ім'я {is} Проксимус\n{print} 'Привіт', як ви? Р"
+            code: "name {is} Harry\n{print} 'Hello ' name ', how are you?'"
             text: "Коли імена змінних використовуються в середині речення, ви повинні залишити змінні поза лапками.\nОднак решта речення потребує лапок. Це виглядає так:"
         5:
-            code: ім'я {is} {ask} 'name будь ласка? р
+            code: name {is} {ask} 'name please?'
             header: Лапки з запитом
             text: Це також стосується команди `{ask}`.
         11:
@@ -196,7 +196,7 @@ levels:
             code: "{очистити}\n{print} Який чудовий день, щоб піти на пляж!\n{ask} «Ви хочете побудувати замок з піску чи поплавати в океані?»\n{print} \"Ви хотіли б зайнятися\"\n{print} \"Я теж хотів би це зробити\"\n{print} «Погляньте на ці чудові черепашки!»\nкольори {is} 'помаранчевий, срібний, білий, коричневий'\n{print} 'Мені подобаються кольори {at} {random} one!'\nвибір {є} {питати} Який тобі подобається?"
             debug: 'True'
         6:
-            code: "ім'я {is} Проксимус\n{print} 'Привіт'"
+            code: "name {is} Harry\n{print} 'Hello ' name"
             header: Лапки та змінні
             text: "Ви не хочете, щоб імена змінних друкувались на екрані.\nОсь чому змінні слід не брати в лапки, наприклад:"
         8:
@@ -219,11 +219,11 @@ levels:
         4:
             header: Навмання в реченні
             text: Ви також можете використовувати команду `{at}` `{random}` у реченні.
-            code: "тварини {is} собаки, коти, кенгуру\nДовідник Мій улюблений тварина {at} {random}"
+            code: "animals {is} dogs, cats, kangaroos\n{print} My favorite animal is animals {at} {random}"
         5:
             header: Додати до
             text: "Ви можете додати елементи до списку за допомогою команди `{add}` `{to}`.\n\nВи можете вибрати, що додати до списку, або скористатися командою `{add}` `{to}` у поєднанні з командою `{ask}`.\nТаким чином ви можете дозволити гравцеві вирішувати, що додати до списку."
-            code: "тварини {is} собака, кіт, kangaroo\nяк {is} {аск} Що таке улюблена тварина?\n{add}, як {to_list} тварини\nДовідник Я обирає тварин {at} {random}"
+            code: "animals {is} dog, cat, kangaroo\nlike {is} {ask} What is your favorite animal?\n{add} like {to_list} animals\n{print} I choose animals {at} {random}"
         7:
             debug: 'True'
             editor: "music_genres {is} рок, поп, метал, інді, джаз\nSelect_genre Музика {at} {random}\nДовідник Послухайте вибраний жанр\nкрасиві {ask} Ви любите цей жанр?\n{remove} обраний_genre {від} вибрано_genre\nРусскийУкраїнськаБеларускаяOʻzbek tiliEnglish\n{print} або ви віддаєте перевагу... Другий_хойсе {at} {random}\n0 товар(ов) - 0.00 р.\nДовідник Я люблю музику_genre {random} кращий!"
@@ -234,7 +234,7 @@ levels:
             text: Насолоджуйтесь пригодами на рівні 3!
         6:
             header: Видалити з
-            code: "тварини {is} собака, кіт, kangaroo\nНемовля {is} {ask} Що таке тварини?\n{remove} відключити {від} тварин\nДовідник Я обирає тварин {at} {random}"
+            code: "animals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
             text: "Протилежністю команди `{add}` `{to}` є команда `{remove}` `{from}`.\nЦя команда видаляє елемент зі списку."
     6:
         3:
@@ -253,7 +253,7 @@ levels:
             header: Множення
             text: Якщо ви хочете зробити множення, ви можете використовувати зірочку.
         7:
-            code: "ім'я = Hedy\nдо 20"
+            code: "name = Hedy\nanswer = 20 + 4"
             header: Символ =
             text: "Відтепер ви також можете використовувати символ = замість команди `{is}`.\nЦе стосується як чисел, так і слів, а також після команд `{if}` або `{else}`."
         6:
@@ -263,7 +263,7 @@ levels:
         8:
             header: Обчислення зі змінними
             text: 'Ви можете використовувати обчислення з числами, але ви також можете використовувати змінні для виконання обчислень, наприклад:'
-            code: "number_1 = {ask} 'Заповніть перше число:'\nnumber_2 = {ask} 'Заповніть друге число:'\nправильна_відповідь = число_1 * число_2\n{print} number_1 ' разів ' number_2 ' є ' правильною_відповіддю"
+            code: "number_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer"
         5:
             header: Поділ
             text: Ви можете використовувати косу риску для поділу.
@@ -359,7 +359,7 @@ levels:
         6:
             header: якщо і інакше зараз
             text: "Тепер це команди `{if}` і `{else}`.\nКожен рядок після команд `{if}` і `{else}` починається з відступу."
-            code: "name = {ask} 'Що таке ім'я? Р\n{if} ім'я {is} Геди\n{print} 'Велком Геди Р\nПро нас\n{print} 'Програма Welcome! Р"
+            code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!'"
         5:
             text: "Те саме стосується команд `{if}` і `{else}`.\nЦе були команди раніше:"
             debug: 'True'
@@ -371,7 +371,7 @@ levels:
         3:
             header: '{repeat} команд зараз'
             text: "На цьому рівні ви можете повторювати кілька рядків коду. Для цього ви повинні повідомити комп’ютеру, які рядки належать разом і повинні повторюватися.\nЦе можна зробити за допомогою відступу.\n\nВикористовуйте 4 пробіли (або одну табуляцію) на початку кожного рядка, який потрібно повторити, наприклад:"
-            code: "{повтор} 5 {час}\n{print} 'Привіт всім Р\nДовідник 'Це буде друкувати 5 разів Р"
+            code: "{repeat} 5 {times}\n    {print} 'Hello everyone'\n    {print} 'This will be printed 5 times'"
         10:
             header: Давайте перевіримо пригоди!
             text: Насолоджуйтесь пригодами на 8 рівні!
@@ -404,7 +404,7 @@ levels:
             text: Насолоджуйтесь пригодами на 9 рівні!
             header: ходімо!
         6:
-            code: "{repeat} 3 {times}\n    food = {ask} 'Що ти хочеш?'\n    {if} їжа {is} піца\n        {print} 'приємно!'\n    {else \n        {print} \"піца краще\""
+            code: "{repeat} 3 {times}\n    food = {ask} 'What do you want?'\n    {if} food {is} pizza\n        {print} 'nice!'\n    {else}\n        {print} 'pizza is better'"
             header: '`{if}` всередині `{repeat}`'
             text: "Тепер, коли ви можете використовувати кілька рядків коду після цієї команди, ви також можете розмістити їх один в одному.\nПеревірте це:"
         5:
@@ -415,7 +415,7 @@ levels:
         2:
             header: Команда for
             text: За допомогою for ви можете створити список і використовувати всі елементи цього списку. `{for}` створює блок, як і повтор, і якщо так, то всі рядки в блоці повинні починатися з відступу (4 пробіли).
-            code: "тварини = собака, кіт, бобова\n{for} тварини {in} тварини\n{print} 'Я люблю ' тварини"
+            code: "animals = dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal"
         4:
             text: Давайте налагодимо цей код
             header: Налагодження
@@ -426,7 +426,7 @@ levels:
             header: Час програмувати!
         3:
             text: 'Ось ще один приклад команди `{for}`:'
-            code: "день = понеділок, вівторок, середа, четвер, п'ятниця, субота, неділя\nімена = мама, тато, emma, sophi\n{for} день {in} днів\n{print} назви {at} {random} ' робить посуд на день"
+            code: "days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day"
             header: Команда for
         1:
             header: Ласкаво просимо на 10 рівень
@@ -435,7 +435,7 @@ levels:
         2:
             header: Команда for
             text: 'Ось як виглядає нова команда for:'
-            code: "{for} лічильника {in} {діапазон} 1 {to} 10\n    Лічильник\n{print} «Готові чи ні. Ось я іду!'"
+            code: "{for} counter {in} {range} 1 {to} 10\n    {print} counter\n{print} 'Ready or not. Here I come!'"
         1:
             header: Ласкаво просимо на 11 рівень
             text: "На цьому рівні ми додаємо нову форму команди `{for}`. На попередніх рівнях ми використовували для зі списком, але ми також можемо використовувати для з числами.\n\nТаким чином нам більше не потрібна команда `{repeat}`."
@@ -466,7 +466,7 @@ levels:
         2:
             header: Квадратні дужки
             text: Ми збираємося створювати списки способом Python, з квадратними дужками навколо списків! Ми також зберігаємо лапки навколо кожного елемента, як ми навчилися на попередніх рівнях. Ми використовуємо квадратні дужки, щоб вказати місце в списку. Команду at random більше не можна використовувати.
-            code: "друзі = ['Ahmed', 'Ben', 'Cayden']\n{print} друзі[1] - це перший друг у списку. Р\n{print} друзі [2] ' є другим другом у списку. Р\n{print} друзі (2009) ' є третім другом у списку. Р\n#тепер ми зустрінемо 2 списки за допомогою змінного i\n0 товар(ов) - 0.00 €\nПро нас Я {in} {range} 1 {to} 3 хв\n{print} друзі[i] \"Щасливий номер є \"щасливим\"[i]"
+            code: "friends = ['Ahmed', 'Ben', 'Cayden']\n{print} friends[1] ' is the first friend on the list.'\n{print} friends[2] ' is the second friend on the list.'\n{print} friends[3] ' is the third friend on the list.'\n#now we will match 2 lists using the variable i\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} friends[i] 's lucky number is ' lucky_numbers[i]"
     17:
         1:
             header: Ласкаво просимо на 17 рівень
@@ -478,24 +478,24 @@ levels:
             debug: 'True'
         2:
             header: Товста кишка
-            code: "ціни = ['1 млн. доларів', 'ябл. пиріг', 'nothing']\nВаш_ціна = ціни[{random}]\nДовідник 'Ви виграєте ' your_price\n{if} your_price == '1 млн. доларів' :\n{print} 'Я Ви багаті! Р\n{else}:\n{print} 'Повага наступного разу.. Р"
+            code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{else}:\n    {print} 'Better luck next time..'"
             text: 'Тепер ми трохи змінимо відступ. Кожного разу, коли нам потрібен відступ, нам потрібно: у рядку перед відступом.'
         5:
             header: Давайте спробуємо!
             text: Насолоджуйтесь пригодами на рівні 17!
         3:
             text: 'На цьому рівні ви також можете використовувати нову команду: elif. elif — це скорочення від else if, і воно вам знадобиться, коли ви хочете створити 3 (або більше!) варіанти. Перевірте це!'
-            code: "ціни = ['1 млн. доларів', 'ябл. пиріг', 'nothing']\nВаш_ціна = ціни[{random}]\nДовідник 'Ви виграєте ' your_price\n{if} your_price == '1 млн. доларів' :\n{print} 'Я Ви багаті! Р\n{elif} your_price == \"Яблевий пиріг\" :\n{print} 'Любо, яблуневий пиріг! Р\n{else}:\n{print} 'Повага наступного разу.. Р"
+            code: "prices = ['1 million dollars', 'an apple pie', 'nothing']\nyour_price = prices[{random}]\n{print} 'You win ' your_price\n{if} your_price == '1 million dollars' :\n    {print} 'Yeah! You are rich!'\n{elif} your_price == 'an apple pie' :\n    {print} 'Lovely, an apple pie!'\n{else}:\n    {print} 'Better luck next time..'"
             header: elif
     13:
         5:
             header: приклад
             text: "У цьому прикладі ви бачите, як аргумент place використовується у функції.\nЗапустіть код і змініть «океан» і «море» на щось інше, і подивіться, що станеться."
-            code: "{define} пісня {з} місце\n{print} 'Мій Бонні над ' місце\n\n{call} пісня {з} 'ocean Р\n{call} пісня {з} 'sea'\n{call} пісня {з} 'ocean Р"
+            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
         7:
             header: Ще більше питань!
             text: "Тепер ми об’єднали ще більше питань із функцією. Введіть цей код і подивіться, що станеться. \n\nЗверніть увагу, що змінні та аргументи мають однакові назви. Це дозволено. \nВас це бентежить? Просто використовуйте різні імена, це також дозволено. \n``` \nвизначити пісню за назвою, місцем \n    print 'Моє ' ім'я ' це ' місце \n\nІм'я запитайте \"Хто?\" \nмісце запитати \"Де вони?\" \nдзвінка пісня з назвою, місцем \n```"
-            code: "{define} пісня {з} місце\n{print} 'Мій Бонні над ' місце\n\n{call} пісня {з} 'ocean Р\n{call} пісня {з} 'sea'\n{call} пісня {з} 'ocean Р"
+            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
         2:
             code: "name = {ask} 'як тебе звати?'\nage = {ask} 'скільки твій вік?'\n{if} name {is} 'Hedy' {and} age {is} 2\n    {print} 'Ти справжня Хеді!'"
             header: Команда і
@@ -506,7 +506,7 @@ levels:
         6:
             text: "Ви також можете комбінувати функції із запитанням. \n\nЩо станеться, якщо ви внесете ці зміни: \n``` \nвизначити пісню за місцем \n    надрукувати місце «Моя Бонні». \n\nвідповідь запитає \"Де моя Бонні?\" \nдзвінок пісня з відповіддю \n```"
             header: Приклад зі змінною
-            code: "{define} пісня {з} місце\n{print} 'Мій Бонні над ' місце\n\n{call} пісня {з} 'ocean Р\n{call} пісня {з} 'sea'\n{call} пісня {з} 'ocean Р"
+            code: "{define} song {with} place\n    {print} 'My Bonnie is over the ' place\n\n{call} song {with} 'ocean'\n{call} song {with} 'sea'\n{call} song {with} 'ocean'"
         8:
             text: Давайте налагодимо цей код!
             debug: 'True'
@@ -536,7 +536,7 @@ levels:
     14:
         5:
             header: Повернене значення
-            code: "{define} розрахунок_new_price {з} кількість, відсоток\nвідсоток = відсоток / 100\nзнижка_amount = сума * відсоток\n{return} кількість - знижка_amount\n\nстарий_ціна = {ask} 'Як багато коштує на цінному тегі? Р\nзнижка = {ask} 'Що відсоток є знижка? Р\n\nnew_price = {call} розрахунок_new_price {with} old_price, знижка\nДовідник 'Нова ціна 'Нова_ціна' долар Р"
+            code: "{define} calculate_new_price {with} amount, percentage\n    percentage = percentage / 100\n    discount_amount = amount * percentage\n    {return} amount - discount_amount\n\nold_price = {ask} 'How much is on the price tag?'\ndiscount = {ask} 'What percentage is the discount?'\n\nnew_price = {call} calculate_new_price {with} old_price, discount\n{print} 'The new price is ' new_price ' dollar'"
             text: Наприклад, у цьому коді функція calculate_new_price обчислить нову ціну будь-якого товару. Це дасть вам нову ціну як значення повернення.
         6:
             debug: 'True'
@@ -552,9 +552,9 @@ levels:
         3:
             text: "Ви також можете використовувати:\n\n== те саме, що.\n\n!= ні\n\n== використовується в операторах `{if}`."
             header: Символи
-            code: "відповідь = {ask} 'Ви хочете дізнатися більше? Р\n{if} відповідь == Р\n{print} 'Go в наступну пригоду! Р\n{if} відповідь != Я Р\nДовідник «Чи є хата! Р"
+            code: "answer = {ask} 'Do you want to learn more?'\n{if} answer == 'yes'\n    {print} 'Go to the next adventure!'\n{if} answer != 'yes'\n    {print} 'That is a shame!'"
         2:
-            code: "вік = {ask} 'Як старий ти? Р\n{if} вік < 13\n{print} 'Ви молодше мене! Р\nПро нас\n{print} 'Ви старше мене! Р"
+            code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'"
             header: Символи
             text: "Ось нові символи, які ви можете використовувати: \n\n  > означає більше, ніж... \n\n  Знак >= означає більше або таке ж, як... \n\n  < означає менше, ніж... \n\n  <= означає менше або таке ж, як... \n\nВи можете використовувати їх так:"
         1:
@@ -583,7 +583,7 @@ levels:
         5:
             header: Мерехтить Мерехтить маленька зіронька!
             text: "У цій програмі ви бачите приклад функції.\nДавайте подивимося, що станеться, якщо ви доповните решту пісні!"
-            code: "{define} мерехтіння\n     {print} «Мерехтіння»\n     {print} '...'\n\n{call} мерехтить\n{print} \"Над світом так високо\"\n{print} «Як діамант у небі»\n{call} мерехтить"
+            code: "{define} twinkle\n     {print} 'Twinkle'\n     {print} '...'\n\n{call} twinkle\n{print} 'Up above the world so high'\n{print} 'Like a diamond in the sky'\n{call} twinkle"
         2:
             text: "Цей рівень вносить деякі зміни у використання лапок.\nВідтепер **усі тексти** потрібно брати в лапки. Це включає значення змінних, елементи в списках і текст після команд {if}."
             header: Лапки
@@ -597,7 +597,7 @@ levels:
             code: "{call} новий_учасник \n{print} 'Привіт, новий учасник!' \nusername = {ask} 'Яке ваше ім'я користувача?'\npassword = 'Який ваш пароль?' \n{print} 'Ласкаво просимо до нашого клубу!' \n\nusername = {ask} 'Будь ласка, введіть своє ім'я користувача. Ви новий учасник? Введіть New Member' \n{if} ім'я користувача = новий учасник \n{call} новий учасник \n    {else}\n        password = {ask} 'Будь ласка, введіть пароль'"
             text: Давайте налагодимо цей код!
         3:
-            code: "{print} 'десяткові числа тепер повинні використовувати крапку\n{print} 2,5 + 2,5"
+            code: "{print} 'decimal numbers now need to use a dot'\n{print} 2.5 + 2.5"
             text: "З цього рівня вам також дозволено використовувати десяткові числа. Це може зробити такі програми, як ваш ресторан, ще кращими!\n\nЧисла не потребують лапок."
             header: Десяткові числа
         4:

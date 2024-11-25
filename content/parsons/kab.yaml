@@ -95,12 +95,12 @@ levels:
             code: "{repeat} 3 {times} {print} 'Agrud awqas tututututudu'\n{print} 'Agrud awqas'\n{repeat} 3 {times} {print} 'Yemma tawqast tututututudu'\n{print} 'Yemma tawqast'\n{repeat} 3 {times} {print} 'Baba awqas tututututudu'\n{print} 'Baba awqas'"
     6:
         1:
-            code: "leεmer = {ask} 'Acḥal deg leεmeṛ-ik? ''\nleεmeṛ_aydi = leεmeṛ * 7\namcic_leεmeṛ = leεmeṛ * 5\n{print} 'Deg yiseggasen n yiḍan, aql-ik 'aydi_leεmeṛ' n yiseggasen. ''\n{print} 'Deg yiseggasen n umcic, aql-ik 'amcic_leεmeṛ' n yiseggasen. ''"
+            code: "age = {ask} 'How old are you?'\ndog_age = age * 7\ncat_age = age * 5\n{print} 'In dog years you are ' dog_age ' years old.'\n{print} 'In cat years you are ' cat_age ' years old.'"
         2:
             story: Snulfu-d ahil ara k-iεawnen ad tḥesbeḍ acḥal n lgaṭu i ilaq ad d-taɣeḍ i tmeɣra n umulli-k.
-            code: "{print} 'D amulli-k\nimdanen = {ask} 'Acḥal n yimdanen iwumi ara tmuddeḍ seg ungul?'\nangul_amḍan = imdanen/8\n{print} 'Ilaq ad d-taɣeḍ ' angul_amḍan ' angul'"
+            code: "{print} 'It is your birthday!'\npeople = {ask} 'How many people do you want to give a slice of cake?'\ncakes_amount = people/8\n{print} 'You will have to buy ' cakes_amount ' cakes'"
     12:
         2:
             story: Urar yid-neɣ urar n Twister! Bdu s usbadu n umutti "imdanen", syen iεeggalen, deg taggara d "initen".
         1:
-            code: "afiren = 'Acu ara nexdem akked uwlal asekran ', 'Dɣa, tettali'\n{for} afir {in} afiren\n    {for} ḥseb {in} {range} 1 {to} 3\n        {print} afir\n    {print} 'Ṣṣbaḥ zik'"
+            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'"
