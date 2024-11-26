@@ -1199,9 +1199,9 @@ adventures:
                     if pemain is hidup
                         print 'Bagus! Kamu berhasil bertahan hidup!'
                     ```
+    parrot:
+        levels:
             5:
-                story_text: |
-                    Reward your parrot {if} it says the correct word!
                 example_code: |
                     ```
                     kata-kata {is} mengoceh, Hedy
@@ -1358,6 +1358,27 @@ adventures:
                     repeat orang times makanan is ask 'Apa yang ingin kamu makan?'
                     print 'Terima kasih atas pesanannya! Makanan akan segera datang!'
                     ```
+            9:
+                story_text: |-
+                    Pada level 7 kamu bisa membuat rumah makan virtual kamu lebih detil dengan mengulang beberapa baris kode. Seperti ini:
+                    ```
+                    print 'Selamat datang di rumah makan Hedy!'
+                    orang is ask 'Berapa banyak orang yang akan bergabung dengan kita?'
+                    print 'Baik!'
+                    print 'Menu hari ini adalah pizza atau salad'
+                    harga is 0
+                    repeat orang times
+                        makanan is ask 'Apa yang kamu mau pesan?'
+                        print makanan
+                        if makanan is pizza
+                            harga is harga + 10000
+                        else
+                            harga is harga + 8000
+                    print 'Terima kasih untuk pesanannya!'
+                    print 'Harganya akan menjadi ' harga ' rupiah'
+                    print 'Selamat menikmati!'
+                    ```
+                    Tentu, kode kamu dapat diperdetil dengan penambahan jenis makanan dan minuman pada menu. Jadi, silakan menambahkan pilihan-pilihan tersebut sesuai dengan keinginanmu!
                 example_code: |
                     ```
                     {print} 'Selamat datang di Restoran Chez Hedy!'
