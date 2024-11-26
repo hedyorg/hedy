@@ -174,7 +174,7 @@ class YamlFile:
         elif source:
             if isinstance(source, str):
                 has_valid_content, content = validate_content(source)
-                if not has_valid_content:
+                if has_valid_content:
                     return content
             else:
                 return source
