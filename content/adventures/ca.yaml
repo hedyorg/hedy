@@ -1619,6 +1619,9 @@ adventures:
                     {if} player {is} alive
                         {print} 'Great! You survived!'
                     ```
+        name: Casa encantada
+        description: Escapa de la casa encantada
+        default_save_name: Casa encantada
     if_command:
         description: Introducing the if command
         levels:
@@ -2545,6 +2548,31 @@ adventures:
         levels:
             17:
                 story_text: "En aquesta aventura programem un joc de penjat. Primer fem algunes preparacions, després programem el joc i en la tercera part afegim un dibuix amb la tortuga.\n\n### Exercici\n***Configura les variables*** En aquest joc de penjat, el Jugador 1 tria una resposta i el Jugador 2 ha d'endevinar les lletres d'aquesta resposta.\nPer deixar que l'ordinador conegui totes les lletres de la paraula, convertirem la resposta en una llista de lletres. Farem el mateix amb les endevinalles que fa el Jugador 2.\nComençarem el joc amb 2 llistes buides. Hem creat una llista buida per a la variable resposta per a tu. Ara crea també una llista buida per a les `lletres_endevinades`.\nDesprés omplim el nombre d'errors que s'han comès. Al principi del joc, aquest ha de ser 0.\nLa variable `quantitat_lletres` ens diu quantes lletres té la resposta. Demana al Jugador 1 que ens digui quantes lletres té la seva paraula.\nFinalment, li diem a l'ordinador si el joc ha acabat. Utilitzem la variable `joc_acabat` i la configurem a `False`.\n\n***Triant la resposta*** Volem que el Jugador 1 pugui triar la resposta. Els preguntarem, les vegades que sigui necessari, quina és la següent lletra.\nDesprés afegim aquesta lletra a la resposta. Finalment, afegim un _ buit a la llista de lletres endevinades, així obtenim tants _ com lletres té la resposta.\n\n***Torn del Jugador 2***\nDiu al Jugador 2 que és el seu torn. Després informa-li de quantes lletres té la resposta. Finalment, imprimeix la llista de `lletres_endevinades`.\n\n***Vés a la següent pestanya*** Ara que totes les variables inicials estan configurades, podem començar a programar el joc en si. Consulta la següent pestanya per aprendre com!\n"
+                example_code: "```\nprint 'El penjat!'\n\n# Estableix les variables\nresposta = []\nlletres_endevinades = _\nerrades_fetes = _\nquantitat_lletres = {ask} _\n_ = 'Fals'\n\n# Triant la resposta\n{for} _\n    lletra = {ask} 'Jugador 1, quina és la lletra ' i '?'\n    _\n    {add} '_' {to} _\n\n# Torn del Jugador 2\nprint _\nprint _\nprint lletres_endevinades\n```\n"
         name: El penjat
         default_save_name: El penjat
         description: Endevina la paraula
+    harry_potter:
+        name: Harry Potter
+        default_save_name: Harry Potter
+        description: Aventures Harry Potter
+        levels:
+            10:
+                story_text: "### Exercici\nTambé podem fer un endeví de temàtica Harry Potter. Omple els espais en blanc perquè es mostrin 9 línies.\n**Extra** Canvia la temàtica de l'endeví per alguna altra cosa, com el teu llibre, pel·lícula o sèrie de televisió preferida.\n"
+                example_code: "```\ncases = Gryffindor, Slytherin, Hufflepuff, Ravenclaw\nsubjects = pocions, defensa contra les forces del mal, encanteris, transfiguració\nfears = en Voldemort, les aranyes, suspendre els examens GNOM\nnoms = Harry, Ron, Hermione\n_\n_ {print} nom ' pertany a la casa ' cases {at} {random}\n_ {print} nom ' és bo amb ' subjects {at} {random}\n_ {print} nom ' li aterra ' fears {at} {random}\n```\n"
+    hangman_2:
+        name: El penjat 2
+        default_save_name: Penjat_2
+        description: El penjat 2
+        levels:
+            17:
+                story_text: "### Exercici\n\n***Enganxa el teu codi*** Copia el teu codi de l'última pestanya i enganxa'l al camp de programació.\n\n***El joc*** En aquest joc es continua jugant fins que el Jugador 2 quedi eliminat. Completa la comanda `while` corresponent. Després, el Jugador 2 pot endevinar una lletra, així que demana-li que endevini una lletra.\nHem de comprovar si la seva resposta és correcta, així que comprova si el seu `intent` es troba (en algun lloc) de la llista `solució`. Després el programa identifica quina és la lletra (o lletres) encertada. Aquesta part ja l'hem programat per a tu.\nSeguidament, volem felicitar el jugador, ja que ha trobat una lletra correcta i imprimirem la llista `lletres_endevinades`, i així el jugador podrà veure el seu progrés.\n\nLa següent part que programarem és el que passa quan el jugador ha encertat totes les lletres. Això passarà quan la seva llista de `lletres_endevinades` sigui la mateixa que la nostra llista `solució`.\nSi les llistes són iguals, ja pots felicitar el Jugador 2 per la seva victòria i posar la variable `final_joc` a `True`.\n\nAleshores programarem què passa quan el Jugador 2 escull una lletra incorrecta (això passarà dins la comanda `{else}`). Primer, informa el jugador que el seu intent ha estat incorrecte. Després augmenta la variable `errades_fetes` en 1.\n\nPer a l'última part, programarem què passa quan el Jugador 2 ha comès 10 errades. Imprimeix que el Jugador 1 ha guanyat el joc. Després imprimeix la solució. Finalment, posa la variable `final_joc` a `True`, perquè el joc s'aturi.\n\n***Ves a la següent pestanya*** Feina increïble! El teu joc ja és jugable, però no seria divertit si el penjat es dibuixés quan el Jugador 2 comet una errada..?\n"
+                example_code: "```\n# Enganxa el teu codi aquí\t\n\n# El joc\n{while} final_joc _\n    intent = _\n    {if} _\n        {for} i {in} {range} 1 {to} quantitat_lletres:\n            if solucio[i] == intent:\n                lletres_endevinades[i] = intent\n        {print} _\n        {if} lletres_endevinades == _:\n            {print} _\n            final_joc = _\n    {else}:\n        {print} _\n        errades_fetes_\n        {if} _ == 10:\n            {print} _\n            {print} _\n            _\n```\n"
+    hangman_3:
+        name: El penjat 3
+        default_save_name: Penjat_3
+        description: El penjat 3
+        levels:
+            17:
+                example_code: "```\n# Crea una funció que dibuixi el penjat\n{define} dibuixa_penjat {with} pas:\n    {if} pas == 1:\n        {color} white\n        {forward} -100\n        {turn} 90\n        {forward} -50\n        {color} black\n        {forward} 100\n        {forward} -50\n\n    {if} pas == 2:\n        _\n# Enganxa el teu codi del penjat\n\n```\n"
+                story_text: "En el joc del penjat, les errades es mostren dibuixant una part del penjat cada vegada que s'ha comès una errada.\nAra afegirem aquests dibuixos amb la nostra tortuga!\n\n### Exercici\n***Crea una funció que dibuixi el penjat*** Crea una funció que dibuixi el penjat en 10 passos. Ja hem fet el primer pas per a tu.\n\n***Prova la funció*** Prova la funció cridant la funció amb 10. Si estàs content amb la funció, elimina la línia que crida la funció temporalment. L'haurem de cridar quan el jugador cometi una errada.\n\n***Enganxa el teu joc de penjat sota la funció*** Torna a la pestanya anterior i copia el teu joc de penjat. Enganxa el joc sota la funció.\n\n***Crida la funció quan el jugador cometi una errada*** Sota la línia `errades_fetes = errades_fetes + 1` cridarem la funció. Volem que la tortuga faci tants passos com les errades que el jugador ha comès, així que cridarem la funció amb `errades_fetes` com a argument.\n\n***Gaudeix del teu joc!***\n<div class=\"w-full flex flex-row gap-2\">\n    El penjat s'ha de semblar a això <img src=\"https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129\" width=\"100\">\n</div>\n"
