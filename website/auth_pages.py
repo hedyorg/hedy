@@ -97,13 +97,16 @@ class AuthModule(WebsiteModule):
         # We set the cookie to expire in a year,
         # just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
+
+        # e2e tests make calls from the domain 'localhost.local', so we need to not set the domain for the tests to work
+        domain = None if 'localhost' in config['domain_name'] else config['domain_name']
         resp.set_cookie(
             TOKEN_COOKIE_NAME,
             value=cookie,
             httponly=True,
             secure=is_heroku(),
             samesite="Strict",
-            domain=config["domain_name"],
+            domain=domain,
             path="/",
             max_age=365 * 24 * 60 * 60,
         )
@@ -199,6 +202,9 @@ class AuthModule(WebsiteModule):
         # We set the cookie to expire in a year,
         # just so that the browser won't invalidate it if the same cookie gets renewed by constant use.
         # The server will decide whether the cookie expires.
+
+        # e2e tests make calls from the domain 'localhost.local', so we need to not set the domain for the tests to work
+        domain = None if 'localhost' in config['domain_name'] else config['domain_name']
         resp.set_cookie(
             TOKEN_COOKIE_NAME,
             value=cookie,
@@ -206,7 +212,7 @@ class AuthModule(WebsiteModule):
             secure=is_heroku(),
             samesite="Strict",
             path="/",
-            domain=config["domain_name"],
+            domain=domain,
             max_age=365 * 24 * 60 * 60,
         )
 
