@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-11-05 06:42+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-11-26 01:22+0000\n"
+"Last-Translator: \"zoom.quiet\" <zoomquiet+hedy@gmail.com>\n"
 "Language-Team: zh_Hans <LL@li.org>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.9-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -35,7 +35,7 @@ msgid "Has Blanks"
 msgstr "我们发现代码似乎不完整。能能用代码填补空白吗？"
 
 msgid "Incomplete"
-msgstr ""
+msgstr "我们发现第 {line_number} 行的 `{incomplete_command}` 部分代码似乎缺失。您可以尝试添加缺失的内容吗？"
 
 msgid "Incomplete Repeat"
 msgstr "我们检测到第 {line_number} 行的 `{repeat}` 缺少 `{command}` 命令。你可以尝试添加它吗？"
@@ -65,7 +65,7 @@ msgid "Lonely Text"
 msgstr "我们检测到代码中似乎缺少一个包含第 {line_number} 行所用文本的命令。你能否尝试使用文本编写所需的命令"
 
 msgid "Missing Additional Command"
-msgstr ""
+msgstr "我们检测到第 {line_number} 行上的命令 `{command}` 缺少某些内容。您可以尝试在代码中使用 `{missing_command}` 吗？"
 
 msgid "Missing Colon Error"
 msgstr "我们检测到 `{command}` 在第 {line_number} 行末尾需要一个 `:`。从第 17 级开始，你可以在命令行末尾添加 `:` ？"
@@ -250,9 +250,8 @@ msgstr "全部"
 msgid "all_class_highscores"
 msgstr "所有学生在班级中都可见高分"
 
-#, fuzzy
 msgid "all_rows_missing_separator"
-msgstr ""
+msgstr "所有行均不包含分号。也许您想让我们自动生成密码？如果是这样，请单击密码切换按钮并重新创建帐户。如果不是这种情况，请在以下行中使用分号分隔用户名和密码：{rows}"
 
 msgid "already_account"
 msgstr "是否已经有账户?"
@@ -279,7 +278,7 @@ msgid "birth_year"
 msgstr "出生年份"
 
 msgid "bug"
-msgstr ""
+msgstr "问题"
 
 msgid "by"
 msgstr "经由"
@@ -398,9 +397,8 @@ msgstr "继续"
 msgid "contributor"
 msgstr "贡献者"
 
-#, fuzzy
 msgid "copy_accounts_to_clipboard"
-msgstr ""
+msgstr "复制到剪贴板"
 
 msgid "copy_clipboard"
 msgstr "已成功复制到剪贴板"
@@ -435,12 +433,11 @@ msgstr "创建账户"
 msgid "create_accounts"
 msgstr "创建多个账户"
 
-#, fuzzy
 msgid "create_accounts_placeholder"
-msgstr ""
+msgstr "键入帐户或从电子表格中粘贴"
 
 msgid "create_accounts_prompt"
-msgstr ""
+msgstr "将创建 {number_of_accounts} 个学生帐户。确定吗？"
 
 msgid "create_adventure"
 msgstr "创建探险"
@@ -454,9 +451,8 @@ msgstr "创建一个账户"
 msgid "create_student_account_explanation"
 msgstr "你可以使用帐户保存自己的程序。"
 
-#, fuzzy
 msgid "create_student_accounts"
-msgstr ""
+msgstr "创建学生帐户"
 
 msgid "create_teacher_account"
 msgstr "创建一个教师账户"
@@ -464,21 +460,17 @@ msgstr "创建一个教师账户"
 msgid "create_teacher_account_explanation"
 msgstr "使用教师帐户，你可以保存自己的程序并查看学生的学习结果。"
 
-#, fuzzy
 msgid "create_usernames_and_passwords_desc"
-msgstr ""
+msgstr "每行输入一个用户名和密码，以分号分隔。或者，如果您的数据在双列电子表格中，请复制文件内容并粘贴在此处。"
 
-#, fuzzy
 msgid "create_usernames_and_passwords_title"
-msgstr ""
+msgstr "用户名和密码"
 
-#, fuzzy
 msgid "create_usernames_desc"
-msgstr ""
+msgstr "每行输入一个用户名或从电子表格中粘贴。"
 
-#, fuzzy
 msgid "create_usernames_title"
-msgstr ""
+msgstr "用户名"
 
 msgid "creator"
 msgstr "创建者"
@@ -1022,7 +1014,7 @@ msgid "main_subtitle"
 msgstr "一种渐进式的编程语言"
 
 msgid "main_title"
-msgstr ""
+msgstr "海蒂"
 
 msgid "make_sure_you_are_done"
 msgstr "确保你完成了！单击“上交”后，你无法再更改程序。"
@@ -1252,15 +1244,14 @@ msgstr "密码已更新。"
 msgid "passwords_six"
 msgstr "所有的密码都至少需要六个字符或更长。"
 
-#, fuzzy
 msgid "passwords_too_short"
-msgstr ""
+msgstr "密码长度必须至少为 6 个字符。请更正以下密码，使其至少包含 6 个符号：{passwords}"
 
 msgid "pending_invites"
 msgstr "等待邀请"
 
 msgid "people_with_a_link"
-msgstr ""
+msgstr "有链接的其他人可以看到这个程序。也可以在“探索”页面上找到它。"
 
 msgid "percentage"
 msgstr "百分比"
@@ -1301,12 +1292,11 @@ msgstr "查看之前的活动"
 msgid "previous_page"
 msgstr "上一页"
 
-#, fuzzy
 msgid "print_accounts"
-msgstr ""
+msgstr "打印"
 
 msgid "print_accounts_title"
-msgstr ""
+msgstr "hedy.org 的学生账户"
 
 msgid "print_logo"
 msgstr "打印"
@@ -1350,9 +1340,8 @@ msgstr "程序"
 msgid "prompt_join_class"
 msgstr "你想参加这个课程吗？"
 
-#, fuzzy
 msgid "provided_username_duplicates"
-msgstr ""
+msgstr "您多次提供了以下用户名：{usernames}"
 
 msgid "public"
 msgstr "公开"
@@ -1363,9 +1352,8 @@ msgstr "浏览公开冒险"
 msgid "public_content"
 msgstr "发布内容"
 
-#, fuzzy
 msgid "public_content_info"
-msgstr "您还可以寻找公共探险活动并以它们为例。"
+msgstr "您可以在这里找到我们的公开冒险故事。这些是来自世界各地的其他教师制作的冒险故事。请浏览并随意在自己的课程中使用冒险故事。"
 
 msgid "public_invalid"
 msgstr "此协议选择无效"
@@ -1469,7 +1457,6 @@ msgstr "重置"
 msgid "reset_password"
 msgstr "重置密码"
 
-#, fuzzy
 msgid "restart"
 msgstr "重来"
 
@@ -1534,7 +1521,7 @@ msgid "select_lang"
 msgstr "选择语言"
 
 msgid "select_levels"
-msgstr ""
+msgstr "选择级别"
 
 msgid "select_tag"
 msgstr "选择标签"
@@ -1596,9 +1583,8 @@ msgstr "解决方案示例"
 msgid "solution_example_explanation"
 msgstr "这是您冒险的解决方案。如果您想与其他老师分享这次冒险，可以使用它，这样他们就可以知道您建议的解决方案是什么。"
 
-#, fuzzy
 msgid "some_rows_missing_separator"
-msgstr ""
+msgstr "以下行缺少分号，因此缺少用户名或密码：{rows}"
 
 msgid "something_went_wrong_keyword_parsing"
 msgstr "您的冒险中有一个错误，所有关键字都正确地用 { } 括起来吗？"
@@ -1636,9 +1622,8 @@ msgstr "文本"
 msgid "student"
 msgstr "学生"
 
-#, fuzzy
 msgid "student_accounts_created"
-msgstr ""
+msgstr "成功创建学生账户"
 
 msgid "student_adventures_table"
 msgstr "学生的探险"
@@ -1829,9 +1814,8 @@ msgstr "海蒂-查看探险活动"
 msgid "token_invalid"
 msgstr "你的令牌无效。"
 
-#, fuzzy
 msgid "too_many_accounts"
-msgstr ""
+msgstr "您不能创建超过 100 个学生帐户。"
 
 msgid "tooltip_level_locked"
 msgstr "你的老师禁用了这个级别"
@@ -1898,13 +1882,11 @@ msgstr "更新公开的个人资料"
 msgid "updating_indicator"
 msgstr "更新"
 
-#, fuzzy
 msgid "use_custom_passwords"
-msgstr ""
+msgstr "提供您自己的密码"
 
-#, fuzzy
 msgid "use_generated_passwords"
-msgstr ""
+msgstr "自动生成密码"
 
 msgid "use_of_blanks_exception"
 msgstr "程序中空格的使用"
@@ -1927,13 +1909,11 @@ msgstr "此用户不存在或没有公开个人资料"
 msgid "username"
 msgstr "用户名"
 
-#, fuzzy
 msgid "username_contains_invalid_symbol"
-msgstr ""
+msgstr "用户名不能包含符号“:”或“@”。从以下用户名中删除这些符号：{usernames}"
 
-#, fuzzy
 msgid "username_contains_separator"
-msgstr ""
+msgstr "用户名不能包含分号。也许您想提供自己的密码？如果是这样，请单击密码切换并重新创建帐户。如果不是这种情况，请从以下用户名中删除分号：{usernames}"
 
 msgid "username_empty"
 msgstr "你没有输入用户名！"
@@ -1947,13 +1927,11 @@ msgstr "用户名不能包含`:`或`@`。"
 msgid "username_three"
 msgstr "用户名必须至少包含三个字符。"
 
-#, fuzzy
 msgid "usernames_too_short"
-msgstr ""
+msgstr "用户名必须至少包含 3 个字符。请更正以下用户名，使其包含 3 个或更多字符：{usernames}"
 
-#, fuzzy
 msgid "usernames_unavailable"
-msgstr ""
+msgstr "以下用户名不可用：{usernames}。您可以创建类似的帐户，例如，通过附加下划线或您的班级名称。"
 
 msgid "value"
 msgstr "值"
@@ -1977,7 +1955,7 @@ msgid "walker_variable_role"
 msgstr "漫游者"
 
 msgid "website"
-msgstr ""
+msgstr "网站"
 
 msgid "what_is_your_role"
 msgstr "你的角色是什么？"
@@ -1986,37 +1964,37 @@ msgid "what_should_my_code_do"
 msgstr "我的代码能做什么？"
 
 msgid "workbook_circle_question_text"
-msgstr ""
+msgstr "**问题**: 在此代码中圈出{goal}:"
 
 msgid "workbook_circle_question_title"
-msgstr ""
+msgstr "分配"
 
 msgid "workbook_define_question_text"
-msgstr ""
+msgstr "**问题**：{word} 是什么意思?"
 
 msgid "workbook_define_question_title"
-msgstr ""
+msgstr "Define"
 
 msgid "workbook_input_question_text"
-msgstr ""
+msgstr "**问题**：哪个代码片段产生了这个输出？"
 
 msgid "workbook_input_question_title"
-msgstr ""
+msgstr "输入"
 
 msgid "workbook_multiple_choice_question_text"
-msgstr ""
+msgstr "**问题**：此代码正确吗？或者有错误？"
 
 msgid "workbook_multiple_choice_question_title"
-msgstr ""
+msgstr "选择"
 
 msgid "workbook_open_question_title"
-msgstr ""
+msgstr "开放式问题"
 
 msgid "workbook_output_question_text"
-msgstr ""
+msgstr "**问题**：这段代码的输出是什么？"
 
 msgid "workbook_output_question_title"
-msgstr ""
+msgstr "输出"
 
 msgid "year_invalid"
 msgstr "请输入介于 1900 和 {current_year} 之间的年份。"
@@ -2395,4 +2373,3 @@ msgstr "你的程序"
 
 #~ msgid "Output"
 #~ msgstr ""
-
