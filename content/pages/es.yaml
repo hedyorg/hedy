@@ -1374,10 +1374,10 @@ workbooks:
         -   type: texto
             contents: "#### Ejercicio5: Escribe el código\nEcha un buen vistazo al resultado y escribe un código correspondiente a él.\n**Asegúrate que tu código contiene al menos una opción aleatoria, ¡así no utilizaras solo imprimir!**"
         -   type: entrada de datos
-            output: "¡Bienvenido a la noche de bingo!<br>\nLos 3 números de la suerte son:<br>\n5 y 3 y 10"
+            output: "¡Bienvenido a la noche de bingo!\nLos 3 números de la suerte son:\n5 y 3 y 10"
             answer: "numeros es 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nimprimir ¡Bienvenido a la noche de bingo!\nimprimir Los 3 números de la suerte son:\nimprimir numeros en aleatorio y imprimir numeros en aleatorio y imprimir numeros en aleatorio"
         -   type: entrada de datos
-            output: "Esta noche vamos a ver una película.<br>\nElegimos: Al revés"
+            output: "Esta noche vamos a ver una película.\nElegimos: Al revés"
             answer: "peliculas es Los vengadores, Barbie, Al revés\nimprimir Esta noche vamos a ver una película.\nimprimir Elegimos: peliculas en aleatorio"
         -   type: texto
             contents: "#### Ejercicio 6: Vocabulario de programación\n¡Hemos vuelto a aprender nuevas palabras de programación! Explícalas con tus propias palabras."
@@ -1741,3 +1741,79 @@ workbooks:
             type: pregunta
         intro: "## Matemáticas\nAl final de esta lección, puedes:\n* utilizar las matemáticas en Hedy"
         level: '6'
+    -   exercises:
+        -   code: repetir 5 veces imprimir '¡Baby shark!'
+            contents: "### Repetición\nA veces quieres repetir una línea de código varias veces, por ejemplo en una canción o una historia."
+            type: texto
+        -   type: texto
+            contents: "#### Ejercicio 1: Predecir el resultado\n¿Cuál será el resultado de estos programas?"
+        -   lines: '3'
+            answer: "¡Baby shark!\n¡Baby shark!\n¡Baby shark!"
+            code: repetir 3 veces imprimir '¡Baby shark!'
+            type: resultado
+        -   type: resultado
+            code: repetir 1 vez imprimir '¡Hola a todos!'
+            answer: ¡Hola a todos!
+            lines: '1'
+        -   lines: '4'
+            code: "a es 4\nrepetir una vez imprimir 'Hola a todos'"
+            type: resultado
+            answer: "¡Hola a todos!\n¡Hola a todos!\n¡Hola a todos!\n¡Hola a todos!"
+        -   type: texto
+            contents: "### Ejercicio 2: Entrada\nEcha un vistazo al resultado. Escribe un programa que pueda pertenecer a este resultado.\n\nTen en cuenta: Pueden ser correctas varias respuestas. Elige la que quieras, mientras sea correcta.\nRellena todas las líneasFill up all the lines, ¡así que fíjate bien en la cantidad de líneas!\n"
+        -   type: entrada
+            answer: "imprimir '¡Hola a todos!'\nrepetir 2 veces imprimir 'Esto es una línea.'"
+            output: "¡Hola a todos!\nEsto es una línea.\nEsto es una línea."
+            lines: '2'
+        -   type: entrada
+            output: "Esta es la línea 1\nEsta es la línea 2\nEsta es la línea 3"
+            lines: '3'
+            answer: "imprimir 'Esta es la línea 1'\nimprimir 'Esta es la línea 2'\nimprimir 'Esta es la línea 3'"
+        -   contents: "### Ejercicio 3: Correcto o incorrecto\nPresta mucha atención a los programas y decide si provocarán un mensaje de error o no."
+            type: texto
+        -   answer: Incorrecto, falta imprimir
+            type: Código MC
+            code: "imprimir 'El príncipe seguía gritando pidiendo ayuda'\nrepetir 3 veces '¡Ayuda!'"
+            options:
+            -   Correcto
+            -   Incorrecto
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            type: Código MC
+            answer: Correcto
+            code: "avanzar 100\nrepetir 3 veces girar 90"
+        -   type: Código MC
+            options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto, falta en aleatorio
+            code: "gente = mamá, papá, Emma, Sophie\nrepetir 7 veces imprimir 'La vajilla será lavada por ' gente"
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            answer: Correcto
+            code: "opciones = 1, 2, 3, 4, 5, 6\nrepetir 5 veces imprimir 'Lanzaste: ' opciones en aleatorio"
+            type: Código MC
+        -   type: texto
+            contents: "#### Ejercicio 6: Vocabulario de programación\n¡Hemos vuelto a aprender una nueva palabra de programación! Explícala con tus propias palabras."
+        -   lines: '1'
+            answer: repetir una línea varias veces
+            type: definir
+            word: repetir
+        -   contents: '#### ¿Qué te ha parecido?'
+            type: texto
+        -   type: pregunta
+            text: ¿Qué ejercicio te ha gustado más de este nivel?
+            lines: '1'
+        -   lines: '5'
+            type: pregunta
+            text: ¿Qué te ha gustado?
+        -   text: ¿Qué ejercicio te ha gustado menos de este nivel?
+            type: pregunta
+            lines: '1'
+        -   lines: '5'
+            type: pregunta
+            text: ¿Qué no te ha gustado?
+        level: '7'
+        intro: "## ¡Repetir!\nAl final de esta lección, podrás:\n* ejecutar una línea de código varias veces"
