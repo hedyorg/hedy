@@ -19,24 +19,16 @@ levels:
             code: ___ Hello!
             mp_choice_options:
             -   option: |-
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: '`{echo}` повторює задану відповідь.'
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: Саме так!
             -   option: |-
-                    ```
-                    hello
-                    ```
+                    `hello`
                 feedback: Привіт - це не команда.
             -   option: |-
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: За допомогою `{ask}` ви можете поставити запитання.
             hint: _ Hello world!
             correct_answer: B
@@ -92,24 +84,16 @@ levels:
                 _ Отже, твоя улюблена тварина...
             mp_choice_options:
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: Ні, ви хочете, щоб вам повторили відповідь.
             -   option: |-
-                    ```
-                    Hedy
-                    ```
+                    `Hedy`
                 feedback: Hedy - це не команда.
             -   option: |-
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: За допомогою `{ask}` ви можете поставити запитання.
             -   option: |-
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: Так!
             hint: Ви хочете побачити відповідь у кінці рядка 2...
             question_score: '10'
@@ -214,24 +198,16 @@ levels:
                 {print} Привіт!
             mp_choice_options:
             -   option: |-
-                    ```
-                    {sleep}
-                    ```
+                    `{sleep}`
                 feedback: Ідеально!
             -   option: |-
-                    ```
-                    {echo}
-                    ```
+                    `{echo}`
                 feedback: Тут нема чого повторюватися
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: Там немає тексту для `{print}`
             -   option: |-
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: Немає жодного питання, яке можна поставити
             question_score: '10'
             question_text: Що має бути на лініях?
@@ -367,19 +343,13 @@ levels:
             question_text: Які команди ви використовуєте, щоб дозволити Хеді вибирати щось довільно?
             mp_choice_options:
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: '`{print}` використовується для друку тексту'
             -   option: |-
-                    ```
-                    {ask}
-                    ```
+                    `{ask}`
                 feedback: '`{ask}` використовується для постановки запитання'
             -   option: |-
-                    ```
-                    {is}
-                    ```
+                    `{is}`
                 feedback: '`{is}` використовується для створення списку'
             -   option: |-
                     `{at} {random}`
@@ -647,7 +617,7 @@ levels:
             hint: Ви не хочете, щоб Hedy буквально друкувала «параметри {at} {random}», ви хочете, щоб вона друкувала «камінь», «папір» або «ножиці».
             code: "варіанти {is} камінь, папір, ножиці\n{print} 'параметри {at} {random}'"
         6:
-            hint: 'Добре подумайте: що таке змінна і має бути поза лапками? А які нормальні слова мають бути всередині?.'
+            hint: 'Добре подумайте: що таке змінна і має бути поза лапками? А які нормальні слова мають бути всередині?'
             question_text: Що було б хорошим наступним рядком у цьому коді?
             mp_choice_options:
             -   option: "```\n{print} 'Ви виграєте... ціни {at} {random}\n```"
@@ -709,7 +679,7 @@ levels:
         4:
             hint: Починаючи з рівня 4, потрібно використовувати лапки.
             mp_choice_options:
-            -   option: 'Слово `{print}` потрібно взяти в лапки, наприклад: `{print}`.'
+            -   option: 'Слово `{print}` потрібно взяти в лапки, наприклад: `''{print}''`.'
                 feedback: Лапки не повинні бути навколо самої команди.
             -   feedback: супер!
                 option: Слова, які потрібно надрукувати, потрібно взяти в лапки.
@@ -744,14 +714,14 @@ levels:
                 _ {print} 'Я щасливий номер 5! Р
             mp_choice_options:
             -   option: '`{print}`'
-                feedback: '`{print}` is still the same'
+                feedback: 'Уже є команда `{print}`.'
             -   option: '`{if}`'
-                feedback: '`{ask}` is still the same'
+                feedback: 'Команда `{if}` використовується в рядку вище.'
             -   option: '`{sleep}`'
-                feedback: '`No these commands remain the same'
+                feedback: 'Це не те!'
             -   option: '`{else}`'
                 feedback: Correct!
-            hint: We have only learned a new command in level 5.
+            hint: Який з них поєднується з командою `{if}`?
             correct_answer: D
             question_score: '10'
         3:
@@ -798,24 +768,16 @@ levels:
                 {else} _ 'Несподівано... Немає великих грошей для вас. Р
             mp_choice_options:
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: '`{if}` знаходиться в рядку вище.'
             -   option: |-
-                    ```
-                    {at} {random}
-                    ```
+                    `{at}` `{random}`
                 feedback: Не потрібно `{at} {random}`.
             -   option: |-
-                    ```
-                    {else}
-                    ```
+                    `{else}`
                 feedback: Ось вже є команда `{else}`
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: Чудовий!
             hint: Після `{else}` a `{print}` команда наступні
             correct_answer: D
@@ -838,14 +800,10 @@ levels:
                     ```
                 feedback: Чудова робота!
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: '`{if}` вже там'
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: Ні, що це не так.
             hint: Яка змінна назва?
             correct_answer: B
@@ -1112,19 +1070,13 @@ levels:
                     `I'm`
                 feedback: Це вірно!
             -   option: |-
-                    ```
-                    {print}
-                    ```
+                    `{print}`
                 feedback: '`{print}` писався правильно'
             -   option: |-
-                    ```
-                    {repeat}
-                    ```
+                    `{repeat}`
                 feedback: '`{repeat}` писався правильно'
             -   option: |-
-                    ```
-                    {times}
-                    ```
+                    `{times}`
                 feedback: '`{times}` писався правильно'
             hint: Я невірно, ви не можете використовувати апотрофії у вирокі
             question_text: Яке слово неправильне в коді?
@@ -1180,6 +1132,7 @@ levels:
                 feedback: '''Ми не будемо з''являтися двічі в одному рядку'
             -   option: |-
                     й й
+                    Ми будемо
                     Ми будемо
                     РОКУ ВАМ!
                     й й
@@ -1304,10 +1257,10 @@ levels:
                 feedback: Це не в правому порядку.
             -   option: |-
                     ```
-                    {repeat} 4 {times} 'if youre happy and you know it'
-                    {repeat} 2 times 'clap your hands'
-                    {print} 'and you really want to show it'
-                    {print} 'clap your hands'
+                    {repeat} 4 {times} 'якщо ти щасливий і ти це знаєш'
+                    {repeat} 2 {times} 'плескайте в долоні'
+                    {print} 'і ви дійсно хочете це показати'
+                    {print} 'плескайте в долоні'
                     ```
                 feedback: Це не в правому порядку.
             question_score: '10'
@@ -1359,10 +1312,10 @@ levels:
                     Im Hedy!
                 feedback: супер!
             -   option: |-
-                    Hello
-                    Hello
-                    Im Hedy!
-                    Im Hedy!"
+                    Привіт
+                    Привіт
+                    Я Хеді!
+                    Я Хеді!
                 feedback: Все друкується двічі
             correct_answer: C
             code: "{repeat} 2 {times}\n{print} 'Hello Р\n{print} 'Im Hedy! Р"
@@ -1577,20 +1530,20 @@ levels:
             mp_choice_options:
             -   option: |-
                     ```
-                    Молодець!
-                    Молодець!
+                    хороша робота!
+                    хороша робота!
                     ```
                 feedback: Це не так!
             -   option: |-
                     ```
                     Комп'ютер вибухне через 5... 4... 3... 2... 1...
                     ```
-                feedback: Це не так
+                feedback: Це не те!
             -   option: |-
                     ```
-                    Молодець!
-                    Молодець!
-                    Можеш користуватися комп'ютером!
+                    хороша робота!
+                    хороша робота!
+                    Ви можете використовувати комп'ютер!
                     ```
                 feedback: Це не так!
             -   option: |-
@@ -1779,153 +1732,278 @@ levels:
         10:
             code: |-
                 1 {repeat} 2 {times}
-                2 {if} level {is} 9
-                3 {print} Great job!
+                2 {if} рівень {is} 10 хв
+                3 {print} 'Велика робота!'
             mp_choice_options:
-            -   option: All lines should start with 4 spaces
-                feedback: Only line 2 and 3 start with spaces
-            -   option: Line 2 and 3 should start with 4 spaces
-                feedback: Line 3 should start with 8
-            -   option: Line 2 and 3 should start with 8 spaces
-                feedback: Line 2 should start with 4
-            -   option: line 2 should atart with 4 spaces and line 3 with 8
-                feedback: You are correct!
-            hint: The first line doens't start with any spaces
+            -   option: Всі лінії повинні починатися з 4 просторів
+                feedback: Тільки лінія 2 і 3 початок з пробілами
+            -   option: Лінія 2 і 3 повинні почати з 4 пробілів
+                feedback: Лінія 3 повинна починатися з 8
+            -   option: Лінія 2 і 3 повинні почати з 8 пробілів
+                feedback: Лінія 2 повинна починатися з 4
+            -   option: лінія 2 повинна починатися з 4 просторів і лінії 3 з 8
+                feedback: Ви правильно!
+            hint: Перша лінія не починається з будь-яких просторів
+            question_score: '10'
+            correct_answer: D
+            question_text: Яка заява правда?
         9:
             mp_choice_options:
             -   option: Ні, що не дозволено
                 feedback: Допускається
             -   feedback: Ви можете використовувати більше, якщо вам подобається
                 option: Тільки 1
+            -   option: '3'
+                feedback: Ви можете використовувати більше, якщо хочете
+            -   option: Нескінченно, до тих пір, поки ви не будете використовувати відступи правильно
+                feedback: Це правда
             question_text: Скільки команд `{if}` можна розмістити в іншому `{if}`?
+            correct_answer: D
+            question_score: '10'
+            hint: Ви можете покласти команду `{if}` у команду `{if}`.
     10:
         1:
-            question_text: What do we need to fill in on the `_?_` if we want to print each compliment?
+            question_text: Що потрібно заповнити на `_`, якщо ми хочемо надрукувати кожен комплімент?
             code: |-
-                compliments = perfect, great job, amazing
-                _?_
-                    {print} compliment
+                компліменти = ідеальне, відмінне завдання, дивовижний
+                У
+                {print} комплімент
+            mp_choice_options:
+            -   option: "й й\n{for} кожен комплімент\nй й"
+                feedback: Це не так
+            -   feedback: Ви заслуговуєте всіх компліментів!
+                option: "й й\n{for} комплімент {in}\nй й"
+            -   option: "й й\n{if} комплімент {in}\nй й"
+                feedback: Це не так
+            -   option: "й й\n{for} компліменти {in}\nй й"
+                feedback: По-перше!
+            correct_answer: B
+            hint: '`{for}` кожен комплімент в списку компліментів...'
+            question_score: '10'
         5:
-            question_text: What word should be on the _?_ with these digital dice?
+            question_text: Яке слово повинно бути на `_` з цим цифровим діцесом?
             code: |-
-                {print} 'Welcome to the digital dice!'
-                players = Ann, John, Jesse
-                choices = 1, 2, 3, 4, 5, 6
-                {for} player {in} players
-                    {print} player ' throws ' _?_ {at} {random}
+                {print} 'Велком до цифрового набору! Р
+                гравці = Енн, Джон, Джессе
+                вибір = 1, 2, 3, 4, 5, 6
+                {for} гравця {in}
+                {print} плеєр ' кидає ' _ {at} {random}
+            mp_choice_options:
+            -   feedback: Ані кидає Джессе, замість «Анна кидає 6».
+                option: гравці
+            -   option: вибір
+                feedback: Це вірно!
+            -   option: вибір
+                feedback: Ви дуже близько. Але вам потрібно, щоб забрати з списку, який називається "хоце" не "хоце"...
+            -   feedback: Подивіться на імена змінних.
+                option: кепікі
+            hint: Потрібні вибрати номер `{at} {random}` й
+            correct_answer: B
+            question_score: '10'
         6:
             mp_choice_options:
-            -   option: Kelly chooses rock
-                feedback: Meredith wants to play too!
+            -   option: "й й\nКеллі вибирає скеля\nй й"
+                feedback: Мередіт хоче грати занадто!
             -   option: |-
-                    Meredith chooses scissors
-                    Kelly chooses rock
-                feedback: So close! But Kelly is first in the list, so she goes first
-            -   option: Meredith chooses paper
-                feedback: Kelly wants to play too!
+                    й й
+                    Мередіт вибирає ножиці
+                    Келлі вибирає скеля
+                    й й
+                feedback: Ось Але Келлі вперше в списку, тому вона йде першим
+            -   option: "й й\nПапір Мередіт вибирає\nй й"
+                feedback: Келлі хоче грати занадто!
             -   option: |-
-                    Kelly chooses paper
-                    Meredith chooses scissors
-                feedback: Amazing!
+                    й й
+                    Келлі вибирає папір
+                    Мередіт вибирає ножиці
+                    й й
+                feedback: Дивовижно!
+            question_text: Які відповіді нижче є можливим результатом, коли ви запустіть код?
+            hint: Кожен гравець підбере опцію. Перший гравець у списку вперше пройде.
+            correct_answer: D
+            code: "вибірки = камінь, папір, ножиці\nгравці = Келлі, Мередіт\n{for} гравця {in}\n{print} гравець ' обирає ' вибору {at} {random}"
+            question_score: '10'
         7:
-            question_text: What line should be on the _?_ in this code that decides what these people will have for dinner?
+            question_text: Яка лінія повинна бути на `_` в цьому коді, який вирішує, що ці люди будуть мати на вечерю?
             code: |-
-                names = Ron, Leslie, April, Andy
-                food = pasta, fries, salad
-                _?_
-                    {print} name ' has to eat ' food {at} {random} ' for dinner'
+                імена = Ron, Леслі, Квітень, Andy
+                їжа = паста, картопля, салат
+                У
+                {print} ім'я ' має їсти ' продукти харчування {at} {random} ' для вечері Р
+            correct_answer: A
+            mp_choice_options:
+            -   feedback: Ви на вогонь!
+                option: "й й\n{for} назва {in} імена\nй й"
+            -   option: "й й\n{for} імена {in}\nй й"
+                feedback: Не потрібно для кожного імені в списку, щоб інший спосіб навколо
+            -   option: "й й\n{for} продукти харчування {in}\nй й"
+                feedback: Кожна назва повинна розповісти про те, що вони будуть на вечерю.
+            -   option: "й й\n{for} назва {in} їжа\nй й"
+                feedback: Кожна назва повинна розповісти про те, що вони будуть на вечерю.
+            hint: Кожна назва повинна розповісти про те, що вони будуть на вечерю.
+            question_score: '10'
         8:
-            question_text: What should be on the _?_ in this code that decides which color shirt you get?
+            question_text: Що потрібно на `_` в цьому коді, який вирішує, яка колірна сорочка ви отримуєте?
             code: |-
-                names = Donna, Tommy, Ben
-                colors = blue, red, purple
-                {for} name {in} names
-                    {print} _?_
+                імена = Донна, Томмі, Бен
+                колір = синій, червоний, фіолетовий
+                {for} name {in} імена
+                {print} _
             mp_choice_options:
             -   option: |-
                     ```
                     'name gets a color shirt'
                     ```
-                feedback: That's not it!
+                feedback: Це не так!
             -   option: |-
                     ```
                     name 'gets a ' colors {at} {random} ' shirt'
                     ```
-                feedback: Great job! This was a hard one!
+                feedback: Чудова робота! Це було важко!
             -   option: |-
                     ```
                     names 'gets a ' color {at} {random} ' shirt'
                     ```
-                feedback: You want each name printed. So the first word should not be names but...
+                feedback: Ви хочете, щоб кожна назва була надрукована. Отже, перше слово не повинно бути імен, але...
             -   option: |-
                     ```
                     'people gets a colors shirt'
                     ```
-                feedback: There is no variable named people..
+                feedback: Немає змінних імен.
+            hint: Розуміть позначки квоти та імена змінних
+            question_score: '10'
+            correct_answer: B
         9:
             question_text: Яке перше питання задасть вам Hedy, коли ви запустите програму?
             code: |-
-                courses = appetizer, main course, dessert
-                names = Timon, Onno
-                {for} name in names
-                    {for} course {in} courses
-                        food = {ask} name ', what would you like to eat as your ' course '?'
-                        {print} name ' orders ' food ' as their ' course
+                курси = закуски, головний курс, десерт
+                імена = Тимон, Оно
+                {for} name {in} імена
+                Курс {for} {in}
+                їжа = {ask} ім'я ', що ви хотіли б їсти як курс '? Р
+                {print} назва ' замовлення ' їжа ' як їх ' курс
+            mp_choice_options:
+            -   option: Тимон, що ви хочете їсти як ваш закусок?
+                feedback: Ідеально!
+            -   option: Оно, що ви хочете їсти як ваш апетер?
+                feedback: Тимон першим у списку!
+            -   feedback: Прискорювачі першими в списку
+                option: Тимон, що ви хочете їсти як десерт?
+            -   feedback: Немає `{at} {random}``` в цьому коді...
+                option: Ви не знаєте, що Hedy оберіть `{at} {random}`.
+            correct_answer: A
+            hint: Вибрано перші варіанти з обох списків.
+            question_score: '10'
         10:
             code: |-
-                prices = 1 million dollars, car, sandwich
-                names = Bob, Patrick, Sandy, Larry
-                {for} price {in} prices
-                    {print} 'The ' price 'is won by ' names {at} {random}
+                призи = 1 млн. дол., автомобіль, сендвіч
+                імена = Боб, Патрик, Сандій, Ларнари
+                {for} приз {in}
+                {print} 'Приз ' виграє імена {at} {random}
             mp_choice_options:
-            -   option: Everybody will always win a price.
-                feedback: That is not true, you could end up without a price.
-            -   option: All the prices always go to one single person.
-                feedback: That is not true. All the prices are given away, but to random people
-            -   option: Larry will never win a price
-                feedback: That is not true. Larry has the same odds as the others
-            -   option: Someone might win with two prices
-                feedback: You get it!
+            -   option: Кожна людина завжди переможе приз.
+                feedback: Це не вірно, ви можете закінчити без призу.
+            -   option: Всі призи завжди йдуть до однієї особи.
+                feedback: Що не вірно. Всі призи віддаються, але до випадкових людей
+            -   option: Ларрі ніколи не виграє приз
+                feedback: Що не вірно. Ларрі має однакові коефіцієнти, як інші
+            -   option: Хто може виграти два призи
+                feedback: Ви зрозуміли!
+            question_score: '10'
+            question_text: Що правда про цей код?
+            hint: Спробуйте уявити вихід цього коду.
+            correct_answer: D
+        2:
+            mp_choice_options:
+            -   option: Я люблю піцу
+                feedback: Лінія 2 говорить `{for}` кожен прийом їжі в списку страв. Так кожен продукт друкується.
+            -   option: Я люблю макарони
+                feedback: Лінія 2 говорить `{for}` кожен прийом їжі в списку страв. Так кожен продукт друкується.
+            -   option: Я люблю млинці
+                feedback: Лінія 2 говорить `{for}` кожен прийом їжі в списку страв. Так кожен продукт друкується.
+            -   option: "Я люблю піцу\nЯ люблю макарони\nЯ люблю млинці"
+                feedback: Great!
+            question_score: '10'
+            question_text: Який вихід правильний?
+            code: "харчування = піца, паста, млинці\n{for} страва {in}\n{print} 'Я люблю'"
+            hint: Лінія 2 говорить про кожну страву в списку страв. Так кожен продукт друкується.
+            correct_answer: D
+        3:
+            question_score: '10'
+            mp_choice_options:
+            -   option: собаки люблять домашніх тварин
+                feedback: Лінія 2 говорить {for} кожен тварини в списку тварин. Так кожен тварини {print}ed.
+            -   feedback: Кожна тварина отримує власну лінію в виході.
+                option: собаки, коти, хамстери, курчати люблять домашніх тварин
+            -   feedback: Чудово!
+                option: "собаки люблять домашніх тварин\nкоти люблять домашніх тварин\nнайпопулярніші тварини\nкурчаті курчати люблять домашніх тварин"
+            -   option: Ви ще не знаєте. Через це вибирає одну з тварин {at} {random}.
+                feedback: Лінія 2 говорить {for} кожен тварини в списку тварин. Так кожен тварини {print}ed.
+            question_text: Який вихід правильний?
+            code: "тварини = собаки, коти, шинки, курки\n{for} {in} тварини\n{print} тварина ' прекрасний вихованці Р"
+            correct_answer: C
+            hint: Лінія 2 говорить {for} кожен тварини в списку тварин. Так кожен тварини друкується
+        4:
+            question_text: Що не так з цим кодом?
+            mp_choice_options:
+            -   feedback: Ні. Тільки лінія 3 потребує відступу, що вона має.
+                option: Лінія 2 повинні почати з 4 просторів як відступ
+            -   feedback: Лінія 2 є `{for}`command так лінія 3 потрібно почати з відступу.
+                option: Лінія 3 не потрібно починати з 4 просторів як відступ
+            -   option: Лінія 3 повинна сказати елемент замість крупи
+                feedback: хороша робота!
+            -   option: Лінія 2 повинна сказати крупи замість виробу
+                feedback: Ні, не так.
+            correct_answer: C
+            hint: Line 2 коментує `{for}` кожен пункт у списку круп
+            code: "крупа = яблука, хліб, молоко\n{for} елемент {in} крупи\n{print} 'Ми повинні ' круп'"
+            question_score: '10'
     11:
         1:
-            question_text: What word should be at the place of the question mark?
+            question_text: Яке слово повинно бути на місці заготовки?
             code: |-
-                {for} i {in} _?_ 1 {to} 10
-                    {print} i
+                {for} i {in} _ 1 {to} 10
+                {print} i
             mp_choice_options:
             -   option: |-
-                    ```
-                    counter
-                    ```
+                    `counter`
                 feedback: 'No'
             -   option: |-
-                    ```
-                    {range}
-                    ```
+                    `{range}`
                 feedback: Correct
             -   option: |-
-                    ```
-                    {if}
-                    ```
+                    `{if}`
                 feedback: 'No'
             -   option: |-
-                    ```
-                    {for}
-                    ```
+                    `{for}`
                 feedback: 'No'
+            question_score: '10'
+            correct_answer: B
+            hint: Що ви навчилися в цьому рівні?
         2:
             mp_choice_options:
             -   option: |-
+                    ```
                     1
                     2
                     3
+                    ```
                 feedback: Correct!
-            -   option: 1 2 3
+            -   option: "```\n1 2 3\n```"
                 feedback: That's not it
-            -   option: 1, 2, 3
+            -   option: "```\n1, 2, 3\n```"
                 feedback: That's not it
-            -   option: '123'
+            -   option: '```
+
+                    123
+
+                    ```'
                 feedback: That's not it
+            correct_answer: A
+            code: "{for} i {in} {range} 1 {to} 3 хв\n{print} i"
+            hint: Як з'являються цифри в екрані?
+            question_text: Що буде вихід з цього коду?
+            question_score: '10'
         4:
             mp_choice_options:
             -   option: |-
@@ -1936,14 +2014,14 @@ levels:
                 feedback: Now Hedy prints the numbers from 0 to 10 instead of 10 to 0.
             -   option: |-
                     ```
-                    {for} i {in} {range} 0 to 10
-                        {print} - i
+                    {for} i {in} {range} 0 {to} 10
+                        {print} -1 * i
                     ```
                 feedback: Hedy would print negative numbers in this case.
             -   option: |-
                     ```
-                    {for} i {in} {range} 10 to 0
-                        {print} 10 9 8 7 6 5 4 3 2 1 0
+                    {for} i {in} {range} 10 {to} 0
+                        {print} i
                     ```
                 feedback: Unfortunately this does not exist.
             -   option: |-
@@ -1952,31 +2030,56 @@ levels:
                         {print} 10 - i
                     ```
                 feedback: That's right!
-            hint: It has to be a calculation...
+            hint: Має бути розрахунок…
+            question_text: Який код був використаний для отримання цього виходу?
+            output: "10\n9\n8\n7\n6\n5\n4\n3\n2\n1\n0"
+            correct_answer: D
+            question_score: '10'
         7:
-            question_text: What should be on the place of the question mark?
+            question_text: Що потрібно на місці заготовки?
             code: |-
-                {print} 'Welcome to Hedys diner'
-                people is {ask} 'How many people will be eating here tonight?'
-                _?_
-                    food is {ask} 'What would you like to order?'
-                    {print} food
+                {print} 'Велком до Динер Р
+                люди = {ask} 'Як багато людей будуть їсти тут вночі? Р
+                У
+                їжа = {ask} 'Що б ви хотіли замовити? Р
+                {print} продукти харчування
+            mp_choice_options:
+            -   feedback: Не завжди 3 люди
+                option: "```\n{for} i {in} {range} 0 {to} 3\n```"
+            -   option: "```\n{for} i {in} {range} 1 {to} guests\n```"
+                feedback: При зміні не іменуються гості
+            -   feedback: Чудово!
+                option: "```\n{for} i {in} {range} 1 {to} people\n```"
+            -   option: "```\n{for} i {in} {range} 0 {to} people\n```"
+                feedback: Це одне замовлення занадто багато!
+            hint: Використовуйте змінну 'нар'
+            correct_answer: C
+            question_score: '10'
         8:
             mp_choice_options:
             -   option: |-
+                    ```
                     23
                     24
                     25
-                feedback: The numbers don't appear. It doesn't say `{print}` i.
-            -   option: 23 hi 24 hi 25 hi
-                feedback: The numbers don't appear. It doesn't say `{print}` i
+                    ```
+                feedback: Номери не з'являються. Не скажеш `{print}` i.
+            -   option: "```\n23 hi 24 hi 25 hi\n```"
+                feedback: Номери не з'являються. Не скажеш `{print}` i
             -   option: |-
+                    ```
                     hi
                     hi
                     hi
-                feedback: Correct
-            -   option: The word 'hi' will appear 25 times in a row.
-                feedback: No it will only appear 3 times.
+                    ```
+                feedback: Правильно
+            -   option: Слово 'hi' з'явиться 25 разів поспіль.
+                feedback: Не з'явиться лише 3 рази.
+            question_text: Що буде вихід з цього коду?
+            hint: Не скажеш `{print}` i
+            correct_answer: C
+            question_score: '10'
+            code: "{for} i {in} {range} 23 {to} 25\n{print} 'hi Р"
         10:
             mp_choice_options:
             -   option: |-
@@ -1985,468 +2088,855 @@ levels:
                         {print} Baby shark tututudutudu
                         {print} Baby shark
                     ```
-                feedback: Mind the indention
+                feedback: Розуміння відступу
             -   option: |-
                     ```
                     {for} i {in} {range} 1 {to} 3
                         {print} Baby shark tututudutudu
                     {print} Baby shark
                     ```
-                feedback: That's right!
+                feedback: Це вірно!
             -   option: |-
                     ```
                     {for} i {in} {range} 0 {to} 3
                         {print} Baby shark tututudutudu
                     {print} Baby shark
                     ```
-                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
+                feedback: '`{range}` 0 `{to}` 3 - 4 рази.'
             -   option: |-
                     ```
                     {for} i {in} {range} 0 {to} 3
                         {print} Baby shark tututudutudu
                         {print} Baby shark
                     ```
-                feedback: '`{range}` 0 `{to}` 3 is 4 times.'
-            hint: Mind the indention
+                feedback: '`{range}` 0 `{to}` 3 - 4 рази.'
+            hint: Розуміння відступу
+            question_score: '10'
+            question_text: Який код належить до цього виходу?
+            correct_answer: B
+            output: "Дитяча акулатура тутутудутуду\nДитяча акулатура тутутудутуду\nДитяча акулатура тутутудутуду\nДитяча акула"
+        3:
+            question_text: Який код був використаний для отримання цього виходу?
+            hint: Спочатку всі номери, потім вирок
+            question_score: '10'
+            mp_choice_options:
+            -   feedback: Чудово
+                option: "й й\n{for} i {in} {range} 1 {to} 5 хв\n{print} i\n{print} 'Звідси я зловив рибу живим! Р\nй й"
+            -   option: "й й\n{for} i {in} {range} 1 {to} 5 хв\n{print} i\n{print} 'Звідси я зловив рибу живою! Р\nй й"
+                feedback: Цей код не працює. Вам потрібно відступ після {for}.
+            -   option: "й й\n{for} i {in} {range} 1 {to} 5 хв\n{print} i\n{print} 'Звідси я зловив рибу живою! Р\nй й"
+                feedback: Тепер Вінди буде розраховувати '1 Після того, як я зловив рибу живою!, 2 Після того як я зловив рибу живою! і т.д.
+            -   feedback: я є змінним і не має значення
+                option: "й й\n{for} i {in} {range} 1 {to} 5 хв\n{print} 'i Р\n{print} 'Звідси я зловив рибу живою! Р\nй й"
+            output: "1\n2\n3\n4\n5\nОдного разу я зловив рибу на живця!"
+            correct_answer: A
+        5:
+            mp_choice_options:
+            -   option: І в останньому рядку потрібні лапки
+                feedback: Ні, це не так.
+            -   option: Ви не можете використовувати `{range}` 1 `{to}` 5 тільки `{range}` 1 `{to}` 10
+                feedback: Ви можете використовувати лише 1 до 5 років!
+            -   option: Лінія 1 повинна починатися з введення.
+                feedback: Не рядок 1 ...
+            -   feedback: Ідеально!
+                option: Лінія 2 повинна почати з введення
+            correct_answer: D
+            question_score: '10'
+            question_text: Що не так з цим кодом?
+            code: "{for} i {in} {range} 1 {to} 10\n{print} i"
+            hint: Є щось неправильно з відмовою
+        6:
+            mp_choice_options:
+            -   feedback: Ні
+                option: 1 час
+            -   option: 2 рази
+                feedback: Ні
+            -   option: 3 рази
+                feedback: Це вірно!
+            -   feedback: Ні
+                option: Ніколи
+            hint: 0 також рахує. Так 0,1,2 це 3 рази.
+            correct_answer: C
+            question_score: '10'
+            code: "{for} i {in} {range} 0 {to} 2\n    {print} 'Hello'"
+            question_text: Скільки разів робить слово Привіт на екрані, коли ви запустіть код?
+        9:
+            code: "age = {ask} 'Скільки тобі років?'\n{for} i {in} {range} 1 {to} вік\n    {print} \"Хіп-хіп-ура!\""
+            question_score: '10'
+            mp_choice_options:
+            -   feedback: Спробуйте знову
+                option: 1 час
+            -   feedback: Спробуйте знову
+                option: 2 рази
+            -   option: Ні
+                feedback: Спробуйте знову
+            -   feedback: Це вірно!
+                option: Що залежить від того, як ви старієте
+            question_text: Скільки разів Hedy chant Hip Hip Hooray?
+            hint: '`{for}` i `{in}` `{range}` 1 `{to}` вік'
+            correct_answer: D
     12:
         1:
             code: |-
-                print 'three and a half plus one and a half is...'
-                print 3.5 + 1.5
+                {print} 'трійка і половина плюс один і половина... Р
+                {print} 3.5 + 1.5
             mp_choice_options:
             -   option: '5'
-                feedback: Don't forget the first line of code!
+                feedback: Не забудьте перший рядок коду!
             -   option: 3.5 + 1.5
-                feedback: This is not the one!
+                feedback: Це не один!
             -   option: |-
                     thee and a half plus one and a half is...
                     five
-                feedback: Take a close look at the second line...
+                feedback: Прийміть близький погляд на другий рядок...
             -   option: |-
                     three and a half plus one and a half is...
                     5
-                feedback: Great job!
+                feedback: Чудова робота!
+            correct_answer: D
+            question_text: Який вихід правильний?
+            hint: Друкуються обидві лінії!
+            question_score: '10'
         2:
             mp_choice_options:
             -   option: |-
-                    ```
-                    flavors is vanilla, strawberry, chocolate
-                    print 'I would like a ' flavors at random ' cake.'
-                    ```
-                feedback: All the different values of flavors should be in quotation marks.
+                    й й
+                    ароматизатори {is} ваніль, полуниця, шоколад
+                    {print} 'Я хотів би ' аромати {at} {random} ' торт. Р
+                    й й
+                feedback: Всі різні значення смаків повинні бути в ціні знаків.
             -   option: |-
-                    ```
-                    'flavors = vanilla, strawberry, chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
-                    ```
-                feedback: All the different values of flavors should be in quotation marks.
+                    й й
+                    'flavors = ванільний, полуниця, шоколад Р
+                    {print} 'Я хотів би ' аромати {at} {random} ' торт. Р
+                    й й
+                feedback: Всі різні значення смаків повинні бути в ціні знаків.
             -   option: |-
-                    ```
-                    flavors = 'vanilla', 'strawberry', 'chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
-                    ```
-                feedback: Alright!
+                    й й
+                    ароматизатори = 'vanilla', 'strawberry', 'chocolate Р
+                    {print} 'Я хотів би ' аромати {at} {random} ' торт. Р
+                    й й
+                feedback: Про нас!
             -   option: |-
-                    ```
-                    flavors = 'vanilla, strawberry, chocolate'
-                    print 'I would like a ' flavors at random ' cake.'
-                    ```
-                feedback: All the different values of flavors should be in quotation marks.
+                    й й
+                    аромати = «ваніль, полуниця, шоколад Р
+                    {print} 'Я хотів би ' аромати {at} {random} ' торт. Р
+                    й й
+                feedback: Всі різні значення смаків повинні бути в ціні знаків.
+            correct_answer: C
+            hint: Друга лінія однакова в кожному коді, приділіть увагу першому рядку
+            question_score: '10'
+            question_text: Які з цих кодів правильні?
         3:
             code: |-
-                favorite_animal = ask 'What is your favorite animal?'
-                print 'I like ' favoriteanimal ' too!'
+                remove_animal = {ask} 'Що таке улюблене тварина? Р
+                {print} 'Я люблю ' улюблений' занадто! Р
             mp_choice_options:
             -   option: The name of the variable is different in line 1 than in line 2.
-                feedback: Correct!
+                feedback: Правильно!
             -   option: The quotation marks aren't used correctly in line 2
-                feedback: That's not true
-            -   option: You can't use the = sign when using an ask command
-                feedback: That's not true
+                feedback: Не вірно
+            -   option: Ви не можете використовувати знак = під час використання команди {ask}
+                feedback: Не вірно
             -   option: Nothing is wrong.
-                feedback: That's not true
+                feedback: Не вірно
+            correct_answer: A
+            question_score: '10'
+            question_text: Що неправильно з цим кодом?
+            hint: Відмітки використовуються правильно
         4:
             code: |-
-                print Welcome to the online shoe shop
-                category = ask What kind of shoes are you looking for?
-                if category = high heels
-                  print High heels are 50% off now!
+                {print} Ласкаво просимо в Інтернет магазин взуття
+                Категорія = {ask} Що таке взуття?
+                {if} категорія = високі підбори
+                {print} Високі підбори 50% тепер!
+            mp_choice_options:
+            -   feedback: Ні
+                option: Лінія 1 і 2
+            -   option: Лінія 1, 2 і 3
+                feedback: Ні
+            -   option: Лінія 1, 2 і 4
+                feedback: Ні
+            -   feedback: ідеально!
+                option: Всі лінії
+            correct_answer: D
+            question_score: '10'
+            question_text: У яких лініях є цінні знаки, необхідні для отримання коду на роботу?
+            hint: Чи потрібна лінія 3 лапки?
         5:
             code: |-
-                name is ask 'What is your name?'
-                if name is 'Agent007'
-                    a is 'Go to the airport '
-                else
-                    a is 'Go to the train station '
-                password is ask 'What is the password?'
-                if password is 'TOPSECRET'
-                    b is 'tomorrow at 02.00'
-                else
-                    b is 'today at 10.00'
-                print a + b
+                name {is} {ask} 'Що ваше ім'я? Р
+                {if} name {is} 'Agent007 Р
+                a {is} 'Go в аеропорт '
+                ще
+                {is} "До станції поїзда"
+                пароль {is} {ask} 'Що пароль? Р
+                {if} пароль {is} 'TOPSECRET'
+                б {is} 'домогосподарка в 02.00 Р
+                {else}
+                б {is} 'за добу в 10.00 Р
+                {print} a + b
+            mp_choice_options:
+            -   option: Перейти до залізничного вокзалу сьогодні в 10.00
+                feedback: Цей агент не буде ловити будь-які погані хлопці тут
+            -   feedback: Ви розтріскуєте код!
+                option: Перейдіть в аеропорт завтра в 02.00
+            -   option: Перейти до залізничного вокзалу завтра в 02.00
+                feedback: Цей агент не буде ловити будь-які погані хлопці тут
+            -   feedback: Цей агент не буде ловити будь-які погані хлопці тут
+                option: Перейдіть в аеропорт завтра в 10.00
+            hint: Правильний пароль - TOP SECRET
+            correct_answer: B
+            question_score: '10'
+            question_text: Який вихід має агент007 отримати, коли вони надягають в правильний пароль?
         6:
-            question_text: Which line should be filled in at the ???
+            question_text: У якому рядку слід заповнити `_`?
             code: |-
-                print 'Welcome to McHedy!'
-                order = ask 'Would you like a hamburger or fries?'
-                if order = 'hamburger'
-                  price = 12
-                if order = 'fries'
-                  price = 4
-                drinks = ask 'Would you like a drink with that for 2 dollars?'
-                if drinks = 'yes'
-                  ???
-                print 'That will be ' price ' dollar please'
+                {print} 'Welcome to McHedy! Р
+                замовлення = {ask} "Що вам подобається гамбургер або картопля? Р
+                {if} замовлення = 'hamburger Р
+                ціна = 12
+                {if} замовлення = 'fries Р
+                ціна = 4
+                напої = {ask} "Що вам подобається напій з цим на 2 долари? Р
+                {if} напої = 'yes Р
+                У
+                {print} 'Ця буде ' ціна ' долар будь ласка Р
+            mp_choice_options:
+            -   feedback: Що робити, якщо ви тільки замовляєте фрі і напою?
+                option: "```\nціна = 14\n```"
+            -   option: "```\nціна = 14\n```"
+                feedback: Що робити, якщо ви тільки замовляєте фрі і напою?
+            -   option: "```\nціна = ціна + 2\n```"
+                feedback: Чудово!
+            -   option: "```\nціна = + 2\n```"
+                feedback: По-перше!
+            question_score: '10'
+            correct_answer: C
+            hint: Що робити, якщо ви тільки замовляєте фрі і напою?
         7:
             code: |-
-                menu = 'cookies', 'cheese', 'grapes'
-                print "It's my birthday! I`ve brought some snacks!"
-                diet = ask 'Do you have any dietary restrictions?'
-                if diet = 'gluten free'
-                    remove 'cookies' from menu
-                if diet = 'vegan'
-                    remove 'cheese' from menu
-                print 'For you I have brought: '
-                for snack in menu
-                    print snack
+                ім'я користувача Р
+                {print} "Це мій день народження! Я приніс снеки!
+                дієта = {ask} "Ви маєте будь-які харчові обмеження? Р
+                {if} дієта = "глютен вільний Р
+                {remove} 'cookies' {from} меню
+                {if} дієта = 'vegan Р
+                {remove} Меню {from}
+                {print} 'Для вас я приніс: '
+                {for} закуски {in} меню
+                {print} закуски
+            hint: Який пункт знімається з списку, коли ви відповіли "веган"?
+            mp_choice_options:
+            -   option: "Це мій день народження! Я приніс деякі закуски!\nДля вас я приніс:\nКонтакти\nвиноград"
+                feedback: Натюрморт!
+            -   option: "Це мій день народження! Я приніс деякі закуски!\nДля вас я приніс:\nвиноград"
+                feedback: Більше можливостей
+            -   option: "Це мій день народження! Я приніс деякі закуски!\nДля вас я приніс:\nсир\nвиноград"
+                feedback: Вегетаріанська людина не може мати сиру
+            -   feedback: Майже там, але подивіться на порядок закусок у списку
+                option: "Це мій день народження! Я приніс деякі закуски!\nДля вас я приніс:\nвиноград\nКонтакти"
+            question_text: Який вихід виходить веган?
+            question_score: '10'
+            correct_answer: A
         8:
             mp_choice_options:
             -   option: |-
                     ```
-                    print '7 / 2'
+                    {print} '7 / 2'
                     ```
-                feedback: 'No'
+                feedback: 'Ні'
             -   option: |-
                     ```
-                    print 7 / 2
+                    {print} 7 / 2
                     ```
-                feedback: That is right!
+                feedback: Це право!
             -   option: |-
                     ```
-                    print 7 : 2
+                    {print} 7 : 2
                     ```
-                feedback: 'No'
+                feedback: 'Ні'
             -   option: |-
                     ```
-                    print 7 * 2
+                    {print} 7 * 2
                     ```
-                feedback: 'No'
+                feedback: 'Ні'
+            correct_answer: B
+            code: '3.5'
+            question_text: Який код був використаний для створення цього виходу?
+            hint: 7 відхилено 2 - 3.5
+            question_score: '10'
         9:
-            question_text: Which code should be filled in in line 1 at the ???
+            question_text: Який код слід заповнити в рядку 1 у `_`?
             code: |-
-                ???
-                print 'You won ' prices at random '!'
+                _
+                {print} 'Ви виграли ' призи {at} {random} '!'
             mp_choice_options:
             -   option: |-
                     ```
-                    prices = 'one' 'million' 'dollars', 'nothing'
+                    призи = 'один' 'мільйон' 'доларів', 'нічого'
                     ```
-                feedback: You won nothing
+                feedback: Ти не завоював
             -   option: |-
                     ```
-                    prices = 'one million dollars, nothing'
+                    призи = 'один' 'мільйон' 'доларів', 'нічого'
                     ```
-                feedback: You won nothing
+                feedback: Ти не завоював
             -   option: |-
                     ```
-                    prices = 'one million dollars', 'nothing'
+                    призи = 'один' 'мільйон' 'доларів', 'нічого'
                     ```
-                feedback: Winner!
+                feedback: Переможець!
             -   option: |-
                     ```
-                    'prices' = 'one million dollars', 'nothing'
+                    призи = 'один' 'мільйон' 'доларів', 'нічого'
                     ```
-                feedback: You one nothing
+                feedback: Ти не завоював
+            hint: Товарів у списку повинні бути в квотах
+            correct_answer: C
+            question_score: '10'
         10:
-            question_text: Which line of code should be filled in at the ??? to complete the song ?
+            question_text: Який рядок коду слід заповнити в `_`, щоб завершити пісню?
             code: |-
-                actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                ???
-                    for i in range 0 to 1
-                        print 'if youre happy and you know it'
-                        print action
-                    print 'if youre happy and you know it and you really want to show it'
-                    print 'if youre happy and you know it'
-                    print action
+                дії = 'хлопати в долоні', 'тупати ногами', 'кричати Ура!' 
+                _
+                    {for} я {in} {range} 0 {to} 1 
+                        {print} 'якщо ти щасливий і ти це знаєш' 
+                        {print} дія 
+                    {print} 'якщо ти щасливий, ти це знаєш і справді хочеш це показати' 
+                    {print} 'якщо ти щасливий і ти це знаєш' 
+                    {print} дія
             mp_choice_options:
-            -   option: for i in range 1 to 3
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: for action in actions
-                feedback: You are amazing!
-            -   option: repeat 3 times
-                feedback: This is a hard one! All the actions on the list must be in the song.
-            -   option: print actions at random
-                feedback: This is a hard one! All the actions on the list must be in the song.
+            -   option: "```\n{for} i {in} {range} 1 {to} 3\n```"
+                feedback: Це важко! Всі дії по списку повинні бути в пісні.
+            -   option: "```\n{for} action {in} actions\n```"
+                feedback: Ти дивний!
+            -   option: "```\n{repeat} 3 {times}\n```"
+                feedback: Це важко! Всі дії по списку повинні бути в пісні.
+            -   option: "```\n{print} actions {at} {random}\n```"
+                feedback: Це важко! Всі дії по списку повинні бути в пісні.
+            correct_answer: B
+            hint: Це важко! Всі дії по списку повинні бути в пісні.
+            question_score: '10'
     13:
         1:
             code: |-
-                name = ask 'What is your name?'
-                song = ask 'Whould you like to hear a song?'
-                birthday = ask 'Is today your birthday?'
-                ???
-                  print 'Happy Birthday to you!'
-                  print 'Happy Birthday to you!'
-                  print 'Happy Birthday. dear ' name
-                  print 'Happy Birthday to you!'
+                name = {ask} 'Що таке ім'я? Р
+                пісня = {ask} 'Ви хотіли почути пісню? Р
+                День народження = {ask} 'Я сьогодні ваш день народження? Р
+                й
+                {print} "Щасливий день народження до вас! Р
+                {print} "Щасливий день народження для вас! Р
+                {print} "Щасливий день народження дорогий" ім'я
+                {print} "Щасливий день народження до вас! Р
             mp_choice_options:
             -   option: |-
                     ```
-                    if birthday and song = 'yes'
+                    {if} день народження {and} song = 'yes'
                     ```
-                feedback: Almost there
+                feedback: Майже там
             -   option: |-
                     ```
-                    if birthday = 'yes' and name = 'Hedy'
+                    {if} день народження = 'так' {and} name = 'Hedy'
                     ```
-                feedback: Hedy only sings for you if you like to hear a song
+                feedback: Якщо ви хочете почути пісні
             -   option: |-
                     ```
-                    if song = 'yes' and birthday = 'yes'
+                    {if} song = 'yes' {and} birthday = 'yes'
                     ```
-                feedback: Super!
+                feedback: Супер!
             -   option: |-
                     ```
-                    if song = 'yes' or birthday = 'yes'
+                    {if} song = 'yes' {or} birthday = 'yes'
                     ```
-                feedback: Hedy only sings if both answers are yes
+                feedback: Віні тільки співає, якщо обидва відповіді є так
+            correct_answer: C
+            question_score: '10'
+            question_text: Який код повинен бути заповнений в ??? ?
+            hint: Віні співає, якщо ви хочете почути пісню і це вам день народження
         2:
             code: |-
-                menu = 'cheese', 'sausage rolls', 'cookies'
-                diet = ask 'Do you have any dietary restrictions?'
-                if diet = 'vegan' ??? diet = 'halal'
-                    remove 'sausage rolls' from menu
+                меню = 'Чеська', 'замінити рулони', 'cookies Р
+                дієта = {ask} "Ви маєте будь-які харчові обмеження? Р
+                {if} дієта = 'vegan' ??? дієта = «галяль» Р
+                {remove} 'susage rolls' {from} меню
             mp_choice_options:
-            -   option: and
-                feedback: You don't have to be vegan and muslim
-            -   option: or
-                feedback: Great thinking!
-            -   option: +
-                feedback: 'No'
-            -   option: print
-                feedback: 'No'
+            -   option: '`{and}`'
+                feedback: Ви не повинні бути вегетаріанські і мусульмани
+            -   option: '`{or}`'
+                feedback: Велике мислення!
+            -   option: '`+`'
+                feedback: 'Ні'
+            -   option: '`{print}`'
+                feedback: 'Ні'
+            hint: Ні вегани, ні мідії можуть їсти ковбасні рулони.
+            correct_answer: B
+            question_score: '10'
+            question_text: Яка команда відсутня в коді на місці ??? ?
         3:
             code: |-
-                member = ask 'Do you have a membership card?'
-                discount = ask 'Do you have a discount code?'
-                if member = 'yes' or discount = 'yes'
-                    print 'You get a free apple pie!'
-                else
-                    print 'That will be 5 dollars please'
+                учасник = {ask} "Ви маєте картку членства? Р
+                Знижка = {ask} 'Ви маєте код знижки? Р
+                {if} учасник = 'yes' {or} знижка = 'yes Р
+                {print} 'Ви отримуєте безкоштовний яблучний пиріг! Р
+                {else}
+                {print} 'Чому буде 5 доларів, будь ласка'
             mp_choice_options:
-            -   option: You get a free pie!
-                feedback: Great job!
-            -   option: That will be 5 dollars please
-                feedback: That is not true
-            -   option: This code won't work, so there is no output
-                feedback: There is nothing wrong with the code
-            -   option: There is no way of knowing
-                feedback: There is! Read the question carefully
-            hint: Mind the command 'or' in line 3
+            -   option: Ви отримуєте безкоштовний яблучний пиріг!
+                feedback: Чудова робота!
+            -   option: Що буде 5 доларів, будь ласка
+                feedback: Що не вірно
+            -   option: Цей код не працює, тому немає виходу
+                feedback: Немає нічого неправильного з кодом
+            -   option: Не існує способу знання
+                feedback: У нас! Читати питання ретельно
+            hint: Розуміть команду `{or}` в рядку 3
+            question_text: Який вихід надається учаснику без дисконтного коду?
+            correct_answer: A
+            question_score: '10'
         4:
-            code: if computer_choice is 'rock' and your_choice is 'paper'
+            code: "{if} computer_choice {is} 'rock' {and} your_choice {is} 'paper Р"
             mp_choice_options:
-            -   option: print 'you win'
-                feedback: You win!
-            -   option: print 'you lose'
-                feedback: You lose!
-            -   option: print 'tie'
-                feedback: It's only a tie if both choices are the same
-            -   option: print 'try again'
-                feedback: Try again!
+            -   option: "й й\n{print} 'Ви win Р\nй й"
+                feedback: Виграєте!
+            -   option: "й й\n{print} 'Ви втратите Р\nй й"
+                feedback: Ви втратите!
+            -   option: "й й\n{print} 'tie'\nй й"
+                feedback: Це тільки краватка, якщо обидва варіанти однакові
+            -   option: "й й\n{print} 'try знову Р\nй й"
+                feedback: Спробуйте знову!
+            hint: Папір б'є скеля
+            correct_answer: A
+            question_score: '10'
+            question_text: Яка лінія коду повинна дотримуватися цього рядка в рок-папері-ножиці гри?
         5:
             code: |-
-                if name = 'Cinderella' and shoe_size = 38
-                    print 'You are my one true love!'
+                {if} name = 'Попелюшка' {and} shoe_size = 38
+                    {print} 'Ти - моє єдине справжнє кохання!'
+            mp_choice_options:
+            -   option: Кожна людина з розміром взуття 38 є однією справжньою любов'ю князя
+                feedback: Князі трохи більше, ніж це!
+            -   option: Кожна людина Cinderella є це принцеса одна вірна любов
+                feedback: Князі трохи більше, ніж це!
+            -   option: Кожна людина, яка називається Cinderella і має розмір взуття 38, це справжня любов князя
+                feedback: Фантастика!
+            -   option: Кожна людина, яка не назвала Cinderella і не має розмір взуття 38 це принцеса одна справжня любов
+                feedback: Князі трохи більше, ніж це!
+            correct_answer: C
+            question_score: '10'
+            question_text: Яка заява стосується цього коду?
+            hint: Обидві заяви повинні бути вірними
         6:
             code: |-
-                print 'Let me guess which family member you are!'
-                glasses = ask 'Do you wear glasses?'
-                female = ask 'Are you female?'
-                if glasses = 'yes' and female = 'yes'
-                    print 'You must be Sophie!'
-                if glasses = 'no' and female = 'yes'
-                   print 'You must be Marleen!'
-                if glasses = 'yes' and female = 'no'
-                    print 'You must be Wouter!'
-                if glasses = 'no' and female = 'no'
-                    print 'You must be Michael!'
+                {print} 'Здогадувати мене, що членів сім'ї ви! Р
+                окуляри = {ask} 'Ви носити окуляри? Р
+                жіночий = {ask} 'З вами жінка? Р
+                {if} окуляри = 'yes' {and} жіночий = 'yes Р
+                {print} 'Ви повинні бути софі! Р
+                {if} окуляри = 'но' {and} жіночий = 'yes Р
+                {print} 'Ви повинні бути Марлен! Р
+                {if} окуляри = 'yes' {and} жіночий = 'no Р
+                {print} 'Ви повинні бути Wouter! Р
+                {if} окуляри = 'но' {and} жіночий = 'но Р
+                {print} 'Ви повинні бути Майклом! Р
+            mp_choice_options:
+            -   option: Михаїл - хлопчик з келихами
+                feedback: Спробуйте знову
+            -   feedback: Спробуйте знову
+                option: Marleen - дівчина з окуляри
+            -   option: Wouter це хлопчик без келихів
+                feedback: Спробуйте знову
+            -   option: Софі - дівчина з окуляри
+                feedback: Чудова робота!
+            hint: Зробіть гарний вигляд! Або вам потрібні окуляри?
+            correct_answer: D
+            question_score: '10'
+            question_text: Яка заява про цей код правда?
         7:
             code: |-
-                print 'Thank you for helping me take care of my pets'
-                print 'Here is a program to help feed them'
-                animal is ask 'What kind of animal are they?'
-                color is ask 'What colour are they?'
-                if animal is 'cat' and color = 'grey'
-                    print 'That is Abby. She eats 3 scoops of cat nibbles'
-                if animal is 'cat' and color = 'orange'
-                    print 'That is Milo. He eats 4 scoops of cat nibbles'
-                if animal is 'bird' or color is 'black'
-                    print 'I fed them this moring! They do not need more food today'
-                if animal is 'hamster' and color is 'brown'
-                    print 'You can feed them a piece of carrot'
+                {print} 'Подорожай мені подбати про своїх домашніх тварин Р
+                {print} "Це програма, щоб допомогти годувати їх"
+                тварини = {ask} "Що таке тварини? Р
+                Колір = {ask} 'Який колір вони? Р
+                {if} тварина = 'cat' {and} колір = 'сірий Р
+                {print} 'Тай Аббі. Вона їсть 3 совки кішки нібльки Р
+                {if} тварина = 'cat' {and} колір = 'помаранчевий Р
+                {print} 'Тай Міло. Він їсть 4 совки кішки нібльки Р
+                {if} тварина = 'bird' {or} колір = 'чорний Р
+                {print} 'Я захопив їх цим морингом! Вони не потрібні більше їжі сьогодні Р
+                {if} тварина = 'hamster' {and} колір = 'коричневий Р
+                {print} 'Ви можете годувати їх шматком моркви Р
+            mp_choice_options:
+            -   option: Сірий кіт називається abby
+                feedback: Це правда!
+            -   option: Мило апельсинова кішка з'їдає 4 ложки кішок
+                feedback: Це правда
+            -   option: Чорний гамстер повинен бути вирощений шматком моркви
+                feedback: Чудова робота!
+            -   feedback: Це правда
+                option: Птахи жовтого кольору закрили вранці
+            correct_answer: C
+            question_score: '10'
+            question_text: Яка заява помилкова?
+            hint: Читати останні 4 лінії ретельно
         8:
             code: |-
-                print 'Welcome to the movie theater'
-                popcorn = ask 'Would you like some popcorn?'
-                drink = ask 'Would you like a drink?'
-                if popcorn = 'yes' and drink = 'yes'
-                    print 'That will be 8 dollars please'
-                if popcorn = 'no' and drink = 'yes'
-                   print 'That will be 3 dollars please'
-                if popcorn = 'yes' and drink = 'no'
-                    print 'That will be 5 dollars please'
-                if popcorn = 'no' and drink = 'no'
-                    print 'Ok'
-                print 'Enjoy the movie'
+                {print} 'Велком до кінотеатру Р
+                попкорн = {ask} "Що вам подобається деякі попкорн? Р
+                пити = {ask} "Що вам подобається напій? Р
+                {if} попкорн = 'yes' {and} напій = 'yes Р
+                {print} 'Чому буде 8 доларів, будь ласка'
+                {if} попкорн = 'но' {and} напій = 'yes Р
+                {print} 'Чому буде 3 доларів, будь ласка'
+                {if} попкорн = 'yes' {and} напій = 'no Р
+                {print} 'Чому буде 5 доларів, будь ласка'
+                {if} попкорн = 'но' {and} напій = 'но Р
+                {print} 'Ок'
+                {print} 'Enjoy the кіно Р
+            mp_choice_options:
+            -   feedback: Ви платите за нас!
+                option: "Ласкаво просимо до кінотеатру\nЩо буде 8 доларів, будь ласка,\nНасолоджуйтесь кіно"
+            -   option: "Ласкаво просимо до кінотеатру\nЩо буде 5 доларів, будь ласка,\nНасолоджуйтесь кіно"
+                feedback: Дивовижна!
+            -   option: "Ласкаво просимо до кінотеатру\nЩо буде 3 долари будь ласка\nНасолоджуйтесь кіно"
+                feedback: Не вистачає грошей!
+            -   option: "Ласкаво просимо до кінотеатру\nНавігація\nНасолоджуйтесь кіно"
+                feedback: Ви повинні платити за попкорн!
+            question_score: '10'
+            question_text: Що ви отримуєте, якщо ви замовляєте попкорн, але ні напою?
+            hint: попкорн = так і напій = немає
+            correct_answer: B
         9:
             code: |-
-                1  chocolate = ask 'Would you like chocolate sauce on your ice cream?'
-                2  sprinkles = ask 'Would you like sprinkles on your ice cream?'
-                3  if chocolate and sprinkles = 'yes'
-                4      print 'Ice cream with chocolate sauce and sprinkles, coming up!'
-                5  if chocolate = 'yes' and sprinkles = 'no'
-                6      print 'Ice cream with chocolate sauce, coming up!'
-                7  if chocolate = 'no' and sprinkles = 'yes'
-                8      print 'Ice cream with sprinkles, coming up'
-                9  if chocolate = 'no' and sprinkles = 'no'
-                10     print 'Just plain icecream, coming up!'
+                1 шоколад = {ask} «Ви хочете шоколадний соус на морозиві? Р
+                2 посипки = {ask} 'Ви хочете посипати на морозиво? Р
+                3 {if} шоколад {and} посипки = "так Р
+                4 {print} «Сметана з шоколадним соусом і посипаннями, придумайте! Р
+                5 {if} шоколад = "так" {and} посипки = "не Р
+                6 {print} 'Яй крем з шоколадним соусом, придуманий! Р
+                7 {if} шоколад = 'но' {and} посипки = 'yes Р
+                8 {print} 'Яй крем зі зморшками, приходячи'
+                9 {if} шоколад = 'но' {and} посипки = 'но Р
+                10 {print} 'Яскраве морозиво, підійшов! Р
             mp_choice_options:
             -   option: |-
                     Line 3 should be:
                     ```
                     {if} chocolate = 'yes' {and} sprinkles = 'yes'
                     ```
-                feedback: Correct!
+                feedback: Правильно!
             -   option: |-
                     Line 3 should be:
                     ```
                     {if} chocolate = 'no' {and} sprinkles = 'no'
                     ```
-                feedback: This is not what I ordered!
+                feedback: Це не те, що я замовлений!
             -   option: |-
                     Line 5 should be:
                     ```
                     {if} chocolate = 'yes' {and} sprinkles = 'yes'
                     ```
-                feedback: This is not what I ordered!
+                feedback: Це не те, що я замовлений!
             -   option: |-
                     Line 7 should be:
                     ```
                     {if} chocolate = 'yes' {and} sprinkles = 'no'
                     ```
-                feedback: This is not what I ordered!
+                feedback: Це не те, що я замовлений!
+            question_text: Що неправильно з цим кодом?
+            hint: Існує помилка в рядку 3
+            correct_answer: A
+            question_score: '10'
         10:
             code: |-
-                print 'Welcome to the product finder of this supermarkt'
-                item is ask 'What product are you looking for?'
-                bakery = 'bread', 'buns', 'muffins'
-                drinks = 'soda', 'water', 'lemonade'
-                snacks = 'chips', 'nuts', 'dips'
-                frozen = 'fries', 'icecream', 'pizza'
-                fruit = 'bananas', 'apples', 'oranges'
-                if item in snacks ??? item in drinks
-                    print 'This item is in aile 3'
-                if item in bakery or item in bakery
-                    print 'This item in in the back of the store'
-                if item in fruit
-                    print 'The fruit is sold near the register'
+                {print} 'Використання продукту цього супермаркта Р
+                {ask} 'Що ви шукаєте? Р
+                пекарня = «прочитати», «буни», «мафіни Р
+                напої = 'soda', 'вода', 'lemonade Р
+                Закуски = 'chips', 'nuts', 'dips Р
+                заморожений = 'fries', 'icecream', 'pizza Р
+                фрукти = 'bananas', 'apples', 'помаранчевий Р
+                {if} пункт {in} закуски ??? {in} напої
+                {print} 'Цей елемент в aisle 3'
+                {if} пункт {in} пекарня {or} пункт {in} пекарня
+                {print} 'Цей елемент у спинці магазину'
+                {if} пункт {in} фрукти
+                {print} 'Фрукти продаються біля реєстру'
             mp_choice_options:
-            -   option: and
-                feedback: There are no items that are both the list of snacks and the list of drinks
-            -   option: or
-                feedback: Great job!
-            -   option: in
-                feedback: 'No'
-            -   option: if
-                feedback: 'No'
+            -   option: '`{and}`'
+                feedback: Не існує товарів, які є як перелік закусок, так і перелік напоїв
+            -   option: '`{or}`'
+                feedback: Чудова робота!
+            -   option: '`{in}`'
+                feedback: 'Ні'
+            -   option: '`{if}`'
+                feedback: 'Ні'
+            question_text: Яка команда повинна бути в лінії 8 на місці ??? ?
+            hint: Продукт є або в списку закусок, або в списку напоїв
+            question_score: '10'
+            correct_answer: B
     14:
         4:
             code: |-
-                price = 10
-                money = {ask} How much money do you have?
-                buy = {ask} 'Would you like to buy this teddy bear?'
-                {if} money >= price and buy == 'yes'
-                    {print} 'You can buy the bear!'
+                ціна = 10
+                гроші = {ask} Скільки грошей у вас є?
+                купити = {ask} 'Ви хочете купити цей ведмед? Р
+                {if} гроші >= ціна {and} купити == Я Р
+                {print} 'Ви можете купити ведмедя! Р
                 {else}
-                    {print} 'You cannot buy this bear!'
+                {print} 'Ви не можете придбати цей ведмед! Р
+            mp_choice_options:
+            -   option: У рядку 1 == слід використовувати замість =
+                feedback: Ні, що не це
+            -   option: Лінія 2 міток квоти
+                feedback: Ви правильно
+            -   option: У рядку 4 = слід використовувати замість ==
+                feedback: Ні, що не це
+            -   feedback: Ні, що не це
+                option: У рядку 4 <= слід використовувати замість >=
+            correct_answer: B
+            question_text: Що неправильно з цим кодом?
+            hint: Символи праві
+            question_score: '10'
         5:
             code: |-
-                age = {ask} 'How old are you?'
-                ticket = {ask} 'Do you have a ticket?'
-                {if} age _ and ticket == 'yes'
-                    {print} 'You can enter the movie theater.'
+                вік = {ask} "Як старі? Р
+                квиток = {ask} 'У вас квиток? Р
+                {if} вік _ {and} квиток == Я Р
+                {print} 'Ви можете ввести кінотеатр. Р
                 {else}
-                    {print} 'You are not allowed to come in!'
+                {print} 'Ви не допустилися! Р
+            hint: '> засіб більше'
+            mp_choice_options:
+            -   feedback: 12 років допускається занадто
+                option: '`> 12`'
+            -   option: '`>= 12`'
+                feedback: Чудово!
+            -   option: '`< 12`'
+                feedback: Ці діти дуже молоді!
+            -   option: '`<= 12`'
+                feedback: Ці діти занадто молодий
+            correct_answer: B
+            question_text: Який символ повинен бути наповнений заготовками, якщо фільм підходить для дітей до 12 років і до 12 років?
+            question_score: '10'
         6:
             code: |-
-                lives = 2
-                {repeat} 10 times
-                    {if} lives != 0
-                        answer = {ask} 'Are you annoyed yet?'
-                    {if} answer == 'yes'
-                        lives = lives - 1
+                життя = 2
+                {repeat} 10 {times}
+                {if} життя != 0 р.
+                Відповідь = {ask} 'У вас ще не вдалося? Р
+                {if} відповідь == "так Р
+                життя = життя - 1
+            correct_answer: D
+            mp_choice_options:
+            -   option: 10 разів
+                feedback: Зупиняється через 2 рази
+            -   feedback: Зупиняється через 2 рази
+                option: 0 разів
+            -   feedback: Зупиняється через 2 рази
+                option: 1 час
+            -   option: 2 рази
+                feedback: Що правильно
+            question_text: Скільки разів ви повинні сказати, що ви дроїться до цього дратівливого гри зупинки?
+            hint: '!== головна р'
+            question_score: '10'
         9:
             code: |-
-                chocolate = {ask} 'How many pieces of chocolate have you eaten?'
-                  {if} chocolate <= 2
-                      {print} 'That is a healthy amount'
-                  {if} chocolate > 2 and chocolate =< 8
-                      {print} 'That is a bit much'
-                  {if} chocolate > 8
-                      {print} 'You will get a stomach ache!'
+                шоколад = {ask} 'Як багато штук шоколаду ви їсти? Р
+                {if} шоколад <= 2
+                {print} «Це здорова сума»
+                {if} шоколад > 2 {and} шоколад = < 8 000 р.
+                {print} 'Чи трохи багато'
+                {if} шоколад > 8 000 р.
+                {print} 'Ви отримаєте шлунок ache! Р
+            correct_answer: D
+            question_text: Скільки шматочків шоколаду дасть вам шлунок аш за цим фіксатором?
+            mp_choice_options:
+            -   option: 1 або більше
+                feedback: Ні
+            -   feedback: Ні
+                option: 2 або більше
+            -   option: 8 або більше
+                feedback: майже
+            -   option: 9 або більше
+                feedback: Чудово!
+            hint: головна > 8 означає більше 8
+            question_score: '10'
+        7:
+            hint: Останній слід сказати, що ви переможете.
+            mp_choice_options:
+            -   option: "`'Lower'` і `'Higher'` і `'You win!'`"
+                feedback: Це не зовсім правий.
+            -   feedback: Виграєте!
+                option: "`'Higher'` і `'Lower'` і `'You win!'`"
+            -   option: "`'You win!'` і `'Lower!'` і `'Higher'`"
+                feedback: Це не зовсім правий.
+            -   feedback: Це не зовсім правий.
+                option: "`'Lower!'` і `'You win!'` і `'Higher!'`"
+            question_score: '10'
+            code: "{print} «Вгадай, яке число» \nцифри = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nчисло = числа {at} {random} \nгра = 'увімкнено'\n{for} i {in} {range} 1 {to} 10 \n    {if} game == 'on' \n        guess = {ask} 'Як ви думаєте, яке це число?' \n        {if} guess < число \n            {print} _ \n        {if} вгадка > число \n            {print} _ \n        {if} guess == число \n            {print} _ \n            гра = 'завершено'"
+            correct_answer: B
+            question_text: Що потрібно заповнювати трьома заготовками?
+        10:
+            mp_choice_options:
+            -   option: "'player 1 виграші р"
+                feedback: Шукайте, хто має найвищий бал!
+            -   option: "'player 2 виграші р"
+                feedback: Так!
+            -   option: "'player 2 втрачає р"
+                feedback: Шукайте, хто має найвищий бал!
+            -   option: Р Це краватка
+                feedback: Немає, один гравець має більш високий бал
+            hint: Виграєте гру, маючи найбільшу кількість точок
+            question_score: '10'
+            question_text: Що потрібно заповнювати в заготовках?
+            code: "{print} 'Важко отримує найзручніших точок! Р\n{if} окуляри_player_1 < точок_player_2\n{print} _"
+            correct_answer: B
+        1:
+            hint: Ми не порівнюємо нічого, ми просто запитуємо назву.
+            mp_choice_options:
+            -   feedback: Це не символ.
+                option: '`=>`'
+            -   option: '`==`'
+                feedback: Ми не порівнюємо нічого, просто запитуємо.
+            -   option: '`!=`'
+                feedback: Ми не порівнюємо нічого, просто запитуємо
+            -   option: '`=`'
+                feedback: Право!
+            question_text: Який символ слід використовувати на бланку?
+            code: "name _ {ask} 'Who are you?'\n{if} name == 'Hedy'\n    {print} 'Me too!'"
+            correct_answer: D
+            question_score: '10'
+        8:
+            mp_choice_options:
+            -   option: Ви повинні бути вище 120 см, щоб піти на роликовому узбережжі
+                feedback: True!
+            -   option: Ви повинні бути високорослі, ніж 119 см, щоб піти на роликовому узбережжі
+                feedback: Якщо ви не отримуєте 120 см
+            -   option: Ви повинні бути коротшими, ніж 120 см, щоб піти на роликовому узбережжі
+                feedback: '> засіб більше'
+            -   option: На роликовому узбережжі немає обмежень довжини
+                feedback: Є.
+            question_score: '10'
+            code: "довжина = {ask} \"Заповнювати вашу довжину в см\"\n{if} довжина < 120\n{print} 'Sorry, ви не можете піти на цьому роликовому узбережжі. Р\n{else}\n{print} 'Подивитися поїздку'"
+            question_text: Яка заява є вірним про цей роликовий берег?
+            hint: '> засіб більше'
+            correct_answer: A
+        2:
+            mp_choice_options:
+            -   feedback: Ні
+                option: "{if} ім'я = Hedy"
+            -   option: '{if} вік = 24'
+                feedback: Ні
+            -   feedback: Так!
+                option: answer = {ask} 'Яка твоя відповідь'
+            -   option: відповідь == {ask} "Як ви робите? Р
+                feedback: Ні
+            correct_answer: C
+            question_score: '10'
+            question_text: Який з цих кодів використовується правильний = або == символ?
+            hint: Якщо ви порівнюєте дві відповіді, ви повинні використовувати ==
+        3:
+            code: "гості = {ask} \"Як багато людей на вечірці? Р\n{if} гості _ 130\n{print} 'Ви можете приїхати в! Р\n{if} гості _ 130\n{print} 'Ім шкода, клуб повний. Р\n{print} 'Ви повинні чекати гостя, щоб залишити'"
+            question_text: Які символи повинні бути заповнені на двох заготовках?
+            mp_choice_options:
+            -   option: '`>` і `<`'
+                feedback: Це не так
+            -   option: '`=` і `>=`'
+                feedback: Це не так
+            -   option: '`<` і `>=`'
+                feedback: Ви маєте право
+            -   option: '`+` і `==`'
+            hint: У клуб допускається 130 осіб
+            correct_answer: C
+            question_score: '10'
+            feedback: Це не так
     15:
         1:
             code: |-
-                answer = 0
-                while answer _ 'Amsterdam'
-                    answer = ask 'What is the capital city of the Netherlands?'
-                print 'You have given the correct answer'
+                відповідь = 0
+                {while} answer _ 'Амстердам'
+                    answer = {ask} 'Яка столиця Нідерландів?'
+                {print} 'Ви дали правильну відповідь'
+            mp_choice_options:
+            -   option: '`=!`'
+                feedback: Що не правильно.
+            -   option: '`==`'
+                feedback: Ви не повинні тримати здогадку, якщо ви надали відповідь.
+            -   feedback: Правильно
+                option: '`!=`'
+            -   option: '`=`'
+                feedback: Це не так
+            question_score: '10'
+            question_text: 'Який символ слід використовувати на бланку? Порада: Ви повинні тримати здогадку, поки ви отримаєте це право.'
+            hint: Здогадайте, поки ви не скажете Амстердам
+            correct_answer: C
         3:
-            question_text: Which command should be filled in on the two blanks?
+            question_text: Яка команда повинна бути заповнена на бланку?
             code: |-
-                _ age >= 18
-                  print 'you are not allowed in this bar'
+                _ вік < 18
+                {print} 'Ви не допускається в цьому барі'
+            question_score: '10'
+            correct_answer: B
+            mp_choice_options:
+            -   feedback: Це не так
+                option: '`{in}`'
+            -   option: '`{while}`'
+                feedback: Ви маєте право
+            -   feedback: Це не так
+                option: '`{for}`'
+            -   option: '`{range}`'
+                feedback: Це не так
+            hint: Ви не допускається в барі до тих пір, поки ви 17 або молодше
         4:
             code: |-
-                options = 1, 2, 3, 4, 5, 6
-                print 'Throw 6 as fast as you can!'
-                thrown = 0
-                tries = 0
-                while thrown == 6
-                    thrown = options at random
-                    print 'You threw ' thrown
-                    tries = tries + 1
-                print 'Yes! You have thrown 6 in ' tries ' tries.'
+                параметри = 1, 2, 3, 4, 5, 6
+                {print} 'Throw 6 так швидко, як ви можете! Р
+                бен = 0
+                0 р.
+                {while} кинути == 6 хв
+                {at} {random}
+                {print} "Ви кинули"
+                1 час
+                {print} 'Я! Ви кинули 6 в "намагатися" Р
             mp_choice_options:
-            -   option: In line 1 == should be used instead of =
-                feedback: No that's not it
-            -   option: Line 2 misses quotation marks
-                feedback: That's not right
-            -   option: In line 5 if should have been used instead of while
-                feedback: That's not it
-            -   option: In line 5 != should have been used instead of ==
-                feedback: You are correct
+            -   option: У рядку 1 `==` слід використовувати замість `=`
+                feedback: Ні, що не це
+            -   option: Лінія 2 міток квоти
+                feedback: це не правильно
+            -   option: У рядку 5 `{if}` слід використовувати замість `{while}`
+                feedback: Це не так
+            -   option: У рядку 5 `!=` слід використовувати замість `==`
+                feedback: Ви правильно
+            correct_answer: D
+            hint: У рядку 5 щось не так
+            question_score: '10'
+            question_text: Що неправильно з цим кодом?
         5:
             code: |-
-                wetness = 10
-                while wetness != 0
-                    print 'Your hair is still wet, hair dryer on!'
-                    sleep 1
-                    clear
-                    wetness _
+                мокрота = 10
+                {while} мокрота != 0 р.
+                {print} 'Ваше волосся все ще вологе, фен на волосся! Р
+                {sleep} 1
+                {clear}
+                мокрота _
 
-                print 'All dry!'
+                {print} 'Все сухе! Р
             mp_choice_options:
-            -   option: = wetness
-                feedback: That will not change anything
-            -   option: = wetness = 1
-                feedback: You can't have two times = in one line
-            -   option: = wetness - 1
-                feedback: You are correct!
-            -   option: = wetness + 1
-                feedback: The program should count down
+            -   option: "```\n   = wetness\n```"
+                feedback: Що не змінить нічого
+            -   option: "```\n   = wetness = 1\n```"
+                feedback: Ви не можете мати двох разів = в одному рядку
+            -   option: "```\n   = wetness - 1\n```"
+                feedback: Ви правильно!
+            -   option: "```\n   = wetness + 1\n```"
+                feedback: Програма повинна розраховувати
+            question_score: '10'
+            correct_answer: C
+            question_text: Що потрібно розмістити на бланку, щоб зробити цю програму правильно?
+            hint: вологість повинна отримати менше кожного разу
         6:
-            question_text: what is wrong with this code?
+            question_text: Що неправильно з цим кодом?
             code: |-
                 lives = 100
                     {while} lives != 0
@@ -2454,85 +2944,404 @@ levels:
                 {if} answer == 'yes'
                     lives = lives - 1
             mp_choice_options:
-            -   option: while should be if
-                feedback: No that is not right
-            -   option: if should be while
-                feedback: No that is not right
-            -   option: Line 3 should start with more indentation
-                feedback: No that's not right
-            -   option: Line 2 should start with less indentation
-                feedback: That is correct
+            -   option: '`{while}` повинен бути`{if}`'
+                feedback: Ні, що не право
+            -   option: '`{if}` слід `{while}`'
+                feedback: Ні, що не право
+            -   option: Лінія 3 повинна починатися з більш відступу
+                feedback: Немає права
+            -   option: Лінія 2 повинна починатися з меншого відступу
+                feedback: Що правильно
+            question_score: '10'
+            hint: Дивитися уважно при відступі
+            correct_answer: D
         7:
-            question_text: How should this program be changed to that it works?
+            question_text: Як змінити цю програму так, що вона працює?
             mp_choice_options:
-            -   option: '... change the first {if} into a {while}'
-                feedback: Perfect!
-            -   option: '... change the second {if} into a {while}'
-                feedback: That's not quite right.
-            -   option: '... change the third {if} into a {while}'
-                feedback: That's not quite right.
-            -   option: '... change the fourth {if} into a {while}'
-                feedback: That's not quite right.
+            -   option: '... змінити перший `{if}` в `{while}`'
+                feedback: ідеально!
+            -   option: '... змінити другий `{if}` в `{while}`'
+                feedback: Це не зовсім правий.
+            -   option: '... змінити третє `{if}` в `{while}`'
+                feedback: Це не зовсім правий.
+            -   option: '... змінити четвертий `{if}` в `{while}`'
+                feedback: Це не зовсім правий.
+            hint: Останній слід сказати, що ви переможете.
+            correct_answer: A
+            question_score: '10'
+            code: "{print} «Вгадай, яке число» \nцифри = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nчисло = числа {at} {random} \nгра = 'увімкнено'\n{if} game == 'on' \n    guess = {ask} 'Як ви думаєте, яке це число?' \n    {if} guess < число \n        {print} _ \n    {if} вгадка > число \n        {print} _ \n    {if} guess == число \n        {print} _ \n        гра = 'завершено'"
         8:
-            hint: The block after the while command keeps happening while the toilet is occupied.
+            hint: Блок після команди {while} продовжує відбуватися, поки туалет зайнятий.
+            correct_answer: B
+            mp_choice_options:
+            -   option: Світло і повітряний освіжувач відключиться через 1 хвилину
+                feedback: Про нас!
+            -   option: Повітря освіжувача обприскує один раз в кожну хвилину і вогні залишаються на весь час, коли ви знаходитесь в туалеті
+                feedback: Чудова робота
+            -   feedback: Це тільки спреї, коли ви знаходитесь там.
+                option: Повітря освіжувача обприскує один раз ви залишаєте туалет.
+            -   feedback: Що б не було права.
+                option: Світильники завжди залишаються на.
+            question_score: '10'
+            code: "{while} туалет == 'закуплений Р\nсвітильники = \"в Р\nair_freshener_sprays = 'yes Р\n{sleep} 60\nсвітильники = \"відключення\" Р\nair_freshener_sprays = \"не Р"
+            question_text: Яка заява про це автоматизована система туалету?
         9:
             code: |-
-                chocolate = {ask} 'How many calories have you eaten today?'
-                  {while} calories <= 1000
-                      {print} 'You could eat some more'
-                  {while} calories > 1000 and calories =< 2000
-                      {print} 'That is alright'
-                  {while} calories > 2000
-                      {print} 'You have had enough for today'
+                енергетична цінність {ask} 'Скільки калорій ви з'їли сьогодні?»
+                {while} калорій <= 1000
+                {print} 'Ви можете їсти ще Р
+                {while} калорій > 1000 {and} калорій = < 2000
+                {print} 'Чи неправда'
+                {while} калорій > 2000
+                {print} 'У вас було достатньо для сьогодні'
             mp_choice_options:
-            -   option: Nothing. 1600 is not programmed into the app.
-                feedback: 'No'
-            -   option: you could eat some more
-                feedback: 'No'
-            -   option: That is alright
-                feedback: Yes!
-            -   option: You have eaten enough for today
-                feedback: 'No'
+            -   option: Ніщо. 1600 не запрограмований в додаток.
+                feedback: 'Ні'
+            -   option: Ти міг би з'їсти ще трохи
+                feedback: 'Ні'
+            -   option: Що таке alright
+                feedback: Так!
+            -   option: У вас є досить багато для сьогодні
+                feedback: 'Ні'
+            question_score: '10'
+            hint: 1600 до 1000 до 2000
+            correct_answer: C
+            question_text: Що буде дієта додаток, якщо ви їсти 1600 калорій сьогодні?
         10:
             mp_choice_options:
-            -   option: name_player_1
-                feedback: You are right!
-            -   option: name_player_2
-                feedback: No they are losing!
-            -   option: points_player_1
-                feedback: You should fill in a name, not a number
-            -   option: points_player_2
-                feedback: You should fill in a name, not a number
+            -   option: "```\n   name_player_1\n```"
+                feedback: Ви маєте право!
+            -   option: "```\n   name_player_2\n```"
+                feedback: Немає втрати!
+            -   option: "```\n   points_player_1\n```"
+                feedback: Вам необхідно заповнити ім'я, а не номер
+            -   option: "```\n   points_player_2\n```"
+                feedback: Вам необхідно заповнити ім'я, а не номер
+            question_score: '10'
+            correct_answer: A
+            question_text: 'Що потрібно заповнювати в заготовках? Порада: гравець з найбільшою кількістю точок знаходиться в свинцю.'
+            code: "name_player_1 = {ask} 'Назвіть гравця 1:'\nname_player_2 = {ask} 'Назвіть гравця 2:'\n{while} points_player_1 > points_player_2\n    {print} _ 'зараз лідирує!'"
+            hint: Виграєте гру, маючи найбільшу кількість точок. Ваше ім'я повинно з'явитися на екрані
+        2:
+            question_text: Які з цих кодів використовували правильний символ?
+            mp_choice_options:
+            -   option: "й й\n{while} ім'я = Hedy\nй й"
+                feedback: Ні
+            -   feedback: Ні
+                option: "й й\n{while} вік = 24\nй й"
+            -   feedback: Так!
+                option: "й й\n{while} час > 0 р.\nй й"
+            -   feedback: Відсутня цитата
+                option: "й й\n{while} відповідь == так Р\nй й"
+            question_score: '10'
+            correct_answer: C
+            hint: Якщо ви порівнюєте дві відповіді, ви повинні використовувати ==
     16:
         2:
             code: |-
-                friends = ['Wesley', 'Eric', 'Kaylee']
-                chores = [the cooking, the cleaning, nothing]
-                {for} i {in} {range} 1 {to} 3
-                    {print}  _
+                друзі = ['Wesley', 'Eric', 'Kaylee']
+                chores = ['Випічка', 'непристосування']
+                {for} i {in} {range} 1 {to} 3 хв
+                {print} _
+            mp_choice_options:
+            -   option: "```\nдрузі[i] повинні робити роботу [i]\n```"
+                feedback: Зрозуміти спати.
+            -   option: "```\nдрузі[1] повинні робити роботу[1]\n```"
+                feedback: Він буде друкувати 3 рази, що Wesley має зробити приготування їжі
+            -   option: "```\nдомашні справи[i] 'має зробити' друзі[random]\n```"
+                feedback: Людина повинна робити хор, не інший спосіб навколо
+            -   option: "```\nдрузі[i] 'має робити' справи[i]\n```"
+                feedback: Фантастика!
+            question_text: Що потрібно заповнювати на заготовки, якщо ви хочете список, які хорони виконуються ким?
+            correct_answer: D
+            question_score: '10'
+            hint: '`i` розповідає про те, що саме в списку. Подруга 1 does chore 1 і т.д.'
         3:
             code: |-
-                friends = ['Wesley', 'Eric', 'Kaylee']
-                chore = [the cooking, the cleaning, nothing]
-                {for} i {in} {range} 1 {to} 3
-                    {print}  friends[i] has to do chores[i]
+                друзі = ['Wesley', 'Eric', 'Kaylee']
+                chore = ['Виготовлення', 'прибирання']
+                {for} i {in} {range} 1 {to} 3 хв
+                {print} друзі[i] повинні робити хори[i]
+            mp_choice_options:
+            -   option: "```\nУеслі повинен готувати\nЕрік повинен зробити прибирання\nКейлі нічого не потрібно робити\n```"
+                feedback: Супер!
+            -   feedback: Ні, не випадково.
+                option: "```\nКейлі має готувати\nВеслі має прибирати\nЕріку нічого не потрібно робити\n```"
+            -   option: "```\nУеслі повинен готувати\nВеслі має прибирати\nВеслі нічого не робити\n```"
+                feedback: Поор Веслі!
+            -   option: "```\nУеслі повинен готувати\nУеслі повинен готувати\nУеслі повинен готувати\n```"
+                feedback: Це не так
+            question_text: Який можливий вихід для цієї програми?
+            correct_answer: A
+            question_score: '10'
+            hint: Не випадково...
         4:
             mp_choice_options:
-            -   option: The variable in line 4 should be 'friend[i]', not 'friends[i]'
-                feedback: That is not right.
-            -   option: Line 3 should say 'in range 1 to 3' not 'in range 0 to 3'
-                feedback: Good catch!
-            -   option: Line 4 should say 'lucky_number', not 'lucky number
-                feedback: It's not a variable, it's just text.
-            -   option: '{in} in line 3 should be removed'
-                feedback: That's not it
+            -   option: Змінна в рядку 4 повинна бути `friend[i]`, не `friends[i]`
+                feedback: Що не правильно.
+            -   option: Лінія 3 слід сказати `in range 1 to 3` не `in range 0 to 3`
+                feedback: Хороший улов!
+            -   option: Лінія 4 повинні сказати 'lucky_number', не 'lucky номер
+                feedback: 'Тексти пісень, а це означає: Це не змінна, це просто текст.'
+            -   option: '{in} в рядку 3 слід видалити'
+                feedback: Це не так
+            question_text: Що неправильно з цим кодом?
+            code: "друзі = ['Jaylee', 'Erin', 'Fay']\n0 товар(ов) - 0.00 €\n{for} i {in} {range} 0 {to} 3 хв\nДрук \"Пощастило число друзів[i]\nДрук 'is 'appy_numbers[i]"
+            hint: Немає нічого неправильного з лінії 4
+            correct_answer: B
+            question_score: '10'
         5:
             mp_choice_options:
-            -   option: noises = ['moo', 'woof', 'neigh']
-                feedback: Mind the variable name and the order of the sounds.
-            -   option: sounds = '[woof], [moo], [neigh]'.
-                feedback: Look at line one to see how brackets are supposed to be used.
-            -   option: sounds = [woof, moo, neigh]
-                feedback: Don't forget the quotation marks!
-            -   option: sounds = ['woof', 'moo', 'neigh']
-                feedback: Great job!
+            -   option: "```\n   noises = ['муу', 'гав', 'ріж']\n```"
+                feedback: Розуміть змінну назву і порядок звуків.
+            -   option: "```\n   sounds = '[гав], [муу], [рж]'\n```"
+                feedback: Подивіться на лінію, щоб побачити, як повинні бути використані кронштейни.
+            -   option: "```\n   звуки = [гав, мукання, ірж]\n```"
+                feedback: Не забувайте про те, що ціни!
+            -   option: "```\n   sounds = ['woof', 'moo', 'niigh']\n```"
+                feedback: Чудова робота!
+            correct_answer: D
+            code: "тварини = ['dog', 'cow', 'horse']\nУ\n{for} i {in} {range} 1 {to} 3\n{print} ' тварин[i] ' каже ' звуки[i]"
+            hint: Шукайте рядок 1, щоб побачити правильне використання брекетів та знаків цитат.
+            question_score: '10'
+            question_text: Яка лінія повинна бути заповнена в заготовці?
+        6:
+            code: "людина = ['Христ', 'Ялино', 'Рян']\nІгри = ['fortnite', 'minecraft', 'fifa']\n{for} o {in} {range} 1 {to} 3 хв\n{print} люди[o] ' сподобалося ' ігри[o]"
+            mp_choice_options:
+            -   feedback: я є найбільш часто використовуваною змінною назвою в цьому випадку, але це не обов'язково для використання i.
+                option: Ви не допускається використання змінної о. Ім'я.
+            -   option: Вихід буде сказати, що Джейліно любить фортніт.
+                feedback: Ні, він любить minecraft.
+            -   option: Вихід буде сказати, що Райан любить фіфа
+                feedback: Правильно
+            -   option: Цей код не буде працювати. Вона дасть і помилки.
+                feedback: Ні, код правильний.
+            correct_answer: C
+            question_score: '10'
+            question_text: Яка заява правда?
+            hint: Немає нічого неправильного з цим кодом.
+        1:
+            mp_choice_options:
+            -   option: '`snacks {at} {random}`'
+                feedback: Це старий спосіб.
+            -   feedback: Замовлення неправильно.
+                option: '`[{random} snack]`'
+            -   option: '`snacks[{random}]`'
+                feedback: Правильно
+            -   feedback: Не потрібно `at`anymore
+                option: '`snacks[{at} {random}]`'
+            code: "снеки = нахо, чіпси, огірок, солодощі\n{print} _"
+            correct_answer: C
+            hint: Ми не використовуємо {at}
+            question_text: Яка команда повинна бути заповнена на бланках для друку випадкових закусок?
+            question_score: '10'
+        7:
+            mp_choice_options:
+            -   option: Лінія 1 потребує менших цін
+                feedback: Що не правильно.
+            -   feedback: Не варто!
+                option: Лінія 3 повинна починатися з відступу
+            -   option: Лінія 4 повинна починатися без відступу
+                feedback: Не варто
+            -   option: Лінія 4 потребує більш детальних ставок.
+                feedback: Дивовижна!
+            hint: Існує помилка, виконана при використанні лапок.
+            question_score: '10'
+            question_text: Що неправильно з цим кодом?
+            code: "люди = ['Savi', 'Senna', 'Fayenne']\nТранспорт = ['bike', 'train', 'car']\n{for} i {in} {range} 1 {to} 3 хв\n{print} люди[i] переходять до школи за допомогою транспорту[i]"
+            correct_answer: D
+        8:
+            correct_answer: B
+            mp_choice_options:
+            -   option: "й й\nКоманди = ['Macy і Kate', 'Lionell і Raj', 'Kim і Leroy']\nпозиція = ['перший', 'друга', 'треть']\n{for} i {in} {range} 0 {to} 3 хв\n{print} команди[random] ' дістатися[i]\nй й"
+                feedback: Це не право
+            -   option: "й й\nКоманди = ['Macy і Kate', 'Lionell і Raj', 'Kim і Leroy']\nпозиція = ['перший', 'друга', 'треть']\n{for} i {in} {range} 1 {to} 3 хв\n{print} команди[i] ’ дістатися[i]\nй й"
+                feedback: Дивовижна!
+            -   feedback: Це не так.
+                option: "й й\nкоманди = ['Macy', 'Kate', 'Lionell', 'Raj', 'Kim', 'Leroy']\nпозиція = ['перший', 'друга', 'треть']\n{for} i {in} {range} 1 {to} 6 хв\n{print} команди[random] ' дістатися ' позиція[random]\nй й"
+            -   feedback: Це не збирається працювати!
+                option: "й й\nКоманди = ['Macy і Kate', 'Lionell і Raj', 'Kim і Leroy']\nпозиція = ['перший', 'друга', 'треть']\n{for} i {in} {range} 0 {to} 3 хв\n{print} команди[random] ' дістатися[i]\nй й"
+            hint: Якщо ви уважно дивитеся на першому рядку, ви побачите, що тільки перші дві відповіді можливо виправити.
+            question_text: Які з цих кодів належать до цього виходу?
+            question_score: '10'
+            code: "Macy і kate отримати йти першим\nLionell і Raj отримати піти другий\nКім і Леройдом піти третій"
+        9:
+            correct_answer: A
+            question_score: '10'
+            code: "країни = ['Канада', 'Зимбабве', 'Нова Зеландія']\n{for} i {in} {range} 0 {to} 1 час\n{print} \"Я буду подорожувати в країни[random]"
+            question_text: Який можливий вихід для цього коду?
+            mp_choice_options:
+            -   option: "```\nI will travel to Canada\nI will travel to Canada\n```"
+                feedback: Чудова робота!
+            -   option: "```\nЯ поїду до Канади\n```"
+                feedback: Буде повторюватися двічі
+            -   option: "```\nЯ поїду до Канади, Зімбабве та Нової Зеландії\n```"
+                feedback: Це не так.
+            -   option: "```\nЯ поїду до Канади\nЯ поїду до Зімбабве\nЯ поїду до Нової Зеландії\n```"
+                feedback: Тільки повторюється двічі
+            hint: Діапазон 0 до 1 2 рази
+        10:
+            mp_choice_options:
+            -   feedback: Майже там... але додавання переможця до списку робить цей рафельний нефрижер
+                option: "й й\nВиберіть_number = list_of_numbers у випадковому режимі\nДрук книг [i] ' буде йти до особи номер ' вибраний_number\n{add} select_number {to} list_of_numbers\nй й"
+            -   option: "й й\nдрукувати людину[i] ' wins ' book[i]\nй й"
+                feedback: Немає списку імен Р
+            -   option: "й й\nОбрати_number = list_of_numbers[нар.]\nДрук книг [нар.] ' відправиться до особи номер ' вибрано_number\n{remove} select_number {from} list_of_numbers\nй й"
+                feedback: Це не так.
+            -   option: "й й\nОбрати_number = list_of_numbers[random]\nДрук книг [i] ' буде йти до особи номер ' вибраний_number\n{remove} select_number {from} list_of_numbers\nй й"
+                feedback: Фантастика!
+            code: "{print} 'Книжковий розіграш починається незабаром Р\n{print} 'Подаруйте квитки зараз! Р\nкниги = ['Narnia', 'Хоббіт', 'Oliver Twist', 'Гаррі Поттер', 'Зелені яйця і шинка']\nлюди = {ask} \"Як багато продаються квитки? Р\nlist_of_numbers = [1, 2]\n{for} i {in} {range} 3 {to} люди\n{add} i {to} list_of_numbers\n{for} i {in} {range} 1 {to} 5 хв"
+            correct_answer: D
+            hint: Вам потрібно використовувати команду {remove}
+            question_score: '10'
+            question_text: Які 3 лінії будуть завершити цей код правильно?
+    17:
+        2:
+            code: "секунди_хвилина = 60 \nхвилина_година = 60 \nгодина_день = 24 \nвисокосний_рік = 366 \nне_високосний_рік = 365 \nроків = запитайте \"який зараз рік?\" \n{if} років = 2024: \n вивести секунди_хвилина * хвилина_година * година_день * високосний_рік \n{else}:\n вивести секунди_хвилина * хвилина_година * година_день * невисокий_рік"
+            question_text: Що неправильно з цим кодом?
+            mp_choice_options:
+            -   option: Ви не можете мати стільки змінних.
+                feedback: Це не так.
+            -   option: Таким чином змінні є некоректним.
+                feedback: Не вірно!
+            -   feedback: Зберігати за помилку.
+                option: Один з змінних `noleap_year` не належить до `{if}`.
+            -   option: '`noleap_year` має бути ідентичним в обох випадках.'
+                feedback: Правильно!
+            hint: Прочитати код акуратно.
+            correct_answer: D
+            question_score: '10'
+        3:
+            question_text: Як багато їжаків буде цей код друку?
+            code: "{for} x в діапазоні 1 до 3:\n{for} y в діапазоні 1 до 2:\n{print} 🦔"
+            mp_choice_options:
+            -   option: "```\n🦔\n🦔\n🦔\n```"
+                feedback: Спробуйте знову.
+            -   feedback: Ще одна спроба.
+                option: "```\n🦔\n🦔\n```"
+            -   feedback: Чудова робота!
+                option: "```\n🦔\n🦔\n🦔\n🦔\n🦔\n🦔\n```"
+            -   option: "```\n🦔\n🦔\n🦔\n🦔\n🦔\n```"
+                feedback: Що це не так.
+            correct_answer: C
+            hint: Подумайте про те, скільки разів потрібно повторити.
+            question_score: '10'
+        4:
+            mp_choice_options:
+            -   option: Перший `{elif}` повинен бути використаний перед командуванням `print`
+                feedback: Спробуйте знову.
+            -   option: '`{elif}` може використовуватися тільки один раз'
+                feedback: Тепер ми можемо використовувати elif кілька разів.
+            -   option: '`==` використовується з `{elif}` слід замінити `=`'
+                feedback: Не вірно.
+            -   feedback: Чудово!
+                option: '`{elif}` в останньому рядку слід замінити `{else}`'
+            question_score: '10'
+            code: "name_color = {ask} 'Який твій улюблений колір?' \n{if} name_color == 'червоний': \n  {print} 'колір помідора' \n{elif} name_color == 'зелений': \n  {print} 'колір яблука' \n{elif} name_color == 'синій': \n  {print} 'колір чорниці' \n{elif} name_color == 'yellow': \n  {print} 'колір банана' \n{elif}: \n  {print} 'цей фруктовий колір не існує'"
+            correct_answer: D
+            question_text: Що неправильно з кодом?
+            hint: Подумайте про `{if}`, `{elif}`, `{else}`.
+        5:
+            mp_choice_options:
+            -   option: "й й\n7 хв\nінший номер\nінший номер\nінший номер\nінший номер\n71.00 р.\n79 км\n990 р\nй й"
+                feedback: Чудова робота!
+            -   option: "```\nінший номер\n19\n29\n41\n53\n71\n79\n97\n```"
+                feedback: Спробуйте знову.
+            -   option: "```\n7\n19\n29\n41\n53\n71\n79\nінший номер\n```"
+                feedback: Ще одна спроба.
+            -   option: "```\n7\n19\n29\n41\n53\n71\n79\n97\n```"
+                feedback: Що це не так.
+            correct_answer: A
+            question_text: Що таке виведення цього коду?
+            code: "номер = [7, 19, 29, 53, 71, 79, 97]\n{for}\n{if} прем'єра <=10:\n{print} прем'єра\n{elif} прем'єра >= 60:\n{print} прем'єра\n{elif} прем'єра >= 90:\n{print} прем'єра\n{else}:\n{print} 'достатній номер Р"
+            question_score: '10'
+            hint: Подумайте про те, скільки разів потрібно повторити і значення, якщо і elif.
+        7:
+            mp_choice_options:
+            -   option: "й й\n[1, 2, 3, 4, 5]\n{for} n в числах:\nрезультат = n * 1\n{print} 'Наслідок '\nй й"
+                feedback: Спробуйте знову!
+            -   option: "й й\n[1, 2, 3, 4, 5]\n{for} у числах:\nкількість = у\n{print} 'Наслідок ' номер\nй й"
+                feedback: Що це не так.
+            -   option: "й й\n[1, 2, 3, 4, 5]\n{for} номер в числах:\nкількість = 3\n{print} 'Наслідок ' номер\nй й"
+                feedback: Дуже добре!
+            -   option: "й й\n[1, 2, 3, 4, 5]\n{for} n в числах:\nn = результат\n{print} 'Наслідок '\nй й"
+                feedback: Що це не так.
+            question_score: '10'
+            hint: Подумайте про математичні символи.
+            correct_answer: C
+            question_text: Якими з наступних кодів будуть друкувати п'ять разів «результат 3» на екрані?
+        9:
+            mp_choice_options:
+            -   option: "й й\n{for} номер в діапазоні -5 до 3:\n{if} номер > 0 товар(ов)\n{print} номер ' є позитивним Р\n{elif} номер < 0:\n{print} номер «негативний Р\n{else}:\n{print} номер ' є нуль Р\nй й"
+                feedback: Спробуйте знову!
+            -   option: "й й\n{for} номер в діапазоні -5 до 3:\n{if} номер > 0 товар(ов)\n{print} номер ' є позитивним Р\n{elif} номер < 0:\n{print} номер «негативний Р\n{else}:\n{print} номер ' є нуль Р\nй й"
+                feedback: Що це не так.
+            -   feedback: Дуже добре!
+                option: "й й\n{for} номер в діапазоні -5 до 3:\n{if} номер >= 0 товар(ов)\n{print} номер ' є позитивним Р\n{elif} номер < 0:\n{print} номер «негативний Р\n{else}:\n{print} номер ' є нуль Р\nй й"
+            -   feedback: Що це не так.
+                option: "й й\n{for} номер в діапазоні -5 до 3:\n{if} номер < 0:\n{print} номер ' є позитивним Р\n{elif} номер <=0:\n{print} номер «негативний Р\n{else}:\n{print} номер ' є нуль Р\nй й"
+            hint: Прочитати код акуратно.
+            question_score: '10'
+            question_text: Який один з кодів нижче дав цей вихід?
+            code: "-5 негативний\n-4 негативно\n-3 негативно\n-2 негативно\n-1 негативний\n0 позитив\n1 позитив\n2 позитивно\n3 позитивно"
+            correct_answer: C
+        10:
+            code: "{for} номер в діапазоні 1 до 5:\nОб'єм_кімн = num * num * num\n{print} об'єм_кімната ' куб. метрів Р\n{if} об'єм_кімната > 100 р.\n{print} 'це велика кімната Р\n{elif} об'єм_кімн < 100:\n{print} 'маленький номер, але затишна Р\n{else}:\n{print} 'i буде шукати щось інше Р"
+            mp_choice_options:
+            -   option: Слово num потребує цитат.
+                feedback: Спробуйте знову.
+            -   option: Команда `{if}` не використовується правильно.
+                feedback: Не вірно.
+            -   option: Лінія 3 повинна бути `volume_room = number * number * number`.
+                feedback: Чудова робота!
+            -   option: В останньому рядку є помилкова відмова.
+                feedback: Ноп.
+            hint: Прочитати код акуратно.
+            correct_answer: C
+            question_score: '10'
+            question_text: Що неправильно з цим кодом?
+        8:
+            hint: Прочитати код акуратно.
+            mp_choice_options:
+            -   feedback: Спробуйте знову.
+                option: '`{or}` не можна використовувати `{if}`.'
+            -   option: У команду `{for}` `insect` слід `insects`.
+                feedback: Не вірно.
+            -   feedback: Чудова робота!
+                option: Немає!
+            -   option: В останньому рядку є помилкова відмова.
+                feedback: Ноп.
+            code: "🦋 🦋 , , ,\nyour_favorite = {ask} 'Чи є ваш улюблений комах? Р\n{for} комахи:\n{if} your_favorite == \"\" {or} your_favorite == \" 🐞\":\n{print} \"Що корисно Р\n{elif} your_favorite == '':\n{print} \"Чи можу зловити комарів Р\n{else}:\n{print} 'Всі всі комахи можуть бути корисні один спосіб або інший Р"
+            correct_answer: C
+            question_text: Що неправильно з кодом?
+            question_score: '10'
+        1:
+            mp_choice_options:
+            -   feedback: Це не так.
+                option: "```\nm i n i o ns\n```"
+            -   feedback: Правильно!
+                option: "```\nБоб\nКевін\nСтюарт\n```"
+            -   option: "```\nміньйони\nміньйони\nміньйони\n```"
+                feedback: Погляньте на вміст вашого списку.
+            -   feedback: Не петля через листи.
+                option: "```\nB o b K e v i n S t u a r t\n```"
+            correct_answer: B
+            question_score: '10'
+            question_text: Що таке виведення цього коду?
+            code: "minions = ['Bob', 'Kevin', 'Стуарт']\n{for} x в мінусах:\n{print} x"
+            hint: Відправте свій список.
+        6:
+            code: "name = {ask} 'Що таке ім'я? Р\n{if} name == 'Хід':\nпароль = {ask} 'Який пароль? Р\n{if} пароль =='turtle123':\n{print} 'Яй'\n{else}:\n{print} 'Доступ відмовлено Р\n{else}:\n{print} 'Go риби'"
+            mp_choice_options:
+            -   option: '`{elif}` відсутні.'
+                feedback: Спробуйте знову.
+            -   option: '`{else}` можна використовувати тільки один раз.'
+                feedback: Тепер ми можемо використовувати elif кілька разів.
+            -   option: Немає!
+                feedback: Є помилка. Шукаємо!
+            -   option: В останньому рядку є помилкова відмова.
+                feedback: Дивовижна!
+            question_text: Що неправильно з кодом?
+            hint: Є помилка десь...
+            question_score: '10'
+            correct_answer: D
