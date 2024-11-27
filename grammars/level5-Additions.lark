@@ -12,9 +12,6 @@ _if_less_command: print | ask | play | turtle | assign_list | add | remove | sle
 // just to be sure that if Lark tries to resolve ambiguity, error_invalid will be considered last
 error_invalid.-100: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
 
-assign_list: var _IS textwithspaces (_COMMA textwithspaces)+
-assign: var _IS (list_access | textwithspaces)
-
 error_print_no_quotes: _PRINT (textwithoutspaces | list_access | var_access) (_SPACE (textwithoutspaces | list_access | var_access))* -> error_print_nq
 
 // new commands for level 5

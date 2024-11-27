@@ -1,8 +1,8 @@
 command:+= assign_list | add | remove | error_add_missing_to | error_remove_missing_from | error_add_missing_list | error_remove_missing_list >> error_invalid
 _print_ask_argument: (_SPACE | (list_access textwithoutspaces?) | textwithoutspaces)*
 
-assign: var _IS (list_access | text) -> assign
-assign_list: var _IS text_list (_COMMA text_list)+
+assign: var _IS (list_access | textwithinnerspaces) _SPACE? -> assign
+assign_list: var _IS textwithinnerspaces (_COMMA textwithinnerspaces)+ _SPACE?
 play: _PLAY (list_access | textwithoutspaces)
 
 list_access: var_access _AT (INT | random)
@@ -11,7 +11,8 @@ turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces))? -> forward | _TUR
 sleep: _SLEEP (INT | list_access | var_access)?
 // lists are introduced and list separators (comma and arabic comma) have to excluded from text.
 text: /([^\n،,，、#]+)/ -> text
-text_list: /([^\n,،，、#]+)/ -> text // list elements are another exception since they can contain punctuation but not list separators
+// list elements are another exception since they can contain punctuation but not list separators. Also, they cannot end with space.
+textwithinnerspaces: /([^\n،,，、#]*[^\n،,，、# ])/ -> text
 
 // Values which are added or removed from lists can contain spaces, so we need to escape the 'to_list' and 'from' keywords
 // The part " (?!<expand_keyword to_list>|<expand_keyword from>)" will be processed to a space with a negative look ahead of all to_list and from values

@@ -1634,8 +1634,8 @@ workbooks:
                 print De drie geluksnummers zijn:
                 print nummers at random en print nummers at random en print nummers at random
             output: |-
-                Welkom bij de bingoavond<br>
-                De drie geluksnummers zijn:<br>
+                Welkom bij de bingoavond
+                De drie geluksnummers zijn:
                 5 en 3 en 10
         -   type: input
             answer: |-
@@ -1643,7 +1643,7 @@ workbooks:
                 print We gaan vanavond naar de film.
                 print We kiezen: films at random
             output: |-
-                We gaan vanavond naar de film.<br>
+                We gaan vanavond naar de film.
                 We kiezen: Inside Out
 
         -   type: text
@@ -2191,3 +2191,121 @@ workbooks:
         -   type: question
             text: "Waarom vond je juist die opdracht niet leuk?"
             lines: '5'
+    -   level: '7'
+        intro: |-
+            ## Herhalen!
+            Aan het einde van de les kan jij:
+            * een regel code meerdere keren uitvoeren
+        exercises:
+        -   type: text
+            contents: |-
+                ### Herhaling
+                Soms wil je één regel code meerdere keren herhalen, bijvoorbeeld in een liedje of verhaal.
+            code: |-
+                repeat 5 times print 'Baby shark!'
+        -   type: text
+            contents: |-
+                #### Opdracht 1: Voorspel de uitvoer
+                Wat is de uitvoer van deze programma's?
+        -   type: output
+            code: |-
+                repeat 3 times print 'Baby shark!'
+            answer: |-
+              Baby shark!
+              Baby shark!
+              Baby shark!
+            lines: 3
+        -   type: output
+            code: |-
+                repeat 1 times print 'Hallo allemaal!'
+            answer: |-
+              Hallo allemaal!
+            lines: 1
+        -   type: output
+            code: |-
+                a is 4
+                repeat a times print 'Hallo allemaal!'
+            answer: |-
+              Hallo allemaal!
+              Hallo allemaal!
+              Hallo allemaal!
+              Hallo allemaal!
+            lines: 4
+        -   type: text
+            contents: |
+                ### Opdracht 2: Invoer
+                Je krijgt nu weer een uitvoer te zien. Schrijf een programma dat bij deze uitvoer kan horen.
+                
+                Let op: vaak zijn er meerdere antwoorden goed, je mag zelf iets kiezen, als het maar kan.
+                Kijk ook goed naar het aantal streepjes!
+        -   type: input
+            answer: |-
+                print 'Hallo allemaal!'
+                repeat 2 times print 'Dit is een regel'
+            output: |-
+                Hallo allemaal!
+                Dit is een regel
+                Dit is een regel
+            lines: 2
+        -   type: input
+            answer: |-
+                print 'Dit is regel 1'
+                print 'Dit is regel 2'
+                print 'Dit is regel 3'
+            output: |-
+                Dit is regel 1
+                Dit is regel 2              
+                Dit is regel 3
+            lines: 3
+        -   type: text
+            contents: |-
+                ### Opdracht 3: Goed of fout?
+                Lees de code goed, en bepaal of deze code een foutmelding oplevert.
+        -   type      : MC-code
+            options   : ["Goed" , "Fout"]
+            code      : |-
+              print 'De prins riep steeds om hulp'
+              repeat 3 times 'Help!'
+            answer    : Fout, print mist
+        -   type      : MC-code
+            options   : ["Goed" , "Fout"]
+            code      : |-
+              forward 100
+              repeat 3 times turn 90
+            answer    : Goed
+        -   type      : MC-code
+            options   : ["Goed" , "Fout"]
+            code      : |-
+              mensen = mama, papa, Emma, Sophie
+              repeat 7 times print 'De afwasser is ' mensen
+            answer    : Fout, at random mist
+        -   type      : MC-code
+            options   : ["Goed" , "Fout"]
+            code      : |-
+              dobbel = 1, 2, 3, 4, 5, 6
+              repeat 5 times print 'Jij gooit: ' dobbel at random
+            answer    : Goed
+        -   type: text
+            contents: |-
+                #### Opdracht 4: Programmeerwoorden
+                We hebben deze les een nieuw programmeerwoord geleerd: `repeat`.
+        -   type: define
+            word: "repeat"
+            answer: "een regel code herhalen"
+            lines: 1
+        -   type: text
+            contents: |-
+                #### Wat vond jij?
+        -   type: question
+            text: "Wat was de leukste opdracht van dit level?"
+            lines: 1
+        -   type: question
+            text: "Waarom vond je juist die opdracht leuk?"
+            lines: 5
+        -   type: question
+            text: "Welke opdracht was het minst leuk?"
+            lines: 1
+        -   type: question
+            text: "Waarom vond je juist die opdracht niet leuk?"
+            lines: 5
+

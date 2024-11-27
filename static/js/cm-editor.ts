@@ -23,7 +23,6 @@ import { languagePerLevel } from "./lezer-parsers/language-packages";
 import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
-import { ClientMessages } from "./client-messages";
 import { Tag, styleTags, tags as t } from "@lezer/highlight";
 
 
@@ -59,6 +58,8 @@ export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
             editorType = EditorType.CHEATSHEET;
         } else if ($(preview).hasClass('parsons')) {
             editorType = EditorType.PARSONS;
+        } else if ($(preview).hasClass('workbook')){
+            editorType = EditorType.WORKBOOK
         } else {
             editorType = EditorType.EXAMPLE;
         }
@@ -168,6 +169,16 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 case EditorType.PARSONS:
                     theme[".cm-scroller"] = { "overflow": "auto", "min-height": "3.5rem" }
                     extensions.push(EditorView.theme(theme));
+                    break;
+                case EditorType.WORKBOOK:
+                    theme["&"] = {
+                        background: '#272822',
+                        fontSize: '15.2px',
+                        color: 'white',
+                        borderRadius: '4px',
+                        marginRight: '5px'
+                    }
+                    extensions.push([EditorView.theme(theme)])
                     break;
                 case EditorType.COMMON_MISTAKES: 
                     theme["&"] = {
@@ -510,7 +521,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             // Show error for this line
             let mapError = theGlobalSourcemap[index];
             error.hide();
-            error.show(ClientMessages['Transpile_error'], mapError.error);
+            error.show("", mapError.error);
         }
     }
 }

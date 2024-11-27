@@ -13,8 +13,8 @@ play: _PLAY (list_access | expression | textwithoutspaces)
 equality_check: (INT | textwithoutspaces) (_IS | _EQUALS) (INT | quoted_text | textwithoutspaces)
 condition: >> equality_check
 
-assign_list: var (_IS | _EQUALS) (INT | textwithspaces) (_COMMA (INT | textwithspaces))+
-assign: var (_IS | _EQUALS) (INT | list_access | expression | textwithoutspaces | textwithspaces)
+assign_list: var (_IS | _EQUALS) (INT | textwithinnerspaces) (_COMMA (INT | textwithinnerspaces))+ _SPACE?
+assign: var (_IS | _EQUALS) (INT | list_access | expression | textwithoutspaces | textwithinnerspaces) _SPACE?
 
 add: _ADD_LIST (INT | text_add_remove_list) _TO_LIST _SPACE var_access
 remove: _REMOVE (INT | text_add_remove_list) _FROM _SPACE var_access

@@ -532,20 +532,6 @@ adventures:
         description: Calculatrice 2
         levels:
             14:
-                story_text: |
-                    ### Exercise 2
-                    **This is the second part of this adventure.** The adventure starts in the previous tab.
-                    Of course, you don't always want to calculate the mean of 4 tests. You might want to calculate the mean of 10 tests or only 2...
-                    We can fix this problem by adding the argument and variable 'amount_of_tests'.
-                    * Start a new line on line 3. Set the amount_of_tests argument by asking the student how many tests they have made.
-                    * Change the 4 in line 4 to the new argument amount_of_tests.
-                    * Lastly, change the 4 in line 6 to amount_of_tests
-
-                    Try out your new program. Does it work ?
-
-                    ### Exercise 3
-                    Did you want to make your program even better ? Great ! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want !
-                    We won't tell you how to do it, but we will give you one tip : Start your code in line 1 with : define calculate_mean_grade with subject.
                 example_code: |
                     ```
                     # Utilise ton code de l'aventure précédente.
@@ -832,8 +818,7 @@ adventures:
                 story_text: |-
                     ### Exercice
                     Déboguez ce code. Bonne chance !
-                example_code: "**Attention ! Ce code doit être débogué !**\n```\n{define}movie_recommendation {with} name\n\taction_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'\n\tromance_movies = 'Love Actually', 'The Notebook', 'Titanic'\n\tcomedy_movies = 'Mr Bean' 'Barbie''Deadpool'\n\tkids_movies = 'Minions', 'Paddington', 'Encanto'\n\t{if} name {is} 'Camila' {or} name {is} 'Manuel'\n\t\trecommended_movie = kids_movie {at} {random}\n\t{if} name {is} 'Pedro' {or} 'Gabriella'\n\t\tmood = {ask} 'What you in the mood for?'\n\t{if} mood {is} 'action'\n\t\trecommended_movie = comedy_movies {at} {random}\n\t{if} mood {is} 'romance'\n\t\trecommended_movie = romance_movies\n\t{if} mood {is} 'comedy'\n\t\trecommended_movie = comedy_movies {at} {random}\n\n{print} 'Je recommande ' recommended_movie ' pour ' name\n\nname = {ask} 'Qui regarde ?'\nrecommendation = {ask} 'Voulez-vous une recommandation?'\n{if} recommendation {is} 'yes'\n\t{print} movie_recommendation {with} name\n
-                    {else}\n\t{print} 'Pas de problème!'\n```\n"
+                example_code: "**Attention ! Ce code doit être débogué !**\n```\n{define}movie_recommendation {with} name\n\taction_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'\n\tromance_movies = 'Love Actually', 'The Notebook', 'Titanic'\n\tcomedy_movies = 'Mr Bean' 'Barbie''Deadpool'\n\tkids_movies = 'Minions', 'Paddington', 'Encanto'\n\t{if} name {is} 'Camila' {or} name {is} 'Manuel'\n\t\trecommended_movie = kids_movie {at} {random}\n\t{if} name {is} 'Pedro' {or} 'Gabriella'\n\t\tmood = {ask} 'What you in the mood for?'\n\t{if} mood {is} 'action'\n\t\trecommended_movie = comedy_movies {at} {random}\n\t{if} mood {is} 'romance'\n\t\trecommended_movie = romance_movies\n\t{if} mood {is} 'comedy'\n\t\trecommended_movie = comedy_movies {at} {random}\n\n{print} 'Je recommande ' recommended_movie ' pour ' name\n\nname = {ask} 'Qui regarde ?'\nrecommendation = {ask} 'Voulez-vous une recommandation?'\n{if} recommendation {is} 'yes'\n\t{print} movie_recommendation {with} name\n {else}\n\t{print} 'Pas de problème!'\n```\n"
             14:
                 story_text: |-
                     ### Exercice

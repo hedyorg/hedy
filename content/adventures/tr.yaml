@@ -57,18 +57,18 @@ adventures:
                     3. seviyede, hikayenizi daha eğlenceli hale getirebilirsiniz. Bunun gibi herhangi bir canavar, hayvan veya diğer engeller için rastgelelik kullanabilirsiniz:
                 example_code: |
                     ```
-                    hayvanlar {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Şimdi şunun sesini duyuyor: bir hayvanlar {at} {random}
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} They now hear the sound of an animals {at} {random}
                     ```
                 story_text_2: |
                     Hikayenizde `{add}` komutu da kullanışlı olabilir.
                 example_code_2: |
                     ```
-                    {print} Bir ses duyuyor
-                    hayvanlar {is} 🐿, 🦔, 🦇, 🦉
-                    hayvan {is} {ask} Ne olduğunu düşünüyorsun?
-                    {add} hayvan {to_list} hayvanlar
-                    {print} bu bir hayvanlar {at} {random}
+                    {print} They hear a sound
+                    animals {is} 🐿, 🦔, 🦇, 🦉
+                    animal {is} {ask} What do you think it is?
+                    {add} animal {to_list} animals
+                    {print} it was an animals {at} {random}
                     ```
                 story_text_3: |
                     Bu, hikayenizdeki `{remove}` komutunun bir örneğidir
@@ -278,7 +278,7 @@ adventures:
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: ekle_çıkar_komutu
-        description: ekle şuraya ve çıkar şuradan komutlarına giriş
+        description: '{add} {to_list} ve {remove} {from} giriş'
         levels:
             3:
                 story_text: |
@@ -332,6 +332,7 @@ adventures:
                     ```
 
                         {print} "Sen gerçek Hedy'sin!"
+        name: '{and} & {or}'
     ask_command:
         default_save_name: sor_komutu
         description: sor komutuna giriş
@@ -396,6 +397,7 @@ adventures:
                     isim = {input}('Senin adın ne?')
                     {print}('Demek senin ismin ', isim)
                     ```
+        name: sor
     blackjack:
         name: Yirmibir
         default_save_name: Yirmibir
@@ -423,6 +425,7 @@ adventures:
                     ***Test the function***
                     Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
                     Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
+                example_code: "```\n{print} 'BLACKJACK'\n\n# Bu değişkenleri tanımlayın\ncards = _\nface_cards = _\ncard_1 =\n\n# Puanları hesaplaması için bir fonksiyon oluşturun\n{define} calculate_points {with} card:\n    {if} card {in} face_cards:\n        points = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ points\n\n# Fonksiyonunuzu test edin\n{print} 'Kartınız ' _\n{print} 'Kartınız ' _ ' puan değerindedir'.\n```\n"
     calculator:
         name: Hesap Makinesi
         default_save_name: Hesap Makinesi
@@ -3453,3 +3456,18 @@ adventures:
                         {print} sayı
                     {print} 'Yeni yılınız kutlu olsun!'
                     ```
+    blackjack_2:
+        levels:
+            17:
+                story_text: "### Alıştırma\nBu macerada Blackjack oyunumuzun ikinci kısmını kodlayacağız.\n\n***Önceki maceradan kodunuzu yapıştırın***\nÖnceki macerada değişkenler listesini başlattınız ve bir kartın kaç puan değerinde olduğunu hesaplayan bir fonksiyon oluşturdunuz. Kodunuzu kopyalayıp buraya yapıştırın. Test kısmına ihtiyacınız olmadığını unutmayın, eğer henüz çıkarmadıysanız, şimdi yapınız.\n\n***Daha fazla değişken ekleyin***\ncards ve face_cards listelerini ve card_1 değişkenini zaten ayarladınız. Bu değişkenlerin altında 3 tane daha değişken oluşturun: card_2, dealer_card_1 ve dealer_card_2. Bu değişkenlerin hepsi cards listesinden rastgele bir karta atanacaktır.\n\n***Puanları toplayın***\nKaç puan aldığınızı hesaplamak için fonksiyonu card_1 ile çağırıyoruz ve card_2 için de aynı işlemi yapıyoruz. Sonra bu iki puanı toplayarak toplamınızı elde ediyoruz. Aynı işlemi krupiyenin puanları için de yapın, ancak kendi kartlarınızı değil, krupiyenin kartlarını kullandığınızdan emin olun!\n\n***2 As***\nHarika gidiyorsunuz! Neredeyse tüm puanlar hesaplanabilir şimdi. Sadece bir istisna var: 2 As. Eğer 2 As alırsanız, toplamınız 22 değil 12 puandır (çünkü 22 puan kaybetmek olurdu!). Bu tabii ki krupiyenin kartları için de geçerlidir.\n\n***Puanı gösterin***\nSon olarak, programın hangi kartları çektiğinizi ve bunun kaç puan olduğunu söylemesini istiyorsunuz. Sonra krupiyenin hangi kartları olduğunu ve kaç puan aldığını gösterin.\n\n***Sonraki sekmede devam edin***\nHarika! Oyunun bu kısmını bitirdiniz! Kodunuzu kopyalayıp bir sonraki sekmeye gidin ve ekstra kart istemeyi ve kazananı ilan etmeyi öğrenin.\n"
+                example_code: "```\n# Önceki maceradan kodunuzu buraya yapıştırın\n\n# Bu iki değişkeni değişkenler listesine ekleyin\ncard_2 = _\ndealer_card_1 = _\ndealer_card_2 = _\n\n# Puanlarınızı toplayın\nyour_points_1 = {call} _ {with} card_1\nyour_points_2 = _\nyour_total = _\n\n# Krupiyenin puanlarını toplayın\ndealer_points_1 = _\n_\n_\n\n# 2 As\n{if} card_1 == 'Ace' {and} _\n    your_total = 12\n{if} dealer_card_1 _\n    dealer_total = _\n\n# Puan tablosunu gösterin\n{print} 'Bir ' _ ' ve bir ' _ ' çektiniz. Bu ' _ ' puan değerindedir'\n{print} 'Krupiye bir ' _ ' ve bir ' _ ' çekti. Bu ' _ ' puan değerindedir'\n```\n"
+        name: Blackjack (21) 2
+        default_save_name: Blackjack_2
+        description: Blackjack 2. bölüm
+    blackjack_3:
+        name: Blackjack 3
+        default_save_name: Blackjack_3
+        description: Blackjack 3. bölüm
+        levels:
+            17:
+                story_text: "Önceki sekmelerde, kendiniz ve krupiye için 2 rastgele kart çekmeyi ve her ikinizin de kaç puan aldığını hesaplamayı öğrendiniz.\nBu macerada, hem siz hem de krupiye için ekstra kart isteme seçeneği ekleyeceğiz.\n\n### Alıştırma\n***Bir önceki maceradan kodunuzu yapıştırın ***İlk olarak, önceki sekmeden kodunuzu kopyalayıp buraya yapıştırın.\n\n***Sizin için Ekstra Kart*** Toplamınızı 21'e mümkün olduğunca yakın hale getirmek için ekstra bir kart alabilirsiniz. İlk olarak, oyuncuya ekstra kart isteyip istemediğini sorun. Eğer isterlerse, rastgele bir kart seçin ve çekilen kartı yazdırın. Kart As değilse, fonksiyonu çağırabilir ve puanları toplamınıza ekleyebilirsiniz. Kart As ise fonksiyonu kullanamazsınız, çünkü As hem 1 puan hem de 11 puan olabilir; bu, kazandığınız puan sayısına bağlıdır. Toplamınız 11'den azsa, As'in 11 puan olmasını istersiniz (çünkü bu, 21'e en yakın değerdir). Bu yüzden toplamınıza 11 puan ekleyin. Toplamınız 11 veya daha fazlaysa, As'in 1 puan olmasını istersiniz (çünkü 21'den fazla puan almak istemezsiniz). Bu yüzden toplamınıza 1 puan ekleyin. Son olarak, yeni puan toplamınızı yazdırın.\n\n***Krupiye için Ekstra Kart***Krupiye de ekstra bir kart alabilir. Krupiyeye sormanıza gerek yok, çünkü toplamları 17'den az ise her zaman ekstra kart alırlar.\n'Sizin için Ekstra Kart' kodunu kopyalayıp krupiyenin bölümüne yapıştırın. Daha sonra, krupiyenin ekstra kart seçmesini ve puanlarının toplamına eklenmesini sağlayacak şekilde değiştirin.\n"

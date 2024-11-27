@@ -353,16 +353,17 @@ class TestsLevel7(HedyTester):
         code = "if x is pressed repeat 5 times print 'doe het 5 keer!' else print 'iets anders'"
 
         expected = self.dedent(f"""\
-         if_pressed_mapping = {{"else": "if_pressed_default_else"}}
-         if_pressed_mapping['x'] = 'if_pressed_x_'
-         if_pressed_mapping['else'] = 'if_pressed_else_'
-         def if_pressed_x_():
-           for __i in range(int_with_error('5', {self.value_exception_transpiled()})):
-             print(f'doe het 5 keer!')
-             time.sleep(0.1)
-         def if_pressed_else_():
-           print(f'iets anders')
-         extensions.if_pressed(if_pressed_mapping)""")
+        global_scope_ = dict()
+        if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_x_():
+          for __i in range(int_with_error('5', {self.value_exception_transpiled()})):
+            print(f'doe het 5 keer!')
+            time.sleep(0.1)
+        def if_pressed_else_():
+          print(f'iets anders')
+        extensions.if_pressed(if_pressed_mapping)""")
 
         self.single_level_tester(
             code=code,
@@ -375,6 +376,7 @@ class TestsLevel7(HedyTester):
             if z is pressed print 'doe het 1 keer!' else print 'iets anders'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -414,6 +416,7 @@ class TestsLevel7(HedyTester):
 
         expected = self.dedent(
             f"""\
+            global_scope_ = dict()
             for __i in range({self.int_transpiled(3)}):
               if_pressed_mapping = {{"else": "if_pressed_default_else"}}
               if_pressed_mapping['x'] = 'if_pressed_x_'
