@@ -23,7 +23,6 @@ import { languagePerLevel } from "./lezer-parsers/language-packages";
 import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
-import { ClientMessages } from "./client-messages";
 import { Tag, styleTags, tags as t } from "@lezer/highlight";
 
 
@@ -522,7 +521,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             // Show error for this line
             let mapError = theGlobalSourcemap[index];
             error.hide();
-            error.show(ClientMessages['Transpile_error'], mapError.error);
+            error.show("", mapError.error);
         }
     }
 }

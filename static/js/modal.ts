@@ -226,21 +226,19 @@ export const error = {
     $('#errorbox').hide();
     $('#warningbox').hide();
   },
-  showWarning(caption: string, message: string) {
+  showWarning(message: string) {
     this.hide();
-    $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
   },
 
   show(caption: string, message: string) {
-    $('#errorbox .caption').text(caption);
-    $('#errorbox .details').html(message);
+    $('#errorbox .details').html(caption + " " + message);
     $('#errorbox').show();
   },
 
-  showFadingWarning(caption: string, message: string) {
-    error.showWarning(caption, message);
+  showFadingWarning(message: string) {
+    error.showWarning(message);
     setTimeout(function(){
       $('#warningbox').fadeOut();
     }, 10000);
