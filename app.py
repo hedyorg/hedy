@@ -497,7 +497,7 @@ def setup_language(language=None):
     g.lang = session['lang']
     querylog.log_value(lang=session['lang'])
 
-    if 'keyword_lang' not in session:
+    if 'keyword_lang' not in session or session['keyword_lang'] not in ('en', g.lang):
         session['keyword_lang'] = g.lang if g.lang in ALL_KEYWORD_LANGUAGES.keys() else 'en'
     # If there is a '?keyword_language=' parameter, it overrides the current keyword lang, permanently
     if request.args.get('keyword_language', None):
@@ -2375,6 +2375,7 @@ def profile_page(user, language="en"):
     else:
         session['messages'] = 0
 
+    lang = make_lang_obj(profile.get('language', 'en'))
     return render_template(
         'profile.html',
         page_title=gettext('title_my-profile'),
@@ -2384,6 +2385,7 @@ def profile_page(user, language="en"):
         public_settings=public_profile_settings,
         user_classes=classes,
         current_page='my-profile',
+        lang=lang,
         javascript_page_options=dict(
             page='my-profile',
         ))

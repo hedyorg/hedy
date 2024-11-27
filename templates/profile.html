@@ -106,8 +106,8 @@
             <div class="flex flex-row items-center mb-2">
                 <label for="language" class="inline-block w-72">{{_('preferred_language')}}</label>
                 <select id="language" name="language" class="personal-input" required>
-                    <option value="{{ current_language().lang}}">{{current_language().sym}}</option>
-                    {% for language in other_languages() %}
+                    <option value="{{ lang.lang}}">{{lang.sym}}</option>
+                    {% for language in other_languages(lang.lang) %}
                         <option value="{{language.lang}}">{{language.sym}}</option>
                     {% endfor %}
                 </select>
