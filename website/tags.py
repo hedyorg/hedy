@@ -81,6 +81,7 @@ class TagsModule(WebsiteModule):
                                              adventure_id=adventure_id, creator=user["username"])
 
     @route("/update/<tag>/<adventure_id>", methods=["PUT"], subdomain="<language>")
+    @route("/update/<tag>/<adventure_id>", methods=["PUT"])
     def update(self, tag, adventure_id, language="en"):
         # TODO: allow admin to update tags.
         pass

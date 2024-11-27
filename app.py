@@ -599,6 +599,7 @@ if os.getenv('PROXY_TO_TEST_HOST') and not os.getenv('IS_TEST_ENV'):
 
 
 @app.route('/session_test', methods=['GET'])
+@app.route('/session_test', methods=['GET'], subdomain="<language>")
 def echo_session_vars_test(language="en"):
     if not utils.is_testing_request(request):
         return make_response(gettext("request_invalid"), 400)
