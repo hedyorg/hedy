@@ -618,7 +618,7 @@ def echo_session_vars_main(language="en"):
 @app.route('/parse', methods=['POST'], subdomain="<language>")
 @app.route('/parse', methods=['POST'])
 @querylog.timed_as('parse_handler')
-def parse():
+def parse(language="en"):
     body = request.json
     if not body:
         return make_response(gettext("request_invalid"), 400)
@@ -759,7 +759,7 @@ def parse():
 @app.route('/parse-by-id', methods=['POST'], subdomain="<language>")
 @app.route('/parse-by-id', methods=['POST'])
 @requires_login
-def parse_by_id(user):
+def parse_by_id(user, language="en"):
     body = request.json
     # Validations
     if not isinstance(body, dict):
@@ -785,7 +785,7 @@ def parse_by_id(user):
 @app.route('/parse_tutorial', methods=['POST'], subdomain="<language>")
 @app.route('/parse_tutorial', methods=['POST'])
 @requires_login
-def parse_tutorial(user):
+def parse_tutorial(user, language="en"):
     body = request.json
 
     code = body['code']
