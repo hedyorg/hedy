@@ -1421,6 +1421,56 @@ class TestsLevel5(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
 
+    def test_if_pressed_with_random_list_access(self):
+        code = textwrap.dedent("""\
+            letters is a, b, c, d, e
+            print letters at random
+            if x is pressed print 'great' else print 'not great'""")
+
+        expected = textwrap.dedent('''\
+            global_scope_ = dict()
+            global_scope_["letters"] = ['a', 'b', 'c', 'd', 'e']
+            try:
+              random.choice(global_scope_.get("letters") or letters)
+            except IndexError:
+              raise Exception("""Runtime Index Error""")
+            print(f'{random.choice(global_scope_.get("letters") or letters)}')
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_x_():
+              print(f'great')
+            def if_pressed_else_():
+              print(f'not great')
+            extensions.if_pressed(if_pressed_mapping)''')
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_if_pressed_with_index_list_access(self):
+        code = textwrap.dedent("""\
+            letters is a, b, c, d, e
+            print letters at 1
+            if x is pressed print 'great' else print 'not great'""")
+
+        expected = textwrap.dedent('''\
+            global_scope_ = dict()
+            global_scope_["letters"] = ['a', 'b', 'c', 'd', 'e']
+            try:
+              (global_scope_.get("letters") or letters)[int(1)-1]
+            except IndexError:
+              raise Exception("""Runtime Index Error""")
+            print(f'{(global_scope_.get("letters") or letters)[int(1)-1]}')
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_x_():
+              print(f'great')
+            def if_pressed_else_():
+              print(f'not great')
+            extensions.if_pressed(if_pressed_mapping)''')
+
+        self.single_level_tester(code=code, expected=expected)
+
     def test_if_pressed_missing_else_gives_error(self):
         code = textwrap.dedent("""\
         prind skipping

@@ -2750,3 +2750,145 @@ class TestsLevel6(HedyTester):
         print(f'{global_scope_.get("m") or m}')""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_with_random_list_access(self):
+        code = textwrap.dedent("""\
+            letters is a, b, c, d, e
+            print letters at random
+            if x is pressed print 'great' else print 'not great'""")
+
+        expected = textwrap.dedent('''\
+            global_scope_ = dict()
+            global_scope_["letters"] = Value([Value('a'), Value('b'), Value('c'), Value('d'), Value('e')])
+            try:
+              random.choice((global_scope_.get("letters") or letters).data)
+            except IndexError:
+              raise Exception("""Runtime Index Error""")
+            print(f'{random.choice((global_scope_.get("letters") or letters).data)}')
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_x_():
+              print(f'great')
+            def if_pressed_else_():
+              print(f'not great')
+            extensions.if_pressed(if_pressed_mapping)''')
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_with_index_list_access(self):
+        code = textwrap.dedent("""\
+            letters is a, b, c, d, e
+            print letters at 1
+            if x is pressed print 'great' else print 'not great'""")
+
+        expected = textwrap.dedent('''\
+            global_scope_ = dict()
+            global_scope_["letters"] = Value([Value('a'), Value('b'), Value('c'), Value('d'), Value('e')])
+            try:
+              (global_scope_.get("letters") or letters).data[int(1)-1]
+            except IndexError:
+              raise Exception("""Runtime Index Error""")
+            print(f'{(global_scope_.get("letters") or letters).data[int(1)-1]}')
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_x_():
+              print(f'great')
+            def if_pressed_else_():
+              print(f'not great')
+            extensions.if_pressed(if_pressed_mapping)''')
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_add_to_list(self):
+        code = textwrap.dedent("""\
+            colors is red, blue
+            if g is pressed answer is green else answer is wrong
+            add answer to colors""")
+
+        expected = textwrap.dedent('''\
+            global_scope_ = dict()
+            global_scope_["colors"] = Value([Value('red'), Value('blue')])
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['g'] = 'if_pressed_g_'
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_g_():
+              global_scope_["answer"] = Value('green')
+            def if_pressed_else_():
+              global_scope_["answer"] = Value('wrong')
+            extensions.if_pressed(if_pressed_mapping)
+            (global_scope_.get("colors") or colors).data.append(global_scope_.get("answer") or answer)''')
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_remove_from_list(self):
+        code = textwrap.dedent("""\
+            colors is red, blue
+            if g is pressed answer is green else answer is wrong
+            remove answer from colors""")
+
+        expected = textwrap.dedent('''\
+            global_scope_ = dict()
+            global_scope_["colors"] = Value([Value('red'), Value('blue')])
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['g'] = 'if_pressed_g_'
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_g_():
+              global_scope_["answer"] = Value('green')
+            def if_pressed_else_():
+              global_scope_["answer"] = Value('wrong')
+            extensions.if_pressed(if_pressed_mapping)
+            try:
+              (global_scope_.get("colors") or colors).data.remove(global_scope_.get("answer") or answer)
+            except:
+              pass''')
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_with_calc(self):
+        code = textwrap.dedent("""\
+            points = 0
+            if x is pressed points = 1 + 1 else points = 5 - 2
+            print points""")
+
+        p = 'global_scope_.get("points") or points'
+        expected = textwrap.dedent(f'''\
+            global_scope_ = dict()
+            global_scope_["points"] = Value('0', num_sys='Latin')
+            if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_x_():
+              global_scope_["points"] = Value(1 + 1, num_sys='Latin')
+            def if_pressed_else_():
+              global_scope_["points"] = Value(5 - 2, num_sys='Latin')
+            extensions.if_pressed(if_pressed_mapping)
+            print(f'{{{p}}}')''')
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)
+
+    def test_if_pressed_with_calc_var(self):
+        code = textwrap.dedent("""\
+            points = 0
+            if x is pressed points = points + 1 else points = points - 2
+            print points""")
+
+        p = 'global_scope_.get("points") or points'
+        points = f'number_with_error({p}, """Runtime Value Error""")'
+        one = 'number_with_error(1, """Runtime Value Error""")'
+        two = 'number_with_error(2, """Runtime Value Error""")'
+        expected = textwrap.dedent(f'''\
+            global_scope_ = dict()
+            global_scope_["points"] = Value('0', num_sys='Latin')
+            if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            def if_pressed_x_():
+              global_scope_["points"] = Value({points} + {one}, num_sys=get_num_sys({p}))
+            def if_pressed_else_():
+              global_scope_["points"] = Value({points} - {two}, num_sys=get_num_sys({p}))
+            extensions.if_pressed(if_pressed_mapping)
+            print(f'{{{p}}}')''')
+
+        self.multi_level_tester(code=code, expected=expected, max_level=7)

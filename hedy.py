@@ -658,9 +658,10 @@ class ExtractAST(Transformer):
 # used in the inner commands which are visited before the iterator variable is added to the lookup.
 
 class LookupEntryCollector(visitors.Visitor):
-    def __init__(self, level):
+    def __init__(self, level, has_pressed):
         super().__init__()
         self.level = level
+        self.has_pressed = has_pressed
         self.local_scopes = []
         self.lookup_entries = []
 
@@ -697,25 +698,6 @@ class LookupEntryCollector(visitors.Visitor):
 
     # list access is added to the lookup table not because it must be escaped
     # for example we print(dieren[1]) not print('dieren[1]')
-
-    def list_access(self, tree):
-        list_name = escape_var(tree.children[0].children[0])
-        index = tree.children[1].children[0] if isinstance(tree.children[1], Tree) else tree.children[1]
-        try:
-            index = str(int(index))  # needed to convert non-latin numbers
-            name = f'{list_name}.data[int({index})-1]'
-            name_old = f'{list_name}[int({index})-1]'
-        except ValueError:
-            if index == 'random':
-                name = f'random.choice({list_name}.data)'
-                name_old = f'random.choice({list_name})'
-            else:
-                name = f'{list_name}.data[int({escape_var(index)}.data)-1]'
-                name_old = f'{list_name}[int({escape_var(index)})-1]'
-        if self.level > 5:
-            self.add_to_lookup(name, tree, tree.meta.line, True)
-        else:
-            self.add_to_lookup(name_old, tree, tree.meta.line, True)
 
     def change_list_item(self, tree):
         self.add_to_lookup(tree.children[0].children[0], tree, tree.meta.line, True)
@@ -1251,7 +1233,10 @@ def all_variables(input_string, level, lang='en'):
     program_root = parse_input(input_string, level, lang)
     abstract_syntax_tree = ExtractAST().transform(program_root)
 
-    lookup = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
+    commands = AllCommands(level).transform(program_root)
+    has_pressed = "if_pressed" in commands or "if_pressed_else" in commands
+
+    lookup = create_lookup_table(abstract_syntax_tree, level, lang, input_string, has_pressed)
 
     # list access and functions are intentionally omitted here
     variables = [str(v.name) for v in lookup.get_only_vars()]
@@ -1690,7 +1675,7 @@ class ConvertToPython(Transformer):
             not self.is_float(value) and \
             not is_quoted(value)
 
-        if is_var_candidate and not self.is_variable(arg, access_line):
+        if is_var_candidate and not (self.is_variable(arg, access_line) or self.is_list_access(value)):
             raise exceptions.UndefinedVarException(name=value, line_number=access_line)
 
         return is_var_candidate
@@ -1705,7 +1690,7 @@ class ConvertToPython(Transformer):
         Thus, the different name"""
         self.has_variable_with_definition(args, access_line)
 
-    def merge_localization_info(self, args):
+    def merge_localization_info(self, args, line):
         """ Merges the localization information of all arguments. Currently, it works in the following manner:
             - take the numeral system of the first argument. If the arg is a LV or EV, return its numeral system.
               If it is a variable, determine the numeral system at runtime.
@@ -1714,7 +1699,8 @@ class ConvertToPython(Transformer):
 
         num_sys, bool_sys = None, None
         if args:
-            num_sys = args[0].num_sys if isinstance(args[0], BaseValue) else f'get_num_sys({args[0]})'
+            arg = self.scoped_var_access(args[0], line) if self.is_variable(args[0], line) else args[0]
+            num_sys = arg.num_sys if isinstance(arg, BaseValue) else f'get_num_sys({arg})'
             bool_sys = next((a.bool_sys for a in args if isinstance(a, BaseValue) and a.bool_sys is not None), None)
         return num_sys, bool_sys
 
@@ -1722,14 +1708,15 @@ class ConvertToPython(Transformer):
         arg = self.scoped_var_access(name, line)
         return f"{{{arg}}}"
 
-    def scoped_var_access(self, name, line):
+    def scoped_var_access(self, name, line, parentheses=False):
         if self.has_pressed:
             loc_scope = self.lookup.try_get_local_scope(line)
             if loc_scope:
                 ls_name = f'local_scope_{loc_scope[0]}_'
-                return f'{ls_name}.get("{name}") or global_scope_.get("{name}") or {name}'
+                value = f'{ls_name}.get("{name}") or global_scope_.get("{name}") or {name}'
             else:
-                return f'global_scope_.get("{name}") or {name}'
+                value = f'global_scope_.get("{name}") or {name}'
+            return f'({value})' if parentheses else value
         return f"{name}"
 
     def scoped_var_assign(self, name, line):
@@ -1740,7 +1727,7 @@ class ConvertToPython(Transformer):
         return f"{name}"
 
     def get_localization_info_from_arg(self, arg, access_line):
-        if self.is_variable(arg, access_line):
+        if self.is_variable(arg, access_line) or self.is_list_access(arg):
             return f'get_num_sys({escape_var(arg)})'
         elif isinstance(arg, BaseValue):
             return f"'{arg.num_sys}'"
@@ -1748,7 +1735,7 @@ class ConvertToPython(Transformer):
             return f'get_num_sys({arg})'
 
     def process_arg_for_data_access(self, arg, access_line=100, use_var_value=True, use_scope=True):
-        if self.is_variable(arg, access_line):
+        if self.is_variable(arg, access_line) or self.is_list_access(arg):
             a = escape_var(arg)
             return self.scoped_var_access(a, access_line) if use_scope else a
         if is_quoted(arg):
@@ -1760,13 +1747,14 @@ class ConvertToPython(Transformer):
         because until level 3 variables are sometimes interpreted as literal strings in fstrings. For example, consider:
            color = red, blue, yellow
            print What is your favorite color?
-        In the print statement, `color` is not a var reference, but the literal string 'color'"""
+        In the print statement, `color` is not a var reference, but the literal string 'color'
+        because at this level we cannot print whole lists, so we revert to the literal string."""
 
         matching_entries = self.lookup.get_matching(arg, access_line)
         is_list = [e for e in matching_entries if e.type_ == HedyType.list and '[' not in e.name]
         is_var = not is_list and self.is_var_defined_before_access(arg, access_line, var_to_escape)
 
-        if is_var:
+        if is_var or self.is_list_access(arg):
             self.try_register_variable_access(arg, access_line)
             return "{" + escape_var(arg) + "}"
         else:
@@ -1797,16 +1785,17 @@ class ConvertToPython(Transformer):
             return False
 
     @staticmethod
-    def is_random(s):
-        return isinstance(s, str) and 'random.choice' in s
+    def is_index_list_access(s):
+        return isinstance(s, str) and '[int(' in s and ')-1]' in s
+
+    @staticmethod
+    def is_list_access(s):
+        is_random = isinstance(s, str) and 'random.choice(' in s and ')' in s
+        return is_random or ConvertToPython.is_index_list_access(s)
 
     @staticmethod
     def is_bool(s):
         return s in ['True', 'False']
-
-    @staticmethod
-    def is_list(s):
-        return isinstance(s, str) and '[' in s and ']' in s
 
     @staticmethod
     def indent(s, spaces_amount=2):
@@ -1937,15 +1926,6 @@ class ConvertToPython_1(ConvertToPython):
                 play(note_with_error(localize('{note}'), {ex}))
                 time.sleep(0.5)""") + self.add_debug_breakpoint()
 
-    def make_play_var(self, note, meta):
-        self.is_variable_with_definition(note, meta.line)
-        chosen_note = note.children[0] if isinstance(note, Tree) else note
-        ex = make_value_error(Command.play, 'suggestion_note', self.language)
-
-        return textwrap.dedent(f"""\
-                play(note_with_error({chosen_note}, {ex}))
-                time.sleep(0.5)""") + self.add_debug_breakpoint()
-
     def make_turtle_command(self, parameter, command, command_text, add_sleep, target_type):
         list_index_exception = self.make_index_error_check_if_list([parameter]) if isinstance(parameter, str) else ''
         variable = self.get_fresh_var('__trtl')
@@ -1978,16 +1958,27 @@ class ConvertToPython_1(ConvertToPython):
             t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
     def make_index_error_check_if_list(self, args):
+        # TODO: it is not nice to detect whether there is list access in the arguments using regular expressions.
+        #  We parsed the string to a ParseTree, transpiled that to a string, and now we are parsing it again via regex?
+        #  Perhaps we could store this information in the lookup table?
+
+        simple_var = r"([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)(?:\.data)?"
+        scope = fr'(?:{simple_var}+\.get\("{simple_var}"\))'
+        scoped_var = fr'''(\(?((?:{scope}\s+or)+\s+{simple_var})\)?(?:\.data)?)'''
+
+        def build_regex_for_var(var):
+            # list access could be indexing or random choice
+            list_access_with_int_cast = fr"(({var})+\[int\(({simple_var})\)-1\])"
+            list_access_without_cast = fr"(({var})+\[({simple_var})-1\])"
+            list_access_random = fr"(random\.choice\(({var})\))"
+            return f"{list_access_with_int_cast}|{list_access_without_cast}|{list_access_random}"
+
+        var_regex = scoped_var if self.has_pressed else simple_var
+        list_regex = build_regex_for_var(var_regex)
+
         list_args = {}
-        # List usage comes in indexation and random choice
-        var_regex = r"([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)(\.data)?"
-        list_access_with_int_cast = fr"(({var_regex})+\[int\(({var_regex})\)-1\])"
-        list_access_without_cast = fr"(({var_regex})+\[({var_regex})-1\])"
-        list_access_random = fr"(random\.choice\(({var_regex})\))"
-        list_regex = f"{list_access_with_int_cast}|{list_access_without_cast}|{list_access_random}"
         for arg in args:
-            # arg could be a literal value, expression value or a tree, so unpack it
-            arg = str(self.unpack(arg))
+            arg = str(self.unpack(arg))  # arg could be a literal value, expression value or a tree, so unpack it
             for group in regex.findall(list_regex, arg):
                 match = [e for e in group if e][:2]
                 # match[0] is the access, e.g. animals[int(1)-1]; match[2] is the list name, e.g. animals
@@ -1997,6 +1988,13 @@ class ConvertToPython_1(ConvertToPython):
         return ''.join(errors)
 
     def make_index_error(self, code, list_name):
+        # after level 6 lists references look like `animals.data`, so remove the suffix
+        if list_name.endswith('.data'):
+            list_name = list_name[:-5]
+        # if has_pressed is True, then list references look like `(global_scope_.get('animals') or animals).data`
+        if self.has_pressed:
+            list_name = list_name.strip(')')
+            list_name = list_name.split('or')[-1].strip()
         exception_text = make_error_text(exceptions.RuntimeIndexException(name=list_name), self.language)
         return textwrap.dedent(f"""\
             try:
@@ -2023,7 +2021,7 @@ class ConvertToPython_2(ConvertToPython_1):
         if not args:
             return f"t.right(90){self.add_debug_breakpoint()}"  # no arguments defaults to a right turn
         arg = self.unpack(args[0])
-        if self.is_variable(arg, meta.line):
+        if self.is_variable(arg, meta.line) and not self.is_list_access(arg):
             return self.make_turn(escape_var(arg))
         # if not a variable, then the arg is an int
         return self.make_turn(arg)
@@ -2033,7 +2031,7 @@ class ConvertToPython_2(ConvertToPython_1):
             return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}',
                                         indent=False, is_debug=self.is_debug, location="after")
         arg = self.unpack(args[0])
-        if not self.is_variable(arg, meta.line):
+        if not self.is_variable(arg, meta.line) and not self.is_list_access(arg):
             arg = int(arg)  # if not a variable, then the arg is an int
         return self.make_forward(escape_var(arg))
 
@@ -2070,7 +2068,7 @@ class ConvertToPython_2(ConvertToPython_1):
         result = []
         for arg in args:
             arg = self.unpack(arg)
-            if self.is_random(arg) or self.is_list(arg):
+            if self.is_list_access(arg):
                 result.append(self.process_arg_for_fstring(arg, meta.line, var_to_escape))
             else:
                 # this regex splits words from non-letter characters, such that name! becomes [name, !]
@@ -2101,7 +2099,7 @@ class ConvertToPython_2(ConvertToPython_1):
         value = self.unpack(args[1])
 
         exception = self.make_index_error_check_if_list([value])
-        if self.is_variable(value, meta.line):
+        if self.is_variable(value, meta.line) or self.is_list_access(value):
             # if the assigned value is a variable, this is a reassign
             value = escape_var(value)
         else:
@@ -2167,15 +2165,7 @@ class ConvertToPython_3(ConvertToPython_2):
           pass""")
 
     def process_add_to_remove_from_list_argument(self, arg, meta):
-        # only call process_variable if arg is a string, else keep as is (ie.
-        # don't change 5 into '5', my_list[1] into 'my_list[1]')
-        if self.is_list(arg):
-            list_name = arg.split('[')[0]
-            self.try_register_variable_access(list_name, meta.line)
-            before_index, after_index = arg.split(']', 1)
-            return before_index + '-1' + ']' + after_index  # account for 1-based indexing
-        else:
-            return self.process_arg_for_data_access(arg, meta.line)
+        return self.process_arg_for_data_access(self.unpack(arg), meta.line)
 
 
 @v_args(meta=True)
@@ -2187,6 +2177,8 @@ class ConvertToPython_4(ConvertToPython_3):
 
         if self.is_variable(name, access_line):
             return self.scoped_var_access_for_fstring(name, access_line)
+        elif self.is_list_access(name):
+            return f"{{{name}}}"
 
         if is_quoted(name):
             name = name[1:-1]
@@ -2243,6 +2235,45 @@ class ConvertToPython_4(ConvertToPython_3):
 @hedy_transpiler(level=5)
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
+    def assign_list(self, meta, args):
+        parameter = self.scoped_var_assign(self.unpack(args[0]), meta.line)
+        values = [f"'{process_characters_needing_escape(str(self.unpack(a)))}'" for a in args[1:]]
+        return f"{parameter} = [{', '.join(values)}]{self.add_debug_breakpoint()}"
+
+    def list_access(self, meta, args):
+        args = [escape_var(str(self.unpack(a))) for a in args]
+        # filter the word `random` since it has a special meaning here and is not excluded in the check var usage
+        vars_to_check = [a for a in args if a != 'random']
+        self.check_variable_usage_and_definition(vars_to_check, meta.line)
+
+        list_name = self.scoped_var_access(args[0], meta.line)
+        index = args[1]
+        if index == 'random':
+            return f'random.choice({list_name})'
+        else:
+            list_name = f'({list_name})'if self.has_pressed else list_name
+            return f'{list_name}[int({index})-1]'
+
+    def add(self, meta, args):
+        value = self.process_add_to_remove_from_list_argument(args[0], meta)
+        list_name = self.unpack(args[1])
+        # register variable usage with the unprocessed list name
+        self.try_register_variable_access(list_name, meta.line)
+        list_name = self.scoped_var_access(list_name, meta.line, parentheses=True)
+
+        return f"{list_name}.append({value}){self.add_debug_breakpoint()}"
+
+    def remove(self, meta, args):
+        value = self.process_add_to_remove_from_list_argument(args[0], meta)
+        list_name = self.scoped_var_access(args[1], meta.line, parentheses=True)
+        self.try_register_variable_access(list_name, meta.line)
+
+        return textwrap.dedent(f"""\
+        try:
+          {list_name}.remove({value}){self.add_debug_breakpoint()}
+        except:
+          pass""")
+
     def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[1])}"""
@@ -2405,8 +2436,10 @@ class ConvertToPython_6(ConvertToPython_5):
                 time.sleep(0.5)""") + self.add_debug_breakpoint()
 
     def process_arg_for_fstring(self, name, access_line=100, var_to_escape=''):
-        if self.is_variable(name, access_line) or self.is_list(name) or self.is_random(name):
+        if self.is_variable(name, access_line):
             return self.scoped_var_access_for_fstring(escape_var(self.unpack(name)), access_line)
+        elif self.is_list_access(name):
+            return f"{{{name}}}"
         elif isinstance(name, LiteralValue):
             return self.process_literal_for_fstring(name)
         elif isinstance(name, ExpressionValue):
@@ -2432,14 +2465,13 @@ class ConvertToPython_6(ConvertToPython_5):
             # In some cases, we don't need to use the data of a variable, e.g. `for a in animals`
             data_part = '.data' if use_var_value else ''
             a = escape_var(self.unpack(arg))
-            var_access = self.scoped_var_access(a, access_line) if use_scope else a
-            var_access = f'({var_access})' if data_part and ' ' in var_access else var_access
+            var_access = self.scoped_var_access(a, access_line, parentheses=True) if use_scope else a
             return f"{var_access}{data_part}"
         elif isinstance(arg, LiteralValue):
             val = arg.data[1:-1] if is_quoted(arg.data) else arg.data
             # equality does not have an f string and requires quotes to be added manually
             return f"'{process_characters_needing_escape(str(val))}'"
-        elif self.is_random(arg) or self.is_list(arg):
+        elif self.is_list_access(arg):
             return f'{arg}.data'
         else:
             # We end up here when if-pressed receives a Token(LETTER_OR_NUMBER, 'x')
@@ -2449,9 +2481,8 @@ class ConvertToPython_6(ConvertToPython_5):
             return f"'{process_characters_needing_escape(str(val))}'"
 
     def process_arg_for_func(self, arg, access_line):
-        if self.is_variable_with_definition(arg, access_line):
+        if self.is_variable_with_definition(arg, access_line) and not self.is_list_access(arg):
             var_name = self.scoped_var_access(escape_var(self.unpack(arg)), access_line)
-            # var_name = escape_var(self.unpack(arg))
             return f"{var_name}"
         return self.process_assign_argument(arg)
 
@@ -2459,20 +2490,20 @@ class ConvertToPython_6(ConvertToPython_5):
         left_hand_side = self.scoped_var_assign(args[0], meta.line)
         right_hand_side = args[1]
 
+        var = escape_var(self.unpack(right_hand_side))
         if self.is_variable(right_hand_side, meta.line):
-            var = escape_var(self.unpack(right_hand_side))
             right_hand_side = self.scoped_var_access(var, meta.line)
-            if self.is_list(var) or self.is_random(var):
-                exception = self.make_index_error_check_if_list([var])
-                return f"{exception}{left_hand_side} = {right_hand_side}{self.add_debug_breakpoint()}"
-            else:
-                return f"{left_hand_side} = {right_hand_side}"
+            return f"{left_hand_side} = {right_hand_side}"
+        elif self.is_list_access(var):
+            exception = self.make_index_error_check_if_list([var])
+            return f"{exception}{left_hand_side} = {right_hand_side}{self.add_debug_breakpoint()}"
         else:
             value = self.process_assign_argument(right_hand_side, escape_quotes=True)
             return f"{left_hand_side} = {value}{self.add_debug_breakpoint()}"
 
     def assign_list(self, meta, args):
         parameter = self.scoped_var_assign(args[0], meta.line)
+        # list elements cannot be variables, only integers, strings and booleans
         arguments = [self.process_assign_argument(v, escape_quotes=True) for v in args[1:]]
 
         return f"{parameter} = Value([{', '.join(arguments)}]){self.add_debug_breakpoint()}"
@@ -2492,7 +2523,7 @@ class ConvertToPython_6(ConvertToPython_5):
         vars_to_check = [a for a in args if a != 'random']
         self.check_variable_usage_and_definition(vars_to_check, meta.line)
 
-        list_name = str(args[0])
+        list_name = self.scoped_var_access(str(args[0]), meta.line, parentheses=True)
         list_index = args[1]
         if str(list_index) == 'random':
             return f'random.choice({list_name}.data)'
@@ -2506,14 +2537,18 @@ class ConvertToPython_6(ConvertToPython_5):
     def add(self, meta, args):
         value = self.process_add_to_remove_from_list_argument(args[0], meta)
         list_name = self.unpack(args[1])
+        # register variable usage with the unprocessed list name
         self.try_register_variable_access(list_name, meta.line)
+        list_name = self.scoped_var_access(list_name, meta.line, parentheses=True)
 
         return f"{list_name}.data.append({value}){self.add_debug_breakpoint()}"
 
     def remove(self, meta, args):
         value = self.process_add_to_remove_from_list_argument(args[0], meta)
         list_name = self.unpack(args[1])
+        # register variable usage with the unprocessed list name
         self.try_register_variable_access(list_name, meta.line)
+        list_name = self.scoped_var_access(list_name, meta.line, parentheses=True)
 
         return textwrap.dedent(f"""\
         try:
@@ -2522,8 +2557,8 @@ class ConvertToPython_6(ConvertToPython_5):
           pass""")
 
     def process_add_to_remove_from_list_argument(self, arg, meta):
-        if self.is_variable(arg, meta.line):
-            return f'{escape_var(self.unpack(arg))}'
+        if self.is_variable(arg, meta.line) or self.is_list_access(arg):
+            return self.scoped_var_access(escape_var(self.unpack(arg)), meta.line)
         elif isinstance(arg, LiteralValue):
             return self.process_literal_to_value(arg)
         elif isinstance(arg, ExpressionValue):
@@ -2561,12 +2596,14 @@ class ConvertToPython_6(ConvertToPython_5):
         lhs = self.unpack(args[0])
         rhs = self.unpack(args[1])
         self.check_variable_usage_and_definition(args, meta.line)
-        num_sys, bool_sys = self.merge_localization_info(args)
+        num_sys, bool_sys = self.merge_localization_info(args, meta.line)
 
         only_literal_values = all([isinstance(a, LiteralValue) for a in args])
         if only_literal_values:
             value = f'{lhs} {operator} {rhs}'
         else:
+            lhs = self.scoped_var_access(lhs, meta.line) if self.is_variable(lhs, meta.line) else lhs
+            rhs = self.scoped_var_access(rhs, meta.line) if self.is_variable(rhs, meta.line) else rhs
             exception_text = make_value_error(operator, 'suggestion_number', self.language)
             value = f'number_with_error({lhs}, {exception_text}) {operator} number_with_error({rhs}, {exception_text})'
         return ExpressionValue(value, num_sys, bool_sys)
@@ -2729,7 +2766,7 @@ class ConvertToPython_11(ConvertToPython_10):
             """) + body
 
     def process_for_loop_args(self, arg, meta, runtime_error=False):
-        if self.is_variable(arg, meta.line):
+        if self.is_variable(arg, meta.line) or self.is_list_access(arg):
             var = escape_var(arg)
             if runtime_error:
                 ex = make_value_error(Command.sleep, 'suggestion_number', self.language)
@@ -2800,7 +2837,7 @@ class ConvertToPython_12(ConvertToPython_11):
             a = self.unpack(arg)
             if not (self.is_int(a) or
                     self.is_float(a) or
-                    self.is_random(a) or
+                    self.is_list_access(a) or
                     self.is_bool(a)):
                 raise exceptions.UnquotedAssignTextException(text=a, line_number=access_line)
         return False
@@ -2832,9 +2869,11 @@ class ConvertToPython_12(ConvertToPython_11):
     def addition(self, meta, args):
         lhs = self.unpack(args[0])
         rhs = self.unpack(args[1])
-        num_sys, bool_sys = self.merge_localization_info(args)
+        num_sys, bool_sys = self.merge_localization_info(args, meta.line)
 
         if self.has_variable_with_definition(args, meta.line):
+            lhs = self.scoped_var_access(lhs, meta.line) if self.is_variable(lhs, meta.line) else lhs
+            rhs = self.scoped_var_access(rhs, meta.line) if self.is_variable(rhs, meta.line) else rhs
             ex_text = make_values_error(Command.addition, 'suggestion_numbers_or_strings', self.language)
             value = f'sum_with_error({lhs}, {rhs}, {ex_text})'
         else:
@@ -2892,12 +2931,15 @@ class ConvertToPython_12(ConvertToPython_11):
         left_hand_side = self.scoped_var_assign(args[0], meta.line)
         right_hand_side = args[1]
 
-        self.is_variable_with_definition(right_hand_side, meta.line)
+        var = escape_var(self.unpack(right_hand_side))
+        if self.is_variable(right_hand_side, meta.line):
+            right_hand_side = self.scoped_var_access(var, meta.line)
+        else:
+            # we no longer escape quotes here because they are now needed
+            right_hand_side = self.process_assign_argument(right_hand_side)
 
-        right_hand_side = self.process_assign_argument(right_hand_side)
-        # we no longer escape quotes here because they are now needed
         exception = self.make_index_error_check_if_list([right_hand_side])
-        return exception + left_hand_side + " = " + right_hand_side + self.add_debug_breakpoint()
+        return f"{exception}{left_hand_side} = {right_hand_side}{self.add_debug_breakpoint()}"
 
     def print(self, meta, args):
         argument_string = self.process_print_ask_args(args, meta)
@@ -2927,8 +2969,10 @@ class ConvertToPython_12(ConvertToPython_11):
         return result
 
     def process_arg_for_fstring(self, name, access_line=100, var_to_escape=''):
-        if self.is_variable(name, access_line) or self.is_list(name) or self.is_random(name):
+        if self.is_variable(name, access_line):
             return self.scoped_var_access_for_fstring(escape_var(self.unpack(name)), access_line)
+        elif self.is_list_access(name):
+            return f"{{{name}}}"
         elif isinstance(name, LiteralValue):
             return self.process_literal_for_fstring(name)
         elif isinstance(name, ExpressionValue):
@@ -2948,7 +2992,7 @@ class ConvertToPython_12(ConvertToPython_11):
         vars_to_check = [a for a in args if str(a) != 'random']
         self.check_variable_usage_and_definition(vars_to_check, meta.line)
 
-        list_name = str(args[0])
+        list_name = self.scoped_var_access(args[0], meta.line, parentheses=True)
         list_index = args[1]
 
         if str(list_index) == 'random':
@@ -2965,32 +3009,9 @@ class ConvertToPython_12(ConvertToPython_11):
         exception = self.make_index_error_check_if_list([args[0]])
         return exception + "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
-    def add(self, meta, args):
-        value = self.process_add_to_remove_from_list_argument(args[0], meta)
-        list_name = args[1]
-
-        # both sides have been used now
-        self.try_register_variable_access(value, meta.line)
-        self.try_register_variable_access(list_name, meta.line)
-        return f"{list_name}.data.append({value}){self.add_debug_breakpoint()}"
-
-    def remove(self, meta, args):
-        value = self.process_add_to_remove_from_list_argument(args[0], meta)
-        list_name = args[1]
-
-        # both sides have been used now
-        self.try_register_variable_access(value, meta.line)
-        self.try_register_variable_access(list_name, meta.line)
-
-        return textwrap.dedent(f"""\
-            try:
-              {list_name}.data.remove({value}){self.add_debug_breakpoint()}
-            except:
-              pass""")
-
     def process_add_to_remove_from_list_argument(self, arg, meta):
         if self.is_variable_with_definition(arg, meta.line):
-            return f'{escape_var(self.unpack(arg))}'
+            return self.scoped_var_access(escape_var(self.unpack(arg)), meta.line)
         elif isinstance(arg, LiteralValue):
             return self.process_literal_to_value(arg)
         elif isinstance(arg, ExpressionValue):
@@ -2999,18 +3020,23 @@ class ConvertToPython_12(ConvertToPython_11):
             return f"{arg}"
 
     def in_list_check(self, meta, args):
-        self.check_variable_usage_and_definition(args, meta.line)
-
-        value = self.process_assign_argument(args[0])
-        list_name = args[1]
+        value, list_name = self.process_in_not_in_list_args(meta, args)
         return f"{value} in {list_name}.data"
 
     def not_in_list_check(self, meta, args):
+        value, list_name = self.process_in_not_in_list_args(meta, args)
+        return f"{value} not in {list_name}.data"
+
+    def process_in_not_in_list_args(self, meta, args):
         self.check_variable_usage_and_definition(args, meta.line)
 
-        value = self.process_assign_argument(args[0])
-        list_name = args[1]
-        return f"{value} not in {list_name}.data"
+        value = self.unpack(args[0])
+        if self.is_variable_with_definition(args[0], meta.line) and not self.is_list_access(value):
+            value = self.scoped_var_access(value, meta.line, parentheses=True)
+        else:
+            value = self.process_assign_argument(args[0])
+        list_name = self.scoped_var_access(self.unpack(args[1]), meta.line, parentheses=True)
+        return value, list_name
 
     def equality_check(self, meta, args):
         left_hand_side = self.process_arg_for_data_access(args[0], meta.line)
@@ -3057,14 +3083,13 @@ class ConvertToPython_12(ConvertToPython_11):
             # In some cases, we don't need to use the data of a variable, e.g. `for a in animals`
             data_part = '.data' if use_var_value else ''
             a = escape_var(self.unpack(arg))
-            var_name = self.scoped_var_access(a, access_line) if use_scope else a
-            var_name = f'({var_name})' if data_part and ' ' in var_name else var_name
+            var_name = self.scoped_var_access(a, access_line, parentheses=True) if use_scope else a
             return f"{var_name}{data_part}"
         elif isinstance(arg, LiteralValue):
             if is_quoted(arg.data):
                 return f"'{process_characters_needing_escape(arg.data[1:-1])}'"
             return arg.data
-        elif self.is_random(arg) or self.is_list(arg):
+        elif self.is_list_access(arg):
             return f'{arg}.data'
         else:
             # We end up here when if-pressed receives a Token(LETTER_OR_NUMBER, 'x')
@@ -3186,7 +3211,7 @@ class ConvertToPython_14(ConvertToPython_13):
         return f"{arg0}{operator}{arg1}"
 
     def process_variable_for_comparisons(self, arg, meta):
-        if self.is_variable(arg, meta.line):
+        if self.is_variable(arg, meta.line) or self.is_list_access(arg):
             return f"{escape_var(arg)}.data"
         else:
             return f'{self.unpack(arg)}'
@@ -3341,7 +3366,7 @@ class MicrobitConvertToPython_2(MicrobitConvertToPython_1, ConvertToPython_2):
         value = self.unpack(args[1])
 
         exception = self.make_index_error_check_if_list([value])
-        if self.is_variable(value, meta.line):
+        if self.is_variable(value, meta.line) or self.is_list_access(value):
             # if the assigned value is a variable, this is a reassign
             value = escape_var(value)
         elif not self.is_int(value) and not self.is_float(value):
@@ -4048,8 +4073,8 @@ def is_program_complete(abstract_syntax_tree, level):
                                                     line_number=line)
 
 
-def create_lookup_table(abstract_syntax_tree, level, lang, input_string):
-    visitor = LookupEntryCollector(level)
+def create_lookup_table(abstract_syntax_tree, level, lang, input_string, has_pressed):
+    visitor = LookupEntryCollector(level, has_pressed)
     visitor.visit_topdown(abstract_syntax_tree)
     lookup_table = LookupTable(visitor.local_scopes, visitor.lookup_entries)
 
@@ -4072,7 +4097,8 @@ def create_AST(input_string, level, lang="en"):
     commands = AllCommands(level).transform(program_root)
     # FH, dec 2023. I don't love how AllCommands works on program root and not on AST,
     # but his will do for now. One day we should really start to clean up our AST!
-    lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string)
+    has_pressed = "if_pressed" in commands or "if_pressed_else" in commands
+    lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string, has_pressed)
 
     return abstract_syntax_tree, lookup_table, commands
 
