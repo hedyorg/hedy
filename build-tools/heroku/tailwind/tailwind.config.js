@@ -1,3 +1,5 @@
+const nightwind = require("nightwind");
+
 // Control the Tailwind file size by disabling stuff we don't need.
 module.exports = {
   content: [
@@ -172,6 +174,11 @@ module.exports = {
         800: '#075985',
         900: '#0c4a6e',
       },
+    },
+    nightwind: {
+      colors: {
+       white: "gray.800"
+      }
     }
   },
   variants: {},
