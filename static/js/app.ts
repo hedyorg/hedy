@@ -671,7 +671,7 @@ export function tryPaletteCode(exampleCode: string) {
 }
 
 export function viewProgramLink(programId: string) {
-  return window.location.origin + '/hedy/' + programId + '/view';
+  return `${location.protocol}//${theDomainName}/hedy/${programId}/view`;
 }
 
 function updateProgramCount() {
