@@ -55,7 +55,7 @@ function redirect(where: string, lang?: string) {
     window.location.href = `http://${theDomainName}/${where}${lang ? `?lang=${lang}` : ''}`
   } else {
     const protocol = location.protocol
-    window.location.href = `${protocol}//${lang ? '.' + lang : ''}${theDomainName}/${where}`;
+    window.location.href = `${protocol}//${lang ? lang + '.' : ''}${theDomainName}/${where}`;
   }
 }
 
