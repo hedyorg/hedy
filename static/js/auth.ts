@@ -103,7 +103,7 @@ export function initializeFormSubmits() {
     tryCatchPopup(async () => {
       const body = convertFormJSON($(this))
       await postNoResponse('/auth/signup', body);      
-      afterLogin({"first_time": true, "is_teacher": "is_teacher" in body, "lang": body["language"] || "en"});
+      afterLogin({"first_time": true, "teacher": "is_teacher" in body, "lang": body["language"] || "en"});
     });
   });
 
@@ -284,12 +284,12 @@ async function afterLogin(loginData: Dict<boolean|string>) {
     return join_class(joinClass.id, joinClass.name);
   }
 
-  // If the user logs in for the first time and is a teacher -> redirect to the for teacher page
-  if (loginData['first_time'] && loginData['is_teacher']) {
+  // If the user is a teacher, shend them to the teachers page
+  if (loginData['teacher']) {
     redirect('for-teachers', userLang)   
     return
-  // If it's a student, send him to the first level
-  } else if(loginData['first_time'] && !loginData['is_teacher']) {
+  // If it's a student, send them to the first level
+  } else if(loginData['first_time'] && !loginData['teacher']) {
     redirect('hedy/1', userLang)
     return
   }
@@ -299,11 +299,6 @@ async function afterLogin(loginData: Dict<boolean|string>) {
     return
   }
 
-  // If the user is a teacher -> re-direct to for-teachers page after login
-  if (loginData['teacher']) {
-    redirect('for-teachers', userLang)
-    return
-  }
   // Otherwise, redirect to the main page
   redirect('', userLang);
 }
