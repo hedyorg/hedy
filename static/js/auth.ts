@@ -51,11 +51,17 @@ function convertFormJSON(form: JQuery<HTMLElement>) {
 }
 
 function redirect(where: string, lang?: string) {
+  if (lang === undefined) {
+    location.pathname = '/' + where
+    return
+  }  
   if (/^localhost:\d\d\d\d|(\d+\.\d+\.\d+\.\d+:\d\d\d\d)$/.test(theDomainName)) {
-    window.location.href = `http://${theDomainName}/${where}${lang ? `?lang=${lang}` : ''}`
-  } else {
+    window.location.href = `http://${theDomainName}/${where}?lang=${lang}`
+    return
+  } else { // We want a full redirect, including the subdomain
     const protocol = location.protocol
-    window.location.href = `${protocol}//${lang ? lang + '.' : ''}${theDomainName}/${where}`;
+    window.location.href = `${protocol}//${lang}.${theDomainName}/${where}`;
+    return
   }
 }
 
@@ -298,6 +304,6 @@ async function afterLogin(loginData: Dict<boolean|string>) {
     redirect('for-teachers', userLang)
     return
   }
-  // Otherwise, redirect to the programs page
-  redirect('');
+  // Otherwise, redirect to the main page
+  redirect('', userLang);
 }
