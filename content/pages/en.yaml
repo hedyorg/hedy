@@ -2290,204 +2290,207 @@ workbooks:
           lines     : 5
     -   level: '8'
         intro: |-
-            ## Herhalen!
-            Aan het einde van de les kan jij:
-            * meerdere regels code meerdere keren uitvoeren
+            ## Repeat!
+            By the end of this lesson, you can:
+            * repeat multiple lines of code
         exercises:
         -   type: text
             contents: |-
-                ### Herhaling
-                Misschien heb je al gezien dat de herhaling nu maar heel simpel is, maar één regel.
-                Vaak wil je meerdere regels herhalen, om een complexer programma te maken.
-                Dat gaat in Hedy, en ook in Python, met inspringen!
-                Inspringen betekent spaties voor regels code zetten.
+                ### Repitition
+                Maybe you've noticed how you could only repeat 1 line of code before, very simplistic.
+                Oftentimes you want to repeat multiple lines, to make a more complex program.
+                In Hedy, and in Python too, this is done with indentation!
+                Indentation means starting a line with a couple of spaces.
             code: |-
                 repeat 5 times
                     print 'Baby shark!'
         -   type: text
             contents: |-
-                #### Opdracht 1: Welke regels worden er herhaald?
+                #### Exercise 1: Which lines will be repeated?
                 
-                Tip: Kijk goed welke regels inspringen, oftewel met spaties beginnen!
+                Tip: Take a careful look at the indentation (starting a line with spaces).
         -   type: circle
-            goal: inspringen
+            goal: indentation
             code: |-
                 repeat 3 times
                     print 'Baby shark!'
                     print 'Tudu tudu tudu!'                  
                 print 'Baby shark!'
-            answer: Regels 2 en 3
+            answer: Lines 2 and 3
         -   type: circle
-            goal: inspringen
+            goal: indentation
             code: |-
-                print 'Hallo!'
-                repeat 1 times
-                    print 'Ja, hallo allemaal'
-            answer: Regel 3
+                print 'Hello!'
+                repeat 2 times
+                    print 'Yes, hi everybody'
+            answer: Line 3
         -   type: circle
-            goal: inspringen
+            goal: indentation
             code: |-
-                naam is ask 'Hoe heet jij?'
-                if naam is Hedy
-                    print 'Ja'
+                name is ask 'What is your name?'
+                if name is Hedy
+                    print 'Yes'
                 else
-                    print 'Nee'
-            answer: Geen regels! Bij if spring je wel in, maar worden regels niet herhaald!
+                    print 'No'
+            answer: No lines! There is indentation because of the if and else, but no lines will be repeated.
 
         -   type: text
             contents: |-
-                #### Opdracht 2: Voorspel de uitvoer
-                Wat is de uitvoer van deze programma's?
+                #### Exercise 2: Predict the output
+                What will be the output of these programs?
         -   type: output
             code: |-
-                print 'Hallo!'
+                print 'Hello!'
                 repeat 1 times 
                     print ':)'
             answer: |-
-              Hallo!
+              Hello!
               :)
         -   type: output
             code: |-
-                print 'Hallo!'
+                print 'Hello!'
                 repeat 5 times 
                     print ':('
-                print 'En klaar!'
+                print 'Sone!'
             answer: |-
-              Hallo!
+              Hello!
               :(
               :(
               :(
               :(
               :(
-              En klaar!
+              Done!
         -   type: text
             contents: |
-                ## If en else
-                Ook bij `if` en `else` moet je inspringen gebruiken. Zo kan je als een conditie waar of niet waar is, ook meerdere regels uitvoeren.
+                ## If and else
+                When using`if` and `else` you also need indentation. This way you can execute multiple lines when a condition is true or flase.
 
-                ### Opdracht 3: Voorspel de uitvoer
-              
-                Voorspel de uitvoer van deze codes.
+                ### Exercise 3: Predict the output
+
+                Predict the output of these programs.
         -   type: output
             code: |-
-                naam is ask 'Hoe heet jij?'
-                if naam is Hedy
-                    print 'Ja'
+                name is ask 'What is your name?'
+                if name is Hedy
+                    print 'Yes'
                 else
-                    print 'Nee'
-            answer: 'Nee'
+                    print 'No'
+            answer: 'No'
             lines: 1
         -   type: output
             code: |-
-                getallen is 1, 2, 3, 4, 5, 6, 7
-                keuze is getallen at random
-                if keuze is vijf
-                    print 'Hoera!'
-                    print 'Hoera!'
+                numbers is 1, 2, 3, 4, 5, 6, 7
+                choice is numbers at random
+                if choice is five
+                    print 'Hooray!'
+                    print 'Hooray!'
                 else
-                    print 'Jammer hoor'
-            answer: 'Jammer hoor'
+                    print 'Oh no!'
+            answer: 'Oh no!'
             lines: 2
         -   type: output
             code: |-
-              dobbel = 1, 2, 3, 4, 5, 6
+              dice = 1, 2, 3, 4, 5, 6
               repeat 3 times 
-                  print 'Jij gooide: ' dobbel at random
-                  print 'Het spel is nu afgelopen'
+                  print 'You threw: ' dice at random
+                  print 'Game over'
             answer: |-
-              Jij gooide: <1 of 2 of 3>
-              Het spel is nu afgelopen
-              Jij gooide: <1 of 2 of 3>
-              Het spel is nu afgelopen
-              Jij gooide: <1 of 2 of 3>
-              Het spel is nu afgelopen
+              You threw: < 1, 2, 3, 4, 5, or 6>
+              Game over
+              You threw: < 1, 2, 3, 4, 5, or 6>
+              Game over
+              You threw: < 1, 2, 3, 4, 5, or 6>
+              Game over
             lines: 6
         -   type: text
             contents: |-
-                ### Opdracht 4: Goed of fout?
-                Lees de code goed, en bepaal of deze code een foutmelding oplevert.
+                ### Exercise 4: Correct or incorrect?
+                Take a careful look at the programs and decide if they will trigger an errormessage or not.
         -   type      : MC-code
-            options   : ["Goed" , "Fout"]
+            options   : ["Correct" , "Incorrect"]
             code      : |-
-                naam is Hermans
-                if naam is Senkal
-                  print 'Hoera!'
+                name is Hermans
+                if name is Senkal
+                  print 'Hooray!'
                 else
-                print 'Pech'
-            answer    : Fout, er is niet ingesprongen bij else
+                print 'Bad luck'
+            answer    : Incorrect, there is no indentation after else
         -   type      : MC-code
-            options   : ["Goed" , "Fout"]
+            options   : ["Correct" , "Incorrect"]
             code      : |-
-                nummer is 10
-                  if nummer is 5
-                print 'Hoera!'
+                number is 10
+                  if number is 5
+                print 'Hooray!'
                   else
-                print 'Pech'
-            answer    : Fout, er is verkeerd ingesprongen
+                print 'Bad luck'
+            answer    : Incorrect, the indentation was used the wrong way around.
         -   type      : MC-code
-            options   : ["Goed" , "Fout"]
+            options   : ["Correct" , "Incorrect"]
             code      : |-
-              mensen = mama, papa, Emma, Sophie
-              repeat 7 times print 'De afwasser is ' mensen
-            answer    : Fout, repeat mag niet meer op één regel
+              people = mom, dad, Emma, Sophie
+              repeat 7 times print 'The dishes will be done by ' people at random
+            answer    : Incorrect, you can no longer use the repeat command in only one line.
         -   type      : MC-code
-            options   : ["Goed" , "Fout"]
+            options   : ["Correct" , "Incorrect"]
             code      : |-
-                dag is ask 'Welke dag is het?'
-                if dag is vrijdag
-                  print 'Hoera!'
+                day is ask 'What is is it?'
+                if day is friday
+                    print 'Yeah!'
             answer    : Goed
         -   type: text
             contents: |-
-                #### Opdracht 5: Schrijf de code
-                Je krijgt uitvoer in beeld, en jij moet er kloppende code bij schrijven. Gebruik een `repeat` waar het kan
-                
-                Kijk ook goed naar het aantal regels code dat je nodig hebt!
+                #### Exercise 5: Write the code
+                Take a good look at the output and write a matching code for it. Use `repeat` if possible.
+
+                Mind the amount of lines your code needs!
         -   type: input
             answer: |-
                 repeat 4 times
-                    print 'Joehoe!'
+                    print 'Yoo Hoo!'
             output: |-
-                Joehoe!
-                Joehoe!  
-                Joehoe!
-                Joehoe!
+                Yoo Hoo!
+                Yoo Hoo!
+                Yoo Hoo!
+                Yoo Hoo!
         -   type: input
             answer: |-
                 repeat 2 times
-                    print 'Vader Jacob...'
+                    print 'Are you sleeping?'
                 repeat 2 times
-                    print 'Leeft gij nog?'
+                    print 'Brother John'
                 repeat 2 times
-                    print 'Alle klokken luiden!'
+                    print 'Morning bells are ringing!'
+                repeat 2 times
+                    print 'Ding Dang Dong!'
             output: |-
-                Vader Jacob...
-                Vader Jacob...  
-                Leeft gij nog?
-                Leeft gij nog?
-                Alle klokken luiden!
-                Alle klokken luiden!
+                Are you sleeping?
+                Are you sleeping?
+                Brother John
+                Brother John
+                Morning bells are ringing!
+                Morning bells are ringing!
+                Ding Dang Dong
+                Ding Dang Dong
         -   type: text
             contents: |-
-                #### Opdracht 6: Programmeerwoorden
-                We hebben deze les een nieuw programmeerwoord geleerd: inspringen.
+                #### Exercise 6: Programming words
+                We have learned a new programming term again: indentation! Explain it in your own words.
         -   type: define
-            word: "Hoe laat je een regel code inspringen?"
-            answer: "een regel code laten beginnen met spaties"
+            word: "How do you create an indent?"
+            answer: "By starting a line with multiple spaces"
             lines: 1
-
-        -   type: text
+        - type: text
             contents: |-
-                #### Wat vond jij?
-        -   type: question
-            text: "Wat was de leukste opdracht van dit level?"
-            lines: 1
-        -   type: question
-            text: "Waarom vond je juist die opdracht leuk?"
-            lines: 5
-        -   type: question
-            text: "Welke opdracht was het minst leuk?"
-            lines: 1
-        -   type: question
-            text: "Waarom vond je juist die opdracht niet leuk?"
-            lines: 5
+                #### What did you think?
+        - type      : question
+          text      : "Which exercise did you like best this level?"
+          lines     : 1
+        - type      : question
+          text      : "What did you like about it?"
+          lines     : 5
+        - type      : question
+          text      : "Which exercise did you like least this level?"
+          lines     : 1
+        - type      : question
+          text      : "What didn't you like about it?"
+          lines     : 5

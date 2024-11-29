@@ -2341,7 +2341,7 @@ workbooks:
             goal: inspringen
             code: |-
                 print 'Hallo!'
-                repeat 1 times
+                repeat 2 times
                     print 'Ja, hallo allemaal'
             answer: Regel 3
         -   type: circle
@@ -2415,11 +2415,11 @@ workbooks:
                   print 'Jij gooide: ' dobbel at random
                   print 'Het spel is nu afgelopen'
             answer: |-
-              Jij gooide: <1 of 2 of 3>
+              Jij gooide: <1, 2, 3, 4, 5 of 6 >
               Het spel is nu afgelopen
-              Jij gooide: <1 of 2 of 3>
+              Jij gooide: <1, 2, 3, 4, 5 of 6 >
               Het spel is nu afgelopen
-              Jij gooide: <1 of 2 of 3>
+              Jij gooide: <1, 2, 3, 4, 5 of 6 >
               Het spel is nu afgelopen
             lines: 6
         -   type: text
@@ -2448,7 +2448,7 @@ workbooks:
             options   : ["Goed" , "Fout"]
             code      : |-
               mensen = mama, papa, Emma, Sophie
-              repeat 7 times print 'De afwasser is ' mensen
+              repeat 7 times print 'De afwasser is ' mensen at random
             answer    : Fout, repeat mag niet meer op één regel
         -   type      : MC-code
             options   : ["Goed" , "Fout"]
@@ -2477,16 +2477,20 @@ workbooks:
                 repeat 2 times
                     print 'Vader Jacob...'
                 repeat 2 times
-                    print 'Leeft gij nog?'
+                    print 'Slaapt gij nog?'
                 repeat 2 times
                     print 'Alle klokken luiden!'
+                repeat 2 times
+                    print 'Bim bam bom!'
             output: |-
                 Vader Jacob...
                 Vader Jacob...  
-                Leeft gij nog?
-                Leeft gij nog?
+                Slaapt gij nog?
+                Slaapt gij nog?
                 Alle klokken luiden!
                 Alle klokken luiden!
+                Bim bam bom!
+                Bim bam bom!
         -   type: text
             contents: |-
                 #### Opdracht 6: Programmeerwoorden
