@@ -647,9 +647,10 @@ class ForTeachersModule(WebsiteModule):
         }
         return redirect("/hedy")
 
+    @route("/clear-preview-class", methods=["GET"], subdomain="<language>")
     @route("/clear-preview-class", methods=["GET"])
     # Note: we explicitly do not need login here, anyone can exit preview mode
-    def clear_preview_class(self):
+    def clear_preview_class(self, language="en"):
         utils.remove_class_preview()
         return redirect("/for-teachers")
 
