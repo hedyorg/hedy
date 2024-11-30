@@ -82,13 +82,19 @@
 14:
 -   name: Amecṭuḥ
     demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
+    explanation: Nesseqdac `<` i usenqed ma yella uṭṭun amezwaru meẓẓiy ɣef wis sin.
 -   name: Meqqer ugar
     explanation: Nesseqdac `>` i usenqed ma yella uṭṭun amezwaru meqqer ɣef wis sin.
     demo_code: "laεmer = {ask} 'Acḥal deg laεmeṛ-ik?'\n{if} laεmer > 13\n    {print} 'Meqqreḍ fell-i!'"
 -   name: Yeεdel akked
     explanation: Nesseqdac `==` i usenqed ma yella snat n tɣawsiwin kifkif-nsent.
--   {}
+    demo_code: "tiririt = {ask} 'Qcu ara d-imudd 5 * 5?'\n{if} tiririt == 25\n    {print} 'Iṣeḥḥa!'"
+-   name: Yemgarrad ɣef
+    explanation: Nesseqdac `!=` i usenqed ma yella magarradent snat n tɣawsiwin.
+    demo_code: "tiririt = {ask} 'D acu ara d-imudd 5 * 5?'\n{if} tiririt != 25\n    {print} 'Ur iṣeḥḥa ara!'"
 -   demo_code: "leεmeṛ = {ask} 'Acḥal deg leεmeṛ-ik?'\n{if} leεmeṛ <= 12\n    {print} 'Meẓẓiyet aṭas fell-i!'"
+    explanation: Nesseqdac `<=`i usenqed ma yella uṭṭun amezwaru meẓẓiy neɣ yeεdel akked wuṭṭun wis sin
+    name: Ameẓẓyan neɣ yeεdel
 -   name: Meqqer ugar neɣ kifkif
 16:
 -   name: ikrucciyen
@@ -106,7 +112,7 @@
     explanation: Ales ugar n yizirigen.
 -   name: '{pressed}'
 12:
--   {}
+-   demo_code: "{print} 'Ḥseb!'\n{print} 'Sin d uzgen rnu-as sin sin d uzgen ad d-imudd...'\n{print} 2.5 + 2.5"
 -   demo_code: "isem = 'Hedy aṛubut'\n{print} 'Azul ' isem"
     explanation: Aḍris s tuccar seld `=`
 -   demo_code: "isem = {ask} 'D anwa kečč?'\n{if} isem = 'Hedy'\n    {print} 'Azul!'"
@@ -149,6 +155,8 @@
     explanation: Ilaq i sin n tgezmin ad ilint d imeɣta.
     demo_code: "tiririt1 = {ask} 'Acḥal 3+2?'\ntiririt2 = {ask} 'Acḥal 2+2?'\n{if} tiririt1 {is} 5 {and} tiririt2 {is} 4\n    {print} 'BI snat n tririyn ṣeḥḥant!'\n{else}\n    {print} 'Ma drus yiwet n tririt txuṣṣ!'"
 -   name: '{or}'
+    explanation: Ma drus 1 seg yinegzumen yesra ad yeɣti. Ma yella ṣeḥḥan i sin, ula akka ad yeddu.
+    demo_code: "tiririt1 = {ask} 'Acu ad d-imudd 3+2?'\ntiririt2 = {ask} 'Acu ad d-imudd 2+2?'\n{if} tiririt1 {is} 5 {or} tiririt2 {is} 4\n    {print} 'Xerṣum yiwet n tririt tṣeḥḥa!'\n{else}\n    {print} 'I snat n triryin ccḍent!'"
 18:
 -   name: '{print}'
     explanation: Seld `{print}` tesriḍ ad tesqedceḍ tacciwin.
