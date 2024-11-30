@@ -1882,23 +1882,32 @@ def view_program(user, id):
         result['username']) else None
 
     code = result['code']
-    # if the snippet has blanks, it'll fail in the translation process
-    # so we just dont translate it if it has any
-    has_blanks = hedy.location_of_first_blank(code) > 0
-    if not has_blanks and result.get("lang") != "en" and result.get("lang") in ALL_KEYWORD_LANGUAGES.keys():
-        code = hedy_translation.translate_keywords(code, from_lang=result.get(
-            'lang'), to_lang="en", level=int(result.get('level', 1)))
-    # If the keyword language is non-English -> parse again to guarantee
-    # completely localized keywords
-    if not has_blanks and g.keyword_lang != "en":
-        code = hedy_translation.translate_keywords(
-            code,
-            from_lang="en",
-            to_lang=g.keyword_lang,
-            level=int(
-                result.get(
-                    'level',
-                    1)))
+    level = int(result.get('level', 1))
+
+    # Try to translate the program from the language of the program to the language of the viewer
+    #
+    # - We do this in 2 steps: first translate from the source language to English,
+    #   then from English to the target language. There must be a reason for this, but I don't
+    #   know what it is.
+    # - In the past we used to do this "normalization via English" step for every program,
+    #   even if we would end up translating nl -> nl. I don't know if that was for a particular
+    #   reason but I've changed it to only do the translation if the source and target languages
+    #   are different.
+    # - Translation may fail, because it requires parsing the program and the program
+    #   may be syntactically invalid (missing indentation, programming mistakes, etc). Or it
+    #   may contain blanks, which will always yield an unparseable program.
+    # - We don't currently have a way to surface this error to the user. I don't know if
+    #   that matters.
+    source_language = result.get("lang")
+    target_language = g.keyword_lang
+    if source_language != target_language and source_language in ALL_KEYWORD_LANGUAGES.keys():
+        try:
+            english_code = hedy_translation.translate_keywords(code, from_lang=source_language, to_lang="en", level=level)
+            code = hedy_translation.translate_keywords(english_code, from_lang="en", to_lang=target_language, level=level)
+        except Exception as e:
+            # Not really a good place to leave this error, but at least we don't
+            # want it crashing the page load. Log it as a warning then.
+            logger.warning(f"Error translating program {id} from {source_language} to {target_language}: {e}")
 
     result['code'] = code
     student_adventure_id = f"{result['username']}-{result['adventure_name']}-{result['level']}"
