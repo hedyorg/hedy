@@ -1613,4 +1613,4 @@ adventures:
         levels:
             13:
                 story_text: "En l'aventura anterior has après com utilitzar un argument en una funció, però sabies que també els pots combinar amb comandes {ask}?  \nEn aquest exemple hem modificat el programa d'en \"Joan petit\" i l'hem fet interactiu. Ara es pregunta amb quina part balla en Joan petit.\n"
-                example_code: "```\n{define} joan_petit {with} part\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla, balla, balla,\"\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla amb el \" part\n\npart_escollida = {ask} 'Amb què balla Joan petit?'\npart_escollida2 = {ask} 'I amb què més balla Joan petit?'\n\n{call} song {with} part_escollida\n{call} song {with} part_escollida2\n```\n"
+                example_code: "```\n{define} song {with} place\n    {print} 'My Bonnie is ' place\n\nchosen_place = {ask} 'Where do you want Bonnie to be?'\nsynonym = {ask} 'What is another word for that?'\n\n{call} song {with} chosen_place\n{call} song {with} synonym\n{call} song {with} chosen_place\n```\n"
