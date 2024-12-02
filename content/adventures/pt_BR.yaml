@@ -2203,41 +2203,6 @@ adventures:
                     premio_em_dinheiro {is} _
                     _
                     ```
-            16:
-                story_text: |-
-                    We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code. The second part of the example code shows you that we can also match 2 lists using the variable i.
-    repeat_command:
-        description: comando {repeat}
-        levels:
-            7:
-                story_text: |
-                    ## Repeat! Repeat! Repeat!
-                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times. Like this:
-
-                    ### Exercise
-                    Play around with the repeat command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?
-            9:
-                story_text: |
-                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
-                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
-                example_code: |
-                    ```
-                    answer = {ask} 'Are you ready to learn something new?'
-                    {if} answer {is} yes
-                        {print} 'Great! You can learn to use the repeat command in the if command!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                    {else}
-                        {print} 'Maybe you should practice some more in the previous level'
-    repeat_command_2:
-        description: comando {repeat} 2
-        levels:
-            7:
-                story_text_2: |
-                    Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
-                    Then, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.
     restaurant:
         name: Restaurante
         default_save_name: Restaurante
@@ -2307,96 +2272,6 @@ adventures:
                     preços {is} _
                     _
                     ```
-            4:
-                story_text: |
-                    ### Exercise
-                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
-                    Then, use the `{clear}` command to only show one line at a time in your output screen.
-
-                    ### Exercise 2
-                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
-            5:
-                story_text: |
-                    In this level the {if} command allows you to {ask} your customers questions and give different responses to the answers.
-                    In the example below, you see that you can {ask} the customer {if} they want to hear the specials and Hedy can respond accordingly.
-            6:
-                story_text: |
-                    In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                example_code: |
-                    You can make a simple restaurant code, like this:
-                    ```
-                    {print} 'Welcome to Hedys restaurant'
-                    {print} 'Here is our menu:'
-                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
-                    main = {ask} 'Which main course would you like?'
-                    price = 0
-                    {if} main {is} pizza price = 10
-                    {if} main {is} lasagne price = 12
-                    {if} main {is} spaghetti price = 8
-                    {print} 'You have ordered ' main
-                    {print} 'That will be ' price ' dollars, please'
-                    {print} 'Thank you, enjoy your meal!'
-                    ```
-            7:
-                story_text: |
-                    In this level you've learned how to use the {repeat} command to repeat a line of code a certain amount of times.
-                    You can use that in your restaurant to {ask} multiple people what they'd like to eat. Like this:
-
-                    ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people are joining us today?'
-                    {repeat} people times food = {ask} 'What would you like to eat?'
-                    {print} 'Thanks for your order! Its coming right up!'
-                    ```
-                example_code: |
-                    ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people are joining us today?'
-                    {repeat} people times food = {ask} 'What would you like to eat?'
-                    {print} 'Thanks for your order! Its coming right up!'
-                    ```
-            9:
-                story_text: |
-                    In this level you can use nesting to make your restaurant more realistic and more fun!
-                    For example you would {ask} for sauce {if} somebody orders fries, but you wouldn't {if} someone orders pizza!
-                    Check out the example, and try this at your own virtual restaurant!
-            10:
-                story_text: |
-                    In this level you'll learn how to easily {ask} your guests' orders in a short code.
-                example_code_2: |
-                    ```
-                    courses = appetizer, main course, dessert
-                    names = Timon, Onno
-                    {for} name {in} names
-                        {for} course {in} courses
-                            food = {ask} name ', what would you like to eat as your ' course '?'
-                            {print} name ' orders ' food ' as their ' course
-                    ```
-            11:
-                story_text: |
-                    We can use the `{for} i {in} {range} 1 {to} 5` to {print} the orders from multiple customers in an orderly manner.
-            12:
-                story_text: |
-                    From this level on you can use decimal numbers to make you menu more realistic.
-            13:
-                story_text: |
-                    In this level we can use the new commands to upgrade our restaurant.
-                    We use `{and}` to see {if} two things are both the case.
-                example_code: |
-                    ```
-                    price = 10
-                    food = {ask} 'What would you like to eat?'
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' {and} drinks {is} 'juice'
-                        {print} 'Thats our discount menu'
-                        price = price - 3
-                    {print} 'That will be ' price ' dollars'
-                    ```
-            15:
-                story_text: |
-                    With the `{while}` you can make sure your costumers can keep adding orders until they are done.
-                    ### Exercise
-                    Correctly add the `{while}` command to this code.
     rock:
         name: Pedra, papel, tesoura
         default_save_name: Pedra_2
@@ -2450,33 +2325,6 @@ adventures:
                     jogador_1 {is} {ask} Nome do(a) jogador(a) 1:
                     _
                     ```
-            5:
-                story_text: |
-                    In this level we can determine who won.
-                    For that you need the new `{if}` code.
-
-                    Save your choice with the name of choice and the choice of computer as computer choice.
-                    Then you can use `{if}` to see {if} they are the same or different.
-                    Will you finish the code?
-            9:
-                story_text: |
-                    In this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?
-                example_code: |
-                    ```
-                    choices = rock, paper, scissors
-                    your_choice = {ask} 'What do you choose?'
-                    {print} 'You choose ' your_choice
-                    computer_choice = choices {at} {random}
-                    {print} 'The computer chooses ' computer_choice
-                    {if} computer_choice {is} your_choice
-                        {print} 'Tie'
-                    {if} computer_choice {is} rock
-                        {if} your_choice {is} paper
-                            {print} 'You win!'
-                        {if} your_choice {is} scissors
-                            {print} 'You lose!'
-                    # finish this code
-                    ```
             10:
                 story_text: |
                     ### Exercício
@@ -2487,9 +2335,6 @@ adventures:
                     jogadores = _
                     {for} _
                     ```
-            13:
-                story_text: |
-                    With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
     rock_2:
         name: Pedra, papel e tesoura 2
         default_save_name: pedra_2
@@ -2510,28 +2355,6 @@ adventures:
         name: Superespião
         default_save_name: Superespião
         description: Faça seu próprio código de espião
-        levels:
-            12:
-                story_text: |
-                    In this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.
-                    If the enemy tries to crack the code, they will get some false info to waste their time.
-                example_code: |
-                    ```
-                    name {is} {ask} 'What is your name?'
-                    {if} name {is} '_'
-                        a {is} 'Go to the airport '
-                    {else}
-                        a {is} 'Go to the trainstation '
-                    password {is} {ask} 'What is the password?'
-                    {if} password {is} _
-                        b {is} 'tomorrow at 02.00'
-                    {else}
-                        b {is} 'today at 10.00'
-                    {print} _ _ _
-                    ```
-            13:
-                story_text: |
-                    The code you made in the previous level can be made a lot easier in this one with the `{and}` command.
     sleep_command:
         default_save_name: comando_durma
         description: introduzindo o comando {sleep}
@@ -2644,11 +2467,6 @@ adventures:
                         {print} 'lá um' som
                         {print} 'em todos os lugares um ' som som
                     ```
-                story_text_2: |
-                    ### Exercise 2
-                    Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
-
-                    **(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
             11:
                 story_text: |
                     Neste nível você pode usar o comando `{for} i {in} {range}` para fazer músicas que usam contagem.
@@ -2934,77 +2752,5 @@ adventures:
                     colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
                     color _
                     ```
-            9:
-                example_code: |
-                    Hint for the nested squares:
-                    ```
-                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
-                    distance = 120
-                    repeat 5 times
-                    _
-                    ```
-                    Hint for the flags:
-                    ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
-                        color_1 = red
-                        color_2 = white
-                        color_3 = blue
-                    ```
-            10:
-                example_code: |
-                    Hint Nested Hexagon:
-                    ```
-                    distances = 100, 80, 60, 40, 20
-                    {for} distance {in} distances
-                    _
-                    ```
-
-                    Hint Traffic Lights:
-                    ```
-                    colors = red, yellow, green
-                    {for} chosen_color {in} colors
-                        color _
-                        {repeat} _
-                    ```
-            12:
-                story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
-                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-                    </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
-                example_code: |
-                    ```
-                    {define} draw_a_square
-                    _
-
-                    {color} white
-                    {turn} -90
-                    {forward} 300
-                    {turn} 180
-
-                    {for} i {in} {range} 1 {to} 5
-                        {color} gray
-                        {forward} 100
-                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
-                        chosen_color = {ask} 'In which color?'
-                        {color} chosen_color
-                        {if} shape = 'square'
-                            {call} draw_a_square
-                    ```
     years:
         description: Contagem regressiva para o Ano Novo!
-        levels:
-            11:
-                story_text: |
-                    In this level you can use the `{for} i {in} {range}` command to countdown to the New Year.
-
-                    ### Exercise
-                    Fill in the blanks and make the code work!
-                example_code: |
-                    ```
-                    for _ in _ 10 to 1
-                        {print} i
-                    {print} 'Happy New Year!'
-                    ```

@@ -1379,18 +1379,6 @@ adventures:
                 story_text: "У цій пригоді ви працюєте над створенням гри, у якій вам доведеться втекти з будинку з привидами, вибравши правильні двері. \nЯкщо ви виберете правильні двері, ви виживете, але якщо ні, жахливий монстр може... \n\nНа першому рівні ми починаємо нашу гру про будинок з привидами, вигадуючи страшну історію та запитуючи гравця, якого монстра він побачить у будинку з привидами.\n"
                 example_code: "``` \n{print} Як я сюди потрапив? \n{print} Пам'ятаю, мій друг сказав мені зайти в старий особняк... \n{print} і раптом усе потемніло. \n{print} Але як я опинився на підлозі...? \n{print} Голова болить, як бейсбольною битою! \n{print} Що це за звук? \n{print} О ні! Я відчуваю, що я не одна в цьому домі! \n{print} Мені потрібно забратися звідси! \n{print} Переді мною 3 двері.. \n{ask} Які двері вибрати? \n{echo} Я вибираю двері \n{print} ...? \n```\n"
             2:
-                example_code: |
-                    ```
-                    monster_1 {is} 👻
-                    monster_2 {is} 🤡
-                    monster_3 {is} 👶
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster_1
-                    {print} You run into the other room...
-                    {print} But a monster_2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster_3 attacks you!
-                    ```
                 example_code_2: |
                     ```
                     чудовисько_1 {is} _
@@ -1549,19 +1537,6 @@ adventures:
                 story_text: "## Змінні \nВи можете назвати слово за допомогою `{is}`. Це називається **змінною**. У цьому прикладі ми створили змінну ім’я та вік. Ви можете використовувати слово name у будь-якому місці коду, і воно буде замінено на Hedy, ось так:\n"
                 example_code_2: "```\nулюблена_тварина {is} _\n{print} Мені подобається favorite_animal\n```\n"
             14:
-                example_code: |
-                    ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
-                    ```
-                    ```
-                    age = {ask} 'How old are you?'
-                    {if} age < 12
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
-                    ```
                 example_code_3: |
                     ```
                     name = {ask} 'Як тебе звати?'
@@ -2580,24 +2555,8 @@ adventures:
                     **Додатково** Тепер ми можемо покращити програму, яка малює різні фігури. Завершіть код, і ви зможете малювати будь-який багатокутник, який забажаєте!
                 example_code_2: "й й\nцифра = {ask} \"Як багато кутів слід малювати? Р\nкут = 360 / фігура\n{repeat} цифра {times}\n{turn} _\n{forward} _\nй й\n"
             9:
-                story_text: |
-                    Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
-
-                    ### Exercise 1
-                    This code creates three black triangles, change that into five pink squares.
-
-                     **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.
                 example_code: "Й Й\n{color} {black}\n{repeat} 3 {times}\n{repeat} 3 {times}\n{forward} 10\n{turn} 120\n{color} {white}\n{forward} 50\n{color} {black}\nЙ Й\n"
             10:
-                story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
-                    ### Exercise 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
-                    ### Exercise 2
-                    The spiral is drawn outwards, make it go inwards?
                 example_code: "й й\n{turn} 90\nдистанції = 10, 20, 30, 40, 50, 60\nВідстань {for} {in}\n{forward} відстань\nй й\n"
             2:
                 story_text_2: "Ви можете використовувати змінні в черепахі `turn`.\n\n### Exercise\nЗміна коду, такого, що створює трикутник. Хін: Ви повинні змінити код в одному місці.\n"
