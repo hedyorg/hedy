@@ -1639,8 +1639,34 @@ adventures:
         levels:
             13:
                 story_text: "En l'aventura anterior has après com utilitzar un argument en una funció, però sabies que també els pots combinar amb comandes {ask}?  \nEn aquest exemple hem modificat el programa d'en \"Joan petit\" i l'hem fet interactiu. Ara es pregunta amb quina part balla en Joan petit.\n"
-                example_code: "```\n{define} song {with} place\n    {print} 'My Bonnie is ' place\n\nchosen_place = {ask} 'Where do you want Bonnie to be?'\nsynonym = {ask} 'What is another word for that?'\n\n{call} song {with} chosen_place\n{call} song {with} synonym\n{call} song {with} chosen_place\n```\n"
+                example_code: "```\n{define} joan_petit {with} part\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla, balla, balla,\"\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla amb el \" part\n\npart = {ask} 'Amb quina part balla joan petit?'\npart2 = {ask} 'Amb quina altra part balla joan petit?'\npart3 = {ask} 'I amb quina altra part balla joan petit?'\n\n{call} joan_petit {with} part\n{call} joan_petit {with} part2\n{call} joan_petit {with} part3\n```\n"
     hotel:
         name: hotel
         description: hotel
         default_save_name: hotel
+        levels:
+            13:
+                example_code: "```\n{define} missatge_benvinguda {with} tractament, cognom, pais, num_habitacio\n    {print} \"Benvingut a l'Hotel Hedy, \" tractament \" \" cognom\n    nice_trip {is} {ask} \"Ha tingut un bon viatge des de \" pais \"?\"\n    {if} nice_trip {is} \"si\"\n        {print} \"Fantàstic!\"\n    {else}\n        {print} \"Quina llàstima...\"\n        {print} \"Afortunadament podrà descançar a la seva habitació.\"\n    {print} \"La seva habitació és la \" num_habitacio\n\n{print} \"Bon dia! Siusplau per a fer el check in ompli la següent informació.\"\ntractament = {ask} \"Com li agradaria que ens dirigíssim a vostè (sr, sra, dr, etc.)?\"\nnom = {ask} \"Quin és el seu cognom?\"\npais_origen = {ask} \"Quin és el seu país d'origen?\"\n\n{call} missatge_benvinguda {with} tractament, nom, pais_origen, 105\n```\n\ntractament = {ask} \"Com li agradaria que ens dirigíssim a vostè (sr, sra, dr, etc.)?\"\nnom = {ask} \"Quin és el seu cognom?\"\npais_origen = {ask} \"Quin és el seu país d'origen?\"\n\n{call} missatge_benvinguda {with} tractament, nom, pais_origen, 105\n"
+                story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {ask}.  \nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.  \nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.  \nAquí tens un exemple d'una funció amb arguments combinada amb comandes {ask}.\n"
+    in_command:
+        default_save_name: in_command
+        name: '{in}'
+        description: Introducció a la comanda {in}
+    if_command:
+        levels:
+            5:
+                example_code_3: "```\nresposta {is} {ask} '2 + 2 = ?'\n_ _ _ 4 _ 'Correcte!'\n_ _ 'No 2 + 2 = 4'\n```\n"
+                example_code: "```\nnom {is} {ask} 'Com et dius?'\n{if} nom {is} Hedy {print} 'bé!' {else} {print} 'buu!'\n```\n"
+                story_text: "## If... else....\nEn el nivell 5 hi ha una cosa nova, la comanda`{if}`! Amb el `{if}` pots triar entre dues opcions diferents.  \nAquest codi imprimeix \"bé!\" si introdueixes Hedy com a nom, i \"buu!\" si introdueixes alguna altra cosa.  \nLes comandes `{ask}` i `{print}` continuen funcionant igual que ho feien en el nivell 4.\n"
+                story_text_3: "### Exercici\nIntenta crear el teu propi codi amb `{if}` i `{else}`. Pots utilitzar el codi d'exemple si vols.\n"
+                story_text_2: "De vegades, el codi amb un `{if}` es fa realment llarg i no hi cap bé en una sola línia. <br> També pots dividir el codi en dues línies, començant la segona línia amb el `{else}`, d'aquesta manera:\n"
+                example_code_2: "```\nnom {is} {ask} 'Com et dius?'\n{if} nom {is} Hedy {print} 'bé!'\n{else} {print} 'buu!'\n```\n"
+            8:
+                example_code: "```\nnom= {ask} 'Com et dius?'\n{if} nom{is} Hedy\n    {print} 'Benvinguda Hedy'\n    {print} 'Pots jugar amb el teu ordinador!'\n```\n"
+                story_text: "## Condicionals\nHas après a repetir un bloc de línies de codi després d'una comanda `{repeat}`.  \nAra també pots utilitzar la indentació per crear blocs després d'una comanda `{if}` o `{else}`.  \nDona-li un cop d'ull al codi d'exemple.\n\n### Exercici\nAfegeix una comanda `{else}` al codi d'exemple. Crea un bloc de línies usant la indentació. Això es fa començant cada línia amb 4 espais.\n"
+            9:
+                example_code: "```\ncontinuar = {ask} \"Vols continuar?\"\n{if} continuar = sí\n    segur = {ask} \"Segur?\"\n    {if} segur {is} sí\n        {print} \"Continuem, doncs\"\n    {else}\n        {print} \"No n'estàs segur\"\n{else}\n    {print} \"No vols continuar\"\n```\n"
+                story_text: "En aquest nivell també pots posar una comanda `{if}` dins d'una altra comanda `{if}`.\n"
+        name: '{if} & {else}'
+        description: Introducció a la comanda {if}
+        default_save_name: if_command
