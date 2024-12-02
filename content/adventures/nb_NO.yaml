@@ -200,7 +200,7 @@ adventures:
                             {print} 'Nei, de er ikke ved ' location
                     {print} 'Nå kan du gå inn i huset!'
                     ```
-        calculator:
+    calculator:
         name: Kalkulator
         default_save_name: Kalkulator
         description: Lag en kalkulator
@@ -524,6 +524,16 @@ adventures:
         default_save_name: Retter
         description: Bruk datamaskinen til å se hvem som skal ta oppvasken (Start på nivå 2)
         levels:
+            3:
+                story_text: |
+                    Er dere alltid uenig hjemme om hvem som skal ta oppvasken eller hvem som skal rense kattedoen?
+                    Da kan du la datamaskinen velge helt rettferdig. Du kan programmere det på dette nivået!
+                    Først må du lage en liste over folk i familien. Så velger du `{at} {random}` fra listen.
+                    Do you always disagree at home about who should wash the dishes or change the litter box today?
+                    Then you can let the computer choose very fairly. You can program that in this level!
+                    You first make a list of the members of your family. Then choose '{at} {random}' from the list.
+                story_text_2: |
+                    Føler du ikke for å ta oppvasken selv? Hack programmet til å fjerne navnet ditt fra listen.
             4:
                 story_text: |
                     Med fnutter kan du gjøre oppvaskeplanleggingen penere.
@@ -609,7 +619,6 @@ adventures:
         name: Spøkelseshus
         default_save_name: Spøkelseshus
         description: flykt fra det forheksede huset
-        levels:
     language:
         name: Språk
         default_save_name: språk
@@ -673,7 +682,6 @@ adventures:
         name: Sparebøsse
         default_save_name: Sparebøsse
         description: Tell sparepengene dine!
-        levels:
     restaurant:
         description: Lag din egen virtuelle restaurant
         levels:
@@ -737,6 +745,7 @@ adventures:
                     {remove} allergier {from} smaker
                     {print} Du vil få en smaker {at} {random} milkshake
                     ```
+            4:
                 example_code: |
                     ```
                     _ Add the quotation marks to this code _
