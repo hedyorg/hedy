@@ -116,8 +116,8 @@ class TestsTranslationLevel17(HedyTester):
             imprimir 5
         sino:
             imprimir 'nee'""")
-        
-        result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="nl", level=self.level)        
+
+        result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
         hedy = 5
         als hedy is 4:

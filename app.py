@@ -1901,7 +1901,7 @@ def view_program(user, id):
     source_language = result.get("lang")
     target_language = g.keyword_lang
     if source_language != target_language and source_language in ALL_KEYWORD_LANGUAGES.keys():
-        try:            
+        try:
             code = hedy_translation.translate_keywords(
                 code, from_lang=source_language, to_lang=target_language, level=level)
         except Exception as e:
