@@ -106,3 +106,25 @@ class TestsTranslationLevel17(HedyTester):
             print 'nee'""")
 
         self.assertEqual(expected, result)
+
+    def test_elif_spanish_dutch(self):
+        code = textwrap.dedent("""\
+        hedy = 5
+        si hedy es 4:
+            imprimir 'hedy'
+        sinosi hedy es 5:
+            imprimir 5
+        sino:
+            imprimir 'nee'""")
+
+        result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="nl", level=self.level)
+        expected = textwrap.dedent("""\
+        hedy = 5
+        als hedy is 4:
+            print 'hedy'
+        alsanders hedy is 5:
+            print 5
+        anders:
+            print 'nee'""")
+
+        self.assertEqual(expected, result)
