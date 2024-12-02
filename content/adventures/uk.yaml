@@ -1624,7 +1624,7 @@ adventures:
                 example_code: "```\nnumber = {ask} 'Say a starting number between 1 and 67'\n{print} number\n{play} number\nnumber = number + 1\n{print} number\n{play} number\nnumber = number + 1\n{print} number\n{play} number\n```\n"
             1:
                 example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
-                story_text: "На цьому рівні ви дізнаєтеся, як використовувати команду `{play}` для відтворення мелодії! \n\nВведіть `{play}`, а потім ноту, яку ви хочете зіграти. Шкала йде CDEFGAB. \nЯк бачите, є 7 різних літер, але ми можемо грати більше, ніж просто 7 нот. \nВведіть число від 1 до 10 за літерою, щоб вибрати масштаб, наприклад, після B4 йде C5. \nC1 — найнижча нота, яку ви можете зіграти, C10 — найвища. \n\n### Вправи\nСпробуйте приклад коду, а потім пограйте з ним! Чи можете ви створити власну мелодію? \nНа наступному рівні ви навчитеся відтворювати деякі наявні пісні."
+                story_text: "У цьому рівні ви дізнаєтеся, як використовувати команду `{play}` для відтворення мелодії!\n\nТип `{play}` слідувати заміткою, яку ви хочете грати. Модель: C-D-E-F-G-A-B\nЯк ви можете побачити, що є 7 різних літер, але ми можемо грати більше ніж просто 7 нот.\nВведіть номер мобільного, який Ви вказали при укладаннi договору з банком - для ідентифікації.\nC0 є найнижчою заміткою, яку ви можете грати, B9 є найвищою.\n\n### Exercise\nСпробуйте прикладний код, а потім грати з ним! Чи можна створити власну мелодію?\nУ наступному рівні ви дізнаєтеся, як грати деякі існуючі пісні."
             3:
                 example_code: "```\nnotes {is} A4, B4, C4\n{play} notes {at} {random}\n{play} notes {at} {random}\n{play} notes {at} {random}\n```\n"
                 story_text: "Створіть випадкову мелодію! \n\n### Вправи\nУ прикладі коду створюється випадкова мелодія, але вона дуже коротка і не використовує багато нот. \nДодайте більше нот до списку та створіть довшу мелодію, скопіювавши останній рядок ще кілька разів.\n"
@@ -1850,9 +1850,16 @@ adventures:
                     Ми збираємося створювати списки способом Python, з квадратними дужками навколо списків! Ми також зберігаємо лапки навколо кожного елемента, як ми навчилися на попередніх рівнях.
                     Ми використовуємо квадратні дужки, щоб вказати місце в списку. Наприклад: `friends[1]` — це перше ім’я в списку друзів, як ви бачите в першій частині прикладу коду.
                     Друга частина прикладу коду показує, що ми також можемо зіставити 2 списки за допомогою змінної i.
+                example_code_2: "й й\nфрукти = ['apple', 'banana', 'cherry']\n{print} фрукти[random]\nй й"
+                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\n{print} friends[1] ' is the first friend on the list.'\n{print} friends[2] ' is the second friend on the list.'\n{print} friends[3] ' is the third friend on the list.'\n#now we will match 2 lists using the variable i\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} friends[i] 's lucky number is ' lucky_numbers[i]\n```\n"
+                story_text_2: "Тепер, коли ви навчилися використовувати дужки в списках, ви також можете почати використовувати команду {at} {random} у спосіб Python!\nВи просто вводите назву свого списку з `[random]` позаду!"
             3:
                 story_text: "## Навмання\nНа цьому рівні ви можете створити список за допомогою команди `{is}`. Ви можете дозволити комп’ютеру вибрати випадковий елемент із цього списку. Ви робите це за допомогою `{at} {random}`.\n"
                 example_code: "```\nanimals {is} dogs, cats, kangaroos\n{print} animals {at} {random}\n```\n"
+                example_code_2: "```\nfood {is} sandwich, slice of pizza, salad, burrito\n{print} I am going to have a food {at} {random} for lunch.\n```\n"
+                story_text_3: "### Вправи\nСпробуйте команду `{at} {random}`, створивши власне ігрове шоу (як ті, що на телебаченні), де ви обираєте двері чи валізу, і це містить велику ціну! \nти можеш це зробити Ми вже помістили перші рядки в приклад коду.\n"
+                story_text_2: "Ви також можете використовувати команду `{at} {random}` у реченні.\n"
+                example_code_3: "```\n{print} Велике ігрове шоу!\n{print} Перед вами 3 валізи...\nобрано {is} {ask} Яку валізу ви обираєте?\nціни {is} _\n_\n```\n"
         default_save_name: random_command
         name: '{random}'
         description: введення за довільною командою
@@ -1866,6 +1873,7 @@ adventures:
 
                     ### Вправи
                     Пограйте з командою `{repeat}`. Чи можете ви створити пісню з днем народження лише в 3 рядках коду замість 4 зараз?
+                example_code: "й й\n{repeat} 3 {times} {print} 'Hedy весело! Р\nй й\n"
             9:
                 story_text: |
                     Чудова робота! Ви вийшли на новий рівень! На попередньому рівні ви навчилися використовувати кілька рядків коду в команді `{if}` або `{repeat}`. 
@@ -1882,13 +1890,26 @@ adventures:
                     {else}
                     {print} 'pizza краще! Р
                     й й
+            8:
+                example_code: "й й\n{repeat} 5 {times}\n{print} 'Привіт всім Р\n{print} 'Це все повторено 5 раз Р\nй й\n"
+                story_text: "### Повторити команди та відступи \nНа цьому рівні ви можете повторювати кілька рядків коду за допомогою лише 1 команди повторення. \nВи робите це, створюючи блок ліній, які ви хочете повторити. \nДля рядків цього блоку знадобиться **відступ**. \nЦе означає розміщення чотирьох пробілів на початку кожного рядка. Вам також доведеться зробити відступ, якщо ви просто хочете створити блок з одного рядка.\n"
+        name: '{repeat}'
+        default_save_name: repeat command
     repeat_command_2:
         description: '{repeat} команда 2'
         levels:
             7:
                 story_text_2: |
-                    Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
-                    Then, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.
+                    Інша цікава річ, яку ви можете зробити за допомогою команди `{repeat}`, це використання змінних для встановлення кількості разів, які потрібно повторити. У прикладі коду ви бачите, що ми спочатку запитуємо людину, скільки їй років. 
+                    Потім, у рядку 3, питання повторюється «вік» разів. Тому ми використали змінну 'age' з командою `{repeat}`.
+                example_code_2: "й й\n{print} 'Яй! Це ваш день народження! Р\nВік = {ask} 'Як старі ви зараз? Р\n{repeat} вік {times} {print} 'Hip Hip Hurray! Р\nй й\n"
+                story_text: "## Повторіть з іншими командами та змінними \nЗараз ви практикували команду `{repeat}` у поєднанні з командою `{print}`, але чи знаєте ви, що можете також використовувати інші команди з `{repeat}`? \nУ цьому прикладі коду ви бачите, що `{repeat}` також можна використовувати з командою `{ask}`, `{if}` або `{else}`.\n"
+                example_code: "й й\n{repeat} 2 {times} відповідь = {ask} 'Ви знаєте, що ви можете запитати питання кілька разів? Р\n{if} відповідь {is} так {repeat} 2 {times} {print} 'Ви знали, що вже! Р\n{else} {repeat} 3 {times} {print} - Ви навчились щось нове! Р\nй й\n"
+            8:
+                example_code: "й й\n_ {print} 'Ви знаєте чоловіка мафіна? Р\n{repeat} 2 {times}\n_ {print} \"Мафін людина\"\n_ {print} 'Ви знаєте чоловіка мафіна, який живе на Drury Lane? Р\nй й\n"
+                story_text: "### У блоці чи ні? \nНа цьому рівні ви повинні ретельно продумати, які рядки коду повинні бути в блоці, а які ні. \nНаприклад: Якщо ви хочете заспівати пісню *the muffin man*. Вам потрібно лише, щоб репліка з «людиною-мафіном» повторювалася двічі. \nЦе означає, що останній рядок не повинен починатися з відступу, оскільки він не належить до блоку. \nЯкщо ви почнете останній рядок з відступу, пісня вийде неправильною. \n\n### Вправи\nКожен рядок у прикладі коду починається з пропуску. Видаліть пробіли та спробуйте з’ясувати, який рядок потребує відступу, а який ні, щоб пісенька булачка.\n"
+        name: '{repeat} 2'
+        default_save_name: javascript licenses api веб-сайт
     restaurant:
         levels:
             1:
@@ -1907,6 +1928,7 @@ adventures:
                     {print} Thank you for your order!
                     {print} It's on its way!
                     ```
+                story_text: "У нашій закладі ви також маєте власний віртуальний ресторан, а також обмежені замовлення гостей.\n"
             2:
                 story_text: |
                     На рівні 2 ви можете розширити свій ресторан за допомогою змінних. На рівні 1 Хеді могла лише `{echo}` наказати один раз і запам’ятати лише останнє, що було замовлено.
@@ -1954,6 +1976,7 @@ adventures:
                     ціни {is} _
                     _
                     ```
+                story_text: "Вирішивши, що у вас є вечеря? Ви можете вибрати для Вас!\nПросто додайте список улюблених страв (або принаймні улюблених) і Hedy можна випадково вибрати вечерю.\nВи також можете трохи весело провести час, дозволяючи йому вибрати ціну на вечерю, а також! Що ви отримаєте?\n"
             4:
                 story_text: |
                     У ресторані ви також повинні використовувати лапки під час використання команди `{print}` або `{ask}`.
@@ -1964,6 +1987,7 @@ adventures:
 
                     ### Вправа 2
                     Поверніться на попередній рівень і скопіюйте код свого ресторану. Змусьте код працювати на цьому рівні, додавши лапки в потрібні місця та додавши кілька команд `{clear}`.
+                example_code: "й й\nУ Додайте позначки квоти до цього коду _\n{print} Ласкаво просимо до ресторану Chez Hedy!\n{print} Сьогодні ми обслуговуємо піцу або lasagna.\n{is} {ask} Що б ви хотіли їсти?\n{print} Великий вибір! Їжа моя улюблена!\n{is} {ask} Вам сподобається м'ясо або овочі на цьому?\n{print} їжа з верхівкою на своєму шляху!\nнапої {is} {ask} Що б ви хочете пити з цим?\n{print} Дякуємо за Ваше замовлення.\n{print} Ваше харчування і напої будуть прямо там!\nй й\n"
             5:
                 story_text: |
                     ### Вправи
@@ -1992,6 +2016,7 @@ adventures:
                     - надавати людям знижку, коли вони вводять (секретний) код купону?
                     - додати дитяче меню?
                     - подумайте про інші цікаві речі, які можна додати?
+                example_code: "Ми можемо самі зателефонувати одержувачу:\nй й\n{print} 'Велком до ресторану Chez Hedy Р\n{print} 'Хай наше меню: Р\n{print} 'Наші основні курси піци, lasagne або спагетті Р\nГоловна = {ask} 'Чизький основний курс вам сподобається? Р\nціна = 0\n{if} головна {is} ціна піци = 10\n{if} головна {is} ціна lasagne = 12\n{if} головна {is} спагетті ціна = 8\n{print} 'Ви замовляєте ' головна\n{print} 'Чому буде ' ціна ' доларів, будь ласка, Р\n{print} 'Подаруйте вам, насолоджуйтеся смачними стравами! Р\nй й\n"
             7:
                 story_text: |
                     На цьому рівні ви навчилися використовувати команду `{repeat}`, щоб повторити рядок коду певну кількість разів.
@@ -2059,14 +2084,14 @@ adventures:
                     Чи можете ви додати правильний відступ перед кожним рядком, щоб код працював належним чином?
                     Порада: деякі рядки взагалі не потребують відступу.
                 example_code_2: |
-                    ```
-                    courses = appetizer, main course, dessert
-                    names = Timon, Onno
-                    {for} name {in} names
-                        {for} course {in} courses
-                            food = {ask} name ', what would you like to eat as your ' course '?'
-                            {print} name ' orders ' food ' as their ' course
-                    ```
+                    й й
+                    _ курси = закуски, головний курс, десерт
+                    _ імена = Тимон, Оно
+                    {for} name {in} імена
+                    Курс {for} {in}
+                    _ їжа = {ask} ім'я ', що б ви хотіли б їсти як курс '? Р
+                    _ {print} назва ' замовлення ' їжа ' як їх ' курс
+                    й й
             11:
                 story_text: |
                     Ми можемо використовувати `{for}` з `{range}`, щоб надрукувати замовлення від кількох клієнтів упорядкованим чином.
@@ -2090,20 +2115,20 @@ adventures:
                     ### Вправи
                     Чи можете ви придумати код, щоб надати друзям і родині знижку 15%?
                 example_code: |
-                    ```
-                    price = 0
-                    food = {ask} 'What would you like to order?'
-                    drink = {ask} 'What would you like to drink?'
-                    {if} food {is} 'hamburger'
-                        price = price + 6.50
-                    {if} food {is} 'pizza'
-                        price = price + 5.75
-                    {if} drink {is} 'water'
-                        price = price + 1.20
-                    {if} drink {is} 'soda'
-                        price = price + 2.35
-                    {print} 'That will be ' price ' dollar, please'
-                    ```
+                    й й
+                    ціна = 0.0
+                    їжа = {ask} 'Що б ви хотіли замовити? Р
+                    пити = {ask} 'Що б ви хотіли б пити? Р
+                    {if} їжа {is} 'hamburger Р
+                    ціна = ціна + 6.50
+                    {if} їжа {is} 'pizza Р
+                    ціна = ціна + 5.75
+                    {if} напій {is} 'вода Р
+                    ціна = ціна + 1.20
+                    {if} напій {is} 'soda'
+                    ціна = ціна + 2.35
+                    {print} 'Ця буде ' ціна ' долар, будь ласка, Р
+                    й й
             13:
                 story_text: |
                     На цьому рівні ви вивчите нові команди, щоб ще більше розширити свій код.
@@ -2127,8 +2152,17 @@ adventures:
                         {print} "Це здоровий вибір"
                     {print} 'Це буде 'ціна' доларів'
                     ```
+            8:
+                example_code: "```\n{print} 'Welcome to Restaurant Chez Hedy!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\n{repeat} people {times}\n    food = {ask} 'What would you like to order?'\n    {print} food\n{print} 'Thank you for ordering!'\n{print} 'Enjoy your meal!'\n```\n"
+                story_text: "У цьому рівні ви можете зробити свій віртуальний ресторан більш розроблений, повторюючи декілька рядків коду. Як це:\n\n### Exercise\nЦей код може бути розширений з більш детальною інформацією в меню, наприклад, пропонують напої та / або кілька курсів або десертів. Додати принаймні один елемент.\n**Extra*** Додати ще більше товарів, скільки вам подобається!\n"
+            15:
+                example_code: "й й\n{print} 'Welcome в McHedy Р\nбільше = \"так Р\nУ\nзамовлення = {ask} 'Що б ви хотіли замовити? Р\n{print} замовлення\nбільше = {ask} \"Що вам подобається замовити щось інше? Р\n{print} 'Дякуй! Р\nй й\n"
+                story_text: "З `{while}` ви можете переконатися, що ваші костюми можуть тримати додавати замовлення, поки вони не будуть виконані.\n\n### Exercise\nПравильно додайте команду `{while}` до цього коду.\n"
+        default_save_name: Ресторани
+        description: Створення віртуального ресторану
+        name: Ресторани
     rock:
-        default_save_name: Rock
+        default_save_name: Рок_2
         levels:
             1:
                 example_code: |
@@ -2137,6 +2171,9 @@ adventures:
                     {ask} choose from rock, paper or scissors
                     {echo} so your choice was:
                     ```
+                example_code_2: "й й\n{print} що ви вибрали?\n{ask} вибрати з _\n{echo} так що ваш вибір був:\nй й\n"
+                story_text: "На рівні 1 ви можете почати з породи, паперу, ножиць гри.\n\nЗ `{ask}` ви можете зробити вибір, і з `{echo}` ви можете повторити цей вибір.\n"
+                story_text_2: "### Exercise\nЗамість слів, ви також можете використовувати смайлики: ✊✋✌\nЧи можна створити код за допомогою смайликів?\n"
             2:
                 story_text: |
                     На цьому рівні ви можете попрактикуватися у використанні змінних, щоб на наступному рівні створити гру «камінь, папір, ножиці»!
@@ -2162,6 +2199,7 @@ adventures:
                     player_1 {is} {ask} Ім'я гравця 1:
                     _
                     ```
+                story_text: "Ви можете використати команду `{at} {random}`, щоб дозволити комп’ютеру вибрати камінь, папір або ножиці! \n\n### Вправи\nЗавершіть код, використовуючи команду `{at} {random}`.\n"
             5:
                 story_text: |
                     На цьому рівні ми можемо визначити, нічия чи ні. Для цього вам потрібен новий код `{if}`.
@@ -2257,19 +2295,28 @@ adventures:
                              = 'так'
                     _
                     ```
+                story_text: "### Exercise\nГрайте до того, як ви б'єте комп'ютер! Але спочатку закінчити прикладний код...\n"
+            4:
+                story_text: "На цьому рівні ми можемо додатково програмувати скеля, папір, ножиці. Але якщо ви хочете додати текст, ви повинні використовувати знаки цитат тут.\n### Exercise\nНаповніть позначки квоти на бланках. Зрозуміти, що змінна `choices` повинна бути поза лапками.\n"
+                example_code: "й й\n{is} рок, папір, ножиці\n{print} _Вибір комп'ютерів {at} {random}\nй й\n"
+        description: Зробіть свій власний рок, папір, ножиці гри
+        name: Скеля, папір, ножиці
     rock_2:
         levels:
             2:
                 story_text: |
-                    Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!
+                    Тепер ви дізналися, як використовувати команду `{ask}`, ви можете зробити свій камінь, папір, код ножиць інтерактивний занадто!
 
                     ### Exercise
-                    Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
+                    Зробіть рок, папір, код ножиць інтерактивний, додавши команду `{ask}` і питання на скелі, папір, код ножиць.
                 example_code: |
                     ```
                     вибір {is} _
                     {print} Я обираю вибір
                     ```
+        description: Частина 2 скеля, папір, ножиці
+        name: Рок, папір, ножиці 2
+        default_save_name: рок_2
     secret:
         levels:
             12:
@@ -2314,6 +2361,9 @@ adventures:
                     {else}
                         {print} "Йди на вокзал о 10.00" 
                      ```
+        name: СуперШпи
+        default_save_name: СуперШпи
+        description: Зробіть свій власний шпигунський код
     sleep_command:
         description: представляємо команду {sleep}
         levels:
@@ -2323,6 +2373,9 @@ adventures:
 
                     ### Вправи
                     Практикуйте цю нову команду, створивши власний код, у якому ви використовуєте команду {sleep} принаймні 3 рази. Для кожної команди {sleep} час паузи має відрізнятися.
+                example_code: "й й\n{print} Мій улюблений колір...\n{sleep} 2\n{print} зелений!\nй й\n"
+        default_save_name: сон_команд
+        name: '{sleep}'
     songs:
         levels:
             6:
@@ -2354,6 +2407,7 @@ adventures:
                     {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
                     {sleep}
                     ```
+                story_text_2: "Ця дитяча пісня нараховує від 5 маленьких мавп до 1 мавпи.\nЯкщо ви копіюєте рядок 2 - 7 і вставте його під код, ви можете співати всю пісню!\n"
             7:
                 story_text: |
                     Пісні часто містять багато повторів. Наприклад... Baby Shark! Якщо ви співаєте це, ви продовжуєте співати те саме:
@@ -2403,9 +2457,10 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise 2
-                    Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
+                    Друк пісень П'ять маленьких грошей стрибають на ліжку. Якщо ви не пам'ятаєте.
 
-                    **(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
+                    **Extra*** Друк пісень Old MacDonald мав ферму, і переконайтеся, що всі тварини роблять різні звуки, використовуючи `{if}`.
+                example_code_2: "й й\nмавпи = 5, 4, 3, 2, 1\nй й\n"
             11:
                 story_text: |
                     На цьому рівні ви можете використовувати `{for}` з `{range}`, щоб створювати пісні, які використовують підрахунок, наприклад, 5 маленьких мавпочок.
@@ -2421,20 +2476,44 @@ adventures:
                         {print} monkeys 'маленькі мавпи, що стрибають на ліжку'
                         _
                     ```
+            12:
+                story_text: "У цій пісні ми можемо зробити це ще простіше, щоб програма була щасливою, і ви її знаєте, клапти руки. Ми можемо поставити всі дії в змінну, перевірити її:\n\n### Exercise\nЧи можна додати потрібну кількість відступу до кожної лінії, щоб зробити пісню правильно?\nНе всі лінії потребують відступу.\n"
+                example_code: "``` \n_ дії = 'хлопати в долоні', 'тупати ногами', 'кричати Ура!' \n_ {for} дії {in} діях \n_ {for} i {in} {range} 1 {to} 2 \n_ {print} 'якщо ти щасливий і ти це знаєш' \n_ {print} дія \n_ {print} 'якщо ти щасливий, ти це знаєш і справді хочеш це показати' \n_ {print} 'якщо ти щасливий і ти це знаєш' \n_ {print} дія \n```\n"
+            13:
+                example_code: "й й\n{define} пісня {with} місце\n{print} 'Мій Бонні' місце\n\nselect_place = {ask} 'Ви хочете, щоб Бонні бути? Р\nсинонім = {ask} 'Що таке інше слово для цього? Р\n\n{call} пісня {with} вибрано_place\n{call} пісня {with} синонім\n{call} пісня {with} вибрано_place\nй й\n"
+                story_text: "У попередній пригоді ви дізналися, як використовувати аргумент в функції, але ви знаєте, що ви можете поєднувати їх з командами {ask} і?\nУ цьому прикладі ми змінили програму «Мій Бонні» і зробили її інтерактивними. Ви зараз попросили де Бонні.\n"
+            16:
+                story_text: "У цьому рівні ви можете запрограмувати пісню OldMacDonald ще швидше. Ви можете підключити праву тварину до правого звуку, просто вказавши їх в одному місці в списку.\nП'яний моряк також швидко виконаний в цьому рівні. Вам потрібно лише 8 рядків для всієї пісні, перевірте її!\n\n### Exercise\nЗавершіть пісню Old MacDonald, встановивши змінну `animal` до `animals[i]` та `sound` до `sounds[i]`.\n"
+                example_code: "```\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} 1 {to} 3\n    animal = _\n    sound = _\n    {print} 'Old MacDonald had a farm'\n    {print} 'E I E I O!'\n    {print} 'and on that farm he had a ' animal\n    {print} 'E I E I O!'\n    {print} 'with a ' sound sound ' here'\n    {print} 'and a ' sound sound ' there'\n    {print} 'here a ' sound\n    {print} 'there a ' sound\n    {print} 'everywhere a ' sound sound\n```\n\n```\nlines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']\n{for} line {in} lines\n    {for} i {in} {range} 1 {to} 3\n        {print} line\n    {print} 'early in the morning'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'way hay and up she rises'\n    {print} 'early in the morning'\n```\n"
+            18:
+                story_text: "На рівні 16 ми зробили пісні за допомогою списків. Ці програми, однак, більше не працюють належним чином на цьому рівні. Полонини від рівня 17 і кронштейни від рівня 18 все ще потрібно додавати.\n\n### Exercise 1\nП'яна вітрильник пісня надається як зразок коду, але ще не працює.\nЧи можна зробити все знову? Щоб допомогти вам, ми одягаємо _ в місцях _ some_ похибки.\n\n### Exercise 2\nТепер також подивіться свою пісню Old MacDonald від рівня 16, і виправте її.\n"
+                example_code: "й й\nлінії = ['Чому ми робимо з п'ятим вітрильником', - поклавши його живіт з ірстим бритвом', - в'яжемо його в довге катері до сараю']]\n{for} лінії {in} _\n{for} i {in} {range} 1 {to} 1 час\n{print} _ лінія _\n{print} 'поранку'\n{for} i {in} {range} 1 {to} 3 хв\n{print} 'way hay і вгору вона піднімається Р\n{print} 'поранку'\nй й\n"
+        description: Друк пісень
+        name: Пісня!
+        default_save_name: Пісня
     songs_2:
         levels:
             12:
                 example_code: |
-                    ```
-                    {define} twinkle
-                        {print} 'Twinkle'
-                        {print} '...'
+                    й й
+                    {define} близнюки
+                    {print} 'Твінкле Р
+                    {print} _
 
-                    {call} twinkle
-                    {print} 'Up above the world so high'
-                    {print} 'Like a diamond in the sky'
+                    {call} близнюки
+                    {print} 'Зверху над світом так висока'
+                    {print} 'Подивитися діамант в небі'
                     {call} _
-                    ```
+                    й й
+                story_text: "Пісні містять безліч повторень. Ми можемо захопити його функцією!\n### Exercise\nПодивіться на прикладний код з функцією. Наповнювати дві лінії, щоб надрукувати повну пісню.\n"
+            16:
+                example_code: "й й\nномер = ['one', 'два', 'трій', 'four', 'six', 'six', 'eight', 'nine', 'ten']\nоб'єкт = ['на його барабані', 'на його взутті', 'на його коліні', 'на його двері', 'на його хтиві', 'на його палиці', 'на небі', 'на його хвіртки', 'на його ване', 'на його знову']\n\nУ\n{print} 'Ця стара людина'\n{print} 'Віграти' _\n{print} 'Віграти knick-knack' _\n{print} 'З кнік-кнаком paddywhack Р\n{print} 'Див собаку кісточку'\n{print} 'Ця стара людина прийшла в рулон будинку Р\n{sleep} 8\n{clear}\nй й\n"
+                example_code_2: "й й\nоб'єкт = ['wheels', 'doors', _]\nрух = [ 'круглий і круглий', 'відкритий і відключення', _]\nй й\n"
+                story_text: "### Exercise\nОздоблення дитячої рифом!\n"
+                story_text_2: "### Exersice 2\nТепер створюйте власний код для дитячої шини «Кільки на автобусі» таким же чином!\n"
+        default_save_name: Пісня 2
+        name: Пісня! 2
+        description: Пісня 2
     turtle:
         levels:
             1:
@@ -2444,22 +2523,29 @@ adventures:
                     Використовуючи `{forward}`, ви малюєте лінію вперед. Число за ним визначає, яку відстань пройде черепаха. `{turn} {right}` повертається на чверть оберту за годинниковою стрілкою, `{turn} {left}` повертається проти годинникової стрілки.
 
                     Якщо ви хочете повернутися назад, ви використовуєте команду `{forward}`, але з від’ємним числом. Так, наприклад, `{forward} -100`
+                story_text_2: "### Exercise\nЦе початок маленької сходи. Чи можете ви зробити це 5 кроків?\n"
+                example_code: "Й Й\n{forward} 100\n{turn} {left}\nЙ Й\n"
+                example_code_2: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
             3:
                 story_text: |
                     На цьому рівні ви можете використовувати `{at} {random}` із малюнком черепахи. Випадковий вибір змушує черепаху щоразу йти іншим шляхом.
                     Використовуйте `{at} {random}`, щоб вибрати значення зі списку.
                     ### Вправи
                     Чи можете ви скопіювати та вставити рядки 2 і 3, щоб створити довший випадковий шлях?
+                example_code: "й й\nкути {is} 10, 50, 90, 150, 250\n{turn} кути {at} {random}\n{forward} 25\nй й\n"
             4:
                 example_code: |
-                    ```
-                    {print} 'Drawing figures'
-                    angle {is} 90
-                    {turn} angle
+                    й й
+                    {print} _ Рисунок креслення _
+                    кут {is} 90
+                    {turn} кут
                     {forward} 25
-                    {turn} angle
+                    {turn} кут
                     {forward} 25
-                    ```
+                    й й
+                story_text: "На рівні 4 ви повинні використовувати значення цитат з `{print}` і `{ask}`. Також при малюнку!\n"
+                story_text_2: "Ви також можете змінити колір ліній за допомогою команди `{color}`. Переглянути приклад.\nВи також можете використовувати команду `{color} {white}`, щоб зробити «невидимі» лінії. Ви можете використовувати ці білі лінії для переміщення черепахи в будь-якому місці в екрані перед початком малювання.\n"
+                example_code_2: "Й Й\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\nЙ Й\n"
             5:
                 example_code_2: |
                     ```
@@ -2468,6 +2554,9 @@ adventures:
                     {if} напрямок {is} праворуч {turn} _
                     {forward} 100
                     ```
+                story_text: "На рівні 5 ви можете зробити вибір з `{if}`. Наприклад між різними видами фігур.\n"
+                story_text_2: "### Exercise\nЗаповніть правильні номери в цьому коді, щоб отримати його на роботу.\nПісля того, як ви зробили, ви можете спробувати додати варіант назад.\n\n**Екстра*** Замість використання «лівого» і «право», що відреагують програму з Північним, східним, Південно-Західним.\nЦей спосіб ви можете додати ще більше напрямків, таких як Північно-східний та Південно-Західний тощо.\n"
+                example_code: "й й\n{print} 'Вилучення фігур Р\n{is} {ask} - Ви хочете квадрат або трикутник? Р\n{if} цифра {is} трикутник кут {is} 120\n{else} кут {is} 90\n{turn} кут\n{forward} 25\n{turn} кут\n{forward} 25\n{turn} кут\n{forward} 25\n{turn} кут\n{forward} 25\nй й\n"
             8:
                 story_text: |
                     Тепер, коли ми можемо повторити кілька рядків, ми можемо легше створювати фігури.
@@ -2481,14 +2570,15 @@ adventures:
                     ### Вправа 2
                     Тепер створіть малюнок, що складається принаймні з двох багатокутників.
                 example_code: |
-                    ```
-                    angle = 90
-                    {repeat} 10 {times}
-                        {turn} angle
-                        {forward} 50
-                    ```
+                    й й
+                    кут = 90
+                    {repeat} 4 {times}
+                    {turn} кут
+                    {forward} 50
+                    й й
                 story_text_2: |
                     **Додатково** Тепер ми можемо покращити програму, яка малює різні фігури. Завершіть код, і ви зможете малювати будь-який багатокутник, який забажаєте!
+                example_code_2: "й й\nцифра = {ask} \"Як багато кутів слід малювати? Р\nкут = 360 / фігура\n{repeat} цифра {times}\n{turn} _\n{forward} _\nй й\n"
             9:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
@@ -2497,6 +2587,7 @@ adventures:
                     This code creates three black triangles, change that into five pink squares.
 
                      **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.
+                example_code: "Й Й\n{color} {black}\n{repeat} 3 {times}\n{repeat} 3 {times}\n{forward} 10\n{turn} 120\n{color} {white}\n{forward} 50\n{color} {black}\nЙ Й\n"
             10:
                 story_text: |
                     In this level you can make the turtle draw a figure.
@@ -2507,6 +2598,21 @@ adventures:
                      **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
                     ### Exercise 2
                     The spiral is drawn outwards, make it go inwards?
+                example_code: "й й\n{turn} 90\nдистанції = 10, 20, 30, 40, 50, 60\nВідстань {for} {in}\n{forward} відстань\nй й\n"
+            2:
+                story_text_2: "Ви можете використовувати змінні в черепахі `turn`.\n\n### Exercise\nЗміна коду, такого, що створює трикутник. Хін: Ви повинні змінити код в одному місці.\n"
+                story_text: "На рівні 1 черепаха може тільки повернути ліворуч або праворуч. Це трохи нудний!\nНа рівні 2 він може вказувати ніс у всіх напрямках.\n\nВикористовуйте 90 градусів, щоб перетворити чверть, 180, щоб перевернути половину, і повне коло становить 360 градусів.\n\n### Exercise\nЦей код тепер створює лист Т. Чи можна змінити його, щоб зробити лист B?\n\n**Extra*** Змініть літеру в інший лист, як перше ім'я.\nВи також можете зробити кілька літер, встановивши колір до `{color}` `{white}` в між собою. \n"
+                example_code: "```\n{forward} 20\n{turn} 90\n{forward} 20\n{turn} 180\n{forward} 100\n```\n"
+                example_code_2: "й й\n{print} Малюнок\nкут {is} 90\n{turn} кут\n{forward} 25\n{turn} кут\n{forward} 25\n{turn} кут\n{forward} 25\nй й\n"
+            6:
+                story_text: "У цьому рівні можна використовувати розрахунки для малювання різних фігур.\nВи можете навчатися в школі, що перетворюючи повне коло 360 градусів. Якщо ви не знаєте!\nОсь чому ви також використовуєте 90 градусів для площі. 360 розділений на 4 - 90.\nМи можемо самі зателефонувати одержувачу і узгодити зручний час і місце вручення квітів.\n"
+                example_code: "й й\nкути = {ask} 'Як багато кутів ви хочете? Р\nкут = 360 / кути\n{forward} 50\n{turn} кут\n{forward} 50\n{turn} кут\n{forward} 50\n{turn} кут\n{forward} 50\n{turn} кут\n{forward} 50\n{turn} кут\n{forward} 50\n{turn} кут\nй й\n"
+            12:
+                story_text: "Ми можемо використовувати функції, щоб зробити більш складні цифри з меншим кодом.\n### Exercise 1\nЗаповнити функцію так, щоб створюються три квадрати. Якщо ви хочете виглядати красиво, ви можете зробити лінії між квадратами білого кольору.\n\n### Exercise 2\nКод може бути виконаний навіть коротшим. Помістіть фінальні лінії в `{repeat}` так, що фігура залишається однаковою.\n\n### Exercise 3\nСтворіть власний малюнок з різними малюнками.\nЗміна кількості фігур `{repeat}` і форми фігур в `{define}`\n"
+                example_code: "й й\n{define} квадрат\n{repeat} 4 {times}\n{turn} _\n{forward} _\n{call} квадрат\n{forward} 50\n{call} квадрат\n{forward} 50\n{call} квадрат\nй й\n"
+        name: Кошик
+        description: Зробіть свій власний малюнок
+        default_save_name: Кошик
     turtle_draw_it:
         levels:
             9:
@@ -2526,6 +2632,7 @@ adventures:
                         колір_2 = білий 
                         колір_3 = синій 
                     ```
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n**Екстра**** Кількість у дужках вказує на скільки рядків коду цей показник можна намальовувати. Чи можна це зробити в одній кількості рядків?\n\n**Extra*** Подаруйте гравця вибір, яку країна хоче побачити прапор.\n\n<div class=\"w-full flex-row gap-2\">\nCross (7) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186\" ширина=\"150\">\nВипадкові кольорові підвісні квадрати (8) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de\" ширина=\"200\">\nПрапори <img src=\"https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e\" ширина=\"300\">\n</div>\n"
             10:
                 example_code: |
                     Вкладений шестикутник підказки: 
@@ -2542,6 +2649,9 @@ adventures:
                         {color} _ 
                         {repeat} _ 
                     ```
+                story_text_2: "Різдвяні вогні <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9637ea6d-6edc-4d88-a6f7-10271bfc5371\" ширина=\"500\">\n"
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n<div class=\"w-full flex-row gap-2\">\nNested Hexagon <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3629e908-3cd5-44ac-bbcd-1f1cceb15654\" ширина=\"150\">\nСвітлофори <img src=\"https://github.com/hedyorg/hedy/assets/80678586/edbbb608-5ff8-4349-85a6-e47809adde43\" ширина=\"100\">\n</div>\n"
+                example_code_2: "Різдвяні вогні:\n\nПочати переїзд на ліву сторону екрана з невидимою білою лінією. Потім повісьте різдвяні вогні!\nй й\n{color} білий\n{turn} -90\n{forward} 300\n{turn} 90\n\nколір = червоний, синій, жовтий, фіолетовий, зелений, помаранчевий, рожевий\n{for} select_color {in} кольори\nУ\nй й\n"
             12:
                 story_text: |
                     ### Вправи
@@ -2570,8 +2680,52 @@ adventures:
                         {if} shape = 'квадрат'
                             {call} draw_a_quarte
                     ```
+            15:
+                example_code: "Спіраль\nй й\nвідстань = 5\n{while} відстань < 200\nвідстань = відстань + 5\nУ\nй й\n"
+                story_text_3: "Зірка <img src=\"https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93\" ширина=\"150\">\n"
+                example_code_3: "Зірки\nЗірка зазвичай тягнеться за допомогою 144-дегре-повернення. Якщо ви зміните цей трохи до 143 градусів, наприклад і повторіть візерунок кілька разів за допомогою петлі {while} ви можете зробити цей малюнок.\n"
+                example_code_2: "Вентилятор\nй й\n{define} Draw_a_square {with} сторона\nУ\n\nдо 100\n{while} i > 1 час\n{with} i\nУ\nI = I - 3\nй й\n"
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\nSpiral <img src=\"https://github.com/hedyorg/hedy/assets/80678586/6943223c-018b-435b-a391-23723cc7a6ad\" ширина=\"150\">\n"
+                story_text_2: "Вентилятор <img src=\"https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f\" ширина=\"150\">\n"
+            1:
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n<div class=\"w-full flex-row gap-2\">\nРектор <img src=\"https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550\" ширина=\"100\">\nКвадрат <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" ширина=\"200\">\nСходи<img src=\"https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106\" ширина=\"200\">\n</div>\n"
+            2:
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n<div class=\"w-full flex-row gap-2\">\nТрикутник <img src=\"https://github.com/hedyorg/hedy/assets/80678586/e974b62c-f0cf-445a-8bd4-5ad9f1f71204\" ширина=\"100\">\nСтрілка <img src=\"https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9\" ширина=\"150\">\nЧовен <img src=\"https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9\" ширина=\"150\">\n</div>\n"
+            3:
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n<div class=\"w-full flex-row gap-2\">\nТрикутник <img src=\"https://github.com/hedyorg/hedy/assets/80678586/71e04d98-9545-4614-9caf-a5f179b756a1\" ширина=\"150\">\nЗірка <img src=\"https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80\" ширина=\"150\">\nСтрілка <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce\" ширина=\"200\">\n</div>\n"
+            4:
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n<div class=\"w-full flex-row gap-2\">\nКольорова зірка <img src=\"https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781\" ширина=\"150\">\nВеселка <img src=\"https://github.com/hedyorg/hedy/assets/80678586/2728b10f-9f7f-45ea-964e-5b284033e4f0\" ширина=\"500\">\nNested квадрати <img src=\"https://github.com/hedyorg/hedy/assets/80678586/f013f9fa-bc68-4c60-b778-2c457799d6f7\" ширина=\"200\">\n</div>\n"
+                example_code: "**Екстра**** Включити реальний виклик? Переконайтеся, що кольори цих фігур вибирають випадково, щоб кожен раз ви запустили свої програми, вони будуть виглядати по-різному!\n\nй й\nкольори {is} червоний, помаранчевий, жовтий, зелений, синій, фіолетовий, рожевий, коричневий, сірий, чорний\nКолір _\nй й\n"
+            6:
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n**Екстра*** Вирішить, що колір квадрата повинен бути.\n\n***Extra**** Чи можете ви зробити лист свого імені та прапора своєї країни занадто?\n\n<div class=\"w-full flex-row gap-2\">\nКвадрат <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" ширина=\"150\">\nЛисти <img src=\"https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad\" ширина=\"100\">\nПрапор <img src=\"https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e\" ширина=\"300\">\n</div>\n"
+                example_code: "Hint for the square:\n```\nchosen_color = {ask}_\n```\n"
+            8:
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n**Екстра**** Кількість у дужках вказує на скільки рядків коду цей показник можна намальовувати. Чи можна це зробити в одній кількості рядків?\n\n<div class=\"w-full flex-row gap-2\">\nSquare (3) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" ширина=\"200\">\nВипадково кольорова зірка (5) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781\" ширина=\"150\">\nВипадкові кольорові спіральні (7) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35\" ширина=\"150\">\n</div>\n"
+            11:
+                example_code: "Хін Бейг:\nй й\n{for} кількість_of_combs {in} {range} 1 {to} _\n{for} стіни_of_one_comb {in} {range} 1 {to} _\n{forward} _\n{turn} _\n{forward} _\n{turn} _\nй й\n\nВентилятор Hint:\nПочати, як вентилятор, який ви зробили на рівні 7. Або візьміть пік на підказці для бджільництва, адже коди дуже схожі.\n\nХінте Сніжинка: Починаємо робити один «лег» і повторюємо його 6 разів.\n"
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n<div class=\"w-full flex-row gap-2\">\nBeehive (6) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec\" ширина=\"150\">\nВентилятор (5) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87\" ширина=\"150\">\nСніжинка (13) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/90f56bbb-86e5-448d-8aec-16f8c2c05cf2\" ширина=\"150\">\n</div>\n"
+            13:
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\nВулиця в різних розмірах <img src=\"https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec\" ширина=\"300\">\nКольорова вулиця <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724\" ширина=\"300\">\nSnow Storm <img src=\"https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc\" ширина=\"300\">\n"
+                example_code: "Hint Street в різних розмірах\nй й\n{define} Draw_a_house {with} розмір\nУ\n\n{call} маляр_a_house {with} 90\n{call} маляр_a_house {with} 60\n{call} маляр_a_house {with} 30\nй й\n\nХіт кольорова вулиця\nй й\n{define} Draw_a_house {with} select_color\nУ\nй й\n\nХунт Сніжний Шторм\nй й\n{define} Draw_snowflake {with} довжина, колір\nУ\n\nкількість = 10, 20, 30\nКолір:\n\n{for} i {in} {range} 1 {to} 5\nJavaScript licenses API Веб-сайт\nJavaScript licenses API Веб-сайт\n{call} Draw_snowflake {with} випадковим_number, випадковим_color\n{color} білий\n{turn} випадковим_number * 5\n{forward} 80\nй й\n"
+            14:
+                story_text: "### Exercise\nСтворіть програму, яка просить гравця, скільки кутів їх фігури повинен мати, а потім створює цей малюнок.\nНа малюнку у зображенні є вихід, коли гравець заповнює 10.\n\n<div class=\"w-full flex-row gap-2\">\n<img src=\"https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b\" ширина=\"300\">\n<img src=\"https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2\" ширина=\"200\">\n</div>\n"
+                example_code: "й й\n{define} обчислення_degrees {with} amount_of_corners\n_ 360 / кількість_номери\n\n\n{define} Draw_figure {with} ступені\nУ\n{forward} 400/amount_of_corners\n{turn} _\n\nкількість_of_corners = {ask} _\n{call} _ {with} _\n\n{call} _ {with}\n{call} _ {with}\nй й\n"
+            5:
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n**Екстра*** Зробіть лише один код, який дозволяє гравця прийняти рішення, який лист, яким подобається бачити! І можна додати ще більше листів?\n\n<div class=\"w-full flex-row gap-2\">\nF <img src=\"https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20\" ширина=\"100\">\nE <img src=\"https://github.com/hedyorg/hedy/assets/80678586/12821803-6422-416a-8e36-9902d14e57a4\" ширина=\"100\">\nL <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24\" ширина=\"100\">\n</div>\n"
+                example_code: "Хін:\nй й\nselect_letter {is} {ask} 'Числовий лист вам сподобається бачити? Ф, Е або Л? Р\n{if} _\nй й\n"
+            7:
+                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n<div class=\"w-full flex-row gap-2\">\nХексагон <img src=\"https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4\" ширина=\"200\">\nТрикутник <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1\" ширина=\"200\">\nВентилятор <img src=\"https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e\" ширина=\"200\">\n</div>\n"
+        name: Написати нам!
+        default_save_name: Написати його
+        description: Намалюйте цю картину з черепицею
     while_command:
         description: '{while}'
+        levels:
+            15:
+                example_code: "```\nвідповідь = 0\n{while} відповідь != 25\n    answer = {ask} 'Скільки буде 5 помножити на 5?'\n{print} \"Дано правильну відповідь\"\n```\n"
+                story_text: "Збираємося дізнатися нову петлю, петлі `{while}`! Продовжуємо петлю до тих пір, поки заява неправда.\nТак не забудьте змінити значення в петлі.\n\nУ прикладному коді ми продовжуємо до дати коректної відповіді.\nЯкщо вірна відповідь ніколи не дається, петля ніколи не закінчується!"
+        default_save_name: while_command
+        name: '{while}'
     years:
         name: Новий рік
         default_save_name: Новорічний відлік
@@ -2705,3 +2859,54 @@ adventures:
             17:
                 story_text: "У цій пригоді ми програмуємо гру в ката. Спочатку ми робимо деякі приготування, потім програмуємо гру і в третій частині додаємо малюнок з черепахою. \n\n### Вправи\n***Встановіть змінні*** У цій грі у ката Гравець 1 вибирає відповідь, а Гравець 2 має вгадати літери в цій відповіді. \nЩоб комп’ютер знав усі літери в слові, ми перетворимо відповідь на список букв. Ми також робимо це за допомогою припущень Гравця 2. \nМи почнемо гру з 2 порожніми списками. Ми створили для вас порожній список для змінної відповіді. Тепер також створіть порожній список для guessed_letters. \nПотім заповнюємо, скільки було допущено помилок. На початку гри це має бути 0. \nЗмінна `amount_letters` повідомляє нам, скільки літер у відповіді. Попросіть Гравця 1 сказати нам, скільки букв має його слово. \nНарешті ми повідомляємо комп’ютеру, чи закінчилася гра. Ми використовуємо змінну `game_over` і встановлюємо для неї значення `False`. \n\n***Вибір відповіді*** Ми хочемо, щоб Гравець 1 міг вибрати відповідь. Ми запитаємо їх стільки разів, яка буде наступна буква. \nТоді ми додаємо цю букву до відповіді. Нарешті, ми додаємо порожній _ до списку вгаданих літер, щоб отримати стільки _, скільки літер у відповіді. \n\n***Хід гравця 2*** \nСкажіть гравцеві 2, що його черга. Потім скажіть Гравцеві 2, скільки літер у відповіді. Нарешті, надрукуйте список `guessed_letters`. \n\n***Перейти до наступної вкладки*** Тепер, коли всі початкові змінні встановлено, ми можемо почати програмувати саму гру. Перегляньте наступну вкладку, щоб дізнатися, як!\n"
                 example_code: "``` \nнадрукувати 'Шибениця!' \n\n# Встановити змінні \nвідповідь = [] \nвгадані_літери = _ \nзроблені_помилки = _ \nкількість_літерів = {ask} _ \n_ = 'Неправда' \n\n# Вибір відповіді \n{for} _\n    letter = {ask} 'Гравець 1, що таке буква ' i '?' \n    _ \n    {add} '_' {to} _ \n\n# Хід гравця 2 \nдрукувати _ \nдрукувати _ \nнадрукувати відгадані_літери \n```\n"
+    tic:
+        levels:
+            16:
+                story_text: "Давайте програма гри tic-tac-toe!\n\n### Exercise\nУ цій пригоді ми почнемо з створення пустого поля.\n\n***Створити список, який називається поле*** Цей список стане нашим ігровим майданчиком. Цей список наповнений 9 точок, так як немає x's і o's ще на початку нашої гри.\n\n***Створити функцію, яка друкує поле*** Спочатку зніміть екран, щоб старі ігрові поля будуть видалені. Далі ми друкуємо першу лінію нашого поля Tic Tac Toe. Складається з перших 3 плям у нашому списку.\nМи вже запрограмували цей рядок для вас. Тепер закінчити поле по друку плями 4, 5, і 6 на другому ряду і на місці 7, 8 і 9 в третьому ряду.\n\n***Всі функції, що друкує поле** Тепер викликати функцію.\n<div class=\"w-full flex-row gap-2\">\nЗапустіть код. <img src=\"https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc\" ширина=\"100\">\n</div>\n\n***Наступ в наступній вкладці**** У наступному вкладці ви дізнаєтеся, як запрограмувати гру самостійно.\n"
+                example_code: "й й\nНема Створити список з назвою поле\n[', '.', '.', '.', '.', '.', '.', '.', '.', '.']\n\nНема Створення функції, яка друкує поле\n{define} print_field\nУ\n{print} 'TIC TAC TOE'\n{print} поле [1] поле[2]\nУ\nУ\n\nНема Дзвоните до функції\nй й\n"
+            17:
+                example_code: "й й\nНема Вставте код тут і зробіть його рівнем 17 доказів\n\nНема Створіть функцію, яка виявить, якщо хтось виграв\n{define} виявлення_winner {with} поле, знак:\n{if} поле[1] == поле [2] {and} поле [2] == поле[2] {and} поле[1] != '.':\ngame_over = 'yes Р\n{print} 'Player' sign 'wins! Р\n{elif}:\nУ\n{else}:\ngame_over = 'не Р\n{return} _\nй й\n"
+                story_text: "На попередньому рівні ви навчилися створювати гру в хрестики-нулики. Гра працює, але дуже дратує, оскільки вона постійно запитує вас, чи ви вже виграли. \nТепер, коли у нас є команда {elif}, ми можемо дозволити грі вирішувати, чи хтось виграв, і вона може перестати запитувати нас! \n\n### Вправи\n***Вставте свій код*** Вставте сюди свій код із попереднього рівня та зробіть його доказом рівня 17. На цьому рівні ви навчилися використовувати двокрапку кожного разу, коли створюєте блок коду. Будь ласка, додайте двокрапки у правильних місцях. \n\n***Створіть функцію, яка визначає, чи хтось виграв*** Ми запустили функцію для вас, вставте її під функцію `print_field` і завершіть функцію. Ви бачите, що цей перший фрагмент коду перевіряє, чи збігаються місця 1, 2 і 3, тому що якщо так, у вас є 3 у рядку. \nВін також перевіряє, чи вони не є крапкою, тому що якщо вони є, рядок може мати ті самі символи на них, але це лише тому, що він все ще порожній. \nЯкщо всі ці умови виконуються, гра закінчується, і переможець друкується. \nЗавершіть цю функцію всіма можливими способами виграшу. Це означає, що ви повинні зробити це для інших 2 рядків, 3 стовпців і 2 діагоналей. \nЯкщо ви завершили всі інші параметри, функція має повернути змінну `game_over`, щоб ми могли використовувати її в нашій грі. \n\n***Викличте функцію в грі*** Перейдіть до рядка ``game_over = {ask} 'Did you win?'` `game_over = {call} detect_winner {with} field, sign`. Тепер функція перевірить, чи є переможець, і грі більше не потрібно продовжувати запитувати! \n\n***Приємної гри!*** Чудова робота! Ви закінчили гру! Насолоджуйтесь грою!\n"
+        name: Tic-Tac-Toe
+        default_save_name: Цицьки
+        description: Грати гру Tic Tac Toe!
+    tic_2:
+        levels:
+            16:
+                story_text: "У попередній пригоді ви дізналися, як створити ігрове поле. Тепер ви дізнаєтеся, як створити гру!\n\n### Exercise\n***Розмістіть свій код**** Почати свій код з попередньої пригоди тут.\n\n***Додати змінні*** Під час вашого списку, який називається `field` ми додаємо ще 2 змінні, які нам потрібно буде запрограмувати гру.\nЗміна `game_over` розповідає нам, якщо гра закінчена, і повинна бути «не» на старті гри.\nУ змінній `sign` ми розповімо, якщо це поворот гравця x або гравця o. Встановіть змінну до 'x'.\n\n***У гру***** Перший використовує команду {while}, щоб переконатися, що гра тримається на гранні змінної, в той час як Game_over не встановлений.\nПід час гри ми спочатку попросимо гравця, який вибираєте. Далі ми змінюємо поле з номером, який вибрав у свій знак.\nПісля того, як ми друкуємо поле знову і ми попросимо гравця, якщо вони ще будуть. Нарешті, ми хочемо, щоб переключити, чи є його, тому якщо знак \"x\" він повинен бути \"o\" і іншим чином навколо.\n\n***Забудьте свою гру**** Чи працює ваша гра? Великий, весело грати в гру! Якщо ні, скористайтеся кнопками для видалення коду.\nВи можете помітити одну помилку в коді, хоча ви можете вкрасти місце іншого гравця! Якщо інший людина вибрав місце 1, ви можете просто ввести 1 після них і вкрасти місце.\nЦе не ярмарок! Перейдіть в наступну вкладку, щоб дізнатися, як виправити цю проблему.\n"
+                example_code: "й й\nНема Поставте код з попередньої пригоди тут\n\nНема Додати змінні\nгра_over = _\nУвійти\n\nНема Гра\n{while} _\nВибір = _ 'Публічний знак '_? Р\nполе[хокей] = _\n_ Друк_field\ngame_over = {ask} _\n{if} запис = 'o Р\nУвійти\nУ\nУвійти\nй й\n"
+        name: Tic-Tac-Toe 2
+        default_save_name: Цицьки
+        description: Грати гру Tic Tac Toe!
+    simon:
+        levels:
+            16:
+                story_text: "Давайте зробимо гру Simon Says! Simon Says - це гра на пам'ять, у якій гравцеві буде надано колір. Вони повинні повторити цей колір. \nЯкщо вони все роблять правильно, до послідовності додається колір, тож тепер вони повинні запам’ятати 2 кольори, потім 3, потім 4 тощо. Гра зупиняється, щойно гравець робить помилку. \n\n### Вправи\nУ цій першій частині пригоди Simon Says ми дозволимо комп’ютеру вибрати випадковий колір і додати його до списку. \n\n***Створіть 2 списки*** Спочатку створіть список під назвою`colors`та заповніть його червоним, жовтим, зеленим і синім кольорами. \nПотім створіть список під назвою `simon_sequence`. Цей список буде використано як відповідь. \nНа початку гри ці списки мають бути порожніми. на жаль, ми не можемо створити порожній список (поки що), тому ми заповнимо його словами «порожній» і «список» і негайно видалимо їх зі списку. \n\n***Створіть функцію, яка додає колір до послідовності*** Тепер, коли у нас є порожній список simon_sequence, ми можемо почати заповнювати його випадковими кольорами. \nМи робимо це за допомогою функції, тож можемо викликати її кожного разу, коли в нашій грі з’являється новий рівень. Створіть функцію під назвою `add_random_color`. \nПотім створіть змінну random_color і встановіть для неї випадковий колір. Далі додайте цей випадковий колір до simon_sequence. \n\n***Створіть функцію, яка показує simon_sequence*** Почніть із назви нової функції `show_simon_sequence` з `level` як аргументом. Тепер ми хочемо показати стільки кольорів, скільки рівень, на якому ми перебуваємо (на рівні 1 ви бачите 1 колір, на рівні 2 ви бачите 2 кольори тощо). \nТому ми повторюємо `level` рази, щоб надрукувати `simon_sequence[i]`. Щоразу, коли відображається колір, зачекайте 1 секунду, а потім очистіть екран. \n\n***Перевірте свою програму*** Перш ніж перейти до наступного рівня, перевірте, чи працюють функції, викликавши обидві функції. Якщо вони працюють, ви повинні побачити випадковий колір на екрані виводу. \nВидаліть цю тестову частину свого коду, скопіюйте код і перейдіть до наступної вкладки, щоб дізнатися більше про гру simon words!\n"
+                example_code: "```\n# Make 2 lists\ncolors = _\n_ = ['empty', 'list']\n{remove} _ {from} simon_sequence\n{remove} _\n\n# Create a function that adds a color\n_ add_random_color\n    _\n    {add} _\n\n# Create a function that shows the simon_sequence\n{define} _\n    {for} i {in} {range} 1 {to} _\n        {print} _\n        _\n        _\n\n# Test your program\n{call} _\n{call} show_simon_sequence {with} 1\n```\n"
+        name: Сон Сайс
+        default_save_name: Мар
+        description: Зробіть гру Simon Says
+    simon_2:
+        levels:
+            16:
+                story_text: "Ми продовжуємо разом з нами!\n\n### Exercise\n***Старий код тут*** Введіть код з попереднього рівня. Не забудьте видалити частину, яка була просто використана для тестування функцій.\n\n***Створити функцію, яка створює гравця_sequence*** Список `player_sequence` використовується для захоплення відповідей гравця. Спочатку ми визначаємо функцію з рівнем аргументу.\nДалі ми запитаємо про те, що колір вибрати. Ми називаємо цю змінну `answer`. Потім ми додаємо змінну `answer` до списку гравця_sequence.\n\n***Налаштування гри**** Перед тим як ми запрограмуємо гру в наступному вкладці, нам буде потрібно деякі початкові змінні. Спочатку ми встановимо змінну `level` до 1 та змінну `game_over` до False.\nПотім ми робимо введення для гри. Ми будемо друкувати «Демо Саймон Сайс!» і очистити екран після 1 секунди.\n\n***Наступ до наступної вкладки, щоб закінчити гру!**** Не забудьте скопіювати код і взяти його з вами в наступну вкладку.\n"
+                example_code: "й й\nНема Введіть код тут\n\n\nНема Створіть функцію, яка створює гравця\n{define} _\n{for} _\n_ 'Що таке колірне число ''? Р\n{add} відповідь {to} _\n\nНема Налаштування\nрівень = _\nгра_over = _\n{print} _\n1 час\nУ\nй й\n"
+        name: Сімон Сайс 2
+        default_save_name: Simon
+        description: Зробіть гру Simon Says
+    simon_3:
+        levels:
+            16:
+                story_text: "У цій вкладці ми будемо програмувати гру Simon Says!\n\n### Exercise\n***Розмістіть свій код**** Скопіюйте код з попередньої вкладки і вставте його тут.\n\n***Програма гри*** Ми починаємо, щоб переконатися, що гра йде в той час як гра не надходить. Потім ми друкуємо, який рівень гравця знаходиться на, ми використовуємо змінний рівень для цього. Ми можемо самі зателефонувати одержувачу.\nТепер ми повинні створити порожній список гравця_sequence. Ми вже запрограмували, як заповнювати список, з нашою функцією `player_sequence`, але ми не зробили сам список. Щоб створити список, ми використовуємо той самий трюк, як ми зробили в попередній вкладці.\nМи зробимо список з словом «порожній» і «лист» на ньому, а потім знімаємо як ці слова. Далі ми будемо називати всі функції 3, які ми створили.\nНарешті, ми обов’язково перевіримо, якщо гравець дав правильні відповіді (наприклад, якщо гравець_послідовність та послідовність є однаковими).\nЯкщо це справи, ми надамо вам повну консультацію. Зачекайте 1 секунду і підвищуйте рівень з 1.\nЧи повинен гравець дати неправдиву відповідь, ми скажемо їх і завершимо гру, встановлюючи game_over to 'True'\n\n***Отримуйте свою гру!**** Чудова робота! Чи не працює ваша гра? Використовуйте дамську кнопку, щоб видалити ваш код!\n"
+                example_code: "й й\nНема Введіть код тут\n\nНема Гра\n{while} гра_over _\n{print} _\nУ\nУ\n_ = ['empty', 'list']\n{remove} _\n{remove} _\n{call} _\n{call} _ {with} _\n{call} _ {with} _\n{if} гравця_sequence == _\nУ\nУ\nУ\n{else}\nУ\nгра_over = _\nй й\n"
+        default_save_name: Simon
+        description: Зробіть гру Simon Says
+        name: Сімон Сайс 3
+    tic_3:
+        name: Tic-Tac-Toe 3
+        default_save_name: Цицьки
+        description: Грати гру Tic Tac Toe!
+        levels:
+            16:
+                example_code: "й й\nНема Введіть код тут\n\nНема Використовуйте це, щоб виправити помилку\n{if} _ = '. Р\nполе[choice] = знак\n{else}\n{print} _\nУ\nй й\n"
+                story_text: "Ви можете помітити одну помилку в коді, який ви зробили в попередній пригоді. Ви можете вкрасти місце іншого гравця! Якщо інший людина вибрав місце 1, ви можете просто ввести 1 після них і вкрасти місце.\nЦе не ярмарок! У цій вкладці ми зафіксуємо цю помилку.\n\n### Exercise\n***Старий код тут*** Поставте код з попередньої пригоди тут.\n\n***Перевірити помилку*** Щоб виправити помилку, ми заміняємо рядок, яка говорить `field[choice] = sign`. Це перетворює будь-яку точку, яку гравець вибрав у свій знак.\nПерейдіть на заголовок, який говорить «Використовувати це, щоб виправити помилку» і закінчити код. Ми спочатку хочемо перевірити, чи вибране місце ще порожній, тому `if field[choice] = '.'`. Якщо це випадок, ви можете прийняти його.\nПотім ми робимо ще командно-роздрукувати «Соррі, це місце вже прийнято», якщо пляма не порожній. Нарешті, ми додаємо команду {sleep}, тому гравці можуть насправді читати текст, перш ніж він знову очищається.\nТепер скопіюйте цей шматок коду і замініть рядок `field[choice] = sign` з цим новим шматком коду.\n\n*** Грайте свою гру!*** Тепер гра повинна працювати належним чином! Доброго дня!\nЄдиним недоліком є те, що ви можете отримати трохи дратує, що гра продовжує запитати вас, якщо ви ще виграли. Ви хочете виправити це? До рівня 17 і ми закріпимо!\n"

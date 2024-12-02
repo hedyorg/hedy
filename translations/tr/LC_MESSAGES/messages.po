@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-10-25 06:21+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2024-11-25 06:17+0000\n"
+"Last-Translator: Samed ÖZDEMİR <samedozdemirr@gmail.com>\n"
 "Language-Team: tr <LL@li.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8.2-dev\n"
+"X-Generator: Weblate 5.9-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -34,8 +34,9 @@ msgstr "{name} fonksiyonunun tanımlanmadan önce kullanıldığını tespit ett
 msgid "Has Blanks"
 msgstr "Kodun tamamlanmamış gibi göründüğünü tespit ettik. Boşlukları doldurabilir misiniz?"
 
+#, fuzzy
 msgid "Incomplete"
-msgstr ""
+msgstr "Koddaki bir bölümün '{incomplete_command}' içinde, '{line_number}' satırda eksik olduğunu tespit ettik. Eksik olanı eklemeyi deneyebilir misiniz?"
 
 msgid "Incomplete Repeat"
 msgstr "Satır {line_number}'daki `{repeat}` ifadesinin yanında bir `{command}` komutunun eksik olduğunu tespit ettik. Eksik komutu eklemeyi deneyebilir misiniz?"
@@ -64,8 +65,9 @@ msgstr "Bir {echo} ifadesinin {ask} kullanılmadan veya öncesinde kullanıldı�
 msgid "Lonely Text"
 msgstr "Kodun, satır {line_number}'de/da kullanılan metinle ilgili bir komut eksik olduğunu tespit ettik. Gerekli komutu metinle birlikte yazmayı deneyebilir misiniz?"
 
+#, fuzzy
 msgid "Missing Additional Command"
-msgstr ""
+msgstr "Koddaki {line_number} satırında `{command}` komutunun bir şeyi eksik olduğunu tespit ettik. Kodunuzda `{missing_command}` kullanmayı deneyebilir misiniz?\""
 
 msgid "Missing Colon Error"
 msgstr "`{command}` ifadesesinin satır {line_number}'nin sonunda bir `:` işaretine ihtiyacı olduğunu tespit ettik. 17. seviyeden itibaren komutların sonuna `:` eklemeye başlayabilir misiniz?"
@@ -79,7 +81,7 @@ msgstr "Görünüşe göre {line_number} satırında kullandığınız `{command
 
 #, fuzzy
 msgid "Missing Square Brackets"
-msgstr ""
+msgstr "{line_number} satırında oluşturduğunuz listede köşeli parantez '[]' eksik. Lütfen listenin etrafına köşeli parantez '[]' eklemeyi deneyebilir misiniz?"
 
 #, fuzzy
 msgid "Missing Variable"
@@ -95,7 +97,7 @@ msgstr "{line_number} numaralı satırda çok az boşluk kullandınız. {leading
 
 #, fuzzy
 msgid "Non Decimal Variable"
-msgstr ""
+msgstr "{line_number} satırında Hedy'nin desteklemediği bir sayı kullandığınızı tespit ettik! 2 gibi bir ondalık sayı kullanmayı deneyebilir misiniz?"
 
 #, fuzzy
 msgid "Parse"
@@ -103,11 +105,11 @@ msgstr "Girdiğiniz kod geçerli bir Hedy kodu değil. {location[0]} numaralı s
 
 #, fuzzy
 msgid "Pressit Missing Else"
-msgstr "Farklı bir tuşa bastığınızda ne olacağını eklemeyi unuttunuz, kodunuza bir `{else}` ekleyin"
+msgstr "Kodunuzun, diğer tuşlara basıldığında ne olacağını belirlemek için bir {else} eksik olduğunu tespit ettik. Kodunuza bir {else} eklemeyi deneyebilir misiniz?"
 
 #, fuzzy
 msgid "Runtime Index Error"
-msgstr "{name} listesine erişmeye çalıştınız ancak liste ya boş ya da istenen dizin orada değil."
+msgstr "{name} listesi boş ya da indeksinin eksik olduğunu tespit ettik. Lütfen listenin boş olmadığından emin olun veya eksik indeks için '[]' içine bir sayı yazmayı deneyin."
 
 #, fuzzy
 msgid "Runtime Value Error"
@@ -397,10 +399,6 @@ msgstr ""
 
 #, fuzzy
 msgid "classes_info"
-msgstr ""
-
-#, fuzzy
-msgid "clear"
 msgstr ""
 
 #, fuzzy
@@ -2547,5 +2545,8 @@ msgstr "Programınız"
 #~ msgstr ""
 
 #~ msgid "Output"
+#~ msgstr ""
+
+#~ msgid "clear"
 #~ msgstr ""
 
