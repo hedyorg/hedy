@@ -30,6 +30,7 @@ export function login(username, password) {
     cy.getDataCy('password').type(password);
     cy.getDataCy('login_button').click();
     cy.wait('@login');
+    cy.wait(250)
 }
 
 export function logout()
