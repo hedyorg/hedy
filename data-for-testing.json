@@ -4,30 +4,31 @@
       "username": "user1",
       "password": "$2b$09$1lZSLTxPBn1p6sOBpXy6H./9Fho7fXed.ZZJPBOd4lHu1QwRDiKW6",
       "email": "user1@dummy.com",
-      "language": "en",
-      "keyword_language": "en",
+      "language": "fr",
+      "keyword_language": "fr",
       "created": 1667487371548,
       "teacher_request": null,
       "third_party": null,
       "verification_pending": "$2b$09$W/lHayOzZttUVDf6nW0OWuXErrXFV3WC.OXAMTHVJ5hZOahFxPzYW",
-      "last_login": 1667488074388,
+      "last_login": 1733156219944,
       "country": "VE",
       "birth_year": 1999,
       "gender": "f",
       "prog_experience": "no",
-      "epoch": 1
+      "epoch": 1,
+      "program_count": 1
     },
     {
       "username": "user2",
       "password": "$2b$09$BlvY7/i5T1/tyGABEFJOx.6W8LcQHz9HaPrwhxXVZ7gILs4GkYyFe",
       "email": "user2@dummy.com",
-      "language": "en",
-      "keyword_language": "en",
+      "language": "es",
+      "keyword_language": "es",
       "created": 1667487426140,
       "teacher_request": null,
       "third_party": null,
       "verification_pending": "$2b$09$8ce7rVDk8ZbMASMP1CRDBepWWXNGZLNuXlhz.2yhXkJUyXELuOdGO",
-      "last_login": 1667488140990,
+      "last_login": 1733156278063,
       "country": "NL",
       "birth_year": 2010,
       "gender": "m",
@@ -310,6 +311,11 @@
       "id": "$2b$09$EW1c0OGdZTGk.TmEBAHKlO",
       "username": "student3",
       "ttl": 1728935624
+    },
+    {
+      "id": "$2b$09$hOgREabUhtSYJqYcMOJHYe",
+      "username": "user2",
+      "ttl": 1734365878
     }
   ],
   "program-stats": [
@@ -860,6 +866,46 @@
         1,
         1,
         1
+      ]
+    },
+    {
+      "id#level": "user1#9",
+      "week": "2024-49",
+      "id": "user1",
+      "level": 9,
+      "number_of_lines": 2,
+      "NoIndentationException": 10,
+      "chart_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id#level": "@all-logged#9",
+      "week": "2024-49",
+      "id": "@all-logged",
+      "level": 9,
+      "number_of_lines": 2,
+      "NoIndentationException": 10,
+      "chart_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ]
     }
   ],
@@ -1674,6 +1720,22 @@
       "id": "48ec04d60a4c4990a60b9e5e81121e71",
       "username_level": "student3-1",
       "is_modified": true
+    },
+    {
+      "session": "a583433caabc41af9cff634103fc315d",
+      "date": 1733156126001,
+      "lang": "fr",
+      "version": "DEV",
+      "level": 9,
+      "code": "r\u00e9p\u00e8te 1 fois\ntourne 3\n    avance 50",
+      "name": "Introduction 9",
+      "username": "user1",
+      "error": true,
+      "adventure_name": "default",
+      "id": "fb23d0fa90ce48b5bf87c0632969fc28",
+      "username_level": "user1-9",
+      "is_modified": true,
+      "public": 1
     }
   ],
   "public_profiles": [
@@ -1682,7 +1744,8 @@
       "image": "1",
       "personal_text": "I like Hedy!",
       "agree_terms": "on",
-      "tags": []
+      "tags": [],
+      "country": "VE"
     },
     {
       "username": "user3",
@@ -1879,10 +1942,10 @@
       "students": {
         "$type": "set",
         "elements": [
-          "student2",
+          "student3",
           "student4",
           "student1",
-          "student3",
+          "student2",
           "student5"
         ]
       },
@@ -2788,6 +2851,11 @@
       "id": "student3-default-1",
       "ticked": false,
       "program_id": "02930e0a15894bc68331775f08e12a32"
+    },
+    {
+      "id": "user1-default-9",
+      "ticked": false,
+      "program_id": "fb23d0fa90ce48b5bf87c0632969fc28"
     }
   ]
 }
