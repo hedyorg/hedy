@@ -37,4 +37,8 @@ export function deleteProgram(name) {
             })
             }
         })
-} 
+}
+
+export function codeMirrorContent() {
+    return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
+}
