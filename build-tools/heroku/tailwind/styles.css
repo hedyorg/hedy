@@ -34,7 +34,7 @@ h4 {
   @apply font-bold text-base;
 }
 
-p, li, span, td, tr {
+p, li, td, tr, label {
   @apply text-black 
 }
 
@@ -109,12 +109,12 @@ strong {
 
 .green-btn {
   @apply btn-shape;
-  @apply bg-green-500 text-white border-green-700;
+  @apply bg-green-500 text-white dark:text-white border-green-700;
 }
 
 .green-btn-new {
   @apply btn-shape-new;
-  @apply bg-green-500 text-white border-green-500;
+  @apply bg-green-500 text-white dark:text-white border-green-500;
 }
 
 .green-btn:disabled, .green-btn[disabled] {
@@ -227,7 +227,7 @@ a.green-btn-new:hover {
 
 .yellow-btn {
   @apply btn-shape;
-  @apply bg-yellow-500 text-black border-yellow-700;
+  @apply bg-yellow-500 border-yellow-700
 }
 
 .yellow-btn-new {
@@ -583,7 +583,7 @@ input[type=checkbox]:checked, input[type=radio]:checked {
 }
 
 input, select {
-  @apply border border-gray-400;
+  @apply border border-gray-400 bg-white text-black;
 }
 
 table.users thead {
@@ -1018,4 +1018,8 @@ div[class^="ace_incorrect_hedy_code"] {
 
 .sliding-content-open {
   grid-template-rows: 1fr;
+}
+
+.dark-opacity-50 {
+  @apply dark:opacity-50
 }

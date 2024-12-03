@@ -3,12 +3,12 @@
 {% block full_width_content %}
     <div class="bg-blue-200 mb-4">
         <div class="py-4 flex items-center w-full copy-container mx-auto">
-            <div class="tracking-wide text-xl font-extralight">{{ page_title }}</div>
+            <div class="tracking-wide text-xl font-extralight text-black">{{ page_title }}</div>
         </div>
     </div>
     <div class="copy-container text-business-copy" id="teacher_documentation">
         <div class="flex gap-8">
-            <div class="flex-0 text-links-plain rounded-md bg-gray-200 p-4">
+            <div class="flex-0 text-links-plain rounded-md bg-gray-200 p-4 text-black">
                 {# Section nav #}
                 {% for key, title in section_titles %}
                 {% if key == section_key %}

@@ -55,7 +55,7 @@
                 <th class="px-2 py-2 text-center" id="username_header">{{_('username')}}</th>
                 <th class="px-2 py-2 text-center" id="role">{{_('role')}}</th>
                 <th class="px-2 py-2 text-center" id="overview_header">{{_('programs')}}</th>
-                {% if not is_second_teacher and class_info.teacher == username %}<th class="px-2 p-2 bg-blue-900 text-white text-center" id="remove_second_teacher_header">{{_('remove')}}</th>{% endif %}
+                {% if not is_second_teacher and class_info.teacher == username %}<th class="px-2 p-2 bg-blue-900 dark:bg-[#2a4365] dark:text-[#FFFFFF] text-white text-center" id="remove_second_teacher_header">{{_('remove')}}</th>{% endif %}
             </tr>
             </thead>
             <tbody id="class_user_table">
@@ -102,7 +102,7 @@
                   <th class="px-2 py-2 text-center">{{_('role')}}</th>
                   <th class="px-2 py-2 text-center">{{_('invite_date')}}</th>
                   <th class="px-2 py-2 text-center">{{_('expiration_date')}}</th>
-                  {% if not is_second_teacher %}<th class="px-2 p-2 bg-blue-900 text-white">{{_('remove')}}</th>{% endif %}
+                  {% if not is_second_teacher %}<th class="px-2 p-2 bg-blue-900 dark:bg-[#2a4365] dark:text-[#FFFFFF] text-white">{{_('remove')}}</th>{% endif %}
               </tr>
           </thead>
           <tbody>

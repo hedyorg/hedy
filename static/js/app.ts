@@ -436,11 +436,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
     const adventure = container.getAttribute('data-tabtarget')
     const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
-    let symbol = "⇥";
-    if (dir === "rtl") {
-      symbol = "⇤";
-    }
-    $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste_example_code_${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
+    const button = $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn text-black dark:text-white').attr('data-cy', `paste_example_code_${adventure}`) .appendTo(buttonContainer).click(function() {
       if (!theGlobalEditor?.isReadOnly) {
         theGlobalEditor.contents = exampleEditor.contents + '\n';
       }
@@ -448,6 +444,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
       stopit();
       clearOutput();
     });
+    $('<i>').addClass('fa-solid fa-arrow-right').appendTo(button)
   }
   const levelStr = $(preview).attr('level');
   const lang = $(preview).attr('lang');

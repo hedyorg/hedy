@@ -177,7 +177,15 @@ module.exports = {
     },
     nightwind: {
       colors: {
-       white: "gray.800"
+       white: "gray.800",
+       yellow: {
+        500: "yellow.500",
+        700: "yellow.700"
+       },
+       blue: {
+        100: "#2e3f5c",
+        900: "#ebf8ff"
+       }
       }
     }
   },
