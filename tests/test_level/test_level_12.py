@@ -3178,6 +3178,38 @@ class TestsLevel12(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 
+    def test_if_pressed_with_index_var_list_access(self):
+        code = textwrap.dedent("""\
+            opt is 'a', 'b', 'c'
+            i is 3
+            a is opt at i
+            if x is pressed
+                print 'x'
+            else
+                print 'y'""")
+
+        expected = textwrap.dedent("""\
+            global_scope_ = dict()
+            global_scope_["opt"] = Value([Value('a'), Value('b'), Value('c')])
+            global_scope_["i"] = Value(3, num_sys='Latin')
+            try:
+              (global_scope_.get("opt") or opt).data[int((global_scope_.get("i") or i).data)-1]
+            except IndexError:
+              raise Exception(\"""Runtime Index Error\""")
+            global_scope_["a"] = (global_scope_.get("opt") or opt).data[int((global_scope_.get("i") or i).data)-1]
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            global if_pressed_x_
+            def if_pressed_x_():
+              print(f'''x''')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            global if_pressed_else_
+            def if_pressed_else_():
+              print(f'''y''')
+            extensions.if_pressed(if_pressed_mapping)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=15, unused_allowed=True)
+
     def test_if_pressed_string_in_list(self):
         code = textwrap.dedent("""\
             animals is 'bee', 'seahorse', 'platypus'
@@ -3189,20 +3221,20 @@ class TestsLevel12(HedyTester):
                 print 'm'""")
 
         expected = textwrap.dedent("""\
-             global_scope_ = dict()
-             global_scope_["animals"] = Value([Value('bee'), Value('seahorse'), Value('platypus')])
-             if Value('horse') in (global_scope_.get("animals") or animals).data:
-               print(f'''correct''')
-             if_pressed_mapping = {"else": "if_pressed_default_else"}
-             if_pressed_mapping['x'] = 'if_pressed_x_'
-             global if_pressed_x_
-             def if_pressed_x_():
-               print(f'''x''')
-             if_pressed_mapping['else'] = 'if_pressed_else_'
-             global if_pressed_else_
-             def if_pressed_else_():
-               print(f'''m''')
-             extensions.if_pressed(if_pressed_mapping)""")
+            global_scope_ = dict()
+            global_scope_["animals"] = Value([Value('bee'), Value('seahorse'), Value('platypus')])
+            if Value('horse') in (global_scope_.get("animals") or animals).data:
+              print(f'''correct''')
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            global if_pressed_x_
+            def if_pressed_x_():
+              print(f'''x''')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            global if_pressed_else_
+            def if_pressed_else_():
+              print(f'''m''')
+            extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 
@@ -3218,21 +3250,21 @@ class TestsLevel12(HedyTester):
                 print 'm'""")
 
         expected = textwrap.dedent("""\
-             global_scope_ = dict()
-             global_scope_["animals"] = Value([Value('bee'), Value('seahorse'), Value('platypus')])
-             global_scope_["animal"] = Value('horse')
-             if (global_scope_.get("animal") or animal) in (global_scope_.get("animals") or animals).data:
-               print(f'''correct''')
-             if_pressed_mapping = {"else": "if_pressed_default_else"}
-             if_pressed_mapping['x'] = 'if_pressed_x_'
-             global if_pressed_x_
-             def if_pressed_x_():
-               print(f'''x''')
-             if_pressed_mapping['else'] = 'if_pressed_else_'
-             global if_pressed_else_
-             def if_pressed_else_():
-               print(f'''m''')
-             extensions.if_pressed(if_pressed_mapping)""")
+            global_scope_ = dict()
+            global_scope_["animals"] = Value([Value('bee'), Value('seahorse'), Value('platypus')])
+            global_scope_["animal"] = Value('horse')
+            if (global_scope_.get("animal") or animal) in (global_scope_.get("animals") or animals).data:
+              print(f'''correct''')
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            global if_pressed_x_
+            def if_pressed_x_():
+              print(f'''x''')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            global if_pressed_else_
+            def if_pressed_else_():
+              print(f'''m''')
+            extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 
@@ -3280,20 +3312,20 @@ class TestsLevel12(HedyTester):
                 print 'm'""")
 
         expected = textwrap.dedent("""\
-             global_scope_ = dict()
-             global_scope_["animals"] = Value([Value('bee'), Value('seahorse'), Value('platypus')])
-             if Value('horse') not in (global_scope_.get("animals") or animals).data:
-               print(f'''correct''')
-             if_pressed_mapping = {"else": "if_pressed_default_else"}
-             if_pressed_mapping['x'] = 'if_pressed_x_'
-             global if_pressed_x_
-             def if_pressed_x_():
-               print(f'''x''')
-             if_pressed_mapping['else'] = 'if_pressed_else_'
-             global if_pressed_else_
-             def if_pressed_else_():
-               print(f'''m''')
-             extensions.if_pressed(if_pressed_mapping)""")
+            global_scope_ = dict()
+            global_scope_["animals"] = Value([Value('bee'), Value('seahorse'), Value('platypus')])
+            if Value('horse') not in (global_scope_.get("animals") or animals).data:
+              print(f'''correct''')
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            global if_pressed_x_
+            def if_pressed_x_():
+              print(f'''x''')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            global if_pressed_else_
+            def if_pressed_else_():
+              print(f'''m''')
+            extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 
@@ -3309,21 +3341,21 @@ class TestsLevel12(HedyTester):
                 print 'm'""")
 
         expected = textwrap.dedent("""\
-             global_scope_ = dict()
-             global_scope_["animals"] = Value([Value('bee'), Value('seahorse'), Value('platypus')])
-             global_scope_["animal"] = Value('horse')
-             if (global_scope_.get("animal") or animal) not in (global_scope_.get("animals") or animals).data:
-               print(f'''correct''')
-             if_pressed_mapping = {"else": "if_pressed_default_else"}
-             if_pressed_mapping['x'] = 'if_pressed_x_'
-             global if_pressed_x_
-             def if_pressed_x_():
-               print(f'''x''')
-             if_pressed_mapping['else'] = 'if_pressed_else_'
-             global if_pressed_else_
-             def if_pressed_else_():
-               print(f'''m''')
-             extensions.if_pressed(if_pressed_mapping)""")
+            global_scope_ = dict()
+            global_scope_["animals"] = Value([Value('bee'), Value('seahorse'), Value('platypus')])
+            global_scope_["animal"] = Value('horse')
+            if (global_scope_.get("animal") or animal) not in (global_scope_.get("animals") or animals).data:
+              print(f'''correct''')
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            global if_pressed_x_
+            def if_pressed_x_():
+              print(f'''x''')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            global if_pressed_else_
+            def if_pressed_else_():
+              print(f'''m''')
+            extensions.if_pressed(if_pressed_mapping)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=15)
 
@@ -3414,6 +3446,39 @@ class TestsLevel12(HedyTester):
               pass''')
 
         self.multi_level_tester(code=code, expected=expected, max_level=15)
+
+    def test_if_pressed_with_ask(self):
+        code = textwrap.dedent("""\
+            a is ask 'question'
+            if x is pressed
+                print 'x'
+            else
+                print 'y'""")
+
+        expected = textwrap.dedent('''\
+            global_scope_ = dict()
+            global_scope_["a"] = input(f\'''question\''')
+            __ns = get_num_sys(global_scope_.get("a") or a)
+            try:
+              global_scope_["a"] = int(global_scope_.get("a") or a)
+            except ValueError:
+              try:
+                global_scope_["a"] = float(global_scope_.get("a") or a)
+              except ValueError:
+                pass
+            global_scope_["a"] = Value(global_scope_.get("a") or a, num_sys=__ns)
+            if_pressed_mapping = {"else": "if_pressed_default_else"}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            global if_pressed_x_
+            def if_pressed_x_():
+              print(f\'''x\''')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            global if_pressed_else_
+            def if_pressed_else_():
+              print(f\'''y\''')
+            extensions.if_pressed(if_pressed_mapping)''')
+
+        self.multi_level_tester(code=code, expected=expected, max_level=14, unused_allowed=True)
 
     def test_if_pressed_with_calc(self):
         code = textwrap.dedent("""\

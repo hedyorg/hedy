@@ -1968,10 +1968,10 @@ class ConvertToPython_1(ConvertToPython):
 
         def build_regex_for_var(var):
             # list access could be indexing or random choice
-            list_access_with_int_cast = fr"(({var})+\[int\(({simple_var})\)-1\])"
-            list_access_without_cast = fr"(({var})+\[({simple_var})-1\])"
-            list_access_random = fr"(random\.choice\(({var})\))"
-            return f"{list_access_with_int_cast}|{list_access_without_cast}|{list_access_random}"
+            index = fr"(({var})+\[int\(({simple_var})\)-1\])"
+            index_pressed = fr"(({var})+\[int\(({var})\)-1\])"
+            random_access = fr"(random\.choice\(({var})\))"
+            return f"{index}|{random_access}|{index_pressed}"
 
         var_regex = scoped_var if self.has_pressed else simple_var
         list_regex = build_regex_for_var(var_regex)
@@ -2235,6 +2235,12 @@ class ConvertToPython_4(ConvertToPython_3):
 @hedy_transpiler(level=5)
 @source_map_transformer(source_map)
 class ConvertToPython_5(ConvertToPython_4):
+    def ask(self, meta, args):
+        var = self.scoped_var_assign(escape_var(self.unpack(args[0])), meta.line)
+        argument_string = self.process_print_ask_args(args[1:], meta)
+        ex = self.make_index_error_check_if_list(args)
+        return f"{ex}{var} = input(f'{argument_string}'){self.add_debug_breakpoint()}"
+
     def assign_list(self, meta, args):
         parameter = self.scoped_var_assign(self.unpack(args[0]), meta.line)
         values = [f"'{process_characters_needing_escape(str(self.unpack(a)))}'" for a in args[1:]]
@@ -2251,7 +2257,9 @@ class ConvertToPython_5(ConvertToPython_4):
         if index == 'random':
             return f'random.choice({list_name})'
         else:
-            list_name = f'({list_name})'if self.has_pressed else list_name
+            if self.is_variable(index, meta.line):
+                index = self.scoped_var_access(index, meta.line)
+            list_name = f'({list_name})' if self.has_pressed else list_name
             return f'{list_name}[int({index})-1]'
 
     def add(self, meta, args):
@@ -2403,13 +2411,15 @@ class ConvertToPython_6(ConvertToPython_5):
         return index_exception + textwrap.dedent(f"time.sleep(int_with_error({value}, {ex}))")
 
     def ask(self, meta, args):
-        var = args[0]
+        var = escape_var(self.unpack(args[0]))
+        var_assign = self.scoped_var_assign(var, meta.line)
+        var_access = self.scoped_var_access(var, meta.line)
         argument_string = self.process_print_ask_args(args[1:], meta)
         ex = self.make_index_error_check_if_list(args)
         return ex + textwrap.dedent(f"""\
-            {var} = input(f'{argument_string}'){self.add_debug_breakpoint()}
-            __ns = get_num_sys({var})
-            {var} = Value({var}, num_sys=__ns)""")
+            {var_assign} = input(f'{argument_string}'){self.add_debug_breakpoint()}
+            __ns = get_num_sys({var_access})
+            {var_assign} = Value({var_access}, num_sys=__ns)""")
 
     def play(self, meta, args):
         if not args:
@@ -2523,15 +2533,14 @@ class ConvertToPython_6(ConvertToPython_5):
         vars_to_check = [a for a in args if a != 'random']
         self.check_variable_usage_and_definition(vars_to_check, meta.line)
 
-        list_name = self.scoped_var_access(str(args[0]), meta.line, parentheses=True)
+        list_name = self.scoped_var_access(escape_var(self.unpack(args[0])), meta.line, parentheses=True)
         list_index = args[1]
         if str(list_index) == 'random':
             return f'random.choice({list_name}.data)'
 
+        value = escape_var(self.unpack(list_index))
         if self.is_variable_with_definition(list_index, meta.line):
-            value = f'{escape_var(self.unpack(list_index))}.data'
-        else:
-            value = self.unpack(list_index)
+            value = f'{self.scoped_var_access(value, meta.line, parentheses=True)}.data'
         return f'{list_name}.data[int({value})-1]'
 
     def add(self, meta, args):
@@ -2947,20 +2956,22 @@ class ConvertToPython_12(ConvertToPython_11):
         return exception + f"print(f'''{argument_string}''')" + self.add_debug_breakpoint()
 
     def ask(self, meta, args):
-        var = args[0]
+        var = escape_var(self.unpack(args[0]))
+        var_assign = self.scoped_var_assign(var, meta.line)
+        var_access = self.scoped_var_access(var, meta.line)
         argument_string = self.process_print_ask_args(args[1:], meta)
         exception = self.make_index_error_check_if_list(args)
         return exception + textwrap.dedent(f"""\
-            {var} = input(f'''{argument_string}'''){self.add_debug_breakpoint()}
-            __ns = get_num_sys({var})
+            {var_assign} = input(f'''{argument_string}'''){self.add_debug_breakpoint()}
+            __ns = get_num_sys({var_access})
             try:
-              {var} = int({var})
+              {var_assign} = int({var_access})
             except ValueError:
               try:
-                {var} = float({var})
+                {var_assign} = float({var_access})
               except ValueError:
                 pass
-            {var} = Value({var}, num_sys=__ns)""")  # no number? leave as string
+            {var_assign} = Value({var_access}, num_sys=__ns)""")  # no number? leave as string
 
     def process_print_ask_args(self, args, meta, var_to_escape=''):
         result = super().process_print_ask_args(args, meta)
@@ -2998,10 +3009,9 @@ class ConvertToPython_12(ConvertToPython_11):
         if str(list_index) == 'random':
             return f'random.choice({list_name}.data)'
 
+        value = self.unpack(list_index)
         if self.is_variable_with_definition(list_index, meta.line):
-            value = f'{escape_var(list_index)}.data'
-        else:
-            value = self.unpack(list_index)
+            value = f'{self.scoped_var_access(value, meta.line, parentheses=True)}.data'
         return f'{list_name}.data[int({value})-1]'
 
     def ifs(self, meta, args):
@@ -3211,10 +3221,13 @@ class ConvertToPython_14(ConvertToPython_13):
         return f"{arg0}{operator}{arg1}"
 
     def process_variable_for_comparisons(self, arg, meta):
-        if self.is_variable(arg, meta.line) or self.is_list_access(arg):
+        value = escape_var(self.unpack(arg))
+        if self.is_variable(arg, meta.line):
+            return f"{self.scoped_var_access(value, meta.line, parentheses=True)}.data"
+        elif self.is_list_access(arg):
             return f"{escape_var(arg)}.data"
         else:
-            return f'{self.unpack(arg)}'
+            return value
 
     def equality_check_dequals(self, meta, args):
         return self.equality_check(meta, args)
@@ -3251,25 +3264,27 @@ class ConvertToPython_15(ConvertToPython_14):
         return code + self.make_extension_call()
 
     def ask(self, meta, args):
-        var = args[0]
+        var = self.unpack(args[0])
+        var_assign = self.scoped_var_assign(var, meta.line)
+        var_access = self.scoped_var_access(var, meta.line)
         argument_string = self.process_print_ask_args(args[1:], meta)
         exception = self.make_index_error_check_if_list(args)
         boolean_keywords = self.get_boolean_system()
 
         return exception + textwrap.dedent(f"""\
-            {var} = input(f'''{argument_string}'''){self.add_debug_breakpoint()}
-            __ns = get_num_sys({var})
+            {var_assign} = input(f'''{argument_string}'''){self.add_debug_breakpoint()}
+            __ns = get_num_sys({var_access})
             __bs = None
             try:
-              {var} = int({var})
+              {var_assign} = int({var_access})
             except ValueError:
               try:
-                {var} = float({var})
+                {var_assign} = float({var_access})
               except ValueError:
-                __b, __bs = get_value_and_bool_sys({var}, {boolean_keywords})
+                __b, __bs = get_value_and_bool_sys({var_access}, {boolean_keywords})
                 if __b is not None:
-                  {var} = __b
-            {var} = Value({var}, num_sys=__ns, bool_sys=__bs)""")
+                  {var_assign} = __b
+            {var_assign} = Value({var_access}, num_sys=__ns, bool_sys=__bs)""")
 
     def get_boolean_system(self):
         """ Returns a list of localized boolean keywords and their respective boolean values in pairs.
