@@ -1,5 +1,5 @@
 <div id="hand_in_modal" data-modal="true" class="hidden fixed w-screen h-screen z-40 inset-0">
-  <div class="absolute bg-black w-full h-full opacity-75" onclick="hedyApp.closeContainingModal(this)"></div>
+  <div class="absolute bg-black dark:bg-[#2e3f5c] text-black w-full h-full opacity-75" onclick="hedyApp.closeContainingModal(this)"></div>
   <div class="absolute flex justify-center w-full h-full">
     <div class="relative w-full max-w-xl bg-white border-2 border-blue-400 rounded-lg p-8 shadow-xl h-min mt-24">
       <h2>{{_('hand_in_exercise')}}</h2>
@@ -7,13 +7,13 @@
       {% if username and current_user_is_in_class %}
 
       <div data-view="if-not-submitted">
-        <div>{{_('this_turns_in_assignment')}}</div>
+        <div class="text-black">{{_('this_turns_in_assignment')}}</div>
 
-        <div class="flex my-8 bg-yellow-200 border-yellow-500 border rounded p-4">
+        <div class="flex my-8 bg-yellow-200 border-yellow-500 border rounded p-4 text-black">
           <div>
             <span class="fa-regular fa-hand"></span>
           </div>
-          <div class="flex-1 mx-4">
+          <div class="flex-1 mx-4 text-black">
             {{_('make_sure_you_are_done')}}
           </div>
         </div>

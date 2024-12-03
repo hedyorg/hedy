@@ -49,7 +49,7 @@
                 </div>
             {% elif section['style'] == 'pane-with-image-right' %}
                 <div class="copy-container-wide px-4 md:px-16 flex flex-col items-center md:flex-row justify-between gap-6">
-                    <div class="column-pane shadow-md rounded-lg px-8 py-4 md:w-3/5">
+                    <div class="column-pane shadow-md dark:shadow-gray-900 rounded-lg px-8 py-4 md:w-3/5">
                         <h3>{{ section['title'] }}</h3>
                         <p>{{ section['text']|commonmark }}</p>
                     </div>
@@ -58,7 +58,7 @@
             {% elif section['style'] == 'columns' %}
                 <div class="copy-container columns px-4 md:px-16 flex flex-col md:flex-row justify-between gap-6">
                     {% for col in section['columns'] %}
-                    <div class="column-pane shadow-md rounded-lg px-8 py-4 flex-1">
+                    <div class="column-pane shadow-md dark:shadow-gray-900 rounded-lg px-8 py-4 flex-1">
                         <h3>{{ col['title'] }}</h3>
                         <p>{{ col['text']|commonmark }}</p>
                     </div>

@@ -144,7 +144,7 @@ strong {
 
 .stripe-colored h2, .stripe-colored a { @apply text-white; }
 .stripe-colored .column-pane a { @apply text-blue-700; }
-.stripe-colored .column-pane { @apply bg-white shadow-md rounded-lg; }
+.stripe-colored .column-pane { @apply bg-white shadow-md dark:shadow-gray-900 rounded-lg; }
 
 .heading-underline { @apply bg-pink-600 w-36 mx-auto h-1 my-8; }
 
@@ -517,7 +517,7 @@ code {
   text-shadow: 0 2px 4px rgba(0,0,0,0.10);
 }
 
-.text-shadow-md {
+.text-shadow-md dark:shadow-gray-900 {
   text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
 }
 
@@ -620,7 +620,7 @@ body[dir='rtl'] .right-hand-shadow {
 }
 
 .command_tab {
-  @apply border-[#fdb2c5];
+  @apply border-[#fdb2c5] dark:border-[#fdb2c5];
 }
 
 .active-bluebar-btn {
@@ -792,7 +792,7 @@ p.close-dialog {
 /* Profile page */
 
 .section-header {
-  @apply bg-blue-200 px-8 py-2 rounded-lg text-3xl cursor-pointer;
+  @apply bg-blue-200 px-8 py-2 rounded-lg text-3xl text-black cursor-pointer;
 }
 
 .profile-section-body-header {
@@ -800,7 +800,7 @@ p.close-dialog {
 }
 
 .profile-section-body {
-  @apply bg-white shadow-md rounded px-8 py-4 mx-auto w-full lg:w-3/4 hidden;
+  @apply bg-white shadow-md dark:shadow-gray-900 dark:shadow-black rounded px-8 py-4 mx-auto w-full lg:w-3/4 hidden;
 }
 
 .personal-input {

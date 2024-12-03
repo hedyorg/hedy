@@ -189,6 +189,9 @@ module.exports = {
        },
        red: {
         100: "#5a2c2c"
+       },
+       gray: {
+        400: "gray.600"
        }
       }
     }

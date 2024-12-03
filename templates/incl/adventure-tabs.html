@@ -37,14 +37,14 @@
         </div>
       </div>
       {# PANES #}
-      <div id="adventures_tab" data-cy="adventures_tab" class="w-full overflow-auto bg-white mb-5 shadow-md">
+      <div id="adventures_tab" data-cy="adventures_tab" class="w-full overflow-auto bg-white mb-5 shadow-md dark:shadow-gray-900 dark:shadow-black">
         {% for adventure in adventures %}
             <div
                 data-tabtarget="{{adventure.short_name}}" class="
                 {% if adventure.short_name != initial_tab %}hidden{% endif %}
                 turn-pre-into-ace show-copy-button p-4 text-adventure-copy"
                 >
-              <div class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
+              <div class="lg:flex lg:flex-row text-black {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
                     <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
                         {% if adventure.is_teacher_adventure %}{{ adventure.text|safe }}{% else %}{{ adventure.text|commonmark }}{% endif %}
                     </div>

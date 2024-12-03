@@ -9,7 +9,7 @@
 {% block regular_content %}
 <div class="w-full mx-auto flex flex-col items-center gap-4">
     {% if not request.args.get('teacher') %}
-        <div class="bg-white shadow-md rounded-lg rounded py-4 px-0 md:px-4 lg:px-8" id="role_selection">
+        <div class="bg-white shadow-md dark:shadow-gray-900 rounded-lg rounded py-4 px-0 md:px-4 lg:px-8" id="role_selection">
             <h2 class="my-0 text-center">{{_('signup_student_or_teacher')}}</h2>
             <div class="mt-4 mx-auto flex flex-wrap px-8 lg:px-0 lg:flex-nowrap justify-center gap-8">
                 <a data-cy="signup_student" class="w-full no-underline border-2 rounded-lg flex flex-col items-center bg-white text-center border-green-400 bg-gray-200 hover:bg-green-400 cursor-pointer hover:text-white p-4 px-8" href="?teacher=false">
@@ -28,7 +28,7 @@
             </div>
         </div>
     {% else %}
-        <div class="bg-white shadow-md mx-auto rounded-lg rounded py-4 px-0 md:px-4 lg:px-8">
+        <div class="bg-white shadow-md dark:shadow-gray-900 mx-auto rounded-lg rounded py-4 px-0 md:px-4 lg:px-8">
             <form id="signup" class="flex flex-col gap-2">
                 <h2 class="my-0 text-center">{{ _('create_teacher_account') if is_teacher else _('create_student_account') }}</h2>
                 {% if is_teacher %}

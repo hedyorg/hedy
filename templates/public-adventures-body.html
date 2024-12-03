@@ -1,6 +1,6 @@
 <!-- <div id="public-adventures-body"> -->
     {% if adventures|length == 0 %}
-        <div class="grid p-5 text-center bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2">
+        <div class="grid p-5 text-center bg-white shadow-md dark:shadow-gray-900 rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2">
             {{_('no_adventures_yet')}}
             <button class="green-btn mt-4" id="create_adventure_button"
                 onclick='hedyApp.create_adventure({{_('adventure_prompt')|default(None)|tojson}})'

@@ -12,7 +12,7 @@
       <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
       <!-- Status warning -->
       <div data-view="if-submitted"
-        class="hidden flex-0 z-20 mt-0 bg-yellow-100 border-b-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md">
+        class="hidden flex-0 z-20 mt-0 bg-yellow-100 border-b-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md dark:shadow-gray-900">
         {{_('submitted_header')}}
       </div>
 
@@ -30,7 +30,7 @@
       </div>
       <!-- errorbox -->
       <div id="errorbox" data-cy="errorbox"
-        class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
+        class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md dark:shadow-gray-900" role="alert"
         style="display: none;">
         <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
         <div class="flex">
@@ -47,7 +47,7 @@
       </div>
       <!-- warningbox -->
       <div id="warningbox"
-        class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
+        class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md dark:shadow-gray-900"
         role="alert" style="display: none;">
         <p data-cy="close_warning" class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
         <div class="flex">
@@ -66,7 +66,7 @@
       </div>
       <!-- okbox -->
       <div id="okbox" data-cy="okbox"
-        class="flex-0 z-20 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
+        class="flex-0 z-20 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md dark:shadow-gray-900"
         role="alert" style="display: none;">
         <div class="flex">
           <div class="flex w-full justify-between items-center">

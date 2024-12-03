@@ -178,17 +178,17 @@
       <div id="tutorial_mask" class="hidden fixed bg-black z-30 w-full h-full opacity-50"></div>
     {% endif %}
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
-    <div id="modal_mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
-    <div id="modal_content" data-cy="modal_content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
+    <div id="modal_mask" class="hidden fixed bg-black dark:bg-[#000000] z-50 w-full h-full opacity-75"></div>
+    <div id="modal_content" data-cy="modal_content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 dark:bg-[#2e3f5c] border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
        <div id="modal_confirm" data-cy="modal_confirm" class="hidden">
-          <div id="modal_confirm_text" data-cy="modal_confirm_text" class="text-white mb-8 text-xl"></div>
+          <div id="modal_confirm_text" data-cy="modal_confirm_text" class="text-white dark:text-[#FFFFFF] mb-8 text-xl"></div>
           <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
             <button id="modal_yes_button" data-cy="modal_yes_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
             <button id="modal_no_button" data-cy="modal_no_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
           </div>
        </div>
        <div id="modal_prompt" class="hidden">
-          <div id="modal_prompt_text" class="text-white mb-8 text-xl"></div>
+          <div id="modal_prompt_text" class="text-white dark:text-[#FFFFFF] mb-8 text-xl"></div>
           <div class="xm-auto">
             <input id="modal_prompt_input" data-cy="modal_prompt_input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <div class="mt-4 flex flex-row justify-center">
@@ -198,7 +198,7 @@
           </div>
        </div>
         <div id="modal_feedback" data-cy="modal_feedback" class="hidden">                                                                                                                                                            
-            <div id="modal_feedback_message" class="text-white mb-4 text-xl"></div>                                                                                                                            
+            <div id="modal_feedback_message" class="text-white dark:text-[#FFFFFF] mb-4 text-xl"></div>                                                                                                                            
               <div class="mt-4 flex w-full justify-center">                                                                                                                                    
                   <form                                                                                                                                                                                   
                       hx-post="/feedback" 
@@ -308,7 +308,7 @@
     {% if is_teacher or is_second_teacher %}
         <div data-cy="feedback_button"
             _="on click call hedyApp.modal.feedback('{{_('feedback_modal_message')}}')"
-              class="fixed bottom-6 right-6 rounded-full p-2 cursor-pointer w-14 h-14 bg-white shadow-md hover:shadow-xl hover:scale-110 transition-all duration-200 ease-in-out flex items-center justify-center text-3xl text-black">
+              class="fixed bottom-6 right-6 rounded-full p-2 cursor-pointer w-14 h-14 bg-white shadow-md dark:shadow-gray-900 dark:shadow-black hover:shadow-xl hover:scale-110 transition-all duration-200 ease-in-out flex items-center justify-center text-3xl text-black">
                 <i class="fa-regular fa-message"></i>
         </div>
     {% endif %}

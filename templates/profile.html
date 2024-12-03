@@ -49,7 +49,7 @@
                  </div>
                  <div class="flex flex-col">
                      <h3 class="px-2 pt-0 pb-2 my-0 font-semibold">{{_('personal_text')}}</h3>
-                     <textarea class="block h-32 px-2 py-1 border border-gray-400 rounded-lg" data-cy="personal_text" name="personal_text" required maxlength="200" minlength="5" placeholder="{{_('your_personal_text')}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
+                     <textarea class="block h-32 px-2 py-1 border border-gray-400 rounded-lg bg-white text-black" data-cy="personal_text" name="personal_text" required maxlength="200" minlength="5" placeholder="{{_('your_personal_text')}}">{% if public_settings.personal_text %}{{ public_settings.personal_text }}{% endif %}</textarea>
                  </div>
                  {% if programs %}
                      <div>
@@ -94,7 +94,7 @@
         <form id="profile">
             <h2 class="profile-section-body-header">{{_('settings')}}</h2>
             <div class="flex flex-row items-center mb-2">
-                <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-2">{{user_data['username']}}</strong>
+                <label for="username" class="inline-block w-72">{{_('username')}}</label><strong id="username" class="inline-block w-1/2 px-2 text-black">{{user_data['username']}}</strong>
             </div>
             <div class="flex flex-row items-center mb-2">
                 <label for="email" class="inline-block w-72">{{_('email')}}</label><input id="email" name="email" type="email" class="personal-input" value="{{user_data['email']}}" {% if user_data['email'] %}required{% endif %}>
