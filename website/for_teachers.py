@@ -102,8 +102,11 @@ class ForTeachersModule(WebsiteModule):
                 exercise['icon'] = '💻'
                 exercise['text'] = gettext('workbook_output_question_text')
 
-                a = len(exercise['answer'].split('\n'))
-                exercise['lines'] = [line for x in range(a)]
+                if 'answer' in exercise.keys():
+                    a = len(exercise['answer'].split('\n'))
+                    exercise['lines'] = [line for x in range(a)]
+                else:
+                    pass
 
             if exercise['type'] == 'circle':
                 exercise['title'] = gettext('workbook_circle_question_title')
@@ -116,9 +119,15 @@ class ForTeachersModule(WebsiteModule):
                 exercise['icon'] = '🧑‍💻'
                 exercise['text'] = gettext('workbook_input_question_text')
 
-                exercise['lines'] = [line for x in exercise['answer'].split('\n')]
+                if 'answer' in exercise.keys():
+                    exercise['lines'] = [line for x in exercise['answer'].split('\n')]
+                else:
+                    pass
 
-                exercise['output'] = [x for x in exercise['output'].split('\n')]
+                if 'output' in exercise.keys():
+                    exercise['output'] = [x for x in exercise['output'].split('\n')]
+                else:
+                    pass
 
             elif exercise['type'] == 'MC-code':
                 exercise['title'] = gettext('workbook_multiple_choice_question_title')
@@ -126,19 +135,22 @@ class ForTeachersModule(WebsiteModule):
                 exercise['text'] = gettext('workbook_multiple_choice_question_text')
                 # let op! op een dag willen we misschien wel ander soorten MC, dan moet
                 # deze tekst anders
-                exercise['options'] = '〇  ' + '<br>  〇  '.join(exercise['options'])
+                if 'options' in exercise.keys():
+                    exercise['options'] = '〇  ' + '  〇  '.join(exercise['options'])
+                else:
+                    exercise['options'] = 'NO OPTIONS GIVEN!'
 
             elif exercise['type'] == 'define':
                 exercise['title'] = gettext('workbook_define_question_title')  # ''
                 exercise['icon'] = '📖'
                 word = exercise['word']
                 exercise['text'] = safe_format(gettext('workbook_define_question_text'), word=word)
-                exercise['lines'] = [line for x in range(exercise['lines'])]
+                exercise['lines'] = [line for x in range(int(exercise['lines']))]
 
             elif exercise['type'] == 'question':
                 exercise['title'] = gettext('workbook_open_question_title')  # ''
                 exercise['icon'] = '✍️'
-                exercise['lines'] = [line for x in range(exercise['lines'])]
+                exercise['lines'] = [line for x in range(int(exercise['lines']))]
 
         return render_template("workbooks.html",
                                current_page="teacher-manual",

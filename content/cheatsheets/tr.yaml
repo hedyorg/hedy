@@ -101,7 +101,7 @@
     explanation: '`{in}` ile öğeleri kontrol edin.'
     demo_code: |-
         güzel_renkler {is} yeşil, sarı
-        renk {is} {ask} 'En sevdiğin renk nedir? ({is})'
+        renk {is} {ask} 'En sevdiğin renk nedir?'
         {if} renk {in} güzel_renkler {print} 'Güzel!' {else} {print} 'eh işte'
 -   name: '{pressed}'
     explanation: '`{pressed}` ile klavyede belirli bir tuşun basılı olup olmadığını kontrol edin.'
@@ -316,7 +316,7 @@
         ilkmeyve = meyve[1]
         {print} ilkmeyve
 -   name: Listeden rastgele bir öğe alın
-    explanation: Bir listeden rastgele bir öğe almak için [rastgele] kullanırız, bu nedenle meyve[rastgele] listeden rastgele bir meyve al anlamına gelir!
+    explanation: Bir listeden rastgele bir öğe almak için [{random}] kullanırız, bu nedenle meyve[{random}] listeden rastgele bir meyve al anlamına gelir!
     demo_code: |-
         meyve = ['muz', 'elma', 'kiraz']
         rastgele_meyve = meyve[{random}]

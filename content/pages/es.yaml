@@ -1374,10 +1374,10 @@ workbooks:
         -   type: texto
             contents: "#### Ejercicio5: Escribe el código\nEcha un buen vistazo al resultado y escribe un código correspondiente a él.\n**Asegúrate que tu código contiene al menos una opción aleatoria, ¡así no utilizaras solo imprimir!**"
         -   type: entrada de datos
-            output: "¡Bienvenido a la noche de bingo!<br>\nLos 3 números de la suerte son:<br>\n5 y 3 y 10"
+            output: "¡Bienvenido a la noche de bingo!\nLos 3 números de la suerte son:\n5 y 3 y 10"
             answer: "numeros es 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nimprimir ¡Bienvenido a la noche de bingo!\nimprimir Los 3 números de la suerte son:\nimprimir numeros en aleatorio y imprimir numeros en aleatorio y imprimir numeros en aleatorio"
         -   type: entrada de datos
-            output: "Esta noche vamos a ver una película.<br>\nElegimos: Al revés"
+            output: "Esta noche vamos a ver una película.\nElegimos: Al revés"
             answer: "peliculas es Los vengadores, Barbie, Al revés\nimprimir Esta noche vamos a ver una película.\nimprimir Elegimos: peliculas en aleatorio"
         -   type: texto
             contents: "#### Ejercicio 6: Vocabulario de programación\n¡Hemos vuelto a aprender nuevas palabras de programación! Explícalas con tus propias palabras."
@@ -1741,3 +1741,175 @@ workbooks:
             type: pregunta
         intro: "## Matemáticas\nAl final de esta lección, puedes:\n* utilizar las matemáticas en Hedy"
         level: '6'
+    -   exercises:
+        -   code: repetir 5 veces imprimir '¡Baby shark!'
+            contents: "### Repetición\nA veces quieres repetir una línea de código varias veces, por ejemplo en una canción o una historia."
+            type: texto
+        -   type: texto
+            contents: "#### Ejercicio 1: Predecir el resultado\n¿Cuál será el resultado de estos programas?"
+        -   lines: '3'
+            answer: "¡Baby shark!\n¡Baby shark!\n¡Baby shark!"
+            code: repetir 3 veces imprimir '¡Baby shark!'
+            type: resultado
+        -   type: resultado
+            code: repetir 1 vez imprimir '¡Hola a todos!'
+            answer: ¡Hola a todos!
+            lines: '1'
+        -   lines: '4'
+            code: "a es 4\nrepetir una vez imprimir 'Hola a todos'"
+            type: resultado
+            answer: "¡Hola a todos!\n¡Hola a todos!\n¡Hola a todos!\n¡Hola a todos!"
+        -   type: texto
+            contents: "### Ejercicio 2: Entrada\nEcha un vistazo al resultado. Escribe un programa que pueda pertenecer a este resultado.\n\nTen en cuenta: Pueden ser correctas varias respuestas. Elige la que quieras, mientras sea correcta.\nRellena todas las líneasFill up all the lines, ¡así que fíjate bien en la cantidad de líneas!\n"
+        -   type: entrada
+            answer: "imprimir '¡Hola a todos!'\nrepetir 2 veces imprimir 'Esto es una línea.'"
+            output: "¡Hola a todos!\nEsto es una línea.\nEsto es una línea."
+            lines: '2'
+        -   type: entrada
+            output: "Esta es la línea 1\nEsta es la línea 2\nEsta es la línea 3"
+            lines: '3'
+            answer: "imprimir 'Esta es la línea 1'\nimprimir 'Esta es la línea 2'\nimprimir 'Esta es la línea 3'"
+        -   contents: "### Ejercicio 3: Correcto o incorrecto\nPresta mucha atención a los programas y decide si provocarán un mensaje de error o no."
+            type: texto
+        -   answer: Incorrecto, falta imprimir
+            type: Código MC
+            code: "imprimir 'El príncipe seguía gritando pidiendo ayuda'\nrepetir 3 veces '¡Ayuda!'"
+            options:
+            -   Correcto
+            -   Incorrecto
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            type: Código MC
+            answer: Correcto
+            code: "avanzar 100\nrepetir 3 veces girar 90"
+        -   type: Código MC
+            options:
+            -   Correcto
+            -   Incorrecto
+            answer: Incorrecto, falta en aleatorio
+            code: "gente = mamá, papá, Emma, Sophie\nrepetir 7 veces imprimir 'La vajilla será lavada por ' gente"
+        -   options:
+            -   Correcto
+            -   Incorrecto
+            answer: Correcto
+            code: "opciones = 1, 2, 3, 4, 5, 6\nrepetir 5 veces imprimir 'Lanzaste: ' opciones en aleatorio"
+            type: Código MC
+        -   type: texto
+            contents: "#### Ejercicio 6: Vocabulario de programación\n¡Hemos vuelto a aprender una nueva palabra de programación! Explícala con tus propias palabras."
+        -   lines: '1'
+            answer: repetir una línea varias veces
+            type: definir
+            word: repetir
+        -   contents: '#### ¿Qué te ha parecido?'
+            type: texto
+        -   type: pregunta
+            text: ¿Qué ejercicio te ha gustado más de este nivel?
+            lines: '1'
+        -   lines: '5'
+            type: pregunta
+            text: ¿Qué te ha gustado?
+        -   text: ¿Qué ejercicio te ha gustado menos de este nivel?
+            type: pregunta
+            lines: '1'
+        -   lines: '5'
+            type: pregunta
+            text: ¿Qué no te ha gustado?
+        level: '7'
+        intro: "## ¡Repetir!\nAl final de esta lección, podrás:\n* ejecutar una línea de código varias veces"
+    -   exercises:
+        -   type: texto
+            code: "repetir 5 veces\n    imprimir 'Baby shark!'"
+            contents: "### Repetición\nTal vez te hayas dado cuenta de que antes sólo podías repetir 1 línea de código, muy simple.\nA menudo se desea repetir varias líneas, para hacer un programa más complejo.\nEn Hedy, y también en Python, ¡esto se hace con la indentación!\nLa indentación significa empezar una ñínea con un par de espacios."
+        -   type: texto
+            contents: "#### Ejercicio 1: ¿Qué líneas se repetirán?\n\nConsejo: Presta mucha atención a la indentación (empezar una línea con espacios)."
+        -   type: círculo
+            goal: indentación
+            code: "repetir 3 veces\n    imprimir 'Baby shark!'\n    imprimir 'Tudu tudu tudu!'                  \nimprimir 'Baby shark!'"
+            answer: Líneas 2 y 3
+        -   type: círculo
+            goal: indentación
+            code: "imprimir '¡Hola!'\nrepetir 2 veces\n    imprimir 'Sí, hola a todos'"
+            answer: Línea 3
+        -   type: círculo
+            goal: indentación
+            code: "nombre es preguntar '¿Cómo te llamas?'\nis name es Hedy\n    imprimir 'Sí'\nsino\n    imprimir 'No'"
+            answer: ¡Sin líneas! Hay indentación debido a el si y sino, pero no se repetirán líneas.
+        -   type: texto
+            contents: "#### Ejercicio 2: Predecir el resultado\n¿Cuál será el resultado de estos programas?"
+        -   code: "imprimir '¡Hola!'\nrepetir 1 vez \n    imprimir ':)'"
+            type: resultado
+            answer: "¡Hola!\n:)"
+        -   type: resultado
+            code: "imprimir '¡Hola!'\nrepetir 5 veces \n    imprimir ':('\nimprimir '¡Hecho!'"
+            answer: "¡Hola!\n:(\n:(\n:(\n:(\n:(\n¡Hecho!"
+        -   type: texto
+            contents: "## Si y sino\nAl utilizar `si` y `sino` tembién necesitas la indentación. De esta manera puedes ejecutar varias líneas cuando una condición es verdadera o falsa.\n\n### Ejercicio 3: Predecir la salida\n\nPredice el resultado de estos programas.\n"
+        -   code: "nombre es preguntas '¿Cómo te llamas?'\nsi nombre es Hedy\n    imprimir 'Sí'\nsino\n    imprimir 'No'"
+            type: resultado
+            answer: No
+            lines: '1'
+        -   code: "números es 1, 2, 3, 4, 5, 6, 7\nopción es números en aleatorio\nsi opción es cinco\n    imprimir '¡Hurra!'\n    imprimir '¡Hurra!'\nsino\n    imprimir '¡Oh no!'"
+            answer: ¡Oh no!
+            lines: '2'
+            type: resultado
+        -   type: resultado
+            code: "dados = 1, 2, 3, 4, 5, 6\nrepetir 3 veces \n    imprimir 'Sacaste: ' dados en aleatorio\n    imprimir 'Juego terminado'"
+            answer: "Sacaste: < 1, 2, 3, 4, 5, ó 6>\nJuego terminado\nSacaste: < 1, 2, 3, 4, 5, ó 6>\nJuego terminado\nSacaste: < 1, 2, 3, 4, 5, ó 6>\nJuego terminado"
+            lines: '6'
+        -   contents: "### Ejercicio 4: ¿Correcto o incorrecto?\nPresta mucha atención a los programas y decide si provocarán un mensaje de error o no."
+            type: texto
+        -   code: "nombre es Hermans\nsi nombre es Senkal\n  imprimir '¡Hurra!'\nsino\nimprimir 'Mala suerte'"
+            answer: Incorrecto, no hay indentación después de sino
+            options:
+            -   Correcto
+            -   Incorrecto
+            type: Código MC
+        -   type: Código MC
+            options:
+            -   Correcto
+            -   Incorrecto
+            code: "número es 10\n  si número es 5\nimprimir '¡Hurra!'\n  sino\nimprimir 'Mala suerte'"
+            answer: Incorrecto, la indentación se usó al revés.
+        -   type: Código MC
+            code: "gente = mamá, papá, Emma, Sophie\nrepetir 7 veces imprimir 'La vajilla será lavada por ' gente en aleatorio"
+            answer: Incorrecto, ya no puedes utilizar el comando repetir solo en una línea.
+            options:
+            -   Correcto
+            -   Incorrecto
+        -   type: Código MC
+            answer: Bien
+            options:
+            -   Correcto
+            -   Incorrecto
+            code: "día es preguntar '¿Qué día es?'\nsi día es viernes\n    imprimir '¡Sí!'"
+        -   contents: "#### Ejercicio 5: Escribir el código\nEcha un buen vistazo al resultado y escribe un código correspondiente. Utiliza `repetir` si es posible.\n\n¡Cuidado con la cantidad de líneas que necesita tu código!"
+            type: texto
+        -   answer: "repetir 4 veces\n    imprimir '¡Yuju!'"
+            type: entrada
+            output: "¡Yuju!\n¡Yuju!\n¡Yuju!\n¡Yuju!"
+        -   type: entrada
+            answer: "repetir 2 veces\n    imprimir '¿Estás durmiendo?'\nrepetir 2 veces\n    imprimir 'Hermano John'\nrepetir 2 veces\n    imprimir '¡Suenan las campanas de la mañana!'\nrepetir 2 veces\n    imprimir '¡Ding Dang Dong!'"
+            output: "¿Estás durmiendo?\n¿Estás durmiendo?\nHermano John\nHermano John\n¡Suenan las campanas de la mañana!\n¡Suenan las campanas de la mañana!\nDing Dang Dong\nDing Dang Dong"
+        -   type: texto
+            contents: "#### Ejercicio 6: Vocabulario de programación\nHemos vuelto a aprender un nuevo término de programación: ¡indentación! Explícalo con tus propias palabras."
+        -   type: definir
+            word: ¿Cómo creas una indentación?
+            answer: Comenzando una línea con varios espacios
+            lines: '1'
+        -   type: texto
+            contents: '#### ¿Qué te ha parecido?'
+        -   type: pregunta
+            text: ¿Qué ejercicio te ha gustado más de este nivel?
+            lines: '1'
+        -   type: pregunta
+            text: ¿Qué te ha gustado?
+            lines: '5'
+        -   type: pregunta
+            text: ¿Qué ejercicio te ha gustado menos de este nivel?
+            lines: '1'
+        -   lines: '5'
+            type: pregunta
+            text: ¿Qué no te ha gustado?
+        level: '8'
+        intro: "## ¡Repetir!\nAl final de esta lección, serás capaz de:\n* repetir varias líneas de código"

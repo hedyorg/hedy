@@ -1,10 +1,11 @@
 import {goToHedyPage} from "../tools/navigation/nav";
+import { codeMirrorContent } from "../tools/programs/program";
 
 describe('Is able to use try pre formatted code', () => {
     it('The cheatsheet code is added to the end of the editor', () => {
       goToHedyPage();
-      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').clear()
-      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').type('print hello world')
+      codeMirrorContent().clear()
+      codeMirrorContent().type('print hello world')
       
       cy.get('#dropdown_cheatsheet_button').click();
       cy.get('#cheatsheet_dropdown').should('be.visible');

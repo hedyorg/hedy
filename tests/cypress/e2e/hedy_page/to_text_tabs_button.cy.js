@@ -1,4 +1,5 @@
 import {goToHedyPage} from "../tools/navigation/nav";
+import { codeMirrorContent } from "../tools/programs/program";
 
 describe('Navigating through the tabs with the buttons', () => {
     it('should be able to go to the next and previous tab', () => {
@@ -12,7 +13,7 @@ describe('Navigating through the tabs with the buttons', () => {
       // Test when code is changed
       goToHedyPage();
       cy.wait(500)
-      cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
+      codeMirrorContent().click();
       cy.focused().type('hello');
       cy.get('.next-tab').click();
       cy.wait(500)

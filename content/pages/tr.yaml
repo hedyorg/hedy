@@ -51,7 +51,8 @@ join-sections:
         Hedy, öğretmenlerin sınıfta programlama dersleri vermelerini desteklemek için tasarlanmıştır. Bir sınıf oluşturma, onu özelleştirme ve öğrencilerinizin neler yaptığını görme seçeneği gibi belirli öğretmen özelliklerine sahibiz.
         Hedy'yi beğendiyseniz, öğretmenlerin başlamasına yardımcı olmak için tanıdığınız okullara ulaşabilirsiniz! <a href="https://discord.gg/8yY7dEme9r" target="_blank">Discord</a> aracılığı ile okul veya öğretmen bulmanıza yardımcı olabiliriz.
 learn-more-sections:
--   {}
+-   text: "Hedy, Hedy Vakfı (Stichting Hedy) tarafından desteklenmektedir. Sportmanstaat 8, 2341 JG Oegstgeest, Hollanda Ticaret Odası numarası 94013985.\n\nVakfın yönetim kurulu şu kişilerden oluşmaktadır:\n\n *Felienne Hermans**, başkan\n *Eelko Huizing**, mali işler\n *Renée Merbis**, sekreter\n\nStichting Hedy yönetim kurulu, görevleri için herhangi bir maddi karşılık almamaktadır. "
+    title: Hedy kuruluşu
 -   title: Derin bir dalış!
     text: |-
         Hedy'nin felsefesi ve tasarımı hakkında daha fazla bilgi edinmek ister misiniz? Felienne'in 2022'de StrangeLoop Konferansında yaptığı bu konuşmaya göz atın:
@@ -60,6 +61,7 @@ learn-more-sections:
 -   title: Haberlerde Hedy
     text: |-
         2020'nin başlarında yayınlandığımızdan bu yana bazı web siteleri ve gazeteler Hedy hakkında yazdı. Burada bir liste tutuyoruz:
+        * [Java Magazine Nisan 2023](images/Hedy_Javamagazine2023.pdf)
         * [Tech Optimism - A Solution to the IT Shortage (Hollandaca), Ağustos 2022](https://pom.show/2022/08/12/een-oplossing-voor-het-it-tekort/)
         * [Codeweek Podcast, Temmuz 2022](https://codeweek.eu/podcast/26)
         * [Heise.de (Almanca), Ocak 2022](https://www.heise.de/news/Hedy-die-mitwachsende-Programmiersprache-6336264.html)
@@ -81,7 +83,7 @@ learn-more-sections:
         * [AG Connect (Hollandaca), Nisan 2020](https://www.agconnect.nl/artikel/stapsgewijs-python-leren-programmeren-met-nieuwe-taal-hedy)
 start-sections:
 -   title: Hedy ile çalışmaya başlamak
-    text: "*Öğretmen hesapları, slaytlar vb. hakkında bir kaç şey*"
+    text: "Hedy'e hoş geldiniz, Hedy ile başlamanıza yardımcı olmaktan mutluluk duyuyoruz.\n\n[Öğretmen Kılavuzumuz](https://www.hedy.org/for-teachers/manual), tüm özelliklerin detaylı bir özeti bulunmaktadır. Bu sayfa ise size neyin ne olduğunu bilmeniz için kısa bir genel bakış sunmaktadır.\n\nBilmeniz gereken birkaç önemli nokta:\n- Hedy, çocukların programlama sınıfını yönetmeye yardımcı olmak için tasarlanmış bir araçtır! Kendi sınıflarınızı, ders planlarınızı oluşturabilir ve çocukların nasıl ilerlediğini takip edebilirsiniz.\n- Başlangıçta çok fazla programlama bilmenize gerek yok, Hedy sizin için de adım adım çalışır!\n- Hedy'yi kendi ana dilinizde kullanabilirsiniz çünkü birçok dile çevrilmiştir!\n- Her çocuk program yapabilir! Hedy, özellikle görme problemi olan çocuklar için faydalıdır çünkü fareye ihtiyaç duymadan materyalleri size sesli olarak okuyabilir.\n- Size yardımcı olmak için buradayız, bizi örneğin [Discord](https://discord.gg/8yY7dEme9r) üzerinden bulabilir veya [bize e-posta gönderebilirsiniz](mailto:hello@hedy.org)."
 -   title: Diğer öğretmenler Hedy hakkında ne diyor
     text: |-
         Bir süre önce birkaç kısa Hedy öğretmen anketi düzenledik.
@@ -196,7 +198,7 @@ teacher-guide:
         text: |-
             Ayrıca, sınıfınızı özelleştirebilir ve onlar için hangi maceraların kullanılabilir olacağını seçebilirsiniz. Bu şekilde öğrencileriniz maceraların ve seviyelerin çokluğundan bunalmayacak ve özellikle pratik yapmalarını istediğiniz maceralara odaklanabilecekler.
             This way your students won't be overwhelmed by the amount of adventures and levels, and they can specifically focus on the adventures you'd like them to practice with.
-            Click on your class on the for teachers page and choose 'customize class'. On this page you can select levels, set opening dates, unlock level thresholds and more.
+            Öğretmenler için sayfasında sınıfınıza tıklayın 'sınıfı özelleştir'i seçin. Bu sayfada seviyeleri seçebilir, başlangıç tarihlerini ayarlayabilir, seviye barajlarını açabilir ve çok daha fazlasını yapabilirsiniz.
 
             **Select and order adventures**
             <img src="https://github.com/hedyorg/hedy/assets/80678586/df38cbb2-468e-4317-ac67-92eaf4212adc" width="1000">
@@ -210,22 +212,20 @@ teacher-guide:
             With this feature you can set opening dates for the levels. This way you can make a lesson plan before your course begins and not worry about opening new levels each week. In the image above the first level is opened directly, the second will open the 23th of september, and the 3rd level the week after. The other levels are closed.
             Don't want to set opening dates? No problem, just leave this section blank.
 
-            **Unlock level thresholds**
-            <img src="https://github.com/hedyorg/hedy/assets/80678586/99a34dab-f112-459e-bfd1-07618be4715a" width = "1000">
-            This featue allows you to set a threshold for your students' quiz grade, before they can continue to the next level. For example, if you enter "80" your students have to score at least 80% on the quiz before they are allowed to go to the next level. If they haven't met the threshold, they are not allowed to continue and have to retake the quiz.
-            Don't want to use the threshold? No worries, just keep this section blank.
+            **Seviye barajlarının kilidini açın**
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/99a34dab-f112-459e-bfd1-07618be4715a" width = "1000"> Bu özellik, öğrencilerinizin bir sonraki seviyeye devam edebilmeden önce quiz notları için bir baraj belirlemenize olanak sağlar. Örneğin, "80" girerseniz, öğrencilerinizin bir sonraki seviyeye geçmelerine izin verilmeden önce quizden en az %80 puan almaları gerekir. Barajı karşılamamışlarsa, devam etmelerine izin verilmez ve quizi tekrar etmeleri gerekir.
+            Baraj kullanmak istemiyor musunuz? Sorun değil, bu bölümü boş bırakmanız yeterli.
 
-            **Other settings**
-            <img src="https://github.com/hedyorg/hedy/assets/80678586/a8491d67-6d6e-42a7-b672-fd3d083a76f8"/>
-            There are some other setting that could be usefu to you aswell. Our first extra setting is 'Mandatory developer's mode'. In developers mode the students only see their input and output screens and the run button. The adventures are hidden and there are no cheatsheets available. This might come in handy in a test situation.
-            If this option is not selected the developer's mode is available for students too as a voluntary option.
+            **Diğer ayarlar**
+            <img src="https://github.com/hedyorg/hedy/assets/80678586/a8491d67-6d6e-42a7-b672-fd3d083a76f8"/> Sizin için faydalı olabilecek bazı diğer ayarlar da bulunmaktadır. İlk ekstra ayarımız 'Zorunlu Geliştirici Modu'dur. Geliştirici modunda öğrenciler sadece giriş ve çıkış ekranları ile çalıştırma düğmesini görürler. Maceralar gizlidir ve hile sayfaları kullanılamaz. Bu, sınav yaparken işinize yarayabilir. 
+            Bu seçenek seçilmezse, geliştirici modu öğrenciler için de gönüllü bir seçenek olarak kullanılabilir.
 
-            If you want all your students to be visible in de class highscore, you can select the second option.
-            With all the other options you can choose to hide some functions or content for your students, this might help them focus more.
+            Tüm öğrencilerinizin sınıf yüksek skorlarında görünmesini istiyorsanız, ikinci seçeneği seçebilirsiniz.
+            Diğer tüm seçeneklerle, öğrencileriniz için bazı fonksiyonları veya içerikleri gizlemeyi seçebilirsiniz; bu, onların daha fazla odaklanmalarına yardımcı olabilir.
 
-            **Save**
+            **Kaydetme**
             <img src="https://github.com/hedyorg/hedy/assets/80678586/df179df3-3073-4d15-bba6-62e58fb675be" width="300">
-            Don't forget to save your changes when you're done customizing your class.
+            Sınıfınızı özelleştirdikten sonra değişikliklerinizi kaydetmeyi unutmayın.
     -   title: Öğrenci Hesapları
         text: |-
             Öğrencilerinizin sınıfınıza katılmasını sağlamanın 2 yolu vardır: Onlar için hesap oluşturabilirsiniz ya da onlar kendi hesaplarını oluşturabilirler.
@@ -317,7 +317,11 @@ teacher-guide:
             Dersinizi kısa bir değerlendirme yaparak tamamlayın. Öğrenciler ne öğrendi? Hangi zorluklarla karşılaştılar?
             Hatalarından nasıl ders çıkardılar? Ve tabii ki: Neler oluşturdular?
             Öğrenciler genellikle kendi eserleriyle gurur duyarlar, bu nedenle öğrencilerinize çalışmalarını sınıf arkadaşlarına gösterme fırsatı verecek molalar verin.
--   {}
+-   title: Öğretmen İstatistikleri
+    subsections:
+    -   title: Canlı Pano
+    -   title: Seviye Seçimi
+    key: öğretmen_istatistikleri
 -   title: Hedy'nin diğer özellikleri
     key: özellikler
     subsections:
