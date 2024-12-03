@@ -22,7 +22,7 @@ export class HedySelect extends HTMLElement {
         for (const option of options) {
             option.hidden = true;
             const newDiv = document.createElement('div');
-            newDiv.classList.add('option');
+            newDiv.classList.add('option', 'text-black');
             newDiv.innerHTML = option.innerText;
             newDiv.dataset['value'] = option.value;
             newDiv.classList.toggle('selected', option.selected);
