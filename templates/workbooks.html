@@ -29,7 +29,7 @@
                             <h4 id="{{exercise.title|slugify}}">{{ exercise.icon}} {{ exercise.title }}</h4>
                             {{ exercise.text|commonmark }}
 
-                            <table>
+                            <table border="1">
                                 <tr>
                                      <td width='5000px'>
                                         {% if exercise.code %}
@@ -38,15 +38,16 @@
                                         </div>
                                         {% endif %}
                                     </td>
-                                    <td width='600px' { text-align: left; }>
+                                    <td width='600px' text-left>
                                         <!-- questions have lines OR options -->
                                         {% if exercise.lines %}
                                             {% for line in exercise.lines %}
                                                 {{ line }} <br>
                                             {% endfor %}
                                         {% endif %}
+
                                         {% if exercise.options %}
-                                            {{ exercise.options }} <br>
+                                            {{ exercise.options | commonmark }}
                                         {% endif %}
                                     </td></tr>
                             </table>
@@ -65,7 +66,11 @@
                                         {% endif %}
                                     </td>
                                     <td width='600px'>
-                                        {{ exercise.output|commonmark }}
+                                        {% if exercise.output %}
+                                            {% for line in exercise.output %}
+                                                {{ line }} <br>
+                                            {% endfor %}
+                                        {% endif %}
                                     </td></tr>
                             </table>
 

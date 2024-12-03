@@ -1618,8 +1618,8 @@ workbooks:
               print The 3 lucky numbers are:
               print numbers at random and print numbers at random and print numbers at random
             output: |-
-              Welcome at bingo night!<br>
-              The 3 lucky numbers are:<br>
+              Welcome at bingo night!
+              The 3 lucky numbers are:
               5 and 3 and 10
           - type: input
             answer: |-
@@ -1627,7 +1627,7 @@ workbooks:
               print We are going to watch a movie tonight.
               print We will pick: movies at random
             output: |-
-              We are going to watch a movie tonight.<br>
+              We are going to watch a movie tonight.
               We will pick: Inside Out
 
           - type      : text
@@ -2159,6 +2159,329 @@ workbooks:
         - type      : text
           contents  : |-
             #### What did you think?
+        - type      : question
+          text      : "Which exercise did you like best this level?"
+          lines     : 1
+        - type      : question
+          text      : "What did you like about it?"
+          lines     : 5
+        - type      : question
+          text      : "Which exercise did you like least this level?"
+          lines     : 1
+        - type      : question
+          text      : "What didn't you like about it?"
+          lines     : 5
+    -   level: '7'
+        intro: |-
+            ## Repeat!
+            By the end of this lesson, you can:
+            * run a line of code multiple times
+        exercises:
+        -   type: text
+            contents: |-
+                ### Repetition
+                Sometimes you want to repeat a line of code multiple times, for example in a song or a story.
+            code: |-
+                repeat 5 times print 'Baby shark!'
+        -   type: text
+            contents: |-
+                #### Exercise 1: Predict the output
+                What will be the output of these programs?
+        -   type: output
+            code: |-
+                repeat 3 times print 'Baby shark!'
+            answer: |-
+              Baby shark!
+              Baby shark!
+              Baby shark!
+            lines: 3
+        -   type: output
+            code: |-
+                repeat 1 times print 'Hi everybody!'
+            answer: |-
+              Hi everybody!
+            lines: 1
+        -   type: output
+            code: |-
+                a is 4
+                repeat a times print 'Hi everybody'
+            answer: |-
+              Hi everybody!
+              Hi everybody!
+              Hi everybody!
+              Hi everybody!
+            lines: 4
+        -   type: text
+            contents: |
+                ### Exercise 2: Input
+                Take a look at the output. Write a program that could belong to this output.
+
+                Please note: Multiple answers can be correct. Choose whatever you want, as long as it's correct.
+                Fill up all the lines, so look carefully at the amount of lines!
+        -   type: input
+            answer: |-
+                print 'Hi everybody!'
+                repeat 2 times print 'This is one line.'
+            output: |-
+                Hi everybody!
+                This is one line.
+                This is one line.
+            lines: 2
+        -   type: input
+            answer: |-
+                print 'This is line 1'
+                print 'This is line 2'
+                print 'This is line 3'
+            output: |-
+                This is line 1
+                This is line 2
+                This is line 3
+            lines: 3
+        -   type: text
+            contents: |-
+                ### Exercise 3: Correct or Incorrect
+                Take a careful look at the programs and decide if they will trigger an errormessage or not.
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              print 'The prince kept screaming for help'
+              repeat 3 times 'Help!'
+            answer    : Incorrect, print is missing
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              forward 100
+              repeat 3 times turn 90
+            answer    : Correct
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              people = mum, dad, Emma, Sophie
+              repeat 7 times print 'The dishes will be done by ' mensen
+            answer    : Incorrect, at random is missing
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              options = 1, 2, 3, 4, 5, 6
+              repeat 5 times print 'You threw: ' options at random
+            answer    : Correct
+        -   type: text
+            contents: |-
+                #### Exercise 6: Programming words
+                We have learned a new programming word again! Explain in your own words.
+        -   type: define
+            word: "repeat"
+            answer: "repeating a line multiple times"
+            lines: 1
+        -   type: text
+            contents: |-
+              #### What did you think?
+        - type      : question
+          text      : "Which exercise did you like best this level?"
+          lines     : 1
+        - type      : question
+          text      : "What did you like about it?"
+          lines     : 5
+        - type      : question
+          text      : "Which exercise did you like least this level?"
+          lines     : 1
+        - type      : question
+          text      : "What didn't you like about it?"
+          lines     : 5
+    -   level: '8'
+        intro: |-
+            ## Repeat!
+            By the end of this lesson, you will be able to:
+            * repeat multiple lines of code
+        exercises:
+        -   type: text
+            contents: |-
+                ### Repetition
+                Maybe you've noticed how you could only repeat 1 line of code before, very simplistic.
+                Oftentimes you want to repeat multiple lines, to make a more complex program.
+                In Hedy, and in Python too, this is done with indentation!
+                Indentation means starting a line with a couple of spaces.
+            code: |-
+                repeat 5 times
+                    print 'Baby shark!'
+        -   type: text
+            contents: |-
+                #### Exercise 1: Which lines will be repeated?
+                
+                Tip: Take a careful look at the indentation (starting a line with spaces).
+        -   type: circle
+            goal: indentation
+            code: |-
+                repeat 3 times
+                    print 'Baby shark!'
+                    print 'Tudu tudu tudu!'                  
+                print 'Baby shark!'
+            answer: Lines 2 and 3
+        -   type: circle
+            goal: indentation
+            code: |-
+                print 'Hello!'
+                repeat 2 times
+                    print 'Yes, hi everybody'
+            answer: Line 3
+        -   type: circle
+            goal: indentation
+            code: |-
+                name is ask 'What is your name?'
+                if name is Hedy
+                    print 'Yes'
+                else
+                    print 'No'
+            answer: No lines! There is indentation because of the if and else, but no lines will be repeated.
+
+        -   type: text
+            contents: |-
+                #### Exercise 2: Predict the output
+                What will be the output of these programs?
+        -   type: output
+            code: |-
+                print 'Hello!'
+                repeat 1 times 
+                    print ':)'
+            answer: |-
+              Hello!
+              :)
+        -   type: output
+            code: |-
+                print 'Hello!'
+                repeat 5 times 
+                    print ':('
+                print 'Done!'
+            answer: |-
+              Hello!
+              :(
+              :(
+              :(
+              :(
+              :(
+              Done!
+        -   type: text
+            contents: |
+                ## If and else
+                When using `if` and `else` you also need indentation. This way you can execute multiple lines when a condition is true or false.
+
+                ### Exercise 3: Predict the output
+
+                Predict the output of these programs.
+        -   type: output
+            code: |-
+                name is ask 'What is your name?'
+                if name is Hedy
+                    print 'Yes'
+                else
+                    print 'No'
+            answer: 'No'
+            lines: 1
+        -   type: output
+            code: |-
+                numbers is 1, 2, 3, 4, 5, 6, 7
+                choice is numbers at random
+                if choice is five
+                    print 'Hooray!'
+                    print 'Hooray!'
+                else
+                    print 'Oh no!'
+            answer: 'Oh no!'
+            lines: 2
+        -   type: output
+            code: |-
+              dice = 1, 2, 3, 4, 5, 6
+              repeat 3 times 
+                  print 'You threw: ' dice at random
+                  print 'Game over'
+            answer: |-
+              You threw: < 1, 2, 3, 4, 5, or 6>
+              Game over
+              You threw: < 1, 2, 3, 4, 5, or 6>
+              Game over
+              You threw: < 1, 2, 3, 4, 5, or 6>
+              Game over
+            lines: 6
+        -   type: text
+            contents: |-
+                ### Exercise 4: Correct or incorrect?
+                Take a careful look at the programs and decide if they will trigger an error message or not.
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+                name is Hermans
+                if name is Senkal
+                  print 'Hooray!'
+                else
+                print 'Bad luck'
+            answer    : Incorrect, there is no indentation after else
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+                number is 10
+                  if number is 5
+                print 'Hooray!'
+                  else
+                print 'Bad luck'
+            answer    : Incorrect, the indentation was used the wrong way around.
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              people = mom, dad, Emma, Sophie
+              repeat 7 times print 'The dishes will be done by ' people at random
+            answer    : Incorrect, you can no longer use the repeat command in only one line.
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+                day is ask 'What is is it?'
+                if day is friday
+                    print 'Yeah!'
+            answer    : Good
+        -   type: text
+            contents: |-
+                #### Exercise 5: Write the code
+                Take a good look at the output and write a matching code for it. Use `repeat` if possible.
+
+                Mind the amount of lines your code needs!
+        -   type: input
+            answer: |-
+                repeat 4 times
+                    print 'Yoo Hoo!'
+            output: |-
+                Yoo Hoo!
+                Yoo Hoo!
+                Yoo Hoo!
+                Yoo Hoo!
+        -   type: input
+            answer: |-
+                repeat 2 times
+                    print 'Are you sleeping?'
+                repeat 2 times
+                    print 'Brother John'
+                repeat 2 times
+                    print 'Morning bells are ringing!'
+                repeat 2 times
+                    print 'Ding Dang Dong!'
+            output: |-
+                Are you sleeping?
+                Are you sleeping?
+                Brother John
+                Brother John
+                Morning bells are ringing!
+                Morning bells are ringing!
+                Ding Dang Dong
+                Ding Dang Dong
+        -   type: text
+            contents: |-
+                #### Exercise 6: Programming words
+                We have learned a new programming term again: indentation! Explain it in your own words.
+        -   type: define
+            word: "How do you create an indent?"
+            answer: "By starting a line with multiple spaces"
+            lines: 1
+        - type: text
+          contents: |-
+                #### What did you think?
         - type      : question
           text      : "Which exercise did you like best this level?"
           lines     : 1

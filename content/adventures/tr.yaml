@@ -57,18 +57,18 @@ adventures:
                     3. seviyede, hikayenizi daha eğlenceli hale getirebilirsiniz. Bunun gibi herhangi bir canavar, hayvan veya diğer engeller için rastgelelik kullanabilirsiniz:
                 example_code: |
                     ```
-                    hayvanlar {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Şimdi şunun sesini duyuyor: bir hayvanlar {at} {random}
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} They now hear the sound of an animals {at} {random}
                     ```
                 story_text_2: |
                     Hikayenizde `{add}` komutu da kullanışlı olabilir.
                 example_code_2: |
                     ```
-                    {print} Bir ses duyuyor
-                    hayvanlar {is} 🐿, 🦔, 🦇, 🦉
-                    hayvan {is} {ask} Ne olduğunu düşünüyorsun?
-                    {add} hayvan {to_list} hayvanlar
-                    {print} bu bir hayvanlar {at} {random}
+                    {print} They hear a sound
+                    animals {is} 🐿, 🦔, 🦇, 🦉
+                    animal {is} {ask} What do you think it is?
+                    {add} animal {to_list} animals
+                    {print} it was an animals {at} {random}
                     ```
                 story_text_3: |
                     Bu, hikayenizdeki `{remove}` komutunun bir örneğidir
@@ -278,7 +278,7 @@ adventures:
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: ekle_çıkar_komutu
-        description: ekle şuraya ve çıkar şuradan komutlarına giriş
+        description: '{add} {to_list} ve {remove} {from} giriş'
         levels:
             3:
                 story_text: |
@@ -332,6 +332,7 @@ adventures:
                     ```
 
                         {print} "Sen gerçek Hedy'sin!"
+        name: '{and} & {or}'
     ask_command:
         default_save_name: sor_komutu
         description: sor komutuna giriş
@@ -396,6 +397,7 @@ adventures:
                     isim = {input}('Senin adın ne?')
                     {print}('Demek senin ismin ', isim)
                     ```
+        name: sor
     blackjack:
         name: Yirmibir
         default_save_name: Yirmibir
@@ -423,6 +425,7 @@ adventures:
                     ***Test the function***
                     Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
                     Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
+                example_code: "```\n{print} 'BLACKJACK'\n\n# Bu değişkenleri tanımlayın\ncards = _\nface_cards = _\ncard_1 =\n\n# Puanları hesaplaması için bir fonksiyon oluşturun\n{define} calculate_points {with} card:\n    {if} card {in} face_cards:\n        points = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ points\n\n# Fonksiyonunuzu test edin\n{print} 'Kartınız ' _\n{print} 'Kartınız ' _ ' puan değerindedir'.\n```\n"
     calculator:
         name: Hesap Makinesi
         default_save_name: Hesap Makinesi
@@ -583,321 +586,6 @@ adventures:
     debugging:
         name: hata ayıklama
         default_save_name: hata ayıklama
-        levels:
-            3:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
-                    ```
-            7:
-                story_text: |-
-                    ### Exercise
-                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
-            8:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
-                    ```
-            9:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
-                    {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
-                    ```
-
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
-            10:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
-                    ```
-            11:
-                story_text: |-
-                    ### Exercise
-                    Debug this calender program. The output of this program is supposed to look like a list of dates.
-                    For example:
-
-                    ```
-                    Hedy calender
-                    Here are all the days of November
-                    November 1
-                    November 2
-                    November 3
-                    ```
-                    And so on.
-
-                    Mind that you have to test your code extra carefully for the month February, because the amount of days in this month changes in leap years.
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    print 'Hedy calender'
-                    months_with_31 days = January, March, May, July, September, October, December
-                    months_with_30_days = April, June, August, November
-                    month = ask 'Which month would you like to see?'
-                    if month in months_with_31_days
-                        days = 31
-                        if month in months_with30_days
-                            days = 30
-                    if month = February
-                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        year = ask 'What year is it?'
-                    if year in leap_years
-                        days = 29
-                    else
-                        days = 28
-
-                    print 'Here are all the days of ' moth
-                    for i in range 1 to days
-                        print month i
-                    ```
-            12:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    define greet
-                    greetings = 'Hello', 'Hi there', 'Goodevening'
-                        print greetings at random
-
-                    define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
-                        drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
-                            else
-                            print 'And ' more
-                    print 'Thank you'
-
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
-                    for i in range 0 to people
-                        call greet_costumer
-                    ```
-            13:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    defin movie_recommendation with name
-                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
-                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
-                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
-                        kids_movies = 'Minions', 'Paddington', 'Encanto'
-                        if name is 'Camila' or name is 'Manuel'
-                            recommended_movie = kids_movie at random
-                        if name is 'Pedro' or 'Gabriella'
-                                mood = ask 'What you in the mood for?'
-                            if mood is 'action'
-                                recommended_movie = comedy_movies at random
-                            if mood is 'romance'
-                                recommended_movie = romance_movies
-                        if mood is 'comedy'
-                                recommended_movie = comedy_movies at random
-
-                    print 'I would recommend ' recommended_movie ' for ' name
-
-                    name = ask 'Who is watching?'
-                    recommendation = ask 'Would you like a recommendation?'
-                    if recommendaion is 'yes'
-                    print movie_recommendation with name
-                    else
-                    print 'No problem!'
-                    ```
-            14:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
-                    ```
-
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
-            15:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
-                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
-                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
-                    hiding_spots = 'behind a tree', under a table', in a box'
-                    sounds = 'a trumpet', 'a car crash', 'thunder'
-                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
-
-                    chosen_ name = names at random
-                    chosen_verb = verbs at random
-                    chosen_location = 'locations at random'
-                    chosen_sounds = noises at random
-                    chosen_spot = hiding_spots random
-                    chosen_causes = causes_of_noise at random
-
-                    print chosen_name ' was ' chosen_verb ' ' chosen_location
-                    print 'when they suddenly heard a sound like ' sounds at random
-                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
-                    print chosen_name ' hid ' chosen_spot'
-                    print 'They tried to look around, but couldn't see anything from there'
-                    hidden = 'yes'
-                    while hidden = 'yes'
-                        print chosen_name 'still didn't see anything'
-                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
-                        if answer = 'yes'
-                            hidden == 'no'
-                    print 'chosen_name moved from' chosen_spot
-                    print 'And then they saw it was just' chosen_cause
-                    print chosen_name 'laughed and went on with their day'
-                    print The End
-                    ```
-            16:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
-
-                    ```
-            17:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
-
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
-
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
-
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
-
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
-
-
-                    print 'Thanks for ordering!'
-                    ```
-            18:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old MacDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
-                    ```
     default:
         name: Giriş
         default_save_name: giriş
@@ -1549,59 +1237,6 @@ adventures:
                     {print} 'Görüyorum... Görüyorum...'
                     {sleep}
                     {print} fallar {at} {random}
-                    ```
-    functions:
-        levels:
-            12:
-                example_code: |
-                    ```
-                    sides = 'left', 'right'
-                    limbs = 'hand', 'foot'
-                    colors = 'red', 'blue', 'green', 'yellow'
-
-                    {define} turn
-                        chosen_side = sides {at} {random}
-                        chosen_limb = limbs _
-                        chosen_color = colors _
-                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
-
-                    {print} 'Lets play a game of Twister!'
-                    {for} i {in} {range} 1 to _
-                        {call} turn
-                        {sleep} 2
-                    ```
-            13:
-                story_text: |
-                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
-                    An **argument** is a variable that is used within a function. It is not used outside the function.
-
-                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
-
-                    ### Exercise
-                    The next verse of this song goes:
-
-                    Last night as I lay on my pillow
-                    Last night as I lay on my bed
-                    Last night as I lay on my pillow
-                    I dreamed that my Bonnie is dead
-
-                    Can you program this verse in the same way as the example?
-            14:
-                example_code: |
-                    ```
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
-
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
-
-                    new_price = _ calculate_new_price {with} old_price, _
-                    {print} 'The new price is ' new_price ' dollar'
                     ```
     harry_potter:
         description: Harry Potter maceraları
@@ -3453,3 +3088,18 @@ adventures:
                         {print} sayı
                     {print} 'Yeni yılınız kutlu olsun!'
                     ```
+    blackjack_2:
+        levels:
+            17:
+                story_text: "### Alıştırma\nBu macerada Blackjack oyunumuzun ikinci kısmını kodlayacağız.\n\n***Önceki maceradan kodunuzu yapıştırın***\nÖnceki macerada değişkenler listesini başlattınız ve bir kartın kaç puan değerinde olduğunu hesaplayan bir fonksiyon oluşturdunuz. Kodunuzu kopyalayıp buraya yapıştırın. Test kısmına ihtiyacınız olmadığını unutmayın, eğer henüz çıkarmadıysanız, şimdi yapınız.\n\n***Daha fazla değişken ekleyin***\ncards ve face_cards listelerini ve card_1 değişkenini zaten ayarladınız. Bu değişkenlerin altında 3 tane daha değişken oluşturun: card_2, dealer_card_1 ve dealer_card_2. Bu değişkenlerin hepsi cards listesinden rastgele bir karta atanacaktır.\n\n***Puanları toplayın***\nKaç puan aldığınızı hesaplamak için fonksiyonu card_1 ile çağırıyoruz ve card_2 için de aynı işlemi yapıyoruz. Sonra bu iki puanı toplayarak toplamınızı elde ediyoruz. Aynı işlemi krupiyenin puanları için de yapın, ancak kendi kartlarınızı değil, krupiyenin kartlarını kullandığınızdan emin olun!\n\n***2 As***\nHarika gidiyorsunuz! Neredeyse tüm puanlar hesaplanabilir şimdi. Sadece bir istisna var: 2 As. Eğer 2 As alırsanız, toplamınız 22 değil 12 puandır (çünkü 22 puan kaybetmek olurdu!). Bu tabii ki krupiyenin kartları için de geçerlidir.\n\n***Puanı gösterin***\nSon olarak, programın hangi kartları çektiğinizi ve bunun kaç puan olduğunu söylemesini istiyorsunuz. Sonra krupiyenin hangi kartları olduğunu ve kaç puan aldığını gösterin.\n\n***Sonraki sekmede devam edin***\nHarika! Oyunun bu kısmını bitirdiniz! Kodunuzu kopyalayıp bir sonraki sekmeye gidin ve ekstra kart istemeyi ve kazananı ilan etmeyi öğrenin.\n"
+                example_code: "```\n# Önceki maceradan kodunuzu buraya yapıştırın\n\n# Bu iki değişkeni değişkenler listesine ekleyin\ncard_2 = _\ndealer_card_1 = _\ndealer_card_2 = _\n\n# Puanlarınızı toplayın\nyour_points_1 = {call} _ {with} card_1\nyour_points_2 = _\nyour_total = _\n\n# Krupiyenin puanlarını toplayın\ndealer_points_1 = _\n_\n_\n\n# 2 As\n{if} card_1 == 'Ace' {and} _\n    your_total = 12\n{if} dealer_card_1 _\n    dealer_total = _\n\n# Puan tablosunu gösterin\n{print} 'Bir ' _ ' ve bir ' _ ' çektiniz. Bu ' _ ' puan değerindedir'\n{print} 'Krupiye bir ' _ ' ve bir ' _ ' çekti. Bu ' _ ' puan değerindedir'\n```\n"
+        name: Blackjack (21) 2
+        default_save_name: Blackjack_2
+        description: Blackjack 2. bölüm
+    blackjack_3:
+        name: Blackjack 3
+        default_save_name: Blackjack_3
+        description: Blackjack 3. bölüm
+        levels:
+            17:
+                story_text: "Önceki sekmelerde, kendiniz ve krupiye için 2 rastgele kart çekmeyi ve her ikinizin de kaç puan aldığını hesaplamayı öğrendiniz.\nBu macerada, hem siz hem de krupiye için ekstra kart isteme seçeneği ekleyeceğiz.\n\n### Alıştırma\n***Bir önceki maceradan kodunuzu yapıştırın ***İlk olarak, önceki sekmeden kodunuzu kopyalayıp buraya yapıştırın.\n\n***Sizin için Ekstra Kart*** Toplamınızı 21'e mümkün olduğunca yakın hale getirmek için ekstra bir kart alabilirsiniz. İlk olarak, oyuncuya ekstra kart isteyip istemediğini sorun. Eğer isterlerse, rastgele bir kart seçin ve çekilen kartı yazdırın. Kart As değilse, fonksiyonu çağırabilir ve puanları toplamınıza ekleyebilirsiniz. Kart As ise fonksiyonu kullanamazsınız, çünkü As hem 1 puan hem de 11 puan olabilir; bu, kazandığınız puan sayısına bağlıdır. Toplamınız 11'den azsa, As'in 11 puan olmasını istersiniz (çünkü bu, 21'e en yakın değerdir). Bu yüzden toplamınıza 11 puan ekleyin. Toplamınız 11 veya daha fazlaysa, As'in 1 puan olmasını istersiniz (çünkü 21'den fazla puan almak istemezsiniz). Bu yüzden toplamınıza 1 puan ekleyin. Son olarak, yeni puan toplamınızı yazdırın.\n\n***Krupiye için Ekstra Kart***Krupiye de ekstra bir kart alabilir. Krupiyeye sormanıza gerek yok, çünkü toplamları 17'den az ise her zaman ekstra kart alırlar.\n'Sizin için Ekstra Kart' kodunu kopyalayıp krupiyenin bölümüne yapıştırın. Daha sonra, krupiyenin ekstra kart seçmesini ve puanlarının toplamına eklenmesini sağlayacak şekilde değiştirin.\n"

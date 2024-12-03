@@ -2656,8 +2656,8 @@ adventures:
 
                     Type `{play}` en daarna de noot die jij wil afspelen. De toonladder gaat zo: C-D-E-F-G-A-B.
                     Zoals je ziet zijn er 7 verschillende letters, maar er zijn veel meer dan 7 muzieknoten.
-                    Type een getal tussen 1 en 10 achter de letter om een toonladder te kiezen. Zo komt na de noot B4 de noot C5.
-                    C1 is de laagste noot die je kunt spelen en C10 is de hoogste.
+                    Type een getal tussen 0 en 9 achter de letter om een toonladder te kiezen. Zo komt na de noot B4 de noot C5.
+                    C0 is de laagste noot die je kunt spelen en B9 is de hoogste.
 
                     ### Opdracht
                     Test de voorbeeldcode en speel er maar mee! Kun jij een melodietje maken?
@@ -3274,13 +3274,16 @@ adventures:
                 story_text_2: |
                     ## Hoge komma's
                     Let op! Omdat we nu aanhalingstekens gebruiken, raakt Hedy in de war als je een hoge komma wil gebruiken in woorden zoals: Auto's.
-                     Zorg dus dat je de hoge komma's weghaalt en de spelling dus aanpast naar: Autos.
+                    Als je een hoge komma wil gebruiken, moet je dus dubbele aanhalingstekens gebruiken.
                     In het voorbeeldje hieronder zie je wat er gebeurt als je de hoge komma's wel gewoon blijft gebruiken.
                 example_code_2: |
                     ```
                     _ Let op dit voorbeeld laat zien hoe het NIET moet_
                     {print} 'Daar rijden twee oma's in hun auto's '
                     {print} 'Zouden zij liever 's middags of 's avonds rijden?'
+                    _ Dit is hoe het WEL moet _
+                    {print} "Daar rijden twee oma's in hun auto's"
+                    {print} 'Zouden zij liever 's middags of 's avonds rijden?"
                     ```
             12:
                 story_text: |

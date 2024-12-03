@@ -1,1 +1,136 @@
-{}
+levels:
+    8:
+        2:
+            story: Siggez leḥsab n wurar n tuqqna_tuffra.
+            code: |-
+                amesmaḍan = 11
+                {repeat} 10 {times}
+                    amesmaḍan = amesmaḍan - 1
+                    {print} amesmaḍan
+                    {sleep} 1
+                {print} 'Twejdeḍ neɣ xaṭi, ad d-aseɣ! '
+        1:
+            story: "Kečč d ukkuẓ n yimeddukkal niḍen la tetturarem Pokémon Go! Snulfut-d ahil ara yefrun anta tarbaεt ara yurar yal yiwen deg-wen.\nYa d azeggaɣ, d awraɣ neɣ d amidadi! Sgunfu cwiṭ seld mi ara d-tberḥeḍ ɣef terbaεt.."
+            code: |-
+                tirebbuyaɛ = azeggaɣ, awraɣ, azegzaw
+                {print} 'Azeggaɣ, awraɣ neɣ azegzaw? '
+                {repeat} 5 {times}
+                    {print} 'Tettwaferneḍ deg terbaεt... '
+                    {print} tirebbuyaɛ {at} {random}
+                    {sleep} 2
+    4:
+        1:
+            code: "ipukimunen {is} Pikaču, Čarmander, Bulbasur, Sqertl\n{print} 'Apukimun-a ad yili d apukimun-ik!'\n{sleep}\n{print} ipukimunen {at} {random}"
+            story: "Aql-ak d asleɣmay ameẓẓyan akk n Pokémon seg temdint n Pallet!\nEg ahil ara ifernen Pokémon-ik amezwaru.\nEǧǧ ahil ad yerǧu tasint send ad d-yesken Pokémon-ik amezwaru."
+        2:
+            story: Snulfu-d luṭu ara k-yeǧǧen ad tferneḍ arraz niḍen i tzemreḍ ad t-trebḥeḍ.
+            code: "arrazen {is} takeṛṛust, hamster, 1 umelyun n uṛu\narraz {is} {ask} 'Acu i tebɣiḍ ad t-trebḥeḍ?'\n{add} arraz {to_list} arrazen\n{print} 'Trebḥeḍ ' arrazen {at} {random}"
+    9:
+        2:
+            code: |-
+                assuter = {ask} 'Tebɣiḍ ad tessutreḍ aẓidan?'
+                {if} assuter = ih
+                    aẓidan = {ask} 'Acu n uẓidan i tḥemmleḍ?'
+                    {if} aẓidan = tiramisu
+                        {print} 'Nesḥassaf, dayen yekfa iramisu.'
+                    {else}
+                        {print} 'Yiwen ' aẓidan ' ur yettεeṭṭil ara ad yewjed!'
+                {else}
+                    {print} 'Ur tebɣiḍ ara aẓidan. Ulac fell-as!'
+            story: "Tangalt-a tessutur deg yimsaganen deg tneččit ma bɣan ad ssutren taẓidant. Ma xedment, ad ten-testeqsi acu n wanaw n tẓidant i baɣan. Ma ssutren tiramittu ad t-zzenzen, tiramittu yenza.\nTzemreḍ ad d-tawiḍ tangalt-nni ɣer umahil?"
+        1:
+            code: |-
+                imḍanen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                {repeat} 3 {times}
+                    amḍan = imḍanen {at} {random}
+                    tgerrez_tririt = 5 * amḍan
+                    tiririt = {ask} 'Acḥal n 5 tikkal' amḍan '?'
+                    {if} tiririt = tgerrez_tririt
+                        {print} 'D amahil igerrzeb!'
+                    {else}
+                        {print} 'Ala! Tiririt igerrzen d ' tgerrez_tririt
+            story: Urar-a ad ak-imudd kraḍet n yisteqdiyen n tusnakt. Yal tikelt asteqsi yemgarad. Tzemreḍ ad d-tafeḍ amizwer ilaqen?
+    10:
+        1:
+            code: |-
+                ussan = Letnayen, Ttlata, Larebεa, Lexmis, Lǧemεa
+                imdanen = yemma, baba, Ferruǧa, Amnay, Ayrad
+                tixtiṛiyin_yimekli = pizza, takus, pankayk, cclaḍa, lazany
+                {for} ass {in} ussan
+                    amdan_yettwafernen = imdanen {at} {random}
+                    imekli_yettwafernen = tixtiṛiyin_yimekli {at} {random}
+                    {print} 'Deg ' ass ' ' amdan_yettwafernen ' ad d-iheyyi ' imekli_yettwafernen
+                    {remove} amdan_yettwafernen {from} imdanen
+                    {remove} imekli_yettwafernen {from} tixtiṛiyin_yimekli
+            story: "Ԑiwen tawacult-a s usnulfu n wahil n usewwi, anwa akk ara isewwen akked wacu i ilaq ad t-sewwen dduṛt-a. Tiludna `{remove}` ttεassant wid ara isewwen, yal yiwen ad iseww tikkelt yerna tiram ad mgaradent, yal ass s tiremt-is.\n**D acu!**amizwer yettemgirid ad yili seg wass amezwaru, syen imdanen, aneggaru d tixtiṛiyin n tiremt. Aya iteddu ula akked yizirigen d tiludna `{remove}`."
+        2:
+            code: |-
+                imdanen = Tilelli, Tiziri, Maziɣ
+                anegzum_n_ucebbub = bulaziru, amuhawk, taseṭṭa n uεewdid, tineddicin
+                {for} amdan {in} imdanen
+                    {print} amdan ' ad yegzem ' anegzum_n_ucebbub {at} {random}
+                    yefraḥ = {ask} amdan ', tferḥeḍ s ufran-a?'
+                    {if} yefreḥ {is} ih
+                        {print} 'Ayuz'
+                    {else}
+                        {print} 'Ad neεreḍ tikkelt niḍen... 'amdan' ad yegzem acebbub-is akka' anegzum_n_ucebbub {at} {random}
+            story: "Aṛubut-a aliketṛunan d netta ara iɣetsen acu n yimceḍ amaynut ara tmecḍeḍ. Ma ur ak-yeεǧib ara ufran-is amezwaru, tzemreḍ ad talseḍ aneεruḍ.\n**D acu** Taladna 'imdanen' tettusbadu deg yizirig amezwaru. Taladna 'imceḍ' deg wis sin."
+    11:
+        1:
+            code: "{for} amḍan {in} {range} 10 {to} 1\n    {print} amḍan\n    {sleep}\n    {clear}\n{print} 'Aseggas ameggaz!'"
+            story: Snulfu leḥsab d akessar i temrilt n useggas amaynut! Ahil ilaq ad d-yesken imḍanen seg 10 ar 1 i tasint, syen serbeḥ aseggas amaynut ameggaz.
+        2:
+            story: "Snulfu-d ahil ara aɣ-d-yinin igmaḍ ineggura n temsizzelt tussnant. Deg tazwara, sbadu amutti n yimḥezwaren, syen amutti n wadeg.\n**Amatar** Izirig wis 5 ilaq ad tili tladna n tguni, ilaq ad tfakkeḍ s yisnemmar."
+            code: "{print} 'And now we will reveal the results of the science fair'\ncontestants = Vivienne, Paul, Trixy, Bianca, Katya\nplace = 5\n{for} contestant {in} contestants\n    {sleep} 2\n    {print} 'On number ' place ' has ended... ' contestant\n    place = place - 1\n{print} 'Congratulations!'"
+    5:
+        2:
+            story: Snulfu-d urar n tusnakt.
+            code: "{print} 'Fru ugur-a'\ntiririt {is} {ask} '88 - 16 = ?'\n{if} tiririt {is} 72 {print} 'Swaswa!'\n{else} {print} 'Yecceḍ! Tiririt d 72'"
+        1:
+            story: "Eg ahil ara yessenqaden ma yella asaru-k asmenyaf mazal-it deg tebdart n uselkim.\nMa yella akka, siggez tessneḍ ad tferneḍ, neɣ rnu asaru ɣer tebdart."
+            code: "favorite_movies {is} Batman, Spiderman, The Avengers, Jurassic Park\nmovie {is} {ask} 'What is your favourite movie?'\n{if} movie {in} favorite_movies {print} 'You have great taste!'\n{else} {print} 'Such a shame that your favourite movie is not in the list, we will add it right away!'\n{add} movie {to_list} favorite_movies"
+    1:
+        1:
+            code: "{print} Ansuf ɣer tḥanut n uɣrum Hedy!\n{ask} Acu n wanaw n uɣrum i tebɣiḍ?\n{echo} Ihi, tebɣiḍ\n{print} Ayen i d-tessutreḍ la d-yettwaheyyay!"
+            story: "Ipezzulen d iluɣma ideg ttwarun yakan izirigen n tengalt. Yessefk kan ad d-tesmelsiḍ izirigen deg umizwer iṣeḥḥan. Gar izirigen n tengalt deg ugdil n unekcum sakin selkem tangalt. Tzemreḍ ad terreḍ ahil iteddu?\n\nKečč d amsaɣ deg tḥanut n uɣrum n Hedy.\nTettedduḍ ɣer tḥanut n uɣrum, yesteṛḥeb yes-k bab n tḥanut.\nYessuter-ak-d d acu n wanaw n uɣrum i tebɣiḍ.\nSyen akken tfukkeḍ yules-as-d i tririt-ik.\nTaggara, ayen tessutreḍ iwjed-d."
+        2:
+            code: "{print} Dagi d DJ Hedy\n{ask} Twejdeḍ i tmeɣra?\n{ask} Anta taɣect i tebɣiḍ ad as-tesleḍ?\n{echo} D afran igerrzen! Ḥemmleɣ-tt"
+            story: Aqla-k tqerbeḍ ɣer DJ i wakken ad as-tessutreḍ tizlit. Rnu ahil ara yessutren ma twejdeḍ ad tgeḍ tameɣra, syen ssuter anta tizlit i tebɣiḍ ad as-tesleḍ.
+    2:
+        1:
+            story: "Kečč d yimeddukkal-ik tebɣam ad twalim tura asaru deg Netflix.\nSken isem n usarau ara twalim, tessarmeḍ i wid ara inezhen ad asen-yeεǧeb!"
+            code: "{print} D lawan ad twaliḍ asaru yessedhayen ɣef Netflix\nasaru {is} Baba inu ba\n{print} Aql-aɣ ad nwali asaru\n{print} Faṛset akken ilaq!"
+        2:
+            story: Wagi d asmel web i usenzi n yilellac. Snulfu-d ahil ideg zemmren yimsaɣen ad rnun alelluc ɣer tqecwalt n tiɣin.
+            code: "{print} Ansuf ɣer tḥanut n yilellac\nalelluc {is} {ask} Acu i tebɣiḍ ad t-taɣeḍ?\n{print} alelluc yettwarna ɣer tqecwalt n tiɣin.\n{print} Tanemmirt imi tuɣeḍ seɣur-neɣ!"
+    7:
+        2:
+            code: "{print} 'ṛṛwadi n usakal tteddun'\n{repeat} 3 {times} {print} 'dewwiṛent, dewwiṛent'\n{print} 'ṛṛwadi n usakal dewwiṛent, dewwiṛent'\n{print} 'deg meṛṛa tamdint'"
+            story: Rnu taɣect 'Ṛṛwadi n usakal dewwiṛent, dewwiṛent'
+        1:
+            story: Fak tizlit-nni n Baby Shark. Agrud Awqas yettas-d d amezwaru, syin yemma Tawqast, aneggaru d baba Awqas.
+            code: "{repeat} 3 {times} {print} 'Agrud awqas tututututudu'\n{print} 'Agrud awqas'\n{repeat} 3 {times} {print} 'Yemma tawqast tututututudu'\n{print} 'Yemma tawqast'\n{repeat} 3 {times} {print} 'Baba awqas tututututudu'\n{print} 'Baba awqas'"
+    6:
+        1:
+            code: "age = {ask} 'How old are you?'\ndog_age = age * 7\ncat_age = age * 5\n{print} 'In dog years you are ' dog_age ' years old.'\n{print} 'In cat years you are ' cat_age ' years old.'"
+            story: "Eg ahil ara iḥesben leεmeṛ ara tesεuḍ deg yiseggasen n uqjun akked ucic\nBdu ssuter leεmeṛ n useqdac syen bdu leḥsab.\nḤseb qbel leεmeṛ n uqjun, syen leεmeṛ n umcic.\nSyen sken leεmeṛ n yal yiwen."
+        2:
+            story: Snulfu-d ahil ara k-iεawnen ad tḥesbeḍ acḥal n lgaṭu i ilaq ad d-taɣeḍ i tmeɣra n umulli-k.
+            code: "{print} 'It is your birthday!'\npeople = {ask} 'How many people do you want to give a slice of cake?'\ncakes_amount = people/8\n{print} 'You will have to buy ' cakes_amount ' cakes'"
+    12:
+        2:
+            story: Urar yid-neɣ urar n Twister! Bdu s usbadu n umutti "imdanen", syen iεeggalen, deg taggara d "initen".
+            code: "people = 'Jess', 'Nick', 'Winston'\nlimbs = 'left hand', 'left foot', 'right hand', 'right foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n{for} person {in} people\n    {print} person ', put your ' limbs {at} {random} ' on ' colors {at} {random}"
+        1:
+            code: "verses = 'What will we do with the drunken sailor', 'Way hey and up she rises'\n{for} verse {in} verses\n    {for} count {in} {range} 1 {to} 3\n        {print} verse\n    {print} 'Early in the morning'"
+            story: "Cnu tizlit-nni 'Acu ara nexdem s uwlal asekṛan'. Ma yella ur t-tessineḍ ara, tizlit tusa-d akka:\n\nD acu ara nexdem s uwlal asekṛan\nD acu ara nexdem s uwlal asekṛan\nD acu ara nexdem s uwlal asekṛan\nTanezzayt\nAbrid abrid, ad d-tekker\nAbrid abrid, ad d-tekker\nAbrid abrid, ad d-tekker\nTanezzayt"
+    3:
+        1:
+            story: "Yebda-d useggas aɣurbiz amaynut deg Hogwarts!\nD ačapun n umsizwer ara k-d-yafen anwa axxam wuɣur ad terreḍ.\nAnwa axxam ideg ara tiliḍ? Kečč d Sifaks, d Massi, d Irat neɣ d Aris.\nUqbel ad d-immel učapun axxam-ik, tzemreḍ ad as-tiniḍ ur d-iferren ara yiwen seg yixxamen-nni."
+            code: "{print} The sorting hat is ready to sort you into a Hogwarts house.\nhouses {is} Gryffindor, Hufflepuf, Ravenclaw, Slytherin\ndislike {is} {ask} Are there any houses you do not want to be part of?\n{remove} dislike {from} houses\n{print} Not dislike eh? Better be... houses {at} {random}"
+        2:
+            code: "food {is} pizza, icecream, salad, sandwich\ntoppings {is} chocolate, cheese, tuna, sprinkles\n{print} Your random meal for today is...\n{sleep} 2\n{print} food {at} {random} with toppings {at} {random}"
+            story: Rnu ahil ara ak-d-ifernen tiremt kan akka. Eg tabdart n tgelliwin akked tebdart n tqaqqacin syen eǧǧ ahil d netta ara ak-d-ifernen!
+        3:
+            code: "players {is} Liam, Noah, Sophie\nplayer_1 {is} players {at} {random}\n{remove} player_1 {from} players\nplayer_2 {is} players {at} {random}\n{print} player_1 ' first plays against ' player_2\n{remove} player_2 {from} players\n{print} 'The winner plays against ' players {at} {random}"
+            story: "Qqimen-d tlata n yimyuraren deg yiwet n temlilit n seṭrenǧ.\nSnulfu-d ahil ara tt-yefrun anwa sin yimyuraren i ilaqen ad uraren wa mgal wa.\nBdu siggez sin-nni n yimyuraren yetturaren timlilit tamezwarut, syen siggez amyurar wukkud ara yurar umyurar i irebḥen."

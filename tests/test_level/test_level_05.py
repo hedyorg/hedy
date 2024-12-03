@@ -1115,6 +1115,7 @@ class TestsLevel5(HedyTester):
         if x is pressed print 'it is a letter key' else print 'it is another letter key'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1133,18 +1134,17 @@ class TestsLevel5(HedyTester):
         print x""")
 
         expected = self.dedent("""\
-        x = 'a'
+        global_scope_ = dict()
+        global_scope_["x"] = 'a'
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping[global_scope_.get("x") or x] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_x_():
-          global x
           print(f'it is a letter key')
         def if_pressed_else_():
-          global x
           print(f'it is another letter key')
         extensions.if_pressed(if_pressed_mapping)
-        print(f'{x}')""")
+        print(f'{global_scope_.get("x") or x}')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -1155,18 +1155,17 @@ class TestsLevel5(HedyTester):
         print x""")
 
         expected = self.dedent("""\
-        x = 'a'
+        global_scope_ = dict()
+        global_scope_["x"] = 'a'
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping[global_scope_.get("x") or x] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_x_():
-          global x
-          x = 'great'
+          global_scope_["x"] = 'great'
         def if_pressed_else_():
-          global x
-          x = 'not great'
+          global_scope_["x"] = 'not great'
         extensions.if_pressed(if_pressed_mapping)
-        print(f'{x}')""")
+        print(f'{global_scope_.get("x") or x}')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -1177,18 +1176,17 @@ class TestsLevel5(HedyTester):
         print m""")
 
         expected = self.dedent("""\
-        x = 'a'
+        global_scope_ = dict()
+        global_scope_["x"] = 'a'
         if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['x'] = 'if_pressed_x_'
+        if_pressed_mapping[global_scope_.get("x") or x] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_x_():
-          global m, x
-          m = 'great'
+          global_scope_["m"] = 'great'
         def if_pressed_else_():
-          global m, x
-          m = 'not great'
+          global_scope_["m"] = 'not great'
         extensions.if_pressed(if_pressed_mapping)
-        print(f'{m}')""")
+        print(f'{global_scope_.get("m") or m}')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -1198,6 +1196,7 @@ class TestsLevel5(HedyTester):
         if y is pressed print 'second key' else print 'something else'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1223,6 +1222,7 @@ class TestsLevel5(HedyTester):
         print 'it is a letter key' else print 'something else'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1239,6 +1239,7 @@ class TestsLevel5(HedyTester):
         if 1 is pressed print 'it is a number key' else print 'something else'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['1'] = 'if_pressed_1_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1255,6 +1256,7 @@ class TestsLevel5(HedyTester):
         if x       is pressed print 'trailing spaces!' else print 'something else'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1272,6 +1274,7 @@ class TestsLevel5(HedyTester):
         else print 'x is not pressed!'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1291,6 +1294,7 @@ class TestsLevel5(HedyTester):
         print 'x is not pressed!'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1309,6 +1313,7 @@ class TestsLevel5(HedyTester):
         else print 'x is not pressed!'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1327,6 +1332,7 @@ class TestsLevel5(HedyTester):
         print 'x is not pressed!'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1345,6 +1351,7 @@ class TestsLevel5(HedyTester):
         else print 'x is not pressed!'""")
 
         expected = self.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1362,6 +1369,7 @@ class TestsLevel5(HedyTester):
 
         expected = self.dedent(
             f"""\
+            global_scope_ = dict()
             if_pressed_mapping = {{"else": "if_pressed_default_else"}}
             if_pressed_mapping['x'] = 'if_pressed_x_'
             if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1385,6 +1393,7 @@ class TestsLevel5(HedyTester):
         if й is pressed print 'russian' else print 'something else'""")
 
         expected = textwrap.dedent("""\
+        global_scope_ = dict()
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['ض'] = 'if_pressed_ض_'
         if_pressed_mapping['else'] = 'if_pressed_else_'
@@ -1461,6 +1470,7 @@ class TestsLevel5(HedyTester):
         else print 'The prince was eaten by a hippopotamus 😭'""")
 
         expected_code = textwrap.dedent("""\
+        global_scope_ = dict()
         print(f'Do you want a good (g) or bad (b) ending?')
         if_pressed_mapping = {"else": "if_pressed_default_else"}
         if_pressed_mapping['g'] = 'if_pressed_g_'
@@ -1472,11 +1482,11 @@ class TestsLevel5(HedyTester):
         extensions.if_pressed(if_pressed_mapping)""")
 
         expected_source_map = {
-            '1/1-1/50': '1/1-1/52',
-            '1/1-3/55': '1/1-9/42',
-            '2/1-3/54': '2/1-9/42',
-            '2/17-2/56': '6/3-6/44',
-            '3/6-3/54': '8/3-8/53'
+            '1/1-1/50': '2/1-2/52',
+            '1/1-3/55': '1/1-10/42',
+            '2/1-3/54': '3/1-10/42',
+            '2/17-2/56': '7/3-7/44',
+            '3/6-3/54': '9/3-9/53'
         }
 
         self.single_level_tester(code, expected=expected_code)
