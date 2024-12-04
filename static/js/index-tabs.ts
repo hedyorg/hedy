@@ -104,17 +104,18 @@ export class IndexTabs {
       tab.removeClass('not-selected-adv')
       tab.addClass('adv-selected');
       let tab_title = document.getElementById('adventure_name')!
+      let level_adventure_title = document.getElementById('level_adventure_title')
       tab_title.textContent = tab.text().trim()
       const type = tab.data('type');
-      tab_title.classList.remove('border-green-300', 'border-[#fdb2c5]', 'border-blue-300', 'border-blue-900')
+      level_adventure_title?.classList.remove('border-green-300', 'border-[#fdb2c5]', 'border-blue-300', 'border-blue-900')
       if (type == 'teacher') {
-        tab_title.classList.add('border-green-300');
+        level_adventure_title?.classList.add('border-green-300');
       } else if(type == 'command') {
-        tab_title.classList.add('border-[#fdb2c5]')
+        level_adventure_title?.classList.add('border-[#fdb2c5]')
       } else if (type == 'special') {
-        tab_title.classList.add('border-blue-300')
+        level_adventure_title?.classList.add('border-blue-300')
       } else {
-        tab_title.classList.add('border-blue-900')
+        level_adventure_title?.classList.add('border-blue-900')
       }
       
       // Hide or show the next or previous level button in case we are in the first or last adventure

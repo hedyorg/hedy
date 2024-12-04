@@ -14,11 +14,11 @@ adventures:
                     Feu servir `{echo}` quan vulguis que el nom del protagonista estigui al final de la frase.
                 example_code: |
                     ```
-                    {ask} El protagonista de l'història és...
-                    {print} El protagonista ha anat a fer un tomb al bosc
+                    {ask} Qui és el protagonista d'aquesta història?
+                    {print} El protagonista ha anat a fer una volta al bosc
                     {echo} Està una mica espantat,
-                    {print} Sent sorolls extranys per tot arreu
-                    {print} Li fa por que estigui a un bosc encantat
+                    {print} Escolta uns sorolls extranys al seu voltant
+                    {print} S'adona que potser està dins d'un bosc encantat
                     ```
                 story_text_2: |
                     ### Exercici
@@ -36,12 +36,12 @@ adventures:
                     A continuació, pots posar aquest nom a qualsevol part d'una frase.
                 example_code: |-
                     ```
-                    nom {is} {ask} Quin és el nom del protagonista?
-                    {print} nom s'en va a correr pel bosc
+                    nom {is} {ask} Com es diu el protagonista?
+                    {print} nom ha anat a correr pel bosc
                     {print} nom està una mica espantat
                     {print} De sobte sent un soroll extrany...
                     {sleep}
-                    {print} nom li fa por que estigui en un bosc encantat
+                    {print} nom s'adona que potser està un bosc encantat
                     ```
                 story_text_2: |
                     ### Exercici
@@ -100,11 +100,11 @@ adventures:
                     {print}  _ El protagonista es diu _ nom
                     _
                     _
-                    {print} nom  _ ha anat a fer un tomb al bosc _
-                    {print} nom_ està una mica espantat _
+                    {print} nom _ ha anat a fer una volta pel bosc _
+                    {print} nom _ està una mica espantat _
                     animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Sent el so de _ animals {at} {random}
-                    {print} name _ li fa por que estigui en un bosc encantat _
+                    {print} _ Sent el so d'un _ animals {at} {random}
+                    {print} nom _ s'adona que potser està en bosc encantat _
                     ```
             5:
                 story_text: |
@@ -1439,14 +1439,40 @@ adventures:
         default_save_name: funcions
         description: funcions
     haunted:
-        name: Casa encantada
-        description: Escapa de la casa encantada
-        default_save_name: Casa encantada
+        name: La casa embruixada
+        description: Escapar de la casa embruixada
+        default_save_name: La casa embruixada
         levels:
             1:
-                example_code: "```\n{print} Com he arribat aquí?  \n{print} Recordo que el meu amic em va dir d'entrar a la vella mansió...  \n{print} i de sobte tot es va fer fosc.  \n{print} Però com he acabat a terra...?  \n{print} Em fa mal el cap com si m'haguessin colpejat amb un bat de beisbol!  \n{print} Què és aquest so?  \n{print} Oh no! Tinc la sensació que no estic sol a aquesta casa!  \n{print} Necessito sortir d'aquí!  \n{print} Hi ha 3 portes davant meu...  \n{ask} Quina porta haig de triar?  \n{echo} Escullo la porta  \n{print} ...?\n```\n"
-                story_text_2: "### Exercici\nCopia el codi d'exemple a la teva pantalla d'entrada fent clic al botó groc.  \nAra acaba la història afegint almenys 5 línies de codi.  \nRecorda començar cada línia de codi amb la comanda `{print}`.\n"
-                story_text: "En aquesta aventura estàs treballant per crear un joc en què has d'escapar d'una casa encantada triant la porta correcta.  \nSi tries la porta correcta, sobreviuràs, però si no, un terrible monstre podria...\n\nAl nivell 1 comencem el nostre joc de la casa encantada creant una història espantosa i preguntant al jugador quin monstre veurà a la casa encantada.\n"
+                example_code: "```\n{print} Com he arribat aquí?\n{print} Només recordo que un amic em va dir d'entrar a la vella mansió...\n{print} i de sobte tot es va fer fosc.\n{print} Però com he acabat estirat a terra...?\n{print} Em fa mal el cap com si m'haguessin colpejat amb un bat de beisbol!\n{print} Què és aquest so?\n{print} Oh no! Tinc la sensació que no estic sol dins d'aquesta casa!\n{print} Necessito sortir d'aquí!\n{print} Hi ha 3 portes davant meu...\n{ask} Quina porta haig de triar?\n{echo} Escullo la porta\n{print} ...?\n```\n"
+                story_text_2: "### Exercici\nCopia el codi d'exemple a la pantalla d'edició del codi clicant al botó groc.\nAcaba la història afegint-hi almenys 5 línies de codi.\nRecorda començar cada línia de codi amb la comanda `{print}`.\n"
+                story_text: "En aquesta aventura has de crear un joc per escapar d'una casa embruixada escollint la porta correcta.\nSi tries la porta correcta, sobreviuràs, però si no, un monstre terrible et podria...\n\nAl nivell 1 comencem el nostre joc de la casa embruixada creant una història per a fer por i preguntant-li al jugador quin monstre es troba a la casa embruixada.\n"
+            5:
+                story_text: "Fins a aquest nivell, el joc de la casa embruixada sempre demanava al jugador que triés una porta, t'has adonat que no era necessari respondre correctament?\nSi el jugador introduïa una resposta completament aleatòria, el joc encara funcionava i fins i tot podria guanyar (tot i no haver triat una porta).\nEn aquest nivell has de fer que només es pugui guanyar el joc si tries la mateixa porta que Hedy ha triat aleatòriament.\n\n### Exercici\nPots trobar les 4 paraules que falten per completar el codi?\n"
+                example_code: "```\n{print} \"Escapa de la casa embruixada!\"\n{print} \"Hi ha tres portes davant teu...\"\nportes {is} 1, 2, 3\nmonstres {is} home llop, mòmia, vampir, zombie\nporta_escollida {is} {ask} \"Quina porta esculls?\"\n{print} \"Has triat la porta ...\" porta_escollida\n{sleep}\nporta_correcte {is} portes {at} {random}\n_ _ _ _ {print} \"Perfecte! T'has pogut escapar!\"\n{else} {print} \"Oh no! S'et menja un ...\" monsters {at} {random}\n```\n"
+            3:
+                example_code: "```\n_ Escapa de la casa embruixada!\n_ Hi ha tres portes davant teu...\n_ _ _ Quina porta esculls?\n_ Has triat la ... porta\nmonstres _ un zombie, un vampir, RES! HAS ESCAPAT!\n_ Veus ...\n{sleep}\n_ _ _ _\n```\n"
+                story_text: "En els nivells anteriors has fet una introducció al joc de la casa embruixada, sempre, però la història té un final dolent.\nEn aquest nivell millorarem la història fent-la més interactiva canviant-li el desenllaç; a vegades seràs devorat, i a vegades aconseguiràs escapar!\nHedy ho decidirà aleatòriament!\n\n### Exercici\nCopia els codis d'exemple i omple els espais en blanc perquè funcioni!\n\n**Extra** Aquesta història és bastant senzilla; potser pots fer-la més esgarrifosa i fer-la més emocionant. \nTambé tens resultats molt limitats ara mateix, només hi ha 3 opcions del que hi ha darrere de les portes. Pensa en més monstres per afegir a la llista!\n"
+            11:
+                story_text: "En aquest nivell hem canviat la comanda `{for}` per poder dir al jugador on es troba.\n\n### Exercici 1\nCompleta el programa perquè el jugador sàpiga en quina habitació es troba.\n\n### Exercici 2\nConverteix el programa en una aventura seguint aquests passos:\n\n1. Fes una llista d'opcions (com: lluitar o fugir).\n2. Assegura't que el jugador pugui triar una opció amb `{ask}`.\n3. La resposta és correcta? Aleshores poden avançar al següent monstre. Si donen una resposta incorrecta, fes-ho saber al jugador amb un `{print}`.\n\n**Extra** Si fas una tria equivocada, encara es mostra un monstre! Com podries canviar això?\n"
+                example_code: "```\n{print} \"Escapa de la casa embruixada!\"\nmonstres = zombie, vampir, aranya gegant\n_\n    {print} 'Habitació ' i\n    monstre = monstres {at} {random}\n```\n"
+            9:
+                example_code: "```\n{print} \"Escapa de la casa embruixada!\"\njugador = viu\nportes = 1, 2, 3\nmonsters = zombie, vampir, aranya gegant\n{repeat} 3 {times}\n    {if} jugador {is} viu\n        porta_correcta {is} portes {at} {random}\n        {print} \"Hi ha tres portes davant teu...\"\n        porta_escollida = {ask} \"Quina porta esculls?\"\n        {if} porta_escollida {is} porta_correcta\n            {print} \"No hi ha monstres aquí!\"\n        {else}\n            {print} \"Se t'ha menjat un \" monsters {at} {random}\n            jugador = mort\n    {else}\n        {print} \"GAME OVER\"\n{if} jugador {is} viu\n    {print} \"Fantastic! Has sobreviscut!\"\n```\n"
+                story_text: "En aquest nivell pots utilitzar la nidificació, la qual cosa et permet fer que la casa embruixada sigui encara més interactiva!\n\n### Exercici\nAra potser és massa difícil guanyar aquest joc, pots fer que sigui més fàcil de guanyar?\nCanvia el teu codi perquè només tingui una porta incorrecta i dues portes correctes en lloc d'una porta correcta i dues d'incorrectes.\nConsell: Això significa canviar la variable porta_correcta per porta_incorrecta, i intercanviar el codi de `{if}` i `{else}`.\nI, per descomptat, també pots canviar la història i fer-la teva. Canvia els monstres o converteix-la en un alegre concurs on guanyis un regal!\n"
+            16:
+                example_code: "```\nnumeros = [1, 2, 3]\ni = numeros[{random}]\npista = [\"uns grunyits\", \"una rialla malèfica\", \"l'aleteig de les ales d'un ratpenat\"]\nmonstres = [\"un zombie\", \"una bruixa\", \"un vampir\"]\nmala_sort = [\"Se't menjen el cervell\", \"Estas maleït per sempre més\", \"Et mossega el coll\"]\nbona_sort = [\"Llençes el penil. El zombie es distreu menjant-se'l.\", \"Cales foc a les cortines. La bruixa fuig volant pel temor al foc.\", \"El vampir respira el teu alè d'all i fuig.\"]\narmes = [\"pernil\", \"encenedor\", \"allioli\"]\n{print} \"Estàs davant d'una antiga mansió\"\n{print} \"Quenlcom no acaba de funcionar bé\"\n{print} \"Sents un soroll com \" _\n{print} \"T'apropes a explorar-ho\"\n{print} \"Entres a la cuina i et trobes un encenedor, un tall de pernil i un pot d'allioli.\"\narma_escollida = {ask} \"Què t'emportes de la cuina?\"\n{print} \"Am el \" arma_escollida \" entres al menjador\"\n{print} \"Et trobes de sobte \" _\narma_necessaria = _\n{if} arma_escollida == arma_necessaria\n    {print} \"Utilitzes el \" arma_escollida\n    {print} _\n    {print} \"Guanyes!\"\n{else}\n    {print} \"Has seleccionat una arma equivocada...\"\n    {print} _\n    {print} \"GAME OVER\"\n```\n"
+                story_text: "### Exercici\nAquest joc de la casa embruixada utilitza la connexió entre les llistes que pots fer servir en aquest nivell.\nPer exemple: totes les propietats que pertanyen al zombi són primeres en totes les llistes, la bruixa segona i el vampir tercer.\nConsulta el codi i omple els espais buits amb `armes[i]`, `monstres[i]`, `mala_sort[i]`, `bona_sort[i]`, `pista[i]` als llocs correctes perquè el codi funcioni!\n"
+            14:
+                example_code: "```\n{print} \"Escapa de la casa embruixada!\"\nvides = 3\nportes = 1, 2, 3\nmonstres = \"una bruixa\", \"un zombie\", \"un gos de tres caps adormit\"\n{for} i {in} {range} 1 {to} 10\n    {if} vides _\n        porta_bona = portes {at} {random}\n        monstre = monstres {at} {random}\n        porta_escollida = {ask} \"Quina porta esculls?\"\n        {if} porta_bona == porta_escollida\n            {print} \"Has triat la porta correcta\"\n        {else}\n            {print} \"Veus ...\" monstre\n            {if} monstre == \"un gos de tres caps adormit\"\n                {print} \"Pbbbuff.... està adormit\"\n            {else}\n                {print} \"Perds una vida\"\n                vides = _\n    {else}\n        {print} \"GAME OVER\"\n```\n"
+                story_text: "### Exercici\nEn aquest nivell pots utilitzar els símbols `<` i `>` per introduir vides al teu joc.  \nAssegura't que el jugador perdi una vida quan es trobi amb el monstre equivocat i que el joc s'aturi si es queda sense vides.\n"
+            4:
+                story_text: "En aquest nivell aprendràs a utilitzar cometes en els teus jocs.\n\n### Exercici\nPots adaptar el teu codi de la casa embruixada per a què funcioni nivell 4?\n\n### Exercici 2\nTorna al nivell anterior i copia el teu codi de la casa embruixada. Fes que el codi funcioni en aquest nivell afegint cometes als llocs adequats.\n"
+                example_code: "```\n_ Posa comes a aquest codi _\n{print} Escapa de la casa embruixada!\n{print} Hi ha tres portes davant teu...\nporta {is} {ask} Quina porta esculls?\n{print} Has triat la ... porta\nmonstres {is} un zombie, un vampir, RES! HAS ESCAPAT!\n{print} Veus...\n{sleep}\n{print} monstres {at} {random}\n ```\n"
+            2:
+                story_text_2: "### Exercici\nEn l'exemple anterior, els monstres estan predeterminats. Així que cada vegada que executes el teu codi, el resultat és el mateix.  \nPots afegir comandes `{ask}` per fer que la casa embruixada sigui interactiva i permetre que els jugadors triïn els monstres amb els quals es troben?\n"
+                story_text: "En aquest programa de la casa embruixada pots escollir els monstres amb emojis. De fet, també podries utilitzar paraules.\n"
+                example_code: "```\nmonstre_1 {is} 👻\nmonstre_2 {is} 🤡\nmonstre_3 {is} 👶\n{print} Has entrat a la casa embruixada.\n{print} De cop veus al monstre_1\n{print} Corres cap a una altre habitació.\n{print} Però un monstre_2 t'està esperant!\n{print} Oh no! corre dins la cuina.\n{print} Però inesperadament a l'entrar un monstre_3 t'ataca!\n```\n"
+                example_code_2: "```\nmonstre_1 {is} _\nmonstre_2 {is} _\nmonstre_3 {is} _\n{print} Has entrat a la casa embruixada.\n{print} De cop veus al monstre_1\n{print} Corres cap a una altre habitació.\n{print} Però un monstre_2 t'està esperant!\n{print} Oh no! corre dins la cuina.\n{print} Però inesperadament a l'entrar un monstre_3 t'ataca!\n```\n"
     is_command:
         default_save_name: comanda_es
         description: Introducció a la comanda {is}
@@ -1613,4 +1639,34 @@ adventures:
         levels:
             13:
                 story_text: "En l'aventura anterior has après com utilitzar un argument en una funció, però sabies que també els pots combinar amb comandes {ask}?  \nEn aquest exemple hem modificat el programa d'en \"Joan petit\" i l'hem fet interactiu. Ara es pregunta amb quina part balla en Joan petit.\n"
-                example_code: "```\n{define} song {with} place\n    {print} 'My Bonnie is ' place\n\nchosen_place = {ask} 'Where do you want Bonnie to be?'\nsynonym = {ask} 'What is another word for that?'\n\n{call} song {with} chosen_place\n{call} song {with} synonym\n{call} song {with} chosen_place\n```\n"
+                example_code: "```\n{define} joan_petit {with} part\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla, balla, balla,\"\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla amb el \" part\n\npart = {ask} 'Amb quina part balla joan petit?'\npart2 = {ask} 'Amb quina altra part balla joan petit?'\npart3 = {ask} 'I amb quina altra part balla joan petit?'\n\n{call} joan_petit {with} part\n{call} joan_petit {with} part2\n{call} joan_petit {with} part3\n```\n"
+    hotel:
+        name: hotel
+        description: hotel
+        default_save_name: hotel
+        levels:
+            13:
+                example_code: "```\n{define} missatge_benvinguda {with} tractament, cognom, pais, num_habitacio\n    {print} \"Benvingut a l'Hotel Hedy, \" tractament \" \" cognom\n    nice_trip {is} {ask} \"Ha tingut un bon viatge des de \" pais \"?\"\n    {if} nice_trip {is} \"si\"\n        {print} \"Fantàstic!\"\n    {else}\n        {print} \"Quina llàstima...\"\n        {print} \"Afortunadament podrà descançar a la seva habitació.\"\n    {print} \"La seva habitació és la \" num_habitacio\n\n{print} \"Bon dia! Siusplau per a fer el check in ompli la següent informació.\"\ntractament = {ask} \"Com li agradaria que ens dirigíssim a vostè (sr, sra, dr, etc.)?\"\nnom = {ask} \"Quin és el seu cognom?\"\npais_origen = {ask} \"Quin és el seu país d'origen?\"\n\n{call} missatge_benvinguda {with} tractament, nom, pais_origen, 105\n```\n\ntractament = {ask} \"Com li agradaria que ens dirigíssim a vostè (sr, sra, dr, etc.)?\"\nnom = {ask} \"Quin és el seu cognom?\"\npais_origen = {ask} \"Quin és el seu país d'origen?\"\n\n{call} missatge_benvinguda {with} tractament, nom, pais_origen, 105\n"
+                story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {ask}.  \nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.  \nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.  \nAquí tens un exemple d'una funció amb arguments combinada amb comandes {ask}.\n"
+    in_command:
+        default_save_name: in_command
+        name: '{in}'
+        description: Introducció a la comanda {in}
+    if_command:
+        levels:
+            5:
+                example_code_3: "```\nresposta {is} {ask} '2 + 2 = ?'\n_ _ _ 4 _ 'Correcte!'\n_ _ 'No 2 + 2 = 4'\n```\n"
+                example_code: "```\nnom {is} {ask} 'Com et dius?'\n{if} nom {is} Hedy {print} 'bé!' {else} {print} 'buu!'\n```\n"
+                story_text: "## If... else....\nEn el nivell 5 hi ha una cosa nova, la comanda`{if}`! Amb el `{if}` pots triar entre dues opcions diferents.  \nAquest codi imprimeix \"bé!\" si introdueixes Hedy com a nom, i \"buu!\" si introdueixes alguna altra cosa.  \nLes comandes `{ask}` i `{print}` continuen funcionant igual que ho feien en el nivell 4.\n"
+                story_text_3: "### Exercici\nIntenta crear el teu propi codi amb `{if}` i `{else}`. Pots utilitzar el codi d'exemple si vols.\n"
+                story_text_2: "De vegades, el codi amb un `{if}` es fa realment llarg i no hi cap bé en una sola línia. <br> També pots dividir el codi en dues línies, començant la segona línia amb el `{else}`, d'aquesta manera:\n"
+                example_code_2: "```\nnom {is} {ask} 'Com et dius?'\n{if} nom {is} Hedy {print} 'bé!'\n{else} {print} 'buu!'\n```\n"
+            8:
+                example_code: "```\nname = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n```\n"
+                story_text: "## Condicionals\nHas après a repetir un bloc de línies de codi després d'una comanda `{repeat}`.  \nAra també pots utilitzar la indentació per crear blocs després d'una comanda `{if}` o `{else}`.  \nDona-li un cop d'ull al codi d'exemple.\n\n### Exercici\nAfegeix una comanda `{else}` al codi d'exemple. Crea un bloc de línies usant la indentació. Això es fa començant cada línia amb 4 espais.\n"
+            9:
+                example_code: "```\ncontinuar = {ask} \"Vols continuar?\"\n{if} continuar = sí\n    segur = {ask} \"Segur?\"\n    {if} segur {is} sí\n        {print} \"Continuem, doncs\"\n    {else}\n        {print} \"No n'estàs segur\"\n{else}\n    {print} \"No vols continuar\"\n```\n"
+                story_text: "En aquest nivell també pots posar una comanda `{if}` dins d'una altra comanda `{if}`.\n"
+        name: '{if} & {else}'
+        description: Introducció a la comanda {if}
+        default_save_name: if_command
