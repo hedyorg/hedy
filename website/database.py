@@ -878,10 +878,6 @@ class Database:
     def update_last_viewed_level_in_class(self, id, level):
         self.classes.update({"id": id}, {"last_viewed_level": level})
 
-    def store_feedback(self, feedback):
-        """Store a feedback message in the database"""
-        self.feedback.create(feedback)
-
     def store_survey(self, survey):
         self.surveys.create(survey)
 
