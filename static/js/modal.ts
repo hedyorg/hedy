@@ -32,7 +32,6 @@ class Modal {
     $('#modal_copy').hide();
     $('#modal_repair').hide();
     $('#modal_preview').hide();
-    $('#modal_feedback').hide();
   }
 
   public hide_alert() {
@@ -186,13 +185,6 @@ class Modal {
       }
     });
   }
-    public feedback(message: string) {
-      this.hide();
-      $('#modal_feedback_message').text(message);
-      this.show();
-      $('#modal_feedback').show();
-      $('#modal_feedback_input').trigger("focus");
-    }
 }
 
 /**
