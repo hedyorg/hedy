@@ -1493,6 +1493,7 @@ adventures:
                     En el codi d'exemple hem fet un exemple de la variable `animal_preferit`. A la línia 1 es defineix la variable, i a la línia 2 hem utilitzat la variable dins una comanda d'impressió.
                     En primer lloc, acabeu el nostre exemple omplint el vostre animal preferit als espais en blanc. A continuació, feu vosaltres mateixos almenys 3 d'aquests codis. Trieu una variable i configureu-la amb la comanda {is}. A continuació, utilitzeu-lo amb una comanda {print}, tal com hem fet abans.
                 example_code_2: "```\nanimal_preferit {is} _\n{print} M'agraden els/les animal_preferit \n```\n"
+        name: '{is}'
     parrot:
         name: Lloro
         description: Crea el teu lloro i fes que repeteixi el que li dius!
@@ -1652,6 +1653,12 @@ adventures:
         default_save_name: in_command
         name: '{in}'
         description: Introducció a la comanda {in}
+        levels:
+            5:
+                example_code_2: "```\nanimals {is} gos, vaca, ovella\nresposta {is} {ask} \"Quin és el teu animal preferit?\"\n_ resposta _ animals _ \"Ala, el meu també!\"\n_ _ \"Els meus animals preferits són els gossos, les vaques i les ovelles.\"\n```\n"
+                story_text: "## Llistes\nSi volem comprovar que una cosa és dins d'una llista utilitzem la comanda `{in}`.  \nEl codi següent imprimeix \"Bé!\" si tries verd o groc, i \"Buu\" en cas contrari.\n"
+                example_code: "```\ncolors_bonics {is} verd, groc\ncolor_preferit {is} {ask} \"Quin és el teu color preferit?\"\n{if} color_preferit {in} colors_bonics {print} \"Bé!\"\n{else} {print} \"Buu\"\n```\n"
+                story_text_2: "### Exercici\nCompleta el codi d'exemple omplint els espais en blanc amb les comandes que has après.\nQuan hagis acabat el codi, intenta crear un codi propi i fes servir una pregunta que hagis pensat tu mateix.\n"
     if_command:
         levels:
             5:
