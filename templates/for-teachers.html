@@ -11,11 +11,11 @@
   </div>
 {% endif %}
 <div class="flex-col">
-  <div class="flex flex-row gap-4 mb-8 mt-10 md:px-16">
-    <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
-      <h2 class="m-0 basis-1/12"> {{_('classes')}} </h2>
+  <div class="flex flex-row gap-4 md:px-16">
+    <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full p-8">
+      <h2 class="m-0 basis-1/12"> {{_('my_classes')}} </h2>
       <div class="text-black basis-10/12">
-      <p>{{ _('classes_info') }}</p>
+        <p>{{ _('classes_info') }}</p>
       </div>
       <div class="flex flex-row gap-3 justify-end basis-1/12">
         <button class="green-btn inline-flex items-center" id="create_class_button" data-cy="create_class_button" onclick='hedyApp.create_class ({{_('class_name_prompt')|default(None)|tojson}})'
@@ -24,98 +24,104 @@
         <button class="white-btn inline-flex items-center gap-2" data-cy="view_classes"
         _="on click hedyApp.saveForTeacherTable('classes_table')"
         >
-        <span id="classes_table_show" class="">{{_('view_classes')}}</span>
-        <span id="classes_table_hide" class="hidden">{{_('hide_classes')}}</span>
-        <svg id="classes_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-        </svg>
-      </button>
-      {% endif %}
-      </div>
-    </div>
-    <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
-      <h2 class="m-0 basis-1/12"> {{_('adventures')}} </h2>
-      <div class="text-black basis-10/12">{{ _('adventures_info') }}</div>
-      <div class="flex gap-3 justify-end basis-1/12">
-            <button id="create_adventure_button" data-cy="create_adventure_button" class="green-btn inline-flex" 
-              _="on click
-                window.open('/for-teachers/customize-adventure', '_self')"
-              data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
-            {% if teacher_adventures %}
-            <button class="white-btn inline-flex" id="view_adventures" data-cy="view_adventures"
-            _="on click hedyApp.saveForTeacherTable('adventures_table')">
-            <span id="adventures_table_show" class="">{{_('view_adventures')}}</span>
-            <span id="adventures_table_hide" class="hidden">{{_('hide_adventures')}}</span>
-            <svg id="adventures_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-            </svg>
-          </button>
-          {% endif %}
-      </div>
-    </div>
-  </div>
-    <!-- classes table -->
-    {% if teacher_classes %}
-      {{ render_partial('htmx-classes-table.html', teacher_classes=teacher_classes) }}
-    {% endif %}
-    <!-- adventures table -->
-    {% if teacher_adventures %}
-      {{ render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures) }}
-    {% endif %}
-
-    <div class="flex flex-row gap-4 mb-8 mt-10 md:px-16">
-      <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
-        <h2 class="m-0 basis-1/12"> {{_('slides')}} </h2>
-        <div class="text-black basis-10/12">
-        <p>{{ _('slides_info') }}</p>
-        </div>
-        <div class="flex flex-row gap-3 justify-end basis-1/12">
-          <button class="white-btn inline-flex items-center gap-2" id="view_slides"
-          _="on load hedyApp.getForTeacherTable('slides_table') end
-          on click hedyApp.saveForTeacherTable('slides_table') end"
-          >
-          <span id="slides_table_show">{{_('view_slides')}}</span>
-          <span id="slides_table_hide" class="hidden">{{_('hide_slides')}}</span>
-          <svg id="slides_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <span id="classes_table_show" class="">{{_('view_classes')}}</span>
+          <span id="classes_table_hide" class="hidden">{{_('hide_classes')}}</span>
+          <svg id="classes_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
         </button>
-        </div>
+        {% endif %}
       </div>
-      <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
-        <h2 class="m-0 basis-1/12"> {{_('public_content')}} </h2>
-        <div class="text-black basis-10/12">{{ _('public_content_info') }}</div>
-        <div class="flex gap-3 justify-end basis-1/12">
-              <button id="public_adventures_link" data-cy="public_adventures_link" class="blue-btn inline-flex items-center"
-            _="on click window.open('/public-adventures', '_self')">{{_('public_adventures')}}</button>
+      <!-- classes table -->
+      {% if teacher_classes %}
+        {{ render_partial('htmx-classes-table.html', teacher_classes=teacher_classes) }}
+      {% endif %}
+    </div>
+  </div>
+  <div class="flex flex-row gap-4 mt-10 md:px-16">
+    <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full p-8">
+      <h2 class="m-0 basis-1/12"> {{_('my_adventures')}} </h2>
+      <div class="text-black basis-10/12">{{ _('adventures_info') }}</div>
+      <div class="flex gap-3 justify-end basis-1/12">
+        <button id="create_adventure_button" data-cy="create_adventure_button" class="green-btn inline-flex"
+          _="on click
+            window.open('/for-teachers/customize-adventure', '_self')"
+          data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
+        {% if teacher_adventures %}
+        <button class="white-btn inline-flex" id="view_adventures" data-cy="view_adventures"
+        _="on click hedyApp.saveForTeacherTable('adventures_table')">
+          <span id="adventures_table_show" class="">{{_('view_adventures')}}</span>
+          <span id="adventures_table_hide" class="hidden">{{_('hide_adventures')}}</span>
+          <svg id="adventures_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+          </svg>
+        </button>
+        {% endif %}
+      </div>
+      <!-- adventures table -->
+      {% if teacher_adventures %}
+        {{ render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures) }}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="flex flex-row gap-4 mt-10 md:px-16">
+    <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full p-8">
+      <h2 class="m-0 basis-1/12"> {{_('slides')}} </h2>
+      <div class="text-black basis-10/12">
+        <p>{{ _('slides_info') }}</p>
+      </div>
+      <div class="flex flex-row gap-3 justify-end basis-1/12">
+        <button class="white-btn inline-flex items-center gap-2" id="view_slides"
+        _="on load hedyApp.getForTeacherTable('slides_table') end
+        on click hedyApp.saveForTeacherTable('slides_table') end"
+        >
+        <span id="slides_table_show">{{_('view_slides')}}</span>
+        <span id="slides_table_hide" class="hidden">{{_('hide_slides')}}</span>
+        <svg id="slides_table_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+        </svg>
+      </button>
+      </div>
+      <div class="flex flex-col w-full hidden" id="slides_table">
+      {% for level in slides %}
+        <div class="bg-gray-100 border rounded-lg mb-2 p-2 flex justify-between items-center">
+          <div class="text-left text-blue-500 font-semibold">
+            {% if level == 0 %}
+            {{_('hedy_introduction_slides')}}
+            {% else %}
+            {{_('slides_for_level')}} {{level}}
+            {% endif %}
+          </div>
+          <div class="flex flex-row ">
+            <iframe class="hidden" id="level_{{level}}_slides" data-src="/slides/{{level}}" src="about:blank"></iframe>
+            <a class="green-btn mr-2 my-auto" href="/slides/{{level}}" target="_blank">
+              <span class="hidden sm:block">{{_('view_slides')}}</span>
+              <span class="sm:hidden"><span class="fas fa-eye"></span></span>
+            </a>
+
+            <button class="white-btn" id="download_slides_{{level}}" onclick="hedyApp.downloadSlides({{level}})">
+              <span>
+                <span class="hidden sm:inline-block">{{_('download')}}</span>
+                <a class="fa fa-download"></a>
+              </span>
+            </button>
+          </div>
         </div>
+        {% endfor %}
       </div>
     </div>
-    <div class="flex flex-col gap-4 mb-8 md:px-16 hidden" id="slides_table">
-      <div class="flex flex-col gap-4 pb-4 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full lg:w-2/4 p-8">
-        {% for level in slides %}
-            <div class="bg-gray-100 border rounded-lg mb-4 p-2 flex justify-between items-center">
-                <div class="text-left text-blue-500 font-semibold ml-6">
-                    {% if level == 0 %}
-                    {{_('hedy_introduction_slides')}}
-                    {% else %}
-                    {{_('slides_for_level')}} {{level}}
-                    {% endif %}
-                </div>
-                <div class="flex flex-row gap-3 mb-2 mr-6">
-                    <iframe class="hidden" id="level_{{level}}_slides" data-src="/slides/{{level}}" src="about:blank"></iframe>
-                    <a class="green-btn mt-4" href="/slides/{{level}}" target="_blank">
-                        {{_('view_slides')}}
-                    </a>
-                    <button class="white-btn mt-4" id="download_slides_{{level}}" onclick="hedyApp.downloadSlides({{level}})">
-                        {{_('download')}}
-                        <a class="fa fa-download"></a>
-                    </button>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+  </div>
+  <div class="flex flex-row gap-4 mt-10 md:px-16">
+    <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full p-8">
+      <h2 class="m-0 basis-1/12"> {{_('public_content')}} </h2>
+      <div class="text-black basis-10/12">{{ _('public_content_info') }}</div>
+      <div class="flex gap-3 justify-end basis-1/12">
+            <button id="public_adventures_link" data-cy="public_adventures_link" class="blue-btn inline-flex items-center"
+          _="on click window.open('/public-adventures', '_self')">{{_('public_adventures')}}</button>
       </div>
-      </div>
+    </div>
+  </div>
 </div>
+
 {% endblock %}
