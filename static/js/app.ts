@@ -2,6 +2,7 @@ import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
 import * as Tone from 'tone'
+import nightwind from "nightwind/helper"
 import { SwitchTabsEvent, Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
@@ -1974,8 +1975,6 @@ export function goToLevel(level: any) {
 export function emptyEditor() {
   theGlobalEditor.contents = ""
 }
-
-import nightwind from "nightwind/helper"
 
 export function toggleNightMode() {
   nightwind.toggle()
