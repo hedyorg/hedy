@@ -12,7 +12,7 @@ describe('Go to level dropdown', () => {
     let classname;
     let students;
     ({classname, students} = createClassAndAddStudents());
-    addCustomizations(new RegExp(`^${classname}$`));
+    addCustomizations(classname);
     logout()
     loginForStudent(students[0]);
     cy.wait(500);

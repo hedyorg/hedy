@@ -328,7 +328,7 @@ teacher-guide:
             Rond je les af met een korte evaluatie. Wat hebben de leerlingen opgestoken? En waar zijn ze tegenaan gelopen?
             Wat hebben ze kunnen leren van hun fouten? En natuurlijk: Wat hebben ze gemaakt?
             Leerlingen zijn vaak trots op hun creaties, dus het is leuk om wat tijd over te houden om leerlingen de kans te geven om hun werk te presenteren aan hun klasgenoten.
--   title: Teacher Statistics
+-   title: Leraarstatistieken
     key: teacher_statistics
     subsections:
     -   title: Live Dashboard
@@ -2211,31 +2211,31 @@ workbooks:
             code: |-
                 repeat 3 times print 'Baby shark!'
             answer: |-
-              Baby shark!
-              Baby shark!
-              Baby shark!
-            lines: 3
+                Baby shark!
+                Baby shark!
+                Baby shark!
+            lines: '3'
         -   type: output
             code: |-
                 repeat 1 times print 'Hallo allemaal!'
             answer: |-
-              Hallo allemaal!
-            lines: 1
+                Hallo allemaal!
+            lines: '1'
         -   type: output
             code: |-
                 a is 4
                 repeat a times print 'Hallo allemaal!'
             answer: |-
-              Hallo allemaal!
-              Hallo allemaal!
-              Hallo allemaal!
-              Hallo allemaal!
-            lines: 4
+                Hallo allemaal!
+                Hallo allemaal!
+                Hallo allemaal!
+                Hallo allemaal!
+            lines: '4'
         -   type: text
             contents: |
                 ### Opdracht 2: Invoer
                 Je krijgt nu weer een uitvoer te zien. Schrijf een programma dat bij deze uitvoer kan horen.
-                
+
                 Let op: vaak zijn er meerdere antwoorden goed, je mag zelf iets kiezen, als het maar kan.
                 Kijk ook goed naar het aantal streepjes!
         -   type: input
@@ -2246,7 +2246,7 @@ workbooks:
                 Hallo allemaal!
                 Dit is een regel
                 Dit is een regel
-            lines: 2
+            lines: '2'
         -   type: input
             answer: |-
                 print 'Dit is regel 1'
@@ -2256,35 +2256,35 @@ workbooks:
                 Dit is regel 1
                 Dit is regel 2              
                 Dit is regel 3
-            lines: 3
+            lines: '3'
         -   type: text
             contents: |-
                 ### Opdracht 3: Goed of fout?
                 Lees de code goed, en bepaal of deze code een foutmelding oplevert.
-        -   type      : MC-code
-            options   : ["Goed" , "Fout"]
-            code      : |-
-              print 'De prins riep steeds om hulp'
-              repeat 3 times 'Help!'
-            answer    : Fout, print mist
-        -   type      : MC-code
-            options   : ["Goed" , "Fout"]
-            code      : |-
-              forward 100
-              repeat 3 times turn 90
-            answer    : Goed
-        -   type      : MC-code
-            options   : ["Goed" , "Fout"]
-            code      : |-
-              mensen = mama, papa, Emma, Sophie
-              repeat 7 times print 'De afwasser is ' mensen
-            answer    : Fout, at random mist
-        -   type      : MC-code
-            options   : ["Goed" , "Fout"]
-            code      : |-
-              dobbel = 1, 2, 3, 4, 5, 6
-              repeat 5 times print 'Jij gooit: ' dobbel at random
-            answer    : Goed
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
+                print 'De prins riep steeds om hulp'
+                repeat 3 times 'Help!'
+            answer: Fout, print mist
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
+                forward 100
+                repeat 3 times turn 90
+            answer: Goed
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
+                mensen = mama, papa, Emma, Sophie
+                repeat 7 times print 'De afwasser is ' mensen
+            answer: Fout, at random mist
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
+                dobbel = 1, 2, 3, 4, 5, 6
+                repeat 5 times print 'Jij gooit: ' dobbel at random
+            answer: Goed
         -   type: text
             contents: |-
                 #### Opdracht 4: Programmeerwoorden
@@ -2292,22 +2292,22 @@ workbooks:
         -   type: define
             word: "repeat"
             answer: "een regel code herhalen"
-            lines: 1
+            lines: '1'
         -   type: text
             contents: |-
                 #### Wat vond jij?
         -   type: question
             text: "Wat was de leukste opdracht van dit level?"
-            lines: 1
+            lines: '1'
         -   type: question
             text: "Waarom vond je juist die opdracht leuk?"
-            lines: 5
+            lines: '5'
         -   type: question
             text: "Welke opdracht was het minst leuk?"
-            lines: 1
+            lines: '1'
         -   type: question
             text: "Waarom vond je juist die opdracht niet leuk?"
-            lines: 5
+            lines: '5'
     -   level: '8'
         intro: |-
             ## Herhalen!
@@ -2327,7 +2327,7 @@ workbooks:
         -   type: text
             contents: |-
                 #### Opdracht 1: Welke regels worden er herhaald?
-                
+
                 Tip: Kijk goed welke regels inspringen, oftewel met spaties beginnen!
         -   type: circle
             goal: inspringen
@@ -2364,8 +2364,8 @@ workbooks:
                 repeat 1 times 
                     print ':)'
             answer: |-
-              Hallo!
-              :)
+                Hallo!
+                :)
         -   type: output
             code: |-
                 print 'Hallo!'
@@ -2373,20 +2373,20 @@ workbooks:
                     print ':('
                 print 'En klaar!'
             answer: |-
-              Hallo!
-              :(
-              :(
-              :(
-              :(
-              :(
-              En klaar!
+                Hallo!
+                :(
+                :(
+                :(
+                :(
+                :(
+                En klaar!
         -   type: text
             contents: |
                 ## If en else
                 Ook bij `if` en `else` moet je inspringen gebruiken. Zo kan je als een conditie waar of niet waar is, ook meerdere regels uitvoeren.
 
                 ### Opdracht 3: Voorspel de uitvoer
-              
+
                 Voorspel de uitvoer van deze codes.
         -   type: output
             code: |-
@@ -2396,7 +2396,7 @@ workbooks:
                 else
                     print 'Nee'
             answer: 'Nee'
-            lines: 1
+            lines: '1'
         -   type: output
             code: |-
                 getallen is 1, 2, 3, 4, 5, 6, 7
@@ -2407,61 +2407,61 @@ workbooks:
                 else
                     print 'Jammer hoor'
             answer: 'Jammer hoor'
-            lines: 2
+            lines: '2'
         -   type: output
             code: |-
-              dobbel = 1, 2, 3, 4, 5, 6
-              repeat 3 times 
-                  print 'Jij gooide: ' dobbel at random
-                  print 'Het spel is nu afgelopen'
+                dobbel = 1, 2, 3, 4, 5, 6
+                repeat 3 times 
+                    print 'Jij gooide: ' dobbel at random
+                    print 'Het spel is nu afgelopen'
             answer: |-
-              Jij gooide: <1, 2, 3, 4, 5 of 6 >
-              Het spel is nu afgelopen
-              Jij gooide: <1, 2, 3, 4, 5 of 6 >
-              Het spel is nu afgelopen
-              Jij gooide: <1, 2, 3, 4, 5 of 6 >
-              Het spel is nu afgelopen
-            lines: 6
+                Jij gooide: <1, 2, 3, 4, 5 of 6 >
+                Het spel is nu afgelopen
+                Jij gooide: <1, 2, 3, 4, 5 of 6 >
+                Het spel is nu afgelopen
+                Jij gooide: <1, 2, 3, 4, 5 of 6 >
+                Het spel is nu afgelopen
+            lines: '6'
         -   type: text
             contents: |-
                 ### Opdracht 4: Goed of fout?
                 Lees de code goed, en bepaal of deze code een foutmelding oplevert.
-        -   type      : MC-code
-            options   : ["Goed" , "Fout"]
-            code      : |-
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
                 naam is Hermans
                 if naam is Senkal
                   print 'Hoera!'
                 else
                 print 'Pech'
-            answer    : Fout, er is niet ingesprongen bij else
-        -   type      : MC-code
-            options   : ["Goed" , "Fout"]
-            code      : |-
+            answer: Fout, er is niet ingesprongen bij else
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
                 nummer is 10
                   if nummer is 5
                 print 'Hoera!'
                   else
                 print 'Pech'
-            answer    : Fout, er is verkeerd ingesprongen
-        -   type      : MC-code
-            options   : ["Goed" , "Fout"]
-            code      : |-
-              mensen = mama, papa, Emma, Sophie
-              repeat 7 times print 'De afwasser is ' mensen at random
-            answer    : Fout, repeat mag niet meer op één regel
-        -   type      : MC-code
-            options   : ["Goed" , "Fout"]
-            code      : |-
+            answer: Fout, er is verkeerd ingesprongen
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
+                mensen = mama, papa, Emma, Sophie
+                repeat 7 times print 'De afwasser is ' mensen at random
+            answer: Fout, repeat mag niet meer op één regel
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
                 dag is ask 'Welke dag is het?'
                 if dag is vrijdag
                   print 'Hoera!'
-            answer    : Goed
+            answer: Goed
         -   type: text
             contents: |-
                 #### Opdracht 5: Schrijf de code
                 Je krijgt uitvoer in beeld, en jij moet er kloppende code bij schrijven. Gebruik een `repeat` waar het kan
-                
+
                 Kijk ook goed naar het aantal regels code dat je nodig hebt!
         -   type: input
             answer: |-
@@ -2498,20 +2498,20 @@ workbooks:
         -   type: define
             word: "Hoe laat je een regel code inspringen?"
             answer: "een regel code laten beginnen met spaties"
-            lines: 1
+            lines: '1'
 
         -   type: text
             contents: |-
                 #### Wat vond jij?
         -   type: question
             text: "Wat was de leukste opdracht van dit level?"
-            lines: 1
+            lines: '1'
         -   type: question
             text: "Waarom vond je juist die opdracht leuk?"
-            lines: 5
+            lines: '5'
         -   type: question
             text: "Welke opdracht was het minst leuk?"
-            lines: 1
+            lines: '1'
         -   type: question
             text: "Waarom vond je juist die opdracht niet leuk?"
-            lines: 5
+            lines: '5'

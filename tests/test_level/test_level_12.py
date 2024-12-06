@@ -3809,6 +3809,34 @@ class TestsLevel12(HedyTester):
             exception=hedy.exceptions.UnusedVariableException
         )
 
+    def test_function_calls_another_function(self):
+        code = textwrap.dedent("""\
+        a = 1
+
+        define add_one with n1
+            print n1 + 1
+
+        define add_another with n1
+            call add_one with n1
+
+        call add_another with a""")
+
+        expected = self.dedent("""\
+            a = Value(1, num_sys='Latin')
+            def add_one(n1):
+              print(f'''{localize(sum_with_error(n1, 1, \"""Runtime Values Error\"""), num_sys=get_num_sys(n1))}''')
+            def add_another(n1):
+              add_one(n1)
+            add_another(a)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output='2',
+            max_level=16,
+            unused_allowed=True
+        )
+
     def test_unused_global_var_named_as_function_arg(self):
         code = textwrap.dedent("""\
         define add with n
