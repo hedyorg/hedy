@@ -343,7 +343,7 @@ def redirect_outdated_domains():
     # request.host looks like 'hostname[:port]'
     host = request.host.split(':')[0]
 
-    if host in ['hedycode.com', 'hedy-beta.herokuapp.com']:
+    if host in ['www.hedycode.com', 'hedycode.com', 'hedy-beta.herokuapp.com']:
         # full_path starts with '/' and has everything
         return redirect(f'https://hedy.org{request.full_path}', code=301)
 

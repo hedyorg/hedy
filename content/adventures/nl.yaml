@@ -312,7 +312,7 @@ adventures:
             1:
                 story_text: |
                     ## Het vraag commando
-                    Nu je het`{print}` commando onder de knie hebt, is het tijd voor een nieuw commando: `{ask}`. Met het`{ask}` commando kun je een vraag stellen. Kijk maar:
+                    Nu je het `{print}` commando onder de knie hebt, is het tijd voor een nieuw commando: `{ask}`. Met het `{ask}` commando kun je een vraag stellen. Kijk maar:
                 example_code: |
                     ```
                     {print} Hallo!
@@ -1186,6 +1186,9 @@ adventures:
                         print 'daar een ' geluid
                         print 'overal een ' geluid geluid
                     ```
+        name: Debugging
+        default_save_name: Debugging
+        description: Debugging avontuur
     default:
         name: Introductie
         description: Level uitleg
@@ -4399,8 +4402,7 @@ adventures:
                     ```
             17:
                 example_code: "```\n# Plak hier jouw code en maak het \"level 17\" waardig\n\n# Creeer een functie zodat deze detecteert dat iemand heeft gewonnen\n{define} detect_winner {with} field, sign:\n    {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':\n        game_over = 'yes'\n        {print} 'Player ' sign 'wins!'\n    {elif}:\n        _\n    {else}:\n        game_over = 'no'\n{return} _\n```\n"
-                story_text: "In het vorige level heb je geleerd hoe je een boter-kaas-en-eieren spel maakt. Het spel werkt, maar is behoorlijk irritant omdat het je steeds vraagt of je al gewonnen hebt.\nNu we de '{elif}' opdracht hebben, kunnen we het spel laten beslissen of iemand gewonnen heeft. Het spel hoeft ons dan niet meer om informatie te vragen!\n\n### Opdracht\n***Plak je code*** Plak je code van het vorige level hier en maak het level 17 proof. In dit level heb je geleerd om een `:` te gebruiken elke keer dat je een codeblok maakt. Voeg de dubbele punten toe op de juiste plekken.\n\n***Maak een functie die detecteert of iemand gewonnen heeft*** We hebben de functie voor je gestart, plak deze onder de functie `print_field` en voltooi de functie. Je ziet dat dit eerste stukje code controleert of plek 1, 2 en 3 hetzelfde zijn, want als dat zo is, heb je er 3 op een rij.\nHet controleert ook of ze geen punt zijn, want als dat zo is, kan de lijn dezelfde symbolen bevatten, maar dat
-                    komt alleen omdat deze nog leeg is.\nAls aan al deze voorwaarden is voldaan, is het spel afgelopen en wordt de winnaar afgedrukt.\nVoltooi deze functie met alle mogelijke manieren om te winnen. Dit betekent dat je dit moet doen voor de andere 2 rijen, 3 kolommen en 2 diagonalen.\nAls je alle andere opties hebt voltooid, moet de functie de variabele `game_over` retourneren, zodat we deze in ons spel kunnen gebruiken.\n\n***Roep de functie aan in het spel*** Ga naar de regel`game_over = {ask} 'Heb je gewonnen?'` en verander het in `game_over = {call} detect_winner {with} field, sign`. Nu controleert de functie of er een winnaar is en hoeft het spel niet dat niet meer te vragen!\n\n***Geniet van je spel!*** Goed gedaan! Je hebt het spel geprogrammeerd! Veel plezier met spelen!\n"
+                story_text: "In het vorige level heb je geleerd hoe je een boter-kaas-en-eieren spel maakt. Het spel werkt, maar is behoorlijk irritant omdat het je steeds vraagt of je al gewonnen hebt.\nNu we de '{elif}' opdracht hebben, kunnen we het spel laten beslissen of iemand gewonnen heeft. Het spel hoeft ons dan niet meer om informatie te vragen!\n\n### Opdracht\n***Plak je code*** Plak je code van het vorige level hier en maak het level 17 proof. In dit level heb je geleerd om een `:` te gebruiken elke keer dat je een codeblok maakt. Voeg de dubbele punten toe op de juiste plekken.\n\n***Maak een functie die detecteert of iemand gewonnen heeft*** We hebben de functie voor je gestart, plak deze onder de functie `print_field` en voltooi de functie. Je ziet dat dit eerste stukje code controleert of plek 1, 2 en 3 hetzelfde zijn, want als dat zo is, heb je er 3 op een rij.\nHet controleert ook of ze geen punt zijn, want als dat zo is, kan de lijn dezelfde symbolen bevatten, maar dat komt alleen omdat deze nog leeg is.\nAls aan al deze voorwaarden is voldaan, is het spel afgelopen en wordt de winnaar afgedrukt.\nVoltooi deze functie met alle mogelijke manieren om te winnen. Dit betekent dat je dit moet doen voor de andere 2 rijen, 3 kolommen en 2 diagonalen.\nAls je alle andere opties hebt voltooid, moet de functie de variabele `game_over` retourneren, zodat we deze in ons spel kunnen gebruiken.\n\n***Roep de functie aan in het spel*** Ga naar de regel`game_over = {ask} 'Heb je gewonnen?'` en verander het in `game_over = {call} detect_winner {with} field, sign`. Nu controleert de functie of er een winnaar is en hoeft het spel niet dat niet meer te vragen!\n\n***Geniet van je spel!*** Goed gedaan! Je hebt het spel geprogrammeerd! Veel plezier met spelen!\n"
     tic_2:
         name: Boter-kaas-en-eieren 2
         levels:
