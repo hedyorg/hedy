@@ -182,6 +182,7 @@ export function initializeApp(options: InitializeAppOptions) {
   initializeLoginLinks();
 
   initializeActivity();
+  getInitialColorMode() == 'light' ? document.documentElement.classList.remove('dark') : document.documentElement.classList.add('dark');
 }
 
 export interface InitializeCodePageOptions {
@@ -1972,4 +1973,60 @@ export function goToLevel(level: any) {
 
 export function emptyEditor() {
   theGlobalEditor.contents = ""
+}
+
+import nightwind from "nightwind/helper"
+
+export function toggleNightMode() {
+  nightwind.toggle()
+}
+
+nightwind.beforeTransition = () => {
+  const doc = document.documentElement;
+  const onTransitionDone = () => {
+    doc.classList.remove('nightwind');
+    doc.removeEventListener('transitionend', onTransitionDone);
+  }
+  doc.addEventListener('transitionend', onTransitionDone);
+  if (!doc.classList.contains('nightwind')) {
+    doc.classList.add('nightwind');
+  }
+}
+
+nightwind.toggle = () => {
+  nightwind.beforeTransition();
+  if (!document.documentElement.classList.contains('dark')) {
+    document.documentElement.classList.add('dark');
+    window.localStorage.setItem('nightwind-mode', 'dark');
+  } else {
+      document.documentElement.classList.remove('dark');
+      window.localStorage.setItem('nightwind-mode', 'light');
+  }
+}
+
+nightwind.enable = (dark: boolean) => {
+  const mode = dark ? "dark" : "light";
+  const opposite = dark ? "light" : "dark";
+
+  nightwind.beforeTransition();
+
+  if (document.documentElement.classList.contains(opposite)) {
+    document.documentElement.classList.remove(opposite);
+  }
+  document.documentElement.classList.add(mode);
+  window.localStorage.setItem('nightwind-mode', mode);
+}
+
+export function getInitialColorMode() {
+  const persistedColorPreference = window.localStorage.getItem('nightwind-mode');
+  const hasPersistedPreference = typeof persistedColorPreference === 'string';
+  if (hasPersistedPreference) {
+    return persistedColorPreference;
+  }
+  const mql = window.matchMedia('(prefers-color-scheme: dark)');
+  const hasMediaQueryPreference = typeof mql.matches === 'boolean';
+  if (hasMediaQueryPreference) {
+    return mql.matches ? 'dark' : 'light';
+  }
+  return 'light';
 }
