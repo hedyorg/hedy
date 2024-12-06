@@ -857,6 +857,7 @@ export function initializeGraph() {
       max = student.successful_runs
     }
   }
+  if (max == 0) {
     max = 12
   }
   let data: dataPoint[] = students.map((student: student) => {
