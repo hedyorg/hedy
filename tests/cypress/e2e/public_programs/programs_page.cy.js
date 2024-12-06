@@ -1,6 +1,6 @@
 import { createAdventure, deleteAdventure } from "../tools/adventures/adventure";
 import { executeHelloWorldProgram, deleteProgram } from "../tools/programs/program";
-import { loginForTeacher } from "../tools/login/login";
+import { login, loginForTeacher } from "../tools/login/login";
 import { navigateToClass } from "../tools/classes/class";
 import { makeProfilePublic } from "../tools/profile/profile";
 
@@ -194,6 +194,13 @@ describe("General tests for my programs page (with both custom teacher and built
          
             cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('be.visible')
             cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('be.visible')
+        })
+
+        it('Introduction adventures should be visible', () => {
+            login('user1', '123456')
+            cy.visit(`${Cypress.env('programs_page')}`);
+            cy.getDataCy('adventure_select').select('Introduction')
+            cy.get('#program_fb23d0fa90ce48b5bf87c0632969fc28').should('be.visible')
         })
     })
 

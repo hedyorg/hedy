@@ -542,6 +542,7 @@ class LookupTable:
         self.entries = entries
         self.__local_scopes = local_scopes
         self.__entries = entries
+        self.entries = entries
 
     def get_all(self):
         return self.__entries
@@ -558,8 +559,11 @@ class LookupTable:
 
     def get_all_in_scope(self, access_line):
         """Returns the lookup entries for the scope of the given access line."""
-        def in_global_scope(line):
-            return not [s for (_, s, e) in self.__local_scopes if s <= line <= e]
+        def in_global_scope(entry):
+            is_func = entry.name.endswith('()')
+            line = entry.definition_line
+            # functions are always part of the global scope since they cannot be nested
+            return is_func or not [s for (_, s, e) in self.__local_scopes if s <= line <= e]
 
         def is_func_definition(entry):
             return entry.is_func() and entry.definition_line in [s for (_, s, _) in self.__local_scopes]
@@ -567,15 +571,17 @@ class LookupTable:
         local_scope = self.try_get_local_scope(access_line)
         if local_scope:
             _, start, end = local_scope
-            # if the variable is in local scope, return the whole local scope combined
-            # with the part of the global scope defined before the local scope
+            # if the variable is in local scope, return the whole local scope combined with the part of the global
+            # scope defined before the local scope. Note that we return the whole local scope, not just the part
+            # before the access line. The decision whether to throw an error if a variable is used before it is
+            # defined or to interpret the variable as a literal string, must be made by the caller.
             loc = [e for e in self.__entries if start <= e.definition_line <= end]
-            glo = [e for e in self.__entries if e.definition_line < start and in_global_scope(e.definition_line)]
+            glo = [e for e in self.__entries if e.definition_line < start and in_global_scope(e)]
             return loc + glo
 
         # if the variable is in the global scope, return the whole global scope
         # combined with the function definitions
-        glo = [e for e in self.__entries if in_global_scope(e.definition_line)]
+        glo = [e for e in self.__entries if in_global_scope(e)]
         funcs = [e for e in self.__entries if is_func_definition(e)]
         return glo + funcs
 
