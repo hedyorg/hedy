@@ -467,9 +467,7 @@ class Database:
             if level and int(program.get('level', 0)) != int(level):
                 return False
             if adventure:
-                if adventure == 'default' and program.get('adventure_name') != '':
-                    return False
-                if adventure != 'default' and program.get('adventure_name') != adventure:
+                if program.get('adventure_name') != adventure:
                     return False
             if submitted is not None:
                 if program.get('submitted') != submitted:
@@ -877,10 +875,6 @@ class Database:
 
     def update_last_viewed_level_in_class(self, id, level):
         self.classes.update({"id": id}, {"last_viewed_level": level})
-
-    def store_feedback(self, feedback):
-        """Store a feedback message in the database"""
-        self.feedback.create(feedback)
 
     def store_survey(self, survey):
         self.surveys.create(survey)
