@@ -415,6 +415,8 @@ levels:
 
                 Separate the items on your list with a comma.
             code: animals {is} dogs, cats, kangaroos
+            note: |-
+                Ask the students to write down an example of a list of their own.
         3:
             header: At random
             text: |-
@@ -424,25 +426,50 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
+            notes: |-
+                Run the code a couple of times and show the students that the output is different every time.
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
+            notes: |-
+                Again, show the students that the output changes when the code is run a couple of times.
+                You can also change the order of the words, to show that `{print} animals {at} {random} are my favorite animal` is allowed too.
+                Now ask your students to write down a print and at random command beneath the list they made and swap their code with another student.
+                Let the other student predict a possible output for the program.
+                Shortly discuss some answers in class.
         5:
+            header: Let's get started!
+            text: |-
+                This is a good time to try the Dice, Rock-paper-scissors, Music, Fortune teller and Restaurant adventures.
+            notes: |-
+                These are the first adventures to start with. Once (most of) the students are done, you can introduce the {add} and {remove} commands.
+        6:
             header: Add to
             text: |-
                 You can add items to a list with the `{add}` `{to}` command.
-
+            code: |-
+                animals {is} dog, cat, kangaroo
+                {add} sheep {to_list} animals
+                {print} I choose animals {at} {random}
+            notes: |-
+                The students will hopefully notice that it doesn't really make sense to use the add to command this way, because you could have just put sheep in the list to start with.
+                The next slide will show how to use the add to in combination with an ask and a variable, to make the program interactive.
+        7:
+            header: Add to
+            text: |-
                 You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
-                This way you can let the player decide what to add to the list.
+                This way you can let the player decide what to add to the list to make the program interactive.
             code: |-
                 animals {is} dog, cat, kangaroo
                 like {is} {ask} What is your favorite animal?
                 {add} like {to_list} animals
                 {print} I choose animals {at} {random}
-        6:
+            notes: |-
+                Run the program multiple times to show that the animal that was picked is now added to the list.
+        8:
             header: Remove from
             text: |-
                 The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
@@ -452,7 +479,9 @@ levels:
                 dislike {is} {ask} What animal do you not like?
                 {remove} dislike {from} animals
                 {print} I choose animals {at} {random}
-        7:
+            notes: |-
+                Once the students understand the add to, they will probably pick up the remove from command pretty easily.
+        9:
             header: Debugging
             text: Let's debug this code!
             editor: |-
@@ -466,9 +495,32 @@ levels:
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
             debug: 'True'
-        8:
+        10:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
+        11:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        12:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        13:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        14:
+            header: Sneak peek into the next level...
+            text: |-
+                In the next level you'll learn how to make a list and let the computer pick a random item of that list!
     4:
         1:
             header: Welcome to level 4
