@@ -34,6 +34,10 @@ h4 {
   @apply font-bold text-base;
 }
 
+p, li, td, tr, label {
+  @apply text-black 
+}
+
 /* TB: Why do we have this? It makes it (a lot) harder to style these element within the templates... */
 * + p, * + ul, * + ol, * + pre {
   @apply mt-4;
@@ -105,12 +109,12 @@ strong {
 
 .green-btn {
   @apply btn-shape;
-  @apply bg-green-500 text-white border-green-700;
+  @apply bg-green-500 text-white dark:text-white border-green-700;
 }
 
 .green-btn-new {
   @apply btn-shape-new;
-  @apply bg-green-500 text-white border-green-500;
+  @apply bg-green-500 text-white dark:text-white border-green-500;
 }
 
 .green-btn:disabled, .green-btn[disabled] {
@@ -140,7 +144,7 @@ strong {
 
 .stripe-colored h2, .stripe-colored a { @apply text-white; }
 .stripe-colored .column-pane a { @apply text-blue-700; }
-.stripe-colored .column-pane { @apply bg-white shadow-md rounded-lg; }
+.stripe-colored .column-pane { @apply bg-white shadow-md dark:shadow-gray-900 rounded-lg; }
 
 .heading-underline { @apply bg-pink-600 w-36 mx-auto h-1 my-8; }
 
@@ -223,7 +227,7 @@ a.green-btn-new:hover {
 
 .yellow-btn {
   @apply btn-shape;
-  @apply bg-yellow-500 text-black border-yellow-700;
+  @apply bg-yellow-500 border-yellow-700
 }
 
 .yellow-btn-new {
@@ -513,7 +517,7 @@ code {
   text-shadow: 0 2px 4px rgba(0,0,0,0.10);
 }
 
-.text-shadow-md {
+.text-shadow-md dark:shadow-gray-900 {
   text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
 }
 
@@ -579,7 +583,7 @@ input[type=checkbox]:checked, input[type=radio]:checked {
 }
 
 input, select {
-  @apply border border-gray-400;
+  @apply border border-gray-400 bg-white text-black;
 }
 
 table.users thead {
@@ -602,7 +606,7 @@ body[dir='rtl'] .right-hand-shadow {
 }
 
 .tab {
-  @apply py-2 px-1 mt-2 bg-gray-100 rounded-t-lg border-t-8 border-gray-300 text-sm cursor-pointer;
+  @apply py-2 px-1 mt-2 bg-gray-100 rounded-t-lg border-t-8 border-gray-300 text-sm cursor-pointer text-black;
   box-shadow:
     /* bottom */ inset 0px -4px 4px -1px rgba(0,0,0,0.1);
 }
@@ -616,7 +620,7 @@ body[dir='rtl'] .right-hand-shadow {
 }
 
 .command_tab {
-  @apply border-[#fdb2c5];
+  @apply border-[#fdb2c5] dark:border-[#fdb2c5];
 }
 
 .active-bluebar-btn {
@@ -788,7 +792,7 @@ p.close-dialog {
 /* Profile page */
 
 .section-header {
-  @apply bg-blue-200 px-8 py-2 rounded-lg text-3xl cursor-pointer;
+  @apply bg-blue-200 px-8 py-2 rounded-lg text-3xl text-black cursor-pointer;
 }
 
 .profile-section-body-header {
@@ -796,7 +800,7 @@ p.close-dialog {
 }
 
 .profile-section-body {
-  @apply bg-white shadow-md rounded px-8 py-4 mx-auto w-full lg:w-3/4 hidden;
+  @apply bg-white shadow-md dark:shadow-gray-900 dark:shadow-black rounded px-8 py-4 mx-auto w-full lg:w-3/4 hidden;
 }
 
 .personal-input {
@@ -1014,4 +1018,8 @@ div[class^="ace_incorrect_hedy_code"] {
 
 .sliding-content-open {
   grid-template-rows: 1fr;
+}
+
+.dark-opacity-50 {
+  @apply dark:opacity-50
 }

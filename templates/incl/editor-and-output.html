@@ -18,7 +18,7 @@
         <div id="search_placeholder" style="display: none":>{{_('search')}}</div>
         <!-- Status warning -->
         <div data-view="if-submitted"
-          class="hidden flex-0 z-20 mt-0 bg-yellow-100 border-b-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md">
+          class="hidden flex-0 z-20 mt-0 bg-yellow-100 border-b-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md dark:shadow-gray-900">
           {{_('submitted_header')}}
         </div>
 
@@ -36,7 +36,7 @@
         </div>
         <!-- errorbox -->
         <div id="errorbox"
-          class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert"
+          class="flex-0 z-20 mt-0 bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md dark:shadow-gray-900" role="alert"
           style="display: none;">
           <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
           <div class="flex">
@@ -53,7 +53,7 @@
         </div>
         <!-- warningbox -->
         <div id="warningbox"
-          class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md"
+          class="flex-0 z-20 mt-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md dark:shadow-gray-900"
           role="alert" style="display: none;">
           <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
           <div class="flex">
@@ -72,7 +72,7 @@
         </div>
         <!-- okbox -->
         <div id="okbox"
-          class="flex-0 z-20 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
+          class="flex-0 z-20 mt-0 bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md dark:shadow-gray-900"
           role="alert" style="display: none;">
           <div class="flex">
             <div class="flex w-full justify-between items-center">
@@ -84,7 +84,7 @@
         </div>
     </div>
     <div data-devmodeheight="{{editor_height}},36rem" data-origheight="{{editor_height}}" class="w-full flex flex-col order-3 relative min-h-0 overflow-auto" id="code_output" style="height: {{editor_height}}">
-      <div id="output" data-cy="output" tabindex=0 class="flex-1 rounded p-2 px-3 pb-10 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
+      <div id="output" data-cy="output" tabindex=0 class="flex-1 rounded p-2 px-3 pb-10 bg-gray-900 dark:bg-[#272822] w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
       <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
       <div class="overflow-auto flex-0 absolute bottom-0 w-full z-20 bg-blue-100">
         <div id="variable_button" class="hidden my-3 cursor-pointer" onclick="$('#variable_list').slideToggle('medium');">
@@ -267,7 +267,7 @@
 {% if raw or public_adventures_page %}
   <div _="on load hedyApp.setDevelopersMode('load', false)"></div>
 {% elif not enforce_developers_mode and not editor_readonly %}
-  <div class="mx-auto mt-4 w-64 border-gray-400 border-2 rounded-full py-2 px-4" id="developers_toggle_container">
+  <div class="mx-auto mt-4 w-64 border-gray-400 dark:bg-gray-200 border-2 rounded-full py-2 px-4" id="developers_toggle_container">
     <label for="developers_toggle" class="flex flex-row items-center justify-center cursor-pointer">
       <div class="relative">
         <input id="developers_toggle" type="checkbox" class="sr-only"

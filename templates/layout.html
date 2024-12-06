@@ -10,7 +10,7 @@
               border-blue-900
             {% endif %}
           {% if selected %}adv-selected{% else %}not-selected-adv{% endif %}
-        px-3 py-1 hover:px-4 hover:py-3 hover:text-lg cursor-pointer text-blue-900
+        px-3 py-1 hover:px-4 hover:py-3 hover:text-lg cursor-pointer text-blue-900        
         transition-all ease-in duration-100"
         data-tab="{{ adv_name }}"
         data-level="{{ tab_level }}"
@@ -20,6 +20,7 @@
         _="on click wait 150ms 
         then toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
         then toggle .opacity-75 on #sidebar_bg
+        then toggle .dark-opacity-50 on #sidebar_bg
         then toggle .opacity-0 on #sidebar_bg
         wait 300ms
         then toggle .hidden on #sidebar_bg"
@@ -49,12 +50,14 @@
     <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
   </head>
   <body id="main_container" dir="{{ g.dir }}" class="{% if not raw %}bg-gray-100{% endif %}" hx-ext="disable-element" data-logged-in="{{ 1 if username else 0 }}">
+    <button class="green-btn" onclick="hedyApp.toggleNightMode()">Toggle dark mode</button>
     <div id="modal_target"></div>
     {% if current_page and current_page == 'tryit' %}
     <div id="index_sidebar" class="ltr:-translate-x-full rtl:translate-x-full ease-out duration-300 xl:rounded-r h-full flex justify-start items-start w-3/4 md:w-1/2 lg:w-1/4 xl:w-1/4 bg-blue-100 flex-col z-50 fixed top-0 items-center overflow-y-auto pb-10">
       <span class="absolute top-0.5 ltr:right-0.5 rtl:left-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark cursor-pointer text-xl"
             _="on click toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
             then toggle .opacity-75 on #sidebar_bg
+            then toggle .dark-opacity-50 on #sidebar_bg
             then toggle .opacity-0 on #sidebar_bg
             wait 300ms
             then toggle .hidden on #sidebar_bg"></span>
@@ -105,9 +108,10 @@
         {% endfor %}
       </div>
     </div>
-    <div id="sidebar_bg" class="transition-all duration-300 opacity-0 fixed bg-black w-full h-full hidden z-40"
+    <div id="sidebar_bg" class="transition-all duration-300 opacity-0 fixed bg-black dark:bg-[#000000] w-full h-full hidden z-40"
       _="on click toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
          then toggle .opacity-75 on #sidebar_bg
+         then toggle .dark-opacity-50 on #sidebar_bg
          then toggle .opacity-0 on #sidebar_bg
          wait 300ms
          then toggle .hidden on #sidebar_bg">
@@ -117,17 +121,17 @@
       <div id="tutorial_mask" class="hidden fixed bg-black z-30 w-full h-full opacity-50"></div>
     {% endif %}
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
-    <div id="modal_mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
-    <div id="modal_content" data-cy="modal_content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
+    <div id="modal_mask" class="hidden fixed bg-black dark:bg-[#000000] z-50 w-full h-full opacity-75"></div>
+    <div id="modal_content" data-cy="modal_content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 dark:bg-[#2e3f5c] border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
        <div id="modal_confirm" data-cy="modal_confirm" class="hidden">
-          <div id="modal_confirm_text" data-cy="modal_confirm_text" class="text-white mb-8 text-xl"></div>
+          <div id="modal_confirm_text" data-cy="modal_confirm_text" class="text-white dark:text-[#FFFFFF] mb-8 text-xl"></div>
           <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
             <button id="modal_yes_button" data-cy="modal_yes_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('yes')}}</button>
             <button id="modal_no_button" data-cy="modal_no_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
           </div>
        </div>
        <div id="modal_prompt" class="hidden">
-          <div id="modal_prompt_text" class="text-white mb-8 text-xl"></div>
+          <div id="modal_prompt_text" class="text-white dark:text-[#FFFFFF] mb-8 text-xl"></div>
           <div class="xm-auto">
             <input id="modal_prompt_input" data-cy="modal_prompt_input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
             <div class="mt-4 flex flex-row justify-center">

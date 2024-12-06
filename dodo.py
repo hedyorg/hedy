@@ -106,12 +106,14 @@ def task_tailwind():
             *glob('templates/*.html'),
             *glob('main/**/*.md'),
             *glob('content/**/*.md'),
+
             # exclude files generated for translations
             *[file for file in glob('static/js/*.ts') if file not in
                 ['static/js/message-translations.ts', 'static/js/client-messages.ts']
               ],
             'build-tools/heroku/tailwind/styles.css',
             script,
+            'build-tools/heroku/tailwind/tailwind.config.js'
         ],
         task_dep=['npm'],
         title=lambda _: 'Generate Tailwind CSS',

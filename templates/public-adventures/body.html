@@ -2,7 +2,7 @@
 <div id="public_adventures">
   <div id="filters"
       class="flex flex-col sm:flex-row items-center gap-2
-      justify-around bg-blue-400 shadow-md rounded-lg p-4 mb-4"
+      justify-around bg-blue-400 shadow-md dark:shadow-gray-900 rounded-lg p-4 mb-4"
       _="on load set $filtered to {}">
       <div id="search" class="w-full sm:basis-1/2">
           <input id="search_adventure"
@@ -99,7 +99,7 @@
 
     <div id="_body">
       {% if adventures|length == 0 %}
-          <div class="grid p-5 text-center bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2">
+          <div class="grid p-5 text-center bg-white shadow-md dark:shadow-gray-900 rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2">
               {{_('no_adventures_yet')}}
               <button id="create_adventure_button" class="green-btn mt-4" 
                 _="on click

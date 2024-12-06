@@ -8,4 +8,8 @@ module.exports = {
   safelist: [
     { pattern: /./ },
   ],
+  plugins: [
+      require("nightwind")
+  ],
+  darkMode: 'class'
 };

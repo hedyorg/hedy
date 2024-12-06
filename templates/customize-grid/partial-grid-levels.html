@@ -22,7 +22,7 @@
           hx-target="#adventure_overview" 
           hx-swap="outerHTML"
           _='on htmx:afterRequest wait 150ms then hedyApp.initializeGraph()'>
-          <div class="flex-grow h-min min-w-80" tabindex=0>
+          <div class="flex-grow h-min" tabindex=0>
             {{ _('level_title') }} {{ dropdown_level }}
           </div>
         </button>
@@ -40,7 +40,7 @@
     </h2>
     <div></div>
   </div>
-  <div id="adventure_table_explanation" class="hidden mb-4 flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-full">
+  <div id="adventure_table_explanation" class="hidden text-black mb-4 flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-full">
     {{_('student_adventures_table_explanation')}}      
   </div>
   {# The actual table that holds the data #}

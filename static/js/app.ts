@@ -2,6 +2,7 @@ import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
 import * as Tone from 'tone'
+import nightwind from "nightwind/helper"
 import { SwitchTabsEvent, Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
@@ -182,6 +183,7 @@ export function initializeApp(options: InitializeAppOptions) {
   initializeLoginLinks();
 
   initializeActivity();
+  getInitialColorMode() == 'light' ? document.documentElement.classList.remove('dark') : document.documentElement.classList.add('dark');
 }
 
 export interface InitializeCodePageOptions {
@@ -436,11 +438,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
     const adventure = container.getAttribute('data-tabtarget')
     const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
-    let symbol = "⇥";
-    if (dir === "rtl") {
-      symbol = "⇤";
-    }
-    $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn').attr('data-cy', `paste_example_code_${adventure}`).text(symbol).appendTo(buttonContainer).click(function() {
+    const button = $('<button>').css({ fontFamily: 'sans-serif' }).addClass('yellow-btn text-black dark:text-white').attr('data-cy', `paste_example_code_${adventure}`) .appendTo(buttonContainer).click(function() {
       if (!theGlobalEditor?.isReadOnly) {
         theGlobalEditor.contents = exampleEditor.contents + '\n';
       }
@@ -448,6 +446,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
       stopit();
       clearOutput();
     });
+    $('<i>').addClass('fa-solid fa-arrow-right').appendTo(button)
   }
   const levelStr = $(preview).attr('level');
   const lang = $(preview).attr('lang');
@@ -1975,4 +1974,58 @@ export function goToLevel(level: any) {
 
 export function emptyEditor() {
   theGlobalEditor.contents = ""
+}
+
+export function toggleNightMode() {
+  nightwind.toggle()
+}
+
+nightwind.beforeTransition = () => {
+  const doc = document.documentElement;
+  const onTransitionDone = () => {
+    doc.classList.remove('nightwind');
+    doc.removeEventListener('transitionend', onTransitionDone);
+  }
+  doc.addEventListener('transitionend', onTransitionDone);
+  if (!doc.classList.contains('nightwind')) {
+    doc.classList.add('nightwind');
+  }
+}
+
+nightwind.toggle = () => {
+  nightwind.beforeTransition();
+  if (!document.documentElement.classList.contains('dark')) {
+    document.documentElement.classList.add('dark');
+    window.localStorage.setItem('nightwind-mode', 'dark');
+  } else {
+      document.documentElement.classList.remove('dark');
+      window.localStorage.setItem('nightwind-mode', 'light');
+  }
+}
+
+nightwind.enable = (dark: boolean) => {
+  const mode = dark ? "dark" : "light";
+  const opposite = dark ? "light" : "dark";
+
+  nightwind.beforeTransition();
+
+  if (document.documentElement.classList.contains(opposite)) {
+    document.documentElement.classList.remove(opposite);
+  }
+  document.documentElement.classList.add(mode);
+  window.localStorage.setItem('nightwind-mode', mode);
+}
+
+export function getInitialColorMode() {
+  const persistedColorPreference = window.localStorage.getItem('nightwind-mode');
+  const hasPersistedPreference = typeof persistedColorPreference === 'string';
+  if (hasPersistedPreference) {
+    return persistedColorPreference;
+  }
+  const mql = window.matchMedia('(prefers-color-scheme: dark)');
+  const hasMediaQueryPreference = typeof mql.matches === 'boolean';
+  if (hasMediaQueryPreference) {
+    return mql.matches ? 'dark' : 'light';
+  }
+  return 'light';
 }

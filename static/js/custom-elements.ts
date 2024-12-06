@@ -13,7 +13,7 @@ export class HedySelect extends HTMLElement {
         const dropdownMenu = this.querySelector('.dropdown-menu')!;                
         if (this.dataset['type'] === 'multiple') {
             const newDiv = document.createElement('div');
-            newDiv.classList.add('option');
+            newDiv.classList.add('option', 'text-black');
             newDiv.innerHTML = ClientMessages['select_all'];
             newDiv.dataset['value'] = 'select_all';
             dropdownMenu.appendChild(newDiv)
@@ -22,7 +22,7 @@ export class HedySelect extends HTMLElement {
         for (const option of options) {
             option.hidden = true;
             const newDiv = document.createElement('div');
-            newDiv.classList.add('option');
+            newDiv.classList.add('option', 'text-black');
             newDiv.innerHTML = option.innerText;
             newDiv.dataset['value'] = option.value;
             newDiv.classList.toggle('selected', option.selected);

@@ -1,3 +1,5 @@
+const nightwind = require("nightwind");
+
 // Control the Tailwind file size by disabling stuff we don't need.
 module.exports = {
   content: [
@@ -172,11 +174,34 @@ module.exports = {
         800: '#075985',
         900: '#0c4a6e',
       },
+    },
+    nightwind: {
+      colors: {
+       white: "gray.800",
+       yellow: {
+        100: "#c38138",
+        500: "yellow.500",
+        700: "yellow.700"
+       },
+       blue: {
+        100: "#2e3f5c",
+        900: "#ebf8ff"
+       },
+       red: {
+        100: "#5a2c2c"
+       },
+       gray: {
+        400: "gray.600"
+       }
+      }
     }
   },
   variants: {},
   corePlugins: {
   },
-  plugins: [require("tw-elements/dist/plugin.cjs")],
+  plugins: [
+      require("tw-elements/dist/plugin.cjs"),
+      require("nightwind")
+  ],
   darkMode: 'class'
 }

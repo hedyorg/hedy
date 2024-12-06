@@ -10,7 +10,7 @@
         <div id="survey" data-cy="survey" class="hidden"></div>
         {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
         <div class="flex flex-col md:flex-row items-left md:items-center justify-between">
-            <h1>{{ class_info.name }}</h1>
+            <h1 class="text-black">{{ class_info.name }}</h1>
             <div class="flex flex-col md:flex-row gap-2">
                 <div class="items-center gap-2 md:ml-4 md:mr-4 align-middle">
                     {% if class_info.students > 0 %}
@@ -55,7 +55,7 @@
                 <th class="px-2 py-2 text-center" id="username_header">{{_('username')}}</th>
                 <th class="px-2 py-2 text-center" id="role">{{_('role')}}</th>
                 <th class="px-2 py-2 text-center" id="overview_header">{{_('programs')}}</th>
-                {% if not is_second_teacher and class_info.teacher == username %}<th class="px-2 p-2 bg-blue-900 text-white text-center" id="remove_second_teacher_header">{{_('remove')}}</th>{% endif %}
+                {% if not is_second_teacher and class_info.teacher == username %}<th class="px-2 p-2 bg-blue-900 dark:bg-[#2a4365] dark:text-[#FFFFFF] text-white text-center" id="remove_second_teacher_header">{{_('remove')}}</th>{% endif %}
             </tr>
             </thead>
             <tbody id="class_user_table">
@@ -102,7 +102,7 @@
                   <th class="px-2 py-2 text-center">{{_('role')}}</th>
                   <th class="px-2 py-2 text-center">{{_('invite_date')}}</th>
                   <th class="px-2 py-2 text-center">{{_('expiration_date')}}</th>
-                  {% if not is_second_teacher %}<th class="px-2 p-2 bg-blue-900 text-white">{{_('remove')}}</th>{% endif %}
+                  {% if not is_second_teacher %}<th class="px-2 p-2 bg-blue-900 dark:bg-[#2a4365] dark:text-[#FFFFFF] text-white">{{_('remove')}}</th>{% endif %}
               </tr>
           </thead>
           <tbody>
