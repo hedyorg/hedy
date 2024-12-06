@@ -1917,23 +1917,21 @@ def view_program(user, id):
         student_adventure = DATABASE.store_student_adventure(
             dict(id=f"{student_adventure_id}", ticked=False, program_id=id))
 
-    arguments_dict = {}
-    arguments_dict['program_id'] = id
-    arguments_dict['page_title'] = f'{result["name"]} – Hedy'
-    arguments_dict['level'] = result['level']  # Necessary for running
-    arguments_dict['initial_adventure'] = dict(result,
-                                               editor_contents=code,
-                                               )
-    arguments_dict['editor_readonly'] = True
-    arguments_dict['student_adventure'] = student_adventure
+    arguments_dict = {
+        'program_id': id,
+        'page_title': f'{result["name"]} – Hedy',
+        'level': result['level'],  # Necessary for running
+        'initial_adventure': dict(result, editor_contents=code),
+        'editor_readonly': True,
+        'student_adventure': student_adventure,
+        'is_students_teacher': False
+    }
+
     if "submitted" in result and result['submitted']:
         arguments_dict['show_edit_button'] = False
         arguments_dict['program_timestamp'] = utils.localized_date_format(result['date'])
     else:
         arguments_dict['show_edit_button'] = True
-    is_students_teacher = is_teacher(user)\
-        and result['username'] in DATABASE.get_teacher_students(user['username'])
-    arguments_dict['is_students_teacher'] = is_students_teacher
 
     classes = DATABASE.get_student_classes_ids(result['username'])
     next_classmate_adventure_id = None
@@ -1948,6 +1946,10 @@ def view_program(user, id):
             next_classmate_adventure_id = next_classmate_adventure.get('program_id')
             if next_classmate_adventure_id:
                 break
+        if is_teacher(user):
+            second_teachers = [t for t in class_.get('second_teachers', []) if t.get('role', '') == 'teacher']
+            all_teachers = [class_.get('teacher')] + [t.get('username', '') for t in second_teachers]
+            arguments_dict['is_students_teacher'] = user.get('username') in all_teachers
 
     student_customizations = DATABASE.get_student_class_customizations(result['username'])
     adventure_index = 0
@@ -1973,7 +1975,6 @@ def view_program(user, id):
                                lang=g.lang,
                                level=int(result['level']),
                                code=code),
-                           is_teacher=user['is_teacher'],
                            class_id=student_customizations.get('id'),
                            next_program_id=next_program_id,
                            next_classmate_program_id=next_classmate_adventure_id,

@@ -1,18 +1,6 @@
 {% extends "layout.html" %}
 {% block full_width_content %}
-<div style="height: 30px;"></div>
 <div tabindex="0" class="flex-grow px-8 common-page-container">
-  {% if initial_adventure.submitted %}
-      <div class="text-center">
-        <h2>{{_('submitted_header')}}</h2>
-        <h3 class="inline-block mt-0">{{_('submission_time')}}: {{program_timestamp}}</h3>
-      </div>
-      {% if is_teacher %}
-      <div class="text-center">
-        <button class="green-btn" data-cy="unsubmit_btn" onclick="hedyApp.modal.confirm ('{{_('unsubmit_warning')}}', function () {hedyApp.unsubmit_program ('{{initial_adventure.id}}', {{ loop_index }})})">{{_('unsubmit_program')}}</button>
-      </div>
-      {% endif %}
-  {% endif %}
   <div class="flex flex-row gap-6 items-center">
     <h1>{{initial_adventure.name}}</h1>
     {% if is_students_teacher %}
@@ -25,6 +13,13 @@
         {% if student_adventure.ticked %}checked{% endif %}
         _="on click toggle .fa-solid .fa-check on me"
       >
+
+      {% if initial_adventure.submitted %}
+        <div class="text-center">
+          <button class="green-btn" data-cy="unsubmit_btn" onclick="hedyApp.modal.confirm ('{{_('unsubmit_warning')}}', function () {hedyApp.unsubmit_program ('{{initial_adventure.id}}', {{ loop_index }})})">{{_('unsubmit_program')}}</button>
+        </div>
+      {% endif %}
+
       <div class="flex-1"></div>
       {% if next_program_id %}
       <a class="green-btn" href="/hedy/{{ next_program_id }}/view">
@@ -41,10 +36,23 @@
       {% endif %}
     {% endif %}
   </div>
-  <h2 class="p-0 m-0">{{_('level_title')}} {{level}}</h2>
-  <div>{{_('by')}}
-      <a {% if initial_adventure.public_profile %}onclick="window.open('/user/{{initial_adventure.username}}', '_self')"{% endif %} class="{% if initial_adventure.public_profile %}cursor-pointer{% else %}text-black{% endif %} no-underline">{{ initial_adventure.username }}</a>
+  <div class="flex flex-row gap-6 items-center">
+    <h2 class="p-0 m-0">{{_('level_title')}} {{level}}</h2>
+    {% if initial_adventure.submitted %}
+    <div class="flex-1"></div>
+    <h2 class="p-0 m-0">{{_('submitted_header')}}</h2>
+    {% endif %}
   </div>
+  <div class="flex flex-row gap-6 items-center">
+    {% if initial_adventure.submitted %}
+    <div>{{_('by')}}
+      <a {% if initial_adventure.public_profile %}onclick="window.open('/user/{{initial_adventure.username}}', '_self')"{% endif %} class="{% if initial_adventure.public_profile %}cursor-pointer{% else %}text-black{% endif %} no-underline">{{ initial_adventure.username }}</a>
+    </div>
+    <div class="flex-1"></div>
+    <h3 class="p-0 m-0">{{_('submission_time')}} {{program_timestamp}}</h3>
+    {% endif %}
+  </div>
+
   {% include "incl/editor-and-output.html" %}
 </div>
 {% endblock %}
