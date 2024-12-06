@@ -241,7 +241,6 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'maths',
         'quotation_marks',
         'functions',
-        'story',
         'fortune',
         'music',
         'songs',
