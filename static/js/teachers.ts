@@ -857,6 +857,8 @@ export function initializeGraph() {
       max = student.successful_runs
     }
   }
+    max = 12
+  }
   let data: dataPoint[] = students.map((student: student) => {
   const radius  = (student.successful_runs - min) * (MAX_BUBBLE_SIZE - MIN_BUBBLE_SIZE) / (max - min) + MIN_BUBBLE_SIZE
     return {
@@ -910,8 +912,9 @@ export function initializeGraph() {
               text: ClientMessages['adventures_tried'],
               font: {
                 size: 15
-              }
-            }
+              },
+            },
+            min: 0
           },
           y: {
             title: {
@@ -920,7 +923,9 @@ export function initializeGraph() {
               font: {
                 size: 15
               }
-            }
+            },
+            suggestedMin: -0.3,
+            suggestedMax: 1
           }
         },
         plugins: {
