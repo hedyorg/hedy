@@ -566,6 +566,71 @@ class TestsLevel14(HedyTester):
 
         self.multi_level_tester(code=code, exception=exceptions.NoIndentationException)
 
+    @parameterized.expand(HedyTester.comparison_commands)
+    def test_comparison_var_if_pressed(self, comparison):
+        code = textwrap.dedent(f"""\
+            i is 10
+            if i {comparison} 12
+                print 'ok'
+            if x is pressed
+                print 'x'
+            else
+                print 'y'""")
+        expected = self.dedent(f"""\
+            global_scope_ = dict()
+            global_scope_["i"] = Value(10, num_sys='Latin')
+            if (global_scope_.get("i") or i).data{comparison}12:
+              print(f'''ok''')
+            if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            global if_pressed_x_
+            def if_pressed_x_():
+              print(f'''x''')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            global if_pressed_else_
+            def if_pressed_else_():
+              print(f'''y''')
+            extensions.if_pressed(if_pressed_mapping)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=16)
+
+    @parameterized.expand(HedyTester.comparison_commands)
+    def test_comparison_list_access_if_pressed(self, comparison):
+        code = textwrap.dedent(f"""\
+            i is 1, 2
+            a is 1
+            if i at a {comparison} 12
+                print 'ok'
+            if x is pressed
+                print 'x'
+            else
+                print 'y'""")
+
+        i = f'global_scope_.get("i") or i'
+        a = f'global_scope_.get("a") or a'
+        expected = self.dedent(f"""\
+            global_scope_ = dict()
+            global_scope_["i"] = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
+            global_scope_["a"] = Value(1, num_sys='Latin')
+            try:
+              (global_scope_.get("i") or i).data[int(({a}).data)-1]
+            except IndexError:
+              raise Exception(\"""Runtime Index Error\""")
+            if ({i}).data[int(({a}).data)-1].data{comparison}12:
+              print(f'''ok''')
+            if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            global if_pressed_x_
+            def if_pressed_x_():
+              print(f'''x''')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            global if_pressed_else_
+            def if_pressed_else_():
+              print(f'''y''')
+            extensions.if_pressed(if_pressed_mapping)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=15)
+
     #
     # function tests
     #
