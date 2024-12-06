@@ -466,7 +466,7 @@ class Database:
         def client_side_filter(program):
             if level and int(program.get('level', 0)) != int(level):
                 return False
-            if adventure:                
+            if adventure:
                 if program.get('adventure_name') != adventure:
                     return False
             if submitted is not None:
