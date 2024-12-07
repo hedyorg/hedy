@@ -653,7 +653,7 @@ class TestsLevel15(HedyTester):
         expected = textwrap.dedent("""\
         global_scope_ = dict()
         global_scope_["stop"] = Value(0, num_sys='Latin')
-        while stop.data!=1:
+        while (global_scope_.get("stop") or stop).data!=1:
           if_pressed_mapping = {"else": "if_pressed_default_else"}
           if_pressed_mapping['p'] = 'if_pressed_p_'
           global if_pressed_p_
@@ -704,6 +704,74 @@ class TestsLevel15(HedyTester):
             max_level=16,
             expected=expected,
         )
+
+    def test_if_pressed_while(self):
+        code = textwrap.dedent("""\
+        i = 0
+        while i < 10
+            if i is pressed
+                i = 11
+            else
+                i = 12""")
+
+        expected = textwrap.dedent("""\
+        global_scope_ = dict()
+        global_scope_["i"] = Value(0, num_sys='Latin')
+        while (global_scope_.get("i") or i).data<10:
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          if_pressed_mapping[(global_scope_.get("i") or i).data] = 'if_pressed_i_'
+          global if_pressed_i_
+          def if_pressed_i_():
+            global_scope_["i"] = Value(11, num_sys='Latin')
+          if_pressed_mapping['else'] = 'if_pressed_else_'
+          global if_pressed_else_
+          def if_pressed_else_():
+            global_scope_["i"] = Value(12, num_sys='Latin')
+          extensions.if_pressed(if_pressed_mapping)
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            expected=expected,
+        )
+
+    def test_if_pressed_ask(self):
+        code = textwrap.dedent("""\
+            i = ask 'question'
+            if x is pressed
+                print 'x'
+            else
+                print 'y'""")
+
+        b = "[{'True': True, 'False': False}, {'true': True, 'false': False}]"
+        expected = textwrap.dedent(f"""\
+            global_scope_ = dict()
+            global_scope_["i"] = input(f'''question''')
+            __ns = get_num_sys(global_scope_.get("i") or i)
+            __bs = None
+            try:
+              global_scope_["i"] = int(global_scope_.get("i") or i)
+            except ValueError:
+              try:
+                global_scope_["i"] = float(global_scope_.get("i") or i)
+              except ValueError:
+                __b, __bs = get_value_and_bool_sys(global_scope_.get("i") or i, {b})
+                if __b is not None:
+                  global_scope_["i"] = __b
+            global_scope_["i"] = Value(global_scope_.get("i") or i, num_sys=__ns, bool_sys=__bs)
+            if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+            if_pressed_mapping['x'] = 'if_pressed_x_'
+            global if_pressed_x_
+            def if_pressed_x_():
+              print(f'''x''')
+            if_pressed_mapping['else'] = 'if_pressed_else_'
+            global if_pressed_else_
+            def if_pressed_else_():
+              print(f'''y''')
+            extensions.if_pressed(if_pressed_mapping)""")
+
+        self.multi_level_tester(code=code, max_level=16, expected=expected, unused_allowed=True)
 
     def test_source_map(self):
         code = textwrap.dedent("""\
