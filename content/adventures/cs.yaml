@@ -61,6 +61,8 @@ adventures:
                     {add} zvire {to_list} zvířata
                     {print} to byla zvířata {at} {random}
                     ```
+                story_text: "V úrovni 3 můžete svůj příběh udělat zábavnějším. Můžete použít náhodnost pro jakoukoli příšeru, zvíře nebo jinou překážku, jako je tato:\n"
+                example_code: "```\nanimals {is} 🦔, 🐿, 🦉, 🦇\n{print} They now hear the sound of an animals {at} {random}\n```\n"
             7:
                 story_text: |
                     V příběhu někdo opakuje slova několikrát. Například, když někdo volá o pomoc nebo zpívá píseň.
@@ -90,7 +92,7 @@ adventures:
                         {print} _
                     ```
             9:
-                 example_code: |
+                example_code: |
                     ```
                     {print} 'Robin jde do centra města'
                     location = {ask} 'Jde Robin do obchodu, nebo jde domů?'
@@ -161,12 +163,12 @@ adventures:
         description: Vysvětlení úrovně
         levels:
             1:
-                story_text: "V první úrovni můžeš používat příkazy `{print}`, `{ask}` a `{echo}`.\n Zapiš svůj kód do levého okna. Nebo stiskni žluté tlačítko v ukázce kódu, které kód zapíše za tebe.\nKód si vždy vyzkoušej pomocí zeleného tlačítka 'Spustit kód' pod levým programovým polem.\n\nMůžeš vypsat text na obrazovku užitím příkazu `{print}`.     \n"
+                story_text: "V první úrovni můžeš používat příkazy `{print}`, `{ask}` a `{echo}`.\n Zapiš svůj kód do levého okna. Nebo stiskni žluté tlačítko v ukázce kódu, které kód zapíše za tebe.\nKód si vždy vyzkoušej pomocí zeleného tlačítka 'Spustit kód' pod levým programovým polem.\n\nMůžeš vypsat text na obrazovku užitím příkazu `{print}`.\n"
             3:
-                story_text: |-
+                story_text: |
                     V úrovni 3 můžeš také vytvořit seznam. Počítač umí z tohoto seznamu vybrat náhodného člena, konkrétně pomocí příkazu `at random`.
                     ```
-                    zvirata is pes, kočka, klokan
+                    zvirata is pes, kočka, klokan, delfin
                     print zvirata at random
                     ```
 

@@ -14,11 +14,11 @@ adventures:
                     Feu servir `{echo}` quan vulguis que el nom del protagonista estigui al final de la frase.
                 example_code: |
                     ```
-                    {ask} El protagonista de l'història és...
-                    {print} El protagonista ha anat a fer un tomb al bosc
+                    {ask} Qui és el protagonista d'aquesta història?
+                    {print} El protagonista ha anat a fer una volta al bosc
                     {echo} Està una mica espantat,
-                    {print} Sent sorolls extranys per tot arreu
-                    {print} Li fa por que estigui a un bosc encantat
+                    {print} Escolta uns sorolls extranys al seu voltant
+                    {print} S'adona que potser està dins d'un bosc encantat
                     ```
                 story_text_2: |
                     ### Exercici
@@ -36,12 +36,12 @@ adventures:
                     A continuació, pots posar aquest nom a qualsevol part d'una frase.
                 example_code: |-
                     ```
-                    nom {is} {ask} Quin és el nom del protagonista?
-                    {print} nom s'en va a correr pel bosc
+                    nom {is} {ask} Com es diu el protagonista?
+                    {print} nom ha anat a correr pel bosc
                     {print} nom està una mica espantat
                     {print} De sobte sent un soroll extrany...
                     {sleep}
-                    {print} nom li fa por que estigui en un bosc encantat
+                    {print} nom s'adona que potser està un bosc encantat
                     ```
                 story_text_2: |
                     ### Exercici
@@ -100,11 +100,11 @@ adventures:
                     {print}  _ El protagonista es diu _ nom
                     _
                     _
-                    {print} nom  _ ha anat a fer un tomb al bosc _
-                    {print} nom_ està una mica espantat _
+                    {print} nom _ ha anat a fer una volta pel bosc _
+                    {print} nom _ està una mica espantat _
                     animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Sent el so de _ animals {at} {random}
-                    {print} name _ li fa por que estigui en un bosc encantat _
+                    {print} _ Sent el so d'un _ animals {at} {random}
+                    {print} nom _ s'adona que potser està en bosc encantat _
                     ```
             5:
                 story_text: |
@@ -175,12 +175,14 @@ adventures:
                     {print} 'Os bru, Os bru'
                     {print} 'Què veus?'
                     ```
+                story_text: "En aquest nivell pots utilitzar la comanda {for}  a la teva història. D'aquesta manera podries programar fàcilment el llibre infantil \"Brown bear, Brown bear, what do you see\" (Os bru, os bru, què veus?) .\n\n### Exercici\n\nConsulta <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\">la història</a> si no la coneixes, i assegura't que es mostri com al llibre.\n"
             12:
                 example_code: |
                     ```
                     nom = "La Reina d'Englaterra"
                     {print} nom ' menjava un tall de pastís, quan de sopte…'
                     ```
+                story_text: "En aquest nivell necessitaràs cometes per desar múltiples paraules en una variable.\n\n### Exercici\n\nTroba una història d'un nivell anterior, qualsevol nivell està bé. Ara assegura't que les cometes s'afegeixen als llocs correctes."
             13:
                 example_code: |
                     ```
@@ -191,6 +193,7 @@ adventures:
                     {if} camí {is} 'esquerre' {and} arma {is} 'espasa'
                         _'
                     ```
+                story_text: "Amb les comandes `{and}` i `{or}`, pots fer que les teves històries siguin més versàtils. Pots fer dues preguntes i respondre a la combinació de respostes.\n\n### Exercici 1\nMira el codi d'exemple i completa'l. Després, afegeix almenys 2 comandes `{if}` més amb `{and}` o `{or}`.\n\n### Exercici 2\nTroba una història d'un nivell anterior i afegeix-hi una comanda `{and}` o `{or}`.\n"
             15:
                 example_code: |
                     ```
@@ -224,6 +227,9 @@ adventures:
                     {print}('Benvingut a aquesta història!')
                     ```
                 story_text: "Ara imprimirem una nova història, però ara farem servir els parèntesis amb el `{print}`.\n\n### Exercici 1\nCrea un conte amb un mínim de 5 frases. Encara no has de fer servir 'nom'.\n"
+            9:
+                example_code: "```\n{print} 'En Robin baixa a la ciutat'\nlloc = {ask} 'Anirà la Robin a una botiga o tornarà directa a casa?'\n{if} lloc {is} botiga\n    {print} 'Entra a una botiga.'\n    {print} 'Din la botiga veu un llibre interessant.'\n    llibre = {ask} 'La Robin compra el llibre?'\n    {if} llibre {is} sí\n    _ {print} 'La Robin compra el llibre i torna a casa.'\n    _ {else}\n    _ {print} 'La Robin surt de la botiga i torna a casa.'\n{else}\n    {print} 'La Robin torna a casa.'\n```\n"
+                story_text: "En aquest nivell pots utilitzar les comandes `{if}` i `{repeat}` dins d'altres comandes `{if}` i `{repeat}`. \nAixò t'afegeix moltes opcions i ajuda a fer històries molt més interactives.\n\n### Exercici 1\nCompleta el codi perquè la comanda `{if}` funcioni correctament.\n\n### Exercici 2\nAfegeix una comanda `{if}` i `{else}` per a la part de la història on la Robin també torna a casa.\n\n### Exercici 3\nTorna a la teva història del nivell 8, copia-la i utilitza almenys dos `{if}` dins d'una altra comanda `{if}`.\n"
     add_remove_command:
         default_save_name: comanda_afegir_borrar
         description: Introduint {add} {to_list} i {remove} {from}
@@ -387,6 +393,7 @@ adventures:
                 story_text: "Ara que ja pots fer mates, pots fer la teva pròpia calculadora!\n"
             9:
                 example_code: "```\npunts = 0\n{repeat} 10 {times}\n    nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    nombre_1 = nombres {at} {random}\n    nombre_2 = nombres {at} {random}\n    resposta_correcta = nombre_1 * nombre_2\n    {print} 'Quant fa ' nombre_1 ' per ' nombre_2 '?'\n    answer = {ask} 'Escriu la teva resposta aquí...'\n    {print} 'La teva resposta és ' answer\n    {if} _ {is} _\n        punts = punts + 1\n{print} 'Bona feina! la teva puntuació és ... ' punts ' sobre 10!'\n```\n"
+                story_text: "En un nivell anterior, has creat una calculadora. En aquest nivell, pots ampliar aquell codi perquè faci múltiples preguntes.\n\n### Exercici 1\nPots completar la línia 10 perquè el codi funcioni?\n\n### Exercici 2\nDona un feedback al jugador quan introdueixi una resposta, com `{print} 'Correcte!'` o `{print} 'Incorrecte! La resposta correcta és ' resposta_correcta`.\n"
             12:
                 story_text: |
                     En aquest nivell, pots fer una calculadora que funcioni amb nombres decimals.
@@ -416,6 +423,7 @@ adventures:
                 story_text: "### Exercici 1\nFem que el programa de pràctica sigui una mica més difícil. Ara el jugador ha de respondre correctament dues preguntes. Omple els espais en blanc per completar el programa.\n\n### Exercici 2\nDe vegades, els càlculs tenen múltiples respostes correctes. Per exemple, 10 es pot dividir entre 5 i entre 2. Així, la pregunta \"Quin nombre divideix 10?\" es pot respondre amb 2 o amb 5.\nPlanteja una pregunta de càlcul que tingui múltiples respostes correctes, demana al jugador que la respongui i determina si és correcta utilitzant `{or}`.\nNeteja l'editor de codi i crea la teva pròpia solució.\n"
             14:
                 story_text: "En aquesta aventura construiràs una calculadora que calcula la teva nota mitjana. Si aconsegueixes que la teva calculadora funcioni, pots continuar amb la pròxima aventura, que et permetrà afegir dues funcions extres.\n\n### Exercici 1\nOmple els espais en blanc per fer que la calculadora funcioni.\n* Comença amb la quarta línia, afegeix una pregunta per saber quina nota ha tret l’estudiant.\n* A la cinquena línia vols calcular el total de totes les notes, així que el total = total + nota.\n* Després fixem el valor de retorn. Volem retornar la mitjana, així que el total dividit pel nombre de proves (4).\n* Finalment, acabem el codi cridant la funció a la línia 8.\n\nHo has aconseguit? Genial! T’agradaria afegir encara més funcions a la teva calculadora? **Aquesta aventura continua a la pròxima pestanya!**\n"
+                example_code: "```\n{define} calcula_mitjana_nota\n    total = 0\n    {for} i {in} {range} 1 {to} 4\n        nota = {ask} _\n        total = total + _\n        {return} _ / 4\n\nmitjana_nota = {call} _\n{print} 'La teva nota mitjana és ' mitjana_nota\n```\n"
             10:
                 story_text: "Aquest joc de la calculadora t'ajuda a practicar les taules de multiplicar!\n### Exercici\nOmple els espais en blanc. Volem que aquest programa faci aquestes preguntes al jugador:\n```\nQuant fa 1 per 1?\nQuant fa 1 per 2?\nQuant fa 1 per 3?\nQuant fa 2 per 1?\nQuant fa 2 per 2?\nQuant fa 2 per 3?\nQuant fa 3 per 1?\nQuant fa 3 per 2?\nQuant fa 3 per 3?\n_\n```\n"
                 example_code: "```\nnumeros = 1, 2, 3\n{for} _\n    {for} _\n        resposta = {ask} _\n        correcta = numero_1 * numero_2\n        {if} resposta {is} correcta\n            {print} 'Bona feina!'\n        {else}\n            {print} 'Això és incorrecte. La resposta correcta era ' correcta\n```\n"
@@ -1160,6 +1168,8 @@ adventures:
             15:
                 story_text: "### Exercici\nEn aquest nivell pots crear un petit joc en què hauràs de treure un 6 com més ràpidament millor.\nHem començat el codi, i ara et toca a tu fer que el joc funcioni!\n\nPrimer, afegeix un bucle `{while}` que comprovi si s’ha tret un 6 o no.\nMentre no hagis tret un 6, tira el dau amb un nombre aleatori.\nImprimeix el que ha tret el jugador.\nAfegeix un intent al nombre d’intents.\nEspera un segon abans de tornar a tirar o, en cas que hagis tret un 6, abans que el joc acabi.\n"
                 example_code: "```\nopcions = 1, 2, 3, 4, 5, 6\n{print} 'Tira un 6 tant ràpid com puguis'\ntirat = 0\nintents = 0\n_\n_\n_\n_\n_\n{print} 'Sí! Has tirat un 6 en ' intents ' intents.'\n```\n"
+            4:
+                story_text: "En aquest nivell també pots crear daus. Però aquesta vegada ho has de fer tu sol, sense codi d'exemple!\n\n### Exercici\nCrea els teus propis daus en aquest nivell.  \nAjuda: Si no tens ni idea de com fer daus, dona una ullada als daus del nivell anterior, sobretot no oblidis afegir-hi cometes.\n"
     dishes:
         name: Plats?
         default_save_name: Plats
@@ -1171,6 +1181,8 @@ adventures:
                     gent {is} mama, papa, Emma, Sofia
                     {print} gent {at} {random} li toca rentar plats
                     ```
+                story_text: "Sempre discuteixes a casa sobre qui ha de rentar els plats o canviar la sorra del gat?  \nSi vols pots fer que l'ordinador ho decideixi de manera més justa. Això ja ho pots programar en aquest nivell!\n"
+                story_text_2: "### Exercici\nCrea la teva pròpia versió del programa del rentaplats. Primer, fes una llista amb els membres de la teva família.  \nDesprés, pensa en una tasca que cal fer i deixa que l'ordinador decideixi qui ha de fer la tasca amb la comanda `{at} {random}`.\n\n**Extra** No tens ganes que et toqui a tu? Hackeja el programa eliminant el teu nom de la llista amb la comanda `{remove}` `{from}`.\n"
             4:
                 example_code: |
                     ```
@@ -1179,8 +1191,10 @@ adventures:
                     {sleep}
                     {print} gent {at} _
                     ```
+                story_text: "Amb les cometes pots millorar encara més el teu programa de rentaplats.\n\n### Exercici\nPrimer, omple els símbols o comandes correctes als espais en blanc perquè aquest programa d'exemple funcioni.  \nHo has aconseguit? Genial! Ara copia el teu propi codi del nivell anterior i fes-lo funcionar en aquest nivell afegint cometes als llocs adequats.\n"
             5:
                 example_code: "```\ngent {is} mama, papa, Emma, Sofia\nnetejador {is} gent {at} {random}\n_ netejador {is} Sofia {print} _ Pffff... em toca rentar plats _\n_ {print} 'per sort no hi ha plats perquè ' _ ' ja els està rentant'\n```\n"
+                story_text: "Amb la comanda `{if}` ara pots divertir-te més amb les eleccions al programa. Pots fer que el teu programa respongui a l'elecció que ha fet l'ordinador.\n### Exercici\nPots completar el codi perquè imprimeixi 'mala sort' quan sigui el teu torn i, altrament, 'sí!'?  \nNo oblidis les cometes!\n"
             6:
                 example_code: |
                     ```
@@ -1226,6 +1240,7 @@ adventures:
                     ### Exercici
                     Afegeix-hi una segona tasca, com passar l'aspiradora o endreçar, i assegura't que també estigui dividida durant tota la setmana.
                     <br> **Extra** El programa no és just, pots tenir mala sort i haver de rentar durnat tota la setmana. Com pots fer el programa més just?
+                example_code: "```\ndies = dilluns, diamrts, dimecres, dijous, divendres, dissabte, diumenge\nnoms = mare, pare, Emma, Sofia\n{for} dia {in} dies\n    {print} noms {at} {random} ' renta plats el ' dia\n```\n"
     elif_command:
         default_save_name: sino
         levels:
@@ -1248,6 +1263,7 @@ adventures:
                 example_code_2: "```\naccions = pica de mans, pica de peus, crida Hurra!\n_\n    {repeat} 2 {times}\n        {print} 'Si ets feliç i ho saps, ' action\n        {sleep} 2\n    {print} 'Si ets feliç i ho saps, i ho vols fer saber a tothom'\n    {print} 'Si ets feliç i ho saps, ' action\n    {sleep} 3\n```\n"
             11:
                 example_code: "```\n{for} comptador {in} {range} 1 {to} 10\n    {print} comptador\n{print} 'Llest o no. Ves que vinc!'\n```\n"
+                story_text: "En aquest nivell, afegim una nova forma de la comanda `{for}`. En nivells anteriors, hem utilitzat `{for}` amb una llista, però també podem usar  `{for}` amb números.  \nFem això afegint un nom de variable, seguit de `{in}` `{range}`. Després escrivim el número amb el qual començar, `{to}` i el número fins al qual arribar.\n\nProva l'exemple per veure què passa! En aquest nivell, novament hauràs d'utilitzar la indentació a les línies que es troben sota de les comandes `{for}`."
             17:
                 story_text: "Ara canviem una mica la indentació. Cada vegada que necessitem una indentació, hem de posar `:` a la línia abans de la indentació.\n"
                 example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Llest o no, ves que vinc!'\n```\n"
@@ -1273,9 +1289,11 @@ adventures:
                     ### Exercici
                     Copia el codi d'exemple a la teva pantalla d'entrada i omple els espais en blanc per fer funcionar el teu codi.
                     **Extra** Canvia el codi i deixa que l'endevina no només predigui el teu nom, sinó també la teva edat, el teu esport preferit o alguna altra cosa sobre tu mateix.
+                story_text: "Has estat mai a una fira i un endeví t'ha predit el teu futur? O has jugat mai amb la bola màgica de vuit?\nSí és així, segurament saps que realment no es pot predir el teu futur, però que igualment és molt divertit jugar!\n\nAls pròxims nivells aprendrem a crear la teva pròpia màquina de prediccions!  \nAl nivell 1 pots començar fent que Hedy es presenti com un endeví i deixar que faci `{echo}` de les respostes dels jugadors.  \nCom això:\n"
             3:
                 example_code: "```\n{print} Sóc Hedy, l'endeví!\npregunta {is} {ask} Què vols saber?\n{print} Això és el que vols saber: pregunta\nrespostes {is} sí, no, potser\n{print} La meva bola de cristall diu...\n{sleep} 2\n{print} respostes {at} {random}\n```\n"
                 story_text_2: "### Exercici\nAra, Hedy només pot respondre sí, no o potser. Pots donar-li més opcions de resposta, com 'definitivament' o 'pregunta de nou'?\n"
+                story_text: "Als nivells anteriors has creat la teva primera màquina de prediccions, però Hedy realment no podia predir res, només feia `{echo}`.  \nEn aquest nivell pots utilitzar una variable i la comanda `{at} {random}` per fer que Hedy realment triï una resposta per a tu. Fixa't en aquest codi, per exemple:\n"
             4:
                 example_code: |
                     ```
@@ -1374,6 +1392,7 @@ adventures:
                     {sleep}
                     {print} destí {at} {random}
                     ```
+                story_text: "A partir del nivell 12, també hauràs d'utilitzar cometes a les llistes, abans i després de cada element.\n\n### Exercici\nAfegeix dues prediccions més a la llista"
     functions:
         levels:
             12:
@@ -1413,13 +1432,47 @@ adventures:
             18:
                 story_text: "Fem servir les funcions de la manera de Python! Per definir una funció, ja no utilitzem:\n\n`{define} nom_funcio {with} argument_1, argument_2:`\n\nsi no que usem:\n\n`{def} nom_funcio (argument_1, argument_2):`.\n\n\nSi no vols fer servir arguments, simplement deixes l'espai entre els parèntesis buit.\nPer cridar una funció, ja no necessitem la comanda `{call}`. Simplement escrius el nom de la funció.\n"
                 example_code: "```\n{def} calcula_puntuacio(resposta, resposta_corercta):\n    {if} resposta == resposta_corercta:\n        punts = 1\n    {elif} resposta == '?':\n        punts = 0\n    {else}:\n        punts = -1\n    {return} punts\n\nresposta = {input} ('A on podem trobar la Torre Eifel?')\nresposta_corercta = 'París'\npunts = calcula_puntuacio(resposta, resposta_corercta)\n{print} ('La teva puntuació és ... ', punts)\n```\n"
+            13:
+                story_text: "Ara que has après com utilitzar funcions, aprendràs com usar una funció amb un argument.  \nUn **argument** és una variable que s'usa dins d'una funció. No es fa servir fora de la funció.\n\nPer exemple, en aquest codi hem programat el primer vers de la cançó \"Perdut en la immensa mar blava\".  \nEn aquest exemple de codi s'utilitza l'argument 'part'. Part és una variable que només es fa servir dins de la funció, per tant, un argument.  \nPer fer servir 'lloc' hem col·locat `{with} part` rere `{define} joan_petit`.  \nQuan la funció és cridada, l'ordinador substituirà l'argument 'part', amb el fragment de text després de `{call} joan_petit {with}`.\n\n### Exercici\nLes parts del cos de la cançó són: dit, mà, colze, peu, cul:\n\n```not_hedy_code\nBalla amb el dit ...\nBalla amb la mà ...\nBalla amb el peu ...\nBalla amb el colze ...\nBalla amb el cul ... \n```\n\nPots posar les parts del cos que falten i fer que les frases estiguin en femení quan és la mà?\n"
+                example_code: "```\n{define} joan_petit {with} part\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla, balla, balla,\"\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla amb el \" part\n\n{call} joan_petit {with} 'dit'\n{call} joan_petit {with} 'peu'\n{call} joan_petit {with} 'colze'\n```\n"
         name: funcions
         default_save_name: funcions
         description: funcions
     haunted:
-        name: Casa encantada
-        description: Escapa de la casa encantada
-        default_save_name: Casa encantada
+        name: La casa embruixada
+        description: Escapar de la casa embruixada
+        default_save_name: La casa embruixada
+        levels:
+            1:
+                example_code: "```\n{print} Com he arribat aquí?\n{print} Només recordo que un amic em va dir d'entrar a la vella mansió...\n{print} i de sobte tot es va fer fosc.\n{print} Però com he acabat estirat a terra...?\n{print} Em fa mal el cap com si m'haguessin colpejat amb un bat de beisbol!\n{print} Què és aquest so?\n{print} Oh no! Tinc la sensació que no estic sol dins d'aquesta casa!\n{print} Necessito sortir d'aquí!\n{print} Hi ha 3 portes davant meu...\n{ask} Quina porta haig de triar?\n{echo} Escullo la porta\n{print} ...?\n```\n"
+                story_text_2: "### Exercici\nCopia el codi d'exemple a la pantalla d'edició del codi clicant al botó groc.\nAcaba la història afegint-hi almenys 5 línies de codi.\nRecorda començar cada línia de codi amb la comanda `{print}`.\n"
+                story_text: "En aquesta aventura has de crear un joc per escapar d'una casa embruixada escollint la porta correcta.\nSi tries la porta correcta, sobreviuràs, però si no, un monstre terrible et podria...\n\nAl nivell 1 comencem el nostre joc de la casa embruixada creant una història per a fer por i preguntant-li al jugador quin monstre es troba a la casa embruixada.\n"
+            5:
+                story_text: "Fins a aquest nivell, el joc de la casa embruixada sempre demanava al jugador que triés una porta, t'has adonat que no era necessari respondre correctament?\nSi el jugador introduïa una resposta completament aleatòria, el joc encara funcionava i fins i tot podria guanyar (tot i no haver triat una porta).\nEn aquest nivell has de fer que només es pugui guanyar el joc si tries la mateixa porta que Hedy ha triat aleatòriament.\n\n### Exercici\nPots trobar les 4 paraules que falten per completar el codi?\n"
+                example_code: "```\n{print} \"Escapa de la casa embruixada!\"\n{print} \"Hi ha tres portes davant teu...\"\nportes {is} 1, 2, 3\nmonstres {is} home llop, mòmia, vampir, zombie\nporta_escollida {is} {ask} \"Quina porta esculls?\"\n{print} \"Has triat la porta ...\" porta_escollida\n{sleep}\nporta_correcte {is} portes {at} {random}\n_ _ _ _ {print} \"Perfecte! T'has pogut escapar!\"\n{else} {print} \"Oh no! S'et menja un ...\" monsters {at} {random}\n```\n"
+            3:
+                example_code: "```\n_ Escapa de la casa embruixada!\n_ Hi ha tres portes davant teu...\n_ _ _ Quina porta esculls?\n_ Has triat la ... porta\nmonstres _ un zombie, un vampir, RES! HAS ESCAPAT!\n_ Veus ...\n{sleep}\n_ _ _ _\n```\n"
+                story_text: "En els nivells anteriors has fet una introducció al joc de la casa embruixada, sempre, però la història té un final dolent.\nEn aquest nivell millorarem la història fent-la més interactiva canviant-li el desenllaç; a vegades seràs devorat, i a vegades aconseguiràs escapar!\nHedy ho decidirà aleatòriament!\n\n### Exercici\nCopia els codis d'exemple i omple els espais en blanc perquè funcioni!\n\n**Extra** Aquesta història és bastant senzilla; potser pots fer-la més esgarrifosa i fer-la més emocionant. \nTambé tens resultats molt limitats ara mateix, només hi ha 3 opcions del que hi ha darrere de les portes. Pensa en més monstres per afegir a la llista!\n"
+            11:
+                story_text: "En aquest nivell hem canviat la comanda `{for}` per poder dir al jugador on es troba.\n\n### Exercici 1\nCompleta el programa perquè el jugador sàpiga en quina habitació es troba.\n\n### Exercici 2\nConverteix el programa en una aventura seguint aquests passos:\n\n1. Fes una llista d'opcions (com: lluitar o fugir).\n2. Assegura't que el jugador pugui triar una opció amb `{ask}`.\n3. La resposta és correcta? Aleshores poden avançar al següent monstre. Si donen una resposta incorrecta, fes-ho saber al jugador amb un `{print}`.\n\n**Extra** Si fas una tria equivocada, encara es mostra un monstre! Com podries canviar això?\n"
+                example_code: "```\n{print} \"Escapa de la casa embruixada!\"\nmonstres = zombie, vampir, aranya gegant\n_\n    {print} 'Habitació ' i\n    monstre = monstres {at} {random}\n```\n"
+            9:
+                example_code: "```\n{print} \"Escapa de la casa embruixada!\"\njugador = viu\nportes = 1, 2, 3\nmonsters = zombie, vampir, aranya gegant\n{repeat} 3 {times}\n    {if} jugador {is} viu\n        porta_correcta {is} portes {at} {random}\n        {print} \"Hi ha tres portes davant teu...\"\n        porta_escollida = {ask} \"Quina porta esculls?\"\n        {if} porta_escollida {is} porta_correcta\n            {print} \"No hi ha monstres aquí!\"\n        {else}\n            {print} \"Se t'ha menjat un \" monsters {at} {random}\n            jugador = mort\n    {else}\n        {print} \"GAME OVER\"\n{if} jugador {is} viu\n    {print} \"Fantastic! Has sobreviscut!\"\n```\n"
+                story_text: "En aquest nivell pots utilitzar la nidificació, la qual cosa et permet fer que la casa embruixada sigui encara més interactiva!\n\n### Exercici\nAra potser és massa difícil guanyar aquest joc, pots fer que sigui més fàcil de guanyar?\nCanvia el teu codi perquè només tingui una porta incorrecta i dues portes correctes en lloc d'una porta correcta i dues d'incorrectes.\nConsell: Això significa canviar la variable porta_correcta per porta_incorrecta, i intercanviar el codi de `{if}` i `{else}`.\nI, per descomptat, també pots canviar la història i fer-la teva. Canvia els monstres o converteix-la en un alegre concurs on guanyis un regal!\n"
+            16:
+                example_code: "```\nnumeros = [1, 2, 3]\ni = numeros[{random}]\npista = [\"uns grunyits\", \"una rialla malèfica\", \"l'aleteig de les ales d'un ratpenat\"]\nmonstres = [\"un zombie\", \"una bruixa\", \"un vampir\"]\nmala_sort = [\"Se't menjen el cervell\", \"Estas maleït per sempre més\", \"Et mossega el coll\"]\nbona_sort = [\"Llençes el penil. El zombie es distreu menjant-se'l.\", \"Cales foc a les cortines. La bruixa fuig volant pel temor al foc.\", \"El vampir respira el teu alè d'all i fuig.\"]\narmes = [\"pernil\", \"encenedor\", \"allioli\"]\n{print} \"Estàs davant d'una antiga mansió\"\n{print} \"Quenlcom no acaba de funcionar bé\"\n{print} \"Sents un soroll com \" _\n{print} \"T'apropes a explorar-ho\"\n{print} \"Entres a la cuina i et trobes un encenedor, un tall de pernil i un pot d'allioli.\"\narma_escollida = {ask} \"Què t'emportes de la cuina?\"\n{print} \"Am el \" arma_escollida \" entres al menjador\"\n{print} \"Et trobes de sobte \" _\narma_necessaria = _\n{if} arma_escollida == arma_necessaria\n    {print} \"Utilitzes el \" arma_escollida\n    {print} _\n    {print} \"Guanyes!\"\n{else}\n    {print} \"Has seleccionat una arma equivocada...\"\n    {print} _\n    {print} \"GAME OVER\"\n```\n"
+                story_text: "### Exercici\nAquest joc de la casa embruixada utilitza la connexió entre les llistes que pots fer servir en aquest nivell.\nPer exemple: totes les propietats que pertanyen al zombi són primeres en totes les llistes, la bruixa segona i el vampir tercer.\nConsulta el codi i omple els espais buits amb `armes[i]`, `monstres[i]`, `mala_sort[i]`, `bona_sort[i]`, `pista[i]` als llocs correctes perquè el codi funcioni!\n"
+            14:
+                example_code: "```\n{print} \"Escapa de la casa embruixada!\"\nvides = 3\nportes = 1, 2, 3\nmonstres = \"una bruixa\", \"un zombie\", \"un gos de tres caps adormit\"\n{for} i {in} {range} 1 {to} 10\n    {if} vides _\n        porta_bona = portes {at} {random}\n        monstre = monstres {at} {random}\n        porta_escollida = {ask} \"Quina porta esculls?\"\n        {if} porta_bona == porta_escollida\n            {print} \"Has triat la porta correcta\"\n        {else}\n            {print} \"Veus ...\" monstre\n            {if} monstre == \"un gos de tres caps adormit\"\n                {print} \"Pbbbuff.... està adormit\"\n            {else}\n                {print} \"Perds una vida\"\n                vides = _\n    {else}\n        {print} \"GAME OVER\"\n```\n"
+                story_text: "### Exercici\nEn aquest nivell pots utilitzar els símbols `<` i `>` per introduir vides al teu joc.  \nAssegura't que el jugador perdi una vida quan es trobi amb el monstre equivocat i que el joc s'aturi si es queda sense vides.\n"
+            4:
+                story_text: "En aquest nivell aprendràs a utilitzar cometes en els teus jocs.\n\n### Exercici\nPots adaptar el teu codi de la casa embruixada per a què funcioni nivell 4?\n\n### Exercici 2\nTorna al nivell anterior i copia el teu codi de la casa embruixada. Fes que el codi funcioni en aquest nivell afegint cometes als llocs adequats.\n"
+                example_code: "```\n_ Posa comes a aquest codi _\n{print} Escapa de la casa embruixada!\n{print} Hi ha tres portes davant teu...\nporta {is} {ask} Quina porta esculls?\n{print} Has triat la ... porta\nmonstres {is} un zombie, un vampir, RES! HAS ESCAPAT!\n{print} Veus...\n{sleep}\n{print} monstres {at} {random}\n ```\n"
+            2:
+                story_text_2: "### Exercici\nEn l'exemple anterior, els monstres estan predeterminats. Així que cada vegada que executes el teu codi, el resultat és el mateix.  \nPots afegir comandes `{ask}` per fer que la casa embruixada sigui interactiva i permetre que els jugadors triïn els monstres amb els quals es troben?\n"
+                story_text: "En aquest programa de la casa embruixada pots escollir els monstres amb emojis. De fet, també podries utilitzar paraules.\n"
+                example_code: "```\nmonstre_1 {is} 👻\nmonstre_2 {is} 🤡\nmonstre_3 {is} 👶\n{print} Has entrat a la casa embruixada.\n{print} De cop veus al monstre_1\n{print} Corres cap a una altre habitació.\n{print} Però un monstre_2 t'està esperant!\n{print} Oh no! corre dins la cuina.\n{print} Però inesperadament a l'entrar un monstre_3 t'ataca!\n```\n"
+                example_code_2: "```\nmonstre_1 {is} _\nmonstre_2 {is} _\nmonstre_3 {is} _\n{print} Has entrat a la casa embruixada.\n{print} De cop veus al monstre_1\n{print} Corres cap a una altre habitació.\n{print} Però un monstre_2 t'està esperant!\n{print} Oh no! corre dins la cuina.\n{print} Però inesperadament a l'entrar un monstre_3 t'ataca!\n```\n"
     is_command:
         default_save_name: comanda_es
         description: Introducció a la comanda {is}
@@ -1440,6 +1493,7 @@ adventures:
                     En el codi d'exemple hem fet un exemple de la variable `animal_preferit`. A la línia 1 es defineix la variable, i a la línia 2 hem utilitzat la variable dins una comanda d'impressió.
                     En primer lloc, acabeu el nostre exemple omplint el vostre animal preferit als espais en blanc. A continuació, feu vosaltres mateixos almenys 3 d'aquests codis. Trieu una variable i configureu-la amb la comanda {is}. A continuació, utilitzeu-lo amb una comanda {print}, tal com hem fet abans.
                 example_code_2: "```\nanimal_preferit {is} _\n{print} M'agraden els/les animal_preferit \n```\n"
+        name: '{is}'
     parrot:
         name: Lloro
         description: Crea el teu lloro i fes que repeteixi el que li dius!
@@ -1582,3 +1636,44 @@ adventures:
             17:
                 example_code: "```\n# Crea una funció que dibuixi el penjat\n{define} dibuixa_penjat {with} pas:\n    {if} pas == 1:\n        {color} white\n        {forward} -100\n        {turn} 90\n        {forward} -50\n        {color} black\n        {forward} 100\n        {forward} -50\n\n    {if} pas == 2:\n        _\n# Enganxa el teu codi del penjat\n\n```\n"
                 story_text: "En el joc del penjat, les errades es mostren dibuixant una part del penjat cada vegada que s'ha comès una errada.\nAra afegirem aquests dibuixos amb la nostra tortuga!\n\n### Exercici\n***Crea una funció que dibuixi el penjat*** Crea una funció que dibuixi el penjat en 10 passos. Ja hem fet el primer pas per a tu.\n\n***Prova la funció*** Prova la funció cridant la funció amb 10. Si estàs content amb la funció, elimina la línia que crida la funció temporalment. L'haurem de cridar quan el jugador cometi una errada.\n\n***Enganxa el teu joc de penjat sota la funció*** Torna a la pestanya anterior i copia el teu joc de penjat. Enganxa el joc sota la funció.\n\n***Crida la funció quan el jugador cometi una errada*** Sota la línia `errades_fetes = errades_fetes + 1` cridarem la funció. Volem que la tortuga faci tants passos com les errades que el jugador ha comès, així que cridarem la funció amb `errades_fetes` com a argument.\n\n***Gaudeix del teu joc!***\n<div class=\"w-full flex flex-row gap-2\">\n    El penjat s'ha de semblar a això <img src=\"https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129\" width=\"100\">\n</div>\n"
+    songs:
+        levels:
+            13:
+                story_text: "En l'aventura anterior has après com utilitzar un argument en una funció, però sabies que també els pots combinar amb comandes {ask}?  \nEn aquest exemple hem modificat el programa d'en \"Joan petit\" i l'hem fet interactiu. Ara es pregunta amb quina part balla en Joan petit.\n"
+                example_code: "```\n{define} joan_petit {with} part\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla, balla, balla,\"\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla amb el \" part\n\npart = {ask} 'Amb quina part balla joan petit?'\npart2 = {ask} 'Amb quina altra part balla joan petit?'\npart3 = {ask} 'I amb quina altra part balla joan petit?'\n\n{call} joan_petit {with} part\n{call} joan_petit {with} part2\n{call} joan_petit {with} part3\n```\n"
+    hotel:
+        name: hotel
+        description: hotel
+        default_save_name: hotel
+        levels:
+            13:
+                example_code: "```\n{define} missatge_benvinguda {with} tractament, cognom, pais, num_habitacio\n    {print} \"Benvingut a l'Hotel Hedy, \" tractament \" \" cognom\n    nice_trip {is} {ask} \"Ha tingut un bon viatge des de \" pais \"?\"\n    {if} nice_trip {is} \"si\"\n        {print} \"Fantàstic!\"\n    {else}\n        {print} \"Quina llàstima...\"\n        {print} \"Afortunadament podrà descançar a la seva habitació.\"\n    {print} \"La seva habitació és la \" num_habitacio\n\n{print} \"Bon dia! Siusplau per a fer el check in ompli la següent informació.\"\ntractament = {ask} \"Com li agradaria que ens dirigíssim a vostè (sr, sra, dr, etc.)?\"\nnom = {ask} \"Quin és el seu cognom?\"\npais_origen = {ask} \"Quin és el seu país d'origen?\"\n\n{call} missatge_benvinguda {with} tractament, nom, pais_origen, 105\n```\n\ntractament = {ask} \"Com li agradaria que ens dirigíssim a vostè (sr, sra, dr, etc.)?\"\nnom = {ask} \"Quin és el seu cognom?\"\npais_origen = {ask} \"Quin és el seu país d'origen?\"\n\n{call} missatge_benvinguda {with} tractament, nom, pais_origen, 105\n"
+                story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {ask}.  \nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.  \nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.  \nAquí tens un exemple d'una funció amb arguments combinada amb comandes {ask}.\n"
+    in_command:
+        default_save_name: in_command
+        name: '{in}'
+        description: Introducció a la comanda {in}
+        levels:
+            5:
+                example_code_2: "```\nanimals {is} gos, vaca, ovella\nresposta {is} {ask} \"Quin és el teu animal preferit?\"\n_ resposta _ animals _ \"Ala, el meu també!\"\n_ _ \"Els meus animals preferits són els gossos, les vaques i les ovelles.\"\n```\n"
+                story_text: "## Llistes\nSi volem comprovar que una cosa és dins d'una llista utilitzem la comanda `{in}`.  \nEl codi següent imprimeix \"Bé!\" si tries verd o groc, i \"Buu\" en cas contrari.\n"
+                example_code: "```\ncolors_bonics {is} verd, groc\ncolor_preferit {is} {ask} \"Quin és el teu color preferit?\"\n{if} color_preferit {in} colors_bonics {print} \"Bé!\"\n{else} {print} \"Buu\"\n```\n"
+                story_text_2: "### Exercici\nCompleta el codi d'exemple omplint els espais en blanc amb les comandes que has après.\nQuan hagis acabat el codi, intenta crear un codi propi i fes servir una pregunta que hagis pensat tu mateix.\n"
+    if_command:
+        levels:
+            5:
+                example_code_3: "```\nresposta {is} {ask} '2 + 2 = ?'\n_ _ _ 4 _ 'Correcte!'\n_ _ 'No 2 + 2 = 4'\n```\n"
+                example_code: "```\nnom {is} {ask} 'Com et dius?'\n{if} nom {is} Hedy {print} 'bé!' {else} {print} 'buu!'\n```\n"
+                story_text: "## If... else....\nEn el nivell 5 hi ha una cosa nova, la comanda`{if}`! Amb el `{if}` pots triar entre dues opcions diferents.  \nAquest codi imprimeix \"bé!\" si introdueixes Hedy com a nom, i \"buu!\" si introdueixes alguna altra cosa.  \nLes comandes `{ask}` i `{print}` continuen funcionant igual que ho feien en el nivell 4.\n"
+                story_text_3: "### Exercici\nIntenta crear el teu propi codi amb `{if}` i `{else}`. Pots utilitzar el codi d'exemple si vols.\n"
+                story_text_2: "De vegades, el codi amb un `{if}` es fa realment llarg i no hi cap bé en una sola línia. <br> També pots dividir el codi en dues línies, començant la segona línia amb el `{else}`, d'aquesta manera:\n"
+                example_code_2: "```\nnom {is} {ask} 'Com et dius?'\n{if} nom {is} Hedy {print} 'bé!'\n{else} {print} 'buu!'\n```\n"
+            8:
+                example_code: "```\nname = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'\n```\n"
+                story_text: "## Condicionals\nHas après a repetir un bloc de línies de codi després d'una comanda `{repeat}`.  \nAra també pots utilitzar la indentació per crear blocs després d'una comanda `{if}` o `{else}`.  \nDona-li un cop d'ull al codi d'exemple.\n\n### Exercici\nAfegeix una comanda `{else}` al codi d'exemple. Crea un bloc de línies usant la indentació. Això es fa començant cada línia amb 4 espais.\n"
+            9:
+                example_code: "```\ncontinuar = {ask} \"Vols continuar?\"\n{if} continuar = sí\n    segur = {ask} \"Segur?\"\n    {if} segur {is} sí\n        {print} \"Continuem, doncs\"\n    {else}\n        {print} \"No n'estàs segur\"\n{else}\n    {print} \"No vols continuar\"\n```\n"
+                story_text: "En aquest nivell també pots posar una comanda `{if}` dins d'una altra comanda `{if}`.\n"
+        name: '{if} & {else}'
+        description: Introducció a la comanda {if}
+        default_save_name: if_command
