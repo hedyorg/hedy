@@ -840,20 +840,28 @@ interface dataPoint {
   successful_runs: number,
   name: string
 }
+const MAX_BUBBLE_SIZE = 62;
+const MIN_BUBBLE_SIZE = 12;
 
 export function initializeGraph() {
   const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
   if (graphElement === undefined || graphElement === null) return;
   const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
-  
+  let min = Infinity;
+  let max = 0;
   const students = graphData.graph_students
-  let data: dataPoint[] = students.map((student: student) => {    
-    let radius;
-    
-    if (student.successful_runs < 7)        radius = 7;
-    else if (student.successful_runs > 300) radius = 300;
-    else                                    radius = student.successful_runs;
-
+  for (const student of students) {
+    if (student.successful_runs < min) {
+      min = student.successful_runs
+    } else if (student.successful_runs > max) {
+      max = student.successful_runs
+    }
+  }
+  if (max == 0) {
+    max = 12
+  }
+  let data: dataPoint[] = students.map((student: student) => {
+  const radius  = (student.successful_runs - min) * (MAX_BUBBLE_SIZE - MIN_BUBBLE_SIZE) / (max - min) + MIN_BUBBLE_SIZE
     return {
       x: student.adventures_tried,
       y: student.number_of_errors,
@@ -905,8 +913,9 @@ export function initializeGraph() {
               text: ClientMessages['adventures_tried'],
               font: {
                 size: 15
-              }
-            }
+              },
+            },
+            min: 0
           },
           y: {
             title: {
@@ -915,7 +924,9 @@ export function initializeGraph() {
               font: {
                 size: 15
               }
-            }
+            },
+            suggestedMin: -0.3,
+            suggestedMax: 1
           }
         },
         plugins: {
