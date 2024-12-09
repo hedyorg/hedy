@@ -1410,7 +1410,13 @@ class DynamoCondition:
 
 
 class Equals(DynamoCondition):
-    """Assert that a value is equal to another value."""
+    """Assert that a value is equal to another value.
+
+    Conditions can be applied to sort keys for efficient lookup, or as a
+    `server_side_filter` as a post-retrieval, pre-download filter. Queries will
+    never fetch more than 1MB from disk, so your server-side filter should
+    not filter out more than ~50% of the rows.
+    """
 
     def __init__(self, value):
         self.value = value
@@ -1428,7 +1434,13 @@ class Equals(DynamoCondition):
 
 
 class Between(DynamoCondition):
-    """Assert that a value is between two other values."""
+    """Assert that a value is between two other values.
+
+    Conditions can be applied to sort keys for efficient lookup, or as a
+    `server_side_filter` as a post-retrieval, pre-download filter. Queries will
+    never fetch more than 1MB from disk, so your server-side filter should
+    not filter out more than ~50% of the rows.
+    """
 
     def __init__(self, minval, maxval):
         self.minval = minval
@@ -1448,7 +1460,13 @@ class Between(DynamoCondition):
 
 
 class BeginsWith(DynamoCondition):
-    """Assert that a string begins with another string."""
+    """Assert that a string begins with another string.
+
+    Conditions can be applied to sort keys for efficient lookup, or as a
+    `server_side_filter` as a post-retrieval, pre-download filter. Queries will
+    never fetch more than 1MB from disk, so your server-side filter should
+    not filter out more than ~50% of the rows.
+    """
 
     def __init__(self, prefix):
         self.prefix = prefix
