@@ -619,17 +619,17 @@ class TestQueryInMemoryWithStringSortKey(unittest.TestCase, Helpers):
             ])
 
     def test_begins_with_query(self):
-        self.table.create({'id': 'key', 'sort': 'asdf' })
-        self.table.create({'id': 'key', 'sort': 'asd' })
-        self.table.create({'id': 'key', 'sort': 'as' })
+        self.table.create({'id': 'key', 'sort': 'asdf'})
+        self.table.create({'id': 'key', 'sort': 'asd'})
+        self.table.create({'id': 'key', 'sort': 'as'})
 
         ret = list(self.table.get_many({
             'id': 'key',
             'sort': dynamo.BeginsWith('asd'),
         }))
         self.assertEqual(ret, [
-            {'id': 'key', 'sort': 'asd' },
-            {'id': 'key', 'sort': 'asdf' },
+            {'id': 'key', 'sort': 'asd'},
+            {'id': 'key', 'sort': 'asdf'},
         ])
 
     def test_cannot_use_begin_with_on_nonkey_field(self):
@@ -640,9 +640,9 @@ class TestQueryInMemoryWithStringSortKey(unittest.TestCase, Helpers):
             })
 
     def test_can_use_begin_with_as_server_side_filter(self):
-        self.table.create({'id': 'key', 'sort': 'asdf', 'str': 'asdf' })
-        self.table.create({'id': 'key', 'sort': 'asd', 'str': 'asd' })
-        self.table.create({'id': 'key', 'sort': 'as', 'str': 'as' })
+        self.table.create({'id': 'key', 'sort': 'asdf', 'str': 'asdf'})
+        self.table.create({'id': 'key', 'sort': 'asd', 'str': 'asd'})
+        self.table.create({'id': 'key', 'sort': 'as', 'str': 'as'})
 
         ret = list(self.table.get_many({
             'id': 'key',
@@ -650,12 +650,12 @@ class TestQueryInMemoryWithStringSortKey(unittest.TestCase, Helpers):
             'str': dynamo.BeginsWith('asd'),
         }))
         self.assertEqual(ret, [
-            {'id': 'key', 'sort': 'asd', 'str': 'asd' },
-            {'id': 'key', 'sort': 'asdf', 'str': 'asdf' },
+            {'id': 'key', 'sort': 'asd', 'str': 'asd'},
+            {'id': 'key', 'sort': 'asdf', 'str': 'asdf'},
         ])
 
     def test_server_side_filter_may_not_filter_nonkey_attrs(self):
-        self.table.create({'id': 'key', 'sort': 'asdf' })
+        self.table.create({'id': 'key', 'sort': 'asdf'})
 
         with self.assertRaises(ValueError):
             self.table.get_many({
