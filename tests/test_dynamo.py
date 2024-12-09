@@ -250,7 +250,7 @@ class TestSortKeysInMemory(unittest.TestCase):
         self.assertEqual(ret, dict(id='key', sort='s', x='x', y='y'))
 
 
-class TestQueryInMemory(unittest.TestCase, Helpers):
+class TestQueryInMemoryWithIntSortkey(unittest.TestCase, Helpers):
     """Test that the query work on an in-memory table."""
 
     def setUp(self):
@@ -590,6 +590,79 @@ class TestQueryInMemory(unittest.TestCase, Helpers):
             ret.append(many.current)
             many.advance()
         self.assertEqual(ret, expected)
+
+
+class TestQueryInMemoryWithStringSortKey(unittest.TestCase, Helpers):
+    """Test that the query work on an in-memory table."""
+
+    def setUp(self):
+        self.table = dynamo.Table(
+            dynamo.MemoryStorage(),
+            'table',
+            partition_key='id',
+            sort_key='sort',
+            types={
+                'id': str,
+                'sort': str,
+                'str': OptionalOf(str),
+                'x': OptionalOf(int),
+                'y': OptionalOf(int),
+                'm': OptionalOf(int),
+                'n': OptionalOf(int),
+            },
+            indexes=[
+                dynamo.Index(
+                    'x',
+                    'y'),
+                dynamo.Index('m'),
+                dynamo.Index('n', keys_only=True),
+            ])
+
+    def test_begins_with_query(self):
+        self.table.create({'id': 'key', 'sort': 'asdf' })
+        self.table.create({'id': 'key', 'sort': 'asd' })
+        self.table.create({'id': 'key', 'sort': 'as' })
+
+        ret = list(self.table.get_many({
+            'id': 'key',
+            'sort': dynamo.BeginsWith('asd'),
+        }))
+        self.assertEqual(ret, [
+            {'id': 'key', 'sort': 'asd' },
+            {'id': 'key', 'sort': 'asdf' },
+        ])
+
+    def test_cannot_use_begin_with_on_nonkey_field(self):
+        with self.assertRaises(ValueError):
+            self.table.get_many({
+                'id': 'key',
+                'str': dynamo.BeginsWith('asdf'),
+            })
+
+    def test_can_use_begin_with_as_server_side_filter(self):
+        self.table.create({'id': 'key', 'sort': 'asdf', 'str': 'asdf' })
+        self.table.create({'id': 'key', 'sort': 'asd', 'str': 'asd' })
+        self.table.create({'id': 'key', 'sort': 'as', 'str': 'as' })
+
+        ret = list(self.table.get_many({
+            'id': 'key',
+        }, server_side_filter={
+            'str': dynamo.BeginsWith('asd'),
+        }))
+        self.assertEqual(ret, [
+            {'id': 'key', 'sort': 'asd', 'str': 'asd' },
+            {'id': 'key', 'sort': 'asdf', 'str': 'asdf' },
+        ])
+
+    def test_server_side_filter_may_not_filter_nonkey_attrs(self):
+        self.table.create({'id': 'key', 'sort': 'asdf' })
+
+        with self.assertRaises(ValueError):
+            self.table.get_many({
+                'id': 'key',
+            }, server_side_filter={
+                'sort': dynamo.BeginsWith('asd'),
+            })
 
 
 class TestSortKeysAgainstAws(unittest.TestCase):
