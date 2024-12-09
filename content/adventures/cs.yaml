@@ -726,7 +726,14 @@ adventures:
                 example_code: "```\nzvířata  {is} pes, kočka, klokan\njako  {is} {ask} Jaké je tvoje oblíbené zvíře?\n{add} rád  {to_list} zvířata\n{print} vybírám si zvířata {at} {random}\n```\n"
                 example_code_2: "```\nanimals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}\n```\n"
                 story_text_2: "## Odstranit z\nPokud můžete položky do seznamu přidávat, můžete je samozřejmě také odebírat. To se provádí příkazem `{remove} {from}` příkazem.\n"
-                example_code_3: "```\n{print} Mystery milkshake\npříchutě {is} jahoda, čokoláda, vanilka\ndoufám, že {{is} {ask} V jakou příchuť doufáte?\n_\nalergie {is} {ask} Jste alergičtí na nějaké příchutě?\n_\n{print} Dostanete příchuť {at} {náhodný} mléčný koktejl.\n```\n"
+                example_code_3: |-
+                    {print} Mystery milkshake
+                    příchutě {is} jahoda, čokoláda, vanilka
+                    doufám, že {is} {ask} V jakou příchuť doufáte?
+                    _
+                    alergie {is} {ask} Jste alergičtí na nějaké příchutě?
+                    _
+                    {print} Dostanete příchuť {at} {random} mléčný_koktejl.
         name: '{add} {to_list} a  {remove} {from}'
         default_save_name: add_remove_command
         description: představuji {add} {to_list} a {remove} {from}
