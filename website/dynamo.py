@@ -346,30 +346,44 @@ class Table:
             return items
 
     @querylog.timed_as("db_get_many")
-    def get_many(self, key, reverse=False, limit=None, pagination_token=None, filter=None):
+    def get_many(self, key, reverse=False, limit=None, pagination_token=None, filter=None, server_side_filter=None):
         """Gets a list of items by key from the database.
 
         The key must be a dict with a single entry which references the
         partition key or an index key.
 
-        `get_many` reads up to 1MB of data from the database, or a maximum of `limit`
-        records, whichever one is hit first. 'filter' is a dictionary of values
-        that will be applied server-side after reading. The response may contain
-        less than `limit` rows if 'filter' is used.
+        `get_many` reads up to 1MB of data from the database, or a maximum of
+        `limit` records, whichever one is hit first.
 
-        Filtering saves bytes sent over the wire, but still costs time and
-        money, and may lead in receiving nearly no records. It is still
-        important to pick a good key/index to read.
-
-        'filter' is a dictionary with a set of values that will be applied as a server-side
-        filter. The values should be either literal strings, ints or bools that are compared to the
-        values in the database literally, or instances of subclasses of `DynamoCondition`; currently
-        only `Between` exists as a Condition class.
+        'server_side_filter' can be used to filter down the max 1MB of data read
+        from the database, to avoid sending useless bytes over the internet.
 
         The result object will have `next_page_token` and `prev_page_token` members
         which can be used to paginate through the result set.
+
+        # On filtering
+
+        - 'server_side_filter' is a dictionary of values that will be applied
+          server-side after reading. The values should be either literal
+          strings, ints or bools that are compared to the values in the database
+          literally, or instances of subclasses of `DynamoCondition`.
+        - The response may contain less than `limit` rows if
+          'server_side_filter' is used. The response may contain 0 rows, yet still
+          have a next page, if all rows read from disk are filtered out.
+        - Filtering saves bytes sent over the wire, but still costs time and
+          money, and may lead in receiving nearly no records. It is still
+          important to pick a good key/index to read. Filters will not magically
+          make a table scan efficient!
+
+        'filter' is also accepted as a deprecated spelling of
+        'server_side_filter' (but 'server_side_filter' is preferred for
+        consistency with 'get_page').
         """
         querylog.log_counter(f"db_get_many:{self.table_name}")
+
+        if filter is not None and server_side_filter is not None:
+            raise ValueError("Only one of 'filter' and 'server_side_filter' may be specified")
+        server_side_filter = server_side_filter or filter
 
         inverse_page, pagination_token = decode_page_token(pagination_token)
         if inverse_page:
@@ -377,6 +391,8 @@ class Table:
 
         lookup = self._determine_lookup(key, many=True)
         if isinstance(lookup, TableLookup):
+            validate_filter_nonkey_columns(server_side_filter, self.key_schema)
+
             pagination_key = PaginationKey.from_table(self.key_schema)
             items, next_page_token = self.storage.query(
                 lookup.table_name,
@@ -386,9 +402,11 @@ class Table:
                 limit=limit + 1 if limit else None,
                 pagination_key=pagination_key,
                 pagination_token=pagination_token,
-                filter=filter
+                filter=server_side_filter
             )
         elif isinstance(lookup, IndexLookup):
+            validate_filter_nonkey_columns(server_side_filter, lookup.key_schema)
+
             pagination_key = PaginationKey.from_index(lookup.key.keys(), lookup.sort_key, self.key_schema)
             items, next_page_token = self.storage.query_index(
                 lookup.table_name,
@@ -401,7 +419,7 @@ class Table:
                 pagination_token=pagination_token,
                 keys_only=lookup.keys_only,
                 table_key_names=self.key_schema.key_names,
-                filter=filter,
+                filter=server_side_filter,
             )
         else:
             assert False
@@ -436,18 +454,34 @@ class Table:
 
         'server_side_filter' is a dictionary with a set of values that will be applied as a server-side
         filter. The values should be either literal strings, ints or bools that are compared to the
-        values in the database literally, or instances of subclasses of `DynamoCondition`; currently
-        only `Between` exists as a Condition class.
+        values in the database literally, or instances of subclasses of `DynamoCondition`.
 
-        'client_side_filter' should be either a dictionary of values, or a callable that will be called
-        for every row. If it is a dictionary, the values in the dictionary must match the values
-        in the records; if it is a callable, it will be invoked for every row and the callable
-        should return True or False to indicate whether that row should be included.
+        'client_side_filter' should be either a dictionary of values, or a
+        callable (function) that will be called for every row. If it is a
+        dictionary, the values in the dictionary must match the values in the
+        records; if it is a callable, it will be invoked for every row and the
+        callable should return True or False to indicate whether that row should
+        be included.
 
         'fetch_factor' controls how many items are fetched per batch in order to try and fill
         'limit' items. Combination with an estimate of how many rows would be
         rejected due to filtering, this can be used to reduce the amount of individual queries
         necessary in order to come up with a given set of items (reducing latency slightly).
+        Ignore this if you are unsure about the right value to use.
+
+        # On server side filtering
+
+        - 'server_side_filter' is a dictionary of values that will be applied
+          server-side after reading. The values should be either literal
+          strings, ints or bools that are compared to the values in the database
+          literally, or instances of subclasses of `DynamoCondition`.
+        - The response may contain less than `limit` rows if
+          'server_side_filter' is used. The response may contain 0 rows, yet still
+          have a next page, if all rows read from disk are filtered out.
+        - Filtering saves bytes sent over the wire, but still costs time and
+          money, and may lead in receiving nearly no records. It is still
+          important to pick a good key/index to read. Filters will not magically
+          make a table scan efficient!
         """
         if limit <= 0:
             raise ValueError('limit must be positive')
@@ -641,7 +675,7 @@ class Table:
         for index in self.indexes:
             if index.key_schema.matches(key_data):
                 return IndexLookup(self.table_name, index.index_name, key_data,
-                                   index.key_schema.sort_key, keys_only=index.keys_only)
+                                   index.key_schema.sort_key, keys_only=index.keys_only, key_schema=index.key_schema)
 
         schemas = [self.key_schema] + [i.key_schema for i in self.indexes]
         str_schemas = ', '.join(s.to_string(opt=True) for s in schemas)
@@ -706,6 +740,13 @@ def validate_value_against_validator(value, validator: 'Validator'):
         return value.validate_against_type(validator)
     else:
         return validator.is_valid(value)
+
+
+def validate_filter_nonkey_columns(server_side_filter, key_schema):
+    """Check that there are no filters that match columns in the key schema."""
+    for column in server_side_filter or {}:
+        if column in key_schema.key_names:
+            raise ValueError(f'Do not use server_side_filter on "{column}", use a key lookup instead.')
 
 
 DDB_SERIALIZER = TypeSerializer()
@@ -1223,6 +1264,7 @@ class IndexLookup:
     key: dict
     sort_key: Optional[str]
     keys_only: bool
+    key_schema: KeySchema
 
 
 class DynamoUpdate:
@@ -1338,6 +1380,11 @@ class DynamoCondition:
 
     These encode any type of comparison supported by Dynamo except equality.
 
+    Conditions can be applied to sort keys for efficient lookup, or as a
+    `server_side_filter` as a post-retrieval, pre-download filter. Queries will
+    never fetch more than 1MB from disk, so your server-side filter should
+    not filter out more than ~50% of the rows.
+
     Conditions only apply to sort keys.
     """
 
@@ -1398,6 +1445,24 @@ class Between(DynamoCondition):
 
     def matches(self, value):
         return self.minval <= value <= self.maxval
+
+
+class BeginsWith(DynamoCondition):
+    """Assert that a string begins with another string."""
+
+    def __init__(self, prefix):
+        self.prefix = prefix
+
+    def to_dynamo_expression(self, field_name):
+        return f"begins_with(#{field_name}, :{field_name}_prefix)"
+
+    def to_dynamo_values(self, field_name):
+        return {
+            f":{field_name}_prefix": DDB_SERIALIZER.serialize(self.prefix),
+        }
+
+    def matches(self, value):
+        return isinstance(value, str) and value.startswith(self.prefix)
 
 
 def replace_decimals(obj):
