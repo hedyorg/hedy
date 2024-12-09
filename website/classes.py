@@ -79,7 +79,7 @@ class ClassModule(WebsiteModule):
                 return make_response(gettext("class_name_duplicate"), 200)
 
         self.db.update_class(class_id, body["name"])
-        return make_response('', 200)
+        return make_response({}, 200)
 
     @route("/<class_id>", methods=["DELETE"])
     @requires_login
