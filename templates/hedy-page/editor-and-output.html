@@ -80,7 +80,7 @@
   <div data-devmodeheight="{{editor_height}},36rem" data-origheight="{{editor_height}}" class="w-full flex flex-col order-3 relative min-h-0 overflow-hidden" id="code_output" style="height: {{editor_height}}">
     <div id="output" data-cy="output" tabindex=0 class="flex-1 rounded p-2 px-3 color-white w-full text-lg overflow-auto" style="background: #272822; min-height: 3rem;"></div>
     <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
-    <div class="overflow-auto flex-0 absolute bottom-0 w-full z-20 bg-blue-100">
+    <div class="overflow-auto flex-0 bottom-0 w-full z-20 bg-blue-100">
       <div id="variable_button" class="hidden my-3 cursor-pointer" onclick="$('#variable_list').slideToggle('medium');">
             <div class="h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
                 <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">
@@ -106,8 +106,9 @@
           <!-- For some reason the Tailwind ml-0 doesn't do the trick here -->
       </div>
     </div>
-    <div id="inline_modal" class="flex-0 absolute bottom-0 w-full z-20">
-      <div id="ask_modal" data-cy="ask_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
+    <div id="inline_modal" class="flex-0 bottom-0 w-full z-20">
+      <div id="ask_modal" data-cy="ask_modal"
+           class="py-2 text-left px-3 border-4 border-teal-500 mt-1 rounded bg-green-100" style="display: none">
         <!--Title-->
         <div class="flex justify-between items-center">
           <p class="text-2xl font-bold caption">Header</p>
@@ -121,13 +122,15 @@
           </div>
         </form>
       </div>
-      <div id="keybinding_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
+      <div id="keybinding_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-1 rounded bg-green-100"
+           style="display: none">
         <!--Title-->
         <div class="flex justify-between items-center">
           <p class="text-2xl font-bold caption">{{_('keybinding_waiting_for_keypress')}}</p>
         </div>
       </div>
-      <div id="sleep_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99;">
+      <div id="sleep_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-1 rounded bg-green-100"
+           style="display: none;z-index: 99;">
         <!--Title-->
         <div class="flex justify-between items-center">
           <p class="text-2xl font-bold caption">{{_('sleeping')}}</p>
