@@ -191,6 +191,10 @@ def is_super_teacher(user):
     return bool(user.get("is_super_teacher", False))
 
 
+def is_students_teacher(student, teacher):
+    return teacher in g.db.get_student_teachers(student)
+
+
 def has_public_profile(user):
     if 'username' not in user or user.get('username') == '':
         return False

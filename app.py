@@ -48,9 +48,9 @@ from website import (ab_proxying, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
-from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, has_public_profile,
-                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
-                          forget_current_user, hide_explore)
+from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, is_students_teacher,
+                          has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
+                          requires_teacher, forget_current_user, hide_explore)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -1946,10 +1946,6 @@ def view_program(user, id):
             next_classmate_adventure_id = next_classmate_adventure.get('program_id')
             if next_classmate_adventure_id:
                 break
-        if is_teacher(user):
-            second_teachers = [t for t in class_.get('second_teachers', []) if t.get('role', '') == 'teacher']
-            all_teachers = [class_.get('teacher')] + [t.get('username', '') for t in second_teachers]
-            arguments_dict['is_students_teacher'] = user.get('username') in all_teachers
 
     student_customizations = DATABASE.get_student_class_customizations(result['username'])
     adventure_index = 0
@@ -1967,6 +1963,8 @@ def view_program(user, id):
         next_program_id = next_student_adventure.get('program_id')
         if next_program_id:
             break
+
+    arguments_dict['is_students_teacher'] = is_students_teacher(student=result['username'], teacher=user['username'])
 
     return render_template("view-program-page.html",
                            blur_button_available=True,
