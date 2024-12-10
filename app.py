@@ -1853,6 +1853,14 @@ def tryit(level, program_id):
         ))
 
 
+@app.route('/search_students', methods=['GET'])
+def filter_usernames():
+    search = request.args.get('search', '')
+    results = DATABASE.get_users_that_starts_with(search)
+    usernames = [record['username'] for record in results]
+    return render_template('modal/results_reply.html', usernames=usernames)
+
+
 @app.route('/hedy', methods=['GET'])
 def index_level():
     if current_user()['username']:
@@ -3136,7 +3144,7 @@ if __name__ == '__main__':
 
     # Threaded option enables multiple instances for multiple user access support
     app.run(threaded=True, debug=debug,
-            port=config['port'], host="0.0.0.0")
+            port=8080, host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
 

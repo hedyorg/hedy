@@ -109,7 +109,8 @@ class Database:
                                   }),
                                   indexes=[
                                       dynamo.Index('email'),
-                                      dynamo.Index('epoch', sort_key='created')
+                                      dynamo.Index('epoch', sort_key='created'),
+                                      dynamo.Index('username', sort_key='epoch', keys_only=True)
                                   ]
                                   )
         self.tokens = dynamo.Table(storage, 'tokens', 'id',
@@ -1155,6 +1156,9 @@ class Database:
     def get_username_role(self, username):
         role = "teacher" if self.users.get({"username": username}).get("is_teacher") == 1 else "student"
         return role
+
+    def get_users_that_starts_with(self, search):
+        return self.users.get_many({'username': dynamo.BeginsWith(search)}, limit=10)
 
 
 def batched(iterable, n):
