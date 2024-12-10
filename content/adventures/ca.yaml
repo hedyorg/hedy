@@ -1634,6 +1634,10 @@ adventures:
             13:
                 story_text: "En l'aventura anterior has après com utilitzar un argument en una funció, però sabies que també els pots combinar amb comandes {ask}?  \nEn aquest exemple hem modificat el programa d'en \"Joan petit\" i l'hem fet interactiu. Ara es pregunta amb quina part balla en Joan petit.\n"
                 example_code: "```\n{define} joan_petit {with} part\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla, balla, balla,\"\n    {print} \"En Joan petit quan balla,\"\n    {print} \"Balla amb el \" part\n\npart = {ask} 'Amb quina part balla joan petit?'\npart2 = {ask} 'Amb quina altra part balla joan petit?'\npart3 = {ask} 'I amb quina altra part balla joan petit?'\n\n{call} joan_petit {with} part\n{call} joan_petit {with} part2\n{call} joan_petit {with} part3\n```\n"
+            6:
+                example_code: "```\nampolles = 99\n{print} \"Hi ha \" ampolles \" ampolles a dalt de la paret,\"\n{print} \"Hi ha \" ampolles \" ampolles a dalt de la paret,\"\n{print} \"Però si una ampolla caiguès per mala sort,\"\nampolles = ampolles - 1\n{print} \"Queden \" ampolles \" ampolles a dalt de la paret.\"\n{sleep}\n```\n"
+            8:
+                example_code: "```\nampolles = 99\n_ 99 {times}\n{print} \"Hi ha \" ampolles \" ampolles a dalt de la paret,\"\n{print} \"Hi ha \" ampolles \" ampolles a dalt de la paret,\"\n{print} \"Pero si una ampolla caiguès per mala sort,\"\nampolles = ampolles - 1\n{print} \"Queden \" ampolles \" ampolles a dalt de la paret.\"\n```\n"
     hotel:
         name: hotel
         description: hotel
