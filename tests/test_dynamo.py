@@ -779,6 +779,32 @@ class TestSortKeysAgainstAws(unittest.TestCase):
             ScanIndexForward=mock.ANY
         )
 
+    def test_usethisindex_object(self):
+        self.table = dynamo.Table(
+            dynamo.AwsDynamoStorage(self.db, ''),
+            'table',
+            partition_key='pk',
+            sort_key='sk',
+            indexes=[
+                dynamo.Index('ik', sort_key='pk'),
+            ],
+        )
+        self.table.get_many({
+            'ik': '3',
+            'pk': dynamo.UseThisIndex(),
+        })
+        self.db.query.assert_called_with(
+            KeyConditionExpression='#ik = :ik',
+            ExpressionAttributeValues={
+                ':ik': {'S': '3'},
+            }, ExpressionAttributeNames={
+                '#ik': 'ik',
+            },
+            TableName=mock.ANY,
+            IndexName='ik-pk-index',
+            ScanIndexForward=mock.ANY
+        )
+
 
 def try_to_delete(filename):
     if os.path.exists(filename):

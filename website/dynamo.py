@@ -676,6 +676,14 @@ class Table:
         - If the PK matches multiple indexes, we raise an error. The lookup
           needs to be disambiguated by adding a sort key with a `UseThisIndex`
           field.
+
+        TODO: what this makes impossible is having an index with (for example)
+        PK and SK reversed; we would short-circuit to using the table
+        immediately, whereas in that case we'd actually want to query an index.
+        This is something we can fix later. The more appropriate algorithm
+        would probably be: filter down all candidates first taking into account
+        not only the name of the field but also the type of condition, THEN
+        prefer the table if it is still a viable query candidate.
         """
         if any(not v for v in key_data.values()):
             raise ValueError(f"Key data cannot have empty values: {key_data}")
@@ -954,16 +962,23 @@ class AwsDynamoStorage(TableStorage):
         if is_key_expression:
             validate_only_sort_key(conditions, sort_key)
 
-        escaped_names = {k: slugify(k) for k in conditions.keys()}
-
-        key_expression = " AND ".join(cond.to_dynamo_expression(escaped_names[field])
-                                      for field, cond in conditions.items())
-
+        escaped_names = {}
+        key_conditions = []
         attr_values = {}
-        for field, cond in conditions.items():
-            attr_values.update(cond.to_dynamo_values(escaped_names[field]))
+        attr_names = {}
 
-        attr_names = {f'#{e}': k for k, e in escaped_names.items()}
+        for field, cond in conditions.items():
+            escaped_name = slugify(field)
+            expr = cond.to_dynamo_expression(escaped_name)
+            # This may return 'None' to avoid emitting this condition to DDB altogether
+            if expr is None: continue
+
+            escaped_names[field] = escaped_name
+            key_conditions.append(expr)
+            attr_values.update(cond.to_dynamo_values(escaped_name))
+            attr_names[f'#{escaped_name}'] = field
+
+        key_expression = " AND ".join(key_conditions)
         return key_expression, attr_values, attr_names
 
     def put(self, table_name, _key, data):
@@ -1556,8 +1571,8 @@ class UseThisIndex(DynamoCondition):
         pass
 
     def to_dynamo_expression(self, field_name):
-        # Dynamo does not support the expression "true" :/
-        return '1=1'
+        # Dynamo does not support the expression "true", so we'll have to make exceptions
+        return None
 
     def to_dynamo_values(self, field_name):
         return {}
