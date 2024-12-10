@@ -716,7 +716,6 @@ class TestQueryInMemoryWithStringSortKey(unittest.TestCase, Helpers):
         self.assertEqual(list(result2), [{'sort': 'qwer', 'attr2': 'qwer', 'id': 'key'}])
 
 
-
 class TestSortKeysAgainstAws(unittest.TestCase):
     """Test that the operations send out appropriate Dynamo requests."""
 
