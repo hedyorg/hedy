@@ -252,7 +252,8 @@ class Table:
     storage: TableStorage
     indexes: List[Index]
 
-    def __init__(self, storage: TableStorage, table_name, partition_key, types=None, sort_key=None, indexes: Optional[List[Index]] = None):
+    def __init__(self, storage: TableStorage, table_name, partition_key, types=None,
+                 sort_key=None, indexes: Optional[List[Index]] = None):
         self.key_schema = KeySchema(partition_key, sort_key)
         self.storage = storage
         self.table_name = table_name
@@ -716,7 +717,9 @@ class Table:
         # in multiple indexes. Frame a helpful error message.
         sort_keys = [i.key_schema.sort_key for i in potential_indexes]
         raise ValueError(
-            f'Table {self.table_name} has multiple indexes with partition key \'{data_keys[0]}\'. Include one of these sort keys in your query {sort_keys} with a value of UseThisIndex() to indicate which index you want to query')
+            f'Table {self.table_name} has multiple indexes with partition key \'{data_keys[0]}\'. ' +
+            f'Include one of these sort keys in your query {sort_keys} ' +
+            'with a value of UseThisIndex() to indicate which index you want to query')
 
     def _validate_key(self, key):
         if not self.key_schema.contains_both_keys(key):
