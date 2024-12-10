@@ -3144,7 +3144,7 @@ if __name__ == '__main__':
 
     # Threaded option enables multiple instances for multiple user access support
     app.run(threaded=True, debug=debug,
-            port=8080, host="0.0.0.0")
+            port=config['port'], host="0.0.0.0")
 
     # See `Procfile` for how the server is started on Heroku.
 
