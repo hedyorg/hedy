@@ -6,7 +6,12 @@
 </button>
 <br><br>
 <div class="flex flex-col gap-2">
-    <h2>{{_('customize_class')}}: {{class_info.name}}</h2>
+    <h2>{{_('customize_class')}}: {{class_info.name}} 
+        <i class="fa-solid fa-pencil cursor-pointer text-lg mx-2" 
+            onclick="hedyApp.rename_class('{{class_info.id}}', '{{_("rename_class_prompt")}}')"
+            title="{{ _('rename_class') }}">
+        </i>
+    </h2>    
 
     {{ render_partial('customize-class/partial-sortable-adventures.html',
                         customizations=customizations,
