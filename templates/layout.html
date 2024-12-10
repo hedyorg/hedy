@@ -139,10 +139,11 @@
                    hx-target="#search_results"                   
                    hx-indicator=".htmx-indicator"                   
                    >
-            <div class="mt-4 flex flex-row justify-center">
-                <div id="search_results">
+            <ul class="list-none flex flex-col items-center align" id="search_results">
 
-                </div>
+            </ul>              
+            </div>
+            <div class="mt-4 flex flex-row justify-center">
                 <button id="modal_ok_button" data-cy="modal_ok_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
                 <button id="modal_cancel_button" data-cy="modal_cancel_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
             </div>
