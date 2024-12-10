@@ -973,7 +973,8 @@ class AwsDynamoStorage(TableStorage):
             escaped_name = slugify(field)
             expr = cond.to_dynamo_expression(escaped_name)
             # This may return 'None' to avoid emitting this condition to DDB altogether
-            if expr is None: continue
+            if expr is None:
+                continue
 
             escaped_names[field] = escaped_name
             key_conditions.append(expr)
