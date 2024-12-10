@@ -1226,7 +1226,8 @@ def hour_of_code(level, program_id=None):
     loaded_program = None
     if program_id:
         result = DATABASE.program_by_id(program_id)
-        if not result or not current_user_allowed_to_see_program(result):
+        can_view, _ = current_user_allowed_to_see_program(result)
+        if not result or not can_view:
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
@@ -1405,7 +1406,8 @@ def index(level, program_id):
     loaded_program = None
     if program_id:
         result = DATABASE.program_by_id(program_id)
-        if not result or not current_user_allowed_to_see_program(result):
+        can_view, _ = current_user_allowed_to_see_program(result)
+        if not result or not can_view:
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
@@ -1636,7 +1638,8 @@ def tryit(level, program_id):
     loaded_program = None
     if program_id:
         result = DATABASE.program_by_id(program_id)
-        if not result or not current_user_allowed_to_see_program(result):
+        can_view, _ = current_user_allowed_to_see_program(result)
+        if not result or not can_view:
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
@@ -1874,7 +1877,8 @@ def index_level():
 def view_program(user, id):
     result = DATABASE.program_by_id(id)
 
-    if not result or not current_user_allowed_to_see_program(result):
+    can_view, can_unsubmit = current_user_allowed_to_see_program(result)
+    if not result or not can_view:
         return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
     # The program is valid, verify if the creator also have a public profile
@@ -1964,7 +1968,7 @@ def view_program(user, id):
         if next_program_id:
             break
 
-    arguments_dict['is_students_teacher'] = is_students_teacher(student=result['username'], teacher=user['username'])
+    arguments_dict['is_students_teacher'] = can_unsubmit
 
     return render_template("view-program-page.html",
                            blur_button_available=True,
@@ -2936,6 +2940,9 @@ def teacher_invitation(code):
     return redirect(url)
 
 
+ProgramPerms = collections.namedtuple('ProgramPerms', ('read', 'unsubmit'))
+
+
 def current_user_allowed_to_see_program(program):
     """Check if the current user is allowed to see the given program.
 
@@ -2943,19 +2950,16 @@ def current_user_allowed_to_see_program(program):
     creator, teacher or the user is admin.
     """
     user = current_user()
+    students_teacher = is_students_teacher(student=program['username'], teacher=user['username'])
 
-    # These are all easy
-    if program.get('public'):
-        return True
-    if user['username'] == program['username']:
-        return True
-    if is_admin(user):
-        return True
+    can_view = (program.get('public') or
+                user['username'] == program['username'] or
+                is_admin(user) or
+                students_teacher)
 
-    if is_teacher(user) and program['username'] in DATABASE.get_teacher_students(user['username']):
-        return True
+    can_unsubmit = is_admin(user) or students_teacher
 
-    return False
+    return ProgramPerms(can_view, can_unsubmit)
 
 
 # *** START SERVER ***
