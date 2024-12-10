@@ -690,6 +690,18 @@ class TestQueryInMemoryWithStringSortKey(unittest.TestCase, Helpers):
                 'id': dynamo.BeginsWith('k'),
             })
 
+    def test_may_not_use_condition_on_table_with_only_partition_key(self):
+        self.table = dynamo.Table(
+            dynamo.MemoryStorage(),
+            'table',
+            partition_key='id',
+        )
+
+        with self.assertRaises(ValueError):
+            self.table.get_many({
+                'id': dynamo.BeginsWith('k'),
+            })
+
     def test_can_disambiguate_between_indexes_with_same_pk(self):
         self.table = dynamo.Table(
             dynamo.MemoryStorage(),
