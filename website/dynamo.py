@@ -702,13 +702,13 @@ class Table:
         if len(potential_indexes) == 1:
             index = potential_indexes[0]
             return IndexLookup(self.table_name, index.index_name, key_data,
-                                index.key_schema.sort_key, keys_only=index.keys_only, key_schema=index.key_schema)
+                               index.key_schema.sort_key, keys_only=index.keys_only, key_schema=index.key_schema)
 
         # More than one index. This can only happen if a user passed a PK that is used
         # in multiple indexes. Frame a helpful error message.
         sort_keys = [i.key_schema.sort_key for i in potential_indexes]
-        raise ValueError(f'Table {self.table_name} has multiple indexes with partition key \'{data_keys[0]}\'. Include one of these sort keys in your query {sort_keys} with a value of UseThisIndex() to indicate which index you want to query')
-
+        raise ValueError(
+            f'Table {self.table_name} has multiple indexes with partition key \'{data_keys[0]}\'. Include one of these sort keys in your query {sort_keys} with a value of UseThisIndex() to indicate which index you want to query')
 
     def _validate_key(self, key):
         if not self.key_schema.contains_both_keys(key):
@@ -782,7 +782,8 @@ class Table:
 
         for index in self.indexes:
             if not index.key_schema.is_compound and index.key_schema.partition_key in pk_of_compound:
-                raise ValueError(f'Table {self.table_name}: PK-only index is a subset of a compound index: {index.key_schema}')
+                raise ValueError(
+                    f'Table {self.table_name}: PK-only index is a subset of a compound index: {index.key_schema}')
 
 
 def validate_value_against_validator(value, validator: 'Validator'):
@@ -802,6 +803,7 @@ def validate_filter_nonkey_columns(server_side_filter, key_schema):
     for column in server_side_filter or {}:
         if column in key_schema.key_names:
             raise ValueError(f'Do not use server_side_filter on "{column}", use a key lookup instead.')
+
 
 DDB_SERIALIZER = TypeSerializer()
 DDB_DESERIALIZER = TypeDeserializer()
