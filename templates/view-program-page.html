@@ -3,7 +3,7 @@
 <div tabindex="0" class="flex-grow px-8 common-page-container">
   <div class="flex flex-row gap-6 items-center">
     <h1>{{initial_adventure.name}}</h1>
-    {% if is_students_teacher %}
+    {% if can_checkoff_program %}
       <input type="checkbox"
         id="adventure_checkbox"
         class="student_adventure_checkbox text-green-700 text-center p-3 text-lg cursor-pointer self-center {% if student_adventure.ticked %}fa-solid fa-check{% endif %} "
@@ -14,7 +14,7 @@
         _="on click toggle .fa-solid .fa-check on me"
       >
 
-      {% if initial_adventure.submitted %}
+      {% if can_unsubmit_program %}
         <div class="text-center">
           <button id="unsubmit-program-button" class="green-btn" data-cy="unsubmit_btn" onclick="hedyApp.unsubmit_program('{{initial_adventure.id}}', '{{_('unsubmit_warning')}}')">{{_('unsubmit_program')}}</button>
         </div>
