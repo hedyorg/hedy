@@ -1632,7 +1632,9 @@ class CustomEncoder(json.JSONEncoder):
 def validate_only_sort_key(conds, sort_key):
     """Check that non-Equals conditions are only used on the sort key."""
     non_equals_fields = [k for k, v in conds.items() if not isinstance(v, Equals)]
-    if sort_key and set(non_equals_fields) - {sort_key}:
+    sort_key_set = {sort_key} if sort_key else set()
+
+    if set(non_equals_fields) - sort_key_set:
         raise ValueError(f"Non-Equals conditions only allowed on sort key {sort_key}, got: {list(conds)}")
 
 
