@@ -756,6 +756,16 @@ class Database:
                     students.append(student)
         return students
 
+    def get_student_teachers(self, username):
+        """Return a list of the main and all secondary teachers of a student."""
+        teachers = []
+        for class_id in self.get_student_classes_ids(username):
+            class_ = self.get_class(class_id)
+            teachers.append(class_["teacher"])
+            sec_teachers = [t['username'] for t in class_.get('second_teachers', []) if t.get('role', '') == 'teacher']
+            teachers.extend(sec_teachers)
+        return teachers
+
     def get_adventure(self, adventure_id):
         return self.adventures.get({"id": adventure_id})
 
