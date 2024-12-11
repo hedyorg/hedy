@@ -35,6 +35,7 @@ import hedy_content
 import hedy_translation
 import hedyweb
 import utils
+from dataclasses import dataclass
 from hedy_error import get_error_text
 from safe_format import safe_format
 from config import config
@@ -48,9 +49,9 @@ from website import (ab_proxying, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger, parsons,
                      profile, programs, querylog, quiz, statistics,
                      translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
-from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, has_public_profile,
-                          login_user_from_token_cookie, requires_login, requires_login_redirect, requires_teacher,
-                          forget_current_user, hide_explore)
+from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, is_students_teacher,
+                          has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
+                          requires_teacher, forget_current_user, hide_explore)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 
@@ -1226,7 +1227,7 @@ def hour_of_code(level, program_id=None):
     loaded_program = None
     if program_id:
         result = DATABASE.program_by_id(program_id)
-        if not result or not current_user_allowed_to_see_program(result):
+        if not result or not get_current_user_program_permissions(result):
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
@@ -1405,7 +1406,7 @@ def index(level, program_id):
     loaded_program = None
     if program_id:
         result = DATABASE.program_by_id(program_id)
-        if not result or not current_user_allowed_to_see_program(result):
+        if not result or not get_current_user_program_permissions(result):
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
@@ -1636,7 +1637,7 @@ def tryit(level, program_id):
     loaded_program = None
     if program_id:
         result = DATABASE.program_by_id(program_id)
-        if not result or not current_user_allowed_to_see_program(result):
+        if not result or not get_current_user_program_permissions(result):
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
@@ -1874,7 +1875,8 @@ def index_level():
 def view_program(user, id):
     result = DATABASE.program_by_id(id)
 
-    if not result or not current_user_allowed_to_see_program(result):
+    prog_perms = get_current_user_program_permissions(result)
+    if not result or not prog_perms:
         return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
     # The program is valid, verify if the creator also have a public profile
@@ -1917,23 +1919,21 @@ def view_program(user, id):
         student_adventure = DATABASE.store_student_adventure(
             dict(id=f"{student_adventure_id}", ticked=False, program_id=id))
 
-    arguments_dict = {}
-    arguments_dict['program_id'] = id
-    arguments_dict['page_title'] = f'{result["name"]} – Hedy'
-    arguments_dict['level'] = result['level']  # Necessary for running
-    arguments_dict['initial_adventure'] = dict(result,
-                                               editor_contents=code,
-                                               )
-    arguments_dict['editor_readonly'] = True
-    arguments_dict['student_adventure'] = student_adventure
+    arguments_dict = {
+        'program_id': id,
+        'page_title': f'{result["name"]} – Hedy',
+        'level': result['level'],  # Necessary for running
+        'initial_adventure': dict(result, editor_contents=code),
+        'editor_readonly': True,
+        'student_adventure': student_adventure,
+        'is_students_teacher': False
+    }
+
     if "submitted" in result and result['submitted']:
         arguments_dict['show_edit_button'] = False
         arguments_dict['program_timestamp'] = utils.localized_date_format(result['date'])
     else:
         arguments_dict['show_edit_button'] = True
-    is_students_teacher = is_teacher(user)\
-        and result['username'] in DATABASE.get_teacher_students(user['username'])
-    arguments_dict['is_students_teacher'] = is_students_teacher
 
     classes = DATABASE.get_student_classes_ids(result['username'])
     next_classmate_adventure_id = None
@@ -1966,6 +1966,9 @@ def view_program(user, id):
         if next_program_id:
             break
 
+    arguments_dict['can_checkoff_program'] = prog_perms.can_checkoff
+    arguments_dict['can_unsubmit_program'] = prog_perms.can_unsubmit
+
     return render_template("view-program-page.html",
                            blur_button_available=True,
                            javascript_page_options=dict(
@@ -1973,7 +1976,6 @@ def view_program(user, id):
                                lang=g.lang,
                                level=int(result['level']),
                                code=code),
-                           is_teacher=user['is_teacher'],
                            class_id=student_customizations.get('id'),
                            next_program_id=next_program_id,
                            next_classmate_program_id=next_classmate_adventure_id,
@@ -2937,26 +2939,32 @@ def teacher_invitation(code):
     return redirect(url)
 
 
-def current_user_allowed_to_see_program(program):
-    """Check if the current user is allowed to see the given program.
+@dataclass
+class ProgramPermissions:
+    can_edit: bool
+    can_checkoff: bool
+    can_unsubmit: bool
 
-    Verify that the program is either public, the current user is the
-    creator, teacher or the user is admin.
+
+def get_current_user_program_permissions(program):
+    """Check if the current user is allowed to view, edit, checkoff or unsubmit the given program.
+
+    Verify that the program is either public, the current user is the creator, teacher or the user is admin.
     """
     user = current_user()
 
-    # These are all easy
-    if program.get('public'):
-        return True
-    if user['username'] == program['username']:
-        return True
-    if is_admin(user):
-        return True
+    is_current_user_author = program['username'] == user['username']
+    students_teacher = is_teacher(user) and is_students_teacher(student=program['username'], teacher=user['username'])
 
-    if is_teacher(user) and program['username'] in DATABASE.get_teacher_students(user['username']):
-        return True
+    can_view = program.get('public') or is_current_user_author or is_admin(user) or students_teacher
 
-    return False
+    if can_view:
+        can_edit = is_current_user_author
+        can_checkoff = students_teacher
+        can_unsubmit = program.get('submitted', False) and (is_admin or students_teacher)
+        return ProgramPermissions(can_edit, can_checkoff, can_unsubmit)
+
+    return None
 
 
 # *** START SERVER ***
