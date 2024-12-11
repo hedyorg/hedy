@@ -808,29 +808,40 @@ levels:
         13:
             header: Sneak peek into the next level...
             text: |-
-                In the next level you'll learn how to use maths in Hedy!           
+                In the next level you'll learn how to use maths in Hedy!
     6:
         1:
             header: Welcome to level 6
             text: |-
                 By the end of this lesson, you can:
                 * use maths in Hedy
+            notes: |-
+                Ask your students to predict when they would need maths in a code (for example calculating a price, an amount of people, points in a game etc).
+                You could also ask them to predict what they think this would look like. They will mist likely come up with + and - themselves.
         2:
             header: Addition
             text: If you want to calculate an addition, simply use the plus sign.
             code: '{print} ''5 plus 5 is '' 5 + 5'
+            notes: |-
+                Briefly show your students the example code.
         3:
             header: Subtraction
             text: If you want to subtract, you can use the minus sign.
             code: '{print} ''5 minus 5 is '' 5 - 5'
+            notes: |-
+                Briefly show your students the example code.
         4:
             header: Multiplication
             text: If you want to do multiplications, you can use the asterisk.
             code: '{print} ''5 times 5 is '' 5 * 5'
+            notes: |-
+                Briefly show your students the example code.
         5:
             header: Division
             text: You can use the slash for division.
             code: '{print} ''5 divided by 5 is '' 5 / 5'
+            notes: |-
+                Briefly show your students the example code.
         6:
             header: Summary
             text: In summary, you can use +, -, * and / to do maths.
@@ -839,6 +850,10 @@ levels:
                 {print} '5 minus 5 is ' 5 - 5
                 {print} '5 times 5 is ' 5 * 5
                 {print} '5 divided by 5 is ' 5 / 5
+            notes: |-
+                Please note that the maths code does not need quotation marks.
+                Let your students predict what the output would look like if you did puth the maths code inside the quotation marks.
+                The students can now make the music adventure and workbook exercise 1 and 2.
         7:
             header: The = symbol
             text: |-
@@ -847,6 +862,8 @@ levels:
             code: |-
                 name = Hedy
                 answer = 20 + 4
+            notes: |-
+                Briefly show your students the example code.
         8:
             header: Calculations with variables
             text: 'You can use calculations with numbers, but you can also use variables to do calculations, like this:'
@@ -855,6 +872,17 @@ levels:
                 number_2 = {ask} 'Fill in the second number:'
                 correct_answer = number_1 * number_2
                 {print} number_1 ' times ' number_2 ' is ' correct_answer
+            notes: |-
+                Show the students the example code and have them take a look at the placement of the quotation marks.
+                If you've made tehm come up with some examples of how to use maths in Hedy in the previous slides, ask them what they think this code would look like.
+                For example, if a student came up with the answer 'calculating points of a game' they could now come up with the code:
+                ```
+                if answer = correct_answer
+                    points = points + 1
+                else
+                    points = points - 1
+                ```
+                If you think this is too hard for your students to do individually or in pairs, you could do this exercise together with the whole class.
         9:
             header: Debugging
             text: Let's debug this code!
@@ -873,9 +901,37 @@ levels:
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
             debug: 'True'
+            notes: |-
+                Debug this code together with your students.
         10:
             header: Let's get to work!
             text: Enjoy the adventures in level 6!
+            notes: |-
+                The students can now make all the adventures in this level.
+                Make workbook exercise 3, 4 and 5.
+        11:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        12:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        13:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        14:
+            header: Sneak peek into the next level...
+            text: |-
+                In the next level you'll learn how to repeat a line of code multiple times!
     7:
         1:
             header: Welcome to level 7
