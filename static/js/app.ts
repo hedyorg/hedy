@@ -772,10 +772,18 @@ export function submit_program (id: string) {
   });
 }
 
-export function unsubmit_program (id: string) {
+function change_to_unsubmitted () {
+    $('#unsubmit-program-button').hide();
+    $('#submitted-program-title').hide();
+    $('#submitted-program-details').hide();
+}
+
+export async function unsubmit_program (id: string, prompt: string) {
+  await modal.confirmP(prompt);
   tryCatchPopup(async () => {
     const response = await postJson('/programs/unsubmit', { id });
     modal.notifySuccess(response.message);
+    change_to_unsubmitted();
   });
 }
 
