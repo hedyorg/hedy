@@ -1020,61 +1020,69 @@ levels:
         2:
             header: '{repeat} commands before'
             text: |-
-                In the previous levels, the `{repeat}` command looked like this:
-
-                You could only repeat one line of code.
+                The repeat command.
             code: '{repeat} 5 {times} {print} ''Help!'''
             debug: 'True'
+            notes: |-
+                Remind the students that they learned how to use the repeat command in the previous level.
+                You could only repeat one line of code. This level you'll learn how to repeat multiple lines of code.
         3:
             header: '{repeat} commands now'
             text: |-
-                In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.
-                You do this by using indentation.
-
-                Use 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:
+                What do you think the output will be?
             code: |-
                 {repeat} 5 {times}
                     {print} 'Hello everyone'
                     {print} 'This will be printed 5 times'
+            notes: |-
+                First let your students predict the output again. Then explain:
+                In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.
+                You do this by using indentation. Use 4 spaces (or one tab) at the beginning of each line that you want to repeat.
         4:
             header: '{repeat} commands now'
             text: |-
-                If you want to, you can continue after the `{repeat}` command without indentation.
-                The lines that do not start with indentation will not be repeated.
+                And what would this code look like?
             code: |-
                 {repeat} 3 {times}
                     {print} 'Hello!'
                 {print} 'We are done repeating!'
+            notes: |-
+                aks the students which lines they think will be repeated and run teh code.
+                Explain: If you want to, you can continue after the `{repeat}` command without indentation.
+                The lines that do not start with indentation will not be repeated.
+                The students can work on these adventures: Fortune teller, sing a sing and music.
+                Make workbook exercise 1 and 2.
         5:
             header: if and else before
             text: |-
-                The same goes for the `{if}` and `{else}` commands.
-                These were the commands before:
+                What will the {if} and {else} commands look like with indentation?
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
             debug: 'True'
+            notes: |-
+                This is what the {if} and {else} have always looked like. What will they look like now that we can use indentation?
         6:
             header: if and else now
             text: |-
                 These are the `{if}` and `{else}` commands now.
-                Each line after the `{if}` and `{else}` commands start with indentation.
             code: |-
                 name = {ask} 'What is your name?'
                 {if} name {is} Hedy
                     {print} 'Welcome Hedy'
                 {else}
                     {print} 'Welcome programmer!'
+            notes: |-
+                Show the students that using indentation isn't just giving you the extra work of adding a tab, but it is very useful. Demonstrate how you can now type multiple lines after an {if} or {else} instead of just one by adding some lines of code to the example.
         7:
             header: stopping the indentation
-            text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
+            text: Predict the output
             code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
+            notes: |-
+                Let your students predict the output of the code and instruct them to take a careful look at the indentation.
+                Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
+                Make workbook exercise 3, 4, 5 and 6.
         8:
-            header: if statements inside if statements
-            text: |-
-                You might have thought of trying to put an if command inside a repeat command, or inside another if command.
-                For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
-        9:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1097,9 +1105,41 @@ levels:
                 price * 2
                 {print} 'That will be ' price ' euros please'
             debug: 'True'
-        10:
+            notes: |-
+                Debug this code with your students.
+        9:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 8!
+            notes: |-
+                Your students can now work on all the adventures in level 8.
+        10:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        11:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        12:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        13:
+            header: Sneak peek into the next level...
+            text: |-
+                Next level we will see what happens if we put an {if} inside another {if}...
+            code: |-
+                {if} level = 8
+                    {if} student = curious
+                        {print} 'See you next level!'
+            debug: True
     9:
         1:
             header: Welcome to level 9
