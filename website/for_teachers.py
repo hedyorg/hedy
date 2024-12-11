@@ -428,7 +428,7 @@ class ForTeachersModule(WebsiteModule):
                 content = adventure['content']
                 soup = BeautifulSoup(content, features="html.parser")
                 for pre in soup.find_all('pre'):
-                    adventure_snippets.append(str(pre.contents[0]))
+                    adventure_snippets.append(pre.text)
 
         student_code = program['code'].strip()
         # now we have to calculate the differences between the student code and the code snippets
