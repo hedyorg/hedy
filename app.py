@@ -1323,10 +1323,6 @@ def hour_of_code(level, program_id=None):
 
     adventures_map = {a.short_name: a for a in adventures}
 
-    enforce_developers_mode = False
-    if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
-        enforce_developers_mode = True
-
     hide_cheatsheet = False
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
@@ -1359,7 +1355,6 @@ def hour_of_code(level, program_id=None):
         HOC_tracking_pixel=True,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
-        enforce_developers_mode=enforce_developers_mode,
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
@@ -1382,7 +1377,6 @@ def hour_of_code(level, program_id=None):
             adventures=adventures,
             initial_tab=initial_tab,
             current_user_name=current_user()['username'],
-            enforce_developers_mode=enforce_developers_mode,
         ))
 
 
@@ -1535,9 +1529,6 @@ def index(level, program_id):
 
     adventures_map = {a.short_name: a for a in adventures}
 
-    enforce_developers_mode = False
-    if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
-        enforce_developers_mode = True
     hide_cheatsheet = False
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
@@ -1593,7 +1584,6 @@ def index(level, program_id):
         next_level=next_level,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
-        enforce_developers_mode=enforce_developers_mode,
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
@@ -1613,7 +1603,6 @@ def index(level, program_id):
         adventures_for_index=adventures_for_index,
         # See initialize.ts
         javascript_page_options=dict(
-            enforce_developers_mode=enforce_developers_mode,
             page='code',  # change to tryit
             level=level_number,
             lang=g.lang,
@@ -1766,9 +1755,6 @@ def tryit(level, program_id):
 
     adventures_map = {a.short_name: a for a in adventures}
 
-    enforce_developers_mode = False
-    if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
-        enforce_developers_mode = True
     hide_cheatsheet = False
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
@@ -1824,7 +1810,6 @@ def tryit(level, program_id):
         next_level=next_level,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
-        enforce_developers_mode=enforce_developers_mode,
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
@@ -1844,7 +1829,6 @@ def tryit(level, program_id):
         adventures_for_index=adventures_for_index,
         # See initialize.ts
         javascript_page_options=dict(
-            enforce_developers_mode=enforce_developers_mode,
             page='tryit',
             level=level_number,
             lang=g.lang,
@@ -2084,7 +2068,6 @@ def get_specific_adventure(name, level, mode):
                            max_level=hedy.HEDY_MAX_LEVEL,
                            customizations=customizations,
                            hide_cheatsheet=None,
-                           enforce_developers_mode=None,
                            teacher_adventures=[],
                            adventures=adventures,
                            initial_tab=initial_tab,
