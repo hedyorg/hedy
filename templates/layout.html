@@ -136,10 +136,9 @@
                    class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1"
                    hx-get="/search_students"
                    hx-trigger="input changed delay:500ms, search"
-                   hx-target="#search_results"                   
-                   hx-indicator=".htmx-indicator"                   
-                   >
-            <ul class="list-none flex flex-col items-center align" id="search_results">
+                   hx-target="#search_results">
+
+            <ul class="list-none flex flex-col items-center align" id="search_results" hx-on::after-settle="document.getElementById('modal_prompt_input').focus()">
 
             </ul>              
             </div>
@@ -211,7 +210,7 @@
 
     {% block scripts %}
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/vendor/htmx-1.8.5.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{static('/vendor/htmx-2.0.3.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/hyperscript-0.9.8.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
