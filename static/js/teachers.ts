@@ -985,3 +985,25 @@ export function invite_support_teacher(requester: string) {
     });
   });
 }
+
+
+export function add_student_to_invite_list(username: string) {
+  const userList = document.getElementById('users_to_invite')
+  const template = document.querySelector('#user_list_template') as HTMLTemplateElement
+  const clone = template.content.cloneNode(true) as HTMLElement
+  let close = clone.querySelector('.close');  
+  close?.addEventListener('click', () => {   
+    close?.parentElement?.remove()
+  })
+  let p = clone.querySelector('p[class^="details"]')!
+  p.textContent = username
+  userList?.appendChild(clone)
+}
+
+export function send_invitations() {
+  const li = document.querySelectorAll('#users_to_invite > li')
+  let list = []
+  for (const userLi of li) {
+    list.push(userLi.textContent)
+  }
+}

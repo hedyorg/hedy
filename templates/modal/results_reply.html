@@ -1,3 +1,6 @@
 {% for username in usernames %}
-    <li class="p-4 m-1 bg-blue-100 rounded cursor-pointer w-4/5" >{{ username}}</li>
+    <li class="p-4 m-1 group flex flex-row justify-between items-center bg-blue-100 rounded w-4/5" >
+        <span>{{ username}}</span>
+        <button class="green-btn" onclick="hedyApp.add_student_to_invite_list('{{username}}')">Invite</button>
+    </li>
 {% endfor %}    
