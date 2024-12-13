@@ -37,10 +37,12 @@
                       hx-target="#public_adventures"
                       value="">{{_('select_lang')}}</option>
                   {% for lang in available_languages %}
+                      {% if lang %}
                       <option {% if lang == selectedLang %}selected{% endif %}
                           hx-post="/public-adventures/filter?lang={{lang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
                           hx-target="#public_adventures"
                           data-value="{{lang}}">{{lang_to_sym(lang)}}</option>
+                      {% endif %}
                   {% endfor %}
             </custom-select>
           </div>
