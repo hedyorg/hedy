@@ -273,6 +273,7 @@ adventures:
                     _
                     {print} Otrzymujesz koktajl o smaku {at} {random}
                     ```
+        name: '{add}{to_list} i {remove}{from}'
     and_or_command:
         default_save_name: i lub
         description: wprowadzenie komendy {and} i {or}
@@ -289,6 +290,7 @@ adventures:
                     {if} imię {is} 'Hedy' {and} wiek {is} 2
                         {print} 'Jesteś prawdziwym Hedym!'
                     ```
+        name: '{and} i {or}'
     ask_command:
         default_save_name: komenda_ask
         description: Wprowadzenie komendy {ask}
@@ -337,41 +339,45 @@ adventures:
                     ```
                 story_text_2: |
                     ### Ćwiczenie
-                    W poprzedniej zakładce przećwiczyliśmy ustawianie wartości zmiennych używając komendy `{is}`.
-                    Utworzyłeś co najmniej 3 zmiennych i użyłeś ich z komendą print.
-                    Teraz, zamiast ustawiać zmiennych w kodzie, spróbuj uczynić je interaktywnymi, tak jak zrobiliśmy to powyżej.
+                    W poprzedniej przygodzie ćwiczyłeś ustawianie zmiennych za pomocą polecenia `{is}`.
+                    Utworzyłeś co najmniej 3 zmienne i użyłeś ich za pomocą polecenia print.
+                    Teraz zamiast ustawiać zmienne, chcemy, abyś uczynił je interaktywnymi, tak jak zrobiliśmy to w naszym przykładzie.
 
-                    Skopiuj kod z poprzedniej zakładki i uczyń zmienne interaktywnymi używając komendy `{ask}`.
+                    Skopiuj swój kod z poprzedniej przygody i spraw, aby zmienne były interaktywne, używając poleceń `{ask}`.
                 example_code_2: |
                     ```
                     ulubione_zwierzę {is} {ask} Jakie jest Twoje ulubione zwierzę?
                     {print} Lubię ulubione_zwierzę
                     ```
+            18:
+                story_text: Ostatnią zmianą, którą musimy wprowadzić, aby uzyskać kod Pythona, jest zamiana `{ask}` na `{input}`.
+                example_code: "```\n{print}('Mam na imię Hedy!')\nname = {input}('Jak masz na imię?')\n{print}('Więc masz na imię ', name)\n```\n"
+        name: '{ask}'
     blackjack:
         description: Spróbuj zdobyć jak największą ilość punktów ale mniejszą lub równą 21
         levels:
             17:
                 story_text: |
-                    Blackjack to prosta gra karciana, w której musisz zdobyć jak najwięcej punktów, ale nie więcej niż 21. Dostajesz dwie karty. Każda karta ma swoją wartość liczbową, a figury (walet, królowa i król) są warte 10 punktów.
-                    As jest wart 1 lub 11 punktów (do wyboru). Rozdający, twój przeciwnik, również otrzymuje dwie karty.
-                    Jeśli chcesz, możesz zdobyć kolejną kartę, a jej punkty zostaną dodane do Twojej sumy. Rozdający może również wybrać inną kartę.
-                    Uważaj, aby nie zdobyć więcej niż 21 punktów, ponieważ jeśli to zrobisz, przegrywasz!
-                    Gracz, który zbliży się do liczby 21, nie przekraczając jej, wygrywa!
+                    Blackjack to prosta gra karciana, w której musisz uzyskać jak najwięcej punktów. Dostajesz dwie karty. Każda karta jest warta tyle, ile wynosi jej wartość liczbowa, a figury (walet, dama i król) są warte 10 punktów.
+                    As jest wart 1 lub 11 punktów (możesz wybrać). Krupier, czyli twój przeciwnik, również otrzymuje dwie karty.
+                    Jeśli chcesz, możesz otrzymać kolejną kartę, a jej punkty zostaną dodane do twojej sumy. Krupier może również wybrać wzięcie kolejnej karty.
+                    Uważaj jednak, aby nie uzyskać więcej niż 21 punktów, ponieważ jeśli to zrobisz, przegrywasz!
+                    Gracz, który uzyska wynik najbliższy 21, ale nie przekraczając go, wygrywa!
 
                     ### Ćwiczenie
-                    W tej przygodzie będziemy kodować pierwszą część naszej gry w Blackjacka. Stworzymy funkcję, która pozwoli nam obliczyć wartość każdej z kart.
+                    W tej przygodzie kodujemy pierwszą część naszej gry w Blackjacka. Stworzymy funkcję obliczającą, ile punktów jest warta karta.
 
                     ***Ustaw zmienne***
-                    Zacznij od zrobienia listy wszystkich kart, od 2 do Asa. Następnie zrób listę figur, czyli Walet, Królowa i Król. Wtedy wybierz przypadkową kartę z listy kart, która ma być kartą_1.
+                    Zacznij od utworzenia listy wszystkich kart, od 2 do asa. Następnie utwórz listę figur, czyli waleta, damy i króla.  Następnie wybierz losową kartę z listy kart, która będzie kartą_1.
 
                     ***Utwórz funkcję do obliczania punktów***
-                    Utwórz funkcję, która obliczy, ile punktów jest warta karta.
-                    Wszystkie figury są warte 10 punktów, As jest wart 11, a wszystkie pozostałe karty mają swoją wartość liczbową .
-                    Return the zmienną `points` na koniec funkcji.
+                    Utwórz funkcję, która oblicza, ile punktów jest warta karta.
+                    Wszystkie karty z figurami są warte 10 punktów, as jest wart 11, a wszystkie pozostałe karty są warte tyle samo, co ich liczba.
+                    Zwróć zmienną `points` na końcu funkcji.
 
                     ***Przetestuj funkcję***
-                    Sprawdź, czy Twoja funkcja działa poprawnie. Zakończ pierwsze polecenie print poprzez wypełnienie go kartą, którą wyciągnąłeś. Następnie zakończ drugi wiersz, wywołując funkcję za pomocą card_1.
-                    Uruchom kod kilka razy. Czy jesteś zadowolony z wyników? Świetnie! Następnie możesz usunąć część testową i przejść do następnej zakładki!
+                    Sprawdź, czy funkcja działa prawidłowo. Zakończ pierwsze polecenie drukowania, wpisując, którą kartę wyciągnąłeś. Następnie zakończ drugi wiersz, wywołując funkcję z kartą_1.
+                    Uruchom kod kilka razy. Czy jesteś zadowolony z wyników? Świetnie! Następnie możesz usunąć część testową i przejść do następnej przygody!
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -395,32 +401,34 @@ adventures:
                     {print} 'Twoja karta to ' _
                     {print} 'Jest warta ' _ ' punktów'.
                     ```
+        name: Maczuga
+        default_save_name: Maczuga
     blackjack_2:
         description: Blackjack część 2
         levels:
             17:
                 story_text: |
                     ### Ćwiczenie
-                    W tej przygodzie napiszemy kod drugiej części naszej gry w Blackjacka.
+                    W tej przygodzie kodujemy drugą część naszej gry w Blackjacka.
 
                     ***Wklej swój kod z poprzedniej przygody***
-                    Poprzednio zacząłeś listę zmiennych i stworzyłeś funkcję do obliczania wartości kart. Skopiuj swój kod i wklej go tutaj. Zwróć uwagę na to, że nie potrzebujesz już części testowej, dlatego jeśli jeszcze jej nie usunąłeś to zrób to teraz.
+                    W poprzedniej przygodzie rozpocząłeś listę zmiennych i stworzyłeś funkcję obliczającą, ile punktów jest warta karta. Skopiuj swój kod i wklej go tutaj. Pamiętaj, że nie potrzebujesz części testowej, więc jeśli jeszcze jej nie usunąłeś, zrób to teraz.
 
                     ***Dodaj więcej zmiennych***
-                    Ustawiłeś już listy `cards` i `face_cards` oraz zmienną `card_1`. Pod tymi zmiennymi utwórz 3 dodatkowe zmienne: `card_2`, dealer_card_1` and `dealer_card_2`. Wszystkie te zmienne są ustawione na losową kartę z listy kart.
+                    Ustawiłeś już listy `cards` i `face_cards` oraz zmienną `card_1`. Pod tymi zmiennymi utwórz 3 kolejne zmienne: `card_2`, dealer_card_1` i `dealer_card_2`. Wszystkie te zmienne są ustawione na losową kartę z listy kart.
 
-                    ***Podlicz punkty***
-                    Aby obliczyć liczbę punktów, które zdobyłeś, wywołujemy funkcję za pomocą karty 1 i robimy to ponownie dla karty 2. Następnie dodajemy oba te wyniki razem, aby uzyskać sumę.
-                    Zrób to samo dla punktów innych graczy , ale pamiętaj, aby użyć kart innych graczy, a nie własnych!
+                    ***Zsumuj punkty***
+                    Aby obliczyć, ile punktów zdobyłeś, wywołujemy funkcję z kartą 1 i robimy to ponownie dla karty 2. Następnie dodajemy oba te wyniki, aby uzyskać wynik całkowity.
+                     Zrób to samo z punktami krupiera, ale pamiętaj, aby użyć kart krupiera, a nie swoich!
 
-                    ***2 Asy***
-                    Świetnie sobie radzisz! Prawie wszystkie wyniki można teraz obliczyć. Jest tylko jeden wyjątek: 2 asy. Jeśli zdobędziesz 2 asy, twoja suma to 12 punktów, a nie 22 (ponieważ mając 22 punkty przegrałbyś!). Dotyczy to oczywiście również rozdającego.
+                    ***2 asy***
+                    Świetnie ci idzie! Teraz można obliczyć niemal wszystkie wyniki. Jest tylko jeden wyjątek: 2 asy. Jeśli dostaniesz 2 asy, twój wynik to 12 punktów, a nie 22 (ponieważ 22 punkty oznaczałyby przegraną!). Oczywiście dotyczy to również krupiera.
 
                     ***Pokaż wynik***
-                    Na koniec musisz powiedzieć programowi, które karty wyciągnąłeś i ile to jest punktów. Następnie pokaż, jakie karty ma inny gracz i ile zdobył punktów.
+                    Na koniec poproś program, aby powiedział ci, jakie karty wyciągnąłeś i ile to punktów. Następnie pokaż, jakie karty ma krupier i ile ma punktów.
 
-                    ***Przejdź do następnej zakładki***
-                    Świetnie! Skończyłeś tę część gry! Skopiuj kod i przejdź do następnej zakładki, aby dowiedzieć się, jak poprosić o dodatkową kartę i ogłosić zwycięzcę.
+                    ***Kontynuuj w następnej przygodzie***
+                    Świetnie! Ukończyłeś tę część gry! Skopiuj swój kod i przejdź do następnej przygody, aby dowiedzieć się, jak poprosić o dodatkową kartę i ogłosić zwycięzcę.
                 example_code: |
                     ```
                     # Wklej tutaj swój kod z poprzedniej przygody. 
@@ -450,26 +458,29 @@ adventures:
                     {print} 'Wyciągnąłeś ' _ ' i ' _ ' kartę. To oznacza, że masz ' _ ' punktów'
                     {print} 'Przeciwnik wyciągnął ' _ ' i ' _ '. To oznacza, że ma ' _ ' punktów'
                     ```
+        name: Blackjack 2
+        default_save_name: Blackjack_2
     blackjack_3:
         description: Blackjack część 3
         levels:
             17:
                 story_text: |
-                    W poprzedniej zakładce nauczyłeś się jak dobierać 2 losowe karty dla siebie i dla przeciwnika, a także jak obliczyć ile punktów dostał każdy z was.
-                    W tej przygodzie dodamy opcję zapytania o dodatkową kartę dla ciebie oraz dla twojego przeciwnika.
+                    W poprzednich przygodach nauczyłeś się, jak dobrać 2 losowe karty dla siebie i krupiera oraz jak obliczyć, ile punktów oboje otrzymaliście.
+
+                    W tej przygodzie dodajemy opcję poproszenia o dodatkową kartę zarówno dla siebie, jak i krupiera.
 
                     ### Ćwiczenie
-                    ***Wklej swój kod z poprzedniej przygody*** Skopiuj swój kod z poprzedniej zakładki i wklej tutaj.
+                    ***Wklej swój kod z poprzedniej przygody*** Najpierw skopiuj swój kod z poprzedniej przygody i wklej go tutaj.
 
-                    ***Dodatkowa karta dla ciebie*** Jeśli chcesz, to możesz dostać dodatkową kartę ,żeby zbliżyć swój wynik do 21 punktów. Najpierw zapytaj gracza czy chcę dodatkową kartę.
-                    Jeśli będzie chciał, to wybierz losową kartę i napisz jaką kartę dobrał. Jeżeli karta nie jest asem , to wtedy wywołaj funkcję i dodaj punkty do twojego wyniku. 
-                    W przypadku, gdy karta jest asem, nie możesz użyć funkcji, ponieważ wartość asa może wynosić 1 punkt lub jedenaście w zależności od tego jak dużo punktów zebrałeś do tej pory.
-                    Jeśli twój wynik jest mniejszy niż 11, to wtedy chcesz aby wartość asa wynosiła 11 punktów (ponieważ jest to najbliższe 21 punktów). Więc dodaj 11 punktów do swojego wyniku.
-                    Jeżeli wynik jest większy lub równy 11, to wtedy chcesz aby wartość asa wynosiła 1 punkt (ponieważ nie chcesz mieć więcej niż 21 punktów). Więc dodaj 1 punkt do swojego wyniku.
-                    Na koniec napisz swój nowy wynik.
+                    ***Dodatkowa karta dla ciebie*** Jeśli chcesz, możesz otrzymać dodatkową kartę, aby uzyskać wynik jak najbardziej zbliżony do 21. Najpierw zapytaj gracza, czy chce dodatkową kartę.
+                    Jeśli tak, wybierz losową kartę i wydrukuj to, co wyciągnął. Jeśli karta nie jest asem, możesz wywołać funkcję i dodać punkty do swojego wyniku.
+                    Jeśli karta jest asem, nie możesz użyć funkcji, ponieważ as może być 1 punktem lub 11 punktami, w zależności od tego, ile punktów już zdobyłeś.
+                    Jeśli twój wynik jest mniejszy niż 11, chcesz, aby as był 11 punktami (ponieważ jest to wynik najbliższy 21).  Więc dodajesz 11 punktów do swojej sumy.
+                    Jeśli suma jest większa lub równa 11, chcesz, aby as był 1 punktem (ponieważ nie chcesz więcej niż 21 punktów). Więc dodajesz 1 punkt do swojej sumy.
+                    Na koniec wydrukuj swoją nową sumę punktów.
 
-                    ***Dodatkowa karta dla przeciwnika*** Przeciwnik może również dostać dodatkową kartę. Przeciwnik nie musi być oto zapytany, ponieważ zawsze dostaje dodatkową kartę jeżeli jego wynik wynosi mniej niż 17.
-                    Skopiuj 'Dodatkowa karta do twojego kodu' i wklej do sekcji przeciwnika. Następnie zmień go w taki sposób, aby dopasować do przeciwnika wybierającego dodatkową kartę i otrzymującego punkty, które są dodawane do jego wyniku.
+                    ***Dodatkowa karta dla krupiera*** Krupier może również otrzymać dodatkową kartę. Krupier nie musi być proszony, ponieważ zawsze otrzymuje dodatkową kartę, jeśli jego suma jest mniejsza niż 17.
+                    Skopiuj „Kod dodatkowej karty dla Ciebie” i wklej go w sekcji krupierów. Następnie zmień go tak, aby pasował do krupiera wybierającego dodatkową kartę i otrzymującego punkty dodane do jego sumy.
                 example_code: |
                     ```
                     # Wklej tutaj swój kod z poprzedniej przygody.
@@ -493,6 +504,8 @@ adventures:
                     {if} wynik_przeciwnika< 17
                     _
                     ```
+        name: Blackjack 3
+        default_save_name: Blackjack_3
     blackjack_4:
         description: Blackjack część 4
         levels:
@@ -529,6 +542,8 @@ adventures:
                     {else}:
                         _
                     ```
+        name: Blackjack 4
+        default_save_name: Blackjack_4
     calculator:
         name: Kalkulator
         default_save_name: Kalkulator
@@ -997,6 +1012,7 @@ adventures:
                     {for} i {in} {range} 0 {to} ludzie
                         {call} powitaj_klienta
                     ```
+                story_text: "### Ćwiczenie\nZdebuguj ten kod. Powodzenia!"
             13:
                 example_code: |
                     **Uwaga! Ten kod musi zostać zdebuggowany!**
@@ -1026,6 +1042,7 @@ adventures:
                     {else}
                     {print} 'Żaden problem!'
                     ```
+                story_text: "### Ćwiczenie\nZdebuguj ten kod. Powodzenia!"
             14:
                 story_text: |-
                     ### Ćwiczenie
@@ -1171,6 +1188,8 @@ adventures:
                         {print} 'tam ' dźwięk
                         {print} 'wszędzie ' dźwięk dźwięk
                     ```
+        name: debugowanie
+        default_save_name: debugowanie
     default:
         name: Wprowadzenie
         default_save_name: wstęp
@@ -1629,6 +1648,9 @@ adventures:
                     {else}:
                         {print} 'Spróbuj szczęścia następnym razem.'
                     ```
+        default_save_name: elif
+        description: '{elif}'
+        name: '{elif}'
     for_command:
         description: komenda {for}
         levels:
@@ -1675,6 +1697,8 @@ adventures:
             18:
                 story_text: |
                     Na koniec zmienimy `{for} i {in} {range} 1 to 5` w prawdziwy kod Pythona, taki jak:
+        default_save_name: for
+        name: '{for}'
     fortune:
         name: Wróżka
         default_save_name: Wróżka
@@ -1911,6 +1935,8 @@ adventures:
                     wynik = oblicz_wynik(odpowiedź, poprawna_odpowiedź)
                     {print} ('Twój wynik to...', wynik)
                     ```
+            13:
+                story_text: "Teraz, gdy nauczyłeś się, jak używać funkcji, nauczysz się, jak używać funkcji z argumentem.\n**Argument** to zmienna, która jest używana w funkcji. Nie jest używana poza funkcją.\n\nNa przykład w tym kodzie zaprogramowaliśmy pierwszą zwrotkę piosenki „My Bonnie is over the ocean”.\nW tym przykładowym kodzie użyto argumentu „place”. Place to zmienna, która jest używana tylko w funkcji, więc jest argumentem.\nAby użyć „place”, umieściliśmy „{with} place” po „{define} song”.\nGdy funkcja zostanie wywołana, komputer zastąpi argument „place” fragmentem tekstu po „{call} song {with}”.\n\n ### Ćwiczenie\nKolejna zwrotka tej piosenki brzmi:\n\n```not_hedy_code\nWczoraj wieczorem, gdy leżałem na poduszce\nWczoraj wieczorem, gdy leżałem na łóżku\nWczoraj wieczorem, gdy leżałem na poduszce\nŚniło mi się, że moja Bonnie nie żyje\n```\n\nCzy możesz zaprogramować tę zwrotkę w taki sam sposób, jak w przykładzie?\n"
     guess_my_number:
         name: Zgadnij moją liczbę
         default_save_name: Zgadnij moją liczbę
