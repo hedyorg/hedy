@@ -235,6 +235,7 @@ adventures:
                             {print} 'Nope they are not at the ' location
                     {print} 'Now you can enter the house !'
                     ```
+                story_text: "Utiliser une boucle `{while}` peut rendre vos histoires plus intéressantes. Par exemple, utiliser `{while} game == 'on'` pourrait faire durer une partie jusqu'à ce que le jeu soit fermé.\nVous pourriez également utiliser `{while} sword == 'lost'` pour que le joueur ne puisse continuer tant que l'épée n'est pas retrouvée.\n\n### Exercice\nLe code en exemple vous montre comment utiliser la boucle `{while}` dans le contexte d'une histoire. Essayez à votre tour de **trouver votre propre scénario** dans lequel le joueur doit trouver quelque chose avant de pouvoir continuer.\n"
             18:
                 story_text: |
                     We are going to print another story, but now we have to use brackets with `{print}`.
@@ -3621,3 +3622,6 @@ adventures:
                     ### Exercice
                     Complète les espaces vides et fait fonctionner le code !
                 example_code: "```\n{for} nombre {in} {range} _ {to} _\n\t{print} nombre\n\t{sleep}\n{print} \"Bonne année !\"\n```\n"
+    blackjack:
+        name: Blackjack
+        default_save_name: Blackjack
