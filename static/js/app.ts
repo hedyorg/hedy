@@ -193,7 +193,6 @@ export interface InitializeCodePageOptions {
   readonly initial_tab: string;
   readonly current_user_name?: string;
   readonly suppress_save_and_load_for_slides?: boolean;
-  readonly enforce_developers_mode?: boolean;
 }
 
 /**
@@ -266,7 +265,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
         adventure.save_info = 'local-storage';
       }
     }
-    reconfigurePageBasedOnTab(options.enforce_developers_mode);
+    reconfigurePageBasedOnTab();
     checkNow();
     theLocalSaveWarning.switchTab();
   });
@@ -1442,40 +1441,6 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
-export function setDevelopersMode(event='click', enforceDevMode: boolean) {
-  let enable: boolean = false;
-  switch (event) {
-    case 'load':
-      const lastSelection = window.localStorage.getItem('developer_mode') === 'true';
-      enable = enforceDevMode || lastSelection;
-      $('#developers_toggle').prop('checked', enable);
-      break;
-
-    case 'click':
-      // Toggled
-      enable = $('#developers_toggle').prop('checked');
-      break;
-  }
-  if (!enforceDevMode) window.localStorage.setItem('developer_mode', `${enable}`)
-  toggleDevelopersMode(!!enforceDevMode)
-}
-
-function toggleDevelopersMode(enforceDevMode: boolean) {
-  const enable = window.localStorage.getItem('developer_mode') === 'true' || enforceDevMode;
-  // DevMode hides the tabs and makes resizable elements track the appropriate size.
-  // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
-  // size literals between HTML and JavaScript).
-  $('#adventures_tab').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
-  // this is for the new design, it needs to be removed once we ship it
-  $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
-  // Parsons dont need a fixed height
-  if (currentTab === 'parsons') return
-  $('[data-devmodeheight]').each((_, el) => {
-    const heights = $(el).data('devmodeheight').split(',') as string[];
-    $(el).css('height', heights[enable ? 1 : 0]);
-  });
-}
-
 export function saveForTeacherTable(table: string) {
   let show_table = window.localStorage.getItem(table);
   window.localStorage.setItem(table, (show_table !== 'true').toString())
@@ -1709,16 +1674,16 @@ function resetWindow() {
  * Update page element visibilities/states based on the state of the current tab
  */
 function updatePageElements() {
-  const isCodeTab = !(currentTab === 'quiz' || currentTab === 'parsons');
-
+  const isParsonsTab = currentTab === 'parsons'
+  const isCodeTab = !(currentTab === 'quiz' || isParsonsTab);
   // .toggle(bool) sets visibility based on the boolean
 
-  // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
-  $('#adventures_tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
-  $('#developers_toggle_container').toggle(isCodeTab);
+  $('#adventures_tab').toggle(true);
+  // this is for the new design, it needs to be removed once we ship it
+  $('#adventures').toggle(true);
   $('#level_header input').toggle(isCodeTab);
-  $('#parsons_code_container').toggle(currentTab === 'parsons');
-  $('#editor_area').toggle(isCodeTab || currentTab === 'parsons');
+  $('#parsons_code_container').toggle(isParsonsTab);
+  $('#editor_area').toggle(isCodeTab || isParsonsTab);
   $('#editor').toggle(isCodeTab);
   $('#debug_container').toggle(isCodeTab);
   $('#program_name_container').toggle(isCodeTab);
@@ -1762,7 +1727,9 @@ function updatePageElements() {
     $('#commands_dropdown_container').show()
     $('#hand_in_button').show()
   }
-  if (currentTab === 'parsons'){    
+  if (currentTab === 'parsons'){
+    $('[data-view="if-submitted"]').toggle(false);
+    $('[data-view="if-not-submitted"]').toggle(true);
     $('#share_program_button').hide()
     $('#read_outloud_button_container').hide()
     $('#cheatsheet_dropdown_container').hide()
@@ -1782,23 +1749,36 @@ function updatePageElements() {
 /**
  * After switching tabs, show/hide elements
  */
-function reconfigurePageBasedOnTab(enforceDevMode?: boolean) {
+function reconfigurePageBasedOnTab() {
   resetWindow();
 
   updatePageElements();
-  toggleDevelopersMode(!!enforceDevMode);
+
   if (currentTab === 'parsons') {
     loadParsonsExercise(theLevel, 1);
-    // remove the fixed height from the editor
+    // parsons could have 5 lines to arrange which requires more space, so remove the fixed height from the editor
     document.getElementById('code_editor')!.style.height = '100%'
     document.getElementById('code_output')!.style.height = '100%'
-    return;
-  }
 
-  const adventure = theAdventures[currentTab];
-  if (adventure) {
-    $ ('#program_name').val(adventure.save_name);
-    theGlobalEditor.contents = adventure.editor_contents;
+    // only relevant for the old hedy page; remove lines below when we migrate to tryit
+    show_editor();
+    $('#fold_in_toggle_container').hide();
+  } else {
+    // deriving from HTML attributes is more flexible on what gets resized, and avoids duplicating
+    // size literals between HTML and JavaScript.
+    $('[data-editorheight]').each((_, el) => {
+      const height = $(el).data('editorheight');
+      $(el).css('height', height);
+    });
+
+    // only relevant for the old hedy page; remove lines below when we migrate to tryit
+    $('#fold_in_toggle_container').show();
+
+    const adventure = theAdventures[currentTab];
+    if (adventure) {
+      $ ('#program_name').val(adventure.save_name);
+      theGlobalEditor.contents = adventure.editor_contents;
+    }
   }
 }
 

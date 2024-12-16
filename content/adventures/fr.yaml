@@ -235,6 +235,7 @@ adventures:
                             {print} 'Nope they are not at the ' location
                     {print} 'Now you can enter the house !'
                     ```
+                story_text: "Utiliser une boucle `{while}` peut rendre vos histoires plus intéressantes. Par exemple, utiliser `{while} game == 'on'` pourrait faire durer une partie jusqu'à ce que le jeu soit fermé.\nVous pourriez également utiliser `{while} sword == 'lost'` pour que le joueur ne puisse continuer tant que l'épée n'est pas retrouvée.\n\n### Exercice\nLe code en exemple vous montre comment utiliser la boucle `{while}` dans le contexte d'une histoire. Essayez à votre tour de **trouver votre propre scénario** dans lequel le joueur doit trouver quelque chose avant de pouvoir continuer.\n"
             18:
                 story_text: |
                     We are going to print another story, but now we have to use brackets with `{print}`.
@@ -293,6 +294,7 @@ adventures:
                     _
                     {print} Voici un milkshake parfums {at} {random}
                     ```
+        name: '{add} {to_list} & {remove} {from}'
     and_or_command:
         default_save_name: et ou
         description: Introduction de {and} et {or}
@@ -309,6 +311,7 @@ adventures:
                     {if} nom {is} 'Hedy' {and} âge {is} 2
                         {print} "Tu es la vraie Hedy !"
                     ```
+        name: '{and} & {or}'
     ask_command:
         description: Introduction à la commande {ask}
         levels:
@@ -356,11 +359,11 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercice
-                    Dans l'onglet précédent, tu t'es entraîné à attribuer des valeurs aux variables avec la commande `{is}`.
+                    Dans l'aventure précédente, tu t'es entraîné à attribuer des valeurs aux variables avec la commande `{is}`.
                     Tu as créé au moins 3 variables et les a utilisées avec la commande d'affichage.
                     Maintenant, au lieu de simplement définir les variables, nous voulons les rendre interactives, comme dans l'exemple.
 
-                    Copie le code de l'onglet précédent et rend les variables interactives en utilisant la commande `{ask}`.
+                    Copie le code de l'aventure précédente et rend les variables interactives en utilisant la commande `{ask}`.
                 example_code_2: |
                     ```
                     animal_préféré {is} {ask} Quel est ton animal préféré ?
@@ -374,6 +377,7 @@ adventures:
                     nom = {input}("quel est ton nom ?")
                     {print}("Ainsi ton nom est ", nom)
                     ```
+        name: '{ask}'
     calculator:
         name: Calculatrice
         default_save_name: Calculatrice
@@ -529,6 +533,7 @@ adventures:
                     {clear}
                     {print} "SURPRISE !"
                     ```
+        name: '{clear}'
     debugging:
         name: débugage
         default_save_name: débugage
@@ -3621,3 +3626,14 @@ adventures:
                     ### Exercice
                     Complète les espaces vides et fait fonctionner le code !
                 example_code: "```\n{for} nombre {in} {range} _ {to} _\n\t{print} nombre\n\t{sleep}\n{print} \"Bonne année !\"\n```\n"
+    blackjack:
+        name: Blackjack
+        default_save_name: Blackjack
+    calculator_2:
+        levels:
+            14:
+                example_code: "```\n# Utilise ton code de l'aventure précédente.\n```\n"
+    blackjack_2:
+        default_save_name: Blackjack_2
+        description: Blackjack partie 2
+        name: Blackjack 2
