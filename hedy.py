@@ -236,7 +236,7 @@ class Command:
     while_ = 'while'
 
 
-translatable_commands = {Command.print: ['print'],
+translatable_keywords = {Command.print: ['print'],
                          Command.ask: ['ask'],
                          Command.echo: ['echo'],
                          Command.turn: ['turn'],
@@ -287,7 +287,7 @@ def promote_types(types, rules):
 
 
 def add_level(commands, level, add=None, remove=None):
-    # Adds the commands for the given level by taking the commands of the previous level
+    # Adds the keywords for the given level by taking the keywords of the previous level
     # and adjusting the list based on which keywords need to be added or/and removed
     if not add:
         add = []
@@ -296,25 +296,25 @@ def add_level(commands, level, add=None, remove=None):
     commands[level] = [c for c in commands[level - 1] if c not in remove] + add
 
 
-# Commands per Hedy level which are used to suggest the closest command when kids make a mistake
-commands_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
-add_level(commands_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
-add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to'])
-add_level(commands_per_level, level=4, add=['clear'])
-add_level(commands_per_level, level=5, add=['else', 'if', 'if_pressed', 'in', 'not_in'])
-add_level(commands_per_level, level=6)
-add_level(commands_per_level, level=7, add=['repeat', 'times'])
-add_level(commands_per_level, level=8)
-add_level(commands_per_level, level=9)
-add_level(commands_per_level, level=10, add=['for'])
-add_level(commands_per_level, level=11, add=['range'], remove=['times'])
-add_level(commands_per_level, level=12, add=['define', 'call'])
-add_level(commands_per_level, level=13, add=['and', 'or'])
-add_level(commands_per_level, level=14)
-add_level(commands_per_level, level=15, add=['while'])
-add_level(commands_per_level, level=16)
-add_level(commands_per_level, level=17, add=['elif'])
-add_level(commands_per_level, level=18, add=['input'], remove=['ask'])
+# Keywords per Hedy level which are used to suggest the closest command when kids make a mistake
+keywords_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
+add_level(keywords_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
+add_level(keywords_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to'])
+add_level(keywords_per_level, level=4, add=['clear'])
+add_level(keywords_per_level, level=5, add=['else', 'if', 'if_pressed', 'in', 'not_in'])
+add_level(keywords_per_level, level=6)
+add_level(keywords_per_level, level=7, add=['repeat', 'times'])
+add_level(keywords_per_level, level=8)
+add_level(keywords_per_level, level=9)
+add_level(keywords_per_level, level=10, add=['for'])
+add_level(keywords_per_level, level=11, add=['range'], remove=['times'])
+add_level(keywords_per_level, level=12, add=['define', 'call'])
+add_level(keywords_per_level, level=13, add=['and', 'or'])
+add_level(keywords_per_level, level=14)
+add_level(keywords_per_level, level=15, add=['while'])
+add_level(keywords_per_level, level=16)
+add_level(keywords_per_level, level=17, add=['elif'])
+add_level(keywords_per_level, level=18, add=['input'], remove=['ask'])
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
@@ -445,10 +445,10 @@ def get_suggestions_for_language(lang, level):
     if not local_keywords_enabled:
         lang = 'en'
 
-    lang_commands = get_list_keywords(commands_per_level[level], lang)
+    lang_commands = get_list_keywords(keywords_per_level[level], lang)
 
     # if we allow multiple keyword languages:
-    en_commands = get_list_keywords(commands_per_level[level], 'en')
+    en_commands = get_list_keywords(keywords_per_level[level], 'en')
     en_lang_commands = list(set(en_commands + lang_commands))
 
     return en_lang_commands
@@ -984,8 +984,8 @@ class TypeValidator(Transformer):
         if arg_type not in allowed_types and not self.ignore_type(arg_type):
             variable = tree.children[0]
 
-            if command in translatable_commands:
-                keywords = translatable_commands[command]
+            if command in translatable_keywords:
+                keywords = translatable_keywords[command]
                 result = hedy_translation.find_command_keywords(
                     self.input_string,
                     self.lang,
@@ -1186,7 +1186,7 @@ class AllKeywords(Transformer):
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[
+        if production_rule_name in keywords_per_level[
                 self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
             # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
@@ -3942,15 +3942,15 @@ def preprocess_ifs(code, lang='en'):
                     return True
             return False
 
-    def contains_any_of(commands, line):
+    def contains_any_of(keywords, line):
         # translation is not needed here, happens in contains
         if lang in ALL_KEYWORD_LANGUAGES:
-            for c in commands:
+            for c in keywords:
                 if contains(c, line):
                     return True
             return False
         else:
-            for c in commands:
+            for c in keywords:
                 if contains(c, line):
                     return True
             return False

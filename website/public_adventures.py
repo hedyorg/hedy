@@ -147,7 +147,7 @@ class PublicAdventuresModule(WebsiteModule):
             initial_adventure = adventures[-1]
 
             # Add the commands to enable the language switcher dropdown
-            commands = hedy.commands_per_level.get(level)
+            commands = hedy.keywords_per_level.get(level)
             prev_level, next_level = utils.find_prev_next_levels(list(self.customizations["available_levels"]), level)
 
         js = dict(

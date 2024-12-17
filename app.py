@@ -1148,7 +1148,7 @@ def tutorial_index():
         return redirect('/login')
     level = 1
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
-    commands = hedy.commands_per_level.get(level)
+    commands = hedy.keywords_per_level.get(level)
     adventures = load_adventures_for_level(level)
     parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
     initial_tab = adventures[0].short_name
@@ -1343,7 +1343,7 @@ def hour_of_code(level, program_id=None):
     prev_level, next_level = utils.find_prev_next_levels(
         list(available_levels), level_number)
 
-    commands = hedy.commands_per_level.get(level)
+    commands = hedy.keywords_per_level.get(level)
     return render_template(
         "code-page.html",
         level_nr=str(level_number),
@@ -1573,7 +1573,7 @@ def index(level, program_id):
     for i, adventure in enumerate(adventures):
         if adventure.save_info:
             completed = i
-    commands = hedy.commands_per_level.get(level)
+    commands = hedy.keywords_per_level.get(level)
     return render_template(
         "code-page.html",
         level_nr=str(level_number),
@@ -1799,7 +1799,7 @@ def tryit(level, program_id):
     for i, adventure in enumerate(adventures):
         if adventure.save_info:
             completed = i
-    commands = hedy.commands_per_level.get(level)
+    commands = hedy.keywords_per_level.get(level)
     return render_template(
         "hedy-page/code-page.html",
         level_nr=str(level_number),
@@ -2053,7 +2053,7 @@ def get_specific_adventure(name, level, mode):
         prev_level, next_level = utils.find_prev_next_levels(customizations["available_levels"], level)
 
     # Add the commands to enable the language switcher dropdown
-    commands = hedy.commands_per_level.get(level)
+    commands = hedy.keywords_per_level.get(level)
     raw = mode == 'raw'
     initial_tab = name
     initial_adventure = adventures[0]
