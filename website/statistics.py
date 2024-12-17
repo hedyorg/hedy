@@ -1,6 +1,6 @@
 from collections import namedtuple
 from enum import Enum
-from flask import g, make_response, request
+from flask import make_response, request
 from website import querylog
 from website.auth import requires_admin
 from .flask_hedy import g_db

@@ -32,7 +32,7 @@ from datetime import date
 import sys
 from os import path
 
-from utils import timems, times, is_debug_mode
+from utils import timems, times
 
 from . import dynamo, auth
 from . import querylog
@@ -78,6 +78,8 @@ class Database:
             # Use dev storage
             is_dev = True
             storage = dynamo.MemoryStorage("dev_database.json")
+
+        self.storage = storage
 
         def only_in_dev(x):
             """Return the argument only in debug mode. In production or offline mode, return None.
@@ -726,7 +728,7 @@ class Database:
         """Return all the classes belonging to a teacher."""
         classes = None
         user = auth.current_user()
-        if isinstance(storage, dynamo.AwsDynamoStorage):
+        if isinstance(self.storage, dynamo.AwsDynamoStorage):
             classes = list(self.classes.get_many({"teacher": username}, reverse=True))
 
             # if current user is a second teacher, we show the related classes.
