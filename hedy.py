@@ -1196,7 +1196,7 @@ class AllKeywords(Transformer):
         else:
             return leaves  # 'pop up' the children
 
-    def command(self, args): #this comes from the grammar and *is* a command (and not a keyword)
+    def command(self, args):  # this comes from the grammar and *is* a command (and not a keyword)
         return args
 
     def program(self, args):
