@@ -960,12 +960,12 @@ class TestsHypothesisLevel1(HedyTester):
                 translate=False
             )
 
-            expected_commands = [Command.ask, Command.ask, Command.echo, Command.echo, Command.forward, Command.forward,
+            expected_keywords = [Command.ask, Command.ask, Command.echo, Command.echo, Command.forward, Command.forward,
                                  Command.print, Command.print, Command.print, Command.turn, Command.turn]
 
             # TODO, FH sept 2023: all_keywords parses and thus is expensive
-            # we should get the keywords list back from the parser instead (parseresult.commands)
+            # we should get the keywords list back from the parser instead (parseresult.keyword)
             # since we don't use many single_level_tester features
             # we can transpile and check the python "manually"
             all_keywords = sorted(hedy.all_keywords(code, self.level, 'en'))
-            self.assertEqual(expected_commands, all_keywords)
+            self.assertEqual(expected_keywords, all_keywords)

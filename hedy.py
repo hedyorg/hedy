@@ -3974,13 +3974,13 @@ def preprocess_ifs(code, lang='en'):
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (
                 not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
-            commands = ["print", "ask", "forward", "turn", "play"]
-            excluded_commands = ["pressed"]
+            keywords = ["print", "ask", "forward", "turn", "play"]
+            excluded_keywords = ["pressed"]
 
             if (
-                (contains_any_of(commands, line) or contains_two('is', line)
+                (contains_any_of(keywords, line) or contains_two('is', line)
                  or (contains('is', line) and contains('=', line)))
-                and not contains_any_of(excluded_commands, line)
+                and not contains_any_of(excluded_keywords, line)
             ):
                 # a second command, but also no else in this line -> check next line!
 
@@ -4115,13 +4115,13 @@ def create_AST(input_string, level, lang="en"):
     if not valid_echo(abstract_syntax_tree):
         raise exceptions.LonelyEchoException()
 
-    commands = AllKeywords(level).transform(program_root)
+    keywords = AllKeywords(level).transform(program_root)
     # FH, dec 2023. I don't love how AllKeywords works on program root and not on AST,
     # but his will do for now. One day we should really start to clean up our AST!
-    has_pressed = "if_pressed" in commands or "if_pressed_else" in commands
+    has_pressed = "if_pressed" in keywords or "if_pressed_else" in keywords
     lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string, has_pressed)
 
-    return abstract_syntax_tree, lookup_table, commands
+    return abstract_syntax_tree, lookup_table, keywords
 
 
 def determine_roles(lookup, input_string, level, lang):
@@ -4163,13 +4163,13 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         source_map.set_hedy_input(input_string)
 
     try:
-        abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
+        abstract_syntax_tree, lookup_table, keywords = create_AST(input_string, level, lang)
 
-        has_clear = "clear" in commands
-        has_turtle = "forward" in commands or "turn" in commands or "color" in commands
-        has_pressed = "if_pressed" in commands or "if_pressed_else" in commands
-        has_music = "play" in commands
-        has_sleep = "sleep" in commands
+        has_clear = "clear" in keywords
+        has_turtle = "forward" in keywords or "turn" in keywords or "color" in keywords
+        has_pressed = "if_pressed" in keywords or "if_pressed_else" in keywords
+        has_music = "play" in keywords
+        has_sleep = "sleep" in keywords
 
         # grab the right transpiler from the lookup
         convertToPython = MICROBIT_TRANSPILER_LOOKUP[level] if microbit else TRANSPILER_LOOKUP[level]
@@ -4178,7 +4178,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         roles_of_variables = determine_roles(lookup_table, input_string, level, lang)
 
         parse_result = ParseResult(python, source_map, has_turtle, has_pressed,
-                                   has_clear, has_music, has_sleep, commands, roles_of_variables)
+                                   has_clear, has_music, has_sleep, keywords, roles_of_variables)
 
         if populate_source_map:
             source_map.set_python_output(python)
