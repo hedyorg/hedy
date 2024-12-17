@@ -119,10 +119,12 @@ def app_before_request(f):
     APP_BEFORE_REQUEST.append(f)
     return f
 
+
 def app_after_request(f):
     """See app_before_request."""
     APP_AFTER_REQUEST.append(f)
     return f
+
 
 # This is the root blueprint. It's what was previously the App object,
 # which is why it's still called 'app'. We now create a new App object dynamically,
