@@ -10,7 +10,7 @@ function updateURL() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const level = levelSelect.selected[0];
-    const language = languageSelect.selected[0];
+    const language = languageSelect.selected[0] || "";
     const tags = tagsSelect.selected.join(',');
 
     urlParams.set('level', level)

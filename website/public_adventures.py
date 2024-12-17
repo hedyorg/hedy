@@ -40,8 +40,9 @@ class PublicAdventuresModule(WebsiteModule):
         for adventure in public_adventures:
             # The adventure lang can be None if it is not set
             adv_lang = adventure.get("language")
+            if adv_lang:
+                self.available_languages.update([adv_lang])
             adv_tags = adventure.get("tags", [])
-            self.available_languages.update([adv_lang])
             self.available_tags.update(adv_tags)
             # NOTE: what if another author has an adventure with the same name?
             # Perhaps we could make this name#creator!
@@ -109,10 +110,7 @@ class PublicAdventuresModule(WebsiteModule):
             language = ""
 
         if language:
-            if language != "rest":
-                adventures = [adv for adv in adventures if adv.get("language") == language]
-            else:
-                language = ""
+            adventures = [adv for adv in adventures if adv.get("language") == language]
             # adjust available tags after filtering on languages
             self.update_tag_filter(adventures)
 
