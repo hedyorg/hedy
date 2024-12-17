@@ -465,22 +465,22 @@ def style_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
 
-def closest_command(input_, known_commands, threshold=2):
-    # Find the closest command to the input, i.e. the one with the smallest distance within the threshold. Returns:
-    #  (None, _)  No suggestion. There is no command similar enough to the input. For example, the distance
+def closest_keyword(input_, known_keywords, threshold=2):
+    # Find the closest keyword to the input, i.e. the one with the smallest distance within the threshold. Returns:
+    #  (None, _)  No suggestion. There is no keyword similar enough to the input. For example, the distance
     #             between 'eechoooo' and 'echo' is higher than the specified threshold.
-    #  (False, _) Invalid suggestion. The suggested command is identical to the input, so it is not a suggestion.
-    #             This is to prevent "print is not a command in Hedy level 3, did you mean print?" error message.
-    #  (True, 'sug') Valid suggestion. A command is similar enough to the input but not identical, e.g. 'aks' -> 'ask'
+    #  (False, _) Invalid suggestion. The suggested keyword is identical to the input, so it is not a suggestion.
+    #             This is to prevent "print is not a keyword in Hedy level 3, did you mean print?" error message.
+    #  (True, 'sug') Valid suggestion. A keyword is similar enough to the input but not identical, e.g. 'aks' -> 'ask'
 
     # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
     minimum_distance = 1000
     result = None
-    for command in known_commands:
-        minimum_distance_for_command = calculate_minimum_distance(command, input_)
-        if minimum_distance_for_command < minimum_distance and minimum_distance_for_command <= threshold:
-            minimum_distance = minimum_distance_for_command
-            result = command
+    for keyword in known_keywords:
+        minimum_distance_for_keyword = calculate_minimum_distance(keyword, input_)
+        if minimum_distance_for_keyword < minimum_distance and minimum_distance_for_keyword <= threshold:
+            minimum_distance = minimum_distance_for_keyword
+            result = keyword
 
     if result:
         if result != input_:
@@ -1145,7 +1145,7 @@ class Filter(Transformer):
         return all(args), ''.join([c for c in args]), meta
 
 
-class AllCommands(Transformer):
+class AllKeywords(Transformer):
     def __init__(self, level):
         self.level = level
 
@@ -1180,7 +1180,7 @@ class AllCommands(Transformer):
         return str(keyword)
 
     def __default__(self, args, children, meta):
-        # if we are matching a rule that is a command
+        # if we are matching a rule that is a keyword
         production_rule_name = self.standardize_keyword(args)
         leaves = flatten_list_of_lists_to_list(children)
         # for the achievements we want to be able to also detect which operators were used by a kid
@@ -1196,7 +1196,7 @@ class AllCommands(Transformer):
         else:
             return leaves  # 'pop up' the children
 
-    def command(self, args):
+    def command(self, args): #this comes from the grammar and *is* a command (and not a keyword)
         return args
 
     def program(self, args):
@@ -1222,7 +1222,7 @@ class AllCommands(Transformer):
         return []
 
 
-def all_commands(input_string, level, lang='en'):
+def all_keywords(input_string, level, lang='en'):
     """Return the commands used in a program string.
 
     This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
@@ -1230,7 +1230,7 @@ def all_commands(input_string, level, lang='en'):
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
-    return AllCommands(level).transform(program_root)
+    return AllKeywords(level).transform(program_root)
 
 
 def all_variables(input_string, level, lang='en'):
@@ -1239,8 +1239,8 @@ def all_variables(input_string, level, lang='en'):
     program_root = parse_input(input_string, level, lang)
     abstract_syntax_tree = ExtractAST().transform(program_root)
 
-    commands = AllCommands(level).transform(program_root)
-    has_pressed = "if_pressed" in commands or "if_pressed_else" in commands
+    keywords = AllKeywords(level).transform(program_root)
+    has_pressed = "if_pressed" in keywords or "if_pressed_else" in keywords
 
     lookup = create_lookup_table(abstract_syntax_tree, level, lang, input_string, has_pressed)
 
@@ -1311,7 +1311,7 @@ class IsValid(Filter):
 
     def error_invalid(self, meta, args):
         invalid_command = args[0][1]
-        sug_exists, suggestion = closest_command(invalid_command, get_suggestions_for_language(self.lang, self.level))
+        sug_exists, suggestion = closest_keyword(invalid_command, get_suggestions_for_language(self.lang, self.level))
 
         if sug_exists is None:  # there is no suggestion
             raise exceptions.MissingCommandException(level=self.level, line_number=meta.line)
@@ -4115,8 +4115,8 @@ def create_AST(input_string, level, lang="en"):
     if not valid_echo(abstract_syntax_tree):
         raise exceptions.LonelyEchoException()
 
-    commands = AllCommands(level).transform(program_root)
-    # FH, dec 2023. I don't love how AllCommands works on program root and not on AST,
+    commands = AllKeywords(level).transform(program_root)
+    # FH, dec 2023. I don't love how AllKeywords works on program root and not on AST,
     # but his will do for now. One day we should really start to clean up our AST!
     has_pressed = "if_pressed" in commands or "if_pressed_else" in commands
     lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string, has_pressed)

@@ -59,7 +59,7 @@ for snippet in snippets:
     if not snippet.error:
         try:
 
-            all_commands = hedy.all_commands(snippet.code, snippet.level, snippet.language)
+            all_commands = hedy.all_keywords(snippet.code, snippet.level, snippet.language)
             try:
                 all_variables = hedy.all_variables(snippet.code, snippet.level, snippet.language)
             except Exception as e:

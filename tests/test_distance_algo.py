@@ -10,59 +10,59 @@ class TestsKeywordSuggestions(unittest.TestCase):
     def test_self_command_print(self):
         invalid_command = "print"
         keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
-        result, _ = hedy.closest_command(invalid_command, keywords_en_level_1)
+        result, _ = hedy.closest_keyword(invalid_command, keywords_en_level_1)
         self.assertFalse(result)
 
     def test_self_command_ask(self):
         invalid_command = "ask"
         keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
-        result, _ = hedy.closest_command(invalid_command, keywords_en_level_1)
+        result, _ = hedy.closest_keyword(invalid_command, keywords_en_level_1)
         self.assertFalse(result)
 
     def test_self_command_echo(self):
         invalid_command = "echo"
         keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
-        result, _ = hedy.closest_command(invalid_command, keywords_en_level_1)
+        result, _ = hedy.closest_keyword(invalid_command, keywords_en_level_1)
         self.assertFalse(result)
 
     def test_print_difference_1(self):
         invalid_command = "pront"
         keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
-        result, suggestion = hedy.closest_command(invalid_command, keywords_en_level_1)
+        result, suggestion = hedy.closest_keyword(invalid_command, keywords_en_level_1)
         self.assertTrue(result)
         self.assertEqual('print', suggestion)
 
     def test_print_difference_2(self):
         invalid_command = "prond"
         keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
-        result, suggestion = hedy.closest_command(invalid_command, keywords_en_level_1)
+        result, suggestion = hedy.closest_keyword(invalid_command, keywords_en_level_1)
         self.assertTrue(result)
         self.assertEqual('print', suggestion)
 
     def test_echo_command_1(self):
         invalid_command = "echoo"
         keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
-        result, suggestion = hedy.closest_command(invalid_command, keywords_en_level_1)
+        result, suggestion = hedy.closest_keyword(invalid_command, keywords_en_level_1)
         self.assertTrue(result)
         self.assertEqual('echo', suggestion)
 
     def test_echo_command_2(self):
         invalid_command = "ego"
         keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
-        result, suggestion = hedy.closest_command(invalid_command, keywords_en_level_1)
+        result, suggestion = hedy.closest_keyword(invalid_command, keywords_en_level_1)
         self.assertTrue(result)
         self.assertEqual('echo', suggestion)
 
     def test_echo_command_3(self):
         invalid_command = "eechooooooo"
         keywords_en_level_1 = hedy.get_suggestions_for_language('en', 1)
-        result, _ = hedy.closest_command(invalid_command, keywords_en_level_1)
+        result, _ = hedy.closest_keyword(invalid_command, keywords_en_level_1)
         self.assertIsNone(result)
 
     def test_ask_command_nl(self):
         invalid_command = "ask"
         keywords_nl_level_1 = hedy.get_suggestions_for_language('nl', 1)
-        result, _ = hedy.closest_command(invalid_command, keywords_nl_level_1)
+        result, _ = hedy.closest_keyword(invalid_command, keywords_nl_level_1)
         self.assertFalse(result)
 
     @parameterized.expand([
@@ -126,6 +126,6 @@ class TestsKeywordSuggestions(unittest.TestCase):
     ])
     def test_command_en(self, level, correct, mistake):
         keywords = hedy.get_suggestions_for_language('en', level)
-        result, suggestion = hedy.closest_command(mistake, keywords)
+        result, suggestion = hedy.closest_keyword(mistake, keywords)
         self.assertTrue(result)
         self.assertEqual(correct, suggestion)

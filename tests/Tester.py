@@ -323,8 +323,8 @@ class HedyTester(unittest.TestCase):
                     if expected_commands is not None:
                         self.assertEqual(expected_commands, all_commands)
                     # <- use this to run tests locally with unittest
-                    skipped_commands = ['ask', 'input', 'clear', 'play']
-                    if not any(x for x in skipped_commands if x in all_commands):
+                    skipped_keywords = ['ask', 'input', 'clear', 'play']
+                    if not any(x for x in skipped_keywords if x in all_commands):
                         if microbit:
                             return
                         else:

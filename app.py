@@ -986,7 +986,7 @@ def all_commands(id):
     lang = program.get('lang')
     return render_template(
         'commands.html',
-        commands=hedy.all_commands(code, level, lang))
+        commands=hedy.all_keywords(code, level, lang))
 
 
 @app.route('/programs', methods=['GET'])
