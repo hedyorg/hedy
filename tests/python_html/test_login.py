@@ -21,6 +21,7 @@ def test_login(client: Client, given: Given):
 
 STUDENT_PROTECTED_ENDPOINTS = ['/programs']
 
+
 @pytest.mark.parametrize('endpoint', STUDENT_PROTECTED_ENDPOINTS)
 def test_student_pages_protected(client: Client, endpoint):
     """Check that these endpoints return 302 if not logged in."""

@@ -6,6 +6,6 @@ tests.
 """
 
 pytest_plugins = [
-   "tests.python_html.fixtures.flask",
-   "tests.python_html.fixtures.given",
+    "tests.python_html.fixtures.flask",
+    "tests.python_html.fixtures.given",
 ]
