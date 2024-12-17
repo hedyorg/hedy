@@ -90,7 +90,6 @@ class Database:
             """
             return x if is_dev else None
 
-
         self.class_errors = dynamo.Table(storage, "class_errors", "id",
                                          types=only_in_dev({'id': str}),
                                          )

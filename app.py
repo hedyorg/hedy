@@ -1074,8 +1074,8 @@ def programs_page(user):
     if page == '':
         page = None
     all_programs = g_db().filtered_programs_for_user(from_user or username,
-                                                       submitted=submitted,
-                                                       pagination_token=page)
+                                                     submitted=submitted,
+                                                     pagination_token=page)
     ids_to_fetch = []
     # Some old programs don't have adventure_name in them, or the field is emtpy.
     for program in all_programs:
@@ -1093,11 +1093,11 @@ def programs_page(user):
             adventure_names[id] = teacher_adventure['name']
     swapped_adventure_names = {value: key for key, value in adventure_names.items()}
     result = g_db().filtered_programs_for_user(from_user or username,
-                                                 level=level,
-                                                 adventure=swapped_adventure_names.get(adventure),
-                                                 submitted=submitted,
-                                                 pagination_token=page,
-                                                 limit=10)
+                                               level=level,
+                                               adventure=swapped_adventure_names.get(adventure),
+                                               submitted=submitted,
+                                               pagination_token=page,
+                                               limit=10)
 
     programs = []
     for item in result:
@@ -2873,17 +2873,17 @@ def public_user_page(username):
 
     if user_public_info:
         user_programs = g_db().filtered_programs_for_user(username,
-                                                            level=level,
-                                                            adventure=swapped_adventure_names.get(adventure),
-                                                            public=True,
-                                                            limit=10,
-                                                            pagination_token=page)
+                                                          level=level,
+                                                          adventure=swapped_adventure_names.get(adventure),
+                                                          public=True,
+                                                          limit=10,
+                                                          pagination_token=page)
         next_page_token = user_programs.next_page_token
         user_programs = normalize_public_programs(user_programs)
 
         all_programs = g_db().filtered_programs_for_user(username,
-                                                           public=True,
-                                                           pagination_token=page)
+                                                         public=True,
+                                                         pagination_token=page)
 
         modified_programs = []
         for program in all_programs:

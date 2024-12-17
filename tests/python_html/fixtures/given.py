@@ -7,8 +7,10 @@ from website.database import Database
 from website import auth
 import pytest
 
+
 class Given:
     """A helper that wraps an in-memory database."""
+
     def __init__(self, client: Client, db: Database):
         self.client = client
         self.db = db
@@ -27,7 +29,7 @@ class Given:
             'keyword_language': language,
         }
         auth.store_new_student_account(self.db, student, teacher_username)
-        return { 'username': username, 'password': password }
+        return {'username': username, 'password': password}
 
     def logged_in_as_student(self, username=None):
         """Make sure that we are logged in."""
@@ -44,5 +46,3 @@ class Given:
 def given(client, app) -> Given:
     db = app.config['hedy_globals']['DATABASE']
     return Given(client, db)
-
-
