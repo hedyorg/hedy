@@ -106,6 +106,24 @@ for lang in ALL_LANGUAGES.keys():
     TAGS[lang] = hedy_content.Tags(lang)
 
 
+APP_BEFORE_REQUEST = []
+APP_AFTER_REQUEST = []
+
+
+def app_before_request(f):
+    """A decorator that used to point to the app when we still had a global app object.
+
+    Now we buffer the functions in a global list and add them to the app object
+    in the factory function.
+    """
+    APP_BEFORE_REQUEST.append(f)
+    return f
+
+def app_after_request(f):
+    """See app_before_request."""
+    APP_AFTER_REQUEST.append(f)
+    return f
+
 # This is the root blueprint. It's what was previously the App object,
 # which is why it's still called 'app'. We now create a new App object dynamically,
 # so that we can use it in tests.
@@ -184,6 +202,11 @@ def create_app(for_testing=False):
 
     app_obj.config['hedy_globals']['DATABASE'] = db
     app_obj.config['hedy_globals']['FOR_TEACHERS'] = teachers_mod
+
+    for before in APP_BEFORE_REQUEST:
+        app_obj.before_request(before)
+    for after in APP_AFTER_REQUEST:
+        app_obj.after_request(after)
 
     app_obj.register_blueprint(auth_pages.AuthModule(db))
     app_obj.register_blueprint(profile.ProfileModule(db))
@@ -414,7 +437,7 @@ def load_customized_adventures(level, customizations, into_adventures):
             into_adventures.append(adv)
 
 
-@app.before_request
+@app_before_request
 def redirect_outdated_domains():
     """If Hedy is being loaded from a domain we no longer use or advertise,
     do a 301 redirect to the official 'hedy.org' domain.
@@ -430,7 +453,7 @@ def redirect_outdated_domains():
         return redirect(f'https://hedy.org{request.full_path}', code=301)
 
 
-@app.before_request
+@app_before_request
 def before_request_begin_logging():
     """Initialize the query logging.
 
@@ -446,13 +469,13 @@ def before_request_begin_logging():
         user_agent=request.headers.get('User-Agent'))
 
 
-@app.after_request
+@app_after_request
 def after_request_log_status(response):
     querylog.log_value(http_code=response.status_code)
     return response
 
 
-@app.before_request
+@app_before_request
 def initialize_session():
     """Make sure the session is initialized.
 
@@ -475,7 +498,7 @@ def initialize_session():
 
 
 if os.getenv('IS_PRODUCTION'):
-    @app.before_request
+    @app_before_request
     def reject_e2e_requests():
         if utils.is_testing_request(request):
             return 'No E2E tests are allowed in production', 400
@@ -486,7 +509,7 @@ def g_for_teachers():
     return current_app.config['hedy_globals']['FOR_TEACHERS']
 
 
-@app.before_request
+@app_before_request
 def before_request_proxy_testing():
     if utils.is_testing_request(request) and os.getenv('IS_TEST_ENV'):
         session['test_session'] = 'test'
@@ -495,7 +518,7 @@ def before_request_proxy_testing():
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
 if os.getenv('REDIRECT_HTTP_TO_HTTPS'):
-    @app.before_request
+    @app_before_request
     def before_request_https():
         if request.url.startswith('http://'):
             url = request.url.replace('http://', 'https://', 1)
@@ -512,7 +535,7 @@ else:
         aws_helpers.s3_querylog_transmitter_from_env())
 
 
-@app.before_request
+@app_before_request
 def setup_language():
     # Determine the user's requested language code.
     #
@@ -586,7 +609,7 @@ def add_hx_detection():
     }
 
 
-@app.after_request
+@app_after_request
 def set_security_headers(response):
     security_headers = {
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
