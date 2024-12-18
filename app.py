@@ -181,8 +181,6 @@ def load_all_adventures_for_index(customizations, subset=None):
 
     return all_adventures
 
-from flask import template_rendered
-
 
 def load_adventures_for_level(level, subset=None):
     """Load the adventures available to the current user at the given level.
