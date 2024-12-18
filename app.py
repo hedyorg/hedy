@@ -1,4 +1,5 @@
 # coding=utf-8
+from flask import template_rendered
 import base64
 import binascii
 import collections
@@ -180,8 +181,6 @@ def load_all_adventures_for_index(customizations, subset=None):
                 all_adventures[int(level)].append(adv)
 
     return all_adventures
-
-from flask import template_rendered
 
 
 def load_adventures_for_level(level, subset=None):

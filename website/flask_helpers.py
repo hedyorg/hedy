@@ -24,8 +24,6 @@ def render_template(filename, **kwargs):
     return rendered
 
 
-
-
 def proper_json_dumps(x, **kwargs):
     """Properly convert the input to JSON that deals with a bunch of edge cases.
 
