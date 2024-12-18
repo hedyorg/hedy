@@ -3628,7 +3628,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands',
+                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'keywords',
                                          'roles_of_variables'])
 
 
