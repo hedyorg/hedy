@@ -1393,7 +1393,7 @@ class TestCustomizeClasses(AuthHelper):
                 'levels': ['1', '2', '3'],
                 'opening_dates': {'1': '', '2': '', '3': ''},
                 'teacher_adventures': [],
-                'other_settings': ['hide_cheatsheet'],
+                'other_settings': ['developers_mode', 'hide_cheatsheet'],
                 'level_thresholds': {}
             },
         ]
