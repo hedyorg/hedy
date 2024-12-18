@@ -1,6 +1,6 @@
 import textwrap
 import hedy
-from hedy import Command
+from hedy import Keyword
 from hedy_sourcemap import SourceRange
 from parameterized import parameterized
 from tests.Tester import HedyTester, SkippedMapping
@@ -75,7 +75,7 @@ class TestsLevel2(HedyTester):
     def test_print_line_with_spaces_works(self):
         code = "print hallo\n      \nprint hallo"
         expected = "print(f'hallo')\n\nprint(f'hallo')"
-        expected_commands = [Command.print, Command.print]
+        expected_commands = [Keyword.print, Keyword.print]
 
         self.multi_level_tester(
             code=code,
@@ -153,7 +153,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             output='10',
-            expected_commands=[Command.print],
+            expected_commands=[Keyword.print],
             max_level=3)
 
     def test_print_number_arabic(self):
@@ -164,7 +164,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             output='١١',
-            expected_commands=[Command.print],
+            expected_commands=[Keyword.print],
             max_level=3)
 
     def test_print_var_number(self):
@@ -237,7 +237,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            expected_commands=[Command.print]
+            expected_commands=[Keyword.print]
         )
 
     def test_assign_comment(self):
