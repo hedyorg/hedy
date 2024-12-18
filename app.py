@@ -106,24 +106,31 @@ for lang in ALL_LANGUAGES.keys():
     TAGS[lang] = hedy_content.Tags(lang)
 
 
-APP_BEFORE_REQUEST = []
-APP_AFTER_REQUEST = []
+FLASK_DECORATORS = {
+    'before_request': [],
+    'after_request': [],
+    'context_processor': [],
+}
 
-
-def app_before_request(f):
+def app_decorator(field):
     """A decorator that used to point to the app when we still had a global app object.
 
-    Now we buffer the functions in a global list and add them to the app object
-    in the factory function.
+    We used to have `@app.before_request`, `@app.after_request` and `@app.context_processor`
+    on various functions. Now we do:
+
+    ```
+    @app_decorator('before_request')
+    def my_before_request(...):
+    ```
+
+    Because we don't have a single 'app' object anymore, but potentially multiple. We
+    store all processors in a list, and then apply them every time we create a new
+    'app' object.
     """
-    APP_BEFORE_REQUEST.append(f)
-    return f
-
-
-def app_after_request(f):
-    """See app_before_request."""
-    APP_AFTER_REQUEST.append(f)
-    return f
+    def wrapper(f):
+        FLASK_DECORATORS[field].append(f)
+        return f
+    return wrapper
 
 
 # This is the root blueprint. It's what was previously the App object,
@@ -205,10 +212,12 @@ def create_app(for_testing=False):
     app_obj.config['hedy_globals']['DATABASE'] = db
     app_obj.config['hedy_globals']['FOR_TEACHERS'] = teachers_mod
 
-    for before in APP_BEFORE_REQUEST:
+    for before in FLASK_DECORATORS['before_request']:
         app_obj.before_request(before)
-    for after in APP_AFTER_REQUEST:
+    for after in FLASK_DECORATORS['after_request']:
         app_obj.after_request(after)
+    for ctx in FLASK_DECORATORS['context_processor']:
+        app_obj.context_processor(ctx)
 
     app_obj.register_blueprint(auth_pages.AuthModule(db))
     app_obj.register_blueprint(profile.ProfileModule(db))
@@ -439,7 +448,7 @@ def load_customized_adventures(level, customizations, into_adventures):
             into_adventures.append(adv)
 
 
-@app_before_request
+@app_decorator('before_request')
 def redirect_outdated_domains():
     """If Hedy is being loaded from a domain we no longer use or advertise,
     do a 301 redirect to the official 'hedy.org' domain.
@@ -455,7 +464,7 @@ def redirect_outdated_domains():
         return redirect(f'https://hedy.org{request.full_path}', code=301)
 
 
-@app_before_request
+@app_decorator('before_request')
 def before_request_begin_logging():
     """Initialize the query logging.
 
@@ -471,13 +480,13 @@ def before_request_begin_logging():
         user_agent=request.headers.get('User-Agent'))
 
 
-@app_after_request
+@app_decorator('after_request')
 def after_request_log_status(response):
     querylog.log_value(http_code=response.status_code)
     return response
 
 
-@app_before_request
+@app_decorator('before_request')
 def initialize_session():
     """Make sure the session is initialized.
 
@@ -500,7 +509,7 @@ def initialize_session():
 
 
 if os.getenv('IS_PRODUCTION'):
-    @app_before_request
+    @app_decorator('before_request')
     def reject_e2e_requests():
         if utils.is_testing_request(request):
             return 'No E2E tests are allowed in production', 400
@@ -511,7 +520,7 @@ def g_for_teachers():
     return current_app.config['hedy_globals']['FOR_TEACHERS']
 
 
-@app_before_request
+@app_decorator('before_request')
 def before_request_proxy_testing():
     if utils.is_testing_request(request) and os.getenv('IS_TEST_ENV'):
         session['test_session'] = 'test'
@@ -520,7 +529,7 @@ def before_request_proxy_testing():
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
 if os.getenv('REDIRECT_HTTP_TO_HTTPS'):
-    @app_before_request
+    @app_decorator('before_request')
     def before_request_https():
         if request.url.startswith('http://'):
             url = request.url.replace('http://', 'https://', 1)
@@ -537,7 +546,7 @@ else:
         aws_helpers.s3_querylog_transmitter_from_env())
 
 
-@app_before_request
+@app_decorator('before_request')
 def setup_language():
     # Determine the user's requested language code.
     #
@@ -580,7 +589,7 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 
 
 # A context processor injects variables in the context that are available to all templates.
-@app.context_processor
+@app_decorator('context_processor')
 def enrich_context_with_user_info():
     user = current_user()
     data = {'username': user.get('username', ''),
@@ -591,14 +600,14 @@ def enrich_context_with_user_info():
     return data
 
 
-@app.context_processor
+@app_decorator('context_processor')
 def add_generated_css_file():
     return {
         "generated_css_file": '/css/generated.full.css' if is_debug_mode() else '/css/generated.css'
     }
 
 
-@app.context_processor
+@app_decorator('context_processor')
 def add_hx_detection():
     """Detect when a request is sent by HTMX.
 
@@ -611,7 +620,7 @@ def add_hx_detection():
     }
 
 
-@app_after_request
+@app_decorator('after_request')
 def set_security_headers(response):
     security_headers = {
         'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
