@@ -13,8 +13,17 @@ from jinja2 import Undefined
 
 @querylog.timed
 def render_template(filename, **kwargs):
-    """A copy of Flask's render_template that is timed."""
-    return flask.render_template(filename, **kwargs)
+    """A copy of Flask's render_template that is timed, and also validated."""
+    rendered = flask.render_template(filename, **kwargs)
+
+    # Late imports because of circular dependencies. Don't care to figure this out right now.
+    from utils import is_debug_mode
+    if is_debug_mode():
+        from website.html_validation import validate_output_html
+        validate_output_html(rendered)
+    return rendered
+
+
 
 
 def proper_json_dumps(x, **kwargs):
