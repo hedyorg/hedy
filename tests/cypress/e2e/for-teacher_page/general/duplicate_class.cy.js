@@ -68,11 +68,13 @@ describe('Duplicate class tests', () => {
 
     // Take actions only when teacher2 is a second teacher; i.e., having teacher1 as a teacher.
     openClassView();
-    cy.get("#classes_table tbody #teacher_cell")
-      .each(($username, i) => {
-        if ($username.text().includes("teacher1")) {
+    cy.get("#classes_table tbody tr ")
+      .each(($row, i) => {
+        const $username_cell = $row.find('[data-cy="teacher_cell"]');
+        const $name_cell = $row.find('[data-cy="view_class_link"]');
+        if ($name_cell.text() === 'CLASS1' && $username_cell.text().includes("teacher1")) {
 
-          cy.getDataCy(`duplicate_CLASS1`).click();
+          cy.wrap($row.find('[data-cy="duplicate_CLASS1"]')).click();
           cy.getDataCy('modal_ok_button').click();
 
           openClassView("CLASS1");
