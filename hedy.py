@@ -320,16 +320,16 @@ command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
 
-def color_commands_local(language):
+def color_keywords_local(language):
     colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in english_colors]
     return colors_local
 
 
-def command_make_color_local(language):
+def make_color_local(language):
     if language == "en":
         return english_colors
     else:
-        return english_colors + color_commands_local(language)
+        return english_colors + color_keywords_local(language)
 
 
 # Keywords and their types per level (only partially filled!)
@@ -410,11 +410,11 @@ characters_that_need_escaping = ["\\", "'"]
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
 
-def get_list_keywords(commands, to_lang):
-    """ Returns a list with the local keywords of the argument 'commands'
+def get_list_keywords(keywords, to_lang):
+    """ Returns a list with the local keywords of the argument 'keywords'
     """
 
-    translation_commands = []
+    translation_keywords = []
     dir = path.abspath(path.dirname(__file__))
     path_keywords = dir + "/content/keywords"
 
@@ -427,31 +427,30 @@ def get_list_keywords(commands, to_lang):
     try:
         with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
-        for command in commands:
-            if command == 'if_pressed':  # TODO: this is a bit of a hack
-                command = 'pressed'  # since in the yamls they are called pressed
+        for keyword in keywords:
+            if keyword == 'if_pressed':  # TODO: this is a bit of a hack
+                keyword = 'pressed'  # since in the yamls they are called pressed
             try:
-                translation_commands.append(to_yaml_dict[command])
+                translation_keywords.append(to_yaml_dict[keyword])
             except Exception:
-                translation_commands.append(en_yaml_dict[command])
+                translation_keywords.append(en_yaml_dict[keyword])
     except Exception:
-        for command in commands:
-            translation_commands.append(en_yaml_dict[command])
+        for keyword in keywords:
+            translation_keywords.append(en_yaml_dict[keyword])
 
-    return translation_commands
+    return translation_keywords
 
 
 def get_suggestions_for_language(lang, level):
     if not local_keywords_enabled:
         lang = 'en'
 
-    lang_commands = get_list_keywords(keywords_per_level[level], lang)
+    other_lang_keywords = get_list_keywords(keywords_per_level[level], lang)
 
     # if we allow multiple keyword languages:
-    en_commands = get_list_keywords(keywords_per_level[level], 'en')
-    en_lang_commands = list(set(en_commands + lang_commands))
+    english_keywords = get_list_keywords(keywords_per_level[level], 'en')
 
-    return en_lang_commands
+    return list(set(english_keywords + other_lang_keywords))
 
 
 def escape_var(var):
@@ -1223,7 +1222,7 @@ class AllKeywords(Transformer):
 
 
 def all_keywords(input_string, level, lang='en'):
-    """Return the commands used in a program string.
+    """Return the keywords used in a program string.
 
     This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
     """
@@ -1437,14 +1436,14 @@ class IsValid(Filter):
 @v_args(meta=True)
 def valid_echo(ast):
     commands = ast.children
-    command_names = [x.children[0].data for x in commands]
-    no_echo = 'echo' not in command_names
+    keywords = [x.children[0].data for x in commands]
+    no_echo = 'echo' not in keywords
 
     # no echo is always ok!
 
     # otherwise, both have to be in the list and echo should come after
-    return no_echo or ('echo' in command_names and 'ask' in command_names) and command_names.index(
-        'echo') > command_names.index('ask')
+    return no_echo or ('echo' in keywords and 'ask' in keywords) and keywords.index(
+        'echo') > keywords.index('ask')
 
 
 @v_args(meta=True)
@@ -1896,7 +1895,7 @@ class ConvertToPython_1(ConvertToPython):
             return f"t.pencolor('black'){self.add_debug_breakpoint()}"  # no arguments defaults to black ink
 
         arg = self.unpack(args[0])
-        if arg in command_make_color_local(self.language):
+        if arg in make_color_local(self.language):
             return f"t.pencolor('{arg}'){self.add_debug_breakpoint()}"
         else:
             # the TypeValidator should protect against reaching this line:
@@ -1945,7 +1944,7 @@ class ConvertToPython_1(ConvertToPython):
         return transpiled
 
     def make_turtle_color_command(self, parameter, command, command_text, language):
-        both_colors = command_make_color_local(language)
+        both_colors = make_color_local(language)
         variable = self.get_fresh_var('__trtl')
 
         # we translate the color value to English at runtime, since it might be decided at runtime

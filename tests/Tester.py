@@ -431,7 +431,7 @@ class HedyTester(unittest.TestCase):
     @staticmethod
     def color_transpiled(val, lang="en"):
         color_dict = {hedy_translation.translate_keyword_from_en(x, lang): x for x in hedy.english_colors}
-        both_colors = hedy.command_make_color_local(lang)
+        both_colors = hedy.make_color_local(lang)
 
         return textwrap.dedent(f'''\
         __trtl = f'{val}'
