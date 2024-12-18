@@ -112,6 +112,7 @@ FLASK_DECORATORS = {
     'context_processor': [],
 }
 
+
 def app_decorator(field):
     """A decorator that used to point to the app when we still had a global app object.
 
