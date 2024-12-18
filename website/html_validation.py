@@ -1,11 +1,13 @@
 import re
 from collections import Counter
 
+
 def validate_output_html(html):
     validate_no_duplicate_ids(html)
 
 
 ID_RE = re.compile('id="([^"]+)"')
+
 
 def validate_no_duplicate_ids(html):
     ids = Counter(ID_RE.findall(html))
