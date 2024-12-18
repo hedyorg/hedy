@@ -453,7 +453,7 @@ class TestsLevel8(HedyTester):
             output='Not found'
         )
 
-    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    @parameterized.expand(HedyTester.in_and_not_in)
     def test_if_not_in_and_in_list_with_string_var_gives_type_error(self, operator):
         code = textwrap.dedent(f"""\
         items is red
@@ -466,7 +466,7 @@ class TestsLevel8(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    @parameterized.expand(HedyTester.in_and_not_in)
     def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
         code = textwrap.dedent(f"""\
             items is ask 'What are the items?'

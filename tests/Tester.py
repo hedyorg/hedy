@@ -132,11 +132,11 @@ class HedyTester(unittest.TestCase):
 
     level = None
     equality_comparison_with_is = ['is', '=']
-    equality_comparison_commands = ['==', '=']
-    number_comparison_commands = ['>', '>=', '<', '<=']
-    comparison_commands = number_comparison_commands + ['!=']
+    equality_comparisons = ['==', '=']
+    number_comparisons = ['>', '>=', '<', '<=']
+    comparison_commands = number_comparisons + ['!=']
     arithmetic_operations = ['+', '-', '*', '/']
-    in_not_in_list_commands = ['in', 'not in']
+    in_and_not_in = ['in', 'not in']
     quotes = ["'", '"']
     booleans = [('true', True), ('True', True), ('false', False), ('False', False)]
     commands_level_4 = [("print 'hello'", "print(f'hello')"),
@@ -319,7 +319,7 @@ class HedyTester(unittest.TestCase):
                     if expected is not None:
                         self.assertEqual(expected, result.code)
 
-                    all_commands = result.commands
+                    all_commands = result.keywords
                     if expected_commands is not None:
                         self.assertEqual(expected_commands, all_commands)
                     # <- use this to run tests locally with unittest
