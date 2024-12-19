@@ -38,9 +38,11 @@ class PublicAdventuresModule(WebsiteModule):
         public_adventures = self.db.get_public_adventures()
         public_adventures = sorted(public_adventures, key=lambda a: a["creator"] == user["username"], reverse=True)
         for adventure in public_adventures:
-            adv_lang = adventure.get("language", g.lang)
+            # The adventure lang can be None if it is not set
+            adv_lang = adventure.get("language")
+            if adv_lang:
+                self.available_languages.update([adv_lang])
             adv_tags = adventure.get("tags", [])
-            self.available_languages.update([adv_lang])
             self.available_tags.update(adv_tags)
             # NOTE: what if another author has an adventure with the same name?
             # Perhaps we could make this name#creator!
@@ -87,30 +89,30 @@ class PublicAdventuresModule(WebsiteModule):
     def filtering(self, user, index_page=False):
         index_page = request.method == "GET"
 
-        level = int(request.args["level"]) if request.args.get("level") else 1
-        adventure = request.args.get("adventure", "")
-        language = request.args.get("lang", "")
-        tag = request.args.get("tag", "")
-        search = request.form.get("search", request.args.get("search", ""))
+        level = int(request.args.get("level", 1))
         if index_page or not self.adventures or not self.adventures.get(level):
             self.init(user)
 
+        adventure = request.args.get("adventure", "")
+        tag = request.args.get("tag", "")
+        search = request.form.get("search", request.args.get("search", ""))
+        default_lang = g.lang if index_page else None
+        language = request.args.get("lang", default_lang)
+
         adventures = self.adventures.get(level, [])
         # adjust available filters for the selected level.
-        self.update_filters(adventures, "tag")
-        self.update_filters(adventures, "lang")
+        self.update_tag_filter(adventures)
+        self.update_lang_filter(adventures)
+
         # In case a selected set of adventures doesn't have the given lang to filter on,
         # we decide that that language cannot be used for filtering.
         if not any(adv.get("language") == language for adv in adventures):
             language = ""
 
         if language:
-            if language != "rest":
-                adventures = [adv for adv in adventures if adv.get("language") == language]
-            else:
-                language = ""
-            # adjust available tags after fitlering on languages.
-            self.update_filters(adventures, "tag")
+            adventures = [adv for adv in adventures if adv.get("language") == language]
+            # adjust available tags after filtering on languages
+            self.update_tag_filter(adventures)
 
         tags = []
         if tag:
@@ -130,12 +132,12 @@ class PublicAdventuresModule(WebsiteModule):
             if tags:
                 adventures = [adv for i, adv in enumerate(adventures) if any(tag in tags for tag in adv.get("tags"))]
             # adjust available languages after fitlering on tags.
-            self.update_filters(adventures, "lang")
+            self.update_lang_filter(adventures)
 
         if search:
             adventures = [adv for adv in adventures if search.lower() in adv.get("name").lower()]
-            self.update_filters(adventures, "lang")
-            self.update_filters(adventures, "tag")
+            self.update_lang_filter(adventures)
+            self.update_tag_filter(adventures)
 
         initial_tab = None
         initial_adventure = None
@@ -245,18 +247,13 @@ class PublicAdventuresModule(WebsiteModule):
                     break
         return render_partial('htmx-adventure-card.html', user=user, adventure=adventure, level=level,)
 
-    def update_filters(self, adventures,  to_filter):
-        if to_filter == 'lang':
-            self.available_languages = set()
-        else:
-            self.available_tags = set()
-        for adventure in adventures:
-            if to_filter == 'lang':
-                adv_lang = adventure.get("language", g.lang)
-                self.available_languages.update([adv_lang])
-            else:
-                adv_tags = adventure.get("tags", [])
-                self.available_tags.update(adv_tags)
+    def update_lang_filter(self, adventures):
+        langs = [a['language'] for a in adventures if a.get('language')]
+        self.available_languages = set(langs)
+
+    def update_tag_filter(self, adventures):
+        tags = [t for a in adventures for t in a.get('tags', [])]
+        self.available_tags = set(tags)
 
     @route("/flag/<adventure_id>", methods=["POST"])
     @route("/flag/<adventure_id>/<flagged>", methods=["POST"])

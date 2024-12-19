@@ -8,6 +8,7 @@ import boto3
 
 import config
 import utils
+from utils import is_heroku
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +18,8 @@ def s3_querylog_transmitter_from_env():
     have_aws_creds = os.getenv("AWS_ACCESS_KEY_ID") and os.getenv("AWS_SECRET_ACCESS_KEY")
 
     if not have_aws_creds:
-        logger.warning("Unable to initialize S3 querylogger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)")
+        if is_heroku():
+            logger.warning("Unable to initialize S3 querylogger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)")
         return None
 
     return make_s3_transmitter(config.config["s3-query-logs"])
@@ -28,7 +30,8 @@ def s3_parselog_transmitter_from_env(config_key="s3-parse-logs"):
     have_aws_creds = os.getenv("AWS_ACCESS_KEY_ID") and os.getenv("AWS_SECRET_ACCESS_KEY")
 
     if not have_aws_creds:
-        logger.warning("Unable to initialize S3 parse logger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)")
+        if is_heroku():
+            logger.warning("Unable to initialize S3 parse logger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)")
         return None
 
     return make_s3_transmitter(config.config[config_key])

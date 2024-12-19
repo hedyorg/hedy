@@ -19,7 +19,7 @@ from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 from hedy_sourcemap import SourceRange
 from functools import cache
 
-from app import app
+from app import create_app
 from hedy_error import get_error_text
 from flask_babel import force_locale
 
@@ -655,7 +655,7 @@ class HedyTester(unittest.TestCase):
             location = 'No Location Found'
 
         # Must run this in the context of the Flask app, because FlaskBabel requires that.
-        with app.app_context():
+        with create_app().app_context():
             with force_locale('en'):
                 error_message = get_error_text(E, 'en')
                 error_message = error_message.replace('<span class="command-highlighted">', '`')
