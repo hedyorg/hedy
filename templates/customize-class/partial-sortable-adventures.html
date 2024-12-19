@@ -36,7 +36,7 @@
                     {{_('reset_button')}}
                 </button>
                 <div class="flex flex-row">
-                    <button id="create_adventure_button" class="green-btn" 
+                    <button id="create_adventure_button" class="green-btn"
                         _="on click
                             window.open('/for-teachers/customize-adventure?class_id={{ class_id }}&level={{level}}', '_self')"
                     data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>
@@ -58,28 +58,28 @@
             </div>
             <div id="indicator" class="htmx-indicator custom-indicator pl-4">{{_('updating_indicator')}} <i class="fa fa-spinner fa-spin"></i> </div>
         </div>
-    <div id="sortadventures" data-cy="sortadventures" class="flex overflow-x-auto">   
-        <div id="level_{{ level }}" data-cy="level_{{ level }}" class="adventures-tab flex sortable" 
+    <div data-cy="sortadventures" class="flex overflow-x-auto">
+        <div id="level_{{ level }}" data-cy="level_{{ level }}" class="adventures-tab flex sortable"
             style="min-width: fit-content;"
             hx-trigger="end"
             hx-post="/for-teachers/sort-adventures?level={{ level }}"
-            hx-target="#adventure_dragger" 
+            hx-target="#adventure_dragger"
             hx-swap="outerHTML"
             hx-include="[name='adventure']"
             hx-indicator="#indicator">
                 {% for adventure in adventures[level|int] %}
-                    <div class="tab 
-                        {% if adventure.is_teacher_adventure %}teacher_tab{% elif adventure.is_command_adventure %}command_tab{% endif %} 
+                    <div class="tab
+                        {% if adventure.is_teacher_adventure %}teacher_tab{% elif adventure.is_command_adventure %}command_tab{% endif %}
                         {% if adventure.short_name in ['quiz', 'parsons'] %}special_tab{% endif %}
                         z-10 whitespace-nowrap flex items-center justify-left relative" data-cy="{{ adventure.short_name }}">
                         <span class="absolute top-0.5 right-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark" data-cy="hide_adv_{{adventure.short_name}}"
-                            hx-post="/for-teachers/remove-adventure?adventure_id={{ adventure.short_name }}&level={{ level }}" 
+                            hx-post="/for-teachers/remove-adventure?adventure_id={{ adventure.short_name }}&level={{ level }}"
                             hx-target="#adventure_dragger"
                             hx-indicator="#indicator"></span>
                             {{ adventure.long_name }}
                         {# Hidden input so we can send the adventures names in the request to the server #}
                         <input type="hidden" value="{{ adventure.short_name }}" name="adventure">
-                    </div>                    
+                    </div>
                 {% endfor %}
         </div>
     </div>
@@ -91,4 +91,4 @@
             })
         }
     </script>
-</div> 
+</div>

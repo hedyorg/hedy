@@ -10,7 +10,7 @@
     <!-- Row 1: editor, output pane -->
     <div data-devmodeheight="{{editor_height}},36rem" class="flex flex-col order-1 relative" id="code_editor" style="height: {{editor_height}}">
         <div id="fold_in_toggle_container" class="hidden md:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
-         <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
+         <div class="bg-green-500 text-white py-3 rounded-lg text-sm">
              <span>←</span>
          </div>
         </div>
@@ -46,7 +46,7 @@
                   d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
               </svg>
             </div>
-            <div>              
+            <div>
               <p class="details text-sm mt-2" data-cy="error_details">An error occurred.</p>
             </div>
           </div>
@@ -91,9 +91,9 @@
           <div class="h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
               <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">
                   <i class="fa-solid fa-tag text-lg mt-2 mr-2"></i>
-                  <i id="variables_arrow" class="fa-solid fa-angle-up text-lg mt-2 ml-2"></i>                    
+                  <i id="variables_arrow" class="fa-solid fa-angle-up text-lg mt-2 ml-2"></i>
               </div>
-          </div>            
+          </div>
         </div>
         <div class="inline-block flex z-10 text-white bg-blue-100 rounded-lg max-h-36" id="variables">
             <ul id="variable_list" class="bg-blue-100 text-blue-500 px-4 whitespace-nowrap list-none mb-0"
@@ -260,7 +260,7 @@
   </div>
   {% if not raw %}
   <div id="speak_container" class="hidden mt-4 flex flex-row items-center w-max overflow-visible">
-      <label for="speak_dropdown" id="speak_aloud_label" class="ltr:mr-2 rtl:ml-2">{{_('read_code_label')}}:</label>
+      <label for="speak_dropdown" class="ltr:mr-2 rtl:ml-2">{{_('read_code_label')}}:</label>
       <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
         <option value="">🤫</option>
       </select>

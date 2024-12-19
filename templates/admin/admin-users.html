@@ -9,7 +9,7 @@
         </svg>
     </div>
     <div class="text-white font-bold text-2xl mt-2 mb-4">Update the tags of <span id="tags_username"></span></div>
-    <div id="tags_container" class="flex flex-row w-full gap-4">
+    <div class="flex flex-row w-full gap-4">
         <div class="flex flex-col gap-2 items-center">
             <div class="bg-red-500 text-white py-1 rounded-lg font-bold px-3">{{_('certified_teacher')}} ⊙</div>
             <input type="checkbox" id="certified_tag_input" class="tags-input bg-white">
@@ -133,20 +133,20 @@
     <thead>
       <tr class="font-bold text-left">
           <td id="username_header">Username</td>
-          <td id="count_header" class="hidden">Programs</td>
+          <td class="hidden">Programs</td>
           <td id="email_header">Email</td>
-          <td id="created_header" class="hidden">Created</td>
+          <td class="hidden">Created</td>
           <td id="last_login_header">Last login</td>
-          <td id="birth_year_header">Birth year</td>
+          <td>Birth year</td>
           <td id="language_header">Language</td>
-          <td id="keyword_language_header">Keyword lang</td>
+          <td>Keyword lang</td>
           <td id="country_header">Country</td>
-          <td id="gender_header" class="hidden">Gender</td>
-          <td id="experience_header" class="hidden">Experience</td>
-          <td id="tags_header" class="text-center">Tags</td>
+          <td class="hidden">Gender</td>
+          <td class="hidden">Experience</td>
+          <td class="text-center">Tags</td>
           <td id="teacher_header" class="text-center">Teacher</td>
           <td id="teacher_header" class="text-center">Super Teacher</td>
-          <td id="verified_header" class="hidden">Verified</td>
+          <td class="hidden">Verified</td>
       </tr>
     </thead>
     <tbody>
@@ -170,7 +170,7 @@
                 hx-post="/admin/mark-as-teacher/{{user.username}}">
             </td>
             <td class="teacher_cell text-center">
-                <input type="checkbox" {% if user.is_super_teacher %}checked="checked"{% endif %} 
+                <input type="checkbox" {% if user.is_super_teacher %}checked="checked"{% endif %}
                 hx-trigger="click"
                 hx-post="/admin/mark-super-teacher/{{user.username}}">
             </td>
