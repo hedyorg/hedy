@@ -230,7 +230,7 @@ adventures:
             3:
                 story_text: |
                     ## Afegeix a
-                    Pots afegir articles a la llista amb la comanda`{add} {to_list}`. Per afegir un element a una llista, simplement escrius: `{add} penguin {to} animals` o bé pots utilitzar la comanda `{ask}` com en el codi d'exemple.
+                    Pots afegir articles a la llista amb la comanda`{add} {to_list}`. Per afegir un element a una llista, simplement escrius: `{add} pingüí {to_list} animals` o bé pots utilitzar la comanda `{ask}` com en el codi d'exemple.
                 example_code: |
                     ```
                     animals {is} gos, gat, cangur
@@ -328,11 +328,11 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercici
-                    A la pestanya anterior heu practicat a establir variables amb la comanda `{is}`.
+                    A l'aventura anterior heu practicat a establir variables amb la comanda `{is}`.
                     Has creat almenys 3 variables i les has utilitzat amb una comanda d'impressió.
                     Ara, en lloc d'establir les variables, volem que les facis interactives, com hem fet al nostre exemple.
 
-                    Copia el teu codi de la pestanya anterior i fes que les variables siguin interactives mitjançant la comanda `{ask}`.
+                    Copia el teu codi de l'aventura anterior i fes que les variables siguin interactives mitjançant la comanda `{ask}`.
                 example_code_2: |
                     ```
                     animal_preferit {is} {ask} Quin és el teu animal preferit?
@@ -347,7 +347,7 @@ adventures:
         default_save_name: Blackjack
         levels:
             17:
-                story_text: "El Blackjack és un joc de cartes senzill en el qual has d’apropar-te tant com puguis a 21 punts. Reps dues cartes. Cada carta val el seu valor numèric, i les figures (Sota, Reina i Rei) valen 10 punts.\nL'As val o bé 1 o bé 11 punts (pots triar). La banca, el teu oponent, qui reparteix, també rep dues cartes.\nSi ho vols, pots rebre una altra carta, i els seus punts s'afegiran al teu total. La banca també pot triar rebre una altra carta.\nPerò vigila de no superar els 21 punts, perquè si ho fas, perds!\nEl jugador que s’apropa més a 21, sense superar-lo, guanya!\n\n### Exercici\nEn aquesta aventura, codifiquem la primera part del nostre joc de Blackjack. Crearem una funció per calcular quants punts val una carta.\n\n***Defineix les variables***\nComença fent una llista de totes les cartes, del 2 a l'As. A continuació, fes una llista de les figures, és a dir, la Sota, la Reina i el Rei. Després tria una carta aleatòria de la llista de cartes per assignar-la a carta_1.\n\n***Crea una funció per calcular els punts***\nCrea una funció que calculi quants punts val una carta.\nTotes les figures valen 10 punts, l'As en val 11 i totes les altres cartes valen el seu número.\nRetorna la variable `points` al final de la funció.\n\n***Prova la funció***\nProva si la teva funció funciona correctament. Completa la primera comanda print omplint quina carta has tret. Aleshores completa la segona línia cridant la funció amb carta_1.\nExecuta el codi unes quantes vegades. Estàs satisfet amb els resultats? Genial! Aleshores pots eliminar la part de proves i avançar a la següent pestanya!\n"
+                story_text: "El Blackjack és un joc de cartes senzill en el qual has d’apropar-te tant com puguis a 21 punts. Reps dues cartes. Cada carta val el seu valor numèric, i les figures (Sota, Reina i Rei) valen 10 punts.\nL'As val o bé 1 o bé 11 punts (pots triar). La banca, el teu oponent, qui reparteix, també rep dues cartes.\nSi ho vols, pots rebre una altra carta, i els seus punts s'afegiran al teu total. La banca també pot triar rebre una altra carta.\nPerò vigila de no superar els 21 punts, perquè si ho fas, perds!\nEl jugador que s’apropa més a 21, sense superar-lo, guanya!\n\n### Exercici\nEn aquesta aventura, codifiquem la primera part del nostre joc de Blackjack. Crearem una funció per calcular quants punts val una carta.\n\n***Defineix les variables***\nComença fent una llista de totes les cartes, del 2 a l'As. A continuació, fes una llista de les figures, és a dir, la Sota, la Reina i el Rei. Després tria una carta aleatòria de la llista de cartes per assignar-la a carta_1.\n\n***Crea una funció per calcular els punts***\nCrea una funció que calculi quants punts val una carta.\nTotes les figures valen 10 punts, l'As en val 11 i totes les altres cartes valen el seu número.\nRetorna la variable `points` al final de la funció.\n\n***Prova la funció***\nProva si la teva funció funciona correctament. Completa la primera comanda print omplint quina carta has tret. Aleshores completa la segona línia cridant la funció amb carta_1.\nExecuta el codi unes quantes vegades. Estàs satisfet amb els resultats? Genial! Aleshores pots eliminar la part de proves i avançar a la següent aventura!\n"
                 example_code: "```\n{print} 'BLACKJACK'\n\n# Defineix les variables\ncartes = _\ncartes_obertes = _\ncarta_1 =\n\n# Crea una funció per a calcular els punts\n{define} calcular_punts {with} carta:\n    {if} carta {in} cartes_obertes:\n        points = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ points\n\n# Testeja la teva funció\n{print} 'La teva carta és ' _\n{print} 'Aquesta carta val ' _ ' points'.\n```\n"
         name: Blackjack
     calculator:
@@ -415,7 +415,7 @@ adventures:
                     ```
                 story_text: "### Exercici 1\nFem que el programa de pràctica sigui una mica més difícil. Ara el jugador ha de respondre correctament dues preguntes. Omple els espais en blanc per completar el programa.\n\n### Exercici 2\nDe vegades, els càlculs tenen múltiples respostes correctes. Per exemple, 10 es pot dividir entre 5 i entre 2. Així, la pregunta \"Quin nombre divideix 10?\" es pot respondre amb 2 o amb 5.\nPlanteja una pregunta de càlcul que tingui múltiples respostes correctes, demana al jugador que la respongui i determina si és correcta utilitzant `{or}`.\nNeteja l'editor de codi i crea la teva pròpia solució.\n"
             14:
-                story_text: "En aquesta aventura construiràs una calculadora que calcula la teva nota mitjana. Si aconsegueixes que la teva calculadora funcioni, pots continuar amb la pròxima aventura, que et permetrà afegir dues funcions extres.\n\n### Exercici 1\nOmple els espais en blanc per fer que la calculadora funcioni.\n* Comença amb la quarta línia, afegeix una pregunta per saber quina nota ha tret l’estudiant.\n* A la cinquena línia vols calcular el total de totes les notes, així que el total = total + nota.\n* Després fixem el valor de retorn. Volem retornar la mitjana, així que el total dividit pel nombre de proves (4).\n* Finalment, acabem el codi cridant la funció a la línia 8.\n\nHo has aconseguit? Genial! T’agradaria afegir encara més funcions a la teva calculadora? **Aquesta aventura continua a la pròxima pestanya!**\n"
+                story_text: "En aquesta aventura construiràs una calculadora que calcula la teva nota mitjana. Si aconsegueixes que la teva calculadora funcioni, pots continuar amb la pròxima aventura, que et permetrà afegir dues funcions extres.\n\n### Exercici 1\nOmple els espais en blanc per fer que la calculadora funcioni.\n* Comença amb la quarta línia, afegeix una pregunta per saber quina nota ha tret l’estudiant.\n* A la cinquena línia vols calcular el total de totes les notes, així que el total = total + nota.\n* Després fixem el valor de retorn. Volem retornar la mitjana, així que el total dividit pel nombre de proves (4).\n* Finalment, acabem el codi cridant la funció a la línia 8.\n\nHo has aconseguit? Genial! T’agradaria afegir encara més funcions a la teva calculadora? **Aquesta aventura continua a la pròxima aventura!**\n"
                 example_code: "```\n{define} calcula_mitjana_nota\n    total = 0\n    {for} i {in} {range} 1 {to} 4\n        nota = {ask} _\n        total = total + _\n        {return} _ / 4\n\nmitjana_nota = {call} _\n{print} 'La teva nota mitjana és ' mitjana_nota\n```\n"
             10:
                 story_text: "Aquest joc de la calculadora t'ajuda a practicar les taules de multiplicar!\n### Exercici\nOmple els espais en blanc. Volem que aquest programa faci aquestes preguntes al jugador:\n```\nQuant fa 1 per 1?\nQuant fa 1 per 2?\nQuant fa 1 per 3?\nQuant fa 2 per 1?\nQuant fa 2 per 2?\nQuant fa 2 per 3?\nQuant fa 3 per 1?\nQuant fa 3 per 2?\nQuant fa 3 per 3?\n_\n```\n"
@@ -847,7 +847,7 @@ adventures:
                     Prova el codi tu mateix! El botó groc copia el codi d'exemple al teu camp de programació.
                     Després, prem el botó verd 'Executa codi' sota del camp de programació per executar el codi.
 
-                    Preparat? Ves a la pestanya següent per aprendre com fer el teu propi codi!
+                    Preparat? Ves a l'aventura següent per aprendre com fer el teu propi codi!
                 example_code: "```\n{print} Hola món!\n```\n"
             2:
                 story_text: |
@@ -855,7 +855,7 @@ adventures:
                     Durant el primer nivell t'hauràs adonat que la comanda `{echo}` només pot guardar una peça d'informació cada vegada.
                     Per exemple, a l'aventura del restaurant podies repetir el que el client volia menjar, o el que volia beure, però no tot d'una vegada.
                     Això canvia al nivell 2. Al nivell 2 aprendràs a treballar amb variable que et permetran guardar múltiples peces d'informació i imprimir-les a qualsevol lloc que vulguis.
-                    om-hi!, anem a la següent pestanya!
+                    Som-hi!, cap a la següent aventura!
                 example_code: |
                     **Alerta! Aquest codi no funciona!**
                     A Hedy les comandes van canviant. Per exemple la comanda `{echo}` només funciona al nivell 1. En aquest nivell aprendràs una millor manera de respondre.
@@ -870,9 +870,9 @@ adventures:
             3:
                 story_text: |
                     Al nivell anterior has après què és una variable i com la pots utilitzar per fer les teves aventures de forma més interactiva.
-                    Però... Hi ha moltes més coses a fer amb les variables! També pots utilitzar les variables per fer llistes.
-                    Fins i tot pots deixar que Hedy esculli una paraula aleatòria d'una llista, permetent-nos fer jocs reals!
-                    Fes-hi una ullada a la següent pestanya!
+                    Però... Hi ha moltes més coses a fer amb les variables! També pots fer servir les variables per fer llistes.
+                    Fins i tot pots deixar que Hedy esculli una paraula aleatòria d'una llista, cosa que ens permet fer jocs reals!
+                    Dona-hi una ullada a la següent aventura!
             4:
                 story_text: |
                     Als nivells anteriors has estat practicant amb les variables, i segurament t'has trobat amb el següent problema.
@@ -898,7 +898,7 @@ adventures:
                     Però realment no era interactiu, el jugador no tenia cap influència amb el que passava al joc.
 
                     En aquest nivell aprendràs la comanda `{if}`, que et permet donar respostes diferents. D'aquesta manera per exemple podràs programar una contrasenya secreta pel teu ordinador.
-                    Som-hi!, anem a la següent pestanya a descobrir la nova comanda!
+                    Som-hi!, anem a la següent aventura a descobrir la nova comanda!
                 example_code: |
                     ```
                     contrasenya {is} {ask} 'Quina és la contrassenya correcta?'
@@ -932,7 +932,7 @@ adventures:
                     Bona feina! Has superat el nivell. Significa que has practicat amb les comandes `{if}` i `{else}`. Probablement, hauràs notat que el teu codi és cada vegada més llarg.
                     Per exemple quan vols programar la cançó de 'Moltes felicitats'.
 
-                    Hi ha molt de codi on repetim les mateixes paraules una vegada i una altra. Per sort a la següent pestanya aprendràs una solució amb la comanda `{repeat}`. La comanda et permet repetir una línia de codi moltes vegades.
+                    Hi ha molt de codi on repetim les mateixes paraules una vegada i una altra. Per sort a la següent aventura aprendràs una solució amb la comanda `{repeat}`. La comanda et permet repetir una línia de codi moltes vegades.
                 example_code: |
                     ```
                     {print} 'moltes felicitats'
@@ -946,7 +946,7 @@ adventures:
                     Aquest nivell et permetrà agrupar una parella de línies de codi i repetir-les de cop!
                 example_code: |
                     ```
-                    {repeat} 5 {times} {print} 'A la següent pestanya podràs repetir múltiples línies de cop!'
+                    {repeat} 5 {times} {print} 'A la següent aventura podràs repetir múltiples línies de cop!'
                     ```
             9:
                 story_text: |
@@ -1065,7 +1065,7 @@ adventures:
                         {for} sound {in} sons
                             {print} 'Una ' animal ' fa ' sound
                     ```
-                    Nota: Aquests codis no funcionaran així en aquest nivell. Ves a la següent pestanya per veure quines parts has de corregir.
+                    Nota: Aquests codis no funcionaran així en aquest nivell. Ves a la següent aventura per veure quines parts has de corregir.
             17:
                 story_text: |
                     Ara canviarem com funciona la indentació una mica. Cada cop que necessitem una sagnia, necessitem `:` a la línia abans de la sagnia.
@@ -1166,7 +1166,7 @@ adventures:
     dishes:
         name: Plats?
         default_save_name: Plats
-        description: Utilitza l'ordinador per veure qui renta els plats.
+        description: Utilitza l'ordinador per veure qui renta els plats
         levels:
             3:
                 example_code: |
@@ -1370,7 +1370,7 @@ adventures:
                     amor = ningú, un príncep, el seu veí, el seu amor verdader
                     mascotes= gos, gat, elefant
                     noms= Jana, Rai, Jaume
-                    {for} nom {in} noms
+                    _
                         {print} nom ' viu en ' cases {at} {random}
                         {print} nom ' es casarà amb ' amor {at} {random}
                         {print} nom ' tindrà un ' mascotes {at} {random} ' com a mascota.'
@@ -1402,7 +1402,7 @@ adventures:
                         {print} extremitat_escollida ' ' costat_escollit ' al ' color_escollit
 
                     {print} 'Juguem al Twister!'
-                    {for} i {in} {range} 1 to _
+                    {for} i {in} {range} 1 {to} _
                         {call} turn
                         {sleep} 2
                     ```
@@ -1413,7 +1413,7 @@ adventures:
                     {define} calcula_preu_nou {with} quantitat, percentatge
                         percentatge = percentatge / 100
                         descompte_quantitat = quantitat * percentatge
-                        return quantitat - descompte_quantitat
+                        {return} quantitat - descompte_quantitat
 
                     preu_vell = {ask} "Quant hi ha a l'etiqueta de preu?"
                     descompte = {ask} "Amb quin percentatge de descompte?"
@@ -1483,9 +1483,19 @@ adventures:
                 story_text_2: |
                     ### Exercici
                     És hora de crear les teves pròpies variables!
-                    En el codi d'exemple hem fet un exemple de la variable `animal_preferit`. A la línia 1 es defineix la variable, i a la línia 2 hem utilitzat la variable dins una comanda d'impressió.
-                    En primer lloc, acabeu el nostre exemple omplint el vostre animal preferit als espais en blanc. A continuació, feu vosaltres mateixos almenys 3 d'aquests codis. Trieu una variable i configureu-la amb la comanda {is}. A continuació, utilitzeu-lo amb una comanda {print}, tal com hem fet abans.
+                    En el codi d'exemple hem fet un exemple de la variable `animal_preferit`. A la línia 1 es defineix la variable, i a la línia 2 hem utilitzat la variable dins una comanda `{print}`.
+                    En primer lloc, acabeu el nostre exemple omplint el vostre animal preferit a l'espai en blanc. A continuació, feu vosaltres mateixos almenys 3 d'aquests codis. Trieu una variable i configureu-la amb la comanda {is}. A continuació, utilitzeu-lo amb una comanda {print}, tal com hem fet abans.
                 example_code_2: "```\nanimal_preferit {is} _\n{print} M'agraden els/les animal_preferit \n```\n"
+            14:
+                example_code: "```\nedat = {ask} 'Quants anys tens?'\n{if} edat > 12\n    {print} 'Ets més gran que jo!'\n```\n```\nedat = {ask} 'Quants anys tens?'\n{if} edat < 12\n    {print} 'Ets més petit que jo!'\n{else}\n    {print} 'Ets més gran que jo!'\n```\n"
+                example_code_3: "```\nnom = {ask} 'Com et dius?'\n{if} nom != 'Hedy'\n    {print} 'Tu no ets pas Hedy'\n```\n"
+                example_code_2: "```\nnom = {ask} 'Com et dius?'\n{if} nom == 'Hedy'\n    {print} 'Ets molt guai!'\n```\n"
+                story_text_3: "També pots comparar si una cosa *no* és igual a una altra utilitzant `!=`, així:\n"
+                story_text_2: "A partir d'aquest nivell, si vols comparar exactament, pots utilitzar dos signes d'igual. Que és el que fan la majoria dels llenguatges de programació:\n"
+                story_text: "Aprenem més elements nous. Potser ja els coneixes de les matemàtiques, el `<` i el `>`.\nEl `<` comprova si el primer número és més petit que el segon, per exemple, edat `<` 12 comprova si l'edat és més petita que 12.\nSi vols comprovar si el primer número és més petit o igual que el segon, pots utilitzar `<=`, per exemple, edat `<=` 11.\nEl `>` comprova si el primer número és més gran que el segon, per exemple, punts `>` 10 comprova si els punts són més grans que 10. \nSi vols comprovar si el primer número és més gran o igual que el segon, pots utilitzar `>=`, per exemple, punts `>=` 11.\nEs fan servir aquestes comparacions dins d'un `{if}`, així:\n"
+            6:
+                story_text: "També fem un canvi en com emmagatzemar una paraula en una variable! Ara pots utilitzar `=` en lloc de `{is}` quan emmagatzemes un nom o un número en una variable, així:\n"
+                example_code: "```\nnom = Hedy\nresposta = 20 + 4\n```\n"
         name: '{is}'
     parrot:
         name: Lloro
@@ -1544,23 +1554,20 @@ adventures:
                     _ Aquesta és la manera incorrecta d'apostrofar _
                     {print} 'Amb l'Anna hem d'anar a fer de cangur als meus nebots'
                     {print} 'M'encanta! la meva germana n'estarà orgullosa'
+                    _ Així és com ho solucionem _
+                    {print} "Amb l'Anna hem d'anar a fer de cangur als meus nebots"
+                    {print} "M'encanta! la meva germana n'estarà orgullosa"
                     ```
             12:
                 example_code: |
                     ```
-                    _ accions = "pica de mans", "pica de peus", "crida Hurra!"
-                    _ {for} accio {in} accions
-                    _ {for} i {in} {range} 1 {to} 2
-                    _ {print} "si ets feliç i ho saps"
-                    _ {print} accio
-                    _ {print} "si ets feliç i ho saps, i ho vols fer saber a tothom"
-                    _ {print} "si ets feliç i ho saps"
-                    _ {print} accio
+                    nom = 'Hedy el robot'
+                    {print} 'Hola' nom
                     ```
     blackjack_3:
         levels:
             17:
-                story_text: "A les pestanyes anteriors has après com tirar 2 cartes aleatòries per a tu i per la banca i com calcular quants punts heu aconseguit.\nEn aquesta aventura, afegim l'opció de demanar una carta extra tant per a tu com per la banca.\n\n### Exercici\n***Enganxa el teu codi de l’aventura anterior*** Primer, copia el teu codi de la pestanya anterior i enganxa’l aquí.\n\n***Carta extra per a tu*** Si vols, pots agafar una carta extra per apropar-te tant com sigui possible a 21. Primer, pregunta al jugador si vol una carta extra.\nSi la vol, escull una carta aleatòria i imprimeix quina carta ha tret. Si la carta no és un As, pots cridar la funció i afegir els punts al teu total.\nEn cas que la carta sigui un As, no pots utilitzar la funció, perquè l'As pot valdre o 1 punt o 11 punts, depenent de quants punts ja has aconseguit.\nSi el teu total és inferior a 11, vols que l'As valgui 11 punts (perquè això és més proper a 21). Per tant, afegeixes 11 punts al teu total.\nSi el total és més gran o igual a 11, vols que l'As valgui 1 punt (perquè no vols superar els 21 punts). Per tant, afegeixes 1 punt al teu total.\nFinalment, imprimeix el teu nou total de punts.\n\n***Carta extra per la banca*** La banca també pot agafar una carta extra. No cal preguntar-li, perquè sempre agafa una carta extra si el seu total és inferior a 17.\nCopia el codi de la 'Carta extra per a tu' i enganxa’l a la secció de la banca. Després modifica’l per adaptar-lo a la selecció de carta extra i a la suma de punts de la banca.\n"
+                story_text: "A les aventures anteriors has après com tirar 2 cartes aleatòries per a tu i per la banca i com calcular quants punts heu aconseguit.\nEn aquesta aventura, afegim l'opció de demanar una carta extra tant per a tu com per la banca.\n\n### Exercici\n***Enganxa el teu codi de l’aventura anterior*** Primer, copia el teu codi de l'aventura anterior i enganxa’l aquí.\n\n***Carta extra per a tu*** Si vols, pots agafar una carta extra per apropar-te tant com sigui possible a 21. Primer, pregunta al jugador si vol una carta extra.\nSi la vol, escull una carta aleatòria i imprimeix quina carta ha tret. Si la carta no és un As, pots cridar la funció i afegir els punts al teu total.\nEn cas que la carta sigui un As, no pots utilitzar la funció, perquè l'As pot valdre o 1 punt o 11 punts, depenent de quants punts ja has aconseguit.\nSi el teu total és inferior a 11, vols que l'As valgui 11 punts (perquè això és més proper a 21). Per tant, afegeixes 11 punts al teu total.\nSi el total és més gran o igual a 11, vols que l'As valgui 1 punt (perquè no vols superar els 21 punts). Per tant, afegeixes 1 punt al teu total.\nFinalment, imprimeix el teu nou total de punts.\n\n***Carta extra per la banca*** La banca també pot agafar una carta extra. No cal preguntar-li, perquè sempre agafa una carta extra si el seu total és inferior a 17.\nCopia el codi de la 'Carta extra per a tu' i enganxa’l a la secció de la banca. Després modifica’l per adaptar-lo a la selecció de carta extra i a la suma de punts de la banca.\n"
                 example_code: "```\n# Enganxa el codi de l'aventura anterior aquí\n\n# Carta extra per tu\npujar_aposta = {ask} _\n{if} pujar_aposta == 'sí':\n    carta_3 = _\n    {print} _\n    {if} carta_3 _ 'As':\n        teus_punts_3 = _\n        teus_total = _\n    {else}:\n       {if} teus_total _\n            _\n        {else}:\n            _\n    {print} _\n\n# Carta extra per la banca\n{if} banca_total < 17\n_\n```\n"
         description: Blackjack 3a part
         name: Blackjack 3
@@ -1577,14 +1584,14 @@ adventures:
         levels:
             17:
                 example_code: "```\n# Enganxa el codi de l'aventura anterior aquí\n\n# Afegeix les següents variables a la llista\ncarta_2 = _\ncarta_banca_1 = _\ncarta_banca_2 = _\n\n# Conta els teus punts\nteus_punts_1 = {call} _ {with} carta_1\nteus_punts_2 = _\nteus_total = _\n\n# Conta els punts de la banca\nbanca_punts_1 = _\n_\n_\n\n# 2 Asos\n{if} carta_1 == 'As' {and} _\n    teus_total = 12\n{if} carta_banca_1 _\n    banca_total = _\n\n# Mostra els punts\n{print} 'Has tret un ' _ ' i un ' _ '. Són ' _ ' punts'\n{print} 'La banca ha tret un ' _ ' i un ' _ '. Són ' _ ' punts'\n```\n"
-                story_text: "### Exercici\nEn aquesta aventura codifiquem la segona part del nostre joc de Blackjack.\n\n***Enganxa el teu codi de l’aventura anterior***\nA l’aventura anterior has començat una llista de variables i has creat una funció per calcular quants punts val una carta. Copia el teu codi i enganxa'l aquí. Tingues en compte que no necessites la part de proves, així que, si encara no l'has eliminat, fes-ho ara.\n\n***Afegeix més variables***\nJa has definit les llistes `cartes` i `cartes_obertes` i la variable `carta_1`. A sota d'aquestes variables, crea 3 variables més: `carta_2`, `carta_repartidor_1` i `carta_repartidor_2`. Aquestes variables s’assignen a una carta aleatòria de la llista de cartes.\n\n***Suma de punts***\nPer calcular quants punts has aconseguit, crida la funció amb la carta 1 i fes-ho de nou amb la carta 2. Aleshores suma aquests dos resultats per obtenir el teu total.\nFes el mateix per als punts de la banca, però assegura't d'utilitzar les cartes de la banca i no les teves!\n\n***2 Asos***\nHo estàs fent molt bé! Ja es poden calcular gairebé tots els punts. Només hi ha una excepció: 2 Asos. Si treus 2 Asos, el teu total és de 12 punts i no de 22 (perquè 22 punts significaria perdre!). Això, és clar, també s'aplica a la banca.\n\n***Mostra la puntuació***\nFinalment, vols que el programa t'indiqui quines cartes has tret i quants punts tens. A continuació, mostra quines cartes té la banca i quants punts té.\n\n***Continua a la següent pestanya***\nGenial! Has acabat aquesta part del joc! Copia el teu codi i ves a la següent pestanya per aprendre com demanar una carta extra i declarar un guanyador.\n"
+                story_text: "### Exercici\nEn aquesta aventura codifiquem la segona part del nostre joc de Blackjack.\n\n***Enganxa el teu codi de l’aventura anterior***\nA l’aventura anterior has començat una llista de variables i has creat una funció per calcular quants punts val una carta. Copia el teu codi i enganxa'l aquí. Tingues en compte que no necessites la part de proves, així que, si encara no l'has eliminat, fes-ho ara.\n\n***Afegeix més variables***\nJa has definit les llistes `cartes` i `cartes_obertes` i la variable `carta_1`. A sota d'aquestes variables, crea 3 variables més: `carta_2`, `carta_repartidor_1` i `carta_repartidor_2`. Aquestes variables s’assignen a una carta aleatòria de la llista de cartes.\n\n***Suma de punts***\nPer calcular quants punts has aconseguit, crida la funció amb la carta 1 i fes-ho de nou amb la carta 2. Aleshores suma aquests dos resultats per obtenir el teu total.\nFes el mateix per als punts de la banca, però assegura't d'utilitzar les cartes de la banca i no les teves!\n\n***2 Asos***\nHo estàs fent molt bé! Ja es poden calcular gairebé tots els punts. Només hi ha una excepció: 2 Asos. Si treus 2 Asos, el teu total és de 12 punts i no de 22 (perquè 22 punts significaria perdre!). Això, és clar, també s'aplica a la banca.\n\n***Mostra la puntuació***\nFinalment, vols que el programa t'indiqui quines cartes has tret i quants punts tens. A continuació, mostra quines cartes té la banca i quants punts té.\n\n***Continua a la següent aventura***\nGenial! Has acabat aquesta part del joc! Copia el teu codi i ves a la següent aventura per aprendre com demanar una carta extra i declarar un guanyador.\n"
         name: Blackjack 2
         default_save_name: Blackjack_2
         description: Blackjack 2a part
     calculator_2:
         levels:
             14:
-                story_text: "### Exercici 2\n**Aquesta és la segona part d’aquesta aventura.** L’aventura comença a la pestanya anterior.\nNo sempre voldràs calcular la mitjana de 4 proves. Potser voldràs calcular la mitjana de 10 proves o només de 2...\nPodem solucionar aquest problema afegint l'argument i la variable 'num_proves'.\n* Comença una nova línia a la línia 3. Defineix l’argument num_proves preguntant a l’alumne quantes proves ha fet.\n* Canvia el 4 de la línia 4 per al nou argument num_proves.\n* Finalment, canvia el 4 de la línia 6 per num_proves.\n\nProva el teu nou programa. Funciona?\n\n### Exercici 3\nVols millorar encara més el teu programa? Genial! En el programa anterior només podies calcular la nota mitjana d'una assignatura, però seria millor si poguessis calcular la nota mitjana de totes les assignatures que vulguis!\nNo t’explicarem com fer-ho, però et donarem un consell: Comença el teu codi a la línia 1 amb: define calcula_mitjana_nota with assignatura.\n"
+                story_text: "### Exercici 2\n**Aquesta és la segona part d’aquesta aventura.** L’aventura comença a l'aventura anterior.\nNo sempre voldràs calcular la mitjana de 4 proves. Potser voldràs calcular la mitjana de 10 proves o només de 2...\nPodem solucionar aquest problema afegint l'argument i la variable 'num_proves'.\n* Comença una nova línia a la línia 3. Defineix l’argument num_proves preguntant a l’alumne quantes proves ha fet.\n* Canvia el 4 de la línia 4 per al nou argument num_proves.\n* Finalment, canvia el 4 de la línia 6 per num_proves.\n\nProva el teu nou programa. Funciona?\n\n### Exercici 3\nVols millorar encara més el teu programa? Genial! En el programa anterior només podies calcular la nota mitjana d'una assignatura, però seria millor si poguessis calcular la nota mitjana de totes les assignatures que vulguis!\nNo t’explicarem com fer-ho, però et donarem un consell: Comença el teu codi a la línia 1 amb: define calcula_mitjana_nota with assignatura.\n"
                 example_code: "```\n# Utilitza el teu propi codi de l'aventura anterior.\n```\n"
         description: Calculadora 2
         name: Calculadora 2
@@ -1600,7 +1607,7 @@ adventures:
     hangman:
         levels:
             17:
-                story_text: "En aquesta aventura programem un joc de penjat. Primer fem algunes preparacions, després programem el joc i en la tercera part afegim un dibuix amb la tortuga.\n\n### Exercici\n***Configura les variables*** En aquest joc de penjat, el Jugador 1 tria una resposta i el Jugador 2 ha d'endevinar les lletres d'aquesta resposta.\nPer deixar que l'ordinador conegui totes les lletres de la paraula, convertirem la resposta en una llista de lletres. Farem el mateix amb les endevinalles que fa el Jugador 2.\nComençarem el joc amb 2 llistes buides. Hem creat una llista buida per a la variable resposta per a tu. Ara crea també una llista buida per a les `lletres_endevinades`.\nDesprés omplim el nombre d'errors que s'han comès. Al principi del joc, aquest ha de ser 0.\nLa variable `quantitat_lletres` ens diu quantes lletres té la resposta. Demana al Jugador 1 que ens digui quantes lletres té la seva paraula.\nFinalment, li diem a l'ordinador si el joc ha acabat. Utilitzem la variable `joc_acabat` i la configurem a `False`.\n\n***Triant la resposta*** Volem que el Jugador 1 pugui triar la resposta. Els preguntarem, les vegades que sigui necessari, quina és la següent lletra.\nDesprés afegim aquesta lletra a la resposta. Finalment, afegim un _ buit a la llista de lletres endevinades, així obtenim tants _ com lletres té la resposta.\n\n***Torn del Jugador 2***\nDiu al Jugador 2 que és el seu torn. Després informa-li de quantes lletres té la resposta. Finalment, imprimeix la llista de `lletres_endevinades`.\n\n***Vés a la següent pestanya*** Ara que totes les variables inicials estan configurades, podem començar a programar el joc en si. Consulta la següent pestanya per aprendre com!\n"
+                story_text: "En aquesta aventura programem un joc de penjat. Primer fem algunes preparacions, després programem el joc i en la tercera part afegim un dibuix amb la tortuga.\n\n### Exercici\n***Configura les variables*** En aquest joc de penjat, el Jugador 1 tria una resposta i el Jugador 2 ha d'endevinar les lletres d'aquesta resposta.\nPer deixar que l'ordinador conegui totes les lletres de la paraula, convertirem la resposta en una llista de lletres. Farem el mateix amb les endevinalles que fa el Jugador 2.\nComençarem el joc amb 2 llistes buides. Hem creat una llista buida per a la variable resposta per a tu. Ara crea també una llista buida per a les `lletres_endevinades`.\nDesprés omplim el nombre d'errors que s'han comès. Al principi del joc, aquest ha de ser 0.\nLa variable `quantitat_lletres` ens diu quantes lletres té la resposta. Demana al Jugador 1 que ens digui quantes lletres té la seva paraula.\nFinalment, li diem a l'ordinador si el joc ha acabat. Utilitzem la variable `joc_acabat` i la configurem a `False`.\n\n***Triant la resposta*** Volem que el Jugador 1 pugui triar la resposta. Els preguntarem, les vegades que sigui necessari, quina és la següent lletra.\nDesprés afegim aquesta lletra a la resposta. Finalment, afegim un _ buit a la llista de lletres endevinades, així obtenim tants _ com lletres té la resposta.\n\n***Torn del Jugador 2***\nDiu al Jugador 2 que és el seu torn. Després informa-li de quantes lletres té la resposta. Finalment, imprimeix la llista de `lletres_endevinades`.\n\n***Ves a la següent aventura*** Ara que totes les variables inicials estan configurades, podem començar a programar el joc en si. Consulta la següent pestanya per aprendre com!\n"
                 example_code: "```\nprint 'El penjat!'\n\n# Estableix les variables\nresposta = []\nlletres_endevinades = _\nerrades_fetes = _\nquantitat_lletres = {ask} _\n_ = 'Fals'\n\n# Triant la resposta\n{for} _\n    lletra = {ask} 'Jugador 1, quina és la lletra ' i '?'\n    _\n    {add} '_' {to} _\n\n# Torn del Jugador 2\nprint _\nprint _\nprint lletres_endevinades\n```\n"
         name: El penjat
         default_save_name: El penjat
@@ -1619,7 +1626,7 @@ adventures:
         description: El penjat 2
         levels:
             17:
-                story_text: "### Exercici\n\n***Enganxa el teu codi*** Copia el teu codi de l'última pestanya i enganxa'l al camp de programació.\n\n***El joc*** En aquest joc es continua jugant fins que el Jugador 2 quedi eliminat. Completa la comanda `while` corresponent. Després, el Jugador 2 pot endevinar una lletra, així que demana-li que endevini una lletra.\nHem de comprovar si la seva resposta és correcta, així que comprova si el seu `intent` es troba (en algun lloc) de la llista `solució`. Després el programa identifica quina és la lletra (o lletres) encertada. Aquesta part ja l'hem programat per a tu.\nSeguidament, volem felicitar el jugador, ja que ha trobat una lletra correcta i imprimirem la llista `lletres_endevinades`, i així el jugador podrà veure el seu progrés.\n\nLa següent part que programarem és el que passa quan el jugador ha encertat totes les lletres. Això passarà quan la seva llista de `lletres_endevinades` sigui la mateixa que la nostra llista `solució`.\nSi les llistes són iguals, ja pots felicitar el Jugador 2 per la seva victòria i posar la variable `final_joc` a `True`.\n\nAleshores programarem què passa quan el Jugador 2 escull una lletra incorrecta (això passarà dins la comanda `{else}`). Primer, informa el jugador que el seu intent ha estat incorrecte. Després augmenta la variable `errades_fetes` en 1.\n\nPer a l'última part, programarem què passa quan el Jugador 2 ha comès 10 errades. Imprimeix que el Jugador 1 ha guanyat el joc. Després imprimeix la solució. Finalment, posa la variable `final_joc` a `True`, perquè el joc s'aturi.\n\n***Ves a la següent pestanya*** Feina increïble! El teu joc ja és jugable, però no seria divertit si el penjat es dibuixés quan el Jugador 2 comet una errada..?\n"
+                story_text: "### Exercici\n\n***Enganxa el teu codi*** Copia el teu codi de l'última aventura i enganxa'l al camp de programació.\n\n***El joc*** En aquest joc es continua jugant fins que el Jugador 2 quedi eliminat. Completa la comanda `while` corresponent. Després, el Jugador 2 pot endevinar una lletra, així que demana-li que endevini una lletra.\nHem de comprovar si la seva resposta és correcta, així que comprova si el seu `intent` es troba (en algun lloc) de la llista `solució`. Després el programa identifica quina és la lletra (o lletres) encertada. Aquesta part ja l'hem programat per a tu.\nSeguidament, volem felicitar el jugador, ja que ha trobat una lletra correcta i imprimirem la llista `lletres_endevinades`, i així el jugador podrà veure el seu progrés.\n\nLa següent part que programarem és el que passa quan el jugador ha encertat totes les lletres. Això passarà quan la seva llista de `lletres_endevinades` sigui la mateixa que la nostra llista `solució`.\nSi les llistes són iguals, ja pots felicitar el Jugador 2 per la seva victòria i posar la variable `final_joc` a `True`.\n\nAleshores programarem què passa quan el Jugador 2 escull una lletra incorrecta (això passarà dins la comanda `{else}`). Primer, informa el jugador que el seu intent ha estat incorrecte. Després augmenta la variable `errades_fetes` en 1.\n\nPer a l'última part, programarem què passa quan el Jugador 2 ha comès 10 errades. Imprimeix que el Jugador 1 ha guanyat el joc. Després imprimeix la solució. Finalment, posa la variable `final_joc` a `True`, perquè el joc s'aturi.\n\n***Ves a la següent aventura*** Feina increïble! El teu joc ja és jugable, però no seria divertit si el penjat es dibuixés quan el Jugador 2 comet una errada..?\n"
                 example_code: "```\n# Enganxa el teu codi aquí\t\n\n# El joc\n{while} final_joc _\n    intent = _\n    {if} _\n        {for} i {in} {range} 1 {to} quantitat_lletres:\n            if solucio[i] == intent:\n                lletres_endevinades[i] = intent\n        {print} _\n        {if} lletres_endevinades == _:\n            {print} _\n            final_joc = _\n    {else}:\n        {print} _\n        errades_fetes_\n        {if} _ == 10:\n            {print} _\n            {print} _\n            _\n```\n"
     hangman_3:
         name: El penjat 3
@@ -1628,7 +1635,7 @@ adventures:
         levels:
             17:
                 example_code: "```\n# Crea una funció que dibuixi el penjat\n{define} dibuixa_penjat {with} pas:\n    {if} pas == 1:\n        {color} white\n        {forward} -100\n        {turn} 90\n        {forward} -50\n        {color} black\n        {forward} 100\n        {forward} -50\n\n    {if} pas == 2:\n        _\n# Enganxa el teu codi del penjat\n\n```\n"
-                story_text: "En el joc del penjat, les errades es mostren dibuixant una part del penjat cada vegada que s'ha comès una errada.\nAra afegirem aquests dibuixos amb la nostra tortuga!\n\n### Exercici\n***Crea una funció que dibuixi el penjat*** Crea una funció que dibuixi el penjat en 10 passos. Ja hem fet el primer pas per a tu.\n\n***Prova la funció*** Prova la funció cridant la funció amb 10. Si estàs content amb la funció, elimina la línia que crida la funció temporalment. L'haurem de cridar quan el jugador cometi una errada.\n\n***Enganxa el teu joc de penjat sota la funció*** Torna a la pestanya anterior i copia el teu joc de penjat. Enganxa el joc sota la funció.\n\n***Crida la funció quan el jugador cometi una errada*** Sota la línia `errades_fetes = errades_fetes + 1` cridarem la funció. Volem que la tortuga faci tants passos com les errades que el jugador ha comès, així que cridarem la funció amb `errades_fetes` com a argument.\n\n***Gaudeix del teu joc!***\n<div class=\"w-full flex flex-row gap-2\">\n    El penjat s'ha de semblar a això <img src=\"https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129\" width=\"100\">\n</div>\n"
+                story_text: "En el joc del penjat, les errades es mostren dibuixant una part del penjat cada vegada que s'ha comès una errada.\nAra afegirem aquests dibuixos amb la nostra tortuga!\n\n### Exercici\n***Crea una funció que dibuixi el penjat*** Crea una funció que dibuixi el penjat en 10 passos. Ja hem fet el primer pas per a tu.\n\n***Prova la funció*** Prova la funció cridant la funció amb 10. Si estàs content amb la funció, elimina la línia que crida la funció temporalment. L'haurem de cridar quan el jugador cometi una errada.\n\n***Enganxa el teu joc de penjat sota la funció*** Torna a l'aventura anterior i copia el teu joc de penjat. Enganxa el joc sota la funció.\n\n***Crida la funció quan el jugador cometi una errada*** Sota la línia `errades_fetes = errades_fetes + 1` cridarem la funció. Volem que la tortuga faci tants passos com les errades que el jugador ha comès, així que cridarem la funció amb `errades_fetes` com a argument.\n\n***Gaudeix del teu joc!***\n<div class=\"w-full flex flex-row gap-2\">\n    El penjat s'ha de semblar a això <img src=\"https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129\" width=\"100\">\n</div>\n"
     songs:
         levels:
             13:
@@ -1674,3 +1681,55 @@ adventures:
         name: '{if} & {else}'
         description: Introducció a la comanda {if}
         default_save_name: if_command
+    language:
+        default_save_name: Llengua
+        levels:
+            5:
+                story_text: "Crea el teu propi programa per practicar vocabulari en un nou idioma.\n\n### Exercici\nAllarga el codi afegint almenys 3 paraules addicionals permetent al jugador aprendre-les.\n**Extra** Per descomptat pots fer servir una llengua diferent del francès. Canvia el codi per qualsevol llengua que et vingui de gust aprendre.\n"
+                example_code: "```\n{print} 'Aprèn Francès!'\ngat {is} {ask} '🐱'\n{if} gat {is} chat {print} 'Genial!'\n{else} {print} 'No, gat es diu chat'\ngranota {is} {ask} '🐸'\n{if} granota {is} grenouille {print} 'Super!'\n{else} {print} 'No, granota es diu grenouille'\n```\n"
+            16:
+                example_code: "```\nparaules_frances = ['bonjour', 'ordinateur', 'pomme de terre']\ntraduccio = ['Bon dia', 'ordinador', 'patata']\npunts = 0\n{for} i {in} {range} 1 {to} 3\n    resposta = {ask} 'Què vol dir ' paraules_frances[i] '?'\n    correcta = traduccio[i]\n    {if} resposta == correcta\n        {print} 'Correcte!'\n        punts = punts + 1\n    {else}\n        {print} 'Malament, ' paraules_frances[i] ' significa ' traduccio[i]\n{print} 'Has encertat ' punts ' respostes.'\n```\n"
+                story_text: "### Exercici\nDona un cop d'ull al codi d'exemple. Aquest és un programa per practicar vocabulari en francès. Ara crea el teu propi programa per practicar el teu vocabulari en un nou idioma.  \nSi no coneixes cap altre idioma, pots utilitzar Google Translate o fer servir emojis i la teva llengua materna.\n"
+        name: Llengua
+        description: Practica paraules amb una llengua estrangera
+    maths:
+        levels:
+            12:
+                example_code_2: "```\na = 'Hola '\nb = 'món!'\n{print} a + b\n```\n"
+                story_text_2: "**Matemàtiques amb paraules**\nEn aquest nivell també pots fer sumes de paraules així:"
+                story_text: "**Nombres decimals**  \nFins ara, Hedy no permetia nombres decimals com 1.5, però ara sí que ho permetem. Tingues en compte que els ordinadors utilitzen el `.` per als nombres decimals."
+                example_code: "```\n{print} 'Dos i mitg més dos i mitg és...'\n{print} 2.5 + 2.5\n```\n"
+            6:
+                example_code: "```\n{print} '5 més 5 és ' 5 + 5\n{print} '5 menys 5 és ' 5 - 5\n{print} '5 per 5 és ' 5 * 5\n{print} '5 dividit entre 5 és ' 5 / 5\n```\n"
+                story_text: "En aquest nivell aprendràs una cosa nova: ara també pots calcular.\n\nLes sumes són fàcils, l'escrius com en matemàtiques: `5 + 5`, per exemple. Les restes també funcionen igual, és `5 - 5`.\n\nMultiplicar és una mica diferent, perquè no hi ha cap símbol de multiplicació al teu teclat. Busca'l, de debò no hi és!  \nPer això multipliquem amb l'asterisc que hi ha normalment prop de la tecla ENTER: `5 * 5`. Llegeix-ho com \"5 vegades 5\", això t'ajudarà a recordar-ho millor.\n"
+        name: Mates
+        default_save_name: mates
+        description: Introduint les mates
+    music:
+        default_save_name: música
+        name: música
+        levels:
+            2:
+                example_code: "```\n{print} En MacDonald viu al camp\n{play} C5\n{play} C5\n{play} C5\n{play} G4\n{play} A4\n{play} A4\n{play} G4\n```\n"
+                story_text_2: Com pots veure, també es pot utilitzar la comanda `{sleep}` per afegir una pausa a la cançó.
+                example_code_2: "```\n{print} Quan les oques van al camp\n{play} C\n{play} C\n{play} G\n{play} G\n{play} A\n{play} A\n{play} G\n{sleep} 1\n{play} F\n{play} F\n```\n"
+                story_text: "### Exercici  \nAcaba les cançons! Ja hem començat el codi per algunes melodies.\n"
+            1:
+                story_text: "En aquest nivell aprendràs com utilitzar la comanda `{play}` per tocar una melodia!\n\nEscriu `{play}` seguit de la nota que vols tocar. L'escala és C-D-E-F-G-A-B.  \nCom pots veure, hi ha 7 lletres diferents, però podem tocar més que només 7 notes.  \nEscriu un número entre 0 i 9 darrere de la lletra per triar l'escala, per exemple, després de B4 ve C5.  \nC0 és la nota més baixa que pots tocar, B9 és la més alta.\n\n### Exercici  \nProva el codi d'exemple i després experimenta amb ell! Pots crear la teva pròpia melodia?  \nEn el següent nivell aprendràs a tocar algunes cançons ja existents."
+                example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
+            4:
+                story_text: "Utilitza la comanda `{clear}` per crear una màquina de karaoke!\n\n### Exercici\nAcaba la versió de karaoke de 'Plou i fa sol'. \nDesprés, crea una versió de karaoke de qualsevol cançó que t'agradi!\n"
+                example_code: "```\n{print} \"Plou i fa sol\"\n{play} G\n{play} E\n{play} F\n{play} G\n{clear}\n{print} \"Les bruixes es pentinen\"\n{play} A\n{play} F\n{play} F\n{play} F\n{play} A\n{play} G\n{play} E\n{clear}\n{print} \"Plou i fa sol\"\n{play} G\n{play} E\n{play} F\n{play} G\n{clear}\n{print} \"Les bruixes porten dol\"\n{play} A\n```\n"
+            3:
+                example_code: "```\nnotes {is} A4, B4, C4\n{play} notes {at} {random}\n{play} notes {at} {random}\n{play} notes {at} {random}\n```\n"
+                story_text: "Crea una melodia aleatòria!\n\n### Exercici  \nEl codi d'exemple crea una melodia aleatòria, però és molt curta i no s'utilitzen massa notes.\nAfegeix més notes a la llista i crea una melodia més llarga copiant la darrera línia unes quantes vegades.\n"
+            5:
+                story_text: "No sempre has d'utilitzar la comanda `{play}` per tocar tota una cançó, de vegades només vols tocar una nota. \nPer exemple, si vols fer un qüestionari, pots tocar una nota alta i alegre si la resposta és correcta i una nota baixa i trista si la resposta és incorrecta.\n\n### Exercici\nAcaba la primera pregunta afegint una línia de codi que toqui una nota C3 si es dona una resposta incorrecta.  \nDesprés, pensa en 3 preguntes més per afegir a aquest qüestionari.\n"
+                example_code: "```\nresposta {is} {ask} 'Quina és la capital de Zimbabwe?'\n{if} resposta {is} Harare {play} C6\n_\n```\n"
+            6:
+                story_text: "En lloc de tocar notes, ara també pots tocar números. Simplement, escriu `{play} 1` per la nota més baixa, `{play} 70` per la nota més alta, o qualsevol número entremig.\n\n### Exercici\nAixò demana matemàtiques musicals! Prova el codi d'exemple unes quantes vegades amb diferents números inicials.  \nDesprés, mira si pots compondre una cançó utilitzant els números.\n"
+                example_code: "```\nnum = {ask} \"Digues un número de l'1 al 67\"\n{print} num\n{play} num\nnum = num + 1\n{print} num\n{play} num\nnum = num + 1\n{print} num\n{play} num\n```\n"
+            7:
+                example_code: "```\n{print} 'Quan les oques van al camp'\n{repeat} 2 {times} {play} C4\n{repeat} 2 {times} {play} G4\n_\n```\n"
+                story_text: "Utilitzar la comanda `{repeat}` pot fer que els teus codis per a melodies siguin molt més curts!\n\n### Exercici\nAcaba el codi per a \"Quan les oques van al camp\" usant la comanda `{repeat}`.\nDesprés, torna a les cançons que has fet en els nivells anteriors. Pots fer més curts aquells codis també?\n"
+        description: Reprodueix una nota!

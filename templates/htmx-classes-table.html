@@ -17,7 +17,7 @@
                 {{class.name|e}}
               </a>
             </td>
-            <td id="teacher_cell" class="text-center p-2">{{class.teacher}}</td>
+            <td data-cy="teacher_cell" class="text-center p-2">{{class.teacher}}</td>
             <td class="text-center p-2">{{class.students|length}}</td>
             <td class="text-center p-2">
               <div class="flex justify-center text-blue-900">
@@ -26,7 +26,7 @@
                   <span class="fas fa-pen block my-auto lg:my-0"></span>
                   <span class="hidden lg:block mt-1">{{_('customize')}}</span>
                 </button>
-                <button class="flex flex-col w-1/4" data-action="duplicate_class"
+                <button class="flex flex-col w-1/4"
                   data-cy="duplicate_{{class.name}}"
                   onclick='hedyApp.duplicate_class("{{class.id}}", "{{class.second_teachers}}", {{_('second_teacher_copy_prompt')|default(None)|tojson}}, {{_('class_name_prompt')|default(None)|tojson}}, {% if class.teacher != username %}"{{class.name}}"{% else %}""{% endif %})'>
                   <span class="fas fa-copy block my-auto lg:my-0"></span>
