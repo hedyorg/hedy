@@ -137,11 +137,13 @@ class NullRecord(LogRecord):
         return {}
 
     def record_exception(self, exc):
-        self.set(fault=1, error_message=str(exc))
+        pass
 
 
 THREAD_LOCAL = threading.local()
-THREAD_LOCAL.current_log_record = NullRecord()
+
+# Can be a singleton because it's immutable
+NULL_RECORD = NullRecord()
 
 
 def begin_global_log_record(**kwargs):
@@ -149,42 +151,39 @@ def begin_global_log_record(**kwargs):
     THREAD_LOCAL.current_log_record = LogRecord(**kwargs)
 
 
-def read_global_log_record():
+def _current_log_record():
     """Read the current global log record."""
-    return THREAD_LOCAL.current_log_record.as_data()
+    if hasattr(THREAD_LOCAL, "current_log_record"):
+        return THREAD_LOCAL.current_log_record
+    return NULL_RECORD
 
 
 def finish_global_log_record(exc=None):
     """Finish the global log record, and return it."""
     try:
         # When developing, this can sometimes get called before 'current_log_record' has been set.
-        if hasattr(THREAD_LOCAL, "current_log_record"):
-            record = THREAD_LOCAL.current_log_record
-            if exc:
-                record.record_exception(exc)
-            record.finish()
-            return record
-        return NullRecord()
+        record = _current_log_record()
+        if exc:
+            record.record_exception(exc)
+        record.finish()
+        return record
     finally:
-        THREAD_LOCAL.current_log_record = NullRecord()
+        THREAD_LOCAL.current_log_record = NULL_RECORD
 
 
 def log_value(**kwargs):
     """Log values into the currently globally active Log Record."""
-    if hasattr(THREAD_LOCAL, "current_log_record"):
-        # For some malformed URLs, the records are not initialized,
-        # so we check whether there's a current_log_record
-        THREAD_LOCAL.current_log_record.set(**kwargs)
+    _current_log_record().set(**kwargs)
 
 
 def log_time(name):
     """Log a time into the currently globally active Log Record."""
-    return THREAD_LOCAL.current_log_record.timer(name)
+    return _current_log_record().timer(name)
 
 
 def log_counter(name, count=1):
     """Increase the count of something in the currently globally active Log Record."""
-    return THREAD_LOCAL.current_log_record.inc(name, count)
+    return _current_log_record().inc(name, count)
 
 
 def timed(fn):
@@ -217,8 +216,8 @@ def timed_as(name):
 
 def emergency_shutdown():
     """The process is being killed. Do whatever needs to be done to save the logs."""
-    THREAD_LOCAL.current_log_record.set(terminated=True)
-    THREAD_LOCAL.current_log_record.finish()
+    _current_log_record().set(terminated=True)
+    _current_log_record().finish()
     LOG_QUEUE.emergency_save_to_disk()
 
 
