@@ -270,6 +270,7 @@ adventures:
                     _
                     {print} Você conseguiu um milkshake de sabores {at} {random}
                     ```
+        name: '{add} {to_list} & {remove} {from}'
     and_or_command:
         default_save_name: e ou
         description: introduzindo {and} & {or}
@@ -286,6 +287,7 @@ adventures:
                     {if} nome {is} 'Hedy' {and} idade {is} 2
                         {print} 'Você é a verdadeira Hedy!'
                     ```
+        name: '{and} & {or}'
     ask_command:
         default_save_name: comando_pergunte
         description: Introdução ao comando {ask}
@@ -334,11 +336,11 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercício
-                    Na aba anterior, você praticou a definição de variáveis com o comando `{is}`.
+                    Na aventura anterior, você praticou a definição de variáveis com o comando `{is}`.
                     Você criou pelo menos 3 variáveis e usou elas com um comando de imprimir.
                     Agora, ao invés de definir as variáveis, queremos que você as torne interativas, assim como fizemos em nosso exemplo.
 
-                    Copie o seu código da aba anterior e torne as variáveis interativas usando comandos `{ask}`.
+                    Copie o seu código da aventura anterior e torne as variáveis interativas usando comandos `{ask}`.
                 example_code_2: |
                     ```
                     animal_favorito {is} {ask} Qual é o seu animal favorito?
@@ -351,6 +353,8 @@ adventures:
                     nome = {input}('Qual é o seu nome?')
                     {print}('Então o seu nome é ', nome)
                     ```
+                story_text: A última coisa que teremos de mudar para que o código seja de Python é trocar `{ask}` por `{input}`.
+        name: '{ask}'
     calculator:
         name: Calculadora
         default_save_name: Calculadora
@@ -418,6 +422,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 10
                         {print} i * número
                     ```
+                story_text: "Com um `{for}`, você pode simplificar o programa de praticar a tabuada de multiplicação.\n\n### Exercício 1\nMelhore o código exemplo de forma que ele imprima uma tabuada bonitinha: <br> \"1 vezes 10 é 10\", \"2 vezes 10 é 20\", etc.\n\n### Exercício 2\nVolte ao seu código do nível 10 da calculadora de tabuada, e então o modifique para que ele use `{for}` e `{range}`.\n"
             12:
                 story_text: |
                     Neste nível, você pode fazer uma calculadora que funciona com números decimais.
@@ -465,12 +470,24 @@ adventures:
                     média = {call} _
                     {print} 'A sua média foi ' média
                     ```
+            10:
+                story_text: "Este jogo de calculadora te ajuda a praticar a tabuada de multiplicação!\n### Exercício\nPreencha as lacunas. Queremos que o programa faça estas perguntas:\n```\nQuanto é 1 vezes 1?\nQuanto é 1 vezes 2?\nQuanto é 1 vezes 3?\nQuanto é 2 vezes 1?\nQuanto é 2 vezes 2?\nQuanto é 2 vezes 3?\nQuanto é 3 vezes 1?\nQuanto é 3 vezes 2?\nQuanto é 3 vezes 3?\n_\n```\n"
+                example_code: "```\nnúmeros = 1, 2, 3\n{for} _\n    {for} _\n        resposta = {ask} _\n        correta = número_1 * número_2\n        {if} resposta {is} correta\n            {print} 'Ótimo trabalho!'\n        {else}\n            {print} 'Isso está errado. A resposta certa é ' correta\n```\n"
     calculator_2:
         default_save_name: Calculadora 2
         description: Calculadora 2
+        name: Calculadora 2
+        levels:
+            14:
+                example_code: "```\n# Use seu próprio código da aventura anterior.\n```\n"
     clear_command:
         default_save_name: comando_limpe
         description: comando {clear}
+        name: '{clear}'
+        levels:
+            4:
+                example_code: "```\n{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'espere...'\n{sleep} 3\n{clear}\n{print} 'SURPRESA!'\n```\n"
+                story_text: "Hora de aprender um comando novo! Com o `{clear}`, você conseque limpar todo o texto da sua tela de saída. Dessa forma, você pode evitar que sua tela fique cheia demais de texto.\nAtenção! Se você for usar um comando `{clear}`, talvez você também precise colocar um `{sleep}` logo acima dele. Caso contrário, Hedy vai limpar sua tela sem te dar tempo para ler, como acontece nesse exemplo!\n"
     debugging:
         name: depuração
         default_save_name: depuração
@@ -551,6 +568,7 @@ adventures:
                 story_text: |-
                     ### Exercício
                     Depure este código. Boa sorte!
+                example_code: "**Atenção! Este código precisa ser depurado!**\n```\n{print} Bem-vindo(a) à Piscina Hedy!\naula {is} {ask} 'Você veio participar de uma aula de natação de hoje?'\n{if} aula sim\n{print} 'Ótimo! Você vai entrar em uma aula!\n{print} {else} 'Você não vai entrar em uma aula'\ndesconto {is} 'Você tem um cupom de desconto?'\n{if} desconto {is} sim\ndesconto_resposta {is} {ask} 'Qual é o código do seu cupom?'\ncupons_de_desconto = Senior4231, Estudante8786, NovoMembro6709\n{if} desconto_resposta {is} {in} copuns_de_desconto\n{print} 'Vai custar R$9,90'\n'Vai custar R$15,50'\n{print} 'Tenha um bom mergulho!'\n```\n"
             6:
                 story_text: |-
                     ### Exercício
@@ -882,18 +900,18 @@ adventures:
                     Experimente o código você mesmo(a)! O botão amarelo copia o código exemplo ao seu campo de programação.
                     Depois, aperte o botão verde escrito "Executar código" embaixo do campo de programação para executar o código.
 
-                    Preparado(a)? Então vá para a próxima aba para aprender a fazer seus próprios códigos!
+                    Preparado(a)? Então vá para a próxima aventura para aprender a fazer seus próprios códigos!
                 example_code: |
                     ```
                     {print} Olá mundo!
                     ```
             2:
                 story_text: |
-                    Parabéns! Você chegou ao nível 2.Você provavelmente já fez alguns códigos incríveis!
-                    No primeiro nível você pode ter notado que o comando `{echo}` só pode salvar um pouco de informação de cada vez.
+                    Parabéns! Você chegou ao nível 2. Você provavelmente já fez alguns códigos incríveis!
+                    No primeiro nível, você pode ter notado que o comando `{echo}` só pode salvar um pouco de informação de cada vez.
                     Por exemplo, na aventura no restaurante, você podia ecoar o que o cliente queria comer, ou o que ele queria beber, mas não os dois em uma mesma frase.
-                    Isso muda no nível 2. No nível 2 você vai aprender a trabalhar com variáveis, que lhe permitem salvar múltiplos pedaços de informações e imprimi-los onde você quiser.
-                    Então vamos para a próxima aba!
+                    Isso muda no nível 2. Agora, você vai aprender a trabalhar com variáveis, que lhe permitem salvar múltiplos pedaços de informações e imprimi-los onde você quiser.
+                    Então vamos para a próxima aventura!
                 example_code: |
                     **Atenção! Este código não irá funcionar!**
                     Na Hedy, comandos vão mudar às vezes. `{echo}`, por exemplo, só funciona no nível 1. Nesse nível, você aprenderá uma maneira melhor de repetir as respostas.
@@ -906,10 +924,10 @@ adventures:
                     ```
             3:
                 story_text: |
-                    No último nível você aprendeu o que é uma variável e como usá-las para fazer sua aventura mais interativa.
-                    Mas... isso não é a única coisa que você pode fazer com variáveis! Você também pode usar variáveis para fazer listas.
+                    No nível anterior, você aprendeu o que são variáveis e como usá-las para tornar suas aventuras mais interativas.
+                    Mas... isso não é a única coisa que você pode fazer com variáveis! Você também pode usá-las para fazer listas.
                     E você pode até deixar a Hedy escolher uma palavra aleatória da lista, o que lhe permite criar jogos de verdade!
-                    Dê uma olhada na próxima aba!
+                    Dê uma olhada na próxima aventura!
             4:
                 story_text: |
                     Nos níveis anteriores, você esteve praticando com variáveis, mas talvez você tenha passado por este problema.
@@ -931,11 +949,11 @@ adventures:
                     ```
             5:
                 story_text: |
-                    Nos níveis anteriores, você já aprendeu a usar `{at} {random}`, que fez seus jogos serem diferentes toda vez que você os executava.
+                    Nos níveis anteriores, você já aprendeu a usar `{at} {random}`, o que fez seus jogos serem diferentes toda vez que você os executava.
                     Mas não chega a ser interativo, o(a) jogador(a) não tem qualquer influência sobre o que acontece no jogo.
 
                     Neste nível, você vai aprender o comando `{if}`, que permite que você dê respostas diferentes em seu programa. Assim, você pode programar uma senha secreta para seu computador, por exemplo.
-                    Então vamos para a próxima aba aprender o novo comando!
+                    Então vamos para a próxima aventura aprender o novo comando!
                 example_code: |
                     ```
                     senha {is} {ask} 'Qual é a senha correta?'
@@ -966,9 +984,9 @@ adventures:
             7:
                 story_text: |
                     Ótimo trabalho! Você chegou ao próximo nível, o que significa que você praticou com `{if}` e `{else}`. Você provavelmente notou que seus códigos estão ficando mais e mais longos.
-                    Por exemplo, se você quiser programar 'Parabéns pra Você' (versão simplificada).
+                    Por exemplo, imagine se você quiser programar 'Parabéns pra Você' (versão simplificada).
 
-                    É muito código para imprimir praticamente as mesmas palavras de novo e de novo. Por sorte, na próxima aba, você irá aprender uma solução com o comando `{repeat}`, que permite que você repita uma mesma linha de código várias vezes.
+                    É muito código para imprimir praticamente as mesmas palavras de novo e de novo. Felizmente, na próxima aventura, você irá aprender uma solução com o comando `{repeat}`, que permite que você repita uma mesma linha de código várias vezes.
                 example_code: |
                     ```
                     {print} 'parabéns pra você'
@@ -982,7 +1000,7 @@ adventures:
                     Este nível permite que você agrupe algumas linhas de código e repita aquele grupo inteiro de linhas de uma vez!
                 example_code: |
                     ```
-                    {repeat} 5 {times} {print} 'Na próxima aba você vai poder repetir várias linhas de código por vez!'
+                    {repeat} 5 {times} {print} 'Na próxima aventura você vai poder repetir várias linhas de código por vez!'
                     ```
             9:
                 story_text: |
@@ -1100,7 +1118,7 @@ adventures:
                         {for} som {in} sons
                             {print} 'Um(a) ' animal ' diz ' som
                     ```
-                    Nota: Esses códigos não vão funcionar dessa maneira nesse nível. Vá à próxima aba para ver quais partes você precisa corrigir.
+                    Nota: Esses códigos não vão funcionar dessa maneira nesse nível. Vá para a próxima aventura para ver quais partes você precisa corrigir.
             17:
                 story_text: |
                     Agora vamos mudar um pouco a indentação. Toda vez que precisarmos de uma indentação, precisaremos colocar `:` na linha anterior a ela.
@@ -1111,6 +1129,7 @@ adventures:
                 story_text: |-
                     Chegamos ao código Python real! Isso significa que precisamos usar parênteses com {print} e {range} de agora em diante.
                     {print}('Meu nome é ', nome)
+        default_save_name: introdução
     dice:
         name: Dado
         default_save_name: Dado
@@ -1318,6 +1337,8 @@ adventures:
                     {else}:
                         {print} 'Mais sorte na próxima..'
                     ```
+        name: '{elif}'
+        description: '{elif}'
     for_command:
         default_save_name: para
         description: comando {for}
@@ -1333,6 +1354,8 @@ adventures:
                     {for} animal {in} animais
                         {print} 'Eu amo ' animal
                     ```
+                example_code_2: "```\nações = bata palmas, bata os pés, grite viva!\n_\n    {repeat} 2 {times}\n        {print} 'Se você está contente, ' ação\n        {sleep} 2\n    {print} 'Se você está contente, quer mostrar pra toda a gente'\n    {print} 'Se você está contente, ' ação\n    {sleep} 3\n```\n"
+                story_text_2: "### Exercício\nComplete este código adicionando `{for} ação {in} ações` à linha 2.\n"
             11:
                 story_text: |-
                     In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
@@ -1353,6 +1376,10 @@ adventures:
                         {print} i
                     {print} 'Prontos ou não, lá vou eu!'
                     ```
+            18:
+                example_code: "```\n{for} i {in} {range}(1,5):\n    {print} (i)\n```\n"
+                story_text: "Por fim, vamos converter `{for} i {in} {range} 1 {to} 5` em código Python, assim:\n"
+        name: '{for}'
     fortune:
         name: Vidente
         default_save_name: Vidente
@@ -1566,6 +1593,8 @@ adventures:
                     preço_novo = _ calcular_preço_novo {with} preço_antigo, _
                     {print} 'O preço novo é ' preço_novo ' reais'
                     ```
+        name: funções
+        description: funções
     guess_my_number:
         default_save_name: adivinhe o número
     harry_potter:
@@ -2747,3 +2776,23 @@ adventures:
                     ```
     years:
         description: Contagem regressiva para o Ano Novo!
+    blackjack:
+        levels:
+            17:
+                story_text: "Vinte-e-um (ou \"Blackjack\") é um simples jogo de cartas em que você tem que chegar o mais perto de 21 possível. Você tem 2 cartas, cada uma com seu valor numérico, e as cartas especiais (Valete, Dama e Rei) valem 10 pontos.\nO Ás pode valer ou 1, ou 11 (você escolhe na hora). O \"dealer\", seu oponente, também ganha duas cartas.\nSe você quiser, você pode pegar outra carta e, então, os pontos dela serão adicionados ao seu total. O dealer também pode escolher outra carta.\nMas tome cuidado para não passar dos 21 pontos, senão você perde!\nO(a) jogador(a) que chegar mais perto de 21, sem ir além disso, vence!\n\n### Exercício\nNesta aventura, vamos escrever o código da primeira parte do nosso jogo de Vinte-e-um. Vamos criar uma função para calcular quantos pontos vale uma carta.\n\n***Defina as variáveis***\nComece fazendo uma lista de todas as cartas do 2 ao Ás. Depois, faça uma lista das cartas especiais: Valete, Dama e Rei. Então, escolha uma carta aleatória.\n\n***Crie uma função para calcular os pontos***\nCrie uma função que calcule quantos pontos vale uma certa carta.\nAs cartas especiais valem 10 pontos cada, o Ás vale 11 e todas as outras cartas valem o próprio número.\nRetorne a variável `pontos` no final da função.\n\n***Teste a função***\nTeste se sua função está funcionando corretamente. Complete o primeiro comando de imprimir com a carta que você tirou. Em seguida, complete a segunda linha chamando a função com carta_1.\nExecute o código algumas vezes. Feliz com os resultados? Ótimo! Então você já pode remover a parte do teste e seguir para a próxima aventura!\n"
+                example_code: "```\n{print} 'VINTE-E-UM'\n\n# Defina estas variáveis\ncartas = _\ncartas_especiais = _\ncarta_1 =\n\n# Crie uma função para calcular os pontos\n{define} calcular_pontos {with} carta:\n    {if} carta {in} cartas_especiais:\n        pontos = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ pontos\n\n# Teste sua função\n{print} 'Sua carta é ' _\n{print} 'Ela vale ' _ ' pontos'.\n```\n"
+        description: Tente chegar o mais perto de 21 que conseguir
+        name: Vinte-e-um
+        default_save_name: Vinte-e-um
+    blackjack_3:
+        description: Vinte-e-um parte 3
+        name: Vinte-e-um 3
+        default_save_name: Vinte_e_um_3
+    blackjack_4:
+        name: Vinte-e-um 4
+        default_save_name: Vinte_e_um_4
+        description: Vinte-e-um parte 4
+    blackjack_2:
+        name: Vinte-e-um 2
+        default_save_name: Vinte_e_um_2
+        description: Vinte-e-um parte 2
