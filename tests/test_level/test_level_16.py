@@ -328,7 +328,7 @@ class TestsLevel16(HedyTester):
             skip_faulty=False
         )
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparison_with_list_access(self, comparison):
         code = textwrap.dedent(f"""\
             balletje = 0

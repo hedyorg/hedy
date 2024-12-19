@@ -22,18 +22,18 @@ def keywords_to_dict(lang="nl"):
 
     # as we mutate this dict, we have to make a copy
     # as YamlFile re-uses the yaml contents
-    command_combinations = copy.deepcopy(
+    keyword_combinations = copy.deepcopy(
         YamlFile.for_file(yaml_filesname_with_path).to_dict()
     )
-    for k, v in command_combinations.items():
-        command_combinations[k] = v.split("|")
+    for k, v in keyword_combinations.items():
+        keyword_combinations[k] = v.split("|")
 
-    return command_combinations
+    return keyword_combinations
 
 
 def keywords_to_dict_single_choice(lang):
-    command_combinations = keywords_to_dict(lang)
-    return {k: v[0] for (k, v) in command_combinations.items()}
+    keyword_combinations = keywords_to_dict(lang)
+    return {k: v[0] for (k, v) in keyword_combinations.items()}
 
 
 def all_keywords_to_dict():
@@ -154,7 +154,7 @@ def replace_token_in_line(line, rule, original, target):
     return before + rule.value.replace(original, target) + after
 
 
-def find_command_keywords(
+def find_keywords(
     input_string, lang, level, keywords, start_line, end_line, start_column, end_column
 ):
     parser = hedy.get_parser(level, lang, True, hedy.source_map.skip_faulty)

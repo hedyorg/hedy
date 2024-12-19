@@ -985,7 +985,7 @@ class TypeValidator(Transformer):
 
             if command in translatable_keywords:
                 keywords = translatable_keywords[command]
-                result = hedy_translation.find_command_keywords(
+                result = hedy_translation.find_keywords(
                     self.input_string,
                     self.lang,
                     self.level,

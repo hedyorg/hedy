@@ -134,7 +134,7 @@ class HedyTester(unittest.TestCase):
     equality_comparison_with_is = ['is', '=']
     equality_comparisons = ['==', '=']
     number_comparisons = ['>', '>=', '<', '<=']
-    comparison_commands = number_comparisons + ['!=']
+    comparisons = number_comparisons + ['!=']
     arithmetic_operations = ['+', '-', '*', '/']
     in_and_not_in = ['in', 'not in']
     quotes = ["'", '"']

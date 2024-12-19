@@ -491,7 +491,7 @@ class TestsLevel17(HedyTester):
             exception=hedy.exceptions.InvalidTypeCombinationException
         )
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparisons(self, comparison):
         code = textwrap.dedent(f"""\
             leeftijd is ask 'Hoe oud ben jij?'
