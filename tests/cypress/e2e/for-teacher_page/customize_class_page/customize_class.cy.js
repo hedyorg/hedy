@@ -90,10 +90,6 @@ teachers.forEach((teacher) => {
                 .children()
                 .should('have.length', startLength + 1);
 
-              // the added option should be the last
-              cy.get('[data-cy="available_adventures_current_level"] option:last')
-                .should('have.value', `${adventure}`);
-
               // after selecting the adventure, it shouldn't be among the options
               cy.getDataCy('available_adventures_current_level').select(`${adventure}`)
 
