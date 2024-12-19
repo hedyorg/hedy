@@ -1,5 +1,4 @@
 # coding=utf-8
-from flask import template_rendered
 import base64
 import binascii
 import collections
