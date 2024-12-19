@@ -96,7 +96,7 @@ babel = Babel(app, locale_selector=get_locale)
 jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)
 
-CHEATSHEETS = collections.defaultdict(hedy_content.NoSuchCommand)
+CHEATSHEETS = collections.defaultdict(hedy_content.NoSuchFile)
 for lang in ALL_LANGUAGES.keys():
     CHEATSHEETS[lang] = hedy_content.Cheatsheets(lang)
 
