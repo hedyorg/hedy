@@ -96,9 +96,9 @@ babel = Babel(app, locale_selector=get_locale)
 jinja_partials.register_extensions(app)
 app.template_filter('tojson')(proper_tojson)
 
-COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
+CHEATSHEETS = collections.defaultdict(hedy_content.NoSuchCommand)
 for lang in ALL_LANGUAGES.keys():
-    COMMANDS[lang] = hedy_content.Commands(lang)
+    CHEATSHEETS[lang] = hedy_content.Cheatsheets(lang)
 
 ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
@@ -978,15 +978,15 @@ def version_page():
                            commit=commit)
 
 
-@app.route('/commands/<id>')
-def all_commands(id):
+@app.route('/keywords/<id>')
+def all_keywords(id):
     program = DATABASE.program_by_id(id)
     code = program.get('code')
     level = program.get('level')
     lang = program.get('lang')
     return render_template(
-        'commands.html',
-        commands=hedy.all_keywords(code, level, lang))
+        'keywords.html',
+        keywords=hedy.all_keywords(code, level, lang))
 
 
 @app.route('/programs', methods=['GET'])
@@ -1147,7 +1147,7 @@ def tutorial_index():
     if not current_user()['username']:
         return redirect('/login')
     level = 1
-    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = CHEATSHEETS[g.lang].get_commands_for_level(level, g.keyword_lang)
     commands = hedy.keywords_per_level.get(level)
     adventures = load_adventures_for_level(level)
     parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
@@ -1299,7 +1299,7 @@ def hour_of_code(level, program_id=None):
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
     customizations['available_levels'] = available_levels
-    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = CHEATSHEETS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
@@ -1509,7 +1509,7 @@ def index(level, program_id):
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
     customizations['available_levels'] = available_levels
-    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = CHEATSHEETS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
@@ -1740,7 +1740,7 @@ def tryit(level, program_id):
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
     customizations['available_levels'] = available_levels
-    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = CHEATSHEETS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
@@ -2170,7 +2170,7 @@ def get_cheatsheet_page(level):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    commands = CHEATSHEETS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     return render_template("printable/cheatsheet.html", commands=commands, level=level)
 
