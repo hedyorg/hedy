@@ -89,11 +89,11 @@
                 <button title="{{ _('change_password') }}" class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
                   <span class="fas fa-pen block mb-4 mt-4"></span>
                 </button>
-                <button title="{{ _('programs') }}" class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}')>
+                <button title="{{ _('programs') }}" class="flex flex-col items-center" onclick="window.open('/programs?user={{student}}')">
                   <span class="fas fa-code block mb-4 mt-4"></span>
                 </button>
                 <button title="{{ _('remove') }}" class="flex flex-col items-center" hx-get="/for-teachers/class/{{ class_info['id'] }}/remove_student_modal/{{ student }}?level={{ level }}" hx-target="#modal_target"
-                    id="duplicate_class" data-cy="remove_student_{{ student }}">
+                    data-action="duplicate_class" data-cy="remove_student_{{ student }}">
                     <span class="fa-solid fa-trash text-red-500 block mb-4 mt-4 ltr:mr-4 rtl:ml-4"></span>
               </button>
               </div>
