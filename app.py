@@ -1195,7 +1195,7 @@ def tutorial_index():
     if not current_user()['username']:
         return redirect('/login')
     level = 1
-    cheatsheet = CHEATSHEETS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = CHEATSHEETS[g.lang].get_keywords_for_level(level, g.keyword_lang)
     commands = hedy.keywords_per_level.get(level)
     adventures = load_adventures_for_level(level)
     parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
@@ -1347,7 +1347,7 @@ def hour_of_code(level, program_id=None):
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
     customizations['available_levels'] = available_levels
-    cheatsheet = CHEATSHEETS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = CHEATSHEETS[g.lang].get_keywords_for_level(level, g.keyword_lang)
 
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
@@ -1557,7 +1557,7 @@ def index(level, program_id):
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
     customizations['available_levels'] = available_levels
-    cheatsheet = CHEATSHEETS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = CHEATSHEETS[g.lang].get_keywords_for_level(level, g.keyword_lang)
 
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
@@ -1788,7 +1788,7 @@ def tryit(level, program_id):
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
     customizations['available_levels'] = available_levels
-    cheatsheet = CHEATSHEETS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = CHEATSHEETS[g.lang].get_keywords_for_level(level, g.keyword_lang)
 
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
@@ -2218,7 +2218,7 @@ def get_cheatsheet_page(level):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    commands = CHEATSHEETS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    commands = CHEATSHEETS[g.lang].get_keywords_for_level(level, g.keyword_lang)
 
     return render_template("printable/cheatsheet.html", commands=commands, level=level)
 
