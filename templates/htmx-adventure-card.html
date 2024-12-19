@@ -60,7 +60,7 @@
             <pre level="{{ adventure.level }}" class="text-sm">{{ adventure.code }}</pre>
         {%endif%}
     </div>
-    <div id="actions"
+    <div
         class="flex items-center px-6 py-4 bg-gray-200 shadow-lg">
         {% if is_program %}
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{adventure.id}}'))">{{_('view_program')}}</button>
