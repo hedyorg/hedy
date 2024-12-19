@@ -16,11 +16,11 @@
         <p class="text-gray-600 mt-1"><strong>{{_('last_update')}}:</strong> {{ class.date|format_date }}</p>
     </div> -->
 
-    <div id="actions"
+    <div
         class="flex items-center gap-2 px-6 py-4 bg-gray-200 shadow-lg">
         {% if class.teacher == username %}
             <a href="/for-teachers/customize-class/{{class.id}}"
-                class="blue-btn" id="edit_class_button">
+                class="blue-btn">
                 {{_('customize_class')}}</a>
         {% endif %}
         <a href="/for-teachers/class/{{class.id}}/preview"
