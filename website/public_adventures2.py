@@ -82,6 +82,12 @@ class PublicAdventuresModule2(WebsiteModule):
             available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
             self.customizations["available_levels"].update([int(adv_level) for adv_level in available_levels])
 
+    @route("/search", methods=["GET"])
+    @requires_teacher
+    def search(self, user):
+        return str(request.args)
+
+
     @route("/", methods=["GET"])
     @route("/filter", methods=["POST"])
     @requires_teacher

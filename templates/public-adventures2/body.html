@@ -2,101 +2,83 @@
   <h1>{{_('public_adventures')}}</h1>
 
   <!-- Filter form -->
-  <div class="flex flex-col sm:flex-row items-center gap-2 justify-around bg-blue-200 shadow-md rounded-lg p-4 mb-4">
-      <form hx-get="/public-adventures2/search">
-        <div class="flex-1">
+  <div>
+    <form hx-trigger="submit" hx-get="/public-adventures2/search" hx-target="#search_results">
+      <div class="flex flex-col items-stretch md:flex-row md:items-center gap-2 justify-around bg-blue-100 shadow-md rounded-lg p-4 mb-4">
+        <div class="flex-0">
           <label for="language_select">{{_('language')}}</label>
-          <custom-select id="language_select" data-cy="language_select" data-label="{{ lang_to_sym(selectedLang) if selectedLang else _('select_lang') }}">
-             <option
-                    hx-get="/public-adventures/filter?lang=reset&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
-                    hx-target="#public_adventures"
-                    value="">{{_('select_lang')}}</option>
-                {% for lang in available_languages %}
-                  <option {% if lang == selectedLang %}selected{% endif %}
-                      hx-post="/public-adventures/filter?lang={{lang}}&level={{selectedLevel}}&tag={{selectedTag}}&search={{currentSearch}}"
-                      hx-target="#public_adventures"
-                        data-value="{{lang}}">{{lang_to_sym(lang)}}</option>
-                {% endfor %}
-          </custom-select>
         </div>
-        <div id="search" class="w-full sm:basis-1/2">
-            <input id="search_adventure"
-                data-cy="search_adventure"
-                type="search"
-                name="search"
-                value="{{currentSearch}}"
-                {% if currentSearch %}autofocus{% endif %}
-                hx-trigger="input changed delay:500ms, search"
-                hx-post="/public-adventures/filter?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
-                hx-target="#public_adventures"
-                placeholder="{{_('search')}}"
-                class="border text-black border-gray-500 rounded h-8 px-2 w-full"
-                >
+        <div class="flex-0">
+          <select
+            id="language_select"
+            name="selected_lang"
+            class="dropdown dropdown-green rounded p-2 w-full"
+            data-cy="language_select"
+            _="on change call (closest <form/>).requestSubmit()"
+            >
+            {% for lang in available_languages %}
+              <option {% if lang == selected_lang %}selected{% endif %} value="{{lang}}">{{lang_to_sym(lang)}}</option>
+            {% endfor %}
+          </select>
         </div>
-        <div class="flex w-full sm:basis-1/2 gap-2">
-            <div id="levels" class="flex-1">
-              <custom-select id="level_select" data-cy="level_select" data-label="{{_('select_levels')}}">
-                {% for level in customizations["available_levels"] %}
-                    <option {% if selectedLevel|string == level|string %}selected{% endif %}
-                        hx-post="/public-adventures/filter?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
-                        hx-target="#public_adventures"
-                        value="{{level}}"
-                    >{{ level }}</option>
-                {% endfor %}
-              </custom-select>
-            </div>
-
-            <div id="tags" class="flex-1">
-              <custom-select data-type="multiple" id="tag_select" data-cy="tag_select" data-label="{{ _('select_tag') }}">
-                {% for tag in available_tags %}
-                  {% set selected = tag in selectedTag %}
-                  <option {% if selected %}selected{% endif %}
-                  {% if selected %}
-                      hx-post="/public-adventures/filter?tag={{tag}}&reset={{selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
-                    {% else %}
-                      hx-post="/public-adventures/filter?tag={{tag + ',' +  selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
-                    {% endif %}
-                    hx-target="#public_adventures" value="{{tag}}">{{tag}}</option>
-                {% endfor %}
-              </custom-select>
-            </div>
-
-            <!-- false should be removed once reported is implemented in public_adventures.py after PR #5431 -->
-            {% if false and is_super_teacher %}
-              <div id="report" class="flex-1">
-                <div class="dropdown relative" data-type="single" id="report-select" data-value="{{selectedReport}}">
-                  <button class="toggle-button font-semibold rounded inline-flex justify-between
-                    appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
-                    onclick="$('#report_dropdown').slideToggle('medium');">
-                    <span class="label" data-value="reported">{{selectedReported}}reported?</span>
-                    <svg id="keyword_arrow_report" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </button>
-                  <div class="dropdown-menu dropdown-blue z-30 mt-2 w-full" id="report_dropdown"
-                    style="display: none; width: 100%;"
-                    _="on mutation of @style
-                        set arrow to #keyword_arrow_report
-                        if *display == 'none'
-                            remove .rotate-180 from arrow
-                        else if not arrow.classList.contains('rotate-180')
-                            add .rotate-180 to arrow
-                        end">
-                          <div class="option {% if selected %}selected{% endif %}"
-                            {% if selected %}
-                            {% else %}
-                            {% endif %}>reported</div>
-                          <div class="option {% if selected %}selected{% endif %}"
-                          {% if selected %}
-                          {% else %}
-                          {% endif %}>not reported</div>
-                    </div>
-                  </div>
-              </div>
-            {% endif %}
-
+        <div class="flex-0">
+          <label for="level_select">{{_('level')}}</label>
         </div>
-      </form>
+        <div class="flex-0">
+          <select
+            id="level_select"
+            name="selected_level"
+            class="dropdown dropdown-green rounded p-2 w-full"
+            data-cy="level_select"
+            data-label="{{_('select_levels')}}"
+            _="on change call (closest <form/>).requestSubmit()"
+            >
+            <option {% if selected_level|string == "" %}selected{% endif %} value="">{{_('all')}}</option>
+            {% for level in available_levels %}
+              <option {% if selected_level|string == level|string %}selected{% endif %} value="{{level}}">{{ level }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="flex-0">
+          <label for="q">{{_('containing')}}</label>
+        </div>
+        <div class="flex-1 w-full">
+          <input
+            type="search"
+            id="q"
+            name="q"
+            class="border text-black border-gray-500 rounded p-2 w-full"
+            data-cy="search_adventure"
+            value="{{q}}"
+            placeholder="{{_('search')}}"
+            _="on keyup debounced at 1s call (closest <form/>).requestSubmit()"
+            >
+        </div>
+        <div class="flex-0">
+          <label for="tag_select">{{_('tags')}}</label>
+        </div>
+        <div class="flex-0">
+          <select
+            id="tag_select"
+            name="selected_tag"
+            class="dropdown dropdown-green rounded p-2 w-full"
+            data-cy="tag_select"
+            _="on change call (closest <form/>).requestSubmit()"
+            >
+            <option {% if selected_tag|string == "" %}selected{% endif %} value="">{{_('all')}}</option>
+            {% for tag in available_tags %}
+              <option {% if selected_tag == tag|string %}selected{% endif %} value="{{tag}}">{{ tag }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="flex-0">
+          <input type="submit" value="{{_('search')}}" class="green-btn">
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="search_results">
   </div>
 
     <div id="_body">
