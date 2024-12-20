@@ -1,0 +1,262 @@
+import uuid
+from flask import g, request, make_response
+from website.flask_helpers import gettext_with_fallback as gettext
+import json
+
+import hedy
+import hedy_content
+import utils
+from config import config
+from website.auth import requires_teacher
+from website.flask_helpers import render_template
+from jinja_partials import render_partial
+
+from .database import Database
+from .website_module import WebsiteModule, route
+from safe_format import safe_format
+
+cookie_name = config["session"]["cookie_name"]
+invite_length = config["session"]["invite_length"] * 60
+
+
+class PublicAdventuresModule2(WebsiteModule):
+    def __init__(self, db: Database):
+        super().__init__("public_adventures2", __name__, url_prefix="/public-adventures2")
+        self.db = db
+        self.adventures = {}
+        self.customizations = {"available_levels": set()}
+        self.available_languages = set()
+        self.available_tags = set()
+
+    def init(self, user):
+        included = {}
+        self.adventures = {}
+        self.available_languages = set()
+        self.available_tags = set()
+
+        public_adventures = self.db.get_public_adventures()
+        public_adventures = sorted(public_adventures, key=lambda a: a["creator"] == user["username"], reverse=True)
+        for adventure in public_adventures:
+            # The adventure lang can be None if it is not set
+            adv_lang = adventure.get("language")
+            if adv_lang:
+                self.available_languages.update([adv_lang])
+            adv_tags = adventure.get("tags", [])
+            self.available_tags.update(adv_tags)
+            # NOTE: what if another author has an adventure with the same name?
+            # Perhaps we could make this name#creator!
+            if included.get(adventure["name"]):
+                continue
+            public_profile = self.db.get_public_profile_settings(adventure.get('creator'))
+            included[adventure["name"]] = True
+
+            content = safe_format(adventure.get('formatted_content', adventure['content']),
+                                  **hedy_content.KEYWORDS.get(g.keyword_lang))
+
+            current_adventure = {
+                "id": adventure.get("id"),
+                "name": adventure.get("name"),
+                "short_name": adventure.get("name"),
+                "author": adventure.get("author", adventure["creator"]),
+                "creator": adventure.get("creator"),
+                "creator_public_profile": public_profile,
+                "date": utils.localized_date_format(adventure.get("date")),
+                "level": adventure.get("level"),
+                "levels": adventure.get("levels"),
+                "language": adv_lang,
+                "cloned_times": adventure.get("cloned_times"),
+                "tags": adv_tags,
+                "text": content,
+                "is_teacher_adventure": True,
+                "flagged": adventure.get("flagged", 0),
+            }
+
+            # save adventures for later usage.
+            for _level in adventure.get("levels", [adventure.get("level")]):
+                _level = int(_level)
+                if self.adventures.get(_level):
+                    self.adventures[_level].append(current_adventure)
+                else:
+                    self.adventures[_level] = [current_adventure]
+
+            available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
+            self.customizations["available_levels"].update([int(adv_level) for adv_level in available_levels])
+
+    @route("/", methods=["GET"])
+    @route("/filter", methods=["POST"])
+    @requires_teacher
+    def filtering(self, user, index_page=False):
+        index_page = request.method == "GET"
+
+        level = int(request.args.get("level", 1))
+        if index_page or not self.adventures or not self.adventures.get(level):
+            self.init(user)
+
+        adventure = request.args.get("adventure", "")
+        tag = request.args.get("tag", "")
+        search = request.form.get("search", request.args.get("search", ""))
+        default_lang = g.lang if index_page else None
+        language = request.args.get("lang", default_lang)
+
+        adventures = self.adventures.get(level, [])
+        # adjust available filters for the selected level.
+        self.update_tag_filter(adventures)
+        self.update_lang_filter(adventures)
+
+        # In case a selected set of adventures doesn't have the given lang to filter on,
+        # we decide that that language cannot be used for filtering.
+        if not any(adv.get("language") == language for adv in adventures):
+            language = ""
+
+        if language:
+            adventures = [adv for adv in adventures if adv.get("language") == language]
+            # adjust available tags after filtering on languages
+            self.update_tag_filter(adventures)
+
+        tags = []
+        if tag:
+            toReset = request.args.get("reset")
+            if toReset:
+                # then it's the current selected tags, so remove current's tag
+                tags = [_tag for _tag in toReset.split(",") if _tag != tag]
+            else:
+                tags = tag.split(",")
+
+            tags = [_tag for _tag in tags if _tag]  # filter out empty strings.
+            for _tag in tags:
+                # In case a selected set of adventures doesn't have the given tag to filter on,
+                # we decide that that tag cannot be used for filtering.
+                if not any(_tag in adv.get("tags") for adv in adventures):
+                    tags.remove(_tag)
+            if tags:
+                adventures = [adv for i, adv in enumerate(adventures) if any(tag in tags for tag in adv.get("tags"))]
+            # adjust available languages after fitlering on tags.
+            self.update_lang_filter(adventures)
+
+        if search:
+            adventures = [adv for adv in adventures if search.lower() in adv.get("name").lower()]
+            self.update_lang_filter(adventures)
+            self.update_tag_filter(adventures)
+
+        initial_tab = None
+        initial_adventure = None
+        commands = {}
+        prev_level = None
+        next_level = None
+        if adventures:
+            initial_tab = adventures[0]["name"]
+            initial_adventure = adventures[-1]
+
+            # Add the commands to enable the language switcher dropdown
+            commands = hedy.commands_per_level.get(level)
+            prev_level, next_level = utils.find_prev_next_levels(list(self.customizations["available_levels"]), level)
+
+        js = dict(
+            page='code',
+            lang=g.lang,
+            level=level,
+            adventures=adventures,
+            initial_tab='',
+            current_user_name=user['username'],
+        )
+
+        temp = render_template(
+            "public-adventures2/index.html" if index_page else "public-adventures2/body.html",
+            adventures=adventures,
+            teacher_adventures=adventures,
+            available_languages=self.available_languages,
+            available_tags=self.available_tags,
+            selectedAdventure=adventure,
+            selectedLevel=level,
+            selectedLang=language,
+            # selectedTag=",".join(self.selectedTag),
+            selectedTag=",".join(tags),
+            currentSearch=search,
+
+            user=user,
+            current_page="public-adventures",
+            page_title=gettext("title_public-adventures"),
+
+            initial_adventure=initial_adventure,
+            initial_tab=initial_tab,
+            commands=commands,
+            level=level,
+            max_level=18,
+            level_nr=str(level),
+            prev_level=prev_level,
+            next_level=next_level,
+
+            customizations=self.customizations,
+
+            public_adventures_page=True,
+            javascript_page_options=js,
+        )
+
+        response = make_response(temp, 200)
+        response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
+        return response
+
+    @route("/clone/<adventure_id>", methods=["POST"])
+    @requires_teacher
+    def clone_adventure(self, user, adventure_id):
+        # TODO: perhaps get it from self.adventures
+        current_adventure = self.db.get_adventure(adventure_id)
+        if not current_adventure:
+            return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
+        elif current_adventure["creator"] == user["username"]:
+            return make_response(gettext("adventure_duplicate"), 400)
+
+        adventures = self.db.get_teacher_adventures(user["username"])
+        for adventure in adventures:
+            if adventure["name"] == current_adventure["name"]:
+                return make_response(gettext("adventure_duplicate"), 400)
+
+        level = current_adventure.get("level")
+        adventure = {
+            "id": uuid.uuid4().hex,
+            "cloned_from": adventure_id,
+            "name": current_adventure.get("name"),
+            "content": current_adventure.get("content"),
+            "public": 1,
+            # creator here is the new owner; we don't change it to owner because that'd introduce many conflicts.
+            # Instead handle it in html.
+            "creator": user["username"],
+            "author": current_adventure.get("creator"),
+            "date": utils.timems(),
+            "level": level,
+            "levels": current_adventure.get("levels", [level]),
+            "language": current_adventure.get("language", g.lang),
+            "tags": current_adventure.get("tags", []),
+            "is_teacher_adventure": True,
+            "solution_example": current_adventure.get("solution_example", ""),
+        }
+
+        self.db.update_adventure(adventure_id, {"cloned_times": current_adventure.get("cloned_times", 0) + 1})
+        self.db.store_adventure(adventure)
+
+        # update cloned adv. that's saved in this class
+        for _level in current_adventure.get("levels", [level]):
+            _level = int(_level)
+            for i, adv in enumerate(self.adventures.get(_level, [])):
+                if adv.get("id") == current_adventure.get("id"):
+                    adventure["short_name"] = adventure.get("name")
+                    adventure["text"] = adventure.get("content")
+                    # Replace the old adventure with the new adventure
+                    self.adventures[_level][i] = adventure
+                    break
+        return render_partial('htmx-adventure-card.html', user=user, adventure=adventure, level=level,)
+
+    def update_lang_filter(self, adventures):
+        langs = [a['language'] for a in adventures if a.get('language')]
+        self.available_languages = set(langs)
+
+    def update_tag_filter(self, adventures):
+        tags = [t for a in adventures for t in a.get('tags', [])]
+        self.available_tags = set(tags)
+
+    @route("/flag/<adventure_id>", methods=["POST"])
+    @route("/flag/<adventure_id>/<flagged>", methods=["POST"])
+    @requires_teacher
+    def flag_adventure(self, user, adventure_id, flagged=None):
+        self.db.update_adventure(adventure_id, {"flagged": 0 if int(flagged) else 1})
+        return gettext("adventure_flagged"), 200
