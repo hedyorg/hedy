@@ -23,10 +23,6 @@ class PublicAdventuresModule2(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("public_adventures2", __name__, url_prefix="/public-adventures2")
         self.db = db
-        self.adventures = {}
-        self.customizations = {"available_levels": set()}
-        self.available_languages = set()
-        self.available_tags = set()
 
     def init(self, user):
         included = {}
@@ -82,27 +78,17 @@ class PublicAdventuresModule2(WebsiteModule):
             available_levels = adventure["levels"] if adventure.get("levels") else [adventure["level"]]
             self.customizations["available_levels"].update([int(adv_level) for adv_level in available_levels])
 
-    @route("/search", methods=["GET"])
+    @route("/", methods=["GET"])
     @requires_teacher
     def search(self, user):
-        return str(request.args)
+        """Render the search page including the form."""
 
-
-    @route("/", methods=["GET"])
-    @route("/filter", methods=["POST"])
-    @requires_teacher
-    def filtering(self, user, index_page=False):
-        index_page = request.method == "GET"
-
-        level = int(request.args.get("level", 1))
-        if index_page or not self.adventures or not self.adventures.get(level):
-            self.init(user)
+        selected_level = int(request.args.get("selected_level", 1))
+        selected_lang = request.args.get("selected_lang", g.lang)
+        q = request.args.get("q", "")
+        selected_tag = request.args.get("selected_tag")
 
         adventure = request.args.get("adventure", "")
-        tag = request.args.get("tag", "")
-        search = request.form.get("search", request.args.get("search", ""))
-        default_lang = g.lang if index_page else None
-        language = request.args.get("lang", default_lang)
 
         adventures = self.adventures.get(level, [])
         # adjust available filters for the selected level.
@@ -166,18 +152,23 @@ class PublicAdventuresModule2(WebsiteModule):
             current_user_name=user['username'],
         )
 
-        temp = render_template(
-            "public-adventures2/index.html" if index_page else "public-adventures2/body.html",
+        hx_request = bool(request.headers.get('Hx-Request'))
+
+        template = "body.html" if is_hx_request() else "index.html",
+
+        ## ?????????/
+        level = selected_level
+
+        temp = render_template(f"public-adventures2/{template}.html",
             adventures=adventures,
             teacher_adventures=adventures,
             available_languages=self.available_languages,
             available_tags=self.available_tags,
             selectedAdventure=adventure,
-            selectedLevel=level,
-            selectedLang=language,
-            # selectedTag=",".join(self.selectedTag),
-            selectedTag=",".join(tags),
-            currentSearch=search,
+            selected_level=selected_level,
+            selected_lang=selected_lang,
+            selected_tag=selected_tag,
+            q=q,
 
             user=user,
             current_page="public-adventures",
@@ -266,3 +257,7 @@ class PublicAdventuresModule2(WebsiteModule):
     def flag_adventure(self, user, adventure_id, flagged=None):
         self.db.update_adventure(adventure_id, {"flagged": 0 if int(flagged) else 1})
         return gettext("adventure_flagged"), 200
+
+
+def is_hx_request():
+    return bool(request.headers.get('Hx-Request'))

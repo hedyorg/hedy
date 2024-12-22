@@ -1,9 +1,9 @@
-<div>
+<div id="public_adventures_page_div">
   <h1>{{_('public_adventures')}}</h1>
 
   <!-- Filter form -->
   <div>
-    <form hx-trigger="submit" hx-get="/public-adventures2/search" hx-target="#search_results">
+    <form hx-trigger="submit" hx-get="/public-adventures2/" hx-target="#public_adventures_div" hx-swap="morph:outerHTML">
       <div class="flex flex-col items-stretch md:flex-row md:items-center gap-2 justify-around bg-blue-100 shadow-md rounded-lg p-4 mb-4">
         <div class="flex-0">
           <label for="language_select">{{_('language')}}</label>
