@@ -33,7 +33,7 @@
                 {% else %}
                     <span class="fas fa-fw fa-user"></span>
                 {% endif %}
-                <span data-cy="username-caption" class="hidden lg:inline-block">{{username[0]|upper}}{{username[1:]}}
+                <span data-cy="username-menu" class="hidden lg:inline-block">{{username[0]|upper}}{{username[1:]}}
                   {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</span>
             </a>
             <div class="dropdown-menu dropdown-blue" id="profile_dropdown" style="display: none;">
