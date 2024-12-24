@@ -9,8 +9,8 @@ export class HedySelect extends HTMLElement {
         const clone = template.content.cloneNode(true) as HTMLElement;
         this.appendChild(clone);
         const options = this.querySelectorAll('option');
-        const label = this.dataset['label'] || '';       
-        const dropdownMenu = this.querySelector('.dropdown-menu')!;                
+        const label = this.dataset['label'] || '';
+        const dropdownMenu = this.querySelector('.dropdown-menu')!;
         if (this.dataset['type'] === 'multiple') {
             const newDiv = document.createElement('div');
             newDiv.classList.add('option');
@@ -40,25 +40,25 @@ export class HedySelect extends HTMLElement {
         const span = this.getElementsByTagName('span')
         if (span.length !== 1) {
             throw new Error('HedySelect should only have one span element!');
-        }        
+        }
         span[0].dataset['value'] = label;
         span[0].textContent = label;
         updateLabelText(this.querySelector('.dropdown')!)
     }
 
-    onOptionClick(this: HTMLDivElement, _event: MouseEvent) {        
+    onOptionClick(this: HTMLDivElement, _event: MouseEvent) {
         const select = this.closest("custom-select") as Element;
         if (!select) {
             return;
         }
         const isSingleSelect = select?.getAttribute('data-type') === 'single';
-    
+
         if (isSingleSelect && !this.classList.contains('selected')) {
             // Deselect other options within the same dropdown
             const otherOptions = select.querySelectorAll('.option.selected');
             otherOptions.forEach(otherOption => otherOption.classList.remove('selected'));
         }
-    
+
         if (!isSingleSelect && this.getAttribute("data-value") === "select_all") {
             const selected = !this.classList.contains("selected")
             const otherOptions = select.querySelectorAll('.option');
@@ -117,17 +117,17 @@ export function toggleDropdown(event: Event) {
     if (dropdown === undefined || dropdown === null) {
         throw new Error('Unexpected error!');
     }
-    $(dropdown).slideToggle('medium');
+    $(dropdown).slideToggle('fast');
 }
 
 document.addEventListener("click", (e) => {
     let dropdowns = [...document.getElementsByClassName('dropdown-menu')]
     let target = e.target as HTMLElement;
-    const dropdown = target.closest('.dropdown-menu') || target.closest('.dropdown');    
+    const dropdown = target.closest('.dropdown-menu') || target.closest('.dropdown');
     if (!dropdown) {
         dropdowns.forEach((dropdown) => {
             if ($(dropdown).is(":hidden")) return;
-            $(dropdown).slideToggle("medium");
+            $(dropdown).slideToggle("fast");
         })
     }
 });
