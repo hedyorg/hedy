@@ -2431,6 +2431,9 @@ def explore():
                             ) if result.prev_page_token else None
 
     favourite_programs = DATABASE.get_hedy_choices()
+    favourite_ids = set(a['id'] for a in favourite_programs)
+    # Filter out programs that already favourites
+    result = [r for r in result if r['id'] not in favourite_ids]
 
     # Do 'normalize_public_programs' on both sets at once, to save database calls
     normalized = normalize_public_programs(list(result) + list(favourite_programs.records))

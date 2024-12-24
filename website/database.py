@@ -682,8 +682,15 @@ class Database:
         ids = self.programs.get_page({'public': 1}, reverse=True, limit=limit,
                                      server_side_filter=filter, pagination_token=pagination_token,
                                      timeout=3, fetch_factor=2.0)
-        ret = self.programs.batch_get(ids)
-        return ret
+
+        # For some reason there are duplicate ids in this list; filter them out
+        unique_ids = []
+        for id in ids:
+            if id['id'] not in unique_ids:
+                unique_ids.append(id['id'])
+
+        ret = self.programs.batch_get(list(dict(id=id) for id in unique_ids))
+        return dynamo.ResultPage(list(ret), next_page_token=ids.next_page_token, prev_page_token=ids.prev_page_token)
 
     def add_public_profile_information(self, programs):
         """For each program in a list, note whether the author has a public profile or not.
