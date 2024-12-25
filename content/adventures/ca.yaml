@@ -1261,7 +1261,7 @@ adventures:
                 story_text: "Ara canviem una mica la indentació. Cada vegada que necessitem una indentació, hem de posar `:` a la línia abans de la indentació.\n"
                 example_code: "```\n{for} i {in} {range} 1 {to} 10:\n    {print} i\n{print} 'Llest o no, ves que vinc!'\n```\n"
             18:
-                story_text: "Finalment, convertirem `{for} i {in} {range} 1 to 5` en codi Python real, així:\n"
+                story_text: "Finalment, convertirem `{for} i {in} {range} 1 {to} 5` en codi Python real, així:\n"
                 example_code: "```\n{for} i {in} {range}(1,5):\n    {print} (i)\n```\n"
         name: '{for}'
     fortune:
@@ -1732,4 +1732,24 @@ adventures:
             7:
                 example_code: "```\n{print} 'Quan les oques van al camp'\n{repeat} 2 {times} {play} C4\n{repeat} 2 {times} {play} G4\n_\n```\n"
                 story_text: "Utilitzar la comanda `{repeat}` pot fer que els teus codis per a melodies siguin molt més curts!\n\n### Exercici\nAcaba el codi per a \"Quan les oques van al camp\" usant la comanda `{repeat}`.\nDesprés, torna a les cançons que has fet en els nivells anteriors. Pots fer més curts aquells codis també?\n"
+            12:
+                story_text: "Utilitza funcions a les teves cançons! Com pots veure en el codi d'exemple, pots fer una funció per a cada línia de \"Quan les oques van al camp\". Un cop hagis programat les tres primeres línies, només has de cridar les funcions en l'ordre en què vols que es reprodueixin.\n\n### Exercici  \nAcaba la cançó de \"Quan les oques van al camp\".  \nDesprés, revisa totes les cançons que has programat en els nivells anteriors. Pots fer aquests codis més curts i millors utilitzant funcions també?\n"
+                example_code: "```\n{define} primera_linia\n    {play} C\n    {play} C\n    {play} G\n    {play} G\n    {play} A\n    {play} A\n    {play} G\n    {sleep}\n\n{define} segona_linia\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {play} D\n    {play} C\n    {sleep}\n\n{define} tercera_linia\n    {play} G\n    {play} G\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {sleep}\n\n{call} _\n{call} _\n{call} _\n{call} _\n{call} _\n{call} _\n```\n"
+            14:
+                story_text: "Pots programar música per diversió, però també pots utilitzar les notes musicals per fer alguna cosa útil, com una alarma d'incendis!\n\n### Exercici  \nAssegura't que l'alarma d'incendis soni quan hi hagi foc!\n"
+                example_code: "```\n{define} sirena_foc\n    {print} 'FOC!'\n    nota = 40\n    {for} i {in} {range} 1 {to} 100\n        {if} nota _ 50\n            nota = nota + 5\n            {play} _\n        {else}\n            nota = 40\n\nfoc = {ask} 'Hi ha foc?'\n{if} foc _ 'sí'\n    {call} sirena_foc\n```\n"
+            13:
+                example_code: "```\n{print} 'Un ianqui baixa a la ciutat'\n{define} _ {with} nota_1, nota_2, nota_3\n    {play} C4\n    {play} C4\n    {play} D4\n    {play} E4\n    {play} _\n    {play} _\n    {play} _\n\n{call} linia_1 {with} 29, 31, 30\n{call} linia_1 {with} 29, 28, 0\n{call} linia_1 {with} 32, 31, 30\n\n{play} C4\n{play} B3\n{play} G3\n{play} A3\n{play} B3\n{play} C4\n{play} C4\n```\n"
+                story_text: "Pots utilitzar una funció amb un argument per a cançons que tenen línies gairebé iguals, però lleugerament diferents cada vegada.\nUn exemple és la cançó \"Un Inaqui baixa la ciutat\". Les primeres 4 notes de les primeres línies són les mateixes, però cada vegada van seguides d'un parell de notes diferents.\n\n### Exercici  \nPots acabar la cançó de \"Un Inaqui baixa la ciutat\"?  \nSe t'acut alguna altra cançó per programar d'aquesta manera?\n"
+            15:
+                story_text: "**Avís** Aquesta aventura pot arribar a ser extremadament molesta!  \nTambé podem utilitzar la comanda {while} per repetir una cançó infinitament.\n\n### Exercici  \nAcaba la cançó interminable.\n"
+                example_code: "```\n{define} cançó\n    {play} _\n\nsi_o_no = {ask} \"Vols sentir la cançó que mai s'acaba?\"\n{while} si_o_no = \"sí\"\n    {call} cançó\n    {print} \"🥳\"\n```\n"
+            16:
+                story_text: "Millora el teu codi de l'Old MacDonald!\n\n### Exercici  \nAgafa el teu codi de l'aventura \"Canta una cançó\" i afegeix notes musicals!  \nPots fer una funció per a cada línia de la cançó i cridar aquesta funció després que la línia sigui impresa.  \nHem definit la primera línia per a tu i l'hem cridada al codi. Pots acabar tota la cançó?\n"
+            9:
+                story_text: "A partir d'aquest nivell pots, entre altres coses, utilitzar una comanda {repeat} dins d'una altra comanda {repeat}.  \nAixò fa que cançons com 'Moltes felicitats' siguin encara més curtes!\n\n### Exercici\nAcaba la cançó!\n"
+                example_code: "```\nprimer_cop = si\n{repeat} 2 {times}\n    {repeat} 2 {times}\n        {play} C\n    {play} D\n    {play} C\n    {if} primer_cop {is} si\n        {play} F\n        {play} E\n        primer_cop {is} no\n    {else}\n        _\n```\n"
+            8:
+                story_text: "Ara que podem utilitzar la comanda `{repeat}` per a múltiples línies, podem fer cançons encara més fàcilment!\n\n### Exercici  \nAcaba la cançó de (Frère Jacques, també coneguda com a Germà Jaume). No oblidis usar `{repeat}`!\n"
+                example_code: "```\n{print} 'Frère Jacques'\n{repeat} 2 {times}\n    {play} C\n    {play} D\n    {play} E\n    {play} C\n{repeat} 2 {times}\n    {play} E\n    {play} F\n    {play} G\n    {sleep} 1\n```\n"
         description: Reprodueix una nota!
