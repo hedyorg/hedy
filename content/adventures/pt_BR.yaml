@@ -1597,6 +1597,12 @@ adventures:
         description: funções
     guess_my_number:
         default_save_name: adivinhe o número
+        description: adivinhe o número
+        name: Adivinhe o número
+        levels:
+            14:
+                story_text: "Neste nível, você pode programar o jogo 'Adivinhe o número'\n\n### Exercício\nPreencha as lacunas com os símbolos corretos para fazer o jogo funcionar.\n"
+                example_code: "```\n{print} 'Adivinhe o número'\nnúmeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnúmero = números {at} {random}\njogo = 'acontecendo'\n{for} i {in} {range} 1 {to} 10\n    {if} jogo == 'acontecendo'\n        chute = {ask} 'Que número você acha que é?'\n        {if} chute _ número \n            {print} 'Mais baixo!'\n        {if} chute _ número \n            {print} 'Mais alto!'\n        {if} chute _ número \n            {print} 'Você venceu!'\n            jogo = 'finalizado'\n```\n"
     harry_potter:
         description: Aventuras de Harry Potter
     haunted:
@@ -1793,6 +1799,9 @@ adventures:
             9:
                 story_text: |
                     Neste nível, você também pode colocar um comando `{if}` dentro de outro comando `{if}`.
+                example_code: "```\ncontinuar = {ask} 'Você quer continuar?'\n{if} continuar = sim\n    certeza = {ask} 'Tem certeza?'\n    {if} certeza {is} sim\n        {print} 'Vamos continuar'\n    {else}\n        {print} 'Você não tem certeza'\n{else}\n    {print} 'Você não quer continuar'\n```\n"
+            8:
+                example_code: "```\nnome = {ask} 'Qual é o seu nome?'\n{if} nome {is} Hedy\n    {print} 'Bem-vinda, Hedy'\n    {print} 'Você pode jogar no seu computador!'\n```\n"
     in_command:
         default_save_name: comando_em
         description: Introduzindo o comando {in}
@@ -1820,6 +1829,7 @@ adventures:
                     _ resposta _ animais _ 'O meu também!'
                     _ _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
                     ```
+        name: '{in}'
     is_command:
         default_save_name: comando_é
         description: introduzindo o comando {is}
@@ -1881,6 +1891,10 @@ adventures:
                     {if} nome != 'Hedy'
                         {print} 'Você não é Hedy'
                     ```
+            6:
+                example_code: "```\nnome = Hedy\nresposta = 20 + 4\n```\n"
+                story_text: "Também mudamos a forma como você guarda uma palavra em uma variável! Agora você pode usar `=` em vez de `{is}` para guardar um nome ou número numa variável, assim:\n"
+        name: '{is}'
     language:
         name: Língua
         default_save_name: Idioma
@@ -1889,6 +1903,7 @@ adventures:
             5:
                 story_text: |
                     Make your own program to practice your vocabulary in a new language.
+                example_code: "```\n{print} 'Aprenda Francês!'\ngato {is} {ask} '🐱'\n{if} gato {is} chat {print} 'Incrível!'\n{else} {print} 'Não, gato é chat'\nsapo {is} {ask} '🐸'\n{if} sapo {is} grenouille {print} 'Sensacional!'\n{else} {print} 'Não, sapo é grenouille'\n```\n"
     maths:
         name: matemática
         default_save_name: matemática
@@ -1995,6 +2010,8 @@ adventures:
                     {repeat} 2 {times} {play} G4
                     _
                     ```
+            9:
+                story_text: "From this level on you can - among other things - use a {repeat} command inside a {repeat} command.\nThat makes songs like 'Happy birthday' even shorter!\n\n### Exercise\nFinish the song!\n"
     parrot:
         name: Papagaia
         default_save_name: Papagaia
@@ -2796,3 +2813,7 @@ adventures:
         name: Vinte-e-um 2
         default_save_name: Vinte_e_um_2
         description: Vinte-e-um parte 2
+    hangman:
+        name: Forca
+        default_save_name: Forca
+        description: Adivinhe a palavra

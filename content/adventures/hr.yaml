@@ -1,1 +1,26 @@
-{}
+adventures:
+    story:
+        levels:
+            1:
+                example_code: "\"\"\n{ask} glavni lik priče je\n{print} glavni karakter će sada šetati u šumi\n{echo} malo su uplašeni,\n{print} čuju čudne zvuke svuda\n{print} uplašeni su da je ovo opsednuta šuma\n\"\"\n"
+                story_text: "U levelu 1 možeš napraviti priču sa različitim glavnim likom koji unosiš sam.\n\nU prvoj liniji koristi  {ask} i pitaj ko će glavni lik priče biti.\n\nPosle prve linije,  počni sa {print} ako rečenica mora da bude odštampana.\nKoristi {echo} kao želiš da tvoj glavni lik bude na kraju rečenice.\n"
+                story_text_2: "## ## Vežba\nSada napravite vašu priču u najmanje 6 linija koda.\nOva priča ne može biti ista kao primer kod.\nKoristite najmanje jedno `{ask}` i jedno `{echo}` komande.\nMožete napraviti o bilo čemu šta želite.  \nAko ne možete smisliti, koristite jedan od naših izbora: odlazak na film, sportski meč ili dan u zoološkom vrtu.\n"
+            2:
+                story_text: "U levelu 2 možete napraviti vašu priču zabavnijom. Ime vašeg glavog lika sada može biti bilo gde u rečenici.\n\nMorate da programirate malo više za to. Sada morate nazvati vašeg glavnog lika prvo.\n\nMožete onda staviti ime bilo gde u rečenici.\n"
+                story_text_2: "###  vežba\nSada je vreme da dodamo promenljive u vašu priču koje ste napravili u prehodnom levelu.\nIdite u \"Moji programi\", potražite vaš level 1 avanturu priče i kopirajte kod. Nalepite kod u vaš input ekran u ovom levelu.\n\nOvaj kod neće raditi u ovom levelu, sada što niste koristili promenljive.\nPromenite `{ask}` komende i `{echo}` komende u vašem kodu u ispravnu formu koju ste naučili u ovom levelu.\n\n**dodatno** dodajte `{sleep}` komandu u vaš kod da stvorite tenziju u vašoj priči.\n"
+                example_code: "\"\"\"\nime {is}{ask} Koje je ime glavnog lika?\n{print} ime će sada trčati u šumu\n{print} ime je malo uplašeno\n{print} iznenada čuje čudnu buku...\n{sleep}\n{print} ime je uplašeno da je ovo opsednuta šuma\n\"\"\""
+            3:
+                story_text_3: "Ovo je primer `{remove}` komande u vašoj priči\n\n### vežba\nkopirajte vašu priču sa prethodnih levela u ovaj level\nu ovom levelu ste naučili 3 nove komande `{at} {random}`{random}``{add} {to_list}` i {from}`{remove} {from}`\ndodajte nove linije koda u vašu priču, da su sve komande iskorišćenje bar jednom u vašoj priči.\n"
+                example_code: "\"\"\"\nživotinje{is}🦔, 🐿, 🦉, 🦇\n{print} sada čuju zvuk životinja {at}{random}\n\"\"\"\n"
+                story_text_2: "komanda `{add}` takođe može biti korisna u vašoj priči.\n"
+                story_text: "U levelu 3 možete napraviti vašu priču zabavnijom. Možete koristiti nasumičnost za bilo koje čudovište, životinju ili drugu prepreku, kao ovo:\n"
+                example_code_3: "\"\"\"\n{print}njegov ranac je postao veoma težak.\n{print}unutra su flaša vode, baterijska lampa i cigla\ntorba {is} voda, baterijska lampa, cigla\nglupo {is}{ask} Koja stvar treba biti glupa?\n{remove} glupo {from} torba\n\"\"\"\n"
+                example_code_2: "\"\"\"\n{print} čuju zvuk\nživotinje {is}🐿, 🦔, 🦇, 🦉\nživotinja {is}{ask} Šta misliš da je?\n{add} životinja {to_list} životinje\n{print} bile su životinje {at}{random}\n\"\"\"\n"
+            4:
+                story_text: "### vežba\nkopirajte primer koda i završite ga dodajući navodnike na prazne linije 1 i 2\nprazne linije 3 i 4 ne trebaju biti zamenjene navodnicima, već `{sleep}` i `{clear}` komandom. možeš li učiniti da radi?\n\n### vežba 2\nvratite se na prethodni evel i kopirajte vaš kod priče. Učinite da kod radi u ovom levelu dodajući navodnike na prava mesta.\nMislite: Promenljive u vašoj priči treba da budu izvan navodnika. Kao druga linija primernog koda. U toj linij ime promenljive je smešteno izvan navodnika.\n"
+                example_code: "\"\"\"\nime{is}{ask}_kako se zoveš?_\n{print}--_glavni lik se zove_ime\n_\n_\n{print}ime--_ sada će ući u šumu_\n{print} ime_je uplašeno_\nživotinje{is}🦔, 🐿, 🦉, 🦇\n{print}_ čuje zvuk _ životinja{at}{random}\n{print}ime_ je uplašen zbog opsednute šume._\n\"\"\"\n"
+            5:
+                story_text: "U ovom levelu možeš programirati različite završetke, koji će napraviti vašu poriču zabavnijom.\nU ovom primernom kodu možeš videti kako da napraviš 2 različita završetka.\n\n### vežba 1\nnapiši novu kratku priču najmnje 6 linija koda po tvom izboru.\nnemaš inspiraciju? izaberi jednu od ovih: superheroj, dosadan školski dan, apušten na pustom ostrvu.\n\nsada daj igraču promenu da izabere srećan ili loš kraj, kao u primernom kodu.\nprogramiraj oba završetka\n\n### vežba 2\nkopiraj priču koju si napravio u tvojoj avanturi priče u prethodnim levelima\npronadji način da dodaš najmanje 2`{if}` i`{else}` komande tvojoj priči.\novo može biti sa srećnim ili lošim krajem, ali takođe možeš pokušati da nadješ druge načine da ubaciš komande.\n"
+        name: priča
+        default_save_name: priča
+        description: priča
