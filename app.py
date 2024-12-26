@@ -3158,7 +3158,7 @@ if __name__ == '__main__':
     debug = utils.is_debug_mode() and not (is_in_debugger or profile_memory)
     if debug:
         logger.debug('app starting in debug mode')
-
+    app_obj.add_url_rule("/", endpoint="index")
     # Threaded option enables multiple instances for multiple user access support
     app_obj.run(threaded=True, debug=debug,
                 port=config['port'], host="0.0.0.0")
