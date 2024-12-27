@@ -3,7 +3,7 @@
 
   <!-- Filter form -->
   <div>
-    <form hx-trigger="submit" hx-get="/public-adventures2/" hx-target="#public_adventures_div" hx-swap="morph:outerHTML">
+    <form id="filterform" hx-trigger="submit" hx-get="/public-adventures2/" hx-target="#public_adventures_page_div" hx-swap="morph:outerHTML">
       <div class="flex flex-col items-stretch md:flex-row md:items-center gap-2 justify-around bg-blue-100 shadow-md rounded-lg p-4 mb-4">
         <div class="flex-0">
           <label for="language_select">{{_('language')}}</label>
@@ -75,24 +75,25 @@
           <input type="submit" value="{{_('search')}}" class="green-btn">
         </div>
       </div>
+      <input type="hidden" name="page" id="page_input" value="{{page}}">
     </form>
   </div>
 
   <div id="search_results">
   </div>
 
-    <div id="_body">
-      {% if adventures|length == 0 %}
-          <div class="grid p-5 text-center bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2">
-              {{_('no_adventures_yet')}}
-              <button id="create_adventure_button" class="green-btn mt-4"
-                _="on click
-                  window.open('/for-teachers/customize-adventure', '_self')"
-                      data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
-          </div>
-      {% else %}
-          {% include "incl/adventure-tabs.html" %}
-          {% include "incl/editor-and-output.html" %}
-      {% endif %}
-    </div>
+  <div id="_body">
+    {% if adventures|length == 0 %}
+      <div class="grid p-5 text-center bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2">
+        {{_('no_adventures_yet')}}
+        <button id="create_adventure_button" class="green-btn mt-4"
+          _="on click window.open('/for-teachers/customize-adventure', '_self')"
+          data-cy="edit_link"
+          {% if second_teacher and role == 'viewer' %}disabled{% endif %}
+          >{{_('create_adventure')}}</button>
+      </div>
+    {% else %}
+      {% include "public-adventures2/incl-adventure-list.html" %}
+    {% endif %}
+  </div>
 </div>

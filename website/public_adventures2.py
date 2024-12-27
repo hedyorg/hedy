@@ -1,4 +1,6 @@
 import uuid
+import time
+from functools import lru_cache
 from flask import g, request, make_response
 from website.flask_helpers import gettext_with_fallback as gettext
 import json
@@ -6,7 +8,6 @@ import json
 import hedy
 import hedy_content
 import utils
-from config import config
 from website.auth import requires_teacher
 from website.flask_helpers import render_template
 from jinja_partials import render_partial
@@ -15,20 +16,22 @@ from .database import Database
 from .website_module import WebsiteModule, route
 from safe_format import safe_format
 
-cookie_name = config["session"]["cookie_name"]
-invite_length = config["session"]["invite_length"] * 60
-
 
 class PublicAdventuresModule2(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("public_adventures2", __name__, url_prefix="/public-adventures2")
         self.db = db
 
+    def all_tags(self):
+        return self._all_tags(get_ttl_hash(300))
+
+    @lru_cache(maxsize=1)
+    def _all_tags(self, _ttl_hash):
+        """Uncached version of `all_tags`. ttl_hash is unused but exists to make the arguments unique for lru_cache."""
+        return list(sorted(self.db.get_public_adventures_tags()))
+
     def init(self, user):
         included = {}
-        self.adventures = {}
-        self.available_languages = set()
-        self.available_tags = set()
 
         public_adventures = self.db.get_public_adventures()
         public_adventures = sorted(public_adventures, key=lambda a: a["creator"] == user["username"], reverse=True)
@@ -83,115 +86,70 @@ class PublicAdventuresModule2(WebsiteModule):
     def search(self, user):
         """Render the search page including the form."""
 
-        selected_level = int(request.args.get("selected_level", 1))
+        # Input arguments
+        selected_level = request.args.get("selected_level", '')
         selected_lang = request.args.get("selected_lang", g.lang)
         q = request.args.get("q", "")
         selected_tag = request.args.get("selected_tag")
+        page = request.args.get("page", '')
 
-        adventure = request.args.get("adventure", "")
+        # Dropbox options
+        available_languages = hedy_content.ALL_LANGUAGES.keys()
+        available_levels = list(range(1, hedy_content.MAX_LEVEL + 1))
+        available_tags = self.all_tags()
 
-        adventures = self.adventures.get(level, [])
-        # adjust available filters for the selected level.
-        self.update_tag_filter(adventures)
-        self.update_lang_filter(adventures)
+        # Search results
+        adventures = self.db.get_public_adventures_filtered(selected_lang, int(selected_level) if selected_level else None, selected_tag or None, q or None, pagination_token=page if page else None)
+        next_page_token = adventures.next_page_token
+        prev_page_token = adventures.prev_page_token
 
-        # In case a selected set of adventures doesn't have the given lang to filter on,
-        # we decide that that language cannot be used for filtering.
-        if not any(adv.get("language") == language for adv in adventures):
-            language = ""
+        adventures = [self.enhance_adventure(a) for a in adventures]
 
-        if language:
-            adventures = [adv for adv in adventures if adv.get("language") == language]
-            # adjust available tags after filtering on languages
-            self.update_tag_filter(adventures)
+        template = "body" if is_hx_request() else "index"
 
-        tags = []
-        if tag:
-            toReset = request.args.get("reset")
-            if toReset:
-                # then it's the current selected tags, so remove current's tag
-                tags = [_tag for _tag in toReset.split(",") if _tag != tag]
-            else:
-                tags = tag.split(",")
-
-            tags = [_tag for _tag in tags if _tag]  # filter out empty strings.
-            for _tag in tags:
-                # In case a selected set of adventures doesn't have the given tag to filter on,
-                # we decide that that tag cannot be used for filtering.
-                if not any(_tag in adv.get("tags") for adv in adventures):
-                    tags.remove(_tag)
-            if tags:
-                adventures = [adv for i, adv in enumerate(adventures) if any(tag in tags for tag in adv.get("tags"))]
-            # adjust available languages after fitlering on tags.
-            self.update_lang_filter(adventures)
-
-        if search:
-            adventures = [adv for adv in adventures if search.lower() in adv.get("name").lower()]
-            self.update_lang_filter(adventures)
-            self.update_tag_filter(adventures)
-
-        initial_tab = None
-        initial_adventure = None
-        commands = {}
-        prev_level = None
-        next_level = None
-        if adventures:
-            initial_tab = adventures[0]["name"]
-            initial_adventure = adventures[-1]
-
-            # Add the commands to enable the language switcher dropdown
-            commands = hedy.commands_per_level.get(level)
-            prev_level, next_level = utils.find_prev_next_levels(list(self.customizations["available_levels"]), level)
-
-        js = dict(
-            page='code',
-            lang=g.lang,
-            level=level,
-            adventures=adventures,
-            initial_tab='',
-            current_user_name=user['username'],
-        )
-
-        hx_request = bool(request.headers.get('Hx-Request'))
-
-        template = "body.html" if is_hx_request() else "index.html",
-
-        ## ?????????/
-        level = selected_level
-
-        temp = render_template(f"public-adventures2/{template}.html",
-            adventures=adventures,
-            teacher_adventures=adventures,
-            available_languages=self.available_languages,
-            available_tags=self.available_tags,
-            selectedAdventure=adventure,
+        return render_template(f"public-adventures2/{template}.html",
+            available_languages=available_languages,
+            available_levels=available_levels,
+            available_tags=available_tags,
             selected_level=selected_level,
             selected_lang=selected_lang,
             selected_tag=selected_tag,
             q=q,
+            page=page,
+
+            adventures=adventures,
+            next_page_token=next_page_token,
+            prev_page_token=prev_page_token,
 
             user=user,
             current_page="public-adventures",
             page_title=gettext("title_public-adventures"),
-
-            initial_adventure=initial_adventure,
-            initial_tab=initial_tab,
-            commands=commands,
-            level=level,
-            max_level=18,
-            level_nr=str(level),
-            prev_level=prev_level,
-            next_level=next_level,
-
-            customizations=self.customizations,
-
-            public_adventures_page=True,
-            javascript_page_options=js,
         )
 
         response = make_response(temp, 200)
-        response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
+        # response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
         return response
+
+    def enhance_adventure(self, adventure):
+        """For each adventure, add some extra information."""
+        if 'levels' not in adventure:
+            adventure['levels'] = [adventure.get('level', '1')]
+        adventure['tags'] = list(sorted(adventure.get('tags', [])))
+        return adventure
+
+    @route("/preview/<adventure_id>", methods=["GET"])
+    @requires_teacher
+    def preview_adventure(self, user, adventure_id):
+        adventure = self.db.get_adventure(adventure_id)
+
+        # Confirm that we're not trying to sneak peek at a non-public adventure
+        if not adventure.get('public'):
+            return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
+
+        return render_template("public-adventures2/htmx-preview-adventure.html",
+                               adventure=adventure,
+                               user=user,
+                               current_page="public-adventures")
 
     @route("/clone/<adventure_id>", methods=["POST"])
     @requires_teacher
@@ -261,3 +219,8 @@ class PublicAdventuresModule2(WebsiteModule):
 
 def is_hx_request():
     return bool(request.headers.get('Hx-Request'))
+
+
+def get_ttl_hash(seconds=3600):
+    """Return the same value withing `seconds` time period"""
+    return round(time.time() / seconds)

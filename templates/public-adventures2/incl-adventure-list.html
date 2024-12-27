@@ -1,0 +1,49 @@
+<div class="flex gap-4">
+  <div class="flex-0">
+    <div class="shadow-inner overflow-auto w-64 border border-gray-600" style="height: 40rem;">
+      {% for adventure in adventures %}
+      <div
+        class="adventure-item text-gray-800 flex flex-col cursor-pointer p-2 border-b border-gray-600"
+        tabindex="0"
+        _="on click remove .selected from .adventure-item then add .selected to me end on keyup[key is 'Enter'] send click to me"
+        hx-get="/public-adventures2/preview/{{ adventure.id }}" hx-target="#preview-div"
+        >
+        <div class="flex-1">
+          <span class="text-xl min-h-28">{{ adventure.name }}</span>
+        </div>
+        <div class="flex-0 text-xs">
+          <div class="flex">
+            <div class="flex-1 text-gray-500">{{ adventure.creator }}</div>
+            <div>
+              <span class="flex-1 text-gray-500" title="{{ adventure.date|jsts_to_unix|datetimeformat }}">
+                {{ adventure.date|jsts_to_unix|format_date_rel }}
+              </span>
+            </div>
+          </div>
+          <div class="text-gray-500">{{_('level')}} {{ adventure.levels|join(', ') }}</div>
+          {% if adventure.tags %}
+            <div>
+              {% for tag in adventure.tags %}
+              <span class="inline-block bg-pink-200 rounded-full px-2 text-xs text-gray-700 mr-1 mb-1">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="flex-1">
+    <div id="preview-div">
+    </div>
+  </div>
+</div>
+
+<div class="flex gap-2">
+  {% if prev_page_token %}
+    <button _="on click set (#page_input).value to '{{prev_page_token}}' then call (#filterform).requestSubmit()" class="green-btn mt-4">« Prev page</button>
+  {% endif %}
+  {% if next_page_token %}
+    <button _="on click set (#page_input).value to '{{next_page_token}}' then call (#filterform).requestSubmit()" class="green-btn mt-4">Next page »</button>
+  {% endif %}
+</div>

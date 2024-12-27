@@ -24,7 +24,7 @@ from markupsafe import Markup
 from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
                    redirect, request, send_file, url_for, Blueprint,
                    send_from_directory, session, current_app)
-from flask_babel import Babel
+from flask_babel import Babel, format_timedelta
 from website.flask_helpers import gettext_with_fallback as gettext
 from website.flask_commonmark import Commonmark
 from flask_compress import Compress
@@ -2708,9 +2708,45 @@ def chunk(x, size):
 
 @app.app_template_filter()
 def format_date(date):
+    """Format a date/time as a full description of the date/time.
+
+    In HTML, render a timestamp with both absolute and relative parts, like this:
+
+    ```
+    <span title="{{ date|format_date }}">
+      {{ date|format_date_rel }}
+    </span>
+    ```
+    """
     if not isinstance(date, int):
         return date
     return utils.localized_date_format(date)
+
+
+@app.app_template_filter()
+def format_date_rel(date):
+    """Format a date/time as a relative time.
+
+    In HTML, render a timestamp with both absolute and relative parts, like this:
+
+    ```
+    <span title="{{ date|datetimeformat }}">
+      {{ date|format_date_rel }}
+    </span>
+    ```
+    """
+    if not isinstance(date, int):
+        return date
+    now = datetime.datetime.now(tz=datetime.UTC)
+    dt = datetime.datetime.fromtimestamp(date, tz=datetime.UTC)
+    # (dt - now) feels the wrong way around, but otherwise this formats "3 weeks from now"
+    return format_timedelta(dt - now, granularity='minute', add_direction=True)
+
+
+@app.app_template_filter()
+def jsts_to_unix(date):
+    """Convert a JavaScript timestamp (in milliesconds since epoch) to a UNIX timestamp (in seconds since epoch)."""
+    return int(date / 1000)
 
 
 @app.app_template_global()
