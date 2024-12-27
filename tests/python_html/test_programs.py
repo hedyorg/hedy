@@ -8,7 +8,7 @@ def test_programs_page_loads_with_lots_of_programs(client: Client, given: Given)
     # GIVEN
     user = given.logged_in_as_student()
     for _ in range(20):
-      given.some_saved_program(user['username'])
+        given.some_saved_program(user['username'])
 
     # WHEN
     client.get('/programs')
