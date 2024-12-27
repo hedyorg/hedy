@@ -1,1 +1,92 @@
-{}
+levels:
+    1:
+        6:
+            mp_choice_options:
+            -   option: U liniji 1 `{print}` treba biti zamenjen sa `{ask}`.
+                feedback: '`{print}` u liniji 1 je tačno.'
+            -   option: U liniji 2, `{print}` treba biti zamenjen sa `{ask}`.
+                feedback: Sjajno! pratio si!
+            -   option: Linija 3 mora da počne sa `{print}` umesto `{echo}`.
+                feedback: '`{echo}` je tačno.'
+            -   feedback: Ne, greška je negde drugde
+                option: U liniji 4, `{print}` je napisano pogrešno.
+            code: "{print}Zdravo ja sam hedi!\n{print}Koji fudbalski tim podržavaš?\n{echo} Tipodržavaš...\n{print} Kul! Ja takođe!"
+            hint: Proveri `{print}` komande.
+            correct_answer: B
+            question_text: Šta je pogrešno sa ovim kodom?
+            question_score: '10'
+        1:
+            mp_choice_options:
+            -   option: hedi
+                feedback: Bravo!
+            -   option: Hedi
+                feedback: Ne ovaj!
+            -   option: Hajdi
+                feedback: Ne ovaj!
+            -   feedback: Ne ovaj!
+                option: Hajdi
+            hint: Zove se po henriju lamaru.
+            correct_answer: A
+            question_score: '10'
+            question_text: kako se zove ovaj programski jezik?
+        5:
+            code: "{ask}Koji je tvoj omiljeni ljubimac?\n_Pa tvoj omiljeni ljubimac je...."
+            mp_choice_options:
+            -   feedback: Ne, želeo bi da se odgovor vrati nazad tebi.
+                option: '`{print}`'
+            -   option: '`Hedy`'
+                feedback: Hedi nije komanda.
+            -   option: '`{ask}`'
+                feedback: Sa `{ask}` možeš pitati pitanje.
+            -   option: '`{echo}`'
+                feedback: Tačno!
+            question_text: Koja komanda nedostaje u liniji 2?
+            correct_answer: D
+            hint: Želiš da vidiš odgovor na kraju linije 2...
+            question_score: '10'
+        3:
+            mp_choice_options:
+            -   feedback: '`{print}` pasterizuje tekst, ali ne pita pitanja.'
+                option: "\"\"\"\n{print} Koja je tvoja omiljena boja?\n\"\"\""
+            -   option: "\"\"\"\n{ask} {print} Koja je tvoja omiljena boja?\n\"\"\""
+                feedback: Samo ti treba jedna komanda, ne dve.
+            -   option: "\"\"\"\n{ask} Koja je tvoja omiljena boja?\n\"\"\""
+                feedback: Sjajno!
+            -   feedback: '`{echo}` ponavlja tvoj odgovor do tebe.'
+                option: "\"\"\"\n{echo} Koja je tvoja omiljena boja?\n\"\"\""
+            hint: Možeš pitati nešto sa `{ask}` komandom
+            correct_answer: C
+            question_score: '10'
+            question_text: Kako pitaš koja je nekome omiljena boja?
+        2:
+            mp_choice_options:
+            -   feedback: '`{echo}`ponavlja dati odgovor.'
+                option: '`{echo}`'
+            -   option: '`{print}`'
+                feedback: Tačno!
+            -   option: '`hello`'
+                feedback: Zdravo nije komanda.
+            -   option: '`{ask}`'
+                feedback: Sa `{ask}` možeš pitati pitanje.
+            correct_answer: B
+            question_score: '10'
+            hint: _ Zdravo svete!
+            question_text: Šta treba da bude popunjeno u praznom da bi se stvorio tekst Zdravo?
+            code: _Zdravo!
+        4:
+            hint: Linija 1 ne izgleda tačno
+            question_text: Šta je pogrešno sa ovim kodom?
+            code: "Zdravo ja sam Hajdi!\n{ask} Ko si ti?\n{echo} Zdravo...."
+            mp_choice_options:
+            -   option: '`{print}` u liniji 1 nedostaje.'
+                feedback: Tačno!
+            -   option: Komanda u liniji 2 je napisana pogrešno.
+                feedback: Komanda je napisana tačno.
+            -   option: '`{echo}` nije komanda.'
+                feedback: '`{echo}` je komanda, postoji druga greška.'
+            -   feedback: Pogrešno, gledaj pažljivo!
+                option: Ništa! Ovo je sjajan kod!
+            question_score: '10'
+            correct_answer: A
+        7:
+            question_text: Šta je pogrešno sa ovim kodom?

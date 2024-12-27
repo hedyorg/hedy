@@ -4,14 +4,14 @@
     <div class="w-full mb-4" id="program_filter">
             <div class="flex flex-row w-full items-center rounded-lg gap-4">
                 <custom-select name="adventure" id="explore_page_adventure" data-autosubmit="true" class="w-2/3" data-type="single">
-                    <option hidden 
-                        {% if not filtered_adventure %} selected{% endif %} 
+                    <option hidden
+                        {% if not filtered_adventure %} selected{% endif %}
                         value=""
                         hx-get="/explore?level={{ filtered_level }}"
                         hx-target="#main_container">{{ _('adventure') }}</option>
                     {% for adventure_key, name in adventures_names.items() %}
-                        <option hidden 
-                            value="{{ adventure_key }}" 
+                        <option hidden
+                            value="{{ adventure_key }}"
                             {% if adventure_key == filtered_adventure %}selected{% endif %}
                             hx-get="/explore?adventure={{ adventure_key }}&level={{ filtered_level }}"
                             hx-target="#main_container">{{ name }}</option>
@@ -55,10 +55,10 @@
             </div>
             <div class="flex w-1/3 gap-4 align-self-right">
                 {% if prev_page_url %}
-                        <a href="{{prev_page_url}}" class="btn green-btn">{{_('previous_page')}}</a>
+                        <a href="{{prev_page_url}}" class="btn green-btn" aria-label="Previous page">{{_('previous_page')}}</a>
                 {% endif %}
                 {% if next_page_url %}
-                        <a href="{{next_page_url}}" class="btn green-btn">{{_('next_page')}}</a>
+                        <a href="{{next_page_url}}" class="btn green-btn" aria-label="Next page">{{_('next_page')}}</a>
                 {% endif %}
             </div>
         </div>
