@@ -664,6 +664,69 @@ class TestQueryInMemoryWithStringSortKey(unittest.TestCase, Helpers):
                 'sort': dynamo.BeginsWith('asd'),
             })
 
+    def test_may_not_use_condition_on_table_partition_key(self):
+        self.table.create({'id': 'key', 'sort': 'asdf'})
+
+        with self.assertRaises(ValueError):
+            self.table.get_many({
+                'id': dynamo.BeginsWith('k'),
+            })
+
+    def test_may_not_use_condition_on_index_partition_key(self):
+        self.table = dynamo.Table(
+            dynamo.MemoryStorage(),
+            'table',
+            partition_key='id',
+            sort_key='sort',
+            indexes=[
+                dynamo.Index('email'),
+                dynamo.Index('epoch', sort_key='created'),
+                dynamo.Index('id', sort_key='epoch', keys_only=True),
+            ],
+        )
+
+        with self.assertRaises(ValueError):
+            self.table.get_many({
+                'id': dynamo.BeginsWith('k'),
+            })
+
+    def test_may_not_use_condition_on_table_with_only_partition_key(self):
+        self.table = dynamo.Table(
+            dynamo.MemoryStorage(),
+            'table',
+            partition_key='id',
+        )
+
+        with self.assertRaises(ValueError):
+            self.table.get_many({
+                'id': dynamo.BeginsWith('k'),
+            })
+
+    def test_can_disambiguate_between_indexes_with_same_pk(self):
+        self.table = dynamo.Table(
+            dynamo.MemoryStorage(),
+            'table',
+            partition_key='id',
+            sort_key='sort',
+            indexes=[
+                dynamo.Index('sort', sort_key='attr1', keys_only=True),
+                dynamo.Index('sort', sort_key='attr2', keys_only=True),
+            ],
+        )
+
+        self.table.create({'id': 'key', 'sort': 'asdf', 'attr1': 'asdf'})
+        self.table.create({'id': 'key', 'sort': 'qwer', 'attr2': 'qwer'})
+
+        with self.assertRaises(ValueError):
+            # Expect to be given a disambiguation error
+            self.table.get_many(dict(sort='asdf'))
+
+        result1 = self.table.get_many(dict(sort='asdf', attr1=dynamo.UseThisIndex()))
+        self.assertEqual(list(result1), [{'sort': 'asdf', 'attr1': 'asdf', 'id': 'key'}])
+
+        result2 = self.table.get_many(dict(sort='qwer', attr2=dynamo.UseThisIndex()))
+        self.assertEqual(list(result2), [{'sort': 'qwer', 'attr2': 'qwer', 'id': 'key'}])
+
 
 class TestSortKeysAgainstAws(unittest.TestCase):
     """Test that the operations send out appropriate Dynamo requests."""
@@ -724,6 +787,32 @@ class TestSortKeysAgainstAws(unittest.TestCase):
                 '#sort_key': 'sort#key'
             },
             TableName=mock.ANY,
+            ScanIndexForward=mock.ANY
+        )
+
+    def test_usethisindex_object(self):
+        self.table = dynamo.Table(
+            dynamo.AwsDynamoStorage(self.db, ''),
+            'table',
+            partition_key='pk',
+            sort_key='sk',
+            indexes=[
+                dynamo.Index('ik', sort_key='pk'),
+            ],
+        )
+        self.table.get_many({
+            'ik': '3',
+            'pk': dynamo.UseThisIndex(),
+        })
+        self.db.query.assert_called_with(
+            KeyConditionExpression='#ik = :ik',
+            ExpressionAttributeValues={
+                ':ik': {'S': '3'},
+            }, ExpressionAttributeNames={
+                '#ik': 'ik',
+            },
+            TableName=mock.ANY,
+            IndexName='ik-pk-index',
             ScanIndexForward=mock.ANY
         )
 

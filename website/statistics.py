@@ -1,8 +1,9 @@
 from collections import namedtuple
 from enum import Enum
-from flask import g, make_response, request
+from flask import make_response, request
 from website import querylog
 from website.auth import requires_admin
+from .flask_hedy import g_db
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -63,7 +64,7 @@ def add(username, action):
         if username:
             action(username)
             # g.db instead of self.db since this function is not on a class
-            is_student = g.db.get_student_classes_ids(username) != []
+            is_student = g_db().get_student_classes_ids(username) != []
             all_id = UserType.STUDENT if is_student else UserType.LOGGED
         action(all_id.value)
     except Exception as ex:

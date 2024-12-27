@@ -265,6 +265,8 @@ adventures:
                 story_text_3: |
                     ### 练习
                     在这个虚拟餐厅中尝试新命令。将玩家想要的口味添加到列表中，并删除他们过敏的口味。
+                example_code_3: "```\n{print} 神秘奶昔\n口味 {is} 草莓、巧克力、香草\n希望 {is} {ask} 您希望什么口味？\n_\n过敏 {is} {ask} 您对任何口味过敏吗？\n_\n{print} 您会得到 {at} {random} 口味的奶昔\n```\n"
+        name: '{add} {to_list} & {remove} {from}'
     and_or_command:
         default_save_name: 与和或
         description: 介绍{and}和{or}
@@ -281,6 +283,7 @@ adventures:
                     {if} 名字 {is} '海蒂' {and} 年龄 {is} 2
                         {print} '你就是真的海蒂!'
                     ```
+        name: '{and} & {or}'
     ask_command:
         default_save_name: 提问命令
         description: '{ask}命令介绍'
@@ -329,11 +332,11 @@ adventures:
                     ```
                 story_text_2: |
                     ### 练习
-                    在前面的选项中你需要操作很多带 `{is}` 的指令.
-                    你至少使用了3种不同的变量并用 print command运行.
-                    现在，我们希望你创造像我们的例子里一样可以交互的变量，而不是设置变量.
+                    在之前的冒险中，您练习了使用 `{is}` 命令设置变量。
+                    您至少创建了 3 个变量，并使用了 print 命令。
+                    现在，我们希望您让变量具有交互性，而不是设置变量，就像我们在示例中所做的那样。
 
-                    从前页复制你的代码，通过使用 `{ask}` 让变量交互运行.
+                    从之前的冒险中复制您的代码，并使用 `{ask}` 命令让变量具有交互性。
                 example_code_2: |
                     ```
                     动物 {is} {ask} 你喜欢什么 动物?
@@ -347,6 +350,7 @@ adventures:
                     名字 = {input}('你的名字是什么？')
                     {print}('所以你的名字是', 名字)
                     ```
+        name: '{ask}'
     blackjack:
         name: 黑杰克
         default_save_name: 黑杰克
@@ -354,27 +358,27 @@ adventures:
         levels:
             17:
                 story_text: |
-                    二十一点是一种简单的纸牌游戏，你必须尽可能地得到接近21点。你得到两张牌。每张牌都有其数值，而正面牌(杰克、皇后和国王)值10分。
-                    a值1或11分(你可以选择)。发牌者，你的对手，也得到两张牌。
-                    如果你愿意，你可以再抽一张卡，它的积分会加到你的积分中。发牌人也可以选择拿另一张牌。
-                    但是要注意不要超过21分，因为如果你超过了，你就输了!
-                    最接近21但没有超过它的玩家获胜。
+                    二十一点是一种简单的纸牌游戏，你必须尽可能接近 21 分。你会得到两张牌。每张牌都有其数值，人头牌（杰克、皇后和国王）值 10 分.
+                    Ace 值 1 分或 11 分（你可以选择）。庄家，也就是你的对手，也会得到两张牌。
+                    如果你愿意，你可以再拿一张牌，它的分数会加到你的总分中。庄家也可以选择再拿一张牌。
+                    但要注意不要超过 21 分，因为如果你超过 21 分，你就输了！
+                    最接近 21 分但不超过 21 分的玩家获胜!
 
+                    ### 练习
+                    在这个冒险中，我们编写了二十一点游戏的第一部分。我们将创建一个函数来计算一张牌值多少分。
 
-                    ### Exercise
-                    In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
+                    ***设置变量***
+                    首先列出所有牌，从 2 到 Ace。接下来列出人头牌，即杰克、皇后和国王。然后从卡片列表中随机挑选一张卡片作为 card_1。
 
-                    ***Set the variables***
-                    Start by making a list of all the cards, from 2 to Ace. Next make a list of the face cards, so Jack, Queen and King. Then pick a random card from the list of cards to be card_1.
+                    ***创建一个函数来计算点数***
+                    创建一个函数来计算一张卡片值多少点数。
+                    所有人头牌都值 10 分，Ace 值 11 分，所有其他卡片都值其数字。
+                    在函数末尾返回变量“points”。
 
-                    ***Create a function to calculate the points***
-                    Create a function that calculates how many points a card is worth.
-                    All the face cards are worth 10 points, the Ace is worth 11 and all the other cards are worth their numeral.
-                    Return the variable `points` at the end of the function.
-
-                    ***Test the function***
-                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
-                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
+                    ***测试函数***
+                    测试您的函数是否正常工作。通过填写您抽到的卡片来完成第一个打印命令。然后通过使用 card_1 调用函数来完成第二行。
+                    运行代码几次。您对结果满意吗？太棒了！然后您可以删除测试部分并继续下一个冒险!
+                example_code: "```\n{print} 'BLACKJACK'\n\n# Set these variables\ncards = _\nface_cards = _\ncard_1 =\n\n# 创建一个函数来计算点数\n{define} calculate_points {with} card:\n    {if} card {in} face_cards:\n        points = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ points\n\n# Test your function\n{print} 'Your card is a ' _\n{print} 'That is worth ' _ ' points'.\n```\n"
     calculator:
         name: 计算器
         default_save_name: 计算器
@@ -4012,3 +4016,7 @@ adventures:
                         {sleep}
                     {print} '新年快乐！'
                     ```
+    blackjack_2:
+        name: Blackjack 2
+        default_save_name: Blackjack_2
+        description: Blackjack part 2

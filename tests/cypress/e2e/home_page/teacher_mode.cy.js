@@ -22,7 +22,7 @@ it('Is able to create a class adventure, public profile, in teacher preview mode
 
   // can create public profile
   makeProfilePublic();
-  cy.getDataCy('username').invoke('text').then((username) => {
+  cy.getDataCy('username-menu').invoke('text').then((username) => {
     const lowercaseUsername = username.toLowerCase();
     cy.getDataCy('exit_teacher_mode_banner').click();
 
