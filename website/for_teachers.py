@@ -729,7 +729,7 @@ class ForTeachersModule(WebsiteModule):
         keyword_lang = g.keyword_lang
         adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
 
-        next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
+        next_page_url = url_for('app.programs_page', **dict(request.args, page=result.next_page_token)
                                 ) if result.next_page_token else None
 
         return render_template(

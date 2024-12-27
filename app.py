@@ -1126,9 +1126,9 @@ def programs_page(user):
     sorted_adventure_programs = hedy_content.Adventures(g.lang) \
         .get_sorted_adventure_programs(all_programs, adventure_names)
 
-    next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
+    next_page_url = url_for('.programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
-    prev_page_url = url_for('programs_page', **dict(request.args, page=result.prev_page_token)
+    prev_page_url = url_for('.programs_page', **dict(request.args, page=result.prev_page_token)
                             ) if result.prev_page_token else None
 
     return render_template(
@@ -2473,9 +2473,9 @@ def explore():
         language_filter=language,
         adventure_filter=adventure,
         pagination_token=page)
-    next_page_url = url_for('explore', **dict(request.args, page=result.next_page_token)
+    next_page_url = url_for('.explore', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
-    prev_page_url = url_for('explore', **dict(request.args, page=result.prev_page_token)
+    prev_page_url = url_for('.explore', **dict(request.args, page=result.prev_page_token)
                             ) if result.prev_page_token else None
 
     favourite_programs = g_db().get_hedy_choices()
@@ -2920,7 +2920,7 @@ def public_user_page(username):
         last_achieved = None
         certificate_message = safe_format(gettext('see_certificate'), username=username)
         next_page_url = url_for(
-            'public_user_page',
+            '.public_user_page',
             username=username, **dict(request.args,
                                       page=next_page_token)) if next_page_token else None
 
@@ -3158,7 +3158,7 @@ if __name__ == '__main__':
     debug = utils.is_debug_mode() and not (is_in_debugger or profile_memory)
     if debug:
         logger.debug('app starting in debug mode')
-    app_obj.add_url_rule("/", endpoint="index")
+
     # Threaded option enables multiple instances for multiple user access support
     app_obj.run(threaded=True, debug=debug,
                 port=config['port'], host="0.0.0.0")
