@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-11-21 21:02+0000\n"
+"PO-Revision-Date: 2024-12-29 06:14+0000\n"
 "Last-Translator: aniollidon <aniollidon@gmail.com>\n"
 "Language-Team: ca <LL@li.org>\n"
 "Language: ca\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
-msgstr "Hem detectat que la variable `{name}`s'està fent servir a la línia {access_line_number} abans de definir-se. Pots definir-la abans d'usar-la?"
+msgstr "Hem detectat que la variable `{name}`s'està fent servir a la línia {access_line_number} abans ser definida. Pots definir-la abans d'usar-la?"
 
 msgid "Cyclic Var Definition"
 msgstr "Hem detectat que la `{variable}` s'està fent servir a la dreta de la comanda `{is}` abans de definir-se. Pots definir la variable abans de fer-la servir?"
@@ -32,7 +32,7 @@ msgid "Function Undefined"
 msgstr "Hem detectat que la funció {name} s'està fent servir abans de definir-se. Pots definir-la abans d'usar-la?"
 
 msgid "Has Blanks"
-msgstr "Hem detectat que el teu codi sembla incomplet. Pots assegurar-te que has omplert tots els espais en blanc?"
+msgstr "Hem detectat que el teu codi pot ser incomplet. Pots assegurar-te que has omplert tots els espais que s'havien d'omplir amb codi?"
 
 msgid "Incomplete"
 msgstr "Hem detectat que falta part del codi a la comanda `{incomplete_command}` a la línia {line_number}. Pots provar d'afegir el que falta?"
@@ -128,13 +128,13 @@ msgid "Unquoted Equality Check"
 msgstr "Hem detectat que el codi està intentant comprovar si una variable és igual a diverses paraules. Pots provar d'utilitzar cometes per a les paraules que vols comprovar?"
 
 msgid "Unquoted Text"
-msgstr "Hem detectat que el text per a {ask} o {print} sembla que falta les seves cometes. Pots provar d'afegir cometes per a {unquotedtext}?"
+msgstr "Hem detectat que el text després de {ask} o {print} potser li falten cometes. Pots provar d'afegir-les al text {unquotedtext}?"
 
 msgid "Unsupported Float"
 msgstr "Hem detectat que el codi utilitza números no enters que encara no són compatibles. Pots provar de canviar `{value}` per un enter?"
 
 msgid "Unsupported String Value"
-msgstr "Hem detectat que el text utilitza valors que no pot contenir {invalid_value}. Pots provar de treure el valor escrit o canviar el seu tipus?"
+msgstr "Hem detectat que el text fa servir valors que no pot contenir ` {invalid_value}`. Pots provar d'eliminar el valor que has escrit o canviar el seu tipus?"
 
 msgid "Unused Variable"
 msgstr "Hem detectat que la variable {variable_name} està definida a la línia {line_number}, però no s'utilitza. Pots provar d'utilitzar la variable definida o treure-la?"
@@ -2636,4 +2636,3 @@ msgstr "El teu programa"
 
 #~ msgid "classes"
 #~ msgstr ""
-
