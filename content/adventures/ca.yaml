@@ -669,11 +669,11 @@ adventures:
                     {define} recomanacio_pelicula {with} nom
                         pelicules_accio = "Die Hard", "Fast and Furious", "Malditos Bastardos"
                         pelicules_romantiques = "Love Actually", "Barcelona nit d'estiu", "Titanic"
-                        pelicules_comedia = "Mr Bean", "Barbie", "La casa en flames"
+                        pelicules_comedia = "Mr Bean" "Barbie" "La casa en flames"
                         pelicules_nens = "Tintin", "Les tres bessones", "Inside out"
-                        {if} nom {is} "Camila" {or} nom {is} "Manel"
+                        {if} nom {is} "Carme" {or} nom {is} "Manel"
                             pelicula_recomanada = pelicules_nens {at} {random}
-                        {if} nom {is} "Pere" {or} "Gabriella"
+                        {if} nom {is} "Roc" {or} "Jana"
                                 estat_d_ànim = {ask} "Quin estat d'ànim tens?"
                             {if} estat_d_ànim {is} "acció"
                                 pelicula_recomanada = pelicules_accio {at} {random}
@@ -682,7 +682,7 @@ adventures:
                             {if} estat_d_ànim {is} "comedia"
                                 pelicula_recomanada = pelicules_comedia {at} {random}
 
-                    {print} "Et recomanaria " pelicula_recomanada " per " nom
+                    {print} "Et recomanaria " pelicula_recomanada " per a " nom
 
                     nom = {ask} "Qui està mirant?"
                     recomanacio = {ask} "Vols una recomanació?"
