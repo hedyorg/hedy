@@ -3,6 +3,7 @@ import json
 import hashlib
 import requests
 from config import config
+from functools import wraps
 from hedy_content import COUNTRIES
 from website.auth import send_email
 
@@ -23,32 +24,36 @@ if os.getenv("MAILCHIMP_API_KEY") and os.getenv("MAILCHIMP_AUDIENCE_ID"):
     }
 
 
+def run_if_mailchimp_config_present(f):
+    """Similar to 'requires_login', but also tests that the user is an admin."""
+    @wraps(f)
+    def inner(*args, **kws):
+        if MAILCHIMP_API_URL:
+            return f(*args, **kws)
+
+    return inner
+
+
+@run_if_mailchimp_config_present
 def create_subscription(email, country):
     """ Subscribes the user to the newsletter. Currently, users can subscribe to the newsletter only on signup and
     only if they are creating a teacher account. """
-    # If there is a Mailchimp API key, use it to add the subscriber through the API
-    if MAILCHIMP_API_URL:
-        create_mailchimp_subscriber(email, [country, MailchimpTag.TEACHER])
-    # Otherwise, email to notify about the subscription to the main email address
-    else:
-        recipient = config["email"]["sender"]
-        send_email(recipient, "Subscription to Hedy newsletter on signup", email, f"<p>{email}</p>")
+    tags = [country, MailchimpTag.TEACHER]
+    create_mailchimp_subscriber(email, tags)
 
 
+@run_if_mailchimp_config_present
 def update_subscription(current_email, new_email, new_country):
     """ Updates the newsletter subscription when the user changes their email or/and their country """
-    if not MAILCHIMP_API_URL:
-        # TODO: Why do we send an email to hello@hedy.org if a user subscribes and there is no mailchimp api key
-        #  but if the user changes their email and we do not have a key, we do nothing?
-        return
-    r = get_mailchimp_subscriber(current_email)
-    if r.status_code == 200:
-        current_tags = r.json().get('tags', [])
+    response = get_mailchimp_subscriber(current_email)
+    if response.status_code == 200:
+        current_tags = response.json().get('tags', [])
         if new_email != current_email:
             # If user is subscribed, we remove the old email from the list and add the new one
             new_tags = [t.get('name') for t in current_tags if t.get('name') not in COUNTRIES] + [new_country]
-            create_mailchimp_subscriber(new_email, new_tags)
-            delete_mailchimp_subscriber(current_email)
+            successfully_created = create_mailchimp_subscriber(new_email, new_tags)
+            if successfully_created:
+                delete_mailchimp_subscriber(current_email)
         else:
             # If the user did not change their email, check if the country needs to be updated
             tags_to_update = get_country_tag_changes(current_tags, new_country)
@@ -64,11 +69,10 @@ def add_class_customized_to_subscription(email):
     create_subscription_event(email, MailchimpTag.CUSTOMIZED_CLASS)
 
 
+@run_if_mailchimp_config_present
 def create_subscription_event(email, tag):
     """ When certain events occur, e.g. a newsletter subscriber creates or customizes a class, these events
     should be reflected in their subscription, so that we can send them relevant content """
-    if not MAILCHIMP_API_URL:
-        return
     r = get_mailchimp_subscriber(email)
     if r.status_code == 200:
         current_tags = r.json().get('tags', [])
@@ -122,6 +126,7 @@ def create_mailchimp_subscriber(email, tag_names):
             "ERROR - Subscription to Hedy newsletter",
             f"email: {email} status: {r.status_code} body: {r.text}",
             f"<p>{email}</p><pre>Status:{r.status_code}    Body:{r.text}</pre>")
+    return not subscription_error
 
 
 def get_mailchimp_subscriber(email):
@@ -140,5 +145,5 @@ def delete_mailchimp_subscriber(email):
 
 
 def get_subscriber_hash(email):
-    """ We hash the email with md5 to avoid emails with unescaped characters triggering errors """
+    """ Hashes the email with md5 to avoid emails with unescaped characters triggering errors """
     return hashlib.md5(email.encode("utf-8")).hexdigest()
