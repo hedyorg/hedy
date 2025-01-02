@@ -1,16 +1,16 @@
 _DEFINE: ("define" | "define") _SPACE?
-_CALL: ("call" | "call") _SPACE?
-_WITH: ("with" | "with") _SPACE?
+_CALL: ("chiama" | "call") _SPACE?
+_WITH: ("con" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
-_RETURN: ("return" | "return") _SPACE?
+_RETURN: ("restituisci" | "return") _SPACE?
 _PRINT: ("stampa" | "print") _SPACE?
-_PLAY: ("play" | "play") _SPACE
+_PLAY: ("esegui" | "play") _SPACE
 _ASK: ("chiedi" | "ask")
 _ECHO: ("eco" | "echo") _SPACE?
 _FORWARD: ("avanti" | "forward") _SPACE?
 _TURN: ("gira" | "turn") _SPACE?
 left: ("sinistra" | "left") _SPACE?
-right: ("right" | "right") _SPACE?
+right: ("destra" | "right") _SPACE?
 black: ("nero" | "black") _SPACE?
 blue: ("blu" | "blue") _SPACE?
 brown: ("marrone" | "brown") _SPACE?
@@ -22,33 +22,33 @@ purple: ("viola" | "purple") _SPACE?
 red: ("rosso" | "red") _SPACE?
 white: ("bianco" | "white") _SPACE?
 yellow: ("giallo" | "yellow") _SPACE?
-_IS: _SPACE ("is" | "is") _SPACE
-_STANDALONE_IS: ("is" | "is")
-_SLEEP: ("dormi" | "sleep") _SPACE?
-_ADD_LIST: ("add" | "add") _SPACE
-_TO_LIST: _SPACE? ("to" | "to")
+_IS: _SPACE ("è" | "is") _SPACE
+_STANDALONE_IS: ("è" | "is")
+_SLEEP: ("sospendi" | "sleep") _SPACE?
+_ADD_LIST: ("aggiungi" | "add") _SPACE
+_TO_LIST: _SPACE? ("a" | "to")
 _REMOVE: ("rimuovi" | "remove") _SPACE
 _FROM: _SPACE? ("da" | "from")
-_AT: _SPACE ("at" | "at") _SPACE
-random: ("a caso" | "random") _SPACE?
+_AT: _SPACE ("nella posizione" | "at") _SPACE
+random: ("casuale" | "random") _SPACE?
 _IN: _SPACE ("in" | "in") _SPACE
-_NOT_IN: _SPACE ("non quello" | "not in") _SPACE
-_IF: ("if" | "if") _SPACE
+_NOT_IN: _SPACE ("non in" | "not in") _SPACE
+_IF: ("se" | "if") _SPACE
 _ELSE: "altrimenti" | "else"
 _AND: _SPACE? ("e" | "and") _SPACE
 _REPEAT: ("ripeti" | "repeat") _SPACE
 _TIMES: _SPACE ("volte" | "times")
-_FOR: ("for" | "for") _SPACE
+_FOR: ("per" | "for") _SPACE
 _RANGE: ("intervallo" | "range") _SPACE?
-_TO: _SPACE ("to" | "to") _SPACE
+_TO: _SPACE ("a" | "to") _SPACE
 _STEP: "passo" | "step"
 _ELIF: _SPACE? ("altrimenti se" | "elif") _SPACE
-_INPUT: ("input" | "input")
-_OR: _SPACE? ("or" | "or") _SPACE
+_INPUT: ("ingresso" | "input")
+_OR: _SPACE? ("o" | "or") _SPACE
 _WHILE: ("mentre" | "while") _SPACE
 _LENGTH: "lunghezza" | "length"
 _COLOR : ("colore" | "color") _SPACE?
-_PRESSED: ("Premuto" | "pressed") _SPACE?
-clear: ("Elimina" | "clear") _SPACE?
-TRUE: ("true" | "True" | "true" | "True") _SPACE?
-FALSE: ("false" | "False" | "false" | "False") _SPACE?
+_PRESSED: ("premuto" | "pressed") _SPACE?
+clear: ("elimina" | "clear") _SPACE?
+TRUE: ("vero" | "Vero" | "true" | "True") _SPACE?
+FALSE: ("falso" | "Falso" | "false" | "False") _SPACE?
