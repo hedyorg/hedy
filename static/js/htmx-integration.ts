@@ -40,10 +40,14 @@ htmx.defineExtension('disable-element', {
  * - Turning <pre>s into Ace editors
  * - Make tabs active
  * - Initialize sortables
+ * - Reset the scroll position on lists that need it
  */
 htmx.onLoad((content) => {
     initializeHighlightedCodeBlocks(content, true);
     new Tabs({ where: content });
+
+    $(content).find('.htmx-resetscroll').scrollTop(0);
+
     var sortables =  content.querySelectorAll('.sortable');
     for (let i = 0; i < sortables.length; i++) {
         var sortable = sortables[i] as HTMLElement;

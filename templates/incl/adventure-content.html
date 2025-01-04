@@ -4,7 +4,7 @@
  # Variables used: adventure, public_adventures_page, story, adventure_content_topright_include
  #}
 
- {% set untrusted_input = adventure.is_teacher_adventure %}
+ {% set content_is_already_html = adventure.is_teacher_adventure %}
 
  <div class="turn-pre-into-ace show-copy-button text-adventure-copy" data-level="{{adventure.level}}">
               <div class="
@@ -19,7 +19,7 @@
                   {% endif %}
 
                     <div class="p-2 ltr:mr-2 rtl:ml-2">
-                        {% if untrusted_input %}
+                        {% if content_is_already_html %}
                           {{ adventure.text|safe }}
                         {% else %}
                           {{ adventure.text|commonmark }}
@@ -27,7 +27,7 @@
                     </div>
                   {% if adventure.example_code %}
                       <div class="p-2 ltr:ml-2 rtl:mr-2">
-                        {% if untrusted_input %}
+                        {% if content_is_already_html %}
                           {{ adventure.example_code|safe }}
                         {% else %}
                           {{ adventure.example_code|commonmark }}
@@ -48,7 +48,7 @@
                 <div class="lg:grid lg:grid-cols-2 gap-4 border-t-2">
                   <div class="p-2 ltr:mr-2 rtl:ml-2">
                     <div class="max-w-prose">
-                      {% if untrusted_input %}
+                      {% if content_is_already_html %}
                         {{ story.text|safe }}
                       {% else %}
                         {{ story.text|commonmark }}
@@ -57,7 +57,7 @@
                   </div>
                   {% if story.example_code %}
                     <div class="p-2 ltr:ml-2 rtl:mr-2">
-                      {% if untrusted_input %}
+                      {% if content_is_already_html %}
                         {{ story.example_code|safe }}
                       {% else %}
                         {{ story.example_code|commonmark }}

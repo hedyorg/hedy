@@ -557,6 +557,14 @@ def deep_translate_keywords(yaml, keyword_language):
         raise TypeError(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
 
 
+def try_render_keywords(str, keyword_language):
+    """Render {placeholder}s in a string, return the original if there are any errors."""
+    try:
+        return safe_format(str, **KEYWORDS.get(keyword_language))
+    except Exception:
+        logger.exception('Error rendering keywords')
+        return str
+
 def get_localized_name(name, keyword_lang):
     return safe_format(name, **KEYWORDS.get(keyword_lang))
 

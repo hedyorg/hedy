@@ -6,17 +6,19 @@
     data-tab="adventure-preview">
     {{ _('Adventure') }}
   </div>
+  {% if adventure.solution_example %}
   <div
     class="tab flex items-center justify-center whitespace-nowrap"
     tabindex="0"
     data-tab="adventure-answer">
     {{ _('Answer') }}
   </div>
+  {% endif %}
 </div>
 
 {# Panes #}
 <div class="shadow-md bg-white p-4">
-  <div data-tabtarget="adventure-preview" data-level="{{adventure.level}}">
+  <div data-tabtarget="adventure-preview">
     <h1>{{ adventure.name }}</h1>
 
     {% set adventure_content_topright_include = 'public-adventures2/incl-about.html' %}
@@ -27,7 +29,13 @@
     {% set public_adventures_page = True %}
     {% include "incl/editor-and-output.html" %}
   </div>
-  <div data-tabtarget="adventure-answer" class="hidden">
-    Answer here
-  </div>
+  {% if adventure.solution_example %}
+    <div data-tabtarget="adventure-answer" class="hidden turn-pre-into-ace" data-level="{{adventure.level}}">
+      {% if adventure.is_teacher_adventure %}
+        {{ adventure.solution_example|safe }}
+      {% else %}
+        {{ adventure.solution_example|commonmark }}
+      {% endif %}
+    </div>
+  {% endif %}
 </div>

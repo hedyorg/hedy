@@ -1,6 +1,6 @@
 <div class="flex gap-4">
   <div class="flex-0">
-    <div class="shadow-inner overflow-auto w-64 bg-white shadow-md" style="max-height: 36em;">
+    <div class="overflow-auto w-64 bg-white shadow-md htmx-resetscroll" style="max-height: 36em;">
       {% for adventure in adventures %}
       <div
         class="adventure-item text-gray-800 flex flex-col cursor-pointer p-2 border-b border-gray-300"
@@ -29,7 +29,14 @@
               </span>
             </div>
           </div>
-          <div class="text-gray-500">{{_('level')}} {{ adventure.levels|join(', ') }}</div>
+          <div class="flex flex-row">
+            <div class="flex-1 text-gray-500">{{_('level')}} {{ adventure.levels|join(', ') }}</div>
+            <div class="flex-none">
+              {% if adventure.solution_example %}
+                <span class="fa fa-book text-gray-500" title="{{_('this_adventure_has_an_example_solution')}}"></span>
+              {% endif %}
+            </div>
+          </div>
           {% if adventure.tags %}
             <div>
               {% for tag in adventure.tags %}

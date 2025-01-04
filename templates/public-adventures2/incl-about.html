@@ -23,6 +23,13 @@
             </div>
         {% endif %}
 
+        {% if adventure.get("language") %}
+            <div>
+                <span class="{{ labelstyles }}">{{ _('language') }}:</span>
+                {{ lang_to_sym(adventure.language) }}
+            </div>
+        {% endif %}
+
         <div>
             <!-- adventure.level will gradually be removed until we have all adventures using only levels. -->
             {% if adventure.levels and adventure.levels|length > 1 %}
@@ -35,13 +42,6 @@
                 {{ adventure.level }}
             {% endif %}
         </div>
-
-        {% if adventure.get("language") %}
-            <div>
-                <span class="{{ labelstyles }}">{{ _('language') }}:</span>
-                {{ lang_to_sym(adventure.language) }}
-            </div>
-        {% endif %}
 
         {% if adventure["cloned_times"] %}
             <div>

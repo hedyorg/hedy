@@ -4,6 +4,7 @@ from functools import lru_cache
 from flask import g, request, make_response
 from website.flask_helpers import gettext_with_fallback as gettext
 import json
+import bs4
 
 import hedy
 import hedy_content
@@ -90,6 +91,14 @@ class PublicAdventuresModule2(WebsiteModule):
         adventure['tags'] = list(sorted(adventure.get('tags', [])))
         adventure['cloned_stars'] = cloned_times_to_stars(adventure.setdefault('cloned_times', 0))
         adventure['creator'] = adventure.get('creator', adventure.get('username'))
+        adventure['solution_example'] = adventure.get('solution_example', '').strip()
+
+        # The solution_example is already HTML, with keyword markers. If it is empty HTML, remove it. If it is non-empty
+        # HTML, render the keywords to the current language.
+        if bs4.BeautifulSoup(adventure['solution_example'], 'html.parser').text.strip() == '':
+            adventure['solution_example'] = ''
+        else:
+            adventure['solution_example'] = hedy_content.try_render_keywords(adventure['solution_example'], adventure['language'])
 
         return adventure
 
