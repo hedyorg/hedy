@@ -2,7 +2,7 @@ adventures:
     story:
         name: Geschichte
         default_save_name: Geschichte
-        description: Geschichte
+        description: Schreib eine Kurzgeschichte
         levels:
             1:
                 story_text: |
@@ -367,9 +367,9 @@ adventures:
                     ```
                 story_text_2: |
                     ### Übung
-                    In vorherigen Übung hast du das Setzen von Variablen mit dem `{is}` Befehl geübt.
-                    Du hast mindestens 3 Variablen definiert und sie im drucke Befehl verwendet.
-                    Jetzt wollen wir die Variablen wie unserem Beispiel interaktiv machen, statt sie zu setzen.
+                    In der vorherigen Übung hast du die Definition von Variablen mit dem `{is}` Befehl geübt.
+                    Du hast mindestens 3 Variablen festgelegt und sie mit dem Druckbefehl verwendet.
+                    Jetzt wollen wir die Variablen nicht einfach festlegen, sondern flexibel machen -  so wie in unserem Beispiel.
 
                     Kopiere den Code der vorherigen Übung hierher und mache sie mit `{ask}` Befehlen interaktiv.
                 example_code_2: |
@@ -391,8 +391,8 @@ adventures:
         levels:
             17:
                 story_text: |
-                    Blackjack ist ein einfaches Kartenspiel, bei dem du so nahe wie möglich an die 21 herankommen musst. Du bekommst zwei Karten. Jede Karte hat den Wert ihrer abgebildeten zahl und die Karten mit Bildern (Bube, Dame, König) sind 10 Punkte Wert.
-                    Das Ass is entweder 1 oder 11 Punkte wert (das kannst du dir aussuchen). Der Kartengeber, dein Gegner, erhält auch zwei Karten.
+                    Blackjack ist ein einfaches Kartenspiel, bei dem du so nahe wie möglich an die 21 herankommen musst. Du bekommst zwei Karten. Jede Karte hat den Wert ihrer abgebildeten Zahl. Die Karten mit Bildern (Bube, Dame, König) sind 10 Punkte wert.
+                    Das Ass ist entweder 1 oder 11 Punkte wert - das kannst du dir aussuchen. Der Kartengeber, dein Gegner, erhält auch zwei Karten.
                     Wenn du möchtest, kannst du noch eine Karte ziehen und ihre Punkte werden zu deinen dazugerechnet. Der Kartengeber darf auch noch eine Karte ziehen.
                     Aber pass auf, dass du nicht mehr als 21 Punkte bekommst, denn dann verlierst du!
                     Der Spieler, der am nächsten an 21 herankommt ohne sie zu überschreiten, gewinnt!
@@ -401,16 +401,16 @@ adventures:
                     In diesem Abenteuer programmieren wir den ersten Teil unseres Blackjack Spiels. Wir schreiben eine Funktion, die berechnet, wie viele Punkte eine Karte zählt.
 
                     ***Setze die Variablen***
-                    Beginne, indem du eine Liste mit Karten anlegst, von der 2 bis zum Ass. Als nächstes, mache eine Liste mit den Bildkarte, also Bube, Dame und König. Dann wähle eine zufällige Karte aus der Liste der Karte als karte_1.
+                    Beginne, indem du eine Liste mit Karten anlegst, von der 2 bis zum Ass. Als nächstes mache eine Liste mit den Bildkarten, also Bube, Dame und König. Dann wähle eine zufällige Karte aus der Liste der Karte als karte_1.
 
                     ***Schreibe eine Funktion, um die Punkte zu berechnen***
                     Schreibe eine Funktion, die berechnet, wie viele Punkte eine Karte zählt.
                     Alle Bildkarten zählen 10 Punkte, ein Ass 11 und alle anderen Karten zählen ihren Zahlenwert
-                    Die die Variable `punkte` am Ende der Funktion zurück.
+                    Gib die Variable `punkte` am Ende der Funktion zurück.
 
                     ***Teste die Funktion***
                     Teste, ob deine Funktion richtig funktioniert. Vervollständige den ersten `{print}`Befehl, indem du die Karte ergänzt, die du gezogen hast. Dann vervollständige die zweite Zeile, indem du die Funktion mit karte_1 aufrufst.
-                    Lass dein Programm ein paar mal laufen. Bist du mit den Ergebnissen zufrieden? Dann kannst du den Testteil entfernen und zum nächsten Tab wechseln!
+                    Lass dein Programm ein paar Mal laufen. Bist du mit den Ergebnissen zufrieden? Dann kannst du den Testteil entfernen und zum nächsten Tab wechseln!
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
