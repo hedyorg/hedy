@@ -12,6 +12,11 @@ export interface TabEvents {
 
 export interface TabOptions {
   readonly initialTab?: string;
+
+  /**
+   * Only activate tabs inside this scope
+   */
+  readonly where?: Element;
 }
 
 /**
@@ -41,7 +46,9 @@ export class Tabs {
   });
 
   constructor(options: TabOptions={}) {
-    $('*[data-tab]').on('click', (e) => {
+    const root = $(options.where ?? document.body);
+
+    root.find('*[data-tab]').on('click', (e) => {
       const tab = $(e.target);
       const tabName = tab.data('tab') as string;
 
@@ -59,7 +66,7 @@ export class Tabs {
       initialTab = hashFragment;
     }
     if (!initialTab) {
-      initialTab = $('.tab:first').attr('data-tab');
+      initialTab = root.find('.tab:first').attr('data-tab');
     }
 
     if (initialTab) {

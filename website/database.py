@@ -797,7 +797,7 @@ class Database:
 
         Also returns the languages and tags that match the current filter.
 
-        FIXME: This is right now very poorly optimized, and needs more work.
+        FIXME: This is right now very poorly optimized, and needs more work to be fast.
         """
 
         server_side_filter = {
@@ -810,8 +810,15 @@ class Database:
                 return False
             if tag and tag not in adventure.get('tags', []):
                 return False
-            if q and (q not in adventure.get('name', '') and q not in adventure.get('content', '') and q not in adventure.get('author', '') and q not in adventure.get('creator', '')):
-                return False
+            if q:
+                fulltext = '|'.join([
+                    adventure.get('name', ''),
+                    adventure.get('content', ''),
+                    adventure.get('author', ''),
+                    adventure.get('creator', '')
+                ])
+                if q.lower() not in fulltext.lower():
+                    return False
             return True
 
         return self.adventures.get_page({"public": 1},

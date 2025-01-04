@@ -67,7 +67,7 @@ class PublicAdventuresModule(WebsiteModule):
                 "language": adv_lang,
                 "cloned_times": adventure.get("cloned_times"),
                 "tags": adv_tags,
-                "text": content,
+                "text": adventure.get("id") + " " + content,
                 "is_teacher_adventure": True,
                 "flagged": adventure.get("flagged", 0),
             }
@@ -194,7 +194,12 @@ class PublicAdventuresModule(WebsiteModule):
         )
 
         response = make_response(temp, 200)
-        response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
+        response.headers["HX-Trigger-After-Settle"] = json.dumps({
+            # "updateTSCode": js,
+
+            # public-adventures.ts
+            'activateTabs': {},
+        })
         return response
 
     @route("/clone/<adventure_id>", methods=["POST"])

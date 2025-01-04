@@ -449,14 +449,20 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
       clearOutput();
     });
   }
-  const levelStr = $(preview).attr('level');
-  const lang = $(preview).attr('lang');
-  if (levelStr && lang) {
-    initializeTranslation({
-      keywordLanguage: lang,
-      level: parseInt(levelStr, 10),
-    })
-    exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
+
+  // Try to find the level for this code block. We first look at the 'level'
+  // attribute on the <pre> element itself.  This is to preserve legacy
+  // behavior, I'm not sure where this is still used. The modern way is to look
+  // for 'data-level' attributes on the element itself and any containing element.
+  // Same for 'lang' and 'data-lang'.
+  const levelStr = $(preview).attr('level') ?? $(preview).closest('[data-level]').attr('data-level');
+  const lang = $(preview).attr('lang') ?? $(preview).closest('[data-lang]').attr('data-lang');
+  if (levelStr) {
+    const level = parseInt(levelStr, 10);
+    if (lang) {
+      initializeTranslation({ keywordLanguage: lang, level })
+    }
+    exampleEditor.setHighlighterForLevel(level);
   }
 }
 
@@ -474,8 +480,8 @@ export function stopit() {
   document.onkeydown = null;
   $('#keybinding_modal').hide();
   $('#sleep_modal').hide();
-  
-  if (sleepRunning) {    
+
+  if (sleepRunning) {
     sleepRunning = false;
   }
 
@@ -586,7 +592,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           error.showWarning(response.Warning);
         }
 
-        
+
         if (adventure && response.save_info) {
           adventure.save_info = response.save_info;
           adventure.editor_contents = code;
@@ -676,7 +682,7 @@ function updateProgramCount() {
   const countText = programCountDiv.text();
   const regex = /(\d+)/;
   const match = countText.match(regex);
-  
+
   if (match && match.length > 0) {
     const currentCount = parseInt(match[0]);
     const newCount = currentCount - 1;
@@ -688,7 +694,7 @@ function updateProgramCount() {
 function updateSelectOptions(selectName: string) {
   let optionsArray: string[] = [];
   const select = $(`select[name='${selectName}']`);
-  
+
   // grabs all the levels and names from the remaining adventures
   $(`[id="program_${selectName}"]`).each(function() {
       const text = $(this).text().trim();
@@ -725,8 +731,8 @@ export async function delete_program(id: string, prompt: string) {
     updateSelectOptions('adventure');
     // this function decreases the total programs saved
     updateProgramCount();
-    const response = await postJson('/programs/delete', { id });    
-    
+    const response = await postJson('/programs/delete', { id });
+
     // issue request on the Bar component.
     modal.notifySuccess(response.message);
   });
@@ -1002,7 +1008,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         $('#stopit').hide();
         $('#runit').show();
         $('#runit').show();
-        if (Sk.execLimit != 1) {          
+        if (Sk.execLimit != 1) {
           return ClientMessages ['Program_too_long'];
         } else {
           return null;
@@ -1051,7 +1057,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
-      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {        
+      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {
         error.showWarning(ClientMessages['Empty_output']);
         return;
       }
@@ -1186,7 +1192,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   function builtinRead(x: string) {
     if (x in skulptExternalLibraries) {
       const tmpPath = skulptExternalLibraries[x]["path"];
-      
+
       let request = new XMLHttpRequest();
       request.open("GET", tmpPath, false);
       request.send();
@@ -1762,7 +1768,7 @@ function updatePageElements() {
     $('#commands_dropdown_container').show()
     $('#hand_in_button').show()
   }
-  if (currentTab === 'parsons'){    
+  if (currentTab === 'parsons'){
     $('#share_program_button').hide()
     $('#read_outloud_button_container').hide()
     $('#cheatsheet_dropdown_container').hide()

@@ -1,0 +1,70 @@
+{##
+ # A single adventure's content
+ #
+ # Variables used: adventure, public_adventures_page, story, adventure_content_topright_include
+ #}
+
+ {% set untrusted_input = adventure.is_teacher_adventure %}
+
+ <div class="turn-pre-into-ace show-copy-button text-adventure-copy" data-level="{{adventure.level}}">
+              <div class="
+                  {% if adventure.example_code or adventure_content_topright_include %}lg:grid lg:grid-cols-2 gap-4{%endif%}
+                  {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}
+                  ">
+                  {% if adventure_content_topright_include %}
+                    {# Source order here but displayed top-right #}
+                    <div class="p-2 ltr:ml-2 rtl:mr-2 lg:order-2">
+                      {% include adventure_content_topright_include %}
+                    </div>
+                  {% endif %}
+
+                    <div class="p-2 ltr:mr-2 rtl:ml-2">
+                        {% if untrusted_input %}
+                          {{ adventure.text|safe }}
+                        {% else %}
+                          {{ adventure.text|commonmark }}
+                        {% endif %}
+                    </div>
+                  {% if adventure.example_code %}
+                      <div class="p-2 ltr:ml-2 rtl:mr-2">
+                        {% if untrusted_input %}
+                          {{ adventure.example_code|safe }}
+                        {% else %}
+                          {{ adventure.example_code|commonmark }}
+                        {% endif %}
+                      </div>
+                  {% endif %}
+
+                  {# Deprecated #}
+                  {% if public_adventures_page %}
+                      <div class="p-2 ltr:ml-2 rtl:mr-2">
+                        {{ render_partial('htmx-adventure-card.html', user={"username": username}, adventure=adventure, level=level ) }}
+                      </div>
+                  {% endif %}
+
+              </div>
+
+            {% for story in adventure.extra_stories %}
+                <div class="lg:grid lg:grid-cols-2 gap-4 border-t-2">
+                  <div class="p-2 ltr:mr-2 rtl:ml-2">
+                    <div class="max-w-prose">
+                      {% if untrusted_input %}
+                        {{ story.text|safe }}
+                      {% else %}
+                        {{ story.text|commonmark }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  {% if story.example_code %}
+                    <div class="p-2 ltr:ml-2 rtl:mr-2">
+                      {% if untrusted_input %}
+                        {{ story.example_code|safe }}
+                      {% else %}
+                        {{ story.example_code|commonmark }}
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+            {% endfor %}
+
+</div>

@@ -1,9 +1,9 @@
 <div class="flex gap-4">
   <div class="flex-0">
-    <div class="shadow-inner overflow-auto w-64 border border-gray-600" style="height: 40rem;">
+    <div class="shadow-inner overflow-auto w-64 bg-white shadow-md" style="max-height: 36em;">
       {% for adventure in adventures %}
       <div
-        class="adventure-item text-gray-800 flex flex-col cursor-pointer p-2 border-b border-gray-600"
+        class="adventure-item text-gray-800 flex flex-col cursor-pointer p-2 border-b border-gray-300"
         tabindex="0"
         _="on click remove .selected from .adventure-item then add .selected to me end on keyup[key is 'Enter'] send click to me"
         hx-get="/public-adventures2/preview/{{ adventure.id }}" hx-target="#preview-div"
@@ -11,6 +11,15 @@
         <div class="flex-1">
           <span class="text-xl min-h-28">{{ adventure.name }}</span>
         </div>
+        {#
+        <div alt="This adventure has been cloned {{ adventure.cloned_times }} times">
+          {{ adventure.cloned_stars }}
+          {{ adventure.cloned_times }}
+          {% for x in range(adventure.cloned_stars) %}
+            <span class="fa fa-star text-green-500"></span>
+          {% endfor %}
+        </div>
+        #}
         <div class="flex-0 text-xs">
           <div class="flex">
             <div class="flex-1 text-gray-500">{{ adventure.creator }}</div>
@@ -32,18 +41,22 @@
       </div>
       {% endfor %}
     </div>
+
+    {# Pagination buttons #}
+    <div class="flex gap-2">
+      {% if prev_page_token %}
+        <button _="on click set (#page_input).value to '{{prev_page_token}}' then call (#filterform).requestSubmit()" class="green-btn mt-4">« Prev page</button>
+      {% endif %}
+      {% if next_page_token %}
+        <button _="on click set (#page_input).value to '{{next_page_token}}' then call (#filterform).requestSubmit()" class="green-btn mt-4">Next page »</button>
+      {% endif %}
+    </div>
   </div>
   <div class="flex-1">
     <div id="preview-div">
+      <div class="flex h-96 items-center justify-center">
+        <div class="text-gray-600">(no adventure selected)</div>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="flex gap-2">
-  {% if prev_page_token %}
-    <button _="on click set (#page_input).value to '{{prev_page_token}}' then call (#filterform).requestSubmit()" class="green-btn mt-4">« Prev page</button>
-  {% endif %}
-  {% if next_page_token %}
-    <button _="on click set (#page_input).value to '{{next_page_token}}' then call (#filterform).requestSubmit()" class="green-btn mt-4">Next page »</button>
-  {% endif %}
 </div>

@@ -1,0 +1,65 @@
+    <div class="w-96 max-w-full border border-gray-600 mb-4">
+      <div class="bg-gray-600 text-white px-4 py-1">{{ _('about_this_adventure') }}</div>
+      <div class="px-4 py-2">
+        {% set creator = _('owner') if adventure["author"] != adventure["creator"] else _('creator') %}
+
+        {% set labelstyles = "inline-block text-gray-600 mt-1 font-bold min-w-16" %}
+
+        {% if adventure["creator_public_profile"] or adventure["public_user"] %}
+            <div>
+                <span class="{{ labelstyles }}">{{ creator }}:</span>
+                <a href="/user/{{adventure.creator or adventure.username}}" target="_blank">{{ adventure.creator or adventure.username }}</a>
+            </div>
+        {% else %}
+            <div>
+                <span class="{{ labelstyles }}">{{ creator }}:</span>
+                {{ adventure.creator or adventure.username }}
+            </div>
+        {% endif %}
+        {% if adventure["author"] != adventure["creator"] %}
+            <div>
+                <span class="{{ labelstyles }}">{{ _('creator') }}:</span>
+                {{ adventure.author or adventure.username }}
+            </div>
+        {% endif %}
+
+        <div>
+            <!-- adventure.level will gradually be removed until we have all adventures using only levels. -->
+            {% if adventure.levels and adventure.levels|length > 1 %}
+                <span class="{{ labelstyles }}">{{ _('levels') }}:</span>
+                {% for level in adventure.levels %}
+                    {{level}}{% if loop.index != adventure.levels|length %}, {% endif %}
+                {% endfor %}
+            {% else %}
+                <span class="{{ labelstyles }}">{{ _('level') }}:</span>
+                {{ adventure.level }}
+            {% endif %}
+        </div>
+
+        {% if adventure.get("language") %}
+            <div>
+                <span class="{{ labelstyles }}">{{ _('language') }}:</span>
+                {{ lang_to_sym(adventure.language) }}
+            </div>
+        {% endif %}
+
+        {% if adventure["cloned_times"] %}
+            <div>
+                <span class="{{ labelstyles }}">{{_('cloned_times')}}:</span>
+                {{adventure["cloned_times"]}}
+            </div>
+        {%endif%}
+        <div>
+            <span class="{{ labelstyles }}">{{_('last_update')}}:</span>
+            {{ adventure.date|format_date }}
+        </div>
+
+        {% if adventure.tags %}
+          <div>
+            {% for tag in adventure.tags %}
+            <span class="inline-block bg-pink-200 rounded-full px-2 text-gray-700 mr-1 mb-1">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>

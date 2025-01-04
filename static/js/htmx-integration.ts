@@ -5,6 +5,7 @@ import { initializeHighlightedCodeBlocks } from './app';
 import { ClientMessages } from './client-messages';
 import { modal } from './modal';
 import Sortable from 'sortablejs';
+import { Tabs } from './tabs';
 
 declare const htmx: typeof import('./htmx');
 
@@ -34,10 +35,15 @@ htmx.defineExtension('disable-element', {
 /**
  * We have some custom JavaScript to run on new content that's loaded into the DOM.
  *
- * (Notably: turning <pre>s into Ace editors)
+ * What we do:
+ *
+ * - Turning <pre>s into Ace editors
+ * - Make tabs active
+ * - Initialize sortables
  */
 htmx.onLoad((content) => {
     initializeHighlightedCodeBlocks(content, true);
+    new Tabs({ where: content });
     var sortables =  content.querySelectorAll('.sortable');
     for (let i = 0; i < sortables.length; i++) {
         var sortable = sortables[i] as HTMLElement;
