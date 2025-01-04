@@ -23,7 +23,6 @@ import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
-import { initializeTranslation } from './lezer-parsers/tokens';
 import { initializeActivity } from './user-activity';
 import { IndexTabs, SwitchAdventureEvent } from './index-tabs';
 export let theGlobalDebugger: any;
@@ -218,7 +217,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   if ($editor.length) {
     const dir = $('body').attr('dir');
     theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
-    initializeTranslation({keywordLanguage: theKeywordLanguage, level: theLevel});
     attachMainEditorEvents(theGlobalEditor);
     initializeDebugger({
       editor: theGlobalEditor,
@@ -369,10 +367,6 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   // We need to enable the main editor for the program page as well
   const dir = $('body').attr('dir');
   theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
-  initializeTranslation({
-    keywordLanguage: options.lang,
-    level: options.level
-  });
   attachMainEditorEvents(theGlobalEditor);
   theGlobalEditor.contents = options.code;
   initializeDebugger({
@@ -386,12 +380,6 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: boolean) {
   const dir = $("body").attr("dir");
   initializeParsons();
-  if (theLevel) {
-    initializeTranslation({
-      keywordLanguage: theKeywordLanguage,
-      level: theLevel
-    })
-  }
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
@@ -459,10 +447,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   const lang = $(preview).attr('lang') ?? $(preview).closest('[data-lang]').attr('data-lang');
   if (levelStr) {
     const level = parseInt(levelStr, 10);
-    if (lang) {
-      initializeTranslation({ keywordLanguage: lang, level })
-    }
-    exampleEditor.setHighlighterForLevel(level);
+    exampleEditor.setHighlighterForLevel(level, lang ?? 'en');
   }
 }
 

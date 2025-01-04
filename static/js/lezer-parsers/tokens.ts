@@ -44,7 +44,7 @@ import {
     add as add7, remove as remove7, from as from7, to_list as to_list7,
     at as at7, random as random7, clear as clear7, ifs as if7,
     elses as else7, ins as in7, pressed as pressed7, not_in as not_in7,
-    repeat as repeat7, times as times7, 
+    repeat as repeat7, times as times7,
 } from "./level7-parser.terms"
 
 import {
@@ -53,7 +53,7 @@ import {
     add as add8, remove as remove8, from as from8, to_list as to_list8,
     at as at8, random as random8, clear as clear8, ifs as if8,
     elses as else8, ins as in8, pressed as pressed8, not_in as not_in8,
-    repeat as repeat8, times as times8, 
+    repeat as repeat8, times as times8,
 } from "./level8-parser.terms"
 
 import {
@@ -143,7 +143,7 @@ import {
 } from "./level17-parser.terms"
 
 import {
-    print as print18, is as is18, input as input18, sleep as sleep18, random as random18, 
+    print as print18, is as is18, input as input18, sleep as sleep18, random as random18,
     forward as forward18, turn as turn18, play as play18, color as color18, add as add18,
     remove as remove18, from as from18, clear as clear18, ifs as ifs18,
     elses as elses18, and as and18, or as or18, pressed as pressed18, notIn as notIn18, ins as ins18,
@@ -160,8 +160,6 @@ export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly level: number;
 }
 
-let TRADUCTION: Map<string,string>;
-let level: number;
 interface tokenSpecilizer {
     extend: Record<string, number>,
     specialize: Record<string, number>,
@@ -258,7 +256,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "at": at5,
             "random": random5,
             "else": else5
-        },        
+        },
     },
     6: {
         extend: {
@@ -284,7 +282,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "at": at6,
             "random": random6,
             "else": else6
-        },        
+        },
     },
     7: {
         extend: {
@@ -312,7 +310,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "at": at7,
             "random": random7,
             "else": else7
-        },        
+        },
     },
     8: {
         extend: {
@@ -523,7 +521,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
             "to": to14,
             "range": range14,
             "return": returns14,
-            "define": define14,            
+            "define": define14,
         },
         specialize: {
             "if": if14,
@@ -671,7 +669,7 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
     18 : {
         specialize: {
             "add": add18,
-            "and": and18,    
+            "and": and18,
             "clear": clear18,
             "color": color18,
             "def": def18,
@@ -708,48 +706,60 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
     }
 }
 
-let specializeTranslations: Map<string, string>;
-let extendTranslations: Map<string, string>;
+let converted_cache: Map<string, Map<string,string>> | undefined;
+/**
+ * Return the keyword translations (historically called "traductions") for a given language
+ */
+function traductionMap(language: string) {
+    if (!converted_cache) {
+        converted_cache = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
+    }
 
-export function initializeTranslation(options: InitializeCodeMirrorSyntaxHighlighterOptions) {
-    const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
-    level = options.level;
-    let lang = options.keywordLanguage;
-    if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
-    // get the traduction    
-    TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
-    specializeTranslations = new Map();
-    extendTranslations = new Map();
-    
-    for (const [key, value] of TRADUCTION) {
+    if (!converted_cache.has(language)) {
+        language = 'en';
+    }
+
+    return converted_cache.get(language)!;
+}
+
+export function specializeKeywordGen(level: number, lang: string) {
+    const specializeTranslations = new Map();
+    for (const [key, value] of traductionMap(lang)) {
         if (key in keywordToToken[level].specialize) {
             specializeTranslations.set(key, value);
-        } else if (key in keywordToToken[level].extend) {
+        }
+    }
+
+    return (name: string, stack: Stack) => {
+        for (const [key, value] of specializeTranslations) {
+            const regexString =  value.replace(/ /g, '|');
+            if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
+                if (stack.canShift(keywordToToken[level].specialize[key])) {
+                    return keywordToToken[level].specialize[key];
+                }
+            }
+        }
+        return -1;
+    };
+}
+
+export function extendKeywordGen(level: number, lang: string) {
+    const extendTranslations = new Map();
+    for (const [key, value] of traductionMap(lang)) {
+        if (key in keywordToToken[level].specialize) {
             extendTranslations.set(key, value);
         }
     }
-}
 
-export function specializeKeyword(name: string, stack: Stack) {
-    for (const [key, value] of specializeTranslations) {
-        const regexString =  value.replace(/ /g, '|');
-        if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
-            if (stack.canShift(keywordToToken[level].specialize[key])) {
-                return keywordToToken[level].specialize[key];
+    return (name: string, stack: Stack) => {
+        for (const [key, value] of extendTranslations) {
+            const regexString =  value.replace(/ /g, '|');
+            if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
+                if (stack.canShift(keywordToToken[level].extend[key])) {
+                    return keywordToToken[level].extend[key];
+                }
             }
         }
-    }
-    return -1;
-}
-
-export function extendKeyword(name: string, stack: Stack) {
-    for (const [key, value] of extendTranslations) {
-        const regexString =  value.replace(/ /g, '|');
-        if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
-            if (stack.canShift(keywordToToken[level].extend[key])) {
-                return keywordToToken[level].extend[key];
-            }            
-        }
-    }
-    return -1;
+        return -1;
+    };
 }

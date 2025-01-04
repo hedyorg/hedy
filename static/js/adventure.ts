@@ -2,7 +2,6 @@ import ClassicEditor from "./ckeditor";
 import { CustomWindow } from './custom-window';
 import { languagePerLevel, keywords } from "./lezer-parsers/language-packages";
 import { SyntaxNode } from "@lezer/common";
-import { initializeTranslation } from "./lezer-parsers/tokens";
 import DOMPurify from "dompurify";
 import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json';
 import { convert } from "./utils";
@@ -25,7 +24,7 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     const editorSolutionExampleContainer = document.querySelector('#adventure-solution-editor') as HTMLElement;
     // Initialize the editor with the default language
     let lang = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
-    const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
+    const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
     if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
     let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
 
@@ -46,7 +45,7 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
 
     // Autosave customize adventure page
     autoSave("customize_adventure")
-    
+
     showWarningIfMultipleLevels()
     document.querySelectorAll('#levels_dropdown div div .option').forEach((el) => {
         el.addEventListener('click', () => {
@@ -104,7 +103,7 @@ function formatKeyword(name: string) {
 
 function findCoincidences(name: string, TRADUCTION: Map<string, string>) {
     let coincidences = [];
-    for (const [key, regexString] of TRADUCTION) {        
+    for (const [key, regexString] of TRADUCTION) {
         if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
             coincidences.push(key)
         }
@@ -143,10 +142,8 @@ function initializeEditor(language: string, editorContainer: HTMLElement, soluti
 export function addCurlyBracesToCode(code: string, level: number, language: string = 'en') {
     // If code already has curly braces, we don't do anything about it
     if (code.match(/\{(\w|_)+\}/g)) return code
-    
-    initializeTranslation({keywordLanguage: language, level: level})
 
-    let parser = languagePerLevel[level];
+    let parser = languagePerLevel[level](language);
     let parseResult = parser.parse(code);
     let formattedCode = ''
     let previous_node: SyntaxNode | undefined = undefined
@@ -205,17 +202,17 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
         j += 1;
     }
     formattedCode = resultingLines.join('\n');
-    
+
     return formattedCode;
 }
 
 export function addCurlyBracesToKeyword(name: string) {
     let lang =  (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
-    const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;    
+    const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
     if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
     let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
 
-    for (const [key, regexString] of TRADUCTION) {        
+    for (const [key, regexString] of TRADUCTION) {
         if ((new RegExp(`^(${regexString})$`, 'gu').test(name)) || name === key) {
             return `{${key}}`
         }
