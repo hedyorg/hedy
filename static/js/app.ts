@@ -23,7 +23,6 @@ import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
-import { initializeTranslation } from './lezer-parsers/tokens';
 import { initializeActivity } from './user-activity';
 import { IndexTabs, SwitchAdventureEvent } from './index-tabs';
 export let theGlobalDebugger: any;
@@ -218,7 +217,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   if ($editor.length) {
     const dir = $('body').attr('dir');
     theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
-    initializeTranslation({keywordLanguage: theKeywordLanguage, level: theLevel});
     attachMainEditorEvents(theGlobalEditor);
     initializeDebugger({
       editor: theGlobalEditor,
@@ -369,10 +367,6 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   // We need to enable the main editor for the program page as well
   const dir = $('body').attr('dir');
   theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
-  initializeTranslation({
-    keywordLanguage: options.lang,
-    level: options.level
-  });
   attachMainEditorEvents(theGlobalEditor);
   theGlobalEditor.contents = options.code;
   initializeDebugger({
@@ -386,12 +380,6 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: boolean) {
   const dir = $("body").attr("dir");
   initializeParsons();
-  if (theLevel) {
-    initializeTranslation({
-      keywordLanguage: theKeywordLanguage,
-      level: theLevel
-    })
-  }
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
@@ -452,11 +440,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   const levelStr = $(preview).attr('level');
   const lang = $(preview).attr('lang');
   if (levelStr && lang) {
-    initializeTranslation({
-      keywordLanguage: lang,
-      level: parseInt(levelStr, 10),
-    })
-    exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
+    exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10), lang);
   }
 }
 
@@ -474,8 +458,8 @@ export function stopit() {
   document.onkeydown = null;
   $('#keybinding_modal').hide();
   $('#sleep_modal').hide();
-  
-  if (sleepRunning) {    
+
+  if (sleepRunning) {
     sleepRunning = false;
   }
 
@@ -586,7 +570,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           error.showWarning(response.Warning);
         }
 
-        
+
         if (adventure && response.save_info) {
           adventure.save_info = response.save_info;
           adventure.editor_contents = code;
@@ -676,7 +660,7 @@ function updateProgramCount() {
   const countText = programCountDiv.text();
   const regex = /(\d+)/;
   const match = countText.match(regex);
-  
+
   if (match && match.length > 0) {
     const currentCount = parseInt(match[0]);
     const newCount = currentCount - 1;
@@ -688,7 +672,7 @@ function updateProgramCount() {
 function updateSelectOptions(selectName: string) {
   let optionsArray: string[] = [];
   const select = $(`select[name='${selectName}']`);
-  
+
   // grabs all the levels and names from the remaining adventures
   $(`[id="program_${selectName}"]`).each(function() {
       const text = $(this).text().trim();
@@ -725,8 +709,8 @@ export async function delete_program(id: string, prompt: string) {
     updateSelectOptions('adventure');
     // this function decreases the total programs saved
     updateProgramCount();
-    const response = await postJson('/programs/delete', { id });    
-    
+    const response = await postJson('/programs/delete', { id });
+
     // issue request on the Bar component.
     modal.notifySuccess(response.message);
   });
@@ -1002,7 +986,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         $('#stopit').hide();
         $('#runit').show();
         $('#runit').show();
-        if (Sk.execLimit != 1) {          
+        if (Sk.execLimit != 1) {
           return ClientMessages ['Program_too_long'];
         } else {
           return null;
@@ -1051,7 +1035,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
-      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {        
+      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {
         error.showWarning(ClientMessages['Empty_output']);
         return;
       }
@@ -1186,7 +1170,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   function builtinRead(x: string) {
     if (x in skulptExternalLibraries) {
       const tmpPath = skulptExternalLibraries[x]["path"];
-      
+
       let request = new XMLHttpRequest();
       request.open("GET", tmpPath, false);
       request.send();
@@ -1762,7 +1746,7 @@ function updatePageElements() {
     $('#commands_dropdown_container').show()
     $('#hand_in_button').show()
   }
-  if (currentTab === 'parsons'){    
+  if (currentTab === 'parsons'){
     $('#share_program_button').hide()
     $('#read_outloud_button_container').hide()
     $('#cheatsheet_dropdown_container').hide()
