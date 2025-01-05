@@ -709,6 +709,8 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
 let converted_cache: Map<string, Map<string,string>> | undefined;
 /**
  * Return the keyword translations (historically called "traductions") for a given language
+ *
+ * The return value is `{ keyword -> regex }` for keywords, or the special keyword 'DIGIT'.
  */
 function traductionMap(language: string) {
     if (!converted_cache) {
@@ -730,12 +732,11 @@ export function specializeKeywordGen(level: number, keywordLang: string) {
         }
     }
 
-    console.log('specializations of', level, keywordLang, specializeTranslations);
-
     return (name: string, stack: Stack) => {
         for (const [key, value] of specializeTranslations) {
             const regexString =  value.replace(/ /g, '|');
             if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
+                console.log(regexString, name, 'yup', keywordToToken[level].specialize[key]);
                 if (stack.canShift(keywordToToken[level].specialize[key])) {
                     return keywordToToken[level].specialize[key];
                 }
@@ -748,12 +749,10 @@ export function specializeKeywordGen(level: number, keywordLang: string) {
 export function extendKeywordGen(level: number, keywordLang: string) {
     const extendTranslations = new Map();
     for (const [key, value] of traductionMap(keywordLang)) {
-        if (key in keywordToToken[level].specialize) {
+        if (key in keywordToToken[level].extend) {
             extendTranslations.set(key, value);
         }
     }
-
-    console.log('extendations of', level, keywordLang, extendTranslations);
 
     return (name: string, stack: Stack) => {
         for (const [key, value] of extendTranslations) {
