@@ -1,17 +1,17 @@
 {# Tabs #}
-<div class="flex flex-row w-min">
+<div class="flex flex-row w-min gap-2 mb-4">
   <div
-    class="tab tab-selected flex items-center justify-center whitespace-nowrap"
+    class="cust-adv-tab cust-adv-tab-text active flex items-center justify-center whitespace-nowrap px-2"
     tabindex="0"
-    data-tab="adventure-preview">
+    data-tab="adventure-preview" data-activeclass="active">
     {{ _('Adventure') }}
   </div>
   {% if adventure.solution_example %}
   <div
-    class="tab flex items-center justify-center whitespace-nowrap"
+    class="cust-adv-tab cust-adv-tab-text flex items-center justify-center whitespace-nowrap px-2"
     tabindex="0"
-    data-tab="adventure-answer">
-    {{ _('Answer') }}
+    data-tab="adventure-answer" data-activeclass="active">
+    {{ _('solution_example') }}
   </div>
   {% endif %}
 </div>
