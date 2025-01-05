@@ -154,17 +154,22 @@ import {
 
 import TRADUCTION_IMPORT from '../../../highlighting/highlighting-trad.json';
 import { Stack } from "@lezer/lr";
-import { convert } from "../utils";
 export interface InitializeCodeMirrorSyntaxHighlighterOptions {
     readonly keywordLanguage: string;
     readonly level: number;
 }
 
-interface tokenSpecilizer {
+/**
+ * Whether we are specializing or extending grammar rules
+ */
+type SpecializeExtend = keyof TokenSpecializer;
+
+interface TokenSpecializer {
     extend: Record<string, number>,
     specialize: Record<string, number>,
 }
-const keywordToToken: Record<number, tokenSpecilizer> = {
+
+const keywordToToken: Record<number, TokenSpecializer> = {
     1: {
         extend: {
             "ask": ask1,
@@ -706,58 +711,78 @@ const keywordToToken: Record<number, tokenSpecilizer> = {
     }
 }
 
-let converted_cache: Map<string, Map<string,string>> | undefined;
 /**
- * Return the keyword translations (historically called "traductions") for a given language
+ * Return the keyword translations (historically called "traductions" because they were created by a French person) for a given language
+ *
+ * The return value is `{ keyword -> regex }` for keywords, or the special keyword 'DIGIT'.
  */
-function traductionMap(language: string) {
-    if (!converted_cache) {
-        converted_cache = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
-    }
+export function traductionMap(language: string): Map<string, string> {
+    // Recast this so TypeScript isn't too picky about indexing this map with a string.
+    const keywordMap: Record<string, Record<string, string>> = TRADUCTION_IMPORT;
 
-    if (!converted_cache.has(language)) {
+    if (!keywordMap[language]) {
         language = 'en';
     }
 
-    return converted_cache.get(language)!;
+    return new Map(Object.entries(keywordMap[language]));
 }
 
-export function specializeKeywordGen(level: number, lang: string) {
-    const specializeTranslations = new Map();
-    for (const [key, value] of traductionMap(lang)) {
-        if (key in keywordToToken[level].specialize) {
-            specializeTranslations.set(key, value);
+
+const PARSER_LOOKUP_CACHE = new Map<string, ParserKeyword[]>();
+
+/**
+ * For a given combination of level, keywordLang, and specialize/extend flavor, return a list of keyword regexes we could match and their respective token numbers.
+ *
+ * The regexes come from the "traductions" map, the classification into specialize/extend comes from the 'keywordToToken' map.
+ *
+ * The output is cached since the output is always the same.
+ */
+function parserLookups(level: number, keywordLang: string, specext: SpecializeExtend): ParserKeyword[] {
+    const cacheKey = `${level}-${keywordLang}-${specext}`;
+    if (PARSER_LOOKUP_CACHE.has(cacheKey)) {
+        return PARSER_LOOKUP_CACHE.get(cacheKey)!;
+    }
+
+    const list = new Array<ParserKeyword>();
+
+    for (const [keyword, restr] of traductionMap(keywordLang)) {
+        // Turn spaces into alternatives. Not sure this is still necessary but it was there.
+        const replacedStr =  restr.replace(/ /g, '|');
+        const regex = new RegExp(`^(${replacedStr})$`, 'gu');
+        const token = keywordToToken[level]?.[specext]?.[keyword];
+        if (token !== undefined) {
+            list.push({ regex, token });
         }
     }
 
+    PARSER_LOOKUP_CACHE.set(cacheKey, list);
+    return list;
+}
+
+/**
+ * How to match a keyword in a (level, language) combination against a parser token
+ */
+interface ParserKeyword {
+    regex: RegExp;
+    token: number;
+}
+
+export function specializeKeywordGen(level: number, keywordLang: string) {
     return (name: string, stack: Stack) => {
-        for (const [key, value] of specializeTranslations) {
-            const regexString =  value.replace(/ /g, '|');
-            if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
-                if (stack.canShift(keywordToToken[level].specialize[key])) {
-                    return keywordToToken[level].specialize[key];
-                }
+        for (const lookup of parserLookups(level, keywordLang, 'specialize')) {
+            if (lookup.regex.test(name) && stack.canShift(lookup.token)) {
+                return lookup.token;
             }
         }
         return -1;
     };
 }
 
-export function extendKeywordGen(level: number, lang: string) {
-    const extendTranslations = new Map();
-    for (const [key, value] of traductionMap(lang)) {
-        if (key in keywordToToken[level].specialize) {
-            extendTranslations.set(key, value);
-        }
-    }
-
+export function extendKeywordGen(level: number, keywordLang: string) {
     return (name: string, stack: Stack) => {
-        for (const [key, value] of extendTranslations) {
-            const regexString =  value.replace(/ /g, '|');
-            if (new RegExp(`^(${regexString})$`, 'gu').test(name)) {
-                if (stack.canShift(keywordToToken[level].extend[key])) {
-                    return keywordToToken[level].extend[key];
-                }
+        for (const lookup of parserLookups(level, keywordLang, 'extend')) {
+            if (lookup.regex.test(name) && stack.canShift(lookup.token)) {
+                return lookup.token;
             }
         }
         return -1;

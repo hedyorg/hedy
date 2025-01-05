@@ -1,13 +1,12 @@
 import ClassicEditor from "./ckeditor";
 import { CustomWindow } from './custom-window';
-import { languagePerLevel, keywords } from "./lezer-parsers/language-packages";
+import { PARSER_FACTORIES, keywords } from "./lezer-parsers/language-packages";
 import { SyntaxNode } from "@lezer/common";
 import DOMPurify from "dompurify";
-import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json';
-import { convert } from "./utils";
 import { ClientMessages } from "./client-messages";
 import { autoSave } from "./autosave";
 import { HedySelect } from "./custom-elements";
+import { traductionMap } from "./lezer-parsers/tokens";
 
 declare let window: CustomWindow;
 
@@ -24,23 +23,18 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     const editorSolutionExampleContainer = document.querySelector('#adventure-solution-editor') as HTMLElement;
     // Initialize the editor with the default language
     let lang = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
-    const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
-    if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
-    let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
 
     if (editorContainer) {
         await initializeEditor(lang, editorContainer);
         await initializeEditor(lang, editorSolutionExampleContainer, true);
-        showWarningIfMultipleKeywords(TRADUCTION)
+        showWarningIfMultipleKeywords(traductionMap(lang))
         $editor.model.document.on('change:data', () => {
-            showWarningIfMultipleKeywords(TRADUCTION)
+            showWarningIfMultipleKeywords(traductionMap(lang))
         })
     }
 
     $('#language').on('change', () => {
-        let lang = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
-        if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
-        TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
+        lang = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
     })
 
     // Autosave customize adventure page
@@ -143,7 +137,7 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
     // If code already has curly braces, we don't do anything about it
     if (code.match(/\{(\w|_)+\}/g)) return code
 
-    let parser = languagePerLevel[level](language);
+    let parser = PARSER_FACTORIES[level](language);
     let parseResult = parser.parse(code);
     let formattedCode = ''
     let previous_node: SyntaxNode | undefined = undefined
@@ -208,9 +202,7 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
 
 export function addCurlyBracesToKeyword(name: string) {
     let lang =  (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
-    const TRADUCTIONS = convert(TRADUCTION_IMPORT) as Map<string, Map<string,string>>;
-    if (!TRADUCTIONS.has(lang)) { lang = 'en'; }
-    let TRADUCTION = TRADUCTIONS.get(lang) as Map<string,string>;
+    let TRADUCTION = traductionMap(lang);
 
     for (const [key, regexString] of TRADUCTION) {
         if ((new RegExp(`^(${regexString})$`, 'gu').test(name)) || name === key) {

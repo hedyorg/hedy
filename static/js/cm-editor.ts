@@ -19,7 +19,7 @@ import {
     variableHighlighter
 } from "./cm-decorations";
 import { LRLanguage } from "@codemirror/language"
-import { languagePerLevel } from "./lezer-parsers/language-packages";
+import { PARSER_FACTORIES } from "./lezer-parsers/language-packages";
 import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
@@ -100,8 +100,10 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 ".cm-gutters": {
                     borderRadius: '4px'
                 },
-                ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"},
-
+                ".cm-cursor, .cm-dropCursor": {
+                    borderLeftColor: "white",
+                    borderLeftWidth: "2px"
+                },
                 ".cm-name": {
                     color: '#009975'
                 },
@@ -209,7 +211,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         });
 
         const levelStr = $(element).closest('[data-level]').attr('data-level');
-        const lang = $(element).closest('[data-lang]').attr('data-lang') ?? 'en';
+        const lang = $(element).closest('[data-kwlang]').attr('data-kwlang') ?? 'en';
         const levelInt = levelStr ? parseInt(levelStr, 10) : theLevel;
 
         if (levelInt) {
@@ -221,8 +223,9 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     * Set the highlither rules for a particular level
     * @param level
     */
-    setHighlighterForLevel(level: number, lang: string): void {
-        const language = languagePerLevel[level](lang);
+    setHighlighterForLevel(level: number, keywordLang: string): void {
+        const parser = PARSER_FACTORIES[level](keywordLang);
+
         // Contains all of the keywords for every level
         const hedyStyleTags: Record<string, Tag> = {
             "print forward turn play color ask is echo sleep Comma": t.keyword,
@@ -239,7 +242,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             "Command/ErrorInvalid/Text": t.invalid,
         }
 
-        const parserWithMetadata = language.configure({
+        const parserWithMetadata = parser.configure({
             props: [
                 styleTags(hedyStyleTags)
             ]
@@ -252,11 +255,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             }
         })
 
-        function hedy() {
-            return new LanguageSupport(langPackage)
-        }
-
-        const effect = StateEffect.appendConfig.of(hedy());
+        const effect = StateEffect.appendConfig.of(new LanguageSupport(langPackage));
 
         this.view.dispatch({ effects: effect });
     }

@@ -18,26 +18,27 @@ import { parser as level17Parser } from "../../../../../static/js/lezer-parsers/
 import { parser as level18Parser } from "../../../../../static/js/lezer-parsers/level18-parser"
 import { testTree } from "@lezer/generator/dist/test"
 import { initializeTranslation } from '../../../../../static/js/lezer-parsers/tokens';
+import { PARSER_FACTORIES } from '../../../../../static/js/lezer-parsers/language-packages';
 
 const parsers = {
-    1: level1Parser,
-    2: level2Parser,
-    3: level3Parser,
-    4: level4Parser,
-    5: level5Parser,
-    6: level6Parser,
-    7: level7Parser,
-    8: level8Parser,
-    9: level9Parser,
-    10: level10Parser,
-    11: level11Parser,
-    12: level12Parser,
-    13: level13Parser,
-    14: level14Parser,
-    15: level15Parser,
-    16: level16Parser,
-    17: level17Parser,
-    18: level18Parser
+    1: PARSER_FACTORIES[1]('en'),
+    2: PARSER_FACTORIES[2]('en'),
+    3: PARSER_FACTORIES[3]('en'),
+    4: PARSER_FACTORIES[4]('en'),
+    5: PARSER_FACTORIES[5]('en'),
+    6: PARSER_FACTORIES[6]('en'),
+    7: PARSER_FACTORIES[7]('en'),
+    8: PARSER_FACTORIES[8]('en'),
+    9: PARSER_FACTORIES[9]('en'),
+    10: PARSER_FACTORIES[10]('en'),
+    11: PARSER_FACTORIES[11]('en'),
+    12: PARSER_FACTORIES[12]('en'),
+    13: PARSER_FACTORIES[13]('en'),
+    14: PARSER_FACTORIES[14]('en'),
+    15: PARSER_FACTORIES[15]('en'),
+    16: PARSER_FACTORIES[16]('en'),
+    17: PARSER_FACTORIES[17]('en'),
+    18: PARSER_FACTORIES[18]('en')
 };
 
 export function multiLevelTester(testName, code, expectedTree, from, to, language = 'en') {

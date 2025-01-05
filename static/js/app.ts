@@ -444,10 +444,10 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   // for 'data-level' attributes on the element itself and any containing element.
   // Same for 'lang' and 'data-lang'.
   const levelStr = $(preview).attr('level') ?? $(preview).closest('[data-level]').attr('data-level');
-  const lang = $(preview).attr('lang') ?? $(preview).closest('[data-lang]').attr('data-lang');
+  const kwlang = $(preview).attr('lang') ?? $(preview).closest('[data-kwlang]').attr('data-kwlang');
   if (levelStr) {
     const level = parseInt(levelStr, 10);
-    exampleEditor.setHighlighterForLevel(level, lang ?? 'en');
+    exampleEditor.setHighlighterForLevel(level, kwlang ?? 'en');
   }
 }
 

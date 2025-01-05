@@ -18,7 +18,14 @@ import { generateParser as generateLevel17Parser } from './level17-parser'
 import { generateParser as generateLevel18Parser} from './level18-parser'
 import { LRParser } from '@lezer/lr';
 
-export let languagePerLevel: Record<number, (lang: string) => LRParser> = {
+/**
+ * A parser factory for every level, only needing requiring the right keyword language.
+ *
+ * The original parser generators *could* have known their levels, but don't
+ * (for fear of making too many assumptions in the wrong place) so we bake those
+ * in here when we forward the call.
+ */
+export let PARSER_FACTORIES: Record<number, (lang: string) => LRParser> = {
      1: (lang) => generateLevel1Parser(1, lang),
      2: (lang) => generateLevel2Parser(2, lang),
      3: (lang) => generateLevel3Parser(3, lang),

@@ -1,7 +1,6 @@
 # https://werkzeug.palletsprojects.com/en/stable/test/
 from .fixtures.given import Given
 from .fixtures.flask import Client
-import json
 import pytest
 
 

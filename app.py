@@ -1127,9 +1127,9 @@ def programs_page(user):
     sorted_adventure_programs = hedy_content.Adventures(g.lang) \
         .get_sorted_adventure_programs(all_programs, adventure_names)
 
-    next_page_url = url_for('programs_page', **dict(request.args, page=result.next_page_token)
+    next_page_url = url_for('.programs_page', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
-    prev_page_url = url_for('programs_page', **dict(request.args, page=result.prev_page_token)
+    prev_page_url = url_for('.programs_page', **dict(request.args, page=result.prev_page_token)
                             ) if result.prev_page_token else None
 
     return render_template(
@@ -2474,9 +2474,9 @@ def explore():
         language_filter=language,
         adventure_filter=adventure,
         pagination_token=page)
-    next_page_url = url_for('explore', **dict(request.args, page=result.next_page_token)
+    next_page_url = url_for('.explore', **dict(request.args, page=result.next_page_token)
                             ) if result.next_page_token else None
-    prev_page_url = url_for('explore', **dict(request.args, page=result.prev_page_token)
+    prev_page_url = url_for('.explore', **dict(request.args, page=result.prev_page_token)
                             ) if result.prev_page_token else None
 
     favourite_programs = g_db().get_hedy_choices()
@@ -2957,7 +2957,7 @@ def public_user_page(username):
         last_achieved = None
         certificate_message = safe_format(gettext('see_certificate'), username=username)
         next_page_url = url_for(
-            'public_user_page',
+            '.public_user_page',
             username=username, **dict(request.args,
                                       page=next_page_token)) if next_page_token else None
 
