@@ -722,13 +722,15 @@ function traductionMap(language: string) {
     return converted_cache.get(language)!;
 }
 
-export function specializeKeywordGen(level: number, lang: string) {
+export function specializeKeywordGen(level: number, keywordLang: string) {
     const specializeTranslations = new Map();
-    for (const [key, value] of traductionMap(lang)) {
+    for (const [key, value] of traductionMap(keywordLang)) {
         if (key in keywordToToken[level].specialize) {
             specializeTranslations.set(key, value);
         }
     }
+
+    console.log('specializations of', level, keywordLang, specializeTranslations);
 
     return (name: string, stack: Stack) => {
         for (const [key, value] of specializeTranslations) {
@@ -743,13 +745,15 @@ export function specializeKeywordGen(level: number, lang: string) {
     };
 }
 
-export function extendKeywordGen(level: number, lang: string) {
+export function extendKeywordGen(level: number, keywordLang: string) {
     const extendTranslations = new Map();
-    for (const [key, value] of traductionMap(lang)) {
+    for (const [key, value] of traductionMap(keywordLang)) {
         if (key in keywordToToken[level].specialize) {
             extendTranslations.set(key, value);
         }
     }
+
+    console.log('extendations of', level, keywordLang, extendTranslations);
 
     return (name: string, stack: Stack) => {
         for (const [key, value] of extendTranslations) {

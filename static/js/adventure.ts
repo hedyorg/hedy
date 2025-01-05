@@ -1,6 +1,6 @@
 import ClassicEditor from "./ckeditor";
 import { CustomWindow } from './custom-window';
-import { languagePerLevel, keywords } from "./lezer-parsers/language-packages";
+import { PARSER_FACTORIES, keywords } from "./lezer-parsers/language-packages";
 import { SyntaxNode } from "@lezer/common";
 import DOMPurify from "dompurify";
 import TRADUCTION_IMPORT from '../../highlighting/highlighting-trad.json';
@@ -143,7 +143,7 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
     // If code already has curly braces, we don't do anything about it
     if (code.match(/\{(\w|_)+\}/g)) return code
 
-    let parser = languagePerLevel[level](language);
+    let parser = PARSER_FACTORIES[level](language);
     let parseResult = parser.parse(code);
     let formattedCode = ''
     let previous_node: SyntaxNode | undefined = undefined

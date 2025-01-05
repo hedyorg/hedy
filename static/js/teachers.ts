@@ -317,6 +317,7 @@ function show_preview(content: string) {
         exampleEditor.contents = code.trimEnd();
         for (const level of levels) {
           exampleEditor.setHighlighterForLevel(parseInt(level, 10), theKeywordLanguage);
+          // We only need to set a highlighter for a single level.
           break;
         }
     }

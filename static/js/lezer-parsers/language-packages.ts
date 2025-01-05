@@ -18,7 +18,7 @@ import { generateParser as generateLevel17Parser } from './level17-parser'
 import { generateParser as generateLevel18Parser} from './level18-parser'
 import { LRParser } from '@lezer/lr';
 
-export let languagePerLevel: Record<number, (lang: string) => LRParser> = {
+export let PARSER_FACTORIES: Record<number, (lang: string) => LRParser> = {
      1: (lang) => generateLevel1Parser(1, lang),
      2: (lang) => generateLevel2Parser(2, lang),
      3: (lang) => generateLevel3Parser(3, lang),
