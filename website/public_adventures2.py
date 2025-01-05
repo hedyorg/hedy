@@ -6,7 +6,6 @@ from website.flask_helpers import gettext_with_fallback as gettext
 import json
 import bs4
 
-import hedy
 import hedy_content
 import utils
 from website.auth import requires_teacher
@@ -80,10 +79,6 @@ class PublicAdventuresModule2(WebsiteModule):
             page_title=gettext("title_public-adventures"),
         )
 
-        response = make_response(temp, 200)
-        # response.headers["HX-Trigger"] = json.dumps({"updateTSCode": js})
-        return response
-
     def enhance_adventure_for_list(self, adventure):
         """For each adventure in the list, add some extra information."""
         if 'levels' not in adventure:
@@ -98,7 +93,7 @@ class PublicAdventuresModule2(WebsiteModule):
         if bs4.BeautifulSoup(adventure['solution_example'], 'html.parser').text.strip() == '':
             adventure['solution_example'] = ''
         else:
-            adventure['solution_example'] = hedy_content.try_render_keywords(adventure['solution_example'], adventure['language'])
+            adventure['solution_example'] = hedy_content.try_render_keywords(adventure['solution_example'], g.keyword_lang)
 
         return adventure
 

@@ -53,20 +53,32 @@
     <div class="flex gap-2 w-full items-stretch mt-4">
       <div class="flex-1">
       {% if prev_page_token %}
-        <button
-          id="prev_button"
-          class="green-btn px-2 w-full h-full"
-          _="on click set (#page_input).value to '{{prev_page_token}}' then call (#filterform).requestSubmit()">
-          {{_('previous_page')}}<br>«</button>
+        <form hx-get="/public-adventures2/" hx-target="#public_adventures_page_div">
+          <input type="hidden" name="selected_lang" value="{{selected_lang}}">
+          <input type="hidden" name="selected_level" value="{{selected_level}}">
+          <input type="hidden" name="q" value="{{q}}">
+          <input type="hidden" name="selected_tag" value="{{selected_tag}}">
+          <input type="hidden" name="page" value="{{prev_page_token}}">
+          <button type="submit"
+            id="prev_button"
+            class="green-btn px-2 w-full h-full">
+            {{_('previous_page')}}<br>«</button>
+        </form>
       {% endif %}
       </div>
       <div class="flex-1">
       {% if next_page_token %}
-        <button
-          id="next_button"
-          class="green-btn px-2 w-full h-full"
-          _="on click set (#page_input).value to '{{next_page_token}}' then call (#filterform).requestSubmit()">
-          {{_('next_page')}}<br>»</button>
+        <form hx-get="/public-adventures2/" hx-target="#public_adventures_page_div">
+          <input type="hidden" name="selected_lang" value="{{selected_lang}}">
+          <input type="hidden" name="selected_level" value="{{selected_level}}">
+          <input type="hidden" name="q" value="{{q}}">
+          <input type="hidden" name="selected_tag" value="{{selected_tag}}">
+          <input type="hidden" name="page" value="{{next_page_token}}">
+          <button
+            id="next_button"
+            class="green-btn px-2 w-full h-full">
+            {{_('next_page')}}<br>»</button>
+        </form>
       {% endif %}
       </div>
     </div>
