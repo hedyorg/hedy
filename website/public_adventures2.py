@@ -2,7 +2,7 @@ import uuid
 import time
 from functools import lru_cache
 from flask import g, request, make_response
-from website.flask_helpers import gettext_with_fallback as gettext
+from website.flask_helpers import gettext_with_fallback as _
 import json
 import bs4
 
@@ -12,6 +12,7 @@ from website.auth import requires_teacher
 from website.flask_helpers import render_template
 from jinja_partials import render_partial
 
+from . import dynamo
 from .database import Database
 from .website_module import WebsiteModule, route
 from safe_format import safe_format
@@ -76,7 +77,7 @@ class PublicAdventuresModule2(WebsiteModule):
 
             user=user,
             current_page="public-adventures",
-            page_title=gettext("title_public-adventures"),
+            page_title=_("title_public-adventures"),
         )
 
     def enhance_adventure_for_list(self, adventure):
@@ -104,7 +105,7 @@ class PublicAdventuresModule2(WebsiteModule):
 
         # Confirm that we're not trying to sneak peek at a non-public adventure
         if not adventure.get('public'):
-            return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
+            return utils.error_page(error=404, ui_message=_("no_such_adventure"))
 
         adventure = self.format_adventure_for_preview(adventure)
         level=int(adventure.get('level', 1))
@@ -154,17 +155,20 @@ class PublicAdventuresModule2(WebsiteModule):
     @route("/clone/<adventure_id>", methods=["POST"])
     @requires_teacher
     def clone_adventure(self, user, adventure_id):
-        # TODO: perhaps get it from self.adventures
         current_adventure = self.db.get_adventure(adventure_id)
         if not current_adventure:
-            return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
+            return utils.error_page(error=404, ui_message=_("no_such_adventure"))
         elif current_adventure["creator"] == user["username"]:
-            return make_response(gettext("adventure_duplicate"), 400)
+            return render_template("public-adventures2/htmx-after-clone.html",
+                                    adventure=current_adventure,
+                                    message=_('adventure_duplicate'))
 
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
             if adventure["name"] == current_adventure["name"]:
-                return make_response(gettext("adventure_duplicate"), 400)
+                return render_template("public-adventures2/htmx-after-clone.html",
+                                       adventure=adventure,
+                                       message=_('adventure_duplicate'))
 
         level = current_adventure.get("level")
         adventure = {
@@ -172,7 +176,10 @@ class PublicAdventuresModule2(WebsiteModule):
             "cloned_from": adventure_id,
             "name": current_adventure.get("name"),
             "content": current_adventure.get("content"),
-            "public": 1,
+
+            # Crucially, a cloned public adventure is not necessarily automatically public
+            "public": 0,
+
             # creator here is the new owner; we don't change it to owner because that'd introduce many conflicts.
             # Instead handle it in html.
             "creator": user["username"],
@@ -186,27 +193,17 @@ class PublicAdventuresModule2(WebsiteModule):
             "solution_example": current_adventure.get("solution_example", ""),
         }
 
-        self.db.update_adventure(adventure_id, {"cloned_times": current_adventure.get("cloned_times", 0) + 1})
+        self.db.update_adventure(adventure_id, {"cloned_times": dynamo.DynamoIncrement(1)})
         self.db.store_adventure(adventure)
+        return render_template("public-adventures2/htmx-after-clone.html",
+                                adventure=adventure,
+                                message=_('adventure_cloned'))
 
-        # update cloned adv. that's saved in this class
-        for _level in current_adventure.get("levels", [level]):
-            _level = int(_level)
-            for i, adv in enumerate(self.adventures.get(_level, [])):
-                if adv.get("id") == current_adventure.get("id"):
-                    adventure["short_name"] = adventure.get("name")
-                    adventure["text"] = adventure.get("content")
-                    # Replace the old adventure with the new adventure
-                    self.adventures[_level][i] = adventure
-                    break
-        return render_partial('htmx-adventure-card.html', user=user, adventure=adventure, level=level,)
-
-    @route("/flag/<adventure_id>", methods=["POST"])
     @route("/flag/<adventure_id>/<flagged>", methods=["POST"])
     @requires_teacher
     def flag_adventure(self, user, adventure_id, flagged=None):
         self.db.update_adventure(adventure_id, {"flagged": 0 if int(flagged) else 1})
-        return gettext("adventure_flagged"), 200
+        return _("adventure_flagged"), 200
 
 
 def is_hx_request():
