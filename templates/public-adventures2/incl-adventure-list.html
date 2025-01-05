@@ -1,5 +1,5 @@
 <div class="flex gap-4">
-  <div class="flex-0 w-64">
+  <div class="flex-none w-64">
     <div class="overflow-auto bg-white shadow-md htmx-resetscroll" style="max-height: 36em;">
       {% for adventure in adventures %}
       <div
@@ -20,7 +20,7 @@
           {% endfor %}
         </div>
         #}
-        <div class="flex-0 text-xs">
+        <div class="flex-none text-xs">
           <div class="flex">
             <div class="flex-1 text-gray-500">{{ adventure.creator }}</div>
             <div>
@@ -71,7 +71,8 @@
       </div>
     </div>
   </div>
-  <div class="flex-1">
+  {# min-w-0 is necessary to prevent overflowing content #}
+  <div class="flex-1 min-w-0">
     <div id="preview-div">
       <div class="flex h-96 items-center justify-center">
         <div class="text-gray-600">(no adventure selected)</div>
