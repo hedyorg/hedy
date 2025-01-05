@@ -1,6 +1,6 @@
 <div class="flex gap-4">
-  <div class="flex-0">
-    <div class="overflow-auto w-64 bg-white shadow-md htmx-resetscroll" style="max-height: 36em;">
+  <div class="flex-0 w-64">
+    <div class="overflow-auto bg-white shadow-md htmx-resetscroll" style="max-height: 36em;">
       {% for adventure in adventures %}
       <div
         class="adventure-item text-gray-800 flex flex-col cursor-pointer p-2 border-b border-gray-300"
@@ -50,13 +50,25 @@
     </div>
 
     {# Pagination buttons #}
-    <div class="flex gap-2">
+    <div class="flex gap-2 w-full items-stretch mt-4">
+      <div class="flex-1">
       {% if prev_page_token %}
-        <button _="on click set (#page_input).value to '{{prev_page_token}}' then call (#filterform).requestSubmit()" class="green-btn mt-4">« Prev page</button>
+        <button
+          id="prev_button"
+          class="green-btn px-2 w-full h-full"
+          _="on click set (#page_input).value to '{{prev_page_token}}' then call (#filterform).requestSubmit()">
+          {{_('previous_page')}}<br>«</button>
       {% endif %}
+      </div>
+      <div class="flex-1">
       {% if next_page_token %}
-        <button _="on click set (#page_input).value to '{{next_page_token}}' then call (#filterform).requestSubmit()" class="green-btn mt-4">Next page »</button>
+        <button
+          id="next_button"
+          class="green-btn px-2 w-full h-full"
+          _="on click set (#page_input).value to '{{next_page_token}}' then call (#filterform).requestSubmit()">
+          {{_('next_page')}}<br>»</button>
       {% endif %}
+      </div>
     </div>
   </div>
   <div class="flex-1">

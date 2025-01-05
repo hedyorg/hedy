@@ -3,7 +3,7 @@
 
   <!-- Filter form -->
   <div>
-    <form id="filterform" hx-trigger="submit" hx-get="/public-adventures2/" hx-target="#public_adventures_page_div" hx-swap="morph:outerHTML">
+    <form id="filterform" hx-trigger="submit" hx-get="/public-adventures2/" hx-target="#public_adventures_page_div">
       <div class="flex flex-col items-stretch md:flex-row md:items-center gap-2 justify-around bg-blue-200 shadow-md rounded-lg p-4 mb-4">
         <div class="flex-0">
           <label for="language_select">{{_('language')}}</label>
@@ -75,6 +75,7 @@
           <input type="submit" value="{{_('search')}}" class="green-btn">
         </div>
       </div>
+      <!-- Holds the current page token -->
       <input type="hidden" name="page" id="page_input" value="{{page}}">
     </form>
   </div>

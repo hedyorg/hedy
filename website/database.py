@@ -729,6 +729,7 @@ class Database:
     def get_teacher_classes(self, username, students_to_list=False, teacher_only=False):
         """Return all the classes belonging to a teacher."""
         classes = None
+        # FIXME: This should be a parameter, not be called here!!
         user = auth.current_user()
         if isinstance(self.storage, dynamo.AwsDynamoStorage):
             classes = list(self.classes.get_many({"teacher": username}, reverse=True))
