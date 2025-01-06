@@ -1,0 +1,1308 @@
+levels:
+    1:
+        intro: |-
+            ### Print and input
+            By the end of this lesson, you can:
+            * Write code that prints text
+            * Create a story with input
+        exercises:
+        -   type      : text
+            contents  : |-
+              ### Exercises
+              A computer does not just do something by itself. You must always give a computer a task. Such a task is called a command. To print out code, we use the command `print`.
+    
+              ### Printing text
+              On the screen you've just deen the `print` command.
+              A `print` command prints a word, when it's between quotation marks. For example `print hello`.
+              #### Exercise 1: Predict the output
+        -   type      : output
+            code      : "print Hello everybody"
+            answer    : "Hello everybody"
+            lines     : 1
+        -   type      : output
+            code      : "print goedemorgen"
+            answer    : "goedemorgen"
+            lines     : 1
+        -   type      : text
+            contents  : |-
+              #### Exercise 2: Error?
+              Sometimes an error sneaks into your code. That's no big deal, but Hedy can't read your code properly then.
+              Which of these programs do you think are wrong?
+        -   type      : MC-code
+            options   : ["Right" , "Wrong"]
+            code      : "prnt Hello everybody!"
+            answer    : "Wrong"
+        -   type      : MC-code
+            options   : ["Right" , "Wrong"]
+            code      : "print print"
+            answer    : "Right"
+        -   type      : text
+            contents  : |-                                   
+              ### Asking for input
+    
+              Only text is a bit boring. You can also ask for _input_ in Hedy. Input is text that you give to the computer.
+              The computer remembers that text and can show it to you later.
+              This code shows the question 'What is your name?'
+              
+              ```hedy
+              ask What is your name?
+              ```
+              
+              ### Showing input
+    
+              The ask command saves the answer, but it doesn't show it yet. For that you'll need the `echo` command. `echo` will show the answer at the end of the sentence.
+              Like this:
+              
+              ```hedy
+              ask what is your name?
+              echo so your name is:
+              ```
+              
+              If someone called Olivia would use this code, the output would be:
+              
+              ```
+              so your name is: Olivia
+              ```
+              
+              Mind that the computer will print the text exactly as you've entered it. So with the colon and the same use of upper- or lowercase letters!
+              
+              #### Exercise 3: Predict the output
+    
+              Predict the output of these programs. Pretend to have filled in your own name.
+
+        -   type      : output
+            code      : |-
+                          ask what is your name?
+                          echo so your name is:
+            answer    : "so your name is: **name**"
+            lines     : 2
+        -   type      : output
+            code      : |-
+                          ask What is your name?
+                          echo Nice to meet you,
+            answer    : "Nice to meet you, **name**"
+            lines     : 2
+        -   type      : text
+            contents  : |-
+              #### Exercise 4: Programming words
+    
+              Every lesson we are going to learn new words, including this lesson. Do you know what these terms mean? Explain it from your own words.
+        -   type      : define
+            word      : command
+            answer    : "A task you'll give to the computer, e.g. print."
+            lines     : 1
+        -   type      : define
+            word      : input
+            answer    : "What you type into the computer when Hedy shows an ask screen"
+            lines     : 1
+        -   type      : define
+            word      : output
+            answer    : "What Hedy shows in the right screen after you've pressed the 'run code' button."
+            lines     : 1
+        -   type      : text
+            contents  : |-
+              #### Exercise 5: Commands
+              
+              We have learned 3 commands so far: `print`, `ask` and `echo`. What so they do? Explain in your own words.
+
+        -   type      : define
+            word      : the `print` command
+            answer    : "Shows text on the screen."
+            lines     : 1
+        -   type      : define
+            word      : the `ask` command
+            answer    : "Asks the user for input."
+            lines     : 1
+        -   type      : define
+            word      : the `echo` command
+            answer    : "Repeats the user's input."
+            lines     : 1
+    2:
+        intro: |-
+          ### Variables
+          By the end of this lesson, you can:
+          * Save something in a variable
+          * Create a story or drawing using variables
+        exercises:
+        -   type      : text
+            contents  : |-
+              ### Using variables
+    
+              You've just seen the `is` command on the screen.
+              An `is` command saves something in the computer memory and gives it a name. We call this a variable.
+              What is saved in the variable is calles the value of the variable.
+            code: |-
+              name is Mo
+              print name
+        -   type      : text
+            contents  : |-
+              #### Exercise 1: Mark the correct piece of the code
+        - type      : circle
+          goal      : variables
+          code      : |-
+            name is Hedy
+            print Hello name
+            age is 17
+            print You are age years old
+          answer    :  "On all lines"
+        - type      : circle
+          goal      : places where the variable is **being set**
+          code      : |-
+              name is Hedy
+              print Hello name
+              age is 17
+              print You are age years old
+          answer    : "Line 1 & 3"
+        - type      : circle
+          goal      : places where the variables are **being used**
+          code      : |-
+              name is Hedy
+              print Hello name
+              age is 17
+              print You are age years old
+          answer    : "Line 2 and 4"
+        - type      : text
+          contents  : |-
+            #### Exercise 2: Predict the output
+            Tip: Are you having a hard time predicting the output? Follow these steps:
+            
+            1. Mark the place where a variable is being set
+            2. Mark the place where a variable is being used
+            3. Draw a line between these two places
+            4. Write the value (what comes after `is`) in the place where the variable is being used.
+    # TODO Voorbeeldje?
+        - type      : output
+          code      : |-
+            name is Mo
+            print Great job name!
+          answer    : "Great job Mo!"
+          lines     : 1
+        - type      : output
+          code      : |-
+            name is Mo
+            print Great job Mo!
+          answer    : "Great job Mo!"
+          lines     : 1
+        - type      : output
+          code      : |-
+            first_name is Layla
+            print Goodmorning first_name!
+          answer    : "Goodmorning Layla!"
+          lines     : 1
+        - type      : text
+          contents  : |-
+            #### Exercise 3: Error?
+            Read the programs carefully. Which ones are correct?
+
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            surname is Johnson
+            print Goodmorning surname!
+          answer    : "Correct"
+
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            name is
+            print Goodmorning, name!
+          answer    : "Incorrect. Name is not set."
+
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            name is Johnson
+            print Goodmorning mr name!
+            print Hello mr name!
+          answer    : "Correct. You are allowed to use a variable multiple times."
+        - type      : text
+          contents  : |-
+            ### Asking for input
+    
+            Just saving text isn't very useful. In level 1 we've seen the code `ask`.
+    
+            From now on you are allowed to combine `ask` with `is`, like this:
+          code      : |-
+            name is ask What is your name?
+
+        - type      : text
+          contents  : |-
+            ### Showing input
+            With variables, we do not need `echo` anymore. Just use `print` to show the answer.
+          code      : |-
+            name is ask What is your name?
+            print so you are called: name
+        - type      : text
+          contents  : |-
+            If someone called Olivia would use this code, the output would be: `so you are called: Olivia`
+            #### Exercise 4: Predict the output
+            Predict these programs' output. Pretend to have used your own name.
+        - type      : output
+          code      : |-
+            name is ask What is your name?
+            print so you are called: name
+          answer    : "so you are called: **name**"
+          lines     : 1
+        - type      : output
+          code      : |-
+            mood is ask How are you doing today?
+            print So you are feeling mood today
+          answer    : "So you are feeling **mood** today"
+          lines     : 1
+        - type      : text
+          contents  : |-
+            #### Exercise 5: Programming words
+            We have learned some new words this level! Explain them in your own words.
+        - type      : define
+          word      : variable
+          answer    : "A name you give something, like a surname or an age."
+          lines     : 1
+        - type      : define
+          word      : value
+          answer    : "What is saved in a variable, like Andrew or 12."
+          lines     : 1
+        - type      : define
+          word      : setting
+          answer    : "You can set a variable with an `is` command"
+          lines     : 1
+        - type      : define
+          word      : interactive
+          answer    : "A program in which a user can give input."
+          lines     : 1
+        - type      : text
+          contents  : |-
+            #### Exercise 6: Commands
+            We have learned new commands: `is` and `is ask` together. What to they do? Explain in your own words.
+        - type      : define
+          word      : the `is` command
+          answer    : "Saving a value (after the `is`) in a variable (before the `is`)"
+          lines     : 1
+        - type      : define
+          word      : the `is ask` command
+          answer    : "Asking the user for input and saving it in a variable."
+          lines     : 1
+    3:
+        intro: |-
+          ### Lists and randomness
+          By the end of this lesson, you can:
+          * Save multiple items in a variable, this is called a list.
+          * Create a story in which random things will happen.
+          * Create a drawing in which random thing will be drawn.
+
+        exercises:
+          - type : text
+            contents  : |-
+              ### Variables
+              You have just seen the `is` command being used with a list.
+              Just like with a regular variable, we use `is` to save something.
+            code: |-
+              friends is Mo, Layla, Danny
+              print Today I will visit friends at random
+
+          - type : text
+            contents  : |-
+              #### Exercise 1: Mark the correct piece of the code
+          - type      : circle
+            goal      : lists
+            code      : |-
+                          today is monday
+                          classes is 1HC, 1HB, 1HA
+                          rooms is 011, 304, 305, 501
+            answer    : "classes and rooms"
+          - type      : circle
+            goal      : place(s) where text from a list is being used
+            code      : |-
+                        classes is 1HC, 1HB, 1HA
+                        print today classes at random gets a day off!
+            answer    : "The end of line 2"
+          - type      : text
+            contents  : |-
+              #### Exercise 2: Predict the output
+              Having a hard time? Use these steps again to predict the output of the variable.
+              1. Mark the place where a variable is being set
+              2. Mark the place where a variable is being used
+              3. Draw a line between these two places
+              4. Pick a random item of the list when `at` `random` is used.
+          -   type      : output
+              code      : |-
+                teachers is Hermans, Merbis, Bagci, Senkal
+                print Today teachers at random will be teaching you!
+              answer    : Today **pick a teacher** will be teaching you!
+              lines     : 1
+          -   type      : output
+              code      : |-
+                teachers is Hermans, Merbis, Bagci, Senkal
+                print Today's teacher is Hermans.
+              answer    : Today's teacher is Hermans.
+              lines     : 1
+          -   type      : output
+              code      : |-
+                weather is sunny, rainy, cloudy, stormy
+                print What lovely weather today!
+              answer    : What lovely weather today!
+              lines     : 1
+          - type      : text
+            contents  : |-
+              #### Exercise 3: Error?
+              Read the programs carefully. Which ones are correct?
+          -   type      : MC-code
+              options   : ["Correct" , "Incorrect"]
+              code      : |-
+                rocks is pebbles, stones, boulders
+                print I love programming! It rocks!
+              answer    : "Incorrect. You can't print a list"
+          -   type      : MC-code
+              options   : ["Correct" , "Incorrect"]
+              code      : |-
+                teachers is Hermans
+                print It will be teachers at random today
+              answer    : "Incorrect. Teachers is not a list"
+          -   type      : MC-code
+              options   : ["Correct" , "Incorrect"]
+              code      : |-
+                teachers is sunny, rainy, cloudy, stormy
+                print It will be teachers at random today
+              answer    : "Correct, the computer doesn't care if the variable name doesn't make sense."
+          - type      : text
+            # [Teacher] Dit zijn alle avonturen zonder `add to` en `remove from`.[/Teacher]
+            # Misschien ook nog even mooier weergeven?
+            contents  : |-
+              ## Adventures
+              This is a good time to start with these adventures:
+              Introduction
+              Random
+              Dice
+              Rock, paper, scissors
+              Music
+              Fortune Teller
+              Restaurant
+              Haunted House
+              Dishes
+          - type      : text
+            contents  : |-
+              ### Adjusting lists
+              
+              Up until now we have always set our lists at the beginning of a program.
+            code  : |-
+              answers is yes, no, maybe
+              print The answer is answers at random
+          - type      : text
+            contents  : |-
+              But sometimes you want your user to add items to the list.
+              You can use the `add to` command for that. You can also remove items from the list with `remove from`.
+
+            code  : |-              
+              animals is 🐿, 🦔, 🦇, 🦉
+              animal is ask What made that sound?
+              add animal to animals
+              print It was... animals at random
+          - type      : text
+            contents  : |-
+             #### Exercise 4: Correct or incorrect?
+
+          -   type      : MC-code
+              options   : ["Correct" , "Incorrect"]
+              code      : |-
+                    letters is a,b,c,d
+                    remove a to letters
+              answer    :  "Incorrect. It is `remove from`, not `remove to`."
+          -   type      : MC-code
+              options   : ["Correct" , "Incorrect"]
+              code      : |-
+                    food is pizza, fries, tacos
+                    remove burger from food
+              answer    :   "Correct, you are allowed to remove something that isn't on the list. But it doesn't make sense to do so"
+          -   type      : MC-code
+              options   : ["Correct" , "Incorrect"]
+              code      : |-
+                    food is pizza, fries, tacos
+                    add pizza to food
+              answer    :   "Correct, you are allowed to put something on a list twice or multiple times."
+          - type      : text
+            contents  : |-
+              #### Exercise 5: Write the code
+              Take a good look at the output and write a matching code for it.
+              **Make sure that your code contains at least one random choice, so don't just use print!**
+          - type: input
+            answer: |-
+              numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+              print Welcome at bingo night!
+              print The 3 lucky numbers are:
+              print numbers at random and print numbers at random and print numbers at random
+            output: |-
+              Welcome at bingo night!
+              The 3 lucky numbers are:
+              5 and 3 and 10
+          - type: input
+            answer: |-
+              movies is Avengers, Barbie, Inside Out
+              print We are going to watch a movie tonight.
+              print We will pick: movies at random
+            output: |-
+              We are going to watch a movie tonight.
+              We will pick: Inside Out
+
+          - type      : text
+            contents  : |-
+              #### Exercise 6: Programming words
+              We have learned some new programming words again! Explain them in your own words.
+
+          -   type      : define
+              word      : list
+              answer    :  "A variable in which multiple values are stored"
+              lines     : 1
+          -   type      : define
+              word      : random
+              answer    : "Picked by the computer."
+              lines     : 1
+          -   type      : define
+              word      : add
+              answer    : "putting something on a list"
+              lines     : 1
+          - type      : text
+            contents  : |-
+              #### Exercise 7: Commands
+              The `is` command has changed in this level and we have learned some new commands.
+              What do they do? Explain in your own words.
+          -   type      : define
+              word      : "The `is` command (Mind: `is` can now do multiple things!)"
+              answer    : "Saving the value (before the is) in a variable or list (after the is)"
+              lines     : 1
+          -   type      : define
+              word      : "The `add to` command "
+              answer    : "Adds an item to a list. It looks like this: add item to list"
+              lines     : 1
+          -   type      : define
+              word      : "The `remove from` command "
+              answer    : "Removes an item from a list. It looks like this: remove item from list"
+              lines     : 1
+          -   type      : define
+              word      : "The `at random` command "
+              answer    : "Picks a random item from a list."
+              lines     : 1
+          - type      : text
+            contents  : |-
+              #### What's your opinion?
+
+          - type      : question
+            text      : "Which exercise did you like best in this level?"
+            lines     : 1
+          - type      : question
+            text      : "What did you like about that exercise?"
+            lines     : 5
+          - type      : question
+            text      : "Which exercise did you like least in this level?"
+            lines     : 1
+          - type      : question
+            text      : "What didn't you like about that exercise?"
+            lines     : 5
+    4:
+        intro: |-
+          ## Quotation marks
+          By the end of this lesson, you can:
+          * understand why quotation marks are needed in programming.
+          * put quotation marks in the correct places.
+          * understand error messages about wrongful use of quotation marks.
+
+        exercises:
+        - type      : text
+          contents  : |-
+            ### Quotation marks
+    
+            We have learned to use quotation marks, when a text needs to appear literally that way on the screen.
+            We use quotation marks with `print` and `ask`.
+          code      : |-
+            friend is ask 'what is your name?'
+            print 'Cool! I will go to the mall with ' friend
+        - type      : text
+          contents  : |-
+            #### Exercise 1: Finish the code.
+            Do this exercise in two steps:
+            1. Place the quotation marks correctly in the code.
+            2. Did you do it? Then predict the output of this code.
+
+        - type      : output
+          code      : |-
+            print Hi everybody!
+            print Welcome to Hedy
+          answer    : |-
+            Hi everybody!
+            Welcome to Hedy
+          lines     : 2
+        - type      : text
+          contents  : |-
+            Don't forget to do both steps of this exercise. Put the quotes on the left side and the code on the right side.
+
+        - type      : output
+          code      : |-
+            name is Hermans
+            classroom is 305
+            print Todays lesson is by name in room classroom!
+          answer    : "Todays lesson is by Hermans in room 305!"
+          lines     : 1
+        - type      : output
+          code      : |-
+            teachers is Hermans, Merbis, Bagci, Senkal
+            print Today teachers at random is teaching.
+          answer    : "Today Hermans is teaching"
+          lines     : 1
+        - type      : output
+          code      : |-
+            rocks is pebbles, stones, boulders
+            print I love programming! It rocks!
+          answer    : "I love programming! It rocks"
+          lines     : 1
+        - type      : output
+          code      : |-
+            print Lovely weather today!
+            name is Bozo
+          answer    : "Lovely weather today!"
+          lines     : 1
+        - type      : text
+          contents  : |-
+            #### Exercise 2: Error?
+            Read the programs carefully. Which ones are correct?
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      :  "print 'I'll go to the zoo tomorrow'"
+          answer    : "Incorrect. You can't use a apostrophe when you use the single quotation marks."
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : "print 'I saw a llama at the zoo"
+          answer    : "Incorrect. You need quotation marks at the end of the sentence."
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+                print "I think I'll feed the llama"
+          answer    : "Correct! You can use the apostrophe when using the double quotation marks."
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            print 'The llama just wondered off into the streets'
+            print "Such an adventure"
+          answer    : "Correct! You don't need to use the same quotation marks in every sentence, but we do recommend it though"
+        - type      : text
+          contents  : |-
+            #### Ask
+            Remember to use quotation marks after `ask` as well!
+    
+            #### Exercise 3: Error?
+            Read the programs carefully! Which ones are correct?
+
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : "ask 'Do you see those two rabbits?'"
+          answer    : "Incorrect. Remember to use a variable with ask!"
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : "naam is ask 'What is your name"
+          answer    : "Incorrect. You need a pair of quotation marks."
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            owner is ask "Is that Jack's capybara or Lucy's?"
+          answer    :  "Correct."
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            owner is ask "Is that Jack's capybara or Lucy's?"
+            print 'It is owner'
+          answer    : "Incorrect. The word owner will be printed, not the value of the variable"
+        - type      : text
+          contents  : |-
+            #### Exercise 4: Write the code
+            Look at the output and make up a fitting code.
+
+        - type: input
+          answer: |-
+            print 'Welcome to bingo night'
+            print 'Here comes the first number...!'
+          output: |-
+            Welcome to bingo night!
+            Here comes the first number...!
+
+        - type: input
+          answer: |-
+            print 'We are going to the movies tonight'
+            film is ask 'What kind of film are you in for?'
+          output: |-
+            We are going to the movies tonight
+            What kind of film are you in for?
+        - type      : text
+          contents  : |-
+            #### Exercise 5: Programming words
+            We have learned some new programming words! Explain them in your own words.
+        - type      : define
+          word      : quotation marks
+          answer    : "Apostrophes that you use for printing or asking something."
+          lines     : 1
+        - type      : define
+          word      : how to use quotation marks in Hedy?
+          answer    : "You use quotation marks when you want to print the text to the screen literally"
+          lines     : 1
+        - type      : text
+          contents  : |-
+            #### Exercise 6: Commands
+            We also have learned some new commands in level 4.
+        - type      : define
+          word      : the `clear` command
+          answer    : "Empties the screen"
+          lines     : 1
+        - type      : define
+          word      : the `color` command
+          answer    : "changes the color of the turtle"
+          lines     : 1
+        - type      : text
+          contents  : "#### What do you think?"
+        - type      : question
+          text      : "Which exercise did you like best this level?"
+          lines     : 1
+        - type      : question
+          text      : "What did you like about it?"
+          lines     : 5
+        - type      : question
+          text      : "Which exercise did you like least this level?"
+          lines     : 1
+        - type      : question
+          text      : "What didn't you like about it?"
+          lines     : 5
+    5:
+        intro: |-
+          ## if else
+          By the end of this lesson, you can:
+          * let the computer react to different input.
+        exercises:
+        - type      : text
+          contents  : |-
+            ### Making choices
+            Up until now Hedy would always run each and every line of code. From now on you can let it only run certain lines in certain cases, with an `if`.
+            The code that follows behind the `if` is called a conditional.
+            In this example the conditional is `friend is Yasmine`.
+          code      : |-
+            friend is ask "What's your name?"
+            if friend is Yasmine print "Hi Yasmine!" else print "No, I didn't mean you!"
+        - type      : text
+          contents  : |-
+            #### Exercise 1: Mark the conditions
+            What is a conditional? Mark the conditionals in the next programs!
+        - type      : circle
+          goal      : the conditional
+          code      : |-
+            today is ask 'What day is it?'
+            if today is friday print 'Yay' else print 'No'
+          answer    : "today is friday"
+        - type      : circle
+          goal      : the conditional
+          code      : |-
+            today is ask 'What day is today?'
+            if today is saturday print 'No school today!'
+            else print 'You have to go to school'
+          answer    : "today is saturday"
+        - type      : circle
+          goal      : the conditional
+          code      : |-
+            age is ask 'How old are you?'
+            if age is 16 print 'Perfecto'
+            else print 'You are too young!'
+          answer    : "age is 16"
+        - type      : text
+          contents  : |-
+            #### Exercise 2: Mark the correct lines
+            Which code will be ran? Mark only those parts.
+            Pretend that today is friday and you are 12 years old.
+        - type      : circle
+          goal      : the code that will be **printed**
+          code      : |-
+            today is ask 'What day is today?'
+            if today is friday print 'Yay' else print 'No'
+          answer    : "print 'Yay'"
+        - type      : circle
+          goal      : the code that will be **printed**
+          code      : |-
+            today is ask 'What day is today?'
+            if today is saturday print 'No school today!'
+            else print 'You have to go to school'
+          answer    : "print 'You have to go to school'"
+        - type      : circle
+          goal      : the code that will be **printed**
+          code      : |-
+            age is ask 'How old are you?'
+            if age is 16 print 'Perfecto'
+            else print 'You are too young!'
+          answer    : "print 'You are too young!'"
+        - type      : text
+          contents  : |-
+            #### Exercise 3: Error?
+            Carefully read the programs! Which ones are correct?
+
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            age is ask 'How old are you?'
+            if age is 16 print 'Right on!' else 'You are too young!'
+          answer    : "Incorrect. There is no `print` after `else`"
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            animal is ask 'What kind of animal is that?'
+            if animal is llama print 'Bahhhhh'
+          answer    :  "Correct! You don't always need an `else`"
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : "print \"I'm so happy!\""
+          answer    : "Correct! You can use the apostrophe when using the double quotes."
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            if name Hedy
+            print 'Programming is fun!'
+          answer    : "Incorrect. There needs to be an `is` in the frist line."
+        - type      : MC-code
+          options   : ["Correct" , "Incorrect"]
+          code      : |-
+            ask 'What school do you go to?'
+            if school is LK print 'Yes!'
+          answer    : "Incorrect. There is no variable in the first line."
+        - type      : MC-code
+          options   : ["Correct", "Incorrect"]
+          code      : |-
+            amount is ask "how many capybaras are over there?"
+            if amount is 5 print 'There are amount capybaras over there.'
+          answer    : "Incorrect. The variable amount will be printed as text."
+        - type      : text
+          contents  : |-
+            #### Exercise 4: Predict the output
+            What will the output of these programs be?
+            Please note! Sometimes `random` is used in a program. You can choose a random item yourself.
+            This means multiple answers could be correct!
+
+        - type      : output
+          code      : |-
+            teachers is Hermans, Merbis, Bagci, Senkal
+            teacher is teachers at random
+            if teacher is Hermans print 'Hooray!'
+          answer    : "Hooray! or no output"
+          lines     : 1
+        - type      : output
+          code      : |-
+            teachers is Hermans, Merbis, Bagci, Senkal
+            teacher is teachers at random
+            if teacher is Hermans print 'Too bad!' else print 'Hooray!'
+          answer    : "Too bad! or Hooray!"
+          lines     : 1
+        - type      : output
+          code      : |-
+            numbers is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            print 'Welcome at bingo night!'
+            number is numbers at random
+            if number is 10 print 'I won!' else print 'Bummer'
+          answer    : |-
+            Welcome to bingo night!
+            I won! or Bummer
+          lines     : 2
+        - type      : output
+          code      : |-
+            number is ask 'What is your favorite number?'
+            if number is 10 print 'Mine too!'
+          answer    : "Mine too! or no output"
+          lines     : 1
+        - type      : text
+          contents  : |-
+            #### Exercise 5: Programming words
+            We have learned some new programming words this lesson! Explain them in your own words.
+
+        - type      : define
+          word      : conditional
+          answer    : "Something that is true or false. It follows behind the `if`."
+          lines     : 1
+        - type      : text
+          contents  : |-
+            #### Exercise 6: Commands
+            We have also learned some new commands in level 5.
+
+        - type      : define
+          word      : the `if` command
+          answer    : "Decides which code will be run. If the conditional is true, the code behind it will be run."
+          lines     : 1
+        - type      : define
+          word      : the `else` command
+          answer    : "Decides which code will be run. If the conditional is false, the code behind it will be run."
+          lines     : 1
+        - type      : text
+          contents  : |-
+            #### What do you think?
+        - type      : question
+          text      : "Which exercise did you like best this level?"
+          lines     : 1
+        - type      : question
+          text      : "What did you like about it?"
+          lines     : 5
+        - type      : question
+          text      : "Which exercise did you like least this level?"
+          lines     : 1
+        - type      : question
+          text      : "What didn't you like about it?"
+          lines     : 5
+    6:
+        intro: |-
+          ## Maths
+          By the end of this lesson, you can:
+          * use maths in Hedy
+        exercises:
+        - type      : text
+          contents  : |-
+            ### Maths
+            Making calculations is an important task for computers.
+    
+            Addition is done with the normal plus sign: `5 + 5`.
+            Subtraction is also using the normal minus sign: `5 - 5`.
+            With multiplications it might look a bit differnt than usually, we use the asterisk (above the 8): `5 * 5`.
+            Division is done with the slash forward: `5 / 5`.
+    
+            Please note that maths code doesn't need quotation marks.
+
+          code      : |-
+            print 'five times five is ' 5 * 5
+        - type      : text
+          contents  : |-
+            #### Exercise 1: Predict the output
+            What do you think the output of these programs will be?
+        - type      : output
+          code      : |-
+            print 'two plus ten is ' 2 * 10
+            print 5 * 5 ' is 30 minus 5'
+            print 10 / 2
+          answer    : |-
+            two plus ten is 20
+            25 is 30 minus 5
+            5
+          lines     : 3
+        - type      : text
+          contents  : |-
+            #### Exercise 2: Maths
+            Follow these steps to complete the exercise:
+            1. Finish the programs by filling in a sum on the lines. The code has to make sense.
+            2. Finished? Fill in what you think the output of the code will be.
+        - type      : output
+          code      : |-
+            print 'five plus ten is ' ___
+            print 'six minus five is ' ___
+            print 'one hunderd diveded by five is ' ___
+            ___ _________________________ 4 * 12
+          answer    : |-
+            five plus ten is 50
+            six minus five is 1
+            one hunderd devided by five is 20
+            four times twelve is 48
+          lines     : 4
+        - type      : text
+          contents  : |-
+            ### Exercise 2: Maths with ask and variables
+            You can also save a sum in a variable, compare it with an `ask` and run it with an `if`.
+            We'll practice that now.
+            Predict the output of these programs.
+            When `ask` and `random` are used, you can make up your own answers.
+        - type      : output
+          code      : |-
+            sum = 2 * 5
+            print 'The answer to this sum is ' sum
+          answer    : |-
+            The answer to this sum is 10
+          lines     : 1
+        - type      : output
+          code      : |-
+            correct_answer = 142 / 2
+            your_answer = ask 'What is 142 divided by 2?'
+            if correct_answer is your_answer
+            print 'Great job'
+            else print 'Bummer!'
+          answer    : |-
+            Great job! or Bummer!
+          lines     : 1
+        - type      : output
+          code      : |-
+            numbers is 2, 4, 6, 7, 9, 11, 17
+            number is numbers at random
+            print 'How much is ' number ' times 7?'
+          answer    : |-
+            How much is 7 times 7? (or any other number from the list: 2, 4, 6, 9, 11, 17)
+          lines     : 1
+        - type      : output
+          code      : |-
+            favorite is ask 'What is your favorite number?'
+            print '3 times ' favorite ' is ' 3 * favorite
+          answer    : |-
+            3 times 6 (for example) is 18
+          lines     : 1
+        - type      : text
+          contents  : |-
+            ### Exercise 3: Input
+            You'll be shown an output. Write a program that could produce this output.
+            Please note: Multiple answers can be correct. Choose whatever you want, as long as it's correct.
+            Fill up all the lines, so look carefully at the amount of lines!
+        - type: input
+          answer: |-
+            print 'This is a very big number:' 4*17
+          output: |-
+            This is a very big number: 68
+        - type: input
+          answer: |-
+            print 1000/10 ' is the answer to 1000/10.'
+          output: |-
+            100 is the answer to 1000/10.
+        - type: input
+          answer: |-
+            numbers is 1,2,3,4,5,6,7,8,9,10
+            print numbers at random * 7 ' is a random multiple of 7'
+          output: |-
+            14 is a random multiple of 7
+        - type      : text
+          contents  : |-
+            #### Exercise 4: Programming words
+            We have learned to use some new signs in our code. Which signs are used in these cases?
+        - type      : define
+          word      : "times"
+          answer    : "*"
+          lines     : 1
+        - type      : define
+          word      : "divided by"
+          answer    : "/"
+          lines     : 1
+        - type      : text
+          contents  : |-
+            #### What did you think?
+        - type      : question
+          text      : "Which exercise did you like best this level?"
+          lines     : 1
+        - type      : question
+          text      : "What did you like about it?"
+          lines     : 5
+        - type      : question
+          text      : "Which exercise did you like least this level?"
+          lines     : 1
+        - type      : question
+          text      : "What didn't you like about it?"
+          lines     : 5
+    7:
+        intro: |-
+            ## Repeat!
+            By the end of this lesson, you can:
+            * run a line of code multiple times
+        exercises:
+        -   type: text
+            contents: |-
+                ### Repetition
+                Sometimes you want to repeat a line of code multiple times, for example in a song or a story.
+            code: |-
+                repeat 5 times print 'Baby shark!'
+        -   type: text
+            contents: |-
+                #### Exercise 1: Predict the output
+                What will be the output of these programs?
+        -   type: output
+            code: |-
+                repeat 3 times print 'Baby shark!'
+            answer: |-
+              Baby shark!
+              Baby shark!
+              Baby shark!
+            lines: 3
+        -   type: output
+            code: |-
+                repeat 1 times print 'Hi everybody!'
+            answer: |-
+              Hi everybody!
+            lines: 1
+        -   type: output
+            code: |-
+                a is 4
+                repeat a times print 'Hi everybody'
+            answer: |-
+              Hi everybody!
+              Hi everybody!
+              Hi everybody!
+              Hi everybody!
+            lines: 4
+        -   type: text
+            contents: |
+                ### Exercise 2: Input
+                Take a look at the output. Write a program that could belong to this output.
+    
+                Please note: Multiple answers can be correct. Choose whatever you want, as long as it's correct.
+                Fill up all the lines, so look carefully at the amount of lines!
+        -   type: input
+            answer: |-
+                print 'Hi everybody!'
+                repeat 2 times print 'This is one line.'
+            output: |-
+                Hi everybody!
+                This is one line.
+                This is one line.
+            lines: 2
+        -   type: input
+            answer: |-
+                print 'This is line 1'
+                print 'This is line 2'
+                print 'This is line 3'
+            output: |-
+                This is line 1
+                This is line 2
+                This is line 3
+            lines: 3
+        -   type: text
+            contents: |-
+                ### Exercise 3: Correct or Incorrect
+                Take a careful look at the programs and decide if they will trigger an errormessage or not.
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              print 'The prince kept screaming for help'
+              repeat 3 times 'Help!'
+            answer    : Incorrect, print is missing
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              forward 100
+              repeat 3 times turn 90
+            answer    : Correct
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              people = mum, dad, Emma, Sophie
+              repeat 7 times print 'The dishes will be done by ' mensen
+            answer    : Incorrect, at random is missing
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              options = 1, 2, 3, 4, 5, 6
+              repeat 5 times print 'You threw: ' options at random
+            answer    : Correct
+        -   type: text
+            contents: |-
+                #### Exercise 6: Programming words
+                We have learned a new programming word again! Explain in your own words.
+        -   type: define
+            word: "repeat"
+            answer: "repeating a line multiple times"
+            lines: 1
+        -   type: text
+            contents: |-
+              #### What did you think?
+        - type      : question
+          text      : "Which exercise did you like best this level?"
+          lines     : 1
+        - type      : question
+          text      : "What did you like about it?"
+          lines     : 5
+        - type      : question
+          text      : "Which exercise did you like least this level?"
+          lines     : 1
+        - type      : question
+          text      : "What didn't you like about it?"
+          lines     : 5
+    8:
+        intro: |-
+            ## Repeat!
+            By the end of this lesson, you will be able to:
+            * repeat multiple lines of code
+        exercises:
+        -   type: text
+            contents: |-
+                ### Repetition
+                Maybe you've noticed how you could only repeat 1 line of code before, very simplistic.
+                Oftentimes you want to repeat multiple lines, to make a more complex program.
+                In Hedy, and in Python too, this is done with indentation!
+                Indentation means starting a line with a couple of spaces.
+            code: |-
+                repeat 5 times
+                    print 'Baby shark!'
+        -   type: text
+            contents: |-
+                #### Exercise 1: Which lines will be repeated?
+                
+                Tip: Take a careful look at the indentation (starting a line with spaces).
+        -   type: circle
+            goal: indentation
+            code: |-
+                repeat 3 times
+                    print 'Baby shark!'
+                    print 'Tudu tudu tudu!'                  
+                print 'Baby shark!'
+            answer: Lines 2 and 3
+        -   type: circle
+            goal: indentation
+            code: |-
+                print 'Hello!'
+                repeat 2 times
+                    print 'Yes, hi everybody'
+            answer: Line 3
+        -   type: circle
+            goal: indentation
+            code: |-
+                name is ask 'What is your name?'
+                if name is Hedy
+                    print 'Yes'
+                else
+                    print 'No'
+            answer: No lines! There is indentation because of the if and else, but no lines will be repeated.
+
+        -   type: text
+            contents: |-
+                #### Exercise 2: Predict the output
+                What will be the output of these programs?
+        -   type: output
+            code: |-
+                print 'Hello!'
+                repeat 1 times 
+                    print ':)'
+            answer: |-
+              Hello!
+              :)
+        -   type: output
+            code: |-
+                print 'Hello!'
+                repeat 5 times 
+                    print ':('
+                print 'Done!'
+            answer: |-
+              Hello!
+              :(
+              :(
+              :(
+              :(
+              :(
+              Done!
+        -   type: text
+            contents: |
+                ## If and else
+                When using `if` and `else` you also need indentation. This way you can execute multiple lines when a condition is true or false.
+    
+                ### Exercise 3: Predict the output
+    
+                Predict the output of these programs.
+        -   type: output
+            code: |-
+                name is ask 'What is your name?'
+                if name is Hedy
+                    print 'Yes'
+                else
+                    print 'No'
+            answer: 'No'
+            lines: 1
+        -   type: output
+            code: |-
+                numbers is 1, 2, 3, 4, 5, 6, 7
+                choice is numbers at random
+                if choice is five
+                    print 'Hooray!'
+                    print 'Hooray!'
+                else
+                    print 'Oh no!'
+            answer: 'Oh no!'
+            lines: 2
+        -   type: output
+            code: |-
+              dice = 1, 2, 3, 4, 5, 6
+              repeat 3 times 
+                  print 'You threw: ' dice at random
+                  print 'Game over'
+            answer: |-
+              You threw: < 1, 2, 3, 4, 5, or 6>
+              Game over
+              You threw: < 1, 2, 3, 4, 5, or 6>
+              Game over
+              You threw: < 1, 2, 3, 4, 5, or 6>
+              Game over
+            lines: 6
+        -   type: text
+            contents: |-
+                ### Exercise 4: Correct or incorrect?
+                Take a careful look at the programs and decide if they will trigger an error message or not.
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+                name is Hermans
+                if name is Senkal
+                  print 'Hooray!'
+                else
+                print 'Bad luck'
+            answer    : Incorrect, there is no indentation after else
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+                number is 10
+                  if number is 5
+                print 'Hooray!'
+                  else
+                print 'Bad luck'
+            answer    : Incorrect, the indentation was used the wrong way around.
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+              people = mom, dad, Emma, Sophie
+              repeat 7 times print 'The dishes will be done by ' people at random
+            answer    : Incorrect, you can no longer use the repeat command in only one line.
+        -   type      : MC-code
+            options   : ["Correct" , "Incorrect"]
+            code      : |-
+                day is ask 'What is is it?'
+                if day is friday
+                    print 'Yeah!'
+            answer    : Good
+        -   type: text
+            contents: |-
+                #### Exercise 5: Write the code
+                Take a good look at the output and write a matching code for it. Use `repeat` if possible.
+    
+                Mind the amount of lines your code needs!
+        -   type: input
+            answer: |-
+                repeat 4 times
+                    print 'Yoo Hoo!'
+            output: |-
+                Yoo Hoo!
+                Yoo Hoo!
+                Yoo Hoo!
+                Yoo Hoo!
+        -   type: input
+            answer: |-
+                repeat 2 times
+                    print 'Are you sleeping?'
+                repeat 2 times
+                    print 'Brother John'
+                repeat 2 times
+                    print 'Morning bells are ringing!'
+                repeat 2 times
+                    print 'Ding Dang Dong!'
+            output: |-
+                Are you sleeping?
+                Are you sleeping?
+                Brother John
+                Brother John
+                Morning bells are ringing!
+                Morning bells are ringing!
+                Ding Dang Dong
+                Ding Dang Dong
+        -   type: text
+            contents: |-
+                #### Exercise 6: Programming words
+                We have learned a new programming term again: indentation! Explain it in your own words.
+        -   type: define
+            word: "How do you create an indent?"
+            answer: "By starting a line with multiple spaces"
+            lines: 1
+        - type: text
+          contents: |-
+                #### What did you think?
+        - type      : question
+          text      : "Which exercise did you like best this level?"
+          lines     : 1
+        - type      : question
+          text      : "What did you like about it?"
+          lines     : 5
+        - type      : question
+          text      : "Which exercise did you like least this level?"
+          lines     : 1
+        - type      : question
+          text      : "What didn't you like about it?"
+          lines     : 5

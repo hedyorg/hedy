@@ -39,6 +39,11 @@ for lang in hedy_content.ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
 
 
+WORKBOOKS = collections.defaultdict(hedy_content.NoSuchWorkbooks)
+for lang in hedy_content.ALL_LANGUAGES.keys():
+    WORKBOOKS[lang] = hedy_content.Workbooks(lang)
+
+
 class ForTeachersModule(WebsiteModule):
     def __init__(self, db: Database, auth: AuthModule):
         super().__init__("teachers", __name__, url_prefix="/for-teachers")
@@ -91,11 +96,16 @@ class ForTeachersModule(WebsiteModule):
 
     @route("/workbooks/<level>", methods=["GET"])
     def get_workbooks(self, level):
-        content = hedyweb.PageTranslations("workbooks").get_page_translations(g.lang)
-        workbooks = content['workbooks']
-        line = '_' * 30
-        workbook_for_level = workbooks['levels'][int(level)-1]
+        try:
+            level = int(level)
+        except ValueError:
+            return utils.error_page(error=404, ui_message="Workbook does not exist")
 
+        workbook_for_level = WORKBOOKS[g.lang].get_workbook_for_level(level, g.lang)
+        if not workbook_for_level:
+            return utils.error_page(error=404, ui_message="Workbook does not exist")
+
+        line = '_' * 30
         for exercise in workbook_for_level['exercises']:
             if exercise['type'] == 'output':
                 exercise['title'] = gettext('workbook_output_question_title')
