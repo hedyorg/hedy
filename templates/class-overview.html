@@ -29,7 +29,7 @@
                 <button class="green-btn w-fit" id="customize_class_button" data-cy="customize_class_button"
                     onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">
                     {{_('customize_class')}}
-                </button>                
+                </button>
             </div>
         </div>
         {{ render_partial('customize-grid/partial-grid-levels.html',
@@ -55,14 +55,14 @@
                 <th class="px-2 py-2 text-center" id="username_header">{{_('username')}}</th>
                 <th class="px-2 py-2 text-center" id="role">{{_('role')}}</th>
                 <th class="px-2 py-2 text-center" id="overview_header">{{_('programs')}}</th>
-                {% if not is_second_teacher and class_info.teacher == username %}<th class="px-2 p-2 bg-blue-900 text-white text-center" id="remove_second_teacher_header">{{_('remove')}}</th>{% endif %}
+                {% if not is_second_teacher and class_info.teacher == username %}<th class="px-2 p-2 bg-blue-900 text-white text-center">{{_('remove')}}</th>{% endif %}
             </tr>
             </thead>
             <tbody id="class_user_table">
               {% for second_teacher in class_info.second_teachers %}
               <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %} m-2">
                 <td class="p-2 text-center font-medium text-blue-900" data-cy="second_teacher_username_cell">{{second_teacher.username}}</td>
-                <td class="text-center" id="role_cell">{% if second_teacher.username == class_info.teacher %}{{_('creator').lower()}}{% else %}{{second_teacher.role}}{% endif %}</td>
+                <td class="text-center">{% if second_teacher.username == class_info.teacher %}{{_('creator').lower()}}{% else %}{{second_teacher.role}}{% endif %}</td>
                 {% if second_teacher.username != username %}
                   <td class="text-center"><a href="/for-teachers/class/{{class_info.id}}/programs/{{second_teacher.username}}" data-cy="programs"
                      ><span class="fas fa-code block mb-4 mt-4 text-blue-900"></span></a></td>
@@ -70,9 +70,9 @@
                   <td class="text-center"><a href="/programs" data-cy="programs"><span class="text-blue-900 fas fa-code block mb-4 mt-4"></span></a></td>
                 {% endif %}
                 <td class="text-center">
-                  {% if second_teacher.username != class_info.teacher %}<a href="#" class="no-underline" id="remove_second_teacher "
+                  {% if second_teacher.username != class_info.teacher %}<a href="#" class="no-underline"
                   hx-swap="none"
-                  {# TODO: 
+                  {# TODO:
                     - figure a new way of showing modal instead of calling js
                     - remove container instead of reloading if only one el exists.
                     #}

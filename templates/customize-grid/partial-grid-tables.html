@@ -36,7 +36,7 @@
             </td>
             {% endif %}
             {% endfor %}
-    
+
           </tr>
           {% endfor %}
           {% if not class_info.students %}
@@ -64,16 +64,16 @@
       </button>
     </h2>
     <div id="student_table_explanation" class="hidden mb-4 flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-full">
-      {{_('student_information_explanation')}}      
+      {{_('student_information_explanation')}}
     </div>
     <div class="w-full overflow-x-auto border rounded-lg">
-      <table class="w-full" id="actions_table" data-cy="adventure_table">
+      <table class="w-full" data-cy="adventure_table">
         <thead>
           <tr class="bg-blue-300 text-blue-900">
             <th class="px-2 py-2 text-center">{{_('students')}}</th>
             <th class="px-2 py-2 text-center">{{_('class_logs')}}</th>
             <th class="px-2 py-2 text-center">{{_('highest_level_reached')}}</th>
-            <th class="px-2 py-2 text-center">{{_('adventures_ticked')}}</th>        
+            <th class="px-2 py-2 text-center">{{_('adventures_ticked')}}</th>
             <th class="px-2 p-2 bg-blue-900 text-white">{{_('actions')}}</th>
           </tr>
         </thead>
@@ -82,18 +82,18 @@
           <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
             <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900  px-4">{{ student }}</td>
             <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900"> {{ students_info[student].last_login }} </td>
-            <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900"> {{ students_info[student].highest_level }}  </td>      
-            <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900"> {{ students_info[student].adventures_ticked }} </td>      
+            <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900"> {{ students_info[student].highest_level }}  </td>
+            <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900"> {{ students_info[student].adventures_ticked }} </td>
             <td class="text-center text-blue-900">
               <div class="flex justify-center gap-6">
                 <button title="{{ _('change_password') }}" class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
                   <span class="fas fa-pen block mb-4 mt-4"></span>
                 </button>
-                <button title="{{ _('programs') }}" class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}')>
+                <button title="{{ _('programs') }}" class="flex flex-col items-center" onclick="window.open('/programs?user={{student}}')">
                   <span class="fas fa-code block mb-4 mt-4"></span>
                 </button>
                 <button title="{{ _('remove') }}" class="flex flex-col items-center" hx-get="/for-teachers/class/{{ class_info['id'] }}/remove_student_modal/{{ student }}?level={{ level }}" hx-target="#modal_target"
-                    id="duplicate_class" data-cy="remove_student_{{ student }}">
+                    data-action="duplicate_class" data-cy="remove_student_{{ student }}">
                     <span class="fa-solid fa-trash text-red-500 block mb-4 mt-4 ltr:mr-4 rtl:ml-4"></span>
               </button>
               </div>

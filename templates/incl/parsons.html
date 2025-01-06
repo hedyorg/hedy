@@ -6,13 +6,13 @@
                         {% if i != parsons_exercises %}border-dashed border-r border-gray-500{% endif %}
                     " id="parsons_header_{{i}}"
                         _="on click hedyApp.loadParsonsExercise({{level}}, {{i}})">
-                        <span class="parsons_header_text_container" id="parsons_header_text_{{i}}" style="display: none;">{{_('exercise')}}</span> 
+                        <span class="parsons_header_text_container" id="parsons_header_text_{{i}}" style="display: none;">{{_('exercise')}}</span>
                         {{ i }}
                     </div>
             {% endfor %}
         </div>
     {% endif %}
-    <div id="parsons_exercise_container" class="pt-2">
+    <div class="pt-2">
         <div class="flex flex-row">
             <div class="w-1/2 ltr:ml-2 rtl:mr-2">
                 <h2 class="text-center">{{_('what_should_my_code_do')}}</h2>

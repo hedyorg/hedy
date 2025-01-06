@@ -52,7 +52,7 @@
         <p data-cy="close_warning" class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
         <div class="flex">
           <div class="py-1 flex items-center">
-              <div id="warningbox_icon">
+              <div>
                   <svg class="fill-current h-6 w-6 text-yellow-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20">
               <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
@@ -85,9 +85,9 @@
             <div class="h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
                 <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">
                     <i class="fa-solid fa-tag text-lg mt-2 mr-2"></i>
-                    <i id="variables_arrow" class="fa-solid fa-angle-up text-lg mt-2 ml-2"></i>                    
+                    <i id="variables_arrow" class="fa-solid fa-angle-up text-lg mt-2 ml-2"></i>
                 </div>
-            </div>            
+            </div>
       </div>
       <div class="inline-block flex z-10 text-white bg-blue-100 rounded-lg max-h-36" id="variables">
           <ul id="variable_list" data-cy="variable_list" class="bg-blue-100 text-blue-500 px-4 whitespace-nowrap list-none mb-0"
@@ -142,7 +142,7 @@
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-3" id="code_related_buttons">
-    <div id="button_row" class="flex flex-col gap-2 md:flex-row lg:flex-col xl:flex-row mb-4">
+    <div class="flex flex-col gap-2 md:flex-row lg:flex-col xl:flex-row mb-4">
       <div class="flex flex-row gap-2">
         <div id="run_button_container" class="gap-2 flex flex-row flex-initial">
             <button id="runit" data-cy="runit" class="green-btn-new" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
@@ -252,11 +252,11 @@
                 end">
           </div>
         </div>
-        <button id="share_program_button_new" class="blue-btn-new next-tab" _="on click remove .hidden from #share_modal">
+        <button class="blue-btn-new next-tab" _="on click remove .hidden from #share_modal">
           <i class="fa-solid fa-share-nodes ltr:mr-1 rtl:ml-1"></i>
           {{_('share')}}
         </button>
-      </div>      
+      </div>
     </div>
   </div>
 

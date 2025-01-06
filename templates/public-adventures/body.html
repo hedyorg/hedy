@@ -11,7 +11,7 @@
               name="search"
               value="{{currentSearch}}"
               {% if currentSearch %}autofocus{% endif %}
-              hx-trigger="input changed delay:500ms, search" 
+              hx-trigger="input changed delay:500ms, search"
               hx-post="/public-adventures/filter?level={{level}}&lang={{selectedLang}}&tag={{selectedTag}}&search={{currentSearch}}"
               hx-target="#public_adventures"
               placeholder="{{_('search')}}"
@@ -29,7 +29,7 @@
                   >{{ level }}</option>
               {% endfor %}
             </custom-select>
-          </div>              
+          </div>
           <div id="languages" class="flex-1">
             <custom-select id="language_select" data-cy="language_select" data-label="{{ lang_to_sym(selectedLang) if selectedLang else _('select_lang') }}">
               <option
@@ -44,17 +44,17 @@
                   {% endfor %}
             </custom-select>
           </div>
-              
+
           <div id="tags" class="flex-1">
             <custom-select data-type="multiple" id="tag_select" data-cy="tag_select" data-label="{{ _('select_tag') }}">
               {% for tag in available_tags %}
                 {% set selected = tag in selectedTag %}
-                <option {% if selected %}selected{% endif %} 
+                <option {% if selected %}selected{% endif %}
                 {% if selected %}
                     hx-post="/public-adventures/filter?tag={{tag}}&reset={{selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
                   {% else %}
                     hx-post="/public-adventures/filter?tag={{tag + ',' +  selectedTag}}&level={{selectedLevel}}&lang={{selectedLang}}&search={{currentSearch}}"
-                  {% endif %} 
+                  {% endif %}
                   hx-target="#public_adventures" value="{{tag}}">{{tag}}</option>
               {% endfor %}
             </custom-select>
@@ -63,8 +63,8 @@
           <!-- false should be removed once reported is implemented in public_adventures.py after PR #5431 -->
           {% if false and is_super_teacher %}
             <div id="report" class="flex-1">
-              <div class="dropdown relative" data-type="single" id="report-select" data-value="{{selectedReport}}">
-                <button class="toggle-button font-semibold rounded inline-flex justify-between 
+              <div class="dropdown relative" data-type="single" data-value="{{selectedReport}}">
+                <button class="toggle-button font-semibold rounded inline-flex justify-between
                   appearance-none w-full border border-gray-200 text-gray-700 p-2 rounded"
                   onclick="$('#report_dropdown').slideToggle('medium');">
                   <span class="label" data-value="reported">{{selectedReported}}reported?</span>
@@ -101,7 +101,7 @@
       {% if adventures|length == 0 %}
           <div class="grid p-5 text-center bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2">
               {{_('no_adventures_yet')}}
-              <button id="create_adventure_button" class="green-btn mt-4" 
+              <button id="create_adventure_button" class="green-btn mt-4"
                 _="on click
                   window.open('/for-teachers/customize-adventure', '_self')"
                       data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>
