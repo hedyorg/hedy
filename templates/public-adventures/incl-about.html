@@ -84,15 +84,17 @@
         {% endif %}
         <a hx-confirm="{{_('flag_adventure_prompt')}}"
             hx-post="/public-adventures/flag/{{adventure.id}}/{{adventure.flagged}}"
-            hx-swap="outerHTML">
+            hx-swap="outerHTML"
+            title="Flag">
             <span class="fa fa-flag bg-{% if adventure.flagged %}red{%else%}blue{%endif%}-300 hover:bg-blue-600 p-2 rounded-full text-white"></span>
         </a>
         {% if is_super_teacher %}
             <a hx-confirm="{{_('delete_adventure_prompt')}}"
                 hx-delete="/for-teachers/customize-adventure/{{adventure.id}}/{{adventure.creator}}"
                 hx-swap="none"
-                _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()">
-                <span class="fa fa-trash p-2 bg-red-500 rounded-full cursor-pointer" id="{{adventure.id}}"></span>
+                _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()"
+                title="{{_('Delete')}}">
+                <span class="fa fa-trash p-2 bg-red-500 hover:bg-red-700 text-white rounded-full cursor-pointer" id="{{adventure.id}}"></span>
             </a>
         {% endif %}
       </div>
