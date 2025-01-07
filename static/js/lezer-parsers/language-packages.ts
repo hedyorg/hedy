@@ -1,42 +1,49 @@
-import { parser as level1Parser} from './level1-parser'
-import { parser as level2Parser} from './level2-parser'
-import { parser as level3Parser} from './level3-parser'
-import { parser as level4Parser} from './level4-parser'
-import { parser as level5Parser} from './level5-parser'
-import { parser as level6Parser} from './level6-parser'
-import { parser as level7Parser } from './level7-parser'
-import { parser as level8Parser } from './level8-parser'
-import { parser as level9Parser } from './level9-parser'
-import { parser as level10Parser } from './level10-parser'
-import { parser as level11Parser } from './level11-parser'
-import { parser as level12Parser } from './level12-parser'
-import { parser as level13Parser } from './level13-parser'
-import { parser as level14Parser } from './level14-parser'
-import { parser as level15Parser } from './level15-parser'
-import { parser as level16Parser } from './level16-parser'
-import { parser as level17Parser } from './level17-parser'
-import { parser as level18Parser} from './level18-parser'
+import { generateParser as generateLevel1Parser} from './level1-parser'
+import { generateParser as generateLevel2Parser} from './level2-parser'
+import { generateParser as generateLevel3Parser} from './level3-parser'
+import { generateParser as generateLevel4Parser} from './level4-parser'
+import { generateParser as generateLevel5Parser} from './level5-parser'
+import { generateParser as generateLevel6Parser} from './level6-parser'
+import { generateParser as generateLevel7Parser } from './level7-parser'
+import { generateParser as generateLevel8Parser } from './level8-parser'
+import { generateParser as generateLevel9Parser } from './level9-parser'
+import { generateParser as generateLevel10Parser } from './level10-parser'
+import { generateParser as generateLevel11Parser } from './level11-parser'
+import { generateParser as generateLevel12Parser } from './level12-parser'
+import { generateParser as generateLevel13Parser } from './level13-parser'
+import { generateParser as generateLevel14Parser } from './level14-parser'
+import { generateParser as generateLevel15Parser } from './level15-parser'
+import { generateParser as generateLevel16Parser } from './level16-parser'
+import { generateParser as generateLevel17Parser } from './level17-parser'
+import { generateParser as generateLevel18Parser} from './level18-parser'
 import { LRParser } from '@lezer/lr';
 
-export let languagePerLevel: Record<number, LRParser> = {
-    1: level1Parser,
-    2: level2Parser,
-    3: level3Parser,
-    4: level4Parser,
-    5: level5Parser,
-    6: level6Parser,
-    7: level7Parser,
-    8: level8Parser,
-    9: level9Parser,
-    10: level10Parser,
-    11: level11Parser,
-    12: level12Parser,
-    13: level13Parser,
-    14: level14Parser,
-    15: level15Parser,
-    16: level16Parser,
-    17: level17Parser,
-    18: level18Parser,
+/**
+ * A parser factory for every level, only needing requiring the right keyword language.
+ *
+ * The original parser generators *could* have known their levels, but don't
+ * (for fear of making too many assumptions in the wrong place) so we bake those
+ * in here when we forward the call.
+ */
+export let PARSER_FACTORIES: Record<number, (lang: string) => LRParser> = {
+     1: (lang) => generateLevel1Parser(1, lang),
+     2: (lang) => generateLevel2Parser(2, lang),
+     3: (lang) => generateLevel3Parser(3, lang),
+     4: (lang) => generateLevel4Parser(4, lang),
+     5: (lang) => generateLevel5Parser(5, lang),
+     6: (lang) => generateLevel6Parser(6, lang),
+     7: (lang) => generateLevel7Parser(7, lang),
+     8: (lang) => generateLevel8Parser(8, lang),
+     9: (lang) => generateLevel9Parser(9, lang),
+    10: (lang) => generateLevel10Parser(10, lang),
+    11: (lang) => generateLevel11Parser(11, lang),
+    12: (lang) => generateLevel12Parser(12, lang),
+    13: (lang) => generateLevel13Parser(13, lang),
+    14: (lang) => generateLevel14Parser(14, lang),
+    15: (lang) => generateLevel15Parser(15, lang),
+    16: (lang) => generateLevel16Parser(16, lang),
+    17: (lang) => generateLevel17Parser(17, lang),
+    18: (lang) => generateLevel18Parser(18, lang),
 };
 
 export const keywords = [
