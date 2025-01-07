@@ -10,7 +10,6 @@ import hedy_content
 import utils
 from website.auth import requires_teacher
 from website.flask_helpers import render_template
-from jinja_partials import render_partial
 
 from . import dynamo
 from .database import Database
@@ -53,8 +52,11 @@ class PublicAdventuresModule(WebsiteModule):
         available_tags = self.all_tags()
 
         # Search results
-        adventures = self.db.get_public_adventures_filtered(selected_lang, int(
-            selected_level) if selected_level else None, selected_tag or None, q or None, pagination_token=page if page else None)
+        adventures = self.db.get_public_adventures_filtered(selected_lang,
+                                                            int(selected_level) if selected_level else None,
+                                                            selected_tag or None,
+                                                            q or None,
+                                                            pagination_token=page if page else None)
         next_page_token = adventures.next_page_token
         prev_page_token = adventures.prev_page_token
 

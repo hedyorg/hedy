@@ -7,7 +7,6 @@ import static_babel_content
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
 from safe_format import safe_format
-import hedy
 
 logger = logging.getLogger(__name__)
 
