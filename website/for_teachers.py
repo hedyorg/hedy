@@ -777,6 +777,7 @@ class ForTeachersModule(WebsiteModule):
             adventures=adventures,
             adventure_names=adventure_names,
             available_adventures=available_adventures,
+            is_try_it=utils.is_try_it(request),
             custom_adventures=list(dict.fromkeys(
                 [item for sublist in available_adventures.values() for item in sublist if item.is_teacher_adventure])),
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
