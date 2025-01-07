@@ -200,7 +200,6 @@ def create_app(for_testing=False):
     app_obj.register_blueprint(user_activity.UserActivityModule(db))
     app_obj.register_blueprint(tags.TagsModule(db))
     app_obj.register_blueprint(public_adventures.PublicAdventuresModule(db))
-    app_obj.register_blueprint(public_adventures.PublicAdventuresModule2(db))
     app_obj.register_blueprint(surveys.SurveysModule(db))
     app_obj.register_blueprint(feedback.FeedbackModule(db))
 
