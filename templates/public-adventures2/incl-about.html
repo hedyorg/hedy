@@ -67,7 +67,7 @@
       </div>
 
       {# Actions #}
-      <div class="flex items-center px-6 py-4 bg-gray-200 shadow-lg">
+      <div class="flex items-center gap-4 px-6 py-4 bg-gray-200 shadow-lg">
         {% if user["username"] != adventure["creator"] %}
             {# Not your adventure, clone #}
             <button class="green-btn"
@@ -85,14 +85,14 @@
         <a hx-confirm="{{_('flag_adventure_prompt')}}"
             hx-post="/public-adventures2/flag/{{adventure.id}}/{{adventure.flagged}}"
             hx-swap="outerHTML">
-            <span class="fa fa-flag bg-{% if adventure.flagged %}red{%else%}blue{%endif%}-300 hover:bg-blue-600 p-2 mx-4 rounded-full text-white"></span>
+            <span class="fa fa-flag bg-{% if adventure.flagged %}red{%else%}blue{%endif%}-300 hover:bg-blue-600 p-2 rounded-full text-white"></span>
         </a>
         {% if is_super_teacher %}
             <a hx-confirm="{{_('delete_adventure_prompt')}}"
                 hx-delete="/for-teachers/customize-adventure/{{adventure.id}}/{{adventure.creator}}"
                 hx-swap="none"
                 _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()">
-                <span class="fa fa-trash p-2 bg-red-500 mr-4 rounded-full cursor-pointer" id="{{adventure.id}}"></span>
+                <span class="fa fa-trash p-2 bg-red-500 rounded-full cursor-pointer" id="{{adventure.id}}"></span>
             </a>
         {% endif %}
       </div>

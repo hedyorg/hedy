@@ -203,7 +203,7 @@ class PublicAdventuresModule2(WebsiteModule):
     @requires_teacher
     def flag_adventure(self, user, adventure_id, flagged=None):
         self.db.update_adventure(adventure_id, {"flagged": 0 if int(flagged) else 1})
-        return _("adventure_flagged"), 200
+        return render_template("public-adventures2/htmx-after-flag.html")
 
 
 def is_hx_request():
