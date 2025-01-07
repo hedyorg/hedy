@@ -22,7 +22,7 @@ from safe_format import safe_format
 CLONED_STARS_THRESHOLDS = [5, 10, 50, 100, 500]
 
 
-class PublicAdventuresModule2(WebsiteModule):
+class PublicAdventuresModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("public_adventures", __name__, url_prefix="/public-adventures")
         self.db = db
