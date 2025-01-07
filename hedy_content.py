@@ -565,6 +565,7 @@ def try_render_keywords(str, keyword_language):
         logger.exception('Error rendering keywords')
         return str
 
+
 def get_localized_name(name, keyword_lang):
     return safe_format(name, **KEYWORDS.get(keyword_lang))
 
