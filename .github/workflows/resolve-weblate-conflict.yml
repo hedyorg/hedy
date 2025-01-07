@@ -111,7 +111,7 @@ jobs:
     - name: Prevent updates and merge conflicts until merged
       run: |
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
-        for component in glossary adventures keywords quizzes commands client-messages web-texts webpages parsons tutorials slides; do
+        for component in glossary adventures keywords quizzes client-messages web-texts webpages slides; do
           wlc lock hedy/$component
         done
 

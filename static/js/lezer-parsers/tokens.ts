@@ -748,7 +748,7 @@ function parserLookups(level: number, keywordLang: string, specext: SpecializeEx
     for (const [keyword, restr] of traductionMap(keywordLang)) {
         // Turn spaces into alternatives. Not sure this is still necessary but it was there.
         const replacedStr =  restr.replace(/ /g, '|');
-        const regex = new RegExp(`^(${replacedStr})$`, 'gu');
+        const regex = new RegExp(`^(${replacedStr})$`, 'u');
         const token = keywordToToken[level]?.[specext]?.[keyword];
         if (token !== undefined) {
             list.push({ regex, token });

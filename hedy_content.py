@@ -720,6 +720,21 @@ class NoSuchSlides:
         return {}
 
 
+class NoSuchWorkbooks:
+    def get_workbook_for_level(self, level, keyword_lang):
+        return {}
+
+
+class Workbooks(StructuredDataFile, NoSuchWorkbooks):
+    def __init__(self, language):
+        self.language = language
+        super().__init__(f'{content_dir}/workbooks/{self.language}.yaml')
+
+    def get_workbook_for_level(self, level, keyword_lang='en'):
+        workbook_for_level = self.file.get('levels', {}).get(level, {})
+        return deep_translate_keywords(workbook_for_level, keyword_lang)
+
+
 class NoSuchTags:
     def get_tags(self):
         return {}
