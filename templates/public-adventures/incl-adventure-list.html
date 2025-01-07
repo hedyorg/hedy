@@ -6,7 +6,7 @@
         class="adventure-item text-gray-800 flex flex-col cursor-pointer p-2 border-b border-gray-300"
         tabindex="0"
         _="on click remove .selected from .adventure-item then add .selected to me end on keyup[key is 'Enter'] send click to me"
-        hx-get="/public-adventures2/preview/{{ adventure.id }}" hx-target="#preview-div"
+        hx-get="/public-adventures/preview/{{ adventure.id }}" hx-target="#preview-div"
         >
         <div class="flex-1">
           <span class="text-xl min-h-28">{{ adventure.name }}</span>
@@ -53,7 +53,7 @@
     <div class="flex gap-2 w-full items-stretch mt-4">
       <div class="flex-1">
       {% if prev_page_token %}
-        <form hx-get="/public-adventures2/" hx-target="#public_adventures_page_div">
+        <form hx-get="/public-adventures/" hx-target="#public_adventures_page_div">
           <input type="hidden" name="selected_lang" value="{{selected_lang}}">
           <input type="hidden" name="selected_level" value="{{selected_level}}">
           <input type="hidden" name="q" value="{{q}}">
@@ -68,7 +68,7 @@
       </div>
       <div class="flex-1">
       {% if next_page_token %}
-        <form hx-get="/public-adventures2/" hx-target="#public_adventures_page_div">
+        <form hx-get="/public-adventures/" hx-target="#public_adventures_page_div">
           <input type="hidden" name="selected_lang" value="{{selected_lang}}">
           <input type="hidden" name="selected_level" value="{{selected_level}}">
           <input type="hidden" name="q" value="{{q}}">

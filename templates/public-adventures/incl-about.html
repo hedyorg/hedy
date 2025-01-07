@@ -71,7 +71,7 @@
         {% if user["username"] != adventure["creator"] %}
             {# Not your adventure, clone #}
             <button class="green-btn"
-                hx-post="/public-adventures2/clone/{{adventure.id}}"
+                hx-post="/public-adventures/clone/{{adventure.id}}"
                 hx-swap="outerHTML"
                 data-cy="clone_{{adventure.name}}"
                 data-id="{{adventure.id}}">{{_('clone')}}</button>
@@ -83,7 +83,7 @@
                 {{_('edit_adventure')}}</a>
         {% endif %}
         <a hx-confirm="{{_('flag_adventure_prompt')}}"
-            hx-post="/public-adventures2/flag/{{adventure.id}}/{{adventure.flagged}}"
+            hx-post="/public-adventures/flag/{{adventure.id}}/{{adventure.flagged}}"
             hx-swap="outerHTML">
             <span class="fa fa-flag bg-{% if adventure.flagged %}red{%else%}blue{%endif%}-300 hover:bg-blue-600 p-2 rounded-full text-white"></span>
         </a>
