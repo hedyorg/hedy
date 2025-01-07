@@ -53,7 +53,8 @@ class PublicAdventuresModule(WebsiteModule):
         available_tags = self.all_tags()
 
         # Search results
-        adventures = self.db.get_public_adventures_filtered(selected_lang, int(selected_level) if selected_level else None, selected_tag or None, q or None, pagination_token=page if page else None)
+        adventures = self.db.get_public_adventures_filtered(selected_lang, int(
+            selected_level) if selected_level else None, selected_tag or None, q or None, pagination_token=page if page else None)
         next_page_token = adventures.next_page_token
         prev_page_token = adventures.prev_page_token
 
@@ -62,23 +63,23 @@ class PublicAdventuresModule(WebsiteModule):
         template = "body" if is_hx_request() else "index"
 
         return render_template(f"public-adventures/{template}.html",
-            available_languages=available_languages,
-            available_levels=available_levels,
-            available_tags=available_tags,
-            selected_level=selected_level,
-            selected_lang=selected_lang,
-            selected_tag=selected_tag,
-            q=q,
-            page=page,
+                               available_languages=available_languages,
+                               available_levels=available_levels,
+                               available_tags=available_tags,
+                               selected_level=selected_level,
+                               selected_lang=selected_lang,
+                               selected_tag=selected_tag,
+                               q=q,
+                               page=page,
 
-            adventures=adventures,
-            next_page_token=next_page_token,
-            prev_page_token=prev_page_token,
+                               adventures=adventures,
+                               next_page_token=next_page_token,
+                               prev_page_token=prev_page_token,
 
-            user=user,
-            current_page="public-adventures",
-            page_title=_("title_public-adventures"),
-        )
+                               user=user,
+                               current_page="public-adventures",
+                               page_title=_("title_public-adventures"),
+                               )
 
     def enhance_adventure_for_list(self, adventure):
         """For each adventure in the list, add some extra information."""
@@ -94,7 +95,8 @@ class PublicAdventuresModule(WebsiteModule):
         if bs4.BeautifulSoup(adventure['solution_example'], 'html.parser').text.strip() == '':
             adventure['solution_example'] = ''
         else:
-            adventure['solution_example'] = hedy_content.try_render_keywords(adventure['solution_example'], g.keyword_lang)
+            adventure['solution_example'] = hedy_content.try_render_keywords(
+                adventure['solution_example'], g.keyword_lang)
 
         return adventure
 
@@ -108,17 +110,17 @@ class PublicAdventuresModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=_("no_such_adventure"))
 
         adventure = self.format_adventure_for_preview(adventure)
-        level=int(adventure.get('level', 1))
+        level = int(adventure.get('level', 1))
 
         response = make_response(
-                        render_template("public-adventures/htmx-preview-adventure.html",
-                               adventure=adventure,
-                               user=user,
-                               current_page="public-adventures",
+            render_template("public-adventures/htmx-preview-adventure.html",
+                            adventure=adventure,
+                            user=user,
+                            current_page="public-adventures",
 
-                               # The next bits are to make the editor work
-                               level=level
-                               ), 200)
+                            # The next bits are to make the editor work
+                            level=level
+                            ), 200)
 
         # Activate some JavaScript on the client to make parts of the page dynamic
         response.headers["HX-Trigger-After-Settle"] = json.dumps({
@@ -141,7 +143,7 @@ class PublicAdventuresModule(WebsiteModule):
         public_profile = self.db.get_public_profile_settings(adventure.get('creator'))
 
         content = safe_format(adventure.get('formatted_content', adventure['content']),
-                                **hedy_content.KEYWORDS.get(g.keyword_lang))
+                              **hedy_content.KEYWORDS.get(g.keyword_lang))
 
         return dict(adventure,
                     short_name=adventure.get('name'),
@@ -160,8 +162,8 @@ class PublicAdventuresModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=_("no_such_adventure"))
         elif current_adventure["creator"] == user["username"]:
             return render_template("public-adventures/htmx-after-clone.html",
-                                    adventure=current_adventure,
-                                    message=_('adventure_duplicate'))
+                                   adventure=current_adventure,
+                                   message=_('adventure_duplicate'))
 
         adventures = self.db.get_teacher_adventures(user["username"])
         for adventure in adventures:
@@ -196,8 +198,8 @@ class PublicAdventuresModule(WebsiteModule):
         self.db.update_adventure(adventure_id, {"cloned_times": dynamo.DynamoIncrement(1)})
         self.db.store_adventure(adventure)
         return render_template("public-adventures/htmx-after-clone.html",
-                                adventure=adventure,
-                                message=_('adventure_cloned'))
+                               adventure=adventure,
+                               message=_('adventure_cloned'))
 
     @route("/flag/<adventure_id>/<flagged>", methods=["POST"])
     @requires_teacher
@@ -213,6 +215,7 @@ def is_hx_request():
 def get_ttl_hash(seconds=3600):
     """Return the same value withing `seconds` time period"""
     return round(time.time() / seconds)
+
 
 def cloned_times_to_stars(times):
     for i, threshold in reversed(list(enumerate(CLONED_STARS_THRESHOLDS))):
