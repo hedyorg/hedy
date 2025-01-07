@@ -54,7 +54,7 @@ export const TRANSLATIONS: Record<string, Record<MessageKey, string>> = {
     "Program_too_long": "Птограмата ти се изпълнява прекалено дълго време...",
     "ServerError": "Написал(а) си код, който не очаквахме. Помогни ни и ни изпрати имейл на hello@hedy.org с името на нивото, в което заседна. Предварително благодарим!",
     "Transpile_error": "Програмата ти не може да бъде изпълнена.",
-    "Transpile_success": "Good job!\nAmazing!\nWell done!\nExcellent!\nYou did great!",
+    "Transpile_success": "Добра работа!\nСтрахотно!\nБраво!\nОтлично!\nСправи се чудесно!",
     "Transpile_warning": "Внимание!",
     "Unsaved_Changes": "You have an unsaved program. Do you want to leave without saving it?",
     "adventures_completed": "Adventures completed: {number_of_adventures}",
