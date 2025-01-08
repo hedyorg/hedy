@@ -422,7 +422,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   // And add an overlay button to the editor if requested via a show-copy-button class, either
   // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
   if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-    const adventure = container.getAttribute('data-tabtarget')
+    const adventure = container.closest('[data-tabtarget]')?.getAttribute('data-tabtarget');
     const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
     let symbol = "⇥";
     if (dir === "rtl") {
