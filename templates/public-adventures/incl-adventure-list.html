@@ -1,6 +1,7 @@
 <div class="flex gap-4">
   <div class="flex-none w-64">
-    <div class="overflow-auto bg-white shadow-md htmx-resetscroll" style="max-height: 36em;">
+    <div class="overflow-auto bg-white shadow-md htmx-resetscroll" style="max-height: 36em;"
+      data-cy="search-results">
       {% for adventure in adventures %}
       <div
         class="adventure-item text-gray-800 flex flex-col cursor-pointer p-2 border-b border-gray-300"
