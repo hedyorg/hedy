@@ -795,10 +795,10 @@ class Database:
 
     def get_public_adventures_filtered(self,
                                        language: str,
-                                       level: int=None,
-                                       tag: str=None,
-                                       q: str=None,
-                                       pagination_token: str=None):
+                                       level: int = None,
+                                       tag: str = None,
+                                       q: str = None,
+                                       pagination_token: str = None):
         """Return a page of the public adventures, filtered by language, level and tag, and with a search string.
 
         Also returns the languages and tags that match the current filter.
