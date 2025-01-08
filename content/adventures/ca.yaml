@@ -191,7 +191,7 @@ adventures:
                 example_code: |
                     ```
                     claus = "perdudes"
-                    {print} "Et trobes al gardí però no pots entrar ja que has perdut les claus."
+                    {print} "Ets al jardí i no pots entrar! has perdut les claus."
                     {print} "On les vols buscar?"
                     {print} "Pots escollir entre: l'arbre, les flors, la roca, la bústia"
                     {while} claus == "perdudes"
@@ -261,7 +261,7 @@ adventures:
                     _
                     {print} T'ha tocat gustos {at} {random} milkshake
                     ```
-        name: '{add}{to_list} & {remove}{from}'
+        name: '{add} {to_list} & {remove} {from}'
     and_or_command:
         default_save_name: i o
         description: Introduint {and} & {or}
@@ -726,7 +726,7 @@ adventures:
                 example_code: |
                     **Atenció!, cal depurar aquest codi!**
                     ```
-                    noms = "Tania", "Omar", "Carla", "Albert", "Aniol"
+                    noms = "Tània", "Omar", "Carla", "Albert", "Aniol"
                     verbs = "caminant", "saltant", "pedalant", "conduint", "corrent"
                     llocs = "en un cim", "al supermercat", "cap a la piscina"
                     llocs_on = "darrera d'un arbre", "sota d'una taula", "dins d'una caixa"
@@ -760,7 +760,7 @@ adventures:
                 story_text: |-
                     ### Exercici
                     Depura aquest codi. Bona sort!
-                    Consell: Assegura't que només vegis la teva puntuació una vegada al final.
+                    Consell: Assegura de només mostrar la puntuació una vegada al final.
                 example_code: |
                     **Atenció!, cal depurar aquest codi!**
                     ```
@@ -1092,7 +1092,7 @@ adventures:
                 example_code: |
                     ```
                     opcions {is} 1, 2, 3, 4, 5, cuc
-                    {print} opcions {at} {random}!
+                    {print} opcions {at} {random} !
                     ```
                 example_code_2: |
                     ```
@@ -1151,7 +1151,7 @@ adventures:
                     Canvia els noms pels noms dels teus amics o familiars i completa el codi.
                 example_code: |
                     ```
-                    jugadors = Ann, John, Jesse
+                    jugadors = Anna, Joan, Jessica
                     opcions = 1, 2, 3, 4, 5, 6
                     _ _ _ _
                         {print} jugador " tira " opcions {at} {random}
@@ -1312,7 +1312,7 @@ adventures:
                     Deixa que la teva imaginació faci el treball!
 
                     El teu programa ha de tenir almenys 10 línies de codi i ha de contenir com a mínim una comanda '{if}' i '{else}'.
-                example_code: "```\namics {is} Jordi, Lucy, David\n{print} \"Puc predir la loteria de demà! i dir-te si et tocarà o no!\"\npersona {is} {ask} \"Qui ets tu?\"\nresposta_bona {is} Visca! La guanyaràs!, Segur que la guanyes demà!, tenim un guanyador!\nresposta_dolenta {is} Mala sort! Torna-ho a provar!, Serà una altra persona qui la guanyi, ets un perdedor!\n{if} persona {in} amics {print} resposta_bona {at} {random}\n{else} {print} resposta_dolenta {at} {random}\n```\n"
+                example_code: "```\namics {is} Jordi, Laura, David\n{print} \"Puc predir la loteria de demà! i dir-te si et tocarà o no!\"\npersona {is} {ask} \"Qui ets tu?\"\nresposta_bona {is} Visca! La guanyaràs!, Segur que la guanyes demà!, tenim un guanyador!\nresposta_dolenta {is} Mala sort! Torna-ho a provar!, Serà una altra persona qui la guanyi, ets un perdedor!\n{if} persona {in} amics {print} resposta_bona {at} {random}\n{else} {print} resposta_dolenta {at} {random}\n```\n"
             6:
                 example_code: |
                     ```
@@ -1367,8 +1367,8 @@ adventures:
                     ```
                     cases = una mansió, un apartment, una cabana, una casa
                     amor = ningú, un príncep, el seu veí, el seu amor verdader
-                    mascotes= gos, gat, elefant
-                    noms= Jana, Rai, Jaume
+                    mascotes = gos, gat, elefant
+                    noms = Jana, Rai, Jaume
                     _
                         {print} nom " viu en " cases {at} {random}
                         {print} nom " es casarà amb " amor {at} {random}
@@ -1379,7 +1379,7 @@ adventures:
                 example_code: |
                     ```
                     destí = "relliscaràs amb una pela de platan", _
-                    {print} "Deixa'm fer una ullada al la meva bola de cristall per observar el teu futur"
+                    {print} "Miraré a la bola de cristall per predir el teu futur"
                     {print} "Veig... veig..."
                     {sleep}
                     {print} destí {at} {random}
@@ -1519,7 +1519,7 @@ adventures:
                 story_text: "Premia el teu lloro-robot si diu la paraula correcta!\n\n### Exercici\nAcaba el codi omplint les 4 comandes que falten.\n"
             4:
                 story_text: "En aquest nivell hem de fer servir cometes amb les comandes `{ask}` i `{print}`.\n### Exercici\nCompleta el codi omplint les cometes als buits\n"
-                example_code: "```\nparaules {is} parrup, Hedy\n{print} _ Ensenya al teu lloro-robot! _\nnova_paraula {is} {ask} _ Quina paraula vols ensenyar-li? _\n{add} nova_paraula {to_list} paraules\n{print} _ 🧒 Digues _ nova_paraula _, Hedy!_\n{print} _ 🦜 _ paraules {at} {random}\n```\n"
+                example_code: "```\nparaules {is} parrup, Hedy\n{print} _ Ensenya al teu lloro-robot! _\nnova_paraula {is} {ask} _ Quina paraula vols ensenyar-li? _\n{add} nova_paraula {to_list} paraules\n{print} _ 🧒 Digues _ nova_paraula _ , Hedy! _\n{print} _ 🦜 _ paraules {at} {random}\n```\n"
         default_save_name: Lloro
     print_command:
         description: Introducció a la comanda imprimir
@@ -1579,15 +1579,15 @@ adventures:
                     {print} "M'encanta! la meva germana n'estarà orgullosa"
                     ```
                 story_text: "## \"Cometes\"\nEn el nivell 4 `{ask}` i `{print}` han canviat.\nHas de posar el text que vols imprimir entre cometes, pots fer servir simples o dobles.\nAixò és útil, perquè ara pots imprimir totes les paraules que vulguis. També les paraules que utilitzaves per emmagatzemar alguna cosa amb `{is}`.\nLa majoria dels llenguatges de programació també fan servir cometes quan imprimeixen, per tant, estem fent un pas més cap a la programació real!\n"
-                story_text_2: "## Contraccions\nImportant! Tingues en compte que ara que estem utilitzant cometes, Hedy es confondrà quan facis servir l'apòstrof per a contraccions com I'm o What's.\nAssegura't de fer servir cometes dobles quan facis servir un apòstrof a la teva línia!\nMira el codi d'exemple per veure la manera incorrecta de fer servir els apòstrofs.\n"
-                example_code: "```\n{print} \"S'hauràn de fer servir cometes a partir d'ara!\"\nresposta {is} {ask} \"Què cal fer servir a partir d'ara?\"\n{print} \"Caldrà fer servir \" resposta\n```\n"
+                story_text_2: "## Apòstrofs\nImportant! A vegades voldrem fer servir cometes o apòstrofs dins del text, Hedy es confondrà quan facis servir l'apòstrof dins una frase si aquesta està rodejada de cometes simples.\nAssegura't de fer servir cometes dobles quan facis servir un apòstrof a la teva línia!\nAl codi d'exemple pots veure la manera incorrecta de fer servir les cometes simples.\n"
+                example_code: "```\n{print} 'Els textos aniràn rodejats de cometes'\nresposta {is} {ask} \"Què cal fer servir a partir d'ara?\"\n{print} \"Caldrà fer servir \" resposta\n```\n"
             12:
                 example_code: |
                     ```
                     nom = "Hedy el robot"
                     {print} "Hola" nom
                     ```
-                example_code_2: "```\nsuperherois = \"Spiderman\", \"Batman\", \"Viuda Negra\"\n{print} superherois {at} {random}\n```\n"
+                example_code_2: "```\nsuperherois = \"Spiderman\", \"Batman\", \"Catwoman\"\n{print} superherois {at} {random}\n```\n"
                 story_text_3: "**Tot el text després de les comparacions `{if}` també necessita cometes**\n"
                 example_code_3: "```\nnom = {ask} \"Com et dius?\"\n{if} nom = \"Hedy el Robot\"\n    {print} \"Hola! que tal?\"\n```\n"
                 example_code_4: "```\npunts = 25\n{print} \"Tens \" punts \" punts\"\n```\n"
@@ -1729,8 +1729,8 @@ adventures:
                 example_code_3: "```\nresposta {is} {ask} \"2 + 2 = ?\"\n_ _ _ 4 _ \"Correcte!\"\n_ _ \"No 2 + 2 = 4\"\n```\n"
                 example_code: "```\nnom {is} {ask} \"Com et dius?\"\n{if} nom {is} Hedy {print} \"bé!\" {else} {print} \"buu!\"\n```\n"
                 story_text: "## If... else....\nEn el nivell 5 hi ha una cosa nova, la comanda`{if}`! Amb el `{if}` pots triar entre dues opcions diferents.  \nAquest codi imprimeix \"bé!\" si introdueixes Hedy com a nom, i \"buu!\" si introdueixes alguna altra cosa.  \nLes comandes `{ask}` i `{print}` continuen funcionant igual que ho feien en el nivell 4.\n"
-                story_text_3: "### Exercici\nIntenta crear el teu propi codi amb `{if}` i `{else}`. Pots utilitzar el codi d'exemple si vols.\n"
-                story_text_2: "De vegades, el codi amb un `{if}` es fa realment llarg i no hi cap bé en una sola línia. <br> També pots dividir el codi en dues línies, començant la segona línia amb el `{else}`, d'aquesta manera:\n"
+                story_text_3: "### Exercici\nIntenta crear el teu propi codi amb `{if}` i `{else}`. Comença amb el codi d'exemple si vols.\n"
+                story_text_2: "De vegades, el codi d'un `{if}` és massa llarg i no hi cap bé en una sola línia. <br> Pots dividir el codi en dues línies, començant la segona línia amb `{else}`, així:\n"
                 example_code_2: "```\nnom {is} {ask} \"Com et dius?\"\n{if} nom {is} Hedy {print} \"bé!\"\n{else} {print} \"buu!\"\n```\n"
             8:
                 example_code: "```\nname = {ask} \"Com et dius?\"\n{if} name {is} Hedy\n    {print} \"Benvingut Hedy\"\n    {print} \"Pots jugar al teu ordinador!\"\n```\n"
@@ -1758,7 +1758,7 @@ adventures:
                 example_code_2: "```\na = \"Hola \"\nb = \"món!\"\n{print} a + b\n```\n"
                 story_text_2: "**Matemàtiques amb paraules**\nEn aquest nivell també pots fer sumes de paraules així:"
                 story_text: "**Nombres decimals**  \nFins ara, Hedy no permetia nombres decimals com 1.5, però ara sí que ho permetem. Tingues en compte que els ordinadors utilitzen el `.` per als nombres decimals."
-                example_code: "```\n{print} \"Dos i mitg més dos i mitg és...\"\n{print} 2.5 + 2.5\n```\n"
+                example_code: "```\n{print} \"Dos i mig més dos i mig és...\"\n{print} 2.5 + 2.5\n```\n"
             6:
                 example_code: "```\n{print} \"5 més 5 és \" 5 + 5\n{print} \"5 menys 5 és \" 5 - 5\n{print} \"5 per 5 és \" 5 * 5\n{print} \"5 dividit entre 5 és \" 5 / 5\n```\n"
                 story_text: "En aquest nivell aprendràs una cosa nova: ara també pots calcular.\n\nLes sumes són fàcils, l'escrius com en matemàtiques: `5 + 5`, per exemple. Les restes també funcionen igual, és `5 - 5`.\n\nMultiplicar és una mica diferent, perquè no hi ha cap símbol de multiplicació al teu teclat. Busca'l, de debò no hi és!  \nPer això multipliquem amb l'asterisc que hi ha normalment prop de la tecla ENTER: `5 * 5`. Llegeix-ho com \"5 vegades 5\", això t'ajudarà a recordar-ho millor.\n"
@@ -1847,7 +1847,7 @@ adventures:
                 story_text: "Ara que saps com combinar instruccions, pots crear una eina de mecanografia tàctil amb `{pressed}`.\n\n### Exercici\nAcaba el codi. Cada vegada s'ha de triar una lletra aleatòria, que hauràs de prémer. Obteniu un punt per cada pressió correcta i dos punts de deducció per una pressió incorrecta.\n**Extra** Neteja la pantalla després de cada lletra i mostra a l'usuari quants punts ha aconseguit.\n"
                 example_code: "```\npunts = 0\nlletres = a, b, c, d, e\n{repeat} 10 {times}\n    lletra = _ _ _\n    {print} \"Prem la lletra \" lletra\n    {if} lletra {is} {pressed}\n    _\n    _\n    _\n```\n"
         description: Prova de vincular una tecla amb una comanda!
-        name: Tecla premuda
+        name: Tecla
         default_save_name: Premut
     piggybank:
         default_save_name: Guardiola
@@ -1944,7 +1944,7 @@ adventures:
                 example_code: "```\nopcions = _\njugadors = _\n{for} _\n```\n"
             4:
                 story_text: "En aquest nivell podem programar encara més el joc de pedra, paper, tisores. Però si vols afegir text recorda que hauràs d'utilitzar cometes.\n### Exercici\nOmple les cometes en els buits. Recorda que la variable `opcions` ha d'estar fora de les cometes.\n"
-                example_code: "```\nopcions {is} pedra, paper, tisores\n{print} _ L'ordinador ha escollit ..._ opcions {at} {random}\n```\n"
+                example_code: "```\nopcions {is} pedra, paper, tisores\n{print} _ L'ordinador ha escollit ... _ opcions {at} {random}\n```\n"
             5:
                 example_code: "```\nopcions {is} pedra, paper, tisores\neleccio_ordinador {is} _\neleccio {is} _\n{print} \"Has escollit \" _\n{print} \"L'ordinador ha escollit \" _\n{if} _ {is} _ {print} \"empat!\" {else} {print} \"no hi ha empat\"\n```\n\nOmple els buits amb codi correcte per veure si és un empat.\n"
                 story_text: "En aquest nivell podem determinar si hi ha empat o no. Per això necessites la nova comanda `{if}`.\n\n### Exercici\nAcaba el codi omplint els buits:\n* Fes que l'ordinador triï una opció aleatòria\n* Pregunta al jugador què vol triar\n* Omple les variables correctes a la línia 4 i 5\n* Acaba la línia 6 perquè Hedy pugui comprovar si hi ha empat o no.\n"
@@ -2058,7 +2058,7 @@ adventures:
         default_save_name: Dibuixa-ho
         levels:
             5:
-                example_code: "Pista:\n```\nllestra_Escollida{is} {ask} \"Quina lletra prefereixes veure F, E o L?\"\n{if} _\n```\n"
+                example_code: "Pista:\n```\nlletra_escollida {is} {ask} \"Quina lletra prefereixes veure F, E o L?\"\n{if} _\n```\n"
                 story_text: "### Exercici\nRecrea els dibuixos amb la tortuga!\n\n**Extra** Fes només un codi que permeti al jugador decidir quina lletra vol veure! I pots afegir encara més lletres?\n\n<div class=\"w-full flex flex-row gap-2\">\nF <img src=\"https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20\" width=\"100\">\nE <img src=\"https://github.com/hedyorg/hedy/assets/80678586/12821803-6422-416a-8e36-9902d14e57a4\" width=\"100\">\nL <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24\" width=\"100\">\n</div>\n"
             6:
                 example_code: "Pista per el quadrat:\n```\ncolor_escollit = {ask} _\n```\n"
@@ -2072,7 +2072,7 @@ adventures:
                 story_text: "### Exercici\nRecrea els dibuixos amb la tortuga!\n\n<div class=\"w-full flex flex-row gap-2\">\nHexàgon <img src=\"https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4\" width=\"200\">\nTriangle <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1\" width=\"200\">\nVentall <img src=\"https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e\" width=\"200\">\n</div>\n"
             9:
                 story_text: "### Exercici\nRecrea els dibuixos amb la tortuga!\n\n**Extra** El número entre parèntesis indica en quantes línies de codi es pot dibuixar aquesta figura. Pots fer-ho en la mateixa quantitat de línies?\n\n**Extra** Dóna al jugador l'opció de triar de quin país vol veure la bandera.\n\n<div class=\"w-full flex flex-row gap-2\">\nCreu (7) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186\" width=\"150\">\nQuadrats niats de colors aleatoris (8) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/17f878cc-e893-4c10-b32e-a09a50bf08de\" width=\"200\">\nBanderes <img src=\"https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e\" width=\"300\">\n</div>\n"
-                example_code: "Pista per als quadrats nidats:\n```\ncolors = vermell, blau, taronja, groc, rosa, lila, verd, marró, negre\ndistancia = 120\n{repeat} 5 {times}\n_\n```\nPista per a les banderes:\n```\npais = {ask} \"Escull un país per veure'n la bandera?\"\n{if} pais {is} \"Andorra\"\n    color_1 = Blau\n    color_2 = Groc\n    color_3 = Vermell\n```\n"
+                example_code: "Pista per als quadrats nidats:\n```\ncolors = vermell, blau, taronja, groc, rosa, lila, verd, marró, negre\ndistancia = 120\n{repeat} 5 {times}\n_\n```\nPista per a les banderes:\n```\npais = {ask} \"Escull un país per veure'n la bandera?\"\n{if} pais {is} \"Andorra\"\n    color_1 = blau\n    color_2 = groc\n    color_3 = vermell\n```\n"
             1:
                 story_text: "### Exercici\nRecrea els dibuixos amb la tortuga!\n\n<div class=\"w-full flex flex-row gap-2\">\n    Rectangle <img src=\"https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550\" width=\"100\">\n    Quadrat <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"200\">\n    Escales<img src=\"https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106\" width=\"200\">\n</div>\n"
             2:
