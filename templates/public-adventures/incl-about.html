@@ -93,7 +93,7 @@
                 hx-delete="/for-teachers/customize-adventure/{{adventure.id}}/{{adventure.creator}}"
                 hx-swap="none"
                 _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()"
-                title="{{_('Delete')}}">
+                title="{{_('delete')}}">
                 <span class="fa fa-trash p-2 bg-red-500 hover:bg-red-700 text-white rounded-full cursor-pointer" id="{{adventure.id}}"></span>
             </a>
         {% endif %}
