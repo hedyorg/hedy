@@ -67,13 +67,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% if not is_redesign_enabled %}
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('mandatory_mode')}}</td>
                                 <td class="border-t border-gray-400">
-                                    <input class="other_settings_checkbox" id="developers_mode" data-cy="developers_mode" type="checkbox" {%
-                                        if "developers_mode" in customizations['other_settings'] %}checked{% endif %}>
+                                    <input class="other_settings_checkbox" id="developers_mode" data-cy="developers_mode" type="checkbox"
+                                        {% if "developers_mode" in customizations['other_settings'] %}checked{%
+                                  endif %}>
                                 </td>
                             </tr>
+                            {% endif %}
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('all_class_highscores')}}
                                 </td>
