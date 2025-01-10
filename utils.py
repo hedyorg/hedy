@@ -169,18 +169,17 @@ def is_testing_request(request):
     return not is_heroku() and bool('X-Testing' in request.headers and request.headers['X-Testing'])
 
 
-def is_try_it(req):
-    """ Many changes need to be released together, so they are done behind a flag - the TRY_IT env variable.
-    To facilitate testing, the flag can be overridden by adding a tryit=[0,1,false,true,yes,no] get param to
-    the request. In this way all users can switch between the 2 designs without the need to change an env variable.
-    Note that the get param override is added only because the specific features behind the flag are static and do not
-    require the flag to be passed down to further requests.
-    """
-    if req:
-        override = request.args.get("tryit", False)
-        if override:
-            return False if override in ['0', 'false', 'no'] else bool(override)
-    return os.getenv('TRY_IT', '0') == '1'
+def is_redesign_enabled():
+    return REDESIGN_2025_ENABLED_BY_DEFAULT or is_opted_in_to_preview()
+
+
+def is_opted_in_to_preview():
+    opt = request.args.get("tryit", False)
+    return False if opt in ['0', 'false', 'no'] else bool(opt)
+
+
+# Flip this to True when we are ready to release
+REDESIGN_2025_ENABLED_BY_DEFAULT = False
 
 
 def extract_bcrypt_rounds(hash):
