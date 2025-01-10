@@ -2,7 +2,11 @@ adventures:
     story:
         name: 故事
         default_save_name: 故事
-        description: 故事
+        description: 寫一個短的故事
+        levels:
+            1:
+                example_code: "```\n{ask}這個故事的主角是\n{print}主角現在走在森林裡\n{echo}他們真的很恐怖\n{print}他們在任何地方都可以聽到瘋狂的噪音\n{print}他們害怕這是一個haunted森林\n```\n"
+                story_text: "在等級1你可以自己用不同的主角寫不同的故事。\n\n在第一條線，使用`{ask}`問故事的主角是什麼樣的人。\n\n寫玩第一條線後，在開頭用`{print}`如果需要顯示句子。\n如果你想讓主角出現在句子的最後面，可以使用`{echo}`。\n"
     default:
         name: 簡介
         default_save_name: 介紹
