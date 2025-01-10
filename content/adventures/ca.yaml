@@ -280,7 +280,7 @@ adventures:
                     ```
         name: '{and} & {or}'
     ask_command:
-        default_save_name: comanda_pregunta
+        default_save_name: comanda_ask
         description: Introducció a la comanda {ask}
         levels:
             1:
@@ -426,7 +426,7 @@ adventures:
                 story_text: "Pots afegir el bucle `{while}` al joc de la calculadora que has après a fer en un nivell anterior.\nAixò assegura que el jugador no pugui continuar a la següent pregunta si respon incorrectament.\n\n### Exercici\nAfegeix el bucle `{while}` a la funció, pregunta al jugador quant fa nombre_1 per nombre_2 i imprimeix la seva resposta.\nDesprés `{call}` la funció.\n"
                 example_code: "```\n{define} nova_pregunta\n    nums = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    num_1 = nums {at} {random}\n    num_2 = nums {at} {random}\n    correcte = num_1 * num_2\n    resposta = 0\n    _\n    _\n    _\n    {print} 'Ben fet!'\n\n{print} 'Respon correctament 10 vegades per guanyar!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} 'Enhorabona!! Has guanyat!'\n```\n"
     clear_command:
-        default_save_name: comanda_netejar
+        default_save_name: comanda_clear
         description: comanda {clear}
         name: '{clear}'
         levels:
@@ -1075,7 +1075,7 @@ adventures:
                 story_text: |
                     L'enhorabona! Has assolit l'últim nivell de Hedy! El codi has creat aquí pot ser copiat a entorns reals de Python com replit o PyCharm, i pots continuar aprenent allà!
                     Tingues en compte que aquell Python només pot llegir comandes en anglès, així que si has estat utilitzant altres llengües, ara les hauràs de posar en anglès.
-        default_save_name: enter
+        default_save_name: intro
     dice:
         name: Dau
         default_save_name: Dau
@@ -1466,7 +1466,7 @@ adventures:
                 example_code: "```\nmonstre_1 {is} 👻\nmonstre_2 {is} 🤡\nmonstre_3 {is} 👶\n{print} Has entrat a la casa embruixada.\n{print} De cop veus al monstre_1\n{print} Corres cap a una altre habitació.\n{print} Però un monstre_2 t'està esperant!\n{print} Oh no! corre dins la cuina.\n{print} Però inesperadament a l'entrar un monstre_3 t'ataca!\n```\n"
                 example_code_2: "```\nmonstre_1 {is} _\nmonstre_2 {is} _\nmonstre_3 {is} _\n{print} Has entrat a la casa embruixada.\n{print} De cop veus al monstre_1\n{print} Corres cap a una altre habitació.\n{print} Però un monstre_2 t'està esperant!\n{print} Oh no! corre dins la cuina.\n{print} Però inesperadament a l'entrar un monstre_3 t'ataca!\n```\n"
     is_command:
-        default_save_name: comanda_es
+        default_save_name: comanda_is
         description: Introducció a la comanda {is}
         levels:
             2:
@@ -1714,7 +1714,7 @@ adventures:
                 example_code: "```\n{define} missatge_benvinguda {with} tractament, cognom, pais, num_habitacio\n    {print} \"Benvingut a l'Hotel Hedy, \" tractament \" \" cognom\n    nice_trip {is} {ask} \"Ha tingut un bon viatge des de \" pais \"?\"\n    {if} nice_trip {is} \"si\"\n        {print} \"Fantàstic!\"\n    {else}\n        {print} \"Quina llàstima...\"\n        {print} \"Afortunadament podrà descançar a la seva habitació.\"\n    {print} \"La seva habitació és la \" num_habitacio\n\n{print} \"Bon dia! Siusplau per a fer el check in ompli la següent informació.\"\ntractament = {ask} \"Com li agradaria que ens dirigíssim a vostè (sr, sra, dr, etc.)?\"\nnom = {ask} \"Quin és el seu cognom?\"\npais_origen = {ask} \"Quin és el seu país d'origen?\"\n\n{call} missatge_benvinguda {with} tractament, nom, pais_origen, 105\n```\n\ntractament = {ask} \"Com li agradaria que ens dirigíssim a vostè (sr, sra, dr, etc.)?\"\nnom = {ask} \"Quin és el seu cognom?\"\npais_origen = {ask} \"Quin és el seu país d'origen?\"\n\n{call} missatge_benvinguda {with} tractament, nom, pais_origen, 105\n"
                 story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {ask}.  \nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.  \nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.  \nAquí tens un exemple d'una funció amb arguments combinada amb comandes {ask}.\n"
     in_command:
-        default_save_name: in_command
+        default_save_name: comanda_in
         name: '{in}'
         description: Introducció a la comanda {in}
         levels:
@@ -1740,7 +1740,7 @@ adventures:
                 story_text: "En aquest nivell també pots posar una comanda `{if}` dins d'una altra comanda `{if}`.\n"
         name: '{if} & {else}'
         description: Introducció a la comanda {if}
-        default_save_name: if_command
+        default_save_name: comanda_if
     language:
         default_save_name: Llengua
         levels:
