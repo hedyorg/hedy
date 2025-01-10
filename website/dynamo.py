@@ -1558,6 +1558,27 @@ class BeginsWith(DynamoCondition):
         return isinstance(value, str) and value.startswith(self.prefix)
 
 
+class SetEmpty(DynamoCondition):
+    """Assert that a set is empty or is not in the record.
+
+    Conditions can be applied to sort keys for efficient lookup, or as a
+    `server_side_filter` as a post-retrieval, pre-download filter. Queries will
+    never fetch more than 1MB from disk, so your server-side filter should
+    not filter out more than ~50% of the rows.
+    """
+
+    def to_dynamo_expression(self, field_name):
+        return f"attribute_not_exists(#{field_name}) OR size(#{field_name}) = :zero"
+
+    def to_dynamo_values(self, _):
+        return {
+            ":zero": DDB_SERIALIZER.serialize(0)
+        }
+
+    def matches(self, value):
+        return value is None or len(value) == 0
+
+
 class UseThisIndex(DynamoCondition):
     """A dummy condition that always matches, and allows picking a specific index.
 
