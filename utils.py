@@ -169,6 +169,19 @@ def is_testing_request(request):
     return not is_heroku() and bool('X-Testing' in request.headers and request.headers['X-Testing'])
 
 
+def is_redesign_enabled():
+    return REDESIGN_2025_ENABLED_BY_DEFAULT or is_opted_in_to_preview()
+
+
+def is_opted_in_to_preview():
+    opt = request.args.get("tryit", False)
+    return False if opt in ['0', 'false', 'no'] else bool(opt)
+
+
+# Flip this to True when we are ready to release
+REDESIGN_2025_ENABLED_BY_DEFAULT = False
+
+
 def extract_bcrypt_rounds(hash):
     return int(re.match(r'\$2b\$\d+', hash)[0].replace('$2b$', ''))
 
