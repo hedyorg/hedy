@@ -106,6 +106,18 @@ adventures:
                     {print} _ He hears the sound of a _ animals {at} {random}
                     {print} name _ is afraid this is a haunted forest _
                     ```
+                answer_code: |
+                    ```
+                    name {is} {ask} 'print What is your name?'
+                    {print} 'The main character is called ' name
+                    {sleep}
+                    {clear}
+                    {print} name ' is now going to walk in the woods '
+                    {print} name ' is a bit scared '
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} 'He hears the sound of a ' animals {at} {random}
+                    {print} name ' is afraid this is a haunted forest '
+                    ```
             5:
                 story_text: |
                     In this level you can program different endings, which will make your story even more fun.
