@@ -1,6 +1,6 @@
 <div class="flex gap-4">
-  <div class="flex-none w-64 relative">
-    <div class="overflow-auto bg-white shadow-md htmx-resetscroll pt-8 pb-16" style="max-height: 40em;"
+  <div class="flex-none w-64 relative" style="max-height: 40em;">
+    <div class="overflow-auto bg-white shadow-md htmx-resetscroll pt-8 pb-16 h-full"
       data-cy="search-results">
 
       {% for adventure in adventures %}
@@ -85,8 +85,8 @@
       </div>
     </div>
 
-    <div class="inset-x-0 h-16 absolute top-0 bg-gradient-to-b from-white"></div>
-    <div class="inset-x-0 h-16 absolute bottom-0 bg-gradient-to-t from-white"></div>
+    <div class="inset-x-0 h-12 absolute top-0 bg-gradient-to-b from-white"></div>
+    <div class="inset-x-0 h-12 absolute bottom-0 bg-gradient-to-t from-white"></div>
   </div>
   {# min-w-0 is necessary to prevent overflowing content #}
   <div class="flex-1 min-w-0">
