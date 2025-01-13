@@ -1521,8 +1521,7 @@ class ForTeachersModule(WebsiteModule):
             "creator": user["username"],
             "name": "",
             "classes": [],
-            "level": 1,
-            "levels": ["1"],
+            "levels": [],
             "content": "",
             "public": 0,
             "language": g.lang,
@@ -1532,7 +1531,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def get_new_adventure(self, user):
         class_id = request.args.get("class_id")
-        level = request.args.get("level", "1")
+        level = request.args.get("level")
 
         adventure_id = uuid.uuid4().hex
         adventure = self.create_basic_adventure(user, adventure_id)
@@ -1656,7 +1655,7 @@ class ForTeachersModule(WebsiteModule):
         if body.get("classes"):
             current_classes = current_adventure.get('classes', [])
         current_levels = []
-        if current_adventure["level"] != 1:
+        if not current_adventure.get('level'):
             current_levels = current_adventure.get('levels', [])
 
         adventures = self.db.get_teacher_adventures(user["username"])
