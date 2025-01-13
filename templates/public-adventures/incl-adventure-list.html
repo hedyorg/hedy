@@ -1,7 +1,8 @@
 <div class="flex gap-4">
-  <div class="flex-none w-64">
-    <div class="overflow-auto bg-white shadow-md htmx-resetscroll" style="max-height: 36em;"
+  <div class="flex-none w-64 relative">
+    <div class="overflow-auto bg-white shadow-md htmx-resetscroll pt-8 pb-16" style="max-height: 40em;"
       data-cy="search-results">
+
       {% for adventure in adventures %}
       <div
         class="adventure-item text-gray-800 flex flex-col cursor-pointer p-2 border-b border-gray-300"
@@ -48,41 +49,44 @@
         </div>
       </div>
       {% endfor %}
+
+      {# Pagination buttons #}
+      <div class="flex gap-2 w-full items-stretch mt-4 p-2">
+        <div class="flex-1">
+        {% if prev_page_token %}
+          <form hx-get="/public-adventures/" hx-target="#public_adventures_page_div">
+            <input type="hidden" name="selected_lang" value="{{selected_lang}}">
+            <input type="hidden" name="selected_level" value="{{selected_level}}">
+            <input type="hidden" name="q" value="{{q}}">
+            <input type="hidden" name="selected_tag" value="{{selected_tag}}">
+            <input type="hidden" name="page" value="{{prev_page_token}}">
+            <button type="submit"
+              id="prev_button"
+              class="green-btn px-2 w-full h-full">
+              {{_('previous_page')}}<br>«</button>
+          </form>
+        {% endif %}
+        </div>
+        <div class="flex-1">
+        {% if next_page_token %}
+          <form hx-get="/public-adventures/" hx-target="#public_adventures_page_div">
+            <input type="hidden" name="selected_lang" value="{{selected_lang}}">
+            <input type="hidden" name="selected_level" value="{{selected_level}}">
+            <input type="hidden" name="q" value="{{q}}">
+            <input type="hidden" name="selected_tag" value="{{selected_tag}}">
+            <input type="hidden" name="page" value="{{next_page_token}}">
+            <button
+              id="next_button"
+              class="green-btn px-2 w-full h-full">
+              {{_('next_page')}}<br>»</button>
+          </form>
+        {% endif %}
+        </div>
+      </div>
     </div>
 
-    {# Pagination buttons #}
-    <div class="flex gap-2 w-full items-stretch mt-4">
-      <div class="flex-1">
-      {% if prev_page_token %}
-        <form hx-get="/public-adventures/" hx-target="#public_adventures_page_div">
-          <input type="hidden" name="selected_lang" value="{{selected_lang}}">
-          <input type="hidden" name="selected_level" value="{{selected_level}}">
-          <input type="hidden" name="q" value="{{q}}">
-          <input type="hidden" name="selected_tag" value="{{selected_tag}}">
-          <input type="hidden" name="page" value="{{prev_page_token}}">
-          <button type="submit"
-            id="prev_button"
-            class="green-btn px-2 w-full h-full">
-            {{_('previous_page')}}<br>«</button>
-        </form>
-      {% endif %}
-      </div>
-      <div class="flex-1">
-      {% if next_page_token %}
-        <form hx-get="/public-adventures/" hx-target="#public_adventures_page_div">
-          <input type="hidden" name="selected_lang" value="{{selected_lang}}">
-          <input type="hidden" name="selected_level" value="{{selected_level}}">
-          <input type="hidden" name="q" value="{{q}}">
-          <input type="hidden" name="selected_tag" value="{{selected_tag}}">
-          <input type="hidden" name="page" value="{{next_page_token}}">
-          <button
-            id="next_button"
-            class="green-btn px-2 w-full h-full">
-            {{_('next_page')}}<br>»</button>
-        </form>
-      {% endif %}
-      </div>
-    </div>
+    <div class="inset-x-0 h-16 absolute top-0 bg-gradient-to-b from-white"></div>
+    <div class="inset-x-0 h-16 absolute bottom-0 bg-gradient-to-t from-white"></div>
   </div>
   {# min-w-0 is necessary to prevent overflowing content #}
   <div class="flex-1 min-w-0">
