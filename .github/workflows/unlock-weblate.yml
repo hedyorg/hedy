@@ -32,7 +32,7 @@ jobs:
     - run: |
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
         set -x
-        for component in glossary adventures keywords quizzes client-messages web-texts webpages slides; do
+        for component in glossary adventures keywords client-messages web-texts webpages slides; do
           wlc --debug unlock hedy/$component | sed 's/${{ secrets.WEBLATE_API_KEY }}/*****/g'
         done
         echo "All components unlocked!"
