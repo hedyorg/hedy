@@ -423,7 +423,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   // And add an overlay button to the editor if requested via a show-copy-button class, either
   // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
   if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-    const adventure = container.getAttribute('data-tabtarget')
+    const adventure = container.closest('[data-tabtarget]')?.getAttribute('data-tabtarget');
     const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
     let symbol = "⇥";
     if (dir === "rtl") {
@@ -438,10 +438,17 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
       clearOutput();
     });
   }
-  const levelStr = $(preview).attr('level');
-  const lang = $(preview).attr('lang');
-  if (levelStr && lang) {
-    exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10), lang);
+
+  // Try to find the level for this code block. We first look at the 'level'
+  // attribute on the <pre> element itself.  This is to preserve legacy
+  // behavior, I'm not sure where this is still used. The modern way is to look
+  // for 'data-level' attributes on the element itself and any containing element.
+  // Same for 'lang' and 'data-lang'.
+  const levelStr = $(preview).attr('level') ?? $(preview).closest('[data-level]').attr('data-level');
+  const kwlang = $(preview).attr('lang') ?? $(preview).closest('[data-kwlang]').attr('data-kwlang');
+  if (levelStr) {
+    const level = parseInt(levelStr, 10);
+    exampleEditor.setHighlighterForLevel(level, kwlang ?? 'en');
   }
 }
 

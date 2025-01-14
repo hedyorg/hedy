@@ -13,7 +13,7 @@ import hedy_error
 import hedy_grammar
 import hedy_translation
 from utils import atomic_write_file
-from hedy_content import ALL_KEYWORD_LANGUAGES
+from hedy_content import ALL_KEYWORD_LANGUAGES, MAX_LEVEL
 from collections import namedtuple
 import re
 import regex
@@ -35,7 +35,7 @@ from hedy_sourcemap import SourceMap, source_map_transformer
 from prefixes.music import present_in_notes_mapping
 from prefixes.normal import get_num_sys
 
-HEDY_MAX_LEVEL = 18
+HEDY_MAX_LEVEL = MAX_LEVEL
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
 MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 8

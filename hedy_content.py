@@ -12,6 +12,8 @@ logger = logging.getLogger(__name__)
 
 COUNTRIES = static_babel_content.COUNTRIES
 
+MAX_LEVEL = 18
+
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
@@ -558,6 +560,15 @@ def deep_translate_keywords(yaml, keyword_language):
     except Exception as E:
         logger.exception(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
         return yaml
+
+
+def try_render_keywords(str, keyword_language):
+    """Render {placeholder}s in a string, return the original if there are any errors."""
+    try:
+        return safe_format(str, **KEYWORDS.get(keyword_language))
+    except Exception:
+        logger.exception('Error rendering keywords')
+        return str
 
 
 def get_localized_name(name, keyword_lang):
