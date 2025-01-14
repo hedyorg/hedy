@@ -777,6 +777,7 @@ class ForTeachersModule(WebsiteModule):
             adventures=adventures,
             adventure_names=adventure_names,
             available_adventures=available_adventures,
+            is_redesign_enabled=utils.is_redesign_enabled(),
             custom_adventures=list(dict.fromkeys(
                 [item for sublist in available_adventures.values() for item in sublist if item.is_teacher_adventure])),
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
@@ -1520,8 +1521,7 @@ class ForTeachersModule(WebsiteModule):
             "creator": user["username"],
             "name": "",
             "classes": [],
-            "level": 1,
-            "levels": ["1"],
+            "levels": [],
             "content": "",
             "public": 0,
             "language": g.lang,
@@ -1531,7 +1531,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def get_new_adventure(self, user):
         class_id = request.args.get("class_id")
-        level = request.args.get("level", "1")
+        level = request.args.get("level")
 
         adventure_id = uuid.uuid4().hex
         adventure = self.create_basic_adventure(user, adventure_id)
@@ -1655,7 +1655,7 @@ class ForTeachersModule(WebsiteModule):
         if body.get("classes"):
             current_classes = current_adventure.get('classes', [])
         current_levels = []
-        if current_adventure["level"] != 1:
+        if not current_adventure.get('level'):
             current_levels = current_adventure.get('levels', [])
 
         adventures = self.db.get_teacher_adventures(user["username"])

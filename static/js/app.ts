@@ -230,7 +230,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
   let tabs: any;
-  if (options.page == 'tryit') {
+  const isTryItPage = options.page == 'tryit';
+  if (isTryItPage) {
     tabs = new IndexTabs({
       // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
       // We click on `level` to load a program associated with level, if any.
@@ -264,7 +265,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
         adventure.save_info = 'local-storage';
       }
     }
-    reconfigurePageBasedOnTab(options.enforce_developers_mode);
+    reconfigurePageBasedOnTab(isTryItPage, options.enforce_developers_mode);
     checkNow();
     theLocalSaveWarning.switchTab();
   });
@@ -1433,6 +1434,7 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
+// Remove this function when enabling the new design
 export function setDevelopersMode(event='click', enforceDevMode: boolean) {
   let enable: boolean = false;
   switch (event) {
@@ -1451,6 +1453,7 @@ export function setDevelopersMode(event='click', enforceDevMode: boolean) {
   toggleDevelopersMode(!!enforceDevMode)
 }
 
+// Remove this function when enabling the new design
 function toggleDevelopersMode(enforceDevMode: boolean) {
   const enable = window.localStorage.getItem('developer_mode') === 'true' || enforceDevMode;
   // DevMode hides the tabs and makes resizable elements track the appropriate size.
@@ -1461,8 +1464,9 @@ function toggleDevelopersMode(enforceDevMode: boolean) {
   $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
   // Parsons dont need a fixed height
   if (currentTab === 'parsons') return
-  $('[data-devmodeheight]').each((_, el) => {
-    const heights = $(el).data('devmodeheight').split(',') as string[];
+
+  $('[data-editorheight]').each((_, el) => {
+    const heights = $(el).data('editorheight').split(',') as string[];
     $(el).css('height', heights[enable ? 1 : 0]);
   });
 }
@@ -1700,13 +1704,15 @@ function resetWindow() {
  * Update page element visibilities/states based on the state of the current tab
  */
 function updatePageElements() {
-  const isCodeTab = !(currentTab === 'quiz' || currentTab === 'parsons');
-
-  // .toggle(bool) sets visibility based on the boolean
+  const isParsonsTab = currentTab === 'parsons'
+  const isCodeTab = !(currentTab === 'quiz' || isParsonsTab);
+ // .toggle(bool) sets visibility based on the boolean
 
   // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
   $('#adventures_tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
   $('#developers_toggle_container').toggle(isCodeTab);
+  // this is for the new design, it needs to be removed once we ship it
+  $('#adventures').toggle(true);
   $('#level_header input').toggle(isCodeTab);
   $('#parsons_code_container').toggle(currentTab === 'parsons');
   $('#editor_area').toggle(isCodeTab || currentTab === 'parsons');
@@ -1771,19 +1777,36 @@ function updatePageElements() {
 }
 
 /**
+ * Load parsons and update the editors height accordingly
+ */
+function configureParson() {
+  loadParsonsExercise(theLevel, 1);
+  // parsons could have 5 lines to arrange which requires more space, so remove the fixed height from the editor
+  document.getElementById('code_editor')!.style.height = '100%'
+  document.getElementById('code_output')!.style.height = '100%'
+}
+
+/**
  * After switching tabs, show/hide elements
  */
-function reconfigurePageBasedOnTab(enforceDevMode?: boolean) {
+function reconfigurePageBasedOnTab(isTryItPage?: boolean, enforceDevMode?: boolean) {
   resetWindow();
-
   updatePageElements();
-  toggleDevelopersMode(!!enforceDevMode);
+
   if (currentTab === 'parsons') {
-    loadParsonsExercise(theLevel, 1);
-    // remove the fixed height from the editor
-    document.getElementById('code_editor')!.style.height = '100%'
-    document.getElementById('code_output')!.style.height = '100%'
-    return;
+    configureParson();
+    show_editor();
+    $('#fold_in_toggle_container').hide();
+  } else {
+    if (isTryItPage) {
+      $('[data-editorheight]').each((_, el) => {
+        const height = $(el).data('editorheight');
+        $(el).css('height', height);
+      });
+    } else {
+      toggleDevelopersMode(!!enforceDevMode);
+    }
+    $('#fold_in_toggle_container').show();
   }
 
   const adventure = theAdventures[currentTab];

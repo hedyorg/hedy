@@ -60,7 +60,7 @@ jobs:
 
         # Have to lock each component individually. Not in the UI, but using the CLI we do.
         # (NOTE: this list is also below!)
-        for component in glossary adventures keywords quizzes client-messages web-texts webpages slides; do
+        for component in glossary adventures keywords client-messages web-texts webpages slides; do
           wlc lock hedy/$component
         done
 
@@ -83,7 +83,7 @@ jobs:
 
           # Unlock each component again so we don't stay locked
           # (NOTE: this list is also above!)
-          for component in glossary adventures keywords quizzes client-messages web-texts webpages slides; do
+          for component in glossary adventures keywords client-messages web-texts webpages slides; do
             wlc unlock hedy/$component
           done
 

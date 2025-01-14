@@ -8,7 +8,7 @@
      </div>
     </div>
     <!-- Row 1: editor, output pane -->
-    <div data-devmodeheight="{{editor_height}},36rem" class="flex flex-col order-1 relative" id="code_editor" style="height: {{editor_height}}">
+    <div data-editorheight="{{editor_height}},36rem" class="flex flex-col order-1 relative" id="code_editor" style="height: {{editor_height}}">
         <div id="fold_in_toggle_container" class="hidden md:flex absolute z-10 top-16 ltr:-right-1 rtl:-left-1 cursor-pointer" onclick="hedyApp.hide_editor();">
          <div id="text_field" class="bg-green-500 text-white py-3 rounded-lg text-sm">
              <span>←</span>
@@ -83,7 +83,7 @@
           </div>
         </div>
     </div>
-    <div data-devmodeheight="{{editor_height}},36rem" data-origheight="{{editor_height}}" class="w-full flex flex-col order-3 relative min-h-0 overflow-auto" id="code_output" style="height: {{editor_height}}">
+    <div data-editorheight="{{editor_height}},36rem" data-origheight="{{editor_height}}" class="w-full flex flex-col order-3 relative min-h-0 overflow-auto" id="code_output" style="height: {{editor_height}}">
       <div id="output" data-cy="output" tabindex=0 class="flex-1 rounded p-2 px-3 pb-10 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
       <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
       <div class="overflow-auto flex-0 bottom-0 w-full z-20 bg-blue-100">

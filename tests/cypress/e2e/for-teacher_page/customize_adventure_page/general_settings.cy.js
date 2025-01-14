@@ -11,20 +11,25 @@ teachers.forEach((teacher) => {
     loginForTeacher(teacher);
     createClass(className);
     createAdventure();
-    
-    // select class
-    cy.getDataCy('custom_adventure_name').clear().type(advName)
-    cy.getDataCy('classes_select').click()
-    cy.wait(1000)
-    cy.getDataCy(`${className}`).click()
-    cy.getDataCy('classes_select').click()
 
     // select levels
     cy.getDataCy('level_select').click()
     cy.wait(500)
-    cy.getDataCy('1').click()
     cy.getDataCy('2').click()
+    cy.wait(500)
     cy.getDataCy('level_select').click()
+    cy.wait(500)
+
+    // set adventure name
+    cy.getDataCy('custom_adventure_name').clear().type(advName)
+
+    // select class
+    cy.getDataCy('classes_select').click()
+    cy.wait(500)
+    cy.getDataCy(`${className}`).click()
+    cy.wait(500)
+    cy.getDataCy('classes_select').click()
+    cy.wait(500)
 
     // agree public 
     cy.getDataCy('agree_public')
@@ -34,6 +39,9 @@ teachers.forEach((teacher) => {
       .should('be.checked')
       .uncheck()
       .should('not.be.checked');
+
+    cy.get('#submit_adventure').click();
+    cy.wait(500)
 
     // go back button
     cy.getDataCy('go_back_button')
