@@ -4,7 +4,7 @@ from parameterized import parameterized
 
 import exceptions
 import hedy
-from hedy import Command
+from hedy import Keyword
 from hedy_sourcemap import SourceRange
 from tests.Tester import HedyTester, SkippedMapping
 
@@ -144,7 +144,7 @@ class TestsLevel4(HedyTester):
     def test_print_line_with_spaces_works(self):
         code = "print 'hallo'\n      \nprint 'hallo'"
         expected = "print(f'hallo')\n\nprint(f'hallo')"
-        expected_commands = [Command.print, Command.print]
+        expected_commands = [Keyword.print, Keyword.print]
 
         self.multi_level_tester(
             code=code,
@@ -475,7 +475,7 @@ class TestsLevel4(HedyTester):
             code=code,
             expected=expected,
             output='10',
-            expected_commands=[Command.print],
+            expected_commands=[Keyword.print],
             max_level=11)
 
     def test_print_number_arabic(self):
@@ -486,7 +486,7 @@ class TestsLevel4(HedyTester):
             code=code,
             expected=expected,
             output='١١',
-            expected_commands=[Command.print],
+            expected_commands=[Keyword.print],
             max_level=11)
 
     def test_print_multi_args(self):
@@ -497,7 +497,7 @@ class TestsLevel4(HedyTester):
             code=code,
             expected=expected,
             output='helloHedy4١١',
-            expected_commands=[Command.print],
+            expected_commands=[Keyword.print],
             max_level=11)
 
     #

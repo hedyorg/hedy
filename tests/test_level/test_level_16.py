@@ -328,7 +328,7 @@ class TestsLevel16(HedyTester):
             skip_faulty=False
         )
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparison_with_list_access(self, comparison):
         code = textwrap.dedent(f"""\
             balletje = 0
@@ -615,7 +615,7 @@ class TestsLevel16(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-    @parameterized.expand(HedyTester.equality_comparison_commands)
+    @parameterized.expand(HedyTester.equality_comparisons)
     def test_equality_with_list_access_and_float(self, comparison):
         code = textwrap.dedent(f"""\
             numbers = [1.5, 2.9, 42.0]

@@ -1,6 +1,6 @@
 import textwrap
 import hedy
-from hedy import Command
+from hedy import Keyword
 from hedy_sourcemap import SourceRange
 from tests.Tester import HedyTester, SkippedMapping
 
@@ -31,7 +31,7 @@ class TestsLevel1(HedyTester):
         code = "print Hallo welkom bij Hedy!"
         expected = "print('Hallo welkom bij Hedy!')"
         output = 'Hallo welkom bij Hedy!'
-        expected_commands = [Command.print]
+        expected_commands = [Keyword.print]
 
         self.single_level_tester(
             code=code,
@@ -48,7 +48,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output='10',
-            expected_commands=[Command.print]
+            expected_commands=[Keyword.print]
         )
 
     def test_print_number_arabic(self):
@@ -59,14 +59,14 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output='١١',
-            expected_commands=[Command.print]
+            expected_commands=[Keyword.print]
         )
 
     def test_print_no_space(self):
         code = "printHallo welkom bij Hedy!"
         expected = "print('Hallo welkom bij Hedy!')"
         output = 'Hallo welkom bij Hedy!'
-        expected_commands = [Command.print]
+        expected_commands = [Keyword.print]
 
         self.single_level_tester(
             code=code,
@@ -78,14 +78,14 @@ class TestsLevel1(HedyTester):
     def test_print_line_with_spaces_works(self):
         code = "print hallo\n      \nprint hallo"
         expected = "print('hallo')\n\nprint('hallo')"
-        expected_commands = [Command.print, Command.print]
+        expected_commands = [Keyword.print, Keyword.print]
 
         self.single_level_tester(code=code, expected=expected, expected_commands=expected_commands)
 
     def test_print_comma(self):
         code = "print one, two, three"
         expected = "print('one, two, three')"
-        expected_commands = [Command.print]
+        expected_commands = [Keyword.print]
 
         self.single_level_tester(code=code, expected=expected, expected_commands=expected_commands)
 
@@ -623,7 +623,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            expected_commands=[Command.print]
+            expected_commands=[Keyword.print]
         )
 
     #
@@ -643,7 +643,7 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=[Command.print, Command.ask, Command.echo])
+            expected_commands=[Keyword.print, Keyword.ask, Keyword.echo])
 
     def test_forward_turn_combined(self):
         code = textwrap.dedent("""\
@@ -660,7 +660,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            expected_commands=[Command.forward, Command.turn, Command.forward],
+            expected_commands=[Keyword.forward, Keyword.turn, Keyword.forward],
             max_level=11
         )
 
@@ -960,12 +960,12 @@ class TestsHypothesisLevel1(HedyTester):
                 translate=False
             )
 
-            expected_commands = [Command.ask, Command.ask, Command.echo, Command.echo, Command.forward, Command.forward,
-                                 Command.print, Command.print, Command.print, Command.turn, Command.turn]
+            expected_keywords = [Keyword.ask, Keyword.ask, Keyword.echo, Keyword.echo, Keyword.forward, Keyword.forward,
+                                 Keyword.print, Keyword.print, Keyword.print, Keyword.turn, Keyword.turn]
 
-            # TODO, FH sept 2023: all_commands parses and thus is expensive
-            # we should get the commands list back from the parser instead (parseresult.commands)
+            # TODO, FH sept 2023: all_keywords parses and thus is expensive
+            # we should get the keywords list back from the parser instead (parseresult.keyword)
             # since we don't use many single_level_tester features
             # we can transpile and check the python "manually"
-            all_commands = sorted(hedy.all_commands(code, self.level, 'en'))
-            self.assertEqual(expected_commands, all_commands)
+            all_keywords = sorted(hedy.all_keywords(code, self.level, 'en'))
+            self.assertEqual(expected_keywords, all_keywords)

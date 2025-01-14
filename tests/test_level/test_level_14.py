@@ -13,7 +13,7 @@ class TestsLevel14(HedyTester):
     #
     # if tests / equality tests / equals tests
     #
-    @parameterized.expand(HedyTester.equality_comparison_commands)
+    @parameterized.expand(HedyTester.equality_comparisons)
     def test_equality_with_var_and_string(self, comparison):
         code = textwrap.dedent(f"""\
             name is 'Hedy'
@@ -30,7 +30,7 @@ class TestsLevel14(HedyTester):
             expected=expected,
         )
 
-    @parameterized.expand(HedyTester.equality_comparison_commands)
+    @parameterized.expand(HedyTester.equality_comparisons)
     def test_equality_with_var_and_int(self, comparison):
         code = textwrap.dedent(f"""\
             age is 20
@@ -47,7 +47,7 @@ class TestsLevel14(HedyTester):
             expected=expected,
         )
 
-    @parameterized.expand(HedyTester.equality_comparison_commands)
+    @parameterized.expand(HedyTester.equality_comparisons)
     def test_equality_with_list_access_and_float(self, comparison):
         code = textwrap.dedent(f"""\
             numbers = 1.5, 2.9, 42.0
@@ -107,7 +107,7 @@ class TestsLevel14(HedyTester):
             expected=expected,
             output='yes')
 
-    @parameterized.expand(HedyTester.equality_comparison_commands)
+    @parameterized.expand(HedyTester.equality_comparisons)
     def test_equality_of_lists(self, comparison):
         code = textwrap.dedent(f"""\
             a = 1, 2
@@ -126,7 +126,7 @@ class TestsLevel14(HedyTester):
             expected=expected,
             max_level=15)
 
-    @parameterized.expand(HedyTester.equality_comparison_commands)
+    @parameterized.expand(HedyTester.equality_comparisons)
     def test_equality_with_lists(self, comparison):
         code = textwrap.dedent(f"""\
             a = 1, 2
@@ -363,7 +363,7 @@ class TestsLevel14(HedyTester):
             output='Below',
         )
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparison_with_int(self, comparison):
         code = textwrap.dedent(f"""\
             leeftijd is 12
@@ -408,7 +408,7 @@ class TestsLevel14(HedyTester):
             expected=expected,
             output=output)
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparison_with_list_access(self, comparison):
         code = textwrap.dedent(f"""\
             numbers = 1, 2, 10
@@ -427,7 +427,7 @@ class TestsLevel14(HedyTester):
             expected=expected,
             max_level=15)
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparison_else(self, comparison):
         code = textwrap.dedent(f"""\
             leeftijd is 12
@@ -448,7 +448,7 @@ class TestsLevel14(HedyTester):
             expected=expected
         )
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def tests_smaller_no_spaces(self, comparison):
         code = textwrap.dedent(f"""\
             leeftijd is 10
@@ -465,7 +465,7 @@ class TestsLevel14(HedyTester):
             expected=expected
         )
 
-    @parameterized.expand(HedyTester.number_comparison_commands)
+    @parameterized.expand(HedyTester.number_comparisons)
     def test_comparison_with_string_gives_type_error(self, comparison):
         code = textwrap.dedent(f"""\
         a is 'text'
@@ -479,7 +479,7 @@ class TestsLevel14(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    @parameterized.expand(HedyTester.number_comparison_commands)
+    @parameterized.expand(HedyTester.number_comparisons)
     def test_comparison_with_list_gives_type_error(self, comparison):
         code = textwrap.dedent(f"""\
         a is 1, 2, 3
@@ -493,7 +493,7 @@ class TestsLevel14(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparison_with_boolean(self, comparison):
         code = textwrap.dedent(f"""\
             leeftijd is 10
@@ -515,7 +515,7 @@ class TestsLevel14(HedyTester):
             expected=expected,
         )
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparison_with_trailing_spaces(self, comparison):
         value = '1  '
         code = textwrap.dedent(f"""\
@@ -530,7 +530,7 @@ class TestsLevel14(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparison_with_leading_spaces(self, comparison):
         code = textwrap.dedent(f"""\
             var is 5
@@ -544,7 +544,7 @@ class TestsLevel14(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
-    @parameterized.expand(HedyTester.number_comparison_commands)
+    @parameterized.expand(HedyTester.number_comparisons)
     def test_comparison_with_undef_var_gives_error(self, comparison):
         code = textwrap.dedent(f"""\
             if n {comparison} 12
@@ -566,7 +566,7 @@ class TestsLevel14(HedyTester):
 
         self.multi_level_tester(code=code, exception=exceptions.NoIndentationException)
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparison_var_if_pressed(self, comparison):
         code = textwrap.dedent(f"""\
             i is 10
@@ -594,7 +594,7 @@ class TestsLevel14(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=16)
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparisons)
     def test_comparison_list_access_if_pressed(self, comparison):
         code = textwrap.dedent(f"""\
             i is 1, 2

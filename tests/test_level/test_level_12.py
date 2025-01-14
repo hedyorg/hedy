@@ -4,7 +4,7 @@ from parameterized import parameterized
 
 import exceptions
 import hedy
-from hedy import Command
+from hedy import Keyword
 from hedy_sourcemap import SourceRange
 from tests.Tester import HedyTester, SkippedMapping
 
@@ -251,7 +251,7 @@ class TestsLevel12(HedyTester):
     def test_print_line_with_spaces_works(self):
         code = "print 'hallo'\n      \nprint 'hallo'"
         expected = "print(f'''hallo''')\nprint(f'''hallo''')"
-        expected_commands = [Command.print, Command.print]
+        expected_commands = [Keyword.print, Keyword.print]
 
         self.multi_level_tester(
             code=code,
@@ -1890,7 +1890,7 @@ class TestsLevel12(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
         )
 
-    @parameterized.expand([(c, q) for c in HedyTester.in_not_in_list_commands for q in HedyTester.quotes])
+    @parameterized.expand([(c, q) for c in HedyTester.in_and_not_in for q in HedyTester.quotes])
     def test_if_in_not_in_list_with_string_var_gives_type_error(self, command, q):
         code = textwrap.dedent(f"""\
         items is {q}red{q}
@@ -1903,7 +1903,7 @@ class TestsLevel12(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    @parameterized.expand(HedyTester.in_and_not_in)
     def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
         code = textwrap.dedent(f"""\
             items is ask 'What are the items?'

@@ -527,12 +527,12 @@ class StructuredDataFile:
         return self._file
 
 
-class Commands(StructuredDataFile):
+class Cheatsheets(StructuredDataFile):
     def __init__(self, language):
         self.language = language
         super().__init__(f'{content_dir}/cheatsheets/{self.language}.yaml')
 
-    def get_commands_for_level(self, level, keyword_lang):
+    def get_keywords_for_level(self, level, keyword_lang):
         return deep_translate_keywords(self.file.get(int(level), {}), keyword_lang)
 
 
@@ -567,8 +567,8 @@ def get_localized_name(name, keyword_lang):
 # each language file is there
 
 
-class NoSuchCommand:
-    def get_commands_for_level(self, level, keyword_lang):
+class NoSuchFile:
+    def get_keywords_for_level(self, level, keyword_lang):
         return {}
 
 
