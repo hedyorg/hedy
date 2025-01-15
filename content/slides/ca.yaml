@@ -63,32 +63,27 @@ levels:
 
                 `{ask}` s'utilitza per fer una pregunta que es pot respondre.
             code: |-
-                {print} Welcome to your own rock scissors paper!
-                {ask} What will you choose?
+                {print} Us donem la benvinguda a Hedy!
+                {ask} Comença a programar!
         4:
             header: 'Hedy nivell 1: {echo}'
             text: |-
                 El codi de text final que podeu utilitzar al nivell 1 és `{echo}`.
 
                 `{echo}` s'utilitza per repetir la resposta d'un `{ask}`.
-            code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+            code: |
         5:
-            header: Programació!
-            text: |-
-                amb `{print}`, `{ask}` i `{echo}` ja podeu crear una petita història.
-                És un bon moment per provar les aventures del lloro, la història i la roca, les tisores de paper.
+            header: '{echo}'
+            text: |
         6:
             header: Programació!
-            text: Les aventures es mostren en pestanyes.
+            text: ''
         7:
             header: Programació!
             text: Els botons de fletxa groga es poden utilitzar per copiar exemples.
             editor: /hedy#print_command
         8:
-            header: Dibuixant amb la tortuga
+            header: Programant!
             text: Ara que hem vist els codis de text, ara veurem els codis de dibuix a continuació.
         9:
             header: 'Dibuix amb la tortuga: {forward}'
@@ -98,19 +93,13 @@ levels:
             text: '`{turn}` s''utilitza per fer que la tortuga giri a l''esquerra o a la dreta.'
             code: |-
                 {forward} 50
-                {turn} left
         11:
             code: |-
                 {forward} 50
                 {turn} left
     2:
         3:
-            text: |-
-                We can also set a variable by asking questions.
-
-                The answer to the question is stored in the variable.
-
-                This way we don't need the `{echo}`  command.
+            text: |
         4:
             text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
     4:

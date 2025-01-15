@@ -11,8 +11,10 @@ home-sections:
         Na Hedy je hezké, že je *stupňovitá*. To znamená, že se nemusíte učit všechna pravidla najednou.
         Prvních několik úrovní nemá tolik pravidel, takže si na programování můžete pohodlně zvyknout.
         V každé úrovni přidáváme nová pravidla, čímž se zvyšuje počet příkazů, které znáte. Příkazy jsou instrukce, ktrými řídíme počítač.
--   {}
--   {}
+-   title: Vícejazyčné programování
+    text: Zatímco téměř všechny textové programovací jazyky mají klíčová slova v angličtině, například `for` nebo `repeat`, Hedy lze použít v jakémkoli jazyce! V současné době podporujeme 47 různých jazyků, včetně nizozemštiny, španělštiny, arabštiny, turečtiny, čínštiny a hindštiny. Pokud váš jazyk není k dispozici, můžete vždy spustit nový překlad.
+-   title: Učení krok za krokem
+    text: Učení se programovacímu jazyku může být náročné, protože se studenti musí učit pojmy (například if-else nebo cykly) a syntaxi (například uvozovky nebo kulaté závorky) zároveň. V jazyce Hedy jsou pojmy nejprve představeny s malým množstvím syntaxe a poté upřesněny. Vědecky ověřený způsob učení!
 -   title: Pro koho je Hedy?
     text: Hedy je určena pro všechny děti, které se chtějí naučit programovat! Taky je potřeba se nebát pár základních anglických slovíček.
 -   title: Potřebuji nějaké znalosti programování?
@@ -23,9 +25,13 @@ home-sections:
         Pokud se ti Hedy líbí a chtěl*a bys nám přispět, přijímáme (a jsme velmi vděční za) [dary](https://github.com/sponsors/hedyorg)!
 -   title: Potřebuji něco instalovat?
     text: Ne. Hedy běží v prohlížeči, což je program, ve kterém se díváš na tuto stránku, pravděpodobně Chrome, Edge nebo Firefox. Hedy také funguje na telefonech a tabletech.
+-   title: Potřebuji k výuce s Hedy zkušenosti s programováním?
+    text: "Ne, to není potřeba. Všechny pojmy jsou vysvětleny ve snímcích a v rozhraní pro studenty.\nPokud si vytvoříte bezplatný účet učitele, získáte také přístup k příručce učitele s informacemi o tom, jak učit.\na často se vyskytujících chybách."
 learn-more-sections:
--   {}
--   {}
+-   text: "Hedy spravuje Nadace Hedy (Stichting Hedy), Sportmanstaat 8, 2341 JG Oegstgeest, číslo nizozemské obchodní komory 94013985.\n\nSprávní radu nadace tvoří:\n\n  * Felienne Hermans, prezidentka\n  * Eelko Huizing, finanční ředitel\n  * Renée Merbis, tajemnice\n\nSprávní rada nadace Stichting Hedy nedostává za své úkoly žádnou finanční odměnu. "
+    title: Nadace Hedy
+-   title: Hluboký ponor!
+    text: "Chcete se dozvědět více o filozofii a designu Hedy? Podívejte se na přednášku, kterou Felienne přednesla na konferenci StrangeLoop v roce 2022:\n\n<iframe width=\"560\" height=\"315\" class=\"mx-auto mt-4\" src=\"https://www.youtube.com/embed/fmF7HpU_-9k?wmode=opaque\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen=\"\">encrypted-media; gyroscope; picture-in-picture“ allowfullscreen=„“></iframe>"
 -   title: Hedy v novinách
     text: |-
         Některé weby a noviny psaly o Hedy od našeho vydání na začátku roku 2020. Seznam si můžete prohlédnout zde:
@@ -55,8 +61,532 @@ start-sections:
 -   title: Učitelé o Hedy
     text: "A while ago we ran a few short Hedy teachers surveys. \nThe questions span between suggestions of improvement and Hedy’s best features. \nBelow is a testimony of their thoughts:\n\nSimple interface and good examples. *Teacher: 3rd - 6th grades (elementary)*\n\nMultilingual programming and just the gradual programming concept itself. - *US: middle school, 6th-8th grade*\n\nThe gradual nature of introducing programming. *Australia: High school*\n\nThe construction is so good. *Netherlands: Lower secondary school HAVO-VWO*\n\nI can keep the pace of the class. *Netherlands: group 7 en 8* \n\nContinues automatically. *Netherlands: 2 HAVO-VWO*\n\nBoth that the explanation can be in Dutch (and the code in English), and that it builds up with more \nand more possibilities. *Netherlands: Plus class group 7*\n\nThe 'realness' of programming, it resembles how it is in reality. *Netherlands: Plus class group 4 to 8*\n\nStep-by-step activities. Fun activities. *Netherlands: 1e All levels, 2e VWO/HAVO 2e VWO +, 3e HAVO 3e VWO*\n\nBut Hedy and its gradual levels... what an idea, \nI wanted to personally thank you for creating this. I cannot thank you enough. Also, I have never seen the level of engagement and enthusiasm of my \nstudents, as I have seen with Hedy. We have covered till level 5, and plan to spend one more week on it in classes and labs, \nbefore starting Python.  *Pakistan*\n\nI really like Hedy very much and it is also nicely set up, which makes it good to use in primary school. \nHedy's gradual approach works very well. \nThe short explanation at the beginning of each level and the short example programs help to give the children a quick insight into what is new in the chosen level. \nThe different assignments that the children can choose also work very well. \nYou see the children choose assignments that appeal to them and they then get to work with them, \nthrough the levels. Hedy is great fun for children who are good at programming and want to get a \ntaste of a real programming language. It is good preparation for secondary school as soon as more ICT \neducation is given there. *Netherlands: Oegstgeest Montessori school*\n\n<img width=\"500px\" src=\"static/images/teacherfeedback/Fkids1.JPG\"></img>"
 teacher-guide:
--   {}
--   {}
+-   subsections:
+    -   title: Co je to Hedy?
+        text: "introHedy je textový programovací jazyk vyvinutý speciálně pro (před)teenagery (10 až 15 let).\n\nNa rozdíl od programovacích jazyků pro děti, jako je Scratch, Hedy nepoužívá bloky kódu, ale textový kód.\nS Hedy se tedy naučíte psát kód jako skuteční programátoři, ale po malých krůčcích s hravými cvičeními.\nHedy tak může fungovat jako odrazový můstek ke skutečným programovacím jazykům, jako je Python, přístupnou a hlavně zábavnou formou!\nPokud se chcete dozvědět více, můžete se podívat na toto<a href=\"https://www.youtube.com/watch?v=EdqT313rM40&amp;t=2s\" target=\"_blank\">video</a> o vývoji Hedy jako programovacího jazyka."
+    -   text: "Hedy je vytvořena s ohledem na studenty středních škol a nižších ročníků gymnázií (10-15 let).\nJe důležité, aby studenti uměli dobře číst. Doporučujeme nezačínat s Hedy dříve, než studenti dosáhnou alespoň úrovně čtení ve 3. třídě.\nStudenti (a učitelé!) nepotřebují před začátkem práce s Hedy žádné zkušenosti s programováním."
+        title: Cílová skupina
+    -   title: Jak Hedy pracuje?
+        text: "Hedy je rozdělena do úrovní, ve kterých se učí nové příkazy. Každá úroveň obsahuje různá dobrodružství k procvičení nově naučených příkazů.\nJako učitel můžete rozhodnout, která dobrodružství budou pro vaše studenty dostupná. Budou v této úrovni vyrábět restauraci, kalkulačku nebo strašidelný dům? V rámci každé úrovně jsou dobrodružství seřazena od nejlehčího po nejtěžší.\nVaši žáci tak budou neustále čelit novým výzvám. Dobrodružství mohou žáci absolvovat samostatně, nebo je můžete využít při klasické výuce.\nSoučástí dobrodružství je také příklad kódu, aby Hedy mohli používat i méně digitálně zdatní učitelé!\nHedy samozřejmě vychází vstříc i kreativním učitelům, kteří si rádi vytvářejí vlastní plány hodin a dobrodružství!Po naprogramování všech dobrodružství určité úrovně si mohou vaši žáci otestovat své znalosti v kvízu.\nPráci studentů a jejich pokrok můžete sledovat na stránce třídy."
+    -   title: Zařízení
+        text: "Hedy je webová aplikace, což znamená, že funguje na jakémkoli zařízení s prohlížečem (Google Chrome, Firefox, Edge atd.), takže ji lze používat na noteboocích, Chromeboocích, tabletech i chytrých telefonech.\nPřed prací s Hedy není třeba nic stahovat, stačí přejít na webové stránky a vše je připraveno!"
+    -   title: Hedy komunita
+        text: "Všichni učitelé Hedy, programátoři a další fanoušci jsou vítáni na našem <a href=\"https://discord.gg/8yY7dEme9r\" target=\"_blank\">Diskord serveru</a>. Je to ideální místo pro chatování o Hedy: máme kanály, kde můžete ukázat své skvělé projekty a lekce, kanály pro hlášení chyb a kanály pro chatování s ostatními učiteli a s týmem Hedy.\n<a href=\"https://www.youtube.com/watch?v=Lyz_Lnd-_aI\" target=\"_blank\">Zde</a> najdete video o tom, jak se připojit ke komunitě Discord."
+    -   title: Hedy a GDPR
+        text: "Organizace v EU musí při zpracování osobních údajů dodržovat GDPR (obecné nařízení o ochraně osobních údajů).\nProtože se jedná o složitou problematiku pro mnoho škol, můžete využívat všechny funkce programování Hedy bez sdílení osobních údajů.\nNejjednodušší je používat Hedy bez vytváření účtů pro učitele a studenty. Bez účtů jsou k dispozici všechny funkce s výjimkou personalizace úrovní, ukládání programů studentů a prohlížení jejich pokroku. To je omezující, ale existují školy, které Hedy takto používají.\n\nDruhým způsobem je, že si učitel vytvoří účet s e-mailovou adresou bez osobních údajů, například „docent25@email.com“. Kromě e-mailové adresy, která je vyžadována pouze pro obnovení hesla, nemusíte při vytváření účtu učitele sdělovat žádné údaje.\nS účtem učitele můžete vytvářet anonymní účty pro studenty, např. rainbow-student1, rainbow-student2 atd (podrobný návod naleznete v části „Přípravy na výuku“). Tímto způsobem můžete využívat všechny funkce Hedy, včetně ukládání pokroku, aniž byste sdíleli osobní údaje své nebo svých studentů.\n\nPokud vám výše uvedený postup v daném kontextu nestačí, můžeme s vámi uzavřít smlouvu o zpracování osobních údajů."
+    title: Úvod
+    key: úvod
+-   title: Návod
+    key: návod
+    subsections:
+    -   title: Návod
+        text: Chcete (znovu) sledovat návod? Klikněte na<a href="https://hedy.org/tutorial" target="_blank"><a href="https://hedy.org/tutorial" target="_blank">zde</a>.
 -   subsections:
     -   title: Pro učitele
         text: Své hodiny můžete připravit na stránce <a href="https://hedy.org/for-teachers" target="_blank">Pro učitele</a>. Najdete zde vše potřebné pro výuku s Hedy, jako jsou vaše třídy, dobrodružství a prezentace. Všechny funkce stránky pro učitele jsou vysvětleny níže.
+    -   text: "Jako učitel můžete pro své studenty vytvořit třídu. V této třídě můžete vidět účty studentů a jejich programy a můžete sledovat jejich pokrok.\nTato stránka<a href=\"https://www.youtube.com/watch?v=Y3RTIWftJQg\" target=\"_blank\">video</a>vám ukáže, jak rychle vytvořit třídu v aplikaci Hedy."
+        title: Tvoření Třídy
+    -   title: Duplikovat třídu
+        text: "Učíte více tříd? Pak nemusíte přizpůsobovat každou třídu zvlášť. Jednoduše vytvořte třídu, upravte její kostýmy (jak na to, se dozvíte v části „Přizpůsobení třídy“) a pak tuto třídu duplikujte tolikrát, kolikrát chcete.\nTřídu můžete duplikovat na stránce „Pro učitele“. Pokud třídu duplikujete, duplikují se i všechna nastavení třídy. To znamená, že všechny úrovně a dobrodružství, které jste znepřístupnili pro první třídu, budou nyní znepřístupněny i pro novou třídu (třídy).\nÚčty žáků a účty druhého učitele ve vaší třídě nebudou duplikovány do nové třídy."
+    -   title: Přidání druhého učitele
+        text: "Nejste jediným učitelem, který učí ve vaší třídě? Pak nyní můžete do třídy přidat dalšího učitele. Přejděte na stránku „Pro učitele“ a klikněte na třídu. Poté vyberte možnost „Pozvat učitele“ a vyplňte uživatelské jméno svého kolegy.\nVáš kolega dostane na svůj účet pozvánku, aby se připojil k vaší třídě. Tuto zprávu s pozvánkou uvidí, když klikne na své uživatelské jméno v pravém horním rohu obrazovky a vybere možnost „Můj účet“.\nJakmile druhý učitel pozvánku přijme, může si třídu také přizpůsobit.\nChcete-li druhého učitele ze třídy odebrat, přejděte na stránku třídy a odeberte druhého učitele. Učitele, který třídu vytvořil, nelze odebrat."
+    -   text: "Třídu si můžete přizpůsobit a zvolit, která dobrodružství budou pro vaše studenty dostupná. Studenti tak nebudou zahlceni množstvím dobrodružství a úrovní a mohou se zaměřit konkrétně na dobrodružství, která chcete, aby si procvičili.\nKlikněte na svou třídu na stránce pro učitele a vyberte možnost „přizpůsobit třídu“. Na této stránce můžete vybrat úrovně, nastavit data zahájení, odemknout prahové hodnoty úrovní a další.\n\n**Výběr a objednání dobrodružství**\n<img src=„https://github.com/hedyorg/hedy/assets/80678586/df38cbb2-468e-4317-ac67-92eaf4212adc“ width=„1000“>\nV této části můžete vybrat a objednat dobrodružství. Růžové záložky jsou dobrodružství s novými příkazy. Šedé záložky jsou běžná dobrodružství. Chcete-li změnit pořadí dobrodružství, můžete záložky přetáhnout. Doporučujeme však používat běžné pořadí dobrodružství, protože tým Hedy se postaral o to, aby dobrodružství šla od nejlehčích po nejtěžší.\nPokud chcete dobrodružství pro své studenty odstranit, jednoduše klikněte na křížek na kartě dobrodružství.\n<img src=„https://github.com/hedyorg/hedy/assets/80678586/0ddd10b5-ef60-4480-a0c4-fc9a0f323baa“ width=„300“>\nPokud chcete přidat dobrodružství, například vlastní dobrodružství nebo dobrodružství, které jste omylem odstranili, použijte tuto nabídku a přidejte dobrodružství k dobrodružstvím svých studentů. Stačí kliknout na dobrodružství, které chcete přidat, a to se (znovu) objeví v řádku dobrodružství. Chcete-li zrušit všechny změny v dobrodružstvích, klikněte na tlačítko „Obnovit“.\n\n**Data zahájení**\n<img src=„https://github.com/hedyorg/hedy/assets/80678586/4e59acfa-4772-429f-8328-babb43c942d5“ width=„300“>\nPomocí této funkce můžete nastavit data zahájení jednotlivých úrovní. Můžete si tak vytvořit plán výuky před zahájením kurzu a nemusíte se starat o otevírání nových úrovní každý týden. Na obrázku výše je první úroveň otevřena přímo, druhá se otevře 23. září a třetí úroveň týden poté. Ostatní úrovně jsou uzavřené.\nNechcete nastavovat data otevření? Žádný problém, nechte tuto část prázdnou.\n\n**Prahy pro odemknutí úrovní**\n<img src=„https://github.com/hedyorg/hedy/assets/80678586/99a34dab-f112-459e-bfd1-07618be4715a“ width = „1000“>\nTato funkce umožňuje nastavit prahovou hodnotu pro hodnocení kvízu, než budou moci studenti pokračovat do další úrovně. Pokud například zadáte hodnotu „80“, musí vaši studenti získat v kvízu alespoň 80 %, než budou moci přejít do další úrovně. Pokud tuto hranici nesplnili, nebudou smět pokračovat a budou muset kvíz opakovat.\nNechcete použít prahovou hodnotu? Nevadí, nechte tento oddíl prázdný.\n\n\n**Další nastavení**\n<img src=„https://github.com/hedyorg/hedy/assets/80678586/a8491d67-6d6e-42a7-b672-fd3d083a76f8“/>\nExistují i další nastavení, která by se vám mohla hodit. Naším prvním dodatečným nastavením je „Povinný režim pro vývojáře“. V režimu pro vývojáře studenti vidí pouze své vstupní a výstupní obrazovky a tlačítko pro spuštění. Dobrodružství jsou skrytá a nejsou k dispozici žádné cheatsheety. To se může hodit při zkouškách.\nPokud tuto možnost nezvolíte, je vývojářský režim k dispozici i pro studenty jako dobrovolná volba.\n\nPokud chcete, aby byli všichni žáci viditelní v de třídním skóre, můžete zvolit druhou možnost.\nU všech ostatních možností si můžete zvolit, zda chcete pro studenty skrýt některé funkce nebo obsah, což jim může pomoci se více soustředit.\n\n**Uložit**\n<img src=„https://github.com/hedyorg/hedy/assets/80678586/df179df3-3073-4d15-bba6-62e58fb675be“ width=„300“>\nPo dokončení přizpůsobení třídy nezapomeňte změny uložit."
+        title: Přizpůsobení třídy
+    -   text: "Chcete-li přidat studenty do třídy, přejděte na stránku třídy kliknutím na název třídy na stránce „pro učitele“. Poté klikněte na tlačítko „přidat studenty“. Existují dva způsoby, jak umožnit studentům připojit se k vaší třídě: Můžete pro ně vytvořit účty, nebo si mohou vytvořit své vlastní účty.\n\n**Vy vytvoříte účty pro své studenty**\nNejjednodušší způsob, jak přidat studenty do třídy, je vytvořit jim účet. To lze provést kliknutím na tlačítko „vytvořit účty studentů“ a vyplněním uživatelských jmen a hesel pro ně.\nStudenti se mohou přihlásit pomocí vámi zvoleného uživatelského jména a hesla. Poté si mohou uživatelské jméno nebo heslo změnit, pokud budou chtít, a zůstanou stále ve vaší třídě.\nToto<a href=\"https://www.youtube.com/watch?v=eEQvik-Ce5M\" target=\"_blank\">video</a> ukazuje, jak nejrychleji a nejjednodušeji přidat studenty do třídy.\n\n**Studenti si vytvářejí vlastní účty**\nVaši studenti mohou také přejít na webové stránky Hedy a vytvořit si vlastní účty, stejně jako jste to udělali vy. Aby se dostali do vaší třídy, musí jednoduše kliknout na odkaz pozvat.\nOdkaz na pozvánku najdete na stránce třídy a můžete ji studentům poslat. Mějte na paměti, že vaši studenti musí být po kliknutí na odkaz přihlášeni do služby Hedy, aby vše fungovalo bez problémů.\nStudenta můžete do třídy pozvat také ručně pomocí tlačítka „Pozvat podle uživatelského jména“."
+        title: Studentské účty
+    -   title: Nastavení preferovaného jazyka
+        text: "Při vytváření profilů si studenti mají zvolit „preferovaný jazyk“. Hedy se vždy načte v tomto vybraném jazyce.\nZměnu tohoto jazyka lze vždy provést později opětovnou navigací do „Můj účet“ a „Moje osobní nastavení“.\n\n**Pro neangličtináře**\nNejenže můžete změnit jazyk dobrodružství na svůj vlastní jazyk. Můžete také zvolit, v jakém jazyce mají být klíčová slova (například „tisk“ nebo „zeptat se“).\nTakto můžete své studenty naučit programovat pomocí anglických klíčových slov, ale zároveň je můžete nechat programovat v jejich vlastním jazyce. Například nizozemští studenti mohou místo příkazu 'ask' použít příkaz 'vraag'.\nPokud chce student přepnout jazyk, může kliknout na přepínač klíčových slov. Ten přepne klíčová slova z angličtiny do preferovaného jazyka a zpět.\nZábavný fakt! Studenti mohou programovat současně v angličtině i ve svém jazyce! Pokud tedy mají problém zapamatovat si některá klíčová slova v angličtině, ale snadno si zapamatují jiná, mohou používat obě slova současně.\n<img src=„https://github.com/hedyorg/hedy/assets/80678586/0b3122e6-ff22-43d7-b8b6-62f47f485293“ width=„100“>\n\n**Video**\nToto <a href=„https://www.youtube.com/watch?v=QrVZETj4oLM“ target=„_blank“>video</a> vám ukáže, jak nastavit preferovaný jazyk a změnit klíčová slova také na vámi preferovaný jazyk."
+    -   title: Ukládání programů
+        text: "Po přihlášení se vedle ikony vašeho profilu zobrazí položka Moje programy.\nTato možnost existuje i pro vaše studenty. V části Moje programy najdete všechny programy, na kterých jste pracovali.\nVe výchozím nastavení se programy ukládají do „Mých programů“ při spuštění kódu a každých 10 sekund pod svým výchozím názvem.\na jejich úrovní (například: Příběh 5). Pokud chcete program uložit pod novým názvem, stačí zadat nový název do panelu názvů.\nV současné době lze na jednu úroveň a na jednu kartu uložit pouze jeden program.\n\nProgramy můžete (vy i vaši studenti) také sdílet pomocí tlačítka sdílení vedle názvů programů.\nTyto programy budou zveřejněny na naší <a href=\"https://hedy.org/explore\" target=\"_blank\">stránce prozkoumání</a>, aby si je mohl každý prohlédnout a používat.\nPokud chcete svůj program zrušit, přejděte do sekce „Moje programy“ a klikněte na tlačítko „Zrušit sdílení“.\n\nIkonu papírového letadla můžete použít k předání programů učiteli třídy. Programy, které byly předány, již nebude možné upravovat."
+    title: Příprava na výuku
+    key: přípravy
+-   subsections:
+    -   title: Výuka s Hedy
+        text: "Hedy obsahuje mnoho různých úrovní, z nichž každá učí jiné nové dovednosti. Doporučujeme učit jednu úroveň v každé lekci.\nStudenti tak budou mít čas si nový příkaz nebo koncept plně osvojit a procvičit, než přejdou na další úroveň.\nTuto strukturu používáme v našich lekcích: Učební lekce: Úvod, Nové pojmy a příkazy, Pusťme se do práce, Hádanky a kvízy."
+    -   title: Slajdy
+        text: "Při zadávání pokynů můžete použít naše diapozitivy. Naše diapozitivy jsou k dispozici na stránce „Pro učitele“. Pro každou úroveň je k dispozici sada diapozitivů. Ve slajdech jsou vysvětleny všechny nové příkazy pro danou úroveň. Naším cílem bylo vysvětlit, proč jsou tyto změny nezbytné nebo jak se nové příkazy hodí.\nUvádíme také několik příkladů, jak lze nové příkazy použít. Můžete samozřejmě použít i vlastní slajdy nebo si prostě otevřít Hedy a provést žáky po webu. Ať už dáváte přednost čemukoli, abyste vedli ty nejlepší lekce Hedy!"
+    -   text: "Výuku můžete zahájit aktivací předchozích znalostí studentů: Co již o tématu vědí, co se naučili v předchozí hodině a jaké chyby udělali a z čeho se nyní poučili?\nTímto způsobem budou mít studenti všechny dříve naučené příkazy a časté chyby v čerstvé paměti, až začnete uvádět novou lekci."
+        title: Úvod
+    -   title: Zavedení nových pojmů a příkazů
+        text: "Pro některé studenty může být velmi obtížné plně pochopit nové pojmy a příkazy.\nProto je důležité, abyste studentům správné používání nových příkazů předvedli.\nZejména v nižších ročnících, kde někteří studenti nemají s programováním vůbec žádné zkušenosti, může být pro ně těžké pochopit nové abstraktní pojmy.\nUkázáním mnoha příkladů se abstraktní pojem (například: „Co je to proměnná?“) stane rozpoznatelnějším a snáze pochopitelným („Podívejte, proměnná pet se změnila na dog“). S tím by vám mohly pomoci naše diapozitivy."
+    -   title: Pusťme se do práce
+        text: "Each level contains different adventures that you can find in the pink tabs. The first pink tab explains the new commands in this level.\nThe following tabs are adventures that the students can try out and make their own.\nThe adventures are arranged from easiest to hardest, so we recommend to start on the left and your your way to the right.\nThe last tab 'what's next' gives a little teaser of what you'll learn in the next level. Of course, you can select the adventures you want your students to do for each level.\nThey don't always have to make every adventure. Every adventure contains an example code, that the students can try out with the green button.\nThe example code gets copied to the workfield, where the students can try out the code and adjust it to make it their own.\nStimulate your students to turn the example code into their own projects by adding their own ideas and making their own variation of the adventure."
+    -   title: Kvízy a hádanky
+        text: "Chcete-li otestovat, zda si studenti osvojili všechny nové informace v dané úrovni, můžete je nechat vyplnit kvíz.\nKvíz obsahuje 10 otázek s výběrem odpovědí na nové pojmy a příkazy k dané úrovni.\nNe každá úroveň má zatím kvíz, protože kvízy stále vytváříme.\nNěkteré úrovně obsahují také hádanky. Hádanky ukazují studentům několik řádků kódu, které musí studenti zařadit do správného pořadí.\n\nToto <a href=\"https://www.youtube.com/watch?v=lNh5EdZVUwc\" target=\"_blank\">video</a> ukazuje kvízy a hádanky."
+    -   title: Evaluace
+        text: "Lekci zakončete krátkým zhodnocením. Co se žáci naučili? S jakými těžkostmi se setkali?\nJak se poučili ze svých chyb? A samozřejmě: Co vytvořili?\nStudenti jsou často na své vlastní výtvory velmi pyšní, proto je příjemné ušetřit trochu času a dát studentům možnost ukázat své dílo spolužákům."
+    key: výuka
+    title: Výuka s Hedy
+-   subsections:
+    -   title: Živý přístrojový panel
+        text: "Pokud chcete sledovat pokroky svých studentů, můžete využít živý řídicí panel. Live dashboard najdete kliknutím na „Live statistics“ na stránce třídy.\n<img src=„https://github.com/hedyorg/hedy/assets/80678586/97a54679-b1d6-46b4-a633-ab0161114642“ width=„1000“>\nVšechny funkce tohoto řídicího panelu jsou vysvětleny níže."
+    -   title: Výběr úrovně
+        text: "<img src=„https://github.com/hedyorg/hedy/assets/80678586/94dc891d-cdd6-4311-91f2-51900eaf4c2a“ width=„500“>\nNejprve můžete vybrat úrovně, které chcete na tabuli zobrazit. Úrovně, na kterých vaši studenti právě pracují, vyberete kliknutím na číslo dané úrovně. Úrovně, které nechcete vidět, zrušte opětovným kliknutím na ně.\nV tomto příkladu jsou vybrány úrovně 1 a 2. Kliknutím na tlačítko Obnovit obnovíte informační tabuli a získáte nejaktuálnější statistiky."
+    -   title: Přehled tříd
+        text: "<img src=„https://github.com/hedyorg/hedy/assets/80678586/b2c30ef9-6eba-4c02-92a3-9669504a54a8“ width=„1000“>\nV přehledu třídy můžete vidět, na kterém dobrodružství vaši studenti právě pracují. Vidíte, že jeden student pracuje na dobrodružství „Kámen, nůžky, papír“ v 1. úrovni, jeden pracuje na dobrodružství „Věštec“ v 1. úrovni a jeden student pracuje na dobrodružství „Kámen, nůžky, papír“ ve 2. úrovni.\nPokud chcete vědět, který ze studentů pracuje na dobrodružství, stačí kliknout na číslo a zobrazí se názvy jejich účtů.\nMůžete také zjistit, kolik vašich studentů dokončilo kvíz. V tomto případě dokončil kvíz v 1. úrovni jeden student. Opět můžete kliknout na jedničku a zjistit, který z vašich studentů to je.\n\nMůžete také vidět, že jeden ze studentů v tomto přehledu „chybí“. To proto, že pracuje na dobrodružství ve 4. úrovni, která není vybrána."
+    -   title: Seznam studentů
+        text: "<img src=„https://github.com/hedyorg/hedy/assets/80678586/693e976c-199f-46f4-abae-3f18f9854cd0“ width=„1000“>\nZde najdete seznam svých studentů a můžete sledovat jejich individuální pokrok. Modrý kroužek ukazuje, na čem vaši studenti právě pracují.\n<img src=„https://github.com/hedyorg/hedy/assets/80678586/c7e2150f-60de-4ef7-8862-5901a7fb6609“ width=„150“>\nJe důležité si všimnout, že modré tečky znamenají, že se studenti o dobrodružství „pokusili“. To znamená, že v tomto dobrodružství spustili kód a přešli k dalšímu dobrodružství, neznamená to tedy automaticky, že odvedli dobrou práci!\nPokud se chcete podívat, jak se daří jednotlivým studentům, můžete v tomto přehledu kliknout na jejich jméno. Toto se zobrazí, když kliknete například na marleen_h3a:\n<img src=„https://github.com/hedyorg/hedy/assets/80678586/f8c2480d-c724-46f9-a702-33532828de70“ width=„800“>\nVidíte, že Marleen má problémy s programováním. Pokoušela se spustit program, který obsahuje prázdná místa vícekrát, takže si možná neuvědomuje, že musí před spuštěním změnit příklady kódu.\nDíky tomuto přehledu tak můžete lépe pochopit, s čím má student problémy."
+    -   title: Běžné chyby
+        text: "<img src=„https://github.com/hedyorg/hedy/assets/80678586/e7af5ce3-ca74-48e7-9654-f17435596fbc“ width=„500“>\nPokud vás nezajímají jen individuální problémy vašich žáků, ale rádi byste věděli, co dělá celá třída špatně, můžete využít tento přehled nejčastějších chyb.\nV tomto přehledu se vám zobrazí nejčastější chybová hlášení, která vaši žáci dostávají, takže v případě potřeby můžete celé třídě poskytnout další pokyny.\nPo kliknutí na chybu uvidíte, kteří studenti mají s touto chybou problémy. Klepnutím na tlačítko vyřešit odstraníte tuto chybu ze seznamu."
+    -   title: Přehled programů pro jednotlivá dobrodružství
+        text: "<img src=„https://github.com/hedyorg/hedy/assets/80678586/f07bf714-7250-4711-82a1-616f9f7b55e8“ width=„1000“>\nDalší užitečný přehled všech programů, které vaši studenti vytvořili v dané úrovni, najdete na stránce třídy. Přejděte na stránku třídy a klikněte na „Přehled programů za dobrodružství“. Zde najdete tento přehled.\nTento přehled můžete použít ke kontrole práce svých studentů. Pokud vytvořili program v dobrodružství, objeví se ve vašem přehledu očko. Kliknutím na oko si můžete prohlédnout jejich práci. Líbilo se vám to? Pak můžete zaškrtnout políčko a objeví se zelené zaškrtnutí.\nTímto způsobem si vytvoříte pěkný přehled o výsledcích svých žáků."
+    title: Statistiky učitelů
+    key: učitel_statistika
+-   subsections:
+    -   title: Vytvořte si vlastní dobrodružství
+        text: Učitelé si také mohou vytvořit vlastní dobrodružství. Toto <a href="https://www.youtube.com/watch?v=A0zbXpxX4q4" target="_blank">video</a> vám ukáže, jak si jako učitelé můžete vytvořit vlastní dobrodružství a přidat ho do své třídy (tříd).
+    -   title: Dobrodružství pro veřejnost
+        text: Chtěli byste využít dobrodružství jiných učitelů? Pak můžete navštívit naši <a href="https://hedy.org/public-adventures" target="_blank">veřejnou stránku dobrodružství</a>. Zde najdete všechna dobrodružství vytvořená jinými učiteli z celého světa. Abyste našli to, co vám vyhovuje, můžete si vybrat úroveň, jazyk a dokonce i značku. Našli jste dobrodružství, které byste rádi použili? Pak můžete stisknout tlačítko „klonovat“ a vytvořit kopii tohoto dobrodružství na svůj vlastní účet. Klon můžete upravit podle svých představ a přidat dobrodružství do své třídy stejným způsobem, jako byste přidávali svá vlastní dobrodružství. Originál upravovat nemůžete, takže originál bude vždy v bezpečí. Vytvořili jste sami dobrodružství, které byste rádi přidali do veřejných dobrodružství? Zaškrtněte při vytváření dobrodružství políčko, které vaše dobrodružství zpřístupní veřejnosti!
+    -   title: Objev stránku
+        text: "Na <a href=\"https://hedy.org/explore\" target=\"_blank\">stránce prozkoumat</a> si můžete prohlédnout práci ostatních uživatelů Hedy. Můžete si vyzkoušet jejich programy a použít je jako inspiraci pro vytvoření něčeho zajímavého pro sebe.\nNa stránku explore můžete také přidat program, který jste sami vytvořili, kliknutím na tlačítko „Uložit a sdílet kód“ na obrazovce kódování nebo přejděte do sekce Moje programy a klikněte na tlačítko „Sdílet“.\nNechcete už sdílet své dílo? Jednoduše přejděte do sekce 'Moje programy' a klikněte na 'Zrušit sdílení'.\nPokud chcete získat více informací o stránce prozkoumat, podívejte se na toto<a href=\"https://www.youtube.com/watch?v=26boFjqvS5Q\" target=\"_blank\">video</a>."
+    -   title: Moje úspěchy
+        text: "Pokud kliknete na své uživatelské jméno v pravém horním rohu obrazovky, můžete přejít na stránku <a href=\"https://hedy.org/my-achievements\" target=\"_blank\">Moje úspěchy</a>. Na této stránce se shromažďují vaše úspěchy. Takovou stránku mají i vaši studenti.\nKdyž na odznak najedete myší, zobrazí se způsob, jak odznak získat. Existují i skryté odznaky, o kterých si budete muset sami zjistit, jak je získat.\nPokud chcete získat více informací o úspěších, podívejte se na toto<a href=\"https://www.youtube.com/watch?v=-FjmKejukCs\" target=\"_blank\">video</a>."
+    -   text: "Na <a href=\"www.https://hedy.org/highscores\" target=\"_blank\">této stránce</a> si můžete prohlédnout vysoké skóre všech uživatelů Hedy.\nV tomto <a href=\"https://www.youtube.com/watch?v=IqTiUkBVTo8\" target=\"_blank\">videu</a> se můžete dozvědět něco více o vysokých skórech."
+        title: Vysoké skóre
+    -   title: Ladicí program
+        text: "Nefunguje váš (studentův) kód? Musí v něm být chyba (chyba v kódování)! K nalezení chyby můžete použít ladicí program.\nDebugger je tlačítko berušky na obrazovce kódování. Pokud jej stisknete, můžete svůj kód spustit řádek po řádku a najít chybu.\nNašli jste chybu? Stiskněte červené tlačítko Stop a ladicí program se vypne."
+    -   title: Hlasité čtení
+        text: Chcete, aby se výstup vašeho programu četl nahlas? Pak můžete použít funkci hlasitého čtení, kterou najdete pod tlačítkem „spustit kód“ na obrazovce kódování.
+    -   title: Režim programátorů
+        text: "Rozptylují vás všechna ta dobrodružství, nebo si chcete udělat dlouhý program? Pak se podívejte na přepínač „Programátorský režim“ v dolní části obrazovky kódování.\nRežim programátorů umožňuje vám a vašim studentům používat větší kódovací obrazovku."
+    -   title: Kontrolní listy
+        text: "V každé úrovni je tlačítko s tímto emoji 🤔. Vy a vaši žáci v něm najdete „taháky“. Na tomto taháku najdete všechny příkazy, které jsou v dané úrovni použitelné, v jejich správné podobě.\nPokud jste tedy zapomněli, jak nějaký příkaz funguje, jednoduše se podívejte na tahák!"
+    -   title: Video
+        text: Toto <a href="https://www.youtube.com/watch?v=c4MntPPgl1Y" target="_blank">video</a> vám ukáže ještě více funkcí programu Hedy, jako jsou tabulky cheatsheets a přepínač klíčových slov.
+    title: Další funkce Hedy
+    key: funkce
+-   title: Po Hedy
+    key: po
+    subsections:
+    -   title: Co dělat po Hedy?
+        text: "Gratulujeme k dosažení konce Hedy! Vaši studenti se nyní naučili vytvářet vlastní základní programy v programovacím jazyce Python.\nSamozřejmě můžete pokračovat v programování v našem překladači Hedy, ale pro vaše studenty může být zajímavější přejít na „skutečné“ rozhraní jazyka Python.\nChtěli byste pokračovat ve výuce jazyka Python? Pak navštivte <a href=\"https://www.python.org/about/gettingstarted/\" target=\"_blank\">webové stránky Pythonu</a> a dozvíte se, jak začít pracovat v jiném překladači.\n\nNyní, když mají vaši studenti základní znalosti o programování obecně, můžete je provést i jinými textovými programovými jazyky. Jazyk se možná změní, ale koncepty nikoliv, takže Hedy jim stále poskytne velkou výhodu."
+-   intro: "Odpovědi na všechna cvičení najdete na veřejném profilu uživatelského účtu 'Hedy_answers'. Studenty často vybízíme k tomu, aby ve svých odpovědích uplatnili vlastní kreativitu, takže tyto odpovědi jsou pouze vodítkem, jak by mohla vypadat případná správná odpověď.\n\nChcete-li přejít na profil 'Hedy_answers', klikněte <a href=\"https://hedy.org/user/hedy_answers\" target=\"_blank\">zde</a>."
+    title: Odpovědi na cvičení
+    key: odpověď
+-   levels:
+    -   sections:
+        -   title: Studenti zapomínají zadávat příkazy
+            example:
+                error_text: Například napíšou větu, aniž by použili tiskací písmo.
+                solution_text: Naučte studenty, aby řádek kódu vždy začínali příkazem.
+                solution_code: '{tisk} Hedy to může vytisknout!'
+                error_code: Hedy to nemůže vytisknout
+        -   title: Žáci používají při psaní příkazů velká písmena
+            example:
+                error_text: Příkazy nebudou fungovat, pokud budou napsány velkými písmeny.
+                solution_text: Odstraňte velká písmena.
+                error_code: "Zeptejte se Proč můj kód selhává?\nVytisknout Protože používám velká písmena."
+                solution_code: "{ask} Proč můj kód nyní funguje?\n{print} Protože jsem odstranil velká písmena!"
+        -   example:
+                error_code: '{echo} Vaše jméno je'
+                solution_text: Přidejte příkaz ask, aby to fungovalo.
+                error_text: Ozvěna je určena k opakování odpovědi po příkazu ask. Bez příkazu ask echo neudělá nic.
+                solution_code: "{ask} Jak se jmenuješ?\n{echo} Vaše jméno je"
+            title: Studenti používají echo bez dotazu
+        -   title: Studenti chtějí, aby jejich echo slovo (proměnná) bylo uprostřed věty
+            example:
+                solution_code: "{ask} Který programovací jazyk je nejzábavnější?\n{echo} Nejlepší je..."
+                solution_text: 'V 1. úrovni se musíme držet této úrovně:'
+                error_text: A mají pravdu! Proto se v další úrovni naučí používat správné proměnné.
+                error_code: "{ask} Který programovací jazyk je nejzábavnější?\n{echo} je nejlepší!"
+        -   title: 'Želva: Žáci nechají želvu odejít z obrazovky'
+            example:
+                error_code: "{dopředu} 300\n{otáčka} 90"
+                solution_code: "{forward} 100\n{turn} 90"
+                error_text: Žáci často rádi zkoušejí velká čísla při použití želvy, která způsobí, že šipka odejde z obrazovky.
+                solution_text: V příkladu si studenti myslí, že příkaz turn selhal, i když splnil, co měl. Stalo se to, že želva překročila hranice obrazovky. Použijte menší čísla, abyste tomu zabránili.
+        -   example:
+                error_code: zpětně 100
+                solution_text: 'Chcete-li, aby se želva vrátila zpět, použijte příkaz vpřed a záporné číslo. Například:'
+                solution_code: '{forward} -100'
+                error_text: Zpětný chod není příkaz.
+            title: 'Želva: Studenti používají příkaz pozpátku, ale žádný takový příkaz neexistuje.'
+        level: '1'
+    -   level: '2'
+        sections:
+        -   title: Žáci dělají v příkazech překlepy
+            example:
+                error_text: Hedy nedokáže rozpoznat příkaz s překlepem.
+                error_code: prinnt Nedělejte překlepy
+                solution_code: '{tisk} Nedělejte překlepy'
+                solution_text: Naučte studenty číst chybová hlášení. Sami tak mohou zjistit, co se pokazilo.
+        -   example:
+                solution_code: objednávka {is} {ask} Co byste si dali k jídlu?
+                error_code: zeptat se, co byste chtěli jíst
+                error_text: V této úrovni se studenti seznámí s proměnnými. Příkaz ask také vyžaduje proměnnou, ale studenti na to zapomínají.
+                solution_text: V této úrovni musíte Hedy říct, kam má uložit vaši odpověď, abyste ji mohli později použít. Tomu se říká proměnná.
+            title: Studenti zapomínají, že příkaz ask se změnil
+        -   title: Studenti se pokusí použít příkaz `{echo}`
+            example:
+                solution_code: "odpověď {is} {ask} Proč už {echo} nefunguje?!\n{print} odpověď"
+                solution_text: Místo toho použijte proměnnou.
+                error_text: Pro některé studenty může být frustrující zjištění, že příkaz `{echo}` již nefunguje. Proto je velmi důležité vysvětlit výhody používání proměnných. Například můžete v kódu použít více proměnných a můžete je umístit kamkoli ve větě!
+                error_code: "odpověď {is} {ask} Proč už {echo} nefunguje?!\n{echo}"
+        -   title: Studenti používají název proměnné nebo jako normální slovo
+            example:
+                error_text: V příkladu níže je slovo „name“ použito jako proměnná, ale také jako běžný text. Výstupem tohoto kódu bude 'Hi my Hedy is Hedy'.
+                solution_text: Nepoužívejte tedy slovo, které chcete použít v textu, jako název proměnné. Ve 4. úrovni se to řeší uvozovkami.
+                solution_code: "jméno {is} Hedy\n{print} Ahoj, já jsem jméno"
+                error_code: "jméno {is} Hedy\n{print} Ahoj, mé jméno je jméno"
+        -   title: Studenti používají dlouhé názvy proměnných obsahující dvě slova.
+            example:
+                error_code: vybrané dveře se ptají Které dveře si vyberete
+                solution_code: chosen_door {is} {ask} které dveře si vyberete
+                solution_text: Přidejte podtržítko.
+                error_text: Proměnná by měla být pojmenována jedním slovem. Pro spojení dvou slov můžete použít podtržítko. To se počítá jako jedno.
+        -   title: Studenti mohou pro stejnou proměnnou použít dva různé názvy.
+            example:
+                error_text: V tomto příkladu student použil pro stejné proměnné 'horse' a 'name'.
+                error_code: "kůň {je} {ask} Jak se jmenuje váš kůň\n{print} Váš kůň se jmenuje jméno"
+                solution_code: "jméno {is} {ask} Jak se jmenuje váš kůň\n{print} Váš kůň se jmenuje jméno"
+                solution_text: Vždy zkontrolujte, zda má proměnná v celém kódu stejný název. Nepatrné rozdíly lze těžko odhalit (například množné číslo), ale v kódu budou působit rušivě.
+    -   sections:
+        -   title: Studenti se snaží vytisknout celé seznamy
+            example:
+                error_text: Seznam nelze vytisknout. Pomocí {at} {random} lze vytisknout pouze jednu položku ze seznamu.
+                error_code: "potraviny {is} jablka, mléko, čokoláda\n{print} potraviny"
+                solution_code: "{print} jablka, mléko, čokoláda\n\n# nebo\n\npotraviny {is} jablka, mléko, čokoláda\n{print} potraviny {at} {random}"
+                solution_text: Chcete-li vytisknout seznam všech potravin, stačí je vložit za příkaz `{print}`. V opačném případě můžete použít seznam pro vytištění jedné položky pomocí `{at}` `{random}`.
+        -   example:
+                error_text: Tento problém se pravděpodobně vyskytl i v úrovni 2. Nyní se to může stát i u seznamů.
+                error_code: "jméno {is} Hedy\n{print} Ahoj, mé jméno je jméno\n\n# nebo\n\nzvíře {is} nosorožec, včela, labuť\n{print} Nejlepší zvíře je... zvíře {at} {random}"
+                solution_text: Nepoužívejte k tisku názvy proměnných nebo seznamů v běžném textu. Na úrovni 4 je tento problém řešen uvozovkami.
+                solution_code: "jméno {is} Hedy\n{print} Ahoj, já jsem jméno\n\n# nebo\n\nzvířata {is} nosorožec, včela, labuť\n{print} Nejlepší zvíře je... zvířata {at} {random}"
+            title: Studenti používají název proměnné nebo seznamu jako běžný text
+        -   example:
+                error_text: Stejně jako v příkladu
+                error_code: "ptáci {is} vrabec, racek, robin\n{print} ptáci náhodně"
+                solution_text: Tento problém se řeší přidáním slova at.
+                solution_code: "ptáci {is} vrabec, racek, robin\n{print} birds {at} {random}"
+            title: Studenti zapomínají `{at}` v `{at}` `{random}`
+        -   example:
+                error_text: Nebo někdy na začátek řádku napíšou `{at}` `{random}`.
+                solution_text: Zdůrazněte studentům, že k vytištění textu je vždy potřeba tisk.
+                error_code: "ovoce {is} jablko, třešeň, banán\novoce {at} {random}"
+                solution_code: "ovoce {is} jablko, třešeň, banán\n{print} fruit {at} {random}"
+            title: Studenti zapomenou použít příkaz `{print}`, když zároveň použijí příkaz `{at}` `{random}`
+        -   title: Žáci zapomínají používat čárky v seznamech
+            example:
+                error_code: "pizzy {is} houby tuňák čtyři roční období\n{print} pizzy {at} {random}"
+                error_text: V seznamu se položky oddělují čárkou.
+                solution_code: "pizzy {is} houby, tuňák, čtyři roční období\n{print} pizzas {at} {random}"
+                solution_text: Za každou položkou seznamu by měla být čárka
+        -   title: Studenti se snaží používat `{at}` `{random}` bez seznamu
+            example:
+                error_text: Například
+                error_code: "kluby {is} Manchester United\n{print} kluby {at} {random}"
+                solution_text: Hedy nemůže vytisknout nic náhodně, protože neexistuje žádný seznam, ze kterého by si mohla vybrat.
+                solution_code: "kluby {is} Manchester United, Bayrn Munchen, FC Barcelona\n{print} kluby {at} {random}"
+        -   example:
+                error_code: "jména {is} Jake\nyour_name {is} {ask} Kdo jsi?\n{add} your_name {to} names\n{print} names {at} {random}"
+                solution_code: "jména {is} Jake, Amy\nyour_name {is} {ask} Kdo jsi?\n{add} your_name {to} names\n{print} names {at} {random}"
+                solution_text: Nejprve musí existovat seznam, takže musíte přidat druhé jméno, aby se ze jmen stal seznam, například Amy. Pokud amy v seznamu nechcete, můžete ji pomocí remove odstranit až poté.
+                error_text: V příkladu níže není 'names' seznam, ale proměnná. Nelze do ní nic přidat.
+            title: Žáci se snaží používat přidávání/odebírání bez seznamu
+        -   example:
+                error_code: "dobrodružství {is} příběh, papoušek, kostky\nvolba {is} Které dobrodružství se vám líbí nejvíce?\n{add} volba\n{remove} kostky\n{print} Miluji dobrodružství {at} {random}"
+                error_text: Bez příkazu to/from nebude příkaz add/remove fungovat.
+                solution_text: Hedy musí vědět, do kterého seznamu má být položka přidána nebo z něj odebrána.
+                solution_code: "dobrodružství {is} příběh, papoušek, kostky\nvolba {is} Které dobrodružství se vám líbí nejvíce?\n{add} volba {to_list} dobrodružství\n{remove} kostky {from} dobrodružství\n{print} Miluji dobrodružství {at} {random}"
+            title: Studenti zapomínají používat `{do}`/`{from}` v `{add}`/`{remove}`
+        level: '3'
+    -   sections:
+        -   example:
+                error_code: "{print} Hello\nnálada {is} {ask} 'Jak se máš?"
+                solution_text: Doplňte správné uvozovky.
+                solution_code: "{print} 'Hello'\nmood {is} {ask} 'Jak se máš?'"
+                error_text: V této úrovni je třeba tisknout a ptát se na sadu uvozovek. Jedny před textem a druhé za ním.
+            title: Studenti zapomínají používat uvozovky na obou stranách textu
+        -   title: Studenti používají nesprávné uvozovky
+            example:
+                error_text: Na začátku hodiny je důležité zkontrolovat, zda studenti vědí, jak správně napsat uvozovky. Na Hedy mohou studenti používat jednoduché uvozovky („“) a dvojité uvozovky („“). Na druhou stranu se za správné uvozovky nepovažují zpětné znaky (``).
+                solution_text: 'Toto jsou správné uvozovky:'
+                solution_code: "{print} 'Vítejte v restauraci'\njídlo {is} {ask} 'Co si chcete objednat?'"
+                error_code: "{print} `Vítejte v restauraci`\njídlo {is} {ask} „Co si chcete objednat?“"
+        -   title: Žáci používají v textu apostrof
+            example:
+                error_text: Od této úrovně nejsou apostrofy povoleny. V angličtině se často používají při psaní spřežek jako you're, don't nebo what's.
+                error_code: "{print} 'Tohle nesmíte psát'"
+                solution_text: Můžete se rozhodnout použít špatnou gramatiku a apostrof prostě vynechat. Nebo můžete použít ` jako apostrof.
+                solution_code: "{print} ''Máte dovoleno napsat toto''\n{print} ''A vy jste schopni udělat toto''"
+        level: '4'
+    -   sections:
+        -   example:
+                error_code: "{if} jméno {is} Hedy 'Skvělé!'\n{else} Hedy {is} lepší!"
+                error_text: Poté, co studenti použijí `{if}` nebo `{else}`, zapomenou použít druhý příkaz, jako je `{print}` nebo `{ask}`.
+                solution_text: Přidejte příkaz pro tisk a opravte jej.
+                solution_code: "{if} jméno {is} Hedy {print} 'Skvělé!'\n{else} {print} 'Hedy je lepší!'"
+            title: Studenti zapomenou použít `{print}` v příkazu `{if}`
+        -   example:
+                error_text: V tomto příkladu student použil pro stejné proměnné 'horse' a 'name'.
+                error_code: "kůň {is} {ask} 'Jak se jmenuje tvůj kůň?'\n{if} name {is} Kostelní oheň {print} 'super'\n{else} {print} 'méně super!'"
+                solution_text: Vždy zkontrolujte, zda má proměnná v celém kódu stejný název. Nepatrné rozdíly lze těžko odhalit (například množné číslo), ale v kódu budou působit rušivě.
+                solution_code: "kůň {is} {ask} 'Jak se jmenuje tvůj kůň?'\n{if} kůň {is} Kostelní oheň {print} 'super'\n{else} {print} 'méně super!'"
+            title: Studenti mohou pro stejnou proměnnou použít dva různé názvy
+        -   example:
+                error_text: Použití příkazu `if` může způsobit, že řádky kódu budou velmi dlouhé a studenti budou zapomínat používat uvozovky.
+                solution_text: V příkazu pro tisk vždy použijte 2 uvozovky.
+                solution_code: "{if} jméno {is} Hedy {print} 'zábava'\n{else} {print} 'meh!'"
+                error_code: "{if} name {is} Hedy {print} fun\n{else} {print} 'meh!"
+            title: Studenti stále zapomínají na citáty na obou stranách
+        -   title: Studenti používají uvozovky kolem názvů proměnných
+            example:
+                error_text: V této úrovni nejsou kolem názvů proměnných uvozovky.
+                solution_code: "{if} jméno {is} Hedy {print} 'zábava'\n{else} {print} 'meh!"
+                error_code: "{if} jméno {is} 'Hedy' {print} 'zábava'\n{else} {print} 'meh!'"
+                solution_text: Odstraňte uvozovky, aby kód fungoval.
+        -   example:
+                error_code: vybrané dveře se ptají Které dveře si vyberete?
+                solution_text: Přidejte podtržítko.
+                solution_code: chosen_door {is} {ask} 'které dveře si vyberete?'
+                error_text: Proměnné v jazyce Hedy nemohou obsahovat mezery, takže pokud chtějí studenti použít několik slov dohromady, musí je spojit pomocí podtržítek (_)
+            title: Žáci používají dlouhé názvy proměnných obsahující dvě nebo více slov
+        -   example:
+                error_code: "{if} jméno {is} Jesse, David, Souf {print} 'Jsi vtipný' {else} {print} 'Nejsi vtipný'"
+                solution_text: "K tomu můžete použít příkaz `{in}`. I když je vysvětlen ve vyšší úrovni, funguje již v úrovni 5.\nDalším řešením je použít více příkazů `{if}` a žádný příkaz `{else}`. Nevýhodou je, že to ostatním spolužákům neřekne, že nejsou vtipní."
+                solution_code: "přátelé {je} Jesse, David, Souf\njméno {je} {prosím} 'Kdo jsi?'\n{if} jméno {in} přátelé {print} 'Jsi vtipný'\n{else} {tisk} 'Nejsi vtipný'\n\n# nebo\n\njméno {is} {ask} 'Kdo jsi?'\n{if} naam {is} Jesse {print} 'Jsi vtipný'\n{if} naam {is} David {tisk} 'Jsi vtipný'\n{if} naam {is} Souf {print} 'Jsi vtipný'"
+                error_text: Tento žák například chce, aby Hedy všem jeho kamarádům řekla, že jsou vtipní, zatímco ostatním spolužákům by měla říct, že nejsou.
+            title: Studenti chtějí, aby bylo správných více odpovědí
+        -   title: Studenti vytvoří název proměnné stejný jako hodnota v příkazu `{if}`
+            example:
+                error_text: V níže uvedeném příkladu heslo je 'heslo'. Výsledkem je, že je vždy správné.
+                error_code: "Heslo {is} {ask} 'Jaké je heslo?'\n{if} password {is} password {print} 'Přístup povolen'\n{else} {print} 'Přístup zamítnut!'"
+                solution_text: Zvolte jiný název proměnné.
+                solution_code: "secret_password {is} {ask} 'Jaké je heslo'\n{if} secret_password {is} password {print} 'Přístup povolen!'\n{else} {print} 'Přístup zamítnut!'"
+        level: '5'
+    -   sections:
+        -   example:
+                error_code: "{print} '5 + 5'"
+                solution_text: V tomto kódu se na výstupní obrazovku vypíše '10'.
+                solution_code: '{print} 5 + 5'
+                error_text: Studenti mají problém s uvozovkamiNěkteří studenti mají problém s přidáváním nebo nepřidáváním uvozovek. Pokud přidáte uvozovky, na výstupní obrazovce se zobrazí doslova „5+5“.
+            title: Studenti mají problémy s uvozovkami
+        -   example:
+                error_code: "age = {ask} 'Kolik je vám let?'\n{print} 'Příští rok ti bude ' věk + 1"
+                solution_text: Nebo jděte ještě o krok dál.
+                solution_code: "cena = 0\n{print} 'Vítejte v naší hamburgerové restauraci'\nburger = {ask} 'Dáte si burger?'\n{if} burger = yes price = price + 10\ndrink = {ask} 'Dáte si nápoj?'\n{if} drink = ano cena = cena + 4\n{print} „To bude ‚ cena ‘ euro, prosím"
+                error_text: 'Pro některé žáky je obtížné počítat s proměnnými. Zkuste jim ukázat velmi jednoduché příklady, např:'
+            title: Žáci mají potíže s pojetím matematiky s proměnnou
+        level: '6'
+    -   sections:
+        -   example:
+                solution_code: "{repeat} 3 {times} {print} 'Protože je to veselý dobrák'\n{repeat} 3 {times} {print} 'Což nikdo nemůže popřít!'"
+                error_text: Ujistěte se, že žáci umí používat příkaz opakování v plném rozsahu i příkaz tisk.
+                error_code: "{repeat} 3 {times} Neboť je to veselý dobrák.\n{repeat} 3 tisk"
+                solution_text: 'Toto je správný kód:'
+            title: Studenti zapomenou jedno ze slov příkazu repeat nebo zapomenou příkaz print
+        -   title: Žáci se snaží opakovat více řádků
+            example:
+                error_code: "repeat} 3 {times} drink = {ask} ‘Co byste si dal k pití?‘\n{print} drink"
+                solution_code: "nápoj = {ask} 'Co si dáte k pití?'\n{print} nápoj\nnápoj = {ask} 'Co si dáte k pití?'\n{print} nápoj\nnápoj = {ask} 'Co byste si dali k pití?'\n{print} nápoj"
+                error_text: V této úrovni můžete opakovat pouze jeden řádek kódu vícekrát. V tomto kódu chtěl student vypsat 3 různé nápoje, ale to nefunguje. Zeptá se na otázku třikrát a vypíše pouze poslední odpověď.
+                solution_text: Abyste mohli opakovat více řádků, měli byste přejít na další úroveň. Na této úrovni tedy budete muset tisknout vše zvlášť.
+        -   example:
+                error_text: Na této úrovni je velmi snadné vytvářet programy, jejichž dokončení zabere spoustu času. Pokud program trvá příliš dlouho, bude zastaven, a to se záměrem zabránit namáhání žákova stroje.
+                error_code: "{repeat} 100 {times} {print} 'Kolikrát to mohu opakovat?'"
+                solution_text: Ujistěte se, že spuštění kódu netrvá příliš dlouho
+                solution_code: "{repeat} 20 {times} {print} 'To stačí'"
+            title: Studenti vytvářejí programy, jejichž spuštění trvá příliš dlouho
+        level: '7'
+    -   level: '8'
+        sections:
+        -   title: Žáci špatně používají odsazení
+            example:
+                solution_text: 'Toto je správný kód:'
+                solution_code: "{repeat} 3 {times}\n    {print} 'ahoj'"
+                error_text: Odsazování je v této úrovni novým pojmem a pro některé studenty může být obtížné se ho naučit. Než s ním vytvoří celý program, ujistěte se, že si procvičili několik jednoduchých příkladů.
+                error_code: "{repeat} 3 {times}\n{print} 'ahoj'"
+        -   example:
+                error_text: Například v níže uvedeném kódu chtěl student provést objednávku nápojů pro 3 osoby. Místo toho se však program zeptal třikrát, ale zapsal pouze jednu objednávku.
+                error_code: "{repeat} 3 {times}\n    nápoj = {ask} 'Co by si chtěl pít?'\n{print} nápoj"
+                solution_code: "{repeat} 3 {times}\n    nápoj = {ask} 'Co by si chtěl pít?'\n    {print} nápoj"
+                solution_text: "Ve správném kódu začíná třetí řádek také odsazením. Patří tak do bloku repeat, a proto se bude třikrát opakovat.\nUkážete-li žákům tyto rozdíly, pomůže jim to pochopit, proč potřebujeme odsazení, aby naše programy fungovaly."
+            title: Studenti opakují pouze 1 řádek, když chtěli opakovat více řádků
+        -   example:
+                solution_text: 'Toto je správný kód pro tuto úroveň:'
+                error_text: "V této úrovni studenti ještě nesmějí vkládat příkazy `{if}` do jiných příkazů `{if}` nebo do opakovacích cyklů.\nV další úrovni je to již povoleno."
+                error_code: "narozeniny = {ask} 'Jsou to tvoje narozeniny?'\n{if} narozeniny = ano\n    {repeat} 3 {times}\n        {print} 'Hip Hip Hurá!'"
+                solution_code: "narozeniny = {ask} 'Jsou to tvoje narozeniny?'\n{if} narozeniny = ano\n    {print} 'Hip Hip Hurá!'\n    {print} 'Hip Hip Hurá!'\n    {print} 'Hip Hip Hurá!'"
+            title: Studenti chtějí vnořovat příkazy `{if}` nebo vkládat příkazy `{if}` do smyčky
+        -   example:
+                error_text: Na této úrovni je velmi snadné vytvářet programy, jejichž dokončení zabere spoustu času. Pokud program trvá příliš dlouho, bude zastaven, a to se záměrem zabránit namáhání žákova stroje.
+                solution_text: Ujistěte se, že spuštění kódu netrvá příliš dlouho
+                solution_code: "{repeat} 20 {times}\n    {print} 'Tohle stačí'"
+                error_code: "{repeat} 100 {times}\n    {print} 'Kolikrát to mohu opakovat?'"
+            title: Studenti vytvářejí programy, jejichž spuštění trvá příliš dlouho
+        -   example:
+                error_code: "Heslo {is} {ask} 'Jaké je heslo?'\n{if} heslo {is} heslo\n{print} ‘Můžete vstoupit‘\n{else}\n{print} ‘Nejste oprávněn‘"
+                error_text: "U našich studentů jsme si všimli časté chyby: snaží se vytvořit program, který kontroluje heslo, ale zadají heslo „password“.\nVe 2. řádku je počítač požádán, aby zkontroloval, zda je proměnná heslo stejná jako proměnná heslo, tedy sama. Což znamená, že odpověď je vždy ano.\nS tímto kódem tedy bude odpověď vždy „Můžete vstoupit“ bez ohledu na to, co hráč vyplní."
+                solution_text: Tuto chybu můžete napravit přidáním uvozovek. Tímto způsobem počítač pozná, že druhé heslo v `{{if} password {is} 'password'`` je řetězcová hodnota (tedy normální text), a ne název proměnné.
+                solution_code: "Heslo {is} {ask} 'Jaké je heslo?'\n{if} heslo {is} ‘heslo‘\n{print} ‘Můžete vstoupit‘\n{else}\n{print} ‘Nejste oprávněn‘"
+            title: Studenti používají příkaz `{if}` ke kontrole, zda je hodnota proměnné stejná jako název proměnné
+    -   sections:
+        -   title: Studenti dělají chyby v odsazování
+            example:
+                solution_text: Toto je správný kód. Pokuste se sledovat všechny různé konstrukce při vkládání příkazů `{if}` do jiných příkazů `{if}`.
+                solution_code: "{print} 'Robin jde do centra'\nlocation = {ask} 'Jde Robin do obchodu, nebo jde domů?'\n{if} location {is} shop\n{print} 'Vchází do obchodu.'\n{print} 'Robin vidí zajímavě vypadající knihu'\nbook = {ask} ‘Koupí si Robin tu knihu?‘\n{if} kniha {is} ano\n{print} ‘Robin si koupí knihu a jde domů‘\n{else}\n{print} ‘Robin odchází z obchodu a jde domů‘\n{else}\n{print} ‘Robin jde domů‘"
+                error_text: Nejtěžší na této úrovni je správné odsazení. Studenti rádi vnořují příkazy `{if}`, někdy dokonce uvnitř jiných vnořených příkazů `{if}`. Uhlídat odsazení může být docela těžké.
+                error_code: "Nejtěžší na této úrovni je správné odsazení. Studenti rádi vnořují příkazy `{if}`, někdy dokonce uvnitř jiných vnořených příkazů `{if}`. Uhlídat odsazení může být docela těžké.{print} 'Robin jde do centra'\nlocation = {ask} 'Jde Robin do obchodu, nebo jde domů?'\n{if} location {je} shop\n{print} 'Vchází do obchodu.'\n{print} 'Robin vidí zajímavě vypadající knihu'\nbook = {ask} „Koupí si Robin tu knihu?\n{if} kniha {je} ano\n{print} „Robin si koupí knihu a jde domů\n{jinak}\n{print} „Robin odchází z obchodu a jde domů\n{jinak}\n{print} „Robin jde domů"
+        level: '9'
+    -   sections:
+        -   example:
+                error_text: Často se setkáváme s tím, že se studenti snaží vytisknout seznam (v příkladu zvířata) místo položek seznamu.
+                error_code: "zvířata {is} pes, kočka, blobfish\n{for} zvíře {from} zvířata\n{print} 'Miluji ' zvířata"
+                solution_text: Slovo zvířata v posledním řádku by mělo být změněno na živočichy.
+                solution_code: "zvířata {is} pes, kočka, blobfish\n{for} zvíře {in} zvířata\n{print} 'Miluji ' zvíře"
+            title: Studenti nepoužívají správně příkaz `{for}`
+        -   example:
+                solution_text: Za příkazem for byste měli použít odsazení.
+                error_code: "zvířata {is} pes, kočka, blobfish\n{for}zvíře {in}zvířata\n{print} 'Miluji ' zvířata"
+                solution_code: "zvířata {is} pes, kočka, blobfish\n{for}zvíře {in}zvířata\n{print} 'Miluji ' zvíře"
+                error_text: Studenti často zapomínají používat odsazení za příkazem for.
+            title: Studenti zapomínají na odsazení
+        level: '10'
+    -   sections:
+        -   example:
+                error_code: "{for} i {in} {range} 1 {to} 5\n{print} i"
+                solution_text: 'Toto je správný kód:'
+                error_text: Dbejte na to, aby studenti používali odsazení.
+                solution_code: "{for} i {in} {range} 1 {to} 5\n    {print} i"
+            title: Studenti zapomínají používat odsazení
+        -   example:
+                error_code: "{for} i {in} {range} 1 {to} 5\n{print} i"
+                solution_text: Stejně dobře by mohl být nahrazen tímto kódem. Funguje to stejně.
+                solution_code: "{for} banán {in} {range} 1 {to} 5\n    {print} banán"
+                error_text: "Někteří studenti nechápou, že i je proměnná. i je zvoleno proto, že se používá při programování v jazyce Python, ale stejně dobře můžete použít jiný název proměnné.\nNapříklad tento kód:"
+            title: Studenti nerozumí i
+        level: '11'
+    -   sections:
+        -   example:
+                error_code: "superhrdinové = Spiderman, Batman, Iron Man\nsuperhrdina = superhrdinové {at} {random}\n{if} superhrdina = Batman\n    {print} 'IM BATMAN!'"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "superhrdinové = Spiderman, Batman, Iron Man\nsuperhrdina = superhrdinové {at} {random}\n{if} superhrdina = Batman\n    {print} 'IM BATMAN!'"
+                error_text: Studenti nyní potřebují více uvozovek než v předchozích úrovních. V tomto příkladu se na uvozovky zapomnělo v seznamu a v příkazu `{if}`.
+            title: Studenti zapomínají na uvozovky
+        -   title: Žáci používají uvozovky u čísel, která chtějí použít pro výpočty
+            example:
+                error_code: "skóre = '25'\nodpověď {is} {ask} 'Chceš bod?'\n{if} odpověď {is} 'ano'\n    skóre = skóre + 1\n    {print} skóre"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "skóre = 25\nodpověď {is} {ask} 'Chceš bod?'\n{if} odpověď {is} ‘ano‘\nskóre = skóre + 1\n{print} score"
+                error_text: "U čísel můžete použít uvozovky, ale pouze pokud chcete, aby je počítač považoval za text. To znamená, že s číslem nelze provádět výpočty.\nV níže uvedeném příkladu nemůžete s číslem 25 provádět výpočty, protože je v uvozovkách."
+        -   example:
+                error_text: Od této úrovně lze používat desetinná čísla, ale nelze používat čárky.
+                error_code: '{print} 2,5 + 2,5'
+                solution_text: 'Toto je správný kód:'
+                solution_code: '{print} 2.5 + 2.5'
+            title: Žáci používají čárky místo teček v desetinných číslech
+        level: '12'
+    -   sections:
+        -   example:
+                error_text: Oba příkazy se mohou zdát podobné, ale jejich funkce jsou velmi odlišné.
+                solution_code: "hra {is} {ask} ‘Chceš si zahrát hru?‘\nčas {je} {prosba} ‘Máš čas si hrát?‘\n{if} game {is} ‘ano‘ {or} time {is} ‘ano‘\n    {print} ‘Pojďme hrát!‘"
+                solution_text: V tomto případě by měla osoba odpovědět ano na obě otázky, proto byste měli použít `a`.
+                error_code: "hra {is} {ask} ‘Chceš si zahrát hru?‘\nčas {je} {prosba} ‘Máš čas si hrát?‘\n{if} game {is} ‘ano‘ {or} time {is} ‘ano‘\n    {print} ‘Pojďme hrát!‘"
+            title: Studenti zaměňují `{and}` za `{or}`
+        level: '13'
+    -   sections:
+        -   title: Žáci zaměňují znaky < a >
+            example:
+                error_text: Studenti často znají tyto znaky již z hodin matematiky. Pokud však vaši studenti tyto značky ještě neznají, mohou s nimi mít problém.
+                error_code: "věk = {ask} 'Kolik je vám let?'\n{if} věk < 12\n{print} 'Jsi starší než já!'"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "věk = {ask} 'Kolik je vám let?'\n{if} věk < 12\n{print} 'Jsi starší než já!'"
+        -   example:
+                error_code: "jméno = {ask} 'Jak se jmenujete?'\n{if} jméno = 'Hedy'\n{print} 'Nejste Hedy'"
+                error_text: Tyto znaky jsou pro většinu studentů pravděpodobně novinkou. Nezapomeňte tyto znaky studentům vysvětlit.
+                solution_code: "jméno = {ask} 'Jak se jmenujete?'\n{if} jméno = 'Hedy'\n{print} 'Nejste Hedy'"
+                solution_text: 'Toto je správný kód:'
+            title: Žáci používají nesprávné značky pro `!=` `<=` a `>=`
+        -   title: Studenti zapomínají používat znak ==
+            example:
+                solution_text: 'Toto je správný kód:'
+                error_text: V této úrovni mohou studenti stále používat = nebo is. V jiných úrovních nebo v Pythonu by však za to mohli mít problémy. Proto je nejlepší je naučit je ho používat.
+                solution_code: "jméno = {ask} 'Jaké je tvoje jméno?'\n{if} jméno == 'Hedy'\n    {print} 'Jseš skvělý!'"
+                error_code: "jméno = {ask} 'Jaké je tvoje jméno?'\n{if} jméno = 'Hedy'\n    {print} 'Jseš skvělý!'"
+        level: '14'
+    -   sections:
+        -   example:
+                solution_code: "odpověď = 0\n{while} odpověď != 25\n      odpověď = {ask} 'Kolik je 5 krát 5?'\n{print} 'Byla zadána správná odpověď'"
+                error_text: Odsazování je pro studenty často obtížné.
+                error_code: "odpověď = 0\n{while} odpověď != 25\nodpověď = {ask} 'Kolik je 5 krát 5?'\n{print} 'Byla zadána správná odpověď'"
+                solution_text: 'Toto je správný kód:'
+            title: Studenti zapomínají na odsazení ve smyčce while
+        level: '15'
+    -   sections:
+        -   example:
+                solution_text: 'Toto je správný kód:'
+                solution_code: "zmrzlina = 'jahodová', ' čokoládová'\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+                error_text: Od této úrovně by měly být seznamy v závorkách.
+                error_code: "zmrzlina = 'jahodová', ' čokoládová'\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+            title: Studenti zapomínají na závorky
+        -   example:
+                error_code: "zmrzlina = ('jahodová', ' čokoládová')\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+                solution_text: 'Toto je správný kód:'
+                error_text: Od této úrovně by měly být seznamy v závorkách.
+                solution_code: "zmrzlina = ['jahodová', ' čokoládová']\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+            title: Studenti používají nesprávné závorky
+        -   example:
+                error_code: "zmrzlina = [jahodová, čokoládová]\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+                error_text: Studenti se někdy velmi soustředí na nový aspekt syntaxe, takže zapomínají na uvozovky.
+                solution_text: 'Toto je správný kód:'
+                solution_code: "zmrzlina = [jahodová, čokoládová]\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+            title: Studenti zapomínají na uvozovky, zatímco se soustředí na závorky
+        -   title: Studenti stále používají starý příkaz at random
+            example:
+                error_text: Studenti se někdy velmi soustředí na nový aspekt syntaxe, takže zapomínají na uvozovky.
+                error_code: "zmrzlina = [jahodová, čokoládová]\n{print} 'Miluji ' zmrzlinu at random ' zmrzlinu'"
+                solution_code: "icecream = ['jahodová', ' čokoládová']\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+                solution_text: 'Toto je správný kód:'
+        -   title: Studenti zapomínají na uvozovky, zatímco se soustředí na závorky
+            example:
+                error_code: "icecream = ['jahodová', ' čokoládová']\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+                solution_text: 'Toto je správný kód:'
+                solution_code: "zmrzlina = ['jahodová', ' čokoládová']\n{print} 'Miluji ' zmrzlina[{random}] ' zmrzlina'"
+                error_text: Studenti se někdy velmi soustředí na nový aspekt syntaxe, takže zapomínají na uvozovky.
+        level: '16'
+    -   sections:
+        -   example:
+                error_text: Příkaz `{elif}` potřebuje za sebou podmínku. Nelze jej použít jako `{else}`, bez podmínky.
+                solution_text: 'Toto je správný kód:'
+                solution_code: "barva = {ask} 'Jaká je vaše oblíbená barva?'\n{if} barva == 'zelená':\n{print} 'zelená je pěkná'\n{elif} barva == žlutá:\n{print} 'žlutá je v pořádku'\n{else}:\n{print} 'mám rád zelenou'"
+                error_code: "barva = ask 'Jaká je vaše oblíbená barva?'\n{if} barva == 'zelená':\n{print} 'zelená je pěkná'\n{elif}:\n{print} ‘mám rád zelenou‘"
+            title: Studenti používají `{elif}` stejně jako `{else}`, tedy bez podmínky
+        -   example:
+                error_text: Za každým příkazem, který vyžaduje odsazení, by měla být dvojtečka.
+                solution_text: 'Toto je správný kód:'
+                solution_code: "odpovědět = ask ‘Jak se máš?‘\n{if} odpověď {is} ‘skvěle'\n{print} ‘Já také!‘\n{elif} odpověď {is} ‘špatně‘\n{print} ‘Dovol mi, abych tě rozveselil!‘\n{else}\n{print} 'Jsem skvělý!‘"
+                error_code: "odpovědět = ask ‘Jak se máš?‘\n{if} odpověď {is} ‘skvěle'\n{print} ‘Já také!‘\n{elif} odpověď {is} ‘špatně‘\n{print} ‘Dovol mi, abych tě rozveselil!‘\n{else}\n{print} 'Jsem skvělý!‘"
+            title: Studenti zapomínají na dvojtečku
+        level: '17'
+    -   sections:
+        -   example:
+                solution_text: 'Toto je správný kód:'
+                solution_code: "{print}('moje jméno je Hedy!')"
+                error_text: Studenti zapomenou dát kolem textu závorky.
+                error_code: "{print} 'moje jméno je Hedy!'"
+            title: Studenti zapomínají používat závorky
+        -   example:
+                solution_code: "{print}('Moje jméno je Hedy!')\njméno = ask('Jaké je tvé jméno?')\n{print}('Takže tvoje jméno je ', jméno)"
+                solution_text: 'Toto je správný kód:'
+                error_text: Příkaz ask se používá od úrovně 1. Pro studenty tedy může být obtížné přejít na příkaz input místo ask.
+                error_code: "{print}('Moje jméno je Hedy!')\njméno = ask('Jaké je tvé jméno?')\n{print}('Takže tvoje jméno je ', jméno)"
+            title: Studenti budou stále používat příkaz ask
+        -   title: Studenti mohou použít závorky jako uvozovky
+            example:
+                solution_code: "teplota = 25\n{print}('Venku je ', teplota, 'stupňů venku')"
+                error_code: "teplota = 25\n{print}('Venku je ') teplota ('stupňů venku')"
+                solution_text: 'Toto je správný kód:'
+                error_text: Naučili se udržovat proměnné mimo uvozovky, takže by to mohli udělat i se závorkami. Což není správný způsob jejich použití.
+        level: '18'
+    key: běžné_chyby
+    title: Nejčastější chyby
+    intro: Z chyb se můžete poučit, zejména v oblasti kódování! Dělat chyby je nevyhnutelné a je to skvělá příležitost k učení, ale pro učitele může být problém najít správnou nápravu chyby! Zvláště když jsou programy stále delší a delší, jak žáci postupují jednotlivými úrovněmi. Proto jsme vytvořili seznam s často dělanými chybami v jednotlivých úrovních a jejich řešením.
+join-sections:
+-   text: '# Hedy můžete podpořit třemi způsoby!'
+    title: Podporovat Hedy
+-   text: "Postupná a vícejazyčná povaha Hedy vytváří mnoho zajímavých technických výzev.\nTyto problémy najdete na <a href=\"https://github.com/hedyorg/hedy/issues?q=is%3Aopen+is%3Aissue+label%3Alanguage\" target=\"_blank\">Githubu</a>."
+    title: Zlepšování jazyka
+-   title: Překládání Hedy
+    text: "Nejste programátor? Žádný problém! Dalším způsobem, jak podpořit Hedy, je <a href=\"https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial\" target=\"_blank\">>překládat klíčová slova, chybová hlášení, dobrodružství a další obsah</a>.\nToto je aktuální stav, pomozte nám jazyk doplnit nebo přidat nový!\n<a href=\"https://hosted.weblate.org/engage/hedy/\">\n<img src=\"https://hosted.weblate.org/widgets/hedy/-/multi-auto.svg\" alt=\"Translation status\" /></a>"
+-   text: "Hedy je navržen tak, aby podporoval učitele při výuce programování ve třídě. Máme specifické funkce pro učitele, jako je možnost vytvořit třídu, přizpůsobit ji a sledovat, jak si vaši žáci vedou.\nPokud se vám Hedy líbí, můžete oslovit školy, které znáte, a pomoci učitelům začít! Můžeme vám pomoci najít školy nebo učitele prostřednictvím <a href=\"https://discord.gg/8yY7dEme9r\" target=\"_blank\">Discord</a>."
+    title: Pomozte učitelům začít

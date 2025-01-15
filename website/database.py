@@ -187,12 +187,14 @@ class Database:
         # A custom teacher adventure
         # - id (str): id of the adventure
         # - content (str): adventure text
+        # - author (str): username (of a teacher account, hopefully)
         # - creator (str): username (of a teacher account, hopefully)
-        # - date (int): timestamp of last update
-        # - level (int | str): level number, sometimes as an int, sometimes as a str
+        # - date (int): timestamp of last update (in milliseconds, JavaScript timestamp)
+        # - level (str): level number, sometimes as an int, usually as a str
+        # - levels: [str]: levels of the adventure
         # - name (str): adventure name
         # - public (int): 1 or 0 whether it can be shared
-        # - tags_id (str): id of tags that describe this adventure.
+        # - tags_id (str): list of tags that describe this adventure.
         self.adventures = dynamo.Table(storage, "adventures", "id",
                                        types=only_in_dev({
                                            'id': str,
@@ -210,6 +212,7 @@ class Database:
                                        indexes=[
                                            dynamo.Index("creator"),
                                            dynamo.Index("public"),
+                                           dynamo.Index("language", keys_only=True),
                                            dynamo.Index("name", sort_key="creator", index_name="name-creator-index")
                                        ])
         self.invitations = dynamo.Table(
@@ -726,6 +729,7 @@ class Database:
     def get_teacher_classes(self, username, students_to_list=False, teacher_only=False):
         """Return all the classes belonging to a teacher."""
         classes = None
+        # FIXME: This should be a parameter, not be called here!!
         user = auth.current_user()
         if isinstance(self.storage, dynamo.AwsDynamoStorage):
             classes = list(self.classes.get_many({"teacher": username}, reverse=True))
@@ -788,6 +792,56 @@ class Database:
 
     def get_public_adventures(self):
         return self.adventures.get_many({"public": 1})
+
+    def get_public_adventures_filtered(self,
+                                       language: str,
+                                       level: int = None,
+                                       tag: str = None,
+                                       q: str = None,
+                                       pagination_token: str = None):
+        """Return a page of the public adventures, filtered by language, level and tag, and with a search string.
+
+        Also returns the languages and tags that match the current filter.
+
+        FIXME: This is right now very poorly optimized, and needs more work to be fast.
+        """
+
+        server_side_filter = {
+            'language': language,
+        }
+
+        def client_side_filter(adventure):
+            # levels are stored as strings T_T
+            if level and adventure.get('level', '') != str(level) and str(level) not in adventure.get('levels', []):
+                return False
+            if tag and tag not in adventure.get('tags', []):
+                return False
+            if q:
+                fulltext = '|'.join([
+                    adventure.get('name', ''),
+                    adventure.get('content', ''),
+                    adventure.get('author', ''),
+                    adventure.get('creator', '')
+                ])
+                if q.lower() not in fulltext.lower():
+                    return False
+            return True
+
+        return self.adventures.get_page({"public": 1},
+                                        pagination_token=pagination_token,
+                                        limit=20,
+                                        server_side_filter=server_side_filter,
+                                        client_side_filter=client_side_filter)
+
+    def get_public_adventures_tags(self):
+        """Return all tags for public adventures.
+
+        FIXME: This is right now very poorly optimized, and needs more work.
+        """
+        ret = set([])
+        for adventure in dynamo.GetManyIterator(self.adventures, {"public": 1}):
+            ret |= set(adventure.get("tags", []))
+        return ret
 
     def get_adventure_by_creator_and_name(self, name, username):
         return self.adventures.get({"name": name, "creator": username})
@@ -866,9 +920,6 @@ class Database:
 
     def all_adventures(self):
         return self.adventures.scan()
-
-    def public_adventures(self):
-        return self.adventures.get_many({"public": 1})
 
     def get_student_classes_ids(self, username):
         ids = self.users.get({"username": username}).get("classes")

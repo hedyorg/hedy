@@ -162,12 +162,12 @@ levels:
             question_text: Welche Aussage ist wahr?
             mp_choice_options:
             -   option: Du kannst den `{print}` Befehl benutzen, um Fragen zu stellen.
-                feedback: Dazu ist frage da
+                feedback: Dazu ist der `{ask}` Befehl da
             -   option: Du kannst den `{ask}` Befehl benutzen um eine Antwort auszugeben.
                 feedback: Das ist nicht richtig
             -   option: Mit dem `{print}` Befehl kannst du Text erscheinen lassen
                 feedback: Gut
-            -   option: Mit dem {sleep} Befehl kannst du Text vom Bildschirm entfernen.
+            -   option: Mit dem `{sleep}` Befehl kannst du Text vom Bildschirm entfernen.
                 feedback: So funktioniert `{sleep}` nicht.
             hint: '`{print}` funktioniert genauso wie in Level 1'
         2:
@@ -213,7 +213,7 @@ levels:
             question_text: Was wird auf dem Ausgabebildschirm angezeigt, wenn du diesen Code ausführst?
             code: |-
                 Name {is} Hedy
-                {print} Hi mein Name ist Name!
+                {print} Hi mein Name ist Name
             mp_choice_options:
             -   option: Hi my name is name
                 feedback: Der Variablenname wird durch Hedy ersetzt
@@ -358,7 +358,7 @@ levels:
                 feedback: '`{ask}` wird verwendet, um Fragen zu stellen'
             -   option: '`{is}`'
                 feedback: '`{is}` wird verwendet, um eine Liste zu erstellen'
-            -   option: '`{at}` `{random}`'
+            -   option: '`{at} {random}`'
                 feedback: Korrekt!
             hint: Zufällig bedeutet ohne Plan.
         2:
@@ -1151,9 +1151,7 @@ levels:
             question_text: Welches Wort ist falsch im Code?
             mp_choice_options:
             -   option: |-
-                    ```
-                    I'm
-                    ```
+                    `I'm`
                 feedback: Das ist richtig!
             -   option: '`{print}`'
                 feedback: '`{print}` ist richtig geschrieben'
@@ -1403,7 +1401,7 @@ levels:
                     Baby shark
                     Baby shark
                     Baby shark
-                feedback: Was wird wiederholt und was nicht.
+                feedback: Was wird wiederholt und was nicht?
             hint: Was wird wiederholt und was nicht?
         4:
             question_text: Welche Ausgabe ist richtig?
@@ -1488,7 +1486,7 @@ levels:
                         food = {ask} 'What would you like to eat?'
                         {print} food
                     ```
-                feedback: Awesome!
+                feedback: Gut gemacht!
             hint: Pay attention to what sould be repeated and what should only be printed once.
         7:
             question_text: Was stimmt mit diesem Code nicht?
@@ -2147,7 +2145,7 @@ levels:
                         {print} 10 - i
                     ```
                 feedback: Das ist richtig!
-            hint: Es muss eine Berechnung sein...
+            hint: Es muss eine Berechnung sein…
         5:
             question_text: Was stimmt mit diesem Code nicht?
             mp_choice_options:
@@ -2903,3 +2901,22 @@ levels:
                 feedback: Don't forget the quotation marks!
             -   option: sounds = ['woof', 'moo', 'neigh']
                 feedback: Great job!
+    17:
+        8:
+            mp_choice_options:
+            -   {}
+            -   {}
+            -   feedback: Gut gemacht!
+        10:
+            mp_choice_options:
+            -   {}
+            -   {}
+            -   feedback: Gut gemacht!
+        3:
+            mp_choice_options:
+            -   {}
+            -   {}
+            -   feedback: Gut gemacht!
+        5:
+            mp_choice_options:
+            -   feedback: Gut gemacht!

@@ -2,7 +2,7 @@ adventures:
     story:
         name: Geschichte
         default_save_name: Geschichte
-        description: Geschichte
+        description: Schreib eine Kurzgeschichte
         levels:
             1:
                 story_text: |
@@ -367,9 +367,9 @@ adventures:
                     ```
                 story_text_2: |
                     ### Übung
-                    In vorherigen Übung hast du das Setzen von Variablen mit dem `{is}` Befehl geübt.
-                    Du hast mindestens 3 Variablen definiert und sie im drucke Befehl verwendet.
-                    Jetzt wollen wir die Variablen wie unserem Beispiel interaktiv machen, statt sie zu setzen.
+                    In der vorherigen Übung hast du die Definition von Variablen mit dem `{is}` Befehl geübt.
+                    Du hast mindestens 3 Variablen festgelegt und sie mit dem Druckbefehl verwendet.
+                    Jetzt wollen wir die Variablen nicht einfach festlegen, sondern flexibel machen -  so wie in unserem Beispiel.
 
                     Kopiere den Code der vorherigen Übung hierher und mache sie mit `{ask}` Befehlen interaktiv.
                 example_code_2: |
@@ -391,8 +391,8 @@ adventures:
         levels:
             17:
                 story_text: |
-                    Blackjack ist ein einfaches Kartenspiel, bei dem du so nahe wie möglich an die 21 herankommen musst. Du bekommst zwei Karten. Jede Karte hat den Wert ihrer abgebildeten zahl und die Karten mit Bildern (Bube, Dame, König) sind 10 Punkte Wert.
-                    Das Ass is entweder 1 oder 11 Punkte wert (das kannst du dir aussuchen). Der Kartengeber, dein Gegner, erhält auch zwei Karten.
+                    Blackjack ist ein einfaches Kartenspiel, bei dem du so nahe wie möglich an die 21 herankommen musst. Du bekommst zwei Karten. Jede Karte hat den Wert ihrer abgebildeten Zahl. Die Karten mit Bildern (Bube, Dame, König) sind 10 Punkte wert.
+                    Das Ass ist entweder 1 oder 11 Punkte wert - das kannst du dir aussuchen. Der Kartengeber, dein Gegner, erhält auch zwei Karten.
                     Wenn du möchtest, kannst du noch eine Karte ziehen und ihre Punkte werden zu deinen dazugerechnet. Der Kartengeber darf auch noch eine Karte ziehen.
                     Aber pass auf, dass du nicht mehr als 21 Punkte bekommst, denn dann verlierst du!
                     Der Spieler, der am nächsten an 21 herankommt ohne sie zu überschreiten, gewinnt!
@@ -401,16 +401,16 @@ adventures:
                     In diesem Abenteuer programmieren wir den ersten Teil unseres Blackjack Spiels. Wir schreiben eine Funktion, die berechnet, wie viele Punkte eine Karte zählt.
 
                     ***Setze die Variablen***
-                    Beginne, indem du eine Liste mit Karten anlegst, von der 2 bis zum Ass. Als nächstes, mache eine Liste mit den Bildkarte, also Bube, Dame und König. Dann wähle eine zufällige Karte aus der Liste der Karte als karte_1.
+                    Beginne, indem du eine Liste mit Karten anlegst, von der 2 bis zum Ass. Als nächstes mache eine Liste mit den Bildkarten, also Bube, Dame und König. Dann wähle eine zufällige Karte aus der Liste der Karte als karte_1.
 
                     ***Schreibe eine Funktion, um die Punkte zu berechnen***
                     Schreibe eine Funktion, die berechnet, wie viele Punkte eine Karte zählt.
                     Alle Bildkarten zählen 10 Punkte, ein Ass 11 und alle anderen Karten zählen ihren Zahlenwert
-                    Die die Variable `punkte` am Ende der Funktion zurück.
+                    Gib die Variable `punkte` am Ende der Funktion zurück.
 
                     ***Teste die Funktion***
                     Teste, ob deine Funktion richtig funktioniert. Vervollständige den ersten `{print}`Befehl, indem du die Karte ergänzt, die du gezogen hast. Dann vervollständige die zweite Zeile, indem du die Funktion mit karte_1 aufrufst.
-                    Lass dein Programm ein paar mal laufen. Bist du mit den Ergebnissen zufrieden? Dann kannst du den Testteil entfernen und zum nächsten Tab wechseln!
+                    Lass dein Programm ein paar Mal laufen. Bist du mit den Ergebnissen zufrieden? Dann kannst du den Testteil entfernen und zum nächsten Tab wechseln!
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -601,7 +601,7 @@ adventures:
                     {else} {print} 'Falsch! Es war ' _
                     ```
                 story_text_3: |
-                    **Extra** Du kannst den Computer auch alleine zufällige Summen rechnen lassen, indem du zufällig benutzt.
+                    **Extra** Du kannst den Computer auch alleine zufällige Summen rechnen lassen, indem du `{random}` benutzt.
                 example_code_3: |-
                     ```
                     zahlen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -850,7 +850,7 @@ adventures:
                     {add} film_wahl {to_list} film_auswahl
                     {print} Morgen schauen wir morgigen_film
                     morgigen_film {is} film_auswahl {at} {random}
-                    I hole uns mal das Popcorn! {print}
+                    Ich hole uns mal das Popcorn! {print}
                     ```
             4:
                 story_text: |-
@@ -1457,7 +1457,7 @@ adventures:
                 story_text: |
                     Jetzt werden wir die Einrückung ein wenig ändern. Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
 
-                    In diesem Level kannst du außerdem einen neuen Befehl benutzen: `{elif}`. `{elif}` ist eine Abkürzung für `{else}` `{if}` und du brauchst ihn, wenn du drei (oder mehr!) Optionen machen willst.
+                    In diesem Level kannst du außerdem einen neuen Befehl benutzen: `{elif}`. `{elif}` ist eine Abkürzung für ``{else} {if}`` und du brauchst ihn, wenn du drei (oder mehr!) Optionen machen willst.
                     Probier es mal aus!
             18:
                 story_text: |-
@@ -1724,7 +1724,7 @@ adventures:
                     ```
             18:
                 story_text: |
-                    Zuletzt, machen wir aus `{for} i {in} {range} 1 to 5` so richtigen Python Code:
+                    Zuletzt, machen wir aus `{for} i {in} {range} 1 {to} 5` so richtigen Python Code:
         name: '{for}'
     fortune:
         name: Wahrsagerin
@@ -1838,7 +1838,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Ich habe Blumen mit magischen Blütenblättern!'
-                    {print} 'Wenn du die Blütenblätter pflückst, wird die die Blume sagen, ob dein Schatz dich liebt!'
+                    {print} 'Wenn du die Blütenblätter pflückst, wird dir die Blume sagen, ob dein Schatz dich liebt!'
                     Anzahl = {ask} 'Wie viele Blütenblätter willst du pflücken?'
                     Möglichkeiten = Du wirst geliebt, Du wirst nicht geliebt
                     _ _ _ _ Möglichkeiten {at} {random}
@@ -2314,8 +2314,8 @@ adventures:
                 story_text: |
                     ## Falls... Sonst...
                     Du hast gelernt, einen Block von Programmzeilen nach einem `{repeat}` Befehl zu wiederholen.
-                    Jetzt kannst du auch Einrückung verwenden um Blöcke nach nach einem {if} oder {else} Befehl zu erzeugen.
-                    Scheu die das Beispielprogramm an.
+                    Jetzt kannst du auch Einrückung verwenden um Blöcke nach einem {if} oder {else} Befehl zu erzeugen.
+                    Schau dir das Beispielprogramm an.
 
                     ### Übung
                     Füge einen {else} Befehl zum Beispielprogramm hinzu. Erzeuge einen Block von Zeilen indem du Einrückungen verwendest. Starte dazu jede Zeile mit 4 Leerzeichen.
@@ -2328,7 +2328,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In diesem Level kannst du einen {if} Befehl innerhalb eines anderen {if} Befehls verwenden.
+                    In diesem Level kannst du einen `{if}` Befehl innerhalb eines anderen `{if}` Befehls verwenden.
                 example_code: |
                     ```
                     weiter = {ask} 'Willst Du weiter machen?'
@@ -2908,7 +2908,7 @@ adventures:
                         wochen = zu_sparen / taschengeld
                         {if} wunsch _ erspartes
                             {print} 'Du musst noch weiter sparen!'
-                            {print} 'Du brauchst noch 'wochen ' Wochen.'
+                            {print} 'Du brauchst noch ' wochen ' weitere Wochen.'
                         {else}
                             {print} 'Großartige! Du hast genug'
                             {print} 'Kommt, wir gehen einkaufen!'
@@ -2917,7 +2917,7 @@ adventures:
                     wunsch = {ask} 'Wie viel Geld brauchst du?'
                     taschengeld = {ask} 'Wie viel Taschengeld bekommst du jede Woche?'
 
-                    {call} berechne_budget {with} _, _, _
+                    {call} _
                     ```
     pressit:
         name: Tastengedrücke
@@ -3438,13 +3438,14 @@ adventures:
                     ```
                     {print} 'Willkommen im Restaurant Hedy!'
                     Leute = {ask} 'Für wie viele Leute möchten Sie bestellen?'
-                    {print} 'Also möchten Sie für 'Leute ' Leute bestellen.'
+                    {print} 'Also möchten Sie für ' Leute ' Leute bestellen.'
                     {print} "Los geht's!"
                     ```
             12:
                 story_text: |
                     Ab diesem Level kannst du Dezimalzahlen verwenden, um deine Speisekarte realistischer zu machen.
 
+                    ### Übung
                     Kannst du dir Code ausdenken mit dem du deinen Freunden und deiner Familie 15% Rabatt geben kannst?
                 example_code: |
                     ```
@@ -3555,7 +3556,7 @@ adventures:
                 story_text: |
                     In diesem Level können wir Schere, Stein, Papier weiter programmieren. Aber wenn du Text hinzufügen möchtest, musst du auch hier Anführungszeichen verwenden.
                     ### Übung
-                    Fülle die Lücken in Anführungszeichen aus. Beachte, dass die `wahlmöglichkeiten` Variable ausserhalb der Anführungszeichen stehen sollte.
+                    Fülle die Lücken in Anführungszeichen aus. Beachte, dass die `choices` Variable außerhalb der Anführungszeichen stehen sollte.
                 example_code: |
                     ```
                     wahlmöglichkeiten {is} Schere, Stein, Papier
@@ -4224,9 +4225,9 @@ adventures:
                     ***Extra*** Kannst du den Buchstaben deines eigenen Namen und die Flagge deines eigenen Landes malen?
 
                     <div class="w-full flex flex-row gap-2">
-                    Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="150">
-                    Letters <img src="https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad" width="100">
-                    Flag <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
+                    Quadrat <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="150">
+                    Buchstaben <img src="https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad" width="100">
+                    Flagge <img src="https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e" width="300">
                     </div>
                 example_code: |
                     Hinweis für das Quadrat:
@@ -4251,7 +4252,7 @@ adventures:
                     **Extra** Die Zahl in den Klammern gibt an, in wie vielen Codezeilen die Figur gezeichnet werden kann. Kannst du es in derselben Anzahl an Zeilen machen?
 
                     <div class="w-full flex flex-row gap-2">
-                    Quadrat(3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
+                    Quadrat (3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
                     Zufällig gefärbter Stern (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
                     Zufällig gefärbte Spirale (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
                     </div>
@@ -4354,8 +4355,9 @@ adventures:
                 story_text: |
                     ### Übung
                     Mache die Zeichnung mit der Schildkröte nach!
-                    Hinweis: Armband Design Programm. Definiere zunächst eine Funktion **für jede Form**. Dann füge die Form so zum Armband hinzu::
-                    </div>
+
+                    Definiere zunächst eine Funktion **für jede Form** die du für das Armband verwenden möchtest. Dann füge die Form so zum Armband hinzu:
+
                     Armband Design Programm <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500"> 
                 example_code: |
                     Hinweis Armband Design Programm
@@ -4380,7 +4382,7 @@ adventures:
             13:
                 story_text: |
                     ### Übung
-                    Mache die Zeichnngen mit der Schildkröte nach!
+                    Mache die Zeichnungen mit der Schildkröte nach!
 
                     Straße in verschiedenen Größen <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
                     Gefärbte Straße  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
