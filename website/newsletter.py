@@ -2,14 +2,18 @@ import os
 import json
 import hashlib
 import requests
+import logging
+import threading
 from config import config
 from functools import wraps
 from hedy_content import COUNTRIES
 from website.auth import send_email
 
+logger = logging.getLogger(__name__)
 
 MAILCHIMP_API_URL = None
 MAILCHIMP_API_HEADERS = {}
+MAILCHIMP_TIMEOUT_SECONDS = 15
 if os.getenv("MAILCHIMP_API_KEY") and os.getenv("MAILCHIMP_AUDIENCE_ID"):
     # The domain in the path is the server name, which is contained in the Mailchimp API key
     MAILCHIMP_API_URL = (
@@ -25,40 +29,55 @@ if os.getenv("MAILCHIMP_API_KEY") and os.getenv("MAILCHIMP_AUDIENCE_ID"):
 
 
 def run_if_mailchimp_config_present(f):
-    """Similar to 'requires_login', but also tests that the user is an admin."""
+    """ Decorator that runs a particular Mailchimp-dependent function only if there are credentials available. """
     @wraps(f)
     def inner(*args, **kws):
         if MAILCHIMP_API_URL:
-            return f(*args, **kws)
+            f(*args, **kws)
 
     return inner
+
+
+def fire_and_forget(f):
+    def run():
+        try:
+            f()
+        except Exception as e:
+            logger.exception(f'Exception in background thread: {e}')
+
+    threading.Thread(target=run, daemon=True).start()
 
 
 @run_if_mailchimp_config_present
 def create_subscription(email, country):
     """ Subscribes the user to the newsletter. Currently, users can subscribe to the newsletter only on signup and
     only if they are creating a teacher account. """
-    tags = [country, MailchimpTag.TEACHER]
-    create_mailchimp_subscriber(email, tags)
+    def create():
+        tags = [country, MailchimpTag.TEACHER]
+        create_mailchimp_subscriber(email, tags)
+    fire_and_forget(create)
 
 
 @run_if_mailchimp_config_present
 def update_subscription(current_email, new_email, new_country):
-    """ Updates the newsletter subscription when the user changes their email or/and their country """
-    response = get_mailchimp_subscriber(current_email)
-    if response.status_code == 200:
-        current_tags = response.json().get('tags', [])
-        if new_email != current_email:
-            # If user is subscribed, we remove the old email from the list and add the new one
-            new_tags = [t.get('name') for t in current_tags if t.get('name') not in COUNTRIES] + [new_country]
-            successfully_created = create_mailchimp_subscriber(new_email, new_tags)
-            if successfully_created:
-                delete_mailchimp_subscriber(current_email)
-        else:
-            # If the user did not change their email, check if the country needs to be updated
-            tags_to_update = get_country_tag_changes(current_tags, new_country)
-            if tags_to_update:
-                update_mailchimp_tags(current_email, tags_to_update)
+    def update():
+        """ Updates the newsletter subscription when the user changes their email or/and their country """
+        response = get_mailchimp_subscriber(current_email)
+        if response and response.status_code == 200:
+            current_tags = response.json().get('tags', [])
+            if new_email != current_email:
+                # If user is subscribed, we remove the old email from the list and add the new one
+                new_tags = [t.get('name') for t in current_tags if t.get('name') not in COUNTRIES] + [new_country]
+                successfully_created = create_mailchimp_subscriber(new_email, new_tags)
+                if successfully_created:
+                    delete_mailchimp_subscriber(current_email)
+            else:
+                # If the user did not change their email, check if the country needs to be updated
+                tags_to_update = get_country_tag_changes(current_tags, new_country)
+                if tags_to_update:
+                    update_mailchimp_tags(current_email, tags_to_update)
+
+    fire_and_forget(update)
 
 
 def add_class_created_to_subscription(email):
@@ -73,12 +92,14 @@ def add_class_customized_to_subscription(email):
 def create_subscription_event(email, tag):
     """ When certain events occur, e.g. a newsletter subscriber creates or customizes a class, these events
     should be reflected in their subscription, so that we can send them relevant content """
-    r = get_mailchimp_subscriber(email)
-    if r.status_code == 200:
-        current_tags = r.json().get('tags', [])
-        if not any([t for t in current_tags if t.get('name') == tag]):
-            new_tags = current_tags + [to_mailchimp_tag(tag)]
-            update_mailchimp_tags(email, new_tags)
+    def create():
+        r = get_mailchimp_subscriber(email)
+        if r.status_code == 200:
+            current_tags = r.json().get('tags', [])
+            if not any([t for t in current_tags if t.get('name') == tag]):
+                new_tags = current_tags + [to_mailchimp_tag(tag)]
+                update_mailchimp_tags(email, new_tags)
+    fire_and_forget(create)
 
 
 def get_country_tag_changes(current_tags, country):
@@ -131,17 +152,22 @@ def create_mailchimp_subscriber(email, tag_names):
 
 def get_mailchimp_subscriber(email):
     request_path = f'{MAILCHIMP_API_URL}/members/{get_subscriber_hash(email)}'
-    return requests.get(request_path, headers=MAILCHIMP_API_HEADERS)
+    return requests.get(request_path, headers=MAILCHIMP_API_HEADERS, timeout=MAILCHIMP_TIMEOUT_SECONDS)
 
 
 def update_mailchimp_tags(email, tags):
     request_path = f'{MAILCHIMP_API_URL}/members/{get_subscriber_hash(email)}/tags'
-    return requests.post(request_path, headers=MAILCHIMP_API_HEADERS, data=json.dumps({'tags': tags}))
+    return requests.post(
+        request_path,
+        headers=MAILCHIMP_API_HEADERS,
+        data=json.dumps({'tags': tags}),
+        timeout=MAILCHIMP_TIMEOUT_SECONDS
+    )
 
 
 def delete_mailchimp_subscriber(email):
     request_path = f'{MAILCHIMP_API_URL}/members/{get_subscriber_hash(email)}'
-    requests.delete(request_path, headers=MAILCHIMP_API_HEADERS)
+    requests.delete(request_path, headers=MAILCHIMP_API_HEADERS, timeout=MAILCHIMP_TIMEOUT_SECONDS)
 
 
 def get_subscriber_hash(email):
