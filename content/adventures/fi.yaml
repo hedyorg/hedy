@@ -268,102 +268,115 @@ adventures:
         description: Tason selitys
         levels:
             1:
-                story_text: "Tasolla 1 voit käyttää komentoja `{print}`, `{ask}` ja `{echo}`.\n Kirjoita koodisi ohjelmointikenttään. Voit myös painaa vihreää painiketta esimerkkikoodilohkossa, niin koodi kirjoitetaan puolestasi!\nKokeile koodia itse ohjelmointikentän alla olevalla vihreällä \"Suorita koodi\" -painikkeella.\n \nVoit tulostaa tekstiä näytölle komennolla `{print}`.     \n"
+                story_text: "Tervetuloa Hedylle! Täältä voit oppia ohjelmoinnin vaihe vaiheelta.\n\nKokeile koodia itse! Keltainen painike kopioi esimerkkikoodin ohjelmointikenttään.\nPaina sitten ohjelmointikentän alla olevaa vihreää \"Suorita koodi\" -painiketta suorittaaksesi koodin.\n\nValmis? Siirry sitten seuraavaan seikkailuun ja opi tekemään omia koodeja!\n"
             3:
                 story_text: |
-                    Tasolla 3 voit tehdä listan. Voit antaa tietokoneen valita satunnaisen asian listalta. Voit tehdä sen komennolla `{at} {random}`.
+                    Edellisellä tasolla olet oppinut, mikä muuttuja on ja kuinka voit käyttää sitä tehdäksesi seikkailuistasi vuorovaikutteisempia.
+                    Mutta... se ei ole ainoa asia, jonka voit tehdä muuttujien kanssa! Voit myös käyttää muuttujia luetteloiden tekemiseen.
+                    Ja voit jopa antaa Hedyn valita satunnaisen sanan luettelosta, jonka avulla voit tehdä oikeita pelejä!
+                    Katso nopeasti seuraava seikkailu!
             4:
                 story_text: |
-                    Tasolla 4 `{ask}` ja `{print}` ovat muuttuneet.
+                    Aiemmilla tasoilla olet harjoitellut muuttujien kanssa, mutta olet ehkä törmännyt tähän ongelmaan.
+                    Olet ehkä yrittänyt suorittaa seuraavanlaisen koodin:
 
-                    Sinun on laitettava teksti, jonka haluat tulostaa, lainausmerkkien väliin.
+                    Tietenkin halusit tulostaa
 
-                    Tämä on hyödyllistä, koska nyt voit tulostaa kaikki haluamasi sanat. Myös sanat, joita käytit tallentaaksesi jotain komennolla `{is}`.
+                    "Nimeni on Sofia".
 
-                    Useimmat ohjelmointikielet käyttävät lainausmerkkejä myös tulostettaessa, joten pääsemme myös askeleen lähemmäs oikeaa ohjelmointia!
+                    mutta Hedy tulostaa
+
+                    "Minun Sofia on Sofia".
+
+                    Tällä tasolla tämä ongelma korjataan käyttämällä lainausmerkkejä.
                 example_code: |
                     ```
-                    {print} "Tästä lähtien on käytettävä lainausmerkkejä!"
-                    vastaus {is} {ask} 'Mitä meidän on käytettävä tästä lähtien?'
-                    {print} "Meidän on käytettävä " vastaus
+                    nimi {is} Sofia
+                    {print} Nimeni on nimi
                     ```
             5:
                 story_text: |
-                    Tasolla 5 on jotain uutta, komento `{if}`! Komennon `{if}` avulla voit valita kahden eri vaihtoehdon välillä.
-                    Tämä koodi tulostaa hienoa! jos kirjoitat nimeksi Hedy, ja boo! jos kirjoitat jotain muuta.
-                    `{ask}` ja `{print}` toimivat edelleen kuten tasolla 4.
+                    Aiemmilla tasoilla olet jo oppinut käyttämään `{at} {random}`, mikä teki peleistäsi erilaisia joka kerta, kun suoritit koodin.
+                    Mutta se ei todellakaan ole vuorovaikutteista, pelaajalla ei ole mitään vaikutusta siihen, mitä pelissä tapahtuu.
+
+                    Tällä tasolla opit `{if}`-komennon, jonka avulla voit antaa erilaisia vastauksia ohjelmassasi. Näin voit ohjelmoida esimerkiksi salaisen salasanan tietokoneellesi.
+                    Joten mennään seuraavaan seikkailuun uutta komentoa varten!
                 example_code: |
                     ```
-                    name {is} {ask} 'mikä on nimesi?'
-                    {if} name {is} Hedy {print} 'nice' {else} {print} 'boo!'
+                    salasana {is} {ask} 'Mikä on oikea salasana?'
                     ```
             6:
                 story_text: |
-                    Tällä tasolla opit jotain uutta: voit nyt myös suorittaa laskutoimituksia.
+                    Edellisellä tasolla olet harjoitellut `{ask}`:n ja `{if}`:n kanssa. Voit esimerkiksi kysyä vierailta, mitä he haluaisivat syödä.
+                    Mitä et kuitenkaan vielä voi tehdä, on laskea kaikkien illallisen hintaa.
 
-                    Yhteenlaskut ovat helppoja, voit kirjoittaa ne kuten matematiikassa, esimerkiksi `5 + 5`. Vähennyslaskut toimivat samalla tavalla, esimerkiksi `5 - 5`.
-
-                    Kertolaskujen laskeminen eroaa hieman tästä, sillä näppäimistössä ei ole kertolaskumerkkiä. Etsi vain, sitä ei todellakaan ole!
-                    Siksi kerrotaan tähdellä 8:n yläpuolella, esimerkiksi `5 * 5`. Lue se "5 kertaa 5", niin muistat sen parhaiten.
+                    Tämä taso mahdollistaa yhteen-, vähennys- ja kertolaskujen käytön ohjelmissasi. Näin voit laskea hinnat ravintolassasi, mutta voit myös lisätä salaisen koodin antaaksesi ystävillesi ja perheellesi alennuksen.
+                    Toinen vaihtoehto tällä tasolla on ohjelmoida oma matematiikkapelisi, jotta pikkuveljesi tai sisaresi voi harjoitella kertolaskujaan.
+                    Käy katsomassa itse!
                 example_code: |
                     ```
-                    {print} '5 plus 5 on ' 5 + 5
-                    {print} '5 miinus 5 on ' 5 - 5
-                    {print} '5 kertaa 5 on ' 5 * 5
+                    ruoan_hinta {is} 0
+                    juoman_hinta {is} 0
+                    kokonais_hinta {is} 0
+                    {print} "Tervetuloa McHedyyn"
+                    tilaus {is} {ask} 'Mitä haluaisit syödä?'
+                    {if} tilaus {is} hampurilaisen ruoan_hinta {is} 5
+                    {if} tilaus {is} perunat ruoan_hinta {is} 2
+                    juoma {is} {ask} 'Mitä haluaisit juoda?'
+                    {if} juoma {is} vesi juoman_hinta {is} 0
+                    {else} juoman_hinta {is} 3
+                    kokonaishinta {is} ruoan_hinta + juoman_hinta
+                    {print} 'Se on ' kokonais_hinta ' euroa, kiitos.'
                     ```
             7:
                 story_text: |
-                    Taso 7 lisää komennon `{repeat}`. `{repeat}` komennolla voidaan suorittaa yksi koodirivi monta kertaa peräkkäin.
+                    Hienoa työtä! Olet saavuttanut seuraavan tason, mikä tarkoittaa, että olet harjoitellut `{if}`:n ja `{else}`:n kanssa. Olet luultavasti huomannut, että koodisi pidentyvät.
+                    Jos esimerkiksi haluat ohjelmoida "Hyvää syntymäpäivää".
+
+                    Se on paljon koodia pääasiassa samoille sanoille yhä uudelleen ja uudelleen. Onneksi seuraavassa seikkailussa opit ratkaisun `{repeat}`-komennolla, jonka avulla voit toistaa koodirivin useita kertoja.
                 example_code: |
                     ```
-                    {repeat} 3 {times} {print} 'Hedy on hauskaa!'
+                    {print} "hyvää syntymäpäivää sinulle"
+                    {print} "hyvää syntymäpäivää sinulle"
+                    {print} "hyvää syntymäpäivää rakas Hedy"
+                    {print} "hyvää syntymäpäivää sinulle"
                     ```
             8:
                 story_text: |
-                    `{ask}` ja `{print}` toimivat edelleen sellaisina kuin ne tunnet. Mutta `{if}`, `{else}` ja `{repeat}` ovat muuttuneet!
-                    Voit nyt ryhmittää useita rivejä yhteen, mutta sinun on *sisennettävä* koodi.
-                    Tämä tarkoittaa neljän välilyönnin asettamista rivin alkuun. Sinun on myös sisennettävä, kun haluat vain luoda yhden rivin lohkon.
+                    Nyt olet oppinut toistamaan yhden koodirivin. Tästä on hyötyä, mutta se ei aina riitä. Joskus haluat toistaa useita rivejä kerralla.
+                    Tällä tasolla voit ryhmitellä pari koodiriviä ja toistaa tuon pienen riviryhmän kerralla!
                 example_code: |
-                    `{repeat}`-komento toimii nyt näin:
                     ```
-                    {repeat} 5 {times}
-                        {print} "Hei kaikki"
-                        {print} "Tämä kaikki toistuu 5 kertaa"
-                    ```
-                    `{if}` ja `{else}` komennot toimivat nyt näin:
-
-                    ```
-                    nimi {is} {ask} 'Mikä on nimesi?'
-                    {if} nimi {is} Hedy
-                        {print} "Tervetuloa Hedy"
-                        {print} "Voit pelata tietokoneellasi!"
-                    {else}
-                        {print} "TUNKEILIJA!"
-                        {print} "Et voi käyttää tätä tietokonetta!"
+                    {repeat} 5 {times} {print} "Seuraavassa seikkailussa voit toistaa useita koodirivejä kerralla!"
                     ```
             9:
                 story_text: |
-                    Tällä tasolla voit edelleen käyttää useita rivejä `{if}` ja `{repeat}` komentojen kanssa, mutta voit myös liittää ne yhteen!
-                    Esimerkissä näet `{if}` -komennon `{repeat}` -komennon sisällä. Se on sallittua myös toisinpäin, `{if}` on sallittu myös `{if}`:n sisällä ja `{repeat}` -komento `{repeat}` :n sisällä.
-                    Kokeile!
+                    Hienoa työtä! Olet saavuttanut uuden tason! Edellisellä tasolla olet oppinut käyttämään useita koodirivejä {if}- tai {repeat}-komennossa. Mutta näitä kahta ei voi vielä yhdistää...
+                    Hyviä uutisia! Tällä tasolla voit laittaa {if}-komennon {if}- tai {repeat}-komennon sisään. Koodilohkon sijoittamista toisen koodilohkon sisään kutsutaan sisäkkäisyyksiksi. ``` Koodilohkon sijoittamista toisen koodilohkon sisään kutsutaan sisäkkäisyyksiksi.
                 example_code: |
                     ```
-                    {repeat} 3 {times}
-                        food = {ask} 'Mitä haluat?'
-                        {if} food {is} pizza
-                            {print} 'kivaa!'
-                        {else}
-                            {print} 'pitsa on parempi'
-                    ```
+                    vastaus = {ask} 'Oletko valmis oppimaan jotain uutta?'
+                    {if} vastaus {is} kyllä
+                     {print} 'Hienoa! Voit oppia käyttämään toistokomentoa if-komennossa!'
+                     {print} "Hurraa!"
+                     {print} "Hurraa!"
+                     {print} "Hurraa!"
+                    {else}
+                     {print} "Ehkä sinun pitäisi harjoitella enemmän edellisellä tasolla"
             10:
-                story_text: |-
-                    Tällä tasolla opimme uuden koodin kohteelle  `{for}`. Koodilla `{for}` voit tehdä luettelon ja käyttää kaikkia elementtejä.
-                    `{for}` luo lohkon, kuten `{repeat}` ja `{if}` joten kaikkien lohkon rivien on alettava välilyönneillä.
+                story_text: |
+                    Sinulla menee loistavasti! Edellisillä tasoilla kohtasimme vielä pienen ongelman. Olet oppinut toistamaan rivejä, mutta entä jos haluat hieman muuttaa riviä.
+                    Esimerkiksi jos haluat laulaa kappaleen "jos olet onnellinen ja tiedät sen". Se näyttäisi tältä:
+
+                    Jos haluat myös seuraavan jakeen "tallattavan jalkojasi" ja seuraavan ja seuraavan, sinun on muutettava koodi kokonaan.
+                    Tällä tasolla opit `{for}`-komennon, jonka avulla voit tehdä luettelon toiminnoista ja toistaa koodin toisella toiminnolla joka kerta!
+                    Ole hyvä ja katso!
                 example_code: |
                     ```
-                    elukat {is} koiraa, kissaa, möykkykalaa
-                    {for} elukka {in} elukat
-                      {print} 'Rakastan ' elukka
+                    {repeat} 2 {times}
+                     {print} 'jos olet onnellinen ja tiedät sen, taputa käsiäsi'
+                    {print} 'jos olet onnellinen ja tiedät sen ja haluat todella näyttää sen'
+                    {print} 'jos olet onnellinen ja tiedät sen, taputa käsiäsi'
                     ```
             12:
                 story_text: |-
@@ -371,13 +384,14 @@ adventures:
                     Tähän asti Hedy ei ole sallinut desimaalilukuja kuten 1.5, mutta nyt ne sallitaan. Huomaa, että tietokoneet käyttävät `.` desimaalinumeroissa.
                 example_code: |
                     ```
-                    {print} 'Kaksi ja puoli plus kaksi ja puoli on...'
-                    {print} 2.5 + 2.5
+                    hampurilainen = 5
+                    juoma = 2
+                    yhteensä = hampurilainen + juoma
+                    tulosta "Olet tilannut hampurilaisen ja juoman"
+                    tulosta 'Se maksaa 'yhteensä' euroa, kiitos.
                     ```
-
-                    {print} 2.5 + 2.5
     for_command:
-        description: for command
+        description: '{for}-komento'
         levels:
             11:
                 story_text: |-
