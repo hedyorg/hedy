@@ -1,13 +1,10 @@
-import json
 import logging
 import os
-import re
 import urllib
 from functools import wraps
 
 import bcrypt
 import boto3
-import requests
 from botocore.exceptions import ClientError as email_error
 from botocore.exceptions import NoCredentialsError
 from flask import request, session, redirect
@@ -20,7 +17,6 @@ from config import config
 from safe_format import safe_format
 from utils import is_debug_mode, timems, times
 from website import querylog
-
 TOKEN_COOKIE_NAME = config["session"]["cookie_name"]
 
 # A special value in the session, if this is set and we hit a 403 on the
@@ -35,42 +31,6 @@ RESET_LENGTH = config["session"]["reset_length"] * 60
 
 
 env = os.getenv("HEROKU_APP_NAME")
-
-MAILCHIMP_API_URL = None
-MAILCHIMP_API_HEADERS = {}
-if os.getenv("MAILCHIMP_API_KEY") and os.getenv("MAILCHIMP_AUDIENCE_ID"):
-    # The domain in the path is the server name, which is contained in the Mailchimp API key
-    MAILCHIMP_API_URL = (
-        "https://"
-        + os.getenv("MAILCHIMP_API_KEY").split("-")[1]
-        + ".api.mailchimp.com/3.0/lists/"
-        + os.getenv("MAILCHIMP_AUDIENCE_ID")
-    )
-    MAILCHIMP_API_HEADERS = {
-        "Content-Type": "application/json",
-        "Authorization": "apikey " + os.getenv("MAILCHIMP_API_KEY"),
-    }
-
-
-def mailchimp_subscribe_user(email, country):
-    # Request is always for teachers as only they can subscribe to newsletters
-    request_body = {"email_address": email, "status": "subscribed", "tags": [country, "teacher"]}
-    r = requests.post(MAILCHIMP_API_URL + "/members", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
-
-    subscription_error = None
-    if r.status_code != 200 and r.status_code != 400:
-        subscription_error = True
-    # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
-    if r.status_code == 400 and not re.match(".*already a list member", r.text):
-        subscription_error = True
-    # If there's an error in subscription through the API, we report it to the main email address
-    if subscription_error:
-        send_email(
-            config["email"]["sender"],
-            "ERROR - Subscription to Hedy newsletter on signup",
-            email,
-            "<p>" + email + "</p><pre>Status:" + str(r.status_code) + "    Body:" + r.text + "</pre>",
-        )
 
 
 @querylog.timed
