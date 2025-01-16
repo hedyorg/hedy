@@ -64,18 +64,18 @@ adventures:
                     Hikayenizde `{add}` komutu da kullanışlı olabilir.
                 example_code_2: |
                     ```
-                    {print} They hear a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was an animals {at} {random}
+                    {print} Bir ses duydular
+                    hayvanlar {is} 🐿, 🦔, 🦇, 🦉
+                    hayvan {is} {ask} Ne olduğunu düşünüyorsun?
+                    {add} hayvan {to} hayvanlar
+                    {print} bu bir hayvanlar {at} {random}
                     ```
                 story_text_3: |
                     Bu, hikayenizdeki `{remove}` komutunun bir örneğidir
 
                     ### Alıştırma
                     Önceki seviyelerdeki hikayenizi bu seviyeye kopyalayın.
-                    Bu seviyede, 3 yeni komut öğrendiniz `{at} {random}` , `{add} {to_list}` ve `{remove} {from}`.
+                    Bu seviyede, 3 yeni komut öğrendiniz `{at} {random}` , `{add} {to}` ve `{remove} {from}`.
                     Hikayenize yeni kod satırları ekleyin, böylece tüm yeni komutlar hikayenizde en az bir kez yer alsın.
                 example_code_3: |
                     ```
@@ -266,17 +266,17 @@ adventures:
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: ekle_çıkar_komutu
-        description: '{add} {to_list} ve {remove} {from} giriş'
+        description: '{add} {to} ve {remove} {from} komutlarına giriş'
         levels:
             3:
                 story_text: |
                     ## ekle şuraya
-                    Listeye `{add} {to_list}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
+                    Listeye `{add} {to}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
                 example_code: |
                     ```
                     hayvanlar {is} köpek, kedi, kanguru
                     sevilen {is} {ask} En sevdiğin hayvan hangisi?
-                    {add} sevilen {to_list} hayvanlar
+                    {add} sevilen {to} hayvanlar
                     {print} Benim seçimim hayvanlar {at} {random}
                     ```
                 story_text_2: |
@@ -583,9 +583,9 @@ adventures:
                 story_text: |
                     Hedy'ye hoş geldiniz! Seviye 1'de, bir hikaye yazdırarak başlayabilirsiniz.
 
-                    Programlama alanının altındaki yeşil 'Kodu çalıştır' düğmesini kullanarak kodu kendiniz deneyin.
+                    Programlama alanının altındaki yeşil 'Kodu Çalıştır' düğmesini kullanarak kodu kendiniz deneyin.
 
-                    Hazır mısınız? O zaman ilk komutunuzu öğrenmek için bir sonraki sekmeye gidin!
+                    Hazır mısınız? O zaman ilk komutunuzu öğrenmek için bir sonraki maceraya gidin!
             2:
                 story_text: |
                     Tebrikler! Seviye 2'ye ulaştınız. Umarım şimdiden bazı harika kodlar yapmışsınızdır!
@@ -1701,7 +1701,7 @@ adventures:
                 story_text: |
                     Papağanınıza `{add}` ile yeni bir kelime öğretin.
                     ### Alıştırma
-                    Kodun çalışması için `{add} {to_list}` komutunu ekleyebilir misiniz?
+                    Kodun çalışması için `{add} {to}` komutunu ekleyebilir misiniz?
                 example_code: |
                     ```
                     kelimeler {is} gaak, Hedy
@@ -1721,7 +1721,7 @@ adventures:
                     kelimeler {is} gaak, Hedy
                     {print} _ Papağanınızı eğitin! _
                     yeni_kelime {is} {ask} _ Ona hangi kelimeyi öğretmek istiyorsunuz? _
-                    {add} yeni_kelime {to_list} kelimeler
+                    {add} yeni_kelime {to} kelimeler
                     {print} _ 🧒 Hadi _ new_word _ de, Hedy!_
                     {print} _ 🦜 _ kelimeler {at} {random}
                     ```
@@ -1736,7 +1736,7 @@ adventures:
                     kelimeler {is} gaak, Hedy
                     {print} 'Papağanınızı eğitin!'
                     yeni_kelime {is} {ask} 'Ona hangi kelimeyi öğretmek istiyorsunuz?'
-                    {add} yeni_kelime {to_list} kelimeler
+                    {add} yeni_kelime {to} kelimeler
                     dediği_kelime {is} kelimeler {at} {random}
                     {print} '🧒 Hadi ' new_word ' de, Hedy!'
                     {print} '🦜 ' dediği_kelime
