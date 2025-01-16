@@ -67,7 +67,7 @@ adventures:
                     {print} They hear a sound
                     animals {is} 🐿, 🦔, 🦇, 🦉
                     animal {is} {ask} What do you think it is?
-                    {add} animal {to} animals
+                    {add} animal {to_list} animals
                     {print} it was an animals {at} {random}
                     ```
                 story_text_3: |
@@ -75,7 +75,7 @@ adventures:
 
                     ### Exercise
                     Copy your story from the previous levels into this level.
-                    In this level you've learned 3 new commands `{at} {random}` , `{add} {to}` and `{remove} {from}`.
+                    In this level you've learned 3 new commands `{at} {random}` , `{add} {to_list}` and `{remove} {from}`.
                     Add new lines of code to your story, so that all of the new commands are featured at least once in your story.
                 example_code_3: |
                     ```
@@ -253,19 +253,19 @@ adventures:
                     {print}('Welcome to this story!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         default_save_name: add_remove_command
-        description: introducing {add} {to} and {remove} {from}
+        description: introducing {add} {to_list} and {remove} {from}
         levels:
             3:
                 story_text: |
                     ## Add to
-                    You can add items to the list with the `{add} {to}` command. To add an item to a list you can simply type: `{add} penguin {to} animals` or you can use the `{ask}` command like in the example code.
+                    You can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to_list} animals` or you can use the `{ask}` command like in the example code.
                 example_code: |
                     ```
                     animals {is} dog, cat, kangaroo
                     like {is} {ask} What is your favorite animal?
-                    {add} like {to} animals
+                    {add} like {to_list} animals
                     {print} I choose animals {at} {random}
                     ```
                 story_text_2: |
@@ -858,7 +858,7 @@ adventures:
                     {print} Tonight we will watch chosen _movies
                     like {ask} Do you like that movie?
                     {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
+                    {add} chosen_movie {to_list} movie_choices
                     {print} Tomorrow we will watch tomorrows_movie
                     tomorrows_movie {is} movie_choices {at} {random}
                     I'll go get the popcorn! {print}
@@ -3181,7 +3181,7 @@ adventures:
                 story_text: |
                     Teach your parrot a new word with `{add}`.
                     ### Exercise
-                    Can you add the `{add} {to}` command to get the code to work?
+                    Can you add the `{add} {to_list}` command to get the code to work?
                 example_code: |
                     ```
                     words {is} squawk, Hedy
@@ -3201,7 +3201,7 @@ adventures:
                     words {is} squawk, Hedy
                     {print} _ Train your parrot! _
                     new_word {is} {ask} _ Which word do you want to teach them? _
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     {print} _ 🧒 Say _ new_word _, Hedy!_
                     {print} _ 🦜 _ words {at} {random}
                     ```
@@ -3216,7 +3216,7 @@ adventures:
                     words {is} squawk, Hedy
                     {print} 'Train your parrot!'
                     new_word {is} {ask} 'Which word do you want to teach them?'
-                    {add} new_word {to} words
+                    {add} new_word {to_list} words
                     said_word {is} words {at} {random}
                     {print} '🧒 Say ' new_word ', Hedy!'
                     {print} '🦜 ' said_word

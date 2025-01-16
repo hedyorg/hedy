@@ -191,15 +191,15 @@ levels:
         5:
             header: İçine Ekle
             text: |-
-                Listeye `{add}` `{to}` komutu ile öğe ekleyebilirsiniz.
+                Listeye `{add}` `{to_list}` komutu ile öğe ekleyebilirsiniz.
 
-                Listeye neyin ekleneceğini seçebilir veya `{add}` `{to}` komutunu `{ask}` komutuyla birlikte kullanabilirsiniz.
+                Listeye neyin ekleneceğini seçebilir veya `{add}` `{to_list}` komutunu `{ask}` komutuyla birlikte kullanabilirsiniz.
                 Bu şekilde, listeye ne ekleneceğine oyuncunun karar vermesine izin verebilirsiniz.
-            code: "hayvanlar {is} köpek, kedi, kanguru\nsevilen {is} {ask} En sevdiğin hayvan hangisi?\n{add} sevilen {to} hayvanlar\n{print} Benim seçimim hayvanlar {at} {random}"
+            code: "hayvanlar {is} köpek, kedi, kanguru\nsevilen {is} {ask} En sevdiğin hayvan hangisi?\n{add} sevilen {to_list} hayvanlar\n{print} Benim seçimim hayvanlar {at} {random}"
         6:
             header: İçinden kaldır
             text: |-
-                `{add}` `{to}` komutunun tersi `{remove}` `{from}` komutudur.
+                `{add}` `{to_list}` komutunun tersi `{remove}` `{from}` komutudur.
                 Bu komut listeden bir öğeyi kaldırır.
             code: "hayvanlar {is} köpek, kedi, kanguru\nsevilmeyen {is} {ask} Hangi hayvanı sevmiyorsun?\n{remove} sevilmeyen {from} hayvanlar\n{print}Benim seçimim hayvanlar {at} {random}"
         8:
@@ -208,7 +208,7 @@ levels:
         7:
             header: Hata Ayıklama
             text: Bu kodda hata ayıklayalım!
-            editor: "müzik_türleri {is} rock, pop, metal, indie, caz\nseçilen_tür {is} müzik {at} {random}\n{print} Hadi seçilen türü dinleyelim\ngüzel {ask} Bu türü sever misin?\n{remove} seçilen_tür {from} seçilen_tür\nikinci_tercih {is} müzik_türleri\n{print} yoksa şunu mu tercih edersiniz... ikinci_tercih {at} {random}\n{remove} ikinci_tercih {to} müzik_türleri\n{print} Ben en çok müzik_türleri {random} severim!"
+            editor: "müzik_türleri {is} rock, pop, metal, indie, caz\nseçilen_tür {is} müzik {at} {random}\n{print} Hadi seçilen türü dinleyelim\ngüzel {ask} Bu türü sever misin?\n{remove} seçilen_tür {to_list} seçilen_tür\nikinci_tercih {is} müzik_türleri\n{print} yoksa şunu mu tercih edersiniz... ikinci_tercih {at} {random}\n{remove} ikinci_tercih {from} müzik_türleri\n{print} Ben en çok müzik_türleri {random} severim!"
             debug: 'True'
     4:
         1:
@@ -484,7 +484,7 @@ levels:
             text: Seviye 9'daki maceraların tadını çıkarın!
         8:
             debug: 'True'
-            code: "{print} 'Paraşütle atlama maceranız HedyJumps'a hoş geldiniz!'\nkişiler = {ask} 'Bugün kaç kişiyle birlikte atlıyorsunuz?\n{print} 'Güvenlik nedeniyle hepinize bazı sorular soracağız.'\nek_talimatlar_kişiler = a, b\n{repeat} 3 {times}\n    isim = {ask} 'Adınız nedir?'\nönceki_atlayış = 'Daha önce hiç paraşütle atladınız mı, ' isim '?'\n{if} önceki_atlayış hayır\n{print} 'Endişelenmeyin, 13 numaralı odada ekstra bir güvenlik eğitimi alacaksınız'\n{add} isim {to} ek_talimatlar_kişiler\n{else}\n{print} 'Eğlenceli!'\n{print} 'Güvenlik sorularını doldurduğunuz için herkese teşekkürler. Atlayışınızın tadını çıkarın!'"
+            code: "{print} 'Paraşütle atlama maceranız HedyJumps'a hoş geldiniz!'\nkişiler = {ask} 'Bugün kaç kişiyle birlikte atlıyorsunuz?\n{print} 'Güvenlik nedeniyle hepinize bazı sorular soracağız.'\nek_talimatlar_kişiler = a, b\n{repeat} 3 {times}\n    isim = {ask} 'Adınız nedir?'\nönceki_atlayış = 'Daha önce hiç paraşütle atladınız mı, ' isim '?'\n{if} önceki_atlayış hayır\n{print} 'Endişelenmeyin, 13 numaralı odada ekstra bir güvenlik eğitimi alacaksınız'\n{add} isim {to_list} ek_talimatlar_kişiler\n{else}\n{print} 'Eğlenceli!'\n{print} 'Güvenlik sorularını doldurduğunuz için herkese teşekkürler. Atlayışınızın tadını çıkarın!'"
             header: Hata Ayıklama
             text: Bu kodda hata ayıklayalım!
     10:
@@ -670,7 +670,7 @@ levels:
             text: Seviye 15'teki maceraların tadını çıkarın!
         3:
             header: Hata Ayıklama
-            code: "sayılar = 1, 2\n\n{for} i {in} {range} 3 {to} 50\n    {add} x {to} sayılar\n    i = + 1\n\nrastgele_sayı = sayılar {random}\ntahminler = 10\n\n{while} tahmin = 0\n    cevap = 'Sayıyı tahmin et:'\n    {if} cevap >= rastgele_sayı\n        {print} 'aşağı in'\n        tahminler = tahminler -1\n    {if} cevap > rastgele_sayı\n        {print} 'yukarı çık!'\n        tahminler = tahminler\n    {else} cevap = rastgele_sayı\n        {print} 'doğru'\n        tahminler = 10"
+            code: "sayılar = 1, 2\n\n{for} i {in} {range} 3 {to} 50\n    {add} x {to_list} sayılar\n    i = + 1\n\nrastgele_sayı = sayılar {random}\ntahminler = 10\n\n{while} tahmin = 0\n    cevap = 'Sayıyı tahmin et:'\n    {if} cevap >= rastgele_sayı\n        {print} 'aşağı in'\n        tahminler = tahminler -1\n    {if} cevap > rastgele_sayı\n        {print} 'yukarı çık!'\n        tahminler = tahminler\n    {else} cevap = rastgele_sayı\n        {print} 'doğru'\n        tahminler = 10"
             text: Bu kodda hata ayıklayalım!
             debug: 'True'
     16:
@@ -688,7 +688,7 @@ levels:
             text: Bu kodda hata ayıklayalım!
             header: Hata Ayıklama
             debug: 'True'
-            code: "{print} 'Arkadaşlık testi'\n{konular} = ['şarkı', 'film', 'yiyecek', 'içecek']\ncevaplar_oyuncu_1 = []\ncevaplar_oyuncu_2 = []\npuan = 100\n\n{for} i {in} {range} 1 {to} 4\n    cevap = {ask} 'En sevdiğin' konular[i] ' hangisi?'\n{add} cevap {to} cevaplar_oyuncu_1\n\n{print} 'Oyuncu 2, sıra sende!'\n{for} i {in} {range} 0 {to} 4\n    cevap_oyuncu_2 = {ask} 'oyuncu 1'in en sevdiği ' konular ' hangisidir?'\n    {add} cevap_oyuncu_2 {in} cevaplar_oyuncu_2\n    {if} cevaplar_oyuncu_2[2] == cevaplar_oyuncu_1[1]\n        {print} 'Doğru!'\n    {else}\n        {print} 'Yanlış!'\n    puan = puan - 25\n\n{print} 'Oyuncu 2, toplam puanın %' puan\n\n{if} puan = 100\n    {print} 'Sen harika bir arkadaşsın'\n{if} puan < 100 {or} puan >= 50\n    {print} 'Daha iyisini yapabilirsin'\n{else} puan < 50\n    {print} 'Bu kişiyi tanıyor musun ki?!'"
+            code: "{print} 'Arkadaşlık testi'\n{konular} = ['şarkı', 'film', 'yiyecek', 'içecek']\ncevaplar_oyuncu_1 = []\ncevaplar_oyuncu_2 = []\npuan = 100\n\n{for} i {in} {range} 1 {to} 4\n    cevap = {ask} 'En sevdiğin' konular[i] ' hangisi?'\n{add} cevap {to_list} cevaplar_oyuncu_1\n\n{print} 'Oyuncu 2, sıra sende!'\n{for} i {in} {range} 0 {to} 4\n    cevap_oyuncu_2 = {ask} 'oyuncu 1'in en sevdiği ' konular ' hangisidir?'\n    {add} cevap_oyuncu_2 {in} cevaplar_oyuncu_2\n    {if} cevaplar_oyuncu_2[2] == cevaplar_oyuncu_1[1]\n        {print} 'Doğru!'\n    {else}\n        {print} 'Yanlış!'\n    puan = puan - 25\n\n{print} 'Oyuncu 2, toplam puanın %' puan\n\n{if} puan = 100\n    {print} 'Sen harika bir arkadaşsın'\n{if} puan < 100 {or} puan >= 50\n    {print} 'Daha iyisini yapabilirsin'\n{else} puan < 50\n    {print} 'Bu kişiyi tanıyor musun ki?!'"
     17:
         1:
             header: Seviye 17'ye hoş geldiniz

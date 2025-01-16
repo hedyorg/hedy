@@ -67,7 +67,7 @@ adventures:
                     {print} Bir ses duydular
                     hayvanlar {is} 🐿, 🦔, 🦇, 🦉
                     hayvan {is} {ask} Ne olduğunu düşünüyorsun?
-                    {add} hayvan {to} hayvanlar
+                    {add} hayvan {to_list} hayvanlar
                     {print} bu bir hayvanlar {at} {random}
                     ```
                 story_text_3: |
@@ -75,7 +75,7 @@ adventures:
 
                     ### Alıştırma
                     Önceki seviyelerdeki hikayenizi bu seviyeye kopyalayın.
-                    Bu seviyede, 3 yeni komut öğrendiniz `{at} {random}` , `{add} {to}` ve `{remove} {from}`.
+                    Bu seviyede, 3 yeni komut öğrendiniz `{at} {random}` , `{add} {to_list}` ve `{remove} {from}`.
                     Hikayenize yeni kod satırları ekleyin, böylece tüm yeni komutlar hikayenizde en az bir kez yer alsın.
                 example_code_3: |
                     ```
@@ -266,7 +266,7 @@ adventures:
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: ekle_çıkar_komutu
-        description: '{add} {to} ve {remove} {from} komutlarına giriş'
+        description: '{add} {to_list} ve {remove} {from} komutlarına giriş'
         levels:
             3:
                 story_text: |
@@ -276,7 +276,7 @@ adventures:
                     ```
                     hayvanlar {is} köpek, kedi, kanguru
                     sevilen {is} {ask} En sevdiğin hayvan hangisi?
-                    {add} sevilen {to} hayvanlar
+                    {add} sevilen {to_list} hayvanlar
                     {print} Benim seçimim hayvanlar {at} {random}
                     ```
                 story_text_2: |
@@ -1701,7 +1701,7 @@ adventures:
                 story_text: |
                     Papağanınıza `{add}` ile yeni bir kelime öğretin.
                     ### Alıştırma
-                    Kodun çalışması için `{add} {to}` komutunu ekleyebilir misiniz?
+                    Kodun çalışması için `{add} {to_list}` komutunu ekleyebilir misiniz?
                 example_code: |
                     ```
                     kelimeler {is} gaak, Hedy
@@ -1721,7 +1721,7 @@ adventures:
                     kelimeler {is} gaak, Hedy
                     {print} _ Papağanınızı eğitin! _
                     yeni_kelime {is} {ask} _ Ona hangi kelimeyi öğretmek istiyorsunuz? _
-                    {add} yeni_kelime {to} kelimeler
+                    {add} yeni_kelime {to_list} kelimeler
                     {print} _ 🧒 Hadi _ new_word _ de, Hedy!_
                     {print} _ 🦜 _ kelimeler {at} {random}
                     ```
@@ -1736,7 +1736,7 @@ adventures:
                     kelimeler {is} gaak, Hedy
                     {print} 'Papağanınızı eğitin!'
                     yeni_kelime {is} {ask} 'Ona hangi kelimeyi öğretmek istiyorsunuz?'
-                    {add} yeni_kelime {to} kelimeler
+                    {add} yeni_kelime {to_list} kelimeler
                     dediği_kelime {is} kelimeler {at} {random}
                     {print} '🧒 Hadi ' new_word ' de, Hedy!'
                     {print} '🦜 ' dediği_kelime

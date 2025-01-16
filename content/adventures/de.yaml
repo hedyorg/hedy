@@ -67,7 +67,7 @@ adventures:
                     {print} Er hört ein Geräusch
                     tiere {is} 🐿, 🦔, 🦇, 🦉
                     tier {is} {ask} Was denkst du ist es?
-                    {add} tier {to} tiere
+                    {add} tier {to_list} tiere
                     {print} Es war das tiere {at} {random}
                     ```
                 story_text_3: |
@@ -75,7 +75,7 @@ adventures:
 
                     ### Übung
                     Kopiere deine Geschichte aus den vorigen Leveln in dieses Level.
-                    In diesem Level hast du 3 neue Befehle gelernt: `{at} {random}` , `{add} {to}` und `{remove} {from}`.
+                    In diesem Level hast du 3 neue Befehle gelernt: `{at} {random}` , `{add} {to_list}` und `{remove} {from}`.
                     Füge neue Zeilen Code zu deiner Geschichte hinzu, sodass alle neuen Befehle mindestens ein Mal in deiner Geschichte vorkommen.
                 example_code_3: |
                     ```
@@ -264,18 +264,18 @@ adventures:
                     {print}('Willkommen in dieser Geschichte!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         description: Einführung von {add} {to} und {remove} {from}
         levels:
             3:
                 story_text: |
                     ## Hinzufügen zu
-                    Du kannst einer Liste mit dem Befehl `{add} {to}` Elemente hinzufügen. Um ein Element zu einer Liste hinzuzufügen, kannst du einfach Folgendes eingeben: `{add} penguin {to} animals` oder du kannst den Befehl `{ask}` wie im Beispielcode verwenden.
+                    Du kannst einer Liste mit dem Befehl `{add} {to_list}` Elemente hinzufügen. Um ein Element zu einer Liste hinzuzufügen, kannst du einfach Folgendes eingeben: `{add} penguin {to_list} animals` oder du kannst den Befehl `{ask}` wie im Beispielcode verwenden.
                 example_code: |
                     ```
                     tiere {is} Hund, Katze, Känguru
                     mag_ich {is} {ask} Welches ist dein Lieblingstier?
-                    {add} mag_ich {to} tiere
+                    {add} mag_ich {to_list} tiere
                     {print} Ich habe tiere {at} {random} gewählt
                     ```
                 story_text_2: |
@@ -847,7 +847,7 @@ adventures:
                     {print} Heute schau wir uns film _wahl an
                     Magst {ask} Magst du den Film?
                     {print} Morgen schauen wir etwas anderes.
-                    {add} film_wahl {to} film_auswahl
+                    {add} film_wahl {to_list} film_auswahl
                     {print} Morgen schauen wir morgigen_film
                     morgigen_film {is} film_auswahl {at} {random}
                     Ich hole uns mal das Popcorn! {print}
@@ -2839,7 +2839,7 @@ adventures:
                     wörter {is} krächz, Hedy
                     {print} _ Trainiere deinen Papagei! _
                     neues_wort {is} {ask} _ Welches Wort möchtest du ihm beibringen? _
-                    {add} neues_wort {to} wörter
+                    {add} neues_wort {to_list} wörter
                     {print} _ 🧒 Sage _ neues_wort _, Hedy!_
                     {print} _ 🦜 _ wörter {at} {random}
                     ```
@@ -2854,7 +2854,7 @@ adventures:
                     Wörter {is} Aaaaaaak, Hedy
                     {print} 'Bring deinem Papagei etwas bei!'
                     neues_Wort {is} {ask} 'Welches Wort willst du ihm beibringen?'
-                    {add} neues_Wort {to} Wörter
+                    {add} neues_Wort {to_list} Wörter
                     gesagtes_Wort {is} Wörter {at} {random}
                     {print} '🧒 Sag ' neues_Wort ', Hedy!'
                     {print} '🦜 ' gesagtes_Wort
