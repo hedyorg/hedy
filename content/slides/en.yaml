@@ -251,7 +251,7 @@ levels:
             text: Let's debug this code!
             editor: |-
                 music_genres {is} rock, pop, metal, indie, jazz
-                chosen_genre is music {at} {random}
+                chosen_genre {is} music {at} {random}
                 {print} Let's listen to chosen genre
                 nice {ask} Do you like that genre?
                 {remove} chosen_genre {from} chosen_genre
@@ -803,9 +803,9 @@ levels:
         4:
             header: Functions!
             text: |-
-                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
 
-                Now, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again.
+                Now, whenever we need that block of code, we just use `{call}` with the function's name to call it up! We don't have to type that block of code again.
         5:
             header: Twinkle Twinkle little star!
             text: |-
@@ -846,7 +846,7 @@ levels:
         1:
             header: Welcome to level 13
             text: |-
-                We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.
+                We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use`{and}` and `{or}` instead.
                 From now on you could also use arguments in your functions.
         2:
             header: The and command
@@ -890,11 +890,11 @@ levels:
 
                 What happens if you make these changes:
                 ```
-                define song with place
-                    print 'My Bonnie is ' place
+                {define} song {with} place
+                    {print} 'My Bonnie is ' place
 
-                answer is ask 'Where is my Bonnie?'
-                call song with answer
+                answer {is} {ask} 'Where is my Bonnie?'
+                {call} song {with} answer
                 ```
             code: |-
                 {define} song {with} place
@@ -911,12 +911,12 @@ levels:
                 Note how the variables and the arguments have the same name. This is allowed.
                 Does it confuse you? Just use different names, that is allowed as well.
                 ```
-                define song with name, place
-                    print 'My ' name ' is ' place
+                {define} song {with} name, place
+                    {print} 'My ' name ' is over the ' place
 
-                name is ask 'Who?'
-                place is ask 'Where are they?'
-                call song with name, place
+                name {is} {ask} 'Who?'
+                place {is} {ask} 'Where are they?'
+                {call} song {with} name, place
                 ```
             code: |-
                 {define} song {with} place
