@@ -26,7 +26,7 @@ levels:
                 * Telefonunuzda kullanmak için kendi uygulamalarınızı oluşturabilirsiniz
         5:
             header: Hedy'de Programlama
-            text: Hedy'de `{print}` gibi özel kodlar kullanırız.
+            text: Hedy'de "`{print}`" gibi özel kodlar kullanırız.
             code: "{print} Hedy'ye hoş geldiniz!"
         6:
             header: Hedy'de Programlama
@@ -34,7 +34,7 @@ levels:
             code: '{print} Hedy''ye hoş geldiniz!'
         7:
             header: Hedy'de Programlama
-            text: Kodun altındaki Kodu Çalıştır düğmesi ile kodu başlatıyoruz.
+            text: Kodun altındaki "Kodu Çalıştır" düğmesi ile kodu başlatıyoruz.
             code: "{print} Hedy'ye hoş geldiniz!"
         8:
             header: Hedy'de Programlama
@@ -55,41 +55,41 @@ levels:
                 Etkileşimli hikayeler oluşturmak için üç metin koduna ihtiyacımız var.
         2:
             text: |-
-                Seviye 1'de kullanabileceğiniz ilk kod `{print}`.
+                Seviye 1'de kullanabileceğiniz ilk kod "`{print}`".
 
-                `{print}` ekranda metin göstermek için kullanılır.
+                "`{print}`" ekranda metin göstermek için kullanılır.
             code: '{print} Bu yazıyı ekranda göster'
-            header: '{print}'
+            header: '`{print}`'
         3:
-            header: '{print} komutu'
+            header: '"`{print}`" komutu'
             text: |-
                 Bu yazdırma komutundan sonraki metni istediğiniz şekilde değiştirebilirsiniz.
 
-                Ya da `{print}` ile başlayan başka bir kod satırı ekleyerek birden fazla satır yazdırabilirsiniz.
+                Ya da "`{print}`" ile başlayan başka kod satırları ekleyerek birden fazla satır yazdırabilirsiniz.
             code: '{print} Hedy''ye hoş geldiniz!
 
                 {print} Artık programlamaya başladık!'
         4:
             text: |-
-                Seviye 1`de kullanabileceğiniz ikinci kod `{ask}`.
+                Seviye 1'de kullanabileceğiniz ikinci kod "`{ask}`".
 
-                `{ask}` cevaplanmasını istediğimiz bir soru sormak için kullanılır.
-            header: '{ask}'
+                "`{ask}`" cevaplanmasını istediğimiz bir soru sormak için kullanılır.
+            header: '`{ask}`'
             code: "{print} Kendi taş kağıt makas oyununa hoş geldin!\n{ask} Hangisini seçeceksin?"
         5:
             text: |-
-                Önceki örnekte görebileceğiniz gibi, eğer `{ask}` komutunu kullanırsanız, bir soru sorabilirsiniz.
+                Önceki örnekte görebileceğiniz gibi, eğer "`{ask}`" komutunu kullanırsanız, bir soru sorabilirsiniz.
                 Ancak cevap çıktı ekranında gösterilmez.
 
-                Eğer verilen cevabın gösterilmesini istiyorsanız, bu seviyenin son komutunu kullanabilirsiniz: `{echo}`.
-                `{echo}` bir `{ask}` komutuna verilen cevabı tekrarlamak için kullanılır.
+                Eğer verilen cevabın gösterilmesini istiyorsanız, bu seviyenin son komutunu kullanabilirsiniz: "`{echo}`".
+                "`{echo}`" komutu bir "`{ask}`" komutuna verilen cevabı ekranda göstermek için kullanılır.
             header: '{echo}'
             code: "{print} Merhaba!\n{ask} Adın ne senin?\n{echo} merhaba"
         6:
             header: Programlama!
             text: |-
-                `{print}`, `{ask}` ve `{echo}` ile artık küçük bir hikaye yazmaya yetecek kadar şey biliyorsunuz.
-                Papağan, Masal, ve Taş Kağıt Makas maceralarını denemek için iyi bir zaman.
+                "`{print}`", "`{ask}`" ve "`{echo}`" ile artık küçük bir hikaye yazmaya yetecek kadar şey biliyorsunuz.
+                Papağan, Hikaye, ve Taş Kağıt Makas maceralarını denemek için iyi bir zaman.
             editor: /hedy/1
         7:
             header: Programlama!
@@ -103,13 +103,13 @@ levels:
             header: Kaplumbağa ile çizim yapmak
             text: Metin ile kodlamayı gördüğümüze göre, şimdi çizim yapma kodlarına bakacağız.
         10:
-            header: 'Kaplumbağa ile çizim yapmak: {forward}'
-            text: '`{forward}` kaplumbağayı ileri hareket ettirmek için kullanılır.'
+            header: 'Kaplumbağa ile çizim yapmak: "`{forward}`"'
+            text: '"`{forward}`" kaplumbağayı ileri hareket ettirmek için kullanılır.'
             code: |-
                 {forward} 50
         11:
-            header: 'Kaplumbağa ile çizim yapmak: {turn}'
-            text: '`{turn}` kaplumbağanın sola veya sağa dönmesini sağlamak için kullanılır.'
+            header: 'Kaplumbağa ile çizim yapmak: "`{turn}`"'
+            text: '"`{turn}`" kaplumbağanın sola veya sağa dönmesini sağlamak için kullanılır.'
             code: |-
                 {forward} 50
                 {turn} {left}
@@ -132,7 +132,7 @@ levels:
                 Örneğin: bir isim, yaş veya tutulan spor takımı.
         2:
             header: Değişkenler
-            text: Bir değişken oluşturmak veya 'ayarlamak' için `{is}` komutunu kullanırız
+            text: Bir değişken oluşturmak veya 'ayarlamak' için "`{is}`" komutunu kullanırız
             code: "isim {is} Hedy\nyaş {is} 15\n{print} isim yaş yaşındadır"
         3:
             header: Etkileşimli
@@ -148,15 +148,15 @@ levels:
             text: Artık değişkenleri kullanabildiğimize göre, tek bir `{echo}` komutu yerine birden fazla değişkeni birlikte kullanabiliriz.
             code: "isim {is} {ask} Adın ne senin?\n{print} Merhaba isim\nyaş {is} {ask} Kaç yaşındasın?\n{print} isim yaş yaşındadır."
         5:
-            header: Uyu
-            text: Kodu bir süreliğine duraklatmak için `{sleep}` komutunu da kullanabilirsiniz.
+            header: '{sleep}'
+            text: Ayrıca, kodu bir süreliğine duraklatmak için "`{sleep}`" komutunu kullanabilirsiniz.
             code: "{print} En sevdiğim renk...\n{sleep} 2\n{print} yeşil!"
         6:
-            header: Uyu 5
+            header: '{sleep} 5'
             text: |-
-                Duraklamanın daha uzun olmasını istiyorsanız `{sleep}` komutundan sonra bir sayı ekleyebilirsiniz.
+                Duraklamanın daha uzun olmasını istiyorsanız "`{sleep}`" komutundan sonra bir sayı ekleyebilirsiniz.
 
-                İsterseniz,` {sleep}` komutunun süresine karar vermek için bir sayı yerine bir değişken bile kullanabilirsiniz.
+                İsterseniz, "` {sleep}`" komutunun süresine karar vermek için bir sayı yerine bir değişken bile kullanabilirsiniz.
             code: "süre {is} 10\n{print} En sevdiğim renk...\n{sleep} süre\n{print} yeşil!"
         8:
             header: Programlama eğlencesi başlasın!
@@ -245,7 +245,7 @@ levels:
             text: |-
                 Değişken adları bir cümlenin ortasında kullanıldığında, değişkenleri tırnak işaretlerinin dışında bırakmanız gerekir.
                 Ancak cümlenin geri kalanında tırnak işaretlerine ihtiyaç vardır. Bu şuna benziyor:
-            code: "isim {is} Harry\n{print} 'Marhaba ' isim ', nasılsın?'"
+            code: "isim {is} Harry\n{print} 'Merhaba ' isim ', nasılsın?'"
         8:
             header: Tırnak işaretleri ve kısaltmalar
             text: |-
@@ -375,11 +375,11 @@ levels:
             code: "{print} 'Prens sürekli yardım istiyordu.'\n{repeat} 5 {times} {print} 'Yardım edin!'\n{print} 'Neden kimse bana yardım etmiyor?'"
         3:
             header: Yazdır komutunu unutmayın
-            text: tekrarla komutunu kullanırken `{print}` komutunu unutmayın.
+            text: '`{repeat}` komutunu kullanırken `{print}` komutunu unutmayın.'
             debug: 'True'
             code: "{repeat} 5 {times} 'Yardım edin!'"
         4:
-            header: Bir sor komutunu tekrarlayın
+            header: Bir `{ask}` komutunu tekrarlayın
             text: Ayrıca bir `{ask}`, `{if}` veya `{else}` komutunu da birden çok kez tekrarlayabilirsiniz.
             code: "{repeat} 2 {times} cevap = {ask} 'Bir soruyu birden fazla kez sorabileceğinizi biliyor muydunuz?'\n{if} cevap {is} evet {repeat} 2 {times} {print} 'Bunu zaten biliyordunuz!'\n{else} {repeat} 3 {times} {print} 'Yeni bir şey öğrendiniz!'"
         6:
@@ -494,7 +494,7 @@ levels:
         2:
             header: için komutu
             text: '`{for}` ile bir liste oluşturabilir ve bu listedeki tüm öğeleri kullanabilirsiniz. `{for}`, `{repeat}` gibi bir blok oluşturur ve bu yüzden bloktaki tüm satırların girinti ile başlaması gerekir (4 boşluk).'
-            code: "hayvanlar = köpek, kedi, blob balığı\n{for} hayvan {in} hayvanlar\n    {print} 'Benim sevdiğim ' hayvan"
+            code: "hayvanlar = köpek, kedi, balon balığı\n{for} hayvan {in} hayvanlar\n    {print} 'Benim sevdiğim ' hayvan"
         3:
             header: için komutu
             text: 'Burada `{for}` komutunun başka bir örneğini görüyorsunuz:'
@@ -582,7 +582,7 @@ levels:
         3:
             header: '`{or}` komutu'
             text: |-
-                `{or}`, `{and}` komutuyla aynı şekilde çalışır, ancak iki ifadeden yalnızca birinin doğru olması yeterlidir.
+                `{or}` komutu, `{and}` komutuyla aynı şekilde çalışır, ancak iki ifadeden yalnızca birinin doğru olması yeterlidir.
 
                 Şimdi `{and}` yerine `{or}` yazdığınızda ne olacağını görelim.
             code: "isim = {ask} 'Adınız nedir?'\n{if} isim {is} 'Hedy' {or} isim {is} 'hedy'\n    {print} 'Hoş geldiniz!!'"
@@ -591,7 +591,7 @@ levels:
             text: Seviye 13'teki maceraların tadını çıkarın!
         6:
             header: Değişkenlerle örnek
-            text: "Fonksiyonları bir soru ile birleştirip kullanabilirsiniz\n\nBu değişiklikleri yaparsanız ne olur?\n```\n{define} şarkı {with} yer\n    {print} 'My Bonnie is ' yer\n\ncevap {is} {ask} 'Where is my Bonnie?'\n{call} şarkı {with} cevap\n```"
+            text: "Fonksiyonları bir soru ile birleştirip kullanabilirsiniz\n\nBu değişiklikleri yaparsanız ne olur?\n```\n{define} şarkı {with} yer\n    {print} 'My Bonnie is over the ' yer\n\ncevap {is} {ask} 'Where is my Bonnie?'\n{call} şarkı {with} cevap\n```"
             code: "{define} şarkı {with} yer\n    {print} 'My Bonnie is over the ' yer\n\n{call} şarkı {with} 'ocean'\n{call} şarkı {with} 'sea'\n{call} şarkı {with} 'ocean'"
         8:
             header: Hata Ayıklama
@@ -712,7 +712,7 @@ levels:
     18:
         1:
             header: Seviye 18'e hoş geldiniz
-            text: Tebrikler! Hedy'nin son seviyesine ulaştınız! Burada oluşturduğunuz kodu replit veya PyCharm gibi gerçek Python ortamlarına kopyalayabilir ve orada öğrenmeye devam edebilirsiniz! Ancak Python'un yalnızca İngilizce komutları okuyabildiğini unutmayın, bu nedenle başka diller kullanıyorsanız, şimdi sayfayı İngilizce'ye geçirmeniz gerekecektir.
+            text: Tebrikler! Hedy'nin son seviyesine ulaştınız! Burada oluşturduğunuz kodu replit veya PyCharm gibi gerçek Python ortamlarına kopyalayabilir ve orada öğrenmeye devam edebilirsiniz! Ancak Python'un yalnızca İngilizce komutları okuyabildiğini unutmayın, bu nedenle başka Türkçe veya başka diller kullanıyorsanız, şimdi anahtar kelime dilini profil ayarlarında İngilizce'ye geçirmeniz gerekecektir.
         2:
             header: Python yolu
             text: |-
