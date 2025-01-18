@@ -173,35 +173,35 @@ levels:
         2:
             header: Bir liste yapmak
             text: |-
-                Bir listeyi yine `{is}` ile yaparsınız.
+                Bir listeyi yine "`{is}`" komutu ile yaparsınız.
 
                 Listenizdeki öğeleri virgülle ayırmalısınız.
             code: hayvanlar {is} köpekler, kediler, kangurular
         3:
             header: Rastgele
             text: |-
-                Listeyi `{at}` `{random}` komutu ile kullanabilirsiniz.
+                Listeyi "`{at}` `{random}`" komutu ile kullanabilirsiniz.
                 Bilgisayar listeden rastgele bir öğe seçecektir.
                 Bu kodu her çalıştırdığınızda çıktı farklı olacaktır.
             code: "hayvanlar {is} köpekler, kediler, kangurular\n{print} hayvanlar {at} {random}"
         4:
-            header: Cümle içinden rastgele
-            text: Bir cümle içinde de `{at}` `{random}` komutunu kullanabilirsiniz.
+            header: Cümle içinde rastgele
+            text: Bir cümle içinde de "`{at}` `{random}`" komutunu kullanabilirsiniz.
             code: "hayvanlar {is} köpekler, kediler, kangurular\n{print} En sevdiğim hayvan hayvanlar {at} {random}"
         5:
-            header: İçine Ekle
+            header: '`{add} {to}`'
             text: |-
-                Listeye `{add}` `{to_list}` komutu ile öğe ekleyebilirsiniz.
+                Listeye "`{add}` `{to_list}`" komutu ile öğe ekleyebilirsiniz.
 
-                Listeye neyin ekleneceğini seçebilir veya `{add}` `{to_list}` komutunu `{ask}` komutuyla birlikte kullanabilirsiniz.
+                Listeye neyin ekleneceğini seçebilir veya "`{add}` `{to_list}`" komutunu "`{ask}`" komutuyla birlikte kullanabilirsiniz.
                 Bu şekilde, listeye ne ekleneceğine oyuncunun karar vermesine izin verebilirsiniz.
             code: "hayvanlar {is} köpek, kedi, kanguru\nsevilen {is} {ask} En sevdiğin hayvan hangisi?\n{add} sevilen {to_list} hayvanlar\n{print} Benim seçimim hayvanlar {at} {random}"
         6:
-            header: İçinden kaldır
+            header: '`{remove} {from}`'
             text: |-
-                `{add}` `{to_list}` komutunun tersi `{remove}` `{from}` komutudur.
+                "`{add}` `{to_list}`" komutunun tersi "`{remove}` `{from}`" komutudur.
                 Bu komut listeden bir öğeyi kaldırır.
-            code: "hayvanlar {is} köpek, kedi, kanguru\nsevilmeyen {is} {ask} Hangi hayvanı sevmiyorsun?\n{remove} sevilmeyen {from} hayvanlar\n{print}Benim seçimim hayvanlar {at} {random}"
+            code: "hayvanlar {is} köpek, kedi, kanguru\nsevilmeyen {is} {ask} Hangi hayvanı sevmiyorsun?\n{remove} sevilmeyen {from} hayvanlar\n{print} Benim seçimim hayvanlar {at} {random}"
         8:
             header: Hadi işe koyulalım!
             text: Seviye 3'teki maceraların tadını çıkarın!
@@ -227,17 +227,17 @@ levels:
 
                 Bu aynı zamanda kodumuzun 'gerçek' Python koduna daha çok benzemesini sağlar.
         4:
-            header: Yazdır ile tırnak işaretleri
-            text: 'Artık `{print}` komutunu her kullandığınızda, ekranda görünmesini istediğiniz metni tırnak içine almanız gerekir.'
+            header: '"`{print}`" komutu ile tırnak işaretleri'
+            text: 'Artık "`{print}`" komutunu her kullandığınızda, ekranda görünmesini istediğiniz metni tırnak içine almanız gerekir. Tek veya çift tırnak olabilir, önemli olan açan ve kapatanın aynı olmasıdır.'
             code: "{print} 'tırnak içinde yazdıralım!'"
         5:
-            header: Sor ile tırnak işaretleri kullanalım
-            text: Bu aynı zamanda `{ask}` komutu için de geçerlidir.
+            header: '"`{ask}`" komutu ile tırnak işaretleri'
+            text: Bu aynı zamanda "`{ask}`" komutu için de geçerlidir.
             code: isim {is} {ask} 'isim alayım lütfen?'
         6:
             header: Tırnak işaretleri ve değişkenler
             text: |-
-                Değişken adlarının ekrana yazdırılmasını istemezsiniz.
+                Değişken adlarının ekrana yazdırılmasını istemezsiniz. Bunu yerine içlerine koyduğumuz değerlerin yazılmasını isteriz.
                 Bu nedenle değişkenler tırnak işaretlerinin dışında bırakılmalıdır, bunun gibi:
             code: "isim {is} Harry\n{print} 'Merhaba ' isim"
         7:
@@ -249,18 +249,18 @@ levels:
         8:
             header: Tırnak işaretleri ve kısaltmalar
             text: |-
-                Dikkatli olun! Artık tırnak işareti kullandığınıza göre, kısaltmalarda ve özel isimlerde kesme işareti kullanamazsınız.
+                Dikkatli olun! Artık tırnak işareti kullandığınıza göre, kısaltmalarda ve özel isimlerde kesme işareti kullanamazsınız. (Bundan kaçınmaya alternatif bir çözüm, cümleleri çift tırnak arasına almaktır, deneyip görün)
 
                 Lütfen aşağıdaki ekranda "Hedy'nin" veya "TC'de" gibi bir özel isim veya kısaltma yazdırmayı deneyin ve ne olduğunu görün...
             debug: 'True'
-            code: "{print} 'Bu işe yaramaz: Hedy'yi çağır!'"
+            code: "{print} 'Böyle işe yaramaz: Hedy'yi çağır!'"
         9:
-            header: Temizle
+            header: '{clear}'
             text: |-
-                Bu seviyede {clear} komutunu da öğreneceksiniz.
+                Bu seviyede "`{clear}`" komutunu da öğreneceksiniz.
                 Bu komut ile çıktı ekranınızdaki tüm metni silebilirsiniz.
 
-                Her zaman uyku komutu kullanmaya da dikkat edin. Eğer bunu yapmazsanız bilgisayar siz okuyamadan tüm metni silecektir!
+                Bununla birlikte her zaman "`{sleep}`" komutunu da kullanmaya da dikkat edin. Eğer bunu yapmazsanız bilgisayar daha siz okuyamadan tüm metni silecektir!
             code: "{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'SÜRPRİZ!'"
         11:
             header: Hazır Ol, Ayarla, Başla!
