@@ -273,41 +273,41 @@ levels:
     5:
         1:
             header: Seviye 5'e hoş geldiniz
-            text: 'Bu seviyede 3 yeni komutu kullanmayı öğreneceksiniz: `{if}`, `{else}` ve `{in}`.'
+            text: 'Bu seviyede 3 yeni komutu kullanmayı öğreneceksiniz: "`{if}`", "`{else}`" ve "`{in}`".'
         2:
-            header: eğer
+            header: '`{if}`'
             text: |-
-                `{if}` komutu iki seçenek arasında seçim yapmanızı sağlar.
+                "`{if}`" komutu iki seçenek arasında seçim yapmanızı sağlar.
                 Bu örnekte, verilen cevap Hedy ise bilgisayar 'güzel' yazdıracaktır.
                 Eğer cevap Hedy değilse, bilgisayar hiçbir şey yapmayacaktır.
             code: "isim {is} {ask} 'Adın ne senin?'\n{if} isim {is} Hedy {print} 'güzel'"
         3:
             header: Yazdırmayı unutmayın
-            text: '`{if}` komutunu kullanırken, `{print}` komutunu kullanmayı unutmayın.
+            text: '"`{if}`" komutunu kullanırken, "`{print}`" komutunu kullanmayı unutmayın.
 
                 Şu kod çalışmayacak!'
             code: "{if} isim {is} Hedy 'güzel'"
             debug: 'True'
         4:
-            header: değilse
+            header: '`{else}`'
             text: |-
-                Bir `{if}` komutu kullanırken, bir `{else}` komutu da ekleyebilirsiniz.
+                Bir "`{if}`" komutu kullanırken, bir "`{else}`" komutu da ekleyebilirsiniz.
                 Eğer cevap Hedy ise, bilgisayar 'güzel' yazacaktır.
                 Ancak cevap başka bir şeyse bilgisayar 'böö' yazacaktır
             code: "{if} isim {is} Hedy {print} 'güzel' {else} {print} 'böö!'"
         5:
             header: Uzun satırlar
             text: |-
-                Hem `{if}` hem de `{else}` komutuna sahip olduğunuzda satırlarınızın çok uzun olabileceğini fark etmiş olabilirsiniz.
+                Hem "`{if}`" hem de "`{else}`" komutuna sahip olduğunuzda satırlarınızın çok uzun olabileceğini fark etmiş olabilirsiniz.
 
                 Komutları ayırmayı ve aşağıdaki gibi 2 satıra koymayı seçebilirsiniz:
             code: "{if} isim {is} Hedy {print} 'güzel'\n{else} {print} 'böö!'"
         6:
             header: Bir başka yeni komut
             text: |-
-                Eğer `{if}` ve `{else}` komutları ile pratik yaptıysanız, `{in}` komutunu da deneyebilirsiniz.
+                Eğer "`{if}`" ve "`{else}`" komutları ile pratik yaptıysanız, "`{in}`" komutunu da deneyebilirsiniz.
 
-                Örneğin `{in}` ile bilgisayarın bir öğenin bir liste içinde olup olmadığını kontrol etmesini sağlayabilirsiniz:
+                Örneğin "`{in}`" ile bilgisayarın bir öğenin bir liste içinde olup olmadığını kontrol etmesini sağlayabilirsiniz:
 
                 Hedy'nin büyük/küçük harfe duyarlı olduğunu lütfen unutmayın. Bu, "yeşil" yerine "Yeşil" yanıtını verirseniz, Hedy'nin "eh işte" yazdıracağı anlamına gelir.
             code: "güzel_renkler {is} yeşil, sarı\nsevilen_renk {is} {ask} 'En sevdiğin renk hangisi?'\n{if} sevilen_renk {in} güzel_renkler {print} 'güzel!'\n{else} {print} 'eh işte'"
