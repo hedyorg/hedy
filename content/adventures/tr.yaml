@@ -2,7 +2,7 @@ adventures:
     story:
         name: Hikaye
         default_save_name: Hikaye
-        description: Hikaye
+        description: Kısa bir hikaye oluşturun
         levels:
             1:
                 story_text: |
@@ -264,7 +264,7 @@ adventures:
                     {print}('Bu hikayeye hoş geldin!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{to_list}{add} {to} & {remove} {from}'
         default_save_name: ekle_çıkar_komutu
         description: '{add} {to_list} ve {remove} {from} komutlarına giriş'
         levels:
@@ -304,7 +304,7 @@ adventures:
                     ```
     and_or_command:
         default_save_name: ve veya
-        description: ve ile veya 'ya giriş
+        description: ve & veya'nın tanıtılması
         levels:
             13:
                 story_text: |-
