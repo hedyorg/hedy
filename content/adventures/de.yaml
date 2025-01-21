@@ -265,7 +265,7 @@ adventures:
                     ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
-        description: Einführung von {add} {to} und {remove} {from}
+        description: Einführung von {add} {to_list} und {remove} {from}
         levels:
             3:
                 story_text: |
@@ -614,7 +614,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Im vorhergehenden Level hast du einen Taschenrechner erstellt. In diesem Level kannst du den Code erweitern, so dass er mehrere Fragen stellt.
+                    In einem vorhergehenden Level hast du einen Taschenrechner erstellt. In diesem Level kannst du den Code erweitern, so dass er mehrere Fragen stellt.
 
                     ### Übung 1
                     Kannst du Zeile 10 vervollständigen, damit das Programm funktioniert?
@@ -631,7 +631,7 @@ adventures:
                         richtige_antwort = Nummer1 * Nummer2
                         {print} 'Was ist ' Nummer1 ' mal ' Nummer2 '?'
                         Antwort = {ask} 'Tippe deine Antwort hier ein...'
-                        {print} 'Deine Antwort ist' Antwort
+                        {print} 'Deine Antwort ist ' Antwort
                         {if} _ {is} _
                             Punkte = Punkte + 1
                     {print} 'Großartig gemacht! Dein Punktestand ist... ' Punkte ' von 10!'
@@ -764,7 +764,7 @@ adventures:
 
                     ### Übung 3
                     Willst du dein Programm weiter verbessern? Großartig! Das letzte Programm konnte nur den Durchschnitt von einer Schüler:in berechnen. Es wäre aber besser, die Durchschnitt von allen Schüler:innen zu berechnen, die du willst.
-                    Wie sagen dir nicht, wie du es machen sollst, geben dir aber einen Hinweis: Beginne deinen Code in Zeile 1 mit {define} berechne_notendurchschnitt {with} schüler_in.
+                    Wir sagen dir nicht, wie du es machen sollst, geben dir aber einen Hinweis: Beginne deinen Code in Zeile 1 mit {define} berechne_notendurchschnitt {with} schüler_in.
                 example_code: |
                     ```
                     # Benutze deinen eigenen Code aus dem letzten Abenteuer.
@@ -1235,9 +1235,10 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Willkommen bei Hedy! In Level 1 kannst du anfangen eine Geschichte auszugeben.
+                    Willkommen bei Hedy! Hier kannst du Schritt für Schritt Programmieren lernen.
 
-                    Probiere den Code selbst mit der grünen Schaltfläche 'Programm ausführen' unter dem Programmierfeld aus.
+                    Probiere den Code selbst! Die gelbe Schaltfläche kopiert den Beispielcode in das Programmierfeld.
+                    Mit der grünen Schaltfläche 'Programm ausführen' unter dem Programmierfeld wird der Code ausgeführt.
 
                     Bereit? Dann gehe zum nächsten Abenteuer um deinen ersten Befehl zu lernen!
                 example_code: |
@@ -2456,6 +2457,7 @@ adventures:
                     {print} '5 plus 5 ist ' 5 + 5
                     {print} '5 minus 5 ist ' 5 - 5
                     {print} '5 mal 5 ist ' 5 * 5
+                    {print} '5 dividiert durch 5 ist ' 5 / 5
                     ```
             12:
                 story_text: |-
@@ -2475,8 +2477,6 @@ adventures:
                     b = 'Welt!'
                     {print} a + b
                     ```
-
-                    {print} 2.5 + 2.5
     music:
         name: Musik
         default_save_name: Musik
@@ -2941,7 +2941,8 @@ adventures:
                     Du kannst dazu nutzen, die Schildkröte vorwärts gehen und sich drehen zu lassen.
 
                     ### Übung
-                    Der Code, den du in Level 5 gesehen hast, prüft die Taste nur einmal. Kopiere den Beispielcode und füge ein `{repeat}` hinzu, so dass du die Tasten mehrmals drücken kannst. Benutze diesen Code, um etwas Schönes zu zeichnen.
+                    Der Code, den du in Level 5 gesehen hast, prüft die Taste nur einmal. Kopiere den Beispielcode und füge ein `{repeat}` hinzu, so dass du die Tasten mehrmals drücken kannst.
+                    Benutze diesen Code, um etwas Schönes zu zeichnen.
             9:
                 story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n**Extra** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
                 example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
@@ -2970,11 +2971,13 @@ adventures:
             18:
                 example_code_2: |
                     ```
-                    temperature = 25
-                    {print}('It is ', temperature, ' degrees outside')
+                    temperatur = 25
+                    {print}('Draußen sind ', temperatur, ' Grad')
                     ```
-
-                    {print}('My name is ', name)
+                    ```
+                    name = 'Hedy'
+                    {print}('Mein Name ist ', name)
+                    ```
         name: '{print}'
         description: Einführung des {print} Befehls
         default_save_name: drucke
@@ -3530,7 +3533,7 @@ adventures:
                 example_code: |
                     ```
                     Auswahlmöglichkeiten {is} Schere, Stein, Papier
-                    {print} Auswahlmöglichkeiten {at} {random}
+                    {print} Auswahlmöglichkeiten _
                     ```
                 story_text_2: |
                     **Extra** Mache ein Spiel für 2 Spieler! Frage die Spieler nach ihrem Namen. Lass dann den Computer zufällig die Wahl treffen.
