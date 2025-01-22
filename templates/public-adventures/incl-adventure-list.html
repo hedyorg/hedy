@@ -1,92 +1,15 @@
 <div class="flex gap-4">
   <div class="flex-none w-64 relative" style="max-height: 40em;">
-    <div class="overflow-auto bg-white shadow-md htmx-resetscroll pt-8 pb-16 h-full"
+    <div class="overflow-auto bg-white shadow-md htmx-resetscroll h-full"
       data-cy="search-results">
 
-      {% for adventure in adventures %}
-      <div
-        class="adventure-item text-gray-800 flex flex-col cursor-pointer p-2 border-b border-gray-300"
-        tabindex="0"
-        _="on click remove .selected from .adventure-item then add .selected to me end on keyup[key is 'Enter'] send click to me"
-        hx-get="/public-adventures/preview/{{ adventure.id }}" hx-target="#preview-div"
-        >
-        <div class="flex-1">
-          <span class="text-xl min-h-28">{{ adventure.name }}</span>
-        </div>
-        {#
-        <div alt="This adventure has been cloned {{ adventure.cloned_times }} times">
-          {{ adventure.cloned_stars }}
-          {{ adventure.cloned_times }}
-          {% for x in range(adventure.cloned_stars) %}
-            <span class="fa fa-star text-green-500"></span>
-          {% endfor %}
-        </div>
-        #}
-        <div class="flex-none text-xs">
-          <div class="flex">
-            <div class="flex-1 text-gray-500">{{ adventure.creator }}</div>
-            <div>
-              <span class="flex-1 text-gray-500" title="{{ adventure.date|jsts_to_unix|datetimeformat }}">
-                {{ adventure.date|jsts_to_unix|format_date_rel }}
-              </span>
-            </div>
-          </div>
-          <div class="flex flex-row">
-            <div class="flex-1 text-gray-500">{{_('level')}} {{ adventure.levels|join(', ') }}</div>
-            <div class="flex-none">
-              {% if adventure.solution_example %}
-                <span class="fa fa-book text-gray-500" title="{{_('this_adventure_has_an_example_solution')}}"></span>
-              {% endif %}
-            </div>
-          </div>
-          {% if adventure.tags %}
-            <div>
-              {% for tag in adventure.tags %}
-              <span class="inline-block bg-pink-200 rounded-full px-2 text-xs text-gray-700 mr-1 mb-1">{{ tag }}</span>
-              {% endfor %}
-            </div>
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
-
-      {# Pagination buttons #}
-      <div class="flex gap-2 w-full items-stretch mt-4 p-2">
-        <div class="flex-1">
-        {% if prev_page_token %}
-          <form hx-get="/public-adventures/" hx-target="#public_adventures_page_div">
-            <input type="hidden" name="selected_lang" value="{{selected_lang}}">
-            <input type="hidden" name="selected_level" value="{{selected_level}}">
-            <input type="hidden" name="q" value="{{q}}">
-            <input type="hidden" name="selected_tag" value="{{selected_tag}}">
-            <input type="hidden" name="page" value="{{prev_page_token}}">
-            <button type="submit"
-              id="prev_button"
-              class="green-btn px-2 w-full h-full">
-              {{_('previous_page')}}<br>«</button>
-          </form>
-        {% endif %}
-        </div>
-        <div class="flex-1">
-        {% if next_page_token %}
-          <form hx-get="/public-adventures/" hx-target="#public_adventures_page_div">
-            <input type="hidden" name="selected_lang" value="{{selected_lang}}">
-            <input type="hidden" name="selected_level" value="{{selected_level}}">
-            <input type="hidden" name="q" value="{{q}}">
-            <input type="hidden" name="selected_tag" value="{{selected_tag}}">
-            <input type="hidden" name="page" value="{{next_page_token}}">
-            <button
-              id="next_button"
-              class="green-btn px-2 w-full h-full">
-              {{_('next_page')}}<br>»</button>
-          </form>
-        {% endif %}
-        </div>
-      </div>
+      {% include "public-adventures/incl-adventure-list-elements.html" %}
     </div>
 
+    <!--
     <div class="inset-x-0 h-12 absolute top-0 bg-gradient-to-b from-white"></div>
     <div class="inset-x-0 h-12 absolute bottom-0 bg-gradient-to-t from-white"></div>
+    -->
   </div>
   {# min-w-0 is necessary to prevent overflowing content #}
   <div class="flex-1 min-w-0">
