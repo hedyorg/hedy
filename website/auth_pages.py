@@ -7,8 +7,8 @@ from config import config
 from safe_format import safe_format
 from hedy_content import ALL_LANGUAGES, COUNTRIES
 from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times, remove_class_preview
-from website.newsletter import create_subscription
 from website.auth import (
+    MAILCHIMP_API_URL,
     RESET_LENGTH,
     SESSION_LENGTH,
     TOKEN_COOKIE_NAME,
@@ -20,11 +20,13 @@ from website.auth import (
     forget_current_user,
     is_admin,
     is_teacher,
+    mailchimp_subscribe_user,
     make_salt,
     password_hash,
     prepare_user_db,
     remember_current_user,
     requires_login,
+    send_email,
     send_email_template,
     send_localized_email_template,
     validate_signup_data,
@@ -178,7 +180,17 @@ class AuthModule(WebsiteModule):
         user, resp = self.store_new_account(body, body["email"].strip().lower())
 
         if not is_testing_request(request) and "subscribe" in body:
-            create_subscription(user["email"], body.get("country"))
+            # If we have a Mailchimp API key, we use it to add the subscriber through the API
+            if MAILCHIMP_API_URL:
+                mailchimp_subscribe_user(user["email"], body["country"])
+            # Otherwise, we send an email to notify about the subscription to the main email address
+            else:
+                send_email(
+                    config["email"]["sender"],
+                    "Subscription to Hedy newsletter on signup",
+                    user["email"],
+                    "<p>" + user["email"] + "</p>",
+                )
 
         # We automatically login the user
         cookie = make_salt()
