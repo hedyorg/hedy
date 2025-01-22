@@ -74,7 +74,7 @@ class PublicAdventuresModule(WebsiteModule):
         # The '/more' endpoint is used only to load elements into the infinite scroll
         # container.
         if request.path.endswith('/more'):
-            return render_template(f"public-adventures/incl-adventure-list-elements.html",
+            return render_template("public-adventures/incl-adventure-list-elements.html",
                                    adventures=adventures,
                                    **query_args)
 
