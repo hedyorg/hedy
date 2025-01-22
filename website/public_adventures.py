@@ -71,13 +71,12 @@ class PublicAdventuresModule(WebsiteModule):
             next_page_token=next_page_token
         )
 
-
         # The '/more' endpoint is used only to load elements into the infinite scroll
         # container.
         if request.path.endswith('/more'):
             return render_template(f"public-adventures/incl-adventure-list-elements.html",
-                adventures=adventures,
-                **query_args)
+                                   adventures=adventures,
+                                   **query_args)
 
         # Otherwise, we return either the full page with the search control for
         # a browser request, or the result chrome with the initial set of results
