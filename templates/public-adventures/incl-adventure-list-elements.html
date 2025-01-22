@@ -1,7 +1,8 @@
 {##
  # List the adventure elements, with infinite scroll
  #
- #
+ # If there is a 'next_page_token', add a div that will fetch
+ # the next block of results from the /public-adventures/more endpoint.
  #}
 {% for adventure in adventures %}
 <div

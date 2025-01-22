@@ -61,18 +61,23 @@ class PublicAdventuresModule(WebsiteModule):
         next_page_token = adventures.next_page_token
 
         adventures = [self.enhance_adventure_for_list(a) for a in adventures]
-        print(request.path)
+
+        # Dictionary with the query & pagination args
+        query_args = dict(
+            selected_level=selected_level,
+            selected_lang=selected_lang,
+            selected_tag=selected_tag,
+            q=q,
+            next_page_token=next_page_token
+        )
+
 
         # The '/more' endpoint is used only to load elements into the infinite scroll
         # container.
         if request.path.endswith('/more'):
             return render_template(f"public-adventures/incl-adventure-list-elements.html",
                 adventures=adventures,
-                selected_level=selected_level,
-                selected_lang=selected_lang,
-                selected_tag=selected_tag,
-                q=q,
-                next_page_token=next_page_token)
+                **query_args)
 
         # Otherwise, we return either the full page with the search control for
         # a browser request, or the result chrome with the initial set of results
@@ -86,14 +91,9 @@ class PublicAdventuresModule(WebsiteModule):
                                available_languages=available_languages,
                                available_levels=available_levels,
                                available_tags=available_tags,
-                               selected_level=selected_level,
-                               selected_lang=selected_lang,
-                               selected_tag=selected_tag,
-                               q=q,
-                               page=page,
 
                                adventures=adventures,
-                               next_page_token=next_page_token,
+                               **query_args,
 
                                user=user,
                                current_page="public-adventures",
