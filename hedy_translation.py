@@ -1,4 +1,4 @@
-from collections import namedtuple
+from collections import namedtuple, defaultdict
 from lark import Token, Transformer, v_args
 from lark.exceptions import VisitError
 import hedy
@@ -7,6 +7,7 @@ from os import path
 import hedy_content
 from website.yaml_file import YamlFile
 import copy
+import re
 
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").
@@ -26,7 +27,9 @@ def keywords_to_dict(lang="nl"):
         YamlFile.for_file(yaml_filesname_with_path).to_dict()
     )
     for k, v in command_combinations.items():
-        command_combinations[k] = v.split("|")
+        words = v.split("|")
+        # Sort the keywords by length descending. This is important for the substitution logic later
+        command_combinations[k] = list(sorted(words, key=len, reverse=True))
 
     return command_combinations
 
@@ -73,6 +76,16 @@ def get_target_keyword(keyword_dict, keyword):
         return keyword
 
 
+MATCH_EDGE_WHITESPACE = re.compile(r'^(\s*).+?(\s*)$')
+
+def make_keyword_string_with_whitespace(matched_substring: str, new_keyword: str):
+    """Make a new keyword string based on the matched substring.
+
+    We retain all whitespace characters at the edge of the source string.
+    """
+    return MATCH_EDGE_WHITESPACE.sub(f'\\1{new_keyword}\\2', matched_substring)
+
+
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """ "Return code with keywords translated to language of choice in level of choice"""
 
@@ -98,23 +111,28 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
         translator = Translator(processed_input)
         translator.transform(program_root)
-        ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
-        # checks whether any error production nodes are present in the parse tree
-        # hedy.is_program_valid(program_root, input_string, level, from_lang)
+        # Build a list of textual substitutions, one per line
+        # { line -> [(start, end, replacement)] }
+        substitutions = defaultdict(list)
 
-        result = processed_input
-        for rule in ordered_rules:
+        lines = processed_input.splitlines()
+        for rule in translator.rules:
             if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
-                lines = result.splitlines()
-                line = lines[rule.line - 1]
-                original = get_original_keyword(keyword_dict_from, rule.keyword, line)
-                target = get_target_keyword(keyword_dict_to, rule.keyword)
-                replaced_line = replace_token_in_line(line, rule, original, target)
-                result = replace_line(lines, rule.line - 1, replaced_line)
+                # Sometimes the rule matches just a keyword, sometimes it matches a keyword
+                # with spaces.
+                line0 = rule.line - 1
+                source_substring = lines[line0][rule.start:rule.end + 1]
+                replaced_substring = make_keyword_string_with_whitespace(source_substring, get_target_keyword(keyword_dict_to, rule.keyword))
 
-        # For now the needed post processing is only removing the 'end-block's added during pre-processing
-        result = "\n".join([line for line in result.splitlines()])
+                substitutions[line0].append((rule.start, rule.end + 1, replaced_substring))
+
+        # Do the actual replacements, taking care to do them back-to-front
+        for line0, subs in sorted(substitutions.items(), reverse=True):
+            for start, end, replacement in sorted(subs, reverse=True):
+                lines[line0] = lines[line0][:start] + replacement + lines[line0][end:]
+
+        result = "\n".join(lines)
         result = result.replace("#ENDBLOCK", "")
 
         # we have to reverse escaping or translating and retranslating will add an unlimited number of slashes
@@ -177,16 +195,6 @@ def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, en
             if rule.line < end_line or (rule.line == end_line and rule.end <= end_column):
                 return rule.value
     return None
-
-
-def get_original_keyword(keyword_dict, keyword, line):
-    for word in keyword_dict[keyword]:
-        if word in line:
-            return word
-
-    # If we can't find the keyword, it means that it isn't part of the valid keywords for this language
-    # so return original instead
-    return keyword
 
 
 @v_args(tree=True)
