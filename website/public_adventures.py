@@ -67,12 +67,12 @@ class PublicAdventuresModule(WebsiteModule):
         # container.
         if request.path.endswith('/more'):
             return render_template(f"public-adventures/incl-adventure-list-elements.html",
-                adventures=adventures,
-                selected_level=selected_level,
-                selected_lang=selected_lang,
-                selected_tag=selected_tag,
-                q=q,
-                next_page_token=next_page_token)
+                                   adventures=adventures,
+                                   selected_level=selected_level,
+                                   selected_lang=selected_lang,
+                                   selected_tag=selected_tag,
+                                   q=q,
+                                   next_page_token=next_page_token)
 
         # Otherwise, we return either the full page with the search control for
         # a browser request, or the result chrome with the initial set of results
