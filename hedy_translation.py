@@ -2,7 +2,6 @@ from collections import namedtuple, defaultdict
 from lark import Token, Transformer, v_args
 from lark.exceptions import VisitError
 import hedy
-import operator
 from os import path
 import hedy_content
 from website.yaml_file import YamlFile
