@@ -77,6 +77,7 @@ def get_target_keyword(keyword_dict, keyword):
 
 MATCH_EDGE_WHITESPACE = re.compile(r'^(\s*).+?(\s*)$')
 
+
 def make_keyword_string_with_whitespace(matched_substring: str, new_keyword: str):
     """Make a new keyword string based on the matched substring.
 
@@ -122,7 +123,8 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
                 # with spaces.
                 line0 = rule.line - 1
                 source_substring = lines[line0][rule.start:rule.end + 1]
-                replaced_substring = make_keyword_string_with_whitespace(source_substring, get_target_keyword(keyword_dict_to, rule.keyword))
+                replaced_substring = make_keyword_string_with_whitespace(
+                    source_substring, get_target_keyword(keyword_dict_to, rule.keyword))
 
                 substitutions[line0].append((rule.start, rule.end + 1, replaced_substring))
 
