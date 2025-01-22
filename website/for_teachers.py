@@ -19,7 +19,6 @@ from datetime import date
 
 from website.server_types import SortedAdventure
 from website.flask_helpers import render_template
-from website.newsletter import add_class_customized_to_subscription
 from website.auth import (
     is_admin,
     is_teacher,
@@ -899,7 +898,6 @@ class ForTeachersModule(WebsiteModule):
             customizations["other_settings"].remove("hide_parsons")
 
         self.db.update_class_customizations(customizations)
-        add_class_customized_to_subscription(user['email'])
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
 
         return render_partial('customize-class/partial-sortable-adventures.html',
@@ -937,7 +935,6 @@ class ForTeachersModule(WebsiteModule):
                                            is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
         adventures[int(level)].remove(sorted_adventure)
         self.db.update_class_customizations(customizations)
-        add_class_customized_to_subscription(user['email'])
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
 
         return render_partial('customize-class/partial-sortable-adventures.html',
@@ -981,7 +978,6 @@ class ForTeachersModule(WebsiteModule):
         self.reorder_adventures(adventures[int(level)], from_sorted_adv_class=True)
         self.reorder_adventures(customizations['sorted_adventures'][level])
         self.db.update_class_customizations(customizations)
-        add_class_customized_to_subscription(user['email'])
 
         return render_partial('customize-class/partial-sortable-adventures.html',
                               level=level,
@@ -1359,7 +1355,6 @@ class ForTeachersModule(WebsiteModule):
         }
 
         self.db.update_class_customizations(customizations)
-        add_class_customized_to_subscription(user['email'])
         response = {"success": gettext("class_customize_success")}
 
         return make_response(response, 200)
@@ -1785,7 +1780,6 @@ class ForTeachersModule(WebsiteModule):
 
         self.reorder_adventures(customizations['sorted_adventures'][level])
         self.db.update_class_customizations(customizations)
-        add_class_customized_to_subscription(user['email'])
 
     @route("/create-adventure/", methods=["POST"])
     @route("/create-adventure/<class_id>", methods=["POST"])
