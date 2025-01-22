@@ -433,6 +433,14 @@ def task_devdb():
     )
 
 
+def task_precommit():
+    """Run the precommit validations."""
+    return dict(
+        title=lambda _: 'Precommit checks',
+        actions=['pre-commit run --show-diff-on-failure --color=always --all-files'],
+    )
+
+
 def task__offline():
     """Build the offline Hedy distribution."""
 
