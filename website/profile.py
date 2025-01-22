@@ -1,5 +1,7 @@
 import datetime
+import hashlib
 
+import requests
 from flask import make_response, request, session
 from website.flask_helpers import gettext_with_fallback as gettext
 
@@ -7,15 +9,17 @@ from safe_format import safe_format
 from hedy_content import ALL_KEYWORD_LANGUAGES, ALL_LANGUAGES, COUNTRIES
 from utils import is_testing_request, timems, valid_email
 from website.auth import (
+    MAILCHIMP_API_HEADERS,
+    MAILCHIMP_API_URL,
     SESSION_LENGTH,
     create_verify_link,
+    mailchimp_subscribe_user,
     make_salt,
     password_hash,
     remember_current_user,
     requires_login,
     send_email_template,
 )
-from website.newsletter import update_subscription
 
 from .database import Database
 from .website_module import WebsiteModule, route
@@ -67,7 +71,7 @@ class ProfileModule(WebsiteModule):
         if "email" in body:
             email = body["email"].strip().lower()
             old_user_email = user.get("email")
-            if email != old_user_email:
+            if email != user.get("email"):
                 exists = self.db.user_by_email(email)
                 if exists:
                     return make_response(gettext("exists_email"), 403)
@@ -91,6 +95,19 @@ class ProfileModule(WebsiteModule):
                         # Add a notification to the response, still process the changes
                         print(f"Profile changes processed for {user['username']}, mail sending invalid")
 
+                # We check whether the user is in the Mailchimp list.
+                if not is_testing_request(request) and MAILCHIMP_API_URL:
+                    # We hash the email with md5 to avoid emails with unescaped characters triggering errors
+                    request_path = (
+                        MAILCHIMP_API_URL + "/members/" + hashlib.md5(old_user_email.encode("utf-8")).hexdigest()
+                    )
+                    r = requests.get(request_path, headers=MAILCHIMP_API_HEADERS)
+                    # If user is subscribed, we remove the old email from the list and add the new one
+                    if r.status_code == 200:
+                        r = requests.delete(request_path, headers=MAILCHIMP_API_HEADERS)
+                        self.db.get_username_role(user["username"])
+                        mailchimp_subscribe_user(email, body["country"])
+
         username = user["username"]
 
         updates = {}
@@ -99,14 +116,6 @@ class ProfileModule(WebsiteModule):
                 updates[field] = body[field]
             else:
                 updates[field] = None
-
-        if not is_testing_request(request):
-            current_email = user.get('email')
-            current_country = user.get('country')
-            new_email = body.get('email', '').strip().lower()
-            new_country = body.get('country')
-            if current_email != new_email or current_country != new_country:
-                update_subscription(current_email, new_email, new_country)
 
         if updates:
             self.db.update_user(username, updates)
