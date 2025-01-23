@@ -3612,6 +3612,8 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
         grammar,
         str(sys.version_info[:2]),
         str(parser_opts),
+        # When we upgrade Lark, make sure to not load cached parsers from old versions
+        str(lark.__version__),
     )).encode()).hexdigest()
 
     cached_parser_file = f"cached-parser-{level}-{lang}-{unique_parser_hash}.pkl"
