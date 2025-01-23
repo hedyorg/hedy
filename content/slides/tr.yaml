@@ -156,7 +156,7 @@ levels:
             text: |-
                 Duraklamanın daha uzun olmasını istiyorsanız "`{sleep}`" komutundan sonra bir sayı ekleyebilirsiniz.
 
-                İsterseniz, "` {sleep}`" komutunun süresine karar vermek için bir sayı yerine bir değişken bile kullanabilirsiniz.
+                İsterseniz, "`{sleep}`" komutunun süresine karar vermek için bir sayı yerine bir değişken bile kullanabilirsiniz.
             code: "süre {is} 10\n{print} En sevdiğim renk...\n{sleep} süre\n{print} yeşil!"
         8:
             header: Programlama eğlencesi başlasın!
@@ -165,7 +165,7 @@ levels:
             text: Bir kodun hatalarını ayıklamak, koddaki hatalardan kurtulmak demektir. Gelin bu kodda birlikte hata ayıklayalım. Hata ayıklayıcıyı başlatmak için uğur böceği düğmesine tıklayın.
             debug: 'True'
             header: Hata Ayıklama
-            code: "{print} Donut dükkanına hoş geldiniz!\ndolgu {is} İçinde ne tür bir dolgu istersiniz?\n{print} Seçimin... Dolgu! Hmm!\nsos {ask} Üstüne ne tür bir sos istersiniz?\nsos çok lezzetli!\n{print} Gidip çöreğini getireyim. {sleep}\n{print} Al bakalım! sos soslu bir dolgu dolu çörek!\n{ask} İyi günler dilerim!"
+            code: "{print} Donut dükkanına hoş geldiniz!\ndolgu {is} İçinde ne tür bir dolgu istersiniz?\n{print} Seçimin... Dolgu! Hmm!\nsos {ask} Üstüne ne tür bir sos istersiniz?\nsos çok lezzetli!\n{print} Gidip çöreğini getireyim. {sleep}\n{print} Al bakalım! sos soslu dolgu dolgulu bir çörek!\n{ask} İyi günler dilerim!"
     3:
         1:
             header: Seviye 3'e hoş geldiniz
@@ -267,7 +267,7 @@ levels:
             text: Seviye 4'teki maceraların tadını çıkarın!
         10:
             header: Hata Ayıklama
-            code: "{clear}\n{print} Sahile gitmek için ne güzel bir gün!\n{ask} 'Kumdan kale mi yapmak yoksa okyanusta yüzmek istersin?'\n{print} 'Demek aktivite istiyorsunuz '\n{print} 'Hedy'yi de çağıralım'\n{print} 'Şu güzel deniz kabuklarına bak!'\nrenkler {is} 'turuncu, gümüş, beyaz, kahverengi'\n{print} 'Renklerden en sevdiğim renkler {at} {random}'\nseçim{is} {ask} Hangisini seviyorsun?"
+            code: "{clear}\n{print} Sahile gitmek için ne güzel bir gün!\n{ask} 'Kumdan kale mi yapmak yoksa okyanusta yüzmek istersin?'\n{print} 'Demek aktivite istiyorsunuz '\n{print} 'Hedy'yi de çağıralım'\n{print} 'Şu güzel deniz kabuklarına bak!'\nrenkler {is} 'turuncu, gümüş, beyaz, kahverengi'\n{print} 'Renklerden en sevdiğim renkler {at} {random}'\nseçim {is} {ask} Hangisini seviyorsun?"
             text: Bu kodda hata ayıklayalım!
             debug: 'True'
     5:
@@ -415,7 +415,7 @@ levels:
             text: |-
                 İsterseniz "`{repeat}`" komutundan sonra girinti yapmadan devam edebilirsiniz.
                 Girinti ile başlamayan satırlar tekrarlanmayacaktır.
-            code: "{repeat} 3 {times}\n    {print} 'Merhaba!'\n{print} 'Tekrarlamaktan bıktık!'"
+            code: "{repeat} 3 {times}\n    {print} 'Merhaba!'\n{print} 'Tekrarlamayı bitirdik!'"
         5:
             header: Önceki "`{if}`" ve "`{else}`"
             text: |-
@@ -498,7 +498,7 @@ levels:
         3:
             header: '"`{for}`" komutu'
             text: 'Burada "`{for}`" komutunun başka bir örneğini görüyorsunuz:'
-            code: "günler = Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar\nisimler = anne, baba, Ceyda, Emine\n{for} gün {in} günler\n    {print} isimler {at} {random} ' bulaşıkları ' gün ' günü yıkayacak.'"
+            code: "günler = Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar\nisimler = anne, baba, Ceyda, Emine\n{for} gün {in} günler\n    {print} 'Bulaşıkları ' gün ' günü ' isimler {at} {random} ' yıkayacak.'"
         5:
             header: Programlama zamanı!
             text: Seviye 10'daki maceraların tadını çıkarın!
@@ -695,7 +695,7 @@ levels:
             text: Bu seviyede iki nokta üst üste işaretinin, `:`, nasıl kullanılacağını ve "`{elif}`" komutunu öğreneceksiniz.
         2:
             header: İki nokta üstüste
-            text: Şimdi girintilemeyi biraz değiştireceğiz. Girintiye ihtiyaç duyduğumuz her seferinde, girintiden önceki satırda "`:`" işaretine ihtiyacımız var.
+            text: Şimdi girintilemeyi biraz değiştireceğiz. Girintiye ihtiyaç duyduğumuz her seferinde, girintiden önceki satırın sonunda "`:`" işaretine ihtiyacımız var.
             code: "ücretler = ['1 milyon dolar', 'bir elmalı turta', 'hiçbir şey']\nsenin_ücretin = ücretler[{random}]\n{print} 'Kazandığın ' senin_ücretin\n{if} senin_ücretin == '1 milyon dolar' :\n    {print} 'Evet! Sen artık zenginsin!'\n{else}:\n    {print} 'Bir dahaki sefere iyi şanslar.'"
         3:
             header: '`{elif}`'
