@@ -2,7 +2,10 @@ adventures:
     story:
         name: 物語
         default_save_name: 物語
-        description: 物語
+        description: 物語を作る
+        levels:
+            1:
+                story_text: "レベル1では、異なる主人公で物語を作ることができます。\n\n最初の行で {ask} を使用して、物語の主人公が誰になるかを尋ねてください。\n\nその後、文を印刷する必要がある場合は {print} で始めます。\n\n文の最後に主人公を表示したい場合は {echo} を使用してください。\n"
     default:
         name: はじめに
         description: レベルの説明
