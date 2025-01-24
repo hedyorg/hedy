@@ -9,7 +9,7 @@
   {% endif %}
 {% if customizations and customizations["teachers_adventure"] %}
   <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_adventure_banner" role="alert">
-      <div class="text-center center-text">{{_('previewing_adventure')}} 
+      <div class="text-center center-text">{{_('previewing_adventure')}}
         {% if initial_adventure.author == username %}
           <a class="text-white" href="/for-teachers/customize-adventure/{{initial_adventure.id}}">{{_('edit_adventure')}}</a>
         {% else %}
@@ -127,7 +127,8 @@
 </div><!-- blue bar -->
 {% endif %}
 
-<div class="w-full max-w-screen-2xl mx-auto" id="code_content_container">
+<div class="w-full max-w-screen-2xl mx-auto" id="code_content_container"
+  data-kwlang="{{ current_language().lang }}" data-level="{{ level }}">
 {% block levelbody %}{% endblock %}
 </div>
 

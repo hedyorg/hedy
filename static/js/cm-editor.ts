@@ -214,6 +214,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         const lang = $(element).closest('[data-kwlang]').attr('data-kwlang') ?? 'en';
         const levelInt = levelStr ? parseInt(levelStr, 10) : theLevel;
 
+        console.log('Editor', element, levelStr, lang);
+
         if (levelInt) {
             this.setHighlighterForLevel(levelInt, lang);
         }

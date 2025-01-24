@@ -6,7 +6,7 @@
 
  {% set content_is_already_html = adventure.is_teacher_adventure %}
 
- <div class="turn-pre-into-ace show-copy-button text-adventure-copy" data-level="{{adventure.level}}">
+ <div class="turn-pre-into-ace show-copy-button text-adventure-copy" {% if adventure.level %}data-level="{{adventure.level}}"{% endif %}>
               <div class="
                   {% if adventure.example_code or adventure_content_topright_include %}lg:grid lg:grid-cols-2 gap-4{%endif%}
                   {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}
