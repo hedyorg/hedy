@@ -1,6 +1,7 @@
 {% set editor_height='22rem' %}
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
-<div id="editor_area" class="relative grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-row-dense gap-4">
+<div id="editor_area" class="relative grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-row-dense gap-4"
+   data-kwlang="{{ current_language().lang }}" data-level="{{ level }}">
 
   <!-- Row 1: editor, output pane -->
   <div data-editorheight="{{editor_height}}" class="flex flex-col order-1 relative" id="code_editor" style="height: {{editor_height}}">
