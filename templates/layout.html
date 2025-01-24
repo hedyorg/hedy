@@ -48,7 +48,8 @@
     <link rel="icon" type="image/png" href="{{static('/images/Hedy-logo-96x96-laptop.png')}}"/>
     <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
   </head>
-  <body id="main_container" dir="{{ g.dir }}" class="{% if not raw %}bg-gray-100{% endif %}" hx-ext="disable-element,morph" data-logged-in="{{ 1 if username else 0 }}">
+  <body id="main_container" dir="{{ g.dir }}" class="{% if not raw %}bg-gray-100{% endif %}" hx-ext="disable-element,morph"
+        data-logged-in="{{ 1 if username else 0 }}" data-kwlang="{{ current_language().lang }}" data-level="{{ level }}">
     <div id="modal_target"></div>
     {% if current_page and current_page == 'tryit' %}
     <div id="index_sidebar" class="ltr:-translate-x-full rtl:translate-x-full ease-out duration-300 xl:rounded-r h-full flex justify-start items-start w-3/4 md:w-1/2 lg:w-1/4 xl:w-1/4 bg-blue-100 flex-col z-50 fixed top-0 items-center overflow-y-auto pb-10">

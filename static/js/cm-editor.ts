@@ -210,8 +210,8 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             state: state
         });
 
-        const levelStr = $('[data-level]').attr('data-level');
-        const lang = $('[data-kwlang]').attr('data-kwlang') ?? 'en';
+        const levelStr = $(element).closest('[data-level]').attr('data-level');
+        const lang = $(element).closest('[data-kwlang]').attr('data-kwlang') ?? 'en';
         const levelInt = levelStr ? parseInt(levelStr, 10) : theLevel;
 
         if (levelInt) {
