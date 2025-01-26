@@ -1879,5 +1879,6 @@ def _create_customizations(db, class_id):
     db.update_class_customizations(customizations)
     return customizations
 
+
 def render_why_class(adventure):
     return safe_format(gettext('see_adventure_shared_class'), class_name=adventure.get("why_class"), creator=adventure.get('creator')),
