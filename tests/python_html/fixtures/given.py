@@ -61,27 +61,24 @@ class Given:
         self.db.store_user(teacher)
         return {'username': username, 'password': password}
 
-    def logged_in_as_student(self, username=None):
+    def logged_in_as_new_student(self, username=None):
         """Make sure that we are logged in."""
         user = self.a_student_account(username)
-
-        response = self.client.post('/auth/login', data=json.dumps({
-            'username': user['username'],
-            'password': user['password'],
-        }), content_type='application/json')
-        assert response.status_code == 200
+        self.logged_in_as(user)
         return user
 
-    def logged_in_as_teacher(self, username=None):
+    def logged_in_as_new_teacher(self, username=None):
         """Make sure that we are logged in as a teacher."""
         user = self.a_teacher_account(username)
+        self.logged_in_as(user)
+        return user
 
+    def logged_in_as(self, user):
         response = self.client.post('/auth/login', data=json.dumps({
             'username': user['username'],
             'password': user['password'],
         }), content_type='application/json')
         assert response.status_code == 200
-        return user
 
     def some_saved_program(self, username, **kwargs):
         """Save a program for the given user."""
@@ -98,6 +95,24 @@ class Given:
         }
         program.update(**kwargs)
         return self.db.store_program(program)
+
+    def some_saved_adventure(self, owner, level='1', **kwargs):
+        """Save an adventure for the given owner."""
+        adventure = {
+            "id": uuid.uuid4().hex,
+            "name": 'An adventure',
+            "content": 'Some adventure content',
+            "public": 0,
+            "creator": owner,
+            "author": owner,
+            "date": now_javascript(),
+            "level": level,
+            "levels": [level],
+            "language": 'en',
+            "is_teacher_adventure": True,
+        }
+        adventure.update(**kwargs)
+        return self.db.store_adventure(adventure)
 
 
 @pytest.fixture()

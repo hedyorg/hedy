@@ -187,8 +187,11 @@ class Database:
         # A custom teacher adventure
         # - id (str): id of the adventure
         # - content (str): adventure text
-        # - author (str): username (of a teacher account, hopefully)
-        # - creator (str): username (of a teacher account, hopefully)
+        # - creator (str): username (of a teacher account, hopefully). This originally was the person
+        #       who created and owned an adventure before we had cloning. Now that we have cloning, this
+        #       field is better understood as 'owner'.
+        # - author (str): username (of a teacher account, hopefully). If present, this is the person
+        #       who originally authored the adventure even throughout cloning.
         # - date (int): timestamp of last update (in milliseconds, JavaScript timestamp)
         # - level (str): level number, sometimes as an int, usually as a str
         # - levels: [str]: levels of the adventure
@@ -851,7 +854,7 @@ class Database:
 
     def store_adventure(self, adventure):
         """Store an adventure."""
-        self.adventures.create(adventure)
+        return self.adventures.create(adventure)
 
     def update_adventure(self, adventure_id, adventure):
         self.adventures.update({"id": adventure_id}, adventure)
