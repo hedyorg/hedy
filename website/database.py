@@ -919,7 +919,8 @@ class Database:
                                 clas.get('second_teachers', [])))}
 
         # We are explicitly not retrieving the current teacher's owned adventures
-        del shared_teachers[teacher]
+        if teacher in shared_teachers:
+            del shared_teachers[teacher]
 
         adventures = []
         for teacher, shared_class_name in shared_teachers.items():
