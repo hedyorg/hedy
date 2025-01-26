@@ -914,7 +914,9 @@ class Database:
         # a class that we share with them.
         shared_teachers = {teacher: clas.get('name')
                            for clas in classes
-                           for teacher in [clas['teacher']] + list(t['username'] for t in clas.get('second_teachers', []))}
+                           for teacher in ( [clas['teacher']] +
+                           list(t['username'] for t in
+                           clas.get('second_teachers', [])))}
 
         # We are explicitly not retrieving the current teacher's owned adventures
         del shared_teachers[teacher]

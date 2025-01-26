@@ -72,7 +72,7 @@ class ForTeachersModule(WebsiteModule):
                     "level": adventure.get("level"),
                     "levels": adventure.get("levels"),
                     "why": adventure.get("why"),
-                    "why_class": safe_format(gettext('see_adventure_shared_class'), class_name=adventure.get("why_class")),
+                    "why_class": render_why_class(adventure),
                 }
             )
 
@@ -1748,7 +1748,7 @@ class ForTeachersModule(WebsiteModule):
                     "level": adventure.get("level"),
                     "levels": adventure.get("levels"),
                     "why": adventure.get("why"),
-                    "why_class": safe_format(gettext('see_adventure_shared_class'), class_name=adventure.get("why_class")),
+                    "why_class": render_why_class(adventure),
                 }
             )
         return render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures)
@@ -1878,3 +1878,6 @@ def _create_customizations(db, class_id):
     }
     db.update_class_customizations(customizations)
     return customizations
+
+def render_why_class(adventure):
+    return safe_format(gettext('see_adventure_shared_class'), class_name=adventure.get("why_class"), creator=adventure.get('creator')),
