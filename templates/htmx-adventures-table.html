@@ -16,7 +16,7 @@
           <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %}">
             <td class="text-center py-2"><a href="for-teachers/customize-adventure/{{adventure.id}}" class="no-underline" data-cy="edit_link_{{adventure.name|e}}">{{adventure.name|e}}</a></td>
             <td class="text-center py-2 owner_username_cell">{{adventure.author or adventure.creator}}</td>
-            <td class="text-center py-2 username_cell">{{adventure.creator}}</td>
+            <td class="text-center py-2 username_cell">{{adventure.creator}} {% if adventure.why == 'shared_class' %}<i class="fa-solid fa-user-group text-gray-500 text-sm ml-4" title="{{ adventure.why_class }}"></i>{% endif %}</td>
             <td class="text-center py-2">
               {% if adventure.levels %}
                   {% for level in adventure.levels %}
