@@ -730,7 +730,10 @@ class Database:
         return self.classes.get({"id": id})
 
     def get_teacher_classes(self, username, students_to_list=False, teacher_only=False):
-        """Return all the classes belonging to a teacher."""
+        """Return all the classes for a teacher.
+
+        This includes classes they own and classes where they are a second teacher.
+        """
         classes = None
         # FIXME: This should be a parameter, not be called here!!
         user = auth.current_user()
@@ -902,23 +905,33 @@ class Database:
         return self.adventures.get_many({"creator": username})
 
     def get_second_teacher_adventures(self, classes, teacher):
-        """Retrieves all adventures of every second teacher in a class"""
-        # we consider the current user as a second teacher
+        """Retrieves all adventures of every second teacher in a class.
+
+        Input: the current user and all the classes they are in, as both primary
+        and secondary teacher.
+
+        - Retrieves adventures for all teachers that we are in a class with.
+        """
+
+        # Find all teachers that we share a class with, and include one name of
+        # a class that we share with them.
+        shared_teachers = {teacher: clas.get('name')
+                           for clas in classes
+                           for teacher in ([clas['teacher']] +
+                           list(t['username'] for t in
+                                clas.get('second_teachers', [])))}
+
+        # We are explicitly not retrieving the current teacher's owned adventures
+        if teacher in shared_teachers:
+            del shared_teachers[teacher]
+
         adventures = []
-        # accounting for duplicates
-        retrieved = {teacher: True}  # current teacher's adventures are already retrieved
-        # for the classes they're teachers and second teachers in, we
-        for Class in classes:
-            # get the adventures of all other teachers.
-            if not retrieved.get(Class["teacher"]):
-                adventures.extend(self.get_teacher_adventures(Class["teacher"]))
-                retrieved[Class["teacher"]] = True
-            # and all other second teachers
-            for st in Class.get("second_teachers", []):
-                if not retrieved.get(st["username"]):
-                    st_adventures = self.get_teacher_adventures(st["username"])
-                    adventures.extend(st_adventures)
-                    retrieved[st["username"]] = True
+        for teacher, shared_class_name in shared_teachers.items():
+            this_teachers_advs = self.get_teacher_adventures(teacher)
+            for a in this_teachers_advs:
+                a['why'] = 'shared_class'
+                a['why_class'] = shared_class_name
+            adventures.extend(this_teachers_advs)
         return adventures
 
     def all_adventures(self):
