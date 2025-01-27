@@ -200,10 +200,10 @@ class PublicAdventuresModule(WebsiteModule):
             # Crucially, a cloned public adventure is not necessarily automatically public
             "public": 0,
 
-            # creator here is the new owner; we don't change it to owner because that'd introduce many conflicts.
-            # Instead handle it in html.
+            # 'creator' here means owner; we don't change the field name because that introduces too many conflicts.
+            # (Instead render it differently in HTML). The new owner is the current user.
             "creator": user["username"],
-            "author": current_adventure.get("creator"),
+            "author": current_adventure.get("author", current_adventure.get('creator')),
             "date": utils.timems(),
             "level": level,
             "levels": current_adventure.get("levels", [level]),
