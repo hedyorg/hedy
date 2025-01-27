@@ -3,6 +3,7 @@ from .fixtures.given import Given
 from .fixtures.flask import Client
 import pytest
 
+
 def test_cloning_public_adventure(client: Client, given: Given):
     # GIVEN
     t1 = given.a_teacher_account()
