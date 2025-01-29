@@ -61,7 +61,6 @@ class ForTeachersModule(WebsiteModule):
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         # Get the adventures that are created by my second teachers.
         second_teacher_adventures = self.db.get_second_teacher_adventures(teacher_classes, user["username"])
-        # second_teacher_adventures = self.db.get_second_teacher_adventures(user)
         for adventure in list(teacher_adventures) + second_teacher_adventures:
             adventures.append(
                 {
@@ -72,6 +71,8 @@ class ForTeachersModule(WebsiteModule):
                     "date": utils.localized_date_format(adventure.get("date")),
                     "level": adventure.get("level"),
                     "levels": adventure.get("levels"),
+                    "why": adventure.get("why"),
+                    "why_class": render_why_class(adventure),
                 }
             )
 
@@ -1733,7 +1734,8 @@ class ForTeachersModule(WebsiteModule):
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
         adventures = []
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
-        # Get the adventures that are created by my second teachers.
+        # Get the adventures that are created by my second teachers. This may be confusing to people so
+        # annotate the adventures.
         second_teacher_adventures = self.db.get_second_teacher_adventures(teacher_classes, user["username"])
         for adventure in list(teacher_adventures) + second_teacher_adventures:
             adventures.append(
@@ -1745,6 +1747,8 @@ class ForTeachersModule(WebsiteModule):
                     "date": utils.localized_date_format(adventure.get("date")),
                     "level": adventure.get("level"),
                     "levels": adventure.get("levels"),
+                    "why": adventure.get("why"),
+                    "why_class": render_why_class(adventure),
                 }
             )
         return render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures)
@@ -1874,3 +1878,10 @@ def _create_customizations(db, class_id):
     }
     db.update_class_customizations(customizations)
     return customizations
+
+
+def render_why_class(adventure):
+    return safe_format(
+        gettext('see_adventure_shared_class'),
+        class_name=adventure.get("why_class"),
+        creator=adventure.get('creator'))
