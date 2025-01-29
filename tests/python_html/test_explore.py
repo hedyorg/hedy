@@ -7,7 +7,7 @@ import bs4
 def test_explore_page_loads_with_lots_of_programs(client: Client, given: Given):
     """Smoke test of the explore page, if there are enough programs for pagination."""
     # GIVEN
-    user = given.logged_in_as_student()
+    user = given.logged_in_as_new_student()
     for _ in range(50):
         given.some_saved_program(user['username'], public=1)
 
