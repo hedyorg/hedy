@@ -221,14 +221,6 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         session['class_id'] = class_id
-        survey_id = ""
-        description = ""
-        questions = []
-        survey_later = ""
-        total_questions = ""
-
-        if Class.get("students"):
-            survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
 
         students = Class.get("students", [])
         invites = []
@@ -273,11 +265,6 @@ class ForTeachersModule(WebsiteModule):
             javascript_page_options=dict(
                 page="class-overview"
             ),
-            survey_id=survey_id,
-            description=description,
-            questions=questions,
-            total_questions=total_questions,
-            survey_later=survey_later,
             adventure_table={
                 'students': student_overview_table,
                 'adventures': class_adventures_formatted,
@@ -790,7 +777,9 @@ class ForTeachersModule(WebsiteModule):
                 class_id=class_id
             ))
 
-    @route("/load-survey/<class_id>", methods=["POST"])
+    # Disabling the load-survey route until the survey UI is redesigned
+    # Explicitly not removing the code because it should be used again after the redesign
+    # @route("/load-survey/<class_id>", methods=["POST"])
     def load_survey(self, class_id):
         survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
         return render_partial('htmx-survey.html', survey_id=survey_id, description=description,
