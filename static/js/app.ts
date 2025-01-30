@@ -388,7 +388,7 @@ export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: 
       $(preview)
         .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-        .attr('lang', theKeywordLanguage);
+        .attr('data-lang', theKeywordLanguage);
       // If the request comes from HTMX initialize all directly
         if (initializeAll) {
           convertPreviewToEditor(preview, container, dir)
@@ -433,7 +433,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
       if (!theGlobalEditor?.isReadOnly) {
         theGlobalEditor.contents = exampleEditor.contents + '\n';
       }
-      update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+      update_view("main_editor_keyword_selector", <string>$(preview).attr('data-lang'));
       stopit();
       clearOutput();
     });
@@ -651,11 +651,6 @@ export function tryPaletteCode(exampleCode: string) {
     theGlobalEditor.contents += '\n' + exampleCode;
   } else {
     theGlobalEditor.contents += exampleCode;
-  }
-  //As the commands try-it buttons only contain english code -> make sure the selected language is english
-  if (!($('#editor').attr('lang') == 'en')) {
-      $('#editor').attr('lang', 'en');
-      update_view("main_editor_keyword_selector", "en");
   }
 }
 
@@ -1525,7 +1520,7 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       // save translated code to local storage
       // such that it can be fetched after reload
       localSave(currentTabLsKey(), { saveName, code });
-      $('#editor').attr('lang', new_lang);
+      $('#editor').attr('data-lang', new_lang);
 
       // update the whole page (example codes)
       const hash = window.location.hash;
@@ -1580,7 +1575,7 @@ export async function change_language(lang: string) {
 
 function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {
-    if ($(this).attr('lang') == new_lang) {
+    if ($(this).attr('data-lang') == new_lang) {
       $(this).show();
     } else {
       $(this).hide();
