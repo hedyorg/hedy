@@ -1144,12 +1144,14 @@ levels:
         1:
             header: Welcome to level 9
             text: |-
-                In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.
-
-                You can even put a `{repeat}` command within another `{repeat}`  command.
+                By the end of this lesson, you can:
+                * nest {if} and {repeat} commands
+                * use indentation properly with {repeat} {if} and {else}
+            notes:
+                Using an {if} command inside another {if} command is called nesting.
         2:
-            header: Multiple lines after `{repeat}`
-            text: You are allowed to combine `{repeat}` and `{if}` in this level.
+            header: Nesting with `{repeat}`
+            text: You are allowed to combine `{repeat}` and `{if}` in this level. This is called nesting.
             code: |-
                 {repeat} 3 {times}
                     food = {ask} 'What do you want?'
@@ -1157,16 +1159,20 @@ levels:
                         {print} 'nice!'
                     {else}
                         {print} 'pizza is better'
+            notes:
+                Run the program twice, once with 'pizza' as the answer and once with a different answer.
         3:
             header: Indentation matters!
-            text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
+            text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be run once.
             code: |-
                 {repeat} 3 {times}
                     {print} 'This line will be repeated...'
                     {print} 'This one too...'
                 {print} 'but this one will not!'
+            notes: |-
+                Repeat to your student the importance of using indentation properly. Run the program and ask the students what would happen if the last line would also start with indentation.
         4:
-            header: Multiple lines after `{if}`
+            header: Nesting with `{if}`
             text: You can also use multiple lines after `{if}`
             code: |-
                 continue = {ask} 'Do you want to continue?'
@@ -1189,28 +1195,8 @@ levels:
                         {print} 'We will continue'
                 {else}
                     {print} 'You are not sure'
-        6:
-            header: An `{if}` inside a `{repeat}`
-            text: |-
-                Now that you can use multiple lines of code after these command, you can also put them within each other.
-                Check it out:
-            code: |-
-                {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
-                    {else}
-                        {print} 'pizza is better'
-        7:
-            header: Mind the indentation
-            text: Mind that the fourth and sixth line of this code starts with 8 spaces of indentation.
-            code: |-
-                {repeat} 3 {times}
-                    food = {ask} 'What do you want?'
-                    {if} food {is} pizza
-                        {print} 'nice!'
-                    {else}
-                        {print} 'pizza is better'
+            notes: |-
+                Play around with the indentation and show the students what happens if you remove the indentation of the second {if} command, for example.
         8:
             header: Debugging
             text: Let's debug this code!
@@ -1229,9 +1215,41 @@ levels:
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
             debug: 'True'
+            notes: |-
+                Debug this code with your students.
         9:
-            header: Let's go!
+            header: Let's check out the adventures!
             text: Enjoy the adventures in level 9!
+            notes: |-
+                Your students can now work on all the adventures in level 9.
+        10:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        11:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        12:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        13:
+            header: Sneak peek into the next level...
+            text: |-
+                Next level we will learn to use the {for} command.
+            code: |-
+                animals = dog, cat, blobfish
+                {for} animal in animals
+                {print} 'I love ' animal
+            debug: True
     10:
         1:
             header: Welcome to level 10
