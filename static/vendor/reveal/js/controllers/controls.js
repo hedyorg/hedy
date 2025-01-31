@@ -154,40 +154,6 @@ export default class Controls {
 
 		}
 
-		if( this.Reveal.getConfig().controlsTutorial ) {
-
-			let indices = this.Reveal.getIndices();
-
-			// Highlight control arrows with an animation to ensure
-			// that the viewer knows how to navigate
-			if( !this.Reveal.hasNavigatedVertically() && routes.down ) {
-				this.controlsDownArrow.classList.add( 'highlight' );
-			}
-			else {
-				this.controlsDownArrow.classList.remove( 'highlight' );
-
-				if( this.Reveal.getConfig().rtl ) {
-
-					if( !this.Reveal.hasNavigatedHorizontally() && routes.left && indices.v === 0 ) {
-						this.controlsLeftArrow.classList.add( 'highlight' );
-					}
-					else {
-						this.controlsLeftArrow.classList.remove( 'highlight' );
-					}
-
-				} else {
-
-					if( !this.Reveal.hasNavigatedHorizontally() && routes.right && indices.v === 0 ) {
-						this.controlsRightArrow.classList.add( 'highlight' );
-					}
-					else {
-						this.controlsRightArrow.classList.remove( 'highlight' );
-					}
-				}
-			}
-		}
-	}
-
 	destroy() {
 
 		this.unbind();

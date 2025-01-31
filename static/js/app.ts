@@ -6,7 +6,6 @@ import { SwitchTabsEvent, Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
-import { startIntroTutorial } from './tutorials/tutorial';
 import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import {
@@ -188,7 +187,6 @@ export interface InitializeCodePageOptions {
   readonly level: number;
   readonly lang: string;
   readonly adventures: Adventure[];
-  readonly start_tutorial?: boolean;
   readonly initial_tab: string;
   readonly current_user_name?: string;
   readonly suppress_save_and_load_for_slides?: boolean;
@@ -271,10 +269,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   });
 
   initializeSpeech(options.page === 'tryit');
-
-  if (options.start_tutorial) {
-    startIntroTutorial();
-  }
 
   // Share/hand in modals
   $('#share_program_button').on('click', () => $('#share_modal').show());
@@ -559,7 +553,6 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           lang: lang,
           skip_faulty: false,
           is_debug: run_type === 'debug',
-          tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
           adventure_name: adventureName,
           short_name: adventure ? adventure.short_name : undefined,
