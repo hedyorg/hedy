@@ -1253,14 +1253,20 @@ levels:
     10:
         1:
             header: Welcome to level 10
-            text: 'In this level you will learn a new command: `{for}`.'
+            text: |-
+                By the end of this lesson, you can:
+                * use the {for} command
         2:
             header: The for command
-            text: With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).
+            text: With for you can make a list and use all items on that list.
             code: |-
                 animals = dog, cat, blobfish
                 {for} animal {in} animals
                     {print} 'I love ' animal
+            notes: |-
+                Show the students how the {for} command creates a block taht starts with indentation.
+                Run the code and show teh students what happens.
+                Then ask the students to write their own version of a program with {for} in it.
         3:
             header: The for command
             text: 'Here you see another example of the `{for}` command:'
@@ -1269,6 +1275,8 @@ levels:
                 names = mom, dad, Emma, Sophie
                 {for} day {in} days
                     {print} names {at} {random} ' does the dishes on ' day
+            notes: |-
+                Go around the room to let teh students share the programs that they came up with. Then show this next example and let the students predict the output.
         4:
             header: Debugging
             text: Let's debug this code
@@ -1284,9 +1292,41 @@ levels:
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
             debug: 'True'
+            notes: |-
+                Debug this code together.
         5:
-            header: Time to program!
+            header: Let's check out the adventures!
             text: Enjoy the adventures in level 10!
+            notes: |-
+                Your students can now work on all the adventures in level 10.
+        6:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        7:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        8:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        9:
+            header: Sneak peek into the next level...
+            text: |-
+                Next level we will learn to use the {for} command in a different way.
+            code: |-
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} 'Ready or not. Here I come!'
+            debug: True
     11:
         1:
             header: Welcome to level 11
