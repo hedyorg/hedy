@@ -51,7 +51,7 @@ from website import (ab_proxying, admin, auth_pages, aws_helpers,
                      translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, is_students_teacher,
                           has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
-                        forget_current_user, hide_explore)
+                          forget_current_user, hide_explore)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 from website.flask_hedy import g_db
