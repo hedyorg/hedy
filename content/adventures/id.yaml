@@ -5,7 +5,7 @@ adventures:
         description: Cerita
         levels:
             1:
-                story_text: |-
+                story_text: |
                     Pada level 1 kamu dapat membuat cerita dengan karakter utama yang kamu tuliskan sendiri.
 
                     Sebagai baris pertama, gunakan kode berikut:
@@ -92,7 +92,7 @@ adventures:
                     {print} nama _takut ini hutan angker _
                     ```
             5:
-                story_text: |-
+                story_text: |
                     Apa yang kamu bisa lakukan di level 4 adalah membuat cerita kamu semakin menyenangkan. Pada level 4 kamu dapat membuat akhir cerita yang berbeda.
 
                     Pikirkan dua alternatif akhir cerita kamu. Misalnya:
@@ -805,7 +805,7 @@ adventures:
                         {print} 'Kamu tidak bisa menggunakan komputer ini!'
                     ```
             9:
-                story_text: |-
+                story_text: |
                     Pada level ini kamu tidak hanya bisa menggunakan beberapa baris baru untuk  `if` and `repeat`, namun juga dapat menggabungkan mereka!
                     Pada contoh kamu lihat sebuah perintah `if` didalam perintah `repeat`. Kamu juga dimungkinkan untuk melakukan sebaliknya, dan `if` juga boleh didalam `if` dan `repeat` didalam `repeat`.
                     Cobalah!
@@ -893,7 +893,7 @@ adventures:
                     Pada level 3 kita dapat membuat kalimat-kalimat dengan nilai dadu didalamnya, menggunakan tanda kutip satu tentunya.
                     Kali ini kode contoh belum sempurna. Dapatkah kamu menyempurnakannya?
             5:
-                story_text: |-
+                story_text: |
                     Kamu juga dapat membuat dadu di level 4 dengan menggunakan `if`
                     Lengkapi kode berikut agar kode mengatakan 'Kamu dapat berhenti melempar' ketika kamu mendapatkan cacing sebagai hasil lemparan.
 
@@ -973,7 +973,7 @@ adventures:
                     print orang at _
                     ```
             5:
-                story_text: "Dengan `if` kamu bisa melakukan banyak hal menyenangkan dalam pengambilan pilihan dalam program tersebut. Kamu dapat membuat program kamu merespon pilihan yang sudah diberikan oleh komputer.\n\nDapatkah kamu melengkapi kode ini agar menampilkan 'Yahh' ketika yang dipilih adalah giliranmu dan 'Yeah!' untuk yang lainnya. \nJangan lupakan tanda kutip satu!"
+                story_text: "Dengan `if` kamu bisa melakukan banyak hal menyenangkan dalam pengambilan pilihan dalam program tersebut. Kamu dapat membuat program kamu merespon pilihan yang sudah diberikan oleh komputer.\n\nDapatkah kamu melengkapi kode ini agar menampilkan 'Yahh' ketika yang dipilih adalah giliranmu dan 'Yeah!' untuk yang lainnya. \nJangan lupakan tanda kutip satu!\n"
                 example_code: |
                     ```
                     orang is ibu, ayah, Emma, Sophie
@@ -1027,7 +1027,7 @@ adventures:
                     Obviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!
                     Take a look in level 2 to improve your fortune teller.
             3:
-                story_text: |-
+                story_text: |
                     Pada level 1 kamu telah membuat mesin peramal pertama kamu, tapi Hedy tidak bisa benar-benar meramal, hanya mengulang.
                     Pada level 2 kamu dapat menggunakan variabel dan perintah `at random` untuk membantu Hedy memilih sebuah jawaban untukmu. Lihatlah kode berikut sebagai contoh.
                 example_code: |
@@ -1142,7 +1142,7 @@ adventures:
                     else print 'Oh tidak! Kamu dimakan oleh ... ' monster {at} {random}
                     ```
             9:
-                story_text: Pada level 7 kamu bisa mengulangi beberapa baris kode, memungkinkan kamu untuk membuat permainan rumah berhantu kamu semakin interaktif.
+                story_text: "Pada level 7 kamu bisa mengulangi beberapa baris kode, memungkinkan kamu untuk membuat permainan rumah berhantu kamu semakin interaktif.\n"
                 example_code: |
                     ```
                     print 'Kabur dari rumah berhantu!'
@@ -1247,7 +1247,7 @@ adventures:
 
                     Dapatkah kamu menambahkan beberapa baris di kode program rumah makan kamu? Misal, dapatkah kamu menanyakan pembeli apa yang mau mereka minum, memberitahukan harga, atau menyampaikan 'selamat menikmati'?
             2:
-                story_text: |-
+                story_text: |
                     Pada level 2 kamu bisa mengembangkan kode rumah makan kamu dengan menggunakan variabel. Pada level 1 Hedy hanya dapat mengulang pesanan dan hanya mengingat pesanan terakhir.
                     Sekarang kamu dapat menggunakan variabel dan Hedy dapat mengingat makanan dan minuman yang dipesan!
                 example_code: |
@@ -1339,7 +1339,7 @@ adventures:
                     print 'Terima kasih, selamat menikmati!'
                     ```
             7:
-                story_text: |-
+                story_text: |
                     Pada level 5 kamu telah belajar bagaimana menggunakan perintah `repeat` untuk mengulang satu baris kode beberapa kali.
                     Kamu dapat menggunakan itu di rumah makan kamu dengan cara menanyakan ke beberapa orang apa yang mau mereka makan, seperti ini:
                 example_code: |
@@ -1415,7 +1415,7 @@ adventures:
         description: Buat permainan batu gunting kertas sendiri
         levels:
             1:
-                story_text: |-
+                story_text: |
                     Pada level 1 kamu dapat memulai dengan permainan batu gunting kertas
 
                     Dengan perintah `ask` kamu bisa mengambil salah satu pilihan, dan dengan `echo` kamu bisa menampilkan pilihan tersebut.
@@ -1454,7 +1454,7 @@ adventures:
                     ```
             5:
                 story_text: "Pada level 4 kamu bisa menentukan siapa yang menang. \nUntuk hal itu, kamu memerlukan perintah `if`\n\nSimpan pilihan kamu dengan sebuah nama favoritmu dan pilihan komputer dengan nama pilihan komputer.\nLalu kamu bisa menggunakan `if` untuk melihat apakah kedua pilihan tersebut sama atau berbeda.\nDapatkah kamu menyelesaikan kode ini?"
-                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\n pil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri. \n"
+                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\n pil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri.\n"
     songs:
         name: Nyanyikan sebuah lagu!
         default_save_name: Lagu
@@ -1478,7 +1478,7 @@ adventures:
 
                     Setelah Baby Shark, kamu juga dapat membuat program untuk menyanyikan lagu lain. Ada banyak lagu yang mengulang-ulang kalimat.
             7:
-                story_text: Lagu-lagu sering memiliki banyak pengulangan. Terkadang pengulangannya didasarkan dari perhitungan. Misal, di sebuah lagu 'Botol'. Kamu dapat membuat program untuk menyanyikan lagu tersebut dengan sedikit matematika.
+                story_text: "Lagu-lagu sering memiliki banyak pengulangan. Terkadang pengulangannya didasarkan dari perhitungan. Misal, di sebuah lagu 'Botol'. Kamu dapat membuat program untuk menyanyikan lagu tersebut dengan sedikit matematika.\n"
                 example_code: |
                     ```
                     reff is 99
@@ -1498,7 +1498,7 @@ adventures:
 
                     Tapi kamu akan lihat pada materi ini, terkadang kamu perlu untuk mengulang beberapa baris bersamaan. Ini bisa dilakukan dengan menyalin ulang, namun itu merepotkan. Pada level 7 kamu akan belajar bagaimana cara melakukannya dengan lebih mudah.
             8:
-                story_text: Pada level 6, kamu menuliskan lagu 'botol'. Kamu membuat sebuah reff lalu mengulangnya hingga 99 kali. Pada level 7, kamu dapat melakukannya hanya dengan menambahkan satu baris program.
+                story_text: "Pada level 6, kamu menuliskan lagu 'botol'. Kamu membuat sebuah reff lalu mengulangnya hingga 99 kali. Pada level 7, kamu dapat melakukannya hanya dengan menambahkan satu baris program.\n"
                 example_code: |
                     ```
                     reff is 99
@@ -1529,7 +1529,7 @@ adventures:
         description: Buat gambar milikmu sendiri
         levels:
             1:
-                story_text: |-
+                story_text: |
                     Pada level 1 kamu juga dapat menggunakan Hedy untuk menggambar. Dengan cara menggabungkan belokan dan garis, kamu bisa membuat kotak atau tangga!
 
                     Gunakan `forward` untuk membentuk garis lurus kedepan. Angka dibelakangnya menyatakan seberapa jauh kura-kura kamu akan bergerak. `turn right` membuat kura-kura menghadap kanan searah jarum jam. `turn left` membuat kura-kura menghadap kiri berlawanan arah jarum jam.
@@ -1552,7 +1552,7 @@ adventures:
                     forward 25
                     ```
             3:
-                story_text: |-
+                story_text: |
                     Kamu juga dapat menggunakan `random` ketika menggambar dengan kura-kura. Pergerakan acak akan membuat sang kura-kura bergerak dalam jalur tidak terduga untuk setiap eksekusi program.
                     Gunakan `at random` untuk memilih nilai dari sebuah list. Kamu dapat menyalin baris 2 dan 3 sehingga membentuk jalur pergerakan yang lebih acak.
                 example_code: |
@@ -1562,7 +1562,7 @@ adventures:
                     forward 25
                     ```
             4:
-                story_text: Pada level 3 kamu harus menggunakan tanda kutip satu pada perintah `print` dan `ask`. Begitu juga ketika menggambar!
+                story_text: "Pada level 3 kamu harus menggunakan tanda kutip satu pada perintah `print` dan `ask`. Begitu juga ketika menggambar!\n"
                 example_code: |
                     ```
                     print 'Menggambar bentuk'
@@ -1573,7 +1573,9 @@ adventures:
                     forward 25
                     ```
             5:
-                story_text: 'Pada level 4 kita akan mengambil sebuah pilihan dengan `if`. Sebagai contoh: mengambil satu dari kumpulan bentuk.'
+                story_text: 'Pada level 4 kita akan mengambil sebuah pilihan dengan `if`. Sebagai contoh: mengambil satu dari kumpulan bentuk.
+
+                    '
                 example_code: |
                     {print} 'Menggambar Bentuk'
                     bentuk {is} {ask} 'Apakah Anda ingin persegi atau segitiga?'
@@ -1611,7 +1613,7 @@ adventures:
                     turn sudut
                     ```
             8:
-                story_text: |-
+                story_text: |
                     Sekarang karena kita sudah bisa mengulang beberapa baris, kita bisa menggambar bentuk dengan lebih mudah.
                     Kita hanya perlu mengisi sudut sekali dan menggunakan variabel tersebut dalam `repeat`.
                 example_code: |
