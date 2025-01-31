@@ -318,7 +318,7 @@ adventures:
             1:
                 story_text: |
                     ## La commande `{ask}`
-                    Maintenant que tu sais utiliser la commande `{print}`, passons à la commande suivante : `{ask}`. Avec la commande `{ask}`, tu peux poser une question. Fais un essai :
+                    Maintenant que tu sais utiliser la commande `{print}`, passons à la commande suivante : `{ask}`. Avec la commande `{ask}`, tu peux poser une question. Fais un essai :
                 example_code: |
                     ```
                     {print} Salut !
@@ -347,7 +347,7 @@ adventures:
                     ## La commande `{ask}`
                     Maintenant que l'on peut utiliser les **variables** dans nos codes, la commande `{echo}` n'est plus utile.
                     On peut utiliser les variables pour stocker les réponses à nos questions et ainsi utiliser la réponse à plusieurs questions dans nos codes.
-                    Fais un essai :
+                    Fais un essai :
 
                     De cette façon ton code devient interactif !
                 example_code: |
@@ -1866,13 +1866,13 @@ adventures:
                 example_code_2: |
                     ```
                     animaux {is} chien, vache, mouton
-                    réponse {is} {ask} "Quel est ton animal préféré ?"
-                    _ réponse _ animaux _ "c'est aussi le mien !"
+                    réponse {is} {ask} "Quel est ton animal préféré ?"
+                    _ réponse _ animaux _ "c'est aussi le mien !"
                     _ _ "mes animaux préférés sont chien, vache et mouton"
                     ```
 
-                    couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
-                    {if} couleur_préférée {in} jolies_couleurs {print} "jolie !"
+                    couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
+                    {if} couleur_préférée {in} jolies_couleurs {print} "jolie !"
                     {else} {print} "bof"
     is_command:
         default_save_name: command_est
@@ -2056,7 +2056,7 @@ adventures:
                 story_text: |
                     Apprend à ton perroquet un nouveau mot avec `{add} {to_list}`.
                     ### Exercice
-                    Peux-tu ajouter la commande `{add} {to_list}` pour faire marcher le code ?
+                    Peux-tu ajouter la commande `{add} {to_list}` pour faire marcher le code ?
                 example_code: |
                     ```
                     mots {is} coco, Hedy
@@ -2421,17 +2421,17 @@ adventures:
                     Chaque ligne de l'exemple de code commence par un espace vide. Retire les espaces vides et essaye de trouver quelle ligne a besoin d'une indentation et quelle ligne n'en a pas besoin pour faire la chanson de *vive le vent*.
                 example_code: |
                     ```
-                    _ {print} "Connais-tu la chanson vive le vent ?"
+                    _ {print} "Connais-tu la chanson vive le vent ?"
                     _ {repeat} 2 {times}
                     _ {print} "Vive le vent"
                     _ {print} "Vive le vent d'hiver"
                     _ {print} "Qui s'en va sifflant, soufflant"
-                    _ {print} "Dans les grands sapins verts, oh !"
+                    _ {print} "Dans les grands sapins verts, oh !"
                     ```
 
                         {print} "Cette ligne sera répétée…"
                         {print} "Cette ligne aussi…"
-                    {print} "mais celle-ci ne le sera pas !"
+                    {print} "mais celle-ci ne le sera pas !"
     restaurant:
         description: Crée ton propre restaurant virtuel
         levels:
@@ -3607,12 +3607,12 @@ adventures:
                 example_code: |
                     ```
                     réponse = 0
-                    {while} réponse != 25
-                        réponse = {ask} "Combien font 5 fois 5 ?"
+                    {while} réponse != 25
+                        réponse = {ask} "Combien font 5 fois 5 ?"
                     {print} "Une réponse correcte a été donnée"
                     ```
 
-                        réponse = {ask} "Combien font 5 fois 5 ?"
+                        réponse = {ask} "Combien font 5 fois 5 ?"
                     {print} "Une réponse correcte a été donnée"
     years:
         name: Nouvel an
