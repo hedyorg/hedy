@@ -150,8 +150,11 @@
                 <input type="checkbox" data-cy="subscribe" name="subscribe" class="ml-4">
             </div>
         </form>
-        <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" data-cy="delete_profile_button">{{_('destroy_profile')}}</button>
-       </div>
+        <div class="flex flex-row items-center mb-2">
+            <label for="subscribe" class="inline-block w-72"></label>
+            <button class="red-btn ml-auto" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" data-cy="delete_profile_button">{{_('destroy_profile')}}</button>
+        </div>
+    </div>
       <h1 id="password_toggle" class="section-header" onclick="$ ('#change_password_body').toggle()">{{_('change_password')}}</h1>
         <div class="profile-section-body" id="change_password_body">
             <form id="change_password">
