@@ -88,6 +88,10 @@ def add_class_customized_to_subscription(email):
     create_subscription_event(email, MailchimpTag.CUSTOMIZED_CLASS)
 
 
+def add_used_slides_to_subscription(email):
+    create_subscription_event(email, MailchimpTag.USED_SLIDES)
+
+
 @run_if_mailchimp_config_present
 def create_subscription_event(email, tag):
     """ When certain events occur, e.g. a newsletter subscriber creates or customizes a class, these events
@@ -126,6 +130,7 @@ class MailchimpTag:
     TEACHER = 'teacher'
     CREATED_CLASS = "created_class"
     CUSTOMIZED_CLASS = "customized_class"
+    USED_SLIDES = "used_slides"
 
 
 def create_mailchimp_subscriber(email, tag_names):
