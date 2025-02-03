@@ -55,6 +55,7 @@ from website.auth import (current_user, is_admin, is_teacher, is_second_teacher,
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 from website.flask_hedy import g_db
+from website.newsletter import add_used_slides_to_subscription
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -2572,6 +2573,10 @@ def get_slides(level):
 
     if not SLIDES[g.lang].get_slides_for_level(level, keyword_language):
         return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+    email = current_user().get('email')
+    if email:
+        add_used_slides_to_subscription(email)
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
     return render_template('slides.html', level=level, slides=slides)
