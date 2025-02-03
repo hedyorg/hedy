@@ -145,6 +145,10 @@
                     {% endfor %}
                 </select>
             </div>
+            <div class="flex flex-row items-center mb-2">
+                <label for="subscribe" class="inline-block w-72">{{_('subscribe_newsletter')}}</label>
+                <input type="checkbox" data-cy="subscribe" name="subscribe" class="ml-4">
+            </div>
         </form>
         <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" data-cy="delete_profile_button">{{_('destroy_profile')}}</button>
        </div>
