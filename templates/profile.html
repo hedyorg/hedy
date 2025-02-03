@@ -136,7 +136,7 @@
                   <option value="o" {% if user_data['gender'] == "o" %}selected{% endif %}>{{_('other')}}</option>
                 </select>
             </div>
-            <div class="flex flex-row items-center mb-2">
+            <div class="flex flex-row items-center mb-6">
                 <label for="country" class="inline-block w-72">{{_('country')}}</label>
                 <select id="country" name="country" class="personal-input">
                     <option value="">{{_('select')}}</option>
@@ -153,7 +153,7 @@
                 <label for="pair_with_teacher">{{_('pair_with_teacher')}}</label>
                 <input type="checkbox" class="ml-auto" data-cy="pair_with_teacher" name="pair_with_teacher">
             </div>
-            <div class="flex flex-row items-center mb-2">
+            <div class="flex flex-row items-center mb-6">
                 <label for="connect_guest_teacher">{{_('connect_guest_teacher')}}</label>
                 <input type="checkbox" class="ml-auto" data-cy="connect_guest_teacher" name="connect_guest_teacher"
                             _="on click toggle [@required='true'] on #phone
