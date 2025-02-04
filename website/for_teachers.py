@@ -1602,7 +1602,7 @@ class ForTeachersModule(WebsiteModule):
             max_level=hedy.HEDY_MAX_LEVEL,
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
-            level=adventure.get("level"),
+            level=adventure.get("level", ""),
             content=preview_content,
             js=dict(
                 content=adventure.get("content"),
@@ -1611,7 +1611,7 @@ class ForTeachersModule(WebsiteModule):
             javascript_page_options=dict(
                 page='customize-adventure',
                 lang=g.lang,
-                level=adventure.get("level"),
+                level=adventure.get("level", ""),
                 adventures=[adventure],
                 initial_tab='',
                 current_user_name=user['username'],
@@ -1745,7 +1745,7 @@ class ForTeachersModule(WebsiteModule):
                     "creator": adventure.get("creator"),
                     "author": adventure.get("author"),
                     "date": utils.localized_date_format(adventure.get("date")),
-                    "level": adventure.get("level"),
+                    "level": adventure.get("level", ""),
                     "levels": adventure.get("levels"),
                     "why": adventure.get("why"),
                     "why_class": render_why_class(adventure),

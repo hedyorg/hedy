@@ -1,3 +1,8 @@
+{#
+  This page is being included from
+
+  - templates/hedy-page/code-page.html
+#}
 {% set editor_height='22rem' %}
 <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
 <div id="editor_area" class="relative grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-row-dense gap-4">
@@ -81,9 +86,9 @@
             <div class="h-2 z-10 bg-blue-500 content-center justify-center grid text-center">
                 <div class="w-fit bg-blue-500 text-white px-5 rounded-lg text-sm">
                     <i class="fa-solid fa-tag text-lg mt-2 mr-2"></i>
-                    <i id="variables_arrow" class="fa-solid fa-angle-up text-lg mt-2 ml-2"></i>                    
+                    <i id="variables_arrow" class="fa-solid fa-angle-up text-lg mt-2 ml-2"></i>
                 </div>
-            </div>            
+            </div>
       </div>
       <div class="inline-block flex z-10 text-white bg-blue-100 rounded-lg max-h-36" id="variables">
           <ul id="variable_list" data-cy="variable_list" class="bg-blue-100 text-blue-500 px-4 whitespace-nowrap list-none mb-0"
@@ -229,7 +234,7 @@
           <i class="fa-solid fa-share-nodes ltr:mr-1 rtl:ml-1"></i>
           {{_('share')}}
         </button>
-      </div>      
+      </div>
     </div>
   </div>
 

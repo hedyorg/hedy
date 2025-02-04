@@ -8,7 +8,7 @@
 {% endif %}
 {% if customizations and customizations["teachers_adventure"] %}
   <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_adventure_banner" role="alert">
-      <div class="text-center center-text">{{_('previewing_adventure')}} 
+      <div class="text-center center-text">{{_('previewing_adventure')}}
         {% if initial_adventure.author == username %}
           <a class="text-white" href="/for-teachers/customize-adventure/{{initial_adventure.id}}">{{_('edit_adventure')}}</a>
         {% else %}
@@ -33,7 +33,7 @@
         {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
       </div>
       <span class="hidden md:block text-4xl font-light text-blue-800" >—</span>
-      <div id="adventure_name" type="text" class="text-4xl font-light text-blue-800">      
+      <div id="adventure_name" type="text" class="text-4xl font-light text-blue-800">
       {{ initial_adventure.name }}
       </div>
     </div>
@@ -47,7 +47,7 @@
       wait 100ms
       then toggle .opacity-0 on #sidebar_bg
       then toggle .opacity-75 on #sidebar_bg">
-      See more adventures 
+      See more adventures
       <i class="fa-solid fa-book-open-reader"></i>
       </button>
       <button class="blue-btn-new md:hidden" _="on click toggle .flex .hidden on #more_options">
@@ -99,7 +99,8 @@
   </div>
 </div>
 {% endif %}
-<div class="w-full max-w-screen-2xl mx-auto py-4 px-4 lg:px-16" id="code_content_container">
+<div class="w-full max-w-screen-2xl mx-auto py-4 px-4 lg:px-16" id="code_content_container"
+  data-kwlang="{{ current_language().lang }}" data-level="{{ level }}">
 {% block levelbody %}{% endblock %}
 </div>
 
