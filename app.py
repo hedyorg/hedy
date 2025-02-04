@@ -1715,76 +1715,6 @@ def tryit(level, program_id):
             return index(available_levels[0], program_id)
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    # At this point we can have the following scenario:
-    # - The level is allowed and available
-    # - But, if there is a quiz threshold we have to check again if the user has reached it
-    if 'level_thresholds' in customizations:
-        # If quiz in level and in some of the previous levels, then we check the threshold level.
-        check_threshold = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
-
-        if check_threshold and 'quiz' in customizations.get('level_thresholds'):
-
-            # Temporary store the threshold
-            threshold = customizations.get('level_thresholds').get('quiz')
-            level_quiz_data = QUIZZES[g.lang].get_quiz_data_for_level(level)
-            # Get the max quiz score of the user in the previous level
-            # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
-            # Todo: How can we fix this without a re-load?
-            quiz_stats = g_db().get_quiz_stats([current_user()['username']])
-
-            previous_quiz_level = level
-            for _prev_level in range(level - 1, 0, -1):
-                if _prev_level in available_levels and \
-                        customizations["sorted_adventures"][str(_prev_level)][-1].get("name") == "quiz" and \
-                        not any(x.get("scores") for x in quiz_stats if x.get("level") == _prev_level):
-                    previous_quiz_level = _prev_level
-                    break
-
-            # Not current leve-quiz's data because some levels may have no data for quizes,
-            # but we still need to check for the threshold.
-            if level - 1 in available_levels and level > 1 and \
-                    (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
-
-                # Only if we have found a quiz in previous levels with quiz data, we check the threshold.
-                if previous_quiz_level < level:
-                    # scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
-                    scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == previous_quiz_level]
-                    scores = [score for week_scores in scores for score in week_scores]
-                    max_score = 0 if len(scores) < 1 else max(scores)
-                    if max_score < threshold:
-                        # Instead of sending this level isn't available, we could send them to the right level?!
-                        # return redirect(f"/hedy/{previous_quiz_level}")
-                        return utils.error_page(
-                            error=403, ui_message=gettext('quiz_threshold_not_reached'))
-
-            # We also have to check if the next level should be removed from the available_levels
-            # Only check the quiz threshold if there is a quiz to obtain a score on the current level
-            if level <= hedy.HEDY_MAX_LEVEL and level_quiz_data:
-                next_level_with_quiz = level - 1
-                for _next_level in range(level, hedy.HEDY_MAX_LEVEL):
-                    # find the next level whose quiz isn't answered.
-                    if _next_level in available_levels and \
-                            customizations["sorted_adventures"][str(_next_level)][-1].get("name") == "quiz" and \
-                            not any(x.get("scores") for x in quiz_stats if x.get("level") == _next_level):
-                        next_level_with_quiz = _next_level
-                        break
-
-                # If the next quiz is in the current or upcoming level,
-                # we attempt to adjust available levels beginning from that level.
-                # e.g., student2 completed quiz 2, levels 3,4 and 5 have not quizes, 6 does.
-                # We should start from that level. If next_level_with_quiz >= level,
-                # meaning we don't need to adjust available levels ~ all available/quizes done!
-                if next_level_with_quiz >= level:
-                    scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == next_level_with_quiz]
-                    scores = [score for week_scores in scores for score in week_scores]
-                    max_score = 0 if len(scores) < 1 else max(scores)
-                    # We don't have the score yet for the next level -> remove all upcoming
-                    # levels from 'available_levels'
-                    if max_score < threshold:
-                        # if this level is currently available, but score is below max score
-                        customizations["below_threshold"] = (next_level_with_quiz + 1 in available_levels)
-                        available_levels = available_levels[:available_levels.index(next_level_with_quiz) + 1]
-
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
     customizations['available_levels'] = available_levels
@@ -1814,43 +1744,9 @@ def tryit(level, program_id):
 
     adventures_map = {a.short_name: a for a in adventures}
 
-    enforce_developers_mode = False
-    if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
-        enforce_developers_mode = True
     hide_cheatsheet = False
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
-
-    parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
-    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
-    tutorial = True if TUTORIALS[g.lang].get_tutorial_for_level(level) else False
-
-    quiz_questions = 0
-    parson_exercises = 0
-
-    if quiz:
-        quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
-    if parsons:
-        parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
-
-    parsons_hidden = 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']
-    quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
-
-    if customizations:
-        g_for_teachers().migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
-
-    parsons_in_level = True
-    quiz_in_level = True
-    if customizations.get("sorted_adventures") and\
-            len(customizations.get("sorted_adventures", {str(level): []})[str(level)]) > 2:
-        last_two_adv_names = [adv["name"] for adv in customizations["sorted_adventures"][str(level)][-2:]]
-        parsons_in_level = "parsons" in last_two_adv_names
-        quiz_in_level = "quiz" in last_two_adv_names
-
-    if not parsons_in_level or parsons_hidden:
-        parsons = False
-    if not quiz_in_level or quizzes_hidden:
-        quiz = False
 
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
@@ -1872,17 +1768,12 @@ def tryit(level, program_id):
         next_level=next_level,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
-        enforce_developers_mode=enforce_developers_mode,
+        enforce_developers_mode=False,
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
         commands=commands,
-        parsons=parsons,
-        parsons_exercises=parson_exercises,
-        tutorial=tutorial,
         latest=version(),
-        quiz=quiz,
-        quiz_questions=quiz_questions,
         cheatsheet=cheatsheet,
         progress={'completed': completed, 'total': len(adventures)},
         blur_button_available=False,
@@ -1892,7 +1783,7 @@ def tryit(level, program_id):
         adventures_for_index=adventures_for_index,
         # See initialize.ts
         javascript_page_options=dict(
-            enforce_developers_mode=enforce_developers_mode,
+            enforce_developers_mode=False,
             page='tryit',
             level=level_number,
             lang=g.lang,

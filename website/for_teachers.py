@@ -1040,21 +1040,28 @@ class ForTeachersModule(WebsiteModule):
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
 
-        # Add quiz and parsons as adventure names so that we can show them as tabs.
-        adventure_names["quiz"] = gettext("quiz_tab")
-        adventure_names["parsons"] = gettext("parsons_title")
-        default_adventures["quiz"] = {}
-        default_adventures["parsons"] = {}
+        # START HERE
+        # Check how to deal with usages of this endpoint through other endpoints
+
+        if not utils.is_redesign_enabled():
+            # Add quiz and parsons as adventure names so that we can show them as tabs.
+            adventure_names["quiz"] = gettext("quiz_tab")
+            adventure_names["parsons"] = gettext("parsons_title")
+            default_adventures["quiz"] = {}
+            default_adventures["parsons"] = {}
 
         parsons_hidden = False
         quizzes_hidden = False
+
         if customizations:
-            parsons_hidden = 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']
-            quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
-            if quizzes_hidden:
-                del default_adventures["quiz"]
-            if parsons_hidden:
-                del default_adventures["parsons"]
+            if not utils.is_redesign_enabled():
+                parsons_hidden = ('other_settings' in customizations and
+                                  'hide_parsons' in customizations['other_settings'])
+                quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
+                if quizzes_hidden:
+                    del default_adventures["quiz"]
+                if parsons_hidden:
+                    del default_adventures["parsons"]
 
             # in case this class has thew new way to select adventures
             if 'sorted_adventures' in customizations:
@@ -1079,7 +1086,7 @@ class ForTeachersModule(WebsiteModule):
             # Since it doesn't have customizations loaded, we create a default customization object.
             # This makes further updating with HTMX easier
             adventures_to_db = {}
-            for level, default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+            for level, default_adventures in hedy_content.adventures_order_per_level().items():
                 adventures_to_db[str(level)] = [{'name': adventure, 'from_teacher': False}
                                                 for adventure in default_adventures]
 
@@ -1127,7 +1134,7 @@ class ForTeachersModule(WebsiteModule):
         default_adventures = {i: set() for i in range(1, hedy.HEDY_MAX_LEVEL+1)}
         teacher_adventures = {i: set() for i in range(1, hedy.HEDY_MAX_LEVEL+1)}
 
-        for level, level_default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+        for level, level_default_adventures in hedy_content.adventures_order_per_level().items():
             for short_name in level_default_adventures:
                 adventure = SortedAdventure(short_name=short_name,
                                             long_name=adventure_names.get(short_name, short_name),

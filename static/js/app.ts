@@ -1788,16 +1788,11 @@ function reconfigurePageBasedOnTab(isTryItPage?: boolean, enforceDevMode?: boole
   resetWindow();
   updatePageElements();
 
-  if (currentTab === 'parsons') {
-    configureParson();
-    show_editor();
-    $('#fold_in_toggle_container').hide();
-  } else {
-    if (isTryItPage) {
-      $('[data-editorheight]').each((_, el) => {
-        const height = $(el).data('editorheight');
-        $(el).css('height', height);
-      });
+  if (!isTryItPage) {
+    if (currentTab === 'parsons') {
+      configureParson();
+      show_editor();
+      $('#fold_in_toggle_container').hide();
     } else {
       toggleDevelopersMode(!!enforceDevMode);
     }
