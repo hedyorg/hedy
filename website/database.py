@@ -580,6 +580,10 @@ class Database:
         """Return a user object from the username."""
         return self.users.get({"username": username.strip().lower()})
 
+    def users_by_username(self, usernames: list[str]):
+        """Return a list of user objects from the usernames."""
+        return self.users.batch_get([{"username": username.strip().lower()} for username in usernames])
+
     def user_by_email(self, email):
         """Return a user object from the email address."""
         return self.users.get({"email": email.strip().lower()})
@@ -1179,12 +1183,29 @@ class Database:
         role = "teacher" if self.users.get({"username": username}).get("is_teacher") == 1 else "student"
         return role
 
-    def get_users_that_starts_with(self, search):
+    def get_student_that_starts_with(self, search):
+        """
+        Gets students that aren't already in a class
+        """
         return self.users.get_many(
             {"epoch": 1, "username": dynamo.BeginsWith(search)},
             server_side_filter={"classes": dynamo.SetEmpty()},
             limit=10,
         )
+
+    def get_teacher_that_starts_with(self, search, class_id=None):
+        """
+        Gets teachers from DB that aren't second teacher's already of this class
+        """
+        server_side_filter = {'is_teacher': dynamo.Equals(1)}
+        if class_id:
+            server_side_filter['second_teacher_in'] = dynamo.NotContains(class_id)
+        records = self.users.get_many(
+            {"epoch": 1, "username": dynamo.BeginsWith(search)},
+            server_side_filter=server_side_filter,
+            limit=10
+        )
+        return records
 
 
 def batched(iterable, n):
