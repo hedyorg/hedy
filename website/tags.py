@@ -120,4 +120,4 @@ class TagsModule(WebsiteModule):
         for adventure in db_tag['tagged_in']:
             self.db.delete_tag_from_adventure(tag, adventure['id'])
 
-        return make_response('', 200)
+        return make_response({}, 200)
