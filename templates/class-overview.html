@@ -89,7 +89,7 @@
         </div>
       {% endif %}
       {% if class_info.teacher == username %}
-              <button class="green-btn w-fit mt-4" data-cy="add_second_teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
+              <button class="green-btn w-fit mt-4" data-cy="add_second_teacher" onclick='hedyApp.invite_to_class("{{class_info.id}}", {{_('second_teacher_prompt')|default(None)|tojson}}, "second_teacher")'>{{_('invite_teacher')}}</button>
       {% endif %}
       {% if invites %}
       <div data-cy="invites_block" class="pt-4 mb-6">
