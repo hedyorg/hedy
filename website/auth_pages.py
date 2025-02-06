@@ -487,7 +487,7 @@ class AuthModule(WebsiteModule):
                 )
             except BaseException:
                 return user, make_response({gettext("mail_error_change_processed")}, 400)
-            resp = make_response('', 200)
+            resp = make_response({}, 200)
         return user, resp
 
     @route('/public_profile', methods=['POST'])
