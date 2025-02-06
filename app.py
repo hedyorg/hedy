@@ -1902,17 +1902,6 @@ def tryit(level, program_id):
         ))
 
 
-@app.route('/search_students', methods=['GET'])
-def filter_usernames():
-    search = request.args.get('search', '')
-    if search == '':
-        return render_template('modal/results_reply.html', usernames=[])
-    results = g_db().get_users_that_starts_with(search)
-    usernames = [record['username'] for record in results]
-    usernames = sorted(usernames)
-    return render_template('modal/results_reply.html', usernames=usernames)
-
-
 @app.route('/hedy', methods=['GET'])
 def index_level():
     if current_user()['username']:
