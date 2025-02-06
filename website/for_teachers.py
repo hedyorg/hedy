@@ -39,6 +39,11 @@ for lang in hedy_content.ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
 
 
+WORKBOOKS = collections.defaultdict(hedy_content.NoSuchWorkbooks)
+for lang in hedy_content.ALL_LANGUAGES.keys():
+    WORKBOOKS[lang] = hedy_content.Workbooks(lang)
+
+
 class ForTeachersModule(WebsiteModule):
     def __init__(self, db: Database, auth: AuthModule):
         super().__init__("teachers", __name__, url_prefix="/for-teachers")
@@ -56,7 +61,6 @@ class ForTeachersModule(WebsiteModule):
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         # Get the adventures that are created by my second teachers.
         second_teacher_adventures = self.db.get_second_teacher_adventures(teacher_classes, user["username"])
-        # second_teacher_adventures = self.db.get_second_teacher_adventures(user)
         for adventure in list(teacher_adventures) + second_teacher_adventures:
             adventures.append(
                 {
@@ -67,6 +71,8 @@ class ForTeachersModule(WebsiteModule):
                     "date": utils.localized_date_format(adventure.get("date")),
                     "level": adventure.get("level"),
                     "levels": adventure.get("levels"),
+                    "why": adventure.get("why"),
+                    "why_class": render_why_class(adventure),
                 }
             )
 
@@ -91,11 +97,16 @@ class ForTeachersModule(WebsiteModule):
 
     @route("/workbooks/<level>", methods=["GET"])
     def get_workbooks(self, level):
-        content = hedyweb.PageTranslations("workbooks").get_page_translations(g.lang)
-        workbooks = content['workbooks']
-        line = '_' * 30
-        workbook_for_level = workbooks['levels'][int(level)-1]
+        try:
+            level = int(level)
+        except ValueError:
+            return utils.error_page(error=404, ui_message="Workbook does not exist")
 
+        workbook_for_level = WORKBOOKS[g.lang].get_workbook_for_level(level, g.lang)
+        if not workbook_for_level:
+            return utils.error_page(error=404, ui_message="Workbook does not exist")
+
+        line = '_' * 30
         for exercise in workbook_for_level['exercises']:
             if exercise['type'] == 'output':
                 exercise['title'] = gettext('workbook_output_question_title')
@@ -767,6 +778,7 @@ class ForTeachersModule(WebsiteModule):
             adventures=adventures,
             adventure_names=adventure_names,
             available_adventures=available_adventures,
+            is_redesign_enabled=utils.is_redesign_enabled(),
             custom_adventures=list(dict.fromkeys(
                 [item for sublist in available_adventures.values() for item in sublist if item.is_teacher_adventure])),
             adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
@@ -1510,8 +1522,7 @@ class ForTeachersModule(WebsiteModule):
             "creator": user["username"],
             "name": "",
             "classes": [],
-            "level": 1,
-            "levels": ["1"],
+            "levels": [],
             "content": "",
             "public": 0,
             "language": g.lang,
@@ -1521,7 +1532,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def get_new_adventure(self, user):
         class_id = request.args.get("class_id")
-        level = request.args.get("level", "1")
+        level = request.args.get("level")
 
         adventure_id = uuid.uuid4().hex
         adventure = self.create_basic_adventure(user, adventure_id)
@@ -1591,7 +1602,7 @@ class ForTeachersModule(WebsiteModule):
             max_level=hedy.HEDY_MAX_LEVEL,
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
             adventure_tags=adventure.get("tags", []),
-            level=adventure.get("level"),
+            level=adventure.get("level", ""),
             content=preview_content,
             js=dict(
                 content=adventure.get("content"),
@@ -1600,7 +1611,7 @@ class ForTeachersModule(WebsiteModule):
             javascript_page_options=dict(
                 page='customize-adventure',
                 lang=g.lang,
-                level=adventure.get("level"),
+                level=adventure.get("level", ""),
                 adventures=[adventure],
                 initial_tab='',
                 current_user_name=user['username'],
@@ -1645,7 +1656,7 @@ class ForTeachersModule(WebsiteModule):
         if body.get("classes"):
             current_classes = current_adventure.get('classes', [])
         current_levels = []
-        if current_adventure["level"] != 1:
+        if not current_adventure.get('level'):
             current_levels = current_adventure.get('levels', [])
 
         adventures = self.db.get_teacher_adventures(user["username"])
@@ -1723,7 +1734,8 @@ class ForTeachersModule(WebsiteModule):
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
         adventures = []
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
-        # Get the adventures that are created by my second teachers.
+        # Get the adventures that are created by my second teachers. This may be confusing to people so
+        # annotate the adventures.
         second_teacher_adventures = self.db.get_second_teacher_adventures(teacher_classes, user["username"])
         for adventure in list(teacher_adventures) + second_teacher_adventures:
             adventures.append(
@@ -1733,8 +1745,10 @@ class ForTeachersModule(WebsiteModule):
                     "creator": adventure.get("creator"),
                     "author": adventure.get("author"),
                     "date": utils.localized_date_format(adventure.get("date")),
-                    "level": adventure.get("level"),
+                    "level": adventure.get("level", ""),
                     "levels": adventure.get("levels"),
+                    "why": adventure.get("why"),
+                    "why_class": render_why_class(adventure),
                 }
             )
         return render_partial('htmx-adventures-table.html', teacher_adventures=teacher_adventures)
@@ -1864,3 +1878,10 @@ def _create_customizations(db, class_id):
     }
     db.update_class_customizations(customizations)
     return customizations
+
+
+def render_why_class(adventure):
+    return safe_format(
+        gettext('see_adventure_shared_class'),
+        class_name=adventure.get("why_class"),
+        creator=adventure.get('creator'))

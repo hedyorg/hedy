@@ -237,7 +237,7 @@ adventures:
                     ```
     add_remove_command:
         default_save_name: Dodaj_komendę_remove
-        description: wprowadzamy {add}{to_list} i {remove} {from}
+        description: wprowadzamy {add} {to_list} i {remove} {from}
         levels:
             3:
                 story_text: |
@@ -848,7 +848,7 @@ adventures:
                     {print} {else} 'Nie dołączasz na lekcję pływania'
                     discount {is} 'Czy posiadasz kod zniżkowy?'
                     {if} zniżka {is} tak
-                    zniżka-odpowiedź {is} {ask} 'Jaki jest twój kod zniżkowy?'
+                    zniżka_odpowiedź {is} {ask} 'Jaki jest twój kod zniżkowy?'
                     kody_zniżkowe = Senior4231, Student8786, NewMember6709
                     {if} zniżka_odpowiedź {is} {in} kod_zniżkowy
                     {print} 'Do zapłaty będzie $3,50'
@@ -1699,7 +1699,7 @@ adventures:
                     ```
             18:
                 story_text: |
-                    Na koniec zmienimy `{for} i {in} {range} 1 to 5` w prawdziwy kod Pythona, taki jak:
+                    Na koniec zmienimy `{for} i {in} {range} 1 {to} 5` w prawdziwy kod Pythona, taki jak:
                 example_code: "```\n{for} i {in} {range}(1,5):\n    {print} (i)\n```\n"
         default_save_name: for
         name: '{for}'
@@ -2197,7 +2197,7 @@ adventures:
                     ### Ćwiczenie
                     Skopiuj przykładowe kody i wypełnij puste pola, tak aby działały!
 
-                    **Dodatkowo ** Ta historia jest dość prosta, może możesz zrobić ją trochę straszniejszą poprzez dodanie bardziej ekscytującej historii.
+                    **Dodatkowo** Ta historia jest dość prosta, może możesz zrobić ją trochę straszniejszą poprzez dodanie bardziej ekscytującej historii.
                     Masz teraz bardzo ograniczone wyniki, są tylko 3 opcje tego, co może być za drzwiami. Może wymyślisz więcej potworów do dodania do listy!
                 example_code: |
                     ```
@@ -2454,7 +2454,7 @@ adventures:
                     ```
                     zwierzęta {is} pies, krowa, owca
                     odpowiedź {is} {ask} 'Jakie jest Twoje ulubione zwierzę?'
-                    _ odpowiedź _zwierzęta _ 'Moje też!'
+                    _ odpowiedź _ zwierzęta _ 'Moje też!'
                     _ _ 'Moje ulubione zwierzęta to psy, krowy i owce'
                     ```
         name: '{in}'
@@ -2475,11 +2475,11 @@ adventures:
                 story_text_2: |
                     ### Ćwiczenie
                     Czas na tworzenie własnych zmiennych!
-                    W przykładowym kodzie podaliśmy przykład zmiennej `favorite_animal`. W wierszu 1 zmienna jest ustawiona, a w wierszu 2 użyliśmy zmiennej w komendzie {print}.
+                    W przykładowym kodzie podaliśmy przykład zmiennej `ulubione_zwierzę`. W wierszu 1 zmienna jest ustawiona, a w wierszu 2 użyliśmy zmiennej w komendzie {print}.
                     Po pierwsze, dokończ nasz przykład, wypełniając swoje ulubione zwierzę w pustym miejscu. Następnie sam napisz co najmniej 3 z tych kodów. Wybierz zmienną i ustaw ją za pomocą polecenia {is}. Następnie użyj go z poleceniem {print}, tak jak my to zrobiliśmy.
                 example_code_2: |
                     ```
-                    Ulubione_zwierzę {is} _
+                    ulubione_zwierzę {is} _
                     {print} Lubię ulubione_zwierzę
                     ```
             6:
@@ -2527,7 +2527,7 @@ adventures:
 
                     ### Ćwiczenie
                     Wydłuż kod, dodając co najmniej 3 dodatkowe słowa, aby gracz mógł się uczyć.
-                    **Dodatkowo ** Oczywiście możesz użyć innego języka niż francuski. Możesz zmienić kod na dowolny język, którego chcesz się nauczyć.
+                    **Dodatkowo** Oczywiście możesz użyć innego języka niż francuski. Możesz zmienić kod na dowolny język, którego chcesz się nauczyć.
                 example_code: "```\n{print} 'Learn French!'\ncat {is} {ask} '🐱'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '🐸'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
             16:
                 story_text: |
@@ -2977,7 +2977,7 @@ adventures:
                     ```
                     słowa {is} ara, Hedy
                     {print} Naucz twoją papugę!
-                    nowe_słowo{is}{ask}Jakiego słowa chcesz ja nauczyć?
+                    nowe_słowo {is} {ask}Jakiego słowa chcesz ja nauczyć?
                     _ nowe_słowo _ słowa
                     {print} 🧒 Powiedz nowe_słowo , Hedy!
                     {print} 🦜 słowa {at} {random}
@@ -3627,7 +3627,7 @@ adventures:
                     Ta gra nie jest zbyt interaktywna, ale nie martw się! W następnej przygodzie dowiesz się, jak używać zmiennych za pomocą polecenia `{ask}`, co sprawi, że Twoja gra będzie interaktywna!
                 example_code: |-
                     ```
-                    wybór{is} kamień
+                    wybór {is} kamień
                     {print} Wybieram_
                     ```
             3:
@@ -3657,7 +3657,7 @@ adventures:
                 example_code: |
                     ```
                     możliwości {is} kamień, papier, nożyce
-                    {print}_ Komputer wybiera ... _ możliwości {at}{random}
+                    {print} _Komputer wybiera..._ możliwości {at} {random}
                     ```
             5:
                 story_text: |
@@ -4333,7 +4333,7 @@ adventures:
                     Ćwiczenia
                     Ten kod tworzy teraz literę T Możesz to zmienić na literę B?
 
-                    * * Extra * * Zmień literę na inną literę, jak pierwsza z twojego imienia.
+                    **Extra** Zmień literę na inną literę, jak pierwsza z twojego imienia.
                     Możesz również zrobić wiele liter, ustawiając kolor na `{color}` `{white}` pomiędzy. 
                 example_code: |
                     ```

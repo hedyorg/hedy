@@ -12,6 +12,8 @@ logger = logging.getLogger(__name__)
 
 COUNTRIES = static_babel_content.COUNTRIES
 
+MAX_LEVEL = 18
+
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
 ALL_KEYWORD_LANGUAGES = {}
@@ -537,8 +539,15 @@ class Commands(StructuredDataFile):
 
 
 def deep_translate_keywords(yaml, keyword_language):
+    """Recurse through a data structure and replace keyword placeholders in any strings we encounter.
+
+    It's easy to make content that doesn't replace properly (make typos in the
+    amounts of `{` for example), and then our entire build stops. So what we'll
+    do instead is return the original, untranslated string. This makes it
+    obvious that something is wrong if the content is looked at, while not
+    stopping the build.
+    """
     try:
-        """Recurse through a data structure and replace keyword placeholders in any strings we encounter."""
         if isinstance(yaml, str):
             # this is used to localize adventures linked in slides (PR 3860)
             yaml = yaml.replace('/raw', f'/raw?keyword_language={keyword_language}')
@@ -548,10 +557,18 @@ def deep_translate_keywords(yaml, keyword_language):
         if isinstance(yaml, dict):
             return {k: deep_translate_keywords(v, keyword_language) for k, v in yaml.items()}
         return yaml
-    except ValueError as E:
-        raise ValueError(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
-    except TypeError as E:
-        raise TypeError(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
+    except Exception as E:
+        logger.exception(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
+        return yaml
+
+
+def try_render_keywords(str, keyword_language):
+    """Render {placeholder}s in a string, return the original if there are any errors."""
+    try:
+        return safe_format(str, **KEYWORDS.get(keyword_language))
+    except Exception:
+        logger.exception('Error rendering keywords')
+        return str
 
 
 def get_localized_name(name, keyword_lang):
@@ -707,6 +724,21 @@ class Slides(StructuredDataFile):
 class NoSuchSlides:
     def get_slides_for_level(self, level, keyword_lang):
         return {}
+
+
+class NoSuchWorkbooks:
+    def get_workbook_for_level(self, level, keyword_lang):
+        return {}
+
+
+class Workbooks(StructuredDataFile, NoSuchWorkbooks):
+    def __init__(self, language):
+        self.language = language
+        super().__init__(f'{content_dir}/workbooks/{self.language}.yaml')
+
+    def get_workbook_for_level(self, level, keyword_lang='en'):
+        workbook_for_level = self.file.get('levels', {}).get(level, {})
+        return deep_translate_keywords(workbook_for_level, keyword_lang)
 
 
 class NoSuchTags:

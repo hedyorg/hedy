@@ -24,7 +24,7 @@ from markupsafe import Markup
 from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
                    redirect, request, send_file, url_for, Blueprint,
                    send_from_directory, session, current_app)
-from flask_babel import Babel
+from flask_babel import Babel, format_timedelta
 from website.flask_helpers import gettext_with_fallback as gettext
 from website.flask_commonmark import Commonmark
 from flask_compress import Compress
@@ -1452,12 +1452,14 @@ def index(level, program_id):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = None
+    suppress_save_and_load = False
     if program_id:
         result = g_db().program_by_id(program_id)
         if not result or not get_current_user_program_permissions(result):
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
+        suppress_save_and_load = True
 
     # Initially all levels are available -> strip those for which conditions
     # are not met or not available yet
@@ -1668,6 +1670,7 @@ def index(level, program_id):
             adventures=adventures,
             initial_tab=initial_tab,
             current_user_name=current_user()['username'],
+            suppress_save_and_load=suppress_save_and_load,
         ))
 
 
@@ -1683,12 +1686,14 @@ def tryit(level, program_id):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = None
+    suppress_save_and_load = False
     if program_id:
         result = g_db().program_by_id(program_id)
         if not result or not get_current_user_program_permissions(result):
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
+        suppress_save_and_load = True
 
     # Initially all levels are available -> strip those for which conditions
     # are not met or not available yet
@@ -1899,6 +1904,7 @@ def tryit(level, program_id):
             adventures=adventures,
             initial_tab=initial_tab,
             current_user_name=current_user()['username'],
+            suppress_save_and_load=suppress_save_and_load,
         ))
 
 
@@ -2069,7 +2075,7 @@ def render_code_in_editor(level):
                                adventures=adventures,
                                initial_tab='start',
                                current_user_name=current_user()['username'],
-                               suppress_save_and_load_for_slides=True,
+                               suppress_save_and_load=True,
                            ))
 
 
@@ -2707,9 +2713,45 @@ def chunk(x, size):
 
 @app.app_template_filter()
 def format_date(date):
+    """Format a date/time as a full description of the date/time.
+
+    In HTML, render a timestamp with both absolute and relative parts, like this:
+
+    ```
+    <span title="{{ date|format_date }}">
+      {{ date|format_date_rel }}
+    </span>
+    ```
+    """
     if not isinstance(date, int):
         return date
     return utils.localized_date_format(date)
+
+
+@app.app_template_filter()
+def format_date_rel(date):
+    """Format a date/time as a relative time.
+
+    In HTML, render a timestamp with both absolute and relative parts, like this:
+
+    ```
+    <span title="{{ date|datetimeformat }}">
+      {{ date|format_date_rel }}
+    </span>
+    ```
+    """
+    if not isinstance(date, int):
+        return date
+    now = datetime.datetime.now(tz=datetime.UTC)
+    dt = datetime.datetime.fromtimestamp(date, tz=datetime.UTC)
+    # (dt - now) feels the wrong way around, but otherwise this formats "3 weeks from now"
+    return format_timedelta(dt - now, granularity='minute', add_direction=True)
+
+
+@app.app_template_filter()
+def jsts_to_unix(date):
+    """Convert a JavaScript timestamp (in milliesconds since epoch) to a UNIX timestamp (in seconds since epoch)."""
+    return int(date / 1000)
 
 
 @app.app_template_global()

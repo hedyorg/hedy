@@ -2,11 +2,11 @@ adventures:
     story:
         name: Hikaye
         default_save_name: Hikaye
-        description: Hikaye
+        description: Kısa bir hikaye oluşturun
         levels:
             1:
                 story_text: |
-                    Seviye 1'de, kendiniz oluşturduğu farklı bir ana karakterle bir hikaye oluşturabilirsiniz.
+                    Seviye 1'de, kendi oluşturduğunuz farklı bir ana karakterle bir hikaye oluşturabilirsiniz.
 
                     İlk satırda `{ask}` kullanın ve hikayenin ana karakterinin kim olacağını sorun.
 
@@ -16,9 +16,9 @@ adventures:
                     ```
                     {ask} Bu hikayenin ana karakteri kim?
                     {print} Ana karakter şimdi ormanda yürüyecek
-                    {echo} Onlar biraz korkmuş,
-                    {print} Onlar her yerde çılgın sesler duyuyor.
-                    {print} Onlar buranın perili bir orman olmasından korkuyor.
+                    {echo} Biraz korkmuş bizim
+                    {print} Her yerde çılgın sesler duyuyor.
+                    {print} Buranın perili bir orman olmasından korkuyor.
                     ```
                 story_text_2: |
                     ### Alıştırma
@@ -54,21 +54,21 @@ adventures:
                     **Ek Görev** Hikayenizde gerilim oluşturmak için kodunuza bir `{sleep}` komutu ekleyin.
             3:
                 story_text: |
-                    3. seviyede, hikayenizi daha eğlenceli hale getirebilirsiniz. Bunun gibi herhangi bir canavar, hayvan veya diğer engeller için rastgelelik kullanabilirsiniz:
+                    Seviye 3'te, hikayenizi artık daha eğlenceli hale getirebilirsiniz. Bunun gibi herhangi bir canavar, hayvan veya diğer engeller için rastgelelik kullanabilirsiniz:
                 example_code: |
                     ```
-                    animals {is} 🦔, 🐿, 🦉, 🦇
-                    {print} They now hear the sound of an animals {at} {random}
+                    hayvanlar {is} 🦔, 🐿, 🦉, 🦇
+                    {print} Şimdi bir hayvanlar {at} {random} sesini duyuyorlar
                     ```
                 story_text_2: |
                     Hikayenizde `{add}` komutu da kullanışlı olabilir.
                 example_code_2: |
                     ```
-                    {print} They hear a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was an animals {at} {random}
+                    {print} Bir ses duydular
+                    hayvanlar {is} 🐿, 🦔, 🦇, 🦉
+                    hayvan {is} {ask} Ne olduğunu düşünüyorsun?
+                    {add} hayvan {to_list} hayvanlar
+                    {print} bu bir hayvanlar {at} {random}
                     ```
                 story_text_3: |
                     Bu, hikayenizdeki `{remove}` komutunun bir örneğidir
@@ -82,8 +82,8 @@ adventures:
                     {print} Sırt çantası çok ağırlaştı.
                     {print} İçinde bir şişe su, bir el feneri ve bir tuğla vardı.
                     çanta {is} şişe su, el feneri, tuğla
-                    çıkar {is} {ask} Hangi eşyayı atmalı?
-                    {remove} çıkar {from} çanta
+                    atılacak {is} {ask} Hangi eşyayı atmalı?
+                    {remove} atılacak {from} çanta
                     ```
             4:
                 story_text: |
@@ -264,14 +264,14 @@ adventures:
                     {print}('Bu hikayeye hoş geldin!')
                     ```
     add_remove_command:
-        name: '{add} {to} & {remove} {from}'
+        name: '{to_list}{add} {to} & {remove} {from}'
         default_save_name: ekle_çıkar_komutu
-        description: '{add} {to_list} ve {remove} {from} giriş'
+        description: '{add} {to_list} ve {remove} {from} komutlarına giriş'
         levels:
             3:
                 story_text: |
                     ## ekle şuraya
-                    Listeye `{add} {to_list}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
+                    Listeye `{add} {to}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
                 example_code: |
                     ```
                     hayvanlar {is} köpek, kedi, kanguru
@@ -304,7 +304,7 @@ adventures:
                     ```
     and_or_command:
         default_save_name: ve veya
-        description: ve ile veya 'ya giriş
+        description: ve & veya'nın tanıtılması
         levels:
             13:
                 story_text: |-
@@ -583,9 +583,9 @@ adventures:
                 story_text: |
                     Hedy'ye hoş geldiniz! Seviye 1'de, bir hikaye yazdırarak başlayabilirsiniz.
 
-                    Programlama alanının altındaki yeşil 'Kodu çalıştır' düğmesini kullanarak kodu kendiniz deneyin.
+                    Programlama alanının altındaki yeşil 'Kodu Çalıştır' düğmesini kullanarak kodu kendiniz deneyin.
 
-                    Hazır mısınız? O zaman ilk komutunuzu öğrenmek için bir sonraki sekmeye gidin!
+                    Hazır mısınız? O zaman ilk komutunuzu öğrenmek için bir sonraki maceraya gidin!
             2:
                 story_text: |
                     Tebrikler! Seviye 2'ye ulaştınız. Umarım şimdiden bazı harika kodlar yapmışsınızdır!
@@ -1880,8 +1880,10 @@ adventures:
                     sıcaklık = 25
                     {print}('Hava dışarıda ', sıcaklık, ' derece')
                     ```
-
+                    ```
+                    isim = 'Hedy'
                     {print}('Benim adım ', isim)
+                    ```
     quizmaster:
         name: Kısa sınav ustası
         default_save_name: Kısa sınav ustası

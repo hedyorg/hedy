@@ -4,7 +4,6 @@ import { ClientMessages } from './client-messages';
 import DOMPurify from 'dompurify'
 import { startTeacherTutorial } from './tutorials/tutorial';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
-import { initializeTranslation } from './lezer-parsers/tokens';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
 import { autoSave } from './autosave';
@@ -28,7 +27,7 @@ export function create_class(class_name_prompt: string) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      window.location.pathname = '/for-teachers/customize-class/' + response.id ;      
+      window.location.pathname = '/for-teachers/customize-class/' + response.id ;
     }).fail(function(err) {
       return modal.notifyError(err.responseText);
     });
@@ -94,7 +93,7 @@ function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, 
             });
         }
       }
-      location.reload();      
+      location.reload();
     }).fail(function(err) {
       return modal.notifyError(err.responseText);
     });
@@ -109,7 +108,7 @@ export function delete_class(id: string, prompt: string) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function () {
-      location.reload();      
+      location.reload();
     }).fail(function (err) {
       modal.notifyError(err.responseText);
     });
@@ -180,7 +179,7 @@ function get_formatted_content(content: string, levels: string[], language: stri
   let minLevel = 1;
   if (levels.length) {
     minLevel = Math.min(...levels.map((el) => Number(el)));
-  } 
+  }
   let snippets: string[] = [] ;
   let snippetsFormatted: string[] = [];
   let keywords: string[] = []
@@ -228,7 +227,7 @@ function update_db_adventure(adventure_id: string) {
   }
   const content = DOMPurify.sanitize(window.ckEditor.getData());
   const solutionExampleCode = DOMPurify.sanitize(window.ckSolutionEditor.getData());
-  
+
   const formatted_content = get_formatted_content(content, levels, language);
   const formatted_solution_code = get_formatted_content(solutionExampleCode, levels, language);
   const agree_public = $('#agree_public').prop('checked');
@@ -256,7 +255,7 @@ function update_db_adventure(adventure_id: string) {
   });
 }
 
-export function update_adventure(adventure_id: string, first_edit: boolean, prompt: string) {  
+export function update_adventure(adventure_id: string, first_edit: boolean, prompt: string) {
   if (!first_edit) {
     modal.confirm (prompt, function () {
         update_db_adventure(adventure_id);
@@ -291,19 +290,17 @@ function show_preview(content: string) {
         // In case it has a child <code> node
         if(codeNode) {
           codeNode.hidden = true
-          code = codeNode.innerText          
+          code = codeNode.innerText
         } else {
           code = preview.textContent || "";
           preview.textContent = "";
         }
         const exampleEditor = editorCreator.initializeReadOnlyEditor(preview, dir);
-        exampleEditor.contents = code.trimEnd();        
+        exampleEditor.contents = code.trimEnd();
         for (const level of levels) {
-          initializeTranslation({
-            keywordLanguage: theKeywordLanguage,
-            level: parseInt(level, 10),
-          })
-          exampleEditor.setHighlighterForLevel(parseInt(level, 10));                
+          exampleEditor.setHighlighterForLevel(parseInt(level, 10), theKeywordLanguage);
+          // We only need to set a highlighter for a single level.
+          break;
         }
     }
 }
@@ -422,7 +419,7 @@ export function save_customizations(class_id: string) {
       }),
       contentType: 'application/json',
       dataType: 'json'
-    }).done(function (response) {      
+    }).done(function (response) {
       modal.notifySuccess(response.success);
       $('#remove_customizations_button').removeClass('hidden');
     }).fail(function (err) {
@@ -433,7 +430,7 @@ export function save_customizations(class_id: string) {
 export function restore_customization_to_default(prompt: string) {
     modal.confirm (prompt, async function () {
       // We need to know the current level that is selected by the user
-      // so we can know which level to draw in the template  
+      // so we can know which level to draw in the template
       let active_level_id : string = $('[id^=level_]')[0].id;
       let active_level = active_level_id.split('_')[1]
       try {
@@ -447,18 +444,18 @@ export function restore_customization_to_default(prompt: string) {
         $('.opening_date_input').prop("type", "text")
                                 .blur()
                                 .val('')
-                                .prop('disabled', false)                                
+                                .prop('disabled', false)
                                 .attr('placeholder', ClientMessages.directly_available)
-                                .each(function() {         
+                                .each(function() {
                                       if($(this).hasClass('bg-green-300')) {
                                         $(this).removeClass('bg-green-300')
                                               .addClass('bg-gray-200')
                                       }
                                 });
 
-        $('[id^=enable_level_]').prop('checked', true);                
+        $('[id^=enable_level_]').prop('checked', true);
         setLevelStateIndicator(active_level);
-        modal.notifySuccess(ClientMessages.customization_deleted);          
+        modal.notifySuccess(ClientMessages.customization_deleted);
       } catch (error) {
         console.error(error);
       }
@@ -794,8 +791,8 @@ export function initializeClassOverviewPage(_options: InitializeClassOverviewPag
   // causes the old version of the page to be shown
   // So we hard reload it
   window.addEventListener( "pageshow", function ( event ) {
-    var historyTraversal = event.persisted || 
-                           ( typeof window.performance != "undefined" && 
+    var historyTraversal = event.persisted ||
+                           ( typeof window.performance != "undefined" &&
                                 window.performance.navigation.type === 2 );
     if ( historyTraversal ) {
       window.location.href = window.location.href
@@ -808,7 +805,7 @@ interface InitializeGraphOptions {
   readonly level: number
 }
 
-interface student { 
+interface student {
   adventures_tried: number,
   number_of_errors: number,
   successful_runs: number,

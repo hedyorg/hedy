@@ -23,7 +23,6 @@ import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
-import { initializeTranslation } from './lezer-parsers/tokens';
 import { initializeActivity } from './user-activity';
 import { IndexTabs, SwitchAdventureEvent } from './index-tabs';
 export let theGlobalDebugger: any;
@@ -192,7 +191,7 @@ export interface InitializeCodePageOptions {
   readonly start_tutorial?: boolean;
   readonly initial_tab: string;
   readonly current_user_name?: string;
-  readonly suppress_save_and_load_for_slides?: boolean;
+  readonly suppress_save_and_load?: boolean;
   readonly enforce_developers_mode?: boolean;
 }
 
@@ -218,7 +217,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   if ($editor.length) {
     const dir = $('body').attr('dir');
     theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
-    initializeTranslation({keywordLanguage: theKeywordLanguage, level: theLevel});
     attachMainEditorEvents(theGlobalEditor);
     initializeDebugger({
       editor: theGlobalEditor,
@@ -232,7 +230,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
   let tabs: any;
-  if (options.page == 'tryit') {
+  const isTryItPage = options.page == 'tryit';
+  if (isTryItPage) {
     tabs = new IndexTabs({
       // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
       // We click on `level` to load a program associated with level, if any.
@@ -256,7 +255,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     currentTab = ev.newTab;
     const adventure = theAdventures[currentTab];
 
-    if (!options.suppress_save_and_load_for_slides) {
+    if (!options.suppress_save_and_load) {
       // Load initial code from local storage, if available
       const programFromLs = localLoad(currentTabLsKey());
       // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
@@ -266,7 +265,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
         adventure.save_info = 'local-storage';
       }
     }
-    reconfigurePageBasedOnTab(options.enforce_developers_mode);
+    reconfigurePageBasedOnTab(isTryItPage, options.enforce_developers_mode);
     checkNow();
     theLocalSaveWarning.switchTab();
   });
@@ -283,7 +282,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   initializeShareProgramButtons();
   initializeHandInButton();
 
-  if (options.suppress_save_and_load_for_slides) {
+  if (options.suppress_save_and_load) {
     disableAutomaticSaving();
   }
 
@@ -369,10 +368,6 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   // We need to enable the main editor for the program page as well
   const dir = $('body').attr('dir');
   theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
-  initializeTranslation({
-    keywordLanguage: options.lang,
-    level: options.level
-  });
   attachMainEditorEvents(theGlobalEditor);
   theGlobalEditor.contents = options.code;
   initializeDebugger({
@@ -386,12 +381,6 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: boolean) {
   const dir = $("body").attr("dir");
   initializeParsons();
-  if (theLevel) {
-    initializeTranslation({
-      keywordLanguage: theKeywordLanguage,
-      level: theLevel
-    })
-  }
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
@@ -399,7 +388,7 @@ export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: 
       $(preview)
         .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-        .attr('lang', theKeywordLanguage);
+        .attr('data-lang', theKeywordLanguage);
       // If the request comes from HTMX initialize all directly
         if (initializeAll) {
           convertPreviewToEditor(preview, container, dir)
@@ -434,7 +423,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   // And add an overlay button to the editor if requested via a show-copy-button class, either
   // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
   if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-    const adventure = container.getAttribute('data-tabtarget')
+    const adventure = container.closest('[data-tabtarget]')?.getAttribute('data-tabtarget');
     const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
     let symbol = "⇥";
     if (dir === "rtl") {
@@ -444,19 +433,22 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
       if (!theGlobalEditor?.isReadOnly) {
         theGlobalEditor.contents = exampleEditor.contents + '\n';
       }
-      update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+      update_view("main_editor_keyword_selector", <string>$(preview).attr('data-lang'));
       stopit();
       clearOutput();
     });
   }
-  const levelStr = $(preview).attr('level');
-  const lang = $(preview).attr('lang');
-  if (levelStr && lang) {
-    initializeTranslation({
-      keywordLanguage: lang,
-      level: parseInt(levelStr, 10),
-    })
-    exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
+
+  // Try to find the level for this code block. We first look at the 'level'
+  // attribute on the <pre> element itself.  This is to preserve legacy
+  // behavior, I'm not sure where this is still used. The modern way is to look
+  // for 'data-level' attributes on the element itself and any containing element.
+  // Same for 'lang' and 'data-lang'.
+  const levelStr = $(preview).attr('level') ?? $(preview).closest('[data-level]').attr('data-level');
+  const kwlang = $(preview).attr('lang') ?? $(preview).closest('[data-kwlang]').attr('data-kwlang');
+  if (levelStr) {
+    const level = parseInt(levelStr, 10);
+    exampleEditor.setHighlighterForLevel(level, kwlang ?? 'en');
   }
 }
 
@@ -474,8 +466,8 @@ export function stopit() {
   document.onkeydown = null;
   $('#keybinding_modal').hide();
   $('#sleep_modal').hide();
-  
-  if (sleepRunning) {    
+
+  if (sleepRunning) {
     sleepRunning = false;
   }
 
@@ -586,7 +578,7 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           error.showWarning(response.Warning);
         }
 
-        
+
         if (adventure && response.save_info) {
           adventure.save_info = response.save_info;
           adventure.editor_contents = code;
@@ -660,11 +652,6 @@ export function tryPaletteCode(exampleCode: string) {
   } else {
     theGlobalEditor.contents += exampleCode;
   }
-  //As the commands try-it buttons only contain english code -> make sure the selected language is english
-  if (!($('#editor').attr('lang') == 'en')) {
-      $('#editor').attr('lang', 'en');
-      update_view("main_editor_keyword_selector", "en");
-  }
 }
 
 export function viewProgramLink(programId: string) {
@@ -676,7 +663,7 @@ function updateProgramCount() {
   const countText = programCountDiv.text();
   const regex = /(\d+)/;
   const match = countText.match(regex);
-  
+
   if (match && match.length > 0) {
     const currentCount = parseInt(match[0]);
     const newCount = currentCount - 1;
@@ -688,7 +675,7 @@ function updateProgramCount() {
 function updateSelectOptions(selectName: string) {
   let optionsArray: string[] = [];
   const select = $(`select[name='${selectName}']`);
-  
+
   // grabs all the levels and names from the remaining adventures
   $(`[id="program_${selectName}"]`).each(function() {
       const text = $(this).text().trim();
@@ -725,8 +712,8 @@ export async function delete_program(id: string, prompt: string) {
     updateSelectOptions('adventure');
     // this function decreases the total programs saved
     updateProgramCount();
-    const response = await postJson('/programs/delete', { id });    
-    
+    const response = await postJson('/programs/delete', { id });
+
     // issue request on the Bar component.
     modal.notifySuccess(response.message);
   });
@@ -1002,7 +989,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         $('#stopit').hide();
         $('#runit').show();
         $('#runit').show();
-        if (Sk.execLimit != 1) {          
+        if (Sk.execLimit != 1) {
           return ClientMessages ['Program_too_long'];
         } else {
           return null;
@@ -1051,7 +1038,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
-      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {        
+      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {
         error.showWarning(ClientMessages['Empty_output']);
         return;
       }
@@ -1186,7 +1173,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   function builtinRead(x: string) {
     if (x in skulptExternalLibraries) {
       const tmpPath = skulptExternalLibraries[x]["path"];
-      
+
       let request = new XMLHttpRequest();
       request.open("GET", tmpPath, false);
       request.send();
@@ -1442,6 +1429,7 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
+// Remove this function when enabling the new design
 export function setDevelopersMode(event='click', enforceDevMode: boolean) {
   let enable: boolean = false;
   switch (event) {
@@ -1460,6 +1448,7 @@ export function setDevelopersMode(event='click', enforceDevMode: boolean) {
   toggleDevelopersMode(!!enforceDevMode)
 }
 
+// Remove this function when enabling the new design
 function toggleDevelopersMode(enforceDevMode: boolean) {
   const enable = window.localStorage.getItem('developer_mode') === 'true' || enforceDevMode;
   // DevMode hides the tabs and makes resizable elements track the appropriate size.
@@ -1470,8 +1459,9 @@ function toggleDevelopersMode(enforceDevMode: boolean) {
   $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
   // Parsons dont need a fixed height
   if (currentTab === 'parsons') return
-  $('[data-devmodeheight]').each((_, el) => {
-    const heights = $(el).data('devmodeheight').split(',') as string[];
+
+  $('[data-editorheight]').each((_, el) => {
+    const heights = $(el).data('editorheight').split(',') as string[];
     $(el).css('height', heights[enable ? 1 : 0]);
   });
 }
@@ -1530,7 +1520,7 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       // save translated code to local storage
       // such that it can be fetched after reload
       localSave(currentTabLsKey(), { saveName, code });
-      $('#editor').attr('lang', new_lang);
+      $('#editor').attr('data-lang', new_lang);
 
       // update the whole page (example codes)
       const hash = window.location.hash;
@@ -1585,7 +1575,7 @@ export async function change_language(lang: string) {
 
 function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {
-    if ($(this).attr('lang') == new_lang) {
+    if ($(this).attr('data-lang') == new_lang) {
       $(this).show();
     } else {
       $(this).hide();
@@ -1709,13 +1699,15 @@ function resetWindow() {
  * Update page element visibilities/states based on the state of the current tab
  */
 function updatePageElements() {
-  const isCodeTab = !(currentTab === 'quiz' || currentTab === 'parsons');
-
-  // .toggle(bool) sets visibility based on the boolean
+  const isParsonsTab = currentTab === 'parsons'
+  const isCodeTab = !(currentTab === 'quiz' || isParsonsTab);
+ // .toggle(bool) sets visibility based on the boolean
 
   // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
   $('#adventures_tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
   $('#developers_toggle_container').toggle(isCodeTab);
+  // this is for the new design, it needs to be removed once we ship it
+  $('#adventures').toggle(true);
   $('#level_header input').toggle(isCodeTab);
   $('#parsons_code_container').toggle(currentTab === 'parsons');
   $('#editor_area').toggle(isCodeTab || currentTab === 'parsons');
@@ -1762,7 +1754,7 @@ function updatePageElements() {
     $('#commands_dropdown_container').show()
     $('#hand_in_button').show()
   }
-  if (currentTab === 'parsons'){    
+  if (currentTab === 'parsons'){
     $('#share_program_button').hide()
     $('#read_outloud_button_container').hide()
     $('#cheatsheet_dropdown_container').hide()
@@ -1780,19 +1772,36 @@ function updatePageElements() {
 }
 
 /**
+ * Load parsons and update the editors height accordingly
+ */
+function configureParson() {
+  loadParsonsExercise(theLevel, 1);
+  // parsons could have 5 lines to arrange which requires more space, so remove the fixed height from the editor
+  document.getElementById('code_editor')!.style.height = '100%'
+  document.getElementById('code_output')!.style.height = '100%'
+}
+
+/**
  * After switching tabs, show/hide elements
  */
-function reconfigurePageBasedOnTab(enforceDevMode?: boolean) {
+function reconfigurePageBasedOnTab(isTryItPage?: boolean, enforceDevMode?: boolean) {
   resetWindow();
-
   updatePageElements();
-  toggleDevelopersMode(!!enforceDevMode);
+
   if (currentTab === 'parsons') {
-    loadParsonsExercise(theLevel, 1);
-    // remove the fixed height from the editor
-    document.getElementById('code_editor')!.style.height = '100%'
-    document.getElementById('code_output')!.style.height = '100%'
-    return;
+    configureParson();
+    show_editor();
+    $('#fold_in_toggle_container').hide();
+  } else {
+    if (isTryItPage) {
+      $('[data-editorheight]').each((_, el) => {
+        const height = $(el).data('editorheight');
+        $(el).css('height', height);
+      });
+    } else {
+      toggleDevelopersMode(!!enforceDevMode);
+    }
+    $('#fold_in_toggle_container').show();
   }
 
   const adventure = theAdventures[currentTab];

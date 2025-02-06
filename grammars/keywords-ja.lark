@@ -1,54 +1,54 @@
-_DEFINE: ("define" | "define") _SPACE?
-_CALL: ("call" | "call") _SPACE?
-_WITH: ("with" | "with") _SPACE?
-_DEF: ("def" | "def") _SPACE?
-_RETURN: ("return" | "return") _SPACE?
-_PRINT: ("かけ" | "print") _SPACE?
-_PLAY: ("play" | "play") _SPACE
-_ASK: ("きけ" | "ask")
+_DEFINE: ("まとめる" | "define") _SPACE?
+_CALL: ("よぶ" | "call") _SPACE?
+_WITH: ("いっしょに" | "with") _SPACE?
+_DEF: ("まとめ" | "def") _SPACE?
+_RETURN: ("もどる" | "return") _SPACE?
+_PRINT: ("みせる" | "print") _SPACE?
+_PLAY: ("おと" | "play") _SPACE
+_ASK: ("きく" | "ask")
 _ECHO: ("まね" | "echo") _SPACE?
-_FORWARD: ("すすめ" | "forward") _SPACE?
+_FORWARD: ("まえへ" | "forward") _SPACE?
 _TURN: ("まわれ" | "turn") _SPACE?
-left: ("ひだり" | "left") _SPACE?
-right: ("みぎ" | "right") _SPACE?
-black: ("くろ" | "black") _SPACE?
-blue: ("あお" | "blue") _SPACE?
+left: ("ひだりへ" | "left") _SPACE?
+right: ("みぎへ" | "right") _SPACE?
+black: ("くろいろ" | "black") _SPACE?
+blue: ("あおいろ" | "blue") _SPACE?
 brown: ("ちゃいろ" | "brown") _SPACE?
 gray: ("はいいろ" | "gray") _SPACE?
-green: ("みどり" | "green") _SPACE?
-orange: ("おれんじ" | "orange") _SPACE?
-pink: ("ぴんく" | "pink") _SPACE?
-purple: ("むらさき" | "purple") _SPACE?
-red: ("あか" | "red") _SPACE?
-white: ("しろ" | "white") _SPACE?
+green: ("みどりいろ" | "green") _SPACE?
+orange: ("だいだいいろ" | "orange") _SPACE?
+pink: ("ももいろ" | "pink") _SPACE?
+purple: ("むらさきいろ" | "purple") _SPACE?
+red: ("あかいろ" | "red") _SPACE?
+white: ("しろいろ" | "white") _SPACE?
 yellow: ("きいろ" | "yellow") _SPACE?
-_IS: _SPACE ("is" | "is") _SPACE
-_STANDALONE_IS: ("is" | "is")
-_SLEEP: ("やすめ" | "sleep") _SPACE?
+_IS: _SPACE ("は" | "is") _SPACE
+_STANDALONE_IS: ("は" | "is")
+_SLEEP: ("やすむ" | "sleep") _SPACE?
 _ADD_LIST: ("たす" | "add") _SPACE
 _TO_LIST: _SPACE? ("to" | "to")
-_REMOVE: ("remove" | "remove") _SPACE
-_FROM: _SPACE? ("from" | "from")
+_REMOVE: ("どける" | "remove") _SPACE
+_FROM: _SPACE? ("から" | "from")
 _AT: _SPACE ("at" | "at") _SPACE
-random: ("random" | "random") _SPACE?
-_IN: _SPACE ("in" | "in") _SPACE
+random: ("てきとう" | "random") _SPACE?
+_IN: _SPACE ("の" | "in") _SPACE
 _NOT_IN: _SPACE ("not in" | "not in") _SPACE
-_IF: ("if" | "if") _SPACE
-_ELSE: "else" | "else"
-_AND: _SPACE? ("and" | "and") _SPACE
-_REPEAT: ("repeat" | "repeat") _SPACE
+_IF: ("もし" | "if") _SPACE
+_ELSE: "そうじゃない" | "else"
+_AND: _SPACE? ("それと" | "and") _SPACE
+_REPEAT: ("くりかえす" | "repeat") _SPACE
 _TIMES: _SPACE ("かい" | "times")
-_FOR: ("for" | "for") _SPACE
-_RANGE: ("range" | "range") _SPACE?
+_FOR: ("このあいだ" | "for") _SPACE
+_RANGE: ("はんい" | "range") _SPACE?
 _TO: _SPACE ("to" | "to") _SPACE
-_STEP: "step" | "step"
-_ELIF: _SPACE? ("elif" | "elif") _SPACE
-_INPUT: ("input" | "input")
-_OR: _SPACE? ("or" | "or") _SPACE
-_WHILE: ("while" | "while") _SPACE
-_LENGTH: "length" | "length"
+_STEP: "とばし" | "step"
+_ELIF: _SPACE? ("そうじゃなくてもし" | "elif") _SPACE
+_INPUT: ("いれる" | "input")
+_OR: _SPACE? ("それか" | "or") _SPACE
+_WHILE: ("くりかえし" | "while") _SPACE
+_LENGTH: "ながさ" | "length"
 _COLOR : ("いろ" | "color") _SPACE?
-_PRESSED: ("pressed" | "pressed") _SPACE?
-clear: ("clear" | "clear") _SPACE?
-TRUE: ("true" | "True" | "true" | "True") _SPACE?
-FALSE: ("false" | "False" | "false" | "False") _SPACE?
+_PRESSED: ("おした" | "pressed") _SPACE?
+clear: ("けす" | "clear") _SPACE?
+TRUE: ("あってる" | "あってる" | "true" | "True") _SPACE?
+FALSE: ("ちがう" | "ちがう" | "false" | "False") _SPACE?

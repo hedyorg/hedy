@@ -19,7 +19,7 @@ import {
     variableHighlighter
 } from "./cm-decorations";
 import { LRLanguage } from "@codemirror/language"
-import { languagePerLevel } from "./lezer-parsers/language-packages";
+import { PARSER_FACTORIES } from "./lezer-parsers/language-packages";
 import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
@@ -99,9 +99,11 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
                 ".cm-gutters": {
                     borderRadius: '4px'
-                },            
-                ".cm-cursor, .cm-dropCursor": {borderLeftColor: "white", borderLeftWidth: "2px"},
-                
+                },
+                ".cm-cursor, .cm-dropCursor": {
+                    borderLeftColor: "white",
+                    borderLeftWidth: "2px"
+                },
                 ".cm-name": {
                     color: '#009975'
                 },
@@ -145,7 +147,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         } else { // the editor is a read only editor
             let theme: Record<string, any> = {
                 ".cm-cursor, .cm-dropCursor": { border: "none"},
-                
+
                 ".cm-name": {
                     color: '#009975'
                 },
@@ -180,14 +182,14 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     }
                     extensions.push([EditorView.theme(theme)])
                     break;
-                case EditorType.COMMON_MISTAKES: 
+                case EditorType.COMMON_MISTAKES:
                     theme["&"] = {
                         background: '#272822',
                         fontSize: '15.2px',
                         color: 'white',
                         borderRadius: '4px',
                         marginRight: '5px'
-                    }                
+                    }
                     extensions.push([
                         EditorView.theme(theme),
                         lineNumbers(),
@@ -196,7 +198,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     ]);
                     break;
             }
-            
+
             state = EditorState.create({
                 doc: '',
                 extensions: extensions
@@ -208,8 +210,12 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             state: state
         });
 
-        if (theLevel) {
-            this.setHighlighterForLevel(theLevel);
+        const levelStr = $(element).closest('[data-level]').attr('data-level');
+        const lang = $(element).closest('[data-kwlang]').attr('data-kwlang') ?? 'en';
+        const levelInt = levelStr ? parseInt(levelStr, 10) : theLevel;
+
+        if (levelInt) {
+            this.setHighlighterForLevel(levelInt, lang);
         }
     }
 
@@ -217,8 +223,9 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     * Set the highlither rules for a particular level
     * @param level
     */
-    setHighlighterForLevel(level: number): void {
-        const language = languagePerLevel[level];
+    setHighlighterForLevel(level: number, keywordLang: string): void {
+        const parser = PARSER_FACTORIES[level](keywordLang);
+
         // Contains all of the keywords for every level
         const hedyStyleTags: Record<string, Tag> = {
             "print forward turn play color ask is echo sleep Comma": t.keyword,
@@ -235,7 +242,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             "Command/ErrorInvalid/Text": t.invalid,
         }
 
-        const parserWithMetadata = language.configure({
+        const parserWithMetadata = parser.configure({
             props: [
                 styleTags(hedyStyleTags)
             ]
@@ -248,11 +255,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             }
         })
 
-        function hedy() {
-            return new LanguageSupport(langPackage)
-        }
-
-        const effect = StateEffect.appendConfig.of(hedy());
+        const effect = StateEffect.appendConfig.of(new LanguageSupport(langPackage));
 
         this.view.dispatch({ effects: effect });
     }
