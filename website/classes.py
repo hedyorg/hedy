@@ -2,6 +2,7 @@ import uuid
 
 from flask import make_response, redirect, request, session
 from jinja_partials import render_partial
+from website.flask_hedy import g_db
 from website.flask_helpers import gettext_with_fallback as gettext
 
 import utils
@@ -276,50 +277,61 @@ class MiscClassPages(WebsiteModule):
             response["second_teachers"] = new_second_teachers
         return make_response(response, 200)
 
-    @route("/invite-student", methods=["POST"])
+    @route('/search', methods=['GET'])
+    @requires_teacher
+    def filter_usernames(self, user):
+        search = request.args.get('search', '')
+        user_type = request.args.get('user_type')
+        class_id = request.args.get('class_id')
+        if search == '':
+            return render_template('modal/results_reply.html', usernames=[])
+        if user_type == 'student':
+            results = g_db().get_student_that_starts_with(search)
+        elif user_type == 'second_teacher':
+            results = g_db().get_teacher_that_starts_with(search, class_id=class_id)
+        else:
+            results = []
+        usernames = [record['username'] for record in results if record['username'] != user['username']]
+        usernames = sorted(usernames)
+        return render_template('modal/results_reply.html', usernames=usernames)
+
+    @route("/invite", methods=["POST"])
     @requires_teacher
     def invite_student(self, user):
         body = request.json
         # Validations
         if not isinstance(body, dict):
             return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("username"), str):
+        if not isinstance(body.get("usernames"), list):
             return make_response(gettext("username_invalid"), 400)
         if not isinstance(body.get("class_id"), str):
             return make_response(gettext("request_invalid"), 400)
-        if len(body.get("username")) < 1:
+        if not isinstance(body.get('invite_as'), str):
+            return make_response(gettext("request_invalid"), 400)
+        if len(body.get("usernames")) < 1:
             return make_response(gettext("username_empty"), 400)
 
-        username = body.get("username").lower()
+        username: list[str] = body.get("usernames")
         class_id = body.get("class_id")
-
+        invite_as = body.get("invite_as")
         Class = self.db.get_class(class_id)
         if not Class or not (utils.can_edit_class(user, Class)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        user = self.db.user_by_username(username)
-        if not user:
-            return make_response(gettext("student_not_existing"), 400)
-        if "students" in Class and user["username"] in Class["students"]:
-            return make_response(gettext("student_already_in_class"), 400)
-        else:
-            student_classes = self.db.get_student_classes(username)
-            if len(student_classes):
-                return make_response(gettext("student_in_another_class"), 400)
-        if self.db.get_user_invitations(user["username"]):
-            return make_response(gettext("student_already_invite"), 400)
+        users = self.db.users_by_username(username)
 
-        # So: The class and student exist and are currently not a combination -> invite!
-        data = {
-            "username": username,
-            "class_id": class_id,
-            "timestamp": utils.times(),
-            "ttl": utils.times() + invite_length,
-            "invited_as": 'student',
-            "invited_as_text": gettext("student"),
-        }
-        self.db.add_class_invite(data)
-        return make_response('', 204)
+        for user in users:
+            data = {
+                "username": user['username'],
+                "class_id": class_id,
+                "timestamp": utils.times(),
+                "ttl": utils.times() + invite_length,
+                "invited_as": invite_as,
+                "invited_as_text": gettext(invite_as),
+            }
+            self.db.add_class_invite(data)
+
+        return make_response({"message": gettext("invitations_sent")}, 200)
 
     @route("/invite-second-teacher", methods=["POST"])
     @requires_teacher
