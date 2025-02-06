@@ -11,6 +11,7 @@ import { autoSave } from './autosave';
 import { HedySelect } from './custom-elements';
 import { Chart } from 'chart.js';
 import { setLoadingVisibility } from './loading';
+import { postJson } from './comm';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -136,25 +137,6 @@ export function join_class(id: string, name: string) {
       } else {
           modal.notifyError(err.responseText || ClientMessages['Connection_error']);
       }
-    });
-}
-
-export function invite_student(class_id: string, prompt: string, url='/invite-student') {
-    modal.prompt (prompt, '', function (username) {
-      $.ajax({
-          type: 'POST',
-          url,
-          data: JSON.stringify({
-            username: username,
-            class_id: class_id
-          }),
-          contentType: 'application/json',
-          dataType: 'json'
-      }).done(function() {
-          location.reload();
-      }).fail(function(err) {
-          modal.notifyError(err.responseText);
-      });
     });
 }
 
@@ -986,9 +968,21 @@ export function invite_support_teacher(requester: string) {
   });
 }
 
+export function invite_to_class(class_id: string, prompt: string, type: "student" | "second_teacher") {
+  const input = document.getElementById('modal_prompt_input')
+  let vals = {'class_id': class_id, 'user_type': type}
+  input?.setAttribute('hx-vals', JSON.stringify(vals))
+  modal.search(prompt, send_invitations, ()=>{}, [type]);
+}
 
-export function add_student_to_invite_list(username: string) {
+export function add_user_to_invite_list(username: string, button: HTMLButtonElement) {
+  button.closest('li')?.remove() // We remove the user from the list
   const userList = document.getElementById('users_to_invite')
+  for (const userLi of userList?.querySelectorAll('li') || []) {
+    if (userLi.innerText === username) {
+      return
+    }
+  }
   const template = document.querySelector('#user_list_template') as HTMLTemplateElement
   const clone = template.content.cloneNode(true) as HTMLElement
   let close = clone.querySelector('.close');  
@@ -1000,10 +994,14 @@ export function add_student_to_invite_list(username: string) {
   userList?.appendChild(clone)
 }
 
-export function send_invitations() {
+export async function send_invitations(invite_as: string = "student") {
   const li = document.querySelectorAll('#users_to_invite > li')
   let list = []
   for (const userLi of li) {
-    list.push(userLi.textContent)
+    list.push(userLi.textContent?.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim())
   }
+  const url = new URL(window.location.href)
+  const class_id = url.pathname.split('/for-teachers/class/')[1]
+  const response = await postJson('/invite', {'usernames': list, 'class_id': class_id, 'invite_as': invite_as})
+  modal.notifySuccess(response.message)
 }
