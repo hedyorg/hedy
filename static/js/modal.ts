@@ -32,6 +32,7 @@ class Modal {
     $('#modal_copy').hide();
     $('#modal_repair').hide();
     $('#modal_preview').hide();
+    $('#modal_search').hide();
   }
 
   public hide_alert() {
@@ -158,6 +159,18 @@ class Modal {
     $('#modal_no_button').off('click').on('click', () => {
       this.hide();
       declineCb();
+    });
+  }
+
+  public search(message: string, confirmCb: (...args: any[]) => void, declineCb: () => void = function(){}, args: any[]) {
+    console.log(message, confirmCb, declineCb)
+    this.hide();
+    $('#modal_search_text').text(message);
+    this.show();
+    $('#modal_search').show();
+    $('#modal_ok_button').off('click').on('click', () => {
+      this.hide();
+      confirmCb(...args);
     });
   }
 
