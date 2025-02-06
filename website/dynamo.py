@@ -1579,6 +1579,30 @@ class SetEmpty(DynamoCondition):
         return value is None or len(value) == 0
 
 
+class NotContains(DynamoCondition):
+    """Assert that a containter doesn't contain a value
+
+    Conditions can be applied to sort keys for efficient lookup, or as a
+    `server_side_filter` as a post-retrieval, pre-download filter. Queries will
+    never fetch more than 1MB from disk, so your server-side filter should
+    not filter out more than ~50% of the rows.
+    """
+
+    def __init__(self, item):
+        self.item = item
+
+    def to_dynamo_expression(self, field_name):
+        return f"not (contains(#{field_name}, :{field_name}_prefix))"
+
+    def to_dynamo_values(self, field_name):
+        return {
+            f":{field_name}_prefix": DDB_SERIALIZER.serialize(self.item)
+        }
+
+    def matches(self, value):
+        return value is None or self.item not in value
+
+
 class UseThisIndex(DynamoCondition):
     """A dummy condition that always matches, and allows picking a specific index.
 
