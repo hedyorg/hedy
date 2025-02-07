@@ -966,7 +966,7 @@ export function invite_support_teacher(requester: string) {
 }
 
 export function invite_to_class(class_id: string, prompt: string, type: "student" | "second_teacher") {
-  const input = document.getElementById('modal_prompt_input')
+  const input = document.getElementById('modal_search_input')
   let vals = {'class_id': class_id, 'user_type': type}
   input?.setAttribute('hx-vals', JSON.stringify(vals))
   modal.search(prompt, send_invitations, ()=>{}, [type]);

@@ -126,11 +126,21 @@
             <button id="modal_no_button" data-cy="modal_no_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('no')}}</button>
           </div>
        </div>
+       <div id="modal_prompt" class="hidden">
+        <div id="modal_prompt_text" class="text-white mb-8 text-xl"></div>
+        <div class="xm-auto">
+          <input id="modal_prompt_input" data-cy="modal_prompt_input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
+          <div class="mt-4 flex flex-row justify-center">
+              <button id="modal_ok_button" data-cy="modal_ok_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
+              <button id="modal_cancel_button" data-cy="modal_cancel_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
+          </div>
+        </div>
+       </div>
        <div id="modal_search" class="hidden">
           <div id="modal_search_text" class="text-white mb-8 text-xl"></div>
           <div class="xm-auto">
-            <input id="modal_prompt_input"
-                   data-cy="modal_prompt_input"
+            <input id="modal_search_input"
+                   data-cy="modal_search_input"
                    type="search"
                    name="search"
                    class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1"
@@ -141,15 +151,14 @@
               <ul id="users_to_invite" class="grid grid-cols-3 items-center mb-4 list-none">
   
               </ul>
-            <ul class="list-none flex flex-col items-center align" id="search_results" hx-on::after-settle="document.getElementById('modal_prompt_input').focus()">
+            <ul class="list-none flex flex-col items-center align" id="search_results" hx-on::after-settle="document.getElementById('modal_search_input').focus()">
 
             </ul>              
-            </div>
-            <div class="mt-4 flex flex-row justify-center">
-                <button id="modal_ok_button" data-cy="modal_ok_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
-                <button id="modal_cancel_button" data-cy="modal_cancel_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
-            </div>
           </div>
+            <div class="mt-4 flex flex-row justify-center">
+                <button id="modal_ok_search_button" data-cy="modal_ok_search_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
+                <button id="modal_cancel_search_button" data-cy="modal_cancel_search_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
+            </div>
        </div>
        <div id="modal_copy" class="hidden">
            <div class="absolute top-2 right-2">

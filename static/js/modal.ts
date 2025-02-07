@@ -8,6 +8,7 @@ class Modal {
     $('#modal_confirm_button').on('click', () => this.hide());
     $('#modal_no_button').on('click', () => this.hide());
     $('#modal_cancel_button').on('click', () => this.hide());
+    $('#modal_cancel_search_button').on('click', () => this.hide());
     $('#modal_copy_ok_button').on('click', () => this.hide());
     $('#modal_copy_close_button').on('click', () => this.hide());
     $('#modal_repair_button').on('click', () => this.hide());
@@ -168,7 +169,7 @@ class Modal {
     $('#modal_search_text').text(message);
     this.show();
     $('#modal_search').show();
-    $('#modal_ok_button').off('click').on('click', () => {
+    $('#modal_ok_search_button').off('click').on('click', () => {
       this.hide();
       confirmCb(...args);
     });
