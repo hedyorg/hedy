@@ -189,7 +189,7 @@ export interface InitializeCodePageOptions {
   readonly adventures: Adventure[];
   readonly initial_tab: string;
   readonly current_user_name?: string;
-  readonly suppress_save_and_load_for_slides?: boolean;
+  readonly suppress_save_and_load?: boolean;
   readonly enforce_developers_mode?: boolean;
 }
 
@@ -253,7 +253,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     currentTab = ev.newTab;
     const adventure = theAdventures[currentTab];
 
-    if (!options.suppress_save_and_load_for_slides) {
+    if (!options.suppress_save_and_load) {
       // Load initial code from local storage, if available
       const programFromLs = localLoad(currentTabLsKey());
       // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
@@ -276,7 +276,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   initializeShareProgramButtons();
   initializeHandInButton();
 
-  if (options.suppress_save_and_load_for_slides) {
+  if (options.suppress_save_and_load) {
     disableAutomaticSaving();
   }
 
