@@ -677,8 +677,12 @@ class Database:
         far from 30M users. Once we start to get in that neighbourhood, we should
         update this code.
         """
-        return self.users.get_page(dict(epoch=CURRENT_USER_EPOCH), pagination_token=page_token,
-                                   limit=limit, reverse=True)
+        return self.users.get_page(
+            dict(epoch=CURRENT_USER_EPOCH, created=dynamo.UseThisIndex()),
+            pagination_token=page_token,
+            limit=limit,
+            reverse=True,
+        )
 
     def get_all_public_programs(self):
         programs = self.programs.get_many({"public": 1}, reverse=True)
