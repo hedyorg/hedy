@@ -1,14 +1,5 @@
 {% extends "hedy-page/level-page.html" %}
 {% block levelbody %}
-{% if intro_tutorial or tutorial %}
-<div id="tutorial_pop_up" class="z-50 fixed hidden" style="width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);">
-      <div class="bg-blue-500 border border-black rounded-lg px-8 py-4 text-center">
-          <h2 id="tutorial_title" class="text-white"></h2>
-          <p id="tutorial_text"></p>
-          <button id="tutorial_next_button" class="green-btn-new mt-4">{{_('next_step_tutorial')}}</button>
-      </div>
-  </div>
-{% endif %}
 <div tabindex="0">
     {# When we're NOT in adventure mode but DO have adventures, render them in tabs #}
     {% if raw %}
