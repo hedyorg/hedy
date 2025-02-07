@@ -11,7 +11,7 @@ git checkout -B weblate-hedy-adventures-conflicts weblate-main/main
 
 # Normalize files in Weblate main repo
 doit run _autopr _autopr_weblate
-git add .
+git add grammars
 git commit -am 'Normalize Weblate branch' --allow-empty
 
 # Merge from origin, preferring Weblate's changes
