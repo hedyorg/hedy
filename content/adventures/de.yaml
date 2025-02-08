@@ -1309,9 +1309,18 @@ adventures:
                     Deshalb multiplizieren wir mit dem Stern (auf der Tastatur über dem Plus): `5 * 5`. Lies das als "5 mal 5", dann kannst du dich am einfachsten daran erinnern.
                 example_code: |
                     ```
-                    {print} '5 plus 5 macht ' 5 + 5
-                    {print} '5 minus 5 macht ' 5 - 5
-                    {print} '5 mal 5 macht ' 5 * 5
+                    essen_preis {is} 0
+                    getränk_preis {is} 0
+                    gesamt_preis {is} 0
+                    {print} 'Willkommen bei McHedy'
+                    bestellung {is} {ask} 'Was möchtest du essen?'
+                    {if} bestellung {is} Hamburger essen_preis {is} 5
+                    {if} bestellung {is} Pommes essen_preis {is} 2
+                    getränk {is} {ask} 'Was möchtest du trinken?'
+                    {if} getränk {is} Wasser getränk_preis {is} 0
+                    {else} getränk_preis {is} 3
+                    gesamt_preis {is} essen_preis + getränk_preis
+                    {print} 'Das macht zusammen ' gesamt_preis ' Euro, bitte'
                     ```
             7:
                 story_text: |
