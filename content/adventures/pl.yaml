@@ -1408,7 +1408,7 @@ adventures:
                 story_text: |
                     Teraz zmienimy nieco wcięcia. Za każdym razem, gdy potrzebujemy wciąć kod, potrzebujemy `:` w linii przed wcięciem.
 
-                    Na tym poziomie możesz też użyć nowej komendy: `{elif}`. `{elif}` ,które jest połczeniem ``{else} {if}` i potrzebujesz go, gdy chcesz dodać 3 (lub więcej!) opcji.
+                    Na tym poziomie możesz też użyć nowej komendy: `{elif}`. `{elif}` ,które jest połczeniem `{else} {if}` i potrzebujesz go, gdy chcesz dodać 3 (lub więcej!) opcji.
                     Sprawdź to!
             18:
                 story_text: |
@@ -1980,18 +1980,18 @@ adventures:
                     W tej przygodzie zaprogramujemy grę w wisielca. Najpierw przygotowujemy się, potem zaprogramujemy grę, a w trzeciej części dodajemy rysunek z żółwiem.
 
                     ### Ćwiczenie
-                    ***Ustaw zmienne *** W tej grze w wisielca gracz 1 wybiera odpowiedź, a gracz 2 musi odgadnąć litery.
+                    ***Ustaw zmienne*** W tej grze w wisielca gracz 1 wybiera odpowiedź, a gracz 2 musi odgadnąć litery.
                     Aby poinformować komputer o wszystkich literach w słowie, zamienimy odpowiedź w listę liter. Robimy to również za pomocą liter zgadywanych przez Gracza 2.
-                    Rozpoczniemy grę z 2 pustymi listami. Zrobiliśmy dla ciebie pustą listę dla zmiennej o nazwie odpowiedzi. Teraz utwórz pustą listę dla zgadywane_litery.
+                    Rozpoczniemy grę z 2 pustymi listami. Zrobiliśmy dla ciebie pustą listę dla zmiennej o nazwie odpowiedzi. Teraz utwórz pustą listę na odgadnięte_litery.
                     Następnie piszemy ile błędów zostało popełnionych. Na początku gry powinno to być 0.
-                    Zmienna `amount_letters` mówi nam, ile liter znajduje się w odpowiedzi. Poproś Gracza 1, aby powiedział, ile liter ma jego słowo.
-                    Na koniec informujemy komputer, czy gra się skończyła. Używamy zmiennej `game_over` i ustawiamy ją na `False`.
+                    Zmienna `liczba_liter` mówi nam, ile liter znajduje się w odpowiedzi. Poproś Gracza 1, aby powiedział, ile liter ma jego słowo.
+                    Na koniec informujemy komputer, czy gra się skończyła. Używamy zmiennej `koniec_gry` i ustawiamy ją na `False`.
 
-                    ***Wybór odpowiedzi *** Chcemy, aby Gracz 1 mógł wybrać odpowiedź. Zapytamy ich tyle razy, ile to konieczne o to jaka jest następna litera.
+                    ***Wybór odpowiedzi*** Chcemy, aby Gracz 1 mógł wybrać odpowiedź. Zapytamy ich tyle razy, ile to konieczne o to jaka jest następna litera.
                     Następnie dodajemy tą literę do odpowiedzi. Na koniec dodajemy puste _ do listy zgadywanych liter, więc otrzymujemy tyle pustych _, ile jest liter w odpowiedzi.
 
                     ***Kolej gracza 2***
-                    Powiedz Graczowi 2, że teraz jest jego kolej. Następnie powiedz Graczowi 2, ile liter znajduje się w odpowiedzi. Na koniec napisz listę `guessed_letters`.
+                    Powiedz Graczowi 2, że teraz jest jego kolej. Następnie powiedz Graczowi 2, ile liter znajduje się w odpowiedzi. Na koniec napisz listę `odgadnięte_litery`.
 
                     ***Przejdź do następnej przygody*** Po ustawieniu wszystkich zmiennych początkowych możemy rozpocząć programowanie samej gry. Sprawdź następną kartę, aby dowiedzieć się, jak to zrobić!
                 example_code: |
@@ -2001,20 +2001,20 @@ adventures:
                     # Ustaw zmienne
                     odpowiedź = []
                     odgadnięte_litery = _
-                    zrobione_pomyłki= _
-                    ilość_liter = {ask} _
+                    zrobione_pomyłki = _
+                    liczba_liter = {ask} _
                     _ = 'False'
 
                     # Wybór odpowiedzi
                     {for} _
-                        litera= {ask} 'Graczu 1, czy w słowie znajduje się litera ' i '?'
+                        litera = {ask} 'Graczu 1, jaka jest litera numer ' i '?'
                         _
                         {add} '_' {to} _
 
                     # Kolej Gracza 2
                     print _
                     print _
-                    print  odgadnięte_litery
+                    print odgadnięte_litery
                     ```
     hangman_2:
         name: Wisielec 2
@@ -2027,11 +2027,11 @@ adventures:
 
                     ### Ćwiczenie
 
-                    ***Wklej kod *** Skopiuj kod z poprzedniej przygody i wklej go w polu programowania.
+                    ***Wklej kod*** Skopiuj kod z poprzedniej przygody i wklej go w polu programowania.
 
-                    **Gra *** Ta gra trwa do momentu, aż Gracz 2 nie zakończy swojej gry (wygra lub przegra). Wypełnij odpowiednio polecenie while. Teraz Gracz 2 może odgadnąć litery, więc poproś Gracza 2, aby je
+                    **Gra*** Ta gra trwa do momentu, aż Gracz 2 nie zakończy swojej gry (wygra lub przegra). Wypełnij odpowiednio polecenie while. Teraz Gracz 2 może odgadnąć litery, więc poproś Gracza 2, aby je
                     zgadywał. Musimy sprawdzić, czy jego odpowiedź jest poprawna, więc sprawdź, czy jego `guess` jest (gdzieś) na (liście) `answer`. Następnie pozwalamy komputerowi dowiedzieć się, która z liter jest zgadywana. Zaprogramowaliśmy już tę część dla Ciebie.
-                    Następnie chcemy pochwalić gracza za odgadnięcie poprawnej litery i chcemy wydrukować listę `guessed_letters`, aby gracz mógł zobaczyć swoje postępy.
+                    Następnie chcemy pochwalić gracza za odgadnięcie poprawnej litery i chcemy wydrukować listę `odgadnięte_litery`, aby gracz mógł zobaczyć swoje postępy.
 
                     W następnej części zaprogramujemy i dowiemy się co się stanie jeśli gracz odgadnie wszystkie litery. Czyli jeśli jego odgadnięte litery `guessed_letters` są takie same jak nasza odpowiedź `answer`.
                     Jeżeli są one takie same, to wtedy pogratuluj Graczowi 2 jego zwycięstwa i ustaw zmienną `game_over` na `True`.
@@ -2046,19 +2046,19 @@ adventures:
                     # Wklej tutaj swój kod.
 
                     # Gra
-                    {while} Koniec_gry _
+                    {while} koniec_gry _
                         próba_odgadnięcia = _
                         {if} _
-                            {for} i {in} {range} 1 {to} Liczba_liter:
-                                jeśli odpowiedź[i] == próba_odgadnięcia:
-                                    odgadnięte_litery [i] = próba_odgadnięcia
+                            {for} i {in} {range} 1 {to} liczba_liter:
+                                {if} odpowiedź[i] == próba_odgadnięcia:
+                                    odgadnięte_litery[i] = próba_odgadnięcia
                             {print} _
                             {if} odgadnięte_litery == _:
                                 {print} _
                                 koniec_gry = _
                         {else}:
                             {print} _
-                            zrobione_pomyłki_
+                            zrobione_pomyłki _
                             {if} _ == 10:
                                 {print} _
                                 {print} _
@@ -2077,11 +2077,11 @@ adventures:
                     ### Ćwiczenie
                     ***Utwórz funkcję, która będzie rysowała wisielca*** Utwórz funkcję, która narysuje wisielca w 10 krokach. Zrobiliśmy już dla ciebie krok 1.
 
-                    ***Przetestuj funkcję *** Przetestuj ją, wywołując funkcję za pomocą 10. Jeśli jesteś zadowolony z funkcji, usuń linię, która na razie ją wywołuje. Wywołamy tę funkcję, gdy gracz popełni błąd.
+                    ***Przetestuj funkcję*** Przetestuj ją, wywołując funkcję za pomocą 10. Jeśli jesteś zadowolony z funkcji, usuń linię, która na razie ją wywołuje. Wywołamy tę funkcję, gdy gracz popełni błąd.
 
-                    ***Wklej grę w wisielca pod swoją funkcją *** Wróć do poprzedniej przygody i skopiuj grę w wisielca. Wklej grę pod swoją funkcją.
+                    ***Wklej grę w wisielca pod swoją funkcją*** Wróć do poprzedniej przygody i skopiuj grę w wisielca. Wklej grę pod swoją funkcją.
 
-                    ***Wezwij do funkcji, gdy gracz popełni błąd *** W wierszu `mistakes_made = mistakes_made + 1` wywołamy funkcję. Chcemy, aby żółw wykonał tyle samo kroków, co gracz popełnił błędów, dlatego nazywamy tę funkcję argumentem `mistakes_made`.
+                    ***Wezwij do funkcji, gdy gracz popełni błąd*** W wierszu `mistakes_made = mistakes_made + 1` wywołamy funkcję. Chcemy, aby żółw wykonał tyle samo kroków, co gracz popełnił błędów, dlatego nazywamy tę funkcję argumentem `mistakes_made`.
 
                     ***Ciesz się swoją grą!***
                     <div class="w-full flex flex-row gap-2">
@@ -3116,7 +3116,7 @@ adventures:
                     ```
             18:
                 story_text: |-
-                    Dotarliśmy do prawdziwego kodu Pythona! Oznacza to, że musimy odtąd używać nawiasów z komendami`{print}` i`{range}`.
+                    Dotarliśmy do prawdziwego kodu Pythona! Oznacza to, że musimy odtąd używać nawiasów z komendami `{print}` i `{range}`.
                     Oznacza to również, że możesz używać kodu Hedy z tego poziomu w dowolnym środowisku Pythona, o ile używasz angielskich poleceń. Jeśli do tej pory tego nie zrobiłeś, to możesz nacisnąć przełącznik w menu poleceń, aby to zrobić.
                 example_code: |
                     ```
@@ -4207,15 +4207,15 @@ adventures:
                     Teraz, gdy mamy polecenie {elif}, możemy pozwolić grze zdecydować, czy ktoś wygrał i może przestać nas pytać!
 
                     ### Ćwiczenie
-                    ***Wklej swój kod *** Wklej tutaj swój kod z poprzedniego poziomu i spraw, by zadziałał Na tym poziomie nauczyłeś się używać dwukropka za każdym razem, gdy tworzysz blok kodu. Dodaj dwukropki we właściwych miejscach.
+                    ***Wklej swój kod*** Wklej tutaj swój kod z poprzedniego poziomu i spraw, by zadziałał Na tym poziomie nauczyłeś się używać dwukropka za każdym razem, gdy tworzysz blok kodu. Dodaj dwukropki we właściwych miejscach.
 
-                    ***Utwórz funkcję, która wykrywa, czy ktoś wygrał *** Uruchomiliśmy dla Ciebie funkcję, wklej ją pod funkcją `print_field` i zakończ funkcję. Możesz zobaczyć, że ten pierwszy fragment kodu sprawdza, czy miejsce 1, 2 i 3 są takie same, ponieważ jeśli tak, masz 3 z rzędu.
+                    ***Utwórz funkcję, która wykrywa, czy ktoś wygrał*** Uruchomiliśmy dla Ciebie funkcję, wklej ją pod funkcją `print_field` i zakończ funkcję. Możesz zobaczyć, że ten pierwszy fragment kodu sprawdza, czy miejsce 1, 2 i 3 są takie same, ponieważ jeśli tak, masz 3 z rzędu.
                     Sprawdza również, czy nie są kropką, ponieważ jeśli tak, linia może mieć te same symbole, ale tylko dlatego, że wciąż jest pusta.
                     Jeśli wszystkie te warunki zostaną spełnione, gra się skończy, a zwycięzca zostanie wyświetlony.
                     Zakończ tę funkcję wszystkimi możliwymi sposobami do wygrania. Oznacza to, że musisz zrobić to samo dla pozostałych 2 wierszy, 3 kolumn i 2 przekątnych.
                     Jeśli skończyłeś wszystkie pozostałe opcje, funkcja powinna zwrócić zmienną `game_over`, abyśmy mogli użyć jej w naszej grze.
 
-                    ***Zadzwoń do funkcji w grze *** Przejdź do linii `game_over = {ask} 'Did you win?'`i zmień go na `game_over = {call} detect_winner {with} field, sign`. Teraz funkcja sprawdzi, czy jest zwycięzca, a gra nie będzie musiała nas o to już pytać!
+                    ***Zadzwoń do funkcji w grze*** Przejdź do linii `game_over = {ask} 'Did you win?'` i zmień go na `game_over = {call} detect_winner {with} field, sign`. Teraz funkcja sprawdzi, czy jest zwycięzca, a gra nie będzie musiała nas o to już pytać!
 
                     ***Ciesz się grą!*** Świetna robota! Skończyłeś grę! !
                 example_code: |
