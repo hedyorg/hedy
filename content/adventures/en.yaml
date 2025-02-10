@@ -121,7 +121,7 @@ adventures:
                     ### Exercise 2
                     Copy the story you've created in your own story adventure in the previous levels.
                     Find a way to add at least 2 `{if}` and `{else}` commands to your story.
-                    This can be with a happy or bad ending, but you can also try to find other ways to incoporate the commands.
+                    This can be with a happy or bad ending, but you can also try to find other ways to incorporate the commands.
                 example_code: |
                     ```
                     name {is} {ask} 'Who is walking in the forest?'
@@ -249,7 +249,7 @@ adventures:
                     Tip: Remember the commas in a `{print}` between text and variables!
                 example_code_2: |
                     ```
-                    naam = {input}("What's your name?")
+                    name = {input}("What's your name?")
                     {print}('Welcome to this story!')
                     ```
     add_remove_command:
@@ -547,7 +547,7 @@ adventures:
 
                     ***Enjoy the game!***
                     Does your game work properly? Amazing! You have done a great job! Enjoy your game!
-                    If it doesn't work right away, no worries, you might have made a mistake. Just keep calm and bebug your code using the ladybug button.
+                    If it doesn't work right away, no worries, you might have made a mistake. Just keep calm and debug your code using the ladybug button.
                 example_code: |
                     ```
                     # Paste your code from the previous adventure here
@@ -713,7 +713,7 @@ adventures:
                     Fill in the blanks to get the calculator to work.
                     * Start with the fourth line, add a question to figure out what grade the student got.
                     * In the fifth line you'll want to calculate the total of all grades, so the total = total + grade.
-                    * Then we get to set the return value. We want to return the mean, so the total devided by the amount of tests (4).
+                    * Then we get to set the return value. We want to return the mean, so the total divided by the amount of tests (4).
                     * Lastly we finish the code by calling the function in line 8.
 
                     Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next adventure!**
@@ -908,7 +908,7 @@ adventures:
                     {print} 'Vending machine'
                     chosen_product = {ask} 'Please select a product'
                     1_dollar_products = coke orange juice water
-                    2_dollar_products = chocolate, cookie, museli bar
+                    2_dollar_products = chocolate, cookie, muesli bar
                     3dollar_prodcuts = potato chips, beef jerky, banana bread
                     {if} chosen {is} {in} 1_dollar_products
                     price = 1
@@ -1166,7 +1166,7 @@ adventures:
                     **Warning! This code needs to be debugged!**
                     ```
                     country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
+                    capitals = 'Amsterdam', 'Warsaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
                     score = 0
                     {for} i {in} {range} 0 {to} 10
                         answer = {ask} 'What's the capital of ' countries[i]
@@ -1477,7 +1477,7 @@ adventures:
                     Check it out!
             18:
                 story_text: |
-                    Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there!
+                    Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like Replit or PyCharm, and you can continue learning there!
                     Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
     dice:
         name: Dice
@@ -2046,7 +2046,7 @@ adventures:
                     `{def} name_function(argument_1, argument_2):`.
 
 
-                    If you don't want to use arguments, you just leave the space between the parantheses empty.
+                    If you don't want to use arguments, you just leave the space between the parentheses empty.
                     To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
                 example_code: |
                     ```
@@ -2477,7 +2477,7 @@ adventures:
                 story_text: |
                     In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {ask}.
                     You might have wondered why you would use functions, because the functions in the example were only one line of code.
-                    Now we will show you what a bigger function looks like and we will use multiple agruments now as well. You'll see how much better it is to use a function once the function gets bigger.
+                    Now we will show you what a bigger function looks like and we will use multiple arguments now as well. You'll see how much better it is to use a function once the function gets bigger.
                     Here is an example of a function with arguments combined with {ask} commands.
                 example_code: |
                     ```
@@ -3226,7 +3226,7 @@ adventures:
     piggybank:
         name: Piggy Bank
         default_save_name: Piggy Bank
-        description: Count your pocketmoney!
+        description: Count your pocket money!
         levels:
             12:
                 story_text: |
@@ -3560,7 +3560,7 @@ adventures:
                     Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an `{if}` or `{repeat}` command. 
                     But you can't yet combine the two...
 
-                    Good news! In this level you will be allowed to put an `{if}` inside an `{if}`, `{repeat}` inside a `{repeat}` command and in eachother.
+                    Good news! In this level you will be allowed to put an `{if}` inside an `{if}`, `{repeat}` inside a `{repeat}` command and in each other.
                     Give it a try!
                 example_code: |
                     ```
@@ -3735,7 +3735,7 @@ adventures:
                     You can add many more things to your virtual restaurant. For example, can you...
                     - ask how many people are coming and multiply the price by that amount?
                     - add another course?
-                    - give people a discount when they enter a (secret) couponcode?
+                    - give people a discount when they enter a (secret) coupon code?
                     - add a children's menu?
                     - think of other fun things to add?
                 example_code: |
@@ -4100,7 +4100,7 @@ adventures:
                     {if} name {is} _
                         a = 'Go to the airport '
                     {else}
-                        a = 'Go to the trainstation '
+                        a = 'Go to the train station '
                     password = {ask} 'What is the password?'
                     {if} password {is} _
                         b = 'tomorrow at 02.00'
@@ -4124,7 +4124,7 @@ adventures:
                     {if} name {is} 'Agent007' _ password {is} 'TOPSECRET'
                         {print} 'Go to the airport at 02.00'
                     {else}
-                        {print} 'Go to the trainstation at 10.00'
+                        {print} 'Go to the train station at 10.00'
                      ```
     simon:
         name: Simon Says
@@ -4507,7 +4507,7 @@ adventures:
                         {clear}
                     ```
                 story_text_2: |
-                    ### Exersice 2
+                    ### Exercise 2
                     Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
                 example_code_2: |
                     ```
@@ -4528,7 +4528,7 @@ adventures:
 
                     ***Create a list called field*** This list will be our playing field. This list is filled with 9 dots, since there are no x's and o's yet at the start of our game.
 
-                    ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line constists of the first 3 spots in our list field.
+                    ***Create a function that prints the field*** Firstly, clear the screen so the old playing fields will be removed. Then we print the first line of our Tic Tac Toe field. This line consists of the first 3 spots in our list field.
                     We have already programmed this line for you. Now finish the field by printing spot 4, 5, and 6 on the second row and spot 7, 8 and 9 in the third row.
 
                     ***Call the function that prints the field*** Now call the function.
