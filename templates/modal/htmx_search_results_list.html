@@ -1,12 +1,12 @@
 {% if usernames|length == 0 %}
 <li class="p-4 m-1 group flex flex-row justify-between items-center bg-blue-100 rounded w-4/5">
-    <span>No students where found</span>    
+    <span>{{_('no_students')}}</span>    
 </li>
 {% endif %}
 
 {% for username in usernames %}
     <li class="p-4 m-1 group flex flex-row justify-between items-center bg-blue-100 rounded w-4/5">
-        <span>{{ username}}</span>
-        <button class="green-btn" onclick="hedyApp.add_user_to_invite_list('{{username}}', this);">Invite</button>
+        <span>{{ username }}</span>
+        <button class="green-btn" data-cy="invite-{{ loop.index }}" onclick="hedyApp.add_user_to_invite_list('{{ username }}', this);">{{_('invite')}}</button>        
     </li>
 {% endfor %}

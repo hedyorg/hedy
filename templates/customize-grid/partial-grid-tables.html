@@ -50,7 +50,7 @@
   <button class="green-btn mt-4 w-fit" data-cy="add_student" _="on click toggle the *display of #add_students_options">{{_('add_students')}}</button>
   <div id="add_students_options" class="flex flex-row gap-2 items-left my-4" style="display: none;">
     <button class="green-btn" data-cy="copy_join_link" onclick='hedyApp.copy_join_link("{{class_info.link}}", {{_('copy_link_success')|default(None)|tojson}})'>{{_('copy_join_link')}}</button>
-    <button class="green-btn" data-cy="invite_student" onclick='hedyApp.invite_to_class("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}}, "student")'>{{_('invite_by_username')}}</button>
+    <button class="green-btn" data-cy="invite_student" onclick='hedyApp.invite_to_class("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}}, "student", {{ is_second_teacher|tojson }})'>{{_('invite_by_username')}}</button>
     <button class="green-btn" data-cy="create_accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
   </div>
   <div class="mt-10">

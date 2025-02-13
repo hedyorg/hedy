@@ -10,7 +10,7 @@ import { autoSave } from './autosave';
 import { HedySelect } from './custom-elements';
 import { Chart } from 'chart.js';
 import { setLoadingVisibility } from './loading';
-import { postJson } from './comm';
+// import { postJson } from './comm';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -965,11 +965,11 @@ export function invite_support_teacher(requester: string) {
   });
 }
 
-export function invite_to_class(class_id: string, prompt: string, type: "student" | "second_teacher") {
+export function invite_to_class(class_id: string, prompt: string, type: "student" | "second_teacher", is_second_teacher: boolean = false) {
   const input = document.getElementById('modal_search_input')
   let vals = {'class_id': class_id, 'user_type': type}
   input?.setAttribute('hx-vals', JSON.stringify(vals))
-  modal.search(prompt, send_invitations, ()=>{}, [type]);
+  modal.search(prompt, send_invitations, ()=>{}, [type, is_second_teacher]);
 }
 
 export function add_user_to_invite_list(username: string, button: HTMLButtonElement) {
@@ -988,10 +988,12 @@ export function add_user_to_invite_list(username: string, button: HTMLButtonElem
   })
   let p = clone.querySelector('p[class^="details"]')!
   p.textContent = username
+  let input = clone.querySelector('input')!
+  input.value = username
   userList?.appendChild(clone)
 }
 
-export async function send_invitations(invite_as: string = "student") {
+export async function send_invitations(invite_as: string = "student", is_second_teacher: boolean = false) {
   const li = document.querySelectorAll('#users_to_invite > li')
   let list = []
   for (const userLi of li) {
@@ -999,6 +1001,9 @@ export async function send_invitations(invite_as: string = "student") {
   }
   const url = new URL(window.location.href)
   const class_id = url.pathname.split('/for-teachers/class/')[1]
-  const response = await postJson('/invite', {'usernames': list, 'class_id': class_id, 'invite_as': invite_as})
-  modal.notifySuccess(response.message)
+  htmx.ajax(
+    'POST', "/invite", { values: { "class_id": class_id, "is_second_teacher": is_second_teacher, "invite_as": invite_as, "usernames": list }, target: "#invite_block" }
+  ).then(() => {
+    modal.notifySuccess('Sucess')
+  })
 }
