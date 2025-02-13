@@ -1004,6 +1004,6 @@ export async function send_invitations(invite_as: string = "student", is_second_
   htmx.ajax(
     'POST', "/invite", { values: { "class_id": class_id, "is_second_teacher": is_second_teacher, "invite_as": invite_as, "usernames": list }, target: "#invite_block" }
   ).then(() => {
-    modal.notifySuccess('Sucess')
+    modal.notifySuccess(ClientMessages['invitations_sent'])
   })
 }
