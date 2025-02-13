@@ -8,7 +8,6 @@ class Modal {
     $('#modal_confirm_button').on('click', () => this.hide());
     $('#modal_no_button').on('click', () => this.hide());
     $('#modal_cancel_button').on('click', () => this.hide());
-    $('#modal_cancel_search_button').on('click', () => this.hide());
     $('#modal_copy_ok_button').on('click', () => this.hide());
     $('#modal_copy_close_button').on('click', () => this.hide());
     $('#modal_repair_button').on('click', () => this.hide());
@@ -172,7 +171,20 @@ class Modal {
     $('#modal_ok_search_button').off('click').on('click', () => {
       this.hide();
       confirmCb(...args);
+      this.clear_search_boxes();
     });
+    $('#modal_cancel_search_button').off('click').on('click', () => {
+      this.hide();
+      this.clear_search_boxes();
+    });
+  }
+  
+  private clear_search_boxes() {
+    $('#modal_search_input').val("");
+    const users_to_invite = document.getElementById('users_to_invite');
+    if (users_to_invite) users_to_invite.innerHTML = ''
+    const search_results = document.getElementById('search_results')
+    if (search_results) search_results.innerHTML = ''
   }
 
   public prompt(message: string, defaultValue: string, confirmCb: (x: string) => void) {
