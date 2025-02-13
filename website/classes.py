@@ -284,7 +284,7 @@ class MiscClassPages(WebsiteModule):
         user_type = request.args.get('user_type')
         class_id = request.args.get('class_id')
         if search == '':
-            return render_template('modal/results_reply.html', usernames=[])
+            return render_template('modal/htmx_search_results_list.html', usernames=[])
         if user_type == 'student':
             results = g_db().get_student_that_starts_with(search)
         elif user_type == 'second_teacher':
@@ -293,7 +293,7 @@ class MiscClassPages(WebsiteModule):
             results = []
         usernames = [record['username'] for record in results if record['username'] != user['username']]
         usernames = sorted(usernames)
-        return render_template('modal/results_reply.html', usernames=usernames)
+        return render_template('modal/htmx_search_results_list.html', usernames=usernames)
 
     @route("/invite", methods=["POST"])
     @requires_teacher
@@ -302,23 +302,23 @@ class MiscClassPages(WebsiteModule):
         # Validations
         if not isinstance(body, dict):
             return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("usernames"), list):
+        if not isinstance(request.form.getlist('usernames'), list):
             return make_response(gettext("username_invalid"), 400)
-        if not isinstance(body.get("class_id"), str):
+        if not isinstance(request.form.get('class_id'), str):
             return make_response(gettext("request_invalid"), 400)
-        if not isinstance(body.get('invite_as'), str):
+        if not isinstance(request.form.get('invite_as'), str):
             return make_response(gettext("request_invalid"), 400)
-        if len(body.get("usernames")) < 1:
+        if len(request.form.getlist('usernames')) < 1:
             return make_response(gettext("username_empty"), 400)
 
-        username: list[str] = body.get("usernames")
-        class_id = body.get("class_id")
-        invite_as = body.get("invite_as")
+        usernames = request.form.getlist('usernames')
+        class_id = request.form.get('class_id')
+        invite_as = request.form.get('invite_as')
         Class = self.db.get_class(class_id)
         if not Class or not (utils.can_edit_class(user, Class)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        users = self.db.users_by_username(username)
+        users = self.db.users_by_username(usernames)
 
         for user in users:
             data = {
@@ -331,7 +331,23 @@ class MiscClassPages(WebsiteModule):
             }
             self.db.add_class_invite(data)
 
-        return make_response({"message": gettext("invitations_sent")}, 200)
+        invites = []
+        for invite in self.db.get_class_invitations(Class["id"]):
+            invites.append(
+                {
+                    "username": invite["username"],
+                    "invited_as_text": invite["invited_as_text"],
+                    "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True),
+                    "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
+                }
+            )
+
+        return render_partial(
+            "htmx-invite-list.html",
+            invites=invites,
+            class_id=Class["id"],
+            is_second_teacher=is_second_teacher(user, class_id),
+        )
 
     @route("/invite-second-teacher", methods=["POST"])
     @requires_teacher
