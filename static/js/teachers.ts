@@ -2,7 +2,6 @@ import { modal } from './modal';
 import { theKeywordLanguage } from "./app";
 import { ClientMessages } from './client-messages';
 import DOMPurify from 'dompurify'
-import { startTeacherTutorial } from './tutorials/tutorial';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
@@ -688,19 +687,11 @@ export interface InitializeTeacherPageOptions {
    * Whether to show the dialog box on page load
    */
   readonly welcome_teacher?: boolean;
-
-  /**
-   * Whether to show the tutorial on page load
-   */
-  readonly tutorial?: boolean;
 }
 
 export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
   if (options.welcome_teacher) {
     modal.notifySuccess(ClientMessages.teacher_welcome, 30_000);
-  }
-  if (options.tutorial) {
-    startTeacherTutorial();
   }
 }
 

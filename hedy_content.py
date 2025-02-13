@@ -689,29 +689,6 @@ class NoSuchQuiz:
         return {}
 
 
-class Tutorials(StructuredDataFile):
-    # Want to parse the keywords only once, they can be cached -> perform this
-    # action on server start
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/tutorials/{self.language}.yaml')
-
-    def get_tutorial_for_level(self, level, keyword_lang="en"):
-        if level not in ["intro", "teacher"]:
-            level = int(level)
-        return deep_translate_keywords(self.file.get(level, None), keyword_lang)
-
-    def get_tutorial_for_level_step(self, level, step, keyword_lang="en"):
-        if level not in ["intro", "teacher"]:
-            level = int(level)
-        return deep_translate_keywords(self.file.get(level, {}).get('steps', {}).get(step), keyword_lang)
-
-
-class NoSuchTutorial:
-    def get_tutorial_for_level(self, level, keyword_lang):
-        return {}
-
-
 class Slides(StructuredDataFile):
     def __init__(self, language):
         self.language = language

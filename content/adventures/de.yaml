@@ -223,8 +223,8 @@ adventures:
                     ```
             15:
                 story_text: |
-                    Mit der `{while}`-Schleife kannst du deine Geschichten noch interessanter gestalten. So kannst du zum Beispiel mit  `{while} game == 'on'``{while} sword == 'lost'` dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
-                    Oder du lässt die Spieler mit  `{while} game == 'on'` so lange weiter suchen, bis sie etwas finden.
+                    Mit der `{while}`-Schleife kannst du deine Geschichten noch interessanter gestalten. So kannst du zum Beispiel mit `{while} game == 'on'` dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
+                    Oder du lässt die Spieler mit `{while} sword == 'lost'` so lange weiter suchen, bis sie etwas finden.
 
                     ### Übung
                     Der Beispiel Code zeigt dir, wie du eine `{while}` Schleife in einer Geschichte verwenden kannst. Denke dir jetzt **ein eigenes Szenario** aus, in dem die Spieler etwas finden müssen, bevor sie weitermachen können.
@@ -409,7 +409,7 @@ adventures:
                     Gib die Variable `punkte` am Ende der Funktion zurück.
 
                     ***Teste die Funktion***
-                    Teste, ob deine Funktion richtig funktioniert. Vervollständige den ersten `{print}`Befehl, indem du die Karte ergänzt, die du gezogen hast. Dann vervollständige die zweite Zeile, indem du die Funktion mit karte_1 aufrufst.
+                    Teste, ob deine Funktion richtig funktioniert. Vervollständige den ersten `{print}` Befehl, indem du die Karte ergänzt, die du gezogen hast. Dann vervollständige die zweite Zeile, indem du die Funktion mit karte_1 aufrufst.
                     Lass dein Programm ein paar Mal laufen. Bist du mit den Ergebnissen zufrieden? Dann kannst du den Testteil entfernen und zum nächsten Tab wechseln!
                 example_code: |
                     ```
@@ -544,8 +544,10 @@ adventures:
             17:
                 story_text: |
                     In den letzten 3 Abenteuern hast du fast ein funktionierendes Blackjack Spiel geschrieben! Jetzt fehlt nur noch, den Gewinner zu bestimmen
-                    *
+
+                    ### Übung
                     Paste your code from the previous adventure*** Start by pasting the code that you've made so far into your programming
+
                     ***Decide a winner***
                     Firstly, if you and the dealer have an equal amount of points, it's a draw.
                     Secondly, if the dealer has more than 21 points and you don't, you are the winner.
@@ -1307,9 +1309,18 @@ adventures:
                     Deshalb multiplizieren wir mit dem Stern (auf der Tastatur über dem Plus): `5 * 5`. Lies das als "5 mal 5", dann kannst du dich am einfachsten daran erinnern.
                 example_code: |
                     ```
-                    {print} '5 plus 5 macht ' 5 + 5
-                    {print} '5 minus 5 macht ' 5 - 5
-                    {print} '5 mal 5 macht ' 5 * 5
+                    essen_preis {is} 0
+                    getränk_preis {is} 0
+                    gesamt_preis {is} 0
+                    {print} 'Willkommen bei McHedy'
+                    bestellung {is} {ask} 'Was möchtest du essen?'
+                    {if} bestellung {is} Hamburger essen_preis {is} 5
+                    {if} bestellung {is} Pommes essen_preis {is} 2
+                    getränk {is} {ask} 'Was möchtest du trinken?'
+                    {if} getränk {is} Wasser getränk_preis {is} 0
+                    {else} getränk_preis {is} 3
+                    gesamt_preis {is} essen_preis + getränk_preis
+                    {print} 'Das macht zusammen ' gesamt_preis ' Euro, bitte'
                     ```
             7:
                 story_text: |
