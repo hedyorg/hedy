@@ -1906,7 +1906,7 @@ class ConvertToPython_1(ConvertToPython):
 
     def turn(self, meta, args):
         if not args:
-            return f"t.right(90){self.add_debug_breakpoint()}"  # no arguments defaults to a right turn
+            return f"t.right(0){self.add_debug_breakpoint()}"  # no arguments defaults to not turning
 
         arg = args[0].data
         if arg == 'left':
@@ -2025,7 +2025,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def turn(self, meta, args):
         if not args:
-            return f"t.right(90){self.add_debug_breakpoint()}"  # no arguments defaults to a right turn
+            return f"t.right(0){self.add_debug_breakpoint()}"  # no arguments defaults to not turning
         arg = self.unpack(args[0])
         if self.is_variable(arg, meta.line) and not self.is_list_access(arg):
             return self.make_turn(escape_var(arg))
@@ -2381,7 +2381,7 @@ else:{self.add_debug_breakpoint()}
 class ConvertToPython_6(ConvertToPython_5):
     def turn(self, meta, args):
         if not args:
-            return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
+            return "t.right(0)" + self.add_debug_breakpoint()  # no arguments defaults to not turning
         arg = args[0]
         if self.is_variable_with_definition(arg, meta.line):
             value = f'{escape_var(self.unpack(arg))}.data'
@@ -2916,7 +2916,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def turn(self, meta, args):
         if not args:
-            return "t.right(90)" + self.add_debug_breakpoint()  # no arguments defaults to a right turn
+            return "t.right(0)" + self.add_debug_breakpoint()  # no arguments defaults to not turning
 
         if self.is_variable_with_definition(args[0], meta.line):
             return self.make_turn(f'{escape_var(self.unpack(args[0]))}.data')
