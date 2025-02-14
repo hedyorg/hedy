@@ -298,10 +298,6 @@ class MiscClassPages(WebsiteModule):
     @route("/invite", methods=["POST"])
     @requires_teacher
     def invite_student(self, user):
-        body = request.json
-        # Validations
-        if not isinstance(body, dict):
-            return make_response(gettext("ajax_error"), 400)
         if not isinstance(request.form.getlist('usernames'), list):
             return make_response(gettext("username_invalid"), 400)
         if not isinstance(request.form.get('class_id'), str):

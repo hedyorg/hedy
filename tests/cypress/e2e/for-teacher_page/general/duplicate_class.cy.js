@@ -41,7 +41,7 @@ describe('Duplicate class tests', () => {
     cy.reload();
     cy.wait(500);
     openClassView(duplicate_class);
-    cy.getDataCy('invites_block').should('not.exist');
+    cy.getDataCy('invites_block').children().should('have.length', 0);
     checkCustomizations();
   })
 
