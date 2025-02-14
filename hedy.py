@@ -1887,7 +1887,7 @@ class ConvertToPython_1(ConvertToPython):
 
     def forward(self, meta, args):
         if not args:
-            return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}',
+            return add_sleep_to_command(f't.forward(0){self.add_debug_breakpoint()}',
                                         indent=False, is_debug=self.is_debug, location="after")
         return self.make_forward(int(self.unpack(args[0])))
 
@@ -2034,7 +2034,7 @@ class ConvertToPython_2(ConvertToPython_1):
 
     def forward(self, meta, args):
         if not args:
-            return add_sleep_to_command(f't.forward(50){self.add_debug_breakpoint()}',
+            return add_sleep_to_command(f't.forward(0){self.add_debug_breakpoint()}',
                                         indent=False, is_debug=self.is_debug, location="after")
         arg = self.unpack(args[0])
         if not self.is_variable(arg, meta.line) and not self.is_list_access(arg):
@@ -2391,7 +2391,7 @@ class ConvertToPython_6(ConvertToPython_5):
 
     def forward(self, meta, args):
         if not args:
-            return add_sleep_to_command('t.forward(50)' + self.add_debug_breakpoint(), indent=False,
+            return add_sleep_to_command('t.forward(0)' + self.add_debug_breakpoint(), indent=False,
                                         is_debug=self.is_debug, location="after")
         arg = args[0]
         if self.is_variable_with_definition(arg, meta.line):
@@ -2926,7 +2926,7 @@ class ConvertToPython_12(ConvertToPython_11):
 
     def forward(self, meta, args):
         if not args:
-            command = f't.forward(50){self.add_debug_breakpoint()}'
+            command = f't.forward(0){self.add_debug_breakpoint()}'
             return add_sleep_to_command(command, False, self.is_debug)
 
         if self.is_variable_with_definition(args[0], meta.line):
