@@ -223,8 +223,8 @@ adventures:
                     ```
             15:
                 story_text: |
-                    Mit der `{while}`-Schleife kannst du deine Geschichten noch interessanter gestalten. So kannst du zum Beispiel mit  `{while} game == 'on'``{while} sword == 'lost'` dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
-                    Oder du lässt die Spieler mit  `{while} game == 'on'` so lange weiter suchen, bis sie etwas finden.
+                    Mit der `{while}`-Schleife kannst du deine Geschichten noch interessanter gestalten. So kannst du zum Beispiel mit `{while} game == 'on'` dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
+                    Oder du lässt die Spieler mit `{while} sword == 'lost'` so lange weiter suchen, bis sie etwas finden.
 
                     ### Übung
                     Der Beispiel Code zeigt dir, wie du eine `{while}` Schleife in einer Geschichte verwenden kannst. Denke dir jetzt **ein eigenes Szenario** aus, in dem die Spieler etwas finden müssen, bevor sie weitermachen können.
@@ -409,7 +409,7 @@ adventures:
                     Gib die Variable `punkte` am Ende der Funktion zurück.
 
                     ***Teste die Funktion***
-                    Teste, ob deine Funktion richtig funktioniert. Vervollständige den ersten `{print}`Befehl, indem du die Karte ergänzt, die du gezogen hast. Dann vervollständige die zweite Zeile, indem du die Funktion mit karte_1 aufrufst.
+                    Teste, ob deine Funktion richtig funktioniert. Vervollständige den ersten `{print}` Befehl, indem du die Karte ergänzt, die du gezogen hast. Dann vervollständige die zweite Zeile, indem du die Funktion mit karte_1 aufrufst.
                     Lass dein Programm ein paar Mal laufen. Bist du mit den Ergebnissen zufrieden? Dann kannst du den Testteil entfernen und zum nächsten Tab wechseln!
                 example_code: |
                     ```
@@ -544,8 +544,10 @@ adventures:
             17:
                 story_text: |
                     In den letzten 3 Abenteuern hast du fast ein funktionierendes Blackjack Spiel geschrieben! Jetzt fehlt nur noch, den Gewinner zu bestimmen
-                    *
+
+                    ### Übung
                     Paste your code from the previous adventure*** Start by pasting the code that you've made so far into your programming
+
                     ***Decide a winner***
                     Firstly, if you and the dealer have an equal amount of points, it's a draw.
                     Secondly, if the dealer has more than 21 points and you don't, you are the winner.
@@ -554,7 +556,7 @@ adventures:
 
                     ***Enjoy the game!***
                     Does your game work properly? Amazing! You have done a great job! Enjoy your game!
-                    If it doesn't work right away, no worries, you might have made a mistake. Just keep calm and bebug your code using the ladybug button.
+                    If it doesn't work right away, no worries, you might have made a mistake. Just keep calm and debug your code using the ladybug button.
                 example_code: |
                     ```
                     # Füge das Programm aus dem vorherigen Abenteuer hier ein
@@ -1307,9 +1309,18 @@ adventures:
                     Deshalb multiplizieren wir mit dem Stern (auf der Tastatur über dem Plus): `5 * 5`. Lies das als "5 mal 5", dann kannst du dich am einfachsten daran erinnern.
                 example_code: |
                     ```
-                    {print} '5 plus 5 macht ' 5 + 5
-                    {print} '5 minus 5 macht ' 5 - 5
-                    {print} '5 mal 5 macht ' 5 * 5
+                    essen_preis {is} 0
+                    getränk_preis {is} 0
+                    gesamt_preis {is} 0
+                    {print} 'Willkommen bei McHedy'
+                    bestellung {is} {ask} 'Was möchtest du essen?'
+                    {if} bestellung {is} Hamburger essen_preis {is} 5
+                    {if} bestellung {is} Pommes essen_preis {is} 2
+                    getränk {is} {ask} 'Was möchtest du trinken?'
+                    {if} getränk {is} Wasser getränk_preis {is} 0
+                    {else} getränk_preis {is} 3
+                    gesamt_preis {is} essen_preis + getränk_preis
+                    {print} 'Das macht zusammen ' gesamt_preis ' Euro, bitte'
                     ```
             7:
                 story_text: |
@@ -2262,7 +2273,7 @@ adventures:
         levels:
             13:
                 story_text: |
-                    Im letzten Abenteuer hast du gelernt, ein Argument in einer Funktion zu verwenden. Du hast auch glen, wie du das mit einem {ask} kombinieren kannst.
+                    Im letzten Abenteuer hast du gelernt, ein Argument in einer Funktion zu verwenden. Du hast auch gelernt, wie du das mit einem {ask} kombinieren kannst.
                     Du hast dich vielleicht gefragt, warum du eine Funktion verwenden solltest, weil die Funktionen im Beispiel nur eine Zeile lange sind.
                     Jetzt werden wir dir zeigen, wie größere Funktionen aussehen. Wir werden jetzt auch mehrere Argumente verwenden. Du wirst sehen, wie viel besser es ist, eine Funktion zu verwenden, wenn die Funktion größer wird.
                     Hier ist ein Beispiel einer Funktion mit Argumenten, kombiniert mit dem {ask} Befehl.
@@ -2700,7 +2711,7 @@ adventures:
                     Wir haben die erste Zeile für dich definiert und den Aufruf im Programm eingefügt. Kannst du das ganze Lied vervollständigen?
                 example_code: |
                     ```
-                    {define} zeal_1
+                    {define} zeile_1
                         {for} i {in} {range} 1 {to} 3
                             {play} G
                         {play} D
@@ -2713,7 +2724,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         tier = tiere[i]
                         laut = laute[i]
-                        {print} 'Old MacDonald had a farm'
+                        {print} 'Old MacDonald hat ’ne Farm'
                         {call} zeile_1
                         {print} 'E I E I O!'
                         _
@@ -3145,7 +3156,7 @@ adventures:
                     Toll gemacht! Du hast einen weiteren neuen Level erreicht! Im vorherigen Level hast du gelernt, mehrere Zeile Code in einem `{if}` oder `{repeat}` Befehl zu benutzen.
                     Aber du kannst noch nicht beide kombinieren...
 
-                    Gute Nachrichten! In diesem Level darfst du ein `{if}`in einem `{if}`, `{repeat}`in einem `{repeat}`und jeweils ineinander zu verwenden.
+                    Gute Nachrichten! In diesem Level darfst du ein `{if}` in einem `{if}`, `{repeat}` in einem `{repeat}` und jeweils ineinander zu verwenden.
                     Versuch es!
                 example_code: |
                     ```
@@ -3277,9 +3288,10 @@ adventures:
 
                     ### Übung 1
                     Füge die Anführungszeichen zum Code hinzu, um ihn zum Laufen zu bringen! Sei vorsichtig: Variablen sollten nicht in Anführungszeichen stehen.
+                    Dann verwende den `{clear}` Befehl um nur eine Zeile anzuzeigen.
 
                     ### Übung 2
-                    Gehe zum vorigen Level zurück und kopiere deinen Restaurant-Code. Bringe diesen Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen hinzufügst.
+                    Gehe zum vorigen Level zurück und kopiere deinen Restaurant-Code. Bringe diesen Code in diesem Level zum Laufen, indem du Anführungszeichen und `{clear}` Befehle an den richtigen Stellen hinzufügst.
                 example_code: |
                     ```
                     _ Füge Anführungszeichen in diesen Code ein _
@@ -3322,7 +3334,7 @@ adventures:
                     Du kann viele weitere Dinge zu deinem virtuellen Restaurant ergänzen. Zum Beispiel kannst du...
                     - frage, wie viele Personen kommen und den Preis mit der Anzahl multiplizieren?
                     - ein weiteres Gericht hinzufügen?
-                    - Gästen einen Rabatt geben, wenn sie einen (geheimen) Couponcode eingeben?
+                    - Gästen einen Rabatt geben, wenn sie einen (geheimen) Gutscheincode eingeben?
                     - ein Kinderessen hinzufügen?
                     - dir noch weitere lustige Dinge ausdenken und ergänzen?
                 example_code: |
@@ -3521,8 +3533,8 @@ adventures:
                     In diesem Level kannst du üben, Variablen zu benutzen, damit du im nächsten Level das Spiel Schere, Stein, Papier machen kannst!
                 example_code: |-
                     ```
-                    _ {is} {ask} Schere, Stein oder Papier?
-                    {print} Ich wähle
+                    Auswahl {is} Stein
+                    {print} Ich wähle _
                     ```
             3:
                 story_text: |
@@ -3540,8 +3552,8 @@ adventures:
                 example_code_2: |
                     ```
                     wahlmöglichkeiten {is} Schere, Stein, Papier
-                    {print} Spieler 1 wählt... wahlmöglichkeiten {at} {random}
-                    {print} Spieler 2 _
+                    spieler_1 {is} {ask} Name von Spieler 1:
+                    _
                     ```
             4:
                 story_text: |
@@ -3585,16 +3597,16 @@ adventures:
                 example_code: |
                     ```
                     Auswahl = Schere, Stein, Papier
-                    deine_Wahl = {ask} 'Was wählst du?'
+                    deine_Wahl {is} {ask} 'Was wählst du?'
                     {print} 'Du wählst ' deine_Wahl
-                    Computer_Wahl = Auswahl {at} {random}
+                    Computer_Wahl {is} Auswahl {at} {random}
                     {print} 'Der Computer wählt ' Computer_Wahl
                     {if} Computer_Wahl {is} deine_Wahl
                         {print} 'Unentschieden'
-                    {if} Computer_Wahl {is} 'Stein'
-                        {if} deine_Wahl {is} 'Papier'
+                    {if} Computer_Wahl {is} Stein
+                        {if} deine_Wahl {is} Papier
                             {print} 'Du gewinnst!'
-                        {if} deine_Wahl {is} 'Schere'
+                        {if} deine_Wahl {is} Schere
                             {print} 'Du verlierst!'
                     # mach den Beispiel-Code fertig
                     ```
@@ -3604,10 +3616,9 @@ adventures:
                     In den vorherigen Leveln hast du oft dein eigenes Schere-Stein-Papier Spiel gemacht. Kann du den Code vervollständigen, indem du den `{for}` Befehl so zu verwenden, dass das Spiel funktioniert?
                 example_code: |
                     ```
-                    Auswahl = Schere, Stein, Papier
+                    Auswahl = _
                     Personen = _
-                    {for} Spieler {in} Personen
-                         {print} Spieler ' wählt ' Auswahl {at} {random}
+                    {for} _
                     ```
             13:
                 story_text: |

@@ -178,7 +178,7 @@ class ClassModule(WebsiteModule):
             # Also remove the pending message in this case
             session["messages"] = session["messages"] - 1 if session["messages"] else 0
 
-        return make_response('', 200)
+        return make_response({}, 200)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
     @requires_login
@@ -189,7 +189,7 @@ class ClassModule(WebsiteModule):
 
         self.db.remove_student_from_class(Class["id"], student_id)
         refresh_current_user_from_db()
-        return make_response('', 200)
+        return make_response({}, 200)
 
     @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
     @requires_login
@@ -201,7 +201,7 @@ class ClassModule(WebsiteModule):
         self.db.remove_second_teacher_from_class(Class, second_teacher)
 
         refresh_current_user_from_db()
-        return make_response('', 200)
+        return make_response({}, 200)
 
 
 class MiscClassPages(WebsiteModule):

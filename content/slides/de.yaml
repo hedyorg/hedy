@@ -34,7 +34,7 @@ levels:
             code: '{print} Willkommen bei Hedy!'
         7:
             header: Programmieren in Hedy
-            text: Wir starten den Code mit dem Run code Knopf unter dem Code.
+            text: Wir starten den Code mit dem "Programm ausführen" Knopf unter dem Code.
             code: '{print} Willkommen bei Hedy!'
         8:
             header: Programmieren in Hedy
@@ -61,48 +61,44 @@ levels:
                 `{print}` wird benutzt, um Text auf dem Bildschirm anzuzeigen.
             code: '{print} Text auf Bilschirm anzeigen'
         3:
+            header: 'Der {print} Befehl'
+            text: |
+            code: |-
+                {print} Willkommen bei Hedy!
+                {print} Beginne jetzt mit dem Programmieren!
+        4:
             header: 'Hedy Level 1: {ask}'
             text: |-
                 Der zweite Code, den du in Level 1 benutzen kannst, ist `{ask}`.
 
                 `{ask}` wird benutzt, um eine Frage zu stellen, die beantwortet werden kann.
             code: |-
-                {print} Welcome to your own rock scissors paper!
-                {ask} What will you choose?
-        4:
-            header: 'Hedy Level 1: {echo}'
-            text: |-
-                Der letzte Text-Code, den du in Level 1 benutzen kannst, ist `{echo}`.
-
-                `{echo}` wird benutzt, um die Antwort auf ein `{ask}` zu wiederholen.
-            code: |-
-                {print} Hello!
-                {ask} What is your name?
-                {echo} hello
+                {print} Willkommen zu deinem eigenen Schere, Stein, Papier!
+                {ask} Was wirst du auswählen?
         5:
-            header: Programmieren!
+            header: 'Hedy Level 1: {echo}'
             text: |-
                 Mit `{print}`, `{ask}` und `{echo}` kannst du bereits eine kleine Geschichte erstellen.
                 Dies ist ein guter Zeitpunkt die Abenteuer Papagei, Geschichte und Stein Schere Papier zu versuchen.
             code: "{print} Hallo!\n{ask} Wie heißt du?\n{echo} hallo"
         6:
             header: Programmieren!
-            text: Abenteuer sind in den Tabs.
+            text: "Mit `{print}`, `{ask}` und `{echo}` kannst du bereits eine kleine Geschichte erstellen.\nDies ist ein guter Zeitpunkt die Abenteuer Papagei, Geschichte und Stein Schere Papier zu versuchen."
             editor: /hedy/1
         7:
             header: Programmieren!
+            text: Abenteuer sind in den Tabs.
+            editor: /hedy/1
+        8:
+            header: Programmieren!
             text: Die gelben Pfeilknöpfe können zum Kopieren von Beispielen benutzt werden.
             editor: /hedy#print_command
-        8:
-            header: Zeichnen mit der Schildkröte
-            text: Nun da wir uns Text-Codes angeguckt haben, schauen wir uns als Nächstes Codes zum Zeichnen an.
-            editor: /hedy#Ausgabe_Befehl
         9:
+            header: 'Zeichnen mit der Schildkröte'
+            text: 'Nun da wir uns Text-Codes angeguckt haben, schauen wir uns als Nächstes Codes zum Zeichnen an.'
+        10:
             header: 'Zeichnen mit der Schildkröte: {forward}'
             text: '`{forward}` wird benutzt, um die Schildkröte vorwärts zu bewegen.'
-        10:
-            header: 'Zeichnen mit der Schildkröte: {turn}'
-            text: '`{turn}` wird benutzt, um die Schildkröte nach links oder rechts zu drehen.'
             code: |-
                 {forward} 50
                 {turn} left
