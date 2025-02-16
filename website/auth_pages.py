@@ -258,6 +258,28 @@ class AuthModule(WebsiteModule):
         # TODO: Redirect the user to a tutorial page
         return make_response({'message': gettext('turned_into_teacher')}, 200)
 
+    @route("/subscribe-to-newsletter", methods=['POST'])
+    def subscribe_to_newsletter(self):
+        username = current_user()['username']
+        if not username:
+            return make_response(gettext("username_invalid"), 400)
+
+        user = self.db.user_by_username(username)
+        # The user must have an email and must be a teacher to subscribe
+        if not user or not user.get('email') or not user.get('is_teacher'):
+            return make_response(gettext("username_invalid"), 403)
+
+        classes = user.get('classes', [])
+        created_class = bool(classes)
+        customized_class = any([self.db.get_class_customizations(c.get('id')) for c in classes])
+
+        success = create_subscription(user["email"], user.get('country'), user.get('is_teacher'),
+                                      created_class, customized_class)
+        if not success:
+            return make_response(gettext('ajax_error'), 400)
+
+        return make_response({'message': gettext("successfully_subscribed")}, 200)
+
     @route("/logout", methods=["POST"])
     def logout(self):
         forget_current_user()

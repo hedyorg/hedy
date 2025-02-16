@@ -30,6 +30,31 @@
              {% endfor %}
            </div>
        {% endif %}
+
+       {% if user_data['is_teacher'] %}
+         <h1 class="section-header" id="my_subscription" onclick="$ ('#subscription').toggle()">{{_('newsletter')}}</h1>
+         <div id="subscription" data-cy="messages" class="profile-section-body"
+              {% if not invitations %} style="display: block;" {% endif %}>
+           {% if subscription_status == "subscribed" %}
+             <h2 class="profile-section-body-header">{{_('subscribed_header')}}</h2>
+             <p class="mt-0 mb-6">{{_('subscribed_message')}}</p>
+           {% elif subscription_status == "unsubscribed" %}
+             <h2 class="profile-section-body-header">{{_('unsubscribed_header')}}</h2>
+             <p class="mt-0 mb-6">{{_('unsubscribed_message')}}</p>
+           {% else %}
+             <div id="subscribe_panel">
+               <h2 class="profile-section-body-header">{{_('subscribe_newsletter')}}</h2>
+               <p class="mt-0 mb-6">{{_('subscribe_message')}}</p>
+               <button class="green-btn" onclick="hedyApp.subscribe_to_newsletter();">{{_('subscribe')}}</button>
+             </div>
+             <div id="subscribed_panel" class="hidden">
+               <h2 class="profile-section-body-header">{{_('subscribed_header')}}</h2>
+               <p class="mt-0 mb-6">{{_('subscribed_message')}}</p>
+             </div>
+           {% endif %}
+         </div>
+       {% endif %}
+
        <h1 data-cy="profile_button" class="section-header" onclick="$ ('#public_profile_body').toggle()">{{_('public_profile')}}</h1>
        <div id="public_profile_body" class="profile-section-body" {% if request.args.get('open') == "public-profile" %} style="display: inline;"{% endif %}>
             <h2 class="profile-section-body-header">{{_('public_profile')}}</h2>
@@ -63,7 +88,8 @@
                      </div>
                  {% endif %}
                  <div class="flex flex-row gap-4 items-center border-gray-400 border p-4 rounded-lg">
-                    <input type="checkbox" name="agree_terms" data-cy="agree_terms" required class="" {% if public_settings %}checked{% endif %}>
+                    <input id="agree_terms"  type="checkbox" name="agree_terms" data-cy="agree_terms" required
+                           class="" {% if public_settings %}checked{% endif %}>
                     <label for="agree_terms" class="cursor-pointer w-full">{{_('public_profile_info')}}</label>
                  </div>
                  <div class="flex flex-row">
@@ -145,22 +171,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="flex flex-row items-center mb-2">
-                <label for="subscribe" class="inline-block w-72">{{_('subscribe_newsletter')}}</label>
-                <input type="checkbox" class="ml-auto" data-cy="subscribe" name="subscribe">
-            </div>
-            <div class="flex flex-row items-center mb-2">
-                <label for="pair_with_teacher">{{_('pair_with_teacher')}}</label>
-                <input type="checkbox" class="ml-auto" data-cy="pair_with_teacher" name="pair_with_teacher">
-            </div>
-            <div class="flex flex-row items-center mb-6">
-                <label for="connect_guest_teacher">{{_('connect_guest_teacher')}}</label>
-                <input type="checkbox" class="ml-auto" data-cy="connect_guest_teacher" name="connect_guest_teacher"
-                            _="on click toggle [@required='true'] on #phone
-                                     toggle .hidden on #phone_number">
-            </div>
         </form>
-        <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" data-cy="delete_profile_button">{{_('destroy_profile')}}</button>
        </div>
       <h1 id="password_toggle" class="section-header" onclick="$ ('#change_password_body').toggle()">{{_('change_password')}}</h1>
         <div class="profile-section-body" id="change_password_body">
@@ -171,7 +182,7 @@
                     <input id="old_password" name="old_password" class="personal-input" minlength="6" type=password role="presentation" autocomplete="off" required>
                 </div>
                 <div class="flex flex-row items-center mb-2">
-                    <label for="new-password" class="inline-block w-72">{{_('new_password')}}</label>
+                    <label for="new_password" class="inline-block w-72">{{_('new_password')}}</label>
                     <input id="new_password" name="new-password" class="personal-input" minlength="6" type=password role="presentation" autocomplete="new-password" required>
                 </div>
                 <div class="flex flex-row items-center mb-2">
@@ -187,6 +198,14 @@
                 <button class="blue-btn" onclick="hedyApp.turn_into_teacher_account();">{{_('request_teacher_account')}}</button>
             </div>
         {% endif %}
+
+        <h1 id="danger_zone" class="section-header-important"
+            onclick="$ ('#danger_zone_body').toggle()">{{_('danger_zone')}}</h1>
+          <div class="profile-section-body" id="danger_zone_body">
+            <h2 class="profile-section-body-header">{{_('destroy_profile')}}</h2>
+            <p class="mt-0 mb-6">{{_('destroy_profile_message')}}</p>
+            <button class="red-btn" onclick="hedyApp.destroy('{{_('are_you_sure')}}')" data-cy="delete_profile_button">{{_('destroy_profile')}}</button>
+          </div>
    </div>
 </div>
 {% endblock %}

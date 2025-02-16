@@ -55,7 +55,7 @@ from website.auth import (current_user, is_admin, is_teacher, is_second_teacher,
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 from website.flask_hedy import g_db
-from website.newsletter import add_used_slides_to_subscription
+from website.newsletter import get_subscription_status
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -2350,6 +2350,10 @@ def profile_page(user):
     else:
         session['messages'] = 0
 
+    subscription_status = ''
+    if profile.get('is_teacher', False):
+        subscription_status = get_subscription_status(user.get('email'))
+
     return render_template(
         'profile.html',
         page_title=gettext('title_my-profile'),
@@ -2359,6 +2363,7 @@ def profile_page(user):
         public_settings=public_profile_settings,
         user_classes=classes,
         current_page='my-profile',
+        subscription_status=subscription_status,
         javascript_page_options=dict(
             page='my-profile',
         ))

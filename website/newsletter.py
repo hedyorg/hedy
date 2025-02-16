@@ -48,14 +48,31 @@ def fire_and_forget(f):
     threading.Thread(target=run, daemon=True).start()
 
 
+def get_subscription_status(email):
+    """ Fetches the subscription status of the user. Values can be 'subscribed',
+    'unsubscribed' or '' if the user has never subscribed """
+    if email and MAILCHIMP_API_URL:
+        response = get_mailchimp_subscriber(email)
+        if response and response.status_code == 200:
+            return response.json().get('status')
+    return ''
+
+
+def create_subscription(email, country, teacher=True, created_class=False, customized_class=False):
+    """ Subscribes the user to the newsletter """
+    if email and MAILCHIMP_API_URL:
+        teacher_tag = MailchimpTag.TEACHER if teacher else None
+        created_class_tag = MailchimpTag.CREATED_CLASS if created_class else None
+        customized_class_tag = MailchimpTag.CUSTOMIZED_CLASS if customized_class else None
+        tags = [tag for tag in [country, teacher_tag, created_class_tag, customized_class_tag] if tag]
+        return create_mailchimp_subscriber(email, tags)
+    return False
+
+
 @run_if_mailchimp_config_present
-def create_subscription(email, country):
-    """ Subscribes the user to the newsletter. Currently, users can subscribe to the newsletter only on signup and
-    only if they are creating a teacher account. """
-    def create():
-        tags = [country, MailchimpTag.TEACHER]
-        create_mailchimp_subscriber(email, tags)
-    fire_and_forget(create)
+def create_subscription_at_signup(email, country):
+    """ Subscribes the user to the newsletter when they sign up. """
+    fire_and_forget(lambda _: create_subscription(email, country))
 
 
 @run_if_mailchimp_config_present
@@ -139,20 +156,16 @@ def create_mailchimp_subscriber(email, tag_names):
     request_path = MAILCHIMP_API_URL + "/members/"
     r = requests.post(request_path, headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
 
-    subscription_error = None
-    if r.status_code != 200 and r.status_code != 400:
-        subscription_error = True
     # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
-    if r.status_code == 400 and "already a list member" not in r.text:
-        subscription_error = True
+    success = r.status_code == 200 or (r.status_code == 400 and "already a list member" in r.text)
     # If there's an error in subscription through the API, we report it to the main email address
-    if subscription_error:
+    if not success:
         send_email(
             config["email"]["sender"],
             "ERROR - Subscription to Hedy newsletter",
             f"email: {email} status: {r.status_code} body: {r.text}",
             f"<p>{email}</p><pre>Status:{r.status_code}    Body:{r.text}</pre>")
-    return not subscription_error
+    return success
 
 
 def get_mailchimp_subscriber(email):
