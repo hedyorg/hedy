@@ -9,6 +9,7 @@ from config import config
 from website.flask_helpers import render_template
 from website.auth import current_user, is_teacher, requires_login, requires_teacher, \
     refresh_current_user_from_db, is_second_teacher
+from website.newsletter import add_class_created_to_subscription
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -50,6 +51,7 @@ class ClassModule(WebsiteModule):
         }
 
         self.db.store_class(Class)
+        add_class_created_to_subscription(user['email'])
         response = {"id": Class["id"]}
         return make_response(response, 200)
 
