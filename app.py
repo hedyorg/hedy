@@ -55,7 +55,7 @@ from website.auth import (current_user, is_admin, is_teacher, is_second_teacher,
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 from website.flask_hedy import g_db
-from website.newsletter import get_subscription_status
+from website.newsletter import add_used_slides_to_subscription, get_subscription_status
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
