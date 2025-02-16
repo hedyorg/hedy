@@ -17,7 +17,6 @@ export * from './app';
 export * from './auth';
 export * from './statistics';
 export * from './logs';
-export * from './tutorials/tutorial';
 export * from './teachers';
 export * from './initialize';
 export * from './debugging';

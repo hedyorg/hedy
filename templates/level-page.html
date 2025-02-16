@@ -20,54 +20,46 @@
 {% endif %}
 <div id="level_header" class="bg-blue-200">
   <div class="ltr:pl-8 rtl:pr-8 py-2 flex gap-2 px-4 items-center justify-between w-full max-w-screen-2xl mx-auto">
-    {% if intro_tutorial %}
-        <div class="text-2xl font-bold text-blue-500 whitespace-nowrap flex-0">
-          {{ _('level_title') }} {{ level_nr }}
+    <div class="dropdown relative">
+      <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" data-cy="dropdown_level_button"
+        onclick="$('#level_dropdown').slideToggle('medium');">
+        <span>{{ _('level_title') }} {{ level_nr }}
           &nbsp;
-          {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
-        </div>
-    {% else %}
-      <div class="dropdown relative">
-        <button class="white-btn px-4 rounded inline-flex items-center gap-2 text-xl" data-cy="dropdown_level_button"
-          onclick="$('#level_dropdown').slideToggle('medium');">
-          <span>{{ _('level_title') }} {{ level_nr }}
-            &nbsp;
-            {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}</span>
-          <svg id="level_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-          </svg>
-        </button>
-        <div class="dropdown-menu dropdown-blue z-30 min-w-full" id="level_dropdown"
-          style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-          _="on mutation of @style
-              set arrow to #level_arrow
-              if *display == 'none'
-                  remove .rotate-180 from arrow
-              else if not arrow.classList.contains('rotate-180')
-                  add .rotate-180 to arrow
-              end">
-            {% set dropdown_levels = customizations["available_levels"] if customizations["teachers_adventure"] else range(1, max_level + 1) %}
-            {% for dropdown_level in dropdown_levels %}
-              <button id="level_button_{{ dropdown_level }}" data-cy="level_button_{{ dropdown_level }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
-              {% if dropdown_level == level %}bg-white{% elif dropdown_level not in customizations['available_levels'] and not specific_adventure %}bg-gray-400 tooltip{% else %}hover:bg-blue-100 bg-blue-200c{% endif %}"
-              {% if (dropdown_level == level or dropdown_level not in customizations['available_levels']) and not specific_adventure %}disabled{% endif %}
-              style="width: 100%;"
-              _="on click hedyApp.goToLevel({{dropdown_level}})">
-                {% if not specific_adventure %}
-                <div class="{% if dropdown_level in customizations['available_levels'] %}hidden{% endif %} text-center opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 items-top">
-                  <span class="tooltiptext text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -90px; margin-top: -30px; color:black; ">
-                    {{ _('tooltip_level_locked') }}
-                  </span>
-                </div>
-                {% endif %}
-                <div class="flex-grow h-min min-w-80" tabindex=0>
-                    {{ _('level_title') }} {{ dropdown_level }}
-                </div>
-              </button>
-            {% endfor %}
-        </div>
+          {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}</span>
+        <svg id="level_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+        </svg>
+      </button>
+      <div class="dropdown-menu dropdown-blue z-30 min-w-full" id="level_dropdown"
+        style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
+        _="on mutation of @style
+            set arrow to #level_arrow
+            if *display == 'none'
+                remove .rotate-180 from arrow
+            else if not arrow.classList.contains('rotate-180')
+                add .rotate-180 to arrow
+            end">
+          {% set dropdown_levels = customizations["available_levels"] if customizations["teachers_adventure"] else range(1, max_level + 1) %}
+          {% for dropdown_level in dropdown_levels %}
+            <button id="level_button_{{ dropdown_level }}" data-cy="level_button_{{ dropdown_level }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
+            {% if dropdown_level == level %}bg-white{% elif dropdown_level not in customizations['available_levels'] and not specific_adventure %}bg-gray-400 tooltip{% else %}hover:bg-blue-100 bg-blue-200c{% endif %}"
+            {% if (dropdown_level == level or dropdown_level not in customizations['available_levels']) and not specific_adventure %}disabled{% endif %}
+            style="width: 100%;"
+            _="on click hedyApp.goToLevel({{dropdown_level}})">
+              {% if not specific_adventure %}
+              <div class="{% if dropdown_level in customizations['available_levels'] %}hidden{% endif %} text-center opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 items-top">
+                <span class="tooltiptext text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -90px; margin-top: -30px; color:black; ">
+                  {{ _('tooltip_level_locked') }}
+                </span>
+              </div>
+              {% endif %}
+              <div class="flex-grow h-min min-w-80" tabindex=0>
+                  {{ _('level_title') }} {{ dropdown_level }}
+              </div>
+            </button>
+          {% endfor %}
       </div>
-    {% endif %}
+    </div>
     <div class="flex-1">
       <div id="program_name_container" class="overflow-hidden flex-1 flex border border-blue-400 ltr:divide-x rtl:divide-x-reverse divide-blue-400 rounded md:mx-16 items-center">
         <input id="program_name" type="text" class="outline-0 text-2xl font-light text-blue-500 flex-1 bg-transparent focus:bg-blue-100 border-0 px-4 flex-1 h-full" value="{{initial_adventure.save_name}}">
@@ -81,9 +73,6 @@
         {% endif %}
       </div>
     </div>
-    {% if tutorial %}
-    <button class="green-btn" onclick="hedyApp.startLevelTutorial('{{level_nr}}')">{{_('tutorial')}}</button>
-    {% endif %}
     {% if not hide_cheatsheet and cheatsheet %}
     <div class="dropdown relative">
       <button class="green-btn font-semibold rounded inline-flex items-center gap-2 mr-2" id="dropdown_cheatsheet_button"

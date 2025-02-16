@@ -92,7 +92,7 @@ class TestsTranslationLevel5(HedyTester):
     def test_2116(self):
         code = textwrap.dedent("""\
             people is mom, dad, Emma, Sophie
-            dishwasher is people op willekeurig
+            dishwasher is people kies willekeurig
             als dishwasher is Sophie
             print 'too bad I have to do the dishes'
             anders

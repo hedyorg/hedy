@@ -314,7 +314,6 @@ class TestPages(AuthHelper):
         pages = [
             '/',
             '/hedy',
-            '/tutorial',
             '/explore',
             '/learn-more',
             '/programs',

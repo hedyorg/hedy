@@ -51,7 +51,7 @@ from website import (ab_proxying, admin, auth_pages, aws_helpers,
                      translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, is_students_teacher,
                           has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
-                          requires_teacher, forget_current_user, hide_explore)
+                          forget_current_user, hide_explore)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 from website.flask_hedy import g_db
@@ -93,10 +93,6 @@ for lang in ALL_LANGUAGES.keys():
 QUIZZES = collections.defaultdict(hedy_content.NoSuchQuiz)
 for lang in ALL_LANGUAGES.keys():
     QUIZZES[lang] = hedy_content.Quizzes(lang)
-
-TUTORIALS = collections.defaultdict(hedy_content.NoSuchTutorial)
-for lang in ALL_LANGUAGES.keys():
-    TUTORIALS[lang] = hedy_content.Tutorials(lang)
 
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in ALL_LANGUAGES.keys():
@@ -786,21 +782,6 @@ def parse_by_id(user):
         return make_response(gettext("request_invalid"), 400)
 
 
-@app.route('/parse_tutorial', methods=['POST'])
-@requires_login
-def parse_tutorial(user):
-    body = request.json
-
-    code = body['code']
-    level = try_parse_int(body['level'])
-    try:
-        result = hedy.transpile(code, level, "en")
-        # this is not a return, is this code needed?
-        make_response(({'code': result.code}), 200)
-    except BaseException:
-        return make_response(gettext("request_invalid"), 400)
-
-
 @app.route("/generate_machine_files", methods=['POST'])
 def prepare_files():
     body = request.json
@@ -1191,78 +1172,6 @@ def get_log_results():
     return make_response(response, 200)
 
 
-@app.route('/tutorial', methods=['GET'])
-def tutorial_index():
-    if not current_user()['username']:
-        return redirect('/login')
-    level = 1
-    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
-    commands = hedy.commands_per_level.get(level)
-    adventures = load_adventures_for_level(level)
-    parsons = len(PARSONS[g.lang].get_parsons_data_for_level(level))
-    initial_tab = adventures[0].short_name
-    initial_adventure = adventures[0]
-
-    max_level = hedy.HEDY_MAX_LEVEL  # do we need to fetch the max level per language?
-
-    return render_template(
-        "code-page.html",
-        intro_tutorial=True,
-        next_level=2,
-        level_nr=str(level),
-        level=str(level),
-        adventures=adventures,
-        initial_tab=initial_tab,
-        commands=commands,
-        quiz=True,
-        max_level=max_level,
-        parsons=True if parsons else False,
-        parsons_exercises=parsons,
-        initial_adventure=initial_adventure,
-        cheatsheet=cheatsheet,
-        blur_button_available=False,
-        current_user_is_in_class=len(current_user().get('classes') or []) > 0,
-        # See initialize.ts
-        javascript_page_options=dict(
-            page='code',
-            level=level,
-            lang=g.lang,
-            adventures=adventures,
-            initial_tab=initial_tab,
-            current_user_name=current_user()['username'],
-            start_tutorial=True,
-        ))
-
-
-@app.route('/teacher-tutorial', methods=['GET'])
-@requires_teacher
-def teacher_tutorial(user):
-    teacher_classes = g_db().get_teacher_classes(user['username'], True)
-    adventures = []
-    for adventure in g_db().get_teacher_adventures(user['username']):
-        adventures.append(
-            {'id': adventure.get('id'),
-             'name': adventure.get('name'),
-             'date': utils.localized_date_format(adventure.get('date')),
-             'level': adventure.get('level')
-             }
-        )
-
-    return render_template('for-teachers.html', current_page='my-profile',
-                           page_title=gettext('title_for-teacher'),
-                           teacher_classes=teacher_classes,
-                           teacher_adventures=adventures,
-                           tutorial=True,
-                           content=hedyweb.PageTranslations('for-teachers').get_page_translations(g.lang),
-                           javascript_page_options=dict(
-                               page='for-teachers',
-                               tutorial=True,
-                           ))
-
-
-# routing to index.html
-
-
 @app.route('/hour-of-code/<int:level>', methods=['GET'])
 @app.route('/hour-of-code', methods=['GET'], defaults={'level': 1})
 def hour_of_code(level, program_id=None):
@@ -1381,7 +1290,6 @@ def hour_of_code(level, program_id=None):
         hide_cheatsheet = True
 
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
-    tutorial = True if TUTORIALS[g.lang].get_tutorial_for_level(level) else False
 
     quiz_questions = 0
 
@@ -1415,7 +1323,6 @@ def hour_of_code(level, program_id=None):
         commands=commands,
         # parsons=parsons,
         # parsons_exercises=parson_exercises,
-        tutorial=tutorial,
         latest=version(),
         quiz=quiz,
         quiz_questions=quiz_questions,
@@ -1453,12 +1360,14 @@ def index(level, program_id):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = None
+    suppress_save_and_load = False
     if program_id:
         result = g_db().program_by_id(program_id)
         if not result or not get_current_user_program_permissions(result):
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
+        suppress_save_and_load = True
 
     # Initially all levels are available -> strip those for which conditions
     # are not met or not available yet
@@ -1593,7 +1502,6 @@ def index(level, program_id):
 
     parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
-    tutorial = True if TUTORIALS[g.lang].get_tutorial_for_level(level) else False
 
     quiz_questions = 0
     parson_exercises = 0
@@ -1649,7 +1557,6 @@ def index(level, program_id):
         commands=commands,
         parsons=parsons,
         parsons_exercises=parson_exercises,
-        tutorial=tutorial,
         latest=version(),
         quiz=quiz,
         quiz_questions=quiz_questions,
@@ -1669,6 +1576,7 @@ def index(level, program_id):
             adventures=adventures,
             initial_tab=initial_tab,
             current_user_name=current_user()['username'],
+            suppress_save_and_load=suppress_save_and_load,
         ))
 
 
@@ -1684,12 +1592,14 @@ def tryit(level, program_id):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = None
+    suppress_save_and_load = False
     if program_id:
         result = g_db().program_by_id(program_id)
         if not result or not get_current_user_program_permissions(result):
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
+        suppress_save_and_load = True
 
     # Initially all levels are available -> strip those for which conditions
     # are not met or not available yet
@@ -1824,7 +1734,6 @@ def tryit(level, program_id):
 
     parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
     quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
-    tutorial = True if TUTORIALS[g.lang].get_tutorial_for_level(level) else False
 
     quiz_questions = 0
     parson_exercises = 0
@@ -1880,7 +1789,6 @@ def tryit(level, program_id):
         commands=commands,
         parsons=parsons,
         parsons_exercises=parson_exercises,
-        tutorial=tutorial,
         latest=version(),
         quiz=quiz,
         quiz_questions=quiz_questions,
@@ -1900,6 +1808,7 @@ def tryit(level, program_id):
             adventures=adventures,
             initial_tab=initial_tab,
             current_user_name=current_user()['username'],
+            suppress_save_and_load=suppress_save_and_load,
         ))
 
 
@@ -2070,7 +1979,7 @@ def render_code_in_editor(level):
                                adventures=adventures,
                                initial_tab='start',
                                current_user_name=current_user()['username'],
-                               suppress_save_and_load_for_slides=True,
+                               suppress_save_and_load=True,
                            ))
 
 
@@ -2601,25 +2510,6 @@ def translate_keywords():
             return make_response(gettext("translate_error"), 400)
     except BaseException:
         return make_response(gettext('translate_error'), 400)
-
-
-# TODO TB: Think about changing this to sending all steps to the front-end at once
-@app.route('/get_tutorial_step/<level>/<step>', methods=['GET'])
-def get_tutorial_translation(level, step):
-    # Keep this structure temporary until we decide on a nice code / parse structure
-    if step == "code_snippet":
-        code = hedy_content.deep_translate_keywords(gettext('tutorial_code_snippet'), g.keyword_lang)
-        return make_response({'code': code}, 200)
-    try:
-        step = int(step)
-    except ValueError:
-        return make_response(gettext('invalid_tutorial_step'), 400)
-
-    data = TUTORIALS[g.lang].get_tutorial_for_level_step(level, step, g.keyword_lang)
-    if not data:
-        data = {'title': gettext('tutorial_title_not_found'),
-                'text': gettext('tutorial_message_not_found')}
-    return make_response((data), 200)
 
 
 @app.route('/store_parsons_order', methods=['POST'])
