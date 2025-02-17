@@ -531,7 +531,7 @@ class TestsLevel1(HedyTester):
     #
     def test_turn_no_args(self):
         code = "turn"
-        expected = "t.right(90)"
+        expected = "t.right(0)"
 
         self.multi_level_tester(
             code=code,
@@ -653,7 +653,7 @@ class TestsLevel1(HedyTester):
 
         expected = self.dedent(
             self.forward_transpiled(50),
-            't.right(90)',
+            't.right(0)',
             self.forward_transpiled(100))
 
         self.multi_level_tester(
