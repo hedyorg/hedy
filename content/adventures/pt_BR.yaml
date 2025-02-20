@@ -249,7 +249,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## {remove} {from}
-                    Se você pode adicionar itens a uma lista, é claro que você também pode retirá-los. Isso é feito usando o comando `{remove} {from}`.
+                    Se você pode adicionar itens a uma lista, é claro que você também pode tirar. Isso é feito usando o comando `{remove} {from}`.
                 example_code_2: |
                     ```
                     animais {is} cachorro, gato, canguru
@@ -371,9 +371,7 @@ adventures:
                     {print} número_1 ' vezes ' número_2 ' é ' resposta_correta
                     ```
                 story_text_2: |
-                    ### Exercício
-                    A calculadora acima vai calcular a resposta para você, mas você também pode fazer um programa para testar suas próprias habilidades matemáticas, assim:
-                    Preencha as lacunas para completar o programa!
+                    You can also let the computer do random calculations on its own using {random}.
                 example_code_2: |
                     ```
                     resposta_correta = 11 * 27
@@ -1044,12 +1042,11 @@ adventures:
                     A partir deste nível, você pode usar números decimais.
                 example_code: |
                     ```
-                    hambúrguer = 5
-                    bebida = 2
-                    total = hambúrguer + bebida
-                    {print} 'Você pediu um hambúrguer e uma bebida'
-                    {print} 'Vai custar ' total ' reais, por gentileza'
+                    {print} 'Dois e meio mais dois e meio é...'
+                    {print} 2.5 + 2.5
                     ```
+
+                    {print} 2.5 + 2.5
             13:
                 story_text: |
                     Nos níveis anteriores, você aprendeu a colocar dois comandos `{if}` um dentro do outro. Funciona bem, mas também resulta em códigos longos e desajeitados como este:
@@ -1131,8 +1128,8 @@ adventures:
                     Confira!
             18:
                 story_text: |
-                    Parabéns! Você chegou ao último nível da Hedy! O código que você criou aqui pode ser copiado para ambientes reais de Python, como Replit ou PyCharm, e você pode continuar aprendendo lá!
-                    Note, porém, que o Python só consegue ler comandos em Inglês, então se você usava outro idioma, terá de mudar os comandos para Inglês agora.
+                    Chegamos ao código Python real! Isso significa que precisamos usar parênteses com {print} e {range} de agora em diante.
+                    {print}('Meu nome é ', nome)
         default_save_name: introdução
     dice:
         name: Dado
@@ -1230,17 +1227,14 @@ adventures:
                 story_text: |
                     Você sempre discorda em casa sobre quem deve lavar a louça ou trocar a caixa de areia hoje?
                     Então você pode deixar o computador escolher de forma muito justa. Você pode programar isso neste nível!
+                    Você primeiro faz uma lista dos membros de sua família. Em seguida, escolha '{at} {random}' na lista.
                 example_code: |
                     ```
                     pessoas {is} mãe, pai, Eva, Sofia
                     {print} pessoas {at} {random} é quem vai lavar a louça
                     ```
                 story_text_2: |
-                    ### Exercício
-                    Faça a sua própria versão do programa de lavar louça. Primeiro, faça uma lista dos membros de sua família.
-                    Então, pense em uma tarefa que precisa ser feita e deixe que o computador decida quem terá de fazê-la, usando o comando `{at} {random}`.
-
-                    **Extra** Não está a fim de lavar a louça? Hackeie o programa removendo o seu próprio nome da lista com o comando `{remove}``{from}`.
+                    Não sente vontade de lavar a louça sozinho? Hackeie o programa para remover seu nome da lista.
             4:
                 story_text: |
                     Com as aspas simples você pode deixar seu planejamento de lavagem de louça mais bonito.
@@ -1428,7 +1422,7 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercício
-                    No momento, Hedy só pode responder sim, não ou talvez. Você pode dar à Hedy mais opções de resposta, como 'definitivamente' ou 'pergunte novamente'.
+                    Agora, Hedy só pode responder sim, não ou talvez. Você pode dar a Hedy mais opções de resposta, como 'definitivamente' ou '{ask} novamente'.
             4:
                 story_text: |
                     ### Exercício
@@ -2616,7 +2610,7 @@ adventures:
                     Se você quiser voltar, você usa o comando `{forward}` mas com um número negativo. Por exemplo, `{forward} -100`
                 story_text_2: |
                     ### Exercise
-                    Este é o início de uma pequena escada. Você pode fazê-la ter 5 passos?
+                    Este é o início de uma pequena escada. Você pode fazê-la ter 5 degraus?
             2:
                 story_text: |
                     Neste nível você pode usar variáveis para tornar a tartaruga interativa. Por exemplo, você pode perguntar ao jogador quantos passos a tartaruga deve dar.
