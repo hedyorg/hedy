@@ -79,7 +79,8 @@ adventures:
                     Na této úrovni můžete použít více řádků ve vašich `{if}` příkazech, tímto způsobem můžete vylepšit svůj šťastný nebo smutný konec!
 
                     ### Cvičení 1
-                    Ukázkový kód zobrazuje dva různé konce; jeden, kde postavy skočí do stroje času, a druhý, kde to neudělají. Doplňte mezery alespoň jednou větou na každý konec.
+                    Ukázkový kód zobrazuje dva různé konce; jeden, kde postavy skočí do stroje času, a druhý, kde to neudělají.
+                    Doplňte mezery alespoň jednou větou na každý konec.
                     **Extra** Udělejte příběh delší. Co se v příběhu stane? Můžete také přidat druhý `{ask}` s různými možnostmi.
 
                     ### Cvičení 2
@@ -260,7 +261,7 @@ adventures:
             12:
                 story_text: Hedy doteď neumožňovala používat čísla s desetinami jako je 1.5, ale odteď už ano. Pozor, Hedy používá desetinnou tečku `.` namísto desetinné čárky.
 
-                example_code: "```\nburger = 5\nnápoj = 2\ncelkem = hamburger + nápoj\nprint 'Objednali jste si hamburger a nápoj'\nprint 'To stojí ' celkem ' dolarů, prosím'\n```\n"
+                example_code: "```\nburger = 5\nnápoj = 2\ncelkem = burger + nápoj\n{print} 'Objednali jste si hamburger a nápoj'\n{print} 'To stojí ' celkem ' dolarů, prosím'\n```\n"
             13:
                 story_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
                 example_code: "```\nuživatelské_jméno = {ask} 'Jaké je vaše uživatelské jméno?'\nheslo = {ask} 'Jaké je vaše heslo?'\n{if} uživatelské_jméno {is} 'Hedy'\n    {if} heslo {is} 'secret'\n        {print} 'Vítejte Hedy!'\n    {else}\n        {print} 'Přístup odepřen'\n{else}\n    {print} 'Přístup zamítnut!'\n```\n"
