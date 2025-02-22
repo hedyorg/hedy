@@ -1261,7 +1261,7 @@ levels:
         -   type: text
             contents: |-
                 #### Opdracht 5: Schrijf de code
-                Je krijgt uitvoer in beeld, en jij moet er kloppende code bij schrijven. Gebruik een `repeat` waar het kan
+                Je krijgt uitvoer in beeld, en jij moet er kloppende code bij schrijven. Gebruik een `repeat` waar het kan.
     
                 Kijk ook goed naar het aantal regels code dat je nodig hebt!
         -   type: input
@@ -1299,6 +1299,178 @@ levels:
         -   type: define
             word: "Hoe laat je een regel code inspringen?"
             answer: "een regel code laten beginnen met spaties"
+            lines: '1'
+
+        -   type: text
+            contents: |-
+                #### Wat vond jij?
+        -   type: question
+            text: "Wat was de leukste opdracht van dit level?"
+            lines: '1'
+        -   type: question
+            text: "Waarom vond je juist die opdracht leuk?"
+            lines: '5'
+        -   type: question
+            text: "Welke opdracht was het minst leuk?"
+            lines: '1'
+        -   type: question
+            text: "Waarom vond je juist die opdracht niet leuk?"
+            lines: '5'
+    9:
+        intro: |-
+            ## Blokken in blokken!
+            Aan het einde van de les kan jij:
+            * codes waarvoor een blok nodig is (`if` en `repeat`) combineren
+
+        exercises:
+        -   type: text
+            contents: |-
+                ### Blokken in blokken
+
+                In dit level kun je niet alleen meerdere regels gebruiken bij if en repeat, maar je kunt ze ook nog eens in elkaar zetten!
+
+            code: |-
+              repeat 3 times
+                  eten = ask 'Wat wil je bestellen?'
+                  if eten is pizza
+                      print 'lekker'
+                  else
+                      print 'pizza is lekkerder'
+        -   type: text
+            contents: |-
+                #### Opdracht 1: Welke regels moeten er worden ingesprongen om te code te laten kloppen?
+    
+                Inspringen betekent met spaties beginnen! Lees de code goed en maak een logische keuze.
+        -   type: circle
+            goal: inspringen
+            code: |-
+                repeat 3 times
+                print 'Baby shark!'
+                print 'Tudu tudu tudu!'                  
+                print 'Baby shark!'
+            answer: Regels 2 en 3
+        -   type: circle
+            goal: inspringen
+            code: |-
+                naam is 'Hoe heet jij?'
+                if naam is Batman
+                repeat 2 times
+                print 'Welkom in de BatCave!'
+                else 
+                print 'Nee ' naam '! Jij mag hier niet in!'
+            answer: Regel 3 t/m 6, en regel 4 twee keer (dus met 8 spaties)
+        -   type: circle
+            goal: inspringen
+            code: |-
+                mensen = ask 'Hoeveel klanten zijn er?'
+                repeat mensen times
+                eten = ask 'Wat wil je eten: Pizza of friet?'
+                if eten is pizza
+                print 'Lekker hoor! Dat is dan 10 euro.'
+                else 
+                print 'Met mayo! Dat is dan 5 euro.'
+            answer: De regels 3 t/m 7, en regels 5 en 7 twee keer.
+        -   type: text
+            contents: |-
+                #### Opdracht 2: Voorspel de uitvoer
+                Wat is de uitvoer van deze programma's?
+        -   type: output
+            code: |-
+                repeat 3 times 
+                    repeat 2 times
+                        print 'Hallo!'
+            answer: |-
+                6x Hallo
+        -   type: output
+            code: |-
+                naam is ask 'Hoe heet jij?'
+                repeat 5 times 
+                    print 'Hallo'
+                if naam is Hedy
+                    print 'Ja'
+                else
+                    print 'Nee'
+            answer: |-
+                5x Hallo 
+                <Ja of Nee>
+        -   type: text
+            contents: |-
+                ### Opdracht 3: Goed of fout?
+                Lees de code goed, en bepaal of deze code een foutmelding oplevert.
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
+                naam is Hermans
+                if naam is Senkal
+                    print 'Hoera!'
+                else
+                    print 'Pech'
+            answer: Goed
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
+                getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9
+                repeat 5 times
+                  nummer is getallen at randoom
+                  if nummer is 5
+                  print 'Hoera!'
+                  else
+                  print 'Pech'
+            answer: Fout, er is niet ingesprongen bij de codes van if.
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
+                mensen = Jan, Mo, Cees, Enes
+                    print 'De afwasser is ' mensen at random
+                repeat 7 times
+            answer: Fout, repeat staat voor de print
+        -   type: MC-code
+            options: ["Goed", "Fout"]
+            code: |-
+                repeat 7 times
+                  dag is ask 'Welke dag is het?'
+                  if dag is vrijdag
+                    print 'Hoera!'
+            answer: Goed
+        -   type: text
+            contents: |-
+                #### Opdracht 4: Schrijf de code
+                Je krijgt uitvoer te zien, schrijf daar kloppende codes bij. Gebruik zoveel mogelijk `repeat` codes.
+    
+                Kijk weer goed naar het aantal regels code dat je nodig hebt!
+        -   type: input
+            answer: |-
+                repeat 4 times
+                    print 'Joehoe!'
+            output: |-
+                Joehoe!
+                Joehoe!  
+                Joehoe!
+                Joehoe!
+        -   type: input
+            answer: |-
+                repeat 2 times
+                    print 'De wielen van de bus gaan'
+                    repeat 3 times
+                        print 'rond en rond'
+                print 'Als de bus gaat rijden'
+            output: |-
+                De wielen van de bus gaan
+                rond en rond
+                rond en rond
+                rond en rond
+                De wielen van de bus gaan
+                rond en rond
+                rond en rond
+                rond en rond
+                Als de bus gaat rijden
+        -   type: text
+            contents: |-
+                #### Opdracht 5: Programmeerwoorden
+                We hebben deze les een nieuw programmeerwoord geleerd: blokken.
+        -   type: define
+            word: "Leg in je eigen woorden uit wat een blok code is?"
+            answer: "een groepje regels code die bij elkaar horen, en bij een if, else of repeat"
             lines: '1'
 
         -   type: text
