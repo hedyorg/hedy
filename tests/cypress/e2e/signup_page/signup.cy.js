@@ -45,7 +45,7 @@ it('Is able to sign up as a student', () => {
     
     // delete profile
     goToProfilePage();
-    cy.getDataCy('personal_settings').click()
+    cy.getDataCy('delete_profile').click()
     cy.getDataCy('delete_profile_button').click()
     cy.intercept('/auth/destroy').as('delete_user')
     cy.getDataCy('modal_yes_button').click()
@@ -98,7 +98,7 @@ it('Is able to sign up as a teacher', () => {
     
     //delete profile
     goToProfilePage();
-    cy.getDataCy('personal_settings').click()
+    cy.getDataCy('delete_profile').click()
     cy.getDataCy('delete_profile_button').click()
     cy.intercept('/auth/destroy').as('delete_user')
     cy.getDataCy('modal_yes_button').click()
