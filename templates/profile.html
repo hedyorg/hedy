@@ -34,7 +34,7 @@
        {% if user_data['is_teacher'] %}
          <h1 class="section-header" id="my_subscription" onclick="$ ('#subscription').toggle()">{{_('newsletter')}}</h1>
          <div id="subscription" data-cy="messages" class="profile-section-body"
-              {% if not invitations %} style="display: block;" {% endif %}>
+              {% if not invitations and subscription_status != "subscribed" %} style="display: block;" {% endif %}>
            {% if subscription_status == "subscribed" %}
              <h2 class="profile-section-body-header">{{_('subscribed_header')}}</h2>
              <p class="mt-0 mb-6">{{_('subscribed_message')}}</p>
