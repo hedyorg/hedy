@@ -573,6 +573,7 @@ adventures:
                 story_text: |-
                     ### Exercício
                     Depure este código. Boa sorte!
+                example_code: "**Atenção! Este código precisa ser depurado!**\n```\n{print} 'Máquina de venda automática'\nproduto_escolhido = {ask} 'Por favor, selecione um produto'\nprodutos_de_1_real = coca suco de laranja água\nprodutos_de_2_reais = chocolate, biscoito, barra de cereal\nprodutos_de_3reais = batata frita, carne seca, pão de banana\n{if} escolhido {is} {in} produtos_de_1_real\npreço = 1\n{if} produto_escolhido {is} produtos_de_2_reais\npreço = 2\n{else} produto_escolhido {in} produtos_de_3_reais\npreço = 3\nquantidade_de_produtos = '{ask} De quantos ' produto_escolhido você gostaria?'\ntotal = preço + quantidade_de_produto\n{print} 'Vai custar R$' preço, 'por gentileza'\n```\n"
             7:
                 story_text: |-
                     ### Exercício
@@ -2609,7 +2610,7 @@ adventures:
                     Se você quiser voltar, você usa o comando `{forward}` mas com um número negativo. Por exemplo, `{forward} -100`
                 story_text_2: |
                     ### Exercise
-                    Este é o início de uma pequena escada. Você pode fazê-la ter 5 passos?
+                    Este é o início de uma pequena escada. Você pode fazê-la ter 5 degraus?
             2:
                 story_text: |
                     Neste nível você pode usar variáveis para tornar a tartaruga interativa. Por exemplo, você pode perguntar ao jogador quantos passos a tartaruga deve dar.

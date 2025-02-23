@@ -358,7 +358,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     In the previous adventure you have practised with setting variables with the `{is}` command.
-                    You have created at least 3 variables and used them with a print command.
+                    You have created at least 3 variables and used them with a `{print}` command.
                     Now, instead of setting the variables we want you to make the variables interactive, like we did in our example.
 
                     Copy your code from the previous adventure and make the variables interactive by using `{ask}` commands.
@@ -400,8 +400,8 @@ adventures:
                     Return the variable `points` at the end of the function.
 
                     ***Test the function***
-                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
-                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next adventure!
+                    Test if your function is working properly. Finish the first `{print}` command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
+                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on to the next adventure!
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -439,7 +439,7 @@ adventures:
                     In the previous adventure you've started a list of variables and created a function to calculate how many points a card is worth. Copy your code and paste it here. Mind that you don't need the testing part, so if you haven't removed that yet, please do so now.
 
                     ***Add more variables***
-                    You have already set the lists `cards` and `face_cards` and the variable `card_1`. Underneath those variables create 3 more variables: `card_2`, dealer_card_1` and `dealer_card_2`. These variables are all set to a random card from the list of cards.
+                    You have already set the lists `cards` and `face_cards` and the variable `card_1`. Underneath those variables create 3 more variables: `card_2`, `dealer_card_1` and `dealer_card_2`. These variables are all set to a random card from the list of cards.
 
                     ***Add up points***
                     To calculate how many points you have scored we call the function with card 1 and we do it again for card 2. Then we add both these scores together to get your total.
@@ -774,7 +774,7 @@ adventures:
 
                     ### Exercise 3
                     Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
-                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
+                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: {define} calculate_mean_grade {with} subject.
                 example_code: |
                     ```
                     # Use your own code from the previous adventure.
@@ -1393,8 +1393,8 @@ adventures:
                     burger = 5
                     drink = 2
                     total = burger + drink
-                    print 'You have ordered a burger and a drink'
-                    print 'That costs ' total ' dollars please'
+                    {print} 'You have ordered a burger and a drink'
+                    {print} 'That costs ' total ' dollars please'
                     ```
             13:
                 story_text: |
@@ -2118,7 +2118,7 @@ adventures:
                     ***Go to the next adventure*** Now that all the starting variables are set, we can start programming the game itself. Check out the next tab to learn how!
                 example_code: |
                     ```
-                    print 'Hangman!'
+                    {print} 'Hangman!'
 
                     # Set the variables
                     answer = []
@@ -2134,9 +2134,9 @@ adventures:
                         {add} '_' {to} _
 
                     # Player 2 turn
-                    print _
-                    print _
-                    print guessed_letters
+                    {print} _
+                    {print} _
+                    {print} guessed_letters
                     ```
     hangman_2:
         name: Hangman 2
@@ -3314,7 +3314,7 @@ adventures:
                     Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
 
                     ### Exercise
-                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.
+                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and two points deduction for a wrong press.
                     **Extra** Clear the screen after each letter, and show the user how many points they have scored.
                 example_code: |
                     ```
@@ -3335,7 +3335,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## The print command
+                    ## The {print} command
                     You can print text to the screen using the `{print}` command.
                 example_code: |
                     ```
@@ -3472,7 +3472,7 @@ adventures:
     random_command:
         name: '{random}'
         default_save_name: random_command
-        description: introducing at random command
+        description: introducing {at} {random} command
         levels:
             3:
                 story_text: |
@@ -4299,7 +4299,7 @@ adventures:
                     ```
                 story_text_2: |
                     This children's song counts down from 5 little monkeys to 1 monkey.
-                    If you copy line 2 - 7 and paste it under the the code, you can sing the whole song!
+                    If you copy line 2 - 7 and paste it under the code, you can sing the whole song!
                 example_code_2: |
                     ```
                     number = 6
