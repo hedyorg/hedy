@@ -2,7 +2,7 @@ title: Hedy Documentation
 home-sections:
 -   title: Textual programming made easy!
     text: |-
-        Many schools and teachers around the world want to teach their students programming. Initially this is often done with playful tools, ranging from the Beebot robot to
+        Many schools and teachers around the world want to teach their students programming. Initially this is often done with playful tools, ranging from the Bee-Bot robot to
         Scratch Junior or Scratch. After using such tools, kids often want to move to more powerful, textual programming languages, like Python.
 
         Python however is hard, because it is only available in English, and requires learners to learn complex programming concepts and syntax at once.
@@ -73,7 +73,7 @@ learn-more-sections:
         * [Java Magazine 04.2023](images/Hedy_Javamagazine2023.pdf)
         * [Tech Optimism - A Solution to the IT Shortage (Dutch), August 2022](https://podcasts.apple.com/nl/podcast/techoptimisme-2-een-oplossing-voor-het-it-tekort/id1114136654?i=1000581523458)
         * [Codeweek Podcast, July 2022](https://codeweek.eu/podcast/26)
-        * [Heise.de (German), Januari 2022](https://www.heise.de/news/Hedy-die-mitwachsende-Programmiersprache-6336264.html)
+        * [Heise.de (German), January 2022](https://www.heise.de/news/Hedy-die-mitwachsende-Programmiersprache-6336264.html)
         * [Strumenta, November 2021](https://tomassetti.me/teaching-programming-with-hedy/)
         * [Vives (Dutch), CodeWeek Special October 2021](images/Vives-174-Codeweek.pdf)
         * [CodeWeek.eu - Haunted House Challenge, September 2021](https://codeweek.eu/2021/challenges/haunted-house)
@@ -81,7 +81,7 @@ learn-more-sections:
         * [IO Magazine, April 2021](https://ict-research.nl/wordpress/wp-content/uploads/2021/04/IO-magazine-NR1-2021_web.pdf)
         * [Ingeniería De Software (Spanish), February 2021](https://ingenieriadesoftware.es/hedy-mejor-lenguaje-ensenar-programacion-ninos/)
         * [Hello World Magazine, February 2021](images/Hello_World_15_Hedy.pdf)
-        * [Discoro, January 2021](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)
+        * [DiScoro, January 2021](https://discoro.wordpress.com/2021/01/09/hedy-gradually-learning-a-programming-language/)
         * [Felienne wins the Dutch award for ICT research for Hedy, January 2021](https://www.universiteitleiden.nl/en/news/2021/01/felienne-hermans-receives-dutch-prize-for-ict-research-2021)
         * [SlashDot, August 2020](https://news.slashdot.org/story/20/08/17/024248/scientist-proposes-a-new-programming-language-for-teaching-coding-and-python)
         * [GenBeta (Spanish), August 2020](https://www.genbeta.com/desarrollo/nuevo-lenguaje-para-ensenar-programacion-a-ninos-como-se-ensena-a-leer-escribir-forma-gradual-niveles)
@@ -156,7 +156,7 @@ teacher-guide:
             So your students keep getting challenged. The adventures can be done by the students individually, or you can use them in a classical instruction.
 
             The adventures also include a code example, to make sure the less digitally informed teachers are able to use Hedy too!
-            Of course Hedy also caters to the creative teachers that love to make their own lessonplans and adventures!
+            Of course Hedy also caters to the creative teachers that love to make their own lesson plans and adventures!
 
             After programming all the adventures of a certain level, your students can test their knowledge in the quiz.
             You can track your students' work and their progress on the class page.
@@ -225,7 +225,7 @@ teacher-guide:
                 error_code: |-
                     {forward} 300
                     {turn} 90
-                solution_text: In the example, students tend to think that the turn command failed; even though it did what it what supossed to. What happened is the turtle walked past the screen limits. Use smaller numbers to prevent this from happening.
+                solution_text: In the example, students tend to think that the turn command failed; even though it did what it what supposed to. What happened is the turtle walked past the screen limits. Use smaller numbers to prevent this from happening.
                 solution_code: |-
                     {forward} 100
                     {turn} 90
@@ -257,7 +257,7 @@ teacher-guide:
                     {echo}
                 solution_text: Use a variable instead.
                 solution_code: |-
-                    answer {is} {ask} Why doens't {echo} work anymore?!
+                    answer {is} {ask} Why doesn't {echo} work anymore?!
                     {print} answer
         -   title: Students use a variable name or as a normal word
             example:
@@ -303,7 +303,7 @@ teacher-guide:
                     {print} groceries {at} {random}
         -   title: Students use the name of a variable or list as regular text
             example:
-                error_text: This problem probably occured in level 2 as well. Now it can happen with lists too.
+                error_text: This problem probably occurred in level 2 as well. Now it can happen with lists too.
                 error_code: |-
                     name {is} Hedy
                     {print} Hi my name is name
@@ -343,7 +343,7 @@ teacher-guide:
                     {print} fruit {at} {random}
         -   title: Students forget to use commas in their lists
             example:
-                error_text: In a list items are seperated with a comma.
+                error_text: In a list items are separated with a comma.
                 error_code: |-
                     pizzas {is} funghi tonno quattro stagioni
                     {print} pizzas {at} {random}
@@ -359,7 +359,7 @@ teacher-guide:
                     {print} clubs {at} {random}
                 solution_text: Hedy can't print anything at random, because there is no list to choose from.
                 solution_code: |-
-                    clubs {is} Manchester United, Bayrn Munchen, FC Barcelona
+                    clubs {is} Manchester United, FC Bayern Munich, FC Barcelona
                     {print} clubs {at} {random}
         -   title: Students try to use add/remove without a list
             example:
@@ -487,16 +487,16 @@ teacher-guide:
                     # or
 
                     name {is} {ask} 'Who are you?'
-                    {if} naam {is} Jesse {print} 'You are funny'
-                    {if} naam {is} David {print} 'You are funny'
-                    {if} naam {is} Souf {print} 'You are funny'
+                    {if} name {is} Jesse {print} 'You are funny'
+                    {if} name {is} David {print} 'You are funny'
+                    {if} name {is} Souf {print} 'You are funny'
         -   title: The students make the variable name the same as the value in the `{if}` statement
             example:
                 error_text: In the example below the password is 'password'. This will result in it always being correct.
                 error_code: |-
                     password {is} {ask} 'What is the password?'
                     {if} password {is} password {print} 'Access granted'
-                    {else} {print} 'Acces denied!'
+                    {else} {print} 'Access denied!'
                 solution_text: Pick a different name for your variable.
                 solution_code: |-
                     secret_password {is} {ask} 'What is the password'
@@ -543,7 +543,7 @@ teacher-guide:
                 error_code: |-
                     {repeat} 3 {times} drink = {ask} 'What would you like to drink?'
                     {print} drink
-                solution_text: You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.
+                solution_text: You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything separately.
                 solution_code: |-
                     drink = {ask} 'What would you like to drink?'
                     {print} drink
@@ -827,51 +827,51 @@ teacher-guide:
             example:
                 error_text: From this level on lists should be in brackets.
                 error_code: |-
-                    icecream = 'starwberry', 'chocolate'
+                    icecream = 'strawberry', 'chocolate'
                     {print} 'I love ' icecream[{random}] ' icecream'
                 solution_text: 'This is the correct code:'
                 solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
+                    icecream = ['strawberry', 'chocolate']
                     {print} 'I love ' icecream[{random}] ' icecream'
         -   title: Students use the wrong brackets
             example:
                 error_text: From this level on lists should be in brackets.
                 error_code: |-
-                    icecream = ('starwberry', 'chocolate')
+                    icecream = ('strawberry', 'chocolate')
                     {print} 'I love ' icecream[{random}] ' icecream'
                 solution_text: 'This is the correct code:'
                 solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
+                    icecream = ['strawberry', 'chocolate']
                     {print} 'I love ' icecream[{random}] ' icecream'
         -   title: Students forget the quotation marks while focussing on the brackets
             example:
                 error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
                 error_code: |-
-                    icecream = [starwberry, chocolate]
+                    icecream = [strawberry, chocolate]
                     {print} 'I love ' icecream[{random}] ' icecream'
                 solution_text: 'This is the correct code:'
                 solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
+                    icecream = ['strawberry', 'chocolate']
                     {print} 'I love ' icecream[{random}] ' icecream'
         -   title: Students still use the old at random command
             example:
                 error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
                 error_code: |-
-                    icecream = [starwberry, chocolate]
+                    icecream = [strawberry, chocolate]
                     {print} 'I love ' icecream at random ' icecream'
                 solution_text: 'This is the correct code:'
                 solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
+                    icecream = ['strawberry', 'chocolate']
                     {print} 'I love ' icecream[{random}] ' icecream'
         -   title: Students forget the quotation marks while focussing on the brackets
             example:
                 error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
                 error_code: |-
-                    icecream = [starwberry, chocolate]
+                    icecream = [strawberry, chocolate]
                     {print} 'I love ' icecream[{random}] ' icecream'
                 solution_text: 'This is the correct code:'
                 solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
+                    icecream = ['strawberry', 'chocolate']
                     {print} 'I love ' icecream[{random}] ' icecream'
     -   level: '17'
         sections:
