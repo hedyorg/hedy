@@ -1,3 +1,4 @@
+import json
 import uuid
 
 from flask import make_response, redirect, request, session
@@ -49,6 +50,27 @@ class ClassModule(WebsiteModule):
             "link": utils.random_id_generator(7),
             "name": body["name"],
         }
+
+        # from auth, where we also use this for mailinglist subscriptions
+
+        import os
+
+        from .auth import MAILCHIMP_API_URL, MAILCHIMP_API_HEADERS
+
+        import requests
+        import hashlib
+
+        subscriber = user["email"].encode('utf-8')
+        subscriber_hash = hashlib.md5(subscriber).hexdigest()
+
+        # mailchimp docs: https://mailchimp.com/developer/marketing/api/list-member-tags/add-or-remove-member-tags/
+
+        request_body = {"tags": [{"name": "class_created", "status": "active"}]}
+        try:
+            r = requests.post(MAILCHIMP_API_URL + f"/members/{subscriber_hash}/tags",
+                              headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
+        except Exception as E:
+            pass
 
         self.db.store_class(Class)
         add_class_created_to_subscription(user['email'])
