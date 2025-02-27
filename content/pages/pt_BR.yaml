@@ -120,5 +120,52 @@ teacher-guide:
             Não há necessidade de baixar nada antes de trabalhar com a Hedy, basta acessar o site e pronto!
     -   title: Hedy e a LGPD
         text: "As organizações na UE devem cumprir com o RGPD (Regulamento Geral sobre a Proteção de Dados), e no Brasil a LGPD (Lei Geral de Proteção de Dados) quando processam dados pessoais.\nComo este é um tema complexo para muitas escolas, é possível usar todas as funcionalidades de programação da Hedy sem partilhar dados pessoais.\nA forma mais simples para tal é usar a Hedy sem criar contas para o professor e os alunos. Sem contas, todas as funcionalidades estão disponíveis, com a excepção da personalização de níveis, guardar os programas dos alunos e observar o seu progresso. Pode ser limitante, mas existem escolas que usam a Hedy desta forma.\n\nOutra maneira passa pelo professor criar uma conta com um email sem dados pessoais, por exemplo, \"docente25@email.com\". Além do endereço de email, que apenas é necessário para reiniciar a sua palavra-passe, não é necessário partilhar qualquer informação quando se cria uma conta de professor.\nCom uma conta de professor, pode-se criar contas anônimas para os seus alunos, e.g. aluno-unicornio1, aluno-unicornio2, etc (acesse 'Preparações para ensino' para um manual detalhado). Desta forma, pode-se usar todas as funcionalidades da Hedy, incluindo guardar o progresso, sem partilhar os seus dados ou dos seus alunos.\n\nSe a explicação acima é insuficiente para o contextualizar, podemos assinar um acordo de processamento para processar os seus dados pessoais."
--   key: ''
+-   key: 'common_mistakes'
     title: Erros frequentes
+    levels:
+    -   sections:
+        -   example:
+                solution_text: Ensine seus alunos a sempre começar uma linha de código com um comando.
+                solution_code: '{print} ¡Hedy consegue imprimir isso!'
+                error_code: Hedy não consegue imprimir isso
+                error_text: Por exemplo, escrever uma frase sem usar imprima.
+            title: Os alunos esquecem de digitar os comandos
+        -   example:
+                error_text: Os comandos não funcionam quando escritos em maiúsculas.
+                solution_code: "{ask} Por que meu código funciona agora?\n{print} Porque tirei as maiúsculas!"
+                solution_text: Tire as maiúsculas.
+                error_code: "Pergunte Por que meu código não funciona?\nImprima Porque estou usando maiúsculas."
+            title: Os alunos usam maiúsculas ao digitar os comandos
+        -   title: Os alunos usam eco sem perguntar
+            example:
+                error_code: '{echo} Seu nome é'
+                solution_code: "{ask} Como você se chama?\n{echo} Seu nome é"
+                error_text: O comando eco é usado para repetir uma resposta depois de um comando pergunte. Sem pergunte, eco não faz nada.
+                solution_text: Adicione o comando «pergunte» para funcionar.
+        -   example:
+                solution_text: 'No nível 1 temos que nos contentar com isso:'
+                error_code: "{ask} Qual linguagem de programação é a mais divertida?\n{echo} é a melhor!"
+                error_text: E têm toda a razão! Por isso no próximo nível aprenderão a usar variáveis corretamente.
+                solution_code: "{ask} Qual linguagem de programação é a mais divertida?\n{echo} A melhor é..."
+            title: Os alunos querem que o resultado do eco (a variável) apareça no meio da frase
+        -   example:
+                error_code: "{forward} 300\n{turn} 90"
+                error_text: Os alunos às vezes gostam de tentar números enormes ao usar a tartaruga, o que faz ela sair da tela.
+                solution_text: Nesse exemplo, os alunos costumam achar que o comando «gire» falhou, apesar de ter feito o que devia. O que aconteceu é que a tartaruga andou além dos limites da tela. Use números menores para evitar que isso ocorra.
+            title: 'Tartaruga: os alunos fazem a tartaruga sair da tela'
+        -   example:
+                error_text: Voltar não é um comando.
+                solution_code: '{forward} -100'
+                error_code: volte 100
+                solution_text: 'Para fazer a tartaruga voltar, use o comando adiante e um número negativo. Por exemplo:'
+            title: 'Tartaruga: os alunos usam um comando para voltar, apesar de não existir esse comando.'
+        level: '1'
+    -   sections:
+        -   example:
+                solution_text: Ensine seus alunos a ler as mensagens de erro. Assim eles conseguem descobrir por si mesmos o que deu errado.
+                solution_code: '{print} Não cometa erros de digitação'
+                error_text: Hedy não consegue reconhecer comandos digitados incorretamente.
+                error_code: imprimma Não cometa erros de digitação
+            title: Os alunos cometem erros de digitação nos comandos
+        level: '2'
+    intro: A gente aprende com os erros, especialmente na programação! Cometer erros é inevitável e uma ótima oportunidade de aprendizado, mas para os professores, pode ser um desafio encontrar a correção certa para um erro! Especialmente à medida que os programas ficam cada vez mais longos conforme os alunos progridem nos níveis. É por isso que criamos uma lista com erros frequentes em cada nível e suas soluções.
