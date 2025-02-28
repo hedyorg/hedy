@@ -1,9 +1,9 @@
 _DEFINE: ("define" | "define") _SPACE?
-_CALL: ("call" | "call") _SPACE?
+_CALL: ("whakahaere" | "call") _SPACE?
 _WITH: ("with" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
 _RETURN: ("whakahoki" | "return") _SPACE?
-_PRINT: ("print" | "print") _SPACE?
+_PRINT: ("tāngia" | "print") _SPACE?
 _PLAY: ("whakatangihia" | "play") _SPACE
 _ASK: ("pātai" | "ask")
 _ECHO: ("echo" | "echo") _SPACE?
@@ -22,33 +22,33 @@ purple: ("waiporoporo" | "purple") _SPACE?
 red: ("whero" | "red") _SPACE?
 white: ("mā" | "white") _SPACE?
 yellow: ("kōwhai" | "yellow") _SPACE?
-_IS: _SPACE ("is" | "is") _SPACE
-_STANDALONE_IS: ("is" | "is")
-_SLEEP: ("sleep" | "sleep") _SPACE?
+_IS: _SPACE ("he" | "is") _SPACE
+_STANDALONE_IS: ("he" | "is")
+_SLEEP: ("e moe" | "sleep") _SPACE?
 _ADD_LIST: ("tāpiri" | "add") _SPACE
-_TO_LIST: _SPACE? ("to" | "to")
+_TO_LIST: _SPACE? ("ki" | "to")
 _REMOVE: ("tangohia" | "remove") _SPACE
 _FROM: _SPACE? ("i" | "from")
 _AT: _SPACE ("at" | "at") _SPACE
 random: ("random" | "random") _SPACE?
-_IN: _SPACE ("in" | "in") _SPACE
-_NOT_IN: _SPACE ("not in" | "not in") _SPACE
+_IN: _SPACE ("i roto i" | "in") _SPACE
+_NOT_IN: _SPACE ("kāore i roto i" | "not in") _SPACE
 _IF: ("mehemea" | "if") _SPACE
 _ELSE: "else" | "else"
 _AND: _SPACE? ("and" | "and") _SPACE
 _REPEAT: ("repeat" | "repeat") _SPACE
 _TIMES: _SPACE ("times" | "times")
 _FOR: ("mō" | "for") _SPACE
-_RANGE: ("range" | "range") _SPACE?
-_TO: _SPACE ("to" | "to") _SPACE
+_RANGE: ("whānui" | "range") _SPACE?
+_TO: _SPACE ("ki" | "to") _SPACE
 _STEP: "step" | "step"
 _ELIF: _SPACE? ("elif" | "elif") _SPACE
 _INPUT: ("tāuru" | "input")
-_OR: _SPACE? ("or" | "or") _SPACE
+_OR: _SPACE? ("rānei" | "or") _SPACE
 _WHILE: ("while" | "while") _SPACE
-_LENGTH: "length" | "length"
+_LENGTH: "roa" | "length"
 _COLOR : ("kara" | "color") _SPACE?
 _PRESSED: ("pressed" | "pressed") _SPACE?
-clear: ("clear" | "clear") _SPACE?
+clear: ("whakawāteatia" | "clear") _SPACE?
 TRUE: ("true" | "True" | "true" | "True") _SPACE?
 FALSE: ("false" | "False" | "false" | "False") _SPACE?
