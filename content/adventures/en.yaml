@@ -106,6 +106,20 @@ adventures:
                     {print} _ He hears the sound of a _ animals {at} {random}
                     {print} name _ is afraid this is a haunted forest _
                     ```
+                answer_code: |
+                    ```
+                    name {is} {ask} 'print What is your name?'
+                    {print} 'The main character is called ' name
+                    {sleep}
+                    {clear}
+                    {print} name ' is now going to walk in the woods '
+                    {print} name ' is a bit scared '
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} 'He hears the sound of a ' animals {at} {random}
+                    {print} name ' is afraid this is a haunted forest '
+                    ```
+                answer_note: |
+                    {sleep} should go before {clear} otherwise the screen will be empty right away.
             5:
                 story_text: |
                     In this level you can program different endings, which will make your story even more fun.
@@ -3157,6 +3171,18 @@ adventures:
                     {ask} _
                     {echo}
                     {echo}
+
+                answer_code: |
+                    ```
+                    {print} Im Hedy the parrot
+                    {ask} Where are you from?
+                    {echo}
+                    {echo}
+                    {ask} How old are you?
+                    {echo}
+                    {echo}
+                    ```
+
             2:
                 story_text: |
                     In the previous level you've made a parrot that will repeat after you. In this level we'll make the parrot interactive using a variable and `{ask}` command.
