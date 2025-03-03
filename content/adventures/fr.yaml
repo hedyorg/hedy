@@ -1,7 +1,7 @@
 adventures:
     story:
         name: Histoire
-        description: Histoire
+        description: Écrivez une histoire courte
         levels:
             1:
                 story_text: |
@@ -108,13 +108,13 @@ adventures:
             5:
                 story_text: |
                     À ce niveau, différentes fins peuvent être programmées afin de rendre ton histoire encore plus amusante.
-                    Le code exemple te montre comment réaliser deux fins différentes.
+                    L'exemple de code te montre comment réaliser deux fins différentes.
 
                     ### Exercice 1
                     Écris une nouvelle histoire courte du sujet de ton choix.
-                    En panne d'inspiration ? Choisie l'un des sujets suivants : un super-héros, une journée d'école ennuyeuse, une île déserte.
+                    En panne d'inspiration ? Choisis l'un des sujets suivants : un super-héros, une journée d'école ennuyeuse, une île déserte.
 
-                    Maintenant, donne la possibilité au joueur de choisir une fin heureuse ou non, comme indiqué dans le code exemple.
+                    Maintenant, donne la possibilité au joueur de choisir une fin heureuse ou non, comme dans le code exemple.
                     Programme les deux fins.
 
                     ### Exercice 2
@@ -253,8 +253,8 @@ adventures:
                     commentaire : N'oublie pas la virgule dans un `{print}` entre un texte et une variable !
                 example_code_2: |
                     ```
-                    naam = {input}("Quel est votre nom?")
-                    {print}('Bienvenue dans cette histoire!')
+                    name = {input}("Quel est votre nom ?")
+                    {print}('Bienvenue dans cette histoire !')
                     ```
         default_save_name: Histoire
     add_remove_command:
@@ -295,6 +295,7 @@ adventures:
                     {print} Voici un milkshake parfums {at} {random}
                     ```
         name: '{add} {to_list} & {remove} {from}'
+        default_save_name: add_remove_command
     and_or_command:
         default_save_name: et ou
         description: Introduction de {and} et {or}
@@ -345,11 +346,11 @@ adventures:
             2:
                 story_text: |
                     ## La commande `{ask}`
-                    Maintenant que l'on peut utiliser les **variables** dans nos codes, la commande `{echo}` n'est plus utile.
-                    On peut utiliser les variables pour stocker les réponses à nos questions et ainsi utiliser la réponse à plusieurs questions dans nos codes.
+                    Maintenant que nous pouvons utiliser des **variables** dans nos codes, la commande `{echo}` n'est plus utile.
+                    Nous pouvons utiliser les variables pour stocker les réponses à nos questions et ainsi utiliser la réponse à plusieurs questions dans nos codes.
                     Fais un essai :
 
-                    De cette façon ton code devient interactif !
+                    De cette façon, ton code devient interactif !
                 example_code: |
                     ```
                     nom {is} {ask} Quel est ton nom ?
@@ -360,8 +361,8 @@ adventures:
                 story_text_2: |
                     ### Exercice
                     Dans l'aventure précédente, tu t'es entraîné à attribuer des valeurs aux variables avec la commande `{is}`.
-                    Tu as créé au moins 3 variables et les a utilisées avec la commande d'affichage.
-                    Maintenant, au lieu de simplement définir les variables, nous voulons les rendre interactives, comme dans l'exemple.
+                    Tu as créé au moins 3 variables et les a utilisées avec la commande d'affichage `{print}`.
+                    Maintenant, au lieu de simplement définir les variables, nous voulons les rendre interactives, comme nous l'avons fait dans l'exemple.
 
                     Copie le code de l'aventure précédente et rend les variables interactives en utilisant la commande `{ask}`.
                 example_code_2: |
@@ -378,6 +379,7 @@ adventures:
                     {print}("Ainsi ton nom est ", nom)
                     ```
         name: '{ask}'
+        default_save_name: ask_command
     calculator:
         name: Calculatrice
         default_save_name: Calculatrice
@@ -3626,6 +3628,11 @@ adventures:
     blackjack:
         name: Blackjack
         default_save_name: Blackjack
+        levels:
+            17:
+                example_code: "```\n{print} 'BLACKJACK'\n\n# Définissez ces variables\ncards = _\nface_cards = _\ncard_1 =\n\n# Créez une fonction de calcul de la valeur de la carte\n{define} calculate_points {with} card:\n    {if} card {in} face_cards:\n        points = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ points\n\n# Testez votre fonction\n{print} 'Your card is a ' _\n{print} 'That is worth ' _ ' points'.\n```\n"
+                story_text: "Le BlackJack est un jeu de carte simple dans lequel le joueur essaye d'arriver au plus près possible de 21 points. Vous obtenez deux cartes. Chaque carte numérale compte pour sa valeur en points et les figures (valet, dame et roi) valent 10 points.\nL'as vaut 1 ou 11 à votre convenance. Le donneur, votre adversaire, obtient aussi deux cartes.\nSi vous le voulez, vous pouvez obtenir une autre carte dont les points s'additionnent à votre total. Le donneur peut faire de même.\nMais attention ! Ne dépassez pas 21 points parce qu'alors vous perdriez.\nLe joueur le plus proche de 21 points, sans les dépasser, gagne.\n\n### Exercice\nDans cette aventure, nous coderons la première partie du jeu de BlackJack. Nous allons créer une fonction qui calcule la valeur d'une carte.\n\n***Définir les variables***\nDébutez en créant une liste des cartes numérales de 2 à l'as, puis une liste des figures. Ensuite choisissez au hasard une carte dans ces listes qui sera card_1\n\n***Créer une fonction de valeur de carte***\nÉcrivez une fonction qui calcule la valeur d'une carte.\n Les figures valent dix points, les autres cartes valent leur valeur numérale sauf l'as qui vaut 11.\nRetournez la variable `points` à la fin de la fonction.\n\n***Tester la fonction***\nVérifiez que votre fonction renvoie un résultat correct. Terminez le premier appel de la commande `{print}` avec la carte que vous avez choisie. Ensuite terminez la seconde ligne en appelant la fonction avec card_1.\nExécutez le code plusieurs fois. Êtes-vous satisfait du résultat ? Parfait ! Vous pouvez à présent retirer les portions de test et passer à l'aventure suivante.\n"
+        description: Essayez d'approcher aussi près que possible de 21
     calculator_2:
         levels:
             14:
