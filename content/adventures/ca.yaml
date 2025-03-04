@@ -1232,7 +1232,7 @@ adventures:
                     ### Exercici
                     Afegeix-hi una segona tasca, com passar l'aspiradora o endreçar, i assegura't que també estigui dividida durant tota la setmana.
                     <br> **Extra** El programa no és just, pots tenir mala sort i haver de rentar durnat tota la setmana. Com pots fer el programa més just?
-                example_code: "```\ndies = dilluns, diamrts, dimecres, dijous, divendres, dissabte, diumenge\nnoms = mare, pare, Emma, Sofia\n{for} dia {in} dies\n    {print} noms {at} {random} \" renta plats el \" dia\n```\n"
+                example_code: "```\ndies = dilluns, dimarts, dimecres, dijous, divendres, dissabte, diumenge\nnoms = mare, pare, Emma, Sofia\n{for} dia {in} dies\n    {print} noms {at} {random} \" renta plats el \" dia\n```\n"
     elif_command:
         default_save_name: sino
         levels:
@@ -1251,8 +1251,8 @@ adventures:
                     En aquest nivell aprendrem una nova comanda anomenada `{for}`. Amb `{for}` pots fer una llista i utilitzar-ne tots els elements.
                     `{for}` crea un bloc, com `{repeat}` i `{if}`, de manera que totes les línies del bloc han de començar amb 4 espais.
                 example_code: "```\nanimals = gossos, gats, pingüins\n{for} animal {in} animals\n    {print} \"M'encanten els \" animal\n```\n"
-                story_text_2: "### Exercici\nAcaba aquest codi afegint `{for} action {in} actions` a la línia 2.\n"
-                example_code_2: "```\naccions = pica de mans, pica de peus, crida Hurra!\n_\n    {repeat} 2 {times}\n        {print} \"Si ets feliç i ho saps, \" action\n        {sleep} 2\n    {print} \"Si ets feliç i ho saps, i ho vols fer saber a tothom\"\n    {print} \"Si ets feliç i ho saps, \" action\n    {sleep} 3\n```\n"
+                story_text_2: "### Exercici\nAcaba aquest codi afegint `{for} accio {in} accions` a la línia 2.\n"
+                example_code_2: "```\naccions = pica de mans, pica de peus, crida Hurra!\n_\n    {repeat} 2 {times}\n        {print} \"Si ets feliç i ho saps, \" accio\n        {sleep} 2\n    {print} \"Si ets feliç i ho saps, i ho vols fer saber a tothom\"\n    {print} \"Si ets feliç i ho saps, \" accio\n    {sleep} 3\n```\n"
             11:
                 example_code: "```\n{for} comptador {in} {range} 1 {to} 10\n    {print} comptador\n{print} \"Llest o no. Ves que vinc!\"\n```\n"
                 story_text: "En aquest nivell, afegim una nova forma de la comanda `{for}`. En nivells anteriors, hem utilitzat `{for}` amb una llista, però també podem usar `{for}` amb números.\nFem això afegint un nom de variable, seguit de `{in}` `{range}`. Després escrivim el número amb el qual començar, `{to}` i el número fins al qual arribar.\n\nProva l'exemple per veure què passa! En aquest nivell, novament hauràs d'utilitzar la indentació a les línies que es troben sota de les comandes `{for}`."
