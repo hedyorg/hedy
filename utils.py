@@ -170,16 +170,8 @@ def is_testing_request(request):
 
 
 def is_redesign_enabled():
-    return REDESIGN_2025_ENABLED_BY_DEFAULT or is_opted_in_to_preview()
-
-
-def is_opted_in_to_preview():
-    opt = request.args.get("tryit", False)
-    return False if opt in ['0', 'false', 'no'] else bool(opt)
-
-
-# Flip this to True when we are ready to release
-REDESIGN_2025_ENABLED_BY_DEFAULT = False
+    # Flip this to True when we are ready to release
+    return False
 
 
 def extract_bcrypt_rounds(hash):
