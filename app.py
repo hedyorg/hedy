@@ -1525,9 +1525,9 @@ def index(level, program_id):
         parsons_in_level = "parsons" in last_two_adv_names
         quiz_in_level = "quiz" in last_two_adv_names
 
-    if not parsons_in_level or parsons_hidden:
+    if utils.is_redesign_enabled() or not parsons_in_level or parsons_hidden:
         parsons = False
-    if not quiz_in_level or quizzes_hidden:
+    if utils.is_redesign_enabled() or not quiz_in_level or quizzes_hidden:
         quiz = False
 
     max_level = hedy.HEDY_MAX_LEVEL
