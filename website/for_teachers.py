@@ -3,6 +3,7 @@ from difflib import SequenceMatcher
 import os
 import re
 import uuid
+import sys
 
 from bs4 import BeautifulSoup
 from flask import g, make_response, request, session, url_for, redirect
@@ -1020,6 +1021,7 @@ class ForTeachersModule(WebsiteModule):
             [self.db.get_class(class_id)], user["username"])
         teacher_adventures += second_teacher_adventures
         customizations = self.db.get_class_customizations(class_id)
+        print('CUSTMARKER getting', customizations.get('levels', []), file=sys.stdout)
 
         # Initialize the data structures that will hold the adventures for each level
         adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL+1)}
@@ -1066,6 +1068,9 @@ class ForTeachersModule(WebsiteModule):
                         customizations['sorted_adventures'][str(level)].append(
                             {"name": "parsons", "from_teacher": False})
             customizations["updated_by"] = user["username"]
+
+            print('CUSTMARKER updating', customizations.get('levels', []), file=sys.stdout)
+
             self.db.update_class_customizations(customizations)
             min_level = 1 if customizations['levels'] == [] else min(customizations['levels'])
         else:
@@ -1087,6 +1092,8 @@ class ForTeachersModule(WebsiteModule):
                 "quiz_parsons_tabs_migrated": True,
             }
             self.db.update_class_customizations(customizations)
+            print('CUSTMARKER updating without previous customizations', customizations.get('levels', []),
+                  file=sys.stdout)
 
         if get_customizations:
             self.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
@@ -1290,6 +1297,7 @@ class ForTeachersModule(WebsiteModule):
             return make_response(gettext("request_invalid"), 400)
         # Values are always strings from the front-end -> convert to numbers
         levels = [int(i) for i in body["levels"]]
+        print('CUSTMARKER update_customizations', levels, file=sys.stdout)
 
         opening_dates = body["opening_dates"].copy()
         for level, timestamp in body.get("opening_dates").items():
