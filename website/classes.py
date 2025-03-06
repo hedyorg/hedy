@@ -9,6 +9,7 @@ from config import config
 from website.flask_helpers import render_template
 from website.auth import current_user, is_teacher, requires_login, requires_teacher, \
     refresh_current_user_from_db, is_second_teacher
+from website.newsletter import add_class_created_to_subscription
 from .database import Database
 from .website_module import WebsiteModule, route
 
@@ -50,6 +51,7 @@ class ClassModule(WebsiteModule):
         }
 
         self.db.store_class(Class)
+        add_class_created_to_subscription(user['email'])
         response = {"id": Class["id"]}
         return make_response(response, 200)
 
@@ -176,7 +178,7 @@ class ClassModule(WebsiteModule):
             # Also remove the pending message in this case
             session["messages"] = session["messages"] - 1 if session["messages"] else 0
 
-        return make_response('', 200)
+        return make_response({}, 200)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
     @requires_login
@@ -187,7 +189,7 @@ class ClassModule(WebsiteModule):
 
         self.db.remove_student_from_class(Class["id"], student_id)
         refresh_current_user_from_db()
-        return make_response('', 200)
+        return make_response({}, 200)
 
     @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
     @requires_login
@@ -199,7 +201,7 @@ class ClassModule(WebsiteModule):
         self.db.remove_second_teacher_from_class(Class, second_teacher)
 
         refresh_current_user_from_db()
-        return make_response('', 200)
+        return make_response({}, 200)
 
 
 class MiscClassPages(WebsiteModule):

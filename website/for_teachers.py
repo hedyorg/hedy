@@ -19,6 +19,7 @@ from datetime import date
 
 from website.server_types import SortedAdventure
 from website.flask_helpers import render_template
+from website.newsletter import add_class_customized_to_subscription
 from website.auth import (
     is_admin,
     is_teacher,
@@ -221,14 +222,6 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         session['class_id'] = class_id
-        survey_id = ""
-        description = ""
-        questions = []
-        survey_later = ""
-        total_questions = ""
-
-        if Class.get("students"):
-            survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
 
         students = Class.get("students", [])
         invites = []
@@ -273,11 +266,6 @@ class ForTeachersModule(WebsiteModule):
             javascript_page_options=dict(
                 page="class-overview"
             ),
-            survey_id=survey_id,
-            description=description,
-            questions=questions,
-            total_questions=total_questions,
-            survey_later=survey_later,
             adventure_table={
                 'students': student_overview_table,
                 'adventures': class_adventures_formatted,
@@ -790,7 +778,9 @@ class ForTeachersModule(WebsiteModule):
                 class_id=class_id
             ))
 
-    @route("/load-survey/<class_id>", methods=["POST"])
+    # Disabling the load-survey route until the survey UI is redesigned
+    # Explicitly not removing the code because it should be used again after the redesign
+    # @route("/load-survey/<class_id>", methods=["POST"])
     def load_survey(self, class_id):
         survey_id, description, questions, total_questions, survey_later = self.class_survey(class_id)
         return render_partial('htmx-survey.html', survey_id=survey_id, description=description,
@@ -899,6 +889,7 @@ class ForTeachersModule(WebsiteModule):
             customizations["other_settings"].remove("hide_parsons")
 
         self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user['email'])
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
 
         return render_partial('customize-class/partial-sortable-adventures.html',
@@ -936,6 +927,7 @@ class ForTeachersModule(WebsiteModule):
                                            is_command_adventure=adventure_id in hedy_content.KEYWORDS_ADVENTURES)
         adventures[int(level)].remove(sorted_adventure)
         self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user['email'])
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
 
         return render_partial('customize-class/partial-sortable-adventures.html',
@@ -979,6 +971,7 @@ class ForTeachersModule(WebsiteModule):
         self.reorder_adventures(adventures[int(level)], from_sorted_adv_class=True)
         self.reorder_adventures(customizations['sorted_adventures'][level])
         self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user['email'])
 
         return render_partial('customize-class/partial-sortable-adventures.html',
                               level=level,
@@ -1363,6 +1356,7 @@ class ForTeachersModule(WebsiteModule):
         }
 
         self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user['email'])
         response = {"success": gettext("class_customize_success")}
 
         return make_response(response, 200)
@@ -1791,6 +1785,7 @@ class ForTeachersModule(WebsiteModule):
 
         self.reorder_adventures(customizations['sorted_adventures'][level])
         self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user['email'])
 
     @route("/create-adventure/", methods=["POST"])
     @route("/create-adventure/<class_id>", methods=["POST"])

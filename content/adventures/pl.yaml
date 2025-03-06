@@ -237,7 +237,7 @@ adventures:
                     ```
     add_remove_command:
         default_save_name: Dodaj_komendę_remove
-        description: wprowadzamy {add}{to_list} i {remove} {from}
+        description: wprowadzamy {add} {to_list} i {remove} {from}
         levels:
             3:
                 story_text: |
@@ -565,7 +565,7 @@ adventures:
                     {else} {print} 'Źle! To było ' _.
                     ```
                 story_text_3: |
-                    **Dodatkowo**Możesz też pozwolić komputerowi na samodzielne wykonywanie losowych sum za pomocą`{random}`.
+                    **Dodatkowo** Możesz też pozwolić komputerowi na samodzielne wykonywanie losowych sum za pomocą `{random}`.
                 example_code_3: |-
                     ```
                     liczby= 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -848,7 +848,7 @@ adventures:
                     {print} {else} 'Nie dołączasz na lekcję pływania'
                     discount {is} 'Czy posiadasz kod zniżkowy?'
                     {if} zniżka {is} tak
-                    zniżka-odpowiedź {is} {ask} 'Jaki jest twój kod zniżkowy?'
+                    zniżka_odpowiedź {is} {ask} 'Jaki jest twój kod zniżkowy?'
                     kody_zniżkowe = Senior4231, Student8786, NewMember6709
                     {if} zniżka_odpowiedź {is} {in} kod_zniżkowy
                     {print} 'Do zapłaty będzie $3,50'
@@ -1408,7 +1408,7 @@ adventures:
                 story_text: |
                     Teraz zmienimy nieco wcięcia. Za każdym razem, gdy potrzebujemy wciąć kod, potrzebujemy `:` w linii przed wcięciem.
 
-                    Na tym poziomie możesz też użyć nowej komendy: `{elif}`. `{elif}` ,które jest połczeniem ``{else} {if}` i potrzebujesz go, gdy chcesz dodać 3 (lub więcej!) opcji.
+                    Na tym poziomie możesz też użyć nowej komendy: `{elif}`. `{elif}` ,które jest połczeniem `{else} {if}` i potrzebujesz go, gdy chcesz dodać 3 (lub więcej!) opcji.
                     Sprawdź to!
             18:
                 story_text: |
@@ -1483,10 +1483,10 @@ adventures:
                     Czy udało ci się policzyć wynik dla 8 kostek? Wymagało to sporo kopiowania i wklejania , prawda? W poziomie 7 ułatwimy to!
             7:
                 story_text: |
-                    Na tym poziomie możeszponownie zrobić kości. Dzięki kodowi `{repeat}` możesz łatwo rzucić całą ręką kości.
+                    Na tym poziomie możesz ponownie zrobić kości. Dzięki kodowi `{repeat}` możesz łatwo rzucić całą ręką kości.
 
                     ### Ćwiczenie
-                    Spróbuj zakończyć przykładowy kod! **Dodatkowo ** Pomyśl o znanej grze, która obejmuje kości i zaprogramuj taką przy użyciu`{repeat}`.
+                    Spróbuj zakończyć przykładowy kod! **Dodatkowo** Pomyśl o znanej grze, która obejmuje kości i zaprogramuj taką przy użyciu `{repeat}`.
                 example_code: |
                     ```
                     wybory = 1, 2, 3, 4, 5, 6
@@ -1663,19 +1663,19 @@ adventures:
                     `{for}` tworzy blok, jak `{repeat}` i `{if}` więc wszystkie linie w bloku muszą zaczynać się od 4 spacji.
                 story_text_2: |
                     ### Ćwiczenie
-                    Dokończ ten kod, dodając `{for} action {in} actions` do wiersza 2.
+                    Dokończ ten kod, dodając `{for} czynność {in} czynności` do wiersza 2.
                 example_code_2: |
                     ```
                     czynności = klaszcz w dłonie, tupnij stopami, krzycz Hurra!
                     _
                         {repeat} 2 {times}
-                            {print} 'If youre happy and you know it, ' czynności
+                            {print} 'Jeśli jesteś szczęśliwy i wiesz o tym, ' czynność
                             {sleep} 2
-                        {print} 'If youre happy and you know it, and you really want to show it'
-                        {print} 'If youre happy and you know it, ' action
+                        {print} 'Jeśli jesteś szczęśliwy i wiesz o tym i naprawdę chcesz to pokazać'
+                        {print} 'Jeśli jesteś szczęśliwy i wiesz o tym, ' czynność
                         {sleep} 3
                     ```
-                example_code: "```\nanimals = dog, cat, blobfish\n{for} animal {in} animals\n    {print} 'I love ' animal\n```\n"
+                example_code: "```\nzwierzęta = pies, kot, ryba\n{for} zwierzę {in} zwierzęta\n    {print} 'Kocham ' zwierzę\n```\n"
             11:
                 story_text: |-
                     Na tym poziomie dodajemy nową formę komendy`{for}`. Na wcześniejszych poziomach używaliśmy `{for}` z listą, ale możemy też używać `{for}` z liczbami.
@@ -1980,18 +1980,18 @@ adventures:
                     W tej przygodzie zaprogramujemy grę w wisielca. Najpierw przygotowujemy się, potem zaprogramujemy grę, a w trzeciej części dodajemy rysunek z żółwiem.
 
                     ### Ćwiczenie
-                    ***Ustaw zmienne *** W tej grze w wisielca gracz 1 wybiera odpowiedź, a gracz 2 musi odgadnąć litery.
+                    ***Ustaw zmienne*** W tej grze w wisielca gracz 1 wybiera odpowiedź, a gracz 2 musi odgadnąć litery.
                     Aby poinformować komputer o wszystkich literach w słowie, zamienimy odpowiedź w listę liter. Robimy to również za pomocą liter zgadywanych przez Gracza 2.
-                    Rozpoczniemy grę z 2 pustymi listami. Zrobiliśmy dla ciebie pustą listę dla zmiennej o nazwie odpowiedzi. Teraz utwórz pustą listę dla zgadywane_litery.
+                    Rozpoczniemy grę z 2 pustymi listami. Zrobiliśmy dla ciebie pustą listę dla zmiennej o nazwie odpowiedzi. Teraz utwórz pustą listę na odgadnięte_litery.
                     Następnie piszemy ile błędów zostało popełnionych. Na początku gry powinno to być 0.
-                    Zmienna `amount_letters` mówi nam, ile liter znajduje się w odpowiedzi. Poproś Gracza 1, aby powiedział, ile liter ma jego słowo.
-                    Na koniec informujemy komputer, czy gra się skończyła. Używamy zmiennej `game_over` i ustawiamy ją na `False`.
+                    Zmienna `liczba_liter` mówi nam, ile liter znajduje się w odpowiedzi. Poproś Gracza 1, aby powiedział, ile liter ma jego słowo.
+                    Na koniec informujemy komputer, czy gra się skończyła. Używamy zmiennej `koniec_gry` i ustawiamy ją na `False`.
 
-                    ***Wybór odpowiedzi *** Chcemy, aby Gracz 1 mógł wybrać odpowiedź. Zapytamy ich tyle razy, ile to konieczne o to jaka jest następna litera.
+                    ***Wybór odpowiedzi*** Chcemy, aby Gracz 1 mógł wybrać odpowiedź. Zapytamy ich tyle razy, ile to konieczne o to jaka jest następna litera.
                     Następnie dodajemy tą literę do odpowiedzi. Na koniec dodajemy puste _ do listy zgadywanych liter, więc otrzymujemy tyle pustych _, ile jest liter w odpowiedzi.
 
                     ***Kolej gracza 2***
-                    Powiedz Graczowi 2, że teraz jest jego kolej. Następnie powiedz Graczowi 2, ile liter znajduje się w odpowiedzi. Na koniec napisz listę `guessed_letters`.
+                    Powiedz Graczowi 2, że teraz jest jego kolej. Następnie powiedz Graczowi 2, ile liter znajduje się w odpowiedzi. Na koniec napisz listę `odgadnięte_litery`.
 
                     ***Przejdź do następnej przygody*** Po ustawieniu wszystkich zmiennych początkowych możemy rozpocząć programowanie samej gry. Sprawdź następną kartę, aby dowiedzieć się, jak to zrobić!
                 example_code: |
@@ -2001,20 +2001,20 @@ adventures:
                     # Ustaw zmienne
                     odpowiedź = []
                     odgadnięte_litery = _
-                    zrobione_pomyłki= _
-                    ilość_liter = {ask} _
+                    zrobione_pomyłki = _
+                    liczba_liter = {ask} _
                     _ = 'False'
 
                     # Wybór odpowiedzi
                     {for} _
-                        litera= {ask} 'Graczu 1, czy w słowie znajduje się litera ' i '?'
+                        litera = {ask} 'Graczu 1, jaka jest litera numer ' i '?'
                         _
                         {add} '_' {to} _
 
                     # Kolej Gracza 2
                     print _
                     print _
-                    print  odgadnięte_litery
+                    print odgadnięte_litery
                     ```
     hangman_2:
         name: Wisielec 2
@@ -2027,11 +2027,11 @@ adventures:
 
                     ### Ćwiczenie
 
-                    ***Wklej kod *** Skopiuj kod z poprzedniej przygody i wklej go w polu programowania.
+                    ***Wklej kod*** Skopiuj kod z poprzedniej przygody i wklej go w polu programowania.
 
-                    **Gra *** Ta gra trwa do momentu, aż Gracz 2 nie zakończy swojej gry (wygra lub przegra). Wypełnij odpowiednio polecenie while. Teraz Gracz 2 może odgadnąć litery, więc poproś Gracza 2, aby je
+                    **Gra*** Ta gra trwa do momentu, aż Gracz 2 nie zakończy swojej gry (wygra lub przegra). Wypełnij odpowiednio polecenie while. Teraz Gracz 2 może odgadnąć litery, więc poproś Gracza 2, aby je
                     zgadywał. Musimy sprawdzić, czy jego odpowiedź jest poprawna, więc sprawdź, czy jego `guess` jest (gdzieś) na (liście) `answer`. Następnie pozwalamy komputerowi dowiedzieć się, która z liter jest zgadywana. Zaprogramowaliśmy już tę część dla Ciebie.
-                    Następnie chcemy pochwalić gracza za odgadnięcie poprawnej litery i chcemy wydrukować listę `guessed_letters`, aby gracz mógł zobaczyć swoje postępy.
+                    Następnie chcemy pochwalić gracza za odgadnięcie poprawnej litery i chcemy wydrukować listę `odgadnięte_litery`, aby gracz mógł zobaczyć swoje postępy.
 
                     W następnej części zaprogramujemy i dowiemy się co się stanie jeśli gracz odgadnie wszystkie litery. Czyli jeśli jego odgadnięte litery `guessed_letters` są takie same jak nasza odpowiedź `answer`.
                     Jeżeli są one takie same, to wtedy pogratuluj Graczowi 2 jego zwycięstwa i ustaw zmienną `game_over` na `True`.
@@ -2046,19 +2046,19 @@ adventures:
                     # Wklej tutaj swój kod.
 
                     # Gra
-                    {while} Koniec_gry _
+                    {while} koniec_gry _
                         próba_odgadnięcia = _
                         {if} _
-                            {for} i {in} {range} 1 {to} Liczba_liter:
-                                jeśli odpowiedź[i] == próba_odgadnięcia:
-                                    odgadnięte_litery [i] = próba_odgadnięcia
+                            {for} i {in} {range} 1 {to} liczba_liter:
+                                {if} odpowiedź[i] == próba_odgadnięcia:
+                                    odgadnięte_litery[i] = próba_odgadnięcia
                             {print} _
                             {if} odgadnięte_litery == _:
                                 {print} _
                                 koniec_gry = _
                         {else}:
                             {print} _
-                            zrobione_pomyłki_
+                            zrobione_pomyłki _
                             {if} _ == 10:
                                 {print} _
                                 {print} _
@@ -2077,11 +2077,11 @@ adventures:
                     ### Ćwiczenie
                     ***Utwórz funkcję, która będzie rysowała wisielca*** Utwórz funkcję, która narysuje wisielca w 10 krokach. Zrobiliśmy już dla ciebie krok 1.
 
-                    ***Przetestuj funkcję *** Przetestuj ją, wywołując funkcję za pomocą 10. Jeśli jesteś zadowolony z funkcji, usuń linię, która na razie ją wywołuje. Wywołamy tę funkcję, gdy gracz popełni błąd.
+                    ***Przetestuj funkcję*** Przetestuj ją, wywołując funkcję za pomocą 10. Jeśli jesteś zadowolony z funkcji, usuń linię, która na razie ją wywołuje. Wywołamy tę funkcję, gdy gracz popełni błąd.
 
-                    ***Wklej grę w wisielca pod swoją funkcją *** Wróć do poprzedniej przygody i skopiuj grę w wisielca. Wklej grę pod swoją funkcją.
+                    ***Wklej grę w wisielca pod swoją funkcją*** Wróć do poprzedniej przygody i skopiuj grę w wisielca. Wklej grę pod swoją funkcją.
 
-                    ***Wezwij do funkcji, gdy gracz popełni błąd *** W wierszu `mistakes_made = mistakes_made + 1` wywołamy funkcję. Chcemy, aby żółw wykonał tyle samo kroków, co gracz popełnił błędów, dlatego nazywamy tę funkcję argumentem `mistakes_made`.
+                    ***Wezwij do funkcji, gdy gracz popełni błąd*** W wierszu `mistakes_made = mistakes_made + 1` wywołamy funkcję. Chcemy, aby żółw wykonał tyle samo kroków, co gracz popełnił błędów, dlatego nazywamy tę funkcję argumentem `mistakes_made`.
 
                     ***Ciesz się swoją grą!***
                     <div class="w-full flex flex-row gap-2">
@@ -2197,7 +2197,7 @@ adventures:
                     ### Ćwiczenie
                     Skopiuj przykładowe kody i wypełnij puste pola, tak aby działały!
 
-                    **Dodatkowo ** Ta historia jest dość prosta, może możesz zrobić ją trochę straszniejszą poprzez dodanie bardziej ekscytującej historii.
+                    **Dodatkowo** Ta historia jest dość prosta, może możesz zrobić ją trochę straszniejszą poprzez dodanie bardziej ekscytującej historii.
                     Masz teraz bardzo ograniczone wyniki, są tylko 3 opcje tego, co może być za drzwiami. Może wymyślisz więcej potworów do dodania do listy!
                 example_code: |
                     ```
@@ -2454,7 +2454,7 @@ adventures:
                     ```
                     zwierzęta {is} pies, krowa, owca
                     odpowiedź {is} {ask} 'Jakie jest Twoje ulubione zwierzę?'
-                    _ odpowiedź _zwierzęta _ 'Moje też!'
+                    _ odpowiedź _ zwierzęta _ 'Moje też!'
                     _ _ 'Moje ulubione zwierzęta to psy, krowy i owce'
                     ```
         name: '{in}'
@@ -2475,11 +2475,11 @@ adventures:
                 story_text_2: |
                     ### Ćwiczenie
                     Czas na tworzenie własnych zmiennych!
-                    W przykładowym kodzie podaliśmy przykład zmiennej `favorite_animal`. W wierszu 1 zmienna jest ustawiona, a w wierszu 2 użyliśmy zmiennej w komendzie {print}.
+                    W przykładowym kodzie podaliśmy przykład zmiennej `ulubione_zwierzę`. W wierszu 1 zmienna jest ustawiona, a w wierszu 2 użyliśmy zmiennej w komendzie {print}.
                     Po pierwsze, dokończ nasz przykład, wypełniając swoje ulubione zwierzę w pustym miejscu. Następnie sam napisz co najmniej 3 z tych kodów. Wybierz zmienną i ustaw ją za pomocą polecenia {is}. Następnie użyj go z poleceniem {print}, tak jak my to zrobiliśmy.
                 example_code_2: |
                     ```
-                    Ulubione_zwierzę {is} _
+                    ulubione_zwierzę {is} _
                     {print} Lubię ulubione_zwierzę
                     ```
             6:
@@ -2527,7 +2527,7 @@ adventures:
 
                     ### Ćwiczenie
                     Wydłuż kod, dodając co najmniej 3 dodatkowe słowa, aby gracz mógł się uczyć.
-                    **Dodatkowo ** Oczywiście możesz użyć innego języka niż francuski. Możesz zmienić kod na dowolny język, którego chcesz się nauczyć.
+                    **Dodatkowo** Oczywiście możesz użyć innego języka niż francuski. Możesz zmienić kod na dowolny język, którego chcesz się nauczyć.
                 example_code: "```\n{print} 'Learn French!'\ncat {is} {ask} '🐱'\n{if} cat {is} chat {print} 'Terrific!'\n{else} {print} 'No, cat is chat'\nfrog {is} {ask} '🐸'\n{if} frog {is} grenouille {print} 'Super!'\n{else} {print} 'No, frog is grenouille'\n```\n"
             16:
                 story_text: |
@@ -2977,7 +2977,7 @@ adventures:
                     ```
                     słowa {is} ara, Hedy
                     {print} Naucz twoją papugę!
-                    nowe_słowo{is}{ask}Jakiego słowa chcesz ja nauczyć?
+                    nowe_słowo {is} {ask}Jakiego słowa chcesz ja nauczyć?
                     _ nowe_słowo _ słowa
                     {print} 🧒 Powiedz nowe_słowo , Hedy!
                     {print} 🦜 słowa {at} {random}
@@ -3089,7 +3089,7 @@ adventures:
 
                     ### Ćwiczenie
                     Dokończ kod. Za każdym razem należy wybrać losową literę, którą należy nacisnąć. Dostajesz punkt za poprawną naciśnięcie i odliczenie dwóch punktów za niewłaściwą prasę.
-                    **Dodatkowo ** Wyczyść ekran po każdej literze i pokaż użytkownikowi, ile punktów zdobył.
+                    **Dodatkowo** Wyczyść ekran po każdej literze i pokaż użytkownikowi, ile punktów zdobył.
                 example_code: "```\npunkty = 0\nlitery = a, b, c, d, e\n{repeat} 10 {times}\n    litera = _ _ _\n    {print} 'Naciśnij literę ' litera.\n    {if} litera {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         description: Wprowadzenie polecenia print
@@ -3116,7 +3116,7 @@ adventures:
                     ```
             18:
                 story_text: |-
-                    Dotarliśmy do prawdziwego kodu Pythona! Oznacza to, że musimy odtąd używać nawiasów z komendami`{print}` i`{range}`.
+                    Dotarliśmy do prawdziwego kodu Pythona! Oznacza to, że musimy odtąd używać nawiasów z komendami `{print}` i `{range}`.
                     Oznacza to również, że możesz używać kodu Hedy z tego poziomu w dowolnym środowisku Pythona, o ile używasz angielskich poleceń. Jeśli do tej pory tego nie zrobiłeś, to możesz nacisnąć przełącznik w menu poleceń, aby to zrobić.
                 example_code: |
                     ```
@@ -3285,7 +3285,7 @@ adventures:
                     ### Polecenia repeat i wcięcia
                     Na tym poziomie możesz powtórzyć wiele wierszy kodu za pomocą tylko 1 polecenia repeat.
                     Robisz to, tworząc blok linii, który chcesz powtórzyć.
-                    Linie w tym bloku będą wymagały ** wcięcia** .
+                    Linie w tym bloku będą wymagały **wcięcia** .
                     Oznacza to umieszczenie czterech spacji na początku każdej linii. Będziesz także musiał użyć wcięć, gdy chcesz tylko utworzyć blok jednej linii.
                 example_code: |
                     ```
@@ -3298,7 +3298,7 @@ adventures:
                     Świetna robota! Osiągnąłeś kolejny nowy poziom! Na poprzednim poziomie nauczyłeś się używać wielu wierszy kodu w poleceniu `{if}`lub `{repeat}`. 
                     Ale nie możesz jeszcze ich połączyć...
 
-                    Dobre wieści! Na tym poziomie będziesz mógł umieścić `{if}` w `{if}`, `{repeat}` wewnątrz`{repeat}` .
+                    Dobre wieści! Na tym poziomie będziesz mógł umieścić `{if}` w `{if}`, `{repeat}` wewnątrz `{repeat}` .
                     Wypróbuj!
                 example_code: |
                     ```
@@ -3627,7 +3627,7 @@ adventures:
                     Ta gra nie jest zbyt interaktywna, ale nie martw się! W następnej przygodzie dowiesz się, jak używać zmiennych za pomocą polecenia `{ask}`, co sprawi, że Twoja gra będzie interaktywna!
                 example_code: |-
                     ```
-                    wybór{is} kamień
+                    wybór {is} kamień
                     {print} Wybieram_
                     ```
             3:
@@ -3657,7 +3657,7 @@ adventures:
                 example_code: |
                     ```
                     możliwości {is} kamień, papier, nożyce
-                    {print}_ Komputer wybiera ... _ możliwości {at}{random}
+                    {print} _Komputer wybiera..._ możliwości {at} {random}
                     ```
             5:
                 story_text: |
@@ -4207,15 +4207,15 @@ adventures:
                     Teraz, gdy mamy polecenie {elif}, możemy pozwolić grze zdecydować, czy ktoś wygrał i może przestać nas pytać!
 
                     ### Ćwiczenie
-                    ***Wklej swój kod *** Wklej tutaj swój kod z poprzedniego poziomu i spraw, by zadziałał Na tym poziomie nauczyłeś się używać dwukropka za każdym razem, gdy tworzysz blok kodu. Dodaj dwukropki we właściwych miejscach.
+                    ***Wklej swój kod*** Wklej tutaj swój kod z poprzedniego poziomu i spraw, by zadziałał Na tym poziomie nauczyłeś się używać dwukropka za każdym razem, gdy tworzysz blok kodu. Dodaj dwukropki we właściwych miejscach.
 
-                    ***Utwórz funkcję, która wykrywa, czy ktoś wygrał *** Uruchomiliśmy dla Ciebie funkcję, wklej ją pod funkcją `print_field` i zakończ funkcję. Możesz zobaczyć, że ten pierwszy fragment kodu sprawdza, czy miejsce 1, 2 i 3 są takie same, ponieważ jeśli tak, masz 3 z rzędu.
+                    ***Utwórz funkcję, która wykrywa, czy ktoś wygrał*** Uruchomiliśmy dla Ciebie funkcję, wklej ją pod funkcją `print_field` i zakończ funkcję. Możesz zobaczyć, że ten pierwszy fragment kodu sprawdza, czy miejsce 1, 2 i 3 są takie same, ponieważ jeśli tak, masz 3 z rzędu.
                     Sprawdza również, czy nie są kropką, ponieważ jeśli tak, linia może mieć te same symbole, ale tylko dlatego, że wciąż jest pusta.
                     Jeśli wszystkie te warunki zostaną spełnione, gra się skończy, a zwycięzca zostanie wyświetlony.
                     Zakończ tę funkcję wszystkimi możliwymi sposobami do wygrania. Oznacza to, że musisz zrobić to samo dla pozostałych 2 wierszy, 3 kolumn i 2 przekątnych.
                     Jeśli skończyłeś wszystkie pozostałe opcje, funkcja powinna zwrócić zmienną `game_over`, abyśmy mogli użyć jej w naszej grze.
 
-                    ***Zadzwoń do funkcji w grze *** Przejdź do linii `game_over = {ask} 'Did you win?'`i zmień go na `game_over = {call} detect_winner {with} field, sign`. Teraz funkcja sprawdzi, czy jest zwycięzca, a gra nie będzie musiała nas o to już pytać!
+                    ***Zadzwoń do funkcji w grze*** Przejdź do linii `game_over = {ask} 'Did you win?'` i zmień go na `game_over = {call} detect_winner {with} field, sign`. Teraz funkcja sprawdzi, czy jest zwycięzca, a gra nie będzie musiała nas o to już pytać!
 
                     ***Ciesz się grą!*** Świetna robota! Skończyłeś grę! !
                 example_code: |
@@ -4333,7 +4333,7 @@ adventures:
                     Ćwiczenia
                     Ten kod tworzy teraz literę T Możesz to zmienić na literę B?
 
-                    * * Extra * * Zmień literę na inną literę, jak pierwsza z twojego imienia.
+                    **Extra** Zmień literę na inną literę, jak pierwsza z twojego imienia.
                     Możesz również zrobić wiele liter, ustawiając kolor na `{color}` `{white}` pomiędzy. 
                 example_code: |
                     ```
@@ -4471,10 +4471,10 @@ adventures:
                     ### Ćwiczenie 1
                     Dodaj obrót o 90 stopni w pętli, aby narysować spiralę.
                     Dodaj co najmniej 5 liczb do listy, aby spirala powiększyła się.
-                     **(Dodatkowo) ** czy możesz zmienić spiralę na inny kształt? Eksperymentuj z liczbami obrotów!
+                     **(Dodatkowo)** czy możesz zmienić spiralę na inny kształt? Eksperymentuj z liczbami obrotów!
                     ### Ćwiczenie 2
                     Spirala jest wyciągnięta na zewnątrz, czy idzie do wewnątrz?
-                example_code: "```\n{turn} 90\ndistances = 10, 20, 30, 40, 50, 60\n{for} distance {in} distances\n    {forward} distance\n```\n"
+                example_code: "```\n{turn} 90\nodległości = 10, 20, 30, 40, 50, 60\n{for} odległość {in} odległości\n    {forward} odległość\n```\n"
             12:
                 story_text: |
                     Możemy używać funkcji do rysowania bardziej złożonych figur przy mniejszej ilości kodu.
@@ -4603,7 +4603,7 @@ adventures:
                     ### Ćwiczenie
                     Odtwórz rysunki za pomocą żółwia!
 
-                    ** Dodatkowo** Liczba w nawiasach wskazuje, w ilu wierszach kodu można narysować tę liczbę. Czy możesz to zrobić w tej samej liczbie linii?
+                    **Dodatkowo** Liczba w nawiasach wskazuje, w ilu wierszach kodu można narysować tę liczbę. Czy możesz to zrobić w tej samej liczbie linii?
 
                     <div class="w-full flex flex-row gap-2">
                     kwadrat(3) <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
@@ -4615,9 +4615,9 @@ adventures:
                     ### Ćwiczenie
                     Odtwórz rysunki za pomocą żółwia!
 
-                    **Dodatkowo ** Liczba w nawiasach wskazuje, w ilu wierszach kodu można narysować tę liczbę. Czy możesz to zrobić w tej samej liczbie linii?
+                    **Dodatkowo** Liczba w nawiasach wskazuje, w ilu wierszach kodu można narysować tę liczbę. Czy możesz to zrobić w tej samej liczbie linii?
 
-                    **Dodatkowo ** Pozwól graczowi wybrać kraj, którego flagę chciałby zobaczyć.
+                    **Dodatkowo** Pozwól graczowi wybrać kraj, którego flagę chciałby zobaczyć.
 
                     <div class="w-full flex flex-row gap-2">
                     krzyż (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/76e42c76-aa3f-4863-8eee-ead73c09a186" width="150">
