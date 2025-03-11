@@ -2,7 +2,7 @@ adventures:
     story:
         name: Câu chuyện
         default_save_name: Câu chuyện
-        description: Câu chuyện
+        description: Làm 1 câu chuyện ngắn
         levels:
             1:
                 story_text: |
@@ -179,6 +179,7 @@ adventures:
 
                     ### Bài tập 3
                     Quay lại cấp độ 8 trong câu chuyện và sử dụng ít nhất 2 lần `{if}` ở trong 1 `{if}`khác.
+                example_code: "{print}'Robin đang đi bọ xuống trung tâm thành phố'\nlocation ={ask}'Liệu Robin sẽ vào 1 cửa hàng, hay cố ấy nên đi về nhà?'\n{if}location {is} \"cửa hàng\"\n…{print}'Cố ấy vào trong cửa hàng'\n…{print}'Robin thấy 1 cuốn chuyện trông rất hay'\n …\n"
     default:
         name: Giới thiệu
         default_save_name: phần giới thiệu
