@@ -57,6 +57,7 @@ adventures:
                 example_code: "```\nanimals {is} 🦔, 🐿, 🦉, 🦇\n{print} They now hear the sound of an animals {at} {random}\n```\n"
                 story_text_2: "Il comando `{add}` può essere utile nella tua storia.\n"
                 example_code_2: "```\n{print} They hear a sound\nanimals {is} 🐿, 🦔, 🦇, 🦉\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was an animals {at} {random}\n```\n"
+                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
             4:
                 story_text: |
                     ### Esercizio
@@ -111,7 +112,7 @@ adventures:
                     ### Esercizio
                     Aggiungi ripetizione alla tua storia. Torna ai programmi salvati, scegli il programma della storia dal livello precedente e
                     trova una riga contenente `{print}` e ripetila!
-                example_code: "```\n{print} 'Il principe continuava a chiedere aiuto'\n{repeat} 5 {times} {print} 'Aiuto!'\n{print} 'Perché nessuno mi aiuta?'\n```\n"
+                example_code: "```\n{print} 'Il principe continuava a chiedere aiuto'\n{repeat} 5 {times} {print} 'Aiuto!'\n{print} 'perché nessuno mi aiuta?'\n```\n"
             8:
                 story_text: |
                     In questo livello puoi utilizzare più righe nei comandi `{if}`, in questo modo puoi migliorare il tuo lieto fine o il tuo triste finale!
@@ -208,8 +209,10 @@ adventures:
                     nome = {input}("Come ti chiami?")
                     {print}('Benvenuti in questa storia!')
                     ```
+                story_text: "Scriveremo un'altra storia, ma ora dobbiamo usare le parentesi con `{print}`.\n\n### Esercizio 1\nCrea una storia di almeno 5 frasi. Non devi ancora usare 'nome'.\n"
             15:
-                story_text: "Usare il comando `{while}` può rendere le tue storie più interessanti. Per esempio, puoi usare `{while} game == 'on'` per giocare fino a quando il gioco non è finito.\nO puoi usare `{while} sword == 'lost'` in modo che i giocatore non possa continuare il gioco fino a quando non ha trovato qualcosa.\n\n### Esercizio\nIl codice di esempio ti mostra come usare la funzione `{while}` in una storia. Ora **pensa al tuo scenario** in cui il giocatore deve trovare qualcosa prima che possa continuare.\n"
+                story_text: "Usando la funzione `{while}`  puoi rendere le tue storie più interessanti. Per esempio puoi usare `{while} game == 'on'` in modo da giocare fino alla fine della partita.\nO puoi usare `{while} sword == 'lost'` in modo che il giocatore non possa continuare la partita fino a quando non hanno trovato qualcosa.\n\n###  Esercizio\nIl codice di esempio ti mostra come usare la funzione `{while}`  in una storia. Ora **pensa ad un tuo scenario** in cui il giocatore deve trovare qualcosa per continuare.\n"
+                example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
     add_remove_command:
         default_save_name: aggiungi_rimuovi_comando
         description: introducendo {add} {to_list} e {remove} {from}
@@ -325,8 +328,9 @@ adventures:
                     ```
             18:
                 example_code: "```\n{print}('Il mio nome è Hedy!')\nnome = {input}('Come ti chiami?')\n{print}('quindi il tuo nome è  ', nome)\n```\n"
-                story_text: L'ultimo cambiamento che dobbiamo fare per ottenere il codice Python è cambiare `{ask}` in `{input}`.
+                story_text: L'ultimo cambiamento che dobbiamo fare per ottenere un codice Python è cambiare `{ask}` in `{input}`.
         name: '{ask}'
+        default_save_name: ask_command
     blackjack:
         name: Jack nero
         default_save_name: Jack nero
