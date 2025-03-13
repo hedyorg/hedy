@@ -755,7 +755,7 @@ class ForTeachersModule(WebsiteModule):
 
         session['class_id'] = class_id
         customizations, adventures, adventure_names, available_adventures, min_level = \
-            self.get_class_info(user, class_id, get_customizations=True)
+            self.get_class_info(user, class_id, migrate_customizations=True)
 
         return render_template(
             "customize-class.html",
@@ -1009,7 +1009,7 @@ class ForTeachersModule(WebsiteModule):
             customizations["quiz_parsons_tabs_migrated"] = 1
             self.db.update_class_customizations(customizations)
 
-    def get_class_info(self, user, class_id, get_customizations=False):
+    def get_class_info(self, user, class_id, migrate_customizations=False):
         if hedy_content.Adventures(g.lang).has_adventures():
             default_adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
@@ -1039,57 +1039,63 @@ class ForTeachersModule(WebsiteModule):
         default_adventures["quiz"] = {}
         default_adventures["parsons"] = {}
 
-        parsons_hidden = False
-        quizzes_hidden = False
-        if customizations:
-            parsons_hidden = 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']
-            quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
-            if quizzes_hidden:
-                del default_adventures["quiz"]
-            if parsons_hidden:
-                del default_adventures["parsons"]
-
-            # in case this class has thew new way to select adventures
-            if 'sorted_adventures' in customizations:
-                # remove from customizations adventures that we have removed
-                self.purge_customizations(customizations['sorted_adventures'], default_adventures, teacher_adventures)
-            # it uses the old way so convert it to the new one
-            elif 'adventures' in customizations:
-                customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
-                for adventure, levels in customizations['adventures'].items():
-                    for level in levels:
-                        customizations['sorted_adventures'][str(level)].append(
-                            {"name": adventure, "from_teacher": False})
-
-                        customizations['sorted_adventures'][str(level)].append(
-                            {"name": "quiz", "from_teacher": False})
-                        customizations['sorted_adventures'][str(level)].append(
-                            {"name": "parsons", "from_teacher": False})
-            customizations["updated_by"] = user["username"]
-            self.db.update_class_customizations(customizations)
-            min_level = 1 if customizations['levels'] == [] else min(customizations['levels'])
-        else:
-            # Since it doesn't have customizations loaded, we create a default customization object.
-            # This makes further updating with HTMX easier
-            adventures_to_db = {}
-            for level, default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
-                adventures_to_db[str(level)] = [{'name': adventure, 'from_teacher': False}
-                                                for adventure in default_adventures]
-
-            customizations = {
-                "id": class_id,
-                "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
-                "opening_dates": {},
-                "other_settings": [],
-                "level_thresholds": {},
-                "sorted_adventures": adventures_to_db,
-                "updated_by": user["username"],
-                "quiz_parsons_tabs_migrated": True,
-            }
-            self.db.update_class_customizations(customizations)
-
-        if get_customizations:
+        if migrate_customizations:
+            parsons_hidden = False
+            quizzes_hidden = False
             self.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
+            if customizations:
+                parsons_hidden = (
+                    "other_settings" in customizations
+                    and "hide_parsons" in customizations["other_settings"]
+                )
+                quizzes_hidden = (
+                    "other_settings" in customizations
+                    and "hide_quiz" in customizations["other_settings"]
+                )
+                if quizzes_hidden:
+                    del default_adventures["quiz"]
+                if parsons_hidden:
+                    del default_adventures["parsons"]
+
+                # in case this class has thew new way to select adventures
+                if 'sorted_adventures' in customizations:
+                    # remove from customizations adventures that we have removed
+                    self.purge_customizations(customizations['sorted_adventures'],
+                                              default_adventures, teacher_adventures)
+                # it uses the old way so convert it to the new one
+                elif 'adventures' in customizations:
+                    customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+                    for adventure, levels in customizations['adventures'].items():
+                        for level in levels:
+                            customizations['sorted_adventures'][str(level)].append(
+                                {"name": adventure, "from_teacher": False})
+
+                            customizations['sorted_adventures'][str(level)].append(
+                                {"name": "quiz", "from_teacher": False})
+                            customizations['sorted_adventures'][str(level)].append(
+                                {"name": "parsons", "from_teacher": False})
+                customizations["updated_by"] = user["username"]
+                self.db.update_class_customizations(customizations)
+                min_level = 1 if customizations['levels'] == [] else min(customizations['levels'])
+            else:
+                # Since it doesn't have customizations loaded, we create a default customization object.
+                # This makes further updating with HTMX easier
+                adventures_to_db = {}
+                for level, default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+                    adventures_to_db[str(level)] = [{'name': adventure, 'from_teacher': False}
+                                                    for adventure in default_adventures]
+
+                customizations = {
+                    "id": class_id,
+                    "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
+                    "opening_dates": {},
+                    "other_settings": [],
+                    "level_thresholds": {},
+                    "sorted_adventures": adventures_to_db,
+                    "updated_by": user["username"],
+                    "quiz_parsons_tabs_migrated": True,
+                }
+                self.db.update_class_customizations(customizations)
 
         for level, sorted_adventures in customizations['sorted_adventures'].items():
             for adventure in sorted_adventures:
