@@ -439,6 +439,9 @@ export function save_customizations(class_id: string) {
     }).done(function (response) {
       modal.notifySuccess(response.success);
       $('#remove_customizations_button').removeClass('hidden');
+      const dropdown = document.getElementById("levels_dropdown");
+      const input_trigger = new Event("input");
+      dropdown?.dispatchEvent(input_trigger);  
     }).fail(function (err) {
       modal.notifyError(err.responseText);
     });
@@ -769,7 +772,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // Autosave customize class page
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
-      autoSave("customize_class", null, {elementId: "levels_dropdown", trigger: "input"});
+      autoSave("customize_class");
   });
 }
 
