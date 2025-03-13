@@ -769,8 +769,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // Autosave customize class page
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
-      autoSave("customize_class", null, {elementId: "levels_dropdown", trigger: "input"});
-
+      autoSave("customize_class", null, null);
   });
 }
 
