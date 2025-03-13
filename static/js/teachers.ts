@@ -439,6 +439,11 @@ export function save_customizations(class_id: string) {
     }).done(function (response) {
       modal.notifySuccess(response.success);
       $('#remove_customizations_button').removeClass('hidden');
+      // Since the `sorted_adventures` section contains `quiz` and `parsons`
+      // It needs to be synched with the updates that aren't done through HTMX
+      // Therefore we trigger an input trigger, which in turn will call the
+      // get-customization-level endpoint and remove or add those two adventures
+      // if needed.
       const dropdown = document.getElementById("levels_dropdown");
       const input_trigger = new Event("input");
       dropdown?.dispatchEvent(input_trigger);  
