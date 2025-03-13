@@ -1320,26 +1320,38 @@ class ForTeachersModule(WebsiteModule):
             level_thresholds[name] = value
 
         customizations = self.db.get_class_customizations(class_id)
-        dashboard = customizations.get('dashboard_customization', {})
-        live_statistics_levels = dashboard.get('selected_levels', [1])
+        dashboard = customizations.get("dashboard_customization", {})
+        live_statistics_levels = dashboard.get("selected_levels", [1])
 
         # Remove quiz and parsons if we need to hide them  all.
-        hide_quiz = 'hide_quiz' in body['other_settings']
-        hide_parsons = 'hide_parsons' in body['other_settings']
+        hide_quiz = "hide_quiz" in body["other_settings"]
+        hide_parsons = "hide_parsons" in body["other_settings"]
         for level, adventures in customizations["sorted_adventures"].items():
-            if hide_parsons:
-                customizations["sorted_adventures"][level] = [adventure for adventure in adventures
-                                                              if adventure["name"] != "parsons"]
-            elif 'other_settings' in customizations \
-                    and 'hide_parsons' in customizations['other_settings']:  # if so, we should toggle parsons.
-                customizations["sorted_adventures"][level].append({'name': 'parsons', 'from_teacher': False})
+            if hide_parsons or hide_quiz:
+                customizations["sorted_adventures"][level] = [
+                    adventure
+                    for adventure in adventures
+                    if not (adventure["name"] == "parsons" and hide_parsons)
+                    and not (adventure["name"] == "quiz" and hide_quiz)
+                ]
 
-            if hide_quiz:
-                customizations["sorted_adventures"][level] = [adventure for adventure in adventures
-                                                              if adventure["name"] != "quiz"]
-            elif 'other_settings' in customizations \
-                    and 'hide_quiz' in customizations['other_settings']:  # if so, we should toggle quizes.
-                customizations["sorted_adventures"][level].append({'name': 'quiz', 'from_teacher': False})
+            if (
+                not hide_parsons
+                and "other_settings" in customizations
+                and "hide_parsons" in customizations["other_settings"]
+            ):  # if so, we should toggle parsons.
+                customizations["sorted_adventures"][level].append(
+                    {"name": "parsons", "from_teacher": False}
+                )
+
+            if (
+                not hide_quiz
+                and "other_settings" in customizations
+                and "hide_quiz" in customizations["other_settings"]
+            ):  # if so, we should toggle quizes.
+                customizations["sorted_adventures"][level].append(
+                    {"name": "quiz", "from_teacher": False}
+                )
 
         customizations = {
             "id": class_id,
@@ -1348,14 +1360,12 @@ class ForTeachersModule(WebsiteModule):
             "other_settings": body["other_settings"],
             "level_thresholds": level_thresholds,
             "sorted_adventures": customizations["sorted_adventures"],
-            "dashboard_customization": {
-                "selected_levels": live_statistics_levels
-            },
-            "updated_by": user["username"]
+            "dashboard_customization": {"selected_levels": live_statistics_levels},
+            "updated_by": user["username"],
         }
 
         self.db.update_class_customizations(customizations)
-        add_class_customized_to_subscription(user['email'])
+        add_class_customized_to_subscription(user["email"])
         response = {"success": gettext("class_customize_success")}
 
         return make_response(response, 200)
