@@ -3,6 +3,7 @@ import os
 from os import path
 
 import static_babel_content
+import utils
 
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
@@ -44,7 +45,15 @@ KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_comm
                        'repeat_command_2', 'for_command', 'and_or_command', 'while_command', 'elif_command',
                        'clear_command', 'pressit', 'debugging', 'functions'}
 
-ADVENTURE_ORDER_PER_LEVEL = {
+
+def adventures_order_per_level():
+    if utils.is_redesign_enabled():
+        return ADVENTURE_ORDER_PER_LEVEL
+    else:
+        return ADVENTURE_ORDER_PER_LEVEL_OLD
+
+
+ADVENTURE_ORDER_PER_LEVEL_OLD = {
     1: [
         'default',
         'print_command',
@@ -347,6 +356,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'debugging'
     ]
 }
+
+ADVENTURE_ORDER_PER_LEVEL = {level: [a for a in adventures if a not in ['parsons', 'quiz']]
+                             for level, adventures in ADVENTURE_ORDER_PER_LEVEL_OLD.items()}
 
 HOUR_OF_CODE_ADVENTURES = {
     1: [
