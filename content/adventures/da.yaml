@@ -2,7 +2,7 @@ adventures:
     story:
         name: Historie
         default_save_name: Historie
-        description: Historie
+        description: Lav en kort historie
         levels:
             1:
                 story_text: |
@@ -14,50 +14,51 @@ adventures:
                     Brug `{echo}` hvis du vil have din hovedpersonen i slutningen af sætningen.
                 example_code: |
                     ```
-                    {ask} Hovedpersonen i denne historie
+                    {ask} Hovedpersonen i denne historie er
                     {print} Hovedpersonen går nu ind i skoven
-                    {echo} Han er en lidt bange,
-                    {print} Han hører mærkelige lyde alle steder
-                    {print} Han er bange for at det en hjemsøgt skov
+                    {echo} De er lidt bange,
+                    {print} De hører mærkelige lyde alle steder
+                    {print} De er bange for at det en hjemsøgt skov
                     ```
                 story_text_2: |
                     ### Opgave
-                    Kan du lave din egen historie i Hedy nu og ved at bruge `{print}` , `{ask}` og `{echo}`?
+                    Lav nu din egen historie på mindst 6 linjers kode.
+                    Denne historie må ikke være den samme som eksempel koden.
+                    Brug mindst en `{ask}` og mindst en `{echo}` kommando.
+                    Du kan skrive om hvilket som helst emne, du kan lide.
+                    Hvis du ikke kan finde på et emne, kan du bruge nogle af vores idéer: en tur i biografen, en sportskamp, eller en dag i zoologisk have.
             2:
                 story_text: |
-                    På niveau 2 kan du gøre din historie sjovere. Din hovedperson kan nu være hvor som helst i sætningen.
+                    På niveau 2 kan du gøre din historie sjovere. Din hovedpersons' navn kan nu være hvor som helst i sætningen.
 
-                    Du bliver nødt til at programmere en lille smule mere for at få det til at ske. Du skal nu først give en hovedperson et navn.
+                    Du bliver nødt til at programmere en lille smule mere for at få det til at ske. Du skal din hovedperson et navn som det første.
 
                     Så kan du sætte det navn ind alle steder i en sætning.
-
-                    ### Opgave
-                    Kan du selv lave en historie hvor du bruger en variabel? Kan du tilføje endnu flere variabler?
                 example_code: |-
                     ```
                     navn {is} {ask} Hvad hedder hovedpersonen?
                     {print} navn løber nu rundt i skoven
                     {print} navn er lidt bange
-                    {print} Pludselig hører han en mærkelig lyd...
+                    {print} Pludselig hører hun en mærkelig lyd...
                     {sleep}
                     {print} navn er bange for at det er en hjemsøgt skov
                     ```
                 story_text_2: |
                     ### Opgave
-                    Nu er det tid til at tilføje variabler til din egen historie, som du lavede i den forrige opgave.
+                    Nu er det tid til at tilføje variabler til din egen historie, som du lavede i det forrige niveau.
                     Gå til 'My programs', se efter din niveau 1 historie og kopier koden. Indsæt koden i din inputskærm på dette niveau.
 
-                    Koden vil ikke virke på dette niveau, men det er fordi du ikke har brugt variabler endnu.
-                    Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
+                    Koden vil ikke virke på dette niveau, fordi du ikke har brugt variabler endnu.
+                    Ændr `{ask}` kommandoen og `{echo}` kommandoen i din kode, til den korrekte form som du har lært på dette niveau.
 
-                    **Extra** Add a sleep command to your code to build up tension in your story.
+                    **Ekstra** Tilføj en `{sleep}` kommando til din kode for at opbygge spænding i din historie.
             3:
                 story_text: |
                     På niveau 3 kan du gøre din historie endnu sjovere. Du kan bruge tilfældighed til et monster, dyr eller anden forhindring, sådan her:
                 example_code: |
                     ```
                     dyr {is} 🦔, 🐿, 🦉, 🦇
-                    {print} Nu hører han lyden af et dyr {at} {random}
+                    {print} Nu hører de lyden af et dyr {at} {random}
                     ```
                 story_text_2: |
                     Kommandoen `{add}` kan også hjælpe dig i din historie.
@@ -85,17 +86,19 @@ adventures:
             5:
                 story_text: |
                     På dette niveau kan du programmere forskellige slutninger, hvilket vil gøre din historie endnu sjovere.
+                    I kodeeksemplet kan du se hvordan man laver 2 forskellige slutninger.
 
-                    ### Opgave
-                    Find på to forskellige slutninger til din historie, for eksempel:
+                    ### Opgave 1
+                    Find på en ny historie med mindst 6 linjers kode om et emne, du selv har valgt.
+                    Mangler du inspiration? Vælg en af disse emner: en superhelt, en kedelig dag i skolen, strander på en øde ø.
 
-                    - Prinsessen går gennem skoven
-                    - Hun møder et monster
+                    Giv nu spilleren en chance for at vælge en glad eller en trist slutning, ligesom i kodeeksemplet.
+                    Programmer begge slutninger.
 
-                    - Lykkelig slutning: Hun griber sit sværd og monstret løber hurtigt sin vej
-                    - Ulykkelig slutning: Monstret spiser prinsessen
-
-                    Du kan også sikre at et navn bliver indtastet igen. Det fungerer ligesom på det forrige niveau. Du kan kombinere det med `{if}`, og så har du allerede lavet et helt program!
+                    ### Øvelse 2
+                    Kopier historien du har skabt i dit eget eventyr, i de forhenværende niveauer.
+                    Find en måde at tilføje mindst 2 `{if}` og `{else}` kommandoer til din historie.
+                    Det kan være med en glad eller en trist slutning, men du kan også finde på andre måder at bruge kommandoerne.
                 example_code: |
                     ```
                     navn {is} {ask} 'Hvem går i skoven?'
@@ -111,8 +114,15 @@ adventures:
                     Du kan indsætte disse gentagelser i din historie, på dette niveau med `{repeat}`.
 
                     ### Opgave
-                    Tilføj en gentagelse til din egen historie. Gå tilbage til dine gemte programmer, vælg dit historieprogram fra niveau 6 og
-                    find en linje der indeholder {print} og gentag det!
+                    Tilføj en gentagelse til din egen historie. Gå tilbage til dine gemte programmer, vælg dit historieprogram fra et at de forrige niveauer, og
+                    find en linje der indeholder `{print}` og gentag det!
+                example_code: "```\n{print} 'Prinsen blev ved med at kalde på hjælp'\n{repeat} 5 {times} {print} 'Hjælp!'\n{print} 'Hvorfor er der ikke nogen der hjælper mig?'\n```\n"
+            4:
+                story_text: "### Opgave\nKopier eksempel koden og færdiggør den ved at tilføje citationstegn til de tomme felter på linje 1 og 2.\nDe tomme felter på linje 3 og 4 skal ikke erstattes med citationstegn, men en `{sleep}` og en `{clear}` kommando. Kan du få det til at virke?\n\n### Opgave 2\nGå tilbage til det forrige niveau og kopiere din historiekode. Få den til at virke på dette niveau ved at tilføje citationstegn de rigtige steder.\nPas på: Variablerne i din historier bør væren udenfor citationstegnene. Ligesom linje 2 i eksempel koden. I den linje er variablerne sat udenfor citationstegnene.\n"
+                example_code: "```\nnavn {is} {ask} _ Hvad er dit navn? _\n{print}  _ Hovedpersonen hedder _ navn\n_\n_\n{print} navn  _ går nu en tur i skoven _\n{print} navn _ er lidt bange _\ndyr {is} 🦔, 🐿, 🦉, 🦇\n{print} _ Han hører lyden af et _ dyr {at} {random}\n{print} navn _ er bange for at skoven er hjemsøgt _\n```\n"
+            8:
+                story_text: "På dette niveau can du bruge flere linjer i dine `{if}` kommandoer. På denne måde kan du opgradere din glade eller triste slutning!\n\n### Opgave 1\nKode eksemplet viser to forskellige slutninger; en hvor karakterene hopper ind i en tidsmaskine, og en hvor de ikke gør.\nFærdiggør de tomme felter med mindst en sætning per slutning.\n**Ekstra** Gør historien længere. Hvad sker der i historien? Du kan også tilføje endnu en `{ask}` med andre muligheder.\n\n### Opgave 2\nGo tilbage til dine gemte programmer, og vælg dit historie program fra niveau 5. Skriv nu en god og en dårlig slutning der hver er 3 linjer lange!\n"
+                example_code: "```\n{print} 'ÅH NEJ! T-rexen nærmer sig!'\nslut = {ask} 'Vil du have en glad eller en trist slutning?'\n{if} slut {is} glad\n    {print} 'Richard når lige at hoppe ind i tidsmaskinen!'\n    {print} _\n{else}\n    {print} 'Åh nej! Richard er for langsom...'\n    {print} _\n```\n"
     ask_command:
         description: Introduction ask command
         levels:

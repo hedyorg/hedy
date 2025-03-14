@@ -2,7 +2,7 @@ adventures:
     story:
         name: Příběh
         default_save_name: Příběh
-        description: Příběh
+        description: Vytvořte krátký příběh
         levels:
             1:
                 story_text: |
@@ -79,7 +79,8 @@ adventures:
                     Na této úrovni můžete použít více řádků ve vašich `{if}` příkazech, tímto způsobem můžete vylepšit svůj šťastný nebo smutný konec!
 
                     ### Cvičení 1
-                    Ukázkový kód zobrazuje dva různé konce; jeden, kde postavy skočí do stroje času, a druhý, kde to neudělají. Doplňte mezery alespoň jednou větou na každý konec.
+                    Ukázkový kód zobrazuje dva různé konce; jeden, kde postavy skočí do stroje času, a druhý, kde to neudělají.
+                    Doplňte mezery alespoň jednou větou na každý konec.
                     **Extra** Udělejte příběh delší. Co se v příběhu stane? Můžete také přidat druhý `{ask}` s různými možnostmi.
 
                     ### Cvičení 2
@@ -138,7 +139,7 @@ adventures:
                     ```
                 story_text: "Budeme tisknout další příběh, ale nyní musíme použít závorky s `{print}`.\n\n### Cvičení 1\nVytvořte příběh o minimálně 5 větách. Zatím nemusíte používat 'jméno'.\n"
                 story_text_2: "## Cvičení 2\nJiž jsme pro vás připravili `{input}`. Nejprve ve svém příběhu použijte proměnnou `name`.\nPoté přidejte druhou proměnnou `{ask}` a použijte ji také.\nTip: Nezapomeňte na čárky v `{print}` mezi textem a proměnnými!\n"
-                example_code_2: "```\nnaam = {input}(\"Jak se jmenujete?\")\n{print}('Vítejte v tomto příběhu!')\n```\n"
+                example_code_2: "```\njmeno = {input}(\"Jak se jmenujete?\")\n{print}('Vítejte v tomto příběhu!')\n```\n"
             15:
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
                 story_text: "oužití smyčky `{while}` může vaše příběhy učinit zajímavějšími. Můžete například použít `{while} game == 'on'`, abyste mohli hrát, dokud hra neskončí.\nNebo můžete použít `{while} sword == 'lost'`, takže hráč nemůže pokračovat ve hře, dokud něco nenajde.\n\n### Cvičení\nPříklad kódu ukazuje, jak v příběhu použít cyklus `{while}`. Nyní si **vymyslete vlastní scénář**, ve kterém musí hráč něco najít, než bude moci pokračovat.\n"
@@ -152,7 +153,7 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## Příkaz ask
+                    ## Příkaz `{ask}`
                     Nyní, když můžeme používat **proměnné** ve svých kódech, už nepotřebujeme příkaz `{echo}`.
                     Můžeme použít proměnné k uložení odpovědí na naše otázky a tímto způsobem můžeme odpověď použít na více otázek ve svých kódech.
                     Podívejte se na to:
@@ -168,7 +169,7 @@ adventures:
                 story_text_2: |
                     ### Cvičení
                     V předchozím panelu jste cvičili nastavování proměnných pomocí příkazu `{is}`.
-                    Vytvořili jste alespoň 3 proměnné a použili je s příkazem print.
+                    Vytvořili jste alespoň 3 proměnné a použili je s příkazem `{print}`.
                     Nyní místo nastavování proměnných chceme, abyste proměnné učinili interaktivními, jak jsme to udělali v našem příkladu.
 
                     Zkopírujte svůj kód z předchozího panelu a učiňte proměnné interaktivními pomocí příkazů `{ask}`.
@@ -178,7 +179,7 @@ adventures:
                 example_code_3: "```\n_ Jak se ti daří?\n_\n```\n"
                 example_code_2: "```\n{print} Ahoj!\n{ask} Jaké je tvé jméno?\n{echo} ahoj\n```\n"
                 example_code: "```\n{print} Ahoj!\n{ask} Jaké je tvé jméno?\n```\n"
-                story_text: "## Příkaz ask\nNyní, když umíte používat příkaz `{print}`, jste připraveni naučit se další příkaz: `{ask}`. Pomocí příkazu `{ask}` můžete položit otázku. Podívejte se na to:\n"
+                story_text: "## Příkaz `{ask}`\nNyní, když umíte používat příkaz `{print}`, jste připraveni naučit se další příkaz: `{ask}`. Pomocí příkazu `{ask}` můžete položit otázku. Podívejte se na to:\n"
                 story_text_3: "### Cvičení\nVyzkoušejte si příkazy `{ask}` a `{echo}`. Nejprve doplňte prázdná místa, aby tento program fungoval.\nPoté položte další 2 otázky pomocí příkazu `{ask}`, po každé `{ask}` použijte `{echo}` pro vypsání odpovědi na obrazovku.\n"
             18:
                 story_text: Poslední změnou, kterou budeme muset provést, abychom získali kód Pythonu, je změna `{ask}` na `{input}`.
@@ -260,7 +261,7 @@ adventures:
             12:
                 story_text: Hedy doteď neumožňovala používat čísla s desetinami jako je 1.5, ale odteď už ano. Pozor, Hedy používá desetinnou tečku `.` namísto desetinné čárky.
 
-                example_code: "```\nburger = 5\nnápoj = 2\ncelkem = hamburger + nápoj\nprint 'Objednali jste si hamburger a nápoj'\nprint 'To stojí ' celkem ' dolarů, prosím'\n```\n"
+                example_code: "```\nburger = 5\nnápoj = 2\ncelkem = burger + nápoj\n{print} 'Objednali jste si hamburger a nápoj'\n{print} 'To stojí ' celkem ' dolarů, prosím'\n```\n"
             13:
                 story_text: Teď se naučíme `and` (česky a) a `or` (nebo)! Když chceš ověřit dvě podmínky, nemusíš k tomu použít dva `if`y, ale stačí ti k tomu `and` a `or`. Pokud použiješ `and`, musí být obě podmínky, napravo i nalevo, pravdivé. S `or` stačí, aby byla pravdivá alespoň jedna z nich.
                 example_code: "```\nuživatelské_jméno = {ask} 'Jaké je vaše uživatelské jméno?'\nheslo = {ask} 'Jaké je vaše heslo?'\n{if} uživatelské_jméno {is} 'Hedy'\n    {if} heslo {is} 'secret'\n        {print} 'Vítejte Hedy!'\n    {else}\n        {print} 'Přístup odepřen'\n{else}\n    {print} 'Přístup zamítnut!'\n```\n"
@@ -310,7 +311,7 @@ adventures:
                 story_text: "kvělá práce! Dosáhl jsi další nové úrovně! V předchozí úrovni jste se naučili používat více řádků kódu v příkazu {if} nebo {repeat}. Zatím však neumíte tyto dva příkazy kombinovat...\nDobrá zpráva! V této úrovni budete moci vložit příkaz {if} dovnitř příkazu {if} nebo dovnitř příkazu {repeat}. Vložení bloku kódu do jiného bloku kódu se nazývá vnořování.                     ``` Vložení bloku kódu do jiného bloku kódu se nazývá vnořování.\n"
                 example_code: "```\nanswer = {ask} 'Jste připraveni naučit se něco nového?'\n{if} odpověď {is} ano\n    {print} 'Skvělé! Můžete se naučit používat příkaz repeat v příkazu if!'\n    {print} 'Hurá!'\n    {print} 'Hurá!'\n    {print} 'Hurá!'\n{else}\n    {print} 'Možná by sis měl ještě trochu procvičit předchozí úroveň.'\n"
             18:
-                story_text: "Gratulujeme! Dosáhli jste poslední úrovně hry Hedy! Kód, který jste zde vytvořili, můžete zkopírovat do skutečných prostředí Pythonu, jako je replit nebo PyCharm, a pokračovat v učení tam!\nUpozorňujeme však, že Python umí číst pouze anglické příkazy, takže pokud jste používali jiné jazyky, budete muset nyní přejít na angličtinu.\n"
+                story_text: "Gratulujeme! Dosáhli jste poslední úrovně hry Hedy! Kód, který jste zde vytvořili, můžete zkopírovat do skutečných prostředí Pythonu, jako je Replit nebo PyCharm, a pokračovat v učení tam!\nUpozorňujeme však, že Python umí číst pouze anglické příkazy, takže pokud jste používali jiné jazyky, budete muset nyní přejít na angličtinu.\n"
         name: Úvod
         default_save_name: úvod
     haunted:
@@ -573,7 +574,7 @@ adventures:
                 story_text: "V této úrovni se naučíte nové příkazy, které ještě více rozšíří váš kód.\n\n### Cvičení 1\nUmístěte příkazy `{and}` a `{or}` na logické místo v programu.\n\n### Cvičení 2\nRozšiřte svou restauraci alespoň o jedno další `{and}` a jedno `{or}`.\nVytvořte například speciální slevový kupón, který se vztahuje pouze na pizzu, nebo dejte zákazníkovi nápoj zdarma.\ns hranolky a palačinkami. Nebo samozřejmě něco úplně jiného!\n"
     rock:
         name: Kámen, nůžky, papír
-        default_save_name: Kámen
+        default_save_name: Kámen 2
         description: Vytvořte si vlastní hru kámen, nůžky, papír
         levels:
             1:
@@ -975,7 +976,7 @@ adventures:
                 example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\njména = Muad Hasan Samira Noura\naktivity = pouštění draka, plavání, turistika, opalování na slunci\n{for} jméno {is} jména\n{print} Na pláži jméno miluje činnost {at} {random}\n```\n"
             16:
                 story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!\nTip: Dbejte na to, abyste na konci viděli své skóre pouze jednou."
-                example_code: "**Upozornění! Tento kód je třeba doladit!**\n```\nzemě = ['Nizozemsko', 'Polsko', 'Turecko', 'Zimbabwe', 'Thajsko', 'Brazílie', 'Peru', 'Austrálie', 'Indie', 'Rumunsko' ]\nhlavní_města = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bukurešť'\nskóre = 0\n{for} i {in} {range} 0 {to} 10\n    odpověď = {ask} 'Jaké je hlavní město ' země[i]\n    správně = hlavní_město[i]\n    {if} odpověď = správně\n        {print} 'Správně!'\n    skóre = skóre + 1\n    {else}\n        {print} 'Špatně,' capitals[i] 'v hlavním městě' countries[i]\n    {print} 'Získali jste ' skóre ' z 10'\n\n```\n"
+                example_code: "**Upozornění! Tento kód je třeba doladit!**\n```\nzemě = ['Nizozemsko', 'Polsko', 'Turecko', 'Zimbabwe', 'Thajsko', 'Brazílie', 'Peru', 'Austrálie', 'Indie', 'Rumunsko' ]\nhlavní_města = 'Amsterdam', 'Varšava' 'Istanbul', 'Harare', 'Bangkok', 'Brasília', 'Lima', 'Canberra', 'Nové Dillí', 'Bukurešť'\nskóre = 0\n{for} i {in} {range} 0 {to} 10\n    odpověď = {ask} 'Jaké je hlavní město ' země[i]\n    správně = hlavní_město[i]\n    {if} odpověď = správně\n        {print} 'Správně!'\n    skóre = skóre + 1\n    {else}\n        {print} 'Špatně,' capitals[i] 'v hlavním městě' countries[i]\n    {print} 'Získali jste ' skóre ' z 10'\n\n```\n"
             17:
                 story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
                 example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{define} objednávka_jídla\n    poleva = {ask} 'feferonky, tuňák, zelenina nebo sýr?'\n    velikost = {ask} 'velký, střední nebo malý?'\n    počet_pizz = {ask} 'Kolik těchto pizz si přejete?'\n\n    {print} 'OBJEDNALI JSTE'\n    {print} počet_pizz ' velikost ' poleva ' pizza'\n\n{define} objednávka_nápojů\n    nápoj = {ask} 'voda, cola, ledová voda, limonáda nebo káva?'\n    počet_nápojů = {ask} 'Kolik těchto nápojů si přejete?'\n\n    {print} 'OBJEDNALI JSTE'\n    {print} počet_nápojů ' ' nápoj\n\n'Vítejte v pizzerii Hedy'\nvíce_jídla = {ask} 'Chcete si objednat pizzu?'\n{while} více_jídla = 'ano'\n    {return} objednávka_jídla\n    více_jídla = {ask} 'Chcete si objednat pizzu?'\nvíce_nápojů = {ask} 'Chcete si objednat nějaké nápoje?'\n{while} více_nápojů == 'ano'\n    {call} objednávka_nápojů\n    více_nápojů == {ask} 'Chcete si objednat další nápoje?'\n\n\n{print} 'Děkujeme za objednávku!'\n```\n"
@@ -1008,7 +1009,7 @@ adventures:
                 example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} Vítejte v bazénu Hedy!\ntřída {is} {ask} 'Přišli jste dnes do třídy?'\n{if} třída ano\n{print} 'Skvělé! Připojujete se ke třídě!\n{print} {else} 'Do třídy se nepřihlásíte'\nsleva {is} 'Máte slevový kód?'\n{if} sleva {is} ano\nsleva_odpověď {is} {ask} 'Jaký je váš slevový kód?'\nslevový_kód = Senior4231, Student8786, NewMember6709\n{if} slevová_odpověď {is} {in} slevové_kódy\n{print} 'To bude 3,50 USD'\n'To bude 5,50 $'\n{print} 'Hezké koupání!'\n```\n"
             6:
                 story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} ' Automat na jídlo a pití'\nvybraný_produkt = {ask} 'Vyberte prosím produkt'\n1_dolar_produkt = cola pomerančový džus voda\n2_dolar_produkty = čokoláda, sušenka, tyčinka museli\n3dolar_prodkty = bramborové lupínky, sušené hovězí maso, banánový chléb\n{if} vybraný {is} {in} 1_dolarové_produkty\ncena = 1\n{if} vybraný_produkt {is} 2_dolarové_produkty\ncena = 2\n{else} vybraný_produkt {in} 3_dolar_produkty\ncena = 3\nmnožství_produktů = '{ask} Kolik ' zvoleného_produktu byste chtěli mít?'\ncelkem = cena + množství_z_produktu\n{print} 'To bude $' cena 'prosím'\n```\n"
+                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} 'Automat na jídlo a pití'\nvybraný_produkt = {ask} 'Vyberte prosím produkt'\n1_dolarové_produkty = cola pomerančový džus voda\n2_dolarové_produkty = čokoláda, sušenka, müsli tyčinka\n3dolarové_prodkty = bramborové lupínky, sušené hovězí maso, banánový chléb\n{if} vybraný {is} {in} 1_dolarové_produkty\ncena = 1\n{if} vybraný_produkt {is} 2_dolarové_produkty\ncena = 2\n{else} vybraný_produkt {in} 3_dolarové_produkty\ncena = 3\nmnožství_produktů = '{ask} Kolik ' zvoleného_produktu byste chtěli mít?'\ncelkem = cena + množství_z_produktu\n{print} 'To bude $' cena 'prosím'\n```\n"
             14:
                 story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
                 example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{define} kalkulace_srdečního_tepu\n    {print} 'Jemně přitiskněte konečky prstů na stranu krku'\n    {print} '(těsně pod čelistí)'\n    {print} 'Počítejte počet tepů, které cítíte, po dobu 15 sekund'\n    tepy == {ask} 'Kolik tepů ucítíte za 15 sekund?'\n    tep_srdce = tepy*4\n    {print} 'Váš srdeční tep je ' tep_srdce\n    {if} tep_srdce >= 60 {or} tep_srdce <= 100\n        {print} 'Váš srdeční tep se zdá být v pořádku'\n    {else}\n{if} tep_srdce > 60\n            {print} 'Váš srdeční tep se zdá být příliš nízký'\n        {if} tep_srdce < 100\n            {print} 'Váš srdeční tep se zdá být příliš vysoký'\n        {print} 'Možná byste měl/a kontaktovat lékaře'\n\nměřit_srdeční_tep = {ask} 'Chcete si nechat změřit srdeční tep?'\n{if} měřit_srdeční_tep = 'ano'\n    {call} měřit_srdeční_tep\n{else}\n    'bez problému'\n```\n"
@@ -1123,7 +1124,7 @@ adventures:
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy je zábava!'\n```\n"
                 story_text: "## Opakujte! Opakuj! Opakujte!\nÚroveň 7 přidává příkaz `{repeat}`.  Příkaz `{repeat}` lze použít k vícenásobnému spuštění jednoho řádku kódu. Například takto:\n\n### Cvičení\nPohrajte si s příkazem `{repeat}`. Dokážete vytvořit píseň Happy Birthday pouze na 3 řádcích kódu místo dosavadních 4?\n"
             9:
-                story_text: "Skvělá práce! Dosáhl jsi další nové úrovně! V předchozí úrovni jste se naučili používat více řádků kódu v příkazu `{if}` nebo `{repeat}`. \nZatím však neumíte tyto dva příkazy kombinovat...\n\nDobrá zpráva! V této úrovni budete moci vkládat `{if}` do `{if}`, `{repeat}` do `{repeat}`příkazu a do sebe navzájem.\nVyzkoušejte si to!\n"
+                story_text: "Skvělá práce! Dosáhl jsi další nové úrovně! V předchozí úrovni jste se naučili používat více řádků kódu v příkazu `{if}` nebo `{repeat}`. \nZatím však neumíte tyto dva příkazy kombinovat...\n\nDobrá zpráva! V této úrovni budete moci vkládat `{if}` do `{if}`, `{repeat}` do `{repeat}` příkazu a do sebe navzájem.\nVyzkoušejte si to!\n"
                 example_code: "```\n{repeat} 3 {times}\n    order = {ask} 'What would you like to order?'\n    {if} order {is} pizza\n        {print} 'Yammie'\n    {else}\n        {print} 'pizza is better!'\n```\n"
     piggybank:
         description: Spočítejte si své kapesné!
@@ -1149,7 +1150,7 @@ adventures:
         description: hotel
         levels:
             13:
-                story_text: "V předchozím dobrodružství jste se naučili používat argument ve funkci a naučili jste se ho kombinovat s {ask}.\nMožná jste se divili, proč byste měli používat funkce, protože funkce v příkladu tvořily pouze jeden řádek kódu.\nNyní si ukážeme, jak vypadá větší funkce, a budeme nyní používat i více agrumentů. Uvidíte, o kolik je lepší používat funkce, jakmile se funkce zvětší.\nZde je příklad funkce s argumenty v kombinaci s příkazy {ask}.\n"
+                story_text: "V předchozím dobrodružství jste se naučili používat argument ve funkci a naučili jste se ho kombinovat s {ask}.\nMožná jste se divili, proč byste měli používat funkce, protože funkce v příkladu tvořily pouze jeden řádek kódu.\nNyní si ukážeme, jak vypadá větší funkce, a budeme nyní používat i více argumentů. Uvidíte, o kolik je lepší používat funkce, jakmile se funkce zvětší.\nZde je příklad funkce s argumenty v kombinaci s příkazy {ask}.\n"
                 example_code: "```\n{define} welcome_message {with} title, last_name, country, room_number\n    {print} 'Welcome to Hotel Hedy, ' title ' ' last_name\n    nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'\n    {if} nice_trip {is} 'yes'\n        {print} 'Lovely!'\n    {else}\n        {print} 'Sorry to hear that.'\n        {print} 'Hopefully you can take a nice rest in you room.'\n    {print} 'Your room number is ' room_number\n\n{print} 'Hello. Please fill in your information to check in.'\ntitle = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'\nname = {ask} 'What is you last name?'\nhomecountry = {ask} 'What country do you come from?'\n\n{call} welcome_message {with} title, name, homecountry, 105\n```\n\ntitle = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'\nname = {ask} 'What is you last name?'\nhomecountry = {ask} 'What country do you come from?'\n\n{call} welcome_message {with} title, name, homecountry, 105\n"
     quotation_marks:
         levels:
@@ -1176,7 +1177,7 @@ adventures:
             1:
                 example_code: "```\n{print} Ahoj, programátore!\n{print} Vítejte v Hedy!\n```\n"
                 example_code_2: "```\n_ Ahoj!\n```\n"
-                story_text: "## Příkaz print\nPomocí příkazu `{print}` můžete vytisknout text na obrazovku.\n"
+                story_text: "## Příkaz `{print}`\nPomocí příkazu `{print}` můžete vytisknout text na obrazovku.\n"
                 story_text_2: "### Cvičení\nV Hedy najdete cvičení v každém dobrodružství. Cvičení vám umožní procvičit si nové příkazy a koncepty a umožní vám dodat příkladům kódů vlastní nádech.\nV tomto cvičení uvidíte růžové prázdné místo. Než bude možné kód spustit, musíte místo prázdného místa něco vyplnit.\n\nDo prázdného místa vyplňte příkaz `{print}` a poté přidejte dalších pět řádků kódu. Každý řádek musí začínat příkazem `{print}`.\nBavte se!\n"
             18:
                 example_code_2: "```\nteplota = 25\n{print} ('To je ', teplota, ' stupňů')\n```\n```\njméno = 'Hedy'\n{print} ('Mé jméno je ', jméno)\n```\n"
@@ -1191,7 +1192,7 @@ adventures:
         description: Uhádni číslo
         levels:
             17:
-                example_code: "```\ntisknout ' Kat!'\n\n# Nastavte proměnné\nodpověď = []\nhádané_písmena = _\nudělané_chyby = _\nmnožství_písmen = {ask}_\n_ = 'False'\n\n# Výběr odpovědi\n{for}_\n    písmeno = {ask}'Hráči 1, co je písmeno ' i '?'\n    _\n    {add}'_' {to}_\n\n# Hráč 2 je na řadě\nprint _\nvytisknout _\ntisknout hádané_písmeno\n```\n"
+                example_code: "```\n{print} 'Kat!'\n\n# Nastavte proměnné\nodpověď = []\nhádané_písmena = _\nudělané_chyby = _\nmnožství_písmen = {ask} _\n_ = 'False'\n\n# Výběr odpovědi\n{for} _\n    písmeno = {ask} 'Hráči 1, co je písmeno ' i '?'\n    _\n    {add} '_' {to} _ \n\n# Hráč 2 je na řadě\n{print} _\n{print} _\n{print} hádané_písmena\n```\n"
                 story_text: "V tomto dobrodružství naprogramujeme hru kat. Nejprve si uděláme přípravu, pak hru naprogramujeme a ve třetí části přidáme kresbu s želvou.\n\n### Cvičení\n***Nastavte proměnné*** V této hře na oběšence si hráč 1 vybere odpověď a hráč 2 musí uhodnout písmena v této odpovědi.\nAby počítač znal všechna písmena ve slově, převedeme odpověď na seznam písmen. Stejně postupujeme i u hádání, které provede Hráč 2.\nHru začneme se 2 prázdnými seznamy. Pro proměnnou odpověď jsme vytvořili prázdný seznam. Nyní vytvoříme prázdný seznam také pro hádané_písmena.\nPoté doplníme, kolik bylo uděláno chyb. Na začátku hry by to měla být 0.\nProměnná `amount_letters` nám říká, kolik písmen je v odpovědi. Požádáme hráče 1, aby nám řekl, kolik písmen má jeho slovo.\nNakonec počítači sdělíme, zda hra skončila. Použijeme proměnnou `game_over`a nastavíme ji na `False`.\n\n***Výběr odpovědi*** Chceme, aby hráč 1 mohl vybrat odpověď. Zeptáme se ho tolikrát, kolikrát bude třeba, jaké je další písmeno.\nPak toto písmeno přidáme k odpovědi. Nakonec do seznamu uhodnutých písmen přidáme prázdné _, takže dostaneme tolik _, kolik je písmen v odpovědi.\n\n***Hráč 2 je na řadě***\nŘekněte hráči 2, že je na řadě. Poté řekněte hráči 2, kolik písmen je v odpovědi. Nakonec vypište seznam `guessed_letters`.\n\n***Přejděte k dalšímu dobrodružství*** Nyní, když jsou všechny počáteční proměnné nastaveny, můžeme začít programovat samotnou hru. Podívejte se na další záložku, kde se dozvíte, jak na to!\n"
     hangman_2:
         default_save_name: Kat_2
@@ -1234,7 +1235,7 @@ adventures:
             3:
                 example_code: "```\nanimals {is} dogs, cats, kangaroos\n{print} animals {at} {random}\n```\n"
                 story_text_3: "### Cvičení\nVyzkoušejte si příkaz `{at} {random}` tak, že si vytvoříte vlastní herní show (jako v televizi), kde si vyberete dveře nebo kufr a v něm velkou cenu!\nDokážete to? První řádky jsme již vložili do ukázkového kódu.\n"
-                example_code_3: "```\n{print} Velká herní show!\n{print} Před vámi jsou 3 kufry...\nVybraný {is} {ask} Který kufr si vybereš?\nceny {is} _ kufřík\n_\n```\n"
+                example_code_3: "```\n{print} Velká herní show!\n{print} Před vámi jsou 3 kufry...\nVybraný {is} {ask} Který kufr si vybereš?\nceny {is} _\n_\n```\n"
                 example_code_2: "```\nfood {is} sandwich, slice of pizza, salad, burrito\n{print} I am going to have a food {at} {random} for lunch.\n```\n"
                 story_text: "## Náhodně\nV této úrovni můžete vytvořit seznam pomocí příkazu `{is}`. Můžete nechat počítač, aby z tohoto seznamu vybral náhodnou položku. To provedete příkazem `{at} {random}`.\n"
                 story_text_2: "Příkaz `{at} {random}` můžete použít také ve větě.\n"
@@ -1243,7 +1244,7 @@ adventures:
                 example_code_2: "```\novoce = ['jablko', 'banán', 'třešeň']\n{print} ovoce[random]\n```"
                 story_text: "Budeme vytvářet seznamy způsobem Pythonu, s hranatými závorkami kolem seznamů! Zachováme také uvozovky kolem každé položky, jak jsme se naučili v předchozích úrovních.\nHranaté závorky používáme k upozornění na místo v seznamu. Například: `friends[1]` je první jméno v seznamu přátel, jak vidíte v první části příkladu kódu.\nDruhá část příkladového kódu vám ukáže, že můžeme také porovnat 2 seznamy pomocí proměnné i."
                 example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\n{print} friends[1] ' is the first friend on the list.'\n{print} friends[2] ' is the second friend on the list.'\n{print} friends[3] ' is the third friend on the list.'\n#now we will match 2 lists using the variable i\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} friends[i] 's lucky number is ' lucky_numbers[i]\n```\n"
-        description: představujeme random příkaz
+        description: představujeme {at} {random} příkaz
         name: '{random}'
         default_save_name: random_příkaz
     harry_potter:

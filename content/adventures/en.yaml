@@ -259,7 +259,7 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## Add to
+                    ## {add} {to_list}
                     You can add items to the list with the `{add} {to_list}` command. To add an item to a list you can simply type: `{add} penguin {to_list} animals` or you can use the `{ask}` command like in the example code.
                 example_code: |
                     ```
@@ -269,7 +269,7 @@ adventures:
                     {print} I choose animals {at} {random}
                     ```
                 story_text_2: |
-                    ## Remove from
+                    ## {remove} {from}
                     If you can add items to a list, of course you can also take them off. This is done with the `{remove} {from}` command.
                 example_code_2: |
                     ```
@@ -315,7 +315,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## The ask command
+                    ## The `{ask}` command
                     Now that you can use the `{print}` command, you are ready to learn the next command: `{ask}`. With the `{ask}` command, you can ask a question. Check it out:
                 example_code: |
                     ```
@@ -342,7 +342,7 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ## The ask command
+                    ## The `{ask}` command
                     Now that we can use **variables** in our codes, we no longer need the `{echo}` command.
                     We can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.
                     Check it out:
@@ -358,7 +358,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     In the previous adventure you have practised with setting variables with the `{is}` command.
-                    You have created at least 3 variables and used them with a print command.
+                    You have created at least 3 variables and used them with a `{print}` command.
                     Now, instead of setting the variables we want you to make the variables interactive, like we did in our example.
 
                     Copy your code from the previous adventure and make the variables interactive by using `{ask}` commands.
@@ -400,8 +400,8 @@ adventures:
                     Return the variable `points` at the end of the function.
 
                     ***Test the function***
-                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
-                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next adventure!
+                    Test if your function is working properly. Finish the first `{print}` command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
+                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on to the next adventure!
                 example_code: |
                     ```
                     {print} 'BLACKJACK'
@@ -439,7 +439,7 @@ adventures:
                     In the previous adventure you've started a list of variables and created a function to calculate how many points a card is worth. Copy your code and paste it here. Mind that you don't need the testing part, so if you haven't removed that yet, please do so now.
 
                     ***Add more variables***
-                    You have already set the lists `cards` and `face_cards` and the variable `card_1`. Underneath those variables create 3 more variables: `card_2`, dealer_card_1` and `dealer_card_2`. These variables are all set to a random card from the list of cards.
+                    You have already set the lists `cards` and `face_cards` and the variable `card_1`. Underneath those variables create 3 more variables: `card_2`, `dealer_card_1` and `dealer_card_2`. These variables are all set to a random card from the list of cards.
 
                     ***Add up points***
                     To calculate how many points you have scored we call the function with card 1 and we do it again for card 2. Then we add both these scores together to get your total.
@@ -774,7 +774,7 @@ adventures:
 
                     ### Exercise 3
                     Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
-                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: define calculate_mean_grade with subject.
+                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: {define} calculate_mean_grade {with} subject.
                 example_code: |
                     ```
                     # Use your own code from the previous adventure.
@@ -1057,7 +1057,7 @@ adventures:
                     {print} 'Welcome to our restaurant'
                     people = {ask} 'How many people are in your party tonight?'
                     {for} i {in} {range} 0 {to} people
-                        {call} greet_costumer
+                        {call} greet_customer
                     ```
             13:
                 story_text: |-
@@ -1256,8 +1256,8 @@ adventures:
             2:
                 story_text: |
                     Congratulations! You've reached level 2. Hopefully you've already made some awesome codes!
-                    In the first level you might've notice that the `{echo}` command can only save one bit of information at a time.
-                    For example in the restaurant adventure, you could echo what the costumer wanted to eat, or what they wanted to drink, but not both in one sentence.
+                    In the first level you might have noticed that the `{echo}` command can only save one bit of information at a time.
+                    For example in the restaurant adventure, you could echo what the customer wanted to eat, or what they wanted to drink, but not both in one sentence.
 
                     That changes in level 2. In level 2 you'll learn to work with variables, that allow you to save multiple pieces of information and print them in any place you want.
                     So let's go to the next adventure!
@@ -1393,12 +1393,12 @@ adventures:
                     burger = 5
                     drink = 2
                     total = burger + drink
-                    print 'You have ordered a burger and a drink'
-                    print 'That costs ' total ' dollars please'
+                    {print} 'You have ordered a burger and a drink'
+                    {print} 'That costs ' total ' dollars please'
                     ```
             13:
                 story_text: |
-                    In the previous levels you've learned how to put two `{if}`commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:
+                    In the previous levels you've learned how to put two `{if}` commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:
 
                     In this system you have to give both the correct username and the correct password.
                     In this level you will learn the `{and}` command that will make this code a lot shorter and more understandable!
@@ -1916,7 +1916,7 @@ adventures:
                     In this level you'll learn how to program the game MASH (mansion, apartment, shack, house). In this game you can predict for all the players at once, what their future will look like.
 
                     ### Exercise
-                    Fil in the blanks by using the new command that you've learned this level.
+                    Fill in the blanks by using the new command that you've learned this level.
                 example_code: |
                     ```
                     houses = mansion, apartment, shack, house
@@ -2118,7 +2118,7 @@ adventures:
                     ***Go to the next adventure*** Now that all the starting variables are set, we can start programming the game itself. Check out the next tab to learn how!
                 example_code: |
                     ```
-                    print 'Hangman!'
+                    {print} 'Hangman!'
 
                     # Set the variables
                     answer = []
@@ -2134,9 +2134,9 @@ adventures:
                         {add} '_' {to} _
 
                     # Player 2 turn
-                    print _
-                    print _
-                    print guessed_letters
+                    {print} _
+                    {print} _
+                    {print} guessed_letters
                     ```
     hangman_2:
         name: Hangman 2
@@ -2880,7 +2880,7 @@ adventures:
                     Using the `{repeat}` command can make your codes for melodies a lot shorter!
 
                     ### Exercise
-                    Finish the code for Twinkle Twinkle Little Star by using the `{repeat}`command.
+                    Finish the code for Twinkle Twinkle Little Star by using the `{repeat}` command.
                     Then go back to the songs you've made in the previous levels. Can you shorten those codes too?
                 example_code: |
                     ```
@@ -3314,7 +3314,7 @@ adventures:
                     Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
 
                     ### Exercise
-                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.
+                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and two points deduction for a wrong press.
                     **Extra** Clear the screen after each letter, and show the user how many points they have scored.
                 example_code: |
                     ```
@@ -3335,7 +3335,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## The print command
+                    ## The {print} command
                     You can print text to the screen using the `{print}` command.
                 example_code: |
                     ```
@@ -3472,7 +3472,7 @@ adventures:
     random_command:
         name: '{random}'
         default_save_name: random_command
-        description: introducing at random command
+        description: introducing {at} {random} command
         levels:
             3:
                 story_text: |
@@ -3492,14 +3492,14 @@ adventures:
                     ```
                 story_text_3: |
                     ### Exercise
-                    Try out the `{at} {random}` command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big price!
+                    Try out the `{at} {random}` command by making your own gameshow (like the ones on tv) where you choose a door or suitcase and it contains a big prize!
                     Can you do it? We have already put the first lines into the example code.
                 example_code_3: |
                     ```
                     {print} The big gameshow!
                     {print} There are 3 suitcases in front of you...
                     chosen {is} {ask} Which suitcase do you choose?
-                    prices {is} _
+                    prizes {is} _
                     _
                     ```
             16:
@@ -3626,8 +3626,8 @@ adventures:
                     Copy the example code into your input screen by clicking the yellow button.
                     Firstly, fill in the correct command on the blanks to make to code work properly.
                     Then add at least 4 more lines of code to the restaurant program.
-                    Ask the costumer what they would like to drink and ask if they want to pay with cash or card.
-                    Lastly, think of a nice way to say goodbye to your costumer.
+                    Ask the customer what they would like to drink and ask if they want to pay with cash or card.
+                    Lastly, think of a nice way to say goodbye to your customer.
                 example_code_2: |
                     ```
                     {print} Welcome to Hedy's restaurant 🍟
@@ -3676,7 +3676,7 @@ adventures:
                     ### Exercise
                     Now make your own version of the random restaurant.
                     Make a list of starts, mains, desserts, drinks and prices yourself.
-                    Then use `{print}` and `{at} {random}` commands to tell the costumer what will be on their menu tonight.
+                    Then use `{print}` and `{at} {random}` commands to tell the customer what will be on their menu tonight.
                 example_code_2: |
                     ```
                     {print} Welcome to your own random restaurant!
@@ -3785,7 +3785,7 @@ adventures:
                     {print} 'Enjoy your meal!'
                     ```
             9:
-                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
+                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the customer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy!'
@@ -3891,7 +3891,7 @@ adventures:
                     ```
             15:
                 story_text: |
-                    With the `{while}` you can make sure your costumers can keep adding orders until they are done.
+                    With the `{while}` you can make sure your customers can keep adding orders until they are done.
 
                     ### Exercise
                     Correctly add the `{while}` command to this code.
@@ -4299,7 +4299,7 @@ adventures:
                     ```
                 story_text_2: |
                     This children's song counts down from 5 little monkeys to 1 monkey.
-                    If you copy line 2 - 7 and paste it under the the code, you can sing the whole song!
+                    If you copy line 2 - 7 and paste it under the code, you can sing the whole song!
                 example_code_2: |
                     ```
                     number = 6
@@ -4354,7 +4354,7 @@ adventures:
                 example_code: "```\nfamily = baby, mammy, daddy, grandma, grandpa\n_ _ _ _ \n  {print} _\n```\n"
                 story_text_2: |
                     ### Exercise 2
-                    Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
+                    Print the song Five little monkeys jumping on the bed. Look up the text if you don't remember.
 
                     **Extra** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
                 example_code_2: |

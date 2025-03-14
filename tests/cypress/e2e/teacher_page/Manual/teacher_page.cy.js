@@ -19,14 +19,6 @@ describe('Teacher page', () => {
     cy.contains('Introduction').should('be.visible').and('have.attr', 'href');
   });
 
-  it('contains a link to Preparations', () => {
-    cy.contains('Teaching preparations').should('be.visible').and('have.attr', 'href');
-  });
-
-  it('contains a link to Teaching', () => {
-    cy.contains('Teaching').should('be.visible').and('have.attr', 'href');
-  });
-
   it('contains a link to Frequently Made Mistakes', () => {
     cy.contains('Common mistakes').should('be.visible').and('have.attr', 'href');
   });

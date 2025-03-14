@@ -100,17 +100,20 @@ adventures:
                     ```
             5:
                 story_text: |
-                    Neste nível você pode programar finais diferentes, o que tornará sua história ainda mais divertida.
+                    Neste nível, você pode programar finais diferentes, o que tornará sua história ainda mais divertida.
+                    No código exemplo, você pode ver como fazer 2 finais diferentes.
 
-                    Pense em dois finais para sua história, por exemplo:
+                    ### Exercício 1
+                    Escreva uma nova história curta, com pelo menos 6 linhas de código, sobre um tópico de sua escolha.
+                    Sem inspiração? Escolha um desses tópicos: um super-herói, um dia chato na escola, preso numa ilha deserta.
 
-                    - A princesa está andando pela floresta
-                    - Ela se depara com um monstro
+                    Agora dê ao(à) jogador(a) a opção de escolher entre final feliz ou triste, assim como no código exemplo.
+                    Programe ambos os finais.
 
-                    - Final feliz: ela pega sua espada e o monstro foge rapidamente
-                    - Final triste: O monstro devora a princesa
-
-                    Você também pode garantir que um nome possa ser inserido novamente. Isso funciona exatamente como nos níveis anteriores. Você pode combinar isso com um `{if}`, e então você já fez um programa inteiro!
+                    ### Exercício 2
+                    Copie aqui a história que você criou por conta própria nos níveis anteriores.
+                    Encontre uma maneira de adicionar pelo menos 2 comandos `{if}` e `{else}` à sua história.
+                    Pode ser com uma escolha entre final feliz ou triste, mas você também pode tentar achar outras formas de incorporar os comandos.
                 example_code: |
                     ```
                     nome {is} {ask} 'Quem está andando na floresta?'
@@ -249,7 +252,7 @@ adventures:
                     ```
                 story_text_2: |
                     ## {remove} {from}
-                    Se você pode adicionar itens a uma lista, é claro que você também pode tirar. Isso é feito usando o comando `{remove} {from}`.
+                    Se você pode adicionar itens a uma lista, é claro que você também pode retirá-los. Isso é feito usando o comando `{remove} {from}`.
                 example_code_2: |
                     ```
                     animais {is} cachorro, gato, canguru
@@ -294,7 +297,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## O comando {ask}
+                    ## O comando `{ask}`
                     Agora que você sabe usar o comando `{print}`, você está pronto(a) para aprender o próximo comando: `{ask}`. Com o comando `{ask}`, você pode fazer uma pergunta. Veja:
                 example_code: |
                     ```
@@ -321,12 +324,12 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ## O comando pergunte
+                    ## O comando `{ask}`
                     Agora que podemos usar **variáveis** em nossos códigos, não precisamos mais do comando `{echo}`.
                     Podemos usar variáveis para guardar as respostas às nossas perguntas e, assim, usá-las em diversas outras partes de nossos códigos.
                     Veja:
 
-                    Assim o seu código está ficando interativo!
+                    Assim, o seu código está ficando interativo!
                 example_code: |
                     ```
                     nome {is} {ask} Qual é o seu nome?
@@ -337,7 +340,7 @@ adventures:
                 story_text_2: |
                     ### Exercício
                     Na aventura anterior, você praticou a definição de variáveis com o comando `{is}`.
-                    Você criou pelo menos 3 variáveis e usou elas com um comando de imprimir.
+                    Você criou pelo menos 3 variáveis e usou elas com um comando `{print}`.
                     Agora, ao invés de definir as variáveis, queremos que você as torne interativas, assim como fizemos em nosso exemplo.
 
                     Copie o seu código da aventura anterior e torne as variáveis interativas usando comandos `{ask}`.
@@ -371,7 +374,9 @@ adventures:
                     {print} número_1 ' vezes ' número_2 ' é ' resposta_correta
                     ```
                 story_text_2: |
-                    You can also let the computer do random calculations on its own using {random}.
+                    ### Exercício
+                    A calculadora acima vai calcular a resposta para você, mas você também pode fazer um programa para testar suas próprias habilidades matemáticas, assim:
+                    Preencha as lacunas para completar o programa!
                 example_code_2: |
                     ```
                     resposta_correta = 11 * 27
@@ -573,6 +578,7 @@ adventures:
                 story_text: |-
                     ### Exercício
                     Depure este código. Boa sorte!
+                example_code: "**Atenção! Este código precisa ser depurado!**\n```\n{print} 'Máquina de venda automática'\nproduto_escolhido = {ask} 'Por favor, selecione um produto'\nprodutos_de_1_real = coca suco de laranja água\nprodutos_de_2_reais = chocolate, biscoito, barra de cereal\nprodutos_de_3reais = batata frita, carne seca, pão de banana\n{if} escolhido {is} {in} produtos_de_1_real\npreço = 1\n{if} produto_escolhido {is} produtos_de_2_reais\npreço = 2\n{else} produto_escolhido {in} produtos_de_3_reais\npreço = 3\nquantidade_de_produtos = '{ask} De quantos ' produto_escolhido você gostaria?'\ntotal = preço + quantidade_de_produto\n{print} 'Vai custar R$' preço, 'por gentileza'\n```\n"
             7:
                 story_text: |-
                     ### Exercício
@@ -910,6 +916,7 @@ adventures:
                     Parabéns! Você chegou ao nível 2. Você provavelmente já fez alguns códigos incríveis!
                     No primeiro nível, você pode ter notado que o comando `{echo}` só pode salvar um pouco de informação de cada vez.
                     Por exemplo, na aventura no restaurante, você podia ecoar o que o cliente queria comer, ou o que ele queria beber, mas não os dois em uma mesma frase.
+
                     Isso muda no nível 2. Agora, você vai aprender a trabalhar com variáveis, que lhe permitem salvar múltiplos pedaços de informações e imprimi-los onde você quiser.
                     Então vamos para a próxima aventura!
                 example_code: |
@@ -1041,11 +1048,12 @@ adventures:
                     A partir deste nível, você pode usar números decimais.
                 example_code: |
                     ```
-                    {print} 'Dois e meio mais dois e meio é...'
-                    {print} 2.5 + 2.5
+                    hambúrguer = 5
+                    bebida = 2
+                    total = hambúrguer + bebida
+                    {print} 'Você pediu um hambúrguer e uma bebida'
+                    {print} 'Vai custar ' total ' reais, por gentileza'
                     ```
-
-                    {print} 2.5 + 2.5
             13:
                 story_text: |
                     Nos níveis anteriores, você aprendeu a colocar dois comandos `{if}` um dentro do outro. Funciona bem, mas também resulta em códigos longos e desajeitados como este:
@@ -1127,8 +1135,8 @@ adventures:
                     Confira!
             18:
                 story_text: |
-                    Chegamos ao código Python real! Isso significa que precisamos usar parênteses com {print} e {range} de agora em diante.
-                    {print}('Meu nome é ', nome)
+                    Parabéns! Você chegou ao último nível da Hedy! O código que você criou aqui pode ser copiado para ambientes reais de Python, como Replit ou PyCharm, e você pode continuar aprendendo lá!
+                    Note, porém, que o Python só consegue ler comandos em Inglês, então se você usava outro idioma, terá de mudar os comandos para Inglês agora.
         default_save_name: introdução
     dice:
         name: Dado
@@ -1226,14 +1234,17 @@ adventures:
                 story_text: |
                     Você sempre discorda em casa sobre quem deve lavar a louça ou trocar a caixa de areia hoje?
                     Então você pode deixar o computador escolher de forma muito justa. Você pode programar isso neste nível!
-                    Você primeiro faz uma lista dos membros de sua família. Em seguida, escolha '{at} {random}' na lista.
                 example_code: |
                     ```
                     pessoas {is} mãe, pai, Eva, Sofia
                     {print} pessoas {at} {random} é quem vai lavar a louça
                     ```
                 story_text_2: |
-                    Não sente vontade de lavar a louça sozinho? Hackeie o programa para remover seu nome da lista.
+                    ### Exercício
+                    Faça a sua própria versão do programa de lavar louça. Primeiro, faça uma lista dos membros de sua família.
+                    Então, pense em uma tarefa que precisa ser feita e deixe que o computador decida quem terá de fazê-la, usando o comando `{at} {random}`.
+
+                    **Extra** Não está a fim de lavar a louça? Hackeie o programa removendo o seu próprio nome da lista com o comando `{remove}``{from}`.
             4:
                 story_text: |
                     Com as aspas simples você pode deixar seu planejamento de lavagem de louça mais bonito.
@@ -1421,7 +1432,7 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercício
-                    Agora, Hedy só pode responder sim, não ou talvez. Você pode dar a Hedy mais opções de resposta, como 'definitivamente' ou '{ask} novamente'.
+                    No momento, Hedy só pode responder sim, não ou talvez. Você pode dar à Hedy mais opções de resposta, como 'definitivamente' ou 'pergunte novamente'.
             4:
                 story_text: |
                     ### Exercício
@@ -1511,7 +1522,10 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
+                    Nesse nível, você aprenderá a programar o jogo MASH (mansion, apartment, shack, house). Nesse jogo, você pode prever para todos os jogadores ao mesmo tempo como será o futuro deles.
+
+                    ### Exercício
+                    Preencha os espaços em branco usando o novo comando que você aprendeu neste nível.
             12:
                 story_text: |
                     In this level you can make your fortunes multiple words. Like in this example below:
@@ -2609,7 +2623,7 @@ adventures:
                     Se você quiser voltar, você usa o comando `{forward}` mas com um número negativo. Por exemplo, `{forward} -100`
                 story_text_2: |
                     ### Exercise
-                    Este é o início de uma pequena escada. Você pode fazê-la ter 5 passos?
+                    Este é o início de uma pequena escada. Você pode fazê-la ter 5 degraus?
             2:
                 story_text: |
                     Neste nível você pode usar variáveis para tornar a tartaruga interativa. Por exemplo, você pode perguntar ao jogador quantos passos a tartaruga deve dar.
