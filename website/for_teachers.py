@@ -34,7 +34,6 @@ from .database import Database
 from .auth_pages import AuthModule
 from .website_module import WebsiteModule, route
 from website.frontend_types import halve_adventure_content
-from .classes import MiscClassPages
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
