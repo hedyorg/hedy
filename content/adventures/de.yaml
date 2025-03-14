@@ -93,7 +93,7 @@ adventures:
 
                     ### Übung 2
                     Gehe zurück zum vorherigen Level und kopiere deinen Geschichte-Code. Bringe den Code in diesem Level zum Laufen, indem du Anführungszeichen an den richtigen Stellen einfügst.
-                    Beachte: Die Variablen in deiner eigenen Geschichte sollten ausserhalb der Anführungszeichen stehen. So wie in der zweiten Zeile des Beispielcodes. In dieser Zeile wird der Variablenname ausserhalb der Anführungszeichen gesetzt.
+                    Beachte: Die Variablen in deiner eigenen Geschichte sollten außerhalb der Anführungszeichen stehen. So wie in der zweiten Zeile des Beispielcodes. In dieser Zeile wird der Variablenname außerhalb der Anführungszeichen gesetzt.
                 example_code: |
                     ```
                     Name {is} {ask} _ Was ist dein Name? _
@@ -269,7 +269,7 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## Hinzufügen zu
+                    ## {add} {to_list}
                     Du kannst einer Liste mit dem Befehl `{add} {to_list}` Elemente hinzufügen. Um ein Element zu einer Liste hinzuzufügen, kannst du einfach Folgendes eingeben: `{add} penguin {to_list} animals` oder du kannst den Befehl `{ask}` wie im Beispielcode verwenden.
                 example_code: |
                     ```
@@ -279,7 +279,7 @@ adventures:
                     {print} Ich habe tiere {at} {random} gewählt
                     ```
                 story_text_2: |
-                    ## Entfernen von
+                    ## {remove} {from}
                     Wenn man Elemente zu einer Liste hinzufügen kann, kann man diese natürlich auch wieder entfernen. Dies geschieht mit dem Befehl `{remove} {from}`.
                 example_code_2: |
                     ```
