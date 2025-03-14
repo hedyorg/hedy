@@ -1,4 +1,5 @@
 from flask import session, request, make_response
+from website.database import Database
 from website.flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib
@@ -521,3 +522,16 @@ def remove_class_preview():
         del session["preview_class"]
     except KeyError:
         pass
+
+def get_class_invites(db: Database, class_id: str):
+    invites = []
+    for invite in db.get_class_invitations(class_id):
+        invites.append(
+            {
+                "username": invite["username"],
+                "invited_as_text": invite["invited_as_text"],
+                "timestamp": localized_date_format(invite["timestamp"], short_format=True),
+                "expire_timestamp": localized_date_format(invite["ttl"], short_format=True),
+            }
+        )
+    return invites

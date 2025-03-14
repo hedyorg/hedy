@@ -297,7 +297,7 @@ class MiscClassPages(WebsiteModule):
 
     @route("/invite", methods=["POST"])
     @requires_teacher
-    def invite_student(self, user):
+    def invite_users(self, user):
         if not isinstance(request.form.getlist('usernames'), list):
             return make_response(gettext("username_invalid"), 400)
         if not isinstance(request.form.get('class_id'), str):
@@ -327,17 +327,7 @@ class MiscClassPages(WebsiteModule):
             }
             self.db.add_class_invite(data)
 
-        invites = []
-        for invite in self.db.get_class_invitations(Class["id"]):
-            invites.append(
-                {
-                    "username": invite["username"],
-                    "invited_as_text": invite["invited_as_text"],
-                    "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True),
-                    "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
-                }
-            )
-
+        invites = utils.get_class_invites(db=self.db, class_id=Class["id"])
         return render_partial(
             "htmx-invite-list.html",
             invites=invites,
@@ -348,6 +338,9 @@ class MiscClassPages(WebsiteModule):
     @route("/invite-second-teacher", methods=["POST"])
     @requires_teacher
     def invite_second_teacher(self, user):
+        """
+        Used to invite second teachers to a class after duplicating it.
+        """
         teacher = user
         body = request.json
         # Validations

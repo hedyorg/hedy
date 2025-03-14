@@ -33,7 +33,7 @@ from .database import Database
 from .auth_pages import AuthModule
 from .website_module import WebsiteModule, route
 from website.frontend_types import halve_adventure_content
-
+from .classes import MiscClassPages
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
@@ -223,16 +223,7 @@ class ForTeachersModule(WebsiteModule):
         session['class_id'] = class_id
 
         students = Class.get("students", [])
-        invites = []
-        for invite in self.db.get_class_invitations(Class["id"]):
-            invites.append(
-                {
-                    "username": invite["username"],
-                    "invited_as_text": invite["invited_as_text"],
-                    "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True),
-                    "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
-                }
-            )
+        invites = utils.get_class_invites(class_id=class_id)
         level = Class.get('last_viewed_level', 1)
         student_overview_table, _, class_adventures_formatted, \
             _, student_adventures, graph_students, students_info = self.get_grid_info(user, class_id, level)
