@@ -1042,7 +1042,6 @@ class ForTeachersModule(WebsiteModule):
         if migrate_customizations:
             parsons_hidden = False
             quizzes_hidden = False
-            self.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
             if customizations:
                 parsons_hidden = (
                     "other_settings" in customizations
@@ -1096,6 +1095,7 @@ class ForTeachersModule(WebsiteModule):
                     "quiz_parsons_tabs_migrated": True,
                 }
                 self.db.update_class_customizations(customizations)
+            self.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
 
         for level, sorted_adventures in customizations['sorted_adventures'].items():
             for adventure in sorted_adventures:
@@ -1778,7 +1778,7 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         customizations, _, _, _, _ = self.get_class_info(
-            user, class_id)
+            user, class_id, migrate_customizations=True)
 
         is_teacher_adventure = True
 
