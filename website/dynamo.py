@@ -1592,11 +1592,11 @@ class NotContains(DynamoCondition):
         self.item = item
 
     def to_dynamo_expression(self, field_name):
-        return f"not (contains(#{field_name}, :{field_name}_prefix))"
+        return f"not (contains(#{field_name}, :{field_name}_field))"
 
     def to_dynamo_values(self, field_name):
         return {
-            f":{field_name}_prefix": DDB_SERIALIZER.serialize(self.item)
+            f":{field_name}_field": DDB_SERIALIZER.serialize(self.item)
         }
 
     def matches(self, value):
