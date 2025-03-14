@@ -9,7 +9,6 @@ import { autoSave } from './autosave';
 import { HedySelect } from './custom-elements';
 import { Chart } from 'chart.js';
 import { setLoadingVisibility } from './loading';
-// import { postJson } from './comm';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -960,7 +959,7 @@ export function invite_to_class(class_id: string, prompt: string, type: "student
   const input = document.getElementById('modal_search_input')
   let vals = {'class_id': class_id, 'user_type': type}
   input?.setAttribute('hx-vals', JSON.stringify(vals))
-  modal.search(prompt, send_invitations, ()=>{}, [type, is_second_teacher]);
+  modal.search(prompt, send_invitations, [type, is_second_teacher]);
 }
 
 export function add_user_to_invite_list(username: string, button: HTMLButtonElement) {
