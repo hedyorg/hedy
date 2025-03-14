@@ -1,5 +1,4 @@
 from flask import session, request, make_response
-from website.database import Database
 from website.flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib
@@ -523,7 +522,7 @@ def remove_class_preview():
     except KeyError:
         pass
 
-def get_class_invites(db: Database, class_id: str):
+def get_class_invites(db, class_id: str):
     invites = []
     for invite in db.get_class_invitations(class_id):
         invites.append(
