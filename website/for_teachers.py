@@ -769,7 +769,7 @@ class ForTeachersModule(WebsiteModule):
             is_redesign_enabled=utils.is_redesign_enabled(),
             custom_adventures=list(dict.fromkeys(
                 [item for sublist in available_adventures.values() for item in sublist if item.is_teacher_adventure])),
-            adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+            adventures_default_order=hedy_content.adventures_order_per_level(),
             current_page="for-teachers",
             min_level=min_level,
             class_id=class_id,
@@ -829,7 +829,7 @@ class ForTeachersModule(WebsiteModule):
                               adventures=adventures,
                               max_level=hedy.HEDY_MAX_LEVEL,
                               adventure_names=adventure_names,
-                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              adventures_default_order=hedy_content.adventures_order_per_level(),
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
@@ -898,7 +898,7 @@ class ForTeachersModule(WebsiteModule):
                               adventures=adventures,
                               max_level=hedy.HEDY_MAX_LEVEL,
                               adventure_names=adventure_names,
-                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              adventures_default_order=hedy_content.adventures_order_per_level(),
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
@@ -936,7 +936,7 @@ class ForTeachersModule(WebsiteModule):
                               adventures=adventures,
                               max_level=hedy.HEDY_MAX_LEVEL,
                               adventure_names=adventure_names,
-                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              adventures_default_order=hedy_content.adventures_order_per_level(),
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
@@ -979,7 +979,7 @@ class ForTeachersModule(WebsiteModule):
                               adventures=adventures,
                               max_level=hedy.HEDY_MAX_LEVEL,
                               adventure_names=adventure_names,
-                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              adventures_default_order=hedy_content.adventures_order_per_level(),
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
@@ -993,8 +993,8 @@ class ForTeachersModule(WebsiteModule):
                 parson_in_level = "parsons" in last_two_adv_names
                 quiz_in_level = "quiz" in last_two_adv_names
                 # In some levels, we don't need quiz/parsons
-                level_accepts_parsons = "parsons" in hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
-                level_accepts_quiz = "quiz" in hedy_content.ADVENTURE_ORDER_PER_LEVEL[int(level)]
+                level_accepts_parsons = "parsons" in hedy_content.adventures_order_per_level()[int(level)]
+                level_accepts_quiz = "quiz" in hedy_content.adventures_order_per_level()[int(level)]
                 if not parson_in_level and not parsons_hidden and level_accepts_parsons:
                     sorted_adventures.append(
                         {"name": "parsons", "from_teacher": False})
@@ -1179,7 +1179,7 @@ class ForTeachersModule(WebsiteModule):
         db_adventures = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
         adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
 
-        for lvl, default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+        for lvl, default_adventures in hedy_content.adventures_order_per_level().items():
             for adventure in default_adventures:
                 db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})
                 sorted_adventure = SortedAdventure(short_name=adventure,
@@ -1212,7 +1212,7 @@ class ForTeachersModule(WebsiteModule):
                               adventures=adventures,
                               max_level=hedy.HEDY_MAX_LEVEL,
                               adventure_names=adventure_names,
-                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              adventures_default_order=hedy_content.adventures_order_per_level(),
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
@@ -1234,7 +1234,7 @@ class ForTeachersModule(WebsiteModule):
 
         db_adventures = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
         adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
-        for lvl, default_adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+        for lvl, default_adventures in hedy_content.adventures_order_per_level().items():
             for adventure in default_adventures:
                 db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})
                 sorted_adventure = SortedAdventure(short_name=adventure,
@@ -1253,7 +1253,7 @@ class ForTeachersModule(WebsiteModule):
                               adventures=adventures,
                               max_level=hedy.HEDY_MAX_LEVEL,
                               adventure_names=adventure_names,
-                              adventures_default_order=hedy_content.ADVENTURE_ORDER_PER_LEVEL,
+                              adventures_default_order=hedy_content.adventures_order_per_level(),
                               available_adventures=available_adventures,
                               class_id=session['class_id'])
 
@@ -1865,7 +1865,7 @@ def _create_customizations(db, class_id):
         customizations (dict): The customizations for the class.
     """
     sorted_adventures = {}
-    for lvl, adventures in hedy_content.ADVENTURE_ORDER_PER_LEVEL.items():
+    for lvl, adventures in hedy_content.adventures_order_per_level().items():
         sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
     customizations = {
         "id": class_id,

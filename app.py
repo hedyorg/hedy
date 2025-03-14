@@ -40,7 +40,7 @@ from hedy_error import get_error_text
 from safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
-from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
+from hedy_content import (adventures_order_per_level, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES, HOUR_OF_CODE_ADVENTURES)
 
 from logging_config import LOGGING_CONFIG
@@ -228,7 +228,7 @@ def load_all_adventures_for_index(customizations, subset=None):
                 'is_command_adventure': short_name in KEYWORDS_ADVENTURES
             })
     for level, adventures in all_adventures.items():
-        adventures_order = ADVENTURE_ORDER_PER_LEVEL.get(level, [])
+        adventures_order = adventures_order_per_level().get(level, [])
         index_map = {v: i for i, v in enumerate(adventures_order)}
         adventures.sort(key=lambda pair: index_map.get(
             pair['short_name'],
@@ -302,7 +302,7 @@ def load_adventures_for_level(level, subset=None):
             default_save_name = adventure['name']
 
         # only add adventures that have been added to the adventure list of this level
-        if short_name in ADVENTURE_ORDER_PER_LEVEL.get(level, []):
+        if short_name in adventures_order_per_level().get(level, []):
             current_adventure = Adventure(
                 short_name=short_name,
                 name=adventure['name'],
@@ -317,7 +317,7 @@ def load_adventures_for_level(level, subset=None):
             all_adventures.append(current_adventure)
 
     # Sort the adventures based on the default ordering
-    adventures_order = ADVENTURE_ORDER_PER_LEVEL.get(level, [])
+    adventures_order = adventures_order_per_level().get(level, [])
     index_map = {v: i for i, v in enumerate(adventures_order)}
     all_adventures.sort(key=lambda pair: index_map.get(
         pair['short_name'],
