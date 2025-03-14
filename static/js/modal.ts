@@ -162,8 +162,7 @@ class Modal {
     });
   }
 
-  public search(message: string, confirmCb: (...args: any[]) => void, declineCb: () => void = function(){}, args: any[]) {
-    console.log(message, confirmCb, declineCb)
+  public search(message: string, confirmCb: (...args: any[]) => void, args: any[]) {
     this.hide();
     $('#modal_search_text').text(message);
     this.show();
