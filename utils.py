@@ -522,6 +522,7 @@ def remove_class_preview():
     except KeyError:
         pass
 
+
 def get_class_invites(db, class_id: str):
     invites = []
     for invite in db.get_class_invitations(class_id):
