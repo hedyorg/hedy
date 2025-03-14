@@ -85,6 +85,15 @@ export async function turn_into_teacher_account() {
   });
 }
 
+export async function subscribe_to_newsletter() {
+  tryCatchPopup(async () => {
+    const response = await postJson('/auth/subscribe-to-newsletter');
+    modal.notifySuccess(response.message);
+    $('#subscribe_panel').hide();
+    $('#subscribed_panel').show();
+  });
+}
+
 // *** User forms ***
 
 export function initializeFormSubmits() {
