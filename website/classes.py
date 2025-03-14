@@ -284,7 +284,7 @@ class MiscClassPages(WebsiteModule):
         user_type = request.args.get('user_type')
         class_id = request.args.get('class_id')
         if search == '':
-            return render_template('modal/htmx_search_results_list.html', usernames=[])
+            return render_template('modal/htmx-search-results-list.html', usernames=[])
         if user_type == 'student':
             results = g_db().get_student_that_starts_with(search)
         elif user_type == 'second_teacher':
@@ -293,7 +293,7 @@ class MiscClassPages(WebsiteModule):
             results = []
         usernames = [record['username'] for record in results if record['username'] != user['username']]
         usernames = sorted(usernames)
-        return render_template('modal/htmx_search_results_list.html', usernames=usernames)
+        return render_template('modal/htmx-search-results-list.html', usernames=usernames)
 
     @route("/invite", methods=["POST"])
     @requires_teacher
