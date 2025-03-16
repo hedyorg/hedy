@@ -1877,6 +1877,7 @@ class ConvertToPython_1(ConvertToPython):
             return self.make_play('C4', meta)
 
         note = self.unpack(args[0]).upper()  # will we also support multiple notes at once?
+        note = note.replace("H", "B")
         return self.make_play(note, meta)
 
     def comment(self, meta, args):
@@ -2089,6 +2090,7 @@ class ConvertToPython_2(ConvertToPython_1):
             return self.make_play('C4', meta)
 
         note = escape_var(self.unpack(args[0]))
+        note = note.upper().replace("H", "B")
         if present_in_notes_mapping(note):  # this is a supported note
             return self.make_play(note.upper(), meta)
 
