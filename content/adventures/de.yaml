@@ -2255,7 +2255,7 @@ adventures:
                             richtige_tür = türen {at} {random}
                             monster = monsters {at} {random}
                             gewählte_tür = {ask} 'Welche Tür nimmst du?'
-                            {if}richtige_tür == gewählte_tür
+                            {if} richtige_tür == gewählte_tür
                                 {print} 'Du hast die richtige Tür gewählt'
                             {else}
                                 {print} 'Du siehst...' monster
