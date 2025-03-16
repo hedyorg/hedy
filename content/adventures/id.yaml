@@ -6,20 +6,20 @@ adventures:
         levels:
             1:
                 story_text: |
-                    Pada level 1 kamu dapat membuat cerita dengan karakter utama yang kamu tuliskan sendiri.
+                    Pada level 1, kamu dapat membuat cerita dengan karakter utama berbeda dari apa yang telah kamu masukkan.
 
-                    Sebagai baris pertama, gunakan kode berikut:
+                    Di baris pertama, gunakan `{ask}` dan tanya siapa yang akan menjadi karakter utama
 
-                    ```
-                    ask siapakah karakter utama di cerita kamu?
-                    ```
-
-                    Setelah baris pertama, mulai dengan `print` jika sebuah kalimat perlu ditampilkan.
-                    Kamu bisa menggunakan `echo` jika kamu mau nama karakter utamamu muncul diakhir kalimat.
-                example_code: "```\nask Karakter utama dalam cerita ini adalah\nprint Karakter utama ini sekarang akan berjalan di dalam hutan\necho Dia sedikit ketakutan, si \nprint Dia mendengar bunyi-bunyi menyeramkan dari sekitar\nprint Dia takut kalau hutan tersebut berhantu\n```\n"
+                    Setelah baris pertama, lanjut dengan`{print}`jika kalimat perlu untuk di cetak.
+                    Kamu juga dapat menggunakan`{echo}`apabila kamu ingin karakter utama mu berada di akhir kalimat.
+                example_code: "```\n{ask} Karakter utama dari cerita ini yaitu\n{print} Karakter utama akan berjalan menuju kedalam hutan\n{echo} Mereka sedikit ketakutan,\n{print} Mereka mendengar suara aneh dimana-mana\n{print} Mereka takut jika ternyata ini adalah hutan berhantu\n```\n"
                 story_text_2: |
-                    ### Exercise
-                    Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
+                    ### latihan
+                    Sekarang buatlah ceritamu sendiri yang terdiri dari 6 baris kode.
+                    Ceritanya tidak boleh sama dengan contoh cerita sebelumnya.
+                    Setidaknya gunakan minimal satu perintah`{ask}` dan`{echo}`
+                    Kamu dapat membuat topik yang kamu inginkan
+                    Kalau kamu tidak dapat menentukan topik, gunakan salah satu dari pilihan ini: pergi menonton film, melihat pertandingan olahraga, atau hari mengunjungi kebun binatang
             2:
                 story_text: |-
                     Pada level 2, kamu dapat membuat ceritanya lebih menyenangkan. Karakter utama kamu sekarang dapat muncul dimanapun pada kalimat-kalimatnya.
@@ -27,13 +27,14 @@ adventures:
                     Kamu dapat memiliki program yang lebih baik dari itu. Tapi kamu harus memberi nama karakter utama kamu terlebih dahulu.
 
                     Kamu lalu dapat menuliskan nama tersebut dimanapun pada sebuah kalimat.
-                example_code: |
+                example_code: |-
                     ```
-                    nama is ask Siapa nama karakter utama dalam cerita ini?
-                    print nama sekarang akan berjalan di dalam hutan
-                    print nama sedikit ketakutan
-                    print Dia mendengar bunyi-bunyi menyeramkan dari sekitar
-                    print nama takut kalau hutan tersebut berhantu
+                    Nama {is}{ask} Apa nama dari karakter utama?
+                    {print} sekarang nama akan berlari kedalam hutan
+                    {print} nama sedikit ketakutan
+                    {print} Tiba-tiba, ia mendengar suara aneh...
+                    {sleep}
+                    {print} nama takut jika ternyata hutan ini merupakan hutan berhantu
                     ```
                 story_text_2: |
                     ### Latihan
@@ -70,6 +71,7 @@ adventures:
                     Salin cerita Anda dari level sebelumnya ke level ini.
                     Di level ini Anda telah mempelajari 3 perintah baru `{at} {random}` , `{add} {to_list}` dan `{remove} {from}`.
                     Tambahkan baris kode baru ke cerita Anda, sehingga semua perintah baru ditampilkan setidaknya sekali dalam cerita Anda.
+                example_code: "```\nHewan {is} 🦔, 🐿, 🦉, 🦇\n{print} Sekarang mereka mendengar suara dari hewan {at} {random}\n```\n"
             4:
                 story_text: |
                     ### Latihan
