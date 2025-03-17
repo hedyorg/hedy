@@ -1422,7 +1422,7 @@ class ForTeachersModule(WebsiteModule):
                                   usernames=', '.join(invalid_usernames))
                 return make_response({"error": err}, 400)
 
-            accounts = [(user.lower(), utils.random_id_generator()) for user in lines]
+            accounts = [(user.lower(), utils.random_password_generator()) for user in lines]
         else:
 
             accounts, incorrect_lines = self._extract_account_info(lines, separator)
