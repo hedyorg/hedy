@@ -321,7 +321,6 @@ def random_password_generator(size=6):
     return random_id_generator(size, base_58_chars)
 
 
-
 def markdown_to_html_tags(markdown):
     """
     This function takes a Markdown string and returns a list with each of the HTML elements obtained
