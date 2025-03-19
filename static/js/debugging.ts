@@ -111,18 +111,28 @@ function special_style_for_variable(variable: Variable) {
    return result;
 }
 //hiding certain variables from the list unwanted for users
-function clean_variables(variables: Record<string, Variable>) {
+function clean_variables(variables: Record<string, any>) {
   const new_variables = [];
   const unwanted_variables = ["random", "time", "int_saver", "int_$rw$", "turtle", "t", "chosen_note"];
-  for (const variable in variables) {
-    if (!variable.includes('__') && !unwanted_variables.includes(variable)) {
-      let extraStyle = special_style_for_variable(variables[variable]);
-      let name = unfixReserved(variable);
-      let newTuple = [name, variables[variable].v, extraStyle];
+  for (const variableName in variables) {
+    let variable = extractVariable(variables[variableName])
+    if (!variableName.includes('__') && !unwanted_variables.includes(variableName)) {
+      let extraStyle = special_style_for_variable(variable);
+      let name = unfixReserved(variableName);
+      let newTuple = [name, variable.v, extraStyle];
       new_variables.push(newTuple);
     }
   }
   return new_variables;
+}
+
+function extractVariable(variable: any): Variable {
+  // From level 6 on, we return objects containing localization information, so their structure is no longer { v: '' }
+  if ('$d' in variable && 'entries' in variable['$d'] && 'data' in variable['$d']['entries'] && variable['$d']['entries']['data'][1]) {
+    let value = variable['$d']['entries']['data'][1]
+    return { v: value['v'], tp$name: value['tp$name'] } as Variable;
+  }
+  return variable as Variable;
 }
 
 function unfixReserved(name: string) {
