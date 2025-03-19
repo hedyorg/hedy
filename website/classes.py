@@ -288,9 +288,9 @@ class MiscClassPages(WebsiteModule):
         if search == '':
             return render_template('modal/htmx-search-results-list.html', usernames=[])
         if user_type == 'student':
-            results = g_db().get_student_that_starts_with(search)
+            results = g_db().get_student_that_starts_with(search.lower())
         elif user_type == 'second_teacher':
-            results = g_db().get_teacher_that_starts_with(search, class_id=class_id)
+            results = g_db().get_teacher_that_starts_with(search.lower(), class_id=class_id)
         else:
             results = []
         usernames = [record['username'] for record in results if record['username'] != user['username']]
