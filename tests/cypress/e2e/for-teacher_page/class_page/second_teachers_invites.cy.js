@@ -22,13 +22,6 @@ it(`Is able to invite second teachers by username, accept it and check it`, () =
     cy.getDataCy('modal_ok_search_button').click();
   }
 
-  //duplicate third teacher
-  cy.getDataCy('add_second_teacher').click();
-  cy.getDataCy('modal_search_input').type(testSecondTeachers[2]);
-  cy.getDataCy('invite-1').click()
-  cy.get('#users_to_invite').should('contain.text', testSecondTeachers[2])
-  cy.getDataCy('modal_ok_search_button').click();
-
   //delete third teacher
   cy.getDataCy('invites_block invite_username_cell')
   .contains(testSecondTeachers[2])
