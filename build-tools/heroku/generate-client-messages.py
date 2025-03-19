@@ -33,7 +33,9 @@ ADDITIONAL_GETTEXT_KEYS = [
     'errors',
     'adventures_completed',
     'number_of_errors',
-    'successful_runs'
+    'successful_runs',
+    'invitations_sent',
+    'invite'
 ]
 
 

@@ -32,6 +32,7 @@ class Modal {
     $('#modal_copy').hide();
     $('#modal_repair').hide();
     $('#modal_preview').hide();
+    $('#modal_search').hide();
   }
 
   public hide_alert() {
@@ -159,6 +160,31 @@ class Modal {
       this.hide();
       declineCb();
     });
+  }
+
+  public search(message: string, confirmCb: (...args: any[]) => void, args: any[], confirm_label?: string) {
+    this.hide();
+    $('#modal_search_text').text(message);
+    if (confirm_label) $('#modal_ok_search_button').text(confirm_label)
+    this.show();
+    $('#modal_search').show();
+    $('#modal_ok_search_button').off('click').on('click', () => {
+      this.hide();
+      confirmCb(...args);
+      this.clear_search_boxes();
+    });
+    $('#modal_cancel_search_button').off('click').on('click', () => {
+      this.hide();
+      this.clear_search_boxes();
+    });
+  }
+  
+  private clear_search_boxes() {
+    $('#modal_search_input').val("");
+    const users_to_invite = document.getElementById('users_to_invite');
+    if (users_to_invite) users_to_invite.innerHTML = ''
+    const search_results = document.getElementById('search_results')
+    if (search_results) search_results.innerHTML = ''
   }
 
   public prompt(message: string, defaultValue: string, confirmCb: (x: string) => void) {

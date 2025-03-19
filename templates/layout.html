@@ -115,7 +115,7 @@
     {% endif %}
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
     <div id="modal_mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
-    <div id="modal_content" data-cy="modal_content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
+    <div id="modal_content" data-cy="modal_content" class="hidden w-1/2 fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
        <div id="modal_confirm" data-cy="modal_confirm" class="hidden">
           <div id="modal_confirm_text" data-cy="modal_confirm_text" class="text-white mb-8 text-xl"></div>
           <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
@@ -124,14 +124,38 @@
           </div>
        </div>
        <div id="modal_prompt" class="hidden">
-          <div id="modal_prompt_text" class="text-white mb-8 text-xl"></div>
-          <div class="xm-auto">
-            <input id="modal_prompt_input" data-cy="modal_prompt_input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
-            <div class="mt-4 flex flex-row justify-center">
-                <button id="modal_ok_button" data-cy="modal_ok_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
-                <button id="modal_cancel_button" data-cy="modal_cancel_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
-            </div>
+        <div id="modal_prompt_text" class="text-white mb-8 text-xl"></div>
+        <div class="xm-auto">
+          <input id="modal_prompt_input" data-cy="modal_prompt_input" type="text" class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1">
+          <div class="mt-4 flex flex-row justify-center">
+              <button id="modal_ok_button" data-cy="modal_ok_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
+              <button id="modal_cancel_button" data-cy="modal_cancel_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
           </div>
+        </div>
+       </div>
+       <div id="modal_search" class="hidden">
+          <div id="modal_search_text" class="text-white mb-8 text-xl"></div>
+          <div class="xm-auto">
+            <input id="modal_search_input"
+                   data-cy="modal_search_input"
+                   type="search"
+                   name="search"
+                   class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1"
+                   hx-get="/search"
+                   hx-trigger="input changed delay:500ms, search"
+                   hx-target="#search_results">
+
+              <ul id="users_to_invite" class="grid grid-cols-3 items-center mb-4 list-none">
+  
+              </ul>
+            <ul class="list-none flex flex-col items-center align" id="search_results" hx-on::after-settle="document.getElementById('modal_search_input').focus()">
+
+            </ul>              
+          </div>
+            <div class="mt-4 flex flex-row justify-center">
+                <button id="modal_ok_search_button" data-cy="modal_ok_search_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
+                <button id="modal_cancel_search_button" data-cy="modal_cancel_search_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
+            </div>
        </div>
        <div id="modal_copy" class="hidden">
            <div class="absolute top-2 right-2">
@@ -195,7 +219,7 @@
 
     {% block scripts %}
     <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="{{static('/vendor/htmx-1.8.5.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="{{static('/vendor/htmx-2.0.3.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/idiomorph-0.3.0/idiomorph-ext.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/hyperscript-0.9.8.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
     <script src="{{static('/vendor/js-confetti.browser.js')}}" type="text/javascript" crossorigin="anonymous"></script>
