@@ -2,7 +2,7 @@ adventures:
     story:
         name: Historia
         default_save_name: Historia
-        description: Historia
+        description: Haz una historia breve
         levels:
             1:
                 story_text: |
@@ -261,7 +261,7 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## Añadir a
+                    ## {add}{to_list}
                     Puedes añadir objetos a la lista con el comando `{add} {to_list}`. Para añadir un objeto a una lista puedes escribir: `{add} penguin {to_list} animals` o puedes usar el comando `{ask}` como en el código de ejemplo.
                 example_code: |
                     ```
@@ -271,7 +271,7 @@ adventures:
                     {print} Yo elijo animales {at} {random}
                     ```
                 story_text_2: |
-                    ## Borrar de
+                    ## {remove}{from}
                     Si puedes añadir objetos a una lista, por supuesto que también puedes quitarlos. Esto se hace con el comando `{remove} {from}`.
                 example_code_2: |
                     ```
@@ -316,7 +316,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## El comando preguntar
+                    ## El comando `{ask}`
                     Ahora que puedes usar el comando `{print}`, estás preparado para usar el siguiente comando: `{ask}`. Con el comando `{ask}`, puedes hacer una pregunta. Compruébalo:
                 example_code: |
                     ```
@@ -343,7 +343,7 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ## El comando preguntar
+                    ## El comando `{ask}`
                     Ahora que podemos usar **variables** en nuestros códigos, ya no necesitamos el comando `{echo}`.
                     Podemos usar variables para almacenar las respuestas a nuestras pregunta y de esta manera podemos usar la respuesta a varias preguntas en nuestros códigos.
                     Compruébalo:
@@ -359,7 +359,7 @@ adventures:
                 story_text_2: |
                     ### Ejercicio
                     En la aventura anterior has practicado estableciendo variables con el comando `{is}`.
-                    Has creado al menos 3 variables y las has usado con el comando imprimir.
+                    Has creado al menos 3 variables y las has usado con el comando `{print}`.
                     Ahora, en vez de establecer las variables queremos que hagas las variables interactivas, como hicimos en nuestro ejemplo.
 
                     Copia tu código de la aventura anterior y haz las variables interactivas usando el comando `{ask}`.
@@ -861,7 +861,7 @@ adventures:
                     **¡Atención! ¡Este código necesita ser depurado!**
                     ```
                     pais = ['Países Bajos', 'Polonia', 'Turquía', 'Zimbabwe', 'Tailandia', 'Brasil', 'Perú', 'Australia', 'India', 'Rumanía' ]
-                    capitales = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'Nueva Delhi', 'Bucarest'
+                    capitales = 'Amsterdam', 'Warsaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'Nueva Delhi', 'Bucarest'
                     puntuacion = 0
                     {for} i {in} {range} 0 {to} 10
                         respuesta = {ask} '¿Cuál es la capital de ' paises[i]
@@ -950,7 +950,7 @@ adventures:
             2:
                 story_text: |
                     ¡Enhorabuena! ¡Has alcanzado el nivel 2! ¡Espero que ya hayas hecho algunos códigos increíbles!
-                    Quizás te has dado cuenta en el primer nivel que el comando `{echo}` sólo puede guardar un bit de información cada vez.
+                    Quizás te hayas dado cuenta que en el primer nivel el comando `{echo}` sólo puede guardar un bit de información cada vez.
                     Por ejemplo en la aventura del restaurante, puedes imprimir lo que el cliente quiere comer, o que quiere de beber, pero no ambas en una misma frase.
 
                     Esos cambios en el nivel 2. En el nivel 2 aprenderás a trabajar con variables, que te permiten guardar varias partes de información e imprimirlas donde quieras.
@@ -1087,8 +1087,8 @@ adventures:
                     hamburguesa = 5
                     bebida = 2
                     total = hamburguesa + bebida
-                    imprimir 'Has pedido una hamburguesa y una bebida'
-                    imprimir 'Eso cuesta ' total ' dólares por favor'
+                    {print} 'Has pedido una hamburguesa y una bebida'
+                    {print} 'Eso cuesta ' total ' dólares por favor'
                     ```
             13:
                 story_text: |
@@ -1171,7 +1171,7 @@ adventures:
                     ¡Compruébalo!
             18:
                 story_text: |
-                    ¡Enhorabuena! Has alcanzado el último nivel de Hedy! El código que has creado aquí se puede copiar a entornos reales de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí!
+                    ¡Enhorabuena! Has alcanzado el último nivel de Hedy! El código que has creado aquí se puede copiar a entornos reales de Python como Replit o PyCharm, ¡y puedes continuar aprendiendo allí!
                     Sin embargo ten en cuenta que Python sólo puede leer comando en inglés, así que si has estado usando otros idiomas, ahora los tendrás que cambiar a inglés.
         default_save_name: intro
     dice:
@@ -1405,7 +1405,7 @@ adventures:
                     ```
             18:
                 example_code: "```\n{for} i {in} {range}(1,5):\n    {print} (i)\n```\n"
-                story_text: "Por último, vamos a convertir `{for} i {in} {range} 1 to 5`en código real de Python, como esto:\n"
+                story_text: "Por último, vamos a convertir `{for} i {in} {range} 1 {to} 5` en código real de Python, como esto:\n"
         name: '{for}'
     fortune:
         name: El adivino
@@ -2494,7 +2494,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## El comando imprimir
+                    ## El comando {print}
                     Puedes imprimir texto por pantalla usando el comando `{print}`.
                 example_code: |
                     ```
@@ -2631,7 +2631,7 @@ adventures:
                     ```
     random_command:
         default_save_name: comando_aleatorio
-        description: introducción al comando aleatorio
+        description: introducción del comando {at} {random}
         levels:
             3:
                 story_text: |
@@ -4045,7 +4045,7 @@ adventures:
         description: Intenta acercarte lo más posible a 21
         levels:
             17:
-                story_text: "El Blackjack es un sencillo juego de cartas en el que tienes que acercarte lo más posible a 21 puntos. Tienes dos cartas. Cada carta vale su valor numérico, y las cartas de la cara (Jota, Reina y Rey) valen 10 puntos.\nEl As vale 1 u 11 puntos (puedes elegir). El crupier, tu oponente, también recibe dos cartas.\nSi quieres, puedes coger otra carta, y sus puntos se sumarán a tu total. El repartidor también puede elegir coger otra carta.\nPero ten cuidado de no conseguir más de 21 puntos, porque si lo haces, ¡pierdes!\nEl jugador que se acerque más a 21, sin pasarse, ¡gana!\n\n### Ejercicio\nEn esta aventura codificamos la primera parte de nuestro juego de Blackjack. Crearemos una función para calcular cuántos puntos vale una carta.\n\n***Establezcamos las variables***\nEmpieza haciendo una lista de todas las cartas, del 2 al As. Después haz una lista de las cartas con cara, es decir, Jota, Reina y Rey. Luego elige una carta al azar de la lista de cartas para que sea card_1.\n\n***Crear una función para calcular los puntos***\nCrea una función que calcule cuántos puntos vale una carta.\nTodas las cartas con cara valen 10 puntos, el As vale 11 y todas las demás cartas valen su numeral.\nDevuelve la variable `points` al final de la función.\n\n***Prueba de la función\nPrueba si tu función funciona correctamente. Termina la primera orden de impresión rellenando qué carta has sacado. Luego termina la segunda línea llamando a la función con carta_1.\nEjecuta el código un par de veces. ¿Estás satisfecho con los resultados? ¡Genial! ¡A continuación, puede eliminar la parte de prueba y pasar a la siguiente aventura!\n"
+                story_text: "El Blackjack es un sencillo juego de cartas en el que tienes que acercarte lo más posible a 21 puntos. Tienes dos cartas. Cada carta vale su valor numérico, y las cartas de la cara (Jota, Reina y Rey) valen 10 puntos.\nEl As vale 1 u 11 puntos (puedes elegir). El crupier, tu oponente, también recibe dos cartas.\nSi quieres, puedes coger otra carta, y sus puntos se sumarán a tu total. El repartidor también puede elegir coger otra carta.\nPero ten cuidado de no conseguir más de 21 puntos, porque si lo haces, ¡pierdes!\nEl jugador que se acerque más a 21, sin pasarse, ¡gana!\n\n### Ejercicio\nEn esta aventura codificamos la primera parte de nuestro juego de Blackjack. Crearemos una función para calcular cuántos puntos vale una carta.\n\n***Establezcamos las variables***\nEmpieza haciendo una lista de todas las cartas, del 2 al As. Después haz una lista de las cartas con cara, es decir, Jota, Reina y Rey. Luego elige una carta al azar de la lista de cartas para que sea card_1.\n\n***Crear una función para calcular los puntos***\nCrea una función que calcule cuántos puntos vale una carta.\nTodas las cartas con cara valen 10 puntos, el As vale 11 y todas las demás cartas valen su numeral.\nDevuelve la variable `points` al final de la función.\n\n***Prueba de la función\nPrueba si tu función funciona correctamente. Primero termina el primer comanod `{print}` rellenando qué carta has sacado. Luego termina la segunda línea llamando a la función con carta_1.\nEjecuta el código un par de veces. ¿Estás satisfecho con los resultados? ¡Genial! ¡A continuación, puede eliminar la parte de prueba y pasar a la siguiente aventura!\n"
                 example_code: "```\n{print} 'BLACKJACK'\n\n# Establece estas variables\ncard = _\nface_cards = _\ncard_1 =\n\n# Crea una función para calcular los puntos\n{define} calculate_points {with} card:\n    {if} card {in} face_cards:\n        points = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ points\n\n# Prueba tu función\n{print} 'Tu carta es un ' _\n{print} 'Eso vale ' _ ' puntos'.\n```\n"
     blackjack_2:
         description: Blackjack parte 2
@@ -4053,7 +4053,7 @@ adventures:
         name: Blackjack 2
         levels:
             17:
-                story_text: "# ## Ejercicio\nEn esta aventura codificamos la segunda parte de nuestro juego de Blackjack.\n\n***Pegue su código de la aventura anterior***\nEn la aventura anterior, creaste una lista de variables y una función para calcular cuántos puntos vale una carta. Copia tu código y pégalo aquí. Ten en cuenta que no necesitas la parte de prueba, así que si aún no la has eliminado, hazlo ahora.\n\n***Añadir más variables***\nYa has configurado las listas `cards` y `face_cards` y la variable `card_1` . Debajo de esas variables, crea 3 variables más: `card_2` , dealer_card_1` and ` dealer_card_2`. Todas estas variables están configuradas con una carta aleatoria de la lista de cartas.\n\n***Suma puntos***\nPara calcular cuántos puntos has conseguido, llamamos a la función con la carta 1 y lo repetimos para la carta 2. Después sumamos ambas puntuaciones para obtener el total.\nHaz lo mismo con los puntos del crupier, pero asegúrate de utilizar las cartas del crupier y no las tuyas.\n\n***2 ases***\n¡Lo estás haciendo genial! Casi todas las puntuaciones se pueden calcular ahora. Solo hay una excepción: 2 ases. Si obtienes 2 ases, tu total será 12 puntos y no 22 (¡porque 22 puntos sería una pérdida!). Por supuesto, esto también se aplica al crupier.\n\n***Mostrar la puntuación***\nPor último, debes indicarle al programa qué cartas has sacado y cuántos puntos tiene cada una. Luego, debes mostrarle qué cartas tiene el crupier y cuántos puntos tiene.\n\n***Continúa en la siguiente aventura***\n¡Genial! ¡Has terminado esta parte del juego! Copia tu código y ve a la siguiente aventura para aprender a pedir una carta extra y declarar un ganador.\n"
+                story_text: "# ## Ejercicio\nEn esta aventura codificamos la segunda parte de nuestro juego de Blackjack.\n\n***Pegue su código de la aventura anterior***\nEn la aventura anterior, creaste una lista de variables y una función para calcular cuántos puntos vale una carta. Copia tu código y pégalo aquí. Ten en cuenta que no necesitas la parte de prueba, así que si aún no la has eliminado, hazlo ahora.\n\n***Añadir más variables***\nYa has configurado las listas `cards` y `face_cards` y la variable `card_1` . Debajo de esas variables, crea 3 variables más: `card_2` , `dealer_card_1` y `dealer_card_2`. Todas estas variables están configuradas con una carta aleatoria de la lista de cartas.\n\n***Suma puntos***\nPara calcular cuántos puntos has conseguido, llamamos a la función con la carta 1 y lo repetimos para la carta 2. Después sumamos ambas puntuaciones para obtener el total.\nHaz lo mismo con los puntos del crupier, pero asegúrate de utilizar las cartas del crupier y no las tuyas.\n\n***2 ases***\n¡Lo estás haciendo genial! Casi todas las puntuaciones se pueden calcular ahora. Solo hay una excepción: 2 ases. Si obtienes 2 ases, tu total será 12 puntos y no 22 (¡porque 22 puntos sería una pérdida!). Por supuesto, esto también se aplica al crupier.\n\n***Mostrar la puntuación***\nPor último, debes indicarle al programa qué cartas has sacado y cuántos puntos tiene cada una. Luego, debes mostrarle qué cartas tiene el crupier y cuántos puntos tiene.\n\n***Continúa en la siguiente aventura***\n¡Genial! ¡Has terminado esta parte del juego! Copia tu código y ve a la siguiente aventura para aprender a pedir una carta extra y declarar un ganador.\n"
                 example_code: "```\n# Pega tu código de la aventura anterior aquí\n\n#Añade estas variables a la lista de variables\ncarta_2 = _\ncrupier_carta_1 = _\ncrupier_carta_2 = _\n\n# Sumar tus puntos\ntus_puntos_1 = {call} _ {with} carta_1\ntus_puntos_2 = _\ntu_total = _\n\n# Sumar los puntos del crupier\ncrupier_puntos_1 = _\n_\n_\n\n# 2 Ases\n{if} carta_1 == 'As' {and} _\n    tu_total = 12\n{if} crupier_carta_1 _\n    crupier_total = _\n\n# Mostrar la puntuación\n{print} 'Has robado un ' _ ' y un ' _ '. Eso son ' _ ' puntos'\n{print} 'El crupier ha robado un ' _ ' y un ' _ '. Eso son ' _ ' puntos'\n```\n"
     tic:
         default_save_name: Tic
@@ -4062,7 +4062,7 @@ adventures:
         levels:
             16:
                 example_code: "```\n# Crea una lista llamada tablero\n_ = ['.', '.', '.', '.', '.', '.', '.', '.', '.']\n\n# Crea una función que imprima el tablero\n{define} imprimir_tablero\n    _\n    {print} 'TRES EN RAYA'\n    {print} tablero[1] tablero[2] tablero[3]\n    _\n    _\n\n# Llama la función\n```\n"
-                story_text: "¡Programemos un juego de Tres en raya!\n\n### Ejercicio\nEn esta aventura comenzaremos creando un tablero vacío.\n\n***Crea una lista llamada tablero*** Esta lista será nuestro tablero de juego. Esta lista está rellena con 9 puntos, ya que todavía no hay 'x' ó 'o' al inicio de nuestro juego.\n\n***Llama una función que imprima el tablero*** Lo primero, limpia la pantalla para que los tableros de juego anteriores se borren. Entonces imprimimos la primera línea de nuestro tablero de Tres en raya. Esta línea consiste en las primeras 3 posiciones de nuestra lista de tablero.\nYa hemos programado esta línea por ti. Ahora completa el trablero imprimiendo las posiciones 4, 5 y 6 en la segunda fila y las posiciones 7, 8 y 9 en la tercera fila.\n\n***Llama a la función que imprime el tablero*** Ahora llama a la función.\n<div class=\"w-full flex flex-row gap-2\">\n\tEjecuta el código. Tu resultado debería parecerse a esto: <img src=\"https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc\" width=\"100\">\n</div>\n\n***Continua en la siguiente aventura*** En la siguiente aventura aprenderás a como programa el juego en sí.\n"
+                story_text: "¡Programemos un juego de Tres en raya!\n\n### Ejercicio\nEn esta aventura comenzaremos creando un tablero vacío.\n\n***Crea una lista llamada tablero*** Esta lista será nuestro tablero de juego. Esta lista está rellena con 9 puntos, ya que todavía no hay 'x' ó 'o' al inicio de nuestro juego.\n\n***Crea una función que imprima el tablero*** Lo primero, limpia la pantalla para que los tableros de juego anteriores se borren. Entonces imprimimos la primera línea de nuestro tablero de Tres en raya. Esta línea consiste en las primeras 3 posiciones de nuestra lista de tablero.\nYa hemos programado esta línea por ti. Ahora completa el trablero imprimiendo las posiciones 4, 5 y 6 en la segunda fila y las posiciones 7, 8 y 9 en la tercera fila.\n\n***Llama a la función que imprime el tablero*** Ahora llama a la función.\n<div class=\"w-full flex flex-row gap-2\">\n\tEjecuta el código. Tu resultado debería parecerse a esto: <img src=\"https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc\" width=\"100\">\n</div>\n\n***Continua en la siguiente aventura*** En la siguiente aventura aprenderás a como programa el juego en sí.\n"
             17:
                 example_code: "```\n# Pega tu código aquí y haz que sea a prueba del nivel 17\n\n# Crea una función que detecte si alguien ha ganado\n{define} detectar_ganador {with} tablero, signo:\n    {if} tablero[1] == tablero[2] {and} tablero[2] == tablero[3] {and} tablero[1] != '.':\n        juego_terminado = 'sí'\n        {print} '¡Jugador ' signo ' gana!'\n    {elif}:\n        _\n    {else}:\n        juego_terminado = 'no'\n{return} _\n```\n"
                 story_text: "En el nivel anterior hemos aprendido a como hacer un juego de Tres en raya. El juego funciona, pero es bastante molesto que siga preguntando si ya has ganado.\nAhora que tenemos el comando {elif}, ¡podemos dejar que el juego decida si alguien ha ganado y puede dejar de preguntarnos!\n\n### Ejercicio\n***Pega tu código*** Pega tu código del nivel anterior aquí y hazlo a prueba del nivel 17. En este nivel has aprendido a usar los dos puntos cada vez que creas un bloque de código. Por favor añade los dos puntos en los lugares correctos.\n\n***Crea una función que detecte si alguien ha ganado*** Hemos comenzado la función por ti, pégala debajo de la función `print_field` y acaba la función. Puedes ver que este primer fragmento de código comprueba si las posiciones 1, 2 y 3 son iguales, porque si lo son tienes 3 en fila.\nTambién comprueba si no son un punto, porque si lo son, en la línea podría tener los mismos símbolos en ellos, pero eso es porque todavía está vacía.\nSi se cumplen todas las condiciones, el juego se termina y se imprime al ganador.\nCompleta esta función con todas las posibles maneras de ganar. esto significa que tiene que hacer esto para las otras 2 filas, 3 columnas y 2 diagonales.\nSi has completado todas las demás posiciones, la función debería devolver la variable `game_over` para que la podamos utilizar en nuestro juego.\n\n***Llama la función en el juego*** Ve a la línea `game_over = {ask} 'Did you win?'` y cámbiala a `game_over = {call} detect_winner {with} field, sign`. ¡Ahora la función comprobará si hay un ganador y el juego no tiene que seguir preguntándolo nunca más!\n\n***¡Disfruta de tu juego!*** ¡Gran trabajo! ¡Has completado el juego! ¡Disfruta jugándolo!\n"
@@ -4081,7 +4081,7 @@ adventures:
         levels:
             14:
                 example_code: "```\n# Utiliza tu propio código de la aventura anterior.\n```\n"
-                story_text: "### Ejercicio 2\n**Esta es la segunda parte de esta aventura.** La aventura comienza en la aventura anterior.\nPor supuesto, no quieres calcular la media de 4 pruebas. Podrías querer calcular la media de 10 pruebas, o solo 2...\nPodemos solucionar este problema añadiendo el argumento y la variable 'candidad_de_pruebas'.\n* Empieza una nueva línea en la línea 3. Establece el argumento candidad_de_pruebas preguntando al alumno cuántas pruebas ha realizado.\n* Cambia el 4 de la línea 4 por el nuevo argumento candidad_de_pruebas.\n* Por último, cambia el 4 en la línea 6 a candidad_de_pruebas\n\nPrueba el nuevo programa. ¿Funciona?\n\n### Ejercicio 3\n¿Querías mejorar aún más el programa? ¡Genial! En el programa anterior solo podías calcular la nota media de una asignatura, pero sería mejor si pudieras calcular la nota media de todas las asignaturas que quisieras!\nNo te diremos cómo hacerlo, pero te daremos un consejo: Empieza tu código en la línea con: define calcular_nota_media with asignatura.\n"
+                story_text: "### Ejercicio 2\n**Esta es la segunda parte de esta aventura.** La aventura comienza en la aventura anterior.\nPor supuesto, no quieres calcular la media de 4 pruebas. Podrías querer calcular la media de 10 pruebas, o solo 2...\nPodemos solucionar este problema añadiendo el argumento y la variable 'candidad_de_pruebas'.\n* Empieza una nueva línea en la línea 3. Establece el argumento candidad_de_pruebas preguntando al alumno cuántas pruebas ha realizado.\n* Cambia el 4 de la línea 4 por el nuevo argumento candidad_de_pruebas.\n* Por último, cambia el 4 en la línea 6 a candidad_de_pruebas\n\nPrueba el nuevo programa. ¿Funciona?\n\n### Ejercicio 3\n¿Querías mejorar aún más el programa? ¡Genial! En el programa anterior solo podías calcular la nota media de una asignatura, pero sería mejor si pudieras calcular la nota media de todas las asignaturas que quisieras!\nNo te diremos cómo hacerlo, pero te daremos un consejo: Empieza tu código en la línea con: {define} calcular_nota_media {with} asignatura.\n"
     hangman:
         name: Ahorcado
         description: Adivina la palabra
@@ -4089,7 +4089,7 @@ adventures:
         levels:
             17:
                 story_text: "En esta aventura programamos un juego del ahorcado. Primero haremos algunos preparativos, después programaremos el juego y en tercer lugar añadiremos un dibujo con la tortuga.\n\n### Ejercicio\n***Establece las variables*** En este juego del ahorcado, el jugador 1 elige una respuesta y el jugador 2 tiene que adivinar las letras de esta respuesta.\nPara que el ordenador sepa todas las letras de la palabra, convertiremos la respuesta en una lista de letras. Haremos lo mismo con los intentos del jugador 2.\nComenzaremos el juego con 2 listas vacías. Hemos hecho por ti una lista vacía para la variable respuesta. Ahora haz también una lista vacía para letras_adivinadas.\nDespués rellenamos cuantos errores han cometido. Al iniciar el juego, debería de ser 0.\nLa variable `amount_letters` nos dice cuantas letras forman la respuesta. Pregunta al jugador 1 que nos diga cuántas letras tiene su palabra.\nPor último, le diremos al ordenador que la partida se ha terminado. Utilizamos la variable `game_over` y la establecemos a `False`.\n\n***Elegir la respuesta*** Queremos que el jugador 1 sea capaz de elegir la respuesta. Le preguntaremos tantas veces como sea neceasrio, cuál es la siguiente letra.\nDespués añadiremos esa letra a la respuesta. Por último, añadimos un _ vacío a la lista de letras adivinadas, así que tendremos tantos _ como letras haya en la respuesta.\n\n***Turno del jugador 2***\nDile al jugador 2 que es su turno. Entonces dile al jugador 2 cuantas letras hay en la respuesta. Por último, imprime la lista de `guessed_letters`.\n\n***Ir a la siguiente aventura*** Ahora que se han establecido todas las variables, podemos comenzar a programar el juego. ¡Comprueba la siguiente pestaña para aprender a como hacerlo!\n"
-                example_code: "```\nimprimir '¡Ahorcado!'\n\n# Establece las variables\nrespuesta = []\nletras_adivinadas = _\nerrores_cometidos = _\ncantidad_letras = {ask} _\n_ = 'Falso'\n\n# Elegir la respuesta\n{for} _\n    letra = {ask} 'Jugador 1, ¿cuál es la letra ' i '?'\n    _\n    {add} '_' {to} _\n\n# Turno jugador 2\nimprimir _\nimprimir _\nimprimir letras_adivinadas\n```\n"
+                example_code: "```\n{print} '¡Ahorcado!'\n\n# Establece las variables\nrespuesta = []\nletras_adivinadas = _\nerrores_cometidos = _\ncantidad_letras = {ask} _\n_ = 'Falso'\n\n# Elegir la respuesta\n{for} _\n    letra = {ask} 'Jugador 1, ¿cuál es la letra ' i '?'\n    _\n    {add} '_' {to} _\n\n# Turno jugador 2\n{print} _\n{print} _\n{print} letras_adivinadas\n```\n"
     hangman_2:
         name: Ahorcado 2
         default_save_name: Ahorcado_2
@@ -4097,7 +4097,7 @@ adventures:
         levels:
             17:
                 example_code: "```\n# Pega tu código aquí\n\n# El juego\n{while} juego_terminado _\n    adivina = _\n    {if} _\n        {for} i {in} {range} 1 {to} cantidad_letras:\n            si respuesta[i] == adivina:\n                letras_adivinadas[i] = adivina\n        {print} _\n        {if} letras_adivinadas == _:\n            {print} _\n            juego_terminado = _\n    {else}:\n        {print} _\n        errores_cometidos _\n        {if} _ == 10:\n            {print} _\n            {print} _\n            _\n```\n"
-                story_text: "Es momento de programar el juego del ahorcado.\n\n### Ejercicio\n\n***Pega tu código*** Copia tu código de la aventura anterior y pégalo en el campo de programación.\n\n***El juego*** Este juego continua funcionando hasta que termina la partida para el jugador 2. Rellena el comando while debidamente. Ahora, se permite que el jugador 2 adivine una letra, así que pregúntale que adivine una letra.\nTenemos que comprobar que su respuesta sea correcta, así que comprueba que su `guess` se encuentra (en cualquier lugar) de la (lista) `answer`. Después dejamos que el ordenador averigue que letra(s) es la adivinada. Ya hemos programado esta parte por ti.\nDespués queremos alabar al jugador por encontrar una letra correcta y queremos imprimir la lista `guessed_letters`, para que el jugador vea su progreso.\n\nLa siguiente parte que vamos a programar es lo que ocurre cuando el jugador adivine todas las letras. Así como si su lista de `guessed_letters` es la misma que nuestra lista `answer`.\nSi las listas son iguales, le damos la enhorabuena al jugador 2 por su victoria y establecemos la variable `game_over` a `True`.\n\nDespués programaremos que ocurre cuando el jugador 2 falla(de ahí el comando`{else}`). Primero, le decimos al jugador que ha fallado su intento. Entonces aumentamos la variable `mistakes_made` en 1.\n\nPara la última parte programaremos que ocurre cuando el jguador 2 cometa 10 errores. Imprimiremos que el jugador 1 ha ganado el juego. Después imprimiremos la respuesta correcta. Y por último estableceremos la variable `game_over` a `True`, para que el juego se detenga.\n\n***Ir a la siguiente aventura*** ¡Gran trabajo! Tu juego es jugable, pero ¿no sería divertido que se dibujara el ahorcado cuando el jugador 2 cometa un error..?\n"
+                story_text: "Es momento de programar el juego del ahorcado.\n\n### Ejercicio\n\n***Pega tu código*** Copia tu código de la aventura anterior y pégalo en el campo de programación.\n\n***El juego*** Este juego continua funcionando hasta que termina la partida para el jugador 2. Rellena el comando while debidamente. Ahora, se permite que el jugador 2 adivine una letra, así que pregúntale que adivine una letra.\nTenemos que comprobar que su respuesta sea correcta, así que comprueba que su `guess` se encuentra (en cualquier lugar) de la (lista) `answer`. Después dejamos que el ordenador averigue que letra(s) es la adivinada. Ya hemos programado esta parte por ti.\nDespués, queremos alabar al jugador por encontrar una letra correcta y queremos imprimir la lista `guessed_letters`, para que el jugador vea su progreso.\n\nLa siguiente parte que vamos a programar es lo que ocurre cuando el jugador adivine todas las letras. Así, si su lista de `guessed_letters` es la misma que nuestra lista `answer`.\nSi las listas son iguales, le damos la enhorabuena al jugador 2 por su victoria y establecemos la variable `game_over` a `True`.\n\nDespués, programaremos que ocurre cuando el jugador 2 falla(de ahí el comando`{else}`). Primero, le decimos al jugador que ha fallado su intento. Entonces aumentamos la variable `mistakes_made` en 1.\n\nPara la última parte programaremos que ocurre cuando el jguador 2 cometa 10 errores. Imprimiremos que el jugador 1 ha ganado el juego. Después imprimiremos la respuesta correcta. Y por último estableceremos la variable `game_over` a `True`, para que el juego se detenga.\n\n***Ir a la siguiente aventura*** ¡Gran trabajo! Tu juego es jugable, pero ¿no sería divertido que se dibujara el ahorcado cuando el jugador 2 cometa un error?\n"
     blackjack_3:
         name: Blackjack 3
         default_save_name: Blackjack_3
