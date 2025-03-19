@@ -162,9 +162,10 @@ class Modal {
     });
   }
 
-  public search(message: string, confirmCb: (...args: any[]) => void, args: any[]) {
+  public search(message: string, confirmCb: (...args: any[]) => void, args: any[], confirm_label?: string) {
     this.hide();
     $('#modal_search_text').text(message);
+    if (confirm_label) $('#modal_ok_search_button').text(confirm_label)
     this.show();
     $('#modal_search').show();
     $('#modal_ok_search_button').off('click').on('click', () => {
