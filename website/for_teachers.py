@@ -755,7 +755,7 @@ class ForTeachersModule(WebsiteModule):
 
         session['class_id'] = class_id
         customizations, adventures, adventure_names, available_adventures, min_level = \
-            self.get_class_info(user, class_id, get_customizations=True)
+            self.get_class_info(user, class_id, migrate_customizations=True)
 
         return render_template(
             "customize-class.html",
@@ -1009,7 +1009,7 @@ class ForTeachersModule(WebsiteModule):
             customizations["quiz_parsons_tabs_migrated"] = 1
             self.db.update_class_customizations(customizations)
 
-    def get_class_info(self, user, class_id, get_customizations=False):
+    def get_class_info(self, user, class_id, migrate_customizations=False):
         if hedy_content.Adventures(g.lang).has_adventures():
             default_adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
         else:
@@ -1043,59 +1043,63 @@ class ForTeachersModule(WebsiteModule):
             default_adventures["quiz"] = {}
             default_adventures["parsons"] = {}
 
-        parsons_hidden = False
-        quizzes_hidden = False
+        if migrate_customizations:
+            parsons_hidden = False
+            quizzes_hidden = False
+            if customizations:
+                if not utils.is_redesign_enabled():
+                    parsons_hidden = (
+                        "other_settings" in customizations
+                        and "hide_parsons" in customizations["other_settings"]
+                    )
+                    quizzes_hidden = (
+                        "other_settings" in customizations
+                        and "hide_quiz" in customizations["other_settings"]
+                    )
+                    if quizzes_hidden:
+                        del default_adventures["quiz"]
+                    if parsons_hidden:
+                        del default_adventures["parsons"]
 
-        if customizations:
-            if not utils.is_redesign_enabled():
-                parsons_hidden = ('other_settings' in customizations and
-                                  'hide_parsons' in customizations['other_settings'])
-                quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
-                if quizzes_hidden:
-                    del default_adventures["quiz"]
-                if parsons_hidden:
-                    del default_adventures["parsons"]
+                # in case this class has thew new way to select adventures
+                if 'sorted_adventures' in customizations:
+                    # remove from customizations adventures that we have removed
+                    self.purge_customizations(customizations['sorted_adventures'],
+                                              default_adventures, teacher_adventures)
+                # it uses the old way so convert it to the new one
+                elif 'adventures' in customizations:
+                    customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+                    for adventure, levels in customizations['adventures'].items():
+                        for level in levels:
+                            customizations['sorted_adventures'][str(level)].append(
+                                {"name": adventure, "from_teacher": False})
 
-            # in case this class has thew new way to select adventures
-            if 'sorted_adventures' in customizations:
-                # remove from customizations adventures that we have removed
-                self.purge_customizations(customizations['sorted_adventures'], default_adventures, teacher_adventures)
-            # it uses the old way so convert it to the new one
-            elif 'adventures' in customizations:
-                customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
-                for adventure, levels in customizations['adventures'].items():
-                    for level in levels:
-                        customizations['sorted_adventures'][str(level)].append(
-                            {"name": adventure, "from_teacher": False})
+                            customizations['sorted_adventures'][str(level)].append(
+                                {"name": "quiz", "from_teacher": False})
+                            customizations['sorted_adventures'][str(level)].append(
+                                {"name": "parsons", "from_teacher": False})
+                customizations["updated_by"] = user["username"]
+                self.db.update_class_customizations(customizations)
+                min_level = 1 if customizations['levels'] == [] else min(customizations['levels'])
+            else:
+                # Since it doesn't have customizations loaded, we create a default customization object.
+                # This makes further updating with HTMX easier
+                adventures_to_db = {}
+                for level, default_adventures in hedy_content.adventures_order_per_level().items():
+                    adventures_to_db[str(level)] = [{'name': adventure, 'from_teacher': False}
+                                                    for adventure in default_adventures]
 
-                        customizations['sorted_adventures'][str(level)].append(
-                            {"name": "quiz", "from_teacher": False})
-                        customizations['sorted_adventures'][str(level)].append(
-                            {"name": "parsons", "from_teacher": False})
-            customizations["updated_by"] = user["username"]
-            self.db.update_class_customizations(customizations)
-            min_level = 1 if customizations['levels'] == [] else min(customizations['levels'])
-        else:
-            # Since it doesn't have customizations loaded, we create a default customization object.
-            # This makes further updating with HTMX easier
-            adventures_to_db = {}
-            for level, default_adventures in hedy_content.adventures_order_per_level().items():
-                adventures_to_db[str(level)] = [{'name': adventure, 'from_teacher': False}
-                                                for adventure in default_adventures]
-
-            customizations = {
-                "id": class_id,
-                "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
-                "opening_dates": {},
-                "other_settings": [],
-                "level_thresholds": {},
-                "sorted_adventures": adventures_to_db,
-                "updated_by": user["username"],
-                "quiz_parsons_tabs_migrated": True,
-            }
-            self.db.update_class_customizations(customizations)
-
-        if get_customizations:
+                customizations = {
+                    "id": class_id,
+                    "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
+                    "opening_dates": {},
+                    "other_settings": [],
+                    "level_thresholds": {},
+                    "sorted_adventures": adventures_to_db,
+                    "updated_by": user["username"],
+                    "quiz_parsons_tabs_migrated": True,
+                }
+                self.db.update_class_customizations(customizations)
             self.migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
 
         for level, sorted_adventures in customizations['sorted_adventures'].items():
@@ -1321,26 +1325,38 @@ class ForTeachersModule(WebsiteModule):
             level_thresholds[name] = value
 
         customizations = self.db.get_class_customizations(class_id)
-        dashboard = customizations.get('dashboard_customization', {})
-        live_statistics_levels = dashboard.get('selected_levels', [1])
+        dashboard = customizations.get("dashboard_customization", {})
+        live_statistics_levels = dashboard.get("selected_levels", [1])
 
         # Remove quiz and parsons if we need to hide them  all.
-        hide_quiz = 'hide_quiz' in body['other_settings']
-        hide_parsons = 'hide_parsons' in body['other_settings']
+        hide_quiz = "hide_quiz" in body["other_settings"]
+        hide_parsons = "hide_parsons" in body["other_settings"]
         for level, adventures in customizations["sorted_adventures"].items():
-            if hide_parsons:
-                customizations["sorted_adventures"][level] = [adventure for adventure in adventures
-                                                              if adventure["name"] != "parsons"]
-            elif 'other_settings' in customizations \
-                    and 'hide_parsons' in customizations['other_settings']:  # if so, we should toggle parsons.
-                customizations["sorted_adventures"][level].append({'name': 'parsons', 'from_teacher': False})
+            if hide_parsons or hide_quiz:
+                customizations["sorted_adventures"][level] = [
+                    adventure
+                    for adventure in adventures
+                    if not (adventure["name"] == "parsons" and hide_parsons)
+                    and not (adventure["name"] == "quiz" and hide_quiz)
+                ]
 
-            if hide_quiz:
-                customizations["sorted_adventures"][level] = [adventure for adventure in adventures
-                                                              if adventure["name"] != "quiz"]
-            elif 'other_settings' in customizations \
-                    and 'hide_quiz' in customizations['other_settings']:  # if so, we should toggle quizes.
-                customizations["sorted_adventures"][level].append({'name': 'quiz', 'from_teacher': False})
+            if (
+                not hide_parsons
+                and "other_settings" in customizations
+                and "hide_parsons" in customizations["other_settings"]
+            ):  # if so, we should toggle parsons.
+                customizations["sorted_adventures"][level].append(
+                    {"name": "parsons", "from_teacher": False}
+                )
+
+            if (
+                not hide_quiz
+                and "other_settings" in customizations
+                and "hide_quiz" in customizations["other_settings"]
+            ):  # if so, we should toggle quizes.
+                customizations["sorted_adventures"][level].append(
+                    {"name": "quiz", "from_teacher": False}
+                )
 
         customizations = {
             "id": class_id,
@@ -1349,14 +1365,12 @@ class ForTeachersModule(WebsiteModule):
             "other_settings": body["other_settings"],
             "level_thresholds": level_thresholds,
             "sorted_adventures": customizations["sorted_adventures"],
-            "dashboard_customization": {
-                "selected_levels": live_statistics_levels
-            },
-            "updated_by": user["username"]
+            "dashboard_customization": {"selected_levels": live_statistics_levels},
+            "updated_by": user["username"],
         }
 
         self.db.update_class_customizations(customizations)
-        add_class_customized_to_subscription(user['email'])
+        add_class_customized_to_subscription(user["email"])
         response = {"success": gettext("class_customize_success")}
 
         return make_response(response, 200)
@@ -1769,7 +1783,7 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         customizations, _, _, _, _ = self.get_class_info(
-            user, class_id)
+            user, class_id, migrate_customizations=True)
 
         is_teacher_adventure = True
 

@@ -54,9 +54,10 @@ adventures:
                     Copia la tua storia dai livelli precedenti a questo livello.
                     In questo livello hai imparato 3 nuovi comandi `{at} {random}`, `{add} {to_list}` e `{remove} {from}`.
                     Aggiungi nuove righe di codice alla tua storia, in modo che tutti i nuovi comandi siano presenti almeno una volta nella tua storia.
-                example_code: "```\nanimals {is} 🦔, 🐿, 🦉, 🦇\n{print} They now hear the sound of an animals {at} {random}\n```\n"
+                example_code: "```\nanimali {is} 🦔, 🐿, 🦉, 🦇\n{print} Ora sentono il verso di un animali {at} {random}\n```\n"
                 story_text_2: "Il comando `{add}` può essere utile nella tua storia.\n"
-                example_code_2: "```\n{print} They hear a sound\nanimals {is} 🐿, 🦔, 🦇, 🦉\nanimal {is} {ask} What do you think it is?\n{add} animal {to_list} animals\n{print} it was an animals {at} {random}\n```\n"
+                example_code_2: "```\n{print} Sentono un suono\nanimali {is} 🐿, 🦔, 🦇, 🦉\nanimale {is} {ask} Quale pensi che sia?\n{add} animale {to_list} animali\n{print} era un animali {at} {random}\n```\n"
+                example_code_3: "```\n{print} His backpack got way too heavy.\n{print} Inside were a bottle of water, a flashlight and a brick.\nbag {is} water, flashlight, brick\ndump {is} {ask} Which item should he dump?\n{remove} dump {from} bag\n```\n"
             4:
                 story_text: |
                     ### Esercizio
@@ -87,13 +88,13 @@ adventures:
                     Scrivi un nuovo racconto di almeno 6 righe di codice su un argomento di tua scelta.
                     Nessuna ispirazione? Scegli uno di questi argomenti: un supereroe, una noiosa giornata scolastica, bloccato su un'isola deserta.
 
-                    Ora dai al giocatore la possibilità di scegliere una fine felice o cattiva, proprio come nel codice di esempio.
+                    Ora dai al giocatore la possibilità di scegliere un finale bello o brutto, come nel codice di esempio.
                     Programma entrambi i finali.
 
                     ### Esercizio 2
                     Copia la storia che hai creato nella tua avventura narrativa nei livelli precedenti.
                     Trova un modo per aggiungere almeno 2 comandi `{if}` e `{else}` alla tua storia.
-                    Questo può avere un finale felice o brutto, ma puoi anche provare a trovare altri modi per incorporare i comandi.
+                    Questo può avvenire con un finale bello o brutto, ma puoi anche provare a trovare altri modi per inserire i comandi.
                 example_code: |
                     ```
                     nome {is} {ask} 'Chi sta camminando nella foresta?'
@@ -111,6 +112,7 @@ adventures:
                     ### Esercizio
                     Aggiungi ripetizione alla tua storia. Torna ai programmi salvati, scegli il programma della storia dal livello precedente e
                     trova una riga contenente `{print}` e ripetila!
+                example_code: "```\n{print} 'Il principe continuava a chiedere aiuto'\n{repeat} 5 {times} {print} 'Aiuto!'\n{print} 'perché nessuno mi aiuta?'\n```\n"
             8:
                 story_text: |
                     In questo livello puoi utilizzare più righe nei comandi `{if}`, in questo modo puoi migliorare il tuo lieto fine o il tuo triste finale!
@@ -204,9 +206,13 @@ adventures:
                     Suggerimento: ricorda le virgole in `{print}` tra testo e variabili!
                 example_code_2: |
                     ```
-                    naam = {input}("Come ti chiami?")
+                    nome = {input}("Come ti chiami?")
                     {print}('Benvenuti in questa storia!')
                     ```
+                story_text: "Scriveremo un'altra storia, ma ora dobbiamo usare le parentesi con `{print}`.\n\n### Esercizio 1\nCrea una storia di almeno 5 frasi. Non devi ancora usare 'nome'.\n"
+            15:
+                story_text: "Usando la funzione `{while}`  puoi rendere le tue storie più interessanti. Per esempio puoi usare `{while} game == 'on'` in modo da giocare fino alla fine della partita.\nO puoi usare `{while} sword == 'lost'` in modo che il giocatore non possa continuare la partita fino a quando non hanno trovato qualcosa.\n\n###  Esercizio\nIl codice di esempio ti mostra come usare la funzione `{while}`  in una storia. Ora **pensa ad un tuo scenario** in cui il giocatore deve trovare qualcosa per continuare.\n"
+                example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
     add_remove_command:
         default_save_name: aggiungi_rimuovi_comando
         description: introducendo {add} {to_list} e {remove} {from}
@@ -245,6 +251,7 @@ adventures:
                     _
                     {print} Ottieni un milkshake con il sapore di {at} {random}
                     ```
+        name: '{add} {to_list} & {remove} {from}'
     and_or_command:
         default_save_name: e o
         description: Introducendo {and} e {or}
@@ -261,13 +268,14 @@ adventures:
                     {if} nome {is} 'Hedy' {and} età {is} 2
                         {print} 'Tu sei la vera Hedy!'
                     ```
+        name: '{and} & {or}'
     ask_command:
         description: Introduzione comando {ask}
         levels:
             1:
                 story_text: |
-                    ## Il comando per chiedere
-                    Ora che sai usare il comando `{print}`, sei pronto per imparare il prossimo comando: `{ask}`. Con il comando `{ask}`, puoi fare una domanda. Controlla:
+                    ## Il comando `{ask}`
+                    Ora che sai usare il comando `{print}`, sei pronto per imparare il prossimo comando: `{ask}`. Con il comando `{ask}`, puoi fare una domanda. Guarda:
                 example_code: |
                     ```
                     {print} Ciao!
@@ -293,10 +301,10 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ## Il comando chiedi
+                    ## Il comando `{ask}`
                     Ora che possiamo utilizzare le **variabili** nei nostri codici, non abbiamo più bisogno del comando `{echo}`.
                     Possiamo utilizzare le variabili per memorizzare le risposte alle nostre domande e in questo modo possiamo utilizzare la risposta a più domande nei nostri codici.
-                    Controlla:
+                    Guarda:
 
                     In questo modo il tuo codice diventa interattivo!
                 example_code: |
@@ -309,7 +317,7 @@ adventures:
                 story_text_2: |
                     ### Esercizio
                     Nella scheda precedente ti sei esercitato a impostare le variabili con il comando `{is}`.
-                    Hai creato almeno 3 variabili e le hai utilizzate con un comando print.
+                    Hai creato almeno 3 variabili e le hai utilizzate con un comando `{print}`.
                     Ora, invece di impostare le variabili, vogliamo che tu renda le variabili interattive, come abbiamo fatto nel nostro esempio.
 
                     Copia il codice dalla scheda precedente e rendi interattive le variabili utilizzando i comandi `{ask}`.
@@ -318,6 +326,11 @@ adventures:
                     animale_preferito {is} {ask} Qual è il tuo animale preferito?
                     {print} Mi piacciono gli animale_preferito
                     ```
+            18:
+                example_code: "```\n{print}('Il mio nome è Hedy!')\nnome = {input}('Come ti chiami?')\n{print}('quindi il tuo nome è  ', nome)\n```\n"
+                story_text: L'ultimo cambiamento che dobbiamo fare per ottenere un codice Python è cambiare `{ask}` in `{input}`.
+        name: '{ask}'
+        default_save_name: ask_command
     blackjack:
         name: Jack nero
         default_save_name: Jack nero
@@ -331,20 +344,20 @@ adventures:
                     Ma fai attenzione a non ottenere più di 21 punti, perché se lo fai, perdi!
                     Vince il giocatore che si avvicina di più al 21, senza superarlo!
 
-                    ### Exercise
-                    In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
+                    ### Esercizio
+                    in questa avventura scriviamo il codice per la prima parte della partita di Blackjack. Creeremo una funzione per calcolare quanti punti vale ogni carta.
 
-                    ***Set the variables***
-                    Start by making a list of all the cards, from 2 to Ace. Next make a list of the face cards, so Jack, Queen and King. Then pick a random card from the list of cards to be card_1.
+                    ***Poni le variabili***
+                    Inizia facendo una lista di tutte le carte, dal 2 all'asso. Poi fai una lista delle figure, Fante, Regina e Re. Poi prendi una carta a caso dalla lista delle carte in modo che sia carta_1.
 
-                    ***Create a function to calculate the points***
-                    Create a function that calculates how many points a card is worth.
-                    All the face cards are worth 10 points, the Ace is worth 11 and all the other cards are worth their numeral.
-                    Return the variable `points` at the end of the function.
+                    ***Crea una funzione per calcolare i punti***
+                    Crea una funzione che calcoli quanti punti vale ogni carta.
+                    Tutte le figure valgono 10 punti, l'asso ne vale 11 e tutte le altre carte hanno il valore del loro numero.
+                    Mostra la variabile `points` alla fine del codice.
 
-                    ***Test the function***
-                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
-                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
+                    ***Testa il codice***
+                    Testa se il tuo codice funziona correttamente. Finisci il comando `{print}` inserendo quale carta hai pescato. Poi finisci la seconda linea chiamando il codice carta_1.
+                    Esegui il codice un paio di volte. Sei felice del risultato? Ottimo! Ora puoi rimuovere la parte di test e andare avanti nella scheda successiva.
     calculator:
         name: Calcolatore
         default_save_name: Calcolatrice
