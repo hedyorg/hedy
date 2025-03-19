@@ -1056,10 +1056,10 @@ class ForTeachersModule(WebsiteModule):
                         "other_settings" in customizations
                         and "hide_quiz" in customizations["other_settings"]
                     )
-                    if quizzes_hidden:
-                        del default_adventures["quiz"]
-                    if parsons_hidden:
-                        del default_adventures["parsons"]
+                if quizzes_hidden:
+                    del default_adventures["quiz"]
+                if parsons_hidden:
+                    del default_adventures["parsons"]
 
                 # in case this class has thew new way to select adventures
                 if 'sorted_adventures' in customizations:
