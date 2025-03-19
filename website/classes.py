@@ -295,6 +295,10 @@ class MiscClassPages(WebsiteModule):
             results = []
         usernames = [record['username'] for record in results if record['username'] != user['username']]
         usernames = sorted(usernames)
+        invitations = utils.get_class_invites(db=self.db, class_id=class_id)
+        for invite in invitations:
+            if invite['username'] in usernames:
+                usernames.remove(invite['username'])
         return render_template('modal/htmx-search-results-list.html', usernames=usernames)
 
     @route("/invite", methods=["POST"])
