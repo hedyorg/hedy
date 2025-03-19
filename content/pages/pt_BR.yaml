@@ -180,5 +180,24 @@ teacher-guide:
                 error_code: "resposta {is} {ask} Por que o {echo} não funciona mais?!\n{echo}"
                 solution_text: Em vez disso, use uma variável.
                 solution_code: "resposta {is} {ask} Por que {echo} não funciona mais?!\n{print} resposta"
+        -   example:
+                error_code: "nome {is} Hedy\n{print} Olá, meu nome é nome"
+                solution_code: "nome {is} Hedy\n{print} Olá, me chamo nome"
+                error_text: No exemplo abaixo, a palavra 'nome' é usada como uma variável, mas também como parte do texto. O resultado desse código será 'Olá, meu Hedy é Hedy'.
+                solution_text: Portanto não use uma palavra que queira usar no texto como nome de variável. No nível 4, isso será resolvido com aspas.
+            title: Os alunos usam o nome de uma variável como uma palavra normal
+        -   example:
+                solution_text: Adicione um traço sublinhado
+                error_code: porta escolhida é pergunte Qual porta você escolhe
+                solution_code: porta_escolhida {is} {ask} Qual porta você escolhe
+                error_text: Um nome de variável deve ter aoenas uma palavra. Pode-se usar um traço sublinhado '_' para unir duas palavras, assim conta como se fosse uma palavra.
+            title: Os estudantes usam nomes de variáveis grandes que contém duas palavras.
+        -   example:
+                error_text: Nesse exemplo, o aluno usou 'cavalo' e 'nome' para a mesma variável.
+                error_code: "cavalo {is} {ask} Como se chama seu cavalo\n{print} Seu cavalo se chama nome"
+                solution_code: "nome {is} {ask} Como se chama seu cavalo\n{print} Seu cavalo se chama nome"
+                solution_text: Sempre verifique que uma variável tenha o mesmo nome em todo o código. Pequenas diferenças podem ser difíceis de perceber (como plurais, por exemplo) mas interferem com o código.
+            title: Os alunos às vezes usam dois nomes diferentes para a mesma variável
         level: '2'
+    -   level: '3'
     intro: A gente aprende com os erros, especialmente na programação! Cometer erros é inevitável e uma ótima oportunidade de aprendizado, mas para os professores, pode ser um desafio encontrar a correção certa para um erro! Especialmente à medida que os programas ficam cada vez mais longos conforme os alunos progridem nos níveis. É por isso que criamos uma lista com erros frequentes em cada nível e suas soluções.
