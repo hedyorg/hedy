@@ -297,7 +297,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Komenda zapytaj
+                    ## Komenda `{ask}
                     Skoro znasz się już komendę `{print}`, jesteś gotowy nauczyć się kolejnej metody: `{ask}`. Używając komendy `{ask}`, możesz zadać pytanie. Wypróbuj tego:
                 example_code: |
                     ```
@@ -324,7 +324,7 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ## Komenda zapytaj
+                    ## Komenda `{ask}`
                     Teraz gdy potrafimy używać **zmiennych** w naszym kodzie, nie potrzebujemy już komendy `{echo}`.
                     Możemy używać zmiennych, aby zapisać odpowiedzi do naszych pytań i w ten sposób używać tych odpowiedzi w wielu zapytaniach w naszym kodzie.
                     Spójrz na to:
@@ -340,7 +340,7 @@ adventures:
                 story_text_2: |
                     ### Ćwiczenie
                     W poprzedniej przygodzie ćwiczyłeś ustawianie zmiennych za pomocą polecenia `{is}`.
-                    Utworzyłeś co najmniej 3 zmienne i użyłeś ich za pomocą polecenia print.
+                    Utworzyłeś co najmniej 3 zmienne i użyłeś ich za pomocą polecenia `{print}`.
                     Teraz zamiast ustawiać zmienne, chcemy, abyś uczynił je interaktywnymi, tak jak zrobiliśmy to w naszym przykładzie.
 
                     Skopiuj swój kod z poprzedniej przygody i spraw, aby zmienne były interaktywne, używając poleceń `{ask}`.
@@ -376,7 +376,7 @@ adventures:
                     Zwróć zmienną `points` na końcu funkcji.
 
                     ***Przetestuj funkcję***
-                    Sprawdź, czy funkcja działa prawidłowo. Zakończ pierwsze polecenie drukowania, wpisując, którą kartę wyciągnąłeś. Następnie zakończ drugi wiersz, wywołując funkcję z kartą_1.
+                    Sprawdź, czy funkcja działa prawidłowo. Zakończ pierwsze polecenie `{print}`, wpisując, którą kartę wyciągnąłeś. Następnie zakończ drugi wiersz, wywołując funkcję z kartą_1.
                     Uruchom kod kilka razy. Czy jesteś zadowolony z wyników? Świetnie! Następnie możesz usunąć część testową i przejść do następnej przygody!
                 example_code: |
                     ```
@@ -415,7 +415,7 @@ adventures:
                     W poprzedniej przygodzie rozpocząłeś listę zmiennych i stworzyłeś funkcję obliczającą, ile punktów jest warta karta. Skopiuj swój kod i wklej go tutaj. Pamiętaj, że nie potrzebujesz części testowej, więc jeśli jeszcze jej nie usunąłeś, zrób to teraz.
 
                     ***Dodaj więcej zmiennych***
-                    Ustawiłeś już listy `cards` i `face_cards` oraz zmienną `card_1`. Pod tymi zmiennymi utwórz 3 kolejne zmienne: `card_2`, dealer_card_1` i `dealer_card_2`. Wszystkie te zmienne są ustawione na losową kartę z listy kart.
+                    Ustawiłeś już listy `cards` i `face_cards` oraz zmienną `card_1`. Pod tymi zmiennymi utwórz 3 kolejne zmienne: `card_2`, `dealer_card_1` i `dealer_card_2`. Wszystkie te zmienne są ustawione na losową kartę z listy kart.
 
                     ***Zsumuj punkty***
                     Aby obliczyć, ile punktów zdobyłeś, wywołujemy funkcję z kartą 1 i robimy to ponownie dla karty 2. Następnie dodajemy oba te wyniki, aby uzyskać wynik całkowity.
@@ -466,7 +466,6 @@ adventures:
             17:
                 story_text: |
                     W poprzednich przygodach nauczyłeś się, jak dobrać 2 losowe karty dla siebie i krupiera oraz jak obliczyć, ile punktów oboje otrzymaliście.
-
                     W tej przygodzie dodajemy opcję poproszenia o dodatkową kartę zarówno dla siebie, jak i krupiera.
 
                     ### Ćwiczenie
@@ -475,7 +474,7 @@ adventures:
                     ***Dodatkowa karta dla ciebie*** Jeśli chcesz, możesz otrzymać dodatkową kartę, aby uzyskać wynik jak najbardziej zbliżony do 21. Najpierw zapytaj gracza, czy chce dodatkową kartę.
                     Jeśli tak, wybierz losową kartę i wydrukuj to, co wyciągnął. Jeśli karta nie jest asem, możesz wywołać funkcję i dodać punkty do swojego wyniku.
                     Jeśli karta jest asem, nie możesz użyć funkcji, ponieważ as może być 1 punktem lub 11 punktami, w zależności od tego, ile punktów już zdobyłeś.
-                    Jeśli twój wynik jest mniejszy niż 11, chcesz, aby as był 11 punktami (ponieważ jest to wynik najbliższy 21).  Więc dodajesz 11 punktów do swojej sumy.
+                    Jeśli twój wynik jest mniejszy niż 11, chcesz, aby as był 11 punktami (ponieważ jest to wynik najbliższy 21). Więc dodajesz 11 punktów do swojej sumy.
                     Jeśli suma jest większa lub równa 11, chcesz, aby as był 1 punktem (ponieważ nie chcesz więcej niż 21 punktów). Więc dodajesz 1 punkt do swojej sumy.
                     Na koniec wydrukuj swoją nową sumę punktów.
 
@@ -733,7 +732,7 @@ adventures:
 
                     ### Ćwiczenie 3
                     Chciałbyś ulepszyć swój program? Świetnie! W poprzednim programie można było obliczyć tylko średnią ocenę z 1 przedmiotu, ale byłoby lepiej, gdybyś mógł obliczyć średnią ocenę dla wszystkich przedmiotów!
-                    Nie powiemy ci, jak to zrobić, ale damy ci jedną wskazówkę: Rozpocznij swój kod w wierszu 1 od: zdefiniuj oblicz_średnią_oceny z przedmiotu.
+                    Nie powiemy ci, jak to zrobić, ale damy ci jedną wskazówkę: Rozpocznij swój kod w wierszu 1 od: {define} oblicz_średnią_oceny {with} przedmiotu.
                 example_code: |
                     ```
                     # Wykorzystaj swój kod z poprzedniej przygody.
@@ -1331,9 +1330,9 @@ adventures:
                     ```
                     burger = 5
                     napój = 2
-                    cena = burger + drink
-                    print 'Zamówiłeś burgera i napój'
-                    print 'Za wszystko należy się ' cena ' dolarów'
+                    cena = burger + napój
+                    {print} 'Zamówiłeś burgera i napój'
+                    {print} 'Za wszystko należy się ' cena ' dolarów'
                     ```
             13:
                 story_text: |
@@ -1996,7 +1995,7 @@ adventures:
                     ***Przejdź do następnej przygody*** Po ustawieniu wszystkich zmiennych początkowych możemy rozpocząć programowanie samej gry. Sprawdź następną kartę, aby dowiedzieć się, jak to zrobić!
                 example_code: |
                     ```
-                    print 'Wisielec!'
+                    {print} 'Wisielec!'
 
                     # Ustaw zmienne
                     odpowiedź = []
@@ -2009,12 +2008,12 @@ adventures:
                     {for} _
                         litera = {ask} 'Graczu 1, jaka jest litera numer ' i '?'
                         _
-                        {add} '_' {to} _
+                        {add} '_' {to_list} _
 
                     # Kolej Gracza 2
-                    print _
-                    print _
-                    print odgadnięte_litery
+                    {print} _
+                    {print} _
+                    {print} odgadnięte_litery
                     ```
     hangman_2:
         name: Wisielec 2
@@ -2031,7 +2030,7 @@ adventures:
 
                     **Gra*** Ta gra trwa do momentu, aż Gracz 2 nie zakończy swojej gry (wygra lub przegra). Wypełnij odpowiednio polecenie while. Teraz Gracz 2 może odgadnąć litery, więc poproś Gracza 2, aby je
                     zgadywał. Musimy sprawdzić, czy jego odpowiedź jest poprawna, więc sprawdź, czy jego `guess` jest (gdzieś) na (liście) `answer`. Następnie pozwalamy komputerowi dowiedzieć się, która z liter jest zgadywana. Zaprogramowaliśmy już tę część dla Ciebie.
-                    Następnie chcemy pochwalić gracza za odgadnięcie poprawnej litery i chcemy wydrukować listę `odgadnięte_litery`, aby gracz mógł zobaczyć swoje postępy.
+                    Następnie chcemy pochwalić gracza za odgadnięcie poprawnej litery i chcemy wydrukować listę `guessed_letters`, aby gracz mógł zobaczyć swoje postępy.
 
                     W następnej części zaprogramujemy i dowiemy się co się stanie jeśli gracz odgadnie wszystkie litery. Czyli jeśli jego odgadnięte litery `guessed_letters` są takie same jak nasza odpowiedź `answer`.
                     Jeżeli są one takie same, to wtedy pogratuluj Graczowi 2 jego zwycięstwa i ustaw zmienną `game_over` na `True`.
@@ -3096,7 +3095,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## Komenda print
+                    ## Komenda {print}
                     Możesz wypisać tekst na ekran używając komendy `{print}`.
                 example_code: |
                     ```
@@ -3210,7 +3209,7 @@ adventures:
                 example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
     random_command:
         default_save_name: Komenda pozycja losowa
-        description: Przedstawienie komendy pozycja losowa
+        description: Przedstawienie komendy {at} {random}
         levels:
             3:
                 story_text: |
@@ -3859,7 +3858,7 @@ adventures:
                     {define} _
                         {for} _
                             _ 'Jaki jest kolor i numer' i '?'
-                            {add} answer {to} _
+                            {add} answer {to_list} _
 
                     # Skonfiguruj
                     poziom= _
@@ -4330,11 +4329,11 @@ adventures:
 
                     Użyj 90 stopni, aby obrócić ćwierć, 180, aby obrócić pół, a pełne koło jest 360 stopni.
 
-                    Ćwiczenia
+                    ### Ćwiczenia
                     Ten kod tworzy teraz literę T Możesz to zmienić na literę B?
 
                     **Extra** Zmień literę na inną literę, jak pierwsza z twojego imienia.
-                    Możesz również zrobić wiele liter, ustawiając kolor na `{color}` `{white}` pomiędzy. 
+                    Możesz również zrobić wiele liter, ustawiając kolor na `{color}` `{white}` pomiędzy.
                 example_code: |
                     ```
                     {forward} 80
@@ -4344,7 +4343,7 @@ adventures:
                     {forward} 100
                     ```
                 story_text_2: |
-                    Możesz użyć zmiennych w żółwiu 'turn'.
+                    Możesz użyć zmiennych w żółwiu `turn`.
 
                     ### Ćwiczenia
                     Zmień kod tak, aby stworzył trójkąt. Podpowiedź: trzeba tylko zmienić kod w jednym miejscu.
