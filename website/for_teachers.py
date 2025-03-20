@@ -467,12 +467,13 @@ class ForTeachersModule(WebsiteModule):
     @route("/grid_overview/<class_id>/change_checkbox", methods=["POST"])
     @requires_login
     def change_checkbox(self, user, class_id):
-        level = request.args.get('level')
-        student_name = request.args.get('student', type=str)
-        adventure_name = request.args.get('adventure', type=str)
+        level = request.args.get("level")
+        student_name = request.args.get("student", type=str)
+        adventure_name = request.args.get("adventure", type=str)
 
-        students, class_, class_adventures_formatted, adventure_names, _, _, _ = self.get_grid_info(
-            user, class_id, level)
+        students, class_, class_adventures_formatted, adventure_names, _, _, _ = (
+            self.get_grid_info(user, class_id, level)
+        )
 
         adventure_names = {value: key for key, value in adventure_names.items()}
         student_adventure_id = f"{student_name}-{adventure_name}-{level}"
@@ -480,21 +481,34 @@ class ForTeachersModule(WebsiteModule):
         if not current_adventure:
             return utils.error_page(error=404, ui_message=gettext("no_programs"))
 
-        self.db.update_student_adventure(student_adventure_id, current_adventure['ticked'])
-        student_overview_table, class_, class_adventures_formatted, \
-            adventure_names, student_adventures, _, students_info = self.get_grid_info(user, class_id, level)
+        self.db.update_student_adventure(student_adventure_id, current_adventure["ticked"])
+        (
+            student_overview_table,
+            class_,
+            class_adventures_formatted,
+            adventure_names,
+            student_adventures,
+            _,
+            students_info,
+        ) = self.get_grid_info(user, class_id, level)
 
-        return jinja_partials.render_partial("customize-grid/partial-grid-tables.html",
-                                             level=level,
-                                             class_info={"id": class_id, "students": students, "name": class_["name"]},
-                                             adventure_table={
-                                                 'students': student_overview_table,
-                                                 'adventures': class_adventures_formatted,
-                                                 'student_adventures': student_adventures,
-                                                 'level': level,
-                                             },
-                                             students_info=students_info
-                                             )
+        return jinja_partials.render_partial(
+            "customize-grid/partial-grid-tables.html",
+            level=level,
+            class_info={
+                "id": class_id,
+                "students": students,
+                "name": class_["name"],
+                "link": class_["link"],
+            },
+            adventure_table={
+                "students": student_overview_table,
+                "adventures": class_adventures_formatted,
+                "student_adventures": student_adventures,
+                "level": level,
+            },
+            students_info=students_info,
+        )
 
     @route("/class/<class_id>/remove_student_modal/<student_id>", methods=["GET"])
     @requires_teacher
