@@ -46,6 +46,7 @@ class ClassModule(WebsiteModule):
             "id": uuid.uuid4().hex,
             "date": utils.timems(),
             "teacher": user["username"],
+            # TODO: remove once we deploy new redesign
             "link": utils.random_id_generator(7),
             "name": body["name"],
         }
@@ -96,8 +97,12 @@ class ClassModule(WebsiteModule):
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
         return render_partial('htmx-classes-table.html', teacher_classes=teacher_classes)
 
+    # TODO: remove once we deploy new redesign
     @route("/<class_id>/prejoin/<link>", methods=["GET"])
     def prejoin_class(self, class_id, link):
+        if utils.is_redesign_enabled():
+            return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
+
         Class = self.db.get_class(class_id)
         if not Class or Class["link"] != link:
             return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
@@ -252,6 +257,7 @@ class MiscClassPages(WebsiteModule):
             "id": class_id,
             "date": utils.timems(),
             "teacher": user["username"],
+            # TODO: remove once we deploy new redesign
             "link": utils.random_id_generator(7),
             "name": body.get("name"),
             "created_by": user["username"],
@@ -395,8 +401,11 @@ class MiscClassPages(WebsiteModule):
         self.db.remove_user_class_invite(username, class_id)
         return make_response('', 204)
 
+    # TODO: remove once we deploy new redesign
     @route("/hedy/l/<link_id>", methods=["GET"])
     def resolve_class_link(self, link_id):
+        if utils.is_redesign_enabled():
+            return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
         Class = self.db.resolve_class_link(link_id)
         if not Class:
             return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
