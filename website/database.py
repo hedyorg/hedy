@@ -35,7 +35,6 @@ from os import path
 from utils import timems, times
 
 from . import dynamo, auth
-from . import querylog
 
 from .dynamo import DictOf, OptionalOf, ListOf, SetOf, RecordOf, EitherOf
 

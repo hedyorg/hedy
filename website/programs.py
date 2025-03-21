@@ -14,7 +14,6 @@ from website.auth import (
     current_user,
     email_base_url,
     is_admin,
-    requires_admin,
     requires_login,
     requires_teacher,
     send_email,

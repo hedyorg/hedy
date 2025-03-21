@@ -165,6 +165,8 @@ def has_public_profile(user):
     return has_public_profile
 
 # Thanks to https://stackoverflow.com/a/34499643
+
+
 def requires_login(f):
     """Decoractor to indicate that a particular route requires the user to be logged in.
 
