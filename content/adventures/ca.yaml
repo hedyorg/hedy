@@ -229,7 +229,7 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## Afegeix a
+                    ## {add} {to_list}
                     Pots afegir articles a la llista amb la comanda`{add} {to_list}`. Per afegir un element a una llista, simplement escrius: `{add} pingüí {to_list} animals` o bé pots utilitzar la comanda `{ask}` com en el codi d'exemple.
                 example_code: |
                     ```
@@ -239,7 +239,7 @@ adventures:
                     {print} Escullo animals {at} {random}
                     ```
                 story_text_2: |
-                    ## Esborra de
+                    ## {remove} {from}
                     De la mateixa manera que pots afegir articles a una llista pots treure'ls. Això es fa amb la comanda `{remove} {from}`.
                 example_code_2: |
                     ```
@@ -285,7 +285,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## La comanda pregunta
+                    ## La comanda `{ask}`
                     Ara que ja saps utilitzar la comanda`{print}`, estàs preparat per aprendre la següent comanda: `{ask}`. Amb `{ask}`, pots fer una pregunta. Comprova-ho:
                 example_code: |
                     ```
@@ -312,9 +312,9 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ## La comanda pregunta
+                    ## La comanda `{ask}`
                     Ara que sabem utilitzar **variables** als nostres codis, ja no necessitem la comanda `{echo}`.
-                    Podem utilitzar variables per emmagatzemar les respostes a les nostres preguntes i podem respondre múltiples preguntes en els nostres codis.
+                    Podem fer servir variables per emmagatzemar les respostes a les nostres preguntes i podem respondre múltiples preguntes en els nostres codis.
                     Comprova-ho:
 
                     D'aquesta manera, el teu codi es torna interactiu!
@@ -328,7 +328,7 @@ adventures:
                 story_text_2: |
                     ### Exercici
                     A l'aventura anterior heu practicat a establir variables amb la comanda `{is}`.
-                    Has creat almenys 3 variables i les has utilitzat amb una comanda d'impressió.
+                    Has creat almenys 3 variables i les has utilitzat amb una comanda `{print}`.
                     Ara, en lloc d'establir les variables, volem que les facis interactives, com hem fet al nostre exemple.
 
                     Copia el teu codi de l'aventura anterior i fes que les variables siguin interactives mitjançant la comanda `{ask}`.
@@ -346,7 +346,7 @@ adventures:
         default_save_name: Blackjack
         levels:
             17:
-                story_text: "El Blackjack és un joc de cartes senzill en el qual has d’apropar-te tant com puguis a 21 punts. Reps dues cartes. Cada carta val el seu valor numèric, i les figures (Sota, Reina i Rei) valen 10 punts.\nL'As val o bé 1 o bé 11 punts (pots triar). La banca, el teu oponent, qui reparteix, també rep dues cartes.\nSi ho vols, pots rebre una altra carta, i els seus punts s'afegiran al teu total. La banca també pot triar rebre una altra carta.\nPerò vigila de no superar els 21 punts, perquè si ho fas, perds!\nEl jugador que s’apropa més a 21, sense superar-lo, guanya!\n\n### Exercici\nEn aquesta aventura, codifiquem la primera part del nostre joc de Blackjack. Crearem una funció per calcular quants punts val una carta.\n\n***Defineix les variables***\nComença fent una llista de totes les cartes, del 2 a l'As. A continuació, fes una llista de les figures, és a dir, la Sota, la Reina i el Rei. Després tria una carta aleatòria de la llista de cartes per assignar-la a carta_1.\n\n***Crea una funció per calcular els punts***\nCrea una funció que calculi quants punts val una carta.\nTotes les figures valen 10 punts, l'As en val 11 i totes les altres cartes valen el seu número.\nRetorna la variable `points` al final de la funció.\n\n***Prova la funció***\nProva si la teva funció funciona correctament. Completa la primera comanda print omplint quina carta has tret. Aleshores completa la segona línia cridant la funció amb carta_1.\nExecuta el codi unes quantes vegades. Estàs satisfet amb els resultats? Genial! Aleshores pots eliminar la part de proves i avançar a la següent aventura!\n"
+                story_text: "El Blackjack és un joc de cartes senzill en el qual has d’apropar-te tant com puguis a 21 punts. Reps dues cartes. Cada carta val el seu valor numèric, i les figures (Sota, Reina i Rei) valen 10 punts.\nL'As val o bé 1 o bé 11 punts (pots triar). La banca, el teu oponent, qui reparteix, també rep dues cartes.\nSi ho vols, pots rebre una altra carta, i els seus punts s'afegiran al teu total. La banca també pot triar rebre una altra carta.\nPerò vigila de no superar els 21 punts, perquè si ho fas, perds!\nEl jugador que s’apropa més a 21, sense superar-lo, guanya!\n\n### Exercici\nEn aquesta aventura, codifiquem la primera part del nostre joc de Blackjack. Crearem una funció per calcular quants punts val una carta.\n\n***Defineix les variables***\nComença fent una llista de totes les cartes, del 2 a l'As. A continuació, fes una llista de les figures, és a dir, la Sota, la Reina i el Rei. Després tria una carta aleatòria de la llista de cartes per assignar-la a carta_1.\n\n***Crea una funció per calcular els punts***\nCrea una funció que calculi quants punts val una carta.\nTotes les figures valen 10 punts, l'As en val 11 i totes les altres cartes valen el seu número.\nRetorna la variable `points` al final de la funció.\n\n***Prova la funció***\nProva si la teva funció funciona correctament. Completa la primera comanda `{print}` omplint quina carta has tret. Aleshores completa la segona línia cridant la funció amb carta_1.\nExecuta el codi unes quantes vegades. Estàs satisfet amb els resultats? Genial! Aleshores pots eliminar la part de proves i avançar a la següent aventura!\n"
                 example_code: "```\n{print} \"BLACKJACK\"\n\n# Defineix les variables\ncartes = _\ncartes_obertes = _\ncarta_1 =\n\n# Crea una funció per a calcular els punts\n{define} calcular_punts {with} carta:\n    {if} carta {in} cartes_obertes:\n        points = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ points\n\n# Testeja la teva funció\n{print} \"La teva carta és \" _\n{print} \"Aquesta carta val \" _ \" points\".\n```\n"
         name: Blackjack
     calculator:
