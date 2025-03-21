@@ -890,8 +890,8 @@ adventures:
             3:
                 story_text_3: "### Cvičení\nVyzkoušejte si nové příkazy v této virtuální restauraci. Přidejte do seznamu příchuť, kterou hráč doufá, že dostane, a odstraňte příchutě, na které je alergický.\n"
                 story_text: "## Přidat do\nPoložky můžete do seznamu přidávat pomocí příkazu `{add} {to_list}`. Chcete-li přidat položku do seznamu, můžete jednoduše zadat: `{add} penguin {to_list} animals` nebo můžete použít příkaz `{ask}` jako v příkladu kódu.\n"
-                example_code: "```\nzvířata  {is} pes, kočka, klokan\njako  {is} {ask} Jaké je tvoje oblíbené zvíře?\n{add} rád  {to_list} zvířata\n{print} vybírám si zvířata {at} {random}\n```\n"
-                example_code_2: "```\nanimals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}\n```\n"
+                example_code: "```\nzvířata {is} pes, kočka, klokan\njako {is} {ask} Jaké je tvoje oblíbené zvíře?\n{add} jako {to_list} zvířata\n{print} vybírám si zvířata {at} {random}\n```\n"
+                example_code_2: "```\nzvířata {is} pes, kočka, klokan\nnemít_rád {is} {ask} Jaké zvíře nemáš rád?\n{remove} nemám_rád {from} zvířata\n{print} Vybírám si zvířata {at} {random}\n```\n"
                 story_text_2: "## Odstranit z\nPokud můžete položky do seznamu přidávat, můžete je samozřejmě také odebírat. To se provádí příkazem `{remove} {from}` příkazem.\n"
                 example_code_3: |
                     ```
@@ -1233,7 +1233,7 @@ adventures:
     random_command:
         levels:
             3:
-                example_code: "```\nanimals {is} dogs, cats, kangaroos\n{print} animals {at} {random}\n```\n"
+                example_code: "```\nzvířata {is} psi, kočky, klokani\n{print} zvířata {at} {random}\n```\n"
                 story_text_3: "### Cvičení\nVyzkoušejte si příkaz `{at} {random}` tak, že si vytvoříte vlastní herní show (jako v televizi), kde si vyberete dveře nebo kufr a v něm velkou cenu!\nDokážete to? První řádky jsme již vložili do ukázkového kódu.\n"
                 example_code_3: "```\n{print} Velká herní show!\n{print} Před vámi jsou 3 kufry...\nVybraný {is} {ask} Který kufr si vybereš?\nceny {is} _\n_\n```\n"
                 example_code_2: "```\nfood {is} sandwich, slice of pizza, salad, burrito\n{print} I am going to have a food {at} {random} for lunch.\n```\n"
