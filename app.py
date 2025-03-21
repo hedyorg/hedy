@@ -555,11 +555,16 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 @app.app_context_processor
 def enrich_context_with_user_info():
     user = current_user()
-    data = {'username': user.get('username', ''),
-            'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
-            'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user),
-            'is_super_teacher': is_super_teacher(user),
-            'hide_explore': hide_explore(g.user)}
+    data = {
+        "username": user.get("username", ""),
+        "is_teacher": is_teacher(user),
+        "is_second_teacher": is_second_teacher(user),
+        "is_admin": is_admin(user),
+        "has_public_profile": has_public_profile(user),
+        "is_super_teacher": is_super_teacher(user),
+        "hide_explore": hide_explore(g.user),
+        "is_redesign_enabled": utils.is_redesign_enabled()
+    }
     return data
 
 

@@ -244,6 +244,7 @@ class ForTeachersModule(WebsiteModule):
         if utils.is_testing_request(request):
             return make_response({
                 "students": graph_students,
+                # TODO: remove once we deploy new redesign
                 "link": Class["link"],
                 "name": Class["name"],
                 "id": Class["id"]
@@ -257,6 +258,7 @@ class ForTeachersModule(WebsiteModule):
             level=level,
             class_info={
                 "students": len(students),
+                # TODO: remove once we deploy new redesign
                 "link": os.getenv("BASE_URL", "") + "/hedy/l/" + Class["link"],
                 "teacher": Class["teacher"],
                 "second_teachers": second_teachers,
@@ -780,7 +782,6 @@ class ForTeachersModule(WebsiteModule):
             adventures=adventures,
             adventure_names=adventure_names,
             available_adventures=available_adventures,
-            is_redesign_enabled=utils.is_redesign_enabled(),
             custom_adventures=list(dict.fromkeys(
                 [item for sublist in available_adventures.values() for item in sublist if item.is_teacher_adventure])),
             adventures_default_order=hedy_content.adventures_order_per_level(),
