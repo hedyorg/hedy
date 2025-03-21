@@ -200,4 +200,23 @@ teacher-guide:
             title: Os alunos às vezes usam dois nomes diferentes para a mesma variável
         level: '2'
     -   level: '3'
+        sections:
+        -   title: Os alunos tentam imprimir listas inteiras
+            example:
+                error_text: Não se pode imprimir uma lista. Só se pode imprimir um único elemento de uma lista com {at} {random} .
+                error_code: "compras {is} maçãs, leite, chocolate\n{print} compras"
+                solution_text: Para imprimir uma lista de todas as compras, você simplesmente as põe depois de um comando `{print}`. Ou então você usa a lista para imprimir um item com `{at}` `{random}`.
+                solution_code: "{print} maçãs, leite, chocolate\n\n#ou\n\ncompras {is} maçãs, leite, chocolate\n{print} compras {at} {random}"
+        -   example:
+                solution_text: Não use o nome de variáveis em texto normal para imprimir. No nível 4 esse problema é resolvido com aspas.
+                error_text: Provavelmente esse problema já ocorria no nível 2. Agora pode acontecer com listas também.
+                error_code: "nome {is} Hedy\n{print} Oi, meu nome é nome\n\n#o\n\nanimal {is} rinoceronte, abelha, cisne\n{print} O melhor animal é... animal {at} {random}"
+                solution_code: "nome {is} Hedy\n{print} Olá, sou nome\n\n#o\n\nanimais {is} rinoceronte, abelha, cisne\n{print} O melhor animal é... animais {at} {random}"
+            title: Os alunos usam um nome de variável ou lista como texto normal
+        -   example:
+                error_text: Como no exemplo
+                error_code: "aves {is} pardal, gaivota, sabiá\n{print} aves aleatório"
+                solution_text: Esse problema se resolve usando a palavra 'em'.
+                solution_code: "aves {is} pardal, gaivota, sabiá\n{print} aves {at} {random}"
+            title: Os alunos esquecem do `{at}`em `{at}` `{random}`
     intro: A gente aprende com os erros, especialmente na programação! Cometer erros é inevitável e uma ótima oportunidade de aprendizado, mas para os professores, pode ser um desafio encontrar a correção certa para um erro! Especialmente à medida que os programas ficam cada vez mais longos conforme os alunos progridem nos níveis. É por isso que criamos uma lista com erros frequentes em cada nível e suas soluções.
