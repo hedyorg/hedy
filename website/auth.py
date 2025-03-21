@@ -165,17 +165,6 @@ def has_public_profile(user):
     return has_public_profile
 
 # Thanks to https://stackoverflow.com/a/34499643
-
-
-def hide_explore(user):
-    if 'username' not in user or user.get('username') == '':
-        return False
-    username = user.get('username')
-    customizations = g_db().get_student_class_customizations(username)
-    hide_explore = True if customizations and 'hide_explore' in customizations.get('other_settings') else False
-    return hide_explore
-
-
 def requires_login(f):
     """Decoractor to indicate that a particular route requires the user to be logged in.
 
