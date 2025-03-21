@@ -518,7 +518,7 @@ adventures:
                 story_text: |-
                     ### Exercici
                     Depura aquest codi. Bona sort!
-                example_code: "**Atenció!, cal depurar aquest codi!**\n```\n{print} \"Máquina expenadora\"\nproducte_escollit = {ask} \"Selecciona un producte siusplau\"\n1_euro_producte = cocacola fanta suc aigua\n2_euro_producte = xocolata, galetes, barreta de muesli\n3dollar_prodcuts = patates xips, magdalena, embotit\n{if} chosen {is} {in} 1_euro_producte\npreu = 1\n{if} producte_escollit {is} 2_euro_producte\npreu = 2\n{else} producte_escollit {in} 3_euro_producte\npreu = 3\nquantitat_productes = \"{ask} Quants \" producte_escollit vols escollir?\"\ntotal = preu + quantitat_producte\n{print} \"Seran \" preu \"€ siusplau\"\n```\n"
+                example_code: "**Atenció!, cal depurar aquest codi!**\n```\n{print} \"Máquina expenadora\"\nproducte_escollit = {ask} \"Selecciona un producte siusplau\"\n1_euro_producte = cocacola fanta suc aigua\n2_euro_producte = xocolata, galetes, barreta de muesli\n3_euro_producte = patates xips, magdalena, embotit\n{if} chosen {is} {in} 1_euro_producte\npreu = 1\n{if} producte_escollit {is} 2_euro_producte\npreu = 2\n{else} producte_escollit {in} 3_euro_producte\npreu = 3\nquantitat_productes = \"{ask} Quants \" producte_escollit vols escollir?\"\ntotal = preu + quantitat_producte\n{print} \"Seran \" preu \"€ siusplau\"\n```\n"
             7:
                 story_text: |-
                     ### Exercici
