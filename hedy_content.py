@@ -151,8 +151,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     6: [
         'default',
         'maths',
-        'music',
         'is_command',
+        'music',
         'songs',
         'dice',
         'dishes',
