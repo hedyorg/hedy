@@ -168,6 +168,7 @@ class Database:
                                     types=only_in_dev({
                                         'id': str,
                                         'teacher': str,
+                                        # TODO: remove once we deploy new redesign
                                         'link': str,
                                         'date': int,
                                         'name': str,
@@ -180,6 +181,8 @@ class Database:
                                     }),
                                     indexes=[
                                         dynamo.Index('teacher'),
+                                        # TODO: remove once we deploy new redesign
+                                        # also remove from Dynamo AWS console
                                         dynamo.Index('link'),
                                     ]
                                     )
