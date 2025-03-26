@@ -28,7 +28,9 @@
         id="customize_class">
 
     <div class="flex flex-col lg:flex-row gap-4">
-        <div class="flex flex-col gap- w-full"> 
+        <div class="flex flex-col gap- w-full">
+
+           {% if not is_redesign_enabled %}
             <div class="flex flex-col">
                 <h3 class="px-4"><u>{{_('unlock_thresholds')}}</u></h3>
                 <div class="border border-gray-400 py-2 px-4 rounded-lg w-full">
@@ -56,6 +58,8 @@
                     </table>
                 </div>
             </div>
+            {% endif %}
+
             <div class="flex flex-col">
                 <h3 class="px-4"><u>{{_('other_settings')}}</u></h3>
                 <div class="border border-gray-400 py-2 px-4 rounded-lg">
@@ -101,6 +105,7 @@
                                         %}>
                                 </td>
                             </tr>
+                            {% if not is_redesign_enabled %}
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('disable_quizes')}}</td>
                                 <td class="border-t border-gray-400">
@@ -115,6 +120,7 @@
                                         if "hide_parsons" in customizations['other_settings'] %}checked{% endif %}>
                                 </td>
                             </tr>
+                            {% endif %}
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('disable_explore_page')}}</td>
                                 <td class="border-t border-gray-400">

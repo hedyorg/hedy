@@ -536,7 +536,7 @@ adventures:
             3:
                 story_text_2: "### Cvičení\nNyní vytvořte vlastní verzi náhodné restaurace.\nVytvořte si seznam hlavních jídel, dezertů, nápojů a cen.\nPak použijte příkazy `{print}` a `{at} {random}` a sdělte zákazníkovi, co bude dnes večer na jídelním lístku.\n"
                 story_text: "Nemůžete se rozhodnout, co si dáte k večeři? Můžete nechat Hedy, aby vybrala za vás!\nJednoduše přidejte seznamy svých oblíbených (nebo naopak nejméně oblíbených) jídel a Hedy vám náhodně vybere večeři.\nMůžete se také trochu pobavit tím, že necháte Hedy vybrat i cenu vaší večeře! Co dostanete?\n"
-                example_code_2: "```\n{print}Vítejte ve své vlastní náhodné restauraci!\npředkrmy {is}_\nhlavní jídla {is}_\ndezerty {is}_\nnápoje {is}_\nceny {is}_\n_\n```\n"
+                example_code_2: "```\n{print} Vítejte ve své vlastní náhodné restauraci!\npředkrmy {is}_\nhlavní_jídla {is}_\ndezerty {is}_\nnápoje {is}_\nceny {is}_\n_\n```\n"
                 example_code: "```\ndishes {is} spaghetti, brussels sprouts, hamburgers\n{print} You will have dishes {at} {random} tonight!\nprices {is} 1 euro, 10 euros, 100 euros\n{print} That will be prices {at} {random} please.\n```\n"
             5:
                 story_text: "### Cvičení\nPříklad kódu ukazuje, jak můžete naprogramovat, že vám v restauraci došla položka menu.\nZkopírujte si vlastní kód restaurace z předchozích úrovní. Vytvořte ve své restauraci problém a nakódujte jej, jako to udělal příklad kódu.\nMohla by vám například také dojít položka jídelního lístku, nebo nepřijímáte platební karty, nebo je rozbitý stroj na zmrzlinu.\n\n**Extra** Naprogramovali jste problém a naprogramovali vhodné reakce? Pak zkuste do kódu přidat další příkazy `{if}` a `{else}`.\nPokuste se přidat `{if}` za každý `{ask}`příkaz v kódu, aby byl kód co nejvíce interaktivní!\n"
@@ -1207,7 +1207,7 @@ adventures:
         default_save_name: Kat_3
         levels:
             17:
-                example_code: "```\n# Vytvoříme funkci, která vykreslí oběšence\n{define}nakreslit_kata {with}krok:\n    {if}krok == 1:\n        {color}bílá\n        {forward}-100\n        {turn}90\n        {forward}-50\n        {color}černá\n        {forward}100\n        {forward}-50\n\n    {if}kroky == 2:\n        _\n# Vložte sem svou hru kata\n\n```\n"
+                example_code: "```\n# Vytvoříme funkci, která vykreslí oběšence\n{define} nakreslit_kata {with} krok:\n    {if} krok == 1:\n        {color} bílá\n        {forward} -100\n        {turn} 90\n        {forward} -50\n        {color} černá\n        {forward} 100\n        {forward} -50\n\n    {if} krok == 2:\n        _\n# Vložte sem svou hru kata\n\n```\n"
                 story_text: "Při hře na kata se chyby projevují tak, že se při každé chybě nakreslí část kata.\nNyní tyto kresby doplníme naší želvou!\n\n### Cvičení\n***Vytvořte funkci, která nakreslí oběšence*** Vytvořte funkci, která nakreslí oběšence v 10 krocích. Krok 1 jsme již vytvořili za vás.\n\n***Vyzkoušejte funkci*** Otestujte funkci tak, že ji zavoláte s číslem 10. Pokud jste s funkcí spokojeni, odstraňte prozatím řádek, který funkci volá. Funkci zavoláme, až hráč udělá chybu.\n\n***Vložte pod funkci hru oběšence*** Vraťte se k předchozímu dobrodružství a zkopírujte svou hru oběšence. Hru vložte pod svou funkci.\n\n***Volání funkce, když hráč udělá chybu*** Pod řádkem `mistakes_made = mistakes_made + 1` budeme volat funkci. Chceme, aby želva udělala tolik kroků, kolik hráč udělal chyb, proto zavoláme funkci s argumentem `mistakes_made`.\n\n***Užijte si hru!***\n<div class=\"w-full flex flex-row gap-2\">\n    Oběšenec by mohl vypadat takto <img src=\"https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129\" width=\"100\">\n</div>\n"
         description: Kat 3
     is_command:
@@ -1261,7 +1261,7 @@ adventures:
                 story_text: "**Desetinná čísla**\nDosud Hedy neumožňoval zadávat desetinná čísla, například 1,5, ale nyní to již umožňujeme. Všimněte si, že počítače používají pro desetinná čísla znak `.`."
                 example_code: "```\n{print} 'Two and a half plus two and a half is...'\n{print} 2.5 + 2.5\n```\n"
                 story_text_2: "**Matematika se slovy**\nV této úrovni můžete také provádět sčítání se slovy, jako je toto:"
-                example_code_2: "```\na = 'Ahoj '\nb = 'svět!'\n{print}a + b\n```\n"
+                example_code_2: "```\na = 'Ahoj '\nb = 'svět!'\n{print} a + b\n```\n"
             6:
                 example_code: "```\n{print} '5 plus 5 is ' 5 + 5\n{print} '5 minus 5 is ' 5 - 5\n{print} '5 times 5 is ' 5 * 5\n{print} '5 divided by 5 is ' 5 / 5\n```\n"
                 story_text: "V této úrovni se dozvíte něco nového: nyní můžete také počítat.\n\nPlus je snadné, píšete to jako v matematice: Například: `5 + 5`. Mínus také funguje dobře, je to `5 - 5`.\n\nS časy je to trochu jiné, protože na klávesnici nemáte žádný symbol času. Stačí hledat, opravdu tam není!\nProto násobíme hvězdičkou nad 8: `5 * 5`. Čtěte to jako ,,5 krát 5“, to vám pomůže si to nejlépe zapamatovat.\n"

@@ -170,16 +170,8 @@ def is_testing_request(request):
 
 
 def is_redesign_enabled():
-    return REDESIGN_2025_ENABLED_BY_DEFAULT or is_opted_in_to_preview()
-
-
-def is_opted_in_to_preview():
-    opt = request.args.get("tryit", False)
-    return False if opt in ['0', 'false', 'no'] else bool(opt)
-
-
-# Flip this to True when we are ready to release
-REDESIGN_2025_ENABLED_BY_DEFAULT = False
+    # Flip this to True when we are ready to release
+    return False
 
 
 def extract_bcrypt_rounds(hash):
@@ -310,6 +302,15 @@ def random_id_generator(
         string.ascii_lowercase +
         string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+
+def random_password_generator(size=6):
+    """
+    This function generates a random password using the base 58 characters to
+    prevent confusion between characters like 0 and O, or 1 and l.
+    """
+    base_58_chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz',
+    return random_id_generator(size, base_58_chars)
 
 
 def markdown_to_html_tags(markdown):

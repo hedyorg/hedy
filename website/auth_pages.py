@@ -1,4 +1,5 @@
 import datetime
+import os
 
 from flask import make_response, redirect, request, session
 from website.flask_helpers import gettext_with_fallback as gettext
@@ -25,6 +26,7 @@ from website.auth import (
     prepare_user_db,
     remember_current_user,
     requires_login,
+    send_email,
     send_email_template,
     send_localized_email_template,
     validate_signup_data,
@@ -177,8 +179,13 @@ class AuthModule(WebsiteModule):
         # We receive the pre-processed user and response package from the function
         user, resp = self.store_new_account(body, body["email"].strip().lower())
 
-        if not is_testing_request(request) and "subscribe" in body:
-            create_subscription(user["email"], body.get("country"))
+        if not is_testing_request(request):
+            if "subscribe" in body:
+                create_subscription(user["email"], body.get("country"))
+            recipient = os.getenv("PAIRING_TEACHER_NOTIFY_EMAIL")
+            if "pair_with_teacher" in body and recipient:
+                msg = f"User with email '{user['email']}' just requested to be paired with another teacher. Yey!"
+                send_email(recipient, "Teacher Pairing Request", msg, msg)
 
         # We automatically login the user
         cookie = make_salt()
@@ -256,6 +263,28 @@ class AuthModule(WebsiteModule):
         session['welcome-teacher'] = True
 
         return make_response({'message': gettext('turned_into_teacher')}, 200)
+
+    @route("/subscribe-to-newsletter", methods=['POST'])
+    def subscribe_to_newsletter(self):
+        username = current_user()['username']
+        if not username:
+            return make_response(gettext("username_invalid"), 400)
+
+        user = self.db.user_by_username(username)
+        # The user must have an email and must be a teacher to subscribe
+        if not user or not user.get('email') or not user.get('is_teacher'):
+            return make_response(gettext("username_invalid"), 403)
+
+        classes = user.get('classes', [])
+        created_class = bool(classes)
+        customized_class = any([self.db.get_class_customizations(c.get('id')) for c in classes])
+
+        success = create_subscription(user["email"], user.get('country'), user.get('is_teacher'),
+                                      created_class, customized_class)
+        if not success:
+            return make_response(gettext('ajax_error'), 400)
+
+        return make_response({'message': gettext("successfully_subscribed")}, 200)
 
     @route("/logout", methods=["POST"])
     def logout(self):
