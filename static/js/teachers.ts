@@ -973,7 +973,8 @@ export function add_user_to_invite_list(username: string, button: HTMLButtonElem
   button.closest('li')?.remove() // We remove the user from the list
   const userList = document.getElementById('users_to_invite')
   for (const userLi of userList?.querySelectorAll('li') || []) {
-    if (userLi.innerText === username) {
+    const p = userLi.querySelector('p')
+    if (p?.textContent?.trim() === username) {
       return
     }
   }
