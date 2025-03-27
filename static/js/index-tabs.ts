@@ -56,14 +56,6 @@ export class IndexTabs {
         location.href = `/tryit/${level}#${tabName}`
     });
 
-    $('#next_adventure').on('click', () => {
-      this.switchPreviousOrNext(true)
-    })
-
-    $('#previous_adventure').on('click', () => {
-      this.switchPreviousOrNext(false)
-    })
-
     // Determine initial tab
     // 1. Given by code
     // 2. In the URL
@@ -147,15 +139,6 @@ export class IndexTabs {
     } else {
       doSwitch();
     }
-  }
-
-  private switchPreviousOrNext(toNext: boolean) {
-    const selected = document.querySelector('.adv-selected') as HTMLElement
-    const i = parseInt(selected?.getAttribute('tabindex') || '0')
-    const next = document.querySelector(`li[tabindex='${i + (toNext ? 1 : -1)}'][data-level='${ selected.dataset['level']}']`) as HTMLElement
-    
-    this.switchToTab(next.dataset['tab']!, Number(next.dataset['level']!))
-    document.getElementById('layout')?.scrollIntoView({behavior: 'smooth'})
   }
 
   public get currentTab() {

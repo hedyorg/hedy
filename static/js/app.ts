@@ -1739,7 +1739,6 @@ function updatePageElements() {
 
     theGlobalEditor.isReadOnly = isSubmitted;
     // All of these are for the buttons added in the new version of the code-page
-    $('#progress_bar').show()
     $('#program_name_container').show()
     $('#share_program_button').show()
     $('#read_outloud_button_container').show()
