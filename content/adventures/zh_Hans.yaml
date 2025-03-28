@@ -15,7 +15,7 @@ adventures:
                 example_code: |
                     ```
                     {ask} 这个故事的主人公是（谁）
-                    {print}主人公现在要到森林里去散步
+                    {print} 主人公现在要到森林里去散步
                     {echo} 他们有点害怕，
                     {print} 听到到处都有疯狂的声音
                     {print} 他们害怕这是一片闹鬼的森林
@@ -971,10 +971,10 @@ adventures:
                     在 Hedy 中，命令有时会发生变化。 例如，`{echo}` 仅适用于级别 1。在本级别中，您将学习一种更好的方法来回显答案。
                     ```
                     {print} 欢迎来到 Hedy's
-                    {ask}你想吃什么？
-                    {echo}所以你想要
-                    {ask}你想喝什么？
-                    {echo}所以你想要
+                    {ask} 你想吃什么？
+                    {echo} 所以你想要
+                    {ask} 你想喝什么？
+                    {echo} 所以你想要
                     ```
             3:
                 story_text: |
@@ -1025,15 +1025,15 @@ adventures:
                     food_price {is} 0
                     drink_price {is} 0
                     total_price {is} 0
-                    {print}“欢迎来到麦克海蒂”
+                    {print} “欢迎来到麦克海蒂”
                     order {is} {ask} '你想吃什么？'
                     {if} order {is} 汉堡包 food_price {is} 5
-                    {if} order{is} 薯条 food_price {is} 2
-                    drink{is} {ask}“你想喝什么？”
+                    {if} order {is} 薯条 food_price {is} 2
+                    drink {is} {ask} “你想喝什么？”
                     {if} drink {is} 水 drink_price {is} 0
-                    {else} drink_price{is} 3
+                    {else} drink_price {is} 3
                     total_price {is} food_price + drink_price
-                    {print} '请付'total_price'美元'
+                    {print} '请付 ' total_price ' 美元'
                     ```
             7:
                 story_text: |
@@ -1098,8 +1098,8 @@ adventures:
                     汉堡 = 5
                     饮料 = 2
                     总计 = 汉堡 + 饮料
-                    print '你已购买汉堡和饮料'
-                    print '总共花费' 总计 '美元'
+                    {print} '你已购买汉堡和饮料'
+                    {print} '总共花费 ' 总计 ' 美元'
                     ```
             13:
                 story_text: |
@@ -1127,14 +1127,14 @@ adventures:
                     从 1 到 5 的所有不同等级都必须单独编程。 幸运的是，在这个级别中，您将学习如何在没有这段极长代码的情况下做到这一点！
                 example_code: |
                     ```
-                    first_grade = {ask}'您在第一次测试中获得了什么分数？”
-                    second_grade = {ask}'您在第二个测试中获得了什么分数？”
-                    added= first_grade + second_grade
-                    mean_grade =添加 / 2
+                    first_grade = {ask} '您在第一次测试中获得了什么分数？'
+                    second_grade = {ask} '您在第二个测试中获得了什么分数？'
+                    added = first_grade + second_grade
+                    mean_grade = added / 2
                     {if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5
-                         {print}'糟糕！你这个科目不及格...'
+                         {print} '糟糕！你这个科目不及格...'
                     {else}
-                         {print}'太棒了！ 你已经通过了这个科目！
+                         {print} '太棒了！ 你已经通过了这个科目！'
                     ```
             15:
                 story_text: |
@@ -1470,11 +1470,11 @@ adventures:
                     像这样：
                 example_code: |
                     ```
-                    _你好，我是海蒂半仙！
-                    _你叫什么？
-                    _让我掐指算一算
+                    _ 你好，我是海蒂半仙！
+                    _ 你叫什么？
+                    _ 让我掐指算一算
                     _ 赵钱孙李……
-                    _你的名字叫
+                    _ 你的名字叫
                     ```
                 story_text_2: |
                     ### 练习
@@ -1783,7 +1783,7 @@ adventures:
                     怪物_1 {is} _
                     怪物_2 {is} _
                     怪物_3 {is} _
-                    {print}你进入了鬼屋。
+                    {print} 你进入了鬼屋。
                     {print} 突然你看到了 怪物_1
                     {print} 你跑进了另一个房间...
                     {print} 但是 怪物_2 在那里等着你！
@@ -2083,7 +2083,7 @@ adventures:
                 example_code_2: |
                     ```
                     最喜爱的动物 {is} _
-                    {print} 我喜欢  动物
+                    {print} 我喜欢 最喜爱的动物
                     ```
             6:
                 story_text: |
@@ -2533,7 +2533,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## print命令
+                    ## {print} 命令
                     你能使用 `{print}` 命令在屏幕上打印文本。
                 example_code: |
                     ```
@@ -2666,7 +2666,7 @@ adventures:
                     ```
     random_command:
         default_save_name: random_命令
-        description: 介绍 at random 命令
+        description: 介绍 {at} {random} 命令
         levels:
             3:
                 story_text: |
@@ -2727,10 +2727,10 @@ adventures:
             7:
                 story_text: |
                     ## 重复!重复!重复!
-                    第7级增加了`{repeat}`命令。`{repeat}`可用于多次执行一行代码。是这样的:
+                    第7级增加了 `{repeat}` 命令。`{repeat}` 可用于多次执行一行代码。是这样的:
 
                     ### 练习
-                    练习使用repeat命令。你能用3行代码而不是现在的4行代码来写生日快乐歌吗?
+                    练习使用 `{repeat}` 命令。你能用3行代码而不是现在的4行代码来写生日快乐歌吗?
                 example_code: |
                     ```
                     {repeat} 3 {times} {print} 'Hedy 真有趣!'
@@ -2750,9 +2750,10 @@ adventures:
                     ```
             9:
                 story_text: |
-                    干得好！你已经达到了另一个新水平！在上一级中，你学会了在{if}或{repeat}命令中使用多行代码。但是你还不能将两者结合起来……
+                    干得好！你已经达到了另一个新水平！在上一级中，你学会了在 `{if}` 或 `{repeat}` 命令中使用多行代码。
+                    但是你还不能将两者结合起来……
 
-                    好消息！在这个级别中，您将被允许在{if}中或{repeat}命令中放置一个{if}。将一个代码块放在另一个代码块中称为嵌套。
+                    好消息！在这个级别中，您将被允许在 `{if}` 中或 `{repeat}` 命令中放置一个 `{if}`。将一个代码块放在另一个代码块中称为嵌套。
                 example_code: |
                     ```
                     answer = {ask} 'Are you ready to learn something new?'
