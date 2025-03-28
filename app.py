@@ -1228,7 +1228,7 @@ def hour_of_code(level, program_id=None):
     # - The level is allowed and available
     # - But, if there is a quiz threshold we have to check again if the user has reached it
 
-    if 'level_thresholds' in customizations:
+    if not utils.is_redesign_enabled() and 'level_thresholds' in customizations:
         if 'quiz' in customizations.get('level_thresholds'):
             # Temporary store the threshold
             threshold = customizations.get('level_thresholds').get('quiz')
@@ -1401,7 +1401,7 @@ def index(level, program_id):
     # At this point we can have the following scenario:
     # - The level is allowed and available
     # - But, if there is a quiz threshold we have to check again if the user has reached it
-    if 'level_thresholds' in customizations:
+    if not utils.is_redesign_enabled() and 'level_thresholds' in customizations:
         # If quiz in level and in some of the previous levels, then we check the threshold level.
         check_threshold = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
 

@@ -92,11 +92,11 @@ adventures:
                     {print}  _ O(a) personagem principal se chama _ nome
                     _
                     _
-                    {print} nome  _ agora está indo andar na floresta _
+                    {print} nome _ agora está indo andar na floresta _
                     {print} nome _ está um pouco assustado(a) _
                     animais {is} 🦔, 🐿, 🦉, 🦇
                     {print} _ Ele(a) ouve um som de _ animais {at} {random}
-                    {print} nome _ tem medo que esta seja uma floresta mal-assombrada _
+                    {print} nome _ tem medo de que esta seja uma floresta mal-assombrada _
                     ```
             5:
                 story_text: |
@@ -1131,7 +1131,7 @@ adventures:
                 story_text: |
                     Agora vamos mudar um pouco a indentação. Toda vez que precisarmos de uma indentação, precisaremos colocar `:` na linha anterior a ela.
 
-                    Neste nível, você também pode usar um novo comando: `{elif}`. `{elif}` é a junção de {else} com {if} e você precisará dele quando quiser fazer 3 (ou mais!) opções.
+                    Neste nível, você também pode usar um novo comando: `{elif}`. `{elif}` é a junção de `{else}` com `{if}` e você precisará dele quando quiser fazer 3 (ou mais!) opções.
                     Confira!
             18:
                 story_text: |
@@ -1203,10 +1203,10 @@ adventures:
                     Você conseguiu calcular a pontuação para 8 dados? Precisou copiar e colar muitas vezes, né? Vamos deixar isso mais fácil no nível 7!
             7:
                 story_text: |
-                    Você também pode fazer um dado novamente neste nível. Com o comando `{repeat}` você pode facilmente rolar uma mão cheia de dados.
+                    Você também pode fazer um dado novamente neste nível. Com o comando `{repeat}`, você pode facilmente rolar uma mão cheia de dados.
 
                     ### Exercício
-                    Tente finalizar o código amostra!  **Extra** Pense num jogo que você conhece que envolve dados e o programe usando um `{repeat}`.
+                    Tente finalizar o código amostra! **Extra** Pense num jogo que você conhece que envolve dados e o programe usando um `{repeat}`.
                 example_code: |
                     ```
                     escolhas = 1, 2, 3, 4, 5, 6
@@ -1866,8 +1866,8 @@ adventures:
                 story_text_2: |
                     ### Exercício
                     É hora de criar suas próprias variáveis!
-                    No código de exemplo fizemos um exemplo da variável `animal_favorito`. Na linha 1 a variável é definida, e na linha 2 usamos a variável em um comando de impressão.
-                    Em primeiro lugar, termine o nosso exemplo preenchendo o espaço em branco com o seu animal favorito. Então faça você mesmo pelo menos 3 desses códigos. Escolha uma variável e defina-a com o comando {is}. Em seguida, use-a com um comando {print}, assim como fizemos.
+                    No código exemplo, fizemos um exemplo da variável `animal_favorito`. Na linha 1, a variável é definida e, na linha 2, usamos a variável em um comando `{print}`.
+                    Primeiro, complete o nosso exemplo preenchendo a lacuna com o seu animal favorito. Então, faça você mesmo pelo menos 3 desses códigos. Escolha uma variável e a defina com o comando `{is}`. Em seguida, use-a com um comando {print}, assim como fizemos.
                 example_code_2: |
                     ```
                     animal_favorito {is} _
@@ -1968,6 +1968,7 @@ adventures:
                     ### Exercício
                     Experimente o código exemplo e então brinque com ele! Você consegue criar sua própria melodia?
                     No próximo nível, você aprenderá a tocar algumas músicas já existentes.
+                example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
             2:
                 story_text: |
                     ### Exercise
@@ -2051,7 +2052,7 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercício
-                    Copie o código exemplo para sua tela de entrada clicando no botão amarelo.
+                    Copie o código exemplo à sua tela de entrada clicando no botão amarelo.
                     Faça a papagaia perguntar outra coisa. Preencha as lacunas no exemplo!
                     **Extra** Você também pode deixar a papagaia fazer múltiplas perguntas. Escreva mais algumas linhas de código embaixo de seu programa.
                 example_code_2: |
@@ -2062,7 +2063,8 @@ adventures:
                     {echo}
             2:
                 story_text: |
-                    Crie sua própria papagaia de estimação online que irá copiar você!
+                    No nível anterior, você fez uma papagaia que repete o que você diz. Neste nível, tornaremos a papagaia interativa usando uma variável e o comando `{ask}`.
+                    Também faremos a papagaia parecer mais viva adicionando comandos `{sleep}` depois que algo é dito.
                 example_code: |
                     ```
                     {print} Sou Hedy, a papagaia
@@ -2097,6 +2099,7 @@ adventures:
                 story_text: |
                     In this level we have to use quotation marks with the commands `{ask}` and `{print}`.
                     Can you complete the code by adding quotation marks?
+                example_code: "```\npalavras {is} crrác, Hedy\n{print} _ Treine sua papagaia! _\npalavra_nova {is} {ask} _ Qual palavra você quer ensinar a ela? _\n{add} palavra_nova {to_list} palavras\n{print} _ 🧒 Diga _ palavra_nova _, Hedy!_\n{print} _ 🦜 _ palavras {at} {random}\n```\n"
             5:
                 story_text: |
                     Recompense seu papagaio se ele disser a palavra correta!
@@ -2157,7 +2160,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## O comando imprima
+                    ## O comando {print}
                     Você pode imprimir texto na tela usando o comando `{print}`.
                 example_code: |
                     ```
@@ -2260,14 +2263,14 @@ adventures:
                     ```
                 story_text_3: |
                     ### Exercício
-                    Experimente o comando `{at} {random}` criando seu próprio concurso de televisão onde você escolhe uma porta ou mala e ela contém um grande prêmio em dinheiro!
-                    Consegue fazer isso? Já colocamos as primeiras linhas no código de exemplo.
+                    Experimente o comando `{at} {random}` criando o seu próprio game show onde você escolhe uma porta ou mala e ela contém um grande prêmio!
+                    Consegue fazer isso? Já colocamos as primeiras linhas no código exemplo.
                 example_code_3: |
                     ```
-                    {print} O grande concurso de televisão!
-                    {print} Tem 3 malas na sua frente...
+                    {print} O grande game show!
+                    {print} Há 3 malas na sua frente...
                     escolhida {is} {ask} Qual mala você escolhe?
-                    premio_em_dinheiro {is} _
+                    premios {is} _
                     _
                     ```
     restaurant:
@@ -2279,7 +2282,12 @@ adventures:
                 story_text: |
                     No nível 1 você pode fazer seu próprio restaurante virtual e receber os pedidos de seus convidados.
                 story_text_2: |
-                    Você consegue pensar em mais linhas para adicionar ao código do seu restaurante? Por exemplo, você pode usar {ask} para perguntar aos convidados o que eles gostariam de beber, dizer o preço ou desejar uma refeição agradável?
+                    ### Exercício
+                    Copie o código exemplo à sua tela de entrada clicando no botão amarelo.
+                    Primeiro, preencha as lacunas com os comandos certos para fazer o código funcionar corretamente.
+                    Então, adicione pelo menos mais 4 linhas de código ao programa de restaurante.
+                    Pergunte ao(à) cliente o que ele(a) gostaria de beber e pergunte se o pagamento será em dinheiro ou cartão.
+                    Por fim, pense em uma forma gentil de se despedir do(a) cliente.
                 example_code_2: |
                     ```
                     {print} Bem-vindo(a) ao restaurante da Hedy 🍟
@@ -2290,8 +2298,8 @@ adventures:
                     ```
             2:
                 story_text: |
-                    No nível 2 você pode expandir seu restaurante usando variáveis. No nível 1, Hedy só conseguia executar {eco} no pedido uma vez e só se lembrava da última coisa que foi pedida.
-                    Agora você pode usar variáveis e Hedy poderá se lembrar tanto da comida quanto das bebidas!
+                    No nível 2, você pode expandir seu restaurante usando variáveis. No nível 1, Hedy só conseguia executar `{echo}` no pedido uma única vez e só se lembrava da última coisa pedida.
+                    Agora, você pode usar variáveis e Hedy poderá se lembrar tanto da comida quanto das bebidas!
                 example_code: |
                     ```
                     {print} Bem-vindo(a) ao restaurante da Hedy!
@@ -2326,9 +2334,9 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercício
-                    Agora faça sua própria versão do restaurante aleatório.
-                    Faça você mesmo uma lista de entradas, pratos principais, sobremesas, bebidas e preços.
-                    Em seguida, use os comandos `{print}` e `{at} {random}` para informar ao cliente o que estará em seu menu esta noite.
+                    Agora faça a sua própria versão do restaurante aleatório.
+                    Faça por conta própria uma lista de entradas, pratos principais, sobremesas, bebidas e preços.
+                    Em seguida, use os comandos `{print}` e `{at} {random}` para informar ao(à) cliente o que estará em seu menu esta noite.
                 example_code_2: |
                     ```
                     {print} Bem-vindo(a) ao seu próprio restaurante aleatório!
@@ -2346,9 +2354,9 @@ adventures:
         levels:
             1:
                 story_text: |
-                    No nível 1 você pode começar com um jogo de pedra, papel e tesoura.
+                    No nível 1, você pode começar com um jogo de pedra, papel e tesoura.
 
-                    Com `{ask}` você pode fazer uma escolha, e com `{echo}` você pode repetir essa escolha.
+                    Com o comando `{ask}` você pode fazer uma escolha, e com `{echo}` você pode repetir essa escolha.
                 example_code: |
                     ```
                     {print} o que você escolhe?
@@ -2367,7 +2375,10 @@ adventures:
                     ```
             2:
                 story_text: |
-                    Neste nível você pode praticar o uso das variáveis, então você poderá fazer o jogo da pedra, papel e tesoura no próximo nível!
+                    Neste nível, você pode praticar o uso de variáveis. Assim, você vai conseguir criar o jogo de pedra, papel e tesoura no próximo nível!
+                    ### Exercício
+                    Complete o código preenchendo a lacuna com a **variável**.
+                    Este jogo não é muito interativo, mas não se preocupe! Na próxima aventura, você aprenderá a usar variáveis com o comando `{ask}` para tornar o seu jogo mais interativo!
                 example_code: |-
                     ```
                     escolha {is} pedra
@@ -2428,11 +2439,10 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## O comando {sleep}
-                    Outro novo comando neste nível é o `{sleep}`, que pausa seu programa por um tempo. Se você digitar um número ao lado direito do comando {sleep}, o programa fará uma pausa por um período em segundos corresponde a esse número.
-
-                    ### Exercício
-                    Pratique este novo comando criando seu próprio código no qual você usa o comando {sleep} pelo menos 3 vezes. O tempo de pausa deve ser diferente para cada vez que usar o comando {sleep}.
+                    Mais um comando novo deste nível é o `{sleep}`, que pausa o seu programa por um segundo. Se você digitar um número depois do comando {sleep}, o programa pausa por essa quantidade de segundos.
+                    ### Exercí
+                    cio
+                    Pratique esse novo comando fazendo um código de sua própria autoria, em que você usa o {sleep} pelo menos 3 vezes. Para cada comando {sleep}, o tempo de pausa tem de ser diferente.
                 example_code: |
                     ```
                     {print} Minha cor favorita é...
@@ -2624,26 +2634,39 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Este é o início de uma pequena escada. Você pode fazê-la ter 5 degraus?
+                example_code_2: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
+                example_code: "```\n{forward} 100\n{turn} {left}\n```\n"
             2:
                 story_text: |
-                    Neste nível você pode usar variáveis para tornar a tartaruga interativa. Por exemplo, você pode perguntar ao jogador quantos passos a tartaruga deve dar.
-                example_code: |
-                    ```
-                    resposta {is} {ask} Quantos passos a tartaruga deve dar?
-                    {forward} resposta
-                    ```
-                story_text_2: |
-                    Além disso, no nível 1 a tartaruga só podia virar para a esquerda ou para a direita. Isso é um pouco chato!
-                    No nível 2, ela pode apontar o nariz em todas as direções.
+                    No nível 1, a tartaruga só podia virar para a esquerda ou para a direita. Isso é meio chato!
+                    No nível 2, ela pode apontar seu nariz para qualquer direção.
 
-                    Use 90 para virar um quarto de volta. Chamamos isso de graus. Uma volta completa é de 360 graus.
+                    Use 90 graus para dar um quarto de volta, 180 para dar meia volta, e 360 para dar uma volta completa.
 
                     ### Exercício
-                    Você consegue fazer uma figura com este código? Talvez um triângulo ou um círculo?
+                    No momento, esse código cria a letra T. Você consegue mudá-lo de forma que ele faça a letra B?
+
+                    **Extra** Mude a letra para alguma outra letra, como, por exemplo, a primeira do seu nome.
+                    Você também pode criar várias letras, definindo a cor como `{color}` `{white}` entre elas.
+                example_code: |
+                    ```
+                    {forward} 80
+                    {turn} 90
+                    {forward} 50
+                    {turn} 180
+                    {forward} 100
+                    ```
+                story_text_2: |
+                    Você também pode usar variáveis no comando `turn` da tartaruga.
+
+                    ### Exercício
+                    Altere o código de modo que ele crie um triângulo. Dica: você só precisa mudar o código em um lugar.
                 example_code_2: |
                     ```
                     {print} Desenhando figuras
                     ângulo {is} 90
+                    {turn} ângulo
+                    {forward} 25
                     {turn} ângulo
                     {forward} 25
                     {turn} ângulo
