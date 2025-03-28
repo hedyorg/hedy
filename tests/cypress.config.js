@@ -43,7 +43,6 @@ module.exports = defineConfig({
     admin_achievements_page: '/admin/achievements',
     admin_classes_page: '/admin/classes',
     programs_page: '/programs',
-    explore_programs_page: '/explore',
     public_adventures: '/public-adventures',
     subscribe_page: '/subscribe',
     learn_more_page: '/learn-more',

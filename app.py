@@ -51,7 +51,7 @@ from website import (ab_proxying, admin, auth_pages, aws_helpers,
                      translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, is_students_teacher,
                           has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
-                          forget_current_user, hide_explore)
+                          forget_current_user)
 from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
 from website.flask_hedy import g_db
@@ -562,7 +562,6 @@ def enrich_context_with_user_info():
         "is_admin": is_admin(user),
         "has_public_profile": has_public_profile(user),
         "is_super_teacher": is_super_teacher(user),
-        "hide_explore": hide_explore(g.user),
         "is_redesign_enabled": utils.is_redesign_enabled()
     }
     return data
@@ -2270,56 +2269,8 @@ def privacy():
                            content=privacy_translations)
 
 
-@app.route('/explore', methods=['GET'])
-def explore():
-    if not current_user()['username']:
-        return redirect('/login')
-
-    level = try_parse_int(request.args.get('level', default=None, type=str))
-    adventure = request.args.get('adventure', default=None, type=str)
-    page = request.args.get('page', default=None, type=str)
-    language = g.lang
-
-    result = g_db().get_public_programs(
-        limit=42,  # 3 columns so make it a multiple of 3
-        level_filter=level,
-        language_filter=language,
-        adventure_filter=adventure,
-        pagination_token=page)
-    next_page_url = url_for('.explore', **dict(request.args, page=result.next_page_token)
-                            ) if result.next_page_token else None
-    prev_page_url = url_for('.explore', **dict(request.args, page=result.prev_page_token)
-                            ) if result.prev_page_token else None
-
-    favourite_programs = g_db().get_hedy_choices()
-
-    # Do 'normalize_public_programs' on both sets at once, to save database calls
-    normalized = normalize_public_programs(list(result) + list(favourite_programs.records))
-    programs, favourite_programs = split_at(len(result), normalized)
-
-    # Filter out programs that are Hedy favorite choice.
-    programs = [program for program in programs if program['id'] not in {fav['id'] for fav in favourite_programs}]
-
-    keyword_lang = g.keyword_lang
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names(keyword_lang)
-
-    return render_template(
-        'explore.html',
-        programs=programs,
-        favourite_programs=favourite_programs,
-        filtered_level=str(level) if level else None,
-        next_page_url=next_page_url,
-        prev_page_url=prev_page_url,
-        filtered_adventure=adventure,
-        filtered_lang=language,
-        max_level=hedy.HEDY_MAX_LEVEL,
-        adventures_names=adventures_names,
-        page_title=gettext('title_explore'),
-        current_page='explore')
-
-
 def normalize_public_programs(programs):
-    """Normalize the content for all programs in the given array, for showing on the /explore or /user page.
+    """Normalize the content for all programs in the given array, for showing on the /user page.
 
     Does the following thing:
 
@@ -2332,7 +2283,7 @@ def normalize_public_programs(programs):
     """
     ret = []
     for program in programs:
-        program = pre_process_explore_program(program)
+        program = pre_process_public_program(program)
 
         # There is a record somewhere that doesn't have a code field, guard against that
         code = program.get('code', '')
@@ -2346,7 +2297,7 @@ def normalize_public_programs(programs):
 
 
 @querylog.timed
-def pre_process_explore_program(program):
+def pre_process_public_program(program):
     # If program does not have an error value set -> parse it and set value
     if 'error' not in program:
         try:
