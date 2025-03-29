@@ -213,7 +213,7 @@ adventures:
                     Alternatywnie możesz napisać `{while} sword == 'lost'` żeby nie pozwolić graczowi kontynuować zanim znajdą miecz.
 
                     ### Ćwiczenie
-                    Przykładowy kod pokazuje, jak w historii używać pętli `{while}` . Teraz ** pomyśl o swoim scenariuszu **, w którym gracz musi coś znaleźć , zanim będzie mógł kontynuować.
+                    Przykładowy kod pokazuje, jak w historii używać pętli `{while}` . Teraz **pomyśl o swoim scenariuszu**, w którym gracz musi coś znaleźć , zanim będzie mógł kontynuować.
                 example_code: "```\nklucze = 'zgubione'\n{print} 'Stoisz w ogrodzie i zgubiłeś swoje klucze.' \n{print} 'Gdzie chcesz ich poszukać?'\n{print} 'Możesz wybrać: drzewo, doniczka, kamień, skrzynka na listy'\n{while} klucze == 'zgubione'\n    miejsce = {ask} 'Gdzie chcesz popatrzeć?'\n    {if} miejsce == 'doniczka'\n        {print} 'Tutaj są!'\n        klucze = 'znalezione'\n    {else}\n        {print} 'Nie, nie ma ich w ' miejsce\n{print} 'Teraz możesz wejść do domu!'\n```\n"
             18:
                 story_text: |
@@ -1854,7 +1854,7 @@ adventures:
         levels:
             12:
                 story_text: |
-                    Na tym poziomie nauczysz się korzystać z ** funkcji**. Funkcja to blok kodu, z którego można łatwo korzystać wiele razy. Korzystanie z funkcji pomaga nam organizować fragmenty kodu, których możemy używać wielokrotnie.
+                    Na tym poziomie nauczysz się korzystać z **funkcji**. Funkcja to blok kodu, z którego można łatwo korzystać wiele razy. Korzystanie z funkcji pomaga nam organizować fragmenty kodu, których możemy używać wielokrotnie.
                     Aby utworzyć funkcję, użyj `{define}` i nadaj funkcji nazwę. Następnie umieść wszystkie linie, które chcesz w funkcji, w wciętym bloku pod linią `{define}`.
                     Pozostaw jedną pustą linię w kodzie, aby wyglądała ładnie i schludnie. Świetna robota! Stworzyłeś funkcję!
 
@@ -1889,7 +1889,7 @@ adventures:
             14:
                 story_text: |
                     Na poprzednich poziomach nauczyłeś się tworzyć funkcje i używać z nimi argumentów. Innym doskonałym zastosowaniem funkcji jest umożliwienie jej obliczenia czegoś.
-                    Możesz podać funkcji obliczenia, które dadzą ci odpowiedź na obliczenia. Ta odpowiedź nazywa się ** wartość zwrotu**.
+                    Możesz podać funkcji obliczenia, które dadzą ci odpowiedź na obliczenia. Ta odpowiedź nazywa się **wartość zwrotu**.
 
                     Na przykład w tym kodzie funkcja oblicz_nową_cenę obliczy nową cenę dowolnego elementu. Daje ci nową cenę jako wartość zwrotu.
 
@@ -2111,7 +2111,7 @@ adventures:
                 story_text: |
                     ### Ćwiczenie
                     Możemy również zrobić wróżbitę o tematyce Harry'ego Pottera. Wypełnij puste pola, tak aby napisano 9 wierszy.
-                    **Dodatkowo ** Zmień motyw wróżbity na coś innego, na przykład ulubioną książkę, film lub program telewizyjny.
+                    **Dodatkowo** Zmień motyw wróżbity na coś innego, na przykład ulubioną książkę, film lub program telewizyjny.
                 example_code: |
                     ```
                     domy = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
@@ -2966,7 +2966,7 @@ adventures:
                     Po pierwsze, zakończ wiersz 2 poleceniem `{is}` i `{ask}`.
                     Następnie wypełnij polecenie `{sleep}` w wierszach 4 i 6, aby papuga pozostała przez chwilę cicho.
 
-                    **Dodatkowo ** Czy możesz sprawić, by papuga poprosiła o więcej niż tylko twoje imię, dodając więcej wierszy kodu?
+                    **Dodatkowo** Czy możesz sprawić, by papuga poprosiła o więcej niż tylko twoje imię, dodając więcej wierszy kodu?
             3:
                 story_text: |
                     Naucz swoją papugę nowego słowa z poleceniem `{add}`.
@@ -3282,7 +3282,7 @@ adventures:
             8:
                 story_text: |
                     ### Polecenia repeat i wcięcia
-                    Na tym poziomie możesz powtórzyć wiele wierszy kodu za pomocą tylko 1 polecenia repeat.
+                    Na tym poziomie możesz powtórzyć wiele wierszy kodu za pomocą tylko 1 polecenia `{repeat}`.
                     Robisz to, tworząc blok linii, który chcesz powtórzyć.
                     Linie w tym bloku będą wymagały **wcięcia** .
                     Oznacza to umieszczenie czterech spacji na początku każdej linii. Będziesz także musiał użyć wcięć, gdy chcesz tylko utworzyć blok jednej linii.
@@ -3442,7 +3442,7 @@ adventures:
                     Skopiuj własny kod restauracji z poprzednich poziomów. Stwórz problem w swojej restauracji i zakoduj go, tak jak zostało to zrobione w przykładowym kodzie.
                     Na przykład może również zabraknąć pozycji z menu lub nie przyjmujesz płatnością kartą kredytową lub maszyna do lodów jest zepsuta.
 
-                    **Dodatkowo ** Czy zaprogramowałeś problem i odpowiednie odpowiedzi? Następnie spróbuj dodać do kodu więcej poleceń `{if}` i `{else}`.
+                    **Dodatkowo** Czy zaprogramowałeś problem i odpowiednie odpowiedzi? Następnie spróbuj dodać do kodu więcej poleceń `{if}` i `{else}`.
                     Spróbuj dodać polecenie `{if}` po każdym poleceniu `{ask}` , aby kod był jak najbardziej interaktywny!
                 example_code: |
                     ```
@@ -3622,7 +3622,7 @@ adventures:
                 story_text: |
                     Na tym poziomie możesz ćwiczyć przy użyciu zmiennych. Dzięki temu będziesz mógł  stworzyć grę w kamień, papier, nożyczki na następnym poziomie!
                     ### Ćwiczenie
-                    Zakończ kod, wypełniając ** zmienną ** w pustych polach.
+                    Zakończ kod, wypełniając **zmienną** w pustych polach.
                     Ta gra nie jest zbyt interaktywna, ale nie martw się! W następnej przygodzie dowiesz się, jak używać zmiennych za pomocą polecenia `{ask}`, co sprawi, że Twoja gra będzie interaktywna!
                 example_code: |-
                     ```
@@ -3792,18 +3792,18 @@ adventures:
                     ### Ćwiczenie
                     W pierwszej części przygody Simon mówi pozwolimy komputerowi wybrać losowy kolor i dodać go do listy.
 
-                    ***Zrób 2 listy *** Najpierw utwórz listę o nazwie `colors` i wypełnij ją kolorami czerwonym, żółtym, zielonym i niebieskim.
+                    ***Zrób 2 listy*** Najpierw utwórz listę o nazwie `colors` i wypełnij ją kolorami czerwonym, żółtym, zielonym i niebieskim.
                     Następnie utwórz listę o nazwie `simon_sequence`. Ta lista zostanie wykorzystana jako odpowiedź.
                     Na początku gry listy muszą być puste. niestety nie możemy utworzyć pustej listy (jeszcze), więc wypełnimy ją słowami „pusty” i „lista”' i natychmiast usuniemy je z listy.
 
-                    ***Utwórz funkcję, która dodaje kolor do sekwencji *** Teraz, gdy mamy pustą listę o nazwie simon_sequence, możemy zacząć wypełniać ją losowymi kolorami.
+                    ***Utwórz funkcję, która dodaje kolor do sekwencji*** Teraz, gdy mamy pustą listę o nazwie simon_sequence, możemy zacząć wypełniać ją losowymi kolorami.
                     Robimy to za pomocą funkcji, dzięki czemu możemy ją wywoływać za każdym razem, gdy w naszej grze pojawia się nowy poziom. Utwórz funkcję o nazwie `add_random_color`.
                     Następnie utwórz zmienną random_color i ustaw ją na losowy kolor. Następnie dodaj ten losowy kolor do simon_sequence.
 
-                    ***Utwórz funkcję, która pokazuje simon_sequence *** Zacznij od nazywania nowej funkcji `show_simon_sequence` za pomocą `level` jako argumentu. Teraz chcemy pokazać tyle kolorów, ile wynosi liczba poziomu na którym się znajdujesz (na poziomie 1 widzisz 1 kolor, na poziomie 2 widzisz 2 kolory itp.).
+                    ***Utwórz funkcję, która pokazuje simon_sequence*** Zacznij od nazywania nowej funkcji `show_simon_sequence` za pomocą `level` jako argumentu. Teraz chcemy pokazać tyle kolorów, ile wynosi liczba poziomu na którym się znajdujesz (na poziomie 1 widzisz 1 kolor, na poziomie 2 widzisz 2 kolory itp.).
                     Powtarzamy więc `level` razy , aby wydrukować `simon_sequence[i]`. Za każdym razem, gdy wyświetlany jest kolor, poczekaj 1 sekundę, a następnie wyczyść ekran.
 
-                    ***Przetestuj swój program *** Zanim przejdziesz do następnego poziomu, sprawdź, czy funkcje działają, wywołując obie funkcje. Jeśli działają, powinieneś zobaczyć losowy kolor na ekranie wyjściowym.
+                    ***Przetestuj swój program*** Zanim przejdziesz do następnego poziomu, sprawdź, czy funkcje działają, wywołując obie funkcje. Jeśli działają, powinieneś zobaczyć losowy kolor na ekranie wyjściowym.
                     Usuń tę testową część kodu, skopiuj kod i przejdź do następnej przygody, aby dowiedzieć się więcej o grze simon mówi!
                 example_code: |
                     ```
@@ -3840,14 +3840,14 @@ adventures:
                     Będziemy kontynuować naszą grę Simon mówi!
 
                     ### Ćwiczenie
-                    ***Wklej tutaj swój kod *** Wklej tutaj swój kod z poprzedniego poziomu. Nie zapomnij usunąć części, która została właśnie użyta do przetestowania funkcji.
+                    ***Wklej tutaj swój kod*** Wklej tutaj swój kod z poprzedniego poziomu. Nie zapomnij usunąć części, która została właśnie użyta do przetestowania funkcji.
 
-                    ***Utwórz funkcję, która tworzy sekwencja_gracza *** Lista `player_sequence` służy do odbierania odpowiedzi gracza. Najpierw definiujemy funkcję za pomocą poziomu argumentu. Następnie pytamy level razy , jaki kolor wybierają. Nazywamy tę zmienną `answer`. Następnie dodajemy zmienną `answer` do listy sekwencja_gracza.
+                    ***Utwórz funkcję, która tworzy sekwencja_gracza*** Lista `player_sequence` służy do odbierania odpowiedzi gracza. Najpierw definiujemy funkcję za pomocą poziomu argumentu. Następnie pytamy level razy , jaki kolor wybierają. Nazywamy tę zmienną `answer`. Następnie dodajemy zmienną `answer` do listy sekwencja_gracza.
 
-                    ***Ustawianie gry *** Zanim zaprogramujemy grę w następnej przygodzie, potrzebujemy zmiennych początkowych. Najpierw ustawimy zmienną `level` na 1, a zmienną `game_over` na False.
+                    ***Ustawianie gry*** Zanim zaprogramujemy grę w następnej przygodzie, potrzebujemy zmiennych początkowych. Najpierw ustawimy zmienną `level` na 1, a zmienną `game_over` na False.
                     Następnie przedstawiamy grę. Wydrukujemy „Witamy w Simon mówi!”!' i wyczyść ekran po 1 sekundzie.
 
-                    ***Przejdź do następnej przygody, aby dokończyć grę!**** Nie zapomnij skopiować kodu i zabrać go ze sobą na następną przygodę.
+                    ***Przejdź do następnej przygody, aby dokończyć grę!*** Nie zapomnij skopiować kodu i zabrać go ze sobą na następną przygodę.
                     .
                 example_code: |
                     ```
@@ -3877,9 +3877,9 @@ adventures:
                     W tej przygodzie zaprogramujemy grę Simon mówi!
 
                     ### Ćwiczenie
-                    ***Wklej kod *** Skopiuj kod z poprzedniej przygody i wklej go tutaj.
+                    ***Wklej kod*** Skopiuj kod z poprzedniej przygody i wklej go tutaj.
 
-                    ***Zaprogramuj grę *** Zaczynamy od upewnienia się, że gra będzie kontynuowana, jeżeli nie nastąpi jej koniec. Następnie wyświetlamy, na jakim poziomie jest gracz, używamy do tego poziomu zmiennej. Pokazujemy to tylko przez 1 sekundę, a następnie ponownie czyścimy ekran.
+                    ***Zaprogramuj grę*** Zaczynamy od upewnienia się, że gra będzie kontynuowana, jeżeli nie nastąpi jej koniec. Następnie wyświetlamy, na jakim poziomie jest gracz, używamy do tego poziomu zmiennej. Pokazujemy to tylko przez 1 sekundę, a następnie ponownie czyścimy ekran.
                     Teraz musimy utworzyć pustą listę sekwencja_gracza. Zaprogramowaliśmy już sposób wypełniania listy za pomocą naszej funkcji `player_sequence`, ale nigdy nie stworzyliśmy samej listy. Aby utworzyć listę, używamy tej samej sztuczki, co w poprzedniej zakładce.
                     Zrobimy listę ze słowami 'empty' i 'lista' a następnie usuniemy oba te słowa. Następnie wywołamy wszystkie 3 funkcje, które stworzyliśmy.
                     Na koniec będziemy musieli sprawdzić, czy gracz udzielił poprawnych odpowiedzi (więc jeśli sekwencja gracza i sekwencja simona są takie same).
@@ -4174,12 +4174,12 @@ adventures:
                     ### Ćwiczenie
                     W tej przygodzie zaczniemy od stworzenia pustego pola.
 
-                    ***Utwórz listę o nazwie pole *** Ta lista będzie naszym polem do grania. Ta lista jest wypełniona 9 kropkami, ponieważ na początku naszej gry nie ma jeszcze X i O.
+                    ***Utwórz listę o nazwie pole*** Ta lista będzie naszym polem do grania. Ta lista jest wypełniona 9 kropkami, ponieważ na początku naszej gry nie ma jeszcze X i O.
 
-                    ***Utwórz funkcję, która wyświetla pole *** Po pierwsze, wyczyść ekran, aby stare pola gry zostały usunięte. Następnie drukujemy pierwszą linię naszego pola do gry kółko i krzyżyl. Ta linia stanowi 3 pierwsze miejsca w naszym polu listy.
+                    ***Utwórz funkcję, która wyświetla pole*** Po pierwsze, wyczyść ekran, aby stare pola gry zostały usunięte. Następnie drukujemy pierwszą linię naszego pola do gry kółko i krzyżyl. Ta linia stanowi 3 pierwsze miejsca w naszym polu listy.
                     Zaprogramowaliśmy już tę linię dla Ciebie. Teraz zakończ pole, drukując punkt 4, 5 i 6 w drugim rzędzie i miejsce 7, 8 i 9 w trzecim rzędzie.
 
-                    ***Wezwij funkcję wyświetlającą pole *** Teraz wywołaj funkcję.
+                    ***Wezwij funkcję wyświetlającą pole*** Teraz wywołaj funkcję.
                     <div class="w-full flex flex-row gap-2">
                         Uruchom kod. Twoje dane wyjściowe powinny wyglądać następująco: <img src="https://github.com/hedyorg/hedy/assets/80678586/bcbd156e-4b48-4e82-84ae-f86d21b0cbcc" width="100">
                     </div>
@@ -4203,7 +4203,7 @@ adventures:
             17:
                 story_text: |
                     Na poprzednim poziomie nauczyłeś się, jak tworzyć grę w kółko i krzyżyk. Gra działa, ale jest dość denerwująca, ponieważ wciąż pyta, czy wygrałeś.
-                    Teraz, gdy mamy polecenie {elif}, możemy pozwolić grze zdecydować, czy ktoś wygrał i może przestać nas pytać!
+                    Teraz, gdy mamy polecenie `{elif}`, możemy pozwolić grze zdecydować, czy ktoś wygrał i może przestać nas pytać!
 
                     ### Ćwiczenie
                     ***Wklej swój kod*** Wklej tutaj swój kod z poprzedniego poziomu i spraw, by zadziałał Na tym poziomie nauczyłeś się używać dwukropka za każdym razem, gdy tworzysz blok kodu. Dodaj dwukropki we właściwych miejscach.
@@ -4242,17 +4242,17 @@ adventures:
                     W poprzedniej przygodzie nauczyłeś się, jak stworzyć pole gry. Teraz nauczysz się tworzyć grę!
 
                     ### Ćwiczenie
-                    ***Wklej swój kod *** Zacznij od wklejenia kodu z poprzedniej przygody tutaj.
+                    ***Wklej swój kod*** Zacznij od wklejenia kodu z poprzedniej przygody tutaj.
 
-                    ***Dodaj zmienne *** Pod listą o nazwie `field` dodamy 2 dodatkowe zmienne, których będziemy potrzebować do zaprogramowania gry.
+                    ***Dodaj zmienne*** Pod listą o nazwie `field` dodamy 2 dodatkowe zmienne, których będziemy potrzebować do zaprogramowania gry.
                     Zmienna `game_over` mówi nam, czy gra się skończyła, i powinna być ustawiona na 'no' na początku gry.
                     Zmienna `sign` mówi nam, czy jest to kolej gracza x czy gracza o. Ustaw zmienną na „x”'.
 
-                    ***Gra *** Najpierw użyj polecenia {while}, aby upewnić się, że gra nadal używa zmiennej , podczas gdy koniec_gry jest ustawiona na „nie”.
+                    ***Gra*** Najpierw użyj polecenia `{while}`, aby upewnić się, że gra nadal używa zmiennej , podczas gdy koniec_gry jest ustawiona na „nie”.
                     Podczas gry najpierw pytamy gracza, które miejsce wybiera. Następnie zmieniamy pole na liczbę, którą wybrał na swój znak.
                     Następnie ponownie wyświetlamy pole i pytamy gracza, czy wygrał. Na koniec chcemy zmienić, czyja aktualnie jest kolej, więc jeśli znak to „x”, to powinien to być „o” i na odwrót.
 
-                    ***Przetestuj swoją grę *** Czy Twoja gra działa? Świetnie, baw się dobrze grając w tę grę! Jeśli nie, użyj przycisku biedronki, aby zdebugować kod.
+                    ***Przetestuj swoją grę*** Czy Twoja gra działa? Świetnie, baw się dobrze grając w tę grę! Jeśli nie, użyj przycisku biedronki, aby zdebugować kod.
                     Być może zauważyłeś jeden błąd w kodzie, - możesz ukraść miejsce drugiego gracza! Jeśli druga osoba wybierze miejsce 1, możesz po prostu wpisać 1 za nimi i ukraść ich miejsce.
                     To niesprawiedliwe! Przejdź do następnej przygody, aby dowiedzieć się, jak rozwiązać ten problem.
                 example_code: |
@@ -4285,11 +4285,11 @@ adventures:
                     To niesprawiedliwe! W tej przygodzie naprawimy ten błąd.
 
                     ### Ćwiczenie
-                    ***Wklej tutaj swój kod *** Wklej tutaj swój kod z poprzedniej przygody.
+                    ***Wklej tutaj swój kod*** Wklej tutaj swój kod z poprzedniej przygody.
 
-                    ***Napraw błąd *** Aby naprawić błąd, zastępujemy linię z napisem `field[choice] = sign`. To zmienia dowolne miejsce wybrane przez gracza w jego znak.
+                    ***Napraw błąd*** Aby naprawić błąd, zastępujemy linię z napisem `field[choice] = sign`. To zmienia dowolne miejsce wybrane przez gracza w jego znak.
                     Przejdź do nagłówka z napisem „Użyj tego, aby naprawić błąd” i dokończ kod. Najpierw chcemy sprawdzić za pomocą `if field[choice] = '.'` czy nadal puste. Jeśli tak to możesz wziąć to miejsce.
-                    Następnie wykonujemy polecenie else i wyświetl „Przepraszam, to miejsce jest już zajęte”, jeśli miejsce nie jest puste. Na koniec dodajemy polecenie {sleep}, aby gracze mogli faktycznie przeczytać tekst, zanim zostanie on ponownie wyczyszczony.
+                    Następnie wykonujemy polecenie else i wyświetl „Przepraszam, to miejsce jest już zajęte”, jeśli miejsce nie jest puste. Na koniec dodajemy polecenie `{sleep}`, aby gracze mogli faktycznie przeczytać tekst, zanim zostanie on ponownie wyczyszczony.
                     Teraz skopiuj ten fragment kodu i zastąp wiersz `field[choice] = sign`tym nowym fragmentem kodu.
 
                     ***Zagraj w swoją grę!*** Teraz gra powinna działać poprawnie! Dobra robota!
@@ -4461,7 +4461,7 @@ adventures:
                     ### Ćwiczenie 1
                     Ten kod tworzy trzy czarne trójkąty, zmień to na pięć różowych kwadratów.
 
-                    **(dodatkowe zadanie)** Stwórz własną figurę składającą się z co najmniej dwóch różnych kształtów.
+                    **Dodatkowo** Stwórz własną figurę składającą się z co najmniej dwóch różnych kształtów.
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
             10:
                 story_text: |
@@ -4555,7 +4555,7 @@ adventures:
                     ### Ćwiczenie
                     Odtwórz rysunki za pomocą żółwia!
 
-                    **Dodatkowo ** Utwórz tylko jeden kod, który pozwala graczowi zdecydować, którą literę chciałby zobaczyć! Czy możesz dodać jeszcze więcej liter?
+                    **Dodatkowo** Utwórz tylko jeden kod, który pozwala graczowi zdecydować, którą literę chciałby zobaczyć! Czy możesz dodać jeszcze więcej liter?
 
                     <div class="w-full flex flex-row gap-2">
                     F <img src="https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20" width="100">
@@ -4573,7 +4573,7 @@ adventures:
                     ### Ćwiczenie
                     Odtwórz rysunki za pomocą żółwia!
 
-                    **Dodatkowo ** Pozwól graczowi zdecydować, jaki kolor powinien mieć kwadrat.
+                    **Dodatkowo** Pozwól graczowi zdecydować, jaki kolor powinien mieć kwadrat.
 
                     ***Dodatkowo*** Czy potrafisz napisać literę z własnego imienia i flagą własnego kraju?
 
@@ -4694,9 +4694,9 @@ adventures:
                     ### Ćwiczenie
                     Odtwórz rysunki za pomocą żółwia!
 
-                    Po pierwsze, zdefiniuj funkcję ** dla każdego kształtu **, którego chcesz użyć na bransoletce. Następnie dodaj kształty do bransoletki w następujący sposób:
+                    Po pierwsze, zdefiniuj funkcję **dla każdego kształtu**, którego chcesz użyć na bransoletce. Następnie dodaj kształty do bransoletki w następujący sposób:
 
-                    Program do projektowania bransoletek <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500"> 
+                    Program do projektowania bransoletek <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
                 example_code: |
                     Wskazówka dotycząca programu do projektowania bransoletek
                     ```
