@@ -1877,6 +1877,7 @@ class ConvertToPython_1(ConvertToPython):
             return self.make_play('C4', meta)
 
         note = self.unpack(args[0]).upper()  # will we also support multiple notes at once?
+        note = note.replace(note[0], hedy_translation.translate_keyword_to_en(note[0], self.language), 1)
         return self.make_play(note, meta)
 
     def comment(self, meta, args):
