@@ -150,15 +150,15 @@ adventures:
                     Torna alla tua storia di livello 8 e usa almeno due `{if}` all'interno di un altro `{if}`.
                 example_code: |
                     ```
-                    {print} "Robin sta camminando in centro"
-                    location = {ask} 'Robin entra in un negozio o torna a casa?'
+                    {print} 'Robin sta camminando in centro'
+                    luogo = {ask} 'Robin entra in un negozio o torna a casa?'
                     {if} luogo {is} negozio
                         {print} 'Lei entra nel negozio.'
-                        {print} 'Robin vede un libro dall'aspetto interessante'
-                        book = {ask} 'Robin compra il libro?'
-                        {if}prenota{is} sì
+                        {print} "Robin vede un libro dall'aspetto interessante"
+                        prenota = {ask} 'Robin compra il libro?'
+                        {if} prenota {is} sì
                         _ {print} 'Robin compra il libro e torna a casa'
-                        _{else}
+                        _ {else}
                         _ {print} 'Robin esce dal negozio e torna a casa'
                     {else}
                         {print} 'Robin va a casa'
@@ -885,17 +885,17 @@ adventures:
                     {repeat} persone {times}
                     _ cibo = {ask} 'Cosa vorresti ordinare?'
                     _ {print} cibo
-                    _ {if} il cibo {is} patatine fritte
+                    _ {if} cibo {is} patatine fritte
                     _ prezzo = prezzo + 3
                     _ salsa = {ask} 'Che tipo di salsa vorresti con le tue patatine?'
                     _ {if} salsa {is} no
                     _ {print} 'senza salsa'
                     _ {else}
                     _ prezzo = prezzo + 1
-                    _ {print} 'con' salsa
-                    _  {if}il cibo {is} pizza
+                    _ {print} 'con ' salsa
+                    _ {if} cibo {is} pizza
                     _ prezzo = prezzo + 4
-                    {print} 'Sarà il 'prezzo' in dollari'
+                    {print} 'Sarà il ' prezzo ' in dollari'
                     {print} 'Buon appetito!'
                     ```
             11:
