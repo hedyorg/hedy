@@ -2020,6 +2020,7 @@ adventures:
                     {if} resposta {is} Harare {play} C6
                     _
                     ```
+                story_text: "Você não precisa sempre tocar uma música inteira quando for usar o comando `{play}`. Às vezes, você só quer tocar uma única nota.\nPor exemplo, se você quiser criar um quiz, você pode tocar uma nota aguda e feliz se a resposta estiver correta e uma nota grave e triste se estiver errada.\n\n### Exercício\nTermine a primeira pergunta adicionando uma linha de código que toca uma nota C3 se a resposta dada estiver errada.\nEm seguida, pense em mais 3 perguntas para adicionar a esse quiz.\n"
             6:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
             7:
@@ -2090,9 +2091,9 @@ adventures:
                     ```
                     palavras {is} crrác, Hedy
                     {print} Treine sua papagaia!
-                    nova_palavra {is} {ask} Qual palavra você quer ensinar a ela?
-                    _ nova_palavra _ palavras
-                    {print} 🧒 Diga nova_palavra, Hedy!
+                    palavra_nova {is} {ask} Qual palavra você quer ensinar a ela?
+                    _ palavra_nova _ palavras
+                    {print} 🧒 Diga palavra_nova, Hedy!
                     {print} 🦜 palavras {at} {random}
                     ```
             4:
@@ -2105,15 +2106,15 @@ adventures:
                     Recompense seu papagaio se ele disser a palavra correta!
                 example_code: |
                     ```
-                    palavras {is} grasnar, Hedy
-                    {print} 'Treine seu papagaio!'
-                    nova_palavra {is} {ask} 'Qual palavra você quer ensinar a ele?'
-                    {add} nova_palavra {to_list} palavras
+                    palavras {is} crrác, Hedy
+                    {print} 'Treine sua papagaia!'
+                    palavra_nova {is} {ask} 'Qual palavra você quer ensinar a ela?'
+                    {add} palavra_nova {to_list} palavras
                     palavra_dita {is} palavras {at} {random}
-                    {print} '🧒 Diga ' nova_palavra ', Hedy!'
+                    {print} '🧒 Diga ' palavra_nova ', Hedy!'
                     {print} '🦜' palavra_dita
-                    {if} palavra_dita {is} nova_palavra {print} '🧒 Ótimo trabalho, Hedy! 🍪'
-                    {else} {print} '🧒 Não, Hedy! Diga ' nova_palavra
+                    _ palavra_dita {is} palavra_nova _ '🧒 Ótimo trabalho, Hedy! 🍪'
+                    _ _ '🧒 Não, Hedy! Diga ' palavra_nova
                     ```
     piggybank:
         levels:
@@ -2355,6 +2356,9 @@ adventures:
             4:
                 example_code: "```\n_ Adicione aspas neste código _\n{print} Bem-vindo(a) ao Restaurante Chez Hedy!\n{print} Hoje, estamos servindo pizza ou lasanha.\ncomida {is} {ask} O que você gostaria de comer?\n{print} Ótima escolha!  comida  é meu prato preferido!\ncobertura {is} {ask} Você quer cobertura de carne ou de vegetais?\n{print} comida  com  cobertura  a caminho!\nbebida {is} {ask} O que você gostaria de beber?\n{print} Agradecemos por seu pedido.\n{print} Sua  comida  e  bebida  estarão aqui logo, logo!\n```\n"
                 story_text: "Agora, no programa de restaurante, você também precisa de aspas para usar os comandos `{print}` ou `{ask}`.\n\n### Exercício\nAdicione aspas neste código para fazê-lo funcionar! Mas atenção: variáveis não devem ser colocadas em aspas.\nEm seguida, use o comando `{clear}` para mostrar apenas uma linha por vez na sua tela de saída.\n\n### Exercício 2\nVolte ao nível anterior e copie o seu código do restaurante. Faça o código funcionar neste nível colocando aspas nos lugares certos e adicione alguns comandos `{clear}`.\n"
+            5:
+                example_code: "```\nbebidas_disponíveis {is} água, limonada, coca, suco de laranja\nbebida {is} {ask} 'O que você gostaria de beber?'\n{if} bebida {in} bebidas_disponíveis {print} 'Um copo de ' bebida ' saindo!'\n{else} {print} 'Desculpe, não vendemos isso'\n```\n"
+                story_text: "### Exercício\nO código exemplo mostra como você poderia programar o caso de algum item do cardápio já ter acabado no seu restaurante.\nCopie o seu próprio código do restaurante dos níveis anteriores. Crie um problema em seu restaurante e programe-o, assim como o código exemplo fez.\nPor exemplo, você também pode ter algum item do cardápio em falta, ou você não aceita cartão de crédito, ou talvez a máquina de sorvetes esteja quebrada.\n\n**Extra** Já programou o problema e as respostas apropriadas? Então tente adicionar mais comandos `{if}` e `{else}` ao seu código.\nTente adicionar um `{if}` depois de todo comando `{ask}` em seu código para torná-lo o mais interativo possível!\n"
     rock:
         name: Pedra, papel, tesoura
         default_save_name: Pedra_2
@@ -2424,6 +2428,9 @@ adventures:
             4:
                 example_code: "```\nescolhas {is} pedra, papel, tesoura\n{print} _O computador escolhe..._ escolhas {at} {random}\n```\n"
                 story_text: "Neste nível, podemos continuar programando o jogo de pedra, papel e tesoura. Mas se quiser adicionar texto, você terá de usar aspas aqui também.\n### Exercício\nPreencha as lacunas com aspas. Note que a variável `escolhas` deve ficar fora das aspas.\n"
+            5:
+                example_code: "```\nopções {is} pedra, papel, tesoura\nescolha_do_computador {is} _\nescolha {is} _\n{print} 'você escolheu ' _\n{print} 'o computador escolheu ' _\n{if} _ {is} _ {print} 'empatado!' {else} {print} 'sem empate'\n```\n\nPreencha as lacunas com o código certo para ver se há empate.\n"
+                story_text: "Neste nível, podemos determinar se houve ou não um empate. Para tanto, você precisa do novo comando `{if}`.\n\n### Exercício\nComplete o código preenchendo as lacunas:\n* Deixe o computador escolher aleatoriamente\n* Pergunte ao(à) jogador(a) qual opção ele(a) quer escolher\n* Preencha as linhas 4 e 5 com as variáveis corretas\n* Complete a linha 6 para que Hedy possa checar se houve ou não um empate.\n"
     rock_2:
         name: Pedra, papel e tesoura 2
         default_save_name: pedra_2
@@ -2727,11 +2734,12 @@ adventures:
                     ```
                 example_code_2: |
                     ```
-                    direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
-                    if direction is left turn _
-                    if direction is right turn _
-                    forward 100
+                    direção {is} {ask} 'Você quer seguir para a esquerda, direita ou em frente?'
+                    {if} direção {is} esquerda {turn} _
+                    {if} direção {is} direita {turn} _
+                    {forward} 100
                     ```
+                story_text_2: "### Exercício\nPreencha este código com os números corretos para fazê-lo funcionar.\nDepois disso, você pode tentar adicionar a opção \"para trás\".\n\n**Extra** Em vez de usar 'esquerda' e 'direita', refaça o programa usando Norte, Leste, Sul e Oeste.\nAssim, você poderia até mesmo incluir outras direções como Nordeste, Sudoeste etc.\n"
             6:
                 story_text: |
                     Neste nível você pode usar cálculos para desenhar figuras diferentes.
