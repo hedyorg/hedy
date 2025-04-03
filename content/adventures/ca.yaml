@@ -950,7 +950,7 @@ adventures:
             9:
                 story_text: |
                     Bona feina! Has aconseguit un nou nivell! Al nivell anterior has après a fer servir múltiples línies de codi dins una comanda {if} o {repeat}. Encara, però no pots combinar-les...
-                    Bones notícies! En aquest nivell estarà permès situar un {if} dins d'un altre {if}, o dins d'una comanda {repeat}. Posar un bloc de codi dins d'un altre bloc de codi es diu anidament.                     ```Posar un bloc de codi dins d'un altre bloc de codi es diu anidament.
+                    Bones notícies! En aquest nivell estarà permès situar un {if} dins d'un altre {if}, o dins d'una comanda {repeat}. Posar un bloc de codi dins d'un altre bloc de codi es diu anidament.
                 example_code: |
                     ```
                     resposta = {ask} "Estàs llest per aprendre una cosa nova?"
@@ -989,8 +989,8 @@ adventures:
                     hamburguesa = 5
                     beguda = 2
                     total = hamburguesa + beguda
-                    print "Has demanat una hamburguesa i una beguda "
-                    print "Costa " total " euros, siusplau"
+                    {print} "Has demanat una hamburguesa i una beguda "
+                    {print} "Costa " total " euros, siusplau"
                     ```
             13:
                 story_text: |
@@ -1073,7 +1073,7 @@ adventures:
                     Comprova-ho!
             18:
                 story_text: |
-                    L'enhorabona! Has assolit l'últim nivell de Hedy! El codi has creat aquí pot ser copiat a entorns reals de Python com replit o PyCharm, i pots continuar aprenent allà!
+                    L'enhorabona! Has assolit l'últim nivell de Hedy! El codi has creat aquí pot ser copiat a entorns reals de Python com Replit o PyCharm, i pots continuar aprenent allà!
                     Tingues en compte que aquell Python només pot llegir comandes en anglès, així que si has estat utilitzant altres llengües, ara les hauràs de posar en anglès.
         default_save_name: intro
     dice:
@@ -1526,7 +1526,7 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## La comanda imprimir
+                    ## La comanda {print}
                     Pots imprimir un text a la pantalla utilitzant la comanda `{print}` .
                 example_code: |
                     ```
@@ -1624,7 +1624,7 @@ adventures:
     calculator_2:
         levels:
             14:
-                story_text: "### Exercici 2\n**Aquesta és la segona part d’aquesta aventura.** L’aventura comença a l'aventura anterior.\nNo sempre voldràs calcular la mitjana de 4 proves. Potser voldràs calcular la mitjana de 10 proves o només de 2...\nPodem solucionar aquest problema afegint l'argument i la variable 'num_proves'.\n* Comença una nova línia a la línia 3. Defineix l’argument num_proves preguntant a l’alumne quantes proves ha fet.\n* Canvia el 4 de la línia 4 per al nou argument num_proves.\n* Finalment, canvia el 4 de la línia 6 per num_proves.\n\nProva el teu nou programa. Funciona?\n\n### Exercici 3\nVols millorar encara més el teu programa? Genial! En el programa anterior només podies calcular la nota mitjana d'una assignatura, però seria millor si poguessis calcular la nota mitjana de totes les assignatures que vulguis!\nNo t’explicarem com fer-ho, però et donarem un consell: Comença el teu codi a la línia 1 amb: define calcula_mitjana_nota with assignatura.\n"
+                story_text: "### Exercici 2\n**Aquesta és la segona part d’aquesta aventura.** L’aventura comença a l'aventura anterior.\nNo sempre voldràs calcular la mitjana de 4 proves. Potser voldràs calcular la mitjana de 10 proves o només de 2...\nPodem solucionar aquest problema afegint l'argument i la variable 'num_proves'.\n* Comença una nova línia a la línia 3. Defineix l’argument num_proves preguntant a l’alumne quantes proves ha fet.\n* Canvia el 4 de la línia 4 per al nou argument num_proves.\n* Finalment, canvia el 4 de la línia 6 per num_proves.\n\nProva el teu nou programa. Funciona?\n\n### Exercici 3\nVols millorar encara més el teu programa? Genial! En el programa anterior només podies calcular la nota mitjana d'una assignatura, però seria millor si poguessis calcular la nota mitjana de totes les assignatures que vulguis!\nNo t’explicarem com fer-ho, però et donarem un consell: Comença el teu codi a la línia 1 amb: {define} calcula_mitjana_nota {with} assignatura.\n"
                 example_code: "```\n# Utilitza el teu propi codi de l'aventura anterior.\n```\n"
         description: Calculadora 2
         name: Calculadora 2
@@ -1641,7 +1641,7 @@ adventures:
         levels:
             17:
                 story_text: "En aquesta aventura programem un joc de penjat. Primer fem algunes preparacions, després programem el joc i en la tercera part afegim un dibuix amb la tortuga.\n\n### Exercici\n***Configura les variables*** En aquest joc de penjat, el Jugador 1 tria una resposta i el Jugador 2 ha d'endevinar les lletres d'aquesta resposta.\nPer deixar que l'ordinador conegui totes les lletres de la paraula, convertirem la resposta en una llista de lletres. Farem el mateix amb les endevinalles que fa el Jugador 2.\nComençarem el joc amb 2 llistes buides. Hem creat una llista buida per a la variable resposta per a tu. Ara crea també una llista buida per a les `lletres_endevinades`.\nDesprés omplim el nombre d'errors que s'han comès. Al principi del joc, aquest ha de ser 0.\nLa variable `quantitat_lletres` ens diu quantes lletres té la resposta. Demana al Jugador 1 que ens digui quantes lletres té la seva paraula.\nFinalment, li diem a l'ordinador si el joc ha acabat. Utilitzem la variable `joc_acabat` i la configurem a `False`.\n\n***Triant la resposta*** Volem que el Jugador 1 pugui triar la resposta. Els preguntarem, les vegades que sigui necessari, quina és la següent lletra.\nDesprés afegim aquesta lletra a la resposta. Finalment, afegim un _ buit a la llista de lletres endevinades, així obtenim tants _ com lletres té la resposta.\n\n***Torn del Jugador 2***\nDiu al Jugador 2 que és el seu torn. Després informa-li de quantes lletres té la resposta. Finalment, imprimeix la llista de `lletres_endevinades`.\n\n***Ves a la següent aventura*** Ara que totes les variables inicials estan configurades, podem començar a programar el joc en si. Consulta la següent pestanya per aprendre com!\n"
-                example_code: "```\nprint \"El penjat!\"\n\n# Estableix les variables\nresposta = []\nlletres_endevinades = _\nerrades_fetes = _\nquantitat_lletres = {ask} _\n_ = \"Fals\"\n\n# Triant la resposta\n{for} _\n    lletra = {ask} \"Jugador 1, quina és la lletra \" i \"?\"\n    _\n    {add} \"_\" {to} _\n\n# Torn del Jugador 2\nprint _\nprint _\nprint lletres_endevinades\n```\n"
+                example_code: "```\nprint \"El penjat!\"\n\n# Estableix les variables\nresposta = []\nlletres_endevinades = _\nerrades_fetes = _\nquantitat_lletres = {ask} _\n_ = \"Fals\"\n\n# Triant la resposta\n{for} _\n    lletra = {ask} \"Jugador 1, quina és la lletra \" i \"?\"\n    _\n    {add} \"_\" {to_list} _\n\n# Torn del Jugador 2\nprint _\nprint _\nprint lletres_endevinades\n```\n"
         name: El penjat
         default_save_name: El penjat
         description: Endevina la paraula
@@ -1712,7 +1712,7 @@ adventures:
         levels:
             13:
                 example_code: "```\n{define} missatge_benvinguda {with} tractament, cognom, pais, num_habitacio\n    {print} \"Benvingut a l'Hotel Hedy, \" tractament \" \" cognom\n    nice_trip {is} {ask} \"Ha tingut un bon viatge des de \" pais \"?\"\n    {if} nice_trip {is} \"si\"\n        {print} \"Fantàstic!\"\n    {else}\n        {print} \"Quina llàstima...\"\n        {print} \"Afortunadament podrà descançar a la seva habitació.\"\n    {print} \"La seva habitació és la \" num_habitacio\n\n{print} \"Bon dia! Siusplau per a fer el check in ompli la següent informació.\"\ntractament = {ask} \"Com li agradaria que ens dirigíssim a vostè (sr, sra, dr, etc.)?\"\nnom = {ask} \"Quin és el seu cognom?\"\npais_origen = {ask} \"Quin és el seu país d'origen?\"\n\n{call} missatge_benvinguda {with} tractament, nom, pais_origen, 105\n```\n\ntractament = {ask} \"Com li agradaria que ens dirigíssim a vostè (sr, sra, dr, etc.)?\"\nnom = {ask} \"Quin és el seu cognom?\"\npais_origen = {ask} \"Quin és el seu país d'origen?\"\n\n{call} missatge_benvinguda {with} tractament, nom, pais_origen, 105\n"
-                story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {ask}.  \nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.  \nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.  \nAquí tens un exemple d'una funció amb arguments combinada amb comandes {ask}.\n"
+                story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {ask}.\nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.\nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.\nAquí tens un exemple d'una funció amb arguments combinada amb comandes {ask}.\n"
     in_command:
         default_save_name: comanda_in
         name: '{in}'
@@ -1875,7 +1875,7 @@ adventures:
                 story_text: "## A l'atzar\nEn aquest nivell pots fer una llista utilitzant la comanda `{is}`. Pots fer que l'ordinador triï un element a l'atzar d'aquesta llista. Ho fas amb `{at} {random}`.\n"
                 example_code_2: "```\nmenjar {is} entrepà, tall de pizza, amanida, kebab\n{print} Menjaré menjar {at} {random} per dinar.\n```\n"
                 story_text_2: "Pots fer servir la comanda `{at} {random}` també en una frase.\n"
-                story_text_3: "### Exercici\nProva la comanda `{at} {random}` per crear el teu propi concurs (com els que es veuen a la TV) on tries una porta o maleta i aquesta conté un super premi!\nCreus que ho pots fer? Hem posat les primeres línies al codi d'exemple.\n"
+                story_text_3: "### Exercici\nProva la comanda `{at} {random}` per crear el teu propi concurs (com els que es veuen a la TV) on tries una porta o maleta i aquesta conté un superpremi!\nCreus que ho pots fer? Hem posat les primeres línies al codi d'exemple.\n"
                 example_code_3: "```\n{print} El super-concurs!\n{print} Hi ha 3 caixes davant teu...\nescollit {is} {ask} Quina esculls?\npreus {is} _\n_\n```\n"
             16:
                 story_text_2: "Ara que ja has après a utilitzar els claudàtors en les llistes, també pots començar a fer servir la comanda {at} {random} a la manera de Python!\nNomés has d'escriure el nom de la teva llista amb `[random]` darrere!"
@@ -1884,7 +1884,7 @@ adventures:
                 story_text: "A partir d'ara farem les llistes a la manera Pythoniana, amb claudàtors al seu voltant! També mantindrem les cometes al voltant de cada element com hem après als nivells anteriors.\nUtilitzem claudàtors per indicar una posició en una llista. Per exemple: `friends[1]` és el primer nom de la llista d'amics, com pots veure en la primera part del codi d'exemple.\nLa segona part del codi d'exemple et mostra que també podem combinar dues llistes fent servir la variable i."
         name: '{random}'
         default_save_name: comanda_random
-        description: Introduint la comanda aleatori
+        description: Introduint la comanda {at} {random}
     repeat_command:
         levels:
             7:
@@ -1982,7 +1982,7 @@ adventures:
                 example_code: "```\nbegudes_estoc {is} aigua, llionada, coca-cola, suc de taronja\nbeguda {is} {ask} \"Què vols beure?\"\n{if} beguda {in} begudes_estoc {print} \"Una \" beguda \" en marxa!\"\n{else} {print} \"Ho sentim, ja no en servim.\"\n```\n"
                 story_text: "### Exercici\nEl codi d'exemple mostra com podries programar quan t'has quedat sense un plat del menú al teu restaurant.\nCopia el teu codi del restaurant dels nivells anteriors. Crea un problema al teu restaurant i programa'l, tal com ho ha fet el codi d'exemple.\nPer exemple, el problema pot ser que t'has quedat sense un element del menú, o que no acceptes targetes de crèdit, o que la màquina de gelat està trencada.\n\n**Extra** Has programat el problema i les respostes adequades? Llavors intenta afegir més comandes `{if}` i `{else}` al teu codi.\nIntenta afegir un `{if}` després de cada comanda `{ask}` en el teu codi per fer-lo tan interactiu com sigui possible!\n"
             4:
-                example_code: "```\n_ Afegiu les cometes a aquest codi _\n{print} Benvingut al Restaurant del chef Hedy!\n{print} Avui servim pizza o lasanya.\nmenjar {is} {ask} Què li agradria menjar?\n{print}Bona elecció! La menjar m'encanta!\nguarnició  {is} {ask} Què hi prefereix verdures o carn?\n{print} menjar amb guarnició en marxa!\nbegudes {is} {ask} Què voldria beure?\n{print} Gràcies per la comanda.\n{print} menjar de guarnició i begudes en marxa!\n```\n"
+                example_code: "```\n_ Afegiu les cometes a aquest codi _\n{print} Benvingut al Restaurant del chef Hedy!\n{print} Avui servim pizza o lasanya.\nmenjar {is} {ask} Què li agradria menjar?\n{print} Bona elecció! La menjar m'encanta!\nguarnició  {is} {ask} Què hi prefereix verdures o carn?\n{print} menjar amb guarnició en marxa!\nbegudes {is} {ask} Què voldria beure?\n{print} Gràcies per la comanda.\n{print} menjar de guarnició i begudes en marxa!\n```\n"
                 story_text: "Al restaurant has d'utilitzar també les cometes quan facis servir la comanda `{print}` o `{ask}`.\n\n### Exercici\nAfegeix les cometes a aquest codi per fer-lo funcionar! Ves amb compte: les variables no han d'estar entre cometes.\nDesprés, utilitza la comanda `{clear}` per mostrar només una línia cada vegada a la pantalla de sortida.\n\n### Exercici 2\nTorna al nivell anterior i copia el teu codi del restaurant. Fes que el codi funcioni en aquest nivell afegint cometes als llocs adequats i afegeix algunes comandes `{clear}`.\n"
             9:
                 story_text: "En aquest nivell pots utilitzar la nidificació per fer que el teu restaurant sigui més realista i divertit!\n\n### Exercici\nLa indentació s'ha eliminat del codi d'exemple.\nPots esbrinar quanta indentació necessita cada línia perquè el codi funcioni correctament?\nSi el client demana pizza, Hedy no hauria de preguntar quina salsa vol el client.\n\n**Extra** El restaurant no disposa de totes les salses. Fes una llista de les salses disponibles i dona una resposta amb cada comanda en funció de si està disponible. <br>\n**Extra** Les pizzes tenen ingredients. Pregunta als clients què volen. <br>\n**Extra** Els clients potser volen beguda. Pregunta'ls-hi també! <br>\n"
@@ -2155,7 +2155,7 @@ adventures:
         levels:
             16:
                 example_code: "```\n# Enganxa el teu codi aquí 👇\n\n\n# Crea una funció que crei la sequencia_jugador\n{define} _\n    {for} _\n        _ \"Quin és el color número \" i \"?\"\n        {add} resposta {to} _\n\n# Configuració inicial\nnivell = _\nfinal_joc= _\n{print} _\n_ 1\n_\n```\n"
-                story_text: "Continuem amb el nostre joc de Simon Says!\n\n### Exercici\n***Enganxa el teu codi aquí*** Enganxa el teu codi del nivell anterior aquí. No t'oblidis d'eliminar la part que només s'utilitzava per provar les funcions.\n\n***Crea una funció que creï la sequencia_jugador*** La llista `sequencia_jugador` s'usa per capturar les respostes del jugador. Primer definim la funció amb l'argument level.\nA continuació, preguntem tantes vegades com nivell quin és el color que trien. Anomenem aquesta variable `resposta`. Després afegim la variable `resposta` a la llista sequencia_jugador.\n\n***Configuració del joc*** Abans de programar el joc a la pròxima aventura, necessitarem algunes variables inicials. Primer, establim la variable `nivell` a 1 i la variable `final_joc` a False.\nDesprés fem una introducció per al joc. Imprimim \"Benvingut a Simon Says!\" i netegem la pantalla després d'1 segon.\n\n***Continua a la propera aventura per acabar el joc!**** No t'oblidis de copiar el teu codi i portar-lo a la propera aventura.\n"
+                story_text: "Continuem amb el nostre joc de Simon Says!\n\n### Exercici\n***Enganxa el teu codi aquí*** Enganxa el teu codi del nivell anterior aquí. No t'oblidis d'eliminar la part que només s'utilitzava per provar les funcions.\n\n***Crea una funció que creï la sequencia_jugador*** La llista `sequencia_jugador` s'usa per capturar les respostes del jugador. Primer definim la funció amb l'argument level.\nA continuació, preguntem tantes vegades com nivell quin és el color que trien. Anomenem aquesta variable `resposta`. Després afegim la variable `resposta` a la llista sequencia_jugador.\n\n***Configuració del joc*** Abans de programar el joc a la pròxima aventura, necessitarem algunes variables inicials. Primer, establim la variable `nivell` a 1 i la variable `final_joc` a False.\nDesprés fem una introducció per al joc. Imprimim \"Benvingut a Simon Says!\" i netegem la pantalla després d'1 segon.\n\n***Continua a la propera aventura per acabar el joc!*** No t'oblidis de copiar el teu codi i portar-lo a la propera aventura.\n"
         name: Simon Says 2
         default_save_name: Simon
         description: Fes el joc del Simon Says
