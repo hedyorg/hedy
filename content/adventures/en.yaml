@@ -209,7 +209,7 @@ adventures:
 
                     Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
                 example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
-            D:
+            16:
                 story_text: |
                     Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.
                     Or you can use `{while} sword == 'lost'` so the player can't continue the game until they have found something.
@@ -231,7 +231,7 @@ adventures:
                             {print} 'Nope they are not at the ' location
                     {print} 'Now you can enter the house!'
                     ```
-            A:
+            13:
                 story_text: |
                     We are going to print another story, but now we have to use brackets with `{print}`.
 
@@ -366,7 +366,7 @@ adventures:
                     favorite_animal {is} {ask} What is your favorite animal?
                     {print} I like favorite_animal
                     ```
-            A:
+            13:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code: |
                     ```
@@ -379,7 +379,7 @@ adventures:
         default_save_name: Blackjack
         description: Try to get as close to 21 as you can
         levels:
-            D:
+            16:
                 story_text: |
                     Blackjack is a simple game of cards in which you have to get as close to 21 points as possible. You get two cards. Each card is worth their numeral value, and the face cards (Jack, Queen and King) are worth 10 points.
                     The Ace is worth either 1 or 11 points (you can choose). The dealer, your opponent, also gets two cards.
@@ -429,7 +429,7 @@ adventures:
         default_save_name: Blackjack_2
         description: Blackjack part 2
         levels:
-            D:
+            16:
                 story_text: |
                     ### Exercise
                     In this adventure we code the second part of our Blackjack game.
@@ -486,7 +486,7 @@ adventures:
         default_save_name: Blackjack_3
         description: Blackjack part 3
         levels:
-            D:
+            16:
                 story_text: |
                     In the previous adventures you have learned how to draw 2 random cards for yourself and for the dealer and to calculate how many points you both got.
                     In this adventure we add the option to ask for an extra card for both you and the dealer.
@@ -531,7 +531,7 @@ adventures:
         default_save_name: Blackjack_4
         description: Blackjack part 4
         levels:
-            D:
+            16:
                 story_text: |
                     In the last 3 adventures you have almost created a working blackjack game! The only thing left to do is to decide a winner!
 
@@ -673,7 +673,7 @@ adventures:
                     answer = _
                     {print} number1 ' plus ' number2 ' is ' _
                     ```
-            C:
+            15:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
 
@@ -697,7 +697,7 @@ adventures:
                     mean_grade = {call} _
                     {print} 'Your mean grade is ' mean_grade
                     ```
-            D:
+            16:
                 story_text: |
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
                     This makes sure the player can't continue to the next question if they answer incorrectly.
@@ -728,7 +728,7 @@ adventures:
         default_save_name: Calculator 2
         description: Calculator 2
         levels:
-            C:
+            15:
                 story_text: |
                     ### Exercise 2
                     **This is the second part of this adventure.** The adventure starts in the previous adventure.
@@ -1554,7 +1554,7 @@ adventures:
                         {print} player ' throws ' choices {at} {random}
                         {sleep}
                     ```
-            D:
+            16:
                 story_text: |
                     ### Exercise
                     In this level you can create a little game in which you'll have to throw 6 as fast as possible.
@@ -1732,7 +1732,7 @@ adventures:
                         {print} 'If youre happy and you know it, ' action
                         {sleep} 3
                     ```
-            A:
+            13:
                 story_text: |
                     Lastly, we'll turn `{for} i {in} {range} 1 {to} 5` into real Python code, like this:
                 example_code: |
@@ -1931,7 +1931,7 @@ adventures:
                         {call} turn
                         {sleep} 2
                     ```
-            C:
+            15:
                 story_text: |
                     Now that you've learned how to use functions, you'll learn how to use a function with an argument.
                     An **argument** is a variable that is used within a function. It is not used outside the function.
@@ -2044,7 +2044,7 @@ adventures:
         default_save_name: Hangman
         description: Guess the word
         levels:
-            D:
+            16:
                 story_text: |
                     In this adventure we program a game of hangman. First we make some preparations, then we program the game and in the third part we add a drawing with the turtle.
 
@@ -2090,7 +2090,7 @@ adventures:
         default_save_name: Hangman_2
         description: Hangman 2
         levels:
-            D:
+            16:
                 story_text: |
                     Now it's time to program the hangman game.
 
@@ -2138,7 +2138,7 @@ adventures:
         default_save_name: Hangman_3
         description: Hangman 3
         levels:
-            D:
+            16:
                 story_text: |
                     In a game of hangman the mistakes are shown by drawing a part of the hangman each time a mistake has been made.
                     We now add those drawings with our turtle!
@@ -2372,7 +2372,7 @@ adventures:
                         {else}
                             {print} 'GAME OVER'
                     ```
-            B:
+            14:
                 story_text: |
                     ### Exercise
                     This haunted house game uses the connection between the lists you can use in this level.
@@ -2410,7 +2410,7 @@ adventures:
         default_save_name: hotel
         description: hotel
         levels:
-            C:
+            15:
                 story_text: |
                     In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {ask}.
                     You might have wondered why you would use functions, because the functions in the example were only one line of code.
@@ -2566,7 +2566,7 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-            C:
+            15:
                 story_text: |
                     We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
                     The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
@@ -2625,7 +2625,7 @@ adventures:
                     {if} frog {is} grenouille {print} 'Super!'
                     {else} {print} 'No, frog is grenouille'
                     ```
-            B:
+            14:
                 story_text: |
                     ### Exercise
                     Take a look at the example code. This is a program to practise French vocabulary. Now make your own program to practice your vocabulary in a new language.
@@ -2904,7 +2904,7 @@ adventures:
                     {call} _
                     {call} _
                     ```
-            C:
+            15:
                 story_text: |
                     You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
                     One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
@@ -2988,7 +2988,7 @@ adventures:
                     line_3()
                     {print} ('Early in the morning')
                     ```
-            D:
+            16:
                 story_text: |
                     **Warning** This adventure can become extremely annoying!
                     We can also use the `{while}` command to repeat a song forever.
@@ -3005,7 +3005,7 @@ adventures:
                         {call} song
                         {print} '🥳'
                     ```
-            B:
+            14:
                 story_text: |
                     Upgrade your Old MacDonald code!
 
@@ -3171,7 +3171,7 @@ adventures:
                     weeks = to_save / allowance
                     {print} 'You can buy a ' _ ' in ' _ ' weeks.'
                     ```
-            C:
+            15:
                 story_text: |
                     ### Exercise
                     In this level you can let Hedy tell you if you have saved up enough money!
@@ -3278,7 +3278,7 @@ adventures:
                     ```
                     _ Hello!
                     ```
-            A:
+            13:
                 story_text: |-
                     We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.
                     It also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so.
@@ -3360,7 +3360,7 @@ adventures:
                     {print} "I'm babysitting my sister's kids"
                     {print} "What's more fun than that?"
                     ```
-            A:
+            13:
                 story_text: |
                     **All texts need to be in quotation marks**
                     For this level on you will also have to use quotation marks when storing a text with `=`:
@@ -3427,7 +3427,7 @@ adventures:
                     prizes {is} _
                     _
                     ```
-            B:
+            14:
                 story_text: |-
                     We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
                     We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code.
@@ -3797,7 +3797,7 @@ adventures:
                         price = price + 2.35
                     {print} 'That will be ' price ' dollar, please'
                     ```
-            D:
+            16:
                 story_text: |
                     With the `{while}` you can make sure your customers can keep adding orders until they are done.
 
@@ -3948,7 +3948,7 @@ adventures:
                     players = _
                     {for} _
                     ```
-            D:
+            16:
                 story_text: |
                     ### Exercise
                     Play until you beat the computer! But first, finish the example code...
@@ -4038,7 +4038,7 @@ adventures:
         default_save_name: Simon
         description: Make a game of Simon Says
         levels:
-            B:
+            14:
                 story_text: |
                     Let's make a game of Simon Says! Simon Says is a memory game in which the player will be given a color. They have to repeat that color back.
                     If they get it right a color is added to the sequence, so they now have to remember 2 colors, then 3, then 4 etc. the game stops as soon as the player makes a mistake.
@@ -4088,7 +4088,7 @@ adventures:
         default_save_name: Simon
         description: Make a game of Simon Says
         levels:
-            B:
+            14:
                 story_text: |
                     We'll continue with our Simon Says game!
 
@@ -4125,7 +4125,7 @@ adventures:
         default_save_name: Simon
         description: Make a game of Simon Says
         levels:
-            B:
+            14:
                 story_text: |
                     In this adventure we'll program the game of Simon Says!
 
@@ -4268,7 +4268,7 @@ adventures:
                     ```
                     monkeys = 5, 4, 3, 2, 1
                     ```
-            C:
+            15:
                 story_text: |
                     In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with `{ask}` commands as well?
                     In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
@@ -4284,7 +4284,7 @@ adventures:
                     {call} song {with} synonym
                     {call} song {with} chosen_place
                     ```
-            B:
+            14:
                 story_text: |
                     In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
                     The Drunken Sailor is also quickly made in this level. You only need 8 lines for the entire song, check it out!
@@ -4319,7 +4319,7 @@ adventures:
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
-            A:
+            13:
                 story_text: |
                     In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.
 
@@ -4361,7 +4361,7 @@ adventures:
                     {print} 'Like a diamond in the sky'
                     {call} _
                     ```
-            B:
+            14:
                 story_text: |
                     ### Exercise
                     Finish the nursery rhyme!
@@ -4393,7 +4393,7 @@ adventures:
         default_save_name: Tic
         description: Play a game of Tic Tac Toe!
         levels:
-            B:
+            14:
                 story_text: |
                     Let's program a game of tic-tac-toe!
 
@@ -4426,7 +4426,7 @@ adventures:
 
                     # Call the function
                     ```
-            C:
+            15:
                 story_text: |
                     In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
                     Now that we have the `{elif}` command, we can let the game decide if someone has won and it can stop asking us!
@@ -4464,7 +4464,7 @@ adventures:
         default_save_name: Tic
         description: Play a game of Tic Tac Toe!
         levels:
-            B:
+            14:
                 story_text: |
                     In the previous adventure you've learned how to create a playing field. Now you'll learn how to create the game!
 
@@ -4506,7 +4506,7 @@ adventures:
         default_save_name: Tic
         description: Play a game of Tic Tac Toe!
         levels:
-            B:
+            14:
                 story_text: |
                     You might have noticed one mistake in the code you've made in the previous adventure. You can steal the other player's spot! If the other person chose spot 1, you could simply enter 1 after them and steal their spot.
                     That's not fair! In this adventure we'll fix that mistake.
@@ -5020,7 +5020,7 @@ adventures:
                         {turn} random_number * 5
                         {forward} 80
                     ```
-            C:
+            15:
                 story_text: |
                     ### Exercise
                     Create a program that asks the player how many corners their figure should have and then creates that figure.
@@ -5047,7 +5047,7 @@ adventures:
                     {call} _ {with}
                     {call} _ {with}
                     ```
-            D:
+            16:
                 story_text: |
                     ### Exercise
                     Recreate the drawings with the turtle!
@@ -5085,7 +5085,7 @@ adventures:
         default_save_name: while_command
         description: '{while}'
         levels:
-            D:
+            16:
                 story_text: |-
                     We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
                     So don't forget to change the value in the loop.
