@@ -186,7 +186,7 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you can use the {for} command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.
+                    In this level you can use the `{for}` command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.
 
                     ### Exercise
 
@@ -924,7 +924,7 @@ adventures:
                 story_text: |-
                     ### Exercise
                     Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jacques)' by using the {repeat} command of course!
+                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jacques)' by using the `{repeat}` command of course!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1353,8 +1353,8 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
-                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.
+                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an `{if}` or `{repeat}` command. But you can't yet combine the two...
+                    Good news! In this level you will be allowed to put an `{if}` inside an `{if}`, or inside a `{repeat}` command. Putting a block of code inside another block of code is called nesting.
                 example_code: |
                     ```
                     answer = {ask} 'Are you ready to learn something new?'
@@ -2151,7 +2151,7 @@ adventures:
 
                     ***Paste your code*** Copy your code from the previous adventure and paste the code in the programming field.
 
-                    ***The game*** This game continues playing until Player 2 is game over. Fill in the while command accordingly. Now, Player 2 is allowed to guess a letter, so ask Player 2 to guess a letter.
+                    ***The game*** This game continues playing until Player 2 is game over. Fill in the `{while}` command accordingly. Now, Player 2 is allowed to guess a letter, so ask Player 2 to guess a letter.
                     We need to check if their answer is correct, so check if their `guess` is (somewhere) in the (list) `answer`. Then we let the computer figure out which of the letter(s) is the guess. We have already programmed that part for you.
                     Next, we want to compliment the player for finding a correct letter and we want to print the list `guessed_letters`, so the player can see their progress.
 
@@ -2172,7 +2172,7 @@ adventures:
                         guess = _
                         {if} _
                             {for} i {in} {range} 1 {to} amount_letters:
-                                if answer[i] == guess:
+                                {if} answer[i] == guess:
                                     guessed_letters[i] = guess
                             {print} _
                             {if} guessed_letters == _:
@@ -2478,7 +2478,7 @@ adventures:
                     In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {ask}.
                     You might have wondered why you would use functions, because the functions in the example were only one line of code.
                     Now we will show you what a bigger function looks like and we will use multiple arguments now as well. You'll see how much better it is to use a function once the function gets bigger.
-                    Here is an example of a function with arguments combined with {ask} commands.
+                    Here is an example of a function with arguments combined with `{ask}` commands.
                 example_code: |
                     ```
                     {define} welcome_message {with} title, last_name, country, room_number
@@ -2541,11 +2541,11 @@ adventures:
                 story_text: |
                     ## If... Else...
                     You have learned to repeat a block of lines of code after a `{repeat}` command.
-                    Now you can also use indentation to make blocks after a {if} or {else} command.
+                    Now you can also use indentation to make blocks after a `{if}` or `{else}` command.
                     Check out the example code.
 
                     ### Exercise
-                    Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
+                    Add an `{else}` command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
                 example_code: |
                     ```
                     name = {ask} 'What is your name?'
@@ -2911,7 +2911,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    From this level on you can - among other things - use a {repeat} command inside a {repeat} command.
+                    From this level on you can - among other things - use a `{repeat}` command inside a `{repeat}` command.
                     That makes songs like 'Happy birthday' even shorter!
 
                     ### Exercise
@@ -3034,7 +3034,7 @@ adventures:
             15:
                 story_text: |
                     **Warning** This adventure can become extremely annoying!
-                    We can also use the {while} command to repeat a song forever.
+                    We can also use the `{while}` command to repeat a song forever.
 
                     ### Exercise
                     Finish the never-ending song.
@@ -3068,12 +3068,12 @@ adventures:
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
+                    {for} i {in} {range} 1 {to} 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old MacDonald had a farm'
-                        call line_1
-                        print 'E I E I O!'
+                        {print} 'Old MacDonald had a farm'
+                        {call} line_1
+                        {print} 'E I E I O!'
                         _
                     ```
             17:
@@ -3545,7 +3545,7 @@ adventures:
             8:
                 story_text: |
                     ### Repeat commands and indentation
-                    In this level you can repeat multiple lines of code with only 1 repeat command.
+                    In this level you can repeat multiple lines of code with only 1 `{repeat}` command.
                     You do this by making a block of lines that you want to repeat.
                     The lines in this block will need **indentation** .
                     That means putting four spaces at the beginning of each line. You will also have to indent when you just want to create a block of one line.
@@ -4263,13 +4263,13 @@ adventures:
         levels:
             2:
                 story_text: |
-                    Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
+                    Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the `{sleep}` command, the program pauses for that amount of seconds.
 
                     ### Exercise
-                    Practise this new command by making a code of your own in which you use the {sleep} command at least 3 times. With each {sleep} command the pausing time should differ.
+                    Practise this new command by making a code of your own in which you use the `{sleep}` command at least 3 times. With each `{sleep}` command the pausing time should differ.
                 example_code: |
                     ```
-                    {print} My favorite colour is...
+                    {print} My favorite color is...
                     {sleep} 2
                     {print} green!
                     ```
@@ -4396,7 +4396,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
+                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with `{ask}` commands as well?
                     In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
                 example_code: |
                     ```
@@ -4555,7 +4555,7 @@ adventures:
             17:
                 story_text: |
                     In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
-                    Now that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!
+                    Now that we have the `{elif}` command, we can let the game decide if someone has won and it can stop asking us!
 
                     ### Exercise
                     ***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.
@@ -4601,7 +4601,7 @@ adventures:
                     The variable `game_over` tells us if the game is over, and should be 'no' at the start of the game.
                     The variable `sign` tells us if it's the turn of player x or player o. Set the variable to 'x'.
 
-                    ***The game*** First use a {while} command, to make sure the game keeps on playing the variable while game_over is set to no.
+                    ***The game*** First use a `{while}` command, to make sure the game keeps on playing the variable while game_over is set to no.
                     During the game, we first ask the player which spot they choose. Then we change the field with the number they chose into their sign.
                     Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
 
@@ -4642,7 +4642,7 @@ adventures:
 
                     ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
                     Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
-                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
+                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a `{sleep}` command, so the players can actually read the text before it gets cleared again.
                     Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
 
                     ***Play your game!*** Now the game should work properly! Good job!
@@ -4909,7 +4909,7 @@ adventures:
                     <div class="w-full flex flex-row gap-2">
                         Rectangle <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
                         Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
-                        Stairs<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
+                        Stairs <img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
             2:
                 story_text: |

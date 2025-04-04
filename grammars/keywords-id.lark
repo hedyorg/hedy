@@ -1,27 +1,27 @@
-_DEFINE: ("define" | "define") _SPACE?
-_CALL: ("call" | "call") _SPACE?
-_WITH: ("with" | "with") _SPACE?
+_DEFINE: ("definisikan" | "define") _SPACE?
+_CALL: ("panggil" | "call") _SPACE?
+_WITH: ("dengan" | "with") _SPACE?
 _DEF: ("def" | "def") _SPACE?
-_RETURN: ("return" | "return") _SPACE?
+_RETURN: ("kembali" | "return") _SPACE?
 _PRINT: ("cetak" | "print") _SPACE?
-_PLAY: ("play" | "play") _SPACE
+_PLAY: ("mulai" | "play") _SPACE
 _ASK: ("tanya" | "ask")
 _ECHO: ("gaungkan" | "echo") _SPACE?
 _FORWARD: ("maju" | "forward") _SPACE?
 _TURN: ("belok" | "turn") _SPACE?
 left: ("kiri" | "left") _SPACE?
 right: ("kanan" | "right") _SPACE?
-black: ("black" | "black") _SPACE?
-blue: ("blue" | "blue") _SPACE?
-brown: ("brown" | "brown") _SPACE?
-gray: ("gray" | "gray") _SPACE?
-green: ("green" | "green") _SPACE?
-orange: ("orange" | "orange") _SPACE?
+black: ("hitam" | "black") _SPACE?
+blue: ("biru" | "blue") _SPACE?
+brown: ("cokelat" | "brown") _SPACE?
+gray: ("abu-abu" | "gray") _SPACE?
+green: ("hijau" | "green") _SPACE?
+orange: ("oranye" | "orange") _SPACE?
 pink: ("pink" | "pink") _SPACE?
-purple: ("purple" | "purple") _SPACE?
-red: ("red" | "red") _SPACE?
-white: ("white" | "white") _SPACE?
-yellow: ("yellow" | "yellow") _SPACE?
+purple: ("ungu" | "purple") _SPACE?
+red: ("merah" | "red") _SPACE?
+white: ("putih" | "white") _SPACE?
+yellow: ("kuning" | "yellow") _SPACE?
 _IS: _SPACE ("adalah" | "is") _SPACE
 _STANDALONE_IS: ("adalah" | "is")
 _SLEEP: ("tidur" | "sleep") _SPACE?
@@ -32,7 +32,7 @@ _FROM: _SPACE? ("dari" | "from")
 _AT: _SPACE ("secara" | "at") _SPACE
 random: ("acak" | "random") _SPACE?
 _IN: _SPACE ("dalam" | "in") _SPACE
-_NOT_IN: _SPACE ("not in" | "not in") _SPACE
+_NOT_IN: _SPACE ("tidak dalam" | "not in") _SPACE
 _IF: ("jika" | "if") _SPACE
 _ELSE: "lainnya" | "else"
 _AND: _SPACE? ("dan" | "and") _SPACE
@@ -48,7 +48,7 @@ _OR: _SPACE? ("atau" | "or") _SPACE
 _WHILE: ("selama" | "while") _SPACE
 _LENGTH: "panjang" | "length"
 _COLOR : ("warna" | "color") _SPACE?
-_PRESSED: ("pressed" | "pressed") _SPACE?
-clear: ("clear" | "clear") _SPACE?
-TRUE: ("true" | "True" | "true" | "True") _SPACE?
-FALSE: ("false" | "False" | "false" | "False") _SPACE?
+_PRESSED: ("tekan" | "pressed") _SPACE?
+clear: ("bersihkan" | "clear") _SPACE?
+TRUE: ("benar" | "Benar" | "true" | "True") _SPACE?
+FALSE: ("salah" | "Salah" | "false" | "False") _SPACE?
