@@ -47,6 +47,16 @@ class ExtraStory:
 
 @require_kwargs
 @dataclass
+class Solution:
+    code: str
+    text: Optional[str] = None
+
+    def __getitem__(self, key):
+        return getattr(self, key)
+
+
+@require_kwargs
+@dataclass
 class Program:
     id: str
     name: str
@@ -142,6 +152,7 @@ class Adventure:
     id: Optional[str] = ""
     author: Optional[str] = ""
     is_checked: Optional[bool] = False
+    solutions: Optional[List[Solution]] = field(default_factory=list)
 
     def __getitem__(self, key):
         return getattr(self, key)
