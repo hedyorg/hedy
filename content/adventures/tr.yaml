@@ -313,10 +313,10 @@ adventures:
                     Eğer `{and}` kullanırsanız, `{and}` nin sağındaki ve solundaki her iki ifadenin de doğru olması gerekir. Ayrıca `{or}` da kullanabiliriz. O zaman sadece bir ifadenin doğru olması gerekir.
                 example_code: |
                     ```
-                    name = {ask} 'Adın ne?'
-                    age = {ask} 'Yaşın kaç?'
+                    name = {ask} 'what is your name?'
+                    age = {ask} 'what is your age?'
                     {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'Sen gerçek Hedy'sin!'
+                        {print} 'You are the real Hedy!'
                     ```
         name: '{and} & {or}'
     ask_command:
