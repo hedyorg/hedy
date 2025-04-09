@@ -97,13 +97,13 @@ adventures:
                 example_code: |
                     ```
                     imię {is} {ask}_ Jakie jest twoje imię? _
-                    {print}  _ Głównym bohaterem jest _ imię
+                    {print} _ Głównym bohaterem jest _ imię
                     _
                     _
                     {print} imię _ idzie na spacer do lasu _
                     {print} imię _ nieco się boi _
                     zwierzęta {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Słyszy dźwięk _ zwierzęcia {at} {random}
+                    {print} _ Słyszy dźwięk _ zwierzęta {at} {random}
                     {print} imię _ obawia się, że jest w nawiedzonym lesie _
                     ```
             5:
@@ -112,7 +112,7 @@ adventures:
                     W przykładowym kodzie możesz zobaczyć jak stworzyć 2 różne zakończenia.
 
                     ### Ćwiczenie 1
-                    Napisz nową, krótką opowieść składającą się z  przynajmniej 6 linii kodu na wybrany przez Ciebie temat.
+                    Napisz nową, krótką opowieść składającą się z przynajmniej 6 linii kodu na wybrany przez Ciebie temat.
                     Brak Ci pomysłów? Wybierz jeden z tych: superbohater, nudny dzień w szkole, opuszczeni na bezludnej wyspie.
 
                     Teraz daj graczowi wybór pomiędzy dobrym i złym zakończeniem, tak jak w kodzie przykładowym.
@@ -191,7 +191,7 @@ adventures:
                     ```
             10:
                 story_text: |
-                    W tym poziomie możesz użyć polecenia {for} w swojej opowieści. Dzięki tej komendzie możesz bardzo prosto zaprogramować część wierszyka "Sroczka kaszkę warzyła".
+                    W tym poziomie możesz użyć polecenia `{for}` w swojej opowieści. Dzięki tej komendzie możesz bardzo prosto zaprogramować część wierszyka "Sroczka kaszkę warzyła".
 
                     ### Ćwiczenie
 
@@ -241,8 +241,8 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## Komenda Add to
-                    Możesz dodawać elementy do listy używając komendy`{add} {to_list}`. Żeby dodać element do listy możesz po prostu wpisać: `{add} penguin {to_list} animals` albo możesz użyć komendy `{ask}`, tak jak w przykładowym kodzie.
+                    ## {add} {to_list}
+                    Możesz dodawać elementy do listy używając komendy `{add} {to_list}`. Żeby dodać element do listy możesz po prostu wpisać: `{add} penguin {to_list} animals` albo możesz użyć komendy `{ask}`, tak jak w przykładowym kodzie.
                 example_code: |
                     ```
                     zwierzęta {is} pies, kot, kangur
@@ -251,7 +251,7 @@ adventures:
                     {print} Wybieram zwierzęta {at} {random}
                     ```
                 story_text_2: |
-                    ## Komenda Remove from
+                    ## {remove} {from}
                     Tak samo jak możemy dodawać elementy do listy, możemy je również usuwać. Robimy to za pomocą komendy `{remove} {from}`.
                 example_code_2: |
                     ```
@@ -671,7 +671,7 @@ adventures:
                     Wypełnij puste pola, aby kalkulator zadziałał.
                     * Zacznij od czwartej linii, dodaj pytanie, aby dowiedzieć się, jaką ocenę uzyskał uczeń.
                     * W piątej linii będziesz chciał obliczyć sumę wszystkich ocen, więc suma = suma + ocena.
-                    * Then we get to set the return value. We want to return the mean, so the total devided by the amount of tests (4).
+                    * Then we get to set the return value. We want to return the mean, so the total divided by the amount of tests (4).
                     * Ostatecznie kończymy kod, wywołując funkcję w wierszu 8.
 
                     Udało ci się? Niesamowite! Chciałbyś dodać jeszcze więcej do swojego kalkulatora? **Dalsza część tej przygody w następnej przygodzie!**
@@ -865,11 +865,11 @@ adventures:
                     wybrany_produkt = {ask} 'Proszę wybrać produkt'
                     produkty_1_dolarowe = kola, sok pomarańczowy, woda 
                     produkty_2_dolarowe = czekolada, ciastko, batonik muesli
-                    produkty_3_dolarowe = chipsy, kabanosy, chleb bananowy
+                    produkty_3dolarowe = chipsy, kabanosy, chleb bananowy
                     {if} wybrany  {is} {in} produkty_1_dolarowe
                     cena = 1
                     {if} wybrany_produkt {is} produkty_2_dolarowe
-                    price = 2
+                    cena = 2
                     {else} wybrany_produkt {in} produkty_3_dolarowe
                     cena = 3
                     ilość_produktów = '{ask} Ile ' wybrany_produkt ' chciałbyś otrzymać?'
@@ -1303,8 +1303,8 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Świetna robota! Osiągnąłeś kolejny poziom! Na poprzednim poziomie nauczyłeś się używać wielu wierszy kodu w poleceniu {if} lub {repeat}. Ale nie możesz jeszcze połączyć dwóch..
-                    Dobre wieści! Na tym poziomie będziesz mógł umieścić {if} w poleceniu {if}lub w poleceniu {repeat}. Umieszczenie bloku kodu w innym bloku kodu nazywa się nesting (zagnieżdżeniem).                     ``` Umieszczenie bloku kodu w innym bloku kodu nazywa się nesting (tłumaczenie dosłowne: zagnieżdżeniem).
+                    Świetna robota! Osiągnąłeś kolejny poziom! Na poprzednim poziomie nauczyłeś się używać wielu wierszy kodu w poleceniu `{if}` lub `{repeat}`. Ale nie możesz jeszcze połączyć dwóch..
+                    Dobre wieści! Na tym poziomie będziesz mógł umieścić `{if}` w poleceniu `{if}` lub w poleceniu `{repeat}`. Umieszczenie bloku kodu w innym bloku kodu nazywa się nesting (zagnieżdżeniem).
                 example_code: |
                     ```
                     odpowiedź = {ask} 'Jesteś gotów, aby nauczyć się czegoś nowego?'
@@ -2180,10 +2180,10 @@ adventures:
                     potwór_1 {is} _
                     potwór_2 {is} _
                     potwór_3 {is} _
-                    {print} Wchodzisz do nawiedzonego domu..
+                    {print} Wchodzisz do nawiedzonego domu.
                     {print} Nagle widzisz potwór_1
-                    {print} Uciekasz do innego pokoju, 
-                    {print}ale potwór_2 czeka na ciebie!
+                    {print} Uciekasz do innego pokoju.
+                    {print} Ale potwór_2 czeka na ciebie!
                     {print} O nie! Szybko idź do kuchni.
                     {print} Ale jak wchodzisz zaatakował ciebie potwór_3!
                     ```
@@ -2976,9 +2976,9 @@ adventures:
                     ```
                     słowa {is} ara, Hedy
                     {print} Naucz twoją papugę!
-                    nowe_słowo {is} {ask}Jakiego słowa chcesz ja nauczyć?
+                    nowe_słowo {is} {ask} Jakiego słowa chcesz ja nauczyć?
                     _ nowe_słowo _ słowa
-                    {print} 🧒 Powiedz nowe_słowo , Hedy!
+                    {print} 🧒 Powiedz nowe_słowo, Hedy!
                     {print} 🦜 słowa {at} {random}
                     ```
             4:
