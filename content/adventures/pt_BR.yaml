@@ -1942,6 +1942,7 @@ adventures:
                     {print} '5 vezes 5 é ' 5 * 5
                     {print} '5 dividido por 5 é ' 5 / 5
                     ```
+                story_text: "Neste nível, temos uma novidade: agora, você pode fazer cálculos.\n\nSomar é fácil, você escreve o sinal de \"mais\", assim como na matemática: `5 + 5`, por exemplo. O mesmo vale para o sinal de \"menos\" para subtrair, como em `5 - 5`.\n\nMultiplicar é um pouco diferente, já que o seu teclado não tem o símbolo de vezes. Pode procurar, não tem mesmo!\nPor isso, para multiplicar, usamos o asterisco que fica na tecla do 8: `5 * 5`. Leia isso como \"5 vezes 5\" para lembrar com mais facilidade.\n"
             12:
                 story_text: |-
                     **Números Decimais**
@@ -2029,6 +2030,7 @@ adventures:
                 story_text: "Você não precisa sempre tocar uma música inteira quando for usar o comando `{play}`. Às vezes, você só quer tocar uma única nota.\nPor exemplo, se você quiser criar um quiz, você pode tocar uma nota aguda e feliz se a resposta estiver correta e uma nota grave e triste se estiver errada.\n\n### Exercício\nTermine a primeira pergunta adicionando uma linha de código que toca uma nota C3 se a resposta dada estiver errada.\nEm seguida, pense em mais 3 perguntas para adicionar a esse quiz.\n"
             6:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
+                example_code: "```\nnúmero = {ask} 'Diga um número entre 1 e 67 como inicial'\n{print} número\n{play} número\nnúmero = número + 1\n{print} número\n{play} número\nnúmero = número + 1\n{print} número\n{play} número\n```\n"
             7:
                 example_code: |
                     ```
