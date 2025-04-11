@@ -108,7 +108,7 @@ adventures:
                     {if} slutning {is} lykkelig {print} navn ' griber sit sværd og monstret løber hurtigt sin vej'
                     {else} {print} 'Monstret æder ' navn
                     ```
-            7:
+            8:
                 story_text: |
                     I en historie, gentages nogle ord flere gange. For eksempel, når nogen råber på hjælp eller synger en sang.
                     Du kan indsætte disse gentagelser i din historie, på dette niveau med `{repeat}`.
@@ -120,7 +120,7 @@ adventures:
             4:
                 story_text: "### Opgave\nKopier eksempel koden og færdiggør den ved at tilføje citationstegn til de tomme felter på linje 1 og 2.\nDe tomme felter på linje 3 og 4 skal ikke erstattes med citationstegn, men en `{sleep}` og en `{clear}` kommando. Kan du få det til at virke?\n\n### Opgave 2\nGå tilbage til det forrige niveau og kopiere din historiekode. Få den til at virke på dette niveau ved at tilføje citationstegn de rigtige steder.\nPas på: Variablerne i din historier bør væren udenfor citationstegnene. Ligesom linje 2 i eksempel koden. I den linje er variablerne sat udenfor citationstegnene.\n"
                 example_code: "```\nnavn {is} {ask} _ Hvad er dit navn? _\n{print}  _ Hovedpersonen hedder _ navn\n_\n_\n{print} navn  _ går nu en tur i skoven _\n{print} navn _ er lidt bange _\ndyr {is} 🦔, 🐿, 🦉, 🦇\n{print} _ Han hører lyden af et _ dyr {at} {random}\n{print} navn _ er bange for at skoven er hjemsøgt _\n```\n"
-            8:
+            9:
                 story_text: "På dette niveau can du bruge flere linjer i dine `{if}` kommandoer. På denne måde kan du opgradere din glade eller triste slutning!\n\n### Opgave 1\nKode eksemplet viser to forskellige slutninger; en hvor karakterene hopper ind i en tidsmaskine, og en hvor de ikke gør.\nFærdiggør de tomme felter med mindst en sætning per slutning.\n**Ekstra** Gør historien længere. Hvad sker der i historien? Du kan også tilføje endnu en `{ask}` med andre muligheder.\n\n### Opgave 2\nGo tilbage til dine gemte programmer, og vælg dit historie program fra niveau 5. Skriv nu en god og en dårlig slutning der hver er 3 linjer lange!\n"
                 example_code: "```\n{print} 'ÅH NEJ! T-rexen nærmer sig!'\nslut = {ask} 'Vil du have en glad eller en trist slutning?'\n{if} slut {is} glad\n    {print} 'Richard når lige at hoppe ind i tidsmaskinen!'\n    {print} _\n{else}\n    {print} 'Åh nej! Richard er for langsom...'\n    {print} _\n```\n"
     ask_command:
@@ -180,7 +180,7 @@ adventures:
                     navn {is} {ask} 'hvad er dit navn?'
                     {if} navn {is} Hedy {print} 'lækkert' {else} {print} 'buh!'
                     ```
-            6:
+            7:
                 story_text: |
                     På dette niveau lærer du noget nyt: du kan nu også regne.
 
@@ -194,14 +194,14 @@ adventures:
                     {print} '5 minus 5 er ' 5 - 5
                     {print} '5 gange 5 er ' 5 * 5
                     ```
-            7:
+            8:
                 story_text: |
                     Niveau 7 tilføjer `{repeat}` kommandoen.  `{repeat}` kan bruges til at udføre en kodelinje flere gange.
                 example_code: |
                     ```
                     {repeat} 3 {times} {print} 'Hedy er sjovt!'
                     ```
-            8:
+            9:
                 story_text: |
                     `{ask}` og`{print}` virker stadig som du kender dem. Men `{if}`, `{else}`, {pressed} og `{repeat}` har ændret sig!
                     Du kan nu udføre en gruppe kode sammen, men du skal *indrykke* koden.
@@ -224,7 +224,7 @@ adventures:
                         {print} 'ADVARSEL!'
                         {print} 'Du må ikke bruge denne computer!'
                     ```
-            9:
+            10:
                 story_text: |
                     På dette niveau må du kun bruge flere linjer med `{if}` og`{repeat}`, men du kan også sætte dem sammen!
                     I eksemplet kan du se en `{if}` kommando inde i en `{repeat}` kommando. Det er også tilladt den anden vej rundt, og en `{if}` er også tilladt i en anden `{if}` og en `{repeat}` i en `{repeat}`.
@@ -238,7 +238,7 @@ adventures:
                         {else}
                             {print} 'pizza er bedre'
                     ```
-            10:
+            11:
                 story_text: |-
                     På dette niveau lærer vi en ny kommando der hedder `{for}`. Med `{for}` kan du lave en liste og bruge alle elementerne.
                     `{for}` skaber en blok, ligesom `{repeat}` og `{if}` så alle linjer i blokken skal starte med mellemrum (indrykning).
@@ -259,70 +259,6 @@ adventures:
                     ```
 
                     {print} 2.5 + 2.5
-            13:
-                story_text: Vi skal nu lære `{and}` og `{or}`! Hvis du vil tjekke to udsagn, behøver du ikke bruge to {if} kommandoer men kan blot bruge `{and}` og `{or}`. Hvis du bruger `{and}`, skal begge udsagn, til højre og venstre for `{and}` være sande. Vi kan også bruge `{or}`. Så behøver kun et enkelt udsagn være sandt.
-                example_code: |
-                    ```
-                    navn = {ask} 'hvad hedder du?'
-                    alder = {ask} 'hvor gammel er du?'
-                    {if} navn {is} 'Hedy' {and} alder {is} 2
-                        {print} 'Du er virkelig Hedy!'
-                    ```
-            14:
-                story_text: |
-                    Vi skal lære flere nye ting. Du kender dem måske allerede fra matematik,  `<` og `>`.
-                    `<` tjekker om det første tal er mindre end det andet, for eksempel alder `<` 12 tjekker om alder er mindre end 12.
-                    Hvis du gerne vil tjekke om det første tale er mindre end eller lig med, kan du bruge `<=`, for eksempel alder `<=` 11.
-                    `>` tjekker  om det første tal er større end det andet, for eksempel point `>` 10 tjekker om point er større end 10.
-                    Hvis du vil tjekke om det første tal er større end eller lig med det andet, kan du bruge `>=`, for eksempel point `>=` 11.
-                    Du kan bruge disse sammenligninger i en `{if}`, sådan her:
-                example_code: |
-                    ```
-                    alder = {ask} 'Hvor gammel er du?'
-                    {if} alder > 12
-                        {print} 'Du er ældre end mig!'
-                    ```
-
-                    {if} alder < 13
-                        {print} 'Du er yngre end mig!'
-                    {else}
-                        {print} 'Du er ældre end mig!'
-            15:
-                story_text: |-
-                    Nu skal vi lære et nyt loop, et `{while}` loop! Vi fortsætter loop'et så længe udsagnet er sandt.
-                    Så glem ikke at ændre værdien inde i loop'et.
-
-                    I eksemplet, fortsætter vi indtil der er blevet givet det rigtige svar.
-                    Hvis det rigtige svar ikke bliver givet, slutter loop'et aldrig!
-                example_code: |
-                    ```
-                    svar = 0
-                    {while} svar != 25
-                        svar = {ask} 'Hvad er 5 gange 5?'
-                    {print} 'Det er rigtigt'
-                    ```
-            16:
-                story_text: |-
-                    Vi skal lave lister på som i Python, med firkantede parenteser rundt om! Vi beholder også anførselstegn rund om hvert element som vi har lært på et tidlige niveau.
-                    Du kan også bruge firkantede parenteser til at udpege et sted i en liste.
-                example_code: |
-                    ```
-                    venner = ['Ahmed', 'Bente', 'Claus']
-                    lykke_tal = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} 'Lykketallet til ' venner[i]
-                        {print} 'er ' lykke_tal[i]
-                    ```
-            17:
-                story_text: |-
-                    Nu skal vi ændre indrykning en lille smule. Hver gang vi har brug for indrykning, skal vi bruge `:` på linjen før indrykningen.
-
-                    På dette niveau kan du også bruge en ny kommando: `{elif}`. `{elif}` er en forkortelse for `{else} {if}` når du vil lave 3 (eller flere!) muligheder.
-                    Se en gang!
-            18:
-                story_text: |
-                    Vi er nået til ægte Python kode! Det betyder at vi er nødt til at bruge parenteser til {print} og {range} fra nu af.
-                    {print}('Jeg hedder ', navn)
     dice:
         name: Terninger
         default_save_name: Terninger
@@ -405,7 +341,7 @@ adventures:
                     Kan du færdigøre koden så den printer 'ærgerligt' når det er din tur og ellers 'sådan!'?
                     Glem ikke anførselstegn!
                 example_code: "```\npersoner {is} mor, far, Emma, Sophie\nopvasker {is} personer {at} {random}\n{if} opvasker {is} Sophie {print} _ ærgerligt jeg skal tage opvasken _ \n{else} {print} 'heldigvis ingen opvask for ' _ ' er allerede i gang'\n```\n"
-            6:
+            7:
                 story_text: |
                     Hvor ofte skal alle tage opvasken? Er det retfærdigt? Du kan tælle det på dette niveau.
                 example_code: |
@@ -437,7 +373,7 @@ adventures:
                     {remove} opvasker {from} personer
                     opvasker = personer {at} {random}
                     ```
-            7:
+            8:
                 story_text: |
                     Med `{repeat}` kan du gentage stykker af kode. Du kan bruge dette til at beregne hvem der skal tage opvasken i flere dage!
                     ### Opgave
@@ -448,7 +384,7 @@ adventures:
                     personer = mor, far, Emma, Sophie
                     {repeat} _ _ {print} 'Opvasken tages af ' _ _ _
                     ```
-            10:
+            11:
                 story_text: |
                     På dette niveau kan du lave et endnu bedre opvaske skema.
                 example_code: |
@@ -471,7 +407,7 @@ adventures:
                     yndlingsdyr {is} _
                     {print} Jeg kan godt lide yndlingsdyr
                     ```
-            6:
+            7:
                 example_code: |
                     ```
                     navn = Hedy
@@ -481,7 +417,7 @@ adventures:
         default_save_name: skriv
     songs:
         levels:
-            16:
+            14:
                 example_code: "```\nalle_dyr = ['gris', 'hund', 'ko']\nlyde = ['øh', 'vuf', 'muh']\n{for} i {in} {range} 1 {to} 3\n    dyr = alle_dyr[i]\n    lyd = lyde[i]\n    {print} 'Jens Hansen havde en bondegård'\n    {print} 'ih ah ih ah oh!'\n    {print} 'og på den gård der var en ' dyr\n    {print} 'ih ah ih ah oh!'\n    {print} 'Der var ' lyd lyd' her'\n    {print} 'og ' lyd lyd' der'\n    {print} lyde ' her'\n    {print} lyde ' der'\n    {print} 'alle steder ' lyde lyde\n```\n\n```\nlinjer = ['Hvad skal vi gøre med den fulde sømand', 'Smid ham i brummen til han vågner', 'Han skal klynges op i masten']\n{for} linje {in} linjer\n    {for} i {in} {range} 1 {to} 3\n        {print} linje \n    {print} 'Tidligt om morgnen.'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Hu hej, se hun sejler'\n    {print} 'Tidligt om morgnen.'\n```\n"
     tic:
         name: Kryds og Bolle
@@ -576,7 +512,7 @@ adventures:
                     {turn} vinkel
                     {forward} 25
                     ```
-            6:
+            7:
                 story_text: |
                     På dette niveau kan du bruge beregninger til at tegne forskellige figurer.
                     Du kan måske lært i skolen at dreje en hel omgang er 360 grader. Hvis ikke, ved du det nu!
@@ -599,7 +535,7 @@ adventures:
                     {forward} 50
                     {turn} vinkel
                     ```
-            8:
+            9:
                 story_text: "Nu hvor vi kan gentage flere streger, kan vi lave lettere lave figurer.\nVi skal kun sætte vinklen en gang og så bruge den variabel i `{repeat}` kommandoen.\n\n### Opgave 1\nKoden i eksemplet skaber et kvadrat. Ændrer koden så den skaber en anden figur, så som en trekant eller sekskant. \n Dette kræver at du ændrer to linjer i koden.\nTip: En hel omgang er 360 grader.\n\n### Opgave 2\nLav nu en tegning der består af mindst på polygoner.\n"
                 example_code: |
                     ```
@@ -619,7 +555,7 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
-            9:
+            10:
                 story_text: |
                     Nu hvor vi kan bruge `{repeat}` inden i en `{repeat}`, kan vi lave mere komplekse figurer.
 
