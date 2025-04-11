@@ -76,9 +76,6 @@ const ELEMENT_TO_TRACK = [
     "download_slides_17",
     "download_slides_18",
 
-    // Explore page buttons
-    "explore_page_adventure",
-    "explore_page_level"
 ];
 const CLICK_COUNTS = "clickCounts";
 const LAST_ACTIVE = "lastActiveTime";
