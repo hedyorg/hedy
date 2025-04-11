@@ -273,7 +273,7 @@ adventures:
                     _
                     {print} Otrzymujesz koktajl o smaku {at} {random}
                     ```
-        name: '{add}{to_list} i {remove}{from}'
+        name: '{add} {to_list} i {remove} {from}'
     and_or_command:
         default_save_name: i lub
         description: wprowadzenie komendy {and} i {or}
@@ -389,7 +389,7 @@ adventures:
 
                     # Stwórz funkcję do obliczenia punktów
                     {define} oblicz_punkty {with} kart:
-                        {if} karta{in} figury:
+                        {if} karta {in} figury:
                             punkty = _
                         {elif} _
                             _
@@ -946,7 +946,7 @@ adventures:
                     imiona = Muad Hasan Samira Noura
                     aktywność = puszczać latawce, pływać, wędrować, opalać się na słońcu
                     {for} imię {is} imiona
-                    {print} Na plaży imię uwielbia aktywność {at}{random}
+                    {print} Na plaży imię uwielbia aktywności {at} {random}
                     ```
             11:
                 story_text: |-
@@ -1022,8 +1022,8 @@ adventures:
                         romase = 'Love Actually', 'The Notebook', 'Titanic'
                         komedie = 'Mr Bean' 'Barbie''Deadpool'
                         filmy_dla_dzieci = 'Minions', 'Paddington', 'Encanto'
-                        {if} imię{is} 'Camila' {or} imię {is} 'Manuel'
-                            recommended_movie = kids_movie {at} {random}
+                        {if} imię {is} 'Camila' {or} imię {is} 'Manuel'
+                            polecany_film = kids_movie {at} {random}
                         {if} imię {is} 'Pedro' {or} 'Gabriella'
                                 ochota = {ask} 'What you in the mood for?'
                             {if} ochota {is} 'action'
@@ -1087,7 +1087,7 @@ adventures:
                     przyczyna hałasu = 'telewizja', 'dziecko z petardami', 'magiczny słoń', 'sen'
 
                     wybrane_imię = imiona {at} {random}
-                    wybrana_czynność= czynności{at} {random}
+                    wybrana_czynność= czynności {at} {random}
                     wybrane_miejsce = 'miejsca {at} {random}'
                     wybrany_dźwięk = hałasy {at} {random}
                     wybrana_kryjówka= kryjówki {random}
@@ -3256,7 +3256,7 @@ adventures:
                         {print} przyjaciele[i] 's szczęśliwy numer to ' szczęśliwe_liczby[i]
                     ```
                 story_text_2: |-
-                    Teraz, gdy nauczyłeś się używać nawiasów na listach, możesz także zacząć używać polecenia {at}{random} w Pythonie!
+                    Teraz, gdy nauczyłeś się używać nawiasów na listach, możesz także zacząć używać polecenia {at} {random} w Pythonie!
                     Po prostu wpisz nazwę swojej listy z `[random]` za nią!
                 example_code_2: |-
                     ```
@@ -3645,7 +3645,7 @@ adventures:
                 example_code_2: |
                     ```
                     możliwości {is} papier, kamień, nożyce
-                    gracz 1 {is}{ask} imię gracza 1
+                    gracz 1 {is} {ask} imię gracza 1
                     _
                     ```
             4:
