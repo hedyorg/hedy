@@ -2163,6 +2163,9 @@ adventures:
                 example_code: "```\n{print} 'Você quer um final feliz (f) ou triste (t)?'\n{if} f {is} {pressed} {print} 'Eles viveram felizes para sempre ❤'\n{else} {print} 'O príncipe foi devorado por um hipopótamo 😭'\n```\n"
                 example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
                 story_text_2: "Você também pode associar comandos da tartaruga a teclas.\n\n### Exercício\nCopie as linhas de código algumas vezes para poder criar um desenho maior.\n"
+            7:
+                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
+                story_text: "Agora que você aprendeu a usar o comando `{repeat}`, podemos apertar teclas várias vezes.\nVocê pode usar isso para fazer a tartaruga andar e se virar.\n\n### Exercício\nO código que você viu no nível 5 só checa a tecla uma vez. Copie o código exemplo e adicione um `{repeat}` a ele, de modo que você possa apertar as teclas várias vezes.\nUse esse código para desenhar algo legal.\n"
         name: Apertos de tecla
         description: Tente ligar uma tecla a um comando!
         default_save_name: Apertado
@@ -2906,3 +2909,8 @@ adventures:
         name: Forca
         default_save_name: Forca
         description: Adivinhe a palavra
+    repeat_command:
+        levels:
+            7:
+                example_code: "```\n{repeat} 3 {times} {print} 'Hedy é divertida!'\n```\n"
+                story_text: "## Repita! Repita! Repita!\nO nível 7 adiciona o comando `{repeat}`. O comando `{repeat}` pode ser usado para executar uma linha de código várias vezes. Assim:\n\n### Exercício\nBrinque com o comando `{repeat}`. Você consegue fazer a canção parabéns para você em só 3 linhas de código em vez de 4 agora?\n"
