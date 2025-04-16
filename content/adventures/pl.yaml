@@ -1268,7 +1268,7 @@ adventures:
                 example_code: |
                     ```
                     cena_posiłku {is} 0
-                    cena_napoju{is} 0
+                    cena_napoju {is} 0
                     cena_całkowita {is} 0
                     {print} 'Witamy w McHedy'
                     zamówienie {is} {ask} 'Co chciałbyś zjeść?'
@@ -4644,7 +4644,7 @@ adventures:
                     Wskazówka sygnalizacja świetlna
                     ```
                     kolory = czerwony, żółty, zielony
-                    {for} wybrany_kolor{in} kolory
+                    {for} wybrany_kolor {in} kolory
                         {color} _
                         {repeat} _
                     ```
@@ -4850,7 +4850,7 @@ adventures:
                     Wypełnij puste pola i spraw, aby kod działał!
                 example_code: |
                     ```
-                    {for} liczba{in} {range} _ {to} _
+                    {for} liczba {in} {range} _ {to} _
                         {print} liczba
                         {sleep}
                     {print} 'Szczęśliwego Nowego Roku!'
