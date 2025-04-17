@@ -162,9 +162,9 @@ adventures:
                 example_code: |
                     ```
                     jmeno {is} {ask} 'Jaké je vaše jméno?'
-                    {print} 'Ahoj, ' jmeno
+                    {print} Ahoj, jmeno
                     vek {is} {ask} 'Kolik vám je let?'
-                    {print} jmeno ' má ' vek ' let.'
+                    {print} jmeno má vek let.
                     ```
                 story_text_2: |
                     ### Cvičení
@@ -173,7 +173,7 @@ adventures:
                     Nyní místo nastavování proměnných chceme, abyste proměnné učinili interaktivními, jak jsme to udělali v našem příkladu.
 
                     Zkopírujte svůj kód z předchozího panelu a učiňte proměnné interaktivními pomocí příkazů `{ask}`.
-                example_code_2: "```\nfavorite_animal {is} {ask} Jaké je vaše oblíbené zvíře?\n{print} Mám rád oblíbené_zvíře\n```\n"
+                example_code_2: "```\noblíbené_zvíře {is} {ask} Jaké je vaše oblíbené zvíře?\n{print} Mám rád oblíbené_zvíře\n```\n"
             1:
                 story_text_2: "## Příkaz `{echo}`\nPokud chcete, aby vám počítač odpověď zopakoval, můžete použít příkaz `{echo}`. Odpověď bude zopakována na konci věty, tedy v tomto příkladu po příkazu ahoj.\n"
                 example_code_3: "```\n_ Jak se ti daří?\n_\n```\n"
@@ -536,7 +536,7 @@ adventures:
             3:
                 story_text_2: "### Cvičení\nNyní vytvořte vlastní verzi náhodné restaurace.\nVytvořte si seznam hlavních jídel, dezertů, nápojů a cen.\nPak použijte příkazy `{print}` a `{at} {random}` a sdělte zákazníkovi, co bude dnes večer na jídelním lístku.\n"
                 story_text: "Nemůžete se rozhodnout, co si dáte k večeři? Můžete nechat Hedy, aby vybrala za vás!\nJednoduše přidejte seznamy svých oblíbených (nebo naopak nejméně oblíbených) jídel a Hedy vám náhodně vybere večeři.\nMůžete se také trochu pobavit tím, že necháte Hedy vybrat i cenu vaší večeře! Co dostanete?\n"
-                example_code_2: "```\n{print} Vítejte ve své vlastní náhodné restauraci!\npředkrmy {is}_\nhlavní_jídla {is}_\ndezerty {is}_\nnápoje {is}_\nceny {is}_\n_\n```\n"
+                example_code_2: "```\n{print} Vítejte ve své vlastní náhodné restauraci!\npředkrmy {is} _\nhlavní_jídla {is} _\ndezerty {is} _\nnápoje {is} _\nceny {is} _\n_\n```\n"
                 example_code: "```\ndishes {is} spaghetti, brussels sprouts, hamburgers\n{print} You will have dishes {at} {random} tonight!\nprices {is} 1 euro, 10 euros, 100 euros\n{print} That will be prices {at} {random} please.\n```\n"
             5:
                 story_text: "### Cvičení\nPříklad kódu ukazuje, jak můžete naprogramovat, že vám v restauraci došla položka menu.\nZkopírujte si vlastní kód restaurace z předchozích úrovní. Vytvořte ve své restauraci problém a nakódujte jej, jako to udělal příklad kódu.\nMohla by vám například také dojít položka jídelního lístku, nebo nepřijímáte platební karty, nebo je rozbitý stroj na zmrzlinu.\n\n**Extra** Naprogramovali jste problém a naprogramovali vhodné reakce? Pak zkuste do kódu přidat další příkazy `{if}` a `{else}`.\nPokuste se přidat `{if}` za každý `{ask}`příkaz v kódu, aby byl kód co nejvíce interaktivní!\n"
@@ -757,7 +757,7 @@ adventures:
                 story_text: "Nyní, když můžeme použít `{repeat}` uvnitř `{repeat}`, můžeme vytvářet složitější obrazce.\n\n### Cvičení 1\nTento kód vytvoří tři černé trojúhelníky, změňte je na pět růžových čtverců.\n\n **Extra** Vytvořte obrázek podle vlastního výběru, který se bude skládat alespoň ze dvou různých typů tvarů.\n"
                 example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
     and_or_command:
-        description: představuji {and} a{or}
+        description: představuji {and} a {or}
         name: '{and} a {or}'
         default_save_name: a nebo
         levels:
@@ -1058,7 +1058,7 @@ adventures:
                 example_code: "```\n# Vložte sem kód z předchozího dobrodružství\n\n# Extra karta pro vás\nzasáhnout = {ask} _\n{if} zasáhnout == 'ano':\n    karta_3 = _\n    {print} _\n    {if} karta_3 _ 'Ace':\n        vaše_body_3 = _\n        vaše_maximum = _\n    {else}:\n       {if} vaše_maximum _\n            _\n        {else}:\n            _\n    {print} _\n\n# Karta navíc pro prodejce\n{if} maximum_prodejce < 17\n_\n```\n"
                 story_text: "V předchozích dobrodružstvích jste se naučili tahat 2 náhodné karty pro sebe a pro rozdávajícího a vypočítat, kolik bodů jste oba získali.\nV tomto dobrodružství přidáváme možnost požádat o kartu navíc pro sebe i pro rozdávajícího.\n\n### Cvičení\n***Vložte svůj kód z předchozího dobrodružství*** Nejprve zkopírujte svůj kód z předchozího dobrodružství a vložte jej sem.\n\n***Karta navíc pro vás*** Pokud chcete, můžete získat kartu navíc, aby se váš celkový součet co nejvíce přiblížil hodnotě 21. Nejprve se zeptejte hráče, zda chce kartu navíc.\nPokud ano, vyberte náhodnou kartu a vytiskněte to, co si vylosovali. Pokud karta není eso, můžete zavolat funkci a přičíst body k celkovému součtu.\nV případě, že karta je eso, nemůžete funkci použít, protože eso může mít buď 1 bod, nebo 11 bodů, podle toho, kolik bodů jste již získali.\nPokud je váš celkový součet menší než 11, chcete, aby eso mělo hodnotu 11 bodů (protože ta je nejblíže hodnotě 21). K celkovému součtu tedy přičtete 11 bodů.\nPokud je celkový součet větší nebo roven 11, chcete, aby eso bylo 1 bod (protože nechcete mít více než 21 bodů). K celkovému součtu tedy přičtete 1 bod.\nNakonec vytiskněte svůj nový součet bodů.\n\n***Extra karta pro krupiéra*** Krupiér může také dostat kartu navíc. Dealer nemusí být požádán, protože kartu navíc dostane vždy, pokud je jeho celkový součet menší než 17.\nZkopírujte kód „Karta navíc pro vás“ a vložte jej do sekce pro krupiéry. Pak jej změňte tak, aby odpovídal tomu, že si krupiér vezme kartu navíc a dostane body, které se mu přičtou k celkovému součtu.\n"
     if_command:
-        description: Představujeme{if} příkaz
+        description: Představujeme {if} příkaz
         default_save_name: pokud_příkaz
         levels:
             5:
