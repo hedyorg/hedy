@@ -2914,3 +2914,10 @@ adventures:
             7:
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy é divertida!'\n```\n"
                 story_text: "## Repita! Repita! Repita!\nO nível 7 adiciona o comando `{repeat}`. O comando `{repeat}` pode ser usado para executar uma linha de código várias vezes. Assim:\n\n### Exercício\nBrinque com o comando `{repeat}`. Você consegue fazer a canção parabéns para você em só 3 linhas de código em vez de 4 agora?\n"
+    repeat_command_2:
+        levels:
+            7:
+                story_text: "## Repita com outros comandos e com variáveis\nVocê já praticou o comando `{repeat}` combinado com o comando `{print}`, mas você sabia que também pode usar outros comandos com o `{repeat}`?\nNeste código exemplo, você pode ver que o `{repeat}` também pode ser usado com um comando `{ask}`, `{if}` ou `{else}`.\n"
+                example_code_2: "```\n{print} 'Eba! É seu aniversário!'\nidade = {ask} 'Quantos anos você tem agora?'\n{repeat} idade {times} {print} 'Hip Hip Hurra!'\n```\n"
+                story_text_2: "Outra coisa interessante que você pode fazer com o comando `{repeat}` é usar variáveis para definir quantas vezes algo deve ser repetido. No código exemplo, você pode ver que, primeiro, perguntamos à pessoa quantos anos ela tem.\nDepois, na linha 3, a pergunta é repetida 'idade' vezes. Assim, usamos a variável 'idade' com o comando `{repeat}`.\n"
+                example_code: "```\n{repeat} 2 {times} resposta = {ask} 'Você sabia que você pode fazer uma pergunta várias vezes?'\n{if} resposta {is} sim {repeat} 2 {times} {print} 'Você já sabia!'\n{else} {repeat} 3 {times} {print} 'Você aprendeu algo novo!'\n```\n"
