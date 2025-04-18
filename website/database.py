@@ -482,7 +482,7 @@ class Database:
         Returns: { adventure_name -> { code, name, ... } }
         """
         programs = self.programs_for_user(username)
-        ret = {i : {} for i in range(1, 18 + 1)}
+        ret = {i: {} for i in range(1, 18 + 1)}
         for program in programs:
             if 'adventure_name' not in program or 'level' not in program:
                 continue

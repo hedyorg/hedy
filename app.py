@@ -206,7 +206,7 @@ def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
-def load_all_adventures_for_index(customizations, user_programs,subset=None):
+def load_all_adventures_for_index(customizations, user_programs, subset=None):
     """
     Loads all the default adventures in a dictionary that will be used to populate
     the index, therfore we only need the titles and short names of the adventures.
@@ -259,7 +259,7 @@ def load_all_adventures_for_index(customizations, user_programs,subset=None):
                 })
             if not adventure['from_teacher'] and (adv := builtin_map[int(level)].get(adventure['name'])):
                 all_adventures[int(level)].append(adv)
-    
+
     for level, adventures in all_adventures.items():
         for adventure in adventures:
             if adventure['short_name'] not in user_programs[level]:
@@ -269,7 +269,7 @@ def load_all_adventures_for_index(customizations, user_programs,subset=None):
             student_adventure = g_db().student_adventure_by_id(student_adventure_id)
             if user_programs[level][name].submitted:
                 adventure['state'] = 'submitted'
-            if student_adventure and  student_adventure['ticked']:
+            if student_adventure and student_adventure['ticked']:
                 adventure['state'] = 'ticked'
 
     return all_adventures
@@ -1621,7 +1621,7 @@ def tryit(level, program_id):
     available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
 
     customizations = {}
-    user_programs = { i : {} for i in range(1, hedy.HEDY_MAX_LEVEL + 1) }
+    user_programs = {i: {} for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     if current_user()['username']:
         # class_to_preview is for teachers to preview a class they own
         customizations = g_db().get_student_class_customizations(
