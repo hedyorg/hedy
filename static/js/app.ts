@@ -243,7 +243,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       initialTab: validAnchor ?? options.initial_tab,
     });
   }
-
   tabs.on('beforeSwitch', () => {
     // If there are unsaved changes, we warn the user before changing tabs.
     saveIfNecessary();
@@ -1979,4 +1978,51 @@ export function goToLevel(level: any) {
 
 export function emptyEditor() {
   theGlobalEditor.contents = ""
+}
+
+
+export function open_index_pane(e: Event) {
+  const target = e.target as HTMLElement;
+  const button = target.closest('button');
+  if (!button) return;
+  const level = button.id.split('_')[1];
+  const pane = document.getElementById(`level_${level}_pane`);
+  if (!pane) return;
+  // If this pane is already open, close it
+  // Otherwise, close all other panes and open this one
+  if (pane.classList.contains('sliding-content-open')) {
+    pane.classList.remove('sliding-content-open');
+    pane.classList.add('sliding-content-closed');
+    document.getElementById(`level_${level}_arrow`)?.classList.toggle('rotate-90');
+  } else {
+    document.querySelectorAll('.sliding-content-open').forEach((el) => {
+      el.classList.remove('sliding-content-open');
+      el.classList.add('sliding-content-closed');
+      const level = el.id.split('_')[1];
+      const arrow = document.getElementById(`level_${level}_arrow`);
+      arrow?.classList.toggle('rotate-90');
+    });
+    // Open the selected pane
+    pane.classList.remove('sliding-content-closed');
+    pane.classList.add('sliding-content-open');
+    const arrow = document.getElementById(`level_${level}_arrow`);
+    arrow?.classList.toggle('rotate-90');
+    // sleep for 400 miliseconds to settle animations
+    setTimeout(() => {
+      pane.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const opened_level_button = pane?.previousElementSibling
+      opened_level_button?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 400);
+  }
+}
+
+export function open_index_dropdown(e: Event) {
+  $('#dropdown-level').slideToggle('medium');
+  document.getElementById('dropdown_index_arrow')?.classList.toggle('rotate-180');
+  const target = e.target as HTMLElement;
+  const button = target.closest('button');
+  if (!button) return;
+  const opened_pane = document.querySelector('.sliding-content-open');
+  const opened_level_button = opened_pane?.previousElementSibling
+  opened_level_button?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
