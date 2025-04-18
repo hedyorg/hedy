@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2025-03-09 11:55+0000\n"
+"PO-Revision-Date: 2025-04-14 22:21+0000\n"
 "Last-Translator: Bob Idle <102661087+bobidle@users.noreply.github.com>\n"
 "Language-Team: de <LL@li.org>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.3-dev\n"
+"X-Generator: Weblate 5.11-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -40,9 +40,8 @@ msgstr ""
 msgid "Incomplete Repeat"
 msgstr "Wir haben festgestellt, dass dem {repeat} Befehl in Zeile{line_number} ein `{command}` Befehl fehlt. Kannst du probieren, es hinzuzufügen?"
 
-#, fuzzy
 msgid "Invalid"
-msgstr "`{invalid_command}` ist kein Hedy-Level-{level}-Befehl. Kannst du probieren `{guessed_command}` zu benutzen?"
+msgstr "Wir haben bemerkt, dass `{invalid_command}` kein Hedy-Level-{level}-Befehl ist. Kannst du probieren `{guessed_command}` zu benutzen?"
 
 msgid "Invalid Argument"
 msgstr "Wir haben festgestellt, dass `{command}` nicht mit dem Argument `{invalid_argument}` benutzt werden kann. Kannst du probieren, `{invalid_argument}` zu einem erlaubten Typ von {allowed_types} zu ändern?"
@@ -56,13 +55,11 @@ msgstr "Wir haben festgestellt, dass der `{command}` Befehl ab Level 16 nicht me
 msgid "Invalid Space"
 msgstr "Wir haben festgestellt, dass die Zeile {line_number} mit einem Leerzeichen begonnen hat. Kannst du versuchen das Leerzeichen zu entfernen?"
 
-#, fuzzy
 msgid "Invalid Type Combination"
-msgstr "Du kannst die Argumente `{invalid_argument}` und `{invalid_argument_2}` nicht in `{command}` verwenden weil das eine ein {invalid_type} und das andere ein {invalid_type_2} ist. Ändere `{invalid_argument}` zu {invalid_type_2} or `{invalid_argument_2}` zu {invalid_type} und versuche ob es funktioniert."
+msgstr "Wir haben bemerkt, dass `{invalid_argument}` und `{invalid_argument_2}` nicht mit `{command}` verwendet werden können, weil das eine ein {invalid_type} und das andere ein {invalid_type_2} ist. Ändere `{invalid_argument}` zu {invalid_type_2} or `{invalid_argument_2}` zu {invalid_type} und versuche ob es funktioniert."
 
-#, fuzzy
 msgid "Lonely Echo"
-msgstr "Du hast ein `{echo}` vor einem `{ask}` verwendet, oder ein `{echo}` ohne `{ask}`. Benutze zuerst ein `{ask}` um eine Eingabe zu bekommen, danach `{echo}`."
+msgstr "Wir haben bemerkt, dass ein `{echo}` ohne einen vorherige `{ask}` verwendet wird. Kannst du versuchen ein `{ask}` in der Zeile vor `{echo}` hinzuzufügen?"
 
 #, fuzzy
 msgid "Lonely Text"
@@ -913,6 +910,12 @@ msgstr "Der Einladungscode als Lehrkraft ist ungültig. Um Lehrkraft zu werden, 
 msgid "invalid_username_password"
 msgstr "Benutzername/Passwort ist ungültig."
 
+msgid "invitations_sent"
+msgstr ""
+
+msgid "invite"
+msgstr ""
+
 msgid "invite_by_username"
 msgstr "Einladen mit Benutzername"
 
@@ -1217,6 +1220,9 @@ msgstr "Dieses Hedy Programm gibt es nicht!"
 
 msgid "no_tag"
 msgstr "Kein Tag angegeben!"
+
+msgid "no_usernames_found"
+msgstr ""
 
 #, fuzzy
 msgid "not_adventure_yet"
@@ -1757,10 +1763,6 @@ msgid "string"
 msgstr "Text"
 
 #, fuzzy
-msgid "student"
-msgstr ""
-
-#, fuzzy
 msgid "student_accounts_created"
 msgstr ""
 
@@ -1771,9 +1773,6 @@ msgstr ""
 #, fuzzy
 msgid "student_adventures_table_explanation"
 msgstr ""
-
-msgid "student_already_in_class"
-msgstr "Diese(r) Schüler(in) ist bereits in deiner Klasse."
 
 msgid "student_already_invite"
 msgstr "Diese(r) Schüler(in) hat bereits eine ausstehende Einladung."
@@ -1789,9 +1788,6 @@ msgstr ""
 #, fuzzy
 msgid "student_information_explanation"
 msgstr ""
-
-msgid "student_not_existing"
-msgstr "Dieser Nutzername existiert nicht."
 
 msgid "student_signup_header"
 msgstr "Schüler(in)"

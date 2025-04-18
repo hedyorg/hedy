@@ -22,8 +22,12 @@ teachers.forEach((teacher) => {
     cy.getDataCy('add_student').click();
 
     cy.getDataCy('invite_student').click();
-    cy.getDataCy('modal_prompt_input').type(student);
-    cy.getDataCy('modal_ok_button').click();
+    cy.getDataCy('modal_search_input').type(student);
+    cy.getDataCy('invite-1').click()
+    cy.get('#users_to_invite').should('contain.text', student)
+    cy.getDataCy('modal_ok_search_button').click()
+    cy.getDataCy('invites_block').should('contain.text', student)
+
     cy.wait(500);
     login(student, "123456");
 

@@ -309,7 +309,7 @@ def random_password_generator(size=6):
     This function generates a random password using the base 58 characters to
     prevent confusion between characters like 0 and O, or 1 and l.
     """
-    base_58_chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz',
+    base_58_chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
     return random_id_generator(size, base_58_chars)
 
 
@@ -522,3 +522,18 @@ def remove_class_preview():
         del session["preview_class"]
     except KeyError:
         pass
+
+
+def get_class_invites(db, class_id: str):
+    invites = []
+    for invite in db.get_class_invitations(class_id):
+        invites.append(
+            {
+                "username": invite["username"],
+                "invited_as_text": invite["invited_as_text"],
+                "invited_as": invite["invited_as"],
+                "timestamp": localized_date_format(invite["timestamp"], short_format=True),
+                "expire_timestamp": localized_date_format(invite["ttl"], short_format=True),
+            }
+        )
+    return invites

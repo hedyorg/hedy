@@ -264,14 +264,14 @@ adventures:
                     {print}('Bu hikayeye hoş geldin!')
                     ```
     add_remove_command:
-        name: '{to_list}{add} {to} & {remove} {from}'
+        name: '{add} {to_list} & {remove} {from}'
         default_save_name: ekle_çıkar_komutu
         description: '{add} {to_list} ve {remove} {from} komutlarına giriş'
         levels:
             3:
                 story_text: |
-                    ## ekle şuraya
-                    Listeye `{add} {to}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
+                    ## {add} {to_list}
+                    Listeye `{add} {to_list}` komutu ile yeni öğeler ekleyebilirsiniz. Listeye bir öğe eklemek için sadece şunu yazın: `{add} penguen {to_list} hayvanlar` , ya da örnek koddaki gibi `{ask}` komutunu kullanabilirsiniz.
                 example_code: |
                     ```
                     hayvanlar {is} köpek, kedi, kanguru
@@ -280,8 +280,8 @@ adventures:
                     {print} Benim seçimim hayvanlar {at} {random}
                     ```
                 story_text_2: |
-                    ## kaldır şuradan
-                    Bir listeye öğe ekleyebiliyorsanız, elbette bunları listeden çıkarabilirsiniz de. Bu işlem `{remove} {from}` komutu ile yapılır.
+                    ## {remove}{from}
+                    Bir listeye öğe ekleyebiliyorsanız, elbette bunları listeden de çıkarabilirsiniz. Bu işlem `{remove} {from}` komutu ile yapılır.
                 example_code_2: |
                     ```
                     hayvanlar {is} köpek, kedi, kanguru
@@ -304,7 +304,7 @@ adventures:
                     ```
     and_or_command:
         default_save_name: ve veya
-        description: ve & veya'nın tanıtılması
+        description: '{and} & {or} komutlarını tanıyalım'
         levels:
             13:
                 story_text: |-
@@ -313,13 +313,11 @@ adventures:
                     Eğer `{and}` kullanırsanız, `{and}` nin sağındaki ve solundaki her iki ifadenin de doğru olması gerekir. Ayrıca `{or}` da kullanabiliriz. O zaman sadece bir ifadenin doğru olması gerekir.
                 example_code: |
                     ```
-                    isim = {ask} 'adınız nedir?'
-                    yaş = {ask} 'yaşınız kaç?'
-                    {if} isim {is} 'Hedy' {and} yaş {is} 2
-                        {print} "Sen gerçek Hedy'sin!"
+                    name = {ask} 'what is your name?'
+                    age = {ask} 'what is your age?'
+                    {if} name {is} 'Hedy' {and} age {is} 2
+                        {print} 'You are the real Hedy!'
                     ```
-
-                        {print} "Sen gerçek Hedy'sin!"
         name: '{and} & {or}'
     ask_command:
         default_save_name: sor_komutu
