@@ -475,6 +475,22 @@ class Database:
                 ret[key] = program
         return ret
 
+    def all_last_programs_for_user(self, username):
+        """Return the most recent program for the given user at a given level.
+
+        Returns: { adventure_name -> { code, name, ... } }
+        """
+        programs = self.programs_for_user(username)
+        ret = {i : {} for i in range(1, 18 + 1)}
+        for program in programs:
+            if 'adventure_name' not in program or 'level' not in program:
+                continue
+            key = program['adventure_name']
+            level = program['level']
+            if key not in ret[level] or ret[level][key]['date'] < program['date']:
+                ret[level][key] = program
+        return ret
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 
