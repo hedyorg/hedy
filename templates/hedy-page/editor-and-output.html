@@ -166,10 +166,12 @@
         </div>
       </div>
       <div class="hidden lg:block lg:flex-1"></div>
-      <button id="share_program_button_new" class="flex-end blue-btn-new next-tab" _="on click remove .hidden from #share_modal">
-        <i class="fa-solid fa-share-nodes ltr:mr-1 rtl:ml-1"></i>
-        {{_('share')}}
-      </button>
+      {% if username and current_user_is_in_class %}
+        <button class="blue-btn-new" _="on click remove .hidden from #share_modal">
+          <i class="fa-solid fa-paper-plane ltr:mr-1 rtl:ml-1"></i>
+          {{_('hand_in')}}
+        </button>
+      {% endif %}
     </div>
     {% if not raw %}
     <div id="not_logged_in_warning" data-cy="not_logged_in_warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
