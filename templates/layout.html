@@ -1,37 +1,34 @@
 
-{% macro adventure_index(adv_name, tab_level, title, selected, id, adv_class, index) %}
-  <li class="{% if adv_class == 'teacher' %}
-              teacher_tab
-            {% elif adv_class == 'command' %}
-              command_tab
-            {% elif adv_class == 'special' %}
-              border-blue-500
-            {% else %}
-              border-blue-900
-            {% endif %}
-          {% if selected %}adv-selected{% else %}not-selected-adv{% endif %}
-        px-3 py-1 hover:px-4 hover:py-3 hover:text-lg cursor-pointer text-blue-900
-        transition-all ease-in duration-100"
+{% macro adventure_index(adv_name, tab_level, title, selected, id, adv_class, state, index) %}
+  <li class="{% if selected %}adv-selected{% else %}not-selected-adv{% endif %}
+        px-3 py-1 hover:bg-gray-200 cursor-pointer  text-blue-900
+        ease-in transition duration-100"
         data-tab="{{ adv_name }}"
         data-level="{{ tab_level }}"
         tabindex="{{ index }}"
         data-type="{{ adv_class }}"
         id = "{{ id }}"
-        _="on click wait 150ms
-        then toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
-        then toggle .opacity-75 on #sidebar_bg
-        then toggle .opacity-0 on #sidebar_bg
-        wait 300ms
-        then toggle .hidden on #sidebar_bg"
   >
-    {{ title }}
-    {% if adv_class == 'teacher' %}
-      <i class="fa-solid fa-chalkboard-user"></i>
-    {% elif adv_name == 'quiz' %}
-      <i class="fa-solid fa-clipboard-question"></i>
-    {% elif adv_name == 'parsons' %}
-      <i class="fa-solid fa-puzzle-piece"></i>
-    {% endif %}
+    <div class="flex flex-row gap-x-2 text-center">
+      {% if adv_class == 'command' %}
+        <i class="fa-regular fa-lightbulb w-4" style="line-height: inherit;"></i>
+      {% elif adv_class == 'teacher' %}
+        <i class="fa-regular fa-pen-to-square w-4" style="line-height: inherit;"></i>
+      {% else %}
+        <i class="w-4 text-center align-middle w-4"></i>
+      {% endif %}
+      <span>
+        {{ title }}
+      </span>
+      <div class="flex-1" ></div>
+      {% if state == 'ticked' %}
+        <i class="fa-regular fa-circle-check" style="line-height: inherit;"></i>
+      {% elif state == 'submitted' %}
+        <i class="fa-regular fa-paper-plane" style="line-height: inherit;"></i>
+      {% else %}
+        <i class="w-4 text-center align-middle w-4"></i>
+      {% endif %}
+    </div>
   </li>
 {% endmacro %}
 
@@ -50,69 +47,6 @@
   </head>
   <body id="main_container" dir="{{ g.dir }}" class="{% if not raw %}bg-gray-100{% endif %}" hx-ext="disable-element,morph" data-logged-in="{{ 1 if username else 0 }}">
     <div id="modal_target"></div>
-    {% if current_page and current_page == 'tryit' %}
-    <div id="index_sidebar" class="ltr:-translate-x-full rtl:translate-x-full ease-out duration-300 xl:rounded-r h-full flex justify-start items-start w-3/4 md:w-1/2 lg:w-1/4 xl:w-1/4 bg-blue-100 flex-col z-50 fixed top-0 items-center overflow-y-auto pb-10">
-      <span class="absolute top-0.5 ltr:right-0.5 rtl:left-0.5 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark cursor-pointer text-xl"
-            _="on click toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
-            then toggle .opacity-75 on #sidebar_bg
-            then toggle .opacity-0 on #sidebar_bg
-            wait 300ms
-            then toggle .hidden on #sidebar_bg"></span>
-      <div class="flex flex-col gap-2 w-4/5 mt-14">
-        <h2>{{ _('levels')|capitalize }}</h2>
-        {% set index_levels = customizations["available_levels"] if customizations["teachers_adventure"] else range(1, max_level + 1) %}
-        {% for i in index_levels %}
-          <div class="flex flex-col">
-            <button class="flex flex-row justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
-              {% if loop.index == level|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %}
-              {% if i not in customizations['available_levels']%} bg-gray-400 {% else %} hover:bg-blue-200 {% endif %}"
-
-              {% if i not in customizations['available_levels']%}disabled{% endif %}
-            _="on click toggle .sliding-content-closed .sliding-content-open on #level_{{ i }}_pane
-                 then toggle .rotate-90 on #level_{{ i }}_arrow
-                then toggle .rounded-lg .rounded-t-lg .bg-blue-200 on #level_{{ i }}_header"
-                id="level_{{ i }}_header">
-              {{_('level_title')}} {{ i }}
-              {% if i not in customizations['available_levels']%}
-                <i class="fa-solid fa-lock"></i>
-              {% else %}
-                <i class="fa-solid fa-chevron-right text-base transition-all ease-in duration-200 {% if loop.index == level|int %}rotate-90{% endif %}" id="level_{{ i }}_arrow"></i>
-              {% endif %}
-            </button>
-            <div class="bg-white rounded-b-lg grow-0 ease-in transition-all duration-300 grid
-                        {% if loop.index == level|int %}sliding-content-open{% else %}sliding-content-closed{% endif %}" id="level_{{ i }}_pane">
-                <ul class="list-none overflow-hidden">
-                  <div class="p-6">
-                    {% for adventure in adventures_for_index[i] %}
-                        {% if adventure.is_teacher_adventure%}
-                          {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'teacher', loop.index) }}
-                        {% elif adventure.is_command_adventure %}
-                          {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'command', loop.index) }}
-                        {% else %}
-                          {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, '', loop.index) }}
-                        {% endif %}
-                    {% endfor %}
-                    {% if parsons %}
-                      {{ adventure_index('parsons', i, _('parsons_title'), False, 'parsons', 'special', adventures|length + 1) }}
-                    {% endif %}
-                    {% if quiz %}
-                        {{ adventure_index('quiz', i, _('quiz_tab'), False, 'quiz', 'special', (adventures|length + (2 if parsons else 1)) ) }}
-                    {% endif %}
-                  </div>
-                </ul>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-    <div id="sidebar_bg" class="transition-all duration-300 opacity-0 fixed bg-black w-full h-full hidden z-40"
-      _="on click toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
-         then toggle .opacity-75 on #sidebar_bg
-         then toggle .opacity-0 on #sidebar_bg
-         wait 300ms
-         then toggle .hidden on #sidebar_bg">
-    </div>
-    {% endif %}
     <noscript>Hedy requires Javascript to be enabled in your browser.</noscript>
     <div id="modal_mask" class="hidden fixed bg-black z-50 w-full h-full opacity-75"></div>
     <div id="modal_content" data-cy="modal_content" class="hidden fixed z-50 p-12 px-16 bg-blue-400 border-2 border-gray-400 rounded-lg text-lg text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style="max-height: 80vh; overflow-y: auto;">
