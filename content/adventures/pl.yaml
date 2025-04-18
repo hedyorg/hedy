@@ -96,7 +96,7 @@ adventures:
                     Zwróć uwagę, że zmienne w twojej opowieści powinny być poza cudzysłowami. Podobnie jak w drugiej linii kodu przykładowego. W tej linii nazwa zmiennej wstawiona poza cudzysłowami.
                 example_code: |
                     ```
-                    imię {is} {ask}_ Jakie jest twoje imię? _
+                    imię {is} {ask} _ Jakie jest twoje imię? _
                     {print} _ Głównym bohaterem jest _ imię
                     _
                     _
@@ -335,7 +335,7 @@ adventures:
                     imię {is} {ask} Jak masz na imię?
                     {print} Cześć imię
                     wiek {is} {ask} Ile masz lat?
-                    {print} imię ma ... lat.
+                    {print} imię ma wiek lat.
                     ```
                 story_text_2: |
                     ### Ćwiczenie
@@ -681,11 +681,11 @@ adventures:
                         wynik = 0
                         {for} i {in} {range} 1 {to} 4
                             ocena = {ask} _
-                            wynik= wynik + _
-                            {return}_ / 4
+                            wynik = wynik + _
+                            {return} _ / 4
 
-                    średnia_ocen= {call} _
-                    {print} 'Twoja średnia ocen wynosi ' średnia ocen
+                    średnia_ocen = {call} _
+                    {print} 'Twoja średnia ocen wynosi ' średnia_ocen
                     ```
             15:
                 story_text: |
@@ -880,7 +880,7 @@ adventures:
                 story_text: |-
                     ### Ćwiczenie
                     Niespodzianka! Ten program wygląda bardziej jak dane wyjściowe a nie kod. A jednak nie chcemy, żebyś tylko dodawał komendy `{print}` na początku każdej linijki.
-                    Napraw ten program, żeby zmienić go w kołysankę 'Panie Janie', oczywiście używając komendy {repeat} !
+                    Napraw ten program, żeby zmienić go w kołysankę 'Panie Janie', oczywiście używając komendy `{repeat}`!
                 example_code: |
                     **Uwaga! Ten kod musi zostać zdebugowany!**
                     ```
@@ -1268,7 +1268,7 @@ adventures:
                 example_code: |
                     ```
                     cena_posiłku {is} 0
-                    cena_napoju{is} 0
+                    cena_napoju {is} 0
                     cena_całkowita {is} 0
                     {print} 'Witamy w McHedy'
                     zamówienie {is} {ask} 'Co chciałbyś zjeść?'
@@ -2028,7 +2028,7 @@ adventures:
 
                     ***Wklej kod*** Skopiuj kod z poprzedniej przygody i wklej go w polu programowania.
 
-                    **Gra*** Ta gra trwa do momentu, aż Gracz 2 nie zakończy swojej gry (wygra lub przegra). Wypełnij odpowiednio polecenie while. Teraz Gracz 2 może odgadnąć litery, więc poproś Gracza 2, aby je
+                    ***Gra*** Ta gra trwa do momentu, aż Gracz 2 nie zakończy swojej gry (wygra lub przegra). Wypełnij odpowiednio polecenie `{while}`. Teraz Gracz 2 może odgadnąć litery, więc poproś Gracza 2, aby je
                     zgadywał. Musimy sprawdzić, czy jego odpowiedź jest poprawna, więc sprawdź, czy jego `guess` jest (gdzieś) na (liście) `answer`. Następnie pozwalamy komputerowi dowiedzieć się, która z liter jest zgadywana. Zaprogramowaliśmy już tę część dla Ciebie.
                     Następnie chcemy pochwalić gracza za odgadnięcie poprawnej litery i chcemy wydrukować listę `guessed_letters`, aby gracz mógł zobaczyć swoje postępy.
 
@@ -2360,7 +2360,7 @@ adventures:
                     W poprzedniej przygodzie nauczyłeś się używać argumentu w funkcji i nauczyłeś się łączyć go z {ask}
                     Być może zastanawiałeś się, dlaczego używasz funkcji, ponieważ funkcje w tym przykładzie były tylko jednym wierszem kodu.
                     Teraz pokażemy Ci, jak wygląda większa funkcja, i teraz będziemy również korzystać z wielu argumentów. Zobaczysz, że lepiej jest korzystać z funkcji, jeżeli funkcja się powiększy.
-                    Oto przykład funkcji z argumentami połączonymi z poleceniami {ask}.
+                    Oto przykład funkcji z argumentami połączonymi z poleceniami `{ask}`.
                 example_code: "```\n{define} welcome_message {with} title, last_name, country, room_number\n    {print} 'Welcome to Hotel Hedy, ' title ' ' last_name\n    nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'\n    {if} nice_trip {is} 'yes'\n        {print} 'Lovely!'\n    {else}\n        {print} 'Sorry to hear that.'\n        {print} 'Hopefully you can take a nice rest in you room.'\n    {print} 'Your room number is ' room_number\n\n{print} 'Hello. Please fill in your information to check in.'\ntitle = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'\nname = {ask} 'What is you last name?'\nhomecountry = {ask} 'What country do you come from?'\n\n{call} welcome_message {with} title, name, homecountry, 105\n```\n\ntitle = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'\nname = {ask} 'What is you last name?'\nhomecountry = {ask} 'What country do you come from?'\n\n{call} welcome_message {with} title, name, homecountry, 105\n"
         name: hotel
         default_save_name: hotel
@@ -2402,11 +2402,11 @@ adventures:
                 story_text: |
                     ## If... Else...
                     Nauczyłeś się powtarzać blok wierszy kodu po poleceniu `{repeat}`.
-                    Teraz możesz także użyć wcięcia, aby utworzyć bloki po poleceniu {if} lub {else}.
+                    Teraz możesz także użyć wcięcia, aby utworzyć bloki po poleceniu `{if}` lub `{else}`.
                     Sprawdź przykładowy kod.
 
                     ### Ćwiczenie
-                    Dodaj polecenie {else} do przykładowego kodu. Utwórz blok wiersza za pomocą wcięcia. Robisz to, rozpoczynając każdą linię od 4 spacji.
+                    Dodaj polecenie `{else}` do przykładowego kodu. Utwórz blok wiersza za pomocą wcięcia. Robisz to, rozpoczynając każdą linię od 4 spacji.
                 example_code: |
                     ```
                     imię = {ask} 'Jak masz na imię?'
@@ -2701,7 +2701,7 @@ adventures:
                 example_code: "```\n{print} 'Brother John'\n{repeat} 2 {times}\n    {play} C\n    {play} D\n    {play} E\n    {play} C\n{repeat} 2 {times}\n    {play} E\n    {play} F\n    {play} G\n    {sleep} 1\n```\n"
             9:
                 story_text: |
-                    Na tym poziomie możesz - między innymi - użyć polecenia {repeat} w poleceniu {repeat}.
+                    Na tym poziomie możesz - między innymi - użyć polecenia `{repeat}` w poleceniu `{repeat}`.
                     To sprawia, że piosenki takie jak „Sto lat” są jeszcze krótsze!
 
                     ### Ćwiczenie
@@ -2824,7 +2824,7 @@ adventures:
             15:
                 story_text: |
                     **Uwaga** Ta przygoda może stać się wyjątkowo denerwująca!
-                    Możemy również użyć polecenia {while}, aby powtórzyć utwór w nieskończoność.
+                    Możemy również użyć polecenia `{while}`, aby powtórzyć utwór w nieskończoność.
 
                     ### Ćwiczenie
                     Dokończ niekończącą się piosenkę
@@ -2858,12 +2858,12 @@ adventures:
 
                     zwierzęta = ['świnka', 'pies', 'krowa']
                     dźwięki = ['chrum', 'hau', 'muu']
-                    for i in range 1 to 3
+                    {for} i {in} {range} 1 {to} 3
                         zwierzę = zwierzęta[i]
                         dźwięk = dźwięki[i]
-                        print 'Pan MacDonald farmę miał'
-                        call linijkę_1
-                        print 'E I E I O!'
+                        {print} 'Pan MacDonald farmę miał'
+                        {call} linijka_1
+                        {print} 'E I E I O!'
                         _
                     ```
             17:
@@ -3360,7 +3360,7 @@ adventures:
                     Następnie dodaj co najmniej 4 kolejne linie kodu do programu restauracji.
                     Zapytaj klienta, co chciałby wypić i czy chce zapłacić gotówką, czy kartą.
                     Na koniec wymyśl jakiś miły sposób pożegnania się z klientem.
-                example_code_2: "``` \n{print} Witaj w restauracji Hedy 🍟\n_ Co chcesz zamówić?\n {echo} A więc chcesz zamówić\n{print} Dziękuje za zamówienie!\n{print} Zaraz podamy!\n```\n"
+                example_code_2: "``` \n{print} Witaj w restauracji Hedy 🍟\n_ Co chcesz zamówić?\n{echo} A więc chcesz zamówić\n{print} Dziękuje za zamówienie!\n{print} Zaraz podamy!\n```\n"
             2:
                 story_text: |
                     Na poziomie 2 możesz rozbudować swoją restaurację za pomocą zmiennych. Na poziomie 1 Hedy mogła wyświetlić `{echo}` zamówienie tylko raz i pamiętała tylko ostatnią zamówioną rzecz.
@@ -3627,7 +3627,7 @@ adventures:
                 example_code: |-
                     ```
                     wybór {is} kamień
-                    {print} Wybieram_
+                    {print} Wybieram _
                     ```
             3:
                 story_text: |
@@ -4044,7 +4044,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    W poprzedniej przygodzie nauczyłeś się używać argumentu w funkcji, ale czy wiesz, że możesz połączyć je również z poleceniami {ask}?
+                    W poprzedniej przygodzie nauczyłeś się używać argumentu w funkcji, ale czy wiesz, że możesz połączyć je również z poleceniami `{ask}`?
                     W tym przykładzie zmieniliśmy program „My Bonnie” i uczyniliśmy go interaktywnym. Zostajesz teraz zapytany, gdzie jest Bonnie.
                 example_code: |
                     ```
@@ -4644,7 +4644,7 @@ adventures:
                     Wskazówka sygnalizacja świetlna
                     ```
                     kolory = czerwony, żółty, zielony
-                    {for} wybrany_kolor{in} kolory
+                    {for} wybrany_kolor {in} kolory
                         {color} _
                         {repeat} _
                     ```
@@ -4723,7 +4723,7 @@ adventures:
                     Odtwórz rysunki za pomocą żółwia!
 
                     Ulica w różnych rozmiarach <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Pokolorowana ulica  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
+                    Pokolorowana ulica <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
                     Śnieżyca <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
                 example_code: |
                     Wskazówka dotycząca ulicy w różnych rozmiarach
@@ -4850,7 +4850,7 @@ adventures:
                     Wypełnij puste pola i spraw, aby kod działał!
                 example_code: |
                     ```
-                    {for} liczba{in} {range} _ {to} _
+                    {for} liczba {in} {range} _ {to} _
                         {print} liczba
                         {sleep}
                     {print} 'Szczęśliwego Nowego Roku!'
