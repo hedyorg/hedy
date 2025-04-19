@@ -1827,6 +1827,7 @@ adventures:
                 example_code: "```\ncontinuar = {ask} 'Você quer continuar?'\n{if} continuar = sim\n    certeza = {ask} 'Tem certeza?'\n    {if} certeza {is} sim\n        {print} 'Vamos continuar'\n    {else}\n        {print} 'Você não tem certeza'\n{else}\n    {print} 'Você não quer continuar'\n```\n"
             8:
                 example_code: "```\nnome = {ask} 'Qual é o seu nome?'\n{if} nome {is} Hedy\n    {print} 'Bem-vinda, Hedy'\n    {print} 'Você pode jogar no seu computador!'\n```\n"
+                story_text: "## Se... Senão...\nVocê aprendeu a repetir um bloco de linhas de código com o comando `{repeat}`.\nAgora você também pode usar indentações para fazer blocos de código com os comandos `{if}` ou `{else}`.\nDê uma olhada no código exemplo.\n\n### Exercício\nAdicione um comando `{else}` ao código exemplo. Faça um bloco de código usando indentação. Basta começar cada linha com 4 espaços.\n"
     in_command:
         default_save_name: comando_em
         description: Introduzindo o comando {in}
@@ -2374,6 +2375,9 @@ adventures:
             6:
                 story_text: "Neste nível, você pode usar matemática para calcular o preço total do pedido do(a) cliente, tornando seu restaurante virtual mais realista.\nMas você também pode adicionar muito mais coisas ao seu restaurante virtual, como, por exemplo, mais pratos.\n\n### Exercício\nVocê pode adicionar muito mais coisas ao seu restaurante. Por exemplo, você consegue...\n- perguntar quantas pessoas vêm e multiplicar o preço por essa quantia?\n- adicionar outro prato?\n- oferecer um desconto a quem digitar um código (secreto) de cupom?\n- incluir um cardápio infantil?\n- pensar em outras coisas legais para adicionar?\n"
                 example_code: "Você pode fazer um código simples de restaurante, assim:\n```\n{print} 'Bem-vindo(a) ao Restaurante Chez Hedy'\n{print} 'Veja o nosso cardápio:'\n{print} 'Nossos pratos principais são pizza, lasanha e espaguete'\nprincipal = {ask} 'Qual prato principal você vai querer?'\npreço = 0\n{if} principal {is} pizza preço = 30\n{if} principal {is} lasanha preço = 36\n{if} principal {is} espaguete preço = 24\n{print} 'Você pediu ' principal\n{print} 'Vai custar ' preço ' reais, por gentileza'\n{print} 'Muito obrigado, bom apetite!'\n```\n"
+            7:
+                story_text: "Neste nível, você aprendeu a usar o comando `{repeat}` para repetir uma linha de código uma certa quantidade de vezes.\nVocê pode usar isso no seu restaurante juntamente com o `{ask}` para perguntar a várias pessoas o que elas querem comer.\n\n### Exercício\nVocê consegue completar o código? Hedy precisa repetir essa pergunta para cada uma das pessoas. Por exemplo, se há 5 pessoas, é preciso fazer a pergunta 5 vezes.\n**Extra** Expanda o seu código com mais perguntas, sobre, por exemplo, bebidas ou molho.\n"
+                example_code: "```\n{print} 'Bem-vindo(a) ao Restaurante Chez Hedy'\npessoas = {ask} 'Quantas pessoas se juntarão a nós hoje?'\n```\n"
     rock:
         name: Pedra, papel, tesoura
         default_save_name: Pedra_2
@@ -2521,6 +2525,7 @@ adventures:
                     Tubarão bebê
 
                     Você pode fazer esta música muito mais curta com um `{repeat}`! Você pode terminar o código?
+                example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n"
             8:
                 story_text: |
                     Em um nível anterior você programou a música 'Garrafas de cerveja'. Você fez um verso e depois teve que copiar os versos 99 vezes. No nível 7 você pode repetir a música 99 vezes, apenas adicionando uma linha simples!
@@ -2883,6 +2888,8 @@ adventures:
             6:
                 example_code: "Dica para o quadrado:\n```\ncor_escolhida = {ask} _\n```\n"
                 story_text: "### Exercício\nRecrie os desenhos com a tartaruga!\n\n**Extra** Deixe o(a) jogador(a) decidir de que cor o quadrado deve ser.\n\n***Extra*** Você consegue fazer a letra inicial do seu próprio nome e a bandeira do seu país?\n\n<div class=\"w-full flex flex-row gap-2\">\nQuadrado <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"150\">\nLetras <img src=\"https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad\" width=\"100\">\nBandeira <img src=\"https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e\" width=\"300\">\n</div>\n"
+            7:
+                story_text: "### Exercício\nRecrie os desenhos com a tartaruga!\n\n<div class=\"w-full flex flex-row gap-2\">\nHexágono <img src=\"https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4\" width=\"200\">\nTriângulo <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1\" width=\"200\">\nVentilador <img src=\"https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e\" width=\"200\">\n</div>\n"
     years:
         description: Contagem regressiva para o Ano Novo!
     blackjack:

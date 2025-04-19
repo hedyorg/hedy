@@ -2220,13 +2220,13 @@ adventures:
                     Wróć do poprzedniego poziomu i skopiuj swój kod nawiedzonego domu. Spraw, aby kod działał na tym poziomie, dodając cudzysłowy we właściwych miejscach.
                 example_code: |
                     ```
-                    _Dodaj znaki cudzysłowu do tego kodu
-                    {print} _ Uciekaj z nawiedzonego domu! _
-                    {print} _ Przed tobą znajduje się 3 drzwi... _
-                    wybór {is} {ask} _ Które drzwi wybierzesz? _
-                    {print} Wybrałeś drzwi ... _ wybór
+                    _Dodaj znaki cudzysłowu do tego kodu _
+                    {print} Uciekaj z nawiedzonego domu!
+                    {print} Przed tobą znajduje się 3 drzwi...
+                    wybór {is} {ask} Które drzwi wybierzesz?
+                    {print} Wybrałeś drzwi ... wybór
                     potwory {is} zombie, wampir, NIC UCIEKŁEŚ
-                    {print} Widzisz... _
+                    {print} Widzisz...
                     {sleep}
                     {print} potwory {at} {random}
                      ```
@@ -2644,9 +2644,9 @@ adventures:
                 example_code: |
                     ```
                     nuty {is} A4, B4, C4
-                    {play} nuty  {at} {random}
-                    {play} nuty  {at} {random}
-                    {play} nuty  {at} {random}
+                    {play} nuty {at} {random}
+                    {play} nuty {at} {random}
+                    {play} nuty {at} {random}
                     ```
             4:
                 story_text: |
@@ -3406,7 +3406,7 @@ adventures:
                     ```
                     {print} Witaj w swojej własnej, losowej restauracji!
                     przystawki {is} _
-                    dania główne {is} _
+                    dania_główne {is} _
                     desery {is} _
                     napoje {is} _
                     ceny {is} _
@@ -3638,14 +3638,14 @@ adventures:
                 example_code: |
                     ```
                     możliwości {is} papier, kamień, nożyce
-                    {print} możliwości_
+                    {print} możliwości _
                     ```
                 story_text_2: |
                     **Dodatkowo** Stwórz grę dla dwóch graczy. Najpierw poproś dwóch graczy o wypełnienie ich imion. Następnie pozwól komputerowi losowo wybrać ich wybory. (możliwości)
                 example_code_2: |
                     ```
                     możliwości {is} papier, kamień, nożyce
-                    gracz 1 {is} {ask} imię gracza 1
+                    gracz_1 {is} {ask} imię gracza 1
                     _
                     ```
             4:
