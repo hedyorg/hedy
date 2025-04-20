@@ -2046,6 +2046,9 @@ adventures:
             15:
                 example_code: "```\n{define} música\n    {play} _\n\nsim_ou_não = {ask} 'Quer ouvir a minha música infinita?'\n{while} sim_ou_não = 'sim'\n    {call} música\n    {print} '🥳'\n```\n"
                 story_text: "**Aviso** Essa aventura pode ficar extremamente irritante!\nTambém podemos usar o comando {while} para repetir uma música infinitamente.\n\n### Exercício\nComplete a música infinita.\n"
+            8:
+                story_text: "Agora que podemos usar o comando `{repeat}` com várias linhas, podemos fazer canções ainda mais facilmente!\n\n### Exercício\nTermine a canção Meus Dedinhos (Frère Jacques). Não se esqueça de usar o `{repeat}`!\n"
+                example_code: "```\n{print} 'Meus dedinhos'\n{repeat} 2 {times}\n    {play} C\n    {play} D\n    {play} E\n    {play} C\n{repeat} 2 {times}\n    {play} E\n    {play} F\n    {play} G\n    {sleep} 1\n```\n"
     parrot:
         name: Papagaia
         default_save_name: Papagaia
@@ -2921,6 +2924,9 @@ adventures:
             7:
                 example_code: "```\n{repeat} 3 {times} {print} 'Hedy é divertida!'\n```\n"
                 story_text: "## Repita! Repita! Repita!\nO nível 7 adiciona o comando `{repeat}`. O comando `{repeat}` pode ser usado para executar uma linha de código várias vezes. Assim:\n\n### Exercício\nBrinque com o comando `{repeat}`. Você consegue fazer a canção parabéns para você em só 3 linhas de código em vez de 4 agora?\n"
+            8:
+                story_text: "### Comandos repita e indentação\nNeste nível, você pode repetir várias linhas de código por vez com 1 único comando `{repeat}`.\nBasta fazer um bloco de linhas a ser repetido.\nAs linhas desse bloco precisarão ser **indentadas** .\nIsso significa colocar quatro espaços no começo de cada linha. Você também terá de indentar quando quiser criar um bloco de uma só linha.\n"
+                example_code: "```\n{repeat} 5 {times}\n    {print} 'Oi, pessoal!'\n    {print} 'Tudo isso se repete 5 vezes'\n```\n"
     repeat_command_2:
         levels:
             7:
