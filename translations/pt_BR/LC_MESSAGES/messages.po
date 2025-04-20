@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2025-04-14 06:19+0000\n"
+"PO-Revision-Date: 2025-04-20 06:16+0000\n"
 "Last-Translator: nicejammer <nicejammer@users.noreply.hosted.weblate.org>\n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Language: pt_BR\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.11.1-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -61,25 +61,20 @@ msgstr "Detectamos que `{invalid_argument}` e `{invalid_argument_2}`não são co
 msgid "Lonely Echo"
 msgstr "Detectamos que um `{echo}`está sendo usado antes de ou sem usar um `{ask}`. Tente colocar um `{ask}` antes do `{echo}`."
 
-#, fuzzy
 msgid "Lonely Text"
-msgstr "Parece que você esqueceu de usar um comando com o texto que você usou na linha {line_number}"
+msgstr "Detectamos que parece estar faltando um comando a ser usado com o texto da linha {line_number}. Tente escrever o comando necessário e usá-lo com o texto."
 
-#, fuzzy
 msgid "Missing Additional Command"
-msgstr ""
+msgstr "Detectamos que falta algo com o comando `{command}` da linha {line_number}. Tente usar `{missing_command}` em seu código."
 
-#, fuzzy
 msgid "Missing Colon Error"
-msgstr ""
+msgstr "Detectamos que o `{command}` precisa de um `:` no fim da linha {line_number}. A partir do nível 17, comece a usar `:`no fim da linha para comandos com blocos."
 
-#, fuzzy
 msgid "Missing Command"
-msgstr "Parece que você esqueceu de usar um comando na linha {line_number}."
+msgstr "Detectamos que parece estar faltando um comando na linha {line_number} do código. Tente olhar na descrição do exercício para descobrir qual comando usar."
 
-#, fuzzy
 msgid "Missing Inner Command"
-msgstr "Parece que você esqueceu de usar um comando com a declaração `{command}` que você usou na linha {line_number}."
+msgstr "Detectamos que parece estar faltando um comando na declaração `{command}` da linha {line_number}. Tente olhar na descrição do exercício para descobrir qual comando usar."
 
 #, fuzzy
 msgid "Missing Square Brackets"
@@ -2665,4 +2660,3 @@ msgstr "Seu programa"
 
 #~ msgid "survey_completed"
 #~ msgstr "Pesquisa completa"
-
