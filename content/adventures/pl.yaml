@@ -16,7 +16,7 @@ adventures:
                     ```
                     {ask} Głównym bohaterem historii jest
                     {print} Główny bohater idzie przez las
-                    {echo}  Jest troszkę przestraszony,
+                    {echo} Jest troszkę przestraszony,
                     {print} Wszędzie słyszy jakieś dziwnie odgłosy
                     {print} Obawia się że to jest nawiedzony las
                     ```
@@ -196,7 +196,7 @@ adventures:
                     ### Ćwiczenie
 
                     Spójrz na <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> opowiadanie</a> jeśli go nie znasz i upewnij się, że jest wydrukowane tak jak w książce.
-                example_code: "```\nzwierzęta = _ , _ , _ \n{print} 'Brązowy niedźwiedź, Brązowy niedźwiedź'\n {print} 'Co widzisz?'\n```\n"
+                example_code: "```\nzwierzęta = _ , _ , _ \n{print} 'Brązowy niedźwiedź, Brązowy niedźwiedź'\n{print} 'Co widzisz?'\n```\n"
             13:
                 story_text: |
                     Używając poleceń `{and}` oraz `{or}` możesz uczynić swoje opowieści bardziej wszechstronnymi. Możesz zadać dwa pytania i odpowiedzieć na kombinację odpowiedzi.
@@ -571,7 +571,7 @@ adventures:
                     liczba_1 = _
                     liczba_2 = _
                     poprawna_odpowiedź = liczba_1 * liczba_2
-                    podana_odpowiedź ={ask} 'Ile to jest ' liczba_1 ' razy ' liczba_2 '?'
+                    podana_odpowiedź = {ask} 'Ile to jest ' liczba_1 ' razy ' liczba_2 '?'
                     {if} _
                     {else} _
                     ```
@@ -1572,9 +1572,9 @@ adventures:
                     ```
                     ludzie {is} mama, tata, Agnieszka, Zosia
                     zmywarka {is} ludzie {at} {random}
-                    _ kto_zmywa {is} Zosia {print} _ o, nie... Moja kolej zmywania naczyń _
-                    _ {print} 'całe szczęście, że nie ma naczyń, ponieważ' _ ' już je myje '
-                    ````
+                    _ zmywarka {is} Zosia {print} _ o, nie... Moja kolej zmywania naczyń _
+                    _ {print} 'całe szczęście, że nie ma naczyń, ponieważ ' _ ' już je myje'
+                    ```
             6:
                 story_text: |
                     Jak często wszyscy będą zmywać naczynia? Czy to jest sprawiedliwe? Możesz to policzyć na tym poziomie.
@@ -2238,7 +2238,7 @@ adventures:
 
                     ### Ćwiczenie
                     Czy potrafisz znaleźć 4 brakujące słowa, aby uzupełnić kod?
-                example_code: "```\n{print} 'Uciekaj z nawiedzonego domu!'\n{print} 'Przed tobą znajdują się 3 drzwi...'\ndrzwi {is} 1, 2, 3\npotwory {is} wilkołak, mumia, wampir, zombie\nwybrane_drzwi {is} {ask} 'Które drzwi wybierasz?'\n {print} 'Wybrałeś drzwi...' wybrane_drzwi \n{sleep}\npoprawne_drzwi {is} drzwi {at} {random}\n_ _ _ {print} 'Fantastycznie! Uciekłeś!'\n{else} {print} 'O nie! Zostałeś zjedzony przez...' potwory. {at} {random}\n```\n"
+                example_code: "```\n{print} 'Uciekaj z nawiedzonego domu!'\n{print} 'Przed tobą znajdują się 3 drzwi...'\ndrzwi {is} 1, 2, 3\npotwory {is} wilkołak, mumia, wampir, zombie\nwybrane_drzwi {is} {ask} 'Które drzwi wybierasz?'\n{print} 'Wybrałeś drzwi...' wybrane_drzwi\n{sleep}\npoprawne_drzwi {is} drzwi {at} {random}\n_ _ _ {print} 'Fantastycznie! Uciekłeś!'\n{else} {print} 'O nie! Zostałeś zjedzony przez...' potwory {at} {random}\n```\n"
             9:
                 story_text: |
                     Na tym poziomie możesz skorzystać ze wcięć, dzięki czemu nawiedzony dom stanie się jeszcze bardziej interaktywny!
@@ -3511,7 +3511,7 @@ adventures:
                     ```
             9:
                 story_text: "Na tym poziomie możesz użyć wcięć, aby Twoja restauracja była bardziej realistyczna i zabawniejsza!\n\n### Ćwiczenie\nWcięcie zostało usunięte z przykładowego kodu.\nCzy potrafisz określić, ile wcięć potrzebuje każda linia, aby kod działał poprawnie?\nJeśli klient zamawia pizzę, Hedy nie powinna pytać, jakiego sosu chce klient.\n\n**Dodatkowo** Restauracja nie posiada wszystkich sosów. Sporządź listę dostępnych sosów i przy każdym zamówieniu napisz, czy je sprzedajesz. <br>\n**Dodatkowo** Pizze mają dodatki. Zapytaj klientów, czego chcą.<br>\n**Dodatkowo** Czy klienci chcą drinka? Zapytaj ich też! <br>\n"
-                example_code: "```\n{print} 'Witamy w Restauracji Chez Hedy!'\nosoby = {ask} 'Ile osób dzisiaj do nas dołączy?'\n{print} 'Świetnie!'\ncena = 0\n{repeat} osoby {times}\n_ jedzenie = {ask} 'Co chciałbyś zamówić?'\n_ {print} jedzenie \n_ {if} jedzenie {is} frytki\n_ cena = cena + 3\n_ sos = {ask} 'Jaki sos chciałbyś mieć do swoich frytek?'\n_ {if} sos {is} nie\n_ {print} 'bez sosu'\n _ {else}\n_ cena = cena + 1\n_ {print} 'z ' sos\n_ {if} jedzenie {is} pizza\n _ cena = cena + 4\n{print} 'To będzie ' cena ' złotych.'\n{print} 'Smacznego!'\n```\n"
+                example_code: "```\n{print} 'Witamy w Restauracji Chez Hedy!'\nosoby = {ask} 'Ile osób dzisiaj do nas dołączy?'\n{print} 'Świetnie!'\ncena = 0\n{repeat} osoby {times}\n_ jedzenie = {ask} 'Co chciałbyś zamówić?'\n_ {print} jedzenie\n_ {if} jedzenie {is} frytki\n_ cena = cena + 3\n_ sos = {ask} 'Jaki sos chciałbyś mieć do swoich frytek?'\n_ {if} sos {is} nie\n_ {print} 'bez sosu'\n_ {else}\n_ cena = cena + 1\n_ {print} 'z ' sos\n_ {if} jedzenie {is} pizza\n_ cena = cena + 4\n{print} 'To będzie ' cena ' złotych.'\n{print} 'Smacznego!'\n```\n"
             10:
                 story_text: |
                     Na tym poziomie nauczysz się, jak łatwo pytać o zamówienia na różne dania.
@@ -3717,7 +3717,7 @@ adventures:
                 story_text: |
                     ### Ćwiczenie
                     Graj, aż pokonasz komputer! Najpierw dokończ przykładowy kod...
-                example_code: "```\nwygrana = 'nie'\nopcje = 'kamień', 'papier', 'nożyce'\n {while} wygrana == 'nie'\n    twój_wybór = {ask} 'Co wybierasz?'\n    wybór_komputera = opcje {at} {random}\n    {print} 'Ty wybrałeś' twój_wybór \n    {print} 'komputer wybrał ' wybór_komputera\n    {if}  wybór_komputera == twój_wybór\n        {print} 'Remis!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'nożyce'\n        {print} 'Przegrywasz!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'papier'\n        {print} 'Wygrywasz!'\n        wygrana = 'tak'\n_\n```\n"
+                example_code: "```\nwygrana = 'nie'\nopcje = 'kamień', 'papier', 'nożyce'\n {while} wygrana == 'nie'\n    twój_wybór = {ask} 'Co wybierasz?'\n    wybór_komputera = opcje {at} {random}\n    {print} 'Ty wybrałeś' twój_wybór\n    {print} 'komputer wybrał ' wybór_komputera\n    {if} wybór_komputera == twój_wybór\n        {print} 'Remis!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'nożyce'\n        {print} 'Przegrywasz!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'papier'\n        {print} 'Wygrywasz!'\n        wygrana = 'tak'\n_\n```\n"
     rock_2:
         name: Papier, kamień, nożyce 2
         default_save_name: Kamień_2
@@ -4770,7 +4770,7 @@ adventures:
                     </div>
                 example_code: |
                     ```
-                    {define} oblicz_kąty  {with}  ilość_narożników
+                    {define} oblicz_kąty {with} ilość_narożników
                         _ 360 / ilość_narożników
 
 
