@@ -24,3 +24,7 @@ class TestUtils(unittest.TestCase):
     def test_extract_default_rounds(self):
         salt = bcrypt.gensalt().decode('utf-8')
         self.assertEqual(12, utils.extract_bcrypt_rounds(salt))
+
+    def test_random_password_generator(self):
+        result = utils.random_password_generator()
+        self.assertEqual(6, len(result))
