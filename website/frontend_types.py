@@ -163,6 +163,10 @@ class Adventure:
     @staticmethod
     def from_teacher_adventure_database_row(row):
         text, example_code = halve_adventure_content(row.get("formatted_content", row["content"]))
+        solution = None
+        if row.get("solution_example"):
+            solution_text, solution_code = halve_adventure_content(row.get("solution_example"))
+            solution = [Solution(text=solution_text, code=solution_code)]
         return Adventure(
             short_name=row['id'],
             name=row['name'],
@@ -171,4 +175,6 @@ class Adventure:
             text=text,
             example_code=example_code,
             is_teacher_adventure=True,
-            is_command_adventure=False)
+            is_command_adventure=False,
+            solutions=solution
+        )
