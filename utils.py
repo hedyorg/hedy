@@ -171,7 +171,7 @@ def is_testing_request(request):
 
 def is_redesign_enabled():
     # Flip this to True when we are ready to release
-    return False
+    return True
 
 
 def extract_bcrypt_rounds(hash):
