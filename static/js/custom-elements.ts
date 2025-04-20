@@ -1,4 +1,5 @@
 import { ClientMessages } from "./client-messages";
+import { escapeHTML } from "./utils";  
 
 export class HedySelect extends HTMLElement {
     constructor() {
@@ -23,7 +24,7 @@ export class HedySelect extends HTMLElement {
             option.hidden = true;
             const newDiv = document.createElement('div');
             newDiv.classList.add('option');
-            newDiv.innerHTML = option.innerText;
+            newDiv.innerHTML = escapeHTML(option.innerText);
             newDiv.dataset['value'] = option.value;
             newDiv.classList.toggle('selected', option.selected);
             dropdownMenu.appendChild(newDiv)
