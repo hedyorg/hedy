@@ -72,22 +72,5 @@ teachers.forEach((teacher) => {
         cy.getDataCy('quiz').should('not.exist');
         cy.getDataCy('parsons').should('not.exist');
       });
-
-
-      it('Is able to hide the explore page', () => {
-        cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations');      
-
-        cy.getDataCy('hide_explore')
-            .should("not.be.checked")
-            .click()
-
-        cy.getDataCy('hide_explore')
-            .should("be.checked")
-
-        cy.wait('@updateCustomizations');
-      
-        loginForStudent();
-        cy.getDataCy('explore_button').should("not.exist")
-      });
   });
 });

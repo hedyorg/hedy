@@ -779,25 +779,6 @@ export async function unsubmit_program (id: string, prompt: string) {
   });
 }
 
-export async function set_explore_favourite(id: string, favourite: number) {
-  let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
-  if (favourite) {
-    prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
-  }
-  await modal.confirmP(prompt);
-
-  await tryCatchPopup(async () => {
-    const response = await postJson('/programs/set_hedy_choice', {
-      id: id,
-      favourite: favourite
-    });
-
-    modal.notifySuccess(response.message);
-    $('#' + id).toggleClass('text-white', favourite !== 1);
-    $('#' + id).toggleClass('text-yellow-500', favourite === 1);
-  });
-}
-
 export function report_program(prompt: string, id: string) {
   tryCatchPopup(async () => {
     await modal.confirmP(prompt);

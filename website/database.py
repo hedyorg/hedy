@@ -35,7 +35,6 @@ from os import path
 from utils import timems, times
 
 from . import dynamo, auth
-from . import querylog
 
 from .dynamo import DictOf, OptionalOf, ListOf, SetOf, RecordOf, EitherOf
 
@@ -707,30 +706,6 @@ class Database:
         programs = self.programs.get_many({"public": 1}, reverse=True)
         return [x for x in programs if not x.get("submitted", False)]
 
-    @querylog.timed_as("get_public_programs")
-    def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None,
-                            limit=40, pagination_token=None):
-        """Return the most recent N public programs, optionally filtered by attributes.
-
-        The 'public' index is the most discriminatory: fetch public programs, then evaluate them against
-        the filters (on the server). The index we're using here has the 'lang', 'adventure_name' and
-        'level' columns.
-        """
-        # This index contains relevant filterable fields, but doesn't contain the actual code
-        filter = {}
-        if level_filter:
-            filter['level'] = int(level_filter)
-        if language_filter:
-            filter['lang'] = language_filter
-        if adventure_filter:
-            filter['adventure_name'] = adventure_filter
-
-        ids = self.programs.get_page({'public': 1}, reverse=True, limit=limit,
-                                     server_side_filter=filter, pagination_token=pagination_token,
-                                     timeout=3, fetch_factor=2.0)
-        ret = self.programs.batch_get(ids)
-        return ret
-
     def add_public_profile_information(self, programs):
         """For each program in a list, note whether the author has a public profile or not.
 
@@ -743,15 +718,6 @@ class Database:
 
         for program in programs:
             program['public_user'] = True if profiles.get(program['id']) else None
-
-    def get_all_hedy_choices(self):
-        return self.programs.get_many({"hedy_choice": 1}, reverse=True)
-
-    def get_hedy_choices(self):
-        return self.programs.get_many({"hedy_choice": 1}, limit=4, reverse=True)
-
-    def set_program_as_hedy_choice(self, id, favourite):
-        self.programs.update({"id": id}, {"hedy_choice": 1 if favourite else None})
 
     def get_class(self, id):
         """Return the classes with given id."""
