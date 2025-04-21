@@ -202,6 +202,19 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     theLocalSaveWarning.setLoggedIn();
   }
 
+  // Event listener to close the adventures dropdown when you click outside of it
+  document.addEventListener('click', (ev) => {
+    const target = ev.target as HTMLElement;
+    const parent = document.getElementById('level_adventure_title');
+    if (parent?.contains(target)) {
+      return;
+    }
+    if ($('#dropdown-level:visible').length) {
+      $('#dropdown-level').slideToggle('medium');
+      document.getElementById('dropdown_index_arrow')?.classList.toggle('rotate-180');
+    }
+  });
+
   theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
 
   // theLevel will already have been set during initializeApp
