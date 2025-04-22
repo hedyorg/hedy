@@ -53,7 +53,7 @@ from website.auth import (current_user, is_admin, is_teacher, is_second_teacher,
                           has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
                           forget_current_user)
 from website.log_fetcher import log_fetcher
-from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
+from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo, Solution
 from website.flask_hedy import g_db
 from website.newsletter import add_used_slides_to_subscription, get_subscription_status
 
@@ -206,10 +206,10 @@ def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
-def load_all_adventures_for_index(customizations, subset=None):
+def load_all_adventures_for_index(customizations, user_programs, subset=None):
     """
     Loads all the default adventures in a dictionary that will be used to populate
-    the index, therfore we only need the titles and short names of the adventures.
+    the index, therefore we only need the titles and short names of the adventures.
     """
 
     keyword_lang = g.keyword_lang
@@ -260,6 +260,18 @@ def load_all_adventures_for_index(customizations, subset=None):
             if not adventure['from_teacher'] and (adv := builtin_map[int(level)].get(adventure['name'])):
                 all_adventures[int(level)].append(adv)
 
+    for level, adventures in all_adventures.items():
+        for adventure in adventures:
+            if adventure['short_name'] not in user_programs[level]:
+                continue
+            name = adventure['short_name']
+            student_adventure_id = f"{current_user()['username']}-{name}-{level}"
+            student_adventure = g_db().student_adventure_by_id(student_adventure_id)
+            if user_programs[level][name].submitted:
+                adventure['state'] = 'submitted'
+            if student_adventure and student_adventure['ticked']:
+                adventure['state'] = 'ticked'
+
     return all_adventures
 
 
@@ -297,6 +309,15 @@ def load_adventures_for_level(level, subset=None):
             if adventure_level.get(f'story_text_{i}', '')
         ]
 
+        solutions = [
+            Solution(
+                code=adventure_level.get(f'answer_code{suffix}'),
+                text=adventure_level.get(f'answer_note{suffix}'),
+            )
+            for suffix in ['' if i == 1 else f'_{i}' for i in range(1, 10)]
+            if adventure_level.get(f'answer_code{suffix}')
+        ]
+
         default_save_name = adventure.get('default_save_name')
         if not default_save_name or default_save_name == 'intro':
             default_save_name = adventure['name']
@@ -312,7 +333,9 @@ def load_adventures_for_level(level, subset=None):
                 extra_stories=extra_stories,
                 is_teacher_adventure=False,
                 is_command_adventure=short_name in KEYWORDS_ADVENTURES,
-                save_name=f'{default_save_name} {level}')
+                save_name=f'{default_save_name} {level}',
+                solutions=solutions,
+            )
 
             all_adventures.append(current_adventure)
 
@@ -1479,7 +1502,6 @@ def index(level, program_id):
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
-    adventures_for_index = load_all_adventures_for_index(customizations)
     initial_tab = adventures[0].short_name
 
     if loaded_program:
@@ -1573,7 +1595,6 @@ def index(level, program_id):
         initial_adventure=adventures_map[initial_tab],
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
         microbit_feature=MICROBIT_FEATURE,
-        adventures_for_index=adventures_for_index,
         # See initialize.ts
         javascript_page_options=dict(
             enforce_developers_mode=enforce_developers_mode,
@@ -1613,10 +1634,19 @@ def tryit(level, program_id):
     available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
 
     customizations = {}
+    user_programs = {i: {} for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     if current_user()['username']:
         # class_to_preview is for teachers to preview a class they own
         customizations = g_db().get_student_class_customizations(
             current_user()['username'], class_to_preview=session.get("preview_class", {}).get("id"))
+        user_programs = g_db().last_programs_for_user_all_levels(current_user()['username'])
+        user_programs = {
+            level: {
+                k: Program.from_database_row(v)
+                for k, v in user_programs[level].items()
+            }
+            for level in user_programs
+        }
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -1641,7 +1671,8 @@ def tryit(level, program_id):
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
-    adventures_for_index = load_all_adventures_for_index(customizations)
+    adventures_for_index = load_all_adventures_for_index(customizations, user_programs)
+
     initial_tab = adventures[0].short_name
 
     if loaded_program:
