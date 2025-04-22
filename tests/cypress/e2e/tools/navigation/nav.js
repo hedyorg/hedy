@@ -108,4 +108,10 @@ export function goToSubscribePage()
    goToPage(Cypress.env('subscribe_page'));
 }
 
+export function clickAdventureIndexButton()
+{
+    cy.getDataCy('dropdown_open_button').click();
+}
+
 export default {goToPage}
+

@@ -4,6 +4,7 @@
         px-3 py-1 hover:bg-gray-200 cursor-pointer  text-blue-900
         ease-in transition duration-100"
         data-tab="{{ adv_name }}"
+        data-cy="{{ title if adv_class == 'teacher' else adv_name }}"
         data-level="{{ tab_level }}"
         tabindex="{{ index }}"
         data-type="{{ adv_class }}"
