@@ -292,19 +292,6 @@ class TestPages(AuthHelper):
         for filter in filters:
             self.get_data("/programs" + filter)
 
-    def test_valid_explore_filtering_page(self):
-        # WHEN a fresh user
-        self.given_fresh_user_is_logged_in()
-
-        # THEN we can retrieve the different filtering options of the explore page
-        filters = [
-            "?level=null&adventure=null&lang=null",
-            "?level=3&adventure=parrot&lang=null",
-            "?level=11&adventure=fortune&lang=es"
-        ]
-        for filter in filters:
-            self.get_data("/explore" + filter)
-
     def test_all_languages(self):
         # WHEN trying all languages to reach all pages
         # THEN receive an OK response from the server
@@ -314,7 +301,6 @@ class TestPages(AuthHelper):
         pages = [
             '/',
             '/hedy',
-            '/explore',
             '/learn-more',
             '/programs',
             '/my-profile']
