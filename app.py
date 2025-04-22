@@ -209,7 +209,7 @@ def get_locale():
 def load_all_adventures_for_index(customizations, user_programs, subset=None):
     """
     Loads all the default adventures in a dictionary that will be used to populate
-    the index, therfore we only need the titles and short names of the adventures.
+    the index, therefore we only need the titles and short names of the adventures.
     """
 
     keyword_lang = g.keyword_lang
@@ -1625,7 +1625,7 @@ def tryit(level, program_id):
         # class_to_preview is for teachers to preview a class they own
         customizations = g_db().get_student_class_customizations(
             current_user()['username'], class_to_preview=session.get("preview_class", {}).get("id"))
-        user_programs = g_db().all_last_programs_for_user(current_user()['username'])
+        user_programs = g_db().last_programs_for_user_all_levels(current_user()['username'])
         user_programs = {
             level: {
                 k: Program.from_database_row(v)
@@ -1659,10 +1659,6 @@ def tryit(level, program_id):
     load_saved_programs(level, adventures, loaded_program)
     adventures_for_index = load_all_adventures_for_index(customizations, user_programs)
 
-    if current_user()['username']:
-        user_programs = g_db().all_last_programs_for_user(current_user()['username'])
-        print(user_programs)
-        print(adventures_for_index)
     initial_tab = adventures[0].short_name
 
     if loaded_program:
