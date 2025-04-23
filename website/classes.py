@@ -15,7 +15,6 @@ from .database import Database
 from .website_module import WebsiteModule, route
 
 cookie_name = config["session"]["cookie_name"]
-invite_length = config["session"]["invite_length"] * 60
 
 
 class ClassModule(WebsiteModule):
@@ -296,15 +295,17 @@ class MiscClassPages(WebsiteModule):
         if user_type == 'student':
             results = g_db().get_student_that_starts_with(search.lower())
         elif user_type == 'second_teacher':
-            results = g_db().get_teacher_that_starts_with(search.lower(), class_id=class_id)
+            results = g_db().get_teacher_that_starts_with(search.lower(), not_in_class_id=class_id)
         else:
             results = []
-        usernames = [record['username'] for record in results if record['username'] != user['username']]
+        # Get sets of usernames
+        usernames = set(r['username'] for r in results)
+        already_invited = set(inv['username'] for inv in self.db.get_class_invites(class_id=class_id))
+        # Set computation to come up with who can still be invited
+        invitable = usernames - already_invited - set([user['username']])
+        # Turn into a sorted list
+        usernames = list(sorted(invitable))
         usernames = sorted(usernames)
-        invitations = utils.get_class_invites(db=self.db, class_id=class_id)
-        for invite in invitations:
-            if invite['username'] in usernames:
-                usernames.remove(invite['username'])
         return render_template('modal/htmx-search-results-list.html', usernames=usernames)
 
     @route("/invite", methods=["POST"])
@@ -329,17 +330,13 @@ class MiscClassPages(WebsiteModule):
         users = self.db.users_by_username(usernames)
 
         for user in users:
-            data = {
-                "username": user['username'],
-                "class_id": class_id,
-                "timestamp": utils.times(),
-                "ttl": utils.times() + invite_length,
-                "invited_as": invite_as,
-                "invited_as_text": gettext(invite_as),
-            }
-            self.db.add_class_invite(data)
-
-        invites = utils.get_class_invites(db=self.db, class_id=Class["id"])
+            self.db.add_class_invite(
+                username=user["username"],
+                class_id=class_id,
+                invited_as=invite_as,
+                invited_as_text=gettext(invite_as)
+            )
+        invites = self.db.get_class_invites(class_id=Class["id"])
         return render_partial(
             "htmx-invite-list.html",
             invites=invites,
@@ -385,16 +382,12 @@ class MiscClassPages(WebsiteModule):
             return make_response(gettext("teacher_invalid"), 400)
         elif Class["teacher"] == username:  # this check is almost never the case; but just in case.
             return make_response(gettext("request_invalid"), 400)
-
-        data = {
-            "username": username,
-            "class_id": class_id,
-            "timestamp": utils.times(),
-            "ttl": utils.times() + invite_length,
-            "invited_as": "second_teacher",
-            "invited_as_text": gettext("second_teacher"),
-        }
-        self.db.add_class_invite(data)
+        self.db.add_class_invite(
+            username=user["username"],
+            class_id=class_id,
+            invited_as="second_teacher",
+            invited_as_text=gettext("second_teacher")
+        )
         return make_response('', 204)
 
     @route("/remove_student_invite", methods=["POST"])
