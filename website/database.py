@@ -40,6 +40,7 @@ from . import dynamo, auth
 
 from .dynamo import DictOf, OptionalOf, ListOf, SetOf, RecordOf, EitherOf
 
+from hedy_content import MAX_LEVEL
 
 is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
@@ -475,6 +476,22 @@ class Database:
             key = program.get('adventure_name', 'default')
             if key not in ret or ret[key]['date'] < program['date']:
                 ret[key] = program
+        return ret
+
+    def last_programs_for_user_all_levels(self, username):
+        """Return the most recent programs for the given user for all levels.
+
+        Returns: { level -> { adventure_name -> { code, name, ... } } }
+        """
+        programs = self.programs_for_user(username)
+        ret = {i: {} for i in range(1, MAX_LEVEL + 1)}
+        for program in programs:
+            if 'adventure_name' not in program or 'level' not in program:
+                continue
+            key = program['adventure_name']
+            level = program['level']
+            if key not in ret[level] or ret[level][key]['date'] < program['date']:
+                ret[level][key] = program
         return ret
 
     def programs_for_user(self, username):
