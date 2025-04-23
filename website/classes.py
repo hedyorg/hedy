@@ -336,7 +336,7 @@ class MiscClassPages(WebsiteModule):
                 invited_as=invite_as,
                 invited_as_text=gettext(invite_as)
             )
-        invites = self.db.get_class_invites(db=self.db, class_id=Class["id"])
+        invites = self.db.get_class_invites(class_id=Class["id"])
         return render_partial(
             "htmx-invite-list.html",
             invites=invites,
