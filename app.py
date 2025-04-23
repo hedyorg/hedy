@@ -53,7 +53,7 @@ from website.auth import (current_user, is_admin, is_teacher, is_second_teacher,
                           has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
                           forget_current_user)
 from website.log_fetcher import log_fetcher
-from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
+from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo, Solution
 from website.flask_hedy import g_db
 from website.newsletter import add_used_slides_to_subscription, get_subscription_status
 
@@ -297,6 +297,15 @@ def load_adventures_for_level(level, subset=None):
             if adventure_level.get(f'story_text_{i}', '')
         ]
 
+        solutions = [
+            Solution(
+                code=adventure_level.get(f'answer_code{suffix}'),
+                text=adventure_level.get(f'answer_note{suffix}'),
+            )
+            for suffix in ['' if i == 1 else f'_{i}' for i in range(1, 10)]
+            if adventure_level.get(f'answer_code{suffix}')
+        ]
+
         default_save_name = adventure.get('default_save_name')
         if not default_save_name or default_save_name == 'intro':
             default_save_name = adventure['name']
@@ -312,7 +321,9 @@ def load_adventures_for_level(level, subset=None):
                 extra_stories=extra_stories,
                 is_teacher_adventure=False,
                 is_command_adventure=short_name in KEYWORDS_ADVENTURES,
-                save_name=f'{default_save_name} {level}')
+                save_name=f'{default_save_name} {level}',
+                solutions=solutions,
+            )
 
             all_adventures.append(current_adventure)
 
