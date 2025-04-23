@@ -1272,6 +1272,7 @@ class Database:
             )
         return invites
 
+
 def batched(iterable, n):
     "Batch data into tuples of length n. The last batch may be shorter."
     # batched('ABCDEFG', 3) --> ABC DEF G
