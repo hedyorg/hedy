@@ -30,7 +30,8 @@
     <div class="flex flex-col md:flex-row md:gap-2" id="level_adventure_title">
       <div class="dropdown relative">
         <div class="flex flex-row">
-          <button type="text" id="dropdow_open_button" class="blue-btn-new text-4xl font-light text-blue-800" onclick="hedyApp.open_index_dropdown(event)">
+          <button type="text" id="dropdow_open_button" data-cy="dropdown_open_button"
+                  class="blue-btn-new text-4xl font-light text-blue-800" onclick="hedyApp.open_index_dropdown(event)">
             <span>
               {{ _('level_title') }} {{ level_nr }}
             </span>
@@ -50,14 +51,15 @@
               <button class="flex flex-row justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
                 {% if loop.index == level|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %}
                 {% if i not in customizations['available_levels']%} bg-gray-400 {% else %} hover:bg-blue-200 {% endif %}"
-  
+
                 {% if i not in customizations['available_levels']%}disabled{% endif %}
-              xd="  on click 
+              xd="  on click
                    toggle .sliding-content-closed .sliding-content-open on #level_{{ i }}_pane
                    then toggle .rotate-90 on #level_{{ i }}_arrow
                   then toggle .rounded-lg .rounded-t-lg .bg-blue-200 on #level_{{ i }}_header"
                   onclick="hedyApp.open_index_pane(event)"
-                  id="level_{{ i }}_header">
+                  id="level_{{ i }}_header"
+                  data-cy="level_{{ i }}_header">
                 {{_('level_title')}} {{ i }}
                 {% if i not in customizations['available_levels']%}
                   <i class="fa-solid fa-lock"></i>

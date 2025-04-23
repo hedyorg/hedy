@@ -1379,6 +1379,9 @@ def hour_of_code(level, program_id=None):
 @app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None})
 @app.route('/hedy/<int:level>/<program_id>', methods=['GET'])
 def index(level, program_id):
+    if utils.is_redesign_enabled():
+        return tryit(level, program_id)
+
     try:
         level = int(level)
         if level < 1 or level > hedy.HEDY_MAX_LEVEL:

@@ -1,4 +1,4 @@
-import {goToHedyLevel, goToHedyPage} from "../tools/navigation/nav";
+import {goToHedyLevel, goToHedyPage, clickAdventureIndexButton} from "../tools/navigation/nav";
 import {codeEditorContent} from "../tools/programs/program";
 
 describe('Is able to run code', () => {
@@ -57,6 +57,7 @@ describe('Is able to run code', () => {
     cy.get('#runit').click()
     cy.wait('@parse')
 
+    clickAdventureIndexButton()
     cy.getDataCy('quizmaster').click()
     const program_2 = "name = ask 'what is your name?'"
     codeEditorContent().clear()

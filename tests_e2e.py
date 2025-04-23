@@ -1207,9 +1207,10 @@ class TestClasses(AuthHelper):
 
         # WHEN retrieving the short link of a class
         # THEN receive a redirect to `class/ID/join/LINK`
-        body = self.get_data('hedy/l/' + Class['link'], expect_http_code=302)
-        if not re.search(HOST + 'class/' + Class['id'] + '/prejoin/' + Class['link'], body):
-            raise Exception('Invalid or missing redirect link')
+        if not utils.is_redesign_enabled():
+            body = self.get_data('hedy/l/' + Class['link'], expect_http_code=302)
+            if not re.search(HOST + 'class/' + Class['id'] + '/prejoin/' + Class['link'], body):
+                raise Exception('Invalid or missing redirect link')
 
         # WHEN joining a class
         # THEN we receive a 200 code
