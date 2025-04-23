@@ -522,18 +522,3 @@ def remove_class_preview():
         del session["preview_class"]
     except KeyError:
         pass
-
-
-def get_class_invites(db, class_id: str):
-    invites = []
-    for invite in db.get_class_invitations(class_id):
-        invites.append(
-            {
-                "username": invite["username"],
-                "invited_as_text": invite["invited_as_text"],
-                "invited_as": invite["invited_as"],
-                "timestamp": localized_date_format(invite["timestamp"], short_format=True),
-                "expire_timestamp": localized_date_format(invite["ttl"], short_format=True),
-            }
-        )
-    return invites

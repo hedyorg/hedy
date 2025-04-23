@@ -223,7 +223,7 @@ class ForTeachersModule(WebsiteModule):
         session['class_id'] = class_id
 
         students = Class.get("students", [])
-        invites = utils.get_class_invites(db=self.db, class_id=class_id)
+        invites = self.db.get_class_invites(class_id=class_id)
         level = Class.get('last_viewed_level', 1)
         student_overview_table, _, class_adventures_formatted, \
             _, student_adventures, graph_students, students_info = self.get_grid_info(user, class_id, level)
