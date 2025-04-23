@@ -136,7 +136,7 @@
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-3" id="code_related_buttons">
-    <div id="button_row" class="flex flex-col gap-2 md:flex-row lg:flex-col xl:flex-row mb-4">
+    <div id="button_row" class="flex flex-col gap-2 sm:flex-row mb-4">
       <div class="flex flex-row gap-2">
         <div id="run_button_container" class="gap-2 flex flex-row flex-initial">
             <button id="runit" data-cy="runit" class="green-btn-new" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
@@ -167,7 +167,7 @@
       </div>
       <div class="hidden lg:block lg:flex-1"></div>
       {% if username and current_user_is_in_class %}
-        <button class="blue-btn-new" _="on click remove .hidden from #share_modal">
+        <button class="blue-btn-new w-fit" _="on click remove .hidden from #share_modal">
           <i class="fa-solid fa-paper-plane ltr:mr-1 rtl:ml-1"></i>
           {{_('hand_in')}}
         </button>
