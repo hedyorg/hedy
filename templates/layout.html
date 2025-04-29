@@ -22,12 +22,19 @@
         {{ title }}
       </span>
       <div class="flex-1" ></div>
+      <i class="fa-regular
+                {% if state == 'ticked' %}
+                  fa-circle-check
+                {% elif state == 'submitted' %}
+                  fa-paper-plane
+                {% endif %}"
+                data-status-icon
+                style="line-height: inherit;">
+      </i>
+    
       {% if state == 'ticked' %}
-        <i class="fa-regular fa-circle-check" style="line-height: inherit;"></i>
       {% elif state == 'submitted' %}
-        <i class="fa-regular fa-paper-plane" style="line-height: inherit;"></i>
       {% else %}
-        <i class="w-4 text-center align-middle w-4"></i>
       {% endif %}
     </div>
   </li>

@@ -1729,6 +1729,8 @@ function updatePageElements() {
     // Show <...data-view="if-submitted"> only if we have a public url
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
+    const icon = document.querySelector(`*[data-tab="${adventure.short_name}"][data-level="${theLevel}"] > div > i[data-status-icon]`);
+    icon?.classList.toggle('fa-paper-plane', isSubmitted && !icon?.classList.contains('fa-circle-check'));
 
     theGlobalEditor.isReadOnly = isSubmitted;
     // All of these are for the buttons added in the new version of the code-page
