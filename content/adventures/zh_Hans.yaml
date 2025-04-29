@@ -163,9 +163,9 @@ adventures:
                         {print} '罗宾发现了一本有趣的书'
                         书 = {ask} '罗宾买了这本书吗？'
                         {if} 书 {is} 是
-                        {print}_ '罗宾买了这本书，回家了'
-                         _{else}
-                        _{print} '罗宾离开商店，回家了'
+                        _ {print} '罗宾买了这本书，回家了'
+                        _ {else}
+                        _ {print} '罗宾离开商店，回家了'
                     {else}
                         {print} '罗宾回了家'
                     ```
@@ -659,7 +659,7 @@ adventures:
                     {if} discount {is} yes
                     discount_answer {is} {ask} '您的折扣代码是什么？'
                     discount_codes = Senior4231, Student8786, NewMember6709
-                    {if}discount_answer {is} {in}discount_codes
+                    {if} discount_answer {is} {in}discount_codes
                     {print} '那将是 3.50 美元'
                     '那将是 5.50 美元'
                     {print} '祝你游得愉快！'
@@ -1343,8 +1343,8 @@ adventures:
                     ```
                     人们 {is} 妈妈, 爸爸, 艾玛, 索菲
                     洗碗的 {is} 人们 {at} {random}
-                    _洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _
-                    _{print} '运气真好，' _ '把碗洗了'
+                    _ 洗碗的 {is} 索菲 {print} _ 太糟了，轮到我洗碗 _
+                    _ {print} '运气真好，' _ '把碗洗了'
                     ```
             6:
                 story_text: |
@@ -2387,7 +2387,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 我是鹦鹉海蒂
-                    名字 _ _你的名字叫什么？
+                    名字 _ _ 你的名字叫什么？
                     {print} 名字
                     _
                     {print} 叽叽喳喳
@@ -2527,7 +2527,7 @@ adventures:
                     ### 练习
                     完成代码。每次随机选择一个字母，你必须按下。按对得一分，按错扣两分。
                     **额外**在每个字母之后清除屏幕，并显示用户他们得了多少分。
-                example_code: "```\n积分 = 0\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
+                example_code: "```\n积分 = 0\n字母们 = a, b, c, d, e\n{repeat} 10 {times}\n    字母 = _ _ _\n    {print} '按下字母' 字母\n    {if} 字母 {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         description: 介绍print命令
         levels:
@@ -2713,7 +2713,7 @@ adventures:
                         {print} friends[i] '的幸运号码是' lucky_numbers[i]
                     ```
                 story_text_2: |-
-                    现在您已经学会了在列表中使用括号，您也可以开始以Python的方式使用`{at}{random}`命令了!
+                    现在您已经学会了在列表中使用括号，您也可以开始以Python的方式使用`{at} {random}`命令了!
                     你只需键入你的名单的名称后面加上`[random]`!
                 example_code_2: |-
                     ```
@@ -2738,7 +2738,7 @@ adventures:
             8:
                 story_text: |
                     ### repeat命令和缩进
-                    在这个级别中，您可以重复多行代码只使用一个repeat命令。
+                    在这个级别中，您可以重复多行代码只使用一个`{repeat}`命令。
                     您可以通过创建想要重复的块来实现这一点。
                     这个块中的行需要**缩进**。
                     这意味着在每行的开头放四个空格。当你只想创建一行的块时，你也必须缩进。
@@ -3170,7 +3170,7 @@ adventures:
                 example_code: |
                     ```
                     选项 = _
-                    玩家们 =  _
+                    玩家们 = _
                     {for} _
                     ```
             13:
@@ -3329,7 +3329,7 @@ adventures:
                 story_text: "歌曲经常包含大量的重复。例如...小鲨鱼!如果你唱这首歌，其实你就是一直在唱同一句歌词：\n\n小鲨鱼图图图杜杜\n小鲨鱼图图图杜杜\n小鲨鱼图图图杜杜\n小鲨鱼\n\n### 练习 \n你可以用`{repeat}` 来打印歌曲《小鲨鱼》吗？ 完成代码替换空白处。 \n**另外** 在《小鲨鱼》之后，你当然还可以为其他歌曲编程。很多歌曲都有重复的句子！\n你能再想出一首歌曲并打印出来吗？\n"
                 example_code: |
                     ```
-                    {repeat} _ _{print} '小鲨鱼图图图杜杜'
+                    {repeat} _ _ {print} '小鲨鱼图图图杜杜'
                     {print} '小鲨鱼'
                     ```
             8:
@@ -4012,7 +4012,7 @@ adventures:
                     填空并使代码正常工作！
                 example_code: |
                     ```
-                    {for} 数字{in} {range} _{to} _
+                    {for} 数字 {in} {range} _ {to} _
                         {print} 数字
                         {sleep}
                     {print} '新年快乐！'
