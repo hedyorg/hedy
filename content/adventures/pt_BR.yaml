@@ -2049,6 +2049,9 @@ adventures:
             8:
                 story_text: "Agora que podemos usar o comando `{repeat}` com várias linhas, podemos fazer canções ainda mais facilmente!\n\n### Exercício\nTermine a canção Meus Dedinhos (Frère Jacques). Não se esqueça de usar o `{repeat}`!\n"
                 example_code: "```\n{print} 'Meus dedinhos'\n{repeat} 2 {times}\n    {play} C\n    {play} D\n    {play} E\n    {play} C\n{repeat} 2 {times}\n    {play} E\n    {play} F\n    {play} G\n    {sleep} 1\n```\n"
+            4:
+                example_code: "```\n{print} 'Maria tinha um cordeirinho'\n{play} E\n{play} D\n{play} C\n{play} D\n{play} E\n{play} E\n{play} E\n{clear}\n{print} 'Cordeirinho, cordeirinho'\n{play} D\n{play} D\n{play} D\n{play} E\n{play} E\n{play} E\n{clear}\n{print} 'Maria tinha um cordeirinho'\n{play} E\n```\n"
+                story_text: "Use o comando `{clear}` para criar uma máquina de karaokê!\n\n### Exercício\nTermine a versão de karaokê de 'Maria tinha um cordeirinho'.\nDepois, crie uma versão de karaokê de qualquer música que você quiser!\n"
     parrot:
         name: Papagaia
         default_save_name: Papagaia
@@ -2510,14 +2513,15 @@ adventures:
                     ```
                 example_code_2: |
                     ```
-                    number = 6
-                    number = number - 1
-                    print number ' little monkeys jumping on the bed'
-                    print 'One fell off and bumped his head'
-                    print 'Mama called the doctor and the doctor said'
-                    print 'NO MORE MONKEYS JUMPING ON THE BED!'
-                    sleep
+                    número = 6
+                    número = número - 1
+                    {print} número ' patinhos foram passear'
+                    {print} 'Além das montanhas para brincar'
+                    {print} 'A mamãe gritou: QUÁ, QUÁ, QUÁ, QUÁ!'
+                    {print} 'Mas só ' número - 1 ' patinhos voltaram de lá'
+                    {sleep}
                     ```
+                story_text_2: "Esta canção infantil conta, regressivamente, de 5 patinhos até nenhum patinho.\nSe você copiar as linhas 2 - 7 e colar algumas vezes embaixo do código, você consegue cantar a canção inteira!\n"
             7:
                 story_text: |
                     As músicas geralmente contêm muita repetição. Por exemplo... Bebê Tubarão! Se você canta, você continua cantando a mesma coisa:
@@ -2531,16 +2535,20 @@ adventures:
                 example_code: "```\n{repeat} _ _ {print} 'Baby Shark tututudutudu'\n{print} 'Baby Shark'\n```\n"
             8:
                 story_text: |
-                    Em um nível anterior você programou a música 'Garrafas de cerveja'. Você fez um verso e depois teve que copiar os versos 99 vezes. No nível 7 você pode repetir a música 99 vezes, apenas adicionando uma linha simples!
+                    Em um nível anterior, você programou a música "Garrafas de cerveja". Mas sem o comando `{repeat}`, você teve de copiar os versos um monte de vezes.
+                    Neste nível, você pode repetir a canção 99 vezes, apenas adicionando uma linha simples!
+
+                    ### Exercício
+                    Preencha as lacunas com os comandos certos e indente o código corretamente.
                 example_code: |
                     ```
                     verso = 99
-                    {repeat} 99 {times}
-                         {print} verso 'garrafas de cerveja na parede'
-                         {print} verso 'garrafas de cerveja'
-                         {print} 'Pegue uma, passe por aí'
-                         verso = verso - 1
-                         {print} verso 'garrafas de cerveja na parede'
+                    _ 99 {times}
+                    {print} verso 'garrafas de cerveja na parede'
+                    {print} verso 'garrafas de cerveja'
+                    {print} 'Pegue uma, passe por aí'
+                    verso = verso - 1
+                    {print} verso 'garrafas de cerveja na parede'
                     ```
             10:
                 story_text: |
@@ -2893,6 +2901,8 @@ adventures:
                 story_text: "### Exercício\nRecrie os desenhos com a tartaruga!\n\n**Extra** Deixe o(a) jogador(a) decidir de que cor o quadrado deve ser.\n\n***Extra*** Você consegue fazer a letra inicial do seu próprio nome e a bandeira do seu país?\n\n<div class=\"w-full flex flex-row gap-2\">\nQuadrado <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"150\">\nLetras <img src=\"https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad\" width=\"100\">\nBandeira <img src=\"https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e\" width=\"300\">\n</div>\n"
             7:
                 story_text: "### Exercício\nRecrie os desenhos com a tartaruga!\n\n<div class=\"w-full flex flex-row gap-2\">\nHexágono <img src=\"https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4\" width=\"200\">\nTriângulo <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1\" width=\"200\">\nVentilador <img src=\"https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e\" width=\"200\">\n</div>\n"
+            8:
+                story_text: "### Exercício\nRecrie os desenhos com a tartaruga!\n\n**Extra** O número entre parênteses indica em quantas linhas de código a figura pode ser desenhada. Você consegue fazê-los usando a mesma quantidade de linhas?\n\n<div class=\"w-full flex flex-row gap-2\">\nQuadrado (3) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"200\">\nEstrela colorida aleatoriamente (5) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781\" width=\"150\">\nEspiral colorida aleatoriamente (7) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35\" width=\"150\">\n</div>\n"
     years:
         description: Contagem regressiva para o Ano Novo!
     blackjack:
