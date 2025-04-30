@@ -50,7 +50,6 @@ export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
-let selectedURI: JQuery<HTMLElement>;
 //create a synth and connect it to the main output (your speakers)
 //const synth = new Tone.Synth().toDestination();
 
@@ -1274,26 +1273,7 @@ function initializeSpeech(isTryit?: boolean) {
 
     if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
-        if (isTryit) {
-          $('#speak_dropdown').append(
-            $('<button>')
-              .attr('id', `speak_button_${voice.name}`)
-              .attr('onclick', `$('#speak_dropdown').slideUp('medium');`)
-              .attr('value', voice.voiceURI)
-              .addClass('flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white')
-              .css('width', '100%')
-              .text(voice.name)
-              .on('click', function () {
-                if (selectedURI){
-                  selectedURI.find('span').remove();
-                }
-                selectedURI = $(this);
-                $(this).append(`<span class="fa fa-check"></span>`);
-              })
-            );
-        } else {
-          $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
-        }
+        $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
       }
       $('#speak_container').show();
 
