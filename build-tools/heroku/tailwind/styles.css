@@ -282,6 +282,11 @@ a.green-btn-new:hover {
   @apply active:bg-blue-400 active:border-blue-500;
 }
 
+.blue-btn-new:disabled, .blue-btn-new[disabled] {
+  @apply bg-gray-200 border-gray-200 text-gray-500;
+  @apply active:bg-gray-200 active:border-gray-200;
+}
+
 .gray-btn-shape {
   @apply font-slab leading-6 font-normal tracking-wide;
   @apply pt-2 pb-1 px-4 rounded no-underline;
