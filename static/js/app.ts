@@ -50,7 +50,6 @@ export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
-let selectedURI: JQuery<HTMLElement>;
 //create a synth and connect it to the main output (your speakers)
 //const synth = new Tone.Synth().toDestination();
 
@@ -280,7 +279,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     theLocalSaveWarning.switchTab();
   });
 
-  initializeSpeech(options.page === 'tryit');
+  initializeSpeech();
 
   // Share/hand in modals
   $('#share_program_button').on('click', () => $('#share_modal').show());
@@ -1248,7 +1247,7 @@ function speak(text: string) {
   }
 }
 
-function initializeSpeech(isTryit?: boolean) {
+function initializeSpeech() {
   // If we are running under cypress, always show the languages dropdown (even if the browser doesn't
   // have TTS capabilities), so that we can test if the logic for showing the dropdown at least runs
   // successfully.
@@ -1274,26 +1273,7 @@ function initializeSpeech(isTryit?: boolean) {
 
     if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
-        if (isTryit) {
-          $('#speak_dropdown').append(
-            $('<button>')
-              .attr('id', `speak_button_${voice.name}`)
-              .attr('onclick', `$('#speak_dropdown').slideUp('medium');`)
-              .attr('value', voice.voiceURI)
-              .addClass('flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white')
-              .css('width', '100%')
-              .text(voice.name)
-              .on('click', function () {
-                if (selectedURI){
-                  selectedURI.find('span').remove();
-                }
-                selectedURI = $(this);
-                $(this).append(`<span class="fa fa-check"></span>`);
-              })
-            );
-        } else {
-          $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
-        }
+        $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
       }
       $('#speak_container').show();
 
@@ -1729,7 +1709,14 @@ function updatePageElements() {
     // Show <...data-view="if-submitted"> only if we have a public url
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
-
+    const icon = document.querySelector(`*[data-tab="${adventure.short_name}"][data-level="${theLevel}"] > div > i[data-status-icon]`);
+    icon?.classList.toggle('fa-paper-plane', isSubmitted && !icon?.classList.contains('fa-circle-check'));
+    const hand_in_btn = document.getElementById('hand_in');
+    if (isSubmitted) {
+      hand_in_btn?.setAttribute('disabled', 'disabled');
+    } else {
+      hand_in_btn?.removeAttribute('disabled');
+    }
     theGlobalEditor.isReadOnly = isSubmitted;
     // All of these are for the buttons added in the new version of the code-page
     $('#program_name_container').show()

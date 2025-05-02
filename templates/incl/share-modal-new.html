@@ -29,11 +29,6 @@
             <div data-view="if-submitted">
               <div class="my-4">
                 <p>{{_('submitted_header')}}</p>
-                <p>{{_('give_link_to_teacher')}}</p>
-              </div>
-      
-              <div data-view="if-public-url">
-                {% include 'incl/copy-url-bar.html' %}
               </div>       
             </div>
           </div>
@@ -50,11 +45,6 @@
         <div class="flex justify-end mt-4">
           <button class="blue-btn-new" _="on click trigger closeShareModal">{{_('close')}}</button>
         </div>
-      </div>
-      <div class="absolute right-0.5 top-0.5">
-        <a href="#" class="" title="Close popup" _="on click trigger closeShareModal">
-          <span class="text-2xl hover:text-red-400 text-gray-400 fa-solid fa-xmark"></span>
-        </a>
       </div>
     </div>
   </div>
