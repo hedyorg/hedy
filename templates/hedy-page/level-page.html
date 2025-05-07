@@ -55,7 +55,7 @@
                 {% if i not in customizations['available_levels']%}disabled{% endif %}
               xd="  on click
                    toggle .sliding-content-closed .sliding-content-open on #level_{{ i }}_pane
-                   then toggle .rotate-90 on #level_{{ i }}_arrow
+                   then toggle .rotate-180 on #level_{{ i }}_arrow
                   then toggle .rounded-lg .rounded-t-lg .bg-blue-200 on #level_{{ i }}_header"
                   onclick="hedyApp.open_index_pane(event)"
                   id="level_{{ i }}_header"
@@ -64,7 +64,7 @@
                 {% if i not in customizations['available_levels']%}
                   <i class="fa-solid fa-lock"></i>
                 {% else %}
-                  <i class="fa-solid fa-chevron-right text-base transition-all ease-in duration-200 {% if loop.index == level|int %}rotate-90{% endif %}" id="level_{{ i }}_arrow"></i>
+                  <i class="fa-solid fa-chevron-down text-base transition-all ease-in duration-200 {% if loop.index == level|int %}rotate-180{% endif %}" id="level_{{ i }}_arrow"></i>
                 {% endif %}
               </button>
               <div class="bg-white rounded-b-lg grow-0 ease-in transition-all duration-300 grid
