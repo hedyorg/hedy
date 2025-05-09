@@ -168,7 +168,7 @@ adventures:
                         {print} _
                     ```
             9:
-                story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. \nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
+                story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands.\nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -191,7 +191,7 @@ adventures:
                     ### Exercise
 
                     Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
-                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+                example_code: "```\nanimals = _ , _ , _\n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
             13:
                 story_text: |
                     By using the `{and}` and `{or}` commands, you can make your stories more versatile. You can ask two questions and respond to the combination of answers.
@@ -517,15 +517,15 @@ adventures:
                             your_points_3 = _
                             your_total = _
                         {else}:
-                           {if} your_total _
+                            {if} your_total _
                                 _
                             {else}:
                                 _
                         {print} _
 
                     # Extra card for the dealer
-                    {if} dealer_total < 17
-                    _
+                    {if} dealer_total < 17:
+                        _
                     ```
     blackjack_4:
         name: Blackjack 4
@@ -2375,7 +2375,7 @@ adventures:
                     {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
                     ```
             9:
-                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
+                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones?\nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2398,7 +2398,7 @@ adventures:
                         {print} 'Great! You survived!'
                     ```
             11:
-                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n**Extra** If you make a wrong choice, a monster is still shown! How could you change that?\n"
+                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are.\n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`.\n\n**Extra** If you make a wrong choice, a monster is still shown! How could you change that?\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -3785,7 +3785,7 @@ adventures:
                     {print} 'Enjoy your meal!'
                     ```
             9:
-                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the customer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
+                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code.\nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the customer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy!'
@@ -3814,7 +3814,7 @@ adventures:
 
                     ### Exercise 1
                     Finish the code with an `{ask}` on the blanks such that the customer is asked what they want to eat for each course.
-                example_code: "```\ncourses = appetizer, main course, dessert\n{for} course {in} courses\n    {print} 'What is your order for ' course '?'\n    _ \n    _\n```\n"
+                example_code: "```\ncourses = appetizer, main course, dessert\n{for} course {in} courses\n    {print} 'What is your order for ' course '?'\n    _\n    _\n```\n"
                 story_text_2: |
                     ### Exercise
                     Of course, you could also order for multiple people!
@@ -3993,7 +3993,7 @@ adventures:
 
                     Fill in the correct code on the blanks to see if it is a draw.
             9:
-                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**Extra** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
+                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands.\n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**Extra** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
                 example_code: |
                     ```
                     choices = rock, paper, scissors
@@ -4351,7 +4351,7 @@ adventures:
 
                     ### Exercise 1
                     Can you make the baby shark code even shorter by using a `{for}` command? Finish the example code.
-                example_code: "```\nfamily = baby, mammy, daddy, grandma, grandpa\n_ _ _ _ \n  {print} _\n```\n"
+                example_code: "```\nfamily = baby, mammy, daddy, grandma, grandpa\n_ _ _ _\n  {print} _\n```\n"
                 story_text_2: |
                     ### Exercise 2
                     Print the song Five little monkeys jumping on the bed. Look up the text if you don't remember.
@@ -4818,7 +4818,7 @@ adventures:
                     {turn} angle
                     ```
             8:
-                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
+                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon.\nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
                 example_code: |
                     ```
                     angle = 90
