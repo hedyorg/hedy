@@ -53,7 +53,7 @@ export class IndexTabs {
       if (this._currentLevel == Number(level))
         this.switchToTab(tabName, Number(level), );
       else
-        location.href = `/tryit/${level}#${tabName}`
+        location.href = `/hedy/${level}#${tabName}`
     });
 
     // Determine initial tab
