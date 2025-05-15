@@ -133,8 +133,8 @@ adventures:
                 story_text: "På dette niveau kan du bruge `{for}`-kommandoen i din historie. På den måde kan du nemt programmere børnebogen 'Brun bjørn, brun bjørn, hvad ser du?'\n\n### Øvelse\n\nKig på <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> historien</a>, hvis du ikke kender den, og sørg for, at den bliver printet som i bogen.\n"
                 example_code: "```\ndyr  = _ , _ , _ \n{print} 'Brune bjørn, brune bjørn'\n{print} 'Hvad kan du se?'\n```\n"
             15:
-                story_text: "Ved at bruge `{while}`-løkken kan du gøre dine historier mere spændende. For eksempel kan du bruge `{while} game == 'on'`, så du kan spille, indtil spillet er slut.\nEller du kan bruge `{while} sword == 'lost'`, så spilleren ikke kan fortsætte spillet, før de har fundet noget.\n\n### Øvelse\nEksempelkoden viser dig, hvordan man bruger `{while}`-løkken i en historie. Nu skal du **finde på dit eget scenarie**, hvor spilleren skal finde noget, før de kan fortsætte.\n"
-                example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
+                story_text: "Ved at bruge `{while}`-løkken kan du gøre dine historier mere spændende. For eksempel kan du bruge `{while} game == 'on'`, så du kan spille, indtil spillet er slut.  \nEller du kan bruge `{while} sword == 'lost'`, så spilleren ikke kan fortsætte spillet, før de har fundet noget.\n\n### Øvelse  \nEksempelkoden viser dig, hvordan man bruger `{while}`-løkken i en historie. Nu skal du **finde på dit eget scenarie**, hvor spilleren skal finde noget, før de kan fortsætte.\n"
+                example_code: "```\nnøgler = 'mistet'\n{print} 'Du står i din have, og du har mistet dine nøgler.'\n{print} 'Hvor vil du lede efter dem?'\n{print} 'Du kan vælge: træ, blomsterbed, sten, postkasse'\n{while} nøgler == 'mistet'\n    lokation = {ask} 'Hvor vil du lede?'\n    {if} lokation == 'blomsterbed'\n        {print} 'Her er de!'\n        nøgler = 'fundet'\n    {else}\n        {print} 'Nej, de er ikke ved ' lokation\n{print} 'Nu kan du gå ind i huset!'\n```\n"
             13:
                 example_code: "```\n{print} 'Vores helt går gennem skoven'\n{print} 'Stien deler sig i to retninger'\npath = {ask} 'Hvilken sti skal hun vælge?'\nweapon = {ask} 'Hvilket våben trækker hun?'\n{if} path {is} 'venstre' {and} weapon {is} 'sværd'\n    _\n```\n"
                 story_text: "Ved at bruge `{and}` og `{or}` kommandoerne kan du gøre dine historier mere spændende. Du kan stille to spørgsmål og reagere på kombinationen af svarene.\n\n### Øvelse 1\nSe på eksempelkoden og gør den færdig. Tilføj derefter mindst 2 ekstra `{if}`-koder med `{and}` eller `{or}`.\n\n### Øvelse 2\nFind en historie fra et tidligere niveau, og tilføj én `{and}` eller `{or}`.\n"
@@ -194,22 +194,38 @@ adventures:
                 example_code: |
             10:
                 story_text: |
+                    På dette niveau lærer vi en ny kommando der hedder `{for}`. Med `{for}` kan du lave en liste og bruge alle elementerne.
+                    `{for}` skaber en blok, ligesom `{repeat}` og `{if}` så alle linjer i blokken skal starte med mellemrum (indrykning).
                 example_code: |
             12:
                 story_text: |
                 example_code: |
             13:
-                story_text: ''
+                story_text: "Vi skal nu lære `{and}` og `{or}`! Hvis du vil tjekke to udsagn, behøver du ikke bruge to {if} kommandoer men kan blot bruge `{and}` og `{or}`. Hvis du bruger `{and}`, skal begge udsagn, til højre og venstre for `{and}` være sande. Vi kan også bruge `{or}`. Så behøver kun et enkelt udsagn være sandt.\n"
                 example_code: |
             14:
                 story_text: |
                 example_code: |
             15:
                 story_text: |
+                    Nu skal vi lære et nyt loop, et `{while}` loop! Vi fortsætter loop'et så længe udsagnet er sandt.
+                    Så glem ikke at ændre værdien inde i loop'et.
+
+                    I eksemplet, fortsætter vi indtil der er blevet givet det rigtige svar.
+                    Hvis det rigtige svar ikke bliver givet, slutter loop'et aldrig!
                 example_code: |
             16:
-                story_text: |
-                example_code: |
+                story_text: |-
+                    Vi skal lave lister på som i Python, med firkantede parenteser rundt om! Vi beholder også anførselstegn rund om hvert element som vi har lært på et tidlige niveau.
+                    Du kan også bruge firkantede parenteser til at udpege et sted i en liste.
+                example_code: |-
+                    ```
+                    venner = ['Ahmed', 'Bente', 'Claus']
+                    lykke_tal = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} 'Lykketallet til ' venner[i]
+                        {print} 'er ' lykke_tal[i]
+                    ```
             17:
                 story_text: |
                     Nu skal vi ændre indrykning en lille smule. Hver gang vi har brug for indrykning, skal vi bruge `:` på linjen før indrykningen.
@@ -345,10 +361,10 @@ adventures:
                     På dette niveau kan du lave et endnu bedre opvaske skema.
                 example_code: |
                     ```
-                    days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-                    names = mom, dad, Emma, Sophie
-                    {for} day {in} days
-                        {print} names {at} {random} ' does the dishes on ' day
+                    dage = mandag, tirsdag, onsdag, torsdag, fredag, lørdag, søndag
+                    navne = mor, far, Emma, Sophie
+                    {for} dag {in} dage
+                        {print} navne {at} {random} ' tager opvasken på ' dag
                     ```
     functions:
         name: funktioner
