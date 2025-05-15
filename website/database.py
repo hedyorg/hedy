@@ -757,7 +757,7 @@ class Database:
             if not teacher_only and auth.is_second_teacher(user):
                 # the session of the user might still say the user is a second_teacher of classes but these classes
                 # could have been deleted in the meantime. So we have to filter the non-existent classes.
-                second_teacher_classes = [self.classes.get({"id": class_id}) for class_id in user["second_teacher_in"]]
+                second_teacher_classes = [self.classes.get({"id": cls_id}) for cls_id in user["second_teacher_in"]]
                 classes.extend([cls.copy() for cls in second_teacher_classes if cls])
 
         if students_to_list:

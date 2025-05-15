@@ -16,4 +16,3 @@ def test_second_teacher_of_deleted_class(client: Client, given: Given):
     # THEN the second teacher can access the /for-teachers page
     client.post_json('/auth/login', second_teacher)
     client.get('/for-teachers')
-
