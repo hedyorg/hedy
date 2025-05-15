@@ -27,6 +27,16 @@ adventures:
                     Use at least one `{ask}` and one `{echo}` command.
                     You can make it about any topic you like.
                     If you can't think of a topic, use one of our choices: going to the movies, a sports match or a day at the zoo.
+                answer_code: |
+                    ```
+                    {print} Hello kids! Today we're going to the zoo!
+                    {ask} Which animal are we going to see first?
+                    {echo} Let's head to the
+                    {print} Since it is very hot, let's go get some ice cream!
+                    {ask} Which flavor do you want?
+                    {echo} Good choice! I will also pick the flavor
+                    ```
+
             2:
                 story_text: |
                     In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
@@ -52,6 +62,21 @@ adventures:
                     Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
 
                     **Extra** Add a `{sleep}` command to your code to build up tension in your story.
+                answer_code: |
+                    ```
+                    {print} Hello kids! Today we're going to the zoo!  
+                    {sleep} 3  
+                    animal {is} {ask} Which animal are we going to see first?  
+                    {sleep} 1  
+                    {print} Let's head to the animal  
+                    {sleep}  
+                    {print} Since it is very hot, let's go get some ice cream!  
+                    {sleep}  
+                    flavor {is} {ask} Which flavor do you want?  
+                    {sleep} 2  
+                    {print} Good choice! I will also pick flavor  
+
+                    ```
             3:
                 story_text: |
                     In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
@@ -84,6 +109,19 @@ adventures:
                     bag {is} water, flashlight, brick
                     dump {is} {ask} Which item should he dump?
                     {remove} dump {from} bag
+                    ```
+                answer_code: |
+                    ```
+                    animals {is} lion, zebra, flamingo
+                    {print} Hello kids! Today we're going to the zoo!
+                    favorite_animal {is} {ask} Which animal do you wanna go to today?
+                    {add} favorite_animal {to} animals
+                    {sleep} 2
+                    {print} Let's head to the animals {at} {random}
+                    {sleep}
+                    least_favorite_animal {is} {ask} Which animal do you not want to see?
+                    {remove} least_favorite_animal {from} animals
+                    {print} Let's go to the animals {at} {random} now!
                     ```
             4:
                 story_text: |
@@ -120,6 +158,8 @@ adventures:
                     ```
                 answer_note: |
                     {sleep} should go before {clear} otherwise the screen will be empty right away.
+                answer_note2: |
+                    Own answer
             5:
                 story_text: |
                     In this level you can program different endings, which will make your story even more fun.
@@ -145,6 +185,18 @@ adventures:
                     {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
                     {else} {print} 'The monster eats ' name
                     ```
+                answer_code: |
+                    ```
+                    name {is} {ask} 'Who is the hero?'
+                    {print} 'Oh no the plane is crashing, who is gonna save us?'
+                    {print} "Look who is flying through the air, it's " name
+                    end {is} {ask} 'Will you save the plane or destroy it?'
+                    if end {is} save {print} name "landed the plane, he saved us!"
+                    else {print} "Oh no! " name " is destroying the plane, help!"
+                    ```
+                answer_note2: |
+                    Own answer
+
             7:
                 story_text: |
                     In a story, someone says words several times. For example, when someone calls for help or sings a song.
@@ -158,6 +210,11 @@ adventures:
                     {print} 'The prince kept calling for help'
                     {repeat} 5 {times} {print} 'Help!'
                     {print} 'Why is nobody helping me?'
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'All the kids wanted to go to the zoo and kept shouting that!'  
+                    {repeat} 3 {times} {print} "Let's go to the zoo!"                  
                     ```
             8:
                 story_text: |
@@ -181,6 +238,38 @@ adventures:
                         {print} 'Oh no! Richard is too slow...'
                         {print} _
                     ```
+                answer_code: |
+                    ```
+                    {print} 'OH NO! The T-rex is closing in!'  
+                    end = {ask} 'Do you want a happy or a sad ending?'  
+                    {if} end {is} happy  
+                        {print} 'Just in time Richard jumps back into the time machine!'  
+                        {print} 'He teleports to his home and is safe now!'  
+                    {else}  
+                        {print} 'Oh no! Richard is too slow...'  
+                        {print} 'The T-rex eats him!'  
+                
+                    ```
+                answer_code2: |
+                    ```
+                        dinosaur {is} {ask} 'Is a T-rex or a velociraptor chasing Richard?'
+                        {if} dinosaur {is} T-rex
+                            {print} 'OH NO! The T-rex is closing in!'
+                        {else}
+                            {print} 'OH NO! The velociraptor is closing in!'
+                        end {is} {ask} 'Do you want a happy or a sad ending?'
+                        {if} end {is} happy
+                            {print} 'Just in time Richard jumps back into the time machine!'
+                            {print} 'He teleports to his home and is safe now!'
+                        {else}
+                            {print} 'Oh no! Richard is too slow...'
+                            {print} 'The T-rex eats him!'
+                    ```
+                answer_note2: |
+                    Extra
+                answer_note3: |
+                    Own answer
+
             9:
                 story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. \nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
                 example_code: |
