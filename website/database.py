@@ -739,7 +739,8 @@ class Database:
 
             # if current user is a second teacher, we show the related classes.
             if not teacher_only and auth.is_second_teacher(user):
-                classes.extend([self.classes.get({"id": class_id}) for class_id in user["second_teacher_in"]])
+                second_teacher_classes = [self.classes.get({"id": class_id}) for class_id in user["second_teacher_in"]]
+                classes.extend([cls for cls in second_teacher_classes if cls])
         # If we're using the in-memory database, we need to make a shallow copy
         # of the classes before changing the `students` key from a set to list,
         # otherwise the field will remain a list later and that will break the
@@ -754,8 +755,10 @@ class Database:
 
             # if current user is a second teacher, we show the related classes.
             if not teacher_only and auth.is_second_teacher(user):
-                classes.extend([self.classes.get({"id": class_id}).copy() for class_id in user["second_teacher_in"]])
-                # classes.extend(CLASSES.query.filter(id__in=user["second_teacher_in"]).all())
+                # the session of the user might still say the user is a second_teacher of classes but these classes
+                # could have been deleted in the meantime. So we have to filter the non-existent classes.
+                second_teacher_classes = [self.classes.get({"id": class_id}) for class_id in user["second_teacher_in"]]
+                classes.extend([cls.copy() for cls in second_teacher_classes if cls])
 
         if students_to_list:
             for Class in classes:
@@ -1015,6 +1018,11 @@ class Database:
     def delete_class(self, Class):
         for student_id in Class.get("students", []):
             Database.remove_student_from_class(self, Class["id"], student_id)
+
+        for second_teacher in Class.get("second_teachers", []):
+            second_teacher_user = self.user_by_username(second_teacher["username"])
+            st_classes = list(filter(lambda cid: cid != Class["id"], second_teacher_user.get("second_teacher_in", [])))
+            self.update_user(second_teacher["username"], {"second_teacher_in": st_classes})
 
         self.customizations.del_many({"id": Class["id"]})
         self.invitations.del_many({"class_id": Class["id"]})

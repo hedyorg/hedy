@@ -18,20 +18,22 @@ class Client:
 
     def get(self, *args, check=True, **kwargs):
         response = self.client.get(*args, **kwargs)
-        if check:
-            assert response.status_code == 200
+        check_status_code(check, response)
         return response
 
     def post(self, *args, check=True, **kwargs):
         response = self.client.post(*args, **kwargs)
-        if check:
-            assert response.status_code == 200
+        check_status_code(check, response)
         return response
 
     def post_json(self, endpoint, data, check=True):
         response = self.client.post('/auth/login', data=json.dumps(data), content_type='application/json')
-        if check:
-            assert response.status_code == 200
+        check_status_code(check, response)
+        return response
+
+    def delete(self, *args, check=True, **kwargs):
+        response = self.client.delete(*args, **kwargs)
+        check_status_code(check, response)
         return response
 
 
@@ -43,3 +45,8 @@ def app():
 @pytest.fixture()
 def client(app) -> Client:
     return Client(app.test_client())
+
+
+def check_status_code(check, response):
+    if check:
+        assert 200 <= response.status_code < 300
