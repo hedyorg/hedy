@@ -36,7 +36,7 @@ from utils import timems, times
 import utils
 from config import config
 
-from . import dynamo, auth
+from . import dynamo
 
 from .dynamo import DictOf, OptionalOf, ListOf, SetOf, RecordOf, EitherOf
 
@@ -672,7 +672,7 @@ class Database:
             self.remove_user_class_invite(username, invite["class_id"])
 
         # Delete classes owned by the user
-        for Class in self.get_teacher_classes(username, False):
+        for Class in self.get_teacher_classes(username):
             self.delete_class(Class)
 
         # Delete possible adventures owned by the user
@@ -726,46 +726,22 @@ class Database:
         """Return the classes with given id."""
         return self.classes.get({"id": id})
 
-    def get_teacher_classes(self, username, students_to_list=False, teacher_only=False):
+    def get_teacher_classes(self, username, add_classes_as_second_teacher=False):
         """Return all the classes for a teacher.
 
-        This includes classes they own and classes where they are a second teacher.
+        This includes the classes they own and, optionally, the classes where they serve as a second teacher.
         """
-        classes = None
-        # FIXME: This should be a parameter, not be called here!!
-        user = auth.current_user()
-        if isinstance(self.storage, dynamo.AwsDynamoStorage):
-            classes = list(self.classes.get_many({"teacher": username}, reverse=True))
+        classes = list(self.classes.get_many({"teacher": username}, reverse=True))
 
-            # if current user is a second teacher, we show the related classes.
-            if not teacher_only and auth.is_second_teacher(user):
-                second_teacher_classes = [self.classes.get({"id": class_id}) for class_id in user["second_teacher_in"]]
-                classes.extend([cls for cls in second_teacher_classes if cls])
-        # If we're using the in-memory database, we need to make a shallow copy
-        # of the classes before changing the `students` key from a set to list,
-        # otherwise the field will remain a list later and that will break the
-        # set methods.
-        #
-        # FIXME: I don't understand what the above comment is saying, but I'm
-        # skeptical that it's accurate.
-        else:
-            classes = []
-            for Class in self.classes.get_many({"teacher": username}, reverse=True):
-                classes.append(Class.copy())
+        # if requested, add the classes in which the user is a second teacher
+        if add_classes_as_second_teacher:
+            user = self.user_by_username(username)
+            second_teacher_classes = [self.classes.get({"id": cls}) for cls in user.get("second_teacher_in", [])]
+            classes.extend([cls for cls in second_teacher_classes if cls])
 
-            # if current user is a second teacher, we show the related classes.
-            if not teacher_only and auth.is_second_teacher(user):
-                # the session of the user might still say the user is a second_teacher of classes but these classes
-                # could have been deleted in the meantime. So we have to filter the non-existent classes.
-                second_teacher_classes = [self.classes.get({"id": cls_id}) for cls_id in user["second_teacher_in"]]
-                classes.extend([cls.copy() for cls in second_teacher_classes if cls])
+        for Class in classes:
+            Class['students'] = list(Class.get('students', []))
 
-        if students_to_list:
-            for Class in classes:
-                if "students" not in Class:
-                    Class["students"] = []
-                else:
-                    Class["students"] = list(Class["students"])
         return classes
 
     def get_teacher_students(self, username):
@@ -1083,7 +1059,7 @@ class Database:
             class_customizations = self.get_class_customizations(student_classes[0]["id"])
             return class_customizations or {}
         elif class_to_preview:
-            for Class in self.get_teacher_classes(user):
+            for Class in self.get_teacher_classes(user, True):
                 if class_to_preview == Class["id"]:
                     class_customizations = self.get_class_customizations(class_to_preview)
                     return class_customizations or {}
