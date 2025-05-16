@@ -1,11 +1,11 @@
+import hedy
 import textwrap
 
-import hedy
 from tests.Tester import HedyTester
 
 
-class TestsLevel10(HedyTester):
-    level = 10
+class TestsLevel9(HedyTester):
+    level = 9
     '''
     Tests should be ordered as follows:
      * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
@@ -20,181 +20,398 @@ class TestsLevel10(HedyTester):
     '''
 
     #
-    # for list tests
+    # if nesting
     #
-    def test_for_list(self):
+    def test_if_nested_in_if(self):
         code = textwrap.dedent("""\
-        dieren is hond, kat, papegaai
-        for dier in dieren
-            print dier""")
+        n is 1
+        m is 2
+        if n is 1
+            if m is 2
+                print 'great!'""")
 
         expected = textwrap.dedent("""\
-        dieren = Value([Value('hond'), Value('kat'), Value('papegaai')])
-        for dier in dieren.data:
-          print(f'{dier}')
-          time.sleep(0.1)""")
+        n = Value('1', num_sys='Latin')
+        m = Value('2', num_sys='Latin')
+        if localize(n.data) == localize('1'):
+          if localize(m.data) == localize('2'):
+            print(f'great!')""")
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            expected_commands=['is', 'for', 'print'],
-            max_level=11
-        )
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_blanks(self):
+    def test_ifs_nested_in_if_else(self):
         code = textwrap.dedent("""\
-        players = Ann, John, Jesse
-        choices = 1, 2, 3, 4, 5, 6
-        _
-            print player ' throws ' choices at random
-            sleep
-        """)
-
-        self.multi_level_tester(
-            max_level=16,
-            code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
-            exception=hedy.exceptions.CodePlaceholdersPresentException
-        )
-
-    def test_for_list_hindi(self):
-        code = textwrap.dedent("""\
-        क is hond, kat, papegaai
-        for काउंटर in क
-            print काउंटर""")
+        n is 1
+        m is 2
+        if n is 1
+            if m is 2
+                print 'great!'
+        else
+            if m is 3
+                print 'awesome'""")
 
         expected = textwrap.dedent("""\
-        क = Value([Value('hond'), Value('kat'), Value('papegaai')])
-        for काउंटर in क.data:
-          print(f'{काउंटर}')
-          time.sleep(0.1)""")
+        n = Value('1', num_sys='Latin')
+        m = Value('2', num_sys='Latin')
+        if localize(n.data) == localize('1'):
+          if localize(m.data) == localize('2'):
+            print(f'great!')
+        else:
+          if localize(m.data) == localize('3'):
+            print(f'awesome')""")
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            expected_commands=['is', 'for', 'print'],
-            max_level=11
-        )
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_for_list_diff_num_sys(self):
+    def test_if_else_nested_in_if(self):
         code = textwrap.dedent("""\
-        digits is 1, 𑁨, ३, ૪, ੫
-        for d in digits
-            print d""")
+        n is 1
+        m is 2
+        if n is 1
+            if m is 2
+                print 'great!'
+            else
+                print 'awesome'""")
 
-        list_transpiled = ("Value([""Value('1', num_sys='Latin'), Value('2', num_sys='Brahmi'), "
-                           "Value('3', num_sys='Devanagari'), Value('4', num_sys='Gujarati'), "
-                           "Value('5', num_sys='Gurmukhi')])")
+        expected = textwrap.dedent("""\
+        n = Value('1', num_sys='Latin')
+        m = Value('2', num_sys='Latin')
+        if localize(n.data) == localize('1'):
+          if localize(m.data) == localize('2'):
+            print(f'great!')
+          else:
+            print(f'awesome')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_else_statements_nested_in_if_else(self):
+        code = textwrap.dedent("""\
+         n is 1
+         m is 2
+         if n is 1
+             if m is 2
+                 print 'great!'
+             else
+                 print 'nice!'
+         else
+             if m is 3
+                 print 'awesome!'
+             else
+                 print 'amazing!'""")
+
+        expected = textwrap.dedent("""\
+         n = Value('1', num_sys='Latin')
+         m = Value('2', num_sys='Latin')
+         if localize(n.data) == localize('1'):
+           if localize(m.data) == localize('2'):
+             print(f'great!')
+           else:
+             print(f'nice!')
+         else:
+           if localize(m.data) == localize('3'):
+             print(f'awesome!')
+           else:
+             print(f'amazing!')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_else_no_indentation(self):
+        code = textwrap.dedent("""\
+        antwoord is ask Hoeveel is 10 keer tien?
+        if antwoord is 100
+        print 'goed zo'
+        else
+        print 'bah slecht'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code,
+                                exception=hedy.exceptions.NoIndentationException)
+
+    def test_if_no_indent_after_pressed_and_else_gives_error(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+        print 'no indent!'
+        else
+        print 'no indent again!'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
+    def test_if_no_indentation(self):
+        code = textwrap.dedent("""\
+        antwoord is ask Hoeveel is 10 keer tien?
+        if antwoord is 100
+        print 'goed zo'""")
+
+        # gives the right exception for all levels even though it misses brackets
+        # because the indent check happens before parsing
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
+    #
+    # repeat nesting
+    #
+    def test_repeat_nested_in_repeat(self):
+        code = textwrap.dedent("""\
+        repeat 2 times
+            repeat 3 times
+                print 'hello'""")
+
         expected = textwrap.dedent(f"""\
-        digits = {list_transpiled}
-        for d in digits.data:
-          print(f'{{d}}')
-          time.sleep(0.1)""")
+           for __i in range({self.int_transpiled(2)}):
+             for __i in range({self.int_transpiled(3)}):
+               print(f'hello')
+               time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_repeat_nested_in_repeat_with_comments(self):
+        code = textwrap.dedent("""\
+        repeat 2 times # test
+            repeat 2 times # test
+                # test
+                sleep # test
+                # test""")
+
+        expected = textwrap.dedent(f"""\
+           for __i in range({self.int_transpiled(2)}):
+             for __i in range({self.int_transpiled(2)}):
+               time.sleep(1)
+               time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_repeat_nested_multi_commands(self):
+        code = textwrap.dedent("""\
+            repeat 3 times
+                print 3
+                repeat 5 times
+                    print 5
+                print 1""")
+
+        expected = textwrap.dedent(f"""\
+            for __i in range({self.int_transpiled(3)}):
+              print(f'3')
+              for __i in range({self.int_transpiled(5)}):
+                print(f'5')
+                time.sleep(0.1)
+              print(f'1')
+              time.sleep(0.1)""")
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            output="1\n𑁨\n३\n૪\n੫",
-            max_level=11
+            max_level=11,
+            skip_faulty=False
         )
 
-    def test_for_list_multiline_body(self):
+    def test_repeat_no_indentation(self):
         code = textwrap.dedent("""\
-        familie is baby, mommy, daddy, grandpa, grandma
-        for shark in familie
-            print shark ' shark tudutudutudu'
-            print shark ' shark tudutudutudu'
-            print shark ' shark tudutudutudu'
-            print shark ' shark'""")
+          repeat 3 times
+          print 'hooray!'""")
 
-        expected = textwrap.dedent("""\
-        familie = Value([Value('baby'), Value('mommy'), Value('daddy'), Value('grandpa'), Value('grandma')])
-        for shark in familie.data:
-          print(f'{shark} shark tudutudutudu')
-          print(f'{shark} shark tudutudutudu')
-          print(f'{shark} shark tudutudutudu')
-          print(f'{shark} shark')
+        self.multi_level_tester(code=code, exception=hedy.exceptions.NoIndentationException)
+
+    def test_repeat_repair_too_few_indents(self):
+        code = textwrap.dedent("""\
+        repeat 5 times
+             print('repair')
+          print('me')""")
+
+        fixed_code = textwrap.dedent("""\
+        repeat 5 times
+             print('repair')
+             print('me')""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.NoIndentationException,
+            extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
+        )
+
+    def test_repeat_repair_too_many_indents(self):
+        code = textwrap.dedent("""\
+        repeat 5 times
+          print('repair')
+             print('me')""")
+        fixed_code = textwrap.dedent("""\
+        repeat 5 times
+          print('repair')
+          print('me')""")
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.IndentationException,
+            extra_check_function=(lambda x: x.exception.fixed_code == fixed_code)
+        )
+
+    #
+    # if and repeat nesting
+    #
+    def test_if_nested_in_repeat(self):
+        code = textwrap.dedent("""\
+            p is 0
+            repeat 7 times
+                ingredient is ask 'wat wil je kopen?'
+                if ingredient is appel
+                    p is p + 1
+            print 'Dat is in totaal ' p ' euro.'""")
+
+        expected = self.dedent(
+            "p = Value('0', num_sys='Latin')",
+            f"for __i in range({self.int_transpiled(7)}):",
+            (self.input_transpiled('ingredient', 'wat wil je kopen?'), '  '),
+            f"""\
+              if localize(ingredient.data) == localize('appel'):
+                p = Value({self.number_transpiled('p')} + {self.number_transpiled(1)}, num_sys=get_num_sys(p))
+              time.sleep(0.1)
+            print(f'Dat is in totaal {{p}} euro.')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_if_nested_in_repeat_with_comment(self):
+        code = textwrap.dedent("""\
+            p is 0
+            repeat 7 times # comment
+                ingredient is ask 'wat wil je kopen?'
+                if ingredient is appel # another comment
+                    p is p + 1
+            print 'Dat is in totaal ' p ' euro.'""")
+
+        expected = self.dedent(
+            "p = Value('0', num_sys='Latin')",
+            f"for __i in range({self.int_transpiled(7)}):",
+            (self.input_transpiled('ingredient', f'wat wil je kopen?'), '  '),
+            f"""\
+              if localize(ingredient.data) == localize('appel'):
+                p = Value({self.number_transpiled('p')} + {self.number_transpiled(1)}, num_sys=get_num_sys(p))
+              time.sleep(0.1)
+            print(f'Dat is in totaal {{p}} euro.')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_repeat_nested_in_if(self):
+        code = textwrap.dedent("""\
+        kleur is groen
+        if kleur is groen
+            repeat 3 times
+                print 'mooi'""")
+
+        expected = textwrap.dedent(f"""\
+        kleur = Value('groen')
+        if localize(kleur.data) == localize('groen'):
+          for __i in range({self.int_transpiled(3)}):
+            print(f'mooi')
+            time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=11,
+            expected_commands=['is', 'if', 'repeat', 'print'])
+
+    def test_if_else_nested_in_repeat(self):
+        code = textwrap.dedent("""\
+        repeat 5 times
+            if antwoord2 is 10
+                print 'Goedzo'
+            else
+                print 'lalala'""")
+
+        expected = textwrap.dedent(f"""\
+        for __i in range({self.int_transpiled(5)}):
+          if localize('antwoord2') == localize('10'):
+            print(f'Goedzo')
+          else:
+            print(f'lalala')
           time.sleep(0.1)""")
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_for_list_with_string_gives_type_error(self):
+    def test_repeat_without_body_nested_in_if_gives_error(self):
         code = textwrap.dedent("""\
-        dieren is 'text'
-        for dier in dieren
-            print dier""")
+        if 1 is 1
+          repeat 5 times""")
 
         self.multi_level_tester(
             code=code,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.MissingInnerCommandException,
             max_level=16,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
+            skip_faulty=False)
 
-    def test_for_list_with_int_gives_type_error(self):
+    def test_repeat_without_body_nested_in_else_gives_error(self):
         code = textwrap.dedent("""\
-        dieren is 5
-        for dier in dieren
-            print dier""")
-
-        self.multi_level_tester(
-            code=code,
-            max_level=16,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
-
-    #
-    # if pressed tests
-    #
-
-    def test_if_pressed_with_list_and_for(self):
-        code = textwrap.dedent("""\
-        lijstje is kip, haan, kuiken
-        if x is pressed
-            for dier in lijstje
-                print dier
+        if 1 is 1
+          print 'test'
         else
-            print 'onbekend dier'""")
+          repeat 5 times""")
 
-        expected = self.dedent("""\
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.MissingInnerCommandException,
+            max_level=16,
+            skip_faulty=False)
+
+    #
+    # if pressed repeat tests
+    #
+
+    def test_if_pressed_repeat(self):
+        code = textwrap.dedent("""\
+        if x is pressed
+            repeat 5 times
+                print 'doe het 5 keer!'
+        else
+            print '1 keertje'""")
+
+        expected = self.dedent(f"""\
         global_scope_ = dict()
-        global_scope_["lijstje"] = Value([Value('kip'), Value('haan'), Value('kuiken')])
-        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping = {{"else": "if_pressed_default_else"}}
         if_pressed_mapping['x'] = 'if_pressed_x_'
         def if_pressed_x_():
-          for dier in (global_scope_.get("lijstje") or lijstje).data:
-            print(f'{global_scope_.get("dier") or dier}')
+          for __i in range({self.int_transpiled(5)}):
+            print(f'doe het 5 keer!')
             time.sleep(0.1)
         if_pressed_mapping['else'] = 'if_pressed_else_'
         def if_pressed_else_():
-          print(f'onbekend dier')
+          print(f'1 keertje')
         extensions.if_pressed(if_pressed_mapping)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_unexpected_indent(self):
+        code = textwrap.dedent("""\
+         print('repair')
+            print('me')""")
 
         self.multi_level_tester(
             code=code,
-            expected=expected,
-            max_level=11)
+            exception=hedy.exceptions.IndentationException
+        )
 
-    def test_if_pressed_in_for_list(self):
+    def test_source_map(self):
         code = textwrap.dedent("""\
-        buttons is a, s, d
-        for button in buttons
-            if button is pressed
-                print 'correct! ' button
+        repeat 3 times
+            food = ask 'What do you want?'
+            if food is pizza
+                print 'nice!'
             else
-                print 'not a match'""")
+                print 'pizza is better'""")
 
-        expected = self.dedent("""\
-        global_scope_ = dict()
-        global_scope_["buttons"] = Value([Value('a'), Value('s'), Value('d')])
-        for button in (global_scope_.get("buttons") or buttons).data:
-          if_pressed_mapping = {"else": "if_pressed_default_else"}
-          if_pressed_mapping[(global_scope_.get("button") or button).data] = 'if_pressed_button_'
-          def if_pressed_button_():
-            print(f'correct! {global_scope_.get("button") or button}')
-          if_pressed_mapping['else'] = 'if_pressed_else_'
-          def if_pressed_else_():
-            print(f'not a match')
-          extensions.if_pressed(if_pressed_mapping)
-          time.sleep(0.1)""")
+        expected_source_map = {
+            '2/5-2/9': '2/1-2/5',
+            '2/5-2/35': '2/1-4/29',
+            '3/8-3/21': '9/-270-1/40',
+            '4/9-4/22': '6/1-6/16',
+            '3/5-4/31': '5/1-6/16',
+            '6/9-6/32': '8/1-8/26',
+            '4/31-6/41': '9/-270-1/34',
+            '3/5-6/41': '5/1-8/22',
+            '1/1-6/50': '1/1-9/18',
+            '1/1-6/51': '1/1-9/18'
+        }
 
-        self.multi_level_tester(code=code, expected=expected, max_level=11)
+        self.source_map_tester(
+            code=code,
+            expected_source_map=expected_source_map,
+        )
