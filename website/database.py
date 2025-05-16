@@ -657,23 +657,28 @@ class Database:
 
     def forget_user(self, username):
         """Forget the given user."""
-        classes = self.users.get({"username": username}).get("classes") or []
-        self.users.delete({"username": username})
         # The recover password token may exist, so we delete it
         self.tokens.delete({"id": username})
         self.programs.del_many({"username": username})
+
         # Remove user from classes of which they are a student
+        classes = self.users.get({"username": username}).get("classes") or []
         for class_id in classes:
             self.remove_student_from_class(class_id, username)
+
+        # Delete classes owned by the user and remove the user from the second teachers list of other classes
+        for Class in self.get_teacher_classes(username, True):
+            if Class['teacher'] == username:
+                self.delete_class(Class)
+            else:
+                self._remove_second_teacher_from_class_table_only(Class, username)
+
+        self.users.delete({"username": username})
 
         # Remove existing invitations.
         invitations = self.get_user_invitations(username)
         for invite in invitations:
             self.remove_user_class_invite(username, invite["class_id"])
-
-        # Delete classes owned by the user
-        for Class in self.get_teacher_classes(username):
-            self.delete_class(Class)
 
         # Delete possible adventures owned by the user
         for adv in self.get_teacher_adventures(username):
@@ -986,10 +991,12 @@ class Database:
         self.update_user(second_teacher["username"], {"second_teacher_in": st_classes})
 
         if not only_user:
-            # remove this second teacher from the class' table
-            second_teachers = list(filter(lambda st: st["username"] !=
-                                          second_teacher["username"], Class.get("second_teachers", [])))
-            self.update_class_data(Class["id"], {"second_teachers": second_teachers})
+            self._remove_second_teacher_from_class_table_only(Class, second_teacher['username'])
+
+    def _remove_second_teacher_from_class_table_only(self, Class, second_teacher_username):
+        # remove this second teacher from the class' table
+        second_teachers = [st for st in Class.get("second_teachers", []) if st['username'] != second_teacher_username]
+        self.update_class_data(Class["id"], {"second_teachers": second_teachers})
 
     def delete_class(self, Class):
         for student_id in Class.get("students", []):
