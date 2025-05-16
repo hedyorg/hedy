@@ -420,7 +420,7 @@ class TestsLevel5(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     def test_if_equality_trailing_space_linebreak_print_else(self):
-        #TODO: dit mag dus niet meer, moet naar een foutmelding gaan!
+        # TODO: dit mag dus niet meer, moet naar een foutmelding gaan!
         value = 'trailing space  '
         code = textwrap.dedent(f"""\
         naam is James
