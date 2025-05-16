@@ -1601,7 +1601,8 @@ class ForTeachersModule(WebsiteModule):
             customizations = self.db.get_class_customizations(Class.get("id"))
             for level in adventure.get("levels", []):
                 # TODO: change name to id in sorted_adventures (probably it's only teachers' adventures!)
-                adventures_for_level = customizations.get("sorted_adventures", {}).get(level, []) if customizations else []
+                adventures_for_level = customizations.get(
+                    "sorted_adventures", {}).get(level, []) if customizations else []
                 if any(adv for adv in adventures_for_level if adv.get("name") == adventure.get("id")):
                     adventure_used_in_classes.append({
                         "name": Class.get("name"),
