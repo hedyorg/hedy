@@ -1974,20 +1974,20 @@ export function open_index_pane(e: Event) {
   if (pane.classList.contains('sliding-content-open')) {
     pane.classList.remove('sliding-content-open');
     pane.classList.add('sliding-content-closed');
-    document.getElementById(`level_${level}_arrow`)?.classList.toggle('rotate-90');
+    document.getElementById(`level_${level}_arrow`)?.classList.toggle('rotate-180');
   } else {
     document.querySelectorAll('.sliding-content-open').forEach((el) => {
       el.classList.remove('sliding-content-open');
       el.classList.add('sliding-content-closed');
       const level = el.id.split('_')[1];
       const arrow = document.getElementById(`level_${level}_arrow`);
-      arrow?.classList.toggle('rotate-90');
+      arrow?.classList.toggle('rotate-180');
     });
     // Open the selected pane
     pane.classList.remove('sliding-content-closed');
     pane.classList.add('sliding-content-open');
     const arrow = document.getElementById(`level_${level}_arrow`);
-    arrow?.classList.toggle('rotate-90');
+    arrow?.classList.toggle('rotate-180');
     // sleep for 400 miliseconds to settle animations
     setTimeout(() => {
       pane.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
