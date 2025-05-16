@@ -2214,11 +2214,11 @@ adventures:
                     # Create a function that draws the hangman
                     {define} draw_hangman {with} step:
                         {if} step == 1:
-                            {color} white
+                            {color} '{white}'
                             {forward} -100
                             {turn} 90
                             {forward} -50
-                            {color} black
+                            {color} '{black}'
                             {forward} 100
                             {forward} -50
 
@@ -3520,11 +3520,11 @@ adventures:
                     ```
                 story_text_2: |-
                     Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
-                    You simply type the name of your list with `[random]` behind it!
+                    You simply type the name of your list with `[{random}]` behind it!
                 example_code_2: |-
                     ```
                     fruit = ['apple', 'banana', 'cherry']
-                    {print} fruit[random]
+                    {print} fruit[{random}]
                     ```
     repeat_command:
         name: '{repeat}'
@@ -4945,8 +4945,8 @@ adventures:
                     **Extra** Up for a real challenge? Make sure that the colors of these figures are selected randomly, so that each time you run your programs they'll look differently!
 
                     ```
-                    colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
-                    color _
+                    colors {is} {red}, {orange}, {yellow}, {green}, {blue}, {purple}, {pink}, {brown}, {gray}, {black}
+                    {color} _
                     ```
             5:
                 story_text: |
@@ -5024,7 +5024,7 @@ adventures:
                 example_code: |
                     Hint for the nested squares:
                     ```
-                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
+                    colors = {red}, {blue}, {orange}, {yellow}, {pink}, {purple}, {green}, {brown}, {black}
                     distance = 120
                     {repeat} 5 {times}
                     _
@@ -5033,9 +5033,9 @@ adventures:
                     ```
                     country = {ask} 'which country would you like to see the flag of?'
                     {if} country {is} 'the Netherlands'
-                        color_1 = red
-                        color_2 = white
-                        color_3 = blue
+                        color_1 = {red}
+                        color_2 = {white}
+                        color_3 = {blue}
                     ```
             10:
                 story_text: |
@@ -5056,7 +5056,7 @@ adventures:
 
                     Hint Traffic Lights:
                     ```
-                    colors = red, yellow, green
+                    colors = {red}, {yellow}, {green}
                     {for} chosen_color {in} colors
                         {color} _
                         {repeat} _
@@ -5068,12 +5068,12 @@ adventures:
 
                     Start by moving to the left side of the screen with an invisible white line. Then hang up the Christmas lights!
                     ```
-                    {color} white
+                    {color} {white}
                     {turn} -90
                     {forward} 300
                     {turn} 90
 
-                    colors = red, blue, yellow, purple, green, orange, pink
+                    colors = {red}, {blue}, {yellow}, {purple}, {green}, {orange}, {pink}
                     {for} chosen_color {in} colors
                     _
                     ```
@@ -5116,13 +5116,13 @@ adventures:
                     {define} draw_a_square
                     _
 
-                    {color} white
+                    {color} {white}
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     {for} i {in} {range} 1 {to} 5
-                        {color} gray
+                        {color} {gray}
                         {forward} 100
                         shape = {ask} 'What kind of shape would you like next on the bracelet?'
                         chosen_color = {ask} 'In which color?'
@@ -5167,7 +5167,7 @@ adventures:
                         random_number = _
                         random_color = _
                         {call} draw_snowflake {with} random_number, random_color
-                        {color} white
+                        {color} {white}
                         {turn} random_number * 5
                         {forward} 80
                     ```
