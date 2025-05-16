@@ -136,47 +136,40 @@
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-3" id="code_related_buttons">
-    <div id="button_row" class="flex flex-col gap-2 lg:flex-row mb-4">
-      <div class="flex flex-row gap-2">
-        <div id="run_button_container" class="gap-2 flex flex-row flex-initial">
-            <button id="runit" data-cy="runit" class="green-btn-new" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
-              <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
-              {{_('run_code_button')}}
-            </button>
-            <button id="stopit" data-cy="stopit" class="red-btn-new" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
-            <div class="flex-1 md:hidden"></div>
-            <button id="debug_button" class="blue-btn-new" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
-                <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
-                {{_('debug')}}
-             </button>
-        </div>
-        <div id="debug_container" class="flex-initial gap-2 inline-flex items-center">
-            <button id="debug_restart" class="green-btn-new hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
-              <span class="fa fa-repeat ltr:mr-1 rtl:ml-1"></span>
-              {{_('restart')}}
-            </button>
-            <button id="debug_stop" class="red-btn-new hidden" onclick="hedyApp.stopDebug()">
-              <span class="fa fa-stop ltr:mr-1 rtl:ml-1"></span>
-              {{_('stop')}}
-            </button>
-            <button id="debug_continue" class="btn-shape-new bg-blue-400 hover:bg-blue-300 text-white hidden" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'>
-              <span class="fa fa-forward ltr:mr-1 rtl:ml-1 {% if g.dir == "rtl" %}rotate-180{% endif %}"></span>
-              {{_('continue')}}
+    <div id="button_row" class="flex flex-row gap-2 mb-4">
+      <div id="run_button_container" class="gap-2 flex flex-row flex-initial">
+          <button id="runit" data-cy="runit" class="green-btn-new" title="{{_('run_code_button')}}" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
+            <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
+            <span>{{_('run_code_button')}}</span>
           </button>
-        </div>
+          <button id="stopit" data-cy="stopit" class="red-btn-new" title="{{_('stop_code_button')}}" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
+          <div class="flex-1 md:hidden"></div>
+          <button id="debug_button" class="blue-btn-new" title="{{_('debug')}}" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+              <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
+              {{_('debug')}}
+           </button>
       </div>
-      <div class="hidden lg:block lg:flex-1"></div>
-      <div class="flex flex-row gap-2">
-        {% if username and current_user_is_in_class %}
-          <button class="blue-btn-new w-fit" id="hand_in" _="on click remove .hidden from #share_modal">
-            <i class="fa-solid fa-paper-plane ltr:mr-1 rtl:ml-1"></i>
-            {{_('hand_in')}}
+      <div id="debug_container" class="flex-initial gap-2 inline-flex items-center">
+          <button id="debug_restart" class="green-btn-new hidden" title="{{_('restart')}}" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+            <span class="fa fa-repeat ltr:mr-1 rtl:ml-1"></span>
+            <span class="inline-flex lg:hidden xl:inline-flex" >{{_('restart')}}</span>
           </button>
-        {% endif %}
-        <div id="save_files_container" class="hidden">
-          <button id="saveFiles" class="green-btn-new" onclick="hedyApp.saveMachineFiles();"><i class="fa-solid fa-floppy-disk m-2"></i>{{ _('save_turtle_drawing') }}</button>
-        </div>
+          <button id="debug_stop" class="red-btn-new hidden" title="{{_('stop')}}" onclick="hedyApp.stopDebug()">
+            <span class="fa fa-stop ltr:mr-1 rtl:ml-1"></span>
+            <span class="inline-flex	 lg:hidden xl:inline-flex">{{_('stop')}}</span>
+          </button>
+          <button id="debug_continue" class="btn-shape-new bg-blue-400 hover:bg-blue-300 text-white hidden" title="{{_('continue')}}" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "continue")'>
+            <span class="fa fa-forward ltr:mr-1 rtl:ml-1 {% if g.dir == "rtl" %}rotate-180{% endif %}"></span>
+            <span class="inline-flex	 lg:hidden xl:inline-flex">{{_('continue')}}</span>
+        </button>
       </div>
+      <div class="flex-1"></div>
+      {% if username and current_user_is_in_class %}
+        <button class="blue-btn-new w-fit" id="hand_in" title="{{_('hand_in')}}" _="on click remove .hidden from #share_modal">
+          <i class="fa-solid fa-paper-plane ltr:mr-1 rtl:ml-1"></i>
+          {{_('hand_in')}}
+        </button>
+      {% endif %}
     </div>
     {% if not raw %}
     <div id="not_logged_in_warning" data-cy="not_logged_in_warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
@@ -200,17 +193,24 @@
     </div>
   </div>
   <div class="order-3 lg:order-4" id="code_related_buttons">
-    <div class="flex flex-col md:flex-row mb-4 gap-4">
-      <button id="hide_editor" class="blue-btn-new rounded items-center hidden lg:inline-block" onclick="hedyApp.hide_editor();">
+    <div class="flex flex-row mb-4 gap-4">
+      <button id="hide_editor" class="blue-btn-new rounded items-center hidden lg:inline-block" onclick="hedyApp.hide_editor();" title="{{ _('expand_output') }}">
         <i class="fa-solid fa-caret-left"></i>
-        <span>Expand output</span>
+        <span class="hidden xl:inline-flex"> {{ _('expand_output') }} </span>
       </button>
-      <button id="show_editor" class="blue-btn-new rounded items-center hidden lg:inline-block" onclick="hedyApp.show_editor();" style="display: none;">
+      <button id="show_editor" class="blue-btn-new rounded items-center hidden lg:inline-block" onclick="hedyApp.show_editor();" style="display: none;" title="{{ _('show_editor') }}">
         <i class="fa-solid fa-caret-right"></i>
-        <span>Show editor</span>
+        <span class="hidden xl:inline-flex"> {{ _('show_editor') }}</span>
       </button>
       <div class="hidden lg:block lg:flex-1"></div>
-      <div id="speak_container" class="hidden flex flex-row items-center w-max overflow-visible">
+      <div id="save_files_container" class="hidden">
+          <button id="saveFiles" class="green-btn-new" onclick="hedyApp.saveMachineFiles();" title="{{ _('save_turtle_drawing') }}">
+            <i class="fa-solid fa-floppy-disk m-2"></i>
+            <span class="inline-flex	 lg:hidden 2xl:inline-flex">{{ _('save_turtle_drawing') }}</span>
+          </button>
+        </div>
+      <div class="block flex-1"></div>
+        <div id="speak_container" class="hidden flex flex-row items-center w-max overflow-visible">
         <label for="speak_dropdown" id="speak_aloud_label" class="ltr:mr-2 rtl:ml-2">{{_('read_code_label')}}:</label>
         <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
           <option value="">🤫</option>
