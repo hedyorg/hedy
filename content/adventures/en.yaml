@@ -168,7 +168,7 @@ adventures:
                         {print} _
                     ```
             9:
-                story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. \nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
+                story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands.\nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
                 example_code: |
                     ```
                     {print} 'Robin is walking downtown'
@@ -186,12 +186,12 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In this level you can use the {for} command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.
+                    In this level you can use the `{for}` command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.
 
                     ### Exercise
 
                     Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
-                example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+                example_code: "```\nanimals = _ , _ , _\n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
             13:
                 story_text: |
                     By using the `{and}` and `{or}` commands, you can make your stories more versatile. You can ask two questions and respond to the combination of answers.
@@ -517,15 +517,15 @@ adventures:
                             your_points_3 = _
                             your_total = _
                         {else}:
-                           {if} your_total _
+                            {if} your_total _
                                 _
                             {else}:
                                 _
                         {print} _
 
                     # Extra card for the dealer
-                    {if} dealer_total < 17
-                    _
+                    {if} dealer_total < 17:
+                        _
                     ```
     blackjack_4:
         name: Blackjack 4
@@ -924,7 +924,7 @@ adventures:
                 story_text: |-
                     ### Exercise
                     Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jacques)' by using the {repeat} command of course!
+                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jacques)' by using the `{repeat}` command of course!
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
@@ -1353,8 +1353,8 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
-                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.
+                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an `{if}` or `{repeat}` command. But you can't yet combine the two...
+                    Good news! In this level you will be allowed to put an `{if}` inside an `{if}`, or inside a `{repeat}` command. Putting a block of code inside another block of code is called nesting.
                 example_code: |
                     ```
                     answer = {ask} 'Are you ready to learn something new?'
@@ -2151,7 +2151,7 @@ adventures:
 
                     ***Paste your code*** Copy your code from the previous adventure and paste the code in the programming field.
 
-                    ***The game*** This game continues playing until Player 2 is game over. Fill in the while command accordingly. Now, Player 2 is allowed to guess a letter, so ask Player 2 to guess a letter.
+                    ***The game*** This game continues playing until Player 2 is game over. Fill in the `{while}` command accordingly. Now, Player 2 is allowed to guess a letter, so ask Player 2 to guess a letter.
                     We need to check if their answer is correct, so check if their `guess` is (somewhere) in the (list) `answer`. Then we let the computer figure out which of the letter(s) is the guess. We have already programmed that part for you.
                     Next, we want to compliment the player for finding a correct letter and we want to print the list `guessed_letters`, so the player can see their progress.
 
@@ -2172,7 +2172,7 @@ adventures:
                         guess = _
                         {if} _
                             {for} i {in} {range} 1 {to} amount_letters:
-                                if answer[i] == guess:
+                                {if} answer[i] == guess:
                                     guessed_letters[i] = guess
                             {print} _
                             {if} guessed_letters == _:
@@ -2375,7 +2375,7 @@ adventures:
                     {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
                     ```
             9:
-                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
+                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones?\nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2398,7 +2398,7 @@ adventures:
                         {print} 'Great! You survived!'
                     ```
             11:
-                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n**Extra** If you make a wrong choice, a monster is still shown! How could you change that?\n"
+                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are.\n\n### Exercise 1\nFinish the program so the player knows which room they are in.\n\n### Exercise 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices (like: fight or flight)\n2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`.\n\n**Extra** If you make a wrong choice, a monster is still shown! How could you change that?\n"
                 example_code: |
                     ```
                     {print} 'Escape from the Haunted House!'
@@ -2478,7 +2478,7 @@ adventures:
                     In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {ask}.
                     You might have wondered why you would use functions, because the functions in the example were only one line of code.
                     Now we will show you what a bigger function looks like and we will use multiple arguments now as well. You'll see how much better it is to use a function once the function gets bigger.
-                    Here is an example of a function with arguments combined with {ask} commands.
+                    Here is an example of a function with arguments combined with `{ask}` commands.
                 example_code: |
                     ```
                     {define} welcome_message {with} title, last_name, country, room_number
@@ -2541,11 +2541,11 @@ adventures:
                 story_text: |
                     ## If... Else...
                     You have learned to repeat a block of lines of code after a `{repeat}` command.
-                    Now you can also use indentation to make blocks after a {if} or {else} command.
+                    Now you can also use indentation to make blocks after a `{if}` or `{else}` command.
                     Check out the example code.
 
                     ### Exercise
-                    Add an {else} command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
+                    Add an `{else}` command to the example code. Make a block of line using indentation. You do this by starting each line with 4 spaces.
                 example_code: |
                     ```
                     name = {ask} 'What is your name?'
@@ -2911,7 +2911,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    From this level on you can - among other things - use a {repeat} command inside a {repeat} command.
+                    From this level on you can - among other things - use a `{repeat}` command inside a `{repeat}` command.
                     That makes songs like 'Happy birthday' even shorter!
 
                     ### Exercise
@@ -3034,7 +3034,7 @@ adventures:
             15:
                 story_text: |
                     **Warning** This adventure can become extremely annoying!
-                    We can also use the {while} command to repeat a song forever.
+                    We can also use the `{while}` command to repeat a song forever.
 
                     ### Exercise
                     Finish the never-ending song.
@@ -3068,12 +3068,12 @@ adventures:
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
+                    {for} i {in} {range} 1 {to} 3
                         animal = animals[i]
                         sound = sounds[i]
-                        print 'Old MacDonald had a farm'
-                        call line_1
-                        print 'E I E I O!'
+                        {print} 'Old MacDonald had a farm'
+                        {call} line_1
+                        {print} 'E I E I O!'
                         _
                     ```
             17:
@@ -3545,7 +3545,7 @@ adventures:
             8:
                 story_text: |
                     ### Repeat commands and indentation
-                    In this level you can repeat multiple lines of code with only 1 repeat command.
+                    In this level you can repeat multiple lines of code with only 1 `{repeat}` command.
                     You do this by making a block of lines that you want to repeat.
                     The lines in this block will need **indentation** .
                     That means putting four spaces at the beginning of each line. You will also have to indent when you just want to create a block of one line.
@@ -3785,7 +3785,7 @@ adventures:
                     {print} 'Enjoy your meal!'
                     ```
             9:
-                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the customer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
+                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code.\nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the customer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
                 example_code: |
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy!'
@@ -3814,7 +3814,7 @@ adventures:
 
                     ### Exercise 1
                     Finish the code with an `{ask}` on the blanks such that the customer is asked what they want to eat for each course.
-                example_code: "```\ncourses = appetizer, main course, dessert\n{for} course {in} courses\n    {print} 'What is your order for ' course '?'\n    _ \n    _\n```\n"
+                example_code: "```\ncourses = appetizer, main course, dessert\n{for} course {in} courses\n    {print} 'What is your order for ' course '?'\n    _\n    _\n```\n"
                 story_text_2: |
                     ### Exercise
                     Of course, you could also order for multiple people!
@@ -3993,7 +3993,7 @@ adventures:
 
                     Fill in the correct code on the blanks to see if it is a draw.
             9:
-                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**Extra** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
+                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands.\n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**Extra** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
                 example_code: |
                     ```
                     choices = rock, paper, scissors
@@ -4263,13 +4263,13 @@ adventures:
         levels:
             2:
                 story_text: |
-                    Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
+                    Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the `{sleep}` command, the program pauses for that amount of seconds.
 
                     ### Exercise
-                    Practise this new command by making a code of your own in which you use the {sleep} command at least 3 times. With each {sleep} command the pausing time should differ.
+                    Practise this new command by making a code of your own in which you use the `{sleep}` command at least 3 times. With each `{sleep}` command the pausing time should differ.
                 example_code: |
                     ```
-                    {print} My favorite colour is...
+                    {print} My favorite color is...
                     {sleep} 2
                     {print} green!
                     ```
@@ -4351,7 +4351,7 @@ adventures:
 
                     ### Exercise 1
                     Can you make the baby shark code even shorter by using a `{for}` command? Finish the example code.
-                example_code: "```\nfamily = baby, mammy, daddy, grandma, grandpa\n_ _ _ _ \n  {print} _\n```\n"
+                example_code: "```\nfamily = baby, mammy, daddy, grandma, grandpa\n_ _ _ _\n  {print} _\n```\n"
                 story_text_2: |
                     ### Exercise 2
                     Print the song Five little monkeys jumping on the bed. Look up the text if you don't remember.
@@ -4396,7 +4396,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with {ask} commands as well?
+                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with `{ask}` commands as well?
                     In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
                 example_code: |
                     ```
@@ -4555,7 +4555,7 @@ adventures:
             17:
                 story_text: |
                     In the previous level you've learned how to make a tic-tac-toe game. The game works, but is quite annoying as it keeps asking you if you've won yet.
-                    Now that we have the {elif} command, we can let the game decide if someone has won and it can stop asking us!
+                    Now that we have the `{elif}` command, we can let the game decide if someone has won and it can stop asking us!
 
                     ### Exercise
                     ***Paste your code*** Paste your code from the previous level here and make it level 17 proof. In this level you've learned to use a colon everytime you create a block of code. Please add the colons in the correct spots.
@@ -4601,7 +4601,7 @@ adventures:
                     The variable `game_over` tells us if the game is over, and should be 'no' at the start of the game.
                     The variable `sign` tells us if it's the turn of player x or player o. Set the variable to 'x'.
 
-                    ***The game*** First use a {while} command, to make sure the game keeps on playing the variable while game_over is set to no.
+                    ***The game*** First use a `{while}` command, to make sure the game keeps on playing the variable while game_over is set to no.
                     During the game, we first ask the player which spot they choose. Then we change the field with the number they chose into their sign.
                     Then we print the field again and we ask the player if they've won yet. Lastly we want to switch whose turn it is, so if the sign is 'x' it should be 'o' and the other way around.
 
@@ -4642,7 +4642,7 @@ adventures:
 
                     ***Fix the mistake*** To fix the mistake we replace the line that says `field[choice] = sign`. This turns any spot that the player has chosen into their sign.
                     Go to the header that says 'Use this to fix the mistake' and finish the code. We first want to check if the chosen spot is still empty, so `if field[choice] = '.'`. If that is the case, you are allowed to take it.
-                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a {sleep} command, so the players can actually read the text before it gets cleared again.
+                    Then we make an else command and print 'Sorry, this spot is already taken' if the spot is not empty. Lastly, we add a `{sleep}` command, so the players can actually read the text before it gets cleared again.
                     Now copy this piece of code and replace the line `field[choice] = sign` with this new piece of code.
 
                     ***Play your game!*** Now the game should work properly! Good job!
@@ -4818,7 +4818,7 @@ adventures:
                     {turn} angle
                     ```
             8:
-                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
+                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon.\nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
                 example_code: |
                     ```
                     angle = 90
@@ -4909,7 +4909,7 @@ adventures:
                     <div class="w-full flex flex-row gap-2">
                         Rectangle <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
                         Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
-                        Stairs<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
+                        Stairs <img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
             2:
                 story_text: |

@@ -100,7 +100,7 @@ adventures:
                     {print} _ Der Name der Hauptfigur lautet _ Name
                     _
                     _
-                    {print} Name _ läuft nun in den Wald hinein _
+                    {print} Name  _ läuft nun in den Wald hinein _
                     {print} Name _ fürchtet sich ein wenig _
                     Tiere {is} 🦔, 🐿, 🦉, 🦇
                     {print} _ Da hört er plötzlich ein _ Tiere {at} {random}
@@ -197,7 +197,7 @@ adventures:
                     ```
             10:
                 story_text: |
-                    In diesem Level kannst du den {for} Befehl für deine Geschichte nutzen. Damit kannst du zum Beispiel ganz einfach das Kinderbuch "Brauner Bär, wen siehst denn Du?" programmieren.
+                    In diesem Level kannst du den `{for}` Befehl für deine Geschichte nutzen. Damit kannst du zum Beispiel ganz einfach das Kinderbuch "Brauner Bär, wen siehst denn Du?" programmieren.
 
                     ### Übung
 
@@ -369,7 +369,7 @@ adventures:
                     ### Übung
                     In der vorherigen Übung hast du die Definition von Variablen mit dem `{is}` Befehl geübt.
                     Du hast mindestens 3 Variablen festgelegt und sie mit dem `{print}` Befehl verwendet.
-                    Jetzt wollen wir die Variablen nicht einfach festlegen, sondern flexibel machen -  so wie in unserem Beispiel.
+                    Jetzt wollen wir die Variablen nicht einfach festlegen, sondern flexibel machen - so wie in unserem Beispiel.
 
                     Kopiere den Code der vorherigen Übung hierher und mache sie mit `{ask}` Befehlen interaktiv.
                 example_code_2: |
@@ -378,7 +378,7 @@ adventures:
                     {print} Mein Lieblingstier ist lieblingstier
                     ```
             18:
-                story_text: Die letzte Anpassung, die wir machen müssen, um Python Code zu erhalten, ist  `{ask}` in `{input}` zu ändern.
+                story_text: Die letzte Anpassung, die wir machen müssen, um Python Code zu erhalten, ist `{ask}` in `{input}` zu ändern.
                 example_code: |
                     ```
                     {print}('Mein Name ist Hedy!')
@@ -432,7 +432,7 @@ adventures:
 
                     # Teste deine Funktion
                     {print} 'Deine Karte ist ein(e) ' _
-                    {print} 'Sie zählt  ' _ ' Punkte'.
+                    {print} 'Sie zählt ' _ ' Punkte'.
                     ```
         default_save_name: Blackjack
         name: Blackjack
@@ -489,7 +489,7 @@ adventures:
 
                     # Zeige den Spielstand
                     {print} 'Du hast ' _ ' und ' _ ' gezogen. Das sind ' _ ' Punkte'
-                    {print} 'Der Geber hat ' _ ' und ' _ ' gezogen. Das sind  ' _ ' Punkte'
+                    {print} 'Der Geber hat ' _ ' und ' _ ' gezogen. Das sind ' _ ' Punkte'
                     ```
         name: Blackjack 2
         default_save_name: Blackjack_2
@@ -915,7 +915,7 @@ adventures:
                 story_text: |-
                     ### Übung
                     Überraschung! Dies Programm sieht mehr wie eine Ausgabe aus als wie Code. Dennoch - wir wollen nun nicht einfach ein `{print}` in jeder Zeile hinzufügen.
-                    Korrigiere das Programm, so dass 'Bruder Jakob' ausgegeben wird, indem du den {repeat} Befehl verwendest (natürlich)!
+                    Korrigiere das Programm, so dass 'Bruder Jakob' ausgegeben wird, indem du den `{repeat}` Befehl verwendest (natürlich)!
                 example_code: |
                     **Warnung! Dieser Code muss gedebugged werden!**
                     ```
@@ -1018,7 +1018,7 @@ adventures:
                     {else}
                         tage = 28
 
-                    {print} 'Hier sind alle Tage im  ' mont
+                    {print} 'Hier sind alle Tage im ' mont
                     {for} i {in} {range} 1 {to} tage
                         {print} monat i
                     ```
@@ -1130,7 +1130,7 @@ adventures:
                     gewählter_ort = 'orte {at} {random}'
                     gewähltes_geräusch = geräusche {at} {random}
                     gewähltes_versteck = verstecke {random}
-                    gewählte_quelle = geräuschquellen  {at} {random}
+                    gewählte_quelle = geräuschquellen {at} {random}
 
                     {print} gewählter_name ' war ' gewähltes_verb ' ' gewählter_ort
                     {print} 'als sie plötzlich ein Geräusch wie ' geräusche {at} {random}
@@ -1219,7 +1219,7 @@ adventures:
                         geräusch = geräusche[i]
                         {print} 'Old MacDonald hat ne Farm'
                         {print} 'I A I A O!'
-                        {print} 'und auf der Farm da gibt's  ' tier
+                        {print} 'und auf der Farm da gibt's ' tier
                         {print} 'I A I A O!'
                         {print} 'mit nem ' geräusch geräusch ' hier'
                         {print} 'und nem ' geräusch geräusch ' da'
@@ -1340,9 +1340,8 @@ adventures:
                     ```
             9:
                 story_text: |
-                    In diesem Level kannst du nicht nur mehrere Zeilen mit `{if}` und `{repeat}` verwenden, du kannst sie auch kombinieren!
-                    Im Beispiel siehst du einen `{if}` Befehl innerhalb eines `{repeat}` Befehls. Es ist auch anders herum erlaubt. Und ebenso ist `{if}` innerhalb eines anderen `{if}` Befehls erlaubt, genau wie `{repeat}` in einem anderen `{repeat}` Befehl.
-                    Versuch es mal!
+                    Toll gemacht! Du hast einen weiteren neuen Level erreicht! Im vorherigen Level hast du gelernt, mehrere Zeile Code in einem `{if}` oder `{repeat}` Befehl zu benutzen. Aber du kannst noch nicht beide kombinieren...
+                    Gute Nachrichten! In diesem Level darfst du ein `{if}` in einem `{if}`, oder in einem `{repeat}` verwenden. Das Verwenden eines Code-Blocks innerhalb eines anderen Code-Block wird Verschachtelung genannt.
                 example_code: |
                     ```
                     Antwort = {ask} 'Bist du bereit, etwas Neues zu lernen?'
@@ -2020,7 +2019,7 @@ adventures:
                             {if} vermutung _ zahl
                                 {print} 'Kleiner!'
                             {if} vermutung _ zahl
-                                {print}  'Größer!'
+                                {print} 'Größer!'
                             {if} vermutung _ zahl
                                 {print} 'Gewonnen!'
                                 spiel = 'vorbei'
@@ -2256,7 +2255,7 @@ adventures:
                             richtige_tür = türen {at} {random}
                             monster = monsters {at} {random}
                             gewählte_tür = {ask} 'Welche Tür nimmst du?'
-                            {if}richtige_tür == gewählte_tür
+                            {if} richtige_tür == gewählte_tür
                                 {print} 'Du hast die richtige Tür gewählt'
                             {else}
                                 {print} 'Du siehst...' monster
@@ -2273,10 +2272,10 @@ adventures:
         levels:
             13:
                 story_text: |
-                    Im letzten Abenteuer hast du gelernt, ein Argument in einer Funktion zu verwenden. Du hast auch gelernt, wie du das mit einem {ask} kombinieren kannst.
+                    Im letzten Abenteuer hast du gelernt, ein Argument in einer Funktion zu verwenden. Du hast auch gelernt, wie du das mit einem `{ask}` kombinieren kannst.
                     Du hast dich vielleicht gefragt, warum du eine Funktion verwenden solltest, weil die Funktionen im Beispiel nur eine Zeile lange sind.
                     Jetzt werden wir dir zeigen, wie größere Funktionen aussehen. Wir werden jetzt auch mehrere Argumente verwenden. Du wirst sehen, wie viel besser es ist, eine Funktion zu verwenden, wenn die Funktion größer wird.
-                    Hier ist ein Beispiel einer Funktion mit Argumenten, kombiniert mit dem {ask} Befehl.
+                    Hier ist ein Beispiel einer Funktion mit Argumenten, kombiniert mit dem `{ask}` Befehl.
         default_save_name: Hotel
         description: Hotel
     if_command:
@@ -2314,11 +2313,11 @@ adventures:
                 story_text: |
                     ## Falls... Sonst...
                     Du hast gelernt, einen Block von Programmzeilen nach einem `{repeat}` Befehl zu wiederholen.
-                    Jetzt kannst du auch Einrückung verwenden um Blöcke nach einem {if} oder {else} Befehl zu erzeugen.
+                    Jetzt kannst du auch Einrückung verwenden um Blöcke nach einem `{if}` oder `{else}` Befehl zu erzeugen.
                     Schau dir das Beispielprogramm an.
 
                     ### Übung
-                    Füge einen {else} Befehl zum Beispielprogramm hinzu. Erzeuge einen Block von Zeilen indem du Einrückungen verwendest. Starte dazu jede Zeile mit 4 Leerzeichen.
+                    Füge einen `{else}` Befehl zum Beispielprogramm hinzu. Erzeuge einen Block von Zeilen indem du Einrückungen verwendest. Starte dazu jede Zeile mit 4 Leerzeichen.
                 example_code: |
                     ```
                     name = {ask} 'Wie heißt Du?'
@@ -2497,10 +2496,10 @@ adventures:
                 story_text: |-
                     In diesem Level lernst du, wie man den `{play}` Befehl benutzt um einen Ton zu spielen.
 
-                    Tippe `{play}` gefolgt von der Note, die du spielen möchtest. Die Skala geht C-D-E-F-G-A-B.
+                    Tippe `{play}` gefolgt von der Note, die du spielen möchtest. Die Tonleiter ist C-D-E-F-G-A-B.
                     Wie du sehen kannst, sind es 7 verschiedene Buchstaben, wir können aber viel mehr als 7 Töne spielen.
-                    Tippe eine Nummer zwischen 0 und 9 hinter den Buchstaben um die Skala auszuwählen, zum Beispiel kommt B4 nach C5.
-                    C0 ist die tiefste Note die du spielen kannst, B9 die höchste
+                    Tippe eine Nummer zwischen 0 und 9 hinter den Buchstaben um eine Tonhöhe auszuwählen, zum Beispiel kommt B4 nach C5.
+                    C0 ist die tiefste Note die du spielen kannst, B9 die höchste.
 
                     ### Übung
                     Probier den Beispielcode aus und spiele damit herum! Kannst du deine eigene Melodie erzeugen?
@@ -2526,11 +2525,11 @@ adventures:
                     ```
             4:
                 story_text: |
-                    Benutze den  `{clear}` Befehl, um eine Karaokemaschine zu bauen!
+                    Benutze den `{clear}` Befehl, um eine Karaokemaschine zu bauen!
 
                     ### Übung
-                    Vervollständige die Karaokeversion von  'Mary had a little lamb'.
-                    Dann schreibe eine Karaokeversion eines Lieds, das dir gefällt!
+                    Vervollständige die Karaoke Version von 'Mary had a little lamb'.
+                    Dann schreibe eine Karaoke Version eines Lieds, das dir gefällt!
             5:
                 story_text: |
                     Du kannst den `{play}` Befehl nicht nur zu verwenden, um ein ganzes Lied zu spielen. Manchmal willst du nur eine einzelne Note spielen.
@@ -2588,7 +2587,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Ab diesem Level kannst Du - unter anderem - den {repeat} Befehl in einem {repeat} Befehl verwenden.
+                    Ab diesem Level kannst Du - unter anderem - den `{repeat}` Befehl in einem `{repeat}` Befehl verwenden.
                     Damit wird z.B. 'Happy birthday' noch kürzer!
 
                     ### Übung
@@ -2687,7 +2686,7 @@ adventures:
             15:
                 story_text: |
                     **Achtung** Dieses Abenteuer kann sehr nervig werden!
-                    Wir können auch den {while} Befehl verwenden, um das Lied ewig zu wiederholen.
+                    Wir können auch den `{while}` Befehl verwenden, um das Lied ewig zu wiederholen.
 
                     ### Übung
                     Vervollständige das Lied-das-niemals-endet.
@@ -2720,7 +2719,7 @@ adventures:
                         {play} D
 
                     tiere = ['Schwein', 'Hund', 'Kuh']
-                    laute = ['quieck', 'wau', 'muh']
+                    laute = ['quiek', 'wau', 'muh']
                     {for} i {in} {range} 1 {to} 3
                         tier = tiere[i]
                         laut = laute[i]
@@ -2888,9 +2887,9 @@ adventures:
                     ```
                     {print} 'Das digitale Sparschwein'
                     Wunsch = {ask} 'Was würdest du dir gerne kaufen?'
-                    Preis = {ask} 'Wieviel kostet das?'
-                    Gespartes = {ask} 'Wieviel Geld hast du schon gespart?'
-                    Taschengeld = {ask} 'Wieviel Taschengeld bekommst du pro Woche?'
+                    Preis = {ask} 'Wie viel kostet das?'
+                    Gespartes = {ask} 'Wie viel Geld hast du schon gespart?'
+                    Taschengeld = {ask} 'Wie viel Taschengeld bekommst du pro Woche?'
                     zu_sparen = Preis - Gespartes
                     Wochen = zu_sparen / Taschengeld
                     {print} 'Du kannst dir ein ' _ ' in ' _ ' Wochen kaufen.'
@@ -2956,7 +2955,7 @@ adventures:
                     Benutze diesen Code, um etwas Schönes zu zeichnen.
             9:
                 story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n**Extra** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
-                example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _ \n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
+                example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _\n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         levels:
             1:
@@ -2973,7 +2972,7 @@ adventures:
                     In Hedy findest du Übungen in jedem Abenteuer. Eine Übung erlaubt dir, neue Befehle und Konzepte zu üben und Beispielprogrammen deinen eigenen Schwung zu geben.
                     In dieser Übung wirst du eine pinke leere Fläche sehen. Du musst die leere Fläche mit etwas befüllen, bevor du das Programm ausführen kannst.
 
-                    Füge den `{print}`  Befehl in die leere Fläche ein und dann noch fünf weitere Codezeilen. Jede Zeile muss mit dem `{print}` Befehl beginnen.
+                    Füge den `{print}` Befehl in die leere Fläche ein und dann noch fünf weitere Codezeilen. Jede Zeile muss mit dem `{print}` Befehl beginnen.
                     Viel Spaß!
                 example_code_2: |
                     ```
@@ -3118,7 +3117,7 @@ adventures:
                     #Jetzt paaren wir die Elemente aus beiden Listen indem wir die variable i verwenden.
                     glückszahl = [15, 18, 6]
                     {for} i {in} {range} 1 {to} 3
-                        {print} freunde[i] 's Glückszahl ist  ' glückszahl[i]
+                        {print} freunde[i] 's Glückszahl ist ' glückszahl[i]
                     ```
         name: '{random}'
     repeat_command:
@@ -3139,7 +3138,7 @@ adventures:
             8:
                 story_text: |
                     ### Wiederhole Befehle und Einrückung
-                    In diesem Level kannst du mehrere Zeilen Code wiederholte ausführen mit nur einem wiederhole Befehl.
+                    In diesem Level kannst du mehrere Zeilen Code wiederholte ausführen mit nur einem `{repeat}` Befehl.
                     Das kannst du machen, indem du einen Block mit den Zeilen machst, die du wiederholen willst.
                     Die Zeilen des Blocks brauchen **Einrückung**
                     Das bedeutet, dass du 4 Leerzeichen an den Anfang jeder Zeile setzt. Du musst auch einrücken, wenn du einen Block mit nur einer Zeile erzeugen willst.
@@ -3173,7 +3172,7 @@ adventures:
             7:
                 story_text: |
                     ## Wiederhole mit anderen Befehlen und mit Variablen
-                    Das hast den `{repeat}`Befehl zusammen mit dem `{print}` Befehl gebaut. Aber wusstest du, dass du auch andere Befehle mit `{repeat}`verwenden kannst?
+                    Das hast den `{repeat}` Befehl zusammen mit dem `{print}` Befehl verwendet. Aber wusstest du, dass du auch andere Befehle mit `{repeat}` verwenden kannst?
                     In diesem Beispielprogramm siehst du, dass `{repeat}` auch zusammen mit `{ask}`, `{if}` oder `{else}` verwendet werden kann.
                 example_code: |
                     ```
@@ -3199,7 +3198,7 @@ adventures:
                     Wenn du die letzte Zeile mit einer Einrückung beginnst, wird das Lied falsch.
 
                     ### Übung
-                    Jede Zeile im Beispielprogram startet mit einem Leerzeichen. Lösche die Leerzeichen und versuche herauszufinden, welche Zeilen einrückt werden müssen und welche nicht, um das Lied vom Muffin Mann zu schreiben.
+                    Jede Zeile im Beispielprogramm startet mit einem Leerzeichen. Lösche die Leerzeichen und versuche herauszufinden, welche Zeilen einrückt werden müssen und welche nicht, um das Lied vom Muffin Mann zu schreiben.
                 example_code: |
                     ```
                     _ {print} 'Kennst du denn den Muffin Mann?'
@@ -3484,7 +3483,7 @@ adventures:
                         preis = preis - 3
                     {if} getränk {is} 'Wasser' _ getränk {is} 'Saft'
                         {print} 'Das ist eine gesunde Wahl'
-                    {print} 'Das kostet dann ' preis '  Euro'
+                    {print} 'Das kostet dann ' preis ' Euro'
                     ```
             15:
                 example_code: |
@@ -3699,7 +3698,7 @@ adventures:
                         a = 'Geh zum Flughafen '
                     {else}
                         a = 'Geh zum Bahnhof '
-                    Passwort =  {ask} 'Wie lautet das Passwort?'
+                    Passwort = {ask} 'Wie lautet das Passwort?'
                     {if} Passwort {is} _
                         b = 'Morgen um 2 Uhr'
                     {else}
@@ -3722,7 +3721,7 @@ adventures:
                     {if} Name {is} 'Agent007' _ Passwort {is} 'STRENGGEHEIM'
                         {print} 'Gehe um 2 Uhr zum Flughafen'
                     {else}
-                        {print}  'Gehe um 10 Uhr zum Bahnhof'
+                        {print} 'Gehe um 10 Uhr zum Bahnhof'
                      ```
     simon:
         name: Simon sagt
@@ -3742,10 +3741,10 @@ adventures:
         levels:
             2:
                 story_text: |
-                    Ein weiterer neuer Befehl in diesem Level ist der `{sleep}` Befehl. Er pausiert dein Programm für eine Sekunde. Wenn du eine Zahl hinter den {sleep} Befehl schreibst, pausiert dein Programm für diese Anzahl an Sekunden.
+                    Ein weiterer neuer Befehl in diesem Level ist der `{sleep}` Befehl. Er pausiert dein Programm für eine Sekunde. Wenn du eine Zahl hinter den `{sleep}` Befehl schreibst, pausiert dein Programm für diese Anzahl an Sekunden.
 
                     ### Übung
-                    Übe den neuen Befehl, in dem du dir eigenen Code ausdenkst, der mindestens 3 mal den Befehl {sleep} verwendet. Mit jedem {sleep} Befehl soll die Pause eine andere Länge haben.
+                    Übe den neuen Befehl, in dem du dir eigenen Code ausdenkst, der mindestens 3 mal den Befehl `{sleep}` verwendet. Mit jedem `{sleep}` Befehl soll die Pause eine andere Länge haben.
                 example_code: |
                     ```
                     {print} Meine Lieblingsfarbe ist...
@@ -3864,7 +3863,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Im letzten Abenteuer hast du gelernt, wie du ein Argument in einer Funktion verwenden kannst. Aber wusstest du, dass du die Argumente auch mit dem {ask} Befehl kombinieren kannst?
+                    Im letzten Abenteuer hast du gelernt, wie du ein Argument in einer Funktion verwenden kannst. Aber wusstest du, dass du die Argumente auch mit dem `{ask}` Befehl kombinieren kannst?
                     In diesem Beispiel haben wir das 'My Bonnie' Programm verändert und interaktiv gemacht. Jetzt kannst du fragen, wo Bonnie ist.
             16:
                 story_text: |
@@ -3962,7 +3961,16 @@ adventures:
                     Das ist der Anfang einer kleinen Treppe. Kannst Du sie so zeichnen, dass sie 5 Stufen hat?
             2:
                 story_text: |
-                    In diesen Level kann du Variablen nutzen, um die Schildkröte interaktiv zu machen. Du kannst zum Beispiel die Spieler fragen, wie viele Schritte die Schildkröte machen soll.
+                    In Level 1 konnte sich die Schildkröte nur nach links oder rechts drehen. Das ist ein bisschen langweilig!
+                    In Level 2 kann sie ihre Nase in alle Richtungen strecken.
+
+                    Benutze 90 Grad für eine Vierteldrehung, 180 Grad für eine Halbdrehung und für eine komplette Drehung sind 360 Grad.
+
+                    ### Übung
+                    Dieser Code zeichnet den Buchstaben T. Kannst du den Code ändern damit ein B entsteht?
+
+                    **Extra** Ändere den Buchstaben in einen anderen Buchstaben, wie den ersten Buchstaben deines Namens.
+                    Du kannst auch mehrere Buchstaben zeichnen, indem du dazwischen die Farbe mit `{color}` `{white}` verwendest.
                 example_code: |
                     ```
                     {forward} 80
@@ -4015,8 +4023,8 @@ adventures:
                     {forward} 25
                     ```
                 story_text_2: |
-                    Du kannst auch die Farben der Linien mit dem `{color}`  Befehl ändern. Sieh dir das Beispiel an.
-                    Du kannst auch den `{color} {white}` Befehl benutzen, um "unsichtbare" Linien zu ziehen. Du kannst diese weissen Linien nutzen, um die Schildkröte irgendwo auf dem Bildschirm hin zu bewegen bevor du zu malen anfängst.
+                    Du kannst auch die Farben der Linien mit dem `{color}` Befehl ändern. Sieh dir das Beispiel an.
+                    Du kannst auch den `{color} {white}` Befehl benutzen, um "unsichtbare" Linien zu ziehen. Du kannst diese weißen Linien nutzen, um die Schildkröte irgendwo auf dem Bildschirm hin zu bewegen bevor du zu malen anfängst.
             5:
                 story_text: |
                     In Level 5 kannst Du mit dem Befehl `{if}` Entscheidungen treffen. Du kannst Dich zum Beispiel zwischen verschiedenen Formen entscheiden.
@@ -4163,7 +4171,7 @@ adventures:
                     <div class="w-full flex flex-row gap-2">
                         Rechteck <img src="https://github.com/hedyorg/hedy/assets/80678586/77aa99d5-cd8f-4969-b49d-e8fed34ac550" width="100">
                         Quadrat <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
-                        Stufen<img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
+                        Stufen <img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
             2:
                 story_text: |

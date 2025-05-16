@@ -1,6 +1,6 @@
 import { loginForTeacher, loginForStudent } from '../../tools/login/login.js'
 import { navigateToClass, removeCustomizations, selectLevel } from "../../tools/classes/class";
-import { goToHedyPage } from "../../tools/navigation/nav";
+import { goToHedyPage, clickAdventureIndexButton } from "../../tools/navigation/nav";
 
 const teachers = ["teacher1", "teacher4"];
 
@@ -10,20 +10,6 @@ teachers.forEach((teacher) => {
       loginForTeacher(teacher);
       navigateToClass();
       removeCustomizations();
-    });
-  
-    // TODO: add check if the quiz actually has a treshold now, either here or in quiz.cy.js
-    it('Is able to fill in the quiz score and click on go back button', () => {
-      cy.intercept('/for-teachers/customize-class/*').as('updateCustomizations'); 
-      // Fill in the quiz score
-      cy.getDataCy('quiz_input').clear().type("50").should("have.value", "50");
-      cy.wait('@updateCustomizations').should('have.nested.property', 'response.statusCode', 200);
-  
-      // Click the go back button
-      cy.getDataCy('back_to_class').click();
-      // We should be in the view class page
-      cy.url()
-        .should('include', Cypress.config('baseUrl') + Cypress.env('class_page'));
     });
 
     it('Is able to switch to level 2', () => {
@@ -139,6 +125,7 @@ teachers.forEach((teacher) => {
       // should be visible for a student
       loginForStudent();
       goToHedyPage();
+      clickAdventureIndexButton();
       cy.getDataCy('parrot').should('be.visible');
     });
 

@@ -47,6 +47,16 @@ class ExtraStory:
 
 @require_kwargs
 @dataclass
+class Solution:
+    code: str
+    text: Optional[str] = None
+
+    def __getitem__(self, key):
+        return getattr(self, key)
+
+
+@require_kwargs
+@dataclass
 class Program:
     id: str
     name: str
@@ -142,6 +152,7 @@ class Adventure:
     id: Optional[str] = ""
     author: Optional[str] = ""
     is_checked: Optional[bool] = False
+    solutions: Optional[List[Solution]] = field(default_factory=list)
 
     def __getitem__(self, key):
         return getattr(self, key)
@@ -152,6 +163,10 @@ class Adventure:
     @staticmethod
     def from_teacher_adventure_database_row(row):
         text, example_code = halve_adventure_content(row.get("formatted_content", row["content"]))
+        solution = None
+        if row.get("solution_example"):
+            solution_text, solution_code = halve_adventure_content(row.get("solution_example"))
+            solution = [Solution(text=solution_text, code=solution_code)]
         return Adventure(
             short_name=row['id'],
             name=row['name'],
@@ -160,4 +175,6 @@ class Adventure:
             text=text,
             example_code=example_code,
             is_teacher_adventure=True,
-            is_command_adventure=False)
+            is_command_adventure=False,
+            solutions=solution
+        )

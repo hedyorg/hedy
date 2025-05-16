@@ -40,7 +40,7 @@ from hedy_error import get_error_text
 from safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
-from hedy_content import (ADVENTURE_ORDER_PER_LEVEL, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
+from hedy_content import (adventures_order_per_level, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES, HOUR_OF_CODE_ADVENTURES)
 
 from logging_config import LOGGING_CONFIG
@@ -51,11 +51,11 @@ from website import (ab_proxying, admin, auth_pages, aws_helpers,
                      translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, is_students_teacher,
                           has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
-                          forget_current_user, hide_explore)
+                          forget_current_user)
 from website.log_fetcher import log_fetcher
-from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
+from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo, Solution
 from website.flask_hedy import g_db
-from website.newsletter import add_used_slides_to_subscription
+from website.newsletter import add_used_slides_to_subscription, get_subscription_status
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -206,10 +206,10 @@ def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
-def load_all_adventures_for_index(customizations, subset=None):
+def load_all_adventures_for_index(customizations, user_programs, subset=None):
     """
     Loads all the default adventures in a dictionary that will be used to populate
-    the index, therfore we only need the titles and short names of the adventures.
+    the index, therefore we only need the titles and short names of the adventures.
     """
 
     keyword_lang = g.keyword_lang
@@ -228,7 +228,7 @@ def load_all_adventures_for_index(customizations, subset=None):
                 'is_command_adventure': short_name in KEYWORDS_ADVENTURES
             })
     for level, adventures in all_adventures.items():
-        adventures_order = ADVENTURE_ORDER_PER_LEVEL.get(level, [])
+        adventures_order = adventures_order_per_level().get(level, [])
         index_map = {v: i for i, v in enumerate(adventures_order)}
         adventures.sort(key=lambda pair: index_map.get(
             pair['short_name'],
@@ -259,6 +259,18 @@ def load_all_adventures_for_index(customizations, subset=None):
                 })
             if not adventure['from_teacher'] and (adv := builtin_map[int(level)].get(adventure['name'])):
                 all_adventures[int(level)].append(adv)
+
+    for level, adventures in all_adventures.items():
+        for adventure in adventures:
+            if adventure['short_name'] not in user_programs[level]:
+                continue
+            name = adventure['short_name']
+            student_adventure_id = f"{current_user()['username']}-{name}-{level}"
+            student_adventure = g_db().student_adventure_by_id(student_adventure_id)
+            if user_programs[level][name].submitted:
+                adventure['state'] = 'submitted'
+            if student_adventure and student_adventure['ticked']:
+                adventure['state'] = 'ticked'
 
     return all_adventures
 
@@ -297,12 +309,21 @@ def load_adventures_for_level(level, subset=None):
             if adventure_level.get(f'story_text_{i}', '')
         ]
 
+        solutions = [
+            Solution(
+                code=adventure_level.get(f'answer_code{suffix}'),
+                text=adventure_level.get(f'answer_note{suffix}'),
+            )
+            for suffix in ['' if i == 1 else f'_{i}' for i in range(1, 10)]
+            if adventure_level.get(f'answer_code{suffix}')
+        ]
+
         default_save_name = adventure.get('default_save_name')
         if not default_save_name or default_save_name == 'intro':
             default_save_name = adventure['name']
 
         # only add adventures that have been added to the adventure list of this level
-        if short_name in ADVENTURE_ORDER_PER_LEVEL.get(level, []):
+        if short_name in adventures_order_per_level().get(level, []):
             current_adventure = Adventure(
                 short_name=short_name,
                 name=adventure['name'],
@@ -312,12 +333,14 @@ def load_adventures_for_level(level, subset=None):
                 extra_stories=extra_stories,
                 is_teacher_adventure=False,
                 is_command_adventure=short_name in KEYWORDS_ADVENTURES,
-                save_name=f'{default_save_name} {level}')
+                save_name=f'{default_save_name} {level}',
+                solutions=solutions,
+            )
 
             all_adventures.append(current_adventure)
 
     # Sort the adventures based on the default ordering
-    adventures_order = ADVENTURE_ORDER_PER_LEVEL.get(level, [])
+    adventures_order = adventures_order_per_level().get(level, [])
     index_map = {v: i for i, v in enumerate(adventures_order)}
     all_adventures.sort(key=lambda pair: index_map.get(
         pair['short_name'],
@@ -555,11 +578,15 @@ if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
 @app.app_context_processor
 def enrich_context_with_user_info():
     user = current_user()
-    data = {'username': user.get('username', ''),
-            'is_teacher': is_teacher(user), 'is_second_teacher': is_second_teacher(user),
-            'is_admin': is_admin(user), 'has_public_profile': has_public_profile(user),
-            'is_super_teacher': is_super_teacher(user),
-            'hide_explore': hide_explore(g.user)}
+    data = {
+        "username": user.get("username", ""),
+        "is_teacher": is_teacher(user),
+        "is_second_teacher": is_second_teacher(user),
+        "is_admin": is_admin(user),
+        "has_public_profile": has_public_profile(user),
+        "is_super_teacher": is_super_teacher(user),
+        "is_redesign_enabled": utils.is_redesign_enabled()
+    }
     return data
 
 
@@ -1224,7 +1251,7 @@ def hour_of_code(level, program_id=None):
     # - The level is allowed and available
     # - But, if there is a quiz threshold we have to check again if the user has reached it
 
-    if 'level_thresholds' in customizations:
+    if not utils.is_redesign_enabled() and 'level_thresholds' in customizations:
         if 'quiz' in customizations.get('level_thresholds'):
             # Temporary store the threshold
             threshold = customizations.get('level_thresholds').get('quiz')
@@ -1352,6 +1379,9 @@ def hour_of_code(level, program_id=None):
 @app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None})
 @app.route('/hedy/<int:level>/<program_id>', methods=['GET'])
 def index(level, program_id):
+    if utils.is_redesign_enabled():
+        return tryit(level, program_id)
+
     try:
         level = int(level)
         if level < 1 or level > hedy.HEDY_MAX_LEVEL:
@@ -1397,7 +1427,7 @@ def index(level, program_id):
     # At this point we can have the following scenario:
     # - The level is allowed and available
     # - But, if there is a quiz threshold we have to check again if the user has reached it
-    if 'level_thresholds' in customizations:
+    if not utils.is_redesign_enabled() and 'level_thresholds' in customizations:
         # If quiz in level and in some of the previous levels, then we check the threshold level.
         check_threshold = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
 
@@ -1472,7 +1502,6 @@ def index(level, program_id):
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
-    adventures_for_index = load_all_adventures_for_index(customizations)
     initial_tab = adventures[0].short_name
 
     if loaded_program:
@@ -1525,9 +1554,9 @@ def index(level, program_id):
         parsons_in_level = "parsons" in last_two_adv_names
         quiz_in_level = "quiz" in last_two_adv_names
 
-    if not parsons_in_level or parsons_hidden:
+    if utils.is_redesign_enabled() or not parsons_in_level or parsons_hidden:
         parsons = False
-    if not quiz_in_level or quizzes_hidden:
+    if utils.is_redesign_enabled() or not quiz_in_level or quizzes_hidden:
         quiz = False
 
     max_level = hedy.HEDY_MAX_LEVEL
@@ -1566,7 +1595,6 @@ def index(level, program_id):
         initial_adventure=adventures_map[initial_tab],
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
         microbit_feature=MICROBIT_FEATURE,
-        adventures_for_index=adventures_for_index,
         # See initialize.ts
         javascript_page_options=dict(
             enforce_developers_mode=enforce_developers_mode,
@@ -1606,10 +1634,19 @@ def tryit(level, program_id):
     available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
 
     customizations = {}
+    user_programs = {i: {} for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     if current_user()['username']:
         # class_to_preview is for teachers to preview a class they own
         customizations = g_db().get_student_class_customizations(
             current_user()['username'], class_to_preview=session.get("preview_class", {}).get("id"))
+        user_programs = g_db().last_programs_for_user_all_levels(current_user()['username'])
+        user_programs = {
+            level: {
+                k: Program.from_database_row(v)
+                for k, v in user_programs[level].items()
+            }
+            for level in user_programs
+        }
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -1626,76 +1663,6 @@ def tryit(level, program_id):
             return index(available_levels[0], program_id)
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
 
-    # At this point we can have the following scenario:
-    # - The level is allowed and available
-    # - But, if there is a quiz threshold we have to check again if the user has reached it
-    if 'level_thresholds' in customizations:
-        # If quiz in level and in some of the previous levels, then we check the threshold level.
-        check_threshold = 'other_settings' in customizations and 'hide_quiz' not in customizations['other_settings']
-
-        if check_threshold and 'quiz' in customizations.get('level_thresholds'):
-
-            # Temporary store the threshold
-            threshold = customizations.get('level_thresholds').get('quiz')
-            level_quiz_data = QUIZZES[g.lang].get_quiz_data_for_level(level)
-            # Get the max quiz score of the user in the previous level
-            # A bit out-of-scope, but we want to enable the next level button directly after finishing the quiz
-            # Todo: How can we fix this without a re-load?
-            quiz_stats = g_db().get_quiz_stats([current_user()['username']])
-
-            previous_quiz_level = level
-            for _prev_level in range(level - 1, 0, -1):
-                if _prev_level in available_levels and \
-                        customizations["sorted_adventures"][str(_prev_level)][-1].get("name") == "quiz" and \
-                        not any(x.get("scores") for x in quiz_stats if x.get("level") == _prev_level):
-                    previous_quiz_level = _prev_level
-                    break
-
-            # Not current leve-quiz's data because some levels may have no data for quizes,
-            # but we still need to check for the threshold.
-            if level - 1 in available_levels and level > 1 and \
-                    (not level_quiz_data or QUIZZES[g.lang].get_quiz_data_for_level(level - 1)):
-
-                # Only if we have found a quiz in previous levels with quiz data, we check the threshold.
-                if previous_quiz_level < level:
-                    # scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == level - 1]
-                    scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == previous_quiz_level]
-                    scores = [score for week_scores in scores for score in week_scores]
-                    max_score = 0 if len(scores) < 1 else max(scores)
-                    if max_score < threshold:
-                        # Instead of sending this level isn't available, we could send them to the right level?!
-                        # return redirect(f"/hedy/{previous_quiz_level}")
-                        return utils.error_page(
-                            error=403, ui_message=gettext('quiz_threshold_not_reached'))
-
-            # We also have to check if the next level should be removed from the available_levels
-            # Only check the quiz threshold if there is a quiz to obtain a score on the current level
-            if level <= hedy.HEDY_MAX_LEVEL and level_quiz_data:
-                next_level_with_quiz = level - 1
-                for _next_level in range(level, hedy.HEDY_MAX_LEVEL):
-                    # find the next level whose quiz isn't answered.
-                    if _next_level in available_levels and \
-                            customizations["sorted_adventures"][str(_next_level)][-1].get("name") == "quiz" and \
-                            not any(x.get("scores") for x in quiz_stats if x.get("level") == _next_level):
-                        next_level_with_quiz = _next_level
-                        break
-
-                # If the next quiz is in the current or upcoming level,
-                # we attempt to adjust available levels beginning from that level.
-                # e.g., student2 completed quiz 2, levels 3,4 and 5 have not quizes, 6 does.
-                # We should start from that level. If next_level_with_quiz >= level,
-                # meaning we don't need to adjust available levels ~ all available/quizes done!
-                if next_level_with_quiz >= level:
-                    scores = [x.get('scores', []) for x in quiz_stats if x.get('level') == next_level_with_quiz]
-                    scores = [score for week_scores in scores for score in week_scores]
-                    max_score = 0 if len(scores) < 1 else max(scores)
-                    # We don't have the score yet for the next level -> remove all upcoming
-                    # levels from 'available_levels'
-                    if max_score < threshold:
-                        # if this level is currently available, but score is below max score
-                        customizations["below_threshold"] = (next_level_with_quiz + 1 in available_levels)
-                        available_levels = available_levels[:available_levels.index(next_level_with_quiz) + 1]
-
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
     customizations['available_levels'] = available_levels
@@ -1704,7 +1671,8 @@ def tryit(level, program_id):
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
-    adventures_for_index = load_all_adventures_for_index(customizations)
+    adventures_for_index = load_all_adventures_for_index(customizations, user_programs)
+
     initial_tab = adventures[0].short_name
 
     if loaded_program:
@@ -1725,42 +1693,9 @@ def tryit(level, program_id):
 
     adventures_map = {a.short_name: a for a in adventures}
 
-    enforce_developers_mode = False
-    if 'other_settings' in customizations and 'developers_mode' in customizations['other_settings']:
-        enforce_developers_mode = True
     hide_cheatsheet = False
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
         hide_cheatsheet = True
-
-    parsons = True if PARSONS[g.lang].get_parsons_data_for_level(level) else False
-    quiz = True if QUIZZES[g.lang].get_quiz_data_for_level(level) else False
-
-    quiz_questions = 0
-    parson_exercises = 0
-
-    if quiz:
-        quiz_questions = len(QUIZZES[g.lang].get_quiz_data_for_level(level))
-    if parsons:
-        parson_exercises = len(PARSONS[g.lang].get_parsons_data_for_level(level))
-
-    parsons_hidden = 'other_settings' in customizations and 'hide_parsons' in customizations['other_settings']
-    quizzes_hidden = 'other_settings' in customizations and 'hide_quiz' in customizations['other_settings']
-
-    if customizations:
-        g_for_teachers().migrate_quizzes_parsons_tabs(customizations, parsons_hidden, quizzes_hidden)
-
-    parsons_in_level = True
-    quiz_in_level = True
-    if customizations.get("sorted_adventures") and\
-            len(customizations.get("sorted_adventures", {str(level): []})[str(level)]) > 2:
-        last_two_adv_names = [adv["name"] for adv in customizations["sorted_adventures"][str(level)][-2:]]
-        parsons_in_level = "parsons" in last_two_adv_names
-        quiz_in_level = "quiz" in last_two_adv_names
-
-    if not parsons_in_level or parsons_hidden:
-        parsons = False
-    if not quiz_in_level or quizzes_hidden:
-        quiz = False
 
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
@@ -1782,16 +1717,12 @@ def tryit(level, program_id):
         next_level=next_level,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
-        enforce_developers_mode=enforce_developers_mode,
+        enforce_developers_mode=False,
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
         commands=commands,
-        parsons=parsons,
-        parsons_exercises=parson_exercises,
         latest=version(),
-        quiz=quiz,
-        quiz_questions=quiz_questions,
         cheatsheet=cheatsheet,
         progress={'completed': completed, 'total': len(adventures)},
         blur_button_available=False,
@@ -1801,7 +1732,7 @@ def tryit(level, program_id):
         adventures_for_index=adventures_for_index,
         # See initialize.ts
         javascript_page_options=dict(
-            enforce_developers_mode=enforce_developers_mode,
+            enforce_developers_mode=False,
             page='tryit',
             level=level_number,
             lang=g.lang,
@@ -2259,6 +2190,10 @@ def profile_page(user):
     else:
         session['messages'] = 0
 
+    subscription_status = ''
+    if profile.get('is_teacher', False):
+        subscription_status = get_subscription_status(user.get('email'))
+
     return render_template(
         'profile.html',
         page_title=gettext('title_my-profile'),
@@ -2268,6 +2203,7 @@ def profile_page(user):
         public_settings=public_profile_settings,
         user_classes=classes,
         current_page='my-profile',
+        subscription_status=subscription_status,
         javascript_page_options=dict(
             page='my-profile',
         ))
@@ -2367,56 +2303,8 @@ def privacy():
                            content=privacy_translations)
 
 
-@app.route('/explore', methods=['GET'])
-def explore():
-    if not current_user()['username']:
-        return redirect('/login')
-
-    level = try_parse_int(request.args.get('level', default=None, type=str))
-    adventure = request.args.get('adventure', default=None, type=str)
-    page = request.args.get('page', default=None, type=str)
-    language = g.lang
-
-    result = g_db().get_public_programs(
-        limit=42,  # 3 columns so make it a multiple of 3
-        level_filter=level,
-        language_filter=language,
-        adventure_filter=adventure,
-        pagination_token=page)
-    next_page_url = url_for('.explore', **dict(request.args, page=result.next_page_token)
-                            ) if result.next_page_token else None
-    prev_page_url = url_for('.explore', **dict(request.args, page=result.prev_page_token)
-                            ) if result.prev_page_token else None
-
-    favourite_programs = g_db().get_hedy_choices()
-
-    # Do 'normalize_public_programs' on both sets at once, to save database calls
-    normalized = normalize_public_programs(list(result) + list(favourite_programs.records))
-    programs, favourite_programs = split_at(len(result), normalized)
-
-    # Filter out programs that are Hedy favorite choice.
-    programs = [program for program in programs if program['id'] not in {fav['id'] for fav in favourite_programs}]
-
-    keyword_lang = g.keyword_lang
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names(keyword_lang)
-
-    return render_template(
-        'explore.html',
-        programs=programs,
-        favourite_programs=favourite_programs,
-        filtered_level=str(level) if level else None,
-        next_page_url=next_page_url,
-        prev_page_url=prev_page_url,
-        filtered_adventure=adventure,
-        filtered_lang=language,
-        max_level=hedy.HEDY_MAX_LEVEL,
-        adventures_names=adventures_names,
-        page_title=gettext('title_explore'),
-        current_page='explore')
-
-
 def normalize_public_programs(programs):
-    """Normalize the content for all programs in the given array, for showing on the /explore or /user page.
+    """Normalize the content for all programs in the given array, for showing on the /user page.
 
     Does the following thing:
 
@@ -2429,7 +2317,7 @@ def normalize_public_programs(programs):
     """
     ret = []
     for program in programs:
-        program = pre_process_explore_program(program)
+        program = pre_process_public_program(program)
 
         # There is a record somewhere that doesn't have a code field, guard against that
         code = program.get('code', '')
@@ -2443,7 +2331,7 @@ def normalize_public_programs(programs):
 
 
 @querylog.timed
-def pre_process_explore_program(program):
+def pre_process_public_program(program):
     # If program does not have an error value set -> parse it and set value
     if 'error' not in program:
         try:

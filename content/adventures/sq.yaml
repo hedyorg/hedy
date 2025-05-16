@@ -228,10 +228,10 @@ adventures:
                     Tani që mund të kalkuloni, ju gjithashtu mund të bëni një kalkulator.
                 example_code: |
                     ```
-                    numri_1 {is} {ask} 'Plotëso numrin e parë:'
-                    numri_2 {is} {ask} 'Plotëso numrin e dytë:'
+                    numri_1 = {ask} 'Plotëso numrin e parë:'
+                    numri_2 = {ask} 'Plotëso numrin e dytë:'
                     përgjigje_saktë = numri_1 * numri_2
-                    {print} numri_1 ' herë ' numri_2 ' është 'përgjigje_saktë
+                    {print} numri_1 ' herë ' numri_2 ' është ' përgjigje_saktë
                     ```
                 story_text_2: |
                     Llogaritësi i mësipërm do të llogarisë përgjigjen për ju, por ju gjithashtu mund të bëni një program për të testuar aftësitë tuaja matematikore, si kjo:
@@ -269,7 +269,7 @@ adventures:
                 example_code: |
                     ```
                     number = 10
-                    {for} i {in} {range} 1 to 10
+                    {for} i {in} {range} 1 {to} 10
                         {print} i * number
                     ```
             12:
@@ -285,7 +285,7 @@ adventures:
             15:
                 story_text: |
                     Ju mund ta shtoni komandën `{while}` në lojën me kalkulator që e mësuat në nivelin e mëparshëm.
-                    Kjo siguron se lojtarët nuk mund të vazhdojnë në pyetjen tjetër {if}(nëse) përgjigjen gabim.
+                    Kjo siguron se lojtarët nuk mund të vazhdojnë në pyetjen tjetër nëse përgjigjen gabim.
 
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
@@ -506,9 +506,10 @@ adventures:
                 example_code: |
                     ```
                     zgjedhjet {is} 1, 2, 3, 4, 5, krimb_toke
-                    hidhe {is} _
-                    {print} 'ti ke hedhur' _
-                    {if} _ {is} krimb_toke {print} 'Mund të ndaloni së hedhuri.' _ {print} 'Duhet ta hidhni përsëri!'
+                    hidhe {is} zgjedhjet {at} {random}
+                    {print} 'ti ke hedhur ' hidhe
+                    _ hidhe {is} krimb_toke {print} 'Mund të ndaloni së hedhuri.'
+                    _ {print} 'Duhet ta hidhni përsëri!'
                     ```
             6:
                 story_text: |
@@ -537,8 +538,8 @@ adventures:
                     Ndoshta doni të bëni një zare komplet tjetër. Sigurisht që mundeni!
                 example_code: |
                     ```
-                    zgjedhjet = 1, 2, 3, 4, 5, krimi_tokes
-                    {repeat} _ _ {print} _ _ _
+                    zgjedhjet = 1, 2, 3, 4, 5, 6
+                    _ _ _ _ _ _ _
                     ```
             10:
                 story_text: |
@@ -590,7 +591,7 @@ adventures:
 
                     A mund ta përfundoni kodin i cili printon 'shumë keq' kur është radha e juaj ndërsa në të kundërt 'po!'?
                     Mos harroni thonjëzat!
-                example_code: "```\nnjerëzit {is} nëna, babi, Erza, Sara\nlarësiEnëve {is} njerëzit {at} {random}\n{if} larësiEnëve {is} Sara {print} _ shumë keq un e kam ti lajë enët _ \n{else} {print} 'fatmirësisht nuk ka enë sepse ' _ ' është veçse duke i larë'\n```\n"
+                example_code: "```\nnjerëzit {is} nëna, babi, Erza, Sara\nlarësiEnëve {is} njerëzit {at} {random}\n_ larësiEnëve {is} Sara {print} _ shumë keq un e kam ti lajë enët _\n_ {print} 'fatmirësisht nuk ka enë sepse ' _ ' është veçse duke i larë'\n```\n"
             6:
                 story_text: |
                     Sa shpesh duhet që secili ti lajë enët? A është e drejtë? Mund të numëroni në këtë nivel.
@@ -621,7 +622,6 @@ adventures:
                     larësi_enëve = njerëzit {at} {random}
                     {print} 'Të martën enët janë larë nga: ' larësi_enëve
                     {remove} larësi_enëve {from} njerëzit
-                    larësi_enëve = njerëzit {at} {random}
                     ```
             7:
                 story_text: |
@@ -638,8 +638,8 @@ adventures:
                     ```
                     ditët = E hënë, E martë, E mërkurë, E enjte, E premte, E shtunë, E diel
                     emrat = nëna, babi, Erza, Sara
-                    _ dita _ ditët
-                        {print} emrat {at} {random} ' i lanë enët në ditën e ' dita
+                    {for} dita {in} ditët
+                        {print} emrat {at} {random} ' i lanë enët në ditën e ' dita
                     ```
     fortune:
         name: Fallxhore
@@ -656,11 +656,11 @@ adventures:
                     Si kjo:
                 example_code: |
                     ```
-                    {print} Përshëndetje, unë jam Hedy fallxhori!
-                    {ask} Kush jeni ju?
-                    {print} Më lejoni t'i hedh një sy topit tim të kristaltë
-                    {print} Ah po e shoh.. e shoh...
-                    {echo} Emri yt është
+                    _ Përshëndetje, unë jam Hedy fallxhori!
+                    _ Kush jeni ju?
+                    _ Më lejoni t'i hedh një sy topit tim të kristaltë
+                    _ Ah po e shoh... e shoh...
+                    _ Emri yt është
                     ```
                 story_text_2: |
                     Hedy tani ju tregon vetëm emrin tuaj. A mund ta zgjeroni kodin në mënyrë që Hedy të mund të parashikojë më shumë gjëra për ju?
@@ -671,7 +671,6 @@ adventures:
                     Në nivelet e mëparshme ju keni krijuar makinën tuaj të parë të tregimit të fatit, por Hedy nuk mund të parashikonte asgjë, vetëm {echo}.
                     Në këtë nivel, ju mund të përdorni një variabël dhe komandën `{at} {random}` për ta lënë Hedy-n të zgjedhë një përgjigje për ju. Shikoni këtë kod për shembull:
                 example_code: |
-                    Në këtë shembull, lojtari mund të {ask} Hedy-t një pyetje po-jo dhe Hedy do të zgjedhë një përgjigje të rastësishme për ju.
                     ```
                     {print} I’m Hedy the fortune teller!
                     pyetja {is} {ask} What do you want to know?
@@ -733,18 +732,6 @@ adventures:
                     {print} 'Ju do keni ...'
                     {sleep}
                     {print} fëmijët ' fëmijë!'
-                    ```
-
-                    Nëse shembulli i mëparshëm nuk ishte mjaft budalla për ju, hidhini një sy këtij!
-                    ```
-                    {print} 'Jam Hedy fallxhori!'
-                    {print} 'Un do të parashikoj sa të zgjuar jeni!'
-                    futboll = {ask} 'Në shkallën 1-10 sa e pëlqeni futbollin?'
-                    banane = {ask} 'Sa banane keni ngrënë këtë javë?'
-                    higjiena = {ask} 'Sa herë i keni larë duart sot?'
-                    rezultati = banane + higjiena
-                    rezultati = rezultati * futboll
-                    {print} 'Ju jeni ' rezultati ' përqind të zgjuar.'
                     ```
             7:
                 story_text: |
@@ -1382,7 +1369,7 @@ adventures:
                     _
                         porosia = {ask} 'Çfarë dëshironi të porosisni?'
                         {print} porosia
-                        më_shumë = {ask} 'A dëshironi diçka {else}(tjetër)?'
+                        më_shumë = {ask} 'A dëshironi diçka tjetër?'
                     {print} 'Falemenderit!'
                     ```
     rock:
@@ -1426,7 +1413,7 @@ adventures:
                 example_code: |
                     ```
                     zgjedhjet {is} gur, letër, gërshërë
-                    {print} zgjedhjet {at} {random}
+                    {print} zgjedhjet _
                     ```
                 story_text_2: |
                     Tani ju keni vetëm një lojtar, kështu që mund të shtoni një lojtar të dytë?
@@ -1449,22 +1436,22 @@ adventures:
                     ```
                     opsionet {is} gur, letër, gërshërë
                     zgjedhja_kompjuterit {is} _
-                    zgjedhja {is} {ask} 'Çfarë zgjidhni?'
+                    zgjedhja {is} _
                     {print} 'Ju zgjodhët ' _
                     {print} 'Kompjuteri zgjodhi ' _
                     {if} _ {is} _ {print} 'barazim!' {else} {print} 'ska barazim'
                     ```
 
-                    Mbusheni boshllëqet {if} (nëse) është barazim.
+                    Mbusheni boshllëqet nëse është barazim.
             9:
                 story_text: |
                     Në këtë nivel mund ta programi gjithë lojën gur, letër, gërshërë duke përdorur komandën {if} një mbi një. A mund ta përfundoni kodin?
                 example_code: |
                     ```
                     zgjedhjet = gur, letër, gërshërë
-                    zgjedhja_juaj = {ask} 'Çfarë zgjidhni?'
+                    zgjedhja_juaj {is} {ask} 'Çfarë zgjidhni?'
                     {print} 'Ju zgjodhët ' zgjedhja_juaj
-                    zgjedhja_kompjuterit = zgjedhjet {at} {random}
+                    zgjedhja_kompjuterit {is} zgjedhjet {at} {random}
                     {print} 'Kompjuteri zgjodhi ' zgjedhja_kompjuterit
                     {if} zgjedhja_kompjuterit {is} zgjedhja_juaj
                         {print} 'Barazim'
@@ -1481,10 +1468,9 @@ adventures:
                     Mjafton të plotësoni emrat e lojtarëve.
                 example_code: |
                     ```
-                    zgjedhjet = gur, letër, gërshërë
+                    zgjedhjet = _
                     lojtarët = _
-                    {for} lojtari {in} lojtarët
-                         {print} lojtari ' ka zgjedhur ' zgjedhjet {at} {random}
+                    {for} _
                     ```
             13:
                 story_text: |
@@ -1594,11 +1580,11 @@ adventures:
                     ```
                     numri = 6
                     numri = numri - 1
-                    print numri "majmunët e vegjël që kërcejnë në shtrat"
-                    print 'Një ra dhe përplasi kokën'
-                    print 'Mami thirri doktorin dhe doktori tha'
-                    print 'JO MË MAJMUNE QË KËRREN NË SHTRAT!'
-                    sleep
+                    {print} numri "majmunët e vegjël që kërcejnë në shtrat"
+                    {print} 'Një ra dhe përplasi kokën'
+                    {print} 'Mami thirri doktorin dhe doktori tha'
+                    {print} 'JO MË MAJMUNE QË KËRREN NË SHTRAT!'
+                    {sleep}
                     ```
             7:
                 story_text: |
@@ -1624,12 +1610,12 @@ adventures:
                 example_code: |
                     ```
                     vargu = 99
-                    _ _ _
-                        {print} vargu ' shishe birre në mur'
-                        {print} vargu ' shishe birre'
-                        {print} 'Hiqeni njërën, kaloje përreth'
-                        vargu = vargu - 1
-                        {print} vargu ' shishe birre në murr'
+                    _ 99 {times}
+                    {print} vargu ' shishe birre në mur'
+                    {print} vargu ' shishe birre'
+                    {print} 'Hiqeni njërën, kaloje përreth'
+                    vargu = vargu - 1
+                    {print} vargu ' shishe birre në murr'
                     ```
             10:
                 story_text: |
@@ -1806,6 +1792,8 @@ adventures:
                     {forward} 25
                     {turn} këndi
                     {forward} 25
+                    {turn} këndi
+                    {forward} 25
                     ```
             3:
                 story_text: "Në këtë nivel ju mund të përdorni komandën `{at} {random}` me vizatimin e breshkës. Një zgjedhje random e bën breshkën të ecë rrugë të ndryshme çdo herë. Përdorni `{at} {random}` për të zgjedhur një vlerë nga një listë. \n\n### Sfidë\nA mund të bëni kopjoni rreshtat 2 dhe 3 për të krijuar një rrugë më të gjatë random.\n"
@@ -1849,12 +1837,6 @@ adventures:
                     {forward} 25
                     ```
                 example_code_2: |
-                    ```
-                    direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
-                    if direction is left turn _
-                    if direction is right turn _
-                    forward 100
-                    ```
             6:
                 story_text: |
                     Në këtë nivel mund të përdorni kalkulime për të vizatuar figura të ndryshme.

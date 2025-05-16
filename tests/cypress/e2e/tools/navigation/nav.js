@@ -94,11 +94,6 @@ export function goToEditAdventure()
     cy.getDataCy('edit_link_adventure1').first().click();
 }
 
-export function goToExploreProgramsPage()
-{
-   goToPage(Cypress.env('explore_programs_page'));
-}
-
 export function navigateHomeButton(button, path)
 {
     goToHome();
@@ -113,4 +108,10 @@ export function goToSubscribePage()
    goToPage(Cypress.env('subscribe_page'));
 }
 
+export function clickAdventureIndexButton()
+{
+    cy.getDataCy('dropdown_open_button').click();
+}
+
 export default {goToPage}
+

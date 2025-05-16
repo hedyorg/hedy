@@ -2,7 +2,7 @@ adventures:
     story:
         name: História
         default_save_name: História
-        description: História
+        description: Crie uma história pequena
         levels:
             1:
                 story_text: |
@@ -89,15 +89,15 @@ adventures:
                     Lembra-te: As variáveis na tua própria história devem estar fora das aspas. Tal como está na segunda linha do código de exemplo. Nessa linha, o nome da variável é colocado por fora das aspas.
                 example_code: |
                     ```
-                    nome {is} {ask} _ Qual é o teu nome? _
+                    nome {is} {ask} _ Qual é o seu nome? _
                     {print} _ O personagem principal chama-se _ nome
                     _
                     _
                     {print} nome _ vai agora caminhar na floresta _
                     {print} nome _ está um pouco(a) assustado(a) _
                     animais {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Escuta o som de um _ animais {at} {random}
-                    {print} nome _ receia que a floresta é assombrada _
+                    {print} _ Ele ouve o som de um _ animais {at} {random}
+                    {print} nome _ receia que é uma floresta assombrada _
                     ```
             5:
                 story_text: |
@@ -142,28 +142,28 @@ adventures:
                     Regressa ao teus programas guardados, escolhe o programa da tua história do nível 5. Agora, escreve um final feliz e um final triste, com pelo menos três linhas cada um!
                 example_code: |
                     ```
-                    {print} 'OH NÃO! O T-rex está a aproximar-se!'
-                    fim = {ask} 'Queres um final feliz ou triste?'
+                    {print} 'OH, NÃO! O T-rex está a aproximar-se!'
+                    fim = {ask} 'Quer um final feliz ou triste?'
                     {if} fim {is} feliz
                         {print} 'Mesmo a tempo, Ricardo salta para dentro da máquina do tempo!'
                         {print} _
                     {else}
-                        {print} 'Oh não! Ricardo é demasiado lento...'
+                        {print} 'Oh, não! Ricardo é demasiado lento...'
                         {print} _
                     ```
             9:
                 story_text: |
-                    Neste nível podes usar comandos `{if}` e `{repeat}` dentro de outros comandos `{if}` e `{repeat}`.
-                    Isto proporciona-te muitas opções e ajuda imenso a tornar a tua história mais interactiva.
+                    Neste nível pode utilizar comandos `{if}` e `{repeat}` dentro de outros comandos `{if}` e `{repeat}`.
+                    Isto proporciona-lhe muitas opções e ajuda imenso a tornar a sua história mais interativa.
 
                     ### Exercício 1
-                    Completa o código para que o `{if}` funcione correctamente.
+                    Termine o código para que o `{if}` funcione corretamente.
 
                     ### Exercício 2
-                    Adiciona também um `{if}` e um `{else}` para a parte da história em que Robin regressa a casa.
+                    Adicione também um `{if}` e um `{else}` para a parte da história em que Robin regressa a casa.
 
                     ### Exercício 3
-                    Regressa à tua história do nível 8 e usa pelo menos dois `{if}`s dentro de outro `{if}`.
+                    Volte para a sua história de nível 8 e utilize pelo menos dois `{if}`s dentro de outro `{if}`.
                 example_code: |
                     ```
                     {print} 'Robin está a caminhar pela baixa da cidade'
@@ -200,8 +200,8 @@ adventures:
                     ```
                     {print} 'O nosso herói caminha pela floresta'
                     {print} 'O caminho divide-se em dois'
-                    caminho = {ask} 'Qual caminho deve escolher?'
-                    arma = {ask} 'Que arma deve pegar?'
+                    caminho = {ask} 'Qual o caminho que ela deve escolher?'
+                    arma = {ask} 'Que arma deve utilizar?'
                     {if} caminho {is} 'esquerda' {and} arma {is} 'espada'
                     	_
                     ```
