@@ -136,7 +136,7 @@
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-3" id="code_related_buttons">
-    <div id="button_row" class="flex flex-col gap-2 md:flex-row lg:flex-col xl:flex-row mb-4">
+    <div id="button_row" class="flex flex-col gap-2 sm:flex-row mb-4">
       <div class="flex flex-row gap-2">
         <div id="run_button_container" class="gap-2 flex flex-row flex-initial">
             <button id="runit" data-cy="runit" class="green-btn-new" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
@@ -165,6 +165,13 @@
           </button>
         </div>
       </div>
+      <div class="hidden lg:block lg:flex-1"></div>
+      {% if username and current_user_is_in_class %}
+        <button class="blue-btn-new w-fit" id="hand_in" _="on click remove .hidden from #share_modal">
+          <i class="fa-solid fa-paper-plane ltr:mr-1 rtl:ml-1"></i>
+          {{_('hand_in')}}
+        </button>
+      {% endif %}
     </div>
     {% if not raw %}
     <div id="not_logged_in_warning" data-cy="not_logged_in_warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
@@ -201,32 +208,12 @@
         <span>Show editor</span>
       </button>
       <div class="hidden lg:block lg:flex-1"></div>
-      <div class="flex flex-row justify-between gap-2">
-        <div id="read_outloud_button_container" class="dropdown relative">
-          <button id="read_outloud" data-cy="read_outloud" class="blue-btn-new rounded inline-flex items-center gap-2"
-          onclick="$('#speak_dropdown').slideToggle('medium');">
-          <span class="fa fa-volume-high ltr:mr-1 rtl:ml-1"></span>
-          <span>{{_('read_code_label')}}</span>
-          <svg id="speak_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-          </svg>
-          </button>
-          <div class="dropdown-menu dropdown-blue z-30 min-w-full h-48 overflow-auto" id="speak_dropdown"
-            style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-            _="on mutation of @style
-                set arrow to #speak_arrow
-                if *display == 'none'
-                    then remove .rotate-180 from arrow
-                else if not arrow.classList.contains('rotate-180')
-                    add .rotate-180 to arrow
-                end">
-          </div>
-        </div>
-        <button id="share_program_button_new" class="blue-btn-new next-tab" _="on click remove .hidden from #share_modal">
-          <i class="fa-solid fa-share-nodes ltr:mr-1 rtl:ml-1"></i>
-          {{_('share')}}
-        </button>
-      </div>
+      <div id="speak_container" class="hidden flex flex-row items-center w-max overflow-visible">
+        <label for="speak_dropdown" id="speak_aloud_label" class="ltr:mr-2 rtl:ml-2">{{_('read_code_label')}}:</label>
+        <select id="speak_dropdown" class="appearance-none w-40 bg-gray-200 border border-gray-600 text-gray-700 py-1 px-4 rounded">
+          <option value="">🤫</option>
+        </select>
+    </div>
     </div>
   </div>
 

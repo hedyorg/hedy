@@ -50,7 +50,6 @@ export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
-let selectedURI: JQuery<HTMLElement>;
 //create a synth and connect it to the main output (your speakers)
 //const synth = new Tone.Synth().toDestination();
 
@@ -202,6 +201,19 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     theLocalSaveWarning.setLoggedIn();
   }
 
+  // Event listener to close the adventures dropdown when you click outside of it
+  document.addEventListener('click', (ev) => {
+    const target = ev.target as HTMLElement;
+    const parent = document.getElementById('level_adventure_title');
+    if (parent?.contains(target)) {
+      return;
+    }
+    if ($('#dropdown-level:visible').length) {
+      $('#dropdown-level').slideToggle('medium');
+      document.getElementById('dropdown_index_arrow')?.classList.toggle('rotate-180');
+    }
+  });
+
   theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
 
   // theLevel will already have been set during initializeApp
@@ -243,7 +255,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
       initialTab: validAnchor ?? options.initial_tab,
     });
   }
-
   tabs.on('beforeSwitch', () => {
     // If there are unsaved changes, we warn the user before changing tabs.
     saveIfNecessary();
@@ -268,7 +279,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     theLocalSaveWarning.switchTab();
   });
 
-  initializeSpeech(options.page === 'tryit');
+  initializeSpeech();
 
   // Share/hand in modals
   $('#share_program_button').on('click', () => $('#share_modal').show());
@@ -767,25 +778,6 @@ export async function unsubmit_program (id: string, prompt: string) {
   });
 }
 
-export async function set_explore_favourite(id: string, favourite: number) {
-  let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
-  if (favourite) {
-    prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
-  }
-  await modal.confirmP(prompt);
-
-  await tryCatchPopup(async () => {
-    const response = await postJson('/programs/set_hedy_choice', {
-      id: id,
-      favourite: favourite
-    });
-
-    modal.notifySuccess(response.message);
-    $('#' + id).toggleClass('text-white', favourite !== 1);
-    $('#' + id).toggleClass('text-yellow-500', favourite === 1);
-  });
-}
-
 export function report_program(prompt: string, id: string) {
   tryCatchPopup(async () => {
     await modal.confirmP(prompt);
@@ -1255,7 +1247,7 @@ function speak(text: string) {
   }
 }
 
-function initializeSpeech(isTryit?: boolean) {
+function initializeSpeech() {
   // If we are running under cypress, always show the languages dropdown (even if the browser doesn't
   // have TTS capabilities), so that we can test if the logic for showing the dropdown at least runs
   // successfully.
@@ -1281,26 +1273,7 @@ function initializeSpeech(isTryit?: boolean) {
 
     if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
-        if (isTryit) {
-          $('#speak_dropdown').append(
-            $('<button>')
-              .attr('id', `speak_button_${voice.name}`)
-              .attr('onclick', `$('#speak_dropdown').slideUp('medium');`)
-              .attr('value', voice.voiceURI)
-              .addClass('flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white')
-              .css('width', '100%')
-              .text(voice.name)
-              .on('click', function () {
-                if (selectedURI){
-                  selectedURI.find('span').remove();
-                }
-                selectedURI = $(this);
-                $(this).append(`<span class="fa fa-check"></span>`);
-              })
-            );
-        } else {
-          $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
-        }
+        $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
       }
       $('#speak_container').show();
 
@@ -1736,10 +1709,16 @@ function updatePageElements() {
     // Show <...data-view="if-submitted"> only if we have a public url
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
-
+    const icon = document.querySelector(`*[data-tab="${adventure.short_name}"][data-level="${theLevel}"] > div > i[data-status-icon]`);
+    icon?.classList.toggle('fa-paper-plane', isSubmitted && !icon?.classList.contains('fa-circle-check'));
+    const hand_in_btn = document.getElementById('hand_in');
+    if (isSubmitted) {
+      hand_in_btn?.setAttribute('disabled', 'disabled');
+    } else {
+      hand_in_btn?.removeAttribute('disabled');
+    }
     theGlobalEditor.isReadOnly = isSubmitted;
     // All of these are for the buttons added in the new version of the code-page
-    $('#progress_bar').show()
     $('#program_name_container').show()
     $('#share_program_button').show()
     $('#read_outloud_button_container').show()
@@ -1980,4 +1959,51 @@ export function goToLevel(level: any) {
 
 export function emptyEditor() {
   theGlobalEditor.contents = ""
+}
+
+
+export function open_index_pane(e: Event) {
+  const target = e.target as HTMLElement;
+  const button = target.closest('button');
+  if (!button) return;
+  const level = button.id.split('_')[1];
+  const pane = document.getElementById(`level_${level}_pane`);
+  if (!pane) return;
+  // If this pane is already open, close it
+  // Otherwise, close all other panes and open this one
+  if (pane.classList.contains('sliding-content-open')) {
+    pane.classList.remove('sliding-content-open');
+    pane.classList.add('sliding-content-closed');
+    document.getElementById(`level_${level}_arrow`)?.classList.toggle('rotate-180');
+  } else {
+    document.querySelectorAll('.sliding-content-open').forEach((el) => {
+      el.classList.remove('sliding-content-open');
+      el.classList.add('sliding-content-closed');
+      const level = el.id.split('_')[1];
+      const arrow = document.getElementById(`level_${level}_arrow`);
+      arrow?.classList.toggle('rotate-180');
+    });
+    // Open the selected pane
+    pane.classList.remove('sliding-content-closed');
+    pane.classList.add('sliding-content-open');
+    const arrow = document.getElementById(`level_${level}_arrow`);
+    arrow?.classList.toggle('rotate-180');
+    // sleep for 400 miliseconds to settle animations
+    setTimeout(() => {
+      pane.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const opened_level_button = pane?.previousElementSibling
+      opened_level_button?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 400);
+  }
+}
+
+export function open_index_dropdown(e: Event) {
+  $('#dropdown-level').slideToggle('medium');
+  document.getElementById('dropdown_index_arrow')?.classList.toggle('rotate-180');
+  const target = e.target as HTMLElement;
+  const button = target.closest('button');
+  if (!button) return;
+  const opened_pane = document.querySelector('.sliding-content-open');
+  const opened_level_button = opened_pane?.previousElementSibling
+  opened_level_button?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }

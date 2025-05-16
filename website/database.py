@@ -33,12 +33,14 @@ import sys
 from os import path
 
 from utils import timems, times
+import utils
+from config import config
 
 from . import dynamo, auth
-from . import querylog
 
 from .dynamo import DictOf, OptionalOf, ListOf, SetOf, RecordOf, EitherOf
 
+from hedy_content import MAX_LEVEL
 
 is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
@@ -121,7 +123,8 @@ class Database:
                                   }),
                                   indexes=[
                                       dynamo.Index('email'),
-                                      dynamo.Index('epoch', sort_key='created')
+                                      dynamo.Index('epoch', sort_key='created'),
+                                      dynamo.Index('epoch', sort_key='username', keys_only=True)
                                   ]
                                   )
         self.tokens = dynamo.Table(storage, 'tokens', 'id',
@@ -475,6 +478,22 @@ class Database:
                 ret[key] = program
         return ret
 
+    def last_programs_for_user_all_levels(self, username):
+        """Return the most recent programs for the given user for all levels.
+
+        Returns: { level -> { adventure_name -> { code, name, ... } } }
+        """
+        programs = self.programs_for_user(username)
+        ret = {i: {} for i in range(1, MAX_LEVEL + 1)}
+        for program in programs:
+            if 'adventure_name' not in program or 'level' not in program:
+                continue
+            key = program['adventure_name']
+            level = program['level']
+            if key not in ret[level] or ret[level][key]['date'] < program['date']:
+                ret[level][key] = program
+        return ret
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 
@@ -588,6 +607,10 @@ class Database:
         """Return a user object from the username."""
         return self.users.get({"username": username.strip().lower()})
 
+    def users_by_username(self, usernames: list[str]):
+        """Return a list of user objects from the usernames."""
+        return self.users.batch_get([{"username": username.strip().lower()} for username in usernames])
+
     def user_by_email(self, email):
         """Return a user object from the email address."""
         return self.users.get({"email": email.strip().lower()})
@@ -675,36 +698,16 @@ class Database:
         far from 30M users. Once we start to get in that neighbourhood, we should
         update this code.
         """
-        return self.users.get_page(dict(epoch=CURRENT_USER_EPOCH), pagination_token=page_token,
-                                   limit=limit, reverse=True)
+        return self.users.get_page(
+            dict(epoch=CURRENT_USER_EPOCH, created=dynamo.UseThisIndex()),
+            pagination_token=page_token,
+            limit=limit,
+            reverse=True,
+        )
 
     def get_all_public_programs(self):
         programs = self.programs.get_many({"public": 1}, reverse=True)
         return [x for x in programs if not x.get("submitted", False)]
-
-    @querylog.timed_as("get_public_programs")
-    def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None,
-                            limit=40, pagination_token=None):
-        """Return the most recent N public programs, optionally filtered by attributes.
-
-        The 'public' index is the most discriminatory: fetch public programs, then evaluate them against
-        the filters (on the server). The index we're using here has the 'lang', 'adventure_name' and
-        'level' columns.
-        """
-        # This index contains relevant filterable fields, but doesn't contain the actual code
-        filter = {}
-        if level_filter:
-            filter['level'] = int(level_filter)
-        if language_filter:
-            filter['lang'] = language_filter
-        if adventure_filter:
-            filter['adventure_name'] = adventure_filter
-
-        ids = self.programs.get_page({'public': 1}, reverse=True, limit=limit,
-                                     server_side_filter=filter, pagination_token=pagination_token,
-                                     timeout=3, fetch_factor=2.0)
-        ret = self.programs.batch_get(ids)
-        return ret
 
     def add_public_profile_information(self, programs):
         """For each program in a list, note whether the author has a public profile or not.
@@ -718,15 +721,6 @@ class Database:
 
         for program in programs:
             program['public_user'] = True if profiles.get(program['id']) else None
-
-    def get_all_hedy_choices(self):
-        return self.programs.get_many({"hedy_choice": 1}, reverse=True)
-
-    def get_hedy_choices(self):
-        return self.programs.get_many({"hedy_choice": 1}, limit=4, reverse=True)
-
-    def set_program_as_hedy_choice(self, id, favourite):
-        self.programs.update({"id": id}, {"hedy_choice": 1 if favourite else None})
 
     def get_class(self, id):
         """Return the classes with given id."""
@@ -1033,7 +1027,16 @@ class Database:
     def get_user_class_invite(self, username, class_id):
         return self.invitations.get({"username#class_id": f"{username}#{class_id}"}) or None
 
-    def add_class_invite(self, data):
+    def add_class_invite(self, username: str, class_id: str, invited_as: str, invited_as_text: str):
+        invite_length = config["session"]["invite_length"] * 60
+        data = {
+            "username": username,
+            "class_id": class_id,
+            "timestamp": utils.times(),
+            "ttl": utils.times() + invite_length,
+            "invited_as": invited_as,
+            "invited_as_text": invited_as_text,
+        }
         data['username#class_id'] = data['username'] + '#' + data['class_id']
         self.invitations.put(data)
 
@@ -1247,6 +1250,44 @@ class Database:
     def get_username_role(self, username):
         role = "teacher" if self.users.get({"username": username}).get("is_teacher") == 1 else "student"
         return role
+
+    def get_student_that_starts_with(self, search):
+        """
+        Gets students that aren't already in a class
+        """
+        return self.users.get_many(
+            {"epoch": CURRENT_USER_EPOCH, "username": dynamo.BeginsWith(search)},
+            server_side_filter={"classes": dynamo.SetEmpty()},
+            limit=10,
+        )
+
+    def get_teacher_that_starts_with(self, search, not_in_class_id=None):
+        """
+        Gets teachers from DB that aren't second teacher's already of this class
+        """
+        server_side_filter = {'is_teacher': 1}
+        if not_in_class_id:
+            server_side_filter['second_teacher_in'] = dynamo.NotContains(not_in_class_id)
+        records = self.users.get_many(
+            {"epoch": CURRENT_USER_EPOCH, "username": dynamo.BeginsWith(search)},
+            server_side_filter=server_side_filter,
+            limit=10
+        )
+        return records
+
+    def get_class_invites(self, class_id: str):
+        invites = []
+        for invite in self.get_class_invitations(class_id):
+            invites.append(
+                {
+                    "username": invite["username"],
+                    "invited_as_text": invite["invited_as_text"],
+                    "invited_as": invite["invited_as"],
+                    "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True),
+                    "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
+                }
+            )
+        return invites
 
 
 def batched(iterable, n):

@@ -282,6 +282,11 @@ a.green-btn-new:hover {
   @apply active:bg-blue-400 active:border-blue-500;
 }
 
+.blue-btn-new:disabled, .blue-btn-new[disabled] {
+  @apply bg-gray-200 border-gray-200 text-gray-500;
+  @apply active:bg-gray-200 active:border-gray-200;
+}
+
 .gray-btn-shape {
   @apply font-slab leading-6 font-normal tracking-wide;
   @apply pt-2 pb-1 px-4 rounded no-underline;
@@ -642,17 +647,11 @@ body[dir='rtl'] .right-hand-shadow {
     /* left */ inset 4px 0px 4px -1px rgba(0,0,0,0.1);
 }
 
-.tab-selected {
-  @apply mt-0 pt-2 bg-white text-black font-normal rounded-t-lg border-t-8 border-r border-l border-pink-500;
-  box-shadow: none !important;
-}
-
 .adv-selected {
-  @apply ltr:border-l-4 rtl:border-r-4 bg-blue-100 ltr:rounded-r-lg rtl:rounded-l-lg;
+  @apply  bg-blue-100;
 }
 
 .not-selected-adv {
-  @apply ltr:border-l-2 rtl:border-r-2;
 }
 /* EDITOR WARNINGS & ERRORS */
 
@@ -774,15 +773,6 @@ p.close-dialog {
 /* Accordion icon formatting - open */
 .accordion .accordion-tab input[type=checkbox]:checked + label::before {
   transform: rotate(270deg);
-}
-
-/* Programs */
-.explore-program-box {
-  @apply w-64 h-72 rounded-lg border border-gray-700 relative bg-blue-200;
-}
-
-.explore-program-box-title {
-  @apply text-white text-center ltr:-ml-2 rtl:-mr-2 -mt-8 pt-10 ltr:pl-12 rtl:pr-12 ltr:rotate-6 rtl:-rotate-6 w-72;
 }
 
 /* Profile page */
@@ -1018,6 +1008,14 @@ div[class^="ace_incorrect_hedy_code"] {
 
 .sliding-content-open {
   grid-template-rows: 1fr;
+}
+
+.sliding-content-closed-test {
+  grid-template-columns: 0fr;
+}
+
+.sliding-content-open-test {
+  grid-template-columns: 1fr;
 }
 
 .adventure-item.selected {

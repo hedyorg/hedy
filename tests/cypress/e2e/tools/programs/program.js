@@ -6,6 +6,7 @@ export function codeEditorContent() {
 export function executeHelloWorldProgram(name) {
     cy.visit(`${Cypress.env('hedy_page')}#${name}`);
     // make sure to navigate to the wanted program tab.
+    cy.getDataCy('dropdown_open_button').click();
     cy.getDataCy(`${name}`).click();
     // Execute program to save it
     cy.get('#editor .cm-content').click();

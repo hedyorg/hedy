@@ -51,9 +51,9 @@ from website import (ab_proxying, admin, auth_pages, aws_helpers,
                      translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, is_students_teacher,
                           has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
-                          forget_current_user, hide_explore)
+                          forget_current_user)
 from website.log_fetcher import log_fetcher
-from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo
+from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo, Solution
 from website.flask_hedy import g_db
 from website.newsletter import add_used_slides_to_subscription, get_subscription_status
 
@@ -206,10 +206,10 @@ def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
-def load_all_adventures_for_index(customizations, subset=None):
+def load_all_adventures_for_index(customizations, user_programs, subset=None):
     """
     Loads all the default adventures in a dictionary that will be used to populate
-    the index, therfore we only need the titles and short names of the adventures.
+    the index, therefore we only need the titles and short names of the adventures.
     """
 
     keyword_lang = g.keyword_lang
@@ -260,6 +260,18 @@ def load_all_adventures_for_index(customizations, subset=None):
             if not adventure['from_teacher'] and (adv := builtin_map[int(level)].get(adventure['name'])):
                 all_adventures[int(level)].append(adv)
 
+    for level, adventures in all_adventures.items():
+        for adventure in adventures:
+            if adventure['short_name'] not in user_programs[level]:
+                continue
+            name = adventure['short_name']
+            student_adventure_id = f"{current_user()['username']}-{name}-{level}"
+            student_adventure = g_db().student_adventure_by_id(student_adventure_id)
+            if user_programs[level][name].submitted:
+                adventure['state'] = 'submitted'
+            if student_adventure and student_adventure['ticked']:
+                adventure['state'] = 'ticked'
+
     return all_adventures
 
 
@@ -297,6 +309,15 @@ def load_adventures_for_level(level, subset=None):
             if adventure_level.get(f'story_text_{i}', '')
         ]
 
+        solutions = [
+            Solution(
+                code=adventure_level.get(f'answer_code{suffix}'),
+                text=adventure_level.get(f'answer_note{suffix}'),
+            )
+            for suffix in ['' if i == 1 else f'_{i}' for i in range(1, 10)]
+            if adventure_level.get(f'answer_code{suffix}')
+        ]
+
         default_save_name = adventure.get('default_save_name')
         if not default_save_name or default_save_name == 'intro':
             default_save_name = adventure['name']
@@ -312,7 +333,9 @@ def load_adventures_for_level(level, subset=None):
                 extra_stories=extra_stories,
                 is_teacher_adventure=False,
                 is_command_adventure=short_name in KEYWORDS_ADVENTURES,
-                save_name=f'{default_save_name} {level}')
+                save_name=f'{default_save_name} {level}',
+                solutions=solutions,
+            )
 
             all_adventures.append(current_adventure)
 
@@ -562,7 +585,6 @@ def enrich_context_with_user_info():
         "is_admin": is_admin(user),
         "has_public_profile": has_public_profile(user),
         "is_super_teacher": is_super_teacher(user),
-        "hide_explore": hide_explore(g.user),
         "is_redesign_enabled": utils.is_redesign_enabled()
     }
     return data
@@ -1357,6 +1379,9 @@ def hour_of_code(level, program_id=None):
 @app.route('/hedy/<int:level>', methods=['GET'], defaults={'program_id': None})
 @app.route('/hedy/<int:level>/<program_id>', methods=['GET'])
 def index(level, program_id):
+    if utils.is_redesign_enabled():
+        return tryit(level, program_id)
+
     try:
         level = int(level)
         if level < 1 or level > hedy.HEDY_MAX_LEVEL:
@@ -1477,7 +1502,6 @@ def index(level, program_id):
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
-    adventures_for_index = load_all_adventures_for_index(customizations)
     initial_tab = adventures[0].short_name
 
     if loaded_program:
@@ -1571,7 +1595,6 @@ def index(level, program_id):
         initial_adventure=adventures_map[initial_tab],
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
         microbit_feature=MICROBIT_FEATURE,
-        adventures_for_index=adventures_for_index,
         # See initialize.ts
         javascript_page_options=dict(
             enforce_developers_mode=enforce_developers_mode,
@@ -1611,10 +1634,19 @@ def tryit(level, program_id):
     available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
 
     customizations = {}
+    user_programs = {i: {} for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     if current_user()['username']:
         # class_to_preview is for teachers to preview a class they own
         customizations = g_db().get_student_class_customizations(
             current_user()['username'], class_to_preview=session.get("preview_class", {}).get("id"))
+        user_programs = g_db().last_programs_for_user_all_levels(current_user()['username'])
+        user_programs = {
+            level: {
+                k: Program.from_database_row(v)
+                for k, v in user_programs[level].items()
+            }
+            for level in user_programs
+        }
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -1639,7 +1671,8 @@ def tryit(level, program_id):
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
-    adventures_for_index = load_all_adventures_for_index(customizations)
+    adventures_for_index = load_all_adventures_for_index(customizations, user_programs)
+
     initial_tab = adventures[0].short_name
 
     if loaded_program:
@@ -2270,56 +2303,8 @@ def privacy():
                            content=privacy_translations)
 
 
-@app.route('/explore', methods=['GET'])
-def explore():
-    if not current_user()['username']:
-        return redirect('/login')
-
-    level = try_parse_int(request.args.get('level', default=None, type=str))
-    adventure = request.args.get('adventure', default=None, type=str)
-    page = request.args.get('page', default=None, type=str)
-    language = g.lang
-
-    result = g_db().get_public_programs(
-        limit=42,  # 3 columns so make it a multiple of 3
-        level_filter=level,
-        language_filter=language,
-        adventure_filter=adventure,
-        pagination_token=page)
-    next_page_url = url_for('.explore', **dict(request.args, page=result.next_page_token)
-                            ) if result.next_page_token else None
-    prev_page_url = url_for('.explore', **dict(request.args, page=result.prev_page_token)
-                            ) if result.prev_page_token else None
-
-    favourite_programs = g_db().get_hedy_choices()
-
-    # Do 'normalize_public_programs' on both sets at once, to save database calls
-    normalized = normalize_public_programs(list(result) + list(favourite_programs.records))
-    programs, favourite_programs = split_at(len(result), normalized)
-
-    # Filter out programs that are Hedy favorite choice.
-    programs = [program for program in programs if program['id'] not in {fav['id'] for fav in favourite_programs}]
-
-    keyword_lang = g.keyword_lang
-    adventures_names = hedy_content.Adventures(session['lang']).get_adventure_names(keyword_lang)
-
-    return render_template(
-        'explore.html',
-        programs=programs,
-        favourite_programs=favourite_programs,
-        filtered_level=str(level) if level else None,
-        next_page_url=next_page_url,
-        prev_page_url=prev_page_url,
-        filtered_adventure=adventure,
-        filtered_lang=language,
-        max_level=hedy.HEDY_MAX_LEVEL,
-        adventures_names=adventures_names,
-        page_title=gettext('title_explore'),
-        current_page='explore')
-
-
 def normalize_public_programs(programs):
-    """Normalize the content for all programs in the given array, for showing on the /explore or /user page.
+    """Normalize the content for all programs in the given array, for showing on the /user page.
 
     Does the following thing:
 
@@ -2332,7 +2317,7 @@ def normalize_public_programs(programs):
     """
     ret = []
     for program in programs:
-        program = pre_process_explore_program(program)
+        program = pre_process_public_program(program)
 
         # There is a record somewhere that doesn't have a code field, guard against that
         code = program.get('code', '')
@@ -2346,7 +2331,7 @@ def normalize_public_programs(programs):
 
 
 @querylog.timed
-def pre_process_explore_program(program):
+def pre_process_public_program(program):
     # If program does not have an error value set -> parse it and set value
     if 'error' not in program:
         try:
