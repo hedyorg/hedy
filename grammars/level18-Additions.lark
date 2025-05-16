@@ -1,15 +1,42 @@
-// adds round brackets in print() and range(), and changes ask to input
+// In this level we add a colon to if-else statements, function definitions, and loops.
+// The `<rule_name>` syntax specifies a preprocessor rule which would be applied in the grammar merger.
+// The merger will find the appropriate function for this annotation and modify it accordingly.
+// The preprocessor can also accept a parameter via the syntax <rule_name argument>.
 
-command: += input | input_empty_brackets | print_empty_brackets -= ask | error_ask_no_quotes | error_print_no_quotes >> assign | call
-_if_less_command: -= ask | error_ask_no_quotes | error_print_no_quotes
+command: += (if_pressed | if_pressed_no_colon) (if_pressed_elifs | if_pressed_elifs_no_colon)* (if_pressed_elses | if_pressed_elses_no_colon)? | (ifs | ifs_no_colon) (elifs | elifs_no_colon)* (elses | elses_no_colon)? | for_list_no_colon | for_loop_no_colon | while_loop_no_colon | define_no_colon -= ifs elses?
 
-print: _PRINT (_LEFT_BRACKET (quoted_text | list_access | print_expression) (_COMMA (quoted_text | list_access | print_expression))* _RIGHT_BRACKET)?
-print_empty_brackets: _PRINT _LEFT_BRACKET _RIGHT_BRACKET
-input_empty_brackets: var (_IS | _EQUALS ) _INPUT (_LEFT_BRACKET _RIGHT_BRACKET)
-input: var (_IS | _EQUALS) _INPUT (_LEFT_BRACKET  ((quoted_text | list_access | print_expression) (_COMMA (quoted_text | list_access | print_expression))*) _RIGHT_BRACKET)?
-for_loop: _FOR var _IN _RANGE _LEFT_BRACKET (POSITIVE_NUMBER | var_access) _COMMA (NUMBER | var_access) (_COMMA (POSITIVE_NUMBER | var_access))? _RIGHT_BRACKET _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+if_pressed:<needs_colon>
+if_pressed_no_colon:<old_rule_to_error if_pressed>
 
-?print_expression: NUMBER | expression | var_access
+if_pressed_else:<needs_colon>
 
-define: _DEF function_name _LEFT_BRACKET (arguments)? _RIGHT_BRACKET _COLON _EOL _SPACE command (_EOL _SPACE command)* _EOL? _END_BLOCK
-call: function_name _LEFT_BRACKET (arguments)? _RIGHT_BRACKET
+if_pressed_elses:<needs_colon>
+if_pressed_elses_no_colon:<old_rule_to_error if_pressed_elses>
+
+if_pressed_elifs: _EOL _ELIF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+if_pressed_elifs_no_colon: _EOL _ELIF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+
+
+
+ifs:<needs_colon>
+ifs_no_colon:<old_rule_to_error ifs>
+
+elses:<needs_colon>
+elses_no_colon:<old_rule_to_error elses>
+
+elifs: _EOL _ELIF _conditions _COLON _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+elifs_no_colon: _EOL _ELIF _conditions _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+
+
+
+for_list:<needs_colon>
+for_list_no_colon:<old_rule_to_error for_list>
+
+for_loop:<needs_colon>
+for_loop_no_colon:<old_rule_to_error for_loop>
+
+while_loop:<needs_colon>
+while_loop_no_colon:<old_rule_to_error while_loop>
+
+define:<needs_colon>
+define_no_colon:<old_rule_to_error define>
