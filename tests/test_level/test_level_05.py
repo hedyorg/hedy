@@ -216,7 +216,8 @@ class TestsLevel5(HedyTester):
     def test_ask_if(self):
         code = textwrap.dedent(f"""\
         name is ask 'what is your name?'
-        if name is Hedy print 'nice' else print 'boo!'""")
+        if name is Hedy print 'nice'
+        else print 'boo!'""")
 
         expected = textwrap.dedent(f"""\
         name = input(f'what is your name?')
@@ -320,7 +321,8 @@ class TestsLevel5(HedyTester):
     def test_if_assign_else_assign(self):
         code = textwrap.dedent("""\
         num is 0
-        if num is 0 result is num else result is b
+        if num is 0 result is num 
+        else result is b
         print result""")
 
         expected = textwrap.dedent("""\
@@ -373,7 +375,8 @@ class TestsLevel5(HedyTester):
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\
         naam is Hedy
-        if naam is Hedy print 'leuk' else print 'minder leuk'""")
+        if naam is Hedy print 'leuk'
+        else print 'minder leuk'""")
 
         expected = textwrap.dedent("""\
         naam = 'Hedy'
@@ -387,7 +390,8 @@ class TestsLevel5(HedyTester):
     def test_if_ask_equality_print_else_print(self):
         code = textwrap.dedent("""\
         kleur is ask 'Wat is je lievelingskleur?'
-        if kleur is groen print 'mooi!' else print 'niet zo mooi'""")
+        if kleur is groen print 'mooi!'
+        else print 'niet zo mooi'""")
 
         expected = textwrap.dedent("""\
         kleur = input(f'Wat is je lievelingskleur?')
@@ -401,7 +405,8 @@ class TestsLevel5(HedyTester):
     def test_if_else_followed_by_print(self):
         code = textwrap.dedent("""\
         kleur is geel
-        if kleur is groen antwoord is ok else antwoord is stom
+        if kleur is groen antwoord is ok
+        else antwoord is stom
         print antwoord""")
 
         expected = textwrap.dedent("""\
@@ -415,6 +420,7 @@ class TestsLevel5(HedyTester):
         self.single_level_tester(code=code, expected=expected)
 
     def test_if_equality_trailing_space_linebreak_print_else(self):
+        #TODO: dit mag dus niet meer, moet naar een foutmelding gaan!
         value = 'trailing space  '
         code = textwrap.dedent(f"""\
         naam is James
@@ -428,7 +434,7 @@ class TestsLevel5(HedyTester):
         else:
           print(f'biertje!')""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.single_level_tester(code=code, exception=hedy.exceptions.IndentationException)
 
     def test_if_equality_print_linebreak_else_print(self):
         # line break before else is allowed
