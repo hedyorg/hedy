@@ -202,7 +202,7 @@ adventures:
                     ### Übung
 
                     Schau dir <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">die Geschichte</a> an, falls du sie nicht kennst und stelle sicher, dass es wie im Buch ausgegeben wird.
-                example_code: "```\ntiere = _ , _ , _ \n{print} 'Brauner Bär'\n{print} 'Was siehst du?'\n```\n"
+                example_code: "```\ntiere = _ , _ , _\n{print} 'Brauner Bär'\n{print} 'Was siehst du?'\n```\n"
             13:
                 story_text: |
                     Durch die Verwendung der Befehle `{and}` und `{or}` kannst du deine Geschichten vielseitiger gestalten. Du kannst zwei Fragen stellen und auf die Kombination der Antworten antworten.
@@ -526,15 +526,15 @@ adventures:
                             deine_punkte_3 = _
                             deine_gesamtpunkte = _
                         {else}:
-                           {if} deine_gesamtpunkte _
+                            {if} deine_gesamtpunkte _
                                 _
                             {else}:
                                 _
                         {print} _
 
                     # Extra Karte für den Geber
-                    {if} geber_gesamtpunkte < 17
-                    _
+                    {if} geber_gesamtpunkte < 17:
+                        _
                     ```
         name: Blackjack 3
         default_save_name: Blackjack_3
@@ -1663,6 +1663,7 @@ adventures:
                 story_text: |
                     In diesem Level kannst du auch einen neuen Befehl nutzen: `{elif}`. `{elif}` ist eine Kombination der Schlüsselwörter `{else}` und `{if}` und du brauchst es, wenn du 3 (oder mehr!) Optionen erstellen möchtest.
                     Guck es dir jetzt an!
+                example_code: "```\ngewinne = ['1 Million Euro', 'einen Apfelkuchen', 'nichts']\ndein_gewinn = gewinne[{random}]\n{print} 'Du gewinnst ' dein_gewinn\n{if} dein_gewinn == '1 Million Euro' :\n    {print} 'Juhu! Du bist reich!'\n{elif} dein_gewinn == 'einen Apfelkuchen' :\n    {print} 'Schön, ein Apfelkuchen!'\n{else}:\n    {print} 'Viel Glück beim nächsten Mal..'\n```\n"
         default_save_name: sofalls
         description: '{elif}'
         name: '{elif}'
@@ -2953,6 +2954,7 @@ adventures:
                     ### Übung
                     Der Code, den du in Level 5 gesehen hast, prüft die Taste nur einmal. Kopiere den Beispielcode und füge ein `{repeat}` hinzu, so dass du die Tasten mehrmals drücken kannst.
                     Benutze diesen Code, um etwas Schönes zu zeichnen.
+                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
             9:
                 story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n**Extra** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
                 example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _\n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
@@ -2988,6 +2990,7 @@ adventures:
                     name = 'Hedy'
                     {print}('Mein Name ist ', name)
                     ```
+                example_code: "```\n{print}('Hallo!')\n{for} i {in} {range}(1, 10):\n    {print}('Dies ist Zeile ', i)\n```\n"
         name: '{print}'
         description: Einführung des {print} Befehls
         default_save_name: drucke
@@ -3119,6 +3122,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         {print} freunde[i] 's Glückszahl ist ' glückszahl[i]
                     ```
+                example_code_2: "```\nfrüchte = ['Apfel', 'Bananen', 'Kirschen']\n{print} früchte[{random}]\n```"
         name: '{random}'
     repeat_command:
         default_save_name: wiederhole_Befehl
@@ -3381,7 +3385,7 @@ adventures:
                     {print} 'Guten Appetit!'
                     ```
             9:
-                story_text: "In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!\n\n### Übung\nDie Einrückung im Beispiel-Code wurde entfernt.\nKannst du herausfinden wie viel Einrückung jede Zeile benötigt, damit der Code ordentlich funktioniert?\nFalls der Kunde Pizza bestellt, sollte Hedy nicht fragen, welche Soße der Kunde möchte.\n\n**(extra)** Ein Restaurant lagert nicht alle möglichen Soßen. Erstelle eine Liste mit verfügbaren Soßen und gib eine Antwort bei jeder Bestellung, ob du sie auf Lager hast. <br>\n**(extra)** Pizzen haben Beläge. Frag die Kunden, was sie möchten.<br>\n**(extra)** Möchten die Kunden etwas trinken? Frag sie! <br>\n"
+                story_text: "In diesem Level kannst du Verschachtelung benutzen, um dein Restaurant realistischer und spaßiger zu machen!\n\n### Übung\nDie Einrückung im Beispiel-Code wurde entfernt.\nKannst du herausfinden wie viel Einrückung jede Zeile benötigt, damit der Code ordentlich funktioniert?\nFalls der Kunde Pizza bestellt, sollte Hedy nicht fragen, welche Soße der Kunde möchte.\n\n**Extra** Ein Restaurant lagert nicht alle möglichen Soßen. Erstelle eine Liste mit verfügbaren Soßen und gib eine Antwort bei jeder Bestellung, ob du sie auf Lager hast. <br>\n**Extra** Pizzen haben Beläge. Frag die Kunden, was sie möchten.<br>\n**Extra** Möchten die Kunden etwas trinken? Frag sie! <br>\n"
                 example_code: |
                     ```
                     {print} 'Willkommen im Restaurant Chez Hedy!'
@@ -3410,7 +3414,7 @@ adventures:
 
                     ### Übung 1
                     Vervollständige den Code mit einem `{ask}` in den Lücken, sodass der Kunde für jeden Gang gefragt wird, was er essen möchte.
-                example_code: "```\ngänge = Vorspeise, Hauptgericht, Nachtisch\n{for} gang {in} gänge\n    {print} 'Was ist Ihre Bestellung als ' gang '?'\n    _ \n    _\n```\n"
+                example_code: "```\ngänge = Vorspeise, Hauptgericht, Nachtisch\n{for} gang {in} gänge\n    {print} 'Was ist Ihre Bestellung als ' gang '?'\n    _\n    _\n```\n"
                 story_text_2: |
                     ### Übung
                     Natürlich kannst auch für mehrere Personen bestellen!
@@ -3818,7 +3822,7 @@ adventures:
 
                     ### Übung 1
                     Kannst du den Babyhai-Code noch kürzer machen, indem du `{for}` verwendest? Vervollständige den Beispiel-Code.
-                example_code: "```\nfamilie = Baby, Mami, Papi, Omi, Opi\n_ _ _ _ \n  {print} _\n```\n"
+                example_code: "```\nfamilie = Baby, Mami, Papi, Omi, Opi\n_ _ _ _\n  {print} _\n```\n"
                 story_text_2: |
                     ### Übung 2
                     Gib das Lied Fünf kleine Affen springen auf dem Bett aus. Schlag den Text nach, falls du dich nicht daran erinnerst.
@@ -3959,6 +3963,8 @@ adventures:
                 story_text_2: |
                     ### Übung
                     Das ist der Anfang einer kleinen Treppe. Kannst Du sie so zeichnen, dass sie 5 Stufen hat?
+                example_code_2: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
+                example_code: "```\n{forward} 100\n{turn} {left}\n```\n"
             2:
                 story_text: |
                     In Level 1 konnte sich die Schildkröte nur nach links oder rechts drehen. Das ist ein bisschen langweilig!
@@ -4025,6 +4031,7 @@ adventures:
                 story_text_2: |
                     Du kannst auch die Farben der Linien mit dem `{color}` Befehl ändern. Sieh dir das Beispiel an.
                     Du kannst auch den `{color} {white}` Befehl benutzen, um "unsichtbare" Linien zu ziehen. Du kannst diese weißen Linien nutzen, um die Schildkröte irgendwo auf dem Bildschirm hin zu bewegen bevor du zu malen anfängst.
+                example_code_2: "```\n{color} {white}\n{forward} -80\n{color} {green}\n{forward} 50\n{color} {yellow}\n{forward} 50\n{color} {red}\n{forward} 50\n```\n"
             5:
                 story_text: |
                     In Level 5 kannst Du mit dem Befehl `{if}` Entscheidungen treffen. Du kannst Dich zum Beispiel zwischen verschiedenen Formen entscheiden.
@@ -4117,6 +4124,7 @@ adventures:
                     Dieser Code erzeugt drei schwarze Dreiecke, ändere dies zu fünf pinken Quadraten.
 
                     **Extra** Erstelle eine Figur deiner Wahl, die aus mindestens zwei verschiedenen Formtypen besteht.
+                example_code: "```\n{color} {black}\n{repeat} 3 {times}\n    {repeat} 3 {times}\n        {forward} 10\n        {turn} 120\n    {color} {white}\n    {forward} 50\n    {color} {black}\n```\n"
             10:
                 story_text: |
                     In diesem Level kannst du die Schildkröte eine Figur zeichnen lassen.
