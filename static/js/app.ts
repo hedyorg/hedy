@@ -885,8 +885,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       turtleConfig.worldHeight = 250;
   }
   else {
-      turtleConfig.height = 300;
-      turtleConfig.worldHeight = 300;
+      turtleConfig.height = 250;
+      turtleConfig.worldHeight = 250;
   }
   // Always set the width to output panel width -> match the UI
   turtleConfig.width = outputDiv.width();
