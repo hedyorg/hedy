@@ -61,6 +61,11 @@ class Given:
         self.db.store_user(teacher)
         return {'username': username, 'password': password}
 
+    def assign_second_teacher(self, username, class_id):
+        user = self.db.user_by_username(username)
+        cls = self.db.get_class(class_id)
+        self.db.add_second_teacher_to_class(cls, user)
+
     def logged_in_as_new_student(self, username=None):
         """Make sure that we are logged in."""
         user = self.a_student_account(username)
@@ -79,6 +84,17 @@ class Given:
             'password': user['password'],
         }), content_type='application/json')
         assert response.status_code == 200
+
+    def a_class(self, teacher):
+        data = {
+            'id': unique_id(),
+            'date': now_javascript(),
+            'teacher': teacher,
+            'name': unique_id(),
+            'link': "R0dgrqL",
+        }
+        self.db.store_class(data)
+        return data
 
     def some_saved_program(self, username, **kwargs):
         """Save a program for the given user."""
