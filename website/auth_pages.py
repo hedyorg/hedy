@@ -471,7 +471,7 @@ class AuthModule(WebsiteModule):
             "language": account["language"],
             "keyword_language": account["keyword_language"],
             "created": timems(),
-            "is_teacher": True if account.get("is_teacher") else None,
+            "is_teacher": 1 if account.get("is_teacher") else None,
             "verification_pending": hashed_token,
             "last_login": timems(),
             "pair_with_teacher": 1 if account.get("pair_with_teacher") else 0,
