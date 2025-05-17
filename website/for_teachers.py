@@ -343,8 +343,7 @@ class ForTeachersModule(WebsiteModule):
                 adventures_tried += 1
                 name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                 customized_level = class_adventures_formatted.get(str(program['level']))
-                if next((adventure for adventure in customized_level if adventure["name"] == name), False)\
-                        and program.get('is_modified'):
+                if next((adventure for adventure in customized_level if adventure["name"] == name), False):
                     student_adventure_id = f"{student}-{program['adventure_name']}-{level}"
                     current_adventure = self.db.student_adventure_by_id(student_adventure_id)
                     if not current_adventure:
@@ -606,20 +605,19 @@ class ForTeachersModule(WebsiteModule):
             date = utils.delta_timestamp(item['date'])
             # This way we only keep the first 4 lines to show as preview to the user
             preview_code = "\n".join(item['code'].split("\n")[:4])
-            if item.get('is_modified', True):
-                programs.append(
-                    {'id': item['id'],
-                     'preview_code': preview_code,
-                     'code': item['code'],
-                     'date': date,
-                     'level': item['level'],
-                     'name': item['name'],
-                     'adventure_name': item.get('adventure_name'),
-                     'submitted': item.get('submitted'),
-                     'public': item.get('public'),
-                     'number_lines': item['code'].count('\n') + 1
-                     }
-                )
+            programs.append(
+                {'id': item['id'],
+                 'preview_code': preview_code,
+                 'code': item['code'],
+                 'date': date,
+                 'level': item['level'],
+                 'name': item['name'],
+                 'adventure_name': item.get('adventure_name'),
+                 'submitted': item.get('submitted'),
+                 'public': item.get('public'),
+                 'number_lines': item['code'].count('\n') + 1
+                 }
+            )
         return jinja_partials.render_partial("incl/programs_loop.html",
                                              programs=programs,
                                              adventure_names=adventure_names,
