@@ -207,9 +207,23 @@ adventures:
                 example_code: |
             6:
                 story_text: |
+                    `ask`,` print` a `if` stále fungují jako na úrovních 5.
+                     V úrovni 6 je ale něco nového, nyní můžeš také počítat!
+
+                     Plus je jednoduché, můžeš ho zapsat jako u matematiky, například `5 + 5`. Mínus funguje stejně, je to `5 - 5`.
+
+                     S krát je to trochu jiné, protože na klávesnici pro něj není žádný symbol. Zkus ho najít, opravdu tam není!
+                     Písmenko x by se nám pletlo se slovy, proto násobíme hvězdičkou: `5 * 5`. Přečti si to jako "5 krát 5", pak si to zapamatujete nejsnáze.
+                     ```
+                     print '5 plus 5 je ' 5 + 5
+                     print '5 mínus 5 je ' 5 - 5
+                     print '5 krát 5 je ' 5 * 5
+                     ```
                 example_code: "```\njídlo_cena {is} 0\nnápoj_cena {is} 0\ncelková_cena {is} 0\n{print} 'Vítejte v McHedy'\nobjednávka {is} {ask} 'Co si dáte k jídlu?'\n{if} objednávka {is} hamburger jídlo_cena {is} 5\n{if} objednávka {is} hranolky jídlo_cena {is} 2\nnápoj {is} {ask} 'Co byste si dal k pití?'\n{if} nápoj {is} voda nápoj_cena {is} 0\n{else} nápoj_cena {is} 3\ncelková_cena {is} jídlo_cena + nápoj_cena\n{print} 'To bude ' celková_cena ' dolarů, prosím'\n```\n"
             7:
                 story_text: |
+                    `ask`, `print` a `if` fungují stejně jako na úrovni 5 a 6.
+                    Úroveň 7 však přidává příkaz `repeat`, pomocí kterého lze řádek kódu provést vícekrát.
                 example_code: |
             8:
                 story_text: |
@@ -241,7 +255,11 @@ adventures:
                     ```
             16:
                 story_text: Už i naše seznamy mají vlastní závorky! Budeme je psát do hranatých závorek a jejich  jednotlivé položky do jednoduchých uvozovek ('), které už známe.
-                example_code: |
+                example_code: |-
+                    ```
+                    ovoce = ['jablko', 'banán', 'třešně']
+                    {print} ovoce
+                    ```
             17:
                 story_text: |
                     Nyní trochu změníme odsazení. Pokaždé, když potřebujeme odsazení, je třeba zapsat znak `:` na řádku před tímto odsazením.
