@@ -1331,7 +1331,6 @@ def hour_of_code(level, program_id=None):
     prev_level, next_level = utils.find_prev_next_levels(
         list(available_levels), level_number)
 
-    commands = hedy.commands_per_level.get(level)
     return render_template(
         "code-page.html",
         level_nr=str(level_number),
@@ -1347,7 +1346,7 @@ def hour_of_code(level, program_id=None):
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
-        commands=commands,
+        lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
         # parsons=parsons,
         # parsons_exercises=parson_exercises,
         latest=version(),
@@ -1568,7 +1567,6 @@ def index(level, program_id):
     for i, adventure in enumerate(adventures):
         if adventure.save_info:
             completed = i
-    commands = hedy.commands_per_level.get(level)
     return render_template(
         "code-page.html",
         level_nr=str(level_number),
@@ -1583,7 +1581,7 @@ def index(level, program_id):
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
-        commands=commands,
+        lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
         parsons=parsons,
         parsons_exercises=parson_exercises,
         latest=version(),
@@ -1706,7 +1704,6 @@ def tryit(level, program_id):
     for i, adventure in enumerate(adventures):
         if adventure.save_info:
             completed = i
-    commands = hedy.commands_per_level.get(level)
     return render_template(
         "hedy-page/code-page.html",
         level_nr=str(level_number),
@@ -1721,7 +1718,7 @@ def tryit(level, program_id):
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
-        commands=commands,
+        lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
         latest=version(),
         cheatsheet=cheatsheet,
         progress={'completed': completed, 'total': len(adventures)},
@@ -1957,8 +1954,6 @@ def get_specific_adventure(name, level, mode):
         adventures.append(current_adventure)
         prev_level, next_level = utils.find_prev_next_levels(customizations["available_levels"], level)
 
-    # Add the commands to enable the language switcher dropdown
-    commands = hedy.commands_per_level.get(level)
     raw = mode == 'raw'
     initial_tab = name
     initial_adventure = adventures[0]
@@ -1966,7 +1961,7 @@ def get_specific_adventure(name, level, mode):
     return render_template("code-page.html",
                            specific_adventure=True,
                            level_nr=str(level),
-                           commands=commands,
+                           lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
                            level=level,
                            prev_level=prev_level,
                            next_level=next_level,
@@ -2439,12 +2434,6 @@ def other_keyword_language():
     if session.get('keyword_lang') and session['keyword_lang'] != "en":
         return make_keyword_lang_obj("en")
     return None
-
-
-@app.app_template_global()
-def translate_command(command):
-    # Return the translated command found in KEYWORDS, if not found return the command itself
-    return hedy_content.KEYWORDS[g.lang].get(command, command)
 
 
 @app.app_template_filter()
