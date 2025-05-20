@@ -433,13 +433,15 @@ class HedyTester(unittest.TestCase):
         color_dict = {hedy_translation.translate_keyword_from_en(x, lang): x for x in hedy.english_colors}
         both_colors = hedy.command_make_color_local(lang)
 
+        actual_val = val if val not in color_dict else color_dict[val]
+
         return textwrap.dedent(f'''\
-        __trtl = f'{val}'
+        __trtl = f'{actual_val}'
         color_dict = {color_dict}
         if __trtl not in {both_colors}:
           raise Exception(f{HedyTester.value_exception_transpiled()})
         else:
-          if not __trtl in {hedy.english_colors}:
+          if __trtl not in {hedy.english_colors}:
             __trtl = color_dict[__trtl]
         t.pencolor(__trtl)''')
 

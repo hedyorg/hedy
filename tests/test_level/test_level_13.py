@@ -131,3 +131,24 @@ class TestsLevel13(HedyTester):
             max_level=16,
             skip_faulty=False
         )
+
+    def test_color_in_function(self):
+        code = textwrap.dedent("""\
+            define move with color
+                color color
+            c = 'blue'
+            call move with c""")
+
+        expected = self.dedent(
+            "def move(color):",
+            (self.color_transpiled('{color}'), '  '),
+            "c = Value('blue')",
+            "move(c)"
+        )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=16,
+            extra_check_function=self.is_turtle(),
+        )
