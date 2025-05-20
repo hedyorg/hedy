@@ -1473,13 +1473,12 @@ class ForTeachersModule(WebsiteModule):
             return make_response({"error": err}, 400)
 
         # Validate the class
-        classes = self.db.get_teacher_classes(user["username"], False)
-        classes = [c for c in classes if c["id"] == body["class"]]
-        if not classes:
+        classes = self.db.get_teacher_classes(user["username"], True)
+        class_ = next(iter([c for c in classes if c['id'] == body['class']]), None)
+        if not class_:
             return make_response(gettext("request_invalid"), 404)
         # Note that the teacher creating the account might be a second teacher for the class
         # In this case, we link the student account to the main teacher
-        class_ = classes[0]
         teacher = class_.get("teacher")
 
         # Now, actually store the users in the db
@@ -1596,28 +1595,30 @@ class ForTeachersModule(WebsiteModule):
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
         # This is a quite expensive retrieval, but we should be fine as this page is not called often
         # We only need the name, id and if it already has the adventure set as data to the front-end
-        Classes = self.db.get_teacher_classes(user["username"])
-        class_data = []
-        for Class in Classes:
+        classes = self.db.get_teacher_classes(user["username"], True)
+        adventure_used_in_classes = []
+        for Class in classes:
             customizations = self.db.get_class_customizations(Class.get("id"))
             for level in adventure.get("levels", []):
                 # TODO: change name to id in sorted_adventures (probably it's only teachers' adventures!)
-                if customizations and customizations.get("sorted_adventures") and \
-                    any(adv for adv in customizations.get("sorted_adventures", {}).get(level, [])
-                        if adv.get("name") == adventure.get("id")):
-                    temp = {"name": Class.get("name"), "id": Class.get("id"),
-                            "teacher": Class.get("teacher"), "students": Class.get("students", []),
-                            "date": Class.get("date"), "classes": Class.get("classes")}
-                    class_data.append(temp)
-                    # Class["from_teacher"] = True
+                adventures_for_level = customizations.get(
+                    "sorted_adventures", {}).get(level, []) if customizations else []
+                if any(adv for adv in adventures_for_level if adv.get("name") == adventure.get("id")):
+                    adventure_used_in_classes.append({
+                        "name": Class.get("name"),
+                        "id": Class.get("id"),
+                        "teacher": Class.get("teacher"),
+                        "students": Class.get("students", []),
+                        "date": Class.get("date")
+                    })
                     break
 
         return render_template(
             "customize-adventure.html",
             page_title=gettext("title_customize-adventure"),
             adventure=adventure,
-            adventure_classes=class_data,
-            all_classes=Classes,
+            adventure_classes=adventure_used_in_classes,
+            all_classes=classes,
             username=user["username"],
             max_level=hedy.HEDY_MAX_LEVEL,
             # TODO: update tags to be {name, canEdit} where canEdit is true if currentUser is the creator.
