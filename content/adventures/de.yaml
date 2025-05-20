@@ -1424,7 +1424,14 @@ adventures:
                     In diesem Level nähern wir uns ein bisschen mehr echtem Python-Code. Außerdem lernst du, wie man zwei Listen miteinander verbindet.
                     So kannst du einen Code programmieren, in dem ein Tier mit dem entsprechenden Tiergeräusch verbunden ist.
                     Weil die zwei Codes unten … ganz offensichtlicher Blödsinn sind!
-                example_code: |
+                example_code: |-
+                    ```
+                    freunde = ['Ahmed', 'Ben', 'Clemens']
+                    glückszahlen = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3
+                        {print} 'Die Glückszahl von ' freunde[i]
+                        {print} 'ist ' glückszahlen[i]
+                    ```
             17:
                 story_text: |
                     Jetzt werden wir die Einrückung ein wenig ändern. Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
