@@ -2019,7 +2019,7 @@ class ConvertToPython_2(ConvertToPython_1):
             return f"t.pencolor('black'){self.add_debug_breakpoint()}"
 
         value = self.unpack(args[0])
-        value = self.process_arg_for_fstring(value)
+        value = self.process_arg_for_fstring(value, meta.line)
 
         return self.make_turtle_color_command(value, Command.color, 'pencolor', self.language)
 
