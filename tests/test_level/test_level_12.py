@@ -4350,11 +4350,23 @@ class TestsLevel12(HedyTester):
     @parameterized.expand(hedy.english_colors)
     def test_all_colors(self, color):
         code = f'color {color}'
-        expected = self.color_transpiled(f'"{color}"')
+        expected = self.color_transpiled(f'{color}')
 
         self.multi_level_tester(
             code=code,
             expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
+    @parameterized.expand(['zwart', 'blauw', 'bruin', 'grijs', 'groen', 'oranje', 'roze', 'rood', 'wit', 'geel'])
+    def test_all_colors_nl(self, color):
+        code = f'kleur {color}'
+        expected = self.color_transpiled(f'{color}', lang='nl')
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            lang='nl',
             extra_check_function=self.is_turtle()
         )
 

@@ -1959,7 +1959,7 @@ class ConvertToPython_1(ConvertToPython):
             if {variable} not in {both_colors}:
               raise Exception(f{ex})
             else:
-              if not {variable} in {english_colors}:
+              if {variable} not in {english_colors}:
                 {variable} = color_dict[{variable}]
             t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
@@ -2997,10 +2997,9 @@ class ConvertToPython_12(ConvertToPython_11):
         elif is_quoted(name):
             name = name[1:-1]
             return name.replace("'", "\\'")
-        elif not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
-            # We end up here with colors
-            name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+        elif self.is_bool(name):
             name = '"' + name + '"'
+        # We end up here with colors, ints and floats
         return str(name)
 
     def list_access(self, meta, args):
