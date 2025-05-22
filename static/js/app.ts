@@ -200,7 +200,9 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   if (theUserIsLoggedIn) {
     theLocalSaveWarning.setLoggedIn();
   }
-
+  // Once the page is loaded, we can confindetly show the adventure name
+  // and thus the dash next to it
+  document.getElementById('level_separator')?.classList.remove('hidden');
   // Event listener to close the adventures dropdown when you click outside of it
   document.addEventListener('click', (ev) => {
     const target = ev.target as HTMLElement;
