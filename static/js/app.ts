@@ -203,6 +203,11 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   // Once the page is loaded, we can confindetly show the adventure name
   // and thus the dash next to it
   document.getElementById('level_separator')?.classList.remove('hidden');
+  for (const el of document.querySelectorAll('*[data-loading]')) {
+    el.removeAttribute('data-loading');
+    el.removeAttribute('disabled');
+  }
+
   // Event listener to close the adventures dropdown when you click outside of it
   document.addEventListener('click', (ev) => {
     const target = ev.target as HTMLElement;
@@ -1717,7 +1722,7 @@ function updatePageElements() {
     if (isSubmitted) {
       hand_in_btn?.setAttribute('disabled', 'disabled');
     } else {
-      hand_in_btn?.removeAttribute('disabled');
+      // hand_in_btn?.removeAttribute('disabled');
     }
     theGlobalEditor.isReadOnly = isSubmitted;
     // All of these are for the buttons added in the new version of the code-page
