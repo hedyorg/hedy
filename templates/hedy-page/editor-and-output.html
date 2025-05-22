@@ -138,13 +138,13 @@
   <div class="order-2 lg:order-3" id="code_related_buttons">
     <div id="button_row" class="flex flex-row gap-2 mb-4">
       <div id="run_button_container" class="gap-2 flex flex-row flex-initial">
-          <button id="runit" data-cy="runit" class="green-btn-new" title="{{_('run_code_button')}}" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
+          <button id="runit" data-cy="runit" class="green-btn-new" title="{{_('run_code_button')}}" data-loading disabled onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
             <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
             <span>{{_('run_code_button')}}</span>
           </button>
           <button id="stopit" data-cy="stopit" class="red-btn-new" title="{{_('stop_code_button')}}" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
           <div class="flex-1 md:hidden"></div>
-          <button id="debug_button" class="blue-btn-new" title="{{_('debug')}}" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
+          <button id="debug_button" class="blue-btn-new" title="{{_('debug')}}" data-loading disabled onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
               <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
               {{_('debug')}}
            </button>
@@ -165,7 +165,7 @@
       </div>
       <div class="flex-1"></div>
       {% if username and current_user_is_in_class %}
-        <button class="blue-btn-new w-fit" id="hand_in" title="{{_('hand_in')}}" _="on click remove .hidden from #share_modal">
+        <button class="blue-btn-new w-fit" id="hand_in" title="{{_('hand_in')}}" _="on click remove .hidden from #share_modal" data-loading disabled >
           <i class="fa-solid fa-paper-plane ltr:mr-1 rtl:ml-1"></i>
           {{_('hand_in')}}
         </button>
@@ -194,7 +194,7 @@
   </div>
   <div class="order-3 lg:order-4" id="code_related_buttons">
     <div class="flex flex-row mb-4 gap-4">
-      <button id="hide_editor" class="blue-btn-new rounded items-center hidden lg:inline-block" onclick="hedyApp.hide_editor();" title="{{ _('expand_output') }}">
+      <button id="hide_editor" class="blue-btn-new rounded items-center hidden lg:inline-block" data-loading disabled onclick="hedyApp.hide_editor();" title="{{ _('expand_output') }}">
         <i class="fa-solid fa-caret-left"></i>
         <span class="hidden xl:inline-flex"> {{ _('expand_output') }} </span>
       </button>

@@ -76,6 +76,9 @@ export class IndexTabs {
 
   public switchToTab(tabName: string, level: number) {
     const doSwitch = () => {
+      // Once the javascript has loeaded, we can remove the loading spinner
+      // and show the content
+      document.getElementById('adventure_loading')?.classList.add('hidden')
       const oldTab = this._currentTab;
       this._currentTab = tabName;
 

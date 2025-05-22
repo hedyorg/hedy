@@ -18,28 +18,20 @@
   </div>
 {% endif %}
 <div class="mt-4 mb-1 mx-auto py-2 px-4 lg:px-16 flex flex-col lg:flex-row gap-4 justify-start w-full max-w-screen-2xl">
-  <div class="flex flex-row justify-between sm:justify-normal gap-4 hidden">
-    {% if current_user_is_in_class %}
-    <button id="hand_in_button" class="blue-btn-new next-tab">
-      <span class="fa fa-paper-plane ltr:mr-1 rtl:ml-1"></span>
-      {{_('submit_program')}}
-    </button>
-    {% endif %}
-  </div>
   <div class="flex flex-row gap-4">
     <div class="flex flex-col md:flex-row md:gap-2" id="level_adventure_title">
       <div class="dropdown relative">
         <div class="flex flex-row">
-          <button type="text" id="dropdow_open_button" data-cy="dropdown_open_button"
+          <button type="text" id="dropdow_open_button" data-cy="dropdown_open_button"  data-loading disabled
                   class="blue-btn-new text-4xl font-light text-blue-800" onclick="hedyApp.open_index_dropdown(event)">
             <span>
               {{ _('level_title') }} {{ level_nr }}
             </span>
-            <span>
+            <span class="hidden" id="level_separator">
               —
             </span>
             <span id="adventure_name" >
-              {{ initial_adventure.name }}
+              
             </span>
             <i class="fa-solid fa-chevron-down transition-all ease-in duration-300 text-3xl" id="dropdown_index_arrow"></i>
           </button>
