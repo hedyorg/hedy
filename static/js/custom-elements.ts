@@ -23,7 +23,7 @@ export class HedySelect extends HTMLElement {
             option.hidden = true;
             const newDiv = document.createElement('div');
             newDiv.classList.add('option');
-            newDiv.innerHTML = option.innerText;
+            newDiv.innerHTML = option.innerHTML;
             newDiv.dataset['value'] = option.value;
             newDiv.classList.toggle('selected', option.selected);
             dropdownMenu.appendChild(newDiv)
