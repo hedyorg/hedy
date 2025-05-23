@@ -89,7 +89,7 @@ def _get_keys(input_):
 def _get_missing_arguments(input_, args, lang):
     """ Discover and translate keywords used in the template which are missing from the arguments, e.g. {print} """
     matches = _get_keys(input_)
-    existing_keywords = hedy_translation.keywords_to_dict_single_choice(lang)
+    existing_keywords = hedy_translation.keywords_to_dict(lang).keys()
     used_keys = [k for k in matches if k not in args and k in existing_keywords]
     translated_keywords = {k: _translate_error_arg(k, lang) for k in used_keys}
     return translated_keywords

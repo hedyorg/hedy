@@ -44,11 +44,19 @@
         </tr>
       </thead>
       <tbody>
-        {% for command in commands %}
+        {% for en_phrase, local_phrase in lang_switch_table.items() %}
         <tr>
-          <td class="ltr:text-right rtl:text-left"><code>{{ command }}</code></td>
+          <td class="ltr:text-right rtl:text-left">
+            {% for en_key in en_phrase %}
+            <code>{{ en_key }}</code>
+            {% endfor %}
+          </td>
           <td class="text-center">⟷</td>
-          <td class="ltr:text-left rtl:text-right"><code>{{  translate_command(command) }}</code></td>
+          <td class="ltr:text-left rtl:text-right">
+            {% for local_key in local_phrase %}
+            <code>{{ local_key }}</code>
+            {% endfor %}
+          </td>
         </tr>
         {% endfor %}
       </tbody>

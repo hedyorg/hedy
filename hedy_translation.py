@@ -1,12 +1,11 @@
-from collections import namedtuple, defaultdict
+import re
+from collections import defaultdict, namedtuple
+
 from lark import Token, Transformer, v_args
 from lark.exceptions import VisitError
+
 import hedy
-from os import path
 import hedy_content
-from website.yaml_file import YamlFile
-import copy
-import re
 
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").
@@ -14,36 +13,49 @@ Rule = namedtuple("Rule", "keyword line start end value")
 
 
 def keywords_to_dict(lang="nl"):
-    """ "Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
-    base = path.abspath(path.dirname(__file__))
+    """Return a dictionary from keyword symbols to their translations in `lang`
 
-    keywords_path = "content/keywords/"
-    yaml_filesname_with_path = path.join(base, keywords_path, lang + ".yaml")
+    Examples:
 
-    # as we mutate this dict, we have to make a copy
-    # as YamlFile re-uses the yaml contents
-    command_combinations = copy.deepcopy(
-        YamlFile.for_file(yaml_filesname_with_path).to_dict()
-    )
-    for k, v in command_combinations.items():
-        words = v.split("|")
+    >>> keywords_to_dict('en')['not_in'] == ['not in']
+    >>> keywords_to_dict('fr')['repeat'] == ['répète', 'repete']
+    >>> keywords_to_dict('nl')['to'] == ['tot']
+    >>> keywords_to_dict('nl')['to_list'] == ['toe ann']
+    """
+    return {
         # Sort the keywords by length descending. This is important for the substitution logic later
-        command_combinations[k] = list(sorted(words, key=len, reverse=True))
+        k: list(sorted(local_keys, key=len, reverse=True))
+        for k, local_keys in hedy_content.ALL_KEYWORDS[lang].items()
+    }
 
-    return command_combinations
 
+def lang_switch_table(level: int, lang1: str, lang2: str | None = None):
+    from_lang, to_lang = (lang1, lang2) if lang2 else ('en', lang1)
 
-def keywords_to_dict_single_choice(lang):
-    command_combinations = keywords_to_dict(lang)
-    return {k: v[0] for (k, v) in command_combinations.items()}
+    phrases = [
+        ('at', 'random'),
+        ('add', 'to'),
+        ('range', 'to_list'),
+        ('remove', 'from'),
+        ('repeat', 'times'),
+    ]
+    keysym_to_phrase = {k: phrase for phrase in phrases for k in phrase}
+
+    def xlated_phrase(keysym, lang):
+        phrase = keysym_to_phrase.get(keysym, (keysym,))
+        return tuple(hedy_content.KEYWORDS[lang].get(k, k) for k in phrase)
+
+    return {
+        xlated_phrase(keyword_symbol, from_lang): xlated_phrase(keyword_symbol, to_lang)
+        for keyword_symbol in hedy.commands_per_level[level]
+    }
 
 
 def all_keywords_to_dict():
     """Return a dictionary where each value is a list of the translations of that keyword (key). Used for testing"""
     keyword_dict = {}
     for lang in hedy_content.ALL_KEYWORD_LANGUAGES:
-        commands = keywords_to_dict_single_choice(lang)
-        keyword_dict[lang] = commands
+        keyword_dict[lang] = {k: v[0] for k, v in keywords_to_dict(lang).items()}
 
     all_translations = {k: [v.get(k, k) for v in keyword_dict.values()] for k in keyword_dict["en"]}
     return all_translations
