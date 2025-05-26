@@ -1722,7 +1722,7 @@ function updatePageElements() {
     if (isSubmitted) {
       hand_in_btn?.setAttribute('disabled', 'disabled');
     } else {
-      // hand_in_btn?.removeAttribute('disabled');
+      hand_in_btn?.removeAttribute('disabled');
     }
     theGlobalEditor.isReadOnly = isSubmitted;
     // All of these are for the buttons added in the new version of the code-page
