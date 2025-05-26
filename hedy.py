@@ -2997,9 +2997,10 @@ class ConvertToPython_12(ConvertToPython_11):
         elif is_quoted(name):
             name = name[1:-1]
             return name.replace("'", "\\'")
-        elif self.is_bool(name):
+        elif not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
+            # We end up here with colors and booleans
+            name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
             name = '"' + name + '"'
-        # We end up here with colors, ints and floats
         return str(name)
 
     def list_access(self, meta, args):
