@@ -705,7 +705,7 @@ adventures:
                     ### Übung 1
                     Wir wollen das Übungsprogramm etwas schwieriger gestalten. Der Spieler muss nun zwei Fragen richtig beantworten. Fülle die Lücken aus, um das Programm zu vervollständigen.
 
-                    ### Übung 2 (extra)
+                    ### Übung 2
                     Manchmal gibt es bei Berechnungen mehrere richtige Antworten. Zum Beispiel kann 10 durch 5 und durch 2 geteilt werden. Die Frage "Welche Zahl teilt 10?" kann also durch 2 und durch 5 beantwortet werden.
                     Frage nach einer Berechnung, die mehrere richtige Antworten hat, bitte die Spielerin, sie zu beantworten, und bestimme mit `{or}`, ob die Antwort richtig ist.
                     Leere das Programmierfeld und erstelle deine eigene Lösung.
@@ -1292,21 +1292,12 @@ adventures:
                     ```
             5:
                 story_text: |
-                    In Level 5 gibt es etwas Neues, nämlich das `{if}`! Mit `{if}` kannst du zwischen zwei verschiedenen Möglichkeiten wählen.
-                    Dieser Code gibt 'Toll!' aus, wenn du Hedy als Namen eingibst, und 'Blöd!', wenn du etwas anderes eingibst.
-                    `{ask}` und `{print}` funktionieren immer noch wie in Level 4.
                 example_code: |
                     ```
                     passwort {is} {ask} 'Was ist das richtige Passwort?'
                     ```
             6:
                 story_text: |
-                    In diesem Level lernst du etwas Neues: Du kannst jetzt auch rechnen.
-
-                    Das Plus ist leicht, das schreibst du wie in Mathe: `5 + 5` zum Beispiel. Das Minus funktioniert genauso, zum Beispiel `5 - 5`.
-
-                    Das Mal ist etwas anders, da auf deiner Tastatur kein Malzeichen vorhanden ist. Suche mal, das gibt es wirklich nicht!
-                    Deshalb multiplizieren wir mit dem Stern (auf der Tastatur über dem Plus): `5 * 5`. Lies das als "5 mal 5", dann kannst du dich am einfachsten daran erinnern.
                 example_code: |
                     ```
                     essen_preis {is} 0
@@ -1324,16 +1315,9 @@ adventures:
                     ```
             7:
                 story_text: |
-                    In Level 7 kommt der Befehl `{repeat}` dazu. Mit `{repeat}` kannst du eine Zeile Code mehrmals ausführen.
                 example_code: |
-                    ```
-                    {repeat} 3 {times} {print} 'Hedy macht Spaß!'
-                    ```
             8:
                 story_text: |
-                    `{ask}` und `{print}` funktionieren immer noch wie du es gewohnt bist. Aber `{if}`, `{else}` und `{repeat}` haben sich verändert!
-                    Du kannst jetzt mehrere Zeilen gruppieren, aber du musst den Code dafür *einrücken*.
-                    Das bedeutet, dass du die Befehlszeilen mit vier Leerzeichen beginnen musst. Das gilt auch, wenn du einen Block mit nur einer Zeile schreiben möchtest.
                 example_code: |
                     ```
                     {repeat} 5 {times} {print} 'Im nächsten Abenteuer kannst du mehrere Zeilen auf einmal ausgeben!'
@@ -1441,13 +1425,6 @@ adventures:
                     So kannst du einen Code programmieren, in dem ein Tier mit dem entsprechenden Tiergeräusch verbunden ist.
                     Weil die zwei Codes unten … ganz offensichtlicher Blödsinn sind!
                 example_code: |
-                    ```
-                    freunde = ['Ahmed', 'Ben', 'Clemens']
-                    glückszahlen = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} 'Die Glückszahl von ' freunde[i]
-                        {print} 'ist ' glückszahlen[i]
-                    ```
             17:
                 story_text: |
                     Jetzt werden wir die Einrückung ein wenig ändern. Jedes Mal, wenn wir eine Einrückung benötigen, brauchen wir `:` in der Zeile vor der Einrückung.
@@ -1456,10 +1433,6 @@ adventures:
                     Probier es mal aus!
             18:
                 story_text: |
-                    Wir sind bei echtem Python-Code angekommen! Das bedeutet, dass wir ab jetzt runde Klammern mit den Befehlen `{print}` und `{range}` benutzen müssen.
-                    Es bedeutet auch, dass du Hedy-Code aus diesem Level in jeder Python-Umgebung benutzen kannst, solange du die englischen Befehle nutzt. Falls du es bisher noch nicht gemacht hast, kannst du den Schalter im Befehlsmenü zum Umschalten benutzen.
-
-                    {print}('Ich heiße ', name)
     dice:
         name: Würfel
         default_save_name: Würfel
@@ -1637,7 +1610,7 @@ adventures:
                     Mit dem Befehl `{repeat}` kannst du Code-Zeilen wiederholen. Das kannst du nutzen, um für mehrere Tage zu berechnen, wer abwäscht.
                     ### Übung
                     Benutze den `{repeat}` Befehl um zu entscheiden wer die ganze Woche abwaschen muss. Jede Lücke muss mit einem Befehl oder einer Zahl gefüllt werden!
-                    **(Extra)** Kannst du an eine andere Aufgabe im Haushalt denken? Passe den Code an, sodass er drei Haushaltsaufgaben entscheidet. Vergiss nicht auszugeben um welche Aufgaben es sich handelt!
+                    **Extra** Kannst du an eine andere Aufgabe im Haushalt denken? Passe den Code an, sodass er drei Haushaltsaufgaben entscheidet. Vergiss nicht auszugeben um welche Aufgaben es sich handelt!
                 example_code: |
                     ```
                     Familienmitglieder = Mama, Papa, Emma, Sophie
@@ -1649,7 +1622,7 @@ adventures:
 
                     ### Übung
                     Füge eine zweite Hauspflicht hinzu, wie z.B. Staubsaugen oder Aufräumen, und stelle sicher, dass sie ebenfalls für die ganze Woche aufgeteilt ist.
-                    <br> **(Extra)** Das Programm ist nicht fair, du kannst Pech haben und die ganze Woche abwaschen. Wie könntest du das Programm fairer machen?
+                    <br> **Extra** Das Programm ist nicht fair, du kannst Pech haben und die ganze Woche abwaschen. Wie könntest du das Programm fairer machen?
                 example_code: |
                     ```
                     tage = Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag
@@ -2462,7 +2435,7 @@ adventures:
                     Das Plus ist einfach, du schreibst es wie in Mathe: `5 + 5` zum Beispiel. Das Minus klappt auch prima, es ist `5 - 5`.
 
                     Das Mal ist ein bisschen anders, weil es dafür kein Symbol auf deiner Tastatur gibt. Such danach, es gibt wirklich keins!
-                    Darum multiplizieren wir mit dem Sternchen über der 8: `5 * 5`. Lies das als "5 mal 5", so kannst du es dir am Besten merken.
+                    Darum multiplizieren wir mit dem Stern (auf der Tastatur über dem Plus): `5 * 5`. Lies das als "5 mal 5", so kannst du es dir am Besten merken.
                 example_code: |
                     ```
                     {print} '5 plus 5 ist ' 5 + 5
@@ -2812,7 +2785,6 @@ adventures:
                     {echo}
             2:
                 story_text: |
-                    Lass Deinen zahmen Papageien noch etwas echter klingen!
                 example_code: |
                     ```
                     {print} Ich bin Hedy der Papagei.
@@ -2991,6 +2963,7 @@ adventures:
                     {print}('Mein Name ist ', name)
                     ```
                 example_code: "```\n{print}('Hallo!')\n{for} i {in} {range}(1, 10):\n    {print}('Dies ist Zeile ', i)\n```\n"
+                story_text: "Wir sind bei echtem Python-Code angekommen! Das bedeutet, dass wir ab jetzt runde Klammern mit den Befehlen `{print}` und `{range}` benutzen müssen.\nEs bedeutet auch, dass du Hedy-Code aus diesem Level in jeder Python-Umgebung benutzen kannst, solange du die englischen Befehle nutzt. Falls du es bisher noch nicht gemacht hast, kannst du den Schalter im Befehlsmenü zum Umschalten benutzen."
         name: '{print}'
         description: Einführung des {print} Befehls
         default_save_name: drucke
@@ -3040,7 +3013,8 @@ adventures:
                     antwort {is} {ask} 'Was müssen wir ab jetzt benutzen?'
                     {print} 'Wir müssen ' antwort ' benutzen'
                     ```
-                story_text_2: "## Verkürzungen im Englischen\nWichtig! Da wir jetzt Anführungszeichen verwenden, wird Hedy verwirrt, wenn du bei englischen Texten das Apostroph für Verkürzungen wie I'm oder What's verwendest.\nEntferne diese Apostrophe und ändere die Schreibweise in I am oder What is sein.\nSchaue dir den Beispielcode an, um die falsche Verwendung von Apostrophen zu lernen.\n"
+                story_text_2: "## Verkürzungen im Englischen\nWichtig! Da wir jetzt Anführungszeichen verwenden, wird Hedy verwirrt, wenn du bei englischen Texten das Apostroph für Verkürzungen wie I'm oder What's verwendest.\nNutze Anführungszeichen wenn du im Text ein Apostroph verwendest.\nSchaue dir den Beispielcode an, um die falsche Verwendung von Apostrophen zu lernen.\n"
+                example_code_2: "```\n_ Dies ist die falsche Verwendung von Apostrophen _\n{print} 'Hedy's Restaurant'\n{print} 'So 'ne schöne Idee!'\n_ So können Apostrophen verwendet werden _\n{print} \"Hedy's Restaurant\"\n{print} \"So 'ne schöne Idee!\"\n```\n"
             12:
                 story_text: |
                     **Alle Texte müssen in Anführungszeichen stehen**
@@ -3311,21 +3285,6 @@ adventures:
                     In diesem Level erlaubt dir der `{if}`-Befehl deinen Kundinnen oder Kunden Fragen zu stellen (`{ask}`) und verschiedene Antworten zu geben.
                     In dem unteren Beispiel siehst du, dass du die Kundin oder den Kunden fragen (`{ask}`) kannst, ob (`{if}`) sie oder er die Tagesgerichte erfahren möchte, und Hedy kann dementsprechend antworten.
                 example_code: |
-                    ```
-                    {print} 'Willkommen im Restaurant Chez Hedy'
-                    Tagesgericht {is} {ask} 'Würden Sie gerne das heutige Tagesgericht erfahren?'
-                    {if} Tagesgericht {is} ja {print} 'Das Tagesgericht ist Nudeln mit Tomatensoße.' {else} {print} 'Ok, kein Problem.'
-                    Essen {is} {ask} 'Was würden Sie gerne essen?'
-                    {print} 'Einmal ' Essen ', kommt sofort!'
-                    Getränk {is} {ask} 'Was würden Sie gerne dazu trinken?'
-                    {if} Getränk {is} Cola {print} 'Tut mir leid, die Cola ist aus!' {else} {print} 'Großartige Wahl!'
-                    etwas {is} {ask} 'Hätten Sie gerne noch etwas?'
-                    {print} 'Lassen Sie mich Ihre Bestellung noch einmal wiederholen...'
-                    {print} 'Einmal ' Essen
-                    {if} Getränk {is} Cola {print} 'und...' {else} {print} 'Einmal ' Getränk
-                    {if} etwas {is} nein {print} 'Das ist alles!' {else} {print} 'Einmal ' etwas
-                    {print} 'Danke für Ihre Bestellung und guten Appetit!'
-                    ```
             6:
                 story_text: |
                     In diesem Level kannst du Mathe verwenden um den Gesamtpreis einer Bestellung auszurechnen. Das macht dein virtuelles Restaurant realistischer.
@@ -3372,7 +3331,7 @@ adventures:
 
                     ### Übung
                     Dieser Code kann mit mehr Gerichten auf der Karte erweitert werden, zum Beispiel einem Getränkeangebot, und/oder mehreren Gängen oder Nachtisch. Füge mindestens ein Gericht hinzu.
-                    **(extra)** Füge so viele Gerichte hinzu wie du magst!
+                    **Extra** Füge so viele Gerichte hinzu wie du magst!
                 example_code: |
                     ```
                     {print} 'Willkommen im Restaurant Chez Hedy!'
@@ -4215,8 +4174,8 @@ adventures:
                     **Extra** Willst du eine wirkliche Herausforderung? Die Farben in den Figuren sollen zufällig ausgewählt werden, so dass jedes Mal, wenn dein Programm läuft, anders aussehen!
 
                     ```
-                    farben {is} Rot, Orange, Gelb, Grün, Blau, Lila, Pink, Braun, Grau, Schwarz
-                    farbe _
+                    farben {is} {red}, {orange}, {yellow}, {green}, {blue}, {purple}, {pink}, {brown}, {gray}, {black}
+                    {color} _
                     ```
             5:
                 story_text: |
@@ -4294,7 +4253,7 @@ adventures:
                 example_code: |
                     Hinweis für die verschachtelten Quadrate:
                     ```
-                    farben = Rot, Blau, Orange, Gelb, Pink, Lila, Grün, Braun, Schwarz
+                    farben = {red}, {blue}, {orange}, {yellow}, {pink}, {purple}, {green}, {brown}, {black}
                     entfernung = 120
                     {repeat} 5 {times}
                     _
@@ -4303,9 +4262,9 @@ adventures:
                     ```
                     land = {ask} 'Von welchem Land willst Du die Flagge sehen?'
                     {if} land {is} 'Deutschland'
-                        farbe_1 = Rot
-                        farbe_2 = Weiß
-                        farbe_3 = Schwarz
+                        farbe_1 = {black}
+                        farbe_2 = {red}
+                        farbe_3 = {yellow}
                     ```
             10:
                 story_text: |
@@ -4326,7 +4285,7 @@ adventures:
 
                     Hinweis Ampel:
                     ```
-                    farben = Rot, Gelb, Grün
+                    farben = {red}, {yellow}, {green}
                     {for} gewählte_farbe {in} farben
                         {color} _
                         {repeat} _
@@ -4338,12 +4297,12 @@ adventures:
 
                     Beginne, indem du die Schildkröte mit einer unsichtbaren Linie zur linken Bildschirmseite bewegst. Dann hänge die Weihnachtsbeleuchtung auf!
                     ```
-                    {color} Weiß
+                    {color} {white}
                     {turn} -90
                     {forward} 300
                     {turn} 90
 
-                    farben = Rot, Blau, Gelb, Lila, Grün, Orange, Pink
+                    farben = {red}, {blue}, {yellow}, {purple}, {green}, {orange}, {pink}
                     {for} gewählte_farbe {in} farben
                     _
                     ```
@@ -4386,13 +4345,13 @@ adventures:
                     {define} zeichne_ein_quadrat
                     _
 
-                    {color} weiss
+                    {color} {white}
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     {for} i {in} {range} 1 {to} 5
-                        {color} grau
+                        {color} {gray}
                         {forward} 100
                         form = {ask} 'Welche Form möchtest du als nächstes mit deinem Armband haben?'
                         gewählte_farbe = {ask} 'In welcher Farbe?'
@@ -4437,7 +4396,7 @@ adventures:
                         zufällige_zahl = _
                         zufällige_farbe = _
                         {call} zeichne_schneeflocke {with} zufällige_zahl, zufällige_farbe
-                        {color} weiß
+                        {color} {white}
                         {turn} zufällige_zahl * 5
                         {forward} 80
                     ```
