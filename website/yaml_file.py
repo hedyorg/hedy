@@ -119,7 +119,7 @@ class YamlFile:
             with atomic_write_file(self.pickle_filename) as f:
                 pickle.dump(data, f)
         except IOError as e:
-            logger.warn('Error writing pickled YAML: %s', e)
+            logger.warning('Error writing pickled YAML: %s', e)
 
         return data
 
