@@ -38,7 +38,7 @@ import utils
 from dataclasses import dataclass
 from hedy_error import get_error_text
 from safe_format import safe_format
-from config import config
+from config import ROOT_DIR, config
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
 from hedy_content import (adventures_order_per_level, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES, HOUR_OF_CODE_ADVENTURES)
@@ -73,9 +73,8 @@ if (sys.version_info.major < 3 or sys.version_info.minor < 7):
     quit()
 
 
-# Set the current directory to the root Hedy folder
-os.chdir(os.path.join(os.getcwd(), __file__.replace(
-    os.path.basename(__file__), '')))
+# Set the current directory to the root Hedy folder FIXME: shouldn't be necessary
+os.chdir(ROOT_DIR)
 
 
 COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
@@ -928,8 +927,7 @@ def save_transpiled_code_for_microbit(transpiled_python_code):
 def convert_to_hex_and_download():
     if MICROBIT_FEATURE:
         flash_micro_bit()
-        current_directory = os.path.dirname(os.path.abspath(__file__))
-        micro_bit_directory = os.path.join(current_directory, 'Micro-bit')
+        micro_bit_directory = ROOT_DIR / 'Micro-bit'
 
         @after_this_request
         def remove_file(response):
@@ -2918,7 +2916,7 @@ def on_offline_mode():
 
     # We have this option for testing the offline build. A lot of modules read
     # files upon import, and those happen before the offline build 'cd' we do
-    # here and need to be written to use __file__. During the offline build,
+    # here and need to be written to use ROOT_DIR. During the offline build,
     # we want to run the actual code to see that nobody added file accesses that
     # crash, but we don't actually want to start the server.
     smoke_test = '--smoketest' in sys.argv

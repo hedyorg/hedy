@@ -2,6 +2,7 @@ import os
 import time
 import unittest
 
+from config import ROOT_DIR
 from website.yaml_file import YamlFile
 
 
@@ -15,8 +16,7 @@ class TestYamlFile(unittest.TestCase):
         n = 10
 
         # Pick a file with unicode in it so we're sure it gets handled properly
-        root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-        yaml_file = os.path.normpath(root_dir + '/content/adventures/hu.yaml')
+        yaml_file = os.path.normpath(ROOT_DIR / '/content/adventures/hu.yaml')
         file = YamlFile(yaml_file)
 
         # Remove pickled version of this file if it exists, it may

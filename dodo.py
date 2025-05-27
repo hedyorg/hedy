@@ -126,16 +126,11 @@ def task_tailwind():
 
 def task_generate_highlighting():
     """Generate JSON files that will be used for syntax highlighting."""
-    script = 'highlighting/generate-rules-highlighting.py'
-
     return dict(
         title=lambda _: 'Generate highlighting rules',
-        file_dep=[
-            *glob('highlighting/*.py'),
-            script,
-        ],
+        file_dep=glob('highlighting/*.py'),
         actions=[
-            [python3, script],
+            [python3, '-m', 'highlighting.generate-rules-highlighting'],
         ],
         targets=['highlighting/highlighting.json', 'highlighting/highlighting-trad.json'],
     )
@@ -188,7 +183,7 @@ def task_client_messages():
             script,
         ],
         actions=[
-            [python3, script],
+            [python3, '-m', 'build-tools.heroku.generate-client-messages'],
         ],
         targets=[
             'static/js/message-translations.ts',
@@ -238,7 +233,7 @@ def task_lark():
             *keyword_yamls,
         ],
         actions=[
-            [python3, script],
+            [python3, '-m', 'content.yaml_to_lark_utils'],
         ],
         targets=grammars,
     )
@@ -484,7 +479,7 @@ def task__autopr():
         actions=[
             # No normalization for now!
             # Run a script to strip things that lead to conflicts from po files
-            # [python3, 'build-tools/github/normalize-pofiles.py'],
+            # [python3, '-m', 'build-tools.github.normalize-pofiles'],
         ])
 
 

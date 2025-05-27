@@ -21,17 +21,13 @@ import hedy
 import utils
 from tests.Tester import HedyTester, YamlSnippet
 from website.yaml_file import YamlFile
+from config import ROOT_DIR
 
 fix_error = False
 # set this to True to revert broken snippets to their en counterpart automatically
 # this is useful for large Weblate PRs that need to go through, this fixes broken snippets
 if os.getenv('fix_for_weblate') or os.getenv('FIX_FOR_WEBLATE'):
     fix_error = True
-
-
-def rootdir():
-    """Return the repository root directory."""
-    return os.path.join(os.path.dirname(__file__), '..', '..')
 
 
 def listify(fn):
@@ -130,7 +126,7 @@ def find_yaml_files(repository_path):
     The `located_yaml_object` is a `LocatedYamlValue` representing the root of the
     YAML file, which can be indexed using `[]` and by using `.items()` and `.values()`.
     """
-    path = os.path.join(rootdir(), repository_path)
+    path = ROOT_DIR.joinpath(repository_path)
     files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f)) and f.endswith('.yaml')]
 
     for f in files:
@@ -208,7 +204,7 @@ class HedySnippetTester(HedyTester):
             if fix_error and isinstance(snippet, YamlSnippet):
                 self.restore_snippet_to_english(snippet)
 
-                with open(path.join(rootdir(), 'snippet-report.md.tmp'), 'a') as f:
+                with ROOT_DIR.joinpath('snippet-report.md.tmp').open('a') as f:
                     f.write(error_message + '\n')
                     f.write('This snippet has been reverted to English.\n\n')
             else:

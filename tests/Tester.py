@@ -22,8 +22,7 @@ from functools import cache
 from app import create_app
 from hedy_error import get_error_text
 from flask_babel import force_locale
-
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from config import ROOT_DIR, GRAMMARS_DIR
 
 
 class Snippet:
@@ -108,15 +107,13 @@ class SkippedMapping:
 
 @cache
 def get_hedy_source_hash():
-    grammars_dir = os.path.join(ROOT_DIR, 'grammars')
-
     files_affecting_parsing = (
-        [os.path.join(grammars_dir, filename) for filename in os.listdir(grammars_dir)] +
+        list(GRAMMARS_DIR.glob('*')) +
         [os.path.join(ROOT_DIR, 'hedy.py')] +
         [os.path.join(ROOT_DIR, file) for file in os.listdir(ROOT_DIR) if re.fullmatch('hedy_.*\\.py', file)]
     )
 
-    files_affecting_parsing.sort()
+    files_affecting_parsing.sort(key=str)
 
     files_contents = []
     for filename in files_affecting_parsing:

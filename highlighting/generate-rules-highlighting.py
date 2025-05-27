@@ -2,12 +2,10 @@ import json
 import regex as re
 
 from os import chdir, listdir, path
-from definition import TRANSLATE_WORDS
+from config import ROOT_DIR
+from highlighting.definition import TRANSLATE_WORDS
 
-# Import packages from the website app (AutoPep8 will mess this up, so disable it)
-import sys
-sys.path.append(path.abspath(path.join(path.dirname(__file__), '..')))  # noqa
-from website.yaml_file import YamlFile  # noqa
+from website.yaml_file import YamlFile
 
 
 # destinations of files containing syntax highlighting rules
@@ -19,7 +17,7 @@ KEYWORDS_PATTERN = '(\\w+).yaml$'
 
 
 def main():
-    chdir(path.dirname(__file__) + "/..")
+    chdir(ROOT_DIR)
 
     print("Generation of translations.....................", end="")
     language_keywords = get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN)
