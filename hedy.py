@@ -1185,7 +1185,7 @@ class AllCommands(Transformer):
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
         if production_rule_name in commands_per_level[self.level] or \
-            production_rule_name in operators or production_rule_name in ['if_pressed', 'if_pressed_else']:
+                production_rule_name in operators or production_rule_name in ['if_pressed', 'if_pressed_else']:
             # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
