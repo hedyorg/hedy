@@ -110,7 +110,7 @@
     </div>
     {% endif %}
     {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
-     {{ render_partial('htmx-language-switch-button.html', commands=commands) }}
+     {{ render_partial('htmx-language-switch-button.html', lang_switch_table=lang_switch_table) }}
     {% endif %}
   </div> <!-- container -->
 </div><!-- blue bar -->
