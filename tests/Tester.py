@@ -439,7 +439,7 @@ class HedyTester(unittest.TestCase):
         if __trtl not in {both_colors}:
           raise Exception(f{HedyTester.value_exception_transpiled()})
         else:
-          if not __trtl in {hedy.english_colors}:
+          if __trtl not in {hedy.english_colors}:
             __trtl = color_dict[__trtl]
         t.pencolor(__trtl)''')
 
