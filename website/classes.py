@@ -313,16 +313,16 @@ class MiscClassPages(WebsiteModule):
     def invite_users(self, user):
         if not isinstance(request.form.getlist('usernames'), list):
             return make_response(gettext("username_invalid"), 400)
-        if not isinstance(request.form.get('class_id'), str):
+        if not isinstance(request.args.get('class_id'), str):
             return make_response(gettext("request_invalid"), 400)
-        if not isinstance(request.form.get('invite_as'), str):
+        if not isinstance(request.args.get('invite_as'), str):
             return make_response(gettext("request_invalid"), 400)
         if len(request.form.getlist('usernames')) < 1:
             return make_response(gettext("username_empty"), 400)
 
         usernames = request.form.getlist('usernames')
-        class_id = request.form.get('class_id')
-        invite_as = request.form.get('invite_as')
+        class_id = request.args.get('class_id')
+        invite_as = request.args.get('invite_as')
         Class = self.db.get_class(class_id)
         if not Class or not (utils.can_edit_class(user, Class)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
