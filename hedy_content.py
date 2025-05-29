@@ -516,14 +516,17 @@ for lang in sorted(languages):
         ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
 
 # Load and cache all keyword yamls
-KEYWORDS = {}
-for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = YamlFile.for_file(f'{content_dir}/keywords/{lang}.yaml').to_dict()
-    for k, v in KEYWORDS[lang].items():
-        if isinstance(v, str) and "|" in v:
-            # when we have several options, pick the first one as default
-            # Some keys are ints, turn them into strings
-            KEYWORDS[lang][k] = v.split('|')[0]
+ALL_KEYWORDS = {
+    str(lang): {
+        str(k): str(v).split('|')
+        for k, v in YamlFile.for_file(f'{content_dir}/keywords/{lang}.yaml').to_dict().items()
+    }
+    for lang in ALL_KEYWORD_LANGUAGES
+}
+KEYWORDS = {  # "default" keywords
+    lang: {k: local_keys[0] for k, local_keys in keywords.items()}
+    for lang, keywords in ALL_KEYWORDS.items()
+}
 
 
 class StructuredDataFile:
