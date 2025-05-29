@@ -4,9 +4,11 @@
 # We do this to avoid conflicts.
 name: Unlock Weblate when PR is closed
 on:
-  pull_request_target:
-    types:
-      - closed
+  workflow_dispatch: { }
+#  Temporarily disabling automatic unlocking of Weblate until hedy levels are redesigned #6342
+#  pull_request_target:
+#    types:
+#      - closed
 
 jobs:
   if_merged:
