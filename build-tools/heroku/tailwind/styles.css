@@ -113,6 +113,11 @@ strong {
   @apply bg-green-500 text-white border-green-500;
 }
 
+.green-btn-new:disabled, .green-btn-new[disabled] {
+  @apply btn-shape-new;
+  @apply  bg-gray-500  text-white border-gray-500;
+}
+
 .green-btn:disabled, .green-btn[disabled] {
   @apply bg-gray-500 border-gray-700;
 }
@@ -1025,3 +1030,12 @@ div[class^="ace_incorrect_hedy_code"] {
 .adventure-item.selected .text-gray-500 {
   @apply text-white !important;
 }
+
+@keyframes loading-placeholder {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+    }

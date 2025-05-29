@@ -962,11 +962,27 @@ export function invite_support_teacher(requester: string) {
   });
 }
 
-export function invite_to_class(class_id: string, prompt: string, type: "student" | "second_teacher", is_second_teacher: boolean = false) {
-  const input = document.getElementById('modal_search_input')
+export function invite_to_class(class_id: string, prompt: string, type: "student" | "second_teacher") {
   const vals = {class_id, 'user_type': type}
-  input?.setAttribute('hx-vals', JSON.stringify(vals))
-  modal.search(prompt, send_invitations, [type, is_second_teacher], ClientMessages['invite']);
+  const input_attributes = {
+    'hx-get': '/search',
+    'hx-target': '#search_results',
+    'hx-vals': JSON.stringify(vals)
+  }
+  const ok_button_attributes = {
+    'hx-post': `/invite?class_id=${class_id}&invite_as=${type}`,
+    'hx-target': '#invite_block',
+    'hx-include': "[name='usernames']"
+  }
+  htmx.process(document.body)
+  modal.htmx_search(
+    prompt,
+    input_attributes,
+    ok_button_attributes,
+    '#invite_block',
+    ClientMessages['invite'],
+    ClientMessages['invitations_sent']
+  );
 }
 
 export function add_user_to_invite_list(username: string, button: HTMLButtonElement) {
@@ -989,19 +1005,4 @@ export function add_user_to_invite_list(username: string, button: HTMLButtonElem
   let input = clone.querySelector('input')!
   input.value = username
   userList?.appendChild(clone)
-}
-
-export async function send_invitations(invite_as: string = "student", is_second_teacher: boolean = false) {
-  const li = document.querySelectorAll('#users_to_invite > li')
-  let list = []
-  for (const userLi of li) {
-    list.push(userLi.textContent?.replace(/[\n\r]+|[\s]{2,}/g, ' ').trim())
-  }
-  const url = new URL(window.location.href)
-  const class_id = url.pathname.split('/for-teachers/class/')[1]
-  htmx.ajax(
-    'POST', "/invite", { values: { "class_id": class_id, "is_second_teacher": is_second_teacher, "invite_as": invite_as, "usernames": list }, target: "#invite_block" }
-  ).then(() => {
-    modal.notifySuccess(ClientMessages['invitations_sent'])
-  })
 }

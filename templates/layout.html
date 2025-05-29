@@ -78,12 +78,12 @@
        <div id="modal_search" class="hidden">
           <div id="modal_search_text" class="text-white mb-8 text-xl"></div>
           <div class="xm-auto">
+            {# for this search to actually work, user code is meant to set up the attributes before using #}
             <input id="modal_search_input"
                    data-cy="modal_search_input"
                    type="search"
                    name="search"
                    class="border border-green-400 rounded p-2 px-3 w-4/5 mt-1"
-                   hx-get="/search"
                    hx-trigger="input changed delay:500ms, search"
                    hx-target="#search_results">
 
@@ -95,7 +95,10 @@
             </ul>              
           </div>
             <div class="mt-4 flex flex-row justify-center">
-                <button id="modal_ok_search_button" data-cy="modal_ok_search_button" class="green-btn block m-4 w-40 pb-4 pt-4">{{_('ok')}}</button>
+              {# This modal is meant to be used with HTMX, so user code is required to set up the htmx attributes before calling #}
+                <button id="modal_ok_search_button" data-cy="modal_ok_search_button" class="green-btn block m-4 w-40 pb-4 pt-4">
+                  {{_('ok')}}
+                </button>
                 <button id="modal_cancel_search_button" data-cy="modal_cancel_search_button" class="red-btn block m-4 w-40 pb-4 pt-4">{{_('cancel')}}</button>
             </div>
        </div>
