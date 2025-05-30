@@ -1,4 +1,5 @@
 from flask import session, request, make_response
+from config import ROOT_DIR
 from website.flask_helpers import render_template
 from bs4 import BeautifulSoup
 import contextlib
@@ -7,7 +8,6 @@ import time
 import functools
 import os
 from io import StringIO
-from os import path
 import re
 import string
 import random
@@ -28,7 +28,7 @@ commonmark_renderer = commonmark.HtmlRenderer()
 
 IS_WINDOWS = os.name == 'nt'
 
-prefixes_dir = path.join(path.dirname(__file__), 'prefixes')
+prefixes_dir = ROOT_DIR / 'prefixes'
 
 # Define code that will be used if some turtle command is present
 with open(f'{prefixes_dir}/turtle.py', encoding='utf-8') as f:

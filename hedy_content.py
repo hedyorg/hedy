@@ -1,7 +1,7 @@
 import logging
 import os
-from os import path
 
+from config import CONTENT_DIR, GRAMMARS_DIR, ROOT_DIR
 import static_babel_content
 import utils
 
@@ -477,10 +477,8 @@ HOUR_OF_CODE_ADVENTURES = {
 # We must find our data relative to this .py file. This will give the
 # correct answer both for when Hedy is run as a webserver on Heroku, as well
 # as when it has been bundled using pyinstaller.
-data_root = path.dirname(__file__)
-
-content_dir = path.join(data_root, 'content')
-translations_dir = path.join(data_root, 'translations')
+content_dir = CONTENT_DIR
+translations_dir = ROOT_DIR / 'translations'
 
 RESEARCH = {}
 for paper in sorted(os.listdir(f'{content_dir}/research'),
@@ -512,7 +510,7 @@ for folder in os.listdir(translations_dir):
 
 for lang in sorted(languages):
     ALL_LANGUAGES[lang] = languages[lang]
-    if os.path.exists(path.join(data_root, './grammars/keywords-' + lang + '.lark')):
+    if GRAMMARS_DIR.joinpath(f'keywords-{lang}.lark').exists():
         ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
 
 # Load and cache all keyword yamls

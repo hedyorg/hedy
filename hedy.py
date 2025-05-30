@@ -2,11 +2,12 @@ import textwrap
 from functools import lru_cache
 
 import lark
+from config import CONTENT_DIR
 from website.flask_helpers import gettext_with_fallback as gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
-from os import path, getenv
+from os import getenv
 
 import hedy
 import hedy_error
@@ -415,11 +416,8 @@ def get_list_keywords(commands, to_lang):
     """
 
     translation_commands = []
-    dir = path.abspath(path.dirname(__file__))
-    path_keywords = dir + "/content/keywords"
-
-    to_yaml_filesname_with_path = path.join(path_keywords, to_lang + '.yaml')
-    en_yaml_filesname_with_path = path.join(path_keywords, 'en' + '.yaml')
+    to_yaml_filesname_with_path = CONTENT_DIR / 'keywords' / f'{to_lang}.yaml'
+    en_yaml_filesname_with_path = CONTENT_DIR / 'keywords' / f'en.yaml'
 
     with open(en_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
         en_yaml_dict = yaml.safe_load(stream)
