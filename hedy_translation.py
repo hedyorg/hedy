@@ -30,12 +30,16 @@ def keywords_to_dict(lang="nl"):
 
 
 def lang_switch_table(level: int, lang1: str, lang2: str | None = None):
+    """Return a dictionary from keywords in lang1 organized in tuples to their translations in lang2, e.g.
+        ('ask', ) -> ('vraag',)
+        ('at', 'random') -> ('kies', 'willekeurig')
+    """
     from_lang, to_lang = (lang1, lang2) if lang2 else ('en', lang1)
 
     phrases = [
         ('at', 'random'),
-        ('add', 'to'),
-        ('range', 'to_list'),
+        ('add', 'to_list'),
+        ('range', 'to'),
         ('remove', 'from'),
         ('repeat', 'times'),
     ]
