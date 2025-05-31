@@ -158,7 +158,7 @@ adventures:
                     ```
                 answer_note: |
                     {sleep} should go before {clear} otherwise the screen will be empty right away.
-                answer_note2: |
+                answer_note_2: |
                     Own answer
             5:
                 story_text: |
@@ -194,7 +194,7 @@ adventures:
                     if end {is} save {print} name "landed the plane, he saved us!"
                     else {print} "Oh no! " name " is destroying the plane, help!"
                     ```
-                answer_note2: |
+                answer_note_2: |
                     Own answer
 
             7:
@@ -250,7 +250,7 @@ adventures:
                         {print} 'The T-rex eats him!'  
                 
                     ```
-                answer_code2: |
+                answer_code_2: |
                     ```
                         dinosaur {is} {ask} 'Is a T-rex or a velociraptor chasing Richard?'
                         {if} dinosaur {is} T-rex
@@ -265,9 +265,9 @@ adventures:
                             {print} 'Oh no! Richard is too slow...'
                             {print} 'The T-rex eats him!'
                     ```
-                answer_note2: |
+                answer_note_2: |
                     Extra
-                answer_note3: |
+                answer_note_3: |
                     Own answer
 
             9:
@@ -303,7 +303,7 @@ adventures:
                         {print} 'Robin goes home'  
                 
                     ```
-                answer_code2: |
+                answer_code_2: |
                     ```
                     {print} 'Robin is walking downtown'
                     location = {ask} 'Is Robin going into a shop, or does she go home?'
@@ -322,7 +322,7 @@ adventures:
                         {print} 'Robin goes home with public transport.'
 
                     ```
-                answer_note3: |
+                answer_note_3: |
                     Own answer
             10:
                 story_text: |
@@ -387,7 +387,7 @@ adventures:
                             {print} "The hero finds a treasure chest!"
                 
                     ```
-                answer_note2: |
+                answer_note_2: |
                     Own answer
             15:
                 story_text: |
@@ -824,7 +824,7 @@ adventures:
                     {else} 
                     {print} 'Wrong! It was ' correct_answer
                     ```
-                answer_code2: |
+                answer_code_2: |
                     ```
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10  
                     number_1 = numbers {at} {random}  
@@ -875,7 +875,7 @@ adventures:
                     {print} 'Great job! Your score is... ' score ' out of 10!'
 
                     ```
-                answer_code2: |
+                answer_code_2: |
                     ```
                     score = 0  
                     {repeat} 10 {times}  
@@ -958,7 +958,7 @@ adventures:
                         {print} i ' times ' number ' is ' i * number
 
                     ```
-                answer_code2: |
+                answer_code_2: |
                     ```
                     {for} number_1 {in} {range} 1 {to} 3
                     {for} number_2 {in} {range} 1 {to} 3
@@ -1020,7 +1020,7 @@ adventures:
                         {print} "Correct!"
 
                     ```
-                answer_code2: |
+                answer_code_2: |
                     ```
                     answer = {ask} "What number divides 12"
                     {if} answer {is} 1 {or} answer {is} 2 {or} answer {is} 3 {or} answer {is} 4 {or} answer {is} 6 {or} answer {is} 12
