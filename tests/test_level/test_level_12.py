@@ -3545,7 +3545,7 @@ class TestsLevel12(HedyTester):
                     print 'correct'
                 else
                     print 'incorrect'
-            
+
             animals = 'a', 'b', 'c'
             call test with animals at random""")
 
@@ -3707,7 +3707,7 @@ class TestsLevel12(HedyTester):
         code = textwrap.dedent("""\
             define sum with n1, n2
                 return n1 + n2
-    
+
             print call sum with 1, 2""")
 
         return_arg = f"{{localize({self.sum_transpiled('n1', 'n2')}, num_sys=get_num_sys(n1))}}"
@@ -3856,7 +3856,7 @@ class TestsLevel12(HedyTester):
         define add with n
             x is 1
             return x + 1
-        
+
         x is 10
         print x
         print call add with 2""")
@@ -3872,7 +3872,7 @@ class TestsLevel12(HedyTester):
         code = textwrap.dedent("""\
             define add
                 x is 1
-                print x + 1 
+                print x + 1
             x is 10
             call add""")
 
@@ -3991,7 +3991,7 @@ class TestsLevel12(HedyTester):
             else
                 x is 'not great'
             print x
-        
+
         call turnz""")
 
         expected = textwrap.dedent("""\
@@ -4066,14 +4066,14 @@ class TestsLevel12(HedyTester):
             else
                 x is 'do not turn'
             print x
-    
+
         define forwardz
             if x is pressed
                 x is 'go forward'
             else
                 x is 'do not go forward'
             print x
-    
+
         call turnz
         call forwardz
         print x""")
@@ -4349,12 +4349,24 @@ class TestsLevel12(HedyTester):
     #
     @parameterized.expand(hedy.english_colors)
     def test_all_colors(self, color):
-        code = f'color {color}'
-        expected = self.color_transpiled(f'"{color}"')
+        code = f'color "{color}"'
+        expected = self.color_transpiled(f'{color}')
 
         self.multi_level_tester(
             code=code,
             expected=expected,
+            extra_check_function=self.is_turtle()
+        )
+
+    @parameterized.expand(['zwart', 'blauw', 'bruin', 'grijs', 'groen', 'oranje', 'roze', 'rood', 'wit', 'geel'])
+    def test_all_colors_nl(self, color):
+        code = f'kleur "{color}"'
+        expected = self.color_transpiled(f'{color}', lang='nl')
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            lang='nl',
             extra_check_function=self.is_turtle()
         )
 
@@ -4387,4 +4399,23 @@ class TestsLevel12(HedyTester):
             expected=expected,
             extra_check_function=self.is_turtle(),
             max_level=18
+        )
+
+    def test_color_with_missing_quotes_literal_gives_error(self):
+        code = "color red"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.UndefinedVarException,
+            skip_faulty=False,
+        )
+
+    def test_color_with_missing_quotes_literal_gives_error_nl(self):
+        code = "kleur blauw"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.UndefinedVarException,
+            skip_faulty=False,
+            lang='nl',
         )

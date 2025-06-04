@@ -1957,7 +1957,7 @@ class ConvertToPython_1(ConvertToPython):
             if {variable} not in {both_colors}:
               raise Exception(f{ex})
             else:
-              if not {variable} in {english_colors}:
+              if {variable} not in {english_colors}:
                 {variable} = color_dict[{variable}]
             t.{command_text}({variable}){self.add_debug_breakpoint()}""")
 
@@ -2017,7 +2017,7 @@ class ConvertToPython_2(ConvertToPython_1):
             return f"t.pencolor('black'){self.add_debug_breakpoint()}"
 
         value = self.unpack(args[0])
-        value = self.process_arg_for_fstring(value)
+        value = self.process_arg_for_fstring(value, meta.line)
 
         return self.make_turtle_color_command(value, Command.color, 'pencolor', self.language)
 
@@ -2995,10 +2995,11 @@ class ConvertToPython_12(ConvertToPython_11):
         elif is_quoted(name):
             name = name[1:-1]
             return name.replace("'", "\\'")
-        elif not ConvertToPython.is_int(name) and not ConvertToPython.is_float(name):
-            # We end up here with colors
-            name = name if self.is_bool(name) else escape_var(name.replace("'", "\\'"))
+        elif self.is_bool(name):
             name = '"' + name + '"'
+        else:
+            # We end up here with colors that have missing quotes
+            raise hedy.exceptions.UndefinedVarException(name=name, line_number=access_line)
         return str(name)
 
     def list_access(self, meta, args):
