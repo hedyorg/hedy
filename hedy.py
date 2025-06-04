@@ -299,16 +299,16 @@ def add_level(commands, level, add=None, remove=None):
 # Commands per Hedy level which are used to suggest the closest command when kids make a mistake
 commands_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
 add_level(commands_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
-add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to'])
+add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to_list'])
 add_level(commands_per_level, level=4, add=['clear'])
-add_level(commands_per_level, level=5, add=['else', 'if', 'if_pressed', 'in', 'not_in'])
+add_level(commands_per_level, level=5, add=['else', 'if', 'pressed', 'in', 'not_in'])
 add_level(commands_per_level, level=6)
 add_level(commands_per_level, level=7, add=['repeat', 'times'])
 add_level(commands_per_level, level=8)
 add_level(commands_per_level, level=9)
 add_level(commands_per_level, level=10, add=['for'])
-add_level(commands_per_level, level=11, add=['range'], remove=['times'])
-add_level(commands_per_level, level=12, add=['define', 'call'])
+add_level(commands_per_level, level=11, add=['range', 'to'], remove=['times'])
+add_level(commands_per_level, level=12, add=['define', 'call', 'with'])
 add_level(commands_per_level, level=13, add=['and', 'or'])
 add_level(commands_per_level, level=14)
 add_level(commands_per_level, level=15, add=['while'])
@@ -428,8 +428,6 @@ def get_list_keywords(commands, to_lang):
         with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
         for command in commands:
-            if command == 'if_pressed':  # TODO: this is a bit of a hack
-                command = 'pressed'  # since in the yamls they are called pressed
             try:
                 translation_commands.append(to_yaml_dict[command])
             except Exception:
@@ -1186,8 +1184,8 @@ class AllCommands(Transformer):
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[
-                self.level] or production_rule_name in operators or production_rule_name == 'if_pressed_else':
+        if production_rule_name in commands_per_level[self.level] or \
+                production_rule_name in operators or production_rule_name in ['if_pressed', 'if_pressed_else']:
             # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
             if production_rule_name == 'else':  # use of else also has an if
