@@ -1,4 +1,3 @@
-# /usr/bin/env python3
 # For all pofiles, normalize then to reduce the amounts of things that can go wrong.
 #
 # Currently, specifically:
@@ -6,6 +5,8 @@
 from os import path
 import os
 import re
+
+from config import ROOT_DIR
 
 
 def scan_pofiles(root, scanner):
@@ -46,7 +47,5 @@ def strip_headers(filename):
 
 
 if __name__ == '__main__':
-    root = path.join(path.dirname(__file__), '..', '..')
-
-    strip_headers(path.join(root, 'messages.pot'))
-    scan_pofiles(path.join(root, 'translations'), strip_headers)
+    strip_headers(path.join(ROOT_DIR, 'messages.pot'))
+    scan_pofiles(path.join(ROOT_DIR, 'translations'), strip_headers)
