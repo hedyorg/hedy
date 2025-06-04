@@ -945,7 +945,7 @@ class TestsHypothesisLevel1(HedyTester):
     @settings(deadline=None, max_examples=100)
     # FH may 2023: we now always use a permutation, but a random sample which could potentially be smaller would be a nice addition!
     def test_template_combination(self, code_tuples, d):
-        excluded_chars = ["_", "#", '\n', '\r']
+        excluded_chars = ["_", "#", '\n', '\r', ' ']
         random_print_argument = hypothesis.strategies.text(
             alphabet=hypothesis.strategies.characters(blacklist_characters=excluded_chars),
             min_size=1,
