@@ -4400,3 +4400,22 @@ class TestsLevel12(HedyTester):
             extra_check_function=self.is_turtle(),
             max_level=18
         )
+
+    def test_color_with_missing_quotes_literal_gives_error(self):
+        code = "color red"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.UndefinedVarException,
+            skip_faulty=False,
+        )
+
+    def test_color_with_missing_quotes_literal_gives_error_nl(self):
+        code = "kleur blauw"
+
+        self.multi_level_tester(
+            code=code,
+            exception=hedy.exceptions.UndefinedVarException,
+            skip_faulty=False,
+            lang='nl',
+        )
