@@ -47,11 +47,7 @@ KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_comm
 
 
 def adventures_order_per_level():
-    if utils.is_redesign_enabled():
-        return ADVENTURE_ORDER_PER_LEVEL
-    else:
-        return ADVENTURE_ORDER_PER_LEVEL_OLD
-
+    return ADVENTURE_ORDER_PER_LEVEL
 
 ADVENTURE_ORDER_PER_LEVEL_OLD = {
     1: [
@@ -667,42 +663,6 @@ class Adventures(StructuredDataFile):
 class NoSuchAdventure:
     def get_adventure(self):
         return {}
-
-
-class ParsonsProblem(StructuredDataFile):
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/parsons/{self.language}.yaml')
-
-    def get_highest_exercise_level(self, level):
-        return max(int(lnum) for lnum in self.file.get('levels', {}).get(level, {}).keys())
-
-    def get_parsons_data_for_level(self, level, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, None), keyword_lang)
-
-    def get_parsons_data_for_level_exercise(self, level, excercise, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, {}).get(excercise), keyword_lang)
-
-
-class Quizzes(StructuredDataFile):
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/quizzes/{self.language}.yaml')
-
-    def get_highest_question_level(self, level):
-        return max(int(k) for k in self.file.get('levels', {}).get(level, {}))
-
-    def get_quiz_data_for_level(self, level, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level), keyword_lang)
-
-    def get_quiz_data_for_level_question(self, level, question, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, {}).get(question), keyword_lang)
-
-
-class NoSuchQuiz:
-    def get_quiz_data_for_level(self, level, keyword_lang):
-        return {}
-
 
 class Slides(StructuredDataFile):
     def __init__(self, language):
