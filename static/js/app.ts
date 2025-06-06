@@ -2,11 +2,10 @@ import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
 import * as Tone from 'tone'
-import { SwitchTabsEvent, Tabs } from './tabs';
+import { SwitchTabsEvent } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
-import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import {
     incrementDebugLine,
@@ -182,14 +181,13 @@ export function initializeApp(options: InitializeAppOptions) {
 }
 
 export interface InitializeCodePageOptions {
-  readonly page: 'code' | 'tryit';
+  readonly page: 'code';
   readonly level: number;
   readonly lang: string;
   readonly adventures: Adventure[];
   readonly initial_tab: string;
   readonly current_user_name?: string;
   readonly suppress_save_and_load?: boolean;
-  readonly enforce_developers_mode?: boolean;
 }
 
 /**
@@ -245,23 +243,14 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   const anchor = window.location.hash.substring(1);
 
-  const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
+  const validAnchor = [...Object.keys(theAdventures)].includes(anchor) ? anchor : undefined;
   let tabs: any;
-  const isTryItPage = options.page == 'tryit';
-  if (isTryItPage) {
-    tabs = new IndexTabs({
-      // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
-      // We click on `level` to load a program associated with level, if any.
-      initialTab: validAnchor ?? options.initial_tab,
-      level: options.level
-    });
-  } else {
-    tabs = new Tabs({
-      // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
-      // We click on `level` to load a program associated with level, if any.
-      initialTab: validAnchor ?? options.initial_tab,
-    });
-  }
+  tabs = new IndexTabs({
+    // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+    // We click on `level` to load a program associated with level, if any.
+    initialTab: validAnchor ?? options.initial_tab,
+    level: options.level
+  });
   tabs.on('beforeSwitch', () => {
     // If there are unsaved changes, we warn the user before changing tabs.
     saveIfNecessary();
@@ -281,7 +270,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
         adventure.save_info = 'local-storage';
       }
     }
-    reconfigurePageBasedOnTab(isTryItPage, options.enforce_developers_mode);
+    reconfigurePageBasedOnTab();
     checkNow();
     theLocalSaveWarning.switchTab();
   });
@@ -392,7 +381,6 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 
 export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: boolean) {
   const dir = $("body").attr("dir");
-  initializeParsons();
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
@@ -533,26 +521,11 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
   try {
     var editor = theGlobalEditor;
     var code = "";
-    if ($('#parsons_container').is(":visible")) {
-      code = get_parsons_code();
-      // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
-      if (!code) {
-        editor.clearErrors();
-        stopit();
-        return;
-      } else {
-        // Add the onclick on the button -> only show if there is another exercise to load (set with an onclick)
-        if ($('#next_parson_button').attr('onclick')) {
-          $('#next_parson_button').show();
-        }
-      }
-    } else {
-      code = get_active_and_trimmed_code();
-      if (code.length == 0) {
-        editor.clearErrors()
-        stopit();
-        return;
-      }
+    code = get_active_and_trimmed_code();
+    if (code.length == 0) {
+      editor.clearErrors()
+      stopit();
+      return;
     }
 
     editor.clearErrors()
@@ -843,7 +816,6 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, variables: any, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
-  // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
   let warning_box_shown = false;
@@ -1304,24 +1276,6 @@ function initializeSpeech() {
   }
 }
 
-export function load_quiz(level: string) {
-  $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz_iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
-}
-
-export async function store_parsons_attempt(order: Array<string>, correct: boolean) {
-  try {
-    await postJson('/store_parsons_order', {
-      level: theLevel,
-      exercise: $('#next_parson_button').attr('current_exercise'),
-      order: order,
-      correct: correct
-    });
-  } catch (e) {
-    // Let's do nothing: saving is not a user relevant action -> no feedback required
-    console.error(e);
-  };
-}
-
 export function get_active_and_trimmed_code() {
   theGlobalEditor.trimTrailingSpace();
   const storage = window.localStorage;
@@ -1400,43 +1354,6 @@ function createModal(level:number ){
   let editor = "<div id='modal_editor' class=\"w-full flex-1 text-lg rounded\" style='height:200px; width:50vw;'></div>".replace("{level}", level.toString());
   let title = ClientMessages['Program_repair'];
   modal.repair(editor, 0, title);
-}
-
-// Remove this function when enabling the new design
-export function setDevelopersMode(event='click', enforceDevMode: boolean) {
-  let enable: boolean = false;
-  switch (event) {
-    case 'load':
-      const lastSelection = window.localStorage.getItem('developer_mode') === 'true';
-      enable = enforceDevMode || lastSelection;
-      $('#developers_toggle').prop('checked', enable);
-      break;
-
-    case 'click':
-      // Toggled
-      enable = $('#developers_toggle').prop('checked');
-      break;
-  }
-  if (!enforceDevMode) window.localStorage.setItem('developer_mode', `${enable}`)
-  toggleDevelopersMode(!!enforceDevMode)
-}
-
-// Remove this function when enabling the new design
-function toggleDevelopersMode(enforceDevMode: boolean) {
-  const enable = window.localStorage.getItem('developer_mode') === 'true' || enforceDevMode;
-  // DevMode hides the tabs and makes resizable elements track the appropriate size.
-  // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
-  // size literals between HTML and JavaScript).
-  $('#adventures_tab').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
-  // this is for the new design, it needs to be removed once we ship it
-  $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
-  // Parsons dont need a fixed height
-  if (currentTab === 'parsons') return
-
-  $('[data-editorheight]').each((_, el) => {
-    const heights = $(el).data('editorheight').split(',') as string[];
-    $(el).css('height', heights[enable ? 1 : 0]);
-  });
 }
 
 export function saveForTeacherTable(table: string) {
@@ -1672,21 +1589,6 @@ function resetWindow() {
  * Update page element visibilities/states based on the state of the current tab
  */
 function updatePageElements() {
-  const isParsonsTab = currentTab === 'parsons'
-  const isCodeTab = !(currentTab === 'quiz' || isParsonsTab);
- // .toggle(bool) sets visibility based on the boolean
-
-  // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
-  $('#adventures_tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
-  $('#developers_toggle_container').toggle(isCodeTab);
-  // this is for the new design, it needs to be removed once we ship it
-  $('#adventures').toggle(true);
-  $('#level_header input').toggle(isCodeTab);
-  $('#parsons_code_container').toggle(currentTab === 'parsons');
-  $('#editor_area').toggle(isCodeTab || currentTab === 'parsons');
-  $('#editor').toggle(isCodeTab);
-  $('#debug_container').toggle(isCodeTab);
-  $('#program_name_container').toggle(isCodeTab);
   theGlobalEditor.isReadOnly = false;
 
   const adventure = theAdventures[currentTab];
@@ -1733,51 +1635,14 @@ function updatePageElements() {
     $('#commands_dropdown_container').show()
     $('#hand_in_button').show()
   }
-  if (currentTab === 'parsons'){
-    $('#share_program_button').hide()
-    $('#read_outloud_button_container').hide()
-    $('#cheatsheet_dropdown_container').hide()
-    $('#commands_dropdown_container').show()
-    $('#hand_in_button').hide()
-    $('#clear').hide()
-  }
-  if (currentTab === 'quiz'){
-    $('#share_program_button').hide()
-    $('#read_outloud_button_container').hide()
-    $('#cheatsheet_dropdown_container').hide()
-    $('#commands_dropdown_container').hide()
-    $('#hand_in_button').hide()
-  }
-}
-
-/**
- * Load parsons and update the editors height accordingly
- */
-function configureParson() {
-  loadParsonsExercise(theLevel, 1);
-  // parsons could have 5 lines to arrange which requires more space, so remove the fixed height from the editor
-  document.getElementById('code_editor')!.style.height = '100%'
-  document.getElementById('code_output')!.style.height = '100%'
 }
 
 /**
  * After switching tabs, show/hide elements
  */
-function reconfigurePageBasedOnTab(isTryItPage?: boolean, enforceDevMode?: boolean) {
+function reconfigurePageBasedOnTab() {
   resetWindow();
   updatePageElements();
-
-  if (!isTryItPage) {
-    if (currentTab === 'parsons') {
-      configureParson();
-      show_editor();
-      $('#fold_in_toggle_container').hide();
-    } else {
-      toggleDevelopersMode(!!enforceDevMode);
-    }
-    $('#fold_in_toggle_container').show();
-  }
-
   const adventure = theAdventures[currentTab];
   if (adventure) {
     $ ('#program_name').val(adventure.save_name);

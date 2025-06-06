@@ -5,7 +5,6 @@ export enum EditorType {
   MODAL,
   COMMON_MISTAKES,
   CHEATSHEET,
-  PARSONS,
   EXAMPLE,
   WORKBOOK
 }

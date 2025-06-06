@@ -4,7 +4,7 @@ from tests.Tester import HedyTester
 from parameterized import parameterized
 from . import snippet_tester
 
-
+# parsons are deprecated, but Im going to keep the test in the contents for now
 snippets = snippet_tester.collect_parsons_snippets()
 
 HedyTester.translate_keywords_in_snippets(snippets)
