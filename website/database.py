@@ -297,7 +297,7 @@ class Database:
         # - id (str): the identifier of the class this customization set applies to
         # - levels (int[]): the levels available in this class
         # - opening_dates ({ str -> str }): key is level nr as string, value is an ISO date
-        # - other_settings (str[]): string list with values like "hide_quiz" (deprecated), 
+        # - other_settings (str[]): string list with values like "hide_quiz" (deprecated),
         # "hide_parsons" (deprecated)
         # - sorted_adventures ({ str -> { from_teacher: bool, name: str }[] }):
         #     for every level (key as string) the adventures to show, in order. If from_teacher

@@ -2088,6 +2088,7 @@ def translate_keywords():
     except BaseException:
         return make_response(gettext('translate_error'), 400)
 
+
 @app.app_template_global()
 def current_language():
     return make_lang_obj(g.lang)

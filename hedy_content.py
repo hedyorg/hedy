@@ -49,6 +49,7 @@ KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_comm
 def adventures_order_per_level():
     return ADVENTURE_ORDER_PER_LEVEL
 
+
 ADVENTURE_ORDER_PER_LEVEL_OLD = {
     1: [
         'default',
@@ -663,6 +664,7 @@ class Adventures(StructuredDataFile):
 class NoSuchAdventure:
     def get_adventure(self):
         return {}
+
 
 class Slides(StructuredDataFile):
     def __init__(self, language):

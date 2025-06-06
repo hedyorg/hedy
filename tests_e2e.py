@@ -1580,7 +1580,6 @@ class TestMultipleAccounts(AuthHelper):
         self.post_data('for-teachers/create-accounts', body, expect_http_code=200)
 
 
-
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
 def tearDownModule():
     auth_helper = AuthHelper()
