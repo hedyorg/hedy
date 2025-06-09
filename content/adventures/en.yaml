@@ -64,18 +64,17 @@ adventures:
                     **Extra** Add a `{sleep}` command to your code to build up tension in your story.
                 answer_code: |
                     ```
-                    {print} Hello kids! Today we're going to the zoo!  
-                    {sleep} 3  
-                    animal {is} {ask} Which animal are we going to see first?  
-                    {sleep} 1  
-                    {print} Let's head to the animal  
-                    {sleep}  
-                    {print} Since it is very hot, let's go get some ice cream!  
-                    {sleep}  
-                    flavor {is} {ask} Which flavor do you want?  
-                    {sleep} 2  
-                    {print} Good choice! I will also pick flavor  
-
+                    {print} Hello kids! Today we're going to the zoo!
+                    {sleep} 3
+                    animal {is} {ask} Which animal are we going to see first?
+                    {sleep} 1
+                    {print} Let's head to the animal
+                    {sleep}
+                    {print} Since it is very hot, let's go get some ice cream!
+                    {sleep}
+                    flavor {is} {ask} Which flavor do you want?
+                    {sleep} 2
+                    {print} Good choice! I will also pick flavor
                     ```
             3:
                 story_text: |
@@ -115,7 +114,7 @@ adventures:
                     animals {is} lion, zebra, flamingo
                     {print} Hello kids! Today we're going to the zoo!
                     favorite_animal {is} {ask} Which animal do you wanna go to today?
-                    {add} favorite_animal {to} animals
+                    {add} favorite_animal {to_list} animals
                     {sleep} 2
                     {print} Let's head to the animals {at} {random}
                     {sleep}
@@ -213,8 +212,8 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} 'All the kids wanted to go to the zoo and kept shouting that!'  
-                    {repeat} 3 {times} {print} "Let's go to the zoo!"                  
+                    {print} 'All the kids wanted to go to the zoo and kept shouting that!'
+                    {repeat} 3 {times} {print} "Let's go to the zoo!"
                     ```
             8:
                 story_text: |
@@ -240,15 +239,15 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} 'OH NO! The T-rex is closing in!'  
-                    end = {ask} 'Do you want a happy or a sad ending?'  
-                    {if} end {is} happy  
-                        {print} 'Just in time Richard jumps back into the time machine!'  
-                        {print} 'He teleports to his home and is safe now!'  
-                    {else}  
-                        {print} 'Oh no! Richard is too slow...'  
-                        {print} 'The T-rex eats him!'  
-                
+                    {print} 'OH NO! The T-rex is closing in!'
+                    end = {ask} 'Do you want a happy or a sad ending?'
+                    {if} end {is} happy
+                        {print} 'Just in time Richard jumps back into the time machine!'
+                        {print} 'He teleports to his home and is safe now!'
+                    {else}
+                        {print} 'Oh no! Richard is too slow...'
+                        {print} 'The T-rex eats him!'
+
                     ```
                 answer_code_2: |
                     ```
@@ -289,19 +288,19 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} 'Robin is walking downtown'  
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'  
-                    {if} location {is} shop  
-                        {print} 'She enters the shop.'  
-                        {print} 'Robin sees an interesting looking book'  
-                        book = {ask} 'Does Robin buy the book?'  
-                        {if} book {is} yes  
-                            {print} 'Robin buys the book and goes home'  
-                        {else}  
-                            {print} 'Robin leaves the shop and goes home'  
-                    {else}  
-                        {print} 'Robin goes home'  
-                
+                    {print} 'Robin is walking downtown'
+                    location = {ask} 'Is Robin going into a shop, or does she go home?'
+                    {if} location {is} shop
+                        {print} 'She enters the shop.'
+                        {print} 'Robin sees an interesting looking book'
+                        book = {ask} 'Does Robin buy the book?'
+                        {if} book {is} yes
+                            {print} 'Robin buys the book and goes home'
+                        {else}
+                            {print} 'Robin leaves the shop and goes home'
+                    {else}
+                        {print} 'Robin goes home'
+
                     ```
                 answer_code_2: |
                     ```
@@ -349,7 +348,7 @@ adventures:
                     {for} animal {in} animals
                         {print} 'a ' animal ','
                     {print} 'looking at us'
-                    {print} "That's what we see"              
+                    {print} "That's what we see"
                     ```
             13:
                 story_text: |
@@ -385,7 +384,7 @@ adventures:
                             {print} "The hero gets lost in the forest..."
                         {else}
                             {print} "The hero finds a treasure chest!"
-                
+
                     ```
                 answer_note_2: |
                     Own answer
@@ -472,14 +471,14 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} Mystery milkshake  
-                    flavors {is} strawberry, chocolate, vanilla  
-                    hope {is} {ask} What flavor are you hoping for?  
-                    add hope to flavors  
-                    allergies {is} {ask} Are you allergic to any flavors?  
-                    remove allergies from flavors  
-                    {print} You get a flavors at random milkshake  
-                
+                    {print} Mystery milkshake
+                    flavors {is} strawberry, chocolate, vanilla
+                    hope {is} {ask} What flavor are you hoping for?
+                    {add} hope {to_list} flavors
+                    allergies {is} {ask} Are you allergic to any flavors?
+                    {remove} allergies {from} flavors
+                    {print} You get a flavors {at} {random} milkshake
+
                     ```
     and_or_command:
         name: '{and} & {or}'
@@ -570,14 +569,14 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    favorite_animal {is} {ask} What is your favorite animal?  
-                    {print} Nice! favorite_animal is so cool!  
-                    favorite_food {is} {ask} What is your favorite food?  
-                    {print} My favorite food is favorite_food too!  
-                    favorite_drink {is} {ask} What is your favorite drink?  
-                    {print} I love to drink favorite_drink as well!  
-                    location {is} {ask} Where do you live?  
-                    {print} It sounds fun to live in location!         
+                    favorite_animal {is} {ask} What is your favorite animal?
+                    {print} Nice! favorite_animal is so cool!
+                    favorite_food {is} {ask} What is your favorite food?
+                    {print} My favorite food is favorite_food too!
+                    favorite_drink {is} {ask} What is your favorite drink?
+                    {print} I love to drink favorite_drink as well!
+                    location {is} {ask} Where do you live?
+                    {print} It sounds fun to live in location!
                     ```
             18:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
@@ -819,20 +818,20 @@ adventures:
                     ```
                     correct_answer = 11 * 27
                     answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} correct_answer 
+                    {if} answer {is} correct_answer
                     {print} 'good job!'
-                    {else} 
+                    {else}
                     {print} 'Wrong! It was ' correct_answer
                     ```
                 answer_code_2: |
                     ```
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10  
-                    number_1 = numbers {at} {random}  
-                    number_2 = numbers {at} {random}  
-                    correct_answer = number_1 * number_2  
-                    given_answer = {ask} 'What is ' number_1 ' times ' number_2 '?'  
-                    {if} given_answer {is} correct_answer {print} 'Good job!'  
-                    {else} {print} 'Wrong! It was ' correct_answer  
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = numbers {at} {random}
+                    number_2 = numbers {at} {random}
+                    correct_answer = number_1 * number_2
+                    given_answer = {ask} 'What is ' number_1 ' times ' number_2 '?'
+                    {if} given_answer {is} correct_answer {print} 'Good job!'
+                    {else} {print} 'Wrong! It was ' correct_answer
 
                     ```
             9:
@@ -877,21 +876,21 @@ adventures:
                     ```
                 answer_code_2: |
                     ```
-                    score = 0  
-                    {repeat} 10 {times}  
-                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10  
-                        number_1 = numbers {at} {random}  
-                        number_2 = numbers {at} {random}  
-                        correct_answer = number_1 * number_2  
-                        {print} 'What is ' number_1 ' times ' number_2 '?'  
-                        answer = {ask} 'Type your answer here...'  
-                        {print} 'Your answer is ' answer  
-                        {if} answer {is} correct_answer  
-                            score = score + 1  
-                            {print} 'Correct!'  
-                        {else}  
-                            {print} 'Wrong!'  
-                    {print} 'Great job! Your score is... ' score ' out of 10!' 
+                    score = 0
+                    {repeat} 10 {times}
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct_answer = number_1 * number_2
+                        {print} 'What is ' number_1 ' times ' number_2 '?'
+                        answer = {ask} 'Type your answer here...'
+                        {print} 'Your answer is ' answer
+                        {if} answer {is} correct_answer
+                            score = score + 1
+                            {print} 'Correct!'
+                        {else}
+                            {print} 'Wrong!'
+                    {print} 'Great job! Your score is... ' score ' out of 10!'
 
                     ```
             10:
@@ -989,9 +988,9 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    number1 = {ask} 'What is the first number?'  
-                    number2 = {ask} 'What is the second number?'  
-                    answer = number1 * number2  
+                    number1 = {ask} 'What is the first number?'
+                    number2 = {ask} 'What is the second number?'
+                    answer = number1 * number2
                     {print} number1 ' times ' number2 ' is ' answer
 
                     ```
@@ -1150,10 +1149,10 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} I love programming  
-                    {ask} Do you love programming too?  
-                    {print} Alright!  
-                    {ask} What are your hobbies?  
+                    {print} I love programming
+                    {ask} Do you love programming too?
+                    {print} Alright!
+                    {ask} What are your hobbies?
                     {echo} Your hobbies are
                     ```
             2:
@@ -1840,8 +1839,8 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    choices {is} 1, 2, 3, 4, 5, star  
-                    {print} You threw choices at random !  
+                    choices {is} 1, 2, 3, 4, 5, star
+                    {print} You threw choices {at} {random} !
 
                     ```
             4:
@@ -1853,8 +1852,8 @@ adventures:
                     Tip: If you have no idea how to make dice. Take a peek at your dice from the previous level, but don't forget to add quotation marks.
                 answer_code: |
                     ```
-                    choices {is} 1, 2, 3, 4, 5, 6  
-                    {print} "The number you have thrown is " choices at random "!"  
+                    choices {is} 1, 2, 3, 4, 5, 6
+                    {print} "The number you have thrown is " choices {at} {random} "!"
 
                     ```
             5:
@@ -1901,48 +1900,48 @@ adventures:
                     Did you manage to calculate the score for 8 dice? That required a lot of copy and pasting, right? We are going to make that easier in level 7!
                 answer_code: |
                     ```
-                    choices = 1, 2, 3, 4, 5, earthworm  
-                    points = 0  
+                    choices = 1, 2, 3, 4, 5, earthworm
+                    points = 0
 
-                    throw = choices {at} {random}  
-                    {print} 'you threw ' throw  
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw  
-                    {print} 'those are ' points ' points'  
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
 
-                    throw = choices {at} {random}  
-                    {print} 'you threw ' throw  
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw  
-                    {print} 'those are ' points ' points'  
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
 
-                    throw = choices {at} {random}  
-                    {print} 'you threw ' throw  
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw  
-                    {print} 'those are ' points ' points'  
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
 
-                    throw = choices {at} {random}   
-                    {print} 'you threw ' throw  
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw  
-                    {print} 'those are ' points ' points'  
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
 
-                    throw = choices {at} {random}  
-                    {print} 'you threw ' throw  
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw  
-                    {print} 'those are ' points ' points'  
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
 
-                    throw = choices {at} {random}  
-                    {print} 'you threw ' throw  
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw  
-                    {print} 'those are ' points ' points'  
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
 
-                    throw = choices {at} {random}    
-                    {print} 'you threw ' throw  
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw  
-                    {print} 'those are ' points ' points'  
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
 
-                    throw = choices {at} {random}  
-                    {print} 'you threw ' throw  
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw  
-                    {print} 'those are ' points ' points'  
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
 
                     ```
             7:
@@ -1959,7 +1958,7 @@ adventures:
                 answer_code: |
                     ```
                     choices = 1, 2, 3, 4, 5, 6
-                    repeat 5 times print choices at random
+                    repeat 5 times print choices {at} {random}
 
                     ```
             10:
@@ -2010,7 +2009,7 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                
+
                     ```
     dishes:
         name: Dishes?
@@ -2034,9 +2033,9 @@ adventures:
                     **Extra** Don't feel like doing the dishes yourself? Hack the program by removing your name from the list with the `{remove}` `{from}` command.
                 answer_code: |
                     ```
-                    people {is} mom, dad, sister, myself  
-                    remove myself from people  
-                    {print} people at random has to take out the trash  
+                    people {is} mom, dad, sister, myself
+                    remove myself from people
+                    {print} people {at} {random} has to take out the trash
 
                     ```
             4:
@@ -2055,10 +2054,10 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    people {is} mom, dad, Emma, Sophie  
-                    {print} "the dishes are done by"  
-                    sleep  
-                    {print} people at random  
+                    people {is} mom, dad, Emma, Sophie
+                    {print} "the dishes are done by"
+                    {sleep}
+                    {print} people {at} {random}
 
                     ```
             5:
@@ -2116,32 +2115,32 @@ adventures:
                 answer_code: |
                     ```
                     people = mom, dad, Emma, Sophie
-                    dishwasher = {people at random}
+                    dishwasher = people {at} {random}
                     {print} 'Monday the dishes are done by: ' dishwasher
                     {remove} dishwasher {from} people
 
-                    dishwasher = {people at random}
+                    dishwasher = people {at} {random}
                     {print} 'Tuesday the dishes are done by: ' dishwasher
                     {remove} dishwasher {from} people
 
-                    dishwasher = {people at random}
+                    dishwasher = people {at} {random}
                     {print} 'Wednesday the dishes are done by: ' dishwasher
                     {remove} dishwasher {from} people
 
-                    dishwasher = {people at random}
+                    dishwasher = people {at} {random}
                     {print} 'Thursday the dishes are done by: ' dishwasher
                     {remove} dishwasher {from} people
 
                     people = mom, dad, Emma, Sophie
-                    dishwasher = {people at random}
+                    dishwasher = people {at} {random}
                     {print} 'Friday the dishes are done by: ' dishwasher
                     {remove} dishwasher {from} people
 
-                    dishwasher = {people at random}
+                    dishwasher = people {at} {random}
                     {print} 'Saturday the dishes are done by: ' dishwasher
                     {remove} dishwasher {from} people
 
-                    dishwasher = {people at random}
+                    dishwasher = people {at} {random}
                     {print} 'Sunday the dishes are done by: ' dishwasher
                     {remove} dishwasher {from} people
 
@@ -2159,9 +2158,9 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    people = mom, dad, Emma, Sophie  
-                    {repeat} 7 {times} {print} 'Dishwashing will be done by ' people {at} {random}  
-                    {repeat} 7 {times} {print} 'Laundry will be done by ' people {at} {random}  
+                    people = mom, dad, Emma, Sophie
+                    {repeat} 7 {times} {print} 'Dishwashing will be done by ' people {at} {random}
+                    {repeat} 7 {times} {print} 'Laundry will be done by ' people {at} {random}
                     {repeat} 7 {times} {print} 'Cooking will be done by ' people {at} {random}
 
                     ```
@@ -2185,10 +2184,10 @@ adventures:
                     names = mom, dad, Emma, Sophie
 
                     {for} day {in} days
-                        {print} names {at} random ' does the dishes on ' day
+                        {print} names {at} {random} ' does the dishes on ' day
 
                     {for} day {in} days
-                        {print} names {at} random ' takes out the trash on ' day
+                        {print} names {at} {random} ' takes out the trash on ' day
 
                     ```
     elif_command:
@@ -2310,17 +2309,17 @@ adventures:
                     **Extra** Change the code and let the fortune teller not only predict your name, but also your age, your favorite sports team or something else about yourself.
                 answer_code: |
                     ```
-                    {print} Hello, I'm Hedy the fortune teller!  
-                    {ask} Who are you?  
-                    {print} Let me take a look in my crystal ball  
-                    {print} I see... I see...  
-                    {echo} Your name is  
-                    {ask} How many years have you been living?  
-                    {print} Interesting  
-                    {echo} My crystal ball tells me you are  
-                    {ask} What sport do you play?  
-                    {print} The ball... the ball...  
-                    {print} It tells me your favorite sport...  
+                    {print} Hello, I'm Hedy the fortune teller!
+                    {ask} Who are you?
+                    {print} Let me take a look in my crystal ball
+                    {print} I see... I see...
+                    {echo} Your name is
+                    {ask} How many years have you been living?
+                    {print} Interesting
+                    {echo} My crystal ball tells me you are
+                    {ask} What sport do you play?
+                    {print} The ball... the ball...
+                    {print} It tells me your favorite sport...
                     {echo} It tells me you play
 
                     ```
@@ -2344,13 +2343,13 @@ adventures:
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or 'ask again'.
                 answer_code: |
                     ```
-                    {print} I’m Hedy the fortune teller!  
-                    question {is} {ask} What do you want to know?  
-                    {print} This is what you want to know: question  
-                    answers {is} yes, no, maybe, definitely, {ask} again  
-                    {print} My crystal ball says...  
-                    sleep 2  
-                    {print} answers at random  
+                    {print} I’m Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is what you want to know: question
+                    answers {is} yes, no, maybe, definitely, {ask} again
+                    {print} My crystal ball says...
+                    sleep 2
+                    {print} answers {at} {random}
 
                     ```
 
@@ -2409,16 +2408,16 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    friends {is} Jordan, Lucy, Dave  
-                    {print} 'I can predict the future...'  
-                    {sleep} 2  
-                    {clear}  
-                    {print} 'I can predict whether your sports favorite team will win or not'  
-                    person {is} {ask} 'Who are you?'  
-                    good_answer {is} Hurray! Your team will win!, Your team will definitely win!, Your team will win! Hooray!  
-                    bad_answer {is} Bad luck! Your team won't win!, Bummer... Your favorite sports team will lose..., Your favorite team will lose  
-                    {if} person {is} {in} friends {print} bad_answer {at random}  
-                    {else} {print} good_answer {at random} 
+                    friends {is} Jordan, Lucy, Dave
+                    {print} 'I can predict the future...'
+                    {sleep} 2
+                    {clear}
+                    {print} 'I can predict whether your sports favorite team will win or not'
+                    person {is} {ask} 'Who are you?'
+                    good_answer {is} Hurray! Your team will win!, Your team will definitely win!, Your team will win! Hooray!
+                    bad_answer {is} Bad luck! Your team won't win!, Bummer... Your favorite sports team will lose..., Your favorite team will lose
+                    {if} person {is} {in} friends {print} bad_answer {at} {random}
+                    {else} {print} good_answer {at} {random}
 
                     ```
 
@@ -2461,11 +2460,11 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} 'I have a flower with magic petals'  
-                    {print} 'If you pick the petals the flower will tell you if your crush loves you back'  
-                    amount = {ask} 'How many petals do you want to pick?'  
-                    options = they love you, they love you not  
-                    {repeat} amount {times} {print} options {at} {random} 
+                    {print} 'I have a flower with magic petals'
+                    {print} 'If you pick the petals the flower will tell you if your crush loves you back'
+                    amount = {ask} 'How many petals do you want to pick?'
+                    options = they love you, they love you not
+                    {repeat} amount {times} {print} options {at} {random}
 
                     ```
 
@@ -2488,14 +2487,14 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} 'I am Hedy the fortune teller!'  
-                    {print} 'You can ask me 3 questions.'  
-                    answers = yes, no, maybe  
-                    {repeat} 3 {times}  
-                    question = {ask} 'What do you want to know?'  
-                    {print} question  
-                    {sleep}  
-                    {print} 'My crystal ball says... ' answers {at} {random}  
+                    {print} 'I am Hedy the fortune teller!'
+                    {print} 'You can ask me 3 questions.'
+                    answers = yes, no, maybe
+                    {repeat} 3 {times}
+                    question = {ask} 'What do you want to know?'
+                    {print} question
+                    {sleep}
+                    {print} 'My crystal ball says... ' answers {at} {random}
 
                     ```
 
