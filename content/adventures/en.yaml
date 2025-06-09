@@ -251,18 +251,18 @@ adventures:
                     ```
                 answer_code_2: |
                     ```
-                        dinosaur {is} {ask} 'Is a T-rex or a velociraptor chasing Richard?'
-                        {if} dinosaur {is} T-rex
-                            {print} 'OH NO! The T-rex is closing in!'
-                        {else}
-                            {print} 'OH NO! The velociraptor is closing in!'
-                        end {is} {ask} 'Do you want a happy or a sad ending?'
-                        {if} end {is} happy
-                            {print} 'Just in time Richard jumps back into the time machine!'
-                            {print} 'He teleports to his home and is safe now!'
-                        {else}
-                            {print} 'Oh no! Richard is too slow...'
-                            {print} 'The T-rex eats him!'
+                    dinosaur {is} {ask} 'Is a T-rex or a velociraptor chasing Richard?'
+                    {if} dinosaur {is} T-rex
+                        {print} 'OH NO! The T-rex is closing in!'
+                    {else}
+                        {print} 'OH NO! The velociraptor is closing in!'
+                    end {is} {ask} 'Do you want a happy or a sad ending?'
+                    {if} end {is} happy
+                        {print} 'Just in time Richard jumps back into the time machine!'
+                        {print} 'He teleports to his home and is safe now!'
+                    {else}
+                        {print} 'Oh no! Richard is too slow...'
+                        {print} 'The T-rex eats him!'
                     ```
                 answer_note_2: |
                     Extra
@@ -960,13 +960,13 @@ adventures:
                 answer_code_2: |
                     ```
                     {for} number_1 {in} {range} 1 {to} 3
-                    {for} number_2 {in} {range} 1 {to} 3
-                        answer = {ask} "How much is " number_1 " times " number_2
-                        correct = number_1 * number_2
-                        {if} answer {is} correct
-                            {print} 'Great job!'
-                        {else}
-                            {print} 'That is wrong. The right answer is ' correct
+                        {for} number_2 {in} {range} 1 {to} 3
+                            answer = {ask} "How much is " number_1 " times " number_2
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
+                            {else}
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             12:
                 story_text: |
@@ -2416,7 +2416,7 @@ adventures:
                     person {is} {ask} 'Who are you?'
                     good_answer {is} Hurray! Your team will win!, Your team will definitely win!, Your team will win! Hooray!
                     bad_answer {is} Bad luck! Your team won't win!, Bummer... Your favorite sports team will lose..., Your favorite team will lose
-                    {if} person {is} {in} friends {print} bad_answer {at} {random}
+                    {if} person {in} friends {print} bad_answer {at} {random}
                     {else} {print} good_answer {at} {random}
 
                     ```
@@ -2491,10 +2491,10 @@ adventures:
                     {print} 'You can ask me 3 questions.'
                     answers = yes, no, maybe
                     {repeat} 3 {times}
-                    question = {ask} 'What do you want to know?'
-                    {print} question
-                    {sleep}
-                    {print} 'My crystal ball says... ' answers {at} {random}
+                        question = {ask} 'What do you want to know?'
+                        {print} question
+                        {sleep}
+                        {print} 'My crystal ball says... ' answers {at} {random}
 
                     ```
 
