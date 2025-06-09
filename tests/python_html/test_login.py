@@ -32,7 +32,7 @@ def test_student_pages_protected(client: Client, endpoint):
 def test_student_pages_available(client: Client, given: Given, endpoint):
     """Check that these endpoints work if we are logged in as students."""
     # GIVEN
-    given.logged_in_as_student()
+    given.logged_in_as_new_student()
 
     # WHEN
     response = client.get(endpoint)

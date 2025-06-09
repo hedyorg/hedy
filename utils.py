@@ -169,6 +169,11 @@ def is_testing_request(request):
     return not is_heroku() and bool('X-Testing' in request.headers and request.headers['X-Testing'])
 
 
+def is_redesign_enabled():
+    # Flip this to True when we are ready to release
+    return True
+
+
 def extract_bcrypt_rounds(hash):
     return int(re.match(r'\$2b\$\d+', hash)[0].replace('$2b$', ''))
 
@@ -297,6 +302,15 @@ def random_id_generator(
         string.ascii_lowercase +
         string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+
+def random_password_generator(size=6):
+    """
+    This function generates a random password using the base 58 characters to
+    prevent confusion between characters like 0 and O, or 1 and l.
+    """
+    base_58_chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+    return random_id_generator(size, base_58_chars)
 
 
 def markdown_to_html_tags(markdown):

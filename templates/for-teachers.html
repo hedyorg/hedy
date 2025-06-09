@@ -1,15 +1,6 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
-{% if tutorial %}
-<div id = "tutorial_pop_up" class = "z-50 fixed hidden" style = "width: 500px; top: 20%; left: 50%; transform: translate(-50%, -50%);" >
-      <div class = "bg-blue-500 border border-black rounded-lg px-8 py-4 text-center" >
-          <h2 id = "tutorial_title" class = "text-white" > </h2 >
-          <p id = "tutorial_text" > </p >
-          <button id = "tutorial_next_button" class = "green-btn mt-4" > {{_('next_step_tutorial')}} </button>
-      </div >
-  </div>
-{% endif %}
 <div class="flex-col">
   <div class="flex flex-row gap-4 md:px-16">
     <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full p-8">

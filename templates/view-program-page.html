@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block full_width_content %}
-<div tabindex="0" class="flex-grow px-8 common-page-container">
+<div tabindex="0" class="flex-grow px-8 common-page-container"
+ data-level="{{level}}" data-kwlang="{{ current_language().lang }}">
   <div class="flex flex-row gap-6 items-center">
     <h1>{{initial_adventure.name}}</h1>
     {% if can_checkoff_program %}

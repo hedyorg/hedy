@@ -2,7 +2,6 @@ import { modal } from './modal';
 import { theKeywordLanguage } from "./app";
 import { ClientMessages } from './client-messages';
 import DOMPurify from 'dompurify'
-import { startTeacherTutorial } from './tutorials/tutorial';
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
 import { CustomWindow } from './custom-window';
 import { addCurlyBracesToCode, addCurlyBracesToKeyword } from './adventure';
@@ -135,25 +134,6 @@ export function join_class(id: string, name: string) {
       } else {
           modal.notifyError(err.responseText || ClientMessages['Connection_error']);
       }
-    });
-}
-
-export function invite_student(class_id: string, prompt: string, url='/invite-student') {
-    modal.prompt (prompt, '', function (username) {
-      $.ajax({
-          type: 'POST',
-          url,
-          data: JSON.stringify({
-            username: username,
-            class_id: class_id
-          }),
-          contentType: 'application/json',
-          dataType: 'json'
-      }).done(function() {
-          location.reload();
-      }).fail(function(err) {
-          modal.notifyError(err.responseText);
-      });
     });
 }
 
@@ -440,6 +420,14 @@ export function save_customizations(class_id: string) {
     }).done(function (response) {
       modal.notifySuccess(response.success);
       $('#remove_customizations_button').removeClass('hidden');
+      // Since the `sorted_adventures` section contains `quiz` and `parsons`
+      // It needs to be synched with the updates that aren't done through HTMX
+      // Therefore we trigger an input trigger, which in turn will call the
+      // get-customization-level endpoint and remove or add those two adventures
+      // if needed.
+      const dropdown = document.getElementById("levels_dropdown");
+      const input_trigger = new Event("input");
+      dropdown?.dispatchEvent(input_trigger);  
     }).fail(function (err) {
       modal.notifyError(err.responseText);
     });
@@ -706,19 +694,11 @@ export interface InitializeTeacherPageOptions {
    * Whether to show the dialog box on page load
    */
   readonly welcome_teacher?: boolean;
-
-  /**
-   * Whether to show the tutorial on page load
-   */
-  readonly tutorial?: boolean;
 }
 
 export function initializeTeacherPage(options: InitializeTeacherPageOptions) {
   if (options.welcome_teacher) {
     modal.notifySuccess(ClientMessages.teacher_welcome, 30_000);
-  }
-  if (options.tutorial) {
-    startTeacherTutorial();
   }
 }
 
@@ -778,8 +758,7 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // Autosave customize class page
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
-      autoSave("customize_class", null, {elementId: "levels_dropdown", trigger: "input"});
-
+      autoSave("customize_class");
   });
 }
 
@@ -981,4 +960,49 @@ export function invite_support_teacher(requester: string) {
         modal.notifyError(err.responseText);
     });
   });
+}
+
+export function invite_to_class(class_id: string, prompt: string, type: "student" | "second_teacher") {
+  const vals = {class_id, 'user_type': type}
+  const input_attributes = {
+    'hx-get': '/search',
+    'hx-target': '#search_results',
+    'hx-vals': JSON.stringify(vals)
+  }
+  const ok_button_attributes = {
+    'hx-post': `/invite?class_id=${class_id}&invite_as=${type}`,
+    'hx-target': '#invite_block',
+    'hx-include': "[name='usernames']"
+  }
+  htmx.process(document.body)
+  modal.htmx_search(
+    prompt,
+    input_attributes,
+    ok_button_attributes,
+    '#invite_block',
+    ClientMessages['invite'],
+    ClientMessages['invitations_sent']
+  );
+}
+
+export function add_user_to_invite_list(username: string, button: HTMLButtonElement) {
+  button.closest('li')?.remove() // We remove the user from the list
+  const userList = document.getElementById('users_to_invite')
+  for (const userLi of userList?.querySelectorAll('li') || []) {
+    const p = userLi.querySelector('p')
+    if (p?.textContent?.trim() === username) {
+      return
+    }
+  }
+  const template = document.querySelector('#user_list_template') as HTMLTemplateElement
+  const clone = template.content.cloneNode(true) as HTMLElement
+  let close = clone.querySelector('.close');  
+  close?.addEventListener('click', () => {   
+    close?.parentElement?.remove()
+  })
+  let p = clone.querySelector('p[class^="details"]')!
+  p.textContent = username
+  let input = clone.querySelector('input')!
+  input.value = username
+  userList?.appendChild(clone)
 }

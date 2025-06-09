@@ -28,29 +28,30 @@ teachers.forEach((teacher) => {
         .should('eq', Cypress.config('baseUrl') + Cypress.env('teachers_page'));
     })
 
-    it('Is able to click on survey button, cancel it, respond to 1 question, then 3 to finish', () => {
-      // cancel survey
-      cy.getDataCy('survey_status_button').click();
-      cy.getDataCy('survey').should("be.visible");
-      cy.getDataCy('cancel_survey').click();
-      cy.getDataCy('survey').should("not.be.visible");
-      // respond to 1 question
-      cy.getDataCy('survey_status_button').click();
-      cy.getDataCy('survey').should("be.visible");
-      cy.getDataCy('input_1').type("test");
-      cy.getDataCy('submit').click();
-      // respond to last 3 questions
-      cy.getDataCy('survey_status_button').click();
-      const surveyInputs = Array.from({length:3},(v, k)=> k+1)
-      cy.wrap(surveyInputs).each((index) => {
-          cy.getDataCy("input_" + index)
-              .type("test")
-              .invoke("val").then((text) => {
-                expect("test").to.equal(text);
-              });
-          });
-      cy.getDataCy('submit').click();
-      cy.getDataCy('survey_status_button').contains("complete");
-    })
+//    Disabling the survey test because it should be used again after the redesign
+//    it('Is able to click on survey button, cancel it, respond to 1 question, then 3 to finish', () => {
+//      // cancel survey
+//      cy.getDataCy('survey_status_button').click();
+//      cy.getDataCy('survey').should("be.visible");
+//      cy.getDataCy('cancel_survey').click();
+//      cy.getDataCy('survey').should("not.be.visible");
+//      // respond to 1 question
+//      cy.getDataCy('survey_status_button').click();
+//      cy.getDataCy('survey').should("be.visible");
+//      cy.getDataCy('input_1').type("test");
+//      cy.getDataCy('submit').click();
+//      // respond to last 3 questions
+//      cy.getDataCy('survey_status_button').click();
+//      const surveyInputs = Array.from({length:3},(v, k)=> k+1)
+//      cy.wrap(surveyInputs).each((index) => {
+//          cy.getDataCy("input_" + index)
+//              .type("test")
+//              .invoke("val").then((text) => {
+//                expect("test").to.equal(text);
+//              });
+//          });
+//      cy.getDataCy('submit').click();
+//      cy.getDataCy('survey_status_button').contains("complete");
+//    })
   });
 });

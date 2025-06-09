@@ -6,7 +6,6 @@ import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
 import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions } from './teachers';
-import { initializeTutorial } from './tutorials/tutorial';
 
 export interface InitializeOptions {
   /**
@@ -79,7 +78,6 @@ export function initialize(options: InitializeOptions) {
     staticRoot: options.staticRoot,
   });
   initializeFormSubmits();
-  initializeTutorial();
 
   // The above initializations are often also page-specific
   switch (options.javascriptPageOptions?.page) {

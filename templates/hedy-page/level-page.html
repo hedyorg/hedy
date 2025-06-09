@@ -8,7 +8,7 @@
 {% endif %}
 {% if customizations and customizations["teachers_adventure"] %}
   <div class="bg-red-500 text-white text-sm font-bold px-4 py-3" data-cy="preview_adventure_banner" role="alert">
-      <div class="text-center center-text">{{_('previewing_adventure')}} 
+      <div class="text-center center-text">{{_('previewing_adventure')}}
         {% if initial_adventure.author == username %}
           <a class="text-white" href="/for-teachers/customize-adventure/{{initial_adventure.id}}">{{_('edit_adventure')}}</a>
         {% else %}
@@ -18,88 +18,79 @@
   </div>
 {% endif %}
 <div class="mt-4 mb-1 mx-auto py-2 px-4 lg:px-16 flex flex-col lg:flex-row gap-4 justify-start w-full max-w-screen-2xl">
-  <div class="flex flex-row justify-between sm:justify-normal gap-4 hidden">
-    {% if current_user_is_in_class %}
-    <button id="hand_in_button" class="blue-btn-new next-tab">
-      <span class="fa fa-paper-plane ltr:mr-1 rtl:ml-1"></span>
-      {{_('submit_program')}}
-    </button>
-    {% endif %}
-  </div>
   <div class="flex flex-row gap-4">
-    <div class="flex flex-col md:flex-row border-b-4 border-blue-900 md:gap-2" id="level_adventure_title">
-      <div class="text-4xl font-light text-blue-800">
-        {{ _('level_title') }} {{ level_nr }}
-        {% if assignment_nr %} · {{ _('step_title') }} {{ assignment_nr }} {% endif %}
-      </div>
-      <span class="hidden md:block text-4xl font-light text-blue-800" >—</span>
-      <div id="adventure_name" type="text" class="text-4xl font-light text-blue-800">      
-      {{ initial_adventure.name }}
+    <div class="flex flex-col md:flex-row md:gap-2" id="level_adventure_title">
+      <div class="dropdown relative">
+        <div class="flex flex-row">
+          <button type="text" id="dropdow_open_button" data-cy="dropdown_open_button"  data-loading disabled
+                  class="blue-btn-new text-4xl font-light text-blue-800" onclick="hedyApp.open_index_dropdown(event)">
+            <span>
+              {{ _('level_title') }} {{ level_nr }}
+            </span>
+            <span class="hidden" id="level_separator">
+              —
+            </span>
+            <span id="adventure_name" >
+              
+            </span>
+            <i class="fa-solid fa-chevron-down transition-all ease-in duration-300 text-3xl" id="dropdown_index_arrow"></i>
+          </button>
+        </div>
+        <div id="dropdown-level" class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 min-w-full" style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; width: 400px !important; max-height: 35rem;">
+          {% set index_levels = customizations["available_levels"] if customizations["teachers_adventure"] else range(1, max_level + 1) %}
+          {% for i in index_levels %}
+            <div class="flex flex-col">
+              <button class="flex flex-row justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                {% if loop.index == level|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %}
+                {% if i not in customizations['available_levels']%} bg-gray-400 {% else %} hover:bg-blue-200 {% endif %}"
+
+                {% if i not in customizations['available_levels']%}disabled{% endif %}
+              xd="  on click
+                   toggle .sliding-content-closed .sliding-content-open on #level_{{ i }}_pane
+                   then toggle .rotate-180 on #level_{{ i }}_arrow
+                  then toggle .rounded-lg .rounded-t-lg .bg-blue-200 on #level_{{ i }}_header"
+                  onclick="hedyApp.open_index_pane(event)"
+                  id="level_{{ i }}_header"
+                  data-cy="level_{{ i }}_header">
+                {{_('level_title')}} {{ i }}
+                {% if i not in customizations['available_levels']%}
+                  <i class="fa-solid fa-lock"></i>
+                {% else %}
+                  <i class="fa-solid fa-chevron-down text-base transition-all ease-in duration-200 {% if loop.index == level|int %}rotate-180{% endif %}" id="level_{{ i }}_arrow"></i>
+                {% endif %}
+              </button>
+              <div class="bg-white rounded-b-lg grow-0 ease-in transition-all duration-300 grid
+                          {% if loop.index == level|int %}sliding-content-open{% else %}sliding-content-closed{% endif %}" id="level_{{ i }}_pane">
+                  <ul class="list-none overflow-hidden">
+                    <div class="p-4" id="level_{{ i }}_adventures">
+                      {% for adventure in adventures_for_index[i] %}
+                          {% if adventure.is_teacher_adventure%}
+                            {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'teacher', adventure.state, loop.index) }}
+                          {% elif adventure.is_command_adventure %}
+                            {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, 'command', adventure.state, loop.index) }}
+                          {% else %}
+                            {{ adventure_index(adventure.short_name, i, adventure.name, adventure.short_name == initial_tab and i == level|int, 'adventure' + loop.index|string, '', adventure.state, loop.index) }}
+                          {% endif %}
+                      {% endfor %}
+                    </div>
+                  </ul>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
   <div class="flex-1"></div>
   <div class="flex flex-col md:flex-row gap-4 md:items-center">
-    <div class="flex flex-row gap-2">
-      <button class="blue-btn-new w-fit"
-      _="on click toggle .ltr:-translate-x-full .rtl:translate-x-full on #index_sidebar
-      then toggle .hidden on #sidebar_bg
-      wait 100ms
-      then toggle .opacity-0 on #sidebar_bg
-      then toggle .opacity-75 on #sidebar_bg">
-      See more adventures 
-      <i class="fa-solid fa-book-open-reader"></i>
-      </button>
-      <button class="blue-btn-new md:hidden" _="on click toggle .flex .hidden on #more_options">
-        <i class="fa-solid fa-ellipsis-vertical"></i>
-      </button>
-    </div>
-    <div class="hidden md:flex flex-row gap-2" id="more_options">
-      {% if not hide_cheatsheet and cheatsheet %}
-      <div class="dropdown relative" id="cheatsheet_dropdown_container">
-        <button class="blue-btn-new ltr:ml-1 rtl:mr-1 rounded inline-flex items-center gap-2" id="dropdown_cheatsheet_button"
-          onclick="$('#cheatsheet_dropdown').slideToggle('medium');">
-          <span class="fa fa-list ltr:mr-1 rtl:ml-1"></span>
-          <span>{{_('cheatsheet_title')}}</span>
-          <svg id="cheatsheet_arrow" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-          </svg>
-        </button>
-        <div class="dropdown-menu dropdown-blue z-30 mt-2" id="cheatsheet_dropdown"
-          style="display: none; padding: 0px !important;"
-          _="on mutation of @style
-              set arrow to #cheatsheet_arrow
-              if *display == 'none'
-                  remove .rotate-180 from arrow
-              else if not arrow.classList.contains('rotate-180')
-                  add .rotate-180 to arrow
-              end">
-          <h2 class="px-2 py-6">{{_('cheatsheet_title')}}</h2>
-          {% for example in cheatsheet %}
-          <div class="flex justify-between items-center gap-4 px-4 py-8 border-t border-dashed border-blue-700">
-            <div class="flex-grow h-min min-w-80" tabindex=0>
-              {{ example.explanation|commonmark }}
-            </div>
-            <div class="flex-none">
-              <button class="yellow-btn-new tiny-btn" id="try_button{{ loop.index }}"
-                onclick='hedyApp.tryPaletteCode({{example.demo_code|tojson}});'>
-                <span class="rtl:hidden">⇥</span>
-                <span class="ltr:hidden">⇤</span>
-              </button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-      {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
-        {{ render_partial('hedy-page/htmx-language-switch-button.html', commands=commands) }}
-      {% endif %}
-    </div>
+    {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
+      {{ render_partial('hedy-page/htmx-language-switch-button.html', lang_switch_table=lang_switch_table) }}
+    {% endif %}
   </div>
 </div>
 {% endif %}
-<div class="w-full max-w-screen-2xl mx-auto py-4 px-4 lg:px-16" id="code_content_container">
+<div class="w-full max-w-screen-2xl mx-auto py-4 px-4 lg:px-16" id="code_content_container"
+  data-kwlang="{{ current_language().lang }}" data-level="{{ level }}">
 {% block levelbody %}{% endblock %}
 </div>
 

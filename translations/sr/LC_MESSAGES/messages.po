@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-12-30 06:16+0000\n"
-"Last-Translator: Reno Tx <renotx@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2025-05-15 10:21+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: sr <LL@li.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -148,6 +148,9 @@ msgstr "Открили смо да је написани код исправан
 msgid "Wrong Number of Arguments"
 msgstr "Открили смо да функција {name} има погрешан број аргумената који је {used_number}. Можете ли покушати да напишете {defined_number} уместо тога?"
 
+msgid "about_this_adventure"
+msgstr "О овој авантури"
+
 msgid "account_overview"
 msgstr "Преглед налога"
 
@@ -206,9 +209,6 @@ msgstr "Ваша авантура мора имати најмање 20 кара
 msgid "adventure_name_invalid"
 msgstr "Ово име авантуре је неважеће."
 
-msgid "adventure_prompt"
-msgstr "Молимо унесите име авантуре"
-
 msgid "adventure_terms"
 msgstr "Слажем се да моја авантура може бити јавно доступна на Hedy."
 
@@ -244,9 +244,6 @@ msgstr "Дошло је до грешке, молимо покушајте по�
 
 msgid "all"
 msgstr "Сви"
-
-msgid "all_class_highscores"
-msgstr "Сви ученици видљиви у разредним најбољим резултатима"
 
 msgid "all_rows_missing_separator"
 msgstr "Нити један ред не садржи тачку зарез. Можда желите да нам дозволите да аутоматски генеришемо лозинке? Ако је тако, кликните на прекидач за лозинке и креирајте налоге поново. Ако то није случај, употребите тачку зарез да одвојите корисничка имена и лозинке на следећим линијама: {rows}"
@@ -365,9 +362,6 @@ msgstr "Команда више није исправна"
 msgid "commands"
 msgstr "Команде"
 
-msgid "complete"
-msgstr "Завршено"
-
 msgid "congrats_message"
 msgstr "Честитамо, {username}, постигли сте следеће резултате са Hedy!"
 
@@ -376,6 +370,9 @@ msgstr "Желим да будем повезан са гостујућим на
 
 msgid "constant_variable_role"
 msgstr "константа"
+
+msgid "containing"
+msgstr "Садржи"
 
 msgid "content_invalid"
 msgstr "Ова авантура је неважећа."
@@ -479,6 +476,9 @@ msgstr "Прилагоди авантуру"
 msgid "customize_class"
 msgstr "Прилагоди разред"
 
+msgid "danger_zone"
+msgstr ""
+
 msgid "dash"
 msgstr "црта"
 
@@ -524,8 +524,11 @@ msgstr "Програм успешно обрисан."
 msgid "delete_tag_prompt"
 msgstr "Да ли сте сигурни да желите да обришете ову ознаку?"
 
-msgid "destroy_profile"
+msgid "destroy_account"
 msgstr "Обриши профил"
+
+msgid "destroy_account_message"
+msgstr ""
 
 msgid "developers_mode"
 msgstr "Програмерски режим"
@@ -535,9 +538,6 @@ msgstr "Директно отвори"
 
 msgid "disable"
 msgstr "Онемогући"
-
-msgid "disable_explore_page"
-msgstr "Онемогући страницу за истраживање"
 
 msgid "disable_parsons"
 msgstr "Онемогући све загонетке"
@@ -623,6 +623,9 @@ msgstr "То корисничко име је већ у употреби."
 msgid "exit_preview_mode"
 msgstr "Изађите из режима прегледа"
 
+msgid "expand_output"
+msgstr ""
+
 msgid "experience_invalid"
 msgstr "Молимо вас да изаберете важеће искуство, изаберите (Да, Не)."
 
@@ -701,6 +704,9 @@ msgstr "Иди на питање"
 msgid "go_to_quiz_result"
 msgstr "Иди на резултат квиза"
 
+msgid "go_to_your_clone"
+msgstr "Идите до вашег клона"
+
 msgid "goto_profile"
 msgstr "Иди на мој профил"
 
@@ -719,9 +725,6 @@ msgstr "Како сте чули за Hedy?"
 msgid "heard_about_invalid"
 msgstr "Молимо вас да изаберете важећи начин на који сте чули за нас."
 
-msgid "hedy_choice_title"
-msgstr "Hedy-јев избор"
-
 msgid "hedy_introduction_slides"
 msgstr "Уводне слајдове за Хеди"
 
@@ -736,9 +739,6 @@ msgstr "здраво"
 
 msgid "hide_adventures"
 msgstr "Сакриј авантуре"
-
-msgid "hide_cheatsheet"
-msgstr "Сакриј листу за варање"
 
 msgid "hide_classes"
 msgstr "Сакриј часове"
@@ -809,11 +809,14 @@ msgstr "# Дати програм је неважећи, молимо покуш
 msgid "invalid_teacher_invitation_code"
 msgstr "Код за позив наставника је неважећи. Да бисте постали наставник, обратите се на hello@hedy.org."
 
-msgid "invalid_tutorial_step"
-msgstr "Неважећи корак туторијала"
-
 msgid "invalid_username_password"
 msgstr "Неважеће корисничко име/лозинка."
+
+msgid "invitations_sent"
+msgstr ""
+
+msgid "invite"
+msgstr ""
 
 msgid "invite_by_username"
 msgstr "Позови по корисничком имену"
@@ -1032,9 +1035,6 @@ msgstr "Мој јавни профил"
 msgid "name"
 msgstr "Име"
 
-msgid "nav_explore"
-msgstr "Истражи"
-
 msgid "nav_hedy"
 msgstr "Хејди"
 
@@ -1053,6 +1053,9 @@ msgstr "Поновите нову лозинку"
 msgid "newline"
 msgstr "нови ред"
 
+msgid "newsletter"
+msgstr ""
+
 msgid "next_adventure"
 msgstr "Следећа авантура"
 
@@ -1061,9 +1064,6 @@ msgstr "Следећа вежба"
 
 msgid "next_page"
 msgstr "Следећа страница"
-
-msgid "next_step_tutorial"
-msgstr "Следећи корак >>>"
 
 msgid "next_student"
 msgstr "Следећи ученик"
@@ -1078,7 +1078,7 @@ msgid "no_accounts"
 msgstr "Нема налога за креирање."
 
 msgid "no_adventures_yet"
-msgstr "Још увек нема јавних авантура..."
+msgstr "Пронађене су јавне авантуре које одговарају овим критеријумима. Покушајте да претражите нешто друго."
 
 msgid "no_more_flat_if"
 msgstr "Почевши од нивоа 8, код након `{if}` треба да буде постављен у следећи ред и да почне са 4 размака."
@@ -1106,6 +1106,9 @@ msgstr "Не постоји такав Hedy програм!"
 
 msgid "no_tag"
 msgstr "Ознака није дата!"
+
+msgid "no_usernames_found"
+msgstr ""
 
 msgid "not_adventure_yet"
 msgstr "Морате прво унети име авантуре"
@@ -1227,6 +1230,7 @@ msgstr "Лозинке морају бити дуге најмање 6 кара�
 msgid "pending_invites"
 msgstr "Позиви на чекању"
 
+#, fuzzy
 msgid "people_with_a_link"
 msgstr "Други људи са везом могу видети овај програм. Такође може бити пронађен на страници \"Истражи\"."
 
@@ -1343,9 +1347,6 @@ msgstr "Одабиром ове кутије чиним свој профил в
 
 msgid "public_profile_updated"
 msgstr "Јавни профил ажуриран, страница ће бити поново учитана."
-
-msgid "put"
-msgstr "Постави"
 
 msgid "question mark"
 msgstr "упитник"
@@ -1467,6 +1468,9 @@ msgstr "Морате имати налог да бисте сачували св
 msgid "save_success_detail"
 msgstr "Програм успешно сачуван."
 
+msgid "save_turtle_drawing"
+msgstr ""
+
 msgid "score"
 msgstr "Резултат"
 
@@ -1488,6 +1492,9 @@ msgstr "Унесите корисничко име наставника да г�
 msgid "second_teacher_warning"
 msgstr "Сви наставници у овом одељењу могу га прилагодити."
 
+msgid "see_adventure_shared_class"
+msgstr ""
+
 msgid "see_certificate"
 msgstr "Погледајте {username} сертификат!"
 
@@ -1500,14 +1507,14 @@ msgstr "Изаберите и наручите авантуре"
 msgid "select_all"
 msgstr "Изабери све"
 
+msgid "select_classes"
+msgstr "Изаберите часове"
+
 msgid "select_lang"
 msgstr "Изаберите језик"
 
 msgid "select_levels"
 msgstr "Изаберите нивое"
-
-msgid "select_tag"
-msgstr "Изаберите ознаку"
 
 msgid "selected"
 msgstr "Изабрано"
@@ -1527,14 +1534,14 @@ msgstr "Ускоро ћете добити имејл са упутствима 
 msgid "settings"
 msgstr "Моја лична подешавања"
 
-msgid "share"
-msgstr "Подели"
-
 msgid "share_by_giving_link"
 msgstr "Прикажите свој програм другим људима давањем везе испод:"
 
 msgid "share_your_program"
 msgstr "Поделите свој програм"
+
+msgid "show_editor"
+msgstr ""
 
 msgid "signup_student_or_teacher"
 msgstr "Да ли сте ученик или наставник?"
@@ -1559,6 +1566,9 @@ msgstr "За сваки ниво Hedy-а, креирали смо слајдов
 
 msgid "social_media"
 msgstr "Друштвени медији"
+
+msgid "solution"
+msgstr ""
 
 msgid "solution_example"
 msgstr "Пример решења"
@@ -1603,9 +1613,6 @@ msgstr "Заустави програм"
 msgid "string"
 msgstr "текст"
 
-msgid "student"
-msgstr "Ученик"
-
 msgid "student_accounts_created"
 msgstr "Успешно креирани ученички налози"
 
@@ -1614,9 +1621,6 @@ msgstr "Авантуре ученика"
 
 msgid "student_adventures_table_explanation"
 msgstr "Ова табела приказује програме које су креирали ученици за сваку авантуру на нивоу. Кликом на икону ока, можете видети страницу програма; након прегледа програма, можете означити квачицу да бисте означили завршетак."
-
-msgid "student_already_in_class"
-msgstr "Овај ученик је већ у вашем одељењу."
 
 msgid "student_already_invite"
 msgstr "Овај ученик већ има на чекању позивницу."
@@ -1629,9 +1633,6 @@ msgstr "Информације о ученику"
 
 msgid "student_information_explanation"
 msgstr "Ова табела приказује основне информације о ученицима у вашој класи. Такође постоји неколико радњи које можете урадити у овој табели: промените лозинку ученика кликом на икону оловке, погледајте страницу програма ученика кликом на икону кода и обришите ученика из класе кликом на црвену икону канте."
-
-msgid "student_not_existing"
-msgstr "Ово корисничко име не постоји."
 
 msgid "student_signup_header"
 msgstr "Ученик"
@@ -1654,17 +1655,30 @@ msgstr "Да ли сте сигурни да желите да предате о
 msgid "submitted"
 msgstr "Предати"
 
+#, fuzzy
 msgid "submitted_header"
 msgstr "Ово је предат програм и не може се мењати."
 
 msgid "subscribe"
 msgstr "Претплати се"
 
+msgid "subscribe_message"
+msgstr ""
+
 msgid "subscribe_newsletter"
 msgstr "Претплатите се на билтен"
 
+msgid "subscribed_header"
+msgstr ""
+
+msgid "subscribed_message"
+msgstr ""
+
 msgid "successful_runs"
 msgstr "Успешна извршења: {successful_runs}"
+
+msgid "successfully_subscribed"
+msgstr ""
 
 msgid "suggestion_color"
 msgstr "Покушајте да користите другу боју"
@@ -1680,12 +1694,6 @@ msgstr "Покушајте да промените вредности да бу�
 
 msgid "surname"
 msgstr "Име"
-
-msgid "survey"
-msgstr "Анкета"
-
-msgid "survey_completed"
-msgstr "Анкета завршена"
 
 msgid "survey_skip"
 msgstr "Не приказуј ово поново"
@@ -1735,6 +1743,9 @@ msgstr ""
 "echo дакле твоје име је \n"
 "</pre>"
 
+msgid "this_adventure_has_an_example_solution"
+msgstr "Ова авантура има пример решења"
+
 msgid "this_turns_in_assignment"
 msgstr "Ово предаје ваш задатак вашем наставнику."
 
@@ -1752,9 +1763,6 @@ msgstr "Hedy - Прилагоди авантуру"
 
 msgid "title_customize-class"
 msgstr "Hedy - Прилагоди одељење"
-
-msgid "title_explore"
-msgstr "Hedy - Истражите"
 
 msgid "title_for-teacher"
 msgstr "Hedy - За наставнике"
@@ -1816,20 +1824,6 @@ msgstr "Преводилац"
 msgid "turned_into_teacher"
 msgstr "Честитамо! Успешно сте постали учитељ."
 
-msgid "tutorial"
-msgstr "Упутство"
-
-msgid "tutorial_code_snippet"
-msgstr ""
-"{print} Здраво свете!\n"
-"{print} Учим Hedy уз туторијал!"
-
-msgid "tutorial_message_not_found"
-msgstr "Нисмо могли да пронађемо тражени корак туторијала..."
-
-msgid "tutorial_title_not_found"
-msgstr "Корак туторијала није пронађен"
-
 msgid "unauthorized"
 msgstr "Немате права приступа за ову страницу"
 
@@ -1856,6 +1850,12 @@ msgstr "Да ли сте сигурни да желите да поништит�
 
 msgid "unsubmitted"
 msgstr "Поништено подношење"
+
+msgid "unsubscribed_header"
+msgstr ""
+
+msgid "unsubscribed_message"
+msgstr ""
 
 msgid "update_adventure_prompt"
 msgstr "Да ли сте сигурни да желите да ажурирате ову авантуру?"
@@ -2309,4 +2309,69 @@ msgstr "Ваш програм"
 
 #~ msgid "classes"
 #~ msgstr "Часови"
+
+#~ msgid "Adventure"
+#~ msgstr ""
+
+#~ msgid "Answer"
+#~ msgstr ""
+
+#~ msgid "adventure_prompt"
+#~ msgstr "Молимо унесите име авантуре"
+
+#~ msgid "select_tag"
+#~ msgstr "Изаберите ознаку"
+
+#~ msgid "Delete"
+#~ msgstr ""
+
+#~ msgid "select_class"
+#~ msgstr ""
+
+#~ msgid "invalid_tutorial_step"
+#~ msgstr "Неважећи корак туторијала"
+
+#~ msgid "next_step_tutorial"
+#~ msgstr "Следећи корак >>>"
+
+#~ msgid "tutorial"
+#~ msgstr "Упутство"
+
+#~ msgid "tutorial_code_snippet"
+#~ msgstr ""
+#~ "{print} Здраво свете!\n"
+#~ "{print} Учим Hedy уз туторијал!"
+
+#~ msgid "tutorial_message_not_found"
+#~ msgstr "Нисмо могли да пронађемо тражени корак туторијала..."
+
+#~ msgid "tutorial_title_not_found"
+#~ msgstr "Корак туторијала није пронађен"
+
+#~ msgid "survey"
+#~ msgstr "Анкета"
+
+#~ msgid "survey_completed"
+#~ msgstr "Анкета завршена"
+
+#~ msgid "put"
+#~ msgstr "Постави"
+
+#~ msgid "disable_explore_page"
+#~ msgstr "Онемогући страницу за истраживање"
+
+#~ msgid "hedy_choice_title"
+#~ msgstr "Hedy-јев избор"
+
+#~ msgid "nav_explore"
+#~ msgstr "Истражи"
+
+#~ msgid "title_explore"
+#~ msgstr "Hedy - Истражите"
+
+#~ msgid "all_class_highscores"
+#~ msgstr "Сви ученици видљиви у разредним најбољим резултатима"
+
+#~ msgid "hide_cheatsheet"
+#~ msgstr "Сакриј листу за варање"
 

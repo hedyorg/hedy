@@ -166,7 +166,7 @@ class AdminModule(WebsiteModule):
 
         update_is_teacher(self.db, teacher, is_teacher_value)
 
-        return make_response('', 200)
+        return make_response({}, 200)
 
     @route("/mark-super-teacher/<username_teacher>", methods=["POST"])
     @requires_admin
@@ -231,7 +231,7 @@ class AdminModule(WebsiteModule):
                 )
             except BaseException:
                 return make_response(gettext("mail_error_change_processed"), 400)
-        return make_response('', 200)
+        return make_response({}, 200)
 
     @route("/getUserTags", methods=["POST"])
     @requires_admin

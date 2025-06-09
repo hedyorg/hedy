@@ -1,0 +1,101 @@
+    <div class="w-96 max-w-full border border-gray-600 mb-4">
+      <div class="bg-gray-600 text-white px-4 py-1">{{ _('about_this_adventure') }}</div>
+
+      {# Info #}
+      <div class="px-4 py-2">
+        {% set creator = _('owner') if adventure["author"] != adventure["creator"] else _('creator') %}
+
+        {% set labelclass = "inline-block text-gray-600 mt-1 font-bold" %}
+        {% set labelstyle = "min-width: 5rem;" %}
+
+        {% if adventure["creator_public_profile"] or adventure["public_user"] %}
+            <div>
+                <span class="{{ labelclass }}" style="{{ labelstyle }}">{{ creator }}:</span>
+                <a href="/user/{{adventure.creator or adventure.username}}" target="_blank">{{ adventure.creator or adventure.username }}</a>
+            </div>
+        {% else %}
+            <div>
+                <span class="{{ labelclass }}" style="{{ labelstyle }}">{{ creator }}:</span>
+                {{ adventure.creator or adventure.username }}
+            </div>
+        {% endif %}
+        {% if adventure["author"] != adventure["creator"] %}
+            <div>
+                <span class="{{ labelclass }}" style="{{ labelstyle }}">{{ _('creator') }}:</span>
+                {{ adventure.author or adventure.username }}
+            </div>
+        {% endif %}
+
+        {% if adventure.get("language") %}
+            <div>
+                <span class="{{ labelclass }}" style="{{ labelstyle }}">{{ _('language') }}:</span>
+                {{ lang_to_sym(adventure.language) }}
+            </div>
+        {% endif %}
+
+        <div>
+            <!-- adventure.level will gradually be removed until we have all adventures using only levels. -->
+            {% if adventure.levels and adventure.levels|length > 1 %}
+                <span class="{{ labelclass }}" style="{{ labelstyle }}">{{ _('levels') }}:</span>
+                {% for level in adventure.levels %}
+                    {{level}}{% if loop.index != adventure.levels|length %}, {% endif %}
+                {% endfor %}
+            {% else %}
+                <span class="{{ labelclass }}" style="{{ labelstyle }}">{{ _('level') }}:</span>
+                {{ adventure.level }}
+            {% endif %}
+        </div>
+
+        {% if adventure["cloned_times"] %}
+            <div>
+                <span class="{{ labelclass }}" style="{{ labelstyle }}">{{_('cloned_times')}}:</span>
+                {{adventure["cloned_times"]}}
+            </div>
+        {%endif%}
+        <div>
+            <span class="{{ labelclass }}" style="{{ labelstyle }}">{{_('last_update')}}:</span>
+            {{ adventure.date|format_date }}
+        </div>
+
+        {% if adventure.tags %}
+          <div>
+            {% for tag in adventure.tags %}
+            <span class="inline-block bg-pink-200 rounded-full px-2 text-gray-700 mr-1 mb-1">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      {# Actions #}
+      <div class="flex items-center gap-4 px-6 py-4 bg-gray-200 shadow-lg">
+        {% if user["username"] != adventure["creator"] %}
+            {# Not your adventure, clone #}
+            <button class="green-btn"
+                hx-post="/public-adventures/clone/{{adventure.id}}"
+                hx-swap="outerHTML"
+                data-cy="clone_{{adventure.name}}"
+                data-id="{{adventure.id}}">{{_('clone')}}</button>
+        {% else %}
+            {# Already your adventure, show an edit link #}
+            <a href="/for-teachers/customize-adventure/{{adventure.id}}"
+                data-cy="edit_{{adventure.name}}"
+                class="green-btn" id="edit_adventure_button">
+                {{_('edit_adventure')}}</a>
+        {% endif %}
+        <a hx-confirm="{{_('flag_adventure_prompt')}}"
+            hx-post="/public-adventures/flag/{{adventure.id}}/{{adventure.flagged}}"
+            hx-swap="outerHTML"
+            title="Flag">
+            <span class="fa fa-flag bg-{% if adventure.flagged %}red{%else%}blue{%endif%}-300 hover:bg-blue-600 p-2 rounded-full text-white"></span>
+        </a>
+        {% if is_super_teacher %}
+            <a hx-confirm="{{_('delete_adventure_prompt')}}"
+                hx-delete="/for-teachers/customize-adventure/{{adventure.id}}/{{adventure.creator}}"
+                hx-swap="none"
+                _="on htmx:afterRequest if detail.xhr.status == 200 then window.location.reload()"
+                title="{{_('delete')}}">
+                <span class="fa fa-trash p-2 bg-red-500 hover:bg-red-700 text-white rounded-full cursor-pointer" id="{{adventure.id}}"></span>
+            </a>
+        {% endif %}
+      </div>
+    </div>

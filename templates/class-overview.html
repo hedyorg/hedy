@@ -7,25 +7,10 @@
             <span class="fa fa-arrow-{% if g.dir == " ltr" %}right{% else %}left{% endif %}">&nbsp;</span>
             {{_('go_back')}}
         </button>
-        <div id="survey" data-cy="survey" class="hidden"></div>
         {% if second_teacher %}<h1>{{_('role')}}: {{role}}</h1>{% endif %}
         <div class="flex flex-col md:flex-row items-left md:items-center justify-between">
             <h1>{{ class_info.name }}</h1>
             <div class="flex flex-col md:flex-row gap-2">
-                <div class="items-center gap-2 md:ml-4 md:mr-4 align-middle">
-                    {% if class_info.students > 0 %}
-                    <h2 id="survey_status_button" class="hidden md:block" data-cy="survey_status_button">
-                        {% if questions|length == 0 %}
-                        {{_('survey_completed')}} ✅
-                        {% else %}
-                        <a class="cursor-pointer" hx-post="/for-teachers/load-survey/{{class_info.id}}" hx-target="#survey"
-                            hx-swap="outerHTML">
-                            {{_('survey')}} {{total_questions - questions|length}}/{{total_questions}}
-                        </a>
-                        {% endif %}
-                    </h2>
-                    {% endif %}
-                </div>
                 <button class="green-btn w-fit" id="customize_class_button" data-cy="customize_class_button"
                     onclick="window.location.href = '/for-teachers/customize-class/{{class_info.id}}'">
                     {{_('customize_class')}}
@@ -89,35 +74,7 @@
         </div>
       {% endif %}
       {% if class_info.teacher == username %}
-              <button class="green-btn w-fit mt-4" data-cy="add_second_teacher" _="on click call hedyApp.invite_student('{{class_info.id}}', {{_('second_teacher_prompt')|default(None)|tojson}}, '/invite-second-teacher')">{{_('invite_teacher')}}</button>
+              <button class="green-btn w-fit mt-4" data-cy="add_second_teacher" onclick='hedyApp.invite_to_class("{{class_info.id}}", {{_('second_teacher_prompt')|default(None)|tojson}}, "second_teacher")'>{{_('invite_teacher')}}</button>
       {% endif %}
-      {% if invites %}
-      <div data-cy="invites_block" class="pt-4 mb-6">
-        <h2>{{_('pending_invites')}}</h2>
-        <div class="w-full overflow-x-auto border rounded-lg">
-          <table class="w-full">
-          <thead>
-              <tr class="bg-blue-300 text-blue-900">
-                  <th class="px-2 py-2 text-center">{{_('username')}}</th>
-                  <th class="px-2 py-2 text-center">{{_('role')}}</th>
-                  <th class="px-2 py-2 text-center">{{_('invite_date')}}</th>
-                  <th class="px-2 py-2 text-center">{{_('expiration_date')}}</th>
-                  {% if not is_second_teacher %}<th class="px-2 p-2 bg-blue-900 text-white">{{_('remove')}}</th>{% endif %}
-              </tr>
-          </thead>
-          <tbody>
-          {% for invite in invites %}
-              <tr class="{% if loop.index is divisibleby 2 %}bg-gray-200{% else %}bg-white{% endif %} m-2">
-                  <td class="p-2 text-center font-medium text-blue-900" data-cy="invite_username_cell">{{invite.username}}</td>
-                  <td class="p-2 text-center font-medium text-blue-900">{{invite.invited_as_text}}</td>
-                  <td class="p-2 text-center font-medium text-blue-900">{{invite.timestamp}}</td>
-                  <td class="p-2 text-center font-medium text-blue-900">{{invite.expire_timestamp}}</td>
-                  {% if not is_second_teacher %}<td class="p-2 text-center font-medium text-blue-900"><a href="#" data-cy="remove_user_invitation" onclick='hedyApp.remove_student_invite("{{invite.username}}", "{{ class_info.id }}", {{_('delete_invite_prompt')|default(None)|tojson}})'><i class="fa-solid fa-trash text-red-500"></a></td>{% endif %}
-              </tr>
-          {% endfor %}
-          </tbody>
-          </table>
-        </div>
-      </div>
-    {% endif %}
+      {{ render_partial('htmx-invite-list.html', invites=invites, is_second_teacher=is_second_teacher, class_id=class_info.id) }}
 {% endblock %}

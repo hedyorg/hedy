@@ -7,7 +7,7 @@ onclick="window.open('/for-teachers', '_self');">
     <span>{{_('go_back')}}</span>
 </button>
 <br><br>
-<div class="flex flex-col">
+<div class="flex flex-col" data-level="{{level}}" data-kwlang="{{ current_language().lang }}" >
     <h2>{{_('customize_adventure')}}: <strong>{{adventure.name}}</strong></h2>
     <div class="h-full w-full list-none flex flex-row items-center gap-x-2 xl:gap-x-6 mb-4 mt-4" id="adventures-buttons">
         <div
@@ -92,7 +92,8 @@ onclick="window.open('/for-teachers', '_self');">
                         <div class="flex flex-row items-center mb-4">
                             <label for="custom_adventure_classes" class="inline-block w-40 text-xl">{{_('used_in')}}</label>
                             <div class="flex-1">
-                                <custom-select data-type="multiple" id="classes_dropdown" data-cy="classes_select" data-label="{{_('used_in')}}">
+                                <custom-select data-type="multiple" id="classes_dropdown" data-cy="classes_select"
+                                               data-label="{{_('select_classes')}}">
                                     {% for class in all_classes %}
                                         <option {% if class.id in adventure.classes %}selected{% endif %} value="{{class.id}}" data-cy="{{class.name}}">{{ class.name }}</option>
                                     {% endfor %}
@@ -104,8 +105,7 @@ onclick="window.open('/for-teachers', '_self');">
                             <div class="flex-1">
                                 <custom-select data-type="multiple" id="levels_dropdown" data-cy="level_select" data-label="{{_('select_levels')}}">
                                     {% for i in range(1, (max_level + 1)) %}
-                                        {% set adv_levels = adventure.levels if adventure.get("levels") else [adventure.level|string] %}
-                                        <option {% if i|string in adv_levels %}selected{% endif %} data-value="{{i}}" data-cy="{{i}}">{{ i }}</option>
+                                        <option {% if i|string in adventure.levels %}selected{% endif %} data-value="{{i}}" data-cy="{{i}}">{{ i }}</option>
                                     {% endfor %}
                                 </custom-select>
                             </div>
@@ -122,7 +122,7 @@ onclick="window.open('/for-teachers', '_self');">
                             </div>
                         </div>
 
-                        <div class="flex flex-row items-start mb-4">  
+                        <div class="flex flex-row items-start mb-4">
                                 <label for="search_tags_input" class="inline-block w-40 text-xl">{{_('tags')}}</label>
                                 <div class="flex flex-1">
                                     <div class="flex flex-1 flex-row w-full relative" id="add_tags">
@@ -130,23 +130,23 @@ onclick="window.open('/for-teachers', '_self');">
                                                 class="appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 ltr:pr-8 rtl:pl-8 rounded"
                                                 hx-trigger="keyup[keyCode == 13]"
                                                 data-autosaved="true"
-                                                hx-post="/tags/create/{{ adventure.id }}" 
+                                                hx-post="/tags/create/{{ adventure.id }}"
                                                 hx-target="#tags_list"
                                                 hx-swap="outerHTML"
                                                 _="on click event.stopPropagation()
                                                     on keypress if event.keyCode == 13 event.stopPropagation() end
                                                     on htmx:beforeRequest event.preventDefault() then if my value == '' then detail.xhr.abort() end
-                                                    on htmx:afterRequest set my value to '' then focus()" 
+                                                    on htmx:afterRequest set my value to '' then focus()"
                                                 >
                                             <button class="green-btn" data-cy="add_adventure_tags"
                                                 hx-trigger="click"
                                                 hx-post="/tags/create/{{adventure.id}}"
                                                 hx-target="#tags_list"
                                                 hx-swap="outerHTML"
-                                                hx-include="[name='tag']"                                        
+                                                hx-include="[name='tag']"
                                                 _="on htmx:afterRequest set value of #search_tags_input to ''"
                                                 >{{_('add')}}</button>
-            
+
                                             <div
                                                 id="tags_dropdown"
                                                 hx-trigger="load"
@@ -157,7 +157,7 @@ onclick="window.open('/for-teachers', '_self');">
                                     </div>
                                 </div>
                                 <div class="flex-1">
-                                    {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}                  
+                                    {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}
                                 </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@ onclick="window.open('/for-teachers', '_self');">
                 </div>
                 <div class="flex gap-2 mt-4 items-center">
                     <button id="submit_adventure" type="submit" class="green-btn">{{_('submit_program')}}</button>
-                    <button type="reset" class="red-btn" data-cy="remove_adventure_button" 
+                    <button type="reset" class="red-btn" data-cy="remove_adventure_button"
                     hx-confirm="{{_('delete_adventure_prompt')}}"
                     hx-trigger="click"
                     hx-delete="/for-teachers/customize-adventure/{{adventure.id}}"
@@ -178,7 +178,7 @@ onclick="window.open('/for-teachers', '_self');">
                 </div>
             </form>
 
-            
+
             <hr
             class="my-12 mx-16 h-2 border-t-4 bg-neutral-100" />
             <div class="flex">
@@ -197,7 +197,7 @@ onclick="window.open('/for-teachers', '_self');">
                 {% endif %}
             </div>
         </div>
-            
+
     <div class="tab_content editor hidden">
         <div class="flex gap-2">
             <div class="w-full">
@@ -205,7 +205,7 @@ onclick="window.open('/for-teachers', '_self');">
                     {% set content = prepare_content_for_ckeditor(adventure.content) if adventure.content|length > 0 else prepare_content_for_ckeditor(_('template_code')) %}
                     <textarea id="adventure-editor" class="hidden">{{content}}</textarea>
                 </div>
-                
+
             </div>
 
             <div id="explanation" class="flex flex-col gap-2 border border-black rounded-lg p-4 text-sm h-full w-1/4">

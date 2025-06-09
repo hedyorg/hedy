@@ -65,9 +65,6 @@
         {% if is_program %}
             <button class="green-btn" onclick="window.open (hedyApp.viewProgramLink('{{adventure.id}}'))">{{_('view_program')}}</button>
             <span class="fa fa-flag bg-blue-300 hover:bg-blue-600 p-2 mx-4 rounded-full text-white cursor-pointer" onclick="hedyApp.report_program('{{_('report_program')}}','{{ adventure.id }}')"></span>
-            {% if is_admin %}
-                <i class="fa fa-star p-2 bg-blue-300 {% if adventure.hedy_choice %}text-yellow-500{% else %}text-white{% endif %} rounded-full cursor-pointer hover:bg-blue-600" id="{{adventure.id}}" onclick="hedyApp.set_explore_favourite('{{ adventure.id }}', {% if adventure.hedy_choice %}0{% else %}1{% endif %});" aria-hidden="true"></i>
-            {% endif %}
         {% else %}
             {% if user["username"] != adventure["creator"] %}
                 <button class="green-btn"

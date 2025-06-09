@@ -5,6 +5,8 @@ cd $scriptdir/../..
 
 echo "------> Validating YAML"
 
+doit run generate_optional_yaml_schemas
+
 # Validate adventure files against their schema
 #
 # We'll go into every directory that has a <xxx>.schema.json file,

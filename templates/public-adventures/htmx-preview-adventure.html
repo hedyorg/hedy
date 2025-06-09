@@ -1,0 +1,44 @@
+{# Set the level and keyword language for all adventure content #}
+<div data-level="{{adventure.level}}" data-kwlang="{{ g.keyword_lang }}">
+  {# Tabs #}
+  <div class="flex flex-row w-min gap-2 mb-4">
+    <div
+      class="cust-adv-tab cust-adv-tab-text active flex items-center justify-center whitespace-nowrap px-2"
+      tabindex="0"
+      data-tab="adventure-preview" data-activeclass="active">
+      {{ _('adventure') }}
+    </div>
+    {% if adventure.solution_example %}
+    <div
+      class="cust-adv-tab cust-adv-tab-text flex items-center justify-center whitespace-nowrap px-2"
+      tabindex="0"
+      data-tab="adventure-answer" data-activeclass="active">
+      {{ _('solution_example') }}
+    </div>
+    {% endif %}
+  </div>
+
+  {# Panes #}
+  <div class="shadow-md bg-white p-4">
+    <div data-tabtarget="adventure-preview">
+      <h1>{{ adventure.name }}</h1>
+
+      {% set adventure_content_topright_include = 'public-adventures/incl-about.html' %}
+      {% include "incl/adventure-content.html" %}
+
+      <div class="clear-both"></div>
+
+      {% set public_adventures_page = True %}
+      {% include "incl/editor-and-output.html" %}
+    </div>
+    {% if adventure.solution_example %}
+      <div data-tabtarget="adventure-answer" class="hidden turn-pre-into-ace">
+        {% if adventure.is_teacher_adventure %}
+          {{ adventure.solution_example|safe }}
+        {% else %}
+          {{ adventure.solution_example|commonmark }}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>

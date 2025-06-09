@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Restrict who can run this workflow
-      - if: github.actor != 'Felienne' && github.actor != 'jpelay'
+      - if: github.actor != 'Felienne' && github.actor != 'jpelay' && github.actor != 'boryanagoncharenko'
         run: |
           echo "You must be Felienne to run this workflow :D" >&2
           exit 1

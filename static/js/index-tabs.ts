@@ -46,23 +46,15 @@ export class IndexTabs {
     this._currentLevel = options.level;
     
     $('*[data-tab]').on('click', (e) => {
-      const tab = $(e.target);
+      const tab = $(e.target).closest('*[data-tab]');
       const tabName = tab.data('tab') as string;
       const level = tab.data('level')
       e.preventDefault();
       if (this._currentLevel == Number(level))
         this.switchToTab(tabName, Number(level), );
       else
-        location.href = `/tryit/${level}#${tabName}`
+        location.href = `/hedy/${level}#${tabName}`
     });
-
-    $('#next_adventure').on('click', () => {
-      this.switchPreviousOrNext(true)
-    })
-
-    $('#previous_adventure').on('click', () => {
-      this.switchPreviousOrNext(false)
-    })
 
     // Determine initial tab
     // 1. Given by code
@@ -84,6 +76,9 @@ export class IndexTabs {
 
   public switchToTab(tabName: string, level: number) {
     const doSwitch = () => {
+      // Once the javascript has loeaded, we can remove the loading spinner
+      // and show the content
+      document.getElementById('adventure_loading')?.classList.add('hidden')
       const oldTab = this._currentTab;
       this._currentTab = tabName;
 
@@ -117,22 +112,6 @@ export class IndexTabs {
       } else {
         level_adventure_title?.classList.add('border-blue-900')
       }
-      
-      // Hide or show the next or previous level button in case we are in the first or last adventure
-      // And also depending in which level we are in
-      const previous: HTMLElement | null = document.querySelector(`[data-level="${tab.data('level')}"][tabindex="${Number(tab.attr('tabindex')) - 1}"]`)
-      if (previous) {
-        (document.querySelector('#previous_adventure > p') as HTMLElement).innerText = previous.innerText.trim()
-      }
-      document.getElementById('back_level')?.classList.toggle('hidden', tab.attr('tabindex') !== '1' || (this._currentLevel ?? 0) === 1)
-      document.getElementById('previous_adventure')?.classList.toggle('hidden', tab.attr('tabindex') === '1')      
-      
-      const next: HTMLElement | null = document.querySelector(`[data-level="${tab.data('level')}"][tabindex="${Number(tab.attr('tabindex')) + 1}"]`)
-      if (next) {
-        (document.querySelector('#next_adventure > p') as HTMLElement).innerText = next.innerText.trim()
-      }
-      document.getElementById('next_adventure')?.classList.toggle('hidden', next === null)
-      document.getElementById('next_level')?.classList.toggle('hidden', next !== null || (this._currentLevel ?? 0) == 18 || tab.data('tab') === 'quiz')
 
       allTargets.addClass('hidden');
       target.removeClass('hidden');
@@ -147,15 +126,6 @@ export class IndexTabs {
     } else {
       doSwitch();
     }
-  }
-
-  private switchPreviousOrNext(toNext: boolean) {
-    const selected = document.querySelector('.adv-selected') as HTMLElement
-    const i = parseInt(selected?.getAttribute('tabindex') || '0')
-    const next = document.querySelector(`li[tabindex='${i + (toNext ? 1 : -1)}'][data-level='${ selected.dataset['level']}']`) as HTMLElement
-    
-    this.switchToTab(next.dataset['tab']!, Number(next.dataset['level']!))
-    document.getElementById('layout')?.scrollIntoView({behavior: 'smooth'})
   }
 
   public get currentTab() {

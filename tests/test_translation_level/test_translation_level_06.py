@@ -114,3 +114,14 @@ class TestsTranslationLevel6(HedyTester):
             print a + 2""")
 
         self.verify_translation(code, "en", self.level)
+
+    def test_at_random_catalan(self):
+        """This used to fail because the Catalan translation of 'at' is 'a', which was a substring of 'at'."""
+
+        code = textwrap.dedent("""\
+            ruleta1 = ruleta at random
+            """)
+
+        result = hedy_translation.translate_keywords(code, from_lang="ca", to_lang="en", level=self.level)
+
+        self.assertEqual(result, 'ruleta1 = ruleta at random')

@@ -14,7 +14,6 @@ from website.auth import (
     current_user,
     email_base_url,
     is_admin,
-    requires_admin,
     requires_login,
     requires_teacher,
     send_email,
@@ -321,28 +320,6 @@ class ProgramsModule(WebsiteModule):
             return make_response({"message": message}, 200)
         else:
             return make_response(gettext("request_invalid"), 400)
-
-    @route("/set_hedy_choice", methods=["POST"])
-    @requires_admin
-    def set_hedy_choice(self, user):
-        body = request.json
-        if not isinstance(body, dict):
-            return make_response(gettext("request_invalid"), 400)
-        if not isinstance(body.get("id"), str):
-            return make_response(gettext("request_invalid"), 400)
-        if not isinstance(body.get("favourite"), int):
-            return make_response(gettext("request_invalid"), 400)
-
-        favourite = True if body.get("favourite") == 1 else False
-
-        result = self.db.program_by_id(body["id"])
-        if not result:
-            return make_response(gettext("request_invalid"), 400)
-
-        self.db.set_program_as_hedy_choice(body["id"], favourite)
-        if favourite:
-            return make_response({"message": gettext("favourite_success")}, 200)
-        return make_response({"message": gettext("unfavourite_success")}, 200)
 
     @route("/report", methods=["POST"])
     @requires_login

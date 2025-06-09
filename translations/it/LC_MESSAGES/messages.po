@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2024-11-26 14:24+0000\n"
-"Last-Translator: Dark Space <DarkSpace@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2025-03-11 16:22+0000\n"
+"Last-Translator: Fabio Bartolucci <fabio.bartolucci@iisbachelet.edu.it>\n"
 "Language-Team: it <LL@li.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.10.3-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -26,21 +26,18 @@ msgstr "Abbiamo notato che la variabile {name} è in uso alla riga {access_line_
 msgid "Cyclic Var Definition"
 msgstr "Il nome `{variable}` deve essere impostato prima di poterlo utilizzare sul lato destro del comando `{is}`."
 
-#, fuzzy
 msgid "Else Without If Error"
-msgstr ""
+msgstr "Abbiamo rilevato che c'è un '{else}' usato prima di un '{if}' nella linea {line_number}. Puoi provare a scrivere un '{if}' prima di '{else}'?"
 
-#, fuzzy
 msgid "Function Undefined"
-msgstr ""
+msgstr "Abbiamo rilevato che una funzione {name} è stata usata senza essere definita. Puoi definire la funzione prima di usarla?"
 
 #, fuzzy
 msgid "Has Blanks"
 msgstr "Il tuo codice è incompleto. Contiene spazi vuoti che devi sostituire con il codice."
 
-#, fuzzy
 msgid "Incomplete"
-msgstr ""
+msgstr "Abbiamo rilevato che una parte del codice manca in '{incomplete_command}' nella linea {line_number}. Puoi provare ad aggiungere quello che manca?"
 
 #, fuzzy
 msgid "Incomplete Repeat"
@@ -50,17 +47,14 @@ msgstr "Sembra che tu abbia dimenticato di utilizzare un comando con il comando 
 msgid "Invalid"
 msgstr "`{invalid_command}` non è un commando Hedy per il livello {level}. Intendevi `{guessed_command}`?"
 
-#, fuzzy
 msgid "Invalid Argument"
-msgstr ""
+msgstr "Abbiamo rilevato che '{command}' non è utilizzabile con '{invalid_argument}'. Puoi provare a cambiare '{invalid_argument}' in {allowed_types}?"
 
-#, fuzzy
 msgid "Invalid Argument Type"
-msgstr ""
+msgstr "Abbiamo rilevato che '{command}' non funziona con '{invalid_argument}' perché è {invalid_type}. Prova a cambiare '{invalid_argument}' in {allowed_types}."
 
-#, fuzzy
 msgid "Invalid At Command"
-msgstr ""
+msgstr "Abbiamo rilevato che '{command}' potrebbe non essere usato dal livello 16 in avanti. Prova ad usare le parentesi quadre '[]' per questa lista."
 
 #, fuzzy
 msgid "Invalid Space"
@@ -190,6 +184,9 @@ msgstr "Questo è il codice Hedy corretto ma non al livello giusto. Hai scritto 
 msgid "Wrong Number of Arguments"
 msgstr ""
 
+msgid "about_this_adventure"
+msgstr ""
+
 #, fuzzy
 msgid "account_overview"
 msgstr ""
@@ -265,10 +262,6 @@ msgid "adventure_name_invalid"
 msgstr ""
 
 #, fuzzy
-msgid "adventure_prompt"
-msgstr ""
-
-#, fuzzy
 msgid "adventure_terms"
 msgstr ""
 
@@ -313,10 +306,6 @@ msgstr "C'è stato un problema, per favore riprova."
 
 #, fuzzy
 msgid "all"
-msgstr ""
-
-#, fuzzy
-msgid "all_class_highscores"
 msgstr ""
 
 #, fuzzy
@@ -468,10 +457,6 @@ msgid "commands"
 msgstr ""
 
 #, fuzzy
-msgid "complete"
-msgstr ""
-
-#, fuzzy
 msgid "congrats_message"
 msgstr ""
 
@@ -481,6 +466,9 @@ msgstr ""
 
 #, fuzzy
 msgid "constant_variable_role"
+msgstr ""
+
+msgid "containing"
 msgstr ""
 
 #, fuzzy
@@ -617,6 +605,9 @@ msgstr ""
 msgid "customize_class"
 msgstr ""
 
+msgid "danger_zone"
+msgstr ""
+
 msgid "dash"
 msgstr "una lineetta"
 
@@ -674,8 +665,11 @@ msgstr ""
 msgid "delete_tag_prompt"
 msgstr ""
 
-msgid "destroy_profile"
+msgid "destroy_account"
 msgstr "Cancella account permanentemente"
+
+msgid "destroy_account_message"
+msgstr ""
 
 #, fuzzy
 msgid "developers_mode"
@@ -687,10 +681,6 @@ msgstr ""
 
 #, fuzzy
 msgid "disable"
-msgstr ""
-
-#, fuzzy
-msgid "disable_explore_page"
 msgstr ""
 
 #, fuzzy
@@ -797,6 +787,9 @@ msgstr "Questo nome utente è già in uso."
 msgid "exit_preview_mode"
 msgstr ""
 
+msgid "expand_output"
+msgstr ""
+
 #, fuzzy
 msgid "experience_invalid"
 msgstr ""
@@ -898,6 +891,9 @@ msgstr ""
 msgid "go_to_quiz_result"
 msgstr ""
 
+msgid "go_to_your_clone"
+msgstr ""
+
 #, fuzzy
 msgid "goto_profile"
 msgstr ""
@@ -923,10 +919,6 @@ msgid "heard_about_invalid"
 msgstr ""
 
 #, fuzzy
-msgid "hedy_choice_title"
-msgstr ""
-
-#, fuzzy
 msgid "hedy_introduction_slides"
 msgstr ""
 
@@ -943,10 +935,6 @@ msgstr "Ciao!"
 
 #, fuzzy
 msgid "hide_adventures"
-msgstr ""
-
-#, fuzzy
-msgid "hide_cheatsheet"
 msgstr ""
 
 #, fuzzy
@@ -1041,12 +1029,14 @@ msgstr ""
 msgid "invalid_teacher_invitation_code"
 msgstr ""
 
-#, fuzzy
-msgid "invalid_tutorial_step"
-msgstr ""
-
 msgid "invalid_username_password"
 msgstr "Nome utente/password non validi."
+
+msgid "invitations_sent"
+msgstr ""
+
+msgid "invite"
+msgstr ""
 
 #, fuzzy
 msgid "invite_by_username"
@@ -1304,10 +1294,6 @@ msgid "name"
 msgstr ""
 
 #, fuzzy
-msgid "nav_explore"
-msgstr ""
-
-#, fuzzy
 msgid "nav_hedy"
 msgstr ""
 
@@ -1329,6 +1315,9 @@ msgstr ""
 msgid "newline"
 msgstr "una nuova riga"
 
+msgid "newsletter"
+msgstr ""
+
 #, fuzzy
 msgid "next_adventure"
 msgstr ""
@@ -1339,10 +1328,6 @@ msgstr ""
 
 #, fuzzy
 msgid "next_page"
-msgstr ""
-
-#, fuzzy
-msgid "next_step_tutorial"
 msgstr ""
 
 #, fuzzy
@@ -1398,6 +1383,9 @@ msgstr ""
 
 #, fuzzy
 msgid "no_tag"
+msgstr ""
+
+msgid "no_usernames_found"
 msgstr ""
 
 #, fuzzy
@@ -1693,10 +1681,6 @@ msgstr ""
 msgid "public_profile_updated"
 msgstr ""
 
-#, fuzzy
-msgid "put"
-msgstr ""
-
 msgid "question mark"
 msgstr "un punto di domanda"
 
@@ -1844,6 +1828,9 @@ msgstr "Devi avere un account per salvare i tuoi programmi. Vuoi entrare nel tuo
 msgid "save_success_detail"
 msgstr "Programma salvato con successo"
 
+msgid "save_turtle_drawing"
+msgstr ""
+
 #, fuzzy
 msgid "score"
 msgstr ""
@@ -1872,6 +1859,9 @@ msgstr ""
 msgid "second_teacher_warning"
 msgstr ""
 
+msgid "see_adventure_shared_class"
+msgstr ""
+
 #, fuzzy
 msgid "see_certificate"
 msgstr ""
@@ -1886,15 +1876,14 @@ msgstr ""
 msgid "select_all"
 msgstr ""
 
+msgid "select_classes"
+msgstr ""
+
 #, fuzzy
 msgid "select_lang"
 msgstr ""
 
 msgid "select_levels"
-msgstr ""
-
-#, fuzzy
-msgid "select_tag"
 msgstr ""
 
 msgid "selected"
@@ -1919,15 +1908,14 @@ msgid "settings"
 msgstr ""
 
 #, fuzzy
-msgid "share"
-msgstr ""
-
-#, fuzzy
 msgid "share_by_giving_link"
 msgstr ""
 
 #, fuzzy
 msgid "share_your_program"
+msgstr ""
+
+msgid "show_editor"
 msgstr ""
 
 #, fuzzy
@@ -1958,6 +1946,9 @@ msgstr ""
 
 #, fuzzy
 msgid "social_media"
+msgstr ""
+
+msgid "solution"
 msgstr ""
 
 #, fuzzy
@@ -2014,10 +2005,6 @@ msgid "string"
 msgstr ""
 
 #, fuzzy
-msgid "student"
-msgstr ""
-
-#, fuzzy
 msgid "student_accounts_created"
 msgstr ""
 
@@ -2027,10 +2014,6 @@ msgstr ""
 
 #, fuzzy
 msgid "student_adventures_table_explanation"
-msgstr ""
-
-#, fuzzy
-msgid "student_already_in_class"
 msgstr ""
 
 #, fuzzy
@@ -2047,10 +2030,6 @@ msgstr ""
 
 #, fuzzy
 msgid "student_information_explanation"
-msgstr ""
-
-#, fuzzy
-msgid "student_not_existing"
 msgstr ""
 
 #, fuzzy
@@ -2089,11 +2068,23 @@ msgstr ""
 msgid "subscribe"
 msgstr "Iscriviti alla newsletter"
 
+msgid "subscribe_message"
+msgstr ""
+
 msgid "subscribe_newsletter"
 msgstr "Iscriviti alla newsletter"
 
+msgid "subscribed_header"
+msgstr ""
+
+msgid "subscribed_message"
+msgstr ""
+
 #, fuzzy
 msgid "successful_runs"
+msgstr ""
+
+msgid "successfully_subscribed"
 msgstr ""
 
 #, fuzzy
@@ -2114,14 +2105,6 @@ msgstr ""
 #, fuzzy
 msgid "surname"
 msgstr "Nome utente"
-
-#, fuzzy
-msgid "survey"
-msgstr ""
-
-#, fuzzy
-msgid "survey_completed"
-msgstr ""
 
 #, fuzzy
 msgid "survey_skip"
@@ -2184,6 +2167,9 @@ msgstr ""
 "echo so your name is \n"
 "</pre>"
 
+msgid "this_adventure_has_an_example_solution"
+msgstr ""
+
 #, fuzzy
 msgid "this_turns_in_assignment"
 msgstr ""
@@ -2206,10 +2192,6 @@ msgstr ""
 
 #, fuzzy
 msgid "title_customize-class"
-msgstr ""
-
-#, fuzzy
-msgid "title_explore"
 msgstr ""
 
 #, fuzzy
@@ -2272,7 +2254,6 @@ msgstr ""
 msgid "too_many_accounts"
 msgstr ""
 
-#, fuzzy
 msgid "tooltip_level_locked"
 msgstr ""
 
@@ -2290,22 +2271,6 @@ msgstr ""
 
 #, fuzzy
 msgid "turned_into_teacher"
-msgstr ""
-
-#, fuzzy
-msgid "tutorial"
-msgstr ""
-
-#, fuzzy
-msgid "tutorial_code_snippet"
-msgstr ""
-
-#, fuzzy
-msgid "tutorial_message_not_found"
-msgstr ""
-
-#, fuzzy
-msgid "tutorial_title_not_found"
 msgstr ""
 
 #, fuzzy
@@ -2342,6 +2307,12 @@ msgstr ""
 
 #, fuzzy
 msgid "unsubmitted"
+msgstr ""
+
+msgid "unsubscribed_header"
+msgstr ""
+
+msgid "unsubscribed_message"
 msgstr ""
 
 #, fuzzy
@@ -2926,5 +2897,68 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "classes"
+#~ msgstr ""
+
+#~ msgid "Adventure"
+#~ msgstr ""
+
+#~ msgid "Answer"
+#~ msgstr ""
+
+#~ msgid "adventure_prompt"
+#~ msgstr ""
+
+#~ msgid "select_tag"
+#~ msgstr ""
+
+#~ msgid "Delete"
+#~ msgstr ""
+
+#~ msgid "select_class"
+#~ msgstr ""
+
+#~ msgid "invalid_tutorial_step"
+#~ msgstr ""
+
+#~ msgid "next_step_tutorial"
+#~ msgstr ""
+
+#~ msgid "tutorial"
+#~ msgstr ""
+
+#~ msgid "tutorial_code_snippet"
+#~ msgstr ""
+
+#~ msgid "tutorial_message_not_found"
+#~ msgstr ""
+
+#~ msgid "tutorial_title_not_found"
+#~ msgstr ""
+
+#~ msgid "survey"
+#~ msgstr ""
+
+#~ msgid "survey_completed"
+#~ msgstr ""
+
+#~ msgid "put"
+#~ msgstr ""
+
+#~ msgid "disable_explore_page"
+#~ msgstr ""
+
+#~ msgid "hedy_choice_title"
+#~ msgstr ""
+
+#~ msgid "nav_explore"
+#~ msgstr ""
+
+#~ msgid "title_explore"
+#~ msgstr ""
+
+#~ msgid "all_class_highscores"
+#~ msgstr ""
+
+#~ msgid "hide_cheatsheet"
 #~ msgstr ""
 

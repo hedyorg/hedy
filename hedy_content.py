@@ -3,6 +3,7 @@ import os
 from os import path
 
 import static_babel_content
+import utils
 
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
@@ -11,6 +12,8 @@ from safe_format import safe_format
 logger = logging.getLogger(__name__)
 
 COUNTRIES = static_babel_content.COUNTRIES
+
+MAX_LEVEL = 18
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
@@ -42,7 +45,15 @@ KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_comm
                        'repeat_command_2', 'for_command', 'and_or_command', 'while_command', 'elif_command',
                        'clear_command', 'pressit', 'debugging', 'functions'}
 
-ADVENTURE_ORDER_PER_LEVEL = {
+
+def adventures_order_per_level():
+    if utils.is_redesign_enabled():
+        return ADVENTURE_ORDER_PER_LEVEL
+    else:
+        return ADVENTURE_ORDER_PER_LEVEL_OLD
+
+
+ADVENTURE_ORDER_PER_LEVEL_OLD = {
     1: [
         'default',
         'print_command',
@@ -140,8 +151,8 @@ ADVENTURE_ORDER_PER_LEVEL = {
     6: [
         'default',
         'maths',
-        'music',
         'is_command',
+        'music',
         'songs',
         'dice',
         'dishes',
@@ -346,6 +357,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
     ]
 }
 
+ADVENTURE_ORDER_PER_LEVEL = {level: [a for a in adventures if a not in ['parsons', 'quiz']]
+                             for level, adventures in ADVENTURE_ORDER_PER_LEVEL_OLD.items()}
+
 HOUR_OF_CODE_ADVENTURES = {
     1: [
         'print_command',
@@ -502,14 +516,17 @@ for lang in sorted(languages):
         ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
 
 # Load and cache all keyword yamls
-KEYWORDS = {}
-for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = YamlFile.for_file(f'{content_dir}/keywords/{lang}.yaml').to_dict()
-    for k, v in KEYWORDS[lang].items():
-        if isinstance(v, str) and "|" in v:
-            # when we have several options, pick the first one as default
-            # Some keys are ints, turn them into strings
-            KEYWORDS[lang][k] = v.split('|')[0]
+ALL_KEYWORDS = {
+    str(lang): {
+        str(k): str(v).split('|')
+        for k, v in YamlFile.for_file(f'{content_dir}/keywords/{lang}.yaml').to_dict().items()
+    }
+    for lang in ALL_KEYWORD_LANGUAGES
+}
+KEYWORDS = {  # "default" keywords
+    lang: {k: local_keys[0] for k, local_keys in keywords.items()}
+    for lang, keywords in ALL_KEYWORDS.items()
+}
 
 
 class StructuredDataFile:
@@ -558,6 +575,15 @@ def deep_translate_keywords(yaml, keyword_language):
     except Exception as E:
         logger.exception(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
         return yaml
+
+
+def try_render_keywords(str, keyword_language):
+    """Render {placeholder}s in a string, return the original if there are any errors."""
+    try:
+        return safe_format(str, **KEYWORDS.get(keyword_language))
+    except Exception:
+        logger.exception('Error rendering keywords')
+        return str
 
 
 def get_localized_name(name, keyword_lang):
@@ -675,29 +701,6 @@ class Quizzes(StructuredDataFile):
 
 class NoSuchQuiz:
     def get_quiz_data_for_level(self, level, keyword_lang):
-        return {}
-
-
-class Tutorials(StructuredDataFile):
-    # Want to parse the keywords only once, they can be cached -> perform this
-    # action on server start
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/tutorials/{self.language}.yaml')
-
-    def get_tutorial_for_level(self, level, keyword_lang="en"):
-        if level not in ["intro", "teacher"]:
-            level = int(level)
-        return deep_translate_keywords(self.file.get(level, None), keyword_lang)
-
-    def get_tutorial_for_level_step(self, level, step, keyword_lang="en"):
-        if level not in ["intro", "teacher"]:
-            level = int(level)
-        return deep_translate_keywords(self.file.get(level, {}).get('steps', {}).get(step), keyword_lang)
-
-
-class NoSuchTutorial:
-    def get_tutorial_for_level(self, level, keyword_lang):
         return {}
 
 
