@@ -1410,7 +1410,7 @@ def index(level, program_id):
         "hedy-page/code-page.html",
         level_nr=str(level_number),
         level=level_number,
-        current_page='tryit',
+        current_page='hedy',
         max_level=max_level,
         prev_level=prev_level,
         next_level=next_level,
