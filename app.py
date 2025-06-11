@@ -1187,6 +1187,8 @@ def get_log_results():
 # I don't like that this function is essenstially duplicated from index
 # but is not the prirority at the moment. So please, when time is available,
 # refactor this function and merge it with the index function.
+
+
 @app.route('/hour-of-code/<int:level>', methods=['GET'])
 @app.route('/hour-of-code', methods=['GET'], defaults={'level': 1})
 def hour_of_code(level, program_id=None):
