@@ -196,18 +196,14 @@ def get_locale():
     return session.get("lang", request.accept_languages.best_match(ALL_LANGUAGES.keys(), 'en'))
 
 
-def load_all_adventures_for_index(customizations, user_programs, subset=None):
+def load_all_adventures_for_index(customizations, user_programs):
     """
     Loads all the default adventures in a dictionary that will be used to populate
     the index, therefore we only need the titles and short names of the adventures.
     """
 
     keyword_lang = g.keyword_lang
-    if subset:
-        adventures = ADVENTURES[g.lang].get_adventures_subset(subset, keyword_lang)
-    else:
-        adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
-
+    adventures = ADVENTURES[g.lang].get_adventures(keyword_lang)
     all_adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     for short_name, adventure in adventures.items():
         for level in adventure['levels']:
@@ -1188,7 +1184,9 @@ def get_log_results():
     response = {'data': data, 'next_token': next_token}
     return make_response(response, 200)
 
-
+# I don't like that this function is essenstially duplicated from index
+# but is not the prirority at the moment. So please, when time is available,
+# refactor this function and merge it with the index function.
 @app.route('/hour-of-code/<int:level>', methods=['GET'])
 @app.route('/hour-of-code', methods=['GET'], defaults={'level': 1})
 def hour_of_code(level, program_id=None):
@@ -1200,27 +1198,33 @@ def hour_of_code(level, program_id=None):
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
     loaded_program = None
+    suppress_save_and_load = False
     if program_id:
         result = g_db().program_by_id(program_id)
         if not result or not get_current_user_program_permissions(result):
             return utils.error_page(error=404, ui_message=gettext('no_such_program'))
 
         loaded_program = Program.from_database_row(result)
-
-    subset = [adv.strip() for adv in request.args.get("subset", "").strip().split(",")]
-    subset = subset if subset[0] else HOUR_OF_CODE_ADVENTURES[level]
-    adventures = load_adventures_for_level(level, subset=subset)
-
-    if not adventures:
-        return utils.error_page(error=404, ui_message=gettext("no_such_adventure"))
+        suppress_save_and_load = True
 
     # Initially all levels are available -> strip those for which conditions
     # are not met or not available yet
     available_levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
 
     customizations = {}
+    user_programs = {i: {} for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     if current_user()['username']:
-        customizations = g_db().get_student_class_customizations(current_user()['username'])
+        # class_to_preview is for teachers to preview a class they own
+        customizations = g_db().get_student_class_customizations(
+            current_user()['username'], class_to_preview=session.get("preview_class", {}).get("id"))
+        user_programs = g_db().last_programs_for_user_all_levels(current_user()['username'])
+        user_programs = {
+            level: {
+                k: Program.from_database_row(v)
+                for k, v in user_programs[level].items()
+            }
+            for level in user_programs
+        }
 
     if 'levels' in customizations:
         available_levels = customizations['levels']
@@ -1242,10 +1246,15 @@ def hour_of_code(level, program_id=None):
     customizations['available_levels'] = available_levels
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
+    adventures = load_adventures_for_level(level, subset=HOUR_OF_CODE_ADVENTURES[level])
     load_customized_adventures(level, customizations, adventures)
     load_saved_programs(level, adventures, loaded_program)
+    adventures_for_index = load_all_adventures_for_index(customizations, user_programs)
+    for index_level, index_adventures in adventures_for_index.items():
+        adventures_for_index[index_level] = [
+            a for a in index_adventures if a["short_name"] in HOUR_OF_CODE_ADVENTURES[index_level]
+        ]
     initial_tab = adventures[0].short_name
-
     if loaded_program:
         # Make sure that there is an adventure(/tab) for a loaded program, otherwise make one
         initial_tab = loaded_program.adventure_name
@@ -1263,27 +1272,17 @@ def hour_of_code(level, program_id=None):
             ))
 
     adventures_map = {a.short_name: a for a in adventures}
-
-    hide_cheatsheet = False
-    if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
-        hide_cheatsheet = True
-
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
-    prev_level, next_level = utils.find_prev_next_levels(
-        list(available_levels), level_number)
 
     return render_template(
-        "code-page.html",
+        "hedy-page/code-page.html",
         level_nr=str(level_number),
         level=level_number,
         current_page='Hour of Code',
         max_level=max_level,
-        prev_level=prev_level,
-        next_level=next_level,
         HOC_tracking_pixel=True,
         customizations=customizations,
-        hide_cheatsheet=hide_cheatsheet,
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
@@ -1293,6 +1292,8 @@ def hour_of_code(level, program_id=None):
         blur_button_available=False,
         initial_adventure=adventures_map[initial_tab],
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
+        microbit_feature=MICROBIT_FEATURE,
+        adventures_for_index=adventures_for_index,
         # See initialize.ts
         javascript_page_options=dict(
             page='code',
@@ -1301,6 +1302,7 @@ def hour_of_code(level, program_id=None):
             adventures=adventures,
             initial_tab=initial_tab,
             current_user_name=current_user()['username'],
+            supress_save_and_load=suppress_save_and_load
         ))
 
 
@@ -1399,21 +1401,12 @@ def index(level, program_id):
 
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
-    prev_level, next_level = utils.find_prev_next_levels(
-        list(available_levels), level_number)
-
-    completed = 0
-    for i, adventure in enumerate(adventures):
-        if adventure.save_info:
-            completed = i
     return render_template(
         "hedy-page/code-page.html",
         level_nr=str(level_number),
         level=level_number,
         current_page='hedy',
         max_level=max_level,
-        prev_level=prev_level,
-        next_level=next_level,
         customizations=customizations,
         hide_cheatsheet=hide_cheatsheet,
         loaded_program=loaded_program,
@@ -1422,7 +1415,6 @@ def index(level, program_id):
         lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
         latest=version(),
         cheatsheet=cheatsheet,
-        progress={'completed': completed, 'total': len(adventures)},
         blur_button_available=False,
         initial_adventure=adventures_map[initial_tab],
         current_user_is_in_class=len(current_user().get('classes') or []) > 0,
