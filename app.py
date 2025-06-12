@@ -1434,22 +1434,6 @@ def index(level, program_id):
         ))
 
 
-@app.route('/hedy', methods=['GET'])
-def index_level():
-    if current_user()['username']:
-        highest_quiz = get_highest_quiz_level(current_user()['username'])
-        # This function returns the character '-' in case there are no finished quizes
-        if highest_quiz == '-':
-            level_rendered = 1
-        elif highest_quiz == hedy.HEDY_MAX_LEVEL:
-            level_rendered = hedy.HEDY_MAX_LEVEL
-        else:
-            level_rendered = highest_quiz + 1
-        return index(level_rendered, None)
-    else:
-        return index(1, None)
-
-
 @app.route('/hedy/<id>/view', methods=['GET'])
 @requires_login
 def view_program(user, id):
@@ -1749,50 +1733,6 @@ def get_cheatsheet_page(level):
     commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     return render_template("printable/cheatsheet.html", commands=commands, level=level)
-
-
-@app.route('/certificate/<username>', methods=['GET'])
-def get_certificate_page(username):
-    if not current_user()['username']:
-        return utils.error_page(error=401, ui_message=gettext('unauthorized'))
-    username = username.lower()
-    user = g_db().user_by_username(username)
-    if not user:
-        return utils.error_page(error=403, ui_message=gettext('user_inexistent'))
-    quiz_score = get_highest_quiz_score(username)
-    quiz_level = get_highest_quiz_level(username)
-
-    programs = g_db().get_program_stats([username])
-    longest_program = max(programs)
-
-    congrats_message = safe_format(gettext('congrats_message'), username=username)
-    user = g_db().user_by_username(username)
-    if user.get('program_count'):
-        user_program_count = user.get('program_count')
-
-    return render_template("printable/certificate.html",
-                           quiz_score=quiz_score,
-                           longest_program=longest_program,
-                           user_program_count=user_program_count,
-                           quiz_level=quiz_level,
-                           congrats_message=congrats_message)
-
-
-def get_highest_quiz_level(username):
-    quiz_scores = g_db().get_quiz_stats([username])
-    # Verify if the user did finish any quiz before getting the max() of the finished levels
-    finished_quizzes = any("finished" in x for x in quiz_scores)
-    return max([x.get("level") for x in quiz_scores if x.get("finished")]) if finished_quizzes else "-"
-
-
-def get_highest_quiz_score(username):
-    max = 0
-    quizzes = g_db().get_quiz_stats([username])
-    for q in quizzes:
-        for score in q.get('scores', []):
-            if score > max:
-                max = score
-    return max
 
 
 @app.errorhandler(404)
