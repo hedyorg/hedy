@@ -32,7 +32,7 @@ from datetime import date
 import sys
 from os import path
 
-from utils import timems, times
+from utils import timems
 import utils
 from config import config
 

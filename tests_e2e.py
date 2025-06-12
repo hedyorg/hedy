@@ -3,7 +3,6 @@ import os
 import collections
 import random
 import json
-import re
 from http.cookies import SimpleCookie
 
 # *** LIBRARIES ***

@@ -1,6 +1,6 @@
 import uuid
 
-from flask import make_response, redirect, request, session
+from flask import make_response, request, session
 from jinja_partials import render_partial
 from website.flask_hedy import g_db
 from website.flask_helpers import gettext_with_fallback as gettext
