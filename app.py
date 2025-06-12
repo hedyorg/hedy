@@ -1595,7 +1595,7 @@ def render_code_in_editor(level):
                            blur_button_available=False,
                            # See initialize.ts
                            javascript_page_options=dict(
-                               page='code',
+                               page='view_adventure',
                                lang=g.lang,
                                level=level,
                                adventures=adventures,
@@ -1652,7 +1652,7 @@ def get_specific_adventure(name, level, mode):
     initial_tab = name
     initial_adventure = adventures[0]
 
-    return render_template("hedy-page/code-page.html",
+    return render_template("code-page.html",
                            specific_adventure=True,
                            level_nr=str(level),
                            lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
@@ -1674,8 +1674,7 @@ def get_specific_adventure(name, level, mode):
                            current_user_is_in_class=len(current_user().get('classes') or []) > 0,
                            # See initialize.ts
                            javascript_page_options=dict(
-
-                               page='code',
+                               page='view_adventure',
                                lang=g.lang,
                                level=level,
                                adventures=adventures,

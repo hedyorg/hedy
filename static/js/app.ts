@@ -2,7 +2,7 @@ import { ClientMessages } from './client-messages';
 import { modal, error, success, tryCatchPopup } from './modal';
 import JSZip from "jszip";
 import * as Tone from 'tone'
-import { SwitchTabsEvent } from './tabs';
+import { SwitchTabsEvent, Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
@@ -181,7 +181,7 @@ export function initializeApp(options: InitializeAppOptions) {
 }
 
 export interface InitializeCodePageOptions {
-  readonly page: 'code';
+  readonly page: 'code' | 'view_adventure';
   readonly level: number;
   readonly lang: string;
   readonly adventures: Adventure[];
@@ -245,12 +245,22 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   const validAnchor = [...Object.keys(theAdventures)].includes(anchor) ? anchor : undefined;
   let tabs: any;
-  tabs = new IndexTabs({
-    // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
-    // We click on `level` to load a program associated with level, if any.
-    initialTab: validAnchor ?? options.initial_tab,
-    level: options.level
-  });
+  const isViewAdventure = options.page == 'view_adventure';
+  // TODO: this still uses the old code. Once we reach the section for adventures, we'll refactor it
+  if (isViewAdventure) {
+    tabs = new Tabs({
+      // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+      // We click on `level` to load a program associated with level, if any.
+      initialTab: validAnchor ?? options.initial_tab,
+    });
+  } else {
+    tabs = new IndexTabs({
+      // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+      // We click on `level` to load a program associated with level, if any.
+      initialTab: validAnchor ?? options.initial_tab,
+      level: options.level
+    });
+  }
   tabs.on('beforeSwitch', () => {
     // If there are unsaved changes, we warn the user before changing tabs.
     saveIfNecessary();

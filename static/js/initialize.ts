@@ -81,6 +81,7 @@ export function initialize(options: InitializeOptions) {
 
   // The above initializations are often also page-specific
   switch (options.javascriptPageOptions?.page) {
+    case 'view_adventure':
     case 'code':
       initializeCodePage(options.javascriptPageOptions);
       break;
@@ -116,6 +117,7 @@ export function initialize(options: InitializeOptions) {
     case 'my-profile':
       initializeMyProfilePage(options.javascriptPageOptions);
       break;
+      
   }
 
   // FIXME: I think this might also be page-specific
