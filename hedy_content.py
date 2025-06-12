@@ -48,7 +48,7 @@ def adventures_order_per_level():
     return ADVENTURE_ORDER_PER_LEVEL
 
 
-ADVENTURE_ORDER_PER_LEVEL_OLD = {
+ADVENTURE_ORDER_PER_LEVEL = {
     1: [
         'default',
         'print_command',
@@ -63,8 +63,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'fortune',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     2: [
         'default',
@@ -81,8 +79,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     3: [
         'default',
@@ -100,8 +96,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     4: [
         'default',
@@ -119,8 +113,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     5: [
         'default',
@@ -140,8 +132,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     6: [
         'default',
@@ -157,8 +147,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     7: [
         'default',
@@ -174,8 +162,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'pressit',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     8: [
         'default',
@@ -191,8 +177,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     9: [
         'default',
@@ -208,8 +192,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     10: [
         'default',
@@ -226,8 +208,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     11: [
         'default',
@@ -239,8 +219,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'haunted',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     12: [
         'default',
@@ -258,8 +236,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'secret',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     13: [
         'default',
@@ -275,7 +251,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'hotel',
         'calculator',
         'debugging',
-        'quiz',
     ],
     14: [
         'default',
@@ -291,7 +266,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'piggybank',
         'quizmaster',
         'debugging',
-        'quiz',
     ],
     15: [
         'default',
@@ -304,7 +278,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'rock',
         'calculator',
         'debugging',
-        'quiz',
     ],
     16: [
         'default',
@@ -321,7 +294,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'simon_2',
         'simon_3',
         'debugging',
-        'quiz',
     ],
     17: [
         'default',
@@ -337,7 +309,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'blackjack_3',
         'blackjack_4',
         'debugging',
-        'quiz',
     ],
     18: [
         'default',
@@ -351,9 +322,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging'
     ]
 }
-
-ADVENTURE_ORDER_PER_LEVEL = {level: [a for a in adventures if a not in ['parsons', 'quiz']]
-                             for level, adventures in ADVENTURE_ORDER_PER_LEVEL_OLD.items()}
 
 HOUR_OF_CODE_ADVENTURES = {
     1: [
