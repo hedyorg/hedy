@@ -1,3 +1,22 @@
-// no changes over 5
+// adds elif in and not in
+// Not yet in the traverser
 
-program: _empty_program | _non_empty_program
+elif_clause: _ELIF (condition (_SPACE+ _EOL* | _SPACE* _EOL+) | condition_spaces _SPACE* _EOL+ | error_condition) _if_less_command
+
+ifelifselse: _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) (elif_clause)* _else_clause
+ifelse: _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) _else_clause
+ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs'
+
+// FH June 2025: New to allow decimals in the grammar
+?atom: NUMBER | _MINUS NUMBER | var_access | textwithoutspaces // we now allow floats with NUMBER
+
+
+in_list_check: textwithoutspaces _IN var_access
+not_in_list_check: textwithoutspaces _NOT_IN var_access
+
+// More advances ins migt be needed lateron?
+// in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _IN var_access
+// not_in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _NOT_IN var_access
+
+
+command:+=ifelifselse

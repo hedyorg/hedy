@@ -651,9 +651,6 @@ class ExtractAST(Transformer):
             return Tree('list_access', [args[0], 'random'], meta)
         return Tree('list_access', [args[0], args[1]], meta)
 
-    # level 5
-    def error_unsupported_number(self, meta, args):
-        return Tree('unsupported_number', [''.join([str(c) for c in args])], meta)
 
 
 # This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
@@ -1339,9 +1336,6 @@ class IsValid(Filter):
                                                  guessed_command=suggestion, line_number=meta.line,
                                                  fixed_code=fixed_code, fixed_result=result)
 
-    def error_unsupported_number(self, meta, args):
-        # add in , line=meta.line, column=meta.column
-        raise exceptions.UnsupportedFloatException(value=''.join(str(args[0])))
 
     def error_condition(self, meta, args):
         raise exceptions.UnquotedEqualityCheckException(line_number=meta.line)
