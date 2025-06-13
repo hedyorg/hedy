@@ -1,5 +1,16 @@
 command: += error_repeat_dep_8 | error_ifelse | if_pressed_without_else | if_pressed if_pressed_elses? | ifs elses? -= error_invalid_space | ifelse | error_else_no_if
 
+
+//  adds and and or - moved from a higher level, tree traversal still needs to be updated
+
+//  ifs: _IF _conditions _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK //'if' cannot be used in Python, hence the name of the rule is 'ifs'
+//  _conditions: condition | and_condition | or_condition
+
+//  and_condition: (condition) (_AND condition)*
+//  or_condition: (condition) (_OR condition)*
+
+
+
 repeat.1: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 error_repeat_dep_8:<old_rule_to_error repeat>
 
