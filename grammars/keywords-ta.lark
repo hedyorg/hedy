@@ -1,54 +1,54 @@
-_DEFINE: ("define" | "define") _SPACE?
-_CALL: ("call" | "call") _SPACE?
-_WITH: ("with" | "with") _SPACE?
-_DEF: ("def" | "def") _SPACE?
-_RETURN: ("return" | "return") _SPACE?
-_PRINT: ("print" | "print") _SPACE?
-_PLAY: ("play" | "play") _SPACE
-_ASK: ("ask" | "ask")
-_ECHO: ("echo" | "echo") _SPACE?
-_FORWARD: ("forward" | "forward") _SPACE?
-_TURN: ("turn" | "turn") _SPACE?
-left: ("left" | "left") _SPACE?
-right: ("right" | "right") _SPACE?
-black: ("black" | "black") _SPACE?
-blue: ("blue" | "blue") _SPACE?
-brown: ("brown" | "brown") _SPACE?
-gray: ("gray" | "gray") _SPACE?
-green: ("green" | "green") _SPACE?
-orange: ("orange" | "orange") _SPACE?
-pink: ("pink" | "pink") _SPACE?
-purple: ("purple" | "purple") _SPACE?
-red: ("red" | "red") _SPACE?
-white: ("white" | "white") _SPACE?
-yellow: ("yellow" | "yellow") _SPACE?
-_IS: _SPACE ("is" | "is") _SPACE
-_STANDALONE_IS: ("is" | "is")
-_SLEEP: ("sleep" | "sleep") _SPACE?
-_ADD_LIST: ("add" | "add") _SPACE
-_TO_LIST: _SPACE? ("to" | "to")
-_REMOVE: ("remove" | "remove") _SPACE
-_FROM: _SPACE? ("from" | "from")
+_DEFINE: ("வரையறுக்கவும்" | "define") _SPACE?
+_CALL: ("அழைப்பு" | "call") _SPACE?
+_WITH: ("உடன்" | "with") _SPACE?
+_DEF: ("டெஃப்" | "def") _SPACE?
+_RETURN: ("திரும்ப" | "return") _SPACE?
+_PRINT: ("அச்சிடுக" | "print") _SPACE?
+_PLAY: ("விளையாடுங்கள்" | "play") _SPACE
+_ASK: ("கேளுங்கள்" | "ask")
+_ECHO: ("எதிரொலி" | "echo") _SPACE?
+_FORWARD: ("முன்னோக்கி" | "forward") _SPACE?
+_TURN: ("திருப்பம்" | "turn") _SPACE?
+left: ("இடது" | "left") _SPACE?
+right: ("வலது" | "right") _SPACE?
+black: ("கருப்பு" | "black") _SPACE?
+blue: ("நீலம்" | "blue") _SPACE?
+brown: ("பழுப்பு" | "brown") _SPACE?
+gray: ("சாம்பல்" | "gray") _SPACE?
+green: ("பச்சை" | "green") _SPACE?
+orange: ("ஆரஞ்சு" | "orange") _SPACE?
+pink: ("இளஞ்சிவப்பு" | "pink") _SPACE?
+purple: ("ஊதா" | "purple") _SPACE?
+red: ("சிவப்பு" | "red") _SPACE?
+white: ("வெள்ளை" | "white") _SPACE?
+yellow: ("மஞ்சள்" | "yellow") _SPACE?
+_IS: _SPACE ("என்பது" | "is") _SPACE
+_STANDALONE_IS: ("என்பது" | "is")
+_SLEEP: ("தூங்கு" | "sleep") _SPACE?
+_ADD_LIST: ("கூட்டு" | "add") _SPACE
+_TO_LIST: _SPACE? ("பெறுநர்" | "to")
+_REMOVE: ("அகற்று" | "remove") _SPACE
+_FROM: _SPACE? ("இருந்து" | "from")
 _AT: _SPACE ("at" | "at") _SPACE
-random: ("random" | "random") _SPACE?
-_IN: _SPACE ("in" | "in") _SPACE
-_NOT_IN: _SPACE ("not in" | "not in") _SPACE
-_IF: ("if" | "if") _SPACE
-_ELSE: "else" | "else"
-_AND: _SPACE? ("and" | "and") _SPACE
-_REPEAT: ("repeat" | "repeat") _SPACE
-_TIMES: _SPACE ("times" | "times")
-_FOR: ("for" | "for") _SPACE
-_RANGE: ("range" | "range") _SPACE?
-_TO: _SPACE ("to" | "to") _SPACE
-_STEP: "step" | "step"
-_ELIF: _SPACE? ("elif" | "elif") _SPACE
-_INPUT: ("input" | "input")
-_OR: _SPACE? ("or" | "or") _SPACE
-_WHILE: ("while" | "while") _SPACE
-_LENGTH: "length" | "length"
-_COLOR : ("color" | "color") _SPACE?
-_PRESSED: ("pressed" | "pressed") _SPACE?
-clear: ("clear" | "clear") _SPACE?
-TRUE: ("true" | "True" | "true" | "True") _SPACE?
-FALSE: ("false" | "False" | "false" | "False") _SPACE?
+random: ("சீரற்ற" | "random") _SPACE?
+_IN: _SPACE ("இல்" | "in") _SPACE
+_NOT_IN: _SPACE ("இல்லை" | "not in") _SPACE
+_IF: ("என்றால்" | "if") _SPACE
+_ELSE: "வேறு" | "else"
+_AND: _SPACE? ("மற்றும்" | "and") _SPACE
+_REPEAT: ("மீண்டும்" | "repeat") _SPACE
+_TIMES: _SPACE ("பெருக்கல்" | "times")
+_FOR: ("க்கு" | "for") _SPACE
+_RANGE: ("வீச்சு" | "range") _SPACE?
+_TO: _SPACE ("பெறுநர்" | "to") _SPACE
+_STEP: "படி" | "step"
+_ELIF: _SPACE? ("எலிஃப்" | "elif") _SPACE
+_INPUT: ("உள்ளீடு" | "input")
+_OR: _SPACE? ("அல்லது" | "or") _SPACE
+_WHILE: ("போது" | "while") _SPACE
+_LENGTH: "நீளம்" | "length"
+_COLOR : ("நிறம்" | "color") _SPACE?
+_PRESSED: ("அழுத்தியது" | "pressed") _SPACE?
+clear: ("தெளிவான" | "clear") _SPACE?
+TRUE: ("உண்மை" | "உண்மை" | "true" | "True") _SPACE?
+FALSE: ("தவறு" | "தவறு" | "false" | "False") _SPACE?

@@ -2,6 +2,7 @@ import uuid
 
 from flask import make_response, redirect, request, session
 from jinja_partials import render_partial
+from website.flask_hedy import g_db
 from website.flask_helpers import gettext_with_fallback as gettext
 
 import utils
@@ -14,7 +15,6 @@ from .database import Database
 from .website_module import WebsiteModule, route
 
 cookie_name = config["session"]["cookie_name"]
-invite_length = config["session"]["invite_length"] * 60
 
 
 class ClassModule(WebsiteModule):
@@ -37,7 +37,7 @@ class ClassModule(WebsiteModule):
             return make_response(gettext("class_name_empty"), 400)
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
-        Classes = self.db.get_teacher_classes(user["username"], True, teacher_only=True)
+        Classes = self.db.get_teacher_classes(user["username"])
         for Class in Classes:
             if Class["name"] == body["name"]:
                 return make_response(gettext("class_name_duplicate"), 200)
@@ -76,7 +76,7 @@ class ClassModule(WebsiteModule):
         username = user["username"]
         if is_second_teacher(user, class_id):
             username = Class["teacher"]
-        Classes = self.db.get_teacher_classes(username, True, teacher_only=True)
+        Classes = self.db.get_teacher_classes(username)
         for Class in Classes:
             if Class["name"] == body["name"]:
                 return make_response(gettext("class_name_duplicate"), 200)
@@ -244,7 +244,7 @@ class MiscClassPages(WebsiteModule):
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         # Todo TB: This is a duplicate function, might be nice to perform some clean-up to reduce these parts
-        Classes = self.db.get_teacher_classes(user["username"], True, teacher_only=True)
+        Classes = self.db.get_teacher_classes(user["username"])
         for Class in Classes:
             if Class["name"] == body.get("name"):
                 return make_response(gettext("class_name_duplicate"), 400)
@@ -284,54 +284,72 @@ class MiscClassPages(WebsiteModule):
             response["second_teachers"] = new_second_teachers
         return make_response(response, 200)
 
-    @route("/invite-student", methods=["POST"])
+    @route('/search', methods=['GET'])
     @requires_teacher
-    def invite_student(self, user):
-        body = request.json
-        # Validations
-        if not isinstance(body, dict):
-            return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("username"), str):
+    def filter_usernames(self, user):
+        search = request.args.get('search', '')
+        user_type = request.args.get('user_type')
+        class_id = request.args.get('class_id')
+        if search == '':
+            return render_template('modal/htmx-search-results-list.html', usernames=[])
+        if user_type == 'student':
+            results = g_db().get_student_that_starts_with(search.lower())
+        elif user_type == 'second_teacher':
+            results = g_db().get_teacher_that_starts_with(search.lower(), not_in_class_id=class_id)
+        else:
+            results = []
+        # Get sets of usernames
+        usernames = set(r['username'] for r in results)
+        already_invited = set(inv['username'] for inv in self.db.get_class_invites(class_id=class_id))
+        # Set computation to come up with who can still be invited
+        invitable = usernames - already_invited - set([user['username']])
+        # Turn into a sorted list
+        usernames = list(sorted(invitable))
+        usernames = sorted(usernames)
+        return render_template('modal/htmx-search-results-list.html', usernames=usernames)
+
+    @route("/invite", methods=["POST"])
+    @requires_teacher
+    def invite_users(self, user):
+        if not isinstance(request.form.getlist('usernames'), list):
             return make_response(gettext("username_invalid"), 400)
-        if not isinstance(body.get("class_id"), str):
+        if not isinstance(request.args.get('class_id'), str):
             return make_response(gettext("request_invalid"), 400)
-        if len(body.get("username")) < 1:
+        if not isinstance(request.args.get('invite_as'), str):
+            return make_response(gettext("request_invalid"), 400)
+        if len(request.form.getlist('usernames')) < 1:
             return make_response(gettext("username_empty"), 400)
 
-        username = body.get("username").lower()
-        class_id = body.get("class_id")
-
+        usernames = request.form.getlist('usernames')
+        class_id = request.args.get('class_id')
+        invite_as = request.args.get('invite_as')
         Class = self.db.get_class(class_id)
         if not Class or not (utils.can_edit_class(user, Class)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        user = self.db.user_by_username(username)
-        if not user:
-            return make_response(gettext("student_not_existing"), 400)
-        if "students" in Class and user["username"] in Class["students"]:
-            return make_response(gettext("student_already_in_class"), 400)
-        else:
-            student_classes = self.db.get_student_classes(username)
-            if len(student_classes):
-                return make_response(gettext("student_in_another_class"), 400)
-        if self.db.get_user_invitations(user["username"]):
-            return make_response(gettext("student_already_invite"), 400)
+        users = self.db.users_by_username(usernames)
 
-        # So: The class and student exist and are currently not a combination -> invite!
-        data = {
-            "username": username,
-            "class_id": class_id,
-            "timestamp": utils.times(),
-            "ttl": utils.times() + invite_length,
-            "invited_as": 'student',
-            "invited_as_text": gettext("student"),
-        }
-        self.db.add_class_invite(data)
-        return make_response('', 204)
+        for user in users:
+            self.db.add_class_invite(
+                username=user["username"],
+                class_id=class_id,
+                invited_as=invite_as,
+                invited_as_text=gettext(invite_as)
+            )
+        invites = self.db.get_class_invites(class_id=Class["id"])
+        return render_partial(
+            "htmx-invite-list.html",
+            invites=invites,
+            class_id=Class["id"],
+            is_second_teacher=is_second_teacher(user, class_id),
+        )
 
     @route("/invite-second-teacher", methods=["POST"])
     @requires_teacher
     def invite_second_teacher(self, user):
+        """
+        Used to invite second teachers to a class after duplicating it.
+        """
         teacher = user
         body = request.json
         # Validations
@@ -364,16 +382,12 @@ class MiscClassPages(WebsiteModule):
             return make_response(gettext("teacher_invalid"), 400)
         elif Class["teacher"] == username:  # this check is almost never the case; but just in case.
             return make_response(gettext("request_invalid"), 400)
-
-        data = {
-            "username": username,
-            "class_id": class_id,
-            "timestamp": utils.times(),
-            "ttl": utils.times() + invite_length,
-            "invited_as": "second_teacher",
-            "invited_as_text": gettext("second_teacher"),
-        }
-        self.db.add_class_invite(data)
+        self.db.add_class_invite(
+            username=user["username"],
+            class_id=class_id,
+            invited_as="second_teacher",
+            invited_as_text=gettext("second_teacher")
+        )
         return make_response('', 204)
 
     @route("/remove_student_invite", methods=["POST"])

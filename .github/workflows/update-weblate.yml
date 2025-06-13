@@ -4,9 +4,10 @@ name: Update Weblate
 
 on:
   workflow_dispatch: {}
-  schedule:
-    # 6 in the morning
-    - cron:  '0 6 * * *'
+#  Temporarily disabling automatic Weblate updates until hedy levels are redesigned #6342
+#  schedule:
+#    # 6 in the morning
+#    - cron:  '0 6 * * *'
 
 jobs:
   update-weblate:

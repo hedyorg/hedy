@@ -33,12 +33,14 @@ import sys
 from os import path
 
 from utils import timems, times
+import utils
+from config import config
 
-from . import dynamo, auth
-from . import querylog
+from . import dynamo
 
 from .dynamo import DictOf, OptionalOf, ListOf, SetOf, RecordOf, EitherOf
 
+from hedy_content import MAX_LEVEL
 
 is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
@@ -121,7 +123,8 @@ class Database:
                                   }),
                                   indexes=[
                                       dynamo.Index('email'),
-                                      dynamo.Index('epoch', sort_key='created')
+                                      dynamo.Index('epoch', sort_key='created'),
+                                      dynamo.Index('epoch', sort_key='username', keys_only=True)
                                   ]
                                   )
         self.tokens = dynamo.Table(storage, 'tokens', 'id',
@@ -475,6 +478,22 @@ class Database:
                 ret[key] = program
         return ret
 
+    def last_programs_for_user_all_levels(self, username):
+        """Return the most recent programs for the given user for all levels.
+
+        Returns: { level -> { adventure_name -> { code, name, ... } } }
+        """
+        programs = self.programs_for_user(username)
+        ret = {i: {} for i in range(1, MAX_LEVEL + 1)}
+        for program in programs:
+            if 'adventure_name' not in program or 'level' not in program:
+                continue
+            key = program['adventure_name']
+            level = program['level']
+            if key not in ret[level] or ret[level][key]['date'] < program['date']:
+                ret[level][key] = program
+        return ret
+
     def programs_for_user(self, username):
         """List programs for the given user, newest first.
 
@@ -588,6 +607,10 @@ class Database:
         """Return a user object from the username."""
         return self.users.get({"username": username.strip().lower()})
 
+    def users_by_username(self, usernames: list[str]):
+        """Return a list of user objects from the usernames."""
+        return self.users.batch_get([{"username": username.strip().lower()} for username in usernames])
+
     def user_by_email(self, email):
         """Return a user object from the email address."""
         return self.users.get({"email": email.strip().lower()})
@@ -634,23 +657,28 @@ class Database:
 
     def forget_user(self, username):
         """Forget the given user."""
-        classes = self.users.get({"username": username}).get("classes") or []
-        self.users.delete({"username": username})
         # The recover password token may exist, so we delete it
         self.tokens.delete({"id": username})
         self.programs.del_many({"username": username})
+
         # Remove user from classes of which they are a student
+        classes = self.users.get({"username": username}).get("classes") or []
         for class_id in classes:
             self.remove_student_from_class(class_id, username)
+
+        # Delete classes owned by the user and remove the user from the second teachers list of other classes
+        for Class in self.get_teacher_classes(username, True):
+            if Class['teacher'] == username:
+                self.delete_class(Class)
+            else:
+                self._remove_second_teacher_from_class_table_only(Class, username)
+
+        self.users.delete({"username": username})
 
         # Remove existing invitations.
         invitations = self.get_user_invitations(username)
         for invite in invitations:
             self.remove_user_class_invite(username, invite["class_id"])
-
-        # Delete classes owned by the user
-        for Class in self.get_teacher_classes(username, False):
-            self.delete_class(Class)
 
         # Delete possible adventures owned by the user
         for adv in self.get_teacher_adventures(username):
@@ -675,36 +703,16 @@ class Database:
         far from 30M users. Once we start to get in that neighbourhood, we should
         update this code.
         """
-        return self.users.get_page(dict(epoch=CURRENT_USER_EPOCH), pagination_token=page_token,
-                                   limit=limit, reverse=True)
+        return self.users.get_page(
+            dict(epoch=CURRENT_USER_EPOCH, created=dynamo.UseThisIndex()),
+            pagination_token=page_token,
+            limit=limit,
+            reverse=True,
+        )
 
     def get_all_public_programs(self):
         programs = self.programs.get_many({"public": 1}, reverse=True)
         return [x for x in programs if not x.get("submitted", False)]
-
-    @querylog.timed_as("get_public_programs")
-    def get_public_programs(self, level_filter=None, language_filter=None, adventure_filter=None,
-                            limit=40, pagination_token=None):
-        """Return the most recent N public programs, optionally filtered by attributes.
-
-        The 'public' index is the most discriminatory: fetch public programs, then evaluate them against
-        the filters (on the server). The index we're using here has the 'lang', 'adventure_name' and
-        'level' columns.
-        """
-        # This index contains relevant filterable fields, but doesn't contain the actual code
-        filter = {}
-        if level_filter:
-            filter['level'] = int(level_filter)
-        if language_filter:
-            filter['lang'] = language_filter
-        if adventure_filter:
-            filter['adventure_name'] = adventure_filter
-
-        ids = self.programs.get_page({'public': 1}, reverse=True, limit=limit,
-                                     server_side_filter=filter, pagination_token=pagination_token,
-                                     timeout=3, fetch_factor=2.0)
-        ret = self.programs.batch_get(ids)
-        return ret
 
     def add_public_profile_information(self, programs):
         """For each program in a list, note whether the author has a public profile or not.
@@ -719,56 +727,26 @@ class Database:
         for program in programs:
             program['public_user'] = True if profiles.get(program['id']) else None
 
-    def get_all_hedy_choices(self):
-        return self.programs.get_many({"hedy_choice": 1}, reverse=True)
-
-    def get_hedy_choices(self):
-        return self.programs.get_many({"hedy_choice": 1}, limit=4, reverse=True)
-
-    def set_program_as_hedy_choice(self, id, favourite):
-        self.programs.update({"id": id}, {"hedy_choice": 1 if favourite else None})
-
     def get_class(self, id):
         """Return the classes with given id."""
         return self.classes.get({"id": id})
 
-    def get_teacher_classes(self, username, students_to_list=False, teacher_only=False):
+    def get_teacher_classes(self, username, add_classes_as_second_teacher=False):
         """Return all the classes for a teacher.
 
-        This includes classes they own and classes where they are a second teacher.
+        This includes the classes they own and, optionally, the classes where they serve as a second teacher.
         """
-        classes = None
-        # FIXME: This should be a parameter, not be called here!!
-        user = auth.current_user()
-        if isinstance(self.storage, dynamo.AwsDynamoStorage):
-            classes = list(self.classes.get_many({"teacher": username}, reverse=True))
+        classes = list(self.classes.get_many({"teacher": username}, reverse=True))
 
-            # if current user is a second teacher, we show the related classes.
-            if not teacher_only and auth.is_second_teacher(user):
-                classes.extend([self.classes.get({"id": class_id}) for class_id in user["second_teacher_in"]])
-        # If we're using the in-memory database, we need to make a shallow copy
-        # of the classes before changing the `students` key from a set to list,
-        # otherwise the field will remain a list later and that will break the
-        # set methods.
-        #
-        # FIXME: I don't understand what the above comment is saying, but I'm
-        # skeptical that it's accurate.
-        else:
-            classes = []
-            for Class in self.classes.get_many({"teacher": username}, reverse=True):
-                classes.append(Class.copy())
+        # if requested, add the classes in which the user is a second teacher
+        if add_classes_as_second_teacher:
+            user = self.user_by_username(username)
+            second_teacher_classes = [self.classes.get({"id": cls}) for cls in user.get("second_teacher_in", [])]
+            classes.extend([cls for cls in second_teacher_classes if cls])
 
-            # if current user is a second teacher, we show the related classes.
-            if not teacher_only and auth.is_second_teacher(user):
-                classes.extend([self.classes.get({"id": class_id}).copy() for class_id in user["second_teacher_in"]])
-                # classes.extend(CLASSES.query.filter(id__in=user["second_teacher_in"]).all())
+        for Class in classes:
+            Class['students'] = list(Class.get('students', []))
 
-        if students_to_list:
-            for Class in classes:
-                if "students" not in Class:
-                    Class["students"] = []
-                else:
-                    Class["students"] = list(Class["students"])
         return classes
 
     def get_teacher_students(self, username):
@@ -1013,14 +991,21 @@ class Database:
         self.update_user(second_teacher["username"], {"second_teacher_in": st_classes})
 
         if not only_user:
-            # remove this second teacher from the class' table
-            second_teachers = list(filter(lambda st: st["username"] !=
-                                          second_teacher["username"], Class.get("second_teachers", [])))
-            self.update_class_data(Class["id"], {"second_teachers": second_teachers})
+            self._remove_second_teacher_from_class_table_only(Class, second_teacher['username'])
+
+    def _remove_second_teacher_from_class_table_only(self, Class, second_teacher_username):
+        # remove this second teacher from the class' table
+        second_teachers = [st for st in Class.get("second_teachers", []) if st['username'] != second_teacher_username]
+        self.update_class_data(Class["id"], {"second_teachers": second_teachers})
 
     def delete_class(self, Class):
         for student_id in Class.get("students", []):
             Database.remove_student_from_class(self, Class["id"], student_id)
+
+        for second_teacher in Class.get("second_teachers", []):
+            second_teacher_user = self.user_by_username(second_teacher["username"])
+            st_classes = list(filter(lambda cid: cid != Class["id"], second_teacher_user.get("second_teacher_in", [])))
+            self.update_user(second_teacher["username"], {"second_teacher_in": st_classes})
 
         self.customizations.del_many({"id": Class["id"]})
         self.invitations.del_many({"class_id": Class["id"]})
@@ -1033,7 +1018,16 @@ class Database:
     def get_user_class_invite(self, username, class_id):
         return self.invitations.get({"username#class_id": f"{username}#{class_id}"}) or None
 
-    def add_class_invite(self, data):
+    def add_class_invite(self, username: str, class_id: str, invited_as: str, invited_as_text: str):
+        invite_length = config["session"]["invite_length"] * 60
+        data = {
+            "username": username,
+            "class_id": class_id,
+            "timestamp": utils.times(),
+            "ttl": utils.times() + invite_length,
+            "invited_as": invited_as,
+            "invited_as_text": invited_as_text,
+        }
         data['username#class_id'] = data['username'] + '#' + data['class_id']
         self.invitations.put(data)
 
@@ -1072,7 +1066,7 @@ class Database:
             class_customizations = self.get_class_customizations(student_classes[0]["id"])
             return class_customizations or {}
         elif class_to_preview:
-            for Class in self.get_teacher_classes(user):
+            for Class in self.get_teacher_classes(user, True):
                 if class_to_preview == Class["id"]:
                     class_customizations = self.get_class_customizations(class_to_preview)
                     return class_customizations or {}
@@ -1247,6 +1241,44 @@ class Database:
     def get_username_role(self, username):
         role = "teacher" if self.users.get({"username": username}).get("is_teacher") == 1 else "student"
         return role
+
+    def get_student_that_starts_with(self, search):
+        """
+        Gets students that aren't already in a class
+        """
+        return self.users.get_many(
+            {"epoch": CURRENT_USER_EPOCH, "username": dynamo.BeginsWith(search)},
+            server_side_filter={"classes": dynamo.SetEmpty()},
+            limit=10,
+        )
+
+    def get_teacher_that_starts_with(self, search, not_in_class_id=None):
+        """
+        Gets teachers from DB that aren't second teacher's already of this class
+        """
+        server_side_filter = {'is_teacher': 1}
+        if not_in_class_id:
+            server_side_filter['second_teacher_in'] = dynamo.NotContains(not_in_class_id)
+        records = self.users.get_many(
+            {"epoch": CURRENT_USER_EPOCH, "username": dynamo.BeginsWith(search)},
+            server_side_filter=server_side_filter,
+            limit=10
+        )
+        return records
+
+    def get_class_invites(self, class_id: str):
+        invites = []
+        for invite in self.get_class_invitations(class_id):
+            invites.append(
+                {
+                    "username": invite["username"],
+                    "invited_as_text": invite["invited_as_text"],
+                    "invited_as": invite["invited_as"],
+                    "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True),
+                    "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
+                }
+            )
+        return invites
 
 
 def batched(iterable, n):

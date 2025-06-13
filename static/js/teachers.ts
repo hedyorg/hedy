@@ -137,25 +137,6 @@ export function join_class(id: string, name: string) {
     });
 }
 
-export function invite_student(class_id: string, prompt: string, url='/invite-student') {
-    modal.prompt (prompt, '', function (username) {
-      $.ajax({
-          type: 'POST',
-          url,
-          data: JSON.stringify({
-            username: username,
-            class_id: class_id
-          }),
-          contentType: 'application/json',
-          dataType: 'json'
-      }).done(function() {
-          location.reload();
-      }).fail(function(err) {
-          modal.notifyError(err.responseText);
-      });
-    });
-}
-
 export function remove_student_invite(username: string, class_id: string, prompt: string) {
   return modal.confirm (prompt, function () {
       $.ajax({
@@ -979,4 +960,49 @@ export function invite_support_teacher(requester: string) {
         modal.notifyError(err.responseText);
     });
   });
+}
+
+export function invite_to_class(class_id: string, prompt: string, type: "student" | "second_teacher") {
+  const vals = {class_id, 'user_type': type}
+  const input_attributes = {
+    'hx-get': '/search',
+    'hx-target': '#search_results',
+    'hx-vals': JSON.stringify(vals)
+  }
+  const ok_button_attributes = {
+    'hx-post': `/invite?class_id=${class_id}&invite_as=${type}`,
+    'hx-target': '#invite_block',
+    'hx-include': "[name='usernames']"
+  }
+  htmx.process(document.body)
+  modal.htmx_search(
+    prompt,
+    input_attributes,
+    ok_button_attributes,
+    '#invite_block',
+    ClientMessages['invite'],
+    ClientMessages['invitations_sent']
+  );
+}
+
+export function add_user_to_invite_list(username: string, button: HTMLButtonElement) {
+  button.closest('li')?.remove() // We remove the user from the list
+  const userList = document.getElementById('users_to_invite')
+  for (const userLi of userList?.querySelectorAll('li') || []) {
+    const p = userLi.querySelector('p')
+    if (p?.textContent?.trim() === username) {
+      return
+    }
+  }
+  const template = document.querySelector('#user_list_template') as HTMLTemplateElement
+  const clone = template.content.cloneNode(true) as HTMLElement
+  let close = clone.querySelector('.close');  
+  close?.addEventListener('click', () => {   
+    close?.parentElement?.remove()
+  })
+  let p = clone.querySelector('p[class^="details"]')!
+  p.textContent = username
+  let input = clone.querySelector('input')!
+  input.value = username
+  userList?.appendChild(clone)
 }
