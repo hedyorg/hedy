@@ -4,8 +4,8 @@ import textwrap
 from tests.Tester import HedyTester
 
 
-class TestsLevel13(HedyTester):
-    level = 13
+class TestsLevel14(HedyTester):
+    level = 14
 
     def test_and(self):
         code = textwrap.dedent("""\

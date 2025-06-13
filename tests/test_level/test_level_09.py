@@ -8,8 +8,8 @@ from hedy_sourcemap import SourceRange
 from tests.Tester import HedyTester, SkippedMapping
 
 
-class TestsLevel8(HedyTester):
-    level = 8
+class TestsLevel9(HedyTester):
+    level = 9
     '''
     Tests should be ordered as follows:
      * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']

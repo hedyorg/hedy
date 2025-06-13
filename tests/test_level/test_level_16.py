@@ -7,8 +7,8 @@ import hedy
 from tests.Tester import HedyTester
 
 
-class TestsLevel15(HedyTester):
-    level = 15
+class TestsLevel16(HedyTester):
+    level = 16
 
     #
     # print tests

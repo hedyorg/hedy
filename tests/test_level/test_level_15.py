@@ -7,8 +7,8 @@ import hedy
 from tests.Tester import HedyTester
 
 
-class TestsLevel14(HedyTester):
-    level = 14
+class TestsLevel15(HedyTester):
+    level = 15
 
     #
     # if tests / equality tests / equals tests

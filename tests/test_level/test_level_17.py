@@ -8,8 +8,8 @@ from hedy_sourcemap import SourceRange
 from tests.Tester import HedyTester, SkippedMapping
 
 
-class TestsLevel16(HedyTester):
-    level = 16
+class TestsLevel17(HedyTester):
+    level = 17
 
     def test_print_list_var(self):
         code = textwrap.dedent("""\

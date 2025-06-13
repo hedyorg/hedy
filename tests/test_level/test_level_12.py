@@ -4,8 +4,8 @@ import hedy
 from tests.Tester import HedyTester
 
 
-class TestsLevel11(HedyTester):
-    level = 11
+class TestsLevel12(HedyTester):
+    level = 12
     '''
     Tests should be ordered as follows:
      * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']

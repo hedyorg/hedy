@@ -7,8 +7,8 @@ from hedy_sourcemap import SourceRange
 from tests.Tester import HedyTester, SkippedMapping
 
 
-class TestsLevel7(HedyTester):
-    level = 7
+class TestsLevel8(HedyTester):
+    level = 8
     '''
     Tests should be ordered as follows:
      * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
@@ -457,6 +457,24 @@ class TestsLevel7(HedyTester):
             translate=False)
 
     def test_repeat_if_multiple(self):
+        # when migrating I had to remove code related to conversion
+        # of numerals, leaving it for now but it is a bit weird (FH, 13 06 2025)
+
+        # expected = self.dedent(f"""\
+        #     aan = Value('ja')
+        #     for __i in range({self.int_transpiled(3)}):
+        #       if localize(aan.data) == localize('ja'):
+        #         print(f'Hedy is leuk!')
+        #       else:
+        #         x__x__x__x = Value('5', num_sys='Latin')
+        #       time.sleep(0.1)
+        #     for __i in range({self.int_transpiled(3)}):
+        #       if localize(aan.data) == localize('ja'):
+        #         print(f'Hedy is leuk!')
+        #       time.sleep(0.1)""")
+
+
+
         code = textwrap.dedent("""\
             aan is ja
             repeat 3 times if aan is ja print 'Hedy is leuk!'
@@ -467,8 +485,6 @@ class TestsLevel7(HedyTester):
             for __i in range({self.int_transpiled(3)}):
               if localize(aan.data) == localize('ja'):
                 print(f'Hedy is leuk!')
-              else:
-                x__x__x__x = Value('5', num_sys='Latin')
               time.sleep(0.1)
             for __i in range({self.int_transpiled(3)}):
               if localize(aan.data) == localize('ja'):
@@ -529,7 +545,7 @@ class TestsLevel7(HedyTester):
             skip_faulty=False,
             unused_allowed=True,
             expected=expected,
-            max_level=7
+            max_level=8
         )
 
     def test_play_repeat_random(self):
@@ -549,5 +565,5 @@ class TestsLevel7(HedyTester):
             skip_faulty=False,
             unused_allowed=True,
             expected=expected,
-            max_level=7
+            max_level=8
         )

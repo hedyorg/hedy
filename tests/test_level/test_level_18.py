@@ -8,8 +8,8 @@ from hedy_sourcemap import SourceRange
 from tests.Tester import HedyTester, SkippedMapping
 
 
-class TestsLevel17(HedyTester):
-    level = 17
+class TestsLevel18(HedyTester):
+    level = 18
     maxDiff = None
 
     def test_if_with_indent(self):

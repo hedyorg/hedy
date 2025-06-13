@@ -6,8 +6,8 @@ from tests.Tester import HedyTester, SkippedMapping
 from parameterized import parameterized
 
 
-class TestsLevel5(HedyTester):
-    level = 5
+class TestsLevel6(HedyTester):
+    level = 6
     '''
     Tests should be ordered as follows:
      * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
