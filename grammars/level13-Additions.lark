@@ -11,8 +11,19 @@ print: _PRINT _LEFT_BRACKET? (_print_ask_argument)? _RIGHT_BRACKET?
 // optional commas between arguments
 _print_ask_argument: (_SPACE | list_access |var_access | quoted_text | _COMMA)*
 
-// we are also adding in the Python 'for':
+// adding the new commands
+command:+= while_loop | for_loop | error_for_missing_in | error_for_missing_to | error_for_missing_command
 
 
+
+//new : for loop
+for_loop: _FOR var _IN _RANGE _LEFT_BRACKET? (INT | var_access) _COMMA (INT | var_access) _RIGHT_BRACKET? _COLON? _EOL (_SPACE command) (_EOL _SPACE command)*  _EOL? _END_BLOCK
+
+error_for_missing_in: _FOR var _SPACE _RANGE (INT | var_access)? (_SPACE (INT | var_access))*
+error_for_missing_to: _FOR var _IN _RANGE (INT | var_access) _SPACE (INT | var_access) _EOL
+error_for_missing_command: _FOR var _IN _RANGE (INT | var_access) _TO (INT | var_access) _EOL
+
+//new : while loop
+while_loop: _WHILE (_conditions) _EOL _COLON? (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
 //TODO: add optional colon in ifs
