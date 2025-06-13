@@ -115,7 +115,7 @@ adventures:
                     Copia a história que criaste na tua própria história aventura, nos níveis anteriores.
                     Encontra uma forma de incluíres na tua história, pelo menos, 2 comandos `{if}` e `{else}`.
                     Podes fazê-lo com um final feliz e outro triste, mas podes também experimentar outras maneiras de incorporar os comandos.
-            7:
+            8:
                 story_text: |
                     Numa históra, alguém pode repetir palavras várias vezes. Por exemplo, quando gritam por ajuda ou cantam uma canção.
                     Podes colocar estas repetições na tua história, neste nível, com o `{repeat}`.
@@ -129,7 +129,7 @@ adventures:
                     {repeat} 5 {times} {print} 'Socorro!'
                     {print} 'Porque é que ninguém me ajuda?'
                     ```
-            8:
+            9:
                 story_text: |
                     Neste nível podes usar múltiplos comandos `{if}`, desta forma, podes melhorar o teu final feliz ou triste!
 
@@ -151,7 +151,7 @@ adventures:
                         {print} 'Oh, não! Ricardo é demasiado lento...'
                         {print} _
                     ```
-            9:
+            10:
                 story_text: |
                     Neste nível pode utilizar comandos `{if}` e `{repeat}` dentro de outros comandos `{if}` e `{repeat}`.
                     Isto proporciona-lhe muitas opções e ajuda imenso a tornar a sua história mais interativa.
@@ -179,7 +179,7 @@ adventures:
                     {else}
                     	{print} 'Robin volta para casa'
                     ```
-            10:
+            11:
                 story_text: |
                     Neste nível podes usar o comando {for} na tua história. Desta maneira, podes facilmente programar o livro infantil 'Urso Castanho, Urso Castanho, o que vês aqui?'.
 
@@ -187,32 +187,14 @@ adventures:
 
                     Vai ver <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> a história</a>, se ainda não a conheces, e assegura-te que é escrita conforme está no livro.
                 example_code: "```\nanimais = _ , _, ­­­_  \n{print} 'Urso Castanho, Urso Castanho'\n{print} 'O que vês aqui?'\n```\n"
-            13:
-                story_text: |
-                    Usando os comandos `{and}` e `{or}` , podes tornar as tuas histórias ainda mais versáteis. Podes colocar duas questões e responder à combinação de ambas as respostas.
-
-                    ### Exercício 1
-                    Observa o código de exemplo e completa-o. Em seguida, inclui mais 2 códigos `{if}` com `{and}` ou `{or}`.
-
-                    ### Exercício 2
-                    Encontra uma história de um nível anterior e adiciona um `{and}` ou `{or}`.
-                example_code: |
-                    ```
-                    {print} 'O nosso herói caminha pela floresta'
-                    {print} 'O caminho divide-se em dois'
-                    caminho = {ask} 'Qual o caminho que ela deve escolher?'
-                    arma = {ask} 'Que arma deve utilizar?'
-                    {if} caminho {is} 'esquerda' {and} arma {is} 'espada'
-                    	_
-                    ```
-            15:
+            16:
                 story_text: |
                     Recorrendo ao ciclo `{while}` podes tornar as tuas histórias mais interessantes. Por exemplo, podes usar `{while} game == 'on'` para que possas jogar até o jogo chegar ao fim.
                     Ou então podes usar `{while} sword == 'lost'` para que o jogador não possa continuar o jogo, até que encontre algum objecto.
 
                     ### Exercício
                     O código de exemplo mostra-te como usar o ciclo `{while}` numa história. Agora, **pensa no teu próprio cenário** no qual o jogador tem de encontrar algo antes que possa continuar.
-            18:
+            13:
                 story_text: |
                     Vamos agora escrever outra história, mas agora temos de usar chavetas com o `{print}`.
 
@@ -271,7 +253,7 @@ adventures:
                      Vais encontrar os comandos à esquerda, novamente, e as tarefas nos separadores seguintes. À medida que avanças pelos separadores, as tarefas vão ficando mais difíceis.
                      Por isso, é melhor começares pela esquerda na história e ires avançando para a direita, para que o desafio vá aumentando, gradualmente.
 
-            5:
+            6:
                 story_text: |
                     `ask` e `print` funcionam como no nível 4.
 
@@ -286,7 +268,7 @@ adventures:
                     nome is ask 'Como te chamas?'
                     if nome is Hedy print 'Fixe!' else print 'boo!'
                     ```
-            6:
+            7:
                 story_text: |
                     No nível anterior praticou com `{ask}` e `{if}`. Por exemplo, pode perguntar aos convidados o que eles gostariam de comer.
                     O que ainda não pode fazer é calcular o preço do jantar de todos.
@@ -300,7 +282,7 @@ adventures:
                     print '5 menos 5 é ' 5 - 5
                     print '5 vezes 5 é ' 5 * 5
                     ```
-            7:
+            8:
                 story_text: |
                     `ask`, `print` e `if` funcionam, exactamente, como acontecia no nível 5 e 6.
                     Mas o nível 7 acrescenta o comando `repeat`.  `repeat` pode ser usado para executar uma linha de código múltiplas vezes.
@@ -308,7 +290,7 @@ adventures:
                     ```
                     repeat 3 times print 'Hedy é divertida!'
                     ```
-            8:
+            9:
                 story_text: |
                     `ask` e `print` ainda funcionam como já conheces. Mas `if` e `repeat` mudaram!
                     Tu podes agora executar grupos de código em conjunto, mas vais ter de indentar o código.
@@ -321,16 +303,6 @@ adventures:
                         print 'Olá a todos!'
                         print 'Tudo isto é repetido 5 vezes.'
                     ```
-            13:
-                story_text: Vamos agora aprender `and` e `or`! Se queres verificar duas instruções, não precisas de usar dois `if` mas podes usar `and` e `or`. Se utilizares `and`, ambas as instruções, à esquerda e à direita do `and` têm de ser verdadeiras. Podemos também utilizar `or`. Neste caso, apenas uma das instruções tem de ser verdadeira.
-            14:
-                story_text: Vamos aprender mais coisas novas! Podes já ter aprendido sobre elas na Matemática, o `<` e `>`. O `<` verifica se o primeiro número é menor que o segundo, como `4 < 5`. O `>` verifica se o primeiro número é maior que o segundo, como `6 > 5`.
-            15:
-                story_text: Vamos aprender um ciclo novo, o ciclo `while`! Continuamos o ciclo enquanto a instrução for verdadeira/válida! Portanto, no exemplo de código, continuamos até ser dada a resposta certa. Se a resposta correcta nunca for dada, o ciclo nunca acaba!
-            16:
-                story_text: "Nós vamos criar listas do jeito do Python, com parêntesis reto ao redor das listas! Nós também mantemos as aspas em torno de cada item, como nós aprendemos nos níveis anteriores. \nTambém pode usar os parêntesis para indicar um lugar nas listas."
-            17:
-                story_text: "Agora, nós vamos alterar um pouco a indentação. Cada vez que nós precisarmos de uma indentação, nós temos de colocar `:` na linha antes da indentação. \n \nNeste nível, também pode usar um novo comando:  `{elif}`. `{elif}` é curto para `{else} {if}` e precisa disto quando quiser criar 3 (ou mais!) opções.\nDê uma vista de olhos!"
     fortune:
         levels:
             3:
