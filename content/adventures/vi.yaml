@@ -17,7 +17,7 @@ adventures:
                     {ask} Nhân vật chính của câu chuyện là
                     {print} Nhân vật chính đang đi dạo trong rừng
                     {echo} Họ có chút sợ,
-                    {print}Họ nghe thấy tiếng ồn kinh khủng ở khắp mọi nơi
+                    {print} Họ nghe thấy tiếng ồn kinh khủng ở khắp mọi nơi
                     {print} Họ sợ rằng đây là khu rừng ma ám
                     ```
                 story_text_2: |
@@ -37,7 +37,7 @@ adventures:
                 example_code: |-
                     ```
                     tên {is} {ask} Tên của nhân vật chính là gì?
-                    {print}tên đang chạy ở trong rừng
+                    {print} tên đang chạy ở trong rừng
                     {print} tên có chút sợ sệt
                     {print} Đột nhiên cô ấy nghe thấy một âm thanh kinh khủng
                     {sleep}
@@ -131,7 +131,7 @@ adventures:
                     {if} kếtthúc {is} vui {print} tên ' nắm lấy thanh kiếm và con quái vật nhanh chóng chạy đi mất'
                     {else} {print} 'Con quái vật nuốt chửng' tên
                     ```
-            7:
+            8:
                 story_text: |
                     Trong một câu chuyện, đôi lúc sẽ có người nói. Ví dụ, khi có người kêu cứu hoặc hát một bài.
                     Bạn có thể lặp lại điều này trong câu chuyện ở cấp độ này bằng cách dùng `{repeat}`.
@@ -144,7 +144,7 @@ adventures:
                     {repeat} 5 {times} {print} 'Cứu!'
                     {print} 'Sao không ai cứu mình vậy?'
                     ```
-            8:
+            9:
                 story_text: |
                     Ở cấp độ này bạn có thể sử dụng nhiều câu khác nhau ở câu lệnh `{if}` , cách này giúp bạn nâng cấp thêm cho cái kết vui hay buồn!
 
@@ -166,7 +166,7 @@ adventures:
                         {print} 'Ôi không! Richard đã quá muộn...'
                         {print} _
                     ```
-            9:
+            10:
                 story_text: |
                     Ở cấp độ này bạn có thể sử dụng câu lệnh `{if}` và `{repeat}` bên trong một câu lệnh `{if}` và `{repeat}` khác.
                     Điều này giúp bạn có nhiều lựa chọ và giúp cho câu chuyện của bạn có sự tương tác
@@ -179,7 +179,7 @@ adventures:
 
                     ### Bài tập 3
                     Quay lại cấp độ 8 trong câu chuyện và sử dụng ít nhất 2 lần `{if}` ở trong 1 `{if}`khác.
-                example_code: "{print}'Robin đang đi bọ xuống trung tâm thành phố'\nlocation ={ask}'Liệu Robin sẽ vào 1 cửa hàng, hay cố ấy nên đi về nhà?'\n{if}location {is} \"cửa hàng\"\n…{print}'Cố ấy vào trong cửa hàng'\n…{print}'Robin thấy 1 cuốn chuyện trông rất hay'\n …\n"
+                example_code: "```\n{print} 'Robin đang đi bọ xuống trung tâm thành phố'\nlocation = {ask}'Liệu Robin sẽ vào 1 cửa hàng, hay cố ấy nên đi về nhà?'\n{if} location {is} \"cửa hàng\"\n    {print} 'Cố ấy vào trong cửa hàng'\n    {print} 'Robin thấy 1 cuốn chuyện trông rất hay'\n```\n"
     default:
         name: Giới thiệu
         default_save_name: phần giới thiệu

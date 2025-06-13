@@ -1692,14 +1692,14 @@ adventures:
                     Check it out!
                 example_code: |
                     ```
-                    prizes = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_prize = prizes[{random}]
+                    prizes = 1 million dollars, an apple pie, nothing
+                    your_prize = prizes {at} {random}
                     {print} 'You win ' your_prize
-                    {if} your_prize == '1 million dollars' :
+                    {if} your_prize {is} '1 million dollars'
                         {print} 'Yeah! You are rich!'
-                    {elif} your_prize == 'an apple pie' :
+                    {elif} your_prize {is} 'an apple pie'
                         {print} 'Lovely, an apple pie!'
-                    {else}:
+                    {else}
                         {print} 'Better luck next time..'
                     ```
     for_command:

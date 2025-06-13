@@ -3,6 +3,7 @@ import { executeHelloWorldProgram, deleteProgram } from "../tools/programs/progr
 import { login, loginForTeacher } from "../tools/login/login";
 import { navigateToClass } from "../tools/classes/class";
 import { makeProfilePublic } from "../tools/profile/profile";
+import { clickAdventureIndexButton } from "../tools/navigation/nav";
 
 describe("General tests for my programs page (with both custom teacher and built-in adventure)", () => {
     const programName = "myTestProgram";
@@ -27,10 +28,10 @@ describe("General tests for my programs page (with both custom teacher and built
 
     it("should not be added to my programs when running a program with copied code", () => {
         cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
-        // make sure to navigate to the wanted program tab.
-        cy.getDataCy(adventure).click();
         // Paste example code
-        cy.getDataCy(`paste_example_code_${adventure}`).click();
+        cy.get(`.adventure_content_${adventure}`).within(() => {
+          cy.getDataCy(`paste_example_code_${adventure}`).click();
+        });
         cy.getDataCy('runit').click();
         cy.wait(500);
         cy.visit(`${Cypress.env('programs_page')}`);
@@ -39,10 +40,10 @@ describe("General tests for my programs page (with both custom teacher and built
 
     it("should be added to my programs when running a program with modified code", () => {
         cy.visit(`${Cypress.env('hedy_page')}#${adventure}`);
-        // make sure to navigate to the wanted program tab.
-        cy.getDataCy(adventure).click();
         // Paste example code and modify code
-        cy.getDataCy(`paste_example_code_${adventure}`).click();
+        cy.get(`.adventure_content_${adventure}`).within(() => {
+          cy.getDataCy(`paste_example_code_${adventure}`).click();
+        });
         cy.get('#editor .cm-content').click();
         cy.focused().type('print Hello world\nask Hello world?');
         cy.getDataCy('runit').click();

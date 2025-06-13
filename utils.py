@@ -171,7 +171,7 @@ def is_testing_request(request):
 
 def is_redesign_enabled():
     # Flip this to True when we are ready to release
-    return False
+    return True
 
 
 def extract_bcrypt_rounds(hash):
@@ -309,7 +309,7 @@ def random_password_generator(size=6):
     This function generates a random password using the base 58 characters to
     prevent confusion between characters like 0 and O, or 1 and l.
     """
-    base_58_chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz',
+    base_58_chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
     return random_id_generator(size, base_58_chars)
 
 

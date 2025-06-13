@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2025-02-20 06:16+0000\n"
-"Last-Translator: Carlos H Correia <chcorreia@gmail.com>\n"
+"PO-Revision-Date: 2025-05-15 10:21+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.10.1-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 "Generated-By: Babel 2.14.0\n"
 
 msgid "Access Before Assign"
@@ -25,73 +25,56 @@ msgstr "Detectamos que a variável {name} está sendo usada na linha {access_lin
 msgid "Cyclic Var Definition"
 msgstr "Detectamos que a variável `{variable}` está sendo usada à direita do comando `{is}` antes de ter sido inicializada. Você pode inicializar a variável antes de usá-la?"
 
-#, fuzzy
 msgid "Else Without If Error"
-msgstr ""
+msgstr "Detectamos que há um `{else}` sendo usado antes de um `{if}` na linha {line_number}. Tente escrever um `{if}` antes do `{else}`."
 
-#, fuzzy
 msgid "Function Undefined"
-msgstr "Você tentou usar a função {name}, mas você não a definiu."
+msgstr "Detectamos que uma função {name} está sendo usada sem ter sido definida. Tente definir a função antes de usá-la."
 
-#, fuzzy
 msgid "Has Blanks"
-msgstr "Seu codigo esta incompleto. Ele contém espaços em branco que precisam ser preenchidos com codigo."
+msgstr "Detectamos que o código parece incompleto. Tente preencher, com código, as lacunas."
 
-#, fuzzy
 msgid "Incomplete"
-msgstr ""
+msgstr "Detectamos que parte do código parece estar faltando no `{incomplete_command}` da linha {line_number}. Tente adicionar o que falta."
 
-#, fuzzy
 msgid "Incomplete Repeat"
-msgstr "Parece que você esqueceu de usar um comando com o `{repeat}` que você escreveu na linha {line_number}."
+msgstr "Detectamos que, no `{repeat}` da linha {line_number}, está faltando um comando `{command}`. Tente adicioná-lo."
 
-#, fuzzy
 msgid "Invalid"
-msgstr "`{invalid_command}` não é um commando do nível {level} da Hedy. Você quis dizer `{guessed_command}`?"
+msgstr "Detectamos que `{invalid_command}` não é um comando do nível {level} da Hedy. Você quis dizer `{guessed_command}`?"
 
-#, fuzzy
 msgid "Invalid Argument"
-msgstr "Você não pode usar o comando `{command}` com `{invalid_argument}` . Tente mudar `{invalid_argument}` para {allowed_types}."
+msgstr "Detectamos que `{command}` não é compatível com `{invalid_argument}` . Tente mudar `{invalid_argument}` para {allowed_types}."
 
-#, fuzzy
 msgid "Invalid Argument Type"
-msgstr "Você não pode usar `{command}` com `{invalid_argument}` porque ele é {invalid_type}. Tente mudar `{invalid_argument}` para {allowed_types}."
+msgstr "Detectamos que `{command}` não é compatível com `{invalid_argument}` porque ele é {invalid_type}. Tente mudar `{invalid_argument}` para {allowed_types}."
 
-#, fuzzy
 msgid "Invalid At Command"
-msgstr "O comando `{command}` não pode mais ser usado a partir do nível 16. Você pode usar colchetes para usar um elemento de uma lista, por exemplo `amigos[i]`, `números_da_sorte[{random}]`."
+msgstr "Detectamos que `{command}` não pode ser usado do nível 16 em diante. Tente usar colchetes `[]` para listas."
 
-#, fuzzy
 msgid "Invalid Space"
-msgstr "Opa! Você começou uma linha com um espaço na linha {line_number}. Espaços confundem os computadores, você poderia removê-lo?"
+msgstr "Detectamos que a linha {line_number} começou com um espaço. Tente removê-lo."
 
-#, fuzzy
 msgid "Invalid Type Combination"
-msgstr "Você não pode usar `{invalid_argument}` e `{invalid_argument_2}` com `{command}` porque um é {invalid_type} e o outro é {invalid_type_2}. Tente mudar `{invalid_argument}` para {invalid_type_2} ou `{invalid_argument_2}` para {invalid_type}."
+msgstr "Detectamos que `{invalid_argument}` e `{invalid_argument_2}`não são compatíveis com `{command}` porque um é {invalid_type} e o outro é {invalid_type_2}. Tente mudar `{invalid_argument}` para {invalid_type_2} ou `{invalid_argument_2}` para {invalid_type}."
 
-#, fuzzy
 msgid "Lonely Echo"
-msgstr "Você usou um `{echo}` antes de um `{ask}`, ou um `{echo}` sem um `{ask}`. Coloque um `{ask}` antes do `{echo}`."
+msgstr "Detectamos que um `{echo}`está sendo usado antes de ou sem usar um `{ask}`. Tente colocar um `{ask}` antes do `{echo}`."
 
-#, fuzzy
 msgid "Lonely Text"
-msgstr "Parece que você esqueceu de usar um comando com o texto que você usou na linha {line_number}"
+msgstr "Detectamos que parece estar faltando um comando a ser usado com o texto da linha {line_number}. Tente escrever o comando necessário e usá-lo com o texto."
 
-#, fuzzy
 msgid "Missing Additional Command"
-msgstr ""
+msgstr "Detectamos que falta algo com o comando `{command}` da linha {line_number}. Tente usar `{missing_command}` em seu código."
 
-#, fuzzy
 msgid "Missing Colon Error"
-msgstr ""
+msgstr "Detectamos que o `{command}` precisa de um `:` no fim da linha {line_number}. A partir do nível 17, comece a usar `:`no fim da linha para comandos com blocos."
 
-#, fuzzy
 msgid "Missing Command"
-msgstr "Parece que você esqueceu de usar um comando na linha {line_number}."
+msgstr "Detectamos que parece estar faltando um comando na linha {line_number} do código. Tente olhar na descrição do exercício para descobrir qual comando usar."
 
-#, fuzzy
 msgid "Missing Inner Command"
-msgstr "Parece que você esqueceu de usar um comando com a declaração `{command}` que você usou na linha {line_number}."
+msgstr "Detectamos que parece estar faltando um comando na declaração `{command}` da linha {line_number}. Tente olhar na descrição do exercício para descobrir qual comando usar."
 
 #, fuzzy
 msgid "Missing Square Brackets"
@@ -296,10 +279,6 @@ msgid "all"
 msgstr "Todos"
 
 #, fuzzy
-msgid "all_class_highscores"
-msgstr ""
-
-#, fuzzy
 msgid "all_rows_missing_separator"
 msgstr ""
 
@@ -428,10 +407,6 @@ msgstr "O comando não é mais correto"
 
 msgid "commands"
 msgstr "Comandos"
-
-#, fuzzy
-msgid "complete"
-msgstr ""
 
 msgid "congrats_message"
 msgstr "Parabéns, {username}, você alcançou os seguintes resultados com Hedy!"
@@ -627,10 +602,6 @@ msgstr ""
 msgid "disable"
 msgstr "Desativar"
 
-#, fuzzy
-msgid "disable_explore_page"
-msgstr ""
-
 msgid "disable_parsons"
 msgstr "Desativar todos os desafios"
 
@@ -718,6 +689,9 @@ msgstr "Esse nome de usuário já está em uso."
 
 msgid "exit_preview_mode"
 msgstr "Sair do modo prévia"
+
+msgid "expand_output"
+msgstr ""
 
 msgid "experience_invalid"
 msgstr "Por favor, selecione uma experiência válida. Escolha (Sim, Não)."
@@ -828,10 +802,6 @@ msgid "heard_about_invalid"
 msgstr "Por favor, selecione uma forma válida pela qual soube de nós."
 
 #, fuzzy
-msgid "hedy_choice_title"
-msgstr ""
-
-#, fuzzy
 msgid "hedy_introduction_slides"
 msgstr ""
 
@@ -847,9 +817,6 @@ msgstr "olá"
 #, fuzzy
 msgid "hide_adventures"
 msgstr ""
-
-msgid "hide_cheatsheet"
-msgstr "Ocultar folha de dicas"
 
 #, fuzzy
 msgid "hide_classes"
@@ -928,6 +895,12 @@ msgstr ""
 
 msgid "invalid_username_password"
 msgstr "Nome de usuário ou senha inválido(s)."
+
+msgid "invitations_sent"
+msgstr ""
+
+msgid "invite"
+msgstr ""
 
 msgid "invite_by_username"
 msgstr "Convidar por nome de usuário"
@@ -1150,9 +1123,6 @@ msgstr "Meu perfil público"
 msgid "name"
 msgstr "Nome"
 
-msgid "nav_explore"
-msgstr "Explorar"
-
 msgid "nav_hedy"
 msgstr ""
 
@@ -1229,6 +1199,9 @@ msgstr "Não existe esse programa Hedy!"
 
 #, fuzzy
 msgid "no_tag"
+msgstr ""
+
+msgid "no_usernames_found"
 msgstr ""
 
 #, fuzzy
@@ -1361,6 +1334,7 @@ msgstr ""
 msgid "pending_invites"
 msgstr "Convites pendentes"
 
+#, fuzzy
 msgid "people_with_a_link"
 msgstr "Outras pessoas com um link podem ver esse programa. Ele também pode ser encontrado na página \"Explorar\"."
 
@@ -1485,10 +1459,6 @@ msgstr "Ao selecionar esta caixa, eu torno meu perfil visível para todos. Tenha
 
 msgid "public_profile_updated"
 msgstr "Perfil público atualizado, a página será recarregada."
-
-#, fuzzy
-msgid "put"
-msgstr ""
 
 msgid "question mark"
 msgstr "um ponto de interrogação"
@@ -1626,6 +1596,9 @@ msgstr "Você precisa de uma conta para salvar seu programa. Gostaria de fazer l
 msgid "save_success_detail"
 msgstr "Programa salvo com sucesso."
 
+msgid "save_turtle_drawing"
+msgstr ""
+
 msgid "score"
 msgstr "Placar"
 
@@ -1695,15 +1668,14 @@ msgstr "Em breve, você receberá um e-mail com instruções sobre como redefini
 msgid "settings"
 msgstr "Minhas configurações pessoais"
 
-#, fuzzy
-msgid "share"
-msgstr ""
-
 msgid "share_by_giving_link"
 msgstr "Mostre seu programa a outras pessoas dando a elas o link abaixo:"
 
 msgid "share_your_program"
 msgstr "Compartilhar programa"
+
+msgid "show_editor"
+msgstr ""
 
 #, fuzzy
 msgid "signup_student_or_teacher"
@@ -1732,6 +1704,9 @@ msgstr ""
 
 #, fuzzy
 msgid "social_media"
+msgstr ""
+
+msgid "solution"
 msgstr ""
 
 #, fuzzy
@@ -1784,10 +1759,6 @@ msgid "string"
 msgstr "texto"
 
 #, fuzzy
-msgid "student"
-msgstr ""
-
-#, fuzzy
 msgid "student_accounts_created"
 msgstr ""
 
@@ -1797,10 +1768,6 @@ msgstr ""
 
 #, fuzzy
 msgid "student_adventures_table_explanation"
-msgstr ""
-
-#, fuzzy
-msgid "student_already_in_class"
 msgstr ""
 
 #, fuzzy
@@ -1818,9 +1785,6 @@ msgstr ""
 #, fuzzy
 msgid "student_information_explanation"
 msgstr ""
-
-msgid "student_not_existing"
-msgstr "Este nome de usuário não existe."
 
 #, fuzzy
 msgid "student_signup_header"
@@ -1845,6 +1809,7 @@ msgstr "Tem certeza de que deseja enviar esse programa?"
 msgid "submitted"
 msgstr "Enviado"
 
+#, fuzzy
 msgid "submitted_header"
 msgstr "Este programa foi enviado e não pode mais ser alterado."
 
@@ -1969,9 +1934,6 @@ msgstr "Hedy - Personalizar aventura"
 #, fuzzy
 msgid "title_customize-class"
 msgstr ""
-
-msgid "title_explore"
-msgstr "Hedy - Explorar"
 
 msgid "title_for-teacher"
 msgstr "Hedy - Para professores"
@@ -2679,4 +2641,25 @@ msgstr "Seu programa"
 
 #~ msgid "survey_completed"
 #~ msgstr "Pesquisa completa"
+
+#~ msgid "put"
+#~ msgstr ""
+
+#~ msgid "disable_explore_page"
+#~ msgstr ""
+
+#~ msgid "hedy_choice_title"
+#~ msgstr ""
+
+#~ msgid "nav_explore"
+#~ msgstr "Explorar"
+
+#~ msgid "title_explore"
+#~ msgstr "Hedy - Explorar"
+
+#~ msgid "all_class_highscores"
+#~ msgstr ""
+
+#~ msgid "hide_cheatsheet"
+#~ msgstr "Ocultar folha de dicas"
 

@@ -5,7 +5,6 @@ import { initializeHighlightedCodeBlocks } from './app';
 import { ClientMessages } from './client-messages';
 import { modal } from './modal';
 import Sortable from 'sortablejs';
-import { Tabs } from './tabs';
 
 declare const htmx: typeof import('./htmx');
 
@@ -38,13 +37,11 @@ htmx.defineExtension('disable-element', {
  * What we do:
  *
  * - Turning <pre>s into Ace editors
- * - Make tabs active
  * - Initialize sortables
  * - Reset the scroll position on lists that need it
  */
 htmx.onLoad((content) => {
     initializeHighlightedCodeBlocks(content, true);
-    new Tabs({ where: content });
 
     $(content).find('.htmx-resetscroll').scrollTop(0);
 
