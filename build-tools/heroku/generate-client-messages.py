@@ -2,15 +2,15 @@
 #
 # This file is compiled from the YAMLs found in content/client-messages/*.yaml,
 # plus gettext-translated messages we found elsewhere.
-import glob
-from os import path
-import json
 import gettext
-
-# Import packages from the website app (AutoPep8 will mess this up, so disable it)
+import glob
+import json
 import sys
-sys.path.append(path.abspath(path.join(path.dirname(__file__), '..', '..')))  # noqa
-from website.yaml_file import YamlFile  # noqa
+from os import path
+
+from website.yaml_file import YamlFile
+
+from config import CONTENT_DIR
 
 OUTPUT_FILE = 'static/js/message-translations.ts'
 
@@ -83,8 +83,7 @@ def validate_gettext_hackfile():
 
     If we don't do this, babel will not find the keys when it does an extract.
     """
-    filename = path.join(path.dirname(__file__), '..', '..', 'content', 'client-messages.txt')
-    with open(filename) as f:
+    with CONTENT_DIR.joinpath('client-messages.txt').open() as f:
         messages = set(x.strip() for x in f.read().split('\n'))
 
     oopsie = False

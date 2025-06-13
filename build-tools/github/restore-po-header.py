@@ -1,4 +1,3 @@
-# /usr/bin/env python3
 # Between 2 PO files, copy the header (and only the header) from one to the other.
 import sys
 

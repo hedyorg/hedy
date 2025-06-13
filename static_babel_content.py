@@ -1,7 +1,8 @@
-from os import path
 import json
 
-with open(path.join(path.dirname(__file__), 'static_babel_content.json')) as f:
+from config import ROOT_DIR
+
+with ROOT_DIR.joinpath('static_babel_content.json').open() as f:
     data = json.load(f)
 
 
