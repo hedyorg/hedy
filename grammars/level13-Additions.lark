@@ -1,7 +1,18 @@
-//  adds and and or
+// from now on we use (something very similar to)
+// Python syntax
+// colons and brackets however can be omitted in most places
 
-ifs: _IF _conditions _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-_conditions: condition | and_condition | or_condition
+// optional colons
+for_list: _FOR var _IN var_access (_COLON)? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
-and_condition: (condition) (_AND condition)*
-or_condition: (condition) (_OR condition)*
+// optional brackets
+print: _PRINT _LEFT_BRACKET? (_print_ask_argument)? _RIGHT_BRACKET?
+
+// optional commas between arguments
+_print_ask_argument: (_SPACE | list_access |var_access | quoted_text | _COMMA)*
+
+// we are also adding in the Python 'for':
+
+
+
+//TODO: add optional colon in ifs
