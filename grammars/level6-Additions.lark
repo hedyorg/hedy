@@ -12,7 +12,7 @@ ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule
 // FH June 2025: New to allow decimals in the grammar
 ?atom: NUMBER | _MINUS NUMBER | var_access | textwithoutspaces // we now allow floats with NUMBER
 
-
+condition: equality_check | in_list_check | not_in_list_check
 in_list_check: textwithoutspaces _IN var_access
 not_in_list_check: textwithoutspaces _NOT_IN var_access
 
