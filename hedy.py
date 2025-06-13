@@ -652,7 +652,6 @@ class ExtractAST(Transformer):
         return Tree('list_access', [args[0], args[1]], meta)
 
 
-
 # This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
 # (e.g. 'animal') and its value as a tree node (e.g. Tree['text', ['cat']]) which is later used to infer the type
 # of the entry. This preliminary traversal is needed to avoid issues with loops in which an iterator variable is
@@ -1335,7 +1334,6 @@ class IsValid(Filter):
         raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=self.level,
                                                  guessed_command=suggestion, line_number=meta.line,
                                                  fixed_code=fixed_code, fixed_result=result)
-
 
     def error_condition(self, meta, args):
         raise exceptions.UnquotedEqualityCheckException(line_number=meta.line)
