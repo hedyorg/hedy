@@ -337,7 +337,7 @@ commands_and_types_per_level = {
     Command.print: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
-        12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+        6: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
@@ -375,20 +375,20 @@ commands_and_types_per_level = {
         15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list, HedyType.boolean]
     },
     Command.addition: {
-        6: [HedyType.integer, HedyType.input],
-        12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
+        1: [HedyType.integer, HedyType.input],
+        6: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
     },
     Command.subtraction: {
         1: [HedyType.integer, HedyType.input],
-        12: [HedyType.integer, HedyType.float, HedyType.input],
+        6: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.multiplication: {
         1: [HedyType.integer, HedyType.input],
-        12: [HedyType.integer, HedyType.float, HedyType.input],
+        6: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.division: {
         1: [HedyType.integer, HedyType.input],
-        12: [HedyType.integer, HedyType.float, HedyType.input],
+        6: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.repeat: {7: [HedyType.integer, HedyType.input]},
     Command.for_list: {10: {HedyType.list}},
