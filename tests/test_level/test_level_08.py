@@ -473,8 +473,6 @@ class TestsLevel8(HedyTester):
         #         print(f'Hedy is leuk!')
         #       time.sleep(0.1)""")
 
-
-
         code = textwrap.dedent("""\
             aan is ja
             repeat 3 times if aan is ja print 'Hedy is leuk!'
