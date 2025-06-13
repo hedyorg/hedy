@@ -38,7 +38,7 @@ from prefixes.normal import get_num_sys
 HEDY_MAX_LEVEL = MAX_LEVEL
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
 MAX_LINES = 100
-LEVEL_STARTING_INDENTATION = 8
+LEVEL_STARTING_INDENTATION = 9
 
 # Boolean variables to allow code which is under construction to not be executed
 local_keywords_enabled = True
