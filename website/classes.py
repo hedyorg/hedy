@@ -1,6 +1,6 @@
 import uuid
 
-from flask import make_response, redirect, request, session
+from flask import make_response, request, session
 from jinja_partials import render_partial
 from website.flask_hedy import g_db
 from website.flask_helpers import gettext_with_fallback as gettext
@@ -96,33 +96,6 @@ class ClassModule(WebsiteModule):
         self.db.delete_class(Class)
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
         return render_partial('htmx-classes-table.html', teacher_classes=teacher_classes)
-
-    # TODO: remove once we deploy new redesign
-    @route("/<class_id>/prejoin/<link>", methods=["GET"])
-    def prejoin_class(self, class_id, link):
-        if utils.is_redesign_enabled():
-            return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
-
-        Class = self.db.get_class(class_id)
-        if not Class or Class["link"] != link:
-            return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
-        if request.cookies.get(cookie_name):
-            token = self.db.get_token(request.cookies.get(cookie_name))
-            if token and token.get("username") in Class.get("students", []):
-                return render_template(
-                    "class-prejoin.html",
-                    joined=True,
-                    page_title=gettext("title_join-class"),
-                    current_page="my-profile",
-                    class_info={"name": Class["name"]},
-                )
-        return render_template(
-            "class-prejoin.html",
-            joined=False,
-            page_title=gettext("title_join-class"),
-            current_page="my-profile",
-            class_info={"id": Class["id"], "name": Class["name"]},
-        )
 
     @route('join/<class_id>', methods=["POST"])
     @requires_login
@@ -414,15 +387,3 @@ class MiscClassPages(WebsiteModule):
 
         self.db.remove_user_class_invite(username, class_id)
         return make_response('', 204)
-
-    # TODO: remove once we deploy new redesign
-    @route("/hedy/l/<link_id>", methods=["GET"])
-    def resolve_class_link(self, link_id):
-        if utils.is_redesign_enabled():
-            return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
-        Class = self.db.resolve_class_link(link_id)
-        if not Class:
-            return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
-        return redirect(
-            request.url.replace("/hedy/l/" + link_id, "/class/" + Class["id"] + "/prejoin/" + link_id), code=302
-        )

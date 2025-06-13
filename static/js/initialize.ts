@@ -22,8 +22,8 @@ export interface InitializeOptions {
    * Written: by every page, on page load.
    *
    * Used: on the code page, to initialize the highlighter, to translate the program,
-   * to determine timeouts, to load the quiz iframe, to show the variable inspector,
-   * to show a debugger,  to load parsons exercises, to initialize a default save name.
+   * to determine timeouts, to show the variable inspector,
+   * to show a debugger, to initialize a default save name.
    */
   readonly level: number;
 
@@ -81,6 +81,7 @@ export function initialize(options: InitializeOptions) {
 
   // The above initializations are often also page-specific
   switch (options.javascriptPageOptions?.page) {
+    case 'view_adventure':
     case 'code':
       initializeCodePage(options.javascriptPageOptions);
       break;
@@ -116,9 +117,7 @@ export function initialize(options: InitializeOptions) {
     case 'my-profile':
       initializeMyProfilePage(options.javascriptPageOptions);
       break;
-    
-    case 'tryit':
-      initializeCodePage(options.javascriptPageOptions);
+      
   }
 
   // FIXME: I think this might also be page-specific

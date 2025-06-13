@@ -47,17 +47,5 @@
             {% include "incl/adventure-content.html" %}
           </div>
         {% endfor %}
-        {% if parsons %}
-            <div data-tabtarget="parsons" class="hidden p-4">
-                <div>
-                    {% include 'incl/parsons.html' %}
-                </div>
-            </div>
-        {% endif %}
-        {% if quiz %}
-            <div data-tabtarget="quiz" class="hidden">
-                {% include 'quiz/incl-begin.html' %}
-            </div>
-        {% endif %}
       </div>
     </div>

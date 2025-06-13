@@ -3,7 +3,6 @@ import os
 import collections
 import random
 import json
-import re
 from http.cookies import SimpleCookie
 
 # *** LIBRARIES ***
@@ -1205,16 +1204,9 @@ class TestClasses(AuthHelper):
         # GIVEN a student (user without teacher permissions)
         self.given_fresh_user_is_logged_in()
 
-        # WHEN retrieving the short link of a class
-        # THEN receive a redirect to `class/ID/join/LINK`
-        if not utils.is_redesign_enabled():
-            body = self.get_data('hedy/l/' + Class['link'], expect_http_code=302)
-            if not re.search(HOST + 'class/' + Class['id'] + '/prejoin/' + Class['link'], body):
-                raise Exception('Invalid or missing redirect link')
-
         # WHEN joining a class
         # THEN we receive a 200 code
-        body = self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
+        self.post_data('class/join', {'id': Class['id']}, expect_http_code=200)
 
         # WHEN getting own profile after joining a class
         profile = self.get_data('profile')
@@ -1587,65 +1579,7 @@ class TestMultipleAccounts(AuthHelper):
         self.post_data('for-teachers/create-accounts', body, expect_http_code=200)
 
 
-class TestHedyPage(AuthHelper):
-    def test_valid_parsons(self):
-        self.given_fresh_user_is_logged_in()
-
-        # WHEN attempting a parsons program
-        # THEN should store attempt and receive OK from server
-        body = {
-            'id': utils.random_id_generator(12),
-            'username': self.user['username'],
-            'level': 1,
-            'exercise': '1',
-            'order': ['1', '2', '3', '4'],
-            'correct': '1',
-            'timestamp': utils.timems()
-        }
-
-        self.post_data('store_parsons_order', body, expect_http_code=204)
-
-    def test_invalid_parsons(self):
-        self.given_fresh_user_is_logged_in()
-
-        invalid_bodies = [
-            {},
-            {
-                'id': str(utils.random_id_generator(12)),
-                'username': self.user,
-                'level': '1',
-                'exercise': '1',
-                'order': ['1', '2', '3', '4'],
-                'correct': '1',
-                'timestamp': utils.timems()
-            },
-            {
-                'id': str(utils.random_id_generator(12)),
-                'username': self.user,
-                'level': '1',
-                'exercise': '1',
-                'order': [1, 2, 3, 4],
-                'correct': '1',
-                'timestamp': utils.timems()
-            },
-            {
-                'id': str(utils.random_id_generator(12)),
-                'username': self.user,
-                'level': '1',
-                'exercise': 1,
-                'order': ['1', '2', '3', '4'],
-                'correct': '1',
-                'timestamp': utils.timems()
-            }
-        ]
-
-        for body in invalid_bodies:
-            self.post_data('store_parsons_order', body, expect_http_code=400)
-
-
 # *** CLEANUP OF USERS CREATED DURING THE TESTS ***
-
-
 def tearDownModule():
     auth_helper = AuthHelper()
     auth_helper.setUp()
