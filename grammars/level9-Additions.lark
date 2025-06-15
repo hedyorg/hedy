@@ -18,17 +18,4 @@ error_repeat_dep_8:<old_rule_to_error repeat>
 // not sure of we want it, but we could
 equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces | NUMBER | textwithinnerspaces) _SPACE?
 
-// from level 8 on if_pressed is implemented slightly differently
-if_pressed: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-if_pressed_else: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-if_pressed_without_else: if_pressed
-
-// from level 8 on if is implemented slightly differently
-elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-if_pressed_elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-//'if' cannot be used in Python, hence the name of the rule is 'ifs'
-ifs: _IF condition _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
-
-//the old 'flat' if-else is now an error
-error_ifelse:<old_rule_to_error ifelse>
 

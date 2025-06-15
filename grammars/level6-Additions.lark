@@ -1,11 +1,14 @@
 // adds elif in and not in
 // Not yet in the traverser
 
+//if and else on different lines from level 6
 
+
+//Next step: remove adding of x_x_x_x_ from levle 6
 
 elif_clause: _ELIF (condition (_SPACE+ _EOL* | _SPACE* _EOL+) | condition_spaces _SPACE* _EOL+ | error_condition) _if_less_command
 
-ifelifselse: _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) (elif_clause)* _else_clause
+ifelifselse: _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) (elif_clause)* (_SPACE+ _EOL* | _SPACE* _EOL+) _else_clause
 ifelse: _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) _else_clause
 ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs'
 
