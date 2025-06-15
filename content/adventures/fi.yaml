@@ -132,7 +132,7 @@ adventures:
                     {if} loppu {is} hyvä {print} nimi 'tarttuu miekkaan ja hirviö juoksee vikkelään pois'
                     {else} {print} nimi 'joutuu hirviön syömäksi'
                     ```
-            7:
+            8:
                 story_text: |
                     Tarinassa joku sanoo sanan monta kertaa. Esimerkiksi, kun joku huutaa apua tai laulaa laulun.
                     Voit laittaa sellaisia toistoja tarinaasi tällä tasolla käyttämällä `{repeat}` komentoa.
@@ -145,7 +145,7 @@ adventures:
                     {repeat} 5 {times} {print} 'Apua!'
                     {print} 'Miksei kukaan auta minua?'
                     ```
-            8:
+            9:
                 story_text: |
                     Tällä tasolla voit käyttää useita rivejä `{if}` komennoissasi, tällä tavoin voit päivittää hyvän tai huonon loppusi!
 
@@ -168,7 +168,7 @@ adventures:
                         {print} 'Voi ei! Riku on liian hidas...'
                         {print} _
                     ```
-            9:
+            10:
                 story_text: |
                     Tällä tasolla voit käyttää `{if}` ja `{repeat}` komentoja muiden `{if}` ja `{repeat}` komentojen sisällä.
                     Tämä avaa sinulle monia eri mahdollisuuksia ja auttaa tekemään tarinastasi vuorovaikutteisen.
@@ -196,7 +196,7 @@ adventures:
                     {else}
                         {print} 'Roosa lähtee kotiin'
                     ```
-            10:
+            11:
                 story_text: |
                     Tällä tasolla voit käyttää `{for}` komentoa tarinassasi. Tällä tavalla pystyt helposti ohjelmoimaan lasten kirjan 'Brown bear, Brown bear, what do you see'.
 
@@ -204,25 +204,7 @@ adventures:
 
                     Vilkaise <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> tarinaa</a> jos et tunne sitä, ja varmista, että tulostat sen kuten se on kirjassa.
                 example_code: "```\neläimet = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
-            13:
-                story_text: |
-                    Käyttämällä `{and}` ja `{or}` komentoja voit tehdä tarinoistasi monipuolisempia. Voit kysyä kaksi kysymystä ja reagoida vastausyhdistelmään.
-
-                    ### Harjoitus 1
-                    Katso esimerkkikoodia ja viimeistele se. Sitten lisää vähintään 2 `{if}` koodia `{and}` ja `{or}` kanssa.
-
-                    ### Harjoitus 2
-                    Etsi tarina aiemmasta tasosta ja lisää yksi `{and}` tai `{or}`.
-                example_code: |
-                    ```
-                    {print} 'Sankarimme kävelee metsän halki'
-                    {print} 'Polku haarautuu'
-                    polku = {ask} 'Kumman polun hän valitsee?'
-                    ase = {ask} 'Minkä aseen hän vetää?'
-                    {if} polku {is} 'vasen' {and} ase {is} 'miekka'
-                        _
-                    ```
-            15:
+            16:
                 story_text: |
                     Jos käytät `{while}` looppia voit tehdä tarinoistasi mielenkiintoisempia. Esimerkiksi, voit käyttää `{while} game == 'on'` jolloin voit pelata kunnes peli päättyy.
                     Tai voit käyttää `{while} sword == 'lost'` jolloin pelaaja ei voi jatkaa peliä ennenkuin hän on löytänyt jotain.
@@ -243,7 +225,7 @@ adventures:
                             {print} sijainti ' - Ne eivät olleet siellä.'
                     {print} 'Nyt voit mennä taloon!'
                     ```
-            18:
+            13:
                 story_text: |
                     Nyt tulostamme uuden tarinan, mutta tällä kertaa meidän täytyy käyttää sulkeita `{print}` komennon kanssa.
 
@@ -305,7 +287,7 @@ adventures:
                     ```
                     salasana {is} {ask} 'Mikä on oikea salasana?'
                     ```
-            6:
+            7:
                 story_text: |
                     Edellisellä tasolla olet harjoitellut `{ask}`:n ja `{if}`:n kanssa. Voit esimerkiksi kysyä vierailta, mitä he haluaisivat syödä.
                     Mitä et kuitenkaan vielä voi tehdä, on laskea kaikkien illallisen hintaa.
@@ -328,7 +310,7 @@ adventures:
                     kokonaishinta {is} ruoan_hinta + juoman_hinta
                     {print} 'Se on ' kokonais_hinta ' euroa, kiitos.'
                     ```
-            7:
+            8:
                 story_text: |
                     Hienoa työtä! Olet saavuttanut seuraavan tason, mikä tarkoittaa, että olet harjoitellut `{if}`:n ja `{else}`:n kanssa. Olet luultavasti huomannut, että koodisi pidentyvät.
                     Jos esimerkiksi haluat ohjelmoida "Hyvää syntymäpäivää".
@@ -341,7 +323,7 @@ adventures:
                     {print} "hyvää syntymäpäivää rakas Hedy"
                     {print} "hyvää syntymäpäivää sinulle"
                     ```
-            8:
+            9:
                 story_text: |
                     Nyt olet oppinut toistamaan yhden koodirivin. Tästä on hyötyä, mutta se ei aina riitä. Joskus haluat toistaa useita rivejä kerralla.
                     Tällä tasolla voit ryhmitellä pari koodiriviä ja toistaa tuon pienen riviryhmän kerralla!
@@ -349,7 +331,7 @@ adventures:
                     ```
                     {repeat} 5 {times} {print} "Seuraavassa seikkailussa voit toistaa useita koodirivejä kerralla!"
                     ```
-            9:
+            10:
                 story_text: |
                     Hienoa työtä! Olet saavuttanut uuden tason! Edellisellä tasolla olet oppinut käyttämään useita koodirivejä {if}- tai {repeat}-komennossa. Mutta näitä kahta ei voi vielä yhdistää...
                     Hyviä uutisia! Tällä tasolla voit laittaa {if}-komennon {if}- tai {repeat}-komennon sisään. Koodilohkon sijoittamista toisen koodilohkon sisään kutsutaan sisäkkäisyyksiksi. ``` Koodilohkon sijoittamista toisen koodilohkon sisään kutsutaan sisäkkäisyyksiksi.
@@ -363,7 +345,7 @@ adventures:
                      {print} "Hurraa!"
                     {else}
                      {print} "Ehkä sinun pitäisi harjoitella enemmän edellisellä tasolla"
-            10:
+            11:
                 story_text: |
                     Sinulla menee loistavasti! Edellisillä tasoilla kohtasimme vielä pienen ongelman. Olet oppinut toistamaan rivejä, mutta entä jos haluat hieman muuttaa riviä.
                     Esimerkiksi jos haluat laulaa kappaleen "jos olet onnellinen ja tiedät sen". Se näyttäisi tältä:
@@ -393,9 +375,3 @@ adventures:
     for_command:
         description: '{for}-komento'
         levels:
-            11:
-                story_text: |-
-                    Tällä tasolla lisäämme uuden muodon kohteelle `{for}`. Aikaisemmilla tasoilla käytimme `{for} luetteloiden kanssa, mutta voimme käyttää `{for}` myös numeroiden kanssa.
-                    Teemme sen lisäämällä muuttujanimen, jota seuraa  `{in}` `{range}`. Kirjoitamme sitten numeron, josta aloitetaan `{to}` ja numeron, johon lopetetaan.
-
-                    Kokeile esimerkkiä, niin näet mitä tapahtuu! Tällä tasolla sinun on taas käytettävä sisennyksiä `{for}` -lauseiden alapuolisilla riveillä.
