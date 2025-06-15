@@ -689,7 +689,7 @@ adventures:
                     ```
                     {define} calculate_mean_grade
                         total = 0
-                        {for} i {in} {range} 1 {to} 4
+                        {for} i {in} {range} 1, 4
                             grade = {ask} _
                             total = total + _
                             {return} _ / 4
@@ -719,7 +719,7 @@ adventures:
                         {print} 'Well done!'
 
                     {print} 'Give 10 correct answers to win!'
-                    {for} i {in} {range} 1 {to} 10
+                    {for} i {in} {range} 1, 10
                         _
                     {print} 'You win!'
                     ```
@@ -1207,7 +1207,7 @@ adventures:
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} 1 {to} 3
+                    {for} i {in} {range} 1, 3
                         animal = animals[i]
                         sound = sounds[i]
                         {print} 'Old MacDonald had a farm'
@@ -1424,7 +1424,7 @@ adventures:
                 example_code: |
                     ```
                     game = 'on'
-                    {for} i {in} {range} 1 {to} 100
+                    {for} i {in} {range} 1, 100
                         {if} game == 'on'
                             answer = {ask} 'Do you want to continue?'
                             {if} answer == 'no'
@@ -1734,7 +1734,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Lastly, we'll turn `{for} i {in} {range} 1 {to} 5` into real Python code, like this:
+                    Lastly, we'll turn `{for} i {in} {range} 1, 5` into real Python code, like this:
                 example_code: |
                     ```
                     {for} i {in} {range}(1,5):
@@ -2118,7 +2118,7 @@ adventures:
                     {while} game_over _
                         guess = _
                         {if} _
-                            {for} i {in} {range} 1 {to} amount_letters:
+                            {for} i {in} {range} 1, amount_letters:
                                 {if} answer[i] == guess:
                                     guessed_letters[i] = guess
                             {print} _
@@ -2635,7 +2635,7 @@ adventures:
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
                     translation = ['hello', 'computer', 'potato']
                     score = 0
-                    {for} i {in} {range} 1 {to} 3
+                    {for} i {in} {range} 1, 3
                         answer = {ask} 'What does ' french_words[i] ' mean?'
                         correct = translation[i]
                         {if} answer == correct
@@ -2946,7 +2946,7 @@ adventures:
                     {define} fire_alarm
                         {print} 'FIRE!'
                         note = 40
-                        {for} i {in} {range} 1 {to} 100
+                        {for} i {in} {range} 1, 100
                             {if} note _ 50
                                 note = note + 5
                                 {play} _
@@ -3016,16 +3016,16 @@ adventures:
                 example_code: |
                     ```
                     {define} line_1
-                        {for} i {in} {range} 1 {to} 3
+                        {for} i {in} {range} 1, 3
                             {play} G
                         {play} D
-                        {for} i {in} {range} 1 {to} 2
+                        {for} i {in} {range} 1, 2
                             {play} E
                         {play} D
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} 1 {to} 3
+                    {for} i {in} {range} 1, 3
                         animal = animals[i]
                         sound = sounds[i]
                         {print} 'Old MacDonald had a farm'
@@ -3440,7 +3440,7 @@ adventures:
                     {print} friends[3] ' is the third friend on the list.'
                     #now we will match 2 lists using the variable i
                     lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
+                    {for} i {in} {range} 1, 3
                         {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
                 story_text_2: |-
@@ -4074,7 +4074,7 @@ adventures:
 
                     # Create a function that shows the simon_sequence
                     {define} _
-                        {for} i {in} {range} 1 {to} _
+                        {for} i {in} {range} 1, _
                             {print} _
                             _
                             _
@@ -4295,7 +4295,7 @@ adventures:
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} 1 {to} 3
+                    {for} i {in} {range} 1, 3
                         animal = _
                         sound = _
                         {print} 'Old MacDonald had a farm'
@@ -4312,10 +4312,10 @@ adventures:
                     ```
                     lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
                     {for} line {in} lines
-                        {for} i {in} {range} 1 {to} 3
+                        {for} i {in} {range} 1, 3
                             {print} line
                         {print} 'early in the morning'
-                        {for} i {in} {range} 1 {to} 3
+                        {for} i {in} {range} 1, 3
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
@@ -4333,10 +4333,10 @@ adventures:
                     ```
                     lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
                     {for} line {in} lines _
-                        {for} i {in} {range} 1 {to} 3 _
+                        {for} i {in} {range} 1, 3 _
                             {print} _ line _
                         {print} 'early in the morning'
-                        {for} i {in} {range} 1 {to} 3
+                        {for} i {in} {range} 1, 3
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
@@ -5012,7 +5012,7 @@ adventures:
                     numbers = 10, 20, 30
                     colors = _
 
-                    {for} i {in} {range} 1 {to} 5
+                    {for} i {in} {range} 1, 5
                         random_number = _
                         random_color = _
                         {call} draw_snowflake {with} random_number, random_color
