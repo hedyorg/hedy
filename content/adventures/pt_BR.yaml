@@ -1355,44 +1355,7 @@ adventures:
                     animal_favorito {is} _
                     {print} Eu gosto de animal_favorito
                     ```
-            16:
-                story_text: |
-                    Vamos aprender mais itens novos. Você já deve conhecê-los da matemática, o `<` e o `>`.
-                    O `<` verifica se o primeiro número é menor que o segundo. Por exemplo, idade `<` 12 verifica se idade é menor que 12.
-                    Se quiser verificar se o primeiro número é menor ou igual ao segundo, você pode usar `<=`. Exemplo: age `<=` 11.
-                    The `>` verifica se o primeiro número é maior que o segundo. Por exemplo, pontos `>` 10 verifica se pontos é maior que 10.
-                    Se quiser verificar se o primeiro número é maior ou igual ao segundo, você pode usar `>=`. Exemplo: pontos `>=` 11.
-                    Essas comparações podem ser usadas em um `{if}`, assim:
-                example_code: |
-                    ```
-                    idade = {ask} 'Quantos anos você tem?'
-                    {if} idade > 12
-                        {print} 'Você é mais velho(a) que eu!'
-                    ```
-                    ```
-                    idade = {ask} 'Quantos anos você tem?'
-                    {if} idade < 12
-                        {print} 'Você é mais novo(a) que eu!'
-                    {else}
-                        {print} 'Você é mais velho(a) que eu!'
-                    ```
-                story_text_2: |
-                    Deste nível em diante, se quiser verificar uma igualdade exata, você pode usar dois sinais de igual. É assim na maioria das linguagens de programação:
-                example_code_2: |
-                    ```
-                    nome = {ask} 'Qual é o seu nome?'
-                    {if} nome == 'Hedy'
-                        {print} 'Você é legal!'
-                    ```
-                story_text_3: |
-                    Você pode verificar se duas coisas são *diferentes* usando `!=`, desse jeito:
-                example_code_3: |
-                    ```
-                    nome = {ask} 'Qual é o seu nome?'
-                    {if} nome != 'Hedy'
-                        {print} 'Você não é Hedy'
-                    ```
-            6:
+            7:
                 example_code: "```\nnome = Hedy\nresposta = 20 + 4\n```\n"
                 story_text: "Também mudamos a forma como você guarda uma palavra em uma variável! Agora você pode usar `=` em vez de `{is}` para guardar um nome ou número numa variável, assim:\n"
         name: '{is}'

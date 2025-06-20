@@ -1983,50 +1983,13 @@ adventures:
                     lievelingsdier {is} _
                     {print} Ik hou van lievelingsdier
                     ```
-            6:
+            7:
                 story_text: |
                     We veranderen ook hoe je een woord opslaat in een variabele! Je mag hierbij vanaf nu een `=` in plaats van een `{is}` gebruiken. Kijk maar:
                 example_code: |
                     ```
                     naam = Hedy
                     antwoord = 20 + 4
-                    ```
-            15:
-                story_text: |
-                    We gaan nieuwe tekens leren, je kent ze misschien wel van rekenen/wiskunde, `<` en `>`.
-                    De `<` kijkt of het eerste getal kleiner is dan de tweede. Bijvoorbeeld met `leeftijd < 12` kun je kijken of `leeftijd` kleiner is dan 12.
-                    Als je wil kijken of een getal kleiner of even groot is dan een ander getal, kun je `<=` gebruiken. Bijvoorbeeld `leeftijd <= 11`.
-                    De `>` kijkt of iets groter is dan het tweede getal. Bijvoorbeeld met `punten > 10` kun je kijken of `punten` groter is dan 10.
-                    Als je wil kijken of een getal groter of even groot is als een ander getal, kun je `>=` gebruiken. Bijvoorbeeld `punten >= 11`.
-                    Je gebruikt de vergelijkingen in de `{if}` zo:
-                example_code: |
-                    ```
-                    leeftijd = {ask} 'Hoe oud ben jij?'
-                    {if} leeftijd < 12
-                            {print} 'Dan ben je jonger dan ik!'
-                    ```
-                    ```
-                    leeftijd = {ask} 'Hoe oud ben jij?'
-                    {if} leeftijd < 12
-                            {print} 'Dan ben je jonger dan ik!'
-                    {else}
-                            {print} 'Dan ben je ouder dan ik!'
-                    ```
-                story_text_2: |
-                    Als je iets precies wilt vergelijken, mag je dat nu doen met twee isgelijktekentjes `==`. Zo doen de meeste programmeertalen dat:
-                example_code_2: |
-                    ```
-                    name = {ask} 'Hoe heet jij?'
-                    {if} name == 'Hedy'
-                        {print} 'Jij bent cool!'
-                    ```
-                story_text_3: |
-                    Je kan ook vergelijken of iets *niet* hetzelfde is met `!=`. Zo:
-                example_code_3: |
-                    ```
-                    name = {ask} 'Hoe heet jij?'
-                    {if} name != 'Hedy'
-                        {print} 'Jij bent Hedy niet'
                     ```
     language:
         name: Woordjes leren

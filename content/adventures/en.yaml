@@ -2764,7 +2764,7 @@ adventures:
                     favorite_animal {is} _
                     {print} I like favorite_animal
                     ```
-            6:
+            7:
                 story_text: |
                     We also make a change in storing a word in a variable! You may now use `=` instead of `{is}` when we store a name or a number in a variable, like this:
                 example_code: |
@@ -2772,9 +2772,9 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
-            15:
+            13:
                 story_text: |
-                    We are going to learn more new items. You might know them already from mathematics, the `<` and `>`.
+                    We are going to learn more new items. You might know them already from mathematics, the `<` and `>`. Before we used `{greater} {than}` and `{less} {than}`, but most programming languages use symbols for this.
                     The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
                     If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.
                     The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
@@ -2782,32 +2782,32 @@ adventures:
                     You use these comparisons in an `{if}`, like this:
                 example_code: |
                     ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
+                    age = {input}('How old are you?')
+                    {if} age > 12:
+                        {print}('You are older than I am!')
                     ```
                     ```
-                    age = {ask} 'How old are you?'
-                    {if} age < 12
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
+                    age = {input}('How old are you?')
+                    {if} age < 12:
+                        {print}('You are younger than me!')
+                    {else}:
+                        {print}('You are older than me!')
                     ```
                 story_text_2: |
                     From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:
                 example_code_2: |
                     ```
-                    name = {ask} 'What is your name?'
-                    {if} name == 'Hedy'
-                        {print} 'You are cool!'
+                    name = {input}('What is your name?')
+                    {if} name == 'Hedy':
+                        {print}('You are cool!')
                     ```
                 story_text_3: |
                     You can also compare if something is *not* equal to something else using `!=` like this:
                 example_code_3: |
                     ```
-                    name = {ask} 'What is your name?'
-                    {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
+                    name = {input}('What is your name?')
+                    {if} name != 'Hedy':
+                        {print}('You are not Hedy')
                     ```
     language:
         name: Language
@@ -2856,7 +2856,7 @@ adventures:
         default_save_name: maths
         description: Introducing maths
         levels:
-            6:
+            7:
                 story_text: |
                     In this level you learn something new: you can now also calculate.
 

@@ -1235,41 +1235,6 @@ adventures:
                     favoritdjur är _
                     {print} Jag gillar favoritdjur
                     ```
-            15:
-                story_text: |
-                    Vi kommer att lära oss fler nya saker. Du kanske redan känner till dem från matematiken, `<` och `>`.
-                     `<` kollar om det första talet är mindre än det andra, t.ex. ålder `<` 12 kontrollerar om ålder är mindre än 12.
-                    Om du vill kolla om det första talet är mindre eller lika med det andra kan du använda `<=`, t.ex. ålder `<=` 11.
-                     `>` kollar om det första talet är större än det andra, t.ex. poäng `>` 10 kollar om poäng är större än 10.
-                    Om du vill kolla om det första talet är större eller lika med det andra kan du använda `>=`, t.ex. poäng `>=` 11.
-                    Du använder dessa jämförelser i en `{if}`, så här:
-                example_code: |
-                    ```
-                    ålder = {ask} 'Hur gammal är du?'
-                    {if} ålder > 12
-                        {print} 'Du är äldre än jag!'
-                    ```
-                story_text_2: |
-                    Från och med den här nivån kan du använda två likhetstecken om du vill jämföra exakt. Detta är vad de flesta programspråk gör:
-                example_code_2: |
-                    ```
-                    namn = {ask} 'Vad heter du?'
-                    {if} namn == 'Hedy'
-                        {print} 'Du är cool!'
-                    ```
-                story_text_3: |
-                    Du kan också jämföra om något *inte* är lika med något annat med hjälp av `!=` så här:
-                example_code_3: |
-                    ```
-                    namn = {ask} 'Vad heter du?'
-                    {if} namn != 'Hedy'
-                        {print} 'Du är inte Hedy'
-                    ```
-
-                    {if} ålder < 13
-                        {print} 'Du är yngre än jag!'
-                    {else}
-                        {print} 'Du är äldre än jag!'
     language:
         name: Språk
         default_save_name: Språk

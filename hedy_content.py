@@ -140,9 +140,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'hospital'
     ],
     6: [
-        'maths',
         'elif_command',
-        'is_command',
         'in_command',
         'restaurant',
         'quizmaster',
@@ -155,6 +153,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     7: [
         'default',
         'is_command',
+        'maths',
         'music',
         'songs',
         'dice',

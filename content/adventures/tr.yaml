@@ -1282,7 +1282,7 @@
                     favori_hayvan {is} _
                     {print} En sevdiğim havyan favori_hayvan
                     ```
-            6:
+            7:
                 story_text: |
                     Bir kelimeyi bir değişkende saklama konusunda da bir değişiklik yapıyoruz! Artık bir değişkende bir isim veya sayı sakladığımızda `{is}` yerine `=` kullanabilirsiniz, bunun gibi:
                 example_code: |
@@ -1290,41 +1290,6 @@
                     isim = Hedy
                     cevap = 20 + 4
                     ```
-            15:
-                story_text: |
-                    Daha fazla yeni öğe öğrenmeye devam ediyoruz. Bunları matematikten zaten biliyor olabilirsiniz, `<` ve `>`.
-                    `<`, ilk sayının ikinciden küçük olup olmadığını kontrol eder, örneğin yaş `<` 12, yaşın 12'den küçük olup olmadığını kontrol eder.
-                    İlk sayının ikinciden küçük veya ona eşit olup olmadığını kontrol etmek istiyorsanız, `<=` kullanabilirsiniz, örneğin yaş `<=` 11.
-                    `>`, İlk sayının ikinciden büyük olup olmadığını kontrol eder, örneğin puan `>` 10, puan'ın 10'dan büyük olup olmadığını kontrol eder.
-                    İlk sayının ikinciden büyük veya ona eşit olup olmadığını kontrol etmek istiyorsanız, `>=` kullanabilirsiniz, örneğin puan `>=` 11.
-                    Bu karşılaştırmaları aşağıdaki gibi bir `{if}` içinde kullanırsınız:
-                example_code: |
-                    ```
-                    yaş = {ask} 'Kaç yaşındasın?'
-                    {if} yaş > 12
-                        {print} 'Sen benden daha yaşlısın!'
-                    ```
-                story_text_2: |
-                    Bu seviyeden itibaren, tam değer karşılaştırması istiyorsanız, iki eşit işareti kullanabilirsiniz. Çoğu programlama dili bunu yapar:
-                example_code_2: |
-                    ```
-                    isim = {ask} 'Senin adın ne?'
-                    {if} isim == 'Hedy'
-                        {print} 'Çok havalısın!'
-                    ```
-                story_text_3: |
-                    Bir şeyin başka bir şeye eşit *olmadığını* `!=` kullanarak karşılaştırabilirsiniz:
-                example_code_3: |
-                    ```
-                    isim = {ask} 'Senin adın ne?'
-                    {if} isim != 'Hedy'
-                        {print} 'Sen Hedy değilsin.'
-                    ```
-
-                    {if} yaş < 13
-                        {print} 'Sen benden daha gençsin!'
-                    {else}
-                        {print} 'Sen benden daha yaşlısın!'
     language:
         name: Dil
         default_save_name: Dil
