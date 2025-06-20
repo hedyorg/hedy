@@ -219,17 +219,17 @@ adventures:
                 example_code: |
                     ```
                     keys = 'lost'
-                    {print} 'You are standing in your garden and you have lost your keys.'
-                    {print} 'Where do you want to look for them?'
-                    {print} 'You can choose: tree, flowerbed, rock, postbox'
-                    {while} keys == 'lost'
+                    {print}('You are standing in your garden and you have lost your keys.')
+                    {print}('Where do you want to look for them?')
+                    {print}('You can choose: tree, flowerbed, rock, postbox')
+                    {while} keys == 'lost':
                         location = {ask} 'Where do you want to look?'
-                        {if} location == 'flowerbed'
-                            {print} 'Here they are!'
+                        {if} location == 'flowerbed':
+                            {print}('Here they are!')
                             keys = 'found'
-                        {else}
-                            {print} 'Nope they are not at the ' location
-                    {print} 'Now you can enter the house!'
+                        {else}:
+                            {print}('Nope they are not at the ', location)
+                    {print}('Now you can enter the house!')
                     ```
             13:
                 story_text: |
@@ -302,10 +302,10 @@ adventures:
                     If you use `{and}`, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
+                    name = {input}('what is your name?')
+                    age = {input}('what is your age?')
+                    {if} name == 'Hedy' {and} age == 2:
+                        {print}('You are the real Hedy!')
                     ```
     ask_command:
         name: '{ask}'
