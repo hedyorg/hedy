@@ -70,6 +70,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     2: [
         'default',
@@ -88,6 +90,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     3: [
         'default',
@@ -107,6 +111,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     4: [
         'default',
@@ -126,6 +132,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     5: [
         'default',
@@ -147,6 +155,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     6: [
         'default',
@@ -164,6 +174,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     7: [
         'default',
@@ -181,6 +193,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     8: [
         'default',
@@ -198,6 +212,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     9: [
         'default',
@@ -215,6 +231,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     10: [
         'default',
@@ -233,6 +251,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     11: [
         'default',
@@ -246,6 +266,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     12: [
         'default',
@@ -265,6 +287,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'parsons',
         'quiz',
+        'hospital',
+        'fair',
     ],
     13: [
         'default',
@@ -281,6 +305,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'debugging',
         'quiz',
+        'hospital',
+        'fair',
     ],
     14: [
         'default',
@@ -297,6 +323,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'quizmaster',
         'debugging',
         'quiz',
+        'hospital',
+        'fair',
     ],
     15: [
         'default',
@@ -310,6 +338,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'debugging',
         'quiz',
+        'hospital',
+        'fair',
     ],
     16: [
         'default',
@@ -327,6 +357,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'simon_3',
         'debugging',
         'quiz',
+        'hospital',
+        'fair',
     ],
     17: [
         'default',
@@ -343,6 +375,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'blackjack_4',
         'debugging',
         'quiz',
+        'hospital',
+        'fair',
     ],
     18: [
         'default',
