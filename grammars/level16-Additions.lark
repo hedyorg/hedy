@@ -1,17 +1,14 @@
-// list definition and list access are now done with brackets
+// adds while loop
 
-command:+= change_list_item | error_assign_list_missing_brackets
+command: += while_loop | if_pressed -= error_if_pressed_missing_else >> error_ifelse | ifs
 
-?atom: NUMBER | _MINUS NUMBER | boolean | list_access | text_in_quotes | var_access
-list_access: var_access _LEFT_SQUARE_BRACKET (INT | random | var_access) _RIGHT_SQUARE_BRACKET
-change_list_item: var_access _LEFT_SQUARE_BRACKET (INT | var_access) _RIGHT_SQUARE_BRACKET _EQUALS (var_access | quoted_text | NUMBER | boolean | list_access)
-assign_list: var (_IS | _EQUALS) _LEFT_SQUARE_BRACKET ((quoted_text | NUMBER | boolean) (_COMMA (quoted_text | NUMBER | boolean))*)? _RIGHT_SQUARE_BRACKET
-error_assign_list_missing_brackets: var  (_IS | _EQUALS) (_LEFT_SQUARE_BRACKET)? ((quoted_text | NUMBER | boolean) _COMMA (quoted_text | NUMBER | boolean) (_COMMA (quoted_text | NUMBER | boolean))*)? (_RIGHT_SQUARE_BRACKET)?
+// new: boolean type and while loop
+boolean: TRUE | FALSE
 
-error_list_access_at:<old_rule_to_error list_access>
+?atom: NUMBER | _MINUS NUMBER | boolean | text_in_quotes | var_access
+assign_list: var (_IS| _EQUALS) (text_in_quotes|NUMBER|boolean) (_COMMA (text_in_quotes|NUMBER|boolean))+
+?comparison_arg: += boolean >> var_access
+?print_expression: += boolean >> var_access_print
 
-_print_ask_argument.1: (_SPACE | quoted_text | list_access | error_list_access_at | expression | print_expression)*
-assign: var (_IS| _EQUALS) (list_access | error_list_access_at | boolean | atom | expression)
-error_print_no_quotes: _PRINT (textwithoutspaces | list_access | error_list_access_at | var_access) (_SPACE (textwithoutspaces | list_access | var_access))*  -> error_print_nq
-sleep: _SLEEP (INT | list_access | error_list_access_at | var_access | expression)?
-turtle: _FORWARD ((NUMBER | list_access | error_list_access_at | textwithoutspaces | expression))? -> forward | _TURN ((NUMBER | list_access | error_list_access_at | textwithoutspaces | expression))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | list_access | error_list_access_at | textwithoutspaces))? -> color
+while_loop: _WHILE (_conditions) _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+

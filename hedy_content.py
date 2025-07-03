@@ -68,8 +68,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'fortune',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     2: [
         'default',
@@ -86,8 +85,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     3: [
         'default',
@@ -105,8 +103,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     4: [
         'default',
@@ -124,8 +121,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     5: [
         'default',
@@ -138,20 +134,26 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'rock',
         'parrot',
         'haunted',
-        'in_command',
-        'restaurant',
-        'fortune',
-        'pressit',
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     6: [
+        'elif_command',
+        'in_command',
+        'restaurant',
+        'quizmaster',
+        'fortune',
+        'guess_my_number',
+        'haunted',
+        'pressit'
+        'hospital'
+    ],
+    7: [
         'default',
-        'maths',
         'is_command',
+        'maths',
         'music',
         'songs',
         'dice',
@@ -162,10 +164,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
-    7: [
+    8: [
         'default',
         'repeat_command',
         'story',
@@ -174,15 +175,15 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'dishes',
         'dice',
         'repeat_command_2',
+        'years',
         'fortune',
         'restaurant',
         'pressit',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
-    8: [
+    9: [
         'default',
         'repeat_command',
         'fortune',
@@ -196,10 +197,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
-    9: [
+    10: [
         'default',
         'repeat_command',
         'if_command',
@@ -207,16 +207,16 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'story',
         'calculator',
         'music',
+        'secret',
         'restaurant',
         'haunted',
         'pressit',
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
-    10: [
+    11: [
         'default',
         'for_command',
         'dishes',
@@ -231,30 +231,13 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
-    ],
-    11: [
-        'default',
-        'for_command',
-        'years',
-        'calculator',
-        'songs',
-        'restaurant',
-        'haunted',
-        'turtle_draw_it',
-        'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     12: [
         'default',
         'maths',
-        'quotation_marks',
         'functions',
-        'fortune',
         'music',
-        'songs',
         'songs_2',
         'restaurant',
         'calculator',
@@ -263,55 +246,19 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'secret',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     13: [
-        'default',
+        'print_command',
+        'ask_command',
+        'quotation_marks',
         'and_or_command',
-        'secret',
-        'functions',
-        'music',
+        'for_command',
         'songs',
-        'story',
-        'rock',
         'turtle_draw_it',
-        'restaurant',
-        'hotel',
-        'calculator',
-        'debugging',
-        'quiz',
+        'hospital'
     ],
     14: [
-        'default',
-        'is_command',
-        'guess_my_number',
-        'music',
-        'haunted',
-        'functions',
-        'turtle_draw_it',
-        'hotel',
-        'calculator',
-        'calculator_2',
-        'piggybank',
-        'quizmaster',
-        'debugging',
-        'quiz',
-    ],
-    15: [
-        'default',
-        'while_command',
-        'music',
-        'turtle_draw_it',
-        'restaurant',
-        'story',
-        'dice',
-        'rock',
-        'calculator',
-        'debugging',
-        'quiz',
-    ],
-    16: [
         'default',
         'random_command',
         'haunted',
@@ -326,14 +273,28 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'simon_2',
         'simon_3',
         'debugging',
-        'quiz',
+        'hospital'
     ],
-    17: [
-        'default',
-        'for_command',
-        'elif_command',
+    15: [
+        'is_command',
+        'functions',
+        'songs',
+        'piggybank',
         'music',
-        'tic',
+        'hotel',
+        'calculator',
+        'calculator_2,'
+        'turtle_draw_it',
+        'hospital'
+    ],
+    16: [
+        'while_command',
+        'dice',
+        'rock'
+        'music',
+        'turtle_draw_it',
+        'calculator',
+        'restaurant',
         'hangman',
         'hangman_2',
         'hangman_3',
@@ -341,21 +302,10 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'blackjack_2',
         'blackjack_3',
         'blackjack_4',
-        'debugging',
-        'quiz',
+        'hospital'
     ],
-    18: [
-        'default',
-        'print_command',
-        'ask_command',
-        'functions',
-        'for_command',
-        'story',
-        'songs',
-        'music',
-        'debugging'
-    ]
 }
+
 
 ADVENTURE_ORDER_PER_LEVEL = {level: [a for a in adventures if a not in ['parsons', 'quiz']]
                              for level, adventures in ADVENTURE_ORDER_PER_LEVEL_OLD.items()}
