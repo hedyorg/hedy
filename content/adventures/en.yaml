@@ -223,7 +223,7 @@ adventures:
                     {print}('Where do you want to look for them?')
                     {print}('You can choose: tree, flowerbed, rock, postbox')
                     {while} keys == 'lost':
-                        location = {ask} 'Where do you want to look?'
+                        location = {input}('Where do you want to look?')
                         {if} location == 'flowerbed':
                             {print}('Here they are!')
                             keys = 'found'
@@ -687,15 +687,15 @@ adventures:
                     Did you get it? Awesome! Would you like to add even more to your calculator? **This adventure continues in the next adventure!**
                 example_code: |
                     ```
-                    {define} calculate_mean_grade
+                    {def} calculate_mean_grade():
                         total = 0
-                        {for} i {in} {range} 1 {to} 4
-                            grade = {ask} _
+                        {for} i {in} {range} (1,4):
+                            grade = {input} _
                             total = total + _
                             {return} _ / 4
 
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
+                    mean_grade = _
+                    {print} ('Your mean grade is ', mean_grade)
                     ```
             16:
                 story_text: |
@@ -704,24 +704,24 @@ adventures:
 
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
-                    Then `{call}` the function.
+                    Then call the function.
                 example_code: |
                     ```
-                    {define} new_question
-                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number_1 = numbers {at} {random}
-                        number_2 = numbers {at} {random}
+                    {define} new_question():
+                        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        number_1 = numbers[random]
+                        number_2 = numbers[random]
                         correct = number_1 * number_2
                         answer = 0
                         _
                         _
                         _
-                        {print} 'Well done!'
+                        {print} ('Well done!')
 
-                    {print} 'Give 10 correct answers to win!'
-                    {for} i {in} {range} 1 {to} 10
+                    {print}('Give 10 correct answers to win!')
+                    {for} i {in} {range} 1 {to} 10:
                         _
-                    {print} 'You win!'
+                    {print} ('You win!')
                     ```
     calculator_2:
         name: Calculator 2
@@ -1567,7 +1567,7 @@ adventures:
                     Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
                 example_code: |
                     ```
-                    options = 1, 2, 3, 4, 5, 6
+                    options = [1, 2, 3, 4, 5, 6]
                     {print} 'Throw 6 as fast as you can!'
                     thrown = 0
                     tries = 0
@@ -1576,7 +1576,7 @@ adventures:
                     _
                     _
                     _
-                    {print} 'Yes! You have thrown 6 in ' tries ' tries.'
+                    {print} ('Yes! You have thrown 6 in ', tries, ' tries.')
                     ```
     dishes:
         name: Dishes?
@@ -1954,12 +1954,12 @@ adventures:
                     Can you program this verse in the same way as the example?
                 example_code: |
                     ```
-                    {define} song {with} place
-                        {print} 'My Bonnie is over the ' place
+                    {def} song(place):
+                        {print} ('My Bonnie is over the ', place)
 
-                    {call} song {with} 'ocean'
-                    {call} song {with} 'sea'
-                    {call} song {with} 'ocean'
+                    song('ocean')
+                    song('sea')
+                    song('ocean')
                     ```
                 story_text_2: |
                     In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
@@ -1972,16 +1972,16 @@ adventures:
                     You should finish the line of code by calling the function that calculates the new price.
                 example_code_2: |
                     ```
-                    {define} calculate_new_price {with} amount, percentage
+                    {def} calculate_new_price(amount, percentage):
                         percentage = percentage / 100
                         discount_amount = amount * percentage
                         {return} amount - discount_amount
 
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
+                    old_price = {input} ('How much is on the price tag?')
+                    discount = {input} ('What percentage is the discount?')
 
-                    new_price = _ calculate_new_price {with} old_price, _
-                    {print} 'The new price is ' new_price ' dollar'
+                    new_price = _ calculate_new_price(old_price, _)
+                    {print}('The new price is ', new_price, ' dollar')
                     ```
                 story_text_3: |
                     Let's make functions the Pythons way! To define a function, we no longer use:
@@ -2071,12 +2071,12 @@ adventures:
                     answer = []
                     guessed_letters = _
                     mistakes_made = _
-                    amount_letters = {ask} _
+                    amount_letters = {input} _
                     _ = 'False'
 
                     # Choosing the answer
                     {for} _
-                        letter = {ask} 'Player 1, what is letter ' i '?'
+                        letter = {input} ('Player 1, what is letter ', i ,'?')
                         _
                         {add} '_' {to_list} _
 
@@ -2118,7 +2118,7 @@ adventures:
                     {while} game_over _
                         guess = _
                         {if} _
-                            {for} i {in} {range} 1 {to} amount_letters:
+                            {for} i {in} {range} (1,amount_letters):
                                 {if} answer[i] == guess:
                                     guessed_letters[i] = guess
                             {print} _
@@ -2159,7 +2159,7 @@ adventures:
                 example_code: |
                     ```
                     # Create a function that draws the hangman
-                    {define} draw_hangman {with} step:
+                    {def} draw_hangman(step):
                         {if} step == 1:
                             {color} white
                             {forward} -100
@@ -2387,23 +2387,23 @@ adventures:
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
                     good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
-                    {print} 'You are standing in front of an old mansion'
-                    {print} 'Something is not right here'
-                    {print} 'You hear ' _
-                    {print} 'You are going to explore it'
-                    {print} 'You enter the kitchen and see a lighter, a raw ham and a garlic.'
-                    your_weapon = {ask} 'What do you bring with you?'
-                    {print} 'With your ' your_weapon ' you enter the living room'
-                    {print} 'There you find a ' _
+                    {print} ('You are standing in front of an old mansion')
+                    {print} ('Something is not right here')
+                    {print} ('You hear ', _)
+                    {print} ('You are going to explore it')
+                    {print} ('You enter the kitchen and see a lighter, a raw ham and a garlic.')
+                    your_weapon = {input} ('What do you bring with you?')
+                    {print} ('With your ', your_weapon, ' you enter the living room')
+                    {print} ('There you find a ', _)
                     needed_weapon = _
-                    {if} your_weapon == needed_weapon
-                        {print} 'You use your ' your_weapon
+                    {if} your_weapon == needed_weapon:
+                        {print} ('You use your ', your_weapon)
                         {print} _
-                        {print} 'YOU WIN!'
-                    {else}
-                        {print} 'You have chosen the wrong weapon...'
+                        {print} ('YOU WIN!')
+                    {else}:
+                        {print} ('You have chosen the wrong weapon...')
                         {print} _
-                        {print} 'GAME OVER'
+                        {print} ('GAME OVER')
                     ```
     hospital:
         name: Hospital
@@ -2624,29 +2624,23 @@ adventures:
                     Here is an example of a function with arguments combined with `{ask}` commands.
                 example_code: |
                     ```
-                    {define} welcome_message {with} title, last_name, country, room_number
-                        {print} 'Welcome to Hotel Hedy, ' title ' ' last_name
-                        nice_trip {is} {ask} 'Did you have a nice trip from, ' country '?'
-                        {if} nice_trip {is} 'yes'
-                            {print} 'Lovely!'
-                        {else}
-                            {print} 'Sorry to hear that.'
-                            {print} 'Hopefully you can take a nice rest in you room.'
-                        {print} 'Your room number is ' room_number
+                    {def} welcome_message(title, last_name, country, room_number):
+                        {print} ('Welcome to Hotel Hedy, ', title, ' ', last_name)
+                        nice_trip {is} {input} ('Did you have a nice trip from ', country, '?')
+                        {if} nice_trip == 'yes':
+                            {print} ('Lovely!')
+                        {else}:
+                            {print} ('Sorry to hear that.')
+                            {print} ('Hopefully you can take a nice rest in you room.')
+                        {print} ('Your room number is ', room_number)
 
-                    {print} 'Hello. Please fill in your information to check in.'
-                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
-                    name = {ask} 'What is you last name?'
-                    homecountry = {ask} 'What country do you come from?'
+                    {print} ('Hello. Please fill in your information to check in.')
+                    title = {input} ('What is your title (mr, mrs, ms, dr, etc.)?')
+                    name = {input} ('What is your last name?')
+                    homecountry = {input}('What country do you come from?')
 
-                    {call} welcome_message {with} title, name, homecountry, 105
+                    welcome_message(title, name, homecountry, 105)
                     ```
-
-                    title = {ask} 'What is your title (mr, mrs, ms, dr, etc.)?'
-                    name = {ask} 'What is you last name?'
-                    homecountry = {ask} 'What country do you come from?'
-
-                    {call} welcome_message {with} title, name, homecountry, 105
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
@@ -2841,15 +2835,15 @@ adventures:
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
                     translation = ['hello', 'computer', 'potato']
                     score = 0
-                    {for} i {in} {range} 1 {to} 3
-                        answer = {ask} 'What does ' french_words[i] ' mean?'
+                    {for} i {in} {range} (1,3):
+                        answer = {input} ('What does ', french_words[i], ' mean?')
                         correct = translation[i]
-                        {if} answer == correct
-                            {print} 'Correct!'
+                        {if} answer == correct:
+                            {print} ('Correct!')
                             score = score + 1
-                        {else}
-                            {print} 'Wrong, ' french_words[i] ' means ' translation[i]
-                    {print} 'You gave ' score ' correct answers.'
+                        {else}:
+                            {print} ('Wrong, ', french_words[i], ' means ', translation[i])
+                    {print} ('You gave ', score, ' correct answers.')
                     ```
     maths:
         name: maths
@@ -3384,21 +3378,21 @@ adventures:
                     Finish this code by filling in the blanks!
                 example_code: |
                     ```
-                    _ calculate_budget {with} wish, money, allowance
+                    _ calculate_budget(wish, money, allowance):
                         to_save = wish - money
                         weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
-                        {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
+                        {if} wish _ money:
+                            {print} ('You need to save up some more!')
+                            {print} ("You'll need ', weeks, ' more weeks.")
+                        {else}:
+                            {print} ('Great! You have enough')
+                            {print} ("Let's go shopping!")
 
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
+                    money = {input}('How much money have you saved?')
+                    wish = {input}('How much money do you need?')
+                    allowance = {input}('How much pocket money do you get each week?')
 
-                    {call} _
+                    _
                     ```
     pressit:
         name: Key presses
@@ -3573,7 +3567,7 @@ adventures:
                 example_code: |
                     ```
                     name = 'Hedy the Robot'
-                    {print} 'Hello ' name
+                    {print} ('Hello ', name)
                     ```
                 story_text_2: |
                     **All items in lists need quotation marks too**
