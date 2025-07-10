@@ -1570,6 +1570,7 @@ def render_code_in_editor(level):
     adventures = [a]
 
     return render_template("code-page.html",
+                           lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
                            specific_adventure=True,
                            level_nr=str(level),
                            level=level,

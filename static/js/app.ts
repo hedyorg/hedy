@@ -381,6 +381,10 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
   attachMainEditorEvents(theGlobalEditor);
   theGlobalEditor.contents = options.code;
+  for (const el of document.querySelectorAll('*[data-loading]')) {
+    el.removeAttribute('data-loading');
+    el.removeAttribute('disabled');
+  }
   initializeDebugger({
     editor: theGlobalEditor,
     level: theLevel,
