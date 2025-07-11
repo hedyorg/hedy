@@ -38,7 +38,7 @@ from prefixes.normal import get_num_sys
 HEDY_MAX_LEVEL = MAX_LEVEL
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
 MAX_LINES = 100
-LEVEL_STARTING_INDENTATION = 8
+LEVEL_STARTING_INDENTATION = 9
 
 # Boolean variables to allow code which is under construction to not be executed
 local_keywords_enabled = True
@@ -337,7 +337,7 @@ commands_and_types_per_level = {
     Command.print: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
-        12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+        6: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
@@ -375,20 +375,20 @@ commands_and_types_per_level = {
         15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list, HedyType.boolean]
     },
     Command.addition: {
-        6: [HedyType.integer, HedyType.input],
-        12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
+        1: [HedyType.integer, HedyType.input],
+        6: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
     },
     Command.subtraction: {
         1: [HedyType.integer, HedyType.input],
-        12: [HedyType.integer, HedyType.float, HedyType.input],
+        6: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.multiplication: {
         1: [HedyType.integer, HedyType.input],
-        12: [HedyType.integer, HedyType.float, HedyType.input],
+        6: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.division: {
         1: [HedyType.integer, HedyType.input],
-        12: [HedyType.integer, HedyType.float, HedyType.input],
+        6: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.repeat: {7: [HedyType.integer, HedyType.input]},
     Command.for_list: {10: {HedyType.list}},
@@ -650,10 +650,6 @@ class ExtractAST(Transformer):
         if isinstance(args[1], Tree) and "random" in args[1].data:
             return Tree('list_access', [args[0], 'random'], meta)
         return Tree('list_access', [args[0], args[1]], meta)
-
-    # level 5
-    def error_unsupported_number(self, meta, args):
-        return Tree('unsupported_number', [''.join([str(c) for c in args])], meta)
 
 
 # This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
@@ -1338,10 +1334,6 @@ class IsValid(Filter):
         raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=self.level,
                                                  guessed_command=suggestion, line_number=meta.line,
                                                  fixed_code=fixed_code, fixed_result=result)
-
-    def error_unsupported_number(self, meta, args):
-        # add in , line=meta.line, column=meta.column
-        raise exceptions.UnsupportedFloatException(value=''.join(str(args[0])))
 
     def error_condition(self, meta, args):
         raise exceptions.UnquotedEqualityCheckException(line_number=meta.line)
