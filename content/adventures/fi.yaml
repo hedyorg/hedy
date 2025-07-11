@@ -27,6 +27,16 @@ adventures:
                     Käytä ainakin yden kerran `{ask}` ja `{echo}` komentoja.
                     Tarinan aiheena voi olla mitä vain.
                     Jos et keksi tarinalle aihetta, käytä vaikka jotain näistä: menossa elokuviin, urheiluottelu, tai päivä eläintarhassa.
+
+                answer_code: |
+                    ```
+                    {print} Hei lapset! Tänään menemme eläintarhaan!
+                    {ask} Minkä eläimen näemme ensin?
+                    {echo} Mennään
+                    {print} Koska on todella kuuma, mennään hakemaan jäätelöä!
+                    {ask} Minkä maun haluatte?
+                    {echo} Hyvä valinta! Minäkin valitsen maun
+                    ```
             2:
                 story_text: |
                     Tasolla 2 voit tehdä tarinastasi vieläkin hauskemman. Päähahmosi nimi voi nyt olla missä tahansa kohtaa lausetta.
@@ -53,6 +63,21 @@ adventures:
                     Muuta `{ask}` komennot ja `{echo}` komennot koodissasi oikeaan muotoon, jonka olet oppinut tällä tasolla.
 
                     **Lisätehtävä** Lisää `{sleep}` komento koodiin lisätäksesi jännitystä tarinaasi.
+
+                answer_code: |
+                    ```
+                    {print} Hei lapset! Tänään menemme eläintarhaan! 
+                    {sleep} 3 
+                    animal {is} {ask} Minkä eläimen näemme ensin? 
+                    {sleep} 1 
+                    {print} Mennään eläimen luo
+                    {sleep} 
+                    {print} Koska on todella kuuma, mennään hakemaan jäätelöä! 
+                    {sleep} 
+                    flavor {is} {ask} Minkä maun haluatte? 
+                    {sleep} 2 
+                    {print} Hyvä valinta! Minäkin valitsen maun 
+                    ```
             3:
                 story_text: |
                     Tasolla 3 voit tehdä tarinastasi vieläkin hauskemman. Voit käyttää satunnaisuutta mille tahansa hirviölle, eläimelle tai muulle esteelle, tällä tavalla:
