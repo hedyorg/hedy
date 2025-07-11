@@ -111,6 +111,19 @@ adventures:
                     poista {is} {ask} Mikä esine hänen kannattaisi poistaa?
                     {remove} poista {from} laukku
                     ```
+                answer_code: |
+                    ```
+                    eläimet {is} leijona, seepra, flamingo
+                    {print} Hei lapset! Tänään menemme eläintarhaan!
+                    suosikki_eläin {is} {ask} Minkä eläimen luo te haluaisitte mennä tänään?
+                    {add} suosikki_eläin {to} eläimet
+                    {sleep} 2
+                    {print} Siirrytään eläinten luo {at} {random}
+                    {sleep}
+                    vähiten_suosikki_eläin {is} {ask} Mitä eläintä ette halua nähdä?
+                    {remove} vähiten_suosikki_eläin {from} eläimet
+                    {print} Siirrytään nyt eläinten luo {at} {random}!
+                    ```
             4:
                 story_text: |
                     ### Harjoitus
@@ -132,6 +145,33 @@ adventures:
                     {print} _ Hän kuulee _ eläimet {at} {random} _ äänen _
                     {print} nimi _ pelkää, että metsässä kummittelee _
                     ```
+                answer_code: |
+                    ```
+                    eläimet {is} leijona, seepra, flamingo
+                    {print} Hei lapset! Tänään menemme eläintarhaan!
+                    suosikki_eläin {is} {ask} Minkä eläimen luo te haluaisitte mennä tänään?
+                    {add} suosikki_eläin {to} eläimet
+                    {sleep} 2
+                    {print} Siirrytään eläinten luo {at} {random}
+                    {sleep}
+                    vähiten_suosikki_eläin {is} {ask} Mitä eläintä ette halua nähdä?
+                    {remove} vähiten_suosikki_eläin {from} eläimet
+                    {print} Siirrytään nyt eläinten luo {at} {random}!
+                    ```
+
+                answer_code_2: |
+                    ```
+                    nimi {is} {ask} "Mikä sinun nimesi on?"
+                    {print} "Päähenkilön nimi on " nimi
+                    {sleep} 3
+                    {clear}
+                    {print} nimi " menee nyt kävelemään metsään "
+                    {print} nimi " on vähän peloissaan "
+                    eläimet {is} 🦔, 🐿, 🦉, 🦇
+                    {print} "Hän kuulee äänen " eläimet {at} {random}
+                    {print} nimi " pelkää, että tämä on kummitusmetsä "
+                    ```    
+
             5:
                 story_text: |
                     Tällä tasolla voit ohjelmoita erilaisia loppuja, jotka tekevät tarinastasi vieläkin hauskemman.
@@ -157,6 +197,16 @@ adventures:
                     {if} loppu {is} hyvä {print} nimi 'tarttuu miekkaan ja hirviö juoksee vikkelään pois'
                     {else} {print} nimi 'joutuu hirviön syömäksi'
                     ```
+
+                answer_code: |
+                    ```
+                    nimi {is} {ask} 'Kuka on sankari?'
+                    {print} 'Voi ei, kone putoaa, kuka pelastaa meidät?'
+                    {print} "Katso kuka lentää ilmassa, se on " nimi 
+                    loppu {is} {ask} 'Pelastatko koneen vai tuhoatko sen?'
+                    {if} loppu {is} pelasta {print} nimi " laski koneen maahan, hän pelasti meidät!"
+                    {else} {print} "Voi ei! " nimi " tuhoaa koneen, auttakaa!"
+                    ```
             8:
                 story_text: |
                     Tarinassa joku sanoo sanan monta kertaa. Esimerkiksi, kun joku huutaa apua tai laulaa laulun.
@@ -170,6 +220,12 @@ adventures:
                     {repeat} 5 {times} {print} 'Apua!'
                     {print} 'Miksei kukaan auta minua?'
                     ```
+
+                answer_code: |
+                    ```
+                    {print} 'Kaikki lapset halusivat mennä eläintarhaan ja huusivat sitä koko ajan!' 
+                    {repeat} 3 {times} {print} "Mennään eläintarhaan!"
+                    ```    
             9:
                 story_text: |
                     Tällä tasolla voit käyttää useita rivejä `{if}` komennoissasi, tällä tavoin voit päivittää hyvän tai huonon loppusi!
@@ -193,6 +249,19 @@ adventures:
                         {print} 'Voi ei! Riku on liian hidas...'
                         {print} _
                     ```
+
+                answer_code: |
+                    ```
+                    {print} 'VOI EI! T-rex lähestyy!' 
+                    loppu = {ask} 'Haluatko onnellisen vai surullisen lopun?' 
+                    {if} loppu {is} onnellisen
+                        {print} 'Juuri ajoissa Richard hyppää takaisin aikakoneeseen!' 
+                        {print} 'Hän teleporttautuu kotiinsa ja on nyt turvassa!' 
+                    {else} 
+                        {print} 'Voi ei! Richard on liian hidas...' 
+                        {print} 'T-rex syö hänet!' 
+                    ```    
+
             10:
                 story_text: |
                     Tällä tasolla voit käyttää `{if}` ja `{repeat}` komentoja muiden `{if}` ja `{repeat}` komentojen sisällä.
@@ -221,6 +290,41 @@ adventures:
                     {else}
                         {print} 'Roosa lähtee kotiin'
                     ```
+
+                    answer_code: |
+                        ```
+                        {print} 'Robin kävelee keskustaan' 
+                        sijainti = {ask} 'Meneekö Robin kauppaan vai kotiin?' 
+                        {if} sijainti {is} kauppaan
+                            {print} 'Hän astuu kauppaan.' 
+                            {print} 'Robin näkee mielenkiintoisen näköisen kirjan' 
+                            kirja = {ask} 'Ostaako Robin kirjan?' 
+                            {if} kirja {is} kyllä
+                                {print} 'Robin ostaa kirjan ja menee kotiin' 
+                            {else} 
+                                {print} 'Robin lähtee kaupasta ja menee kotiin' 
+                        {else} 
+                            {print} 'Robin menee kotiin'
+                        ```
+
+                    answer_code_2: |
+                        ```
+                        {print} 'Robin kävelee keskustaan'
+                        sijainti = {ask} 'Meneekö Robin kauppaan vai kotiin?'
+                        {if} sijainti {is} kauppaan 
+                            {print} 'Hän astuu kauppaan.'
+                            {print} 'Robin näkee mielenkiintoisen näköisen kirjan'
+                            kirja = {ask} 'Ostaako Robin kirjan?'
+                            {if} kirja {is} kyllä
+                                {print} 'Robin ostaa kirjan.'
+                            {else}
+                                {print} 'Robin poistuu kaupasta.'
+                        kuljetus = {ask} 'Ottaako Robin polkupyörän kotiin vai julkisen liikenteen?'
+                        {if} kuljetus = polkupyörän 
+                            {print} 'Robin menee kotiin polkupyörällään.'
+                        {else}
+                            {print} 'Robin menee kotiin julkisella liikenteellä.'
+                        ```
             11:
                 story_text: |
                     Tällä tasolla voit käyttää `{for}` komentoa tarinassasi. Tällä tavalla pystyt helposti ohjelmoimaan lasten kirjan 'Brown bear, Brown bear, what do you see'.
@@ -229,6 +333,27 @@ adventures:
 
                     Vilkaise <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> tarinaa</a> jos et tunne sitä, ja varmista, että tulostat sen kuten se on kirjassa.
                 example_code: "```\neläimet = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+
+                answer_code: |
+                    ```
+                    eläimet = Punaisen linnun, Keltaisen ankan, Sinisen hevosen, Vihreän sammakon, Violetin kissan, Valkoisen koiran, Mustan lampaan, Kultakalan, Opettajan
+
+                    {print} 'Mitä näet?'
+                    {for} eläin {in} eläimet 
+                        {print} 'Näen ' eläin ' katsovan minua.'
+                        {repeat} 2 {times}
+                            {print} eläin ','
+                        {print} 'Mitä sinä näet?'
+                        {sleep}
+                    {repeat} 2 {times}
+                        {print} 'Lapset, '
+                    {print} 'Mitä te näette?'
+                    {print} 'Me näemme '
+                    {for} eläin {in} eläimet 
+                        {print} eläin ','
+                    {print} 'katsomassa meitä'
+                    {print} "Sen me näemme"
+                    ```
             16:
                 story_text: |
                     Jos käytät `{while}` looppia voit tehdä tarinoistasi mielenkiintoisempia. Esimerkiksi, voit käyttää `{while} game == 'on'` jolloin voit pelata kunnes peli päättyy.
@@ -250,6 +375,13 @@ adventures:
                             {print} sijainti ' - Ne eivät olleet siellä.'
                     {print} 'Nyt voit mennä taloon!'
                     ```
+
+
+                answer_code: |
+                    ```
+                    ### Oma vastaus 
+                    ```
+
             13:
                 story_text: |
                     Nyt tulostamme uuden tarinan, mutta tällä kertaa meidän täytyy käyttää sulkeita `{print}` komennon kanssa.
