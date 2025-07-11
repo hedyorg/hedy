@@ -72,6 +72,8 @@ jobs:
         ref: ${{ steps.branch.outputs.branch }}
         repository: ${{ steps.branch.outputs.repo }}
         token: ${{ steps.secret.outputs.secret }}
+        # The git credentials need to be non-accessible to downstream steps
+        persist-credentials: false
 
     #----------------------------------------------------------------------
     #  Actual build
@@ -121,8 +123,7 @@ jobs:
 
     #----------------------------------------------------------------------
     #  Commit back
-    # For some reason, we must supply the token here again, even though
-    # we already supplied it during checkout.
+    # Supply the token here again
     - name: Commit changed files (with token)
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
       with:
