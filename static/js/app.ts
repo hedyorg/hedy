@@ -29,12 +29,13 @@ export let theModalEditor: HedyEditor;
 export let theGlobalSourcemap: { [x: string]: any; };
 export const theLocalSaveWarning = new LocalSaveWarning();
 const editorCreator: HedyCodeMirrorEditorCreator = new HedyCodeMirrorEditorCreator();
+
 let last_code: string;
 
 /**
  * Represents whether there's an open 'ask' prompt
  */
-let askPromptOpen = false;
+let askPromptOpen = true;
 /**
  * Represents whether there's an open 'sleeping' prompt
  */
@@ -1893,3 +1894,5 @@ export function open_index_dropdown(e: Event) {
   const opened_level_button = opened_pane?.previousElementSibling
   opened_level_button?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
+
+// A comment here to test
