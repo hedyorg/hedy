@@ -27,6 +27,7 @@
                     {% if slide['editor'] %}
                     <iframe class="fragment" src="{{ slide['editor'] }}"></iframe>
                     {% endif %}
+                    <aside class="notes">{{ slide['notes'] }}</aside>
                 </textarea>
             </section>
           {% endfor %}
