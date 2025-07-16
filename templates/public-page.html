@@ -8,11 +8,6 @@
                 {% else %}
                     <img src="{{static('/images/Hedy-logo.png')}}" class="w-64" alt="{{_('profile_logo_alt')}}">
                 {% endif %}
-                {% if has_certificate %}
-                    <button class="green-btn text-white px-10 py-4" onclick="window.location={{'\'/certificate/'~user_info.username~'\''}}">
-                        {{ certificate_message }}
-                    </button>
-                {% endif %}
             </div>
         </div>
         <div class="flex flex-col gap-1 w-full h-full max-w-3xl md:justify-center">
