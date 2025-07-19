@@ -381,19 +381,6 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
-        6:
-            header: Another new command
-            text: |-
-                If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.
-
-                With `{in}` you can let the computer check if an item is in a list, for example:
-
-                Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
-            code: |-
-                pretty_colors {is} green, yellow
-                favorite_color {is} {ask} 'What is your favorite color?'
-                {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                {else} {print} 'meh'
         7:
             header: Debugging
             text: Let's debug this code!
@@ -1183,21 +1170,3 @@ levels:
         5:
             header: Let's try it out!
             text: Enjoy the adventures in level 17!
-    18:
-        1:
-            header: Welcome to level 18
-            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
-        2:
-            header: The Python way
-            text: |-
-                We arrived at real Python code! That means we need to use parentheses with print and range from now on.
-
-                Also, if you want to print more than one item, you need to separate them by commas.
-
-                The final change we will need to make to get Python code is changing ask into input.
-
-                Click on the 'print' tab for all the examples.
-            editor: /hedy/18
-        3:
-            header: The very last adventures!
-            text: Enjoy the very last adventures in level 18!
