@@ -381,19 +381,6 @@ levels:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
-        6:
-            header: Another new command
-            text: |-
-                If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.
-
-                With `{in}` you can let the computer check if an item is in a list, for example:
-
-                Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
-            code: |-
-                pretty_colors {is} green, yellow
-                favorite_color {is} {ask} 'What is your favorite color?'
-                {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                {else} {print} 'meh'
         7:
             header: Debugging
             text: Let's debug this code!
