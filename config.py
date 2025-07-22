@@ -1,5 +1,10 @@
 import os
 import socket
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).parent
+CONTENT_DIR = ROOT_DIR / 'content'
+GRAMMARS_DIR = ROOT_DIR / 'grammars'
 
 app_name = os.getenv('HEROKU_APP_NAME', socket.gethostname())
 dyno = os.getenv('DYNO')
