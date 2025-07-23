@@ -1705,7 +1705,7 @@ def tryit(level, program_id):
         if adventure.save_info:
             completed = i
     return render_template(
-        "hedy-page/code-page.html",
+        "code-page.html",
         level_nr=str(level_number),
         level=level_number,
         current_page='tryit',
@@ -1891,24 +1891,27 @@ def render_code_in_editor(level):
         editor_contents=code)
     adventures = [a]
 
-    return render_template("code-page.html",
-                           specific_adventure=True,
-                           level_nr=str(level),
-                           level=level,
-                           adventures=adventures,
-                           raw=True,
-                           menu=False,
-                           blur_button_available=False,
-                           # See initialize.ts
-                           javascript_page_options=dict(
-                               page='code',
-                               lang=g.lang,
-                               level=level,
-                               adventures=adventures,
-                               initial_tab='start',
-                               current_user_name=current_user()['username'],
-                               suppress_save_and_load=True,
-                           ))
+    return render_template(
+        "code-page.html",
+        specific_adventure=True,
+        level_nr=str(level),
+        level=level,
+        adventures=adventures,
+        raw=True,
+        menu=False,
+        blur_button_available=False,
+        lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
+        # See initialize.ts
+        javascript_page_options=dict(
+            page='code',
+            lang=g.lang,
+            level=level,
+            adventures=adventures,
+            initial_tab='start',
+            current_user_name=current_user()['username'],
+            suppress_save_and_load=True
+        )
+    )
 
 
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
@@ -1958,37 +1961,38 @@ def get_specific_adventure(name, level, mode):
     initial_tab = name
     initial_adventure = adventures[0]
 
-    return render_template("code-page.html",
-                           specific_adventure=True,
-                           level_nr=str(level),
-                           lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
-                           level=level,
-                           prev_level=prev_level,
-                           next_level=next_level,
-                           max_level=hedy.HEDY_MAX_LEVEL,
-                           customizations=customizations,
-                           hide_cheatsheet=None,
-                           enforce_developers_mode=None,
-                           teacher_adventures=[],
-                           adventures=adventures,
-                           initial_tab=initial_tab,
-                           initial_adventure=initial_adventure,
-                           latest=version(),
-                           raw=raw,
-                           progress=0,
-                           menu=not raw,
-                           blur_button_available=False,
-                           current_user_is_in_class=len(current_user().get('classes') or []) > 0,
-                           # See initialize.ts
-                           javascript_page_options=dict(
+    return render_template(
+        "code-page.html",
+        specific_adventure=True,
+        level_nr=str(level),
+        lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
+        level=level,
+        prev_level=prev_level,
+        next_level=next_level,
+        max_level=hedy.HEDY_MAX_LEVEL,
+        customizations=customizations,
+        hide_cheatsheet=None,
+        enforce_developers_mode=None,
+        teacher_adventures=[],
+        adventures=adventures,
+        initial_tab=initial_tab,
+        initial_adventure=initial_adventure,
+        latest=version(),
+        raw=raw,
+        progress=0,
+        menu=not raw,
+        blur_button_available=False,
+        current_user_is_in_class=len(current_user().get('classes') or []) > 0,
+        # See initialize.ts
+        javascript_page_options=dict(
 
-                               page='code',
-                               lang=g.lang,
-                               level=level,
-                               adventures=adventures,
-                               initial_tab='',
-                               current_user_name=current_user()['username'],
-                           ))
+            page='code',
+            lang=g.lang,
+            level=level,
+            adventures=adventures,
+            initial_tab='',
+            current_user_name=current_user()['username'],
+        ))
 
 
 @app.route('/embedded/<int:level>', methods=['GET'])
@@ -2371,6 +2375,7 @@ def get_slides(level):
         add_used_slides_to_subscription(email)
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
+    print("HERE ", slides[2])
     return render_template('slides.html', level=level, slides=slides)
 
 
