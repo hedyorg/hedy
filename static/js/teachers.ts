@@ -420,6 +420,8 @@ export function save_customizations(class_id: string) {
     }).done(function (response) {
       modal.notifySuccess(response.success);
       $('#remove_customizations_button').removeClass('hidden');
+      // TODO: this is not needed anymore so need to come back to it
+      // and remove it
       // Since the `sorted_adventures` section contains `quiz` and `parsons`
       // It needs to be synched with the updates that aren't done through HTMX
       // Therefore we trigger an input trigger, which in turn will call the
