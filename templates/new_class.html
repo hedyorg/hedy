@@ -1,0 +1,69 @@
+{% extends "auth.html" %}
+{% block regular_content %}
+<div class="flex flex-col">
+    <h1 class="md:px-16 ">{{ _('create_class') }}</h1>
+    <form id="create_class_form" onsubmit="hedyApp.create_class(this); event.preventDefault();">
+        <div class="flex flex-col md:px-16 my-5 w-full md:w-2/3">
+            <div class="flex flex-col mx-2 mb-10">
+                <div class="flex flex-row gap-20 items-center mb-10" >
+                    <label for="class_name" class="text-xl">Class name</label>
+                    <input type="text" id="class_name" name="class_name" class="border border-gray-300 rounded-lg p-2 w-2/3" required>
+                </div>
+                <div class="flex flex-row gap-10 mb-5">
+                    <div>
+                        <input type="radio" name="creation_type" required value="standard">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="submitted" class="text-xl">Standard new class</label>
+                        <p class="mt-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ipsum reprehenderit qui
+                            ab, explicabo veniam quo fugit commodi laudantium iusto labore laborum optio, iste deserunt
+                            tempora illum repellat modi praesentium?</p>
+                    </div>
+                </div>
+                <div class="flex flex-row gap-10 mb-5">
+                    <div>
+                        <input type="radio" name="creation_type" required value="copy">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="submitted" class="text-xl">Copy from an existing class</label>
+                        <p class="mt-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ipsum reprehenderit qui
+                            ab, explicabo veniam quo fugit commodi laudantium iusto labore laborum optio, iste deserunt
+                            tempora illum repellat modi praesentium?</p>
+                        {% if not teacher_classes %}
+                            <p>You don't have any classes to copy from </p>
+                        {% else %}
+                            <div class="flex flex-row">
+                                <span class="">Class name</span>
+                                <select class="ml-2 border border-gray-300 rounded-lg p-1 w-1/2" name="class_to_copy" id="class_to_copy">
+                                    {% for class in teacher_classes %}
+                                        <option value="{{ class.id }}">{{ class.name|e }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="flex flex-row items-center gap-2">
+                                <label class="switch">
+                                    <input id="copy_second_teachers" type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <label for="copy_second_teachers">Also copy second teachers?</label>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="flex flex-row gap-10 mb-5">
+                    <div>
+                        <input type="radio" name="creation_type" required value="plain">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label for="submitted" class="text-xl">Class without adventures</label>
+                        <p class="mt-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ipsum reprehenderit qui
+                            ab, explicabo veniam quo fugit commodi laudantium iusto labore laborum optio, iste deserunt
+                            tempora illum repellat modi praesentium?</p>
+                    </div>
+                </div>
+            </div>
+            <button class="green-btn-new w-fit" >{{_('ok')}}</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

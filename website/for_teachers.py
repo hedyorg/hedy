@@ -219,12 +219,83 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
         for _class in teacher_classes:
-            _class['date'] = utils.localized_date_format(_class['date'])
+            _class['date'] = utils.localized_date_format(_class['date'], only_date=True)
         logger.info(teacher_classes)
         return render_template("for-teachers/classes.html",
                                current_page="classes",
                                page_title=gettext("classes"),
-                               teacher_classes=teacher_classes)
+                               teacher_classes=teacher_classes,
+                               javascript_page_options=dict(
+                                   page='classes',
+                               ))
+
+    @route("/class/new", methods=["GET"])
+    @requires_teacher
+    def new_class(self, user):
+        if not is_teacher(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        return render_template(
+            "new_class.html",
+            current_page="new_page",
+            page_title=gettext("new_class_page"),
+            teacher_classes=teacher_classes,
+            javascript_page_options=dict(
+                page='new-class'
+            ))
+    
+    @route("/redesign/class/<class_id>", methods=["GET"])
+    @requires_login
+    def get_class_redesign(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        session['class_id'] = class_id
+
+        return render_template(
+            "for-teachers/view-class.html",
+            current_page="view-class",
+            # TODO: maybe change this title
+            page_title=gettext("title_class-overview"),
+            _class=Class,
+            javascript_page_options=dict(
+                page="view-class"
+            )
+        )
+    
+    @route("/redesign/class/<class_id>/graph", methods=["GET"])
+    @requires_login
+    def get_class_graph(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        session['class_id'] = class_id
+        students = Class.get("students", [])
+        graph_students = []
+        
+        level = 1
+        #TODO esta funcion luego la voy a romper en partes, por ejemplo la parte de 
+        # calcular el grafico de los estudiantes deberia ir aqui
+        _, _, _, _, _, graph_students, _ = self.get_grid_info(user, class_id, level)
+        return render_template(
+            "for-teachers/performance-graph.html",
+            current_page="performance-graph",
+            page_title=gettext("title_performance_graph"),
+            _class=Class,
+            javascript_page_options=dict(
+                page="performance-graph",
+            ),
+            graph_options=dict(
+                level=level,
+                graph_students=graph_students,
+            )
+        )
 
     @route("/class/<class_id>", methods=["GET"])
     @requires_login
@@ -1764,7 +1835,7 @@ def get_customizations(db, class_id):
     return customizations
 
 
-def _create_customizations(db, class_id):
+def _create_customizations(db, class_id, include_adventures=True):
     """
     Create customizations for a given class.
 
@@ -1776,8 +1847,11 @@ def _create_customizations(db, class_id):
         customizations (dict): The customizations for the class.
     """
     sorted_adventures = {}
-    for lvl, adventures in hedy_content.adventures_order_per_level().items():
-        sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+    if include_adventures:
+        for lvl, adventures in hedy_content.adventures_order_per_level().items():
+            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+    else:
+        sorted_adventures = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     customizations = {
         "id": class_id,
         "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
