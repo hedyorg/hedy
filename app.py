@@ -1591,6 +1591,7 @@ def render_code_in_editor(level):
         )
     )
 
+
 @app.route('/adventure/<name>', methods=['GET'], defaults={'level': 1, 'mode': 'full'})
 @app.route('/adventure/<name>/<level>', methods=['GET'], defaults={'mode': 'full'})
 @app.route('/adventure/<name>/<level>/<mode>', methods=['GET'])
