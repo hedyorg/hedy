@@ -26,14 +26,6 @@
                     {{ adventure_tab(adventure.short_name, adventure.name, adventure.short_name == initial_tab, 'adventure' + loop.index|string, '', adventure.is_checked, loop.index) }}
                 {% endif %}
             {% endfor %}
-            <!-- Add the tab for the parsons problem (if it exists) -->
-            {% if parsons %}
-                {{ adventure_tab('parsons', _('parsons_title'), False, 'parsons', 'special_tab', False, adventures|length + 1 ) }}
-            {% endif %}
-            <!-- Add the tab for the quiz -->
-            {% if quiz %}
-                {{ adventure_tab('quiz', _('quiz_tab'), False, 'quiz', 'special_tab', False,(adventures|length + (2 if parsons else 1)) ) }}
-            {% endif %}
         </div>
       </div>
       {# PANES #}
@@ -47,17 +39,5 @@
             {% include "incl/adventure-content.html" %}
           </div>
         {% endfor %}
-        {% if parsons %}
-            <div data-tabtarget="parsons" class="hidden p-4">
-                <div>
-                    {% include 'incl/parsons.html' %}
-                </div>
-            </div>
-        {% endif %}
-        {% if quiz %}
-            <div data-tabtarget="quiz" class="hidden">
-                {% include 'quiz/incl-begin.html' %}
-            </div>
-        {% endif %}
       </div>
     </div>
