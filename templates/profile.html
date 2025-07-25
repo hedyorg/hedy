@@ -166,7 +166,7 @@
                 <label for="country" class="inline-block w-72">{{_('country')}}</label>
                 <select id="country" name="country" class="personal-input">
                     <option value="">{{_('select')}}</option>
-                    {% for alpha, name in all_countries().items() %}
+                    {% for alpha, name in all_countries() %}
                         <option value="{{ alpha }}" {% if alpha == user_data['country'] %}selected{% endif %}>{{ name }}</option>
                     {% endfor %}
                 </select>

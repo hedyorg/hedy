@@ -1,6 +1,8 @@
 import logging
 import os
 from os import path
+import iso3166
+from unidecode import unidecode
 
 import static_babel_content
 from utils import customize_babel_locale
@@ -10,6 +12,25 @@ from safe_format import safe_format
 logger = logging.getLogger(__name__)
 
 COUNTRIES = static_babel_content.COUNTRIES
+
+
+def _get_friendly_sorted_countries():
+    friendly_countries = []
+    for code, locale_name in COUNTRIES.items():
+        locale_name_starts_with_ascii = locale_name[0].isascii()
+        iso3166_english_name_normalized = unidecode(iso3166.countries.get(code).name).lower()
+        locale_name_normalized = unidecode(locale_name).lower()
+        if locale_name_starts_with_ascii or iso3166_english_name_normalized == locale_name_normalized:
+            friendly_countries.append((code, locale_name_normalized, locale_name))
+        else:
+            friendly_countries.append((code, iso3166_english_name_normalized, locale_name))
+
+    friendly_sorted_countries = sorted(friendly_countries, key=lambda c: c[1])
+
+    return list(map(lambda c: ((c[0], c[2])), friendly_sorted_countries))
+
+
+FRIENDLY_SORTED_COUNTRIES = _get_friendly_sorted_countries()
 
 MAX_LEVEL = 18
 
