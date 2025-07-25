@@ -1,104 +1,106 @@
 <div class="md:px-16 overflow-x-auto h-full" id="classes_table">
   <div class="w-full h-full mb-48">
-    <table class="w-full divide-y divide-gray-200">
-      <thead>
-        <tr class="border border-gray-200">
-          <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-lg">{{_('name')}}</th>
-          <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('teacher')}}</th>
-          <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('students')[0]|upper}}{{_('students')[1:]}}</th>
-          <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('created')}}
-          <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-lg">{{_('actions')}}</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-200 ">
-        {% for class in teacher_classes %}
-        <tr >
-          <td class="text-center">
-            <a href="/for-teachers/redesign/class/{{class.id}}" class="view_class" data-cy="view_class_link">
-              {{class.name|e}}
-            </a>
-          </td>
-          <td data-cy="teacher_cell" class="py-3 text-center">{{class.teacher}}</td>
-          <td class="text-center">{{ class.students|length }}</td>
-          <td class="text-center">{{ class.date }}</td>
-          <td class="text-center ">
-            <div class="relative inline-block text-left" name="menu">
-              <button class="blue-btn-new p-1.5 flex justify-center rounded-full"
-                    _="on click
-                      remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
-                      add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
-                      if #menu-{{loop.index}} matches .hidden
-                        remove .hidden from #menu-{{loop.index}}
-                        wait 10ms
-                        toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
-                      else
-                        toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
-                        wait 180ms
-                        add .hidden to #menu-{{loop.index}}
-                       "
-                      >
-                <i class="fa-solid fa-ellipsis"></i>
-              </button> 
-              <div id="menu-{{loop.index}}" class="hidden
-                {# For the last 5 elements we display the menu from the bottom up #}
-                {% if (teacher_classes|length > 7) and (loop.index >=  teacher_classes|length - 4)%}
-                  bottom-10
-                {% endif %}
-              z-30 menu origin-top-left absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
-                <ul class="list-none divide-y divide-gray-200 p-2">
-                  <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100">
-                    <i class="fa-solid fa-circle-check text-sm"></i>
-                      <span class="m-3">Grading</span>
-                  </li>
-                  <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4">
-                    <i class="fa-solid fa-gears text-sm"></i> <span class="m-3">Configure</span> 
-                  </li>
-                  <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100">
-                    <i class="fa-solid fa-box-archive text-sm"></i>  <span class="m-3">Archive</span> </li>
-                  <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-b-lg  text-red-700 ease-in transition duration-100">
-                    <i class="fa-solid fa-trash-can text-sm"></i> <span class="m-3">Delete</span> </li>
-                </ul>
+    <div class="w-full h-full border rounded-lg shadow-md">
+      <table class="w-full divide-y divide-gray-400">
+        <thead class="bg-gray-200 divide-y divide-gray-400">
+          <tr>
+            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('name')}}</th>
+            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('teacher')}}</th>
+            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('students')[0]|upper}}{{_('students')[1:]}}</th>
+            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('created')}}
+            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('actions')}}</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          {% for class in teacher_classes %}
+          <tr >
+            <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+              <a href="/for-teachers/redesign/class/{{class.id}}" class="view_class" data-cy="view_class_link">
+                {{class.name|e}}
+              </a>
+            </td>
+            <td data-cy="teacher_cell" class="py-3 text-center">{{class.teacher}}</td>
+            <td class="text-center">{{ class.students|length }}</td>
+            <td class="text-center">{{ class.date }}</td>
+            <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+              <div class="relative inline-block text-left" name="menu">
+                <button class="blue-btn-new p-1.5 flex justify-center rounded-full"
+                      _="on click
+                        remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
+                        add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
+                        if #menu-{{loop.index}} matches .hidden
+                          remove .hidden from #menu-{{loop.index}}
+                          wait 10ms
+                          toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
+                        else
+                          toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
+                          wait 180ms
+                          add .hidden to #menu-{{loop.index}}
+                         "
+                        >
+                  <i class="fa-solid fa-ellipsis"></i>
+                </button> 
+                <div id="menu-{{loop.index}}" class="hidden
+                  {# For the last 5 elements we display the menu from the bottom up #}
+                  {% if (teacher_classes|length > 7) and (loop.index >=  teacher_classes|length - 4)%}
+                    bottom-10
+                  {% endif %}
+                z-30 menu origin-top-left absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
+                  <ul class="list-none divide-y divide-gray-200 p-2">
+                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100">
+                      <i class="fa-solid fa-circle-check text-sm"></i>
+                        <span class="m-3">Grading</span>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4">
+                      <i class="fa-solid fa-gears text-sm"></i> <span class="m-3">Configure</span> 
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100">
+                      <i class="fa-solid fa-box-archive text-sm"></i>  <span class="m-3">Archive</span> </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-b-lg  text-red-700 ease-in transition duration-100">
+                      <i class="fa-solid fa-trash-can text-sm"></i> <span class="m-3">Delete</span> </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          </td>
-          <!--DISABLED FOR NOW :)-->
-          {#
-          <td class="text-center">
-            <div class="flex justify-center text-blue-900">
-              <button class="flex flex-col w-1/4"
-                _="on click window.open('/for-teachers/customize-class/{{class.id}}', '_self')">
-                <span class="fas fa-pen block my-auto lg:my-0"></span>
-                <span class="hidden lg:block mt-1">{{_('customize')}}</span>
-              </button>
-              <button class="flex flex-col w-1/4" data-cy="duplicate_{{class.name}}"
-                onclick='hedyApp.duplicate_class("{{class.id}}", "{{class.second_teachers}}", {{_('
-                second_teacher_copy_prompt')|default(None)|tojson}}, {{_('class_name_prompt')|default(None)|tojson}}, {%
-                if class.teacher !=username %}"{{class.name}}"{% else %}""{% endif %})'>
-                <span class="fas fa-copy block my-auto lg:my-0"></span>
-                <span class="hidden lg:block mt-1">{{_('duplicate')}}</span>
-              </button>
-              <button class="flex flex-col w-1/4"
-                _="on click window.open('/for-teachers/class/{{class.id}}/preview', '_self')">
-                <span class="fas fa-eye block my-auto lg:my-0"></span>
-                <span class="hidden lg:block mt-1">{{_('preview')}}</span>
-              </button>
-              <button data-cy="remove_class" class="flex flex-col w-1/4" hx-confirm="{{_('delete_class_prompt')}}"
-                hx-trigger="click" hx-delete="/class/{{class.id}}" hx-target="#classes_table" hx-swap="outerHTML">
-                <span class="fas fa-trash block text-red-700 my-auto lg:my-0"></span>
-                <span class="text-red-700 hidden lg:block mt-1">{{_('remove')}}</span>
-              </button>
-            </div>
-          </td>
-          #}
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-       <a class="blue-btn-new inline-flex items-center mt-10"
-           id="create_class_button"
-           data-cy="create_class_button"
-           href="/for-teachers/class/new"
-          {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}
-        </a>
+            </td>
+            <!--DISABLED FOR NOW :)-->
+            {#
+            <td class="text-center">
+              <div class="flex justify-center text-blue-900">
+                <button class="flex flex-col w-1/4"
+                  _="on click window.open('/for-teachers/customize-class/{{class.id}}', '_self')">
+                  <span class="fas fa-pen block my-auto lg:my-0"></span>
+                  <span class="hidden lg:block mt-1">{{_('customize')}}</span>
+                </button>
+                <button class="flex flex-col w-1/4" data-cy="duplicate_{{class.name}}"
+                  onclick='hedyApp.duplicate_class("{{class.id}}", "{{class.second_teachers}}", {{_('
+                  second_teacher_copy_prompt')|default(None)|tojson}}, {{_('class_name_prompt')|default(None)|tojson}}, {%
+                  if class.teacher !=username %}"{{class.name}}"{% else %}""{% endif %})'>
+                  <span class="fas fa-copy block my-auto lg:my-0"></span>
+                  <span class="hidden lg:block mt-1">{{_('duplicate')}}</span>
+                </button>
+                <button class="flex flex-col w-1/4"
+                  _="on click window.open('/for-teachers/class/{{class.id}}/preview', '_self')">
+                  <span class="fas fa-eye block my-auto lg:my-0"></span>
+                  <span class="hidden lg:block mt-1">{{_('preview')}}</span>
+                </button>
+                <button data-cy="remove_class" class="flex flex-col w-1/4" hx-confirm="{{_('delete_class_prompt')}}"
+                  hx-trigger="click" hx-delete="/class/{{class.id}}" hx-target="#classes_table" hx-swap="outerHTML">
+                  <span class="fas fa-trash block text-red-700 my-auto lg:my-0"></span>
+                  <span class="text-red-700 hidden lg:block mt-1">{{_('remove')}}</span>
+                </button>
+              </div>
+            </td>
+            #}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+      <a class="blue-btn-new inline-flex items-center mt-10"
+          id="create_class_button"
+          data-cy="create_class_button"
+          href="/for-teachers/class/new"
+        {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}
+      </a>
   </div>
 </div>

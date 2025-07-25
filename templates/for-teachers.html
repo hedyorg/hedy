@@ -4,13 +4,13 @@
 <div class="flex-col">
   <h1 class="md:px-16 my-5"> {{ _('for_teachers') }} </h1>
   <div class="flex flex-row gap-4 md:px-16">
-    <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full p-8">
+    <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8">
       <h2 class="m-0 basis-1/12"><a href="/for-teachers/class/all">{{_('classes')}}</a></h2>
-      <div class="text-black basis-10/12">
+      <div class="text-black basis-10/12 text-base">
         <p>{{ _('classes_info') }}</p>
       </div>
       <div class="flex flex-row gap-3 justify-end basis-1/12">
-        <a class="green-btn-new inline-flex items-center"
+        <a class="blue-btn-new inline-flex items-center"
            id="create_class_button"
            data-cy="create_class_button"
            href="/for-teachers/class/new"
@@ -20,17 +20,17 @@
     </div>
   </div>
   <div class="flex flex-row gap-4 mt-10 md:px-16">
-    <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full p-8">
+    <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg px-10 rounded-lg w-full p-8">
       <h2 class="m-0 basis-1/12"><a href="">{{_('teaching_materials')}}</a></h2>
       <div class="text-black basis-10/12">{{ _('teaching_materials_info') }}</div>
     </div>
   </div>
   <div class="flex flex-row gap-4 mt-10 md:px-16">
-    <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full p-8">
+    <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md px-10 rounded-lg w-full p-8">
       <h2 class="m-0 basis-1/12"><a href="">{{_('adventures')}}</a></h2>
       <div class="text-black basis-10/12">{{ _('adventures_info') }}</div>
       <div class="flex gap-3 justify-end basis-1/12">
-        <button id="create_adventure_button" data-cy="create_adventure_button" class="green-btn inline-flex"
+        <button id="create_adventure_button" data-cy="create_adventure_button" class="blue-btn-new inline-flex"
           _="on click
             window.open('/for-teachers/customize-adventure', '_self')"
           data-cy="edit_link"{% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_adventure')}}</button>       
