@@ -1404,7 +1404,7 @@ def index(level, program_id):
     max_level = hedy.HEDY_MAX_LEVEL
     level_number = int(level)
     return render_template(
-        "code-page.html",
+        "hedy-page/code-page.html",
         level_nr=str(level_number),
         level=level_number,
         current_page='hedy',
@@ -2009,7 +2009,6 @@ def get_slides(level):
         add_used_slides_to_subscription(email)
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
-    print("HERE ", slides[2])
     return render_template('slides.html', level=level, slides=slides)
 
 
