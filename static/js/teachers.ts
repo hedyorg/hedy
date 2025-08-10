@@ -832,8 +832,7 @@ export interface InitializeClassPerformanceGraphPageOptions {
 }
 
 export function initializePerformanceGraphPage() {
-  console.log('Initializing performance graph page');
-  initializeGraph();
+  initializeGraph(true);
 }
 
 interface InitializeGraphOptions {
@@ -858,7 +857,7 @@ interface dataPoint {
 const MAX_BUBBLE_SIZE = 62;
 const MIN_BUBBLE_SIZE = 12;
 
-export function initializeGraph() {
+export function initializeGraph(is_redesign: boolean = false) {
   const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
   if (graphElement === undefined || graphElement === null) return;
   const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
@@ -912,15 +911,31 @@ export function initializeGraph() {
         onClick: (_e, activePoints, chart) => {
           if (activePoints.length === 0) return;
           const item: dataPoint = chart.data.datasets[0].data[activePoints[0].index] as dataPoint
+          let usernames: string[] = []
           for(const point of activePoints) {
-            console.log(chart.data.datasets[0].data[point.index])
+            const item: dataPoint = chart.data.datasets[0].data[point.index] as dataPoint
+            usernames.push(item.name)
           }
           document.getElementById('programs_container')?.classList.remove('hidden')
-          htmx.ajax(
-            'GET',
-            `/for-teachers/get_student_programs/${item.name}`,
-            '#programs_container'
-          )
+          if (is_redesign) {
+            htmx.ajax(
+              'GET',
+              `/for-teachers/redesign/get_student_programs`,
+              {
+                target: '#programs_container',
+                values: {
+                  'usernames': usernames,
+                  'level': graphData.level.toString()
+                }
+              },
+            )
+          } else {
+            htmx.ajax(
+              'GET',
+              `/for-teachers/get_student_programs/${item.name}`,
+              '#programs_container'
+            )
+          }
         },
         scales: {
           x: {

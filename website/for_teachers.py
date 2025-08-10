@@ -221,7 +221,7 @@ class ForTeachersModule(WebsiteModule):
         for _class in teacher_classes:
             _class['date'] = utils.localized_date_format(_class['date'], only_date=True)
         logger.info(teacher_classes)
-        return render_template("for-teachers/classes.html",
+        return render_template("for-teachers/classes/classes.html",
                                current_page="classes",
                                page_title=gettext("classes"),
                                teacher_classes=teacher_classes,
@@ -236,7 +236,7 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
         return render_template(
-            "new_class.html",
+            "for-teachers/classes/new-class.html",
             current_page="new_page",
             page_title=gettext("new_class_page"),
             teacher_classes=teacher_classes,
@@ -256,7 +256,7 @@ class ForTeachersModule(WebsiteModule):
         session['class_id'] = class_id
 
         return render_template(
-            "for-teachers/view-class.html",
+            "for-teachers/classes/view-class.html",
             current_page="view-class",
             # TODO: maybe change this title
             page_title=gettext("title_class-overview"),
@@ -278,13 +278,12 @@ class ForTeachersModule(WebsiteModule):
         session['class_id'] = class_id
         students = Class.get("students", [])
         graph_students = []
-        
-        level = 1
+        level = request.args.get("level", 1, type=int)
         #TODO esta funcion luego la voy a romper en partes, por ejemplo la parte de 
         # calcular el grafico de los estudiantes deberia ir aqui
         _, _, _, _, _, graph_students, _ = self.get_grid_info(user, class_id, level)
         return render_template(
-            "for-teachers/performance-graph.html",
+            "for-teachers/classes/performance-graph.html",
             current_page="performance-graph",
             page_title=gettext("title_performance_graph"),
             _class=Class,
@@ -668,6 +667,61 @@ class ForTeachersModule(WebsiteModule):
                                              },
                                              students_info=students_info
                                              )
+
+    @route("/redesign/get_student_programs", methods=["GET"])
+    @requires_teacher
+    def show_students_programs_performance_graph(self, user):
+        """
+        This function is used to show the programs of a severl students within the performance graph page
+        """
+        usernames = request.args.getlist('usernames')
+        level = request.args.get('level', type=int)
+        student = 'student1' # TODO: remove 
+        programs_per_user = {}
+        for username in usernames:
+            programs_per_user[username] = self.db.level_programs_for_user(username, level)
+
+        # Preparing the adventure names
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+        # Now that we have the adventure names, we can start processing the programs
+        programs = { username : [] for username in usernames }
+        for username, result in programs_per_user.items():
+            for item in result:
+                date = utils.delta_timestamp(item['date'])
+                # This way we only keep the first 4 lines to show as preview to the user
+                preview_code = "\n".join(item['code'].split("\n")[:4])
+                if item.get('is_modified', True):
+                    programs[username].append(
+                        {'id': item['id'],
+                        'preview_code': preview_code,
+                        'code': item['code'],
+                        'date': date,
+                        'level': item['level'],
+                        'name': item['name'],
+                        'adventure_name': item.get('adventure_name'),
+                        'submitted': item.get('submitted'),
+                        'public': item.get('public'),
+                        'number_lines': item['code'].count('\n') + 1
+                        }
+                    )
+        return jinja_partials.render_partial("for-teachers/classes/student-programs.html",
+                                             programs_per_user=programs,
+                                             adventure_names=adventure_names,
+                                             student=student
+                                             )
+
 
     @route("/get_student_programs/<student>", methods=["GET"])
     @requires_teacher
