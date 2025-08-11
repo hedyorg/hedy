@@ -26,7 +26,7 @@ doit run generate_optional_yaml_schemas
 # 'npx' does work... so we're just going to ¯\_(ツ)_/¯ and do that.
 
 schemas=$(find content -name \*.schema.json)
-
+echo $schemas
 failures=false
 
 for schema in $schemas; do

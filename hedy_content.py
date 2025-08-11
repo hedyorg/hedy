@@ -1,10 +1,10 @@
 import logging
 import os
 from os import path
+import iso3166
+from unidecode import unidecode
 
 import static_babel_content
-import utils
-
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
 from safe_format import safe_format
@@ -12,6 +12,25 @@ from safe_format import safe_format
 logger = logging.getLogger(__name__)
 
 COUNTRIES = static_babel_content.COUNTRIES
+
+
+def _get_friendly_sorted_countries():
+    friendly_countries = []
+    for code, locale_name in COUNTRIES.items():
+        locale_name_starts_with_ascii = locale_name[0].isascii()
+        iso3166_english_name_normalized = unidecode(iso3166.countries.get(code).name).lower()
+        locale_name_normalized = unidecode(locale_name).lower()
+        if locale_name_starts_with_ascii or iso3166_english_name_normalized == locale_name_normalized:
+            friendly_countries.append((code, locale_name_normalized, locale_name))
+        else:
+            friendly_countries.append((code, iso3166_english_name_normalized, locale_name))
+
+    friendly_sorted_countries = sorted(friendly_countries, key=lambda c: c[1])
+
+    return list(map(lambda c: ((c[0], c[2])), friendly_sorted_countries))
+
+
+FRIENDLY_SORTED_COUNTRIES = _get_friendly_sorted_countries()
 
 MAX_LEVEL = 18
 
@@ -47,13 +66,10 @@ KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_comm
 
 
 def adventures_order_per_level():
-    if utils.is_redesign_enabled():
-        return ADVENTURE_ORDER_PER_LEVEL
-    else:
-        return ADVENTURE_ORDER_PER_LEVEL_OLD
+    return ADVENTURE_ORDER_PER_LEVEL
 
 
-ADVENTURE_ORDER_PER_LEVEL_OLD = {
+ADVENTURE_ORDER_PER_LEVEL = {
     1: [
         'default',
         'print_command',
@@ -68,8 +84,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'fortune',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     2: [
         'default',
@@ -86,8 +100,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     3: [
         'default',
@@ -105,8 +117,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     4: [
         'default',
@@ -124,8 +134,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     5: [
         'default',
@@ -145,8 +153,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     6: [
         'default',
@@ -162,8 +168,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     7: [
         'default',
@@ -179,8 +183,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'pressit',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     8: [
         'default',
@@ -196,8 +198,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     9: [
         'default',
@@ -213,8 +213,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     10: [
         'default',
@@ -231,8 +229,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     11: [
         'default',
@@ -244,8 +240,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'haunted',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     12: [
         'default',
@@ -263,8 +257,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'secret',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
     ],
     13: [
         'default',
@@ -280,7 +272,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'hotel',
         'calculator',
         'debugging',
-        'quiz',
     ],
     14: [
         'default',
@@ -296,7 +287,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'piggybank',
         'quizmaster',
         'debugging',
-        'quiz',
     ],
     15: [
         'default',
@@ -309,7 +299,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'rock',
         'calculator',
         'debugging',
-        'quiz',
     ],
     16: [
         'default',
@@ -326,7 +315,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'simon_2',
         'simon_3',
         'debugging',
-        'quiz',
     ],
     17: [
         'default',
@@ -342,7 +330,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'blackjack_3',
         'blackjack_4',
         'debugging',
-        'quiz',
     ],
     18: [
         'default',
@@ -356,9 +343,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging'
     ]
 }
-
-ADVENTURE_ORDER_PER_LEVEL = {level: [a for a in adventures if a not in ['parsons', 'quiz']]
-                             for level, adventures in ADVENTURE_ORDER_PER_LEVEL_OLD.items()}
 
 HOUR_OF_CODE_ADVENTURES = {
     1: [
@@ -666,41 +650,6 @@ class Adventures(StructuredDataFile):
 
 class NoSuchAdventure:
     def get_adventure(self):
-        return {}
-
-
-class ParsonsProblem(StructuredDataFile):
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/parsons/{self.language}.yaml')
-
-    def get_highest_exercise_level(self, level):
-        return max(int(lnum) for lnum in self.file.get('levels', {}).get(level, {}).keys())
-
-    def get_parsons_data_for_level(self, level, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, None), keyword_lang)
-
-    def get_parsons_data_for_level_exercise(self, level, excercise, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, {}).get(excercise), keyword_lang)
-
-
-class Quizzes(StructuredDataFile):
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/quizzes/{self.language}.yaml')
-
-    def get_highest_question_level(self, level):
-        return max(int(k) for k in self.file.get('levels', {}).get(level, {}))
-
-    def get_quiz_data_for_level(self, level, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level), keyword_lang)
-
-    def get_quiz_data_for_level_question(self, level, question, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, {}).get(question), keyword_lang)
-
-
-class NoSuchQuiz:
-    def get_quiz_data_for_level(self, level, keyword_lang):
         return {}
 
 
