@@ -1194,7 +1194,7 @@ adventures:
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} 1 {to} 3
+                    {for} i {in} {range} (1, 3)
                         animal = animals[i]
                         sound = sounds[i]
                         {print} 'Old MacDonald had a farm'
@@ -3190,7 +3190,7 @@ adventures:
                 example_code: |
                     ```
                     {define} line_1
-                        {for} i {in} {range} 1 {to} 3
+                        {for} i {in} {range} (1, 3)
                             {play} G
                         {play} D
                         {for} i {in} {range} 1 {to} 2
@@ -3199,7 +3199,7 @@ adventures:
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} 1 {to} 3
+                    {for} i {in} {range} (1, 3)
                         animal = animals[i]
                         sound = sounds[i]
                         {print} 'Old MacDonald had a farm'
@@ -3591,7 +3591,7 @@ adventures:
                     {print} friends[3] ' is the third friend on the list.'
                     #now we will match 2 lists using the variable i
                     lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
+                    {for} i {in} {range} (1, 3)
                         {print} friends[i] 's lucky number is ' lucky_numbers[i]
                     ```
                 story_text_2: |-
@@ -4446,7 +4446,7 @@ adventures:
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} 1 {to} 3
+                    {for} i {in} {range} (1, 3)
                         animal = _
                         sound = _
                         {print} 'Old MacDonald had a farm'
@@ -4463,10 +4463,10 @@ adventures:
                     ```
                     lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
                     {for} line {in} lines
-                        {for} i {in} {range} 1 {to} 3
+                        {for} i {in} {range} (1, 3)
                             {print} line
                         {print} 'early in the morning'
-                        {for} i {in} {range} 1 {to} 3
+                        {for} i {in} {range} (1, 3)
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
@@ -4484,10 +4484,10 @@ adventures:
                     ```
                     lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
                     {for} line {in} lines _
-                        {for} i {in} {range} 1 {to} 3 _
+                        {for} i {in} {range} (1, 3) _
                             {print} _ line _
                         {print} 'early in the morning'
-                        {for} i {in} {range} 1 {to} 3
+                        {for} i {in} {range} (1, 3)
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
