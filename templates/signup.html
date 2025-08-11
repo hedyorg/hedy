@@ -105,7 +105,7 @@
                     <label class="signup-label" for="country">{{_('country')}}</label>
                     <select class="signup-input appearance-none" id="country" data-cy="country" name="country">
                         <option value="" selected disabled hidden>{{_('select')}}</option>
-                        {% for alpha, name in all_countries().items() %}
+                        {% for alpha, name in all_countries() %}
                         <option value="{{ alpha }}">{{ name }}</option>
                         {% endfor %}
                     </select>
