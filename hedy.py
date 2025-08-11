@@ -3207,10 +3207,6 @@ class ConvertToPython_13(ConvertToPython_12):
         return ' or '.join(args)
 
 
-@v_args(meta=True)
-@hedy_transpiler(level=14)
-@source_map_transformer(source_map)
-class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, meta, args, operator):
         arg0 = self.process_variable_for_comparisons(args[0], meta)
         arg1 = self.process_variable_for_comparisons(args[1], meta)
@@ -3245,10 +3241,6 @@ class ConvertToPython_14(ConvertToPython_13):
         return self.process_comparison(meta, args, "!=")
 
 
-@v_args(meta=True)
-@hedy_transpiler(level=15)
-@source_map_transformer(source_map)
-class ConvertToPython_15(ConvertToPython_14):
     def while_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         body = self.indent("\n".join(args[1:]))
@@ -3291,11 +3283,6 @@ class ConvertToPython_15(ConvertToPython_14):
         bool_pairs = [('True', 'False'), ('true', 'false')]
         return [{KEYWORDS[lang][t]: True, KEYWORDS[lang][f]: False} for t, f in bool_pairs for lang in langs]
 
-
-@v_args(meta=True)
-@hedy_transpiler(level=16)
-@source_map_transformer(source_map)
-class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, meta, args):
         name = self.unpack(args[0])
         index = self.unpack(args[1])
@@ -3309,10 +3296,6 @@ class ConvertToPython_16(ConvertToPython_15):
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
 
-@v_args(meta=True)
-@hedy_transpiler(level=17)
-@source_map_transformer(source_map)
-class ConvertToPython_17(ConvertToPython_16):
     def elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
@@ -3330,11 +3313,6 @@ class ConvertToPython_17(ConvertToPython_16):
             self.make_function(elif_function_name, elif_code) + '\n'
         )
 
-
-@v_args(meta=True)
-@hedy_transpiler(level=18)
-@source_map_transformer(source_map)
-class ConvertToPython_18(ConvertToPython_17):
     def input(self, meta, args):
         return self.ask(meta, args)
 
@@ -3349,6 +3327,36 @@ class ConvertToPython_18(ConvertToPython_17):
 
     def print_empty_brackets(self, meta, args):
         return self.print(meta, args)
+
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=14)
+@source_map_transformer(source_map)
+class ConvertToPython_14(ConvertToPython_13):
+    pass
+
+@v_args(meta=True)
+@hedy_transpiler(level=15)
+@source_map_transformer(source_map)
+class ConvertToPython_15(ConvertToPython_14):
+    pass
+
+@v_args(meta=True)
+@hedy_transpiler(level=16)
+@source_map_transformer(source_map)
+class ConvertToPython_16(ConvertToPython_15):
+    pass
+@v_args(meta=True)
+@hedy_transpiler(level=17)
+@source_map_transformer(source_map)
+class ConvertToPython_17(ConvertToPython_16):
+    pass
+@v_args(meta=True)
+@hedy_transpiler(level=18)
+@source_map_transformer(source_map)
+class ConvertToPython_18(ConvertToPython_17):
+    pass
 
 
 @v_args(meta=True)
