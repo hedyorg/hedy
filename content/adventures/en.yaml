@@ -882,7 +882,7 @@ adventures:
                     'That will be $5,50'
                     {print} 'Have a nice swim!'
                     ```
-            6:
+            7:
                 story_text: |-
                     ### Exercise
                     Debug this code. Good luck!
@@ -1291,7 +1291,7 @@ adventures:
                     ```
                     password {is} {ask} 'What is the correct password?'
                     ```
-            6:
+            7:
                 story_text: |
                     In the previous level you have practiced with `{ask}` and `{if}`. For example you can ask guests what they would like to eat.
                     What you can't yet do though, is calculate the price for everyone's dinner.
@@ -1696,11 +1696,11 @@ adventures:
                     your_prize = prizes {at} {random}
                     {print} 'You win ' your_prize
                     {if} your_prize {is} '1 million dollars'
-                        {print} 'Yeah! You are rich!'
+                    {print} 'Yeah! You are rich!'
                     {elif} your_prize {is} 'an apple pie'
-                        {print} 'Lovely, an apple pie!'
+                    {print} 'Lovely, an apple pie!'
                     {else}
-                        {print} 'Better luck next time..'
+                    {print} 'Better luck next time..'
                     ```
     for_command:
         name: '{for}'
@@ -2016,7 +2016,7 @@ adventures:
         default_save_name: guess my number
         description: guess my number
         levels:
-            6:
+            16:
                 story_text: |
                     In this level you can program the game 'Guess my number'
 
@@ -2344,7 +2344,7 @@ adventures:
                     {if} player {is} alive
                         {print} 'Great! You survived!'
                     ```
-            6:
+            7:
                 story_text: |
                     ### Exercise
                     In this level you can use the `<` and `>` symbol to introduce lives to your game.
@@ -3233,7 +3233,7 @@ adventures:
                         {print} 'E I E I O!'
                         _
                     ```
-            6:
+            16:
                 story_text: |
                     You can use the {elif} to create different options.
 
@@ -3503,7 +3503,7 @@ adventures:
         default_save_name: Quizmaster
         description: Make your own quiz!
         levels:
-            6:
+            7:
                 story_text: |
                     ### Exercise
                     In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
@@ -3518,15 +3518,15 @@ adventures:
                     {print} 'Answer option B'
                     answer = {ask} 'Which answer?'
                     {if} answer == 'A'
-                        points_a = points_a + 1
+                    points_a = points_a + 1
                     {if} answer == 'B'
-                        points_b = points_b + 1
+                    points_b = points_b + 1
                     {print} 'End of the quiz!'
                     {print} 'Lets see the results!'
                     {if} points_a > points_b
-                        {print} 'You belong to the A club'
+                    {print} 'You belong to the A club'
                     {if} points_b > points_a
-                        {print} 'You belong to the B club'
+                    {print} 'You belong to the B club'
                     ```
     quotation_marks:
         name: '''quotation marks'''
