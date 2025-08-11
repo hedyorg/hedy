@@ -17,16 +17,20 @@ elses: _EOL (_SPACE)* _ELSE (_COLON)? _EOL (_SPACE command) (_EOL _SPACE command
 
 //add input
 input_empty_brackets: var (_IS | _EQUALS ) _INPUT (_LEFT_BRACKET _RIGHT_BRACKET)
-input: var (_IS | _EQUALS) _INPUT (_LEFT_BRACKET  ((quoted_text | list_access | print_expression) (_COMMA (quoted_text | list_access | print_expression))*) _RIGHT_BRACKET)?
+input: var (_IS | _EQUALS) _INPUT _LEFT_BRACKET _print_ask_argument* _RIGHT_BRACKET
 
 //new : while loop with optional colon
 while_loop: _WHILE (_conditions) _COLON? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
+//list access with mandatory (!!) brackets
+list_access: var_access _LEFT_SQUARE_BRACKET (INT | random | var_access) _RIGHT_SQUARE_BRACKET
+change_list_item: var_access _LEFT_SQUARE_BRACKET (INT | var_access) _RIGHT_SQUARE_BRACKET _EQUALS (var_access | quoted_text | NUMBER  | list_access)
+assign_list: var (_IS | _EQUALS) _LEFT_SQUARE_BRACKET ((quoted_text | NUMBER ) (_COMMA (quoted_text | NUMBER ))*)? _RIGHT_SQUARE_BRACKET
 
 
 
 // adding the new commands
-command:+= while_loop | for_loop | error_for_missing_in | error_for_missing_to | error_for_missing_command
+command:+= while_loop | for_loop | input | define | call | return | error_for_missing_in | error_for_missing_to | error_for_missing_command
 
 
 
@@ -56,3 +60,21 @@ text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes? _SINGLE_QU
 ?comparison_arg: call | var_access | list_access | text_in_quotes | NUMBER
 //------------------------------------
 
+// FUNCTIONS =====================================================================
+
+define: _DEFINE function_name _LEFT_BRACKET? (arguments?) _RIGHT_BRACKET? (_COLON)? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+call: _CALL function_name _LEFT_BRACKET? (arguments?) _RIGHT_BRACKET?
+
+
+?arguments: argument (_COMMA argument)* -> arguments
+?argument: expression | atom | list_access
+
+function_name: NAME -> text
+
+?return: _RETURN (_print_ask_argument)? -> returns
+?simple_expression:+= call
+?turtle_color:+= call
+
+add: _ADD_LIST (atom | list_access | call) _TO_LIST _SPACE var_access
+remove: _REMOVE (atom | list_access | call) _FROM _SPACE var_access
+// ================================================================================
