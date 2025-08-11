@@ -3206,7 +3206,6 @@ class ConvertToPython_13(ConvertToPython_12):
     def or_condition(self, meta, args):
         return ' or '.join(args)
 
-
     def process_comparison(self, meta, args, operator):
         arg0 = self.process_variable_for_comparisons(args[0], meta)
         arg1 = self.process_variable_for_comparisons(args[1], meta)
@@ -3239,7 +3238,6 @@ class ConvertToPython_13(ConvertToPython_12):
 
     def not_equal(self, meta, args):
         return self.process_comparison(meta, args, "!=")
-
 
     def while_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -3295,7 +3293,6 @@ class ConvertToPython_13(ConvertToPython_12):
         exception = self.make_index_error_check_if_list([left_side])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
-
     def elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
@@ -3329,12 +3326,12 @@ class ConvertToPython_13(ConvertToPython_12):
         return self.print(meta, args)
 
 
-
 @v_args(meta=True)
 @hedy_transpiler(level=14)
 @source_map_transformer(source_map)
 class ConvertToPython_14(ConvertToPython_13):
     pass
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=15)
@@ -3342,16 +3339,21 @@ class ConvertToPython_14(ConvertToPython_13):
 class ConvertToPython_15(ConvertToPython_14):
     pass
 
+
 @v_args(meta=True)
 @hedy_transpiler(level=16)
 @source_map_transformer(source_map)
 class ConvertToPython_16(ConvertToPython_15):
     pass
+
+
 @v_args(meta=True)
 @hedy_transpiler(level=17)
 @source_map_transformer(source_map)
 class ConvertToPython_17(ConvertToPython_16):
     pass
+
+
 @v_args(meta=True)
 @hedy_transpiler(level=18)
 @source_map_transformer(source_map)
