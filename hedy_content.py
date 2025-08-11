@@ -1,10 +1,10 @@
 import logging
 import os
 from os import path
-import iso3166
-from unidecode import unidecode
 
 import static_babel_content
+import utils
+
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
 from safe_format import safe_format
@@ -12,25 +12,6 @@ from safe_format import safe_format
 logger = logging.getLogger(__name__)
 
 COUNTRIES = static_babel_content.COUNTRIES
-
-
-def _get_friendly_sorted_countries():
-    friendly_countries = []
-    for code, locale_name in COUNTRIES.items():
-        locale_name_starts_with_ascii = locale_name[0].isascii()
-        iso3166_english_name_normalized = unidecode(iso3166.countries.get(code).name).lower()
-        locale_name_normalized = unidecode(locale_name).lower()
-        if locale_name_starts_with_ascii or iso3166_english_name_normalized == locale_name_normalized:
-            friendly_countries.append((code, locale_name_normalized, locale_name))
-        else:
-            friendly_countries.append((code, iso3166_english_name_normalized, locale_name))
-
-    friendly_sorted_countries = sorted(friendly_countries, key=lambda c: c[1])
-
-    return list(map(lambda c: ((c[0], c[2])), friendly_sorted_countries))
-
-
-FRIENDLY_SORTED_COUNTRIES = _get_friendly_sorted_countries()
 
 MAX_LEVEL = 18
 
@@ -66,10 +47,13 @@ KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_comm
 
 
 def adventures_order_per_level():
-    return ADVENTURE_ORDER_PER_LEVEL
+    if utils.is_redesign_enabled():
+        return ADVENTURE_ORDER_PER_LEVEL
+    else:
+        return ADVENTURE_ORDER_PER_LEVEL_OLD
 
 
-ADVENTURE_ORDER_PER_LEVEL = {
+ADVENTURE_ORDER_PER_LEVEL_OLD = {
     1: [
         'default',
         'print_command',
@@ -146,18 +130,24 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'parrot',
         'haunted',
-        'in_command',
-        'restaurant',
-        'fortune',
-        'pressit',
         'turtle',
         'turtle_draw_it',
         'debugging',
     ],
     6: [
+        'elif_command',
+        'in_command',
+        'restaurant',
+        'quizmaster',
+        'fortune',
+        'guess_my_number',
+        'haunted',
+        'pressit'
+    ],
+    7: [
         'default',
-        'maths',
         'is_command',
+        'maths',
         'music',
         'songs',
         'dice',
@@ -169,7 +159,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'debugging',
     ],
-    7: [
+    8: [
         'default',
         'repeat_command',
         'story',
@@ -178,13 +168,14 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'dishes',
         'dice',
         'repeat_command_2',
+        'years',
         'fortune',
         'restaurant',
         'pressit',
         'turtle_draw_it',
         'debugging',
     ],
-    8: [
+    9: [
         'default',
         'repeat_command',
         'fortune',
@@ -199,7 +190,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle_draw_it',
         'debugging',
     ],
-    9: [
+    10: [
         'default',
         'repeat_command',
         'if_command',
@@ -207,6 +198,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'story',
         'calculator',
         'music',
+        'secret',
         'restaurant',
         'haunted',
         'pressit',
@@ -214,7 +206,7 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle_draw_it',
         'debugging',
     ],
-    10: [
+    11: [
         'default',
         'for_command',
         'dishes',
@@ -230,25 +222,11 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'debugging',
     ],
-    11: [
-        'default',
-        'for_command',
-        'years',
-        'calculator',
-        'songs',
-        'restaurant',
-        'haunted',
-        'turtle_draw_it',
-        'debugging',
-    ],
     12: [
         'default',
         'maths',
-        'quotation_marks',
         'functions',
-        'fortune',
         'music',
-        'songs',
         'songs_2',
         'restaurant',
         'calculator',
@@ -259,48 +237,15 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'debugging',
     ],
     13: [
-        'default',
+        'print_command',
+        'ask_command',
+        'quotation_marks',
         'and_or_command',
-        'secret',
-        'functions',
-        'music',
+        'for_command',
         'songs',
-        'story',
-        'rock',
         'turtle_draw_it',
-        'restaurant',
-        'hotel',
-        'calculator',
-        'debugging',
     ],
     14: [
-        'default',
-        'is_command',
-        'guess_my_number',
-        'music',
-        'haunted',
-        'functions',
-        'turtle_draw_it',
-        'hotel',
-        'calculator',
-        'calculator_2',
-        'piggybank',
-        'quizmaster',
-        'debugging',
-    ],
-    15: [
-        'default',
-        'while_command',
-        'music',
-        'turtle_draw_it',
-        'restaurant',
-        'story',
-        'dice',
-        'rock',
-        'calculator',
-        'debugging',
-    ],
-    16: [
         'default',
         'random_command',
         'haunted',
@@ -316,12 +261,25 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'simon_3',
         'debugging',
     ],
-    17: [
-        'default',
-        'for_command',
-        'elif_command',
+    15: [
+        'is_command',
+        'functions',
+        'songs',
+        'piggybank',
         'music',
-        'tic',
+        'hotel',
+        'calculator',
+        'calculator_2,'
+        'turtle_draw_it',
+    ],
+    16: [
+        'while_command',
+        'dice',
+        'rock'
+        'music',
+        'turtle_draw_it',
+        'calculator',
+        'restaurant',
         'hangman',
         'hangman_2',
         'hangman_3',
@@ -329,20 +287,12 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'blackjack_2',
         'blackjack_3',
         'blackjack_4',
-        'debugging',
     ],
-    18: [
-        'default',
-        'print_command',
-        'ask_command',
-        'functions',
-        'for_command',
-        'story',
-        'songs',
-        'music',
-        'debugging'
-    ]
 }
+
+
+ADVENTURE_ORDER_PER_LEVEL = {level: [a for a in adventures if a not in ['parsons', 'quiz']]
+                             for level, adventures in ADVENTURE_ORDER_PER_LEVEL_OLD.items()}
 
 HOUR_OF_CODE_ADVENTURES = {
     1: [
@@ -650,6 +600,41 @@ class Adventures(StructuredDataFile):
 
 class NoSuchAdventure:
     def get_adventure(self):
+        return {}
+
+
+class ParsonsProblem(StructuredDataFile):
+    def __init__(self, language):
+        self.language = language
+        super().__init__(f'{content_dir}/parsons/{self.language}.yaml')
+
+    def get_highest_exercise_level(self, level):
+        return max(int(lnum) for lnum in self.file.get('levels', {}).get(level, {}).keys())
+
+    def get_parsons_data_for_level(self, level, keyword_lang="en"):
+        return deep_translate_keywords(self.file.get('levels', {}).get(level, None), keyword_lang)
+
+    def get_parsons_data_for_level_exercise(self, level, excercise, keyword_lang="en"):
+        return deep_translate_keywords(self.file.get('levels', {}).get(level, {}).get(excercise), keyword_lang)
+
+
+class Quizzes(StructuredDataFile):
+    def __init__(self, language):
+        self.language = language
+        super().__init__(f'{content_dir}/quizzes/{self.language}.yaml')
+
+    def get_highest_question_level(self, level):
+        return max(int(k) for k in self.file.get('levels', {}).get(level, {}))
+
+    def get_quiz_data_for_level(self, level, keyword_lang="en"):
+        return deep_translate_keywords(self.file.get('levels', {}).get(level), keyword_lang)
+
+    def get_quiz_data_for_level_question(self, level, question, keyword_lang="en"):
+        return deep_translate_keywords(self.file.get('levels', {}).get(level, {}).get(question), keyword_lang)
+
+
+class NoSuchQuiz:
+    def get_quiz_data_for_level(self, level, keyword_lang):
         return {}
 
 

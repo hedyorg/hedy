@@ -1907,7 +1907,7 @@ adventures:
                     ulubione_zwierzę {is} _
                     {print} Lubię ulubione_zwierzę
                     ```
-            6:
+            7:
                 story_text: |
                     Zmieniamy również przechowywanie słowa w zmiennej! Możesz teraz użyć `=` zamiast `{is}`, gdy przechowujemy nazwę lub liczbę w zmiennej, w ten oto sposób:
                 example_code: |
@@ -1915,31 +1915,6 @@ adventures:
                     imię = Hedy
                     odpowiedź = 20 + 4
                     ```
-            15:
-                story_text: |
-                    Nauczymy się więcej nowych rzeczy. Być może znasz je już z matematyki, `<` i `>`.
-                    `<` sprawdza, czy pierwsza liczba jest mniejsza niż druga, na przykład wiek `<` 12 sprawdza, czy wiek jest mniejszy niż 12 lat.
-                    Jeśli chcesz sprawdzić, czy pierwsza liczba jest mniejsza lub równa drugiej, możesz użyć`<=`, na przykład wiek `<=` 11.
-                    `>` sprawdza, czy pierwsza liczba jest większa niż druga, na przykład wskazuje `>` 10, czy punkty są większe niż 10.
-                    Jeśli chcesz sprawdzić, czy pierwsza liczba jest większa lub równa drugiej, możesz użyć `>=`, na przykład punktów`>=` 11.
-                    Używasz tych porównań w `{if}`, w ten sposób:
-                story_text_2: |
-                    Od tego poziomu, jeśli chcesz dokładnie coś porównać, możesz użyć dwóch znaków równości. Tak właśnie robi większość języków programowania:
-                example_code_2: |
-                    ```
-                    imię = {ask} 'Jak masz na imię?'
-                    {if} imię == 'Hedy'
-                        {print} 'Jesteś spoko!'
-                    ```
-                story_text_3: |
-                    Możesz także porównać, czy coś * nie * jest równe czemuś innemu za pomocą `!=` w ten sposób:
-                example_code_3: |
-                    ```
-                    imię = {ask} 'Jak masz na imię?'
-                    {if} imię != 'Hedy'
-                        {print} 'Ty nie jesteś hedy'
-                    ```
-                example_code: "```\nage = {ask} 'How old are you?'\n{if} age > 12\n    {print} 'You are older than I am!'\n```\n```\nage = {ask} 'How old are you?'\n{if} age < 12\n    {print} 'You are younger than me!'\n{else}\n    {print} 'You are older than me!'\n```\n"
         name: '{is}'
     language:
         name: Język

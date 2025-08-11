@@ -1443,50 +1443,13 @@ adventures:
                     animal_favorito {is} _
                     {print} me gusta animal_favorito
                     ```
-            6:
+            7:
                 story_text: |
                     ¡También hacemos un cambio al almacenar una palabra en una variable! Ahora se puede utilizar `=` en lugar de `{is}` cuando almacenamos un nombre o un número en una variable, así:
                 example_code: |
                     ```
                     nombre = Hedy
                     respuesta = 20 + 4
-                    ```
-            15:
-                story_text: |
-                    Vamos a aprender más cosas nuevas. Quizá ya las conozcas de matemáticas, el `<` y `>`.
-                    El `<` comprueba si el primer número es menor que el segundo, por ejemplo edad `<` 12 comprueba si edad es menor que 12.
-                    Si quieres comprobar si el primer número es menor o igual que el segundo, puedes usar `<=`, por ejemplo edad `<=` 11.
-                    El `>` comprueba si el primer número es mayor que el segundo, por ejemplo puntos `>` 10 comprueba si puntos es mayor que 10.
-                    Si quieres comprobar si el primer número es mayor o igual que el segundo, puedes usar `>=`, por ejemplo puntos `>=` 11.
-                    Usa estas comparaciones en un `{if}`, tal que así:
-                example_code: |
-                    ```
-                    edad = {ask} '¿Cuántos años tienes?'
-                    {if} edad > 12
-                        {print} '¡Eres mayor que yo!'
-                    ```
-                    ```
-                    edad = {ask} '¿Cuántos años tienes?'
-                    {if} edad  < 12
-                        {print} '¡Eres más joven que yo!'
-                    {else}
-                        {print} 'Eres mayor que yo!'
-                    ```
-                story_text_2: |
-                    A partir de este nivel, si quieres comparar exactamente, puedes usar dos signos de igualdad. Esto es lo que hacen la mayoría de los lenguajes de programación:
-                example_code_2: |
-                    ```
-                    nombre = {ask} '¿Cómo te llamas?'
-                    {if} nombre == 'Hedy'
-                        {print} '¡Cómo molas!'
-                    ```
-                story_text_3: |
-                    También puedes comparar si algo *no* es igual a otra cosa usando `!=` tal que así:
-                example_code_3: |
-                    ```
-                    nombre = {ask} '¿Cómo te llamas?'
-                    {if} nombre != 'Hedy'
-                        {print} 'Tu no eres Hedy'
                     ```
         name: '{is}'
     language:

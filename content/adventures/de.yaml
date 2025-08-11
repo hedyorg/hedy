@@ -1834,37 +1834,13 @@ adventures:
                     lieblingstier {is} _
                     {print} Ich mag lieblingstier
                     ```
-            6:
+            7:
                 story_text: |
                     Wir haben außerdem geändert, wie man ein Wort in einer Variable speichert. Du kannst nun auch `=` anstatt von `{is}` verwenden, wenn du einen Namen oder eine Zahl in einer Variable speichert, und zwar so:
                 example_code: |
                     ```
                     name = Hedy
                     antwort = 20 + 4
-                    ```
-            15:
-                story_text: |
-                    Wir lernen neue Elemente kennen. Aus der Mathematik kennst du vielleicht schon `<` und `>`.
-                    Das `<`prüft, ob die erste Zahl kleiner als die zweite ist. Zum Beispiel prüft alter `<`12, ob alter kleiner als 12 ist.
-                    Falls zu prüfen willst, ob die erste Zahl kleiner oder gleich der zweiten ist, kann du `<=` verwenden, zum Beispiel alter `<=` 11
-                    Das `>` prüft, ob die erste Zahl größer als die zweite ist, zum Beispiel punkte `>`10 prüft, ob punkte größer als 10 ist.
-                    Falls du prüfen willst ob die erste Zahl größer als oder gleich der zweiten ist, kannst du `>=`verwenden, zum Beispiel punkte `>=` 11.
-                    Benutze diese Vergleiche so in einem `{if}`:
-                story_text_2: |
-                    Ab diesem Level kannst du zwei Gleichheitszeichen verwenden, um etwas zu vergleichen. Das ist in den meisten Programmiersprachen so:
-                example_code_2: |
-                    ```
-                    name = {ask} 'Wie heißt du?'
-                    {if} name == 'Hedy'
-                        {print} 'Du bist cool!'
-                    ```
-                story_text_3: |
-                    Du kannst auch vergleichen, ob etwas *nicht* gleich wie etwas anderes ist. Dazu benutzt du `!=` so:
-                example_code_3: |
-                    ```
-                    name = {ask} 'Wie heisst du?'
-                    {if} name != 'Hedy'
-                        {print} 'Du bist nicht Hedy'
                     ```
         name: '{is}'
     language:
