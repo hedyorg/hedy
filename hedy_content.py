@@ -1,10 +1,10 @@
 import logging
 import os
 from os import path
+import iso3166
+from unidecode import unidecode
 
 import static_babel_content
-import utils
-
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
 from safe_format import safe_format
@@ -12,6 +12,25 @@ from safe_format import safe_format
 logger = logging.getLogger(__name__)
 
 COUNTRIES = static_babel_content.COUNTRIES
+
+
+def _get_friendly_sorted_countries():
+    friendly_countries = []
+    for code, locale_name in COUNTRIES.items():
+        locale_name_starts_with_ascii = locale_name[0].isascii()
+        iso3166_english_name_normalized = unidecode(iso3166.countries.get(code).name).lower()
+        locale_name_normalized = unidecode(locale_name).lower()
+        if locale_name_starts_with_ascii or iso3166_english_name_normalized == locale_name_normalized:
+            friendly_countries.append((code, locale_name_normalized, locale_name))
+        else:
+            friendly_countries.append((code, iso3166_english_name_normalized, locale_name))
+
+    friendly_sorted_countries = sorted(friendly_countries, key=lambda c: c[1])
+
+    return list(map(lambda c: ((c[0], c[2])), friendly_sorted_countries))
+
+
+FRIENDLY_SORTED_COUNTRIES = _get_friendly_sorted_countries()
 
 MAX_LEVEL = 18
 
@@ -600,41 +619,6 @@ class Adventures(StructuredDataFile):
 
 class NoSuchAdventure:
     def get_adventure(self):
-        return {}
-
-
-class ParsonsProblem(StructuredDataFile):
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/parsons/{self.language}.yaml')
-
-    def get_highest_exercise_level(self, level):
-        return max(int(lnum) for lnum in self.file.get('levels', {}).get(level, {}).keys())
-
-    def get_parsons_data_for_level(self, level, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, None), keyword_lang)
-
-    def get_parsons_data_for_level_exercise(self, level, excercise, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, {}).get(excercise), keyword_lang)
-
-
-class Quizzes(StructuredDataFile):
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/quizzes/{self.language}.yaml')
-
-    def get_highest_question_level(self, level):
-        return max(int(k) for k in self.file.get('levels', {}).get(level, {}))
-
-    def get_quiz_data_for_level(self, level, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level), keyword_lang)
-
-    def get_quiz_data_for_level_question(self, level, question, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, {}).get(question), keyword_lang)
-
-
-class NoSuchQuiz:
-    def get_quiz_data_for_level(self, level, keyword_lang):
         return {}
 
 
