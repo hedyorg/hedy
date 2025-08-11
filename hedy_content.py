@@ -68,7 +68,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'fortune',
         'debugging',
-        'hospital'
     ],
     2: [
         'default',
@@ -85,7 +84,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
     ],
     3: [
         'default',
@@ -103,7 +101,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
     ],
     4: [
         'default',
@@ -121,7 +118,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'restaurant',
         'debugging',
-        'hospital'
     ],
     5: [
         'default',
@@ -137,7 +133,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
     ],
     6: [
         'elif_command',
@@ -148,7 +143,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'guess_my_number',
         'haunted',
         'pressit'
-        'hospital'
     ],
     7: [
         'default',
@@ -164,7 +158,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'restaurant',
         'debugging',
-        'hospital'
     ],
     8: [
         'default',
@@ -181,7 +174,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'pressit',
         'turtle_draw_it',
         'debugging',
-        'hospital'
     ],
     9: [
         'default',
@@ -197,7 +189,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
     ],
     10: [
         'default',
@@ -214,7 +205,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
     ],
     11: [
         'default',
@@ -231,7 +221,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'restaurant',
         'debugging',
-        'hospital'
     ],
     12: [
         'default',
@@ -246,7 +235,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'secret',
         'turtle_draw_it',
         'debugging',
-        'hospital'
     ],
     13: [
         'print_command',
@@ -256,7 +244,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'for_command',
         'songs',
         'turtle_draw_it',
-        'hospital'
     ],
     14: [
         'default',
@@ -273,7 +260,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'simon_2',
         'simon_3',
         'debugging',
-        'hospital'
     ],
     15: [
         'is_command',
@@ -285,7 +271,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'calculator_2,'
         'turtle_draw_it',
-        'hospital'
     ],
     16: [
         'while_command',
@@ -302,7 +287,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'blackjack_2',
         'blackjack_3',
         'blackjack_4',
-        'hospital'
     ],
 }
 
