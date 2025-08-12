@@ -462,7 +462,7 @@ adventures:
                     dealer_card_2 = _
 
                     # Add up your points
-                    your_points_1 = {call} _ {with} card_1
+                    your_points_1 = _ {with} card_1
                     your_points_2 = _
                     your_total = _
 
@@ -689,13 +689,13 @@ adventures:
                     ```
                     {def} calculate_mean_grade():
                         total = 0
-                        {for} i {in} {range} (1,4):
+                        {for} i {in} {range}(1,4):
                             grade = {input} _
                             total = total + _
                             {return} _ / 4
 
                     mean_grade = _
-                    {print} ('Your mean grade is ', mean_grade)
+                    {print}('Your mean grade is ', mean_grade)
                     ```
             16:
                 story_text: |
@@ -716,12 +716,12 @@ adventures:
                         _
                         _
                         _
-                        {print} ('Well done!')
+                        {print}('Well done!')
 
                     {print}('Give 10 correct answers to win!')
                     {for} i {in} {range} 1 {to} 10:
                         _
-                    {print} ('You win!')
+                    {print}('You win!')
                     ```
     calculator_2:
         name: Calculator 2
@@ -1028,7 +1028,7 @@ adventures:
                     {print} 'Welcome to our restaurant'
                     people = {ask} 'How many people are in your party tonight?'
                     {for} i {in} {range} 0 {to} people
-                        {call} greet_customer
+                        greet_customer()
                     ```
             13:
                 story_text: |-
@@ -1087,7 +1087,7 @@ adventures:
 
                     measure_heartbeat = {ask} 'Would you like to measure your heartbeat?'
                     {if} measure_heartbeat = 'yes'
-                        {call} measure_heartbeat
+                        measure_heartbeat()
                     {else}
                         'no problem'
                     ```
@@ -1179,7 +1179,7 @@ adventures:
                         more_food = {ask} 'Would you like to order a pizza?'
                     more_drinks = {ask} 'Would you like to order some drinks?'
                     {while} more_drinks == 'yes'
-                        {call} drink_order
+                        drink_order()
                         more_drinks == {ask} 'Would you like to order more drinks?'
 
 
@@ -1194,7 +1194,7 @@ adventures:
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} (1, 3)
+                    {for} i {in} {range}(1, 3)
                         animal = animals[i]
                         sound = sounds[i]
                         {print} 'Old MacDonald had a farm'
@@ -1550,7 +1550,7 @@ adventures:
                     _
                     _
                     _
-                    {print} ('Yes! You have thrown 6 in ', tries, ' tries.')
+                    {print}('Yes! You have thrown 6 in ', tries, ' tries.')
                     ```
     dishes:
         name: Dishes?
@@ -1877,12 +1877,12 @@ adventures:
                     To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line.
                     Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
 
-                    Now, whenever we need that block of code, we just use <code>{call}</code> with the function's name to call it up! We don't have to type that block of code again.
+                    Now, whenever we need that block of code, we just use the function's name to call it up! We don't have to type that block of code again.
 
                     Check out this example code of a game of Twister. The function 'turn' contains a block of code that chooses which limb should go where.
 
                     ### Exercise
-                    Finish this code by setting the 2 variables chosen_limb and chosen_color.
+                    Finish this code by setting the 2 variables `chosen_limb` and `chosen_color`.
                     Then, choose how many times you want to call the function to give the twister spinner a spin.
 
                     ### Exercise 2
@@ -1894,7 +1894,7 @@ adventures:
                     limbs = 'hand', 'foot'
                     colors = 'red', 'blue', 'green', 'yellow'
 
-                    {define} turn
+                    {define} next_turn
                         chosen_side = sides {at} {random}
                         chosen_limb = limbs _
                         chosen_color = colors _
@@ -1902,7 +1902,7 @@ adventures:
 
                     {print} 'Lets play a game of Twister!'
                     {for} i {in} {range} 1 {to} _
-                        {call} turn
+                        next_turn()
                         {sleep} 2
                     ```
             15:
@@ -1912,8 +1912,8 @@ adventures:
 
                     For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
                     In this example code the argument 'place' is used. Place is a variable that is only used in the function, so an argument.
-                    To use 'place' we have placed `{with} place` after `{define} song`.
-                    When the function is called, the computer will replace the argument 'place', with the piece of text after `{call} song {with}`.
+                    To use 'place' we have placed `place` after `{define} song`.
+                    When the function is called, the computer will replace the argument 'place', with the piece of text after ` song {with}`.
 
                     ### Exercise
                     The next verse of this song goes:
@@ -1960,15 +1960,13 @@ adventures:
                 story_text_3: |
                     Let's make functions the Pythons way! To define a function, we no longer use:
 
-                    `{define} name_function {with} argument_1, argument_2:`
+                    `{define} name_function {with} argument_1, argument_2):`
 
                     but we use:
 
                     `{def} name_function(argument_1, argument_2):`.
 
-
                     If you don't want to use arguments, you just leave the space between the parentheses empty.
-                    To call a function, we don't need the `{call}` command anymore. You just type the name of the function.
                 example_code_3: |
                     ```
                     {def} calculate_score(answer, correct_answer):
@@ -2553,7 +2551,7 @@ adventures:
                 example_code: |
                   The program should end like this:
                     ```
-                    {call} make_tasklist {with} day, month, date
+                    make_tasklist(day, month, date)
                     ```
             15:
                 story_text: |
@@ -3071,12 +3069,9 @@ adventures:
                         {play} D
                         {sleep}
 
-                    {call} _
-                    {call} _
-                    {call} _
-                    {call} _
-                    {call} _
-                    {call} _
+                    first_line()
+                    _
+                    _
                     ```
             15:
                 story_text: |
@@ -3089,7 +3084,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
-                    {define} _ {with} note_1, note_2, note_3
+                    {define} _ (note_1, note_2, note_3
                         {play} C4
                         {play} C4
                         {play} D4
@@ -3098,9 +3093,9 @@ adventures:
                         {play} _
                         {play} _
 
-                    {call} line_1 {with} 29, 31, 30
-                    {call} line_1 {with} 29, 28, 0
-                    {call} line_1 {with} 32, 31, 30
+                    line_1(29, 31, 30)
+                    line_1(29, 28, 0)
+                    line_1(32, 31, 30)
 
                     {play} C4
                     {play} B3
@@ -3129,7 +3124,7 @@ adventures:
 
                     fire = {ask} 'Is there a fire?'
                     {if} fire _ 'yes'
-                        {call} fire_alarm
+                        fire_alarm_
                     ```
                 story_text_3: |
                     ### Exercise
@@ -3176,7 +3171,7 @@ adventures:
 
                     yes_or_no = {ask} 'Do you want to hear my never-ending song?'
                     {while} yes_or_no = 'yes'
-                        {call} song
+                        song()
                         {print} '🥳'
                     ```
             14:
@@ -3203,7 +3198,7 @@ adventures:
                         animal = animals[i]
                         sound = sounds[i]
                         {print} 'Old MacDonald had a farm'
-                        {call} line_1
+                        line_1()
                         {print} 'E I E I O!'
                         _
                     ```
@@ -4231,8 +4226,8 @@ adventures:
                             _
 
                     # Test your program
-                    {call} _
-                    {call} show_simon_sequence {with} 1
+                    _
+                    show_simon_sequence(1)
                     ```
     simon_2:
         name: Simon Says 2
@@ -4303,9 +4298,9 @@ adventures:
                         _ = ['empty', 'list']
                         {remove} _
                         {remove} _
-                        {call} _
-                        {call} _ {with} _
-                        {call} _ {with} _
+                        _
+                        _ (_)
+                        _ (_)
                         {if} player_sequence == _
                             _
                             _
@@ -4425,15 +4420,15 @@ adventures:
                     In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
                 example_code: |
                     ```
-                    {define} song {with} place
+                    {define} song (place)
                         {print} 'My Bonnie is ' place
 
                     chosen_place = {ask} 'Where do you want Bonnie to be?'
                     synonym = {ask} 'What is another word for that?'
 
-                    {call} song {with} chosen_place
-                    {call} song {with} synonym
-                    {call} song {with} chosen_place
+                    song(chosen_place)
+                    song(synonym)
+                    song (chosen_place)
                     ```
             14:
                 story_text: |
@@ -4507,10 +4502,10 @@ adventures:
                         {print} 'Twinkle'
                         {print} _
 
-                    {call} twinkle
+                    twinkle()
                     {print} 'Up above the world so high'
                     {print} 'Like a diamond in the sky'
-                    {call} _
+                    _
                     ```
             14:
                 story_text: |
@@ -4591,7 +4586,7 @@ adventures:
                     Finish this function with all possible ways to win. This means you have to make this for the other 2 rows, 3 columns and 2 diagonals.
                     If you've finished all the other options, the function should return the variable `game_over` so we can use it in our game.
 
-                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = {call} detect_winner {with} field, sign`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
+                    ***Call the function in the game*** Go to the line `game_over = {ask} 'Did you win?'` and change it to `game_over = detect_winner(field, sign)`. Now the function will check if there's a winner and the game doesn't need to keep asking anymore!
 
                     ***Enjoy your game!*** Great job! You have finished the game! Enjoy playing it!
 
@@ -4600,7 +4595,7 @@ adventures:
                     # Paste your code here and make it level 17 proof
 
                     # Create a function that detects if someone has won
-                    {define} detect_winner {with} field, sign:
+                    {define} detect_winner (field, sign):
                         {if} field[1] == field[2] {and} field[2] == field[3] {and} field[1] != '.':
                             game_over = 'yes'
                             {print} 'Player ' sign 'wins!'
@@ -4915,11 +4910,11 @@ adventures:
                         {repeat} 4 {times}
                             {turn} _
                             {forward} _
-                    {call} square
+                    square()
                     {forward} 50
-                    {call} square
+                    square()
                     {forward} 50
-                    {call} square
+                    square()
                     ```
     turtle_draw_it:
         name: Draw it!
@@ -5128,7 +5123,7 @@ adventures:
                         chosen_color = {ask} 'In which color?'
                         {color} chosen_color
                         {if} shape = 'square'
-                            {call} draw_a_square
+                            draw_a_square()
                     ```
             13:
                 story_text: |
@@ -5141,23 +5136,23 @@ adventures:
                 example_code: |
                     Hint Street in different sizes
                     ```
-                    {define} draw_a_house {with} size
+                    {define} draw_a_house(size)
                     _
 
-                    {call} draw_a_house {with} 90
-                    {call} draw_a_house {with} 60
-                    {call} draw_a_house {with} 30
+                    draw_a_house(90)
+                    draw_a_house(60)
+                    draw_a_house(30)
                     ```
 
                     Hint Colored street
                     ```
-                    {define} draw_a_house {with} chosen_color
+                    {define} draw_a_house(chosen_color)
                     _
                     ```
 
                     Hint Snow Storm
                     ```
-                    {define} draw_snowflake {with} length, color
+                    {define} draw_snowflake(length, color)
                         _
 
                     numbers = 10, 20, 30
@@ -5166,7 +5161,7 @@ adventures:
                     {for} i {in} {range} 1 {to} 5
                         random_number = _
                         random_color = _
-                        {call} draw_snowflake {with} random_number, random_color
+                        draw_snowflake(random_number, random_color)
                         {color} white
                         {turn} random_number * 5
                         {forward} 80
@@ -5183,20 +5178,20 @@ adventures:
                     </div>
                 example_code: |
                     ```
-                    {define} calculate_degrees {with} amount_of_corners
+                    {define} calculate_degrees(amount_of_corners)
                         _ 360 / amount_of_corners
 
 
-                    {define} draw_figure {with} degrees
+                    {define} draw_figure(degrees)
                         _
                             {forward} 400/amount_of_corners
                             {turn} _
 
                     amount_of_corners = {ask} _
-                    degrees = {call} _ {with} _
+                    degrees = _(_)
 
-                    {call} _ {with}
-                    {call} _ {with}
+                    _ {with}
+                    _ {with}
                     ```
             16:
                 story_text: |
@@ -5217,12 +5212,12 @@ adventures:
                 example_code_2: |
                     Fan
                     ```
-                    {define} draw_a_square {with} side
+                    {define} draw_a_square(side)
                     _
 
                     i = 100
                     {while} i > 1
-                        _ {with} i
+                        _(i)
                         _
                         i = i - 3
                     ```
