@@ -2288,12 +2288,7 @@ class ConvertToPython_5(ConvertToPython_4):
 else:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[2])}"""
 
-    def ifelifelse(self, meta, args):
-            return f"""if {args[0]}:{self.add_debug_breakpoint()}
-    {ConvertToPython.indent(args[1])}
-    {args[2]}
-else:{self.add_debug_breakpoint()}
-{ConvertToPython.indent(args[3])}"""
+
 
     def condition(self, meta, args):
         return ' and '.join(args)
@@ -2423,6 +2418,14 @@ class ConvertToPython_6(ConvertToPython_5):
             {var_assign} = input(f'{argument_string}'){self.add_debug_breakpoint()}
             __ns = get_num_sys({var_access})
             {var_assign} = Value({var_access}, num_sys=__ns)""")
+
+    def ifelifelse(self, meta, args):
+        return f"""if {args[0]}:{self.add_debug_breakpoint()}
+    {ConvertToPython.indent(args[1])}
+elif {args[2]}:
+{ConvertToPython.indent(args[3])}
+else:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(args[4])}"""
 
     def play(self, meta, args):
         if not args:

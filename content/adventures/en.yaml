@@ -1794,8 +1794,10 @@ adventures:
                     person {is} {ask} 'Who are you?'
                     good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
                     bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
-                    {if} person {in} friends {print} good_answer {at} {random}
-                    {else} {print} bad_answer {at} {random}
+                    {if} person {in} friends
+                    {print} good_answer {at} {random}
+                    {else}
+                    {print} bad_answer {at} {random}
                     ```
             7:
                 story_text: |
@@ -2691,8 +2693,10 @@ adventures:
                     ```
                     pretty_colors {is} green, yellow
                     favorite_color {is} {ask} 'What is your favorite color?'
-                    {if} favorite_color {in} pretty_colors {print} 'pretty!'
-                    {else} {print} 'meh'
+                    {if} favorite_color {in} pretty_colors
+                    {print} 'pretty!'
+                    {else}
+                    {print} 'meh'
                     ```
                 story_text_2: |
                     ### Exercise
@@ -3794,8 +3798,10 @@ adventures:
                     ```
                     drinks_in_stock {is} water, lemonade, cola, orange juice
                     drink {is} {ask} 'What would you like to drink?'
-                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'coming up!'
-                    {else} {print} 'Sorry, we do not sell that'
+                    {if} drink {in} drinks_in_stock
+                    {print} 'One ' drink 'coming up!'
+                    {else}
+                    {print} 'Sorry, we do not sell that'
                     ```
             7:
                 story_text: |
