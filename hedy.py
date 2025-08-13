@@ -4033,13 +4033,13 @@ def process_input_string(input_string, level, lang, preprocess_ifs_enabled=True)
     if level >= 4:
         result = result.replace("\\", "\\\\")
 
-    # In levels 5 to 7 we do not allow if without else, we add an empty print to make it possible in the parser
+    # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
     if level >= 5 and level < 8 and preprocess_ifs_enabled:
         result = preprocess_ifs(result, lang)
 
-    # In level 8 we add indent-dedent blocks to the code before parsing
-    if level >= hedy.LEVEL_STARTING_INDENTATION:
-        result = preprocess_blocks(result, level, lang)
+    # In level 9 we add indent-dedent blocks to the code before parsing
+    # if level >= hedy.LEVEL_STARTING_INDENTATION:
+    #     result = preprocess_blocks(result, level, lang)
 
     return result
 

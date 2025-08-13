@@ -13,8 +13,13 @@ print: _PRINT _LEFT_BRACKET? (_print_ask_argument)? _RIGHT_BRACKET?
 _print_ask_argument: (_SPACE | list_access |var_access | quoted_text | _COMMA)*
 
 //optional colon in if/elses
-ifs: _IF _conditions (_COLON)? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK //'if' cannot be used in Python, hence the name of the rule is 'ifs'
-elses: _EOL (_SPACE)* _ELSE (_COLON)? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+_if_clause: _IF condition _COLON? _EOL (_SPACE command) (_EOL _SPACE command)* _EOL?
+_else_clause: _ELSE _COLON? (_EOL _SPACE+ _if_less_command)*
+
+ifelse: _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) _else_clause
+ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs'
+elifs: _ELIF (condition | condition_spaces | error_condition) _COLON? _EOL+ (_SPACE command) (_EOL _SPACE command)* _EOL
+ifelifelse: _if_clause (elifs)* _else_clause
 
 //add input
 input_empty_brackets: var (_IS | _EQUALS ) _INPUT (_LEFT_BRACKET _RIGHT_BRACKET)
@@ -29,7 +34,7 @@ change_list_item: var_access _LEFT_SQUARE_BRACKET (INT | var_access) _RIGHT_SQUA
 assign_list: var (_IS | _EQUALS) _LEFT_SQUARE_BRACKET ((quoted_text | NUMBER ) (_COMMA (quoted_text | NUMBER ))*)? _RIGHT_SQUARE_BRACKET
 
 // adding the new commands
-command:+= while_loop | for_loop | input | input_empty_brackets | define | call | return | error_for_missing_in | error_for_missing_to | error_for_missing_command
+command: += while_loop | for_loop | input | input_empty_brackets | define | call | return | error_for_missing_in | error_for_missing_to | error_for_missing_command
 
 //new : for loop
 for_loop: _FOR var _IN _RANGE _LEFT_BRACKET? (INT | var_access) _COMMA (INT | var_access) _RIGHT_BRACKET? _COLON? _EOL (_SPACE command) (_EOL _SPACE command)*  _EOL? _END_BLOCK
@@ -60,7 +65,7 @@ text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes? _SINGLE_QU
 // FUNCTIONS =====================================================================
 
 define: (_DEF | "define") function_name _LEFT_BRACKET? (arguments)? _RIGHT_BRACKET? _COLON? _EOL _SPACE command (_EOL _SPACE command)* _EOL? _END_BLOCK
-call.-100: function_name _LEFT_BRACKET arguments? _RIGHT_BRACKET //make sure call goed below input, which looks the same
+call.-100: function_name _LEFT_BRACKET arguments? _RIGHT_BRACKET //make sure call goes below input, which looks the same
 
 //TODO not sure yet if I can make brackets optional with a function call?
 // FH June 2025: New to allow decimals in the grammar
