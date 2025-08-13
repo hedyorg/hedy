@@ -4038,8 +4038,8 @@ def process_input_string(input_string, level, lang, preprocess_ifs_enabled=True)
         result = preprocess_ifs(result, lang)
 
     # In level 9 we add indent-dedent blocks to the code before parsing
-    # if level >= hedy.LEVEL_STARTING_INDENTATION:
-    #     result = preprocess_blocks(result, level, lang)
+    if level >= hedy.LEVEL_STARTING_INDENTATION:
+        result = preprocess_blocks(result, level, lang)
 
     return result
 
