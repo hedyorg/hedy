@@ -2288,6 +2288,13 @@ class ConvertToPython_5(ConvertToPython_4):
 else:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[2])}"""
 
+    def ifelifelse(self, meta, args):
+            return f"""if {args[0]}:{self.add_debug_breakpoint()}
+    {ConvertToPython.indent(args[1])}
+    {args[2]}
+else:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(args[3])}"""
+
     def condition(self, meta, args):
         return ' and '.join(args)
 
@@ -2584,6 +2591,11 @@ class ConvertToPython_6(ConvertToPython_5):
         # In level 6 the values of variables could be either a number or a string, e.g. 5 or '5'.
         # So, to check if a number is not in a list of numbers with diff numeral system, we use localize()
         return f"localize({arg0}) not in [localize(__la.data) for __la in {arg1}]"
+
+    def elifs(self, meta, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        return "\nelif " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
     def addition(self, meta, args):
         return self.process_calculation(args, '+', meta)
@@ -3293,10 +3305,6 @@ class ConvertToPython_13(ConvertToPython_12):
         exception = self.make_index_error_check_if_list([left_side])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
-    def elifs(self, meta, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        return "\nelif " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
     def if_pressed_elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
