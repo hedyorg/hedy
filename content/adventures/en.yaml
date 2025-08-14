@@ -1499,7 +1499,10 @@ adventures:
                     points = 0
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm
+                    points = points + 5
+                    {else}
+                    points = points + throw
                     {print} 'those are ' points ' points'
                     ```
                 example_code_2: |
@@ -1608,7 +1611,8 @@ adventures:
                     emma_washes = 0
                     dishwasher = people {at} {random}
                     {print} 'The dishwasher is' dishwasher
-                    {if} dishwasher {is} Emma emma_washes = emma_washes + 1
+                    {if} dishwasher {is} Emma
+                    emma_washes = emma_washes + 1
                     {print} 'Emma will do the dishes this week' emma_washes 'times'
                     ```
 
@@ -3467,9 +3471,9 @@ adventures:
                     {print} 'Answer option A'
                     {print} 'Answer option B'
                     answer = {ask} 'Which answer?'
-                    {if} answer == 'A'
+                    {if} answer is 'A'
                     points_a = points_a + 1
-                    {if} answer == 'B'
+                    {if} answer is 'B'
                     points_b = points_b + 1
                     {print} 'End of the quiz!'
                     {print} 'Lets see the results!'
@@ -3823,9 +3827,12 @@ adventures:
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
                     price = 0
-                    {if} main {is} pizza price = 10
-                    {if} main {is} lasagne price = 12
-                    {if} main {is} spaghetti price = 8
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
                     {print} 'You have ordered ' main
                     {print} 'That will be ' price ' dollars, please'
                     {print} 'Thank you, enjoy your meal!'
