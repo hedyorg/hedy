@@ -43,16 +43,10 @@ error_for_missing_in: _FOR var _SPACE _RANGE (INT | var_access)? (_SPACE (INT | 
 error_for_missing_to: _FOR var _IN _RANGE (INT | var_access) _SPACE (INT | var_access) _EOL
 error_for_missing_command: _FOR var _IN _RANGE (INT | var_access) _TO (INT | var_access) _EOL
 
-// comparisons from level 14
-condition:+= equality_check_dequals | smaller | bigger | not_equal | smaller_equal | bigger_equal
+// allow == from now
+condition:+= equality_check_dequals
 
-equality_check: comparison_arg (_IS | _EQUALS) comparison_arg _SPACE?
 equality_check_dequals: comparison_arg _DOUBLE_EQUALS comparison_arg _SPACE?
-smaller: comparison_arg _SMALLER comparison_arg _SPACE?
-bigger: comparison_arg _LARGER comparison_arg _SPACE?
-smaller_equal: comparison_arg _SMALLER_EQUALS comparison_arg _SPACE?
-bigger_equal: comparison_arg _LARGER_EQUALS comparison_arg _SPACE?
-not_equal: comparison_arg _NOT_EQUALS comparison_arg _SPACE?
 
 // all literal strings have to be quoted now, so arithmetic operators don't need to be excluded anymore
 text_with_spaces_without_single_quotes: /(?:[^\n،,' ]| (?!<expand_keyword else>))+/ -> text

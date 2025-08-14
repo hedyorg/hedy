@@ -393,12 +393,12 @@ commands_and_types_per_level = {
     Command.repeat: {7: [HedyType.integer, HedyType.input]},
     Command.for_list: {10: {HedyType.list}},
     Command.for_loop: {11: [HedyType.integer, HedyType.input]},
-    Command.smaller: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.smaller_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.bigger: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.bigger_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.smaller: {7: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.smaller_equal: {7: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.bigger: {7: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.bigger_equal: {7: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.not_equal: {
-        14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list, HedyType.boolean]
+        7: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list, HedyType.boolean]
     },
     Command.pressed: {5: [HedyType.string]}  # TODO: maybe use a seperate type character in the future.
 }

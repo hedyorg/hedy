@@ -15,9 +15,19 @@ ifelifelse: _if_clause _EOL _elif_clause _EOL _else_clause
 // FH June 2025: New to allow decimals in the grammar
 ?atom: NUMBER | _MINUS NUMBER | var_access | textwithoutspaces // we now allow floats with NUMBER
 
-condition: equality_check | in_list_check | not_in_list_check
+condition: equality_check | smaller | bigger | not_equal | smaller_equal | bigger_equal
+
 in_list_check: textwithoutspaces _IN var_access
 not_in_list_check: textwithoutspaces _NOT_IN var_access
+equality_check: comparison_arg (_IS | _EQUALS) comparison_arg _SPACE?
+equality_check_dequals: comparison_arg _DOUBLE_EQUALS comparison_arg _SPACE?
+smaller: comparison_arg _SMALLER comparison_arg _SPACE?
+bigger: comparison_arg _LARGER comparison_arg _SPACE?
+smaller_equal: comparison_arg _SMALLER_EQUALS comparison_arg _SPACE?
+bigger_equal: comparison_arg _LARGER_EQUALS comparison_arg _SPACE?
+not_equal: comparison_arg _NOT_EQUALS comparison_arg _SPACE?
+
+?comparison_arg: textwithoutspaces | var_access | list_access | NUMBER
 
 // More advances ins migt be needed lateron?
 // in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _IN var_access
