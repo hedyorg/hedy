@@ -2288,8 +2288,6 @@ class ConvertToPython_5(ConvertToPython_4):
 else:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[2])}"""
 
-
-
     def condition(self, meta, args):
         return ' and '.join(args)
 
@@ -3307,7 +3305,6 @@ class ConvertToPython_13(ConvertToPython_12):
 
         exception = self.make_index_error_check_if_list([left_side])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
-
 
     def if_pressed_elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens

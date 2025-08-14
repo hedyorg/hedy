@@ -449,6 +449,7 @@ class TestsLevel15(HedyTester):
             max_level=17,
             expected=expected
         )
+
     def test_elif_in_function(self):
         code = textwrap.dedent("""\
         def calculate_score(answer, correct_answer):
