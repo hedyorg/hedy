@@ -8,6 +8,3 @@ _conditions: condition | and_condition | or_condition
 and_condition: (condition) (_AND condition)*
 or_condition: (condition) (_OR condition)*
 
-_if_clause: _IF (_conditions) _EOL _commands _EOL? _END_BLOCK
-_else_clause: _SPACE* _ELSE _EOL _commands _EOL? _END_BLOCK
-_elif_clause: _SPACE* _ELIF (_conditions) _EOL _commands _EOL? _END_BLOCK
