@@ -296,6 +296,23 @@ class ForTeachersModule(WebsiteModule):
             )
         )
 
+    @route("/redesign/class/<class_id>/grade", methods=["GET"])
+    @requires_login
+    def get_grading_page(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        session['class_id'] = class_id
+        return render_template(
+            "for-teachers/classes/grade-class.html",
+            current_page="grade-class",
+            page_title=gettext("title_grade_class"),
+            _class=Class,
+        )
+
     @route("/class/<class_id>", methods=["GET"])
     @requires_login
     def get_class(self, user, class_id):
