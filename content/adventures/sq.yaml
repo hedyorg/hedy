@@ -95,7 +95,7 @@ adventures:
                     {if} përfundimi {is} lumtur {print} emri ' merë shpatën dhe bisha ikën menjëherë'
                     {else} {print} 'Bisha hanë ' emri
                     ```
-            7:
+            8:
                 story_text: |
                     Në tregim, dikush përmend një fjalë disa herë. Si për shembull, kur dikush thirrën për ndihmë apo këndon një këngë.
                     Ju mund ti vendosni këto përsëritje në tregimin tuaj, në këtë nivel me komandën `{repeat}`.
@@ -108,7 +108,7 @@ adventures:
                     {repeat} 5 {times} {print} 'Ndihmë!'
                     {print} 'Pse askush nuk më ndihmon?'
                     ```
-            8:
+            9:
                 story_text: |
                     Në këtë nivel mund të përdorni shumë rreshta në komandat {if}, në këtë mënyrë mund ti përmirësoni përfundimet e lumtura ose të këqija!
 
@@ -128,7 +128,7 @@ adventures:
                         {print} 'Por Rinori është shumë i ngadaltë...'
                         {print} 'T-Rex afrohet dhe e hanë me një të gëlltitur!🦖'
                     ```
-            9:
+            10:
                 story_text: |
                     Në këtë nivel mund të përdorni komandat një mbi një `{if}`, `{repeat}` ose `{for}` komandat brenda komandave tjera si `{if}`, `{repeat}` ose `{for}`. Kjo ju lejon shumë opsione dhe u ndihmon ta bëni tregimin tuaj më interaktive.
                 example_code: |
@@ -146,7 +146,7 @@ adventures:
                     {else}
                         {print} 'Rina shkon në shtëpi'
                     ```
-            10:
+            11:
                 story_text: |
                     Në këtë nivel ju mund të përdorni komandën {for} në tregimin tuaj. Në këtë mënyrë lehtësisht mund ta programoni librin e fëmijëve 'ariu i murrmë, ariu i murrmë, çfarë po sheh?'.
                 example_code: |
@@ -162,39 +162,7 @@ adventures:
                         {print} 'Çfarë po sheh?'
                     {print} 'Un i shoh të gjitha kafshët që më shikojnë!'
                     ```
-            13:
-                story_text: |
-                    Duke përdorur komandën `{and}` dhe `{or}`, ju mund ta shkurtoni tregimin tuaj. Si për shembull, shikoni tregimin e dragonit.
-
-                    ### Sfidë
-                    A mund të bëni mini-lojën tuaj aventureske si kjo?
-                example_code: |
-                    ```
-                    shpata = 'humbur'
-                    loja = 'ndezur'
-                    {print} 'Heroi ynë është duke ecur nëpër pyll'
-                    {print} 'Rruga ndahet në dy pjesë'
-                    {for} i {in} {range} 0 {to} 2
-                        {if} loja {is} 'ndezur'
-                            rruga = {ask} 'Cilën rrugë duhet ajo ta zgjedhë?'
-                            {if} rruga {is} 'majtë' {and} shpata {is} 'gjetur'
-                                {print} 'Heroi ynë përballet me një dragon!'
-                                {print} 'Fatmirësisht heroi ynë ka një shpatë për ta mposhtur dragonin!'
-                                loja = 'mbaruar'
-                            {if} rruga {is} 'majtë' {and} shpata {is} 'humbur'
-                                {print} 'Heroi ynë përballet me në dragon, por ajo nuk ka shpatë!'
-                                {print} 'Heroi ynë mposhtet nga dragoi...'
-                                {print} 'Provoni prapë'
-                                loja = 'mbaruar'
-                            {if} rruga {is} 'djathë' {and} shpata {is} 'gjetur'
-                                {print} 'Ju veçse kei gjetur shpatën. Nu ka mbetur gjë tjetër këtu.'
-                                {print} 'Ajo ecën mbrapa'
-                            {if} rruga {is} 'djathtë' {and} shpata {is} 'humbur'
-                                {print} 'Heroi ynë gjen një shpatë'
-                                {print} 'Kjo mund të jetë e dobishme'
-                                shpata = 'gjetur'
-                    ```
-            15:
+            16:
                 story_text: |
                     Duke përdorur komandën `{while}` mund ta bëni tregimin më interesante. Për shembull, ju mund të përdorni `{while} game == 'on'` kështu që ju mund të luani derisa loja të mbarojë.
                     Ose ju mund të përdorni `{while} sword == 'lost'` kështu që lojtari nuk mund të vazhdojë lojën pa mos e gjetur shpatën.
@@ -223,15 +191,15 @@ adventures:
         default_save_name: Kalkulatori
         description: Krijoni një kalkulator
         levels:
-            6:
+            7:
                 story_text: |
                     Tani që mund të kalkuloni, ju gjithashtu mund të bëni një kalkulator.
                 example_code: |
                     ```
-                    numri_1 = {ask} 'Plotëso numrin e parë:'
-                    numri_2 = {ask} 'Plotëso numrin e dytë:'
+                    numri_1 {is} {ask} 'Plotëso numrin e parë:'
+                    numri_2 {is} {ask} 'Plotëso numrin e dytë:'
                     përgjigje_saktë = numri_1 * numri_2
-                    {print} numri_1 ' herë ' numri_2 ' është ' përgjigje_saktë
+                    {print} numri_1 ' herë ' numri_2 ' është 'përgjigje_saktë
                     ```
                 story_text_2: |
                     Llogaritësi i mësipërm do të llogarisë përgjigjen për ju, por ju gjithashtu mund të bëni një program për të testuar aftësitë tuaja matematikore, si kjo:
@@ -245,7 +213,7 @@ adventures:
                     ```
                 story_text_3: |
                     Ju gjithashtu mund ta lini kompjuterin të bëjë shuma të rastësishme vetë duke përdorur rastësi.
-            9:
+            10:
                 story_text: |
                     Në nivelet e mëparshme ju keni mësuar se si të bëni një kalkulator, në këtë nivel mund ta zgjeroni atë kod dhe ta shndërroni atë në një lojë të vogël matematikore.
                     ### Sfidë
@@ -265,27 +233,10 @@ adventures:
                             pikë = pikë + 1
                     {print} 'Punë mirë! Pikët tuaja janë... ' pikë ' nga 10!'
                     ```
-            11:
-                example_code: |
-                    ```
-                    number = 10
-                    {for} i {in} {range} 1 {to} 10
-                        {print} i * number
-                    ```
-            12:
-                story_text: |
-                    Tani mund të bëni një kalkulator që punon me numra decimal. Plotësoni vendet bosh që të funksionojë siç duhet!
-                example_code: |
-                    ```
-                    numri1 = {ask} 'Cili është numri i parë?'
-                    numri2 = {ask} 'Cili është numri i dytë?'
-                    përgjigja = _
-                    {print} numri1 ' plus ' numri2 ' është ' përgjigja
-                    ```
-            15:
+            16:
                 story_text: |
                     Ju mund ta shtoni komandën `{while}` në lojën me kalkulator që e mësuat në nivelin e mëparshëm.
-                    Kjo siguron se lojtarët nuk mund të vazhdojnë në pyetjen tjetër nëse përgjigjen gabim.
+                    Kjo siguron se lojtarët nuk mund të vazhdojnë në pyetjen tjetër {if}(nëse) përgjigjen gabim.
 
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
@@ -315,7 +266,7 @@ adventures:
                     përgjigja {is} {ask} 'Çfarë duhet të përdorim prej tani e tutje?'
                     {print} 'Ne duhet të përdorim ' përgjigja
                     ```
-            5:
+            6:
                 story_text: |
                     Në nivel 5 kemi diçka të re, `{if}` komanda! Me `{if}` komandën ju mund të zgjidhni një nga dy opsione .
                     Ky kodi printon Hedy si emër, dhe boo! nëse shkruani diçka tjetër.
@@ -325,7 +276,7 @@ adventures:
                     emri {is} {ask} 'si e keni emrin?'
                     {if} emri {is} Hedy {print} 'mirë' {else} {print} 'boo!'
                     ```
-            6:
+            7:
                 story_text: |
                     Në këtë nivel ju do të mësoni diçka të re: ju tash mund të kalkuloni.
 
@@ -339,14 +290,14 @@ adventures:
                     {print} '5 minus 5 është ' 5 - 5
                     {print} '5 herë 5 është ' 5 * 5
                     ```
-            7:
+            8:
                 story_text: |
                     Niveli 7 shton komandën `{repeat}`.  `{repeat}` komanda mund të përdoret që të ekzekutoni rreshtin e kodit disa herë.
                 example_code: |
                     ```
                     {repeat} 3 {times} {print} 'Hedy është qejf!'
                     ```
-            8:
+            9:
                 story_text: |
                     `{ask}` dhe `{print}` punojnë siç i mbani mend. Por `{if}`, `{else}` dhe `{repeat}` kanë ndryshuar!
                     Tani mund të ekzekutoni grup kodi së bashku, por do të duhet që para kodin të lëni hapësira.
@@ -369,7 +320,7 @@ adventures:
                         {print} 'HAJDUT!'
                         {print} 'Nuk mund ta përdorni këtë kompjuter!'
                     ```
-            9:
+            10:
                 story_text: |
                     Në këtë nivel jo veçse mund të përdorni shumë rreshta me komandat `{if}` dhe `{repeat}`, por mund ti vendoseni së bashku!
                     Në shembullin që shikoni komanda `{if}` është brenda komandës `{repeat}`. Gjithashtu mund edhe e kundërta, një komandë `{if}` lejohet brenda komandës tjetër `{if}` dhe komanda `{repeat}` brenda një tjetër `{repeat}`.
@@ -383,7 +334,7 @@ adventures:
                         {else}
                             {print} 'pica është më mirë'
                     ```
-            10:
+            11:
                 story_text: |-
                     Në këtë nivel do mësojmë për komandë të re që quhet `{for}`. Me komandën`{for}` mund të bëni një listë dhe ti përdoreni të gjitha elementet.
                     `{for}` krijon një bllok, si në `{repeat}` dhe `{if}` kështu që të gjitha rreshtat në bllok duhet të fillojnë me hapësira.
@@ -393,81 +344,6 @@ adventures:
                     {for} kafsha {in} kafshët
                       {print} 'Un e dua ' kafsha
                     ```
-            12:
-                story_text: |-
-                    **Numrat decimal**
-                    Deri tani, Hedy nuk lejoji numrat decimal si 1.5, por tani ne e lejojmë këtë. Mbani mend se kompjuterët e përdorin `.` për numra decimal.
-                example_code: |
-                    ```
-                    {print} 'Dy e gjysmë plus dy e gjysme është...'
-                    {print} 2.5 + 2.5
-                    ```
-
-                    {print} 2.5 + 2.5
-            13:
-                story_text: Ne tash do të mësojmë për komandën `{and}` dhe `{or}`! Nëse doni të kontrolloni dy deklarata, nuk ka nevojë për dy komanda {if} por mund të përdorni `{and}` dhe `{or}`. Nëse përdorni `{and}`, të dyja deklaratat, majtë edhe djathtë `{and}` duhet të jenë të vërteta. Ne gjithashtu mund të përdorim `{or}` atëherë vetëm njëra deklaratë duhet të jetë e vërtetë.
-                example_code: |
-                    ```
-                    emri= {ask} 'Si e ke emrin?'
-                    mosha= {ask} 'Sa vjeçar jeni?'
-                    {if} emri {is} 'Hedy' {and} mosha {is} 2
-                        {print} 'Ju jeni Hedy i vërtetë!'
-                    ```
-            14:
-                story_text: |
-                    Ne do të mësojmë më shumë gjëra. Ju veçse mund ti dini nga matematika, `<` edhe `>`.
-                    `<` kontrollon nëse numri i parë është më i vogël se i dyti, për shembull mosha `<` 12 kontrollon nëse mosha është më e vogël se 12.
-                    Nëse doni të kontrolloni nëse numri i parë është më i madh ose barazi me numrin e dytë, ju mund të përdorni `<=`, për shembull mosha `<=` 11.
-                    `>` kontrollon nëse numri i parë është më i madh se i dyti, për shembull pikët `>` 10 kontrollon nëse pikët janë më shumë se 10.
-                    Nëse doni të kontrolloni nëse numri i parë është më i madh apo barazi me numrin e dytë, ju mund të përdorni `>=`, për shembull pikët`>=` 11.
-                    Ju mund ti përdorni këto krahasime në komandën `{if}`, si kështu:
-                example_code: |
-                    ```
-                    mosha= {ask} 'Sa vjeçar jeni?'
-                    {if} mosha > 12
-                        {print} 'Ju jeni më të vjetër se unë!'
-                    ```
-
-                    {if} mosha< 13
-                        {print} 'Ju jeni më të ri se unë!'
-                    {else}
-                        {print} 'Ju jeni më të vjetër se unë!'
-            15:
-                story_text: |-
-                    Ne do të mësojmë një tjetër kusht me përsëritje, `{while}` komanda! Ne e përsëritim bllokun e kodit derisa deklarata është e vërtetë.
-                    Kështu që mos harroni ta ndërroni vlerën në kushtin e dhënë.
-
-                    Në shembullin e dhënë, ne vazhdojmë derisa të jepet një përgjigje e saktë.
-                    Nëse nuk jepet përgjigje e saktë, atëherë përsëritja nuk mbaron!
-                example_code: |
-                    ```
-                    rezultati= 0
-                    {while} rezultati != 25
-                        rezultati = {ask} 'Sa bëjnë 5 herë 5?'
-                    {print} 'Është dhënë përgjigje e saktë'
-                    ```
-            16:
-                story_text: |-
-                    Ne do ta bëjmë një listë si në Python, me kllapa katrore para dhe pas listës! Ne gjithashtu i mbajmë thonjëzat në secilin artikull siç e kemi mësuar në nivelet e mëparshme.
-                    Mund të përdorni kllapa katrore që të treguar një vend në listë.
-                example_code: |
-                    ```
-                    shokët = ['Agoni', 'Beni', 'Arsimi']
-                    numrat_me_fat = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} 'numri me fatë i ' shokët[i]
-                        {print} 'është ' numrat_me_fat[i]
-                    ```
-            17:
-                story_text: |-
-                    Tani do të ndryshojmë mënyrën e hapësirave para kodit. Çdoherë kur do na duhet hapësirë para kodit, neve na duhet `:` tek rreshti para hapësirës.
-
-                    Në këtë nivel gjithashtu mund të përdorni: `{elif}`. `{elif}` është shkurt për `{else} {if}` dhe ju duhet kur doni të kontrolloni 3 apo më shumë opsione.
-                    Shiheni!
-            18:
-                story_text: |
-                    Ne mbërritëm në kodin e vërtetë të gjuhës Python! Kjo do të thotë se duhet të përdorim kllapa në komandën {print} dhe {range} prej tani.
-                    {print}('Emri im është ', emri)
     dice:
         name: Zare
         default_save_name: Zare
@@ -506,12 +382,11 @@ adventures:
                 example_code: |
                     ```
                     zgjedhjet {is} 1, 2, 3, 4, 5, krimb_toke
-                    hidhe {is} zgjedhjet {at} {random}
-                    {print} 'ti ke hedhur ' hidhe
-                    _ hidhe {is} krimb_toke {print} 'Mund të ndaloni së hedhuri.'
-                    _ {print} 'Duhet ta hidhni përsëri!'
+                    hidhe {is} _
+                    {print} 'ti ke hedhur' _
+                    {if} _ {is} krimb_toke {print} 'Mund të ndaloni së hedhuri.' _ {print} 'Duhet ta hidhni përsëri!'
                     ```
-            6:
+            7:
                 story_text: |
                     Mund përsëri të bëni zarin e krimbit të tokës, por tani gjithashtu mund ta kalkuloni sa pikë keni hedhur.
                     Ju mund ta dini që krimbi njihet si 5 pikë. Pas një të hedhuri, ju mund menjëherë ta kalkuloni sa pikë keni hedhur.
@@ -530,7 +405,7 @@ adventures:
                     ```
                 example_code_2: |
                     A mundët që të kalkuloni pikët për 8 zare? U desh të kopjoni shumë apo? Ne do ta bëjmë më të lehtë në nivelin 7!
-            7:
+            8:
                 story_text: |
                     Ju mund përsëri ta bëni një zare në nivelin 5. Me komandën `{repeat}` ju mund lehtë të hidhni një dorë me zare.
                     Tentoni ta përfundoni kodin e dhënë si shembull! Vijat duhet të kenë disa komanda dhe shkronja.
@@ -538,10 +413,10 @@ adventures:
                     Ndoshta doni të bëni një zare komplet tjetër. Sigurisht që mundeni!
                 example_code: |
                     ```
-                    zgjedhjet = 1, 2, 3, 4, 5, 6
-                    _ _ _ _ _ _ _
+                    zgjedhjet = 1, 2, 3, 4, 5, krimi_tokes
+                    {repeat} _ _ {print} _ _ _
                     ```
-            10:
+            11:
                 story_text: |
                     A është secilit duke i marrë shumë kohë hedhja e zareve? Në këtë nivel ju mund ta bëni që Hedy ti hedhë të gjitha zaret në të njëjtën kohë!
                     A mund të plotësoni rreshtin e saktë të kodit në vendet bosh?
@@ -591,8 +466,8 @@ adventures:
 
                     A mund ta përfundoni kodin i cili printon 'shumë keq' kur është radha e juaj ndërsa në të kundërt 'po!'?
                     Mos harroni thonjëzat!
-                example_code: "```\nnjerëzit {is} nëna, babi, Erza, Sara\nlarësiEnëve {is} njerëzit {at} {random}\n_ larësiEnëve {is} Sara {print} _ shumë keq un e kam ti lajë enët _\n_ {print} 'fatmirësisht nuk ka enë sepse ' _ ' është veçse duke i larë'\n```\n"
-            6:
+                example_code: "```\nnjerëzit {is} nëna, babi, Erza, Sara\nlarësiEnëve {is} njerëzit {at} {random}\n{if} larësiEnëve {is} Sara {print} _ shumë keq un e kam ti lajë enët _ \n{else} {print} 'fatmirësisht nuk ka enë sepse ' _ ' është veçse duke i larë'\n```\n"
+            7:
                 story_text: |
                     Sa shpesh duhet që secili ti lajë enët? A është e drejtë? Mund të numëroni në këtë nivel.
                 example_code: |
@@ -622,8 +497,9 @@ adventures:
                     larësi_enëve = njerëzit {at} {random}
                     {print} 'Të martën enët janë larë nga: ' larësi_enëve
                     {remove} larësi_enëve {from} njerëzit
+                    larësi_enëve = njerëzit {at} {random}
                     ```
-            7:
+            8:
                 story_text: |
                     Me komandën `{repeat}` mund të përsëritni pjesë nga kodi. Mund ta përdorni që të kalkuloni kush do ti lajë enët për të gjithë javën.
                 example_code: |
@@ -631,15 +507,15 @@ adventures:
                     njerëzit = nëna, babi, Erza, Sara
                     {repeat} _ _ {print} 'larësi i enëve është' _
                     ```
-            10:
+            11:
                 story_text: |
                     Në këtë nivel, ju mund të bëni një orar më të mirë të larjes së enëve.
                 example_code: |
                     ```
                     ditët = E hënë, E martë, E mërkurë, E enjte, E premte, E shtunë, E diel
                     emrat = nëna, babi, Erza, Sara
-                    {for} dita {in} ditët
-                        {print} emrat {at} {random} ' i lanë enët në ditën e ' dita
+                    _ dita _ ditët
+                        {print} emrat {at} {random} ' i lanë enët në ditën e ' dita
                     ```
     fortune:
         name: Fallxhore
@@ -656,11 +532,11 @@ adventures:
                     Si kjo:
                 example_code: |
                     ```
-                    _ Përshëndetje, unë jam Hedy fallxhori!
-                    _ Kush jeni ju?
-                    _ Më lejoni t'i hedh një sy topit tim të kristaltë
-                    _ Ah po e shoh... e shoh...
-                    _ Emri yt është
+                    {print} Përshëndetje, unë jam Hedy fallxhori!
+                    {ask} Kush jeni ju?
+                    {print} Më lejoni t'i hedh një sy topit tim të kristaltë
+                    {print} Ah po e shoh.. e shoh...
+                    {echo} Emri yt është
                     ```
                 story_text_2: |
                     Hedy tani ju tregon vetëm emrin tuaj. A mund ta zgjeroni kodin në mënyrë që Hedy të mund të parashikojë më shumë gjëra për ju?
@@ -671,6 +547,7 @@ adventures:
                     Në nivelet e mëparshme ju keni krijuar makinën tuaj të parë të tregimit të fatit, por Hedy nuk mund të parashikonte asgjë, vetëm {echo}.
                     Në këtë nivel, ju mund të përdorni një variabël dhe komandën `{at} {random}` për ta lënë Hedy-n të zgjedhë një përgjigje për ju. Shikoni këtë kod për shembull:
                 example_code: |
+                    Në këtë shembull, lojtari mund të {ask} Hedy-t një pyetje po-jo dhe Hedy do të zgjedhë një përgjigje të rastësishme për ju.
                     ```
                     {print} I’m Hedy the fortune teller!
                     pyetja {is} {ask} What do you want to know?
@@ -699,7 +576,7 @@ adventures:
                     {sleep} 2
                     {print} përgjigja {at} {random}
                     ```
-            5:
+            6:
                 story_text: |
                     Në këtë nivel do të mësoni të (fshehurazi) t'i ktheni shanset në favorin tuaj, kur përdorni fallxhoren!
                     Duke përdorur `{if}` dhe `{else}` mund të siguroheni që gjithmonë do të merrni një foto të mirë, ndërsa njerëzit e tjerë mund të mos kenë.
@@ -711,7 +588,7 @@ adventures:
                     person {is} {ask} 'Kush jeni ju?'
                     {if} person {is} Hedy {print} 'Ju sigurisht do të fitoni!🤩' {else} {print} 'Fat i keq! Dikush tjetër do të fitojë!😭'
                     ```
-            6:
+            7:
                 story_text: |
                     Në këtë nivel ju mund të përdorni matematikën në parashikimet tuaja si një fallxhor. Kjo ju lejon të krijoni formula (të pamenda) për të llogaritur të ardhmen.
                     Për shembull, mund të llogarisni sa të pasur do të bëheni ose sa fëmijë do të keni kur të rriteni.
@@ -733,7 +610,19 @@ adventures:
                     {sleep}
                     {print} fëmijët ' fëmijë!'
                     ```
-            7:
+
+                    Nëse shembulli i mëparshëm nuk ishte mjaft budalla për ju, hidhini një sy këtij!
+                    ```
+                    {print} 'Jam Hedy fallxhori!'
+                    {print} 'Un do të parashikoj sa të zgjuar jeni!'
+                    futboll = {ask} 'Në shkallën 1-10 sa e pëlqeni futbollin?'
+                    banane = {ask} 'Sa banane keni ngrënë këtë javë?'
+                    higjiena = {ask} 'Sa herë i keni larë duart sot?'
+                    rezultati = banane + higjiena
+                    rezultati = rezultati * futboll
+                    {print} 'Ju jeni ' rezultati ' përqind të zgjuar.'
+                    ```
+            8:
                 story_text: |
                     Në këtë nivel mund të përdorni komandën `{repeat}`(përsërit) për ta bërë kompjuterin tuaj të tregojë fate të shumta në të njëjtën kohë.
                 example_code: |
@@ -744,7 +633,7 @@ adventures:
                     përgjigja = po, jo, ndoshta
                     {repeat} 3 {times} {print} 'Topi im i kristaltë thotë... ' përgjigja {at} {random}
                     ```
-            8:
+            9:
                 story_text: |
                     Në nivelet e mëparshme keni mësuar se si të përdorni `{repeat}` për ta bërë fallxhoren t'u përgjigjet 3 pyetjeve me radhë, por ne patëm një problem me printimin e pyetjeve.
                     Tani ai problem është zgjidhur, për shkak të mënyrës së re të përdorimit të komandës `{repeat}`.
@@ -763,7 +652,7 @@ adventures:
                        {sleep}
                        {print} 'Topi im i kristaltë thotë...' përgjigja {at} {random}
                     ```
-            10:
+            11:
                 story_text: |
                     Në këtë nivel do të mësoni se si të programoni lojën MASH (rezidencë, apartament, kasolle, shtëpi). Në këtë lojë ju mund të parashikoni për të gjithë lojtarët menjëherë se si do të duket e ardhmja e tyre.
                 example_code: |
@@ -777,17 +666,6 @@ adventures:
                         {print} emri ' do të martohet me ' dashuron {at} {random}
                         {print} emri ' do të ketë ' kafshë_shtëpiake {at} {random} ' si kafshën e tyre shtëpiake.'
                         {sleep}
-                    ```
-            12:
-                story_text: |
-                    Në këtë nivel ju mund të bëni fatin tuaj me fjalë të shumta. Mund të shtoni më shumë pasuri të ndryshme në listë?
-                example_code: |
-                    ```
-                    fati ='do të rrëshqasësh në lëkurën e bananes', _
-                    {print} 'Do të hedh një sy në topin tim të kristaltë për të ardhmen tuaj.'
-                    {print} 'E shikoj... E shikoj...'
-                    {sleep}
-                    {print} fati {at} {random}
                     ```
     haunted:
         name: Shtëpia e përhumbur
@@ -886,7 +764,7 @@ adventures:
                     _ _ _ _ {print} 'Shkëlqyeshëm! Ju keni shpëtuar!'
                     {else} {print} 'Oh jo! Ju jeni duke u ngrënë nga një...' përbindëshit {at} {random}
                     ```
-            9:
+            10:
                 story_text: |
                     Në këtë nivel mund të përdorni folenë, e cila ju lejon ta bëni shtëpinë e përhumbur edhe më ndërvepruese!
 
@@ -914,34 +792,6 @@ adventures:
                     {if} lojtari {is} gjallë
                         {print} 'Shkëlqyeshëm! Ju mbijetuat!'
                     ```
-            11:
-                story_text: |
-                    Në këtë nivel ne kemi ndryshuar komandën e përsëritjes dhe kemi shtuar një linjë në shtëpinë tonë të përhumbur që i tregon lojtarit në cilën dhomë janë.
-
-                    ### Sfidë
-                    Përfundoni programin me rreshtin e saktë të kodit. Mendje: Ka 3 dhoma që lojtarit i duhen për të mbijetuar përpara se të fitojë!
-                example_code: |
-                    ```
-                    {print} 'Ik nga shtëpia e përhumbur!'
-                    lojtari {is} gjallë
-                    dyert = 1, 2, 3
-                    përbindëshit = mumje, vampir, merimangë gjigante
-                    _
-                        {if} lojtari {is} gjallë
-                            dera_saktë = dyert {at} {random}
-                            {print} 'Dhoma' i
-                            {print} 'Ka 3 dyer para jush...'
-                            dera_zgjedhur = {ask} 'Cilën derë zgjidhni?'
-                            {if} dera_zgjedhur {is} dera_saktë
-                                {print} 'Nuk ka përbindësh këtu!'
-                            {else}
-                                {print} 'Ju jeni ngrënë nga një ' përbindëshit {at} {random}
-                                lojtari = vdekur
-                        {else}
-                            {print} 'LOJA PËRFUNDOI'
-                    {if} lojtari {is} gjallë
-                        {print} 'Shkëlqyeshëm! Ju mbijetuat!'
-                    ```
     language:
         name: Gjuha
         default_save_name: Gjuha
@@ -963,7 +813,7 @@ adventures:
                     {if} bretkocë {is} grenouille {print} 'Super!'
                     {else} {print} 'Jo, bretkosa është grenuille'
                     ```
-            16:
+            14:
                 example_code: |
                     ```
                     fjalë_franceze = ['bonjour', 'ordinator', 'pomme de terre']
@@ -1070,30 +920,6 @@ adventures:
         default_save_name: Drejtues konkursi
         description: Bëni kuizin tuaj!
         levels:
-            14:
-                story_text: |
-                    Në këtë aventurë ju mund të bëni kuizin tuaj! Plotësoni vendet bosh, shtoni më shumë pyetje dhe shijoni kuizin tuaj!
-                    Ju mund të bëni një kuiz për çdo gjë që ju pëlqen: hobi juaj, kafshën tuaj të preferuar, librin tuaj të preferuar apo ndonjë gjë fare!
-                example_code: |
-                    ```
-                    {print} 'Bëni kuizin tuaj'
-                    pikë_a = 0
-                    pikë_b = 0
-                    {print} 'Pyetje'
-                    {print} 'Opsioni i përgjigjes A'
-                    {print} 'Opsioni i përgjigjes B'
-                    përgjigje = {ask} 'Cila përgjigje?'
-                    {if} përgjigje == 'A'
-                         pikë_a = pikë_a + 1
-                    {if} përgjigje == 'B'
-                         pikë_b = pikë_b + 1
-                    {print} 'Fundi i kuizit!'
-                    {print} 'Le ti shohim rezultatet!'
-                    {if} pikë_a > pikë_b
-                         {print} 'Ti i përket klubit A'
-                    {if} pikë_b > pikë_a
-                         {print} 'Ti i përket klubit B'
-                    ```
     restaurant:
         name: Restorant
         default_save_name: Restorant
@@ -1175,7 +1001,7 @@ adventures:
                     {print} Faleminderit per porosinë.
                     {print} ushqimi  juaj dhe  pije  do të jenë këtu!'
                     ```
-            5:
+            6:
                 story_text: |
                     Në këtë nivel komanda `{if}` ju lejon që të `{ask}`(pyesni) klientët tuaj dhe të trajtoni përgjigje të ndryshme.
                     Në shembullin më poshtë, ju mund ta shikoni që mund ta `{ask}`(pyesni) klientin `{if}`(nëse) duan ta dëgjojnë specialitetin dhe Hedy mund të përgjigjet varësisht çka thotë klienti .
@@ -1195,7 +1021,7 @@ adventures:
                     {if} çfarëdo {is} jo {print} 'Kjo ishte!' {else} {print} 'Një ' çfarëdo
                     {print} 'Faleminderit për porosinë tuaj dhe shijoni ushqimin tuaj!'
                     ```
-            6:
+            7:
                 story_text: |
                     Në këtë nivel mund të përdorni matematikën për të kalkuluar çmimin total të klientit tuaj, e cila do ta bëjë restorantin tuaj më reale.
                 example_code: |
@@ -1213,7 +1039,7 @@ adventures:
                     {print} 'Kjo do të kushtojë ' çmimi ' lekë.'
                     {print} 'Faleminderit, shijoni vaktin tuaj!'
                     ```
-            7:
+            8:
                 story_text: |
                     Në këtë nivel keni mësuar të përdorni komandën `{repeat}` që të përsëritni një rresht kodi disa herë.
                     Ju mund ta përdorni atë në restorant që të `{ask}`(pyesni) disa njerëz se çfarë duan të hanë.
@@ -1227,7 +1053,7 @@ adventures:
                     {repeat} _ {times} ushqimi = {ask} 'Çfarë doni të hani?'
                     {print} 'Faleminderit për porosinë tuaj. Është duke u bërë!'
                     ```
-            8:
+            9:
                 story_text: |
                     Në këtë nivel mund ta bëni restorantin tuaj virtual më të përpunuar duke përsëritur disa rreshta kodi. Si kështu:
 
@@ -1245,7 +1071,7 @@ adventures:
                     {print} 'Faleminderit për porosinë!'
                     {print} 'Enjoy your meal!'
                     ```
-            9:
+            10:
                 story_text: |
                     Në këtë nivel ju mund të përdorni komandë ndër komandë për ta bërë restorantin tuaj më realist dhe më argëtues!
                     Për shembull, ju do të kërkoni salcë nëse dikush porosit patate të skuqura, por nuk do të kërkoni nëse dikush porosit pica!
@@ -1277,7 +1103,7 @@ adventures:
                     {print} 'Kjo do të jetë ' çmimi ' lekë'
                     {print} 'Të bëftë mirë!'
                     ```
-            10:
+            11:
                 story_text: |
                     Në këtë nivel do të mësoni se si të {ask} (pyesni) me lehtësi për porositë e mysafirëve tuaj në një kod të shkurtër.
                 example_code: |
@@ -1300,28 +1126,6 @@ adventures:
                     _ ushqimi = {ask} emri ', çfarë do të dëshironit të hani si 'kurs' tuaj?'
                     _ {print} emri ' porositën ' ushqimi ' si ' kurs
                     ```
-            11:
-                story_text: |
-                    Mund ta përdorim `{for} i {in} {range} 1 {to} 5` për të `{print}` porositë nga shumë klientë në mënyrë të rregullt.
-
-                    ### Exercise
-                    Can you handle another indentation challenge? Get the code to work properly by adding the right amount of indentation before each line!
-                example_code: |
-                    ```
-                    {print} 'Mirë se erdhët në Restorant Hedy!'
-                    njerëzit = {ask} 'Për sa persona dëshironi të porosisni?'
-                    {for} i {in} {range} 1 {to} njerëzit
-                    _ {print} 'Porosija numër ' i
-                    _ ushqimi = {ask} 'Çfarë do të dëshironit të hani?'
-                    _ {print} ushqimi
-                    _ {if} ushqimi {is} patate
-                    _ salcë = {ask} 'Çfarë lloj salce do të dëshironit me të?'
-                    _ {print} sauce
-                    _ pije = {ask} 'Çfarë dëshironi të pini?'
-                    _ {print} pijet
-                    çmimi = 4 * njerëzit
-                    {print} 'Kjo do të jetë ' çmimi ' lekë!'
-                    ```
             12:
                 story_text: |
                     Nga ky nivel e tutje, mund të përdorni numra dhjetorë për ta bërë menu-në tuaj më realiste.
@@ -1343,21 +1147,7 @@ adventures:
                         çmimi = çmimi + 2.35
                     {print} 'Kjo do të jetë ' çmimi ' lekë'
                     ```
-            13:
-                story_text: |
-                    Në këtë nivel ne mund të përdorim komandat e reja për të përmirësuar restorantin tonë.
-                    Ne përdorim komandën `{and}` të shikojmë {if}(nëse) dy gjera jane të njëjta.
-                example_code: |
-                    ```
-                    çmimi = 10
-                    ushqimi = {ask} 'Çfarë do të dëshironit të hani?'
-                    pije = {ask} 'Çfare do te pish?'
-                    {if} ushqimi {is} 'sanduiç' {and} pije {is} 'lëng'
-                        {print} 'Kjo është menyja jonë e zbritjes'
-                        çmimi = çmimi - 3
-                    {print} 'Kjo do të jetë ' çmimi ' lekë'
-                    ```
-            15:
+            16:
                 story_text: |
                     Me komandën `{while}` mund të siguroheni që klientët tuaj të mund të vazhdojnë të shtojnë porosi derisa të mbarojnë.
                     ### Exercise
@@ -1369,7 +1159,7 @@ adventures:
                     _
                         porosia = {ask} 'Çfarë dëshironi të porosisni?'
                         {print} porosia
-                        më_shumë = {ask} 'A dëshironi diçka tjetër?'
+                        më_shumë = {ask} 'A dëshironi diçka {else}(tjetër)?'
                     {print} 'Falemenderit!'
                     ```
     rock:
@@ -1413,7 +1203,7 @@ adventures:
                 example_code: |
                     ```
                     zgjedhjet {is} gur, letër, gërshërë
-                    {print} zgjedhjet _
+                    {print} zgjedhjet {at} {random}
                     ```
                 story_text_2: |
                     Tani ju keni vetëm një lojtar, kështu që mund të shtoni një lojtar të dytë?
@@ -1436,22 +1226,22 @@ adventures:
                     ```
                     opsionet {is} gur, letër, gërshërë
                     zgjedhja_kompjuterit {is} _
-                    zgjedhja {is} _
+                    zgjedhja {is} {ask} 'Çfarë zgjidhni?'
                     {print} 'Ju zgjodhët ' _
                     {print} 'Kompjuteri zgjodhi ' _
                     {if} _ {is} _ {print} 'barazim!' {else} {print} 'ska barazim'
                     ```
 
-                    Mbusheni boshllëqet nëse është barazim.
-            9:
+                    Mbusheni boshllëqet {if} (nëse) është barazim.
+            10:
                 story_text: |
                     Në këtë nivel mund ta programi gjithë lojën gur, letër, gërshërë duke përdorur komandën {if} një mbi një. A mund ta përfundoni kodin?
                 example_code: |
                     ```
                     zgjedhjet = gur, letër, gërshërë
-                    zgjedhja_juaj {is} {ask} 'Çfarë zgjidhni?'
+                    zgjedhja_juaj = {ask} 'Çfarë zgjidhni?'
                     {print} 'Ju zgjodhët ' zgjedhja_juaj
-                    zgjedhja_kompjuterit {is} zgjedhjet {at} {random}
+                    zgjedhja_kompjuterit = zgjedhjet {at} {random}
                     {print} 'Kompjuteri zgjodhi ' zgjedhja_kompjuterit
                     {if} zgjedhja_kompjuterit {is} zgjedhja_juaj
                         {print} 'Barazim'
@@ -1462,15 +1252,16 @@ adventures:
                             {print} 'Ju humbët!'
                     # përfundoni kodin
                     ```
-            10:
+            11:
                 story_text: |
                     Ju mërzitet që të luani lojën vetë? Lëreni Hedy të luajë për ju!
                     Mjafton të plotësoni emrat e lojtarëve.
                 example_code: |
                     ```
-                    zgjedhjet = _
+                    zgjedhjet = gur, letër, gërshërë
                     lojtarët = _
-                    {for} _
+                    {for} lojtari {in} lojtarët
+                         {print} lojtari ' ka zgjedhur ' zgjedhjet {at} {random}
                     ```
             13:
                 story_text: |
@@ -1490,7 +1281,7 @@ adventures:
                         {print} 'Kompjuteri fiton!'
                     _
                     ```
-            15:
+            16:
                 story_text: |
                     Luani derisa ta fitoni kompjuterin! Por fillimisht, përfundoni shembullin e dhënë...
                 example_code: |
@@ -1537,7 +1328,7 @@ adventures:
                          b = 'sot në orën 10:00'
                     {print} a + b
                     ```
-            13:
+            10:
                 story_text: |
                     A mund të plotësoni komandën e duhur në vendin bosh? Mendja: Superspiuni duhet t'u përgjigjet saktë të DY pyetjeve, përpara se të marrë informacionin konfidencial!
                 example_code: |
@@ -1580,13 +1371,13 @@ adventures:
                     ```
                     numri = 6
                     numri = numri - 1
-                    {print} numri "majmunët e vegjël që kërcejnë në shtrat"
-                    {print} 'Një ra dhe përplasi kokën'
-                    {print} 'Mami thirri doktorin dhe doktori tha'
-                    {print} 'JO MË MAJMUNE QË KËRREN NË SHTRAT!'
-                    {sleep}
+                    print numri "majmunët e vegjël që kërcejnë në shtrat"
+                    print 'Një ra dhe përplasi kokën'
+                    print 'Mami thirri doktorin dhe doktori tha'
+                    print 'JO MË MAJMUNE QË KËRREN NË SHTRAT!'
+                    sleep
                     ```
-            7:
+            8:
                 story_text: |
                     Këngët shpesh herë kanë përsëritje. Për shembull... Peshkaqeni i vogël! Nëse e këndoni, ju vazhdoni të këndoni të njëjtën gjë:
 
@@ -1603,21 +1394,21 @@ adventures:
                     ```
 
                     Pas Peshkani i vogël, ju mund të programi këngë të tjera. Ka shumë këngë me përsëritje.
-            8:
+            9:
                 story_text: |
                     Në nivelin e mëparshëm, ju e keni programuar këngën 'Shishe birre'. Ju e bëtë një varg dhe u deshtë që të kopjoni vargun 99 herë. Në nivelin 7 ju mund të përsëritni këngën 99 herë, vetëm duke shtuar një rresht kodi!
                     A e dini se cilën rresht kodi të shtoni në boshllëqet?
                 example_code: |
                     ```
                     vargu = 99
-                    _ 99 {times}
-                    {print} vargu ' shishe birre në mur'
-                    {print} vargu ' shishe birre'
-                    {print} 'Hiqeni njërën, kaloje përreth'
-                    vargu = vargu - 1
-                    {print} vargu ' shishe birre në murr'
+                    _ _ _
+                        {print} vargu ' shishe birre në mur'
+                        {print} vargu ' shishe birre'
+                        {print} 'Hiqeni njërën, kaloje përreth'
+                        vargu = vargu - 1
+                        {print} vargu ' shishe birre në murr'
                     ```
-            10:
+            11:
                 story_text: |
                     Në këtë nivel ju mund thjeshtë të bëni këngën për fëmijë ' këngën 'Pesë fëmijët majmun'. A mund ta bëni korin e fundit?
                     Ju mund ta bëni të gjithë këngën e Peshkaqenit të vogël (duke përmbajtur të gjithë peshkaqenët në familje) në vetëm 6 rreshta, Duke përdorur komandën `{for}`
@@ -1672,73 +1463,6 @@ adventures:
                     Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
 
                     **(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
-            11:
-                story_text: |
-                    Në këtë nivel ju mund të përdorni komandën `{for} i {in} {range}` të bëni muzika që përdorin numërim, si në 5 majmunët e vegjël.
-
-                    ### Sfidë
-                    Plotësoni vendet bosh dhe bëni kodin të funksionojë!
-                example_code: |
-                    ```
-                    _ _ _ _ 5 _ 1
-                        {print} i 'majmunët e vogël kërcejnë në shtrat'
-                        {print} 'Njëri rra dhe vrau kokën'
-                        {print} 'Nëna thërriti doktorin dhe doktori tha'
-                        {if} i {is} 1
-                            {print} 'Vendoseni këto majmunë drejt në shtrat!'
-                        {else}
-                            {print} 'Jo më majmunët të kërcejnë në shtrat'
-                    ```
-            12:
-                story_text: |
-                    Në këtë këngë ne mund ta bëjmë ende më të lehtë të programojmë '{if} jeni të lumtur dhe e dini, duartrokitni'. Sepse mund ti vendosim të gjitha veprimet në një variabël, shiheni:
-
-                    ### Sfidë
-                    A mund të shtoni sasinë e duhur të hapësirave përpara, në çdo rresht për ta bërë që kënga të luajë saktë?
-                    Mendje: Jo të gjitha rreshtat kanë nevojë për hapësirë përpara
-                example_code: |
-                    ```
-                    _ veprimet = 'duartrokitni', 'sheklni me këmbët tuaja', 'thirrni URAA!'
-                    _ {for} veprim {in} veprimet
-                    _ {for} i {in} {range} 1 {to} 2
-                    _ {print} 'Nëse jeni të lumtur dhe e dini'
-                    _ {print} veprim
-                    _ {print} 'Nëse jeni të lumtur dhe e dini dhe vërtet doni ta tregoni'
-                    _ {print} 'Nëse jeni të lumtur dhe e dini'
-                    _ {print} veprim
-                    ```
-            16:
-                story_text: |
-                    Në këtë nivel, ju mund ta programoni një këngë si Mek Donald i vjetër edhe më shpejtë. Ju mund ta lidhni kafshën e saktë me zërin e saktë thjeshtë duke i vënë me një vend në listë.
-                    Marinari i dehur gjithashtu mund të bëhet shpejtë. Ju duhet vetëm 8 rreshta për të gjithë këngën, shiheni!
-                example_code: |
-                    ```
-                    kafshët = ['derri', 'qeni', 'lopa']
-                    zërat = ['oink', 'auf', 'muuu']
-                    {for} i {in} {range} 1 {to} 3
-                        kafsha = _
-                        zëri = _
-                        {print} 'Mek Donald i vjetër kishte një fermë'
-                        {print} 'I A I A O!'
-                        {print} 'dhe në këtë fermë ai kishtë një ' kafsha
-                        {print} 'E I E I O!'
-                        {print} 'me një ' zëri zëri ' këtu'
-                        {print} 'dhe një ' zëri zëri ' atje'
-                        {print} 'këtu një ' zëri
-                        {print} 'atje një ' zëri
-                        {print} 'gjithkund një ' zëri zëri
-                    ```
-
-                    ```
-                    rreshtat = ['Çfarë duhet të bëjmë me marinarin e dehur', 'Rruajeni barkun e tij me brisk të ndryshkur', 'futeni në një varg derisa të jetë esëll']
-                    {for} rreshti {in} rreshtat
-                        {for} i {in} {range} 1 {to} 3
-                            {print} rreshti
-                        {print} 'herët në mëngjes'
-                        {for} i {in} {range} 1 {to} 3
-                            {print} 'Eheei dhe ja ku ngritet'
-                        {print} 'herët në mëngjes'
-                    ```
     songs_2:
         levels:
             12:
@@ -1792,8 +1516,6 @@ adventures:
                     {forward} 25
                     {turn} këndi
                     {forward} 25
-                    {turn} këndi
-                    {forward} 25
                     ```
             3:
                 story_text: "Në këtë nivel ju mund të përdorni komandën `{at} {random}` me vizatimin e breshkës. Një zgjedhje random e bën breshkën të ecë rrugë të ndryshme çdo herë. Përdorni `{at} {random}` për të zgjedhur një vlerë nga një listë. \n\n### Sfidë\nA mund të bëni kopjoni rreshtat 2 dhe 3 për të krijuar një rrugë më të gjatë random.\n"
@@ -1837,7 +1559,13 @@ adventures:
                     {forward} 25
                     ```
                 example_code_2: |
-            6:
+                    ```
+                    direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
+                    if direction is left turn _
+                    if direction is right turn _
+                    forward 100
+                    ```
+            7:
                 story_text: |
                     Në këtë nivel mund të përdorni kalkulime për të vizatuar figura të ndryshme.
                     Mund të keni mësuar në shkollë se nëse ktheni komplet rreth ,është 360 shkalle. Nëse jo, tani e dini!
@@ -1860,7 +1588,7 @@ adventures:
                     {forward} 50
                     {turn} këndi
                     ```
-            8:
+            9:
                 story_text: |
                     Tani që mund të përsërisim shumë rreshta, mund të bëjmë figura më lehtë.
                     Duhet vetëm të vendosim këndin një herë, pastaj mund ta përdorim at variabël në komandën `{repeat}`.
