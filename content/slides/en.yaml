@@ -3,17 +3,12 @@ levels:
         1:
             header: Welcome to Hedy!
             text: Hedy is a programming language.
-            notes: |-
-                Ask your students to write down some words that they associate with programming. Do a quick round to hear the answers.
         2:
             header: Programming
             text: |-
                 Programming is giving instructions to a computer, using the language of the computer.
 
                 Such a language is called a "programming language".
-            notes: |-
-                Unfortunately, computers don't understand normal people language, like English, but they speak in their own language.
-                Don't panic, you don't have to type in a string of zeros and ones, but we are going to learn to give the computer instructions in a programming language.
         3:
             header: Programming Language
             text: |-
@@ -22,8 +17,6 @@ levels:
                 * Scratch
                 * Python
                 * HTML
-            notes: |-
-                Ask the students about their own programming experience, or if they perhaps know someone who works in IT.
         4:
             header: Programming
             text: |-
@@ -31,81 +24,35 @@ levels:
                 * Build interactive stories
                 * Create computer drawings and draw these on paper or fabric
                 * Build your own apps to use on your phone
-            notes: |-
-                This may sound really difficult, but we are going to learn programming step-by-step.
         5:
             header: Programming in Hedy
-            text: In Hedy we use special 'keywords' or 'commands', like `{print}`.
+            text: In Hedy we use special codes, like `{print}`.
             code: '{print} Welcome to Hedy!'
-            notes: |-
-                Let's take a look at Hedy. In Hedy we use code words (commands) to give the computer an instruction.
-                We type these instructions in the left screen. This is what we call code, or a program.
         6:
             header: Programming in Hedy
-            text: Keyords will be shown in pink.
+            text: Code words will be shown in pink.
             code: '{print} Welcome to Hedy!'
-            notes: |-
-                As you can see, the code words (or commands) turn pink if you use them correctly.
         7:
             header: Programming in Hedy
             text: We start the code with the Run code button underneath the code.
             code: '{print} Welcome to Hedy!'
-            notes: |-
-                To make the computer follow the instructions you have to 'run' the code. Press the button to show the students what happens.
         8:
             header: Programming in Hedy
             text: Output appears on the right-hand side.
             code: '{print} Welcome to Hedy!'
-            notes: |-
-                When we run the code, output appears. Output is the result of running our program. The right screen where the output appears, is called the output screen.
         9:
             header: Programming in Hedy
             text: The output can also be a drawing.
             code: |-
                 {forward} 100
                 {turn} {left}
-            notes: |-
-                In Hedy we don't only make text appear, but output can also be a drawing, or....
-        10:
-            header: Programming in Hedy
-            text: Or the output can be music!
-            code: |-
-                {play} C4
-                {play} D4
-                {play} E4
-            notes: |-
-                Let's go to the first level to get started!
-        11:
-            header: Programming in Hedy
-            text: |-
-                Sometimes you make a mistake in your code. You can use the debugger to find the mistake (bug) and fix it.
-            code: |-
-                print Debugging means finding a mistake
-                print You can run the code line-by-line
-                prnt This makes it easy to find the bug
-                print And fix it!
-                print Or click on the sleep emoji to disable a line of code
-            debug: 'True'
-            notes: |-
-                **How to debug a code**
-                Watch this <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a> to see how the debugger works, or read the instructions.
-                Of course you could just look at the code and find the mistakes yourself, but we also have some tools to help you.
-                Click on the ladybug 🐞 button beneath your input field. This starts the **debugger**. With the debugger you can run a program line-by-line.
-                If there is a big mistake in your code (like in the debugging adventures) the debugger will tell you to fix the big mistakes first. Read the error messages to find out how to fix the mistakes.
-                If the major mistakes are gone, the debugger will run your program line by line.
-                To run the next line, click on the ⏭️button on the right. Is the line doing what it's supposed to do? Great! Click the button again to run the next line until your program is working perfectly.
-                To stop the debugger, click on the 🛑 button in the middle.
-                To start running your code from the top, click the 🔁 button on the left.
-                Did you get stuck on a line of code and do you want to try your program without that line?
-                You can disable a line of code by clicking in front of the line number. A sleeping emoji 😴 will appear and the line will be crossed out.
-                The line will now be skipped when running the code. To reactivate the line, simply click the sleeping emoji and the line won't be skipped anymore.
     1:
         1:
             header: Welcome to level 1!
             text: |-
-                By the end of this lesson, you can:
-                * Write code that prints text
-                * Create a story with input
+                We will start level 1 by making stories in Hedy!
+
+                We need three text codes to create interactive stories.
         2:
             header: '{print}'
             text: |-
@@ -113,8 +60,6 @@ levels:
 
                 `{print}` is used to show text on the screen.
             code: '{print} Show text on the screen'
-            notes: |-
-                First let the students guess what they think the output will be. Then run the code to show the students what happens when a `print` code is run.
         3:
             header: The {print} command
             text: |-
@@ -124,9 +69,6 @@ levels:
             code: |-
                 {print} Welcome to Hedy!
                 {print} Start programming now!
-            notes: |-
-                Run the code and then change to code to something yourself. Show that you can print whatever you like.
-                Make workbook exercise 1 and 2.
         4:
             header: '{ask}'
             text: |-
@@ -136,42 +78,46 @@ levels:
             code: |-
                 {print} Welcome to your own rock scissors paper!
                 {ask} What will you choose?
-            notes: |-
-                Show that the computer now asks you a question. Fill in an answer and also show that once you fill in the answer, nothing happens.
-                Make your students aware that the computer will only follow your instructions, it will not do anything by itself. This means that if you want the computer to print the answer, you have to give that instruction.
         5:
             header: '{echo}'
             text: |-
-                To show the answer in the output screen, you can use: `{echo}`.
-                `{echo}` is never used by itself, always with an `{ask}`.
+                As you could see in the previous example. If you use the `{ask}` command, you can ask a question.
+                The answer, however doesn't show in the output screen.
+
+                If you do want the answer to show, you can use the final command of this level: `{echo}`.
+                `{echo}` is used to repeat the answer of an `{ask}`.
             code: |-
                 {print} Hello!
                 {ask} What is your name?
                 {echo} hello
-            notes: |-
-                To make the computer repeat the answer back to you, you use the `echo` command. Point out that the answer you've typed in will appear at the end of the sentence.
-                Make workbook exercise 3.
         6:
             header: Programming!
-            text: Here you can find a list of the adventures.
+            text: |-
+                With `{print}`, `{ask}` and `{echo}` you can already create a little story.
+                This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
             editor: /hedy/1
-            notes: |-
-                Before we start, show the students the adventures. Don't forget to point out the exercises. This is where the students will have to read what to do exactly in an adventure.
         7:
+            header: Programming!
+            text: Adventures are shown in tabs.
+            editor: /hedy/1
+        8:
             header: Programming!
             text: The yellow arrow buttons can be used to copy examples.
             editor: /hedy#print_command
-            notes: |-
-                Lastly show the students that they can copy the example code into their programming field by pressing the yellow button.
-        8:
-            header: Let's get started!
-            text: |-
-                This is a good time to try the Parrot, Haunted House, Story and Rock, Paper Scissors adventures.
-            editor: /hedy/1
-            notes: |-
-                These are the first adventures to start with. Once (most of) the students are done, you can introduce the drawing turtle and the `{play}` command.
-                Make workbook exercise 4 and 5.
         9:
+            header: Drawing with the turtle
+            text: Now that we have seen at text codes, we will now look at drawing codes next.
+        10:
+            header: 'Drawing with the turtle: {forward}'
+            text: '`{forward}` is used to move the turtle forward.'
+            code: '{forward} 50'
+        11:
+            header: 'Drawing with the turtle: {turn}'
+            text: '`{turn}` is used to make the turtle turn left or right.'
+            code: |-
+                {forward} 50
+                {turn} {left}
+        12:
             header: Debugging
             text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
             code: |-
@@ -180,112 +126,25 @@ levels:
                 {ask} I like that song too!
                 {print} Next up... {echo}
             debug: 'True'
-            notes: |-
-                **How to debug a code**
-                Watch this <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a> to see how the debugger works, or read the instructions.
-                Of course you could just look at the code and find the mistakes yourself, but we also have some tools to help you.
-                Click on the ladybug 🐞 button beneath your input field. This starts the **debugger**. With the debugger you can run a program line-by-line.
-                If there is a big mistake in your code (like in the debugging adventures) the debugger will tell you to fix the big mistakes first. Read the error messages to find out how to fix the mistakes.
-                If the major mistakes are gone, the debugger will run your program line by line.
-                To run the next line, click on the ⏭️button on the right. Is the line doing what it's supposed to do? Great! Click the button again to run the next line until your program is working perfectly.
-                To stop the debugger, click on the 🛑 button in the middle.
-                To start running your code from the top, click the 🔁 button on the left.
-                Did you get stuck on a line of code and do you want to try your program without that line?
-                You can disable a line of code by clicking in front of the line number. A sleeping emoji 😴 will appear and the line will be crossed out.
-                The line will now be skipped when running the code. To reactivate the line, simply click the sleeping emoji and the line won't be skipped anymore.
-        10:
-            header: Playing music
-            text: |-
-                Play musical notes with `{play}`
-                The notes go: C - D - E - F - G - A - B
-                Place a number behind the note to pick a scale, the scales go from 1 to 10.
-            code: |
-                {play} C4
-                {play} D4
-                {play} E4
-                {play} F4
-                {play} G4
-                {play} A4
-                {play} B4
-                {play} C5
-            notes: |-
-                Show the students how to use the `{play}` command in Hedy. This is also a good time to review the classroom rules about headphone usage.
-                The students can now continue with the music adventure.
-        11:
-            header: 'Drawing with the turtle: {forward}'
-            text: '`{forward}` is used to move the turtle forward.'
-            code: '{forward} 50'
-            notes: |-
-                Now that we have seen at text codes, we will now look at drawing codes next. Show the students how to use the forward command.
-        12:
-            header: 'Drawing with the turtle: {forward}'
-            text: 'How do we go backwards?'
-            code: '{forward} -50'
-            notes: |-
-                Ask the students if they have any idea how to go backwards. The answer is using a negative number, like -50.
         13:
-            header: 'Drawing with the turtle: {turn}'
-            text: '`{turn}` is used to make the turtle turn left or right.'
-            code: |-
-                {forward} 50
-                {turn} {left}
-        14:
-            header: Debugging
-            text: Using the debugger when drawing
-            code: |-
-                {forward} 50
-                {turn} {left}
-                {forward} 100
-                {turn} {left}
-                {forward} 50
-                {turn} {left}
-            debug: 'True'
-            notes: |-
-                The debugger can come in handy when making a drawing. The students can now continue with the rest of the adventures of this level.
-        15:
-            header: Let's review!
-            text: What did you learn today?
-            notes: |-
-                Ask the students to list what they've learned today.
-        16:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        17:
-            header: Show and tell!
-            text: Would anyone like to show the class a program they've made?
-            notes: |-
-                Let some students show their work to the class. You can do that by going to the class page and clicking on the students' adventures.
-        18:
-            header: Sneak peek into the next level...
-            text: |-
-                In the next level you'll learn how to use a variable to make your programs even more interactive!
-                And you'll learn to use the `{sleep}` command to pause your code!
+            header: Let the programming fun begin!
+            text: Enjoy the adventures in level 1!
     2:
         1:
             header: Welcome to level 2
             text: |-
-                By the end of this lesson, you can:
-                * Save something in a variable
-                * Create a story or drawing using variables
-            notes: |-
-                Students might have a hard time understanding the concept of a variable. We found that giving the students multiple examples of variables will help them grasp the concept better.
+                In this level you will learn to use variables.
+
+                A variable is a word that can be used to store information.
+
+                For example: a name, age or favorite sports team.
         2:
             header: Variables
-            text: To make or 'set' a variable we use the `{is}` command. The name of the variable comes before the `{is}` and the value of the variable behind it.
+            text: To make or 'set' a variable we use the `{is}` command
             code: |-
                 name {is} Hedy
                 age {is} 15
                 {print} name is age years old
-            notes: |-
-                Show the students how the variables work. Point out that the names of the variables in the last line are replaced with the values of the variable.
-                Ask students if they could think of another variable (length, shoe size, haircolor etc.) and add your own examples to the code.
-                The students can now make the Rock, paper, scissors adventure. Make workbook exercise 1.
         3:
             header: Interactive
             text: |-
@@ -297,9 +156,6 @@ levels:
             code: |-
                 name {is} {ask} What is your name?
                 {print} Hello name
-            notes: |-
-                Now our programs can get really interactive. The user can give input that is used in the program.
-                Ask the students to come up with their own examples. Make workbook exercise 2 and 3.
         4:
             header: Multiple variables
             text: Now that we use variables, we can use multiple variables instead of just one `{echo}` command.
@@ -308,10 +164,6 @@ levels:
                 {print} Hello name
                 age {is} {ask} How old are you?
                 {print} name is age years old.
-            notes: |-
-                Point out that the `{echo}` command is no longer needed, so it will no longer work in Hedy.
-                The students can now make Rock, Paper Scissors part 2 and Haunted House.
-                Make workbook exercise 4 - 6.
         5:
             header: Sleep
             text: You can also use the `{sleep}` command to pause the code for a while.
@@ -319,9 +171,6 @@ levels:
                 {print} My favorite colour is...
                 {sleep} 2
                 {print} green!
-            notes: |-
-                Show the students the sleep command. Ask them what they think the 2 stand for.
-                Change the 2 into another number to show that they can decide for how many seconds the code will be paused.
         6:
             header: Sleep 5
             text: |-
@@ -333,66 +182,7 @@ levels:
                 {print} My favorite colour is...
                 {sleep} pause
                 {print} green!
-            notes: |-
-                Show the code and if you want you can even change the 10 to an {ask} command.
-                The students can now work on these adventures: Parrot, Story, Music and Restaurant.
         7:
-            header: Drawing with variables
-            text: |-
-                In level 1 you've learned how to use {forward} 100.
-                Now you can use a variable too.
-            code: |-
-                distance {is} {ask} Hwo far should i go?
-                {forward} distance
-            notes: |-
-                Show the students that they can use variables with the drawing turtle now too!
-                Run the code multiple times with different answers, to show the use of variables.
-        8:
-            header: Drawing with degrees
-            text: |-
-                Before you could {turn} {left} or {turn} {right}, now we can use degrees!
-            code: |-
-                {forward} 100
-                {turn} 45
-                {forward} 100
-            notes: |-
-                Show the students the code. In the next slide we'll show multiple angles.
-        9:
-            header: Degrees
-            text: |-
-                A full circle is 360 degrees.
-                Half a circle is 180 degrees.
-                A right turn is 90 degrees.
-                A left turn is 270 degrees.
-
-                You can fill in any number you want.
-            code: |-
-                {turn} 90
-                {forward} 100
-            notes: |-
-                Make sure the students understand degrees. They may have learned this already in maths, but it might be completely new to them.
-                If the students have never heard of degrees before, it might be nice to show them a degree wheel. You could even print one out for them.
-                Use the example code on the slides to show the students multiple angles.
-        10:
-            header: Degrees and variables
-            text: |-
-                Degrees can be variables too!
-            code: |-
-                degrees {is} {ask} How many degrees should the turtle turn?
-                {turn} degrees
-                {forward} 100
-            notes: |-
-                Show the students that you can make the amount of degrees a variable as well.
-        11:
-            header: Drawing with color
-            text: |-
-                You can now use `{color}` to set a color when drawing.
-            code: |-
-                {color} green
-                {forward} 100
-            notes: |-
-                Show the students that they can use multiple colors. They can use the white color to make 'invisible' lines (as the background is white as well).
-        12:
             header: Debugging
             text: Debugging a code means getting rid of mistakes in the code. Let's debug this code together. Click the ladybug button to start the debugger.
             code: |-
@@ -405,40 +195,13 @@ levels:
                 {print} Here you go! A filling donut with toping!
                 {ask} Have a nice day!
             debug: 'True'
-            notes: |-
-                Model how to use the debugger.
-                The students can now finish all the adventures of this level.
-        13:
-            header: Let's review!
-            text: What did you learn today?
-            notes: |-
-                Ask the students to list what they've learned today.
-        14:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        15:
-            header: Show and tell!
-            text: Would anyone like to show the class a program they've made?
-            notes: |-
-                Let some students show their work to the class.
-        16:
-            header: Sneak peek into the next level...
-            text: |-
-                In the next level you'll learn how to make a list and let the computer pick a random item of that list!
+        8:
+            header: Let the programming fun begin!
+            text: Enjoy the adventures in level 2!
     3:
         1:
             header: Welcome to level 3
-            text: |-
-                By the end of this lesson, you can:
-                * Save multiple items in a variable, this is called a list.
-                * Create a story in which random things will happen.
-                * Create a drawing in which random thing will be drawn.
+            text: In this level you'll learn how to make a list, add and remove items form your lists and pick a random item off that list.
         2:
             header: Making a list
             text: |-
@@ -446,8 +209,6 @@ levels:
 
                 Separate the items on your list with a comma.
             code: animals {is} dogs, cats, kangaroos
-            notes: |-
-                Ask the students to write down an example of a list of their own.
         3:
             header: At random
             text: |-
@@ -457,51 +218,25 @@ levels:
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} animals {at} {random}
-            notes: |-
-                Run the code a couple of times and show the students that the output is different every time.
         4:
             header: At random in a sentence
             text: You can use the `{at}` `{random}` command in a sentence as well.
             code: |-
                 animals {is} dogs, cats, kangaroos
                 {print} My favorite animal is animals {at} {random}
-            notes: |-
-                Again, show the students that the output changes when the code is run a couple of times.
-                You can also change the order of the words, to show that `{print} animals {at} {random} are my favorite animal` is allowed too.
-                Now ask your students to write down a print and at random command beneath the list they made and swap their code with another student.
-                Let the other student predict a possible output for the program.
-                Shortly discuss some answers in class.
         5:
-            header: Let's get started!
-            text: |-
-                This is a good time to try the Dice, Rock-paper-scissors, Music, Fortune teller and Restaurant adventures.
-            notes: |-
-                These are the first adventures to start with. Once (most of) the students are done, you can introduce the {add} and {remove} commands.
-                Make workbook exercise 1, 2 and 3.
-        6:
             header: Add to
             text: |-
                 You can add items to a list with the `{add}` `{to}` command.
-            code: |-
-                animals {is} dog, cat, kangaroo
-                {add} sheep {to_list} animals
-                {print} I choose animals {at} {random}
-            notes: |-
-                The students will hopefully notice that it doesn't really make sense to use the add to command this way, because you could have just put sheep in the list to start with.
-                The next slide will show how to use the add to in combination with an ask and a variable, to make the program interactive.
-        7:
-            header: Add to
-            text: |-
+
                 You can choose what to add to the list or you can use the `{add}` `{to}` command in combination with the `{ask}` command.
-                This way you can let the player decide what to add to the list to make the program interactive.
+                This way you can let the player decide what to add to the list.
             code: |-
                 animals {is} dog, cat, kangaroo
                 like {is} {ask} What is your favorite animal?
                 {add} like {to_list} animals
                 {print} I choose animals {at} {random}
-            notes: |-
-                Run the program multiple times to show that the animal that was picked is now added to the list.
-        8:
+        6:
             header: Remove from
             text: |-
                 The opposite of the `{add}` `{to}` command is the  `{remove}` `{from}` command.
@@ -511,15 +246,12 @@ levels:
                 dislike {is} {ask} What animal do you not like?
                 {remove} dislike {from} animals
                 {print} I choose animals {at} {random}
-            notes: |-
-                Once the students understand the add to, they will probably pick up the remove from command pretty easily.
-                Make exercise 4 and 5.
-        9:
+        7:
             header: Debugging
             text: Let's debug this code!
             editor: |-
                 music_genres {is} rock, pop, metal, indie, jazz
-                chosen_genre is music {at} {random}
+                chosen_genre {is} music {at} {random}
                 {print} Let's listen to chosen genre
                 nice {ask} Do you like that genre?
                 {remove} chosen_genre {from} chosen_genre
@@ -528,46 +260,14 @@ levels:
                 {remove} second_choice {to} music_genres
                 {print} I like music_genre {random} best!
             debug: 'True'
-            notes: |-
-                Model how to use the debugger.
-        10:
+        8:
             header: Let's get to work!
             text: Enjoy the adventures in level 3!
-            notes: |-
-                Make workbook exercise 6 and 7.
-        11:
-            header: Let's review!
-            text: What did you learn today?
-            notes: |-
-                Ask the students to list what they've learned today.
-        12:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        13:
-            header: Show and tell!
-            text: Would anyone like to show the class a program they've made?
-            notes: |-
-                Let some students show their work to the class.
-        14:
-            header: Sneak peek into the next level...
-            text: |-
-                In the next level you'll learn how to use quotation marks! One step closer to real python code!
     4:
         1:
             header: Welcome to level 4
-            text: |-
-                By the end of this lesson, you can:
-                * understand why quotation marks are needed in programming.
-                * put quotation marks in the correct places.
-                * understand error messages about wrongful use of quotation marks.
-            code: |-
-                {print} 'Use quotes!'
+            text: In this level you will learn how to use quotation marks.
+            code: '{print} ''print with quotes!'''
         2:
             header: Problem
             text: 'In the previous levels, you might have come across this problem:'
@@ -575,27 +275,16 @@ levels:
                 name {is} Sophie
                 {print} My name is name
             debug: 'True'
-            notes: |-
-                Let the students predict the output. The problem is that if you use the variable name, you can no longer use the word name in your text.
-                The output of this code will be 'My Sophie is Sophie'.
         3:
             header: Fixing it with quotation marks
             text: |-
                 In this level we will fix this problem by using quotation marks.
 
                 This also makes our code look more like 'real' Python code.
-            code: |-
-                name {is} Sophie
-                {print} 'My name is ' name
-            notes: |-
-                The computer now knows the difference between the text 'name' and the variable name.
-                Show the students that the computer now prints 'My name is Sophie'.
-                A student might say you could have also easily fixed this problem by giving the variable is different name. That is true, but it is an important skill in programming to show the computer different types of data and for yourself to know the difference between normal text and variables.
         4:
             header: Quotation marks with print
             text: Each time you use the `{print}` command you need to put the text that you want to appear on the screen in quotation marks.
-            code: |-
-                {print} 'Use quotes!'
+            code: '{print} ''print with quotes!'''
         5:
             header: Quotation marks with ask
             text: This also goes for the `{ask}` command.
@@ -616,28 +305,15 @@ levels:
             code: |-
                 name {is} Harry
                 {print} 'Hello ' name ', how are you?'
-            notes: |-
-                Make workbook exercise 1, 2 and 3.
         8:
             header: Quotation marks and contractions
             text: |-
                 Be careful! Now that you are using quotation marks, you can't use apostrophes in contractions.
 
                 Please try to print a contraction like "you're" or "I'm" in the screen below and see what happens....
-            code: |-
-                {print} 'This won't work'
+            code: '{print} ''This won''t work!'''
             debug: 'True'
         9:
-            header: Fix it!
-            text: |-
-                If you have to use an apostrophe in your text, use double quotes to fix the problem.
-            code: |-
-                {print} "I'm using double quotes"
-                {print} "It's easy to do!"
-            notes: |-
-                You can now let the students make all the adventures before the 'clear command' adventure.
-                Make workbook exercise 4 and 5.
-        10:
             header: Clear
             text: |-
                 In this level you'll also learn the {clear} command.
@@ -652,9 +328,7 @@ levels:
                 {print} '1'
                 {clear}
                 {print} 'SURPRISE!'
-            notes: |-
-                Run the code and show the students the program. You will notice that you cannot read the 3, 2, 1. Add sleep commands before the clear commands to fix the program.
-        11:
+        10:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -668,105 +342,59 @@ levels:
                 {print} 'I love the colors {at} {random} one!'
                 choice {is} {ask} Which one do you like?
             debug: 'True'
-            notes: |-
-                Model how to use the debugger.
-                Make workbook exercise 6.
-        12:
+        11:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
-        13:
-            header: Let's review!
-            text: What did you learn today?
-            notes: |-
-                Ask the students to list what they've learned today.
-        14:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        15:
-            header: Show and tell!
-            text: Would anyone like to show the class a program they've made?
-            notes: |-
-                Let some students show their work to the class.
-        16:
-            header: Sneak peek into the next level...
-            text: |-
-                In the next level you'll learn how to make the computer react differently to different input!
     5:
         1:
             header: Welcome to level 5
-            text: |-
-                By the end of this lesson, you can:
-                * let the computer react to different input.
-                * use {if} {else} and {in} commands
+            text: 'In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.'
         2:
             header: if
             text: |-
                 The `{if}` command allows you to choose between two options.
+                In this example the computer will print 'nice' if the given answer is Hedy.
+                If the answer is not Hedy, the computer will do nothing.
             code: |-
                 name {is} {ask} 'what is your name?'
                 {if} name {is} Hedy {print} 'nice'
-            notes: |-
-                Show how in this example the computer will print 'nice' if the given answer is Hedy.
-                If the answer is not Hedy, the computer will do nothing.
         3:
             header: Don't forget to print
             text: |-
                 When using the `{if}` command, don't forget to use the `{print}` command.
                 This code will not work!
-            code: |-
-                {if} name {is} Hedy 'nice'
+            code: '{if} name {is} Hedy ''nice'''
             debug: 'True'
-            notes: |-
-                Run the code and fix the bug.
         4:
-            header: Conditionals
-            text: |-
-                The code that follows after an if is called a conditional.
-            code: |-
-                {if} name {is} Hedy {print} 'nice'
-            notes: |-
-                Ask the students what they think the conditional is.
-                Make workbook exercise 1
-        5:
             header: else
             text: |-
                 When using an `{if}` command, you can also add an `{else}` command.
-            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
-            notes: |-
                 If the answer is Hedy, the computer will print 'nice'.
                 But if the answer is something else the computer will print 'boo'
-        6:
+            code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
+        5:
             header: Long lines
             text: |-
                 You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.
+
                 You can choose to separate commands and put them on 2 lines, like this:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
-            notes: |-
-                If your students don't mind using two lines, we recommend that you'll start using two lines right away.
-                This makes the program less messy and comes in handy in later levels.
-                Make workbook exercise 2 and 3
-        7:
+        6:
             header: Another new command
             text: |-
                 If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.
+
+                With `{in}` you can let the computer check if an item is in a list, for example:
+
+                Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
             code: |-
                 pretty_colors {is} green, yellow
                 favorite_color {is} {ask} 'What is your favorite color?'
                 {if} favorite_color {in} pretty_colors {print} 'pretty!'
                 {else} {print} 'meh'
-            notes: |-
-                With `{in}` you can let the computer check if an item is in a list. Show the example.
-                Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
-                Make workbook exercise 4, 5 and 6
-        8:
+        7:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -783,65 +411,29 @@ levels:
                 {else} Alright
                 {print} Thank you. Please head to gate A22.'
             debug: 'True'
-        9:
+        8:
             header: Let's go!
             text: Enjoy the adventures in level 5!
-        10:
-            header: Let's review!
-            text: What did you learn today?
-            notes: |-
-                Ask the students to list what they've learned today.
-        11:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        12:
-            header: Show and tell!
-            text: Would anyone like to show the class a program they've made?
-            notes: |-
-                Let some students show their work to the class.
-        13:
-            header: Sneak peek into the next level...
-            text: |-
-                In the next level you'll learn how to use maths in Hedy!
     6:
         1:
             header: Welcome to level 6
-            text: |-
-                By the end of this lesson, you can:
-                * use maths in Hedy
-            notes: |-
-                Ask your students to predict when they would need maths in a code (for example calculating a price, an amount of people, points in a game etc).
-                You could also ask them to predict what they think this would look like. They will mist likely come up with + and - themselves.
+            text: In this level we are adding maths to our codes.
         2:
             header: Addition
             text: If you want to calculate an addition, simply use the plus sign.
             code: '{print} ''5 plus 5 is '' 5 + 5'
-            notes: |-
-                Briefly show your students the example code.
         3:
             header: Subtraction
             text: If you want to subtract, you can use the minus sign.
             code: '{print} ''5 minus 5 is '' 5 - 5'
-            notes: |-
-                Briefly show your students the example code.
         4:
             header: Multiplication
             text: If you want to do multiplications, you can use the asterisk.
             code: '{print} ''5 times 5 is '' 5 * 5'
-            notes: |-
-                Briefly show your students the example code.
         5:
             header: Division
             text: You can use the slash for division.
             code: '{print} ''5 divided by 5 is '' 5 / 5'
-            notes: |-
-                Briefly show your students the example code.
         6:
             header: Summary
             text: In summary, you can use +, -, * and / to do maths.
@@ -850,10 +442,6 @@ levels:
                 {print} '5 minus 5 is ' 5 - 5
                 {print} '5 times 5 is ' 5 * 5
                 {print} '5 divided by 5 is ' 5 / 5
-            notes: |-
-                Please note that the maths code does not need quotation marks.
-                Let your students predict what the output would look like if you did puth the maths code inside the quotation marks.
-                The students can now make the music adventure and workbook exercise 1 and 2.
         7:
             header: The = symbol
             text: |-
@@ -862,8 +450,6 @@ levels:
             code: |-
                 name = Hedy
                 answer = 20 + 4
-            notes: |-
-                Briefly show your students the example code.
         8:
             header: Calculations with variables
             text: 'You can use calculations with numbers, but you can also use variables to do calculations, like this:'
@@ -872,17 +458,6 @@ levels:
                 number_2 = {ask} 'Fill in the second number:'
                 correct_answer = number_1 * number_2
                 {print} number_1 ' times ' number_2 ' is ' correct_answer
-            notes: |-
-                Show the students the example code and have them take a look at the placement of the quotation marks.
-                If you've made tehm come up with some examples of how to use maths in Hedy in the previous slides, ask them what they think this code would look like.
-                For example, if a student came up with the answer 'calculating points of a game' they could now come up with the code:
-                ```
-                if answer = correct_answer
-                    points = points + 1
-                else
-                    points = points - 1
-                ```
-                If you think this is too hard for your students to do individually or in pairs, you could do this exercise together with the whole class.
         9:
             header: Debugging
             text: Let's debug this code!
@@ -901,61 +476,29 @@ levels:
                 total_price = total_price * 0.25
                 {print} 'That will be total_price please'
             debug: 'True'
-            notes: |-
-                Debug this code together with your students.
         10:
             header: Let's get to work!
             text: Enjoy the adventures in level 6!
-            notes: |-
-                The students can now make all the adventures in this level.
-                Make workbook exercise 3, 4 and 5.
-        11:
-            header: Let's review!
-            text: What did you learn today?
-            notes: |-
-                Ask the students to list what they've learned today.
-        12:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        13:
-            header: Show and tell!
-            text: Would anyone like to show the class a program they've made?
-            notes: |-
-                Let some students show their work to the class.
-        14:
-            header: Sneak peek into the next level...
-            text: |-
-                In the next level you'll learn how to repeat a line of code multiple times!
     7:
         1:
             header: Welcome to level 7
-            text: |-
-                By the end of this lesson, you can:
-                * run a single line of code multiple times
+            text: In this level you will learn how to repeat a line of code as many times a you'd like.
         2:
             header: repeat 3 times
             text: |-
-                Predict the output of this code:
+                If you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code.
+                If you want to repeat the line more times, simply change the number.
+
+                For example: If you are programming a story where your character shouts for help for 5 times, it could look like this:
             code: |-
                 {print} 'The prince kept calling for help'
                 {repeat} 5 {times} {print} 'Help!'
                 {print} 'Why is nobody helping me?'
-            notes: |-
-                Let your students predict what the output would look like.
-                Explain that if you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code. If you want to repeat the line more times, simply change the number. For example: If you are programming a story where your character shouts for help for 5 times, it could look like this:
         3:
             header: Don't forget the print command
             text: When using the repeat command, do not forget the `{print}` command.
             code: '{repeat} 5 {times} ''Help!'''
             debug: 'True'
-            notes: |-
-                Debug this code with your students.
         4:
             header: Repeat an ask command
             text: You can also repeat an `{ask}`, `{if}` or `{else}` command multiple times.
@@ -963,8 +506,6 @@ levels:
                 {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
                 {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
                 {else} {repeat} 3 {times} {print} 'You have learned something new!'
-            notes: |
-                Again let the students predict the output.
         5:
             header: Debugging
             text: Let's debug this code!
@@ -980,109 +521,71 @@ levels:
                 {print} 'Hurray!
                 {else} 'That's a shame... Oh well... time to build a shelter and find some food.'
             debug: 'True'
-            notes: |-
-                Debug this code with your students.
         6:
             header: Ready Set Go!
             text: Enjoy the adventures in level 7!
-            notes: |-
-                Your students can now make all the workbook exercises and all the adevntures of this level.
-        7:
-            header: Let's review!
-            text: What did you learn today?
-            notes: |-
-                Ask the students to list what they've learned today.
-        8:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        9:
-            header: Show and tell!
-            text: Would anyone like to show the class a program they've made?
-            notes: |-
-                Let some students show their work to the class.
-        10:
-            header: Sneak peek into the next level...
-            text: |-
-                Now that you've learned how to repeat one line of code, it's time to repeat multiple lines at once!
     8:
         1:
             header: Welcome to level 8
-            text: |-
-                By the end of this lesson, you can:
-                * repeat multiple lines of code
-                * use indentation properly with {repeat} {if} and {else}
+            text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
         2:
             header: '{repeat} commands before'
             text: |-
-                The repeat command.
+                In the previous levels, the `{repeat}` command looked like this:
+
+                You could only repeat one line of code.
             code: '{repeat} 5 {times} {print} ''Help!'''
             debug: 'True'
-            notes: |-
-                Remind the students that they learned how to use the repeat command in the previous level.
-                You could only repeat one line of code. This level you'll learn how to repeat multiple lines of code.
         3:
             header: '{repeat} commands now'
             text: |-
-                What do you think the output will be?
+                In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.
+                You do this by using indentation.
+
+                Use 4 spaces (or one tab) at the beginning of each line that you want to repeat, like this:
             code: |-
                 {repeat} 5 {times}
                     {print} 'Hello everyone'
                     {print} 'This will be printed 5 times'
-            notes: |-
-                First let your students predict the output again. Then explain:
-                In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.
-                You do this by using indentation. Use 4 spaces (or one tab) at the beginning of each line that you want to repeat.
         4:
             header: '{repeat} commands now'
             text: |-
-                And what would this code look like?
+                If you want to, you can continue after the `{repeat}` command without indentation.
+                The lines that do not start with indentation will not be repeated.
             code: |-
                 {repeat} 3 {times}
                     {print} 'Hello!'
                 {print} 'We are done repeating!'
-            notes: |-
-                aks the students which lines they think will be repeated and run teh code.
-                Explain: If you want to, you can continue after the `{repeat}` command without indentation.
-                The lines that do not start with indentation will not be repeated.
-                The students can work on these adventures: Fortune teller, sing a sing and music.
-                Make workbook exercise 1 and 2.
         5:
             header: if and else before
             text: |-
-                What will the {if} and {else} commands look like with indentation?
+                The same goes for the `{if}` and `{else}` commands.
+                These were the commands before:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
             debug: 'True'
-            notes: |-
-                This is what the {if} and {else} have always looked like. What will they look like now that we can use indentation?
         6:
             header: if and else now
             text: |-
                 These are the `{if}` and `{else}` commands now.
+                Each line after the `{if}` and `{else}` commands start with indentation.
             code: |-
                 name = {ask} 'What is your name?'
                 {if} name {is} Hedy
                     {print} 'Welcome Hedy'
                 {else}
                     {print} 'Welcome programmer!'
-            notes: |-
-                Show the students that using indentation isn't just giving you the extra work of adding a tab, but it is very useful. Demonstrate how you can now type multiple lines after an {if} or {else} instead of just one by adding some lines of code to the example.
         7:
             header: stopping the indentation
-            text: Predict the output
+            text: Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
             code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
-            notes: |-
-                Let your students predict the output of the code and instruct them to take a careful look at the indentation.
-                Just like with the `{repeat}` command, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
-                Make workbook exercise 3, 4, 5 and 6.
         8:
+            header: if statements inside if statements
+            text: |-
+                You might have thought of trying to put an if command inside a repeat command, or inside another if command.
+                For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
+        9:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1105,53 +608,19 @@ levels:
                 price * 2
                 {print} 'That will be ' price ' euros please'
             debug: 'True'
-            notes: |-
-                Debug this code with your students.
-        9:
+        10:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 8!
-            notes: |-
-                Your students can now work on all the adventures in level 8.
-        10:
-            header: Let's review!
-            text: What did you learn today?
-            notes: |-
-                Ask the students to list what they've learned today.
-        11:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        12:
-            header: Show and tell!
-            text: Would anyone like to show the class a program they've made?
-            notes: |-
-                Let some students show their work to the class.
-        13:
-            header: Sneak peek into the next level...
-            text: |-
-                Next level we will see what happens if we put an {if} inside another {if}...
-            code: |-
-                {if} level = 8
-                    {if} student = curious
-                        {print} 'See you next level!'
-            debug: 'True'
     9:
         1:
             header: Welcome to level 9
             text: |-
-                By the end of this lesson, you can:
-                * nest {if} and {repeat} commands
-                * use indentation properly with {repeat} {if} and {else}
-            notes:
-                Using an {if} command inside another {if} command is called nesting.
+                In this level you can use multiple lines of code after an `{if}` or after a `{repeat}` command.
+
+                You can even put a `{repeat}` command within another `{repeat}`  command.
         2:
-            header: Nesting with `{repeat}`
-            text: You are allowed to combine `{repeat}` and `{if}` in this level. This is called nesting.
+            header: Multiple lines after `{repeat}`
+            text: You are allowed to combine `{repeat}` and `{if}` in this level.
             code: |-
                 {repeat} 3 {times}
                     food = {ask} 'What do you want?'
@@ -1159,20 +628,16 @@ levels:
                         {print} 'nice!'
                     {else}
                         {print} 'pizza is better'
-            notes:
-                Run the program twice, once with 'pizza' as the answer and once with a different answer.
         3:
             header: Indentation matters!
-            text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be run once.
+            text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be ran once.
             code: |-
                 {repeat} 3 {times}
                     {print} 'This line will be repeated...'
                     {print} 'This one too...'
                 {print} 'but this one will not!'
-            notes: |-
-                Repeat to your student the importance of using indentation properly. Run the program and ask the students what would happen if the last line would also start with indentation.
         4:
-            header: Nesting with `{if}`
+            header: Multiple lines after `{if}`
             text: You can also use multiple lines after `{if}`
             code: |-
                 continue = {ask} 'Do you want to continue?'
@@ -1195,9 +660,29 @@ levels:
                         {print} 'We will continue'
                 {else}
                     {print} 'You are not sure'
-            notes: |-
-                Play around with the indentation and show the students what happens if you remove the indentation of the second {if} command, for example.
         6:
+            header: An `{if}` inside a `{repeat}`
+            text: |-
+                Now that you can use multiple lines of code after these command, you can also put them within each other.
+                Check it out:
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
+        7:
+            header: Mind the indentation
+            text: Mind that the fourth and sixth line of this code starts with 8 spaces of indentation.
+            code: |-
+                {repeat} 3 {times}
+                    food = {ask} 'What do you want?'
+                    {if} food {is} pizza
+                        {print} 'nice!'
+                    {else}
+                        {print} 'pizza is better'
+        8:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1215,58 +700,20 @@ levels:
                 {print} 'Fun!'
                 {print} 'Thanks for filling in the safety questions everyone. Enjoy your jump!'
             debug: 'True'
-            notes: |-
-                Debug this code with your students.
-        7:
-            header: Let's check out the adventures!
-            text: Enjoy the adventures in level 9!
-            notes: |-
-                Your students can now work on all the adventures in level 9.
-        8:
-            header: Let's review!
-            text: What did you learn today?
-            notes: |-
-                Ask the students to list what they've learned today.
         9:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        10:
-            header: Show and tell!
-            text: Would anyone like to show the class a program they've made?
-            notes: |-
-                Let some students show their work to the class.
-        11:
-            header: Sneak peek into the next level...
-            text: |-
-                Next level we will learn to use the {for} command.
-            code: |-
-                animals = dog, cat, blobfish
-                {for} animal in animals
-                {print} 'I love ' animal
-            debug: 'True'
+            header: Let's go!
+            text: Enjoy the adventures in level 9!
     10:
         1:
             header: Welcome to level 10
-            text: |-
-                By the end of this lesson, you can:
-                * use the {for} command
+            text: 'In this level you will learn a new command: `{for}`.'
         2:
             header: The for command
-            text: With for you can make a list and use all items on that list.
+            text: With for you can make a list and use all items on that list. `{for}` creates a block, like repeat and if so all lines in the block need to start with indentation (4 spaces).
             code: |-
                 animals = dog, cat, blobfish
                 {for} animal {in} animals
                     {print} 'I love ' animal
-            notes: |-
-                Show the students how the {for} command creates a block taht starts with indentation.
-                Run the code and show teh students what happens.
-                Then ask the students to write their own version of a program with {for} in it.
         3:
             header: The for command
             text: 'Here you see another example of the `{for}` command:'
@@ -1275,8 +722,6 @@ levels:
                 names = mom, dad, Emma, Sophie
                 {for} day {in} days
                     {print} names {at} {random} ' does the dishes on ' day
-            notes: |-
-                Go around the room to let teh students share the programs that they came up with. Then show this next example and let the students predict the output.
         4:
             header: Debugging
             text: Let's debug this code
@@ -1292,41 +737,9 @@ levels:
                 {print} 'Come and watch our show tonight!'
                 {print} 'Tickets are only available at the counter
             debug: 'True'
-            notes: |-
-                Debug this code together.
         5:
-            header: Let's check out the adventures!
+            header: Time to program!
             text: Enjoy the adventures in level 10!
-            notes: |-
-                Your students can now work on all the adventures in level 10.
-        6:
-            header: Let's review!
-            text: What did you learn today?
-            notes: |-
-                Ask the students to list what they've learned today.
-        7:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        8:
-            header: Show and tell!
-            text: Would anyone like to show the class a program they've made?
-            notes: |-
-                Let some students show their work to the class.
-        9:
-            header: Sneak peek into the next level...
-            text: |-
-                Next level we will learn to use the {for} command in a different way.
-            code: |-
-                {for} counter {in} {range} 1 {to} 10
-                    {print} counter
-                {print} 'Ready or not. Here I come!'
-            debug: 'True'
     11:
         1:
             header: Welcome to level 11
@@ -1390,9 +803,9 @@ levels:
         4:
             header: Functions!
             text: |-
-                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
 
-                Now, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again.
+                Now, whenever we need that block of code, we just use `{call}` with the function's name to call it up! We don't have to type that block of code again.
         5:
             header: Twinkle Twinkle little star!
             text: |-
@@ -1433,7 +846,7 @@ levels:
         1:
             header: Welcome to level 13
             text: |-
-                We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.
+                We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but can use`{and}` and `{or}` instead.
                 From now on you could also use arguments in your functions.
         2:
             header: The and command
@@ -1477,11 +890,11 @@ levels:
 
                 What happens if you make these changes:
                 ```
-                define song with place
-                    print 'My Bonnie is ' place
+                {define} song {with} place
+                    {print} 'My Bonnie is ' place
 
-                answer is ask 'Where is my Bonnie?'
-                call song with answer
+                answer {is} {ask} 'Where is my Bonnie?'
+                {call} song {with} answer
                 ```
             code: |-
                 {define} song {with} place
@@ -1498,12 +911,12 @@ levels:
                 Note how the variables and the arguments have the same name. This is allowed.
                 Does it confuse you? Just use different names, that is allowed as well.
                 ```
-                define song with name, place
-                    print 'My ' name ' is ' place
+                {define} song {with} name, place
+                    {print} 'My ' name ' is over the ' place
 
-                name is ask 'Who?'
-                place is ask 'Where are they?'
-                call song with name, place
+                name {is} {ask} 'Who?'
+                place {is} {ask} 'Where are they?'
+                {call} song {with} name, place
                 ```
             code: |-
                 {define} song {with} place
