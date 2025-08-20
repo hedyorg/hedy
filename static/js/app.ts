@@ -1384,6 +1384,19 @@ export function saveForTeacherTable(table: string) {
 }
 
 
+export function getForTeacherTable(table: string) {
+  let show_table = window.localStorage.getItem(table);
+  const table_ele = document.getElementById(table)!
+  const arrow = document.getElementById(table + '_arrow')!;
+  const show_label = document.getElementById(table + '_show')!
+  const hide_label = document.getElementById(table + '_hide')!
+
+  table_ele.classList.toggle('hidden', show_table !== 'true');
+  show_label.classList.toggle('hidden', show_table === 'true');
+  hide_label.classList.toggle('hidden', show_table !== 'true');
+  arrow.classList.toggle('rotate-180', show_table === 'true');
+}
+
 /**
  * Run a code block, show an error message if we catch an exception
  */
