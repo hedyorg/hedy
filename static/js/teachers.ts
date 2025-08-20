@@ -14,7 +14,25 @@ declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
 const editorCreator = new HedyCodeMirrorEditorCreator();
 
-export function create_class(form: HTMLFormElement) {
+export function create_class(class_name_prompt: string) {
+  modal.prompt (class_name_prompt, '', function (class_name) {
+    $.ajax({
+      type: 'POST',
+      url: '/class',
+      data: JSON.stringify({
+        name: class_name
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function(response) {
+      window.location.pathname = '/for-teachers/customize-class/' + response.id ;
+    }).fail(function(err) {
+      return modal.notifyError(err.responseText);
+    });
+  });
+}
+
+export function create_class_redesign(form: HTMLFormElement) {
   const radio = form.querySelector('input[name="creation_type"]:checked') as HTMLInputElement | null
   const className = form.querySelector('#class_name') as HTMLInputElement | null
   const classToCopy = form.querySelector('#class_to_copy') as HTMLSelectElement | null

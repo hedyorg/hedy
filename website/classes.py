@@ -24,10 +24,43 @@ class ClassModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("class", __name__, url_prefix="/class")
         self.db = db
-
+    
     @route("/", methods=["POST"])
     @requires_teacher
     def create_class(self, user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return make_response(gettext("ajax_error"), 400)
+        if not isinstance(body.get("name"), str):
+            return make_response(gettext("class_name_invalid"), 400)
+        if len(body.get("name")) < 1:
+            return make_response(gettext("class_name_empty"), 400)
+
+        # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+        Classes = self.db.get_teacher_classes(user["username"])
+        for Class in Classes:
+            if Class["name"] == body["name"]:
+                return make_response(gettext("class_name_duplicate"), 200)
+
+        Class = {
+            "id": uuid.uuid4().hex,
+            "date": utils.timems(),
+            "teacher": user["username"],
+            # TODO: remove once we deploy new redesign
+            "link": utils.random_id_generator(7),
+            "name": body["name"],
+        }
+
+        self.db.store_class(Class)
+        add_class_created_to_subscription(user['email'])
+        response = {"id": Class["id"]}
+        return make_response(response, 200)
+
+
+    @route("/redesign", methods=["POST"])
+    @requires_teacher
+    def create_class_redesign(self, user):
         body = request.json
         # Validations
         if not isinstance(body, dict):
