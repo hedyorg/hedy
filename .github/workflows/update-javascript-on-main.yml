@@ -9,33 +9,23 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  autopr:
-
+  # This workflow is split into 2 jobs:
+  #
+  # One that runs arbitrary code without any access to secrets, and then another
+  # job with access to secrets that performs commits.
+  #
+  # NOTE: not passing the secrets to any step isn't good enough lone, as an
+  # attack that's always still possible is to memory dump the GitHub Agent
+  # process which has the token in memory.
+  updatefiles:
     runs-on: ubuntu-latest
 
     permissions:
-      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
-      contents: write
-      # For commenting on a PR
-      pull-requests: write
+      contents: read
 
     steps:
     - name: Print event (for debugging)
       run: cat $GITHUB_EVENT_PATH
-
-    #----------------------------------------------------------------------
-    # Either use HEDY_BOT_TOKEN or GITHUB_TOKEN
-    # GITHUB_TOKEN can do fewer things (push to main, trigger new GHAs, etc).
-    - name: Check for presence of GitHub Token
-      id: secret
-      run: |
-        if [ ! -z "${{ secrets.HEDY_BOT_TOKEN }}" ]; then
-          echo "We have a token!"
-          echo "secret=${{ secrets.HEDY_BOT_TOKEN }}" >> $GITHUB_OUTPUT
-        else
-          echo "We do not have a token"
-          echo "secret=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_OUTPUT
-        fi
 
     - name: Determine branch name
       id: branch
@@ -59,9 +49,6 @@ jobs:
     #----------------------------------------------------------------------
     #  Checkout source
     #
-    # We need to pass the token here -- the commit action below will not overwrite the token to push.
-    # This is necessary to bypass branch protection (which will disallow non-reviewed pushes otherwise)
-    #
     # Make a distinction between Pull Request checkout and Push checkout. Push checkout
     # works mostly automatically, but for PRs we must be very explicit to get the right
     # branch and also support forks.
@@ -71,13 +58,12 @@ jobs:
         fetch-depth: 1
         ref: ${{ steps.branch.outputs.branch }}
         repository: ${{ steps.branch.outputs.repo }}
-        token: ${{ steps.secret.outputs.secret }}
 
     #----------------------------------------------------------------------
     #  Actual build
 
     - name: Set up Python 3.12
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v5
       with:
         python-version: 3.12
     - name: Install Python dependencies
@@ -91,7 +77,7 @@ jobs:
       run: "echo value=$(ls -1 hedy.py hedy_*.py grammars/* | sort | xargs tail -n 99999999 | sha256sum | cut -f 1 -d ' ') >> $GITHUB_OUTPUT"
       id: hedy_cache_key
     - name: Cache hedy test runs
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: .test-cache
         key: "hedy-test-cache-${{ steps.hedy_cache_key.outputs.value }}"
@@ -107,11 +93,98 @@ jobs:
       run: |
         doit run _autopr_weblate
 
+    - name: Get list of changed files
+      id: changed
+      # List changed files only so we don't have to upload literally all files to the artifact.
+      # Include .gitignore because of some annoying behavior with 'upload-artifact's 'path' input:
+      # it will strip shared paths from the top, so we must always include a file in the root
+      # to maintain paths of all other files.
+      run: |
+        {
+          echo 'files<<--EOF--'
+          git status --porcelain -uno | awk '{print $2}'
+          echo .gitignore
+          echo --EOF--
+        } >> $GITHUB_OUTPUT
+
     - name: Prepare comment
       if: ${{ hashFiles('snippet-report.md.tmp') != '' }}
       run: |
         echo 'The automatic script made changes' >> comment.md.tmp
         cat snippet-report.md.tmp >> comment.md.tmp
+
+    - name: "Upload changed files"
+      uses: actions/upload-artifact@v4
+      id: updated-files
+      with:
+        name: updated-files
+        path: ${{ steps.changed.outputs.files }}
+        overwrite: true
+
+    - name: "Upload PR comment"
+      uses: actions/upload-artifact@v4
+      id: pr-comment
+      with:
+        name: pr-comment
+        path: comment.md.tmp
+        overwrite: true
+        if-no-files-found: ignore
+
+    outputs:
+      branch: ${{ steps.branch.outputs.branch }}
+      repo: ${{ steps.branch.outputs.repo }}
+      updated-files-id: ${{ steps.updated-files.outputs.artifact-id }}
+      pr-comment-id: ${{ steps.pr-comment.outputs.artifact-id }}
+
+  postupdate:
+    needs: [updatefiles]
+
+    runs-on: ubuntu-latest
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      contents: write
+      # For commenting on a PR
+      pull-requests: write
+
+    steps:
+
+    #----------------------------------------------------------------------
+    # Either use HEDY_BOT_TOKEN or GITHUB_TOKEN
+    # GITHUB_TOKEN can do fewer things (push to main, trigger new GHAs, etc)
+    # and we do want workflows to be triggered. So use HEDY_BOT if we can.
+    - name: Check for presence of GitHub Token
+      id: secret
+      run: |
+        if [ ! -z "${{ secrets.HEDY_BOT_TOKEN }}" ]; then
+          echo "We have a token!"
+          echo "secret=${{ secrets.HEDY_BOT_TOKEN }}" >> $GITHUB_OUTPUT
+        else
+          echo "We do not have a token"
+          echo "secret=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_OUTPUT
+        fi
+
+    # Checkout source again
+    - uses: actions/checkout@v4
+      name: Checkout branch
+      with:
+        fetch-depth: 1
+        ref: ${{ needs.updatefiles.outputs.branch }}
+        repository: ${{ needs.updatefiles.outputs.repo }}
+        token: ${{ steps.secret.outputs.secret }}
+
+    - name: Download updated files
+      if: needs.updatefiles.outputs.updated-files-id != ''
+      uses: actions/download-artifact@v4
+      with:
+        name: updated-files
+        path: .
+
+    - name: Download PR comment
+      if: needs.updatefiles.outputs.pr-comment-id != ''
+      uses: actions/download-artifact@v4
+      with:
+        name: pr-comment
+        path: .
 
     - name: Post comment
       if: ${{ hashFiles('comment.md.tmp') != '' && github.event_name == 'pull_request_target' }}
@@ -121,12 +194,13 @@ jobs:
 
     #----------------------------------------------------------------------
     #  Commit back
-    # For some reason, we must supply the token here again, even though
-    # we already supplied it during checkout.
-    - name: Commit changed files (with token)
-      uses: stefanzweifel/git-auto-commit-action@v2.3.0
+    #
+    # We need to pass the token here. This is necessary to bypass branch
+    # protection (which will disallow non-reviewed pushes otherwise)
+    - name: Commit changed files
+      uses: stefanzweifel/git-auto-commit-action@v6
       with:
         commit_message: 🤖 Automatically update generated files
-        branch: ${{ steps.branch.outputs.branch }}
+        branch: ${{ needs.updatefiles.outputs.branch }}
       env:
         GITHUB_TOKEN: ${{ steps.secret.outputs.secret }}

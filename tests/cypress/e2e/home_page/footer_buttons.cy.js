@@ -8,6 +8,8 @@ it('Is able to click on all footer buttons', () => {
     // I am not sure how to check a redirect to an external page
     goToHome();
     cy.getDataCy('github_button').should('be.visible')
+    cy.getDataCy('facebook_button').should('be.visible')
+    cy.getDataCy('linkedin_button').should('be.visible')
     cy.getDataCy('sponsor_button').should('be.visible')
     cy.getDataCy('discord_button').should('be.visible')
     cy.getDataCy('translate_button').should('be.visible')
