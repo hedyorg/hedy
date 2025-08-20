@@ -96,6 +96,52 @@ class ForTeachersModule(WebsiteModule):
                 welcome_teacher=welcome_teacher,
             ))
 
+    @route("/redesign", methods=["GET"])
+    @requires_teacher
+    def for_teachers_page_redesign(self, user):
+        welcome_teacher = session.get("welcome-teacher") or False
+        session.pop("welcome-teacher", None)
+
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        adventures = []
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        # Get the adventures that are created by my second teachers.
+        second_teacher_adventures = self.db.get_second_teacher_adventures(teacher_classes, user["username"])
+        for adventure in list(teacher_adventures) + second_teacher_adventures:
+            adventures.append(
+                {
+                    "id": adventure.get("id"),
+                    "name": adventure.get("name"),
+                    "creator": adventure.get("creator"),
+                    "author": adventure.get("author"),
+                    "date": utils.localized_date_format(adventure.get("date")),
+                    "level": adventure.get("level"),
+                    "levels": adventure.get("levels"),
+                    "why": adventure.get("why"),
+                    "why_class": render_why_class(adventure),
+                }
+            )
+
+        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+        slides = []
+        for level in range(hedy.HEDY_MAX_LEVEL + 1):
+            if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
+                slides.append(level)
+
+        return render_template(
+            "for-teachers/for-teachers.html",
+            current_page="for-teachers",
+            page_title=gettext("title_for-teacher"),
+            teacher_classes=teacher_classes,
+            teacher_adventures=adventures,
+            welcome_teacher=welcome_teacher,
+            slides=slides,
+            javascript_page_options=dict(
+                page='for-teachers',
+                welcome_teacher=welcome_teacher,
+            ))
+
+
     @route("/workbooks/<level>", methods=["GET"])
     def get_workbooks(self, level):
         try:

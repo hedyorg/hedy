@@ -4,7 +4,7 @@
         <h1 class="md:px-16 ">{{ _('classes') }}</h1>
         <h2 class="md:px-16 my-5">{{_('active_classes')}}</h2>        
         {% if teacher_classes %}
-            {{ render_partial('htmx-classes-table.html', teacher_classes=teacher_classes) }}
+            {{ render_partial('for-teachers/classes/htmx-classes-table.html', teacher_classes=teacher_classes) }}
         {% endif %}    
     </div>
 {% endblock %}
