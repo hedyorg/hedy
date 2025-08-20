@@ -24,7 +24,7 @@ class ClassModule(WebsiteModule):
     def __init__(self, db: Database):
         super().__init__("class", __name__, url_prefix="/class")
         self.db = db
-    
+
     @route("/", methods=["POST"])
     @requires_teacher
     def create_class(self, user):
@@ -56,7 +56,6 @@ class ClassModule(WebsiteModule):
         add_class_created_to_subscription(user['email'])
         response = {"id": Class["id"]}
         return make_response(response, 200)
-
 
     @route("/redesign", methods=["POST"])
     @requires_teacher

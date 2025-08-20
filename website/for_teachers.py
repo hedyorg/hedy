@@ -141,7 +141,6 @@ class ForTeachersModule(WebsiteModule):
                 welcome_teacher=welcome_teacher,
             ))
 
-
     @route("/workbooks/<level>", methods=["GET"])
     def get_workbooks(self, level):
         try:
@@ -289,7 +288,7 @@ class ForTeachersModule(WebsiteModule):
             javascript_page_options=dict(
                 page='new-class'
             ))
-    
+
     @route("/redesign/class/<class_id>", methods=["GET"])
     @requires_login
     def get_class_redesign(self, user, class_id):
@@ -311,7 +310,7 @@ class ForTeachersModule(WebsiteModule):
                 page="view-class"
             )
         )
-    
+
     @route("/redesign/class/<class_id>/graph", methods=["GET"])
     @requires_login
     def get_class_graph(self, user, class_id):
@@ -325,7 +324,7 @@ class ForTeachersModule(WebsiteModule):
         students = Class.get("students", [])
         graph_students = []
         level = request.args.get("level", 1, type=int)
-        #TODO esta funcion luego la voy a romper en partes, por ejemplo la parte de 
+        # TODO esta funcion luego la voy a romper en partes, por ejemplo la parte de
         # calcular el grafico de los estudiantes deberia ir aqui
         _, _, _, _, _, graph_students, _ = self.get_grid_info(user, class_id, level)
         return render_template(
@@ -739,7 +738,7 @@ class ForTeachersModule(WebsiteModule):
         """
         usernames = request.args.getlist('usernames')
         level = request.args.get('level', type=int)
-        student = 'student1' # TODO: remove 
+        student = 'student1'  # TODO: remove
         programs_per_user = {}
         for username in usernames:
             programs_per_user[username] = self.db.level_programs_for_user(username, level)
@@ -759,7 +758,7 @@ class ForTeachersModule(WebsiteModule):
         for adventure in teacher_adventures:
             adventure_names[adventure['id']] = adventure['name']
         # Now that we have the adventure names, we can start processing the programs
-        programs = { username : [] for username in usernames }
+        programs = {username: [] for username in usernames}
         for username, result in programs_per_user.items():
             for item in result:
                 date = utils.delta_timestamp(item['date'])
@@ -768,23 +767,22 @@ class ForTeachersModule(WebsiteModule):
                 if item.get('is_modified', True):
                     programs[username].append(
                         {'id': item['id'],
-                        'preview_code': preview_code,
-                        'code': item['code'],
-                        'date': date,
-                        'level': item['level'],
-                        'name': item['name'],
-                        'adventure_name': item.get('adventure_name'),
-                        'submitted': item.get('submitted'),
-                        'public': item.get('public'),
-                        'number_lines': item['code'].count('\n') + 1
-                        }
+                         'preview_code': preview_code,
+                         'code': item['code'],
+                         'date': date,
+                         'level': item['level'],
+                         'name': item['name'],
+                         'adventure_name': item.get('adventure_name'),
+                         'submitted': item.get('submitted'),
+                         'public': item.get('public'),
+                         'number_lines': item['code'].count('\n') + 1
+                         }
                     )
         return jinja_partials.render_partial("for-teachers/classes/student-programs.html",
                                              programs_per_user=programs,
                                              adventure_names=adventure_names,
                                              student=student
                                              )
-
 
     @route("/get_student_programs/<student>", methods=["GET"])
     @requires_teacher
