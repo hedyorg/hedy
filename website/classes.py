@@ -4,7 +4,6 @@ from flask import make_response, request, session
 from jinja_partials import render_partial
 from website.flask_hedy import g_db
 from website.flask_helpers import gettext_with_fallback as gettext
-from loguru import logger
 import utils
 from config import config
 from website.flask_helpers import render_template
