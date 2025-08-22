@@ -1,4 +1,5 @@
 import collections
+from dataclasses import dataclass
 from difflib import SequenceMatcher
 import os
 import re
@@ -345,18 +346,106 @@ class ForTeachersModule(WebsiteModule):
     @requires_login
     def get_grading_page(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        students, class_adventures_formatted, adventure_names = (
+            self.get_class_information(Class, user)
+        )
+        student_adventures = {}
+        # TODO: is it possible to review several levels at the same time?
+        level = 1
+        for student in students:
+            programs = self.db.last_level_programs_for_user(student, level)
+            for _, program in programs.items():
+                # Old programs sometimes don't have adventures associated to them
+                # So skip them
+                if "adventure_name" not in program:
+                    continue
+                name = adventure_names.get(
+                    program["adventure_name"], program["adventure_name"]
+                )
+                customized_level = class_adventures_formatted.get(str(program["level"]))
+                if next(
+                    (
+                        adventure
+                        for adventure in customized_level
+                        if adventure["name"] == name
+                    ),
+                    False,
+                ):
+                    student_adventure_id = (
+                        f"{student}-{program['adventure_name']}-{level}"
+                    )
+                    current_adventure = self.db.student_adventure_by_id(
+                        student_adventure_id
+                    )
+                    if not current_adventure:
+                        # store the adventure in case it's not in the table
+                        current_adventure = self.db.store_student_adventure(
+                            dict(
+                                id=f"{student_adventure_id}",
+                                ticked=False,
+                                program_id=program["id"],
+                            )
+                        )
 
-        session['class_id'] = class_id
+                    current_program = dict(
+                        level=str(program["level"]),
+                        name=name,
+                        program=program["id"],
+                        code=program["code"],
+                        student=student,
+                        ticked=current_adventure["ticked"],
+                        is_modified=program.get("is_modified")
+                    )
+
+                    student_adventures[student_adventure_id] = current_program
+        print(student_adventures)
+        session["class_id"] = class_id
         return render_template(
             "for-teachers/classes/grade-class.html",
             current_page="grade-class",
             page_title=gettext("title_grade_class"),
             _class=Class,
+            students=students,
+            student_adventures=student_adventures,
         )
+
+    def get_class_information(self, Class, user):
+        # First we get the class information, like students adentures and customizations
+        students = Class.get("students", [])
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        students = sorted(Class.get("students", []))
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
+        class_info = get_customizations(self.db, Class["id"])
+        class_adventures = class_info.get('sorted_adventures')
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        class_adventures_formatted = {}
+        for key, value in class_adventures.items():
+            adventure_list = []
+            for adventure in value:
+                # if the adventure is not in adventure names it means that the data in the customizations is bad
+                if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
+                    adventure_list.append({'name': adventure_names[adventure['name']], 'id': adventure['name']})
+            class_adventures_formatted[key] = adventure_list
+        return students, class_adventures_formatted, adventure_names
 
     @route("/class/<class_id>", methods=["GET"])
     @requires_login
