@@ -1,5 +1,4 @@
 import collections
-from dataclasses import dataclass
 from difflib import SequenceMatcher
 import os
 import re
@@ -322,7 +321,7 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         session['class_id'] = class_id
-        students = Class.get("students", [])
+#        students = Class.get("students", [])
         graph_students = []
         level = request.args.get("level", 1, type=int)
         # TODO esta funcion luego la voy a romper en partes, por ejemplo la parte de
@@ -400,7 +399,8 @@ class ForTeachersModule(WebsiteModule):
                         code=program["code"],
                         student=student,
                         ticked=current_adventure["ticked"],
-                        is_modified=program.get("is_modified")
+                        is_modified=program.get("is_modified"),
+                        date=utils.localized_date_format(program['date'], only_date=True)
                     )
 
                     student_adventures[student_adventure_id] = current_program

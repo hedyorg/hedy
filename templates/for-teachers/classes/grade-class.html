@@ -6,7 +6,7 @@
     <!-- LEVEL -->
     <div class="flex flex-row w-full">
         <div id="level_button" class="dropdown relative">
-            <button class="blue-btn-new rounded inline-flex w-fit gap-2 text-xl" id="dropdown_level_button"
+            <button class="blue-btn-new rounded inline-flex items-center w-fit gap-2 text-xl" id="dropdown_level_button"
                 onclick="$('#level_dropdown').slideToggle('medium');">
                 <span>{{ _('level_title') }} {{ 1 }}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
             </button>
@@ -36,13 +36,14 @@
     <!-- STUDENTS -->
     <div class="flex flex-row w-full">
         <div id="student_button" class="dropdown relative">
-            <button class="blue-btn-new rounded inline-flex w-fit gap-2 text-xl" id="dropdown_student_button"
-                onclick="$('#student_dropdown').slideToggle('medium');">
+            <button class="blue-btn-new rounded inline-flex items-center w-fit gap-2 text-xl"
+                id="dropdown_student_button" onclick="$('#student_dropdown').slideToggle('medium');">
                 <span>{{ _('all') }}</span> <i id="student-arrow" class="fa-solid fa-angle-down"></i>
             </button>
             <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
                 style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
-                id="student_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
+                id="student_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
+                _="on mutation of @style
             set arrow to #student-arrow
             if *display == 'none'
             remove .rotate-180 from arrow
@@ -52,10 +53,9 @@
                 {% for student in students %}
                 <a id="student_button_{{student}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
             {% if loop.index == 1 %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
-            hover:bg-blue-200"
-                    href="/for-teachers/redesign/class/{{ _class.id }}/graph?level={{ 1 }}">
+            hover:bg-blue-200" href="/for-teachers/redesign/class/{{ _class.id }}/graph?level={{ 1 }}">
                     <div class="flex-grow h-min" tabindex=0>
-                         {{ student }}
+                        {{ student }}
                     </div>
                 </a>
                 {% endfor %}
@@ -65,7 +65,7 @@
     <!-- ADVENTURES -->
     <div class="flex flex-row w-full">
         <div id="level_button" class="dropdown relative">
-            <button class="blue-btn-new rounded inline-flex w-fit gap-2 text-xl" id="dropdown_level_button"
+            <button class="blue-btn-new rounded inline-flex items-center w-fit gap-2 text-xl" id="dropdown_level_button"
                 onclick="$('#level_dropdown').slideToggle('medium');">
                 <span>{{ _('level_title') }} {{ 1 }}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
             </button>
@@ -95,32 +95,60 @@
     <!-- ADVENTURES -->
     <input type="text" name="search" id="search">
 </div>
-<div class="mt-10" >  
+<div class="mt-10">
     <table class="w-full divide-y divide-gray-400">
         <thead class="bg-gray-200 divide-y divide-gray-400">
-          <tr>
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('level')}}</th>
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('student')}}</th>
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('adventure')}}</th>
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('received')}}
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('accepted')}}</th>
-          </tr>
+            <tr>
+                <th
+                    class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-tl-lg w-20">
+                    {{_('level')}}</th>
+                <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
+                    {{_('student')}}</th>
+                <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
+                    {{_('adventure')}}</th>
+                <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
+                    {{_('date')}}
+                <th
+                    class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-tr-lg">
+                    {{_('accepted')}}</th>
+            </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          {% for student_adventure_id, program in student_adventures.items() %}
-          <tr >
-            <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
-              {{ program.level }}
-            </td>
-            <td data-cy="teacher_cell" class="py-3 text-center">{{ program.student }}</td>
-            <td class="text-center">{{ program.name }} </td>
-            <td class="text-center"> 18 minutes ago</td>
-            <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
-              {{ program.ticked }} 
-            </td>
-          </tr>
-          {% endfor %}
+            {% for student_adventure_id, program in student_adventures.items() %}
+            <tr>
+                <td class="text-center w-20 {% if loop.last %} rounded-b-lg {% endif %}">
+                    {{ program.level }}
+                </td>
+                <td data-cy="teacher_cell" class="py-3 text-center">{{ program.student }}</td>
+                <td class="cursor-pointer hover:bg-blue-200 p-3 rounded-lg transition-all ease-in duration-100"
+                    _="on click toggle .hidden on the next .turn-pre-into-ace">
+                    <div class="flex flex-row items-center">
+                        {{ program.name }}
+                        <div class="flex flex-1"> </div>
+                        <div class="flex flex-row items-center gap-5">
+                            {% if not program.is_modified%}
+                            <span class="fa fa-exclamation"></span>
+                            {% endif %}
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                    </div>
+                    <div class="turn-pre-into-ace mb-4 overflow-auto hidden rounded-md transition-opacity h-[16rem] min-h-full"
+                        id="program_{{ program.id }}">
+                        <pre level="{{ program.level }}" class="view-program min-h-full h-full">{{ program.code }}</pre>
+                    </div>
+                </td>
+                <td class="text-center"> {{ program.date }}</td>
+                <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+                    <input type="checkbox"
+                        class="student_adventure_checkbox text-green-700 text-center text-sm cursor-pointer {% if program.ticked %}fa-solid fa-check{% endif %}"
+                        {% if program.ticked %}checked{% endif %} 
+                        {# hx-post="/for-teachers/grid_overview/{{ class_info.id }}/change_checkbox?level={{level}}&student={{student}}&adventure={{adventure.id|lower}}"
+                        
+                        hx-target="#adventure_tables" hx-swap="outerHTML" hx-trigger="change" #}>                    
+                </td>
+            </tr>
+            {% endfor %}
         </tbody>
-      </table>
+    </table>
 </div>
 {% endblock %}
