@@ -4,12 +4,12 @@ from flask import make_response, request, session
 from jinja_partials import render_partial
 from website.flask_hedy import g_db
 from website.flask_helpers import gettext_with_fallback as gettext
-
 import utils
 from config import config
 from website.flask_helpers import render_template
 from website.auth import current_user, is_teacher, requires_login, requires_teacher, \
     refresh_current_user_from_db, is_second_teacher
+from website.for_teachers import _create_customizations
 from website.newsletter import add_class_created_to_subscription
 from .database import Database
 from .website_module import WebsiteModule, route
@@ -54,6 +54,42 @@ class ClassModule(WebsiteModule):
         self.db.store_class(Class)
         add_class_created_to_subscription(user['email'])
         response = {"id": Class["id"]}
+        return make_response(response, 200)
+
+    @route("/redesign", methods=["POST"])
+    @requires_teacher
+    def create_class_redesign(self, user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return make_response(gettext("ajax_error"), 400)
+        if not isinstance(body.get("name"), str):
+            return make_response(gettext("class_name_invalid"), 400)
+        if len(body.get("name")) < 1:
+            return make_response(gettext("class_name_empty"), 400)
+        if not isinstance(body.get("creation_type"), str):
+            return make_response(gettext("request_invalid"), 400)
+        response = {}
+        if body.get("creation_type") in ("standard", "plain"):
+            # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+            Classes = self.db.get_teacher_classes(user["username"])
+            for Class in Classes:
+                if Class["name"] == body["name"]:
+                    return make_response(gettext("class_name_duplicate"), 200)
+
+            Class = {
+                "id": uuid.uuid4().hex,
+                "date": utils.timems(),
+                "teacher": user["username"],
+                # TODO: remove once we deploy new redesign
+                "link": utils.random_id_generator(7),
+                "name": body["name"],
+            }
+            self.db.store_class(Class)
+            add_class_created_to_subscription(user['email'])
+            include_adventures = body.get("creation_type") == "standard"
+            _create_customizations(g_db(), Class["id"], include_adventures=include_adventures)
+            response = {"id": Class["id"]}
         return make_response(response, 200)
 
     @route("/<class_id>", methods=["PUT"])
@@ -237,24 +273,25 @@ class MiscClassPages(WebsiteModule):
         }
 
         self.db.store_class(new_class)
-        # TODO: duplicate students and second teachers.
-        # if second_teachers:
-        #     for st in second_teachers:
-        #         self.db.add_second_teacher_to_class(new_class, st)
-
         # Get the customizations of the current class -> if they exist, update id and store again
         customizations = self.db.get_class_customizations(body.get("id"))
         if customizations:
             customizations["id"] = class_id
             self.db.update_class_customizations(customizations)
 
-        new_second_teachers = {}
-        if body.get("second_teacher") is True:
-            new_second_teachers = Class.get("second_teachers")
+        # If the user wants to copy the second teachers from the original class
+        # we will invite them to the new class
+        if body.get("copy_second_teachers"):
+            second_teachers = Class.get("second_teachers")
+            for second_teacher in second_teachers:
+                self.db.add_class_invite(
+                    username=second_teacher["username"],
+                    class_id=class_id,
+                    invited_as="second_teacher",
+                    invited_as_text=gettext("second_teacher")
+                )
 
         response = {"id": new_class["id"]}
-        if new_second_teachers:
-            response["second_teachers"] = new_second_teachers
         return make_response(response, 200)
 
     @route('/search', methods=['GET'])

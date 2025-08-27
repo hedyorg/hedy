@@ -6,7 +6,8 @@ export enum EditorType {
   COMMON_MISTAKES,
   CHEATSHEET,
   EXAMPLE,
-  WORKBOOK
+  WORKBOOK,
+  VIEW_PROGRAM
 }
 
 type EditorEventEmitter = EventEmitter<EditorEvent>;

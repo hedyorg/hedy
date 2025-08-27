@@ -32,6 +32,52 @@ export function create_class(class_name_prompt: string) {
   });
 }
 
+export function create_class_redesign(form: HTMLFormElement) {
+  const radio = form.querySelector('input[name="creation_type"]:checked') as HTMLInputElement | null
+  const className = form.querySelector('#class_name') as HTMLInputElement | null
+  const classToCopy = form.querySelector('#class_to_copy') as HTMLSelectElement | null
+  const copySecondTeachers = form.querySelector('#copy_second_teachers') as HTMLInputElement | null;
+
+  if (!radio || !className || !classToCopy) {
+    throw new Error("Missing required elements in the form");
+  }
+
+  if (radio.value === 'copy' && classToCopy.value === '') {
+    modal.notifyError(ClientMessages.Other_error);
+    return;
+  }
+
+  if (radio.value === 'copy') {
+    $.ajax({
+      type: 'POST',
+      url: '/duplicate_class',
+      data: JSON.stringify({
+        id: classToCopy.value,
+        name: className.value,
+        copy_second_teachers: copySecondTeachers?.checked || false,
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+  } else if (radio.value === 'standard' || radio.value === 'plain') {
+    $.ajax({
+      type: 'POST',
+      url: '/class',
+      data: JSON.stringify({
+        creation_type: radio?.value,
+        name: className?.value,
+        class_to_copy: classToCopy?.value
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).fail(function (err) {
+      return modal.notifyError(err.responseText);
+    })
+  }
+}
+
 export function rename_class(id: string, class_name_prompt: string) {
     modal.prompt (class_name_prompt, '', function (class_name) {
         $.ajax({
@@ -799,6 +845,14 @@ export function initializeClassOverviewPage(_options: InitializeClassOverviewPag
   });
 }
 
+export interface InitializeClassPerformanceGraphPageOptions {
+  readonly page: 'performance-graph';
+}
+
+export function initializePerformanceGraphPage() {
+  initializeGraph(true);
+}
+
 interface InitializeGraphOptions {
   readonly graph_students: student[];
   readonly level: number
@@ -821,10 +875,11 @@ interface dataPoint {
 const MAX_BUBBLE_SIZE = 62;
 const MIN_BUBBLE_SIZE = 12;
 
-export function initializeGraph() {
+export function initializeGraph(is_redesign: boolean = false) {
   const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
   if (graphElement === undefined || graphElement === null) return;
   const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
+  console.log('Graph data:', graphData);
   let min = Infinity;
   let max = 0;
   const students = graphData.graph_students
@@ -874,15 +929,31 @@ export function initializeGraph() {
         onClick: (_e, activePoints, chart) => {
           if (activePoints.length === 0) return;
           const item: dataPoint = chart.data.datasets[0].data[activePoints[0].index] as dataPoint
+          let usernames: string[] = []
           for(const point of activePoints) {
-            console.log(chart.data.datasets[0].data[point.index])
+            const item: dataPoint = chart.data.datasets[0].data[point.index] as dataPoint
+            usernames.push(item.name)
           }
           document.getElementById('programs_container')?.classList.remove('hidden')
-          htmx.ajax(
-            'GET',
-            `/for-teachers/get_student_programs/${item.name}`,
-            '#programs_container'
-          )
+          if (is_redesign) {
+            htmx.ajax(
+              'GET',
+              `/for-teachers/redesign/get_student_programs`,
+              {
+                target: '#programs_container',
+                values: {
+                  'usernames': usernames,
+                  'level': graphData.level.toString()
+                }
+              },
+            )
+          } else {
+            htmx.ajax(
+              'GET',
+              `/for-teachers/get_student_programs/${item.name}`,
+              '#programs_container'
+            )
+          }
         },
         scales: {
           x: {
@@ -1007,4 +1078,30 @@ export function add_user_to_invite_list(username: string, button: HTMLButtonElem
   let input = clone.querySelector('input')!
   input.value = username
   userList?.appendChild(clone)
+}
+
+export interface InitializeAllClassesPageOptions {
+  readonly page: 'classes';
+}
+
+export function initializeAllClassesPage(_options: InitializeAllClassesPageOptions) {
+  // Event listener to close the adventures dropdown when you click outside of it
+  document.addEventListener('click', (ev) => {
+    const target = ev.target as HTMLElement;
+    const parents = document.querySelectorAll('[name="menu"]')
+    for (const parent of parents) {
+      if (parent.contains(target)) {
+        return;
+      }
+    }
+    if (document.querySelectorAll('[name="menu"]>div.menu-content-open').length) {
+      document.querySelectorAll('[name="menu"]>div.menu-content-open').forEach((el) => {
+        el.classList.remove('menu-content-open');
+        el.classList.add('menu-content-closed');
+        setTimeout(() => {
+          el.classList.add('hidden');
+        }, 200);
+      });
+    }
+  });
 }

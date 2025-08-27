@@ -3,6 +3,7 @@ from difflib import SequenceMatcher
 import os
 import re
 import uuid
+from venv import logger
 
 from bs4 import BeautifulSoup
 from flask import g, make_response, request, session, url_for, redirect
@@ -84,6 +85,51 @@ class ForTeachersModule(WebsiteModule):
 
         return render_template(
             "for-teachers.html",
+            current_page="for-teachers",
+            page_title=gettext("title_for-teacher"),
+            teacher_classes=teacher_classes,
+            teacher_adventures=adventures,
+            welcome_teacher=welcome_teacher,
+            slides=slides,
+            javascript_page_options=dict(
+                page='for-teachers',
+                welcome_teacher=welcome_teacher,
+            ))
+
+    @route("/redesign", methods=["GET"])
+    @requires_teacher
+    def for_teachers_page_redesign(self, user):
+        welcome_teacher = session.get("welcome-teacher") or False
+        session.pop("welcome-teacher", None)
+
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        adventures = []
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        # Get the adventures that are created by my second teachers.
+        second_teacher_adventures = self.db.get_second_teacher_adventures(teacher_classes, user["username"])
+        for adventure in list(teacher_adventures) + second_teacher_adventures:
+            adventures.append(
+                {
+                    "id": adventure.get("id"),
+                    "name": adventure.get("name"),
+                    "creator": adventure.get("creator"),
+                    "author": adventure.get("author"),
+                    "date": utils.localized_date_format(adventure.get("date")),
+                    "level": adventure.get("level"),
+                    "levels": adventure.get("levels"),
+                    "why": adventure.get("why"),
+                    "why_class": render_why_class(adventure),
+                }
+            )
+
+        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+        slides = []
+        for level in range(hedy.HEDY_MAX_LEVEL + 1):
+            if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
+                slides.append(level)
+
+        return render_template(
+            "for-teachers/for-teachers.html",
             current_page="for-teachers",
             page_title=gettext("title_for-teacher"),
             teacher_classes=teacher_classes,
@@ -210,6 +256,196 @@ class ForTeachersModule(WebsiteModule):
                                subsection_titles=subsection_titles,
                                subsections=subsections,
                                levels=levels)
+
+    @route("/class/all", methods=["GET"])
+    @requires_teacher
+    def get_classes(self, user):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        for _class in teacher_classes:
+            _class['date'] = utils.localized_date_format(_class['date'], only_date=True)
+        logger.info(teacher_classes)
+        return render_template("for-teachers/classes/classes.html",
+                               current_page="classes",
+                               page_title=gettext("classes"),
+                               teacher_classes=teacher_classes,
+                               javascript_page_options=dict(
+                                   page='classes',
+                               ))
+
+    @route("/class/new", methods=["GET"])
+    @requires_teacher
+    def new_class(self, user):
+        if not is_teacher(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        return render_template(
+            "for-teachers/classes/new-class.html",
+            current_page="new_page",
+            page_title=gettext("new_class_page"),
+            teacher_classes=teacher_classes,
+            javascript_page_options=dict(
+                page='new-class'
+            ))
+
+    @route("/redesign/class/<class_id>", methods=["GET"])
+    @requires_login
+    def get_class_redesign(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        session['class_id'] = class_id
+
+        return render_template(
+            "for-teachers/classes/view-class.html",
+            current_page="view-class",
+            # TODO: maybe change this title
+            page_title=gettext("title_class-overview"),
+            _class=Class,
+            javascript_page_options=dict(
+                page="view-class"
+            )
+        )
+
+    @route("/redesign/class/<class_id>/graph", methods=["GET"])
+    @requires_login
+    def get_class_graph(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        session['class_id'] = class_id
+#        students = Class.get("students", [])
+        graph_students = []
+        level = request.args.get("level", 1, type=int)
+        # TODO esta funcion luego la voy a romper en partes, por ejemplo la parte de
+        # calcular el grafico de los estudiantes deberia ir aqui
+        _, _, _, _, _, graph_students, _ = self.get_grid_info(user, class_id, level)
+        return render_template(
+            "for-teachers/classes/performance-graph.html",
+            current_page="performance-graph",
+            page_title=gettext("title_performance_graph"),
+            _class=Class,
+            javascript_page_options=dict(
+                page="performance-graph",
+            ),
+            graph_options=dict(
+                level=level,
+                graph_students=graph_students,
+            )
+        )
+
+    @route("/redesign/class/<class_id>/grade", methods=["GET"])
+    @requires_login
+    def get_grading_page(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        students, class_adventures_formatted, adventure_names = (
+            self.get_class_information(Class, user)
+        )
+        student_adventures = {}
+        # TODO: is it possible to review several levels at the same time?
+        level = 1
+        for student in students:
+            programs = self.db.last_level_programs_for_user(student, level)
+            for _, program in programs.items():
+                # Old programs sometimes don't have adventures associated to them
+                # So skip them
+                if "adventure_name" not in program:
+                    continue
+                name = adventure_names.get(
+                    program["adventure_name"], program["adventure_name"]
+                )
+                customized_level = class_adventures_formatted.get(str(program["level"]))
+                if next(
+                    (
+                        adventure
+                        for adventure in customized_level
+                        if adventure["name"] == name
+                    ),
+                    False,
+                ):
+                    student_adventure_id = (
+                        f"{student}-{program['adventure_name']}-{level}"
+                    )
+                    current_adventure = self.db.student_adventure_by_id(
+                        student_adventure_id
+                    )
+                    if not current_adventure:
+                        # store the adventure in case it's not in the table
+                        current_adventure = self.db.store_student_adventure(
+                            dict(
+                                id=f"{student_adventure_id}",
+                                ticked=False,
+                                program_id=program["id"],
+                            )
+                        )
+
+                    current_program = dict(
+                        level=str(program["level"]),
+                        name=name,
+                        program=program["id"],
+                        code=program["code"],
+                        student=student,
+                        ticked=current_adventure["ticked"],
+                        is_modified=program.get("is_modified"),
+                        date=utils.localized_date_format(program['date'], only_date=True)
+                    )
+
+                    student_adventures[student_adventure_id] = current_program
+        print(student_adventures)
+        session["class_id"] = class_id
+        return render_template(
+            "for-teachers/classes/grade-class.html",
+            current_page="grade-class",
+            page_title=gettext("title_grade_class"),
+            _class=Class,
+            students=students,
+            student_adventures=student_adventures,
+        )
+
+    def get_class_information(self, Class, user):
+        # First we get the class information, like students adentures and customizations
+        students = Class.get("students", [])
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        students = sorted(Class.get("students", []))
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+
+        class_info = get_customizations(self.db, Class["id"])
+        class_adventures = class_info.get('sorted_adventures')
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+
+        class_adventures_formatted = {}
+        for key, value in class_adventures.items():
+            adventure_list = []
+            for adventure in value:
+                # if the adventure is not in adventure names it means that the data in the customizations is bad
+                if not adventure['name'] == 'next' and adventure['name'] in adventure_names:
+                    adventure_list.append({'name': adventure_names[adventure['name']], 'id': adventure['name']})
+            class_adventures_formatted[key] = adventure_list
+        return students, class_adventures_formatted, adventure_names
 
     @route("/class/<class_id>", methods=["GET"])
     @requires_login
@@ -581,6 +817,60 @@ class ForTeachersModule(WebsiteModule):
                                                  }
                                              },
                                              students_info=students_info
+                                             )
+
+    @route("/redesign/get_student_programs", methods=["GET"])
+    @requires_teacher
+    def show_students_programs_performance_graph(self, user):
+        """
+        This function is used to show the programs of a severl students within the performance graph page
+        """
+        usernames = request.args.getlist('usernames')
+        level = request.args.get('level', type=int)
+        student = 'student1'  # TODO: remove
+        programs_per_user = {}
+        for username in usernames:
+            programs_per_user[username] = self.db.level_programs_for_user(username, level)
+
+        # Preparing the adventure names
+        if hedy_content.Adventures(g.lang).has_adventures():
+            adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        adventure_names = {}
+        for adv_key, adv_dic in adventures.items():
+            for name, _ in adv_dic.items():
+                adventure_names[adv_key] = hedy_content.get_localized_name(name, g.keyword_lang)
+
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        for adventure in teacher_adventures:
+            adventure_names[adventure['id']] = adventure['name']
+        # Now that we have the adventure names, we can start processing the programs
+        programs = {username: [] for username in usernames}
+        for username, result in programs_per_user.items():
+            for item in result:
+                date = utils.delta_timestamp(item['date'])
+                # This way we only keep the first 4 lines to show as preview to the user
+                preview_code = "\n".join(item['code'].split("\n")[:4])
+                if item.get('is_modified', True):
+                    programs[username].append(
+                        {'id': item['id'],
+                         'preview_code': preview_code,
+                         'code': item['code'],
+                         'date': date,
+                         'level': item['level'],
+                         'name': item['name'],
+                         'adventure_name': item.get('adventure_name'),
+                         'submitted': item.get('submitted'),
+                         'public': item.get('public'),
+                         'number_lines': item['code'].count('\n') + 1
+                         }
+                    )
+        return jinja_partials.render_partial("for-teachers/classes/student-programs.html",
+                                             programs_per_user=programs,
+                                             adventure_names=adventure_names,
+                                             student=student
                                              )
 
     @route("/get_student_programs/<student>", methods=["GET"])
@@ -1749,7 +2039,7 @@ def get_customizations(db, class_id):
     return customizations
 
 
-def _create_customizations(db, class_id):
+def _create_customizations(db, class_id, include_adventures=True):
     """
     Create customizations for a given class.
 
@@ -1761,8 +2051,11 @@ def _create_customizations(db, class_id):
         customizations (dict): The customizations for the class.
     """
     sorted_adventures = {}
-    for lvl, adventures in hedy_content.adventures_order_per_level().items():
-        sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+    if include_adventures:
+        for lvl, adventures in hedy_content.adventures_order_per_level().items():
+            sorted_adventures[str(lvl)] = [{'name': adventure, 'from_teacher': False} for adventure in adventures]
+    else:
+        sorted_adventures = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     customizations = {
         "id": class_id,
         "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
