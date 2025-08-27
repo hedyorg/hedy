@@ -1227,7 +1227,32 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   }
 }
 
+function speakIsMuted() {
+  return $('#speak_mute_button').attr('data-muted') === 'true';
+}
+
+export function toggleSpeakMute() {
+  const speakMuteButton = $('#speak_mute_button');
+  const speakMuteIcon = speakMuteButton.find('.fa');
+
+  const MUTED_ATTR = 'data-muted';
+  const MUTED_ICON = 'fa-volume-xmark';
+  const UNMUTED_ICON = 'fa-volume-high';
+
+  if (speakIsMuted()) {
+    speakMuteButton.attr(MUTED_ATTR, 'false');
+    speakMuteIcon.removeClass(MUTED_ICON).addClass(UNMUTED_ICON);
+  } else {
+    speechSynthesis.cancel();
+    speakMuteButton.attr(MUTED_ATTR, 'true');
+    speakMuteIcon.removeClass(UNMUTED_ICON).addClass(MUTED_ICON);
+  }
+}
+
 function speak(text: string) {
+  if (speakIsMuted()) {
+    return;
+  }
   var selectedURI = $('#speak_dropdown').val();
   if (!selectedURI) { return; }
   var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI)[0];
