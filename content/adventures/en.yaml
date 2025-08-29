@@ -131,6 +131,25 @@ adventures:
                     {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
                     {else} {print} 'The monster eats ' name
                     ```
+            6:
+                story_text: |
+                    In the example you see how the {elif} can offer the player more options in a story.
+
+                    ### Exercise
+                    Make up your own story with an {elif} command.
+                example_code: |
+                    ```
+                    print 'Out of the bushes a wolf appears...'
+                    action {is} {ask} 'What would you like to do?'
+                    {if} answer {is} run
+                    {print} 'the wolf is faster than you...'
+                    {elif} answer {is} hide
+                    {print} 'You have succesfully hidden behind a tree'
+                    {elif} action {is} scare it off
+                    {print} 'the wolf runs away!'
+                    {elif} action {is} pet
+                    print 'you just lost a finger'
+                    ```
             8:
                 story_text: |
                     In a story, someone says words several times. For example, when someone calls for help or sings a song.
@@ -3368,6 +3387,10 @@ adventures:
         default_save_name: Quizmaster
         description: Make your own quiz!
         levels:
+            6:
+                example_code: |
+                    ```
+
             7:
                 story_text: |
                     ### Exercise
