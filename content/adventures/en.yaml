@@ -655,24 +655,6 @@ adventures:
                             {else}
                                 {print} 'That is wrong. The right answer is ' correct
                     ```
-            12:
-                story_text: |
-                    In this level, you can make a calculator that works for decimal numbers.
-
-                    ### Exercise 1
-                    Fill out the blanks to complete the calculator. Remember to use a period and not a comma for decimal numbers.
-
-                    ### Exercise 2
-                    Create a new mathematics practice program, but now use decimal numbers.
-                    Create a list of numbers, choose two to multiple and let the player answer.
-                    And of course you have to validate the answer! **Extra** Increase the difficulty by adding lives: A player loses a life for a wrong answer and after three wrong answers the game ends.
-                example_code: |
-                    ```
-                    number1 = {ask} 'What is the first number?'
-                    number2 = {ask} 'What is the second number?'
-                    answer = _
-                    {print} number1 ' plus ' number2 ' is ' _
-                    ```
             15:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
@@ -3307,7 +3289,7 @@ adventures:
         default_save_name: Piggy Bank
         description: Count your pocket money!
         levels:
-            12:
+            7:
                 story_text: |
                     In this adventure you learn how to make a digital piggy bank.
 
@@ -3936,27 +3918,6 @@ adventures:
                     _ {for} course {in} courses
                     _ food = {ask} name ', what would you like to eat as your ' course '?'
                     _ {print} name ' orders ' food ' as their ' course
-                    ```
-            12:
-                story_text: |
-                    From this level on, you can use decimal numbers to make your menu more realistic.
-
-                    ### Exercise
-                    Can you think of a code to give your friends and family a 15% discount?
-                example_code: |
-                    ```
-                    price = 0.0
-                    food = {ask} 'What would you like to order?'
-                    drink = {ask} 'What would you like to drink?'
-                    {if} food {is} 'hamburger'
-                        price = price + 6.50
-                    {if} food {is} 'pizza'
-                        price = price + 5.75
-                    {if} drink {is} 'water'
-                        price = price + 1.20
-                    {if} drink {is} 'soda'
-                        price = price + 2.35
-                    {print} 'That will be ' price ' dollar, please'
                     ```
             16:
                 story_text: |

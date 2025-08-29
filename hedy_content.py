@@ -75,7 +75,6 @@ def adventures_order_per_level():
 
 ADVENTURE_ORDER_PER_LEVEL_OLD = {
     1: [
-        'default',
         'print_command',
         'ask_command',
         'parrot',
@@ -88,9 +87,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'fortune',
         'debugging',
+        'hospital'
     ],
     2: [
-        'default',
         'is_command',
         'rock',
         'ask_command',
@@ -104,9 +103,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
     3: [
-        'default',
         'random_command',
         'dice',
         'rock',
@@ -121,9 +120,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
     4: [
-        'default',
         'quotation_marks',
         'rock',
         'dice',
@@ -138,9 +137,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'fortune',
         'restaurant',
         'debugging',
+        'hospital'
     ],
     5: [
-        'default',
         'if_command',
         'music',
         'language',
@@ -153,34 +152,40 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
     6: [
         'elif_command',
+        'is_command',
         'in_command',
         'restaurant',
         'quizmaster',
         'fortune',
         'guess_my_number',
         'haunted',
-        'pressit'
+        'pressit',
+        'hospital'
     ],
     7: [
-        'default',
-        'is_command',
         'maths',
+        'is_command',
         'music',
         'songs',
         'dice',
         'dishes',
+        'piggybank',
+        'haunted',
+        'quizmaster',
+        'years',
         'turtle',
         'turtle_draw_it',
         'calculator',
         'fortune',
         'restaurant',
         'debugging',
+        'hospital'
     ],
     8: [
-        'default',
         'repeat_command',
         'story',
         'songs',
@@ -194,9 +199,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'pressit',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
     9: [
-        'default',
         'repeat_command',
         'fortune',
         'repeat_command_2',
@@ -209,14 +214,15 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
     10: [
-        'default',
         'repeat_command',
         'if_command',
         'rock',
         'story',
         'calculator',
+        'calculator_2',
         'music',
         'secret',
         'restaurant',
@@ -225,9 +231,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
     11: [
-        'default',
         'for_command',
         'dishes',
         'dice',
@@ -241,32 +247,30 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'restaurant',
         'debugging',
+        'hospital'
     ],
     12: [
-        'default',
         'maths',
         'functions',
         'music',
         'songs_2',
-        'restaurant',
-        'calculator',
         'turtle',
         'piggybank',
         'secret',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
     13: [
         'print_command',
         'ask_command',
         'quotation_marks',
-        'and_or_command',
         'for_command',
         'songs',
         'turtle_draw_it',
+        'hospital'
     ],
     14: [
-        'default',
         'random_command',
         'haunted',
         'songs',
@@ -280,6 +284,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'simon_2',
         'simon_3',
         'debugging',
+        'hospital'
     ],
     15: [
         'is_command',
@@ -291,6 +296,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'calculator_2,'
         'turtle_draw_it',
+        'hospital'
     ],
     16: [
         'while_command',
@@ -300,6 +306,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle_draw_it',
         'calculator',
         'restaurant',
+        'guess_my_number',
         'hangman',
         'hangman_2',
         'hangman_3',
@@ -307,6 +314,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'blackjack_2',
         'blackjack_3',
         'blackjack_4',
+        'debugging',
+        'hospital'
     ],
 }
 
