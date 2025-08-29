@@ -450,6 +450,32 @@ class TestsLevel15(HedyTester):
             expected=expected
         )
 
+    def test_elif_in_function(self):
+        code = textwrap.dedent("""\
+        def calculate_score(answer, correct_answer):
+            if answer == correct_answer:
+                score = 1
+            elif answer == '?':
+                score = 0
+            else:
+                score = -1
+            return score
+            
+        answer = input ('Where can you find the Eiffel Tower?')
+        correct_answer = 'Paris'
+        score = calculate_score(answer, correct_answer)
+        print ('Your score is... ', score)""")
+
+        expected = self.dedent(
+            self.input_transpiled('answer', '1 or 2?'),
+            f"""print(f'''{{localize({self.sum_transpiled('5', 'answer')}, num_sys='Latin')}}''')""")
+
+        self.single_level_tester(
+            code=code,
+            max_level=17,
+            expected=expected
+        )
+
     def test_concat_promotes_ask_input_to_float(self):
         code = textwrap.dedent("""\
             answer is ask '1 or 2?'

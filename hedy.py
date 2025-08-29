@@ -38,7 +38,7 @@ from prefixes.normal import get_num_sys
 HEDY_MAX_LEVEL = MAX_LEVEL
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
 MAX_LINES = 100
-LEVEL_STARTING_INDENTATION = 8
+LEVEL_STARTING_INDENTATION = 9
 
 # Boolean variables to allow code which is under construction to not be executed
 local_keywords_enabled = True
@@ -337,7 +337,7 @@ commands_and_types_per_level = {
     Command.print: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
-        12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
+        6: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float],
         15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean],
         16: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.boolean, HedyType.list]
     },
@@ -375,30 +375,30 @@ commands_and_types_per_level = {
         15: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float, HedyType.list, HedyType.boolean]
     },
     Command.addition: {
-        6: [HedyType.integer, HedyType.input],
-        12: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
+        1: [HedyType.integer, HedyType.input],
+        6: [HedyType.string, HedyType.integer, HedyType.input, HedyType.float]
     },
     Command.subtraction: {
         1: [HedyType.integer, HedyType.input],
-        12: [HedyType.integer, HedyType.float, HedyType.input],
+        6: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.multiplication: {
         1: [HedyType.integer, HedyType.input],
-        12: [HedyType.integer, HedyType.float, HedyType.input],
+        6: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.division: {
         1: [HedyType.integer, HedyType.input],
-        12: [HedyType.integer, HedyType.float, HedyType.input],
+        6: [HedyType.integer, HedyType.float, HedyType.input],
     },
     Command.repeat: {7: [HedyType.integer, HedyType.input]},
     Command.for_list: {10: {HedyType.list}},
     Command.for_loop: {11: [HedyType.integer, HedyType.input]},
-    Command.smaller: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.smaller_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.bigger: {14: [HedyType.integer, HedyType.float, HedyType.input]},
-    Command.bigger_equal: {14: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.smaller: {7: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.smaller_equal: {7: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.bigger: {7: [HedyType.integer, HedyType.float, HedyType.input]},
+    Command.bigger_equal: {7: [HedyType.integer, HedyType.float, HedyType.input]},
     Command.not_equal: {
-        14: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list, HedyType.boolean]
+        7: [HedyType.integer, HedyType.float, HedyType.string, HedyType.input, HedyType.list, HedyType.boolean]
     },
     Command.pressed: {5: [HedyType.string]}  # TODO: maybe use a seperate type character in the future.
 }
@@ -650,10 +650,6 @@ class ExtractAST(Transformer):
         if isinstance(args[1], Tree) and "random" in args[1].data:
             return Tree('list_access', [args[0], 'random'], meta)
         return Tree('list_access', [args[0], args[1]], meta)
-
-    # level 5
-    def error_unsupported_number(self, meta, args):
-        return Tree('unsupported_number', [''.join([str(c) for c in args])], meta)
 
 
 # This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
@@ -1338,10 +1334,6 @@ class IsValid(Filter):
         raise exceptions.InvalidCommandException(invalid_command=invalid_command, level=self.level,
                                                  guessed_command=suggestion, line_number=meta.line,
                                                  fixed_code=fixed_code, fixed_result=result)
-
-    def error_unsupported_number(self, meta, args):
-        # add in , line=meta.line, column=meta.column
-        raise exceptions.UnsupportedFloatException(value=''.join(str(args[0])))
 
     def error_condition(self, meta, args):
         raise exceptions.UnquotedEqualityCheckException(line_number=meta.line)
@@ -2425,6 +2417,14 @@ class ConvertToPython_6(ConvertToPython_5):
             __ns = get_num_sys({var_access})
             {var_assign} = Value({var_access}, num_sys=__ns)""")
 
+    def ifelifelse(self, meta, args):
+        return f"""if {args[0]}:{self.add_debug_breakpoint()}
+    {ConvertToPython.indent(args[1])}
+elif {args[2]}:
+{ConvertToPython.indent(args[3])}
+else:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(args[4])}"""
+
     def play(self, meta, args):
         if not args:
             return self.make_play('C4', meta)
@@ -2592,6 +2592,11 @@ class ConvertToPython_6(ConvertToPython_5):
         # In level 6 the values of variables could be either a number or a string, e.g. 5 or '5'.
         # So, to check if a number is not in a list of numbers with diff numeral system, we use localize()
         return f"localize({arg0}) not in [localize(__la.data) for __la in {arg1}]"
+
+    def elifs(self, meta, args):
+        args = [a for a in args if a != ""]  # filter out in|dedent tokens
+        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
+        return "\nelif " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
     def addition(self, meta, args):
         return self.process_calculation(args, '+', meta)
@@ -3214,11 +3219,6 @@ class ConvertToPython_13(ConvertToPython_12):
     def or_condition(self, meta, args):
         return ' or '.join(args)
 
-
-@v_args(meta=True)
-@hedy_transpiler(level=14)
-@source_map_transformer(source_map)
-class ConvertToPython_14(ConvertToPython_13):
     def process_comparison(self, meta, args, operator):
         arg0 = self.process_variable_for_comparisons(args[0], meta)
         arg1 = self.process_variable_for_comparisons(args[1], meta)
@@ -3252,11 +3252,6 @@ class ConvertToPython_14(ConvertToPython_13):
     def not_equal(self, meta, args):
         return self.process_comparison(meta, args, "!=")
 
-
-@v_args(meta=True)
-@hedy_transpiler(level=15)
-@source_map_transformer(source_map)
-class ConvertToPython_15(ConvertToPython_14):
     def while_loop(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
         body = self.indent("\n".join(args[1:]))
@@ -3299,11 +3294,6 @@ class ConvertToPython_15(ConvertToPython_14):
         bool_pairs = [('True', 'False'), ('true', 'false')]
         return [{KEYWORDS[lang][t]: True, KEYWORDS[lang][f]: False} for t, f in bool_pairs for lang in langs]
 
-
-@v_args(meta=True)
-@hedy_transpiler(level=16)
-@source_map_transformer(source_map)
-class ConvertToPython_16(ConvertToPython_15):
     def change_list_item(self, meta, args):
         name = self.unpack(args[0])
         index = self.unpack(args[1])
@@ -3315,16 +3305,6 @@ class ConvertToPython_16(ConvertToPython_15):
 
         exception = self.make_index_error_check_if_list([left_side])
         return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
-
-
-@v_args(meta=True)
-@hedy_transpiler(level=17)
-@source_map_transformer(source_map)
-class ConvertToPython_17(ConvertToPython_16):
-    def elifs(self, meta, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        return "\nelif " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
     def if_pressed_elifs(self, meta, args):
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -3338,11 +3318,6 @@ class ConvertToPython_17(ConvertToPython_16):
             self.make_function(elif_function_name, elif_code) + '\n'
         )
 
-
-@v_args(meta=True)
-@hedy_transpiler(level=18)
-@source_map_transformer(source_map)
-class ConvertToPython_18(ConvertToPython_17):
     def input(self, meta, args):
         return self.ask(meta, args)
 
@@ -3357,6 +3332,41 @@ class ConvertToPython_18(ConvertToPython_17):
 
     def print_empty_brackets(self, meta, args):
         return self.print(meta, args)
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=14)
+@source_map_transformer(source_map)
+class ConvertToPython_14(ConvertToPython_13):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=15)
+@source_map_transformer(source_map)
+class ConvertToPython_15(ConvertToPython_14):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=16)
+@source_map_transformer(source_map)
+class ConvertToPython_16(ConvertToPython_15):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=17)
+@source_map_transformer(source_map)
+class ConvertToPython_17(ConvertToPython_16):
+    pass
+
+
+@v_args(meta=True)
+@hedy_transpiler(level=18)
+@source_map_transformer(source_map)
+class ConvertToPython_18(ConvertToPython_17):
+    pass
 
 
 @v_args(meta=True)
@@ -4023,11 +4033,11 @@ def process_input_string(input_string, level, lang, preprocess_ifs_enabled=True)
     if level >= 4:
         result = result.replace("\\", "\\\\")
 
-    # In levels 5 to 7 we do not allow if without else, we add an empty print to make it possible in the parser
+    # In levels 5 to 8 we do not allow if without else, we add an empty print to make it possible in the parser
     if level >= 5 and level < 8 and preprocess_ifs_enabled:
         result = preprocess_ifs(result, lang)
 
-    # In level 8 we add indent-dedent blocks to the code before parsing
+    # In level 9 we add indent-dedent blocks to the code before parsing
     if level >= hedy.LEVEL_STARTING_INDENTATION:
         result = preprocess_blocks(result, level, lang)
 

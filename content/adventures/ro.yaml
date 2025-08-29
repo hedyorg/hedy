@@ -27,7 +27,7 @@ adventures:
                         {print} 'Oo nu! Richard se mișcă prea încet...'
                         {print} _
                     ```
-            9:
+            10:
                 story_text: "In acest nivel poți folosi comenzile  `{if}` și `{repeat}` in interiorul altor `{if}` și `{repeat}` comenzi. \nAceasta posibilitate iți oferă mai multe opțiuni si te ajută sa creezi o poveste interactivă.\n\n### Exercițiu 1\nCompletează programul astfel incât comanda `{if}` funcționează corect.\n\n### Exercițiul 2\nAdaugă `{if}` și `{else}` in partea din poveste in care Robin merge acasă.\n\n### Exercițiul 3\nIntoarce-te la povestea de la nivelul și folosește cel puțin de două ori comanda `{if}`s în interiorul altei comenzi `{if}`.\n"
     default:
         name: Introducere
@@ -56,7 +56,7 @@ adventures:
                     răspuns {is} {ask} 'Ce trebuie să folosim de acum înainte?'
                     {print} 'Trebuie să folosim' răspuns
                     ```
-            5:
+            6:
                 story_text: |
                     La nivelul 5 există ceva nou, `{if}`! Cu `{if}` puteți alege între două opțiuni diferite.
                     Acest program afișează frumos dacă introduci Hedy ca nume și bau! dacă introduci altceva.
@@ -66,7 +66,7 @@ adventures:
                     nume {is} {ask} 'cum te numești?'
                     {if} nume {is} Hedy {print} 'frumos' {else} {print} 'bau!'
                     ```
-            6:
+            7:
                 story_text: |
                     In acest nivel inveți ceva nou: poți face calcule aritmetice.
 
@@ -80,14 +80,14 @@ adventures:
                     {print} '5 minus 5 face ' 5 - 5
                     {print} '5 ori 5 face ' 5 * 5
                     ```
-            7:
+            8:
                 story_text: |
                     Nivelul 7 adaugă comanda `{repeat}`. `{repeat}` poate fi folosită pentru a executa o linie din program de mai multe ori.
                 example_code: |
                     ```
                     {repeat} 3 {times} {print} 'Hedy e distractiv!'
                     ```
-            8:
+            9:
                 story_text: |
                     `{ask}` și `{print}` funcționează în continuare așa cum le cunoști. Dar `{if}`, `{else}` și `{repeat}` s-au schimbat!
                     Acum poți grupa mai multe linii împreună, dar va trebui să *indentezi* programul.
@@ -110,7 +110,7 @@ adventures:
                         {print} 'INTRUS!'
                         {print} 'Nu puteți folosi acest calculator!'
                     ```
-            9:
+            10:
                 story_text: |
                     În acest nivel nu numai că poți folosi mai multe linii cu `{if}` și `{repeat}`, dar le și poți combina!
                     În exemplu vezi o comandă `{if}` într-o comandă `{repeat}`. Este permis și invers, de asemenea un `{if}` este permis într-un `{if}` și un `{repeat}` într-un `{repeat}`.
@@ -124,7 +124,7 @@ adventures:
                         {else}
                             {print} 'pizza e mai bună'
                     ```
-            10:
+            11:
                 story_text: |-
                     În acest nivel învățăm un nouă comandă numită `{for}`. Cu `{for}` poți face o listă și poți folosi toate elementele.
                     `{for}` creează un bloc, la fel ca `{repeat}` și `{if}`, deci toate liniile din bloc trebuie să înceapă cu spații.
@@ -134,84 +134,6 @@ adventures:
                     {for} animal {in} animale
                       {print} 'Îmi place' animal
                     ```
-            12:
-                story_text: |-
-                    **Numere zecimale**
-                    Până acum, Hedy nu permitea numere zecimale precum 1.5, dar acum permite asta. Rețineți că folosim `.` pentru numere zecimale, nu virgulă.
-                example_code: |
-                    ```
-                    {print} 'Doi și jumătate plus doi și jumătate face...'
-                    {print} 2.5 + 2.5
-                    ```
-
-                    {print} 2.5 + 2.5
-            13:
-                story_text: |-
-                    Acum vom invăța: `{and}` și `{or}`! Dacă vrei să verifici două propoziții nu trebuie să folosești de două ori `{if}` dar poți folosi `{and}` și `{or}`.
-
-                    Dacă folosești`{and}`, ambele propoziții din stânga și dreapta, de o parte și de alta`{and}` trebuie să fie adevărate. Putem folosi și`{or}`. În cazul acesta doar o propoziție trebuie să fie adevărată.
-                example_code: |
-                    ```
-                    nume = {ask} 'cum te numești?'
-                    vârsta = {ask} 'ce vârstă ai?'
-                    {if} nume {is} 'Hedy' {and} vârsta {is} 2
-                        {print} 'Tu ești adevăratul program Hedy!'
-                    ```
-            14:
-                story_text: |
-                    Vom invăța comenzi noi. Probabil le stii deja de la matematică: simbolurile:  `<` și  `>`.
-                    Simbolul `<` verifică dacă primul număr este mai mic decât cel de-al doilea număr, de exemplu pentru vârsta `<` 12 verifică dacă vârsta este mai mică decât 12.
-                    Dacă vrei să verifici dacă primul număr este mai mic sau egal cu cel de-al doilea număr, poți folosi simbolul `<=`, de exemplu vârsta `<=` 11.
-                    Simbolul `>` verifică dacă primul număr este mai mare decât cel de-al doilea număr, de exemplu  `>` 10 verifică dacă if points is larger than 10.
-                    If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.
-                    You use these comparisons in an `{if}`, like this:
-                example_code: |
-                    ```
-                    vârsta = {ask} 'Ce vârstă ai?'
-                    {if} vârsta > 12
-                        {print} 'Ești mai în vârstă decât mine!'
-                    ```
-
-                    {if} vârsta < 13
-                        {print} 'Ești mai tânăr(ă) decât mine!'
-                    {else}
-                        {print} 'Ești mai in vârstă decât mine!'
-            15:
-                story_text: |-
-                    We are going to learn a new loop, the `{while}` loop! We continue the loop as long as the statement is true.
-                    So don't forget to change the value in the loop.
-
-                    In the example code, we continue until a correct answer has been given.
-                    If the correct answer is never given, the loop never ends!
-                example_code: |
-                    ```
-                    răspuns = 0
-                    {while} răspuns != 25
-                        răspuns = {ask} 'Cât face 5 ori 5?'
-                    {print} 'Am dat un răspuns corect'
-                    ```
-            16:
-
-                example_code: |
-                    ```
-                    prieteni = ['Ahmed', 'Ben', 'Cayden']
-                    numere_norocoase = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} 'numerele norocoase ale ' prieteni[i]
-                        {print} 'is ' numere_norocoase[i]
-                    ```
-            17:
-                story_text: |
-                    De acum vom modifica un pic indentarea. De fiecare dată când avem nevoie de indentare vom folosi`:` la linia înainte de indentare.
-
-                    In acest nivel poți deasemenea folosi și o comandă nouă: `{elif}`. `{elif}`  este prescurtarea pentru`{else}` `{if}` și ai nevoie de aceasta când vrei să ai 3 (sau mai multe) opțiuni.
-                    Incearcă!
     for_command:
         description: for command
         levels:
-            11:
-                story_text: |-
-                    In acest nivel, adăugăm o nouă formă a comenzii `{for}`. În nivelurile anterioare, am folosit `{for}` cu o listă, dar putem folosi `{for}` și cu numere.
-                    Facem asta adăugând un nume de variabilă, urmat de `{in}` `{range}`. Apoi scriem numărul de la care începem, `{to}` și numărul la care se termină.
-
-                    Încercați exemplul pentru a vedea ce se întâmplă! Și la acest nivel va trebui să utilizați indentări în rândurile de sub instrucțiunile `{for}`.
