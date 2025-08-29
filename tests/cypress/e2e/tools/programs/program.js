@@ -8,6 +8,8 @@ export function executeHelloWorldProgram(name) {
     // make sure to navigate to the wanted program tab.
     cy.getDataCy('dropdown_open_button').click();
     cy.getDataCy(`${name}`).click();
+    // close dropdown
+    cy.getDataCy('dropdown_open_button').click();
     // Execute program to save it
     cy.get('#editor .cm-content').click();
     // empty textarea
