@@ -1267,7 +1267,7 @@ adventures:
                     name {is} Sophie
                     {print} My name is name
                     ```
-            5:
+            6:
                 story_text: |
                     In the previous levels you've already learned to use `{at} {random}` which made your games different every time you ran the code.
                     But it's not really interactive, the player doesn't have any influence on what happens in the game.
@@ -1303,13 +1303,26 @@ adventures:
                     ```
             8:
                 story_text: |
+                    Great job! You've reached the next level, which means you have practiced with `{if}` and `{else}`. You have probably noticed that your codes are getting longer and longer.
+                    For example if you want to program 'Happy Birthday'.
+
+                    That's a lot of code for mainly the same words over and over again. Luckily in the next adventure you'll learn a solution with the `{repeat}` command, that allows you to repeat a line of code multiple times.
+                example_code: |
+                    ```
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday to you'
+                    {print} 'happy birthday dear Hedy'
+                    {print} 'happy birthday to you'
+                    ```
+            9:
+                story_text: |
                     Now you've learned how to repeat one single line of code. This comes in handy, but it's not always enough. Sometimes you want to repeat multiple lines at once.
                     This level allows you to group a couple of lines of code, and repeat that little group of lines all at once!
                 example_code: |
                     ```
                     {repeat} 5 {times} {print} 'In the next adventure you can repeat multiple lines of code at once!'
                     ```
-            9:
+            10:
                 story_text: |
                     Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an `{if}` or `{repeat}` command. But you can't yet combine the two...
                     Good news! In this level you will be allowed to put an `{if}` inside an `{if}`, or inside a `{repeat}` command. Putting a block of code inside another block of code is called nesting.
@@ -1323,7 +1336,7 @@ adventures:
                         {print} 'Hooray!'
                     {else}
                         {print} 'Maybe you should practice some more in the previous level'
-            10:
+            11:
                 story_text: |
                     You're doing great! In the previous levels we still faced a small problem. You have learned to repeat lines, but what if you'd want to slightly change the line.
                     For example if you want to sing the song 'if you're happy and you know it'. It would look like this:
@@ -1338,105 +1351,6 @@ adventures:
                     {print} 'if youre happy and you know it and you really want to show it'
                     {print} 'if youre happy and you know it clap your hands'
                     ```
-            11:
-                story_text: |
-                    You have reached level 11, you're doing great! In the higher levels, Hedy is focussing more and more on teaching you the programming language Python.
-                    In Python there is no `{repeat}` command, but there is a command that works like {repeat}. Are you curious to find out how to say `{repeat}` in Python language? Quickly go on to find out!
-            12:
-                story_text: |
-                    Maybe you have tried using decimal numbers in your restaurant adventure. If you did, you probably noticed that Hedy didn't understand them yet and always rounded off.
-                    From this level on you can use decimal numbers.
-                example_code: |
-                    ```
-                    burger = 5
-                    drink = 2
-                    total = burger + drink
-                    {print} 'You have ordered a burger and a drink'
-                    {print} 'That costs ' total ' dollars please'
-                    ```
-            13:
-                story_text: |
-                    In the previous levels you've learned how to put two `{if}` commands inside each other. This works fine, but it does give you very long and unhandy codes like this one:
-
-                    In this system you have to give both the correct username and the correct password.
-                    In this level you will learn the `{and}` command that will make this code a lot shorter and more understandable!
-                    Check it out!
-                example_code: |
-                    ```
-                    username = {ask} 'What is your username?'
-                    password = {ask} 'What is your password?'
-                    {if} username {is} 'Hedy'
-                        {if} password {is} 'secret'
-                            {print} 'Welcome Hedy!'
-                        {else}
-                            {print} 'Access denied'
-                    {else}
-                        {print} 'Access denied!'
-                    ```
-            14:
-                story_text: |
-                    With the example code you can calculate if you've passed a subject at school (so, a grade of six or higher).
-                    You can see this code is extremely inefficient, due to the very long code in line 5.
-                    All the different grades from 1 to 5 had to be programmed separately. Lucky for you, in this level you'll learn how to do this without this extremely long code!
-                example_code: |
-                    ```
-                    first_grade = {ask} 'What score did you get on your first test?'
-                    second_grade = {ask} 'What score did you get on your second test?'
-                    added = first_grade + second_grade
-                    mean_grade = added / 2
-                    {if} mean_grade = 1 {or} mean_grade = 2 {or} mean_grade = 3 {or} mean_grade = 4 {or} mean_grade = 5
-                        {print} 'Oh no! You have failed the subject...'
-                    {else}
-                        {print} 'Great! You have passed the subject!'
-                    ```
-            15:
-                story_text: |
-                    In this game below a code has been made to make sure the player can play on as long as they want...
-                    But the code is ineffective and way too long. Also, what if the player wants to play 101 games instead of 100?
-                    You can't play to infinity?
-                    In this level you will learn a command that makes all of this a lot easier!
-                example_code: |
-                    ```
-                    game = 'on'
-                    {for} i {in} {range} 1 {to} 100
-                        {if} game == 'on'
-                            answer = {ask} 'Do you want to continue?'
-                            {if} answer == 'no'
-                                game = 'over'
-                            {if} answer == 'yes'
-                                {print} 'Ok we will continue'
-                    ```
-            16:
-                story_text: |
-                    In this level we will grow a bit more towards real Python code. You will also learn how to match two lists together.
-                    This way you can program a code in which the correct animal is matched to the right sound.
-                    Because the two codes below... Are obviously nonsense!
-                example_code: |-
-                    ```
-                    animals = 'chicken', 'horse', 'cow'
-                    sounds = 'cluck', 'neigh', 'moo'
-                    {for} animal {in} animals
-                        {print} 'A ' animal ' says ' sounds {at} {random}
-                    ```
-                    You could also try to make it work this way, but....
-                    ```
-                    animals = 'chicken', 'horse', 'cow'
-                    sounds = 'cluck', 'neigh', 'moo'
-                    {for} animal {in} animals
-                        {for} sound {in} sounds
-                            {print} 'A ' animal ' says ' sound
-                    ```
-                    Note: These codes will not work like this in this level. Head to the next adventure to see which parts you need to correct.
-            17:
-                story_text: |
-                    Now we are going to change indentation a little bit. Every time that we need an indentation, we need `:` at the line before the indentation.
-
-                    In this level you can also use a new command: `{elif}`. `{elif}` is short for `{else} {if}` and you need it when you want to make 3 (or more!) options.
-                    Check it out!
-            18:
-                story_text: |
-                    Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like Replit or PyCharm, and you can continue learning there!
-                    Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
     dice:
         name: Dice
         default_save_name: Dice
