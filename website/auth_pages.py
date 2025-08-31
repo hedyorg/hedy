@@ -56,6 +56,9 @@ class AuthModule(WebsiteModule):
         # If username has an @-sign, then it's an email
         if "@" in body["username"]:
             user = self.db.user_by_email(body["username"])
+            # If not found, it may be email as username (possible for accounts created by teachers)
+            if not user:
+                user = self.db.user_by_username(body["username"])
         else:
             user = self.db.user_by_username(body["username"])
 
@@ -384,6 +387,9 @@ class AuthModule(WebsiteModule):
         # If username has an @-sign, then it's an email
         if "@" in body["username"]:
             user = self.db.user_by_email(body["username"].strip().lower())
+            # If not found, it may be email as username (possible for accounts created by teachers)
+            if not user:
+                user = self.db.user_by_username(body["username"])
         else:
             user = self.db.user_by_username(body["username"].strip().lower())
 

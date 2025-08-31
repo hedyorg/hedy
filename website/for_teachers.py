@@ -1300,8 +1300,8 @@ class ForTeachersModule(WebsiteModule):
                 err = safe_format(gettext('username_contains_separator'), usernames=', '.join(usernames_with_separator))
                 return make_response({"error": err}, 400)
 
-            # Currently usernames cannot contain '@' and ':'
-            invalid_symbols_in_username = ['@', ':']
+            # Currently usernames cannot contain ':'. The original reason for this is unknown
+            invalid_symbols_in_username = [':']
             invalid_usernames = [usr for usr in lines if any(sym in usr for sym in invalid_symbols_in_username)]
             if invalid_usernames:
                 err = safe_format(gettext('username_contains_invalid_symbol'),
@@ -1361,7 +1361,7 @@ class ForTeachersModule(WebsiteModule):
         for usr, pwd in accounts:
             # Set the current teacher language and keyword language as new account language
             user = {'username': usr, 'password': pwd, 'language': g.lang, 'keyword_language': g.keyword_lang}
-            store_new_student_account(self.db, user, teacher)
+            print("CREATED_USER: ", store_new_student_account(self.db, user, teacher))
             self.db.add_student_to_class(body["class"], usr)
         response = {"accounts": [{"username": usr, "password": pwd} for usr, pwd in accounts]}
         return make_response(response, 200)
