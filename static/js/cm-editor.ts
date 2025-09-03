@@ -1,6 +1,8 @@
 import { HedyEditor, EditorType, HedyEditorCreator, EditorEvent, SourceRange } from "./editor";
-import { EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
-        highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers } from '@codemirror/view'
+import {
+    EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
+    highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers
+} from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec, Extension, Facet } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
@@ -56,8 +58,10 @@ export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
             editorType = EditorType.COMMON_MISTAKES;
         } else if ($(preview).hasClass('cheatsheet')) {
             editorType = EditorType.CHEATSHEET;
-        } else if ($(preview).hasClass('workbook')){
+        } else if ($(preview).hasClass('workbook')) {
             editorType = EditorType.WORKBOOK
+        } else if ($(preview).hasClass('view-program')) {
+            editorType = EditorType.VIEW_PROGRAM;
         } else {
             editorType = EditorType.EXAMPLE;
         }
@@ -145,7 +149,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         } else { // the editor is a read only editor
             let theme: Record<string, any> = {
                 ".cm-cursor, .cm-dropCursor": { border: "none"},
-
                 ".cm-name": {
                     color: '#009975'
                 },
@@ -163,7 +166,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 Prec.highest(variableHighlighter)
             ];
 
-            switch(editorType) {
+            switch (editorType) {
                 case EditorType.CHEATSHEET:
                 case EditorType.EXAMPLE:
                     theme[".cm-scroller"] = { "overflow": "auto", "min-height": "3.5rem" }
@@ -193,6 +196,20 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                         highlightActiveLine(),
                         highlightActiveLineGutter()
                     ]);
+                    break;
+                case EditorType.VIEW_PROGRAM:
+                    theme["&"] = {
+                        background: '#272822',
+                        fontSize: '15.2px',
+                        color: 'white',
+                        borderRadius: '4px',
+                        marginRight: '5px',
+                        height: '100%',
+                    }
+                    theme[".cm-scroller"] = { "overflow": "auto" }
+                    theme[".cm-gutters"] = { "borderRadius": '4px' }
+                    theme[".cm-name"] = { "color": '#009975' }
+                    extensions.push([EditorView.theme(theme), lineNumbers(), highlightActiveLine(), highlightActiveLineGutter()]);
                     break;
             }
 

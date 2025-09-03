@@ -1,0 +1,10 @@
+<input
+    type="checkbox"
+    class="student_adventure_checkbox text-green-700 text-center text-sm cursor-pointer {% if is_ticked %}fa-solid fa-check{% endif %}"
+    {% if is_ticked %}checked{% endif %} 
+    id="checkbox_{{ student }}_{{ adventure_name }}_{{ level }}"
+    hx-post="/for-teachers/redesign/program/{{ class_id }}/grade?level={{level}}&student={{student}}&adventure_name={{adventure_name}}"
+    hx-target="#checkbox_{{ student }}_{{ adventure_name }}_{{ level }}"
+    hx-swap="outerHTML"
+    hx-trigger="change"   
+>
