@@ -426,7 +426,7 @@ class ForTeachersModule(WebsiteModule):
                         )
                         student_adventures[student_adventure_id] = current_program
         return student_adventures
-    
+
     @route("/redesign/class/<class_id>/grade/sort", methods=["GET"])
     @requires_login
     def sort_grading_page(self, user, class_id):
@@ -478,10 +478,10 @@ class ForTeachersModule(WebsiteModule):
             if order and order != "none":
                 rev = True if order == "descendent" else False
                 if col == "adventure":
-                    key_func = lambda item: item[1]["name"].lower()
+                    def key_func(item): return item[1]["name"].lower()
                 else:
                     idx = sort_columns.index(col)
-                    key_func = lambda item: sort_key(item)[idx]
+                    def key_func(item): return sort_key(item)[idx]
                 sorted_items = sorted(sorted_items, key=key_func, reverse=rev)
 
         sorted_adventures = dict(sorted_items)
@@ -513,8 +513,6 @@ class ForTeachersModule(WebsiteModule):
             level=level,
             class_id=class_id
         )
-
-
 
     def get_class_information(self, Class, user):
         # First we get the class information, like students adentures and customizations
