@@ -1,0 +1,162 @@
+<table class="w-full divide-y divide-gray-400">
+        <thead class="bg-gray-200 divide-y divide-gray-400">
+            <form id="sort-form" hx-get="/for-teachers/redesign/class/{{ class_info.id }}/grade/sort" hx-trigger="submit">
+                <tr>
+                    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-tl-lg w-28">
+                        {{_('level')}}
+                        <button class="ml-2" type="submit" title="Sort Level"
+                            _="on click
+                                if #level-sort matches .fa-sort then
+                                    remove .fa-sort from #level-sort
+                                    add .fa-sort-up to #level-sort
+                                    set value of #level-sort-input to 'ascendent'
+                                else if #level-sort matches .fa-sort-up then
+                                    remove .fa-sort-up from #level-sort
+                                    add .fa-sort-down to #level-sort
+                                    set value of #level-sort-input to 'descendent'
+                                else if #level-sort matches .fa-sort-down then
+                                    remove .fa-sort-down from #level-sort
+                                    add .fa-sort to #level-sort
+                                    set value of #level-sort-input to 'none'
+                                end">
+                            <i id="level-sort" class="fa-solid fa-sort"></i>
+                        </button>
+                        <input id="level-sort-input" type="hidden" name="level" value="none">
+                    </th>
+                    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
+                        {{_('student')}}
+                        <button class="ml-2" type="submit"
+                            _="on click
+                                if #student-sort matches .fa-sort then
+                                    remove .fa-sort from #student-sort
+                                    add .fa-sort-up to #student-sort
+                                    set value of #student-sort-input to 'ascendent'
+                                else if #student-sort matches .fa-sort-up then
+                                    remove .fa-sort-up from #student-sort
+                                    add .fa-sort-down to #student-sort
+                                    set value of #student-sort-input to 'descendent'
+                                else if #student-sort matches .fa-sort-down then
+                                    remove .fa-sort-down from #student-sort
+                                    add .fa-sort to #student-sort
+                                    set value of #student-sort-input to 'none'
+                                end">
+                            <i id="student-sort" class="fa-solid fa-sort"></i>
+                        </button>
+                        <input id="student-sort-input" type="hidden" name="student" value="ascendent">
+                    </th>
+                    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
+                        {{_('adventure')}}
+                        <button class="ml-2" type="submit"
+                            _="on click
+                                if #adventure-sort matches .fa-sort then
+                                    remove .fa-sort from #adventure-sort
+                                    add .fa-sort-up to #adventure-sort
+                                    set value of #adventure-sort-input to 'ascendent'
+                                else if #adventure-sort matches .fa-sort-up then
+                                    remove .fa-sort-up from #adventure-sort
+                                    add .fa-sort-down to #adventure-sort
+                                    set value of #adventure-sort-input to 'descendent'
+                                else if #adventure-sort matches .fa-sort-down then
+                                    remove .fa-sort-down from #adventure-sort
+                                    add .fa-sort to #adventure-sort
+                                    set value of #adventure-sort-input to 'none'
+                                end">
+                            <i id="adventure-sort" class="fa-solid fa-sort"></i>
+                        </button>
+                        <input id="adventure-sort-input" type="hidden" name="adventure" value="ascendent">
+                    </th>
+                    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
+                        {{_('date')}}
+                        <button class="ml-2" type="submit"
+                            _="on click
+                                if #date-sort matches .fa-sort then
+                                    remove .fa-sort from #date-sort
+                                    add .fa-sort-up to #date-sort
+                                    set value of #date-sort-input to 'ascendent'
+                                else if #date-sort matches .fa-sort-up then
+                                    remove .fa-sort-up from #date-sort
+                                    add .fa-sort-down to #date-sort
+                                    set value of #date-sort-input to 'descendent'
+                                else if #date-sort matches .fa-sort-down then
+                                    remove .fa-sort-down from #date-sort
+                                    add .fa-sort to #date-sort
+                                    set value of #date-sort-input to 'none'
+                                end">
+                            <i id="date-sort" class="fa-solid fa-sort"></i>
+                        </button>
+                        <input id="date-sort-input" type="hidden" name="date" value="ascendent">
+                    </th>
+                    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-tr-lg">
+                        {{_('accepted')}}
+                        <button class="ml-2" type="submit"
+                            _="on click
+                                if #accepted-sort matches .fa-sort then
+                                    remove .fa-sort from #accepted-sort
+                                    add .fa-sort-up to #accepted-sort
+                                    set value of #accepted-sort-input to 'ascendent'
+                                else if #accepted-sort matches .fa-sort-up then
+                                    remove .fa-sort-up from #accepted-sort
+                                    add .fa-sort-down to #accepted-sort
+                                    set value of #accepted-sort-input to 'descendent'
+                                else if #accepted-sort matches .fa-sort-down then
+                                    remove .fa-sort-down from #accepted-sort
+                                    add .fa-sort to #accepted-sort
+                                    set value of #accepted-sort-input to 'none'
+                                end">
+                            <i id="accepted-sort" class="fa-solid fa-sort"></i>
+                        </button>
+                        <input id="accepted-sort-input" type="hidden" name="accepted" value="ascendent">
+                    </th>
+                </tr>
+            </form>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            {% for student_adventure_id, program in student_adventures.items() %}
+            <tr>
+                <td class="text-center w-20 {% if loop.last %} rounded-b-lg {% endif %}">
+                    {{ program.level }}
+                </td>
+                <td data-cy="teacher_cell" class="py-3 text-center">{{ program.student }}</td>
+                <td class="py-3 tet-center items-center">
+                    <div class="flex flex-row  items-center cursor-pointer hover:bg-blue-200 p-3 rounded-lg transition-all ease-in duration-100"
+                    _="on click
+                        toggle .sliding-content-closed .sliding-content-open on #program_{{ program.program_id }}
+                        then toggle .rotate-180  on #program_{{ program.program_id }}_arrow">
+                        {{ program.name }}
+                        <div class="flex flex-1"> </div>
+                        <div class="flex flex-row items-center gap-5">
+                            {% if not program.is_modified%}
+                            <span class="fa fa-exclamation text-lg"></span>
+                            {% endif %}
+                            <span id="program_{{ program.program_id }}_arrow" class="fa fa-angle-down transition-all ease-in duration-100"></span>
+                        </div>
+                    </div>
+                    <div class="grow-0 grid sliding-content-closed ease-in transition-all duration-300 min-h-0 max-h-80 w-full" id="program_{{ program.program_id }}">
+                        <div class="turn-pre-into-ace  overflow-auto rounded-md">
+                            <pre level="{{ program.level }}" class="view-program min-h-4/5 h-4/5 py-4">{{ program.code }}</pre>
+                            <div class="flex flex-row gap-5 items-center">
+                                <a href="/hedy/{{ program.program_id }}/view" target="_blank" class="blue-btn-new"> {{ _('view_program') }} </a>
+                                {% if not program.is_modified %}
+                                    <span> This code is very similar to example code.</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center "> {{ program.date }}</td>
+                <td class="text-center {% if loop.last %} rounded-b-lg {% endif %} ">
+                        {{
+                            render_partial(
+                                'for-teachers/classes/htmx-grade-class-checkbox.html',
+                                class_id=class_info.id,
+                                level=program.level,
+                                student=program.student,
+                                adventure_name=program.adventure_name,
+                                is_ticked=program.ticked,
+                            )
+                        }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>

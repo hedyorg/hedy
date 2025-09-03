@@ -96,59 +96,13 @@
     <input type="text" name="search" id="search">
 </div>
 <div class="mt-10">
-    <table class="w-full divide-y divide-gray-400">
-        <thead class="bg-gray-200 divide-y divide-gray-400">
-            <tr>
-                <th
-                    class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-tl-lg w-20">
-                    {{_('level')}}</th>
-                <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
-                    {{_('student')}}</th>
-                <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
-                    {{_('adventure')}}</th>
-                <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
-                    {{_('date')}}
-                <th
-                    class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-tr-lg">
-                    {{_('accepted')}}</th>
-            </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-            {% for student_adventure_id, program in student_adventures.items() %}
-            <tr>
-                <td class="text-center w-20 {% if loop.last %} rounded-b-lg {% endif %}">
-                    {{ program.level }}
-                </td>
-                <td data-cy="teacher_cell" class="py-3 text-center">{{ program.student }}</td>
-                <td class="cursor-pointer hover:bg-blue-200 p-3 rounded-lg transition-all ease-in duration-100"
-                    _="on click toggle .hidden on the next .turn-pre-into-ace">
-                    <div class="flex flex-row items-center">
-                        {{ program.name }}
-                        <div class="flex flex-1"> </div>
-                        <div class="flex flex-row items-center gap-5">
-                            {% if not program.is_modified%}
-                            <span class="fa fa-exclamation"></span>
-                            {% endif %}
-                            <span class="fa fa-angle-down"></span>
-                        </div>
-                    </div>
-                    <div class="turn-pre-into-ace mb-4 overflow-auto hidden rounded-md transition-opacity h-[16rem] min-h-full"
-                        id="program_{{ program.id }}">
-                        <pre level="{{ program.level }}" class="view-program min-h-full h-full">{{ program.code }}</pre>
-                    </div>
-                </td>
-                <td class="text-center"> {{ program.date }}</td>
-                <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
-                    <input type="checkbox"
-                        class="student_adventure_checkbox text-green-700 text-center text-sm cursor-pointer {% if program.ticked %}fa-solid fa-check{% endif %}"
-                        {% if program.ticked %}checked{% endif %} 
-                        {# hx-post="/for-teachers/grid_overview/{{ class_info.id }}/change_checkbox?level={{level}}&student={{student}}&adventure={{adventure.id|lower}}"
-                        
-                        hx-target="#adventure_tables" hx-swap="outerHTML" hx-trigger="change" #}>                    
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {{
+        render_partial(
+            'for-teachers/classes/htmx-grade-class-table.html',
+            class_info=_class,
+            students=students,
+            student_adventures=student_adventures
+        )
+    }}
 </div>
 {% endblock %}

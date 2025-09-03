@@ -351,69 +351,170 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        students, class_adventures_formatted, adventure_names = (
-            self.get_class_information(Class, user)
-        )
-        student_adventures = {}
-        # TODO: is it possible to review several levels at the same time?
-        level = 1
-        for student in students:
-            programs = self.db.last_level_programs_for_user(student, level)
-            for _, program in programs.items():
-                # Old programs sometimes don't have adventures associated to them
-                # So skip them
-                if "adventure_name" not in program:
-                    continue
-                name = adventure_names.get(
-                    program["adventure_name"], program["adventure_name"]
-                )
-                customized_level = class_adventures_formatted.get(str(program["level"]))
-                if next(
-                    (
-                        adventure
-                        for adventure in customized_level
-                        if adventure["name"] == name
-                    ),
-                    False,
-                ):
-                    student_adventure_id = (
-                        f"{student}-{program['adventure_name']}-{level}"
-                    )
-                    current_adventure = self.db.student_adventure_by_id(
-                        student_adventure_id
-                    )
-                    if not current_adventure:
-                        # store the adventure in case it's not in the table
-                        current_adventure = self.db.store_student_adventure(
-                            dict(
-                                id=f"{student_adventure_id}",
-                                ticked=False,
-                                program_id=program["id"],
-                            )
-                        )
-
-                    current_program = dict(
-                        level=str(program["level"]),
-                        name=name,
-                        program=program["id"],
-                        code=program["code"],
-                        student=student,
-                        ticked=current_adventure["ticked"],
-                        is_modified=program.get("is_modified"),
-                        date=utils.localized_date_format(program['date'], only_date=True)
-                    )
-
-                    student_adventures[student_adventure_id] = current_program
-        print(student_adventures)
+        # For now, only level 1 is supported as in the original code
+        levels = [1]
+        student_adventures = self.build_student_adventures(Class, user, levels)
         session["class_id"] = class_id
         return render_template(
             "for-teachers/classes/grade-class.html",
             current_page="grade-class",
             page_title=gettext("title_grade_class"),
             _class=Class,
-            students=students,
+            students=sorted(Class.get("students", [])),
             student_adventures=student_adventures,
         )
+
+    def build_student_adventures(self, Class, user, levels):
+        """
+        Builds the student adventures dictionary for grading.
+        Args:
+            Class: The class object
+            students: List of student IDs
+            class_adventures_formatted: Adventures formatted for the class
+            adventure_names: Mapping of adventure names
+            levels: List of levels to include
+        Returns:
+            student_adventures: dict
+        """
+        students, class_adventures_formatted, adventure_names = (
+            self.get_class_information(Class, user)
+        )
+        student_adventures = {}
+        for student in students:
+            all_programs = self.db.last_programs_for_user_all_levels(student)
+            for level in levels:
+                programs = all_programs.get(level, {})
+                for _, program in programs.items():
+                    if "adventure_name" not in program:
+                        continue
+                    name = adventure_names.get(
+                        program["adventure_name"], program["adventure_name"]
+                    )
+                    customized_level = class_adventures_formatted.get(str(program["level"]))
+                    if next(
+                        (
+                            adventure
+                            for adventure in customized_level
+                            if adventure["name"] == name
+                        ),
+                        False,
+                    ):
+                        student_adventure_id = (
+                            f"{student}-{program['adventure_name']}-{level}"
+                        )
+                        current_adventure = self.db.student_adventure_by_id(
+                            student_adventure_id
+                        )
+                        if not current_adventure:
+                            current_adventure = self.db.store_student_adventure(
+                                dict(
+                                    id=f"{student_adventure_id}",
+                                    ticked=False,
+                                    program_id=program["id"],
+                                )
+                            )
+                        current_program = dict(
+                            level=str(program["level"]),
+                            name=name,
+                            program_id=program["id"],
+                            code=program["code"],
+                            student=student,
+                            adventure_name=program["adventure_name"],
+                            ticked=current_adventure["ticked"],
+                            is_modified=program.get("is_modified"),
+                            date=utils.localized_date_format(program['date'], only_date=True)
+                        )
+                        student_adventures[student_adventure_id] = current_program
+        return student_adventures
+    
+    @route("/redesign/class/<class_id>/grade/sort", methods=["GET"])
+    @requires_login
+    def sort_grading_page(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        # Get sort values from form (htmx)
+        sort_columns = ["level", "student", "adventure", "date", "accepted"]
+        sort_orders = {}
+        for col in sort_columns:
+            val = request.args.get(col)
+            if val:
+                sort_orders[col] = val
+
+        # Get adventures to sort
+        levels = [1]  # or get from request if needed
+        student_adventures = self.build_student_adventures(Class, user, levels)
+
+        # Build sort keys and order
+        def sort_key(item):
+            keys = []
+            for col in sort_columns:
+                if col == "adventure":
+                    val = item[1].get("name", "")
+                else:
+                    val = item[1].get(col, "")
+                # Normalize
+                if col in ["student", "adventure", "date"]:
+                    val = str(val).lower()
+                elif col == "level":
+                    try:
+                        val = int(val)
+                    except Exception:
+                        pass
+                elif col == "accepted":
+                    val = str(val).lower()
+                keys.append(val)
+            return tuple(keys)
+
+        # Sort by each column in reverse order (last column first)
+        sorted_items = list(student_adventures.items())
+        for col in reversed(sort_columns):
+            order = sort_orders.get(col, None)
+            if order and order != "none":
+                rev = True if order == "descendent" else False
+                if col == "adventure":
+                    key_func = lambda item: item[1]["name"].lower()
+                else:
+                    idx = sort_columns.index(col)
+                    key_func = lambda item: sort_key(item)[idx]
+                sorted_items = sorted(sorted_items, key=key_func, reverse=rev)
+
+        sorted_adventures = dict(sorted_items)
+
+        return render_partial(
+            "for-teachers/classes/htmx-grade-class-table.html",
+            class_id=class_id,
+            student_adventures=sorted_adventures
+        )
+
+    @route("/redesign/program/<class_id>/grade", methods=["POST"])
+    @requires_login
+    def tick_student_adventure(self, user, class_id):
+        level = request.args.get("level")
+        student_name = request.args.get("student", type=str)
+        adventure_name = request.args.get("adventure_name", type=str)
+        print(student_name, adventure_name, level)
+        student_adventure_id = f"{student_name}-{adventure_name}-{level}"
+        student_adventure = self.db.student_adventure_by_id(student_adventure_id)
+        if not student_adventure:
+            return utils.error_page(error=404, ui_message=gettext("no_programs"))
+        self.db.update_student_adventure(student_adventure_id, student_adventure["ticked"])
+        student_adventure = self.db.student_adventure_by_id(student_adventure_id)
+        return jinja_partials.render_partial(
+            "for-teachers/classes/htmx-grade-class-checkbox.html",
+            is_ticked=student_adventure["ticked"],
+            student=student_name,
+            adventure_name=adventure_name,
+            level=level,
+            class_id=class_id
+        )
+
+
 
     def get_class_information(self, Class, user):
         # First we get the class information, like students adentures and customizations
