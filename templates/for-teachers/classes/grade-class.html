@@ -1,7 +1,7 @@
 {% extends "auth.html" %}
 {% block regular_content %}
-<h1>{{ _class.name }}</h1>
-<h2 class="text-4xl mt-3">{{ _('grade_class') }}</h2>
+<h1>{{ class_info.name }}</h1>
+<h2 class="text-4xl mt-3">{{ _('gradeclass_info') }}</h2>
 <div class="flex flex-row gap-5">
     <!-- LEVEL -->
     <div class="flex flex-row w-full">
@@ -23,7 +23,7 @@
                 <a id="level_button_{{dropdown_level}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
             {% if loop.index == 1 %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
             hover:bg-blue-200" {% if dropdown_level==1 %}disabled{% endif %}
-                    href="/for-teachers/redesign/class/{{ _class.id }}/graph?level={{ dropdown_level}}">
+                    href="/for-teachers/redesign/class/{{ class_info.id }}/graph?level={{ dropdown_level}}">
                     <div class="flex-grow h-min" tabindex=0>
                         {{ _('level_title') }} {{ dropdown_level }}
                     </div>
@@ -53,7 +53,7 @@
                 {% for student in students %}
                 <a id="student_button_{{student}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
             {% if loop.index == 1 %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
-            hover:bg-blue-200" href="/for-teachers/redesign/class/{{ _class.id }}/graph?level={{ 1 }}">
+            hover:bg-blue-200" href="/for-teachers/redesign/class/{{ class_info.id }}/graph?level={{ 1 }}">
                     <div class="flex-grow h-min" tabindex=0>
                         {{ student }}
                     </div>
@@ -82,7 +82,7 @@
                 <a id="level_button_{{dropdown_level}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
             {% if loop.index == 1 %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
             hover:bg-blue-200" {% if dropdown_level==1 %}disabled{% endif %}
-                    href="/for-teachers/redesign/class/{{ _class.id }}/graph?level={{ dropdown_level}}">
+                    href="/for-teachers/redesign/class/{{ class_info.id }}/graph?level={{ dropdown_level}}">
                     <div class="flex-grow h-min" tabindex=0>
                         {{ _('level_title') }} {{ dropdown_level }}
                     </div>
@@ -99,7 +99,7 @@
     {{
         render_partial(
             'for-teachers/classes/htmx-grade-class-table.html',
-            class_info=_class,
+            class_info=class_info,
             students=students,
             student_adventures=student_adventures
         )

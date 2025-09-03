@@ -1,5 +1,6 @@
 import collections
 from difflib import SequenceMatcher
+import functools
 import os
 import re
 import uuid
@@ -359,7 +360,7 @@ class ForTeachersModule(WebsiteModule):
             "for-teachers/classes/grade-class.html",
             current_page="grade-class",
             page_title=gettext("title_grade_class"),
-            _class=Class,
+            class_info=Class,
             students=sorted(Class.get("students", [])),
             student_adventures=student_adventures,
         )
@@ -422,6 +423,7 @@ class ForTeachersModule(WebsiteModule):
                             adventure_name=program["adventure_name"],
                             ticked=current_adventure["ticked"],
                             is_modified=program.get("is_modified"),
+                            timestamp=program["date"],
                             date=utils.localized_date_format(program['date'], only_date=True)
                         )
                         student_adventures[student_adventure_id] = current_program
@@ -439,57 +441,45 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         # Get sort values from form (htmx)
-        sort_columns = ["level", "student", "adventure", "date", "accepted"]
+        sort_columns = ["level", "student", "name", "timestamp", "ticked"]
         sort_orders = {}
         for col in sort_columns:
-            val = request.args.get(col)
-            if val:
-                sort_orders[col] = val
+            if request.args.get(col, "none") != "none":
+                sort_orders[col] = request.args[col] == "ascendent"
 
         # Get adventures to sort
         levels = [1]  # or get from request if needed
         student_adventures = self.build_student_adventures(Class, user, levels)
 
         # Build sort keys and order
-        def sort_key(item):
-            keys = []
-            for col in sort_columns:
-                if col == "adventure":
-                    val = item[1].get("name", "")
-                else:
-                    val = item[1].get(col, "")
-                # Normalize
-                if col in ["student", "adventure", "date"]:
-                    val = str(val).lower()
-                elif col == "level":
-                    try:
-                        val = int(val)
-                    except Exception:
-                        pass
-                elif col == "accepted":
-                    val = str(val).lower()
-                keys.append(val)
-            return tuple(keys)
+        def cmp_items(a, b):
+            _, va = a
+            _, vb = b
+            for col, asc in sort_orders.items():
+                va_val = va[col]
+                vb_val = vb[col]
+                if isinstance(va_val, str) and isinstance(vb_val, str):
+                    # For strings, use case-insensitive comparison
+                    va_val = va_val.lower()
+                    vb_val = vb_val.lower()
+                # For descending, swap comparison
+                if not asc:
+                    va_val, vb_val = vb_val, va_val
+                if va_val < vb_val:
+                    return -1
+                elif va_val > vb_val:
+                    return 1
+            return 0
 
         # Sort by each column in reverse order (last column first)
-        sorted_items = list(student_adventures.items())
-        for col in reversed(sort_columns):
-            order = sort_orders.get(col, None)
-            if order and order != "none":
-                rev = True if order == "descendent" else False
-                if col == "adventure":
-                    def key_func(item): return item[1]["name"].lower()
-                else:
-                    idx = sort_columns.index(col)
-                    def key_func(item): return sort_key(item)[idx]
-                sorted_items = sorted(sorted_items, key=key_func, reverse=rev)
-
-        sorted_adventures = dict(sorted_items)
+        sorted_adventures = sorted(student_adventures.items(), key=functools.cmp_to_key(cmp_items))
 
         return render_partial(
-            "for-teachers/classes/htmx-grade-class-table.html",
+            "for-teachers/classes/htmx-grade-class-table-body.html",
             class_id=class_id,
-            student_adventures=sorted_adventures
+            class_info=Class,
+            students=sorted(Class.get("students", [])),
+            student_adventures=dict(sorted_adventures)
         )
 
     @route("/redesign/program/<class_id>/grade", methods=["POST"])
