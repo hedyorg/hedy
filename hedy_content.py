@@ -160,6 +160,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'fortune',
         'pressit',
+        'debugging',
         'hospital'
     ],
     7: [
