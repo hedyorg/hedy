@@ -911,18 +911,37 @@ adventures:
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warsaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    {for} i {in} {range} 0 {to} 10
-                        answer = {ask} 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        {if} answer = correct
-                            {print} 'Correct!'
-                        score = score + 1
-                        {else}
-                            {print} 'Wrong,' capitals[i] 'is the capital of' countries[i]
-                        {print} 'You scored ' score ' out of 10'
+                    names = ['Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali']
+                    verbs = ['walking', 'skipping', 'cycling', 'driving', 'running']
+                    locations = ['on a mountaintop', 'in the supermarket', 'to the swimming pool']
+                    hiding_spots = ['behind a tree', under a table', in a box']
+                    sounds = ['a trumpet', 'a car crash', 'thunder']
+                    causes_of_noise = ['a television', 'a kid with firecrackers', 'a magic elephant', 'a dream']
+
+                    chosen_ name = names[{random}]
+                    chosen_verb = verbs[{random}]
+                    chosen_location = 'locations[{random}]'
+                    chosen_sounds = cause_of_noise[{random}]
+                    chosen_spot = hiding_spots[{random}]
+                    chosen_causes = causes_of_noise[{random}]
+
+                    {print} (chosen_name, ' was ', chosen_verb, ' ', chosen_location)
+                    {print} ('when they suddenly heard a sound like ', sounds)
+                    {print} (chosen_name, " looked around, but they couldn't discover where the noise came from")
+                    {print} (chosen_name, ' hid ', chosen_spot')
+                    {print} ('They tried to look around, but couldn't see anything from there')
+
+                    hidden = 'yes'
+                    {while} hidden = 'yes':
+                        {print} (chosen_name, 'still didn't see anything')
+                        answer = {input} 'does ', chosen_name, ' move from their hiding spot?')
+                    {if} answer == 'yes'
+                        hidden == 'no'
+                    
+                    {print} ('chosen_name moved from', chosen_spot)
+                    {print} 'And then they saw it was just' chosen_cause
+                    {print} (chosen_name, 'laughed and went on with their day')
+                    {print} The End
 
                     ```
             17:
