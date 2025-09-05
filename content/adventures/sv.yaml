@@ -351,31 +351,6 @@ adventures:
                     namn = {input}('Vad heter du?')
                     {print}('Du heter alltså ', namn)
                     ```
-    blackjack:
-        description: Försök att hamna så nära 21 som möjligt
-        levels:
-            16:
-                story_text: |
-                    Blackjack är ett enkelt kortspel där det gäller att komma så nära 21 poäng som möjligt. Du får två kort. Varje kort är värt sitt siffervärde och bildkorten (knekt, dam och kung) är värda tio poäng.
-                    Esset är värt antingen 1 eller 11 poäng (du kan välja). Given, din motspelare, får också två kort.
-                    Om du vill kan du ta ytterligare ett kort, och dess poäng läggs till din totala poängsumma. Given kan också välja att ta ett annat kort.
-                    Men se upp så att du inte får mer än 21 poäng, för om du får det förlorar du!
-                    Den spelare som kommer närmast 21, utan att gå över det, vinner!
-
-                    ### Exercise
-                    In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
-
-                    ***Set the variables***
-                    Start by making a list of all the cards, from 2 to Ace. Next make a list of the face cards, so Jack, Queen and King. Then pick a random card from the list of cards to be card_1.
-
-                    ***Create a function to calculate the points***
-                    Create a function that calculates how many points a card is worth.
-                    All the face cards are worth 10 points, the Ace is worth 11 and all the other cards are worth their numeral.
-                    Return the variable `points` at the end of the function.
-
-                    ***Test the function***
-                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
-                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
     calculator:
         name: Kalkylator
         default_save_name: Kalkylator

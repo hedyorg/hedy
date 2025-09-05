@@ -316,34 +316,6 @@ adventures:
                     {print}('所以你的名字是', 名字)
                     ```
         name: '{ask}'
-    blackjack:
-        name: 黑杰克
-        default_save_name: 黑杰克
-        description: 尽可能地接近21
-        levels:
-            16:
-                story_text: |
-                    二十一点是一种简单的纸牌游戏，你必须尽可能接近 21 分。你会得到两张牌。每张牌都有其数值，人头牌（杰克、皇后和国王）值 10 分.
-                    Ace 值 1 分或 11 分（你可以选择）。庄家，也就是你的对手，也会得到两张牌。
-                    如果你愿意，你可以再拿一张牌，它的分数会加到你的总分中。庄家也可以选择再拿一张牌。
-                    但要注意不要超过 21 分，因为如果你超过 21 分，你就输了！
-                    最接近 21 分但不超过 21 分的玩家获胜!
-
-                    ### 练习
-                    在这个冒险中，我们编写了二十一点游戏的第一部分。我们将创建一个函数来计算一张牌值多少分。
-
-                    ***设置变量***
-                    首先列出所有牌，从 2 到 Ace。接下来列出人头牌，即杰克、皇后和国王。然后从卡片列表中随机挑选一张卡片作为 card_1。
-
-                    ***创建一个函数来计算点数***
-                    创建一个函数来计算一张卡片值多少点数。
-                    所有人头牌都值 10 分，Ace 值 11 分，所有其他卡片都值其数字。
-                    在函数末尾返回变量“points”。
-
-                    ***测试函数***
-                    测试您的函数是否正常工作。通过填写您抽到的卡片来完成第一个打印命令。然后通过使用 card_1 调用函数来完成第二行。
-                    运行代码几次。您对结果满意吗？太棒了！然后您可以删除测试部分并继续下一个冒险!
-                example_code: "```\n{print} 'BLACKJACK'\n\n# Set these variables\ncards = _\nface_cards = _\ncard_1 =\n\n# 创建一个函数来计算点数\n{define} calculate_points {with} card:\n    {if} card {in} face_cards:\n        points = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ points\n\n# Test your function\n{print} 'Your card is a ' _\n{print} 'That is worth ' _ ' points'.\n```\n"
     calculator:
         name: 计算器
         default_save_name: 计算器
@@ -3021,7 +2993,3 @@ adventures:
         default_save_name: 新年倒计时
         description: 新年倒计时!
         levels:
-    blackjack_2:
-        name: Blackjack 2
-        default_save_name: Blackjack_2
-        description: Blackjack part 2

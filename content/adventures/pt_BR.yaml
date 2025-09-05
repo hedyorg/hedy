@@ -2075,27 +2075,3 @@ adventures:
                 story_text: "### Exercício\nRecrie os desenhos com a tartaruga!\n\n**Extra** Faça um único código que deixa o(a) jogador(a) decidir qual letra mostrar! E mais, você consegue adicionar ainda mais letras?\n\n<div class=\"w-full flex flex-row gap-2\">\nF <img src=\"https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20\" width=\"100\">\nE <img src=\"https://github.com/hedyorg/hedy/assets/80678586/12821803-6422-416a-8e36-9902d14e57a4\" width=\"100\">\nL <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24\" width=\"100\">\n</div>\n"
     years:
         description: Contagem regressiva para o Ano Novo!
-    blackjack:
-        levels:
-            16:
-                story_text: "Vinte-e-um (ou \"Blackjack\") é um simples jogo de cartas em que você tem que chegar o mais perto de 21 possível. Você tem 2 cartas, cada uma com seu valor numérico, e as cartas especiais (Valete, Dama e Rei) valem 10 pontos.\nO Ás pode valer ou 1, ou 11 (você escolhe na hora). O \"dealer\", seu oponente, também ganha duas cartas.\nSe você quiser, você pode pegar outra carta e, então, os pontos dela serão adicionados ao seu total. O dealer também pode escolher outra carta.\nMas tome cuidado para não passar dos 21 pontos, senão você perde!\nO(a) jogador(a) que chegar mais perto de 21, sem ir além disso, vence!\n\n### Exercício\nNesta aventura, vamos escrever o código da primeira parte do nosso jogo de Vinte-e-um. Vamos criar uma função para calcular quantos pontos vale uma carta.\n\n***Defina as variáveis***\nComece fazendo uma lista de todas as cartas do 2 ao Ás. Depois, faça uma lista das cartas especiais: Valete, Dama e Rei. Então, escolha uma carta aleatória.\n\n***Crie uma função para calcular os pontos***\nCrie uma função que calcule quantos pontos vale uma certa carta.\nAs cartas especiais valem 10 pontos cada, o Ás vale 11 e todas as outras cartas valem o próprio número.\nRetorne a variável `pontos` no final da função.\n\n***Teste a função***\nTeste se sua função está funcionando corretamente. Complete o primeiro comando de imprimir com a carta que você tirou. Em seguida, complete a segunda linha chamando a função com carta_1.\nExecute o código algumas vezes. Feliz com os resultados? Ótimo! Então você já pode remover a parte do teste e seguir para a próxima aventura!\n"
-                example_code: "```\n{print} 'VINTE-E-UM'\n\n# Defina estas variáveis\ncartas = _\ncartas_especiais = _\ncarta_1 =\n\n# Crie uma função para calcular os pontos\n{define} calcular_pontos {with} carta:\n    {if} carta {in} cartas_especiais:\n        pontos = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ pontos\n\n# Teste sua função\n{print} 'Sua carta é ' _\n{print} 'Ela vale ' _ ' pontos'.\n```\n"
-        description: Tente chegar o mais perto de 21 que conseguir
-        name: Vinte-e-um
-        default_save_name: Vinte-e-um
-    blackjack_3:
-        description: Vinte-e-um parte 3
-        name: Vinte-e-um 3
-        default_save_name: Vinte_e_um_3
-    blackjack_4:
-        name: Vinte-e-um 4
-        default_save_name: Vinte_e_um_4
-        description: Vinte-e-um parte 4
-    blackjack_2:
-        name: Vinte-e-um 2
-        default_save_name: Vinte_e_um_2
-        description: Vinte-e-um parte 2
-    hangman:
-        name: Forca
-        default_save_name: Forca
-        description: Adivinhe a palavra
