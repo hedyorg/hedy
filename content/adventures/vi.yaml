@@ -131,7 +131,7 @@ adventures:
                     {if} kếtthúc {is} vui {print} tên ' nắm lấy thanh kiếm và con quái vật nhanh chóng chạy đi mất'
                     {else} {print} 'Con quái vật nuốt chửng' tên
                     ```
-            7:
+            8:
                 story_text: |
                     Trong một câu chuyện, đôi lúc sẽ có người nói. Ví dụ, khi có người kêu cứu hoặc hát một bài.
                     Bạn có thể lặp lại điều này trong câu chuyện ở cấp độ này bằng cách dùng `{repeat}`.
@@ -144,7 +144,7 @@ adventures:
                     {repeat} 5 {times} {print} 'Cứu!'
                     {print} 'Sao không ai cứu mình vậy?'
                     ```
-            8:
+            9:
                 story_text: |
                     Ở cấp độ này bạn có thể sử dụng nhiều câu khác nhau ở câu lệnh `{if}` , cách này giúp bạn nâng cấp thêm cho cái kết vui hay buồn!
 
@@ -166,7 +166,7 @@ adventures:
                         {print} 'Ôi không! Richard đã quá muộn...'
                         {print} _
                     ```
-            9:
+            10:
                 story_text: |
                     Ở cấp độ này bạn có thể sử dụng câu lệnh `{if}` và `{repeat}` bên trong một câu lệnh `{if}` và `{repeat}` khác.
                     Điều này giúp bạn có nhiều lựa chọ và giúp cho câu chuyện của bạn có sự tương tác
@@ -180,17 +180,3 @@ adventures:
                     ### Bài tập 3
                     Quay lại cấp độ 8 trong câu chuyện và sử dụng ít nhất 2 lần `{if}` ở trong 1 `{if}`khác.
                 example_code: "```\n{print} 'Robin đang đi bọ xuống trung tâm thành phố'\nlocation = {ask}'Liệu Robin sẽ vào 1 cửa hàng, hay cố ấy nên đi về nhà?'\n{if} location {is} \"cửa hàng\"\n    {print} 'Cố ấy vào trong cửa hàng'\n    {print} 'Robin thấy 1 cuốn chuyện trông rất hay'\n```\n"
-    default:
-        name: Giới thiệu
-        default_save_name: phần giới thiệu
-        description: Giải thích cấp độ
-        levels:
-            1:
-                story_text: |
-                    Ở Cấp độ 1, bạn có thể sử dụng các lệnh `{print}`, `{ask}` và `{echo}`.
-                    Nhập mã của bạn vào trường lập trình. Hoặc nhấn vào nút màu xanh trong khối mã ví dụ, và mã sẽ được gõ tự động cho bạn!
-                    Hãy thử mã của bạn bằng cách sử dụng nút 'Chạy mã' màu xanh dưới trường lập trình.
-                    Bạn có thể in ra màn hình văn bản bằng cách sử dụng lệnh `{print}`.
-            3:
-                story_text: |
-                    Ở cấp độ 3, bạn có thể tạo một danh sách. Bạn có thể để máy tính chọn ngẫu nhiên một phần tử từ danh sách đó. Bạn thực hiện điều đó bằng cách sử dụng `{at} {random}`.
