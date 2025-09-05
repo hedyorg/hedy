@@ -3254,40 +3254,6 @@ adventures:
                     {print} "I'm babysitting my sister's kids"
                     {print} "What's more fun than that?"
                     ```
-            13:
-                story_text: |
-                    **All texts need to be in quotation marks**
-                    For this level on you will also have to use quotation marks when storing a text with `=`:
-                example_code: |
-                    ```
-                    name = 'Hedy the Robot'
-                    {print} ('Hello ', name)
-                    ```
-                story_text_2: |
-                    **All items in lists need quotation marks too**
-                    Lists are texts, so they need quotation marks too. Mind that each single item on the list has quotation marks.
-                    This allows you to save two words as 1 item on the list, for example 'Black Widow'.
-                example_code_2: |
-                    ```
-                    superheroes = ['Spiderman', 'Batman', 'Black Widow']
-                    {print} superheroes {at} {random}
-                    ```
-                story_text_3: |
-                    **All text after `{if}` comparisons need quotation marks too**
-                example_code_3: |
-                    ```
-                    name = {ask} 'What is your name?'
-                    {if} name = 'Hedy the Robot'
-                        {print} 'Hi there!'
-                    ```
-                story_text_4: |
-                    **Numbers don't need quotation marks**
-                    For numbers, you do not use quotation marks in the `=`:
-                example_code_4: |
-                    ```
-                    score = 25
-                    {print} 'You got ' score
-                    ```
     random_command:
         name: '{random}'
         default_save_name: random_command

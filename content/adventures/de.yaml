@@ -2201,40 +2201,6 @@ adventures:
                     {print} 'Wir müssen ' antwort ' benutzen'
                     ```
                 story_text_2: "## Verkürzungen im Englischen\nWichtig! Da wir jetzt Anführungszeichen verwenden, wird Hedy verwirrt, wenn du bei englischen Texten das Apostroph für Verkürzungen wie I'm oder What's verwendest.\nEntferne diese Apostrophe und ändere die Schreibweise in I am oder What is sein.\nSchaue dir den Beispielcode an, um die falsche Verwendung von Apostrophen zu lernen.\n"
-            13:
-                story_text: |
-                    **Alle Texte müssen in Anführungszeichen stehen**
-                    Ab diesem Level musst du auch Anführungszeichen verwenden, um Text mit `=` zu speichern:
-                example_code: |
-                    ```
-                    name = 'Hedy der Roboter'
-                    {print} 'Hallo ' name
-                    ```
-                story_text_2: |
-                    **Alle Helden in dieser Liste müssen auch in Anführungszeichen stehen**
-                    In Listen müssen Texte auch in Anführungszeichen stehen. Beachte, dass jeder einzelne Held in der Liste Anführungszeichen hat. 
-                    Damit kann der Name auch aus zwei Wörtern bestehen, wie zum Beispiel 'Silver Surfer'.
-                example_code_2: |
-                    ```
-                    superhelden = 'Spiderman', 'Batman', 'Silver Surfer'
-                    {print} superhelden {at} {random}
-                    ```
-                story_text_3: |
-                    **Alle Texte nach `{if}` Vergleichen brauchen auch Anführungszeichen**
-                example_code_3: |
-                    ```
-                    name = {ask} 'Wie heißt du?'
-                    {if} name = 'Hedy der Roboter'
-                        {print} 'Hallo!!'
-                    ```
-                story_text_4: |
-                    **Zahlen brauchen keine Anführungszeichen**
-                    Für Zahlen benutzen wir keine Anführungszeichen bei `=`:
-                example_code_4: |
-                    ```
-                    punkte = 25
-                    {print} 'Du hast ' punkte
-                    ```
         description: Einführung der Anführungszeichen
         default_save_name: Anführungszeichen
     random_command:

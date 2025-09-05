@@ -958,15 +958,6 @@ adventures:
                 example_code_2: "```\n_ Toto je špatný způsob používání apostrofů _\n{print} 'Hlídám sestřiny děti'\n{print} 'Co je zábavnějšího než tohle?'\n_ Takhle se to řeší _\n{print} \"Hlídám sestřiny děti\"\n{print} \"Co je zábavnější než tohle?\"\n```\n"
                 story_text: "## 'Uvozovky'\nV úrovni 4 se změnily `{ask}` a `{print}`.\nText, který chcete vytisknout, musíte dát do uvozovek.\nTo je užitečné, protože nyní můžete vytisknout všechna slova, která chcete. Také slova, která jste použili k uložení něčeho pomocí `{is}`.\nVětšina programovacích jazyků používá při tisku také uvozovky, takže se také o krok přiblížíme skutečnému programování!\n"
                 story_text_2: "## Kontrakce\nDůležité! Pamatujte, že když teď používáme uvozovky, Hedy bude zmatená, když použijete apostrof pro spojky jako I'm nebo What's.\nDbejte na to, abyste používali dvojité uvozovky, když v řádku používáte apostrof!\nPodívejte se na příklad kódu, abyste viděli nesprávný způsob použití apostrofů.\n"
-            13:
-                story_text_3: "**Všechny texty po `{if}` porovnání potřebují také uvozovky**\n"
-                example_code_4: "```\nskóre = 25\n{print}'Máte ' skóre\n```\n"
-                story_text_2: "**Všechny položky v seznamech potřebují také uvozovky**\nSeznamy jsou texty, takže potřebují také uvozovky. Dbejte na to, aby každá jednotlivá položka seznamu měla uvozovky.\nTo umožňuje uložit dvě slova jako 1 položku seznamu, například „Black Widow“.\n"
-                example_code_2: "```\nsuperheroes = 'Spiderman', 'Batman', 'Black Widow'\n{print} superheroes {at} {random}\n```\n"
-                story_text_4: "**Čísla nepotřebují uvozovky**\nU čísel se uvozovky ve tvaru `=` nepoužívají:\n"
-                story_text: "**Všechny texty musí být v uvozovkách**\nPro tuto úroveň je nutné používat uvozovky také při ukládání textu pomocí `=`:\n"
-                example_code: "```\njméno = 'Hedy robott'\n{print} 'Hello ' jméno\n```\n"
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
         description: Představujeme uvozovky
         name: "'uvozovky'"
         default_save_name: uvozovky

@@ -1045,19 +1045,6 @@ adventures:
                 story_text: "## \"Cometes\"\nEn el nivell 4 `{ask}` i `{print}` han canviat.\nHas de posar el text que vols imprimir entre cometes, pots fer servir simples o dobles.\nAixò és útil, perquè ara pots imprimir totes les paraules que vulguis. També les paraules que utilitzaves per emmagatzemar alguna cosa amb `{is}`.\nLa majoria dels llenguatges de programació també fan servir cometes quan imprimeixen, per tant, estem fent un pas més cap a la programació real!\n"
                 story_text_2: "## Apòstrofs\nImportant! A vegades voldrem fer servir cometes o apòstrofs dins del text, Hedy es confondrà quan facis servir l'apòstrof dins una frase si aquesta està rodejada de cometes simples.\nAssegura't de fer servir cometes dobles quan facis servir un apòstrof a la teva línia!\nAl codi d'exemple pots veure la manera incorrecta de fer servir les cometes simples.\n"
                 example_code: "```\n{print} 'Els textos aniràn rodejats de cometes'\nresposta {is} {ask} \"Què cal fer servir a partir d'ara?\"\n{print} \"Caldrà fer servir \" resposta\n```\n"
-            13:
-                example_code: |
-                    ```
-                    nom = "Hedy el robot"
-                    {print} "Hola" nom
-                    ```
-                example_code_2: "```\nsuperherois = \"Spiderman\", \"Batman\", \"Catwoman\"\n{print} superherois {at} {random}\n```\n"
-                story_text_3: "**Tot el text després de les comparacions `{if}` també necessita cometes**\n"
-                example_code_3: "```\nnom = {ask} \"Com et dius?\"\n{if} nom = \"Hedy el Robot\"\n    {print} \"Hola! que tal?\"\n```\n"
-                example_code_4: "```\npunts = 25\n{print} \"Tens \" punts \" punts\"\n```\n"
-                story_text_2: "**Tots els elements de les llistes també necessiten cometes**\nLes llistes són textos, per tant, també necessiten cometes. Tingues en compte que cada element de la llista té cometes.\nAixò et permet guardar dues paraules com a 1 element de la llista, per exemple \"Viuda Negra\".\n"
-                story_text: "**Tots els textos han d'estar entre cometes**\nA partir d'aquest nivell també hauràs d'utilitzar cometes quan emmagatzemis un text amb `=`:\n"
-                story_text_4: "**Els números no necessiten cometes**\nPer als números, no cal fer servir cometes després del signe `=`:\n"
         name: '"cometes"'
         default_save_name: cometes
         description: Introducció a les cometes

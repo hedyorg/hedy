@@ -1782,40 +1782,6 @@ adventures:
                     _ Así se resuelve el problema _
                     {print} "I'm babysitting my sister's kids"
                     {print} "¿Qué es más divertido que eso?"
-                    ``
-            13:
-                story_text: |
-                    **Todos los textos tienen que ir entre comillas**
-                    Para este nivel también tendrás que usar comillas cuando almacenes un texto con `=`:
-                example_code: |
-                    ```
-                    nombre = 'El Robot Hedy'
-                    {print} 'Hola ' nombre
-                    ```
-                story_text_2: |
-                    **Todos los objetos en las listas también necesitan comillas**
-                    Las listas son textos, así que también necesitan comillas. Ten en cuenta que cada objeto en la lista tiene comillas.
-                    Esto te permite guardar dos palabras como un objeto en la lista, por ejemplo 'Black Widow'.
-                example_code_2: |
-                    ```
-                    superhéroes = 'Spiderman', 'Batman', 'Black Widow'
-                    {print} superhéroes {at} {random}
-                    ```
-                story_text_3: |
-                    **Todos los textos tras las comparaciones `{if}` también necesitan comillas**
-                example_code_3: |
-                    ```
-                    nombre = {ask} '¿Cuál es tu nombre?'
-                    {if} nombre = 'El Robot Hedy'
-                        {print} '¡Hola!'
-                    ```
-                story_text_4: |
-                    **Los números no necesitan comillas**
-                    Para los números, no utilizas comillas en el `=`:
-                example_code_4: |
-                    ```
-                    puntuación = 25
-                    {print} 'Obtuviste ' puntuación
                     ```
     random_command:
         default_save_name: comando_aleatorio

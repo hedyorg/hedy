@@ -1841,40 +1841,6 @@ adventures:
                     {print} 'I'm babysitting my sister's kids'
                     {print} 'What's more fun than that?'
                     ' ' '
-            13:
-                story_text: |
-                    **所有文本需要用引号括起来**
-                    对于这个级别，你还必须在使用`=`存储的文本中使用引号:
-                example_code: |
-                    ```
-                    name = '海蒂机器人'
-                    {print} '你好' name
-                    ```
-                story_text_2: |
-                    **列表中的所有项目也需要引号**
-                    列表是文本，所以它们也需要引号。请注意，清单上的每一项都有引号。
-                    这允许你将两个单词保存为列表中的一个项目，例如'钢铁侠 小猪佩奇'。
-                example_code_2: |
-                    ```
-                    超级英雄 = '蜘蛛侠', '蝙蝠侠', '钢铁 侠'
-                    {print} 超级英雄 {at} {random}
-                    ```
-                story_text_3: |
-                    **`{if}`比较后的所有文本也需要引号**
-                example_code_3: |
-                    ```
-                    name = {ask} '你的名字是?'
-                    {if} name = '海蒂机器人'
-                        {print} 'Hi大家!'
-                    ```
-                story_text_4: |
-                    **数字不需要引号**
-                    对于数字，不需要在`=`后使用引号:
-                example_code_4: |
-                    ```
-                    score = 25
-                    {print} '你得到' score
-                    ```
     random_command:
         default_save_name: random_命令
         description: 介绍 {at} {random} 命令

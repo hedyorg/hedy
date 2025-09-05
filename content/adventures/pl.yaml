@@ -2291,35 +2291,6 @@ adventures:
                     {print} "I'm babysitting my sister's kids"
                     {print} "What's more fun than that?"
                     ```
-            13:
-                story_text: |
-                    **Wszystkie teksty muszą znajdować się w cudzysłowie**
-                    Dla tego poziomu będziesz musiał również użyć cudzysłowu podczas przechowywania tekstu za pomocą `=`:
-                example_code: |
-                    ```
-                    imię = 'Robot Hedy'
-                    {print} 'Witaj ' imię
-                    ```
-                story_text_2: |
-                    **Wszystkie pozycje na listach również wymagają cudzysłowu**
-                    Listy są tekstami, więc potrzebują też cudzysłowów. Pamiętaj, że każdy element na liście ma cudzysłowy.
-                    Pozwala to zapisać dwa słowa jako 1 element na liście, na przykład „Czarna Wdowa”'.
-                example_code_2: |
-                    ```
-                    superbohaterowie = 'Spiderman', 'Batman', 'Black Widow'
-                    {print} superbohaterowie  {at} {random}
-                    ```
-                story_text_3: |
-                    **Cały tekst po porównaniach `{if}` również wymaga cudzysłowu**
-                story_text_4: |
-                    **Liczby nie potrzebują cudzysłowu**
-                    W przypadku liczb nie używasz cudzysłowu w `=`:
-                example_code_4: |
-                    ```
-                    wynik = 25
-                    {print} 'Zdobyłeś ' wynik
-                    ```
-                example_code_3: "```\nname = {ask} 'What is your name?'\n{if} name = 'Hedy the Robot'\n    {print} 'Hi there!'\n```\n"
     random_command:
         default_save_name: Komenda pozycja losowa
         description: Przedstawienie komendy {at} {random}

@@ -1691,40 +1691,6 @@ adventures:
                     {print} 'aujourd'hui je fais du babysitting avec les enfants de ma sœur'
                     {print} 'qu'y a-t-il de plus amusant que ça ?'
                     ```
-            13:
-                story_text: |
-                    **Tous les textes doivent être entre guillemets**
-                    À partir de ce niveau, tu devras utiliser les guillemets quand tu enregistres un texte avec `=` :
-                example_code: |
-                    ```
-                    nom = "Hedy le robot"
-                    {print} "Bonjour " nom
-                    ```
-                story_text_2: |
-                    **Tous les éléments des listes ont aussi besoins des guillemets**
-                    Les listes, c'est du texte ! Donc, elles ont aussi besoins des guillemets. Attention que chaque élément de la liste à besoins de ses guillemets individuellement.
-                    Cela te permet d'avoir un élément de deux mots dans une liste. Par exemple "Black Widow".
-                example_code_2: |
-                    ```
-                    superhéros = "Spiderman", "Batman", "Black Widow"
-                    {print} superhéros {at} {random}
-                    ```
-                story_text_3: |
-                    **Tout texte dans la comparaison d'un `{if}` a besoins de guillemets**
-                example_code_3: |
-                    ```
-                    nom = {ask} "Quel est ton nom ?"
-                    {if} nom = "Hedy le robot"
-                        {print} "Salut !"
-                    ```
-                story_text_4: |
-                    **Les nombres n'ont pas besoins de guillemets**
-                    Pour les nombres, tu ne dois pas utiliser les guillemets avec `=` :
-                example_code_4: |
-                    ```
-                    score = 25
-                    {print} "Tu as eu " score " points"
-                    ```
     random_command:
         description: Introduction de la commande `{at} {random}`
         levels:

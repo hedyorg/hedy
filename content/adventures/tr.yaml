@@ -1468,40 +1468,6 @@
                     {print} 'Ayşe'nin çocuklarına bakıyorum.'
                     {print} 'Çocuklarla oyun'dan daha eğlenceli ne olabilir ki?'
                     ```
-            13:
-                story_text: |
-                    **Tüm metinlerin tırnak içinde olması gerekir**
-                    Bu seviyeden itibaren bir metni `=` ile kaydederken tırnak işaretlerini de kullanmanız gerekecektir:
-                example_code: |
-                    ```
-                    isim = 'Robot Hedy'
-                    {print} 'Merhaba ' isim
-                    ```
-                story_text_2: |
-                    **Listelerdeki tüm öğelerin de tırnak işaretine ihtiyacı vardır**
-                    Listeler metindir, bu nedenle onlarında tırnak işaretlerine ihtiyaçları vardır. Listedeki her bir öğenin tırnak işaretine sahip olduğuna dikkat edin.
-                    Bu, örneğin 'Black Widow' gibi iki kelimeyi listeye 1 öğe olarak kaydetmenizi sağlar.
-                example_code_2: |
-                    ```
-                    süperkahramanlar = 'Spiderman', 'Batman', 'Black Widow'
-                    {print} süperkahramanlar {at} {random}
-                    ```
-                story_text_3: |
-                    **`{if}` karşılaştırmalarından sonraki tüm metinler de tırnak işaretine ihtiyaç duyar**
-                example_code_3: |
-                    ```
-                    isim = {ask} 'Senin adın ne?'
-                    {if} isim = 'Robot Hedy'
-                        {print} 'Merhaba!'
-                    ```
-                story_text_4: |
-                    **Sayıların tırnak işaretine ihtiyacı yoktur**
-                    Sayılar için `=` içinde tırnak işareti kullanmazsınız:
-                example_code_4: |
-                    ```
-                    puan = 25
-                    {print} 'Puanın ' puan
-                    ```
     random_command:
         default_save_name: restgele_komutu
         description: şurada rastgele komutuna giriş

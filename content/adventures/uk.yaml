@@ -2001,15 +2001,6 @@ adventures:
         levels:
     quotation_marks:
         levels:
-            13:
-                story_text_3: "**Увесь текст після порівнянь `{if}` також потребує лапок**\n"
-                story_text_2: "**Усі елементи в списках також потрібно брати в лапки** \nСписки — це тексти, тому вони також потребують лапок. Майте на увазі, що кожен окремий елемент у списку взято в лапки. \nЦе дозволяє зберегти два слова як 1 пункт у списку, наприклад, «Чорна вдова».\n"
-                example_code_2: "```\nsuperheroes = 'Spiderman', 'Batman', 'Black Widow'\n{print} superheroes {at} {random}\n```\n"
-                story_text: "**Всі тексти взяти в лапки**\nДля цього рівня вам також доведеться використовувати лапки під час зберігання тексту з `=`:\n"
-                example_code: "```\nname = 'Hedy the Robot'\n{print} 'Hello ' name\n```\n"
-                example_code_3: "```\nname = {ask} 'Як тебе звати?'\n{if} name = 'Hedy the Robot'\n    {print} 'Привіт!'\n```\n"
-                story_text_4: "**Числа не потребують лапок**\nДля чисел ви не використовуєте лапки в `=`:\n"
-                example_code_4: "```\nscore = 25\n{print} 'You got ' score\n```\n"
             4:
                 example_code: "```\n{print} 'You need to use quotation marks from now on!'\nanswer {is} {ask} 'What do we need to use from now on?'\n{print} 'We need to use ' answer\n```\n"
                 story_text_2: "## Скорочення \nважливо! Майте на увазі, що тепер, коли ми використовуємо лапки, Хеді заплутається, коли ви використовуєте апостроф для скорочень, як-от I'm або What's. \nОбов’язково використовуйте подвійні лапки, коли використовуєте апостроф у своєму рядку! \nПерегляньте приклад коду, щоб побачити неправильний спосіб використання апострофів.\n"
