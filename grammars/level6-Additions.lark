@@ -9,7 +9,7 @@ _elif_clause: _ELIF (condition|error_condition|condition_spaces) _EOL _if_less_c
 
 ifelse: _if_clause _EOL _else_clause
 ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs'
-ifelifelse: _if_clause _EOL _elif_clause _EOL _else_clause
+ifelifelse: _if_clause (_EOL _elif_clause)+ _EOL _else_clause
 
 
 // FH June 2025: New to allow decimals in the grammar
