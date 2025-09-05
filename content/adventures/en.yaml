@@ -709,6 +709,8 @@ adventures:
                     price = 2
                     {elif} chosen_product {in} three_dollar_products
                     price = 3
+                    {else}
+                    price
                     amount_of_products = '{ask} How many of ' chosen_product would you like to have?
                     total {is} price * amount_of_products
                     {print} 'That will be $' total ' please'
@@ -726,6 +728,8 @@ adventures:
                     price = 2
                     {elif} chosen_product {in} three_dollar_products
                     price = 3
+                    {else}
+                    price = 0
                     amount_of_products = {ask} 'How many of ' chosen_product ' would you like to have?'
                     total = price * amount_of_products
                     {print} 'That will be $' total ' please'
