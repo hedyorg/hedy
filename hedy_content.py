@@ -285,6 +285,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     ],
     16: [
         'while_command',
+        'story',
         'dice',
         'rock',
         'music',
