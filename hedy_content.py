@@ -261,6 +261,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'story',
         'songs',
         'turtle_draw_it',
+        'debugging',
         'hospital'
     ],
     14: [
@@ -281,6 +282,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'calculator',
         'calculator_2',
         'turtle_draw_it',
+        'debugging',
         'hospital'
     ],
     16: [
