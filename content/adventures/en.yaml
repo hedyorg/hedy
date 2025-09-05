@@ -874,8 +874,8 @@ adventures:
 
                     {print} 'Welcome to our restaurant'
                     people = {ask} 'How many people are in your party tonight?'
-                    {for} i {in} {range} 0 {to} people
-                        greet_customer()
+                    {repeat} people times
+                        greet_customer
                     ```
             13:
                 story_text: |-
