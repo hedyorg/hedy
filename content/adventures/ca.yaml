@@ -1311,7 +1311,7 @@ adventures:
             15:
                 story_text: "### Exercici\nEn aquest nivell pots fer que Hedy t'expliqui si has estalviat prou diners!\nAcaba aquest codi omplint els buits!\n"
                 example_code: "```\n_ calcula_pressupost {with} desitg, diners, paga\n    a_estalviar = desitg - diners\n    setmanes = a_estalviar / paga\n    {if} desitg _ diners\n        {print} \"Has d'estalviar més!\"\n        {print} \"Necessites \" setmanes \" setmanes més.\"\n    {else}\n        {print} \"Perfecte! Ja en tens suficient\"\n        {print} \"Ja ho pots comprar!\"\n\ndiners = {ask} \"Quant has estalviat?\"\ndesitg = {ask} \"Quants diners necessites?\"\npaga = {ask} \"Quants diners aconsegueixes cada setmana?\"\n\n{call} _\n```\n"
-            12:
+            7:
                 example_code: "```\n{print} \"La teva guardiola digital\"\ndesig = {ask} \"Què vols comprar?\"\npreu = {ask} \"Quant costa?\"\nestalviat = {ask} \"Quants diners ja has estalviat?\"\npaga = {ask} \"Quants diners aconsegueixes cada setmana?\"\na_estalviar = preu - estalviat\nweeks = a_estalviar / paga\n{print} \"Ho podràs comprar \" _ \" en \" _ \" setmanes.\"\n```\n"
                 story_text: "En aquesta aventura aprendràs a crear una guardiola digital.\n\n### Exercici\nAcaba el codi per calcular quants diners tens i quant temps necessites estalviar per comprar allò que vols!\n**Extra** Potser ja has estalviat alguns diners? Dedueix-los de la quantitat que hauràs d'estalviar.\n"
         description: Conta el teu efectiu!
