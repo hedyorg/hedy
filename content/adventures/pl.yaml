@@ -264,23 +264,6 @@ adventures:
                     {print} Otrzymujesz koktajl o smaku {at} {random}
                     ```
         name: '{add}{to_list} i {remove}{from}'
-    and_or_command:
-        default_save_name: i lub
-        description: wprowadzenie komendy {and} i {or}
-        levels:
-            13:
-                story_text: |-
-                    Teraz nauczymy się komend `{and}` i `{or}`! Jeżeli chcesz sprawdzić dwa stwierdzenia, nie musisz używać dwóch komend`{if}` zamiast tego możesz użyć komendy `{and}` i `{or}`.
-
-                    Jeżeli używasz komendy `{and}`, oba stwierdzenia, po lewej i prawej stronie komendy `{and}` muszą być prawdziwe. Możemy również użyć komendy `{or}`. Wtedy tylko jedno stwierdzenie musi być poprawne.
-                example_code: |
-                    ```
-                    imię = {ask} 'Jak masz na imię?'
-                    wiek = {ask} 'Ile masz lat?'
-                    {if} imię {is} 'Hedy' {and} wiek {is} 2
-                        {print} 'Jesteś prawdziwym Hedym!'
-                    ```
-        name: '{and} i {or}'
     ask_command:
         default_save_name: komenda_ask
         description: Wprowadzenie komendy {ask}
