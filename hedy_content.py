@@ -279,14 +279,14 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'music',
         'hotel',
         'calculator',
-        'calculator_2,'
+        'calculator_2',
         'turtle_draw_it',
         'hospital'
     ],
     16: [
         'while_command',
         'dice',
-        'rock'
+        'rock',
         'music',
         'turtle_draw_it',
         'calculator',
