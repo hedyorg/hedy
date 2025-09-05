@@ -1540,9 +1540,6 @@ adventures:
             10:
                 example_code: "```\nnom = {ask} \"Com et dius?\"\npassword = {ask} \"Quina és la contrasenya?\"\n{if} nom {is} \"Agent007\" _ password {is} \"TOPSECRET\"\n    {print} \"Ves a l'aeroport demà a les 02:00\"\n{else}\n    {print} \"Ves a l'estació de tren avui a les 10:00\"\n ```\n"
                 story_text: "Podem simplificar el codi de superespia amb `{and}`, de manera que només necessitem un `{if}`.\n\n### Exercici 1\nCompleta el codi omplint la comanda correcta en el buit. Consell: El superespia ha de respondre TOTES les preguntes correctament abans d'obtenir la informació confidencial!\n\n### Exercici 2\nVolem confondre encara més l'enemic! Crea una llista amb respostes falses i selecciona'n una a l'atzar quan es doni una resposta incorrecta.\n"
-            12:
-                story_text: "En aquesta aventura pots crear el teu propi codi de superespia. Codifica un missatge que només l'agent correcte pugui desxifrar.\nSi l'enemic intenta desxifrar el codi, obtindrà informació falsa per fer-li perdre el temps.\n\n### Exercici 1\nCrea el teu propi codi secret per al teu superespia i retorna les dues parts només a l'espia real.\n\n### Exercici 2\nAfegeix un tercer component al codi, com una peça de roba o un objecte.\n"
-                example_code: "```\nnom = {ask} \"Com et dius?\"\n{if} nom {is} _\n    a = \"Ves a l'aeroport \"\n{else}\n    a = \"Ves a l'estació de trens \"\npassword = {ask} \"Quina és la constrasenya?\"\n{if} password {is} _\n    b = \"demà a les 02:00\"\n{else}\n    b = \"avui a les 10:00\"\n{print} _ _ _\n```\n"
         default_save_name: SuperEspia
         description: Fes el teu propi codi espia
     simon:

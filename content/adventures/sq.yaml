@@ -1204,27 +1204,6 @@ adventures:
         default_save_name: Super spiuni
         description: Bëni kodin tuaj të spiunazhit
         levels:
-            12:
-                story_text: |
-                    Në këtë aventurë ju mund të krijoni kodin tuaj super spiun. Kodoni një mesazh që vetëm agjenti i duhur mund ta deshifrojë.
-                    Nëse armiku përpiqet të thyejë kodin, ata do të marrin disa informacione të rreme për të humbur kohën e tyre.
-
-                    ### Sfidë
-                    Bëni kodin tuaj sekret për superspiunin tuaj. A mund ta bëni atë të përbëhet nga edhe më shumë variabla?
-                example_code: |
-                    ```
-                    emri = {ask} 'Cili është emri juaj?'
-                    {if} emri {is} 'Agent007'
-                         a = 'Shko në aeroport'
-                    {else}
-                         a = 'Shko në stacionin e trenit'
-                    fjalëkalimi = {ask} "Cili është fjalëkalimi?"
-                    {if} fjalëkalimi {is} "TOPSECRET"
-                         b = 'nesër në 02:00'
-                    {else}
-                         b = 'sot në orën 10:00'
-                    {print} a + b
-                    ```
             10:
                 story_text: |
                     A mund të plotësoni komandën e duhur në vendin bosh? Mendja: Superspiuni duhet t'u përgjigjet saktë të DY pyetjeve, përpara se të marrë informacionin konfidencial!

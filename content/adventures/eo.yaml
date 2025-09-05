@@ -1009,24 +1009,6 @@ adventures:
         default_save_name: Superspiono
         description: Faru vian propran spionkodon
         levels:
-            12:
-                story_text: |
-                    En ĉi tiu aventuro, vi povas krei vian propran superspionkodon. Kodu mesaĝon, kiun nur la ĝusta agento povas deĉifri.
-                    Se la malamiko provos solvi la kodon, ili ricevos falsajn informojn por malŝpari sian tempon.
-                example_code: |
-                    ```
-                    nomo = {ask} 'Kio estas via nomo?'
-                    {if} nomo {is} 'Agento007'
-                        a = 'Iru al la flughaveno '
-                    {else}
-                        a = 'Iru al la stacidomo '
-                    pasvorto = {ask} 'Kio estas la pasvorto?'
-                    {if} pasvorto {is} 'SEKRETO'
-                        b = 'morgaŭ je la 2a horo'
-                    else
-                        b = 'hodiaŭ je la 10a horo'
-                    {print} a + b
-                    ```
             10:
                 story_text: |
                     La kodo, kiun vi faris en la antaŭa nivelo, estas simpligebla en ĉi tiu nivelo per la komando `{and}`.

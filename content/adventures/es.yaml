@@ -2312,30 +2312,6 @@ adventures:
         default_save_name: Super Espía
         description: Haz tu propio código espía
         levels:
-            12:
-                story_text: |
-                    En esta aventura podrás crear tu propio código secreto. Codifica un mensaje que solo la persona correcta podrá descifrar.
-                    Si el enemigo intenta descifrar el código, obtendrán un mensaje falso para hacerles perder el tiempo.
-
-                    ### Ejercicio 1
-                    Crea tu propio código secreto para tu super espía. ¿Puedes hacer que use aún más variables?
-
-                    ### Ejercicio 2
-                    Añade un tercer componente al código, como una prenda de ropa o un objeto.
-                example_code: |
-                    ```
-                    nombre = {ask} ¿Cuál es tu nombre?
-                    {if} nombre {is} _
-                        a = 'Ve al aeropuerto '
-                    {else}
-                        a = 'Ve a la estación de tren '
-                    contraseña = {ask} '¿Cuál es la contraseña?
-                    {if} contraseña {is} _
-                        b = 'mañana a las 02.00'
-                    {else}
-                        b = 'hoy a las 10.00'
-                    {print} _ _ _
-                    ```
             10:
                 story_text: |
                     Podemos simplificar el código de superspy con `{and}`, de forma que solo necesitemos un `{if}`.

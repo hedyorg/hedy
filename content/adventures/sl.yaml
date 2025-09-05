@@ -214,8 +214,6 @@ adventures:
                 example_code: "```\nizbira {is} _\n{print} Jaz izberem choice\n```\n"
     secret:
         levels:
-            12:
-                example_code: "```\nime = {ask} 'Kako vam je ime?'\n{if} ime {is} _\n    a = 'Pojdite na letališče '\n{else}\n    a = 'Pojdite na železniško postajo '\ngeslo = {ask} 'Kakšno je geslo?'\n{if} geslo {is} _\n    b = 'jutri ob 2:00.'\n{else}\n    b = 'danes ob 10:00'\n{print} _ _ _\n```\n"
             10:
                 example_code: "```\nime = {ask} 'Kako vam je ime?'\ngeslo = {ask} 'Kakšno je vaše geslo?'\n{if} ime {is} 'Agent007' _ geslo {is} 'STROGO_ZAUPNO'\n    {print} 'Ob 2:00 pojdite na letališče.'\n{else}\n    {print} 'Ob 10:00 pojdite na železniško postajo.'\n ```\n"
     sleep_command:
