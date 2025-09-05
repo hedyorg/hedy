@@ -1479,8 +1479,8 @@ adventures:
                         {print} chosen_side ' ' chosen_limb ' on ' chosen_color
 
                     {print} 'Lets play a game of Twister!'
-                    {for} i {in} {range} 1 {to} _
-                        next_turn()
+                    {repeat} _
+                        call next_turn
                         {sleep} 2
                     ```
             15:
@@ -2514,7 +2514,7 @@ adventures:
                         {play} D
                         {sleep}
 
-                    first_line()
+                    {call} first_line
                     _
                     _
                     ```
@@ -3743,7 +3743,7 @@ adventures:
                         {print} 'Twinkle'
                         {print} _
 
-                    twinkle()
+                    {call} twinkle
                     {print} 'Up above the world so high'
                     {print} 'Like a diamond in the sky'
                     _
@@ -4007,11 +4007,11 @@ adventures:
                         {repeat} 4 {times}
                             {turn} _
                             {forward} _
-                    square()
+                    {call} square
                     {forward} 50
-                    square()
+                    {call} square
                     {forward} 50
-                    square()
+                    {call} square
                     ```
     turtle_draw_it:
         name: Draw it!
@@ -4220,7 +4220,7 @@ adventures:
                         chosen_color = {ask} 'In which color?'
                         {color} chosen_color
                         {if} shape = 'square'
-                            draw_a_square()
+                            {call} draw_a_square
                     ```
             14:
                 story_text: |
