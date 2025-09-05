@@ -171,7 +171,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'dice',
         'dishes',
         'piggybank',
-        'haunted',
         'quizmaster',
         'years',
         'turtle',
