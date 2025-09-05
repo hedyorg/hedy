@@ -686,7 +686,7 @@ adventures:
                     food_choice {is} {ask} 'What do you want to eat?'
                     {if} food_choice {in} foods
                     {print} "We have that! I'll get it."
-                    {elif} food_choice {is} 'nothing' 
+                    {elif} food_choice {is} 'nothing'
                     {print} 'No food for you then.'
                     {else} 
                     {print} "I'm afraid we don't have that."
@@ -698,20 +698,37 @@ adventures:
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
+                    {print} Vending machine
+                    chosen_product = {ask} 'Please select a product'
+                    one_dollar_products = coke orange juice water
+                    two_dollar_products = chocolate, cookie, muesli bar
+                    three_dollar_products = potato chips, beef jerky, banana bread
+                    {if} chosen_product {is} {in} one_dollar_products
+                    price = 1
+                    {elif} chosen_product {is} two_dollar_products
+                    price = 2
+                    {elif} chosen_product {in} three_dollar_products
+                    price = 3
+                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?
+                    total {is} price * amount_of_products
+                    {print} 'That will be $' total ' please'
+                    ```
+                answer_code: |
+                    ```
                     {print} 'Vending machine'
                     chosen_product = {ask} 'Please select a product'
-                    1_dollar_products = coke orange juice water
-                    2_dollar_products = chocolate, cookie, muesli bar
-                    3dollar_prodcuts = potato chips, beef jerky, banana bread
-                    {if} chosen {is} {in} 1_dollar_products
+                    one_dollar_products = coke, orange juice, water
+                    two_dollar_products = chocolate, cookie, muesli bar
+                    three_dollar_products = potato chips, beef jerky, banana bread
+                    {if} chosen_product {in} one_dollar_products
                     price = 1
-                    {if} chosen_product {is} 2_dollar_products
+                    {elif} chosen_product {in} two_dollar_products
                     price = 2
-                    {else} chosen_product {in} 3_dollar_products
+                    {elif} chosen_product {in} three_dollar_products
                     price = 3
-                    amount_of_products = '{ask} How many of ' chosen_product would you like to have?'
-                    total = price + amount_of_product
-                    {print} 'That will be $' price 'please'
+                    amount_of_products = {ask} 'How many of ' chosen_product ' would you like to have?'
+                    total = price * amount_of_products
+                    {print} 'That will be $' total ' please'
                     ```
             8:
                 story_text: |-
