@@ -176,33 +176,6 @@ adventures:
                             {print} 'Ne, ĝi ne estas ĉe la ' loko
                     {print} 'Nun vi povas eniri la domon!'
                     ```
-    blackjack:
-        name: Nigra fanto
-        default_save_name: Nigra fanto
-        description: Provu alproksimiĝi al 21 laŭeble
-        levels:
-            16:
-                story_text: |
-                    Nigra fanto estas simpla kartludo, dum kiu oni provas alproksimiĝi laŭeble al 21 poentoj. Vi ricevas du kartojn. Ĉiu karto valoras sian numeran valoron, kaj la vizaĝkartoj (fanto, damo kaj reĝo) valoras 10 poentojn.
-                    La aso valoras aŭ 1 aŭ 11 poentojn (vi povas elekti). La kazinisto, via kontraŭulo, ankaŭ ricevas du kartojn.
-                    Se vi volas, vi povas akiri alian karton, kaj ĝiaj poentoj estos aldonitaj al via totalo. La kazinisto ankaŭ povas preni alian karton.
-                    Sed atentu ne akiri pli ol 21 poentojn, ĉar se vi tion faros, vi perdos!
-                    La ludanto, kiu plej alproksimiĝos al 21, ne superante 21, gajnos!
-
-                    ### Exercise
-                    In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
-
-                    ***Set the variables***
-                    Start by making a list of all the cards, from 2 to Ace. Next make a list of the face cards, so Jack, Queen and King. Then pick a random card from the list of cards to be card_1.
-
-                    ***Create a function to calculate the points***
-                    Create a function that calculates how many points a card is worth.
-                    All the face cards are worth 10 points, the Ace is worth 11 and all the other cards are worth their numeral.
-                    Return the variable `points` at the end of the function.
-
-                    ***Test the function***
-                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
-                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
     calculator:
         name: Kalkulilo
         default_save_name: Kalkulilo

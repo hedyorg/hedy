@@ -476,10 +476,6 @@ adventures:
                 story_text: "V této úrovni můžete naprogramovat celou hru kámen, nůžky, papír pomocí vnořování příkazů `{if}`. \n\n### Cvičení\nDokážete dokončit kód? Program musí pro každou kombinaci říci, kdo vyhrál.\n\n**Extra** Chcete hrát více než jednu hru? Rozšiřte kód tak, abyste mohli hrát více kol. Můžete dokonce použít příkaz `{ask}`, který se uživatele zeptá, kolik kol chce hrát.\n"
             5:
                 story_text: "V této úrovni můžeme určit, zda se jedná o remízu, nebo ne. K tomu potřebujeme nový kód `{if}`.\n\n### Cvičení\nDokončete kód doplněním prázdných míst:\n* Nechte počítač vybrat náhodnou možnost\n* Zeptejte se hráče, co chce vybrat\n* Vyplňte správné proměnné na řádcích 4 a 5.\n* Dokončete řádek 6 tak, aby Hedy mohla zkontrolovat, zda se jedná o nerozhodný výsledek.\n"
-    tic_2:
-        description: Zahrajte si hru Piškvorky!
-        name: Piškvorky 2
-        default_save_name: Křížek
     turtle:
         name: Želva
         default_save_name: Želva
@@ -757,14 +753,6 @@ adventures:
             13:
                 story_text: "Nakonec změníme `{for} i {in} {range} 1 {to} 5` do skutečného kódu Pythonu, například takto:\n"
                 example_code: "```\n{for} i {in} {range}(1,5):\n    {print} (i)\n```\n"
-    blackjack:
-        name: Blackjack
-        default_save_name: Blackjack
-        description: Snažte se co nejvíce přiblížit hodnotě 21.
-        levels:
-            16:
-                example_code: "```\n{print} 'BLACKJACK'\n\n# Nastavte tyto proměnné\ncards = _\nface_cards = _\ncard_1 =\n\n# Vytvořte funkci pro výpočet bodů\n{define} calculate_points {with} card:\n    {if} card {in} face_cards:\n        body = _\n    {elif} _\n        _\n    {else}:\n        _\n    _ bodů\n\n# Otestujte svou funkci\n{print} 'Vaše karta je ' _ _\n{print} 'Ta má hodnotu ' _ ' bodů'.\n```\n"
-                story_text: "Blackjack je jednoduchá karetní hra, ve které se musíte co nejvíce přiblížit 21 bodům. Dostanete dvě karty. Každá karta má svou číselnou hodnotu a lícové karty (Jack, Queen a King) mají hodnotu 10 bodů.\nEso má hodnotu 1 nebo 11 bodů (můžete si vybrat). Krupiér, váš soupeř, dostane také dvě karty.\nPokud chcete, můžete získat další kartu a její body se přičtou k vašemu celkovému počtu. Krupiér si také může vybrat, zda si vezme další kartu.\nDávejte si však pozor, abyste nezískali více než 21 bodů, protože pokud se tak stane, prohráváte!\nVyhrává hráč, který se nejvíce přiblíží k hodnotě 21, aniž by ji překročil!\n\n### Cvičení\nV tomto dobrodružství zakódujeme první část naší hry Blackjack. Vytvoříme funkci, která spočítá, kolik bodů má karta hodnotu.\n\n***Nastavte proměnné***\nZačněte tím, že vytvoříte seznam všech karet od 2 po eso. Dále vytvořte seznam lícových karet, tedy Jack, Dáma a Král. Poté vyberte náhodnou kartu ze seznamu karet, která bude karta_1.\n\n***Vytvořte funkci pro výpočet bodů***.\nVytvořte funkci, která vypočítá, kolik bodů má daná karta hodnotu.\nVšechny lícové karty mají hodnotu 10 bodů, eso má hodnotu 11 a všechny ostatní karty mají hodnotu svého čísla.\nNa konci funkce vraťte proměnnou `body`.\n\n***Vyzkoušejte funkci***\nOtestujte, zda vaše funkce funguje správně. Dokončete první příkaz pro tisk tím, že vyplníte, kterou kartu jste si vytáhli. Poté dokončete druhý řádek zavoláním funkce pomocí příkazu card_1.\nKód několikrát spusťte. Jste spokojeni s výsledky? Skvěle! Pak můžete odstranit testovací část a přejít k dalšímu dobrodružství!\n"
     calculator_2:
         description: Kalkulačka 2
         name: Kalkulačka 2
@@ -835,30 +823,6 @@ adventures:
             4:
                 example_code: "```\n{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'čekej na to...'\n{sleep} 3\n{clear}\n{print} 'PŘEKVAPENÍ!'\n```\n"
                 story_text: "Je čas na nový příkaz! Příkazem `{clear}` můžete vymazat veškerý text z výstupní obrazovky. Tímto způsobem můžete zabránit tomu, aby byla obrazovka příliš zaplněna textem.\nPozor! Používáte-li příkaz `{clear}`, může se stát, že nad ním budete muset použít příkaz `{sleep}`. Jinak vám Hedy vymaže obrazovku, aniž by vám dal čas na čtení, jak vidíte v příkladu!\n"
-    blackjack_2:
-        default_save_name: Blackjack_2
-        levels:
-            16:
-                example_code: "```\n# Vložte sem kód z předchozího dobrodružství\n\n# Přidejte tyto proměnné do seznamu proměnných\ncard_2 = _\ndealer_card_1 = _\ndealer_card_2 = _\n\n# Sečtěte své body\nyour_points_1 = {call} _ {with} kartou_1\nyour_points_2 = _\nyour_total = _\n\n# Sečtěte body dealerů\ndealer_points_1 = _\n_\n_\n\n# 2 esa\n{if} card_1 == 'Ace' {and} _\n    your_total = 12\n{if} dealer_card_1 _\n    dealer_total = _\n\n# Ukažte skóre\n{print} 'Vytáhli jste ' _ ' a ' _ '. To je ' _ ' bodů.'\n{print} 'Krupiér vytáhl ' _ ' a ' _ '. To je ' _ ' bodů.'\n```\n"
-                story_text: "### Cvičení\nV tomto dobrodružství nakódujeme druhou část naší hry Blackjack.\n\n***Vložte kód z předchozího dobrodružství***\nV předchozím dobrodružství jste založili seznam proměnných a vytvořili funkci pro výpočet, kolik bodů má karta hodnotu. Zkopírujte svůj kód a vložte jej sem. Mějte na paměti, že testovací část nepotřebujete, takže pokud jste ji ještě neodstranili, učiňte tak nyní.\n\n***Přidejte další proměnné***\nJiž jste nastavili seznamy `cards` a `face_cards` a proměnnou `card_1`. Pod těmito proměnnými vytvořte další 3 proměnné: `card_2`, `dealer_card_1` a `dealer_card_2`. Všechny tyto proměnné jsou nastaveny na náhodnou kartu ze seznamu karet.\n\n***Přičtěte body***\nAbychom spočítali, kolik bodů jste získali, zavoláme funkci s kartou 1 a zopakujeme ji pro kartu 2. Poté obě tato skóre sečteme a získáme váš celkový součet.\nTotéž proveďte pro body rozdávajícího, ale nezapomeňte použít karty rozdávajícího, a ne své vlastní!\n\n***2 esa***\nVedete si skvěle! Nyní lze vypočítat téměř všechny výsledky. Existuje pouze jedna výjimka: 2 esa. Pokud získáte 2 esa, váš celkový součet je 12 bodů a ne 22 (protože 22 bodů by znamenalo prohru!). To samozřejmě platí i pro krupiéra.\n\n***Zobrazit skóre***\nNakonec chcete programu říct, aby vám sdělil, které karty jste si vylosovali a kolik to je bodů. Dále pak zobrazit, které karty má rozdávající a kolik má bodů.\n\n***Pokračování v dalším dobrodružství***\nSkvělé! Tuto část hry jste dokončili! Zkopírujte si kód a přejděte do dalšího dobrodružství, kde se dozvíte, jak požádat o kartu navíc a jak vyhlásit vítěze.\n"
-        name: Blackjack 2
-        description: Blackjack část 2
-    blackjack_4:
-        name: Blackjack 4
-        default_save_name: Blackjack_4
-        description: Blackjack část 4
-        levels:
-            16:
-                story_text: "V posledních třech dobrodružstvích jste téměř vytvořili funkční hru blackjack! Zbývá už jen rozhodnout o vítězi!\n\n### Cvičení\n***Vložte svůj kód z předchozího dobrodružství*** Začněte tím, že vložíte kód, který jste dosud vytvořili, do programovacího pole.\n\n***Rozhodněte o vítězi***\nZa prvé, pokud máte s rozdávajícím stejný počet bodů, je to remíza.\nZa druhé, pokud má krupiér více než 21 bodů a vy ne, jste vítězem.\nZatřetí, pokud máte vy i krupiér méně než 22 bodů, musíme zjistit, kdo se nejvíce přiblížil 21 bodům. To provedeme tak, že porovnáme, kdo má nejvyšší počet bodů. Je váš součet vyšší než součet krupiéra, pak jste vítězem vy. Pokud ne, vyhrává krupiér.\nA konečně, ve všech ostatních případech (např. vy máte více než 21 bodů a krupiér ne, nebo máte oba více než 21 bodů) jste poraženým.\n\n***Užijte si hru!***\nFunguje vaše hra správně? Úžasně! Odvedli jste skvělou práci! Užijte si hru!\nPokud nefunguje hned, nezoufejte, možná jste udělali chybu. Zachovejte klid a zkuste svůj kód odladit pomocí tlačítka beruška.\n"
-                example_code: "```\n# Vložte sem kód z předchozího dobrodružství\n\n# Rozhodněte o vítězi\n{if} _\n    {print} 'Its a draw! Hrajte znovu!\n{elif} _\n    {print} 'Vyhrál jsi!'\n{elif} _ :\n    {if} _:\n        {print} _\n    {else}:\n        {print} _\n{else}:\n    _\n```\n"
-    blackjack_3:
-        name: Blackjack 3
-        default_save_name: Blackjack_3
-        description: Blackjack část 3
-        levels:
-            16:
-                example_code: "```\n# Vložte sem kód z předchozího dobrodružství\n\n# Extra karta pro vás\nzasáhnout = {ask} _\n{if} zasáhnout == 'ano':\n    karta_3 = _\n    {print} _\n    {if} karta_3 _ 'Ace':\n        vaše_body_3 = _\n        vaše_maximum = _\n    {else}:\n       {if} vaše_maximum _\n            _\n        {else}:\n            _\n    {print} _\n\n# Karta navíc pro prodejce\n{if} maximum_prodejce < 17\n_\n```\n"
-                story_text: "V předchozích dobrodružstvích jste se naučili tahat 2 náhodné karty pro sebe a pro rozdávajícího a vypočítat, kolik bodů jste oba získali.\nV tomto dobrodružství přidáváme možnost požádat o kartu navíc pro sebe i pro rozdávajícího.\n\n### Cvičení\n***Vložte svůj kód z předchozího dobrodružství*** Nejprve zkopírujte svůj kód z předchozího dobrodružství a vložte jej sem.\n\n***Karta navíc pro vás*** Pokud chcete, můžete získat kartu navíc, aby se váš celkový součet co nejvíce přiblížil hodnotě 21. Nejprve se zeptejte hráče, zda chce kartu navíc.\nPokud ano, vyberte náhodnou kartu a vytiskněte to, co si vylosovali. Pokud karta není eso, můžete zavolat funkci a přičíst body k celkovému součtu.\nV případě, že karta je eso, nemůžete funkci použít, protože eso může mít buď 1 bod, nebo 11 bodů, podle toho, kolik bodů jste již získali.\nPokud je váš celkový součet menší než 11, chcete, aby eso mělo hodnotu 11 bodů (protože ta je nejblíže hodnotě 21). K celkovému součtu tedy přičtete 11 bodů.\nPokud je celkový součet větší nebo roven 11, chcete, aby eso bylo 1 bod (protože nechcete mít více než 21 bodů). K celkovému součtu tedy přičtete 1 bod.\nNakonec vytiskněte svůj nový součet bodů.\n\n***Extra karta pro krupiéra*** Krupiér může také dostat kartu navíc. Dealer nemusí být požádán, protože kartu navíc dostane vždy, pokud je jeho celkový součet menší než 17.\nZkopírujte kód „Karta navíc pro vás“ a vložte jej do sekce pro krupiéry. Pak jej změňte tak, aby odpovídal tomu, že si krupiér vezme kartu navíc a dostane body, které se mu přičtou k celkovému součtu.\n"
     if_command:
         description: Představujeme{if} příkaz
         default_save_name: pokud_příkaz
@@ -976,30 +940,6 @@ adventures:
                 story_text: "Dostali jsme se ke skutečnému kódu Pythonu! To znamená, že od nynějška musíme používat závorky s `{print}` a `{range}`.\nZnamená to také, že kód Hedy z této úrovně můžete používat v jakémkoli prostředí Pythonu, pokud budete používat anglické příkazy. Pokud jste tak dosud nečinili, můžete to přepnout přepínačem v nabídce příkazů."
         default_save_name: tisknout
         description: Představujeme print příkaz
-    hangman:
-        name: Kat
-        default_save_name: Kat
-        description: Uhádni číslo
-        levels:
-            16:
-                example_code: "```\n{print} 'Kat!'\n\n# Nastavte proměnné\nodpověď = []\nhádané_písmena = _\nudělané_chyby = _\nmnožství_písmen = {ask} _\n_ = 'False'\n\n# Výběr odpovědi\n{for} _\n    písmeno = {ask} 'Hráči 1, co je písmeno ' i '?'\n    _\n    {add} '_' {to} _ \n\n# Hráč 2 je na řadě\n{print} _\n{print} _\n{print} hádané_písmena\n```\n"
-                story_text: "V tomto dobrodružství naprogramujeme hru kat. Nejprve si uděláme přípravu, pak hru naprogramujeme a ve třetí části přidáme kresbu s želvou.\n\n### Cvičení\n***Nastavte proměnné*** V této hře na oběšence si hráč 1 vybere odpověď a hráč 2 musí uhodnout písmena v této odpovědi.\nAby počítač znal všechna písmena ve slově, převedeme odpověď na seznam písmen. Stejně postupujeme i u hádání, které provede Hráč 2.\nHru začneme se 2 prázdnými seznamy. Pro proměnnou odpověď jsme vytvořili prázdný seznam. Nyní vytvoříme prázdný seznam také pro hádané_písmena.\nPoté doplníme, kolik bylo uděláno chyb. Na začátku hry by to měla být 0.\nProměnná `amount_letters` nám říká, kolik písmen je v odpovědi. Požádáme hráče 1, aby nám řekl, kolik písmen má jeho slovo.\nNakonec počítači sdělíme, zda hra skončila. Použijeme proměnnou `game_over`a nastavíme ji na `False`.\n\n***Výběr odpovědi*** Chceme, aby hráč 1 mohl vybrat odpověď. Zeptáme se ho tolikrát, kolikrát bude třeba, jaké je další písmeno.\nPak toto písmeno přidáme k odpovědi. Nakonec do seznamu uhodnutých písmen přidáme prázdné _, takže dostaneme tolik _, kolik je písmen v odpovědi.\n\n***Hráč 2 je na řadě***\nŘekněte hráči 2, že je na řadě. Poté řekněte hráči 2, kolik písmen je v odpovědi. Nakonec vypište seznam `guessed_letters`.\n\n***Přejděte k dalšímu dobrodružství*** Nyní, když jsou všechny počáteční proměnné nastaveny, můžeme začít programovat samotnou hru. Podívejte se na další záložku, kde se dozvíte, jak na to!\n"
-    hangman_2:
-        default_save_name: Kat_2
-        levels:
-            16:
-                example_code: "```\n# Vlož svůj kód zde\n\n# Hra\n{while} konec_hry _\n    hádej = _\n    {if} _\n        {for} i {in} {range} 1 {to} hodnota_písmen:\n            pokud odppověď[i] == tip:\n                hádaná_písmena[i] = tip\n        {print} _\n        {if} hádaná_písmena == _:\n            {print} _\n            konec_hry = _\n    {else}:\n        {print} _\n        udělané_chyby _\n        {if} _ == 10:\n            {print} _\n            {print} _\n            _\n```\n"
-                story_text: "Nyní je čas naprogramovat hru Hangman.\n\n### Cvičení\n\n***Vložte svůj kód*** Zkopírujte svůj kód z předchozího dobrodružství a vložte jej do programovacího pole.\n\n***Hra*** Tato hra pokračuje ve hře, dokud hráč 2 hru neukončí. Podle toho vyplňte příkaz while. Nyní může Hráč 2 hádat písmeno, proto požádejte Hráče 2, aby uhodl písmeno.\nPotřebujeme zkontrolovat, zda je jeho odpověď správná, proto zkontrolujte, zda se jeho `guess` nachází (někde) v (seznamu) `answer`. Poté necháme počítač zjistit, které z písmen(a) je hádané. Tuto část jsme již naprogramovali za vás.\nDále chceme hráče pochválit za nalezení správného písmene a chceme vypsat seznam  `answer`, aby hráč viděl svůj postup.\n\nDalší částí, kterou naprogramujeme, je to, co se stane, když hráč uhodne všechna písmena. Pokud je tedy jeho seznam `guessed_letters` stejný jako náš seznam `answer`.\nPokud jsou seznamy stejné, pogratulujeme hráči 2 k vítězství a nastavíme proměnnou `game_over` na `True`.\n\nDále naprogramujeme, co se stane, když hráč 2 uhodne špatně (tedy příkaz `{else}`). Nejprve hráči řekneme, že jeho odhad byl špatný. Poté zvýšíme proměnnou `mistakes_made` o 1.\n\nV poslední části naprogramujeme, co se stane, když hráč 2 udělá 10 chyb. Vypíšeme, že hráč 1 vyhrál hru. Pak vypíšeme správnou odpověď. A nakonec nastavíme naši proměnnou `game_over` na hodnotu `True`, takže hra skončí.\n\n***Přejděte na další dobrodružství*** Úžasná práce! Vaše hra je hratelná, ale nebylo by zábavné, kdyby se kat skutečně vykreslil, když hráč 2 udělá chybu...?\n"
-        name: Kat 2
-        description: Kat 2
-    hangman_3:
-        name: Kat 3
-        default_save_name: Kat_3
-        levels:
-            16:
-                example_code: "```\n# Vytvoříme funkci, která vykreslí oběšence\n{define} nakreslit_kata {with} krok:\n    {if} krok == 1:\n        {color} bílá\n        {forward} -100\n        {turn} 90\n        {forward} -50\n        {color} černá\n        {forward} 100\n        {forward} -50\n\n    {if} krok == 2:\n        _\n# Vložte sem svou hru kata\n\n```\n"
-                story_text: "Při hře na kata se chyby projevují tak, že se při každé chybě nakreslí část kata.\nNyní tyto kresby doplníme naší želvou!\n\n### Cvičení\n***Vytvořte funkci, která nakreslí oběšence*** Vytvořte funkci, která nakreslí oběšence v 10 krocích. Krok 1 jsme již vytvořili za vás.\n\n***Vyzkoušejte funkci*** Otestujte funkci tak, že ji zavoláte s číslem 10. Pokud jste s funkcí spokojeni, odstraňte prozatím řádek, který funkci volá. Funkci zavoláme, až hráč udělá chybu.\n\n***Vložte pod funkci hru oběšence*** Vraťte se k předchozímu dobrodružství a zkopírujte svou hru oběšence. Hru vložte pod svou funkci.\n\n***Volání funkce, když hráč udělá chybu*** Pod řádkem `mistakes_made = mistakes_made + 1` budeme volat funkci. Chceme, aby želva udělala tolik kroků, kolik hráč udělal chyb, proto zavoláme funkci s argumentem `mistakes_made`.\n\n***Užijte si hru!***\n<div class=\"w-full flex flex-row gap-2\">\n    Oběšenec by mohl vypadat takto <img src=\"https://github.com/hedyorg/hedy/assets/80678586/d385b691-5701-4342-b5d9-dfae1589c129\" width=\"100\">\n</div>\n"
-        description: Kat 3
     is_command:
         levels:
             6:
@@ -1129,26 +1069,3 @@ adventures:
         description: Zazpívejte si píseň! 2
         levels:
         default_save_name: Píseň 2
-    simon:
-        description: Udělejte si hru Šimon říká
-        name: Šimon říká
-        default_save_name: Šimon
-    simon_2:
-        name: Šimon říká 2
-        default_save_name: Šimon
-        description: Udělejte si hru Šimon říká
-        levels:
-            14:
-                story_text: "Budeme pokračovat ve hře Šimon říká!\n\n### Cvičení\n***Zde vložte svůj kód*** Zde vložte svůj kód z předchozí úrovně. Nezapomeňte odstranit část, která byla právě použita pro testování funkcí.\n\n***Vytvořte funkci, která vytvoří seznam player_sequence*** Seznam `player_sequence` slouží k zachycení odpovědí hráče. Nejprve definujeme funkci s argumentem level.\nDále se ptáme na časy úrovní, jakou barvu si vyberou. Tuto proměnnou nazveme `answer`. Poté přidáme proměnnou `answer` do seznamu player_sequence.\n\n***Nastavení hry*** Než naprogramujeme hru v dalším dobrodružství, budeme potřebovat několik počátečních proměnných. Nejprve nastavíme proměnnou `level` na hodnotu 1 a proměnnou `game_over` na hodnotu False.\nPoté vytvoříme úvod hry. Vypíšeme proměnnou `Vítejte ve hře Simon říká!“ a po 1 sekundě vymažeme obrazovku.\n\n***Pokračujte v dalším dobrodružství a dokončete hru!*** Nezapomeňte si kód zkopírovat a vzít si ho s sebou do dalšího dobrodružství.\n"
-    simon_3:
-        name: Šimon říká 3
-        default_save_name: Šimon
-        description: Udělejte si hru Šimon říká
-    tic_3:
-        name: Piškvorky 3
-        default_save_name: Křížek
-        description: Zahrajte si hru Piškvorky!
-    tic:
-        name: Piškvorky
-        description: Zahrajte si hru Piškvorky!
-        default_save_name: Křížek

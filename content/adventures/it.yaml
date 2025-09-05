@@ -296,33 +296,6 @@ adventures:
                 story_text: L'ultimo cambiamento che dobbiamo fare per ottenere un codice Python è cambiare `{ask}` in `{input}`.
         name: '{ask}'
         default_save_name: ask_command
-    blackjack:
-        name: Jack nero
-        default_save_name: Jack nero
-        description: Cerca di avvicinarti il più possibile a 21
-        levels:
-            16:
-                story_text: |
-                    Il Blackjack è un semplice gioco di carte in cui devi avvicinarti il più possibile a 21 punti. Ottieni due carte. Ogni carta vale il suo valore numerico e le figure (Fante, Regina e Re) valgono 10 punti.
-                    L'asso vale 1 o 11 punti (puoi scegliere). Anche il dealer, il tuo avversario, riceve due carte.
-                    Se lo desideri, puoi ottenere un'altra carta e i suoi punti verranno aggiunti al tuo totale. Il dealer può anche scegliere di prendere un'altra carta.
-                    Ma fai attenzione a non ottenere più di 21 punti, perché se lo fai, perdi!
-                    Vince il giocatore che si avvicina di più al 21, senza superarlo!
-
-                    ### Esercizio
-                    in questa avventura scriviamo il codice per la prima parte della partita di Blackjack. Creeremo una funzione per calcolare quanti punti vale ogni carta.
-
-                    ***Poni le variabili***
-                    Inizia facendo una lista di tutte le carte, dal 2 all'asso. Poi fai una lista delle figure, Fante, Regina e Re. Poi prendi una carta a caso dalla lista delle carte in modo che sia carta_1.
-
-                    ***Crea una funzione per calcolare i punti***
-                    Crea una funzione che calcoli quanti punti vale ogni carta.
-                    Tutte le figure valgono 10 punti, l'asso ne vale 11 e tutte le altre carte hanno il valore del loro numero.
-                    Mostra la variabile `points` alla fine del codice.
-
-                    ***Testa il codice***
-                    Testa se il tuo codice funziona correttamente. Finisci il comando `{print}` inserendo quale carta hai pescato. Poi finisci la seconda linea chiamando il codice carta_1.
-                    Esegui il codice un paio di volte. Sei felice del risultato? Ottimo! Ora puoi rimuovere la parte di test e andare avanti nella scheda successiva.
     calculator:
         name: Calcolatore
         default_save_name: Calcolatrice
@@ -744,17 +717,4 @@ adventures:
         name: Sasso, carta, forbici 2
     in_command:
         name: '{in}'
-    hangman_3:
-        name: Impiccato 3
-        description: Impiccato 3
-        default_save_name: Impiccato_3
-    hangman:
-        default_save_name: Impiccato
-        description: Indovina la parola
-        name: Impiccato
-    hangman_2:
-        default_save_name: Impiccato_2
-        name: Impiccato 2
-        description: Impiccato 2
-    tic:
-        name: Tris
+
