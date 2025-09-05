@@ -9,6 +9,7 @@ from venv import logger
 from bs4 import BeautifulSoup
 from flask import g, make_response, request, session, url_for, redirect
 from jinja_partials import render_partial
+from website import hedy_website_utils
 from website.flask_helpers import gettext_with_fallback as gettext
 import jinja_partials
 
@@ -36,6 +37,11 @@ from .database import Database
 from .auth_pages import AuthModule
 from .website_module import WebsiteModule, route
 from website.frontend_types import halve_adventure_content
+
+ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
+for lang in hedy_content.ALL_LANGUAGES.keys():
+    ADVENTURES[lang] = hedy_content.Adventures(lang)
+
 SLIDES = collections.defaultdict(hedy_content.NoSuchSlides)
 for lang in hedy_content.ALL_LANGUAGES.keys():
     SLIDES[lang] = hedy_content.Slides(lang)
@@ -322,7 +328,7 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         session['class_id'] = class_id
-#        students = Class.get("students", [])
+        #        students = Class.get("students", [])
         graph_students = []
         level = request.args.get("level", 1, type=int)
         # TODO esta funcion luego la voy a romper en partes, por ejemplo la parte de
@@ -353,15 +359,23 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         # For now, only level 1 is supported as in the original code
-        levels = [1]
+        levels = [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)]
         student_adventures = self.build_student_adventures(Class, user, levels)
         session["class_id"] = class_id
+        customizations = get_customizations(self.db, Class["id"])
+        adventures_per_level = hedy_website_utils.load_all_adventures_for_index(
+            customizations=customizations,
+            user_programs={},
+            all_languages_adventures=ADVENTURES,
+        )
+        adventure_list = hedy_website_utils.unique_adventures_list(adventures_per_level)
         return render_template(
             "for-teachers/classes/grade-class.html",
             current_page="grade-class",
             page_title=gettext("title_grade_class"),
             class_info=Class,
             students=sorted(Class.get("students", [])),
+            adventures=adventure_list,
             student_adventures=student_adventures,
         )
 
@@ -388,10 +402,14 @@ class ForTeachersModule(WebsiteModule):
                 for _, program in programs.items():
                     if "adventure_name" not in program:
                         continue
+                    if not program.get("submitted", False):
+                        pass  # TODO CHANGE THIS ONCE FIXED THE BUGS
                     name = adventure_names.get(
                         program["adventure_name"], program["adventure_name"]
                     )
-                    customized_level = class_adventures_formatted.get(str(program["level"]))
+                    customized_level = class_adventures_formatted.get(
+                        str(program["level"])
+                    )
                     if next(
                         (
                             adventure
@@ -424,34 +442,39 @@ class ForTeachersModule(WebsiteModule):
                             ticked=current_adventure["ticked"],
                             is_modified=program.get("is_modified"),
                             timestamp=program["date"],
-                            date=utils.localized_date_format(program['date'], only_date=True)
+                            date=utils.localized_date_format(
+                                program["date"], only_date=True
+                            ),
                         )
                         student_adventures[student_adventure_id] = current_program
         return student_adventures
 
-    @route("/redesign/class/<class_id>/grade/sort", methods=["GET"])
-    @requires_login
-    def sort_grading_page(self, user, class_id):
-        if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(
-                error=401, ui_message=gettext("retrieve_class_error")
-            )
-        Class = self.db.get_class(class_id)
-        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+    def filter_student_adventures(self, student_adventures: dict, filter_student: str, filter_adventure: str):
+        """
+        Return a subset of student_adventures filtered by student and adventure.
+        Args:
+            student_adventures: dict mapping id -> program dict
+            filter_student: student username or "all"
+            filter_adventure: adventure id or "all"
+        Returns:
+            dict of filtered student_adventures
+        """
+        return {
+            student_adventure_id: prog
+            for student_adventure_id, prog in student_adventures.items()
+            if (filter_student == "all" or prog.get("student") == filter_student)
+            and (filter_adventure == "all" or prog.get("adventure_name") == filter_adventure)
+        }
 
-        # Get sort values from form (htmx)
-        sort_columns = ["level", "student", "name", "timestamp", "ticked"]
-        sort_orders = {}
-        for col in sort_columns:
-            if request.args.get(col, "none") != "none":
-                sort_orders[col] = request.args[col] == "ascendent"
-
-        # Get adventures to sort
-        levels = [1]  # or get from request if needed
-        student_adventures = self.build_student_adventures(Class, user, levels)
-
-        # Build sort keys and order
+    def sort_student_adventures(self, student_adventures: dict, sort_orders: dict):
+        """
+        Return a sorted version of student_adventures based on sort_orders.
+        Args:
+            student_adventures: dict mapping id -> program dict
+            sort_orders: dict mapping column name to bool (True for ascendent, False for descendent)
+        Returns:
+            dict of sorted student_adventures
+        """
         def cmp_items(a, b):
             _, va = a
             _, vb = b
@@ -473,13 +496,52 @@ class ForTeachersModule(WebsiteModule):
 
         # Sort by each column in reverse order (last column first)
         sorted_adventures = sorted(student_adventures.items(), key=functools.cmp_to_key(cmp_items))
+        return dict(sorted_adventures)
+
+    @route("/redesign/class/<class_id>/grade/filter_sort", methods=["GET"])
+    @requires_login
+    def filter_sort_grading_page(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        # Get filter values from form (htmx)
+        filter_level = request.args.get("filter_level", "all", type=str)
+        filter_student = request.args.get("filter_student", "all", type=str)
+        filter_adventure = request.args.get("filter_adventure", "all", type=str)
+
+        if filter_level == "all":
+            levels = list(range(1, hedy.HEDY_MAX_LEVEL + 1))
+        else:
+            try:
+                levels = [int(filter_level)]
+            except ValueError:
+                levels = [1]
+        # Get sort values from form (htmx)
+        sort_columns = ["level", "student", "name", "timestamp", "ticked"]
+        sort_orders = {}
+        for col in sort_columns:
+            if request.args.get(col, "none") != "none":
+                sort_orders[col] = request.args[col] == "ascendent"
+
+        student_adventures = self.build_student_adventures(Class, user, levels)
+        filtered_adventures = self.filter_student_adventures(
+            student_adventures, filter_student, filter_adventure
+        )
+        filtered_adventures = self.sort_student_adventures(
+            filtered_adventures, sort_orders
+        )
 
         return render_partial(
             "for-teachers/classes/htmx-grade-class-table-body.html",
             class_id=class_id,
             class_info=Class,
             students=sorted(Class.get("students", [])),
-            student_adventures=dict(sorted_adventures)
+            student_adventures=filtered_adventures,
+            sort_orders=sort_orders
         )
 
     @route("/redesign/program/<class_id>/grade", methods=["POST"])
@@ -1484,7 +1546,6 @@ class ForTeachersModule(WebsiteModule):
 
         db_adventures = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
         adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
-
         for lvl, default_adventures in hedy_content.adventures_order_per_level().items():
             for adventure in default_adventures:
                 db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})

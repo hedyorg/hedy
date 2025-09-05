@@ -2,100 +2,160 @@
 {% block regular_content %}
 <h1>{{ class_info.name }}</h1>
 <h2 class="text-4xl mt-3">{{ _('gradeclass_info') }}</h2>
-<div class="flex flex-row gap-5">
-    <!-- LEVEL -->
-    <div class="flex flex-row w-full">
-        <div id="level_button" class="dropdown relative">
-            <button class="blue-btn-new rounded inline-flex items-center w-fit gap-2 text-xl" id="dropdown_level_button"
-                onclick="$('#level_dropdown').slideToggle('medium');">
-                <span>{{ _('level_title') }} {{ 1 }}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
-            </button>
-            <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
-                style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
-                id="level_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
-            set arrow to #level-arrow
-            if *display == 'none'
-            remove .rotate-180 from arrow
-            else if not arrow.classList.contains('rotate-180')
-            add .rotate-180 to arrow
-            end">
-                {% for dropdown_level in range(1, 19) %}
-                <a id="level_button_{{dropdown_level}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
-            {% if loop.index == 1 %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
-            hover:bg-blue-200" {% if dropdown_level==1 %}disabled{% endif %}
-                    href="/for-teachers/redesign/class/{{ class_info.id }}/graph?level={{ dropdown_level}}">
-                    <div class="flex-grow h-min" tabindex=0>
-                        {{ _('level_title') }} {{ dropdown_level }}
+<form hx-get="/for-teachers/redesign/class/{{ class_info.id }}/grade/filter_sort"
+    hx-target="#grade-class-table-body"
+    hx-swap="innerHTML"
+    hx-trigger="submit"
+    hx-include="
+        #adventure-sort-input, 
+        #accepted-sort-input, 
+        #level-sort-input, 
+        #student-sort-input, 
+        #name-sort-input, 
+        #timestamp-sort-input, 
+        #ticked-sort-input"
+>
+    <div class="flex flex-row gap-5 justify-between items-center">
+        <div class="flex flex-row gap-14 items-center">
+            <!-- LEVEL -->
+            <div class="flex flex-row gap-2 w-full items-center">
+                <label for="dropdown_level_button" class="text-xl font-slab leading-6 text-blue-800">{{ _('level') }}</label>
+                <div id="level_button" class="dropdown relative">
+                    <button type="button" class="blue-btn-new rounded inline-flex items-center w-fit gap-2 text-xl" id="dropdown_level_button"
+                        onclick="$('#level_dropdown').slideToggle('medium');">
+                        <span id="level-button-span">{{ _('all') }}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
+                    </button>
+                    <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
+                        style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
+                        id="level_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" 
+                        _="on mutation of @style
+                            set arrow to #level-arrow
+                            if *display == 'none'
+                            remove .rotate-180 from arrow
+                            else if not arrow.classList.contains('rotate-180')
+                            add .rotate-180 to arrow
+                            end"
+                    >
+                        <div id="level_button_all"
+                            class="cursor-pointer flex-row w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                                no-underline  rounded-t-lg bg-blue-200 bg-green-200 hover:bg-blue-200"
+                            _="on click
+                            set @data-temp-value of #level-filter-input to 'all'
+                            put '{{ _('all') }}' into #level-button-span"
+                        >                        
+                            <span class="flex-grow">{{ _('all') }}</span>
+                        </div>
+                        {% for dropdown_level in range(1, 19) %}
+                        <div id="level_button_{{dropdown_level}}"
+                            class="cursor-pointer flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                                rounded-lg no-underline hover:bg-blue-200"
+                            _="on click
+                                set @data-temp-value of #level-filter-input to {{ dropdown_level }}
+                                put '{{ dropdown_level }}' into #level-button-span"
+                        >                        
+                            <span class="flex-grow">{{ _('level_title') }} {{ dropdown_level }}</span>
+                        </div>
+                        {% endfor %}
                     </div>
-                </a>
-                {% endfor %}
+                    <input id="level-filter-input" type="hidden" name="filter_level" data-temp-value="all"  value="all">
+                </div>    
+            </div>
+            <!-- STUDENTS -->
+            <div class="flex flex-row w-full gap-2 items-center">
+                <label for="dropdown_student_button" class="text-xl font-slab leading-6 text-blue-800">{{ _('students')|capitalize }}</label>
+                <div id="student_button" class="dropdown relative">
+                    <button type="button" class="blue-btn-new w-max rounded inline-flex items-center w-fit gap-2 text-xl"
+                        id="dropdown_student_button" onclick="$('#student_dropdown').slideToggle('medium');">
+                        <span id="student-button-span">{{ _('all') }}</span> <i id="student-arrow" class="fa-solid fa-angle-down"></i>
+                    </button>
+                    <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
+                        style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
+                        id="student_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
+                        _="on mutation of @style
+                            set arrow to #student-arrow
+                            if *display == 'none'
+                            remove .rotate-180 from arrow
+                            else if not arrow.classList.contains('rotate-180')
+                            add .rotate-180 to arrow
+                            end">
+                        <div id="student_button_{{student}}" class="cursor-pointer flex flex-row items-center w-full justify-between place-items-center  text-center justify-center items-center text-lg font-extralight py-1 px-2 text-blue-900 ease-in transition duration-100
+                            rounded-t-lg bg-blue-200 bg-green-200 no-underline
+                            hover:bg-blue-200"
+                            _="on click
+                                set @data-temp-value of #student-filter-input to 'all'
+                                put '{{ _('all') }}' into #student-button-span"
+                        >
+                                <span class="flex-grow"> {{ _('all') }} </span> 
+                        </div>
+                        {% for student in students %}
+                        <div id="student_button_{{student}}" class="cursor-pointer flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                            rounded-lg no-underline
+                            hover:bg-blue-200"
+                            _="on click
+                                set @data-temp-value of #student-filter-input to '{{ student }}'
+                                put '{{ student }}' into #student-button-span"
+                            >
+                            <span class="flex-grow"> {{ student }} </span>                         
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <input id="student-filter-input" type="hidden" name="filter_student" data-temp-value="all" value="all">
+                </div>
+            </div>
+            <!-- ADVENTURES -->
+            <div class="flex flex-row w-full gap-2 items-center">
+                <label for="dropdown_adventure_button" class="text-xl font-slab leading-6 text-blue-800">{{ _('adventures')|capitalize }}</label>
+                <div id="adventure_button" class="dropdown relative">
+                    <button type="button" class="blue-btn-new w-max rounded inline-flex items-center w-fit gap-2 text-xl"
+                        id="dropdown_adventure_button" onclick="$('#adventure_dropdown').slideToggle('medium');">
+                        <span id="adventure-button-span">{{ _('all') }}</span> <i id="adventure-arrow" class="fa-solid fa-angle-down"></i>
+                    </button>
+                    <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
+                        style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
+                        id="adventure_dropdown"
+                        _="on mutation of @style
+                            set arrow to #adventure-arrow
+                            if *display == 'none'
+                            remove .rotate-180 from arrow
+                            else if not arrow.classList.contains('rotate-180')
+                            add .rotate-180 to arrow
+                            end">
+                        <div id="adventure_button_all"
+                            class="cursor-pointer flex flex-row items-center w-full justify-between text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                                rounded-t-lg bg-blue-200 bg-green-200 no-underline hover:bg-blue-200"
+                            _="on click
+                                set @data-temp-value of #adventure-filter-input to 'all'
+                                put '{{ _('all') }}' into #adventure-button-span"
+                        >
+                            <span class="flex-grow">{{ _('all') }}</span>
+                        </div>
+                        {% for adventure in adventures %}
+                        <div id="adventure_button_{{ adventure }}"
+                            class="cursor-pointer flex flex-row w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                                rounded-lg no-underline hover:bg-blue-200"
+                            _="on click
+                                set @data-temp-value of #adventure-filter-input to '{{ adventure.short_name }}'
+                                put '{{ adventure.name }}' into #adventure-button-span"
+                        >
+                            <span class="flex-grow">{{ adventure.name }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <input id="adventure-filter-input" type="hidden" name="filter_adventure" data-temp-value="all" value="all">
+                </div>
             </div>
         </div>
-
+        <button class="blue-btn-new inline-flex items-center w-fit gap-2 text-xl" type="submit" 
+        _="on click
+            set value of #level-filter-input to @data-temp-value of #level-filter-input
+            set value of #student-filter-input to @data-temp-value of #student-filter-input
+            set value of #adventure-filter-input to @data-temp-value of #adventure-filter-input
+        end">
+            <i class="fa-solid fa-filter"></i> <span>{{ _('filter') }}</span>
+        </button>        
     </div>
-    <!-- STUDENTS -->
-    <div class="flex flex-row w-full">
-        <div id="student_button" class="dropdown relative">
-            <button class="blue-btn-new rounded inline-flex items-center w-fit gap-2 text-xl"
-                id="dropdown_student_button" onclick="$('#student_dropdown').slideToggle('medium');">
-                <span>{{ _('all') }}</span> <i id="student-arrow" class="fa-solid fa-angle-down"></i>
-            </button>
-            <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
-                style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
-                id="student_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-                _="on mutation of @style
-            set arrow to #student-arrow
-            if *display == 'none'
-            remove .rotate-180 from arrow
-            else if not arrow.classList.contains('rotate-180')
-            add .rotate-180 to arrow
-            end">
-                {% for student in students %}
-                <a id="student_button_{{student}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
-            {% if loop.index == 1 %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
-            hover:bg-blue-200" href="/for-teachers/redesign/class/{{ class_info.id }}/graph?level={{ 1 }}">
-                    <div class="flex-grow h-min" tabindex=0>
-                        {{ student }}
-                    </div>
-                </a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <!-- ADVENTURES -->
-    <div class="flex flex-row w-full">
-        <div id="level_button" class="dropdown relative">
-            <button class="blue-btn-new rounded inline-flex items-center w-fit gap-2 text-xl" id="dropdown_level_button"
-                onclick="$('#level_dropdown').slideToggle('medium');">
-                <span>{{ _('level_title') }} {{ 1 }}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
-            </button>
-            <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
-                style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
-                id="level_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
-            set arrow to #level-arrow
-            if *display == 'none'
-            remove .rotate-180 from arrow
-            else if not arrow.classList.contains('rotate-180')
-            add .rotate-180 to arrow
-            end">
-                {% for dropdown_level in range(1, 19) %}
-                <a id="level_button_{{dropdown_level}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
-            {% if loop.index == 1 %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
-            hover:bg-blue-200" {% if dropdown_level==1 %}disabled{% endif %}
-                    href="/for-teachers/redesign/class/{{ class_info.id }}/graph?level={{ dropdown_level}}">
-                    <div class="flex-grow h-min" tabindex=0>
-                        {{ _('level_title') }} {{ dropdown_level }}
-                    </div>
-                </a>
-                {% endfor %}
-            </div>
-        </div>
-
-    </div>
-    <!-- ADVENTURES -->
-    <input type="text" name="search" id="search">
-</div>
-<div class="mt-10">
+</form>
+<div class="mt-5">
     {{
         render_partial(
             'for-teachers/classes/htmx-grade-class-table.html',

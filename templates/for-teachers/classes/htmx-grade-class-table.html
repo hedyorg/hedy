@@ -1,122 +1,68 @@
-<table class="w-full divide-y divide-gray-400" id="grade-class-table">
-        <thead class="bg-gray-200 divide-y divide-gray-400">
-            <form id="sort-form" hx-get="/for-teachers/redesign/class/{{ class_info.id }}/grade/sort" hx-target="#grade-class-table-body" hx-swap="innerHTML" hx-trigger="submit">
+{% macro sortable_th(field, label, sort_orders) %}
+    {% set sort_val = sort_orders.get(field) if sort_orders else None %}
+    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider min-w-36">
+        {{ _(label) }}
+        <button class="ml-2" type="submit"
+            _="on click
+                if #{{ field }}-sort matches .fa-sort then
+                    remove .fa-sort from #{{ field }}-sort
+                    add .fa-sort-up to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'ascendent'
+                else if #{{ field }}-sort matches .fa-sort-up then
+                    remove .fa-sort-up from #{{ field }}-sort
+                    add .fa-sort-down to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'descendent'
+                else if #{{ field }}-sort matches .fa-sort-down then
+                    remove .fa-sort-down from #{{ field }}-sort
+                    add .fa-sort to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'none'
+                end">
+            <i id="{{ field }}-sort"
+               class="fa-solid
+               {% if sort_val is none %}fa-sort
+               {% elif sort_val is true %}fa-sort-up
+               {% elif sort_val is false %}fa-sort-down
+               {% endif %}"></i>
+        </button>
+        <input id="{{ field }}-sort-input" type="hidden" name="{{ field }}" value="{% if sort_val is none %}none{% elif sort_val is true %}ascendent{% elif sort_val is false %}descendent{% endif %}">
+    </th>
+{% endmacro %}
+
+<div id="table_container">
+    <form id="sort-form"
+          hx-get="/for-teachers/redesign/class/{{ class_info.id }}/grade/filter_sort"
+          hx-target="#grade-class-table-body"
+          hx-swap="innerHTML"
+          hx-trigger="submit"
+          hx-include="#level-filter-input, #student-filter-input, #adventure-filter-input"
+    >
+        <table class="w-full divide-y divide-gray-400" id="grade-class-table">
+            <thead class="bg-gray-200 divide-y divide-gray-400">
                 <tr>
-                    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-tl-lg w-28">
-                        {{_('level')}}
-                        <button class="ml-2" type="submit" title="Sort Level"
-                            _="on click
-                                if #level-sort matches .fa-sort then
-                                    remove .fa-sort from #level-sort
-                                    add .fa-sort-up to #level-sort
-                                    set value of #level-sort-input to 'ascendent'
-                                else if #level-sort matches .fa-sort-up then
-                                    remove .fa-sort-up from #level-sort
-                                    add .fa-sort-down to #level-sort
-                                    set value of #level-sort-input to 'descendent'
-                                else if #level-sort matches .fa-sort-down then
-                                    remove .fa-sort-down from #level-sort
-                                    add .fa-sort to #level-sort
-                                    set value of #level-sort-input to 'none'
-                                end">
-                            <i id="level-sort" class="fa-solid fa-sort"></i>
-                        </button>
-                        <input id="level-sort-input" type="hidden" name="level" value="none">
-                    </th>
-                    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
-                        {{_('student')}}
-                        <button class="ml-2" type="submit"
-                            _="on click
-                                if #student-sort matches .fa-sort then
-                                    remove .fa-sort from #student-sort
-                                    add .fa-sort-up to #student-sort
-                                    set value of #student-sort-input to 'ascendent'
-                                else if #student-sort matches .fa-sort-up then
-                                    remove .fa-sort-up from #student-sort
-                                    add .fa-sort-down to #student-sort
-                                    set value of #student-sort-input to 'descendent'
-                                else if #student-sort matches .fa-sort-down then
-                                    remove .fa-sort-down from #student-sort
-                                    add .fa-sort to #student-sort
-                                    set value of #student-sort-input to 'none'
-                                end">
-                            <i id="student-sort" class="fa-solid fa-sort"></i>
-                        </button>
-                        <input id="student-sort-input" type="hidden" name="student" value="none">
-                    </th>
-                    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
-                        {{_('adventure')}}
-                        <button class="ml-2" type="submit"
-                            _="on click
-                                if #adventure-sort matches .fa-sort then
-                                    remove .fa-sort from #adventure-sort
-                                    add .fa-sort-up to #adventure-sort
-                                    set value of #adventure-sort-input to 'ascendent'
-                                else if #adventure-sort matches .fa-sort-up then
-                                    remove .fa-sort-up from #adventure-sort
-                                    add .fa-sort-down to #adventure-sort
-                                    set value of #adventure-sort-input to 'descendent'
-                                else if #adventure-sort matches .fa-sort-down then
-                                    remove .fa-sort-down from #adventure-sort
-                                    add .fa-sort to #adventure-sort
-                                    set value of #adventure-sort-input to 'none'
-                                end">
-                            <i id="adventure-sort" class="fa-solid fa-sort"></i>
-                        </button>
-                        <input id="adventure-sort-input" type="hidden" name="name" value="none">
-                    </th>
-                    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">
-                        {{_('date')}}
-                        <button class="ml-2" type="submit"
-                            _="on click
-                                if #date-sort matches .fa-sort then
-                                    remove .fa-sort from #date-sort
-                                    add .fa-sort-up to #date-sort
-                                    set value of #date-sort-input to 'ascendent'
-                                else if #date-sort matches .fa-sort-up then
-                                    remove .fa-sort-up from #date-sort
-                                    add .fa-sort-down to #date-sort
-                                    set value of #date-sort-input to 'descendent'
-                                else if #date-sort matches .fa-sort-down then
-                                    remove .fa-sort-down from #date-sort
-                                    add .fa-sort to #date-sort
-                                    set value of #date-sort-input to 'none'
-                                end">
-                            <i id="date-sort" class="fa-solid fa-sort"></i>
-                        </button>
-                        <input id="date-sort-input" type="hidden" name="timestamp" value="none">
-                    </th>
-                    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-tr-lg">
-                        {{_('accepted')}}
-                        <button class="ml-2" type="submit"
-                            _="on click
-                                if #accepted-sort matches .fa-sort then
-                                    remove .fa-sort from #accepted-sort
-                                    add .fa-sort-up to #accepted-sort
-                                    set value of #accepted-sort-input to 'ascendent'
-                                else if #accepted-sort matches .fa-sort-up then
-                                    remove .fa-sort-up from #accepted-sort
-                                    add .fa-sort-down to #accepted-sort
-                                    set value of #accepted-sort-input to 'descendent'
-                                else if #accepted-sort matches .fa-sort-down then
-                                    remove .fa-sort-down from #accepted-sort
-                                    add .fa-sort to #accepted-sort
-                                    set value of #accepted-sort-input to 'none'
-                                end">
-                            <i id="accepted-sort" class="fa-solid fa-sort"></i>
-                        </button>
-                        <input id="accepted-sort-input" type="hidden" name="ticked" value="none">
-                    </th>
+                    {{ sortable_th('level', 'level', sort_orders) }}
+                    {{ sortable_th('student', 'student', sort_orders) }}
+                    {{ sortable_th('name', 'adventure', sort_orders) }}
+                    {{ sortable_th('timestamp', 'date', sort_orders) }}
+                    {{ sortable_th('ticked', 'accepted', sort_orders) }}
                 </tr>
-            </form>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200" id="grade-class-table-body">
-            {{
-                render_partial(
-                    "for-teachers/classes/htmx-grade-class-table-body.html",
-                    class_info=class_info,
-                    student_adventures=student_adventures,
-                )
-            }}
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200" id="grade-class-table-body">
+                {% if not student_adventures %}
+                    <tr>
+                        <td colspan="5" class="text-center text-gray-500 py-4">
+                            {{ _('no_programs') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    {{
+                        render_partial(
+                            "for-teachers/classes/htmx-grade-class-table-body.html",
+                            class_info=class_info,
+                            student_adventures=student_adventures,
+                        )
+                    }}
+                {% endif %}
+            </tbody>
+        </table>
+    </form>
+</div>
