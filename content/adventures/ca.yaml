@@ -261,23 +261,6 @@ adventures:
                     {print} T'ha tocat gustos {at} {random} milkshake
                     ```
         name: '{add} {to_list} & {remove} {from}'
-    and_or_command:
-        default_save_name: i o
-        description: Introduint {and} & {or}
-        levels:
-            10:
-                story_text: |-
-                    Ara aprendrem `{and}` i `{or}`! Quan vols comprovar dues sentències no cal fer servir dos `{if}`s, enlloc pots utilitzar les comandes `{and}` i `{or}`.
-
-                    Quan utilitzes `{and}` cal que ambdues sentències, tant l'esquerra com la dreta del `{and}` , siguin certes. En canvi, quan utilitzes `{or}`, només una de les sentències ha de ser certa.
-                example_code: |
-                    ```
-                    nom = {ask} "Com et dius?"
-                    edat = {ask} "Quants anys tens?"
-                    {if} nom {is} "Hedy" {and} edat {is} 2
-                        {print} "Ets el veritable Hedy!"
-                    ```
-        name: '{and} & {or}'
     ask_command:
         default_save_name: comanda_ask
         description: Introducció a la comanda {ask}

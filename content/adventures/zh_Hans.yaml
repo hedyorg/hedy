@@ -249,11 +249,6 @@ adventures:
                     在这个虚拟餐厅中尝试新命令。将玩家想要的口味添加到列表中，并删除他们过敏的口味。
                 example_code_3: "```\n{print} 神秘奶昔\n口味 {is} 草莓、巧克力、香草\n希望 {is} {ask} 您希望什么口味？\n_\n过敏 {is} {ask} 您对任何口味过敏吗？\n_\n{print} 您会得到 {at} {random} 口味的奶昔\n```\n"
         name: '{add} {to_list} & {remove} {from}'
-    and_or_command:
-        default_save_name: 与和或
-        description: 介绍{and}和{or}
-        levels:
-        name: '{and} & {or}'
     ask_command:
         default_save_name: 提问命令
         description: '{ask}命令介绍'
