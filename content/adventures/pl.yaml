@@ -2761,30 +2761,6 @@ adventures:
         default_save_name: Super Szpieg
         description: Stwórz swój kod szpiegowski
         levels:
-            12:
-                story_text: |
-                    W tej przygodzie możesz stworzyć własny super kod szpiegowski. Zakoduj wiadomość, którą tylko właściwy agent może odszyfrować.
-                    Jeśli wróg spróbuje złamać kod, otrzyma fałszywe informacje i zmarnuje swój czas.
-
-                    ### Ćwiczenie 1
-                    Stwórz własny tajny kod dla swojej super szpiega i zwróć obie części tylko prawdziwemu szpiegowi.
-
-                    ### Ćwiczenie 2
-                    Dodaj trzeci element do kodu, taki jak ubranie lub przedmiot.
-                example_code: |
-                    ```
-                    imię = {ask} 'Jak masz na imię?'
-                    {if} imię {is} _
-                        a = 'Jedź na lotnisko '
-                    {else}
-                        a = 'Idź na dworzec kolejowy'
-                    hasło = {ask} 'Jakie jest hasło?'
-                    {if} hasło {is} 'TOPSECRET'
-                        b = 'jutro o 02.00'
-                    {else}
-                        b = 'dziś o 10.00'
-                    {print} a + b
-                    ```
             10:
                 story_text: |
                     Możemy uprościć kod super szpiega za pomocą `{and}`, tak że potrzebujemy tylko jednego `{if}`.

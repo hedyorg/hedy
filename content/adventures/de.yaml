@@ -2749,30 +2749,6 @@ adventures:
         default_save_name: Superspion
         description: Schreibe deinen eigenen Spion-Code
         levels:
-            12:
-                story_text: |
-                    In diesem Abenteuer kannst du deinen eigenen Superspion-Code erstellen. Verschlüssele eine Nachricht, die nur der richtige Agent entschlüsseln kann.
-                    Wenn der Feind versucht, den Code zu knacken, wird er falsche Informationen erhalten, um seine Zeit zu verschwenden.
-
-                    ### Übung 1
-                    Erstelle deinen eigenen Geheimcode für deinen Superspion und gib beide Teile nur an den echten Spion zurück.
-
-                    ### Übung 2
-                    Füge dem Code eine dritte Komponente hinzu, zum Beispiel ein Kleidungsstück oder einen Gegenstand.
-                example_code: |
-                    ```
-                    Name = {ask} 'Wie heißt du?'
-                    {if} Name {is} _
-                        a = 'Geh zum Flughafen '
-                    {else}
-                        a = 'Geh zum Bahnhof '
-                    Passwort = {ask} 'Wie lautet das Passwort?'
-                    {if} Passwort {is} _
-                        b = 'Morgen um 2 Uhr'
-                    {else}
-                        b = 'Heute um 10 Uhr'
-                    {print} _ _ _
-                    ```
             10:
                 story_text: |
                     Wir können den Superspy-Code mit `{and}` vereinfachen, so dass wir nur einen `{if}` benötigen.

@@ -3835,30 +3835,6 @@ adventures:
         default_save_name: SuperSpy
         description: Make your own spy code
         levels:
-            12:
-                story_text: |
-                    In this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.
-                    If the enemy tries to crack the code, they will get some false info to waste their time.
-
-                    ### Exercise 1
-                    Make your own secret code for your superspy and return both parts only to the real spy.
-
-                    ### Exercise 2
-                    Add a third component to the code, like a piece of clothing or an object.
-                example_code: |
-                    ```
-                    name = {ask} 'What is your name?'
-                    {if} name {is} _
-                        a = 'Go to the airport '
-                    {else}
-                        a = 'Go to the train station '
-                    password = {ask} 'What is the password?'
-                    {if} password {is} _
-                        b = 'tomorrow at 02.00'
-                    {else}
-                        b = 'today at 10.00'
-                    {print} _ _ _
-                    ```
             10:
                 story_text: |
                     We can simplify the superspy code with `{and}`, such that we only need one `{if}`.

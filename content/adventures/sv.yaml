@@ -1945,30 +1945,6 @@ adventures:
         default_save_name: SuperSpion
         description: Skapa din egen spionkod
         levels:
-            12:
-                story_text: |
-                    I det här äventyret kan du skapa din egen superspionkod. Koda ett meddelande som bara rätt agent kan avkoda.
-                    Om fienden försöker knäcka koden kommer de att få falsk information för att slösa på deras tid.
-
-                    ### Övning 1
-                    Gör din egen hemliga kod för din superspion och lämna tillbaka båda delarna bara till den rätta spionen.
-
-                    ### Övning 2
-                    Lägg till en tredje komponent till koden, till exempel ett klädesplagg eller ett föremål.
-                example_code: |
-                    ```
-                    namn = {ask} 'Vad heter du?'
-                    {if} namn {is} '_'
-                        a = 'Åk till flygplatsen'
-                    {else}
-                        a = 'Åk till tågstationen'
-                    lösenord = {ask} 'Vad är lösenordet?'
-                    {if} lösenord {is} _
-                        b = 'imorgon kl. 02.00'
-                    {else}
-                        b = 'idag kl. 10.00'
-                    {print} _ _ _
-                    ```
             10:
                 story_text: |
                     Vi kan förenkla superspionkoden med `{and}`, så att vi bara behöver en `{if}`.

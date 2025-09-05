@@ -1998,30 +1998,6 @@
         default_save_name: SüperCasus
         description: Kendi casus kodunuzu oluşturun
         levels:
-            12:
-                story_text: |
-                    Bu macerada kendi süper casus kodunuzu oluşturabilirsiniz. Sadece doğru ajanın deşifre edebileceği bir mesaj kodlayın.
-                    Düşman kodu kırmaya çalışırsa, zamanlarını boşa harcayarak bazı yanlış bilgiler elde edeceklerdir.
-
-                    ### Alıştırma 1
-                    Süper casusunuz için kendi gizli kodunuzu oluşturun ve her iki parçayı da yalnızca gerçek casusa iade edin.
-
-                    ### Alıştırma 2
-                    Koda üçüncü bir bileşen ekleyin, bir giysi parçası veya bir nesne gibi.
-                example_code: |
-                    ```
-                    isim = {ask} 'Senin adın ne?'
-                    {if} isim {is} '_'
-                        a = 'Havaalanına git '
-                    {else}
-                        a = 'Tren istasyonuna git '
-                    şifre = {ask} 'Şifre nedir?'
-                    {if} şifre {is} _
-                        b = 'yarın gece saat 02.00'de'
-                    {else}
-                        b = 'bugün sabah saat 10.00'da'
-                    {print} _ _ _
-                    ```
             10:
                 story_text: |
                     Süpercasus kodunu `{and}` ile basitleştirebiliriz, böylece bize sadece bir `{if}` gerekir.
