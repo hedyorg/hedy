@@ -783,10 +783,45 @@ adventures:
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
+                    answer = 'Welcome to our pizza shop. Would you like to order?'
+                    if answer
+                    amount 'How many pizzas would you like to buy?'
+                    else
+                    print "You're buying one anyways!"
+                    amount = 1
+                    'We have Margherita and Pepperoni pizzas.'
+                    repeat amount
+                    chosen_pizza = ask 'What kind of pizza would you like?'
+                    print 'One ' chosen_pizza '.'
+                    price = amount * 10
+                    That will be ' price ' dollars please.'
+                    ```
+                answer_code: |
+                    ```
+                    answer = ask 'Welcome to our pizza shop. Would you like to order?'
+                    if answer is yes
+                        amount = ask 'How many pizzas would you like to buy?'
+                    else
+                        print "You're buying one anyways!"
+                        amount = 1
+                    print 'We have Margherita and Pepperoni pizzas.'
+                    repeat amount times
+                        chosen_pizza = ask 'What kind of pizza would you like?'
+                        print 'One ' chosen_pizza '.'
+                    price = amount * 10
+                    print 'That will be ' price ' dollars please.'
+                    ```
+            10:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
                     {print} 'Welcome to our sandwich shop'
                     amount 'How many sandwiches would you like to buy?'
                     {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
+                    {ask} {is} {ask} 'What kind of bread would you like your sandwich to be?'
                     types_of_bread {is} white, wheat, rye, garlic, gluten free
                     {if} chosen_bread in types_of_bread
                     {print} 'Lovely!'
@@ -796,19 +831,24 @@ adventures:
                     sauce {is} {ask} 'What kind of sauce would you like?'
                     {print} One chosen_bread with topping and sauce.
                     price = amount * 6
-                    {print} 'That will be 'price dollar' please'
+                    {print} 'That will be 'price dollars' please'
                     ```
-            10:
-                story_text: |-
-                    ### Exercise
-                    Debug this code. Good luck!
-                example_code: |
-                    **Warning! This code needs to be debugged!**
+                answer_code: |
                     ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity {at} {random}
+                    {print} 'Welcome to our sandwich shop'
+                    amount = {ask} 'How many sandwiches would you like to buy?'
+                    {repeat} amount {times}
+                        chosen_bread = {ask} 'What kind of bread would you like your sandwich to be?'
+                        types_of_bread = white, wheat, rye, garlic, gluten free
+                        {if} chosen_bread {in} types_of_bread
+                            {print} 'Lovely!'
+                        {else}
+                            {print} "I'm sorry we don't sell that"
+                        topping = {ask} 'What kind of topping would you like?'
+                        sauce = {ask} 'What kind of sauce would you like?'
+                        {print} 'One ' chosen_bread ' with ' topping ' and ' sauce '.'
+                    price = amount * 6
+                    {print} 'That will be ' price ' dollars please.'
                     ```
             11:
                 story_text: |-
