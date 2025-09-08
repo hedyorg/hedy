@@ -1016,6 +1016,34 @@ export function initializeGraph(is_redesign: boolean = false) {
   );
 }
 
+export interface InitializeGradePageOptions {
+  readonly page: 'grade-class';
+}
+
+export function initializeGradePage(_options: InitializeGradePageOptions) {
+  // Only close dropdowns if click is outside ALL dropdowns and their buttons
+  document.addEventListener('click', function (event) {
+    const dropdowns = [
+      {dropdown: document.getElementById('level_dropdown'), button: document.getElementById('dropdown_level_button')},
+      {dropdown: document.getElementById('student_dropdown'), button: document.getElementById('dropdown_student_button')},
+      {dropdown: document.getElementById('adventure_dropdown'), button: document.getElementById('dropdown_adventure_button')}
+    ];
+    const target = event.target as HTMLElement;
+    // If click is inside any dropdown or its button, do nothing
+    for (const {dropdown, button} of dropdowns) {
+      if ((dropdown && dropdown.contains(target)) || (button && button.contains(target))) {
+        return;
+      }
+    }
+    // Otherwise, close all open dropdowns
+    for (const {dropdown} of dropdowns) {
+      if (dropdown && dropdown.style.display !== 'none') {
+        $(dropdown).slideUp('medium');
+      }
+    }
+  });
+}
+
 export function invite_support_teacher(requester: string) {
   modal.prompt(`Invite a teacher to support ${requester}.`, '', function (username) {
     $.ajax({

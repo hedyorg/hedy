@@ -377,6 +377,9 @@ class ForTeachersModule(WebsiteModule):
             students=sorted(Class.get("students", [])),
             adventures=adventure_list,
             student_adventures=student_adventures,
+            javascript_page_options=dict(
+                page="grade-class",
+            ),
         )
 
     def build_student_adventures(self, Class, user, levels):
@@ -534,7 +537,7 @@ class ForTeachersModule(WebsiteModule):
         filtered_adventures = self.sort_student_adventures(
             filtered_adventures, sort_orders
         )
-
+        print("Filtered adventures:", filtered_adventures)
         return render_partial(
             "for-teachers/classes/htmx-grade-class-table-body.html",
             class_id=class_id,

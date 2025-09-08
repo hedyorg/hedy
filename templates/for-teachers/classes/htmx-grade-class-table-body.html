@@ -1,4 +1,11 @@
-{% for student_adventure_id, program in student_adventures.items() %}
+{% if not student_adventures %}
+    <tr>
+        <td colspan="5" class="text-center text-gray-500 py-4">
+            {{ _('no_programs') }}
+        </td>
+    </tr>
+{% else %}
+    {% for student_adventure_id, program in student_adventures.items() %}
     <tr>
         <td class="text-center w-20 {% if loop.last %} rounded-b-lg {% endif %}">
             {{ program.level }}
@@ -45,3 +52,4 @@
         </td>
     </tr>
 {% endfor %}
+{% endif %}

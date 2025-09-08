@@ -5,7 +5,7 @@ import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializ
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
-import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeAllClassesPageOptions, initializeAllClassesPage, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage } from './teachers';
+import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeAllClassesPageOptions, initializeAllClassesPage, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage, InitializeGradePageOptions, initializeGradePage } from './teachers';
 
 export interface InitializeOptions {
   /**
@@ -59,6 +59,7 @@ type InitializePageOptions =
   | InitializeMyProfilePage
   | InitializeAllClassesPageOptions
   | InitializeClassPerformanceGraphPageOptions
+  | InitializeGradePageOptions
   ;
 
 
@@ -126,7 +127,10 @@ export function initialize(options: InitializeOptions) {
     case 'performance-graph':
       initializePerformanceGraphPage();
       break;
-
+    
+    case 'grade-class':
+      initializeGradePage(options.javascriptPageOptions);
+      break;
   }
 
   // FIXME: I think this might also be page-specific

@@ -37,21 +37,25 @@
                             end"
                     >
                         <div id="level_button_all"
-                            class="cursor-pointer flex-row w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                            class="level-select selected flex-row w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
                                 no-underline  rounded-t-lg bg-blue-200 bg-green-200 hover:bg-blue-200"
                             _="on click
                             set @data-temp-value of #level-filter-input to 'all'
-                            put '{{ _('all') }}' into #level-button-span"
+                            put '{{ _('all') }}' into #level-button-span
+                            remove .bg-blue-200 .selected from .level-select
+                            add .bg-blue-200 .selected to me"
                         >                        
                             <span class="flex-grow">{{ _('all') }}</span>
                         </div>
                         {% for dropdown_level in range(1, 19) %}
                         <div id="level_button_{{dropdown_level}}"
-                            class="cursor-pointer flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                            class="level-select cursor-pointer flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
                                 rounded-lg no-underline hover:bg-blue-200"
                             _="on click
                                 set @data-temp-value of #level-filter-input to {{ dropdown_level }}
-                                put '{{ dropdown_level }}' into #level-button-span"
+                                put '{{ dropdown_level }}' into #level-button-span
+                                remove .bg-blue-200 .selected from .level-select
+                                add .bg-blue-200 .selected to me"
                         >                        
                             <span class="flex-grow">{{ _('level_title') }} {{ dropdown_level }}</span>
                         </div>
@@ -78,22 +82,26 @@
                             else if not arrow.classList.contains('rotate-180')
                             add .rotate-180 to arrow
                             end">
-                        <div id="student_button_{{student}}" class="cursor-pointer flex flex-row items-center w-full justify-between place-items-center  text-center justify-center items-center text-lg font-extralight py-1 px-2 text-blue-900 ease-in transition duration-100
+                        <div id="student_button_{{student}}" class="student-select selected cursor-pointer flex flex-row items-center w-full justify-between place-items-center  text-center justify-center items-center text-lg font-extralight py-1 px-2 text-blue-900 ease-in transition duration-100
                             rounded-t-lg bg-blue-200 bg-green-200 no-underline
                             hover:bg-blue-200"
                             _="on click
                                 set @data-temp-value of #student-filter-input to 'all'
-                                put '{{ _('all') }}' into #student-button-span"
+                                put '{{ _('all') }}' into #student-button-span
+                                remove .bg-blue-200 .selected from .student-select
+                                add .bg-blue-200 .selected to me"
                         >
                                 <span class="flex-grow"> {{ _('all') }} </span> 
                         </div>
                         {% for student in students %}
-                        <div id="student_button_{{student}}" class="cursor-pointer flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                        <div id="student_button_{{student}}" class="student-select cursor-pointer flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
                             rounded-lg no-underline
                             hover:bg-blue-200"
                             _="on click
                                 set @data-temp-value of #student-filter-input to '{{ student }}'
-                                put '{{ student }}' into #student-button-span"
+                                put '{{ student }}' into #student-button-span
+                                remove  .bg-blue-200 .selected from .student-select
+                                add .bg-blue-200 .selected to me"
                             >
                             <span class="flex-grow"> {{ student }} </span>                         
                         </div>
@@ -121,21 +129,25 @@
                             add .rotate-180 to arrow
                             end">
                         <div id="adventure_button_all"
-                            class="cursor-pointer flex flex-row items-center w-full justify-between text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                            class="adventure-select selected cursor-pointer flex flex-row items-center w-full justify-between text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
                                 rounded-t-lg bg-blue-200 bg-green-200 no-underline hover:bg-blue-200"
                             _="on click
                                 set @data-temp-value of #adventure-filter-input to 'all'
-                                put '{{ _('all') }}' into #adventure-button-span"
+                                put '{{ _('all') }}' into #adventure-button-span
+                                remove .bg-green-200 .bg-blue-200 .selected from .adventure-select
+                                add .bg-blue-200 .selected to me"
                         >
                             <span class="flex-grow">{{ _('all') }}</span>
                         </div>
                         {% for adventure in adventures %}
-                        <div id="adventure_button_{{ adventure }}"
-                            class="cursor-pointer flex flex-row w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                        <div id="adventure_button_{{ adventure.short_name }}"
+                            class="adventure-select cursor-pointer flex flex-row w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
                                 rounded-lg no-underline hover:bg-blue-200"
                             _="on click
                                 set @data-temp-value of #adventure-filter-input to '{{ adventure.short_name }}'
-                                put '{{ adventure.name }}' into #adventure-button-span"
+                                put '{{ adventure.name }}' into #adventure-button-span
+                                remove .bg-blue-200 .selected from .adventure-select
+                                add .bg-blue-200 .selected to me"
                         >
                             <span class="flex-grow">{{ adventure.name }}</span>
                         </div>
@@ -150,6 +162,18 @@
             set value of #level-filter-input to @data-temp-value of #level-filter-input
             set value of #student-filter-input to @data-temp-value of #student-filter-input
             set value of #adventure-filter-input to @data-temp-value of #adventure-filter-input
+            
+            remove .bg-green-200 from .adventure-select
+            remove .bg-blue-200 from <div.adventure-select.selected/>
+            add .bg-green-200 to <div.adventure-select.selected/>
+
+            remove .bg-green-200 from .level-select
+            remove .bg-blue-200 from <div.level-select.selected/>
+            add .bg-green-200 to <div.level-select.selected/>
+
+            remove .bg-green-200 from .student-select
+            remove .bg-blue-200 from <div.student-select.selected/>
+            add .bg-green-200 to <div.student-select.selected/>
         end">
             <i class="fa-solid fa-filter"></i> <span>{{ _('filter') }}</span>
         </button>        
