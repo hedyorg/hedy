@@ -406,7 +406,7 @@ class ForTeachersModule(WebsiteModule):
                     if "adventure_name" not in program:
                         continue
                     if not program.get("submitted", False):
-                        pass  # TODO CHANGE THIS ONCE FIXED THE BUGS
+                        continue
                     name = adventure_names.get(
                         program["adventure_name"], program["adventure_name"]
                     )
