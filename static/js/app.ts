@@ -210,7 +210,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   document.addEventListener('click', (ev) => {
     const target = ev.target as HTMLElement;
     const parent = document.getElementById('level_adventure_title');
-    if (parent?.contains(target)) {
+    const moreAdventuresButton = document.getElementById('more_adventures');
+    if (parent?.contains(target) || moreAdventuresButton?.contains(target)) {
       return;
     }
     if ($('#dropdown-level:visible').length) {
@@ -1909,13 +1910,23 @@ export function open_index_pane(e: Event) {
   }
 }
 
-export function open_index_dropdown(e: Event) {
+export function open_index_dropdown() {
   $('#dropdown-level').slideToggle('medium');
   document.getElementById('dropdown_index_arrow')?.classList.toggle('rotate-180');
-  const target = e.target as HTMLElement;
-  const button = target.closest('button');
+  const button = document.getElementById('dropdown_open_button');
   if (!button) return;
   const opened_pane = document.querySelector('.sliding-content-open');
   const opened_level_button = opened_pane?.previousElementSibling
   opened_level_button?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+export function moreAdventures() {
+  const button = document.getElementById('dropdown_open_button');
+  if (!button) return;
+  if (button.getBoundingClientRect().top < 0) {
+    button.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(open_index_dropdown, 500);
+  } else {
+    open_index_dropdown();
+  }
 }
