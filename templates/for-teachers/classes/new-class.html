@@ -6,7 +6,7 @@
         <div class="flex flex-col px-8 md:mx-16 my-5 w-full md:w-3/4 bg-white border border-gray-400 shadow-md rounded-lg py-8">
             <div class="flex flex-col gap-5 mx-2 mb-10">
                 <div class="flex flex-row gap-20 items-center mb-10" >
-                    <label for="class_name" class="text-xl">Class name</label>
+                    <label for="class_name" class="text-xl">{{ _('class_name') }}</label>
                     <input type="text" id="class_name" name="class_name" class="border border-gray-300 rounded-lg p-2 w-2/3" required>
                 </div>
                 <div class="flex flex-row gap-10 mb-5">
@@ -14,10 +14,8 @@
                         <input type="radio" name="creation_type" required value="standard">
                     </div>
                     <div class="flex flex-col gap-2">
-                        <label for="submitted" class="text-xl">Standard new class</label>
-                        <p class="mt-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ipsum reprehenderit qui
-                            ab, explicabo veniam quo fugit commodi laudantium iusto labore laborum optio, iste deserunt
-                            tempora illum repellat modi praesentium?</p>
+                        <label for="submitted" class="text-xl">{{ _('standard_new_class') }}</label>
+                        <p class="mt-0">{{ _('standard_new_class_explanation') }}</p>
                     </div>
                 </div>
                 <div class="flex flex-row gap-10 mb-5">
@@ -25,15 +23,13 @@
                         <input type="radio" name="creation_type" required value="copy">
                     </div>
                     <div class="flex flex-col gap-2">
-                        <label for="submitted" class="text-xl">Copy from an existing class</label>
-                        <p class="mt-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ipsum reprehenderit qui
-                            ab, explicabo veniam quo fugit commodi laudantium iusto labore laborum optio, iste deserunt
-                            tempora illum repellat modi praesentium?</p>
+                        <label for="submitted" class="text-xl">{{ _('copy_class') }}</label>
+                        <p class="mt-0">{{ _('copy_class_explanation') }}</p>
                         {% if not teacher_classes %}
-                            <p>You don't have any classes to copy from </p>
+                            <p>{{ _('no_existing_class') }}</p>
                         {% else %}
                             <div class="flex flex-row">
-                                <span class="">Class name</span>
+                                <span class="">{{ _('class')  }}</span>
                                 <select class="ml-2 border border-gray-300 rounded-lg p-1 w-1/2" name="class_to_copy" id="class_to_copy">
                                     {% for class in teacher_classes %}
                                         <option value="{{ class.id }}">{{ class.name|e }}</option>
@@ -45,7 +41,7 @@
                                     <input id="copy_second_teachers" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
-                                <label for="copy_second_teachers">Also copy second teachers?</label>
+                                <label for="copy_second_teachers"> {{ _('copy_second_teachers') }}</label>
                             </div>
                         {% endif %}
                     </div>
@@ -55,10 +51,8 @@
                         <input type="radio" name="creation_type" required value="plain">
                     </div>
                     <div class="flex flex-col gap-2">
-                        <label for="submitted" class="text-xl">Class without adventures</label>
-                        <p class="mt-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ipsum reprehenderit qui
-                            ab, explicabo veniam quo fugit commodi laudantium iusto labore laborum optio, iste deserunt
-                            tempora illum repellat modi praesentium?</p>
+                        <label for="submitted" class="text-xl">{{ _('class_without_adventures') }}</label>
+                        <p class="mt-0">{{ _('class_without_adventures_explanation') }}</p>
                     </div>
                 </div>
             </div>

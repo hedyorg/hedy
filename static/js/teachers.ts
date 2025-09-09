@@ -58,6 +58,8 @@ export function create_class_redesign(form: HTMLFormElement) {
       }),
       contentType: 'application/json',
       dataType: 'json'
+    }).done(function(response) {
+      window.location.pathname = '/for-teachers/redesign/class/' + response.id ;
     }).fail(function (err) {
       modal.notifyError(err.responseText);
     });
@@ -72,6 +74,8 @@ export function create_class_redesign(form: HTMLFormElement) {
       }),
       contentType: 'application/json',
       dataType: 'json'
+    }).done(function(response) {
+      window.location.pathname = '/for-teachers/redesign/class/' + response.id ;
     }).fail(function (err) {
       return modal.notifyError(err.responseText);
     })
