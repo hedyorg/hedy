@@ -3366,24 +3366,26 @@ adventures:
                 story_text: |-
                     In this level you'll learn how to use the `{play}` command to play a tune!
 
-                    Type `{play}` followed by the note you want to play. The scale goes C-D-E-F-G-A-B.
+                    Type `{play}` followed by the note you want to play. The scale goes {C}-{D}-{E}-{F}-{G}-{A}-{B}.
                     As you can see there are 7 different letters, but we can play more than just 7 notes.
-                    Type a number between 0 and 9 behind the letter to choose the scale, for example after B4 comes C5.
-                    C0 is the lowest note you can play, B9 is the highest.
+                    Type a number between 0 and 9 behind the letter to choose the scale, for example after {B}4 comes {C}5.
+                    {C}0 is the lowest note you can play, {B}9 is the highest.
 
                     ### Exercise
                     Try out the example code and then play around with it! Can you create your own melody?
                     In the next level you'll learn how to play some existing songs.
                 example_code: |-
                     ```
-                    {play} C4
-                    {play} D4
-                    {play} E4
-                    {play} F4
-                    {play} G4
-                    {play} A4
-                    {play} B4
-                    {play} C5
+                    {play} {C}4
+                    {play} {c}4
+                    {play} {D}4
+                    {play} {E}4
+                    {play} {F}4
+                    {play} {G}4
+                    {play} {A}4
+                    {play} {B}4
+                    {play} {b}4
+                    {play} {C}5
                     ```
             2:
                 story_text: |
@@ -3392,28 +3394,28 @@ adventures:
                 example_code: |
                     ```
                     {print} Old Mac Donald had a farm
-                    {play} C5
-                    {play} C5
-                    {play} C5
-                    {play} G4
-                    {play} A4
-                    {play} A4
-                    {play} G4
+                    {play} {C}5
+                    {play} {C}5
+                    {play} {C}5
+                    {play} {G}4
+                    {play} {A}4
+                    {play} {A}4
+                    {play} {G}4
                     ```
                 story_text_2: As you can see, you can also use the `{sleep}` command to add a little pause in the song.
                 example_code_2: |
                     ```
                     {print} Twinkle Twinkle Little Star
-                    {play} C
-                    {play} C
-                    {play} G
-                    {play} G
-                    {play} A
-                    {play} A
-                    {play} G
+                    {play} {C}
+                    {play} {C}
+                    {play} {G}
+                    {play} {G}
+                    {play} {A}
+                    {play} {A}
+                    {play} {G}
                     {sleep} 1
-                    {play} F
-                    {play} F
+                    {play} {F}
+                    {play} {F}
                     ```
             3:
                 story_text: |
@@ -3424,7 +3426,7 @@ adventures:
                     Add more notes to the list and create a longer melody by copying the last line a couple more times.
                 example_code: |
                     ```
-                    notes {is} A4, B4, C4
+                    notes {is} {A}4, {B}4, {C}4
                     {play} notes {at} {random}
                     {play} notes {at} {random}
                     {play} notes {at} {random}
@@ -3439,24 +3441,24 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Mary had a little lamb'
-                    {play} E
-                    {play} D
-                    {play} C
-                    {play} D
-                    {play} E
-                    {play} E
-                    {play} E
+                    {play} {E}
+                    {play} {D}
+                    {play} {C}
+                    {play} {D}
+                    {play} {E}
+                    {play} {E}
+                    {play} {E}
                     {clear}
                     {print} 'Little lamb, little lamb'
-                    {play} D
-                    {play} D
-                    {play} D
-                    {play} E
-                    {play} E
-                    {play} E
+                    {play} {D}
+                    {play} {D}
+                    {play} {D}
+                    {play} {E}
+                    {play} {E}
+                    {play} {E}
                     {clear}
                     {print} 'Mary had a little lamb'
-                    {play} E
+                    {play} {E}
                     ```
             5:
                 story_text: |
@@ -3464,12 +3466,12 @@ adventures:
                     For example, if you want to make a quiz, you can play a happy high note if the answer is right and a sad low note if the answer is wrong.
 
                     ### Exercise
-                    Finish the first question by adding a line of code that plays a C3 note if the wrong answer is given.
+                    Finish the first question by adding a line of code that plays a {C}3 note if the wrong answer is given.
                     Then think of 3 more questions to add to this quiz.
                 example_code: |
                     ```
                     answer {is} {ask} 'What is the capital of Zimbabwe?'
-                    {if} answer {is} Harare {play} C6
+                    {if} answer {is} Harare {play} {C}6
                     _
                     ```
             6:
@@ -3496,8 +3498,8 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Twinkle Twinkle Little Star'
-                    {repeat} 2 {times} {play} C4
-                    {repeat} 2 {times} {play} G4
+                    {repeat} 2 {times} {play} {C}4
+                    {repeat} 2 {times} {play} {G}4
                     _
                     ```
             8:
@@ -3510,14 +3512,14 @@ adventures:
                     ```
                     {print} 'Brother John'
                     {repeat} 2 {times}
-                        {play} C
-                        {play} D
-                        {play} E
-                        {play} C
+                        {play} {C}
+                        {play} {D}
+                        {play} {E}
+                        {play} {C}
                     {repeat} 2 {times}
-                        {play} E
-                        {play} F
-                        {play} G
+                        {play} {E}
+                        {play} {F}
+                        {play} {G}
                         {sleep} 1
                     ```
             9:
@@ -3532,12 +3534,12 @@ adventures:
                     first_time = yes
                     {repeat} 2 {times}
                         {repeat} 2 {times}
-                            {play} C
-                        {play} D
-                        {play} C
+                            {play} {C}
+                        {play} {D}
+                        {play} {C}
                         {if} first_time {is} yes
-                            {play} F
-                            {play} E
+                            {play} {F}
+                            {play} {E}
                             first_time {is} no
                         {else}
                             _
@@ -3552,33 +3554,33 @@ adventures:
                 example_code: |
                     ```
                     {define} first_line
-                        {play} C
-                        {play} C
-                        {play} G
-                        {play} G
-                        {play} A
-                        {play} A
-                        {play} G
+                        {play} {C}
+                        {play} {C}
+                        {play} {G}
+                        {play} {G}
+                        {play} {A}
+                        {play} {A}
+                        {play} {G}
                         {sleep}
 
                     {define} second_line
-                        {play} F
-                        {play} F
-                        {play} E
-                        {play} E
-                        {play} D
-                        {play} D
-                        {play} C
+                        {play} {F}
+                        {play} {F}
+                        {play} {E}
+                        {play} {E}
+                        {play} {D}
+                        {play} {D}
+                        {play} {C}
                         {sleep}
 
                     {define} third_line
-                        {play} G
-                        {play} G
-                        {play} F
-                        {play} F
-                        {play} E
-                        {play} E
-                        {play} D
+                        {play} {G}
+                        {play} {G}
+                        {play} {F}
+                        {play} {F}
+                        {play} {E}
+                        {play} {E}
+                        {play} {D}
                         {sleep}
 
                     {call} _
@@ -3600,10 +3602,10 @@ adventures:
                     ```
                     {print} 'Yankee Doodle'
                     {define} _ {with} note_1, note_2, note_3
-                        {play} C4
-                        {play} C4
-                        {play} D4
-                        {play} E4
+                        {play} {C}4
+                        {play} {C}4
+                        {play} {D}4
+                        {play} {E}4
                         {play} _
                         {play} _
                         {play} _
@@ -3612,13 +3614,13 @@ adventures:
                     {call} line_1 {with} 29, 28, 0
                     {call} line_1 {with} 32, 31, 30
 
-                    {play} C4
-                    {play} B3
-                    {play} G3
-                    {play} A3
-                    {play} B3
-                    {play} C4
-                    {play} C4
+                    {play} {C}4
+                    {play} {B}3
+                    {play} {G}3
+                    {play} {A}3
+                    {play} {B}3
+                    {play} {C}4
+                    {play} {C}4
                     ```
             14:
                 story_text: |
@@ -3671,11 +3673,11 @@ adventures:
                     ```
                     {define} line_1
                         {for} i {in} {range} 1 {to} 3
-                            {play} G
-                        {play} D
+                            {play} {G}
+                        {play} {D}
                         {for} i {in} {range} 1 {to} 2
-                            {play} E
-                        {play} D
+                            {play} {E}
+                        {play} {D}
 
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
@@ -3698,12 +3700,12 @@ adventures:
                     ```
                     {define} scary_song
                         {for} i {in} {range} 1 {to} 3
-                            {play} G
-                        {play} E
+                            {play} {G}
+                        {play} {E}
                         {sleep} 2
                         {for} i {in} {range} 1 {to} 3
-                            {play} F
-                        {play} D
+                            {play} {F}
+                        {play} {D}
 
                     mood = {ask} 'Which emotion are you feeling?'
                     {if} mood {is} 'fear'
@@ -3720,17 +3722,17 @@ adventures:
                     ```
                     {def} line_1():
                         {for} i {in} {range}(1, 5):
-                            {play} A
-                        {play} D
-                        {play} F
-                        {play} A
+                            {play} {A}
+                        {play} {D}
+                        {play} {F}
+                        {play} {A}
 
                     {def} line_2():
                         {for} i {in} {range}(1, 5):
-                            {play} G
-                        {play} C
-                        {play} E
-                        {play} G
+                            {play} {G}
+                        {play} {C}
+                        {play} {E}
+                        {play} {G}
 
                     {def} line_3():
                     _

@@ -2470,10 +2470,10 @@ adventures:
                 story_text: |-
                     In diesem Level lernst du, wie man den `{play}` Befehl benutzt um einen Ton zu spielen.
 
-                    Tippe `{play}` gefolgt von der Note, die du spielen möchtest. Die Tonleiter ist C-D-E-F-G-A-B.
+                    Tippe `{play}` gefolgt von der Note, die du spielen möchtest. Die Tonleiter ist {C}-{D}-{E}-{F}-{G}-{A}-{B}.
                     Wie du sehen kannst, sind es 7 verschiedene Buchstaben, wir können aber viel mehr als 7 Töne spielen.
-                    Tippe eine Nummer zwischen 0 und 9 hinter den Buchstaben um eine Tonhöhe auszuwählen, zum Beispiel kommt B4 nach C5.
-                    C0 ist die tiefste Note die du spielen kannst, B9 die höchste.
+                    Tippe eine Nummer zwischen 0 und 9 hinter den Buchstaben um eine Tonhöhe auszuwählen, zum Beispiel kommt {B}4 nach {C}5.
+                    {C}0 ist die tiefste Note die du spielen kannst, {B}9 die höchste.
 
                     ### Übung
                     Probier den Beispielcode aus und spiele damit herum! Kannst du deine eigene Melodie erzeugen?
@@ -2492,7 +2492,7 @@ adventures:
                     Füge der Liste weitere Noten hinzu und erstellen Sie eine längere Melodie, indem du die letzte Zeile noch ein paar Mal kopierst.
                 example_code: |
                     ```
-                    noten {is} A4, B4, C4
+                    noten {is} {A}4, {B}4, {C}4
                     {play} noten {at} {random}
                     {play} noten {at} {random}
                     {play} noten {at} {random}
@@ -2510,12 +2510,12 @@ adventures:
                     Wenn Du beispielsweise einen Quiz programmieren willst, kannst du einen fröhlichen hohen Ton spielen, wenn die Antwort richtig ist und einen traurigen tiefen Ton, wenn sie falsch ist.
 
                     ### Übung
-                    Vervollständige die erste Frage, in dem du eine Zeile Code einfügst, die ein C3 spielt, wenn die Antwort falsch ist.
+                    Vervollständige die erste Frage, in dem du eine Zeile Code einfügst, die ein {C}3 spielt, wenn die Antwort falsch ist.
                     Dann denke dir noch 3 Fragen für den Quiz aus.
                 example_code: |
                     ```
                     antwort {is} {ask} 'Wie heißt die Hauptstadt von Simbabwe?'
-                    {if} antwort {is} Harare {play} C6
+                    {if} antwort {is} Harare {play} {C}6
                     _
                     ```
             6:
@@ -2549,14 +2549,14 @@ adventures:
                     ```
                     {print} 'Bruder Jakob'
                     {repeat} 2 {times}
-                        {play} C
-                        {play} D
-                        {play} E
-                        {play} C
+                        {play} {C}
+                        {play} {D}
+                        {play} {E}
+                        {play} {C}
                     {repeat} 2 {times}
-                        {play} E
-                        {play} F
-                        {play} G
+                        {play} {E}
+                        {play} {F}
+                        {play} {G}
                         {sleep} 1
                     ```
             9:
@@ -2571,12 +2571,12 @@ adventures:
                     erstes_mal = ja
                     {repeat} 2 {times}
                         {repeat} 2 {times}
-                            {play} C
-                        {play} D
-                        {play} C
+                            {play} {C}
+                        {play} {D}
+                        {play} {C}
                         {if} erstes_mal {is} ja
-                            {play} F
-                            {play} E
+                            {play} {F}
+                            {play} {E}
                             erstes_mal {is} nein
                         {else}
                             _
@@ -2591,33 +2591,33 @@ adventures:
                 example_code: |
                     ```
                     {define} erste_zeile
-                        {play} C
-                        {play} C
-                        {play} G
-                        {play} G
-                        {play} A
-                        {play} A
-                        {play} G
+                        {play} {C}
+                        {play} {C}
+                        {play} {G}
+                        {play} {G}
+                        {play} {A}
+                        {play} {A}
+                        {play} {G}
                         {sleep}
 
                     {define} zweite_zeile
-                        {play} F
-                        {play} F
-                        {play} E
-                        {play} E
-                        {play} D
-                        {play} D
-                        {play} C
+                        {play} {F}
+                        {play} {F}
+                        {play} {E}
+                        {play} {E}
+                        {play} {D}
+                        {play} {D}
+                        {play} {C}
                         {sleep}
 
                     {define} dritte_zeile
-                        {play} G
-                        {play} G
-                        {play} F
-                        {play} F
-                        {play} E
-                        {play} E
-                        {play} D
+                        {play} {G}
+                        {play} {G}
+                        {play} {F}
+                        {play} {F}
+                        {play} {E}
+                        {play} {E}
+                        {play} {D}
                         {sleep}
 
                     {call} _
@@ -2686,11 +2686,11 @@ adventures:
                     ```
                     {define} zeile_1
                         {for} i {in} {range} 1 {to} 3
-                            {play} G
-                        {play} D
+                            {play} {G}
+                        {play} {D}
                         {for} i {in} {range} 1 {to} 2
-                            {play} E
-                        {play} D
+                            {play} {E}
+                        {play} {D}
 
                     tiere = ['Schwein', 'Hund', 'Kuh']
                     laute = ['quiek', 'wau', 'muh']
@@ -2713,12 +2713,12 @@ adventures:
                     ```
                     {define} grusel_lied
                         {for} i {in} {range} 1 {to} 3
-                            {play} G
-                        {play} E
+                            {play} {G}
+                        {play} {E}
                         {sleep} 2
                         {for} i {in} {range} 1 {to} 3
-                            {play} F
-                        {play} D
+                            {play} {F}
+                        {play} {D}
 
                     stimmung = {ask} 'Was fühlst du?'
                     {if} stimmung {is} 'furcht'
@@ -2735,17 +2735,17 @@ adventures:
                     ```
                     {def} zeile_1():
                         {for} i {in} {range}(1, 5):
-                            {play} A
-                        {play} D
-                        {play} F
-                        {play} A
+                            {play} {A}
+                        {play} {D}
+                        {play} {F}
+                        {play} {A}
 
                     {def} zeile_2():
                         {for} i {in} {range}(1, 5):
-                            {play} G
-                        {play} C
-                        {play} E
-                        {play} G
+                            {play} {G}
+                        {play} {C}
+                        {play} {E}
+                        {play} {G}
 
                     {def} zeile_3():
                     _
