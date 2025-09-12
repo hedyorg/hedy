@@ -2280,15 +2280,15 @@ class ConvertToPython_5(ConvertToPython_4):
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[1])}"""
 
-    #must be moved to level 9
+    # must be moved to level 9
     def else_clause(self, meta, args):
-        return{'\n'.join(args)}
+        return {'\n'.join(args)}
 
     def elif_clause(self, meta, args):
-        return{'\n'.join(args)}
+        return {'\n'.join(args)}
 
     def if_clause(self, meta, args):
-        return{'\n'.join(args)}
+        return {'\n'.join(args)}
 
     def ifelse(self, meta, args):
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
