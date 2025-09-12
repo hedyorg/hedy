@@ -357,6 +357,26 @@ adventures:
                     name = {input}('What is your name?')
                     {print}('So your name is ', name)
                     ```
+    and_or_command:
+        name: '{and} & {or}'
+        default_save_name: and_or_command
+        description: 'and, or'
+        levels:
+            10:
+                story_text: |-
+                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use `{and}` and `{or}`.
+                    If you use and, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                example_code: |
+                    ```
+                    name = {ask} 'what is your name?'
+                    age = {ask} 'what is your age?'
+                    {if} name {is} 'Hedy' {and} age {is} 2
+                        print 'You are the real Hedy!'
+                    {elif} name {is} 'Hedy' {or} age {is} 2
+                        {print} 'So close.. but you are not Hedy!'
+                    {else}
+                        {print} 'You are not Hedy!'
+                    ```
     calculator:
         name: Calculator
         default_save_name: Calculator
