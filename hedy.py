@@ -296,25 +296,23 @@ def add_level(commands, level, add=None, remove=None):
     commands[level] = [c for c in commands[level - 1] if c not in remove] + add
 
 
-# Commands per Hedy level which are used to suggest the closest command when kids make a mistake
+# Commands per Hedy level which are used to suggest the closest command when kids make a mistake. This list is also used to generate the list of keywords in the language switcher.
 commands_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
 add_level(commands_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
 add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to_list'])
 add_level(commands_per_level, level=4, add=['clear'])
-add_level(commands_per_level, level=5, add=['else', 'if', 'pressed', 'in', 'not_in'])
-add_level(commands_per_level, level=6)
-add_level(commands_per_level, level=7, add=['repeat', 'times'])
-add_level(commands_per_level, level=8)
+add_level(commands_per_level, level=5, add=['else', 'if',])
+add_level(commands_per_level, level=6, add=['in', 'not_in', 'pressed', 'elif'])
+add_level(commands_per_level, level=7)
+add_level(commands_per_level, level=8, add=['repeat', 'times'])
 add_level(commands_per_level, level=9)
-add_level(commands_per_level, level=10, add=['for'])
-add_level(commands_per_level, level=11, add=['range', 'to'], remove=['times'])
-add_level(commands_per_level, level=12, add=['define', 'call', 'with'])
-add_level(commands_per_level, level=13, add=['and', 'or'])
+add_level(commands_per_level, level=10, add=['and', 'or'])
+add_level(commands_per_level, level=11, add=['for'])
+add_level(commands_per_level, level=12, add=['define', 'call'])
+add_level(commands_per_level, level=13, add=['input', 'range'], remove=['ask', 'call', 'define', 'repeat'])
 add_level(commands_per_level, level=14)
-add_level(commands_per_level, level=15, add=['while'])
-add_level(commands_per_level, level=16)
-add_level(commands_per_level, level=17, add=['elif'])
-add_level(commands_per_level, level=18, add=['input'], remove=['ask'])
+add_level(commands_per_level, level=15)
+add_level(commands_per_level, level=16, add=['while'])
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
