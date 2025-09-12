@@ -777,36 +777,18 @@ adventures:
             1:
                 example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} Miluji programování\nTaké milujete programování?\n{echo}\n{print} Jaké jsou vaše koníčky?\n{echo} Vaše koníčky jsou\n```\n"
                 story_text: "Vítejte v dobrodružství ladění. Ladění kódu znamená odstraňování chyb v kódu.\nTo znamená, že v těchto ladicích dobrodružstvích vám ukážeme kód, který zatím nefunguje.\nBudete muset zjistit, co je špatně, a chyby opravit.\n\n### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-            11:
-                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\njména = Muad Hasan Samira Noura\naktivity = pouštění draka, plavání, turistika, opalování na slunci\n{for} jméno {is} jména\n{print} Na pláži jméno miluje činnost {at} {random}\n```\n"
             2:
                 example_code: "**Upozornění! Tento kód je třeba vyladit!**\n```\ndestination {ask} Kam jedete na dovolenou?\n{print} Let do dstination odlétá v 15:00.\n{ask} Už jste si odbavili zavazadla?\n{echo}\n{print} Dovolte mi, abych vám vytiskl palubní vstupenku.\n{sleep}\nTady máte! Šťastnou cestu!\n```\n"
                 story_text: "Vítejte v dobrodružství ladění. Ladění kódu znamená odstraňování chyb v kódu.\nTo znamená, že v těchto ladicích dobrodružstvích vám nabídneme kód, který zatím nefunguje.\nBudete muset zjistit, co je špatně, a chyby opravit.\n\n### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-            4:
-                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} 'Vítejte v online knihovně!\n{ask} Jaký žánr knih máte rádi?\n{print} Máte rádi žánr\nautor {is} {ask} 'Kdo je tvůj oblíbený autor?\n{print} 'autor je váš oblíbený autor'\n{print} Hmmm... myslím, že byste měl zkusit... knih {at} {random}\n```\n"
-            12:
-                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{define} pozdrav\npozdravy = 'Ahoj', 'Ahoj', 'Dobrý večer'\n    {print} pozdravy {at} {random}\n\n{define} vzít_objednávku\n    jídlo = {ask} 'Co si dáte k jídlu?'\n    {print} 'Jedno jídlo'\n    pití = 'Co si dáte k pití?'\n    {print} 'Jeden ' pití\n    více = {ask} 'Dáte si ještě něco?'\n        {if} více {is} 'ne'\n    {print} 'Dobře'\n        {else}\n        {print} 'A ' více\n{print} 'Děkuji'\n\n{print} 'Vítejte v naší restauraci'\nlidé = {ask} 'Kolik lidí je dnes ve vaší společnosti?'\n{for} i {in} {range} 0 {to} lidé\n    {call} pozdrav_zákazníka\n```\n"
-            9:
-                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} 'Vítejte na stránkách Manikúra a pedikúra u Hedy'\nbodypart = {ask} 'Necháte si dnes udělat nehty na rukou nebo nohou? Nebo obojí?'\n{if} bodyparts {is} obojí\n        {print} To bude 25 $'\n        cena = 25\n    {else}\n        {print} To bude 18 $'\n        cena = 18\nbarva = {ask} Jakou barvu si přejete?\ntřpytky = {ask} 'Chtěli byste k tomu nějaké třpytky?'\n{if} Sparkles {is} ano\n    {print} 'Za to si účtujeme 3 dolary navíc'\ncena = cena + 3\n{else} {print} 'Žádné třpytky' {print} 'Takže žádný příplatek'\n{sleep} 5\n{print} 'Hotovo! To bude $' cena ' prosím!'\n{print} 'Děkuji! Nashledanou!\n```"
-            5:
-                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} Vítejte v bazénu Hedy!\ntřída {is} {ask} 'Přišli jste dnes do třídy?'\n{if} třída ano\n{print} 'Skvělé! Připojujete se ke třídě!\n{print} {else} 'Do třídy se nepřihlásíte'\nsleva {is} 'Máte slevový kód?'\n{if} sleva {is} ano\nsleva_odpověď {is} {ask} 'Jaký je váš slevový kód?'\nslevový_kód = Senior4231, Student8786, NewMember6709\n{if} slevová_odpověď {is} {in} slevové_kódy\n{print} 'To bude 3,50 USD'\n'To bude 5,50 $'\n{print} 'Hezké koupání!'\n```\n"
-            7:
-                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} 'Automat na jídlo a pití'\nvybraný_produkt = {ask} 'Vyberte prosím produkt'\n1_dolarové_produkty = cola pomerančový džus voda\n2_dolarové_produkty = čokoláda, sušenka, müsli tyčinka\n3dolarové_prodkty = bramborové lupínky, sušené hovězí maso, banánový chléb\n{if} vybraný {is} {in} 1_dolarové_produkty\ncena = 1\n{if} vybraný_produkt {is} 2_dolarové_produkty\ncena = 2\n{else} vybraný_produkt {in} 3_dolarové_produkty\ncena = 3\nmnožství_produktů = '{ask} Kolik ' zvoleného_produktu byste chtěli mít?'\ncelkem = cena + množství_z_produktu\n{print} 'To bude $' cena 'prosím'\n```\n"
-            10:
-                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} 'Vítejte v našem obchodě se sendviči'\nmnožství 'Kolik sendvičů si přejete koupit?'\n{repeat} množství {times}\n{ask} {is} {ask} 'Jaký druh chleba si přejete pro svůj sendvič?'\ntypech_chleba {is} bílý, pšeničný, žitný, česnekový, bezlepkový\n{if} vybraný_chléb in typech_chleba\n{print} 'Krásné!'\n{else}\n'Je mi líto, ale ten neprodáváme'\npoleva {is} {ask} 'Jaký druh polevy si přejete?'\nomáčka {is} {ask} 'Jaký druh omáčky byste si přál?'\n{print} Jeden vybraný_chléb s poleva a omáčka.\ncena = množství * 6\n{print} 'To bude 'cena dolar', prosím'\n```\n"
-            8:
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\nSpíte?\nBratře Johne!\nRanní zvony zvoní!\nCink, cink, cink!\n```\n"
-                story_text: "### Cvičení\nPřekvapení! Tento program vypadá spíše jako výstup než jako kód. A přesto nechceme, abyste před každý řádek jen přidávali příkazy `{print}`.\nOpravte tento program tak, aby se z něj stala dětská říkanka 'Bratr Jan (Frère Jacques)', samozřejmě pomocí příkazu {repeat}!"
             3:
                 example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\nmovie_choices {is} dracula, fast and furious, home alone, barbie\nchosen_movie {is} movies {at} {random}\n{print} Dnes večer se budeme dívat na vybrané _filmy\nlike {ask} Líbí se ti ten film?\n{print} Zítra se podíváme na něco jiného.\n{add} vybraný_film {to_list} movie_choices\n{print} Zítra se podíváme na zítřejší_film\ntomorrows_movie {is} movie_choices {at} {random}\nJdu pro popcorn! {print}\n```\n"
                 story_text: "Vítejte v dobrodružství ladění. Ladění kódu znamená odstraňování chyb v kódu.\nTo znamená, že v těchto ladicích dobrodružstvích vám předložíme kód, který zatím nefunguje.\nBudete muset zjistit, co je špatně, a chyby opravit.\n\n### Cvičení\nVylaďte tento kód. Hodně štěstí!"
+            4:
+                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
+                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} 'Vítejte v online knihovně!\n{ask} Jaký žánr knih máte rádi?\n{print} Máte rádi žánr\nautor {is} {ask} 'Kdo je tvůj oblíbený autor?\n{print} 'autor je váš oblíbený autor'\n{print} Hmmm... myslím, že byste měl zkusit... knih {at} {random}\n```\n"
+            5:
+                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
+                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} Vítejte v bazénu Hedy!\ntřída {is} {ask} 'Přišli jste dnes do třídy?'\n{if} třída ano\n{print} 'Skvělé! Připojujete se ke třídě!\n{print} {else} 'Do třídy se nepřihlásíte'\nsleva {is} 'Máte slevový kód?'\n{if} sleva {is} ano\nsleva_odpověď {is} {ask} 'Jaký je váš slevový kód?'\nslevový_kód = Senior4231, Student8786, NewMember6709\n{if} slevová_odpověď {is} {in} slevové_kódy\n{print} 'To bude 3,50 USD'\n'To bude 5,50 $'\n{print} 'Hezké koupání!'\n```\n"
         description: ladění dobrodružství
         name: ladění
         default_save_name: ladění
