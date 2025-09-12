@@ -2280,19 +2280,8 @@ class ConvertToPython_5(ConvertToPython_4):
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[1])}"""
 
-    #must be moved to level 9
-    def else_clause(self, meta, args):
-        return{'\n'.join(args)}
-
-    def elif_clause(self, meta, args):
-        return{'\n'.join(args)}
-
-    def if_clause(self, meta, args):
-        return{'\n'.join(args)}
-
     def ifelse(self, meta, args):
-        return f"""if {args[0]}:{self.add_debug_breakpoint()}
-{ConvertToPython.indent(args[1])}
+        return f"""{args[0]}
 else:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[2])}"""
 
@@ -2733,11 +2722,25 @@ class ConvertToPython_8_9(ConvertToPython_7):
             self.make_extension_call()
         )
 
-    def elses(self, meta, args):
-        args = [a for a in args if a != ""]  # filter out in|dedent tokens
-        all_lines = [ConvertToPython.indent(x) for x in args]
+    def ifelse(self, meta, args):
+        return f"""{args[0]}
+else:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(args[1])}"""
 
-        return "\nelse:\n" + "\n".join(all_lines)
+    def if_clause(self, meta, args):
+        body = '\n'.join(args[1:])
+        return f"""if {args[0]}:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(body)}"""
+
+
+    def else_clause(self, meta, args):
+        return('\n'.join(args))
+
+    def elif_clause(self, meta, args):
+        return('\n'.join(args))
+
+
+
 
 
 @v_args(meta=True)
