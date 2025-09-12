@@ -213,6 +213,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     10: [
         'repeat_command',
         'if_command',
+        'and_or_command',
         'rock',
         'story',
         'calculator',
