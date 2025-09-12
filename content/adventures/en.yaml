@@ -131,6 +131,26 @@ adventures:
                     {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
                     {else} {print} 'The monster eats ' name
                     ```
+            6:
+                story_text: |-
+                    Now that you can use `{elif}` you can create an even more interactive story! You could create multiple characters for example, that all have different traits.
+                    Or you could have your player choose which road to take, which door to open, or which magical potion to drink... 
+
+                    ### Exercise
+                    Create your own story with 3 or more options using the {elif}.
+                example_code: |
+                    ```
+                    character = {ask} 'Who will help you on your quest?'
+                    {if} character {is} 'Daisy'
+                        {print} 'You have picked Daisy! She is the smartest of them all!'
+                        {print} "Daisy imediately tells you taht you shouldn't eat those berries over there."
+                    {elif} character {is} 'Jason'
+                        {print} 'You have picked Jason! He is the strongest of them all!'
+                        {print} 'Jason lifts up a boulder, showing a secret map underneath'
+                    {elif} character {is} 'Sam'
+                        {print} 'You have picked Sam! They are the quickest of them all!'
+                        {print} 'Sam climbs up a tree and sees that there is a village not far away..'
+                    ```
             8:
                 story_text: |
                     In a story, someone says words several times. For example, when someone calls for help or sings a song.
