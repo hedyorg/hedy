@@ -156,6 +156,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     ],
     6: [
         'elif_command',
+        'story',
         'in_command',
         'restaurant',
         'fortune',
