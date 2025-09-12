@@ -2103,6 +2103,15 @@ adventures:
                     {print} 'Two and a half plus two and a half is...'
                     {print} 2.5 + 2.5
                     ```
+                story_text_3: |-
+                    **Maths with variables**
+                example_code_3: |
+                    ```
+                    {print} 'A ticket is $2'
+                    people = {ask} 'How many tickets would you like?'
+                    price = people * 2
+                    {print} 'That will be $' price 'please'
+                    ```
     music:
         name: music
         default_save_name: music
