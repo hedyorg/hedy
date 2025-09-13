@@ -77,7 +77,8 @@ def find_mismatched_types(reference, other):
         path_str = ''.join(p)
 
         if isinstance(ref, str) and isinstance(oth, dict):
-            ret[path_str] = Mismatch(ref, oth, 'Type mismatch', f'The path {path_str} is a string in the reference file but a dict in the lang file.')
+            ret[path_str] = Mismatch(
+                ref, oth, 'Type mismatch', f'The path {path_str} is a string in the reference file but a dict in the lang file.')
             return True
 
         if isinstance(ref, dict) and oth:
@@ -105,7 +106,7 @@ def find_mismatched_types(reference, other):
 
             if len(ref) < len(oth):
                 ret[path_str] = Mismatch(ref, oth, 'Array length mismatch', (f'The path {path_str} is a list with more '
-                                                                                f'elements than in the reference file.'))
+                                                                             f'elements than in the reference file.'))
                 return True
 
             for i in range(min(len(ref), len(oth))):
