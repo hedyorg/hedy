@@ -77,19 +77,21 @@ def find_mismatched_types(reference, other):
         path_str = ''.join(p)
 
         if isinstance(ref, str) and isinstance(oth, dict):
-            ret[path_str] = Mismatch(ref, oth, 'Type mismatch', f'The path {path_str} is a string in the reference file but a dict in the lang file.')
+            ret[path_str] = Mismatch(ref, oth, 'Type mismatch', (f'The path {path_str} is a string in the reference '
+                                                                'file but a dict in the lang file.'))
             return True
 
         if isinstance(ref, dict) and oth:
             if not isinstance(oth, dict):
-                ret[path_str] = Mismatch(ref, oth, 'Type mismatch', (f'The path {path_str} is of type dict in the reference file '
-                                                                     f'but not in the lang file.'))
+                ret[path_str] = Mismatch(ref, oth, 'Type mismatch', (f'The path {path_str} is of type dict in the '
+                                                                     'reference file but not in the lang file.'))
                 return True
 
             exk = set(oth.keys()) - set(ref.keys())
             if exk:
-                ret[path_str] = Mismatch(ref, oth, 'Extra keys in dict', (f'The path {path_str} is a dict that contains more '
-                                                                          f'keys than the reference file: {exk}'))
+                ret[path_str] = Mismatch(ref, oth, 'Extra keys in dict', (f'The path {path_str} is a dict that '
+                                                                         'contains more keys than the reference '
+                                                                         f'file: {exk}'))
                 return True
 
             any_mismatch = False
@@ -99,8 +101,8 @@ def find_mismatched_types(reference, other):
 
         if isinstance(ref, list) and oth:
             if not isinstance(oth, list):
-                ret[path_str] = Mismatch(ref, oth, 'Type mismatch', (f'The path {path_str} is of type list in the reference file '
-                                                                     f'but not in the lang file.'))
+                ret[path_str] = Mismatch(ref, oth, 'Type mismatch', (f'The path {path_str} is of type list in '
+                                                                      'the reference file but not in the lang file.'))
                 return True
 
             if len(ref) < len(oth):
