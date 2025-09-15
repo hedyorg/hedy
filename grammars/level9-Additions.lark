@@ -3,7 +3,7 @@ command: += error_repeat_dep_8 | if_pressed_without_else | if_pressed if_pressed
 
 _commands: (_SPACE command) (_EOL (_SPACE command))*
 
-if_clause: _IF (condition) _EOL _commands _EOL? _END_BLOCK
+if_clause: _SPACE* _IF (condition) _EOL _commands _EOL? _END_BLOCK
 else_clause: _SPACE* _ELSE _EOL _commands _EOL? _END_BLOCK
 elif_clause: _SPACE* _ELIF (condition) _EOL _commands _EOL? _END_BLOCK
 
@@ -13,7 +13,7 @@ if_pressed_else: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE comman
 if_pressed_without_else: if_pressed
 if_pressed_elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
-ifelse: if_clause _EOL else_clause
+ifelse: if_clause (_EOL elif_clause)* _EOL else_clause
 ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs'
 ifelifelse: _if_clause _EOL elif_clause _EOL else_clause
 

@@ -33,5 +33,6 @@ not_equal: comparison_arg _NOT_EQUALS comparison_arg _SPACE?
 // in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _IN var_access
 // not_in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _NOT_IN var_access
 
-command:+=ifelifelse
+command: -= ifelse | ifs
+command: += ifelifelse | ifelse | ifs
 
