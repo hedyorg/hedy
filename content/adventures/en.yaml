@@ -3284,29 +3284,12 @@ adventures:
 
                     Fill in the correct code on the blanks to see if it is a draw.
             10:
-                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### Exercise\nCan you finish the code? The program must tell who has won for every combination.\n\n**Extra** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
-                example_code: |
-                    ```
-                    choices = rock, paper, scissors
-                    your_choice {is} {ask} 'What do you choose?'
-                    {print} 'You choose ' your_choice
-                    computer_choice {is} choices {at} {random}
-                    {print} 'The computer chooses ' computer_choice
-                    {if} computer_choice {is} your_choice
-                        {print} 'Tie'
-                    {if} computer_choice {is} rock
-                        {if} your_choice {is} paper
-                            {print} 'You win!'
-                        {if} your_choice {is} scissors
-                            {print} 'You lose!'
-                    # finish this code
-                    ```
-                story_text_2: |
+                story_text: |
                     With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code.
 
                     ### Exercise
                     Finish the code such that a winner is always decided on. Run your code a few times to verify there is always a winner printed.
-                    example_code: |
+                example_code: |
                     ```
                     options = 'rock', 'paper', 'scissors'
                     your_choice = {ask} 'What do you choose?'
@@ -3315,9 +3298,9 @@ adventures:
                     {print} 'The computer chooses ' computer_choice
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'
-                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
+                    {elif} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
                         {print} 'You win!'
-                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
+                    {elif} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
                         {print} 'The computer wins!'
                     _
                     ```

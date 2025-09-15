@@ -2732,15 +2732,11 @@ else:{self.add_debug_breakpoint()}
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(body)}"""
 
-
     def else_clause(self, meta, args):
-        return('\n'.join(args))
+        return ('\n'.join(args))
 
     def elif_clause(self, meta, args):
-        return('\n'.join(args))
-
-
-
+        return ('\n'.join(args))
 
 
 @v_args(meta=True)
