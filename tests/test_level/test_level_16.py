@@ -1028,7 +1028,7 @@ class TestsLevel16(HedyTester):
             translate=False
         )
 
-#-----old level 17-----
+# -----old level 17-----
 
         def test_if_with_indent(self):
             code = textwrap.dedent("""\
@@ -2572,10 +2572,7 @@ class TestsLevel16(HedyTester):
             self.single_level_tester(code, expected=excepted_code)
             self.source_map_tester(code=code, expected_source_map=expected_source_map)
 
-
-
-    #-----old level 18-----
-
+    # -----old level 18-----
 
     @parameterized.expand([['(', ')'], ['（', '）']])
     def test_print_brackets(self, bracket_open, bracket_close):
