@@ -33,7 +33,7 @@ def _get_friendly_sorted_countries():
 
 FRIENDLY_SORTED_COUNTRIES = _get_friendly_sorted_countries()
 
-MAX_LEVEL = 18
+MAX_LEVEL = 16
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
