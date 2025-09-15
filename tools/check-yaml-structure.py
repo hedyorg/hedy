@@ -91,8 +91,8 @@ def find_mismatched_types(reference, other):
             exk = set(oth.keys()) - set(ref.keys())
             if exk:
                 ret[path_str] = Mismatch(ref, oth, 'Extra keys in dict', (f'The path {path_str} is a dict that '
-                                                                         'contains more keys than the reference '
-                                                                         f'file: {exk}'))
+                                                                          'contains more keys than the reference '
+                                                                          f'file: {exk}'))
                 return True
 
             any_mismatch = False
@@ -103,7 +103,7 @@ def find_mismatched_types(reference, other):
         if isinstance(ref, list) and oth:
             if not isinstance(oth, list):
                 ret[path_str] = Mismatch(ref, oth, 'Type mismatch', (f'The path {path_str} is of type list in '
-                                                                      'the reference file but not in the lang file.'))
+                                                                     'the reference file but not in the lang file.'))
                 return True
 
             if len(ref) < len(oth):
