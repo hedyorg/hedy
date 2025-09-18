@@ -1409,6 +1409,7 @@ export function saveForTeacherTable(table: string) {
   arrow.classList.toggle('rotate-180');
 }
 
+
 export function getForTeacherTable(table: string) {
   let show_table = window.localStorage.getItem(table);
   const table_ele = document.getElementById(table)!
