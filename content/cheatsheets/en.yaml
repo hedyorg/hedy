@@ -262,118 +262,138 @@
         {if} chosen_color {in} primary_colors {print} 'That is a primary color!'
         {elif} chosen_color {in} secondary_colors {print} 'That is a secondary color!'
         {else} {print} 'Interesting choice!'
-20:
--   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
--   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        {else}
-            {print} 'Oops!'
-            {print} 'The answer is 10'
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
 9:
 -   name: '{if} with multiple lines'
-    explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
+    explanation: After `{if}` and `{else}` you can now use multiple lines of code. Be sure to start those lines with indentation (4 spaces).
     demo_code: |-
         answer = {ask} 'What is 10 plus 10?'
         {if} answer {is} 20
             {print} 'Well done!!'
             {print} 'The answer is indeed' answer
+        {elif} answer {is} 19
+            {print} 'Very close...'
         {else}
             {print} 'Wrong'
             {print} 'The answer is 20'
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
+-   name: '{repeat} with multiple lines'
+    explanation: You can also repeat multiple lines now, but do remember to use indentation.
     demo_code: |-
         {repeat} 4 {times}
             {turn} 90
             {forward} 50
+-   name: 'Keywords you have learned before this level'
+    explanation: '`{repeat}`,`{if}`, `{elif}`, `{else}`, `{in}`, `{not} {in}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{sleep}`, `{pressed}`, `{forward}`, `{turn}`, `{play}`. '
+    demo_code: |-
+        primary_colors = red, yellow, blue
+        secondary_colors = orange, green, purple
+        chosen_color = {ask} 'What color is your favorite?'
+        {if} chosen_color {in} primary_colors
+            {print} 'That is a primary color!'
+        {elif} chosen_color {in} secondary_colors
+            {print} 'That is a secondary color!'
+        {else}
+            {print} 'Interesting choice!'
 10:
--   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
+-   name: 'nesting if-statements'
+    explanation: 'Putting an `{if}` inside another `{if}`, is called nesting. Mind the indentation!'
+    demo_code: |-
+        continue = {ask} 'Do you want to continue?'
+        {if} continue = yes
+            sure = ask 'Are you sure?'
+            {if} sure {is} yes
+                {print} 'We will continue'
+            {else}
+                {print} 'You are not sure'
+        {else}
+            {print} 'You do not want to continue'
+-   name: 'nesting repeat'
+    explanation: 'You can also nest repeats, or combine if and repeats. Mind the indentation!'
+    demo_code: |-
+        {repeat} 3 {times}
+            order = {ask} 'What would you like to order?'
+            {if} order {is} pizza
+                {print} 'Yammie'
+            {else}
+                {print} 'pizza is better!'
+-   name: '{and}'
+    explanation: 'Use `{and}` to check if two statements are true.'
+    demo_code: |-
+        {print} 'On this rollercoaster you have to be taller than 120cm and lighter than 200kg.'
+        height = {ask} 'Are you taller than 120cm?'
+        weight = {ask} 'Are you lighter than 200kg?'
+        {if} height {is} yes {and} weight {is} yes
+            {print} 'Have fun on the rollercoaster!'
+        {else}
+            {print} 'Sorry, this rollercoaster is not safe for you.'
+-   name: '{or}'
+    explanation: 'Use `{or}` to check if at least one of the statements is true.'
+    demo_code: |-
+        {print} 'To enter this haunted house you need to be older than 14 years old, or have a supervising adult with you.'
+        age = {ask} 'Are you 14 years old or older?'
+        adult = {ask} 'Is there a supervising adult with you?'
+        {if} age {is} yes {or} adult {is} yes
+            {print} 'Have hun in this haunted house!'
+        {else}
+            {print} 'Sorry, this haunted house is not suited for you.'
+-   name: 'Keywords you have learned before this level'
+    explanation: '`{repeat}`,`{if}`, `{elif}`, `{else}`, `{in}`, `{not} {in}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{sleep}`, `{pressed}`, `{forward}`, `{turn}`, `{play}`. '
+    demo_code: |-
+        primary_colors = red, yellow, blue
+        secondary_colors = orange, green, purple
+        chosen_color = {ask} 'What color is your favorite?'
+        {if} chosen_color {in} primary_colors
+            {print} 'That is a primary color!'
+        {elif} chosen_color {in} secondary_colors
+            {print} 'That is a secondary color!'
+        {else}
+            {repeat} 2 {times}
+                {print} 'Interesting choice!'
+11:
 -   name: '{for} with a list'
     explanation: Print all things in a list.
     demo_code: |-
         animals {is} dog, cat, blobfish
         {for} animal {in} animals
           {print} 'I love ' animal
-11:
--   name: '{for} loop'
-    explanation: We can use `{for}` with a `{range}`.
+-   name: 'Keywords you have learned before this level'
+    explanation: '`{repeat}`,`{if}`, `{elif}`, `{else}`, `{in}`, `{not} {in}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{sleep}`, `{pressed}`, `{forward}`, `{turn}`, `{play}`. '
     demo_code: |-
-        {for} counter {in} {range} 1 {to} 5
-            {print} counter
--   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
+        primary_colors = red, yellow, blue
+        secondary_colors = orange, green, purple
+        chosen_color = {ask} 'What color is your favorite?'
+        {if} chosen_color {in} primary_colors {and} chosen_color {is} red
+            {print} 'Red is my favorite!'
+        {elif} chosen_color {in} primary_colors
+            {print} 'That is a primary color!'
+        {elif} chosen_color {in} secondary_colors
+            {print} 'That is a secondary color!'
         {else}
-            {print} 'Oops!'
-            {print} 'The answer is 10'
+            {repeat} 2 {times}
+                {print} 'Interesting choice!'
 12:
--   name: float directly
-    explanation: Decimal numbers.
+-   name: functions
+    explanation: "Marleen gaat dit afmaken"
     demo_code: |-
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
-        {print} 2.5 + 2.5
--   name: assign text
-    explanation: Text with quotation marks after `=`
-    demo_code: |-
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: quotes after `{if}` comparison
-    explanation: Text with quotation marks after `{if}`.
-    demo_code: |-
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
--   name: quotes in list
-    explanation: A list with quotation marks.
-    demo_code: |-
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
+        {define} Marleen gaat dit afmaken.
 13:
--   name: '{and}'
-    explanation: Two parts both need to be correct.
+-   name: '{print}'
+    explanation: After `{print}` you need to use parentheses.
+    demo_code: '{print}(''hi!'')'
+-   name: '{range}'
+    explanation: After `{range}` you need to use parentheses.
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
-        {else}
-            {print} 'At least one answer is wrong!'
--   name: '{or}'
-    explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
+        {for} i {in} {range} (1,10):
+            {print}('Hello, times ', i)
+-   name: '{print} with var'
+    explanation: With `{print}` you need to use parentheses and commas if you print more items.
     demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {or} answer2 {is} 4
-            {print} 'At least one answer is correct!'
-        {else}
-            {print} 'Both answers are wrong!'
+        name = 'Hedy'
+        {print}('my name is ', name)
+-   name: ask something with {input}
+    explanation: Use `{input}` instead of `{ask}` to ask something.
+    demo_code: |-
+        name = {input}('What is your name?')
+        {print}('So your name is ', name)
 14:
 -   name: Smaller
     explanation: We use the `<` to check if the first number is smaller than the second number.
@@ -428,6 +448,11 @@
             count = count + 1
         {print} 'We are done'
 16:
+-   name: quotes in list
+    explanation: A list with quotation marks.
+    demo_code: |-
+        superheroes = 'Iron Man', 'Batman', 'Superman'
+        {print} superheroes {at} {random}
 -   name: square brackets
     explanation: Lists with square brackets.
     demo_code: |-
@@ -445,47 +470,4 @@
         fruit = ['banana', 'apple', 'cherry']
         random_fruit = fruit[{random}]
         {print} random_fruit
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a is 1'
-        {elif} a == 2:
-            {print} 'a is 2'
-        {else}:
-            {print} 'a is not 1 or 2'
--   name: '{print}'
-    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Ready or not, here I come!'
--   name: '{if}'
-    explanation: We need to do the same with all of our `{if}` statements.
-    demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color == 'green':
-            {print} 'Your favorite color is green'
-        {else}:
-            {print} 'Your favorite color is not green'
-18:
--   name: '{print}'
-    explanation: After `{print}` you need to use parentheses.
-    demo_code: '{print}(''hi!'')'
--   name: '{range}'
-    explanation: After `{range}` you need to use parentheses.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hello, times ', i)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you print more items.
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something.
-    demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)
+
