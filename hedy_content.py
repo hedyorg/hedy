@@ -5,6 +5,7 @@ import iso3166
 from unidecode import unidecode
 
 import static_babel_content
+import utils
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
 from safe_format import safe_format
@@ -58,20 +59,22 @@ CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
-# This changes the color of the adventure tab to pink
+# This creates the lightbulb icons next to the adventure
 KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_command', 'random_command',
                        'add_remove_command', 'quotation_marks', 'if_command', 'in_command', 'maths', 'repeat_command',
-                       'repeat_command_2', 'for_command', 'and_or_command', 'while_command', 'elif_command',
+                       'repeat_command_2', 'for_command', 'while_command', 'elif_command',
                        'clear_command', 'pressit', 'debugging', 'functions'}
 
 
 def adventures_order_per_level():
-    return ADVENTURE_ORDER_PER_LEVEL
+    if utils.is_redesign_enabled():
+        return ADVENTURE_ORDER_PER_LEVEL
+    else:
+        return ADVENTURE_ORDER_PER_LEVEL_OLD
 
 
-ADVENTURE_ORDER_PER_LEVEL = {
+ADVENTURE_ORDER_PER_LEVEL_OLD = {
     1: [
-        'default',
         'print_command',
         'ask_command',
         'parrot',
@@ -84,9 +87,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'fortune',
         'debugging',
+        'hospital'
     ],
     2: [
-        'default',
         'is_command',
         'rock',
         'ask_command',
@@ -100,9 +103,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
     3: [
-        'default',
         'random_command',
         'dice',
         'rock',
@@ -117,9 +120,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
     4: [
-        'default',
         'quotation_marks',
         'rock',
         'dice',
@@ -134,9 +137,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'restaurant',
         'debugging',
+        'hospital'
     ],
     5: [
-        'default',
         'if_command',
         'music',
         'language',
@@ -146,31 +149,41 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'parrot',
         'haunted',
+        'turtle',
+        'turtle_draw_it',
+        'debugging',
+        'hospital'
+    ],
+    6: [
+        'elif_command',
+        'story',
+        'music',
         'in_command',
         'restaurant',
         'fortune',
         'pressit',
-        'turtle',
-        'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
-    6: [
-        'default',
+    7: [
         'maths',
         'is_command',
         'music',
         'songs',
         'dice',
         'dishes',
+        'piggybank',
+        'quizmaster',
+        'years',
         'turtle',
         'turtle_draw_it',
         'calculator',
         'fortune',
         'restaurant',
         'debugging',
+        'hospital'
     ],
-    7: [
-        'default',
+    8: [
         'repeat_command',
         'story',
         'songs',
@@ -183,9 +196,10 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'pressit',
         'turtle_draw_it',
         'debugging',
+        'hospital',
+        'congratulations'
     ],
-    8: [
-        'default',
+    9: [
         'repeat_command',
         'fortune',
         'repeat_command_2',
@@ -193,29 +207,31 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'music',
         'if_command',
         'story',
-        'haunted',
         'restaurant',
         'turtle',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
-    9: [
-        'default',
+    10: [
         'repeat_command',
         'if_command',
+        'and_or_command',
         'rock',
         'story',
         'calculator',
+        'calculator_2',
         'music',
+        'secret',
         'restaurant',
         'haunted',
         'pressit',
         'turtle',
         'turtle_draw_it',
         'debugging',
+        'hospital'
     ],
-    10: [
-        'default',
+    11: [
         'for_command',
         'dishes',
         'dice',
@@ -224,125 +240,75 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle_draw_it',
         'harry_potter',
         'songs',
+        'songs_2',
         'story',
         'rock',
         'calculator',
         'restaurant',
         'debugging',
-    ],
-    11: [
-        'default',
-        'for_command',
-        'years',
-        'calculator',
-        'songs',
-        'restaurant',
-        'haunted',
-        'turtle_draw_it',
-        'debugging',
+        'hospital'
     ],
     12: [
-        'default',
-        'maths',
-        'quotation_marks',
         'functions',
-        'fortune',
         'music',
-        'songs',
         'songs_2',
-        'restaurant',
-        'calculator',
         'turtle',
-        'piggybank',
-        'secret',
         'turtle_draw_it',
         'debugging',
+        'hospital',
+        'congratulations'
     ],
     13: [
-        'default',
-        'and_or_command',
-        'secret',
-        'functions',
-        'music',
-        'songs',
+        'print_command',
+        'is_command',
+        'ask_command',
+        'for_command',
         'story',
-        'rock',
+        'songs',
         'turtle_draw_it',
-        'restaurant',
-        'hotel',
-        'calculator',
         'debugging',
+        'hospital'
     ],
     14: [
-        'default',
-        'is_command',
-        'guess_my_number',
-        'music',
-        'haunted',
-        'functions',
-        'turtle_draw_it',
-        'hotel',
-        'calculator',
-        'calculator_2',
-        'piggybank',
-        'quizmaster',
-        'debugging',
-    ],
-    15: [
-        'default',
-        'while_command',
-        'music',
-        'turtle_draw_it',
-        'restaurant',
-        'story',
-        'dice',
-        'rock',
-        'calculator',
-        'debugging',
-    ],
-    16: [
-        'default',
         'random_command',
         'haunted',
         'songs',
-        'songs_2',
         'music',
         'language',
-        'tic',
-        'tic_2',
-        'tic_3',
-        'simon',
-        'simon_2',
-        'simon_3',
         'debugging',
+        'hospital'
     ],
-    17: [
-        'default',
-        'for_command',
-        'elif_command',
-        'music',
-        'tic',
-        'hangman',
-        'hangman_2',
-        'hangman_3',
-        'blackjack',
-        'blackjack_2',
-        'blackjack_3',
-        'blackjack_4',
-        'debugging',
-    ],
-    18: [
-        'default',
-        'print_command',
-        'ask_command',
+    15: [
         'functions',
-        'for_command',
-        'story',
         'songs',
+        'piggybank',
         'music',
-        'debugging'
-    ]
+        'hotel',
+        'calculator',
+        'calculator_2',
+        'turtle_draw_it',
+        'debugging',
+        'hospital'
+    ],
+    16: [
+        'while_command',
+        'story',
+        'dice',
+        'rock',
+        'music',
+        'turtle_draw_it',
+        'calculator',
+        'restaurant',
+        'guess_my_number',
+        'debugging',
+        'hospital',
+        'congratulations'
+    ],
 }
+
+
+ADVENTURE_ORDER_PER_LEVEL = {level: [a for a in adventures if a not in ['parsons', 'quiz']]
+                             for level, adventures in ADVENTURE_ORDER_PER_LEVEL_OLD.items()}
 
 HOUR_OF_CODE_ADVENTURES = {
     1: [
