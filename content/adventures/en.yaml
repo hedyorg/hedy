@@ -2267,6 +2267,24 @@ adventures:
                     {if} answer {is} Harare {play} C6
                     _
                     ```
+            6:
+                story_text: |
+                    With `{elif}` you can play different tunes for different situations. For example if a person is feeling happy, you can play them a happy tune.
+                    ### Exercise
+                    First create a sad tune, then create at least 2 other tunes for different moods.
+                example_code: |
+                    ```
+                    mood = {ask} 'How are you feeling today?'
+                    {if} mood {is} happy
+                        {play} C4
+                        {play} E4
+                        {play} G4
+                        {play} C5
+                    {elif} mood {is} sad
+                        {play} _
+                    {elif} mood {is} _
+                        {play} _
+                    ```
             7:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\nThis calls for musical maths! Try out the example code a couple of times with different starting numbers.\nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
