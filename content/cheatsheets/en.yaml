@@ -13,6 +13,10 @@
 -   name: '{print} emojis'
     explanation: Print an emoji with `{print}`.
     demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{play}'
+    explanation: Play a musical note with `{play}`. Type play followed by the note you want to play. The scale goes C-D-E-F-G-A-B. As you can see there are 7 different letters, but we can play more than just 7 notes. Type a number between 0 and 9 behind the letter to choose the scale, for example after B4 comes C5. C0 is the lowest note you can play, B9 is the highest.
+    demo_code: |-
+        {play} C5
 -   name: '{forward}'
     explanation: Draw a line with `{forward}`.
     demo_code: '{forward} 100'
@@ -25,12 +29,12 @@
         {turn} {right}
 2:
 -   name: '{is}'
-    explanation: Give a word a name to use in the program using `{is}`. You can choose the name yourself.
+    explanation: Use a variable with `{is}`.
     demo_code: |-
         name {is} Hedy
         {print} welcome name
 -   name: '{ask}'
-    explanation: Ask something with `{ask}`. Beware! You need to give the answer a name with `{is}`.
+    explanation: Ask something with `{ask}`. Beware! You need to use a variable with `{is}`.
     demo_code: |-
         color {is} {ask} What is your favorite color?
         {print} color is your favorite!
@@ -42,18 +46,38 @@
         {print} Hmm.. I need 3 more seconds...
         {sleep} 3
         {print} Eureka! Ive got it!
--   name: '{is} with turtle'
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
+-   name: '{turn} 90'
+    explanation: Instead of just `{right}` and `{left}`, you can now make turn of all degrees possible.
+    demo_code: |-
+        {forward} 100
+        {turn} 90
+        {forward} 100
+        {turn} -90
+-   name: 'variables with turtle'
+    explanation: Use a variable with in the turtle with `{is}`.
     demo_code: |-
         angle {is} 90
         {turn} angle
         {forward} 100
+-   name: 'These keywords have stayed the same'
+    explanation: '`{print}`, `{forward}`'
+    demo_code: |-
+        {print} hello world 🌍
 3:
+-   name: Make a list with `{is}`
+    explanation: Make a list with is.
+    demo_code: |-
+        colors {is}
 -   name: Choose random
-    explanation: Choose a random word from a group with `{at}` and `{random}`.
+    explanation: Choose a random word from a group with `{at} {random}`.
     demo_code: |-
         animals {is} dog, cat, kangaroo
         {print} animals {at} {random}
+-   name: '{at} {random} in a sentence'
+    explanation: 'You can use `{at} {random}` in a sentence as well.'
+    demo_code: |-
+        food {is} sandwich, slice of pizza, salad, burrito
+        {print} I am going to have a food {at} {random} for lunch.
 -   name: '{add}'
     explanation: '`{add}` an item `{to_list}` a list.'
     demo_code: |-
@@ -64,12 +88,33 @@
     demo_code: |-
         animals {is} cat, dog, cow
         {remove} dog {from} animals
+-   name: '{clear}'
+    explanation: 'Clear the screen with `{clear}`. Make sure to use `{sleep}`, or the computer will clear the screen before you can read the text before the {clear}.'
+    demo_code: |-
+        {print} 'hello'
+        {sleep} 2
+        {clear}
+-   name: '`{color} red`'
+    explanation: 'Use {color} make the turtle draw in a different color. The colors you can choose are red, orange, yellow, green, blue, purple, pink, brown, gray, black and white.'
+    demo_code: |-
+        {color} red
+        {forward} 100
+        {color} green
+        {forward} 100
+-   name: 'Keywords you have learned before this level'
+    explanation: '`{print}`, `{ask}`, `{is}`, `{sleep}`, `{forward}`, `{turn}`, `{play}`. '
+    demo_code: |-
+        {print} hello world 🌍
+        {sleep} 2
+        name {is} {ask} 'what is your name?'
+        {print} hello name
+
 4:
 -   name: '{print}'
-    explanation: Print exactly using quotation marks.
+    explanation: Print using quotation marks.
     demo_code: '{print} ''Hello welcome to Hedy.'''
 -   name: '{is}'
-    explanation: Give a name to some text and `{print}` without quotation marks.
+    explanation: Use a variable. Leave the variable outside of the quotation marks.
     demo_code: |-
         name {is} Hedy
         {print} 'my name is ' name
@@ -77,68 +122,147 @@
     explanation: Ask something with `{ask}`.
     demo_code: |-
         color {is} {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
+        {print} 'I like ' color 'too!'
+-   name: '{print} with double quotation marks'
+    explanation: Sometimes you need to use an apostrophe in the text that you want to print. In that case you can use double quotation marks.
+    demo_code: |-
+        {print} "Hi! I'm Hedy!"
+        mood {is} {ask} "What's up?"
+-   name: 'Keywords you have learned before this level'
+    explanation: '`{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{sleep}`, `{forward}`, `{turn}`, `{play}`. '
+    demo_code: |-
+        animals {is} duck, dog, rhino
+        chosen_to_add {is} {ask} 'What animal would you like to add to the list?'
+        {add} chosen_to_add {to} animals
+        chosen_to_remove {is} {ask} 'What animal would you like to remove from the list?'
+        {remove} chosen_to_remove {from} animals
+        {sleep} 2
+        {print} 'I pick...' animals {at} {random}
 5:
--   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''Hello welcome to Hedy.'''
--   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
 -   name: '{if}'
-    explanation: Make a choice with `{if}`.
+    explanation: 'Make a choice with `{if}`.'
     demo_code: |-
         color {is} {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
+        {if} color {is} green {print} 'pretty!'
+-   name: '{else}'
+    explanation: Use `{else}` with `{if}`.
+    demo_code: |-
+        color {is} {ask} 'What is your favorite color?'
+        {if} color {is} green {print} 'pretty!'
+        {else} {print} 'meh'
 -   name: '{if} with turtle'
     explanation: Make a choice with `{if}`.
     demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
+        answer {is} {ask} 'Should I walk far or not?'
+        {if} answer {is} yes {forward} 100
+        {else} {forward} 5
+-   name: 'Keywords you have learned before this level'
+    explanation: '`{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{sleep}`, `{forward}`, `{turn}`, `{play}`. '
+    demo_code: |-
+        animals {is} duck, dog, rhino
+        chosen_to_add {is} {ask} 'What animal would you like to add to the list?'
+        {add} chosen_to_add {to} animals
+        chosen_to_remove {is} {ask} 'What animal would you like to remove from the list?'
+        {remove} chosen_to_remove {from} animals
+        {sleep} 2
+        {print} 'I pick...' animals {at} {random}
+6:
+-   name: '{elif}'
+    explanation: 'Add a thrid option to `{if}` and `{else}` with `{elif}`.'
+    demo_code: |-
+        your_choice {is} {ask} 'Choose rock, paper, or scissors!'
+        {print} 'The computer has chosen paper'
+        {if} your_choice {is} rock {print} 'You lose!'
+        {elif} your_choice {is} paper {print} "It's a draw!"
+        {else} {print} 'You chose scissors. You win!'
 -   name: '{in}'
-    explanation: Check elements with `{in}`.
+    explanation: Check if elements are in a list.
     demo_code: |-
         pretty_colors {is} green, yellow
         color {is} {ask} 'What is your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
+        {if} color {in} pretty_colors {print} 'pretty!'
+        {else} {print} 'meh'
+-   name: '{not} {in}'
+    explanation: Check if elements are not in a list.
+    demo_code: |-
+        pretty_colors {is} green, yellow
+        color {is} {ask} 'What is your favorite color?'
+        {if} color {not} {in} pretty_colors {add} color {to} pretty_colors
+        {else} {print} 'It was already on the list!'
 -   name: '{pressed}'
     explanation: Check whether a given key on the keyboard is `{pressed}`.
     demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
-6:
--   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
--   name: '{ask}'
-    explanation: Ask for a calculation and check whether it is correct.
+-   name: 'Keywords you have learned before this level'
+    explanation: '`{if}`, `{else}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{sleep}`, `{forward}`, `{turn}`, `{play}`. '
     demo_code: |-
-        answer = {ask} 'What is 10 plus 10?'
-        {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
--   name: '`{ask}` and `{if}` with turtle'
-    explanation: Ask the user how many angles they want.
-    demo_code: |-
-        angles = {ask} 'How many angles?'
-        angle = 360 / angles
-        {forward} 50
+        animals {is} duck, dog, rhino
+        chosen_to_add {is} {ask} 'What animal would you like to add to the list?'
+        {add} chosen_to_add {to} animals
+        chosen_to_remove {is} {ask} 'What animal would you like to remove from the list?'
+        {remove} chosen_to_remove {from} animals
+        {sleep} 2
+        {print} 'I pick...' animals {at} {random}
+        happy {is} {ask} 'Are you happy with this choice?'
+        {if} happy {is} yes {print} 'Great!'
+        {else} {print} "I'll choose again! I pick..." animals {at} {random}
 7:
--   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''Hello welcome to Hedy.'''
--   name: '{ask}'
-    explanation: Ask something with `{ask}`.
+-   name: 'Maths'
+    explanation: 'You can use these mathematical symbols to calculate in Hedy'
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
--   name: '{if}'
-    explanation: Make a choice with `{if}`.
+        {print} '5 plus 5 is ' 5 + 5
+        {print} '5 minus 5 is ' 5 - 5
+        {print} '5 times 5 is ' 5 * 5
+        {print} '5 divided by 5 is ' 5 / 5
+-   name: '='
+    explanation: 'Instead of {is} you can use the = symbol, when setting a variable or making a list. Note: We do not use the =-symbol in if-statements.'
     demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: '{repeat} with turtle'
-    explanation: Repeat a line of code with `{repeat}`.
-    demo_code: '{repeat} 3 {times} {forward} 10'
+        {anwer} = {ask} 'What is 5 times 5?'
+        correct_answer = 5*5
+        {if} answer {is} correct_answer {print} 'Great job!'
+        {else} {print} 'Try again!'
+-   name: 'Maths with variables'
+    explanation: 'Variables can also be used in calculations'
+    demo_code: |-
+        people {is} {ask} 'How many tickets would you like?'
+        price = people * 3
+        {print} 'That will be $' price ', please.'
+-   name: 'Decimal numbers'
+    explanation: 'Use a point in your decimal numbers'
+    demo_code: |-
+        {print} 2.5 + 2.5
+-   name: '{play} with numbers'
+    explanation: 'Instead of musical notes, you can also play tunes using numbers. Choose a number between 1 and 70.'
+    demo_code: |-
+        {play} 45
+-   name: 'Keywords you have learned before this level'
+    explanation: '`{if}`, `{elif}`, `{else}`, `{in}`, `{not} {in}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{sleep}`, `{pressed}`, `{forward}`, `{turn}`, `{play}`. '
+    demo_code: |-
+        primary_colors = red, yellow, blue
+        secondary_colors = orange, green, purple
+        chosen_color = {ask} 'What color is your favorite?'
+        {if} chosen_color {in} primary_colors {print} 'That is a primary color!'
+        {elif} chosen_color {in} secondary_colors {print} 'That is a secondary color!'
+        {else} {print} 'Interesting choice!'
 8:
+-   name: '{repeat} 3 {times}'
+    explanation: 'Repeat a line of code multiple times'
+    demo_code: |-
+        {repeat} 5 {times} {print} 'Hello!'
+-   name: '{repeat} with a variable'
+    explanation: 'You can use a variable with a {repeat}.'
+    demo_code: |-
+        people {is} {ask} 'How many people are here today?'
+        {repeat} people {times} 'Goodmorning!'
+-   name: 'Keywords you have learned before this level'
+    explanation: '`{if}`, `{elif}`, `{else}`, `{in}`, `{not} {in}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{sleep}`, `{pressed}`, `{forward}`, `{turn}`, `{play}`. '
+    demo_code: |-
+        primary_colors = red, yellow, blue
+        secondary_colors = orange, green, purple
+        chosen_color = {ask} 'What color is your favorite?'
+        {if} chosen_color {in} primary_colors {print} 'That is a primary color!'
+        {elif} chosen_color {in} secondary_colors {print} 'That is a secondary color!'
+        {else} {print} 'Interesting choice!'
+20:
 -   name: '{print}'
     explanation: Print something. Remember to use a quotation mark for literal printing.
     demo_code: '{print} ''5 times 5 is '' 5 * 5'
