@@ -1790,6 +1790,16 @@ class ForTeachersModule(WebsiteModule):
         if duplicates_in_db:
             err = safe_format(gettext('usernames_unavailable'), usernames=', '.join(duplicates_in_db))
             return make_response({"error": err}, 400)
+        
+        # If a username is a valid email address, also set the users email
+        accounts_with_emails = [(usr, pwd, (usr if utils.valid_email(usr) else None)) for usr, pwd in accounts]
+
+        # Validate that the emails do not exist in the db
+        duplicates_in_db = [usr for usr, _, email in accounts_with_emails if email and self.db.user_by_email(email)]
+        if duplicates_in_db:
+            # Maybe change 'usernames_unavailable' to 'emails_unavailable', but this would create more translation work
+            err = safe_format(gettext('usernames_unavailable'), usernames=', '.join(duplicates_in_db))
+            return make_response({"error": err}, 400)
 
         # Validate the class
         classes = self.db.get_teacher_classes(user["username"], True)
@@ -1801,9 +1811,9 @@ class ForTeachersModule(WebsiteModule):
         teacher = class_.get("teacher")
 
         # Now, actually store the users in the db
-        for usr, pwd in accounts:
+        for usr, pwd, email in accounts_with_emails:
             # Set the current teacher language and keyword language as new account language
-            user = {'username': usr, 'password': pwd, 'language': g.lang, 'keyword_language': g.keyword_lang}
+            user = {'username': usr, 'password': pwd, 'email': email, 'language': g.lang, 'keyword_language': g.keyword_lang}
             store_new_student_account(self.db, user, teacher)
             self.db.add_student_to_class(body["class"], usr)
         response = {"accounts": [{"username": usr, "password": pwd} for usr, pwd in accounts]}
