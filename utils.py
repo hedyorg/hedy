@@ -279,13 +279,16 @@ def stoisostring(date):
     return datetime.datetime.fromtimestamp(date)
 
 
-def localized_date_format(date, short_format=False):
+def localized_date_format(date, short_format=False, only_date=False):
     # Improve the date by using the Flask Babel library and return timestamp as expected by language
     if short_format:
         timestamp = datetime.datetime.fromtimestamp(int(str(date)))
     else:
         timestamp = datetime.datetime.fromtimestamp(int(str(date)[:-3]))
-    return format_date(timestamp, format='medium') + " " + format_datetime(timestamp, "H:mm")
+    if only_date:
+        return format_date(timestamp, format='medium')
+    else:
+        return format_date(timestamp, format='medium') + " " + format_datetime(timestamp, "H:mm")
 
 
 def datetotimeordate(date):
