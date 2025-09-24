@@ -1804,7 +1804,7 @@ class ForTeachersModule(WebsiteModule):
         for usr, pwd in accounts:
             # Set the current teacher language and keyword language as new account language
             user = {'username': usr, 'password': pwd, 'language': g.lang, 'keyword_language': g.keyword_lang}
-            print("CREATED_USER: ", store_new_student_account(self.db, user, teacher))
+            store_new_student_account(self.db, user, teacher)
             self.db.add_student_to_class(body["class"], usr)
         response = {"accounts": [{"username": usr, "password": pwd} for usr, pwd in accounts]}
         return make_response(response, 200)
