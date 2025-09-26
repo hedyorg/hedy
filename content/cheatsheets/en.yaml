@@ -352,7 +352,7 @@
 -   name: '{for} with a list'
     explanation: Print all things in a list.
     demo_code: |-
-        animals {is} dog, cat, blobfish
+        animals = dog, cat, blobfish
         {for} animal {in} animals
           {print} 'I love ' animal
 -   name: 'Keywords you have learned before this level'
@@ -371,10 +371,36 @@
             {repeat} 2 {times}
                 {print} 'Interesting choice!'
 12:
--   name: functions
-    explanation: "Marleen gaat dit afmaken"
+-   name: Creating a function
+    explanation: "A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the define line."
     demo_code: |-
-        {define} Marleen gaat dit afmaken.
+        {define} draw_a_square
+            {repeat} 4 {times}
+                {forward} 50
+                {turn} 90
+-   name:  Calling a function
+    explanation: "Whenever we need that block of code, we just use `{call}` with the function's name to call it up! We don't have to type that block of code again."
+    demo_code: |-
+        {define} greet_the_costumer
+            {print} 'Hello!'
+            {print} 'Welcome to the Hedy Helpdesk!'
+            action = {ask} 'What can I do for you today?'
+
+        {call} greet_the_costumer
+-   name: 'Keywords you have learned before this level'
+    explanation: '`{repeat}`,`{if}`, `{elif}`, `{else}`, `{in}`, `{not} {in}`, `{print}`, `{is}`, `{ask}`, `{at} {random}`, `{add} {to_list}`, `{remove} {from}`, `{sleep}`, `{pressed}`, `{forward}`, `{turn}`, `{play}`. '
+    demo_code: |-
+        primary_colors = red, yellow, blue
+        {for} color {in} primary_colors
+            {print} color ' is a primary color'
+        chosen_color = {ask} 'What color is your favorite?'
+        {if} chosen_color {in} primary_colors {or} chosen_color {is} orange
+            {print} 'Beautiful color!'
+        {elif} chosen_color {is} green
+            {print} "I don't really like green"
+        {else}
+            {repeat} 2 {times}
+                {print} 'Interesting choice!'
 13:
 -   name: '{print}'
     explanation: After `{print}` you need to use parentheses.
