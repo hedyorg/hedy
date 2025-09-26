@@ -66,10 +66,10 @@ class TestsLevel6(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-
     #
     # in/not in tests
     #
+
     def test_if_var_in_list_print(self):
         code = textwrap.dedent("""\
         items is red, green
@@ -212,7 +212,6 @@ class TestsLevel6(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-
     @parameterized.expand(HedyTester.in_not_in_list_commands)
     def test_if_not_in_and_in_list_with_string_var_gives_type_error(self, operator):
         code = textwrap.dedent(f"""\
@@ -236,7 +235,6 @@ class TestsLevel6(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
-
 
     def test_if_equality_unquoted_rhs_with_space_and_trailing_space_linebreak_print(self):
         value = 'trailing space  '
