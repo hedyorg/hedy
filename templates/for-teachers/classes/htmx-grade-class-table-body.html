@@ -1,0 +1,55 @@
+{% if not student_adventures %}
+    <tr>
+        <td colspan="5" class="text-center text-gray-500 py-4">
+            {{ _('no_programs') }}
+        </td>
+    </tr>
+{% else %}
+    {% for student_adventure_id, program in student_adventures.items() %}
+    <tr>
+        <td class="text-center w-20 {% if loop.last %} rounded-b-lg {% endif %}">
+            {{ program.level }}
+        </td>
+        <td data-cy="teacher_cell" class="py-3 text-center">{{ program.student }}</td>
+        <td class="py-3 tet-center items-center">
+            <div class="flex flex-row  items-center cursor-pointer hover:bg-blue-200 p-3 rounded-lg transition-all ease-in duration-100"
+            _="on click
+                toggle .sliding-content-closed .sliding-content-open on #program_{{ program.program_id }}
+                then toggle .rotate-180  on #program_{{ program.program_id }}_arrow">
+                {{ program.name }}
+                <div class="flex flex-1"> </div>
+                <div class="flex flex-row items-center gap-5">
+                    {% if not program.is_modified%}
+                    <span class="fa fa-exclamation text-lg"></span>
+                    {% endif %}
+                    <span id="program_{{ program.program_id }}_arrow" class="fa fa-angle-down transition-all ease-in duration-100"></span>
+                </div>
+            </div>
+            <div class="grow-0 grid sliding-content-closed ease-in transition-all duration-300 min-h-0 max-h-80 w-full" id="program_{{ program.program_id }}">
+                <div class="turn-pre-into-ace  overflow-auto rounded-md">
+                    <pre level="{{ program.level }}" class="view-program min-h-4/5 h-4/5 py-4">{{ program.code }}</pre>
+                    <div class="flex flex-row gap-5 items-center">
+                        <a href="/hedy/{{ program.program_id }}/view" target="_blank" class="blue-btn-new"> {{ _('view_program') }} </a>
+                        {% if not program.is_modified %}
+                            <span> This code is very similar to example code.</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td class="text-center "> {{ program.date }}</td>
+        <td class="text-center {% if loop.last %} rounded-b-lg {% endif %} ">
+                {{
+                    render_partial(
+                        'for-teachers/classes/htmx-grade-class-checkbox.html',
+                        class_id=class_info.id,
+                        level=program.level,
+                        student=program.student,
+                        adventure_name=program.adventure_name,
+                        is_ticked=program.ticked,
+                    )
+                }}
+        </td>
+    </tr>
+{% endfor %}
+{% endif %}
