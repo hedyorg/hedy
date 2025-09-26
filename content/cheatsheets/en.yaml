@@ -403,60 +403,101 @@
                 {print} 'Interesting choice!'
 13:
 -   name: '{print}'
-    explanation: After `{print}` you need to use parentheses.
-    demo_code: '{print}(''hi!'')'
--   name: '{range}'
-    explanation: After `{range}` you need to use parentheses.
+    explanation: Print text like this in Python.
     demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hello, times ', i)
--   name: '{print} with var'
+        {print}('hi!')
+-   name: '{print} with a variable'
     explanation: With `{print}` you need to use parentheses and commas if you print more items.
     demo_code: |-
         name = 'Hedy'
         {print}('my name is ', name)
--   name: ask something with {input}
+        {print}('Hello', name, 'nice to meet you!')
+-   name: 'ask something with {input}'
     explanation: Use `{input}` instead of `{ask}` to ask something.
     demo_code: |-
         name = {input}('What is your name?')
         {print}('So your name is ', name)
-14:
+-   name: '{range}'
+    explanation: Repeating something is done with `{range}` and variable i.
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Hello, times ', i)
+-   name: '{if} {elif} {else}'
+    explanation: The keywords {if} {elif} and {else} stay the same, but mind the colon and the new symbols in the if-statement.
+    demo_code: |-
+        name = {input}("What's your name?")
+        {if} name == 'Hedy':
+            {print} ('Hi Hedy!')
+        {elif} name == 'Jack':
+            {print} ('Hit the road, Jack!')
+        {else}:
+            {print} ('Nice to meet you!')
 -   name: Smaller
     explanation: We use the `<` to check if the first number is smaller than the second number.
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age < 13
-            {print} 'You are younger than me!'
+        age = {input}('How old are you?')
+        {if} age < 13 :
+            {print}('You are younger than me!')
 -   name: Bigger
     explanation: We use the `>` to check if the first number is bigger than the second number.
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age > 13
-            {print} 'You are older than me!'
+        age = {input}('How old are you?')
+        {if} age > 13 :
+            {print}('You are older than me!')
 -   name: Equal
     explanation: We use the `==` to check if two things are the same.
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That is correct!'
+        answer = {input}('What is 5 x 5?')
+        {if} answer == 25:
+            {print}('That is correct!')
 -   name: Not equal
     explanation: We use the `!=` to check if two things are not the same.
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
+        answer = {input}('What is 5 * 5?')
+        {if} answer != 25:
+            {print}('That is not correct!')
 -   name: Smaller or equal
     explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
+        age = {input}('How old are you?')
+        {if} age <= 12:
+            {print}('You are younger than me!')
 -   name: Bigger or equal
     explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+        age = {input}('How old are you?')
+        {if} age >= 14:
+            {print}('You are older than me!')
+-   name: 'Keywords you have learned before this level'
+    explanation: 'Warning! From this level on the syntax resembles Python syntax. This means that the keywords you have learned in the previous levels might not work! Check out the upcoming levels to learn how to do them the Python way!'
+14:
+-   name: 'creating a list'
+    explanation: Use square brachets to create a list, and use quotation marks around each item.
+    demo_code: |-
+        fruit = ['apple', 'banana', 'cherry']
+-   name: 'choosing a specific item of a list'
+    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
+    demo_code: |-
+        fruit = ['apple', 'banana', 'cherry']
+        {print}(fruit[1], ' is the first thing on my list')
+-   name: 'choosing a random item of a list'
+    explanation: choose a random item of a list.
+    demo_code: |-
+        fruit = ['apple', 'banana', 'cherry']
+        {print}(fruit[random], ' is my favorite')
+-   name: 'using the variable i'
+    explanation: You can use variable i with a list as well.
+    demo_code: |-
+        fruit = ['apple', 'banana', 'cherry']
+        {for} i {in} {range} (1,3):
+            {print}(fruit[i], ' is item number ', i, ' on the list.')
+-   name: 'add to list'
+
+-   name: 'remove from list'
+-   name: 'using a function'
+-   name: 'using a function with arguments'
+-   name: 'using a function with a return value'
+
 15:
 -   name: '{while}'
     explanation: We can use the `{while}` loop with not equal.
@@ -474,26 +515,4 @@
             count = count + 1
         {print} 'We are done'
 16:
--   name: quotes in list
-    explanation: A list with quotation marks.
-    demo_code: |-
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
--   name: square brackets
-    explanation: Lists with square brackets.
-    demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
--   name: Get an item from a list
-    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: Get a random item from a list
-    explanation: To get a random item from a list we use [{random}] so fruit[{random}] means, get a random fruit from the list!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[{random}]
-        {print} random_fruit
 
