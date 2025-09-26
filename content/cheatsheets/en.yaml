@@ -485,34 +485,68 @@
     demo_code: |-
         fruit = ['apple', 'banana', 'cherry']
         {print}(fruit[random], ' is my favorite')
+-   name: 'add to or remove from list'
+    explanation: Use quotation marks to the items you want to add to or remove from a list.
+    demo_code: |-
+        list = ['item', 'ietm_2']
+        {add} 'item_3' {to} list
+        {print}(list[3])
 -   name: 'using the variable i'
     explanation: You can use variable i with a list as well.
     demo_code: |-
         fruit = ['apple', 'banana', 'cherry']
         {for} i {in} {range} (1,3):
             {print}(fruit[i], ' is item number ', i, ' on the list.')
--   name: 'add to list'
-
--   name: 'remove from list'
--   name: 'using a function'
--   name: 'using a function with arguments'
--   name: 'using a function with a return value'
-
 15:
+-   name: 'using a function'
+    explanation: You can use a function like this. Take a close look at the correct syntax.
+    demo_code: |-
+        {def} ask_age() :
+            age = {input}('what is your age?')
+            {print}('You are ', age, ' years old')
+
+        ask_age()
+-   name: 'using a function with arguments'
+    explanation: Place the arguments you want to use in your function between the parentheses.
+    demo_code: |-
+        name = {input}('what is your name?')
+        surname = {input}('what is your surname?')
+
+        {def} ask_age(name, surname):
+            age = {input}('what is your age?')
+            {print}(name, ' ', surname, ' is ', age, ' years old')
+
+        ask_age(name, surname)
+-   name: 'using a function with a return value'
+    explanation: Use `{return}` to use the return value outside of the function.
+    demo_code: |-
+        {def} calculate_score(answer, correct_answer):
+            {if} answer == correct_answer:
+                score = 1
+            {elif} answer == '?':
+                score = 0
+            {else}:
+                score = -1
+            {return} score
+
+        answer = {input}('Where can you find the Eiffel Tower?')
+        correct_answer = 'Paris'
+        score = calculate_score(answer, correct_answer)
+        {print}('Your score is... ', score)
+16:
 -   name: '{while}'
     explanation: We can use the `{while}` loop with not equal.
     demo_code: |-
         answer = 0
         {while} answer != 25
-            answer = {ask} 'What is 5 times 5?'
-        {print} 'A correct answer has been given'
--   name: Smaller {while}
+            answer = {input}('What is 5 times 5?')
+        {print}('A correct answer has been given')
+-   name: '{while} with > and <'
     explanation: We can also use the `{while}` loop with `<` and `>`.
     demo_code: |-
         count = 1
         {while} count < 3
-            {print} 'We do this ' 3 - count ' more times'
+            {print}('We do this ', 3 - count, ' more times')
             count = count + 1
-        {print} 'We are done'
-16:
+        {print}('We are done')
 
