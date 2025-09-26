@@ -1,14 +1,10 @@
 // adds elif in and not in
 // Not yet in the traverser
 
-//if, conditions and else on different lines from level 6
+// if, conditions and else on different lines from level 6
+// not yet forced in the grammar
 
-_if_clause: _IF (condition|error_condition|condition_spaces) _EOL _if_less_command
-_else_clause: _ELSE _EOL _if_less_command
 _elif_clause: _ELIF (condition|error_condition|condition_spaces) _EOL _if_less_command
-
-ifelse: _if_clause _EOL _else_clause
-ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs'
 ifelifelse: _if_clause (_EOL _elif_clause)+ _EOL _else_clause
 
 

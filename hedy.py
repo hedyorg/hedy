@@ -2283,7 +2283,7 @@ class ConvertToPython_5(ConvertToPython_4):
     def ifelse(self, meta, args):
         return f"""{args[0]}
 else:{self.add_debug_breakpoint()}
-{ConvertToPython.indent(args[2])}"""
+{ConvertToPython.indent(args[1])}"""
 
     def condition(self, meta, args):
         return ' and '.join(args)
