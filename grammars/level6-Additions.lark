@@ -1,11 +1,13 @@
 // adds elif in and not in
 // Not yet in the traverser
 
-// if, conditions and else on different lines from level 6
-// not yet forced in the grammar
+//if, conditions and else on different lines from level 6
 
-_elif_clause: _ELIF (condition|error_condition|condition_spaces) _EOL _if_less_command
-ifelifelse: _if_clause (_EOL _elif_clause)+ _EOL _else_clause
+if_clause: _IF (condition|error_condition|condition_spaces) _EOL _if_less_command
+else_clause: _ELSE _EOL _if_less_command
+elif_clause: _ELIF (condition|error_condition|condition_spaces) _EOL _if_less_command
+
+ifelifelse: if_clause (_EOL elif_clause)* (_EOL else_clause)?
 
 
 condition: in_list_check | not_in_list_check | equality_check | smaller | bigger | not_equal | smaller_equal | bigger_equal

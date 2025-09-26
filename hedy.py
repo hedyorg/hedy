@@ -2414,13 +2414,20 @@ class ConvertToPython_6(ConvertToPython_5):
             __ns = get_num_sys({var_access})
             {var_assign} = Value({var_access}, num_sys=__ns)""")
 
-    def ifelifelse(self, meta, args):
+    def if_clause(self, meta, args):
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
-    {ConvertToPython.indent(args[1])}
-elif {args[2]}:
-{ConvertToPython.indent(args[3])}
-else:{self.add_debug_breakpoint()}
-{ConvertToPython.indent(args[4])}"""
+{ConvertToPython.indent(args[1])}"""
+
+    def else_clause(self, meta, args):
+        return f"""else:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(args[0])}"""
+
+    def elif_clause(self, meta, args):
+        return f"""elif {args[0]}:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(args[1])}"""
+
+    def ifelifelse(self, meta, args):
+        return '\n'.join(args)
 
     def play(self, meta, args):
         if not args:
