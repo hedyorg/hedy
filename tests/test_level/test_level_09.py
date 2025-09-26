@@ -73,7 +73,6 @@ class TestsLevel9(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-
     def test_if_elif_else(self):
         code = textwrap.dedent("""\
         var is 0
