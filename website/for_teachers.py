@@ -184,7 +184,7 @@ class ForTeachersModule(WebsiteModule):
         return render_template("workbooks.html",
                                current_page="teacher-manual",
                                level=level,
-                               page_title=f'All workbooks',
+                               page_title='All workbooks',
                                workbooks=workbooks)
 
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
