@@ -210,7 +210,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   document.addEventListener('click', (ev) => {
     const target = ev.target as HTMLElement;
     const parent = document.getElementById('level_adventure_title');
-    if (parent?.contains(target)) {
+    const moreAdventuresButton = document.getElementById('more_adventures');
+    if (parent?.contains(target) || moreAdventuresButton?.contains(target)) {
       return;
     }
     if ($('#dropdown-level:visible').length) {
@@ -1227,7 +1228,32 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   }
 }
 
+function speakIsMuted() {
+  return $('#speak_mute_button').attr('data-muted') === 'true';
+}
+
+export function toggleSpeakMute() {
+  const speakMuteButton = $('#speak_mute_button');
+  const speakMuteIcon = speakMuteButton.find('.fa');
+
+  const MUTED_ATTR = 'data-muted';
+  const MUTED_ICON = 'fa-volume-xmark';
+  const UNMUTED_ICON = 'fa-volume-high';
+
+  if (speakIsMuted()) {
+    speakMuteButton.attr(MUTED_ATTR, 'false');
+    speakMuteIcon.removeClass(MUTED_ICON).addClass(UNMUTED_ICON);
+  } else {
+    speechSynthesis.cancel();
+    speakMuteButton.attr(MUTED_ATTR, 'true');
+    speakMuteIcon.removeClass(UNMUTED_ICON).addClass(MUTED_ICON);
+  }
+}
+
 function speak(text: string) {
+  if (speakIsMuted()) {
+    return;
+  }
   var selectedURI = $('#speak_dropdown').val();
   if (!selectedURI) { return; }
   var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI)[0];
@@ -1382,6 +1408,7 @@ export function saveForTeacherTable(table: string) {
   hide_label.classList.toggle('hidden')
   arrow.classList.toggle('rotate-180');
 }
+
 
 export function getForTeacherTable(table: string) {
   let show_table = window.localStorage.getItem(table);
@@ -1883,13 +1910,23 @@ export function open_index_pane(e: Event) {
   }
 }
 
-export function open_index_dropdown(e: Event) {
+export function open_index_dropdown() {
   $('#dropdown-level').slideToggle('medium');
   document.getElementById('dropdown_index_arrow')?.classList.toggle('rotate-180');
-  const target = e.target as HTMLElement;
-  const button = target.closest('button');
+  const button = document.getElementById('dropdown_open_button');
   if (!button) return;
   const opened_pane = document.querySelector('.sliding-content-open');
   const opened_level_button = opened_pane?.previousElementSibling
   opened_level_button?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+export function moreAdventures() {
+  const button = document.getElementById('dropdown_open_button');
+  if (!button) return;
+  if (button.getBoundingClientRect().top < 0) {
+    button.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(open_index_dropdown, 500);
+  } else {
+    open_index_dropdown();
+  }
 }

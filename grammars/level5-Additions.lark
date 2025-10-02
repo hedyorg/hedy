@@ -22,7 +22,7 @@ error_if_pressed_missing_else: if_pressed_without_else
 _if_clause: _IF (condition (_SPACE+ _EOL* | _SPACE* _EOL+) | condition_spaces _SPACE* _EOL+ | error_condition) _if_less_command
 _else_clause: _ELSE (_SPACE+ _EOL* | _SPACE* _EOL+) _if_less_command
 error_condition: condition_spaces _SPACE
-ifelse: _if_clause (_SPACE+ _EOL* | _SPACE* _EOL+) _else_clause
+ifelse: ifs (_SPACE+ _EOL* | _SPACE* _EOL+) _else_clause
 ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs'
 
 error_else_no_if.-1: _else_clause

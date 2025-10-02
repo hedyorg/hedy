@@ -1,0 +1,68 @@
+{% macro sortable_th(field, label, sort_orders) %}
+    {% set sort_val = sort_orders.get(field) if sort_orders else None %}
+    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider min-w-36">
+        {{ _(label) }}
+        <button class="ml-2" type="submit"
+            _="on click
+                if #{{ field }}-sort matches .fa-sort then
+                    remove .fa-sort from #{{ field }}-sort
+                    add .fa-sort-up to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'ascendent'
+                else if #{{ field }}-sort matches .fa-sort-up then
+                    remove .fa-sort-up from #{{ field }}-sort
+                    add .fa-sort-down to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'descendent'
+                else if #{{ field }}-sort matches .fa-sort-down then
+                    remove .fa-sort-down from #{{ field }}-sort
+                    add .fa-sort to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'none'
+                end">
+            <i id="{{ field }}-sort"
+               class="fa-solid
+               {% if sort_val is none %}fa-sort
+               {% elif sort_val is true %}fa-sort-up
+               {% elif sort_val is false %}fa-sort-down
+               {% endif %}"></i>
+        </button>
+        <input id="{{ field }}-sort-input" type="hidden" name="{{ field }}" value="{% if sort_val is none %}none{% elif sort_val is true %}ascendent{% elif sort_val is false %}descendent{% endif %}">
+    </th>
+{% endmacro %}
+
+<div id="table_container">
+    <form id="sort-form"
+          hx-get="/for-teachers/redesign/class/{{ class_info.id }}/grade/filter_sort"
+          hx-target="#grade-class-table-body"
+          hx-swap="innerHTML"
+          hx-trigger="submit"
+          hx-include="#level-filter-input, #student-filter-input, #adventure-filter-input"
+    >
+        <table class="w-full divide-y divide-gray-400" id="grade-class-table">
+            <thead class="bg-gray-200 divide-y divide-gray-400">
+                <tr>
+                    {{ sortable_th('level', 'level', sort_orders) }}
+                    {{ sortable_th('student', 'student', sort_orders) }}
+                    {{ sortable_th('name', 'adventure', sort_orders) }}
+                    {{ sortable_th('timestamp', 'date', sort_orders) }}
+                    {{ sortable_th('ticked', 'accepted', sort_orders) }}
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200" id="grade-class-table-body">
+                {% if not student_adventures %}
+                    <tr>
+                        <td colspan="5" class="text-center text-gray-500 py-4">
+                            {{ _('no_programs') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    {{
+                        render_partial(
+                            "for-teachers/classes/htmx-grade-class-table-body.html",
+                            class_info=class_info,
+                            student_adventures=student_adventures,
+                        )
+                    }}
+                {% endif %}
+            </tbody>
+        </table>
+    </form>
+</div>

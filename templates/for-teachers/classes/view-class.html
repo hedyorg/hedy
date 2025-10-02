@@ -1,0 +1,49 @@
+{% extends "auth.html" %}
+{% block regular_content %}
+<div class="flex flex-col gap-10">
+    <h1 class="md:px-16 my-5"> {{ _class.name }} </h1>
+    <div class="flex flex-row gap-4 md:px-16">
+        <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md px-10 rounded-lg w-full p-8">
+            <h2 class="m-0 basis-1/12"><a href="/for-teachers/redesign/class/{{ _class.id }}/graph">{{ _('performance_graph') }}</a></h2>
+            <div class="text-black basis-10/12">
+                <p>{{ _('performance_graph_info') }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-row gap-4 md:px-16">
+        <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md px-10 rounded-lg w-full p-8">
+            <h2 class="m-0 basis-1/12"><a href="/for-teachers/redesign/class/{{ _class.id }}/grade">{{ _('grading') }}</a></h2>
+            <div class="text-black basis-10/12">
+                <p>{{ _('grading_class_info') }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-row gap-4 md:px-16">
+        <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md px-10 rounded-lg w-full p-8">
+            <h2 class="m-0 basis-1/12"><a href="/for-teachers/class/all">{{ _('manage_students') }}</a></h2>
+            <div class="text-black basis-10/12">
+                <p>{{ _('manage_students_info') }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-row gap-4 md:px-16">
+        <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md px-10 rounded-lg w-full p-8">
+            <h2 class="m-0 basis-1/12"><a href="/for-teachers/class/all">{{ _('configure') }}</a></h2>
+            <div class="text-black basis-10/12">
+                <p>{{ _('configure_class_info') }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col md:px-16 gap-3">
+        <h2>{{ _('danger_zone') }}</h2>
+        <div class="flex flex-col gap-5">
+            <button class="green-btn-new w-fit">{{ _('archive_class') }}</button>
+            <button class="red-btn-new w-fit">{{_('delete_class') }}</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

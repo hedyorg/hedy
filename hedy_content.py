@@ -33,7 +33,7 @@ def _get_friendly_sorted_countries():
 
 FRIENDLY_SORTED_COUNTRIES = _get_friendly_sorted_countries()
 
-MAX_LEVEL = 18
+MAX_LEVEL = 16
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
@@ -156,8 +156,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     ],
     6: [
         'elif_command',
-        'story',
-        'music',
         'in_command',
         'restaurant',
         'fortune',
@@ -196,8 +194,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'pressit',
         'turtle_draw_it',
         'debugging',
-        'hospital',
-        'congratulations'
+        'hospital'
     ],
     9: [
         'repeat_command',
@@ -255,8 +252,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital',
-        'congratulations'
+        'hospital'
     ],
     13: [
         'print_command',
@@ -301,8 +297,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'guess_my_number',
         'debugging',
-        'hospital',
-        'congratulations'
+        'hospital'
     ],
 }
 
