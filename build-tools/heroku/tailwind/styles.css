@@ -18,6 +18,14 @@ html {
   display: inline-block;
 }
 
+@media print
+{
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
 h1 {
   @apply font-extralight text-4xl;
 }

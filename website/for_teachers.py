@@ -161,6 +161,10 @@ class ForTeachersModule(WebsiteModule):
 
         line = '_' * 30
         for exercise in workbook_for_level['exercises']:
+            if isinstance(exercise, str):
+                # Some items in the list are just the string "new-page"
+                continue
+
             if exercise['type'] == 'output':
                 exercise['title'] = gettext('workbook_output_question_title')
                 exercise['icon'] = '💻'
@@ -197,12 +201,6 @@ class ForTeachersModule(WebsiteModule):
                 exercise['title'] = gettext('workbook_multiple_choice_question_title')
                 exercise['icon'] = '🤔'
                 exercise['text'] = gettext('workbook_multiple_choice_question_text')
-                # let op! op een dag willen we misschien wel ander soorten MC, dan moet
-                # deze tekst anders
-                if 'options' in exercise.keys():
-                    exercise['options'] = '〇  ' + '  〇  '.join(exercise['options'])
-                else:
-                    exercise['options'] = 'NO OPTIONS GIVEN!'
 
             elif exercise['type'] == 'define':
                 exercise['title'] = gettext('workbook_define_question_title')  # ''
