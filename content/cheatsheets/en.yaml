@@ -538,14 +538,14 @@
     explanation: We can use the `{while}` loop with not equal.
     demo_code: |-
         answer = 0
-        {while} answer != 25
+        {while} answer != 25:
             answer = {input}('What is 5 times 5?')
         {print}('A correct answer has been given')
 -   name: '{while} with > and <'
     explanation: We can also use the `{while}` loop with `<` and `>`.
     demo_code: |-
         count = 1
-        {while} count < 3
+        {while} count < 3:
             {print}('We do this ', 3 - count, ' more times')
             count = count + 1
         {print}('We are done')
