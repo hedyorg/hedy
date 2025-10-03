@@ -328,7 +328,8 @@ class HedyTester(unittest.TestCase):
                         if microbit:
                             return
                         else:
-                            self.assertTrue(self.validate_Python_code(result))
+                            r = self.validate_Python_code(result)
+                            self.assertTrue(r)
 
                     if output is not None:
                         if extra_check_function is None:  # most programs have no turtle so make that the default
