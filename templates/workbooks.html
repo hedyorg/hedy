@@ -1,12 +1,14 @@
 {% extends "auth.html" %}
 
 {% block full_width_content %}
+{# Usually there will just be one, but we can also print all workbooks in one go #}
+{% for (level, workbook) in workbooks %}
     <div class="bg-blue-200 mb-4">
         <div class="py-4 flex items-center w-full copy-container mx-auto">
-            <div class="tracking-wide text-xl font-extralight">{{ page_title }}</div>
+            <div class="tracking-wide text-xl font-extralight">Workbook {{ level }}</div>
         </div>
     </div>
-    <div class="copy-container text-business-copy" id="teacher_documentation">
+    <div class="copy-container text-business-copy break-after-page" id="teacher_documentation">
         <div class="flex gap-8">
             <div class="flex-1">
                 {% if workbook.intro %}
@@ -92,4 +94,5 @@
             </div>
         </div>
     </div>
+{% endfor %}
 {% endblock %}
