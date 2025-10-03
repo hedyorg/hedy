@@ -10,8 +10,11 @@ yaml_writer = yaml.YAML(typ="rt")
 
 
 def main():
+    dirs = sys.argv[1:]
+    reference_files = [f'content/{dir}/en.yaml' for dir in dirs] if dirs else glob.glob('content/*/en.yaml')
+
     any_failure = False
-    for reference_file in glob.glob('content/*/en.yaml'):
+    for reference_file in reference_files:
         en = load_yaml(reference_file)
         structure_dir = path.basename(path.dirname(reference_file))
 
@@ -69,33 +72,52 @@ def find_mismatched_types(reference, other):
     ret = {}
 
     def recurse(ref, oth, p):
+        """Returns True if any mismatches were found, in which case we stop iterating lists."""
+
+        path_str = ''.join(p)
+
+        if isinstance(ref, str) and isinstance(oth, dict):
+            ret[path_str] = Mismatch(
+                ref, oth, 'Type mismatch', (f'The path {path_str} is a string in the reference file but a '
+                                            'dict in the lang file.'))
+            return True
 
         if isinstance(ref, dict) and oth:
             if not isinstance(oth, dict):
-                pth = ''.join(p)
-                ret[pth] = Mismatch(ref, oth, 'Type mismatch', (f'The path {pth} is of type dict in the reference file'
-                                                                f'but not in the lang file.'))
-            else:
-                exk = set(oth.keys()) - set(ref.keys())
-                for e in exk:
-                    pth = ''.join(p + [e])
-                    ret[pth] = Mismatch(ref, oth, 'Extra keys in dict', (f'The path {pth} is a dict that contains more'
-                                                                         f'keys than the reference file.'))
-                for key in set(ref.keys()) & set(oth.keys()):
-                    recurse(ref[key], oth[key], p + [f'.{key}'])
-        elif isinstance(ref, list) and oth:
+                ret[path_str] = Mismatch(ref, oth, 'Type mismatch', (f'The path {path_str} is of type dict in the '
+                                                                     'reference file but not in the lang file.'))
+                return True
+
+            exk = set(oth.keys()) - set(ref.keys())
+            if exk:
+                ret[path_str] = Mismatch(ref, oth, 'Extra keys in dict', (f'The path {path_str} is a dict that '
+                                                                          'contains more keys than the reference '
+                                                                          f'file: {exk}'))
+                return True
+
+            any_mismatch = False
+            for key in set(ref.keys()) & set(oth.keys()):
+                any_mismatch |= recurse(ref[key], oth[key], p + [f'.{key}'])
+            return any_mismatch
+
+        if isinstance(ref, list) and oth:
             if not isinstance(oth, list):
-                pth = ''.join(p)
-                ret[pth] = Mismatch(ref, oth, 'Type mismatch', (f'The path {pth} is of type list in the reference file'
-                                                                f'but not in the lang file.'))
-            else:
-                if len(ref) < len(oth):
-                    pth = ''.join(p)
-                    ret[pth] = Mismatch(ref, oth, 'Array length mismatch', (f'The path {pth} is a list with more'
-                                                                            f'elements than in the reference file.'))
-                else:
-                    for i in range(min(len(ref), len(oth))):
-                        recurse(ref[i], oth[i], p + [f'[{i}]'])
+                ret[path_str] = Mismatch(ref, oth, 'Type mismatch', (f'The path {path_str} is of type list in '
+                                                                     'the reference file but not in the lang file.'))
+                return True
+
+            if len(ref) < len(oth):
+                ret[path_str] = Mismatch(ref, oth, 'Array length mismatch', (f'The path {path_str} is a list with more '
+                                                                             f'elements than in the reference file.'))
+                return True
+
+            for i in range(min(len(ref), len(oth))):
+                # Early break on iterating lists, the issue is probably with first list element and reporting on
+                # following failures is just noisy and confusing
+                if recurse(ref[i], oth[i], p + [f'[{i}]']):
+                    return True
+
+        return False
 
     recurse(reference, other, [])
     return ret
