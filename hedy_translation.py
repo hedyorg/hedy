@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 from collections import defaultdict, namedtuple
+from typing import Optional
 
 from lark import Token, Transformer, v_args
 from lark.exceptions import VisitError
@@ -31,7 +32,7 @@ def keywords_to_dict(lang="nl"):
     }
 
 
-def lang_switch_table(level: int, lang1: str, lang2: str | None = None):
+def lang_switch_table(level: int, lang1: str, lang2: Optional[str] = None):
     """Return a dictionary from keywords in lang1 organized in tuples to their translations in lang2, e.g.
         ('ask', ) -> ('vraag',)
         ('at', 'random') -> ('kies', 'willekeurig')
