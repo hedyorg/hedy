@@ -231,16 +231,6 @@ adventures:
                             poentaro = poentaro + 1
                     {print} 'Bonege! Jen via poentaro: ' poentaro '/10!'
                     ```
-            12:
-                story_text: |
-                    Nun oni povas verki kalkulilon, kiu funkcias por decimalaj frakcioj.
-                example_code: |
-                    ```
-                    nombro1 = {ask} 'Kio estas la unua nombro?'
-                    nombro2 = {ask} 'Kio estas la dua nombro?'
-                    respondo = nombro1 + nombro2
-                    {print} nombro1 ' plus ' nombro2 ' estas ' respondo
-                    ```
     dice:
         name: Ĵetkuboj
         default_save_name: Ĵetkuboj
@@ -520,21 +510,6 @@ adventures:
                        {print} demando
                        {sleep}
                        {print} 'Laŭ mia kristala globo…' respondoj {at} {random}
-                    ```
-            10:
-                story_text: |
-                    En ĉi tiu nivelo, vi lernos kiel programi la ludon MASH (domego, apartamento, barako, domo). En ĉi tiu ludo vi povas aŭguri por ĉiuj ludantoj samtempe, kiel aspektos iliaj estontecoj.
-                example_code: |
-                    ```
-                    domoj = domego, apartamento, barako, domo
-                    amoj = neniu, reĝo, najbaro, vera amanto
-                    dorlotbestoj = hundo, kato, elefanto
-                    nomoj = Johanino, Rikardo, Jakobo
-                    {for} nomo {in} nomoj
-                        {print} nomo ' loĝos en ' domoj {at} {random}
-                        {print} nomo ' edz(in)iĝos kun ' amoj {at} {random}
-                        {print} nomo ' ricevos ' dorlotbestoj {at} {random} 'n kiel sian dorlotbeston.'
-                        {sleep}
                     ```
             11:
                 story_text: |
@@ -843,24 +818,6 @@ adventures:
                         {for} plado {in} pladoj
                             manĝaĵo = {ask} nomo ', kion vi volas manĝi por via ' plado '?'
                             {print} nomo ' mendas ' manĝaĵo 'n por sia ' plado
-                    ```
-            12:
-                story_text: |
-                    En ĉi tiu nivelo, vi povas uzi decimalajn frakciojn por igi vian menuon pli realeca.
-                example_code: |
-                    ```
-                    prezo = 0
-                    manĝaĵo = {ask} 'Kion vi volas mendi?'
-                    trinkaĵo = {ask} 'Kion vi volas trinki?'
-                    {if} manĝaĵo {is} 'hamburgero'
-                        prezo = prezo + 6.50
-                    {if} manĝaĵo {is} 'pico'
-                        prezo = prezo + 5.75
-                    {if} trinkaĵo {is} 'akvo'
-                        prezo = prezo + 1.20
-                    {if} trinkaĵo {is} 'sodakvo'
-                        prezo = prezo + 2.35
-                    {print} 'Bonvolu pagi ' prezo ' spesmilojn'
                     ```
             16:
                 example_code: |

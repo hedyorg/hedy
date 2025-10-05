@@ -1,4 +1,4 @@
- adventures:
+adventures:
     story:
         name: Hikaye
         default_save_name: Hikaye
@@ -1161,15 +1161,7 @@
         name: matematik
         default_save_name: matematik
         description: matematiğe giriş
-        levels:
-            6:
-                example_code: |
-                    ```
-                    {print} '5 artı 5 eder ' 5 + 5
-                    {print} '5 eksi 5 eder ' 5 - 5
-                    {print} '5 çarpı 5 eder ' 5 * 5
-                    {print} '5 bölü 5 eder ' 5 / 5
-                    ```
+        levels: {}
     music:
         levels:
             7:
@@ -1777,27 +1769,6 @@
                     _ yemek = {ask} isim ', yemekte ' course ' olarak ne yemek istersin?'
                     _ {print} isim ' yemekte ' çeşit ' olarak ' yemek ' sipariş ediyor'
                     ``
-            12:
-                story_text: |
-                    Bu seviyeden itibaren menünüzü daha gerçekçi hale getirmek için ondalık sayıları kullanabilirsiniz.
-
-                    ### Alıştırma
-                    Arkadaşlarınıza ve ailenize %15 indirim sağlayacak bir kod düşünebiliyor musunuz?
-                example_code: |
-                    ```
-                    fiyat = 0.0
-                    yemek = {ask} 'Ne sipariş etmek istersiniz?'
-                    içecek = {ask} 'Ne içmek istersiniz?'
-                    {if} yemek {is} 'hamburger'
-                        fiyat = fiyat + 6.50
-                    {if} yemek {is} 'pizza'
-                        fiyat = fiyat + 5.75
-                    {if} içecek {is} 'su'
-                        fiyat = fiyat + 1.20
-                    {if} içecek {is} 'soda'
-                        fiyat = fiyat + 2.35
-                    {print} 'Toplam ' fiyat ' lira, lütfen'
-                    ```
             16:
                 story_text: |
                     `{while}` ile müşterilerinizin istekleri bitene kadar sipariş eklemeye devam edebilmelerini sağlayabilirsiniz.

@@ -1141,15 +1141,7 @@ adventures:
         name: matemática
         default_save_name: matemática
         description: introduzindo matemática
-        levels:
-            6:
-                example_code: |
-                    ```
-                    {print} '5 mais 5 é ' 5 + 5
-                    {print} '5 menos 5 é ' 5 - 5
-                    {print} '5 vezes 5 é ' 5 * 5
-                    {print} '5 dividido por 5 é ' 5 / 5
-                    ```
+        levels: {}
     music:
         name: música
         default_save_name: música
@@ -1657,31 +1649,6 @@ adventures:
         default_save_name: Canção
         description: Imprima uma canção
         levels:
-            6:
-                story_text: |
-                    As músicas geralmente contêm muita repetição. Às vezes, a repetição também se baseia na contagem.
-                    Por exemplo, como na conhecida canção 'Garrafas de cerveja'. Você pode programar essa música com um pouco de matemática.
-                example_code: |
-                    ```
-                    verso = 99
-                    {print} verso 'garrafas de cerveja na parede'
-                    {print} verso 'garrafas de cerveja'
-                    {print} 'Pegue uma, passe por aí'
-                    verso = verso - 1
-                    {print} verso 'garrafas de cerveja na parede'
-                    ```
-
-                    Agora você pode repetir as linhas 2 a 9 quantas vezes quiser copiando as linhas.
-                example_code_2: |
-                    ```
-                    number = 6
-                    number = number - 1
-                    print number ' little monkeys jumping on the bed'
-                    print 'One fell off and bumped his head'
-                    print 'Mama called the doctor and the doctor said'
-                    print 'NO MORE MONKEYS JUMPING ON THE BED!'
-                    sleep
-                    ```
             8:
                 story_text: |
                     As músicas geralmente contêm muita repetição. Por exemplo... Bebê Tubarão! Se você canta, você continua cantando a mesma coisa:

@@ -1021,27 +1021,6 @@ adventures:
                     _ ushqimi = {ask} emri ', çfarë do të dëshironit të hani si 'kurs' tuaj?'
                     _ {print} emri ' porositën ' ushqimi ' si ' kurs
                     ```
-            12:
-                story_text: |
-                    Nga ky nivel e tutje, mund të përdorni numra dhjetorë për ta bërë menu-në tuaj më realiste.
-
-                    ### Sfidë
-                    A mund të mendoni për një kod për t'u dhënë miqve dhe familjes suaj një zbritje prej 15%?
-                example_code: |
-                    ```
-                    çmimi = 0
-                    ushqimi = {ask} 'Çfarë dëshironi të porosisni?'
-                    pije = {ask} 'Cfare do te pish?'
-                    {if} ushqimi {is} 'hamburger'
-                        çmimi = çmimi + 6.50
-                    {if} pije {is} 'pica'
-                        çmimi = çmimi + 5.75
-                    {if} pije {is} 'uj'
-                        çmimi = çmimi + 1.20
-                    {if} pije {is} 'kola'
-                        çmimi = çmimi + 2.35
-                    {print} 'Kjo do të jetë ' çmimi ' lekë'
-                    ```
             16:
                 story_text: |
                     Me komandën `{while}` mund të siguroheni që klientët tuaj të mund të vazhdojnë të shtojnë porosi derisa të mbarojnë.
@@ -1158,24 +1137,6 @@ adventures:
                     {for} lojtari {in} lojtarët
                          {print} lojtari ' ka zgjedhur ' zgjedhjet {at} {random}
                     ```
-            13:
-                story_text: |
-                    Me komandën `{and}` mund ta shkurtoni kodin tuaj për gur, letër, gërshërë! Shikoni shembullin më poshtë dhe tentoni ta përfundoni.
-                example_code: |
-                    ```
-                    opsionet = 'gur', 'letër', 'gërshërë'
-                    zgjedhja_juaj = {ask} 'Çfarë zgjidhni?'
-                    zgjedhja_kompjuterit = opsionet {at} {random}
-                    {print} 'Ju keni zgjedhur ' zgjedhja_juaj
-                    {print} 'Kompjuteri ka zgjedhur ' zgjedhja_kompjuterit
-                    {if} zgjedhja_kompjuterit {is} zgjedhja_juaj
-                        {print} 'Barazim'
-                    {if} zgjedhja_kompjuterit {is} 'gur' {and} zgjedhja_juaj {is} 'letër'
-                        {print} 'Ju fitoni!'
-                    {if} zgjedhja_kompjuterit {is} 'gur' {and} zgjedhja_juaj {is} 'gërshërë'
-                        {print} 'Kompjuteri fiton!'
-                    _
-                    ```
             16:
                 story_text: |
                     Luani derisa ta fitoni kompjuterin! Por fillimisht, përfundoni shembullin e dhënë...
@@ -1219,38 +1180,6 @@ adventures:
         default_save_name: Këngë
         description: Printo një këngë
         levels:
-            6:
-                story_text: |
-                    Këngët shpesh herë kanë shumë përsëritje. Ndonjëherë përsëritja është e bazuar në numërim.
-                    Për shembull, në këngën e njohur 'Shishe birre'. Ju mund ta programoni këngën me pak matematik.
-
-                    Këshillë: Përdorni funksionin e leximit me zë për ta lënë Hedy-n t'ju këndojë këngën!
-
-                    ### Sfidë
-                    Tani mund të përsërisni rreshtat 2 deri në 7 sa herë të dëshironi duke kopjuar rreshtat.
-                example_code: |
-                    ```
-                    vargu = 99
-                    {print} vargu ' shishe birre në mur'
-                    {print} vargu ' shishe birre'
-                    {print} 'Hiqe njërën, kaloje përreth'
-                    vargu = vargu - 1
-                    {print} vargu ' shishe birre në mur'
-                    {sleep}
-                    ```
-                story_text_2: |
-                    Kjo këngë për fëmijë numëron mbrapsht nga 5 majmunë të vegjël në 1 majmun.
-                    Nëse kopjoni rreshtin 2 - 7 dhe ngjisni nën kodin, mund të këndoni të gjithë këngën!
-                example_code_2: |
-                    ```
-                    numri = 6
-                    numri = numri - 1
-                    print numri "majmunët e vegjël që kërcejnë në shtrat"
-                    print 'Një ra dhe përplasi kokën'
-                    print 'Mami thirri doktorin dhe doktori tha'
-                    print 'JO MË MAJMUNE QË KËRREN NË SHTRAT!'
-                    sleep
-                    ```
             8:
                 story_text: |
                     Këngët shpesh herë kanë përsëritje. Për shembull... Peshkaqeni i vogël! Nëse e këndoni, ju vazhdoni të këndoni të njëjtën gjë:

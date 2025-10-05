@@ -1119,14 +1119,7 @@ adventures:
         name: matte
         default_save_name: matte
         description: Introduktion till matte
-        levels:
-            6:
-                example_code: |
-                    ```
-                    {print} '5 plus 5 är ' 5 + 5
-                    {print} '5 minus 5 är ' 5 - 5
-                    {print} '5 gånger 5 är ' 5 * 5
-                    ```
+        levels: {}
     music:
         levels:
             7:
@@ -1730,27 +1723,6 @@ adventures:
                     _ {for} rätt {in} rätter
                     _ mat = {ask} namnet ', vad vill du ha till ' rätt '?'
                     _ {print} namnet ' beställer ' mat ' till ' rätt
-                    ```
-            12:
-                story_text: |
-                    Från och med den här nivån kan du använda decimaltal för att göra menyn mer realistisk.
-
-                    ### Övning
-                    Kan du komma på en kod för att ge dina vänner och din familj 15% rabatt?
-                example_code: |
-                    ```
-                    pris = 0.0
-                    mat = {ask} 'Vad önskas?'
-                    dricka = {ask} 'Vad vill du dricka?'
-                    {if} mat {is} 'hamburgare'
-                        pris = pris + 6.50
-                    {if} mat {is} 'pizza'
-                        pris = pris + 5.75
-                    {if} dricka {is} 'vatten'
-                        pris = pris + 1.20
-                    {if} dricka {is} 'läsk'
-                        pris = pris + 2.35
-                    {print} 'Det blir ' pris ' dollar, tack'
                     ```
             16:
                 story_text: |

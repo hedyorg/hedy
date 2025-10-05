@@ -371,16 +371,6 @@ adventures:
                 story_text_3: |
                     **Extra** También puedes dejar que el ordenador haga productos aleatorios por sí mismo usando `{random}`.
                 example_code_3: "```\nnumeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nnumero_1 = _\nnumero_2 = _\nrespuesta_correcta = numero_1 * numero_2\nrespuesta_dada = {ask} '¿Cuánto es ' number_1 ' veces ' number_2 '?'\n{if} _\n{else} _\n```"
-            8:
-                story_text: |
-                    En el nivel anterior creaste una calculadora. En este nivel puedes ampliar el código para que haga varias preguntas.
-
-                    ### Ejercicio 1
-                    ¿Puedes completar la línea 10 para hacer que el código funcione?
-
-                    ### Ejercicio 2
-                    Dale al jugador información cuando introduzcan una pregunta, por ejemplo `{print}` '¡Correcto!' o `{print}` '¡Incorrecto! La respuesta correcta es ' respuesta_correcta
-                example_code: "```\npuntuación = 0\n{repeat} 10 {times}\n    números = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    número_1 = números {at} {random}\n    número_2 = números {at} {random}\n    respuesta_correcta = numero_1 * numero_2\n    {print} '¿Cuánto es 'número_1' multiplicado por 'número_2'?'\n    respuesta = {ask} 'Escriba su respuesta aquí...'\n    {print} 'Tu respuesta es ' respuesta\n    {if}_{is}_ \n        puntuación = puntuación + 1\n{print} '¡Buen trabajo! Tu puntuación es... 'puntuación' sobre 10!'\n```\n"
             15:
                 example_code: |
                     ```
@@ -913,9 +903,6 @@ adventures:
                         {call} turno
                         {sleep} 2
                     ```
-            13:
-                story_text: "¡Hagamos funciones al estilo de Python! Para definir una función ya no utilizaremos:\n\n`{define} name_function {with} argument_1, argument_2:`\n\npero utilizaremos:\n\n`{def} name_function(argument_1, argument_2):`.\n\n\nSi no quieres utilizar argumentos, deja un espacio vacío entre los paréntesis.\nPara llamar a una función, no necesitamos el comando `{call}` nunca más. Solo escribe el nombre de la función.\n"
-                example_code: "```\n{def} calcular_puntuacion(respuesta, respuesta_correcta):\n    {if} respuesta == respuesta_correcta:\n        puntuacion = 1\n    {elif} respuesta == '?':\n        puntuacion = 0\n    {else}:\n        puntuacion = -1\n    {return} puntuacion\n\nrespuesta = {input} ('¿Donde se encuentra la Torre Eiffel?')\nrespuesta_correcta = 'Paris'\npuntuacion = calcular_puntuacion(respuesta, respuesta_correcta)\n{print} ('Tu puntuación es... ', puntuacion)\n```\n"
     guess_my_number:
         name: Adivina mi número
         default_save_name: adivina mi número
@@ -1269,22 +1256,7 @@ adventures:
         name: cálculos
         default_save_name: cálculos
         description: Introducción a cálculos
-        levels:
-            6:
-                story_text: |
-                    En este nivel aprenderás algo nuevo: ahora también puedes calcular.
-
-                    La suma es fácil, se escribe como en matemáticas: `5 + 5` por ejemplo. La resta funciona igual, es `5 - 5`.
-
-                    La multiplicación es un poco diferente, porque no hay símbolo de multiplicar en tu teclado. Sólo busca, ¡no hay realmente!
-                    Eso es por lo que multiplicamos con el asterisco cerca de la tecla ENTER: `5 * 5`. Léelo como "5 veces 5" para recordarlo mejor.
-                example_code: |
-                    ```
-                    {print} '5 más 5 es ' 5 + 5
-                    {print} '5 menos 5 es ' 5 - 5
-                    {print} '5 veces 5 es ' 5 * 5
-                    {print} '5 dividido por 5 es ' 5 / 5
-                    ```
+        levels: {}
     music:
         name: música
         default_save_name: música
@@ -2047,27 +2019,6 @@ adventures:
                     _ comida = {ask} '¿Que te gustaría ordenar como tu ' plato '?'
                     _ {print} nombre ' pedidos ' comida ' como su ' plato
                     ```
-            12:
-                story_text: |
-                    A partir de este nivel, puedes utilizar números decimales para que tu menú sea más realista.
-
-                    ### Ejercicio
-                    ¿Se te ocurre un código para hacer un descuento del 15% a tus amigos y familiares?
-                example_code: |
-                    ```
-                    precio = 0.0
-                    comida = {ask} '¿Qué te gustaría pedir?'
-                    bebida = {ask} '¿Que te gustaría beber?'
-                    {if} comida {is} 'hamburguesa'
-                        precio = precio + 6.50
-                    {if} comida {is} 'pizza'
-                        precio = precio + 5.75
-                    {if} bebida {is} 'agua'
-                        precio = precio + 1.20
-                    {if} bebida {is} 'refresco'
-                        precio = precio + 2.35
-                    {print} 'Serán ' precio ' dólares, por favor'
-                    ```
             16:
                 story_text: |
                     Con el comando `{while}` puedes asegurarte que tus clientes sigan agregando ordenes hasta que gusten.
@@ -2493,29 +2444,6 @@ adventures:
                     {if} dirección {is} derecha {turn} _
                     {if} dirección {is} izquierda {turn} _
                     {forward} 100
-                    ```
-            6:
-                story_text: |
-                    En nivel 5 puede usar cálculos para dibujar diferentes figuras.
-                    Es posible que haya aprendido en la escuela que girar un círculo completo es de 360 grados. Si no, ¡ahora ya lo sabes!
-                    Es por eso que también usas 90 grados para un cuadrado. 360 dividido por 4 es 90.
-                    Ahora que podemos hacer matemáticas con Hedy, ¡podemos dibujar todas las figuras que queramos!
-                example_code: |
-                    ```
-                    ángulos = {ask} '¿Cuántos ángulos quieres?'
-                    ángulo = 360 / ángulos
-                    {forward} 50
-                    {turn} ángulo
-                    {forward} 50
-                    {turn} ángulo
-                    {forward} 50
-                    {turn} ángulo
-                    {forward} 50
-                    {turn} ángulo
-                    {forward} 50
-                    {turn} ángulo
-                    {forward} 50
-                    {turn} ángulo
                     ```
             9:
                 story_text: |
