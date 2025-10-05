@@ -451,26 +451,7 @@ adventures:
         name: Kalkulator 2
         default_save_name: Kalkulator 2
         description: Kalkulator 2
-        levels:
-            16:
-                story_text: |
-                    ### Ćwiczenie 2
-                    **To druga część tej przygody.** Przygoda zaczyna się w poprzedniej przygodzie.
-                    Oczywiście nie zawsze chcesz obliczyć średnią z 4 testów. Możesz obliczyć średnią z 10 testów lub tylko 2.
-                    Możemy rozwiązać ten problem, dodając argument i zmienną 'ilość_testów'.
-                    * Zacznij nową linię w wierszu 3. Ustaw argument ilość_testów, pytając ucznia, ile testów napisał.
-                    * Zmień 4 w wierszu 4 na nowy argument ilość_testów.
-                    * Na koniec zmień 4 w wierszu 6 na ilość_testów
-
-                    Wypróbuj nowy program. Działa?
-
-                    ### Ćwiczenie 3
-                    Chciałbyś ulepszyć swój program? Świetnie! W poprzednim programie można było obliczyć tylko średnią ocenę z 1 przedmiotu, ale byłoby lepiej, gdybyś mógł obliczyć średnią ocenę dla wszystkich przedmiotów!
-                    Nie powiemy ci, jak to zrobić, ale damy ci jedną wskazówkę: Rozpocznij swój kod w wierszu 1 od: {define} oblicz_średnią_oceny {with} przedmiotu.
-                example_code: |
-                    ```
-                    # Wykorzystaj swój kod z poprzedniej przygody.
-                    ```
+        levels: {}
     clear_command:
         default_save_name: komenda_clear
         description: 'Polecenie {clear}'
@@ -1292,22 +1273,7 @@ adventures:
         name: Matematyka
         default_save_name: matematyka
         description: Wprowadzenie matematyki
-        levels:
-            6:
-                story_text: |
-                    Na tym poziomie nauczysz się czegoś nowego: możesz teraz wykonywać obliczenia.
-
-                    Plus jest łatwy, piszesz go jak w matematyce: na przykład `5 + 5`. Minus również działa tak samo, to jest `5 - 5`.
-
-                    Teraz jest nieco inaczej , ponieważ na klawiaturze nie ma symbolu mnożenia. Poszukaj, naprawdę nie ma!
-                    Dlatego mnożymy przez gwiazdkę * powyżej 8: `5 * 5`. Przeczytaj to jako „5 razy 5”, to pomoże ci lepiej zapamiętać.
-                example_code: |
-                    ```
-                    {print} '5 plus 5 to ' 5 + 5
-                    {print} '5 minus 5 to ' 5 - 5
-                    {print} '5 razy 5 to ' 5 * 5
-                    {print} '5 dzielone na 5 to ' 5 / 5
-                    ```
+        levels: {}
     music:
         name: muzyka
         default_save_name: muzyka
@@ -1684,14 +1650,6 @@ adventures:
         default_save_name: Skarbonka
         description: Policz swoje kieszonkowe!
         levels:
-            12:
-                story_text: |
-                    W tej przygodzie uczysz się, jak zrobić cyfrową skarbonkę.
-
-                    ### Ćwiczenie
-                    Zakończ kod, aby obliczyć, ile masz pieniędzy i jak długo musisz oszczędzać, aby kupić to, co chcesz!
-                    **Dodatkowo** Może już zaoszczędziłeś trochę pieniędzy? Odejmij to od kwoty, którą będziesz musiał zaoszczędzić.
-                example_code: "```\n{print} 'Cyfrowa skarbonka'\nżyczenie = {ask} 'Co chciałbyś kupić?'\ncena = {ask} 'Ile to kosztuje?'\nzaoszczędzone = {ask} 'Ile pieniędzy już zaoszczędziłeś?'\nkieszonkowe = {ask} 'Ile kieszonkowego dostajesz na tydzień?'\ndo_zaoszczędzenia = cena - zaoszczędzone\ntygodnie = do_zaoszczędzenia / kieszonkowe \n{print} 'Możesz kupić ' _ ' za ' _ ' tygodni.'\n```\n"
             15:
                 story_text: |
                     ### Ćwiczenie
@@ -2154,27 +2112,6 @@ adventures:
                     Czy możesz dodać odpowiednią ilość wcięć przed każdą linią, aby kod działał poprawnie?
                     Wskazówka: niektóre wiersze w ogóle nie wymagają wcięcia.
                 example_code_2: "```\n_ dania = przystawka, danie główne, deser\n_ imiona = Szymon, Anna\n_ {for} imię {in} imiona \n_ {for} danie {in} dania  \n_ jedzenie = {ask} imię ', co chcesz zjeść jako swoje ' danie '?'\n_ {print} imię ' zamawia ' jedzenie ' jako ich ' danie\n```\n"
-            12:
-                story_text: |
-                    Od tego poziomu możesz używać liczb dziesiętnych, aby menu było bardziej realistyczne.
-
-                    ### Ćwiczenie
-                    Czy możesz wymyślić kod, aby dać znajomym i rodzinie 15% zniżki?
-                example_code: |
-                    ```
-                    cena = 0.0
-                    posiłek = {ask} 'Co chciałbyś zamówić do jedzenia?'
-                    napój = {ask} 'Czego chciałbyś się napić?'
-                    {if} posiłek {is} 'hamburger'
-                        cena = cena + 6.50
-                    {if} posiłek {is} 'pizza'
-                        cena = cena + 5.75
-                    {if} napój {is} 'woda'
-                        cena = cena + 1.20
-                    {if} napój {is} 'soda'
-                        cena = cena + 2.35
-                    {print} 'Za wszystko należy się ' cena ' dolarów'
-                    ```
             16:
                 story_text: |
                     Dzięki `{while}` możesz mieć pewność, że Twoi klienci będą mogli dodawać zamówienia, dopóki nie przestaną.
@@ -2348,31 +2285,6 @@ adventures:
         default_save_name: Piosenka
         description: Wyświetl piosenkę
         levels:
-            6:
-                story_text: "Piosenki często zawierają dużo powtórzeń. Czasami te powtórzenia opierają się na liczeniu. \nPrzykładem jest dobrze znana angielska piosenka \"Butelki Piwa\" (ang. bottles of beer). Możesz zaprogramować tą piosenkę z odrobiną matematyki.\n\nWskazówka: Użyj funkcji \"czytaj na głos\" żeby Hedy zaśpiewał tą piosenkę!\n\n### Ćwiczenie\nMożesz teraz powtórzyć linie od 2 do 7 ile razy chcesz poprzez skopiowanie tych linii.\n"
-                example_code: |
-                    ```
-                    wers = 99
-                    {print} wers ' butelek piwa na ścianie'
-                    {print} wers ' butelek piwa'
-                    {print} 'Weź jedną i przekaż ją dalej'
-                    wers = wers - 1
-                    {print} wers ' butelek piwa na ścianie'
-                    {sleep}
-                    ```
-                story_text_2: |
-                    Ta piosenka dla dzieci odlicza od 5 małych małpek do 1 małpki.
-                    Możesz zaśpiewać całą piosenkę jeżeli skopiujesz linie od 2 do 7 i wkleisz je poniżej kodu.
-                example_code_2: |
-                    ```
-                    numer = 6
-                    numer = numer - 1
-                    {print} 'Skakało na łóżku małych małpek ' numer
-                    {print} 'Nagle jedna spadła i potłukła się'
-                    {print} 'Mama do doktora dzwoni i słyszy, że'
-                    {print} 'SKAKAĆ NA ŁÓŻKU ZABRONIONE JEST!'
-                    {sleep}
-                    ```
             8:
                 story_text: |
                     Piosenki często zawierają dużo powtórzeń, na przykład: Dziecko Rekin (ang. Baby Shark)! Jeżeli ją zaśpiewasz to będziesz śpiewać ten w kółko ten sam tekst:

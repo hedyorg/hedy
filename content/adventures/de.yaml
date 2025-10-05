@@ -1398,22 +1398,7 @@ adventures:
         name: Mathe
         default_save_name: Mathe
         description: Mathe einführen
-        levels:
-            6:
-                story_text: |
-                    In diesem Level lernst du etwas Neues: Du kannst nun auch Rechnen.
-
-                    Das Plus ist einfach, du schreibst es wie in Mathe: `5 + 5` zum Beispiel. Das Minus klappt auch prima, es ist `5 - 5`.
-
-                    Das Mal ist ein bisschen anders, weil es dafür kein Symbol auf deiner Tastatur gibt. Such danach, es gibt wirklich keins!
-                    Darum multiplizieren wir mit dem Sternchen über der 8: `5 * 5`. Lies das als "5 mal 5", so kannst du es dir am Besten merken.
-                example_code: |
-                    ```
-                    {print} '5 plus 5 ist ' 5 + 5
-                    {print} '5 minus 5 ist ' 5 - 5
-                    {print} '5 mal 5 ist ' 5 * 5
-                    {print} '5 dividiert durch 5 ist ' 5 / 5
-                    ```
+        levels: {}
     music:
         name: Musik
         default_save_name: Musik
@@ -2236,27 +2221,6 @@ adventures:
                     _ Essen = {ask} Name ', Was möchten Sie als ' Kurs '?'
                     _ {print} Name ' bestellt ' Essen ' als ' Kurs
                     ```
-            12:
-                story_text: |
-                    Ab diesem Level kannst du Dezimalzahlen verwenden, um deine Speisekarte realistischer zu machen.
-
-                    ### Übung
-                    Kannst du dir Code ausdenken mit dem du deinen Freunden und deiner Familie 15% Rabatt geben kannst?
-                example_code: |
-                    ```
-                    preis = 0.0
-                    essen = {ask} 'Was möchten Sie bestellen?'
-                    trinken = {ask} 'Was möchten Sie trinken?'
-                    {if} essen {is} 'Hamburger'
-                        preis = preis + 6.50
-                    {if} essen {is} 'Pizza'
-                        preis = preis + 5.75
-                    {if} trinken {is} 'Wasser'
-                        preis = preis + 1.20
-                    {if} trinken {is} 'Sprudel'
-                        preis = preis + 2.35
-                    {print} 'Das macht ' preis ' Euro, bitte'
-                    ```
             16:
                 example_code: |
                     ```
@@ -2693,35 +2657,6 @@ adventures:
                     {turn} Winkel
                     {forward} 50
                     {turn} Winkel
-                    ```
-            8:
-                story_text: |
-                    Jetzt, da wir einzelne Linien wiederholen können, fällt uns das Zeichnen einzelner Formen leichter.
-                    Wir setzen den Winkel einmalig und nutzen dann die Variable im `{repeat}`.
-
-                    ### Übung 1
-                    Der Beispiel-Code erstellt ein Quadrat. Ändere den Code, sodass er eine andere Figur erstellt, wie ein Dreieck oder ein Sechseck.
-                    Dies bedarf einer Änderung in zwei Zeilen Code.
-                    Tipp: Ein voller Kreis hat 360 Grad.
-
-                    ### Übung 2
-                    Erstelle nun eine Zeichnung aus mindestens zwei Polygonen.
-                example_code: |
-                    ```
-                    Winkel = 90
-                    {repeat} 4 {times}
-                        {turn} Winkel
-                        {forward} 50
-                    ```
-                story_text_2: |
-                    **Extra** Wir können auch das Programm verbessern, das verschiedene Formen zeichnet. Vervollständige den Code und du kannst jedes Vieleck zeichnen, das du möchtest!
-                example_code_2: |
-                    ```
-                    Ecken = {ask} 'Wie viele Ecken soll die Form haben?'
-                    Winkel = 360 / Ecken
-                    {repeat} Ecken {times}
-                        {turn} _
-                        {forward} _
                     ```
             10:
                 story_text: |

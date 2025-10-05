@@ -160,11 +160,3 @@ adventures:
                     {print} Thank you for your order.
                     {print} Your  food  and  drinks  will be right there!
                     ```
-            5:
-                example_code: |
-                    ```
-                    drinks_in_stock {is} metsi, gemere, coke, orange juice
-                    drink {is} {ask} 'O bata go nwa eng?'
-                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'e eta!'
-                    {else} {print} 'Sorry, ga re rena yone mo semausung'
-                    ```
