@@ -207,7 +207,7 @@ adventures:
                     keys = 'lost'
                     {print} 'You are standing in your garden and you have lost your keys.'
                     {print} 'Where do you want to look for them ?'
-                    {print} 'You can choose : tree, flowerbed, rock, postbox'
+                    {print} 'You can choose : tree, flowerbed, rock, postbox'
                     {while} keys == 'lost'
                         location = {ask} 'Where do you want to look ?'
                         {if} location == 'flowerbed'
@@ -1591,22 +1591,22 @@ adventures:
                         {print} "Ceci sera écrit 5 fois"
             10:
                 story_text: |
-                    À ce niveau, tu peux non seulement utiliser un bloc de lignes avec `{if}` et `{repeat}`, mais tu peux aussi mettre ces commandes ensemble !
+                    À ce niveau, tu peux non seulement utiliser un bloc de lignes avec `{if}` et `{repeat}`, mais tu peux aussi mettre ces commandes ensemble !
                     Dans l'exemple, tu vois une commande `{if}` dans une commande `{repeat}`. Ça marche aussi à l'inverse, et un `{if}` peut aussi se trouver dans un autre `{if}` et un `{repeat}` dans un autre `{repeat}`.
-                    Essaye !
+                    Essaye !
                 example_code: |
                     ```
                     {repeat} 3 {times}
-                        nourriture = {ask} "Que veux-tu ?"
+                        nourriture = {ask} "Que veux-tu ?"
                         {if} nourriture {is} pizza
-                            {print} "bien !"
+                            {print} "bien !"
                         {else}
                             {print} "La pizza c'est meilleur"
                     ```
 
-                        nourriture = {ask} "Que veux-tu ?"
+                        nourriture = {ask} "Que veux-tu ?"
                         {if} nourriture {is} pizza
-                            {print} "parfait !"
+                            {print} "parfait !"
                         {else}
                             {print} "La pizza c'est meilleur"
     repeat_command_2:
@@ -1796,7 +1796,7 @@ adventures:
                     Tu peux l'utiliser dans ton restaurant pour demander à plusieurs personnes ce qu'elles veulent manger.
 
                     ### Exercice
-                    Peux-tu compléter le code ? Hedy doit demander le plat autant de fois qu'il y a de personnes. Donc s'il y a 5 personnes, la question doit être répétée 5 fois.
+                    Peux-tu compléter le code ? Hedy doit demander le plat autant de fois qu'il y a de personnes. Donc s'il y a 5 personnes, la question doit être répétée 5 fois.
                     **Bonus** Enrichi ton code avec plus de questions, par exemple pour les boissons et les sauces.
                 example_code: |
                     ```
@@ -1969,9 +1969,9 @@ adventures:
                     À ce niveau tu peux programmer le jeu pierre, papier, ciseaux dans son ensemble, en imbriquant les commandes `{if}`.
 
                     ### Exercice
-                    Peux-tu terminer ce code ? Le programme doit dire qui gagne pour chaque combinaison.
+                    Peux-tu terminer ce code ? Le programme doit dire qui gagne pour chaque combinaison.
 
-                    **Bonus** Tu veux jouer plus d'une partie ? Étant le code pour pouvoir jouer plusieurs fois. Tu peux même utiliser une commande `{ask}` pour demander aux joueurs combien de parties ils veulent jouer.
+                    **Bonus** Tu veux jouer plus d'une partie ? Étant le code pour pouvoir jouer plusieurs fois. Tu peux même utiliser une commande `{ask}` pour demander aux joueurs combien de parties ils veulent jouer.
                 example_code: |
                     ```
                     choix = pierre, papier, ciseaux
