@@ -414,6 +414,8 @@ def store_new_student_account(db, account, teacher_username):
         "verification_pending": hashed_token,
         "last_login": timems(),
     }
+    if "email" in account and account["email"]:
+        user["email"] = account["email"]
     db.store_user(user)
     return user
 
