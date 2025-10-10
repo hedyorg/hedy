@@ -62,7 +62,7 @@ customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 # This creates the lightbulb icons next to the adventure
 KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_command', 'random_command',
                        'add_remove_command', 'quotation_marks', 'if_command', 'in_command', 'maths', 'repeat_command',
-                       'repeat_command_2', 'for_command', 'while_command', 'elif_command',
+                       'repeat_command_2', 'for_command', 'and_or_command', 'while_command', 'elif_command',
                        'clear_command', 'pressit', 'debugging', 'functions'}
 
 
