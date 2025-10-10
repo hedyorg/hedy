@@ -174,7 +174,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'dishes',
         'piggybank',
         'quizmaster',
-        'years',
         'turtle',
         'turtle_draw_it',
         'calculator',
@@ -186,6 +185,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     8: [
         'repeat_command',
         'story',
+        'years',
         'songs',
         'music',
         'dishes',
