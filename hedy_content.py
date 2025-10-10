@@ -196,7 +196,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'pressit',
         'turtle_draw_it',
         'debugging',
-        'hospital'
+        'hospital',
+        'congratulations'
     ],
     9: [
         'repeat_command',
@@ -254,7 +255,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
+        'hospital',
+        'congratulations'
     ],
     13: [
         'print_command',
@@ -300,6 +302,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'guess_my_number',
         'debugging',
         'hospital'
+        'congratulations'
     ],
 }
 
