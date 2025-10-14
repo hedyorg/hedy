@@ -1296,15 +1296,7 @@ adventures:
                     ```
     maths:
         description: Introduction des maths
-        levels:
-            6:
-                example_code: |
-                    ```
-                    {print} "5 plus 5 fait " 5 + 5
-                    {print} "5 moins 5 fait " 5 - 5
-                    {print} "5 fois 5 fait " 5 * 5
-                    {print} "5 divisé par 5 fait " 5 / 5
-                    ```
+        levels: {}
     music:
         name: musique
         default_save_name: musique
@@ -1935,27 +1927,6 @@ adventures:
                     _ plat = {ask} nom ", que voulez-vous manger pour votre " service " ?"
                     _ {print} nom " a commandé " plat " pour son " service
                     ```
-            12:
-                story_text: |
-                    À partir de ce niveau, tu peux utiliser les nombres décimaux pour rendre ton menu plus réaliste.
-
-                    ### Exercice
-                    Peux-tu écrire le code pour donner à tes amis et à ta famille une réduction de 15 % ?
-                example_code: |
-                    ```
-                    total = 0.0
-                    nourriture = {ask} "Que voulez-vous commander ?"
-                    boisson = {ask} "Que voulez-vous boire ?"
-                    {if} nourriture {is} "hamburger"
-                        total = total + 6.50
-                    {if} nourriture {is} "pizza"
-                        total = total + 5.75
-                    {if} boisson {is} "water"
-                        total = total + 1.20
-                    {if} boisson {is} "soda"
-                        total = total + 2.35
-                    {print} "Ça vous fera un total de " total " euros, s'il vous plait"
-                    ```
     rock:
         name: Pierre, papier, ciseaux
         default_save_name: Rock
@@ -2060,16 +2031,6 @@ adventures:
                         {if} ton_choix {is} ciseaux
                             {print} "Tu as perdu !"
                     # termine ce code
-                    ```
-            9:
-                story_text: |
-                    ### Exercice
-                    Aux niveaux précédents, tu as déjà fait ton propre jeu pierre-papier-ciseau. Peux-tu finir l'exemple suivant en utilisant la commande `{for}` correctement pour que le jeu fonctionne ?
-                example_code: |
-                    ```
-                    choix = _
-                    joueurs = _
-                    {for} _
                     ```
             16:
                 example_code: |
@@ -2236,24 +2197,6 @@ adventures:
                 example_code_2: |
                     ```
                     singes = 5, 4, 3, 2, 1
-                    ```
-            12:
-                story_text: |
-                    Dans cette chanson, nous pouvons programmer plus facilement la partie « si tu as de la joie au cœur, tape des mains ». Parce que nous pouvons mettre toutes les actions dans une liste, comme ceci :
-
-                    ### Exercice
-                    Peux-tu ajouter le bon nombre d'indentations pour chaque ligne pour que la chanson soit chantée correctement ?
-                    Conseil : Tu n'es pas obligé d'indenter toutes les lignes.
-                example_code: |
-                    ```
-                    _ actions = "tape des mains", "tape du pied", "crie hourra !"
-                    _ {for} action {in} actions
-                    _ {for} i {in} {range} 1 {to} 2
-                    _ {print} "si tu as de la joie au coeur"
-                    _ {print} action
-                    _ {print} "si tu as de la joie au coeur et que tu souhaite le partager"
-                    _ {print} "si tu as de la joie au coeur"
-                    _ {print} action
                     ```
             13:
                 story_text: |

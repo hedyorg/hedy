@@ -55,7 +55,7 @@ text_in_quotes: _SINGLE_QUOTE text_with_spaces_without_single_quotes? _SINGLE_QU
 
 // FUNCTIONS =====================================================================
 
-define: (_DEF | "define ") function_name _LEFT_BRACKET? (arguments)? _RIGHT_BRACKET? _COLON? _EOL _commands _EOL? _END_BLOCK
+define: (_DEF | _DEFINE) function_name _LEFT_BRACKET? (arguments)? _RIGHT_BRACKET? _COLON? _EOL _commands _EOL? _END_BLOCK
 call.-100: function_name _LEFT_BRACKET arguments? _RIGHT_BRACKET //make sure call goes below input, which looks the same
 
 //TODO not sure yet if I can make brackets optional with a function call?

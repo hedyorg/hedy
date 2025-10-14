@@ -73,6 +73,33 @@ class TestsLevel9(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
+    def test_if_elif_else(self):
+        code = textwrap.dedent("""\
+        var is 0
+        if var is 1
+            print 'if line 1'
+            print 'if line 2'
+        elif var is 2
+            print 'elif 1 line 1'
+            print 'elif 2 line 2'       
+        elif var is 3
+            print 'elif 2 line 1'
+            print 'elif 2 line 2'    
+        else
+            print 'else line 1'
+            print 'else line 2'""")
+
+        expected = textwrap.dedent("""\
+        var = Value('0', num_sys='Latin')
+        if localize(var.data) == localize('1'):
+          print(f'if line 1')
+          print(f'if line 2')
+        else:
+          print(f'else line 1')
+          print(f'else line 2')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
     def test_if_else(self):
         code = textwrap.dedent("""\
         var is 0

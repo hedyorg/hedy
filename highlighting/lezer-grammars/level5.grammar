@@ -30,9 +30,7 @@ If { ifs+ Condition newline* IfLessCommand Else? }
 Else { !else elses+ newline* IfLessCommand }
 
 Condition { 
-    EqualityCheck { Text is+ (String | Text | pressed+) } |
-    InListCheck { Text ins+  Text } |
-    NotInListCheck { Text not_in+  Text }
+    EqualityCheck { Text is+ (String | Text | pressed+) }
 }
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
@@ -63,9 +61,7 @@ ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
     from[@name="from"],
     remove[@name="remove"],
     to_list[@name="to_list"],
-    clear[@name="clear"],    
-    ins[@name="in"],
-    not_in[@name="not_in"]
+    clear[@name="clear"]
 }
 
 Op<expr> { expr }

@@ -179,15 +179,6 @@ adventures:
             10:
                 example_code: "```\n{print} \"La Marta baixa a la ciutat\"\nlloc = {ask} \"Anirà la Marta a una botiga o tornarà directa a casa?\"\n{if} lloc {is} botiga\n    {print} \"Entra a una botiga.\"\n    {print} \"Din la botiga veu un llibre interessant.\"\n    llibre = {ask} \"La Marta compra el llibre?\"\n    {if} llibre {is} sí\n    _ {print} \"La Marta compra el llibre i torna a casa.\"\n    _ {else}\n    _ {print} \"La Marta surt de la botiga i torna a casa.\"\n{else}\n    {print} \"La Marta torna a casa.\"\n```\n"
                 story_text: "En aquest nivell pots utilitzar les comandes `{if}` i `{repeat}` dins d'altres comandes `{if}` i `{repeat}`. \nAixò t'afegeix moltes opcions i ajuda a fer històries molt més interactives.\n\n### Exercici 1\nCompleta el codi perquè la comanda `{if}` funcioni correctament.\n\n### Exercici 2\nAfegeix una comanda `{if}` i `{else}` per a la part de la història on la Robin també torna a casa.\n\n### Exercici 3\nTorna a la teva història del nivell 8, copia-la i utilitza almenys dos `{if}` dins d'una altra comanda `{if}`.\n"
-                example_code_2: |
-                    ```
-                    {print} "El nostre heroïna camina dins el bosc"
-                    {print} "El camí té una bifurcació"
-                    camí= {ask} "Quin camí ha d'escollir?"
-                    arma = {ask} "Quina arma desenfunda?"
-                    {if} camí {is} "esquerre" {and} arma {is} "espasa"
-                        _"
-                    ```
                 story_text_2: "Amb les comandes `{and}` i `{or}`, pots fer que les teves històries siguin més versàtils. Pots fer dues preguntes i respondre a la combinació de respostes.\n\n### Exercici 1\nMira el codi d'exemple i completa'l. Després, afegeix almenys 2 comandes `{if}` més amb `{and}` o `{or}`.\n\n### Exercici 2\nTroba una història d'un nivell anterior i afegeix-hi una comanda `{and}` o `{or}`.\n"
             16:
                 example_code: |
@@ -360,14 +351,6 @@ adventures:
             10:
                 example_code: "```\npunts = 0\n{repeat} 10 {times}\n    nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    nombre_1 = nombres {at} {random}\n    nombre_2 = nombres {at} {random}\n    resposta_correcta = nombre_1 * nombre_2\n    {print} \"Quant fa \" nombre_1 \" per \" nombre_2 \"?\"\n    answer = {ask} \"Escriu la teva resposta aquí...\"\n    {print} \"La teva resposta és \" answer\n    {if} _ {is} _\n        punts = punts + 1\n{print} \"Bona feina! la teva puntuació és ... \" punts \" sobre 10!\"\n```\n"
                 story_text: "En un nivell anterior, has creat una calculadora. En aquest nivell, pots ampliar aquell codi perquè faci múltiples preguntes.\n\n### Exercici 1\nPots completar la línia 10 perquè el codi funcioni?\n\n### Exercici 2\nDona un feedback al jugador quan introdueixi una resposta, com `{print} 'Correcte!'` o `{print} 'Incorrecte! La resposta correcta és ' resposta_correcta`.\n"
-                example_code_2: |
-                    ```
-                    resposta1 = {ask} "Quin és 10 per 7?"
-                    resposta2 = {ask} "Quin és 6 per 7?"
-                    {if} _ _ _ _ _ _ _
-                        {print} _
-                    ```
-                story_text_2: "### Exercici 1\nFem que el programa de pràctica sigui una mica més difícil. Ara el jugador ha de respondre correctament dues preguntes. Omple els buits per completar el programa.\n\n### Exercici 2\nDe vegades, els càlculs tenen múltiples respostes correctes. Per exemple, 10 es pot dividir entre 5 i entre 2. Així, la pregunta \"Quin nombre divideix 10?\" es pot respondre amb 2 o amb 5.\nPlanteja una pregunta de càlcul que tingui múltiples respostes correctes, demana al jugador que la respongui i determina si és correcta utilitzant `{or}`.\nNeteja l'editor de codi i crea la teva pròpia solució.\n"
             15:
                 story_text: "En aquesta aventura construiràs una calculadora que calcula la teva nota mitjana. Si aconsegueixes que la teva calculadora funcioni, pots continuar amb la pròxima aventura, que et permetrà afegir dues funcions extres.\n\n### Exercici 1\nOmple els buits i fes que la calculadora funcioni.\n* Comença amb la quarta línia, afegeix una pregunta per saber quina nota ha tret l’estudiant.\n* A la cinquena línia vols calcular el total de totes les notes, així que el total = total + nota.\n* Després fixem el valor de retorn. Volem retornar la mitjana, així que el total dividit pel nombre de proves (4).\n* Finalment, acabem el codi cridant la funció a la línia 8.\n\nHo has aconseguit? Genial! T’agradaria afegir encara més funcions a la teva calculadora? **Aquesta aventura continua a la pròxima aventura!**\n"
                 example_code: "```\n{define} calcula_mitjana_nota\n    total = 0\n    {for} i {in} {range} 1 {to} 4\n        nota = {ask} _\n        total = total + _\n        {return} _ / 4\n\nmitjana_nota = {call} _\n{print} \"La teva nota mitjana és \" mitjana_nota\n```\n"
@@ -1024,10 +1007,7 @@ adventures:
         name: Llengua
         description: Practica paraules amb una llengua estrangera
     maths:
-        levels:
-            6:
-                example_code: "```\n{print} \"5 més 5 és \" 5 + 5\n{print} \"5 menys 5 és \" 5 - 5\n{print} \"5 per 5 és \" 5 * 5\n{print} \"5 dividit entre 5 és \" 5 / 5\n```\n"
-                story_text: "En aquest nivell aprendràs una cosa nova: ara també pots calcular.\n\nLes sumes són fàcils, l'escrius com en matemàtiques: `5 + 5`, per exemple. Les restes també funcionen igual, és `5 - 5`.\n\nMultiplicar és una mica diferent, perquè no hi ha cap símbol de multiplicació al teu teclat. Busca'l, de debò no hi és!  \nPer això multipliquem amb l'asterisc que hi ha normalment prop de la tecla ENTER: `5 * 5`. Llegeix-ho com \"5 vegades 5\", això t'ajudarà a recordar-ho millor.\n"
+        levels: {}
         name: Mates
         default_save_name: mates
         description: Introduint les mates
@@ -1084,11 +1064,6 @@ adventures:
             12:
                 story_text: "Les cançons contenen molta repetició. Ho podem capturar amb una funció!\n### Exercici\nMira l'exemple de codi amb la funció. Omple les dues línies perquè s'imprimeixi tota la cançó.\n"
                 example_code: "```\n{define} cada_dia\n    {print} \"Cada dia al dematí\"\n    {print} _\n\n{call} cada_dia\n{print} \"I la gent mig adormida\"\n{print} \"es desperta de seguida.\"\n{call} _\n```\n"
-            14:
-                story_text_2: "### Exercici 2\nAra crea el teu propi codi per a la cançó infantil \"Les rodes de l'autobús\" de la mateixa manera!\n"
-                example_code: "```\ndia = \"dilluns\", \"dimarts\", \"dimecres\", \"dijous\", \"divendres\", \"dissabte\", \"diumenge\"]\ncompra = [\"llums\", \"naps\", \"nespres\", \"nous\", \"faves tendres\", \"tot s'ho gasta!\", \"tot s'ho menja!\"]\n\n_\n    {print} \"La masovera s'en va al mercat\"\n    {print} \"El mercat és el \" _\n    {print} \"El \" _ \" en compra \" _\n    {print} \"El \" _ \", \" _\n    {print} \"O lai la, la masovera, la masovera.\"\n    {print} \"O lai la, la masovera s'en va al mercat.\"\n    {sleep} 2\n    {clear}\n```\n"
-                example_code_2: "```\nobjecte = \"rodes\", \"portes\", _\nmoviment =  \"van girant\", \"obrint tancant\", _\n```\n"
-                story_text: "### Exercici\nAcaba la cançó infantil!\n"
         name: Canta una cançó! 2
         default_save_name: Cançó 2
         description: Canta una cançó 2
@@ -1240,9 +1215,6 @@ adventures:
             10:
                 story_text: "En aquest nivell pots utilitzar la nidificació per fer que el teu restaurant sigui més realista i divertit!\n\n### Exercici\nLa indentació s'ha eliminat del codi d'exemple.\nPots esbrinar quanta indentació necessita cada línia perquè el codi funcioni correctament?\nSi el client demana pizza, Hedy no hauria de preguntar quina salsa vol el client.\n\n**Extra** El restaurant no disposa de totes les salses. Fes una llista de les salses disponibles i dona una resposta amb cada comanda en funció de si està disponible. <br>\n**Extra** Les pizzes tenen ingredients. Pregunta als clients què volen. <br>\n**Extra** Els clients potser volen beguda. Pregunta'ls-hi també! <br>\n"
                 example_code: "```\n{print} \"Benvinguts al restaurant del Chef Hedy\"\ngent = {ask} \"Quantes persones sereu a taula?\"\n{print} \"Perfecte!\"\npreu = 0\n{repeat} gent {times}\n_ menjar = {ask} \"Què voldrà menjar?\"\n_ {print} menjar\n_ {if} menjar {is} patates fregides\n_ preu = preu + 3\n_ salsa = {ask} \"Quina salsa vol per les patates?\"\n_ {if} salsa {is} no\n_ {print} \"sense salsa\"\n_ {else}\n_ preu = preu + 1\n_ {print} \"amb \" salsa\n_ {if} menjar {is} pizza\n_ preu = preu + 4\n{print} \"En total costarà \" preu \" euros\"\n{print} \"Bon profit!\"\n```\n"
-            12:
-                story_text: "A partir d'aquest nivell, pots utilitzar nombres decimals per fer el teu menú una mica més realista.\n\n### Exercici\nSeries capaç de pensar un fragment de codi que oferís als teus amics i família un descompte del 15%?\n"
-                example_code: "```\npreu = 0.0\nmenjar = {ask} \"Què voldria menjar?\"\nbeguda = {ask} \"I per veure que voldria?\"\n{if} menjar {is} \"hamburguesa\"\n    preu = preu + 6.50\n{if} menjar {is} \"pizza\"\n    preu = preu + 5.75\n{if} beguda {is} \"aigua\"\n    preu = preu + 1.20\n{if} beguda {is} \"refresc\"\n    preu = preu + 2.35\n{print} \"Costarà un total de \" preu \" euros, siusplau\"\n```\n"
             16:
                 story_text: "Amb la comanda `{while}` pots assegurar-te que els teus clients puguin continuar afegint comandes fins que hagin acabat.\n\n### Exercici\nAfegeix correctament la comanda `{while}` a aquest codi.\n"
                 example_code: "```\n{print} \"Benvinguts al McHedy\"\ncontinuar = \"sí\"\n_\n    comanda = {ask} \"Què vol demanar?\"\n    {print} comanda\n    continuar = {ask} \"Voldria demanar alguna cosa més?\"\n{print} \"Gràcies!\"\n```\n"

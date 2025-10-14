@@ -11,7 +11,12 @@ module.exports = {
       '../../../node_modules/tw-elements/dist/js/**/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        print: { raw: 'print' },
+        screen: { raw: 'screen' },
+      },
+    },
     fontSize: {
       xs: '0.75rem',
       sm: '0.875rem',

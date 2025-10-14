@@ -27,7 +27,7 @@ import {
     forward as forward5, turn as turn5, sleep as sleep5, is as is5,
     add as add5, remove as remove5, from as from5, to_list as to_list5,
     at as at5, random as random5, clear as clear5, ifs as if5,
-    elses as else5, ins as in5, pressed as pressed5, not_in as not_in5
+    elses as else5, pressed as pressed5
 } from "./level5-parser.terms"
 
 import {
@@ -35,7 +35,8 @@ import {
     forward as forward6, turn as turn6, sleep as sleep6, is as is6,
     add as add6, remove as remove6, from as from6, to_list as to_list6,
     at as at6, random as random6, clear as clear6, ifs as if6,
-    elses as else6, ins as in6, pressed as pressed6, not_in as not_in6
+    elses as else6, ins as in6, pressed as pressed6, not_in as not_in6,
+    elif as elif6
 } from "./level6-parser.terms"
 
 import {
@@ -43,8 +44,7 @@ import {
     forward as forward7, turn as turn7, sleep as sleep7, is as is7,
     add as add7, remove as remove7, from as from7, to_list as to_list7,
     at as at7, random as random7, clear as clear7, ifs as if7,
-    elses as else7, ins as in7, pressed as pressed7, not_in as not_in7,
-    repeat as repeat7, times as times7,
+    elses as else7, ins as in7, pressed as pressed7, not_in as not_in7, elif as elif7
 } from "./level7-parser.terms"
 
 import {
@@ -62,7 +62,7 @@ import {
     add as add10, remove as remove10, from as from10, to_list as to_list10,
     at as at10, random as random10, clear as clear10, ifs as if10,
     elses as else10, ins as in10, pressed as pressed10, not_in as not_in10,
-    repeat as repeat10, times as times10, fors as for10
+    repeat as repeat10, times as times10, and as and10, or as or10,
 } from "./level10-parser.terms"
 
 import {
@@ -71,7 +71,7 @@ import {
     add as add11, remove as remove11, from as from11, to_list as to_list11,
     at as at11, random as random11, clear as clear11, ifs as if11,
     elses as else11, ins as in11, pressed as pressed11, not_in as not_in11,
-    repeat as repeat11, times as times11, fors as for11, to as to11, range as range11
+    repeat as repeat11, times as times11, fors as for11
 } from "./level11-parser.terms"
 
 import {
@@ -80,20 +80,19 @@ import {
     add as add12, remove as remove12, from as from12, to_list as to_list12,
     at as at12, random as random12, clear as clear12, ifs as if12,
     elses as else12, ins as in12, pressed as pressed12, not_in as not_in12,
-    repeat as repeat12, times as times12, fors as for12, to as to12, range as range12,
-    define as define12, returns as returns12, _with as with12, call as call12
+    repeat as repeat12, times as times12, fors as for12, define as define12,
+    returns as returns12, _with as with12, call as call12
 } from "./level12-parser.terms"
 
 import {
-    print as print13, ask as ask13, play as play13, color as color13,
-    forward as forward13, turn as turn13, sleep as sleep13, is as is13,
-    add as add13, remove as remove13, from as from13, to_list as to_list13,
-    at as at13, random as random13, clear as clear13, ifs as if13,
-    elses as else13, ins as in13, pressed as pressed13, not_in as not_in13,
-    repeat as repeat13, times as times13, fors as for13, to as to13, range as range13,
-    define as define13, returns as returns13, _with as with13, call as call13,
-    and as and13, or as or13
-} from "./level13-parser.terms"
+    print as print13, is as is13, input as input13, sleep as sleep13, random as random13,
+    forward as forward13, turn as turn13, play as play13, color as color13, add as add13,
+    remove as remove13, from as from13, clear as clear13, ifs as ifs13,
+    elses as elses13, and as and13, or as or13, pressed as pressed13, notIn as notIn13, ins as ins13,
+    repeat as repeat13, times as times13, range as range13, whiles as whiles13,
+    def as def13, returns as returns13, fors as fors13, to_list as to_list13, elif as elif13,
+    low_true as true13, low_false as false13, cap_true as True13, cap_false as False13
+}  from "./level13-parser.terms";
 
 import {
     print as print14, ask as ask14, play as play14, color as color14,
@@ -251,8 +250,6 @@ const keywordToToken: Record<number, TokenSpecializer> = {
             "from": from5,
             "to_list": to_list5,
             "clear": clear5,
-            "not_in": not_in5,
-            "in": in5
         },
         specialize: {
             "if": if5,
@@ -279,14 +276,15 @@ const keywordToToken: Record<number, TokenSpecializer> = {
             "clear": clear6,
             "not_in": not_in6,
             "in": in6
-        },
+    },
         specialize: {
             "if": if6,
             "pressed": pressed6,
             "ask": ask6,
             "at": at6,
             "random": random6,
-            "else": else6
+            "else": else6,
+            "elif": elif6
         },
     },
     7: {
@@ -304,9 +302,7 @@ const keywordToToken: Record<number, TokenSpecializer> = {
             "to_list": to_list7,
             "clear": clear7,
             "not_in": not_in7,
-            "in": in7,
-            "repeat": repeat7,
-            "times": times7
+            "in": in7
         },
         specialize: {
             "if": if7,
@@ -314,7 +310,8 @@ const keywordToToken: Record<number, TokenSpecializer> = {
             "ask": ask7,
             "at": at7,
             "random": random7,
-            "else": else7
+            "else": else7,
+            "elif": elif7
         },
     },
     8: {
@@ -392,7 +389,6 @@ const keywordToToken: Record<number, TokenSpecializer> = {
             "in": in10,
             "repeat": repeat10,
             "times": times10,
-            "for": for10
         },
         specialize: {
             "if": if10,
@@ -400,7 +396,9 @@ const keywordToToken: Record<number, TokenSpecializer> = {
             "ask": ask10,
             "at": at10,
             "random": random10,
-            "else": else10
+            "else": else10,
+            "and": and10,
+            "or": or10
         },
     },
     11: {
@@ -422,8 +420,6 @@ const keywordToToken: Record<number, TokenSpecializer> = {
             "repeat": repeat11,
             "times": times11,
             "for": for11,
-            "to": to11,
-            "range": range11
         },
         specialize: {
             "if": if11,
@@ -453,8 +449,6 @@ const keywordToToken: Record<number, TokenSpecializer> = {
             "repeat": repeat12,
             "times": times12,
             "for": for12,
-            "to": to12,
-            "range": range12,
             "return": returns12,
             "define": define12,
         },
@@ -470,41 +464,42 @@ const keywordToToken: Record<number, TokenSpecializer> = {
         },
     },
     13: {
-        extend: {
-            "print": print13,
-            "forward": forward13,
-            "turn": turn13,
+        specialize: {
+            "add": add13,
+            "and": and13,
+            "clear": clear13,
             "color": color13,
+            "def": def13,
+            "print": print13,
+            "is": is13,
+            "input": input13,
             "play": play13,
             "sleep": sleep13,
-            "is": is13,
-            "add": add13,
+            "random": random13,
+            "forward": forward13,
+            "turn": turn13,
+            "to_list": to_list13,
             "remove": remove13,
             "from": from13,
-            "to_list": to_list13,
-            "clear": clear13,
-            "not_in": not_in13,
-            "in": in13,
+            "if": ifs13,
+            "else": elses13,
+            "or": or13,
+            "pressed": pressed13,
+            "not_in": notIn13,
+            "in": ins13,
             "repeat": repeat13,
             "times": times13,
-            "for": for13,
-            "to": to13,
             "range": range13,
+            "while": whiles13,
             "return": returns13,
-            "define": define13
+            "for": fors13,
+            "elif": elif13,
+            "true": true13,
+            "false": false13,
+            "True": True13,
+            "False": False13,
         },
-        specialize: {
-            "if": if13,
-            "pressed": pressed13,
-            "ask": ask13,
-            "at": at13,
-            "random": random13,
-            "else": else13,
-            "and": and13,
-            "or": or13,
-            "call": call13,
-            "with": with13
-        },
+        extend: {}
     },
     14: {
         extend: {

@@ -648,24 +648,6 @@ adventures:
                             ønsket_mat = {ask} navn ', hva vil du ha til ' rett '?'
                             {print} navn ' bestiller ' ønsket_mat ' til ' rett
                     ```
-            12:
-                story_text: |
-                    Fra dette nivået av kan du bruke desimaltall for å gjøre menyen mer realistisk.
-                example_code: |
-                    ```
-                    pris = 0
-                    ønsket_mat = {ask} 'What would you like to order?'
-                    ønsket_drikke = {ask} 'What would you like to drink?'
-                    {if} ønsket_mat {is} 'hamburger'
-                        pris = pris + 60.50
-                    {if} ønsket_mat {is} 'pizza'
-                        pris = pris + 50.75
-                    {if} ønsket_drikke {is} 'vann'
-                        pris = pris + 10.50
-                    {if} ønsket_drikke {is} 'brus'
-                        pris = pris + 20.35
-                    {print} 'Det blir ' pris ' kroner, takk!'
-                    ```
             16:
                 story_text: |
                     Med `{while}` kan du sørge for at kundene dine kan fortsette å bestille til de er ferdig.

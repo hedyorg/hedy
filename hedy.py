@@ -2283,7 +2283,7 @@ class ConvertToPython_5(ConvertToPython_4):
     def ifelse(self, meta, args):
         return f"""{args[0]}
 else:{self.add_debug_breakpoint()}
-{ConvertToPython.indent(args[2])}"""
+{ConvertToPython.indent(args[1])}"""
 
     def condition(self, meta, args):
         return ' and '.join(args)
@@ -2414,13 +2414,20 @@ class ConvertToPython_6(ConvertToPython_5):
             __ns = get_num_sys({var_access})
             {var_assign} = Value({var_access}, num_sys=__ns)""")
 
-    def ifelifelse(self, meta, args):
+    def if_clause(self, meta, args):
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
-    {ConvertToPython.indent(args[1])}
-elif {args[2]}:
-{ConvertToPython.indent(args[3])}
-else:{self.add_debug_breakpoint()}
-{ConvertToPython.indent(args[4])}"""
+{ConvertToPython.indent(args[1])}"""
+
+    def else_clause(self, meta, args):
+        return f"""else:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(args[0])}"""
+
+    def elif_clause(self, meta, args):
+        return f"""elif {args[0]}:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(args[1])}"""
+
+    def ifelifelse(self, meta, args):
+        return '\n'.join(args)
 
     def play(self, meta, args):
         if not args:
@@ -2731,6 +2738,9 @@ else:{self.add_debug_breakpoint()}
         body = '\n'.join(args[1:])
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(body)}"""
+
+
+# move elif and else into this is nicer and scales better!
 
     def else_clause(self, meta, args):
         return ('\n'.join(args))
