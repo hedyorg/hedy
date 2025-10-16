@@ -13,9 +13,9 @@ print: _PRINT _LEFT_BRACKET? (_print_ask_argument)? _RIGHT_BRACKET?
 _print_ask_argument: (_SPACE | list_access |var_access | quoted_text | _COMMA)*
 
 //optional colon in if/elses
-_if_clause: _IF (_conditions) _COLON? _EOL _commands _EOL? _END_BLOCK
-_else_clause: _SPACE* _ELSE _COLON _EOL _commands _EOL? _END_BLOCK
-_elif_clause: _SPACE* _ELIF (_conditions) _COLON _EOL _commands _EOL? _END_BLOCK
+if_clause: _IF (_conditions) _COLON? _EOL _commands _EOL? _END_BLOCK
+else_clause: _SPACE* _ELSE _COLON? _EOL _commands _EOL? _END_BLOCK
+elif_clause: _SPACE* _ELIF (_conditions) _COLON? _EOL _commands _EOL? _END_BLOCK
 
 //add input
 input_empty_brackets: var (_IS | _EQUALS ) _INPUT (_LEFT_BRACKET _RIGHT_BRACKET)

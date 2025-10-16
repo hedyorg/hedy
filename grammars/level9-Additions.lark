@@ -13,7 +13,7 @@ if_pressed_without_else: if_pressed
 if_pressed_elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
 ifelifelse: if_clause (_EOL elif_clause)* (_EOL else_clause)?
-ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs' //FH sept 2025 I think ifs can now be removed?
+ifs: if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs' //FH sept 2025 I think ifs can now be removed?
 
 
 repeat.1: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL _commands _EOL? _END_BLOCK

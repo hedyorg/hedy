@@ -2665,6 +2665,38 @@ class ConvertToPython_6(ConvertToPython_5):
         bool_sys = f', bool_sys={ev.bool_sys}' if ev.bool_sys else ''
         return f"{{localize({ev.data}{num_sys}{bool_sys})}}"
 
+    def process_comparison(self, meta, args, operator):
+        arg0 = self.process_variable_for_comparisons(args[0], meta)
+        arg1 = self.process_variable_for_comparisons(args[1], meta)
+
+        return f"{arg0}{operator}{arg1}"
+
+    def process_variable_for_comparisons(self, arg, meta):
+        value = escape_var(self.unpack(arg))
+        if self.is_variable(arg, meta.line):
+            return f"{self.scoped_var_access(value, meta.line, parentheses=True)}.data"
+        elif self.is_list_access(arg):
+            return f"{escape_var(arg)}.data"
+        else:
+            return value
+
+    def equality_check_dequals(self, meta, args):
+        return self.equality_check(meta, args)
+
+    def smaller(self, meta, args):
+        return self.process_comparison(meta, args, "<")
+
+    def bigger(self, meta, args):
+        return self.process_comparison(meta, args, ">")
+
+    def smaller_equal(self, meta, args):
+        return self.process_comparison(meta, args, "<=")
+
+    def bigger_equal(self, meta, args):
+        return self.process_comparison(meta, args, ">=")
+
+    def not_equal(self, meta, args):
+        return self.process_comparison(meta, args, "!=")
 
 @v_args(meta=True)
 @hedy_transpiler(level=7)
@@ -2687,6 +2719,18 @@ class ConvertToPython_7(ConvertToPython_6):
         body = add_sleep_to_command(body, indent=True, is_debug=self.is_debug, location="after")
         ex = make_value_error(Command.repeat, 'suggestion_number', self.language)
         return f"for {var_name} in range(int_with_error({times}, {ex})):{self.add_debug_breakpoint()}\n{body}"
+
+    def number(self, meta, args):
+        # try converting to ints
+        try:
+            value = ''.join([str(int(x)) for x in args])
+            value = int(value)
+        except Exception:
+            # if it does not work, convert to floats
+            value = ''.join([str(float(x)) for x in args])
+            value = float(value)
+        input_text = ''.join([x for x in args])
+        return LiteralValue(value, num_sys=get_num_sys(input_text))
 
 
 @v_args(meta=True)
@@ -2823,18 +2867,6 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             text_in_quotes = "''"
         return LiteralValue(text_in_quotes)
-
-    def number(self, meta, args):
-        # try converting to ints
-        try:
-            value = ''.join([str(int(x)) for x in args])
-            value = int(value)
-        except Exception:
-            # if it does not work, convert to floats
-            value = ''.join([str(float(x)) for x in args])
-            value = float(value)
-        input_text = ''.join([x for x in args])
-        return LiteralValue(value, num_sys=get_num_sys(input_text))
 
     def true(self, meta, args):
         bool_sys = self.get_bool_sys(args[0], True)
@@ -3611,7 +3643,7 @@ def _restore_parser_from_file_if_present(pickle_file):
     return None
 
 
-@lru_cache(maxsize=0 if utils.is_production() else 100)
+# @lru_cache(maxsize=0 if utils.is_production() else 100)
 def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     """Return the Lark parser for a given level.
     Parser generation takes about 0.5 seconds depending on the level so
