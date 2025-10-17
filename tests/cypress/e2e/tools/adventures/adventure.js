@@ -11,6 +11,12 @@ export function createAdventure(name)
         cy.intercept('/for-teachers/customize-adventure').as('customizeAdventure');      
         cy.getDataCy('custom_adventure_name').clear().type(name);
         cy.wait(500)
+        cy.getDataCy('level_select').click();
+        cy.wait(500)
+        cy.getDataCy('1').click();
+        cy.wait(500)
+        cy.getDataCy('level_select').click()
+        cy.wait(500)
         cy.wait('@customizeAdventure').should('have.nested.property', 'response.statusCode', 200);
     }
 

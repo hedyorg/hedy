@@ -1,3 +1,4 @@
+declare const htmx: typeof import('./htmx');
 /**
  * The modal we pop up to have children confirm things
  */
@@ -32,7 +33,7 @@ class Modal {
     $('#modal_copy').hide();
     $('#modal_repair').hide();
     $('#modal_preview').hide();
-    $('#modal_feedback').hide();
+    $('#modal_search').hide();
   }
 
   public hide_alert() {
@@ -162,6 +163,39 @@ class Modal {
     });
   }
 
+  /**
+   * Modal for a htmx-based search.
+   * 
+   * @param message The text to show above the search box
+   * @param input_attr HTMX attributes to attach to the search input box
+   * @param confirm_attr HTMX attributes to attach to the confirm button
+   * @param result_target The target element to update with the search results
+   * @param confirm_label Optional text to use for the confirmation
+   */
+  public htmx_search(message: string, input_attr: Record<string, string>, confirm_attr: Record<string, string>, result_target: string, confirm_label?: string, success_message?: string) {
+    this.hide();
+    $('#modal_search_text').text(message);
+    if (confirm_label) $('#modal_ok_search_button').text(confirm_label)
+    $('#modal_search_input').attr(input_attr);
+    $('#modal_ok_search_button').attr(confirm_attr);
+    $(result_target).attr({'hx-on::after-settle': `hedyApp.close_htmx_search_modal("${success_message}")`});
+    htmx.process(document.body)
+    this.show();
+    $('#modal_search').show();
+    $('#modal_cancel_search_button').off('click').on('click', () => {
+      this.hide();
+      this.clear_search_boxes();
+    });
+  }
+  
+  public clear_search_boxes() {
+    $('#modal_search_input').val("");
+    const users_to_invite = document.getElementById('users_to_invite');
+    if (users_to_invite) users_to_invite.innerHTML = ''
+    const search_results = document.getElementById('search_results')
+    if (search_results) search_results.innerHTML = ''
+  }
+
   public prompt(message: string, defaultValue: string, confirmCb: (x: string) => void) {
     this.hide();
     $('#modal_prompt_text').text(message);
@@ -186,13 +220,6 @@ class Modal {
       }
     });
   }
-    public feedback(message: string) {
-      this.hide();
-      $('#modal_feedback_message').text(message);
-      this.show();
-      $('#modal_feedback').show();
-      $('#modal_feedback_input').trigger("focus");
-    }
 }
 
 /**
@@ -226,21 +253,19 @@ export const error = {
     $('#errorbox').hide();
     $('#warningbox').hide();
   },
-  showWarning(caption: string, message: string) {
+  showWarning(message: string) {
     this.hide();
-    $('#warningbox .caption').text(caption);
     $('#warningbox .details').text(message);
     $('#warningbox').show();
   },
 
   show(caption: string, message: string) {
-    $('#errorbox .caption').text(caption);
-    $('#errorbox .details').html(message);
+    $('#errorbox .details').html(caption + " " + message);
     $('#errorbox').show();
   },
 
-  showFadingWarning(caption: string, message: string) {
-    error.showWarning(caption, message);
+  showFadingWarning(message: string) {
+    error.showWarning(message);
     setTimeout(function(){
       $('#warningbox').fadeOut();
     }, 10000);
@@ -258,5 +283,14 @@ export async function tryCatchPopup(cb: () => void | Promise<void>) {
   } catch (e: any) {
     console.log('Error', e);
     modal.notifyError(e.message);
+  }
+}
+
+
+export function close_htmx_search_modal(confirmation_message?: string) {
+  modal.hide()
+  modal.clear_search_boxes()
+  if (confirmation_message) {
+    modal.notifySuccess(confirmation_message)
   }
 }

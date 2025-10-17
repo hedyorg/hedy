@@ -1,0 +1,42 @@
+{% extends "auth.html" %}
+{% block regular_content %}
+<h1>{{ _class.name }}</h1>
+<div class="flex flex-row gap-5">
+    <h2 class="text-4xl mt-3">{{ _('performance_graph') }}</h2>
+    <div id="level_button" class="dropdown relative">
+        <button class="blue-btn-new rounded inline-flex w-fit gap-2 text-xl" id="dropdown_level_button"
+            onclick="$('#level_dropdown').slideToggle('medium');">
+            <span>{{ _('level_title') }} {{ graph_options.level }}</span> <i id="level-arrow"
+                class="fa-solid fa-angle-down"></i>
+        </button>
+        <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
+            style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
+            id="level_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
+            set arrow to #level-arrow
+            if *display == 'none'
+            remove .rotate-180 from arrow
+            else if not arrow.classList.contains('rotate-180')
+            add .rotate-180 to arrow
+            end">
+            {% for dropdown_level in range(1, 19) %}
+            <a id="level_button_{{dropdown_level}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+            {% if loop.index == graph_options.level|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
+            hover:bg-blue-200" {% if dropdown_level==graph_options.level %}disabled{% endif %}
+                href="/for-teachers/redesign/class/{{ _class.id }}/graph?level={{ dropdown_level}}">
+                <div class="flex-grow h-min" tabindex=0>
+                    {{ _('level_title') }} {{ dropdown_level }}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<p class="mt-3 mb-5 w-full md:w-2/3">
+    {{ _('performance_graph_info') }}
+</p>
+<div class="flex flex-col relative justify-center items-center">
+    <div id="graph" class="w-full md:w-2/3 relative h-[32rem]"><canvas data-graph='{{ graph_options|tojson|safe }}'
+            id="adventure_bubble"></canvas></div>
+    <div class="w-full  hidden"id="programs_container"></div>
+</div>
+{% endblock %}

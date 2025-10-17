@@ -6,8 +6,6 @@ import { SwitchTabsEvent, Tabs } from './tabs';
 import { MessageKey } from './message-translations';
 import { turtle_prefix, pressed_prefix, normal_prefix, music_prefix } from './pythonPrefixes'
 import { Adventure, isServerSaveInfo, ServerSaveInfo } from './types';
-import { startIntroTutorial } from './tutorials/tutorial';
-import { get_parsons_code, initializeParsons, loadParsonsExercise } from './parsons';
 import { checkNow, onElementBecomesVisible } from './browser-helpers/on-element-becomes-visible';
 import {
     incrementDebugLine,
@@ -23,7 +21,6 @@ import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
 import { HedyCodeMirrorEditorCreator } from './cm-editor';
-import { initializeTranslation } from './lezer-parsers/tokens';
 import { initializeActivity } from './user-activity';
 import { IndexTabs, SwitchAdventureEvent } from './index-tabs';
 export let theGlobalDebugger: any;
@@ -52,7 +49,6 @@ export let theKeywordLanguage: string = 'en';
 let theStaticRoot: string = '';
 let currentTab: string;
 let theUserIsLoggedIn: boolean;
-let selectedURI: JQuery<HTMLElement>;
 //create a synth and connect it to the main output (your speakers)
 //const synth = new Tone.Synth().toDestination();
 
@@ -185,15 +181,13 @@ export function initializeApp(options: InitializeAppOptions) {
 }
 
 export interface InitializeCodePageOptions {
-  readonly page: 'code' | 'tryit';
+  readonly page: 'code' | 'view_adventure';
   readonly level: number;
   readonly lang: string;
   readonly adventures: Adventure[];
-  readonly start_tutorial?: boolean;
   readonly initial_tab: string;
   readonly current_user_name?: string;
-  readonly suppress_save_and_load_for_slides?: boolean;
-  readonly enforce_developers_mode?: boolean;
+  readonly suppress_save_and_load?: boolean;
 }
 
 /**
@@ -204,6 +198,27 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   if (theUserIsLoggedIn) {
     theLocalSaveWarning.setLoggedIn();
   }
+  // Once the page is loaded, we can confindetly show the adventure name
+  // and thus the dash next to it
+  document.getElementById('level_separator')?.classList.remove('hidden');
+  for (const el of document.querySelectorAll('*[data-loading]')) {
+    el.removeAttribute('data-loading');
+    el.removeAttribute('disabled');
+  }
+
+  // Event listener to close the adventures dropdown when you click outside of it
+  document.addEventListener('click', (ev) => {
+    const target = ev.target as HTMLElement;
+    const parent = document.getElementById('level_adventure_title');
+    const moreAdventuresButton = document.getElementById('more_adventures');
+    if (parent?.contains(target) || moreAdventuresButton?.contains(target)) {
+      return;
+    }
+    if ($('#dropdown-level:visible').length) {
+      $('#dropdown-level').slideToggle('medium');
+      document.getElementById('dropdown_index_arrow')?.classList.toggle('rotate-180');
+    }
+  });
 
   theAdventures = Object.fromEntries((options.adventures ?? []).map(a => [a.short_name, a]));
 
@@ -218,7 +233,6 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   if ($editor.length) {
     const dir = $('body').attr('dir');
     theGlobalEditor = editorCreator.initializeEditorWithGutter($editor, EditorType.MAIN, dir);
-    initializeTranslation({keywordLanguage: theKeywordLanguage, level: theLevel});
     attachMainEditorEvents(theGlobalEditor);
     initializeDebugger({
       editor: theGlobalEditor,
@@ -230,23 +244,24 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   const anchor = window.location.hash.substring(1);
 
-  const validAnchor = [...Object.keys(theAdventures), 'parsons', 'quiz'].includes(anchor) ? anchor : undefined;
+  const validAnchor = [...Object.keys(theAdventures)].includes(anchor) ? anchor : undefined;
   let tabs: any;
-  if (options.page == 'tryit') {
+  const isViewAdventure = options.page == 'view_adventure';
+  // TODO: this still uses the old code. Once we reach the section for adventures, we'll refactor it
+  if (isViewAdventure) {
+    tabs = new Tabs({
+      // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
+      // We click on `level` to load a program associated with level, if any.
+      initialTab: validAnchor ?? options.initial_tab,
+    });
+  } else {
     tabs = new IndexTabs({
       // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
       // We click on `level` to load a program associated with level, if any.
       initialTab: validAnchor ?? options.initial_tab,
       level: options.level
     });
-  } else {
-    tabs = new Tabs({
-      // If we're opening an adventure from the beginning (either through a link to /hedy/adventures or through a saved program for an adventure), we click on the relevant tab.
-      // We click on `level` to load a program associated with level, if any.
-      initialTab: validAnchor ?? options.initial_tab,
-    });
   }
-
   tabs.on('beforeSwitch', () => {
     // If there are unsaved changes, we warn the user before changing tabs.
     saveIfNecessary();
@@ -256,7 +271,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
     currentTab = ev.newTab;
     const adventure = theAdventures[currentTab];
 
-    if (!options.suppress_save_and_load_for_slides) {
+    if (!options.suppress_save_and_load) {
       // Load initial code from local storage, if available
       const programFromLs = localLoad(currentTabLsKey());
       // if we are in raw (used in slides) we don't want to load from local storage, we always want to show startcode
@@ -266,16 +281,12 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
         adventure.save_info = 'local-storage';
       }
     }
-    reconfigurePageBasedOnTab(options.enforce_developers_mode);
+    reconfigurePageBasedOnTab();
     checkNow();
     theLocalSaveWarning.switchTab();
   });
 
-  initializeSpeech(options.page === 'tryit');
-
-  if (options.start_tutorial) {
-    startIntroTutorial();
-  }
+  initializeSpeech();
 
   // Share/hand in modals
   $('#share_program_button').on('click', () => $('#share_modal').show());
@@ -283,7 +294,7 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
   initializeShareProgramButtons();
   initializeHandInButton();
 
-  if (options.suppress_save_and_load_for_slides) {
+  if (options.suppress_save_and_load) {
     disableAutomaticSaving();
   }
 
@@ -369,12 +380,12 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
   // We need to enable the main editor for the program page as well
   const dir = $('body').attr('dir');
   theGlobalEditor = editorCreator.initializeEditorWithGutter($('#editor'), EditorType.MAIN, dir);
-  initializeTranslation({
-    keywordLanguage: options.lang,
-    level: options.level
-  });
   attachMainEditorEvents(theGlobalEditor);
   theGlobalEditor.contents = options.code;
+  for (const el of document.querySelectorAll('*[data-loading]')) {
+    el.removeAttribute('data-loading');
+    el.removeAttribute('disabled');
+  }
   initializeDebugger({
     editor: theGlobalEditor,
     level: theLevel,
@@ -385,13 +396,6 @@ export function initializeViewProgramPage(options: InitializeViewProgramPageOpti
 
 export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: boolean) {
   const dir = $("body").attr("dir");
-  initializeParsons();
-  if (theLevel) {
-    initializeTranslation({
-      keywordLanguage: theKeywordLanguage,
-      level: theLevel
-    })
-  }
   // Any code blocks we find inside 'turn-pre-into-ace' get turned into
   // read-only editors (for syntax highlighting)
   for (const container of $(where).find('.turn-pre-into-ace').get()) {
@@ -399,7 +403,7 @@ export function initializeHighlightedCodeBlocks(where: Element, initializeAll?: 
       $(preview)
         .addClass('relative text-lg rounded overflow-x-hidden')
         // We set the language of the editor to the current keyword_language -> needed when copying to main editor
-        .attr('lang', theKeywordLanguage);
+        .attr('data-lang', theKeywordLanguage);
       // If the request comes from HTMX initialize all directly
         if (initializeAll) {
           convertPreviewToEditor(preview, container, dir)
@@ -434,7 +438,7 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
   // And add an overlay button to the editor if requested via a show-copy-button class, either
   // on the <pre> itself OR on the element that has the '.turn-pre-into-ace' class.
   if ($(preview).hasClass('show-copy-button') || $(container).hasClass('show-copy-button')) {
-    const adventure = container.getAttribute('data-tabtarget')
+    const adventure = container.closest('[data-tabtarget]')?.getAttribute('data-tabtarget');
     const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
     let symbol = "⇥";
     if (dir === "rtl") {
@@ -444,19 +448,22 @@ function convertPreviewToEditor(preview: HTMLPreElement, container: HTMLElement,
       if (!theGlobalEditor?.isReadOnly) {
         theGlobalEditor.contents = exampleEditor.contents + '\n';
       }
-      update_view("main_editor_keyword_selector", <string>$(preview).attr('lang'));
+      update_view("main_editor_keyword_selector", <string>$(preview).attr('data-lang'));
       stopit();
       clearOutput();
     });
   }
-  const levelStr = $(preview).attr('level');
-  const lang = $(preview).attr('lang');
-  if (levelStr && lang) {
-    initializeTranslation({
-      keywordLanguage: lang,
-      level: parseInt(levelStr, 10),
-    })
-    exampleEditor.setHighlighterForLevel(parseInt(levelStr, 10));
+
+  // Try to find the level for this code block. We first look at the 'level'
+  // attribute on the <pre> element itself.  This is to preserve legacy
+  // behavior, I'm not sure where this is still used. The modern way is to look
+  // for 'data-level' attributes on the element itself and any containing element.
+  // Same for 'lang' and 'data-lang'.
+  const levelStr = $(preview).attr('level') ?? $(preview).closest('[data-level]').attr('data-level');
+  const kwlang = $(preview).attr('lang') ?? $(preview).closest('[data-kwlang]').attr('data-kwlang');
+  if (levelStr) {
+    const level = parseInt(levelStr, 10);
+    exampleEditor.setHighlighterForLevel(level, kwlang ?? 'en');
   }
 }
 
@@ -474,8 +481,8 @@ export function stopit() {
   document.onkeydown = null;
   $('#keybinding_modal').hide();
   $('#sleep_modal').hide();
-  
-  if (sleepRunning) {    
+
+  if (sleepRunning) {
     sleepRunning = false;
   }
 
@@ -529,26 +536,11 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
   try {
     var editor = theGlobalEditor;
     var code = "";
-    if ($('#parsons_container').is(":visible")) {
-      code = get_parsons_code();
-      // We return no code if all lines are empty or there is a mistake -> clear errors and do nothing
-      if (!code) {
-        editor.clearErrors();
-        stopit();
-        return;
-      } else {
-        // Add the onclick on the button -> only show if there is another exercise to load (set with an onclick)
-        if ($('#next_parson_button').attr('onclick')) {
-          $('#next_parson_button').show();
-        }
-      }
-    } else {
-      code = get_active_and_trimmed_code();
-      if (code.length == 0) {
-        editor.clearErrors()
-        stopit();
-        return;
-      }
+    code = get_active_and_trimmed_code();
+    if (code.length == 0) {
+      editor.clearErrors()
+      stopit();
+      return;
     }
 
     editor.clearErrors()
@@ -567,7 +559,6 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
           lang: lang,
           skip_faulty: false,
           is_debug: run_type === 'debug',
-          tutorial: $('#code_output').hasClass("z-40"), // if so -> tutorial mode
           read_aloud : !!$('#speak_dropdown').val(),
           adventure_name: adventureName,
           short_name: adventure ? adventure.short_name : undefined,
@@ -583,17 +574,17 @@ export async function runit(level: number, lang: string, raw: boolean, disabled_
         console.log('Response', response);
         if (response.Warning && $('#editor').is(":visible")) {
           //storeFixedCode(response, level);
-          error.showWarning(ClientMessages['Transpile_warning'], response.Warning);
+          error.showWarning(response.Warning);
         }
 
-        
+
         if (adventure && response.save_info) {
           adventure.save_info = response.save_info;
           adventure.editor_contents = code;
         }
 
         if (response.Error) {
-          error.show(ClientMessages['Transpile_error'], response.Error);
+          error.show("", response.Error);
           if (response.Location && response.Location[0] != "?") {
             //storeFixedCode(response, level);
             // Location can be either [row, col] or just [row].
@@ -660,11 +651,6 @@ export function tryPaletteCode(exampleCode: string) {
   } else {
     theGlobalEditor.contents += exampleCode;
   }
-  //As the commands try-it buttons only contain english code -> make sure the selected language is english
-  if (!($('#editor').attr('lang') == 'en')) {
-      $('#editor').attr('lang', 'en');
-      update_view("main_editor_keyword_selector", "en");
-  }
 }
 
 export function viewProgramLink(programId: string) {
@@ -676,7 +662,7 @@ function updateProgramCount() {
   const countText = programCountDiv.text();
   const regex = /(\d+)/;
   const match = countText.match(regex);
-  
+
   if (match && match.length > 0) {
     const currentCount = parseInt(match[0]);
     const newCount = currentCount - 1;
@@ -688,7 +674,7 @@ function updateProgramCount() {
 function updateSelectOptions(selectName: string) {
   let optionsArray: string[] = [];
   const select = $(`select[name='${selectName}']`);
-  
+
   // grabs all the levels and names from the remaining adventures
   $(`[id="program_${selectName}"]`).each(function() {
       const text = $(this).text().trim();
@@ -725,8 +711,8 @@ export async function delete_program(id: string, prompt: string) {
     updateSelectOptions('adventure');
     // this function decreases the total programs saved
     updateProgramCount();
-    const response = await postJson('/programs/delete', { id });    
-    
+    const response = await postJson('/programs/delete', { id });
+
     // issue request on the Bar component.
     modal.notifySuccess(response.message);
   });
@@ -772,29 +758,18 @@ export function submit_program (id: string) {
   });
 }
 
-export function unsubmit_program (id: string) {
+function change_to_unsubmitted () {
+    $('#unsubmit-program-button').hide();
+    $('#submitted-program-title').hide();
+    $('#submitted-program-details').hide();
+}
+
+export async function unsubmit_program (id: string, prompt: string) {
+  await modal.confirmP(prompt);
   tryCatchPopup(async () => {
     const response = await postJson('/programs/unsubmit', { id });
     modal.notifySuccess(response.message);
-  });
-}
-
-export async function set_explore_favourite(id: string, favourite: number) {
-  let prompt = "Are you sure you want to remove this program as a \"Hedy\'s choice\" program?";
-  if (favourite) {
-    prompt = "Are you sure you want to set this program as a \"Hedy\'s choice\" program?";
-  }
-  await modal.confirmP(prompt);
-
-  await tryCatchPopup(async () => {
-    const response = await postJson('/programs/set_hedy_choice', {
-      id: id,
-      favourite: favourite
-    });
-
-    modal.notifySuccess(response.message);
-    $('#' + id).toggleClass('text-white', favourite !== 1);
-    $('#' + id).toggleClass('text-yellow-500', favourite === 1);
+    change_to_unsubmitted();
   });
 }
 
@@ -856,7 +831,6 @@ window.onerror = function reportClientException(message, source, line_number, co
 }
 
 export function runPythonProgram(this: any, code: string, sourceMap: any, hasTurtle: boolean, hasPressed: boolean, hasSleep: number[], hasClear: boolean, hasMusic: boolean, hasWarnings: boolean, variables: any, isModified: boolean, cb: () => void, run_type: "run" | "debug" | "continue") {
-  // If we are in the Parsons problem -> use a different output
   let outputDiv = $('#output');
   let skip_faulty_found_errors = false;
   let warning_box_shown = false;
@@ -881,7 +855,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
 
       // Only show the warning box for the first error shown
       if (skip_faulty_found_errors && !warning_box_shown) {
-        error.showFadingWarning(ClientMessages['Execute_error'], ClientMessages['Errors_found']);
+        error.showFadingWarning(ClientMessages['Errors_found']);
         warning_box_shown = true;
       }
     }
@@ -905,8 +879,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       turtleConfig.worldHeight = 250;
   }
   else {
-      turtleConfig.height = 300;
-      turtleConfig.worldHeight = 300;
+      turtleConfig.height = 250;
+      turtleConfig.worldHeight = 250;
   }
   // Always set the width to output panel width -> match the UI
   turtleConfig.width = outputDiv.width();
@@ -994,7 +968,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         $('#stopit').hide();
         $('#runit').show();
         $('#runit').show();
-        if (Sk.execLimit != 1) {          
+        if (Sk.execLimit != 1) {
           return ClientMessages ['Program_too_long'];
         } else {
           return null;
@@ -1043,8 +1017,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
-      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {        
-        error.showWarning(ClientMessages['Transpile_warning'], ClientMessages['Empty_output']);
+      if ((!hasClear) && $('#output').is(':empty') && $('#turtlecanvas').is(':empty') && !hasMusic) {
+        error.showWarning(ClientMessages['Empty_output']);
         return;
       }
       if (!hasWarnings && code !== last_code) {
@@ -1178,7 +1152,7 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   function builtinRead(x: string) {
     if (x in skulptExternalLibraries) {
       const tmpPath = skulptExternalLibraries[x]["path"];
-      
+
       let request = new XMLHttpRequest();
       request.open("GET", tmpPath, false);
       request.send();
@@ -1254,7 +1228,32 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
   }
 }
 
+function speakIsMuted() {
+  return $('#speak_mute_button').attr('data-muted') === 'true';
+}
+
+export function toggleSpeakMute() {
+  const speakMuteButton = $('#speak_mute_button');
+  const speakMuteIcon = speakMuteButton.find('.fa');
+
+  const MUTED_ATTR = 'data-muted';
+  const MUTED_ICON = 'fa-volume-xmark';
+  const UNMUTED_ICON = 'fa-volume-high';
+
+  if (speakIsMuted()) {
+    speakMuteButton.attr(MUTED_ATTR, 'false');
+    speakMuteIcon.removeClass(MUTED_ICON).addClass(UNMUTED_ICON);
+  } else {
+    speechSynthesis.cancel();
+    speakMuteButton.attr(MUTED_ATTR, 'true');
+    speakMuteIcon.removeClass(UNMUTED_ICON).addClass(MUTED_ICON);
+  }
+}
+
 function speak(text: string) {
+  if (speakIsMuted()) {
+    return;
+  }
   var selectedURI = $('#speak_dropdown').val();
   if (!selectedURI) { return; }
   var voice = window.speechSynthesis.getVoices().filter(v => v.voiceURI === selectedURI)[0];
@@ -1267,7 +1266,7 @@ function speak(text: string) {
   }
 }
 
-function initializeSpeech(isTryit?: boolean) {
+function initializeSpeech() {
   // If we are running under cypress, always show the languages dropdown (even if the browser doesn't
   // have TTS capabilities), so that we can test if the logic for showing the dropdown at least runs
   // successfully.
@@ -1293,26 +1292,7 @@ function initializeSpeech(isTryit?: boolean) {
 
     if (voices.length > 0 || isBeingTested) {
       for (const voice of voices) {
-        if (isTryit) {
-          $('#speak_dropdown').append(
-            $('<button>')
-              .attr('id', `speak_button_${voice.name}`)
-              .attr('onclick', `$('#speak_dropdown').slideUp('medium');`)
-              .attr('value', voice.voiceURI)
-              .addClass('flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500 bg-white')
-              .css('width', '100%')
-              .text(voice.name)
-              .on('click', function () {
-                if (selectedURI){
-                  selectedURI.find('span').remove();
-                }
-                selectedURI = $(this);
-                $(this).append(`<span class="fa fa-check"></span>`);
-              })
-            );
-        } else {
-          $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
-        }
+        $('#speak_dropdown').append($('<option>').attr('value', voice.voiceURI).text('📣 ' + voice.name));
       }
       $('#speak_container').show();
 
@@ -1334,24 +1314,6 @@ function initializeSpeech(isTryit?: boolean) {
     if (!window.speechSynthesis) { return []; }
     return window.speechSynthesis.getVoices().filter(voice => voice.lang.startsWith(simpleLang));
   }
-}
-
-export function load_quiz(level: string) {
-  $('*[data-tabtarget="quiz"]').html ('<iframe id="quiz_iframe" class="w-full" title="Quiz" src="/quiz/start/' + level + '"></iframe>');
-}
-
-export async function store_parsons_attempt(order: Array<string>, correct: boolean) {
-  try {
-    await postJson('/store_parsons_order', {
-      level: theLevel,
-      exercise: $('#next_parson_button').attr('current_exercise'),
-      order: order,
-      correct: correct
-    });
-  } catch (e) {
-    // Let's do nothing: saving is not a user relevant action -> no feedback required
-    console.error(e);
-  };
 }
 
 export function get_active_and_trimmed_code() {
@@ -1434,40 +1396,6 @@ function createModal(level:number ){
   modal.repair(editor, 0, title);
 }
 
-export function setDevelopersMode(event='click', enforceDevMode: boolean) {
-  let enable: boolean = false;
-  switch (event) {
-    case 'load':
-      const lastSelection = window.localStorage.getItem('developer_mode') === 'true';
-      enable = enforceDevMode || lastSelection;
-      $('#developers_toggle').prop('checked', enable);
-      break;
-
-    case 'click':
-      // Toggled
-      enable = $('#developers_toggle').prop('checked');
-      break;
-  }
-  if (!enforceDevMode) window.localStorage.setItem('developer_mode', `${enable}`)
-  toggleDevelopersMode(!!enforceDevMode)
-}
-
-function toggleDevelopersMode(enforceDevMode: boolean) {
-  const enable = window.localStorage.getItem('developer_mode') === 'true' || enforceDevMode;
-  // DevMode hides the tabs and makes resizable elements track the appropriate size.
-  // (Driving from HTML attributes is more flexible on what gets resized, and avoids duplicating
-  // size literals between HTML and JavaScript).
-  $('#adventures_tab').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
-  // this is for the new design, it needs to be removed once we ship it
-  $('#adventures').toggle(!enable || currentTab === 'quiz' || currentTab === 'parsons');
-  // Parsons dont need a fixed height
-  if (currentTab === 'parsons') return
-  $('[data-devmodeheight]').each((_, el) => {
-    const heights = $(el).data('devmodeheight').split(',') as string[];
-    $(el).css('height', heights[enable ? 1 : 0]);
-  });
-}
-
 export function saveForTeacherTable(table: string) {
   let show_table = window.localStorage.getItem(table);
   window.localStorage.setItem(table, (show_table !== 'true').toString())
@@ -1480,6 +1408,7 @@ export function saveForTeacherTable(table: string) {
   hide_label.classList.toggle('hidden')
   arrow.classList.toggle('rotate-180');
 }
+
 
 export function getForTeacherTable(table: string) {
   let show_table = window.localStorage.getItem(table);
@@ -1502,7 +1431,7 @@ export async function tryCatchErrorBox(cb: () => void | Promise<void>) {
     return await cb();
   } catch (e: any) {
     console.log('Error', e);
-    error.show(ClientMessages['Transpile_error'], e.message);
+    error.show("", e.message);
   }
 }
 
@@ -1522,7 +1451,7 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       // save translated code to local storage
       // such that it can be fetched after reload
       localSave(currentTabLsKey(), { saveName, code });
-      $('#editor').attr('lang', new_lang);
+      $('#editor').attr('data-lang', new_lang);
 
       // update the whole page (example codes)
       const hash = window.location.hash;
@@ -1533,7 +1462,7 @@ export function toggle_keyword_language(current_lang: string, new_lang: string) 
       window.open(hash, "_self");
 
       // if in iframe, reload the topper window level.
-      if (window.top && !(window as any).Cypress) {
+      if (window.top && window.top !== window && !(window as any).Cypress) {
         window.top.location.reload();
       }
 
@@ -1577,7 +1506,7 @@ export async function change_language(lang: string) {
 
 function update_view(selector_container: string, new_lang: string) {
   $('#' + selector_container + ' > div').map(function() {
-    if ($(this).attr('lang') == new_lang) {
+    if ($(this).attr('data-lang') == new_lang) {
       $(this).show();
     } else {
       $(this).hide();
@@ -1701,19 +1630,6 @@ function resetWindow() {
  * Update page element visibilities/states based on the state of the current tab
  */
 function updatePageElements() {
-  const isCodeTab = !(currentTab === 'quiz' || currentTab === 'parsons');
-
-  // .toggle(bool) sets visibility based on the boolean
-
-  // Explanation area is visible for non-code tabs, or when we are NOT in developer's mode
-  $('#adventures_tab').toggle(!(isCodeTab && $('#developers_toggle').is(":checked")));
-  $('#developers_toggle_container').toggle(isCodeTab);
-  $('#level_header input').toggle(isCodeTab);
-  $('#parsons_code_container').toggle(currentTab === 'parsons');
-  $('#editor_area').toggle(isCodeTab || currentTab === 'parsons');
-  $('#editor').toggle(isCodeTab);
-  $('#debug_container').toggle(isCodeTab);
-  $('#program_name_container').toggle(isCodeTab);
   theGlobalEditor.isReadOnly = false;
 
   const adventure = theAdventures[currentTab];
@@ -1743,10 +1659,16 @@ function updatePageElements() {
     // Show <...data-view="if-submitted"> only if we have a public url
     $('[data-view="if-submitted"]').toggle(isSubmitted);
     $('[data-view="if-not-submitted"]').toggle(!isSubmitted);
-
+    const icon = document.querySelector(`*[data-tab="${adventure.short_name}"][data-level="${theLevel}"] > div > i[data-status-icon]`);
+    icon?.classList.toggle('fa-paper-plane', isSubmitted && !icon?.classList.contains('fa-circle-check'));
+    const hand_in_btn = document.getElementById('hand_in');
+    if (isSubmitted) {
+      hand_in_btn?.setAttribute('disabled', 'disabled');
+    } else {
+      hand_in_btn?.removeAttribute('disabled');
+    }
     theGlobalEditor.isReadOnly = isSubmitted;
     // All of these are for the buttons added in the new version of the code-page
-    $('#progress_bar').show()
     $('#program_name_container').show()
     $('#share_program_button').show()
     $('#read_outloud_button_container').show()
@@ -1754,39 +1676,14 @@ function updatePageElements() {
     $('#commands_dropdown_container').show()
     $('#hand_in_button').show()
   }
-  if (currentTab === 'parsons'){    
-    $('#share_program_button').hide()
-    $('#read_outloud_button_container').hide()
-    $('#cheatsheet_dropdown_container').hide()
-    $('#commands_dropdown_container').show()
-    $('#hand_in_button').hide()
-    $('#clear').hide()
-  }
-  if (currentTab === 'quiz'){
-    $('#share_program_button').hide()
-    $('#read_outloud_button_container').hide()
-    $('#cheatsheet_dropdown_container').hide()
-    $('#commands_dropdown_container').hide()
-    $('#hand_in_button').hide()
-  }
 }
 
 /**
  * After switching tabs, show/hide elements
  */
-function reconfigurePageBasedOnTab(enforceDevMode?: boolean) {
+function reconfigurePageBasedOnTab() {
   resetWindow();
-
   updatePageElements();
-  toggleDevelopersMode(!!enforceDevMode);
-  if (currentTab === 'parsons') {
-    loadParsonsExercise(theLevel, 1);
-    // remove the fixed height from the editor
-    document.getElementById('code_editor')!.style.height = '100%'
-    document.getElementById('code_output')!.style.height = '100%'
-    return;
-  }
-
   const adventure = theAdventures[currentTab];
   if (adventure) {
     $ ('#program_name').val(adventure.save_name);
@@ -1975,4 +1872,61 @@ export function goToLevel(level: any) {
 
 export function emptyEditor() {
   theGlobalEditor.contents = ""
+}
+
+
+export function open_index_pane(e: Event) {
+  const target = e.target as HTMLElement;
+  const button = target.closest('button');
+  if (!button) return;
+  const level = button.id.split('_')[1];
+  const pane = document.getElementById(`level_${level}_pane`);
+  if (!pane) return;
+  // If this pane is already open, close it
+  // Otherwise, close all other panes and open this one
+  if (pane.classList.contains('sliding-content-open')) {
+    pane.classList.remove('sliding-content-open');
+    pane.classList.add('sliding-content-closed');
+    document.getElementById(`level_${level}_arrow`)?.classList.toggle('rotate-180');
+  } else {
+    document.querySelectorAll('.sliding-content-open').forEach((el) => {
+      el.classList.remove('sliding-content-open');
+      el.classList.add('sliding-content-closed');
+      const level = el.id.split('_')[1];
+      const arrow = document.getElementById(`level_${level}_arrow`);
+      arrow?.classList.toggle('rotate-180');
+    });
+    // Open the selected pane
+    pane.classList.remove('sliding-content-closed');
+    pane.classList.add('sliding-content-open');
+    const arrow = document.getElementById(`level_${level}_arrow`);
+    arrow?.classList.toggle('rotate-180');
+    // sleep for 400 miliseconds to settle animations
+    setTimeout(() => {
+      pane.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const opened_level_button = pane?.previousElementSibling
+      opened_level_button?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 400);
+  }
+}
+
+export function open_index_dropdown() {
+  $('#dropdown-level').slideToggle('medium');
+  document.getElementById('dropdown_index_arrow')?.classList.toggle('rotate-180');
+  const button = document.getElementById('dropdown_open_button');
+  if (!button) return;
+  const opened_pane = document.querySelector('.sliding-content-open');
+  const opened_level_button = opened_pane?.previousElementSibling
+  opened_level_button?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+export function moreAdventures() {
+  const button = document.getElementById('dropdown_open_button');
+  if (!button) return;
+  if (button.getBoundingClientRect().top < 0) {
+    button.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(open_index_dropdown, 500);
+  } else {
+    open_index_dropdown();
+  }
 }

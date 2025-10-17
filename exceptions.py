@@ -40,6 +40,9 @@ class HedyException(Exception):
             return [self.arguments['line_number']]
         return None
 
+    def __str__(self):
+        return f'{self.error_code} {repr(self.arguments)}'
+
 
 class WarningException(HedyException):
     """Fixed That For You warning/exception.

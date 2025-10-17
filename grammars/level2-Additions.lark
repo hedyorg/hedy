@@ -20,10 +20,11 @@ sleep: _SLEEP (INT | var_access)?
 
 //in level 2, forward may also depend on a variable
 turtle: _FORWARD (NUMBER | textwithoutspaces)? -> forward | _TURN ((NUMBER | textwithoutspaces))? -> turn | _COLOR ((black | blue | brown | gray | green | orange | pink | purple | red | white | yellow | textwithoutspaces))? -> color
-assign: var _IS text -> assign
+assign: var _IS textwithinnerspaces _SPACE? -> assign
 
 textwithoutspaces: /([^\n #]+)/ -> text
 text: /([^\n#]+)/ -> text
+textwithinnerspaces: /([^\n#]*[^\n# ])/ -> text
 
 var: NAME // used for variable definitions, e.g. a = 1
 var_access: NAME // used for variable references, e.g. for i in range. It parses the same as var, but does not result in a lookup table entry

@@ -8,11 +8,11 @@
         <h2>{{_('login_long')}}</h2>
         <div class="w-full flex px-8 flex-row items-center justify-center">
             <label for="username" class="inline-block w-1/3">{{_('username')}}</label>
-            <input class="inline-block w-2/3 px-2 py-1 rounded-lg border-gray-400" data-cy="username" minlength="3" name="username" required>
+            <input class="inline-block w-2/3 px-2 py-1 rounded-lg border-gray-400" id="username" data-cy="username" minlength="3" name="username" required>
         </div>
         <div class="w-full flex px-8 flex-row items-center justify-center">
-            <label for=password" class="inline-block w-1/3">{{_('password')}}</label>
-            <input class="inline-block w-2/3 px-2 py-1 rounded-lg border-gray-400" data-cy="password" minlength="6" name="password" type=password required>
+            <label for="password" class="inline-block w-1/3">{{_('password')}}</label>
+            <input class="inline-block w-2/3 px-2 py-1 rounded-lg border-gray-400" id="password" data-cy="password" minlength="6" name="password" type=password required>
         </div>
         <button type="submit" class="green-btn mt-2" data-cy="login_button">{{_('login')}}</button>
       </form>

@@ -1,9 +1,10 @@
 import {goToHedyPageWithEnKeywords} from "../tools/navigation/nav";
+import { codeMirrorContent } from "../tools/programs/program";
 
 describe('when the user changes their language to Arabic', () => {
   beforeEach(() => {
     goToHedyPageWithEnKeywords();
-    cy.get('#editor > .cm-editor > .cm-scroller > .cm-content').click();
+    codeMirrorContent().click();
     cy.get('#editor').type("print Hallo!'\n");
     cy.getDataCy('language_dropdown_button').click();
     cy.getDataCy('switch_lang_ar').click();

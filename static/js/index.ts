@@ -17,7 +17,6 @@ export * from './app';
 export * from './auth';
 export * from './statistics';
 export * from './logs';
-export * from './tutorials/tutorial';
 export * from './teachers';
 export * from './initialize';
 export * from './debugging';
@@ -25,7 +24,6 @@ export { getNext, getCurrentAdv } from './index-tabs';
 export { getPreviousAndNext } from './tabs'
 export * from './tailwind';
 export * from './public-adventures';
-export { loadParsonsExercise } from './parsons';
 export * from './user-activity';
 export * from './adventure';
 export * from './microbit';

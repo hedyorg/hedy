@@ -519,7 +519,7 @@ levels:
             text: Let's debug this code!
             code: |-
                 music_genres {is} rock, pop, metal, indie, jazz
-                chosen_genre is music {at} {random}
+                chosen_genre {is} music {at} {random}
                 {print} Let's listen to chosen genre
                 nice {ask} Do you like that genre?
                 {remove} chosen_genre {from} chosen_genre
@@ -1413,9 +1413,9 @@ levels:
         4:
             header: Functions!
             text: |-
-                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use define and give the function a name. Then put all the lines you want in the function in a indented block under the define line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
 
-                Now, whenever we need that block of code, we just use call with the function's name to call it up! We don't have to type that block of code again.
+                Now, whenever we need that block of code, we just use `{call}` with the function's name to call it up! We don't have to type that block of code again.
         5:
             header: Twinkle Twinkle little star!
             text: |-

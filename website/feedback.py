@@ -1,13 +1,9 @@
 
-from flask import request, make_response, render_template
+from flask import request, render_template
 from website.flask_helpers import gettext_with_fallback as gettext
-import json
-import uuid
 from collections import defaultdict
 
-import utils
-
-from website.auth import requires_teacher, requires_super_teacher
+from website.auth import requires_super_teacher
 
 from .database import Database
 from .website_module import WebsiteModule, route
@@ -21,36 +17,6 @@ class FeedbackModule(WebsiteModule):
 
     def is_valid_category(self, cat):
         return cat in self.valid_categories
-
-    @route("/", methods=["POST"])
-    @requires_teacher
-    def teacher_feedback(self, user):
-        body = request.form
-        # Request validation
-        if not body.get("message") or not body.get("category"):
-            return make_response(gettext('feedback_message_error'), 400)
-
-        feedback = {
-            "id": uuid.uuid4().hex,
-            "username": user.get("username"),
-            "email": user.get("email", ""),
-            "message": body.get("message"),
-            "category": body.get("category"),
-            "page": body.get("page", ""),
-            "date": utils.timems(),
-        }
-
-        try:
-            self.db.store_feedback(feedback)
-        except Exception as e:
-            print(e)
-            return make_response(gettext('feedback_message_error'), 500)
-
-        response = make_response('', 200)
-        response.headers["HX-Push-URL"] = 'false'
-        response.headers["HX-Trigger"] = json.dumps({"hideFeedbackModal": True})
-
-        return response
 
     @route("/", methods=["GET"])
     @requires_super_teacher

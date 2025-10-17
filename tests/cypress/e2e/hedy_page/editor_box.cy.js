@@ -1,4 +1,5 @@
 const YAML = require('js-yaml')
+import { codeMirrorContent } from '../tools/programs/program';
 
 describe('Is able to type in the editor box', () => {
   const LANGUAGES_TO_TEST = ['en', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de','el', 'eo', 'es', 'et', 'fa', 'fi', 'fr', 'fy', 'he', 'hi', 'hu', 'id', 'it', 'ja', 'kmr', 'ko', 'nb_NO', 'nl', 'pa_PK', 'pl', 'pt_BR', 'pt_PT', 'ro', 'ru', 'sq', 'sr', 'sv', 'sw', 'te', 'th']
@@ -95,8 +96,4 @@ describe('Test editor box functionality', () => {
 function clearViaBackspace() {
   cy.focused().type('{moveToEnd}' + '{backspace}'.repeat(40));
   codeMirrorContent().should('have.text', '');
-}
-
-function codeMirrorContent() {
-  return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
 }

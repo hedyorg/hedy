@@ -19,7 +19,7 @@ from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 from hedy_sourcemap import SourceRange
 from functools import cache
 
-from app import app
+from app import create_app
 from hedy_error import get_error_text
 from flask_babel import force_locale
 
@@ -328,7 +328,8 @@ class HedyTester(unittest.TestCase):
                         if microbit:
                             return
                         else:
-                            self.assertTrue(self.validate_Python_code(result))
+                            r = self.validate_Python_code(result)
+                            self.assertTrue(r)
 
                     if output is not None:
                         if extra_check_function is None:  # most programs have no turtle so make that the default
@@ -388,10 +389,12 @@ class HedyTester(unittest.TestCase):
         result = hedy.transpile(code, self.level, 'en')
         self.assertDictEqual(result.source_map.get_compressed_mapping(), expected_source_map)
 
-    def assert_translated_code_equal(self, orignal, translation):
+    def assert_translated_code_equal(self, original, translation):
         # When we translate a program we lose information about the whitespaces of the original program.
         # So when comparing the original and the translated code, we compress multiple whitespaces into one.
-        self.assertEqual(re.sub('\\s+', ' ', orignal), re.sub('\\s+', ' ', translation))
+        # Also, we lose the trailing spaces, so we strip before comparing.
+        self.assertEqual(re.sub('\\s+', ' ', original).strip(),
+                         re.sub('\\s+', ' ', translation).strip())
 
     @staticmethod
     def validate_Python_code(parseresult):
@@ -437,7 +440,7 @@ class HedyTester(unittest.TestCase):
         if __trtl not in {both_colors}:
           raise Exception(f{HedyTester.value_exception_transpiled()})
         else:
-          if not __trtl in {hedy.english_colors}:
+          if __trtl not in {hedy.english_colors}:
             __trtl = color_dict[__trtl]
         t.pencolor(__trtl)''')
 
@@ -653,7 +656,7 @@ class HedyTester(unittest.TestCase):
             location = 'No Location Found'
 
         # Must run this in the context of the Flask app, because FlaskBabel requires that.
-        with app.app_context():
+        with create_app().app_context():
             with force_locale('en'):
                 error_message = get_error_text(E, 'en')
                 error_message = error_message.replace('<span class="command-highlighted">', '`')

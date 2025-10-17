@@ -103,6 +103,7 @@ def task_tailwind():
     return dict(
         file_dep=[
             *glob('templates/**/*.html'),
+            *glob('templates/**/**/*.html'),
             *glob('templates/*.html'),
             *glob('main/**/*.md'),
             *glob('content/**/*.md'),
@@ -215,7 +216,7 @@ def task_typescript():
 
             # Then bundle JavaScript into a single bundle
             [npx, 'esbuild', 'static/js/index.ts',
-             '--bundle', '--sourcemap', '--target=es2017',
+             '--bundle', '--sourcemap', '--minify', '--target=es2017',
              '--global-name=hedyApp', '--platform=browser',
              '--outfile=static/js/appbundle.js'],
         ],
@@ -430,6 +431,14 @@ def task_devdb():
         ],
         # No dependencies, so that this script will always run when you invoke it
         targets=['dev_database.json'],
+    )
+
+
+def task_precommit():
+    """Run the precommit validations."""
+    return dict(
+        title=lambda _: 'Precommit checks',
+        actions=['pre-commit run --show-diff-on-failure --color=always --all-files'],
     )
 
 

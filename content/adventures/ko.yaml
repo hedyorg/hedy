@@ -12,36 +12,32 @@ adventures:
                     적어도 하나의 `{ask}` 명령과 하나의 `{echo}` 명령을 사용합니다.
                     당신은 당신이 좋아하는 어떤 주제에 대해서도 그것을 만들 수 있다.
                     주제가 생각나지 않는다면, 우리가 선택한 것 중 하나를 이용해 보세요: 영화를 보러 가거나, 스포츠 경기를 하거나, 동물원에서 하루를 보내거나.
+                story_text: "레벨 1에서는 여러분이 직접 입력한 여러 주인공으로 이야기를 만들 수 있습니다. \n\n첫 번째 줄에  `{ask}`를 사용해서 이야기의 주인공아 누가 될 지를 물어보세요. \n\n첫 번째 줄 이후로는, 출력해야 하는 문장이 있다면 `{print}`로 시작하세요. \n문장의 맨 끝에 여러분의 주인공이 나오게 하고 싶다면  `{echo}`를 사용하세요.\n"
+                example_code: "```\n{ask} 이 이야기의 주인공은\n{print} 주인공은 숲 속을 걷고 있습니다. \n{echo} 겁에 질려있네요,\n{print} 사방에서 온갖 시끄러운 소리가 들려옵니다. \n{print} 어쩌면 이 곳이 귀신들린 숲은 아닐까 두려워하고 있습니다. \n```\n"
             2:
                 story_text_2: |
                     ### 연습문제
                     이제 이전 레벨에서 만들었던 자신의 스토리에 변수를 추가해야 할 때입니다.
-                    내 프로그램'으로 이동하여 레벨 1 스토리 모험을 찾아 코드를 복사한다. 이 레벨에서 입력 화면에 코드를 붙여넣는다.
+                    '내 프로그램'으로 이동하여 레벨 1 스토리 모험을 찾아 코드를 복사하세요. 코드를 이 레벨의 입력 화면에 붙여넣으세요.
 
-                    아직 변수를 사용하지 않았기 때문에 이 레벨에서는 이 코드가 작동하지 않습니다.
-                    코드에 있는 `{ask}`명령어와 `{echo}` 명령어를 이 수준에서 배운 올바른 형태로 변경합니다.
+                    아직 변수를 사용하지 않았기 때문에 이 레벨에서는 붙여넣은 코드가 작동하지 않습니다.
+                    코드에 있는 `{ask}`명령어와 `{echo}` 명령어를 이 레벨에서 배운 올바른 형태로 변경합니다.
 
-                    **추가** 코드에 {sleep} 명령을 추가하여 스토리에 긴장감을 조성합니다.
+                    **추가** 코드에  `{sleep}` 명령을 추가하여 스토리에 긴장감을 조성해 보세요.
+                example_code: "```\n이름 {is} {ask} 주인공의 이름이 무엇인가요?\n{print} 이름 은 숲속을 달릴거예요.\n{print} name 은 조금 겁에 질려있습니다.\n{print} 갑자기 소름끼치는 소음이 들려옵니다.\n{sleep}\n{print} 이름 은 여기가 귀신들린 숲이 아닐까 두려워하고 있습니다.\n```"
+                story_text: "레벨 2에서는 여러분의 이야기를 더 재미있게 만들 수 있습니다. 여러분이 만든 주인공의 이름이 문장 어디에든 들어갈 수 있게 되었습니다.\n\n그러기 위해서는 프로그래밍을 조금 더 해야 해요. 당신은 이제 주인공의 이름을 먼저 지어줘야 합니다. \n\n지어준 이름을 문장 어디에나 넣을 수 있습니다.\n"
             3:
                 story_text: |
-                    레벨 3 에서 더 재미있게 만들 수 있습니다.괴물, 동물 또는 다른 장애에 대한 랜덤성을 사용할 수 있습니다.
+                    레벨 3에서는 여러분의 이야기를 더 재미있게 만들 수 있습니다. 몬스터, 동물이나 장애물에 랜덤성을 사용할 수 있게 됐습니다. 이렇게요:
                 story_text_2: |
-                    `{add}`라는 명령어는 당신의 스토리에도 도움이 될 것이다.
-                example_code_2: |
-                    ```
-                    {print} He hears a sound
-                    animals {is} 🐿, 🦔, 🦇, 🦉
-                    animal {is} {ask} What do you think it is?
-                    {add} animal {to_list} animals
-                    {print} it was a animals {at} {random}
-                    ```
+                    `{add}` 명령어도 여러분의 이야기에 유용하게 쓰일 수 있습니다.
                 story_text_3: |
-                    This is an example of the `{remove}` command in your story
-
                     ### 연습문제
                     이전 레벨에서 이 레벨로 스토리를 복사합니다.
                     이 레벨에서는 `{at} {random}`, `{add} {to_list}` 및 `{remove} {from}` 명령 3개를 새로 배웠습니다.
                     스토리에 새 코드 줄을 추가하여 모든 새 명령이 스토리에 한 번 이상 포함되도록 합니다.
+                example_code: "```\n동물들 {is} 🦔, 🐿, 🦉, 🦇\n{print} 이제 동물들 {at} {random} 의 울음소리가 들리기 시작합니다.\n```\n"
+                example_code_2: "```\n{print} 소리가 들려옵니다.\n동물들 {is} 🐿, 🦔, 🦇, 🦉\n동물 {is} {ask} 어떤 동물의 소리일까요?\n{add} 동물 {to_list} 동물들\n{print}  동물들 {at} {random} 이었습니다. \n```\n"
             4:
                 story_text: |
                     ### 연습문제1
@@ -67,16 +63,7 @@ adventures:
                     자신의 스토리 모험에서 만든 스토리를 이전 레벨에 복사합니다.
                     스토리에 최소한 두 개의 `{if}` 명령과 `{else}` 명령을 추가하는 방법을 찾으십시오.
                     이것은 행복한 결말일 수도 있고 나쁜 결말일 수도 있지만 명령어를 통합하는 다른 방법을 찾을 수도 있습니다.
-                example_code: |
-                    ```
-                    name {is} {ask} 'Who is walking in the forest?'
-                    {print} name 'walks through the forest'
-                    {print} name 'encounter a monster'
-                    end {is} {ask} 'Would you like a good or a bad ending?'
-                    {if} end {is} good {print} name 'takes the sword and the monster quickly runs away'
-                    {else} {print} 'The monster eats' name
-                    ```
-            7:
+            8:
                 story_text: |
                     스토리에서, 어떤 사람은 여러 번 말을 합니다. 예를 들어, 누군가가 도움을 요청하거나 노래를 부를 때 말입니다.
                     이런 반복을 스토리에 넣을 수 있습니다. `{repeat}`과(와) 같은 레벨이다.
@@ -84,7 +71,7 @@ adventures:
                     ### 연습문제
                     자신의 스토리를 반복해 보세요. 저장된 프로그램으로 돌아가서 6레벨에서 자신의 이야기 프로그램을 선택하고
                     `{print}`가 포함된 행을 찾아서 반복합니다!
-            8:
+            9:
                 story_text: |
                     이 레벨에서는 `{if}` 명령에 여러 줄을 사용할 수 있으며, 이렇게 하면 해피엔딩이나 새드엔딩을 업그레이드할 수 있습니다!
 
@@ -95,24 +82,9 @@ adventures:
 
                     ### ### 연습문제 2
                     저장된 프로그램으로 돌아가서 5단계에서 스토리 프로그램을 선택하세요. 이제 각각 최소 세 줄의 좋은 결말과 나쁜 결말을 쓰세요!
-            9:
-                story_text: "이 레벨에서는 다른 `{if}` 및 `{repeat}` 명령어 내에서 {if} 및 {repeat} 명령어를 사용할 수 있습니다. \n이것은 여러분에게 많은 선택권을 주고 여러분의 이야기를 상호작용적으로 만드는 데 정말로 도움을 줍니다.\n\n ### 연습문제 1\n코드를 완료하여 `{if}`가 올바르게 작동하도록 하십시오.\n\n### 연습문제 2\n로빈이 집에 가는 스토리의 부분도 `{if}`와 `{else}`를 붙인다.\n\n### 연습문제 3\n레벨 8 스토리로 돌아가서 다른 `{if}` 안에 최소한 두 개의 `{if}`을 사용합니다.\n"
-                example_code: |
-                    ```
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                        {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
-                        {else}
-                            {print} 'Robin leaves the shop and goes home'
-                    {else}
-                        {print} 'Robin goes home'
-                    ```
             10:
+                story_text: "이 레벨에서는 다른 `{if}` 및 `{repeat}` 명령어 내에서 {if} 및 {repeat} 명령어를 사용할 수 있습니다. \n이것은 여러분에게 많은 선택권을 주고 여러분의 이야기를 상호작용적으로 만드는 데 정말로 도움을 줍니다.\n\n ### 연습문제 1\n코드를 완료하여 `{if}`가 올바르게 작동하도록 하십시오.\n\n### 연습문제 2\n로빈이 집에 가는 스토리의 부분도 `{if}`와 `{else}`를 붙인다.\n\n### 연습문제 3\n레벨 8 스토리로 돌아가서 다른 `{if}` 안에 최소한 두 개의 `{if}`을 사용합니다.\n"
+            11:
                 story_text: |
                     이 레벨에서 스토리에서 {for} 명령을 사용할 수 있다. 이렇게 하면 어린이 책 '갈색 곰, 갈색곰, 무엇이 보이니'를 쉽게 프로그래밍할 수 있다.
 
@@ -120,28 +92,7 @@ adventures:
 
                     <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">스토리</a> 를 보고, 책에서처럼 인쇄되어 있는지 확인한다.
                 example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n {print} 'What do you see?'\n```\n"
-            12:
-                story_text: |-
-                    이 레벨에서는 변수에 여러 단어를 저장하기 위해 따옴표가 필요할 것입니다.
-
-                    ### ### 연습문제
-
-                    이전 레벨의 이야기를 찾으세요. 어느 레벨이든 괜찮습니다. 이제 따옴표가 올바른 위치에 추가되었는지 확인하세요.
-                example_code: |
-                    ```
-                    name = 'The Queen of England'
-                    {print} name ' was eating a piece of cake, when suddenly...'
-                    ```
             13:
-                story_text: |
-                    `{and}` 명령어와 `{or}` 명령어를 사용하면 자신의 이야기를 보다 다재다능하게 만들 수 있다. 두 가지 질문을 하고 대답의 조합에 응답할 수 있다.
-
-                    ### 연습문제 1
-                    예제 코드를 보고 끝내라. 그런 다음 `{and}` 또는 `{or}`로 `{if}` 코드를 최소 2개 더 추가한다.
-
-                    ### 연습문제 2
-                    이전 레벨의 이야기를 찾고 `{and}` 또는 `{or}` 중 하나를 추가한다.
-            18:
                 story_text: |
                     다른 이야기를 인쇄할 건데 이제는 `{print}`가 붙은 괄호를 써야 해요.
 
@@ -164,8 +115,6 @@ adventures:
                 story_text_3: |
                     ### Exercise
                     이 가상 레스토랑에서 새로운 명령어를 사용해 보십시오. 플레이어가 원하는 맛을 목록에 추가하고 알레르기가 있는 맛을 제거하십시오.
-    and_or_command:
-        description: introducing and or
     ask_command:
         description: Introduction ask command
         levels:
@@ -211,154 +160,10 @@ adventures:
                     이제 예제에서 했던 것처럼 변수를 설정하는 대신 변수를 상호작용적으로 만들기를 바랍니다.
 
                     이전 탭에서 코드를 복사하고 `{ask}` 명령을 사용하여 변수를 상호작용시킵니다.
-            18:
-                story_text: 파이썬 코드를 얻기 위해 우리가 해야 할 마지막 변화는 `{ask}`를 `{input}`으로 바꾸는 것이다.
-    blackjack:
-        name: 블랙잭
-        default_save_name: 블랙잭
-        description: 숫자 21에 근접하도록 노력해보세요
-        levels:
-            17:
-                story_text: |
-                    블랙잭은 당신이 가능한 한 21점에 근접해야 하는 단순한 카드 게임입니다. 당신은 두 장의 카드를 받습니다. 각각의 카드는 숫자만큼 가치가 있고, 페이스 카드(잭, 퀸, 킹)는 10점의 가치가 있습니다.
-                    에이스는 1점 또는 11점의 가치가 있습니다. (선택하실 수 있습니다.) 딜러, 상대방도 2장의 카드를 받습니다.
-                    당신이 원한다면 다른 카드를 얻을 수 있고, 그 카드의 포인트는 당신의 총합에 추가됩니다. 딜러는 다른 카드를 가져가기를 선택할 수도 있습니다.
-                    하지만 21점 이상 받지 않도록 조심하세요, 그러면 지는 거니까요!
-                    넘어가지 않고 21에 가장 근접한 선수가 승리!
-
-                    ### Exercise
-                    In this adventure we code the first part of our Blackjack game. We'll create a function to calculate how many points a card is worth.
-
-                    ***Set the variables***
-                    Start by making a list of all the cards, from 2 to Ace. Next make a list of the face cards, so Jack, Queen and King. Then pick a random card from the list of cards to be card_1.
-
-                    ***Create a function to calculate the points***
-                    Create a function that calculates how many points a card is worth.
-                    All the face cards are worth 10 points, the Ace is worth 11 and all the other cards are worth their numeral.
-                    Return the variable `points` at the end of the function.
-
-                    ***Test the function***
-                    Test if your function is working properly. Finish the first print command by filling in which card you've drawn. Then finish the second line by calling the function with card_1.
-                    Run the code a couple of times. Are you happy with the results? Great! Then you can remove the testing part and move on the the next tab!
-    calculator:
-        levels:
-            6:
-                story_text: |
-                    이제 수학을 할 수 있게 되었으니, 계산기를 직접 만들 수 있을 거야!
-                example_code: |
-                    ```
-                    number_1 {is} {ask} 'Fill in the first number:'
-                    number_2 {is} {ask} 'Fill in the second number:'
-                    correct_answer = number_1 * number_2
-                    {print} number_1 ' times ' number_2 ' is ' correct_answer
-                    ```
-                story_text_2: |
-                    ### 연습문제
-                    The calculator above will calculate the answer for you, but you can also make a program to test your own maths skills, like this:
-                    Fill in the blanks to make it complete!
-                story_text_3: |
-                    **Extra** You can also let the computer do random sums on its own using `{random}`.
-                example_code_3: |
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number_1 = _
-                    number_2 = _
-                    correct_answer = number_1 * number_2
-                    given_answer = 'What is ' number_1 ' times ' number_2 '?'
-                    {if} _
-                    {else} _
-            9:
-                story_text: |
-                    In level 6 you created a calculator, in this level you can expand that code so it asks multiple questions.
-
-                    ### 연습문제 1
-                    Can you finish line 10 to make to program work?
-
-                    ### 연습문제 2
-                    Give the player feedback when the enter a right or wrong answer. To achieve that, expand your program with an `{else}`.
-                example_code: |
-                    ```
-                    score = 0
-                    {repeat} 10 {times}
-                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        number1 = numbers {at} {random}
-                        number2 = numbers {at} {random}
-                        correct_answer = number1 * number2
-                        {print} 'What is ' number1 ' times ' number2 '?'
-                        answer = {ask} 'Type your answer here...'
-                        {print} 'Your answer is' answer
-                        {if} _ {is} _
-                            score = score + 1
-                    {print} 'Great job! Your score is... ' score ' out of 10!'
-                    ```
-            11:
-                story_text: |
-                    With a `{for}` you can simplify tables of multiplication practise program.
-
-                    ### 연습문제 1
-                    Improve the example code such that it prints a nice multiplication table: <br> "1 times 10 is 10", "2 times 10 is 20", etc.
-
-                    ### 연습문제 2
-                    Go back to your level 10 multiplication code, and modify it so that it uses a `{for}` and `{range}`.
-                example_code: |
-                    ```
-                    number = 10
-                    {for} i {in} {range} 1 to 10
-                        {print} i * number
-                    ```
-            12:
-                story_text: |
-                    In this level, you can make a calculator that works for decimal numbers.
-
-                    ### 연습문제 1
-                    Fill out the blanks to complete the calculator. Remember to use a period and not a comma for decimal numbers.
-
-                    ### 연습문제 2
-                    Create a new mathematics practice program, but now use decimal numbers.
-                    Create a list of numbers, choose two to multiple and let the player answer.
-                    And of course you have to validate the answer! **Extra** Increase the difficulty by adding lives: A player loses a life for a wrong answer and after three wrong answers the game ends.
-                example_code: |
-                    ```
-                    number1 = {ask} 'What is the first number?'
-                    number2 = {ask} 'What is the second number?'
-                    answer = number1 + number2
-                    {print} number1 ' plus ' number2 ' is ' answer
-                    ```
             13:
-                story_text: |
-                    ### 연습문제 1
-                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
-
-                    ### 연습문제 2 Extra
-                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                    Empty the programming field and create your own solution.
-            14:
-                example_code: |
-                    ```
-                    {define} calculate_mean_grade
-                        total = 0
-                        {for} i {in} {range} 1 {to} 4
-                            grade = {ask} _
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
-                    ```
-
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
-            15:
-                story_text: |
-                    이전 레벨에서 배운 계산기 게임에 `{while}` 루프를 추가하면 된다.
-                    이렇게 하면 플레이어가 틀린 답변을 할 경우 다음 질문을 계속할 수 없습니다.
-
-                    ### Exercise
-                    Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
-                    Then `{call}` the function.
+                story_text: 파이썬 코드를 얻기 위해 우리가 해야 할 마지막 변화는 `{ask}`를 `{input}`으로 바꾸는 것이다.
+    calculator:
+        levels: {}
     clear_command:
         description: clear 명령어
         levels:
@@ -379,610 +184,18 @@ adventures:
                     {clear}
                     {print} '서프라이즈!'
                     ```
-    debugging:
-        levels:
-            3:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    movie_choices {is} dracula, fast and furious, home alone, barbie
-                    chosen_movie {is} movies {at} {random}
-                    {print} Tonight we will watch chosen _movies
-                    like {ask} Do you like that movie?
-                    {print} Tomorrow we will watch something else.
-                    {add} chosen_movie {to} movie_choices
-                    {print} Tomorrow we will watch tomorrows_movie
-                    tomorrows_movie {is} movie_choices {at} {random}
-                    I'll go get the popcorn! {print}
-                    ```
-            7:
-                story_text: |-
-                    ### Exercise
-                    Surprise! This program looks more like an output than a code. And yet, we don't want you to just add `{print}` commands in front of each line.
-                    Fix this program to turn it into the nursery rhyme 'Brother John (Frère Jaques)' by using the {repeat} command of course!
-            8:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} 'Welcome to Manicures and Pedicures by Hedy'
-                    bodypart = {ask} 'Are you getting your fingernails or toenails done today? Or both?'
-                    {if} bodyparts {is} both
-                            {print} That will be $25'
-                            price = 25
-                        {else}
-                            {print} That will be $18'
-                            price = 18
-                    color = {ask} What color would you like?
-                    sparkles = {ask} 'Would you like some sparkles with that?'
-                    {if} sparkles {is} yes
-                        {print} 'We charge $3 extra for that'
-                    price = price + 3
-                    {else} {print} 'No sparkles' {print} 'So no extra charge'
-                    {sleep} 5
-                    {print} 'All done! That will be $' price ' please!'
-                    {print} 'Thank you! Byebye!'
-                    ```
-            9:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    {print} 'Welcome to our sandwich shop'
-                    amount 'How many sandwiches would you like to buy?'
-                    {repeat} amount {times}
-                    {ask} {is} {ask} 'What kind or bread would you like your sandwich to be?'
-                    types_of_bread {is} white, wheat, rye, garlic, gluten free
-                    {if} chosen_bread in types_of_bread
-                    {print} 'Lovely!'
-                    {else}
-                    'I'm sorry we don't sell that'
-                    topping {is} {ask} 'What kind of topping would you like?'
-                    sauce {is} {ask} 'What kind of sauce would you like?'
-                    {print} One chosen_bread with topping and sauce.
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
-                    ```
-
-                    price = amount * 6
-                    {print} 'That will be 'price dollar' please'
-            10:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    names = Muad Hasan Samira Noura
-                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
-                    {for} name {is} names
-                    {print} At the beach name loves to activity at random
-                    ```
-            11:
-                story_text: |-
-                    ### Exercise
-                    Debug this calender program. The output of this program is supposed to look like a list of dates.
-                    For example:
-
-                    ```
-                    Hedy calender
-                    Here are all the days of November
-                    November 1
-                    November 2
-                    November 3
-                    ```
-                    And so on.
-
-                    Mind that you have to test your code extra carefully for the month February, because the amount of days in this month changes in leap years.
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    print 'Hedy calender'
-                    months_with_31 days = January, March, May, July, September, October, December
-                    months_with_30_days = April, June, August, November
-                    month = ask 'Which month would you like to see?'
-                    if month in months_with_31_days
-                        days = 31
-                        if month in months_with30_days
-                            days = 30
-                    if month = February
-                        leap_years = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        year = ask 'What year is it?'
-                    if year in leap_years
-                        days = 29
-                    else
-                        days = 28
-
-                    print 'Here are all the days of ' moth
-                    for i in range 1 to days
-                        print month i
-                    ```
-            12:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    define greet
-                    greetings = 'Hello', 'Hi there', 'Goodevening'
-                        print greetings at random
-
-                    define take_order
-                        food = ask 'What would you like to eat?'
-                        print 'One food'
-                        drink = 'What would you like to drink?'
-                        print 'One ' drink
-                        more = ask 'Would you like anything else?'
-                            if more is 'no'
-                        print 'Alright'
-                            else
-                            print 'And ' more
-                    print 'Thank you'
-
-                    print 'Welcome to our restaurant'
-                    people = ask 'How many people are in your party tonight?'
-                    for i in range 0 to people
-                        call greet_costumer
-                    ```
-            13:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    defin movie_recommendation with name
-                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
-                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
-                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
-                        kids_movies = 'Minions', 'Paddington', 'Encanto'
-                        if name is 'Camila' or name is 'Manuel'
-                            recommended_movie = kids_movie at random
-                        if name is 'Pedro' or 'Gabriella'
-                                mood = ask 'What you in the mood for?'
-                            if mood is 'action'
-                                recommended_movie = comedy_movies at random
-                            if mood is 'romance'
-                                recommended_movie = romance_movies
-                        if mood is 'comedy'
-                                recommended_movie = comedy_movies at random
-
-                    print 'I would recommend ' recommended_movie ' for ' name
-
-                    name = ask 'Who is watching?'
-                    recommendation = ask 'Would you like a recommendation?'
-                    if recommendaion is 'yes'
-                    print movie_recommendation with name
-                    else
-                    print 'No problem!'
-                    ```
-            14:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
-                    ```
-
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
-            15:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
-                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
-                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
-                    hiding_spots = 'behind a tree', under a table', in a box'
-                    sounds = 'a trumpet', 'a car crash', 'thunder'
-                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
-
-                    chosen_ name = names at random
-                    chosen_verb = verbs at random
-                    chosen_location = 'locations at random'
-                    chosen_sounds = noises at random
-                    chosen_spot = hiding_spots random
-                    chosen_causes = causes_of_noise at random
-
-                    print chosen_name ' was ' chosen_verb ' ' chosen_location
-                    print 'when they suddenly heard a sound like ' sounds at random
-                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
-                    print chosen_name ' hid ' chosen_spot'
-                    print 'They tried to look around, but couldn't see anything from there'
-                    hidden = 'yes'
-                    while hidden = 'yes'
-                        print chosen_name 'still didn't see anything'
-                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
-                        if answer = 'yes'
-                            hidden == 'no'
-                    print 'chosen_name moved from' chosen_spot
-                    print 'And then they saw it was just' chosen_cause
-                    print chosen_name 'laughed and went on with their day'
-                    print The End
-                    ```
-            16:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
-
-                    ```
-            17:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
-
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
-
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
-
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
-
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
-
-
-                    print 'Thanks for ordering!'
-                    ```
-            18:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old MacDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
-                    ```
-    default:
-        name: 소개
-        default_save_name: 인트로
-        description: 레벨 설명
-        levels:
-            1:
-                story_text: |
-                    Hedy에 오신 것을 환영합니다! 레벨 1에서는 스토리를 출력하는 것으로 시작할 수 있습니다.
-
-                    프로그래밍 필드 아래에 있는 녹색 '코드 실행' 버튼으로 직접 코드를 사용해 보십시오.
-
-                    준비되셨나요? 출력 결과를 확인하셨다면 이후 다음 탭으로 가셔서 첫 번째 명령어를 배우세요!
-            3:
-                story_text: |
-                    이전 레벨에서는 변수가 무엇인지와 이를 사용하여 모험을 보다 상호 작용적으로 만들 수 있는 방법에 대해 배웠습니다.
-                    하지만... 변수만 가지고 할 수 있는 것이 아닙니다! 변수를 사용하여 목록을 만들 수도 있습니다.
-                    그리고 당신은 Hedy가 목록에서 임의의 단어를 고르도록 할 수도 있고, 이것은 당신이 진짜 게임을 만들 수 있게 해 준다!
-                    다음 탭을 잠깐 보세요!
-            4:
-                story_text: |
-                    이전 레벨에서는 변수를 사용하여 연습해 보았지만, 이 문제를 발견했을 수도 있습니다.
-                    다음과 같은 코드를 실행하려고 했을 수도 있습니다:
-
-                    물론 출력 하고 싶었겠지
-
-                    `My name is Sophie`
-
-                    but Hedy prints
-
-                    `My Sophie is Sophie`.
-
-                    이 레벨에서는 따옴표를 사용하여 이 문제를 해결합니다.
-            5:
-                story_text: |
-                    이전 레벨에서는 코드를 실행할 때마다 게임이 달라지는 `{at} {random}`을 사용하는 법을 이미 배웠습니다.
-                    하지만 그것은 실제로 상호작용적이지 않으며, 플레이어는 게임에서 일어나는 일에 아무런 영향을 미치지 않는다.
-
-                    이 레벨에서는 프로그램에서 다른 응답을 할 수 있는 `{if}` 명령어를 배울 것이다. 예를 들어, 컴퓨터의 비밀 암호를 프로그래밍할 수 있는 방법이다.
-                    그럼 새로운 명령어를 보려면 다음 탭으로 이동해 보겠습니다!
-                example_code: |
-                    ```
-                    암호 {is} {ask} '암호가 뭐에요?'
-                    ```
-            6:
-                story_text: |
-                    이전 레벨에서는 `{ask}`와 `{if}`을 연습했습니다. 예를 들어 손님들에게 무엇을 먹고 싶은지 물어볼 수 있습니다.
-                    하지만 아직 할 수 없는 것은 모든 사람들의 저녁 식사 가격을 계산하는 것이다.
-
-                    다음 단계는 프로그램에서 덧셈, 뺄셈, 곱셈을 사용하는 것을 가능하게 한다. 이런 식으로 당신은 당신의 식당의 가격을 계산할 수 있지만, 친구들과 가족들에게 할인을 주기 위해 비밀 암호를 추가할 수도 있다.
-                    다음 단계의 또 다른 옵션은 당신의 남동생이나 여동생이 그들의 곱셈을 연습할 수 있도록 당신 자신의 수학 게임을 프로그래밍하는 것이다.
-                    직접 가보세요!
-                example_code: |
-                    ```
-                    food_price {is} 0
-                    drink_price {is} 0
-                    total_price {is} 0
-                    {print} 'Welcome to McHedy'
-                    order {is} {ask} 'What would you like to eat?'
-                    {if} order {is} hamburger food_price {is} 5
-                    {if} order {is} fries food_price {is} 2
-                    drink {is} {ask} 'What would you like to drink?'
-                    {if} drink {is} water drink_price {is} 0
-                    else drink_price {is} 3
-                    total_price {is} food_price + drink_price
-                    {print} 'That will be ' total_price ' dollars, please'
-                    ```
-            7:
-                story_text: |
-                    잘했어요! 다음 레벨에 도달했으니 `{if}`와 `{else}`로 연습한 셈이죠. 코드가 점점 길어지는 것을 알아차렸을 거예요.
-                    예를 들어 'Happy Birthday'를 프로그래밍하고 싶다면.
-
-                    이는 주로 같은 단어를 몇 번이고 반복해서 사용할 수 있는 많은 코드이다. 다행히도 다음 탭에서는 코드의 한 줄을 여러 번 반복할 수 있는 `{repeat}` 명령어를 사용한 해를 배울 수 있다.
-            8:
-                story_text: |
-                    이제 여러분은 한 줄의 코드를 반복하는 방법에 대해 배웠습니다. 이것은 유용하지만, 항상 충분하지는 않습니다. 때때로 여러분은 한 번에 여러 줄을 반복하고 싶어합니다.
-                    이 레벨을 사용하면 몇 줄의 코드를 그룹화할 수 있고, 그 작은 줄 그룹을 한 번에 반복할 수 있습니다!
-            9:
-                story_text: |
-                    잘했어요! 다른 새 레벨에 도달했어요! 이전 레벨에서는 {if} 또는 {repeat} 명령어에서 여러 줄의 코드를 사용하는 법을 배웠지만 아직 둘을 결합할 수는 없어요...
-                    좋은 소식입니다! 이 레벨에서는 {if} 명령 또는 {repeat} 명령에 {if}을(를) 넣을 수 있습니다.
-                example_code: |
-                    ```
-                    answer = {ask} 'Are you ready to learn something new?'
-                    {if} answer {is} yes
-                        {print} 'Great! You can learn to use the repeat commando in the if command!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                    {else}
-                        {print} 'Maybe you should practice some more in the previous level'
-            10:
-                story_text: |
-                    잘하고 있어요! 이전 레벨에서 우리는 여전히 작은 문제에 직면했어요. 당신은 선을 반복하는 법을 배웠지만, 선을 살짝 바꾸고 싶다면 어떻게 해야 하죠.
-                    예를 들어, 만약 여러분이 '행복하고 알고 있다면'이라는 노래를 부르고 싶다면, 다음과 같습니다:
-
-                    다음 절 '발을 구르다', 다음 절 '발을 구르다', 다음 절 '발을 구르다'도 원한다면 코드를 완전히 바꿔야 할 것이다.
-                    이 레벨에서는 동작 목록을 만들고 매번 다른 동작으로 코드를 반복할 수 있는 `{for}` 명령어를 배울 것입니다!
-                    한번 봐주세요!
-            11:
-                story_text: |
-                    당신은 레벨 11에 도달했고, 잘하고 있어요! 상위 레벨에서는 Hedy가 점점 더 당신에게 파이썬 프로그래밍 언어를 가르치는데 집중하고 있습니다.
-                    파이썬에는 `{repeat}` 명령어가 없지만 {repeat}처럼 작동하는 명령어가 있습니다. 파이썬 언어로 `{repeat}`을(를) 어떻게 말해야 하는지 궁금한가요? 빨리 찾아보세요!
-            12:
-                story_text: |
-                    아마 독자 분은 레스토랑 모험에서 십진법 숫자들을 사용해 보셨을 겁니다. 만약 사용했다면, 독자 분은 Hedy가 십진법 숫자들을 아직 이해하지 못하고 항상 반올림했다는 것을 알아차렸을 거예요.
-                    이 레벨부터는 십진수를 사용할 수 있습니다.
-            13:
-                story_text: |
-                    이전 레벨에서 여러분은 두 `{if}` 명령어를 서로 안에 넣는 방법을 배웠습니다. 이것은 잘 작동하지만, 이것과 같이 매우 길고 다루기 힘든 코드를 제공합니다:
-
-                    이 시스템에서는 올바른 사용자 이름과 올바른 비밀 암호를 모두 제공해야 합니다.
-                    이 레벨에서 당신은 이 코드를 훨씬 더 짧고 이해하기 쉽게 만드는 `{and}`명령어를 배울 것이다!
-                    한번 봐봐!
-            14:
-                story_text: |
-                    아래 프로그램으로 학교에서 한 과목(즉, 6등급 이상)을 통과했는지 계산할 수 있다.
-                    이 코드는 5번 행의 코드가 매우 길기 때문에 매우 비효율적이라는 것을 알 수 있다.
-                    1등급부터 5등급까지 모든 다른 등급들은 따로따로 프로그래밍이 되어야만 했다. 운이 좋네요, 이 레벨에서 이 극도로 긴 코드 없이 이것을 하는 방법을 배울 수 있을 거예요!
-            15:
-                story_text: |
-                    아래 게임에서는 플레이어가 원하는 만큼 플레이할 수 있도록 코드가 만들어졌다...
-                    하지만 이 코드는 효과가 없고 너무 깁니다. 또한, 게임을 하는 사람이 100 게임 대신 101 게임을 하고 싶다면 어떻게 할까요?
-                    무한대로 못 놀아?
-                    이 레벨에서는 이 모든 것을 훨씬 쉽게 만드는 명령어를 배우게 될 것입니다!
-            16:
-                story_text: |
-                    이 레벨에서 우리는 실제 파이썬 코드를 향해 조금 더 성장할 것이다. 두 개의 목록을 함께 맞추는 방법도 배울 것이다.
-                    이렇게 하면 올바른 동물이 올바른 소리에 맞게 코드를 프로그래밍할 수 있습니다.
-                    왜냐하면 아래의 두 코드는... 말도 안 되는 소리야!
-                example_code: |
-                    ```
-                    animals = 'chicken', 'horse', 'cow'
-                    sounds = 'cluck', 'neigh', 'moo'
-                    {for} animal {in} animals
-                        {print} 'A ' animal ' says ' sounds {at} {random}
-                    ```
-                    You could also try to make it work this way, but....
-                    ```
-                    animals = 'chicken', 'horse', 'cow'
-                    sounds = 'cluck', 'neigh', 'moo'
-                    {for} animal {in} animals
-                        {for} sound {in} sounds
-                            {print} 'A ' animal ' says ' sound
-                    ```
-            17:
-                story_text: |
-                    Hedy의 마지막 레벨에 거의 다 도달했습니다. 잘했어요! 이 레벨에서는 `{print}`을(를) 사용하는 실제 파이썬 방법을 배울 수 있습니다.
-            18:
-                story_text: |
-                    축하합니다! Hedy의 마지막 레벨에 도달했습니다! 여기서 만든 코드를 레플릿이나 파이참과 같은 실제 파이썬 환경에 복사할 수 있고, 거기서 계속 배울 수 있습니다!
-                    참고로 파이썬은 영어 명령어만 읽을 수 있기 때문에 다른 언어를 사용해 왔다면 지금은 영어로 전환해야 한다.
-    dice:
-        levels:
-            3:
-                example_code: |
-                    ```
-                    choices {is} 1, 2, 3, 4, 5, earthworm
-                    {print} choices {at} {random}
-                    ```
-                story_text_2: |
-                    ### 연습문제
-                    The dice in the example above are dice for a specific game. Can you make normal dice?
-                    Or other special dice from a different game?
-            4:
-                story_text: |
-                    In this level you can also create dice. But this time you can try it yourself, without an example code!
-
-                    ### 연습문제
-                    Make your own dice in this level.
-                    Tip: If you have no idea how to make dice. Take a peek at your dice from the previous level, but don't forget to add quotation marks.
-            5:
-                story_text: |
-                    We are going to add the `{if}` and `{else}` commands to our dice!
-
-                    ### 연습문제
-                    Complete the sample code so that the code says "You can stop throwing" once you have thrown an earthworm. It should say "You have to throw again" if you've thrown anything else.
-                    **Extra** Maybe you want to recreate a die from a completely different game. That's fine too! Then make up your own reaction, e.g. 'yes' for 6 and 'pity' for something else.
-            6:
-                story_text: |
-                    You can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.
-                    You may know that the worm counts 5 points for Earthworms. Now after a roll you can immediately calculate how many points you have thrown.
-                    This is the code to calculate points for one die:
-
-                    ### 연습문제
-                    Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
-                example_code_2: |
-                    Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
-            7:
-                story_text: |
-                    You can also make a dice again in this level. With the `{repeat}` code you can easily roll a whole hand of dice.
-
-                    ### 연습문제
-                    Try to finish the sample code!  **Extra** Think of a game you know that involves a dice and program that using a `{repeat}`.
-            10:
-                story_text: |
-                    ### 연습문제
-                    Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
-                    Change the names into names of your friends or family, and finish the code.
     dishes:
         description: Use the computer to see who does the dishes (Start at level 2)
         levels:
-            3:
-                example_code: |
-                    ```
-                    people {is} mom, dad, Emma, Sophie
-                    {print} people {at} {random}
-                    ```
-                story_text_2: |
-                    ### 연습문제
-                    Make your own version of the dishwasher program. Firstly make a list of your family members.
-                    Then think of a task that needs to be done, and let the computer decide who has to do the task with the `{at} {random}` command.
-
-                    **Extra** Don't feel like doing the dishes yourself? Hack the program by removing your name from the list with the `{remove}` `{from}` command.
-            4:
-                story_text: |
-                    With quotation marks you can make your dishwashing program even better.
-
-                    ### 연습문제
-                    First, fill in right symbols or commands on the blanks to make this example program work.
-                    Did you get it? Great! Now copy your own code from the previous level and make it work in this level by adding quotation marks in the right spots.
-            5:
-                story_text: |
-                    With the `{if}` you can now have more fun with choice in the program. You can have your program respond to the choice that the computer has made.
-                    ### 연습문제
-                    Can you finish the code so that it prints 'too bad' when it is your turn and otherwise 'yes!'?
-                    Don't forget the quotes!
-            6:
-                story_text: |
-                    얼마나 자주 설거지를 할까요? 공평한가요? 이 정도면 계산할 수 있어요.
-                story_text_2: |
-                    If you are extremely unlucky the previous program might choose you to to the dishes for the whole week! That's not fair!
-                    To create a fairer system you can use the `{remove}` command to remove the chosen person from the list. This way you don't have to do the dishes again untill everybody has had a turn.
-
-                    Monday and tuesday are ready for you! Can you add the rest of the week?
-                    And... can you come up with a solution for when your list is empty?
             7:
                 story_text: |
-                    With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for multiple days!
-                    ### 연습문제
-                    Use the `{repeat}` command to decide on who needs to wash the dishes for an entire week. Each blank needs to be filled with one command or number!
-                    **Extra** Can you think of other tasks in the house? Adapt the code so it decides on three household chores. Do not forget to print what tasks it concerns!
-                example_code: |
-                    ```
-                    people = mom, dad, Emma, Sophie
-                    {repeat} _ _ {print} 'the dishwasher is' _
-                    ```
-            10:
-                story_text: |
-                    In this level you can make a schedule for the whole week in an easy way!
-
-                    ### 연습문제
-                    Add a second chore, such as vacuuming or tidying up, and make sure it is also divided for the whole week.
-                    <br> **Extra** The program is not fair, you can be unlucky and wash up all week. How could you make the program more fair?
+                    얼마나 자주 설거지를 할까요? 공평한가요? 이 정도면 계산할 수 있어요.
     elif_command:
         description: elif
-        levels:
-            17:
-                story_text: |
-                    이 레벨에서는 새 명령어 `{elif}`를 사용할 수도 있습니다. `{elif}`는 `{else}` `{if}`의 줄임말로, 3개 이상의 옵션을 만들 때 필요합니다.
-                    한번 봐봐!
-                example_code: |
-                    ```
-                    prices = ['백만달러', '사과파이', '아무것도없음']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '백만달러' :
-                        {print} '예! 너는 부자야!'
-                    {elif} your_price == '사과파이' :
-                        {print} 'Lovely, 사과파이!'
-                    {else}:
-                        {print} '다음 기회를..'
-                    ```
+        levels: {}
     for_command:
         description: for 명령어
-        levels:
-            10:
-                story_text: |-
-                    ## For
-                    이 레벨에서 우리는 `{for}`라는 새로운 코드를 배운다. `{for}`를 사용하면 목록을 만들고 모든 요소를 사용할 수 있다.
-                    `{for}`는 `{repeat}`와 `{if}`와 같은 블록을 생성하므로 블록의 모든 행은 4개의 공백으로 시작해야 한다.
-            11:
-                story_text: |-
-                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
-                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
-                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
-            17:
-                story_text: |
-                    이제 들여쓰기를 조금 바꿀 것이다. 들여쓰기가 필요할 때마다 우리는 들여쓰기 앞 줄에 `:`가 필요하다.
+        levels: {}
     fortune:
         name: 예언가
         default_save_name: 예언가
@@ -999,133 +212,7 @@ adventures:
                     ### 연습문제
                     예제 코드를 입력 화면에 복사하고 빈칸을 입력하면 코드가 작동합니다.
                     **추가** 코드를 바꿔서 점쟁이가 당신의 이름뿐만 아니라 당신의 나이, 당신이 좋아하는 스포츠 팀, 또는 당신 자신에 관한 다른 것들도 예측할 수 있도록 하세요.
-            3:
-                story_text_2: |
-                    ### 연습문제
-                    Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or 'ask again'.
-            5:
-                story_text: |
-                    ### 연습문제
-                    In the example code you see how to make a fortune teller program that allows you to tip the odds in your favor. This cheating program always tells you that you will win the lottery, but your friends will never win.
 
-                    Use this to make your own program, be creative! For example you could create a code that predicts that:
-                    * your favorite sports team will beat all the competitors!
-                    * your favorite movie will be chosen for movie night!
-                    * you win tickets to your favorite show!
-                    * you are the fairest of them all, like Snow White's magic mirror.
-                    Let your imagination do the work!
-
-                    Your program has to exist of at least 10 lines of code and need to have at least one `{if}` and `{else}` command.
-            6:
-                story_text: |
-                    In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
-                    For example you could calculate how rich you'll get or how many kids you will have when you grow up.
-
-
-
-                    ### 연습문제
-                    Can you think of your own (silly) fortune telling machine?
-            7:
-                story_text: |
-                    ### 연습문제
-                    Finish this program that tells you if your crush loves you back or not.
-            8:
-                story_text: |
-                    In the next example you can have your fortune teller ask multiple questions and also print them!
-
-                    ### 연습문제
-                    Can you fill in right command on the blanks?
-                example_code: |
-                    ```
-                    {print} 'I am Hedy the fortune teller!'
-                    {print} 'You can ask me 3 questions.'
-                    answers = yes, no, maybe
-                    _ _ _
-                       question = {ask} 'What do you want to know?'
-                       {print} question
-                       {sleep}
-                       {print} 'My crystal ball says...' answers {at} {random}
-                    ```
-            10:
-                story_text: |
-                    In this level you'll learn how to program the game MASH (mansion, apartment, shack, house). In this game you can predict for all the players at once, what their future will look like.
-
-                    ### 연습문제
-                    Fil in the blanks by using the new command that you've learned this level.
-            12:
-                story_text: |-
-                    From level 12 on, you will also have to use quotation marks in lists, before and after each item.
-
-                    ### 연습문제
-                    Add two predictions to the list
-                example_code: |
-                    ```
-                    fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
-                    {print} 'I will take a look in my crystall ball for your future.'
-                    {print} 'I see... I see...'
-                    {sleep}
-                    {print} fortunes {at} {random}
-                    ```
-    functions:
-        levels:
-            12:
-                example_code: |
-                    ```
-                    sides = 'left', 'right'
-                    limbs = 'hand', 'foot'
-                    colors = 'red', 'blue', 'green', 'yellow'
-
-                    {define} turn
-                        chosen_side = sides {at} {random}
-                        chosen_limb = limbs _
-                        chosen_color = colors _
-                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
-
-                    {print} 'Lets play a game of Twister!'
-                    {for} i {in} {range} 1 to _
-                        {call} turn
-                        {sleep} 2
-                    ```
-            13:
-                story_text: |
-                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
-                    An **argument** is a variable that is used within a function. It is not used outside the function.
-
-                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
-
-                    ### Exercise
-                    The next verse of this song goes:
-
-                    Last night as I lay on my pillow
-                    Last night as I lay on my bed
-                    Last night as I lay on my pillow
-                    I dreamed that my Bonnie is dead
-
-                    Can you program this verse in the same way as the example?
-            14:
-                example_code: |
-                    ```
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
-
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
-
-                    new_price = _ calculate_new_price {with} old_price, _
-                    {print} 'The new price is ' new_price ' dollar'
-                    ```
-    harry_potter:
-        levels:
-            10:
-                story_text: |
-                    ### 연습문제
-                    We can also make a Harry Potter themed fortune teller. Fill in blanks such that 9 lines are printed.
-                    **Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
     haunted:
         name: 유령의 집
         default_save_name: 유령의 집
@@ -1136,50 +223,9 @@ adventures:
                     오른쪽 문을 선택하면 살아남겠지만, 끔찍한 괴물이 아니라면...
 
                     레벨 1에서는 무서운 이야기를 지어내는 것으로 유령의 집 게임을 시작하고 플레이어에게 유령의 집에서 어떤 괴물을 보게 될지 물어봅니다.
-                story_text_2: |
-                    ### 연습문제
-                    Copy the example code to your input screen by clicking the yellow button.
-                    Now finish the story by adding at least 5 lines of code.
-                    Remember to start each line of codes with a `{print}` command.
             2:
                 story_text: |
                     이 유령이 나오는 집에서는 이모지로 몬스터를 고를 수 있습니다. 물론 단어도 사용할 수 있습니다.
-                story_text_2: |
-                    ### 연습문제
-                    In the example above the monsters are predetermined. So each time you run your code, the output is the same.
-                    Can you add `{ask}` commands to make the haunted house interactive and have the players choose the monsters they come across?
-            3:
-                story_text: |
-                    In the previous levels you've made an introduction to your haunted house game, but as you might have noticed the story would always have a dreadful end.
-                    In this level you can make your story more interactive by changing the outcome of the game; sometimes you'll get eaten, sometimes you'll escape!
-                    Let Hedy decide randomly!
-
-                    ### 연습문제
-                    Copy the example codes and fill in the blanks to make it work!
-
-                    **Extra** This story is pretty straight forward, maybe you can spook it up a bit by adding a more exciting story.
-                    Also you have very limited outcomes right now, there are only 3 options of what's behind the doors. Maybe you can think of more monsters to add to the list!
-            4:
-                story_text: |
-                    In this level you learn how to use quotation marks in your games.
-
-                    ### 연습문제
-                    Can you make your Haunted House level 4 proof?
-
-                    ### 연습문제 2
-                    Go back to the previous level and copy your haunted house code. Make the code work in this level by adding quotation marks in the right spots.
-            5:
-                story_text: |
-                    Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
-                    If the player filled in a completely random answer, the game would still work and the player might even win (despite not picking a door).
-                    In this level you can only win the game by picking the same door Hedy picked randomly.
-
-                    ### 연습문제
-                    Can you find the 4 missing words to complete the code?
-            9:
-                story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### 연습문제\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
-            11:
-                story_text: "In this level we've changed the `{for}` command so we can tell the player where they are. \n\n### 연습문제 1\nFinish the program so the player knows which room they are in.\n\n### 연습문제 2\nMake the program into an adventure by following these steps:\n\n1. Make a list of choices (like: fight or flight)\n 2. Make sure the player can choose an option with `{ask}`\n3. Is answer correct? Then they may proceed to the next monster. Do they give a wrong answer? Let the player know with a `{print}`. \n\n**Extra** If you make a wrong choice, a monster is still shown! How could you change that?\n"
     if_command:
         description: Introducing the if command
         levels:
@@ -1194,37 +240,9 @@ adventures:
                 story_text_3: |
                     ### 연습 문제
                     `{if}`와 `{else}`로 자신만의 코드를 만들어 보자. 원한다면 예제 코드를 사용할 수 있다.
-            8:
-                story_text: |
-                    ## If... Else...
-                    `{repeat}` 명령 후 코드 행 블록을 반복하는 법을 배웠습니다.
-                    이제 들여쓰기를 사용하여 {if} 또는 {else} 명령 뒤에 블록을 만들 수도 있습니다.
-                    예제 코드를 확인해 보세요.
-
-                    ### 연습 문제
-                    예제 코드에 {else} 명령어를 추가합니다. 들여쓰기를 사용하여 선 블록을 만듭니다. 이것은 각 선을 4개의 공백으로 시작하여 수행합니다.
-            9:
-                story_text: |
-                    In this level you can also put an {if} command inside another {if} command.
     in_command:
         description: Introducing the in command
-        levels:
-            5:
-                story_text: |
-                    ## Lists
-                    목록에 있는 것이 있는지 확인하고 싶을 때는 이제 `{in}` 명령을 사용할 수 있다.
-                    이 코드는 예쁘게 인쇄됩니다! 녹색이나 노란색을 선택하면, 나는 그렇지 않으면 인쇄됩니다.
-                story_text_2: |
-                    ### 연습문제
-                    배운 명령어를 빈칸에 채워 예제 코드를 완성합니다.
-                    코드를 완성했으면 자신의 코드를 만들고 자신이 생각한 질문을 사용해 보십시오.
-                example_code_2: |
-                    ```
-                    animals is dog, cow, sheep
-                    answer is ask 'What is your favorite animal?'
-                    _ answer _ animals _ 'Mine too!'
-                    _ _ 'My favorite animals are dogs, cows and sheep'
-                    ```
+        levels: {}
     is_command:
         description: introducing is command
         levels:
@@ -1237,66 +255,6 @@ adventures:
                     변수를 직접 만들어 볼 시간!
                     예제 코드에서 우리는 `favorite_animal` 변수의 예를 만들었다. 1행에서 변수가 설정되어 있고, 2행에서 우리는 인쇄 명령에 변수를 사용했다.
                     먼저 빈칸에 가장 좋아하는 동물을 채우는 것으로 예제를 끝내라. 그런 다음 적어도 3개의 코드를 직접 만들어라. 변수를 골라서, {is} 명령어로 변수를 설정한다. 그런 다음 우리가 했던 것처럼 {print} 명령어로 사용한다.
-            14:
-                story_text: |
-                    우리는 새로운 것들을 더 배울 거예요. 여러분은 수학, `<`와 `>`에서 이미 알고 있을 거예요.
-                    `<`은 첫 번째 숫자가 두 번째 숫자보다 작은지, 예를 들어 `<`12세가 12세보다 작은지를 확인합니다.
-                    만약 첫 번째 숫자가 두 번째 숫자보다 작거나 같은지 확인하려면, `<=`를 사용합니다. 예를 들어, "<=" 11.
-                    `>`은 첫 번째 숫자가 두 번째 숫자보다 큰지 확인하고, 예를 들어 `>` 는 포인트가 10보다 큰지 확인한다.
-                    첫 번째 숫자가 두 번째 숫자보다 크거나 같은지 확인하려면 점 `>=`를 사용하면 된다.
-                    다음과 같이 `{if}`에서 이들 비교를 사용한다:
-                example_code: |
-                    ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
-                    ```
-                story_text_2: |
-                    이 레벨부터는 정확하게 비교하고 싶다면 두 개의 등호를 사용할 수 있다. 대부분의 프로그래밍 언어는 다음과 같이 한다:
-                story_text_3: |
-                    다음과 같이 `!=`을 사용하여 어떤 것이 다른 것과 *not* 같은지 비교할 수도 있습니다:
-                example_code_3: |
-                    ```
-                    name = {ask} 'What is your name?'
-                    {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
-                    ```
-
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
-    language:
-        levels:
-            5:
-                story_text: |
-                    Make your own program to practice your vocabulary in a new language.
-
-                    ### 연습문제
-                    Make the code longer by adding at least 3 more words for the player to learn.
-                    **Extra** Of course, you can choose to use a different language than French. You can change to code to any language you'd like to learn.
-    maths:
-        levels:
-            6:
-                example_code: |
-                    ```
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
-                    ```
-            12:
-                example_code_2: |
-                    ```
-                    a = 'Hello '
-                    b = 'world!'
-                    {print} a + b
-                    ```
-
-                    {print} 2.5 + 2.5
-    music:
-        levels:
-            6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
     parrot:
         name: 앵무새
         default_save_name: 앵무새
@@ -1333,74 +291,6 @@ adventures:
 
                     ### 연습문제
                     누락된 명령어 4개를 입력하여 코드를 마무리합니다.
-    piggybank:
-        levels:
-            12:
-                story_text: |
-                    In this adventure you learn how to make a digital piggy bank.
-
-                    ### 연습문제
-                    Finish the code to calculate how much money you have and how long you need to save up to buy what you want!
-                    **Extra** Maybe you have already saved some money? Deduct that from the amount you will have to save up.
-                example_code: |
-                    ```
-                    {print} 'The digital piggy bank'
-                    wish = {ask} 'What would you like to buy?'
-                    price = {ask} 'How much does that cost?'
-                    saved = {ask} 'How much money have you saved already?'
-                    allowance = {ask} 'How much pocket money do you get per week?'
-                    to_save = price - saved
-                    weeks = to_save / allowance
-                    {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
-                    ```
-            14:
-                example_code: |
-                    ```
-                    _ calculate_budget with wish, money, allowance
-                        to_save = wish - money
-                        weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
-                        {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
-
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
-
-                    {call} calculate_budget with _, _, _
-                    ```
-    pressit:
-        levels:
-            5:
-                story_text: |
-                    In this level there is another new keyword: `{pressed}`!
-                    With `{pressed}` you can use keys on your keyboard to control what lines are used.
-
-                    ### 연습문제
-                    Look at the example and add one more line of code that reacts to a key press.
-                story_text_2: |
-                    You can also link turtle commands to keys.
-
-                    ### 연습문제
-                    Copy the lines a few times so you can create a larger drawing.
-            7:
-                story_text: |
-                    Now that you have learned about `{repeat}`, we can press keys multiple times.
-                    You can use it to make the turtle walk forward and turn.
-
-                    ### 연습문제
-                    The code you have seen in level 5 only checks the key once. Copy the example code and add a `{repeat}` to it, so that you can press the keys many times.
-                    Use this code to draw something nice.
-            9:
-                story_text: |
-                    Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
-
-                    ### 연습문제
-                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.
-                    **Extra** Clear the screen after each letter, and show the user how many points they have scored.
     print_command:
         levels:
             1:
@@ -1423,18 +313,6 @@ adventures:
                     ```
                     _ 안녕하세요!
                     ```
-            18:
-                story_text: |-
-                    진짜 파이썬 코드에 도착했어! 이제부터는 `{print}`와 `{range}`가 있는 괄호를 써야 한다는 얘기다.
-                    영어 명령어만 사용하면 파이썬 환경에서 이 레벨의 Hedy 코드를 사용할 수 있다는 의미도 있다. 지금까지 사용하지 않았다면 명령어 메뉴의 토글을 전환하여 사용할 수 있다.
-                story_text_2: 두 개 이상의 항목을 인쇄하려면 쉼표,으로 구분해야 합니다.
-                example_code_2: |
-                    ```
-                    temperature = 25
-                    {print}('It is ', temperature, ' degrees outside')
-                    ```
-
-                    {print}('My name is ', name)
     quotation_marks:
         name: '''따옴표'''
         levels:
@@ -1462,20 +340,9 @@ adventures:
                     ### 연습 문제
                     문이나 여행가방을 고르는 게임쇼(TV에 나오는 것처럼)를 만들어 `{at} {random}` 명령어를 사용해 보세요. 가격이 엄청나요!
                     할 수 있겠어? 우리는 이미 예제 코드에 첫 줄을 넣었다.
-            16:
-                story_text: |-
-                    우리는 파이썬 방식으로 목록을 만들고, 목록 주변에 대괄호를 둘 것이다! 우리는 또한 이전 레벨에서 배운 것처럼 각 항목의 주변에 따옴표를 유지한다.
-                    우리는 대괄호를 사용하여 목록의 한 자리를 가리킨다. {at} {random} 명령은 더 이상 사용할 수 없다.
     repeat_command:
         description: repeat 명령어
         levels:
-            7:
-                story_text: |
-                    ## Repeat! Repeat! Repeat!
-                    레벨 7은 `{repeat}` 명령어를 추가한다.`{repeat}`는 한 줄의 코드를 여러 번 실행하는 데 사용될 수 있다. 다음과 같다:
-
-                    ### ### 연습문제
-                    반복 명령으로 장난을 치세요. 생일 축하 노래를 지금 4줄이 아닌 3줄의 코드로 만들 수 있나요?
             8:
                 story_text: |
                     ### Repeat commands and indentation
@@ -1483,31 +350,9 @@ adventures:
                     이것은 반복하고 싶은 선들의 블록을 만들어서 하는 것이다.
                     이 블록의 줄에는 **indentation**가 필요합니다.
                     그것은 각 줄의 시작에 4칸을 넣는 것을 의미한다. 한 줄로 된 블록을 만들고 싶을 때도 들여쓰기를 해야 한다.
-            9:
-                story_text: |
-                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
-                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
-                example_code: |
-                    ```
-                    answer = {ask} 'Are you ready to learn something new?'
-                    {if} answer {is} yes
-                        {print} 'Great! You can learn to use the repeat command in the if command!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                    {else}
-                        {print} 'Maybe you should practice some more in the previous level'
     repeat_command_2:
         description: repeat 명령어 2
         levels:
-            7:
-                story_text: |
-                    ## Repeat with other commands and with variables
-                    지금은 `{print}` 명령어와 함께 `{repeat}` 명령어를 연습했는데, `{repeat}`으로 다른 명령어도 사용할 수 있다는 사실을 알고 있었나요?
-                    이 예제 코드에서 '{repeat}'는 `{ask}`, `{if}` 또는 `{else}` 명령어로도 사용할 수 있음을 알 수 있습니다.
-                story_text_2: |
-                    Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
-                    Then, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.
             8:
                 story_text: |
                     ### In the block or not?
@@ -1532,54 +377,7 @@ adventures:
                     그러면 식당 프로그램에 최소 4줄의 코드를 추가해주세요.
                     고객에게 무엇을 마시고 싶은지 물어보고 현금이나 카드로 지불하고 싶은지 물어봅니다.
                     마지막으로 고객과 작별할 수 있는 좋은 방법을 생각해 보세요.
-            2:
-                story_text_2: |
-                    ### 연습문제
-                    Copy your own restaurant code from to previous level to the input screen below.
-                    Fix the code by replacing the `{ask}` and `{echo}` commands and using variables, like you've learned in this level.
-
-                    Now that your code is working again, it's time to add something more.
-                    Look at the last line of the example code: `{print} food with topping is on its way!`
-                    In this single line 2 variables have been used to create a summary of the order.
-                    Now add your own summary of the food and drinks ordered by the customer.
-
-                    **Extra** Now that you've learned how to use variables, you can use as many variables in one line as you'd like. Can you add more variables to your code, like eat in or take-away, cash or card, with or without a straw etc.?
-            3:
-                story_text_2: |
-                    ### 연습문제
-                    Now make your own version of the random restaurant.
-                    Make a list of starts, mains, desserts, drinks and prices yourself.
-                    Then use `{print}` and `{at} {random}` commands to tell the costumer what will be on their menu tonight.
-            4:
-                story_text: |
-                    ### 연습문제
-                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
-                    Then, use the `{clear}` command to only show one line at a time in your output screen.
-
-                    ### 연습문제 2
-                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
-            5:
-                story_text: |
-                    ### 연습문제
-                    The example code shows how you could program that you've run out of a menu item in your restaurant.
-                    Copy your own restaurant code from the previous levels. Create a problem in your restaurant and code it, like the example code did.
-                    For instance, you could also run out of a menu item, or you don't take credit cards, or the ice cream machine is broken.
-
-                    **Extra** Have you programmed the problem and programmed appropriate responses? Then try to add more `{if}` and `{else}` commands into your code.
-                    Try to add an `{if}` after every `{ask}` command in your code to make the code as interactive as possible!
-            6:
-                story_text: |
-                    In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
-                    But you can also add many more things to your virtual restaurant, for example more courses.
-
-                    ### 연습문제
-                    You can add many more things to your virtual restaurant. For example, can you...
-                    - ask how many people are coming and multiply the price by that amount?
-                    - add another course?
-                    - give people a discount when they enter a (secret) couponcode?
-                    - add a children's menu?
-                    - think of other fun things to add?
-            7:
+            8:
                 story_text: |
                     이 레벨에서는 코드의 한 줄을 일정 시간 반복하기 위해 `{repeat}` 명령을 사용하는 방법을 배웠습니다.
                     레스토랑에서 여러 사람이 무엇을 먹고 싶은지 `{ask}` 용도로 사용할 수 있습니다.
@@ -1587,88 +385,7 @@ adventures:
                     ### 연습문제
                     코드를 완성할 수 있나요? Hedy는 이 질문을 사람 수만큼 반복해야 합니다. 그래서 만약에 5명이면 5번 질문을 해야 합니다.
                     **추가** 음료나 소스와 같은 더 많은 질문으로 코드를 확장합니다.
-            8:
-                story_text: |
-                    이 레벨에서 당신은 여러 줄의 코드를 반복함으로써 가상 식당을 더 정교하게 만들 수 있다. 다음과 같이:
-
-                    ### 연습문제
-                    This code can be expanded with more items on the menu, for example offering drinks, and/or multiple courses or desserts. Add at least one more item.
-                    **Extra** Add even more items, as many options as you like!
-                example_code: |
-                    ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people will be joining us today?'
-                    {print} 'Great!'
-                    {repeat} people {times}
-                        food = {ask} 'What would you like to order?'
-                        {print} food
-                    {print} 'Thank you for ordering!'
-                    {print} 'Enjoy your meal!'
-                    ```
-            9:
-                story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### 연습문제\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the costumer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
-            10:
-                story_text: |
-                    In this level you'll learn how to easily ask orders for different courses.
-
-                    ### 연습문제 1
-                    Finish the code with an `{ask}` on the blanks such that the customer is asked what they want to eat for each course.
-                story_text_2: |
-                    ### 연습문제
-                    Of course, you could also order for multiple people!
-                    Can you add the correct amount of indentation before each line to make the code work properly?
-                    Tip: some lines don't need any indentation at all.
-                example_code_2: |
-                    ```
-                    courses = appetizer, main course, dessert
-                    names = Timon, Onno
-                    {for} name {in} names
-                        {for} course {in} courses
-                            food = {ask} name ', what would you like to eat as your ' course '?'
-                            {print} name ' orders ' food ' as their ' course
-                    ```
-            11:
-                story_text: |
-                    We can use the `{for}` with `{range}` to print the orders from multiple customers in an orderly manner.
-
-                    ### 연습문제
-                    Finish the restaurant code, so that you can ask for the order of multiple people. Print the order number each time: 'Order 1', 'Order 2', etc.
-                    Are you not sure how to go about this? Have a peek at your level 8 code.
-
-                    **Extra** In level 9 the restaurant also used prices. You can add that here too!
-            12:
-                story_text: |
-                    From this level on you can use decimal numbers to make you menu more realistic.
-
-                    ### 연습문제
-                    Can you think of a code to give your friends and family a 15% discount?
-                example_code: |
-                    ```
-                    price = 0
-                    food = {ask} 'What would you like to order?'
-                    drink = {ask} 'What would you like to drink?'
-                    {if} food {is} 'hamburger'
-                        price = price + 6.50
-                    {if} food {is} 'pizza'
-                        price = price + 5.75
-                    {if} drink {is} 'water'
-                        price = price + 1.20
-                    {if} drink {is} 'soda'
-                        price = price + 2.35
-                    {print} 'That will be ' price ' dollar, please'
-                    ```
-            13:
-                story_text: |
-                    In this level you will learn new commands to extend your code even further.
-
-                    ### 연습문제 1
-                    Place a `{and}` and a `{or}` in the logical place in the program.
-
-                    ### 연습문제 2
-                    Expand your restaurant with at least one more `{and}` and one `{or}`.
-                    For example, create a special discount coupon that only applies to pizza, or give your customer a free drink
-                    with fries and pancakes. Or something completely different of course!
-            15:
+            16:
                 story_text: |
                     `{while}`를 사용하면 고객이 주문이 완료될 때까지 주문을 계속 추가할 수 있습니다.
 
@@ -1684,228 +401,18 @@ adventures:
                     1단계에서는 가위바위보 게임으로 시작할 수 있습니다.
 
                     `{ask}`를 사용하면 선택을 할 수 있고, `{echo}`를 사용하면 선택을 반복할 수 있습니다.
-                story_text_2: |
-                    ### 연습문제
-                    Instead of using words, you could also use emojis: ✊✋✌
-                    Can you create a code using emojis?
-            2:
-                story_text: |
-                    In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
-                    ### 연습문제
-                    Finish the code by filling in the **variable** on the blanks.
-                    This game is not very interactive, but no worries! In the next tab you'll learn how to use variables with the `{ask}` command to make your game interactive!
-                example_code: |
-                    ```
-                    choice is rock
-                    {print} I choose _
-                    ```
             3:
-                story_text: |
-                    You can use the `{at} {random}` command to let the computer pick rock, paper or scissors!
-
-                    ### 연습문제
-                    Finish the code by using the `{at} {random}` command.
                 story_text_2: |
                     **추가** 두 플레이어가 게임을 하도록 하세요. 먼저 두 플레이어에게 이름을 입력해달라고 요청하고 컴퓨터가 임의로 선택하도록 하세요.
-            5:
-                story_text: |
-                    In this level we can determine whether it's a tie or not. For that you need the new `{if}` code.
-
-                    ### 연습문제
-                    Finish the code by filling in the blanks:
-                    * Let the computer pick a random option
-                    * Ask the player what they want to choose
-                    * Fill in the correct variables in line 4 and 5
-                    * Finish line 6 so that Hedy can check whether it's a tie or not.
-                example_code: |
-                    ```
-                    options {is} rock, paper, scissors
-                    computer_choice {is} _
-                    choice {is} _
-                    {print} 'you chose ' _
-                    {print} 'computer chose ' _
-                    {if} _ {is} _ {print} 'tie!' {else} {print} 'no tie'
-                    ```
-
-                    비겼는지 확인하려면 빈칸에 정확한 코드를 입력하세요.
-            9:
-                story_text: "In this level you can program the whole rock, paper, scissors game by nesting the `{if}` commands. \n\n### 연습문제\nCan you finish the code? The program must tell who has won for every combination.\n\n**Extra** Want to play more than one game? Expand the code so that you can play multiple rounds. You can even use an `{ask}` to ask the user how many rounds they want to play.\n"
-                example_code: |
-                    ```
-                    choices = rock, paper, scissors
-                    your_choice = {ask} 'What do you choose?'
-                    {print} 'You choose ' your_choice
-                    computer_choice = choices {at} {random}
-                    {print} 'The computer chooses ' computer_choice
-                    {if} computer_choice {is} your_choice
-                        {print} 'Tie'
-                    {if} computer_choice {is} rock
-                        {if} your_choice {is} paper
-                            {print} 'You win!'
-                        {if} your_choice {is} scissors
-                            {print} 'You lose!'
-                    # finish this code
-                    ```
-            10:
-                story_text: |
-                    ### 연습문제
-                    In the previous levels you have often made your own rock paper scissors game. Can you finish the code and use the {for} command properly to get the game to work?
-            13:
-                story_text: |
-                    With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code.
-
-                    ### 연습문제
-                    Finish the code such that a winner is always decided on. Run your code a few times to verify there is always a winner printed.
-            15:
+            16:
                 story_text: |
                     ### 연습문제
                     컴퓨터를 이길 때까지 게임을 해! 하지만 일단 예제 코드를 완성하고...
-    rock_2:
-        levels:
-            2:
-                story_text: |
-                    Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!
-
-                    ### 연습문제
-                    Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
-                example_code: |
-                    ```
-                    choice is _
-                    {print} I choose choice
-                    ```
-    secret:
-        levels:
-            12:
-                story_text: |
-                    In this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.
-                    If the enemy tries to crack the code, they will get some false info to waste their time.
-
-                    ### 연습문제 1
-                    Make your own secret code for your superspy and return both parts only to the real spy.
-
-                    ### 연습문제 2
-                    Add a third component to the code, like a piece of clothing or an object.
-                example_code: |
-                    ```
-                    name = {ask} 'What is your name?'
-                    if name {is} '_'
-                        a = 'Go to the airport '
-                    {else}
-                        a = 'Go to the trainstation '
-                    password = {ask} 'What is the password?'
-                    {if} password {is} _
-                        b = 'tomorrow at 02.00'
-                    {else}
-                        b = 'today at 10.00'
-                    {print} _ _ _
-                    ```
-            13:
-                story_text: |
-                    We can simplify the superspy code with `{and}`, such that we only need one `{if}`.
-
-                    ### 연습문제 1
-                    Complete the code by filling the right command on the blank. Tip: The superspy has to answer BOTH questions correctly, before they get the confidential information!
-
-                    ### 연습문제 2
-                    We want confuse the enemy even more! Create a list with fake answers and select one at random when a wrong answer is given.
     sleep_command:
         description: introducing sleep command
         levels:
             2:
                 story_text: "이 레벨의 또 다른 새로운 명령어는 `{sleep}`으로 프로그램을 잠시 일시 중지한다. {sleep} 명령 뒤에 숫자를 입력하면 해당 시간 동안 프로그램이 일시 중지된다. \n\n### 연습 문제\n{sleep} 명령어를 적어도 3번 사용하는 자신만의 코드를 만들어 이 새로운 명령어를 연습한다. {sleep} 명령어마다 일시 중지 시간이 달라야 한다.\n"
-    songs:
-        levels:
-            6:
-                story_text: |
-                    Songs often contain a lot of repetition. Sometimes the repetition is also based on counting.
-                    For example, in the well-known song 'Bottles of beer'. You can program that song with a little math.
-
-                    Tip: Use the read aloud function to let Hedy sing the song to you!
-
-                    ### 연습문제
-                    You can now repeat lines 2 to 7 as many times as you want by copying the lines.
-            7:
-                story_text: |
-                    Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
-
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark tututudutudu <br>
-                    Baby Shark
-
-                    ### 연습문제
-                    You can print the song Baby Shark with a `{repeat}`? Finish the code by replacing the blanks?
-                    **Extra** After Baby Shark you can of course also program other songs. There are many songs with repetition!
-                    Can you think of one more song and print it?
-            8:
-                story_text: |
-                    In a previous level you've programmed the song 'Bottles of beer'. But without the `{repeat}` command, you had to copy the verses many times.
-                    In this level you can repeat the song 99 times, just by adding one simple line!
-
-                    ### 연습문제
-                    Add the right command on the blanks and indent the code correctly.
-            10:
-                story_text: |
-                    With `{for}` you can print make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
-
-                    ### 연습문제 1
-                    Can you make the baby shark code even shorter by using a `{for}` command? Finish the example code.
-                story_text_2: |
-                    ### 연습문제 2
-                    Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
-
-                    **Extra** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
-            11:
-                story_text: |
-                    In this level you can use the `{for}` with `{range}` to make songs that use counting, like the 5 little monkeys.
-
-                    ### 연습문제 1
-                    Fill in the blanks and make the code work! If you don't remember the song text, look it up yourself.
-
-                    ### 연습문제 2
-                    The final line of the song is different from the others. Print this line inside the `{for}`, and use an `{if}` to make it work correctly.
-            12:
-                story_text: |
-                    In this song we can make it even easier to program 'if you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
-
-                    ### 연습문제
-                    Can you add the right amount of indentation to each line to make the song play correctly?
-                    Hint: Not all lines need indentation.
-                example_code: |
-                    ```
-                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    {for} action {in} actions
-                        {for} i {in} {range} 1 {to} 2
-                            {print} 'if youre happy and you know it'
-                            {print} action
-                        {print} 'if youre happy and you know it and you really want to show it'
-                        {print} 'if youre happy and you know it'
-                        {print} action
-                    ```
-            18:
-                story_text: |
-                    In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.
-
-                    ### 연습문제 1
-                    The Drunken sailor song is given as sample code, but not yet working.
-                    Can you make sure everything works again? To help you, we've put _ in the places of _some_ errors.
-
-                    ### 연습문제 2
-                    Now also look up your Old MacDonald song from level 16, and correct it.
-    songs_2:
-        levels:
-            12:
-                example_code: |
-                    ```
-                    {define} twinkle
-                        {print} 'Twinkle'
-                        {print} '...'
-
-                    {call} twinkle
-                    {print} 'Up above the world so high'
-                    {print} 'Like a diamond in the sky'
-                    {call} _
-                    ```
     turtle:
         name: 거북이
         default_save_name: 거북이
@@ -1923,156 +430,6 @@ adventures:
             2:
                 story_text: |
                     이 레벨에서 변수를 사용하여 거북이가 상호작용하도록 만들 수 있다. 예를 들어 플레이어에게 거북이가 몇 걸음을 걸어야 하는지 물어볼 수 있다.
-                example_code: |
-                    ```
-                    answer {is} {ask} How many steps should the turtle make?
-                    {forward} answer
-                    ```
-                story_text_2: |
-                    Also, in level 1 the turtle could only turn left or right. That is a bit boring!
-                    In level 2 he can point his nose in all directions.
-
-                    Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
-
-                    ### 연습문제
-                    Can you make a figure with this code? Maybe a triangle or a circle?
-                example_code_2: |
-                    ```
-                    {print} Drawing figures
-                    angle {is} 90
-                    {turn} angle
-                    {forward} 25
-                    {turn} angle
-                    {forward} 25
-                    ```
-            3:
-                story_text: |
-                    In this level you can use `{at} {random}` with the drawing turtle. A random choice makes the turtle walk a different path each time.
-                    Use `{at} {random}` to choose a value from a list.
-                    ### 연습문제
-                    Can you copy and paste lines 2 and 3 to create a longer random path?
-            4:
-                example_code: |
-                    ```
-                    {print} 'Drawing figures'
-                    angle {is} 90
-                    {turn} angle
-                    {forward} 25
-                    {turn} angle
-                    {forward} 25
-                    ```
-            5:
-                story_text_2: |
-                    ### 연습문제
-                    Fill in the correct numbers in this code to get it to work.
-                    After you've done that, you can try to add the option backwards.
-
-                    **Extra** Instead of using 'left' and 'right', remake the program with North, East, South and West.
-                    This way you could add even more directions like Northeast and Southwest etc.
-            8:
-                story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### 연습문제 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### 연습문제 2\nNow create a drawing consisting of at least two polygons.\n"
-                example_code: |
-                    ```
-                    angle = 90
-                    {repeat} 10 {times}
-                        {turn} angle
-                        {forward} 50
-                    ```
+            9:
                 story_text_2: |
                     **Extra** 다양한 도형을 그리는 프로그램을 개선할 수 있습니다. 코드를 완성하면 원하는 다각형을 그릴 수 있습니다!
-            9:
-                story_text: |
-                    Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
-
-                    ### 연습문제 1
-                    This code creates three black triangles, change that into five pink squares.
-
-                     **Extra** Create a figure of your own choosing consisting of at least two different shapes types.
-            10:
-                story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
-                    ### Exercise 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
-                    ### Exercise 2
-                    The spiral is drawn outwards, make it go inwards?
-    turtle_draw_it:
-        levels:
-            9:
-                example_code: |
-                    Hint for the nested squares:
-                    ```
-                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
-                    distance = 120
-                    repeat 5 times
-                    _
-                    ```
-                    Hint for the flags:
-                    ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
-                        color_1 = red
-                        color_2 = white
-                        color_3 = blue
-                    ```
-            10:
-                example_code: |
-                    Hint Nested Hexagon:
-                    ```
-                    distances = 100, 80, 60, 40, 20
-                    {for} distance {in} distances
-                    _
-                    ```
-
-                    Hint Traffic Lights:
-                    ```
-                    colors = red, yellow, green
-                    {for} chosen_color {in} colors
-                        color _
-                        {repeat} _
-                    ```
-            12:
-                story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
-                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-                    </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
-                example_code: |
-                    ```
-                    {define} draw_a_square
-                    _
-
-                    {color} white
-                    {turn} -90
-                    {forward} 300
-                    {turn} 180
-
-                    {for} i {in} {range} 1 {to} 5
-                        {color} gray
-                        {forward} 100
-                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
-                        chosen_color = {ask} 'In which color?'
-                        {color} chosen_color
-                        {if} shape = 'square'
-                            {call} draw_a_square
-                    ```
-    while_command:
-        description: while
-    years:
-        description: Countdown to the new year!
-        levels:
-            11:
-                story_text: |
-                    이 레벨에서는 `{for}` number `{in} {range}` 명령을 사용하여 새해를 카운트다운할 수 있습니다.
-
-                    ### 연습문제
-                    빈칸을 채우고 코드를 작동시켜라!
-                example_code: |
-                    ```
-                    {for} number {in} {range} _ {to} _
-                        {print} number
-                    {print} 'Happy New Year!'
-                    ```

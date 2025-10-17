@@ -42,6 +42,9 @@ var $builtinmodule = function (name) {
     function keyBoardInputPromise(if_pressed_mapping) {
       ongoingIfPressedCall = true;
       $('#keybinding_modal').show();
+      const outputDiv = $('#output');
+      outputDiv.scrollTop(outputDiv.prop('scrollHeight'));
+
       return new Promise((resolve, reject) => {
         window.addEventListener("keydown", (event) => {
           try {

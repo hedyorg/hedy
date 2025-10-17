@@ -324,6 +324,18 @@ class TestsLevel3(HedyTester):
 
         self.multi_level_tester(max_level=5, code=code, expected=expected)
 
+    def test_assign_var_trims_spaces(self):
+        code = "answer is  This is long    "
+        expected = "answer = 'This is long'"
+
+        self.multi_level_tester(max_level=5, code=code, expected=expected, unused_allowed=True)
+
+    def test_assign_var_trims_spaces_with_comment(self):
+        code = "answer is  This is long    # comment"
+        expected = "answer = 'This is long'"
+
+        self.multi_level_tester(max_level=5, code=code, expected=expected, unused_allowed=True)
+
     def test_assign_list(self):
         code = "dieren is Hond, Kat, Kangoeroe"
         expected = "dieren = ['Hond', 'Kat', 'Kangoeroe']"
@@ -354,11 +366,21 @@ class TestsLevel3(HedyTester):
 
         self.multi_level_tester(max_level=5, code=code, expected=expected)
 
-    def test_assign_list_with_spaces(self):
-        # spaces are parsed in the text here, that is fine (could be avoided if we say text
-        # can't *end* (or start) in a space but I find this ok for now
-        code = "dieren is Hond , Kat , Kangoeroe"
-        expected = "dieren = ['Hond ', 'Kat ', 'Kangoeroe']"
+    def test_assign_list_trims_elements_trailing_spaces(self):
+        code = "dieren is Hond , Kat , Kangoeroe "
+        expected = "dieren = ['Hond', 'Kat', 'Kangoeroe']"
+
+        self.multi_level_tester(max_level=5, code=code, expected=expected, unused_allowed=True)
+
+    def test_assign_list_trims_elements_leading_spaces(self):
+        code = "dieren is   Hond,   Kat,   Kangoeroe"
+        expected = "dieren = ['Hond', 'Kat', 'Kangoeroe']"
+
+        self.multi_level_tester(max_level=5, code=code, expected=expected, unused_allowed=True)
+
+    def test_assign_list_trims_elements_spaces(self):
+        code = "dieren is   I am  ,  waiting for  ,  the summer  "
+        expected = "dieren = ['I am', 'waiting for', 'the summer']"
 
         self.multi_level_tester(max_level=5, code=code, expected=expected, unused_allowed=True)
 

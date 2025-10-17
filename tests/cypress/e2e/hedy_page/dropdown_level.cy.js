@@ -12,14 +12,14 @@ describe('Go to level dropdown', () => {
     let classname;
     let students;
     ({classname, students} = createClassAndAddStudents());
-    addCustomizations(new RegExp(`^${classname}$`));
+    addCustomizations(classname);
     logout()
     loginForStudent(students[0]);
     cy.wait(500);
     goToHedyLevel(2);
 
-    cy.getDataCy('dropdown_level_button').click();
-    cy.getDataCy('level_button_4').should('not.be.disabled');
-    cy.getDataCy('level_button_7').should('be.disabled');
+    cy.getDataCy('dropdown_open_button').click();
+    cy.getDataCy('level_4_header').should('not.be.disabled');
+    cy.getDataCy('level_7_header').should('be.disabled');
   })
 })

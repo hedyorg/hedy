@@ -7,6 +7,23 @@ from tests.Tester import HedyTester
 class TestsLevel13(HedyTester):
     level = 13
 
+    def test_else_with_colon(self):
+        code = textwrap.dedent("""\
+            if nice_trip == 'yes':
+                print('Lovely!')
+            else:
+                print('Sorry to hear that.')
+                print('Hopefully you can take a nice rest in you room.')""")
+        expected = self.dedent(
+            """\
+            "if 'nice_trip' == 'yes':\n"
+              print(f'''Lovely!''')\n"
+            else:\n'
+            print(f'''Sorry to hear that.''')
+            print('Hopefully you can take a nice rest in you room.')""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=14)
+
     def test_and(self):
         code = textwrap.dedent("""\
             naam is ask 'hoe heet jij?'
@@ -130,4 +147,25 @@ class TestsLevel13(HedyTester):
             unused_allowed=True,
             max_level=16,
             skip_faulty=False
+        )
+
+    def test_color_in_function(self):
+        code = textwrap.dedent("""\
+            define move with color
+                color color
+            c = 'blue'
+            call move with c""")
+
+        expected = self.dedent(
+            "def move(color):",
+            (self.color_transpiled('{color}'), '  '),
+            "c = Value('blue')",
+            "move(c)"
+        )
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=16,
+            extra_check_function=self.is_turtle(),
         )

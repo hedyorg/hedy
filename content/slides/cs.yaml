@@ -2,13 +2,42 @@ levels:
     0:
         8:
             text: Output appears on the left-hand side.
+            code: '{print} Vítejte v Hedy!'
+            header: Programování v Hedy
         9:
             code: |-
                 {forward} 100
                 {turn} left
+            header: Programování v Hedy
+            text: Výstupem může být také kresba.
+        3:
+            header: Programovací jazyk
+        1:
+            header: Vitej v Hedy!
+            text: Hedy je programovací jazyk.
+        5:
+            text: V Hedy používáme speciální kódy, například `{print}`.
+            code: '{print} Vítejte v Hedy!'
+            header: Programování v Hedy
+        6:
+            code: '{print} Vítejte v Hedy!'
+            header: Programování v Hedy
+            text: Kódová slova budou zobrazena růžově.
+        2:
+            header: Programování
+            text: "Programování je zadávání pokynů počítači pomocí jazyka počítače.\n\nTakový jazyk se nazývá „programovací jazyk“."
+        7:
+            code: '{print} Vítejte v Hedy!'
+            header: Programování v Hedy
+            text: Kód spustíme tlačítkem Spustit kód pod kódem.
+        4:
+            header: Programování
+            text: "Pokud umíte programovat, můžete dělat spoustu skvělých věcí:\n* Vytvářet interaktivní příběhy\n* vytvářet počítačové kresby a kreslit je na papír nebo látku\n* Vytvářet vlastní aplikace pro použití v telefonu"
     1:
         2:
             header: 'Hedy level 1: {print}'
+            text: "První kód, který můžete použít v úrovni 1, je `{print}`.\n\n`{print}` slouží k zobrazení textu na obrazovce."
+            code: '{print} Zobrazit text na obrazovce'
         3:
             header: 'Hedy level 1: {ask}'
             text: |-
@@ -33,14 +62,19 @@ levels:
             text: |-
                 with `{print}`, `{ask}` and `{echo}` you can already create a little story.
                 This is a good time to try the Parrot, Story and Rock, Paper Scissors adventures.
+            code: "{print} Ahoj!\n{ask} Jak se jmenuješ?\n{echo} ahoj"
         6:
             text: Adventures are shown in tabs.
+            header: Programování!
+            editor: /hedy/1
         7:
             text: The yellow arrow buttons can be used to copy examples.
             editor: /hedy#print_command
+            header: Programování!
         8:
             header: Drawing with the turtle
             text: Now that we have seen at text codes, we will now look at drawing codes next.
+            editor: /hedy#print_command
         9:
             header: 'Drawing with the turtle: {forward}'
             text: '`{forward}` is used to move the turtle forward.'
@@ -48,6 +82,23 @@ levels:
             code: |-
                 {forward} 50
                 {turn} left
+            header: 'Kreslení s želvou: {turn}'
+            text: '`{turn}` slouží k tomu, aby se želva otočila doleva nebo doprava.'
+        13:
+            header: Zábava s programováním může začít!
+            text: Užijte si dobrodružství v úrovni 1!
+        12:
+            debug: Pravda
+            text: Ladění kódu znamená odstraňování chyb v kódu. Pojďme společně ladit tento kód. Klepnutím na tlačítko berušky spustíte ladicí program.
+            header: Ladění
+            code: "Jsem DJ Hedy\n{print} Jakou skladbu byste chtěli slyšet?\n{ask} Ta písnička se mi taky líbí!\n{print} Další na řadě... {echo}"
+        1:
+            header: Vítejte na úrovni 1!
+            text: "Úroveň 1 zahájíme tvorbou příběhů v Hedy!\n\nK vytvoření interaktivních příběhů potřebujeme tři textové kódy."
+        10:
+            code: '{forward} 50'
+            header: 'Kreslení s želvou: {forward}'
+            text: '`{forward}` slouží k posunu želvy vpřed.'
     2:
         3:
             text: |-
@@ -56,9 +107,64 @@ levels:
                 The answer to the question is stored in the variable.
 
                 This way we don't need the `{echo}`  command.
+            header: Interaktivní
+            code: "jméno {is} {ask} Jak se jmenuješ?\n{print} Dobrý den, jméno"
         4:
             text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
+            code: "jméno {is} {ask} Jak se jmenuješ?\n{print} Dobrý den, jméno\nvěk {is} {ask} Kolik je vám let?\n{print} jméno je věk let."
+            header: Více proměnných
+        2:
+            header: Proměnné
+            code: "jméno {is} Hedy\nvěk {is} 15 let\n{print} jméno je věk let"
+            text: Pro vytvoření nebo nastavení proměnné použijeme příkaz `{is}`.
+        5:
+            code: "{print} My favorite colour is...\n{sleep} 2\n{print} green!"
+            header: Spánek
+            text: Můžete také použít příkaz `{sleep}`, který kód na chvíli pozastaví.
+        6:
+            header: Spánek 5
+            code: "pauza {is} 10\n{print} Moje oblíbená barva je...\n{sleep} pauza\n{print} zelená!"
+            text: "Pokud chcete, aby byla pauza delší, můžete za příkaz `{sleep}` přidat číslo.\n\nPokud chcete, můžete dokonce místo čísla použít proměnnou, která bude rozhodovat o délce trvání příkazu sleep."
+        7:
+            header: Ladění
+            text: Ladění kódu znamená odstraňování chyb v kódu. Pojďme společně ladit tento kód. Klepnutím na tlačítko berušky spustíte ladicí program.
+            debug: Pravda
+        8:
+            header: Zábava s programováním může začít!
+            text: Užijte si dobrodružství ve 2. úrovni!
+        1:
+            header: Vítejte na úrovni 2
     4:
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
+    3:
+        5:
+            header: Přidat do
+            code: "zvířata {is} pes, kočka, klokan\njako {is} {ask} Jaké je vaše oblíbené zvíře?\n{add} jako {to_list} zvířata\n{print} Vybírám si zvířata {at} {random}"
+            text: "Položky můžete do seznamu přidávat pomocí příkazu `{add}` `{to}`.\n\nMůžete si vybrat, co chcete do seznamu přidat, nebo můžete použít příkaz `{add}` `{to}` v kombinaci s příkazem `{ask}`.\nTímto způsobem můžete nechat hráče rozhodnout, co do seznamu přidá."
+        1:
+            header: Vítejte na úrovni 3
+            text: V této úrovni se naučíte vytvářet seznamy, přidávat a odebírat položky ze seznamů a vybírat náhodné položky ze seznamu.
+        6:
+            header: Odstranit z
+            code: "animals {is} dog, cat, kangaroo\ndislike {is} {ask} What animal do you not like?\n{remove} dislike {from} animals\n{print} I choose animals {at} {random}"
+            text: "Opakem příkazu `{add}` `{to}` je příkaz `{remove}` `{from}`.\nTento příkaz odstraní položku ze seznamu."
+        2:
+            code: zvířata {is} psi, kočky, klokani
+            header: Vytvoření seznamu
+        3:
+            code: "zvířata {is} psi, kočky, klokani\n{print} zvířata {at} {random}"
+            header: Náhodně
+            text: "Seznam můžete použít pomocí příkazu `{at}` `{random}`.\nPočítač náhodně vybere jednu položku seznamu.\nPři každém spuštění tohoto kódu se bude výstup lišit."
+        8:
+            text: Užijte si dobrodružství ve 3. úrovni!
+            header: Pusťte se do práce!
+        4:
+            code: "animals {is} dogs, cats, kangaroos\n{print} My favorite animal is animals {at} {random}"
+            text: Příkaz `{at}` `{random}` můžete použít i ve větě.
+            header: Náhodně ve větě
+        7:
+            debug: Pravda
+            text: Pojďme tento kód vyladit!
+            header: Ladění

@@ -24,7 +24,7 @@ class TestsTranslationLevel3(HedyTester):
         code = "print animals at random"
 
         result = hedy_translation.translate_keywords(code, "en", "nl", self.level)
-        expected = "print animals op willekeurig"
+        expected = "print animals kies willekeurig"
 
         self.assertEqual(expected, result)
 
@@ -37,7 +37,7 @@ class TestsTranslationLevel3(HedyTester):
         self.assertEqual(expected, result)
 
     def test_at_random_nl_en(self):
-        code = "print echo op willekeurig"
+        code = "print echo kies willekeurig"
 
         result = hedy_translation.translate_keywords(code, "nl", "en", self.level)
         expected = "print echo at random"
@@ -62,7 +62,7 @@ class TestsTranslationLevel3(HedyTester):
         antwoorden is ja, nee, misschien
         print Mijn glazen bol zegt...
         slaap 2
-        print antwoorden op willekeurig""")
+        print antwoorden kies willekeurig""")
 
         self.assertEqual(expected, result)
 
@@ -74,7 +74,7 @@ class TestsTranslationLevel3(HedyTester):
         antwoorden is ja, nee, misschien
         print Mijn glazen bol zegt...
         slaap 2
-        print antwoorden op willekeurig""")
+        print antwoorden kies willekeurig""")
 
         expected = textwrap.dedent("""\
         print Hoi Ik ben Hedy de Waarzegger
@@ -97,7 +97,7 @@ class TestsTranslationLevel3(HedyTester):
         antwoorden is ja, nee, misschien
         print Mijn glazen bol zegt...
         slaap 2
-        print antwoorden op willekeurig""")
+        print antwoorden kies willekeurig""")
 
         expected = textwrap.dedent("""\
         print Hoi Ik ben Hedy de Waarzegger
@@ -124,7 +124,7 @@ class TestsTranslationLevel3(HedyTester):
         dieren is koe, kiep
         voeg muis toe aan dieren
         verwijder koe uit dieren
-        print dieren op willekeurig""")
+        print dieren kies willekeurig""")
 
         self.assertEqual(expected, result)
 

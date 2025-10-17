@@ -1,12 +1,13 @@
-from collections import namedtuple
+from __future__ import annotations
+
+import re
+from collections import defaultdict, namedtuple
+
 from lark import Token, Transformer, v_args
 from lark.exceptions import VisitError
+
 import hedy
-import operator
-from os import path
 import hedy_content
-from website.yaml_file import YamlFile
-import copy
 
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").
@@ -14,34 +15,53 @@ Rule = namedtuple("Rule", "keyword line start end value")
 
 
 def keywords_to_dict(lang="nl"):
-    """ "Return a dictionary of keywords from language of choice. Key is english value is lang of choice"""
-    base = path.abspath(path.dirname(__file__))
+    """Return a dictionary from keyword symbols to their translations in `lang`
 
-    keywords_path = "content/keywords/"
-    yaml_filesname_with_path = path.join(base, keywords_path, lang + ".yaml")
+    Examples:
 
-    # as we mutate this dict, we have to make a copy
-    # as YamlFile re-uses the yaml contents
-    command_combinations = copy.deepcopy(
-        YamlFile.for_file(yaml_filesname_with_path).to_dict()
-    )
-    for k, v in command_combinations.items():
-        command_combinations[k] = v.split("|")
+    >>> keywords_to_dict('en')['not_in'] == ['not in']
+    >>> keywords_to_dict('fr')['repeat'] == ['répète', 'repete']
+    >>> keywords_to_dict('nl')['to'] == ['tot']
+    >>> keywords_to_dict('nl')['to_list'] == ['toe ann']
+    """
+    return {
+        # Sort the keywords by length descending. This is important for the substitution logic later
+        k: list(sorted(local_keys, key=len, reverse=True))
+        for k, local_keys in hedy_content.ALL_KEYWORDS[lang].items()
+    }
 
-    return command_combinations
 
+def lang_switch_table(level: int, lang1: str, lang2: str | None = None):
+    """Return a dictionary from keywords in lang1 organized in tuples to their translations in lang2, e.g.
+        ('ask', ) -> ('vraag',)
+        ('at', 'random') -> ('kies', 'willekeurig')
+    """
+    from_lang, to_lang = (lang1, lang2) if lang2 else ('en', lang1)
 
-def keywords_to_dict_single_choice(lang):
-    command_combinations = keywords_to_dict(lang)
-    return {k: v[0] for (k, v) in command_combinations.items()}
+    phrases = [
+        ('at', 'random'),
+        ('add', 'to_list'),
+        ('range', 'to'),
+        ('remove', 'from'),
+        ('repeat', 'times'),
+    ]
+    keysym_to_phrase = {k: phrase for phrase in phrases for k in phrase}
+
+    def xlated_phrase(keysym, lang):
+        phrase = keysym_to_phrase.get(keysym, (keysym,))
+        return tuple(hedy_content.KEYWORDS[lang].get(k, k) for k in phrase)
+
+    return {
+        xlated_phrase(keyword_symbol, from_lang): xlated_phrase(keyword_symbol, to_lang)
+        for keyword_symbol in hedy.commands_per_level[level]
+    }
 
 
 def all_keywords_to_dict():
     """Return a dictionary where each value is a list of the translations of that keyword (key). Used for testing"""
     keyword_dict = {}
     for lang in hedy_content.ALL_KEYWORD_LANGUAGES:
-        commands = keywords_to_dict_single_choice(lang)
-        keyword_dict[lang] = commands
+        keyword_dict[lang] = {k: v[0] for k, v in keywords_to_dict(lang).items()}
 
     all_translations = {k: [v.get(k, k) for v in keyword_dict.values()] for k in keyword_dict["en"]}
     return all_translations
@@ -73,6 +93,17 @@ def get_target_keyword(keyword_dict, keyword):
         return keyword
 
 
+MATCH_EDGE_WHITESPACE = re.compile(r'^(\s*).+?(\s*)$')
+
+
+def make_keyword_string_with_whitespace(matched_substring: str, new_keyword: str):
+    """Make a new keyword string based on the matched substring.
+
+    We retain all whitespace characters at the edge of the source string.
+    """
+    return MATCH_EDGE_WHITESPACE.sub(f'\\1{new_keyword}\\2', matched_substring)
+
+
 def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
     """ "Return code with keywords translated to language of choice in level of choice"""
 
@@ -98,23 +129,29 @@ def translate_keywords(input_string, from_lang="en", to_lang="nl", level=1):
 
         translator = Translator(processed_input)
         translator.transform(program_root)
-        ordered_rules = reversed(sorted(translator.rules, key=operator.attrgetter("line", "start")))
 
-        # checks whether any error production nodes are present in the parse tree
-        # hedy.is_program_valid(program_root, input_string, level, from_lang)
+        # Build a list of textual substitutions, one per line
+        # { line -> [(start, end, replacement)] }
+        substitutions = defaultdict(list)
 
-        result = processed_input
-        for rule in ordered_rules:
+        lines = processed_input.splitlines()
+        for rule in translator.rules:
             if rule.keyword in keyword_dict_from and rule.keyword in keyword_dict_to:
-                lines = result.splitlines()
-                line = lines[rule.line - 1]
-                original = get_original_keyword(keyword_dict_from, rule.keyword, line)
-                target = get_target_keyword(keyword_dict_to, rule.keyword)
-                replaced_line = replace_token_in_line(line, rule, original, target)
-                result = replace_line(lines, rule.line - 1, replaced_line)
+                # Sometimes the rule matches just a keyword, sometimes it matches a keyword
+                # with spaces.
+                line0 = rule.line - 1
+                source_substring = lines[line0][rule.start:rule.end + 1]
+                replaced_substring = make_keyword_string_with_whitespace(
+                    source_substring, get_target_keyword(keyword_dict_to, rule.keyword))
 
-        # For now the needed post processing is only removing the 'end-block's added during pre-processing
-        result = "\n".join([line for line in result.splitlines()])
+                substitutions[line0].append((rule.start, rule.end + 1, replaced_substring))
+
+        # Do the actual replacements, taking care to do them back-to-front
+        for line0, subs in sorted(substitutions.items(), reverse=True):
+            for start, end, replacement in sorted(subs, reverse=True):
+                lines[line0] = lines[line0][:start] + replacement + lines[line0][end:]
+
+        result = "\n".join(lines)
         result = result.replace("#ENDBLOCK", "")
 
         # we have to reverse escaping or translating and retranslating will add an unlimited number of slashes
@@ -177,16 +214,6 @@ def find_keyword_in_rules(rules, keyword, start_line, end_line, start_column, en
             if rule.line < end_line or (rule.line == end_line and rule.end <= end_column):
                 return rule.value
     return None
-
-
-def get_original_keyword(keyword_dict, keyword, line):
-    for word in keyword_dict[keyword]:
-        if word in line:
-            return word
-
-    # If we can't find the keyword, it means that it isn't part of the valid keywords for this language
-    # so return original instead
-    return keyword
 
 
 @v_args(tree=True)

@@ -14,12 +14,14 @@
                 {% endif %}
 
                 {% for exercise in workbook.exercises %}
-                    {% if exercise.contents %}
+                    {% if exercise == 'new-page' %}
+                        <p class="break-after-page"></p>
+                    {% elif exercise.contents %}
                         <p>{{ exercise.contents|commonmark }}</p>
-                        <!-- contents kan ook nog een code blok hebben --!>
+                        <!-- contents kan ook nog een code blok hebben -->
                         {% if exercise.code %}
-                            <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                <pre class="common-mistakes" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
+                            <div class="w-full lg:w-1/2 turn-pre-into-ace my-5 print:border print:border-gray-400">
+                                <pre class="workbook" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
                             </div>
                         {% endif %}
 
@@ -29,24 +31,30 @@
                             <h4 id="{{exercise.title|slugify}}">{{ exercise.icon}} {{ exercise.title }}</h4>
                             {{ exercise.text|commonmark }}
 
-                            <table>
+                            <table class="w-full">
                                 <tr>
-                                     <td width='5000px'>
+                                     <td class="w-2/3 pr-4">
                                         {% if exercise.code %}
-                                        <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-                                            <pre class="common-mistakes" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
+                                        <div class="w-full turn-pre-into-ace my-5 print:border print:border-gray-400">
+                                            <pre class="workbook" level="{{ workbook.level }}" style="font-size: 0.95em;">{{ exercise.code }}</pre>
                                         </div>
                                         {% endif %}
                                     </td>
-                                    <td width='600px' { text-align: left; }>
+                                    <td>
                                         <!-- questions have lines OR options -->
                                         {% if exercise.lines %}
                                             {% for line in exercise.lines %}
                                                 {{ line }} <br>
                                             {% endfor %}
                                         {% endif %}
+
                                         {% if exercise.options %}
-                                            {{ exercise.options }} <br>
+                                            {% for option in exercise.options %}
+                                                <span class="whitespace-nowrap">〇 {{ option }}</span>
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% if exercise.type == 'MC-code' and not exercise.options %}
+                                            NO OPTIONS GIVEN!
                                         {% endif %}
                                     </td></tr>
                             </table>
@@ -65,11 +73,16 @@
                                         {% endif %}
                                     </td>
                                     <td width='600px'>
-                                        {{ exercise.output|commonmark }}
+                                        {% if exercise.output %}
+                                            {% for line in exercise.output %}
+                                                {{ line }} <br>
+                                            {% endfor %}
+                                        {% endif %}
                                     </td></tr>
                             </table>
 
                         {% endif %}
+
                     {% endif %}
 
 

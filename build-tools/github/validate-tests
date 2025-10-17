@@ -9,15 +9,21 @@ python content/yaml_to_lark_utils.py
 
 echo "------> Python unit tests"
 
+all=false
+if [[ "${1:-}" == "--all" ]]; then
+  shift
+  all=true
+fi
+
 
 # Snippets (>20 000 tests) can take a long time, so we have an option to skip them
 slow_suites=test_level,test_translation_level,test_snippets
 workers=${WORKERS:-4}
 
 # This is expected to run from the repo root
-eval python -m pytest -n $workers --ignore=tests/{$slow_suites}
+eval python -m pytest -n $workers --ignore=tests/{$slow_suites} "$@"
 
-if [[ "${1:-}" == "--all" ]]; then
+if $all; then
   # Add in the slow suites
-  eval python -m pytest -n $workers --tb=no tests/{$slow_suites}
+  eval python -m pytest -n $workers --tb=no tests/{$slow_suites} "$@"
 fi

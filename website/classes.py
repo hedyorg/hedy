@@ -1,19 +1,20 @@
 import uuid
 
-from flask import make_response, redirect, request, session
+from flask import make_response, request, session
 from jinja_partials import render_partial
+from website.flask_hedy import g_db
 from website.flask_helpers import gettext_with_fallback as gettext
-
 import utils
 from config import config
 from website.flask_helpers import render_template
 from website.auth import current_user, is_teacher, requires_login, requires_teacher, \
     refresh_current_user_from_db, is_second_teacher
+from website.for_teachers import _create_customizations
+from website.newsletter import add_class_created_to_subscription
 from .database import Database
 from .website_module import WebsiteModule, route
 
 cookie_name = config["session"]["cookie_name"]
-invite_length = config["session"]["invite_length"] * 60
 
 
 class ClassModule(WebsiteModule):
@@ -36,7 +37,7 @@ class ClassModule(WebsiteModule):
             return make_response(gettext("class_name_empty"), 400)
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
-        Classes = self.db.get_teacher_classes(user["username"], True, teacher_only=True)
+        Classes = self.db.get_teacher_classes(user["username"])
         for Class in Classes:
             if Class["name"] == body["name"]:
                 return make_response(gettext("class_name_duplicate"), 200)
@@ -45,12 +46,50 @@ class ClassModule(WebsiteModule):
             "id": uuid.uuid4().hex,
             "date": utils.timems(),
             "teacher": user["username"],
+            # TODO: remove once we deploy new redesign
             "link": utils.random_id_generator(7),
             "name": body["name"],
         }
 
         self.db.store_class(Class)
+        add_class_created_to_subscription(user['email'])
         response = {"id": Class["id"]}
+        return make_response(response, 200)
+
+    @route("/redesign", methods=["POST"])
+    @requires_teacher
+    def create_class_redesign(self, user):
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return make_response(gettext("ajax_error"), 400)
+        if not isinstance(body.get("name"), str):
+            return make_response(gettext("class_name_invalid"), 400)
+        if len(body.get("name")) < 1:
+            return make_response(gettext("class_name_empty"), 400)
+        if not isinstance(body.get("creation_type"), str):
+            return make_response(gettext("request_invalid"), 400)
+        response = {}
+        if body.get("creation_type") in ("standard", "plain"):
+            # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
+            Classes = self.db.get_teacher_classes(user["username"])
+            for Class in Classes:
+                if Class["name"] == body["name"]:
+                    return make_response(gettext("class_name_duplicate"), 200)
+
+            Class = {
+                "id": uuid.uuid4().hex,
+                "date": utils.timems(),
+                "teacher": user["username"],
+                # TODO: remove once we deploy new redesign
+                "link": utils.random_id_generator(7),
+                "name": body["name"],
+            }
+            self.db.store_class(Class)
+            add_class_created_to_subscription(user['email'])
+            include_adventures = body.get("creation_type") == "standard"
+            _create_customizations(g_db(), Class["id"], include_adventures=include_adventures)
+            response = {"id": Class["id"]}
         return make_response(response, 200)
 
     @route("/<class_id>", methods=["PUT"])
@@ -73,13 +112,13 @@ class ClassModule(WebsiteModule):
         username = user["username"]
         if is_second_teacher(user, class_id):
             username = Class["teacher"]
-        Classes = self.db.get_teacher_classes(username, True, teacher_only=True)
+        Classes = self.db.get_teacher_classes(username)
         for Class in Classes:
             if Class["name"] == body["name"]:
                 return make_response(gettext("class_name_duplicate"), 200)
 
         self.db.update_class(class_id, body["name"])
-        return make_response('', 200)
+        return make_response({}, 200)
 
     @route("/<class_id>", methods=["DELETE"])
     @requires_login
@@ -93,29 +132,6 @@ class ClassModule(WebsiteModule):
         self.db.delete_class(Class)
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
         return render_partial('htmx-classes-table.html', teacher_classes=teacher_classes)
-
-    @route("/<class_id>/prejoin/<link>", methods=["GET"])
-    def prejoin_class(self, class_id, link):
-        Class = self.db.get_class(class_id)
-        if not Class or Class["link"] != link:
-            return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
-        if request.cookies.get(cookie_name):
-            token = self.db.get_token(request.cookies.get(cookie_name))
-            if token and token.get("username") in Class.get("students", []):
-                return render_template(
-                    "class-prejoin.html",
-                    joined=True,
-                    page_title=gettext("title_join-class"),
-                    current_page="my-profile",
-                    class_info={"name": Class["name"]},
-                )
-        return render_template(
-            "class-prejoin.html",
-            joined=False,
-            page_title=gettext("title_join-class"),
-            current_page="my-profile",
-            class_info={"id": Class["id"], "name": Class["name"]},
-        )
 
     @route('join/<class_id>', methods=["POST"])
     @requires_login
@@ -176,7 +192,7 @@ class ClassModule(WebsiteModule):
             # Also remove the pending message in this case
             session["messages"] = session["messages"] - 1 if session["messages"] else 0
 
-        return make_response('', 200)
+        return make_response({}, 200)
 
     @route("/<class_id>/student/<student_id>", methods=["DELETE"])
     @requires_login
@@ -187,7 +203,7 @@ class ClassModule(WebsiteModule):
 
         self.db.remove_student_from_class(Class["id"], student_id)
         refresh_current_user_from_db()
-        return make_response('', 200)
+        return make_response({}, 200)
 
     @route("/<class_id>/second-teacher/<second_teacher>", methods=["DELETE"])
     @requires_login
@@ -199,7 +215,7 @@ class ClassModule(WebsiteModule):
         self.db.remove_second_teacher_from_class(Class, second_teacher)
 
         refresh_current_user_from_db()
-        return make_response('', 200)
+        return make_response({}, 200)
 
 
 class MiscClassPages(WebsiteModule):
@@ -237,7 +253,7 @@ class MiscClassPages(WebsiteModule):
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         # Todo TB: This is a duplicate function, might be nice to perform some clean-up to reduce these parts
-        Classes = self.db.get_teacher_classes(user["username"], True, teacher_only=True)
+        Classes = self.db.get_teacher_classes(user["username"])
         for Class in Classes:
             if Class["name"] == body.get("name"):
                 return make_response(gettext("class_name_duplicate"), 400)
@@ -250,80 +266,100 @@ class MiscClassPages(WebsiteModule):
             "id": class_id,
             "date": utils.timems(),
             "teacher": user["username"],
+            # TODO: remove once we deploy new redesign
             "link": utils.random_id_generator(7),
             "name": body.get("name"),
             "created_by": user["username"],
         }
 
         self.db.store_class(new_class)
-        # TODO: duplicate students and second teachers.
-        # if second_teachers:
-        #     for st in second_teachers:
-        #         self.db.add_second_teacher_to_class(new_class, st)
-
         # Get the customizations of the current class -> if they exist, update id and store again
         customizations = self.db.get_class_customizations(body.get("id"))
         if customizations:
             customizations["id"] = class_id
             self.db.update_class_customizations(customizations)
 
-        new_second_teachers = {}
-        if body.get("second_teacher") is True:
-            new_second_teachers = Class.get("second_teachers")
+        # If the user wants to copy the second teachers from the original class
+        # we will invite them to the new class
+        if body.get("copy_second_teachers"):
+            second_teachers = Class.get("second_teachers")
+            for second_teacher in second_teachers:
+                self.db.add_class_invite(
+                    username=second_teacher["username"],
+                    class_id=class_id,
+                    invited_as="second_teacher",
+                    invited_as_text=gettext("second_teacher")
+                )
 
         response = {"id": new_class["id"]}
-        if new_second_teachers:
-            response["second_teachers"] = new_second_teachers
         return make_response(response, 200)
 
-    @route("/invite-student", methods=["POST"])
+    @route('/search', methods=['GET'])
     @requires_teacher
-    def invite_student(self, user):
-        body = request.json
-        # Validations
-        if not isinstance(body, dict):
-            return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("username"), str):
+    def filter_usernames(self, user):
+        search = request.args.get('search', '')
+        user_type = request.args.get('user_type')
+        class_id = request.args.get('class_id')
+        if search == '':
+            return render_template('modal/htmx-search-results-list.html', usernames=[])
+        if user_type == 'student':
+            results = g_db().get_student_that_starts_with(search.lower())
+        elif user_type == 'second_teacher':
+            results = g_db().get_teacher_that_starts_with(search.lower(), not_in_class_id=class_id)
+        else:
+            results = []
+        # Get sets of usernames
+        usernames = set(r['username'] for r in results)
+        already_invited = set(inv['username'] for inv in self.db.get_class_invites(class_id=class_id))
+        # Set computation to come up with who can still be invited
+        invitable = usernames - already_invited - set([user['username']])
+        # Turn into a sorted list
+        usernames = list(sorted(invitable))
+        usernames = sorted(usernames)
+        return render_template('modal/htmx-search-results-list.html', usernames=usernames)
+
+    @route("/invite", methods=["POST"])
+    @requires_teacher
+    def invite_users(self, user):
+        if not isinstance(request.form.getlist('usernames'), list):
             return make_response(gettext("username_invalid"), 400)
-        if not isinstance(body.get("class_id"), str):
+        if not isinstance(request.args.get('class_id'), str):
             return make_response(gettext("request_invalid"), 400)
-        if len(body.get("username")) < 1:
+        if not isinstance(request.args.get('invite_as'), str):
+            return make_response(gettext("request_invalid"), 400)
+        if len(request.form.getlist('usernames')) < 1:
             return make_response(gettext("username_empty"), 400)
 
-        username = body.get("username").lower()
-        class_id = body.get("class_id")
-
+        usernames = request.form.getlist('usernames')
+        class_id = request.args.get('class_id')
+        invite_as = request.args.get('invite_as')
         Class = self.db.get_class(class_id)
         if not Class or not (utils.can_edit_class(user, Class)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        user = self.db.user_by_username(username)
-        if not user:
-            return make_response(gettext("student_not_existing"), 400)
-        if "students" in Class and user["username"] in Class["students"]:
-            return make_response(gettext("student_already_in_class"), 400)
-        else:
-            student_classes = self.db.get_student_classes(username)
-            if len(student_classes):
-                return make_response(gettext("student_in_another_class"), 400)
-        if self.db.get_user_invitations(user["username"]):
-            return make_response(gettext("student_already_invite"), 400)
+        users = self.db.users_by_username(usernames)
 
-        # So: The class and student exist and are currently not a combination -> invite!
-        data = {
-            "username": username,
-            "class_id": class_id,
-            "timestamp": utils.times(),
-            "ttl": utils.times() + invite_length,
-            "invited_as": 'student',
-            "invited_as_text": gettext("student"),
-        }
-        self.db.add_class_invite(data)
-        return make_response('', 204)
+        for user in users:
+            self.db.add_class_invite(
+                username=user["username"],
+                class_id=class_id,
+                invited_as=invite_as,
+                invited_as_text=gettext(invite_as)
+            )
+        invites = self.db.get_class_invites(class_id=Class["id"])
+        return render_partial(
+            "htmx-invite-list.html",
+            invites=invites,
+            class_id=Class["id"],
+            is_second_teacher=is_second_teacher(user, class_id),
+        )
 
     @route("/invite-second-teacher", methods=["POST"])
     @requires_teacher
     def invite_second_teacher(self, user):
+        """
+        Used to invite second teachers to a class after duplicating it.
+        """
         teacher = user
         body = request.json
         # Validations
@@ -356,16 +392,12 @@ class MiscClassPages(WebsiteModule):
             return make_response(gettext("teacher_invalid"), 400)
         elif Class["teacher"] == username:  # this check is almost never the case; but just in case.
             return make_response(gettext("request_invalid"), 400)
-
-        data = {
-            "username": username,
-            "class_id": class_id,
-            "timestamp": utils.times(),
-            "ttl": utils.times() + invite_length,
-            "invited_as": "second_teacher",
-            "invited_as_text": gettext("second_teacher"),
-        }
-        self.db.add_class_invite(data)
+        self.db.add_class_invite(
+            username=user["username"],
+            class_id=class_id,
+            invited_as="second_teacher",
+            invited_as_text=gettext("second_teacher")
+        )
         return make_response('', 204)
 
     @route("/remove_student_invite", methods=["POST"])
@@ -392,12 +424,3 @@ class MiscClassPages(WebsiteModule):
 
         self.db.remove_user_class_invite(username, class_id)
         return make_response('', 204)
-
-    @route("/hedy/l/<link_id>", methods=["GET"])
-    def resolve_class_link(self, link_id):
-        Class = self.db.resolve_class_link(link_id)
-        if not Class:
-            return utils.error_page(error=404, ui_message=gettext("invalid_class_link"))
-        return redirect(
-            request.url.replace("/hedy/l/" + link_id, "/class/" + Class["id"] + "/prejoin/" + link_id), code=302
-        )

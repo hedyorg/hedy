@@ -1,12 +1,9 @@
-<nav aria-label="Website" class="px-4 h-14 lg:h-16 w-full max-w-screen-2xl mx-auto">
+<nav aria-label="Website" class="px-4 lg:px-16 h-14 lg:h-16 w-full max-w-screen-2xl mx-auto print:hidden">
     {% block menu %}
     <ul class="h-full w-full list-none flex flex-row items-center gap-x-2 xl:gap-x-6">
         <li class="ltr:mr-2 rtl:ml-2"><a href="/" class="inline-block w-10 lg:w-12"><img src="{{static('/images/Hedy-logo-96x96-round.png')}}" height="48px" width="48px" alt="{{_('hedy_logo_alt')}}"></a></li>
         <li class="flex-initial menubar-item{% if current_page == 'start' %} active{% endif %}"><a class="menubar-text" href="/" title="{{_('nav_start')}}">{{_('nav_start')}}</a></li>
         <li class="flex-initial menubar-item{% if current_page == 'hedy' %} active{% endif %}"><a class="menubar-text" data-cy="hedy_button" href="/hedy" title="{{_('nav_hedy')}}">{{_('nav_hedy')}}</a></li>
-        {% if not hide_explore %}
-            <li class="flex-initial truncate menubar-item{% if current_page == 'explore' %} active{% endif %}"><a class="menubar-text" data-cy="explore_button" href="/explore" title="{{_('nav_explore')}}">{{_('nav_explore')}}</a></li>
-        {% endif %}
         {% if is_teacher  or is_second_teacher %}
             <li class="flex-initial truncate menubar-item{% if current_page == 'for-teachers' %} active{% endif %}"><a class="menubar-text" data-cy="for_teacher_button" href="/for-teachers" title="{{_('for_teachers')}}">{{_('for_teachers')}}</a></li>
             <li class="flex-initial truncate menubar-item{% if current_page == 'teacher-manual' %} active{% endif %}"><a class="menubar-text" data-cy="manual_button" href="/for-teachers/manual" title="{{_('teacher_manual')}}">{{_('teacher_manual')}}</a></li>
@@ -33,7 +30,8 @@
                 {% else %}
                     <span class="fas fa-fw fa-user"></span>
                 {% endif %}
-                <span data-cy="username" class="hidden lg:inline-block">{{username[0]|upper}}{{username[1:]}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</span>
+                <span data-cy="username-menu" class="hidden lg:inline-block">{{username[0]|upper}}{{username[1:]}}
+                  {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</span>
             </a>
             <div class="dropdown-menu dropdown-blue" id="profile_dropdown" style="display: none;">
                 <a class="dropdown-item" data-cy="my_account_button" href="/my-profile"><span class="fas fa-user-cog ltr:mr-4 rtl:ml-4"></span>{{_('my_account')}} {% if get_user_messages() %} ({{ get_user_messages() }}){% endif %}</a>
@@ -63,7 +61,7 @@
               <div class="mb-4">
                   <input id="search_language" data-cy="search_language" placeholder="{{_('search')}} {{other_languages()|length}}" class="border text-black border-gray-500 rounded h-8 px-2 w-full">
               </div>
-              <div class="flex flex-row flex-wrap w-min justify-start content-start items-start">         
+              <div class="flex flex-row flex-wrap w-min justify-start content-start items-start">
                 {% for lang in other_languages() %}
                     <div class="dropdown-item language" data-english="{{ lang.english }}" onclick="hedyApp.change_language ('{{lang.lang}}');event.preventDefault();" data-cy="switch_lang_{{lang.lang}}">{{ lang.sym }}</div>
                 {% endfor %}

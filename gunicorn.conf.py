@@ -9,9 +9,3 @@ def worker_exit(server, worker):
     querylog.emergency_shutdown()
     app.parse_logger.emergency_shutdown()
     user_activity.logger.emergency_shutdown()
-
-
-def post_fork(server, worker):
-    """When the worker has started."""
-    import app
-    app.on_server_start()

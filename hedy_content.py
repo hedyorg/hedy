@@ -1,9 +1,11 @@
 import logging
 import os
 from os import path
+import iso3166
+from unidecode import unidecode
 
 import static_babel_content
-
+import utils
 from utils import customize_babel_locale
 from website.yaml_file import YamlFile
 from safe_format import safe_format
@@ -11,6 +13,27 @@ from safe_format import safe_format
 logger = logging.getLogger(__name__)
 
 COUNTRIES = static_babel_content.COUNTRIES
+
+
+def _get_friendly_sorted_countries():
+    friendly_countries = []
+    for code, locale_name in COUNTRIES.items():
+        locale_name_starts_with_ascii = locale_name[0].isascii()
+        iso3166_english_name_normalized = unidecode(iso3166.countries.get(code).name).lower()
+        locale_name_normalized = unidecode(locale_name).lower()
+        if locale_name_starts_with_ascii or iso3166_english_name_normalized == locale_name_normalized:
+            friendly_countries.append((code, locale_name_normalized, locale_name))
+        else:
+            friendly_countries.append((code, iso3166_english_name_normalized, locale_name))
+
+    friendly_sorted_countries = sorted(friendly_countries, key=lambda c: c[1])
+
+    return list(map(lambda c: ((c[0], c[2])), friendly_sorted_countries))
+
+
+FRIENDLY_SORTED_COUNTRIES = _get_friendly_sorted_countries()
+
+MAX_LEVEL = 16
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
@@ -36,15 +59,22 @@ CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
 
 customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 
-# This changes the color of the adventure tab to pink
+# This creates the lightbulb icons next to the adventure
 KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_command', 'random_command',
                        'add_remove_command', 'quotation_marks', 'if_command', 'in_command', 'maths', 'repeat_command',
-                       'repeat_command_2', 'for_command', 'and_or_command', 'while_command', 'elif_command',
+                       'repeat_command_2', 'for_command', 'while_command', 'elif_command',
                        'clear_command', 'pressit', 'debugging', 'functions'}
 
-ADVENTURE_ORDER_PER_LEVEL = {
+
+def adventures_order_per_level():
+    if utils.is_redesign_enabled():
+        return ADVENTURE_ORDER_PER_LEVEL
+    else:
+        return ADVENTURE_ORDER_PER_LEVEL_OLD
+
+
+ADVENTURE_ORDER_PER_LEVEL_OLD = {
     1: [
-        'default',
         'print_command',
         'ask_command',
         'parrot',
@@ -57,11 +87,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'restaurant',
         'fortune',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     2: [
-        'default',
         'is_command',
         'rock',
         'ask_command',
@@ -75,11 +103,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     3: [
-        'default',
         'random_command',
         'dice',
         'rock',
@@ -94,11 +120,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     4: [
-        'default',
         'quotation_marks',
         'rock',
         'dice',
@@ -113,11 +137,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'fortune',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     5: [
-        'default',
         'if_command',
         'music',
         'language',
@@ -127,35 +149,39 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'rock',
         'parrot',
         'haunted',
+        'turtle',
+        'turtle_draw_it',
+        'debugging',
+        'hospital'
+    ],
+    6: [
+        'elif_command',
         'in_command',
         'restaurant',
         'fortune',
         'pressit',
-        'turtle',
-        'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
-    6: [
-        'default',
+    7: [
         'maths',
-        'music',
         'is_command',
+        'music',
         'songs',
         'dice',
         'dishes',
+        'piggybank',
+        'quizmaster',
+        'years',
         'turtle',
         'turtle_draw_it',
         'calculator',
         'fortune',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
-    7: [
-        'default',
+    8: [
         'repeat_command',
         'story',
         'songs',
@@ -168,11 +194,9 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'pressit',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
-    8: [
-        'default',
+    9: [
         'repeat_command',
         'fortune',
         'repeat_command_2',
@@ -180,33 +204,31 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'music',
         'if_command',
         'story',
-        'haunted',
         'restaurant',
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
-    9: [
-        'default',
+    10: [
         'repeat_command',
         'if_command',
+        'and_or_command',
         'rock',
         'story',
         'calculator',
+        'calculator_2',
         'music',
+        'secret',
         'restaurant',
         'haunted',
         'pressit',
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
-    10: [
-        'default',
+    11: [
         'for_command',
         'dishes',
         'dice',
@@ -215,135 +237,73 @@ ADVENTURE_ORDER_PER_LEVEL = {
         'turtle_draw_it',
         'harry_potter',
         'songs',
+        'songs_2',
         'story',
         'rock',
         'calculator',
         'restaurant',
         'debugging',
-        'parsons',
-        'quiz',
-    ],
-    11: [
-        'default',
-        'for_command',
-        'years',
-        'calculator',
-        'songs',
-        'restaurant',
-        'haunted',
-        'turtle_draw_it',
-        'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     12: [
-        'default',
-        'maths',
-        'quotation_marks',
         'functions',
-        'story',
-        'fortune',
         'music',
-        'songs',
         'songs_2',
-        'restaurant',
-        'calculator',
         'turtle',
-        'piggybank',
-        'secret',
         'turtle_draw_it',
         'debugging',
-        'parsons',
-        'quiz',
+        'hospital'
     ],
     13: [
-        'default',
-        'and_or_command',
-        'secret',
-        'functions',
-        'music',
+        'print_command',
+        'is_command',
+        'ask_command',
+        'for_command',
         'story',
-        'rock',
+        'songs',
         'turtle_draw_it',
-        'restaurant',
-        'calculator',
         'debugging',
-        'quiz',
+        'hospital'
     ],
     14: [
-        'default',
-        'is_command',
-        'guess_my_number',
-        'music',
-        'haunted',
-        'functions',
-        'turtle_draw_it',
-        'hotel',
-        'calculator',
-        'calculator_2',
-        'piggybank',
-        'quizmaster',
-        'debugging',
-        'quiz',
-    ],
-    15: [
-        'default',
-        'while_command',
-        'music',
-        'turtle_draw_it',
-        'restaurant',
-        'story',
-        'dice',
-        'rock',
-        'calculator',
-        'debugging',
-        'quiz',
-    ],
-    16: [
-        'default',
         'random_command',
         'haunted',
         'songs',
-        'songs_2',
         'music',
         'language',
-        'tic',
-        'tic_2',
-        'tic_3',
-        'simon',
-        'simon_2',
-        'simon_3',
         'debugging',
-        'quiz',
+        'hospital'
     ],
-    17: [
-        'default',
-        'for_command',
-        'elif_command',
-        'music',
-        'tic',
-        'hangman',
-        'hangman_2',
-        'hangman_3',
-        'blackjack',
-        'blackjack_2',
-        'blackjack_3',
-        'blackjack_4',
-        'debugging',
-        'quiz',
-    ],
-    18: [
-        'default',
-        'print_command',
-        'ask_command',
+    15: [
         'functions',
-        'for_command',
-        'story',
         'songs',
+        'piggybank',
         'music',
-        'debugging'
-    ]
+        'hotel',
+        'calculator',
+        'calculator_2',
+        'turtle_draw_it',
+        'debugging',
+        'hospital'
+    ],
+    16: [
+        'while_command',
+        'story',
+        'dice',
+        'rock',
+        'music',
+        'turtle_draw_it',
+        'calculator',
+        'restaurant',
+        'guess_my_number',
+        'debugging',
+        'hospital'
+    ],
 }
+
+
+ADVENTURE_ORDER_PER_LEVEL = {level: [a for a in adventures if a not in ['parsons', 'quiz']]
+                             for level, adventures in ADVENTURE_ORDER_PER_LEVEL_OLD.items()}
 
 HOUR_OF_CODE_ADVENTURES = {
     1: [
@@ -501,14 +461,17 @@ for lang in sorted(languages):
         ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
 
 # Load and cache all keyword yamls
-KEYWORDS = {}
-for lang in ALL_KEYWORD_LANGUAGES.keys():
-    KEYWORDS[lang] = YamlFile.for_file(f'{content_dir}/keywords/{lang}.yaml').to_dict()
-    for k, v in KEYWORDS[lang].items():
-        if isinstance(v, str) and "|" in v:
-            # when we have several options, pick the first one as default
-            # Some keys are ints, turn them into strings
-            KEYWORDS[lang][k] = v.split('|')[0]
+ALL_KEYWORDS = {
+    str(lang): {
+        str(k): str(v).split('|')
+        for k, v in YamlFile.for_file(f'{content_dir}/keywords/{lang}.yaml').to_dict().items()
+    }
+    for lang in ALL_KEYWORD_LANGUAGES
+}
+KEYWORDS = {  # "default" keywords
+    lang: {k: local_keys[0] for k, local_keys in keywords.items()}
+    for lang, keywords in ALL_KEYWORDS.items()
+}
 
 
 class StructuredDataFile:
@@ -536,8 +499,15 @@ class Commands(StructuredDataFile):
 
 
 def deep_translate_keywords(yaml, keyword_language):
+    """Recurse through a data structure and replace keyword placeholders in any strings we encounter.
+
+    It's easy to make content that doesn't replace properly (make typos in the
+    amounts of `{` for example), and then our entire build stops. So what we'll
+    do instead is return the original, untranslated string. This makes it
+    obvious that something is wrong if the content is looked at, while not
+    stopping the build.
+    """
     try:
-        """Recurse through a data structure and replace keyword placeholders in any strings we encounter."""
         if isinstance(yaml, str):
             # this is used to localize adventures linked in slides (PR 3860)
             yaml = yaml.replace('/raw', f'/raw?keyword_language={keyword_language}')
@@ -547,10 +517,18 @@ def deep_translate_keywords(yaml, keyword_language):
         if isinstance(yaml, dict):
             return {k: deep_translate_keywords(v, keyword_language) for k, v in yaml.items()}
         return yaml
-    except ValueError as E:
-        raise ValueError(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
-    except TypeError as E:
-        raise TypeError(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
+    except Exception as E:
+        logger.exception(f'Issue in language {keyword_language}. Offending yaml: {yaml}. Error: {E}')
+        return yaml
+
+
+def try_render_keywords(str, keyword_language):
+    """Render {placeholder}s in a string, return the original if there are any errors."""
+    try:
+        return safe_format(str, **KEYWORDS.get(keyword_language))
+    except Exception:
+        logger.exception('Error rendering keywords')
+        return str
 
 
 def get_localized_name(name, keyword_lang):
@@ -636,64 +614,6 @@ class NoSuchAdventure:
         return {}
 
 
-class ParsonsProblem(StructuredDataFile):
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/parsons/{self.language}.yaml')
-
-    def get_highest_exercise_level(self, level):
-        return max(int(lnum) for lnum in self.file.get('levels', {}).get(level, {}).keys())
-
-    def get_parsons_data_for_level(self, level, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, None), keyword_lang)
-
-    def get_parsons_data_for_level_exercise(self, level, excercise, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, {}).get(excercise), keyword_lang)
-
-
-class Quizzes(StructuredDataFile):
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/quizzes/{self.language}.yaml')
-
-    def get_highest_question_level(self, level):
-        return max(int(k) for k in self.file.get('levels', {}).get(level, {}))
-
-    def get_quiz_data_for_level(self, level, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level), keyword_lang)
-
-    def get_quiz_data_for_level_question(self, level, question, keyword_lang="en"):
-        return deep_translate_keywords(self.file.get('levels', {}).get(level, {}).get(question), keyword_lang)
-
-
-class NoSuchQuiz:
-    def get_quiz_data_for_level(self, level, keyword_lang):
-        return {}
-
-
-class Tutorials(StructuredDataFile):
-    # Want to parse the keywords only once, they can be cached -> perform this
-    # action on server start
-    def __init__(self, language):
-        self.language = language
-        super().__init__(f'{content_dir}/tutorials/{self.language}.yaml')
-
-    def get_tutorial_for_level(self, level, keyword_lang="en"):
-        if level not in ["intro", "teacher"]:
-            level = int(level)
-        return deep_translate_keywords(self.file.get(level, None), keyword_lang)
-
-    def get_tutorial_for_level_step(self, level, step, keyword_lang="en"):
-        if level not in ["intro", "teacher"]:
-            level = int(level)
-        return deep_translate_keywords(self.file.get(level, {}).get('steps', {}).get(step), keyword_lang)
-
-
-class NoSuchTutorial:
-    def get_tutorial_for_level(self, level, keyword_lang):
-        return {}
-
-
 class Slides(StructuredDataFile):
     def __init__(self, language):
         self.language = language
@@ -706,6 +626,21 @@ class Slides(StructuredDataFile):
 class NoSuchSlides:
     def get_slides_for_level(self, level, keyword_lang):
         return {}
+
+
+class NoSuchWorkbooks:
+    def get_workbook_for_level(self, level, keyword_lang):
+        return {}
+
+
+class Workbooks(StructuredDataFile, NoSuchWorkbooks):
+    def __init__(self, language):
+        self.language = language
+        super().__init__(f'{content_dir}/workbooks/{self.language}.yaml')
+
+    def get_workbook_for_level(self, level, keyword_lang='en'):
+        workbook_for_level = self.file.get('levels', {}).get(level, {})
+        return deep_translate_keywords(workbook_for_level, keyword_lang)
 
 
 class NoSuchTags:

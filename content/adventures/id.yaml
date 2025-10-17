@@ -2,24 +2,24 @@ adventures:
     story:
         name: Cerita
         default_save_name: Cerita
-        description: Cerita
+        description: Membuat cerita pendek
         levels:
             1:
-                story_text: |-
-                    Pada level 1 kamu dapat membuat cerita dengan karakter utama yang kamu tuliskan sendiri.
+                story_text: |
+                    Pada level 1, kamu dapat membuat cerita dengan karakter utama berbeda dari apa yang telah kamu masukkan.
 
-                    Sebagai baris pertama, gunakan kode berikut:
+                    Di baris pertama, gunakan `{ask}` dan tanya siapa yang akan menjadi karakter utama
 
-                    ```
-                    ask siapakah karakter utama di cerita kamu?
-                    ```
-
-                    Setelah baris pertama, mulai dengan `print` jika sebuah kalimat perlu ditampilkan.
-                    Kamu bisa menggunakan `echo` jika kamu mau nama karakter utamamu muncul diakhir kalimat.
-                example_code: "```\nask Karakter utama dalam cerita ini adalah\nprint Karakter utama ini sekarang akan berjalan di dalam hutan\necho Dia sedikit ketakutan, si \nprint Dia mendengar bunyi-bunyi menyeramkan dari sekitar\nprint Dia takut kalau hutan tersebut berhantu\n```\n"
+                    Setelah baris pertama, lanjut dengan`{print}`jika kalimat perlu untuk di cetak.
+                    Kamu juga dapat menggunakan`{echo}`apabila kamu ingin karakter utama mu berada di akhir kalimat.
+                example_code: "```\n{ask} Karakter utama dari cerita ini yaitu\n{print} Karakter utama akan berjalan menuju kedalam hutan\n{echo} Mereka sedikit ketakutan,\n{print} Mereka mendengar suara aneh dimana-mana\n{print} Mereka takut jika ternyata ini adalah hutan berhantu\n```\n"
                 story_text_2: |
-                    ### Exercise
-                    Can you make your own story in Hedy now by using `{print}` , `{ask}` and `{echo}`?
+                    ### latihan
+                    Sekarang buatlah ceritamu sendiri yang terdiri dari 6 baris kode.
+                    Ceritanya tidak boleh sama dengan contoh cerita sebelumnya.
+                    Setidaknya gunakan minimal satu perintah`{ask}` dan`{echo}`
+                    Kamu dapat membuat topik yang kamu inginkan
+                    Kalau kamu tidak dapat menentukan topik, gunakan salah satu dari pilihan ini: pergi menonton film, melihat pertandingan olahraga, atau hari mengunjungi kebun binatang
             2:
                 story_text: |-
                     Pada level 2, kamu dapat membuat ceritanya lebih menyenangkan. Karakter utama kamu sekarang dapat muncul dimanapun pada kalimat-kalimatnya.
@@ -27,13 +27,14 @@ adventures:
                     Kamu dapat memiliki program yang lebih baik dari itu. Tapi kamu harus memberi nama karakter utama kamu terlebih dahulu.
 
                     Kamu lalu dapat menuliskan nama tersebut dimanapun pada sebuah kalimat.
-                example_code: |
+                example_code: |-
                     ```
-                    nama is ask Siapa nama karakter utama dalam cerita ini?
-                    print nama sekarang akan berjalan di dalam hutan
-                    print nama sedikit ketakutan
-                    print Dia mendengar bunyi-bunyi menyeramkan dari sekitar
-                    print nama takut kalau hutan tersebut berhantu
+                    nama {is} {ask} Apa nama dari karakter utama?
+                    {print} sekarang nama akan berlari kedalam hutan
+                    {print} nama sedikit ketakutan
+                    {print} Tiba-tiba, ia mendengar suara aneh...
+                    {sleep}
+                    {print} nama takut jika ternyata hutan ini merupakan hutan berhantu
                     ```
                 story_text_2: |
                     ### Latihan
@@ -70,6 +71,7 @@ adventures:
                     Salin cerita Anda dari level sebelumnya ke level ini.
                     Di level ini Anda telah mempelajari 3 perintah baru `{at} {random}` , `{add} {to_list}` dan `{remove} {from}`.
                     Tambahkan baris kode baru ke cerita Anda, sehingga semua perintah baru ditampilkan setidaknya sekali dalam cerita Anda.
+                example_code: "```\nhewan {is} 🦔, 🐿, 🦉, 🦇\n{print} Sekarang mereka mendengar suara dari hewan {at} {random}\n```\n"
             4:
                 story_text: |
                     ### Latihan
@@ -92,7 +94,7 @@ adventures:
                     {print} nama _takut ini hutan angker _
                     ```
             5:
-                story_text: |-
+                story_text: |
                     Apa yang kamu bisa lakukan di level 4 adalah membuat cerita kamu semakin menyenangkan. Pada level 4 kamu dapat membuat akhir cerita yang berbeda.
 
                     Pikirkan dua alternatif akhir cerita kamu. Misalnya:
@@ -113,7 +115,7 @@ adventures:
                     {if} akhir {is} nama {print}  nama 'yang bagus  mengambil pedang dan monster itu segera lari'
                     {else} {print} nama 'Monster itu memakan '
                     ```
-            7:
+            8:
                 story_text: |
                     Dalam sebuah cerita, seseorang mengucapkan kata-kata beberapa kali. Misalnya saja ketika seseorang meminta bantuan atau menyanyikan sebuah lagu.
                     Anda dapat memasukkan pengulangan seperti itu ke dalam cerita Anda, di level ini dengan `{repeat}`.
@@ -127,7 +129,7 @@ adventures:
                     repeat 5 times print 'Tolong!'
                     print 'Kenapa tidak ada seorangpun yang menolongku?'
                     ```
-            8:
+            9:
                 example_code: |
                     ```
                     {print} 'OH TIDAK! T-rex mendekat!'
@@ -139,7 +141,7 @@ adventures:
                         {print} 'Oh tidak! Richard terlalu lambat.'
                         {print} _
                     ```
-            9:
+            10:
                 story_text: |
                     In this level you can use nesting to put {if}, {repeat} or {for} commands inside other {if}, {repeat} or {for} commands. This gives you many options and really helps you to make your story interactive.
                 example_code: |
@@ -157,7 +159,7 @@ adventures:
                     {else}
                         {print} 'Robin pulang'
                     ```
-            10:
+            11:
                 story_text: |
                     Pada level ini Anda dapat menggunakan perintah {for} dalam cerita Anda. Dengan cara ini Anda dapat dengan mudah memprogram buku anak-anak 'Beruang coklat, Beruang coklat, apa yang kamu lihat'.
 
@@ -170,27 +172,7 @@ adventures:
                     {print} 'Beruang coklat, Beruang coklat'
                     {print} 'Apa yang kamu lihat?'
                     ```
-            12:
-                story_text: |
-                    In this level you can use the quotation marks to save multiple words in a variable.
-                example_code: |
-                    ```
-                    nama = 'Ratu Inggris'
-                    {print} nama ' sedang memakan sepotong kue, tiba-tiba...'
-                    ```
-            13:
-                story_text: |
-                    By using the `{and}` and `{or}` commands, you can shorten your stories. For example, check out the dragon story.
-                example_code: |
-                    ```
-                    {print} 'Pahlawan kita sedang berjalan melewati hutan'
-                    {print} 'Jalurnya terbagi dua'
-                    jalan = {ask} 'Jalan mana yang harus dia pilih?'
-                    senjata = {ask} 'Senjata apa yang dia gunakan?'
-                    {if} jalur {is} 'kiri' {and} senjata {is} 'pedang'
-                        _
-                    ```
-            15:
+            16:
                 example_code: |
                     ```
                     keys = 'lost'
@@ -205,7 +187,7 @@ adventures:
                         {else}
                             {print} 'Nope they are not at the ' location
                     {print} 'Now you can enter the house!'
-            18:
+            13:
                 example_code: |
                     ```
                     {print}('Selamat datang di cerita ini!')
@@ -258,22 +240,6 @@ adventures:
                     alergi {is} {ask} Apakah Anda alergi terhadap rasa apa pun?
                     _
                     {print} Anda mendapatkan milkshake rasa {at} {random}
-                    ```
-    and_or_command:
-        default_save_name: dan atau
-        description: memperkenalkan dan atau
-        levels:
-            13:
-                story_text: |-
-                    Kita sekarang akan mempelajari `{and}` dan `{or}`! Jika Anda ingin memeriksa dua pernyataan, Anda tidak harus menggunakan dua `{if}` tetapi dapat menggunakan `{and}` dan `{or}`.
-
-                    Jika Anda menggunakan `{and}`, kedua pernyataan, kiri dan kanan `{and}` harus benar. Kita juga bisa menggunakan `{or}`. Maka hanya satu pernyataan yang perlu benar.
-                example_code: |
-                    ```
-                    nama = {ask} 'siapa namamu?'
-                    umur = {ask} 'berapa umurmu?'
-                    {if} nama {is} 'Hedy' {and} umur {is} 2
-                        {print} 'Kamu adalah Hedy yang asli!'
                     ```
     ask_command:
         default_save_name: tanya_perintah
@@ -338,7 +304,7 @@ adventures:
         default_save_name: kalkulator
         description: Membuat sebuah kalkulator
         levels:
-            6:
+            7:
                 story_text: |
                     Now that you can calculate, you can also create a program to practice maths calculations. You can make up the calculations yourself, for example:
                 example_code: |
@@ -359,7 +325,7 @@ adventures:
                     ```
                 story_text_3: |
                     **Tambahan** Anda juga dapat membiarkan komputer melakukan penjumlahan acak sendiri menggunakan `{random}`.
-                example_code_3: |
+                example_code_3: |-
                     angka = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     angka_1 = _
                     angka_2 = _
@@ -367,7 +333,7 @@ adventures:
                     diberikan_jawaban = 'Berapakah 'angka_1' dikalikan 'angka_2'?'
                     {if} _
                     {else} _
-            9:
+            10:
                 story_text: |
                     Di level 6 Anda membuat kalkulator, di level ini Anda dapat memperluas kode tersebut sehingga menanyakan banyak pertanyaan.
 
@@ -391,66 +357,6 @@ adventures:
                             skor = skor + 1
                     {print} 'Kerja bagus! Skor Anda adalah... 'skor' dari 10!'
                     ```
-            11:
-                example_code: |
-                    ```
-                    nomor = 10
-                    {for} i {in} {range} 1 {to} 10
-                        {print} i * nomor
-                    ```
-            12:
-                story_text: |
-                    Di level ini, Anda bisa membuat kalkulator yang berfungsi untuk angka desimal.
-
-                    ### Latihan 1
-                    Isilah bagian yang kosong untuk melengkapi kalkulator. Ingatlah untuk menggunakan titik dan bukan koma untuk angka desimal.
-
-                    ### Latihan 2
-                    Buat program latihan matematika baru, tapi sekarang gunakan angka desimal.
-                    Buat daftar angka, pilih dua hingga kelipatan dan biarkan pemain menjawab.
-                    Dan tentunya Anda harus memvalidasi jawabannya! **Ekstra** Tingkatkan kesulitan dengan menambahkan nyawa: Seorang pemain kehilangan nyawa karena jawaban yang salah dan setelah tiga jawaban salah, permainan berakhir.
-                example_code: |
-                    ```
-                    nomor1 = {ask} 'Berapa angka pertama?'
-                    nomor2 = {ask} 'Berapakah bilangan kedua?'
-                    jawaban = _
-                    {print} nomor1 ' ditambah ' nomor2 ' adalah ' _
-                    ```
-            13:
-                story_text: |
-                    ### Latihan 1
-                    Mari kita buat program latihannya sedikit lebih sulit. Pemain sekarang harus menjawab dua pertanyaan dengan benar. Isilah bagian yang kosong untuk menyelesaikan program.
-
-                    ### Latihan 2 Ekstra
-                    Terkadang, perhitungan memiliki beberapa jawaban yang benar. Misalnya 10 bisa dibagi 5 dan 2. Jadi pertanyaannya 'Bilangan berapa yang membagi 10?' bisa dijawab 2 dan 5.
-                    Mintalah perhitungan yang memiliki beberapa jawaban benar, minta pemain menjawabnya, dan tentukan apakah benar menggunakan `{or}`.
-                    Kosongkan bidang pemrograman dan buat solusi Anda sendiri.
-                example_code: |
-                    ```
-                    jawaban1 = {ask} 'Berapa 10 dikali 7?'
-                    jawaban2 = {ask} 'Berapa 6 kali 7?'
-                    {if} _ _ _ _ _ _ _
-                        {print} _
-                    ```
-            14:
-                example_code: |
-                    ```
-                    {define} calculate_mean_grade
-                        total = 0
-                        {for} i {in} {range} 1 {to} 4
-                            grade = {ask} _
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
-                    ```
-
-                            total = total + _
-                            return _ / 4
-
-                    mean_grade = {call} _
-                    {print} 'Your mean grade is ' mean_grade
     clear_command:
         default_save_name: perintah_jelas
         description: perintah yang jelas
@@ -548,569 +454,6 @@ adventures:
                     {print} 'Penulis favoritmu adalah'
                     {print} 'Hmm... aku pikir kamu sebaiknya mencoba... buku {at} {random}'
                     ```
-            5:
-                story_text: |-
-                    ### Latihan
-                    Perbaiki kode ini. Semoga beruntung!
-                example_code: |
-                    **Peringatan! Kode ini perlu diperbaiki!**
-                    ```
-                    {print} Selamat datang di Kolam Renang Hedy!
-                    kelas {is} {ask} 'Apakah Anda di sini untuk bergabung dengan kelas hari ini?'
-                    {if} kelas ya
-                    {print} 'Bagus! Anda bergabung dengan kelas!'
-                    {print} {else} 'Anda tidak akan bergabung dengan kelas'
-                    diskon {is} {ask} 'Apakah Anda punya kode diskon?'
-                    {if} diskon {is} ya
-                    discount_answer {is} {ask} 'Apa kode diskon Anda?'
-                    discount_codes = Senior4231, Student8786, NewMember6709
-                    {if} discount_answer {is} {in} discount_codes
-                    {print} 'Harganya $3,50'
-                    {else} 'Kode itu tidak valid
-                    {else} 'Harganya $5,50'
-                    {print} 'Selamat berenang!'
-                    ```
-            6:
-                story_text: |-
-                    ### Latihan
-                    Perbaiki kode ini. Semoga beruntung!
-                example_code: |
-                    **Peringatan! Kode ini perlu di-debug!**
-                    ```
-                    {print} 'Mesin penjual otomatis'
-                    produk_terpilih = {ask} 'Silakan pilih produk'
-                    produk_1_dolar = coke jus jeruk air
-                    produk_2_dolar = cokelat, kue, bar museli
-                    produk3_dolar = keripik kentang, daging sapi asap, roti pisang
-                    {if} produk_terpilih {in} produk_1_dolar
-                    harga = 1
-                    {if} produk_terpilih {is} produk_2_dolar
-                    harga = 2
-                    {if} produk_terpilih {in} produk_3_dolar
-                    harga = 3
-                    jumlah_produk = '{ask} Berapa banyak ' produk_terpilih ' yang ingin Anda beli?'
-                    total = harga + jumlah_produk
-                    {print} 'Totalnya akan menjadi $' harga 'silakan'
-                    ```
-            7:
-                story_text: |-
-                    ### Latihan
-                    Kejutan! Program ini lebih terlihat seperti keluaran daripada kode. Namun, kami tidak ingin Anda hanya menambahkan perintah `{print}` di depan setiap baris.
-                    Perbaiki program ini untuk mengubahnya menjadi lagu anak-anak 'Saudara John (Frère Jaques)' tentu saja dengan menggunakan perintah {repeat}!
-                example_code: |
-                    **Peringatan! Kode ini perlu diperbaiki!**
-                    ```
-                    Apa kau tidur?
-                    Bang John!
-                    Lonceng pagi berbunyi!
-                    Ding, dang, dong!
-                    ```
-            8:
-                story_text: |-
-                    ### Latihan
-                    Perbaiki kode ini. Semoga beruntung!
-                example_code: |
-                    **Peringatan! Kode ini perlu diperbaiki!**
-                    ```
-                    {print} 'Selamat datang di Manikur dan Pedikur oleh Hedy'
-                    bagian_tubuh = {ask} 'Apakah Anda ingin merapikan kuku jari atau kuku kaki hari ini? Atau keduanya?'
-                    {if} bagian_tubuh {is} keduanya
-                            {print} 'Itu akan menjadi $25'
-                            harga = 25
-                        {else}
-                            {print} 'Itu akan menjadi $18'
-                            harga = 18
-                    warna = {ask} 'Warna apa yang Anda inginkan?'
-                    kilauan = {ask} 'Apakah Anda ingin ada kilauan di atasnya?'
-                    {if} kilauan {is} ya
-                        {print} 'Kami menambahkan biaya tambahan $3 untuk itu'
-                    harga = harga + 3
-                    {else} {print} 'Tidak ada kilauan' {print} 'Jadi tidak ada biaya tambahan'
-                    {sleep} 5
-                    {print} 'Semua selesai! Harganya $' harga ' tolong!'
-                    {print} 'Terima kasih! Selamat tinggal!'
-                    ```
-            9:
-                story_text: |-
-                    ### Latihan
-                    Perbaiki kode ini. Semoga beruntung!
-                example_code: |
-                    **Peringatan! Kode ini perlu di-debug!**
-                    ```
-                    {print} 'Selamat datang di toko sandwich kami'
-                    jumlah 'Berapa banyak sandwich yang ingin Anda beli?'
-                    {repeat} jumlah {times}
-                    {ask} {is} {ask} 'Anda ingin sandwich jenis apa atau roti apa?'
-                    jenis_roti {is} putih, gandum, gandum hitam, bawang putih, bebas gluten
-                    {if} roti_dipilih dalam jenis_roti_roti
-                    {print} 'Indah sekali!'
-                    {else}
-                    'Maaf kami tidak menjualnya'
-                    topping {is} {ask} 'Topping apa yang kamu mau?'
-                    saus {is} {ask} 'Saus apa yang kamu mau?'
-                    {print} Satu roti_pilihan dengan topping dan saus.
-                    harga = jumlah * 6
-                    {print} 'Tolong, itu 'harga dolar''
-                    ```
-
-                    harga = jumlah * 6
-                    {print} 'Tolong, itu 'harga dolar''
-            10:
-                story_text: |-
-                    ### Latihan
-                    Perbaiki kode ini. Semoga beruntung!
-                example_code: |
-                    **Peringatan! Kode ini perlu diperbaiki!**
-                    ```
-                    nama = Muad Hasan Samira Noura
-                    kegiatan = menerbangkan layang-layang, berenang, mendaki gunung, berjemur di bawah sinar matahari
-                    {for} nama {is} nama
-                    {print} Di pantai namanya suka beraktivitas {at} {random}
-                    ```
-            11:
-                story_text: |-
-                    ### Latihan
-                    Perbaiki program kalender ini. Output dari program ini seharusnya terlihat seperti daftar tanggal.
-                    Misalnya:
-
-                    ```
-                    Kalender Hedy
-                    Ini semua hari-hari di bulan November
-                    1 November
-                    2 November
-                    3 November
-                    ```
-                    Dan seterusnya.
-
-                    Ingatlah bahwa Anda harus menguji kode Anda dengan ekstra hati-hati untuk bulan Februari, karena jumlah hari di bulan ini berubah berdasarkan tahun kabisat.
-                example_code: |
-                    **Peringatan! Kode ini perlu diperbaiki!**
-                    ```
-                    print 'Kalender Hedy'
-                    bulan_dengan_31 hari = Januari, Maret, Mei, Juli, September, Oktober, Desember
-                    bulan_dengan_30_hari = April, Juni, Agustus, November
-                    bulan = tanya 'Bulan apa yang ingin Anda lihat?'
-                    jika bulan dalam bulan_dengan_31_hari
-                        hari = 31
-                        jika bulan dalam bulan_dengan30_hari
-                            hari = 30
-                    jika bulan = Februari
-                        tahun_kabisat = 2020, 2024, 2028, 2036, 2040, 2044, 2028
-                        tahun = tanya 'Tahun berapa sekarang?'
-                    jika tahun dalam tahun_kabisat
-                        hari = 29
-                    kalau tidak
-                        hari = 28
-
-                    print 'Inilah hari-hari' ngengat
-                    untuk i dalam rentang 1 hingga hari
-                        cetak bulan i
-                    ```
-
-                    print 'Inilah hari-hari' ngengat
-                    untuk i dalam rentang 1 hingga hari
-                        cetak bulan i
-            12:
-                story_text: |-
-                    ### Latihan
-                    Perbaiki kode ini. Semoga beruntung!
-                example_code: |
-                    **Peringatan! Kode ini perlu diperbaiki!**
-                    ```
-                    mendefinisikan salam
-                    salam = 'Halo', 'Halo', 'Selamat malam'
-                        cetak salam secara acak
-
-                    tentukan mengambil_pesanan
-                        makanan = tanya 'Kamu mau makan apa?'
-                        print 'Satu makanan'
-                        minum = 'Kamu ingin minum apa?'
-                        print minuman 'Satu'
-                        more = tanya 'Apakah Anda ingin yang lain?'
-                            jika lebih berarti 'tidak'
-                        cetak 'Baiklah'
-                            kalau tidak
-                            print 'Dan' lagi
-                    print 'Terima kasih'
-
-                    ptint 'Selamat datang di restoran kami'
-                    people = tanya 'Berapa orang yang ada di pestamu malam ini?'
-                    untuk saya dalam rentang 0 hingga orang
-                        hubungi salam_pelanggan
-                    ```
-            13:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    defin movie_recommendation with name
-                        action_movies == 'Die Hard', 'Fast and Furious', 'Inglorious Bastards'
-                        romance_movies = 'Love Actually', 'The Notebook', 'Titanic'
-                        comedy_movies = 'Mr Bean' 'Barbie''Deadpool'
-                        kids_movies = 'Minions', 'Paddington', 'Encanto'
-                        if name is 'Camila' or name is 'Manuel'
-                            recommended_movie = kids_movie at random
-                        if name is 'Pedro' or 'Gabriella'
-                                mood = ask 'What you in the mood for?'
-                            if mood is 'action'
-                                recommended_movie = comedy_movies at random
-                            if mood is 'romance'
-                                recommended_movie = romance_movies
-                        if mood is 'comedy'
-                                recommended_movie = comedy_movies at random
-
-                    print 'I would recommend ' recommended_movie ' for ' name
-
-                    name = ask 'Who is watching?'
-                    recommendation = ask 'Would you like a recommendation?'
-                    if recommendaion is 'yes'
-                    print movie_recommendation with name
-                    else
-                    print 'No problem!'
-                    ```
-            14:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    define calculate_heartbeat
-                        print 'Press your fingertips gently against the side of your neck'
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
-                    ```
-
-                        print '(just under your jawline)'
-                        print 'Count the number of beats you feel for 15 seconds'
-                        beats == ask 'How many beats do you feel in 15 seconds?'
-                        heartbeat = beats*4
-                        print 'Your heartbeat is ' heartbeat
-                        if heartbeat >= 60 or heartbeat <= 100
-                            print 'Your heartbeat seems fine'
-                        else
-                            if heartbeat > 60
-                                print 'Your heartbeat seems to be too low'
-                            if heartbeat < 100
-                                print 'Your heartbeat seems to be too high'
-                            print 'You might want to contact a medical professional'
-
-                    measure_heartbeat = ask 'Would you like to measure your heartbeat?'
-                    if measure_heartbeat = 'yes'
-                        call measure_heartbeat
-                    else
-                        'no problem'
-            15:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    names = 'Tanya', 'Romy', 'Kayla', 'Aldrin', 'Ali'
-                    verbs='walking', 'skipping', 'cycling', 'driving', 'running'
-                    locations = 'on a mountaintop', 'in the supermarket', 'to the swimming pool'
-                    hiding_spots = 'behind a tree', under a table', in a box'
-                    sounds = 'a trumpet', 'a car crash', 'thunder'
-                    causes_of_noise = 'a television', 'a kid with firecrackers', 'a magic elephant', 'a dream'
-
-                    chosen_ name = names at random
-                    chosen_verb = verbs at random
-                    chosen_location = 'locations at random'
-                    chosen_sounds = noises at random
-                    chosen_spot = hiding_spots random
-                    chosen_causes = causes_of_noise at random
-
-                    print chosen_name ' was ' chosen_verb ' ' chosen_location
-                    print 'when they suddenly heard a sound like ' sounds at random
-                    print chosen_name ' looked around, but they couldn't discover where the noise came from'
-                    print chosen_name ' hid ' chosen_spot'
-                    print 'They tried to look around, but couldn't see anything from there'
-                    hidden = 'yes'
-                    while hidden = 'yes'
-                        print chosen_name 'still didn't see anything'
-                    answer = ask 'does ' chosen_name ' move from their hiding spot?'
-                        if answer = 'yes'
-                            hidden == 'no'
-                    print 'chosen_name moved from' chosen_spot
-                    print 'And then they saw it was just' chosen_cause
-                    print chosen_name 'laughed and went on with their day'
-                    print The End
-                    ```
-            16:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
-                    capitals = 'Amsterdam', 'Warshaw' 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
-                    score = 0
-                    for i in range 0 to 10
-                        answer = ask 'What's the capital of ' countries[i]
-                        correct = capital[i]
-                        if answer = correct
-                            print 'Correct!'
-                        score = score + 1
-                        else
-                            print 'Wrong,' capitals[i] 'in the capital of' countries[i]
-                        print 'You scored ' score ' out of 10'
-
-                    ```
-            17:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    define food_order
-                        toppings = ask 'pepperoni, tuna, veggie or cheese?'
-                        size = ask 'big, medium or small?'
-                        number_of_pizza = ask 'How many these pizzas would you like?'
-
-                        print 'YOU ORDERED'
-                        print number_of_pizzas ' size  ' topping ' pizza'
-
-                    define drinks_order
-                        drink = ask 'water, coke, icetea, lemonade or coffee?'
-                        number_of_drinks = ask 'How many of these drinks would you like?'
-
-                        print 'YOU ORDERED'
-                        print number_of_drinks ' ' drink
-
-                    'Welcome to Hedy pizza'
-                    more_food = ask 'Would you like to order a pizza?'
-                    while more_food = 'yes'
-                        return food_order
-                        more_food = ask 'Would you like to order a pizza?'
-                    more_drinks = ask 'Would you like to order some drinks?'
-                    while more_drinks == 'yes'
-                        call drink_order
-                        more_drinks == ask 'Would you like to order more drinks?'
-
-
-                    print 'Thanks for ordering!'
-                    ```
-            18:
-                example_code: |
-                    **Warning! This code needs to be debugged!**
-                    ```
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Old MacDonald had a farm'
-                        print 'E I E I O!'
-                        print 'and on that farm he had a ' animal
-                        print 'E I E I O!'
-                        print 'with a ' sound sound ' here'
-                        print 'and a ' sound sound ' there'
-                        print 'here a ' sound
-                        print 'there a ' sound
-                        print 'everywhere a ' sound sound
-                    ```
-    default:
-        name: Pengantar
-        description: Penjelasan level
-        levels:
-            1:
-                story_text: "Pada level 1 kamu dapat menggunakan perintah `{print}`, `{ask}` dan `{echo}`.\nTulis kodingan kamu di bagian tampilan kode. Atau tekan tombol hijau di contoh kode, dan kode akan dituliskan sendiri!\nCoba jalankan kodenya dengan menekan tombol 'Run code' di bawah tampilan kode.\n\nAnda dapat print text di tampilan dengan menggunakan perintah `{print}` .     \n"
-            3:
-                story_text: |-
-                    Pada level 3 kamu juga dapat membuat list. Kamu dapat meminta komputer memilih sesuatu secara acak dari list tersebut. Kamu dapat melakukan itu dengan `at random`.
-
-                    ```
-                    hewan is anjing, kucing, kangguru
-                    print hewan at random
-                    ```
-
-                    Kamu bisa menemukan semua kode contoh level 3 pada bagian kiri. Ada juga diberikan latihan pada tab-tab diatas.
-            4:
-                story_text: |
-                    Pada level 4 `{ask}` dan `{print}` sudah diubah.
-
-                    Kamu harus memasukkan teks yang mau kamu tampilkan diantara tanda kutip.
-
-                    Ini berguna, karena sekarang kamu bisa menampilkan semua kata yang kamu mau, termasuk kata yang sebelumnya digunakan untuk menyimpan sesuatu dengan `{is}`.
-
-                    Kebanyakan bahasa pemrograman juga menggunakan tanda kutip ketika menampilkan, jadi sebenarnya kita satu langkah lebih dekat dengan pemrograman yang sebenarnya!
-                example_code: |
-                    ```
-                    {print}'You need to use quotation marks from now on!'
-                    answer {is} {ask} 'What do we need to use from now on?'
-                    print 'We need to use ' answer
-                    ```
-            5:
-                story_text: "Perintah `ask` dan `print` tetap sama seperti pada level 4.\n \nPada level 5, ada hal baru, `if`! Dengan `if` kamu bisa memilih antara dua pilihan.\n\n```\nnama is ask 'siapa nama kamu?'\nif nama is Hedy print 'keren' else print 'boo'\n```\n\nKode ini menampilkan keren jika kamu memasukkan Hedy sebagai nama, dan boo jika kamu memasukkan yang lain.\n\nTerkadang kode dengan `if` bisa menjadi sangat panjang dan tidak cukup menggunakan satu baris <br> \nKamu dapat memisah kodenya menjadi dua baris; baris kedua dimulai dengan `else` seperti ini:\n```\nnama is ask 'siapa nama kamu?'\n if nama is Hedy print 'keren' \nelse print 'boo'\n```\n\n\nPada level 5, tugas-tugas yang ada pada tab-tab terlampir akan menjadi makin kompleks semakin posisi tabnya ke kanan. Jadi, pastikan untuk mengerjakan mulai dari kiri ke kanan."
-                example_code: |
-                    ```
-                    password {is} {ask} 'Apa kata sandi yang benar?'
-                    ```
-            6:
-                story_text: |-
-                    `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 4 dan level 5.
-                    Tapi di level 6 ada sesuatu yang baru, kamu sekarang bisa melakukan perhitungan matematika.
-
-                    Pada level 6, kode baru sudah ditambahkan untuk perhitungan matematika.
-
-                    Penambahan itu mudah, kamu menuliskannya persis seperti di matematika: `5 + 5` sebagai contoh. Pengurangan juga mudah dituliskan, seperti `5 - 5`.
-
-                    Perkalian sedikit berbeda, karena tidak ada simbol perkalian di keyboard kita. Cobalah cari, ini beneran tidak ada!
-                    Karenanya kita melakukan perkalian dengan tanda bintang diatas tombol '8': `5 * 5`. Baca itu sebagai 5 kali 5 dan kamu akan lebih mudah mengingatnya.
-
-                    ```
-                    print '5 tambah 5 adalah ' 5 + 5
-                    print '5 kurang 5 adalah ' 5 - 5
-                    print '5 kali 5 adalah ' 5 * 5
-                    ```
-                example_code: |
-                    ```
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 {times} 5 is ' 5 * 5
-                    ```
-            7:
-                story_text: |-
-                    `ask`, `print`, dan `if` berfungsi sama persis dengan yang ada pada level 6.
-                    Tapi level 7 menambahkan perintah `repeat`. Perintah repeat dapat digunakan untuk menjalankan satu baris kode beberapa kali
-
-                    ```
-                    repeat 3 times print 'Hedy itu menyenangkan!'
-                    ```
-                example_code: |
-                    ```
-                    {repeat} 3 {times} {print} 'Hedy is fun!'
-                    ```
-            8:
-                story_text: "`ask` dan `print` tetap berfungsi sama seperti sebelumnya. Tapi `if` dan `repeat` berubah. \nKamu sekarang dapat mengeksekusi kumpulan kode secara bersamaan, tapi kamu harus memberikan indentasi pada kode tersebut.\n Indentasi berarti memberikan empat spasi diawal baris. Ini juga berlaku ketika kamu hanya mau mengeksekusi satu baris kode saja.\n\n```\nrepeat 5 times\n    print 'halo semua'\n    print 'Ini akan ditampilkan lima kali'\n```"
-                example_code: |
-                    Ini adalah cara perintah `{repeat}` bekerja:
-                    ```
-                    {repeat} 5 {times}
-                        {print} 'Halo semua'
-                        {print} 'Ini adalah pengulangan 5 kali'
-                    ```
-                    Ini bagaimana perintah `{if}` dan `{else}` bekerja:
-
-                    ```
-                    nama {is} {ask} 'Siapa nama kamu?'
-                    {if} nama {is} Hedy
-                        {print} 'Selamat datang Hedy'
-                        {print} 'Kamu bisa bermain di komputer kamu!'
-                    {else}
-                        {print} 'PENGACAU!'
-                        {print} 'Kamu tidak bisa menggunakan komputer ini!'
-                    ```
-            9:
-                story_text: |-
-                    Pada level ini kamu tidak hanya bisa menggunakan beberapa baris baru untuk  `if` and `repeat`, namun juga dapat menggabungkan mereka!
-                    Pada contoh kamu lihat sebuah perintah `if` didalam perintah `repeat`. Kamu juga dimungkinkan untuk melakukan sebaliknya, dan `if` juga boleh didalam `if` dan `repeat` didalam `repeat`.
-                    Cobalah!
-
-                    ```
-                    repeat 3 times
-                        makanan = ask 'Apa yang kamu mau?'
-                        if makanan is 'pizza'
-                            print 'bagus!'
-                        else
-                            print 'pizza lebih enak'
-                    ```
-                example_code: |
-                    ```
-                    {repeat} 3 {times}
-                        food = {ask} 'What do you want?'
-                        {if} food {is} pizza
-                            {print} 'nice!'
-                        else
-                            {print} 'pizza is better'
-                    ```
-            10:
-                story_text: |
-                    Pada level ini kita akan belajar perintah `for`. Dengan `for` kamu dapat membuat sebuah daftar dan mengakses semua isinya.
-                    `for` membentuk sebuah blok seperti `repeat` dan `if` jadi semua baris untuk aksi harus diawali dengan beberapa spasi.
-
-                    ```
-                    hewanhewan is anjing, kucing, ikan
-                    for hewan in hewanhewan
-                      print 'Aku suka ' hewan
-                    ```
-                example_code: |
-                    ```
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
-                    ```
-            12:
-                story_text: |-
-                    **Angka Desimal**
-                    Sejauh ini, Hedy tidak diperbolehkan untuk menggunakan angka desimal seperti 1.5, tapi sekarang kita diperbolehkan untuk itu. Catatan untuk itu gunakan `.` untuk angka desimal itu
-                example_code: |
-                    ```
-                    {print} 'Two and a half plus two and a half is...'
-                    {print} 2.5 + 2.5
-                    ```
-            13:
-                story_text: |
-                    Pada level sebelumnya Anda telah mempelajari cara menempatkan dua perintah `{if}` di dalam satu sama lain. Ini berfungsi dengan baik, tetapi ini memberi Anda kode yang sangat panjang dan tidak praktis seperti ini:
-
-                    Dalam sistem ini Anda harus memberikan nama pengguna dan kata sandi yang benar.
-                    Di level ini Anda akan mempelajari perintah `{and}` yang akan membuat kode ini lebih pendek dan mudah dimengerti!
-                    Coba lihat!
-                example_code: |
-                    ```
-                    name = ask 'what is your name?'
-                    age = ask 'what is your age?'
-                    if name is 'Hedy' and age is 2
-                        print 'You are the real Hedy!'
-                    ```
-            14:
-                story_text: 'Kita akan mulai belajar untuk menggunakan banyak hal baru! Kamu mungkin sudah tahu hal-hal ini dari matematika: simbol `<` dan `>`. Simbol `<` mengecek apakah angka pertama lebih kecil daripada angka kedua, seperti `4 < 5`. Simbol `>` mengecek apakah angka pertama lebih besar daripada angka kedua, seperti `6 > 5`.'
-                example_code: |
-                    ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
-                    ```
-
-                    if umur < 13
-                        print 'Kamu lebih muda daripada aku!'
-                    else
-                        print 'Kamu lebih tua daripada aku!'
-            15:
-                story_text: Kita akan belajar tentang jenis pengulangan baru, pengulangan `while`! Kita akan melakukan pengulangan tersebut terus-menerus selama kondisinya dipenuhi. Jadi di contoh tersebut, kita terus melakukan pengulangan hingga jawaban benar telah diberikan. Jika jawaban benar tidak diberikan, pengulangan tidak akan pernah berakhir!
-                example_code: |
-                    ```
-                    answer = 0
-                    while answer != 25
-                        answer = ask 'What is 5 times 5?'
-                    print 'A correct answer has been given'
-                    ```
-            16:
-                story_text: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
-                example_code: |
-                    ```
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
-                    ```
-            17:
-                story_text: Kali ini kita akan mengganti proses indentasi sedikit. Setiap kali kita membutuhkan indentasi, kita perlu menambahkan `:` pada akhir baris sebelumnya
-            18:
-                story_text: |-
-                    We arrived at real Python code! That means we need to use parentheses with {print} and {range} from now on.
-                    {print}('My name is ', naam)
     dice:
         name: Dadu
         default_save_name: dadu
@@ -1137,7 +480,7 @@ adventures:
                     Pada level 3 kita dapat membuat kalimat-kalimat dengan nilai dadu didalamnya, menggunakan tanda kutip satu tentunya.
                     Kali ini kode contoh belum sempurna. Dapatkah kamu menyempurnakannya?
             5:
-                story_text: |-
+                story_text: |
                     Kamu juga dapat membuat dadu di level 4 dengan menggunakan `if`
                     Lengkapi kode berikut agar kode mengatakan 'Kamu dapat berhenti melempar' ketika kamu mendapatkan cacing sebagai hasil lemparan.
 
@@ -1150,7 +493,7 @@ adventures:
                     print 'kamu memiliki' _ 'lemparan'
                     if _ is cacing print 'Kamu dapat berhenti melempar.' _ print 'Kamu harus mendengarnya sekali lagi!'
                     ```
-            6:
+            7:
                 story_text: |
                     Anda juga dapat membuat Cacing Tanah mati lagi di sini, tetapi sekarang Anda juga dapat menghitung berapa banyak poin yang telah diperoleh.
                     Anda mungkin tahu bahwa cacing menghitung 5 poin untuk Cacing Tanah. Nah setelah melakukan roll anda bisa langsung menghitung berapa poin yang sudah anda lempar.
@@ -1172,8 +515,8 @@ adventures:
                     Apakah kamu berhasil menghitung poin dari lemparan dadu 8 kali? Ini memerlukan banyak salinan kode, betul? Kita akan membuatnya lebih mudah pada level 7!
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
-            7:
-                story_text: |-
+            8:
+                story_text: |
                     Kamu juga dapat membuat dadu kembali di level 5. Dengan `repeat` kamu dapat dengan mudah melempar dadu beberapa kali.
                     Cobalah lengkapi kode berikut! Bagian dengan garis bawah harus berisi beberapa perintah dan karakter.
 
@@ -1182,17 +525,6 @@ adventures:
                     ```
                     pilihan is 1, 2, 3, 4, 5, cacing
                     repeat _ _ print _ _ _
-                    ```
-            10:
-                story_text: |
-                    Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
-                example_code: |
-                    ```
-                    players = Ann, John, Jesse
-                    choices = 1, 2, 3, 4, 5, 6
-                    {for} player {in} players
-                        {print} player ' throws ' choices {at} {random}
-                        {sleep}
                     ```
     dishes:
         name: Cuci piring?
@@ -1228,14 +560,14 @@ adventures:
                     print orang at _
                     ```
             5:
-                story_text: "Dengan `if` kamu bisa melakukan banyak hal menyenangkan dalam pengambilan pilihan dalam program tersebut. Kamu dapat membuat program kamu merespon pilihan yang sudah diberikan oleh komputer.\n\nDapatkah kamu melengkapi kode ini agar menampilkan 'Yahh' ketika yang dipilih adalah giliranmu dan 'Yeah!' untuk yang lainnya. \nJangan lupakan tanda kutip satu!"
+                story_text: "Dengan `if` kamu bisa melakukan banyak hal menyenangkan dalam pengambilan pilihan dalam program tersebut. Kamu dapat membuat program kamu merespon pilihan yang sudah diberikan oleh komputer.\n\nDapatkah kamu melengkapi kode ini agar menampilkan 'Yahh' ketika yang dipilih adalah giliranmu dan 'Yeah!' untuk yang lainnya. \nJangan lupakan tanda kutip satu!\n"
                 example_code: |
                     ```
                     orang is ibu, ayah, Emma, Sophie
                     pencucipirng is orang at random
                     if pencucipiring is Sophie print _ Yahh aku harus mencuci piring _ else print 'untungnya tidak ada piring yang perlu dicuci karena'  _ 'sudah mencucinya'
                     ```
-            6:
+            7:
                 story_text: Dengan `repeat`, kamu dapat mengulang bagian-bagian kode. Kamu dapat melakukan ini untuk menentukan siapa yang akan mencuci piring selama seminggu kedepan.
                 example_code: |
                     ```
@@ -1248,19 +580,8 @@ adventures:
 
                     Senin dan Selasa siap untuk Anda! Bisakah Anda menambahkan sisa minggu ini?
                     Dan… dapatkah Anda menemukan solusi ketika daftar Anda kosong?
-                example_code_2: |
-                    ```
-                    people = mom, dad, Emma, Sophie
-                    dishwasher = people {at} {random}
-                    {print} 'Monday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-                    dishwasher = people {at} {random}
-                    {print} 'Tuesday the dishes are done by: ' dishwasher
-                    {remove} dishwasher {from} people
-                    dishwasher = people {at} {random}
-                    ```
-            7:
-                story_text: Seberapa sering semua orang mencuci piring? Apakah adil? Kamu harus menghitungnya di level 6.
+            8:
+                story_text: "Seberapa sering semua orang mencuci piring? Apakah adil? Kamu harus menghitungnya di level 6.\n"
                 example_code: |
                     ```
                     orang is ibu, ayah, Emma, Sophie
@@ -1273,33 +594,6 @@ adventures:
 
                     Sekarang kamu dapat menyalin baris 3 ke 5 beberapa kali (misal 7 kali untuk seminggu penuh) untuk menghitung jumlah jatah cuci piring selama seminggu.
                     Apakah kamu mau membuat kodenya untuk seminggu penuh?
-            10:
-                story_text: |
-                    In this level you could make an even better dish washing shedule.
-    elif_command:
-        description: elif
-        levels:
-            17:
-                example_code: |
-                    ```
-                    prices = ['1 million dollars', 'an apple pie', 'nothing']
-                    your_price = prices[{random}]
-                    {print} 'You win ' your_price
-                    {if} your_price == '1 million dollars' :
-                        {print} 'Yeah! You are rich!'
-                    {elif} your_price == 'an apple pie' :
-                        {print} 'Lovely, an apple pie!'
-                    {else}:
-                        {print} 'Better luck next time..'
-                    ```
-    for_command:
-        description: for command
-        levels:
-            11:
-                story_text: |-
-                    In this level, we add a new form of the `{for}`. In earlier levels, we used `{for}` with a list, but we can also use `{for}` with numbers.
-                    We do that by adding a variable name, followed by  `{in}` `{range}`. We then write the number to start at, `{to}` and the number to end at.
-                    Try the example to see what happens! In this level again, you will need to use indentations in lines below the `{for}` statements.
     fortune:
         name: Peramal
         default_save_name: peramal
@@ -1320,7 +614,7 @@ adventures:
                     Obviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!
                     Take a look in level 2 to improve your fortune teller.
             3:
-                story_text: |-
+                story_text: |
                     Pada level 1 kamu telah membuat mesin peramal pertama kamu, tapi Hedy tidak bisa benar-benar meramal, hanya mengulang.
                     Pada level 2 kamu dapat menggunakan variabel dan perintah `at random` untuk membantu Hedy memilih sebuah jawaban untukmu. Lihatlah kode berikut sebagai contoh.
                 example_code: |
@@ -1337,8 +631,8 @@ adventures:
                 story_text_2: |
                     ### Exercises
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
-            5:
-                story_text: |-
+            6:
+                story_text: |
                     Pada level 4 kamu akan belajar untuk membuat kemungkinan jawabannya sesuai dengan keinginanmu, ketika menggunakan jasa sang peramal!
                     Dengan menggunakan `if` dan `else` kamu dapat memastikan bahwa kamu akan mendapatkan ramalan yang baik walaupun orang lain belum tentu.
                     Cek contoh berikut dan temukan caranya.
@@ -1349,7 +643,7 @@ adventures:
                     orang is ask 'Siapa kamu?'
                     if orang is Hedy print 'Kamu pasti menang!' else print 'Nasib buruk! Orang lain yang akan menang!'
                     ```
-            6:
+            7:
                 story_text: |-
                     Pada level 5 kamu dapat menggunakan matematika dalam ramalan sang peramal. Ini mengijinkan kamu untuk membuat formula (yang mungkin lucu) untuk meramal masa depan.
                     Sebagai contoh kamu dapat meramal seberapa kaya kamu dan berapa banyak anak yang akan kamu dapat ketika kamu dewasa.
@@ -1378,11 +672,10 @@ adventures:
                     hasil is hasil * sepakbola
                     print 'Kamu ' hasil ' persen pintar.'
                     ```
-            7:
-                story_text: Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
-                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang kamu lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk
-                    mengulang beberapa baris sekaligus.\n"
             8:
+                story_text: Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
+                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang kamu lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.\n"
+            9:
                 story_text: |-
                     Pada level 5 kamu telah belajar bagaimana menggunakan perintah `repeat` untuk membuat sang peramal menjawab tiga pertanyaan sekaligus, namun kita masih tidak bisa menampilkan pertanyaan-pertanyaannya sekaligus.
                     Pada level 7 masalah ini dapat diselesaikan, karena cara baru dalam penggunaan perintah `repeat`.
@@ -1397,85 +690,6 @@ adventures:
                         {print} pertanyaan
                         {print} 'Bola kristal saya menyatakan...' jawaban {at} {random}
                     ```
-            10:
-                story_text: |
-                    In this level you'll learn how to program the game MASH (mansion, apartement, shack, house). In this game you can predict for all the players at once, what their future will look like.
-                example_code: |
-                    ```
-                    houses = mansion, apartment, shack, house
-                    loves = nobody, a royal, their neighbour, their true love
-                    pets = dog, cat, elephant
-                    names = Jenna, Ryan, Jim
-                    {for} name {in} names
-                        {print} name ' lives in a ' houses {at} {random}
-                        {print} name ' will marry ' loves {at} {random}
-                        {print} name ' will get a ' pets {at} {random} ' as their pet.'
-                        {sleep}
-                    ```
-            12:
-                story_text: |
-                    In this level you can make your fortunes multiple words. Like in this example below:
-                example_code: |
-                    ```
-                    fortunes = 'you will be rich', 'you will fall in love', 'you will slip on a banana peel'
-                    {print} 'I will take a look in my crystall ball for your future.'
-                    {print} 'I see... I see...'
-                    {sleep}
-                    {print} fortunes {at} {random}
-                    ```
-    functions:
-        levels:
-            12:
-                example_code: |
-                    ```
-                    sides = 'left', 'right'
-                    limbs = 'hand', 'foot'
-                    colors = 'red', 'blue', 'green', 'yellow'
-
-                    {define} turn
-                        chosen_side = sides {at} {random}
-                        chosen_limb = limbs _
-                        chosen_color = colors _
-                        {print} chosen_side ' ' chosen_limb ' on ' chosen_color
-
-                    {print} 'Lets play a game of Twister!'
-                    {for} i {in} {range} 1 to _
-                        {call} turn
-                        {sleep} 2
-                    ```
-            13:
-                story_text: |
-                    Now that you've learned how to use functions, you'll learn how to use a function with an argument.
-                    An **argument** is a variable that is used within a function. It is not used outside the function.
-
-                    For example in this code we've programmed the first verse of the song 'My Bonnie is over the ocean'.
-                    In this example code the argument `place` is used. Place is a variable that is only used in the function, so an argument.
-                    To use `place` we have programmed the line `define song with place`.
-                    When the function is called, computer will replace the argument `place`, with the piece of text after `call song with`.
-
-                    ### Exercise
-                    The next verse of this song goes:
-
-                    Last night as I lay on my pillow
-                    Last night as I lay on my bed
-                    Last night as I lay on my pillow
-                    I dreamed that my Bonnie is dead
-
-                    Can you program this verse in the same way as the example?
-            14:
-                example_code: |
-                    ```
-                    {define} calculate_new_price {with} amount, percentage
-                        percentage = percentage / 100
-                        discount_amount = amount * percentage
-                        return amount - discount_amount
-
-                    old_price = {ask} 'How much is on the price tag?'
-                    discount = {ask} 'What percentage is the discount?'
-
-                    new_price = _ calculate_new_price {with} old_price, _
-                    {print} 'The new price is ' new_price ' dollar'
-                    ```
     haunted:
         name: Rumah berhantu
         default_save_name: rumahhantu
@@ -1488,45 +702,6 @@ adventures:
 
                     Pada level 1 kita memulai permainan rumah berhantu dengan membuat cerita menyeramkan dan menanyakan monster apa yang pemain akan lihat di rumah berhantu.
                 example_code: "```\nprint Kenapa aku ada disini?\nprint Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\nprint dan tiba-tiba semuanya menjadi gelap.\nprint Tapi bagaimana caranya aku tergeletak di lantai...?\nprint Kepalaku sakit seperti telah dipukul dengan tongkat pemukul basebal!\nprint Suara apa itu?\nprint Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\nprint Aku perlu keluar dari sini!\nprint Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\necho Aku memilih pintu \nprint ...?\n ```\n\nDapatkah kamu menyelesaikan cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
-                story_text_2: |
-                    ### Exercise
-                    Can you finish the scary story? Or make up your own haunted house story?
-            2:
-                story_text: |
-                    In this haunted house you can choose your monsters with emojis. Of course you could also use words.
-
-                    ```
-                    monster1 {is} 👻
-                    monster2 {is} 🤡
-                    monster3 {is} 👶
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster1
-                    {print} You run into the other room, but a monster2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster3 attacks you!
-                    ```
-                example_code: |
-                    ```
-                    monster_1 {is} 👻
-                    monster_2 {is} 🤡
-                    monster_3 {is} 👶
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster_3 attacks you!
-                    ```
-                example_code_2: |
-                    ```
-                    monster_1 {is} _
-                    monster_2 {is} _
-                    monster_3 {is} _
-                    {print} You enter the haunted house.
-                    {print} Suddenly you see a monster_1
-                    {print} You run into the other room, but a monster_2 is waiting there for you!
-                    {print} Oh no! Quickly get to the kitchen.
-                    {print} But as you enter monster_3 attacks you!
-                    ```
             3:
                 story_text: |-
                     Pada level 1 kamu telah membuat pendahuluan tentang permainan rumah berhantu kamu, tapi seperti yang mungkin sudah kamu ketahui, ceritanya selalu memiliki akhir yang mengerikan.
@@ -1536,17 +711,6 @@ adventures:
                 story_text: |-
                     Pada level 3 kamu belajar bagaimana menggunakan tanda kutip satu di permainan kamu.
                     Dapatkah kamu membuat permainan rumah berhantu kamu berjalan di level 3?
-                example_code: |
-                    ```
-                    {print} _Escape from the haunted house!_
-                    {print} _There are 3 doors in front of you..._
-                    choice {is} {ask} _Which door do you choose?_
-                    {print} _You picked door ..._ choice
-                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
-                    {print} _You see..._
-                    {sleep}
-                    {print} monsters {at} {random}
-                     ```
             5:
                 story_text: |-
                     Sampai pada level ini permainan rumah berhantu kamu pasti menanyakan ke pemain tentang pintu mana yang akan dipilih, namun seperti yang mungkin kamu sadari, mereka tidak harus menjawab dengan benar.
@@ -1564,8 +728,8 @@ adventures:
                     if pintuterpilih is pintutepat print 'Bagus! Kamu berhasil kabur!'
                     else print 'Oh tidak! Kamu dimakan oleh ... ' monster {at} {random}
                     ```
-            9:
-                story_text: Pada level 7 kamu bisa mengulangi beberapa baris kode, memungkinkan kamu untuk membuat permainan rumah berhantu kamu semakin interaktif.
+            10:
+                story_text: "Pada level 7 kamu bisa mengulangi beberapa baris kode, memungkinkan kamu untuk membuat permainan rumah berhantu kamu semakin interaktif.\n"
                 example_code: |
                     ```
                     print 'Kabur dari rumah berhantu!'
@@ -1587,156 +751,11 @@ adventures:
                     if pemain is hidup
                         print 'Bagus! Kamu berhasil bertahan hidup!'
                     ```
-
                     Sekarang permainan ini jadi cukup sulit untuk dimenangkan. Dapatkah kamu membuat permainan ini lebih mudah?
                     Sebagai contoh dengan hanya memiliki 1 pintu yang salah dan 2 pintu benar ketimbang 2 pintu salah dan 1 pintu benar?
-            11:
-                story_text: Pada level 8 kita telah mengubah perintah `repeat` dan menambahkan beberapa baris ke kode permainan rumah berhantu kita, yang menginformasikan ke pemain lokasi ruangan mereka.
-                example_code: |
-                    ```
-                    print 'Kabur dari rumah berhantu!'
-                    pemain is hidup
-                    pintu is 1, 2, 3
-                    monster is zombie, vampir, laba-laba besar
-                    for i in range 1 to 3
-                        if pemain is hidup
-                            pintubenar is pintu {at} {random}
-                            print 'Ruangan ' i
-                            print 'Ada 3 pintu di depan kamu...'
-                            pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
-                            if pintuterpilih is pintubenar
-                                print 'Tidak ada monster disini!'
-                            else
-                                print 'Kamu dimakan oleh ' monster {at} {random}
-                                pemain is meninggal
-                        else
-                            print 'PERMAINAN BERAKHIR'
-                    if pemain is hidup
-                        print 'Bagus! Kamu berhasil bertahan hidup!'
-                    ```
-    if_command:
-        description: Introducing the if command
-        levels:
-            9:
-                story_text: |
-                    In this level you can also put an {if} command inside another {if} command.
-    in_command:
-        description: Introducing the in command
-        levels:
-            5:
-                example_code_2: |
-                    ```
-                    animals is dog, cow, sheep
-                    answer is ask 'What is your favorite animal?'
-                    _ answer _ animals _ 'Mine too!'
-                    _ _ 'My favorite animals are dogs, cows and sheep'
-                    ```
-    is_command:
-        description: introducing is command
-        levels:
-            2:
-                story_text_2: |
-                    ### Exercise
-                    Time to make your own variables!
-                    In the example code we made an example of the variable `favorite_animal`. In line 1 the variable is set, and in line 2 we haved used the variable in a print command.
-                    Firstly, finish our example by filling in your favorite animal on the blank. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the {is} command. Then use it with a {print} command, just like we did.
-            14:
-                example_code: |
-                    ```
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
-                    ```
-                example_code_3: |
-                    ```
-                    name = {ask} 'What is your name?'
-                    {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
-                    ```
-
-                    {if} age < 13
-                        {print} 'You are younger than me!'
-                    {else}
-                        {print} 'You are older than me!'
-    language:
-        default_save_name: language
-        levels:
-            5:
-                story_text: |
-                    Make your own program to practice your vocabulary in a new language.
-
-                    ```
-                    {print} 'Learn French!'
-                    cat {is} {ask} '🐱'
-                    {if} cat {is} chat {print} 'Terrific!'
-                    {else} {print} 'No, cat is chat'
-                    frog {is} {ask} '🐸'
-                    {if} frog {is} grenouille {print} 'Super!'
-                    {else} {print} 'No, frog is grenouille'
-                    ```
-    maths:
-        levels:
-            6:
-                example_code: |
-                    ```
-                    {print} '5 plus 5 is ' 5 + 5
-                    {print} '5 minus 5 is ' 5 - 5
-                    {print} '5 times 5 is ' 5 * 5
-                    ```
-            12:
-                example_code_2: |
-                    ```
-                    a = 'Hello '
-                    b = 'world!'
-                    {print} a + b
-                    ```
-
-                    {print} 2.5 + 2.5
-    music:
-        levels:
-            6:
-                story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\n This calls for musical maths! Try out the example code a couple of times with different starting numbers. \nThen, see if you can compose a song using the numbers.\n"
     parrot:
         levels:
-            1:
-                story_text_2: |
-                    ### Exercise
-                    Can you make the parrot ask a different question? Fill in the blanks in the example!
-            2:
-                story_text: |
-                    Create your own online pet parrot that will copy you!
-                example_code: |
-                    ```
-                    {print} Im Hedy the parrot
-                    name {is} {ask} whats your name?
-                    {print} name
-                    {sleep}
-                    {print} squawk
-                    {sleep}
-                    {print} name
-                    ```
-                story_text_2: |
-                    ### Exercise
-                    You can use variables to make the parrot say more than only your name. Can you complete this code?
-            3:
-                story_text: |
-                    Teach your parrot a new word with `{add}`.
-                example_code: |
-                    ```
-                    words {is} squawk, Hedy
-                    {print} Train your parrot!
-                    new_word {is} {ask} Which word do you want to teach them?
-                    {add} new_word {to_list} words
-                    {print} 🧒 Say new_word , Hedy!
-                    {print} 🦜 words {at} {random}
-                    ```
-            4:
-                story_text: |
-                    In this level we have to use quotation marks with the commands `{ask}` and `{print}`.
-                    Can you complete the code by adding quotation marks?
             5:
-                story_text: |
-                    Reward your parrot {if} it says the correct word!
                 example_code: |
                     ```
                     kata-kata {is} mengoceh, Hedy
@@ -1751,20 +770,7 @@ adventures:
                     ```
     piggybank:
         levels:
-            12:
-                story_text: |
-                    In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
-                example_code: |
-                    ```
-                    {print} 'The digital piggy bank'
-                    wish = {ask} 'What would you like to buy?'
-                    price = {ask} 'How much does that cost?'
-                    saved = {ask} 'How much money have you saved already?'
-                    allowance = {ask} 'How much pocket money do you get per week?'
-                    to_save = price - saved
-                    weeks = to_save / allowance
-                    {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
-            14:
+            15:
                 example_code: |
                     ```
                     _ hitung_anggaran {with} keinginan, uang, tunjangan
@@ -1783,62 +789,6 @@ adventures:
 
                     {call} _
                     ```
-    pressit:
-        levels:
-            9:
-                story_text: |
-                    Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
-
-                    ### Exercise
-                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.
-                    **(extra)** Clear the screen after each letter, and show the user how many points they have scored.
-    print_command:
-        levels:
-            18:
-                example_code_2: |
-                    ```
-                    temperature = 25
-                    {print}('It is ', temperature, ' degrees outside')
-                    ```
-
-                    {print}('My name is ', name)
-    random_command:
-        levels:
-            16:
-                story_text: |-
-                    We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code. The second part of the example code shows you that we can also match 2 lists using the variable i.
-    repeat_command:
-        description: repeat command
-        levels:
-            7:
-                story_text: |
-                    ## Repeat! Repeat! Repeat!
-                    Level 7 adds the `{repeat}` command.  `{repeat}` can be used to execute one line of code multiple times. Like this:
-
-                    ### Exercise
-                    Play around with the repeat command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?
-            9:
-                story_text: |
-                    Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...
-                    Good news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.
-                example_code: |
-                    ```
-                    answer = {ask} 'Are you ready to learn something new?'
-                    {if} answer {is} yes
-                        {print} 'Great! You can learn to use the repeat command in the if command!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                    {else}
-                        {print} 'Maybe you should practice some more in the previous level'
-    repeat_command_2:
-        description: repeat command 2
-        levels:
-            7:
-                story_text_2: |
-                    Another interesting thing you can so with the `{repeat}` command is using variables to set the amount of times something should be repeated. In the example code you can see that we first ask the person how old they are.
-                    Then, in line 3, the question is repeated 'age' times. So we have used the variable 'age' with the `{repeat}` command.
     restaurant:
         name: Rumah makan
         default_save_name: rumahmakan
@@ -1860,7 +810,7 @@ adventures:
 
                     Dapatkah kamu menambahkan beberapa baris di kode program rumah makan kamu? Misal, dapatkah kamu menanyakan pembeli apa yang mau mereka minum, memberitahukan harga, atau menyampaikan 'selamat menikmati'?
             2:
-                story_text: |-
+                story_text: |
                     Pada level 2 kamu bisa mengembangkan kode rumah makan kamu dengan menggunakan variabel. Pada level 1 Hedy hanya dapat mengulang pesanan dan hanya mengingat pesanan terakhir.
                     Sekarang kamu dapat menggunakan variabel dan Hedy dapat mengingat makanan dan minuman yang dipesan!
                 example_code: |
@@ -1875,9 +825,6 @@ adventures:
                     print Terima kasih atas pesanannya.
                     print makanan dan minuman kamu akan segera tersedia!
                     ```
-                story_text_2: |
-                    ### Exercise
-                    Can you make this code more elaborate? For example by adding drinks to the order? Or...?
             3:
                 story_text: |-
                     Punya masalah untuk menentukan apa yang akan kamu makan untuk malam? Kamu dapat meminta Hedy untuk memilihkannya untukmu!
@@ -1901,24 +848,7 @@ adventures:
                     ```
 
                     Dapatkan kamu memikirkan hal apa yang bisa membuat kode rumah makan kamu semakin menarik?
-                story_text_2: |
-                    Does your costumer have any allergies or do they dislike certain dishes? Then you can use the `{remove}`command to remove it from your menu.
-                example_code_2: |
-                    ```
-                    {print} Mystery milkshake
-                    flavors {is} strawberry, chocolate, vanilla
-                    allergies {is} {ask} Are you allergic to any falvors?
-                    {remove} allergies {from} flavors
-                    {print} You get a flavors {at} {random} milkshake
-                    ```
             4:
-                story_text: |-
-                    ### Exercise
-                    Add the quotation marks to this code to make it work! Be careful: variables should not be in quotation marks.
-                    Then, use the `{clear}` command to only show one line at a time in your output screen.
-
-                    ### Exercise 2
-                    Go back to the previous level and copy your restaurant code. Make the code work in this level by adding quotation marks in the right spots and add some `{clear}` commands.
                 example_code: |
                     ```
                     _ Add the quotation marks to this code _
@@ -1932,8 +862,8 @@ adventures:
                     print Terima kasih atas pesanannya.
                     print makanan  dan minuman kamu akan segera tersedia!
                     ```
-            5:
-                story_text: |-
+            6:
+                story_text: |
                     Pada level 4 perintah `if` memungkinkan kamu untuk menanyakan pertanyaan ke pembeli dan memberi respon yang berbeda bergantung pada jawaban yang diberikan.
                     Pada contoh dibawah, kamu dapat melihat bahwa kamu dapat menanyakan pembeli apakah mereka ingin tahu menu spesial dan Hedy dapat merespon sesuai dengan jawaban yang diberikan.
                 example_code: |
@@ -1954,7 +884,7 @@ adventures:
                     ```
 
                     Dapatkah kamu memikirkan pertanyaan-pertanyaan lain untuk pembeli ketika mereka memesan makanan, dan membuat respon yang bervariasi bergantung dari jawaban mereka?
-            6:
+            7:
                 story_text: Pada level 5 kamu dapat menggunakan matematika untuk menghitung total harga dari pesanan pembeli. Ini dapat membuat rumah makan virtual kamu semakin realistis.
                 example_code: |
                     Kamu dapat membuat kode rumah makan sederhana, seperti ini
@@ -1971,31 +901,20 @@ adventures:
                     print 'Itu akan seharga ' harga ' rupiah'
                     print 'Terima kasih, selamat menikmati!'
                     ```
-            7:
-                story_text: |-
+            8:
+                story_text: |
                     Pada level 5 kamu telah belajar bagaimana menggunakan perintah `repeat` untuk mengulang satu baris kode beberapa kali.
                     Kamu dapat menggunakan itu di rumah makan kamu dengan cara menanyakan ke beberapa orang apa yang mau mereka makan, seperti ini:
-
+                example_code: |
                     ```
                     print 'Selamat datang di rumah makan Hedy!'
                     orang is ask 'Berapa banyak orang yang akan datang hari ini?'
                     repeat orang times makanan is ask 'Apa yang ingin kamu makan?'
                     print 'Terima kasih atas pesanannya! Makanan akan segera datang!'
                     ```
-
-                    Pada level 5 kamu dapat menanyakan ke beberapa orang tentang apa yang mau dia makan namun kamu tidak bisa menampilkan pesanannya secara terpisah karena kamu hanya bisa mengulang satu baris kode.
-                    Pada level 7 kamu akan bisa mengulang beberapa baris kode sekaligus, memungkinkan kamu untuk menanyakan beberapa pesanan dan menampilkannya juga.
-                example_code: |
-                    ```
-                    {print} 'Welcome to Hedys restaurant!'
-                    people = {ask} 'How many people are joining us today?'
-                    {repeat} people times food = {ask} 'What would you like to eat?'
-                    {print} 'Thanks for your order! Its coming right up!'
-                    ```
-            9:
+            10:
                 story_text: |-
                     Pada level 7 kamu bisa membuat rumah makan virtual kamu lebih detil dengan mengulang beberapa baris kode. Seperti ini:
-
                     ```
                     print 'Selamat datang di rumah makan Hedy!'
                     orang is ask 'Berapa banyak orang yang akan bergabung dengan kita?'
@@ -2013,7 +932,6 @@ adventures:
                     print 'Harganya akan menjadi ' harga ' rupiah'
                     print 'Selamat menikmati!'
                     ```
-
                     Tentu, kode kamu dapat diperdetil dengan penambahan jenis makanan dan minuman pada menu. Jadi, silakan menambahkan pilihan-pilihan tersebut sesuai dengan keinginanmu!
                 example_code: |
                     ```
@@ -2037,83 +955,13 @@ adventures:
                     {print} 'Itu akan menjadi ' harga ' dolar'
                     {print} 'Selamat menikmati makananmu!'
                     ```
-            10:
-                story_text: |
-                    In this level you'll learn how to easily {ask} your guests' orders in a short code.
-                example_code: |
-                    ```
-                    courses = appetizer, main course, dessert
-                    {for} course {in} courses
-                        food = {ask} 'What would you like to eat as your ' course '?'
-                        {print} food ' will be your ' course
-                    ```
-                story_text_2: |
-                    Of course, you could also order for multiple people!
-                example_code_2: |
-                    ```
-                    courses = appetizer, main course, dessert
-                    names = Timon, Onno
-                    {for} name {in} names
-                        {for} course {in} courses
-                            food = {ask} name ', what would you like to eat as your ' course '?'
-                            {print} name ' orders ' food ' as their ' course
-                    ```
-            11:
-                example_code: |
-                    ```
-                    print 'Selamat datang di rumah makan Hedy!'
-                    orang is ask 'For how many orang would you like to order?'
-                    for i in range 1 to orang
-                        print 'Nomor pesanan ' i
-                        makanan is ask 'Apa yang ingin kamu makan?'
-                        print makanan
-                        if makanan is kentang
-                            saus is ask 'Saus apa yang kamu inginkan untuk kentang itu?'
-                            print saus
-                        minuman is ask 'Apa yang ingin kamu minum?'
-                        print minuman
-                    harga is 40000 * orang
-                    print 'Harganya akan menjadi ' harga ' rupiah!'
-                    ```
-            12:
-                story_text: |
-                    From this level on you can use decimal numbers to make you menu more realistic.
-                example_code: |
-                    ```
-                    price = 0
-                    food = {ask} 'What would you like to order?'
-                    drink = {ask} 'What would you like to drink?'
-                    {if} food {is} 'hamburger'
-                        price = price + 6.50
-                    {if} food {is} 'pizza'
-                        price = price + 5.75
-                    {if} drink {is} 'water'
-                        price = price + 1.20
-                    {if} drink {is} 'soda'
-                        price = price + 2.35
-                    {print} 'That will be ' price ' dollar, please'
-                    ```
-            13:
-                story_text: |
-                    In this level we can use the new commands to upgrade our restaurant.
-                    We use `{and}` to see {if} two things are both the case.
-                example_code: |
-                    ```
-                    price = 10
-                    food = {ask} 'What would you like to eat?'
-                    drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' {and} drinks {is} 'juice'
-                        {print} 'Thats our discount menu'
-                        price = price - 3
-                    {print} 'That will be ' price ' dollars'
-                    ```
     rock:
         name: Batu, gunting, kertas
         default_save_name: Batu
         description: Buat permainan batu gunting kertas sendiri
         levels:
             1:
-                story_text: |-
+                story_text: |
                     Pada level 1 kamu dapat memulai dengan permainan batu gunting kertas
 
                     Dengan perintah `ask` kamu bisa mengambil salah satu pilihan, dan dengan `echo` kamu bisa menampilkan pilihan tersebut.
@@ -2152,120 +1000,13 @@ adventures:
                     ```
             5:
                 story_text: "Pada level 4 kamu bisa menentukan siapa yang menang. \nUntuk hal itu, kamu memerlukan perintah `if`\n\nSimpan pilihan kamu dengan sebuah nama favoritmu dan pilihan komputer dengan nama pilihan komputer.\nLalu kamu bisa menggunakan `if` untuk melihat apakah kedua pilihan tersebut sama atau berbeda.\nDapatkah kamu menyelesaikan kode ini?"
-                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\n pil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri. \n"
-            9:
-                story_text: |
-                    In this level you can program the whole rock, paper, scissors game by nesting the {if}-commands. Can you finish the code?
-                example_code: |
-                    ```
-                    choices = rock, paper, scissors
-                    your_choice = {ask} 'What do you choose?'
-                    {print} 'You choose ' your_choice
-                    computer_choice = choices {at} {random}
-                    {print} 'The computer chooses ' computer_choice
-                    {if} computer_choice {is} your_choice
-                        {print} 'Tie'
-                    {if} computer_choice {is} rock
-                        {if} your_choice {is} paper
-                            {print} 'You win!'
-                        {if} your_choice {is} scissors
-                            {print} 'You lose!'
-                    # finish this code
-                    ```
-            10:
-                story_text: |
-                    Feeling too lazy to play the game yourself? Let Hedy play it for you!
-                example_code: |
-                    ```
-                    choices = rock, paper, scissors
-                    players = Marleen, Michael
-                    {for} player {in} players
-                         {print} player ' chooses ' choices {at} {random}
-                    ```
-            13:
-                story_text: |
-                    With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code below and try to finish it.
-                example_code: |
-                    ```
-                    options = 'rock', 'paper', 'scissors'
-                    your_choice = {ask} 'What do you choose?'
-                    computer_choice = options {at} {random}
-                    {print} 'You choose ' your_choice
-                    {print} 'The computer chooses ' computer_choice
-                    {if} computer_choice {is} your_choice
-                        {print} 'Tie'
-                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
-                        {print} 'You win!'
-                    {if} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
-                        {print} 'The computer wins!'
-                    ```
-            15:
-                example_code: |
-                    ```
-                    won = 'no'
-                    options = 'rock', 'paper', 'scissors'
-                    {while} won == 'no'
-                        your_choice = {ask} 'What do you choose?'
-                        computer_choice = options {at} {random}
-                        {print} 'you chose ' your_choice
-                        {print} 'the computer chose ' computer_choice
-                        {if} computer_choice == your_choice
-                            {print} 'Tie!'
-                        {if} computer_choice == 'rock' {and} your_choice == 'scissors'
-                            {print} 'You lose!'
-                        {if} computer_choice == 'rock' {and} your_choice == 'paper'
-                            {print} 'You win!'
-                            won = 'yes'
-    rock_2:
-        levels:
-            2:
-                story_text: |
-                    Now that you have learned how to use the `{ask} command, you can make your rock, paper, scissors code interavtive too!
-
-                    ### Exercise
-                    Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
-                example_code: |
-                    ```
-                    choice is _
-                    {print} I choose choice
-                    ```
-    secret:
-        default_save_name: language
-        levels:
-            12:
-                story_text: |
-                    In this adventure you can create your own super spy code. Encode a message that only the right agent can decipher.
-                    If the enemy tries to crack the code, they will get some false info to waste their time.
-                example_code: |
-                    ```
-                    name {is} {ask} 'What is your name?'
-                    {if} name {is} '_'
-                        a {is} 'Go to the airport '
-                    {else}
-                        a {is} 'Go to the trainstation '
-                    password {is} {ask} 'What is the password?'
-                    {if} password {is} _
-                        b {is} 'tomorrow at 02.00'
-                    {else}
-                        b {is} 'today at 10.00'
-                    {print} _ _ _
-                    ```
-            13:
-                story_text: |
-                    The code you made in the previous level can be made a lot easier in this one with the `{and}` command.
-    sleep_command:
-        description: introducing sleep command
-        levels:
-            2:
-                story_text: |
-                    ## The sleep command
-                    Another new command in this level is `{sleep}`, which pauses your program for a second. If you type a number behind the {sleep} command, the program pauses for that amount of seconds.
+                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\n pil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri.\n"
     songs:
         name: Nyanyikan sebuah lagu!
         default_save_name: Lagu
         description: Tampilkan sebuah lagu
         levels:
-            6:
+            7:
                 story_text: |-
                     Lagu-lagu sering memiliki banyak pengulangan. Sebagai contoh... Baby Shark! Jika mau menyanyikannya, kamu mengucapkan hal yang sama berkali-kali.
 
@@ -2282,18 +1023,8 @@ adventures:
                     ```
 
                     Setelah Baby Shark, kamu juga dapat membuat program untuk menyanyikan lagu lain. Ada banyak lagu yang mengulang-ulang kalimat.
-                example_code_2: |
-                    ```
-                    number = 6
-                    number = number - 1
-                    print number ' little monkeys jumping on the bed'
-                    print 'One fell off and bumped his head'
-                    print 'Mama called the doctor and the doctor said'
-                    print 'NO MORE MONKEYS JUMPING ON THE BED!'
-                    sleep
-                    ```
-            7:
-                story_text: Lagu-lagu sering memiliki banyak pengulangan. Terkadang pengulangannya didasarkan dari perhitungan. Misal, di sebuah lagu 'Botol'. Kamu dapat membuat program untuk menyanyikan lagu tersebut dengan sedikit matematika.
+            8:
+                story_text: "Lagu-lagu sering memiliki banyak pengulangan. Terkadang pengulangannya didasarkan dari perhitungan. Misal, di sebuah lagu 'Botol'. Kamu dapat membuat program untuk menyanyikan lagu tersebut dengan sedikit matematika.\n"
                 example_code: |
                     ```
                     reff is 99
@@ -2312,8 +1043,8 @@ adventures:
                     ` repeat 3 times print 'Baby Shark Tutududududu`
 
                     Tapi kamu akan lihat pada materi ini, terkadang kamu perlu untuk mengulang beberapa baris bersamaan. Ini bisa dilakukan dengan menyalin ulang, namun itu merepotkan. Pada level 7 kamu akan belajar bagaimana cara melakukannya dengan lebih mudah.
-            8:
-                story_text: Pada level 6, kamu menuliskan lagu 'botol'. Kamu membuat sebuah reff lalu mengulangnya hingga 99 kali. Pada level 7, kamu dapat melakukannya hanya dengan menambahkan satu baris program.
+            9:
+                story_text: "Pada level 6, kamu menuliskan lagu 'botol'. Kamu membuat sebuah reff lalu mengulangnya hingga 99 kali. Pada level 7, kamu dapat melakukannya hanya dengan menambahkan satu baris program.\n"
                 example_code: |
                     ```
                     reff is 99
@@ -2324,70 +1055,12 @@ adventures:
                         reff is reff - 1
                         print reff ' botol di dinding'
                     ```
-            10:
-                story_text: |
-                    In this level you can easily make the childrens' song 'Five little monkeys'. Can you make the last chorus?
-                    You can also make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
-                    Or you can make Old MacDonald with all the different animals.
+            11:
                 example_code: |
                     ```
                     keluarga = bayi, ibu, ayah, nenek, kakek
                     _ _ _ _
                       {print} _
-                    ```
-                story_text_2: |
-                    ### Exercise 2
-                    Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
-
-                    **(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
-            11:
-                story_text: |
-                    In this level you can use the `{for} i {in} {range}` command to make songs that use counting.
-                example_code: |
-                    ```
-                    {for} i {in} {range} 5 {to} 1
-                        {print} i ' little monkeys jumping on the bed'
-                        {print} 'One fell off and bumped his head'
-                        {print} 'Mama called the doctor and the doctor said'
-                        {if} i {is} 1
-                            {print} 'PUT THOSE MONKEYS RIGHT TO BED!'
-                        {else}
-                            {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
-                    ```
-            12:
-                story_text: |
-                    In this song we can make it even easier to program '{if} you're happy and you know it, clap your hands'. Because we can put all of the actions in a variable, check it out:
-                example_code: |
-                    ```
-                    actions = 'clap your hands', 'stomp your feet', 'shout Hurray!'
-                    {for} action {in} actions
-                        {for} i {in} {range} 1 {to} 2
-                            {print} '{if} youre happy and you know it'
-                            {print} action
-                        {print} '{if} youre happy and you know it and you really want to show it'
-                        {print} '{if} youre happy and you know it'
-                        {print} action
-                    ```
-            16:
-                story_text: |
-                    Di level ini, Anda dapat memprogram lagu seperti OldMacDonald dengan lebih cepat. Anda dapat menghubungkan hewan yang tepat dengan suara yang tepat hanya dengan menempatkannya di tempat yang sama dalam daftar.
-                    Pelaut Mabuk juga dengan cepat dibuat di level ini. Anda hanya membutuhkan 8 baris untuk keseluruhan lagu, lihatlah!
-
-                    ### Latihan
-                    Selesaikan lagu Old MacDonald dengan mengatur variabel `animal` menjadi `animals[i]` dan `sound` menjadi `sounds[i]`.
-    songs_2:
-        levels:
-            12:
-                example_code: |
-                    ```
-                    {define} twinkle
-                        {print} 'Twinkle'
-                        {print} '...'
-
-                    {call} twinkle
-                    {print} 'Up above the world so high'
-                    {print} 'Like a diamond in the sky'
-                    {call} _
                     ```
     turtle:
         name: Kura-kura
@@ -2395,7 +1068,7 @@ adventures:
         description: Buat gambar milikmu sendiri
         levels:
             1:
-                story_text: |-
+                story_text: |
                     Pada level 1 kamu juga dapat menggunakan Hedy untuk menggambar. Dengan cara menggabungkan belokan dan garis, kamu bisa membuat kotak atau tangga!
 
                     Gunakan `forward` untuk membentuk garis lurus kedepan. Angka dibelakangnya menyatakan seberapa jauh kura-kura kamu akan bergerak. `turn right` membuat kura-kura menghadap kanan searah jarum jam. `turn left` membuat kura-kura menghadap kiri berlawanan arah jarum jam.
@@ -2417,23 +1090,8 @@ adventures:
                     turn sudut
                     forward 25
                     ```
-                story_text_2: |
-                    Also, in level 1 the turtle could only turn left or right. That is a bit boring!
-                    In level 2 he can point his nose in all directions.
-
-                    Use 90 to turn a quarter. We call this degrees. A full turn is 360 degrees.
-                    Can you make a figure with this code? Maybe a triangle or a circle?
-                example_code_2: |
-                    ```
-                    {print} Drawing figures
-                    angle {is} 90
-                    {turn} angle
-                    {forward} 25
-                    {turn} angle
-                    {forward} 25
-                    ```
             3:
-                story_text: |-
+                story_text: |
                     Kamu juga dapat menggunakan `random` ketika menggambar dengan kura-kura. Pergerakan acak akan membuat sang kura-kura bergerak dalam jalur tidak terduga untuk setiap eksekusi program.
                     Gunakan `at random` untuk memilih nilai dari sebuah list. Kamu dapat menyalin baris 2 dan 3 sehingga membentuk jalur pergerakan yang lebih acak.
                 example_code: |
@@ -2443,7 +1101,7 @@ adventures:
                     forward 25
                     ```
             4:
-                story_text: Pada level 3 kamu harus menggunakan tanda kutip satu pada perintah `print` dan `ask`. Begitu juga ketika menggambar!
+                story_text: "Pada level 3 kamu harus menggunakan tanda kutip satu pada perintah `print` dan `ask`. Begitu juga ketika menggambar!\n"
                 example_code: |
                     ```
                     print 'Menggambar bentuk'
@@ -2454,7 +1112,9 @@ adventures:
                     forward 25
                     ```
             5:
-                story_text: 'Pada level 4 kita akan mengambil sebuah pilihan dengan `if`. Sebagai contoh: mengambil satu dari kumpulan bentuk.'
+                story_text: 'Pada level 4 kita akan mengambil sebuah pilihan dengan `if`. Sebagai contoh: mengambil satu dari kumpulan bentuk.
+
+                    '
                 example_code: |
                     {print} 'Menggambar Bentuk'
                     bentuk {is} {ask} 'Apakah Anda ingin persegi atau segitiga?'
@@ -2468,14 +1128,7 @@ adventures:
                     {forward} 25
                     {turn} sudut
                     {forward} 25
-                example_code_2: |
-                    ```
-                    direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
-                    if direction is left turn _
-                    if direction is right turn _
-                    forward 100
-                    ```
-            6:
+            7:
                 story_text: |-
                     Pada level 6 kamu dapat menggunakan perhitungan untuk menggambar bentuk-bentuk yang berbeda.
                     Kamu mungkin pernah belajar di sekolah bahwa berputar satu lingkaran penuh itu 360 derajat. Jika tidak, sekarang kamu telah mengetahuinya!
@@ -2498,8 +1151,8 @@ adventures:
                     forward 50
                     turn sudut
                     ```
-            8:
-                story_text: |-
+            9:
+                story_text: |
                     Sekarang karena kita sudah bisa mengulang beberapa baris, kita bisa menggambar bentuk dengan lebih mudah.
                     Kita hanya perlu mengisi sudut sekali dan menggunakan variabel tersebut dalam `repeat`.
                 example_code: |
@@ -2511,99 +1164,5 @@ adventures:
                     ```
                 story_text_2: Selain itu, kita juga bisa meningkatkan kemampuan program untuk menggambar banyak bentuk. Dapatkah kamu tebak seberapa jauh sang kura-kura perlu berbelok disini? Selesaikan kodenya dan kamu dapat menggambar bentuk poligon apapun yang kamu suka!
                 example_code_2: "```\njumlahsudut = {ask} 'Berapa banyak sudut yang kamu mau?'\nsudut = 360 / jumlahsudut \n{repeat} jumlahsudut {times}\n    {turn} _\n    {forward} _\n```\n"
-            9:
-                story_text: |
-                    Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
-
-                    ### Exercise 1
-                    This code creates three black triangles, change that into five pink squares.
-
-                     **(extra)** Create a figure of your own choosing consisting of at least two different shapes types.
-            10:
-                story_text: |
-                    In this level you can make the turtle draw a figure.
-                    The turtle will travel the distances in the list, one by one, making bigger and bigger steps.
-                    ### Exercise 1
-                    Add a 90 degree turn in the loop, so that a spiral is drawn.
-                    Add at least 5 numbers to the list, so the spiral grows larger.
-                     **(extra)** can you change the spiral into another shape? Experiment with numbers for the turn!
-                    ### Exercise 2
-                    The spiral is drawn outwards, make it go inwards?
-    turtle_draw_it:
-        levels:
-            9:
-                example_code: |
-                    Hint for the nested squares:
-                    ```
-                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
-                    distance = 120
-                    repeat 5 times
-                    _
-                    ```
-                    Hint for the flags:
-                    ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
-                        color_1 = red
-                        color_2 = white
-                        color_3 = blue
-                    ```
-            10:
-                example_code: |
-                    Hint Nested Hexagon:
-                    ```
-                    distances = 100, 80, 60, 40, 20
-                    {for} distance {in} distances
-                    _
-                    ```
-
-                    Hint Traffic Lights:
-                    ```
-                    colors = red, yellow, green
-                    {for} chosen_color {in} colors
-                        color _
-                        {repeat} _
-                    ```
-            12:
-                story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
-                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-                    </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
-                example_code: |
-                    ```
-                    {define} draw_a_square
-                    _
-
-                    {color} white
-                    {turn} -90
-                    {forward} 300
-                    {turn} 180
-
-                    {for} i {in} {range} 1 {to} 5
-                        {color} gray
-                        {forward} 100
-                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
-                        chosen_color = {ask} 'In which color?'
-                        {color} chosen_color
-                        {if} shape = 'square'
-                            {call} draw_a_square
-                    ```
-    while_command:
-        description: while
-    years:
-        description: Countdown to the new year!
-        levels:
-            11:
-                story_text: |
-                    In this level you can use the `{for} i {in} {range}` command to countdown to the New Year.
-
-                    ### Exercise
-                    Fill in the blanks and make the code work!
-                example_code: |
-                    ```
-                    for _ in _ 10 to 1
-                        {print} i
-                    {print} 'Happy New Year!'
-                    ```
+    pressit:
+        default_save_name: Ditekan

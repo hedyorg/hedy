@@ -1,25 +1,22 @@
-import json
 import logging
 import os
-import re
 import urllib
 from functools import wraps
 
 import bcrypt
 import boto3
-import requests
 from botocore.exceptions import ClientError as email_error
 from botocore.exceptions import NoCredentialsError
-from flask import g, request, session, redirect
+from flask import request, session, redirect
 from flask_babel import force_locale
 from website.flask_helpers import gettext_with_fallback as gettext
+from website.flask_hedy import g_db
 
 import utils
 from config import config
 from safe_format import safe_format
 from utils import is_debug_mode, timems, times
 from website import querylog
-
 TOKEN_COOKIE_NAME = config["session"]["cookie_name"]
 
 # A special value in the session, if this is set and we hit a 403 on the
@@ -34,42 +31,6 @@ RESET_LENGTH = config["session"]["reset_length"] * 60
 
 
 env = os.getenv("HEROKU_APP_NAME")
-
-MAILCHIMP_API_URL = None
-MAILCHIMP_API_HEADERS = {}
-if os.getenv("MAILCHIMP_API_KEY") and os.getenv("MAILCHIMP_AUDIENCE_ID"):
-    # The domain in the path is the server name, which is contained in the Mailchimp API key
-    MAILCHIMP_API_URL = (
-        "https://"
-        + os.getenv("MAILCHIMP_API_KEY").split("-")[1]
-        + ".api.mailchimp.com/3.0/lists/"
-        + os.getenv("MAILCHIMP_AUDIENCE_ID")
-    )
-    MAILCHIMP_API_HEADERS = {
-        "Content-Type": "application/json",
-        "Authorization": "apikey " + os.getenv("MAILCHIMP_API_KEY"),
-    }
-
-
-def mailchimp_subscribe_user(email, country):
-    # Request is always for teachers as only they can subscribe to newsletters
-    request_body = {"email_address": email, "status": "subscribed", "tags": [country, "teacher"]}
-    r = requests.post(MAILCHIMP_API_URL + "/members", headers=MAILCHIMP_API_HEADERS, data=json.dumps(request_body))
-
-    subscription_error = None
-    if r.status_code != 200 and r.status_code != 400:
-        subscription_error = True
-    # We can get a 400 if the email is already subscribed to the list. We should ignore this error.
-    if r.status_code == 400 and not re.match(".*already a list member", r.text):
-        subscription_error = True
-    # If there's an error in subscription through the API, we report it to the main email address
-    if subscription_error:
-        send_email(
-            config["email"]["sender"],
-            "ERROR - Subscription to Hedy newsletter on signup",
-            email,
-            "<p>" + email + "</p><pre>Status:" + str(r.status_code) + "    Body:" + r.text + "</pre>",
-        )
 
 
 @querylog.timed
@@ -141,7 +102,7 @@ def refresh_current_user_from_db():
     user = session.get("user", {"username": "", "email": ""})
     username = user["username"]
     if username:
-        db_user = g.db.user_by_username(username)
+        db_user = g_db().user_by_username(username)
         if not db_user:
             raise RuntimeError(f"Cannot find current user in db anymore: {username}")
         remember_current_user(db_user)
@@ -191,24 +152,19 @@ def is_super_teacher(user):
     return bool(user.get("is_super_teacher", False))
 
 
+def is_students_teacher(student, teacher):
+    return teacher in g_db().get_student_teachers(student)
+
+
 def has_public_profile(user):
     if 'username' not in user or user.get('username') == '':
         return False
     username = user.get('username')
-    public_profile_settings = g.db.get_public_profile_settings(username)
+    public_profile_settings = g_db().get_public_profile_settings(username)
     has_public_profile = public_profile_settings is not None
     return has_public_profile
 
 # Thanks to https://stackoverflow.com/a/34499643
-
-
-def hide_explore(user):
-    if 'username' not in user or user.get('username') == '':
-        return False
-    username = user.get('username')
-    customizations = g.db.get_student_class_customizations(username)
-    hide_explore = True if customizations and 'hide_explore' in customizations.get('other_settings') else False
-    return hide_explore
 
 
 def requires_login(f):
@@ -316,13 +272,13 @@ def login_user_from_token_cookie():
     if not request.cookies.get(TOKEN_COOKIE_NAME):
         return
 
-    token = g.db.get_token(request.cookies.get(TOKEN_COOKIE_NAME))
+    token = g_db().get_token(request.cookies.get(TOKEN_COOKIE_NAME))
     if not token:
         return
 
     # We update the login record with the current time -> this way the last login is closer to correct
-    g.db.record_login(token["username"])
-    user = g.db.user_by_username(token["username"])
+    g_db().record_login(token["username"])
+    user = g_db().user_by_username(token["username"])
     if user:
         remember_current_user(user)
 

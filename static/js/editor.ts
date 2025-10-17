@@ -5,8 +5,9 @@ export enum EditorType {
   MODAL,
   COMMON_MISTAKES,
   CHEATSHEET,
-  PARSONS,
-  EXAMPLE
+  EXAMPLE,
+  WORKBOOK,
+  VIEW_PROGRAM
 }
 
 type EditorEventEmitter = EventEmitter<EditorEvent>;
@@ -57,7 +58,7 @@ export interface HedyEditor {
    * Set the highlither rules for a particular level
    * @param level
    */
-  setHighlighterForLevel(level: number): void;
+  setHighlighterForLevel(level: number, keywordLang: string): void;
 
   /**
    * Resizes the editor after changing its size programatically

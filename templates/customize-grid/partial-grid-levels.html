@@ -22,7 +22,7 @@
           hx-target="#adventure_overview" 
           hx-swap="outerHTML"
           _='on htmx:afterRequest wait 150ms then hedyApp.initializeGraph()'>
-          <div class="flex-grow h-min min-w-80" tabindex=0>
+          <div class="flex-grow h-min" tabindex=0>
             {{ _('level_title') }} {{ dropdown_level }}
           </div>
         </button>
@@ -53,7 +53,7 @@
   <div class="mt-4">
     {% if class_info.students %}
     <h2>
-      {{_('class_performance_graph')}}
+      {{_('performance_graph')}}
       <button type="button" _="on click toggle .hidden on #explanation" title="{{_('more_info')}}">
         <svg class="fill-current h-4 w-4 text-blue-500 cursor-pointer !m-0 !p-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path

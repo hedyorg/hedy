@@ -66,21 +66,21 @@
         {remove} perro {from} animales
 4:
 -   name: '{print}'
-    explanation: Imprimir exactamente usando comillas.
+    explanation: Imprime exactamente utilizando comillas.
     demo_code: '{print} ''Hola bienvenido a Hedy.'''
 -   name: '{is}'
-    explanation: Dar un nombre al texto e `{print}` sin comillas simples.
+    explanation: Da un nombre al texto e `{print}` sin comillas simples.
     demo_code: |-
         nombre {is} Hedy
         {print} 'Mi nombre es ' nombre
 -   name: '{ask}'
-    explanation: Preguntar algo con `{ask}`.
+    explanation: Pregunta algo con `{ask}`.
     demo_code: |-
         color {is} {ask} '¿Cuál es tu color favorito?'
         {print} 'Tu color favorito es ' color
 5:
 -   name: '{print}'
-    explanation: Imprimir un texto literal usando comillas.
+    explanation: Imprime exactamente utilizando comillas.
     demo_code: '{print} ''Hola bienvenido a Hedy.'''
 -   name: '{ask}'
     explanation: Pregunta algo con `{ask}`.
@@ -98,7 +98,7 @@
         respuesta {is} {ask} '¿Cuán lejos debería caminar?'
         {if} respuesta {is} lejos {forward} 100 {else} {forward} 5
 -   name: '{in}'
-    explanation: Comprobar elementos con `{in}`.
+    explanation: Compueba elementos con `{in}`.
     demo_code: |-
         colores_bonitos {is} verde, amarillo
         color {is} {ask} '¿Cuál es tu color favorito?'
@@ -108,7 +108,7 @@
     demo_code: '{if} a {is} {pressed} {print} ''¡Presionas A!'' {else} {print} ''¡Presionaste otra tecla!'''
 6:
 -   name: '{print}'
-    explanation: Imprime un texto literal con usando comillas simples.
+    explanation: Imprime exactamente utilizando comillas.
     demo_code: '{print} ''5 multiplicado por 5 es '' 5 * 5'
 -   name: '{ask}'
     explanation: Pregunta por una operación y comprueba que sea correcta.
@@ -123,7 +123,7 @@
         {forward} 50
 7:
 -   name: '{print}'
-    explanation: Imprimir un texto literal usando comillas simples.
+    explanation: Imprime exactamente utilizando comillas.
     demo_code: '{print} ''Hola bienvenido a Hedy.'''
 -   name: '{ask}'
     explanation: Pregunta algo con `{ask}`.
@@ -356,12 +356,12 @@
         {for} i {in} {range} (1,10):
             {print}('Hola, veces ', i)
 -   name: '{print} con var'
-    explanation: Con `{print}` necesita usar paréntesis y comas si imprime más elementos.
+    explanation: Con `{print}` necesita usar paréntesis y comas si imprimes más elementos.
     demo_code: |-
         nombre = 'Hedy'
         {print}('mi nombre es ', nombre)
 -   name: pregunta algo con {input}
-    explanation: Use `{input}` en lugar de `{ask}` para preguntar algo.
+    explanation: Utiliza `{input}` en lugar de `{ask}` para preguntar algo.
     demo_code: |-
         nombre = {input}('¿Cómo te llamas?')
         {print}('Así que tu nombre es ', nombre)

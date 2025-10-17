@@ -1,3 +1,4 @@
+"""General helpers for Flask that are not Hedy-specific."""
 import dataclasses
 import json
 

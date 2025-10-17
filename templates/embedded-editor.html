@@ -27,14 +27,13 @@
                   style="display: none;">
                   <p class="close-dialog" onclick="hedyApp.error.hide ()"><i class="fa-solid fa-xmark"></i></p>
                   <div class="flex">
-                    <div class="py-1">
+                    <div class="py-1 flex items-center">
                       <svg class="fill-current h-6 w-6 text-red-500 ltr:mr-4 rtl:ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path
                           d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
                       </svg>
                     </div>
                     <div>
-                      <p class="caption font-bold">Oops</p>
                       <p class="details text-sm" data-cy="error_details">An error occurred.</p>
                     </div>
                   </div>
@@ -53,7 +52,6 @@
                         </div>
                     </div>
                     <div>
-                      <p class="caption font-bold">Oops</p>
                       <p class="details text-sm">An error occurred.</p>
                     </div>
                   </div>
@@ -74,7 +72,8 @@
                       <div id="output" tabindex=0 class="flex-1 rounded p-2 px-3 bg-gray-900 color-white w-full text-lg overflow-auto" style="min-height: 3rem;"></div>
                       <div id="turtlecanvas" class="flex-0 ltr:pl-4 rtl:pr-4"></div>
                       <div id="inline_modal" class="flex-0">
-                        <div id="ask_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none">
+                        <div id="ask_modal"
+                             class="py-2 text-left px-3 border-4 border-teal-500 mt-1 rounded bg-green-100" style="display: none">
                         <!--Title-->
                             <div class="flex justify-between items-center">
                             <p class="text-2xl font-bold caption">Header</p>
@@ -88,7 +87,8 @@
                             </div>
                         </form>
                     </div>
-                    <div id="keybinding_modal" class="py-2 text-left px-3 border-4 border-teal-500 mt-3 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
+                    <div id="keybinding_modal"
+                         class="py-2 text-left px-3 border-4 border-teal-500 mt-1 rounded bg-green-100" style="display: none;z-index: 99; position: absolute; bottom: 0; width: 100%;">
                       <!--Title-->
                       <div class="flex justify-between items-center">
                         <p class="text-2xl font-bold caption">{{_('keybinding_waiting_for_keypress')}}</p>
@@ -112,7 +112,7 @@
         {% endif %}
         {% block scripts %}
             <script src="{{static('/vendor/jquery.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
-            <script src="{{static('/vendor/htmx-1.8.5.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+            <script src="{{static('/vendor/htmx-2.0.3.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
             <script src="{{static('/vendor/hyperscript-0.9.8.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
             <script src="{{static('/vendor/skulpt.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
             <script src="{{static('/vendor/skulpt-stdlib.js')}}" type="text/javascript" crossorigin="anonymous"></script>                       
