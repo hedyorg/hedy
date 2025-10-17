@@ -809,9 +809,9 @@ levels:
             header: Sneak peek into the next level...
             text: |-
                 In the next level you'll learn how to use maths in Hedy!
-    6:
+    7:
         1:
-            header: Welcome to level 6
+            header: Welcome to level 7
             text: |-
                 By the end of this lesson, you can:
                 * use maths in Hedy
@@ -905,7 +905,7 @@ levels:
                 Debug this code together with your students.
         10:
             header: Let's get to work!
-            text: Enjoy the adventures in level 6!
+            text: Enjoy the adventures in level 7!
             notes: |-
                 The students can now make all the adventures in this level.
                 Make workbook exercise 3, 4 and 5.
@@ -915,26 +915,17 @@ levels:
             notes: |-
                 Ask the students to list what they've learned today.
         12:
-            header: Let's review!
-            text: |-
-                Which adventure did you like best? Why?
-
-                Which adventure did you like least? Why?
-
-            notes: |-
-                Ask the students for their opinion.
-        13:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
             notes: |-
                 Let some students show their work to the class.
-        14:
+        13:
             header: Sneak peek into the next level...
             text: |-
                 In the next level you'll learn how to repeat a line of code multiple times!
-    7:
+    8:
         1:
-            header: Welcome to level 7
+            header: Welcome to level 8
             text: |-
                 By the end of this lesson, you can:
                 * run a single line of code multiple times
@@ -984,7 +975,7 @@ levels:
                 Debug this code with your students.
         6:
             header: Ready Set Go!
-            text: Enjoy the adventures in level 7!
+            text: Enjoy the adventures in level 8!
             notes: |-
                 Your students can now make all the workbook exercises and all the adevntures of this level.
         7:
@@ -1010,9 +1001,9 @@ levels:
             header: Sneak peek into the next level...
             text: |-
                 Now that you've learned how to repeat one line of code, it's time to repeat multiple lines at once!
-    8:
+    9:
         1:
-            header: Welcome to level 8
+            header: Welcome to level 9
             text: |-
                 By the end of this lesson, you can:
                 * repeat multiple lines of code
@@ -1109,9 +1100,9 @@ levels:
                 Debug this code with your students.
         9:
             header: Let's check out the adventures!
-            text: Enjoy the adventures in level 8!
+            text: Enjoy the adventures in level 9!
             notes: |-
-                Your students can now work on all the adventures in level 8.
+                Your students can now work on all the adventures in level 9.
         10:
             header: Let's review!
             text: What did you learn today?
@@ -1140,7 +1131,7 @@ levels:
                     {if} student = curious
                         {print} 'See you next level!'
             debug: True
-    9:
+    10:
         1:
             header: Welcome to level 9
             text: |-
@@ -1219,9 +1210,9 @@ levels:
                 Debug this code with your students.
         7:
             header: Let's check out the adventures!
-            text: Enjoy the adventures in level 9!
+            text: Enjoy the adventures in level 10!
             notes: |-
-                Your students can now work on all the adventures in level 9.
+                Your students can now work on all the adventures in level 10.
         8:
             header: Let's review!
             text: What did you learn today?
@@ -1250,9 +1241,9 @@ levels:
                 {for} animal in animals
                 {print} 'I love ' animal
             debug: True
-    10:
+    11:
         1:
-            header: Welcome to level 10
+            header: Welcome to level 11
             text: |-
                 By the end of this lesson, you can:
                 * use the {for} command
@@ -1296,9 +1287,9 @@ levels:
                 Debug this code together.
         5:
             header: Let's check out the adventures!
-            text: Enjoy the adventures in level 10!
+            text: Enjoy the adventures in level 11!
             notes: |-
-                Your students can now work on all the adventures in level 10.
+                Your students can now work on all the adventures in level 11.
         6:
             header: Let's review!
             text: What did you learn today?
@@ -1327,43 +1318,6 @@ levels:
                     {print} counter
                 {print} 'Ready or not. Here I come!'
             debug: True
-    11:
-        1:
-            header: Welcome to level 11
-            text: |-
-                In this level, we add a new form of the `{for}` command. In earlier levels, we used for with a list, but we can also use for with numbers.
-
-                This way we don't need the `{repeat}` command anymore.
-        2:
-            header: The for command
-            text: 'This is what the new for command looks like:'
-            code: |-
-                {for} counter {in} {range} 1 {to} 10
-                    {print} counter
-                {print} 'Ready or not. Here I come!'
-        3:
-            header: the variable i
-            text: |-
-                In the previous slide the variable was named 'counter', because it was counting down.
-                You can of course use any name for the variable you want.
-                The standard name  for variables in this situation that is used in programming languages like Python is 'i'.
-                That looks like this:
-            code: |-
-                number = 10
-                {for} i {in} {range} 1 {to} 10
-                    {print} i * number
-        4:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                factor {is} {ask} 'Which table of multiplication do you need?'
-                {repeat} {for} numbers {in} {range} 1 {to} 10 {times}
-                    {print} This is the table of multiplications for factor
-                    {print} number ' x ' factor ' = ' i * factor
-            debug: 'True'
-        5:
-            header: Let's start programming!
-            text: Enjoy the adventures in level 11!
     12:
         1:
             header: Welcome to level 12
@@ -1429,362 +1383,3 @@ levels:
         8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
-    13:
-        1:
-            header: Welcome to level 13
-            text: |-
-                We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use and and or.
-                From now on you could also use arguments in your functions.
-        2:
-            header: The and command
-            text: |-
-                The `{and}` command is always used in a combination with the {if} command.
-                This way you can check if 2 statements are true. For example:
-            code: |-
-                name = {ask} 'what is your name?'
-                age = {ask} 'what is your age?'
-                {if} name {is} 'Hedy' {and} age {is} 2
-                    {print} 'You are the real Hedy!'
-        3:
-            header: The or command
-            text: |-
-                The `{or}` works in the same way as the `{and}` command, but only 1 of the two statements has to be true.
-
-                Let's see what happens when you change the `{and}` for `{or}`.
-            code: |-
-                name = {ask} 'what is your name?'
-                {if} name {is} 'Hedy' {or} name {is} 'hedy'
-                    {print} 'Welcome!!'
-        4:
-            header: Functions with arguments
-            text: Now that you've learned how to use functions, you'll learn how to use a function with an **argument**. An argument is a variable that is used within a function. It is not used outside the function.
-        5:
-            header: Example
-            text: |-
-                In this example you see how the argument 'place' is used in the function.
-                Run the code and change 'ocean' and 'sea' to something else, and see what happens.
-            code: |-
-                {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
-
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
-        6:
-            header: Example with variable
-            text: |-
-                You can also combine functions with a question.
-
-                What happens if you make these changes:
-                ```
-                define song with place
-                    print 'My Bonnie is ' place
-
-                answer is ask 'Where is my Bonnie?'
-                call song with answer
-                ```
-            code: |-
-                {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
-
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
-        7:
-            header: Even more questions!
-            text: |-
-                Now we have combined even more question with the function. Type this code and see what happens.
-
-                Note how the variables and the arguments have the same name. This is allowed.
-                Does it confuse you? Just use different names, that is allowed as well.
-                ```
-                define song with name, place
-                    print 'My ' name ' is ' place
-
-                name is ask 'Who?'
-                place is ask 'Where are they?'
-                call song with name, place
-                ```
-            code: |-
-                {define} song {with} place
-                    {print} 'My Bonnie is over the ' place
-
-                {call} song {with} 'ocean'
-                {call} song {with} 'sea'
-                {call} song {with} 'ocean'
-        8:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {define} happiness {with} name
-                    {print} '🥳'
-                {play} G
-                {play} A
-                {play} B
-                {print} 'Party on, ' name
-                {define} sadness
-                {print} '😞'
-                {play} E
-                {play} D
-                {play} C
-                {print} 'Hope you feel better, ' name
-
-                name = {ask} 'What is your' name '?'
-                mood = {ask} 'Are you happy or sad?'
-                {if} mood = happy
-                    {call} happiness {with} person
-                {else} mood = sad
-                    {define} sadness {to} name
-            debug: 'True'
-        9:
-            header: Let's go!
-            text: Enjoy the adventures in level 13!
-    14:
-        1:
-            header: Welcome to level 14
-            text: In this level you'll learn some new symbols that can help you improve your programs, like >. You will also learn to work with return values of a function.
-        2:
-            header: Symbols
-            text: |-
-                These are the new symbols you can use:
-
-                  The >  means bigger than...
-
-                  The >= means bigger than or the same as...
-
-                  The <  means smaller than...
-
-                  The <= means smaller than or the same as...
-
-                You can use them like this:
-            code: |-
-                age = {ask} 'How old are you?'
-                {if} age < 13
-                    {print} 'You are younger than me!'
-                {else}
-                    {print} 'You are older than me!'
-        3:
-            header: Symbols
-            text: |-
-                You can also use:
-
-                == is the same as.
-
-                != is not
-
-                == is used in `{if}` statements.
-            code: |-
-                answer = {ask} 'Do you want to learn more?'
-                {if} answer == 'yes'
-                    {print} 'Go to the next adventure!'
-                {if} answer != 'yes'
-                    {print} 'That is a shame!'
-        4:
-            header: Return value
-            text: In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you. You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
-        5:
-            header: Return value
-            text: For example, in this code the function calculate_new_price will calculate the new price of any item. It will give you the new price as a return value.
-            code: |-
-                {define} calculate_new_price {with} amount, percentage
-                    percentage = percentage / 100
-                    discount_amount = amount * percentage
-                    {return} amount - discount_amount
-
-                old_price = {ask} 'How much is on the price tag?'
-                discount = {ask} 'What percentage is the discount?'
-
-                new_price = {call} calculate_new_price {with} old_price, discount
-                {print} 'The new price is ' new_price ' dollar'
-        6:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                item = 'not bought'
-                {print} 'I would like to buy this item'
-                price == {ask} 'What is the price?'
-                {if} price less than or the same as 10
-                    {print} 'Thats a great deal!'
-                    item = 'bought'
-                {if} price is more than 10 {and} less than or the same as 20
-                    {print} 'Alright'
-                    item = 'bought'
-                {if} price is more than 20 {and} less than 50
-                    {print} 'That is a bit much!'
-                {if} price is more than or the same as 50
-                    {print} 'No way!'
-                {if} item =! bought
-                    {print} 'Shame.. I wont buy it'
-                {else}
-                    {print} 'I will buy it! Thank you!'
-            debug: 'True'
-        7:
-            header: Let's get to work!
-            text: Enjoy the adventures in level 14!
-    15:
-        1:
-            header: Welcome to level 15
-            text: In this level you will learn about the `{while}` loop.
-        2:
-            header: '{while}'
-            text: |-
-                We are going to learn a new loop, the while loop! The loop continues as long as the statement is true. So don't forget to change the value in the loop.
-
-                In the example code, we continue until a correct answer has been given. If the correct answer is never given, the loop will never end!
-            code: |-
-                answer = 0
-                {while} answer != 25
-                    answer = {ask} 'What is 5 times 5?'
-                {print} 'A correct answer has been given'
-        3:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                numbers = 1, 2
-
-                {for} i {in} {range} 3 {to} 50
-                    {add} x {to} numbers
-                    i = + 1
-
-                random_number = numbers {random}
-                guesses = 10
-
-                {while} guess = 0
-                    answer = 'Guess my number:'
-                    {if} answer >= random_number
-                        {print} 'lower'
-                        guesses = guesses -1
-                    {if} answer > random_number
-                        {print} 'higher!'
-                        guesses = guesses
-                    {else} answer = random_number
-                        {print} 'correct'
-                        guesses = 10
-
-            debug: 'True'
-        4:
-            header: Let's try it out!
-            text: Enjoy the adventures in level 15!
-    16:
-        1:
-            header: Welcome to level 16
-            text: In this level you will learn about the [square brackets] and how to use them.
-        2:
-            header: Square brackets
-            text: We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels. We use square brackets to point out a place in a list. The at random command can not be used anymore.
-            code: |-
-                friends = ['Ahmed', 'Ben', 'Cayden']
-                {print} friends[1] ' is the first friend on the list.'
-                {print} friends[2] ' is the second friend on the list.'
-                {print} friends[3] ' is the third friend on the list.'
-                #now we will match 2 lists using the variable i
-                lucky_numbers = [15, 18, 6]
-                {for} i {in} {range} 1 {to} 3
-                    {print} friends[i] 's lucky number is ' lucky_numbers[i]
-        3:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {print} 'Friendship test'
-                {subjects} = ['song', 'movie', 'food', 'drink']
-                answers_player_1 = []
-                answers_player_2 = []
-                score = 100
-
-                {for} i {in} {range} 1 {to} 4
-                    answer = {ask} 'what is your favorite ' subjects[i]
-                {add} answer {to} answers_player_1
-
-                {print} 'Player 2, your turn!'
-                {for} i {in} {range} 0 {to} 4
-                    answer_player_2 = {ask} 'what is player 1s favorite ' subjects
-                    {add} answer_player_2 {in} answers_player_2
-                    {if} answers_player_2[2] == answers_player_1[1]
-                        {print} 'Correct!'
-                    {else}
-                        {print} 'Wrong!'
-                    score = score - 25
-
-                {print} 'Player 2, you've scored ' score '%'
-
-                {if} score = 100
-                    {print} 'You are an amazing friend'
-                {if} score < 100 {or} score >= 50
-                    {print} 'You could do better'
-                {else} score < 50
-                    {print} 'Do you even know this person?!'
-            debug: 'True'
-        4:
-            header: Let's try it out!
-            text: Enjoy the adventures in level 16!
-    17:
-        1:
-            header: Welcome to level 17
-            text: in this level you will learn how to use a colon and you will learn the elif command.
-        2:
-            header: Colon
-            text: 'Now we are going to change indentation a little bit. Every time that we need an indentation, we need : at the line before the indentation.'
-            code: |-
-                prices = ['1 million dollars', 'an apple pie', 'nothing']
-                your_price = prices[{random}]
-                {print} 'You win ' your_price
-                {if} your_price == '1 million dollars' :
-                    {print} 'Yeah! You are rich!'
-                {else}:
-                    {print} 'Better luck next time..'
-        3:
-            header: Elif
-            text: 'In this level you can also use a new command: elif. elif is short for else if and you need it when you want to make 3 (or more!) options. Check it out!'
-            code: |-
-                prices = ['1 million dollars', 'an apple pie', 'nothing']
-                your_price = prices[{random}]
-                {print} 'You win ' your_price
-                {if} your_price == '1 million dollars' :
-                    {print} 'Yeah! You are rich!'
-                {elif} your_price == 'an apple pie' :
-                    {print} 'Lovely, an apple pie!'
-                {else}:
-                    {print} 'Better luck next time..'
-        4:
-            header: Debugging
-            text: Let's debug this code!
-            code: |-
-                {define} ask_direction
-                    direction = {ask} 'Where do you want to go?'
-                    {if} direction = 'backwards'
-                        {turn} 180
-                    {else} direction == 'right'
-                        {turn} 90
-                    {else} direction == 'left'
-                        {turn} 270
-                        {forward} 100
-
-                continue = 'yes'
-
-                {while} continue == 'yes'
-                    {print} ask_direction
-                    {sleep}
-                    continue = 'do you want to draw some more?'
-                    {sleep}
-            debug: 'True'
-        5:
-            header: Let's try it out!
-            text: Enjoy the adventures in level 17!
-    18:
-        1:
-            header: Welcome to level 18
-            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
-        2:
-            header: The Python way
-            text: |-
-                We arrived at real Python code! That means we need to use parentheses with print and range from now on.
-
-                Also, if you want to print more than one item, you need to separate them by commas.
-
-                The final change we will need to make to get Python code is changing ask into input.
-
-                Click on the 'print' tab for all the examples.
-            editor: /hedy/18
-        3:
-            header: The very last adventures!
-            text: Enjoy the very last adventures in level 18!
