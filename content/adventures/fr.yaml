@@ -207,7 +207,7 @@ adventures:
                     keys = 'lost'
                     {print} 'You are standing in your garden and you have lost your keys.'
                     {print} 'Where do you want to look for them ?'
-                    {print} 'You can choose : tree, flowerbed, rock, postbox'
+                    {print} 'You can choose : tree, flowerbed, rock, postbox'
                     {while} keys == 'lost'
                         location = {ask} 'Where do you want to look ?'
                         {if} location == 'flowerbed'
@@ -382,30 +382,6 @@ adventures:
                     réponse_donnée = {ask} "Combiens font " nombre_1 " fois " nombre_2 " ?"
                     {if} _
                     {else} _
-                    ```
-            8:
-                story_text: |
-                    Au niveau précédent, tu as créé une calculatrice. À ce niveau, tu peux étendre ce code pour qu'il pose plusieurs questions.
-
-                    ### Exercice
-                    Peux-tu terminer la ligne 10 pour faire fonctionner le programme ?
-
-                    ### Exercice 2
-                    Donne au joueur ou à la joueuse un retour quand il ou elle répond. Comme par exemple, `{print} "Correct !"` ou `{print} "Faux ! La réponse correcte est " réponse_correcte`.
-                example_code: |
-                    ```
-                    score = 0
-                    {repeat} 10 {times}
-                        nombres = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                        nombre_1 = nombres {at} {random}
-                        nombre_2 = nombres {at} {random}
-                        bonne_réponse = nombre_1 * nombre_2
-                        {print}"Combien font " nombre_1 " fois " nombre_2 " ?"
-                        tentative = {ask} "Quel est ta réponse ?"
-                        {print} "Ta réponse est " tentative
-                        {if} _ {is} _
-                            score = score + 1
-                    {print} "Bon travail ! Ton score est… " score " sur 10 !"
                     ```
             15:
                 story_text: |
@@ -1263,33 +1239,7 @@ adventures:
                     ```
     maths:
         description: Introduction des maths
-        levels:
-            6:
-                example_code: |
-                    ```
-                    {print} "5 plus 5 fait " 5 + 5
-                    {print} "5 moins 5 fait " 5 - 5
-                    {print} "5 fois 5 fait " 5 * 5
-                    {print} "5 divisé par 5 fait " 5 / 5
-                    ```
-            12:
-                story_text: |-
-                    **Nombres décimaux**
-                    Jusqu'à présent, Hedy ne te permettait pas d'utiliser les nombres décimaux comme 1.5, mais maintenant nous les autorisons. Attention, les langages de programmation utilisent le point `.` pour les nombres décimaux et non la virgule.
-                example_code: |
-                    ```
-                    {print} "Deux et demi plus deux et demi font…"
-                    {print} 2.5 + 2.5
-                    ```
-                story_text_2: |-
-                    **Les maths avec des mots**
-                    À ce niveau, tu peux aussi additionner les mots comme ceci :
-                example_code_2: |
-                    ```
-                    a = "Salut "
-                    b = "le monde !"
-                    {print} a + b
-                    ```
+        levels: {}
     music:
         name: musique
         default_save_name: musique
@@ -1641,22 +1591,22 @@ adventures:
                         {print} "Ceci sera écrit 5 fois"
             10:
                 story_text: |
-                    À ce niveau, tu peux non seulement utiliser un bloc de lignes avec `{if}` et `{repeat}`, mais tu peux aussi mettre ces commandes ensemble !
+                    À ce niveau, tu peux non seulement utiliser un bloc de lignes avec `{if}` et `{repeat}`, mais tu peux aussi mettre ces commandes ensemble !
                     Dans l'exemple, tu vois une commande `{if}` dans une commande `{repeat}`. Ça marche aussi à l'inverse, et un `{if}` peut aussi se trouver dans un autre `{if}` et un `{repeat}` dans un autre `{repeat}`.
-                    Essaye !
+                    Essaye !
                 example_code: |
                     ```
                     {repeat} 3 {times}
-                        nourriture = {ask} "Que veux-tu ?"
+                        nourriture = {ask} "Que veux-tu ?"
                         {if} nourriture {is} pizza
-                            {print} "bien !"
+                            {print} "bien !"
                         {else}
                             {print} "La pizza c'est meilleur"
                     ```
 
-                        nourriture = {ask} "Que veux-tu ?"
+                        nourriture = {ask} "Que veux-tu ?"
                         {if} nourriture {is} pizza
-                            {print} "parfait !"
+                            {print} "parfait !"
                         {else}
                             {print} "La pizza c'est meilleur"
     repeat_command_2:
@@ -1846,7 +1796,7 @@ adventures:
                     Tu peux l'utiliser dans ton restaurant pour demander à plusieurs personnes ce qu'elles veulent manger.
 
                     ### Exercice
-                    Peux-tu compléter le code ? Hedy doit demander le plat autant de fois qu'il y a de personnes. Donc s'il y a 5 personnes, la question doit être répétée 5 fois.
+                    Peux-tu compléter le code ? Hedy doit demander le plat autant de fois qu'il y a de personnes. Donc s'il y a 5 personnes, la question doit être répétée 5 fois.
                     **Bonus** Enrichi ton code avec plus de questions, par exemple pour les boissons et les sauces.
                 example_code: |
                     ```
@@ -1932,27 +1882,6 @@ adventures:
                     _ {for} service {in} menu
                     _ plat = {ask} nom ", que voulez-vous manger pour votre " service " ?"
                     _ {print} nom " a commandé " plat " pour son " service
-                    ```
-            12:
-                story_text: |
-                    À partir de ce niveau, tu peux utiliser les nombres décimaux pour rendre ton menu plus réaliste.
-
-                    ### Exercice
-                    Peux-tu écrire le code pour donner à tes amis et à ta famille une réduction de 15 % ?
-                example_code: |
-                    ```
-                    total = 0.0
-                    nourriture = {ask} "Que voulez-vous commander ?"
-                    boisson = {ask} "Que voulez-vous boire ?"
-                    {if} nourriture {is} "hamburger"
-                        total = total + 6.50
-                    {if} nourriture {is} "pizza"
-                        total = total + 5.75
-                    {if} boisson {is} "water"
-                        total = total + 1.20
-                    {if} boisson {is} "soda"
-                        total = total + 2.35
-                    {print} "Ça vous fera un total de " total " euros, s'il vous plait"
                     ```
     rock:
         name: Pierre, papier, ciseaux
@@ -2040,9 +1969,9 @@ adventures:
                     À ce niveau tu peux programmer le jeu pierre, papier, ciseaux dans son ensemble, en imbriquant les commandes `{if}`.
 
                     ### Exercice
-                    Peux-tu terminer ce code ? Le programme doit dire qui gagne pour chaque combinaison.
+                    Peux-tu terminer ce code ? Le programme doit dire qui gagne pour chaque combinaison.
 
-                    **Bonus** Tu veux jouer plus d'une partie ? Étant le code pour pouvoir jouer plusieurs fois. Tu peux même utiliser une commande `{ask}` pour demander aux joueurs combien de parties ils veulent jouer.
+                    **Bonus** Tu veux jouer plus d'une partie ? Étant le code pour pouvoir jouer plusieurs fois. Tu peux même utiliser une commande `{ask}` pour demander aux joueurs combien de parties ils veulent jouer.
                 example_code: |
                     ```
                     choix = pierre, papier, ciseaux
@@ -2505,18 +2434,6 @@ adventures:
                     couleur {is} rouge, orange, jaune, vert, bleu, violet, rose, maron, gris, noir
                     couleur _
                     ```
-            6:
-                story_text: |
-                    ### Exercice
-                    Refait les dessins avec la tortue !
-
-                    **Extra** Make only one code that lets the player decide which letter they'd like to see! And can you add even more letters?
-
-                    <div class="w-full flex flex-row gap-2">
-                    F <img src="https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20" width="100">
-                    E <img src="https://github.com/hedyorg/hedy/assets/80678586/12821803-6422-416a-8e36-9902d14e57a4" width="100">
-                    L <img src="https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24" width="100">
-                    </div>
             7:
                 story_text: |
                     ### Exercice
