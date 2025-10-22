@@ -308,7 +308,7 @@ class TestsLevel15(HedyTester):
             code=code,
             max_level=16,
             expected=expected,
-            expected_commands=['ask', 'ask', 'if', 'and', 'print']
+            expected_keywords=['ask', 'ask', 'if', 'and', 'print']
         )
 
     #
@@ -557,7 +557,7 @@ class TestsLevel15(HedyTester):
             code=code,
             max_level=16,
             expected=expected,
-            expected_commands=['is', 'while', op, 'ask', 'print']
+            expected_keywords=['is', 'while', op, 'ask', 'print']
         )
 
     def test_while_fr_equals(self):
@@ -577,7 +577,7 @@ class TestsLevel15(HedyTester):
             code=code,
             max_level=16,
             expected=expected,
-            expected_commands=['is', 'while', 'is', 'addition', 'print'],
+            expected_keywords=['is', 'while', 'is', 'addition', 'print'],
             lang='fr'
         )
 

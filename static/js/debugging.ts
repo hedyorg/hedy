@@ -10,7 +10,7 @@ let TRADUCTION: Map<string,string>;
 let variable_view = true;
 let showRoles = false;
 let step_debugger = false;
-const fullLineCommands = [
+const fullLinekeywords = [
   'print',
   'echo',
   'assign',
@@ -20,10 +20,10 @@ const fullLineCommands = [
   'remove',
   'ask',
   'play',
-  'command', // the turtle and clear commands get put in the source map as 'command'
+  'command', // the turtle and clear keywords get put in the source map as 'command'
 ]
 
-const blockCommands = [
+const blockkeywords = [
   'ifs',
   'ifelse',
   'if_pressed_else',
@@ -333,7 +333,7 @@ export function incrementDebugLine() {
     // Maybe we hit the correct mapping for this line
     if (lineNumber >= startingLine && lineNumber <= finishingLine) {
       // Highlight whole line if it's a full command
-      if(fullLineCommands.includes(map.command)){
+      if(fullLinekeywords.includes(map.command)){
         // lines in ace start at 0
         const lines = theGlobalEditor.contents.split('\n');
         const line = lines[map.hedy_range.from_line - 1];
@@ -347,7 +347,7 @@ export function incrementDebugLine() {
           theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line);
         }
         break
-      } else if (theLevel <= 7 && blockCommands.includes(map.command)){
+      } else if (theLevel <= 7 && blockkeywords.includes(map.command)){
         const lines = theGlobalEditor.contents.split('\n');
         let line: string;
         if (map.hedy_range.from_line < map.hedy_range.to_line) {
@@ -373,7 +373,7 @@ export function incrementDebugLine() {
             break
           }
         }
-      }  else if (theLevel >= 8 && blockCommands.includes(map.command)) { // these commands always come up in the tree so we visit them later
+      }  else if (theLevel >= 8 && blockkeywords.includes(map.command)) { // these keywords always come up in the tree so we visit them later
         theGlobalEditor.setDebuggerCurrentLine(map.hedy_range.from_line);
         break;
       }

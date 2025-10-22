@@ -12,7 +12,7 @@ class TestsLevel1(HedyTester):
     level = 1
     '''
     Tests should be ordered as follows:
-     * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
+     * keywords in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
      * markup tests
      * negative tests
@@ -31,13 +31,13 @@ class TestsLevel1(HedyTester):
         code = "print Hallo welkom bij Hedy!"
         expected = "print('Hallo welkom bij Hedy!')"
         output = 'Hallo welkom bij Hedy!'
-        expected_commands = [Command.print]
+        expected_keywords = [Command.print]
 
         self.single_level_tester(
             code=code,
             expected=expected,
             output=output,
-            expected_commands=expected_commands
+            expected_keywords=expected_keywords
         )
 
     def test_print_number(self):
@@ -48,7 +48,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output='10',
-            expected_commands=[Command.print]
+            expected_keywords=[Command.print]
         )
 
     def test_print_number_arabic(self):
@@ -59,35 +59,35 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output='١١',
-            expected_commands=[Command.print]
+            expected_keywords=[Command.print]
         )
 
     def test_print_no_space(self):
         code = "printHallo welkom bij Hedy!"
         expected = "print('Hallo welkom bij Hedy!')"
         output = 'Hallo welkom bij Hedy!'
-        expected_commands = [Command.print]
+        expected_keywords = [Command.print]
 
         self.single_level_tester(
             code=code,
             expected=expected,
             output=output,
-            expected_commands=expected_commands
+            expected_keywords=expected_keywords
         )
 
     def test_print_line_with_spaces_works(self):
         code = "print hallo\n      \nprint hallo"
         expected = "print('hallo')\n\nprint('hallo')"
-        expected_commands = [Command.print, Command.print]
+        expected_keywords = [Command.print, Command.print]
 
-        self.single_level_tester(code=code, expected=expected, expected_commands=expected_commands)
+        self.single_level_tester(code=code, expected=expected, expected_keywords=expected_keywords)
 
     def test_print_comma(self):
         code = "print one, two, three"
         expected = "print('one, two, three')"
-        expected_commands = [Command.print]
+        expected_keywords = [Command.print]
 
-        self.single_level_tester(code=code, expected=expected, expected_commands=expected_commands)
+        self.single_level_tester(code=code, expected=expected, expected_keywords=expected_keywords)
 
     def test_print_multiple_lines(self):
         code = textwrap.dedent("""\
@@ -394,7 +394,7 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['ask', 'echo', 'ask', 'print'],
+            expected_keywords=['ask', 'echo', 'ask', 'print'],
             lang='nl',
             translate=False  # mixed codes will not translate back to their original form, sadly
         )
@@ -623,11 +623,11 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            expected_commands=[Command.print]
+            expected_keywords=[Command.print]
         )
 
     #
-    # combined commands tests
+    # combined keywords tests
     #
     def test_print_ask_echo(self):
         code = textwrap.dedent("""\
@@ -643,7 +643,7 @@ class TestsLevel1(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=[Command.print, Command.ask, Command.echo])
+            expected_keywords=[Command.print, Command.ask, Command.echo])
 
     def test_forward_turn_combined(self):
         code = textwrap.dedent("""\
@@ -660,7 +660,7 @@ class TestsLevel1(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            expected_commands=[Command.forward, Command.turn, Command.forward],
+            expected_keywords=[Command.forward, Command.turn, Command.forward],
             max_level=11
         )
 
@@ -915,7 +915,7 @@ class TestsLevel1(HedyTester):
 # hypothesis initialization starts here
 
 
-# numbers define an order since some commands must be in a certain place (f.e. here: ask must go before echo)
+# numbers define an order since some keywords must be in a certain place (f.e. here: ask must go before echo)
 templates = [
     ("print <P>", -1),
     ("print <P>", -1),
@@ -960,12 +960,12 @@ class TestsHypothesisLevel1(HedyTester):
                 translate=False
             )
 
-            expected_commands = [Command.ask, Command.ask, Command.echo, Command.echo, Command.forward, Command.forward,
+            expected_keywords = [Command.ask, Command.ask, Command.echo, Command.echo, Command.forward, Command.forward,
                                  Command.print, Command.print, Command.print, Command.turn, Command.turn]
 
-            # TODO, FH sept 2023: all_commands parses and thus is expensive
-            # we should get the commands list back from the parser instead (parseresult.commands)
+            # TODO, FH sept 2023: all_keywords parses and thus is expensive
+            # we should get the keywords list back from the parser instead (parseresult.keywords)
             # since we don't use many single_level_tester features
             # we can transpile and check the python "manually"
-            all_commands = sorted(hedy.all_commands(code, self.level, 'en'))
-            self.assertEqual(expected_commands, all_commands)
+            all_keywords = sorted(hedy.all_keywords(code, self.level, 'en'))
+            self.assertEqual(expected_keywords, all_keywords)

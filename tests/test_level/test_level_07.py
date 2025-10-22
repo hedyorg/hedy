@@ -9,7 +9,7 @@ class TestsLevel7(HedyTester):
     level = 7
     '''
     Tests should be ordered as follows:
-     * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
+     * keywords in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
      * markup tests
      * negative tests
@@ -548,7 +548,7 @@ class TestsLevel7(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            expected_commands=['is', 'turn'],
+            expected_keywords=['is', 'turn'],
             max_level=11,
         )
 
@@ -1821,7 +1821,7 @@ class TestsLevel7(HedyTester):
             max_level=7,
             code=code,
             expected=expected,
-            expected_commands=['is', 'if', 'else', 'print', 'print']
+            expected_keywords=['is', 'if', 'else', 'print', 'print']
         )
 
     def test_if_equality_linebreak_print_else_print(self):
@@ -2180,7 +2180,7 @@ class TestsLevel7(HedyTester):
             code=code,
             max_level=11,
             expected=expected,
-            expected_commands=['is', 'is', 'addition', 'print', 'addition'],
+            expected_keywords=['is', 'is', 'addition', 'print', 'addition'],
             extra_check_function=lambda x: self.run_code(x) == "11"
         )
 
@@ -2201,7 +2201,7 @@ class TestsLevel7(HedyTester):
             code=code,
             max_level=11,
             expected=expected,
-            expected_commands=['is', 'is', 'is', 'addition', 'print', 'addition'],
+            expected_keywords=['is', 'is', 'is', 'addition', 'print', 'addition'],
             extra_check_function=lambda x: self.run_code(x) == "11"
         )
 
@@ -2600,7 +2600,7 @@ class TestsLevel7(HedyTester):
             code=code,
             expected=expected,
             output='found!',
-            expected_commands=['is', 'is', 'if', 'in', 'print']
+            expected_keywords=['is', 'is', 'if', 'in', 'print']
         )
 
     def test_if_in_list_in_print_else(self):

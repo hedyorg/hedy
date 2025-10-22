@@ -1,7 +1,7 @@
 import {goToHedyLevel, goToHedyPage} from "../tools/navigation/nav";
 import {codeEditorContent} from "../tools/programs/program";
 
-describe('Test commands', () => {
+describe('Test keywords', () => {
   it('The input of ask is converted to a number in level 12', () => {
     cy.intercept('/parse').as('parse')
 

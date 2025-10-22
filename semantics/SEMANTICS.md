@@ -6,7 +6,7 @@ A more formal description can be found in [Julia's thesis](https://hedy.org/rese
 
 ## Level 1
 
-### Commands and types
+### keywords and types
 
 Level 1 supports:
 
@@ -127,7 +127,7 @@ Level 1 supports:
 
 ## Level 2
 
-### Commands and types
+### keywords and types
 
 Level 2 supports:
 
@@ -270,7 +270,7 @@ Level 2 supports:
 
 ## Level 3
 
-### Commands and types
+### keywords and types
 
 Level 3 supports:
 
@@ -457,7 +457,7 @@ Level 3 supports:
 
 ## Level 4
 
-### Commands and types
+### keywords and types
 
 Level 4 supports:
 
@@ -645,7 +645,7 @@ Level 4 supports:
 
 ## Level 5
 
-### Commands and types
+### keywords and types
 
 Level 5 supports:
 
@@ -865,7 +865,7 @@ Level 5 supports:
 
 ## Level 6
 
-### Commands and types
+### keywords and types
 
 Level 6 supports:
 
@@ -1116,7 +1116,7 @@ Level 6 supports:
 
 ## Level 7
 
-### Commands and types
+### keywords and types
 
 Level 7 supports:
 
@@ -1381,7 +1381,7 @@ Level 7 supports:
 
 ## Level 8
 
-### Commands
+### keywords
 
 Level 8 supports:
 
@@ -1649,7 +1649,7 @@ Level 8 supports:
 
 ## Level 9
 
-### Commands and types
+### keywords and types
 
 Level 9 supports:
 
@@ -1917,7 +1917,7 @@ Level 9 supports:
 
 ## Level 10
 
-### Commands and types
+### keywords and types
 
 Level 10 supports:
 
@@ -2193,7 +2193,7 @@ Level 10 supports:
 
 ## Level 11
 
-### Commands and types
+### keywords and types
 
 Level 11 supports:
 
@@ -2416,7 +2416,7 @@ Level 11 supports:
 
 ## Level 12
 
-### Commands and types
+### keywords and types
 
 Level 12 supports:
 
@@ -2648,7 +2648,7 @@ Level 12 supports:
 
 ## Level 13
 
-### Commands and types
+### keywords and types
 
 Level 13 supports:
 
@@ -2892,7 +2892,7 @@ Level 13 supports:
 
 ## Level 14
 
-### Commands and types
+### keywords and types
 
 Level 14 supports:
 
@@ -3169,7 +3169,7 @@ Level 14 supports:
 
 ## Level 15
 
-### Commands and types
+### keywords and types
 
 Level 15 supports:
 
@@ -3453,7 +3453,7 @@ Level 15 supports:
 
 ## Level 16
 
-### Commands and types
+### keywords and types
 
 Level 16 supports:
 
@@ -3744,7 +3744,7 @@ Level 16 supports:
 
 ## Level 17
 
-### Commands and types
+### keywords and types
 
 Level 17 supports:
 

@@ -328,7 +328,7 @@ class TestsLevel16(HedyTester):
             skip_faulty=False
         )
 
-    @parameterized.expand(HedyTester.comparison_commands)
+    @parameterized.expand(HedyTester.comparison_keywords)
     def test_comparison_with_list_access(self, comparison):
         code = textwrap.dedent(f"""\
             balletje = 0
@@ -615,7 +615,7 @@ class TestsLevel16(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-    @parameterized.expand(HedyTester.equality_comparison_commands)
+    @parameterized.expand(HedyTester.equality_comparison_keywords)
     def test_equality_with_list_access_and_float(self, comparison):
         code = textwrap.dedent(f"""\
             numbers = [1.5, 2.9, 42.0]
@@ -712,7 +712,7 @@ class TestsLevel16(HedyTester):
         self.single_level_tester(code, exception=exceptions.InvalidTypeCombinationException)
 
     #
-    # and/or commands
+    # and/or keywords
     #
     @parameterized.expand(['and', 'or'])
     def test_if_list_access_lhs_and_or(self, op):
@@ -735,7 +735,7 @@ class TestsLevel16(HedyTester):
         )
 
     #
-    # in/not-in list commands
+    # in/not-in list keywords
     #
     @parameterized.expand([
         ('in', 'Found'),
@@ -1182,7 +1182,7 @@ class TestsLevel16(HedyTester):
             self.single_level_tester(
                 code=code,
                 expected=expected,
-                expected_commands=['for', 'print'])
+                expected_keywords=['for', 'print'])
 
         @parameterized.expand(['and', 'or'])
         def test_if_list_access_lhs_and_or(self, op):
@@ -1291,7 +1291,7 @@ class TestsLevel16(HedyTester):
                 max_level=17,
                 code=code,
                 expected=expected,
-                expected_commands=['is', 'if', 'print', 'print']
+                expected_keywords=['is', 'if', 'print', 'print']
             )
 
         #
@@ -1435,7 +1435,7 @@ class TestsLevel16(HedyTester):
                   a = Value(222, num_sys='Latin')""")
 
             self.single_level_tester(
-                code=code, expected=expected, expected_commands=[
+                code=code, expected=expected, expected_keywords=[
                     'is', 'if', 'is', 'elif', 'is', 'elif', 'is'])
 
         def test_if_in_list_with_string_var_gives_type_error(self):
@@ -1509,7 +1509,7 @@ class TestsLevel16(HedyTester):
                 exception=hedy.exceptions.InvalidTypeCombinationException
             )
 
-        @parameterized.expand(HedyTester.comparison_commands)
+        @parameterized.expand(HedyTester.comparison_keywords)
         def test_comparisons(self, comparison):
             code = textwrap.dedent(f"""\
                 leeftijd is ask 'Hoe oud ben jij?'
@@ -1523,7 +1523,7 @@ class TestsLevel16(HedyTester):
 
             self.single_level_tester(code=code, expected=expected)
 
-        @parameterized.expand(HedyTester.number_comparison_commands)
+        @parameterized.expand(HedyTester.number_comparison_keywords)
         def test_smaller_with_string_gives_type_error(self, comparison):
             code = textwrap.dedent(f"""\
             a is 'text'
@@ -1955,7 +1955,7 @@ class TestsLevel16(HedyTester):
             self.single_level_tester(
                 code=code,
                 expected=expected,
-                expected_commands=['for', 'print'])
+                expected_keywords=['for', 'print'])
 
         @parameterized.expand(['and', 'or'])
         def test_if_list_access_lhs_and_or(self, op):
@@ -2064,7 +2064,7 @@ class TestsLevel16(HedyTester):
                 max_level=17,
                 code=code,
                 expected=expected,
-                expected_commands=['is', 'if', 'print', 'print']
+                expected_keywords=['is', 'if', 'print', 'print']
             )
 
         #
@@ -2208,7 +2208,7 @@ class TestsLevel16(HedyTester):
                   a = Value(222, num_sys='Latin')""")
 
             self.single_level_tester(
-                code=code, expected=expected, expected_commands=[
+                code=code, expected=expected, expected_keywords=[
                     'is', 'if', 'is', 'elif', 'is', 'elif', 'is'])
 
         def test_if_in_list_with_string_var_gives_type_error(self):
@@ -2282,7 +2282,7 @@ class TestsLevel16(HedyTester):
                 exception=hedy.exceptions.InvalidTypeCombinationException
             )
 
-        @parameterized.expand(HedyTester.comparison_commands)
+        @parameterized.expand(HedyTester.comparison_keywords)
         def test_comparisons(self, comparison):
             code = textwrap.dedent(f"""\
                 leeftijd is ask 'Hoe oud ben jij?'
@@ -2296,7 +2296,7 @@ class TestsLevel16(HedyTester):
 
             self.single_level_tester(code=code, expected=expected)
 
-        @parameterized.expand(HedyTester.number_comparison_commands)
+        @parameterized.expand(HedyTester.number_comparison_keywords)
         def test_smaller_with_string_gives_type_error(self, comparison):
             code = textwrap.dedent(f"""\
             a is 'text'
@@ -2586,7 +2586,7 @@ class TestsLevel16(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_not_turtle(),
-            expected_commands=['print']
+            expected_keywords=['print']
         )
 
     def test_print_var_brackets(self):
@@ -2706,7 +2706,7 @@ class TestsLevel16(HedyTester):
             code=code,
             expected=expected,
             translate=False,
-            expected_commands=['input', 'if', 'print', 'print', 'print', 'print'],
+            expected_keywords=['input', 'if', 'print', 'print', 'print', 'print'],
             extra_check_function=self.is_not_turtle()
         )
 
@@ -2761,7 +2761,7 @@ class TestsLevel16(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['for', 'print'])
+            expected_keywords=['for', 'print'])
 
     def test_input_with_list(self):
         code = textwrap.dedent("""\
@@ -2886,7 +2886,7 @@ class TestsLevel16(HedyTester):
     #
     # repeat
     #
-    def test_repeat_nested_multi_commands(self):
+    def test_repeat_nested_multi_keywords(self):
         code = textwrap.dedent("""\
             repeat 3 times
                 print(3)

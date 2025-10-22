@@ -289,7 +289,7 @@ function highlightVariables(view: EditorView) {
     let functionsNames = new Set<string>()
     let variablesNames = new Set<string>()
 
-    let definingCommands = [
+    let definingkeywords = [
         'Assign' , 
         'Ask' , 
         'AssignList' , 
@@ -304,7 +304,7 @@ function highlightVariables(view: EditorView) {
             from: from,
             to: to,
             enter: (node) => {
-                if (definingCommands.includes(node.node.name)) {
+                if (definingkeywords.includes(node.node.name)) {
                     const child = node.node.getChild('Text');
                     addVar(child, variableData, 'variable', view, functionsNames, variablesNames);                    
                 } else if (node.node.name  === 'Define') {                    
@@ -322,7 +322,7 @@ function highlightVariables(view: EditorView) {
         })
     }
 
-    let commands = [
+    let keywords = [
         "Assign" , 
         "Print" , 
         "Forward", 
@@ -343,18 +343,18 @@ function highlightVariables(view: EditorView) {
     ]
     // in levels 2 and 3 variables are not substitued inside ask
     // not sure if that's intended behaviour or not
-    if (level > 3) commands.push("Ask")
+    if (level > 3) keywords.push("Ask")
     // Now that we have the variable names, we can distinguish them from other Text nodes
     for (let {from, to} of view.visibleRanges) {
         syntaxTree(view.state).iterate({
             from: from,
             to: to,
             enter: (node) => {
-                if (commands.includes(node.name)) {
+                if (keywords.includes(node.name)) {
                     const children = node.node.getChildren('Text');
-                    // no need to add again the first child of defining commands since 
+                    // no need to add again the first child of defining keywords since 
                     // we already highlighted it in the previous step
-                    let i = definingCommands.includes(node.name) ? 1 : 0
+                    let i = definingkeywords.includes(node.name) ? 1 : 0
                     for (; i < children.length; i++) {
                         const child = children[i];
                         const text = view.state.doc.sliceString(child.from, child.to);

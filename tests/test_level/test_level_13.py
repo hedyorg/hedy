@@ -57,7 +57,7 @@ class TestsLevel13(HedyTester):
             code=code,
             max_level=14,
             expected=expected,
-            expected_commands=['ask', 'ask', 'if', 'and', 'print']
+            expected_keywords=['ask', 'ask', 'if', 'and', 'print']
         )
 
     def test_or(self):
@@ -72,7 +72,7 @@ class TestsLevel13(HedyTester):
             code=code,
             max_level=16,
             expected=expected,
-            expected_commands=['if', 'or', 'print']
+            expected_keywords=['if', 'or', 'print']
         )
 
     def test_simple_function(self):

@@ -332,7 +332,7 @@ class Database:
                                          types=only_in_dev({
                                              'username': str,
                                              'achieved': OptionalOf(ListOf(str)),
-                                             'commands': OptionalOf(ListOf(str)),
+                                             'keywords': OptionalOf(ListOf(str)),
                                              'saved_programs': OptionalOf(int),
                                              'run_programs': OptionalOf(int)
                                          }))
@@ -1084,11 +1084,11 @@ class Database:
             return True
         return False
 
-    def add_commands_to_username(self, username, commands):
+    def add_keywords_to_username(self, username, keywords):
         user_achievements = self.achievements.get({"username": username})
         if not user_achievements:
             user_achievements = {"username": username}
-        user_achievements["commands"] = commands
+        user_achievements["keywords"] = keywords
         self.achievements.put(user_achievements)
 
     def increase_user_run_count(self, username):

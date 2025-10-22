@@ -10,7 +10,7 @@ class TestsLevel2(HedyTester):
     level = 2
     '''
     Tests should be ordered as follows:
-     * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
+     * keywords in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
      * markup tests
      * negative tests
@@ -75,12 +75,12 @@ class TestsLevel2(HedyTester):
     def test_print_line_with_spaces_works(self):
         code = "print hallo\n      \nprint hallo"
         expected = "print(f'hallo')\n\nprint(f'hallo')"
-        expected_commands = [Command.print, Command.print]
+        expected_keywords = [Command.print, Command.print]
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            expected_commands=expected_commands,
+            expected_keywords=expected_keywords,
             max_level=3)
 
     def test_print_exclamation_mark_and_quote(self):
@@ -153,7 +153,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             output='10',
-            expected_commands=[Command.print],
+            expected_keywords=[Command.print],
             max_level=3)
 
     def test_print_number_arabic(self):
@@ -164,7 +164,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             output='١١',
-            expected_commands=[Command.print],
+            expected_keywords=[Command.print],
             max_level=3)
 
     def test_print_var_number(self):
@@ -237,7 +237,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             output=output,
-            expected_commands=[Command.print]
+            expected_keywords=[Command.print]
         )
 
     def test_assign_comment(self):
@@ -632,7 +632,7 @@ class TestsLevel2(HedyTester):
             code=code,
             expected=expected,
             extra_check_function=self.is_turtle(),
-            expected_commands=['is', 'turn'],
+            expected_keywords=['is', 'turn'],
             max_level=5,
         )
 

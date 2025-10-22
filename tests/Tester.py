@@ -132,14 +132,14 @@ class HedyTester(unittest.TestCase):
 
     level = None
     equality_comparison_with_is = ['is', '=']
-    equality_comparison_commands = ['==', '=']
-    number_comparison_commands = ['>', '>=', '<', '<=']
-    comparison_commands = number_comparison_commands + ['!=']
+    equality_comparison_keywords = ['==', '=']
+    number_comparison_keywords = ['>', '>=', '<', '<=']
+    comparison_keywords = number_comparison_keywords + ['!=']
     arithmetic_operations = ['+', '-', '*', '/']
-    in_not_in_list_commands = ['in', 'not in']
+    in_not_in_list_keywords = ['in', 'not in']
     quotes = ["'", '"']
     booleans = [('true', True), ('True', True), ('false', False), ('False', False)]
-    commands_level_4 = [("print 'hello'", "print(f'hello')"),
+    keywords_level_4 = [("print 'hello'", "print(f'hello')"),
                         ("name is ask 'who?'", "name = input(f'who?')"),
                         ('name is Harry', "name = 'Harry'")]
 
@@ -218,7 +218,7 @@ class HedyTester(unittest.TestCase):
             exception=None,
             skipped_mappings: 'list[SkippedMapping]' = None,
             extra_check_function=None,
-            expected_commands=None,
+            expected_keywords=None,
             unused_allowed=False,
             lang='en',
             translate=True,
@@ -251,7 +251,7 @@ class HedyTester(unittest.TestCase):
                 exception=exception,
                 skipped_mappings=skipped_mappings,
                 extra_check_function=extra_check_function,
-                expected_commands=expected_commands,
+                expected_keywords=expected_keywords,
                 unused_allowed=unused_allowed,
                 lang=lang,
                 translate=translate,
@@ -269,7 +269,7 @@ class HedyTester(unittest.TestCase):
             expected=None,
             extra_check_function=None,
             output=None,
-            expected_commands=None,
+            expected_keywords=None,
             unused_allowed=False,
             lang='en',
             translate=True,
@@ -319,12 +319,12 @@ class HedyTester(unittest.TestCase):
                     if expected is not None:
                         self.assertEqual(expected, result.code)
 
-                    all_commands = result.commands
-                    if expected_commands is not None:
-                        self.assertEqual(expected_commands, all_commands)
+                    all_keywords = result.keywords
+                    if expected_keywords is not None:
+                        self.assertEqual(expected_keywords, all_keywords)
                     # <- use this to run tests locally with unittest
-                    skipped_commands = ['ask', 'input', 'clear', 'play']
-                    if not any(x for x in skipped_commands if x in all_commands):
+                    skipped_keywords = ['ask', 'input', 'clear', 'play']
+                    if not any(x for x in skipped_keywords if x in all_keywords):
                         if microbit:
                             return
                         else:

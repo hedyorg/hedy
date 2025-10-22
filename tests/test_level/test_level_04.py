@@ -13,7 +13,7 @@ class TestsLevel4(HedyTester):
     level = 4
     '''
     Tests should be ordered as follows:
-     * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
+     * keywords in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
      * markup tests
      * negative tests
@@ -144,12 +144,12 @@ class TestsLevel4(HedyTester):
     def test_print_line_with_spaces_works(self):
         code = "print 'hallo'\n      \nprint 'hallo'"
         expected = "print(f'hallo')\n\nprint(f'hallo')"
-        expected_commands = [Command.print, Command.print]
+        expected_keywords = [Command.print, Command.print]
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            expected_commands=expected_commands,
+            expected_keywords=expected_keywords,
             max_level=7, skip_faulty=False)
 
     def test_print_single_quoted_text_with_inner_double_quote(self):
@@ -475,7 +475,7 @@ class TestsLevel4(HedyTester):
             code=code,
             expected=expected,
             output='10',
-            expected_commands=[Command.print],
+            expected_keywords=[Command.print],
             max_level=11)
 
     def test_print_number_arabic(self):
@@ -486,7 +486,7 @@ class TestsLevel4(HedyTester):
             code=code,
             expected=expected,
             output='١١',
-            expected_commands=[Command.print],
+            expected_keywords=[Command.print],
             max_level=11)
 
     def test_print_multi_args(self):
@@ -497,7 +497,7 @@ class TestsLevel4(HedyTester):
             code=code,
             expected=expected,
             output='helloHedy4١١',
-            expected_commands=[Command.print],
+            expected_keywords=[Command.print],
             max_level=11)
 
     #

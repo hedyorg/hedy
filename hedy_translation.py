@@ -53,7 +53,7 @@ def lang_switch_table(level: int, lang1: str, lang2: str | None = None):
 
     return {
         xlated_phrase(keyword_symbol, from_lang): xlated_phrase(keyword_symbol, to_lang)
-        for keyword_symbol in hedy.commands_per_level[level]
+        for keyword_symbol in hedy.keywords_per_level[level]
     }
 
 

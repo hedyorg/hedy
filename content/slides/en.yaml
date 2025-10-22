@@ -348,7 +348,7 @@ levels:
     5:
         1:
             header: Welcome to level 5
-            text: 'In this level you will learn to use 3 new commands: `{if}`, `{else}` and `{in}`.'
+            text: 'In this level you will learn to use 3 new keywords: `{if}`, `{else}` and `{in}`.'
         2:
             header: if
             text: |-
@@ -377,14 +377,14 @@ levels:
             text: |-
                 You might have noticed that your lines can get very long when you have both an `{if}` and an `{else}` command.
 
-                You can choose to separate commands and put them on 2 lines, like this:
+                You can choose to separate keywords and put them on 2 lines, like this:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
         6:
             header: Another new command
             text: |-
-                If you have practised with the `{if}` and `{else}` commands, you can also try the `{in}` command.
+                If you have practised with the `{if}` and `{else}` keywords, you can also try the `{in}` command.
 
                 With `{in}` you can let the computer check if an item is in a list, for example:
 
@@ -446,7 +446,7 @@ levels:
             header: The = symbol
             text: |-
                 From now on you can also use the = symbol instead of the `{is}` command.
-                This goes for both numbers and words, and it also goes after the `{if}` or `{else}` commands.
+                This goes for both numbers and words, and it also goes after the `{if}` or `{else}` keywords.
             code: |-
                 name = Hedy
                 answer = 20 + 4
@@ -527,9 +527,9 @@ levels:
     8:
         1:
             header: Welcome to level 8
-            text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` commands work for multiple lines of code.
+            text: In this level you will learn to use indentation to make the `{repeat}`, `{if}` and `{else}` keywords work for multiple lines of code.
         2:
-            header: '{repeat} commands before'
+            header: '{repeat} keywords before'
             text: |-
                 In the previous levels, the `{repeat}` command looked like this:
 
@@ -537,7 +537,7 @@ levels:
             code: '{repeat} 5 {times} {print} ''Help!'''
             debug: 'True'
         3:
-            header: '{repeat} commands now'
+            header: '{repeat} keywords now'
             text: |-
                 In this level you can repeat multiple lines of code. To do this you must tell the computer which lines belong together and should be repeated.
                 You do this by using indentation.
@@ -548,7 +548,7 @@ levels:
                     {print} 'Hello everyone'
                     {print} 'This will be printed 5 times'
         4:
-            header: '{repeat} commands now'
+            header: '{repeat} keywords now'
             text: |-
                 If you want to, you can continue after the `{repeat}` command without indentation.
                 The lines that do not start with indentation will not be repeated.
@@ -559,8 +559,8 @@ levels:
         5:
             header: if and else before
             text: |-
-                The same goes for the `{if}` and `{else}` commands.
-                These were the commands before:
+                The same goes for the `{if}` and `{else}` keywords.
+                These were the keywords before:
             code: |-
                 {if} name {is} Hedy {print} 'nice'
                 {else} {print} 'boo!'
@@ -568,8 +568,8 @@ levels:
         6:
             header: if and else now
             text: |-
-                These are the `{if}` and `{else}` commands now.
-                Each line after the `{if}` and `{else}` commands start with indentation.
+                These are the `{if}` and `{else}` keywords now.
+                Each line after the `{if}` and `{else}` keywords start with indentation.
             code: |-
                 name = {ask} 'What is your name?'
                 {if} name {is} Hedy
@@ -584,7 +584,7 @@ levels:
             header: if statements inside if statements
             text: |-
                 You might have thought of trying to put an if command inside a repeat command, or inside another if command.
-                For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` commands with proper indentation first.
+                For now, this is not possible yet. In the higher levels, it will be allowed, but for now let's focus on practising the `{if}` `{else}` and `{repeat}` keywords with proper indentation first.
         9:
             header: Debugging
             text: Let's debug this code!
@@ -787,7 +787,7 @@ levels:
             header: Quotation marks
             text: |-
                 This level makes some changes to the usage of quotation marks.
-                From now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} commands.
+                From now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} keywords.
             code: |-
                 name = 'Hedy the Robot'
                 {print} 'Hello ' name
@@ -1186,7 +1186,7 @@ levels:
     18:
         1:
             header: Welcome to level 18
-            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
+            text: Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like replit or PyCharm, and you can continue learning there! Note however that Python can only read English keywords, so if you have been using other languages, you will need to switch to English now.
         2:
             header: The Python way
             text: |-

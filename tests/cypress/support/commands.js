@@ -1,30 +1,30 @@
 // ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
+// This example keywords.js shows you how to
+// create various custom keywords and overwrite
+// existing keywords.
 //
 // For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
+// keywords please read more here:
+// https://on.cypress.io/custom-keywords
 // ***********************************************
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+// Cypress.keywords.add('login', (email, password) => { ... })
 //
 //
 // -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
+// Cypress.keywords.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
 //
 //
 // -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
+// Cypress.keywords.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
 //
 //
 // -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+// Cypress.keywords.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('getDataCy', (selector, ...args) => {
+Cypress.keywords.add('getDataCy', (selector, ...args) => {
   let dataSelector = "";
   const selectors = selector.split(" ");
   for (let s of selectors) {
@@ -39,6 +39,6 @@ Cypress.Commands.add('getDataCy', (selector, ...args) => {
   return cy.get(dataSelector, ...args)
 })
 
-Cypress.Commands.add('getDataCyLike', (selector, ...args) => {
+Cypress.keywords.add('getDataCyLike', (selector, ...args) => {
   return cy.get(`*[data-cy="${selector}"]`, ...args)
 })

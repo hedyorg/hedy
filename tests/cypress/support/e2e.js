@@ -13,11 +13,11 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
-import './commands'
+// Import keywords.js using ES2015 syntax:
+import './keywords'
 import '@cypress/code-coverage/support'
 // Alternatively you can use CommonJS syntax:
-// require('./commands')
+// require('./keywords')
 
 // Hide fetch/XHR requests
 const app = window.top;

@@ -22,7 +22,7 @@ class Env1
 {
     var outs: string // string voor outputs
     var ins: string // string met laatst ingevoerde input
-    var turtle: string // TODO structuur voor turtle (commands/grid/bitmap...?) boolean turtle exists?
+    var turtle: string // TODO structuur voor turtle (keywords/grid/bitmap...?) boolean turtle exists?
 }
 
 type Config1 = (Com1, Env1)
@@ -88,7 +88,7 @@ datatype O2 = Empty
 datatype M = N(int)
            | V(string)
 
-// Used for commands turn, forward, sleep
+// Used for keywords turn, forward, sleep
 function bigstep_O2(c: Com2, o: O2, e: Env2): int
 {
     match(o){
@@ -107,7 +107,7 @@ class Env2
 {
     var outs: string // string voor outputs
     //type sigma = map<string, string> // memory, Loc > A* // of var sigma : array<string> ?
-    var turtle: string // TODO structuur voor turtle (commands/grid/bitmap...?) boolean turtle exists
+    var turtle: string // TODO structuur voor turtle (keywords/grid/bitmap...?) boolean turtle exists
 }
 
 type Config2 = (Com2, Env2)
@@ -165,7 +165,7 @@ datatype U = N(int)
 type L = array<M>
 
 
-// Used for commands turn, forward, sleep
+// Used for keywords turn, forward, sleep
 function bigstep_O3(c: Com3, o: O3, e: Env3): int
 {
     match(o){
@@ -187,7 +187,7 @@ class Env3
 {
     var outs: string // string voor outputs
     // var sigma : array<T> // TODO memory, Loc > disjoint union of A*, Z, ListT
-    var turtle: string // TODO structuur voor turtle (commands/grid/bitmap...?) boolean turtle exists
+    var turtle: string // TODO structuur voor turtle (keywords/grid/bitmap...?) boolean turtle exists
 }
 
 type Config3 = (Com3, Env3)
@@ -265,7 +265,7 @@ class Env5
 {
     var outs: string // string voor outputs
     //function sigma(string): string // TODO memory, Loc > disjoint union of A*, Z, ListT, BOOLEAN (bool is nieuw)
-    var turtle: string // TODO structuur voor turtle (commands/grid/bitmap...?) boolean turtle exists
+    var turtle: string // TODO structuur voor turtle (keywords/grid/bitmap...?) boolean turtle exists
 }
 
 type Config5 = (Com5, Env5)

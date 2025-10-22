@@ -305,10 +305,10 @@ def merge_rules_operator(prev_definition, new_definition, name, complete_line):
     add_arg = op_to_arg.get(ADD_GRAMMAR_MERGE_OP, '')
     remove_arg = op_to_arg.get(REMOVE_GRAMMAR_MERGE_OP, '')
     last_arg = op_to_arg.get(LAST_GRAMMAR_MERGE_OP, '')
-    remaining_commands = get_remaining_rules(prev_definition, remove_arg, last_arg)
-    ordered_commands = split_rule(remaining_commands, add_arg, last_arg)
+    remaining_keywords = get_remaining_rules(prev_definition, remove_arg, last_arg)
+    ordered_keywords = split_rule(remaining_keywords, add_arg, last_arg)
 
-    new_rule = f"{name}: {' | '.join(ordered_commands)}" if bool(op_to_arg) else complete_line
+    new_rule = f"{name}: {' | '.join(ordered_keywords)}" if bool(op_to_arg) else complete_line
     deletable = split_rule(remove_arg)
     return new_rule, deletable
 
@@ -328,14 +328,14 @@ def get_operator_to_argument(definition):
 
 
 def get_remaining_rules(orig_def, *sub_def):
-    original_commands = split_rule(orig_def)
-    commands_after_minus = split_rule(*sub_def)
-    misses = [c for c in commands_after_minus if c not in original_commands]
+    original_keywords = split_rule(orig_def)
+    keywords_after_minus = split_rule(*sub_def)
+    misses = [c for c in keywords_after_minus if c not in original_keywords]
     if misses:
         raise Exception(f"Command(s) {'|'.join(misses)} do not exist in the previous definition")
-    remaining_commands = [cmd for cmd in original_commands if cmd not in commands_after_minus]
-    remaining_commands = ' | '.join(remaining_commands)  # turn the result list into a string
-    return remaining_commands
+    remaining_keywords = [cmd for cmd in original_keywords if cmd not in keywords_after_minus]
+    remaining_keywords = ' | '.join(remaining_keywords)  # turn the result list into a string
+    return remaining_keywords
 
 
 def split_rule(*rules):

@@ -95,13 +95,13 @@ class TestErrors(HedyTester):
         self.assertEqual(expected, result)
 
     def test_highlight_template_multiple_parts(self):
-        result = _highlight('this commands `start`,`middle`,`end`.')
-        expected = f'this commands {highlighted("start")},{highlighted("middle")},{highlighted("end")}.'
+        result = _highlight('this keywords `start`,`middle`,`end`.')
+        expected = f'this keywords {highlighted("start")},{highlighted("middle")},{highlighted("end")}.'
         self.assertEqual(expected, result)
 
     def test_highlight_template_consecutive_parts(self):
-        result = _highlight('this commands `start``middle``end`.')
-        expected = f'this commands {highlighted("start")}{highlighted("middle")}{highlighted("end")}.'
+        result = _highlight('this keywords `start``middle``end`.')
+        expected = f'this keywords {highlighted("start")}{highlighted("middle")}{highlighted("end")}.'
         self.assertEqual(expected, result)
 
     def test_highlight_whole_template_triple_backquotes(self):

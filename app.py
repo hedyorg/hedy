@@ -79,9 +79,9 @@ os.chdir(os.path.join(os.getcwd(), __file__.replace(
     os.path.basename(__file__), '')))
 
 
-COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
+keywords = collections.defaultdict(hedy_content.NoSuchCommand)
 for lang in ALL_LANGUAGES.keys():
-    COMMANDS[lang] = hedy_content.Commands(lang)
+    keywords[lang] = hedy_content.keywords(lang)
 
 ADVENTURES = collections.defaultdict(hedy_content.NoSuchAdventure)
 for lang in ALL_LANGUAGES.keys():
@@ -957,15 +957,15 @@ def version_page():
                            commit=commit)
 
 
-@app.route('/commands/<id>')
-def all_commands(id):
+@app.route('/keywords/<id>')
+def all_keywords(id):
     program = g_db().program_by_id(id)
     code = program.get('code')
     level = program.get('level')
     lang = program.get('lang')
     return render_template(
-        'commands.html',
-        commands=hedy.all_commands(code, level, lang))
+        'keywords.html',
+        keywords=hedy.all_keywords(code, level, lang))
 
 
 @app.route('/programs', methods=['GET'])
@@ -1182,7 +1182,7 @@ def hour_of_code(level, program_id=None):
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
     customizations['available_levels'] = available_levels
-    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = keywords[g.lang].get_keywords_for_level(level, g.keyword_lang)
 
     adventures = load_adventures_for_level(level, subset=HOUR_OF_CODE_ADVENTURES[level])
     load_customized_adventures(level, customizations, adventures)
@@ -1307,7 +1307,7 @@ def index(level, program_id):
     # Add the available levels to the customizations dict -> simplify
     # implementation on the front-end
     customizations['available_levels'] = available_levels
-    cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    cheatsheet = keywords[g.lang].get_keywords_for_level(level, g.keyword_lang)
 
     adventures = load_adventures_for_level(level)
     load_customized_adventures(level, customizations, adventures)
@@ -1673,9 +1673,9 @@ def get_cheatsheet_page(level):
     except BaseException:
         return utils.error_page(error=404, ui_message=gettext('no_such_level'))
 
-    commands = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
+    keywords = keywords[g.lang].get_keywords_for_level(level, g.keyword_lang)
 
-    return render_template("printable/cheatsheet.html", commands=commands, level=level)
+    return render_template("printable/cheatsheet.html", keywords=keywords, level=level)
 
 
 @app.errorhandler(404)

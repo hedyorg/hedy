@@ -8,7 +8,7 @@ class TestsLevel10(HedyTester):
     level = 10
     '''
     Tests should be ordered as follows:
-     * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
+     * keywords in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
      * markup tests
      * negative tests
@@ -181,7 +181,7 @@ class TestsLevel10(HedyTester):
 
         self.multi_level_tester(code=code, expected=expected, max_level=11)
 
-    def test_repeat_nested_multi_commands(self):
+    def test_repeat_nested_multi_keywords(self):
         code = textwrap.dedent("""\
             repeat 3 times
                 print 3
@@ -308,7 +308,7 @@ class TestsLevel10(HedyTester):
             code=code,
             expected=expected,
             max_level=11,
-            expected_commands=['is', 'if', 'repeat', 'print'])
+            expected_keywords=['is', 'if', 'repeat', 'print'])
 
     def test_if_else_nested_in_repeat(self):
         code = textwrap.dedent("""\

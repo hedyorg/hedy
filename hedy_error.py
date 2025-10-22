@@ -52,7 +52,7 @@ def get_error_text(ex, lang):
             if nested_arguments:
                 arguments[k] = v.format(**nested_arguments)
 
-    # Errors might contain hardcoded references to commands which are not supplied in the arguments, e.g. {print}, {ask}
+    # Errors might contain hardcoded references to keywords which are not supplied in the arguments, e.g. {print}, {ask}
     arguments.update(_get_missing_arguments(error_template, arguments, lang))
 
     # Do not use a safe_format here. Every exception is tested against every language in tests_translation_error

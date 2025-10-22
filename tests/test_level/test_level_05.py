@@ -10,7 +10,7 @@ class TestsLevel5(HedyTester):
     level = 5
     '''
     Tests should be ordered as follows:
-     * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
+     * keywords in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
      * markup tests
      * negative tests
@@ -24,7 +24,7 @@ class TestsLevel5(HedyTester):
     #
     # if tests
     #
-    @parameterized.expand(HedyTester.commands_level_4)
+    @parameterized.expand(HedyTester.keywords_level_4)
     def test_if_equality_linebreak_print(self, hedy_, python):
         # line breaks after if-condition are allowed
         code = textwrap.dedent(f"""\
@@ -173,7 +173,7 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(
             code=code,
-            expected_commands=['is', 'if', 'print'],
+            expected_keywords=['is', 'if', 'print'],
             expected=expected)
 
     @parameterized.expand(HedyTester.quotes)
@@ -203,7 +203,7 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(
             code=code,
-            expected_commands=['ask', 'if', 'else', 'if', 'print', 'print'],
+            expected_keywords=['ask', 'if', 'else', 'if', 'print', 'print'],
             expected=expected)
 
     def test_if_equality_single_quoted_rhs_with_inner_double_quote(self):
@@ -218,7 +218,7 @@ class TestsLevel5(HedyTester):
 
         self.single_level_tester(
             code=code,
-            expected_commands=['is', 'if', 'print'],
+            expected_keywords=['is', 'if', 'print'],
             expected=expected)
 
     def test_if_equality_double_quoted_rhs_with_inner_single_quote(self):

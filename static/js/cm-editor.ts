@@ -5,8 +5,8 @@ import {
 } from '@codemirror/view'
 import { EditorState, Compartment, StateEffect, Prec, Extension, Facet } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
-import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
-import { history } from "@codemirror/commands"
+import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/keywords'
+import { history } from "@codemirror/keywords"
 import { indentOnInput, defaultHighlightStyle, syntaxHighlighting, LanguageSupport, indentUnit, indentService } from "@codemirror/language"
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import {

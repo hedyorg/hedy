@@ -12,7 +12,7 @@ class TestsLevel9(HedyTester):
     level = 9
     '''
     Tests should be ordered as follows:
-     * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
+     * keywords in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
      * markup tests
      * negative tests
@@ -481,7 +481,7 @@ class TestsLevel9(HedyTester):
             code=code,
             expected=expected,
             output='found!',
-            expected_commands=['is', 'is', 'if', 'in', 'print']
+            expected_keywords=['is', 'is', 'if', 'in', 'print']
         )
 
     def test_if_not_in_list_print(self):
@@ -502,7 +502,7 @@ class TestsLevel9(HedyTester):
             output='Not found'
         )
 
-    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    @parameterized.expand(HedyTester.in_not_in_list_keywords)
     def test_if_not_in_and_in_list_with_string_var_gives_type_error(self, operator):
         code = textwrap.dedent(f"""\
         items is red
@@ -515,7 +515,7 @@ class TestsLevel9(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    @parameterized.expand(HedyTester.in_not_in_list_keywords)
     def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
         code = textwrap.dedent(f"""\
             items is ask 'What are the items?'
@@ -695,12 +695,12 @@ class TestsLevel9(HedyTester):
     def test_print_line_with_spaces_works(self):
         code = "print 'hallo'\n      \nprint 'hallo'"
         expected = "print(f'hallo')\nprint(f'hallo')"
-        expected_commands = [Command.print, Command.print]
+        expected_keywords = [Command.print, Command.print]
 
         self.multi_level_tester(
             code=code,
             expected=expected,
-            expected_commands=expected_commands,
+            expected_keywords=expected_keywords,
             max_level=11)
 
     def test_if_empty_start_line_with_whitespace_else_print(self):
@@ -1133,7 +1133,7 @@ class TestsLevel9(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['repeat', 'print'],
+            expected_keywords=['repeat', 'print'],
             output=output,
             max_level=11
         )
@@ -1163,7 +1163,7 @@ class TestsLevel9(HedyTester):
         self.multi_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['is', 'repeat', 'print', 'print'],
+            expected_keywords=['is', 'repeat', 'print', 'print'],
             output=output,
             max_level=11
         )
