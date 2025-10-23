@@ -2813,6 +2813,13 @@ class ConvertToPython_10(ConvertToPython_8_9):
         #     lines.insert(0, f'global_scope_["{escape_var(for_var)}"] = {escape_var(for_var)}')
         return lines
 
+    def and_condition(self, meta, args):
+        return ' and '.join(args)
+
+    def or_condition(self, meta, args):
+        return ' or '.join(args)
+
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=11)
@@ -3261,12 +3268,6 @@ class ConvertToPython_12(ConvertToPython_11):
 @hedy_transpiler(level=13)
 @source_map_transformer(source_map)
 class ConvertToPython_13(ConvertToPython_12):
-    def and_condition(self, meta, args):
-        return ' and '.join(args)
-
-    def or_condition(self, meta, args):
-        return ' or '.join(args)
-
     def process_comparison(self, meta, args, operator):
         arg0 = self.process_variable_for_comparisons(args[0], meta)
         arg1 = self.process_variable_for_comparisons(args[1], meta)
