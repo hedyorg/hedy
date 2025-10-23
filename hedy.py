@@ -2784,14 +2784,6 @@ else:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(body)}"""
 
 
-# move elif and else into this is nicer and scales better!
-
-    def else_clause(self, meta, args):
-        return ('\n'.join(args))
-
-    def elif_clause(self, meta, args):
-        return ('\n'.join(args))
-
 
 @v_args(meta=True)
 @hedy_transpiler(level=10)
