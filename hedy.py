@@ -2783,6 +2783,14 @@ else:{self.add_debug_breakpoint()}
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(body)}"""
 
+    def else_clause(self, meta, args):
+        return f"""else:{self.add_debug_breakpoint()}
+{ConvertToPython.indent('\n'.join(args))}"""
+
+    def elif_clause(self, meta, args):
+        return f"""elif {args[0]}:{self.add_debug_breakpoint()}
+{ConvertToPython.indent('\n'.join(args[1:]))}"""
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=10)
