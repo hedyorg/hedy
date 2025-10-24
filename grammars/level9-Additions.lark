@@ -21,6 +21,5 @@ error_repeat_dep_8:<old_rule_to_error repeat>
 
 // FH jan 2022 (#1817) we can allow unquoted rhs's again cause there now is a line break after
 // not sure of we want it, but we could
-equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces | NUMBER | textwithinnerspaces) _SPACE?
-
-
+// TODO: I might improve this later, waiting for Felienne to reply on issue #1817
+equality_check: (NUMBER | textwithoutspaces) (_IS | _EQUALS) (NUMBER | quoted_text | textwithoutspaces) _SPACE?
