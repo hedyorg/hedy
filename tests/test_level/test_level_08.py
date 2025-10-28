@@ -11,7 +11,7 @@ class TestsLevel8(HedyTester):
     level = 8
     '''
     Tests should be ordered as follows:
-     * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
+     * keywords in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
      * markup tests
      * negative tests
@@ -303,7 +303,7 @@ class TestsLevel8(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['repeat', 'print'],
+            expected_keywords=['repeat', 'print'],
             output=output)
 
     def test_repeat_with_variable_name_collision(self):
@@ -330,7 +330,7 @@ class TestsLevel8(HedyTester):
         self.single_level_tester(
             code=code,
             expected=expected,
-            expected_commands=['is', 'repeat', 'print', 'print'],
+            expected_keywords=['is', 'repeat', 'print', 'print'],
             output=output)
 
     def test_repeat_if(self):

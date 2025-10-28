@@ -10,7 +10,7 @@ class TestsLevel6(HedyTester):
     level = 6
     '''
     Tests should be ordered as follows:
-     * commands in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
+     * keywords in the order of hedy.py e.g. for level 1: ['print', 'ask', 'echo', 'turn', 'forward']
      * combined tests
      * markup tests
      * negative tests
@@ -24,7 +24,7 @@ class TestsLevel6(HedyTester):
     #
     # if tests
     #
-    @parameterized.expand(HedyTester.commands_level_4)
+    @parameterized.expand(HedyTester.keywords_level_4)
     def test_if_equality_linebreak_print(self, hedy_, python):
         # line breaks after if-condition are allowed
         code = textwrap.dedent(f"""\
@@ -86,7 +86,7 @@ class TestsLevel6(HedyTester):
             code=code,
             expected=expected,
             output='found!',
-            expected_commands=['is', 'is', 'if', 'in', 'print']
+            expected_keywords=['is', 'is', 'if', 'in', 'print']
         )
 
     def test_if_var_in_list_print_else(self):
@@ -162,7 +162,7 @@ class TestsLevel6(HedyTester):
             code=code,
             expected=expected,
             output='found!',
-            expected_commands=['is', 'if', 'in', 'print']
+            expected_keywords=['is', 'if', 'in', 'print']
         )
 
     @parameterized.expand(HedyTester.quotes)
@@ -212,7 +212,7 @@ class TestsLevel6(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
-    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    @parameterized.expand(HedyTester.in_not_in_list_keywords)
     def test_if_not_in_and_in_list_with_string_var_gives_type_error(self, operator):
         code = textwrap.dedent(f"""\
         items is red
@@ -224,7 +224,7 @@ class TestsLevel6(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    @parameterized.expand(HedyTester.in_not_in_list_keywords)
     def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
         code = textwrap.dedent(f"""\
         items is ask 'What are the items?'
@@ -367,7 +367,7 @@ class TestsLevel6(HedyTester):
 
         self.single_level_tester(
             code=code,
-            expected_commands=['is', 'if', 'print'],
+            expected_keywords=['is', 'if', 'print'],
             expected=expected)
 
     @parameterized.expand(HedyTester.quotes)
@@ -397,7 +397,7 @@ class TestsLevel6(HedyTester):
 
         self.single_level_tester(
             code=code,
-            expected_commands=['ask', 'if', 'else', 'print', 'print'],
+            expected_keywords=['ask', 'if', 'else', 'print', 'print'],
             expected=expected)
 
     def test_if_equality_single_quoted_rhs_with_inner_double_quote(self):
@@ -412,7 +412,7 @@ class TestsLevel6(HedyTester):
 
         self.single_level_tester(
             code=code,
-            expected_commands=['is', 'if', 'print'],
+            expected_keywords=['is', 'if', 'print'],
             expected=expected)
 
     def test_if_equality_double_quoted_rhs_with_inner_single_quote(self):
@@ -460,7 +460,7 @@ class TestsLevel6(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    @parameterized.expand(HedyTester.in_not_in_list_keywords)
     def test_if_not_in_and_in_list_with_string_var_gives_type_error(self, operator):
         code = textwrap.dedent(f"""\
         items is red
@@ -472,7 +472,7 @@ class TestsLevel6(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    @parameterized.expand(HedyTester.in_not_in_list_commands)
+    @parameterized.expand(HedyTester.in_not_in_list_keywords)
     def test_if_not_in_and_in_list_with_input_gives_type_error(self, operator):
         code = textwrap.dedent(f"""\
         items is ask 'What are the items?'
@@ -891,7 +891,7 @@ class TestsLevel6(HedyTester):
             code=code,
             expected=expected,
             output='found!',
-            expected_commands=['is', 'is', 'if', 'in', 'print']
+            expected_keywords=['is', 'is', 'if', 'in', 'print']
         )
 
     def test_if_var_in_list_print_else(self):
@@ -967,7 +967,7 @@ class TestsLevel6(HedyTester):
             code=code,
             expected=expected,
             output='found!',
-            expected_commands=['is', 'if', 'in', 'print']
+            expected_keywords=['is', 'if', 'in', 'print']
         )
 
     @parameterized.expand(HedyTester.quotes)

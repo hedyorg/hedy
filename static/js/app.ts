@@ -1673,7 +1673,7 @@ function updatePageElements() {
     $('#share_program_button').show()
     $('#read_outloud_button_container').show()
     $('#cheatsheet_dropdown_container').show()
-    $('#commands_dropdown_container').show()
+    $('#keywords_dropdown_container').show()
     $('#hand_in_button').show()
   }
 }

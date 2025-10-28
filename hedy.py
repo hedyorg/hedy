@@ -236,7 +236,7 @@ class Command:
     while_ = 'while'
 
 
-translatable_commands = {Command.print: ['print'],
+translatable_keywords = {Command.print: ['print'],
                          Command.ask: ['ask'],
                          Command.echo: ['echo'],
                          Command.turn: ['turn'],
@@ -286,39 +286,39 @@ def promote_types(types, rules):
     return types
 
 
-def add_level(commands, level, add=None, remove=None):
-    # Adds the commands for the given level by taking the commands of the previous level
+def add_level(keywords, level, add=None, remove=None):
+    # Adds the keywords for the given level by taking the keywords of the previous level
     # and adjusting the list based on which keywords need to be added or/and removed
     if not add:
         add = []
     if not remove:
         remove = []
-    commands[level] = [c for c in commands[level - 1] if c not in remove] + add
+    keywords[level] = [c for c in keywords[level - 1] if c not in remove] + add
 
 
-# Commands per Hedy level which are used to suggest the closest command when kids make a mistake. This list is also used to generate the list of keywords in the language switcher.
-commands_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
-add_level(commands_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
-add_level(commands_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to_list'])
-add_level(commands_per_level, level=4, add=['clear'])
-add_level(commands_per_level, level=5, add=['else', 'if',])
-add_level(commands_per_level, level=6, add=['in', 'not_in', 'pressed', 'elif'])
-add_level(commands_per_level, level=7)
-add_level(commands_per_level, level=8, add=['repeat', 'times'])
-add_level(commands_per_level, level=9)
-add_level(commands_per_level, level=10, add=['and', 'or'])
-add_level(commands_per_level, level=11, add=['for'])
-add_level(commands_per_level, level=12, add=['define', 'call'])
-add_level(commands_per_level, level=13, add=['input', 'range'], remove=['ask', 'call', 'define', 'repeat'])
-add_level(commands_per_level, level=14)
-add_level(commands_per_level, level=15)
-add_level(commands_per_level, level=16, add=['while'])
+# keywords per Hedy level which are used to suggest the closest command when kids make a mistake. This list is also used to generate the list of keywords in the language switcher.
+keywords_per_level = {1: ['ask', 'color', 'echo', 'forward', 'play', 'print', 'turn']}
+add_level(keywords_per_level, level=2, add=['is', 'sleep'], remove=['echo'])
+add_level(keywords_per_level, level=3, add=['add', 'at', 'from', 'random', 'remove', 'to_list'])
+add_level(keywords_per_level, level=4, add=['clear'])
+add_level(keywords_per_level, level=5, add=['else', 'if',])
+add_level(keywords_per_level, level=6, add=['in', 'not_in', 'pressed', 'elif'])
+add_level(keywords_per_level, level=7)
+add_level(keywords_per_level, level=8, add=['repeat', 'times'])
+add_level(keywords_per_level, level=9)
+add_level(keywords_per_level, level=10, add=['and', 'or'])
+add_level(keywords_per_level, level=11, add=['for'])
+add_level(keywords_per_level, level=12, add=['define', 'call'])
+add_level(keywords_per_level, level=13, add=['input', 'range'], remove=['ask', 'call', 'define', 'repeat'])
+add_level(keywords_per_level, level=14)
+add_level(keywords_per_level, level=15)
+add_level(keywords_per_level, level=16, add=['while'])
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
 
 
-def color_commands_local(language):
+def color_keywords_local(language):
     colors_local = [hedy_translation.translate_keyword_from_en(k, language) for k in english_colors]
     return colors_local
 
@@ -327,11 +327,11 @@ def command_make_color_local(language):
     if language == "en":
         return english_colors
     else:
-        return english_colors + color_commands_local(language)
+        return english_colors + color_keywords_local(language)
 
 
-# Commands and their types per level (only partially filled!)
-commands_and_types_per_level = {
+# keywords and their types per level (only partially filled!)
+keywords_and_types_per_level = {
     Command.print: {
         1: [HedyType.string, HedyType.integer, HedyType.input, HedyType.list],
         4: [HedyType.string, HedyType.integer, HedyType.input],
@@ -408,11 +408,11 @@ characters_that_need_escaping = ["\\", "'"]
 character_skulpt_cannot_parse = re.compile('[^a-zA-Z0-9_]')
 
 
-def get_list_keywords(commands, to_lang):
-    """ Returns a list with the local keywords of the argument 'commands'
+def get_list_keywords(keywords, to_lang):
+    """ Returns a list with the local keywords of the argument 'keywords'
     """
 
-    translation_commands = []
+    translation_keywords = []
     dir = path.abspath(path.dirname(__file__))
     path_keywords = dir + "/content/keywords"
 
@@ -425,29 +425,29 @@ def get_list_keywords(commands, to_lang):
     try:
         with open(to_yaml_filesname_with_path, 'r', encoding='utf-8') as stream:
             to_yaml_dict = yaml.safe_load(stream)
-        for command in commands:
+        for command in keywords:
             try:
-                translation_commands.append(to_yaml_dict[command])
+                translation_keywords.append(to_yaml_dict[command])
             except Exception:
-                translation_commands.append(en_yaml_dict[command])
+                translation_keywords.append(en_yaml_dict[command])
     except Exception:
-        for command in commands:
-            translation_commands.append(en_yaml_dict[command])
+        for command in keywords:
+            translation_keywords.append(en_yaml_dict[command])
 
-    return translation_commands
+    return translation_keywords
 
 
 def get_suggestions_for_language(lang, level):
     if not local_keywords_enabled:
         lang = 'en'
 
-    lang_commands = get_list_keywords(commands_per_level[level], lang)
+    lang_keywords = get_list_keywords(keywords_per_level[level], lang)
 
     # if we allow multiple keyword languages:
-    en_commands = get_list_keywords(commands_per_level[level], 'en')
-    en_lang_commands = list(set(en_commands + lang_commands))
+    en_keywords = get_list_keywords(keywords_per_level[level], 'en')
+    en_lang_keywords = list(set(en_keywords + lang_keywords))
 
-    return en_lang_commands
+    return en_lang_keywords
 
 
 def escape_var(var):
@@ -461,7 +461,7 @@ def style_command(command):
     return f'<span class="command-highlighted">{command}</span>'
 
 
-def closest_command(input_, known_commands, threshold=2):
+def closest_command(input_, known_keywords, threshold=2):
     # Find the closest command to the input, i.e. the one with the smallest distance within the threshold. Returns:
     #  (None, _)  No suggestion. There is no command similar enough to the input. For example, the distance
     #             between 'eechoooo' and 'echo' is higher than the specified threshold.
@@ -472,7 +472,7 @@ def closest_command(input_, known_commands, threshold=2):
     # FH, early 2020: simple string distance, could be more sophisticated MACHINE LEARNING!
     minimum_distance = 1000
     result = None
-    for command in known_commands:
+    for command in known_keywords:
         minimum_distance_for_command = calculate_minimum_distance(command, input_)
         if minimum_distance_for_command < minimum_distance and minimum_distance_for_command <= threshold:
             minimum_distance = minimum_distance_for_command
@@ -653,7 +653,7 @@ class ExtractAST(Transformer):
 # This visitor collects all entries that should be part of the lookup table. It only stores the name of the entry
 # (e.g. 'animal') and its value as a tree node (e.g. Tree['text', ['cat']]) which is later used to infer the type
 # of the entry. This preliminary traversal is needed to avoid issues with loops in which an iterator variable is
-# used in the inner commands which are visited before the iterator variable is added to the lookup.
+# used in the inner keywords which are visited before the iterator variable is added to the lookup.
 
 class LookupEntryCollector(visitors.Visitor):
     def __init__(self, level, has_pressed):
@@ -702,14 +702,14 @@ class LookupEntryCollector(visitors.Visitor):
 
     def for_list(self, tree):
         iterator = str(tree.children[0].children[0])
-        # the tree is trimmed to skip contain the inner commands of the loop since
+        # the tree is trimmed to skip contain the inner keywords of the loop since
         # they are not needed to infer the type of the iterator variable
         trimmed_tree = Tree(tree.data, tree.children[0:2], tree.meta)
         self.add_to_lookup(iterator, trimmed_tree, tree.meta.line)
 
     def for_loop(self, tree):
         iterator = str(tree.children[0].children[0])
-        # the tree is trimmed to skip contain the inner commands of the loop since
+        # the tree is trimmed to skip contain the inner keywords of the loop since
         # they are not needed to infer the type of the iterator variable
         trimmed_tree = Tree(tree.data, tree.children[0:3], tree.meta)
         self.add_to_lookup(iterator, trimmed_tree, tree.meta.line)
@@ -741,7 +741,7 @@ class LookupEntryCollector(visitors.Visitor):
 
 
 # The transformer traverses the whole AST and infers the type of each node. It alters the lookup table entries with
-# their inferred type. It also performs type validation for commands, e.g. 'text' + 1 results in error.
+# their inferred type. It also performs type validation for keywords, e.g. 'text' + 1 results in error.
 @v_args(tree=True)
 class TypeValidator(Transformer):
     def __init__(self, lookup, level, lang, input_string):
@@ -976,8 +976,8 @@ class TypeValidator(Transformer):
         if arg_type not in allowed_types and not self.ignore_type(arg_type):
             variable = tree.children[0]
 
-            if command in translatable_commands:
-                keywords = translatable_commands[command]
+            if command in translatable_keywords:
+                keywords = translatable_keywords[command]
                 result = hedy_translation.find_command_keywords(
                     self.input_string,
                     self.lang,
@@ -1137,7 +1137,7 @@ class Filter(Transformer):
         return all(args), ''.join([c for c in args]), meta
 
 
-class AllCommands(Transformer):
+class Allkeywords(Transformer):
     def __init__(self, level):
         self.level = level
 
@@ -1178,7 +1178,7 @@ class AllCommands(Transformer):
         # for the achievements we want to be able to also detect which operators were used by a kid
         operators = ['addition', 'subtraction', 'multiplication', 'division']
 
-        if production_rule_name in commands_per_level[self.level] or \
+        if production_rule_name in keywords_per_level[self.level] or \
                 production_rule_name in operators or production_rule_name in ['if_pressed', 'if_pressed_else']:
             # if_pressed_else is not in the yamls, upsetting lookup code to get an alternative later
             # lookup should be fixed instead, making a special case for now
@@ -1214,15 +1214,15 @@ class AllCommands(Transformer):
         return []
 
 
-def all_commands(input_string, level, lang='en'):
-    """Return the commands used in a program string.
+def all_keywords(input_string, level, lang='en'):
+    """Return the keywords used in a program string.
 
     This function is still used in the web frontend, and some tests, but no longer by 'transpile'.
     """
     input_string = process_input_string(input_string, level, lang)
     program_root = parse_input(input_string, level, lang)
 
-    return AllCommands(level).transform(program_root)
+    return Allkeywords(level).transform(program_root)
 
 
 def all_variables(input_string, level, lang='en'):
@@ -1231,8 +1231,8 @@ def all_variables(input_string, level, lang='en'):
     program_root = parse_input(input_string, level, lang)
     abstract_syntax_tree = ExtractAST().transform(program_root)
 
-    commands = AllCommands(level).transform(program_root)
-    has_pressed = "if_pressed" in commands or "if_pressed_else" in commands
+    keywords = Allkeywords(level).transform(program_root)
+    has_pressed = "if_pressed" in keywords or "if_pressed_else" in keywords
 
     lookup = create_lookup_table(abstract_syntax_tree, level, lang, input_string, has_pressed)
 
@@ -1424,8 +1424,8 @@ class IsValid(Filter):
 
 @v_args(meta=True)
 def valid_echo(ast):
-    commands = ast.children
-    command_names = [x.children[0].data for x in commands]
+    keywords = ast.children
+    command_names = [x.children[0].data for x in keywords]
     no_echo = 'echo' not in command_names
 
     # no echo is always ok!
@@ -1526,24 +1526,24 @@ def find_unquoted_segments(s):
 
 def get_allowed_types(command, level):
     # get only the allowed types of the command for all levels before the requested level
-    allowed = [values for key, values in commands_and_types_per_level[command].items() if key <= level]
+    allowed = [values for key, values in keywords_and_types_per_level[command].items() if key <= level]
     # use the allowed types of the highest level available
     return allowed[-1] if allowed else []
 
 
-def add_sleep_to_command(commands, indent=True, is_debug=False, location="after"):
+def add_sleep_to_command(keywords, indent=True, is_debug=False, location="after"):
     if is_debug:
-        return commands
+        return keywords
 
-    lines = commands.split()
+    lines = keywords.split()
     if lines[-1] == "time.sleep(0.1)":  # we don't sleep double so skip if final line is a sleep already
-        return commands
+        return keywords
 
     sleep_command = "time.sleep(0.1)" if indent is False else "  time.sleep(0.1)"
     if location == "after":
-        return commands + "\n" + sleep_command
+        return keywords + "\n" + sleep_command
     else:  # location is before
-        return sleep_command + "\n" + commands
+        return sleep_command + "\n" + keywords
 
 
 class BaseValue:
@@ -3657,7 +3657,7 @@ def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
 
 
 ParseResult = namedtuple('ParseResult', ['code', 'source_map', 'has_turtle',
-                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'commands',
+                                         'has_pressed', 'has_clear', 'has_music', 'has_sleep', 'keywords',
                                          'roles_of_variables'])
 
 
@@ -3970,15 +3970,15 @@ def preprocess_ifs(code, lang='en'):
                     return True
             return False
 
-    def contains_any_of(commands, line):
+    def contains_any_of(keywords, line):
         # translation is not needed here, happens in contains
         if lang in ALL_KEYWORD_LANGUAGES:
-            for c in commands:
+            for c in keywords:
                 if contains(c, line):
                     return True
             return False
         else:
-            for c in commands:
+            for c in keywords:
                 if contains(c, line):
                     return True
             return False
@@ -4002,13 +4002,13 @@ def preprocess_ifs(code, lang='en'):
         if (starts_with('if', line) or starts_with_after_repeat('if', line)) and (
                 not starts_with('else', next_non_empty_line(lines, i))) and (not contains('else', line)):
             # is this line just a condition and no other keyword (because that is no problem)
-            commands = ["print", "ask", "forward", "turn", "play"]
-            excluded_commands = ["pressed"]
+            keywords = ["print", "ask", "forward", "turn", "play"]
+            excluded_keywords = ["pressed"]
 
             if (
-                (contains_any_of(commands, line) or contains_two('is', line)
+                (contains_any_of(keywords, line) or contains_two('is', line)
                  or (contains('is', line) and contains('=', line)))
-                and not contains_any_of(excluded_commands, line)
+                and not contains_any_of(excluded_keywords, line)
             ):
                 # a second command, but also no else in this line -> check next line!
 
@@ -4143,13 +4143,13 @@ def create_AST(input_string, level, lang="en"):
     if not valid_echo(abstract_syntax_tree):
         raise exceptions.LonelyEchoException()
 
-    commands = AllCommands(level).transform(program_root)
-    # FH, dec 2023. I don't love how AllCommands works on program root and not on AST,
+    keywords = Allkeywords(level).transform(program_root)
+    # FH, dec 2023. I don't love how Allkeywords works on program root and not on AST,
     # but his will do for now. One day we should really start to clean up our AST!
-    has_pressed = "if_pressed" in commands or "if_pressed_else" in commands
+    has_pressed = "if_pressed" in keywords or "if_pressed_else" in keywords
     lookup_table = create_lookup_table(abstract_syntax_tree, level, lang, input_string, has_pressed)
 
-    return abstract_syntax_tree, lookup_table, commands
+    return abstract_syntax_tree, lookup_table, keywords
 
 
 def determine_roles(lookup, input_string, level, lang):
@@ -4191,13 +4191,13 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         source_map.set_hedy_input(input_string)
 
     try:
-        abstract_syntax_tree, lookup_table, commands = create_AST(input_string, level, lang)
+        abstract_syntax_tree, lookup_table, keywords = create_AST(input_string, level, lang)
 
-        has_clear = "clear" in commands
-        has_turtle = "forward" in commands or "turn" in commands or "color" in commands
-        has_pressed = "if_pressed" in commands or "if_pressed_else" in commands
-        has_music = "play" in commands
-        has_sleep = "sleep" in commands
+        has_clear = "clear" in keywords
+        has_turtle = "forward" in keywords or "turn" in keywords or "color" in keywords
+        has_pressed = "if_pressed" in keywords or "if_pressed_else" in keywords
+        has_music = "play" in keywords
+        has_sleep = "sleep" in keywords
 
         # grab the right transpiler from the lookup
         convertToPython = MICROBIT_TRANSPILER_LOOKUP[level] if microbit else TRANSPILER_LOOKUP[level]
@@ -4206,7 +4206,7 @@ def transpile_inner(input_string, level, lang="en", populate_source_map=False, i
         roles_of_variables = determine_roles(lookup_table, input_string, level, lang)
 
         parse_result = ParseResult(python, source_map, has_turtle, has_pressed,
-                                   has_clear, has_music, has_sleep, commands, roles_of_variables)
+                                   has_clear, has_music, has_sleep, keywords, roles_of_variables)
 
         if populate_source_map:
             source_map.set_python_output(python)

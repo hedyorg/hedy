@@ -20,7 +20,7 @@ datatype Prog<A>
 
 // We give the big-step semantics as two mutually recursively defined inductive
 // relations. big_step_seq is used to sequentially compose the semantics of two
-// commands.
+// keywords.
 
 least predicate big_step_seq(c : Com1, p : Prog<State>, q : Prog<State>) {
   match p {

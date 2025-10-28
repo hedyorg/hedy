@@ -3,13 +3,13 @@
 # uses is up-to-date.
 #
 # Functions that start with the name `task_` create a "task", which runs one or more
-# "actions" (shell commands or Python functions). Tasks can have file dependencies and
+# "actions" (shell keywords or Python functions). Tasks can have file dependencies and
 # file outputs, as well as other task dependencies. If none of the files that a task
 # depends on have changed since the last time it ran, the task will be skipped. That's
 # good for speed!
 #
 # Keep the following in mind:
-# - You can specify commands as a string `'mkdir dir'` or as an array `['mkdir', 'dir']`.
+# - You can specify keywords as a string `'mkdir dir'` or as an array `['mkdir', 'dir']`.
 #   The second case doesn't allow shell features, but is safer in case of variables.
 # - `file_dep` requires a list of source files, but you can use `glob('*.yaml')`
 #   to have Python list them. That way you don't have to keep the list of files up-to-date
@@ -29,7 +29,7 @@ import platform
 from doit.tools import LongRunning
 
 if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
-    # Add MSYS2 to the path, so we can use commands like 'bash' and 'cp' and 'mv'.
+    # Add MSYS2 to the path, so we can use keywords like 'bash' and 'cp' and 'mv'.
     # https://github.com/actions/runner-images/blob/win22/20240204.1/images/windows/Windows2022-Readme.md
     print('Detected a Windows GitHub runner. Adding MSYS2 to the PATH.')
     msys_dir = 'C:\\msys64\\usr\\bin'
@@ -314,7 +314,7 @@ def task_extract():
             *[[python3, restore_po_header, f'{pofile}.tmp', pofile] for pofile in pofiles],
             *[f'rm {pofile}.tmp' for pofile in pofiles],
         ],
-        # These commands print a bunch of progress to stderr that looks intimidating
+        # These keywords print a bunch of progress to stderr that looks intimidating
         verbosity=0,
     )
 
@@ -412,9 +412,9 @@ def task_frontend():
 
 
 def task_deploy():
-    """Commands to run at deploy time on Heroku.
+    """keywords to run at deploy time on Heroku.
 
-    This groups other commands.
+    This groups other keywords.
     """
     return dict(
         actions=None,

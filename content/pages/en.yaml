@@ -155,7 +155,7 @@ teacher-guide:
             Students (and teachers!) don't need any programming experience before starting with Hedy.
     -   title: How does Hedy work?
         text: |-
-            Hedy is divided into levels, in which new commands are taught. Each level contains a variety of adventures to practice the newly learned commands.
+            Hedy is divided into levels, in which new keywords are taught. Each level contains a variety of adventures to practice the newly learned keywords.
             As a teacher, you get to decide which adventures are available for your students. Will they be making a restaurant, a calculator or a haunted house this level? Within each level, the adventures are arranged from easiest to hardest.
             So your students keep getting challenged. The adventures can be done by the students individually, or you can use them in a classical instruction.
 
@@ -189,15 +189,15 @@ teacher-guide:
     levels:
     -   level: '1'
         sections:
-        -   title: Students forget to type commands
+        -   title: Students forget to type keywords
             example:
                 error_text: For example they type a sentence without using print.
                 error_code: Hedy can't print this
                 solution_text: Teach your students to always start a line of code with a command.
                 solution_code: '{print} Hedy can print this!'
-        -   title: Students use capitals when typing commands
+        -   title: Students use capitals when typing keywords
             example:
-                error_text: Commands won't work if they are in capitals.
+                error_text: keywords won't work if they are in capitals.
                 error_code: |-
                     Ask Why does my code fail?
                     Print Because I'm using capitals.
@@ -241,7 +241,7 @@ teacher-guide:
                 solution_code: '{forward} -100'
     -   level: '2'
         sections:
-        -   title: Students make typos in their commands
+        -   title: Students make typos in their keywords
             example:
                 error_text: Hedy can't recognize a command with a typo.
                 error_code: prinnt Don't make typos
@@ -481,7 +481,7 @@ teacher-guide:
                 error_code: "{if} name {is} Jesse, David, Souf {print} 'You are funny' {else} {print} 'You are not funny'"
                 solution_text: |-
                     You could use the `{in}` command for that. While it is explained in a higher level, it does already work in level 5.
-                    Another solution is to use multiple `{if}` commands and no `{else}` command. The disadvantage is that it won't tell the other classmates that they are not funny.
+                    Another solution is to use multiple `{if}` keywords and no `{else}` command. The disadvantage is that it won't tell the other classmates that they are not funny.
                 solution_code: |-
                     friends {is} Jesse, David, Souf
                     name {is} {ask} 'Who are you?'
@@ -759,7 +759,7 @@ teacher-guide:
         sections:
         -   title: Students confuse `{and}` with `{or}`
             example:
-                error_text: Both commands might appear similar, but their functions are very different.
+                error_text: Both keywords might appear similar, but their functions are very different.
                 error_code: |-
                     game {is} {ask} 'Do you want to play a game?'
                     time {is} {ask} 'Do you have time to play?'

@@ -47,7 +47,7 @@ for p in public_programs['rows']:
 with open('analysis.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['program_id', 'username', 'language', 'experiment_language', 'class', 'number of lines',
-                     'number of variables', 'number of commands', 'number of distinct commands',
+                     'number of variables', 'number of keywords', 'number of distinct keywords',
                      'level', 'error_message'])
 
 analysis = False
@@ -59,7 +59,7 @@ for snippet in snippets:
     if not snippet.error:
         try:
 
-            all_commands = hedy.all_commands(snippet.code, snippet.level, snippet.language)
+            all_keywords = hedy.all_keywords(snippet.code, snippet.level, snippet.language)
             try:
                 all_variables = hedy.all_variables(snippet.code, snippet.level, snippet.language)
             except Exception as e:
@@ -80,7 +80,7 @@ for snippet in snippets:
                     writer = csv.writer(csvfile)
                     writer.writerow([program_id, snippet.username, snippet.language, snippet.experiment_language,
                                      snippet.adventure_name, lines, len(
-                                         all_variables), len(all_commands), len(set(all_commands)), snippet.level, ''])
+                                         all_variables), len(all_keywords), len(set(all_keywords)), snippet.level, ''])
 
             print(program_id, len(snippets), round(100 * program_id / len(snippets), 2))
 

@@ -60,7 +60,7 @@ describe('Lezer parser tests for level 1', () => {
                 )
             )`
 
-            singleLevelTester('Test turtle commands: forward, turn, color', code, expectedTree, 1);
+            singleLevelTester('Test turtle keywords: forward, turn, color', code, expectedTree, 1);
         });
 
         describe('Combined tests', () => {

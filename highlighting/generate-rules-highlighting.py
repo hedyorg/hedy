@@ -29,7 +29,7 @@ def main():
     print(" Done !")
 
 
-def get_commands(language_code, keywords, keywords_ref, translate_words):
+def get_keywords(language_code, keywords, keywords_ref, translate_words):
     """Create keyword translations
 
     For each language, this function returns a dictionary
@@ -108,7 +108,7 @@ def get_translations(KEYWORDS_PATH, KEYWORDS_PATTERN):
     for language_code in sorted(tmp.keys()):
 
         # KEYWORDS
-        result[language_code] = get_commands(language_code, tmp[language_code], reference, TRANSLATE_WORDS)
+        result[language_code] = get_keywords(language_code, tmp[language_code], reference, TRANSLATE_WORDS)
 
         # DIGITS
         result[language_code]["DIGIT"] = get_digits(tmp[language_code], reference)
