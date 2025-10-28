@@ -2698,6 +2698,7 @@ class ConvertToPython_6(ConvertToPython_5):
     def not_equal(self, meta, args):
         return self.process_comparison(meta, args, "!=")
 
+
 @v_args(meta=True)
 @hedy_transpiler(level=7)
 @source_map_transformer(source_map)
@@ -2818,7 +2819,6 @@ class ConvertToPython_10(ConvertToPython_8_9):
 
     def or_condition(self, meta, args):
         return ' or '.join(args)
-
 
 
 @v_args(meta=True)
