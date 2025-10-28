@@ -137,7 +137,7 @@ adventures:
                 story_text: |-
                     Now that you can use `{elif}` you can create an even more interactive story! You could create multiple characters for example, that all have different traits.
                     Or you could have your player choose which road to take, which door to open, or which magical potion to drink...
-            
+
                     ### Exercise
                     Create your own story with 3 or more options using the {elif}.
                 example_code: |
@@ -145,15 +145,15 @@ adventures:
                     character = {ask} 'Who will help you on your quest?'
                     {if} character {is} 'Daisy'
                         {print} 'You have picked Daisy! She is the smartest of them all!'
-                        {print} "Daisy imediately tells you taht you shouldn't eat those berries over there."
+                        {print} "Daisy immediately tells you that you shouldn't eat those berries over there."
                     {elif} character {is} 'Jason'
                         {print} 'You have picked Jason! He is the strongest of them all!'
-                        {print} 'Jason lifts up a boulder, showing a secret map underneath'
+                        {print} 'Jason lifts up a boulder, showing a secret map underneath.'
                     {elif} character {is} 'Sam'
                         {print} 'You have picked Sam! They are the quickest of them all!'
-                        {print} 'Sam climbs up a tree and sees that there is a village not far away..'
+                        {print} 'Sam climbs up a tree and sees that there is a village not far away...'
                     ```
-            
+
                                 
 
             8:
@@ -389,14 +389,14 @@ adventures:
         levels:
             10:
                 story_text: |-
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two ifs but can use `{and}` and `{or}`.
-                    If you use and, both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but you can use `{and}` and `{or}`.
+                    If you use `{and}`, then both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
                 example_code: |
                     ```
                     name = {ask} 'what is your name?'
                     age = {ask} 'what is your age?'
                     {if} name {is} 'Hedy' {and} age {is} 2
-                        print 'You are the real Hedy!'
+                        {print} 'You are the real Hedy!'
                     {elif} name {is} 'Hedy' {or} age {is} 2
                         {print} 'So close.. but you are not Hedy!'
                     {else}
@@ -706,7 +706,7 @@ adventures:
                     {else} {print} "You can enter, but you can't swim."
                     discount {is} {ask} 'Are you younger than 12?'
                     {if} discount {is} 'yes' {print} 'That will be $3,50'
-                    {print} 'That will be $5,50'
+                    {else} {print} 'That will be $5,50'
                     {print} 'Have a nice day!'
 
                     ```
@@ -1832,28 +1832,28 @@ adventures:
                     * Print the personnel number.
             14:
                 story_text: |
-                  Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
-                  Can you help by writing a program that'll print the correct tasklist for that day?
-                  ### Exercise
-                  The program should:
-                  * Wish the janitor a goodmorning.
-                  * Ask the janitor what day of the week it is, which month and which day of the month.
-                  * Print the correct tasklist for that day.
-                  The tasks that should be done:
-                  * Everyday tasks: mop the floor, clean the toilets, open the curtains
-                  * On mondays and thursdays: water the plants
-                  * On tuesday and fridays: mop the floors
-                  * On saturdays: wash the coffeemachine
-                  * On the first of each month: wash the windows
-                  * On the 7th of each month: refill the vending machines
-                  * On the 14th of each month: check the batteries for the fire alarms
-                  * Everyday in wintermonths: turn on the heaters
-                  * Everyday in summermonths: turn on the airconditioning
+                    Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
+                    Can you help by writing a program that'll print the correct tasklist for that day?
+                    ### Exercise
+                    The program should:
+                    * Wish the janitor a goodmorning.
+                    * Ask the janitor what day of the week it is, which month and which day of the month.
+                    * Print the correct tasklist for that day.
+                    The tasks that should be done:
+                    * Everyday tasks: mop the floor, clean the toilets, open the curtains
+                    * On mondays and thursdays: water the plants
+                    * On tuesday and fridays: mop the floors
+                    * On saturdays: wash the coffeemachine
+                    * On the first of each month: wash the windows
+                    * On the 7th of each month: refill the vending machines
+                    * On the 14th of each month: check the batteries for the fire alarms
+                    * Everyday in wintermonths: turn on the heaters
+                    * Everyday in summermonths: turn on the airconditioning
                 example_code: |
-                  The program should end like this:
-                    ```
-                    make_tasklist(day, month, date)
-                    ```
+                    The program should end like this:
+                      ```
+                      make_tasklist(day, month, date)
+                      ```
             15:
                 story_text: |
                     After surgery our patients can sometimes experience a lot of pain. In those cases our patients can be given a morphine pump. They can administer some morphine themselves if they are in pain.
