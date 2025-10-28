@@ -10,7 +10,7 @@ for_list: _FOR var _IN var_access (_COLON)? _EOL (_SPACE command) (_EOL _SPACE c
 print: _PRINT _LEFT_BRACKET? (_print_ask_argument)? _RIGHT_BRACKET?
 
 // optional commas between arguments
-_print_ask_argument: (_SPACE | list_access |var_access | quoted_text | _COMMA)*
+_print_ask_argument: (_SPACE | list_access |var_access_print | quoted_text | _COMMA)*
 
 //optional colon in if/elses
 _if_clause: _IF (_conditions) _COLON? _EOL _commands _EOL? _END_BLOCK
