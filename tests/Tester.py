@@ -139,9 +139,10 @@ class HedyTester(unittest.TestCase):
     in_not_in_list_commands = ['in', 'not in']
     quotes = ["'", '"']
     booleans = [('true', True), ('True', True), ('false', False), ('False', False)]
-    commands_level_4 = [("print 'hello'", "print(f'hello')"),
-                        ("name is ask 'who?'", "name = input(f'who?')"),
-                        ('name is Harry', "name = 'Harry'")]
+    commands_level_4 = [
+        ("print 'hello'", "print(f'hello')"),
+        ('name is Harry', "name = Value('Harry')")
+    ]
 
     @classmethod
     def setUpClass(cls):

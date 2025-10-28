@@ -33,8 +33,8 @@ class TestsLevel6(HedyTester):
         {hedy_}""")
 
         expected = textwrap.dedent(f"""\
-        naam = 'Hedy'
-        if localize(naam) == localize('Hedy'):
+        naam = Value('Hedy')
+        if localize(naam.data) == localize('Hedy'):
           {python}""")
 
         self.single_level_tester(code=code, expected=expected, unused_allowed=True)
