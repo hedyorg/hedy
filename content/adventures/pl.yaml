@@ -225,6 +225,9 @@ adventures:
                     imię = {input}("Jak się nazywasz?")
                     {print}('Witamy w tej opowieści!')
                     ```
+            6:
+                story_text: "Od teraz dzięki temu, że możesz używać `{elif}` możesz tworzyć jeszcze bardziej interaktywne historyjki! Możesz na przykład stworzyć wiele postaci, każdą z innymi cechami.\nAlbo możesz pozwolić swojej postaci zdecydować którą drogę wybrać, które drzwi otworzyć albo które magiczne mikstury wypić...\n\n### Ćwiczenie\nStwórz swoją własną historyjkę z przynajmniej 3 wyborami używając {elif}."
+                example_code: "```\npostać= {ask} 'Kto Ci pomoże w Twojej przygodzie?'\n{if} postać {is} 'Daisy'\n    {print} 'Wybrałeś(aś) Daisy! Ona jest najmądrzejsza ze wszystkich!'\n    {print} \"Daisy natychmiast mówi Ci, że nie powinieneś (powinnaś) jeść tych jagód.\"\n{elif} postać {is} 'Jason'\n    {print} 'Wybrałeś(aś) Jasona! On jest najsilniejszy ze wszystkich!'\n    {print} 'Jason podnosi głaz, pokazując ukrytą pod nim sekretną mapę.'\n{elif} postać {is} 'Sam'\n    {print} 'Wybrałeś(aś) Sama! On jest najszybszy ze wszystkich!'\n    {print} 'Sam wspina się na drzewo i widzi, że nieopodal jest wioska.'\n```\n\n            \n"
     add_remove_command:
         default_save_name: Dodaj_komendę_remove
         description: wprowadzamy {add} {to_list} i {remove} {from}
@@ -536,8 +539,11 @@ adventures:
                     punkty = 0
                     rzut = wybory {at} {random}
                     {print} 'wyrzuciłeś' rzut
-                    {if} rzut {is} gąsienica punkty = punkty + 5 {else} punkty = punkty + rzut
-                    {print} 'suma punktów to ' punkty
+                    {if} rzut {is} gąsienica 
+                    punkty = punkty + 5 
+                    {else} 
+                    punkty = punkty + rzut
+                    {print} 'suma punktów to ' punkty ' punktów'
                     ```
                 example_code_2: |
                     Czy udało ci się policzyć wynik dla 8 kostek? Wymagało to sporo kopiowania i wklejania , prawda? W poziomie 7 ułatwimy to!
