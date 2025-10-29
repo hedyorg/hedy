@@ -3,12 +3,17 @@ levels:
         1:
             header: Welkom bij Hedy!
             text: Hedy is een programmeertaal.
+            notes: |-
+                Vraag je studenten om op te schrijven wat er in ze opkomt bij 'programmeren'. Maak een kort rondje om hun antwoorden te horen.
         2:
             header: Programmeren
             text: |-
                 Programmeren betekent de computer opdrachten geven, in de taal van de computer.
 
                 Dat noemen we een programmeertaal.
+            notes: |-
+                Helaas kunnen computers geen menselijke taal begrijpen, zoals Nederlands of Engels, maar ze spreken hun eigen taal. 
+                Maar, geen paniek, je hoeft gelukkig geen regels nullen en enen te typen. We gaan namelijk leren om de computer instructies te geven in een programmeertaal. 
         3:
             header: Programmeertaal
             text: |-
@@ -17,6 +22,8 @@ levels:
                 * Scratch
                 * Python
                 * HTML
+            notes: |-
+                Vraag je studenten naar hun eigen programmeerervaring en of ze misschien iemand kennen die in de IT werkt. 
         4:
             header: Programmeren
             text: |-
@@ -24,32 +31,86 @@ levels:
                 * Interactieve verhalen maken
                 * Tekeningen maken en die printen op papier of op een shirt
                 * Je eigen apps maken voor op je telefoon
+            notes: |-
+                Dit klinkt misschien heel ingewikkeld, maar we gaan het gelukkig stap voor stap leren. 
         5:
             header: Programmeren met Hedy
             text: In Hedy gebruiken we speciale codes, zoals `{print}`.
             code: '{print} Welkom bij Hedy!'
+            notes: |-
+                Laten we naar Hedy kijken. In Hedy gebruiken we codewoorden ('keywords') om de computer een bepaalde instructie te geven.
+                We typen deze instructies in het linker scherm. Dit noemen we de code of een programma. 
         6:
             header: Programmeren met Hedy
             text: De code woorden worden in Hedy altijd roze.
             code: '{print} Welkom bij Hedy!'
+            notes: |-
+                Zoals je ziet, worden de codewoorden roze als je ze goed gebruikt.
         7:
             header: Programmeren met Hedy
-            text: Je kan je code opstarten met de Voer code uit knop onder het programmeerveld.
+            text: Je kan je code opstarten met de 'Voer code uit'-knop onder het programmeerveld.
             code: '{print} Welkom bij Hedy!'
+            notes: |-
+                Om te zorgen dat de computer de instructies volgt, moet je de code uitvoeren ('runnen').
         8:
             header: Programmeren met Hedy
             text: De uitvoer verschijnt dan aan de rechterkant.
             code: '{print} Welkom bij Hedy!'
+            notes: |-
+                Als we de code uitvoeren, verschijnt de uitvoer ('output') aan de rechterkant. De uitvoer is het resultaat van het uitvoeren van ons programma. 
+                Het rechter scherm waar de uitvoer verschijnt wordt het uitvoerscherm genoemd. 
         9:
             header: Programmeren met Hedy
             text: De uitvoer kan ook een tekening zijn.
+            code: |-
+                {forward} 100
+                {turn} {left}
+            notes: |-
+                In Hedy laten we niet alleen tekst verschijnen: de uitvoer kan ook een tekening zijn, of...
+
+        10:
+            header: Prorgammeren met Hedy
+            text: ... de uitvoer kan muziek zijn!
+            code: |-
+                {play} C4
+                {play} D4
+                {play} E4
+            notes: |-
+                Laten we beginnen met het eerste level!
+        11:
+            header: Programmeren met Hedy
+            text: |-
+                Soms maak je een fout in je code. Je kunt de debugger (foutzoeker) gebruiken om de fouten te vinden en op te lossen.
+            code: |-
+                {print} Debuggen betekent het zoeken van fouten in je code
+                {print} Je kunt de code regel voor regel uitvoeren.
+                {print} Dit maakt het makkelijk om de fout te vinden...
+                {print} ... en op te lossen!
+                {print} Of klik op de slapende smiley om een regel code uit te zetten.
+            debug: 'True'
+            notes: |-
+                **Hoe debug je je code**
+                Kijk dit <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a> om te zien hoe de debugger werkt of lees onderstaande instructies.
+                Natuurlijk kan je ook gewoon zelf naar de code kijken en je fouten vinden, maar we hebben ook wat hulpmiddelen voor je. 
+                Klik op de lieveheersbeestjesknop 🐞 onderaan het invoerveld. Dit zorgt ervoor dat de debugger begint. Met de debugger kan je je programma regel voor regel uitvoeren.
+                Als er een grote fout in je code zit (zoals in de debug avonturen) zal de debugger je vertellen dat je eerst de grote fouten moet oplossen. Lees de foutmeldingen om te ontdenken hoe je de fouten kunt oplossen.
+                Als de grote fouten opgelost zijn, zal de debugger je progamma regel voor regel uitvoeren. 
+                Om de volgende regel uit te voeren, klik je op de vooruitknop ⏭️ rechts. Pas de code zo nodig aan. Doet de regel wat deze moet doen? Super!
+                Klik op de knop om de volgende regel uit te voeren totdat je programma werkt zoals jij dat wil.
+                Om de debugger te stoppen kan je op de stopknop 🛑 in het midden klikken. 
+                Om de code weer vanaf het begin uit te voeren klik je op de herhaalknop 🔁 aan de linkerkant.
+                Zit je vast bij een regel of wil je je programma proberen zonder die regel? 
+                Je kunt een regel code uitzetten door voor het regelnummer te klikken. Er verschijnt dan een slapende smiley 😴 en de regel wordt doorgestreept.
+                De regel wordt nu overgeslagen wanneer je de code uitvoert. Om de regel weer te acticeren klik je gewoon op de slapende smiley: de regel wordt niet meer overgeslagen.
+
+
     1:
         1:
             header: Welkom bij level 1!
             text: |-
-                We beginnen level 1 met het maken van een interactief verhaal.
-
-                Daarvoor hebben we drie tekstcodes nodig.
+                Aan het eind van deze les kan je:
+                * Code schrijven die tekst print
+                * Een verhaal maken op basis van input
         2:
             header: 'Hedy level 1: {print}'
             text: |-
@@ -57,6 +118,8 @@ levels:
 
                 `print` zorgt ervoor dat er tekst in het uitvoerveld komt.
             code: '{print} Presenteer tekst op het scherm'
+            notes: |-
+                Laat de studenten eerst raden wat de uitvoer zal zijn. Voer daarna de code uit en laat aan de studenten zien wat er gebeurd wanneer de instructie 'print' wordt uitgevoerd.
         3:
             header: Het {print} commando
             text: |-
