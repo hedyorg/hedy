@@ -1151,6 +1151,8 @@ class AllCommands(Transformer):
             return 'else'
         if keyword == 'ifs':
             return 'if'
+        if keyword == 'if_clause':
+            return 'if'
         if keyword == 'elifs':
             return 'elif'
         if keyword == 'for_loop':
@@ -2276,14 +2278,16 @@ class ConvertToPython_5(ConvertToPython_4):
         except:
           pass""")
 
-    def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
+    def if_clause(self, meta, args):  # might be worth asking if we want a debug breakpoint here
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[1])}"""
 
+    def else_clause(self, meta, args):
+        return f"""else:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(args[0])}"""
+
     def ifelse(self, meta, args):
-        return f"""{args[0]}
-else:{self.add_debug_breakpoint()}
-{ConvertToPython.indent(args[1])}"""
+        return '\n'.join(args)
 
     def condition(self, meta, args):
         return ' and '.join(args)
@@ -2746,7 +2750,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
     def repeat(self, meta, args):
         return self.make_repeat(meta, args, multiline=True)
 
-    def ifs(self, meta, args):
+    def if_clause(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
@@ -3079,7 +3083,7 @@ class ConvertToPython_12(ConvertToPython_11):
             value = f'{self.scoped_var_access(value, meta.line, parentheses=True)}.data'
         return f'{list_name}.data[int({value})-1]'
 
-    def ifs(self, meta, args):
+    def if_clause(self, meta, args):
         all_lines = [self.indent(x) for x in args[1:]]
         exception = self.make_index_error_check_if_list([args[0]])
         return exception + "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
