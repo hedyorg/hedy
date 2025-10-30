@@ -545,10 +545,10 @@ adventures:
                     wybory = 1, 2, 3, 4, 5, gąsienica
                     punkty = 0
                     rzut = wybory {at} {random}
-                    {print} 'wyrzuciłeś ' rzut
-                    {if} rzut {is} gąsienica
-                    punkty = punkty + 5
-                    {else}
+                    {print} 'wyrzuciłeś' rzut
+                    {if} rzut {is} gąsienica 
+                    punkty = punkty + 5 
+                    {else} 
                     punkty = punkty + rzut
                     {print} 'suma punktów to ' punkty ' punktów'
                     ```
