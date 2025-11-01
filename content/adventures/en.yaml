@@ -914,6 +914,60 @@ adventures:
                     {for} name {in} names
                         {print} 'At the beach ' name ' loves to ' activities {at} {random}
                     ```
+            12:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {define} greet
+                    greetings = 'Hello', 'Hi there', 'Good evening'
+                        {print} greetings {at} {random}
+
+                    {define} take_order
+                        food = {ask} 'What would you like to eat?'
+                        {print} 'One food'
+                        drink = 'What would you like to drink?'
+                        {print} 'One ' drink
+                        more = {ask} 'Would you like anything else?'
+                            {if} more {is} 'no'
+                        {print} 'Alright'
+                            {else}
+                            print 'And ' more
+                    {print} 'Thank you'
+
+                    {print} 'Welcome to our restaurant'
+                    people = {ask} 'How many people are in your party tonight?'
+                    {for} person {in} people
+                        {call} greet_customer
+                        take_order
+
+                    ```
+                answer_code: |
+                    ```
+                    {define} greet
+                        greetings = 'Hello', 'Hi there', 'Good evening'
+                        {print} greetings {at} {random}
+
+                    {define} take_order
+                        food = {ask} 'What would you like to eat?'
+                        {print} 'One ' food
+                        drink = {ask} 'What would you like to drink?'
+                        {print} 'One ' drink
+                        more = {ask} 'Would you like anything else?'
+                        {if} more {is} 'no'
+                            {print} 'Alright'
+                        {else}
+                            print 'And ' more
+                        {print} 'Thank you'
+
+                    {print} 'Welcome to our restaurant'
+                    people = {ask} 'How many people are in your party tonight?'
+                    {repeat} people {times}
+                        {call} greet
+                        {call} take_order
+                    ```
     dice:
         name: Dice
         default_save_name: Dice
