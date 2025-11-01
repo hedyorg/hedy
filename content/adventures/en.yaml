@@ -895,6 +895,25 @@ adventures:
                     price = amount * 6
                     {print} 'That will be ' price ' dollars please.'
                     ```
+            11:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    names = Muad Hasan Samira Noura
+                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
+                    {for} name {is} names
+                    {print} At the beach name loves to activity {at} {random}
+                    ```
+                answer_code: |
+                    ```
+                    names = Muad, Hasan, Samira, Noura
+                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
+                    {for} name {in} names
+                        {print} 'At the beach ' name ' loves to ' activities {at} {random}
+                    ```
     dice:
         name: Dice
         default_save_name: Dice
