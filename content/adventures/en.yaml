@@ -1055,6 +1055,124 @@ adventures:
                             {print}('Wrong,', capitals[i], ' is the capital of ', countries[i])
                     {print}('You scored ', score, ' out of 10')
                     ```
+            15:
+                story_text: |-
+                    ### Exercise
+                    Debug this random children's story. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {def} ask_user:
+                        answer = {input}('What should the ', question, ' in the story be?')
+                        {call} answer
+                    
+                    questions = ['name', 'verb', 'location', 'hiding spot', 'sound', 'cause of the noise'
+
+                    chosen _name = ask_user(questions[0])
+                    chosen_verb = ask_user(questions[2])
+                    chosen_locations = ask_user(questions[3])
+                    chosen_sound = ask_user(questions[4])
+                    chosen_spot = ask_user(questions[5])
+                    chosen_causes = ask_user(questions[6])
+
+                    {print}(chosen_name ' was ' chosen_verb ' to ' chosen_location)
+                    {print} ('When they suddenly heard a sound like ', chosen_sound)
+                    {print}(chosen_name " looked around, but they couldn't discover where the noise came from")
+                    {print} chosen_name, ' hid ', chosen_spot
+                    {print}'They tried to look around, but couldn't see anything from there')
+                    {print}chosen_name, ' moved from ', chosen_spot
+                    {print}'And then they saw it was just ' chosen_cause
+                    {print}(chosen_name ' laughed and went on with their day')
+                    'The End' 
+                    ```
+                answer_code: |
+                    ```
+                    {def} ask_user(question):
+                        answer = {input}('What should the ', question, ' in the story be?')
+                        {return} answer
+                    
+                    questions = ['name', 'verb', 'location', 'hiding spot', 'sound', 'cause of the noise']
+
+                    chosen_name = ask_user(questions[1])
+                    chosen_verb = ask_user(questions[2])
+                    chosen_location = ask_user(questions[3])
+                    chosen_sound = ask_user(questions[4])
+                    chosen_spot = ask_user(questions[5])
+                    chosen_cause = ask_user(questions[6])
+
+                    {print}(chosen_name, ' was ', chosen_verb, ' to ', chosen_location)
+                    {print}('When they suddenly heard a sound like ', chosen_sound)
+                    {print}(chosen_name, " looked around, but they couldn't discover where the noise came from")
+                    {print}(chosen_name, ' hid ', chosen_spot)
+                    {print}("They tried to look around, but couldn't see anything from there")
+                    {print}(chosen_name, ' moved from ', chosen_spot)
+                    {print}('And then they saw it was just ', chosen_cause)
+                    {print}(chosen_name, ' laughed and went on with their day')
+                    {print}('The End')
+                    ```
+            16:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {define} (food_order)
+                        toppings = {input}('pepperoni, tuna, veggie or cheese?')
+                        size = {input} 'big, medium or small?'
+                        number_of_pizza = {ask}('How many these pizzas would you like?')
+
+                        {print}('YOU ORDERED')
+                        {print}(number_of_pizzas ' size  ' topping ' pizza')
+
+                    {def} drink_order:
+                        drink = {input}'water, coke, icetea, lemonade or coffee?'
+                        number_of_drinks = {input}('How many of these drinks would you like?')
+
+                        print ()('YOU ORDERED')
+                        print (number_of_drinks ' ' drink)
+
+                    'Welcome to Hedy pizza'
+                    more_food = input 'Would you like to order a pizza?'
+                    while more_food = 'yes':
+                        return more_food
+                        more_food == input('Would you like to order a pizza?')
+                    more_drinks = input('Would you like to order some drinks?')
+                    while more_drinks == 'yes':
+                        call drink_order
+                        more_drinks == input('Would you like to order more drinks?')
+
+                    print 'Thanks for ordering!'
+                    ```
+                answer_code: |
+                    ```
+                    {def} food_order():
+                        toppings = {input}('Pepperoni, tuna, veggie or cheese?')
+                        size = {input}('Big, medium or small?')
+                        number_of_pizzas = {input}('How many of these pizzas would you like?')
+
+                        {print}('YOU ORDERED')
+                        {print}(number_of_pizzas, ' ', size , ' ', toppings, ' pizza')
+
+                    {def} drink_order():
+                        drink = {input}('Water, coke, icetea, lemonade or coffee?')
+                        number_of_drinks = {input}('How many of these drinks would you like?')
+
+                        {print}('YOU ORDERED')
+                        {print}(number_of_drinks, ' ', drink)
+
+                    {print}('Welcome to Hedy pizza')
+                    more_food = {input}('Would you like to order a pizza?')
+                    {while} more_food == 'yes':
+                        food_order()
+                        more_food = {input}('Would you like to order a pizza?')
+                    more_drinks = {input}('Would you like to order some drinks?')
+                    {while} more_drinks == 'yes':
+                        drink_order()
+                        more_drinks = {input}('Would you like to order more drinks?')
+
+                    {print}('Thanks for ordering!')
+                    ```
     dice:
         name: Dice
         default_save_name: Dice
