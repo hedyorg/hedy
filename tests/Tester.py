@@ -136,12 +136,15 @@ class HedyTester(unittest.TestCase):
     number_comparison_commands = ['>', '>=', '<', '<=']
     comparison_commands = number_comparison_commands + ['!=']
     arithmetic_operations = ['+', '-', '*', '/']
+    # addition accepts strings, while the others do not
+    # leading to different errors in some tests
+    arithmetic_operations_but_addition = ['-', '*', '/']
     in_not_in_list_commands = ['in', 'not in']
     quotes = ["'", '"']
     booleans = [('true', True), ('True', True), ('false', False), ('False', False)]
     commands_level_4 = [
         ("print 'hello'", "print(f'hello')"),
-        ('name is Harry', "name = Value('Harry')")
+        ('name is Harry', "name = 'Harry'")
     ]
 
     @classmethod
@@ -298,7 +301,7 @@ class HedyTester(unittest.TestCase):
         except TypeError:
             test_hash = None
 
-        if not self.snippet_already_tested_with_current_hedy_version(test_hash):
+        if True or not self.snippet_already_tested_with_current_hedy_version(test_hash):
             if skipped_mappings is not None:
                 result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty, unused_allowed=unused_allowed)
                 for skipped in skipped_mappings:
