@@ -75,7 +75,7 @@ print Goed bezig Mo!
 							
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+**<i class="fa fa-laptop"></i> Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 voornaam is Layla                                 __________________________
