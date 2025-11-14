@@ -125,7 +125,7 @@ levels:
                 {print} Welcome to Hedy!
                 {print} Start programming now!
             notes: |-
-                Run the code and then change to code to something yourself. Show that you can print whatever you like.
+                Run the code and then change the code to something yourself. Show that you can print whatever you like.
                 Make workbook exercise 1 and 2.
         4:
             header: '{ask}'
@@ -169,7 +169,8 @@ levels:
                 This is a good time to try the Parrot, Haunted House, Story and Rock, Paper Scissors adventures.
             editor: /hedy/1
             notes: |-
-                These are the first adventures to start with. Once (most of) the students are done, you can introduce the drawing turtle and the `{play}` keyword.
+                These are the first adventures to start with. Once (most of) the students are done, you can introduce the drawing turtle and the `{play}` keyword with the next slides. 
+                (But first looking with your students at the debugging example on the next slide.)
                 Make workbook exercise 4 and 5.
         9:
             header: Debugging
@@ -216,7 +217,7 @@ levels:
             text: '`{forward}` is used to move the turtle forward.'
             code: '{forward} 50'
             notes: |-
-                Now that we have seen at text codes, we will now look at drawing codes next. Show the students how to use the forward keyword.
+                Now that we have seen text codes, we now look at drawing codes.  Show the students how to use the forward keyword.
         12:
             header: 'Drawing with the turtle: {forward}'
             text: 'How do we go backwards?'
@@ -259,7 +260,7 @@ levels:
         17:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
-            notes: |-
+            notes: |-   
                 Let some students show their work to the class. You can do that by going to the class page and clicking on the students' adventures.
         18:
             header: Sneak peek into the next level...
@@ -320,7 +321,7 @@ levels:
                 {sleep} 2
                 {print} green!
             notes: |-
-                Show the students the sleep keyword. Ask them what they think the 2 stand for.
+                Show the students the '{sleep}' keyword. Ask them what they think the 2 stand for.
                 Change the 2 into another number to show that they can decide for how many seconds the code will be paused.
         6:
             header: Sleep 5
@@ -446,7 +447,7 @@ levels:
 
                 Separate the items on your list with a comma.
             code: animals {is} dogs, cats, kangaroos
-            note: |-
+            notes: |-
                 Ask the students to write down an example of a list of their own.
         3:
             header: At random
@@ -481,7 +482,7 @@ levels:
         6:
             header: Add to
             text: |-
-                You can add items to a list with the `{add}` `{to}` keyword.
+                You can add items to a list with the `{add}` `{to_list}` keyword.
             code: |-
                 animals {is} dog, cat, kangaroo
                 {add} sheep {to_list} animals
@@ -723,15 +724,15 @@ levels:
                 {if} name {is} Hedy 'nice'
             debug: 'True'
             notes: |-
-                Run the code and fix the bug.
+                Run the code and fix the bug as in the next slide. 
         4:
             header: Conditionals
             text: |-
-                The code that follows after an if is called a conditional.
+                The code that follows after an if-condition is called a conditional.
             code: |-
                 {if} name {is} Hedy {print} 'nice'
             notes: |-
-                Ask the students what they think the conditional is.
+                Ask the students what they think the conditional is. Here it is: '{print} 'nice'.'
                 Make workbook exercise 1
         5:
             header: else
@@ -739,6 +740,7 @@ levels:
                 When using an `{if}` keyword, you can also add an `{else}` keyword.
             code: '{if} name {is} Hedy {print} ''nice'' {else} {print} ''boo!'''
             notes: |-
+                Show the students how this code will give different output for different answers:
                 If the answer is Hedy, the computer will print 'nice'.
                 But if the answer is something else the computer will print 'boo'
         6:
@@ -837,9 +839,12 @@ levels:
             code: |-
 |-
                 pizza {is} {ask} 'What is your favorite?'
-                {if} pizza {is} pepperoni {print} 'Yeah! Pepperoni is the best!'
-                {elif} pizza {is} hawaii {print} 'Are you mad?! Hawaii is the worst!'
-                {else} {print} 'Pepperoni is better!'
+                {if} pizza {is} pepperoni
+                {print} 'Yeah! Pepperoni is the best!'
+                {elif} pizza {is} hawaii
+                {print} 'Are you mad?! Hawaii is the worst!'
+                {else}
+                {print} 'Pepperoni is better!'
             notes: |-
                 Show this code to your students and let them predict the 3 possible outcomes. Then let them think of their own ideas for a code with 3 or more options.
         5:
@@ -858,7 +863,20 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                todo
+                {print} 'Welcome to the Icecream shop.'
+                flavour {is} {ask} 'Which flavour would you like?'
+                {if} flavour strawberry
+                {print} 'Good choice!'
+                flavour {is} vanilla
+                {print} 'Are you sure you don't want strawberry?''
+                {else}
+                {print} I am sorry, we only have vanilla and strawberry.
+                scoops {is} 'How many scoops would you like?'
+                {if} scoops {is} 1
+                {print} that will be 1.50, please.
+                {elif} {is} 2
+                {print} 'that will be 2.50, please.'
+                {else} 'sorry, that is too much.'
             debug: 'True'
         7:
             header: Let's review!
@@ -877,7 +895,7 @@ levels:
         9:
             header: Sneak peek into the next level...
             text: |-
-                In the next level you'll learn what to do if you want 3 or more options instead of just 2 (if and else).
+                In the next level you'll learn how to use maths in Hedy
     7:
         1:
             header: Welcome to level 7
@@ -886,7 +904,7 @@ levels:
                 * use maths in Hedy
             notes: |-
                 Ask your students to predict when they would need maths in a code (for example calculating a price, an amount of people, points in a game etc).
-                You could also ask them to predict what they think this would look like. They will mist likely come up with + and - themselves.
+                You could also ask them to predict what this would look like. They will most likely come up with + and - themselves.
         2:
             header: Addition
             text: If you want to calculate an addition, simply use the plus sign.
@@ -943,7 +961,7 @@ levels:
                 {print} number_1 ' times ' number_2 ' is ' correct_answer
             notes: |-
                 Show the students the example code and have them take a look at the placement of the quotation marks.
-                If you've made tehm come up with some examples of how to use maths in Hedy in the previous slides, ask them what they think this code would look like.
+                If you've made them come up with some examples of how to use maths in Hedy in the previous slides, ask them what they think this code would look like.
                 For example, if a student came up with the answer 'calculating points of a game' they could now come up with the code:
                 ```
                 if answer = correct_answer
@@ -1008,7 +1026,8 @@ levels:
                 {print} 'Why is nobody helping me?'
             notes: |-
                 Let your students predict what the output would look like.
-                Explain that if you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code. If you want to repeat the line more times, simply change the number. For example: If you are programming a story where your character shouts for help for 5 times, it could look like this:
+                Explain that if you want to repeat a line of code, you can use the `{repeat}` 3 `{times}` code. If you want to repeat the line more times, simply change the number. 
+                For example: If you are programming a story where your character shouts for help for 5 times, it could look like in the example.
         3:
             header: Don't forget the print keyword
             text: When using the repeat keyword, do not forget the `{print}` keyword.
@@ -1046,7 +1065,7 @@ levels:
             header: Ready Set Go!
             text: Enjoy the adventures in level 8!
             notes: |-
-                Your students can now make all the workbook exercises and all the adevntures of this level.
+                Your students can now make all the workbook exercises and all the adventures of this level.
         7:
             header: Let's review!
             text: What did you learn today?
@@ -1078,7 +1097,7 @@ levels:
                 * repeat multiple lines of code
                 * use indentation properly with {repeat} {if} and {else}
         2:
-            header: '{repeat} keywords before'
+            header: '{repeat} keywords in level 8'
             text: |-
                 The repeat keyword.
             code: '{repeat} 5 {times} {print} ''Help!'''
@@ -1101,7 +1120,7 @@ levels:
         4:
             header: '{repeat} keywords now'
             text: |-
-                And what would this code look like?
+                And what would this output look like?
             code: |-
                 {repeat} 3 {times}
                     {print} 'Hello!'
@@ -1110,7 +1129,7 @@ levels:
                 aks the students which lines they think will be repeated and run teh code.
                 Explain: If you want to, you can continue after the `{repeat}` keyword without indentation.
                 The lines that do not start with indentation will not be repeated.
-                The students can work on these adventures: Fortune teller, sing a sing and music.
+                The students can work on these adventures: Fortune teller, sing a song and music.
                 Make workbook exercise 1 and 2.
         5:
             header: if and else before
@@ -1133,14 +1152,16 @@ levels:
                 {else}
                     {print} 'Welcome programmer!'
             notes: |-
-                Show the students that using indentation isn't just giving you the extra work of adding a tab, but it is very useful. Demonstrate how you can now type multiple lines after an {if} or {else} instead of just one by adding some lines of code to the example.
+                Show the students that using indentation isn't just giving you the extra work of adding a tab, but it is very useful. 
+                Demonstrate how you can now type multiple lines after an {if} or {else} instead of just one by adding some lines of code to the example.
         7:
-            header: stopping the indentation
+            header: Stopping the indentation
             text: Predict the output
             code: "name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n{else}\n    {print} 'Welcome programmer!' \n{print} '3..2..1.. Start programming!'"
             notes: |-
                 Let your students predict the output of the code and instruct them to take a careful look at the indentation.
-                Just like with the `{repeat}` keyword, you can stop using indentation and the lines will always be shown. Not just if the statement is true.
+                Just like with the `{repeat}` keyword, you can stop using indentation and the lines will always be shown. 
+                Not just if the statement is true. So, the lines without indentation are not dependent on the {if} or {else} statement.
                 Make workbook exercise 3, 4, 5 and 6.
         8:
             header: Debugging
@@ -1199,7 +1220,7 @@ levels:
                 {if} level = 9
                     {if} student = curious
                         {print} 'See you next level!'
-            debug: True
+            debug: 'True'
     10:
         1:
             header: Welcome to level 10
