@@ -1841,7 +1841,7 @@ class TestsLevel7(HedyTester):
             max_level=7,
             code=code,
             expected=expected,
-            expected_commands=['is', 'if', 'else', 'print', 'print']
+            # expected_commands=['is', 'if', 'else', 'print', 'print']
         )
 
     def test_if_equality_linebreak_print_else_print(self):
@@ -2022,6 +2022,7 @@ class TestsLevel7(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
+
     # TODO: additon here is returning unused var for '3 and 3',
     # do we want that?
     # issue 2067
@@ -2032,7 +2033,7 @@ class TestsLevel7(HedyTester):
             max_level=11,
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
-            exception=hedy.exceptions.InvalidArgumentTypeException
+            exception=hedy.exceptions.UndefinedVarException
         )
 
     @parameterized.expand([

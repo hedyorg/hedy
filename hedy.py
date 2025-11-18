@@ -1464,7 +1464,7 @@ class IsComplete(Filter):
         return args != [], ('print', meta.line)
 
     def input(self, meta, args):
-        return len(args) > 1, ('input', meta.line)
+        return len(args) > 0, ('input', meta.line)
 
     def length(self, meta, args):
         return args != [], ('len', meta.line)
@@ -2440,7 +2440,7 @@ class ConvertToPython_6(ConvertToPython_5):
         arg = args[0]
         note = escape_var(self.unpack(arg))
         if present_in_notes_mapping(note):  # this is a supported note
-            return self.make_play(note.upper(), meta)
+            return self.make_play(str(note).upper(), meta)
 
         if self.is_variable_with_definition(arg, meta.line):
             arg = f'{escape_var(self.unpack(arg))}.data'
@@ -2926,7 +2926,7 @@ class ConvertToPython_12(ConvertToPython_11):
         arg = args[0]
         note = self.unpack(arg)
         if present_in_notes_mapping(note):  # this is a supported note
-            return self.make_play(note.upper(), meta)
+            return self.make_play(str(note).upper(), meta)
 
         if self.is_variable_with_definition(arg, meta.line):
             arg = f'{escape_var(self.unpack(arg))}.data'
@@ -3385,6 +3385,18 @@ class ConvertToPython_13(ConvertToPython_12):
 
     def print_empty_brackets(self, meta, args):
         return self.print(meta, args)
+
+    def change_list_item(self, meta, args):
+        name = self.unpack(args[0])
+        index = self.unpack(args[1])
+        self.check_variable_usage_and_definition(args[0:3], meta.line)
+
+        index = f'{index}.data' if self.is_variable(args[1], meta.line) else index
+        left_side = f'{name}.data[int({index})-1]'
+        right_side = self.process_literal_to_value(args[2]) if isinstance(args[2], LiteralValue) else args[2]
+
+        exception = self.make_index_error_check_if_list([left_side])
+        return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
 
 
 @v_args(meta=True)

@@ -456,7 +456,7 @@ class HedyTester(unittest.TestCase):
                 {var_name} = input(f'{text}')
                 __ns = get_num_sys({var_name})
                 {var_name} = Value({var_name}, num_sys=__ns)""")
-        elif self.level < 15:
+        elif self.level == 12:
             return textwrap.dedent(f"""\
                 {var_name} = input(f'''{text}''')
                 __ns = get_num_sys({var_name})
