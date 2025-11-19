@@ -10,7 +10,8 @@ from tests.Tester import HedyTester, SkippedMapping
 
 def missing_colon_check(command, line_number):
     return lambda c: (c.exception.arguments['line_number'] == line_number and
-                        c.exception.arguments['command'] == command)
+                      c.exception.arguments['command'] == command)
+
 
 class TestsLevel16(HedyTester):
     level = 16
