@@ -1819,7 +1819,7 @@ class TestsLevel7(HedyTester):
     # if name is Hedy is het beste print 'hello'
     # if name is Hedy is het beste x is 5
 
-    #TODO: this one isnt working but maybe not that important
+    # TODO: this one isnt working but maybe not that important
     # only failing due to AllCommands
     def test_if_equality_print_linebreak_else_print(self):
         # line break before else is allowed
@@ -2152,7 +2152,7 @@ class TestsLevel7(HedyTester):
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
-    
+
     def test_addition_with_text_var_gives_type_error(self):
         code = textwrap.dedent(f"""\
         a is test

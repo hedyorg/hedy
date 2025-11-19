@@ -372,7 +372,7 @@ class TestsLevel6(HedyTester):
 
     def test_quoted_ask(self):
         code = "szogek is ask 'Hello'"
-        expected = f"{self.input_transpiled('szogek',"Hello")}"
+        expected = f"{self.input_transpiled('szogek', "Hello")}"
 
         self.single_level_tester(code=code, expected=expected, unused_allowed=True)
 

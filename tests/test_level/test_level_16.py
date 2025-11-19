@@ -2790,8 +2790,8 @@ class TestsLevel16(HedyTester):
             extra_check_function=self.is_not_turtle()
         )
 
-    #TODO: is failing now but not sure we would want an empty print
-    #def test_print_without_text_inside(self):
+    # TODO: is failing now but not sure we would want an empty print
+    # def test_print_without_text_inside(self):
     #    self.multi_level_tester(
     #        code="print()",
     #        expected="print(f'''''')",

@@ -687,7 +687,7 @@ class TestsLevel15(HedyTester):
             max_level=15,
             exception=exceptions.NoIndentationException
         )
-    
+
     # TODO: disable for now, as if pressed is not yet supported
     # def test_if_pressed_without_else_works(self):
     #     code = textwrap.dedent("""\
