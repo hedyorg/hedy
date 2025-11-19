@@ -2026,7 +2026,7 @@ class TestsLevel7(HedyTester):
     # TODO: additon here is returning unused var for '3 and 3',
     # do we want that?
     # issue 2067
-    def test_assign_calc_precedes_quoted_string(self):
+    def test_assign_calc_precedes_quoted_string_addition(self):
         code = f"a is '3+10'"  # gets parsed to arithmetic operation of '3 and 10'
 
         self.multi_level_tester(
