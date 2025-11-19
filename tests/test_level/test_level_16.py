@@ -718,6 +718,7 @@ class TestsLevel16(HedyTester):
     #
     # in/not-in list commands
     #
+
     @parameterized.expand([
         ('in', 'Found'),
         ('not in', 'Not found')
@@ -829,6 +830,7 @@ class TestsLevel16(HedyTester):
     #
     # forward tests
     #
+
     def test_forward_with_list_variable_gives_error(self):
         code = textwrap.dedent("""\
         a = [1, 2, 3]
@@ -1054,10 +1056,11 @@ class TestsLevel16(HedyTester):
             if naam.data == 'Hedy':
                 print(f'''koekoek''')""")
 
-        self.single_level_tester(code=code, expected=expected)    
+        self.single_level_tester(code=code, expected=expected)
     #
     # boolean values
     #
+
     def test_if_elif_boolean(self):
         code = textwrap.dedent("""\
             computerc = 'PC'
@@ -1945,6 +1948,7 @@ class TestsLevel16(HedyTester):
     #
     # repeat
     #
+
     def test_repeat_nested_multi_commands(self):
         code = textwrap.dedent("""\
             repeat 3 times
