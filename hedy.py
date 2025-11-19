@@ -309,10 +309,10 @@ add_level(commands_per_level, level=9)
 add_level(commands_per_level, level=10, add=['and', 'or'])
 add_level(commands_per_level, level=11, add=['for'])
 add_level(commands_per_level, level=12, add=['define', 'call'])
-add_level(commands_per_level, level=13, add=['input', 'range'], remove=['ask', 'call', 'define', 'repeat'])
+add_level(commands_per_level, level=13, add=['input', 'range', 'while'], remove=['ask', 'call', 'define', 'repeat'])
 add_level(commands_per_level, level=14)
 add_level(commands_per_level, level=15)
-add_level(commands_per_level, level=16, add=['while'])
+add_level(commands_per_level, level=16)
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
