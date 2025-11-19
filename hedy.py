@@ -2750,10 +2750,6 @@ class ConvertToPython_8_9(ConvertToPython_7):
     def repeat(self, meta, args):
         return self.make_repeat(meta, args, multiline=True)
 
-    def if_clause(self, meta, args):
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        return "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
-
     def if_pressed(self, meta, args):
         key = self.process_arg_for_data_access(args[0], meta.line)
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -3386,18 +3382,6 @@ class ConvertToPython_13(ConvertToPython_12):
     def print_empty_brackets(self, meta, args):
         return self.print(meta, args)
 
-    def change_list_item(self, meta, args):
-        name = self.unpack(args[0])
-        index = self.unpack(args[1])
-        self.check_variable_usage_and_definition(args[0:3], meta.line)
-
-        index = f'{index}.data' if self.is_variable(args[1], meta.line) else index
-        left_side = f'{name}.data[int({index})-1]'
-        right_side = self.process_literal_to_value(args[2]) if isinstance(args[2], LiteralValue) else args[2]
-
-        exception = self.make_index_error_check_if_list([left_side])
-        return exception + left_side + ' = ' + right_side + self.add_debug_breakpoint()
-
 
 @v_args(meta=True)
 @hedy_transpiler(level=14)
@@ -3659,7 +3643,7 @@ def _restore_parser_from_file_if_present(pickle_file):
     return None
 
 
-# @lru_cache(maxsize=0 if utils.is_production() else 100)
+@lru_cache(maxsize=0 if utils.is_production() else 100)
 def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     """Return the Lark parser for a given level.
     Parser generation takes about 0.5 seconds depending on the level so
