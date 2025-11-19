@@ -202,17 +202,17 @@ adventures:
                 example_code: |
                     ```
                     chaves = 'perdidas'
-                    {print} 'Você está no seu jardim e perdeu suas chaves.'
-                    {print} 'Onde você quer procurá-las?'
-                    {print} 'Você pode escolher: árvore, canteiro de flores, pedra, caixa postal'
-                    {while} chaves == 'perdidas'
-                        local = {ask} 'Onde você quer procurar?'
-                        {if} local == 'canteiro de flores'
-                            {print} 'Aqui estão elas!'
+                    {print}('Você está no seu jardim e perdeu suas chaves.')
+                    {print}('Onde você quer procurá-las?')
+                    {print}('Você pode escolher: árvore, canteiro de flores, pedra, caixa de correio')
+                    {while} chaves == 'perdidas':
+                        local = {input}('Onde você quer procurar?')
+                        {if} local == 'canteiro de flores':
+                            {print}('Aqui estão elas!')
                             chaves = 'encontradas'
-                        {else}
-                            {print} 'Não, elas não estão no ' local
-                    {print} 'Agora você pode entrar na casa!'
+                        {else}:
+                            {print}('Não, elas não estão em ', local)
+                    {print}('Agora você pode entrar na casa!')
                     ```
             13:
                 story_text: |
@@ -408,15 +408,15 @@ adventures:
             15:
                 example_code: |
                     ```
-                    {define} calcular_média
+                    {def} calcular_media():
                         total = 0
-                        {for} i {in} {range} 1 {to} 4
-                            nota = {ask} _
+                        {for} i {in} {range}(1, 4):
+                            nota = {input} _
                             total = total + _
                             {return} _ / 4
 
-                    média = {call} _
-                    {print} 'A sua média foi ' média
+                    media = _
+                    {print}('A sua média foi ', media)
                     ```
             11:
                 story_text: "Este jogo de calculadora te ajuda a praticar a tabuada de multiplicação!\n### Exercício\nPreencha as lacunas. Queremos que o programa faça estas perguntas:\n```\nQuanto é 1 vezes 1?\nQuanto é 1 vezes 2?\nQuanto é 1 vezes 3?\nQuanto é 2 vezes 1?\nQuanto é 2 vezes 2?\nQuanto é 2 vezes 3?\nQuanto é 3 vezes 1?\nQuanto é 3 vezes 2?\nQuanto é 3 vezes 3?\n_\n```\n"
@@ -512,6 +512,20 @@ adventures:
                     {print} 'autor é o seu autor favorito'
                     {print} Hmmm... acho que você devia experimentar ler... livros {at} {random}
                     ```
+            5:
+                story_text: "### Exercício\nDepure este código. Boa sorte!"
+                example_code: "**Atenção! Este código precisa ser depurado!**\n```\n{print} Bem-vindo(a) à Piscina Hedy!\ncertificado {is} {ask} 'Você tem um certificado de natação?'\n{if} certificado 'sim' {print} 'Ótimo! Você pode nadar na piscina!\n{print} {else} 'Você pode entrar, mas não pode nadar.'\ndesconto {is} {ask} 'Você tem menos de 12 anos?'\n{if} desconto {is} sim\n{print} 'Vai custar R$9,90'\n'Vai custar R$15,50'\n{print} 'Tenha um bom dia!'\n```\n"
+                answer_code: "```\n{print} 'Bem-vindo(a) à Piscina Hedy!'\ncertificado {is} {ask} 'Você tem um certificado de natação?'\n{if} certificado {is} 'sim' {print} 'Ótimo! Você pode nadar na piscina!\n{else} {print} 'Você pode entrar, mas não pode nadar.'\ndesconto {is} {ask} 'Você tem menos de 12 anos?'\n{if} desconto {is} 'sim' {print} 'Vai custar R$9,90'\n{else} {print} 'Vai custar R$15,50'\n{print} 'Tenha um bom dia!'\n\n```\n"
+            6:
+                story_text: "### Exercício\nDepure este código. Boa sorte!\n"
+            7:
+                story_text: "### Exercício\nDepure este código. Boa sorte!"
+            8:
+                story_text: "### Exercício\nDepure este código. Boa sorte!"
+            9:
+                story_text: "### Exercício\nDepure este código. Boa sorte!"
+            10:
+                story_text: "### Exercício\nDepure este código. Boa sorte!"
     dice:
         name: Dado
         default_save_name: Dado
@@ -706,6 +720,8 @@ adventures:
     elif_command:
         default_save_name: senão se
         levels:
+            6:
+                story_text: "Neste nível, você também pode usar um novo comando: `{elif}`. `{elif}` é a junção de `{else}` com `{if}` e você precisará dele quando quiser fazer 3 (ou mais!) opções.\nConfira!\n"
         name: '{elif}'
         description: '{elif}'
     for_command:
@@ -873,12 +889,12 @@ adventures:
                     Para criar uma função, use `{define}` e a dê um nome. Depois, coloque todas as linhas que você quer que estejam na função em um bloco indentado abaixo da linha do `{define}`.
                     Deixe uma linha em branco no seu código para que ele fique mais elegante. Ótimo trabalho! Você criou uma função!
 
-                    Agora, sempre que precisarmos daquele bloco de código, vamos simplesmente usar <code>{call}</code> com o nome da função para executá-lo! Não teremos de digitar aquele bloco novamente.
+                    Agora, sempre que precisarmos daquele bloco de código, vamos simplesmente usar o nome da função para executá-lo! Não teremos de digitar aquele bloco novamente.
 
                     Veja este código exemplo de um jogo chamado Twister. A função 'giro' contém um bloco de código que escolhe qual membro do corpo deve ir aonde.
 
                     ### Exercício
-                    Termine o código definindo as duas variáveis membro_escolhido e cor_escolhida.
+                    Termine o código definindo as duas variáveis `membro_escolhido` e `cor_escolhida`.
                     Então, escolha quantas vezes você quer chamar a função de girar a roda do Twister.
 
                     ### Exercício 2
@@ -1086,6 +1102,7 @@ adventures:
                 example_code: "```\ncontinuar = {ask} 'Você quer continuar?'\n{if} continuar = sim\n    certeza = {ask} 'Tem certeza?'\n    {if} certeza {is} sim\n        {print} 'Vamos continuar'\n    {else}\n        {print} 'Você não tem certeza'\n{else}\n    {print} 'Você não quer continuar'\n```\n"
             9:
                 example_code: "```\nnome = {ask} 'Qual é o seu nome?'\n{if} nome {is} Hedy\n    {print} 'Bem-vinda, Hedy'\n    {print} 'Você pode jogar no seu computador!'\n```\n"
+        name: '{if} & {else}'
     in_command:
         default_save_name: comando_em
         description: Introduzindo o comando {in}
@@ -1141,6 +1158,11 @@ adventures:
             7:
                 example_code: "```\nnome = Hedy\nresposta = 20 + 4\n```\n"
                 story_text: "Também mudamos a forma como você guarda uma palavra em uma variável! Agora você pode usar `=` em vez de `{is}` para guardar um nome ou número numa variável, assim:\n"
+            13:
+                story_text_2: "Deste nível em diante, se você quiser fazer uma comparação exata, você pode usar dois sinais de igual. É isso o que a maioria das linguagens de programação usa:\n"
+                example_code_2: "```\nnome = {input}('Qual é o seu nome?')\n{if} nome == 'Hedy':\n    {print}('Você é legal!')\n```\n"
+                story_text_3: "Você também pode checar se uma coisa *não* é igual a outra usando `!=`, desse jeito:\n"
+                example_code_3: "```\nnome = {input}('Qual é o seu nome?')\n{if} nome != 'Hedy':\n    {print}('Você não é a Hedy')\n```\n"
         name: '{is}'
     language:
         name: Língua
@@ -1977,3 +1999,16 @@ adventures:
     and_or_command:
         name: '{and} e {or}'
         default_save_name: e_ou_comando
+        description: e, ou
+        levels:
+            10:
+                story_text: "Agora, vamos aprender `{and}` e `{or}`! Se você quer checar duas condições, você não precisa usar dois `{if}`s, você pode usar `{and}` e `{or}`.\nSe você usar `{and}`, significa que ambas as condições, à esquerda e à direita do `{and}`, precisam ser verdadeiras. Também podemos usar `{or}`. Nesse caso, basta que uma das condições seja verdadeira."
+                example_code: "```\nnome = {ask} 'qual é o seu nome?'\nidade = {ask} 'qual é a sua idade?'\n{if} nome {is} 'Hedy' {and} idade {is} 2\n    {print} 'Você é a verdadeira Hedy!'\n{elif} nome {is} 'Hedy' {or} idade {is} 2\n    {print} 'Tão perto... mas você não é a Hedy!'\n{else}\n    {print} 'Você não é a Hedy!'\n```\n"
+    hospital:
+        name: Hospital
+        default_save_name: Hospital
+        description: Hospital
+    hotel:
+        name: hotel
+        default_save_name: hotel
+        description: hotel
