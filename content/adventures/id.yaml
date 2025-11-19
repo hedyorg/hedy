@@ -1166,3 +1166,11 @@ adventures:
                 example_code_2: "```\njumlahsudut = {ask} 'Berapa banyak sudut yang kamu mau?'\nsudut = 360 / jumlahsudut \n{repeat} jumlahsudut {times}\n    {turn} _\n    {forward} _\n```\n"
     pressit:
         default_save_name: Ditekan
+    years:
+        name: Tahun Baru
+        default_save_name: Hitung Mundur Tahun Baru
+        description: Hitung Mundur menuju Tahun Baru!
+        levels:
+            7:
+                story_text: "Hitung mundur menuju Tahun Baru\n\n### Latihan\nIsilah yang kosong dan buat kodenya berfungsi!\n"
+                example_code: "```\nnumber = 10\n{repeat} _\n    {print} number\n    {sleep}\n    number = number - 1\n{print} 'Selamat Tahun Baru!'\n```\n"

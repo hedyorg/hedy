@@ -1151,6 +1151,8 @@ class AllCommands(Transformer):
             return 'else'
         if keyword == 'ifs':
             return 'if'
+        if keyword == 'if_clause':
+            return 'if'
         if keyword == 'elifs':
             return 'elif'
         if keyword == 'for_loop':
@@ -2276,14 +2278,16 @@ class ConvertToPython_5(ConvertToPython_4):
         except:
           pass""")
 
-    def ifs(self, meta, args):  # might be worth asking if we want a debug breakpoint here
+    def if_clause(self, meta, args):  # might be worth asking if we want a debug breakpoint here
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(args[1])}"""
 
+    def else_clause(self, meta, args):
+        return f"""else:{self.add_debug_breakpoint()}
+{ConvertToPython.indent(args[0])}"""
+
     def ifelse(self, meta, args):
-        return f"""{args[0]}
-else:{self.add_debug_breakpoint()}
-{ConvertToPython.indent(args[1])}"""
+        return '\n'.join(args)
 
     def condition(self, meta, args):
         return ' and '.join(args)
@@ -2665,6 +2669,39 @@ class ConvertToPython_6(ConvertToPython_5):
         bool_sys = f', bool_sys={ev.bool_sys}' if ev.bool_sys else ''
         return f"{{localize({ev.data}{num_sys}{bool_sys})}}"
 
+    def process_comparison(self, meta, args, operator):
+        arg0 = self.process_variable_for_comparisons(args[0], meta)
+        arg1 = self.process_variable_for_comparisons(args[1], meta)
+
+        return f"{arg0}{operator}{arg1}"
+
+    def process_variable_for_comparisons(self, arg, meta):
+        value = escape_var(self.unpack(arg))
+        if self.is_variable(arg, meta.line):
+            return f"{self.scoped_var_access(value, meta.line, parentheses=True)}.data"
+        elif self.is_list_access(arg):
+            return f"{escape_var(arg)}.data"
+        else:
+            return value
+
+    def equality_check_dequals(self, meta, args):
+        return self.equality_check(meta, args)
+
+    def smaller(self, meta, args):
+        return self.process_comparison(meta, args, "<")
+
+    def bigger(self, meta, args):
+        return self.process_comparison(meta, args, ">")
+
+    def smaller_equal(self, meta, args):
+        return self.process_comparison(meta, args, "<=")
+
+    def bigger_equal(self, meta, args):
+        return self.process_comparison(meta, args, ">=")
+
+    def not_equal(self, meta, args):
+        return self.process_comparison(meta, args, "!=")
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=7)
@@ -2688,6 +2725,18 @@ class ConvertToPython_7(ConvertToPython_6):
         ex = make_value_error(Command.repeat, 'suggestion_number', self.language)
         return f"for {var_name} in range(int_with_error({times}, {ex})):{self.add_debug_breakpoint()}\n{body}"
 
+    def number(self, meta, args):
+        # try converting to ints
+        try:
+            value = ''.join([str(int(x)) for x in args])
+            value = int(value)
+        except Exception:
+            # if it does not work, convert to floats
+            value = ''.join([str(float(x)) for x in args])
+            value = float(value)
+        input_text = ''.join([x for x in args])
+        return LiteralValue(value, num_sys=get_num_sys(input_text))
+
 
 @v_args(meta=True)
 @hedy_transpiler(level=8)
@@ -2701,7 +2750,7 @@ class ConvertToPython_8_9(ConvertToPython_7):
     def repeat(self, meta, args):
         return self.make_repeat(meta, args, multiline=True)
 
-    def ifs(self, meta, args):
+    def if_clause(self, meta, args):
         all_lines = [ConvertToPython.indent(x) for x in args[1:]]
         return "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
 
@@ -2739,14 +2788,13 @@ else:{self.add_debug_breakpoint()}
         return f"""if {args[0]}:{self.add_debug_breakpoint()}
 {ConvertToPython.indent(body)}"""
 
-
-# move elif and else into this is nicer and scales better!
-
     def else_clause(self, meta, args):
-        return ('\n'.join(args))
+        return f"""else:{self.add_debug_breakpoint()}
+{ConvertToPython.indent('\n'.join(args))}"""
 
     def elif_clause(self, meta, args):
-        return ('\n'.join(args))
+        return f"""elif {args[0]}:{self.add_debug_breakpoint()}
+{ConvertToPython.indent('\n'.join(args[1:]))}"""
 
 
 @v_args(meta=True)
@@ -2769,6 +2817,12 @@ class ConvertToPython_10(ConvertToPython_8_9):
         #     # Also, this leaks a variable from the loop to the outer scope
         #     lines.insert(0, f'global_scope_["{escape_var(for_var)}"] = {escape_var(for_var)}')
         return lines
+
+    def and_condition(self, meta, args):
+        return ' and '.join(args)
+
+    def or_condition(self, meta, args):
+        return ' or '.join(args)
 
 
 @v_args(meta=True)
@@ -2823,18 +2877,6 @@ class ConvertToPython_12(ConvertToPython_11):
         else:
             text_in_quotes = "''"
         return LiteralValue(text_in_quotes)
-
-    def number(self, meta, args):
-        # try converting to ints
-        try:
-            value = ''.join([str(int(x)) for x in args])
-            value = int(value)
-        except Exception:
-            # if it does not work, convert to floats
-            value = ''.join([str(float(x)) for x in args])
-            value = float(value)
-        input_text = ''.join([x for x in args])
-        return LiteralValue(value, num_sys=get_num_sys(input_text))
 
     def true(self, meta, args):
         bool_sys = self.get_bool_sys(args[0], True)
@@ -3041,7 +3083,7 @@ class ConvertToPython_12(ConvertToPython_11):
             value = f'{self.scoped_var_access(value, meta.line, parentheses=True)}.data'
         return f'{list_name}.data[int({value})-1]'
 
-    def ifs(self, meta, args):
+    def if_clause(self, meta, args):
         all_lines = [self.indent(x) for x in args[1:]]
         exception = self.make_index_error_check_if_list([args[0]])
         return exception + "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
@@ -3230,12 +3272,6 @@ class ConvertToPython_12(ConvertToPython_11):
 @hedy_transpiler(level=13)
 @source_map_transformer(source_map)
 class ConvertToPython_13(ConvertToPython_12):
-    def and_condition(self, meta, args):
-        return ' and '.join(args)
-
-    def or_condition(self, meta, args):
-        return ' or '.join(args)
-
     def process_comparison(self, meta, args, operator):
         arg0 = self.process_variable_for_comparisons(args[0], meta)
         arg1 = self.process_variable_for_comparisons(args[1], meta)
@@ -3611,7 +3647,7 @@ def _restore_parser_from_file_if_present(pickle_file):
     return None
 
 
-@lru_cache(maxsize=0 if utils.is_production() else 100)
+# @lru_cache(maxsize=0 if utils.is_production() else 100)
 def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     """Return the Lark parser for a given level.
     Parser generation takes about 0.5 seconds depending on the level so
