@@ -104,7 +104,7 @@ class TestsKeywordSuggestions(unittest.TestCase):
         (12, 'in', 'inm'),
         (12, 'print', 'rint'),
         (12, 'sleep', 'suleep'),
-    #     (13, 'else', 'lese'),
+        #     (13, 'else', 'lese'),
         (14, 'remove', 'remoe'),
         (14, 'add', 'dadd'),
         (14, 'range', 'raige'),
