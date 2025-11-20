@@ -301,7 +301,7 @@ class HedyTester(unittest.TestCase):
         except TypeError:
             test_hash = None
 
-        if True or not self.snippet_already_tested_with_current_hedy_version(test_hash):
+        if not self.snippet_already_tested_with_current_hedy_version(test_hash):
             if skipped_mappings is not None:
                 result = hedy.transpile(code, level, lang, skip_faulty=skip_faulty, unused_allowed=unused_allowed)
                 for skipped in skipped_mappings:

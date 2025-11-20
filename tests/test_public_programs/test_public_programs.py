@@ -36,7 +36,7 @@ passed_snippets = []
 
 
 class TestsPublicPrograms(HedyTester):
-    @parameterized.expand(p2, skip_on_empty=True)
+    @parameterized.expand(p2)
     def test_programs(self, name, snippet):
         # test correct programs
         if snippet is not None and len(snippet.code) > 0 and len(snippet.code) < 100 and not snippet.error:
