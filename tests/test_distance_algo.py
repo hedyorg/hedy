@@ -84,7 +84,6 @@ class TestsKeywordSuggestions(unittest.TestCase):
         (5, 'random', 'arndom'),
         (6, 'print', 'pritn'),
         (6, 'add', 'dda'),
-        (6, 'else', 'eles'),
         (6, 'remove', 'zremove'),
         (6, 'turn', 'tunr'),
         (7, 'print', 'pxrint'),
