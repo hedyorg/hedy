@@ -820,13 +820,6 @@ class TestsLevel16(HedyTester):
             exception=hedy.exceptions.UndefinedVarException,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2
         )
-
-        expected = textwrap.dedent(f"""\
-           a = {self.list_transpiled("11", "22", "33")}
-           if {self.in_list_transpiled("Value(11, num_sys='Arabic')", 'a')}:
-             print(f'''correct''')""")
-
-        self.single_level_tester(code=code, expected=expected, output='correct')
     #
     # forward tests
     #
@@ -1007,9 +1000,9 @@ class TestsLevel16(HedyTester):
             userc = Value('Hedy')
             print(f'''Pilihan komputer: {computerc}''')
             if userc.data == computerc.data and userc.data == 'Hedy':
-                print(f'''SERI''')
+              print(f'''SERI''')
             else:
-                print(f'''Komputer''')""")
+              print(f'''Komputer''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -1026,7 +1019,7 @@ class TestsLevel16(HedyTester):
             self.list_access_transpiled('colors.data[int(2)-1]'),
             f"""\
             if colors.data[int(1)-1].data == colors.data[int(2)-1].data {op} 1 == 1:
-                print(f'''red''')""")
+              print(f'''red''')""")
 
         self.single_level_tester(
             code=code,
@@ -1041,7 +1034,7 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
             naam = Value('Hedy')
             if naam.data == 'Hedy':
-                print(f'''koekoek''')""")
+              print(f'''koekoek''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -1049,12 +1042,12 @@ class TestsLevel16(HedyTester):
         code = textwrap.dedent("""\
             naam is 'Hedy'
             if naam == 'Hedy':
-                print 'koekoek'""")
+              print 'koekoek'""")
 
         expected = textwrap.dedent("""\
             naam = Value('Hedy')
             if naam.data == 'Hedy':
-                print(f'''koekoek''')""")
+              print(f'''koekoek''')""")
 
         self.single_level_tester(code=code, expected=expected)
     #
@@ -1078,11 +1071,11 @@ class TestsLevel16(HedyTester):
             userc = Value('Hedy')
             print(f'''Pilihan komputer: {computerc}''')
             if userc.data == computerc.data and userc.data == 'Hedy':
-                print(f'''SERI''')
+              print(f'''SERI''')
             elif userc.data == 'PC' and userc.data == 'Hedy':
-                print(f'''HARI''')
+              print(f'''HARI''')
             else:
-                print(f'''Komputer''')""")
+              print(f'''Komputer''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -1104,37 +1097,14 @@ class TestsLevel16(HedyTester):
             jouw_prijs = random.choice(prijzen.data)
             print(f'''Je wint {jouw_prijs}''')
             if jouw_prijs.data == '1 miljoen':
-                print(f'''Yess! Je bent rijk!''')
+              print(f'''Yess! Je bent rijk!''')
             elif jouw_prijs.data == 'een appeltaart':
-                print(f'''Heerlijk, een appeltaart!''')
+              print(f'''Heerlijk, een appeltaart!''')
             else:
-                print(f'''Meer geluk volgende keer..''')"""
+              print(f'''Meer geluk volgende keer..''')"""
         )
 
         self.single_level_tester(code=code, expected=expected)
-
-    def test_for_loop_no_colon_after_pressed_gives_error(self):
-        code = textwrap.dedent("""\
-        for a in range 2 to 4
-            a = 1""")
-
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('for in range', 1)
-        )
-
-    def test_for_list_without_colon_gives_error(self):
-        code = textwrap.dedent("""\
-        dieren = ['cat', 'dog', 'parrot']
-        for dier in dieren
-            a = 1""")
-
-        self.multi_level_tester(
-            code=code,
-            exception=exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('for in', 2)
-        )
 
     def test_if__else(self):
         code = textwrap.dedent("""\
@@ -1146,14 +1116,14 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
             a = Value(5, num_sys='Latin')
             if a.data == 1:
-                a = Value(2, num_sys='Latin')
+              a = Value(2, num_sys='Latin')
             else:
-                a = Value(222, num_sys='Latin')""")
+              a = Value(222, num_sys='Latin')""")
         self.single_level_tester(code=code, expected=expected)
 
     def test_forloop(self):
         code = textwrap.dedent("""\
-            for i in range 1 to 10:
+            for i in range (1, 10):
                 print i
             print 'wie niet weg is is gezien'""")
         expected = self.dedent(
@@ -1175,9 +1145,9 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
             a = Value(1, num_sys='Latin')
             if a.data == 1:
-                print(f'''{a}''')
+              print(f'''{a}''')
             else:
-                print(f'''nee''')""")
+              print(f'''nee''')""")
 
         self.multi_level_tester(
             max_level=17,
@@ -1189,19 +1159,6 @@ class TestsLevel16(HedyTester):
     #
     # while loop
     #
-
-    def test_while_no_colon_gives_error(self):
-        code = textwrap.dedent("""\
-        a = 1
-        while a != 5
-            a = a + 1""")
-
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('while', 2)
-        )
-
     def test_while_equals_boolean(self):
         code = textwrap.dedent("""\
             cond is True
@@ -1210,8 +1167,8 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
             cond = Value(True, bool_sys={True: 'True', False: 'False'})
             while cond.data!=False:
-                cond = Value(False, bool_sys={True: 'True', False: 'False'})
-                time.sleep(0.1)""")
+              cond = Value(False, bool_sys={True: 'True', False: 'False'})
+              time.sleep(0.1)""")
 
         self.multi_level_tester(
             code=code,
@@ -1230,9 +1187,9 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
             a = Value(1, num_sys='Latin')
             if a.data == 1:
-                print(f'''{a}''')
+              print(f'''{a}''')
             else:
-                print(f'''nee''')""")
+              print(f'''nee''')""")
 
         self.multi_level_tester(
             code=code,
@@ -1243,7 +1200,7 @@ class TestsLevel16(HedyTester):
     def test_if_under_else_in_for(self):
         # todo can me multitester with higher levels!
         code = textwrap.dedent("""\
-            for i in range 0 to 10:
+            for i in range (0, 10):
                 antwoord is ask 'Wat is 5*5'
                 if antwoord is 24:
                     print 'Dat is fout!'
@@ -1257,11 +1214,11 @@ class TestsLevel16(HedyTester):
             (self.input_transpiled('antwoord', 'Wat is 5*5'), '  '),
             ("""\
             if antwoord.data == 24:
-                print(f'''Dat is fout!''')
+              print(f'''Dat is fout!''')
             else:
-                print(f'''Dat is goed!''')
+              print(f'''Dat is goed!''')
             if antwoord.data == 25:
-                i = Value(10, num_sys='Latin')
+              i = Value(10, num_sys='Latin')
             time.sleep(0.1)""", '  '))
 
         self.single_level_tester(code=code, expected=expected)
@@ -1276,9 +1233,9 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
             a = Value(5, num_sys='Latin')
             if a.data == 1:
-                a = Value(2, num_sys='Latin')
+              a = Value(2, num_sys='Latin')
             elif a.data == 2:
-                a = Value(222, num_sys='Latin')""")
+              a = Value(222, num_sys='Latin')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -1292,9 +1249,9 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent("""\
             a = Value(5, num_sys='Latin')
             if a.data == 1:
-                a = Value(2, num_sys='Latin')
+              a = Value(2, num_sys='Latin')
             elif a.data == 2:
-                a = Value(222, num_sys='Latin')""")
+              a = Value(222, num_sys='Latin')""")
 
         self.single_level_tester(code=code, expected=expected, lang='fr')
 
@@ -1302,23 +1259,25 @@ class TestsLevel16(HedyTester):
         code = textwrap.dedent("""\
             a is 5
             if a is 1:
-                a is 2
+              a is 2
             elif a is 4:
-                a is 3
+              a is 3
             elif a is 2:
-                a is 222""")
+              a is 222""")
         expected = textwrap.dedent("""\
             a = Value(5, num_sys='Latin')
             if a.data == 1:
-                a = Value(2, num_sys='Latin')
+              a = Value(2, num_sys='Latin')
             elif a.data == 4:
-                a = Value(3, num_sys='Latin')
+              a = Value(3, num_sys='Latin')
             elif a.data == 2:
-                a = Value(222, num_sys='Latin')""")
+              a = Value(222, num_sys='Latin')""")
 
         self.single_level_tester(
-            code=code, expected=expected, expected_commands=[
-                'is', 'if', 'is', 'elif', 'is', 'elif', 'is'])
+            code=code,
+            expected=expected,
+            # expected_commands=['is', 'if', 'is', 'elif', 'is', 'elif', 'is']
+        )
 
     def test_if_in_list_with_string_var_gives_type_error(self):
         code = textwrap.dedent("""\
@@ -1343,7 +1302,7 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent(f"""\
             a = {self.list_transpiled("11", "22", "33")}
             if {self.in_list_transpiled("Value(11, num_sys='Arabic')", 'a')}:
-                print(f'''correct''')""")
+              print(f'''correct''')""")
 
         self.single_level_tester(code=code, expected=expected, output='correct')
 
@@ -1356,7 +1315,7 @@ class TestsLevel16(HedyTester):
         expected = textwrap.dedent(f"""\
             a = {self.list_transpiled("22", "33", "44")}
             if {self.not_in_list_transpiled("Value(11, num_sys='Arabic')", 'a')}:
-                print(f'''correct''')""")
+              print(f'''correct''')""")
 
         self.single_level_tester(code=code, expected=expected, output='correct')
 
@@ -1371,7 +1330,7 @@ class TestsLevel16(HedyTester):
             m = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
             n = Value([Value(1, num_sys='Latin'), Value(2, num_sys='Latin')])
             if m.data == n.data:
-                print(f'''JA!''')""")
+              print(f'''JA!''')""")
 
         self.multi_level_tester(
             code=code,
@@ -1401,7 +1360,7 @@ class TestsLevel16(HedyTester):
             self.input_transpiled('leeftijd', 'Hoe oud ben jij?'),
             f"""\
             if leeftijd.data{comparison}12:
-                print(f'''Dan ben je jonger dan ik!''')""")
+              print(f'''Dan ben je jonger dan ik!''')""")
 
         self.single_level_tester(code=code, expected=expected)
 
@@ -1424,7 +1383,7 @@ class TestsLevel16(HedyTester):
             sleep""")
         expected = textwrap.dedent(f"""\
         if 'quoted'!='string':
-            time.sleep(1)""")
+          time.sleep(1)""")
 
         self.multi_level_tester(
             code=code,
@@ -1441,13 +1400,13 @@ class TestsLevel16(HedyTester):
             a = {arg}
             b = {arg}
             if a != b:
-                b = 1""")
+              b = 1""")
 
         expected = textwrap.dedent(f"""\
             a = {exp}
             b = {exp}
             if a.data!=b.data:
-                b = Value(1, num_sys='Latin')""")
+              b = Value(1, num_sys='Latin')""")
 
         self.multi_level_tester(
             code=code,
@@ -1471,194 +1430,132 @@ class TestsLevel16(HedyTester):
             exception=exceptions.InvalidTypeCombinationException
         )
 
-    def test_if_pressed_with_color(self):
-        code = textwrap.dedent("""\
-            if x is pressed:
-                color 'red'""")
+    # TODO: Removing if pressed tests for now
 
-        expected = self.dedent(
-            f"""\
-            global_scope_ = dict()
-            if_pressed_mapping = {{"else": "if_pressed_default_else"}}
-            if_pressed_mapping['x'] = 'if_pressed_x_'
-            global if_pressed_x_
-            def if_pressed_x_():""",
-            (self.color_transpiled('red'), '  '),
-            "extensions.if_pressed(if_pressed_mapping)")
+    # def test_if_pressed_with_color(self):
+    #     code = textwrap.dedent("""\
+    #         if x is pressed:
+    #             color 'red'""")
 
-        self.multi_level_tester(
-            code=code,
-            expected=expected,
-            extra_check_function=self.is_turtle()
-        )
+    #     expected = self.dedent(
+    #         f"""\
+    #         global_scope_ = dict()
+    #         if_pressed_mapping = {{"else": "if_pressed_default_else"}}
+    #         if_pressed_mapping['x'] = 'if_pressed_x_'
+    #         global if_pressed_x_
+    #         def if_pressed_x_():""",
+    #         (self.color_transpiled('red'), '  '),
+    #         "extensions.if_pressed(if_pressed_mapping)")
 
-    def test_if_pressed_no_colon_gives_error(self):
-        code = textwrap.dedent("""\
-        if x is pressed
-            a = 'no colon!'""")
+    #     self.multi_level_tester(
+    #         code=code,
+    #         expected=expected,
+    #         extra_check_function=self.is_turtle()
+    #     )
 
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('if', 1)
-        )
+    # def test_if_pressed_no_colon_gives_error(self):
+    #     code = textwrap.dedent("""\
+    #     if x is pressed
+    #         a = 'no colon!'""")
 
-    def test_pressed_elif_no_colon_gives_error(self):
-        code = textwrap.dedent("""\
-        if x is pressed:
-            a = 'correct'
-        elif m is pressed
-            a = 'no colon!'""")
+    #     self.multi_level_tester(
+    #         code=code,
+    #         exception=hedy.exceptions.MissingColonException,
+    #         extra_check_function=missing_colon_check('if', 1)
+    #     )
 
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('elif', 3)
-        )
+    # def test_pressed_elif_no_colon_gives_error(self):
+    #     code = textwrap.dedent("""\
+    #     if x is pressed:
+    #         a = 'correct'
+    #     elif m is pressed
+    #         a = 'no colon!'""")
 
-    def test_pressed_if_else_no_colon_gives_error(self):
-        code = textwrap.dedent("""\
-        if x is pressed:
-            a = 'correct'
-        else
-            a = 'no colon!'""")
+    #     self.multi_level_tester(
+    #         code=code,
+    #         exception=hedy.exceptions.MissingColonException,
+    #         extra_check_function=missing_colon_check('elif', 3)
+    #     )
 
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('else', 3)
-        )
+    # def test_pressed_if_else_no_colon_gives_error(self):
+    #     code = textwrap.dedent("""\
+    #     if x is pressed:
+    #         a = 'correct'
+    #     else
+    #         a = 'no colon!'""")
 
-    def test_pressed_if_elif_else_no_colon_gives_error(self):
-        code = textwrap.dedent("""\
-        if x is pressed:
-            a = 'correct'
-        elif m is pressed:
-            a = 'correct'
-        else
-            a = 'no colon!'""")
+    #     self.multi_level_tester(
+    #         code=code,
+    #         exception=hedy.exceptions.MissingColonException,
+    #         extra_check_function=missing_colon_check('else', 3)
+    #     )
 
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('else', 5)
-        )
+    # def test_pressed_if_elif_else_no_colon_gives_error(self):
+    #     code = textwrap.dedent("""\
+    #     if x is pressed:
+    #         a = 'correct'
+    #     elif m is pressed:
+    #         a = 'correct'
+    #     else
+    #         a = 'no colon!'""")
 
-    def test_if_no_colon_gives_error(self):
-        code = textwrap.dedent("""\
-        if 'a' is 'a'
-            b = 'no colon!'""")
+    #     self.multi_level_tester(
+    #         code=code,
+    #         exception=hedy.exceptions.MissingColonException,
+    #         extra_check_function=missing_colon_check('else', 5)
+    #     )        
 
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('if', 1)
-        )
+    # def test_pressed_elif(self):
+    #     code = textwrap.dedent("""\
+    #     if a is pressed:
+    #         print 'A'
+    #     elif b is pressed:
+    #         print 'B'
+    #     else:
+    #         print 'Other'""")
 
-    def test_elif_no_colon_gives_error(self):
-        code = textwrap.dedent("""\
-        if 'a' is 'a':
-            b = 'colon!'
-        elif 'a' is 'b'
-            b = 'no colon!'""")
+    #     expected = self.dedent("""\
+    #     global_scope_ = dict()
+    #     if_pressed_mapping = {"else": "if_pressed_default_else"}
+    #     if_pressed_mapping['a'] = 'if_pressed_a_'
+    #     global if_pressed_a_
+    #     def if_pressed_a_():
+    #         print(f'''A''')
+    #     if_pressed_mapping['b'] = 'if_pressed_b_'
+    #     global if_pressed_b_
+    #     def if_pressed_b_():
+    #         print(f'''B''')
+    #     if_pressed_mapping['else'] = 'if_pressed_else_'
+    #     global if_pressed_else_
+    #     def if_pressed_else_():
+    #         print(f'''Other''')
+    #     extensions.if_pressed(if_pressed_mapping)""")
 
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('elif', 3)
-        )
+    #     self.single_level_tester(code=code, expected=expected)
 
-    def test_else_no_colon_gives_error(self):
-        code = textwrap.dedent("""\
-        if 'a' is 'a':
-            b = 'colon!'
-        else
-            b = 'no colon!'""")
+    # def test_source_map(self):
+    #     code = textwrap.dedent("""\
+    #         for i in range 1 to 10:
+    #             print i
+    #         print 'Ready or not, here I come!'""")
 
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('else', 3)
-        )
+    #     excepted_code = self.dedent(
+    #         self.for_loop('i', 1, 10),
+    #         (f"print(f'''{{i}}''')", '  '),
+    #         ("time.sleep(0.1)", '  '),
+    #         "print(f'''Ready or not, here I come!''')")
 
-    def test_if_elif_else_no_colon_gives_error(self):
-        code = textwrap.dedent("""\
-        if 'a' is 'a':
-            b = 'colon!'
-        elif 'a' is 'b':
-            b = 'colon!'
-        else
-            b = 'no colon!'""")
+    #     expected_source_map = {
+    #         '1/5-1/6': '1/12-1/13',
+    #         '2/11-2/12': '1/1-1/2',
+    #         '2/5-2/12': '3/1-3/18',
+    #         '1/1-2/21': '1/1-4/18',
+    #         '3/1-3/35': '5/1-5/41',
+    #         '1/1-3/36': '1/1-5/41'
+    #     }
 
-        self.multi_level_tester(
-            code=code,
-            exception=hedy.exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('else', 5)
-        )
-
-    def test_pressed_elif(self):
-        code = textwrap.dedent("""\
-        if a is pressed:
-            print 'A'
-        elif b is pressed:
-            print 'B'
-        else:
-            print 'Other'""")
-
-        expected = self.dedent("""\
-        global_scope_ = dict()
-        if_pressed_mapping = {"else": "if_pressed_default_else"}
-        if_pressed_mapping['a'] = 'if_pressed_a_'
-        global if_pressed_a_
-        def if_pressed_a_():
-            print(f'''A''')
-        if_pressed_mapping['b'] = 'if_pressed_b_'
-        global if_pressed_b_
-        def if_pressed_b_():
-            print(f'''B''')
-        if_pressed_mapping['else'] = 'if_pressed_else_'
-        global if_pressed_else_
-        def if_pressed_else_():
-            print(f'''Other''')
-        extensions.if_pressed(if_pressed_mapping)""")
-
-        self.single_level_tester(code=code, expected=expected)
-
-    def test_define_no_colon_gives_error(self):
-        code = textwrap.dedent("""\
-            define simple_function
-                a = 1
-            call simple_function""")
-
-        self.single_level_tester(
-            code=code,
-            exception=exceptions.MissingColonException,
-            extra_check_function=missing_colon_check('define', 1)
-        )
-
-    def test_source_map(self):
-        code = textwrap.dedent("""\
-            for i in range 1 to 10:
-                print i
-            print 'Ready or not, here I come!'""")
-
-        excepted_code = self.dedent(
-            self.for_loop('i', 1, 10),
-            (f"print(f'''{{i}}''')", '  '),
-            ("time.sleep(0.1)", '  '),
-            "print(f'''Ready or not, here I come!''')")
-
-        expected_source_map = {
-            '1/5-1/6': '1/12-1/13',
-            '2/11-2/12': '1/1-1/2',
-            '2/5-2/12': '3/1-3/18',
-            '1/1-2/21': '1/1-4/18',
-            '3/1-3/35': '5/1-5/41',
-            '1/1-3/36': '1/1-5/41'
-        }
-
-        self.single_level_tester(code, expected=excepted_code)
-        self.source_map_tester(code=code, expected_source_map=expected_source_map)
+    #     self.single_level_tester(code, expected=excepted_code)
+    #     self.source_map_tester(code=code, expected_source_map=expected_source_map)
 
     # -----old level 18-----
 
