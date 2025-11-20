@@ -1503,7 +1503,7 @@ class TestsLevel16(HedyTester):
     #         code=code,
     #         exception=hedy.exceptions.MissingColonException,
     #         extra_check_function=missing_colon_check('else', 5)
-    #     )        
+    #     )
 
     # def test_pressed_elif(self):
     #     code = textwrap.dedent("""\
