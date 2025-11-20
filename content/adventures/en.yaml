@@ -1460,19 +1460,19 @@ adventures:
                     Fill in the correct symbols on the blanks to get the game to work.
                 example_code: |
                     ```
-                    {print} 'Guess my number'
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number = numbers {at} {random}
+                    {print}('Guess my number')
+                    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    number = numbers[{random}]
                     game = 'on'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} game == 'on'
-                            guess = {ask} 'Which number do you think it is?'
+                    {for} i {in} {range} (1, 10):
+                        {if} game == 'on':
+                            guess = {input}('Which number do you think it is?')
                             {if} guess _ number
-                                {print} 'Lower!'
+                                {print} ('Lower!')
                             {if} guess _ number
-                                {print} 'Higher!'
+                                {print} ('Higher!')
                             {if} guess _ number
-                                {print} 'You win!'
+                                {print} '(You win!')
                                 game = 'over'
                     ```
     harry_potter:
@@ -2485,34 +2485,6 @@ adventures:
                     {while} yes_or_no = 'yes'
                         song()
                         {print} '🥳'
-                    ```
-            14:
-                story_text: |
-                    Upgrade your Old MacDonald code!
-
-                    ### Exercise
-                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
-                    You can make a function for each line in the song and call that function after the line is printed.
-                    We defined the first line for you and called it in the code. Can you finish the whole song?
-                example_code: |
-                    ```
-                    {define} line_1
-                        {for} i {in} {range} (1, 3)
-                            {play} G
-                        {play} D
-                        {for} i {in} {range} 1 {to} 2
-                            {play} E
-                        {play} D
-
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} (1, 3)
-                        animal = animals[i]
-                        sound = sounds[i]
-                        {print} 'Old MacDonald had a farm'
-                        line_1()
-                        {print} 'E I E I O!'
-                        _
                     ```
     parrot:
         name: Parrot
@@ -4071,47 +4043,6 @@ adventures:
                         {color} chosen_color
                         {if} shape = 'square'
                             {call} draw_a_square
-                    ```
-            14:
-                story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
-
-                    Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Colored street <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
-                example_code: |
-                    Hint Street in different sizes
-                    ```
-                    {define} draw_a_house(size)
-                    _
-
-                    draw_a_house(90)
-                    draw_a_house(60)
-                    draw_a_house(30)
-                    ```
-
-                    Hint Colored street
-                    ```
-                    {define} draw_a_house(chosen_color)
-                    _
-                    ```
-
-                    Hint Snow Storm
-                    ```
-                    {define} draw_snowflake(length, color)
-                        _
-
-                    numbers = 10, 20, 30
-                    colors = _
-
-                    {for} i {in} {range} 1 {to} 5
-                        random_number = _
-                        random_color = _
-                        draw_snowflake(random_number, random_color)
-                        {color} white
-                        {turn} random_number * 5
-                        {forward} 80
                     ```
             15:
                 story_text: |

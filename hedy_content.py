@@ -269,7 +269,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'random_command',
         'haunted',
         'songs',
-        'music',
         'language',
         'debugging',
         'hospital'
