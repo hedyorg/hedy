@@ -10,7 +10,7 @@ for_list: _FOR var _IN var_access (_COLON)? _EOL (_SPACE command) (_EOL _SPACE c
 print: _PRINT _LEFT_BRACKET? (_print_ask_argument)? _RIGHT_BRACKET?
 
 // optional commas between arguments
-_print_ask_argument.1: (_SPACE | var_access_print | atom | quoted_text | list_access | expression | print_expression | _COMMA)*
+_print_ask_argument.1: (_SPACE | print_ask_atom | quoted_text | list_access | expression | print_expression | _COMMA)*
 
 //optional colon in if/elses
 if_clause: _IF (_conditions) _COLON? _EOL _commands _EOL? _END_BLOCK
@@ -68,6 +68,8 @@ boolean: TRUE | FALSE
 // FH June 2025: New to allow decimals in the grammar
 ?atom: NUMBER | _MINUS NUMBER | boolean | text_in_quotes | list_access | error_list_access_at | var_access // no more text without quotes
 
+// The atom for the print ask needs its own var_access
+?print_ask_atom: NUMBER | _MINUS NUMBER | boolean | text_in_quotes | list_access | error_list_access_at | var_access_print
 
 ?arguments: argument (_COMMA argument)* -> arguments
 ?argument: expression | atom | list_access | error_list_access_at | quoted_text
