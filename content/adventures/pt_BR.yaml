@@ -161,7 +161,17 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Neste nível você pode usar o encaixamento para colocar comandos {if}, {repeat} ou {for} dentro de outros comandos {if}, {repeat} ou {for}. Isso oferece muitas opções e realmente ajuda você a tornar sua história interativa.
+                    Neste nível, você pode usar os comandos `{if}` e `{repeat}` dentro de outros comandos `{if}` e `{repeat}`.
+                    Isso oferece muitas opções e realmente ajuda a tornar sua história interativa.
+
+                    ### Exercício 1
+                    Conclua o código para que o `{if}` funcione corretamente.
+
+                    ### Exercício 2
+                    Adicione um `{if}` e `{else}` para a parte da história em que Robin também volta para casa.
+
+                    ### Exercício 3
+                    Volte para a sua história do nível 8 e use pelo menos dois `{if}` dentro de outro `{if}`.
                 example_code: |
                     ```
                     {print} 'Roberta está andando no centro'
@@ -177,6 +187,7 @@ adventures:
                     {else}
                         {print} 'Roberta vai para casa'
                     ```
+                story_text_2: "Usando os comandos `{and}` e `{or}`, você pode tornar suas histórias mais versáteis. Você pode fazer duas perguntas e responder à combinação de respostas.\n\n### Exercício 1\nObserve o código de exemplo e complete-o. Em seguida, adicione pelo menos mais 2 códigos `{if}` com `{and}` ou `{or}`.\n\n### Exercício 2\nEncontre uma história de um nível anterior e adicione um `{and}` ou `{or}`.\nexample_code: |\n```\n{print} 'Nosso herói está caminhando pela floresta'\n{print} 'O caminho se divide em dois'\npath = {ask} 'Qual caminho ela deve escolher?'\nweapon = {ask} 'Qual arma ela saca?'\n{if} path {is} 'left' {and} weapon {is} 'sword'\n_\n```\n"
             11:
                 story_text: |
                     Neste nível você pode usar o comando {for} em sua história. Desta forma, você poderia facilmente programar o livro infantil 'urso pardo, urso pardo, o que você vê'.
@@ -191,17 +202,17 @@ adventures:
                 example_code: |
                     ```
                     chaves = 'perdidas'
-                    {print} 'Você está no seu jardim e perdeu suas chaves.'
-                    {print} 'Onde você quer procurá-las?'
-                    {print} 'Você pode escolher: árvore, canteiro de flores, pedra, caixa postal'
-                    {while} chaves == 'perdidas'
-                        local = {ask} 'Onde você quer procurar?'
-                        {if} local == 'canteiro de flores'
-                            {print} 'Aqui estão elas!'
+                    {print}('Você está no seu jardim e perdeu suas chaves.')
+                    {print}('Onde você quer procurá-las?')
+                    {print}('Você pode escolher: árvore, canteiro de flores, pedra, caixa de correio')
+                    {while} chaves == 'perdidas':
+                        local = {input}('Onde você quer procurar?')
+                        {if} local == 'canteiro de flores':
+                            {print}('Aqui estão elas!')
                             chaves = 'encontradas'
-                        {else}
-                            {print} 'Não, elas não estão no ' local
-                    {print} 'Agora você pode entrar na casa!'
+                        {else}:
+                            {print}('Não, elas não estão em ', local)
+                    {print}('Agora você pode entrar na casa!')
                     ```
             13:
                 story_text: |
@@ -223,6 +234,9 @@ adventures:
                     nome = {input}("Qual é o seu nome?")
                     {print}('Bem-vindo(a) a esta história!')
                     ```
+            6:
+                story_text: "Agora que você pode usar `{elif}`, pode criar uma história ainda mais interativa! Você pode criar vários personagens, por exemplo, com características diferentes.\nOu você pode fazer com que seu jogador escolha qual caminho seguir, qual porta abrir ou qual poção mágica beber...\n\n### Exercício\nCrie sua própria história com 3 ou mais opções usando {elif}."
+                example_code: "```\ncharacter = {ask} 'Quem vai te ajudar na sua jornada?'\n{if} character {is} 'Daisy'\n{print} 'Você escolheu Daisy! Ela é a mais inteligente de todas!'\n{print} \"Daisy imediatamente diz que você não deve comer aquelas frutas ali.\"\n{elif} character {is} 'Jason'\n{print} 'Você escolheu Jason! Ele é o mais forte de todos!'\n{print} 'Jason levanta uma pedra, mostrando um mapa secreto embaixo'\n{elif} character {is} 'Sam'\n{print} 'Você escolheu Sam! Elas são as mais rápidas de todas!'\n{print} 'Sam sobe em uma árvore e vê que há uma vila não muito longe...'\n```\n\n            \n"
     add_remove_command:
         default_save_name: comando_some_remova
         description: introduzindo {add} {to_list} e {remove} {from}
@@ -394,15 +408,15 @@ adventures:
             15:
                 example_code: |
                     ```
-                    {define} calcular_média
+                    {def} calcular_media():
                         total = 0
-                        {for} i {in} {range} 1 {to} 4
-                            nota = {ask} _
+                        {for} i {in} {range}(1, 4):
+                            nota = {input} _
                             total = total + _
                             {return} _ / 4
 
-                    média = {call} _
-                    {print} 'A sua média foi ' média
+                    media = _
+                    {print}('A sua média foi ', media)
                     ```
             11:
                 story_text: "Este jogo de calculadora te ajuda a praticar a tabuada de multiplicação!\n### Exercício\nPreencha as lacunas. Queremos que o programa faça estas perguntas:\n```\nQuanto é 1 vezes 1?\nQuanto é 1 vezes 2?\nQuanto é 1 vezes 3?\nQuanto é 2 vezes 1?\nQuanto é 2 vezes 2?\nQuanto é 2 vezes 3?\nQuanto é 3 vezes 1?\nQuanto é 3 vezes 2?\nQuanto é 3 vezes 3?\n_\n```\n"
@@ -498,6 +512,20 @@ adventures:
                     {print} 'autor é o seu autor favorito'
                     {print} Hmmm... acho que você devia experimentar ler... livros {at} {random}
                     ```
+            5:
+                story_text: "### Exercício\nDepure este código. Boa sorte!"
+                example_code: "**Atenção! Este código precisa ser depurado!**\n```\n{print} Bem-vindo(a) à Piscina Hedy!\ncertificado {is} {ask} 'Você tem um certificado de natação?'\n{if} certificado 'sim' {print} 'Ótimo! Você pode nadar na piscina!\n{print} {else} 'Você pode entrar, mas não pode nadar.'\ndesconto {is} {ask} 'Você tem menos de 12 anos?'\n{if} desconto {is} sim\n{print} 'Vai custar R$9,90'\n'Vai custar R$15,50'\n{print} 'Tenha um bom dia!'\n```\n"
+                answer_code: "```\n{print} 'Bem-vindo(a) à Piscina Hedy!'\ncertificado {is} {ask} 'Você tem um certificado de natação?'\n{if} certificado {is} 'sim' {print} 'Ótimo! Você pode nadar na piscina!\n{else} {print} 'Você pode entrar, mas não pode nadar.'\ndesconto {is} {ask} 'Você tem menos de 12 anos?'\n{if} desconto {is} 'sim' {print} 'Vai custar R$9,90'\n{else} {print} 'Vai custar R$15,50'\n{print} 'Tenha um bom dia!'\n\n```\n"
+            6:
+                story_text: "### Exercício\nDepure este código. Boa sorte!\n"
+            7:
+                story_text: "### Exercício\nDepure este código. Boa sorte!"
+            8:
+                story_text: "### Exercício\nDepure este código. Boa sorte!"
+            9:
+                story_text: "### Exercício\nDepure este código. Boa sorte!"
+            10:
+                story_text: "### Exercício\nDepure este código. Boa sorte!"
     dice:
         name: Dado
         default_save_name: Dado
@@ -692,6 +720,8 @@ adventures:
     elif_command:
         default_save_name: senão se
         levels:
+            6:
+                story_text: "Neste nível, você também pode usar um novo comando: `{elif}`. `{elif}` é a junção de `{else}` com `{if}` e você precisará dele quando quiser fazer 3 (ou mais!) opções.\nConfira!\n"
         name: '{elif}'
         description: '{elif}'
     for_command:
@@ -859,12 +889,12 @@ adventures:
                     Para criar uma função, use `{define}` e a dê um nome. Depois, coloque todas as linhas que você quer que estejam na função em um bloco indentado abaixo da linha do `{define}`.
                     Deixe uma linha em branco no seu código para que ele fique mais elegante. Ótimo trabalho! Você criou uma função!
 
-                    Agora, sempre que precisarmos daquele bloco de código, vamos simplesmente usar <code>{call}</code> com o nome da função para executá-lo! Não teremos de digitar aquele bloco novamente.
+                    Agora, sempre que precisarmos daquele bloco de código, vamos simplesmente usar o nome da função para executá-lo! Não teremos de digitar aquele bloco novamente.
 
                     Veja este código exemplo de um jogo chamado Twister. A função 'giro' contém um bloco de código que escolhe qual membro do corpo deve ir aonde.
 
                     ### Exercício
-                    Termine o código definindo as duas variáveis membro_escolhido e cor_escolhida.
+                    Termine o código definindo as duas variáveis `membro_escolhido` e `cor_escolhida`.
                     Então, escolha quantas vezes você quer chamar a função de girar a roda do Twister.
 
                     ### Exercício 2
@@ -1072,6 +1102,7 @@ adventures:
                 example_code: "```\ncontinuar = {ask} 'Você quer continuar?'\n{if} continuar = sim\n    certeza = {ask} 'Tem certeza?'\n    {if} certeza {is} sim\n        {print} 'Vamos continuar'\n    {else}\n        {print} 'Você não tem certeza'\n{else}\n    {print} 'Você não quer continuar'\n```\n"
             9:
                 example_code: "```\nnome = {ask} 'Qual é o seu nome?'\n{if} nome {is} Hedy\n    {print} 'Bem-vinda, Hedy'\n    {print} 'Você pode jogar no seu computador!'\n```\n"
+        name: '{if} & {else}'
     in_command:
         default_save_name: comando_em
         description: Introduzindo o comando {in}
@@ -1127,6 +1158,11 @@ adventures:
             7:
                 example_code: "```\nnome = Hedy\nresposta = 20 + 4\n```\n"
                 story_text: "Também mudamos a forma como você guarda uma palavra em uma variável! Agora você pode usar `=` em vez de `{is}` para guardar um nome ou número numa variável, assim:\n"
+            13:
+                story_text_2: "Deste nível em diante, se você quiser fazer uma comparação exata, você pode usar dois sinais de igual. É isso o que a maioria das linguagens de programação usa:\n"
+                example_code_2: "```\nnome = {input}('Qual é o seu nome?')\n{if} nome == 'Hedy':\n    {print}('Você é legal!')\n```\n"
+                story_text_3: "Você também pode checar se uma coisa *não* é igual a outra usando `!=`, desse jeito:\n"
+                example_code_3: "```\nnome = {input}('Qual é o seu nome?')\n{if} nome != 'Hedy':\n    {print}('Você não é a Hedy')\n```\n"
         name: '{is}'
     language:
         name: Língua
@@ -1960,3 +1996,19 @@ adventures:
                 story_text: "### Exercício\nRecrie os desenhos com a tartaruga!\n\n**Extra** Faça um único código que deixa o(a) jogador(a) decidir qual letra mostrar! E mais, você consegue adicionar ainda mais letras?\n\n<div class=\"w-full flex flex-row gap-2\">\nF <img src=\"https://github.com/hedyorg/hedy/assets/80678586/8a021b76-c24b-4e7c-b960-48d57f3bcb20\" width=\"100\">\nE <img src=\"https://github.com/hedyorg/hedy/assets/80678586/12821803-6422-416a-8e36-9902d14e57a4\" width=\"100\">\nL <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3af6f919-7b67-4ee7-b923-11e56f2b6b24\" width=\"100\">\n</div>\n"
     years:
         description: Contagem regressiva para o Ano Novo!
+    and_or_command:
+        name: '{and} e {or}'
+        default_save_name: e_ou_comando
+        description: e, ou
+        levels:
+            10:
+                story_text: "Agora, vamos aprender `{and}` e `{or}`! Se você quer checar duas condições, você não precisa usar dois `{if}`s, você pode usar `{and}` e `{or}`.\nSe você usar `{and}`, significa que ambas as condições, à esquerda e à direita do `{and}`, precisam ser verdadeiras. Também podemos usar `{or}`. Nesse caso, basta que uma das condições seja verdadeira."
+                example_code: "```\nnome = {ask} 'qual é o seu nome?'\nidade = {ask} 'qual é a sua idade?'\n{if} nome {is} 'Hedy' {and} idade {is} 2\n    {print} 'Você é a verdadeira Hedy!'\n{elif} nome {is} 'Hedy' {or} idade {is} 2\n    {print} 'Tão perto... mas você não é a Hedy!'\n{else}\n    {print} 'Você não é a Hedy!'\n```\n"
+    hospital:
+        name: Hospital
+        default_save_name: Hospital
+        description: Hospital
+    hotel:
+        name: hotel
+        default_save_name: hotel
+        description: hotel

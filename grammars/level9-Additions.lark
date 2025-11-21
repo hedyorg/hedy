@@ -13,7 +13,6 @@ if_pressed_without_else: if_pressed
 if_pressed_elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
 
 ifelifelse: if_clause (_EOL elif_clause)* (_EOL else_clause)?
-ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs' //FH sept 2025 I think ifs can now be removed?
 
 
 repeat.1: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL _commands _EOL? _END_BLOCK
@@ -21,6 +20,5 @@ error_repeat_dep_8:<old_rule_to_error repeat>
 
 // FH jan 2022 (#1817) we can allow unquoted rhs's again cause there now is a line break after
 // not sure of we want it, but we could
-equality_check: (textwithoutspaces | NUMBER) (_IS | _EQUALS) (textwithoutspaces | NUMBER | textwithinnerspaces) _SPACE?
-
-
+// TODO: I might improve this later, waiting for Felienne to reply on issue #1817
+equality_check: (NUMBER | textwithoutspaces) (_IS | _EQUALS) (NUMBER | quoted_text | textwithoutspaces) _SPACE?
