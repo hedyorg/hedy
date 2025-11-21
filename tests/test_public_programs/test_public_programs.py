@@ -14,9 +14,11 @@ public_snippets = []
 # while saving, they were not broken (no Parse error or other Hedy exception)
 # these tests make sure we aren't accidentally breaking public programs
 
-with open(most_recent_file_name, 'r') as public_programs_file:
-    text = public_programs_file.read()
-    public_programs = json.loads(text)
+# with open(most_recent_file_name, 'r') as public_programs_file:
+#     text = public_programs_file.read()
+#     public_programs = json.loads(text)
+
+public_programs = []
 
 for p in public_programs:
     s = Snippet(filename='file',

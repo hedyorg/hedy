@@ -1,3 +1,24 @@
-// only remove repeat error commands
+command: += error_repeat_dep_8 | if_pressed_without_else | if_pressed if_pressed_elses? -= error_invalid_space | error_else_no_if
 
-command: -= error_repeat_no_print | error_repeat_no_times
+_commands: (_SPACE command) (_EOL (_SPACE command))*
+
+if_clause: _SPACE* _IF (condition) _EOL _commands _EOL? _END_BLOCK
+else_clause: _SPACE* _ELSE _EOL _commands _EOL? _END_BLOCK
+elif_clause: _SPACE* _ELIF (condition) _EOL _commands _EOL? _END_BLOCK
+
+// from level 9 on if_pressed is implemented slightly differently
+if_pressed: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+if_pressed_else: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+if_pressed_without_else: if_pressed
+if_pressed_elses: _EOL (_SPACE)* _ELSE (_SPACE)* _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+
+ifelifelse: if_clause (_EOL elif_clause)* (_EOL else_clause)?
+
+
+repeat.1: _REPEAT (INT | var_access) _TIMES _SPACE? _EOL _commands _EOL? _END_BLOCK
+error_repeat_dep_8:<old_rule_to_error repeat>
+
+// FH jan 2022 (#1817) we can allow unquoted rhs's again cause there now is a line break after
+// not sure of we want it, but we could
+// TODO: I might improve this later, waiting for Felienne to reply on issue #1817
+equality_check: (NUMBER | textwithoutspaces) (_IS | _EQUALS) (NUMBER | quoted_text | textwithoutspaces) _SPACE?

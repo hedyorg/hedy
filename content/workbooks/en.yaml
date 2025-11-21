@@ -10,7 +10,7 @@ levels:
             contents  : |-
               ### Exercises
               A computer does not just do something by itself. You must always give a computer a task. Such a task is called a command. To print out code, we use the command `print`.
-    
+
               ### Printing text
               On the screen you've just seen the `print` command.
               A `print` command prints a word, when it's between quotation marks. For example `print hello`.
@@ -19,10 +19,14 @@ levels:
             code      : "print Hello everybody"
             answer    : "Hello everybody"
             lines     : 1
+
         -   type      : output
             code      : "print Good morning"
             answer    : "Good morning"
             lines     : 1
+
+        -   new-page
+
         -   type      : text
             contents  : |-
               #### Exercise 2: Error?
@@ -37,37 +41,37 @@ levels:
             code      : "print print"
             answer    : "Right"
         -   type      : text
-            contents  : |-                                   
+            contents  : |-
               ### Asking for input
-    
+
               Only text is a bit boring. You can also ask for _input_ in Hedy. Input is text that you give to the computer.
               The computer remembers that text and can show it to you later.
               This code shows the question 'What is your name?'
-              
+
               ```hedy
               ask What is your name?
               ```
-              
+
               ### Showing input
-    
+
               The ask command saves the answer, but it doesn't show it yet. For that you'll need the `echo` command. `echo` will show the answer at the end of the sentence.
               Like this:
-              
+
               ```hedy
               ask what is your name?
               echo so your name is:
               ```
-              
+
               If someone called Olivia would use this code, the output would be:
-              
+
               ```
               so your name is: Olivia
               ```
-              
+
               Mind that the computer will print the text exactly as you've entered it. So with the colon and the same use of upper- or lowercase letters!
-              
+
               #### Exercise 3: Predict the output
-    
+
               Predict the output of these programs. Pretend to have filled in your own name.
 
         -   type      : output
@@ -76,6 +80,7 @@ levels:
                           echo so your name is:
             answer    : "so your name is: **name**"
             lines     : 2
+
         -   type      : output
             code      : |-
                           ask What is your name?
@@ -85,7 +90,7 @@ levels:
         -   type      : text
             contents  : |-
               #### Exercise 4: Programming words
-    
+
               Every lesson we are going to learn new words, including this lesson. Do you know what these terms mean? Explain it from your own words.
         -   type      : define
             word      : command
@@ -102,7 +107,7 @@ levels:
         -   type      : text
             contents  : |-
               #### Exercise 5: Commands
-              
+
               We have learned 3 commands so far: `print`, `ask` and `echo`. What so they do? Explain in your own words.
 
         -   type      : define
@@ -127,7 +132,7 @@ levels:
         -   type      : text
             contents  : |-
               ### Using variables
-    
+
               You've just seen the `is` command on the screen.
               An `is` command saves something in the computer memory and gives it a name. We call this a variable.
               What is saved in the variable is called the value of the variable.
@@ -165,7 +170,7 @@ levels:
           contents  : |-
             #### Exercise 2: Predict the output
             Tip: Are you having a hard time predicting the output? Follow these steps:
-            
+
             1. Mark the place where a variable is being set
             2. Mark the place where a variable is being used
             3. Draw a line between these two places
@@ -218,9 +223,9 @@ levels:
         - type      : text
           contents  : |-
             ### Asking for input
-    
+
             Just saving text isn't very useful. In level 1 we've seen the code `ask`.
-    
+
             From now on you are allowed to combine `ask` with `is`, like this:
           code      : |-
             name is ask What is your name?
@@ -381,7 +386,7 @@ levels:
           - type      : text
             contents  : |-
               ### Adjusting lists
-              
+
               Up until now we have always set our lists at the beginning of a program.
             code  : |-
               answers is yes, no, maybe
@@ -391,7 +396,7 @@ levels:
               But sometimes you want your user to add items to the list.
               You can use the `add to` command for that. You can also remove items from the list with `remove from`.
 
-            code  : |-              
+            code  : |-
               animals is 🐿, 🦔, 🦇, 🦉
               animal is ask What made that sound?
               add animal to animals
@@ -508,7 +513,7 @@ levels:
         - type      : text
           contents  : |-
             ### Quotation marks
-    
+
             We have learned to use quotation marks, when a text needs to appear literally that way on the screen.
             We use quotation marks with `print` and `ask`.
           code      : |-
@@ -585,7 +590,7 @@ levels:
           contents  : |-
             #### Ask
             Remember to use quotation marks after `ask` as well!
-    
+
             #### Exercise 3: Error?
             Read the programs carefully! Which ones are correct?
 
@@ -853,12 +858,12 @@ levels:
           contents  : |-
             ### Maths
             Making calculations is an important task for computers.
-    
+
             Addition is done with the normal plus sign: `5 + 5`.
             Subtraction is also using the normal minus sign: `5 - 5`.
             With multiplications it might look a bit different than usually, we use the asterisk (above the 8): `5 * 5`.
             Division is done with the slash forward: `5 / 5`.
-    
+
             Please note that maths code doesn't need quotation marks.
 
           code      : |-
@@ -1027,7 +1032,7 @@ levels:
             contents: |
                 ### Exercise 2: Input
                 Take a look at the output. Write a program that could belong to this output.
-    
+
                 Please note: Multiple answers can be correct. Choose whatever you want, as long as it's correct.
                 Fill up all the lines, so look carefully at the amount of lines!
         -   type: input
@@ -1119,14 +1124,14 @@ levels:
         -   type: text
             contents: |-
                 #### Exercise 1: Which lines will be repeated?
-                
+
                 Tip: Take a careful look at the indentation (starting a line with spaces).
         -   type: circle
             goal: indentation
             code: |-
                 repeat 3 times
                     print 'Baby shark!'
-                    print 'Tudu tudu tudu!'                  
+                    print 'Tudu tudu tudu!'
                 print 'Baby shark!'
             answer: Lines 2 and 3
         -   type: circle
@@ -1153,7 +1158,7 @@ levels:
         -   type: output
             code: |-
                 print 'Hello!'
-                repeat 1 times 
+                repeat 1 times
                     print ':)'
             answer: |-
               Hello!
@@ -1161,7 +1166,7 @@ levels:
         -   type: output
             code: |-
                 print 'Hello!'
-                repeat 5 times 
+                repeat 5 times
                     print ':('
                 print 'Done!'
             answer: |-
@@ -1176,9 +1181,9 @@ levels:
             contents: |
                 ## If and else
                 When using `if` and `else` you also need indentation. This way you can execute multiple lines when a condition is true or false.
-    
+
                 ### Exercise 3: Predict the output
-    
+
                 Predict the output of these programs.
         -   type: output
             code: |-
@@ -1203,7 +1208,7 @@ levels:
         -   type: output
             code: |-
               dice = 1, 2, 3, 4, 5, 6
-              repeat 3 times 
+              repeat 3 times
                   print 'You threw: ' dice at random
                   print 'Game over'
             answer: |-
@@ -1253,7 +1258,7 @@ levels:
             contents: |-
                 #### Exercise 5: Write the code
                 Take a good look at the output and write a matching code for it. Use `repeat` if possible.
-    
+
                 Mind the amount of lines your code needs!
         -   type: input
             answer: |-

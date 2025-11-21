@@ -11,7 +11,7 @@ levels:
         ### Opdrachten
         Een computer doet niet zomaar zelf iets, je moet een computer altijd een opdracht geven. Zo'n opdracht heet commando. Om code uit te printen, gebruiken we de code `print`.
 
-        ### Tekst printen    
+        ### Tekst printen
         Je hebt net op het bord de `print` opdracht gezien.
         Een `print` opdracht print een woord uit, als het tussen aanhalingstekens staat. Bijvoorbeeld zo `print hallo`.
         #### Opdracht 1: Voorspel de uitvoer
@@ -23,6 +23,9 @@ levels:
       code: "print goedemorgen"
       answer: "goedemorgen"
       lines: '1'
+
+    - new-page
+
     - type: text
       contents: |-
         #### Opdracht 2: Foutje?
@@ -55,7 +58,7 @@ levels:
 
         ```hedy
         ask Hoe heet jij?
-        echo dus jij heet: 
+        echo dus jij heet:
         ```
 
         Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer:
@@ -84,7 +87,7 @@ levels:
       lines: '2'
     - type: text
       contents: |-
-        #### Opdracht 4: Programmeer-woorden 
+        #### Opdracht 4: Programmeer-woorden
 
         Iedere les gaan we nieuwe woorden leren, deze les ook. Weet jij wat deze termen betekenen? Leg het uit je eigen woorden.
     - type: define
@@ -103,7 +106,7 @@ levels:
       contents: |-
         #### Opdracht 5: Codes
 
-        We hebben tot nu toe 3 codes geleerd: `print`, `ask` en `echo`. Wat doen die? Leg het uit in je eigen woorden. 
+        We hebben tot nu toe 3 codes geleerd: `print`, `ask` en `echo`. Wat doen die? Leg het uit in je eigen woorden.
 
     - type: define
       word: het commando `print`
@@ -130,7 +133,7 @@ levels:
       contents: |-
         ### Variabele opslaan en gebruiken
 
-        Je hebt net op het bord de `is` opdracht gezien. 
+        Je hebt net op het bord de `is` opdracht gezien.
         Een `is` opdracht slaat iets op in de computer, en geeft het een naam. We noemen dat een variabelen.
         Wat in de variabele is opgeslagen noemen we de waarde van de variabele.
       code: |-
@@ -165,7 +168,7 @@ levels:
       answer: "Op regel 2 en 4"
     - type: text
       contents: |-
-        #### Opdracht 2: Voorspel de uitvoer           
+        #### Opdracht 2: Voorspel de uitvoer
         Tip: Vind je het lastig om de uitvoer te voorspellen? Gebruik dan dit stappenplan:
 
         1. Omcirkel de plek waar een variabele wordt ingesteld
@@ -238,7 +241,7 @@ levels:
     - type: text
       contents: |-
         Als iemand die Maan heet deze code zou gebruiken, dan wordt de uitvoer: `dus jij heet: Maan`
-        #### Opdracht 4: Voorspel de uitvoer            
+        #### Opdracht 4: Voorspel de uitvoer
         Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
     - type: output
       code: |-
@@ -297,7 +300,7 @@ levels:
     - type: text
       contents: |-
         ### Variabelen
-        Je hebt net op het bord de `is` opdracht gezien met een lijst. 
+        Je hebt net op het bord de `is` opdracht gezien met een lijst.
         Net als bij een gewone variabele, slaan we iets op in een lijst met `is`.
       code: |-
         vrienden is Mo, Layla, Denny
@@ -305,7 +308,7 @@ levels:
 
     - type: text
       contents: |-
-        #### Opdracht 1: Omcirkel het juiste stukje code              
+        #### Opdracht 1: Omcirkel het juiste stukje code
 
     - type: circle
       goal: lijsten
@@ -703,20 +706,20 @@ levels:
     - type: circle
       goal: de conditie
       code: |-
-        vandaag is ask 'Welke dag is het?'                    
+        vandaag is ask 'Welke dag is het?'
         if vandaag is vrijdag print 'Ja' else print 'Nee'
       answer: "vandaag is vrijdag"
     - type: circle
       goal: de conditie
       code: |-
-        vandaag is ask 'Welke dag is het?'                    
-        if vandaag is zaterdag print 'Geen school vandaag' 
+        vandaag is ask 'Welke dag is het?'
+        if vandaag is zaterdag print 'Geen school vandaag'
         else print 'Helaas wel'
       answer: "vandaag is zaterdag"
     - type: circle
       goal: de conditie
       code: |-
-        leeftijd is ask 'Hoe oud ben jij?'                    
+        leeftijd is ask 'Hoe oud ben jij?'
         if leeftijd is 16 print 'Perfecto'
         else print 'Jij bent te jong!'
       answer: "leeftijd is 16"
@@ -729,21 +732,21 @@ levels:
     - type: circle
       goal: code die wordt **uitgevoerd**
       code: |-
-        vandaag is ask 'Welke dag is het?'                    
+        vandaag is ask 'Welke dag is het?'
         if vandaag is vrijdag print 'Ja' else print 'Nee'
       answer: "print 'Ja'"
     - type: circle
       goal: code die wordt **uitgevoerd**
       code: |-
-        vandaag is ask 'Welke dag is het?'                    
-        if vandaag is zaterdag print 'Geen school vandaag' 
+        vandaag is ask 'Welke dag is het?'
+        if vandaag is zaterdag print 'Geen school vandaag'
         else print 'Helaas wel'
       answer: "print 'Helaas wel'"
     - type: circle
       goal: code die wordt **uitgevoerd**
       code: |-
-        leeftijd is ask 'Hoe oud ben jij?'                    
-        if leeftijd is 16 print 'Perfecto' 
+        leeftijd is ask 'Hoe oud ben jij?'
+        if leeftijd is 16 print 'Perfecto'
         else print 'Jij bent te jong!'
       answer: "print 'Jij bent te jong!'"
     - type: text
@@ -754,13 +757,13 @@ levels:
     - type: MC-code
       options: ["Goed", "Fout"]
       code: |-
-        leeftijd is ask 'Hoe oud ben jij?'                    
+        leeftijd is ask 'Hoe oud ben jij?'
         if leeftijd is 16 print 'Perfecto' else 'Jij bent te jong!'
       answer: "Fout. Er staat geen print achter else"
     - type: MC-code
       options: ["Goed", "Fout"]
       code: |-
-        dier is ask 'Wat voor dier is dat?'                    
+        dier is ask 'Wat voor dier is dat?'
         if dier is Lama print 'Beeeee'
       answer: "Goed! Er hoeft geen else code te staan"
     - type: MC-code
@@ -770,7 +773,7 @@ levels:
     - type: MC-code
       options: ["Goed", "Fout"]
       code: |-
-        if naam Hedy 
+        if naam Hedy
         print 'Programmeren is leuk!'
       answer: "Fout, de is mist."
     - type: MC-code
@@ -788,29 +791,29 @@ levels:
     - type: text
       contents: |-
         #### Opdracht 4: Voorspel de uitvoer
-        Wat is de uitvoer van deze programma's? 
+        Wat is de uitvoer van deze programma's?
         Let op! Soms staat er random in een programma. Dan moet je zelf kiezen wat Hedy zou kiezen.
         Er kunnen dan dus meerdere antwoorden goed zijn!
 
     - type: output
       code: |-
-        docenten is Hermans, Merbis, Bagci, Senkal                    
-        docent is docenten at random                    
+        docenten is Hermans, Merbis, Bagci, Senkal
+        docent is docenten at random
         if docent is Hermans print 'Hoera!'
       answer: "Hoera! of niks"
       lines: '1'
     - type: output
       code: |-
-        docenten is Hermans, Merbis, Bagci, Senkal                    
-        docent is docenten at random                    
+        docenten is Hermans, Merbis, Bagci, Senkal
+        docent is docenten at random
         if docent is Hermans print 'Jammer!' else print 'Hoera!'
       answer: "Hoera! of Jammer!"
       lines: '1'
     - type: output
       code: |-
-        getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10                    
-        print 'Welkom bij de bingoavond'                    
-        getal is getallen at random                    
+        getallen is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+        print 'Welkom bij de bingoavond'
+        getal is getallen at random
         if getal is 10 print 'Gewonnen!' else print 'Helaas'
       answer: |-
         Welkom bij de bingoavond
@@ -818,7 +821,7 @@ levels:
       lines: '2'
     - type: output
       code: |-
-        getal is ask 'Wat is jouw lievelingsgetal?'                    
+        getal is ask 'Wat is jouw lievelingsgetal?'
         if getal is 10 print 'Mijne ook!'
       answer: "Mijne ook! of niks"
       lines: '1'
@@ -874,7 +877,7 @@ levels:
         Een belangrijke taak die computers goed kunnen uitvoeren is rekenen.
 
         De plus is makkelijk, die schrijf je zoals bij rekenen: `5 + 5`.
-        De min gaat ook goed, dat is `5 - 5`. 
+        De min gaat ook goed, dat is `5 - 5`.
         De keer is een beetje anders, die programmeer je met het sterretje (boven de 8): `5 * 5`.
         Gedeeld door gaat met een schuine streep vooruit: `5 / 5`.
 
@@ -899,7 +902,7 @@ levels:
     - type: text
       contents: |-
         #### Opdracht 2: Rekenen
-        Deze opdracht doe je weer in stappen. 
+        Deze opdracht doe je weer in stappen.
         1. Maak eerst de codes af, op een logische manier door iets in te vullen op de streepjes.
         2. Is de code af? Vul dan in wat de uitvoer van de code wordt.
     - type: output
@@ -918,7 +921,7 @@ levels:
       contents: |-
         ### Opdracht 2: Rekenen met ask en variabelen
         Je kan een rekensom ook opslaan in een variabele, vergelijken met een `ask` en een som uitvoeren in een `if`.
-        Dat gaan we nu oefenen. 
+        Dat gaan we nu oefenen.
         Voorspel wat de uitvoer van deze programma's is.
         Bij een `ask` en `random` mag je zelf kiezen wat het antwoord wordt, maar het moet wel kunnen!
     - type: output
@@ -1065,7 +1068,7 @@ levels:
         print 'Dit is regel 3'
       output: |-
         Dit is regel 1
-        Dit is regel 2              
+        Dit is regel 2
         Dit is regel 3
       lines: '3'
     - type: text
@@ -1145,7 +1148,7 @@ levels:
       code: |-
         repeat 3 times
             print 'Baby shark!'
-            print 'Tudu tudu tudu!'                  
+            print 'Tudu tudu tudu!'
         print 'Baby shark!'
       answer: Regels 2 en 3
     - type: circle
@@ -1172,7 +1175,7 @@ levels:
     - type: output
       code: |-
         print 'Hallo!'
-        repeat 1 times 
+        repeat 1 times
             print ':)'
       answer: |-
         Hallo!
@@ -1180,7 +1183,7 @@ levels:
     - type: output
       code: |-
         print 'Hallo!'
-        repeat 5 times 
+        repeat 5 times
             print ':('
         print 'En klaar!'
       answer: |-
@@ -1222,7 +1225,7 @@ levels:
     - type: output
       code: |-
         dobbel = 1, 2, 3, 4, 5, 6
-        repeat 3 times 
+        repeat 3 times
             print 'Jij gooide: ' dobbel at random
             print 'Het spel is nu afgelopen'
       answer: |-
@@ -1280,7 +1283,7 @@ levels:
             print 'Joehoe!'
       output: |-
         Joehoe!
-        Joehoe!  
+        Joehoe!
         Joehoe!
         Joehoe!
     - type: input
@@ -1295,7 +1298,7 @@ levels:
             print 'Bim bam bom!'
       output: |-
         Vader Jacob...
-        Vader Jacob...  
+        Vader Jacob...
         Slaapt gij nog?
         Slaapt gij nog?
         Alle klokken luiden!

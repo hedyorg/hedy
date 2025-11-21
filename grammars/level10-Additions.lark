@@ -1,6 +1,11 @@
-command:+= for_list
+// only remove repeat error commands
 
-// new : for list
-for_list: _FOR var _IN var_access _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK
+command: -= error_repeat_no_print | error_repeat_no_times
 
+if_clause: _SPACE* _IF (_conditions) _EOL _commands _EOL? _END_BLOCK
+elif_clause: _SPACE* _ELIF (_conditions) _EOL _commands _EOL? _END_BLOCK
+_conditions: condition | and_condition | or_condition
+
+and_condition: (condition) (_AND condition)*
+or_condition: (condition) (_OR condition)*
 

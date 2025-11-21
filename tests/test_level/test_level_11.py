@@ -20,366 +20,181 @@ class TestsLevel11(HedyTester):
     '''
 
     #
-    # for loop tests
+    # for list tests
     #
-    def test_for_loop(self):
+    def test_for_list(self):
         code = textwrap.dedent("""\
-            for i in range 1 to 10
-                a is i + 1""")
-        expected = self.dedent(
-            self.for_loop('i', 1, 10),
-            (f"a = Value({self.number_transpiled('i')} + {self.number_transpiled(1)}, num_sys=get_num_sys(i))", '  '),
-            ("time.sleep(0.1)", '  '))
+        dieren is hond, kat, papegaai
+        for dier in dieren
+            print dier""")
 
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            unused_allowed=True,
-            expected_commands=['for', 'is', 'addition'])
-
-    def test_for_loop_arabic(self):
-        code = textwrap.dedent("""\
-            for i in range ١ to ١١
-                a is i + 1""")
-        expected = self.dedent(
-            self.for_loop('i', 1, 11, num_sys="'Arabic'"),
-            (f"a = Value({self.number_transpiled('i')} + {self.number_transpiled(1)}, num_sys=get_num_sys(i))", '  '),
-            ("time.sleep(0.1)", '  '))
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            unused_allowed=True,
-            expected_commands=['for', 'is', 'addition'])
-
-    def test_for_loop_with_int_vars(self):
-        code = textwrap.dedent("""\
-            begin = 1
-            end = 10
-            for i in range begin to end
-                print i""")
-
-        expected = self.dedent(
-            "begin = Value('1', num_sys='Latin')",
-            "end = Value('10', num_sys='Latin')",
-            self.for_loop('i', 'begin', 'end', 'get_num_sys(begin)'),
-            ("print(f'{i}')", '  '),
-            ("time.sleep(0.1)", '  '))
-
-        self.single_level_tester(code=code, expected=expected)
-
-    def test_for_loop_with_keyword_vars(self):
-        code = textwrap.dedent("""\
-            sum = 1
-            dir = 10
-            for i in range sum to dir
-                print i""")
-
-        expected = self.dedent(
-            "_sum = Value('1', num_sys='Latin')",
-            "_dir = Value('10', num_sys='Latin')",
-            self.for_loop('i', '_sum', '_dir', 'get_num_sys(_sum)'),
-            ("print(f'{i}')", '  '),
-            ("time.sleep(0.1)", '  '))
-
-        self.single_level_tester(code=code, expected=expected)
-
-    def test_for_loop_with_list_var_gives_type_error(self):
-        code = textwrap.dedent("""\
-        begin = 1, 2
-        end = 3, 4
-        for i in range begin to end
-            print i""")
+        expected = textwrap.dedent("""\
+        dieren = Value([Value('hond'), Value('kat'), Value('papegaai')])
+        for dier in dieren.data:
+          print(f'{dier}')
+          time.sleep(0.1)""")
 
         self.multi_level_tester(
             code=code,
-            max_level=15,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
-
-    def test_for_loop_with_string_var_gives_type_error(self):
-        code = textwrap.dedent("""\
-        begin = 'one'
-        end = 'ten'
-        for i in range begin to end
-            print i""")
-
-        self.multi_level_tester(
-            code=code,
-            max_level=16,
-            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
-            exception=hedy.exceptions.InvalidArgumentTypeException)
-
-    def test_for_loop_without_in_var_gives_error(self):
-        code = "for no_in range 1 to 5"
-
-        self.multi_level_tester(
-            code=code,
-            max_level=16,
-            exception=hedy.exceptions.MissingAdditionalCommand)
-
-    def test_for_loop_without_to_var_gives_error(self):
-        code = "for no_to in range 1 5"
-
-        self.multi_level_tester(
-            code=code,
-            max_level=16,
-            exception=hedy.exceptions.MissingAdditionalCommand)
-
-    def test_for_loop_without_command_var_gives_error(self):
-        code = "for no_command in range 1 to 5"
-
-        self.multi_level_tester(
-            code=code,
-            max_level=16,
-            exception=hedy.exceptions.IncompleteCommandException)
-
-    def test_for_loop_multiline_body(self):
-        code = textwrap.dedent("""\
-            a is 2
-            b is 3
-            for a in range 2 to 4
-                a is a + 2
-                b is b + 2""")
-
-        expected = self.dedent(
-            "a = Value('2', num_sys='Latin')",
-            "b = Value('3', num_sys='Latin')",
-            self.for_loop('a', 2, 4),
-            (f'a = Value({self.number_transpiled("a")} + {self.number_transpiled(2)}, num_sys=get_num_sys(a))', '  '),
-            (f'b = Value({self.number_transpiled("b")} + {self.number_transpiled(2)}, num_sys=get_num_sys(b))', '  '),
-            ('time.sleep(0.1)', '  '))
-
-        self.single_level_tester(code=code, expected=expected)
-
-    def test_for_loop_followed_by_print(self):
-        code = textwrap.dedent("""\
-            for i in range 1 to 10
-                print i
-            print 'wie niet weg is is gezien'""")
-
-        expected = self.dedent(
-            self.for_loop('i', 1, 10),
-            ("print(f'{i}')", '  '),
-            ("time.sleep(0.1)", '  '),
-            "print(f'wie niet weg is is gezien')")
-
-        output = textwrap.dedent("""\
-            1
-            2
-            3
-            4
-            5
-            6
-            7
-            8
-            9
-            10
-            wie niet weg is is gezien""")
-
-        self.single_level_tester(
-            code=code,
             expected=expected,
-            expected_commands=['for', 'print', 'print'],
-            output=output)
-
-    def test_for_loop_hindi_variable(self):
-        code = textwrap.dedent("""\
-            for काउंटर in range 1 to 5
-                print काउंटर""")
-
-        expected = self.dedent(
-            self.for_loop('काउंटर', 1, 5),
-            ("print(f'{काउंटर}')", '  '),
-            ("time.sleep(0.1)", '  '))
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            expected_commands=['for', 'print'])
-
-    def test_for_loop_arabic_range(self):
-        code = textwrap.dedent("""\
-            for دورة in range ١ to ٥
-                print دورة""")
-
-        expected = self.dedent(
-            self.for_loop('دورة', 1, 5, "'Arabic'"),
-            ("print(f'{دورة}')", '  '),
-            ("time.sleep(0.1)", '  '))
-
-        output = textwrap.dedent("""\
-            ١
-            ٢
-            ٣
-            ٤
-            ٥""")
-
-        self.single_level_tester(
-            code=code,
-            output=output,
-            translate=False,
-            expected=expected,
-            expected_commands=['for', 'print'])
-
-    def test_for_loop_reversed_range(self):
-        code = textwrap.dedent("""\
-            for i in range 10 to 1
-                print i
-            print 'wie niet weg is is gezien'""")
-
-        expected = self.dedent(
-            self.for_loop('i', 10, 1),
-            ("print(f'{i}')", '  '),
-            ("time.sleep(0.1)", '  '),
-            "print(f'wie niet weg is is gezien')")
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
-            expected_commands=['for', 'print', 'print'])
-
-    def test_for_loop_with_if_else_body(self):
-        code = textwrap.dedent("""\
-            for i in range 0 to 10
-                antwoord is ask 'Wat is 5*5'
-                if antwoord is 24
-                    print 'Dat is fout!'
-                else
-                    print 'Dat is goed!'
-                if antwoord is 25
-                    i is 10""")
-
-        expected = self.dedent(
-            self.for_loop('i', 0, 10),
-            (self.input_transpiled('antwoord', 'Wat is 5*5'), '  '),
-            ("if localize(antwoord.data) == localize('24'):", '  '),
-            ("print(f'Dat is fout!')", '    '),
-            ("else:", '  '),
-            ("print(f'Dat is goed!')", '    '),
-            ("if localize(antwoord.data) == localize('25'):", '  '),
-            ("i = Value('10', num_sys='Latin')", '    '),
-            ("time.sleep(0.1)", '  '))
-
-        self.single_level_tester(code=code, expected=expected)
-
-    # issue 363
-    def test_for_loop_if_followed_by_print(self):
-        code = textwrap.dedent("""\
-            for i in range 0 to 10
-                antwoord is ask 'Wat is 5*5'
-                if antwoord is 24
-                    print 'fout'
-            print 'klaar met for loop'""")
-
-        expected = self.dedent(
-            self.for_loop('i', 0, 10),
-            (self.input_transpiled('antwoord', 'Wat is 5*5'), '  '),
-            ("if localize(antwoord.data) == localize('24'):", '  '),
-            ("print(f'fout')", '    '),
-            ("time.sleep(0.1)", '  '),
-            "print(f'klaar met for loop')")
-
-        self.single_level_tester(code=code, expected=expected)
-
-    # issue 599
-    def test_for_loop_if(self):
-        code = textwrap.dedent("""\
-            for i in range 0 to 10
-                if i is 2
-                    print '2'""")
-
-        expected = self.dedent(
-            self.for_loop('i', 0, 10),
-            ("if localize(i.data) == localize('2'):", '  '),
-            ("print(f'2')", '    '),
-            ("time.sleep(0.1)", '  '))
-
-        self.single_level_tester(code=code, expected=expected)
-
-    # issue 1209
-    def test_for_loop_unindented_nested_for_loop(self):
-        code = textwrap.dedent("""\
-        for x in range 1 to 10
-         for y in range 1 to 10
-         print 'x*y'""")
-
-        self.multi_level_tester(code, exception=hedy.exceptions.NoIndentationException)
-
-    # issue 1209
-    def test_for_loop_dedented_nested_loop(self):
-        code = textwrap.dedent("""\
-        for x in range 1 to 10
-         for y in range 1 to 10
-        print 'x*y'""")
-
-        self.multi_level_tester(code, exception=hedy.exceptions.NoIndentationException)
-
-    # issue 1209
-    def test_nested_for_loop_with_zigzag_body(self):
-        code = textwrap.dedent("""\
-        for x in range 1 to 10
-          for y in range 1 to 10
-             print 'this number is'
-            print x*y""")
-
-        self.multi_level_tester(code, exception=hedy.exceptions.IndentationException)
-
-    #
-    # pressed with for loop tests
-    #
-
-    def test_if_pressed_works_in_for_loop(self):
-        code = textwrap.dedent("""\
-            for i in range 1 to 10
-                if p is pressed
-                    print 'press'
-                else
-                    print 'no!'""")
-
-        expected = self.dedent(
-            "global_scope_ = dict()",
-            self.for_loop('i', 1, 10),
-            ("""\
-            if_pressed_mapping = {"else": "if_pressed_default_else"}
-            if_pressed_mapping['p'] = 'if_pressed_p_'
-            def if_pressed_p_():
-              print(f'press')
-            if_pressed_mapping['else'] = 'if_pressed_else_'
-            def if_pressed_else_():
-              print(f'no!')
-            extensions.if_pressed(if_pressed_mapping)
-            time.sleep(0.1)""", '  '))
-
-        self.single_level_tester(
-            code=code,
-            expected=expected,
+            expected_commands=['is', 'for', 'print'],
+            max_level=11
         )
 
-    def test_if_pressed_in_for_loop(self):
+    def test_blanks(self):
         code = textwrap.dedent("""\
-        for i in range 1 to 10
-            print i
-            if i is pressed
-                r = 'Yes'
+        players = Ann, John, Jesse
+        choices = 1, 2, 3, 4, 5, 6
+        _
+            print player ' throws ' choices at random
+            sleep
+        """)
+
+        self.multi_level_tester(
+            max_level=16,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
+            exception=hedy.exceptions.CodePlaceholdersPresentException
+        )
+
+    def test_for_list_hindi(self):
+        code = textwrap.dedent("""\
+        क is hond, kat, papegaai
+        for काउंटर in क
+            print काउंटर""")
+
+        expected = textwrap.dedent("""\
+        क = Value([Value('hond'), Value('kat'), Value('papegaai')])
+        for काउंटर in क.data:
+          print(f'{काउंटर}')
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            expected_commands=['is', 'for', 'print'],
+            max_level=11
+        )
+
+    def test_for_list_diff_num_sys(self):
+        code = textwrap.dedent("""\
+        digits is 1, 𑁨, ३, ૪, ੫
+        for d in digits
+            print d""")
+
+        list_transpiled = ("Value([""Value('1', num_sys='Latin'), Value('2', num_sys='Brahmi'), "
+                           "Value('3', num_sys='Devanagari'), Value('4', num_sys='Gujarati'), "
+                           "Value('5', num_sys='Gurmukhi')])")
+        expected = textwrap.dedent(f"""\
+        digits = {list_transpiled}
+        for d in digits.data:
+          print(f'{{d}}')
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            output="1\n𑁨\n३\n૪\n੫",
+            max_level=11
+        )
+
+    def test_for_list_multiline_body(self):
+        code = textwrap.dedent("""\
+        familie is baby, mommy, daddy, grandpa, grandma
+        for shark in familie
+            print shark ' shark tudutudutudu'
+            print shark ' shark tudutudutudu'
+            print shark ' shark tudutudutudu'
+            print shark ' shark'""")
+
+        expected = textwrap.dedent("""\
+        familie = Value([Value('baby'), Value('mommy'), Value('daddy'), Value('grandpa'), Value('grandma')])
+        for shark in familie.data:
+          print(f'{shark} shark tudutudutudu')
+          print(f'{shark} shark tudutudutudu')
+          print(f'{shark} shark tudutudutudu')
+          print(f'{shark} shark')
+          time.sleep(0.1)""")
+
+        self.multi_level_tester(code=code, expected=expected, max_level=11)
+
+    def test_for_list_with_string_gives_type_error(self):
+        code = textwrap.dedent("""\
+        dieren is 'text'
+        for dier in dieren
+            print dier""")
+
+        self.multi_level_tester(
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            max_level=16,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
+
+    def test_for_list_with_int_gives_type_error(self):
+        code = textwrap.dedent("""\
+        dieren is 5
+        for dier in dieren
+            print dier""")
+
+        self.multi_level_tester(
+            code=code,
+            max_level=16,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidArgumentTypeException)
+
+    #
+    # if pressed tests
+    #
+
+    def test_if_pressed_with_list_and_for(self):
+        code = textwrap.dedent("""\
+        lijstje is kip, haan, kuiken
+        if x is pressed
+            for dier in lijstje
+                print dier
+        else
+            print 'onbekend dier'""")
+
+        expected = self.dedent("""\
+        global_scope_ = dict()
+        global_scope_["lijstje"] = Value([Value('kip'), Value('haan'), Value('kuiken')])
+        if_pressed_mapping = {"else": "if_pressed_default_else"}
+        if_pressed_mapping['x'] = 'if_pressed_x_'
+        def if_pressed_x_():
+          for dier in (global_scope_.get("lijstje") or lijstje).data:
+            print(f'{global_scope_.get("dier") or dier}')
+            time.sleep(0.1)
+        if_pressed_mapping['else'] = 'if_pressed_else_'
+        def if_pressed_else_():
+          print(f'onbekend dier')
+        extensions.if_pressed(if_pressed_mapping)""")
+
+        self.multi_level_tester(
+            code=code,
+            expected=expected,
+            max_level=11)
+
+    def test_if_pressed_in_for_list(self):
+        code = textwrap.dedent("""\
+        buttons is a, s, d
+        for button in buttons
+            if button is pressed
+                print 'correct! ' button
             else
-                r = 'No'
-            print r""")
+                print 'not a match'""")
 
-        expected = self.dedent(
-            "global_scope_ = dict()",
-            self.for_loop('i', 1, 10),
-            ("""\
-            print(f'{global_scope_.get("i") or i}')
-            if_pressed_mapping = {"else": "if_pressed_default_else"}
-            if_pressed_mapping[(global_scope_.get("i") or i).data] = 'if_pressed_i_'
-            def if_pressed_i_():
-              global_scope_["r"] = Value('\\'Yes\\'')
-            if_pressed_mapping['else'] = 'if_pressed_else_'
-            def if_pressed_else_():
-              global_scope_["r"] = Value('\\'No\\'')
-            extensions.if_pressed(if_pressed_mapping)
-            print(f'{global_scope_.get("r") or r}')
-            time.sleep(0.1)""", '  '))
+        expected = self.dedent("""\
+        global_scope_ = dict()
+        global_scope_["buttons"] = Value([Value('a'), Value('s'), Value('d')])
+        for button in (global_scope_.get("buttons") or buttons).data:
+          if_pressed_mapping = {"else": "if_pressed_default_else"}
+          if_pressed_mapping[(global_scope_.get("button") or button).data] = 'if_pressed_button_'
+          def if_pressed_button_():
+            print(f'correct! {global_scope_.get("button") or button}')
+          if_pressed_mapping['else'] = 'if_pressed_else_'
+          def if_pressed_else_():
+            print(f'not a match')
+          extensions.if_pressed(if_pressed_mapping)
+          time.sleep(0.1)""")
 
-        self.single_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=11)

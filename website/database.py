@@ -32,7 +32,7 @@ from datetime import date
 import sys
 from os import path
 
-from utils import timems, times
+from utils import timems
 import utils
 from config import config
 
@@ -297,7 +297,8 @@ class Database:
         # - id (str): the identifier of the class this customization set applies to
         # - levels (int[]): the levels available in this class
         # - opening_dates ({ str -> str }): key is level nr as string, value is an ISO date
-        # - other_settings (str[]): string list with values like "hide_quiz", "hide_parsons"
+        # - other_settings (str[]): string list with values like "hide_quiz" (deprecated),
+        # "hide_parsons" (deprecated)
         # - sorted_adventures ({ str -> { from_teacher: bool, name: str }[] }):
         #     for every level (key as string) the adventures to show, in order. If from_teacher
         #     is False, the name of a built-in adventure. If from_teacher is true, name is the
@@ -343,6 +344,7 @@ class Database:
                                                 'agree_terms': str,
                                                 'tags': OptionalOf(ListOf(str))
                                             }))
+        # PARSONS ARE NOW DEPRECATED
         self.parsons = dynamo.Table(storage, "parsons", "id",
                                     types=only_in_dev({
                                         'id': str,
@@ -383,7 +385,7 @@ class Database:
         #
         # 'levelAttempt' is a combination of level and attemptId, to distinguish attempts
         # by a user. 'level' is padded to 4 characters, then attemptId is added.
-        #
+        # QUIZES ARE NOW DEPRECATED
         self.quiz_answers = dynamo.Table(storage, "quizAnswers", partition_key="user", sort_key="levelAttempt",
                                          types=only_in_dev({
                                              'user': str,
@@ -421,39 +423,6 @@ class Database:
             }),
             indexes=[dynamo.Index("id", "week")]
         )
-
-    def record_quiz_answer(self, attempt_id, username, level, question_number, answer, is_correct):
-        """Update the current quiz record with a new answer.
-
-        Uses a DynamoDB update to add to the exising record. Expects answer to be A, B, C etc.
-        """
-        key = {
-            "user": username,
-            "levelAttempt": str(level).zfill(4) + "_" + attempt_id,
-        }
-
-        updates = {
-            "attemptId": attempt_id,
-            "level": level,
-            "date": times(),
-            "q" + str(question_number): dynamo.DynamoAddToList(answer),
-        }
-
-        if is_correct:
-            updates["correct"] = dynamo.DynamoAddToNumberSet(int(question_number))
-
-        return self.quiz_answers.update(key, updates)
-
-    def get_quiz_answer(self, username, level, attempt_id):
-        """Load a quiz answer from the database."""
-
-        quizAnswers = self.quiz_answers.get({"user": username, "levelAttempt": str(level).zfill(4) + "_" + attempt_id})
-
-        array_quiz_answers = []
-        for question_number in range(len(quizAnswers)):
-            answers = quizAnswers.get("q" + str(question_number))
-            array_quiz_answers.append(answers)
-        return array_quiz_answers
 
     def level_programs_for_user(self, username, level):
         """List level programs for the given user, newest first.
@@ -1165,28 +1134,6 @@ class Database:
 
     def get_all_public_profiles(self):
         return self.public_profiles.scan()
-
-    def store_parsons(self, attempt):
-        self.parsons.create(attempt)
-
-    def add_quiz_started(self, id, level):
-        key = {"id#level": f"{id}#{level}", "week": self.to_year_week(date.today())}
-
-        add_attributes = {"id": id, "level": level, "started": dynamo.DynamoIncrement()}
-
-        return self.quiz_stats.update(key, add_attributes)
-
-    def add_quiz_finished(self, id, level, score):
-        key = {"id#level": f"{id}#{level}", "week": self.to_year_week(date.today())}
-
-        add_attributes = {
-            "id": id,
-            "level": level,
-            "finished": dynamo.DynamoIncrement(),
-            "scores": dynamo.DynamoAddToList(score),
-        }
-
-        return self.quiz_stats.update(key, add_attributes)
 
     def get_quiz_stats(self, ids, start=None, end=None):
         start_week = self.to_year_week(self.parse_date(start, date(2022, 1, 1)))

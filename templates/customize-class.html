@@ -29,37 +29,6 @@
 
     <div class="flex flex-col lg:flex-row gap-4">
         <div class="flex flex-col gap- w-full">
-
-           {% if not is_redesign_enabled %}
-            <div class="flex flex-col">
-                <h3 class="px-4"><u>{{_('unlock_thresholds')}}</u></h3>
-                <div class="border border-gray-400 py-2 px-4 rounded-lg w-full">
-                    <table class="table-auto text-center w-full customize_threshold_settings">
-                        <thead>
-                            <tr>
-                                <th class="w-2/3 text-left border-r border-gray-400">{{_('option')}}</th>
-                                <th class="w-40">{{_('value')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-left border-t border-r border-gray-400">{{_('quiz_score')}}</td>
-                                <td class="border-t border-gray-400 px-4 pt-2">
-                                    <input class="threshold_settings_value appearance-none rounded-lg w-full px-2"
-                                        data-cy="quiz_input" id="quiz" {% if "quiz" in
-                                        customizations['level_thresholds']
-                                        %}value="{{ customizations['level_thresholds']['quiz'] }}" {% endif %} min="1"
-                                        max="100" placeholder="e.g. 75 ({{_('percentage')}})" type="number"
-                                        _="on load or change from #hide_quiz throttled at 500ms
-                                            set my disabled to #hide_quiz.checked">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            {% endif %}
-
             <div class="flex flex-col">
                 <h3 class="px-4"><u>{{_('other_settings')}}</u></h3>
                 <div class="border border-gray-400 py-2 px-4 rounded-lg">
@@ -71,16 +40,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% if not is_redesign_enabled %}
-                            <tr>
-                                <td class="text-left border-t border-r border-gray-400">{{_('mandatory_mode')}}</td>
-                                <td class="border-t border-gray-400">
-                                    <input class="other_settings_checkbox" id="developers_mode" data-cy="developers_mode" type="checkbox"
-                                        {% if "developers_mode" in customizations['other_settings'] %}checked{%
-                                  endif %}>
-                                </td>
-                            </tr>
-                            {% endif %}
                             <tr>
                                 <td class="text-left border-t border-r border-gray-400">{{_('hide_keyword_switcher')}}
                                 </td>
@@ -90,22 +49,6 @@
                                         %}>
                                 </td>
                             </tr>
-                            {% if not is_redesign_enabled %}
-                            <tr>
-                                <td class="text-left border-t border-r border-gray-400">{{_('disable_quizes')}}</td>
-                                <td class="border-t border-gray-400">
-                                    <input class="other_settings_checkbox" id="hide_quiz" data-cy="hide_quiz" type="checkbox" {%
-                                        if "hide_quiz" in customizations['other_settings'] %}checked{% endif %}>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-left border-t border-r border-gray-400">{{_('disable_parsons')}}</td>
-                                <td class="border-t border-gray-400">
-                                    <input class="other_settings_checkbox" id="hide_parsons" data-cy="hide_parsons" type="checkbox" {%
-                                        if "hide_parsons" in customizations['other_settings'] %}checked{% endif %}>
-                                </td>
-                            </tr>
-                            {% endif %}
                         </tbody>
                     </table>
                 </div>

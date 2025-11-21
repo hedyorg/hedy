@@ -1,1 +1,60 @@
-{}
+adventures:
+    story:
+        name: Гісторыя
+        default_save_name: Гісторыя
+        description: Прыдумай кароценькую гісторыю
+        levels:
+            1:
+                story_text: "На ўзроўні 1 ты зможаш скласці гісторыю пра любога персанажа, каторага ўвядзеш самастойна.\n\nУ першым радку спытай, хто будзе галоўным персанажам тваёй гісторыі з дапамоагй каманды `{ask}`.\n\nКожны наступны радок пачынай з `{print}`, каб надрукаваць сказ.\nА калі ты хочаш, каб галоўны персанаж быў у канцы сказа, скарыстай `{echo}`.\n"
+                story_text_2: "### Практыкаванне\nА зараз складзі гісторыю з прынамсі 6 сказаў.\nТвая гісторыя павінна быць не такой, як у прыкладзе.\nВыкарыстай хаця б адну каманду `{ask}` і адну `{echo}`.\nГісторыя можа быць на любую тэму, якая табе падабаецца.\nКалі не можаш прыдумаць тэму, скарыстайся адным з нашых варыянтаў: паход у кіно, спартыўны матч або дзень у заапарку.\n"
+            2:
+                story_text: "На другім узроўні ты можаш зрабіць гісторыю больш цікавай. Імя галоўнага героя цяпер можа быць у любым месцы сказа.\n\nДля гэтага табе прыйдзецца крыху больш папраграмаваць. Цяпер перш-наперш трэба даць галоўнаму герою імя.\n\nА потым можна ўстаўляць гэта імя ў любое месца любога сказа.\n"
+            8:
+                example_code: "```\n{print} 'Прынц усё клікаў на дапамогу'\n{repeat} 5 {times} {print} 'Дапамажыце!'\n{print} 'Чаму мне ніхто не дапамагае?'\n```\n"
+    and_or_command:
+        name: '{and} ды {or}'
+    calculator_2:
+        name: Калькулятар 2
+        default_save_name: Калькулятар 2
+        description: Калькулятар 2
+    elif_command:
+        name: '{elif}'
+    harry_potter:
+        name: Гары Потэр
+        default_save_name: Гары Потэр
+        description: Прыгоды Гары Потэра
+    in_command:
+        name: '{in}'
+    is_command:
+        name: '{is}'
+    language:
+        name: Мова
+        default_save_name: Мова
+    music:
+        name: музыка
+        default_save_name: музыка
+    parrot:
+        name: Папугай
+        default_save_name: Папугай
+    while_command:
+        name: '{while}'
+        description: '{while}'
+    turtle:
+        name: Чарапаха
+        default_save_name: Чарапаха
+    sleep_command:
+        name: '{sleep}'
+    repeat_command:
+        name: '{repeat}'
+        description: Каманда {repeat}
+    random_command:
+        name: '{random}'
+    print_command:
+        name: '{print}'
+    ask_command:
+        name: '{ask}'
+        description: Знаёмства з камандай {ask}
+    calculator:
+        name: Калькулятар
+        default_save_name: Калькулятар
+        description: Ствары калькулятар

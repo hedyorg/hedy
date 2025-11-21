@@ -5,7 +5,7 @@ import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializ
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
-import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions } from './teachers';
+import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeAllClassesPageOptions, initializeAllClassesPage, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage, InitializeGradePageOptions, initializeGradePage } from './teachers';
 
 export interface InitializeOptions {
   /**
@@ -22,8 +22,8 @@ export interface InitializeOptions {
    * Written: by every page, on page load.
    *
    * Used: on the code page, to initialize the highlighter, to translate the program,
-   * to determine timeouts, to load the quiz iframe, to show the variable inspector,
-   * to show a debugger,  to load parsons exercises, to initialize a default save name.
+   * to determine timeouts, to show the variable inspector,
+   * to show a debugger, to initialize a default save name.
    */
   readonly level: number;
 
@@ -57,6 +57,9 @@ type InitializePageOptions =
   | InitializeAdminUsersPageOptions
   | InitializeCustomizeAdventurePage
   | InitializeMyProfilePage
+  | InitializeAllClassesPageOptions
+  | InitializeClassPerformanceGraphPageOptions
+  | InitializeGradePageOptions
   ;
 
 
@@ -81,6 +84,7 @@ export function initialize(options: InitializeOptions) {
 
   // The above initializations are often also page-specific
   switch (options.javascriptPageOptions?.page) {
+    case 'view_adventure':
     case 'code':
       initializeCodePage(options.javascriptPageOptions);
       break;
@@ -116,9 +120,17 @@ export function initialize(options: InitializeOptions) {
     case 'my-profile':
       initializeMyProfilePage(options.javascriptPageOptions);
       break;
+    case 'classes':
+      initializeAllClassesPage(options.javascriptPageOptions);
+      break;
     
-    case 'tryit':
-      initializeCodePage(options.javascriptPageOptions);
+    case 'performance-graph':
+      initializePerformanceGraphPage();
+      break;
+    
+    case 'grade-class':
+      initializeGradePage(options.javascriptPageOptions);
+      break;
   }
 
   // FIXME: I think this might also be page-specific
