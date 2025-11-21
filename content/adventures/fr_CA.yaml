@@ -751,8 +751,6 @@ adventures:
                     {for} jour {in} jours
                         {print} jour ", la vaisselle sera faite par " noms {at} {random}
                     ```
-    elif_command:
-        levels:
     for_command:
         default_save_name: pour
         description: La commande {for}
@@ -960,11 +958,6 @@ adventures:
                         {call} joue_un_tour
                         {sleep} 2
                     ```
-    guess_my_number:
-        name: Devine le nombre
-        default_save_name: devine le nombre
-        description: devine le nombre
-        levels:
     harry_potter:
         description: Les aventures d'Harry Potter
         levels:
@@ -2639,7 +2632,3 @@ adventures:
 
                         réponse = {ask} "Combien font 5 fois 5 ?"
                     {print} "Une réponse correcte a été donnée"
-    years:
-        name: Nouvel an
-        description: Countdown to the new year!
-        levels:
