@@ -100,7 +100,7 @@ adventures:
                     {print} _主角叫_名字
                     _
                     _
-                    {print} name _ 现在要去树林里散步 _
+                    {print} name _ 现在要去森林里散步 _
                     {print}名字_有点害怕_
                     动物{is} 🦔、🐿、🦉、🦇
                     {print} _ 他听到 _ 动物的声音 {at} {random}
@@ -109,13 +109,13 @@ adventures:
             5:
                 story_text: |
                     在此级别中，你可以设计不同的结局，这将使你的故事更加有趣。
-                    在范例代码中，你可以看到如何设计两个不同的结局。
+                    在示例代码中，你可以看到如何设计两个不同的结局。
 
                     ### 练习1
                     请选择一个主题然后用至少6行代码写一个新的小故事。
-                    没有灵感？可以从这些主题中选一个：超级英雄、无聊的学校生活、搁浅在荒岛上。
+                    没有灵感？可以从这些主题中选一个：超级英雄、无聊的上学日、被困在荒岛上。
 
-                    现在给玩家一个机会选择故事的结局，可以是好的结局也可以是坏的结局，就像范例代码中的那样。
+                    现在给玩家一个机会选择故事的结局，可以是好的结局也可以是坏的结局，就像示例代码中的那样。
                     对这两种结局进行编程。
 
                     ### 练习2
@@ -169,6 +169,7 @@ adventures:
                     {else}
                         {print} '罗宾回了家'
                     ```
+                story_text_2: "通过使用`{and}`和`{or}`命令，你可以让你的故事更加灵活。你可以问两个问题，也可以回应多个回答的组合。\n### 练习1\n阅读示例代码并完成它。然后添加至少两例`{if}`与`{and}`或`{or}`组成的代码。\n\n### 练习2\n从之前的级别中找到一个故事，并增加`{and}`或`{or}`。\n示例代码：\n```\n{print}'我们的英雄正走过森林。'\n{print}'小路分成了两个方向'\n小路={ask}'她应该选择哪条路？'\n武器={ask}'她拔出了什么武器？'\n{if}小路{is}'左边'{and}武器{is}'剑'\n\t_\n```\n"
             11:
                 story_text: |
                     在这一级，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。
@@ -176,7 +177,7 @@ adventures:
                      ### 练习
 
                     请看<a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。
-                example_code: "```\n动物们 = _ , _ , _ \n{print} '棕熊，棕熊 '\n{print} '你看到了什么？'\n```\n"
+                example_code: "```\n动物们 = _ , _ , _ \n{print} '棕熊，大 棕熊'\n{print} '你看到了什么？'\n```\n"
             16:
                 story_text: |
                     运用`{while}`循环能让你的故事更有趣。比如，用`{while} game == 'on'`可以让游戏一直进行到结束为止。
@@ -191,7 +192,7 @@ adventures:
                     {print} '你想去哪里找它们？'
                     {print} '你可以选择：树、花坛、石头、邮筒'
                     {while} 钥匙 == '丢失'
-                        位置 = {ask} '你想去哪里找？'
+                        位置 = {input} '你想去哪里找？'
                         {if} 位置 == '花坛'
                             {print} '它们在这里！'
                             钥匙 = '找到'
@@ -219,14 +220,17 @@ adventures:
                     naam = {input}("你叫什么名字？")
                     {print}('欢迎来到这个故事！')
                     ```
+            6:
+                story_text: "现在你可以使用`{elif}` ，你能创造一个更加互动的故事！比方说，你可以创建多个角色，全都有不同的特征。\n或者你可以让你的玩家选择走哪条路，开哪扇门，或喝哪瓶魔法药水…\n### 练习\n创造你自己的故事，用{elif}实现三个或三个以上的选项。"
+                example_code: "```\n角色= {ask} '谁将帮助你做任务？'\n{if} 角色{is} '黛西'\n\t{print} '你选择了黛西！她是他们所有人中最聪明的那个！‘\n\t{print} \"黛西立即告诉你，你应该吃那儿的那些浆果。\"\n{elif} 角色 {is} '杰森'\n\t{print} '你选择了杰森！他是他们所有人中最强壮的那个！'\n\t{print} '杰森举起一块巨石，底下露出一张秘密地图。'\n{elif}角色{is}'山姆'\n\t{print}'你选择了山姆！他们是他们所有人中最快的那个！'\n\t{print}'山姆爬上一棵树，看见不远处有一座村庄…'\n```\n\n            \n"
     add_remove_command:
         default_save_name: 添加_删除_命令
         description: 简介 {add}{to_list}和{remove}{from}
         levels:
             3:
                 story_text: |
-                    ## 添加到
-                    可以使用`{add} {to_list}`命令将项目添加到列表中。要将项目添加到列表中，可以简单地键入：`{add} penguin {to_list} animals`，或者可以像示例代码中那样使用`{ask}`命令。
+                    ## {add} {to_list}
+                    可以使用`{add} {to_list}`命令将项目添加到列表中。要将项目添加到列表中，可以简单地输入：`{add} penguin {to_list} animals`，或者你可以使用`{ask}`命令，像示例代码中那样。
                 example_code: |
                     ```
                     动物 {is} 狗, 猫, 袋鼠
@@ -235,8 +239,8 @@ adventures:
                     {print} 我选择 动物 {at} {random}
                     ```
                 story_text_2: |
-                    ## 从...移除
-                    如果你可以将项目添加到列表中，当然你也可以将其删除。可以使用 `{remove} {from}` 指令.
+                    ## {remove} {from}
+                    如果你可以将项目添加到列表中，当然你也可以把它们删除。可以使用 `{remove} {from}` 命令.
                 example_code_2: |
                     ```
                     动物们 {is} 狗, 猫, 袋鼠
@@ -1622,7 +1626,7 @@ adventures:
                     ### 练习
                     完成代码。每次随机选择一个字母，你必须按下。按对得一分，按错扣两分。
                     **额外**在每个字母之后清除屏幕，并显示用户他们得了多少分。
-                example_code: "```\n积分 = 0\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
+                example_code: "```\n积分 = 0\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母:' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         description: 介绍print命令
         levels:
@@ -1790,14 +1794,13 @@ adventures:
                     好消息！在这个级别中，您将被允许在 `{if}` 中或 `{repeat}` 命令中放置一个 `{if}`。将一个代码块放在另一个代码块中称为嵌套。
                 example_code: |
                     ```
-                    answer = {ask} 'Are you ready to learn something new?'
-                    {if} answer {is} yes
-                        {print} 'Great! You can learn to use the repeat command in the if command!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                        {print} 'Hooray!'
-                    {else}
-                        {print} 'Maybe you should practice some more in the previous level'
+                    {repeat} 3 {times}
+                        订单 = {ask} '你想订购什么?'
+                        {if} 订单 {is} 披萨
+                            {print} '真好吃！'
+                        {else}
+                            {print} '披萨更好！'
+                    ```
     repeat_command_2:
         default_save_name: repeat_命令_2
         description: '{repeat} 命令 2'
@@ -2352,7 +2355,7 @@ adventures:
                     {call} 闪亮
                     {print} '高高地在天空上'
                     {print} '好像一颗钻石'
-                    {call} _
+                     _
                     ```
     turtle:
         name: 海龟
@@ -2369,6 +2372,7 @@ adventures:
                 story_text_2: |
                     ### 练习
                     让我们开始画一个小楼梯。你能使它有5个台阶吗？
+                example_code: "```\n{forward}100\n{turn}{left}\n```\n"
             2:
                 story_text: |
                     在第 1 级中，乌龟只能向左或向右转。这有点无聊！
@@ -2380,7 +2384,7 @@ adventures:
                     此代码现在创建字母 T。你能改变它来制作字母 B 吗？
 
                     **额外**将字母更改为不同的字母，例如你名字的第一个字母。
-                    你还可以通过将颜色设置为 `{color}` `{white}` 来制作多个字母。 
+                    你还可以通过将颜色设置为 `{color}` `{white}` 来制作多个字母。
                 story_text_2: |
                     您可以使用变量来让乌龟 `turn`. 
 
@@ -2397,6 +2401,7 @@ adventures:
                     {turn} 角度
                     {forward} 25
                     ```
+                example_code: "```\n{向前} 80\n{旋转} 90\n{向前} 50\n{旋转} 180\n{向前} 100\n```\n"
             3:
                 story_text: |
                     在这个级别中，您可以将 `{at} {random}` 与海龟绘图一起使用。使用随机选择使乌龟每次走不同的路径。
@@ -2859,3 +2864,7 @@ adventures:
         default_save_name: 新年倒计时
         description: 新年倒计时!
         levels:
+    and_or_command:
+        name: '{and} 和 {or}'
+        default_save_name: and和or命令
+        description: and, or
