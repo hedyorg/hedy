@@ -1610,34 +1610,6 @@ adventures:
                         {call} song
                         {print} '🥳'
                     ```
-            14:
-                story_text: |
-                    Verbessere dein 'Old MacDonald' Programm!
-
-                    ### Übung
-                    Nimm das Programm aus Deinem 'Singe eine Lied' Abenteuer und füge Musiknoten hinzu!
-                    Da kannst eine Funktion für jede Zeile des Lieds erstellen und die Funktion aufrufen, nachdem die Zeile gedruckt wurde.
-                    Wir haben die erste Zeile für dich definiert und den Aufruf im Programm eingefügt. Kannst du das ganze Lied vervollständigen?
-                example_code: |
-                    ```
-                    {define} zeile_1
-                        {for} i {in} {range} 1 {to} 3
-                            {play} G
-                        {play} D
-                        {for} i {in} {range} 1 {to} 2
-                            {play} E
-                        {play} D
-
-                    tiere = ['Schwein', 'Hund', 'Kuh']
-                    laute = ['quiek', 'wau', 'muh']
-                    {for} i {in} {range} 1 {to} 3
-                        tier = tiere[i]
-                        laut = laute[i]
-                        {print} 'Old MacDonald hat ’ne Farm'
-                        {call} zeile_1
-                        {print} 'E I E I O!'
-                        _
-                    ```
     parrot:
         name: Papagei
         default_save_name: Papagei
@@ -2914,47 +2886,6 @@ adventures:
                         {color} gewählte_farbe
                         {if} form = 'quadrat'
                             {call} zeichne_ein_quadrat
-                    ```
-            14:
-                story_text: |
-                    ### Übung
-                    Mache die Zeichnungen mit der Schildkröte nach!
-
-                    Straße in verschiedenen Größen <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Gefärbte Straße <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Schneesturm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
-                example_code: |
-                    Hinweis Straße in verschiedenen Größen
-                    ```
-                    {define} zeichne_ein_haus {with} größe
-                    _
-
-                    {call} zeichne_ein_haus {with} 90
-                    {call} zeichne_ein_haus {with} 60
-                    {call} zeichne_ein_haus {with} 30
-                    ```
-
-                    Hinweis Farbige Straße
-                    ```
-                    {define} zeichne_ein_haus {with} gewählte_farbe
-                    _
-                    ```
-
-                    Hinweis Schneesturm
-                    ```
-                    {define} zeichne_schneeflocke {with} länge, farbe
-                        _
-
-                    zahlen = 10, 20, 30
-                    färben = _
-
-                    {for} i {in} {range} 1 {to} 5
-                        zufällige_zahl = _
-                        zufällige_farbe = _
-                        {call} zeichne_schneeflocke {with} zufällige_zahl, zufällige_farbe
-                        {color} weiß
-                        {turn} zufällige_zahl * 5
-                        {forward} 80
                     ```
             15:
                 story_text: |

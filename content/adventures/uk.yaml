@@ -982,9 +982,6 @@ adventures:
                 example_code_2: "```\n{define} fire_alarm\n    {print} 'FIRE!'\n    note = 40\n    {for} i {in} {range} 1 {to} 100\n        {if} note _ 50\n            note = note + 5\n            {play} _\n        {else}\n            note = 40\n\nfire = {ask} 'Чи є пожежа?'\n{if} fire _ 'так'\n    fire_alarm_\n```\n"
                 story_text_3: "### Вправа\nНавіть на цьому останньому рівні Hedy ми можемо створювати музику! Будьте уважні до всього синтаксису, який зараз потрібен.\nУважно подивіться на те, як функції визначені та викликаються у прикладі коду.\nЗакінчіть пісню!\n"
                 example_code_3: "```\n{def} line_1():\n    {for} i {in} {range}(1, 5):\n        {play} A\n    {play} D\n    {play} F\n    {play} A\n\n{def} line_2():\n    {for} i {in} {range}(1, 5):\n        {play} G\n    {play} C\n    {play} E\n    {play} G\n\n{def} line_3():\n_\n\n{print} ('П'яний моряк')\n{print} ('Що нам робити з п'яним моряком?')\nline_1()\nline_2()\nline_3()\n{print} ('Рано вранці')\n```\n"
-            14:
-                story_text: "Оновіть свій старий код Макдональда!\n\n### Вправа\nВізьміть свій код з пригоди «Заспівай пісню» та додайте до нього музичні ноти!\nВи можете створити функцію для кожного рядка пісні та викликати цю функцію після того, як рядок буде надруковано.\nМи визначили перший рядок для вас та викликали його в коді. Чи можете ви закінчити всю пісню?\n"
-                example_code: "```\n{define} line_1\n    {for} i {in} {range} (1, 3)\n        {play} G\n    {play} D\n    {for} i {in} {range} 1 {to} 2\n        {play} E\n    {play} D\n\nanimals = ['pig', 'dog', 'cow']\nsounds = ['oink', 'woof', 'moo']\n{for} i {in} {range} (1, 3)\n    animal = animals[i]\n    sound = sounds[i]\n    {print} 'Старий Макдональд мав ферму'\n    line_1()\n    {print} 'E I E I O!'\n    _\n```\n"
         default_save_name: музика
         name: музика
         description: Зіграй мелодію!
@@ -1878,9 +1875,6 @@ adventures:
                 example_code: "Hint for the square:\n```\nchosen_color = {ask}_\n```\n"
             9:
                 story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n**Екстра** Кількість у дужках вказує на скільки рядків коду цей показник можна намальовувати. Чи можна це зробити в одній кількості рядків?\n\n<div class=\"w-full flex flex-row gap-2\">\nSquare (3) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"200\">\nВипадково кольорова зірка (5) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781\" width=\"150\">\nВипадкові кольорові спіральні (7) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35\" width=\"150\">\n</div>\n"
-            14:
-                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\nВулиця в різних розмірах <img src=\"https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec\" width=\"300\">\nКольорова вулиця <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724\" width=\"300\">\nSnow Storm <img src=\"https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc\" width=\"300\">\n"
-                example_code: "Вулиця Хінт у різних розмірах\n```\n{define} draw_a_house(size)\n_\n\ndraw_a_house(90)\ndraw_a_house(60)\ndraw_a_house(30)\n```\n\nКольорова вулиця Hint\n```\n{define} draw_a_house(chosen_color)\n_\n```\n\nНатяк на снігову бурю\n```\n{define} draw_snowflake(length, color)\n    _\n\nnumbers = 10, 20, 30\ncolors = _\n\n{for} i {in} {range} 1 {to} 5\n    random_number = _\n    random_color = _\n    draw_snowflake(random_number, random_color)\n    {color} white\n    {turn} random_number * 5\n    {forward} 80\n```\n"
             15:
                 story_text: "### Exercise\nСтворіть програму, яка просить гравця, скільки кутів їх фігури повинен мати, а потім створює цей малюнок.\nНа малюнку у зображенні є вихід, коли гравець заповнює 10.\n\n<div class=\"w-full flex flex-row gap-2\">\n<img src=\"https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b\" width=\"300\">\n<img src=\"https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2\" width=\"200\">\n</div>\n"
                 example_code: "```\n{define} calculate_degrees(amount_of_corners)\n    _ 360 / amount_of_corners\n\n\n{define} draw_figure(degrees)\n    _\n        {forward} 400/amount_of_corners\n        {turn} _\n\namount_of_corners = {ask} _\ndegrees = _(_)\n\n_ {with}\n_ {with}\n```\n"
@@ -1904,10 +1898,7 @@ adventures:
         name: Новий рік
         default_save_name: Новорічний відлік
         description: Зворотний відлік до Нового року!
-        levels:
-            7:
-                story_text: "Зворотний відлік до Нового року.\n\n### Вправа\nЗаповніть пропуски та змусьте код працювати!\n"
-                example_code: "```\nnumber = 10\n{repeat} _\n    {print} число\n    {sleep}\n    number = number - 1\n{print} 'З Новим роком!'\n```\n"
+        levels: {}
     calculator_2:
         name: Калькулятор 2
         default_save_name: Калькулятор 2

@@ -2576,47 +2576,6 @@ adventures:
                         {if} forme {is} "carré"
                             {call} dessine_un_carré
                     ```
-            14:
-                story_text: |
-                    ### Exercice
-                    Refait les dessins avec la tortue !
-
-                    Une rue avec des maisons de toutes les tailles <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Une rue colorée  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Un orage de flocons <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
-                example_code: |
-                    Aide pour la rue avec les maisons de toutes les tailles
-                    ```
-                    {define} dessine_une_maison {with} taille
-                    _
-
-                    {call} dessine_une_maison {with} 90
-                    {call} dessine_une_maison {with} 60
-                    {call} dessine_une_maison {with} 30
-                    ```
-
-                    Aide pour la rue colorée
-                    ```
-                    {define} dessine_une_maison {with} couleur
-                    _
-                    ```
-
-                    Aide pour l'orage de flocons
-                    ```
-                    {define} dessine_flocon {with} longueur, couleur
-                        _
-
-                    longueurs = 10, 20, 30
-                    couleurs = _
-
-                    {for} i {in} {range} 1 {to} 5
-                        longueur_au_hasard = _
-                        couleur_au_hasard = _
-                        {call} dessine_flocon {with} longueur_au_hasard, couleur_au_hasard
-                        {color} blanc
-                        {turn} longueur_au_hasard * 5
-                        {forward} 80
-                    ```
             16:
                 story_text: |
                     ### Exercice

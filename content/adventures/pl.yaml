@@ -1565,34 +1565,6 @@ adventures:
                         piosenka()
                         {print} '🥳'
                     ```
-            14:
-                story_text: |
-                    Ulepsz swój kod dla Pan MacDonald !
-
-                    ### Ćwiczenie
-                    Weź swój kod z przygody „Sing a Song” i dodaj do niego nuty!
-                    Możesz utworzyć funkcję dla każdego wiersza w utworze i wywołać tę funkcję po wyświetleniu wiersza kodu.
-                    Zdefiniowaliśmy dla ciebie pierwszy wiersz i wywołaliśmy go w kodzie. Czy potrafisz dokończyć całą piosenkę?
-                example_code: |
-                    ```
-                    {define} linijka_1
-                        {for} i {in} {range} (1, 3)
-                            {play} G
-                        {play} D
-                        {for} i {in} {range} 1 {to} 2
-                            {play} E
-                        {play} D
-
-                    zwierzęta = ['świnka', 'pies', 'krowa']
-                    dźwięki = ['chrum', 'hau', 'muu']
-                    {for} i {in} {range} (1, 3)
-                        zwierzę = zwierzęta[i]
-                        dźwięk = dźwięki[i]
-                        {print} 'Pan MacDonald farmę miał'
-                        linijka_1()
-                        {print} 'E I E I O!'
-                        _
-                    ```
     parrot:
         name: Papuga
         default_save_name: Papuga
@@ -2835,47 +2807,6 @@ adventures:
                         {if} kształt = 'kwadrat'
                             {call} narysuj_kwadrat
                     ```
-            14:
-                story_text: |
-                    ### Ćwiczenie
-                    Odtwórz rysunki za pomocą żółwia!
-
-                    Ulica w różnych rozmiarach <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Pokolorowana ulica  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Śnieżyca <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
-                example_code: |
-                    Wskazówka dotycząca ulicy w różnych rozmiarach
-                    ```
-                    {define} narysuj_dom(rozmiar)
-                    _
-
-                    narysuj_dom(90)
-                    narysuj_dom(60)
-                    narysuj_dom(30)
-                    ```
-
-                    Wskazówka dotycząca pokolorowanej ulicy
-                    ```
-                    {define} narysuj_dom(wybrany_kolor)
-                    _
-                    ```
-
-                    Wskazówka dotycząca śnieżycy
-                    ```
-                    {define} narysuj_śnieżynkę(długość, kolor)
-                        
-
-                    liczby = 10, 20, 30
-                    kolory = _
-
-                    {for} i {in} {range} 1 {to} 5
-                        losowa_liczba = _
-                        losowy_kolor = _
-                        narysuj_śnieżynkę(losowa_liczba, losowy_kolor)
-                        {color} biały
-                        {turn} losowa_liczba * 5
-                        {forward} 80
-                    ```
             15:
                 story_text: |
                     ### Ćwiczenie
@@ -2959,10 +2890,7 @@ adventures:
         name: Nowy Rok
         default_save_name: Odliczanie do Nowego Roku
         description: Odliczanie do Nowego Roku!
-        levels:
-            7:
-                story_text: "Odliczanie do nowego roku.\n\n### Ćwiczenie\nUzupełnij luki i napraw ten kod!\n"
-                example_code: "```\nliczba = 10\n{repeat} _\n    {print} liczba \n    {sleep}\n    liczba = liczba - 1\n{print} 'Szczęśliwego nowego roku!'\n```\n"
+        levels: {}
     and_or_command:
         name: '{and} i {or}'
         default_save_name: komenda_i_lub
