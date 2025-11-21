@@ -450,7 +450,7 @@ adventures:
             5:
                 story_text: "### Exercici\nDepura aquest codi. Bona sort!"
                 example_code: "**Avís! Aquest codi s’ha de depurar!**\n```\n{print} \"Benvingut/da a la Piscina Hedy!\"\ncertificat {is} {ask} \"Tens un certificat de natació?\"\n{if} certificat \"sí\" {print} \"Genial! Pots nedar a la piscina!\"\n{print} {else} \"Pots entrar, però no pots nedar.\"\ndescompte {is} {ask} \"Tens menys de 12 anys?\"\n{if} descompte {is} sí\n{print} \"El preu és de 3,50 €\"\n\"El preu és de 5,50 €\"\n{print} \"Que tinguis un bon dia!\"\n```\n"
-                answer_code: "```\n{print} \"Benvingut/da a la Piscina Hedy!\"\ncertificat {is} {ask} \"Tens un certificat de natació?\"\n{if} certificat {is} \"sí\" {print} \"Genial! Pots nedar a la piscina!\"\n{else} {print} \"Pots entrar, però no pots nedar.\"\ndescompte {is} {ask} \"Tens menys de 12 anys?\"\n{if} descompte {is} \"sí\" {print} \"El preu és de 3,50 €\"\n{print} \"El preu és de 5,50 €\"\n{print} \"Que tinguis un bon dia!\"\n\n```\n"
+                answer_code: "```\n{print} \"Benvingut/da a la Piscina Hedy!\"\ncertificat {is} {ask} \"Tens un certificat de natació?\"\n{if} certificat {is} \"sí\" {print} \"Genial! Pots nedar a la piscina!\"\n{else} {print} \"Pots entrar, però no pots nedar.\"\ndescompte {is} {ask} \"Tens menys de 12 anys?\"\n{if} descompte {is} \"sí\" {print} \"El preu és de 3,50 €\"\n{else} {print} \"El preu és de 5,50 €\"\n{print} \"Que tinguis un bon dia!\"\n\n```\n"
             6:
                 story_text: "### Exercici\nDepura aquest codi. Bona sort!\n"
                 example_code: "**Atenció! Aquest codi necessita ser depurat!**\n```\nmenjars {in} creps, xurros, melindros\nelecció_menjar {ask} \"Què vols menjar?\"\n{if} elecció_menjar {is} menjars\n{print} \"Ho tinc! Me n'encarrego.\"\n{else} elecció_menjar {is} \"res\" \n{print} \"Llavors no tindràs menjar.\"\n{else} elecció_menjar {is} \"\" {print} \"Em temo que d'això no en tenim.\"\n```\n"
@@ -516,7 +516,7 @@ adventures:
                     Aquest és el codi per calcular els punts d'un dau:
 
                     ### Exercici
-                    Pots fer el codi per obtenir la puntuació total per a 8 daus? Per fer-ho, hauràs de copiar i enganxar algunes línies del codi.
+                    Pots fer el codi per obtenir la puntuació total per a un dau de 8 cares? Per fer-ho, hauràs de copiar i enganxar algunes línies del codi.
                 example_code: |
                     ```
                     opcions = 1, 2, 3, 4, 5, cuc
@@ -847,6 +847,10 @@ adventures:
             7:
                 story_text: "També fem un canvi en com emmagatzemar una paraula en una variable! Ara pots utilitzar `=` en lloc de `{is}` quan emmagatzemes un nom o un número en una variable, així:\n"
                 example_code: "```\nnom = Hedy\nresposta = 20 + 4\n```\n"
+            13:
+                example_code_2: "```\nnom = {input}(\"Com et dius?\")\n{if} nom == \"Hedy\":\n    {print}(\"Que guai que ets!\")\n```\n"
+                story_text_3: "Pots comparar si alguna cosa *no* és igual a una altra fent servir `!=`, d'aquesta manera:\n"
+                example_code_3: "```\nnom= {input}(\"Com et dius\")\n{if} nom!= \"Hedy\":\n    {print}(\"No ets pas Hedy\")\n```\n"
         name: '{is}'
     parrot:
         name: Lloro
@@ -1031,7 +1035,7 @@ adventures:
                 story_text: "Crea el teu propi programa per practicar vocabulari en un nou idioma.\n\n### Exercici\nAllarga el codi afegint almenys 3 paraules addicionals permetent al jugador aprendre-les.\n**Extra** Per descomptat pots fer servir una llengua diferent del francès. Canvia el codi per qualsevol llengua que et vingui de gust aprendre.\n"
                 example_code: "```\n{print} \"Aprèn Francès!\"\ngat {is} {ask} \"🐱\"\n{if} gat {is} chat {print} \"Genial!\"\n{else} {print} \"No, gat es diu chat\"\ngranota {is} {ask} \"🐸\"\n{if} granota {is} grenouille {print} \"Super!\"\n{else} {print} \"No, granota es diu grenouille\"\n```\n"
             14:
-                example_code: "```\nparaules_frances = [\"bonjour\", \"ordinateur\", \"pomme de terre\"]\ntraduccio = [\"Bon dia\", \"ordinador\", \"patata\"]\npunts = 0\n{for} i {in} {range} 1 {to} 3\n    resposta = {ask} \"Què vol dir \" paraules_frances[i] \"?\"\n    correcta = traduccio[i]\n    {if} resposta == correcta\n        {print} \"Correcte!\"\n        punts = punts + 1\n    {else}\n        {print} \"Malament, \" paraules_frances[i] \" significa \" traduccio[i]\n{print} \"Has encertat \" punts \" respostes.\"\n```\n"
+                example_code: "```\nparaules_frances = [\"bonjour\", \"ordinateur\", \"pomme de terre\"]\ntraduccio = [\"Bon dia\", \"ordinador\", \"patata\"]\npunts = 0\n{for} i {in} {range} (1,3):\n    resposta = {input} (\"Què vol dir \", paraules_frances[i], \"?\")\n    correcta = traduccio[i]\n    {if} resposta == correcta:\n        {print} (\"Correcte!\")\n        punts = punts + 1\n    {else}:\n        {print} (\"Malament, \", paraules_frances[i], \" significa \", traduccio[i])\n{print} (\"Has encertat \", punts, \" respostes.\")\n```\n"
                 story_text: "### Exercici\nDona un cop d'ull al codi d'exemple. Aquest és un programa per practicar vocabulari en francès. Ara crea el teu propi programa per practicar el teu vocabulari en un nou idioma.\nSi no coneixes cap altre idioma, pots utilitzar Google Translate o fer servir emojis i la teva llengua materna.\n"
         name: Llengua
         description: Practica paraules amb una llengua estrangera
@@ -1385,8 +1389,8 @@ adventures:
         description: i, o
         levels:
             10:
-                story_text: "Ara aprendrem `{and}` i `{or}`! Si vols comprovar dues afirmacions, no cal que utilitzis dues comandes, sinó que pots fer servir `{and}` i `{or}`.\nSi utilitzes `{and}`, totes dues afirmacions, la de l’esquerra i la de la dreta, han de ser certes. També podem utilitzar `{or}`. En aquest cas, només una de les afirmacions ha de ser correcta."
-                example_code: "```\nnom = {ask} \"quin és el teu nom?\"\nedat = {ask} \"quants anys tens?\"\n{if} nom {is} \"Hedy\" {and} edat {is} 2\n    print \"Ets la Hedy real!\"\n{elif} nom {is} \"Hedy\" {or} edat {is} 2\n    {print} \"Quasi... però no ets la Hedy!\"\n{else}\n    {print} \"No ets la Hedy!\"\n```\n"
+                story_text: "Ara aprendrem `{and}` i `{or}`! Si vols comprovar dues afirmacions, no cal que utilitzis dues comandes `{if}`, sinó que pots fer servir `{and}` i `{or}`.\nSi fas servir `{and}`, totes dues afirmacions, la de l’esquerra i la de la dreta de l'`{and}`, han de ser certes. També podem fer servir `{or}`. I , només una de les dues afirmacions haurà de ser correcta."
+                example_code: "```\nnom = {ask} \"quin és el teu nom?\"\nedat = {ask} \"quants anys tens?\"\n{if} nom {is} \"Hedy\" {and} edat {is} 2\n    {print} \"Ets la Hedy real!\"\n{elif} nom {is} \"Hedy\" {or} edat {is} 2\n    {print} \"Quasi... però no ets la Hedy!\"\n{else}\n    {print} \"No ets la Hedy!\"\n```\n"
     elif_command:
         name: '{elif}'
         default_save_name: sinosi
@@ -1426,6 +1430,8 @@ adventures:
                 story_text: "Benvingut a l'Aventura de l'Hospital. En aquesta aventura ajudaràs el director d'un hospital a solucionar alguns problemes que ocorren al seu hospital. Aquesta és la teva primera tasca:\n\nHi ha una cua horriblement llarga a la nostra recepció i l'empleat està molt ocupat. Podries ajudar aquest empleat programant un quiosc d'autoregistre?\n### Exercici\nEl quiosc d'autoregistre ha de:\n* Donar la benvinguda al pacient\n* Demanar el seu nom i repetir-lo\n* Demanar la seva data de naixement i repetir-la\n* Preguntar en quin departament té la seva cita\n* Preguntar amb quin metge té la seva cita\n* Agrair al pacient per registrar-se amb èxit\n* Dir al pacient que esperi assegut a la sala d'espera\n"
             15:
                 story_text: "Després d'una cirurgia, els nostres pacients de vegades poden experimentar molt dolor. En aquests casos, es pot donar als pacients una bomba de morfina. Poden administrar-se una mica de morfina ells mateixos si tenen dolor.\nAquestes bombes s'han de programar amb molta cura, perquè els pacients no se n'administrin massa. Pots programar una bomba de morfina per a nosaltres?\n### Exercici\nEl programa ha de:\n* Preguntar a la infermera quants mil·lilitres de morfina ha rebut avui el pacient.\n* Dir a la infermera que doni el dispositiu al pacient\n* Preguntar al pacient quant dolor experimenta en una escala de l'1 al 10.\n* Dir al pacient que premi el botó x si vol una mica més de morfina.\n* Cridar la funció començar_bombeig amb els arguments nivell_dolor i nivell_morfina si es prem x.\n* La funció ha d'imprimir 'Se us administraran 20 ml més de morfina' mentre el nivell de dolor del pacient sigui superior o igual a 6 i el nivell de morfina sigui inferior a 120.\n* Després d'administrar nova morfina, el programa ha de fer una pausa de 2 minuts (mentre proves el programa pots utilitzar 2 segons).\n* Després d'aquests 2 minuts, s'ha d'actualitzar el nivell de morfina (+20ml) i s'ha d'actualitzar el nivell de dolor preguntant al pacient com se sent ara.\n* Si el nivell de morfina és massa alt o el pacient ja no té dolor, el programa ha de dir als pacients que no rebran més morfina. Si tenen molt dolor, digues-los que truquin a la infermera.\n* Digues al pacient que la bomba es tancarà ara, i que premi x si necessita que la bomba s'iniciï de nou.\n"
+            16:
+                story_text: "Els nostres estudiants de medicina han d’aprendre els termes mèdics de totes les parts del cos. Sembla que els costa recordar tots els noms anatòmics i que troben l’estudi molt avorrit.\nPots ajudar-los creant un joc que els permeti practicar els termes mèdics?\nAquests són els termes que els estudiants han de saber:\ncorpus = cos, caput = cap, ocolus = ull, nasus = nas, auris = orella, os = boca, collum = coll, manus = mà, pectus = pit, humerus = espatlla, venter = estómac, tergum = esquena\n### Exercici\nEl programa ha de:\n* Ser un joc que permeti als estudiants practicar els termes mèdics.\n* Donar als estudiants un punt i un elogi quan han donat la resposta correcta.\n* Treure un punt i dir-los que la resposta és incorrecta quan s’han equivocat.\n* També mostrar als estudiants la resposta correcta durant uns segons si han respost malament, esborrar la resposta de la pantalla i continuar preguntant fins que l’encertin.\n* Continuar jugant fins que l’estudiant hagi respost correctament totes les preguntes.\n* Mostrar la puntuació final a l’estudiant.  \n* Donar a l’estudiant una valoració basada en la seva puntuació: 12 punts: Impressionant!, 8 - 11 punts: Bona feina, continua practicant!, 7 o menys: Hauries d’estudiar més!\n"
         name: Hospital
         default_save_name: Hospital
         description: Hospital
