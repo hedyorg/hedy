@@ -238,6 +238,9 @@ adventures:
                     name = {input}("Quel est votre nom ?")
                     {print}('Bienvenue dans cette histoire !')
                     ```
+            6:
+                story_text: "Maintenant que vous pouvez utiliser `{elif}` vous pouvez créer une histoire encore plus interactive ! Vous pourriez créer plusieurs personnages, par exemple, qui auraient tous des attributs différents.\nOu vous pourriez faire choisir à votre joueur quel chemin emprunter, quelle porte ouvrir ou quelle potion magique boire...\n\n###Exercice\nCréez votre propre histoire avec 3 options ou plus en utilisant {elif}."
+                example_code: "```\npersonnage =  {ask}  'Qui va vous aider dans votre quête?'\n{if} personnage {is} 'Daisy'\n    {print} 'Vous avez chosi Daysi! C'est la plus futée de tous!'\n    {print} \"Daisy vous dit immédiatement que vous ne devriez pas manger cez baies là-bas.\"\n{elif} personnage {is} 'Jason'\n    {print} 'Vous avez chosi Jason! C'est le plus fort de tous!'\n    {print} 'Jason soulève un rocher, en découvrant une carte secrète en dessous.'\n{elif} character {is} 'Sam'\n    {print} ''Vous avez chosi Sam! C'est le plus rapide de tous!'\n    {print} 'Sam grimpe à un arbre et voit qu'il y a un village pas très loin...'\n\n```\n\n\n\n            \n\nFrancés\n\n            \n"
         default_save_name: Histoire
     add_remove_command:
         description: Introduction {add} {to_list} et {remove} {from}
