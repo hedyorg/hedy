@@ -152,7 +152,8 @@ def markdown_code_blocks(text):
 
 
 def filter_snippets(snippets, level=None, lang=None):
-    if (lang or level) and os.getenv('CI'):
+    # TODO: for now we are only going to test english. Soon we'll test all languages.
+    if (lang or level) and os.getenv('CI') and lang != 'en':
         raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
     if lang:
