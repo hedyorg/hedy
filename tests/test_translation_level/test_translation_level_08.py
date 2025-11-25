@@ -13,7 +13,7 @@ class TestsTranslationLevel8(HedyTester):
     level = 8
     keywords_from = hedy_translation.keywords_to_dict('en')
     keywords_to = hedy_translation.keywords_to_dict('nl')
-    
+
     def test_repeat_english_dutch(self):
         code = "repeat 3 times print 'Hedy is fun!'"
 
@@ -45,7 +45,7 @@ class TestsTranslationLevel8(HedyTester):
         expected = "repeat 2 times print ask"
 
         self.assertEqual(expected, result)
-    
+
     def test_repeat_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             a is 1, 2, 3

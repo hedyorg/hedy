@@ -119,5 +119,3 @@ class TestsTranslationLevel9(HedyTester):
             print 'wrong!'""")
 
         self.verify_translation(code, "en", self.level)
-
-    

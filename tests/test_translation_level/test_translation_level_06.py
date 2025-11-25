@@ -118,10 +118,10 @@ class TestsTranslationLevel6(HedyTester):
 
         result = hedy_translation.translate_keywords(
             code, from_lang="en", to_lang="nl", level=self.level)
-        
+
         expected = textwrap.dedent("""\
         als color in pretty_colors
-        print 'pretty!""")        
+        print 'pretty!""")
 
         self.assertEqual(expected, result)
 

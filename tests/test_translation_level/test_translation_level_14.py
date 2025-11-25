@@ -13,6 +13,3 @@ from tests.Tester import HedyTester
 
 class TestsTranslationLevel14(HedyTester):
     level = 14
-    
-
-    

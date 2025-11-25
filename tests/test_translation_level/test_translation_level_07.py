@@ -21,7 +21,7 @@ class TestsTranslationLevel7(HedyTester):
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
 
         self.assertEqual(code, result)
-    
+
     def test_ask_with_equals_spanish_english(self):
         code = "nombre = preguntar '¿Cual es tu nombre?'"
 

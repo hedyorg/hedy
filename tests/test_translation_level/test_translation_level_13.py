@@ -13,7 +13,7 @@ from tests.Tester import HedyTester
 
 class TestsTranslationLevel13(HedyTester):
     level = 13
-    all_keywords = hedy_translation.all_keywords_to_dict()    
+    all_keywords = hedy_translation.all_keywords_to_dict()
 
     def test_and_condition_english_dutch(self):
         code = textwrap.dedent("""\
@@ -74,7 +74,7 @@ class TestsTranslationLevel13(HedyTester):
             print 'hallo'""")
 
         self.assertEqual(expected, result)
-    
+
     def test_for_in_english_dutch(self):
         code = textwrap.dedent("""\
         for counter in range (1, 5)
@@ -129,6 +129,7 @@ class TestsTranslationLevel13(HedyTester):
                 print end""")
 
         self.verify_translation(code, "en", self.level)
+
     def test_indent_while_loop_english_dutch(self):
         code = textwrap.dedent("""\
         i = 3
@@ -282,7 +283,7 @@ class TestsTranslationLevel13(HedyTester):
         print 'Good job!'""")
 
         self.assertEqual(expected, result)
-    
+
     def test_indent_while_loop_english_dutch(self):
         code = textwrap.dedent("""\
         i = 3
@@ -386,7 +387,7 @@ class TestsTranslationLevel13(HedyTester):
             print 'nee'""")
 
         self.assertEqual(expected, result)
-    
+
     def test_assign_list_english_dutch(self):
         code = "fruit = ['appel', 'banaan', 'kers']"
 
@@ -418,7 +419,7 @@ class TestsTranslationLevel13(HedyTester):
         print fruit[random]""")
 
         self.assertEqual(expected, result)
-    
+
     def test_input(self):
         code = textwrap.dedent("""\
         leeftijd is input('Hoe oud ben jij?')
