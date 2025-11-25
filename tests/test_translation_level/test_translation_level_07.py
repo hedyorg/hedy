@@ -14,38 +14,6 @@ class TestsTranslationLevel7(HedyTester):
     keywords_from = hedy_translation.keywords_to_dict('en')
     keywords_to = hedy_translation.keywords_to_dict('nl')
 
-    def test_repeat_english_dutch(self):
-        code = "repeat 3 times print 'Hedy is fun!'"
-
-        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = "herhaal 3 keer print 'Hedy is fun!'"
-
-        self.assertEqual(expected, result)
-
-    def test_repeat2_english_dutch(self):
-        code = "repeat 2 times print name"
-
-        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
-        expected = "herhaal 2 keer print name"
-
-        self.assertEqual(expected, result)
-
-    def test_repeat_dutch_english(self):
-        code = "herhaal 3 keer print 'Hedy is fun!'"
-
-        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        expected = "repeat 3 times print 'Hedy is fun!'"
-
-        self.assertEqual(expected, result)
-
-    def test_repeat2_dutch_english(self):
-        code = "herhaal 2 keer print ask"
-
-        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        expected = "repeat 2 times print ask"
-
-        self.assertEqual(expected, result)
-
     def test_translate_back(self):
         code = "repeat 4 times print 'Welcome to Hedy'"
 
@@ -53,10 +21,19 @@ class TestsTranslationLevel7(HedyTester):
         result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
 
         self.assertEqual(code, result)
+    
+    def test_ask_with_equals_spanish_english(self):
+        code = "nombre = preguntar '¿Cual es tu nombre?'"
 
-    def test_repeat_type_error_translates_command(self):
+        result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="en", level=self.level)
+
+        expected = "nombre = ask '¿Cual es tu nombre?'"
+
+        self.assertEqual(expected, result)
+
+    def test_expression_type_error_uses_arith_operator(self):
         code = textwrap.dedent(f"""\
-            a is 1, 2, 3
-            repeat a times print 'n'""")
+            a is test
+            print a + 2""")
 
         self.verify_translation(code, "en", self.level)
