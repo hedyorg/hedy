@@ -1290,16 +1290,18 @@ levels:
                     {if} student = nieuwsgierig
                         {print} 'See you next level!'
             debug: 'Waar'
-    9:
+    10:
         1:
-            header: Welkom bij level 9
+            header: Welkom bij level 10
             text: |-
-                In dit level leer je meerdere regels code te gebruiken na een `{if}` of na een `{repeat}` commando.
-
-                Je mag zelfs een `{repeat}` commando in een ander `{repeat}`  commando zetten.
+                Aan het eind van dit level kan je:
+                * {if} en {repeat} commandos 'nesten'
+                * inpsringing op de juiste manier gebruiken bij {repeat} {if} and {else}
+            notes:
+                Het gebruik van een {if} commando in een ander {if} commando wordt nesten genoemd. 
         2:
-            header: Meerdere regels na `{repeat}`
-            text: Je mag meerdere regels gebruiken na `{repeat}`.
+            header: Nesten met `{repeat}`
+            text: Het is toegestaan om `{repeat}` te combineren met `{if}` in dit level. Dit wordt nesten genoemd. 
             code: |-
                 {repeat} 3 {times}
                     eten= {ask} 'Wat wil je eten?'
@@ -1307,6 +1309,8 @@ levels:
                         {print} 'lekker!'
                     {else}
                         {print} 'pizza is beter'
+            notes:
+                Voer dit programma uit. Geef pizza een keer als antwoord, maar geef ook andere antwoorden. 
         3:
             header: Inspringen is belangrijk!
             text: Inspringen is erg belangrijk om de computer te vertellen welke regels herhaald moeten worden en welke niet.
@@ -1315,6 +1319,9 @@ levels:
                     {print} 'Deze regel wordt herhaald...'
                     {print} 'Deze regel ook...'
                 {print} 'Maar deze regel niet!'
+            notes:
+                Herhaal voor je studenten wat het belang is van inspringing goed gebruiken.
+                Voer het programma uit en vraag de studenten wat er gebeurt als de laatste regel ook met een inspringing begint. 
         4:
             header: Meerdere regels na `{if}`
             text: Je mag ook meerdere regels gebruiken na een `{if}`
@@ -1328,6 +1335,8 @@ levels:
                         {print} 'Je weet het niet zeker'
                 {else}
                     {print} 'Je wilt niet doorgaan'
+            notes: Voer de code een aantal keer uit met verschillende input. 
+                Vraag je studenten welke antwoorden je moet geven om een bepaalde output te krijgen. 
         5:
             header: Inspringen is belangrijk
             text: Ook hier is inspringen superbelangrijk! Het kan een groot verschil maken in je code.
@@ -1339,29 +1348,10 @@ levels:
                         {print} 'We zullen doorgaan '
                 {else}
                     {print} 'Je weet het niet zeker'
+            notes: |-
+                Speel wat met de inspringing en laat zien wat er gebeurd als je de inspringing van het tweede {if} commando verwijdert, bijvoorbeeld. 
+        
         6:
-            header: Een `{if}` in een `{repeat}`
-            text: |-
-                Nu je meerdere regels kunt gebruiken na deze commando's, kun je ze ook in elkaar zetten.
-                Bekijk dit voorbeeld maar eens:
-            code: |-
-                {repeat} 3 {times}
-                    eten = {ask} 'Wat wil je eten?'
-                    {if} eten {is} pizza
-                        {print} 'lekker!'
-                    {else}
-                        {print} 'pizza is beter'
-        7:
-            header: Let op het inspringen
-            text: Zie hoe de 4e en 6e regel van deze code beginnen met 8 spaties.
-            code: |-
-                {repeat} 3 {times}
-                    eten = {ask} 'Wat wil je eten?'
-                    {if} eten {is} pizza
-                        {print} 'lekker!'
-                    {else}
-                        {print} 'pizza is beter'
-        8:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             code: |-
@@ -1378,20 +1368,58 @@ levels:
                 {else}
                 {print} 'Gaaf!'
                 {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
+            debug: 'waar'
+            notes: Debug deze code samen met je studenten. 
+        7:
+            header: Klaar voor de start, af!
+            text: Veel plezier met de avonturen in level 10!
+            notes: |-
+                Je studenten kunnen nu alle avonturen van dit level maken. 
+        8:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
         9:
-            header: Doen!
-            text: Veel plezier met de avonturen in level 9!
-    10:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        10:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        11:
+            header: Tipje van de sluier voor het volgende level...
+            text: |-
+                In het volgende level leren we het {for} commando te gebruiken.
+            code: |-
+                dieren = hond, kat, goudvis
+                {for} dier in dieren
+                {print} 'I love ' dier
+            debug: 'waar'
+    11:
         1:
-            header: Welkom bij level 10
-            text: 'In dit level leer je het nieuwe commando: `{for}`.'
+            header: Welkom bij level 11
+            text: |-
+                Aan het eind van dit level kan je:
+                * het {for} commando gebruiken. 
         2:
             header: '{for}'
-            text: Met {for} kun je een lijst maken en alle items op die lijst gebruiken. `{for}` creëert net als {repeat} en {if} een blok waarbij je 4 spaties moet inspringen.
-            code: |-
+            text: Met {for} kun je een lijst maken en alle items in die lijst gebruiken.
                 dieren = hond, kat, goudvis
                 {for} dier {in} dieren
                     {print} 'I love ' dier
+            notes: |-
+                Laat de studenten zien hoe je met het {for} commando ook een block nodig hebt dat met inspringing begint.
+                Voer de code uit en laat zien wat er gebeurt.
+                Vraag de studenten daarna om hun eigen versie van een programma met {for} erin te schrijven.
         3:
             header: '{for}'
             text: 'Hier zie je een ander voorbeeld van `{for}`:'
@@ -1400,13 +1428,16 @@ levels:
                 namen= Mama, Papa, Emma, Sophie
                 {for} dag {in} dagen
                     {print} namen {at} {random} ' doet de afwas on ' dag
+            notes: |-
+                Ga de klas langs en laat de studenten het programma delen dat ze bedacht hebben. 
+                Laat daarna dit volgende voorbeeld zien en laat de studenten de uitvoer voorspellen. 
         4:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen
             code: |-
                 {print} 'Dames en heren!'
                 {print} 'Komt dat zien! Vanavond in circus Hedy!'
-                acts = uit een kanon schieten, koortdansen , zichzelf inpakken in een koffertje,
+                acts =  kanon schieten, koordansen , zichzelf inpakken in een koffertje,
                 mensen = Gina de Geweldige Olly de Ongelooflijke Francis de Fantastische
                     {for} mensen {in} acts
                 gekozen_persoon {is} mensen {random}
@@ -1414,12 +1445,46 @@ levels:
                 {add} gekozen_persoon {from} mensen
                 {print} 'Komt dat zien! Alleen vanavond!'
                 {print} 'Laatste tickets verkrijgbaar aan de kassa
+            debug: 'waar'
+            notes: |- 
+                    Debug deze code samen met je studenten.
         5:
             header: Programmeertijd!
-            text: Veel plezier met de avonturen in level 10!
-    11:
+            text: Veel plezier met de avonturen in level 11!
+            notes: |-
+                Je studenten kunnen nu alle avonturen in level 11 maken. 
+        8:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
+        9:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        10:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        11:
+            header: Tipje van de sluier voor het volgende level...
+            text: |-
+                In het volgende level leren we het {for} commando op een andere manier te gebruiken.
+            code: |-
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} 'Ready or not. Here I come!'
+            debug: True
+    12:
         1:
-            header: Welkom bij level 11
+            header: Welkom bij level 12
             text: |-
                 In dit level leer je een nieuwe vorm van `{for}`. In de eerdere levels gebruikte je `{for}` voor een lijstje, maar we kunnen het ook gebruiken met getallen.
 

@@ -1241,7 +1241,7 @@ levels:
                     {else}
                         {print} 'pizza is better'
             notes:
-                Run the program twice, once with 'pizza' as the answer and once with a different answer.
+                Run the program. Give 'pizza' as the answer once but also give a different answers.
         3:
             header: Indentation matters!
             text: Indentation is very important to tell the computer which lines should be repeated and which lines should only be run once.
@@ -1254,7 +1254,7 @@ levels:
                 Repeat to your student the importance of using indentation properly. Run the program and ask the students what would happen if the last line would also start with indentation.
         4:
             header: Nesting with `{if}`
-            text: You can also use multiple lines after `{if}`
+            text: You can also use an `{if}` in an `{if}`
             code: |-
                 continue = {ask} 'Do you want to continue?'
                 {if} continue = yes
@@ -1265,6 +1265,7 @@ levels:
                         {print} 'You are not sure'
                 {else}
                     {print} 'You do not want to continue'
+            notes: Run this program a few times with different answers. Ask your students which answers you should give to get one of the outputs.  
         5:
             header: Indentation matters
             text: Again, indentation is still very important and can make a big difference in the code.
@@ -1345,8 +1346,8 @@ levels:
                 {for} animal {in} animals
                     {print} 'I love ' animal
             notes: |-
-                Show the students how the {for} keyword creates a block taht starts with indentation.
-                Run the code and show teh students what happens.
+                Show the students how the {for} keyword creates a block that starts with indentation.
+                Run the code and show the students what happens.
                 Then ask the students to write their own version of a program with {for} in it.
         3:
             header: The for keyword
@@ -1357,7 +1358,7 @@ levels:
                 {for} day {in} days
                     {print} names {at} {random} ' does the dishes on ' day
             notes: |-
-                Go around the room to let teh students share the programs that they came up with. Then show this next example and let the students predict the output.
+                Go around the room to let the students share the programs that they came up with. Then show this next example and let the students predict the output.
         4:
             header: Debugging
             text: Let's debug this code
