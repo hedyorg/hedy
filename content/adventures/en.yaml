@@ -1,6 +1,6 @@
 adventures:
     story:
-        name: Story
+        name: story
         default_save_name: Story
         description: Make a short story
         levels:
@@ -144,18 +144,12 @@ adventures:
                     ```
                     character = {ask} 'Who will help you on your quest?'
                     {if} character {is} 'Daisy'
-                        {print} 'You have picked Daisy! She is the smartest of them all!'
-                        {print} "Daisy immediately tells you that you shouldn't eat those berries over there."
+                    {print} 'You have picked Daisy! She is the smartest of them all!'
                     {elif} character {is} 'Jason'
-                        {print} 'You have picked Jason! He is the strongest of them all!'
-                        {print} 'Jason lifts up a boulder, showing a secret map underneath.'
+                    {print} 'You have picked Jason! He is the strongest of them all!'
                     {elif} character {is} 'Sam'
-                        {print} 'You have picked Sam! They are the quickest of them all!'
-                        {print} 'Sam climbs up a tree and sees that there is a village not far away...'
+                    {print} 'You have picked Sam! They are the quickest of them all!'
                     ```
-
-                                
-
             8:
                 story_text: |
                     In a story, someone says words several times. For example, when someone calls for help or sings a song.
@@ -403,7 +397,7 @@ adventures:
                         {print} 'You are not Hedy!'
                     ```
     calculator:
-        name: Calculator
+        name: calculator
         default_save_name: Calculator
         description: Create a calculator
         levels:
@@ -544,7 +538,7 @@ adventures:
                     {print}('You win!')
                     ```
     calculator_2:
-        name: Calculator 2
+        name: calculator 2
         default_save_name: Calculator 2
         description: Calculator 2
         levels:
@@ -605,6 +599,22 @@ adventures:
                     {clear}
                     {print} 'SURPRISE!'
                     ```
+    congratulations:
+        name: congratulations
+        default_save_name: now_what
+        description: end of Hedy
+        levels:
+            8:
+                story_text: |
+                    Congratulations! You have reached the end of Hedy Basic! You can continue learning in Hedy Advanced (level 9-12), where you can learn more complex programming concepts.
+                    Or feel free to stay in Hedy Basic and come up with your own programs, of course!
+            12:
+                story_text: |
+                    Congratulations! You have reached the end of Hedy Advanced! You can continue learning in Hedy Expert (level 13-16), where you can learn how to write real Python code.
+                    Or feel free to stay in Hedy Advanced and come up with your own programs, of course!
+            16:
+                story_text: |
+                    Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like Replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
     debugging:
         name: debugging
         default_save_name: debugging
@@ -896,7 +906,7 @@ adventures:
                     {print} 'That will be ' price ' dollars please.'
                     ```
     dice:
-        name: Dice
+        name: dice
         default_save_name: Dice
         description: Make your own dice
         levels:
@@ -1014,7 +1024,7 @@ adventures:
                     {print}('Yes! You have thrown 6 in ', tries, ' tries.')
                     ```
     dishes:
-        name: Dishes?
+        name: dishes?
         default_save_name: Dishes
         description: Use the computer to see who does the dishes
         levels:
@@ -1126,6 +1136,8 @@ adventures:
                 story_text: |
                     In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
                     Check it out!
+                    ### Exercise
+                    Make your own wheel of fortune, where you can win different prizes and get corresponding reactions
                 example_code: |
                     ```
                     prizes is 1 million dollars, an apple pie, nothing
@@ -1177,7 +1189,7 @@ adventures:
                         {print} (i)
                     ```
     fortune:
-        name: Fortune teller
+        name: fortune teller
         default_save_name: Fortune Teller
         description: Let Hedy predict the future
         levels:
@@ -1448,7 +1460,7 @@ adventures:
                     {print} ('Your score is... ', score)
                     ```
     guess_my_number:
-        name: Guess my number
+        name: guess my number
         default_save_name: guess my number
         description: guess my number
         levels:
@@ -1476,7 +1488,7 @@ adventures:
                                 game = 'over'
                     ```
     harry_potter:
-        name: Harry Potter
+        name: harry potter
         default_save_name: Harry Potter
         description: Harry Potter adventures
         levels:
@@ -1497,7 +1509,7 @@ adventures:
                     _ {print} name 's greatest fear is ' fears {at} {random}
                     ```
     haunted:
-        name: Haunted House
+        name: haunted house
         default_save_name: Haunted House
         description: Escape from the haunted house
         levels:
@@ -1679,8 +1691,8 @@ adventures:
                         {print} ('GAME OVER')
                     ```
     hospital:
-        name: Hospital
-        default_save_name: Hospital
+        name: hospital
+        default_save_name: hospital
         description: Hospital
         levels:
             1:
@@ -1832,28 +1844,29 @@ adventures:
                     * Print the personnel number.
             14:
                 story_text: |
-                    Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
-                    Can you help by writing a program that'll print the correct tasklist for that day?
-                    ### Exercise
-                    The program should:
-                    * Wish the janitor a goodmorning.
-                    * Ask the janitor what day of the week it is, which month and which day of the month.
-                    * Print the correct tasklist for that day.
-                    The tasks that should be done:
-                    * Everyday tasks: mop the floor, clean the toilets, open the curtains
-                    * On mondays and thursdays: water the plants
-                    * On tuesday and fridays: mop the floors
-                    * On saturdays: wash the coffeemachine
-                    * On the first of each month: wash the windows
-                    * On the 7th of each month: refill the vending machines
-                    * On the 14th of each month: check the batteries for the fire alarms
-                    * Everyday in wintermonths: turn on the heaters
-                    * Everyday in summermonths: turn on the airconditioning
+                  Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
+                  Can you help by writing a program that'll print the correct tasklist for that day?
+                  ### Exercise
+                  The program should:
+                  * Wish the janitor a goodmorning.
+                  * Ask the janitor what day of the week it is, which month and which day of the month.
+                  * Print the correct tasklist for that day.
+                  The tasks that should be done:
+                  * Everyday tasks: mop the floor, clean the toilets, open the curtains
+                  * On mondays and thursdays: water the plants
+                  * On tuesday and fridays: mop the floors
+                  * On saturdays: wash the coffeemachine
+                  * On the first of each month: wash the windows
+                  * On the 7th of each month: refill the vending machines
+                  * On the 14th of each month: check the batteries for the fire alarms
+                  * Everyday in wintermonths: turn on the heaters
+                  * Everyday in summermonths: turn on the airconditioning
                 example_code: |
-                    The program should end like this:
-                      ```
-                      make_tasklist(day, month, date)
-                      ```
+                  The program should end like this:
+                    ```
+                    _The program should end like this_
+                    make_tasklist(day, month, date)
+                    ```
             15:
                 story_text: |
                     After surgery our patients can sometimes experience a lot of pain. In those cases our patients can be given a morphine pump. They can administer some morphine themselves if they are in pain.
@@ -2079,7 +2092,7 @@ adventures:
                         {print}('You are not Hedy')
                     ```
     language:
-        name: Language
+        name: language
         default_save_name: Language
         description: Practice words in a foreign language
         levels:
@@ -2271,6 +2284,24 @@ adventures:
                     answer {is} {ask} 'What is the capital of Zimbabwe?'
                     {if} answer {is} Harare {play} C6
                     _
+                    ```
+            6:
+                story_text: |
+                    With `{elif}` you can play different tunes for different situations. For example if a person is feeling happy, you can play them a happy tune.
+                    ### Exercise
+                    First create a sad tune, then create at least 2 other tunes for different moods.
+                example_code: |
+                    ```
+                    mood = {ask} 'How are you feeling today?'
+                    {if} mood {is} happy
+                        {play} C4
+                        {play} E4
+                        {play} G4
+                        {play} C5
+                    {elif} mood {is} sad
+                        {play} _
+                    {elif} mood {is} _
+                        {play} _
                     ```
             7:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\nThis calls for musical maths! Try out the example code a couple of times with different starting numbers.\nThen, see if you can compose a song using the numbers.\n"
@@ -2487,7 +2518,7 @@ adventures:
                         {print} '🥳'
                     ```
     parrot:
-        name: Parrot
+        name: parrot
         default_save_name: Parrot
         description: Create your own online pet parrot that will copy you!
         levels:
@@ -2579,7 +2610,7 @@ adventures:
                     _ _ '🧒 No, Hedy! Say ' new_word
                     ```
     piggybank:
-        name: Piggy Bank
+        name: piggy bank
         default_save_name: Piggy Bank
         description: Count your pocket money!
         levels:
@@ -2625,7 +2656,7 @@ adventures:
                     _
                     ```
     pressit:
-        name: Key presses
+        name: '{pressed}'
         default_save_name: Pressed
         description: Try linking a keyboard key to a command!
         levels:
@@ -2729,7 +2760,7 @@ adventures:
                     {print}('My name is ', name)
                     ```
     quizmaster:
-        name: Quizmaster
+        name: quizmaster
         default_save_name: Quizmaster
         description: Make your own quiz!
         levels:
@@ -2935,7 +2966,7 @@ adventures:
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
     restaurant:
-        name: Restaurant
+        name: restaurant
         default_save_name: Restaurant
         description: Create your own virtual restaurant
         levels:
@@ -3194,7 +3225,7 @@ adventures:
                     {print} 'Thank you!'
                     ```
     rock:
-        name: Rock, paper, scissors
+        name: rock, paper, scissors
         default_save_name: Rock_2
         description: Make your own rock, paper, scissors game
         levels:
@@ -3334,7 +3365,7 @@ adventures:
                     _
                     ```
     rock_2:
-        name: Rock, paper, scissors 2
+        name: rock, paper, scissors 2
         default_save_name: rock_2
         description: Part 2 of rock, paper, scissors
         levels:
@@ -3350,7 +3381,7 @@ adventures:
                     {print} I choose choice
                     ```
     secret:
-        name: SuperSpy
+        name: super spy
         default_save_name: SuperSpy
         description: Make your own spy code
         levels:
@@ -3390,7 +3421,7 @@ adventures:
                     {print} green!
                     ```
     songs:
-        name: Sing a song!
+        name: sing a song!
         default_save_name: Song
         description: Print a song
         levels:
@@ -3530,14 +3561,14 @@ adventures:
                     ```
             13:
                 story_text: |
-                    In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.
+                    Now that we are using Python syntax, the songs you've coded before will need Python syntax too!
 
                     ### Exercise 1
                     The Drunken sailor song is given as sample code, but not yet working.
                     Can you make sure everything works again? To help you, we've put _ in the places of _some_ errors.
 
                     ### Exercise 2
-                    Now also look up your Old MacDonald song from level 16, and correct it.
+                    Now also look up your Old MacDonald song from before and correct it.
                 example_code: |
                     ```
                     lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
@@ -3550,7 +3581,7 @@ adventures:
                         {print} 'early in the morning'
                     ```
     songs_2:
-        name: Sing a song! 2
+        name: sing a song! 2
         default_save_name: Song 2
         description: Sing a song 2
         levels:
@@ -3598,7 +3629,7 @@ adventures:
                     movement = 'round and round', 'open and shut', _
                     ```
     turtle:
-        name: Turtle
+        name: turtle
         default_save_name: Turtle
         description: Make your own drawing
         levels:
@@ -3836,7 +3867,7 @@ adventures:
                     {call} square
                     ```
     turtle_draw_it:
-        name: Draw it!
+        name: draw it!
         default_save_name: Draw it
         description: Draw this picture with the turtle
         levels:
@@ -4124,13 +4155,13 @@ adventures:
                     {print} 'A correct answer has been given'
                     ```
     years:
-        name: New Year's
+        name: new year's
         default_save_name: New Year's Countdown
         description: Countdown to the New Year!
         levels:
-            7:
+            8:
                 story_text: |
-                    Ccountdown to the New Year.
+                    Countdown to the New Year.
 
                     ### Exercise
                     Fill in the blanks and make the code work!
