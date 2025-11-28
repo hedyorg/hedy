@@ -797,11 +797,6 @@ adventures:
                     {for} tag {in} tage
                         {print} namen {at} {random} ' ist mit dem Abwasch dran am ' tag
                     ```
-    elif_command:
-        levels:
-        default_save_name: sofalls
-        description: '{elif}'
-        name: '{elif}'
     for_command:
         default_save_name: für
         description: '{for} Befehl'
@@ -1056,11 +1051,6 @@ adventures:
                     punkte = berechne_punkte(antwort, richtige_antwort)
                     {print} ('Dein Punktestand ist... ', punkte)
                     ```
-    guess_my_number:
-        levels:
-        default_save_name: Errate meine Zahl
-        name: Errate meine Zahl
-        description: Errate meine Zahl
     harry_potter:
         description: Harry Potter Abenteuer
         levels:
@@ -1818,11 +1808,6 @@ adventures:
         name: '{print}'
         description: Einführung des {print} Befehls
         default_save_name: drucke
-    quizmaster:
-        name: Quizmeister
-        default_save_name: Quizmeister
-        description: Mache dein eigenes Quiz!
-        levels:
     quotation_marks:
         name: '''Anführungszeichen'''
         levels:
@@ -2955,8 +2940,3 @@ adventures:
                 example_code: "```\nantwort = 0\n{while} antwort != 25\n    antwort = {ask} 'Was ist 5 mal 5?'\n{print} 'Eine richtige Antwort wurde gegeben'\n```\n"
         default_save_name: solange_Befehl
         name: '{while}'
-    years:
-        name: Neujahr
-        default_save_name: Neujahrs-Countdown
-        description: Countdown zum neuen Jahr!
-        levels:

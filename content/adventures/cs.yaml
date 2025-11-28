@@ -747,11 +747,6 @@ adventures:
             12:
                 example_code: "```\nstrany = 'levá', 'pravá'\nkončetiny = 'ruka', 'noha'\nbarvy = 'červená', 'modrá', 'zelená', 'žlutá'\n\n{define} otočit\n    zvolená_strana = strany {at} {random}\n    zvolená_končetina = končetiny _\n    zvolená_barva = barvy _\n    {print} zvolená_strana ' ' zvolená_končetina ' na ' zvolená_barva\n\n{print} 'Zahrajeme si hru Twister!'\n{for} i {in} {range} 1 {to} _\n    {call} otočit\n    {sleep} 2\n```\n"
                 story_text: "V této úrovni se naučíte používat **funkce**. Funkce je blok kódu, který můžete snadno použít vícekrát. Používání funkcí nám pomáhá uspořádat části kódu, které můžeme používat opakovaně.\nChcete-li vytvořit funkci, použijte `{define}` a pojmenujte ji. Poté vložte všechny řádky, které chcete ve funkci mít, do odsazeného bloku pod řádek `{define}`.\nV kódu ponechte jeden prázdný řádek, aby vypadal pěkně a přehledně. Skvělá práce! Vytvořili jste funkci!\n\nNyní, kdykoli budeme tento blok kódu potřebovat, stačí použít <code>{call}</code> s názvem funkce, abychom ji vyvolali! Nemusíme tento blok kódu psát znovu.\n\nPodívejte se na tento příklad kódu hry Twister. Funkce 'turn' obsahuje blok kódu, který vybírá, kam má jít která končetina.\n\n### Cvičení\nDokončete tento kód nastavením 2 proměnných zvolená_končetina a zvolená_barva.\nPoté zvolte, kolikrát chcete zavolat funkci, aby se twisterový spinner roztočil.\n\n### Cvičení 2\nVylepšete svůj kód přidáním proměnné s názvem ' lidi'. Pomocí této proměnné dejte všem hráčům ve hře jejich vlastní příkaz.\nNapříklad: „Ahmed, pravá ruka na zelenou“ nebo „Jessica, levá noha na žlutou“.\n"
-    elif_command:
-        name: '{elif}'
-        default_save_name: elif
-        description: '{elif}'
-        levels:
     debugging:
         levels:
             1:
@@ -859,11 +854,6 @@ adventures:
                 example_code: "```\n{print} 'Digitální prasátko'\npřání = {ask} 'Co byste si chtěli koupit?'\ncena = {ask} 'Kolik to stojí?'\nuloženo = {ask} 'Kolik peněz jste již ušetřili?'\nkapesné = {ask} 'Kolik kapesného dostáváš týdně?'\nspořit = cena - ušetřeno\ntýdny = spořit / kapesné\n{print} 'Můžeš si koupit ' _ ' za ' _ ' týdnů.'\n```\n"
             15:
                 story_text: "### Cvičení\nV této úrovni si můžete nechat od Hedy říct, jestli máte našetřeno dost peněz!\nDokončete tento kód vyplněním prázdných políček!\n"
-    guess_my_number:
-        name: Uhodni moje číslo
-        default_save_name: uhodni moje číslo
-        description: uhodni moje číslo
-        levels:
     hotel:
         name: hotel
         default_save_name: hotel
@@ -963,11 +953,6 @@ adventures:
             5:
                 example_code: "Nápověda:\n```\nvybrané_písmeno {is} {ask} 'Které písmeno byste chtěli vidět? F, E nebo L?'\n{if} _\n```\n"
         default_save_name: Nakreslete to
-    quizmaster:
-        levels:
-        name: Kvízmistr
-        default_save_name: Kvízmistr
-        description: Vytvořte si vlastní kvíz!
     rock_2:
         description: 2. část hry kámen, nůžky, papír
         default_save_name: kámen_2
@@ -1005,8 +990,3 @@ adventures:
                 story_text: "Dalším novým příkazem v této úrovni je `{sleep}`, který na sekundu pozastaví váš program. Pokud za příkazem {sleep} napíšete číslo, program se na tuto dobu pozastaví.\n\n### Cvičení\nProcvičte si tento nový příkaz tak, že vytvoříte vlastní kód, ve kterém použijete příkaz {sleep} alespoň třikrát. S každým příkazem {sleep} by se měla doba pozastavení lišit.\n"
                 example_code: "```\n{print} Moje oblíbená barva je...\n{sleep} 2\n{print} zelená!\n```\n"
         default_save_name: spánek_příkaz
-    songs_2:
-        name: Zazpívejte si píseň! 2
-        description: Zazpívejte si píseň! 2
-        levels:
-        default_save_name: Píseň 2
