@@ -53,15 +53,6 @@ class TestsTranslationLevel5(HedyTester):
 
         self.assertEqual(expected, result)
 
-    def test_in_list_english_dutch(self):
-        code = "if color in pretty_colors print 'pretty!'"
-
-        result = hedy_translation.translate_keywords(
-            code, from_lang="en", to_lang="nl", level=self.level)
-        expected = "als color in pretty_colors print 'pretty!'"
-
-        self.assertEqual(expected, result)
-
     def test_print_dutch_english(self):
         code = "print 'Hallo welkom bij Hedy!'"
 
@@ -135,15 +126,6 @@ class TestsTranslationLevel5(HedyTester):
 
         self.assertEqual(expected, result)
 
-    def test_in_list_dutch_english(self):
-        code = "als hond in dieren print 'Cute!'"
-
-        result = hedy_translation.translate_keywords(
-            code, from_lang="nl", to_lang="en", level=self.level)
-        expected = "if hond in dieren print 'Cute!'"
-
-        self.assertEqual(expected, result)
-
     @parameterized.expand(
         HedyTester.as_list_of_tuples(
             all_keywords["if"],
@@ -165,12 +147,5 @@ class TestsTranslationLevel5(HedyTester):
         code = textwrap.dedent(f"""\
             letters is a, b, c
             if letters is '10' print 'wrong!'""")
-
-        self.verify_translation(code, "en", self.level)
-
-    def test_in_list_type_error_translates_command(self):
-        code = textwrap.dedent(f"""\
-            letters is 'test'
-            if 10 in letters print 'wrong!'""")
 
         self.verify_translation(code, "en", self.level)

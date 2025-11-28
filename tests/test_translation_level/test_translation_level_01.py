@@ -175,6 +175,7 @@ class TestsTranslationLevel1(HedyTester):
         self.multi_level_tester(
             lang=lang,
             code=code,
+            max_level=12,
             exception=hedy.exceptions.InvalidArgumentTypeException,
             extra_check_function=self.exception_command(forward)
         )

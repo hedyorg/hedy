@@ -516,7 +516,7 @@ class TestsLevel3(HedyTester):
         forward a""")
 
         self.multi_level_tester(
-            max_level=15,
+            max_level=12,
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
@@ -565,7 +565,7 @@ class TestsLevel3(HedyTester):
         turn a""")
 
         self.multi_level_tester(
-            max_level=15,
+            max_level=12,
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException

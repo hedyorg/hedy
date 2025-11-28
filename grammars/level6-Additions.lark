@@ -3,9 +3,9 @@
 
 //if, conditions and else on different lines from level 6
 
-if_clause: _IF (condition|error_condition|condition_spaces) _EOL _if_less_command
-else_clause: _ELSE _EOL _if_less_command
-elif_clause: _ELIF (condition|error_condition|condition_spaces) _EOL _if_less_command
+if_clause: _IF (condition|condition_spaces) _SPACE? _EOL _if_less_command
+else_clause: _ELSE _SPACE? _EOL _if_less_command
+elif_clause: _ELIF (condition|condition_spaces) _SPACE? _EOL _if_less_command
 
 ifelifelse: if_clause (_EOL elif_clause)* (_EOL else_clause)?
 

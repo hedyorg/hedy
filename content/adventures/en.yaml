@@ -142,7 +142,7 @@ adventures:
                     Create your own story with 3 or more options using the {elif}.
                 example_code: |
                     ```
-                    character = {ask} 'Who will help you on your quest?'
+                    character {is} {ask} 'Who will help you on your quest?'
                     {if} character {is} 'Daisy'
                     {print} 'You have picked Daisy! She is the smartest of them all!'
                     {elif} character {is} 'Jason'

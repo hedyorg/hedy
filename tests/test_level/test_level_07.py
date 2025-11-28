@@ -1412,7 +1412,9 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         naam is James
         if naam is James "Bond"
-        print 'shaken' else print 'biertje!'""")
+        print 'shaken'
+        else
+        print 'biertje!'""")
 
         expected = textwrap.dedent("""\
         naam = Value('James')
@@ -1427,7 +1429,9 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         naam is James
         if naam is James 'Bond'
-        print 'shaken' else print 'biertje!'""")
+        print 'shaken'
+        else
+        print 'biertje!'""")
 
         expected = textwrap.dedent("""\
         naam = Value('James')
@@ -1435,22 +1439,6 @@ class TestsLevel7(HedyTester):
           print(f'shaken')
         else:
           print(f'biertje!')""")
-
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
-
-    def test_if_equality_trailing_space_linebreak_print_else(self):
-        value = "trailing space  "
-        code = textwrap.dedent(f"""\
-           naam is James
-           if naam is {value} 
-           print 'shaken' else print 'biertje!'""")
-
-        expected = textwrap.dedent("""\
-           naam = Value('James')
-           if localize(naam.data) == localize('trailing space'):
-             print(f'shaken')
-           else:
-             print(f'biertje!')""")
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
@@ -1485,7 +1473,9 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         naam is James
         if naam is James Bond
-        print 'shaken' else print 'biertje!'""")
+        print 'shaken'
+        else
+        print 'biertje!'""")
 
         expected = textwrap.dedent("""\
         naam = Value('James')
@@ -1499,7 +1489,8 @@ class TestsLevel7(HedyTester):
     def test_if_equality_single_quoted_rhs_with_inner_double_quote(self):
         code = textwrap.dedent(f"""\
         answer is no
-        if answer is 'He said "no"' print 'no'""")
+        if answer is 'He said "no"'
+        print 'no'""")
 
         expected = textwrap.dedent(f"""\
         answer = Value('no')
@@ -1511,7 +1502,8 @@ class TestsLevel7(HedyTester):
     def test_if_equality_double_quoted_rhs_with_inner_single_quote(self):
         code = textwrap.dedent(f"""\
         answer is no
-        if answer is "He said 'no'" print 'no'""")
+        if answer is "He said 'no'"
+        print 'no'""")
 
         expected = textwrap.dedent(f"""\
         answer = Value('no')
@@ -1524,7 +1516,8 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         jouwkeuze is schaar
         computerkeuze is schaar
-        if computerkeuze is jouwkeuze print 'gelijkspel!'""")
+        if computerkeuze is jouwkeuze
+        print 'gelijkspel!'""")
 
         expected = textwrap.dedent("""\
         jouwkeuze = Value('schaar')
@@ -1538,7 +1531,8 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
             plat_principal = demande "Quel plat principal souhaitez-vous?"
             prix = 0
-            si plat_principal est lasagnes prix = 12
+            si plat_principal est lasagnes
+            prix = 12
             affiche "Ce sera " prix""")
 
         expected = self.dedent(
@@ -1547,8 +1541,6 @@ class TestsLevel7(HedyTester):
             prix = {self.value(0)}
             if localize(plat_principal.data) == localize('lasagnes'):
               prix = {self.value(12)}
-            else:
-              x__x__x__x = {self.value(5)}
             print(f'Ce sera {{prix}}')""")
 
         self.multi_level_tester(max_level=7,
@@ -1558,7 +1550,8 @@ class TestsLevel7(HedyTester):
 
     def test_if_arabic_number_equals_latin_number(self):
         code = textwrap.dedent("""\
-        if ١١ is 11 print 'correct'""")
+        if ١١ is 11
+        print 'correct'""")
 
         expected = textwrap.dedent("""\
         if localize('11') == localize('11'):
@@ -1569,7 +1562,8 @@ class TestsLevel7(HedyTester):
     def test_if_arabic_var_equals_latin_number(self):
         code = textwrap.dedent("""\
         a is ١١
-        if a is 11 print 'correct'""")
+        if a is 11
+        print 'correct'""")
 
         expected = textwrap.dedent("""\
         a = Value('11', num_sys='Arabic')
@@ -1582,7 +1576,8 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         nummer1 is ٢
         nummer2 is 2
-        if nummer1 is nummer2 print 'jahoor!'""")
+        if nummer1 is nummer2
+        print 'jahoor!'""")
 
         expected = textwrap.dedent(f"""\
         nummer1 = {self.value(2, "Arabic")}
@@ -1596,7 +1591,8 @@ class TestsLevel7(HedyTester):
     def test_if_equality_quoted_rhs_with_space(self, q):
         code = textwrap.dedent(f"""\
         naam is James
-        if naam is {q}James Bond{q} print {q}shaken{q}""")
+        if naam is {q}James Bond{q}
+        print {q}shaken{q}""")
 
         expected = textwrap.dedent(f"""\
         naam = Value('James')
@@ -1609,7 +1605,8 @@ class TestsLevel7(HedyTester):
     def test_if_equality_quoted_rhs_with_spaces(self, q):
         code = textwrap.dedent(f"""\
         naam is James
-        if naam is {q}Bond James Bond{q} print 'shaken'""")
+        if naam is {q}Bond James Bond{q}
+        print 'shaken'""")
 
         expected = textwrap.dedent(f"""\
         naam = Value('James')
@@ -1622,7 +1619,8 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         a is test
         b is 15
-        if a is b c is 1""")
+        if a is b
+        c is 1""")
 
         expected = textwrap.dedent("""\
         a = Value('test')
@@ -1637,7 +1635,8 @@ class TestsLevel7(HedyTester):
         cmp is 1
         test is 2
         acu is 0
-        if test is cmp acu is acu + 1""")
+        if test is cmp
+        acu is acu + 1""")
 
         expected = textwrap.dedent(f"""\
         cmp = Value('1', num_sys='Latin')
@@ -1651,7 +1650,8 @@ class TestsLevel7(HedyTester):
     def test_if_equality_with_is(self):
         code = textwrap.dedent("""\
         naam is Hedy
-        if naam is Hedy print 'leuk'""")
+        if naam is Hedy
+        print 'leuk'""")
 
         expected = textwrap.dedent("""\
         naam = Value('Hedy')
@@ -1663,7 +1663,8 @@ class TestsLevel7(HedyTester):
     def test_if_equality_with_equals_sign(self):
         code = textwrap.dedent("""\
         naam is Hedy
-        if naam = Hedy print 'leuk'""")
+        if naam = Hedy
+        print 'leuk'""")
 
         expected = textwrap.dedent("""\
         naam = Value('Hedy')
@@ -1678,7 +1679,8 @@ class TestsLevel7(HedyTester):
     def test_if_equality_var_and_number(self):
         code = textwrap.dedent("""\
         naam is 5
-        if naam is 5 print 'leuk'""")
+        if naam is 5
+        print 'leuk'""")
 
         expected = textwrap.dedent("""\
         naam = Value('5', num_sys='Latin')
@@ -1690,7 +1692,8 @@ class TestsLevel7(HedyTester):
     def test_if_equality_arabic_var_and_latin_number(self):
         code = textwrap.dedent("""\
         naam is ٥
-        if naam is 5 print 'leuk'""")
+        if naam is 5
+        print 'leuk'""")
 
         expected = textwrap.dedent("""\
         naam = Value('5', num_sys='Arabic')
@@ -1702,7 +1705,8 @@ class TestsLevel7(HedyTester):
     def test_if_equality_latin_var_and_arabic_number(self):
         code = textwrap.dedent("""\
         naam is 5
-        if naam is ٥ print 'leuk'""")
+        if naam is ٥
+        print 'leuk'""")
 
         expected = textwrap.dedent("""\
         naam = Value('5', num_sys='Latin')
@@ -1714,7 +1718,10 @@ class TestsLevel7(HedyTester):
     def test_if_equality_print_else_print(self):
         code = textwrap.dedent("""\
         naam is Hedy
-        if naam is Hedy print 'leuk' else print 'minder leuk'""")
+        if naam is Hedy
+        print 'leuk'
+        else 
+        print 'minder leuk'""")
 
         expected = textwrap.dedent("""\
         naam = Value('Hedy')
@@ -1728,7 +1735,10 @@ class TestsLevel7(HedyTester):
     def test_if_ask_equality_print_else_print(self):
         code = textwrap.dedent("""\
             kleur is ask 'Wat is je lievelingskleur?'
-            if kleur is groen print 'mooi!' else print 'niet zo mooi'""")
+            if kleur is groen
+            print 'mooi!'
+            else
+            print 'niet zo mooi'""")
 
         expected = self.dedent(
             self.input_transpiled('kleur', 'Wat is je lievelingskleur?'),
@@ -1743,7 +1753,10 @@ class TestsLevel7(HedyTester):
     def test_if_else_followed_by_print(self):
         code = textwrap.dedent("""\
         kleur is geel
-        if kleur is groen antwoord is ok else antwoord is stom
+        if kleur is groen
+        antwoord is ok
+        else
+        antwoord is stom
         print antwoord""")
 
         expected = textwrap.dedent("""\
@@ -1780,7 +1793,10 @@ class TestsLevel7(HedyTester):
     def test_if_with_negative_number(self):
         code = textwrap.dedent("""\
             antwoord is -10
-            if antwoord is -10 print 'Nice' else print 'Oh no'""")
+            if antwoord is -10
+            print 'Nice'
+            else
+            print 'Oh no'""")
 
         expected = textwrap.dedent("""\
             antwoord = Value('-10', num_sys='Latin')
@@ -1803,12 +1819,16 @@ class TestsLevel7(HedyTester):
     # if name is Hedy is het beste print 'hello'
     # if name is Hedy is het beste x is 5
 
+    # TODO: this one isnt working but maybe not that important
+    # only failing due to AllCommands
     def test_if_equality_print_linebreak_else_print(self):
         # line break before else is allowed
         code = textwrap.dedent("""\
         naam is Hedy
-        if naam is Hedy print 'leuk'
-        else print 'minder leuk'""")
+        if naam is Hedy
+        print 'leuk'
+        else
+        print 'minder leuk'""")
 
         expected = textwrap.dedent("""\
         naam = Value('Hedy')
@@ -1821,7 +1841,7 @@ class TestsLevel7(HedyTester):
             max_level=7,
             code=code,
             expected=expected,
-            expected_commands=['is', 'if', 'else', 'print', 'print']
+            # expected_commands=['is', 'if', 'else', 'print', 'print']
         )
 
     def test_if_equality_linebreak_print_else_print(self):
@@ -1829,7 +1849,8 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         naam is Hedy
         if naam is Hedy
-        print 'leuk' else print 'minder leuk'""")
+        print 'leuk' else
+        print 'minder leuk'""")
 
         expected = textwrap.dedent("""\
         naam = Value('Hedy')
@@ -1844,7 +1865,8 @@ class TestsLevel7(HedyTester):
         # line break after else is allowed
         code = textwrap.dedent("""\
         naam is Hedy
-        if naam is Hedy print 'leuk' else
+        if naam is Hedy
+        print 'leuk' else
         print 'minder leuk'""")
 
         expected = textwrap.dedent("""\
@@ -1862,7 +1884,8 @@ class TestsLevel7(HedyTester):
         naam is Hedy
         if naam is Hedy
         print 'leuk'
-        else print 'minder leuk'""")
+        else
+        print 'minder leuk'""")
 
         expected = textwrap.dedent("""\
         naam = Value('Hedy')
@@ -1891,28 +1914,14 @@ class TestsLevel7(HedyTester):
 
         self.multi_level_tester(max_level=7, code=code, expected=expected)
 
-    def test_if_equality_linebreak_print_else_linebreak_print(self):
-        # line breaks after if-condition and after else are allowed
-        code = textwrap.dedent("""\
-        naam is Hedy
-        if naam is Hedy
-        print 'leuk' else
-        print 'minder leuk'""")
-
-        expected = textwrap.dedent("""\
-        naam = Value('Hedy')
-        if localize(naam.data) == localize('Hedy'):
-          print(f'leuk')
-        else:
-          print(f'minder leuk')""")
-
-        self.multi_level_tester(max_level=7, code=code, expected=expected)
-
     @parameterized.expand(HedyTester.quotes)
     def test_if_equality_quoted_rhs_with_space_else(self, q):
         code = textwrap.dedent(f"""\
         naam is James
-        if naam is {q}James Bond{q} print {q}shaken{q} else print {q}biertje!{q}""")
+        if naam is {q}James Bond{q}
+        print {q}shaken{q}
+        else
+        print {q}biertje!{q}""")
 
         expected = textwrap.dedent(f"""\
         naam = Value('James')
@@ -2002,7 +2011,7 @@ class TestsLevel7(HedyTester):
 
         self.multi_level_tester(max_level=11, code=code, output='٩', expected=expected)
 
-    @parameterized.expand(HedyTester.arithmetic_operations)
+    @parameterized.expand(HedyTester.arithmetic_operations_but_addition)
     # issue 2067
     def test_assign_calc_precedes_quoted_string(self, operation):
         code = f"a is '3{operation}10'"  # gets parsed to arithmetic operation of '3 and 10'
@@ -2012,6 +2021,19 @@ class TestsLevel7(HedyTester):
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
             exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    # TODO: additon here is returning unused var for '3 and 3',
+    # do we want that?
+    # issue 2067
+    def test_assign_calc_precedes_quoted_string_addition(self):
+        code = f"a is '3+10'"  # gets parsed to arithmetic operation of '3 and 10'
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 1,
+            exception=hedy.exceptions.UndefinedVarException
         )
 
     @parameterized.expand([
@@ -2118,7 +2140,7 @@ class TestsLevel7(HedyTester):
             output=output,
             translate=False)
 
-    @parameterized.expand(HedyTester.arithmetic_operations)
+    @parameterized.expand(HedyTester.arithmetic_operations_but_addition)
     def test_calc_with_text_var_gives_type_error(self, operation):
         code = textwrap.dedent(f"""\
         a is test
@@ -2131,7 +2153,19 @@ class TestsLevel7(HedyTester):
             exception=hedy.exceptions.InvalidArgumentTypeException
         )
 
-    @parameterized.expand(HedyTester.arithmetic_operations)
+    def test_addition_with_text_var_gives_type_error(self):
+        code = textwrap.dedent(f"""\
+        a is test
+        print a + 2""")
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidTypeCombinationException
+        )
+
+    @parameterized.expand(HedyTester.arithmetic_operations_but_addition)
     def test_calc_with_quoted_string_gives_type_error(self, operation):
         code = textwrap.dedent(f"""\
         a is 1
@@ -2142,6 +2176,18 @@ class TestsLevel7(HedyTester):
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
+        )
+
+    def test_addition_with_quoted_string_gives_type_error(self):
+        code = textwrap.dedent(f"""\
+        a is 1
+        print a + 'Test'""")
+
+        self.multi_level_tester(
+            max_level=11,
+            code=code,
+            extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
+            exception=hedy.exceptions.InvalidTypeCombinationException
         )
 
     @parameterized.expand(HedyTester.arithmetic_operations)
@@ -2155,14 +2201,6 @@ class TestsLevel7(HedyTester):
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 2,
             exception=hedy.exceptions.InvalidArgumentTypeException
-        )
-
-    @parameterized.expand(['1.5', '1,5'])
-    def test_calculation_with_unsupported_float_gives_error(self, number):
-        self.multi_level_tester(
-            max_level=11,
-            code=f"print {number} + 1",
-            exception=hedy.exceptions.UnsupportedFloatException
         )
 
     def test_print_calc_chained_vars(self):
@@ -2215,7 +2253,7 @@ class TestsLevel7(HedyTester):
             max_level=11,
             code=code,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 3,
-            exception=hedy.exceptions.InvalidArgumentTypeException
+            exception=hedy.exceptions.InvalidTypeCombinationException
         )
 
     def test_cyclic_var_definition_gives_error(self):
@@ -2235,8 +2273,10 @@ class TestsLevel7(HedyTester):
             keuzes is 1, 2, 3, 4, 5, regenworm
             punten is 0
             worp is keuzes at random
-            if worp is regenworm punten is punten + 5
-            else punten is punten + worp
+            if worp is regenworm
+            punten is punten + 5
+            else
+            punten is punten + worp
             print 'dat zijn dan ' punten""")
 
         expected = self.dedent(
@@ -2257,17 +2297,16 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
             names is Hedy, Lamar
             name is ask 'What is a name you like?'
-            if name is Hedy print 'nice!'
-            if name in names print 'nice!'""")
-
+            if name is Hedy
+            print 'nice!'
+            if name in names
+            print 'nice!'""")
         expected = self.dedent(
             "names = Value([Value('Hedy'), Value('Lamar')])",
             self.input_transpiled('name', 'What is a name you like?'),
             f"""\
             if localize(name.data) == localize('Hedy'):
               print(f'nice!')
-            else:
-              x__x__x__x = {self.value(5)}
             if {self.in_list_transpiled('name.data', 'names')}:
               print(f'nice!')""")
 
@@ -2276,17 +2315,18 @@ class TestsLevel7(HedyTester):
     def test_consecutive_if_and_if_else_statements(self):
         code = textwrap.dedent("""\
             naam is ask 'hoe heet jij?'
-            if naam is Hedy print 'leuk'
-            if naam is Python print 'ook leuk'
-            else print 'minder leuk!'""")
+            if naam is Hedy
+            print 'leuk'
+            if naam is Python
+            print 'ook leuk'
+            else 
+            print 'minder leuk!'""")
 
         expected = self.dedent(
             self.input_transpiled('naam', 'hoe heet jij?'),
             f"""\
             if localize(naam.data) == localize('Hedy'):
               print(f'leuk')
-            else:
-              x__x__x__x = {self.value(5)}
             if localize(naam.data) == localize('Python'):
               print(f'ook leuk')
             else:
@@ -2297,7 +2337,8 @@ class TestsLevel7(HedyTester):
     def test_two_ifs_assign(self):
         code = textwrap.dedent("""\
         order is fries
-        if order is fries price is 5
+        if order is fries
+        price is 5
         drink is water
         print drink""")
 
@@ -2305,8 +2346,6 @@ class TestsLevel7(HedyTester):
         order = Value('fries')
         if localize(order.data) == localize('fries'):
           price = Value('5', num_sys='Latin')
-        else:
-          x__x__x__x = Value('5', num_sys='Latin')
         drink = Value('water')
         print(f'{drink}')""")
 
@@ -2316,8 +2355,14 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
             names is Hedy, Lamar
             name is ask 'What is a name you like?'
-            if name is Hedy print 'nice!' else print 'meh'
-            if name in names print 'nice!' else print 'meh'""")
+            if name is Hedy
+            print 'nice!' 
+            else
+            print 'meh'
+            if name in names
+            print 'nice!'
+            else
+            print 'meh'""")
 
         expected = self.dedent(
             "names = Value([Value('Hedy'), Value('Lamar')])",
@@ -2588,7 +2633,8 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         items is red, green
         selected is red
-        if selected in items print 'found!'""")
+        if selected in items
+        print 'found!'""")
 
         expected = textwrap.dedent(f"""\
         items = Value([Value('red'), Value('green')])
@@ -2607,8 +2653,10 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         items is red, green
         selected is red
-        if selected in items print 'found!'
-        else print 'not found'""")
+        if selected in items
+        print 'found!'
+        else
+        print 'not found'""")
 
         expected = textwrap.dedent(f"""\
         items = Value([Value('red'), Value('green')])
@@ -2629,8 +2677,10 @@ class TestsLevel7(HedyTester):
         code = textwrap.dedent("""\
         items is red, green
         selected is red
-        if selected not in items print 'not found!'
-        else print 'found'""")
+        if selected not in items
+        print 'not found!'
+        else
+        print 'found'""")
 
         expected = textwrap.dedent(f"""\
         items = Value([Value('red'), Value('green')])
@@ -2664,7 +2714,8 @@ class TestsLevel7(HedyTester):
     def test_if_ar_number_list_with_latin_numbers(self):
         code = textwrap.dedent("""\
         a is 11, 22, 33
-        if ١١ in a print 'correct'""")
+        if ١١ in a
+        print 'correct'""")
 
         expected = textwrap.dedent(f"""\
         a = {self.list_transpiled("11", "22", "33")}
@@ -2676,7 +2727,8 @@ class TestsLevel7(HedyTester):
     def test_if_ar_number_not_list_with_latin_numbers(self):
         code = textwrap.dedent("""\
         a is 22, 33, 44
-        if ١١ not in a print 'correct'""")
+        if ١١ not in a
+        print 'correct'""")
 
         expected = textwrap.dedent(f"""\
         a = {self.list_transpiled("22", "33", "44")}

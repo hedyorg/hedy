@@ -2,9 +2,9 @@ command: += error_repeat_dep_8 | if_pressed_without_else | if_pressed if_pressed
 
 _commands: (_SPACE command) (_EOL (_SPACE command))*
 
-if_clause: _SPACE* _IF (condition) _EOL _commands _EOL? _END_BLOCK
+if_clause: _SPACE* _IF (condition) _SPACE? _EOL _commands _EOL? _END_BLOCK
 else_clause: _SPACE* _ELSE _EOL _commands _EOL? _END_BLOCK
-elif_clause: _SPACE* _ELIF (condition) _EOL _commands _EOL? _END_BLOCK
+elif_clause: _SPACE* _ELIF (condition) _SPACE? _EOL _commands _EOL? _END_BLOCK
 
 // from level 9 on if_pressed is implemented slightly differently
 if_pressed: _IF (LETTER_OR_NUMERAL | NAME) _IS _PRESSED _EOL (_SPACE command) (_EOL _SPACE command)* _EOL? _END_BLOCK

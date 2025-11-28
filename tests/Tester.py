@@ -136,12 +136,16 @@ class HedyTester(unittest.TestCase):
     number_comparison_commands = ['>', '>=', '<', '<=']
     comparison_commands = number_comparison_commands + ['!=']
     arithmetic_operations = ['+', '-', '*', '/']
+    # addition accepts strings, while the others do not
+    # leading to different errors in some tests
+    arithmetic_operations_but_addition = ['-', '*', '/']
     in_not_in_list_commands = ['in', 'not in']
     quotes = ["'", '"']
     booleans = [('true', True), ('True', True), ('false', False), ('False', False)]
-    commands_level_4 = [("print 'hello'", "print(f'hello')"),
-                        ("name is ask 'who?'", "name = input(f'who?')"),
-                        ('name is Harry', "name = 'Harry'")]
+    commands_level_4 = [
+        ("print 'hello'", "print(f'hello')"),
+        ('name is Harry', "name = 'Harry'")
+    ]
 
     @classmethod
     def setUpClass(cls):
@@ -452,7 +456,7 @@ class HedyTester(unittest.TestCase):
                 {var_name} = input(f'{text}')
                 __ns = get_num_sys({var_name})
                 {var_name} = Value({var_name}, num_sys=__ns)""")
-        elif self.level < 15:
+        elif self.level == 12:
             return textwrap.dedent(f"""\
                 {var_name} = input(f'''{text}''')
                 __ns = get_num_sys({var_name})
