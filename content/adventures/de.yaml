@@ -100,7 +100,7 @@ adventures:
                     {print} _ Der Name der Hauptfigur lautet _ Name
                     _
                     _
-                    {print} Name  _ läuft nun in den Wald hinein _
+                    {print} Name _ läuft nun in den Wald hinein _
                     {print} Name _ fürchtet sich ein wenig _
                     Tiere {is} 🦔, 🐿, 🦉, 🦇
                     {print} _ Da hört er plötzlich ein _ Tiere {at} {random}
@@ -476,7 +476,7 @@ adventures:
 
                     ### Übung
                     Ergänze die `{while}` Schleife in der Funktion, frage die Spieler, was zahl_1 mal zahl_2 ist und drucke ihre Antwort.
-                    Dann mache einen `{call}` der Funktion.
+                    Dann rufe die Funktion auf.
                 example_code: "```\n{define} neue_frage\n    Zahlen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    Zahl_1 = Zahlen {at} {random}\n    Zahl_2 = Zahlen {at} {random}\n    richtig = Zahl_1 * Zahl_2\n    Antwort = 0\n    _\n    _\n    _\n    {print} 'Gut gemacht!'\n\n{print} 'Gib 10 richtige Antworten, um zu gewinnen!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} 'Gewonnen!'\n```\n"
     calculator_2:
         name: Taschenrechner 2
@@ -994,12 +994,12 @@ adventures:
                     Um eine Funktion zu erzeugen, benutze `{define}` und gib der Funktion einen Namen. Dann schreibe alle Zeilen, die in der Funktion sein sollen, in einen eingerückten Block unter der `{define}` Zeile.
                     Lass eine Leerzeile in deinem Code, damit alles hübsch aussieht. Großartig! Du hast eine Funktion erzeugt.
 
-                    Jetzt können wir jedes mal, wenn wir diesen Block Code benötigen, einfach <code>{call}</code> mit dem Namen der Funktion verwenden, um sie aufzurufen. Diesen Block Code müssen wir nicht immer wieder schreiben.
+                    Jetzt können wir jedes mal, wenn wir diesen Block Code benötigen, einfach den Name der Funktion verwenden, um sie aufzurufen. Diesen Block Code müssen wir nicht immer wieder schreiben.
 
                     Schau dir diesen Beispiel Code von einem Spiel Twister an. Die Funktion 'zug' enthält einen Block Code, der bestimmt, wohin welches Körperteil gehen soll.
 
                     ### Übung
-                    Vervollständige den Code, indem du die beiden Variablen gewähltes_körperteil und gewählte_farbe setzt.
+                    Vervollständige den Code, indem du die beiden Variablen `gewähltes_körperteil` und `gewählte_farbe` setzt.
                     Wähle dann, wie oft du die Funktion aufrufen willst, dem Twister den richtige Dreh mit zu eben.
 
                     ### Übung 2
@@ -1550,12 +1550,9 @@ adventures:
                         {play} D
                         {sleep}
 
-                    {call} _
-                    {call} _
-                    {call} _
-                    {call} _
-                    {call} _
-                    {call} _
+                    {call} erste_zeile
+                    _
+                    _
                     ```
             15:
                 story_text: |
@@ -1602,34 +1599,6 @@ adventures:
                     {while} ja_oder_nein = 'ja'
                         {call} song
                         {print} '🥳'
-                    ```
-            14:
-                story_text: |
-                    Verbessere dein 'Old MacDonald' Programm!
-
-                    ### Übung
-                    Nimm das Programm aus Deinem 'Singe eine Lied' Abenteuer und füge Musiknoten hinzu!
-                    Da kannst eine Funktion für jede Zeile des Lieds erstellen und die Funktion aufrufen, nachdem die Zeile gedruckt wurde.
-                    Wir haben die erste Zeile für dich definiert und den Aufruf im Programm eingefügt. Kannst du das ganze Lied vervollständigen?
-                example_code: |
-                    ```
-                    {define} zeile_1
-                        {for} i {in} {range} 1 {to} 3
-                            {play} G
-                        {play} D
-                        {for} i {in} {range} 1 {to} 2
-                            {play} E
-                        {play} D
-
-                    tiere = ['Schwein', 'Hund', 'Kuh']
-                    laute = ['quiek', 'wau', 'muh']
-                    {for} i {in} {range} 1 {to} 3
-                        tier = tiere[i]
-                        laut = laute[i]
-                        {print} 'Old MacDonald hat ’ne Farm'
-                        {call} zeile_1
-                        {print} 'E I E I O!'
-                        _
                     ```
     parrot:
         name: Papagei
@@ -2902,47 +2871,6 @@ adventures:
                         {color} gewählte_farbe
                         {if} form = 'quadrat'
                             {call} zeichne_ein_quadrat
-                    ```
-            14:
-                story_text: |
-                    ### Übung
-                    Mache die Zeichnungen mit der Schildkröte nach!
-
-                    Straße in verschiedenen Größen <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Gefärbte Straße <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Schneesturm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
-                example_code: |
-                    Hinweis Straße in verschiedenen Größen
-                    ```
-                    {define} zeichne_ein_haus {with} größe
-                    _
-
-                    {call} zeichne_ein_haus {with} 90
-                    {call} zeichne_ein_haus {with} 60
-                    {call} zeichne_ein_haus {with} 30
-                    ```
-
-                    Hinweis Farbige Straße
-                    ```
-                    {define} zeichne_ein_haus {with} gewählte_farbe
-                    _
-                    ```
-
-                    Hinweis Schneesturm
-                    ```
-                    {define} zeichne_schneeflocke {with} länge, farbe
-                        _
-
-                    zahlen = 10, 20, 30
-                    färben = _
-
-                    {for} i {in} {range} 1 {to} 5
-                        zufällige_zahl = _
-                        zufällige_farbe = _
-                        {call} zeichne_schneeflocke {with} zufällige_zahl, zufällige_farbe
-                        {color} weiß
-                        {turn} zufällige_zahl * 5
-                        {forward} 80
                     ```
             15:
                 story_text: |
