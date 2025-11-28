@@ -1413,6 +1413,7 @@ levels:
         1:
             header: Welcome to level 12
             text: |-
+                A
                 From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.
                 You can also use functions from this level on!
         2:
@@ -1474,3 +1475,61 @@ levels:
         8:
             header: Ready to try it out?
             text: Enjoy the adventures in level 12!
+
+    13:
+        1:  
+            header: Welcome to level 13
+            text: |-
+                By the end of this lesson, you can:
+                * write code that is all real Python code
+
+        2:  
+            header: Real Python code
+            text: |-
+                The code we have used until now, was simplified.
+                But now we will start with real Python code.
+
+            notes: |-
+                Explain to your students that Python is a widely used programming language. 
+                Up until now we used different simplified versions of this language.
+                But now we have reached the point where all the language that you use in Hedy is real Python code and thus can be used elsewhere.  
+
+        3: 
+            header: '{print} in Python'
+
+            text: For {print} you will have you to use parentheses from now on
+               
+            code: |-
+                {print} ('This code now looks like real Python language.')
+                {print} ('You can print now outside of Hedy.')
+                {print} ('Congratulations, you have become a programming pro!')
+            notes: |-
+                Ask your students to recall how a print keyword was written before. 
+                Than show the new code and make sure they all see where the parentheses are.
+
+        4:
+            header: '{range} in real Python'
+            text: |-
+                To count with the {range} keyword you now also need parentheses.
+            code: |-
+                for i in {range} (1, 10):
+                    {print} (i)
+                {print} ('We have counted to 10.')
+            notes:
+        
+        5:
+            header: '{print} multiple items' 
+            text: |-
+                If you want you can combine printing variables and text by using commas to seperate it:
+            code: |-
+                for i in {range} (1, 12):
+                    {print} ('You have completed Hedy level', i)
+                level = 13
+                {print} ('Congrats, you are now in level', level, 'of Hedy.')
+            notes:
+                Let your students predict what will be the outcome of this code. 
+                Than run the code and show how the code prints the text inside the quotation marks literally and what is outside as the value of the variable. 
+                Show what happens if you put 'level' in the last line also in quotation marks.
+
+        6:
+            header: 
