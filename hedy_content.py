@@ -314,112 +314,113 @@ HOUR_OF_CODE_ADVENTURES = {
         'print_command',
         'parrot',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     2: [
-        'default',
+        'is_command',
         'parrot',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     3: [
         'parrot',
         'dishes',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     4: [
         'dishes',
         'parrot',
         'story',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     5: [
         'language',
         'parrot',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     6: [
-        'songs',
-        'dishes',
-        'turtle',
-        'debugging'
+        'story',
+        'music',
+        'fortune',
+        'debugging',
+        'hospital'
     ],
     7: [
-        'songs',
-        'dishes',
+        'maths',
+        'song',
         'restaurant',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     8: [
         'songs',
         'restaurant',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     9: [
+        'songs',
+        'story',
+        'turtle_draw_it',
+        'debugging',
+        'hospital'
+
+    ],
+    10: [
         'rock',
         'restaurant',
         'turtle',
-        'debugging'
-    ],
-    10: [
-        'dishes',
-        'dice',
-        'turtle',
-        'songs',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     11: [
-        'years',
         'songs',
+        'dishes',
         'restaurant',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     12: [
-        'maths',
         'functions',
-        'story',
+        'music',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     13: [
         'story',
-        'rock',
-        'restaurant',
-        'calculator',
-        'debugging'
+        'songs',
+        'hospital'
     ],
     14: [
-        'guess_my_number',
-        'haunted',
-        'hotel',
-        'calculator',
-        'quizmaster',
-        'debugging'
-    ],
-    15: [
-        'restaurant',
-        'story',
-        'dice',
-        'rock',
-        'debugging'
-    ],
-    16: [
         'haunted',
         'songs',
         'language',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
-    17: [
-        'blackjack',
-        'debugging'
-    ],
-    18: [
-        'story',
+    15: [
         'songs',
-        'debugging'
+        'hotel',
+        'calculator',
+        'debugging',
+        'hospital'
+    ],
+    16: [
+        'dice',
+        'music',
+        'language',
+        'guess_my_number', 
+        'debugging',
+        'hospital'
     ]
 }
 
