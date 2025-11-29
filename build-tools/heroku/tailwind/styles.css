@@ -11,6 +11,12 @@ html {
   font-family: 'Balsamiq Sans', sans-serif;
 }
 
+.font-secondary{
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  color: #333333;
+}
+
 .dot {
   height: 25px;
   width: 25px;
@@ -76,11 +82,11 @@ strong {
 /* Apply somewhat fancy styles to running text (good for landing page copy) */
 .text-display-copy h2 {
   text-align: center;
-  @apply text-4xl text-pink-600;
+  @apply text-4xl text-blue-600;
 }
 
 .text-display-copy h3 {
-  @apply text-4xl text-pink-600;
+  @apply text-4xl text-blue-600;
 }
 
 .text-display-copy .columns h3 {
@@ -102,7 +108,7 @@ strong {
 
 .btn-shape {
   @apply font-slab leading-6 font-normal tracking-wide;
-  @apply pt-2 pb-1 px-4 border border-b-4 rounded no-underline;
+  @apply pt-2 pb-1 px-2 rounded-2xl no-underline shadow-md;
   display: inline-block;
 }
 
@@ -147,7 +153,7 @@ strong {
 }
 
 .stripe-colored {
-  @apply bg-yellow-400 border-yellow-500 border-b-4;
+  @apply bg-blue-200 border-blue-300 border-b-4;
 }
 
 .stripe-white { @apply border-b-4; }
@@ -156,7 +162,7 @@ strong {
 .stripe-colored .column-pane a { @apply text-blue-700; }
 .stripe-colored .column-pane { @apply bg-white shadow-md rounded-lg; }
 
-.heading-underline { @apply bg-pink-600 w-36 mx-auto h-1 my-8; }
+.heading-underline { @apply bg-blue-600 w-36 mx-auto h-1 my-8; }
 
 .stripe-colored .heading-underline {
   @apply bg-white;
@@ -366,6 +372,10 @@ h3 {
 
 h4 {
   @apply mt-4 mb-2;
+}
+
+p, li {
+  @apply font-secondary;
 }
 
 pre, code {
