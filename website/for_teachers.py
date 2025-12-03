@@ -1467,7 +1467,11 @@ class ForTeachersModule(WebsiteModule):
                     "quiz_parsons_tabs_migrated": True,
                 }
                 self.db.update_class_customizations(customizations)
-        for level, sorted_adventures in customizations['sorted_adventures'].items():
+        sorted_adventures = {
+            k: v for k, v in customizations.get('sorted_adventures', {}).items() if int(k) <= hedy.HEDY_MAX_LEVEL
+        }
+        
+        for level, sorted_adventures in sorted_adventures.items():
             for adventure in sorted_adventures:
                 if adventure['name'] in adventure_names:
                     sorted_adventure = SortedAdventure(short_name=adventure['name'],
@@ -1511,6 +1515,8 @@ class ForTeachersModule(WebsiteModule):
                                         is_command_adventure=False,)
             # levels=teacher_adventure.get("levels", []))
             for level in teacher_adventure.get("levels", [teacher_adventure.get("level")]):
+                if int(level) > hedy.HEDY_MAX_LEVEL:
+                    continue
                 teacher_adventures[int(level)].add(adventure)
 
         for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
