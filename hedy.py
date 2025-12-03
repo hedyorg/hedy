@@ -1010,7 +1010,7 @@ class TypeValidator(Transformer):
         # If the tree has more than 1 child, then it is not a leaf node, so do not search in the lookup
         if tree.type_ in [HedyType.none, HedyType.string] and len(tree.children) == 1:
             in_lookup, type_in_lookup = self.try_get_type_from_lookup(tree.children[0], tree.meta.line)
-            if in_lookup: 
+            if in_lookup:
                 return type_in_lookup
         # If the value is not in the lookup or the type is other than 'None' or 'string', return evaluated type
         return tree.type_
