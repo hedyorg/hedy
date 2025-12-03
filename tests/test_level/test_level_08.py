@@ -336,7 +336,8 @@ class TestsLevel8(HedyTester):
     def test_repeat_if(self):
         code = textwrap.dedent("""\
         naam is Hedy
-        if naam is Hedy repeat 3 times print 'Hallo Hedy!'""")
+        if naam is Hedy
+        repeat 3 times print 'Hallo Hedy!'""")
 
         expected = textwrap.dedent(f"""\
         naam = Value('Hedy')
@@ -475,8 +476,10 @@ class TestsLevel8(HedyTester):
 
         code = textwrap.dedent("""\
             aan is ja
-            repeat 3 times if aan is ja print 'Hedy is leuk!'
-            repeat 3 times if aan is ja print 'Hedy is leuk!'""")
+            repeat 3 times if aan is ja
+            print 'Hedy is leuk!'
+            repeat 3 times if aan is ja
+            print 'Hedy is leuk!'""")
 
         expected = self.dedent(f"""\
             aan = Value('ja')

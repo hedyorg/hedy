@@ -61,15 +61,6 @@ class TestsTranslationLevel6(HedyTester):
 
         self.assertEqual(code, result)
 
-    def test_ask_with_equals_spanish_english(self):
-        code = "nombre = preguntar '¿Cual es tu nombre?'"
-
-        result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="en", level=self.level)
-
-        expected = "nombre = ask '¿Cual es tu nombre?'"
-
-        self.assertEqual(expected, result)
-
     def test_ask_with_is_spanish_english(self):
         code = "nombre es preguntar '¿Cual es tu nombre?'"
 
@@ -91,27 +82,21 @@ class TestsTranslationLevel6(HedyTester):
     def test_assign_list_var_spanish_english(self):
         code = textwrap.dedent("""\
         lenguajes es Hedy, Python, C
-        a = lenguajes en 0""")
+        a es lenguajes en 0""")
 
         result = hedy_translation.translate_keywords(code, from_lang="es", to_lang="en", level=self.level)
 
         expected = textwrap.dedent("""\
         lenguajes is Hedy, Python, C
-        a = lenguajes at 0""")
+        a is lenguajes at 0""")
 
         self.assertEqual(result, expected)
 
     def test_equality_type_error_translates_command(self):
         code = textwrap.dedent(f"""\
             letters is a, b, c
-            if letters is '10' print 'wrong!'""")
-
-        self.verify_translation(code, "en", self.level)
-
-    def test_expression_type_error_uses_arith_operator(self):
-        code = textwrap.dedent(f"""\
-            a is test
-            print a + 2""")
+            if letters is '10'
+            print 'wrong!'""")
 
         self.verify_translation(code, "en", self.level)
 
@@ -125,3 +110,39 @@ class TestsTranslationLevel6(HedyTester):
         result = hedy_translation.translate_keywords(code, from_lang="ca", to_lang="en", level=self.level)
 
         self.assertEqual(result, 'ruleta1 = ruleta at random')
+
+    def test_in_list_english_dutch(self):
+        code = textwrap.dedent("""\
+        if color in pretty_colors
+        print 'pretty!""")
+
+        result = hedy_translation.translate_keywords(
+            code, from_lang="en", to_lang="nl", level=self.level)
+
+        expected = textwrap.dedent("""\
+        als color in pretty_colors
+        print 'pretty!""")
+
+        self.assertEqual(expected, result)
+
+    def test_in_list_dutch_english(self):
+        code = textwrap.dedent("""\
+        als color in pretty_colors
+        print 'pretty!""")
+
+        result = hedy_translation.translate_keywords(
+            code, from_lang="nl", to_lang="en", level=self.level)
+
+        expected = textwrap.dedent("""\
+        if color in pretty_colors
+        print 'pretty!""")
+
+        self.assertEqual(expected, result)
+
+    def test_in_list_type_error_translates_command(self):
+        code = textwrap.dedent(f"""\
+            letters is 'test'
+            if 10 in letters
+            print 'wrong!'""")
+
+        self.verify_translation(code, "en", self.level)
