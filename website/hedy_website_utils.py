@@ -33,6 +33,8 @@ def load_all_adventures_for_index(customizations, user_programs, all_languages_a
     sorted_adventures = customizations.get('sorted_adventures')
     if not sorted_adventures:
         return all_adventures
+    # We make sure to only get valid levels
+    sorted_adventures = {k: v for k, v in sorted_adventures.items() if int(k) <= hedy.HEDY_MAX_LEVEL}
 
     builtin_map = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     adventure_ids = []
