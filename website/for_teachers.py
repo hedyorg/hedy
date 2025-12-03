@@ -1470,7 +1470,7 @@ class ForTeachersModule(WebsiteModule):
         sorted_adventures = {
             k: v for k, v in customizations.get('sorted_adventures', {}).items() if int(k) <= hedy.HEDY_MAX_LEVEL
         }
-        
+
         for level, sorted_adventures in sorted_adventures.items():
             for adventure in sorted_adventures:
                 if adventure['name'] in adventure_names:
