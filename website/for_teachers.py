@@ -728,6 +728,9 @@ class ForTeachersModule(WebsiteModule):
                 # So skip them
                 if 'adventure_name' not in program:
                     continue
+
+                if str(program['level']) not in class_adventures_formatted:
+                    continue
                 adventures_tried += 1
                 name = adventure_names.get(program['adventure_name'], program['adventure_name'])
                 customized_level = class_adventures_formatted.get(str(program['level']))
