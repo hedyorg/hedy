@@ -1,6 +1,6 @@
 adventures:
     story:
-        name: Historyjka
+        name: historyjka
         default_save_name: Historyjka
         description: Stwórz krótką historyjkę
         levels:
@@ -331,7 +331,7 @@ adventures:
                 example_code: "```\n{print}('Mam na imię Hedy!')\nname = {input}('Jak masz na imię?')\n{print}('Więc masz na imię ', name)\n```\n"
         name: '{ask}'
     calculator:
-        name: Kalkulator
+        name: kalkulator
         default_save_name: Kalkulator
         description: Stwórz kalkulator
         levels:
@@ -452,7 +452,7 @@ adventures:
                     {print}('Wygrałeś!')
                     ```
     calculator_2:
-        name: Kalkulator 2
+        name: kalkulator 2
         default_save_name: Kalkulator 2
         description: Kalkulator 2
         levels:
@@ -485,7 +485,7 @@ adventures:
                     ```
         name: '{clear}'
     dice:
-        name: Kostka do gry
+        name: kostka do gry
         default_save_name: Kostka do gry
         description: Stwórz własną kostkę do gry
         levels:
@@ -603,7 +603,7 @@ adventures:
                     {print} 'Tak! Wrzuciłeś 6 w 'próby' próbach
                     ```
     dishes:
-        name: Zmywanie?
+        name: zmywanie?
         default_save_name: Zmywanie
         description: Użyj komputera, aby sprawdzić, kto zmywa naczynia
         levels:
@@ -709,7 +709,7 @@ adventures:
     elif_command:
         levels:
             6:
-                story_text: "Na tym poziomie możesz używać również nowego polecenia: `{elif}`. `{elif}` to kombinacja słów kluczowych `{else}` i `{if}` i potrzebujesz ich jeśli chcesz pozwolić na 3 (lub więcej!) opcji.\nWypróbuj!\n"
+                story_text: "Na tym poziomie możesz używać również nowego polecenia: `{elif}`. `{elif}` to kombinacja słów kluczowych `{else}` i `{if}` i potrzebujesz ich jeśli chcesz pozwolić na 3 (lub więcej!) opcji.\nWypróbuj!\n### Ćwiczenie\nStwórz swoje własne koło fortuny, gdzie będzie można wygrać różne nagrody i dostać odpowiednie reakcje\n"
                 example_code: "```\nnagrody to 1 million złotych, jabłecznik, nic\ntwoja_nagroda to nagrody {at} {random}\n{print} 'Wygrywasz ' twoja_nagroda\n{if} twoja_nagroda {is} '1 million złotych'\n{print} 'Super! Jesteś bogaty(a)!'\n{elif} twoja_nagroda {is} 'jabłecznik'\n{print} 'Wspaniale, jabłecznik!'\n{else}\n{print} 'Więcej szczęścia następnym razem..'\n```\n"
         default_save_name: elif
         description: '{elif}'
@@ -744,7 +744,7 @@ adventures:
         default_save_name: for
         name: '{for}'
     fortune:
-        name: Wróżka
+        name: wróżka
         default_save_name: Wróżka
         description: Niech Hedy przewidzi przyszłość
         levels:
@@ -922,7 +922,7 @@ adventures:
                 story_text_3: "Zróbmy funkcje tak jak w Pythonie! Aby zdefiniować funkcję nie będziemy używać:\n\n`{define} name_function {with} argument_1, argument_2):`\n\nale używamy:\n\n`{def} name_function(argument_1, argument_2):`.\n\nJeśli nie chcesz używać argumentów po prostu zostaw miejsce między nawiasami puste.\n"
                 example_code_3: "```\n{def} oblicz_wynik(odpowiedź, poprawna_odpowiedź):\n    {if} odpowiedź == poprawna_odpowiedź:\n        wynik = 1\n    {elif} odpowiedź == '?':\n        wynik = 0\n    {else}:\n        wynik = -1\n    {return} wynik \n\nodpowiedź = {input} ('Gdzie można znaleźć więżę Eiffela?')\npoprawna_odpowiedź = 'Paryż'\nwynik = oblicz_wynik(odpowiedź, poprawna_odpowiedź)\n{print} ('Twój wynik to... ', wynik)\n```\n"
     guess_my_number:
-        name: Zgadnij moją liczbę
+        name: zgadnij moją liczbę
         default_save_name: Zgadnij moją liczbę
         description: Zgadnij mój numer
         levels:
@@ -947,10 +947,10 @@ adventures:
                     _ {print} imię ' jest dobry w ' przedmiot {at} {random}
                     _ {print} największy lęk imię to' lęki {at} {random}
                     ```
-        name: Harry Potter
+        name: harry potter
         default_save_name: Harry Potter
     haunted:
-        name: Nawiedzony dom
+        name: nawiedzony dom
         default_save_name: Nawiedzony dom
         description: Ucieknij z nawiedzonego domu
         levels:
@@ -1272,7 +1272,7 @@ adventures:
                 example_code: "```\nwiek = {input}('Ile masz lat?')\n{if} wiek > 12:\n    {print}('Jesteś starszy(a) ode mnie!')\n```\n```\nwiek = {input}('Ile masz lat?')\n{if} wiek < 12:\n    {print}('Jesteś młodszy(a) ode mnie!')\n{else}:\n    {print}('Jesteś starszy(a) ode mnie!')\n```\n"
         name: '{is}'
     language:
-        name: Język
+        name: język
         default_save_name: Język
         description: Ćwicz słowa w języku obcym
         levels:
@@ -1565,36 +1565,11 @@ adventures:
                         piosenka()
                         {print} '🥳'
                     ```
-            14:
-                story_text: |
-                    Ulepsz swój kod dla Pan MacDonald !
-
-                    ### Ćwiczenie
-                    Weź swój kod z przygody „Sing a Song” i dodaj do niego nuty!
-                    Możesz utworzyć funkcję dla każdego wiersza w utworze i wywołać tę funkcję po wyświetleniu wiersza kodu.
-                    Zdefiniowaliśmy dla ciebie pierwszy wiersz i wywołaliśmy go w kodzie. Czy potrafisz dokończyć całą piosenkę?
-                example_code: |
-                    ```
-                    {define} linijka_1
-                        {for} i {in} {range} (1, 3)
-                            {play} G
-                        {play} D
-                        {for} i {in} {range} 1 {to} 2
-                            {play} E
-                        {play} D
-
-                    zwierzęta = ['świnka', 'pies', 'krowa']
-                    dźwięki = ['chrum', 'hau', 'muu']
-                    {for} i {in} {range} (1, 3)
-                        zwierzę = zwierzęta[i]
-                        dźwięk = dźwięki[i]
-                        {print} 'Pan MacDonald farmę miał'
-                        linijka_1()
-                        {print} 'E I E I O!'
-                        _
-                    ```
+            6:
+                example_code: "```\nnastrój = {ask} 'Jak się dzisiaj czujesz?'\n{if} nastrój {is} szczęśliwy\n    {play} C4\n    {play} E4\n    {play} G4\n    {play} C5\n{elif} nastrój {is} smutny\n    {play} _\n{elif} nastrój {is} _\n    {play} _\n```\n"
+                story_text: "Z `{elif}` możesz zagrać różne nuty dla różnych sytuacji. Na przykład jeśli osoba jest szczęśliwa możesz zagrać szczęśliwą melodię.\n### Ćwiczenie\nNajpierw stwórz smutną melodię, potem stwórz co najmniej dwie inne melodie na inne nastroje.\n"
     parrot:
-        name: Papuga
+        name: papuga
         default_save_name: Papuga
         description: Stwórz swoja własną cyfrową papugę która powtórzy wszystko co powiesz!
         levels:
@@ -1686,7 +1661,7 @@ adventures:
                     _ _ '🧒 Nie, Hedy! Powiedz ' nowe_słowo
                     ```
     piggybank:
-        name: Skarbonka
+        name: skarbonka
         default_save_name: Skarbonka
         description: Policz swoje kieszonkowe!
         levels:
@@ -1716,7 +1691,7 @@ adventures:
             7:
                 story_text: "W tej przygodzie nauczysz się jak zrobić cyfrową skarbonkę.\n\n### Ćwiczenie\nDokończ kod obliczający ile masz pieniędzy i ile musisz oszczędzać, żeby kupić to co chcesz!\n**Dodatkowo** Może już masz odłożone jakieś pieniądze? Odejmij tę kwotę od kwoty, którą musisz oszczędzić.\n"
     pressit:
-        name: Naciśnięcia klawiszy
+        name: '{pressed}'
         default_save_name: Naciśnij
         description: Spróbuj przypisać klawisz do konkretnego polecenia!
         levels:
@@ -1802,7 +1777,7 @@ adventures:
         name: '{print}'
         default_save_name: drukuj
     quizmaster:
-        name: Mistrz Quizu
+        name: mistrz Quizu
         default_save_name: Mistrz Quizu
         description: Stwórz własny quiz!
         levels:
@@ -1979,7 +1954,7 @@ adventures:
                 example_code: "```\n_ {print} 'Do you know the muffin man?'\n_ {repeat} 2 {times}\n_ {print} 'The muffin man'\n_ {print} 'Do you know the muffin man, who lives on Drury Lane?'\n```\n"
         name: '{repeat} 2'
     restaurant:
-        name: Restauracja
+        name: restauracja
         default_save_name: Restauracja
         description: Stwórz swoją własną wirtualną restaurację
         levels:
@@ -2171,7 +2146,7 @@ adventures:
                     Poprawnie dodaj do tego kodu polecenie `{while}`
                 example_code: "```\n{print} 'Witamy w McHedy'\nwięcej = 'tak'\n_\n    zamówienie = {ask} 'Co chcesz zamówić?'\n    {print} zamówienie \n    więcej = {ask} 'Czy chciałby Pan/Pani zamówić coś jeszcze?'\n{print} 'Dziękuję!'\n```\n"
     rock:
-        name: Papier, kamień, nożyce
+        name: papier, kamień, nożyce
         default_save_name: Kamień_2
         description: Zrób własną grę w papier, kamień, nożyce
         levels:
@@ -2276,7 +2251,7 @@ adventures:
                     Graj, aż pokonasz komputer! Najpierw dokończ przykładowy kod...
                 example_code: "```\nwygrana = 'nie'\nopcje = 'kamień', 'papier', 'nożyce'\n {while} wygrana == 'nie'\n    twój_wybór = {ask} 'Co wybierasz?'\n    wybór_komputera = opcje {at} {random}\n    {print} 'Ty wybrałeś' twój_wybór \n    {print} 'komputer wybrał ' wybór_komputera\n    {if}  wybór_komputera == twój_wybór\n        {print} 'Remis!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'nożyce'\n        {print} 'Przegrywasz!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'papier'\n        {print} 'Wygrywasz!'\n        wygrana = 'tak'\n_\n```\n"
     rock_2:
-        name: Papier, kamień, nożyce 2
+        name: papier, kamień, nożyce 2
         default_save_name: Kamień_2
         description: Część 2 papier, kamień, nożyce
         levels:
@@ -2292,7 +2267,7 @@ adventures:
                     {print} Wybieram wybór
                     ```
     secret:
-        name: Super Szpieg
+        name: super szpieg
         default_save_name: Super Szpieg
         description: Stwórz swój kod szpiegowski
         levels:
@@ -2332,7 +2307,7 @@ adventures:
                     ```
         name: '{sleep}'
     songs:
-        name: Zaśpiewaj piosenkę!
+        name: zaśpiewaj piosenkę!
         default_save_name: Piosenka
         description: Wyświetl piosenkę
         levels:
@@ -2416,7 +2391,7 @@ adventures:
                 example_code: "```\n{define} piosenka (miejsce)\n    {print} 'Moja Bonnie jest nad ' place\n\nwybrane_miejsce = {ask} 'Gdzie chcesz, żeby była Bonnie?'\nsynonim = {ask} 'Jakie jest inne określenie na to miejsce? '\n\npiosenka (wybrane_miejsce )\npiosenka (synonim )\npiosenka (wybrane_miejsce )\n```\n"
                 story_text: "W poprzedniej przygodzie nauczyłeś(aś) się jak używać argumentów funkcji ale czy wiedziałeś(aś), że możesz je połączyć z poleceniem`{ask}` ?\nW tym przykładzie zmieniliśmy program 'Moja Bonnie' i zrobiliśmy go bardziej interaktywnym. Teraz pytamy gdzie jest Bonnie.\n"
     songs_2:
-        name: Zaśpiewaj piosenkę! 2
+        name: zaśpiewaj piosenkę! 2
         default_save_name: Piosenka 2
         description: Zaśpiewaj piosenkę 2
         levels:
@@ -2449,7 +2424,7 @@ adventures:
                     ruch= [ 'w kółko', 'otwarte i zamknięte', _]
                     ```
     turtle:
-        name: Żółw
+        name: żółw
         default_save_name: Żółw
         description: Stwórz swoje własne obrazki
         levels:
@@ -2642,7 +2617,7 @@ adventures:
                     {call} kwadrat
                     ```
     turtle_draw_it:
-        name: Narysuj to !
+        name: narysuj to !
         default_save_name: Narysuj to
         description: Narysuj ten obrazek za pomocą żółwia
         levels:
@@ -2835,47 +2810,6 @@ adventures:
                         {if} kształt = 'kwadrat'
                             {call} narysuj_kwadrat
                     ```
-            14:
-                story_text: |
-                    ### Ćwiczenie
-                    Odtwórz rysunki za pomocą żółwia!
-
-                    Ulica w różnych rozmiarach <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Pokolorowana ulica  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Śnieżyca <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
-                example_code: |
-                    Wskazówka dotycząca ulicy w różnych rozmiarach
-                    ```
-                    {define} narysuj_dom(rozmiar)
-                    _
-
-                    narysuj_dom(90)
-                    narysuj_dom(60)
-                    narysuj_dom(30)
-                    ```
-
-                    Wskazówka dotycząca pokolorowanej ulicy
-                    ```
-                    {define} narysuj_dom(wybrany_kolor)
-                    _
-                    ```
-
-                    Wskazówka dotycząca śnieżycy
-                    ```
-                    {define} narysuj_śnieżynkę(długość, kolor)
-                        
-
-                    liczby = 10, 20, 30
-                    kolory = _
-
-                    {for} i {in} {range} 1 {to} 5
-                        losowa_liczba = _
-                        losowy_kolor = _
-                        narysuj_śnieżynkę(losowa_liczba, losowy_kolor)
-                        {color} biały
-                        {turn} losowa_liczba * 5
-                        {forward} 80
-                    ```
             15:
                 story_text: |
                     ### Ćwiczenie
@@ -2956,13 +2890,13 @@ adventures:
         description: '{while}'
         name: '{while}'
     years:
-        name: Nowy Rok
+        name: nowy rok
         default_save_name: Odliczanie do Nowego Roku
         description: Odliczanie do Nowego Roku!
         levels:
-            7:
-                story_text: "Odliczanie do nowego roku.\n\n### Ćwiczenie\nUzupełnij luki i napraw ten kod!\n"
-                example_code: "```\nliczba = 10\n{repeat} _\n    {print} liczba \n    {sleep}\n    liczba = liczba - 1\n{print} 'Szczęśliwego nowego roku!'\n```\n"
+            8:
+                story_text: "Odliczanie do nowego roku.\n\n### Ćwiczenie\nUzupełnij luki i spraw aby ten kod zadziałał!\n"
+                example_code: "```\nliczba = 10\n{repeat} _\n    {print} liczba \n    {sleep}\n    liczba = liczba - 1\n{print} 'Szczęśliwego Nowego Roku!'\n```\n"
     and_or_command:
         name: '{and} i {or}'
         default_save_name: komenda_i_lub
@@ -2970,7 +2904,7 @@ adventures:
         levels:
             10:
                 story_text: "Nauczymy się teraz używania komend `{and}` and `{or}`! Jeśli chcesz sprawdzić dwa wyrażenia nie musisz używać dwóch komend warunkowych a zamiast tego możesz użyć `{and}` i `{or}`.\nJeśli użyjesz komendy i oba warunki, po lewej i prawej stronie `{and}` muszą być prawdziwe. Możemy także użyć `{or}`.  Wtedy tylko jeden z nich musi być prawdziwy."
-                example_code: "```\nimię = {ask} 'jak masz na imię?'\nwiek = {ask} 'ile masz lat?'\n{if} imię {is} 'Hedy' {and} wiek {is} 2\n    print 'Jesteś prawdziwą Hedy!'\n{elif} imię {is} 'Hedy' {or} wiek {is} 2\n    {print} 'Tak blisko.. ale nie jesteś Hedy!'\n{else}\n    {print} 'Nie jesteś Hedy!'\n```\n"
+                example_code: "```\nimię = {ask} 'jak masz na imię?'\nwiek = {ask} 'ile masz lat?'\n{if} imię {is} 'Hedy' {and} wiek {is} 2\n    {print} 'Jesteś prawdziwą Hedy!'\n{elif} imię {is} 'Hedy' {or} wiek {is} 2\n    {print} 'Tak blisko.. ale nie jesteś Hedy!'\n{else}\n    {print} 'Nie jesteś Hedy!'\n```\n"
     debugging:
         name: debugowanie
         default_save_name: debugowanie
@@ -3011,13 +2945,22 @@ adventures:
             10:
                 story_text: "### Ćwiczenie\nZdebuguj ten kod. Powodzenia!"
     hospital:
-        default_save_name: Szpital
-        name: Szpital
+        default_save_name: szpital
+        name: szpital
         description: Szpital
         levels:
             14:
-                example_code: "Program powinien się kończyć w ten sposób:\n  ```\n  zrób_listę_zadań(dzień, miesiąc, data)\n  ```\n"
+                example_code: "Program powinien się kończyć w ten sposób:\n  ```\n  _Program powinien się kończyć w ten sposób_\n  zrób_listę_zadań(dzień, miesiąc, data)\n  ```\n"
             8:
                 story_text: "Farba na Naszym lądowisku dla helikoptera ratunkowego starła się. Czy możesz napisać program dla żółwia, który narysuje oznaczenia ponownie?\n### Ćwiczenie\nNarysuj oznaczenia na lądowisku dla helikoptera.\n<img src=\"https://github.com/user-attachments/assets/96deeb9e-b155-4a3d-91f3-3c447df7ce2b\" width=\"200\">\n"
             9:
                 story_text: "Nasz ambulans powinien być naprawiony. Namalowany czerwony krzyż na boku odpada a syrena nie działa.\nCzy możesz to naprawić?\n### Ćwiczenie\nProgram powinien:\n* Narysować czerwony krzyż żółwiem.\n* Wydać dźwięk syreny po skończeniu czerwonego krzyża.\nWSKAZÓWKA: użyj polecenia powtórz.\n"
+    congratulations:
+        name: gratulacje
+        default_save_name: co_teraz
+        description: koniec Hedy
+        levels:
+            8:
+                story_text: "Gratulacje! Dotarłeś(aś) do końca Podstaw Hedy! Możesz kontynuować naukę Zaawansowanego Hedy (poziomy 9-12), gdzie możesz nauczyć się więcej zaawansowanych programistycznych koncepcji.\nAlbo możesz pozostać na Podstawach Hedy i tworzyć swoje własne programy!\n"
+            12:
+                story_text: "Gratulacje! Dotarłeś(aś) do końca Zaawansowanego Hedy! Możesz kontynuować naukę Hedy Ekspert (poziomy 13-16), gdzie możesz nauczyć się pisać prawdziwy kod w Pythonie.\nAlbo pozostań na Zaawansowanym Hedy i twórz swoje własne programy!\n"

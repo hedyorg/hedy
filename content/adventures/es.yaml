@@ -688,11 +688,6 @@ adventures:
                     {for} día {in} días
                         {print} nombres {at} {random} ' Hará los platos el ' día
                     ```
-    elif_command:
-        default_save_name: sinosi
-        levels:
-        name: '{elif}'
-        description: '{elif}'
     for_command:
         default_save_name: para
         description: comando {for}
@@ -905,11 +900,6 @@ adventures:
                         {call} turno
                         {sleep} 2
                     ```
-    guess_my_number:
-        name: Adivina mi número
-        default_save_name: adivina mi número
-        description: adivina mi número
-        levels:
     harry_potter:
         description: Aventuras de Harry Potter
         levels:
@@ -1425,9 +1415,6 @@ adventures:
             16:
                 story_text: "**Precaución** ¡Esta aventura puede ser extremadamente molesta!\nTambién podemos utilizar el comando {while} para repetir una canción para siempre.\n\n### Ejercicio\nCompleta la canción interminable.\n"
                 example_code: "```\n{define} cancion\n    {play} _\n\nsi_o_no = {ask} '¿Quieres oír mi canción interminable?'\n{while} si_o_no = 'sí'\n    {call} cancion\n    {print} '🥳'\n```\n"
-            14:
-                story_text: "¡Mejora tu código de Viejo MacDonald!\n\n### Ejercicio\n¡Coge tu código de la aventura 'Canta una canción' y añádele notas musicales!\nPuedes hacer una función por cada estrofa de la canción y llamar a esa función después de que se imprima la estrofa.\nHemos definido la primera estrofa y la hemos llamado en el código por ti. ¿Puedes completar la canción completa?\n"
-                example_code: "```\n{define} linea_1\n    {for} i {in} {range} 1 {to} 3\n        {play} G\n    {play} D\n    {for} i {in} {range} 1 {to} 2\n        {play} E\n    {play} D\n\nanimales = ['cerdo', 'perro', 'vaca']\nsonidos = ['oink', 'woof', 'moo']\nde i en rango 1 a 3\n    animal = animales[i]\n    sonido = sonidos[i]\n    imprimir 'Old MacDonald tenía una granja'\n    llamar linea_1\n    imprimir 'E I E I O!'\n    _\n```\n"
     parrot:
         name: Loro
         default_save_name: Loro
@@ -1643,11 +1630,6 @@ adventures:
                     {print}('Mi nombre es ', nombre)
                     ```
         name: '{print}'
-    quizmaster:
-        name: Presentador
-        default_save_name: Presentador
-        description: ¡Haz tu propio cuestionario!
-        levels:
     quotation_marks:
         name: '''comillas'''
         default_save_name: comillas
@@ -2728,47 +2710,6 @@ adventures:
                     	{if} forma = 'cuadrado'
                     		{call} dibujar_un_cuadrado
                     ```
-            14:
-                story_text: |
-                    ### Ejercicio
-                    ¡Vuelve a crear los dibujos con la tortuga!
-
-                    Calle en diferentes tamaños <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Calle coloreada  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
-                example_code: |
-                    La Calle de la Pista en diferentes tamaños
-                    ```
-                    {define} dibuja_una_casa {with} tamaño
-                    _
-
-                    {call} dibuja_una_casa {with} 90
-                    {call} dibuja_una_casa {with} 60
-                    {call} dibuja_una_casa {with} 30
-                    ```
-
-                    Calle de la Pista Coloreada
-                    ```
-                    {define} dibuja_una_casa {with} color_elegido
-                    _
-                    ```
-
-                    Tormenta de la Pista de Nieve
-                    ```
-                    {define} dibujar_copo_nieve {with} longitud, color
-                    	_
-
-                    números= 10, 20, 30
-                    colores = _
-
-                    {for} i {in} {range} 1 {to} 5
-                    	número_aleatorio = _
-                    	color_aleatorio = _
-                    	{call} dibujar_copo_nieve {with} número_aleatorio , color_aleatorio
-                    	{color} blanco
-                    	{turn} número_aleatorio * 5
-                    	{forward} 80
-                    ```
             15:
                 story_text: |
                     ### Ejercicio
@@ -2848,11 +2789,6 @@ adventures:
                     ```
         description: '{while}'
         name: '{while}'
-    years:
-        name: Año Nuevo
-        default_save_name: Cuenta atrás para el Año Nuevo
-        description: ¡Cuenta regresiva para el año nuevo!
-        levels:
     hotel:
         name: hotel
         description: hotel

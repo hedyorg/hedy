@@ -62,7 +62,7 @@ customize_babel_locale(CUSTOM_BABEL_LANGUAGES)
 # This creates the lightbulb icons next to the adventure
 KEYWORDS_ADVENTURES = {'print_command', 'ask_command', 'is_command', 'sleep_command', 'random_command',
                        'add_remove_command', 'quotation_marks', 'if_command', 'in_command', 'maths', 'repeat_command',
-                       'repeat_command_2', 'for_command', 'while_command', 'elif_command',
+                       'repeat_command_2', 'for_command', 'and_or_command', 'while_command', 'elif_command',
                        'clear_command', 'pressit', 'debugging', 'functions'}
 
 
@@ -156,6 +156,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     ],
     6: [
         'elif_command',
+        'story',
+        'music',
         'in_command',
         'restaurant',
         'fortune',
@@ -172,7 +174,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'dishes',
         'piggybank',
         'quizmaster',
-        'years',
         'turtle',
         'turtle_draw_it',
         'calculator',
@@ -184,6 +185,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     8: [
         'repeat_command',
         'story',
+        'years',
         'songs',
         'music',
         'dishes',
@@ -194,7 +196,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'pressit',
         'turtle_draw_it',
         'debugging',
-        'hospital'
+        'hospital',
+        'congratulations'
     ],
     9: [
         'repeat_command',
@@ -252,7 +255,8 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'turtle',
         'turtle_draw_it',
         'debugging',
-        'hospital'
+        'hospital',
+        'congratulations'
     ],
     13: [
         'print_command',
@@ -269,7 +273,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'random_command',
         'haunted',
         'songs',
-        'music',
         'language',
         'debugging',
         'hospital'
@@ -298,6 +301,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'guess_my_number',
         'debugging',
         'hospital'
+        'congratulations'
     ],
 }
 
@@ -310,112 +314,113 @@ HOUR_OF_CODE_ADVENTURES = {
         'print_command',
         'parrot',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     2: [
-        'default',
+        'is_command',
         'parrot',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     3: [
         'parrot',
         'dishes',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     4: [
         'dishes',
         'parrot',
         'story',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     5: [
         'language',
         'parrot',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     6: [
-        'songs',
-        'dishes',
-        'turtle',
-        'debugging'
+        'story',
+        'music',
+        'fortune',
+        'debugging',
+        'hospital'
     ],
     7: [
-        'songs',
-        'dishes',
+        'maths',
+        'song',
         'restaurant',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     8: [
         'songs',
         'restaurant',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     9: [
+        'songs',
+        'story',
+        'turtle_draw_it',
+        'debugging',
+        'hospital'
+
+    ],
+    10: [
         'rock',
         'restaurant',
         'turtle',
-        'debugging'
-    ],
-    10: [
-        'dishes',
-        'dice',
-        'turtle',
-        'songs',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     11: [
-        'years',
         'songs',
+        'dishes',
         'restaurant',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     12: [
-        'maths',
         'functions',
-        'story',
+        'music',
         'turtle',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
     13: [
         'story',
-        'rock',
-        'restaurant',
-        'calculator',
-        'debugging'
+        'songs',
+        'hospital'
     ],
     14: [
-        'guess_my_number',
-        'haunted',
-        'hotel',
-        'calculator',
-        'quizmaster',
-        'debugging'
-    ],
-    15: [
-        'restaurant',
-        'story',
-        'dice',
-        'rock',
-        'debugging'
-    ],
-    16: [
         'haunted',
         'songs',
         'language',
-        'debugging'
+        'debugging',
+        'hospital'
     ],
-    17: [
-        'blackjack',
-        'debugging'
-    ],
-    18: [
-        'story',
+    15: [
         'songs',
-        'debugging'
+        'hotel',
+        'calculator',
+        'debugging',
+        'hospital'
+    ],
+    16: [
+        'dice',
+        'music',
+        'language',
+        'guess_my_number',
+        'debugging',
+        'hospital'
     ]
 }
 

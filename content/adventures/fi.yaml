@@ -245,3 +245,16 @@ adventures:
                     nimi = {input}("Mikä on nimesi?")
                     {print}('Tervetuloa tähän tarinaan!')
                     ```
+            6:
+                story_text: "Nyt kun voit käyttää `{elif}`, voit luoda entistä interaktiivisemman tarinan! Voisit esimerkiksi luoda useita hahmoja, joilla kaikilla on erilaisia ominaisuuksia.\nTai voit antaa pelaajan valita, minkä tien hän ottaa, minkä oven hän avaa tai minkä taikajuoman hän juo...\n\n### Harjoitus\nLuo oma tarinasi, jossa on 3 tai useampia vaihtoehtoja käyttäen {elif}."
+    haunted:
+        levels:
+            2:
+                example_code_2: "```\nhirviö_1 {is} _\nhirviö_2 {is} _\nhirviö_3 {is} _\n{print} Astut kummitustaloon.\n{print} Yhtäkkiä näet hirviö_1\n{print} Juokset toiseen huoneeseen...\n{print} Mutta siellä odottaa hirviö_2!\n{print} Voi ei! Mene nopeasti keittiöön.\n{print} Mutta kun astut sisään, hirviö_3 hyökkää kimppuusi!\n```\n"
+    ask_command:
+        levels:
+            2:
+                example_code: "```\nnimi {is} {ask} Mikä on nimesi?  \n{print} Hei nimi  \nikä {is} {ask} Kuinka vanha olet?  \n{print} nimi on ikä vuotta vanha.\n```\n"
+                example_code_2: "```\nlemmikki {is} {ask} Mikä on lempieläimesi?  \n{print} Minä pidän lemmikki\n```\n"
+            13:
+                story_text: "```\nlemmikki {is} {ask} Mikä on lempieläimesi?  \n{print} Minä pidän lemmikki\n```"

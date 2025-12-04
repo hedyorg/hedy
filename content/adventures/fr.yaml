@@ -238,6 +238,9 @@ adventures:
                     name = {input}("Quel est votre nom ?")
                     {print}('Bienvenue dans cette histoire !')
                     ```
+            6:
+                story_text: "Maintenant que vous pouvez utiliser `{elif}` vous pouvez créer une histoire encore plus interactive ! Vous pourriez créer plusieurs personnages, par exemple, qui auraient tous des attributs différents.\nOu vous pourriez faire choisir à votre joueur quel chemin emprunter, quelle porte ouvrir ou quelle potion magique boire...\n\n###Exercice\nCréez votre propre histoire avec 3 options ou plus en utilisant {elif}."
+                example_code: "```\npersonnage =  {ask}  'Qui va vous aider dans votre quête?'\n{if} personnage {is} 'Daisy'\n    {print} 'Vous avez chosi Daysi! C'est la plus futée de tous!'\n    {print} \"Daisy vous dit immédiatement que vous ne devriez pas manger cez baies là-bas.\"\n{elif} personnage {is} 'Jason'\n    {print} 'Vous avez chosi Jason! C'est le plus fort de tous!'\n    {print} 'Jason soulève un rocher, en découvrant une carte secrète en dessous.'\n{elif} character {is} 'Sam'\n    {print} ''Vous avez chosi Sam! C'est le plus rapide de tous!'\n    {print} 'Sam grimpe à un arbre et voit qu'il y a un village pas très loin...'\n\n```\n\n\n\n            \n\nFrancés\n\n            \n"
         default_save_name: Histoire
     add_remove_command:
         description: Introduction {add} {to_list} et {remove} {from}
@@ -903,11 +906,6 @@ adventures:
                         {call} joue_un_tour
                         {sleep} 2
                     ```
-    guess_my_number:
-        name: Devine le nombre
-        default_save_name: devine le nombre
-        description: devine le nombre
-        levels:
     harry_potter:
         description: Les aventures d'Harry Potter
         levels:
@@ -1492,8 +1490,6 @@ adventures:
                     nom = "Hedy"
                     {print}("Mon nom est ", nom)
                     ```
-    quizmaster:
-        description: Fabrique ton propre quiz !
     quotation_marks:
         name: '"Les guillemets"'
         description: Introduction des guillemets
@@ -2573,47 +2569,6 @@ adventures:
                         {if} forme {is} "carré"
                             {call} dessine_un_carré
                     ```
-            14:
-                story_text: |
-                    ### Exercice
-                    Refait les dessins avec la tortue !
-
-                    Une rue avec des maisons de toutes les tailles <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Une rue colorée  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Un orage de flocons <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
-                example_code: |
-                    Aide pour la rue avec les maisons de toutes les tailles
-                    ```
-                    {define} dessine_une_maison {with} taille
-                    _
-
-                    {call} dessine_une_maison {with} 90
-                    {call} dessine_une_maison {with} 60
-                    {call} dessine_une_maison {with} 30
-                    ```
-
-                    Aide pour la rue colorée
-                    ```
-                    {define} dessine_une_maison {with} couleur
-                    _
-                    ```
-
-                    Aide pour l'orage de flocons
-                    ```
-                    {define} dessine_flocon {with} longueur, couleur
-                        _
-
-                    longueurs = 10, 20, 30
-                    couleurs = _
-
-                    {for} i {in} {range} 1 {to} 5
-                        longueur_au_hasard = _
-                        couleur_au_hasard = _
-                        {call} dessine_flocon {with} longueur_au_hasard, couleur_au_hasard
-                        {color} blanc
-                        {turn} longueur_au_hasard * 5
-                        {forward} 80
-                    ```
             16:
                 story_text: |
                     ### Exercice
@@ -2660,8 +2615,3 @@ adventures:
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
                     ```
-    years:
-        name: Nouvel an
-        default_save_name: Compte à rebours du Nouvel An
-        description: Compte à rebours du Nouvel An !
-        levels:
