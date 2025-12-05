@@ -59,7 +59,7 @@ Tip: Vind je het lastig om de uitvoer te voorspellen? Gebruik dan dit stappenpla
 
 Voorbeeld:
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+**<i class="fa-solid fa-laptop-code"></i> Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 naam is Mo                                        __________________________
@@ -67,15 +67,16 @@ print Goed bezig naam!
 							
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+**<i class="fa-solid fa-laptop-code"></i> Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 naam is Mo                                        __________________________
 print Goed bezig Mo!                              
 							
-```
+                            
+``` 
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+**<i class="fa-solid fa-laptop-code"></i> Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 voornaam is Layla                                 __________________________
@@ -87,21 +88,21 @@ print Goedemorgen naam!
 #### Opdracht 3: Foutje?
 Lees de codes goed! Welke zijn er goed of fout.
 
-**🤔 Vraag**: Is deze code goed of fout?
+**<i class="fa-solid fa-question"></i> Vraag**: Is deze code goed of fout?
 ```hedy
 achternaam is Jansen
 print Goedemorgen naam!							
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
-**🤔 Vraag**: Is deze code goed of fout?
+**<i class="fa-solid fa-question"></i> Vraag**: Is deze code goed of fout?
 ```hedy
 naam is
 print Goedemorgen naam!							
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
-**🤔 Vraag**: Is deze code goed of fout?
+**<i class="fa-solid fa-question"></i> Vraag**: Is deze code goed of fout?
 ```hedy
 naam is Jansen
 print Goedemorgen meneer naam!
@@ -138,7 +139,7 @@ dus jij heet: Maan
 
 Voorspel wat de uitvoer van deze codes is. Doe alsof je je eigen naam hebt ingevuld.
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+**<i class="fa-solid fa-laptop-code"></i> Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 naam is ask Hoe heet jij?                         __________________________
@@ -146,7 +147,7 @@ print dus jij heet: naam
 							
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+**<i class="fa-solid fa-laptop-code"></i> Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 toestand is ask Hoe gaat het met jou?             __________________________
@@ -159,13 +160,13 @@ print Dus het gaat toestand met jou
 
 We hebben deze les weer nieuwe woorden geleerd! Leg ze uit je eigen woorden.
 
-**📖 Vraag**: Wat betekent variabele?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat betekent variabele?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat betekent waarde?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat betekent waarde?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat betekent instellen?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat betekent instellen?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 
@@ -173,8 +174,8 @@ Antwoord: ______________________________________________________________________
 
 We hebben nieuwe codes geleerd: `is`, `is ask` samen. Wat doen die? Leg het uit in je eigen woorden.
 
-**📖 Vraag**: Wat doet het commando `is`?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat doet het commando `is`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat doet het commando `is ask`?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat doet het commando `is ask`?
 Antwoord: ____________________________________________________________________________________________________<br>
