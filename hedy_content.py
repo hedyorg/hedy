@@ -300,7 +300,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'restaurant',
         'guess_my_number',
         'debugging',
-        'hospital'
+        'hospital',
         'congratulations'
     ],
 }
