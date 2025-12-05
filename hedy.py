@@ -309,10 +309,10 @@ add_level(commands_per_level, level=9)
 add_level(commands_per_level, level=10, add=['and', 'or'])
 add_level(commands_per_level, level=11, add=['for'])
 add_level(commands_per_level, level=12, add=['define', 'call'])
-add_level(commands_per_level, level=13, add=['input', 'range'], remove=['ask', 'call', 'define', 'repeat'])
+add_level(commands_per_level, level=13, add=['input', 'range', 'while'], remove=['ask', 'call', 'define', 'repeat'])
 add_level(commands_per_level, level=14)
 add_level(commands_per_level, level=15)
-add_level(commands_per_level, level=16, add=['while'])
+add_level(commands_per_level, level=16)
 
 command_turn_literals = ['right', 'left']
 english_colors = ['black', 'blue', 'brown', 'gray', 'green', 'orange', 'pink', 'purple', 'red', 'white', 'yellow']
@@ -1464,7 +1464,7 @@ class IsComplete(Filter):
         return args != [], ('print', meta.line)
 
     def input(self, meta, args):
-        return len(args) > 1, ('input', meta.line)
+        return len(args) > 0, ('input', meta.line)
 
     def length(self, meta, args):
         return args != [], ('len', meta.line)
@@ -2440,7 +2440,7 @@ class ConvertToPython_6(ConvertToPython_5):
         arg = args[0]
         note = escape_var(self.unpack(arg))
         if present_in_notes_mapping(note):  # this is a supported note
-            return self.make_play(note.upper(), meta)
+            return self.make_play(str(note).upper(), meta)
 
         if self.is_variable_with_definition(arg, meta.line):
             arg = f'{escape_var(self.unpack(arg))}.data'
@@ -2750,10 +2750,6 @@ class ConvertToPython_8_9(ConvertToPython_7):
     def repeat(self, meta, args):
         return self.make_repeat(meta, args, multiline=True)
 
-    def if_clause(self, meta, args):
-        all_lines = [ConvertToPython.indent(x) for x in args[1:]]
-        return "if " + args[0] + ":" + self.add_debug_breakpoint() + "\n" + "\n".join(all_lines)
-
     def if_pressed(self, meta, args):
         key = self.process_arg_for_data_access(args[0], meta.line)
         args = [a for a in args if a != ""]  # filter out in|dedent tokens
@@ -2926,7 +2922,7 @@ class ConvertToPython_12(ConvertToPython_11):
         arg = args[0]
         note = self.unpack(arg)
         if present_in_notes_mapping(note):  # this is a supported note
-            return self.make_play(note.upper(), meta)
+            return self.make_play(str(note).upper(), meta)
 
         if self.is_variable_with_definition(arg, meta.line):
             arg = f'{escape_var(self.unpack(arg))}.data'
@@ -3647,7 +3643,7 @@ def _restore_parser_from_file_if_present(pickle_file):
     return None
 
 
-# @lru_cache(maxsize=0 if utils.is_production() else 100)
+@lru_cache(maxsize=0 if utils.is_production() else 100)
 def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     """Return the Lark parser for a given level.
     Parser generation takes about 0.5 seconds depending on the level so

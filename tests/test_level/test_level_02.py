@@ -570,6 +570,7 @@ class TestsLevel2(HedyTester):
         self.multi_level_tester(
             code=code,
             exception=hedy.exceptions.InvalidArgumentTypeException,
+            max_level=12,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
         )
 
