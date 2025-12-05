@@ -1,6 +1,6 @@
 adventures:
     story:
-        name: Story
+        name: story
         default_save_name: Story
         description: Make a short story
         levels:
@@ -142,20 +142,14 @@ adventures:
                     Create your own story with 3 or more options using the {elif}.
                 example_code: |
                     ```
-                    character = {ask} 'Who will help you on your quest?'
+                    character {is} {ask} 'Who will help you on your quest?'
                     {if} character {is} 'Daisy'
-                        {print} 'You have picked Daisy! She is the smartest of them all!'
-                        {print} "Daisy immediately tells you that you shouldn't eat those berries over there."
+                    {print} 'You have picked Daisy! She is the smartest of them all!'
                     {elif} character {is} 'Jason'
-                        {print} 'You have picked Jason! He is the strongest of them all!'
-                        {print} 'Jason lifts up a boulder, showing a secret map underneath.'
+                    {print} 'You have picked Jason! He is the strongest of them all!'
                     {elif} character {is} 'Sam'
-                        {print} 'You have picked Sam! They are the quickest of them all!'
-                        {print} 'Sam climbs up a tree and sees that there is a village not far away...'
+                    {print} 'You have picked Sam! They are the quickest of them all!'
                     ```
-
-                                
-
             8:
                 story_text: |
                     In a story, someone says words several times. For example, when someone calls for help or sings a song.
@@ -403,7 +397,7 @@ adventures:
                         {print} 'You are not Hedy!'
                     ```
     calculator:
-        name: Calculator
+        name: calculator
         default_save_name: Calculator
         description: Create a calculator
         levels:
@@ -544,7 +538,7 @@ adventures:
                     {print}('You win!')
                     ```
     calculator_2:
-        name: Calculator 2
+        name: calculator 2
         default_save_name: Calculator 2
         description: Calculator 2
         levels:
@@ -605,6 +599,22 @@ adventures:
                     {clear}
                     {print} 'SURPRISE!'
                     ```
+    congratulations:
+        name: congratulations
+        default_save_name: now_what
+        description: end of Hedy
+        levels:
+            8:
+                story_text: |
+                    Congratulations! You have reached the end of Hedy Basic! You can continue learning in Hedy Advanced (level 9-12), where you can learn more complex programming concepts.
+                    Or feel free to stay in Hedy Basic and come up with your own programs, of course!
+            12:
+                story_text: |
+                    Congratulations! You have reached the end of Hedy Advanced! You can continue learning in Hedy Expert (level 13-16), where you can learn how to write real Python code.
+                    Or feel free to stay in Hedy Advanced and come up with your own programs, of course!
+            16:
+                story_text: |
+                    Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like Replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
     debugging:
         name: debugging
         default_save_name: debugging
@@ -895,8 +905,286 @@ adventures:
                     price = amount * 6
                     {print} 'That will be ' price ' dollars please.'
                     ```
+            11:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    names = Muad Hasan Samira Noura
+                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
+                    {for} name {is} names
+                    {print} At the beach name loves to activity {at} {random}
+                    ```
+                answer_code: |
+                    ```
+                    names = Muad, Hasan, Samira, Noura
+                    activities = fly a kite, go swimming, go hiking, catch tan in the sun
+                    {for} name {in} names
+                        {print} 'At the beach ' name ' loves to ' activities {at} {random}
+                    ```
+            12:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {define} greet
+                    greetings = 'Hello', 'Hi there', 'Good evening'
+                        {print} greetings {at} {random}
+
+                    {define} take_order
+                        food = {ask} 'What would you like to eat?'
+                        {print} 'One food'
+                        drink = 'What would you like to drink?'
+                        {print} 'One ' drink
+                        more = {ask} 'Would you like anything else?'
+                            {if} more {is} 'no'
+                        {print} 'Alright'
+                            {else}
+                            print 'And ' more
+                    {print} 'Thank you'
+
+                    {print} 'Welcome to our restaurant'
+                    people = {ask} 'How many people are in your party tonight?'
+                    {for} person {in} people
+                        {call} greet_customer
+                        take_order
+                    ```
+                answer_code: |
+                    ```
+                    {define} greet
+                        greetings = 'Hello', 'Hi there', 'Good evening'
+                        {print} greetings {at} {random}
+
+                    {define} take_order
+                        food = {ask} 'What would you like to eat?'
+                        {print} 'One ' food
+                        drink = {ask} 'What would you like to drink?'
+                        {print} 'One ' drink
+                        more = {ask} 'Would you like anything else?'
+                        {if} more {is} 'no'
+                            {print} 'Alright'
+                        {else}
+                            print 'And ' more
+                        {print} 'Thank you'
+
+                    {print} 'Welcome to our restaurant'
+                    people = {ask} 'How many people are in your party tonight?'
+                    {repeat} people {times}
+                        {call} greet
+                        {call} take_order
+                    ```
+            13:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {define} calculate_heartbeat
+                        {print} 'Press your fingertips gently against the side of your neck'
+                        {print}'(just under your jawline)'
+                        {print} 'Count the number of beats you feel for 15 seconds'
+                        beats == {ask} 'How many beats do you feel in 15 seconds?'
+                        heartbeat = beats*4
+                        {print} 'Your heartbeat is ' heartbeat
+                        {if} heartbeat >= 60 {or} heartbeat <= 100
+                            {print} 'Your heartbeat seems fine'
+                        {else}
+                            {if} heartbeat > 60
+                                {print} 'Your heartbeat seems to be too low'
+                            {if} heartbeat < 100
+                                {print} 'Your heartbeat seems to be too high'
+                            {print} 'You might want to contact a medical professional'
+
+                    measure_heartbeat = {input} 'Would you like to measure your heartbeat?'
+                    {if} measure_heartbeat = 'yes'
+                        measure_heartbeat()
+                    {else}
+                        {print}('no problem')
+                    ```
+                answer_code: |
+                    ```
+                    {define} calculate_heartbeat
+                        {print}('Press your fingertips gently against the side of your neck')
+                        {print}('just under your jawline')
+                        {print}('Count the number of beats you feel for 15 seconds')
+                        beats = {input}('How many beats do you feel in 15 seconds?')
+                        heartbeat = beats*4
+                        {print}('Your heartbeat is ', heartbeat)
+                        {if} heartbeat >= 60 {and} heartbeat <= 100
+                            {print}('Your heartbeat seems fine')
+                        {else}
+                            {if} heartbeat < 60
+                                {print}('Your heartbeat seems to be too low')
+                            {if} heartbeat > 100
+                                {print}('Your heartbeat seems to be too high')
+                            {print}('You might want to contact a medical professional')
+
+                    measure_heartbeat = {input}('Would you like to measure your heartbeat?')
+                    {if} measure_heartbeat == 'yes'
+                        calculate_heartbeat()
+                    {else}
+                        {print}('no problem')
+                    ```
+            14:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    country = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania' ]
+                    capitals = 'Amsterdam', 'Warsaw', 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest'
+                    score = 0
+                    {for} i {in} {range} 0 {to} 10
+                        answer == {input} 'What's the capital of ' countries[i]
+                        correct = capital[i]
+                        {if} answer = correct
+                            {print} 'Correct!'
+                        score = score + 1
+                        {else}
+                            {print} 'Wrong,' capitals[i] 'is the capital of' countries[i]
+                        {print} 'You scored ' score ' out of 10'
+                    ```
+                answer_code: |
+                    ```
+                    countries = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania']
+                    capitals = ['Amsterdam', 'Warsaw', 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest']
+                    score = 0
+                    {for} i in {range}(1, 10)
+                        answer = {input}("What's the capital of ", countries[i])
+                        correct = capitals[i]
+                        {if} answer == correct
+                            {print}('Correct!')
+                        score = score + 1
+                        {else}
+                            {print}('Wrong,', capitals[i], ' is the capital of ', countries[i])
+                    {print}('You scored ', score, ' out of 10')
+                    ```
+            15:
+                story_text: |-
+                    ### Exercise
+                    Debug this random children's story. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {def} ask_user:
+                        answer = {input}('What should the ', question, ' in the story be?')
+                        {call} answer
+                    
+                    questions = ['name', 'verb', 'location', 'hiding spot', 'sound', 'cause of the noise'
+
+                    chosen _name = ask_user(questions[0])
+                    chosen_verb = ask_user(questions[2])
+                    chosen_locations = ask_user(questions[3])
+                    chosen_sound = ask_user(questions[4])
+                    chosen_spot = ask_user(questions[5])
+                    chosen_causes = ask_user(questions[6])
+
+                    {print}(chosen_name ' was ' chosen_verb ' to ' chosen_location)
+                    {print} ('When they suddenly heard a sound like ', chosen_sound)
+                    {print}(chosen_name " looked around, but they couldn't discover where the noise came from")
+                    {print} chosen_name, ' hid ', chosen_spot
+                    {print}'They tried to look around, but couldn't see anything from there')
+                    {print}chosen_name, ' moved from ', chosen_spot
+                    {print}'And then they saw it was just ' chosen_cause
+                    {print}(chosen_name ' laughed and went on with their day')
+                    'The End' 
+                    ```
+                answer_code: |
+                    ```
+                    {def} ask_user(question):
+                        answer = {input}('What should the ', question, ' in the story be?')
+                        {return} answer
+                    
+                    questions = ['name', 'verb', 'location', 'hiding spot', 'sound', 'cause of the noise']
+
+                    chosen_name = ask_user(questions[1])
+                    chosen_verb = ask_user(questions[2])
+                    chosen_location = ask_user(questions[3])
+                    chosen_spot = ask_user(questions[4])
+                    chosen_sound = ask_user(questions[5])
+                    chosen_cause = ask_user(questions[6])
+
+                    {print}(chosen_name, ' was ', chosen_verb, ' to ', chosen_location)
+                    {print}('When they suddenly heard a sound like ', chosen_sound)
+                    {print}(chosen_name, " looked around, but they couldn't discover where the noise came from")
+                    {print}(chosen_name, ' hid ', chosen_spot)
+                    {print}("They tried to look around, but couldn't see anything from there")
+                    {print}(chosen_name, ' moved from ', chosen_spot)
+                    {print}('And then they saw it was just ', chosen_cause)
+                    {print}(chosen_name, ' laughed and went on with their day')
+                    {print}('The End')
+                    ```
+            16:
+                story_text: |-
+                    ### Exercise
+                    Debug this code. Good luck!
+                example_code: |
+                    **Warning! This code needs to be debugged!**
+                    ```
+                    {define} (food_order)
+                        toppings = {input}('pepperoni, tuna, veggie or cheese?')
+                        size = {input} 'big, medium or small?'
+                        number_of_pizza = {ask}('How many these pizzas would you like?')
+
+                        {print}('YOU ORDERED')
+                        {print}(number_of_pizzas ' size  ' topping ' pizza')
+
+                    {def} drink_order:
+                        drink = {input}'water, coke, icetea, lemonade or coffee?'
+                        number_of_drinks = {input}('How many of these drinks would you like?')
+
+                        print ()('YOU ORDERED')
+                        print (number_of_drinks ' ' drink)
+
+                    'Welcome to Hedy pizza'
+                    more_food = input 'Would you like to order a pizza?'
+                    while more_food = 'yes':
+                        return more_food
+                        more_food == input('Would you like to order a pizza?')
+                    more_drinks = input('Would you like to order some drinks?')
+                    while more_drinks == 'yes':
+                        call drink_order
+                        more_drinks == input('Would you like to order more drinks?')
+
+                    print 'Thanks for ordering!'
+                    ```
+                answer_code: |
+                    ```
+                    {def} food_order():
+                        toppings = {input}('Pepperoni, tuna, veggie or cheese?')
+                        size = {input}('Big, medium or small?')
+                        number_of_pizzas = {input}('How many of these pizzas would you like?')
+
+                        {print}('YOU ORDERED')
+                        {print}(number_of_pizzas, ' ', size , ' ', toppings, ' pizza')
+
+                    {def} drink_order():
+                        drink = {input}('Water, coke, icetea, lemonade or coffee?')
+                        number_of_drinks = {input}('How many of these drinks would you like?')
+
+                        {print}('YOU ORDERED')
+                        {print}(number_of_drinks, ' ', drink)
+
+                    {print}('Welcome to Hedy pizza')
+                    more_food = {input}('Would you like to order a pizza?')
+                    {while} more_food == 'yes':
+                        food_order()
+                        more_food = {input}('Would you like to order a pizza?')
+                    more_drinks = {input}('Would you like to order some drinks?')
+                    {while} more_drinks == 'yes':
+                        drink_order()
+                        more_drinks = {input}('Would you like to order more drinks?')
+
+                    {print}('Thanks for ordering!')
+                    ```
     dice:
-        name: Dice
+        name: dice
         default_save_name: Dice
         description: Make your own dice
         levels:
@@ -1014,7 +1302,7 @@ adventures:
                     {print}('Yes! You have thrown 6 in ', tries, ' tries.')
                     ```
     dishes:
-        name: Dishes?
+        name: dishes?
         default_save_name: Dishes
         description: Use the computer to see who does the dishes
         levels:
@@ -1126,6 +1414,8 @@ adventures:
                 story_text: |
                     In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
                     Check it out!
+                    ### Exercise
+                    Make your own wheel of fortune, where you can win different prizes and get corresponding reactions
                 example_code: |
                     ```
                     prizes is 1 million dollars, an apple pie, nothing
@@ -1177,7 +1467,7 @@ adventures:
                         {print} (i)
                     ```
     fortune:
-        name: Fortune teller
+        name: fortune teller
         default_save_name: Fortune Teller
         description: Let Hedy predict the future
         levels:
@@ -1448,7 +1738,7 @@ adventures:
                     {print} ('Your score is... ', score)
                     ```
     guess_my_number:
-        name: Guess my number
+        name: guess my number
         default_save_name: guess my number
         description: guess my number
         levels:
@@ -1460,23 +1750,23 @@ adventures:
                     Fill in the correct symbols on the blanks to get the game to work.
                 example_code: |
                     ```
-                    {print} 'Guess my number'
-                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-                    number = numbers {at} {random}
+                    {print}('Guess my number')
+                    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    number = numbers[{random}]
                     game = 'on'
-                    {for} i {in} {range} 1 {to} 10
-                        {if} game == 'on'
-                            guess = {ask} 'Which number do you think it is?'
+                    {for} i {in} {range} (1, 10):
+                        {if} game == 'on':
+                            guess = {input}('Which number do you think it is?')
                             {if} guess _ number
-                                {print} 'Lower!'
+                                {print} ('Lower!')
                             {if} guess _ number
-                                {print} 'Higher!'
+                                {print} ('Higher!')
                             {if} guess _ number
-                                {print} 'You win!'
+                                {print} '(You win!')
                                 game = 'over'
                     ```
     harry_potter:
-        name: Harry Potter
+        name: harry potter
         default_save_name: Harry Potter
         description: Harry Potter adventures
         levels:
@@ -1497,7 +1787,7 @@ adventures:
                     _ {print} name 's greatest fear is ' fears {at} {random}
                     ```
     haunted:
-        name: Haunted House
+        name: haunted house
         default_save_name: Haunted House
         description: Escape from the haunted house
         levels:
@@ -1679,8 +1969,8 @@ adventures:
                         {print} ('GAME OVER')
                     ```
     hospital:
-        name: Hospital
-        default_save_name: Hospital
+        name: hospital
+        default_save_name: hospital
         description: Hospital
         levels:
             1:
@@ -1832,28 +2122,29 @@ adventures:
                     * Print the personnel number.
             14:
                 story_text: |
-                    Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
-                    Can you help by writing a program that'll print the correct tasklist for that day?
-                    ### Exercise
-                    The program should:
-                    * Wish the janitor a goodmorning.
-                    * Ask the janitor what day of the week it is, which month and which day of the month.
-                    * Print the correct tasklist for that day.
-                    The tasks that should be done:
-                    * Everyday tasks: mop the floor, clean the toilets, open the curtains
-                    * On mondays and thursdays: water the plants
-                    * On tuesday and fridays: mop the floors
-                    * On saturdays: wash the coffeemachine
-                    * On the first of each month: wash the windows
-                    * On the 7th of each month: refill the vending machines
-                    * On the 14th of each month: check the batteries for the fire alarms
-                    * Everyday in wintermonths: turn on the heaters
-                    * Everyday in summermonths: turn on the airconditioning
+                  Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
+                  Can you help by writing a program that'll print the correct tasklist for that day?
+                  ### Exercise
+                  The program should:
+                  * Wish the janitor a goodmorning.
+                  * Ask the janitor what day of the week it is, which month and which day of the month.
+                  * Print the correct tasklist for that day.
+                  The tasks that should be done:
+                  * Everyday tasks: mop the floor, clean the toilets, open the curtains
+                  * On mondays and thursdays: water the plants
+                  * On tuesday and fridays: mop the floors
+                  * On saturdays: wash the coffeemachine
+                  * On the first of each month: wash the windows
+                  * On the 7th of each month: refill the vending machines
+                  * On the 14th of each month: check the batteries for the fire alarms
+                  * Everyday in wintermonths: turn on the heaters
+                  * Everyday in summermonths: turn on the airconditioning
                 example_code: |
-                    The program should end like this:
-                      ```
-                      make_tasklist(day, month, date)
-                      ```
+                  The program should end like this:
+                    ```
+                    _The program should end like this_
+                    make_tasklist(day, month, date)
+                    ```
             15:
                 story_text: |
                     After surgery our patients can sometimes experience a lot of pain. In those cases our patients can be given a morphine pump. They can administer some morphine themselves if they are in pain.
@@ -2079,7 +2370,7 @@ adventures:
                         {print}('You are not Hedy')
                     ```
     language:
-        name: Language
+        name: language
         default_save_name: Language
         description: Practice words in a foreign language
         levels:
@@ -2271,6 +2562,24 @@ adventures:
                     answer {is} {ask} 'What is the capital of Zimbabwe?'
                     {if} answer {is} Harare {play} C6
                     _
+                    ```
+            6:
+                story_text: |
+                    With `{elif}` you can play different tunes for different situations. For example if a person is feeling happy, you can play them a happy tune.
+                    ### Exercise
+                    First create a sad tune, then create at least 2 other tunes for different moods.
+                example_code: |
+                    ```
+                    mood = {ask} 'How are you feeling today?'
+                    {if} mood {is} happy
+                        {play} C4
+                        {play} E4
+                        {play} G4
+                        {play} C5
+                    {elif} mood {is} sad
+                        {play} _
+                    {elif} mood {is} _
+                        {play} _
                     ```
             7:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\nThis calls for musical maths! Try out the example code a couple of times with different starting numbers.\nThen, see if you can compose a song using the numbers.\n"
@@ -2486,36 +2795,8 @@ adventures:
                         song()
                         {print} '🥳'
                     ```
-            14:
-                story_text: |
-                    Upgrade your Old MacDonald code!
-
-                    ### Exercise
-                    Take your code from the 'Sing a Song' adventure and add musical notes to it!
-                    You can make a function for each line in the song and call that function after the line is printed.
-                    We defined the first line for you and called it in the code. Can you finish the whole song?
-                example_code: |
-                    ```
-                    {define} line_1
-                        {for} i {in} {range} (1, 3)
-                            {play} G
-                        {play} D
-                        {for} i {in} {range} 1 {to} 2
-                            {play} E
-                        {play} D
-
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} (1, 3)
-                        animal = animals[i]
-                        sound = sounds[i]
-                        {print} 'Old MacDonald had a farm'
-                        line_1()
-                        {print} 'E I E I O!'
-                        _
-                    ```
     parrot:
-        name: Parrot
+        name: parrot
         default_save_name: Parrot
         description: Create your own online pet parrot that will copy you!
         levels:
@@ -2607,7 +2888,7 @@ adventures:
                     _ _ '🧒 No, Hedy! Say ' new_word
                     ```
     piggybank:
-        name: Piggy Bank
+        name: piggy bank
         default_save_name: Piggy Bank
         description: Count your pocket money!
         levels:
@@ -2653,7 +2934,7 @@ adventures:
                     _
                     ```
     pressit:
-        name: Key presses
+        name: '{pressed}'
         default_save_name: Pressed
         description: Try linking a keyboard key to a command!
         levels:
@@ -2757,7 +3038,7 @@ adventures:
                     {print}('My name is ', name)
                     ```
     quizmaster:
-        name: Quizmaster
+        name: quizmaster
         default_save_name: Quizmaster
         description: Make your own quiz!
         levels:
@@ -2963,7 +3244,7 @@ adventures:
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
     restaurant:
-        name: Restaurant
+        name: restaurant
         default_save_name: Restaurant
         description: Create your own virtual restaurant
         levels:
@@ -3222,7 +3503,7 @@ adventures:
                     {print} 'Thank you!'
                     ```
     rock:
-        name: Rock, paper, scissors
+        name: rock, paper, scissors
         default_save_name: Rock_2
         description: Make your own rock, paper, scissors game
         levels:
@@ -3362,7 +3643,7 @@ adventures:
                     _
                     ```
     rock_2:
-        name: Rock, paper, scissors 2
+        name: rock, paper, scissors 2
         default_save_name: rock_2
         description: Part 2 of rock, paper, scissors
         levels:
@@ -3378,7 +3659,7 @@ adventures:
                     {print} I choose choice
                     ```
     secret:
-        name: SuperSpy
+        name: super spy
         default_save_name: SuperSpy
         description: Make your own spy code
         levels:
@@ -3418,7 +3699,7 @@ adventures:
                     {print} green!
                     ```
     songs:
-        name: Sing a song!
+        name: sing a song!
         default_save_name: Song
         description: Print a song
         levels:
@@ -3558,14 +3839,14 @@ adventures:
                     ```
             13:
                 story_text: |
-                    In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.
+                    Now that we are using Python syntax, the songs you've coded before will need Python syntax too!
 
                     ### Exercise 1
                     The Drunken sailor song is given as sample code, but not yet working.
                     Can you make sure everything works again? To help you, we've put _ in the places of _some_ errors.
 
                     ### Exercise 2
-                    Now also look up your Old MacDonald song from level 16, and correct it.
+                    Now also look up your Old MacDonald song from before and correct it.
                 example_code: |
                     ```
                     lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
@@ -3578,7 +3859,7 @@ adventures:
                         {print} 'early in the morning'
                     ```
     songs_2:
-        name: Sing a song! 2
+        name: sing a song! 2
         default_save_name: Song 2
         description: Sing a song 2
         levels:
@@ -3626,7 +3907,7 @@ adventures:
                     movement = 'round and round', 'open and shut', _
                     ```
     turtle:
-        name: Turtle
+        name: turtle
         default_save_name: Turtle
         description: Make your own drawing
         levels:
@@ -3864,7 +4145,7 @@ adventures:
                     {call} square
                     ```
     turtle_draw_it:
-        name: Draw it!
+        name: draw it!
         default_save_name: Draw it
         description: Draw this picture with the turtle
         levels:
@@ -4072,47 +4353,6 @@ adventures:
                         {if} shape = 'square'
                             {call} draw_a_square
                     ```
-            14:
-                story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
-
-                    Street in different sizes <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Colored street <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Snow Storm <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
-                example_code: |
-                    Hint Street in different sizes
-                    ```
-                    {define} draw_a_house(size)
-                    _
-
-                    draw_a_house(90)
-                    draw_a_house(60)
-                    draw_a_house(30)
-                    ```
-
-                    Hint Colored street
-                    ```
-                    {define} draw_a_house(chosen_color)
-                    _
-                    ```
-
-                    Hint Snow Storm
-                    ```
-                    {define} draw_snowflake(length, color)
-                        _
-
-                    numbers = 10, 20, 30
-                    colors = _
-
-                    {for} i {in} {range} 1 {to} 5
-                        random_number = _
-                        random_color = _
-                        draw_snowflake(random_number, random_color)
-                        {color} white
-                        {turn} random_number * 5
-                        {forward} 80
-                    ```
             15:
                 story_text: |
                     ### Exercise
@@ -4193,13 +4433,13 @@ adventures:
                     {print} 'A correct answer has been given'
                     ```
     years:
-        name: New Year's
+        name: new year's
         default_save_name: New Year's Countdown
         description: Countdown to the New Year!
         levels:
-            7:
+            8:
                 story_text: |
-                    Ccountdown to the New Year.
+                    Countdown to the New Year.
 
                     ### Exercise
                     Fill in the blanks and make the code work!

@@ -536,7 +536,6 @@ adventures:
         default_save_name: Посуд
     elif_command:
         description: '{elif}'
-        levels:
         default_save_name: elif
         name: '{elif}'
     for_command:
@@ -1808,9 +1807,6 @@ adventures:
                 example_code: "Hint for the square:\n```\nchosen_color = {ask}_\n```\n"
             9:
                 story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\n**Екстра** Кількість у дужках вказує на скільки рядків коду цей показник можна намальовувати. Чи можна це зробити в одній кількості рядків?\n\n<div class=\"w-full flex flex-row gap-2\">\nSquare (3) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"200\">\nВипадково кольорова зірка (5) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781\" width=\"150\">\nВипадкові кольорові спіральні (7) <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35\" width=\"150\">\n</div>\n"
-            14:
-                story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\nВулиця в різних розмірах <img src=\"https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec\" width=\"300\">\nКольорова вулиця <img src=\"https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724\" width=\"300\">\nSnow Storm <img src=\"https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc\" width=\"300\">\n"
-                example_code: "Hint Street в різних розмірах\nй й\n{define} Draw_a_house {with} розмір\nУ\n\n{call} маляр_a_house {with} 90\n{call} маляр_a_house {with} 60\n{call} маляр_a_house {with} 30\nй й\n\nХіт кольорова вулиця\nй й\n{define} Draw_a_house {with} select_color\nУ\nй й\n\nХунт Сніжний Шторм\nй й\n{define} Draw_snowflake {with} довжина, колір\nУ\n\nкількість = 10, 20, 30\nКолір:\n\n{for} i {in} {range} 1 {to} 5\nJavaScript licenses API Веб-сайт\nJavaScript licenses API Веб-сайт\n{call} Draw_snowflake {with} випадковим_number, випадковим_color\n{color} білий\n{turn} випадковим_number * 5\n{forward} 80\nй й\n"
             15:
                 story_text: "### Exercise\nСтворіть програму, яка просить гравця, скільки кутів їх фігури повинен мати, а потім створює цей малюнок.\nНа малюнку у зображенні є вихід, коли гравець заповнює 10.\n\n<div class=\"w-full flex flex-row gap-2\">\n<img src=\"https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b\" width=\"300\">\n<img src=\"https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2\" width=\"200\">\n</div>\n"
                 example_code: "й й\n{define} обчислення_degrees {with} amount_of_corners\n_ 360 / кількість_номери\n\n\n{define} Draw_figure {with} ступені\nУ\n{forward} 400/amount_of_corners\n{turn} _\n\nкількість_of_corners = {ask} _\n{call} _ {with} _\n\n{call} _ {with}\n{call} _ {with}\nй й\n"
@@ -1834,7 +1830,6 @@ adventures:
         name: Новий рік
         default_save_name: Новорічний відлік
         description: Зворотний відлік до Нового року!
-        levels:
     calculator_2:
         name: Калькулятор 2
         default_save_name: Калькулятор 2
@@ -1847,7 +1842,6 @@ adventures:
         name: Вгадай мій номер
         default_save_name: вгадай мій номер
         description: вгадай мій номер
-        levels:
     quotation_marks:
         levels:
             4:
@@ -1860,7 +1854,6 @@ adventures:
         default_save_name: quotation_marks
     quizmaster:
         description: Зробіть власну вікторину!
-        levels:
         default_save_name: Вікторина
         name: Вікторина
     hotel:
