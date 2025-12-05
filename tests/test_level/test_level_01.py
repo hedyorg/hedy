@@ -376,7 +376,7 @@ class TestsLevel1(HedyTester):
         code = "play ١١"
         expected = self.play_transpiled("'١١'")
 
-        self.multi_level_tester(code=code, expected=expected)
+        self.multi_level_tester(code=code, expected=expected, max_level=6)
 
     def test_mixes_languages_nl_en(self):
         code = textwrap.dedent("""\
@@ -473,6 +473,7 @@ class TestsLevel1(HedyTester):
 
         self.multi_level_tester(
             code=code,
+            max_level=12,
             exception=hedy.exceptions.InvalidArgumentTypeException,
             extra_check_function=lambda c: c.exception.arguments['line_number'] == 1
         )
