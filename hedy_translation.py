@@ -347,17 +347,17 @@ class Translator(Transformer):
     def error_echo_dep_2(self, tree):
         self.add_rule_for_grammar_token("_ECHO", "echo", tree)
 
-    def ifs(self, tree):
+    def if_clause(self, tree):
         self.add_rule_for_grammar_token("_IF", "if", tree)
 
     def ifelse(self, tree):
         self.add_rule_for_grammar_token("_IF", "if", tree)
         self.add_rule_for_grammar_token("_ELSE", "else", tree)
 
-    def elifs(self, tree):
+    def elif_clause(self, tree):
         self.add_rule_for_grammar_token("_ELIF", "elif", tree)
 
-    def elses(self, tree):
+    def else_clause(self, tree):
         self.add_rule_for_grammar_token("_ELSE", "else", tree)
 
     def condition_spaces(self, tree):
