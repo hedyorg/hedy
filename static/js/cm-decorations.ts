@@ -182,9 +182,13 @@ export const decorationsTheme = EditorView.theme({
 });
 
 
-const deactivateGutterMarker = new class extends GutterMarker {
-    toDOM() { return document.createTextNode("😴") }
-}
+const deactivateGutterMarker = new (class extends GutterMarker {
+  toDOM() {
+    let e = document.createElement("i");
+    e.className = "fa-solid fa-eye-slash";
+    return e;
+  }
+})();
 
 function toggleLine(view: EditorView, pos: number) {
     let breakpoints = view.state.field(breakpointGutterState)
