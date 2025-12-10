@@ -36,6 +36,6 @@ export const
   Remove = 38,
   If = 39,
   Condition = 40,
-  IfLessCommand = 42,
-  ErrorInvalid = 43,
-  Else = 44
+  IfLessCommand = 43,
+  ErrorInvalid = 44,
+  Else = 45
