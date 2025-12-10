@@ -23,9 +23,9 @@ Turtle[@isGroup=turtle] {
     Color { color+ (Expression | ListAccess)  }
 }   
 
-If { ifs+ ((and+ | or+) Condition)*  }
+If { ifs+ Condition ((and+ | or+) Condition)*  }
 Else { elses+  }
-Elif { elif+ ((and+ | or+) Condition)* }
+Elif { elif+ Condition ((and+ | or+) Condition)* }
 
 Condition { 
     PressedCheck { Text ~cond is+ pressed+ } |
