@@ -459,6 +459,8 @@ class Database:
                 continue
             key = program['adventure_name']
             level = program['level']
+            if level not in ret:
+                ret[level] = {}
             if key not in ret[level] or ret[level][key]['date'] < program['date']:
                 ret[level][key] = program
         return ret
