@@ -159,66 +159,33 @@ class ForTeachersModule(WebsiteModule):
         if not workbook_for_level:
             return utils.error_page(error=404, ui_message="Workbook does not exist")
 
-        line = '_' * 30
-        for exercise in workbook_for_level['exercises']:
-            if isinstance(exercise, str):
-                # Some items in the list are just the string "new-page"
-                continue
-
-            if exercise['type'] == 'output':
-                exercise['title'] = gettext('workbook_output_question_title')
-                exercise['icon'] = '💻'
-                exercise['text'] = gettext('workbook_output_question_text')
-
-                if 'answer' in exercise.keys():
-                    a = len(exercise['answer'].split('\n'))
-                    exercise['lines'] = [line for x in range(a)]
-                else:
-                    pass
-
-            if exercise['type'] == 'circle':
-                exercise['title'] = gettext('workbook_circle_question_title')
-                exercise['icon'] = '◯'
-                goal = exercise['goal']
-                exercise['text'] = safe_format(gettext('workbook_circle_question_text'), goal=goal)
-
-            elif exercise['type'] == 'input':
-                exercise['title'] = gettext('workbook_input_question_title')
-                exercise['icon'] = '🧑‍💻'
-                exercise['text'] = gettext('workbook_input_question_text')
-
-                if 'answer' in exercise.keys():
-                    exercise['lines'] = [line for x in exercise['answer'].split('\n')]
-                else:
-                    pass
-
-                if 'output' in exercise.keys():
-                    exercise['output'] = [x for x in exercise['output'].split('\n')]
-                else:
-                    pass
-
-            elif exercise['type'] == 'MC-code':
-                exercise['title'] = gettext('workbook_multiple_choice_question_title')
-                exercise['icon'] = '🤔'
-                exercise['text'] = gettext('workbook_multiple_choice_question_text')
-
-            elif exercise['type'] == 'define':
-                exercise['title'] = gettext('workbook_define_question_title')  # ''
-                exercise['icon'] = '📖'
-                word = exercise['word']
-                exercise['text'] = safe_format(gettext('workbook_define_question_text'), word=word)
-                exercise['lines'] = [line for x in range(int(exercise['lines']))]
-
-            elif exercise['type'] == 'question':
-                exercise['title'] = gettext('workbook_open_question_title')  # ''
-                exercise['icon'] = '✍️'
-                exercise['lines'] = [line for x in range(int(exercise['lines']))]
+        prepare_workbook_for_template(workbook_for_level)
 
         return render_template("workbooks.html",
                                current_page="teacher-manual",
                                level=level,
                                page_title=f'Workbook {level}',
-                               workbook=workbook_for_level)
+                               workbooks=[(level, workbook_for_level)])
+
+    @route("/workbooks/all", methods=["GET"])
+    def all_workbooks(self):
+        workbooks = []
+        level = 1
+        while True:
+            workbook = WORKBOOKS[g.lang].get_workbook_for_level(level, g.lang)
+            if not workbook:
+                break
+
+            prepare_workbook_for_template(workbook)
+
+            workbooks.append((level, workbook))
+            level += 1
+
+        return render_template("workbooks.html",
+                               current_page="teacher-manual",
+                               level=level,
+                               page_title='All workbooks',
+                               workbooks=workbooks)
 
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
     @route("/manual/<section_key>", methods=["GET"])
@@ -2236,3 +2203,61 @@ def render_why_class(adventure):
         gettext('see_adventure_shared_class'),
         class_name=adventure.get("why_class"),
         creator=adventure.get('creator'))
+
+
+def prepare_workbook_for_template(workbook):
+    """Change the workbook contents (in-place) in the way that is expected by the template."""
+    line = '_' * 30
+    for exercise in workbook['exercises']:
+        if isinstance(exercise, str):
+            # Some items in the list are just the string "new-page"
+            continue
+
+        if exercise['type'] == 'output':
+            exercise['title'] = gettext('workbook_output_question_title')
+            exercise['icon'] = '💻'
+            exercise['text'] = gettext('workbook_output_question_text')
+
+            if 'answer' in exercise.keys():
+                a = len(exercise['answer'].split('\n'))
+                exercise['lines'] = [line for x in range(a)]
+            else:
+                pass
+
+        if exercise['type'] == 'circle':
+            exercise['title'] = gettext('workbook_circle_question_title')
+            exercise['icon'] = '◯'
+            goal = exercise['goal']
+            exercise['text'] = safe_format(gettext('workbook_circle_question_text'), goal=goal)
+
+        elif exercise['type'] == 'input':
+            exercise['title'] = gettext('workbook_input_question_title')
+            exercise['icon'] = '🧑‍💻'
+            exercise['text'] = gettext('workbook_input_question_text')
+
+            if 'answer' in exercise.keys():
+                exercise['lines'] = [line for x in exercise['answer'].split('\n')]
+            else:
+                pass
+
+            if 'output' in exercise.keys():
+                exercise['output'] = [x for x in exercise['output'].split('\n')]
+            else:
+                pass
+
+        elif exercise['type'] == 'MC-code':
+            exercise['title'] = gettext('workbook_multiple_choice_question_title')
+            exercise['icon'] = '🤔'
+            exercise['text'] = gettext('workbook_multiple_choice_question_text')
+
+        elif exercise['type'] == 'define':
+            exercise['title'] = gettext('workbook_define_question_title')  # ''
+            exercise['icon'] = '📖'
+            word = exercise['word']
+            exercise['text'] = safe_format(gettext('workbook_define_question_text'), word=word)
+            exercise['lines'] = [line for x in range(int(exercise['lines']))]
+
+        elif exercise['type'] == 'question':
+            exercise['title'] = gettext('workbook_open_question_title')  # ''
+            exercise['icon'] = '✍️'
+            exercise['lines'] = [line for x in range(int(exercise['lines']))]
