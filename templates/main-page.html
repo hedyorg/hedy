@@ -4,7 +4,7 @@
     <div class="bg-blue-200 mt-8 mb-8 border-b-8 border-blue-300">
         <div class="copy-container px-8 py-8 md:py-16 md:px-16 mb-8 flex flex-col gap-16 md:flex-row justify-between items-stretch">
             <div class="flex flex-col">
-                <h1 class="pb-0 font-bold font-slab text-sky-600 text-6xl tracking-wide">{{_('main_title')}}</h1>
+                <h1 class="pb-0 font-bold font-slab  text-6xl tracking-wide">{{_('main_title')}}</h1>
                 <h2 class="pb-12 my-0 font-secondary text-sky-600 tracking-wide">{{_('main_subtitle')}}</h2>
                 <div class="flex flex-row gap-4 min-w-full">
                     <button data-cy="start_learning_button" class="green-btn text-white w-60 py-4" onclick="window.location.href='/hedy'">{{_('start_learning')}}</button>
@@ -30,62 +30,233 @@
             </div>
         </div>
     </div>
-    <div id="main_page_content" class="text-display-copy">
-        {% for section in content %}
-        <div class="{{loop.cycle('stripe-white', 'stripe-colored')}} py-16">
-            {% if section['style'] == 'block' %}
-                <div class="copy-container px-10 md:px-16">
-                    <h2 class="font-bold">{{ section['title'] }}</h2>
-                    <div class="heading-underline"></div>
-                    <p>{{ section['text']|commonmark }}</p>
-                </div>
-            {% elif section['style'] == 'pane-with-image-left' %}
-                <div class="copy-container-wide px-4 md:px-16 flex flex-col items-center md:flex-row justify-between gap-6">
-                    <img src="{{static(section['image'])}}" class="w-4/5 md:w-2/5">
-                    <div class="column-pane px-8 py-4 md:w-3/5">
-                        <h3>{{ section['title'] }}</h3>
-                        <p>{{ section['text']|commonmark }}</p>
-                    </div>
-                </div>
-            {% elif section['style'] == 'pane-with-image-right' %}
-                <div class="copy-container-wide px-4 md:px-16 flex flex-col items-center md:flex-row justify-between gap-6">
-                    <div class="column-pane shadow-md rounded-lg px-8 py-4 md:w-3/5">
-                        <h3>{{ section['title'] }}</h3>
-                        <p>{{ section['text']|commonmark }}</p>
-                    </div>
-                    <img src="{{static(section['image'])}}" class="w-4/5 md:w-2/5">
-                </div>
-            {% elif section['style'] == 'columns' %}
-                <div class="copy-container columns px-4 md:px-16 flex flex-col md:flex-row justify-between gap-6">
-                    {% for col in section['columns'] %}
-                    <div class="column-pane shadow-md rounded-lg px-8 py-4 flex-1">
-                        <h3>{{ col['title'] }}</h3>
-                        <p>{{ col['text']|commonmark }}</p>
-                    </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
+
+    <div class="stripe-white py-16">
+        <div>
+            <h2 class="text-4xl font-bold text-center mb-0">Meet Hedy!</h2>
+            <p class="text-center text-gray-600 mb-12 mt-0">The coding language made for kids</p>
         </div>
-        {% endfor %}
-    </div>
-    <div class="stripe-white text-base text-blue-600 py-16">
-        <div class="flex flex-col sm:flex-row max-w-screen-xl mx-auto text-links-plain">
-            <div class="flex-1">
-                <a href="/subscribe" data-cy="subscribe_button">{{_('subscribe_newsletter')}}</a><br>
-                <a href="/learn-more" data-cy="learnmore_button">{{_('nav_learn_more')}}</a><br>
-                <a href="/for-teachers/manual" data-cy="footer_manual_button">{{_('teacher_manual')}}</a><br>
-                <a href="/privacy" data-cy="privacy_button">{{_('privacy_terms')}}</a><br>
+        <div class="copy-container-wide px-4 md:px-16 flex flex-col md:flex-row justify-center items-stretch gap-8">
+            <div class="column-pane bg-white rounded-lg px-8 py-12 flex-1 shadow-md text-center h-full flex flex-col items-center border-2 border-solid border-sky-200">
+                <img src="{{ static('/images/hedy-multilang.png') }}" alt="Bridge image" class="w-50 h-32 object-cover mb-6">
+                <h3 class="text-2xl font-bold mb-4">Multi-lingual Programming</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Hedy supports over 47 different languages! Including Dutch, Spanish, Arabic, Turkish, Chinese and Hindi.
+                </p>
+                <button class="white-btn text-sky-600 w-60 py-2 mt-4 border-2 border-solid border-sky-200" onclick="window.location.href='/hedy'">Become a translator</button>
             </div>
-            <div class="flex-1 text-right sm:text-left">
-                <a href="https://github.com/hedyorg/hedy" data-cy="github_button">{{_('hedy_on_github')}}</a><br>
-                <a href="https://www.facebook.com/profile.php?id=61578101102215" data-cy="facebook_button">{{_('facebook_page')}}</a><br>
-                <a href="https://www.linkedin.com/company/hedyorg" data-cy="linkedin_button">{{_('linkedin_page')}}</a><br>
-                <a href="https://github.com/sponsors/hedyorg" data-cy="sponsor_button">{{_('become_a_sponsor')}}</a><br>
-                <a href="https://discord.gg/8yY7dEme9r" data-cy="discord_button">{{_('discord_server')}}</a><br>
-                <a href="https://github.com/hedyorg/hedy/wiki/Hedy-Translation-Tutorial" data-cy="translate_button">{{_('translating_hedy')}}</a><br>
-                ✉️ <a href="mailto:hello@hedy.org" data-cy="email_button">hello@hedy.org</a>
+
+            <div class="column-pane bg-white rounded-lg px-8 py-12 flex-1 shadow-md text-center h-full flex flex-col items-center border-2 border-solid border-sky-200">
+                <img src="{{ static('/images/hedy-classroom.png') }}" alt="Community image" class="w-50 h-32 object-cover mb-6">
+                <h3 class="text-2xl font-bold mb-4">Built for the Classroom</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Teachers can use our free built-in lesson plans, or create their own. Hedy is suitable for kids ages 10 and up.
+                </p>
+                <button class="white-btn text-sky-600 w-60 py-2 mt-4 border-2 border-solid border-sky-200" onclick="window.location.href='/hedy'">Start teaching</button>
+            </div>
+
+            <div class="column-pane bg-white rounded-lg px-8 py-12 flex-1 shadow-md text-center h-full flex flex-col items-center border-2 border-solid border-sky-200">
+                <img src="{{ static('/images/hedy-grows.png') }}" alt="Learning image" class="w-70 h-32 object-cover mb-6">
+                <h3 class="text-2xl font-bold mb-4">Step by Step Learning</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Hedy introduces concepts and syntax step by step. A scientifically proven way to learn!
+                </p>
+                <button class="white-btn text-sky-600 w-60 py-2 mt-4 border-2 border-solid border-sky-200" onclick="window.location.href='/hedy'">Start learning</button>
             </div>
         </div>
     </div>
+
+    <div class="stripe-green-bk py-16">
+        <div class="copy-container-wide px-4 md:px-16 flex justify-center">
+            <div class="column-pane bg-white rounded-lg px-8 py-16 flex flex-col md:flex-row items-center gap-16 max-w-6xl">
+            <img src="{{ static('/images/code-example.jpg') }}"
+                class="w-full md:w-1/2 rounded-lg object-cover"
+                alt="Descriptive alt text">
+                
+            <div class="flex flex-col md:w-1/2">
+                <h2 class="text-3xl font-bold mb-4">Bridge the gap!</h2>
+                <p class="text-gray-700 leading-relaxed">
+                Hedy can be a bridge between programming tools like Scratch and textual programming like Python.
+                It combines the friendliness of block coding with the power of real syntax to help students
+                transition smoothly into textual programming.
+                </p>
+            </div>
+
+            </div>
+        </div>
+
+        <div class="copy-container-wide px-4 md:px-16 flex justify-center mt-16">
+            <div class="column-pane bg-white rounded-lg px-8 py-16 flex flex-col md:flex-row items-center gap-16 max-w-6xl">
+            
+            <div class="flex flex-col md:w-1/2">
+                <h2 class="text-3xl font-bold mb-4">Made for kids</h2>
+                <p class="text-gray-700 leading-relaxed">Hedy is a textual programming language designed for kids in the classroom. 
+                    For example, Hedy provides error messages that are easy for kids to read and understand. 
+                    This helps students practice debugging on their own.
+                </p>
+            </div>
+
+            <img src="{{ static('/images/code-example-2.jpg') }}"
+                class="w-full md:w-1/2 rounded-lg object-cover"
+                alt="Descriptive alt text">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="stripe-white py-16">
+        <div class="copy-container-wide px-4 md:px-16 flex flex-col md:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
+            
+            <!-- Left Side: Text Content -->
+            <div class="flex flex-col md:w-1/2 text-left">
+            <h2 class="text-4xl font-bold mb-4">Hedy is free!</h2>
+            <p class="text-gray-700 leading-relaxed mb-8">
+                Hedy is “open source”, which means that everyone can help us make Hedy better.  If you like Hedy and want to contribute, we accept (and are very grateful for) donations!
+            </p>
+            <div class="flex flex-row gap-4">
+                <button class="blue-btn text-white px-2 py-3 w-40" onclick="window.location.href='/hedy'">
+                Donate!
+                </button>
+                <button class="green-btn text-white px-2 py-3 w-40" onclick="window.location.href='/for-teachers'">
+                See our Github
+                </button>
+            </div>
+            </div>
+
+            <div class="md:w-1/2 flex justify-center">
+            <img src="{{ static('/images/Hedy-logo-old.png') }}" 
+                alt="Students coding" 
+                class="rounded-lg w-3/4 max-w-md object-cover">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="py-16">
+  <div class="copy-container-wide px-4 md:px-16 max-w-4xl mx-auto">
+
+    <div class="faq-item mb-4 rounded-lg overflow-hidden">
+      <button class="faq-question w-full flex justify-between items-center bg-blue-200 hover:bg-blue-300 text-left px-6 py-4 text-lg text-sky-700 transition-all">
+        <span class="font-sans">Do I need to install anything?</span>
+        <svg class="faq-arrow w-6 h-6 text-sky-700 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div class="faq-answer px-6 py-4 bg-blue-100 text-gray-700 hidden">
+        <p>
+            Hedy is an innovative programming language that helps learners transition from block-based coding (like Scratch)
+            to text-based programming (like Python). It introduces syntax step-by-step, making learning easier and more fun.
+        </p>
+      </div>
+    </div>
+
+    <!-- FAQ item 2 -->
+    <div class="faq-item mb-4 rounded-lg overflow-hidden">
+      <button class="faq-question w-full flex justify-between items-center bg-blue-200 hover:bg-blue-300 text-left px-6 py-4 text-lg text-sky-700 transition-all">
+        <span class="font-sans">Do I need programming experience to teach with Hedy?</span>
+        <svg class="faq-arrow w-6 h-6 text-sky-700 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div class="faq-answer px-6 py-4 bg-blue-100 text-gray-700 hidden">
+        Yes! Hedy is completely free and open-source. You can start learning, teaching, or contributing right away.
+      </div>
+    </div>
+
+    <!-- FAQ item 3 -->
+    <div class="faq-item mb-4 rounded-lg overflow-hidden">
+      <button class="faq-question w-full flex justify-between items-center bg-blue-200 hover:bg-blue-300 text-left px-6 py-4 text-lg text-sky-700 transition-all">
+        <span class="font-sans">How can I help translate Hedy?</span>
+        <svg class="faq-arrow w-6 h-6 text-sky-700 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div class="faq-answer px-6 py-4 bg-blue-100 text-gray-700 hidden">
+        Nope! Hedy runs entirely in your web browser — no installation needed. Just open the website and start coding.
+      </div>
+    </div>
+
+    <div class="faq-item mb-4 rounded-lg overflow-hidden">
+      <button class="faq-question w-full flex justify-between items-center bg-blue-200 hover:bg-blue-300 text-left px-6 py-4 text-lg text-sky-700 transition-all">
+        <span class="font-sans">How do I sign up for the newsletter?</span>
+        <svg class="faq-arrow w-6 h-6 text-sky-700 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div class="faq-answer px-6 py-4 bg-blue-100 text-gray-700 hidden">
+        Nope! Hedy runs entirely in your web browser — no installation needed. Just open the website and start coding.
+      </div>
+    </div>
+
+    <div class="faq-item mb-4 rounded-lg overflow-hidden">
+      <button class="faq-question w-full flex justify-between items-center bg-blue-200 hover:bg-blue-300 text-left px-6 py-4 text-lg text-sky-700 transition-all">
+        <span class="font-sans">Is Hedy suitable for evidence based teaching?</span>
+        <svg class="faq-arrow w-6 h-6 text-sky-700 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div class="faq-answer px-6 py-4 bg-blue-100 text-gray-700 hidden">
+        Nope! Hedy runs entirely in your web browser — no installation needed. Just open the website and start coding.
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  // Toggle FAQ answers
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const faqItem = button.parentElement;
+      const answer = faqItem.querySelector('.faq-answer');
+      const arrow = faqItem.querySelector('.faq-arrow');
+
+      // Toggle visibility
+      answer.classList.toggle('hidden');
+      arrow.classList.toggle('rotate-180');
+    });
+  });
+</script>
+
+<footer class="bg-blue-200 py-16">
+  <div class="copy-container-wide px-4  max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-40">
+
+    <!-- Left Side: Logo + Header + Subtitle -->
+    <div class="flex flex-col md:w-1/3 gap-4">
+        <div class="flex flex-row items-center gap-4 align-items-center">
+            <img src="{{ static('/images/Hedy-logo-96x96-laptop.png') }}" alt="Site Logo" class="w-30 h-auto mb-2">
+            <h1 class="font-bold mt-0 mb-0">Hedy</h1>
+        </div>
+      <p class="text-sky-600 mt-0">
+        Textual programming for the classroom. Free and open source.
+      </p>
+    </div>
+
+
+    <div class="flex flex-col md:flex-row md:w-1/2 justify-between gap-2">
+
+
+      <div class="flex flex-col gap-2 justify-center md:w-1/4">
+        <h2 class="font-semibold text-lg">Get Involved</h2>
+        <p class="mb-0 mt-0"><a href="/for-teachers">Donate</a></p>
+        <p class="mb-0 mt-0"><a href="/resources">Translate</a></p>
+        <p class="mb-0 mt-0"><a href="/manual">hello@hedy.org</a></p>
+      </div>
+
+      <div class="flex flex-col gap-2 justify-center md:w-1/4">
+        <h2 class="font-semibold text-lg">Learn More</h2>
+        <p class="mb-0 mt-0"><a href="https://github.com/hedyorg/hedy" class="hover:underline">Newsletter</a></p>
+        <p class="mb-0 mt-0"><a href="https://discord.gg/8yY7dEme9r" class="hover:underline">The Hedy Foundation</a></p>
+        <p class="mb-0 mt-0"><a href="/blog" class="hover:underline">Privacy Terms</a></p>
+      </div>
+
+            <div class="flex flex-col gap-2 justify-center md:w-1/4">
+        <h2 class="font-semibold text-lg">Follow us</h2>
+        <p class="mb-0 mt-0"><a href="/start">Github</a></p>
+        <p class="mb-0 mt-0"><a href="/lessons">Linkedin</a></p>
+        <p class="mb-0 mt-0"><a href="/examples">Discord</a></p>
+      </div>
+    </div>
+
+  </div>
+</footer>
 {% endblock %}
