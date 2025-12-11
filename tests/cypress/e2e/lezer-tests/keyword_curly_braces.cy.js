@@ -46,11 +46,11 @@ describe('Adds curly braces around keywords, mainting the original code as much 
         })  
     })
 
-    describe('Level 8 tests', () => {
+    describe('Level 9 tests', () => {
         it('Spaces are maintained', () => {
             const code =  `name = ask 'What is your name?'\nif name is Hedy\n    print 'Welcome Hedy'\n    print 'You can play on your computer!'`
             const expected = `name = {ask} 'What is your name?'\n{if} name {is} Hedy\n    {print} 'Welcome Hedy'\n    {print} 'You can play on your computer!'`
-            const generatedCode = addCurlyBracesToCode(code, 8, 'en')
+            const generatedCode = addCurlyBracesToCode(code, 9, 'en')
 
             expect(expected).equal(generatedCode)
         })
@@ -58,7 +58,7 @@ describe('Adds curly braces around keywords, mainting the original code as much 
         it('Not in should be reduced to just one keyword', () => {
             const code =  `if 1 not in list`
             const expected = `{if} 1 {not_in} list`
-            const generatedCode = addCurlyBracesToCode(code, 8, 'en')
+            const generatedCode = addCurlyBracesToCode(code, 9, 'en')
 
             expect(expected).equal(generatedCode)
         })
