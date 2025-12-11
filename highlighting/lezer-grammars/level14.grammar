@@ -1,4 +1,3 @@
-// Same as level 13
 @top Program { newline* (Command newline+)* Command? }
 
 Command {
@@ -11,7 +10,7 @@ PrintArguments { argument !comma (Op<',' | '،' | '，' | '、' >? argument)* }
 
 AssignList { Text (is+ | Op<"=">) Op<"["> ((boolean | String | Text | Number) ~ambig (Op<',' | '،' | '，' | '、' > (boolean | String | Text | Number))*)? Op<"]"> }
 Assign { Text (is+ | Op<"=">) (Expression ~ambig )+ }
-Input { Text (is+ | Op<"=">) input+ Op<"("> PrintArguments? Op<")"> }
+Input { Text (is+ | Op<"=">) (input+ | ask+) Op<"("> PrintArguments? Op<")"> }
 Sleep { sleep+ (Expression )? }
 
 ListAccess { Text Op<"["> (random+ | Text | Number) Op<"]">}
@@ -45,7 +44,7 @@ Repeat { repeat+ (Number | Text) times+ }
 
 For { fors+ Text ins+ (Text | range+ Op<"(">? (Number | Text) Op<',' | '،' | '，' | '、' > (Number | Text) (Op<',' | '،' | '，' | '、' > (Number | Text))? Op<")"?>) Op<":">? }
 While { whiles+ Condition ((and+| or+) Condition)* Op<":">}
-Define { def+ Text Op<"(">? Arguments? Op<")">? Op<":">?}
+Define { (def+ | define+) Text Op<"(">? Arguments? Op<")">? Op<":">?}
 Call { Text Op<"("> Arguments? Op<")"> }
 Return { returns+ (PrintArguments)? }
 
@@ -83,6 +82,7 @@ Expression {
     print[@name="print"],
     is[@name="is"],
     input[@name="input"],
+    ask[@name="ask"],
     sleep[@name="sleep"],
     play[@name="play"],
     random[@name="random"],
@@ -105,6 +105,7 @@ Expression {
     range[@name="range"],
     whiles[@name="while"],
     def[@name="def"],
+    define[@name="define"],
     returns[@name="return"],
     fors[@name="for"],
     to_list[@name="to_list"],

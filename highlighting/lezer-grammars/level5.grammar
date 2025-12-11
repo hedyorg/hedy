@@ -29,8 +29,9 @@ Turtle[@isGroup=turtle] {
 If { ifs+ Condition newline* IfLessCommand Else? }
 Else { !else elses+ newline* IfLessCommand }
 
-Condition { 
-    EqualityCheck { Text is+ (String | Text | pressed+) }
+Condition {
+    PressedCheck { Text is+ pressed+ } |
+    EqualityCheck { Text is+ (String | Text) }
 }
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
