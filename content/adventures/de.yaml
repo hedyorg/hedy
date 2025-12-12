@@ -195,6 +195,23 @@ adventures:
                     {else}
                         {print} 'Robin geht nach Hause.'
                     ```
+                story_text_2: |
+                    Durch die Befehle `{and}` und `{or}` können Sie Ihre Geschichten vielseitiger gestalten. Sie können zwei Fragen stellen und auf die Kombination von Antworten reagieren.
+
+                    ### Exercise 1
+                    Sehen Sie sich den Beispielcode an und beenden Sie ihn. Dann mindestens 2 weitere `{if}` Codes mit `{and}` oder `{or}` hinzufügen.
+
+                    ### Exercise 2
+                    Finde eine Geschichte aus einer vorherigen Ebene und füge eine `{and}` oder `{or}` hinzu.
+                    Beispiel_Code: |
+                    `` `
+                    {print} 'Unser Held geht durch den Wald '
+                    {print} 'Der Pfad teilt zwei Wege '
+                    path = {ask} 'Welcher Pfad sollte sie wählen? '
+                    Waffe = {ask} 'Welche Waffe zieht sie? '
+                    {if} Pfad {is} 'link' {and} Waffe {is} Schwert '
+                        _.
+                    `` `
             11:
                 story_text: |
                     In diesem Level kannst du den `{for}` Befehl für deine Geschichte nutzen. Damit kannst du zum Beispiel ganz einfach das Kinderbuch "Brauner Bär, wen siehst denn Du?" programmieren.
@@ -218,11 +235,11 @@ adventures:
                     {print} 'Wo willst Du nach ihnen suchen?'
                     {print} 'Wähle zwischen: Baum, Blumenbeet, Stein, Briefkasten'
                     {while} Schlüssel == 'verloren'
-                        Ort = {ask} 'Wo willst Du suchen?'
+                        Ort = {input} 'Wo willst Du suchen?'
                         {if} Ort == 'Blumenbeet'
                             {print} 'Ah, hier sind sie!'
                             Schlüssel = 'gefunden'
-                        {else}
+                        {else}:
                             {print} 'Nö, sie sind nicht beim ' Ort '.'
                     {print} 'Jetzt kannst Du ins Haus!'
                     ```
@@ -248,6 +265,16 @@ adventures:
                     ```
             6:
                 story_text: "Nun da du `{elif}` benutzen kannst, kannst du eine noch interaktivere Geschichte kreieren! Du könntest zum Beispiel mehrere Charaktere, die alle unterschiedliche Eigenschaften haben, erstellen.\nOder du könntest deine Spieler entscheiden lassen, welchen Weg sie wählen, welche Tür sie öffnen oder welchen magischen Trank sie trinken wollen...\n\n### Übung\nErstelle eine eigene Geschichte mit 3 oder mehr Auswahlmöglichkeiten, indem du {elif} einsetzt."
+                example_code: |
+                    `` `
+                    character = {ask} 'Wer wird Ihnen bei Ihrer Suche helfen? '
+                    {if} character  {is} 'Daisy'
+                    {print} 'Du hast Daisy ausgesucht! Sie ist die schlauste aller! '
+                    {elif} character  {is} 'Jason'
+                    {print} 'Du hast Jason ausgewählt! Er ist der Größte von allen! '
+                    {elif} character {is} 'Sam'
+                    {print} 'Du hast Sam ausgewählt! Sie sind die schnellsten von allen! '
+                    `` `
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
         description: Einführung von {add} {to_list} und {remove} {from}
@@ -459,15 +486,15 @@ adventures:
                     Hast du es hingekriegt? Wirklich toll! Willst du noch andere Sachen mit deinem Taschenrechner machen? **Im nächsten Abenteuer geht es weiter!**
                 example_code: |
                     ```
-                    {define} berechne_notendurchschnitt
+                    {def} berechne_notendurchschnitt
                         gesamt = 0
-                        {for} i {in} {range} 1 {to} 4
-                            note = {ask} _
-                            gesamt = gesamt + _
+                        {for} i {in} {range} (1,4):
+                            grade = {input} _
+                            total = total + _
                             {return} _ / 4
 
-                    notendurchschnitt = {call} _
-                    {print} 'Dein Notendurchschnitt ist ' notendurchschnitt
+                    mean_grade =  _
+                    {print} ('Dein Notendurchschnitt ist ' ,  mean_grade)
                     ```
             16:
                 story_text: |
@@ -477,7 +504,7 @@ adventures:
                     ### Übung
                     Ergänze die `{while}` Schleife in der Funktion, frage die Spieler, was zahl_1 mal zahl_2 ist und drucke ihre Antwort.
                     Dann rufe die Funktion auf.
-                example_code: "```\n{define} neue_frage\n    Zahlen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    Zahl_1 = Zahlen {at} {random}\n    Zahl_2 = Zahlen {at} {random}\n    richtig = Zahl_1 * Zahl_2\n    Antwort = 0\n    _\n    _\n    _\n    {print} 'Gut gemacht!'\n\n{print} 'Gib 10 richtige Antworten, um zu gewinnen!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} 'Gewonnen!'\n```\n"
+                example_code: "```\n{define} new_question():\n    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n    number_1 = numbers[random]\n    number_2 = numbers[random]\n    correct = number_1 * number_2\n    answer = 0\n    _\n    _\n    _\n    {print} ('Gut gemacht!')\n\n{print} ('Gib 10 richtige Antworten, um zu gewinnen!')\n{for} i {in} {range} 1 {to} 10:\n    _\n{print} ('Gewonnen!')\n```\n"
     calculator_2:
         name: Taschenrechner 2
         levels:
@@ -499,6 +526,22 @@ adventures:
                 example_code: |
                     ```
                     # Benutze deinen eigenen Code aus dem letzten Abenteuer.
+                    ```
+            10:
+                story_text: |
+                    ### Exercise 1
+                    Machen wir das Übungsprogramm etwas härter. Der Spieler muss nun zwei Fragen korrekt beantworten. Füllen Sie die Leerzeichen aus, um das Programm abzuschließen.
+
+                    ### Exercise 2
+                    Manchmal haben Berechnungen mehrere korrekte Antworten. Beispielsweise kann 10 durch 5 und durch 2 geteilt werden. Die Frage "Welche Zahl teilt 10?" kann also von 2 und von 5 beantwortet werden.
+                    Fragen Sie nach einer Berechnung, die mehrere korrekte Antworten hat, fragen Sie den Spieler, ihn zu beantworten, und bestimmen Sie, ob es korrekt ist mit `{or}`.
+                    Leeren Sie das Programmierfeld und erstellen Sie Ihre eigene Lösung.
+                example_code: |
+                    ```
+                    answer1 = {ask} 'Was ist 10 mal 7?'
+                    answer2 = {ask} 'Was ist 6 mal 7?'
+                    {if} _ _ _ _ _ _ _
+                        {print} _
                     ```
         default_save_name: Taschenrechner 2
         description: Taschenrechner 2
@@ -597,6 +640,108 @@ adventures:
                     {print} 'autor ist dein(e) Lieblingsautor(in)'
                     {print} Hmmm... Ich denke du solltest... bücher {at} {random} ausprobieren
                     ```
+            5:
+                story_text: |-
+                    ### Exercise
+                    Debugge diesen Code. Viel Glück!
+                example_code: |
+                    **Achtung! Dieser Code muss debuggt werden!**
+                    ```
+                    {print} Willkommen im Schwimmbad Hedy!
+                    certificate {is} {ask} ‚Hast du ein Schwimmabzeichen?‘
+                    {if} certificate ‚yes‘ {print} 'Super! Du darfst im Schwimmbad schwimmen!
+                    {print} {else} „Sie dürfen zwar eintreten, aber nicht schwimmen.“
+                    Rabatt {is} {ask} „Sind Sie jünger als 12 Jahre?“
+                    {if} Rabatt {is} ja
+                    {print} „Das macht dann 3,50 $.“
+                    „Das macht dann 5,50 $.“
+                    {print} „Einen schönen Tag noch!“
+                    ```
+                answer_code: |
+                    ```
+                    {print} „Willkommen im Schwimmbad Hedy!“
+                    Zertifikat {is} {ask} ‚Hast du ein Schwimmzertifikat?‘
+                    {if} Zertifikat {is} ‚ja‘ {print} ‚Super! Du darfst im Schwimmbad schwimmen!‘
+                    {else} {print} „Du darfst reinkommen, aber nicht schwimmen.“
+                    Rabatt {is} {ask} ‚Bist du jünger als 12?‘
+                    {if} Rabatt {is} ‚ja‘ {print} ‚Das macht dann 3,50 $‘
+                    {else} {print} ‚Das macht dann 5,50 $‘
+                    {print} 'Einen schönen Tag noch!‘
+
+                    ```
+            6:
+                story_text: |
+                    ### Übung
+                    Debugge diesen Code. Viel Glück!
+                example_code: |
+                    **Warning! Dieser Code muss debugged werden! **
+                    ```
+                    Lebensmittel {in} Popcorn, Süßigkeiten, Nachos
+                    food_choice {ask} 'Was wollen Sie essen? '
+                    {if} food_choice {is} Lebensmittel
+                    {print} 'Wir haben das! Ich hole es. '
+                    {else} food_choice {is} 'Nichts' 
+                    {print} Kein Essen für dich. '
+                    {else} food_choice {is} "" {print} "Ich fürchte, wir haben das nicht. '
+                    ```
+                answer_code: |
+                    `` `
+                    Lebensmittel {is} Popcorn, Süßigkeiten, Nachos
+                    food_choice {is} {ask} 'Was wollen Sie essen? '
+                    {if} food_choice {in} Lebensmittel
+                    {print} "Wir haben das! Ich hole es."
+                    {elif} food_choice {is} '
+                    {print} Kein Essen für dich. '
+                    {else} 
+                    {print} "Ich fürchte, wir haben das nicht."
+                    ```
+            7:
+                story_text: |-
+                    ### Übung
+                    Debugge diesen Code. Viel Glück!
+                example_code: |
+                    **Warning! Dieser Code muss debugged werden! **
+                    ```
+                    {print} Vending machine
+                    select_product = {ask} 'Bitte wählen Sie ein Produkt '
+                    one_dollar_products = Cola Orangensaft Wasser
+                    two_dollar_products = Schokolade, Keks, Müsliriegel
+                    drei_dollar_products = Kartoffelchips, Beef Jerky, Bananenbrot
+                    {if} select_product {is} {in} one_dollar_products
+                    Preis = 1
+                    {elif} select_product {is} two_dollar_products
+                    Preis = 2
+                    {elif} select_product {in} drei_dollar_products
+                    Preis = 3
+                    {else}
+                    Preis
+                    quant_of_products = '{ask} Wie viele von 'select_product möchten Sie haben?
+                    Gesamt {is} Preis * volume_of_products
+                    {print} 'Das wird $' insgesamt ' bitte '
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Vending machine'
+                    select_product = {ask} 'Bitte wählen Sie ein Produkt '
+                    one_dollar_products = Koks, Orangensaft, Wasser
+                    two_dollar_products = Schokolade, Keks, muesli bar
+                    drei_dollar_products = Kartoffelchips, Rindfleisch ruck, Bananenbrot
+                    {if} select_product {in} one_dollar_products
+                    price = 1
+                    {elif} select_product {in} two_dollar_products
+                    price = 2
+                    {elif} ausgewählt_Produkt {in} drei_dollar_products
+                    price = 3
+                    {else}
+                    price = 0
+                    quant_of_products = {ask} "Wie viele von 'select_product ' möchten Sie haben? '
+                    Gesamt = Preis * Menge_of_products
+                    {print} 'Das wird $' gesamt ' bitte '
+                    ```
+            8:
+                story_text: |-
+                    ### Übung
+                    Debugge diesen Code. Viel Glück!
         description: Debugging-Abenteuer
         name: Debugging
         default_save_name: Debugging
@@ -2940,3 +3085,39 @@ adventures:
                 example_code: "```\nantwort = 0\n{while} antwort != 25\n    antwort = {ask} 'Was ist 5 mal 5?'\n{print} 'Eine richtige Antwort wurde gegeben'\n```\n"
         default_save_name: solange_Befehl
         name: '{while}'
+    and_or_command:
+        name: '{and} & {or}'
+        default_save_name: and_or_command
+        description: and, or
+        levels:
+            10:
+                story_text: |-
+                    Wir lernen jetzt `{and}` und `{or}`! Wenn Sie zwei Aussagen überprüfen möchten, müssen Sie nicht zwei `{if}`s verwenden, aber Sie können `{and}` und `{or}` verwenden.
+                    Wenn Sie `{and}` verwenden, müssen beide Aussagen, links und rechts von `{and}` wahr sein. Wir können auch `{or}` verwenden. Dann muss nur eine Aussage korrekt sein.
+                example_code: |
+                    ```
+                    Name = {ask} 'was ist eure Name?'
+                    Alter = {ask} 'was ist eure Alter?'
+                    {if} Name {is} 'Hedys {and} Alter {is} 2
+                        {print} 'du bist das reales Hedy!'
+                    {elif} Name {is} 'Hedys {or} Alter {is} 2
+                        {print} 'So Abschluss.. Aber du bist nicht Hedy!'
+                    {else}
+                        {print} 'Du bist nicht Hedy!'
+                    ```
+    congratulations:
+        name: Glückwünsche
+        default_save_name: now_what
+        description: Ende von Hedy
+        levels:
+            8:
+                story_text: |
+                    Glückwunsch! Sie haben das Ende von Hedy Basic erreicht! Sie können weiter in Hedy Advanced (Ebene 9-12) lernen, wo Sie komplexere Programmierkonzepte lernen können.
+                    Oder fühlen Sie sich frei, in Hedy Basic zu bleiben und kommen Sie selbstverständlich mit Ihren eigenen Programmen!
+            12:
+                story_text: |
+                    Glückwunsch! Sie haben das Ende von Hedy Advanced erreicht! Sie können weiterhin in Hedy Expert (Level 13-16) lernen, wie man echten Python-Code schreibt.
+                    Oder fühlen Sie sich frei, in Hedy Advanced zu bleiben und kommen Sie selbstverständlich mit Ihren eigenen Programmen!
+            16:
+                story_text: |
+                    Glückwunsch! Du hast das letzte Level von Hedy erreicht! Der Code, den Sie hier erstellt haben, kann in reale Python-Umgebungen wie Replit oder PyCharm kopiert werden und Sie können dort weiter lernen! Beachten Sie jedoch, dass Python nur Englisch-Befehle lesen kann, also wenn Sie andere Sprachen verwendet haben, müssen Sie jetzt auf Englisch wechseln.
