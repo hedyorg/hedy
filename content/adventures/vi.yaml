@@ -97,13 +97,13 @@ adventures:
                 example_code: |
                     ```
                     tên {is} {ask} _ Tên bạn là gì? _
-                    {print}  _ Nhân vật chính được gọi là _ tên
+                    {print} _ Nhân vật chính được gọi là _ tên
                     _
                     _
-                    {print} tên  _ đang đi dạo trong rừng_
-                    {print} tên _có chút sợ hãi_
-                    nhữngthú {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Anh ấy nghe thấy âm thanh của một_ nhữngthú {at} {random}
+                    {print} tên _ đang đi dạo trong rừng_
+                    {print} tên_có chút sợ hãi_
+                    những con thú {is} 🦔, 🐿, 🦉, 🦇
+                    {print}_ Anh ấy nghe thấy âm thanh của một_ những con thú {at} {random}
                     {print} tên _lo sợ rằng đây là khu rừng ma ám _
                     ```
             5:
@@ -111,14 +111,14 @@ adventures:
                     Ở cấp độ này ban có thể lập trình ra nhiều cái kết khác nhau, khiến câu chuyện của bạn trở nên thú vị hơn.
                     Phần code ví dụ bạn có thể thấy hai cái kết khác nhau.
 
-                    ###Bài tập 1
+                    ### Bài tập 1
                     Viết một câu chuyện mới với ít nhất 6 dòng code về một chủ đề mà bạn chọn.
                     Không có cảm hứng? Chọn một trong những chủ đề sau đây: siêu anh hùng, một ngày đi học buồn chán, lạc trên đảo hoang.
 
                     Cho người chơi lựa chọn cái kết có hậu và cái kết buồn, như code ví dụ.
                     Lập trình cả hai cái kết.
 
-                    ###Bài tập 2
+                    ### Bài tập 2
                     Sao chép câu chuyện trinh thám mà bạn vừa tạo nên ở những cấp độ trước.
                     Tìm cách thêm vào ít nhất 2 câu lệnh  `{if}` và `{else}`  trong câu chuyện của bạn.
                     Đây có thể là kết thúc vui hoặc buồn, nhưng bạn cũng có thể tìm nhiều cách khác để kết hợp các câu lệnh.
@@ -137,7 +137,8 @@ adventures:
                     Bạn có thể lặp lại điều này trong câu chuyện ở cấp độ này bằng cách dùng `{repeat}`.
 
                     ### Bài tập
-                    Thêm phần lặp lại vào trong câu chuyện của bạn. Quay lại để lưu chương trình, chọn lập trình cho câu truyện từ cấp độ trước cấp 6 và tìm dòng có chứa `{print}` để lặp lại nó!
+                    Thêm phần lặp lại vào trong câu chuyện của bạn. Quay lại để lưu chương trình, chọn lập trình cho câu truyện từ cấp độ trước cấp 6 và
+                    tìm dòng có chứa `{print}` để lặp lại nó!
                 example_code: |
                     ```
                     {print} 'Chàng hoàng tử liên tục cầu cứu'
@@ -179,4 +180,28 @@ adventures:
 
                     ### Bài tập 3
                     Quay lại cấp độ 8 trong câu chuyện và sử dụng ít nhất 2 lần `{if}` ở trong 1 `{if}`khác.
-                example_code: "```\n{print} 'Robin đang đi bọ xuống trung tâm thành phố'\nlocation = {ask}'Liệu Robin sẽ vào 1 cửa hàng, hay cố ấy nên đi về nhà?'\n{if} location {is} \"cửa hàng\"\n    {print} 'Cố ấy vào trong cửa hàng'\n    {print} 'Robin thấy 1 cuốn chuyện trông rất hay'\n```\n"
+                example_code: "```\n{print} 'Robin đang đi bọ xuống trung tâm thành phố'\nlocation = {ask}'Liệu Robin sẽ vào 1 cửa hàng, hay cô ấy sẽ đi về nhà?'\n{if} location {is} \"cửa hàng\"\n    {print} 'Cô ấy vào trong cửa hàng'\n    {print} 'Robin thấy 1 cuốn sách trông rất thú vị'\n    sách = {ask} 'Robin có mua sách không?'\n    {if} sách {is} có\n    _{print} 'Robin mua quyển sách và đi về nhà'\n    _{else}\n    _{print} 'Robin rời cửa hàng và về nhà'\n{else} \n    {print}'Robin về nhà'    \n```\n"
+            6:
+                story_text: |-
+                    Bây giờ bạn có thể dùng `{elif}`để tăng sự tương tác của câu chuyện! Bạn có thể tạo nhiều nhân vật với tính cách khác nhau. 
+                    Hoặc bạn có thể cho nhân vật của bạn lựa chọn đi đường nào, mở cánh cửa nào, hoặc uống loại nước thần kì nào... 
+
+                    ### Bài tập
+                    Dựng một câu chuyện với ít nhất ba lựa chọn bằng cách dùng {elif}.
+                example_code: |
+                    ```
+                    nhân vật {is} {ask} 'Ai sẽ giúp bạn trong cuộc hành trình của bạn?'
+                    {if} nhân vật {is} 'Daisy'
+                    {print} 'Bạn đã chọn Daisy! Cô ấy là người thông minh nhất!'
+                    {elif} nhân vật {is} 'Jason'
+                    {print} 'Bạn đã chọn Jason! Anh ấy là người mạnh nhất!'
+                    {elif} nhân vật {is} 'Sam'
+                    {print} 'Bạn đã chọn Sam! Đây là người nhanh nhất!'
+                    ```
+            11:
+                example_code: |
+                    ```
+                    con thú = _ , _ , _ 
+                    {print} 'Gấu nâu, gấu nâu ơi'
+                    {print} 'Bạn nhìn thấy gì?'
+                    ```
