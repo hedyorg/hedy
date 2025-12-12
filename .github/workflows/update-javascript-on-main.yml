@@ -165,6 +165,6 @@ jobs:
       uses: stefanzweifel/git-auto-commit-action@v2.3.0
       with:
         commit_message: 🤖 Automatically update generated files
-        branch: ${{ steps.branch.outputs.branch }}
+        branch: ${{ needs.updatefiles.outputs.branch }}
       env:
         GITHUB_TOKEN: ${{ steps.secret.outputs.secret }}

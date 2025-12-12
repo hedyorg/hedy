@@ -12,52 +12,70 @@ from tests.Tester import HedyTester
 class TestsTranslationLevel10(HedyTester):
     level = 10
 
-    def test_for_english_dutch(self):
+    def test_double_repeat_indent_english_dutch(self):
         code = textwrap.dedent("""\
-        dieren is hond, kat, vis
-        for dier in dieren
-            print 'hallo' dier""")
+        repeat 3 times
+            repeat 5 times
+                print 'hi'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
         expected = textwrap.dedent("""\
-        dieren is hond, kat, vis
-        voor dier in dieren
-            print 'hallo' dier""")
+        herhaal 3 keer
+            herhaal 5 keer
+                print 'hi'""")
 
         self.assertEqual(expected, result)
 
-    def test_for_dutch_english(self):
+    def test_repeat_ifelse_english_dutch(self):
         code = textwrap.dedent("""\
-        dieren is hond, kat, vis
-        voor dier in dieren
-            voor animal in dieren
-                print 'hallo' dier""")
+        repeat 3 times
+            if naam is hedy
+                print 'hello'
+            else
+                repeat 2 times
+                    print 'oh'""")
+
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        expected = textwrap.dedent("""\
+        herhaal 3 keer
+            als naam is hedy
+                print 'hello'
+            anders
+                herhaal 2 keer
+                    print 'oh'""")
+
+        self.assertEqual(expected, result)
+
+    def test_multiple_ifelse_dutch_english(self):
+        code = textwrap.dedent("""\
+        als 10 is 10
+            als 2 is 3
+                print 'wat raar'
+            anders
+                print 'gelukkig'""")
 
         result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
         expected = textwrap.dedent("""\
-        dieren is hond, kat, vis
-        for dier in dieren
-            for animal in dieren
-                print 'hallo' dier""")
+        if 10 is 10
+            if 2 is 3
+                print 'wat raar'
+            else
+                print 'gelukkig'""")
 
         self.assertEqual(expected, result)
 
-    def test_repeat_translate_back(self):
+    def test_indent_translate_back(self):
         code = textwrap.dedent("""\
-        dieren is hond, kat, vis
-        voor dier in dieren
-            voor animal in dieren
-                print 'hallo' dier""")
+        naam = hedy
+        if naam is hedy
+            repeat 4 times
+                print 'Hallo Hedy'
+                print 'Hoe gaat het?'
+        else
+            repeat 5 times
+                print '5 keer'""")
 
-        result = hedy_translation.translate_keywords(code, from_lang="nl", to_lang="en", level=self.level)
-        result = hedy_translation.translate_keywords(result, from_lang="en", to_lang="nl", level=self.level)
+        result = hedy_translation.translate_keywords(code, from_lang="en", to_lang="nl", level=self.level)
+        result = hedy_translation.translate_keywords(result, from_lang="nl", to_lang="en", level=self.level)
 
-        self.assertEqual(result, code)
-
-    def test_for_list_type_error_translates_command(self):
-        code = textwrap.dedent(f"""\
-            dieren is 'text'
-            for dier in dieren
-                print dier""")
-
-        self.verify_translation(code, "en", self.level)
+        self.assertEqual(code, result)
