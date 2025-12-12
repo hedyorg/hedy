@@ -161,7 +161,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'in_command',
         'restaurant',
         'fortune',
-        'pressit',
         'debugging',
         'hospital'
     ],
@@ -193,7 +192,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'repeat_command_2',
         'fortune',
         'restaurant',
-        'pressit',
         'turtle_draw_it',
         'debugging',
         'hospital',
@@ -225,7 +223,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'secret',
         'restaurant',
         'haunted',
-        'pressit',
         'turtle',
         'turtle_draw_it',
         'debugging',
