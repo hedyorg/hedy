@@ -3628,10 +3628,10 @@ adventures:
                 example_code: |
                     ```
                     won = 'no'
-                    options = 'rock', 'paper', 'scissors'
+                    options = ['rock', 'paper', 'scissors']
                     {while} won == 'no'
                         your_choice = {ask} 'What do you choose?'
-                        computer_choice = options {at} {random}
+                        computer_choice = options[{random}]
                         {print} 'you chose ' your_choice
                         {print} 'the computer chose ' computer_choice
                         {if} computer_choice == your_choice
