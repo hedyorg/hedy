@@ -1,6 +1,6 @@
 adventures:
     story:
-        name: Histórias
+        name: História
         default_save_name: História
         description: Crie uma pequena história
         levels:
@@ -428,6 +428,14 @@ adventures:
         levels:
             15:
                 example_code: "```\n# Use seu próprio código da aventura anterior.\n```\n"
+            10:
+                example_code: |
+                    ```
+                    resposta1={ask} 'Quanto é 10 vezes 7?'
+                    resposta2={ask} 'Quanto é 6 vezes 7?'
+                    {if}_______
+                        {print}_
+                    ```
     clear_command:
         default_save_name: comando_limpe
         description: comando {clear}
@@ -2011,3 +2019,12 @@ adventures:
         name: hotel
         default_save_name: hotel
         description: hotel
+    congratulations:
+        name: Parabéns
+        default_save_name: E agora
+        description: Fim da Hedy
+        levels:
+            8:
+                story_text: |
+                    Parabéns! Você chegou ao fim do Hedy Básico! Você pode continuar aprendendo Hedy Avançado (níveis 9-12), onde você pode aprender conceitos mais complexos de programação.
+                    Ou fique à vontade para permanecer no Hedy Básico e criar seus próprios programas, claro!
