@@ -114,20 +114,10 @@ levels:
         7:
             header: Narekovaji in spremenljivke
             text: "Če so imena spremenljivk uporabljena sredi stavka, jih morate pustiti zunaj narekovajev.\nZa preostali del stavka pa so potrebni narekovaji. To izgleda takole:"
-    6:
+    7:
         8:
             header: Računanje s spremenljivkami
             text: 'Izračune lahko izvajate neposredno s številkami, vendar lahko za računanje uporabljate tudi spremenljivke, kot je ta:'
-    11:
-        3:
-            text: "Na prejšnji strani je bila spremenljivka poimenovana 'števec', ker je odštevala.\nSeveda lahko za spremenljivko uporabite poljubno ime.\nObičajno ime za spremenljivke v takšni situaciji, ki se uporablja v programskih jezikih, kot je Python, je 'i'.\nTo izgleda takole:"
     12:
         2:
             text: "Na tej stopnji je nekaj sprememb pri uporabi narekovajev.\nOdslej morajo biti **vsa besedila** v narekovajih. To vključuje vrednosti spremenljivk, elemente na seznamih in besedilo za ukazi {if}."
-    13:
-        7:
-            text: "Zdaj smo v funkcijo združili več vprašanj. V program vnesite to kodo in poglejte, kaj se bo zgodilo.\n\nUpoštevajte, da imajo spremenljivke in argumenti enako ime. To je dovoljeno.\nVas to moti? Uporabite različna imena, tudi to je dovoljeno.\n```\ndefiniraj pesem z ime, kraj\n    izpiši 'Moje ' ime ' je ' kraj\n\nime je vprašaj 'Kdo?'\nplace is vprašaj 'Kje so?'\npokliči pesmi z ime, kraj\n```"
-    14:
-        5:
-            text: V tej kodi bo na primer funkcija izračunaj_novo_ceno izračunala novo ceno katerega koli predmeta. Vrnila bo novo ceno.
-            code: "{define} izračunaj_novo_ceno {with} znesek, odstotek\n    odstotek = odstotek/ 100\n    znesek_popusta = znesek* odstotek\n    return znesek - znesek_popusta\n\nstara_cena = {ask} 'Kakšna je označena cena?'\npopust = {ask} 'Kakšen je odstotek popusta?'\n\nnova_cena = _ izračunaj_novo_ceno {with} stara_cena, _\n{print} 'Nova cena je ' nova_cena ' Eurov'"
