@@ -2,7 +2,18 @@
 
 {% block regular_content %}
 <div class="flex-col">
+
   <div class="flex flex-row gap-4 md:px-16">
+    <div class="flex flex-col items-left gap-3 bg-yellow-100 text-yellow-900 border border-yellow-400 px-10 rounded-lg w-full p-8">
+      <h2 class="m-0 basis-1/12 text-yellow-900 "> {{_('hedy_teacher_update_title')}} </h2>
+      <div class="text-black basis-10/12 text-yellow-900 ">
+        <p>We have made some big content changes to make an even better Hedy. This means that adventures and levels might have been moved or removed.  Because of the changes we've made in the level structure, your class customization might not work properly anymore.</p>
+        <p>Please check your classes to see what has changed for you!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-row gap-4 mt-10 md:px-16">
     <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full p-8">
       <h2 class="m-0 basis-1/12"> {{_('my_classes')}} </h2>
       <div class="text-black basis-10/12">
@@ -29,6 +40,7 @@
       {% endif %}
     </div>
   </div>
+
   <div class="flex flex-row gap-4 mt-10 md:px-16">
     <div class="flex flex-col items-left gap-3 bg-gray-200 border border-gray-400 px-10 rounded-lg w-full p-8">
       <h2 class="m-0 basis-1/12"> {{_('my_adventures')}} </h2>
