@@ -3,12 +3,17 @@ levels:
         1:
             header: Welkom bij Hedy!
             text: Hedy is een programmeertaal.
+            notes: |-
+                Vraag je studenten om op te schrijven wat er in ze opkomt bij 'programmeren'. Maak een kort rondje om hun antwoorden te horen.
         2:
             header: Programmeren
             text: |-
                 Programmeren betekent de computer opdrachten geven, in de taal van de computer.
 
                 Dat noemen we een programmeertaal.
+            notes: |-
+                Helaas kunnen computers geen menselijke taal begrijpen, zoals Nederlands of Engels, maar ze spreken hun eigen taal. 
+                Maar, geen paniek, je hoeft gelukkig geen regels nullen en enen te typen. We gaan namelijk leren om de computer instructies te geven in een programmeertaal. 
         3:
             header: Programmeertaal
             text: |-
@@ -17,6 +22,8 @@ levels:
                 * Scratch
                 * Python
                 * HTML
+            notes: |-
+                Vraag je studenten naar hun eigen programmeerervaring en of ze misschien iemand kennen die in de IT werkt. 
         4:
             header: Programmeren
             text: |-
@@ -24,32 +31,86 @@ levels:
                 * Interactieve verhalen maken
                 * Tekeningen maken en die printen op papier of op een shirt
                 * Je eigen apps maken voor op je telefoon
+            notes: |-
+                Dit klinkt misschien heel ingewikkeld, maar we gaan het gelukkig stap voor stap leren. 
         5:
             header: Programmeren met Hedy
             text: In Hedy gebruiken we speciale codes, zoals `{print}`.
             code: '{print} Welkom bij Hedy!'
+            notes: |-
+                Laten we naar Hedy kijken. In Hedy gebruiken we commando's ('keywords') om de computer een bepaalde instructie te geven.
+                We typen deze instructies in het linker scherm. Dit noemen we de code of een programma. 
         6:
             header: Programmeren met Hedy
             text: De code woorden worden in Hedy altijd roze.
             code: '{print} Welkom bij Hedy!'
+            notes: |-
+                Zoals je ziet, worden de codewoorden roze als je ze goed gebruikt.
         7:
             header: Programmeren met Hedy
-            text: Je kan je code opstarten met de Voer code uit knop onder het programmeerveld.
+            text: Je kan je code opstarten met de 'Voer code uit'-knop onder het programmeerveld.
             code: '{print} Welkom bij Hedy!'
+            notes: |-
+                Om te zorgen dat de computer de instructies volgt, moet je de code uitvoeren ('runnen').
         8:
             header: Programmeren met Hedy
             text: De uitvoer verschijnt dan aan de rechterkant.
             code: '{print} Welkom bij Hedy!'
+            notes: |-
+                Als we de code uitvoeren, verschijnt de uitvoer ('output') aan de rechterkant. De uitvoer is het resultaat van het uitvoeren van ons programma. 
+                Het rechter scherm waar de uitvoer verschijnt wordt het uitvoerscherm genoemd. 
         9:
             header: Programmeren met Hedy
             text: De uitvoer kan ook een tekening zijn.
+            code: |-
+                {forward} 100
+                {turn} {left}
+            notes: |-
+                In Hedy laten we niet alleen tekst verschijnen: de uitvoer kan ook een tekening zijn, of...
+
+        10:
+            header: Prorgammeren met Hedy
+            text: ... de uitvoer kan muziek zijn!
+            code: |-
+                {play} C4
+                {play} D4
+                {play} E4
+            notes: |-
+                Laten we beginnen met het eerste level!
+        11:
+            header: Programmeren met Hedy
+            text: |-
+                Soms maak je een fout in je code. Je kunt de debugger (foutzoeker) gebruiken om de fouten te vinden en op te lossen.
+            code: |-
+                {print} Debuggen betekent het zoeken van fouten in je code
+                {print} Je kunt de code regel voor regel uitvoeren.
+                {print} Dit maakt het makkelijk om de fout te vinden...
+                {print} ... en op te lossen!
+                {print} Of klik op de slapende smiley om een regel code uit te zetten.
+            debug: 'Waar'
+            notes: |-
+                **Hoe debug je je code**
+                Kijk dit <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a> om te zien hoe de debugger werkt of lees onderstaande instructies.
+                Natuurlijk kan je ook gewoon zelf naar de code kijken en je fouten vinden, maar we hebben ook wat hulpmiddelen voor je. 
+                Klik op de lieveheersbeestjesknop 🐞 onderaan het invoerveld. Dit zorgt ervoor dat de debugger begint. Met de debugger kan je je programma regel voor regel uitvoeren.
+                Als er een grote fout in je code zit (zoals in de debug avonturen) zal de debugger je vertellen dat je eerst de grote fouten moet oplossen. Lees de foutmeldingen om te ontdenken hoe je de fouten kunt oplossen.
+                Als de grote fouten opgelost zijn, zal de debugger je progamma regel voor regel uitvoeren. 
+                Om de volgende regel uit te voeren, klik je op de vooruitknop ⏭️ rechts. Pas de code zo nodig aan. Doet de regel wat deze moet doen? Super!
+                Klik op de knop om de volgende regel uit te voeren totdat je programma werkt zoals jij dat wil.
+                Om de debugger te stoppen kan je op de stopknop 🛑 in het midden klikken. 
+                Om de code weer vanaf het begin uit te voeren klik je op de herhaalknop 🔁 aan de linkerkant.
+                Zit je vast bij een regel of wil je je programma proberen zonder die regel? 
+                Je kunt een regel code uitzetten door voor het regelnummer te klikken. Er verschijnt dan een slapende smiley 😴 en de regel wordt doorgestreept.
+                De regel wordt nu overgeslagen wanneer je de code uitvoert. Om de regel weer te acticeren klik je gewoon op de slapende smiley: de regel wordt niet meer overgeslagen.
+
+
     1:
         1:
             header: Welkom bij level 1!
             text: |-
-                We beginnen level 1 met het maken van een interactief verhaal.
-
-                Daarvoor hebben we drie tekstcodes nodig.
+                Aan het eind van deze les kan je:
+                * Code schrijven die tekst print
+                * Een verhaal maken op basis van input
         2:
             header: 'Hedy level 1: {print}'
             text: |-
@@ -57,17 +118,21 @@ levels:
 
                 `print` zorgt ervoor dat er tekst in het uitvoerveld komt.
             code: '{print} Presenteer tekst op het scherm'
+            notes: |-
+                Laat de studenten eerst raden wat de uitvoer zal zijn. Voer daarna de code uit en laat aan de studenten zien wat er gebeurd wanneer de instructie 'print' wordt uitgevoerd.
         3:
             header: Het {print} commando
             text: |-
                 Je kunt de tekst na het print veranderen met je eigen tekst
-
                 Of je kunt meerdere regels printen door extra regels code toe te voegen die ook starten met `{print}`.
             code: |-
                 {print} Welkom bij Hedy!
                 {print} Start nu met programmeren!
+            notes: |-
+                Voer de code uit en verander de code daarna zelf. Laat zien dat je alles wat je maar wilt kan printen. 
+                Maak opdracht 1 en 2 van het werkboek.
         4:
-            header: 'Hedy level 1: {echo}'
+            header: 'Hedy level 1: {ask}'
             text: |-
                 De tweede code die je kunt gebruiken in level 1 is `{ask}`.
 
@@ -75,93 +140,210 @@ levels:
             code: |-
                 {print} Welkom bij je eigen steen papier schaar!
                 {ask} Wat is je keuze?
+            notes: |-
+                Laat aan de studenten zien dat de computer je nu een vraag kan stellen. Laat zien dat er verder niets gebeurd als je een antwoord invult. 
+                Zorg dat je studenten door hebben dat de computer enkel je instructies zal volgen en zelf niets doet. 
+                Als je wilt dat je computer het antwoord print moet je dus expliciet die instructie geven. 
         5:
+            header: '{echo}'
             text: |-
-                Zoals je kon zien in het vorige voorbeeld. Als je het `{ask}` commando gebruikt kun je een vraag stellen.
-                Alleen wordt het antwoord niet gepresenteerd in het uitvoer scherm.
-
-                Als je het antwoord wilt presenteren kun je het laatste commando van dit level gebruiken: `{echo}`.
-                `{echo}` is gebruikt on het antwoord van een `{ask}`te presenteren.
+                Om het antwoord in het uitvoerscherm te laten zien kan je `{echo}` gebruiken. 
+                `{echo}` kan niet los worden gebruikt, maar gaat altijd samen met `{ask}`.
             code: |-
                 {print} Hallo!
                 {ask} Wat is je naam?
-                {echo} Hallo
+                {echo} Hallo 
+            notes: |-
+                Om te zorgen dat de computer het antwoord tegen je herhaalt gebruikt je het commando 'echo. 
+                Wijs je studenten erop dat het antwoord dat je getypt hebt bij de 'echo' opdracht achter de zin verschijnt. 
+                Maak opdracht 3 van het werkboek. 
         6:
             header: Programmeren maar!
-            text: |-
-                Met `{print}`, `{ask}` en `{echo}` kun je al een klein verhaal programmeren.
-                Dit is een goed moment om de Papegaai, Verhaal en Steen, Papier, Schaar avonturen te proberen.
+            text: Hier kan je een lijst van de avonturen vinden. 
+            editor: /hedy/1
+            notes: |-
+                Laat voordat we beginnen de avonturen aan je studenten zien. Vergeet ze niet op de opdrachten te wijzen.
+                Hier kunnen de studenten lezen wat ze precies moeten doen in een avontuur. 
         7:
-            header: Programmeren maar!
-            text: Avonturen worden in tabjes getoond.
-            editor: /hedy#print_command
-        8:
             header: Programmeren!
-            text: De gele pijlen knoppen kunnen gebruikt worden om de voorbeelden te kopiëren.
+            text: De gele pijlen kunnen gebruikt worden om de voorbeelden te kopiëren.
             editor: /hedy#print_commando
+            notes: |-
+                Laat als laatste aan de studenten zien dat ze de voorbeeldcode kunnen kopiëren naar hun programmeerveld door op de gele pijl te klikken. 
+        8:  
+            header: Laten we beginnen!
+            text: |-
+                Dit is een goed moment om de 'Papegaai', 'Spookhuis', 'Verhaal' en 'Steen, Papier, Schaar' avonturen te proberen.
+            editor: /hedy/1
+            notes: |-
+                Dit zijn avonturen om mee te beginnen. Als (de meeste van) je studenten klaar zijn, kan je de tekenende schildpad en het '{play}' keywoord aan ze introduceren met de volgende slides. 
+                Maak daarna opdracht 4 en 5 van het werkboek. Maar daarvoor is er nog een slide met een debugvoorbeeld. 
+
         9:
-            header: Tekenen met de schildpad
-            text: Met `{forward}` kun je de schildpad vooruit laten bewegen.
-        10:
-            header: 'Tekenen met de schildpad: {forward}'
-            text: '`{forward}` wordt gebruikt om de schildpad naar voren te bewegen.'
-        11:
-            header: 'Tekenen met de schildpad: {turn}'
-            text: '`{turn}` wordt gebruikt om de schildpad links of rechtsom te laten draaien.'
-        12:
-            header: Debugging (foutzoeken)
-            text: Debugging van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen. Klik op de ladybug knop (lieveheersbeestje) om de debugger te starten.
+            header: Foutenzoeken
+            text: Foutenzoeken (debuggen) in een code betekent dat je de fouten eruit gaat halen.
+                Laten we samen deze code foutzoeken.
+                Klik op het lieveheersbeestje om de foutzoeker te beginnen.
             code: |-
                 Ik ben DJ Hedy
                 {print} Welk liedje wil je horen?
-                {ask} Ik vind dat ook een leuk liedje!
-                {print} Volgende... {echo}
-            debug: Waar
+                {ask} Dat liedje vind ik ook leuk!
+                {print} Het volgende nummer is ... {echo}
+            debug: 'Waar'
+            notes: |-
+                **Hoe debug je je code**
+                Kijk dit <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a> om te zien hoe de debugger werkt of lees onderstaande instructies.
+                Natuurlijk kan je ook gewoon zelf naar de code kijken en je fouten vinden, maar we hebben ook wat hulpmiddelen voor je. 
+                Klik op de lieveheersbeestjesknop 🐞 onderaan het invoerveld. Dit zorgt ervoor dat de debugger begint. Met de debugger kan je je programma regel voor regel uitvoeren.
+                Als er een grote fout in je code zit (zoals in de debug avonturen) zal de debugger je vertellen dat je eerst de grote fouten moet oplossen. Lees de foutmeldingen om te ontdenken hoe je de fouten kunt oplossen.
+                Als de grote fouten opgelost zijn, zal de debugger je progamma regel voor regel uitvoeren. 
+                Om de volgende regel uit te voeren, klik je op de vooruitknop ⏭️ rechts. Pas de code zo nodig aan. Doet de regel wat deze moet doen? Super!
+                Klik op de knop om de volgende regel uit te voeren totdat je programma werkt zoals jij dat wil.
+                Om de debugger te stoppen kan je op de stopknop 🛑 in het midden klikken. 
+                Om de code weer vanaf het begin uit te voeren klik je op de herhaalknop 🔁 aan de linkerkant.
+                Zit je vast bij een regel of wil je je programma proberen zonder die regel? 
+                Je kunt een regel code uitzetten door voor het regelnummer te klikken. Er verschijnt dan een slapende smiley 😴 en de regel wordt doorgestreept.
+                De regel wordt nu overgeslagen wanneer je de code uitvoert. Om de regel weer te acticeren klik je gewoon op de slapende smiley: de regel wordt niet meer overgeslagen.
+        10:
+            header: Muziek afspelen
+            text: |-
+                Speel muzieknoten af met `{play}`
+                De noten zijn: C - D - E - F - G - A - B
+                Zet een nummer achter de noten om een toonladder te kiezen. De toonladders gaan van 1 tot 10.
+            code: |
+                {play} C4
+                {play} D4
+                {play} E4
+                {play} F4
+                {play} G4
+                {play} A4
+                {play} B4
+                {play} C5
+            notes: |-
+                Laat de studenten zien hoe ze het '{play}' commando in Hedy kunnen gebruiken. 
+                Dit is ook een goed moment om met je studenten te praten over de regels rondom het gebruik van koptelefoons. 
+                De studenten kunnen nu verder met het muziek avontuur. 
+
+        11:
+            header: 'Tekenen met de schildpad: {forward}'
+            text: Met `{forward}` kun je de schildpad vooruit laten bewegen.
+            code: '{forward} 50'
+            notes: |-
+                Tot nu toe keken we naar tekstcodes, maar nu gaan we naar codes kijken die iets tekenen.
+                Laat je studenten zien hoe het '{forward}' commando gebruikt kan worden. 
+        12:
+            header: 'Tekenen met de schildpad: {forward}'
+            text: Hoe kunnen we achteruit?
+            code: '{forward} 50'
+            notes: Vraag de studenten of ze enig idee hebben hoe je achteruit kunt. Het antwoord is gebruik een negatief getal, zoals -50. 
         13:
-            header: Laat het programmeerfeest beginnen!
-            text: Veel plezier met de avonturen in level 1!
+            header: 'Tekenen met de schildpad: {turn}'
+            text: '`{turn}` wordt gebruikt om de schildpad links of rechtsom te laten draaien.'
+            code: |-
+                {forward} 50
+                {turn} {left}
+        14:
+            header: Foutzoeken
+            text: Gebruik de foutzoeker ook bij tekenen
+            code: |-
+                {forward} 50
+                {turn} {left}
+                {forward} 100
+                {turn} {left}
+                {forward} 50
+                {turn} {left}
+            debug: 'Waar'
+            notes: |-
+                De debugger kan handig zijn als je een tekening wilt maken.
+                De studenten kunnen nu verdergaan met de rest van de avonturen in dit level.
+                The debugger can come in handy when making a drawing. The students can now continue with the rest of the adventures of this level.
+        15:
+            header: Een korte terugblik...
+            text: Wat hebben jullie vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd.
+        16:
+            header: Een korte terugblik...
+            text: |-
+                Welke avonturen vond je leukst? Waarom?
+
+                Welke avonturen vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag je studenten naar hun mening. 
+        17:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        18:     
+            header: Tipje van de sluier voor het volgende level
+            text: |-
+                In het volgende level leer je een variabele te gebruiken om je programma nog interactiever te maken. 
+                Je leert ook het '{sleep}' commando om je code te pauzeren.
     2:
         1:
             header: Welkom bij level 2
             text: |-
-                In dit level leer je gebruik te maken van variabelen.
-
-                Een variabele is een woord waarin je informatie kunt opslaan.
-
-                Zoals: een naam, leeftijd of favoriete sportteam.
+                Aan het eind van deze les kan je:
+                * Iets opslaan in een veriabele
+                * Een verhaal of tekening maken met behulp van variabelen
+            notes: |-
+                Wellicht vinden je studenten het lastig om het concept van een variabele te begrijpen. 
+                Om het concept beter te begrijpen kan het helpen om je studenten allerlei voorbeelden te geven. 
+      
         2:
             header: Variabelen
-            text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando
+            text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando. De naam van de variabele komt voor '{is}' en de waarde van de variabele komt erachter.
             code: |-
                 naam {is} Hedy
                 leeftijd {is} 15
                 {print} naam is leeftijd jaar
+            notes: |-
+                Laat aan je studenten zien hoe variabelen werken. Laat zien dat de namen van de variabelen in de laatste regel vervangen worden door de waarde van de desbetreffende variabele. 
+                De studenten kunnen nu het Steen, papier, schaar avontuur maken. Maak ook werkboek opdracht 1. 
+                The students can now make the Rock, paper, scissors adventure. Make workbook exercise 1.
         3:
             header: Interactief
             text: |-
                 We kunnen ook een variabele instellen door vragen te stellen.
-
                 Het antwoord op de vraag wordt dan opgeslagen in de variabele.
-
                 Zo hebben we het `{echo}` commando niet meer nodig.
             code: |-
                 naam {is} {ask} Wat is je naam?
                 {print} Hallo naam
+            notes: |-
+                Nu kunnen onze programma's echt interactief worden. De gebruker kan input geven die vervolgens in het programma gebruikt wordt. 
+                Vraag de studenten om hun eigen voorbeelden te verzinnen. Maak opdracht 2 en 3 uit het werkboek. 
+                Ask the students to come up with their own examples. Make workbook exercise 2 and 3.
         4:
             header: Meerdere variabelen
-            text: Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in tegenstelling tot maar één `{echo}` commando.
-            code: "naam {is} {ask} Wat is je naam ?\n{print} Hallo naam \nleeftijd {is} {ask} Hoe oud ben je?\n{print} naam is leeftijd jaar."
+            text: Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in plaats van maar één `{echo}` commando.
+            code: |-
+                "naam {is} {ask} Wat is je naam ?
+                {print} Hallo naam
+                leeftijd {is} {ask} Hoe oud ben je?
+                {print} naam is leeftijd jaar."
+            notes: |-
+                Wijs de studenten er op dat het '{echo}' commando nu niet meer nodig is. Het werkt daarom ook niet meer in Hedy. 
+                De studenten kunnen nu Steen, papier schaar deel 2 maken en het spookhuis
+                Maak opdracht 4-6 van het werkboek. 
+                
         5:
-            header: Slaap
+            header: Het '{sleep}' commando
             text: Je kunt het `{sleep}` commando gebruiken om de code een tijdje op pauze te zetten.
             code: |-
                 {print} Mijn favoriete kleur is...
                 {sleep} 2
                 {print} groen!
+            notes: |-
+                Laat aan studenten het '{sleep}' commando zien. Vraag hen wat ze denken dat het is. 
+                Verander het nummer 2 in een ander getal om te laten zien dat ze zelf kunnen kiezen hoeveel secondes het programma op pauze wordt gezet. 
         6:
             header: '{sleep} 5'
             text: |-
-                Je kunt een getal achter het `{sleep}` commando typen als je een langere stilte wilt.
+                Je kunt een getal achter het {sleep} commando typen als je een langere stilte wilt.
 
                 Als je wil, kun je een zelfs een variabele gebruiken in plaats van een nummer om te bepalen hoe lang het programma moet pauzeren.
             code: |-
@@ -169,26 +351,119 @@ levels:
                 {print} Mijn favoriete kleur is...
                 {sleep} pauze
                 {print} groen!
-        7:
-            header: Debugging (foutzoeken)
-            text: Debugging van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen. Klik op de ladybug knop (lieveheersbeestje) om de debugger te starten.
+            notes: |-
+                Laat de code zien. Als je wil kan je de 10 zelfs veranderen in een '{ask}' commando. 
+                De studenten kunnen nu aan het Papegaai, Verhaal, Muziek en Restaurant avontuur werken. 
+
+        7: 
+            header: Tekenen met variabelen
+            text: |-
+                In level 1 heb je geleerd hoe je het commando {forward} 100 kunt gebruiken. 
+                Nu kan je hiervoor ook een variabele gebruiken.  
+            code: |-
+                afstand {is} {ask} Hoe ver zal ik gaan?
+                {forward} afstand
+            notes: |-
+                Laat de studenten zien dat ze nu ook variabelen kunnen gebruiken voor de tekenende schildpad. 
+                Voer de code een aantal keer uit met verschillende antwoorden om het nut van variabelen te laten zien. 
+        8:
+            header: Tekenen met graden
+            text: |-
+                Eerder kon je het commando {turn} {left} of {turn} {right} gebruiken om te draaien, maar nu kan je graden gebruiken. 
+            code: |-
+                {forward} 100
+                {turn} 45
+                {forward} 100
+            notes: |-
+                Laat de studenten deze code zien. In de volgende slide laten we verschillende hoeken zien. 
+        9:
+            header: Graden
+            text: |-
+                Een hele cirkel is 360 graden.
+                Een halve cirkel is 180 graden.
+                Een bocht naar rechts is 90 graden.
+                Een bocht naar links is 270 graden. 
+
+                Je kunt elk getal invullen dat je wilt. 
+            code: |-
+                {turn} 90
+                {forward} 100
+            notes: |-
+                Zorg dat je studenten de graden echt begrijpen. Misschien hebben ze het bij wiskunde al geleerd, maar het kan ook zijn dat het helemaal nieuw voor ze is. 
+                Als de studenten nog nooit van graden hebben gehoord, kan het handig zijn om ze een gradenwiel te laten zien. 
+                Je kunt er zelfs een voor ze uitprinten.
+                Gebruik de voorbeeldcode op de slide om de studenten verschillende hoeken te laten zien. 
+        10:
+            header: Graden en variabelen
+            text: |-
+                Graden kunnen ook variabelen zijn!
+            code: |-
+                graden {is} {ask} Hoeveel graden moet de schildpad draaien?
+                {turn} graden
+                {forward} 100
+            notes: |-
+                Laat de studenten zien dat je van het aantal graden ook een veriabele kunt maken. 
+        11:
+            header: Tekenen met kleur
+            text: |-
+                Je kunt nu het commando `{color}` gebruiken om bij het tekenen een kleur in te stellen.
+            code: |-
+                {color} groen
+                {forward} 100
+            notes: |-
+                Laat de studenten zien dat ze verschillende kleuren kunnen gebruiken. 
+                Ze kunnen de witte kleur gebruiken om onzichtbare lijnen te maken (aangezien de achtergrond ook wit is).
+        12:
+            header: Foutzoeken
+            text: Foutenzoeken van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen. 
+                Klik op het lieveheersbeestje om de foutzoeker te starten.
             code: |-
                 {print} Welkom in de donut winkel!
                 vulling {is} Wat voor vulling wil je graag?
                 {print} Je hebt gekozen voor... vulling ! Lekkerr!
                 topping {ask} Wat voor topping wil je graag?
                 topping is heerlijk!
-                {print} Ik ga je donut.halen {sleep}
+                {print} Ik ga een donut voor je halen. {sleep}
                 {print} Asjeblieft! Een vulling donut met topping!
                 {ask} Fijne dag nog!
-            debug: Waar
-        8:
-            header: Veel programmeerplezier!
-            text: Veel plezier met de avonturen in level 2!
+            debug: 'True'
+            notes: |-
+                Voorbeeld voor hoe je de foutzoeker kan gebruiken.
+                De studenten kunnen nu alle avonturen van dit level afmaken. 
+        13:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
+        14:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        15:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        16:     
+            header: Tipje van de sluier voor het volgende level
+            text: |-
+                In het volgende level ga je leren hoe je een lijst moet maken. Ook laat je de computer een random item uit die lijst kiezen.
+        
     3:
         1:
             header: Welkom bij level 3
-            text: In dit level leer je een lijstje te maken, items aan het lijstje toe te voegen of verwijderen en een willekeurig item uit het lijstje kiezen.
+            text: |-
+                Aan het eind van deze les kan je:
+                * Meerdere items in een variabele opslaan: dit noemen we een lijst.
+                * Je kunt een verhaal maken waarin random dingen gebeuren.
+                * Je kunt een tekening maken waarin random dingen worden getekend. 
+    
         2:
             header: Een lijst maken
             text: |-
@@ -196,44 +471,76 @@ levels:
 
                 Scheid de elementen in de lijst met komma's.
             code: dieren {is} honden, katten, kangoeroes
+            notes: |-
+                Vraag de studenten om hun eigen voorbeeld van een lijst op te schrijven. 
         3:
-            header: '{at} {random}'
+            header: Random kiezen
             text: |-
-                Je kunt na het maken van een lijstje het `{at}` `{random}` commando gebruiken.
-                De computer kiest dan een willekeurig item van het lijstje.
-                Je krijgt bij deze code dus elke keer dat je het uitvoert een verschillende uitvoer.
+                Je kunt na het maken van een lijst het `{at}` `{random}` commando gebruiken.
+                De computer kiest dan een willekeurig item van de lijst.
+                Je kunt bij deze code dus elke keer dat je het uitvoert een verschillende uitvoer krijgen.
             code: |-
                 dieren {is} honden, katten, kangoeroes
                 {print} dieren {at} {random}
+            notes: |-
+                Voer de code een aantal keer uit en laat aan de studenten zijn dat de uitvoer verschillend is. 
         4:
-            header: '{at} {random} in een zin'
+            header: Random woorden in een zin
             text: Je kunt `{at}` `{random}` ook midden in een zin gebruiken.
             code: |-
                 dieren {is} honden, katten, kangoeroes
-                {print} Mijn favoriete dier is dieren {at} {random}
+                {print} Mijn favoriete dieren zijn dieren {at} {random}
+            notes: |-
+                Laat opnieuw aan de studenten zien dat de uitvoer verandert wanneer je de code meerdere keren runt.
+                Je kunt ook de volgorde van de woorden veranderen om te laten zien dat `{print} dieren {at} {random} zijn mijn  favoriete dieren` ook mag. 
+                Vraag nu je studenten om een `{print}` en `{at}` `{random}` commando te gebruiken onder de lijst die ze gemaakt hebben. 
+                Laat ze de code met een andere student uitwisselen en laat die voorspelen wat de uitvoer van het programma kan zijn. 
+                Bespreek daarna kort de antwoorden met de hele klas. 
         5:
-            header: '{add} {to}'
+            header: Laten we beginnen 
             text: |-
-                Je kunt items aan een lijst toevoegen met het `{add}` `{to_list}` commando.
-
+                Dit is een goed moment om het Dobbelsteen, Steen, papier, schaar, Muziek, Waarzegger en Restaurant avontuur te proberen. 
+            notes: |-
+                Dit zijn de eerste avonturen om mee te beginnen. Als (de meeste van) je studenten klaar zijn, kan je het {add} en {remove} commando introduceren met de volgende slides. 
+                Maak opdracht 1, 2 en 3 uit het werkboek. 
+        6:
+            header: Toevoegen aan
+            text: |-
+                Je kunt items aan een lijst toevoegen met het `{add}` `{to}` commando.
+            code: |-
+                animals {is} dog, cat, kangaroo
+                {add} sheep {to_list} animals
+                {print} I choose animals {at} {random}
+            notes: |-
+                De studenten zullen als het goed is opmerken dat het geen zin heeft om het commando op deze manier te gebruiken, want je had 'schapen' gelijk bij de lijst kunnen zetten waar je mee begint
+                De volgende slide laat zien hoe je {add} kan gebruiken in combinatie met {ask} en een variabele om het programma ineractief te maken. 
+        7:
+            header: Toevoegen aan
+            text: |-
                 Je kunt zelf kiezen wat je aan de lijst toevoegt, of je kunt de speler laten kiezen.
-                Dat doe je door `{add}` `{to}` te gebruiken in combinatie met een `{ask}` commando.
+                Dat doe je door `{add}` `{to}` te gebruiken in combinatie met een `{ask}` commando. Op deze manier maak je je programma interactief. 
             code: |-
                 dieren {is} honden, katten, kangoeroes
                 favoriet {is} {ask} Wat is je favoriete dier?
                 {add} favoriet {to_list} dieren
                 {print} Ik kies dieren {at} {random}
-        6:
-            header: '{remove} {from}'
+            notes: |-
+                Voer het programma meerdere keren uit om te laten zien dat het dier dat je gekozen hebt aan de lijst is toegevoegd. 
+
+        8:
+            header: Verwijderen van
             text: |-
-                Het tegenovergestelde van `{add}` `{to}` is  `{remove}` `{from}`.
-                Met dit commando haal je dus juist items van het lijstje af.
+                Het tegenovergestelde van `{add}` `{to}` commando is het `{remove}` `{from}` commado.
+                Met dit commando haal je dus items van een lijst af.
             code: |-
-                dieren {is} honden, katten, kangoeroes
+                dieren {is} hond, kat, kangoeroe
                 nietleuk {is} {ask} Welk dier vind je niet leuk?
                 {remove} nietleuk {from} dieren
                 {print} I choose dieren {at} {random}
-        7:
+            notes: |-
+                Als je studenten begrijpen hoe ze iets aan een lijst moeten toevoegen zullen ze waarschijnlijk ook snel het verwijderen begrijpen.
+                Maak opdracht 4 en 5 uit het werkboek. 
+        9:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             code: |-
@@ -247,43 +554,93 @@ levels:
                 {remove} tweede_keus {to} muziek_genres
                 {print} Ik houd het meest van muziek_genre {random} !
             debug: Waar
-        8:
-            header: Laten we aan het werk gaan!
+            notes: |-
+                Laat zien hoe je de foutzoeker gebruikt.              
+        10:
+            header: Laten we aan de slag gaan!
             text: Veel plezier met de avonturen in level 3!
+            notes: |-
+                Maak opdracht 6 en 7 uit het werkboek. 
+        11:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
+        12:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        13:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        14:     
+            header: Tipje van de sluier voor het volgende level
+            text: |-
+                In het volgende level ga je leren hoe je aanhalingstekens moet gebruiken. Dat is een stap dichter naar echte Python code!
     4:
         1:
             header: Welkom bij level 4
-            text: In dit level leer je aanhalingstekens te gebruiken.
-            code: '{print} ''print met quotes!'''
+            text: |-
+                Aan het eind van dit level:
+                * begrijp je waarom aanhalingstekens nodig zijn bij programmeren.
+                * kan je de aanhalingstekens op de juiste plek zetten.
+                * begrijp je de foutmeldingen over verkeerd gebruik van aanhalingstekens. 
+            code: |-
+                {print} 'Gebruik aanhalingstekens!
         2:
             header: Probleem
-            text: 'In de vorige levels heb je dit probleem misschien gezien:'
+            text: 'In de vorige levels ben je misschien dit probleem tegen gekomen:'
             code: |-
                 naam {is} Sophie
                 {print} Mijn naam is naam
             debug: Waar
+            notes: |-
+                Laat de studenten de uitvoer van de code voorspellen.
+                Wanneer je als variabele 'naam' gebruikt kan je het woord 'naam' niet meer in je tekst gebruiken, want dan wordt het gezien als de variabele. 
+                De uitvoer van deze code zal zijn 'Mijn Sophie is Sophie.'
+    
         3:
             header: Aanhalingstekens zijn de oplossing
             text: |-
                 In dit level leer je het probleem op te lossen met aanhalingstekens.
 
                 Dit zorgt er ook voor dat je code meer begint te lijken op 'echte' Python code.
+            code: |-
+                naam {is} Sophie
+                {print} 'Mijn naam is' name
+            notes: |-
+                De computer weet het verschil tussen de tekst 'naam' en de variabele: naam dankzij de aanhalingstekens. 
+                Laat de studenten zien dat de uitvoer nu is: 'Mijn naam is Sophie. '
+                Het kan zijn dat je studenten zeg dat dit probleem makkelijk op te lossen is door de variabele een andere naam te geven.
+                Dat klopt, maar het is een belangrijke skill bij programmeren om je computer verschillende type data te laten zien. 
+                Ook voor jezelf is het handig om het verschil te weten tussen normale tekst en variabelen. 
         4:
-            header: Aanhalingstekens en {print}
+            header: Aanhalingstekens en print
             text: Elke keer als je het `{print}` commando gebruikt, moet je de tekst die je letterlijk op het uitvoerscherm wil zien tussen aanhalingstekens zetten.
-            code: '{print} ''print met quotes!'''
+            code: |-
+                {print} 'Gebruik aanhalingstekens!'
         5:
-            header: Aanhalingstekens en {ask}
-            text: Dit geldt ook voor `{ask}` .
-            code: naam {is} {ask} 'naam graag?'
+            header: Aanhalingstekens en vraag
+            text: Dit geldt ook voor het `{ask}` commando.
+            code: naam {is} {ask} 'Wat is je naam?'
+
         6:
             header: Aanhalingstekens en variabelen
             text: |-
                 De naam van je variabele wil je niet letterlijk in het uitvoerscherm zien verschijnen.
-                Daarom moeten variabelenamen buiten de aanhalingstekens gehouden worden! Kijk maar:
+                Daarom moeten de namen van de variabelen buiten de aanhalingstekens gehouden worden! Kijk maar:
             code: |-
                 naam {is} Harry
-                {print} 'Hallo ' naam
+                {print} 'Hallo' naam
+
         7:
             header: Aanhalingstekens en variabelen
             text: |-
@@ -292,21 +649,35 @@ levels:
             code: |-
                 naam {is} Harry
                 {print} 'Hallo ' naam ', hoe gaat het met jou?'
+            notes: |-
+                Maak opdracht 1 tot en met 3 uit het werkboek.
         8:
             header: Aanhalingstekens en hoge komma's
             text: |-
                 Let op! Nu we aanhalingstekens gebruiken, kun je geen hoge komma's gebruiken voor andere doeleinden.
+                Kijk maar eens wat er gebeurt als je een hoge komma gebruikt voor auto's  of voor 's middags. Deze maken Hedy in de war....
+            code: |-
+                {print} 'De oma's rijden in de auto's.'
+        debug: 'Waar'
 
-                Kijk maar eens wat er gebeurt als je een hoge komma voor auto's, of voor 's middags, deze maken Hedy in de war....
-            code: '{print} ''De oma''s rijden in de auto''s.'''
-            debug: Waar
         9:
+            header: De oplossing
+            text: |-
+                Als je hoge komma's nodig hebt in je tekst kan je dubbele aanhalingstekens gebruiken om het op te lossen. 
+            code: |-
+                {print} "Ik gebruik dubbele komma's."
+                {print} "Alle oma's kunnen dit ook!"
+            notes: |-
+                Je kunt nu de studenten alle avonturen laten maken tot aan het 'Verwijder commando' avontuur
+                Maak ook opdracht 4 en 5 uit het werkboek. 
+        10:
             header: '{clear}'
             text: |-
-                In dit level is het `{clear}` commando ook nieuw.
+                In dit level leer je ook het `{clear}` commando.
                 Hiermee kun je alle tekst van je uitvoerscherm wissen.
 
-                Let op dat je hierbij ook altijd een `{sleep}` commando gebruikt. Doe je dit niet, dan wist de computer alle tekst al van je scherm voordat je het kan lezen!
+                Let op dat je hierbij ook altijd een `{sleep}` commando gebruikt.
+                Doe je dit niet, dan wist de computer alle tekst al van je scherm voordat je het kan lezen!
             code: |-
                 {print} '3'
                 {clear}
@@ -315,9 +686,12 @@ levels:
                 {print} '1'
                 {clear}
                 {print} 'VERRASSING!'
-        10:
-            header: Debugging (foutzoeken)
-            text: Laten we deze code debuggen!
+            notes: |-
+                Voer de code uit en laat de studenten het programma zien. Je zult merken dat de studenten het aftellen niet kunnen lezen. 
+                Voeg een '{sleep}' commando toe voor de '{clear}' commando's om het programma te fixen. 
+        11:
+            header: Foutzoeken
+            text: Laten we deze code foutzoeken!
             code: |-
                 {clear}
                 {print} Wat een mooie dag om naar het strand te gaan!
@@ -328,36 +702,87 @@ levels:
                 kleuren {is} 'oranje, zilver, wit, bruin'
                 {print} 'Ik houd van kleuren {at} {random} !'
                 keuze {is} {ask} Welke kleur vind jij mooi?
-        11:
-            header: Klaar voor de start? Af!
-            text: Veel plezier met de avonturen in level 4!
+            debug: 'Waar'
+            notes: |-
+                Laat zien hoe je de foutzoeker kan gebruiken. 
+                Maak opdracht 6 uit het werkboek. 
+        12:
+            header: Alles klaar? Programmeren maar!
+            text: Veel plezier met de avonturen van level 4!
+        13:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
+                Ask the students to list what they've learned today.
+        14:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        15:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        16:
+            header: Tipje van de sluier voor het volgende level...
+            text: |-
+                In het volgende level leer je hoe je de computer verschillend kan laten reageren op verschillende invoer!
     5:
         1:
             header: Welkom bij level 5
-            text: 'In dit level leer je 3 nieuwe commando''s: `{if}`, `{else}` en `{in}`.'
+            text: |-
+                Aan het eind van dit level kan je:
+                * de computer laten reageren op verschillende invoer
+                * '{if}' en '{else}' commando's gebruiken.
         2:
             header: '{if}'
             text: |-
-                Door {if} kun je kiezen uit twee opties.
-                In dit voorbeeld wordt er bijvoorbeeld 'nice' geprint als de speler 'Hedy' antwoordt.
-                Antwoordt de speler iets anders, dan doet de computer niets.
+                Door het `{if}`commando kun je kiezen uit twee opties.
             code: |-
                 naam {is} {ask} 'wat is je naam?'
                 {if} naam {is} Hedy {print} 'leuk'
+            notes: |-
+                Laat zien wanneer de computer in het voorbeeld 'leuk' print: alleen als de gegeven naar Hedy is. 
+                Als het antwoord niet Hedy is, doet de computer niets. 
+            
         3:
             header: Vergeet het print commando niet
             text: |-
                 Als je een `{if}` commando gebruikt, vergeet dan niet om ook een `{print}` commando te gebruiken.
                 Deze code werkt niet!
-            code: '{if} naam {is} Hedy ''leuk'''
+            code: |-
+                {if} naam {is} Hedy 'leuk'
+            notes: |-
+                Voer de code uit en los de fout op, zoals in de volgende slide.
+
         4:
+            header: Voorwaardes
+            text: |-
+                De code die volgt na een als-voorwaarde is een voorwaardelijke bijzin.
+            code: |-
+                {if} naam {is} Hedy {print} 'leuk'
+            notes: |-
+                Vraag de studenten wat ze denken dat een voorwaardelijke bijzin is. Hier is dat: '{print} 'leuk'.'
+                Maak werkboek opdracht 1. 
+            
+        5:
             header: '{else}'
             text: |-
-                Als je een {if} gebruikt, kun je ook een {else} toevoegen.
+                Als je een `{if}` commando gebruikt, kun je ook een `{else}` commando toevoegen.
+            code: '{if} naam {is} Hedy {print} ''leuk'' {else} {print} ''meh!'''
+            notes: |-
+                Laat aan de studenten zien welke verschillende uitvoer deze code kan geven bij verschillende antwoorden. 
                 Als het antwoord op de vraag 'Hedy' is, zegt de computer 'leuk'.
-                Is het antwoord iets anders, dan print de computer 'minder leuk'
-            code: '{if} naam {is} Hedy {print} ''leuk'' {else} {print} ''minder leuk!'''
-        5:
+                Is het antwoord iets anders, dan print de computer 'minder leuk.
+        
+        6:
             header: Lange regels
             text: |-
                 Door {if} en {else} te gebruiken in één regel, kunnen je regels erg lang worden.
@@ -366,19 +791,10 @@ levels:
             code: |-
                 {if} naam {is} Hedy {print} 'leuk'
                 {else} {print} 'minder leuk'
-        6:
-            header: Nog iets nieuws
-            text: |-
-                Als je hebt geoefend met `{if}` en `{else}`, kun je aan de slag met het `{in}` commando.
-
-                Met `{in}` kun je de computer laten checken of iets in jouw lijstje staat. Kijk maar naar het voorbeeld:
-
-                Let daarbij wel op dat Hedy hoofdlettergevoelig is. Als je "Groen" intikt in plaats van "groen", dan zegt Hedy "minder mooi".
-            code: |-
-                leuke_kleuren {is} groen, geel
-                favoriete_kleur {is} {ask} 'What is your favorite color?'
-                {if} favoriete_kleur {in} leuke_kleuren {print} 'mooi!'
-                {else} {print} 'minder mooi'
+            notes: |-
+                Als het je studenten niet uitmaakt om twee regels te gebruiken, raden we aan om deze code gelijk te laten zien met twee losse regels. 
+                Dit zorgt dat je programma overzichtelijker blijft en is ook handig in latere levels als er nog meer bijkomt. 
+                Maak opdracht 2 en 3 van het werkboek. 
         7:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
@@ -395,27 +811,177 @@ levels:
                 aangeef_voorwerp {is} {ask} 'Wat wilt U aangeven'
                 {else} OK
                 {print} Dank U. Gaat U naar gate A22 alstublieft.'
+            debug: 'True'
         8:
-            header: Werken maar!
+            header: Aan de slag!
             text: Veel plezier met de avonturen in level 5!
+        9:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
+                Ask the students to list what they've learned today.
+        10:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        11:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        12:
+            header: Tipje van de sluier voor het volgende level...
+            text: |-
+                In het volgende level leer je wat je moet doen als je in plaats van twee opties (met '{if}' en '{else}') drie of meer opties wilt. 
     6:
         1:
             header: Welkom bij level 6
-            text: In dit level kunnen we gaan rekenen in onze codes.
+            text: |-
+                Aan het eind van deze les kan je:
+                * het `{elif}` commando gebruiken om een derde optie aan de voorwaardes toe te voegen. 
+                * het `{in}` commando gebruiken om te checken of een item in een lijst staat of niet.
+        2:
+            header: Korte herhaling van '{if}' en '{else}'
+            text: |-
+                Lan je een code bedenken met `{if}` en `{else}`?
+            code: |-
+                pizza {is} {ask} 'Welk pizza is jouw favoriet?'
+                {if} pizza {is} pepperoni
+                {print} 'Ja, pepperoni is de beste pizza!'
+                {else}
+                {print} 'Pepperoni is nog beter!'
+            notes: |-
+                Laat de studenten samenwerken om een code te verzinnen waar een '{if}' en een '{else}' commando inzit. 
+                Als ze klaar zijn, kun je hen de voorbeeldcode laten zien en hen laten voorspellen wat de uitvoer zal zijn. 
+                Herinner ze er ook aan dat het deel na de als-voorwaarde de voorwaardelijke bijzin wordt genoemd. 
+        3:
+            header: Meerdere regels gebruiken. 
+            text: |-
+                Voorwaardelijk bijzinnen zijn het deel na '{if}' or '{else}'. Deze voorwaardelijke bijzinnen moeten vanaf nu op de volgende regel geplaatst worden. 
+            code: |-
+                overzichtelijk {is} {ask} 'Wil je graag dat je code er mooi en overzichtelijk uitziet?'
+                {if} overzichtelijk {is} 'ja'
+                {print} 'Geweldig! Zorg dat je de voorwaardelijke bijzin altijd op een volgende regel zet.'
+                {else}
+                {print} 'Helaas! Je moet alsnog zorgen dat je de voorwaardelijk bijzin op een volgende regel zet.'
+            notes: |
+                Wanneer je studenten het moeilijk vinden om te begrijpen waarom de conditional op de volgende regel moet, 
+                vertel ze dan dat in ze in het volgende level leren om meerdere regels code na een {if} of een {else} commando te zetten. 
+               
+        4:
+            header: 'Het {elif} commado'
+            text: |-
+                `{elif}` is een combinatie van de commandos `{else} en `{if}` die je nodig hebt om 3 (of meer) opties te maken. 
+                `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
+            code: |-
+                pizza {is} {ask} 'Welk pizza is jouw favoriet?'
+                {if} pizza {is} pepperoni
+                {print} 'Ja, pepperoni is de beste pizza!'
+                {elif} pizza {is} hawaï 
+                {print} 'Ben je helemaal gek?! Hawaï is de slechtste pizza!'
+                {else}
+                {print} 'Pepperoni is nog beter!'
+            notes: |-
+                Laat deze code aan je studenten zien en laat hen de 3 verschillende uitkomsten voorspellen. 
+                Laat ze daarna hun eigen ideeën verzinnen voor een code met 3 of meer opties.
+        5:
+            header: '{in}'
+            text: |-
+                Als je met het `{if}` en `{else}` commando hebt geoefend, kan je ook het `{in} commando uitproberen. 
+            code: |-
+                mooie_kleuren {is} groen, geel
+                lievelingskleur {is} {ask} 'Wat is je lievelingskleur?'
+                {if} lievelingskleur {in} mooie_kleuren {print} 'mooi!'
+                {else} {print} 'bah'
+            notes: |-
+                Met het `{in}` commando kan je je computer laten checken of een item in de lijst staat. 
+                With `{in}` you can let the computer check if an item is in a list. Show the example.
+                Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
+        6:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} 'Welkom bij de ijssalon.'
+                smaak {is} {ask} 'Welke smaak wilt u graag hebben?'
+                {if} smaak aardbei
+                {print} 'Goede keuze!'
+                smaak {is} vanille
+                {print} 'Weet je zeker dat je geen aardbei wilt?'
+                {else}
+                {print} Het spijt me, we hebben alleen aardbei en vanille.
+                bolletjes {is} 'Hoeveel bolletjes ijs had u gewild?'
+                {if} bolletjes {is} 1
+                {print} dat is dan 1.50 alstublieft
+                {elif} {is} 2
+                {print} 'dat is dan 2.50 alstublieft'
+                {else} 'Sorry, dat zijn er te veel.'
+            debug: 'Waar'
+            notes: Debug deze code met je studenten.
+
+        7:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
+        8:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        9:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        10:
+            header: Tipje van de sluier voor het volgende level...
+            text: In het volgende level leer je hoe in Hedy kunt rekenen. 
+    7:
+        1:
+            header: Welkom bij level 7
+            text: |-
+                Aan het eind van dit level kan je:
+                * Rekenen met Hedy
+            notes: |-
+                Vraag je studenten te voorspellen wanneer je rekenen in je code nodig hebt (bijvoorbeeld als je een prijs uitrekent, als je een aantal mensen wilt weten, score in een game wil bijhouden, etc.)
+                Je kunt ze ook vragen te voorspellen hoe dit eruit ziet. De kans is groot dat ze zelf al komen met + en - en misschien ook met de rest.  
         2:
             header: Optellen
             text: Wil je optellen, dan gebruik je het plusteken.
+            code: '{print} ''5 plus 5 is '' 5 + 5'
+            notes: |-
+                Laat de voorbeeldcode kort aan je studenten zien. 
+            
         3:
             header: Aftrekken
             text: Wil je twee getallen van elkaar aftrekken, gebruik dan het minteken.
+            code: '{print} ''5 min 5 is '' 5 - 5'
+            notes: |-
+                Laat de voorbeeldcode kort aan je studenten zien.
         4:
             header: Vermenigvuldigen
             text: Wil je vermenigvuldigen, gebruik dan het sterretje.
             code: '{print} ''5 maal 5 is '' 5 * 5'
+            notes: |-
+                Laat de voorbeeldcode kort aan je studenten zien. 
         5:
             header: Delen
             text: Voor delen gebruik je de slash.
             code: '{print} ''5 gedeeld door 5 is '' 5 / 5'
+            notes: |-
+                Laat de voorbeeldcode kort aan je studenten zien. 
         6:
             header: Samenvatting
             text: 'Je kan deze tekens dus gebruiken om mee te rekenen: +, -, * en /.'
@@ -424,14 +990,20 @@ levels:
                 {print} '5 min 5 is ' 5 - 5
                 {print} '5 maal 5 is ' 5 * 5
                 {print} '5 gedeeld door 5 is ' 5 / 5
+            notes: |-
+                Merk op dat de wiskunde code geen aanhalingstekens nodig heeft. 
+                Laat je studenten voorspellen wat de uitvoer wordt als je de wiskunde code wel tussen aanhalingstekens zet.
+                De studenten kunnen nu het muziek avontuur maken en opdracht 1 en 2 uit het werkboek. 
         7:
             header: Het = symbool
             text: |-
-                Vanaf nu kun je het = symbool gebruiken in plaats van het `{is}` commando.
+                Vanaf nu kun je = gebruiken in plaats van het `{is}` commando.
                 Dit geldt voor getallen en woorden, en het geldt ook na `{if}` of `{else}` commando's.
             code: |-
                 naam = Hedy
                 antwoord = 20 + 4
+            notes: |-
+                Laat de voorbeeldcode kort aan je studenten zien. 
         8:
             header: Rekenen met variabelen
             text: 'Je kunt rekenen met getallen, maar je kunt ook variabelen gebruiken in je berekeningen. Kijk maar:'
@@ -440,15 +1012,27 @@ levels:
                 nummer_2 = {ask} 'Vul tweede nummer in:'
                 correct_antwoord = nummer_1 * nummer_2
                 {print} nummer_1 ' maal ' nummer_2 ' is ' correct_antwoord
+            notes: |-
+                Laat de studenten de voorbeeldcode zien en zorg dat ze goed letten op de plaats van de aanhalingstekens 
+                Als je ze gevraagd hebt om voorbeelden te verzinnen over hoe je wiskunde gebruikt in Hedy, vraag ze dan hoe ze denken dat deze code eruit gaat zien. 
+                Als een student heeft bedacht om punten te tellen bij een spel dan zouden ze nu een code zoals hieronder kunnen bedenken:
+                ```
+                als antwoord = goede_antwoord
+                    punten = punten + 1
+                anders
+                    punten = punten - 1
+                ```
+                Als je denkt dat dit voor stundenten te moeilijk is om individueel of in tweetallen te doen, kan je deze opdracht met de hele klas samen doen. 
+        
         9:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             code: |-
                 {print} 'Dit is het water park kaartjes automaat'
-                {print} 'Priislijst: Kinderen onder 12 €3, Volwassenen €5'
+                {print} 'Prijslijst: Kinderen onder 12 €3, Volwassenen €5'
                 {print} 'Maandag 25% korting'
-                aantal_kinderen = 'Hoeveel kinder kaartjes wilt U?'
-                aantal_volwassenen = 'Hoeveel volwassenen kaartjes wilt U ?'
+                aantal_kinderen = 'Hoeveel kinderkaartjes wilt U?'
+                aantal_volwassenen = 'Hoeveel volwassenenkaartjes wilt U ?'
                 dag_van_de_week = {ask} 'Welke dag is het vandaag?'
                 {clear}
                 kinder_prijs = aantal_kinderen * 3
@@ -457,34 +1041,73 @@ levels:
                 {if} dag {is} maandag
                 totaal = total_price * 0.25
                 {print} 'Totaal prijs is totaal'
+            debug: 'True'
+            notes: |-
+                Debug deze code samen met je studenten.
         10:
             header: Aan de slag!
-            text: Veel plezier met de avonturen in level 6!
-    7:
+            text: Veel plezier met de avonturen in level 7!
+            notes: |-
+                Je studenten kunnen nu alle avonturen in dit level maken.
+                Maak daarnaast werkboekopdracht 3,4, en 5.
+        11:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
+        12:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        13:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        14:
+            header: Tipje van de sluier voor het volgende level...
+            text: In het volgende level leer je hoe een regel code meerdere keren kunt herhalen. 
+    8:
         1:
-            header: Welkom bij level 7
-            text: In dit level leer je hoe je een regel code zo vaak als je wil kunt herhalen.
+            header: Welkom bij level 8
+            text: |-
+                Aan het eind van deze les kan je:
+                * Een regel code meerdere keren herhalen.
         2:
             header: '{repeat} 3 {times}'
             text: |-
-                Wil je een regel code herhalen, gebruik dan deze code `{repeat}` 3 `{times}`.
-                Wil je de regel vaker herhalen dan 3 keer, verander dan simpelweg het getal.
-
-                Bijvoorbeeld: Wil je in je spannende verhaal een personage 5x om hulp laten schreeuwen. Doe dat dan zo:
+                Voorspel de uitvoer van deze code:
             code: |-
                 {print} 'De prins bleef om hulp roepen'
                 {repeat} 5 {times} {print} 'Help!'
                 {print} 'Waarom helpt niemand mij?'
+            notes: |-
+                Laat je studenten voorspellen wat de uitvoer van deze code zal zijn. 
+                 If you want to repeat the line more times, simply change the number. For example: If you are programming a story where your character shouts for help for 5 times, it could look like this:
+                Leg uit dat om een regel code te herhalen, je deze code gebruikt: `{repeat}` 3 `{times}`.
+                Bijvoorbeeld: Wil je in je spannende verhaal een personage 5x om hulp laten schreeuwen. Doe dat dan zoals in de voorbeeldcode.
         3:
             header: Vergeet print niet
             text: Als je {repeat} gebruikt, vergeet dan {print} niet.
+            code: '{repeat} 5 {times} ''Help!'''
+            debug: 'True'
+            notes: |-
+                Zoek met je studenten de fout in deze code
         4:
-            header: '{repeat} met {ask}'
-            text: Je kunt {repeat} ook gebruiken met `{ask}`, `{if}` of `{else}`.
+            header: '{repeat} een {vraag} commando'
+            text: Je kunt `{repeat}` ook gebruiken met `{ask}`, `{if}` of `{else}` commando.
             code: |-
                 {repeat} 2 {times} antwoord = {ask} 'Wist je dat je een vraag meerdere keren kunt stellen?'
                 {if} antwoord {is} ja {repeat} 2 {times} {print} 'Je wist het al!'
                 {else} {repeat} 3 {times} {print} 'Je hebt wat nieuws geleerd!'
+            notes: |-
+                Laat je studenten opnieuw de uivoer voorspellen.
         5:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
@@ -499,67 +1122,115 @@ levels:
                 {if} ja
                 {print} 'Hoera!
                 {else} 'Dat is jammer.. Nou ja... tijd om een hut te bouwen en wat eten te zoeken.'
+            debug: 'waar'
+            notes: |-
+                Debug deze code samen met je studenten.
         6:
-            header: Klaar voor de start? Af!
-            text: Veel plezier met de avonturen in level 7!
-    8:
+            header: Klaar voor de start, af!
+            text: Veel plezier met de avonturen in level 8!
+            notes: |-
+                Je studenten kunnen nu alle werboekopdrachten en alle avonturen van dit level maken. 
+        7:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
+        8:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        9:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        10:
+            header: Tipje van de sluier voor het volgende level...
+            text: In het volgende level leer je hoe een regel code meerdere keren kunt herhalen. 
+    9:
         1:
-            header: Welkom bij level 8
-            text: In dit level leer je inspringen bij `{repeat}`, `{if}` en `{else}`, om de commando's te gebruiken over meerdere regels code.
+            header: Welkom bij level 9
+            text: |-
+                Aan het eind van deze les kan je:
+                * verschillende regels code herhalen
+                * inspringen gebruiken bij de commando's: herhaal, als en anders.
         2:
-            header: '{repeat} hiervoor'
+            header: 'Het {repeat} commando in level 8'
             text: |-
-                Voor dit level zag `{repeat}` er zo uit:
-
-                Je kon het maar gebruiken over 1 regel.
+                Het `{repeat}` commando
+            code: '{repeat} 5 {times} {print} ''Help!'''
+            debug: 'True'
+            notes: |-
+                Herinner de studenten eraan dat ze in het vorige level hebben geleerd hoe je het herhaal commando kan gebruiken. 
+                Je kunt hiermee slechts één regel code herhalen. In dit level gaan ze leren hoe je meerdere regels code kunt herhalen.    
         3:
-            header: '{repeat} nu'
+            header: Het {repeat} commando nu
             text: |-
-                In dit level kun je meerdere regels code herhalen. Om dit te doen moet je de computer duidelijk maken welke regels bij elkaar horen en dus herhaald moeten worden.
-                Dit doe je door in te springen.
-
-                Inspringen doe je met 4 spaties (of een tab) aan het begin van elke regel die herhaald moet worden. Zoals in het voorbeeld:
+                Wat denk je dat de uitvoer van deze code is?
             code: |-
                 {repeat} 5 {times}
                     {print} 'Hallo iedereen'
                     {print} 'Dit wordt 5 keer geprint'
+            notes: |-
+                Laat je studenten eerst de uitvoer voorspellen. Leg dan uit hoe het werkt:
+                Vanaf dit level kan je meerdere regels code herhalen. Om dit te doen moet je de computer vertellen welke regels code bij elkaar horen en samen herhaald moeten worden. 
+                Dit doe je door inspringing te gebruiken. Gebruik 4 spaties of 1 tab aan het begin van elke regel die je wilt herhalen. 
+                
         4:
-            header: '{repeat} nu'
+            header: Het '{repeat}' commando nu
             text: |-
-                Als je wil kun je onder het blok van regels die herhaald gaan worden gewoon weer verder typen zonder in te springen.
-                De regels die niet inspringen worden dan niet herhaald.
+                En hoe denken jullie deze uitvoer eruit ziet?
             code: |-
                 {repeat} 3 {times}
                     {print} 'Hallo!'
                 {print} 'We zijn klaar met herhalen!'
+            notes: |-
+                Vraag de studenten welke regels ze denken dat herhaald worden en voer daarna de code uit
+                Leg uit: Als je wil kan je na het `{repeat}` commando door zonder inspringing. 
+                De regels die geen inspringing hebben worden niet herhaald. 
+                De studenten kunnen aan deze avonturen werken: Waarzegger, zing een liedje and muziek.
+                Maak opdracht 1 en 2 uit het werkboek. 
+            
         5:
             header: '{if} en {else} hiervoor'
             text: |-
-                Hetzelfde geldt voor `{if}` en `{else}`.
-                Hiervoor gebruikte je deze commando's zo:
+                Hoe zullen het {if} en {else} commando eruit zien met inspringing?
             code: |-
                 {if} naam {is} Hedy {print} 'leuk'
                 {else} {print} 'minder leuk!'
+            debug: 'Waar'
+            notes: |-
+                Dit is hoe {if} en {else} er altijd uit hebben gezien. Hoe zullen ze eruit gaan zien nu we inspringing kunnen gebruiken?
         6:
             header: '{if} en {else} nu'
             text: |-
                 Zo zien de `{if}` and `{else}` commando's er nu uit.
-                Bij {if} en {else} spring je nu ook in.
             code: |-
                 naam = {ask} 'Wat is je naam?'
                 {if} naam {is} Hedy
                     {print} 'Welkom Hedy'
                 {else}
                     {print} 'Welkom programmeur!'
+            notes: |-
+                Laat aan de studenten zien dat inpsringing niet slechts extra werk is namelijk om een tab toe te voegen, maar dat het erg handig is. 
+                Laat in het voorbeeld zien hoe je nu meerdere regels achter een {if} of {else} commando kunt typen in plaats van slechts één. 
         7:
             header: Stoppen met inspringen
-            text: Net als bij {repeat}, kun je stoppen met inspringen. Hierdoor worden de regels altijd getoond en niet alleen als de stelling waar is.
+            text: Voorspel de uitvoer.
             code: "naam = {ask} 'Wat is je naam ?'\n{if} naam {is} Hedy\n    {print} 'Welkom Hedy'\n{else}\n    {print} 'Welkom programmeur!' \n{print} '3..2..1.. Start met programmeren!'"
-        8:
-            header: '{if}jes in {if}jes'
-            text: |-
-                Misschien heb je al bedacht om te proberen om een {if} in een {repeat} te stoppen, of andersom.
-                Voor nu kan dit nog niet. In hoger levels mag dit wel, maar we willen je eerst even goed laten oefenen met het inspringen bij deze commando's.
+    
+            notes: |-
+                Laat je studenten de uitvoer van deze code voorspellen en vraag ze daarbij goed te kijken naar de inspringing. 
+                Net als bij {repeat}, kun je stoppen met inspringen. 
+                Hierdoor worden de regels altijd getoond en niet alleen als de stelling waar is. De regels zonder inspringing zijn dus niet meer afhankelijk van de {if} of {else} voorwaarde.
+
+                Maak werkboek opdracht 3, 4 en 5. 
         9:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
@@ -582,19 +1253,55 @@ levels:
                         {print} Je koos voor een retour ticket'
                 prijs * 2
                 {print} 'Dat wordt dan ' prijs ' euro alstublieft'
-        10:
-            header: Op naar de avonturen!
-            text: Veel plezier met de avonturen in level 8!
-    9:
-        1:
-            header: Welkom bij level 9
+            debug: 'Waar'
+            notes: Debug deze code samen met je studenten.
+        6:
+            header: Klaar voor de start, af!
+            text: Veel plezier met de avonturen in level 9!
+            notes: |-
+                Je studenten kunnen nu alle avonturen van dit level maken. 
+        7:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
+        8:
+            header: Een korte terugblik...
             text: |-
-                In dit level leer je meerdere regels code te gebruiken na een `{if}` of na een `{repeat}` commando.
+                Welk avontuur vond je het leukst? Waarom?
 
-                Je mag zelfs een `{repeat}` commando in een ander `{repeat}`  commando zetten.
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        9:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        10:
+            header: Tipje van de sluier voor het volgende level...
+            text: |-
+                In het volgende level ga je zien wat er gebeurd als je een {if} in een andere {if} stopt...
+                Next level we will see what happens if we put an {if} inside another {if}...
+            code: |-
+                {if} level = 9
+                    {if} student = nieuwsgierig
+                        {print} 'See you next level!'
+            debug: 'Waar'
+    10:
+        1:
+            header: Welkom bij level 10
+            text: |-
+                Aan het eind van dit level kan je:
+                * {if} en {repeat} commandos 'nesten'
+                * inpsringing op de juiste manier gebruiken bij {repeat} {if} and {else}
+            notes:
+                Het gebruik van een {if} commando in een ander {if} commando wordt nesten genoemd. 
         2:
-            header: Meerdere regels na `{repeat}`
-            text: Je mag meerdere regels gebruiken na `{repeat}`.
+            header: Nesten met `{repeat}`
+            text: Het is toegestaan om `{repeat}` te combineren met `{if}` in dit level. Dit wordt nesten genoemd. 
             code: |-
                 {repeat} 3 {times}
                     eten= {ask} 'Wat wil je eten?'
@@ -602,6 +1309,8 @@ levels:
                         {print} 'lekker!'
                     {else}
                         {print} 'pizza is beter'
+            notes:
+                Voer dit programma uit. Geef pizza een keer als antwoord, maar geef ook andere antwoorden. 
         3:
             header: Inspringen is belangrijk!
             text: Inspringen is erg belangrijk om de computer te vertellen welke regels herhaald moeten worden en welke niet.
@@ -610,6 +1319,9 @@ levels:
                     {print} 'Deze regel wordt herhaald...'
                     {print} 'Deze regel ook...'
                 {print} 'Maar deze regel niet!'
+            notes:
+                Herhaal voor je studenten wat het belang is van inspringing goed gebruiken.
+                Voer het programma uit en vraag de studenten wat er gebeurt als de laatste regel ook met een inspringing begint. 
         4:
             header: Meerdere regels na `{if}`
             text: Je mag ook meerdere regels gebruiken na een `{if}`
@@ -623,6 +1335,8 @@ levels:
                         {print} 'Je weet het niet zeker'
                 {else}
                     {print} 'Je wilt niet doorgaan'
+            notes: Voer de code een aantal keer uit met verschillende input. 
+                Vraag je studenten welke antwoorden je moet geven om een bepaalde output te krijgen. 
         5:
             header: Inspringen is belangrijk
             text: Ook hier is inspringen superbelangrijk! Het kan een groot verschil maken in je code.
@@ -634,29 +1348,10 @@ levels:
                         {print} 'We zullen doorgaan '
                 {else}
                     {print} 'Je weet het niet zeker'
+            notes: |-
+                Speel wat met de inspringing en laat zien wat er gebeurd als je de inspringing van het tweede {if} commando verwijdert, bijvoorbeeld. 
+        
         6:
-            header: Een `{if}` in een `{repeat}`
-            text: |-
-                Nu je meerdere regels kunt gebruiken na deze commando's, kun je ze ook in elkaar zetten.
-                Bekijk dit voorbeeld maar eens:
-            code: |-
-                {repeat} 3 {times}
-                    eten = {ask} 'Wat wil je eten?'
-                    {if} eten {is} pizza
-                        {print} 'lekker!'
-                    {else}
-                        {print} 'pizza is beter'
-        7:
-            header: Let op het inspringen
-            text: Zie hoe de 4e en 6e regel van deze code beginnen met 8 spaties.
-            code: |-
-                {repeat} 3 {times}
-                    eten = {ask} 'Wat wil je eten?'
-                    {if} eten {is} pizza
-                        {print} 'lekker!'
-                    {else}
-                        {print} 'pizza is beter'
-        8:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             code: |-
@@ -673,20 +1368,58 @@ levels:
                 {else}
                 {print} 'Gaaf!'
                 {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
+            debug: 'waar'
+            notes: Debug deze code samen met je studenten. 
+        7:
+            header: Klaar voor de start, af!
+            text: Veel plezier met de avonturen in level 10!
+            notes: |-
+                Je studenten kunnen nu alle avonturen van dit level maken. 
+        8:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
         9:
-            header: Doen!
-            text: Veel plezier met de avonturen in level 9!
-    10:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        10:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        11:
+            header: Tipje van de sluier voor het volgende level...
+            text: |-
+                In het volgende level leren we het {for} commando te gebruiken.
+            code: |-
+                dieren = hond, kat, goudvis
+                {for} dier in dieren
+                {print} 'I love ' dier
+            debug: 'waar'
+    11:
         1:
-            header: Welkom bij level 10
-            text: 'In dit level leer je het nieuwe commando: `{for}`.'
+            header: Welkom bij level 11
+            text: |-
+                Aan het eind van dit level kan je:
+                * het {for} commando gebruiken. 
         2:
             header: '{for}'
-            text: Met {for} kun je een lijst maken en alle items op die lijst gebruiken. `{for}` creëert net als {repeat} en {if} een blok waarbij je 4 spaties moet inspringen.
-            code: |-
+            text: Met {for} kun je een lijst maken en alle items in die lijst gebruiken.
                 dieren = hond, kat, goudvis
                 {for} dier {in} dieren
                     {print} 'I love ' dier
+            notes: |-
+                Laat de studenten zien hoe je met het {for} commando ook een block nodig hebt dat met inspringing begint.
+                Voer de code uit en laat zien wat er gebeurt.
+                Vraag de studenten daarna om hun eigen versie van een programma met {for} erin te schrijven.
         3:
             header: '{for}'
             text: 'Hier zie je een ander voorbeeld van `{for}`:'
@@ -695,13 +1428,16 @@ levels:
                 namen= Mama, Papa, Emma, Sophie
                 {for} dag {in} dagen
                     {print} namen {at} {random} ' doet de afwas on ' dag
+            notes: |-
+                Ga de klas langs en laat de studenten het programma delen dat ze bedacht hebben. 
+                Laat daarna dit volgende voorbeeld zien en laat de studenten de uitvoer voorspellen. 
         4:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen
             code: |-
                 {print} 'Dames en heren!'
                 {print} 'Komt dat zien! Vanavond in circus Hedy!'
-                acts = uit een kanon schieten, koortdansen , zichzelf inpakken in een koffertje,
+                acts =  kanon schieten, koordansen , zichzelf inpakken in een koffertje,
                 mensen = Gina de Geweldige Olly de Ongelooflijke Francis de Fantastische
                     {for} mensen {in} acts
                 gekozen_persoon {is} mensen {random}
@@ -709,12 +1445,46 @@ levels:
                 {add} gekozen_persoon {from} mensen
                 {print} 'Komt dat zien! Alleen vanavond!'
                 {print} 'Laatste tickets verkrijgbaar aan de kassa
+            debug: 'waar'
+            notes: |- 
+                    Debug deze code samen met je studenten.
         5:
             header: Programmeertijd!
-            text: Veel plezier met de avonturen in level 10!
-    11:
+            text: Veel plezier met de avonturen in level 11!
+            notes: |-
+                Je studenten kunnen nu alle avonturen in level 11 maken. 
+        8:
+            header: Een korte terugblik...
+            text: Wat heb je vandaag geleerd?
+            notes: |-
+                Vraag de studenten om op te noemen wat ze vandaag hebben geleerd. 
+        9:
+            header: Een korte terugblik...
+            text: |-
+                Welk avontuur vond je het leukst? Waarom?
+
+                Welk avontuur vond je het minst leuk? Waarom?
+
+            notes: |-
+                Vraag de studenten naar hun mening
+        10:
+            header: Laat zien en vertel!
+            text: Is er iemand die zijn programma aan de klas wil laten zien?
+            notes: |-
+                Laat een aantal studenten hun werk aan de klas laten zien. 
+                Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken. 
+        11:
+            header: Tipje van de sluier voor het volgende level...
+            text: |-
+                In het volgende level leren we het {for} commando op een andere manier te gebruiken.
+            code: |-
+                {for} counter {in} {range} 1 {to} 10
+                    {print} counter
+                {print} 'Ready or not. Here I come!'
+            debug: True
+    12:
         1:
-            header: Welkom bij level 11
+            header: Welkom bij level 12
             text: |-
                 In dit level leer je een nieuwe vorm van `{for}`. In de eerdere levels gebruikte je `{for}` voor een lijstje, maar we kunnen het ook gebruiken met getallen.
 
