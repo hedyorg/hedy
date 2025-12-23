@@ -2,6 +2,7 @@ import uuid
 
 from flask import make_response, request, session
 from jinja_partials import render_partial
+import hedy_content
 from website.flask_hedy import g_db
 from website.flask_helpers import gettext_with_fallback as gettext
 import utils
@@ -126,12 +127,26 @@ class ClassModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class:
             return make_response(gettext("no_such_class"), 404)
-        if Class["teacher"] != user["username"]:  # only teachers can remove their classes.
+        if (
+            Class["teacher"] != user["username"]
+        ):  # only teachers can remove their classes.
             return make_response(gettext("unauthorized"), 401)
 
         self.db.delete_class(Class)
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
-        return render_partial('htmx-classes-table.html', teacher_classes=teacher_classes)
+        class_customizations = [
+            self.db.get_class_customizations(_class["id"]) for _class in teacher_classes
+        ]
+        class_customizations = {
+            customizations["id"]: customizations
+            for customizations in class_customizations
+        }        
+        return render_partial(
+            "htmx-classes-table.html",
+            class_customizations=class_customizations,
+            teacher_classes=teacher_classes,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
+        )
 
     @route('join/<class_id>', methods=["POST"])
     @requires_login
