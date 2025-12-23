@@ -29,9 +29,10 @@ Turtle[@isGroup=turtle] {
 If { ifs+ Condition newline* IfLessCommand Else? }
 Else { !else elses+ newline* IfLessCommand }
 
-Condition {
-    PressedCheck { Text is+ pressed+ } |
-    EqualityCheck { Text is+ (String | Text) }
+Condition { 
+    EqualityCheck { Text is+ (String | Text | pressed+) } |
+    InListCheck { Text ins+  Text } |
+    NotInListCheck { Text not_in+  Text }
 }
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
@@ -62,7 +63,9 @@ ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
     from[@name="from"],
     remove[@name="remove"],
     to_list[@name="to_list"],
-    clear[@name="clear"]
+    clear[@name="clear"],    
+    ins[@name="in"],
+    not_in[@name="not_in"]
 }
 
 Op<expr> { expr }

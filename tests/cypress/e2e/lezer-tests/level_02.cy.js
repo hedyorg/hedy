@@ -48,7 +48,7 @@ describe('Lezer parser tets for level 2', () => {
                     )
                 )`;
 
-            multiLevelTester('Test empty sleep', code, expectedTree, 2, 16);
+            multiLevelTester('Test empty sleep', code, expectedTree, 2, 18);
         });
 
         describe('Test turtle assignment', () => {

@@ -94,7 +94,7 @@ describe('Lezer parser tests for level 3', () => {
                 const code = 'play list at random'
                 const expectedTree = 'Program(Command(Play(play,ListAccess(Text,at,random))))'
 
-                multiLevelTester('Play note', code, expectedTree, 3, 12)
+                multiLevelTester('Play note', code, expectedTree, 3, 15)
             });
 
             describe('Play list access index', () => {
