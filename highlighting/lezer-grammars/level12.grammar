@@ -1,40 +1,44 @@
+// Same as level 9, b
 @top Program { newline* (Command newline+)* Command? }
-
 Command {
-    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove| If | Else | Elif | Repeat | For | Define | Call | Return | ErrorInvalid
 }
 
-Print { print+ ( ListAccess | Expression)+ }
-Ask { Text (is+ | Op<"=">) ask+ ( ListAccess | Expression )+ }
+Print { print ( String | ListAccess | Expression )+ }
+Ask { Text (is+ | Op<"=">) ask+ ( String | ListAccess | Expression )+ }
 
 // Commas in every language are allowed
-AssignList { Text (is+ | Op<"=">) (String | Number ) ~ambig  (Op<',' | '،' | '，' | '、' > (String | Number ))+ }
-Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
-Sleep { sleep+ (Expression | ListAccess)? }
+AssignList { Text (is+ | Op<"=">) (Text+ | Number ) ~ambig  (Op<',' | '،' | '，' | '、' > (Text+ | Number ))+ } 
+Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
+Sleep { sleep+ (Expression | ListAccess )? }
 ListAccess { Text at+ (random+ | Text | Number) }
-Add { add+ (Expression ) to_list+ Text }
-Remove { remove+ (Expression ) from+ Text }
+Add { add+ (Number | ListAccess | Text+) to_list+ Text }
+Remove { remove+ (Number | ListAccess | Text+) from+ Text }
 Clear { clear+ }
 Play { play+ (ListAccess | Expression) }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Expression | ListAccess ) } |
     Turn { turn+ (Expression | ListAccess ) } |
-    Color { color+ (Expression | ListAccess )  }
-}
+    Color { color+ (Expression | ListAccess)  }
+}   
 
-If { ifs+ Condition }
-Else { elses+ } 
+If { ifs+ Condition ((and+ | or+) Condition)*  }
+Else { elses+  }
+Elif { elif+ Condition ((and+ | or+) Condition)* }
 
 Condition { 
-    EqualityCheck { (String | Text | Number) (is+ | Op<"=">) (Expression | pressed+) } |
-    InListCheck { (String | Text | Number) ins+ Text } |
-    NotInListCheck { (String | Text | Number) not_in+ Text }
+    PressedCheck { Text ~cond is+ pressed+ } |
+    EqualityCheck { (Expression ) (is+ | Op<"="> Op<"=">? ) (Expression ) } |
+    NotEqualCheck { (Expression ) (Op<"!=">) (Expression ) } |
+    ComparisonCheck { (Expression ) (Op<">"> | Op<"<">) Op<"=">? (Expression ) } |
+    InListCheck { (Expression ~cond ) ins+  Text } |
+    NotInListCheck { (Expression ~cond ) not_in+  Text }
 }
 
-Repeat { repeat+ (Number | Text) times+ }
+Repeat { repeat+ (Number | Text) times+ Command? }
 
-For { fors+ Text ins+ (Text | range+ (Text | Number) to+ (Text | Number)) }
+For { fors+ Text ins+ Text }
 
 Define { define+ Text (with+  Arguments)? }
 Call { call+ Text (with+ Arguments)? }
@@ -55,7 +59,6 @@ binaryExpression {
 Expression {
     Number |
     Text |
-    String |
     Call |
     binaryExpression
 }
@@ -71,8 +74,11 @@ Expression {
     at[@name="at"],
     random[@name="random"],
     ifs[@name="if"],
-    pressed[@name="pressed"],
     elses[@name="else"],
+    pressed[@name="pressed"],
+    elif[@name="elif"],
+    and[@name="and"],
+    or[@name="or"],
     call[@name="call"],
     with[@name="with"]
 }
@@ -89,16 +95,14 @@ Expression {
     from[@name="from"],
     remove[@name="remove"],
     to_list[@name="to_list"],
-    clear[@name="clear"],    
+    clear[@name="clear"],
     ins[@name="in"],
     not_in[@name="not_in"],
     repeat[@name="repeat"],
-    times[@name="times"],
+    times[@name="times"],        
     fors[@name="for"],
-    to[@name="to"],
-    range[@name="range"],
     define[@name="define"],
-    returns[@name="return"]    
+    returns[@name="return"]
 }
 
 @tokens {
@@ -106,7 +110,7 @@ Expression {
         Number,
         Text
     }
-    symbol { $[!%&().:;<>?@\[\]\\\^\{\}`~$_] }
+    symbol { $[%&().:;?@\[\]\\\^\{\}`~$_] }
     Comment { "#" ![\n]* }
     newline { '\n' }
     // A char can be anything that goes after the character ! (A1)
@@ -126,7 +130,7 @@ Expression {
     String {
         '"' ( ![\\\n"] )* '"' |
         "'" ( ![\\\n'] )* "'"
-    } 
+    }    
 }
 
 @skip { Comment | space }
