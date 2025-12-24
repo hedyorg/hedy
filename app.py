@@ -1303,10 +1303,6 @@ def index(level, program_id):
         if available_levels:
             return index(available_levels[0], program_id)
         return utils.error_page(error=403, ui_message=gettext('level_not_class'))
-
-    # Add the available levels to the customizations dict -> simplify
-    # implementation on the front-end
-    customizations['available_levels'] = available_levels
     cheatsheet = COMMANDS[g.lang].get_commands_for_level(level, g.keyword_lang)
 
     adventures = load_adventures_for_level(level)
@@ -1347,6 +1343,7 @@ def index(level, program_id):
         current_page='hedy',
         max_level=max_level,
         customizations=customizations,
+        available_levels=available_levels,
         hide_cheatsheet=hide_cheatsheet,
         loaded_program=loaded_program,
         adventures=adventures,

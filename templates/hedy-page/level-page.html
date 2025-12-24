@@ -37,14 +37,14 @@
           </button>
         </div>
         <div id="dropdown-level" class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 min-w-full" style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; width: 400px !important; max-height: 35rem;">
-          {% set index_levels = customizations["available_levels"] if customizations["teachers_adventure"] else range(1, max_level + 1) %}
+          {% set index_levels = available_levels %}
           {% for i in index_levels %}
             <div class="flex flex-col">
               <button class="flex flex-row justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
                 {% if loop.index == level|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %}
-                {% if i not in customizations['available_levels']%} bg-gray-400 {% else %} hover:bg-blue-200 {% endif %}"
+                {% if i not in available_levels%} bg-gray-400 {% else %} hover:bg-blue-200 {% endif %}"
 
-                {% if i not in customizations['available_levels']%}disabled{% endif %}
+                {% if i not in available_levels%}disabled{% endif %}
               xd="  on click
                    toggle .sliding-content-closed .sliding-content-open on #level_{{ i }}_pane
                    then toggle .rotate-180 on #level_{{ i }}_arrow
@@ -53,7 +53,7 @@
                   id="level_{{ i }}_header"
                   data-cy="level_{{ i }}_header">
                 {{_('level_title')}} {{ i }}
-                {% if i not in customizations['available_levels']%}
+                {% if i not in available_levels%}
                   <i class="fa-solid fa-lock"></i>
                 {% else %}
                   <i class="fa-solid fa-chevron-down text-base transition-all ease-in duration-200 {% if loop.index == level|int %}rotate-180{% endif %}" id="level_{{ i }}_arrow"></i>

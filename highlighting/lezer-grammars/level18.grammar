@@ -1,0 +1,143 @@
+@top Program { newline* (Command newline+)* Command? }
+
+Command {
+    Assign | AssignList | Input | Clear | Print | Play | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | Elif | ErrorInvalid
+}
+
+Print { print+  Op<"("> Arguments? Op<")"> }
+
+
+AssignList { Text (is+ | Op<"=">) Op<"["> ((boolean | String | Text | Number) ~ambig (Op<',' | '،' | '，' | '、' > (boolean | String | Text | Number))*)? Op<"]"> }
+Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig )+ }
+Input { Text (is+ | Op<"=">) input+ Op<"("> Arguments? Op<")"> }
+Sleep { sleep+ (Expression )? }
+
+ListAccess { Text Op<"["> (random+ | Text | Number) Op<"]">}
+Play { play+ Expression }
+
+Turtle[@isGroup=turtle] {
+    Forward { forward+ (Expression ) } |
+    Turn { turn+ (Expression ) } |
+    Color { color+ (Expression )  }
+}   
+
+Add { add+ (Expression ) to_list+ Text }
+Remove { remove+ (Expression ) from+ Text }
+Clear { clear+ }
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
+
+If { ifs+ Condition ((and+| or+) Condition)* Op<":"> }
+Else { elses+ Op<":"> }
+Elif { elif+ Condition ((and+| or+) Condition)* Op<":"> }
+Condition {    
+    PressedCheck { Text ~cond is+ pressed+ } |
+    EqualityCheck { (Expression ) (is+ | Op<"="> Op<"=">? ) (Expression ) } |
+    NotEqualCheck { (Expression ) (Op<"!=">) (Expression ) } |
+    ComparisonCheck { (Expression ) (Op<">"> | Op<"<">) Op<"=">? (Expression ) } |
+    ListCheck { (Expression ~cond ) notIn+  Text }
+}
+
+
+Repeat { repeat+ (Number | Text) times+ }
+
+For { fors+ Text ins+ (Text | range+ Op<"("> (Number | Text) Op<',' | '،' | '，' | '、' > (Number | Text) (Op<',' | '،' | '，' | '、' > (Number | Text))? Op<")">) Op<":"> }
+While { whiles+ Condition ((and+| or+) Condition)* Op<":">}
+Define { def+ Text Op<"("> Arguments? Op<")"> Op<":">}
+Call { Text Op<"("> Arguments? Op<")"> }
+Return { returns+ (Call)+ }
+
+
+Arguments { argument !comma (Op<',' | '،' | '，' | '、' > argument)* }
+argument { Expression }
+
+Op<expr> { expr }
+
+binaryExpression {
+    Expression !times Op<"*" | "/"> Expression |
+    Expression !plus Op<"+" | "-"> Expression
+}
+
+boolean { low_true | low_false | cap_true | cap_false }
+
+Expression {
+    Number |
+    boolean |
+    Text |
+    String |
+    ListAccess |
+    Call |
+    binaryExpression
+}
+
+@precedence {
+    times @left,
+    plus @right,
+    comma @left
+}
+
+
+@external specialize { Text } specializeKeyword from "./tokens" {
+    print[@name="print"],
+    is[@name="is"],
+    input[@name="input"],
+    sleep[@name="sleep"],
+    play[@name="play"],
+    random[@name="random"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    color[@name="color"],
+    add[@name="add"],
+    remove[@name="remove"],
+    from[@name="from"],
+    clear[@name="clear"],
+    ifs[@name="if"],
+    elses[@name="else"],
+    and[@name="and"],
+    or[@name="or"],
+    pressed[@name="pressed"],
+    notIn[@name="notIn"],
+    ins[@name="in"],
+    repeat[@name="repeat"],
+    times[@name="times"],
+    range[@name="range"],
+    whiles[@name="while"],
+    def[@name="def"],
+    returns[@name="return"],
+    fors[@name="for"],
+    to_list[@name="to_list"],
+    elif[@name="elif"],
+    low_true[@name="true"],
+    low_false[@name="false"],
+    cap_true[@name="True"],
+    cap_false[@name="False"]
+}
+
+@tokens {
+    @precedence {
+        Number,
+        Text
+    }
+    symbol { $[%&.;?@\\\^\{\}`~$_] }
+    Comment { "#" ![\n]* }
+    newline { '\n' }
+    // A char can be anything that goes after the character ! (A1)
+    // Excluding the commas in different languages:
+    // ، (U+00060C) ，(U+00FF0C) 、 (U+003001)
+    // We are also excluding the arab and Pajabi numeral systems.
+    identifierChar { 
+        @asciiLetter | 
+        $[\u{0000a1}-\u{00060b}] | $[\u{00060d}-\u{000659}] |
+        $[\u{000670}-\u{0006EF}] | $[\u{0006FA}-\u{003000}] |
+        $[\u{003002}-\u{00ff0b}] | $[\u{00ff0d}-\u{10ffff}]
+    }
+    Text { (identifierChar | symbol | digit)+ }
+    space { " " }
+    digit { $[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹0123456789] } // latin, arab and pa_PK (Panjabi) scripts
+    Number { digit+ ("." digit+)? }
+    String {
+        '"' ( ![\\\n"] )* '"' |
+        "'" ( ![\\\n'] )* "'"
+    } 
+}
+
+@skip { Comment | space }
