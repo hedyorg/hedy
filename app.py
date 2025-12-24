@@ -1328,7 +1328,7 @@ def index(level, program_id):
                 is_command_adventure=loaded_program.adventure_name in KEYWORDS_ADVENTURES
             ))
 
-    adventures_map = {a.short_name: a for a in adventures} 
+    adventures_map = {a.short_name: a for a in adventures}
 
     hide_cheatsheet = False
     if 'other_settings' in customizations and 'hide_cheatsheet' in customizations['other_settings']:
