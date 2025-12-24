@@ -140,7 +140,7 @@ class ClassModule(WebsiteModule):
         class_customizations = {
             customizations["id"]: customizations
             for customizations in class_customizations
-        }        
+        }
         return render_partial(
             "htmx-classes-table.html",
             class_customizations=class_customizations,
