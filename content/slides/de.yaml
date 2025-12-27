@@ -59,7 +59,7 @@ levels:
                 Den ersten Code, den du in Level 1 benutzen kannst, ist `{print}`.
 
                 `{print}` wird benutzt, um Text auf dem Bildschirm anzuzeigen.
-            code: '{print} Text auf Bilschirm anzeigen'
+            code: '{print} Text auf dem Bildschirm anzeigen'
         3:
             header: 'Der {print} Befehl'
             text: |
@@ -101,7 +101,6 @@ levels:
             text: '`{forward}` wird benutzt, um die Schildkröte vorwärts zu bewegen.'
             code: |-
                 {forward} 50
-                {turn} left
         11:
             code: |-
                 {forward} 50
@@ -125,16 +124,11 @@ levels:
             text: Um eine Variable zu erstellen oder 'zu setzen', nutzen wir den `{is}` Befehl
             header: Variablen
         3:
-            text: |-
-                We can also set a variable by asking questions.
-
-                The answer to the question is stored in the variable.
-
-                This way we don't need the `{echo}`  command.
+            text: |
             header: Interaktiv
             code: "name {is} {ask} Wie heißt du?\n{print} Hallo name"
         4:
-            text: Now that we use variables, we can use multiple variables instead of just one `{echo}`command.
+            text: ''
             code: |-
                 name {is} {ask} Was ist dein Name?
                 {print} Hallo name
@@ -174,12 +168,12 @@ levels:
             code: "tiere {is} Hunde, Katzen, Kängurus\n{print} Meine Lieblingstiere sind tiere {at} {random}"
         2:
             text: "Du erstellst eine Liste mit`{is}`.\n\nTrenne die Elemente in deiner Liste mit einem Komma."
-            code: tiere {is} Hunde, Katzen, Kangurus
+            code: tiere {is} Hunde, Katzen, Kängurus
             header: Eine Liste erstellen
         6:
             header: Entfernen von
             code: "tiere {is} Hunde, Katzen, Kängurus\nnicht_mögen {is} {ask} Welche Tiere magst du nicht?\n{remove} nicht_mögen {from} tiere\n{print} Ich wähle tiere {at} {random}"
-            text: "Das Gegenstück zum `{add}` `{to_list}` Befehl ist der  `{remove}` `{from}` Befehl.\nDieser Befehlt entfernt ein Element von der Liste."
+            text: "Das Gegenstück zum `{add}` `{to}` Befehl ist der `{remove}` `{from}` Befehl.\nDieser Befehlt entfernt ein Element von der Liste."
         7:
             debug: Wahr
             header: Debugging
@@ -197,12 +191,20 @@ levels:
             header: Zufällig
         5:
             code: "tiere {is} Hunde, Katzen, Kängurus\nmag {is} {ask} Welches ist dein Lieblingstier?\n{add} mag {to_list} tiere\n{print} Ich wähle tiere {at} {random}"
-            text: "Du kannst der Liste Elemente mit dem `{add}` `{to_list}` Befehl hinzufügen.\n\nDu kannst auswählen, was du zur Liste hingefügt wird oder den `{add}` `{to_list}` Befehlt in Kombination mit dem `{ask}` Befehl nutzen.\nSo kannst du den Spieler entscheiden lassen, was der Liste hinzugefügt wird."
+            text: "Du kannst der Liste Elemente mit dem `{add}` `{to}` Befehl hinzufügen.\n\nDu kannst auswählen, was du zur Liste hinzugefügt wird oder den `{add}` `{to}` Befehl in Kombination mit dem `{ask}` Befehl nutzen.\nSo kannst du den Spieler entscheiden lassen, was der Liste hinzugefügt wird."
             header: Hinzufügen
     4:
         9:
-            header: Ready, Set, Go!
-            text: Enjoy the adventures in level 4!
+            header: ''
+            text: ''
+            code: |-
+                {print} '3'
+                {clear}
+                {print} '2'
+                {clear}
+                {print} '1'
+                {clear}
+                {print} 'ÜBERRASCHUNG!'
         2:
             text: 'In den vorherigen Leveln bist du vielleicht über folgendes Problem gestolpert:'
             debug: Wahr
@@ -215,3 +217,56 @@ levels:
         3:
             header: Es mit Anführungszeichen beheben
             text: "In diesem Level werden wir das Problem mithilfe von Anführungszeichen lösen.\n\nDamit sieht unser Code auch schon mehr nach 'echtem' Python-Code aus."
+        6:
+            code: |-
+                name {is} Harry
+                {print} 'Hallo ' name
+        7:
+            code: |-
+                name {is} Harry
+                {print} 'Hallo ' name ', wie geht es dir?'
+        8:
+            debug: Wahr
+        10:
+            header: Debugging
+            debug: Wahr
+    5:
+        3:
+            debug: Wahr
+        7:
+            header: Debugging
+            debug: Wahr
+    6:
+        2:
+            code: "{print} '5 plus 5 ist ' 5 + 5"
+        3:
+            code: "{print} '5 minus 5 ist ' 5 - 5"
+        4:
+            code: "{print} '5 mal 5 ist ' 5 * 5"
+        5:
+            code: "{print} '5 geteilt durch 5 ist ' 5 / 5"
+        6:
+            code: |-
+                {print} '5 plus 5 ist ' 5 + 5
+                {print} '5 minus 5 ist ' 5 - 5
+                {print} '5 mal 5 ist ' 5 * 5
+                {print} '5 geteilt durch 5 ist ' 5 / 5
+        7:
+            code: |-
+                name = Hedy
+                antwort = 20 + 4
+        9:
+            header: Debugging
+            debug: Wahr
+    7:
+        3:
+            debug: Wahr
+        5:
+            header: Debugging
+            debug: Wahr
+    8:
+        2:
+            code: "{repeat} 5 {times} {print} 'Hilfe!'"
+            debug: Wahr
+        5:
+            debug: Wahr
