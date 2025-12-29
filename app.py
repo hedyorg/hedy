@@ -1341,7 +1341,7 @@ def index(level, program_id):
         level_nr=str(level_number),
         level=level_number,
         current_page='hedy',
-        max_level=max_level,
+        max_level=max_level, 
         customizations=customizations,
         available_levels=available_levels,
         hide_cheatsheet=hide_cheatsheet,
