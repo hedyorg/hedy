@@ -37,7 +37,7 @@
           </button>
         </div>
         <div id="dropdown-level" class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 min-w-full" style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; width: 400px !important; max-height: 35rem;">
-          {% set index_levels = available_levels %}
+          {% set index_levels = range(1, max_level + 1) %}
           {% for i in index_levels %}
             <div class="flex flex-col">
               <button class="flex flex-row justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
