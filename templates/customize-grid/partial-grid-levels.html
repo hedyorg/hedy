@@ -14,7 +14,7 @@
           else if not arrow.classList.contains('rotate-180')
           add .rotate-180 to arrow
           end">
-        {% for dropdown_level in range(1, 19) %}
+        {% for dropdown_level in range(1, 17) %}
         <button id="level_button_{{dropdown_level}}" class="flex-row flex justify-between items-center px-2 py-2 border-b border-dashed border-blue-500
             {% if dropdown_level == adventure_table.level %}bg-white{% else %}hover:bg-blue-100 bg-blue-200{% endif %}"
           {% if dropdown_level==adventure_table.level %}disabled{% endif %} style="width: 100%;"
