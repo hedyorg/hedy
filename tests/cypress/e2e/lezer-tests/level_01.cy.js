@@ -89,7 +89,7 @@ describe('Lezer parser tests for level 1', () => {
             const code = 'hello world';
             const expectedTree = `Program(Command(ErrorInvalid(Text,Text)))`
 
-            multiLevelTester('Test misspelled command', code, expectedTree, 1, 18);
+            multiLevelTester('Test misspelled command', code, expectedTree, 1, 16);
         });
 
         describe('Correct command after error parses correctly', () => {
