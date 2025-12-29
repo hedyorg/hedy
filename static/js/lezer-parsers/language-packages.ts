@@ -40,6 +40,8 @@ export let PARSER_FACTORIES: Record<number, (lang: string) => LRParser> = {
     14: (lang) => generateLevel14Parser(14, lang),
     15: (lang) => generateLevel15Parser(15, lang),
     16: (lang) => generateLevel16Parser(16, lang),
+    17: (lang) => generateLevel1Parser(16, lang),
+    18: (lang) => generateLevel1Parser(16, lang),
 };
 
 export const keywords = [
