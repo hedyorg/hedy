@@ -86,5 +86,9 @@ htmx.on("htmx:confirm", function(e: any) {
     modal.confirm(modalPrompt, () => {
         e.target.removeAttribute("hx-confirm");
         e.detail.issueRequest(true);
+        const success_message = e.target.getAttribute("data-success-message")
+        if (success_message) {
+            modal.notifySuccess(success_message);
+        }
     });
 });
