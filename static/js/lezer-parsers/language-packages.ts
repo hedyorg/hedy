@@ -14,8 +14,6 @@ import { generateParser as generateLevel13Parser } from './level13-parser'
 import { generateParser as generateLevel14Parser } from './level14-parser'
 import { generateParser as generateLevel15Parser } from './level15-parser'
 import { generateParser as generateLevel16Parser } from './level16-parser'
-import { generateParser as generateLevel17Parser } from './level17-parser'
-import { generateParser as generateLevel18Parser} from './level18-parser'
 import { LRParser } from '@lezer/lr';
 
 /**
@@ -42,8 +40,6 @@ export let PARSER_FACTORIES: Record<number, (lang: string) => LRParser> = {
     14: (lang) => generateLevel14Parser(14, lang),
     15: (lang) => generateLevel15Parser(15, lang),
     16: (lang) => generateLevel16Parser(16, lang),
-    17: (lang) => generateLevel17Parser(17, lang),
-    18: (lang) => generateLevel18Parser(18, lang),
 };
 
 export const keywords = [
