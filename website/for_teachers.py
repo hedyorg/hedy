@@ -1274,13 +1274,12 @@ class ForTeachersModule(WebsiteModule):
             for level, date in customizations.get("opening_dates", {}).items()
             if int(level) <= hedy.HEDY_MAX_LEVEL
         }
-        print('*' * 100)
-        print(opening_dates)
-        print('*' * 100)
         customizations["opening_dates"] = opening_dates
         for level, adventures_list in customizations.get(
             "sorted_adventures", {}
         ).items():
+            if int(level) > hedy.HEDY_MAX_LEVEL:
+                continue
             for adventure in adventures_list:
                 if adventure["from_teacher"]:
                     db_adventures[level].append(adventure)
