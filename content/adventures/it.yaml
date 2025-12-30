@@ -195,6 +195,23 @@ adventures:
             16:
                 story_text: "Usando la funzione `{while}`  puoi rendere le tue storie più interessanti. Per esempio puoi usare `{while} game == 'on'` in modo da giocare fino alla fine della partita.\nO puoi usare `{while} sword == 'lost'` in modo che il giocatore non possa continuare la partita fino a quando non hanno trovato qualcosa.\n\n###  Esercizio\nIl codice di esempio ti mostra come usare la funzione `{while}`  in una storia. Ora **pensa ad un tuo scenario** in cui il giocatore deve trovare qualcosa per continuare.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
+            6:
+                story_text: |-
+                    Ora che puoi usare `{elif}` puoi creare una storia ancora più interattiva! Potresti creare più personaggi con diversi tratti per esempio.
+                    Oppure potresti far scegliere al tuo giocatore quale strada prendere, quale porta apire o quale pozione magica bere...
+
+                    ### Esercizio
+                    Crea la tua storia con 3 o più opzioni usando {elif}.
+                example_code: |
+                    ```
+                    personaggio {is}{ask} 'Chi ti aiuterà in questa sfida?'
+                    {if} personaggio {is} 'Daisy'
+                    {print} 'Hai scelto Daisy! Lei è la più intelligente di tutti!'
+                    {elif} personaggio {is} 'Jason'
+                    {print} 'Hai scelto Jason! Lui è il più forte di tutti!'
+                    {elif} personaggio {is} 'Sam'
+                    {print} 'Hai scelto Sam! Lui è il più veloce di tutti!'
+                    ```
     add_remove_command:
         default_save_name: aggiungi_rimuovi_comando
         description: introducendo {add} {to_list} e {remove} {from}
