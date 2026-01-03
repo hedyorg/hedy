@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2000-01-01 00:00+0000\n"
-"PO-Revision-Date: 2025-12-31 13:00+0000\n"
+"PO-Revision-Date: 2026-01-06 09:53+0000\n"
 "Last-Translator: Hamoud-barmajah <hbusaeedi23@tutanota.com>\n"
 "Language-Team: ar <LL@li.org>\n"
 "Language: ar\n"
@@ -19,17 +19,11 @@ msgstr ""
 "X-Generator: Weblate 5.15.1\n"
 "Generated-By: Babel 2.14.0\n"
 
-#, fuzzy
 msgid "Access Before Assign"
-msgstr ""
-"لقد حاولت استخدام المتغير {name} في السطر {access_line_number}، لكنك قمت "
-"بتعيينه على السطر {definition_line_number}. قم بتعيين متغير قبل استخدامه."
+msgstr "لقد حاولت استخدام المتغير '{name}' في السطر {access_line_number} قبل تعريفه. هل بإمكانك تعريف المتغير قبل استخدامه؟"
 
-#, fuzzy
 msgid "Cyclic Var Definition"
-msgstr ""
-"يجب أن تضبط قيمة المتغير `{variable}` قبل أن تستعمله على الجانب الأيسر من من "
-"الأمر هو."
+msgstr "يجب أن تضبط قيمة المتغير `{variable}` قبل أن تستعمله على الجانب الأيسر من من الأمر  البرمجي '{is}'. هل بإمكانك تعريف المتغير قبل استخدامه؟"
 
 msgid "Else Without If Error"
 msgstr ""
@@ -50,28 +44,19 @@ msgstr ""
 "لقد اكتشفنا أن جزءًا من اﻷمر البرمجي يبدو مفقودًا من`{incomplete_command}` على "
 "السطر رقم {line_number}. هل يمكنك أن تضيف ما هو مفقود؟"
 
-#, fuzzy
 msgid "Incomplete Repeat"
-msgstr ""
-"يبدو أنك نسيت إستخدام أمر مع أمر `{repeat}` الذي إستخدمته في السطر "
-"{line_number}."
+msgstr "لقد اكتشفنا أن الأمر البرمجي '{repeat}' على السطر {line_number} يفتقد إلى الأمر البرمجي '{command}'. هل بإمكانك إضافته؟"
 
 msgid "Invalid"
 msgstr ""
 "لقد اكتشفنا أن `{invalid_command}` ليس أمراً برمجياً ضمن المستوى {level} من "
 "هيدي. هل كنت تقصد الأمر `{guessed_command}`؟"
 
-#, fuzzy
 msgid "Invalid Argument"
-msgstr ""
-"لا يمكن استعمال الأمر `{command}` مع `{invalid_argument}`. حاول تغيير "
-"`{invalid_argument}` الى {allowed_types}."
+msgstr "لا يمكن استعمال الأمر `{command}` مع هذا المدخل: `{invalid_argument}`. هل بإمكانك تغيير `{invalid_argument}` الى {allowed_types}؟"
 
-#, fuzzy
 msgid "Invalid Argument Type"
-msgstr ""
-"لا يمكن استعمال الأمر `{command}` مع `{invalid_argument}` وذلك بسبب كونها "
-"{invalid_type}. حاول تغيير `{invalid_argument}` الى {allowed_types}."
+msgstr "لا يمكن استعمال الأمر `{command}` مع `{invalid_argument}` وذلك بسبب كونها {invalid_type}. هل بإمكانك تغيير `{invalid_argument}` الى {allowed_types}؟"
 
 msgid "Invalid At Command"
 msgstr ""
@@ -82,25 +67,15 @@ msgid "Invalid Space"
 msgstr ""
 "يوجد مسافة زائدة في بداية السطر رقم {line_number}، هل باستطاعتك أن تمسحها؟"
 
-#, fuzzy
 msgid "Invalid Type Combination"
-msgstr ""
-"لا يمكن استعمال `{invalid_argument}` و`{invalid_argument_2}` مع الأمر "
-"`{command}` وذلك بسبب كون الأول{invalid_type} وكون الآخر {invalid_type_2}. "
-"حاول تغيير `{invalid_argument}` الى {invalid_type_2} أو `{invalid_argument_2}"
-"` الى {invalid_type}."
+msgstr "لا يمكن استعمال `{invalid_argument}` و`{invalid_argument_2}` مع الأمر `{command}` وذلك بسبب كون الأول{invalid_type} وكون الآخر {invalid_type_2}. هل بإمكانك تغيير `{invalid_argument}` الى {invalid_type_2} أو `{invalid_argument_2}` الى {invalid_type}؟"
 
-#, fuzzy
 msgid "Lonely Echo"
-msgstr ""
-"لقد استعملت الأمر ردد قبل الأمر اسأل، أو استعملت الأمر ردد بدون استعمال "
-"الأمر اسأل. قم باستعمال الأمر اسأل للحصول على اجابة أولاً ثم استعمل الأمر ردد."
+msgstr "لقد استعملت الأمر '{echo}' قبل أو دون الأمر '{ask}'. هل بإمكانك استعمال الأمر '{ask}' للحصول على إجابة أولاً ثم استعمال الأمر '{echo}'؟"
 
 #, fuzzy
 msgid "Lonely Text"
-msgstr ""
-"لقد اكتشفنا أن النص الذي أدخلته في السطر {line_number} يفتقر إلى أمر برمجي. "
-"هل بإمكانك إدخال الأمر البرمجي المطلوب مع النص؟"
+msgstr "لقد اكتشفنا أن السطر {line_number} يفتقر إلى أمر برمجي. هل بإمكانك إدخال الأمر البرمجي المطلوب مع النص؟"
 
 msgid "Missing Additional Command"
 msgstr ""
@@ -130,9 +105,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Missing Variable"
-msgstr ""
-"لقد لاحظنا أن الأمر البرمجي `{command}` يفتقر إلى متغير في بداية السطر. هل "
-"يمكنك محاولة كتابة المتغير قبل الأمر البرمجي `{command}`؟"
+msgstr "لقد لاحظنا أن الأمر البرمجي `{command}` يفتقر إلى متغير في بداية السطر. هل يمكنك تعريف المتغير قبل الأمر البرمجي `{command}`؟"
 
 msgid "Misspelled At Command"
 msgstr ""
@@ -1638,7 +1611,7 @@ msgid "retrieve_class_error"
 msgstr "يمكن للمعلمين فقط استرجاع الصفوف"
 
 msgid "retrieve_tag_error"
-msgstr ""
+msgstr "حدث خطأ أثناء استرجاع العلامات"
 
 msgid "role"
 msgstr "منصب"
@@ -1678,7 +1651,7 @@ msgid "second_teacher_warning"
 msgstr "كل معلم بهذا الصف يمكنه تعديل الخصائص جميعها."
 
 msgid "see_adventure_shared_class"
-msgstr ""
+msgstr "بإمكانك أن ترى هذه المغامرة لأنك تشارك الصف {class_name} مع المُنشأ {creator}"
 
 msgid "see_certificate"
 msgstr "اطلع على شهادة {username}!"
@@ -1749,7 +1722,7 @@ msgid "slides_for_level"
 msgstr "شرائح للمستوى"
 
 msgid "slides_info"
-msgstr ""
+msgstr "لكل مستوى من مستويات هيدي، قمنا بإعداد شرائح لمساعدتك في التدريس. تحتوي هذه الشرائح على شروحات لكل مستوى، بالإضافة إلى أمثلة عملية من هيدي يمكنك عرضها داخل الشرائح. ما عليك سوى النقر على الرابط والبدء! تقدم شرائح المقدمة شرحًا عامًا لهيدي قبل المستوى الأول. تم إنشاء هذه الشرائح باستخدام <a href=\"https://slides.com\">slides.com</a>. إذا كنت ترغب في تعديلها بنفسك، يمكنك تنزيلها، ثم تحميل ملف ZIP الناتج إلى <a href=\"https://slides.com\">slides.com</a>. يمكنك العثور على مزيد من المعلومات حول الشرائح في <a href=\"https://hedy.org/for-teachers/manual/features\">دليل المعلم</a>."
 
 msgid "social_media"
 msgstr "وسائل التواصل الاجتماعي"
@@ -1766,7 +1739,7 @@ msgstr ""
 "هو حلك المقترح."
 
 msgid "some_rows_missing_separator"
-msgstr ""
+msgstr "الصفوف التالية تفتقر إلى فاصلة منقوطة، لذا إما أن اسم المستخدم أو كلمة المرور مفقود: {rows}"
 
 #, fuzzy
 msgid "something_went_wrong_keyword_parsing"
@@ -1794,7 +1767,7 @@ msgid "step_title"
 msgstr "المهمة"
 
 msgid "stepper_variable_role"
-msgstr ""
+msgstr "الزائد"
 
 msgid "stop"
 msgstr "توقف"
@@ -1812,7 +1785,7 @@ msgid "student_adventures_table"
 msgstr "مغامرات الطلاب"
 
 msgid "student_adventures_table_explanation"
-msgstr ""
+msgstr "يعرض هذا الجدول البرامج التي أنشأها الطلاب لكل مغامرة في كل مستوى. بالنقر على علامة العين، يمكنك عرض صفحة البرنامج؛ وبعد مراجعة البرنامج، بإمكانك وضع علامة صح للإشارة أنه مكتمل."
 
 msgid "student_already_invite"
 msgstr "هذا التلميذ بالفعل لديه دعوة قيد الإنتظار."
@@ -1882,13 +1855,13 @@ msgid "suggestion_color"
 msgstr "جرب استخدام لونٍ آخر"
 
 msgid "suggestion_note"
-msgstr ""
+msgstr "حاول بين"
 
 msgid "suggestion_number"
-msgstr ""
+msgstr "حاول تغيير القيمة إلى رقم"
 
 msgid "suggestion_numbers_or_strings"
-msgstr ""
+msgstr "حاول تغيير القيم جميعها إلى نص فقط أو إلى أرقام فقط"
 
 msgid "surname"
 msgstr "الاسم الأول"
@@ -1900,7 +1873,7 @@ msgid "survey_submit"
 msgstr "قدِّم"
 
 msgid "tag_in_adventure"
-msgstr ""
+msgstr "ضع علامة: مغامرة"
 
 msgid "tag_input_placeholder"
 msgstr "اكتب علامة جديدة"
@@ -1977,7 +1950,7 @@ msgid "title_for-teacher"
 msgstr "هيدي - للمعلمين"
 
 msgid "title_grade_class"
-msgstr ""
+msgstr "قَيِّمِ الصف"
 
 msgid "title_learn-more"
 msgstr "هيدي - اعرف أكثر"
@@ -1989,7 +1962,7 @@ msgid "title_my-profile"
 msgstr "هيدي - حسابي"
 
 msgid "title_performance_graph"
-msgstr ""
+msgstr "رسم بياني للأداء"
 
 msgid "title_privacy"
 msgstr "هيدي - شروط الخصوصية"
@@ -2019,10 +1992,10 @@ msgid "token_invalid"
 msgstr "الرمز الخاص بك غير صالح."
 
 msgid "too_many_accounts"
-msgstr ""
+msgstr "لا يمكنك إنشاء أكثر من 100 حساب طالب."
 
 msgid "tooltip_level_locked"
-msgstr ""
+msgstr "قام معلمك بتعطيل هذا المستوى"
 
 msgid "translate_error"
 msgstr ""
@@ -2042,31 +2015,31 @@ msgid "unauthorized"
 msgstr "ليس لديك الصلاحيات اللازمة للوصول إلى هذه الصفحة"
 
 msgid "unfavourite_confirm"
-msgstr ""
+msgstr "هل أنت متأكد من رغبتك في إلغاء ضم هذا البرنامج إلى قائمة البرامج المفضلة الخاصة بك؟"
 
 msgid "unfavourite_success"
-msgstr ""
+msgstr "تم إلغاء برنامجك من قائمة برامجك المفضلة."
 
 msgid "unknown_variable_role"
-msgstr ""
+msgstr "غير معلوم"
 
 msgid "unsaved_class_changes"
-msgstr ""
+msgstr "توجد تغييرات غير محفوظة، هل أنت متأكد أنك تريد مغادرة هذه الصفحة؟"
 
 msgid "unsubmit_program"
-msgstr ""
+msgstr "ألغِ تقديم البرنامج"
 
 msgid "unsubmit_warning"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد إلغاء تقديم هذا البرنامج؟"
 
 msgid "unsubmitted"
-msgstr ""
+msgstr "تم إلغاء تقديم البرنامج"
 
 msgid "unsubscribed_header"
-msgstr ""
+msgstr "تم حذف إشتراكك"
 
 msgid "unsubscribed_message"
-msgstr ""
+msgstr "يحزننا ذهابك. إذا حذفت اشتراكك بالخطأ، فيمكنك إعادة الاشتراك بإعادة ملء هذه الاستمارة: <a href=\"http://eepurl.com/hk77Mv\">this form</a>."
 
 msgid "update_adventure_prompt"
 msgstr "هل أنت متأكد أنك تريد تعديل هذه المغامرة؟"
@@ -2078,19 +2051,19 @@ msgid "updating_indicator"
 msgstr "جاري التحديث"
 
 msgid "use_custom_passwords"
-msgstr ""
+msgstr "زود كلمات المرور"
 
 msgid "use_generated_passwords"
-msgstr ""
+msgstr "أنشأ كلمات المرور تلقائيا"
 
 msgid "use_of_blanks_exception"
-msgstr ""
+msgstr "استخدام الفراغات في البرامج"
 
 msgid "use_of_nested_functions_exception"
-msgstr ""
+msgstr "استخدام الدوال المتداخلة"
 
 msgid "used_in"
-msgstr ""
+msgstr "مُستخدم في:"
 
 msgid "user"
 msgstr "مستخدم"
@@ -2102,10 +2075,10 @@ msgid "username"
 msgstr "اسم المستخدم"
 
 msgid "username_contains_invalid_symbol"
-msgstr ""
+msgstr "لا يمكن أن تحتوي أسماء المستخدمين على العلامة ':' أو '@'. أزل أيا من العلامتين من أسماء المستخدمين هذه: {usernames}"
 
 msgid "username_contains_separator"
-msgstr ""
+msgstr "لا يمكن أن تحتوي أسماء المستخدمين على فاصلة منقوطة. هل ترغب أن تستخدم كلمات مرور الخاصة؟ إذا كان الأمر كذلك، فاضغط على زر تبديل كلمات المرور وأعد إنشاء الحسابات. إذا لم يكن الأمر كذلك، فاحذف الفاصلة المنقوطة من أسماء المستخدمين التالية: {usernames}"
 
 msgid "username_empty"
 msgstr "لم تدخل اسم المستخدم!"
@@ -2120,10 +2093,10 @@ msgid "username_three"
 msgstr "اسم المستخدم يجب أن يتكون من ثلاثة أحرف على الأقل."
 
 msgid "usernames_too_short"
-msgstr ""
+msgstr "يجب أن يتكون اسم المستخدم من 3 أحرف على الأقل. صحح أسماء المستخدمين التالية بحيث تتكون من 3 رموز أو أكثر: {usernames}"
 
 msgid "usernames_unavailable"
-msgstr ""
+msgstr "أسماء المستخدمين التالية غير متاحة: {usernames}. يمكنك إنشاء حسابات مشابهة، على سبيل المثال، عن طريق إضافة شرطة سفلية أو اسم صفك."
 
 msgid "view_adventures"
 msgstr "الاطّلاع على المغامرات"
@@ -2141,7 +2114,7 @@ msgid "waiting_for_submit"
 msgstr "ننتظر التسليم"
 
 msgid "walker_variable_role"
-msgstr ""
+msgstr "ماشي"
 
 msgid "website"
 msgstr "موقعك"
@@ -2149,35 +2122,36 @@ msgstr "موقعك"
 msgid "what_is_your_role"
 msgstr "ما هو دورك؟"
 
+#, fuzzy
 msgid "workbook_circle_question_text"
-msgstr ""
+msgstr "**سؤال**: ضع دائرة {goal} في هذا البرنامج:"
 
 msgid "workbook_circle_question_title"
-msgstr ""
+msgstr "عَيِّن"
 
 msgid "workbook_define_question_text"
-msgstr ""
+msgstr "**سؤال**: ماذا تعني كلمة {word}؟"
 
 msgid "workbook_define_question_title"
-msgstr ""
+msgstr "عَرِّف"
 
 msgid "workbook_input_question_text"
-msgstr ""
+msgstr "**سؤال**: أي فقرة من فقرات البرنامج أنتجت هذا المُخرج؟"
 
 msgid "workbook_input_question_title"
-msgstr ""
+msgstr "مُدخل"
 
 msgid "workbook_multiple_choice_question_text"
-msgstr ""
+msgstr "**سؤال**: هل هذا البرنامج صحيح أو هل فيه خطأ؟"
 
 msgid "workbook_multiple_choice_question_title"
-msgstr ""
+msgstr "اختر"
 
 msgid "workbook_open_question_title"
-msgstr ""
+msgstr "سؤال ذات إجابة موسعة"
 
 msgid "workbook_output_question_text"
-msgstr ""
+msgstr "**سؤال**: ما هو مُخرج هذا البرنامج؟"
 
 msgid "workbook_output_question_title"
 msgstr "مُخرج"
@@ -2207,13 +2181,13 @@ msgid "outdated_class_warning"
 msgstr "هذا الصف فيه محتوى قديم غير مُدعم."
 
 msgid "update"
-msgstr ""
+msgstr "حَدِّث"
 
 msgid "update_class_prompt"
-msgstr ""
+msgstr "متأكد أنك تريد تحديث الصف؟"
 
 msgid "updated"
-msgstr ""
+msgstr "تم التحديث"
 
 #~ msgid "create_account_explanation"
 #~ msgstr "يسمح لك امتلاك حسابك الخاص بحفظ برامجك."
