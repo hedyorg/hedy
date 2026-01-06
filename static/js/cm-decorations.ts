@@ -121,7 +121,7 @@ export const breakpointGutterState = StateField.define<RangeSet<GutterMarker>>({
         for (let e of transaction.effects) {
             if (e.is(breakpointGutterEffect)) {
                 if (e.value.on)
-                    set = set.update({ add: [deactivateGutterMarker.range(e.value.pos)] })
+                    set = set.update({ add: [activeGutterMarker.range(e.value.pos)] })
                 else
                     set = set.update({ filter: from => from != e.value.pos })
             }
@@ -182,7 +182,15 @@ export const decorationsTheme = EditorView.theme({
 });
 
 
-const deactivateGutterMarker = new (class extends GutterMarker {
+const activeGutterMarker = new (class extends GutterMarker { //Previously named deactivateGutterMarker
+  toDOM() {
+    let e = document.createElement("i");
+    e.className = "fa-solid fa-eye-slash cm-gutter-icon-active";
+    return e;
+  }
+})();
+
+const inactiveGutterMarker = new (class extends GutterMarker {
   toDOM() {
     let e = document.createElement("i");
     e.className = "fa-solid fa-eye-slash";
@@ -207,8 +215,23 @@ export const breakpointGutter = [
     deactivateLineState,
     gutter({
         class: "cm-breakpoint-gutter",
-        markers: v => v.state.field(breakpointGutterState),
-        initialSpacer: () => deactivateGutterMarker,
+        markers: (v) => {
+          // Create a marker for every visible line
+          let breakpoints = v.state.field(breakpointGutterState);
+          let builder = new RangeSetBuilder<GutterMarker>();
+          for (let {from, to} of v.visibleRanges) {
+              for (let pos = from; pos <= to;) {
+                  let line = v.state.doc.lineAt(pos);
+                  let hasBreakpoint = false;
+                  breakpoints.between(line.from, line.from, () => { hasBreakpoint = true });
+                  //Adds "active" gutterMarkers on clicked lines and "inactive" ones on not clicked ones 
+                  builder.add(line.from, line.from, hasBreakpoint? activeGutterMarker : inactiveGutterMarker);
+                  pos = line.to + 1;
+              }
+          }
+          return builder.finish();
+        },
+        initialSpacer: () => activeGutterMarker,
         domEventHandlers: {
             mousedown(view, line) {
                 toggleLine(view, line.from)
@@ -223,7 +246,16 @@ export const breakpointGutter = [
         },
         ".cm-disabled-line": {
             textDecoration: "line-through"
-        }
+        },
+        ".cm-breakpoint-gutter .cm-gutterElement i": {
+          opacity: "0",
+        },
+        ".cm-breakpoint-gutter .cm-gutterElement:hover i": {
+          opacity: "1",
+        },
+        ".cm-breakpoint-gutter .cm-gutterElement i.cm-gutter-icon-active": {
+          opacity: "1",
+        },
     })
 ]
 
