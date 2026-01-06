@@ -1269,7 +1269,7 @@ class ForTeachersModule(WebsiteModule):
         else:
             levels = [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)]
         customizations["levels"] = levels
-        opening_dates = {
+        opening_dates = { 
             level: date
             for level, date in customizations.get("opening_dates", {}).items()
             if int(level) <= hedy.HEDY_MAX_LEVEL
