@@ -34,6 +34,8 @@ def _get_friendly_sorted_countries():
 FRIENDLY_SORTED_COUNTRIES = _get_friendly_sorted_countries()
 
 MAX_LEVEL = 16
+# This variable will be used to track which classes need to be updated
+LAST_CONTENT_VERSION = 1
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_LANGUAGES = {}
