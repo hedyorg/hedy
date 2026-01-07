@@ -1472,9 +1472,35 @@ levels:
                     {else}
                         password = {ask} 'Please enter password'
             debug: 'True'
+       
         8:
-            header: Ready to try it out?
-            text: Enjoy the adventures in level 12!
+            header: Let's check out the adventures!
+            text: Enjoy the adventures in level 11!
+            notes: |-
+                Your students can now work on all the adventures in level 12.
+        9:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        10:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        11:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        12:
+            header: Sneak peek into the next level...
+            text: |-
+                Next level we will make some changes in the language so you can use it in all places where Python is used. 
 
     13:
         1:  
@@ -1487,12 +1513,13 @@ levels:
             header: Real Python code
             text: |-
                 The code we have used until now, was simplified.
-                But now we will start with real Python code.
+                But from now we will use real Python code, that you could use elsewhere.
 
             notes: |-
                 Explain to your students that Python is a widely used programming language. 
                 Up until now we used different simplified versions of this language.
                 But now we have reached the point where all the language that you use in Hedy is real Python code and thus can be used elsewhere.  
+                Also tell that there are quite some changes, but they are relatively minor changes. 
 
         3: 
             header: '{print} in Python'
@@ -1507,20 +1534,32 @@ levels:
                 Ask your students to recall how a print keyword was written before. 
                 Than show the new code and make sure they all see where the parentheses are.
 
-        4:
+        4: 
+            header: '{for} in real Python'
+            text: |-
+                From now on, whenever you use the {for} keyword you will have to put a colon a the end of the line:
+            code: |-
+                animals = dog, cat, blobfish
+                {for} animal in animals: 
+                    {print} ('I love ' animal)
+            notes: |-
+                Make the students aware that this not only happens with the {for} keyword but with every line that is followed by a line with indentation. 
+                You will see this in next slides. 
+
+        5:
             header: '{range} in real Python'
             text: |-
                 To count with the {range} keyword you now also need parentheses.
             code: |-
-                for i in {range} (1, 10):
+                {for} i in {range} (1, 10):
                     {print} (i)
                 {print} ('We have counted to 10.')
-            notes:
+            notes: Ask your students to recall how they used this 
         
-        5:
+        6:
             header: '{print} multiple items' 
             text: |-
-                If you want you can combine printing variables and text by using commas to seperate it:
+                If you want, you can combine printing variables and text by using commas to seperate it:
             code: |-
                 for i in {range} (1, 12):
                     {print} ('You have completed Hedy level', i)
@@ -1530,6 +1569,428 @@ levels:
                 Let your students predict what will be the outcome of this code. 
                 Than run the code and show how the code prints the text inside the quotation marks literally and what is outside as the value of the variable. 
                 Show what happens if you put 'level' in the last line also in quotation marks.
+        7:
+            header: Ask
+            text: We will also replace {ask} for the {input} keyword used in Python.
+            code: |-
+            
+                age = {input} ('how old are you?')
+                {print} ('You are', age, 'years old.')
+        8:
+            header: Smaller and greater
+            text: From now on we will use symbols for smaller than and greater than
+
+            code: |-
+                number = {input} ('pick a number below 10')
+                {if} number < 10:
+                    {print}('Nice, you picked a number!')
+                {if} number > 10:
+                    {print}('That is not a number below 10.')
+
+            notes: |-
+                Show the code to your students. Ask them to predict what happens for which numbers.
+                Run the code with different numbers. 
+                Finally, try the number 10 en show that the code now gives no output. 
+                The number 10 is neither greater than nor smaller than 10 and thus it gives no output, but we will solve this in the next slide.
+
+        9:  
+            header: Greater or equal
+            text: |-
+                There is also a symbol for greater than or equal to. 
+                Do you see the difference with the code before?
+            code: |-
+                number = {input} ('pick a number below 10')
+                {if} number < 10:
+                    print('Nice, you picked a number!')
+                {if} number >= 10:
+                    print('That is not a number below 10.')
+
+            notes: |-
+               Now, you can do the same. Run the code with different numbers, but also run it with 10. 
+               Make sure your students understand where the difference comes from. 
+        10:  
+            header: Smaller or equal
+            text: |-
+                There is also a symbol for smaller than or equal to. 
+                It works the same
+            code: |-
+                number = {input} ('pick a number between 10 and 20')
+                {if} number <= 10:
+                    print('Pick another number')
+                {if} 
+                    print('Nice, you picked a number!')
+                {if} number >= 10:
+                    print('That is not a number below 10.')
+
+            notes: |-
+               Now, you can do the same. Run the code with different numbers, but also run it with 10. 
+               Make sure your students understand where the difference comes from. 
+               Show them that you can do the same for smaller than or equal to by changing '>='into '>' and '<=' into '<'.
+        
+        11:
+            header: Is or is not
+            text: From now, you should also use symbols for equal and not equal to.
+
+            code: |-
+                answer = {input} ('How much is 5+5?')
+                {if} answer = 10:
+                    {print} ('You gave the correct answer!')
+                {if} answer != 10:
+                    {print} ('Incorrect. Try again!')
+            notes: |-
+                Ask your students what the think the symbol '!=' means. 
+                Then show, by running the code, that it stands for not equal to. 
+
+        12: 
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} ('Let's play hide and seek')
+                people = input How many people are playing?
+                
+                {for} i in range 1,10
+                {print} i
+
+                {print} 'Ready or not, here I come'
+
+                for i in range (1, people):
+                name = {input} (What is your name?)
+                hidden = {input} (name, Are you hidden?)
+                if hidden == no
+                    {print} (name, ' I see you!') 
+                else:
+                    {print} ('Come closer', name, 'I cannot find you.')
+                    
+            debug: 'True'
+            notes: |-
+                Debug this code together.
+        13:
+            header: Let's check out the adventures!
+            text: Enjoy the adventures in level 13!
+            notes: |-
+                Your students can now work on all the adventures in level 13.
+        14:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        15:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        16:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        17:
+            header: Sneak peek into the next level...
+            text: |-
+                In the next level you will learn how to use lists the real Python way. 
+
+    14:
+        1:  
+            header: Welcome to level 14
+            text: |-
+                By the end of this lesson, you can:
+                * use lists the real Python way.
+
+        2: 
+            header: Make a list in Python
+            text: |-
+                If you want to make a list you now need square brackets.
+            code: |-
+                prices = [4, 8, 9]
+        3: 
+            header: Lists with words
+            text: |-
+                If the list is with words instead of numbers, you will also have to use quotation marks. 
+
+            code: |-
+                favorite_animals = ['dogs', 'sheep', 'parrots', 'kangaroos']
+
+
+        4: 
+            header: Get an element from the list.
+            text: |-
+                You can easily print an element from the list by putting the number of the element behind the name of the list:
+            code: |-
+                winners = ['Amber', 'Bryan', 'Clara']
+
+                {print} (winners[1], 'won the first prize.')
+                {print} (winners[2], 'won the second prize.')
+                {print} (winners[3], 'won the third prize.')
+
+                {for} i {in} {range} (1,3):
+                    {print} (winners[i], 'won prize', i)
+            notes: |-
+                Ask your students first what they think the output of the first part of the code is going to be. 
+                Then, run the code to see if they are correct. Ask them what the difference will be with the output of the second part of the code. 
+                Show that the second part of the code is a shorter way with nearly the same result. 
+        5: 
+            header: Random element from list
+            text: As earlier, we also want to get a random element from list.
+            code: |-
+                candidates = ['Amber', 'Bryan', 'Clara']
+                winner = candidates[random]
+                {print} ('Congratulations,', winner, 'you earned a prize.')
+
+            notes: |-
+                Run the code multiple times to show that it really gives a random name. 
+
+
+        6: 
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} ('Welcome in at Hedyclothes online.')
+                items = ['Hedy T-shirts', 'Hedy jeans', 'Hedy socks']
+                prices = [15 25, 10]
+                
+                total = 0
+
+                for i range (1,3)
+                    number = ('How many ', items[i], ' would you like to buy?')
+                    total = total + prices*number
+                
+                if total < 50:
+                total = + 10
+                {print} (You have to pay 10 extra for shipment.)
+                
+                presents = [earrings, sunglasses, earplugs ]
+                else
+                    {print} 'You get free shipping and a little present.'
+                    present = present random
+                    {print} 'Your present is a pair of', present
+
+                {print} (Thanks for shopping at Hedyclothes. Please pay, total,)
+            debug: 'True'
+            notes: Debug this code together. 
+
+    15:
+        1: 
+            header: Welcome to level 15!
+            text: |-
+                By the end of this lesson, you can:
+                * Make your code shorter and more efficient by using functions. 
+
+        2:
+            header: Too much code?
+            text: The code below has a lot of repetition. 
+            code: |-
+                {print} ('This code will calculate the first 5 squares and print the result.')
+                
+                square1 = 1*1
+                {print} ('the square of 1 =', square1)
+                square2 = 2*2
+                {print} ('the square of 2 = ', square2)
+                square3 = 3*3
+                {print} ('the square of 3 = ', square3)
+                square4 = 4*4
+                {print} ('the square of 4 = ', square4)
+                square5 = 5*5
+                {print} ('the square of 5 = ', square5)
+            notes: |-
+                Show the code to your students. Do they see all the repetition?
+                Ask them if they can come up with a way of writing this code with less lines. 
+                They will probably not be able to figure out a way, so show them the next slide!
+        3: 
+            header: Use a function!
+            text: |-
+                Now we will try to have the same output with less lines of code.
+                For this we write a function: a piece of code we can repeat multiple times with different input. 
+            code: |-
+                {def} calculate_square(number):
+                    square = number*number
+                    {print} ('the square of', number, '=', square)
+
+                {print} ('This code will calculate the first 5 squares and print the result.')
+
+                calculate_square(1)
+                calculate_square(2)
+                calculate_square(3)
+                calculate_square(4)
+                calculate_square(5)
+            notes: |- 
+                Run the code. Make sure your students see how this output comes from the code.
+                Now we only have two lines less than in the last slide. 
+
+                Explain to your students that the more repetition you have the better it is to use functions. 
+                Some benefits: Less code, so more organized code and the writing of the code will go quicker.
+                Less possibility to make mistakes and easier to find them if you make them. 
+                
+                Show that you can change something in the function, such that all the output changes. 
+        4:
+            header: Functions with more arguments
+            text: |-
+                The input that is in the brackets of a function we call the argument. 
+                You can use multiple arguments for one function: 
+            code: |-
+                {def} fairy_tale(princess, prince, something_poisonous, expression_of_love)
+                answer = input('Do you want me to tell you a fairy tale?')
+                if answer == yes:
+                    {print} ('Once upon a time there was a girl named ', princess)
+                    {print} ('She ate some ', something_poisonous, ' and nearly died...')
+                    {print} ('But prince ', prince, ' came to visit her and gave her a ', expression_of_love )
+                    {print} ('This healed ', princess ' and she fell in love with ', prince)
+                    {print} (princess, ' and ', prince, ' married and lived a long and happy life.')
+                else:
+                    {print} ('No problem. Perhaps next time.')
+
+                fairy_tale('Snowwhite', 'Casper', 'poison', 'kiss')
+
+
+            notes: Run the code and show that you can change all four arguments to get a different story. 
+        5:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} ('This program will help you practice multiplication.')
+
+                {def} check answer(question correct_answer)
+                    answer given = input('What is ' question '?' )
+                    {if} answer_given == correct_answer:
+                    {play} C5
+                    {print} (Well done, you gave the correct answer.)
+
+                    else
+                        {play} C2
+                        {print} 'Incorrect. Better next time!'
+                
+                çheck_answer 5*5, 25
+                check answer(6*7 42)
+            debug: 'True'
+            notes: |-
+                Debug this code together.
 
         6:
-            header: 
+            header: Let's check out the adventures!
+            text: Enjoy the adventures in level 15!
+            notes: |-
+                Your students can now work on all the adventures in level 15.
+        7:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        8:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        9:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        10:
+            header: Sneak peek into the next level...
+            text: |-
+                Next level you will learn the last keyword, to make a {while} loop:
+            code: 
+                level = 15
+                {while} <= 16:
+                    {print} ('Do not use while')
+                    level = level + 1
+    
+    16:
+        1:
+            header: Welcome to level 16!
+            text: |-
+                By the end of this lesson, you can:
+                * make a {while} loop.
+
+        2:
+            header: A new loop
+            text: |-
+                With the {while} keyword you can make a new loop.
+                It will run the loop as long as the statement is true. 
+            code: |-
+                temperature = 15
+                {while} temperature < 25:
+                    {print} ('It is ', temperature, ' degrees.')
+                    {print} ('You cannot go outside without a jacket.')
+                    temperature = temperature + 2
+                {print} ('It is ', temperature, ' degrees. Now you can go outside without a jacket.')
+            
+            notes: Ask your students to predict what the output of this code is going to be. For which temperature will it print that you can go outside without a jacket?
+                Show what happens to if they are correct. Then, ask your students what happens if you remove the line 'temperature = temperature + 2'. 
+                Show them that this will result in a endless loop because the temperature always stays below 25. 
+
+        3: 
+            header: '{while} and {input}'
+            text: You can also combine the {while} keyword with asking a question.
+            code: |-
+                {while} answer != Hedy:
+                    answer = {input} ('What is my name?')
+                {print} ('You are correct. Nice to meet you. I am Hedy!')
+            notes: Ask your students again to predict the outcome. How many times will you get asked the question?
+                Show them that the question will be asked until you gave the correct answer, namely 'Hedy'.
+
+        4:
+            header: Debugging
+            text: Let's debug this code!
+            code: |-
+                {print} ('We will now make an improved version of the calculation tool. ')
+
+                {def} check_answer question, correct_answer
+                    {while} answer_given != correct answer
+                    answer_given = {input} ('What is ' question '?' )
+                        {play} C2
+                        {print} (Incorrect. Try again!)                  
+                    
+                        {print} (Well done, you gave the correct answer.)
+                    {play} C5
+
+
+                çheck_answer 3+9, 12
+                check answer (7*8, 56)
+            debug: 'True'
+            notes: |-
+                Debug this code together.
+        
+        6:
+            header: Let's check out the adventures!
+            text: Enjoy the adventures in level 16!
+            notes: |-
+                Your students can now work on all the adventures in level 16.
+        7:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        8:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        9:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        10:
+            header: Sneak peak into your future...
+            text: |-
+                This was the last level. But that does not mean you have to stop programming now. 
+                You have learned a lot and you can make a lot of interesting programs with it. 
+                What would you like to program yourself?
+            notes: Let your students discuss what things would like to program in the future. Encourage them to do so!
+
+        
+
+
+        
