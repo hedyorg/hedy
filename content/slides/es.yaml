@@ -378,19 +378,6 @@ levels:
                 {if} nombre {is} Hedy {print} 'genial'
                 {else} {print} '¡boo!'
         6:
-            header: Otro comando nuevo
-            text: |-
-                Si has practicado con los comandos `{if}` y `{else}`, también puedes intentar el comando `{in}`.
-
-                Con `{in}` puedes dejar que el ordenador compruebe si un objeto está en una lista, por ejemplo:
-
-                Por favor ten en cuenta que Hedy distingue entre mayúsculas y minúsculas. Esto significa que tu respuesta "Verde" en vez de "verde", Hedy imprimirá "meh".
-            code: |-
-                colores_bonitos {is} verde, amarillo
-                color_favorito {is} {ask} '¿Cuál es tu color favorito?'
-                {if} color_favorito {in} colores_bonitos {print} '¡bonito!'
-                {else} {print} 'meh'
-        7:
             header: Depurar
             text: ¡Depuremos este código!
             code: |-
@@ -407,12 +394,12 @@ levels:
                 {else} Muy bien
                 {print} Gracias. Vaya a la puerta A22.'
             debug: Verdadero
-        8:
+        7:
             header: ¡Vamos!
             text: ¡Disfruta las aventuras en el nivel 5!
-    6:
+    7:
         1:
-            header: Bienvenido al nivel 6
+            header: Bienvenido al nivel 7
             text: En este nivel añadimos las matemáticas a nuestros códigos.
         2:
             header: Suma
@@ -474,10 +461,10 @@ levels:
             debug: 'True'
         10:
             header: ¡Manos a la obra!
-            text: ¡Disfruta las aventuras en el nivel 6!
-    7:
+            text: ¡Disfruta las aventuras en el nivel 7!
+    8:
         1:
-            header: Bienvenido al nivel 7
+            header: Bienvenido al nivel 8
             text: En este nivel aprenderás a cómo repetir una línea de código tantas veces como quieras.
         2:
             header: repetir 3 veces
@@ -519,10 +506,10 @@ levels:
             debug: 'True'
         6:
             header: ¡Preparado Listo Ya!
-            text: ¡Disfruta las aventuras en el nivel 7!
-    8:
+            text: ¡Disfruta las aventuras en el nivel 8!
+    9:
         1:
-            header: Bienvenido al nivel 8
+            header: Bienvenido al nivel 9
             text: En este nivel aprenderás a usar la sangría para hacer funcionar los comandos `{repeat}`, `{if}` and `{else}` para varias líneas de código.
         2:
             header: comandos {repeat} antes
@@ -606,10 +593,10 @@ levels:
             debug: 'True'
         10:
             header: ¡Vamos a ver las aventuras!
-            text: ¡Disfruta las aventuras en el nivel 8!
-    9:
+            text: ¡Disfruta las aventuras en el nivel 9!
+    10:
         1:
-            header: Bienvenido al nivel 9
+            header: Bienvenido al nivel 10
             text: |-
                 En este nivel puedes usar varias líneas de código tras un comando `{if}` o tras un `{repeat}`.
 
@@ -698,10 +685,10 @@ levels:
             debug: 'True'
         9:
             header: ¡Vamos!
-            text: ¡Disfruta las aventuras en el nivel 9!
-    10:
+            text: ¡Disfruta las aventuras en el nivel 10!
+    11:
         1:
-            header: Bienvenido al nivel 10
+            header: Bienvenido al nivel 11
             text: 'En este nivel aprenderás un nuevo comando: `{for}`.'
         2:
             header: El comando para
@@ -735,43 +722,6 @@ levels:
             debug: Verdadero
         5:
             header: ¡Hora de programar!
-            text: ¡Disfruta las aventuras en el nivel 10!
-    11:
-        1:
-            header: Bienvenido al nivel 11
-            text: |-
-                En este nivel, añadimos una nueva forma del comando `{for}`. En niveles anteriores, usamos para con una lista, pero también podemos usar para con números.
-
-                De esta manera no necesitamos el comando `{repeat}` nunca más.
-        2:
-            header: El comando para
-            text: 'Así es el nuevo comando para:'
-            code: |-
-                {for} contador {in} {range} 1 {to} 10
-                    {print} contador
-                {print} 'Preparado o no. ¡Allá voy!'
-        3:
-            header: la variable i
-            text: |-
-                En la diapositiva anterior la variable se llamó 'contador', porque because era la cuenta atrás.
-                Por supuesto puedes usar cualquier nombre que quieras para la variable.
-                En esta situación el nombre estándar para las variables que se usan en lenguajes de programación como Python es 'i'.
-                Se parece a esto:
-            code: |-
-                numero = 10
-                {for} i {in} {range} 1 {to} 10
-                    {print} i * numero
-        4:
-            header: Depuración
-            text: ¡Depuremos este código!
-            code: |-
-                factor {is} {ask} '¿Qué tabla de multiplicar necesitas?'
-                {repeat} {for} números {in} {range} 1 {to} 10 {times}
-                    {print} Esta es la tabla de multiplicaciones por un factor
-                    {print} número ' x ' factor ' = ' i * factor
-            debug: 'True'
-        5:
-            header: ¡Comencemos a programar!
             text: ¡Disfruta las aventuras en el nivel 11!
     12:
         1:
@@ -838,361 +788,4 @@ levels:
         8:
             header: ¿Listo para probarlo?
             text: ¡Disfruta de las aventuras en el nivel 12!
-    13:
-        1:
-            header: Bienvenido al nivel 13
-            text: |-
-                Ahora vamos a aprender `{and}` y `{or}`. Si quieres comprobar dos sentencias, no tienes que usar dos if sino que puedes usar and y or.
-                A partir de ahora también puedes usar argumentos en tus funciones.
-        2:
-            header: El comando y
-            text: |-
-                El comando `{and}` siempre se usa en una combinación con el comando {if}.
-                De esta manera puedes comprobar si 2 sentencias son verdaderas. Por ejemplo:
-            code: |-
-                nombre = {ask} '¿cómo te llamas?'
-                edad = {ask} '¡cuántos años tienes?'
-                {if} nombre {is} 'Hedy' {and} edad {is} 2
-                    {print} '¡Tú eres el verdadero Hedy!'
-        3:
-            header: El comando o
-            text: |-
-                El `{or}` funciona de la misma manera que el comando `{and}`, pero sólo 1 de las dos sentencias tiene que ser verdadero.
-
-                Veamos que ocurre cuando cambias el `{and}` por `{or}`.
-            code: |-
-                nombre = {ask} '¿cómo te llamas?'
-                {if} nombre {is} 'Hedy' {or} nombre {is} 'hedy'
-                    {print} '¡¡Bienvenido/a!!'
-        4:
-            header: Funciones con argumentos
-            text: Ahora que hemos aprendido a usar funciones, aprenderás cómo usar una función con **argumentos**. Un argumento es una variable que se usa dentro de una función. No se utiliza fuera de la función.
-        5:
-            header: Ejemplo
-            text: |-
-                En este ejemplo puedes ver cómo se utiliza el argumento 'place' en la función.
-                Ejecuta el código y cambia 'ocean' y 'sea' por otra cosa, a ver qué pasa.
-            code: |-
-                {define} cancion {with} lugar
-                    {print} 'My Bonnie está en algún ' lugar
-
-                {call} cancion {with} 'océano'
-                {call} cancion {with} 'mar'
-                {call} cancion {with} 'océano'
-        6:
-            header: Un ejemplo con una variable
-            text: |-
-                También puedes combinar funciones con una pregunta.
-
-                ¿Qué pasa si haces estos cambios:
-                ```
-                definir canción con lugar
-                    print 'Mi Bonnie está ' lugar
-
-                answer is pregunta '¿Dónde está mi Bonnie?
-                llamar canción con respuesta
-                ```
-            code: |-
-                {define} cancion {with} lugar
-                    {print} 'My Bonnie está en algún ' lugar
-
-                {call} cancion {with} 'océano'
-                {call} cancion {with} 'mar'
-                {call} cancion {with} 'océano'
-        7:
-            header: ¡Aún más preguntas!
-            text: |-
-                Ahora hemos combinado aún más preguntas con la función. Escriba este código y vea qué sucede.
-
-                Observe cómo las variables y los argumentos tienen el mismo nombre. Esto está permitido.
-                ¿Te confunde? Simplemente use nombres diferentes, eso también está permitido.
-                ```
-                definir canción con nombre, lugar
-                    imprime 'Mi 'nombre' es 'lugar
-
-                el nombre es preguntar '¿Quién?'
-                el lugar es preguntar '¿Dónde están?'
-                llamar canción con nombre, lugar
-                ```
-            code: |-
-                {define} cancion {with} lugar
-                    {print} 'Mi Bonnie está en algún ' lugar
-
-                {call} cancion {with} 'océano'
-                {call} cancion {with} 'mar'
-                {call} cancion {with} 'océano'
-        8:
-            header: Depuración
-            text: ¡Depuremos este código!
-            code: |-
-                {define} felicidad {with} nombre
-                    {print} '🥳'
-                {play} G
-                {play} A
-                {play} B
-                {print} 'Fiesta, ' nombre
-                {define} tristeza
-                {print} '😞'
-                {play} E
-                {play} D
-                {play} C
-                {print} 'Espero que te sientas mejor, ' nombre
-
-                nombre = {ask} '¿Cómo te llamas '?'
-                estado = {ask} 'Estás contento o triste?'
-                {if} estado = contento
-                    {call} felicidad {with} persona
-                {else} estado = triste
-                    {define} tristeza {to} nombre
-            debug: 'True'
-        9:
-            header: ¡Vamos!
-            text: ¡Disfruta de las aventuras en el nivel 13!
-    14:
-        1:
-            header: Bienvenido al nivel 14
-            text: En este nivel aprenderás algunos símbolos nuevos que pueden ayudarte a mejorar tus programas, como >. También aprenderás a trabajar con los valores de retorno de una función.
-        2:
-            header: Símbolos
-            text: |-
-                Estos son los nuevos símbolos que puedes usar:
-
-                El >  significa mayor que...
-
-                El >= significa mayor o igual que...
-
-                El <  significa menor que...
-
-                El <= significa menor o igual que...
-
-                Puedes usarlos así:
-            code: |-
-                edad = {ask} '¡Cuántos años tienes?'
-                {if} edad < 13
-                    {print} '¡Eres más joven que yo!'
-                {else}
-                    {print} '¡Eres mayor que yo!'
-        3:
-            header: Símbolos
-            text: |-
-                También puedes usar:
-
-                == is igual que.
-
-                != no es
-
-                == se usa en sentencias `{if}`.
-            code: |-
-                respuesta = {ask} '¿Quieres aprender más?'
-                {if} respuesta == 'sí'
-                    {print} '¡Pasa a la siguiente aventura!'
-                {if} respuesta != 'sí'
-                    {print} '¡Es una pena!'
-        4:
-            header: Valor devuelto
-            text: En los niveles anteriores hemos aprendido a crear funciones y usar argumentos con ellas. Otro gran uso de una función es dejar que calcule algo por tí. Puedes darle una operación a la función y ésta te dará la solución de esa operación. Esta respuesta se llama **valor devuelto**.
-        5:
-            header: Valor devuelto
-            text: Por ejemplo, en este código la función calculate_new_price calculará el nuevo precio de cualquier artículo. Le dará el nuevo precio como valor de retorno.
-            code: |-
-                {define} calculate_new_price {with} devuelta, porcentaje
-                    porcentaje = porcentaje / 100
-                    discount_amount = devuelta * porcentaje
-                    {return} devuelta - discount_amount
-
-                old_price = {ask} '¿Cuánto hay en la etiqueta de precio?'
-                descuento = {ask} '¿Qué porcentaje es el descuento?'
-
-                new_price = {call} calculate_new_price {with} old_price, descuento
-                {print} 'El nuevo precio es ' new_price ' dólares'
-        6:
-            header: Depuración
-            text: ¡Depuremos este código!
-            code: |-
-                item = 'no comprado'
-                {print} 'Me gustaría comprar este artículo'
-                price == {ask} '¿Cuál es el precio?'
-                {if} precio inferior o igual a 10
-                    {print} '¡Eso es mucho!'
-                    artículo = 'comprado'
-                {if} precio es superior a 10 {and} inferior o igual a 20
-                    {print} 'De acuerdo'
-                    artículo = 'comprado'
-                {if} precio es superior a 20 {and} inferior a 50
-                    {print} '¡Eso es demasiado!'
-                {if} precio es mayor o igual que 50
-                    {print} '¡De ninguna manera!'
-                {if} artículo =! comprado
-                    {print} 'Vergüenza.. No lo voy a comprar.
-                {else}
-                    {print} '¡Lo compraré! ¡Gracias!"
-            debug: 'True'
-        7:
-            header: ¡Manos a la obra!
-            text: ¡Disfruta de las aventuras en el nivel 14!
-    15:
-        1:
-            header: Bienvenido al nivel 15
-            text: En este nivel aprenderás sobre el bucle `{while}`.
-        2:
-            text: |-
-                Vamos a aprender un nuevo bucle, ¡el bucle mientras! El bucle continua tanto que la sentencia sea verdadera. Así que no te olvides de cambiar el valor en el bucle.
-
-                En el código de ejemplo, continuamos hasta que se da una respuesta correcta. Si nunca se da la respuesta correcta, ¡el bucle nunca acabará!
-            code: |-
-                respuesta = 0
-                {while} respuesta != 25
-                    respuesta = {ask} '¿Cuánto es 5 veces 5?'
-                {print} 'Se ha dado una respuesta correcta'
-            header: '{while}'
-        3:
-            header: Depuración
-            text: ¡Depuremos este código!
-            code: |-
-                números = 1, 2
-
-                {for} i {in} {range} 3 {to} 50
-                     {add} x {to} números
-                     yo = + 1
-
-                número_aleatorio = números {random}
-                conjeturas = 10
-
-                {while} adivina = 0
-                     respuesta = 'Adivina mi número:'
-                     {if} respuesta >= número_aleatorio
-                         {print} 'inferior'
-                         conjeturas = conjeturas -1
-                     {if} respuesta > número_aleatorio
-                         {print} '¡más alto!'
-                         conjeturas = conjeturas
-                     {else} respuesta = número_aleatorio
-                         {print} 'correcto'
-                         conjeturas = 10
-            debug: 'Verdadero'
-        4:
-            header: ¡Vamos a probarlo!
-            text: ¡Disfruta las aventuras en el nivel 15!
-    16:
-        1:
-            header: Bienvenido al nivel 16
-            text: En este nivel aprenderás sobre los [corchetes] y cómo se usan.
-        2:
-            header: Corchetes
-            text: Vamos a hacer listas a la manera de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas alrededor de cada objeto como hemos aprendido en los niveles anteriores. Usamos corchetes para apuntar a un lugar en una lista. El comando en aleatorio ya no se puede usar nunca más.
-            code: |-
-                amigos = ['Ahmed', 'Ben', 'Cayden']
-                {print} amigos[1] ' es el primer amigo en la lista.'
-                {print} amigos[2] ' es el segundo amigo en la lista.'
-                {print} amigos[3] ' es el tercer amigo en la lista.'
-                #ahora haremos coincidir 2 listas usando la variable i
-                numeros_suerte = [15, 18, 6]
-                {for} i {in} {range} 1 {to} 3
-                    {print} 'El número de la suerte de 'amigos[i] ' es ' numeros_suerte[i]
-        3:
-            header: Depuración
-            text: ¡Depuremos este código!
-            code: |-
-                {print} 'Prueba de amistad'
-                {subjects} = ['canción', 'película', 'comida', 'bebida']
-                respuestas_jugador_1 = []
-                respuestas_jugador_2 = []
-                puntuación = 100
-
-                {for} i {in} {range} 1 {to} 4
-                    respuesta = {ask} 'cúal es tu ' subjects[i] ' favorito'
-                {add} respuesta {to} respuestas_jugador_1
-
-                {print} 'Jugador 2, ¡tu turno!'
-                {for} i {in} {range} 0 {to} 4
-                    respuesta = {ask} 'cuáles son los ' subjects ' del jugador 1'
-                    {add} respuesta {in} respuestas_jugador_2
-                    {if} respuestas_jugador_2[2] == respuestas_jugador_1[1]
-                        {print} '¡Correcto!'
-                    {else}
-                        {print} '¡Fallo!'
-                    puntuación = puntuación - 25
-
-                {print} 'Jugador 2, has conseguido ' puntuación '%'
-
-                {if} puntuación = 100
-                    {print} 'Eres un amigo increible'
-                {if} puntuación < 100 {or} puntuación >= 50
-                    {print} 'Puedes hacerlo mejor'
-                {else} puntuación < 50
-                    {print} '¡¿Acaso conoces a esta persona?!'
-            debug: 'Verdadero'
-        4:
-            header: ¡Vamos a probarlo!
-            text: ¡Disfruta las aventuras en el nivel 16!
-    17:
-        1:
-            header: Bienvenido al nivel 17
-            text: en este nivel aprenderás a como usar los dos puntos y aprenderás el comando sino.
-        2:
-            header: Dos puntos
-            text: 'Ahora vamos a cambiar la sangría un poco. Cada vez que necesitemos una sangría, necesitamos : en la línea de antes de la sangría.'
-            code: |-
-                premios = ['1 millón de dólares', 'una tarta de manzana', 'nada']
-                tu_premio = premios[{random}]
-                {print} 'Ganaste ' tu_premio
-                {if} tu_premio == '1 millón de dólares' :
-                    {print} '¡Sí! ¡Eres rico!'
-                {else}:
-                    {print} 'Más suerte la próxima vez..'
-        3:
-            header: Sino
-            text: 'En este nivel también puedes usar un nuevo comando: sino. sino es la abreviatura para si no si y lo necesitas cuando quieras hacer 3 (''o más!) opciones. ¡Compruébalo!'
-            code: |-
-                premios = ['1 millón de dólares', 'una tarta de manzana', 'nada']
-                tu_premio = premios[{random}]
-                {print} 'Ganaste ' tu_premio
-                {if} tu_premio == '1 millón de dólares' :
-                    {print} '¡Sí! ¡Eres rico!'
-                {elif} tu_premio == 'una tarta de manzana' :
-                    {print} 'Genial, ¡una tarta de manzana!'
-                {else}:
-                    {print} 'Más suerte la próxima vez..'
-        4:
-            header: Depuración
-            text: ¡Depuremos este código!
-            code: |-
-                {define} preguntar_direccion
-                    direccion = {ask} '¿A dónde quieres ir?'
-                    {if} direccion = 'hacia atrás'
-                        {turn} 180
-                    {else} direccion == 'derecha'
-                        {turn} 90
-                    {else} direccion == 'izquierda'
-                        {turn} 270
-                        {forward} 100
-
-                continuar = 'si'
-
-                {while} continuar == 'si'
-                    {print} preguntar_direccion
-                    {sleep}
-                    continuar = '¿quieres dibujar algo más?'
-                    {sleep}
-            debug: 'Verdadero'
-        5:
-            header: ¡Vamos a probarlo!
-            text: ¡Disfruta las aventuras en el nivel 17!
-    18:
-        1:
-            header: Bienvenido al nivel 18
-            text: ¡Enhorabuena! ¡Has alcanzado el último nivel de Hedy! El código que has creado se puede copiar a un entorno de Python como replit o PyCharm, ¡y puedes continuar aprendiendo allí! Sin embargo ten en cuenta que Python sólo puede ller comandos en inglés, así que si has usado otros lenguajes, tendrás ahora que cambiar a inglés.
-        2:
-            header: Al estilo Python
-            text: |-
-                ¡Hemos llegado la código real de Python! Esto significa que tenemos que usar paréntesis con imprimir y rango de ahora en adelante.
-
-                También, si quieres imprimir más de un objeto, necesitas separarlos por comas.
-
-                El cambio final que tenemos que hacer para conseguir el código Python es cambiar ask por entrada.
-
-                Haz clic en la pestaña 'imprimir' para todos los ejemplos.
-            editor: /hedy/18
-        3:
-            header: ¡Las últimas aventuras!
-            text: ¡Disfruta las últimas aventuras en el nivel 18!
+    
