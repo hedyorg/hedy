@@ -15,10 +15,10 @@ from . import grammar as hedy_grammar
 from . import translation as hedy_translation
 from . import exceptions
 from . import program_repair
-from ._utils import atomic_write_file
+from .lang_utils import atomic_write_file
 from .external import gettext
 
-from hedy_content import ALL_KEYWORD_LANGUAGES, MAX_LEVEL
+from .content import ALL_KEYWORD_LANGUAGES, MAX_LEVEL
 from collections import namedtuple
 import re
 import regex
@@ -34,8 +34,8 @@ import tempfile
 from hedy.content import KEYWORDS
 from hedy.sourcemap import SourceMap, source_map_transformer
 
-from prefixes.music import present_in_notes_mapping
-from prefixes.normal import get_num_sys
+from .prefixes.music import present_in_notes_mapping
+from .prefixes.normal import get_num_sys
 
 HEDY_MAX_LEVEL = MAX_LEVEL
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
@@ -3641,7 +3641,7 @@ def _restore_parser_from_file_if_present(pickle_file):
     return None
 
 
-@lru_cache(maxsize=0 if utils.is_production() else 100)
+@lru_cache(maxsize=0 if lang_utils.is_production() else 100)
 def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     """Return the Lark parser for a given level.
     Parser generation takes about 0.5 seconds depending on the level so

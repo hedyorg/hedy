@@ -15,7 +15,7 @@ from config import config as CONFIG
 
 # *** GLOBAL VARIABLES ***
 from hedy import HEDY_MAX_LEVEL
-from hedy_content import ALL_LANGUAGES
+from website_content import ALL_LANGUAGES
 
 HOST = os.getenv('ENDPOINT', 'http://localhost:' + str(CONFIG['port']) + '/')
 if not HOST.endswith('/'):

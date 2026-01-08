@@ -2,7 +2,7 @@ import os
 import time
 import unittest
 
-from website.yaml_file import YamlFile
+from hedy.yaml_file import YamlFile
 
 
 class TestYamlFile(unittest.TestCase):

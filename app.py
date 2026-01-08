@@ -19,7 +19,7 @@ from logging.config import dictConfig as logConfig
 from os import path
 from iso639 import languages
 
-import static_babel_content
+import hedy.static_babel_content as static_babel_content
 from markupsafe import Markup
 from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
                    redirect, request, send_file, url_for, Blueprint,
@@ -31,16 +31,16 @@ from flask_compress import Compress
 from urllib.parse import quote_plus
 
 import hedy
-import hedy_content
-import hedy_translation
+import website_content as hedy_content
+from hedy import translation as hedy_translation
 import hedyweb
 import utils
 from dataclasses import dataclass
-from hedy_error import get_error_text
-from safe_format import safe_format
+from hedy.error import get_error_text
+from hedy.safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
-from hedy_content import (adventures_order_per_level, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
+from website_content import (adventures_order_per_level, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
                           ALL_LANGUAGES, COUNTRIES, FRIENDLY_SORTED_COUNTRIES, HOUR_OF_CODE_ADVENTURES)
 
 from logging_config import LOGGING_CONFIG

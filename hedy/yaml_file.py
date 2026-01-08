@@ -5,7 +5,7 @@ import os
 import pickle
 import re
 import tempfile
-from . import querylog
+from ..website import querylog
 
 from ruamel import yaml
 

@@ -1,0 +1,2 @@
+- [ ] `static_babel_content.json` needs to be updated periodically
+- [ ] Update Weblate to point components to new files/repository
