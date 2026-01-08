@@ -1,8 +1,10 @@
 import re
 import warnings
+
 from os import path
 from functools import cache
-import hedy_translation
+
+import .translation as hedy_translation
 
 """
 Because of the gradual nature of Hedy, the grammar of every level is just slightly different than the grammar of the

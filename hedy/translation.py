@@ -7,7 +7,7 @@ from lark import Token, Transformer, v_args
 from lark.exceptions import VisitError
 
 import hedy
-import hedy_content
+from . import content as hedy_content
 
 # Holds the token that needs to be translated, its line number, start and
 # end indexes and its value (e.g. ", ").

@@ -2,35 +2,37 @@ import textwrap
 from functools import lru_cache
 
 import lark
-from website.flask_helpers import gettext_with_fallback as gettext
 from lark import Lark
 from lark.exceptions import UnexpectedEOF, UnexpectedCharacters, VisitError
 from lark import Tree, Transformer, visitors, v_args
 from os import path, getenv
+import sys
 
-import hedy
-import hedy_error
-import hedy_grammar
-import hedy_translation
-from utils import atomic_write_file
+# This is so that all the 'hedy.exception' references below still work
+hedy = sys.modules[__name__]
+from . import error as hedy_error
+from . import grammar as hedy_grammar
+from . import translation as hedy_translation
+from . import exceptions
+from . import program_repair
+from ._utils import atomic_write_file
+from .external import gettext
+
 from hedy_content import ALL_KEYWORD_LANGUAGES, MAX_LEVEL
 from collections import namedtuple
 import re
 import regex
 from dataclasses import dataclass, field
-import exceptions
-import program_repair
 import yaml
 import hashlib
 import os
 import pickle
 import sys
 import tempfile
-import utils
 
 # Some useful constants
-from hedy_content import KEYWORDS
-from hedy_sourcemap import SourceMap, source_map_transformer
+from hedy.content import KEYWORDS
+from hedy.sourcemap import SourceMap, source_map_transformer
 
 from prefixes.music import present_in_notes_mapping
 from prefixes.normal import get_num_sys
@@ -455,10 +457,6 @@ def escape_var(var):
     if isinstance(var, LookupEntry):
         var_name = var.name
     return "_" + var_name if var_name in reserved_words else var_name
-
-
-def style_command(command):
-    return f'<span class="command-highlighted">{command}</span>'
 
 
 def closest_command(input_, known_commands, threshold=2):

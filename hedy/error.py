@@ -1,5 +1,4 @@
-import hedy
-import hedy_translation
+from . import translation as hedy_translation
 import re
 from website.flask_helpers import gettext_with_fallback as gettext
 
@@ -77,7 +76,7 @@ def _highlight(input_):
         if start_ < end_:
             part = input_[start_:end_]
             is_highlighted = i % 2 == 1
-            result.append(hedy.style_command(part) if is_highlighted else part)
+            result.append(style_command(part) if is_highlighted else part)
     return ''.join(result)
 
 
@@ -125,3 +124,7 @@ def _translate(v, language):
     if v == translation:
         translation = hedy_translation.translate_keyword_from_en(v, language)
     return translation
+
+
+def style_command(command):
+    return f'<span class="command-highlighted">{command}</span>'

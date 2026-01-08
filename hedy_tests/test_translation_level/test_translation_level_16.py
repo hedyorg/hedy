@@ -1,5 +1,5 @@
 import textwrap
-import hedy_translation
+import hedy.translation as hedy_translation
 from tests.Tester import HedyTester
 
 # tests should be ordered as follows:
@@ -9,5 +9,5 @@ from tests.Tester import HedyTester
 # * Error handling
 
 
-class TestsTranslationLevel18(HedyTester):
-    level = 18
+class TestsTranslationLevel16(HedyTester):
+    level = 16
