@@ -1,6 +1,6 @@
 import textwrap
 
-import hedy_translation
+import hedy.translation as hedy_translation
 from tests.Tester import HedyTester
 
 # tests should be ordered as follows:

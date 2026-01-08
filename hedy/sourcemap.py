@@ -1,8 +1,10 @@
+from os import path
 import re
 import textwrap
-import exceptions
-from os import path
+
 from lark import Tree
+
+from . import exceptions
 
 
 class SourceRange:

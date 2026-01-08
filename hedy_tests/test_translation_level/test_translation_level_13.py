@@ -1,7 +1,7 @@
 import textwrap
 from parameterized import parameterized
 from hedy_content import ALL_KEYWORD_LANGUAGES
-import hedy_translation
+import hedy.translation as hedy_translation
 from tests.Tester import HedyTester
 
 # tests should be ordered as follows:

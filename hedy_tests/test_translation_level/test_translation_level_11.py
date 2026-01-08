@@ -1,5 +1,5 @@
 import textwrap
-import hedy_translation
+import hedy.translation as hedy_translation
 from hedy_content import ALL_KEYWORD_LANGUAGES
 from tests.Tester import HedyTester
 
