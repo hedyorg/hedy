@@ -1653,8 +1653,10 @@ adventures:
                     ```
                     depodaki_içecekler {is} su, limonata, kola, portakal suyu
                     içecek {is} {ask} 'Ne içmek istersiniz?'
-                    {if} içecek {in} depodaki_içecekler {print} 'Bir ' içecek ' hemen geliyor!'
-                    {else} {print} 'Üzgünüm, ondan satmıyoruz'
+                    {if} içecek {in} depodaki_içecekler
+                    {print} 'Bir ' içecek ' hemen geliyor!'
+                    {else}
+                    {print} 'Üzgünüm, ondan satmıyoruz'
                     ```
             7:
                 story_text: |

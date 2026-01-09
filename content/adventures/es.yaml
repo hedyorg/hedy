@@ -1899,8 +1899,10 @@ adventures:
                     ```
                     bebidas_disponibles {is} agua, limonada, refresco de cola, zumo de naranja
                     bebida {is} {ask} '¿Qué quieres beber?'
-                    {if} bebida {in} bebidas_disponibles {print} '¡Una ' bebida 'de camino!'
-                    {else} {print} 'Lo siento, no servimos eso'
+                    {if} bebida {in} bebidas_disponibles
+                    {print} '¡Una ' bebida 'de camino!'
+                    {else}
+                    {print} 'Lo siento, no servimos eso'
                     ```
             7:
                 story_text: |

@@ -1248,13 +1248,6 @@ adventures:
 
                     **Додатково** Чи запрограмували ви проблему та відповідні відповіді? Потім спробуйте додати більше команд `{if}` і `{else}` у свій код.
                     Спробуйте додати `{if}` після кожної команди `{ask}` у вашому коді, щоб зробити код максимально інтерактивним!
-                example_code: |
-                    ```
-                    drinks_in_stock {is} water, lemonade, cola, orange juice
-                    drink {is} {ask} 'What would you like to drink?'
-                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'coming up!'
-                    {else} {print} 'Sorry, we do not sell that'
-                    ```
             7:
                 story_text: |
                     На цьому рівні ви можете використовувати математику, щоб обчислити загальну вартість замовлення вашого клієнта, що може зробити ваш віртуальний ресторан більш реалістичним.

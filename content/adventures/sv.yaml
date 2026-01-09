@@ -1611,8 +1611,10 @@ adventures:
                     ```
                     drycker_i_lager {is} vatten, läsk, cola, apelsinjuice
                     dryck {is} {ask} 'Vad vill du dricka?'
-                    {if} dryck {in} drycker_i_lager {print} 'En' dryck 'på väg!'
-                    {else} {print} 'Tyvärr, vi har inte det'
+                    {if} dryck {in} drycker_i_lager
+                    {print} 'En' dryck 'på väg!'
+                    {else}
+                    {print} 'Tyvärr, vi har inte det'
                     ```
             7:
                 story_text: |

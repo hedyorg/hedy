@@ -1799,8 +1799,10 @@ adventures:
                     ```
                     boisson_en_stock {is} eau, limonade, coca, jus d'orange
                     choix {is} {ask} "Que voulez vous boire ?"
-                    {if} choix {in} boisson_en_stock {print} choix " en préparation !"
-                    {else} {print} "Désolé, nous n'avons pas de " choix
+                    {if} choix {in} boisson_en_stock
+                    {print} choix " en préparation !"
+                    {else}
+                    {print} "Désolé, nous n'avons pas de " choix
                     ```
             7:
                 story_text: |
