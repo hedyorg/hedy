@@ -2445,8 +2445,10 @@ adventures:
                     ```
                     drank_voorraad {is} water, limonade, cola, sinaasappelsap
                     drank {is} {ask} 'Wat wilt u drinken?'
-                    {if} drank {in} drank_voorraad {print} 'Een ' drank 'komt eraan!'
-                    {else} {print} 'Sorry, dat hebben we niet'
+                    {if} drank {in} drank_voorraad
+                    {print} 'Een ' drank 'komt eraan!'
+                    {else}
+                    {print} 'Sorry, dat hebben we niet'
                     ```
             7:
                 story_text: |

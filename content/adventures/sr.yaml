@@ -2012,8 +2012,10 @@ adventures:
                     ```
                     drinks_in_stock {is} вода, лимунада, кола, сок од поморанџе
                     drink {is} {ask} 'Шта бисте желели да пијете?'
-                    {if} drink {in} drinks_in_stock {print} 'Једна ' drink ' стиже!'
-                    {else} {print} 'Жао нам је, не продајемо то'
+                    {if} drink {in} drinks_in_stock
+                    {print} 'Једна ' drink ' стиже!'
+                    {else}
+                    {print} 'Жао нам је, не продајемо то'
                     ```
             7:
                 story_text: |
