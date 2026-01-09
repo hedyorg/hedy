@@ -2296,8 +2296,10 @@ adventures:
                     ```
                     animals {is} dog, cow, sheep
                     answer {is} {ask} 'What is your favorite animal?'
-                    _ answer _ animals _ 'Mine too!'
-                    _ _ 'My favorite animals are dogs, cows and sheep'
+                    _ answer _ animals
+                    _ 'Mine too!'
+                    _
+                    _ 'My favorite animals are dogs, cows and sheep'
                     ```
     is_command:
         name: '{is}'

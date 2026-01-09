@@ -1244,8 +1244,10 @@ adventures:
                     ```
                     animals {is} 狗, 牛, 羊
                     answer {is} {ask} '你最喜欢的动物是哪个?'
-                    _ answer _ animals _ '我也是!'
-                    _ _ '我最喜欢的动物是狗, 牛, 羊。'
+                    _ answer _ animals
+                    _ '我也是!'
+                    _
+                    _ '我最喜欢的动物是狗, 牛, 羊。'
                     ```
     is_command:
         default_save_name: is_命令

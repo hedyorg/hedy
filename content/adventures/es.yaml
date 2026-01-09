@@ -1168,8 +1168,10 @@ adventures:
                     ```
                     animales {is} perro, vaca, oveja
                     respuesta {is} {ask} '¿Cuál es tu animal preferido?'
-                    _ respuesta _ animales _ '¡También el mío!'
-                    _ _ 'Mis animales preferidos son perros, vacas y ovejas'
+                    _ respuesta _ animales
+                    _ '¡También el mío!'
+                    _
+                    _ 'Mis animales preferidos son perros, vacas y ovejas'
                     ```
         name: '{in}'
     is_command:
