@@ -2572,7 +2572,7 @@ adventures:
                     First create a sad note, then create at least 2 other tunes for different moods.
                 example_code: |
                     ```
-                    mood = {ask} 'How are you feeling today?'
+                    mood {is} {ask} 'How are you feeling today?'
                     {if} mood {is} happy
                     {play} C4
                     {elif} mood {is} sad
