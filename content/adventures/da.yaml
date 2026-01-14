@@ -1,6 +1,6 @@
 adventures:
     story:
-        name: Historie
+        name: historie
         default_save_name: Historie
         description: Lav en kort historie
         levels:
@@ -74,6 +74,7 @@ adventures:
                     Dette er et eksempel med `{remove}` kommandoen i din historie
 
                     ### Opgave
+                    Kopier din historie fra forrige niveau til dette.
                     Kan du bruge de 3 nye kommandoer `{at} {random}` , `{add} {to_list}` og `{remove} {from}` i din egen historie?
                 example_code_3: |
                     ```
@@ -123,13 +124,33 @@ adventures:
             9:
                 story_text: "På dette niveau can du bruge flere linjer i dine `{if}` kommandoer. På denne måde kan du opgradere din glade eller triste slutning!\n\n### Opgave 1\nKode eksemplet viser to forskellige slutninger; en hvor karakterene hopper ind i en tidsmaskine, og en hvor de ikke gør.\nFærdiggør de tomme felter med mindst en sætning per slutning.\n**Ekstra** Gør historien længere. Hvad sker der i historien? Du kan også tilføje endnu en `{ask}` med andre muligheder.\n\n### Opgave 2\nGo tilbage til dine gemte programmer, og vælg dit historie program fra niveau 5. Skriv nu en god og en dårlig slutning der hver er 3 linjer lange!\n"
                 example_code: "```\n{print} 'ÅH NEJ! T-rexen nærmer sig!'\nslut = {ask} 'Vil du have en glad eller en trist slutning?'\n{if} slut {is} glad\n    {print} 'Richard når lige at hoppe ind i tidsmaskinen!'\n    {print} _\n{else}\n    {print} 'Åh nej! Richard er for langsom...'\n    {print} _\n```\n"
+            6:
+                story_text: |-
+                    Nu hvor du kan bruge `{elif}` kan du lave en endnu mere interaktive historie! F.eks. kan du skabe flere karakterer, der alle har forskellige egenskaber.
+                    Eller du kan få din spiller til at vælge hvilken vej der skal tages, hvilken dør at åbne eller hvilken trylledrik der skal drikkes...
+
+                    ### Opgave
+                    lav din egen historie med 3 eller flere muligheder der bruger  {elif}.
+            10:
+                story_text: |
+                    På dette niveau kan du bruge `{if}` og `{repeat}` kommandoer inden i andre `{if}` og `{repeat}` kommandoer. 
+                    Dette giver dig mange muligheder og hjælper med at lave historierne mere interaktive.
+
+                    ### Opgave 1
+                    Færdiggør koden sådan at `{if}` virker korrekt.
+
+                    ### Opgave 2
+                    Tilføj en `{if}` og en `{else}` til den del af historier hvor Robin også går hjem.
+
+                    ### Opgave 3
+                    Gå tilbage til din historie i niveau 8 og brug mindst to `{if}`er inden i en anden `{if}`.
     ask_command:
         description: Introduction ask command
         levels:
             1:
                 story_text_2: |
-                    ## The echo command
-                    If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
+                    ## `{echo}` kommandoen
+                    Hvis du vil have computeren til at gentage dit svar, kan du bruge `{echo}` kommandoen. Svaret vil blive returneret i slutningen af sætningen, så i dette eksempel efter hej.
             2:
                 example_code_2: |
                     ```
