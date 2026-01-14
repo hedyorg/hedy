@@ -424,7 +424,7 @@ adventures:
                     **Atenció!, cal depurar aquest codi!**
                     ```
                     opcions_pelicula {is} dracula, fast and furious, solo en casa, barbie 
-                    pelicula_escollida {is} movies {at} {random}
+                    pelicula_escollida {is} pelis {at} {random}
                     {print} Aquesta nit veurem _pelicula_escollida
                     com {ask} T'agrada aquesta pel·lícula?
                     {print} Demà veurem una altra cosa.
@@ -1862,7 +1862,7 @@ adventures:
         levels:
             6:
                 story_text: "En aquest nivell farem servir una nova comanda: `{elif}`. `{elif}` és una combinació de les paraules clau `{else}` i `{if}`, i la serà molt útil quan volem crear 3 (o més!) opcions.\nDona-hi un cop d’ull!\n### Exercici\nFes la teva pròpia roda de la fortuna, on pots guanyar diferents premis i obtenir reaccions corresponents.\n"
-                example_code: "```\npremis is 1 milió d'euros, un pastís de poma, res\nel_teu_premi is premis {at} {random}\n{print} \"Guanyes \" el_teu_premi\n{if} el_teu_premi {is} \"1 milió d'euros\"\n{print} \"Sí! Ets ric!\"\n{elif} el_teu_premi {is} \"un pastís de poma\"\n{print} \"Mmm, un pastís de poma!\"\n{else}\n{print} \"Més sort la propera vegada..\"\n```\n"
+                example_code: "```\npremis is 1.000.000€, un pastís de poma, res\nel_teu_premi is premis {at} {random}\n{print} \"Guanyes \" el_teu_premi\n{if} el_teu_premi {is} \"1.000.000€\"\n{print} \"Sí! Ets ric!\"\n{elif} el_teu_premi {is} \"un pastís de poma\"\n{print} \"Mmm, un pastís de poma!\"\n{else}\n{print} \"Més sort la propera vegada..\"\n```\n"
     hospital:
         levels:
             3:
