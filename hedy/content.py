@@ -25,11 +25,17 @@ def total_grammars_dir():
 
 MAX_LEVEL = 16
 
+languages_in_grammar_dir = set(
+    kw_file[len('keywords-'):-len('.lark')]
+    for kw_file in glob.glob('keywords-*.lark', root_dir=grammars_dir()))
+languages_in_keywords_dir = set(
+    kw_file[:-len('.yaml')]
+    for kw_file in glob.glob('*.yaml', root_dir=path.join(data_root, 'keywords')))
+
 # Define dictionary for available languages. Fill dynamically later.
 ALL_KEYWORD_LANGUAGES = {}
-
-for kw_file in glob.glob('keywords-*.lark', root_dir=grammars_dir()):
-    lang = kw_file[len('keywords-'):-len('.lark')]
+for lang in sorted(list(languages_in_grammar_dir & languages_in_keywords_dir)):
+    # Use the first two characters as the language code
     ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
