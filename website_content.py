@@ -10,7 +10,7 @@ from utils import customize_babel_locale
 from hedy.yaml_file import YamlFile
 from hedy.safe_format import safe_format
 
-from hedy.content import (KEYWORDS, ALL_KEYWORDS, ALL_KEYWORD_LANGUAGES, CUSTOM_BABEL_LANGUAGES, CUSTOM_LANGUAGE_TRANSLATIONS)
+from hedy.content import (KEYWORDS, ALL_KEYWORDS, MAX_LEVEL, ALL_KEYWORD_LANGUAGES, CUSTOM_BABEL_LANGUAGES, CUSTOM_LANGUAGE_TRANSLATIONS, grammars_dir)
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +35,6 @@ def _get_friendly_sorted_countries():
 
 FRIENDLY_SORTED_COUNTRIES = _get_friendly_sorted_countries()
 
-MAX_LEVEL = 16
 # This variable will be used to track which classes need to be updated
 LAST_CONTENT_VERSION = 1
 
@@ -446,7 +445,7 @@ for folder in os.listdir(translations_dir):
 
 for lang in sorted(languages):
     ALL_LANGUAGES[lang] = languages[lang]
-    if os.path.exists(path.join(data_root, './grammars/keywords-' + lang + '.lark')):
+    if os.path.exists(path.join(grammars_dir() + '/keywords-' + lang + '.lark')):
         ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
 
 

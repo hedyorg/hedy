@@ -14,7 +14,7 @@ from hedy.yaml_file import YamlFile  # noqa
 OUTPUT_PATH_TRANSLATION = "highlighting/highlighting-trad.json"
 
 # Files containing translations of keywords
-KEYWORDS_PATH = 'content/keywords/'
+KEYWORDS_PATH = 'hedy/data/keywords/'
 KEYWORDS_PATTERN = '(\\w+).yaml$'
 
 

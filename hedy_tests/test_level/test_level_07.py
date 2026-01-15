@@ -2,7 +2,7 @@ import exceptions
 import textwrap
 from parameterized import parameterized
 import hedy
-from tests.Tester import HedyTester
+from ..Tester import HedyTester
 
 
 class TestsLevel7(HedyTester):
@@ -81,7 +81,7 @@ class TestsLevel7(HedyTester):
 
     def test_print_list_access_at_index_arabic(self):
         code = textwrap.dedent("""\
-               l is ١,٢,٣ 
+               l is ١,٢,٣
                print l at ٣""")
 
         expected = self.dedent(
@@ -1720,7 +1720,7 @@ class TestsLevel7(HedyTester):
         naam is Hedy
         if naam is Hedy
         print 'leuk'
-        else 
+        else
         print 'minder leuk'""")
 
         expected = textwrap.dedent("""\
@@ -2319,7 +2319,7 @@ class TestsLevel7(HedyTester):
             print 'leuk'
             if naam is Python
             print 'ook leuk'
-            else 
+            else
             print 'minder leuk!'""")
 
         expected = self.dedent(
@@ -2356,7 +2356,7 @@ class TestsLevel7(HedyTester):
             names is Hedy, Lamar
             name is ask 'What is a name you like?'
             if name is Hedy
-            print 'nice!' 
+            print 'nice!'
             else
             print 'meh'
             if name in names

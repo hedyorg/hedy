@@ -5,11 +5,12 @@ import os
 import pickle
 import re
 import tempfile
-from ..website import querylog
+# Can't do this for now because of circular dependencies
+# from ..website import querylog
 
 from ruamel import yaml
 
-from utils import atomic_write_file
+from .lang_utils import atomic_write_file
 from flask import has_request_context, g
 
 yaml_loader = yaml.YAML(typ="safe", pure=True)
@@ -123,12 +124,12 @@ class YamlFile:
 
         return data
 
-    @querylog.timed_as('load_yaml_pickled')
+    # @querylog.timed_as('load_yaml_pickled')
     def load_pickle(self):
         with open(self.pickle_filename, "rb") as f:
             return pickle.load(f)
 
-    @querylog.timed_as('load_yaml_uncached')
+    # @querylog.timed_as('load_yaml_uncached')
     def load_uncached(self):
         """Load the source YAML file."""
         file = self._load_yaml(self.filename)

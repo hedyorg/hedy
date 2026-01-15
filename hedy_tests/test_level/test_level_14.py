@@ -4,7 +4,7 @@ from parameterized import parameterized
 
 import exceptions
 import hedy
-from tests.Tester import HedyTester
+from ..Tester import HedyTester
 
 
 class TestsLevel14(HedyTester):
@@ -519,7 +519,7 @@ class TestsLevel14(HedyTester):
         value = '1  '
         code = textwrap.dedent(f"""\
             var is 5
-            if var   {comparison} {value} 
+            if var   {comparison} {value}
                 print 'seems correct'""")
 
         expected = textwrap.dedent(f"""\
@@ -533,7 +533,7 @@ class TestsLevel14(HedyTester):
     def test_comparison_with_leading_spaces(self, comparison):
         code = textwrap.dedent(f"""\
             var is 5
-            if   var {comparison}  1 
+            if   var {comparison}  1
                 print 'seems correct'""")
 
         expected = textwrap.dedent(f"""\

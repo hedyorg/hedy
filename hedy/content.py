@@ -11,9 +11,9 @@ from hedy.safe_format import safe_format
 # We must find our data relative to this .py file. This will give the
 # correct answer both for when Hedy is run as a webserver on Heroku, as well
 # as when it has been bundled using pyinstaller.
-data_root = path.dirname(__file__)
+data_root = path.join(path.dirname(__file__), 'data')
 
-content_dir = path.join(data_root, 'data')
+MAX_LEVEL = 16
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_KEYWORD_LANGUAGES = {}
@@ -41,7 +41,7 @@ CUSTOM_LANGUAGE_TRANSLATIONS = {'kmr': 'Kurdî (Tirkiye)',
 ALL_KEYWORDS = {
     str(lang): {
         str(k): str(v).split('|')
-        for k, v in YamlFile.for_file(f'{content_dir}/keywords/{lang}.yaml').to_dict().items()
+        for k, v in YamlFile.for_file(f'{data_root}/keywords/{lang}.yaml').to_dict().items()
     }
     for lang in ALL_KEYWORD_LANGUAGES
 }
@@ -50,3 +50,7 @@ KEYWORDS = {  # "default" keywords
     lang: {k: local_keys[0] for k, local_keys in keywords.items()}
     for lang, keywords in ALL_KEYWORDS.items()
 }
+
+def grammars_dir():
+    """Returns the path to the grammars directory."""
+    return path.join(data_root, 'grammars')

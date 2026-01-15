@@ -2,7 +2,7 @@ import hedy
 import textwrap
 
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+from ..Tester import HedyTester, SkippedMapping
 from parameterized import parameterized
 
 
@@ -160,7 +160,7 @@ class TestsLevel6(HedyTester):
     def test_if_equality_single_quoted_rhs_with_inner_double_quote(self):
         code = textwrap.dedent(f"""\
         answer is no
-        if answer is 'He said "no"' 
+        if answer is 'He said "no"'
         print 'no'""")
 
         expected = textwrap.dedent(f"""\
@@ -1223,11 +1223,11 @@ class TestsLevel6(HedyTester):
         code = textwrap.dedent("""\
         if ض is pressed
         print 'arabic'
-        else 
+        else
         print 'something else'
         if ש is pressed
         print 'hebrew'
-        else 
+        else
         print 'something else'
         if й is pressed
         print 'russian'

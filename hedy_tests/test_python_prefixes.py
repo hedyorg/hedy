@@ -1,6 +1,6 @@
 import pytest
 
-from prefixes.normal import localize, to_latin_numeral, Value
+from hedy.prefixes.normal import localize, to_latin_numeral, Value
 
 localize_test_data = [
     # None and empty values

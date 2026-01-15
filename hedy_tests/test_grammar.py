@@ -1,6 +1,6 @@
 import textwrap
 import unittest
-from hedy_grammar import merge_rules_operator, parse_grammar_rule, merge_grammars, GrammarRule, RuleProcessor
+from hedy.grammar import merge_rules_operator, parse_grammar_rule, merge_grammars, GrammarRule, RuleProcessor
 from parameterized import parameterized
 lang = 'en'
 

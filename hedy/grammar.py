@@ -4,6 +4,8 @@ import warnings
 from os import path
 from functools import cache
 
+from .content import grammars_dir
+
 from . import translation as hedy_translation
 
 """
@@ -88,50 +90,47 @@ def merge_grammars(grammar_text_1, grammar_text_2, lang):
     return '\n'.join(sorted(rules_to_keep))
 
 
-def read_file(*paths):
-    script_dir = path.abspath(path.dirname(__file__))
-    path_ = path.join(script_dir, *paths)
+def read_grammars_file(*paths):
+    path_ = path.join(grammars_dir(), *paths)
     with open(path_, "r", encoding="utf-8") as file:
         return file.read()
 
 
 def read_skip_faulty_file(level):
-    script_dir = path.abspath(path.dirname(__file__))
     for lvl in range(level, 0, -1):
-        file_path = path.join(script_dir, 'grammars', f'skip-faulty-level{lvl}.lark')
+        file_path = path.join(grammars_dir(), f'skip-faulty-level{lvl}.lark')
         if path.isfile(file_path):
             with open(file_path, "r", encoding="utf-8") as file:
                 return file.read()
 
 
-def write_file(content, *paths):
-    script_dir = path.abspath(path.dirname(__file__))
-    path_ = path.join(script_dir, *paths)
+def write_grammars_file(content, *paths):
+    path_ = path.join(grammars_dir(), *paths)
     with open(path_, "w", encoding="utf-8") as file:
         file.write(content)
 
 
 def get_keywords_for_language(language):
     try:
-        return read_file('grammars', f'keywords-{language}.lark')
+        return read_grammars_file(f'keywords-{language}.lark')
     except FileNotFoundError:
-        return read_file('grammars', 'keywords-en.lark')
+        return read_grammars_file('keywords-en.lark')
 
 
 def get_terminals():
-    return read_file('grammars', 'terminals.lark')
+    return read_grammars_file('terminals.lark')
 
 
 def save_total_grammar_file(level, grammar, lang_):
-    write_file(grammar, 'grammars-Total', f'level{level}.{lang_}-Total.lark')
+    write_grammars_file(grammar, f'level{level}.{lang_}-Total.lark')
 
 
 def get_additional_rules_for_level(level):
-    return read_file('grammars', f'level{level}-Additions.lark')
+    return read_grammars_file(f'level{level}-Additions.lark')
 
 
 def get_full_grammar_for_level(level):
-    return read_file('grammars', f'level{level}.lark')
+    return read_grammars_file(f'level{level}.lark')
 
 
 def parse_grammar(grammar):

@@ -1,8 +1,8 @@
 import textwrap
 from parameterized import parameterized
-from hedy_content import ALL_KEYWORD_LANGUAGES
+from hedy.content import ALL_KEYWORD_LANGUAGES
 import hedy.translation as hedy_translation
-from tests.Tester import HedyTester
+from ..Tester import HedyTester
 
 # tests should be ordered as follows:
 # * Translation from English to Dutch

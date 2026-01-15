@@ -2,7 +2,7 @@ import textwrap
 import hedy
 from hedy import Command
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+from ..Tester import HedyTester, SkippedMapping
 
 from hypothesis import given, settings
 import hypothesis.strategies

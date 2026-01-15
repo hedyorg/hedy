@@ -5,7 +5,7 @@ import yaml
 
 
 def extract_Lark_grammar_from_yaml():
-    """Creates a lark file in ../grammars/ for  all yaml files located in ../content/keywords/.
+    """Creates a lark file in ../grammars/ for  all yaml files located in ./data/keywords/.
     If a keyword is not yet translated, it will use the English translation of the keyword
 
     Args:
@@ -13,8 +13,8 @@ def extract_Lark_grammar_from_yaml():
         or for all languages. Defaults to True.
     """
     dirname = os.path.dirname(__file__)
-    input_path = os.path.join(dirname, 'keywords')
-    current_grammar_path = os.path.join(dirname, '../grammars')
+    input_path = os.path.join(dirname, 'data', 'keywords')
+    current_grammar_path = os.path.join(dirname, 'data', 'grammars')
 
     yaml_languages = [f.replace('.yaml', '') for f in os.listdir(input_path) if
                       os.path.isfile(os.path.join(input_path, f)) and f.endswith('.yaml')]

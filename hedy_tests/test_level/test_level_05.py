@@ -2,7 +2,7 @@ import hedy
 import textwrap
 
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+from ..Tester import HedyTester, SkippedMapping
 from parameterized import parameterized
 
 
@@ -371,7 +371,7 @@ class TestsLevel5(HedyTester):
         value = 'trailing space  '
         code = textwrap.dedent(f"""\
         naam is James
-        if naam is {value} 
+        if naam is {value}
         print 'shaken' else print 'biertje!'""")
 
         expected = textwrap.dedent("""\
@@ -403,7 +403,7 @@ class TestsLevel5(HedyTester):
         # line break before else is allowed
         code = textwrap.dedent("""\
         naam is Hedy
-        if naam is Hedy print 'leuk'\n\n       
+        if naam is Hedy print 'leuk'\n\n
         else print 'minder leuk'""")
 
         expected = textwrap.dedent("""\

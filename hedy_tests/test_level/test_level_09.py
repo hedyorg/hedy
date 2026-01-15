@@ -5,7 +5,7 @@ from parameterized import parameterized
 import hedy
 from hedy import Command
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+from ..Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel9(HedyTester):
@@ -57,10 +57,10 @@ class TestsLevel9(HedyTester):
             print 'if line 2'
         elif var is 2
             print 'elif 1 line 1'
-            print 'elif 2 line 2'       
+            print 'elif 2 line 2'
         elif var is 3
             print 'elif 2 line 1'
-            print 'elif 2 line 2'    
+            print 'elif 2 line 2'
         else
             print 'else line 1'
             print 'else line 2'""")
@@ -785,8 +785,8 @@ class TestsLevel9(HedyTester):
     def test_repeat_empty_lines(self):
         code = textwrap.dedent("""\
             repeat 2 times
-                
-                
+
+
                 sleep""")
 
         expected = textwrap.dedent(f"""\

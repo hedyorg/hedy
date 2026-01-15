@@ -6,7 +6,7 @@ import exceptions
 import hedy
 from hedy import Command
 from hedy_sourcemap import SourceRange
-from tests.Tester import HedyTester, SkippedMapping
+from ..Tester import HedyTester, SkippedMapping
 
 
 class TestsLevel12(HedyTester):

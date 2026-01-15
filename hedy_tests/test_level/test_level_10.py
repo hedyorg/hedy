@@ -1,7 +1,7 @@
 import hedy
 import textwrap
 
-from tests.Tester import HedyTester
+from ..Tester import HedyTester
 
 
 class TestsLevel10(HedyTester):

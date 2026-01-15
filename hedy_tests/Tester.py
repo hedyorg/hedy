@@ -14,16 +14,18 @@ import inspect
 import unittest
 import utils
 import typing
-from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
+from hedy.content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 
-from hedy_sourcemap import SourceRange
+from hedy.sourcemap import SourceRange
 from functools import cache
 
 from app import create_app
-from hedy_error import get_error_text
+from hedy.error import get_error_text
 from flask_babel import force_locale
+import hedy
 
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(hedy.__file__)))
+HEDY_PACKAGE_DIR = os.path.dirname(os.path.abspath(hedy.__file__))
 
 
 class Snippet:
@@ -108,12 +110,12 @@ class SkippedMapping:
 
 @cache
 def get_hedy_source_hash():
-    grammars_dir = os.path.join(ROOT_DIR, 'grammars')
+    grammars_dir = hedy.content.grammars_dir()
 
     files_affecting_parsing = (
         [os.path.join(grammars_dir, filename) for filename in os.listdir(grammars_dir)] +
-        [os.path.join(ROOT_DIR, 'hedy.py')] +
-        [os.path.join(ROOT_DIR, file) for file in os.listdir(ROOT_DIR) if re.fullmatch('hedy_.*\\.py', file)]
+        [os.path.join(HEDY_PACKAGE_DIR, '__init__.py')] +
+        [os.path.join(HEDY_PACKAGE_DIR, file) for file in os.listdir(HEDY_PACKAGE_DIR) if re.fullmatch('*\\.py', file)]
     )
 
     files_affecting_parsing.sort()

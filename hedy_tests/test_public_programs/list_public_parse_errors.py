@@ -1,6 +1,6 @@
 import json
 import hedy
-from tests.Tester import HedyTester, Snippet
+from ..Tester import HedyTester, Snippet
 from parameterized import parameterized
 from app import create_app
 from hedy_error import get_error_text
