@@ -189,6 +189,8 @@ def create_app(for_testing=False):
     app_obj.register_blueprint(public_adventures.PublicAdventuresModule(db))
     app_obj.register_blueprint(surveys.SurveysModule(db))
     app_obj.register_blueprint(feedback.FeedbackModule(db))
+    app_obj.register_error_handler(404, not_found)
+    app_obj.register_error_handler(500, internal_error)
 
     return app_obj
 
@@ -1683,7 +1685,7 @@ def not_found(exception):
 @app.errorhandler(500)
 def internal_error(exception):
     import traceback
-    print(traceback.format_exc())
+    logger.info(traceback.format_exc())
     return utils.error_page(error=500, exception=exception)
 
 
