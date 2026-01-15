@@ -1,4 +1,5 @@
 import logging
+import glob
 import os
 from os import path
 import iso3166
@@ -13,10 +14,18 @@ from hedy.safe_format import safe_format
 # as when it has been bundled using pyinstaller.
 data_root = path.join(path.dirname(__file__), 'data')
 
+def grammars_dir():
+    """Returns the path to the grammars directory."""
+    return path.join(data_root, 'grammars')
+
 MAX_LEVEL = 16
 
 # Define dictionary for available languages. Fill dynamically later.
 ALL_KEYWORD_LANGUAGES = {}
+
+for kw_file in glob.glob('keywords-*.lark', root_dir=grammars_dir()):
+    lang = kw_file[len('keywords-'):-len('.lark')]
+    ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
 
 # Babel has a different naming convention than Weblate and doesn't support some languages -> fix this manually
 # Map our langauge code to the language code recognized by Babel, or 'en' if Babel doesn't support this locale
@@ -50,7 +59,3 @@ KEYWORDS = {  # "default" keywords
     lang: {k: local_keys[0] for k, local_keys in keywords.items()}
     for lang, keywords in ALL_KEYWORDS.items()
 }
-
-def grammars_dir():
-    """Returns the path to the grammars directory."""
-    return path.join(data_root, 'grammars')

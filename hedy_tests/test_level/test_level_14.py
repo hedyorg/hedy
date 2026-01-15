@@ -2,7 +2,7 @@ import textwrap
 
 from parameterized import parameterized
 
-import exceptions
+from hedy import exceptions
 import hedy
 from ..Tester import HedyTester
 

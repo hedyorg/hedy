@@ -3,9 +3,9 @@ import hedy
 from ..Tester import HedyTester, Snippet
 from parameterized import parameterized
 from app import create_app
-from hedy_error import get_error_text
+from hedy.error import get_error_text
 from flask_babel import force_locale
-import exceptions
+from hedy import exceptions
 
 most_recent_file_name = 'tests/test_public_programs/filtered-programs-2023-12-12.json'
 public_snippets = []

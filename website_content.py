@@ -445,8 +445,6 @@ for folder in os.listdir(translations_dir):
 
 for lang in sorted(languages):
     ALL_LANGUAGES[lang] = languages[lang]
-    if os.path.exists(path.join(grammars_dir() + '/keywords-' + lang + '.lark')):
-        ALL_KEYWORD_LANGUAGES[lang] = lang[0:2].upper()  # first two characters
 
 
 class StructuredDataFile:

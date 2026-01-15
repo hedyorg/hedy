@@ -1,7 +1,7 @@
 import textwrap
 
 import hedy
-from hedy_sourcemap import SourceRange
+from hedy.sourcemap import SourceRange
 from ..Tester import HedyTester, SkippedMapping
 
 

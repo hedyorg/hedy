@@ -1,4 +1,4 @@
-import exceptions
+from hedy import exceptions
 import textwrap
 from parameterized import parameterized
 import hedy
