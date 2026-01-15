@@ -19,7 +19,7 @@ import functools
 from hedy import exceptions
 import hedy
 import utils
-from tests.Tester import HedyTester, YamlSnippet
+from hedy_tests.Tester import HedyTester, YamlSnippet
 from hedy.yaml_file import YamlFile
 
 fix_error = False

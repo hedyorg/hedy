@@ -2,7 +2,7 @@ from os import path
 
 from parameterized import parameterized
 
-from tests.Tester import HedyTester
+from hedy_tests.Tester import HedyTester
 from . import snippet_tester
 
 
