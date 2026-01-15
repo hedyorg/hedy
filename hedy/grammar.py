@@ -4,7 +4,7 @@ import warnings
 from os import path
 from functools import cache
 
-from .content import grammars_dir
+from .content import grammars_dir, total_grammars_dir
 
 from . import translation as hedy_translation
 
@@ -104,8 +104,8 @@ def read_skip_faulty_file(level):
                 return file.read()
 
 
-def write_grammars_file(content, *paths):
-    path_ = path.join(grammars_dir(), *paths)
+def write_total_grammars_file(content, *paths):
+    path_ = path.join(total_grammars_dir(), *paths)
     with open(path_, "w", encoding="utf-8") as file:
         file.write(content)
 
@@ -122,7 +122,7 @@ def get_terminals():
 
 
 def save_total_grammar_file(level, grammar, lang_):
-    write_grammars_file(grammar, f'level{level}.{lang_}-Total.lark')
+    write_total_grammars_file(grammar, f'level{level}.{lang_}-Total.lark')
 
 
 def get_additional_rules_for_level(level):

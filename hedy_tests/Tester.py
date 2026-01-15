@@ -115,7 +115,7 @@ def get_hedy_source_hash():
     files_affecting_parsing = (
         [os.path.join(grammars_dir, filename) for filename in os.listdir(grammars_dir)] +
         [os.path.join(HEDY_PACKAGE_DIR, '__init__.py')] +
-        [os.path.join(HEDY_PACKAGE_DIR, file) for file in os.listdir(HEDY_PACKAGE_DIR) if re.fullmatch('*\\.py', file)]
+        [os.path.join(HEDY_PACKAGE_DIR, file) for file in os.listdir(HEDY_PACKAGE_DIR) if re.fullmatch('.*\\.py', file)]
     )
 
     files_affecting_parsing.sort()
