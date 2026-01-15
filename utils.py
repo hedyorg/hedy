@@ -378,14 +378,14 @@ def error_page(
     hx_request = bool(request.headers.get("Hx-Request"))
     if hx_request:
         # Return a json response, so we have access to the exception in the frontend
-            return make_response(
-                {
-                    "code": error,
-                    "error": f"{default} {exception}",
-                    "exception": original_exception,
-                },
-                error,
-            )
+        return make_response(
+            {
+                "code": error,
+                "error": f"{default} {exception}",
+                "exception": original_exception,
+            },
+            error,
+        )
 
     if (
         request.accept_mimetypes.accept_json
