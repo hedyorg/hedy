@@ -177,10 +177,10 @@ class HedyTester(unittest.TestCase):
 
     @staticmethod
     def run_code(parse_result):
-        code = utils.NORMAL_PREFIX_CODE
+        code = hedy.lang_utils.NORMAL_PREFIX_CODE
 
         if parse_result.has_turtle:
-            code += utils.TURTLE_PREFIX_CODE
+            code += hedy.lang_utils.TURTLE_PREFIX_CODE
 
         code += parse_result.code
         # remove sleep comments to make program execution less slow
@@ -413,7 +413,8 @@ class HedyTester(unittest.TestCase):
             pass
         except OSError:
             return True  # programs with ask cannot be tested with output :(
-        except Exception:
+        except Exception as e:
+            print(e)
             return False
         return True
 
