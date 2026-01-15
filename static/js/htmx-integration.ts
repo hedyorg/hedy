@@ -67,7 +67,10 @@ htmx.on('htmx:responseError', (ev) => {
     const event = ev as CustomEvent<HtmxEvent>;
     const xhr: XMLHttpRequest = event.detail.xhr;
     const genericError = event.detail.error;
-    modal.notifyError(xhr.responseText.length < 1000 ? xhr.responseText : genericError);
+    const jsonResponse = JSON.parse(xhr.response)
+    const error_text = jsonResponse.error ? jsonResponse.error : genericError
+    console.log(jsonResponse.exception);
+    modal.notifyError(error_text.length < 1000 ? error_text : genericError);
 });
 
 htmx.on('htmx:sendError', () => {
