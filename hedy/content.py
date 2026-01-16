@@ -1,13 +1,6 @@
-import logging
 import glob
-import os
 from os import path
-import iso3166
-from unidecode import unidecode
-
-from . import static_babel_content
 from hedy.yaml_file import YamlFile
-from hedy.safe_format import safe_format
 
 # We must find our data relative to this .py file. This will give the
 # correct answer both for when Hedy is run as a webserver on Heroku, as well

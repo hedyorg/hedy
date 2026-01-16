@@ -11,7 +11,11 @@ from hedy.yaml_file import YamlFile
 from hedy.safe_format import safe_format
 
 from hedy.content import (KEYWORDS, ALL_KEYWORDS, MAX_LEVEL, ALL_KEYWORD_LANGUAGES,
-                          CUSTOM_BABEL_LANGUAGES, CUSTOM_LANGUAGE_TRANSLATIONS, grammars_dir)
+                          CUSTOM_BABEL_LANGUAGES, CUSTOM_LANGUAGE_TRANSLATIONS)
+
+# Re-export here
+ALL_KEYWORDS = ALL_KEYWORDS
+MAX_LEVEL = MAX_LEVEL
 
 logger = logging.getLogger(__name__)
 

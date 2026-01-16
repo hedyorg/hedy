@@ -7,7 +7,6 @@ import time
 import functools
 import os
 from io import StringIO
-from os import path
 import re
 import string
 import random

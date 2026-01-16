@@ -13,7 +13,7 @@ import re
 from collections import namedtuple
 from .content import ALL_KEYWORD_LANGUAGES, MAX_LEVEL
 from .external import gettext
-from .lang_utils import atomic_write_file
+from .lang_utils import atomic_write_file, is_production
 from . import program_repair
 from . import exceptions
 from . import translation as hedy_translation
@@ -3640,7 +3640,7 @@ def _restore_parser_from_file_if_present(pickle_file):
     return None
 
 
-@lru_cache(maxsize=0 if lang_utils.is_production() else 100)
+@lru_cache(maxsize=0 if is_production() else 100)
 def get_parser(level, lang="en", keep_all_tokens=False, skip_faulty=False):
     """Return the Lark parser for a given level.
     Parser generation takes about 0.5 seconds depending on the level so

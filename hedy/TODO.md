@@ -1,2 +1,6 @@
-- [ ] `static_babel_content.json` needs to be updated periodically
-- [ ] Update Weblate to point components to new files/repository
+- [ ] Update Weblate to point components to new files
+- [ ] Update offline Python build to point to new data files
+
+WHEN WE EXTRACT
+- [ ] Update Weblate to point components to new repository
+- [ ] Extract doit.py scripts

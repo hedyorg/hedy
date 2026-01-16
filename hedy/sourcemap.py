@@ -189,8 +189,6 @@ class SourceMap:
             python_code_mapped.append(python_source_code.code)
 
     def get_grammar_rules(self):
-        script_dir = path.abspath(path.dirname(__file__))
-
         with open(path.join(grammars_dir(), "level1.lark"), "r", encoding="utf-8") as file:
             grammar_text = file.read()
 
