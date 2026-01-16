@@ -10,7 +10,8 @@ from utils import customize_babel_locale
 from hedy.yaml_file import YamlFile
 from hedy.safe_format import safe_format
 
-from hedy.content import (KEYWORDS, ALL_KEYWORDS, MAX_LEVEL, ALL_KEYWORD_LANGUAGES, CUSTOM_BABEL_LANGUAGES, CUSTOM_LANGUAGE_TRANSLATIONS, grammars_dir)
+from hedy.content import (KEYWORDS, ALL_KEYWORDS, MAX_LEVEL, ALL_KEYWORD_LANGUAGES,
+                          CUSTOM_BABEL_LANGUAGES, CUSTOM_LANGUAGE_TRANSLATIONS, grammars_dir)
 
 logger = logging.getLogger(__name__)
 
@@ -634,4 +635,3 @@ class Tags(StructuredDataFile):
 
     def has_tags(self):
         return True if self.file.get('tags') else False
-

@@ -41,7 +41,7 @@ from hedy.safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
 from website_content import (adventures_order_per_level, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
-                          ALL_LANGUAGES, COUNTRIES, FRIENDLY_SORTED_COUNTRIES, HOUR_OF_CODE_ADVENTURES)
+                             ALL_LANGUAGES, COUNTRIES, FRIENDLY_SORTED_COUNTRIES, HOUR_OF_CODE_ADVENTURES)
 
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents

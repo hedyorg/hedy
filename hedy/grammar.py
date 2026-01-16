@@ -272,6 +272,7 @@ def expand_keyword_not_followed_by_space(**kwargs):
 
 def get_translated_keyword(keyword, lang):
     print(keyword, lang)
+
     def get_keyword_value_from_lang(keyword_, lang_):
         keywords = hedy_translation.keywords_to_dict(lang_)
         if keyword_ in keywords:

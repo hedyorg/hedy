@@ -14,6 +14,7 @@ from hedy.safe_format import safe_format
 # as when it has been bundled using pyinstaller.
 data_root = path.join(path.dirname(__file__), 'data')
 
+
 def grammars_dir():
     """Returns the path to the grammars directory."""
     return path.join(data_root, 'grammars')
@@ -22,6 +23,7 @@ def grammars_dir():
 def total_grammars_dir():
     """Returns the path to the Total grammars directory."""
     return path.join(data_root, 'grammars-Total')
+
 
 MAX_LEVEL = 16
 

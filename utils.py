@@ -28,6 +28,7 @@ commonmark_renderer = commonmark.HtmlRenderer()
 
 IS_WINDOWS = os.name == 'nt'
 
+
 class Timer:
     """A quick and dirty timer."""
 
