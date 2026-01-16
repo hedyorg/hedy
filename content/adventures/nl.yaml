@@ -898,8 +898,10 @@ adventures:
                     persoon {is} {ask} 'Wie ben jij?'
                     goed_antwoord {is} Hoera! Jij wint!, Jij gaat zeker winnen!, We hebben een WINNAAR!
                     fout_antwoord {is} Helaas! probeer nog eens!, Een ander wint!, Verliezer!
-                    {if} persoon {in} vrienden {print} goed_antwoord {at} {random}
-                    {else} {print} fout_antwoord {at} {random}
+                    {if} persoon {in} vrienden
+                    {print} fout_antwoord {at} {random}
+                    {else}
+                    {print} goed_antwoord {at} {random}
                     ```
             7:
                 story_text: |

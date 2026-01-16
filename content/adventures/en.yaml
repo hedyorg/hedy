@@ -1547,16 +1547,14 @@ adventures:
                     good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
                     bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
                     {if} person {in} friends
-                    {print} good_answer {at} {random}
-                    {else}
                     {print} bad_answer {at} {random}
+                    {else}
+                    {print} good_answer {at} {random}
                     ```
             7:
                 story_text: |
                     In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
                     For example you could calculate how rich you'll get or how many kids you will have when you grow up.
-
-
 
                     ### Exercise
                     Can you think of your own (silly) fortune telling machine?
