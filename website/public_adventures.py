@@ -6,7 +6,7 @@ from website.flask_helpers import gettext_with_fallback as _
 import json
 import bs4
 
-import hedy.content as hedy_content
+import website_content as hedy_content
 import utils
 from website.auth import requires_teacher
 from website.flask_helpers import render_template

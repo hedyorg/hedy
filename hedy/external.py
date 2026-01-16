@@ -8,6 +8,7 @@ def configure_gettext(new_gettext_fn):
     gettext = new_gettext_fn
 
 
+# pylint: disable=function-redefined
 def gettext(x):
     """Translate the given input.
 
