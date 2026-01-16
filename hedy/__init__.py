@@ -1,3 +1,24 @@
+from .prefixes.normal import get_num_sys
+from .prefixes.music import present_in_notes_mapping
+from hedy.sourcemap import SourceMap, source_map_transformer
+from hedy.content import KEYWORDS
+import tempfile
+import pickle
+import os
+import hashlib
+import yaml
+from dataclasses import dataclass, field
+import regex
+import re
+from collections import namedtuple
+from .content import ALL_KEYWORD_LANGUAGES, MAX_LEVEL
+from .external import gettext
+from .lang_utils import atomic_write_file
+from . import program_repair
+from . import exceptions
+from . import translation as hedy_translation
+from . import grammar as hedy_grammar
+from . import error as hedy_error
 import textwrap
 from functools import lru_cache
 
@@ -10,32 +31,10 @@ import sys
 
 # This is so that all the 'hedy.exception' references below still work
 hedy = sys.modules[__name__]
-from . import error as hedy_error
-from . import grammar as hedy_grammar
-from . import translation as hedy_translation
-from . import exceptions
-from . import program_repair
-from .lang_utils import atomic_write_file
-from .external import gettext
 
-from .content import ALL_KEYWORD_LANGUAGES, MAX_LEVEL
-from collections import namedtuple
-import re
-import regex
-from dataclasses import dataclass, field
-import yaml
-import hashlib
-import os
-import pickle
-import sys
-import tempfile
 
 # Some useful constants
-from hedy.content import KEYWORDS
-from hedy.sourcemap import SourceMap, source_map_transformer
 
-from .prefixes.music import present_in_notes_mapping
-from .prefixes.normal import get_num_sys
 
 HEDY_MAX_LEVEL = MAX_LEVEL
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
