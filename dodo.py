@@ -170,7 +170,7 @@ def task_generate_static_babel_content():
         actions=[
             [python3, script],
         ],
-        targets=['static_babel_content.json'],
+        targets=['hedy/data/static_babel_content.json'],
         uptodate=[babel_version_unchanged],
     )
 
