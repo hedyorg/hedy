@@ -1,7 +1,7 @@
 from flask import g
 
 import hedy
-from hedy_content import KEYWORDS_ADVENTURES, adventures_order_per_level
+from website_content import KEYWORDS_ADVENTURES, adventures_order_per_level
 from website.auth import current_user
 from website.flask_hedy import g_db
 

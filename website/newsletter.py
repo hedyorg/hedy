@@ -6,7 +6,7 @@ import logging
 import threading
 from config import config
 from functools import wraps
-from hedy_content import COUNTRIES
+from website_content import COUNTRIES
 from website.auth import send_email
 
 logger = logging.getLogger(__name__)

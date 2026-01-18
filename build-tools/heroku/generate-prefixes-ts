@@ -2,7 +2,7 @@
 set -eu
 
 root=$(cd $(dirname $0)/../.. && pwd)
-python_prefix_src_dir=$root/prefixes
+python_prefix_src_dir=$root/hedy/prefixes
 python_prefix_ts=$root/static/js/pythonPrefixes.ts
 
 cat <<EOF > $python_prefix_ts

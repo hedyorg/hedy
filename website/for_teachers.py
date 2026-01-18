@@ -14,10 +14,10 @@ from website.flask_helpers import gettext_with_fallback as gettext
 import jinja_partials
 
 import hedy
-import hedy_content
+import website_content as hedy_content
 import hedyweb
 import utils
-from safe_format import safe_format
+from hedy.safe_format import safe_format
 from datetime import date
 
 from website.server_types import SortedAdventure
