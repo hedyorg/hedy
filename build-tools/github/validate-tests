@@ -17,13 +17,13 @@ fi
 
 
 # Snippets (>20 000 tests) can take a long time, so we have an option to skip them
-slow_suites=test_level,test_translation_level,test_snippets
+slow_suites="hedy_tests/test_level hedy_tests/test_translation_level tests/test_snippets"
 workers=${WORKERS:-4}
 
 # This is expected to run from the repo root
-eval python -m pytest -n $workers --ignore=tests/{$slow_suites} "$@"
+eval python -m pytest -n $workers --ignore="$slow_suites" "$@"
 
 if $all; then
   # Add in the slow suites
-  eval python -m pytest -n $workers --tb=no tests/{$slow_suites} "$@"
+  eval python -m pytest -n $workers --tb=no "$slow_suites" "$@"
 fi
