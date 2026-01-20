@@ -171,11 +171,11 @@ adventures:
                     ```
             11:
                 story_text: |
-                    在这一级，你可以在你的故事里使用 {for} 命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。
+                    在这一关，你可以在你的故事里使用 `{for}`命令。这样很容易就能写出儿童书里的“棕熊，棕熊，你看到了什么”的故事。
 
                      ### 练习
 
-                    请看<a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> 如果你不知道这个故事，请确保它是按照书中的内容打印的。
+                    请看<a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> 故事</a> 。如果你不知道这个故事，请确保它是按照书中的内容打印的。
                 example_code: "```\n动物们 = _ , _ , _ \n{print} '棕熊，棕熊 '\n{print} '你看到了什么？'\n```\n"
             16:
                 story_text: |
@@ -191,7 +191,7 @@ adventures:
                     {print} '你想去哪里找它们？'
                     {print} '你可以选择：树、花坛、石头、邮筒'
                     {while} 钥匙 == '丢失'
-                        位置 = {ask} '你想去哪里找？'
+                        位置 = {input} '你想去哪里找？'
                         {if} 位置 == '花坛'
                             {print} '它们在这里！'
                             钥匙 = '找到'
@@ -225,7 +225,7 @@ adventures:
         levels:
             3:
                 story_text: |
-                    ## 添加到
+                    ## {add}{to_list} 添加到列表
                     可以使用`{add} {to_list}`命令将项目添加到列表中。要将项目添加到列表中，可以简单地键入：`{add} penguin {to_list} animals`，或者可以像示例代码中那样使用`{ask}`命令。
                 example_code: |
                     ```
@@ -235,7 +235,7 @@ adventures:
                     {print} 我选择 动物 {at} {random}
                     ```
                 story_text_2: |
-                    ## 从...移除
+                    ## {remove}{from} 从...移除
                     如果你可以将项目添加到列表中，当然你也可以将其删除。可以使用 `{remove} {from}` 指令.
                 example_code_2: |
                     ```
@@ -255,8 +255,8 @@ adventures:
         levels:
             1:
                 story_text: |
-                    ## 提问命令
-                    现在你可以用 `{print}`来命令, 你准备好学习新指令: `{ask}`. 用 `{ask}` 来指令, 你可以提一个问题. 试试吧:
+                    ## `{ask}` 提问命令
+                    现在你可以使用 `{print}`命令，你已准备好学习新命令：`{ask}`。用 `{ask}` 来命令，你可以提一个问题。试试吧：
                 example_code: |
                     ```
                     {print} 你好!
@@ -282,7 +282,7 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ## 询问指令
+                    ## `{ask}`提问命令
                     现在我们可以在代码中使用**变量**，我们可以不再使用`{echo}`命令。
                     我们可以使用变量来保存问题的答案，这样我们就可以在代码中使用多个问题的答案。
                     一探究竟：
@@ -298,7 +298,7 @@ adventures:
                 story_text_2: |
                     ### 练习
                     在之前的冒险中，您练习了使用 `{is}` 命令设置变量。
-                    您至少创建了 3 个变量，并使用了 print 命令。
+                    您至少创建了 3 个变量，并使用了 `{print}` 命令。
                     现在，我们希望您让变量具有交互性，而不是设置变量，就像我们在示例中所做的那样。
 
                     从之前的冒险中复制您的代码，并使用 `{ask}` 命令让变量具有交互性。
@@ -455,6 +455,7 @@ adventures:
                     {clear}
                     {print} '惊喜!'
                     ```
+        name: '{clear} 清除'
     debugging:
         name: 调试
         default_save_name: 调试
@@ -2583,7 +2584,7 @@ adventures:
                     ### 练习
                     完成代码。每次随机选择一个字母，你必须按下。按对得一分，按错扣两分。
                     **额外**在每个字母之后清除屏幕，并显示用户他们得了多少分。
-                example_code: "```\n积分 = 0\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
+                example_code: "```\n积分 = 0\n字母 = a, b, c, d, e\n{repeat} 10{times}\n    单字母 = _ _ _ \n    {print} '按下字母' 单字母\n    {if} 字母 {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         description: 介绍print命令
         levels:
@@ -2740,7 +2741,7 @@ adventures:
                         {print} friends[i] '的幸运号码是' lucky_numbers[i]
                     ```
                 story_text_2: |-
-                    现在您已经学会了在列表中使用括号，您也可以开始以Python的方式使用`{at}{random}`命令了!
+                    现在您已经学会了在列表中使用括号，您也可以开始以Python的方式使用{at}{random}命令了!
                     你只需键入你的名单的名称后面加上`[random]`!
                 example_code_2: |-
                     ```
@@ -3010,11 +3011,11 @@ adventures:
                     {print} '好！'
                     价格 = 0
                     {repeat} 人数 {times}
-                        食物 = {ask} '您想点什么？'
+                        食物 = {ask} '你想点什么？'
                         {print} 食物
                         {if} 食物 {is} 薯条
                             价格 = 价格 + 3
-                            蘸酱= {ask} '您的薯条要配什么酱？'
+                            蘸酱= {ask} '你的薯条要配什么酱？'
                             {if} 蘸酱 {is} 不要
                                 {print} '不要酱'
                             {else}
@@ -3023,7 +3024,7 @@ adventures:
                         {if} 食物 {is} 披萨
                             价格 = 价格 + 4
                     {print} '一共' 价格 '元'
-                    {print} '祝您用餐愉快！'
+                    {print} '祝你用餐愉快！'
                     ```
                 story_text_2: |
                     在这一关，你将学习新的指令，让你的代码继续扩展。
@@ -3318,7 +3319,7 @@ adventures:
                     {sleep}
                     ```
             8:
-                story_text: "歌曲经常包含大量的重复。例如...小鲨鱼!如果你唱这首歌，其实你就是一直在唱同一句歌词：\n\n小鲨鱼图图图杜杜\n小鲨鱼图图图杜杜\n小鲨鱼图图图杜杜\n小鲨鱼\n\n### 练习 \n你可以用`{repeat}` 来打印歌曲《小鲨鱼》吗？ 完成代码替换空白处。 \n**另外** 在《小鲨鱼》之后，你当然还可以为其他歌曲编程。很多歌曲都有重复的句子！\n你能再想出一首歌曲并打印出来吗？\n"
+                story_text: "歌曲经常包含大量的重复。例如...小鲨鱼!如果你唱这首歌，其实你就是一直在唱同一句歌词：\n\n小鲨鱼图图图杜杜 <br>\n小鲨鱼图图图杜杜 <br>\n小鲨鱼图图图杜杜 <br>\n小鲨鱼\n\n### 练习 \n你可以用`{repeat}` 来打印歌曲《小鲨鱼》吗？ 完成代码替换空白处。 \n**另外** 在《小鲨鱼》之后，你当然还可以为其他歌曲编程。很多歌曲都有重复的句子！\n你能再想出一首歌曲并打印出来吗？\n"
                 example_code: |
                     ```
                     {repeat} _ _{print} '小鲨鱼图图图杜杜'
@@ -3969,7 +3970,7 @@ adventures:
                     星星 <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
                 example_code_3: |
                     星星
-                    星星通常是用144度旋转来画的。例如，如果您将其稍微更改为143度，并使用`{while}`循环重复该模式多次，则可以得到此图。
+                    星星通常是用144度旋转来画的。例如，如果你将其稍微更改为143度，并使用{while}循环重复该模式多次，则可以得到此图。
     while_command:
         default_save_name: while_命令
         levels:
