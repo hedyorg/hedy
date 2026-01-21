@@ -294,6 +294,7 @@ class HedyTester(unittest.TestCase):
 
         all_args = locals()
         del all_args["self"]
+        del all_args["extra_check_function"]
         try:
             # we use pickle instead of hash for consistency across test-runs
             # see PYTHONHASHSEED
