@@ -1680,7 +1680,6 @@ def get_cheatsheet_page(level):
 def not_found(exception):
     return utils.error_page(error=404, ui_message=gettext('page_not_found'))
 
-
 def internal_error(exception):
     import traceback
     logger.error(traceback.format_exc())
