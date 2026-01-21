@@ -364,7 +364,7 @@ def error_page(
         else exception
     )
     original_exception = (
-        "".join(traceback.format_exception(original_exception))
+        "".join(traceback.TracebackException.from_exception(original_exception, capture_locals=True).format())
         if original_exception
         else None
     )
