@@ -67,10 +67,20 @@ htmx.on('htmx:responseError', (ev) => {
     const event = ev as CustomEvent<HtmxEvent>;
     const xhr: XMLHttpRequest = event.detail.xhr;
     const genericError = event.detail.error;
-    const jsonResponse = JSON.parse(xhr.response)
-    const error_text = jsonResponse.error ? jsonResponse.error : genericError
-    console.log(jsonResponse.exception);
-    modal.notifyError(error_text.length < 1000 ? error_text : genericError);
+    try {
+        const jsonResponse = JSON.parse(xhr.response)
+        const message = jsonResponse?.message ?? genericError
+        const stack_trace = jsonResponse?.stack_trace ?? "";
+        console.log(jsonResponse);
+        console.error('======================================');
+        console.error('There was a server error, please report to the maintainers at hello@hedy.org');
+        console.error(stack_trace);
+        console.error('======================================');
+        modal.notifyError(message.length < 1000 ? message : genericError);
+    } catch (e) {
+        modal.notifyError(genericError);
+        return;
+    }
 });
 
 htmx.on('htmx:sendError', () => {

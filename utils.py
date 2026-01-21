@@ -364,13 +364,7 @@ def error_page(
         else exception
     )
     original_exception = (
-        "".join(
-            traceback.format_exception(
-                type(original_exception),
-                original_exception,
-                original_exception.__traceback__,
-            )
-        )
+        "".join(traceback.format_exception(original_exception))
         if original_exception
         else None
     )
@@ -381,8 +375,8 @@ def error_page(
             return make_response(
                 {
                     "code": error,
-                    "error": f"{default} {exception}",
-                    "exception": original_exception,
+                    "message": default,
+                    "stack_trace": original_exception,
                 },
                 error,
             )
@@ -395,8 +389,8 @@ def error_page(
         return make_response(
             {
                 "code": error,
-                "error": default,
-                "exception": original_exception,
+                "message": default,
+                "stack_trace": original_exception,
             },
             error,
         )
@@ -409,7 +403,7 @@ def error_page(
             iframe=iframe,
             page_error=page_error or ui_message or default or "",
             default=default,
-            exception=original_exception,
+            stack_trace=original_exception,
         ),
         error,
     )

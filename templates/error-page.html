@@ -13,6 +13,9 @@
       </button>
   </div>
   <script>
-        console.log('{{ exception | tojson | safe }}');
+        console.error('======================================');
+        console.error('  Server Error (please include when reporting a problem)');
+        console.error('{{ stack_trace | tojson | safe }}');
+        console.error('======================================');
   </script>
 {% endblock %}
