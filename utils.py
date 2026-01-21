@@ -364,7 +364,11 @@ def error_page(
         else exception
     )
     original_exception = (
-        "".join(traceback.TracebackException.from_exception(original_exception, capture_locals=True).format())
+        "".join(
+            traceback.TracebackException.from_exception(
+                original_exception, capture_locals=True
+            ).format()
+        )
         if original_exception
         else None
     )
@@ -372,7 +376,7 @@ def error_page(
     hx_request = bool(request.headers.get("Hx-Request"))
     if hx_request:
         # Return a json response, so we have access to the exception in the frontend
-            return make_response(
+        return make_response(
                 {
                     "code": error,
                     "message": default,
