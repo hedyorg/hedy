@@ -366,7 +366,7 @@ def error_page(
     original_exception = (
         "".join(
             traceback.TracebackException.from_exception(
-                original_exception, capture_locals=True
+                original_exception, capture_locals=False
             ).format()
         )
         if original_exception
