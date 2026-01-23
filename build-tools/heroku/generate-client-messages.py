@@ -35,7 +35,8 @@ ADDITIONAL_GETTEXT_KEYS = [
     'number_of_errors',
     'successful_runs',
     'invitations_sent',
-    'invite'
+    'invite',
+    'program_size_too_long',
 ]
 
 

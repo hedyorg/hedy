@@ -90,7 +90,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             (tr: Transaction) => {
                 if (!tr.docChanged) return tr;
                 
-                let error_message = "Your program can not be longer than {amount_lines} lines!";
+                let error_message = ClientMessages["program_size_too_long"];
                 error_message = error_message.replace("{amount_lines}", String(100));
                 const nextLineCount = tr.newDoc.lines;
 
