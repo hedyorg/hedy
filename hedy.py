@@ -1849,12 +1849,12 @@ class ConvertToPython_1(ConvertToPython):
 
     def print(self, meta, args):
         argument = process_characters_needing_escape(self.unpack(args[0]))
-        argument, has_answer = self.interpolate_answer(argument)
+        argument = self.interpolate_answer(argument)
         return f"print(f'{argument}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(self.unpack(args[0]))
-        argument, has_interpolation = self.interpolate_answer(argument)
+        argument = self.interpolate_answer(argument)
         return f"answer = input(f'{argument}'){self.add_debug_breakpoint()}"
 
     @staticmethod
