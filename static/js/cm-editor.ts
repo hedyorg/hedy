@@ -380,11 +380,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             const transaction = this.view.state.update({
                 effects: StateEffect.appendConfig.of(EditorView.updateListener.of((v: ViewUpdate) => {
                     if (v.docChanged) {
-                        console.log(this.view.state.facet(level))
-                        console.log("Setting up change handler");
-                        const parser = PARSER_FACTORIES[this.view.state.facet(level)]('en');
-                        console.log(this.view.state.doc.toString());
-                        console.log(parser.parse(this.view.state.doc.toString()).toString());
                         handler();
                     }
                 }))

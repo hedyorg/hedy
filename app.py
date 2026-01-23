@@ -189,6 +189,8 @@ def create_app(for_testing=False):
     app_obj.register_blueprint(public_adventures.PublicAdventuresModule(db))
     app_obj.register_blueprint(surveys.SurveysModule(db))
     app_obj.register_blueprint(feedback.FeedbackModule(db))
+    app_obj.register_error_handler(404, not_found)
+    app_obj.register_error_handler(500, internal_error)
 
     return app_obj
 
@@ -1675,15 +1677,13 @@ def get_cheatsheet_page(level):
     return render_template("printable/cheatsheet.html", commands=commands, level=level)
 
 
-@app.errorhandler(404)
 def not_found(exception):
     return utils.error_page(error=404, ui_message=gettext('page_not_found'))
 
 
-@app.errorhandler(500)
 def internal_error(exception):
     import traceback
-    print(traceback.format_exc())
+    logger.error(traceback.format_exc())
     return utils.error_page(error=500, exception=exception)
 
 
