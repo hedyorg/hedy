@@ -649,7 +649,8 @@ def parse():
             if transpile_result.has_sleep:
                 response['has_sleep'] = True
 
-            response['variables'] = transpile_result.roles_of_variables
+            # This is a dictionary with gettext keywords
+            response['variables'] = translate_variable_roles(transpile_result.roles_of_variables)
         except Exception:
             pass
 
@@ -2302,6 +2303,33 @@ def public_user_page(username):
         )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
 
+
+def translate_variable_roles(roles):
+    """Translate variable roles using gettext().
+
+    This function is rather silly: we need the string `gettext('xyz')` to
+    appear in the source code literally, for gettext to find the keys that
+    it needs to translate. So we do something that looks dumb, but it's this
+    way for a reason.
+    """
+    ret = {}
+    for var_name, role_key in roles.items():
+        if role_key == 'walker_variable_role':
+            ret[var_name] = gettext('walker_variable_role')
+        elif role_key == 'stepper_variable_role':
+            ret[var_name] = gettext('stepper_variable_role')
+        elif role_key == 'list_variable_role':
+            ret[var_name] = gettext('list_variable_role')
+        elif role_key == 'input_variable_role':
+            ret[var_name] = gettext('input_variable_role')
+        elif role_key == 'constant_variable_role':
+            ret[var_name] = gettext('constant_variable_role')
+        elif role_key == 'unknown_variable_role':
+            ret[var_name] = gettext('unknown_variable_role')
+        else:
+            ret[var_name] = role_key  # unknown key, return as-is
+
+    return ret
 
 def valid_invite_code(code):
     if not code:

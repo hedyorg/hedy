@@ -12,7 +12,6 @@ import regex
 import re
 from collections import namedtuple
 from .content import ALL_KEYWORD_LANGUAGES, MAX_LEVEL
-from .external import gettext
 from .lang_utils import atomic_write_file, is_production
 from . import program_repair
 from . import exceptions
@@ -183,20 +182,6 @@ def make_values_error(command, tip, lang):
 def make_error_text(ex, lang):
     # The error text is transpiled in f-strings with ", ' and ''' quotes. The only option is to use """.
     return f'"""{hedy_error.get_error_text(ex, lang)}"""'
-
-
-def translate_suggestion(suggestion_type):
-    # Right now we only have three types of suggestion
-    # In the future we might change this if the number increases
-    if suggestion_type == 'number':
-        return gettext('suggestion_number')
-    elif suggestion_type == 'color':
-        return gettext('suggestion_color')
-    elif suggestion_type == 'note':
-        return gettext('suggestion_note')
-    elif suggestion_type == 'numbers_or_strings':
-        return gettext('suggestion_numbers_or_strings')
-    return ''
 
 
 class Command:
@@ -4188,18 +4173,18 @@ def determine_roles(lookup, input_string, level, lang):
         assignments = [x for x in lookup.get_all() if x.name == var]
 
         if assignments[0].tree.data == 'for_list':
-            roles_dictionary[var] = gettext('walker_variable_role')
+            roles_dictionary[var] = 'walker_variable_role'
         elif assignments[0].tree.data == 'for_loop':
-            roles_dictionary[var] = gettext('stepper_variable_role')
+            roles_dictionary[var] = 'stepper_variable_role'
         elif assignments[0].type_ == 'list':
-            roles_dictionary[var] = gettext('list_variable_role')
+            roles_dictionary[var] = 'list_variable_role'
         elif len(assignments) == 1:
             if assignments[0].type_ == 'input':
-                roles_dictionary[var] = gettext('input_variable_role')
+                roles_dictionary[var] = 'input_variable_role'
             else:
-                roles_dictionary[var] = gettext('constant_variable_role')
+                roles_dictionary[var] = 'constant_variable_role'
         else:
-            roles_dictionary[var] = gettext('unknown_variable_role')
+            roles_dictionary[var] = 'unknown_variable_role'
 
     return roles_dictionary
 
