@@ -1849,7 +1849,12 @@ class ConvertToPython_1(ConvertToPython):
 
     def print(self, meta, args):
         argument = process_characters_needing_escape(self.unpack(args[0]))
-        return f"print('{argument}'){self.add_debug_breakpoint()}"
+        answer = 'answer' # todo: replace hardcoded string with keyword from lookup for translation
+        has_answer = False
+        if answer in argument:
+            has_answer = True
+            argument = argument.replace(answer, '{locals().get(\'answer\') or \'answer\'}')
+        return f"print({'f' if has_answer else ''}'{argument}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(self.unpack(args[0]))
