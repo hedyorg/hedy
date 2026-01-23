@@ -1849,18 +1849,24 @@ class ConvertToPython_1(ConvertToPython):
 
     def print(self, meta, args):
         argument = process_characters_needing_escape(self.unpack(args[0]))
-        answer = 'answer' # todo: replace hardcoded string with keyword from lookup for translation
-        has_answer = False
-        if answer in argument:
-            has_answer = True
-            argument = argument.replace(answer, '{locals().get(\'answer\') or \'answer\'}')
+        argument, has_answer = self.interpolate_answer(argument)
         return f"print({'f' if has_answer else ''}'{argument}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(self.unpack(args[0]))
-        return f"answer = input('{argument}'){self.add_debug_breakpoint()}"
+        argument, has_interpolation = self.interpolate_answer(argument)
+        return f"answer = input({'f' if has_interpolation else ''}'{argument}'){self.add_debug_breakpoint()}"
 
-    def echo(self, meta, args):
+    @staticmethod
+    def interpolate_answer(argument) -> tuple[str, bool]:
+        answer_keyword = 'answer'  # todo: replace hardcoded string with keyword from lookup for translation
+        has_answer = answer_keyword in argument
+        if has_answer:
+            has_answer = True
+            argument = argument.replace(answer_keyword, f'{{locals().get(\'answer\') or \'{answer_keyword}\'}}')
+        return argument, has_answer
+
+    def echo(self, meta, args): # todo: keep for backwards compatibility, maybe remove later?
         if not args:
             return f"print(answer){self.add_debug_breakpoint()}"  # no arguments, just print answer
 

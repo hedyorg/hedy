@@ -172,7 +172,7 @@ class TestsLevel1(HedyTester):
 
     def test_print_with_answer_nl(self):
         code = "ask Hoe heet je?\nprint Jouw naam is antwoord"
-        expected = "answer = input('Hoe heet je?')\nprint(f'Jouw naam is {locals().get('answer') or 'answer'}')"
+        expected = "answer = input('Hoe heet je?')\nprint(f'Jouw naam is {locals().get('answer') or 'antwoord'}')"
 
         self.single_level_tester(code=code, expected=expected)
 
