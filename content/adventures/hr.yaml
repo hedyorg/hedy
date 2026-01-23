@@ -10,7 +10,7 @@ adventures:
                 story_text_2: "###  vežba\nSada je vreme da dodamo promenljive u vašu priču koje ste napravili u prehodnom levelu.\nIdite u \"Moji programi\", potražite vaš level 1 avanturu priče i kopirajte kod. Nalepite kod u vaš input ekran u ovom levelu.\n\nOvaj kod neće raditi u ovom levelu, sada što niste koristili promenljive.\nPromenite `{ask}` komende i `{echo}` komende u vašem kodu u ispravnu formu koju ste naučili u ovom levelu.\n\n**dodatno** dodajte `{sleep}` komandu u vaš kod da stvorite tenziju u vašoj priči.\n"
                 example_code: "\"\"\"\nime {is}{ask} Koje je ime glavnog lika?\n{print} ime će sada trčati u šumu\n{print} ime je malo uplašeno\n{print} iznenada čuje čudnu buku...\n{sleep}\n{print} ime je uplašeno da je ovo opsednuta šuma\n\"\"\""
             3:
-                story_text_3: "Ovo je primer `{remove}` komande u vašoj priči\n\n### vežba\nkopirajte vašu priču sa prethodnih levela u ovaj level\nu ovom levelu ste naučili 3 nove komande `{at} {random}`{random}``{add} {to_list}` i {from}`{remove} {from}`\ndodajte nove linije koda u vašu priču, da su sve komande iskorišćenje bar jednom u vašoj priči.\n"
+                story_text_3: "Ovo je primjer `{ukloni}` naredbe u vašoj priči\n\n### Vježba\nKopirajte vašu priču sa prethodnih levela u ovaj level.\nU ovom levelu ste naučili 3 nove naredbe `{nasumice}`,`{dodaj} {na_listu}` i {ukloni} {iz}`.\nDodajte nove linije koda u vašu priču, tako da su sve komande iskorištene bar jednom u vašoj priči.\n"
                 example_code: "\"\"\"\nživotinje{is}🦔, 🐿, 🦉, 🦇\n{print} sada čuju zvuk životinja {at}{random}\n\"\"\"\n"
                 story_text_2: "komanda `{add}` takođe može biti korisna u vašoj priči.\n"
                 story_text: "U levelu 3 možete napraviti vašu priču zabavnijom. Možete koristiti nasumičnost za bilo koje čudovište, životinju ili drugu prepreku, kao ovo:\n"
@@ -23,4 +23,4 @@ adventures:
                 story_text: "U ovom levelu možeš programirati različite završetke, koji će napraviti vašu poriču zabavnijom.\nU ovom primernom kodu možeš videti kako da napraviš 2 različita završetka.\n\n### vežba 1\nnapiši novu kratku priču najmnje 6 linija koda po tvom izboru.\nnemaš inspiraciju? izaberi jednu od ovih: superheroj, dosadan školski dan, apušten na pustom ostrvu.\n\nsada daj igraču promenu da izabere srećan ili loš kraj, kao u primernom kodu.\nprogramiraj oba završetka\n\n### vežba 2\nkopiraj priču koju si napravio u tvojoj avanturi priče u prethodnim levelima\npronadji način da dodaš najmanje 2`{if}` i`{else}` komande tvojoj priči.\novo može biti sa srećnim ili lošim krajem, ali takođe možeš pokušati da nadješ druge načine da ubaciš komande.\n"
         name: priča
         default_save_name: priča
-        description: priča
+        description: Napravi kratku priču
