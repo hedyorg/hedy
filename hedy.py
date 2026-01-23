@@ -1859,7 +1859,8 @@ class ConvertToPython_1(ConvertToPython):
 
     @staticmethod
     def interpolate_answer(argument) -> str:
-        answer_keyword = 'answer'  # todo: replace hardcoded string with keyword from lookup for translation
+        answer_keyword = gettext('answer')
+        # todo: replace hardcoded string with keyword from lookup for translation
         if answer_keyword in argument:
             argument = argument.replace(answer_keyword, f'{{locals().get(\'answer\') or \'{answer_keyword}\'}}')
         return argument
