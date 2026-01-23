@@ -89,12 +89,15 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         let lineLimitFilter = EditorState.transactionFilter.of(
             (tr: Transaction) => {
                 if (!tr.docChanged) return tr;
+
+                const maxLineLength = this.getMaxLineLengthForLevel(theLevel);
+                const error_message = ClientMessages["program_size_too_long"].replace(
+                    "{amount_lines}", String(maxLineLength)
+                );
                 
-                let error_message = ClientMessages["program_size_too_long"];
-                error_message = error_message.replace("{amount_lines}", String(100));
                 const nextLineCount = tr.newDoc.lines;
 
-                if (nextLineCount > 100) {
+                if (nextLineCount > maxLineLength) {
                     error.showWarning(error_message);
                     return []; // cancel transaction
                 }
@@ -299,6 +302,18 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     */
     public get contents(): string {
         return this.view.state.doc.toString();
+    }
+
+    /**
+     * @param level 
+     * @returns the maximum line length for the given level
+     */
+    getMaxLineLengthForLevel(level: number): number {
+        if (level >= 9) {
+            return 200;
+        } else {
+            return 100;
+        }
     }
 
     /**
