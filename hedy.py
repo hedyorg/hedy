@@ -1857,9 +1857,8 @@ class ConvertToPython_1(ConvertToPython):
         argument = self.interpolate_answer(argument)
         return f"answer = input(f'{argument}'){self.add_debug_breakpoint()}"
 
-    @staticmethod
-    def interpolate_answer(argument) -> str:
-        answer_keyword = gettext('answer')
+    def interpolate_answer(self, argument) -> str:
+        answer_keyword = hedy_translation.translate_keyword_from_en('answer', self.language)
         # todo: replace hardcoded string with keyword from lookup for translation
         if answer_keyword in argument:
             argument = argument.replace(answer_keyword, f'{{locals().get(\'answer\') or \'{answer_keyword}\'}}')
