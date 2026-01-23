@@ -1859,7 +1859,6 @@ class ConvertToPython_1(ConvertToPython):
 
     def interpolate_answer(self, argument) -> str:
         answer_keyword = hedy_translation.translate_keyword_from_en('answer', self.language)
-        # todo: replace hardcoded string with keyword from lookup for translation
         if answer_keyword in argument:
             argument = argument.replace(answer_keyword, f'{{locals().get(\'answer\') or \'{answer_keyword}\'}}')
         return argument
