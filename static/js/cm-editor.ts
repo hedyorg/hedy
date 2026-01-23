@@ -3,7 +3,7 @@ import {
     EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
     highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers
 } from '@codemirror/view'
-import { EditorState, Compartment, StateEffect, Prec, Extension, Facet } from '@codemirror/state'
+import { EditorState, Compartment, StateEffect, Prec, Extension, Facet, Transaction } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
@@ -26,6 +26,7 @@ import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
 import { Tag, styleTags, tags as t } from "@lezer/highlight";
+import { ClientMessages } from "./client-messages";
 
 
 // CodeMirror requires # of indentation to be in spaces.
@@ -84,6 +85,24 @@ export class HedyCodeMirrorEditor implements HedyEditor {
 
     constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, __: string = "ltr") {
         let state: EditorState;
+
+        let lineLimitFilter = EditorState.transactionFilter.of(
+            (tr: Transaction) => {
+                if (!tr.docChanged) return tr;
+                
+                let error_message = "Your program can not be longer than {amount_lines} lines!";
+                error_message = error_message.replace("{amount_lines}", String(100));
+                const nextLineCount = tr.newDoc.lines;
+
+                if (nextLineCount > 100) {
+                    error.showWarning(error_message);
+                    return []; // cancel transaction
+                }
+
+                return tr;
+            }
+        );
+
         if (editorType === EditorType.MAIN) {
 
             const mainEditorStyling = EditorView.theme({
@@ -114,6 +133,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             state = EditorState.create({
                 doc: '',
                 extensions: [
+                    lineLimitFilter,
                     mainEditorStyling,
                     breakpointGutter,
                     lineNumbers(),
@@ -155,6 +175,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             }
             // base set of extensions for every type of read-only editor
             let extensions: Extension[] = [
+                lineLimitFilter,
                 highlightSpecialChars(),
                 drawSelection(),
                 syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
