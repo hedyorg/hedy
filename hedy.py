@@ -1863,7 +1863,7 @@ class ConvertToPython_1(ConvertToPython):
             argument = argument.replace(answer_keyword, f'{{locals().get(\'answer\') or \'{answer_keyword}\'}}')
         return argument
 
-    def echo(self, meta, args): # todo: keep for backwards compatibility, maybe remove later?
+    def echo(self, meta, args):  # todo: keep for backwards compatibility, maybe remove later?
         if not args:
             return f"print(answer){self.add_debug_breakpoint()}"  # no arguments, just print answer
 
