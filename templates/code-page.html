@@ -5,7 +5,7 @@
     {% if raw %}
         {% if get_syntax_language(g.lang) != "en" and (not customizations or 'hide_keyword_switcher' not in customizations['other_settings']) %}
         <div class="flex justify-end mb-4">
-            {{ render_partial('htmx-language-switch-button.html', lang_switch_table=lang_switch_table) }}
+            {{ render_partial('hedy-page/htmx-language-switch-button.html', lang_switch_table=lang_switch_table) }}
         </div>
         {% endif %}
     {% else %}
