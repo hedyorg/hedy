@@ -22,6 +22,8 @@ class TestQueryLog(unittest.TestCase):
         self.assertEqual(self.records[0]['bloem'], 'rood')
 
     def test_emergency_recovery(self):
+        querylog.LOG_QUEUE.clear()
+
         querylog.begin_global_log_record(banaan='geel')
         querylog.log_value(bloem='rood')
 

@@ -103,7 +103,7 @@ class YamlSnippet:
 class SkippedMapping:
     """ Class used to test if a certain source mapping contains an exception type """
 
-    def __init__(self, source_range: SourceRange, exception_type: type(Exception)):
+    def __init__(self, source_range: SourceRange, exception_type: type[Exception]):
         self.source_range = source_range
         self.exception_type = exception_type
 
@@ -294,6 +294,7 @@ class HedyTester(unittest.TestCase):
 
         all_args = locals()
         del all_args["self"]
+        del all_args["extra_check_function"]
         try:
             # we use pickle instead of hash for consistency across test-runs
             # see PYTHONHASHSEED
