@@ -157,6 +157,19 @@ class TestsLevel1(HedyTester):
 
         self.single_level_tester(code=code, expected=expected)
 
+    def test_print_with_answer(self):
+        code = "ask What's your name?\nprint Your name is answer"
+        expected = "answer = input('What's your name?')\nprint(f'Your name is {answer or \"answer\"}')"
+
+        self.single_level_tester(code=code, expected=expected)
+
+    def test_print_with_answer_without_ask(self):
+        code = "print Your name is answer"
+        expected = "print(f'Your name is {answer or \"answer\"}')"
+        output = "Your name is answer"
+
+        self.single_level_tester(code=code, expected=expected, output=output)
+
     def test_print_nl(self):
         code = "print Hallo welkom bij Hedy!"
         expected = "print('Hallo welkom bij Hedy!')"
