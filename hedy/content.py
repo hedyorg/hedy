@@ -7,7 +7,6 @@ from hedy.yaml_file import YamlFile
 # as when it has been bundled using pyinstaller.
 data_root = path.join(path.dirname(__file__), 'data')
 
-
 def grammars_dir():
     """Returns the path to the grammars directory."""
     return path.join(data_root, 'grammars')

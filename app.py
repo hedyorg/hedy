@@ -75,8 +75,7 @@ if (sys.version_info.major < 3 or sys.version_info.minor < 7):
 
 
 # Set the current directory to the root Hedy folder
-os.chdir(os.path.join(os.getcwd(), __file__.replace(
-    os.path.basename(__file__), '')))
+os.chdir(os.path.dirname(__file__))
 
 
 COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
