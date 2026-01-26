@@ -2330,7 +2330,6 @@ def translate_variable_roles(roles):
 
     return ret
 
-
 def valid_invite_code(code):
     if not code:
         return False

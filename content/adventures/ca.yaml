@@ -465,7 +465,7 @@ adventures:
                 answer_code: "```\n{print} \"Benvinguda a Manicures i Pedicures per Hedy\"\nparts_del_cos = {ask} \"Avui et fas les ungles de les mans o dels peus? O totes dues?\"\n{if} parts_del_cos {is} \"totes dues\"\npreu = 25\n{else}\npreu = 18\n{print} \"Seran \" preu \" euros\"\ncolor = {ask} \"Quin color vols?\"\nbrillants = {ask} \"Vols brillants? Cobrem 3 euros extres per això.\"\n{if} brillants {is} \"sí\"\npreu = preu + 3\n{else} \n{print} \"Així que sense càrrec extra\"\n{repeat} 3 {times} {print} \"Un segon més...\"\n{print} \"Tot llest! Seran \" preu \" euros, si us plau!\"\n{print} \"Gràcies! Adéu!\"\n```"
             9:
                 story_text: "### Exercici\nDepura aquest codi. Bona sort!"
-                example_code: "**Avís! Aquest codi necessita depuració!**\n```\nresposta = \"Benvingut a la nostra pizzeria. Vols fer una comanda?\"\nif resposta\nquantitat \"Quantes pizzes vols comprar?\"\nelse\nprint \"En compres una igualment!\"\nquantitat = 1\n\"Tenim pizzes Margherita i Pepperoni.\"\nrepeat quantitat\npizza_escollida = ask \"Quin tipus de pizza vols?\"\nprint \"Una \" pizza_escollida \".\"\npreu = quantitat * 10\n\"Seran \" preu \" euros, si us plau.\"\n```\n"
+                example_code: "**Avís! Aquest codi necessita depuració!**\n```\nresposta = \"Benvingut a la nostra pizzería. Vols fer una comanda?\"\nsi resposta\nquantitat \"Quantes pizzes vols comprar?\"\naltrament\nprint \"En compres una igualment!\"\nquantitat = 1\n\"Tenim pizzes Margherita i Pepperoni.\"\nrepeteix quantitat\npizza_escollida = ask \"Quin tipus de pizza vols?\"\nprint \"Una \" pizza_escollida \".\"\npreu = quantitat * 10\n\"Seran \" preu \" euros, si us plau.\"\n```\n"
                 answer_code: "```\nresposta = ask \"Benvingut a la nostra pizzeria. Vols fer una comanda?\"\nif resposta is sí\n    quantitat = ask \"Quantes pizzes vols comprar?\"\nelse\n    print \"En compres una igualment!\"\n    quantitat = 1\nprint \"Tenim pizzes Margherita i Pepperoni.\"\nrepeat quantitat times\n    pizza_escollida = ask \"Quin tipus de pizza vols?\"\n    print \"Una \" pizza_escollida \".\"\npreu = quantitat * 10\nprint \"Seran \" preu \" euros, si us plau.\"\n```\n"
             10:
                 story_text: "### Exercici\nDepura aquest codi. Bona sort!"
@@ -802,7 +802,7 @@ adventures:
                     tirada = opcions {at} {random}
                     {print} "Has tirat " tirada
                     {if} tirada {is} cuc
-                    punts = punts + 5
+                     punts = punts+ 5
                     {else}
                     punts = punts + tirada
                     {print} "Això són " punts " punts "
@@ -827,7 +827,7 @@ adventures:
                     Canvia els noms pels noms dels teus amics o familiars i completa el codi.
                 example_code: |
                     ```
-                    jugadors = Anna, Joan, Jèssica
+                    jugadors = Anna, Joan, Jessica
                     opcions = 1, 2, 3, 4, 5, 6
                     _ _ _ _
                         {print} jugador " tira " opcions {at} {random}
@@ -1015,12 +1015,12 @@ adventures:
                     ```
                     {print} "Sóc Hedy l'endeví!"
                     {print} "Pots fer-me 3 preguntes."
-                    respostes = sí, no, potser
+                    answers = sí, no, potser
                     _ _ _
-                       pregunta = {ask} "Què vols saber?"
-                       {print} pregunta 
+                       question = {ask} "Què vols saber?"
+                       {print} question
                        {sleep}
-                       {print} "La meva bola de cristall diu..." respostes {at} {random}
+                       {print} "La meva bola de cristall diu..." answers {at} {random}
                     ```
             11:
                 story_text: |
@@ -1030,7 +1030,7 @@ adventures:
                     Omple els espais buits utilitzant la nova comanda que has après en aquest nivell.
                 example_code: |
                     ```
-                    cases = una mansió, un apartament, una cabana, una casa
+                    cases = una mansió, un apartment, una cabana, una casa
                     amor = ningú, un príncep, el seu veí, el seu amor verdader
                     mascotes = gos, gat, elefant
                     noms = Jana, Rai, Jaume
@@ -1060,7 +1060,7 @@ adventures:
                         call següent_torn
                         {sleep} 2
                     ```
-                story_text: "En aquest nivell aprendràs a utilitzar **funcions**. Una funció és un bloc de codi que pots fer servir fàcilment diverses vegades. Usar funcions ens ajuda a organitzar fragments de codi que podem usar una vegada i una altra.\nPer crear una funció, usa `{define}` i dona-li un nom a la funció. Després, posa totes les línies que vols dins de la funció en un bloc indentat sota la línia `{define}`.\nDeixa una línia buida al teu codi per fer-lo més net i organitzat. Bona feina! Ja has creat una funció!\n\nAra, sempre que necessitem aquest fragment de codi, només hem d'utilitzar el nom de la funció per cridar-la! No cal tornar-ho a escriure i repetir el codi.\n\nMira aquest exemple de codi d'un joc de Twister. La funció 'torn' conté un bloc de codi que tria quina part del cos ha d'anar a cada color.\n\n### Exercici\nAcaba aquest codi establint les dues variables `extremitat_escollida` i `color_escollit`.\nDesprés, tria quantes vegades vols cridar la funció per fer girar la roda de Twister.\n\n### Exercici 2\nMillora el teu codi afegint una variable anomenada 'persones'. Utilitza la variable per donar a tots els jugadors el seu propi comandament en el joc.\nPer exemple: 'Ahmed, mà dreta al verd' o 'Jèssica, peu esquerre al groc'.\n"
+                story_text: "En aquest nivell aprendràs a utilitzar **funcions**. Una funció és un bloc de codi que pots fer servir fàcilment diverses vegades. Usar funcions ens ajuda a organitzar fragments de codi que podem usar una vegada i una altra.\nPer crear una funció, usa `{define}` i dona-li un nom a la funció. Després, posa totes les línies que vols dins de la funció en un bloc indentat sota la línia `{define}`.\nDeixa una línia buida al teu codi per fer-lo més net i organitzat. Bona feina! Ja has creat una funció!\n\nAra, sempre que necessitem aquest fragment de codi, només hem d'utilitzar el nom de la funció per cridar-la! No cal tornar-ho a escriure i repetir el codi.\n\nMira aquest exemple de codi d'un joc de Twister. La funció 'torn' conté un bloc de codi que tria quina part del cos ha d'anar a cada color.\n\n### Exercici\nAcaba aquest codi establint les dues variables `extremitat_escollida` i `color_escollit`.\nDesprés, tria quantes vegades vols cridar la funció per fer girar la roda de Twister.\n\n### Exercici 2\nMillora el teu codi afegint una variable anomenada 'persones'. Utilitza la variable per donar a tots els jugadors el seu propi comandament en el joc.\nPer exemple: 'Ahmed, mà dreta al verd' o 'Jessica, peu esquerre al groc'.\n"
             15:
                 example_code: |
                     ```
@@ -1090,7 +1090,7 @@ adventures:
                 story_text: "En aquesta aventura treballem en un joc per escapar d'una casa embruixada escollint la porta correcta.\nSi tries la porta correcta, sobreviuràs, però si no, un monstre terrible et podria...\n\nAl nivell 1 comencem el joc de la casa embruixada creant una història de por i preguntant-li al jugador quin monstre es troba a la casa embruixada.\n"
             5:
                 story_text: "Fins a aquest nivell, el joc de la casa embruixada sempre demanava al jugador que triés una porta, t'has adonat que no era necessari respondre correctament?\nSi el jugador introduïa una resposta completament aleatòria, el joc encara funcionava i fins i tot podria guanyar (tot i no haver triat una porta).\nEn aquest nivell has de fer que només es pugui guanyar el joc si tries la mateixa porta que Hedy ha triat aleatòriament.\n\n### Exercici\nPots trobar les 4 paraules que falten per completar el codi?\n"
-                example_code: "```\n{print} \"Escapa de la casa embruixada!\"\n{print} \"Hi ha tres portes davant teu...\"\nportes {is} 1, 2, 3\nmonstres {is} home llop, mòmia, vampir, zombi\nporta_escollida {is} {ask} \"Quina porta esculls?\"\n{print} \"Has triat la porta ...\" porta_escollida\n{sleep}\nporta_correcte {is} portes {at} {random}\n_ _ _ _ {print} \"Perfecte! T'has pogut escapar!\"\n{else} {print} \"Oh no! S'et menja un ...\" monstres {at} {random}\n```\n"
+                example_code: "```\n{print} \"Escapa de la casa embruixada!\"\n{print} \"Hi ha tres portes davant teu...\"\nportes {is} 1, 2, 3\nmonstres {is} home llop, mòmia, vampir, zombie\nporta_escollida {is} {ask} \"Quina porta esculls?\"\n{print} \"Has triat la porta ...\" porta_escollida\n{sleep}\nporta_correcte {is} portes {at} {random}\n_ _ _ _ {print} \"Perfecte! T'has pogut escapar!\"\n{else} {print} \"Oh no! S'et menja un ...\" monstres {at} {random}\n```\n"
             3:
                 example_code: "```\n_ Escapa de la casa embruixada!\n_ Hi ha tres portes davant teu...\n_ _ _ Quina porta esculls?\n_ Has triat la ... porta\nmonstres _ un zombie, un vampir, RES! HAS ESCAPAT!\n_ Veus ...\n{sleep}\n_ _ _ _\n```\n"
                 story_text: "En els nivells anteriors has fet una introducció al joc de la casa embruixada, sempre, però la història té un final dolent.\nEn aquest nivell millorarem la història fent-la més interactiva canviant-li el desenllaç; a vegades seràs devorat, i a vegades aconseguiràs escapar!\nHedy ho decidirà aleatòriament!\n\n### Exercici\nCopia els codis d'exemple i omple els buits perquè funcioni!\n\n**Extra** Aquesta història és bastant senzilla; potser pots fer-la més esgarrifosa i fer-la més emocionant. \nTambé tens resultats molt limitats ara mateix, només hi ha 3 opcions del que hi ha darrere de les portes. Pensa en més monstres per afegir a la llista!\n"
@@ -1620,7 +1620,7 @@ adventures:
         default_save_name: comanda_repeteix_2
         levels:
             8:
-                example_code: "```\n{repeat} 2 {times} resposta = {ask} \"Sabies que podries fer una pregunta diverses vegades?\"\n{if} resposta {is} sí \n{repeat} 2 {times} {print} \"Així que ja ho sabies!\"\n{else}\n{repeat} 3 {times} {print} \"Has après alguna cosa nova!\"\n```\n"
+                example_code: "```\n{repeat} 2 {times} resposta = {ask} \"Sabies que podries fer una pregunta diverses vegades?\"\n{if} resposta {is} sí \n{repeat} 2 {times} {print} \"Així que ja ho sabies!\"\n{else}\n {repeat} 3 {times} {print} \"Has après alguna cosa nova!\"\n```\n"
                 story_text_2: "Una altra cosa interessant que pots fer amb la comanda `{repeat}` és utilitzar variables per establir la quantitat de vegades que alguna cosa s'ha de repetir. En el codi d'exemple pots veure que primer preguntem a la persona quants anys té.\nDesprés, en la línia 3, la pregunta es repeteix \"edat\" vegades. Així que hem usat la variable \"edat\" amb la comanda `{repeat}`.\n"
                 story_text: "## Repetir amb altres comandes i amb variables\nAra has practicat la comanda `{repeat}` en combinació amb la comanda `{print}`, però sabies que també podries utilitzar altres comandes amb `{repeat}`?\nEn aquest codi d'exemple pots veure que la comanda `{repeat}` també es pot fer servir amb una comanda `{ask}`, `{if}` o `{else}`.\n"
                 example_code_2: "```\n{print} \"Eii! És el teu aniversari!\"\nedat = {ask} \"Quants anys fas?\"\n{repeat} edat {times} {print} \"Visca!\"\n```\n"
