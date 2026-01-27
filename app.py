@@ -19,7 +19,7 @@ from logging.config import dictConfig as logConfig
 from os import path
 from iso639 import languages
 
-import static_babel_content
+import hedy.static_babel_content as static_babel_content
 from markupsafe import Markup
 from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
                    redirect, request, send_file, url_for, Blueprint,
@@ -31,17 +31,17 @@ from flask_compress import Compress
 from urllib.parse import quote_plus
 
 import hedy
-import hedy_content
-import hedy_translation
+import website_content as hedy_content
+from hedy import translation as hedy_translation
 import hedyweb
 import utils
 from dataclasses import dataclass
-from hedy_error import get_error_text
-from safe_format import safe_format
+from hedy.error import get_error_text
+from hedy.safe_format import safe_format
 from config import config
 from website.flask_helpers import render_template, proper_tojson, JinjaCompatibleJsonProvider
-from hedy_content import (adventures_order_per_level, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
-                          ALL_LANGUAGES, COUNTRIES, FRIENDLY_SORTED_COUNTRIES, HOUR_OF_CODE_ADVENTURES)
+from website_content import (adventures_order_per_level, KEYWORDS_ADVENTURES, ALL_KEYWORD_LANGUAGES,
+                             ALL_LANGUAGES, COUNTRIES, FRIENDLY_SORTED_COUNTRIES, HOUR_OF_CODE_ADVENTURES)
 
 from logging_config import LOGGING_CONFIG
 from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
@@ -75,8 +75,7 @@ if (sys.version_info.major < 3 or sys.version_info.minor < 7):
 
 
 # Set the current directory to the root Hedy folder
-os.chdir(os.path.join(os.getcwd(), __file__.replace(
-    os.path.basename(__file__), '')))
+os.chdir(os.path.dirname(__file__))
 
 
 COMMANDS = collections.defaultdict(hedy_content.NoSuchCommand)
@@ -651,7 +650,8 @@ def parse():
             if transpile_result.has_sleep:
                 response['has_sleep'] = True
 
-            response['variables'] = transpile_result.roles_of_variables
+            # This is a dictionary with gettext keywords
+            response['variables'] = translate_variable_roles(transpile_result.roles_of_variables)
         except Exception:
             pass
 
@@ -2301,6 +2301,34 @@ def public_user_page(username):
             has_certificate=has_certificate,
         )
     return utils.error_page(error=404, ui_message=gettext('user_not_private'))
+
+
+def translate_variable_roles(roles):
+    """Translate variable roles using gettext().
+
+    This function is rather silly: we need the string `gettext('xyz')` to
+    appear in the source code literally, for gettext to find the keys that
+    it needs to translate. So we do something that looks dumb, but it's this
+    way for a reason.
+    """
+    ret = {}
+    for var_name, role_key in roles.items():
+        if role_key == 'walker_variable_role':
+            ret[var_name] = gettext('walker_variable_role')
+        elif role_key == 'stepper_variable_role':
+            ret[var_name] = gettext('stepper_variable_role')
+        elif role_key == 'list_variable_role':
+            ret[var_name] = gettext('list_variable_role')
+        elif role_key == 'input_variable_role':
+            ret[var_name] = gettext('input_variable_role')
+        elif role_key == 'constant_variable_role':
+            ret[var_name] = gettext('constant_variable_role')
+        elif role_key == 'unknown_variable_role':
+            ret[var_name] = gettext('unknown_variable_role')
+        else:
+            ret[var_name] = role_key  # unknown key, return as-is
+
+    return ret
 
 
 def valid_invite_code(code):

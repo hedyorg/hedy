@@ -14,7 +14,7 @@ from website.flask_hedy import g_db
 
 import utils
 from config import config
-from safe_format import safe_format
+from hedy.safe_format import safe_format
 from utils import is_debug_mode, timems, times
 from website import querylog
 TOKEN_COOKIE_NAME = config["session"]["cookie_name"]
