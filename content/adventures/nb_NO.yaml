@@ -532,26 +532,6 @@ adventures:
                     {print} Takk for bestillingen.
                     {print} maten 'og  drikken ' kommer snart!
                     ```
-            6:
-                story_text: |
-                    På dette nivået lar `{if}`-kommandoen deg å spørre kunder spørsmål og gi forskjellige ting til svar.
-                    I eksempelet under kan du se at du kan spørre kunden om de har lyst å høre om dagens rett og Hedy kan svare deretter.
-                example_code: |
-                    ```
-                    {print} 'Velkommen til Hedys restaurant!'
-                    vil_høre {is} {ask} 'Vil du høre om dagens rett?'
-                    {if} vil_høre {is} ja {print} 'Dagens rett er kylling piri piri med ris.' {else} {print} 'Ikke noe problem.'
-                    matønske {is} {ask} 'Hva har du lyst å spise?'
-                    {print} 'en ' matønske ' er på vei!'
-                    drikke {is} {ask} 'Hva har du lyst å drikke til?'
-                    {if} drikke {is} cola {print} 'Beklager, vi er tom for cola!' {else} {print} 'Godt valg!'
-                    annet {is} {ask} 'Vil du ha noe annet?'
-                    {print} 'La meg lese opp bestillingen...'
-                    {print} 'En ' matønske
-                    {if} drikke {is} cola {print} 'og...' {else} {print} 'En ' drikke
-                    {if} annet {is} nei {print} 'Det var det!' {else} {print} 'En ' annet
-                    {print} 'Takk for bestillingen og vel bekomme!'
-                    ```
             7:
                 story_text: |
                     På dette nivået kan du bruke matte til å regne ut totalprisen på kundens bestilling. Dette vil gjøre den virtuelle restauranten mer realistisk.

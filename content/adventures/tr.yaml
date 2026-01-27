@@ -1083,8 +1083,10 @@ adventures:
                     ```
                     hayvanlar eşit köpek, inek, koyun
                     cevap eşit sor 'En sevdiğin hayvan hangisi?'
-                    _ cevap _ hayvanlar _ 'Benimki de öyle!'
-                    _ _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
+                    _ cevap _ hayvanlar
+                    _ 'Benimki de öyle!'
+                    _
+                    _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
                     ```
     is_command:
         default_save_name: eşit_komutu
@@ -1468,7 +1470,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Seviye 7 de `{repeat}` komutunu ekliyoruz. `{repeat}` bir kod satırını birden çok kez çalıştırmak için kullanılabilir. Bunun gibi:
+                    Seviye 8 de `{repeat}` komutunu ekliyoruz. `{repeat}` bir kod satırını birden çok kez çalıştırmak için kullanılabilir. Bunun gibi:
 
                     ### Alıştırma
                     Tekrarla komutu ile oynayın. Mutlu yıllar şarkısını şimdi 4 yerine sadece 3 satır kodla yapabilir misiniz?
@@ -1651,8 +1653,10 @@ adventures:
                     ```
                     depodaki_içecekler {is} su, limonata, kola, portakal suyu
                     içecek {is} {ask} 'Ne içmek istersiniz?'
-                    {if} içecek {in} depodaki_içecekler {print} 'Bir ' içecek ' hemen geliyor!'
-                    {else} {print} 'Üzgünüm, ondan satmıyoruz'
+                    {if} içecek {in} depodaki_içecekler
+                    {print} 'Bir ' içecek ' hemen geliyor!'
+                    {else}
+                    {print} 'Üzgünüm, ondan satmıyoruz'
                     ```
             7:
                 story_text: |
