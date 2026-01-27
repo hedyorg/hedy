@@ -16,11 +16,11 @@ from os import path
 
 from dataclasses import dataclass
 import functools
-import exceptions
+from hedy import exceptions
 import hedy
 import utils
-from tests.Tester import HedyTester, YamlSnippet
-from website.yaml_file import YamlFile
+from hedy_tests.Tester import HedyTester, YamlSnippet
+from hedy.yaml_file import YamlFile
 
 fix_error = False
 # set this to True to revert broken snippets to their en counterpart automatically
