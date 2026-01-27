@@ -1,54 +1,56 @@
 @top Program { newline* (Command newline+)* Command? }
 
 Command {
-    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | ErrorInvalid
+    Assign | AssignList | Input | Clear | Print | Play | Turtle | Sleep | Add | Remove | If | Else | Repeat | For | Define | Call | Return | While | Elif | ErrorInvalid
 }
 
-Print { print+ ( Expression )+ }
-Ask { Text (is+ | Op<"=">) ask+ ( Expression )+ }
+Print { print+  Op<"(">? PrintArguments? Op<")">? }
+// Commas are optional when using print, but not for calling functions
+PrintArguments { argument !comma (Op<',' | '،' | '，' | '、' >? argument)* } 
 
-// Commas in every language are allowed
 AssignList { Text (is+ | Op<"=">) Op<"["> ((boolean | String | Text | Number) ~ambig (Op<',' | '،' | '，' | '、' > (boolean | String | Text | Number))*)? Op<"]"> }
-Assign { (Text | ListAccess) (is+ | Op<"=">) (Expression ~ambig )+ }
+Assign { Text (is+ | Op<"=">) (Expression ~ambig )+ }
+Input { Text (is+ | Op<"=">) (input+ | ask+) Op<"("> PrintArguments? Op<")"> }
 Sleep { sleep+ (Expression )? }
-ListAccess { Text Op<"["> (random+ | Text | Number) Op<"]"> }
-Add { add+ (Expression ) to_list+ Text }
-Remove { remove+ (Expression ) from+ Text }
-Clear { clear+ }
+
+ListAccess { Text Op<"["> (random+ | Text | Number) Op<"]">}
 Play { play+ Expression }
 
 Turtle[@isGroup=turtle] {
     Forward { forward+ (Expression ) } |
     Turn { turn+ (Expression ) } |
     Color { color+ (Expression )  }
-}
+}   
 
-If { ifs+ Condition ((and+ | or+) Condition)* }
-Else { elses+ } 
+Add { add+ (Expression ) to_list+ Text }
+Remove { remove+ (Expression ) from+ Text }
+Clear { clear+ }
+ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
-Condition {
+If { ifs+ Condition ((and+| or+) Condition)* Op<":">? }
+Else { elses+ Op<":">? }
+Elif { elif+ Condition ((and+| or+) Condition)* Op<":">? }
+Condition {    
     PressedCheck { Text ~cond is+ pressed+ } |
     EqualityCheck { (Expression ) (is+ | Op<"="> Op<"=">? ) (Expression ) } |
     NotEqualCheck { (Expression ) (Op<"!=">) (Expression ) } |
     ComparisonCheck { (Expression ) (Op<">"> | Op<"<">) Op<"=">? (Expression ) } |
     InListCheck { (Expression ~cond ) ins+  Text } |
-    NotInListCheck { (Expression ~cond ) not_in+  Text }
+    NotInListCheck { (Expression ~cond ) notIn+  Text }
 }
 
 
 Repeat { repeat+ (Number | Text) times+ }
 
-For { fors+ Text ins+ (Text | range+ (Text | Number) to+ (Text | Number)) }
-While { while+ Condition ((and+ | or+) Condition)* }
+For { fors+ Text ins+ (Text | range+ Op<"(">? (Number | Text) Op<',' | '،' | '，' | '、' > (Number | Text) (Op<',' | '،' | '，' | '、' > (Number | Text))? Op<")"?>) Op<":">? }
+While { whiles+ Condition ((and+| or+) Condition)* Op<":">}
+Define { (def+ | define+) Text Op<"(">? Arguments? Op<")">? Op<":">?}
+Call { Text Op<"("> Arguments? Op<")"> }
+Return { returns+ (PrintArguments)? }
 
-Define { define+ Text (with+  Arguments)? }
-Call { call+ Text (with+ Arguments)? }
-Return { returns+ (Expression )+ }
 
 Arguments { argument !comma (Op<',' | '،' | '，' | '、' > argument)* }
 argument { Expression }
-
-ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
 Op<expr> { expr }
 
@@ -75,54 +77,51 @@ Expression {
     comma @left
 }
 
+
 @external specialize { Text } specializeKeyword from "./tokens" {
+    print[@name="print"],
+    is[@name="is"],
+    input[@name="input"],
     ask[@name="ask"],
+    sleep[@name="sleep"],
+    play[@name="play"],
     random[@name="random"],
+    forward[@name="forward"],
+    turn[@name="turn"],
+    color[@name="color"],
+    add[@name="add"],
+    remove[@name="remove"],
+    from[@name="from"],
+    clear[@name="clear"],
     ifs[@name="if"],
-    pressed[@name="pressed"],
     elses[@name="else"],
     and[@name="and"],
     or[@name="or"],
-    is[@name="is"],
-    while[@name="while"],
+    pressed[@name="pressed"],
+    notIn[@name="notIn"],
+    ins[@name="in"],
+    repeat[@name="repeat"],
+    times[@name="times"],
+    range[@name="range"],
+    whiles[@name="while"],
+    def[@name="def"],
     define[@name="define"],
-    with[@name="with"],
+    returns[@name="return"],
+    fors[@name="for"],
+    to_list[@name="to_list"],
+    elif[@name="elif"],
     low_true[@name="true"],
     low_false[@name="false"],
     cap_true[@name="True"],
     cap_false[@name="False"]
 }
 
-@external extend { Text } extendKeyword from "./tokens" {
-    print[@name="print"],
-    forward[@name="forward"],
-    turn[@name="turn"],
-    color[@name="color"],
-    sleep[@name="sleep"],
-    play[@name="play"],
-    add[@name="add"],
-    from[@name="from"],
-    remove[@name="remove"],
-    to_list[@name="to_list"],
-    clear[@name="clear"],    
-    ins[@name="in"],
-    not_in[@name="not_in"],
-    repeat[@name="repeat"],
-    times[@name="times"],
-    fors[@name="for"],
-    to[@name="to"],
-    range[@name="range"],
-    call[@name="call"],
-    returns[@name="return"]
-}
-
-
 @tokens {
     @precedence {
         Number,
         Text
     }
-    symbol { $[%&().:;?@\\\^\{\}`~$_] }
+    symbol { $[%&.;?@\\\^\{\}`~$_] }
     Comment { "#" ![\n]* }
     newline { '\n' }
     // A char can be anything that goes after the character ! (A1)

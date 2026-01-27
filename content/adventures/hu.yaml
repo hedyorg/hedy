@@ -79,8 +79,8 @@ adventures:
                     vege is ask ' Egy jó vagy rossz véget szeretnél?'
                     if vege is jó print nev ' előveszi a kardot és a szörny gyorsan elszalad' else print 'A szörny megeszi ' nev '-t'
                     ```
-            7:
-                story_text: |-
+            8:
+                story_text: |
                     A történetben valaki bizonyos szavakat többször is elmond. Például, ha valaki segítséget kér vagy elénekel egy dalt.
                     Az ilyen ismétlést beírhatod a 6. szintbe tartozó történetbe a 'repeat' paranccsal.
                 example_code: |
@@ -94,13 +94,13 @@ adventures:
         default_save_name: Számológép
         description: Készíts számológépet
         levels:
-            6:
+            7:
                 story_text: |-
                     Most, hogy tudsz számolni, létrehozhatsz egy programot is a matematikai számítások gyakorlásához. A számításokat magad is elkészítheted, például:
                     Azt is engedélyezheted, hogy a számítógép véletlenszerű számításokat végezzen véletlenszámok használatával.
 
                     Így válassz ki pár táblázatot a gyakorláshoz, és ettől mindig más eredményt kapsz
-                example_code: |-
+                example_code: |
                     ```
                     jo_valasz = 11 * 27
                     valasz = ask 'Mennyi 11 és 27 szorzata?'
@@ -109,7 +109,7 @@ adventures:
                     ```
                 story_text_2: |
                     You can also let the computer do random calculations on its own using {random}.
-                example_code_2: |-
+                example_code_2: |
                     ```
                     tablazat = 4, 5, 6, 8
                     szamok = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
@@ -122,7 +122,7 @@ adventures:
                     ```
                 story_text_3: |
                     You can also let the computer do random calculations on its own using {random}.
-                example_code_3: |
+                example_code_3: |-
                     numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                     number_1 = _
                     number_2 = _
@@ -130,9 +130,9 @@ adventures:
                     given_answer = 'What is ' number_1 ' times ' number_2 '?'
                     {if} _
                     {else} _
-            9:
+            10:
                 story_text: "A 6. szinten megtanultad a számológép készítését, a 7. szinten kibővítheted ezt a kódot, és egy kis matematikai játékot készíthetsz belőle. Mint ez...\n"
-                example_code: |-
+                example_code: |
                     ```
                     pontszam = 0
                     repeat 10 times
@@ -147,185 +147,6 @@ adventures:
                             pontszam = pontszam + 1
                     print 'Szép munka! A pontszámod... ' pontszam ' a 10-ből!'
                     ```
-    default:
-        name: Bevezető
-        description: Szint magyarázat
-        levels:
-            1:
-                story_text: "Az első szinten a `{print}`, `{ask}` és `{echo}` parancsokat használhatod.\nÍrd a kódodat a programozási ablakba, vagy nyomd meg a gombot a példa programok mellett, hogy bemásold!\nPróbáld ki a kódot a zöld 'Kód futtatása' gomb megnyomásával a programozási ablak alatt!\n\nSzöveget írhatsz a képernyőre a `{print}` paranccsal.     \n"
-            3:
-                story_text: |
-                    A 3. szinten készíthetsz listát is. Kérheted a számítógépet, hogy véletlenszerűen válasszon valamit a listából. Ezt a `{at} {random}` paranccsal teheted meg.
-            4:
-                story_text: |
-                    A 4. szinten a `{ask}` és a `{print}` máshogy működik.
-                    Amit ki akarsz íratni, idézőjelbe kell tenned.
-                    Ez hasznos, mert most már mindent kiírathatsz, amit csak akarsz, azokat a szavakat is, amiket arra használtál, hogy eltárolj valamit az `{is}` paranccsal.
-                    A legtöbb programozási nyelv idézőjelet használ a kiíratáshoz, így egy kicsit közelebb kerülünk az igazi programozáshoz!
-                example_code: |
-                    ```
-                    {print} "Mostantól idézőjeleket kell használni!"
-                    válasz {is} {ask} "Miket kell mostantól használni?"
-                    {print} válasz " kell használni."
-                    ```
-            5:
-                story_text: |
-                    Az 5. szinten újdonság következik, a `{if}`! A `{if}` paranccsal két lehetőség közül választhatsz.
-                    Ez a kód kiírja, hogy klassz, ha a Hedy nevet adod meg névként, és fújt, ha valami mást írsz be.
-                    A `{ask}` és `{print}` ugyanúgy működnek, mint a 4. szinten.
-                example_code: |
-                    ```
-                    név {is} {ask} "Hogy hívnak?"
-                    {if} név {is} Hedy {print} "klassz" {else} {print} "fúj!"
-                    ```
-            6:
-                story_text: |
-                    Ezen a szinten új dolgot tanulunk: számolni.
-
-                    Az összeadás könnyű, ugyanúgy írod, mint a matekban: `5 + 5`. A kivonás is jól működik, így írjuk: `5 - 5`.
-
-                    A szorzás egy kicsit különbözik, ugyanis nincs szorzásjel a billentyűzeten. Nézd meg, tényleg nincs!
-                    Ezért használjuk a csillagot: `5 * 5`. Olvasd ezt "5-ször 5"-nek, így könnyen megjegyzed.
-                example_code: |
-                    ```
-                    {print} "5 plusz 5 egyenlő " 5 + 5
-                    {print} "5 mínusz 5 egyenlő " 5 - 5
-                    {print} "5-ször 5 egyenlő " 5 * 5
-                    ```
-            7:
-                story_text: |
-                    A 7. szinten bemutatkozik az `{repeat}` parancs. Ezzel egy sort többször végrehajthatsz.
-                example_code: |
-                    ```
-                    {repeat} 3 {times} {print} "A Hedy szórakoztató!"
-                    ```
-            8:
-                story_text: |
-                    A `{ask}` és a `{print}` még mindig úgy működik, ahogyan ismered. De a `{if}`, `{else}` és az `{repeat}` utasítások megváltoztak!
-                    Most különböző utasítások egy csoportját futtathatod egyszerre, de behúzással tagolnod kell a kódot.
-                    Ez azt jelenti, hogy négy szóközt kell tennünk a sor elejére. Ez akkor is érvényes, ha csak egy soros blokkot akarsz létrehozni.
-                example_code: |
-                    Így működik mostantól az `{repeat}` parancs:
-                    ```
-                    {repeat} 5 {times}
-                        {print} "Sziasztok"
-                        {print} "Ez 5-ször ismétlődik"
-                    ```
-                    Így működik mostantól a `{if}` és az `{else}` parancs:
-
-                    ```
-                    név {is} {ask} "Hogy hívnak?"
-                    {if} név {is} Hedy
-                        {print} "Szia Hedy!"
-                        {print} "Játszhatsz a számítógéppel."
-                    {else}
-                        {print} "BEHATOLÓ!"
-                        {print} "Nem használhatod ezt a gépet!"
-                    ```
-
-                        {print} "Sziasztok"
-                        {print} "Ez 5-ször lett kiírva"
-            9:
-                story_text: |
-                    Ezen a szinten már nemcsak több soros `{if}` és `{repeat}` parancsokat használhatsz, hanem egymásba is teheted őket.
-                    A példában egy `{if}` van egy `{repeat}` parancson belül. Fordítva is lehet csinálni, és még `{if}` is lehet `{if}` `{if}` parancsba ágyazva, vagy `{repeat}` `{repeat}`-be.
-                    Próbáld ki!
-                example_code: |
-                    ```
-                    {repeat} 3 {times}
-                        étel = {ask} "Mit kérsz?"
-                        {if} étel {is} pizza
-                            {print} "fincsi!"
-                        {else}
-                            {print} "a pizza finomabb"
-                    ```
-
-                        étel = {ask} "Mit kérsz?"
-                        {if} étel {is} pizza
-                            {print} "fincsi!"
-                        {else}
-                            {print} "a pizza finomabb"
-            10:
-                story_text: |-
-                    Ezen a szinten új parancsot mutatunk be, a `{for}`-t. A `{for}` segítségével egy lista minden elemét használhatod.
-                    A `{for}` is létrehoz egy blokkot, pont úgy, ahogy az `{repeat}` és `{if}`, ezért az összes sort a blokkban szóközökkel kell kezdeni.
-                example_code: |
-                    ```
-                    állatok {is} kutya, cica, gömbhal
-                    {for} állat {in} állatok
-                      {print} 'Szép ' állat
-                    ```
-            12:
-                story_text: |-
-                    **Tizedes törtek**
-                    Egészen eddig a Hedy nem kezelte a tört számokat, mint az 1,5. Figyelj, hogy a számítógépek `.` használnak, így: 1.5
-                example_code: |
-                    ```
-                    {print} 'Két és fél plusz két fél egyenlő...'
-                    {print} 2.5 + 2.5
-                    ```
-
-                    {print} 2.5 + 2.5
-            13:
-                story_text: Most megtanuljuk az `{and}` és `{or}` kifejezések használatát! Ha két állítást szeretnél ellenőrizni, akkor nem kell kettő {if} parancsot használnod, használhatod az `{and}` és `{or}` parancsokat. Ha az `{and}` parancsot használod, akkor az `{and}` bal és jobb oldalán mindkét állításnak igaznak kell lennie. `{or}` esetén csak egy állításnak kell helyesnek lennie.
-                example_code: |
-                    ```
-                    név = {ask} "Hogy hívnak?"
-                    kor = {ask} "Hány éves vagy?"
-                    {if} név {is} "Hedy" {and} kor {is} 2
-                        {print} "Te vagy az igazi Hedy!"
-                    ```
-            14:
-                story_text: |
-                    További új elemeket fogunk megtanulni! Lehet, hogy már a matematikából ismered ezeket a jeleket, a `<` és a `>`.
-                    A `<` ellenőrzi, hogy az első szám kisebb-e, mint a második, például kor `<` 12 megmondja, hogy a kor kisebb-e, mint 12.
-                    Ha arra vagy kíváncsi, hogy az első szám kisebb vagy egyenlő-e a másodikkal, a `<=` jelet használd, például kor `<=` 11.
-                    A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második, például pontszám `>` 10 megmondja, hogy a pontszám nagyobb-e, mint 10.
-                    Ha arra vagy kíváncsi, hogy az első szám nagyobb vagy egyenlő-e a másodikkal, a `>=` jelet használd, például pontszám `<=` 11.
-                    Ezeket az összehasonlításokat `{if}` parancsok után használhatod, így:
-                example_code: |
-                    ```
-                    kor = {ask} "Hány éves vagy?"
-                    {if} kor > 12
-                        {print} "Idősebb vagy nálam!"
-                    ```
-            15:
-                story_text: |-
-                    Tanulni fogunk egy új ciklust, az `{while}` ciklust! Addig folytatjuk a ciklust, amíg az állítás igaz!
-                    Szóval ne felejtsd el módosítani a ciklusban szereplő értéket!
-
-                    A példakódban addig megyünk, amíg meg nem kapjuk a helyes választ.
-                    Ha soha nem kapjuk meg a megoldást, akkor a ciklus soha nem ér véget!
-                example_code: |
-                    ```
-                    válasz = 0
-                    {while} válasz != 25
-                        válasz = {ask} "Mennyi 5-ször 5?"
-                    {print} "Ez a helyes válasz"
-                    ```
-
-                        válasz = {ask} "Mennyi 5-ször 5?"
-                    {print} "Ez a helyes válasz"
-            16:
-                story_text: |-
-                    Listákat fogunk készíteni Python módra, szögletes zárójelekkel! Megtartjuk az idézőjeleket az elemek körül, ahogy az előző szinteken tanultuk, és az egész listát szögletes zárójelek közé foglaljuk.
-                    A szögletes zárójeleket arra is használhatod, hogy kiválaszd a lista elemét egy adott helyen.
-                example_code: |
-                    ```
-                    barátok = ["Aladár", "Blöki", "MZ/X"]
-                    szerencsés_számok = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} barátok[i] " szerencsés száma"
-                        {print} "egyenlő " szerencsés_számok[i]
-                    ```
-            17:
-                story_text: |-
-                    Most egy kicsit meg fogjuk változtatni a behúzást. Minden alkalommal, amikor behúzást használunk, az előző sor végére`:` jelet teszünk.
-
-                    Ezen a szinten egy új parancsot is használhatsz: `{elif}`. Az `{elif}` az `{else} {if}` rövidítése, és szükséged lesz rá, ha 3 (vagy több!) alternatívát szeretnél használni.
-                    Próbáld ki!
-            18:
-                story_text: Elértünk az igazi Python kódhoz! Ez azt jelenti, hogy zárójeleket kell használnunk a {print} és {range} esetében.
     dice:
         name: Készítsd el a saját kockádat
         default_save_name: Kocka
@@ -367,7 +188,7 @@ adventures:
                     print 'Te' _ 'dobtál'
                     if _ is giliszta print 'Megállhatsz.' _ print 'Dobj újra!'
                     ```
-            6:
+            7:
                 story_text: |-
                     Azt is megteheted, hogy újra egy giliszta kockát csinálsz a 6. szinten, de most kiszámíthatod azt is, hogy hány pontot dobtál.
 
@@ -379,7 +200,7 @@ adventures:
 
 
                     Sikerült kiszámolni a 8 kocka pontszámát? Ehhez sok vágás és beillesztés kellett, igaz? Ezt megkönnyítjük a 7. szinten!
-                example_code: |-
+                example_code: |
                     ```
                     dobasok = 1, 2, 3, 4, 5, giliszta
                     pontok = 0
@@ -390,8 +211,8 @@ adventures:
                     ```
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
-            7:
-                story_text: |-
+            8:
+                story_text: |
                     Az 5. szinten ismét készíthetsz kockát . A `repeat` kóddal könnyedén dobhatsz egy
                     csomó dobókockát.
                     Próbáld meg befejezni a mintakódot! A kötőjeleknek több parancsot és karaktert
@@ -402,7 +223,7 @@ adventures:
                     dobások is 1, 2, 3, 4, 5, giliszta
                     repeat _ _ print _ _
                     ```
-            10:
+            11:
                 story_text: |
                     Is everybody taking too long throwing the dice? In this level you can let Hedy throw all the dice at once!
                 example_code: |
@@ -464,7 +285,7 @@ adventures:
                     if mosogato is Gizi print _ sajnos mosogatnom kell _ else print 'szerencsére nem én,
                     mert' _ 'már mosogat'
                     ```
-            6:
+            7:
                 story_text: |-
                     Ki milyen gyakran mosogat? Ez igazságos? Ezt megszámolhatod a 5. szinten.
 
@@ -482,11 +303,11 @@ adventures:
                     if mosogato is Edit edit_mosogat = edit_mosogat + 1
                     print 'Edit ezen a héten' edit_mosogat 'alkalommal mosogatott'
                     ```
-            7:
-                story_text: |-
+            8:
+                story_text: |
                     Az `repeat` segítségével megismételheted a kódrészleteket. Ennek segítségével
                     kiszámíthatod, hogy kik fogj mosogatni az egész héten.
-                example_code: |-
+                example_code: |
                     ```
                     emberek is anya, apa, Edit, Gizi
                     repeat _ _ print 'a mosogató:' _
@@ -539,28 +360,7 @@ adventures:
                 story_text_2: |
                     ### Exercises
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or '{ask} again'.
-            5:
-                story_text: |-
-                    A 4. szinten megtanulod (titokban) az esélyeket a magad javára billenteni a jósnő használata során!
-                    Az `if` és `else` használatával bebiztosíthatod, hogy mindig jó szerencsét kapj, míg mások nem.
-                    Tekintsd meg ezt a példát, hogy megtudd, hogyan.
-
-
-                    Cseréld le Hedyt a saját nevedre az utolsó sorban, és Hedy mindig azt jósolja, hogy te nyersz a lottón, mások nem!
-                    Természetesen ez gyanakvást kelthet a többi játékossal szemben ... Ennek elkerülése érdekében gondoskodhatsz arról, hogy Hedy minden alkalommal más válaszokat adjon a kód futtatásakor.
-                    De természetesen neked továbbra is pozitív választ ad, a többi játékosnak pedig negatív választ.
-
-                    Ezeb az elven különféle programokat lehet készíteni, csak légy kreatív! Például létrehozhatsz egy olyan gépet, amely megjósolja, hogy kedvenc sportcsapatod legyőzi az összes versenytársat!
-                    Vagy elkészítheted Hófehérke varázslatos tükrét a falon, hogy elmondd mindenkinek, hogy te vagy a legbecsületesebb!
-                    Hagyd, hogy a fantáziád végezze a munkádat!
-                example_code: |
-                    ```
-                    print 'Szia, Hedy, a jósnő vagyok'
-                    print 'Meg tudom jósolni, nyersz-e a lottón holnap!'
-                    szemely is ask 'Ki vagy te?'
-                    if szemely is Hedy print 'Bizonyosan nyerni fogsz!' else print 'Balszerencse! Valaki más nyer!'
-                    ```
-            6:
+            7:
                 story_text: |-
                     A 5. szinten jövendőmondóként használhatod a matematikát előrejelzéseidben. Ez lehetővé teszi (buta) képletek kitalálását a jövő kiszámításához.
                     Például kiszámíthatod, hogy milyen gazdag leszel, vagy hány gyermeked lesz, ha felnősz.
@@ -589,7 +389,7 @@ adventures:
                     eredmeny is eredmeny * foci
                     print 'Te ' eredmeny ' százalék okos vagy.'
                     ```
-            7:
+            8:
                 story_text: |-
                     Az 6. szinten a `repeat` paranccsal beállíthatod, hogy a gép egyszerre több jóslatot mondjon.
 
@@ -610,7 +410,7 @@ adventures:
                     valasz is igen, nem, talan
                     repeat 3 times print 'A kristálygömböm azt mondja... ' valasz at random
                     ```
-            8:
+            9:
                 story_text: |-
                     Az 5. szinten megtanultad, hogyan kell használni az ismétlést, hogy a jósnő 3 kérdésre válaszoljon egymás után, de problémánk adódott a kérdések kiíratásával.
                     A 7. szinten ez a probléma megoldódott az ismétlés parancs új módjának köszönhetően.
@@ -685,29 +485,6 @@ adventures:
                     if valasztottajto is helyesajto print 'Nagyszerű! Kiszabadultál!'
                     else print 'Jaj ne! Megevett a ...' szornyek at random
                     ```
-            11:
-                story_text: A 8. szinten megváltoztattuk az ismétlés parancsot, és hozzáadtunk egy sort a kísértetjárta házunkhoz, amely megmondja a játékosnak, hogy melyik szobában vannak.
-                example_code: |
-                    ```
-                    print 'Szabadulj ki a kísértetházból'
-                    jatekos is elo
-                    ajtok is 1, 2, 3
-                    szornyek is  vampir, zombi, oriaspok
-                    for i in range 1 to 3
-                        if jatekos is elo
-                            helyesajto is ajtok at random
-                            print 'Három ajtó van előtted...'
-                            valasztottajto is ask 'Melyik ajtót választod?'
-                            if valasztottajto is helyesajto
-                                print 'Itt nincs szörny!'
-                            else
-                                print 'Megevett a(z) ' szornyek at random
-                                jatekos is halott
-                        else
-                            print 'GAME OVER'
-                    if jatekos is elo
-                        print 'Nagyszerű! Túlélted!'
-                    ```
     restaurant:
         name: Étterem
         default_save_name: Étterem
@@ -780,8 +557,8 @@ adventures:
                     print Köszönjük a rendelésedet.
                     print 'A(z)  etel  és a(z)  ital  mindjárt itt lesz!
                     ```
-            5:
-                story_text: |-
+            6:
+                story_text: |
                     A 4. szinten az if parancs lehetővé teszi, hogy kérdéseket tegyél fel ügyfeleidnek, és különböző módon felelj a válaszaikra.
                     Az alábbi példában láthatod, hogy megkérdezheted az ügyfeledet, hogy szeretné-e hallani a különlegességeket, és Hedy ennek megfelelően válaszolhat.
                 example_code: |
@@ -802,7 +579,7 @@ adventures:
                     ```
 
                     Tudnál még több kérdést feltenni az ügyfeleknek, amikor rendelnek, és különböző  módon felelni a válaszaikra az if paranccsal?
-            6:
+            7:
                 story_text: |-
                     A 6. szinten matematikai számításokkal kiszámíthatod az ügyfelek megrendelésének teljes árát, ami reálisabbá teheti a virtuális éttermet.
 
@@ -832,27 +609,27 @@ adventures:
                     - kedvezményt adsz az embereknek, amikor (titkos) kuponkódot adnak meg?
                     - adsz hozzá gyermekmenüt?
                     - gondolsz más szórakoztató dolgokra?
-            7:
-                story_text: |-
+            8:
+                story_text: |
                     Az 6. szinten megtanultad, hogyan használhatod az ismétlés parancsot egy kódsor megismétlésére bizonyos számú alkalommal.
                     Ezt használhatod éttermedben, hogy megkérdezz több embert, hogy mit szeretnének enni. Mint ez:
 
 
                     Az 5. szinten több embert is megkérdezhetsz, hogy mit szeretnének enni, de nem lehet minden egyes rendelést külön kiíratni, mert csak egy kódsort ismételhetsz meg.
                     A 7. szinten megtanulhatod, hogyan kell több sor kódot egyszerre megismételni, ami lehetővé teszi több rendelés kérését és kiíratását is!
-                example_code: |-
+                example_code: |
                     ```
                     print 'Üdvözlünk a Hedy étteremben!'
                     emberek is ask 'Hány ember jön ma?'
                     repeat emberek times food is ask 'Mit szeretnél ennit?'
                     print 'Köszönjük megrendelésedet! Mindjárt jön!'
                     ```
-            9:
+            10:
                 story_text: |-
                     A 7. szinten több sor kód megismétlésével bonyolultabbá teheted virtuális éttermedet. Mint ez:
 
                     Természetesen ez a kód bővíthető a menü további elemeivel, italokkal és/vagy több fogással, így nyugodtan adj hozzá annyi lehetőséget, amennyit csak akarsz!
-                example_code: |-
+                example_code: |
                     ```
                     print 'Üdvözlünk a Hedy étteremben!'
                     emberek is ask 'Hány ember jön ma??'
@@ -869,24 +646,6 @@ adventures:
                     print 'Köszönjük rendelésedet!'
                     print 'Ez ' ar ' forint lesz'
                     print 'Köszönöm, jó étvágyat!!'
-                    ```
-            11:
-                story_text: Az "for i in 1 in 5" tartományban használhatjuk a több vásárló megrendeléseinek rendezett kiíratására.
-                example_code: |
-                    ```
-                    print 'Üdvözlünk a Hedynél!'
-                    emberek is ask 'Hány ember számára rendelsz?'
-                    for i in range 1 to emberek
-                        print 'Rendelésszám ' i
-                        etel is ask 'Mit szeretnél enni?'
-                        print etel
-                        if etel is sültkrumpli
-                            szosz is ask 'Milyen szószt szeretnél hozzá?'
-                            print szosz
-                        ital is ask 'Mit szeretnél inni?'
-                        print ital
-                    ar is 400 * emberek
-                    print 'Ez ' ar ' forint lesz, kérem'
                     ```
     rock:
         name: Kő, papír, olló
@@ -951,7 +710,7 @@ adventures:
         default_save_name: Dal
         description: Dal kiíratása
         levels:
-            6:
+            7:
                 story_text: |-
                     A dalok gyakran sok ismétlést tartalmaznak. Néha az ismétlés alapja a számlálás is.
                     Például a jól ismert dalban „üveg sör”. Programozhatod azt a dalt egy kis matekkal.
@@ -964,7 +723,7 @@ adventures:
                     * repeat 3 times print 'Baby Shark Tutududududu'
 
                     De ahogyan ebben a leckében látni fogod, néha több sort is meg akarsz együtt ismételni. Ezt meg lehet tenni vágással és beillesztéssel, de ez sok munka. A 7. szinten megtanulod, hogyan kell ezt könnyebben megtenni.
-                example_code: |-
+                example_code: |
                     ```
                     verssor = 99
                     print verssor ' üveg sör a falon'
@@ -973,7 +732,7 @@ adventures:
                     verssor = verssor - 1
                     print verssor ' üveg sör a falon'
                     ```
-            7:
+            8:
                 story_text: |
                     A dalok gyakran sok ismétlést tartalmaznak. Például... Baby Shark! Ha elénekled, ugyanazt énekled folyamatosan:
 
@@ -985,7 +744,7 @@ adventures:
                     ezt a dalt sokkal rövidebbé teheted egy `repeat` utasítással! Be tudod fejezni a kódot?
 
                     A Baby Shark után természetesen más dalokat is programozhat. Sok dal van ismétléssel.
-            8:
+            9:
                 story_text: "A 6. szinten a \"Üveg sör\" dalt programoztad. Egy verset alkottál, majd 99 -szer kellett lemásolnod a verssorokat. A 7. szinten 99 alkalommal ismételheted meg a dalt, csak egy egyszerű sor hozzáadásával!\n"
                 example_code: |
                     ```
@@ -1083,7 +842,7 @@ adventures:
                     if direction is right turn _
                     forward 100
                     ```
-            6:
+            7:
                 story_text: |-
                     Az 5. szinten számítások segítségével különböző alakzatokat rajzolhatsz.
                     Lehet, hogy az iskolában már tanultad, hogy a teljes kör fordulata 360 fokos. Ha nem, most már tudod!
@@ -1106,7 +865,7 @@ adventures:
                     forward 50
                     turn szog
                     ```
-            8:
+            9:
                 story_text: |
                     Most, hogy több sort megismételhetünk, könnyebben készíthetünk alakzatokat.
                     Csak egyszer kell beállítani a szöget, majd ezt a változót használni a `repeat` utasítással.
@@ -1114,7 +873,7 @@ adventures:
 
                     Továbbá javíthatjuk azt a programot, amely különböző alakzatokat rajzol.
                     Kitalálod, mennyit kell itt fordulnia a teknősnek? Fejezd be a kódot, és rajzolhatsz tetszőleges sokszöget!
-                example_code: |-
+                example_code: |
                     ```
                     szog is 90
                     repeat 10 times

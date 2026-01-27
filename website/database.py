@@ -40,7 +40,7 @@ from . import dynamo
 
 from .dynamo import DictOf, OptionalOf, ListOf, SetOf, RecordOf, EitherOf
 
-from hedy_content import MAX_LEVEL
+from hedy.content import MAX_LEVEL
 
 is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
@@ -459,6 +459,8 @@ class Database:
                 continue
             key = program['adventure_name']
             level = program['level']
+            if level not in ret:
+                ret[level] = {}
             if key not in ret[level] or ret[level][key]['date'] < program['date']:
                 ret[level][key] = program
         return ret

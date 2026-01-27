@@ -65,7 +65,7 @@
         <div class="flex">
           <div class="flex w-full justify-between items-center">
             <p class="caption font-bold">Success</p>
-            <button class="hidden" id="confetti_button" onclick="hedyApp.confetti_cannon()">🎉</button>
+            <button id="confetti_button" onclick="hedyApp.confetti_cannon()"><i class="fa-regular fa-face-grin-stars"></i></button>
             <!-- <p class="details text-sm">Something went according to plan.</p> -->
           </div>
         </div>
@@ -175,6 +175,11 @@
     <div id="not_logged_in_warning" data-cy="not_logged_in_warning" class="hidden bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
       {{ _('not_logged_in_cantsave') }}. <a href="/login" class="text-black">{{_('login_to_save_your_work')}}</a>
     </div>
+    {% endif %}
+    {% if not raw and customizations and not ('content_version' in customizations and customizations.content_version > 0)%}
+      <div class="bg-yellow-200 text-sm px-4 py-1 border-2 border-yellow-400 mb-4">
+        {{ _('outdated_class_warning') }}
+      </div>
     {% endif %}
     <div class="flex justify-between gap-2 items-start overflow-visible">
       <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
