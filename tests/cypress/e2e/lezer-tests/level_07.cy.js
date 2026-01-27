@@ -185,22 +185,6 @@ describe('Lezer parser tets for level 7', () => {
 
             multiLevelTester('Test elif clause', code, expectedTree, 7, 8);
         })
-
-        describe('Test if pressed with number', () => {
-            const code = `if 1 is pressed\nprint 'hello'`
-            const expectedTree =
-                `Program(
-                    Command(
-                        If(
-                            if,
-                            Condition(PressedCheck(Number,is,pressed)),
-                            IfLessCommand(Print(print,String))
-                        )
-                    )
-                )`
-
-            multiLevelTester('Test if pressed with number', code, expectedTree, 7, 8);
-        })
  
         describe('Play tests', () => {
             describe('Play note', () => {

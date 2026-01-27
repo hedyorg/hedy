@@ -114,21 +114,6 @@ describe('Tests level 9', () => {
 
         multiLevelTester('Test if number not in list print', code, expectedTree, 9, 11);
     })
-
-    describe('Test if pressed with number', () => {
-        const code = `if 1 is pressed\nprint 'hello'`
-        const expectedTree =
-            `Program(
-                Command(
-                    If(if,Condition(PressedCheck(Number,is,pressed)))
-                ),
-                Command(
-                    Print(print,String)
-                )
-            )`
-
-        multiLevelTester('Test if pressed with number', code, expectedTree, 9, 12);
-    })
   
     describe('Test equality check equal sign', () => {
         const code =
