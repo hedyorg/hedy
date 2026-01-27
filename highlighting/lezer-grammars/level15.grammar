@@ -31,7 +31,7 @@ If { ifs+ Condition ((and+| or+) Condition)* Op<":">? }
 Else { elses+ Op<":">? }
 Elif { elif+ Condition ((and+| or+) Condition)* Op<":">? }
 Condition {    
-    PressedCheck { Text ~cond is+ pressed+ } |
+    PressedCheck { (Text | Number) ~cond is+ pressed+ } |
     EqualityCheck { (Expression ) (is+ | Op<"="> Op<"=">? ) (Expression ) } |
     NotEqualCheck { (Expression ) (Op<"!=">) (Expression ) } |
     ComparisonCheck { (Expression ) (Op<">"> | Op<"<">) Op<"=">? (Expression ) } |
