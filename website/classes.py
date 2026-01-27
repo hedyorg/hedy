@@ -2,7 +2,7 @@ import uuid
 
 from flask import make_response, request, session
 from jinja_partials import render_partial
-import hedy_content
+import website_content as hedy_content
 from website.flask_hedy import g_db
 from website.flask_helpers import gettext_with_fallback as gettext
 import utils

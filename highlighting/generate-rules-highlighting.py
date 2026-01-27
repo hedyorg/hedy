@@ -7,14 +7,14 @@ from definition import TRANSLATE_WORDS
 # Import packages from the website app (AutoPep8 will mess this up, so disable it)
 import sys
 sys.path.append(path.abspath(path.join(path.dirname(__file__), '..')))  # noqa
-from website.yaml_file import YamlFile  # noqa
+from hedy.yaml_file import YamlFile  # noqa
 
 
 # destinations of files containing syntax highlighting rules
 OUTPUT_PATH_TRANSLATION = "highlighting/highlighting-trad.json"
 
 # Files containing translations of keywords
-KEYWORDS_PATH = 'content/keywords/'
+KEYWORDS_PATH = 'hedy/data/keywords/'
 KEYWORDS_PATTERN = '(\\w+).yaml$'
 
 
