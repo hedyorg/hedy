@@ -31,12 +31,15 @@ levels:
         6:
             header: Programmer avec Hedy
             text: Les mots du code seront affichés en rose.
+            code: ''
         7:
             header: Programmer en Hedy
             text: On lance le code avec le bouton « Exécuter le code » sous le code.
+            code: ''
         8:
             header: Programmer en Hedy
             text: Les sorties apparaissent sur le côté droit.
+            code: ''
         9:
             header: Programmer en Hedy
             text: La sortie peut également être une figure.
@@ -56,6 +59,7 @@ levels:
 
                 `{print}` permet d'afficher du texte à l'écran.
             code: '{print} Put text on the screen'
+            header: ''
         3:
             header: La commande {print}
             text: |-
@@ -70,6 +74,8 @@ levels:
                 Le deuxième code que tu peux utiliser au niveau 1 est `{ask}`.
 
                 `{ask}` est utilisé pour poser une question à laquelle on peut répondre.
+            code: ''
+            header: ''
         5:
             text: |-
                 Comme tu as pu le voir dans l'exemple précédent, si tu utilises la commande `{ask}`, tu peux poser une question.
@@ -83,14 +89,17 @@ levels:
                 {print} Hello !
                 {ask} What is your name ?
                 {echo} hello
+            header: ''
         6:
             header: Programmons !
             text: |-
                 Avec `{print}`, `{ask}` et `{echo}` tu peux déjà créer une petite histoire.
                 Il est temps d'essayer les aventures : Perroquet, Histoires, Pierre-papier-ciseaux, …
+            editor: ''
         7:
             header: Programmons !
             text: Les aventures sont affichées dans des onglets.
+            editor: ''
         8:
             header: Programmons!
             text: Les boutons en forme de flèches jaunes peuvent être utilisés pour copier des exemples.
@@ -110,6 +119,14 @@ levels:
             code: |-
                 {forward} 50
                 {turn} left
+        12:
+            debug: ''
+            code: ''
+            header: ''
+            text: ''
+        13:
+            text: ''
+            header: ''
     2:
         1:
             header: Bienvenue au niveau 2
@@ -121,6 +138,8 @@ levels:
                 Par exemple: un nom, un âge ou ton équipe sportive favorite.
         2:
             text: Pour créer ou 'définir' une variable nous utilisons la commande `{is}`.
+            code: ''
+            header: ''
         3:
             header: Interactif
             text: |-
@@ -129,19 +148,30 @@ levels:
                 La réponse à la question posée est alors stockée dans la variable..
 
                 De cette façon nous n'avons pas besoin de la commande `{echo}`  .
+            code: ''
         4:
             header: Variables multiples
             text: Maintenant que nous utilisons les variables, nous pouvons utiliser des variables multiples au lieu d'une seule commande `{echo}`.
+            code: ''
         5:
             text: Tu peux aussi utiliser la commande `{sleep}` pour mettre le code en pause pendant un moment.
+            header: ''
+            code: ''
         6:
             text: |-
                 Tu peux ajouter un nombre après la commande `{sleep}` si tu veux que la pause soit plus longue.
 
                 Si tu le veux, tu peux même utiliser une variable au lieu d'un nombre pour contrôler la durée de la commande sleep.
+            header: ''
+            code: ''
         8:
             header: Que le plaisir de programmer commence!
             text: Profite des aventures du niveau 2!
+        7:
+            text: ''
+            debug: ''
+            header: ''
+            code: ''
     3:
         1:
             header: Bienvenue au niveau 3
@@ -151,15 +181,18 @@ levels:
             text: |-
                 Tu crées une liste avec `{is}`
                 Sépare les éléments de ta liste avec une virgule.
+            code: ''
         3:
             header: Au hasard
             text: |-
                 Tu peux utiliser la liste avec la commande `{at}` `{random}`.
                 L'ordinateur tirera au hasard un élément de la liste.
                 A chaque fois que tu exécuteras le code, le tirage changera.
+            code: ''
         4:
             header: Au hasard dans une phrase
             text: Tu peux également utiliser la commande `{at}` `{random}` dans une phrase.
+            code: ''
         5:
             header: Ajouter à
             text: |-
@@ -167,21 +200,31 @@ levels:
 
                 Tu peux choisir ce qu'il faut ajouter à la liste ou tu peux combiner la commande `{add}` `{to}` avec la commande `{ask}` .
                 De cette façon, tu peux laisser le joueur décider de ce qu'il faut ajouter à la liste.
+            code: ''
         6:
             header: Retirer de
             text: |-
                 Le contraire de la commande `{add}` `{to}` est la commande  `{remove}` `{from}`.
                 Cette commande retire un élément d'une liste.
+            code: ''
         8:
             header: Il est temps de passer à l'action!
             text: Profite des aventures du niveau 3!
+        7:
+            debug: ''
+            header: ''
+            text: ''
+            code: ''
     4:
         1:
             header: Bienvenue au niveau 4
             text: Dans ce niveau, tu apprendras à te servir des guillemets.
+            code: ''
         2:
             header: Problème
             text: 'Dans les niveaux précédents, tu as peut-être été confronté à ce problème:'
+            code: ''
+            debug: ''
         3:
             header: Résolvons-le avec les guillemets
             text: |-
@@ -191,22 +234,407 @@ levels:
         4:
             header: Guillemets avec print
             text: A chaque fois que tu utilises la commande`{print}`, il faut que tu mettes le texte que tu veux voir apparaître à l'écran entre guillemets.
+            code: ''
         5:
             header: Guillemets avec ask
             text: C'est aussi valable pour la commande `{ask}`.
+            code: ''
         6:
             header: Guillemets et variables
             text: |-
                 Tu ne veux pas que le nom des variables soit affiché à l'écran.
                 C'est pourquoi les variables doivent être laissées en dehors des guillemets, comme ça:
+            code: ''
         7:
             header: Guillemets et variables
             text: |-
                 Quand les noms des variables sont utilisés au milieu d'une phrase, tu dois laisser les variables en dehors des guillemets.
                 Néanmoins, le reste de la phrase a besoin de guillemets. Cela ressemble à ça:
+            code: ''
         9:
             header: Ready, Set, Go!
             text: Enjoy the adventures in level 4!
+            code: ''
+        10:
+            header: ''
+            code: ''
+            debug: ''
+            text: ''
+        8:
+            debug: ''
+            code: ''
+            header: ''
+            text: ''
+        11:
+            text: ''
+            header: ''
     8:
         7:
             code: "nom = {ask} \"Comment t'appelles-tu ?\"\n{if} nom {is} Hedy\n    {print} 'Bienvenue Hedy'\n{else}\n    {print} 'Bienvenu·e programmeur·se !' \n{print} '3… 2… 1… Programme !'"
+            text: ''
+            header: ''
+        9:
+            code: ''
+            header: ''
+            debug: ''
+            text: ''
+        2:
+            debug: ''
+            code: ''
+            header: ''
+            text: ''
+        3:
+            text: ''
+            code: ''
+            header: ''
+        5:
+            debug: ''
+            text: ''
+            header: ''
+            code: ''
+        8:
+            text: ''
+            header: ''
+        1:
+            header: ''
+            text: ''
+        6:
+            header: ''
+            text: ''
+            code: ''
+        10:
+            text: ''
+            header: ''
+        4:
+            header: ''
+            text: ''
+            code: ''
+    7:
+        5:
+            header: ''
+            text: ''
+            debug: ''
+            code: ''
+        3:
+            text: ''
+            debug: ''
+            header: ''
+            code: ''
+        4:
+            text: ''
+            code: ''
+            header: ''
+        2:
+            code: ''
+            text: ''
+            header: ''
+        1:
+            text: ''
+            header: ''
+        6:
+            text: ''
+            header: ''
+    13:
+        7:
+            header: ''
+            code: ''
+            text: ''
+        5:
+            text: ''
+            header: ''
+            code: ''
+        8:
+            code: ''
+            debug: ''
+            header: ''
+            text: ''
+        9:
+            text: ''
+            header: ''
+        1:
+            header: ''
+            text: ''
+        2:
+            text: ''
+            header: ''
+            code: ''
+        6:
+            header: ''
+            code: ''
+            text: ''
+        3:
+            code: ''
+            text: ''
+            header: ''
+        4:
+            header: ''
+            text: ''
+    9:
+        4:
+            code: ''
+            text: ''
+            header: ''
+        7:
+            text: ''
+            code: ''
+            header: ''
+        2:
+            code: ''
+            text: ''
+            header: ''
+        8:
+            text: ''
+            code: ''
+            header: ''
+            debug: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
+        6:
+            code: ''
+            text: ''
+            header: ''
+        1:
+            header: ''
+            text: ''
+        5:
+            header: ''
+            code: ''
+            text: ''
+        9:
+            text: ''
+            header: ''
+    16:
+        3:
+            code: ''
+            header: ''
+            debug: ''
+            text: ''
+        2:
+            code: ''
+            header: ''
+            text: ''
+        1:
+            text: ''
+            header: ''
+        4:
+            text: ''
+            header: ''
+    17:
+        5:
+            header: ''
+            text: ''
+        4:
+            text: ''
+            debug: ''
+            code: ''
+            header: ''
+        1:
+            header: ''
+            text: ''
+        3:
+            code: ''
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: ''
+    15:
+        3:
+            text: ''
+            code: ''
+            debug: ''
+            header: ''
+        4:
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: ''
+        1:
+            text: ''
+            header: ''
+    12:
+        5:
+            header: ''
+            code: ''
+            text: ''
+        3:
+            text: ''
+            code: ''
+            header: ''
+        2:
+            text: ''
+            code: ''
+            header: ''
+        8:
+            text: ''
+            header: ''
+        7:
+            debug: ''
+            text: ''
+            code: ''
+            header: ''
+        6:
+            text: ''
+            header: ''
+        1:
+            header: ''
+            text: ''
+        4:
+            header: ''
+            text: ''
+    5:
+        8:
+            text: ''
+            header: ''
+        7:
+            text: ''
+            header: ''
+            code: ''
+            debug: ''
+        4:
+            code: ''
+            header: ''
+            text: ''
+        2:
+            code: ''
+            header: ''
+            text: ''
+        3:
+            debug: ''
+            text: ''
+            header: ''
+            code: ''
+        5:
+            header: ''
+            code: ''
+            text: ''
+        1:
+            header: ''
+            text: ''
+        6:
+            text: ''
+            header: ''
+            code: ''
+    6:
+        2:
+            code: ''
+            header: ''
+            text: ''
+        8:
+            text: ''
+            header: ''
+            code: ''
+        6:
+            header: ''
+            text: ''
+            code: ''
+        4:
+            header: ''
+            code: ''
+            text: ''
+        5:
+            header: ''
+            text: ''
+            code: ''
+        7:
+            header: ''
+            text: ''
+            code: ''
+        1:
+            header: ''
+            text: ''
+        3:
+            code: ''
+            text: ''
+            header: ''
+        10:
+            header: ''
+            text: ''
+        9:
+            text: ''
+            header: ''
+            debug: ''
+            code: ''
+    14:
+        2:
+            text: ''
+            code: ''
+            header: ''
+        4:
+            header: ''
+            text: ''
+        5:
+            header: ''
+            code: ''
+            text: ''
+        1:
+            text: ''
+            header: ''
+        6:
+            debug: ''
+            text: ''
+            code: ''
+            header: ''
+        7:
+            header: ''
+            text: ''
+        3:
+            text: ''
+            header: ''
+            code: ''
+    10:
+        4:
+            header: ''
+            text: ''
+            debug: ''
+            code: ''
+        2:
+            header: ''
+            code: ''
+            text: ''
+        5:
+            header: ''
+            text: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
+        1:
+            header: ''
+            text: ''
+    18:
+        1:
+            text: ''
+            header: ''
+        2:
+            editor: ''
+            text: ''
+            header: ''
+        3:
+            header: ''
+            text: ''
+    11:
+        1:
+            text: ''
+            header: ''
+        2:
+            header: ''
+            code: ''
+            text: ''
+        4:
+            header: ''
+            debug: ''
+            code: ''
+            text: ''
+        3:
+            code: ''
+            header: ''
+            text: ''
+        5:
+            text: ''
+            header: ''

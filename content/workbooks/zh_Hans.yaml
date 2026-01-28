@@ -3,9 +3,9 @@ levels:
     intro: "### 打印和输入\n在本课结束时，您可以：\n* 编写打印文本的代码\n* 创建带有输入的故事"
     exercises:
     - type: 文本
-      contents: "### 练习\n计算机不会自己做某事。你必须始终给计算机一个任务。这样的任务称为命令。要打印出代码，我们使用命令“print”。\n
-        \n### 打印文本\n在屏幕上，你刚刚看到了“print”命令。\n“print”命令会打印一个单词，如果它在引号之间。例如“print hello”。\n
-        #### 练习 1：预测输出"
+      contents: "### 练习\n计算机不会自己做某事。你必须始终给计算机一个任务。这样的任务称为命令。要打印出代码，我们使用命令“print”。\n\
+        \ \n### 打印文本\n在屏幕上，你刚刚看到了“print”命令。\n“print”命令会打印一个单词，如果它在引号之间。例如“print hello”。\n\
+        \ #### 练习 1：预测输出"
     - type: 输出
       code: 打印 Hello everybody
       answer: Hello everybody
@@ -32,11 +32,11 @@ levels:
       code: 打印 print
       answer: 正确
     - type: 文本
-      contents: "### 要求输入\n\n只有文本有点无聊。您还可以在 Hedy 中要求输入。输入是您提供给计算机的文本。\n计算机会记住该文本，并可以在以后显示给您。\n
-        此代码显示问题“你叫什么名字？”\n\n```hedy\n问你叫什么名字？\n```\n\n### 显示输入\n\nask 命令保存答案，但尚未显示。为此，您需要
+      contents: "### 要求输入\n\n只有文本有点无聊。您还可以在 Hedy 中要求输入。输入是您提供给计算机的文本。\n计算机会记住该文本，并可以在以后显示给您。\n\
+        \ 此代码显示问题“你叫什么名字？”\n\n```hedy\n问你叫什么名字？\n```\n\n### 显示输入\n\nask 命令保存答案，但尚未显示。为此，您需要
         `echo` 命令。`echo` 将在句子末尾显示答案。\n像这样：\n\n```hedy\n问你叫什么名字？\necho so your name
-        is:\n```\n\n如果有人叫 Olivia 使用此代码，则输出将是：\n\n```\nso your name is: Olivia\n```\n
-        \n请注意，计算机将准确打印您输入的文本。因此，使用冒号和大写或小写字母！\n\n#### 练习 3：预测输出\n\n预测这些程序的输出。假设已经填写了你自己的名字。"
+        is:\n```\n\n如果有人叫 Olivia 使用此代码，则输出将是：\n\n```\nso your name is: Olivia\n```\n\
+        \ \n请注意，计算机将准确打印您输入的文本。因此，使用冒号和大写或小写字母！\n\n#### 练习 3：预测输出\n\n预测这些程序的输出。假设已经填写了你自己的名字。"
     - type: 输出
       code: "ask 你叫什么名字？\necho 所以你的名字是："
       lines: '2'
@@ -94,8 +94,8 @@ levels:
       code: "名字is Hedy\npirint 你好 名字\n年龄is 17\nprint 你的年龄是 岁"
       answer: 行2和4
     - type: 文本
-      contents: "#### 练习 2：预测输出\n提示：您是否很难预测输出？请按照以下步骤操作：\n\n1. 标记设置变量的位置\n2. 标记使用变量的位置\n
-        3. 在这两个位置之间画一条线\n4. 在使用变量的位置写入值（“is”后面的内容）。"
+      contents: "#### 练习 2：预测输出\n提示：您是否很难预测输出？请按照以下步骤操作：\n\n1. 标记设置变量的位置\n2. 标记使用变量的位置\n\
+        \ 3. 在这两个位置之间画一条线\n4. 在使用变量的位置写入值（“is”后面的内容）。"
     - type: 输出
       code: "名字是 Mo\n打印 干得好名字！"
       answer: 干得好 Mo!
@@ -189,8 +189,8 @@ levels:
       goal: 使用列表中的文本的地方
       answer: 第 2 行结束
     - type: 文本
-      contents: "#### 练习 2：预测输出\n很难吗？再次使用这些步骤来预测变量的输出。\n1. 标记设置变量的位置\n2. 标记使用变量的位置\n
-        3. 在这两个位置之间画一条线\n4. 当使用 `at` `random` 时，从列表中随机选择一个项目。"
+      contents: "#### 练习 2：预测输出\n很难吗？再次使用这些步骤来预测变量的输出。\n1. 标记设置变量的位置\n2. 标记使用变量的位置\n\
+        \ 3. 在这两个位置之间画一条线\n4. 当使用 `at` `random` 时，从列表中随机选择一个项目。"
     - type: 输出
       answer: 今天**选一位老师**来教你！
       code: "teachers is Hermans, Merbis, Bagci, Senkal\nprint 今天有老师 teachers at random
@@ -231,8 +231,8 @@ levels:
       code: "answers is yes, no, maybe\nprint 答案是 answers at random"
     - type: 文本
       contents: "但有时您希望用户将项目添加到列表中。\n您可以使用`add to`命令来实现这一点。您还可以使用`remove from`命令从列表中删除项目。"
-      code: "animals is 🐿, 🦔, 🦇, 🦉\nanimal is ask 发出什么样的声音?\nadd animal to animals\n
-        print It was... animals at random"
+      code: "animals is 🐿, 🦔, 🦇, 🦉\nanimal is ask 发出什么样的声音?\nadd animal to animals\n\
+        \ print It was... animals at random"
     - type: 文本
       contents: '#### 练习 4：正确还是不正确？'
     - type: MC-code
@@ -310,8 +310,8 @@ levels:
     - lines: '5'
       text: 您不喜欢这项练习的哪些方面？
       type: 提问
-    intro: "### 列表和随机性\n在本课结束时，您可以：\n* 将多个项目保存在一个变量中，这称为列表。\n* 创建一个故事，其中会发生随机的事情。\n
-      * 创建一个将绘制随机事物的绘图。"
+    intro: "### 列表和随机性\n在本课结束时，您可以：\n* 将多个项目保存在一个变量中，这称为列表。\n* 创建一个故事，其中会发生随机的事情。\n\
+      \ * 创建一个将绘制随机事物的绘图。"
   4:
     exercises:
     - type: 文本
@@ -439,3 +439,364 @@ levels:
     intro: "## 引号\n在本课结束时，您可以：\n* 了解为什么编程中需要引号。\n* 将引号放在正确的位置。\n* 理解有关错误使用引号的错误消息。"
   5:
     intro: "## if else\n在本课结束时，您可以：\n* 让计算机对不同的输入做出反应。"
+    exercises:
+    - contents: ''
+      code: ''
+      type: ''
+    - contents: ''
+      type: ''
+    - goal: ''
+      code: ''
+      type: ''
+      answer: ''
+    - code: ''
+      answer: ''
+      goal: ''
+      type: ''
+    - code: ''
+      type: ''
+      answer: ''
+      goal: ''
+    - type: ''
+      contents: ''
+    - answer: ''
+      type: ''
+      goal: ''
+      code: ''
+    - code: ''
+      type: ''
+      goal: ''
+      answer: ''
+    - goal: ''
+      code: ''
+      answer: ''
+      type: ''
+    - type: ''
+      contents: ''
+    - options:
+      - ''
+      - ''
+      type: ''
+      answer: ''
+      code: ''
+    - type: ''
+      options:
+      - ''
+      - ''
+      code: ''
+      answer: ''
+    - type: ''
+      code: ''
+      options:
+      - ''
+      - ''
+      answer: ''
+    - type: ''
+      code: ''
+      options:
+      - ''
+      - ''
+      answer: ''
+    - type: ''
+      options:
+      - ''
+      - ''
+      code: ''
+      answer: ''
+    - options:
+      - ''
+      - ''
+      type: ''
+      code: ''
+      answer: ''
+    - type: ''
+      contents: ''
+    - code: ''
+      lines: ''
+      type: ''
+      answer: ''
+    - lines: ''
+      answer: ''
+      type: ''
+      code: ''
+    - type: ''
+      lines: ''
+      answer: ''
+      code: ''
+    - type: ''
+      answer: ''
+      lines: ''
+      code: ''
+    - contents: ''
+      type: ''
+    - word: ''
+      answer: ''
+      lines: ''
+      type: ''
+    - type: ''
+      contents: ''
+    - answer: ''
+      word: ''
+      lines: ''
+      type: ''
+    - answer: ''
+      lines: ''
+      word: ''
+      type: ''
+    - contents: ''
+      type: ''
+    - text: ''
+      type: ''
+      lines: ''
+    - text: ''
+      lines: ''
+      type: ''
+    - lines: ''
+      text: ''
+      type: ''
+    - type: ''
+      text: ''
+      lines: ''
+  7:
+    exercises:
+    - type: ''
+      contents: ''
+      code: ''
+    - type: ''
+      contents: ''
+    - type: ''
+      answer: ''
+      lines: ''
+      code: ''
+    - type: ''
+      answer: ''
+      lines: ''
+      code: ''
+    - type: ''
+      answer: ''
+      lines: ''
+      code: ''
+    - contents: ''
+      type: ''
+    - answer: ''
+      lines: ''
+      type: ''
+      output: ''
+    - type: ''
+      lines: ''
+      answer: ''
+      output: ''
+    - type: ''
+      contents: ''
+    - options:
+      - ''
+      - ''
+      answer: ''
+      type: ''
+      code: ''
+    - options:
+      - ''
+      - ''
+      answer: ''
+      code: ''
+      type: ''
+    - type: ''
+      options:
+      - ''
+      - ''
+      answer: ''
+      code: ''
+    - options:
+      - ''
+      - ''
+      answer: ''
+      type: ''
+      code: ''
+    - type: ''
+      contents: ''
+    - answer: ''
+      lines: ''
+      type: ''
+      word: ''
+    - contents: ''
+      type: ''
+    - type: ''
+      lines: ''
+      text: ''
+    - text: ''
+      type: ''
+      lines: ''
+    - type: ''
+      text: ''
+      lines: ''
+    - lines: ''
+      text: ''
+      type: ''
+    intro: ''
+  8:
+    exercises:
+    - type: ''
+      code: ''
+      contents: ''
+    - contents: ''
+      type: ''
+    - answer: ''
+      goal: ''
+      type: ''
+      code: ''
+    - answer: ''
+      code: ''
+      type: ''
+      goal: ''
+    - type: ''
+      code: ''
+      goal: ''
+      answer: ''
+    - type: ''
+      contents: ''
+    - code: ''
+      answer: ''
+      type: ''
+    - answer: ''
+      code: ''
+      type: ''
+    - type: ''
+      contents: ''
+    - answer: ''
+      type: ''
+      code: ''
+      lines: ''
+    - code: ''
+      lines: ''
+      type: ''
+      answer: ''
+    - type: ''
+      code: ''
+      answer: ''
+      lines: ''
+    - type: ''
+      contents: ''
+    - type: ''
+      options:
+      - ''
+      - ''
+      code: ''
+      answer: ''
+    - answer: ''
+      code: ''
+      options:
+      - ''
+      - ''
+      type: ''
+    - type: ''
+      answer: ''
+      options:
+      - ''
+      - ''
+      code: ''
+    - type: ''
+      options:
+      - ''
+      - ''
+      answer: ''
+      code: ''
+    - type: ''
+      contents: ''
+    - answer: ''
+      output: ''
+      type: ''
+    - answer: ''
+      output: ''
+      type: ''
+    - type: ''
+      contents: ''
+    - lines: ''
+      answer: ''
+      word: ''
+      type: ''
+    - type: ''
+      contents: ''
+    - text: ''
+      type: ''
+      lines: ''
+    - text: ''
+      lines: ''
+      type: ''
+    - text: ''
+      type: ''
+      lines: ''
+    - lines: ''
+      type: ''
+      text: ''
+    intro: ''
+  6:
+    exercises:
+    - contents: ''
+      code: ''
+      type: ''
+    - contents: ''
+      type: ''
+    - answer: ''
+      type: ''
+      code: ''
+      lines: ''
+    - type: ''
+      contents: ''
+    - code: ''
+      type: ''
+      lines: ''
+      answer: ''
+    - contents: ''
+      type: ''
+    - answer: ''
+      type: ''
+      lines: ''
+      code: ''
+    - lines: ''
+      type: ''
+      answer: ''
+      code: ''
+    - answer: ''
+      code: ''
+      lines: ''
+      type: ''
+    - answer: ''
+      type: ''
+      code: ''
+      lines: ''
+    - contents: ''
+      type: ''
+    - answer: ''
+      output: ''
+      type: ''
+    - answer: ''
+      type: ''
+      output: ''
+    - type: ''
+      answer: ''
+      output: ''
+    - contents: ''
+      type: ''
+    - word: ''
+      lines: ''
+      answer: ''
+      type: ''
+    - answer: ''
+      lines: ''
+      word: ''
+      type: ''
+    - contents: ''
+      type: ''
+    - text: ''
+      lines: ''
+      type: ''
+    - type: ''
+      text: ''
+      lines: ''
+    - type: ''
+      text: ''
+      lines: ''
+    - text: ''
+      lines: ''
+      type: ''
+    intro: ''
