@@ -1,6 +1,6 @@
 _DEFINE: ("tautuhi" | "define") _SPACE?
 _CALL: ("whakahaerea" | "call") _SPACE?
-_WITH: ("with" | "with") _SPACE?
+_WITH: ("" | "with") _SPACE?
 _DEF: ("tautuhi" | "def") _SPACE?
 _RETURN: ("whakahoki" | "return") _SPACE?
 _PRINT: ("tāngia" | "print") _SPACE?
@@ -30,25 +30,25 @@ _TO_LIST: _SPACE? ("ki" | "to")
 _REMOVE: ("tangohia" | "remove") _SPACE
 _FROM: _SPACE? ("i" | "from")
 _AT: _SPACE ("kei" | "at") _SPACE
-random: ("random" | "random") _SPACE?
+random: ("" | "random") _SPACE?
 _IN: _SPACE ("kei roto i" | "in") _SPACE
 _NOT_IN: _SPACE ("kāore i roto i" | "not in") _SPACE
 _IF: ("mehemea" | "if") _SPACE
-_ELSE: "else" | "else"
+_ELSE: "" | "else"
 _AND: _SPACE? ("," | "and") _SPACE
 _REPEAT: ("tāruatia" | "repeat") _SPACE
 _TIMES: _SPACE ("ngā wā" | "times")
 _FOR: ("mō" | "for") _SPACE
 _RANGE: ("whānui" | "range") _SPACE?
 _TO: _SPACE ("ki" | "to") _SPACE
-_STEP: "step" | "step"
-_ELIF: _SPACE? ("elif" | "elif") _SPACE
+_STEP: "" | "step"
+_ELIF: _SPACE? ("" | "elif") _SPACE
 _INPUT: ("tāuru" | "input")
 _OR: _SPACE? ("rānei" | "or") _SPACE
-_WHILE: ("while" | "while") _SPACE
+_WHILE: ("" | "while") _SPACE
 _LENGTH: "roa" | "length"
 _COLOR : ("kara" | "color") _SPACE?
 _PRESSED: ("pēhia" | "pressed") _SPACE?
 clear: ("whakawāteangia" | "clear") _SPACE?
-TRUE: ("true" | "True" | "true" | "True") _SPACE?
-FALSE: ("false" | "False" | "false" | "False") _SPACE?
+TRUE: ("" | "" | "true" | "True") _SPACE?
+FALSE: ("" | "" | "false" | "False") _SPACE?
