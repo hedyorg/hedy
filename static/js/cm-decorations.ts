@@ -16,7 +16,7 @@ export const addDebugWords = StateEffect.define<{ from: number, to: number }>({
 });
 export const removeDebugLine = StateEffect.define<void>();
 
-const breakpointGutterEffect = StateEffect.define<{ pos: number, on: boolean }>({
+const eyeMarkerGutterEffect = StateEffect.define<{ pos: number, on: boolean }>({
     map: (val, mapping) => ({ pos: mapping.mapPos(val.pos), on: val.on })
 });
 
@@ -114,23 +114,7 @@ export const incorrectLineField = StateField.define<DecorationSet>({
     provide: f => EditorView.decorations.from(f)
 })
 
-export const breakpointGutterState = StateField.define<RangeSet<GutterMarker>>({
-    create() { return RangeSet.empty },
-    update(set, transaction) {
-        set = set.map(transaction.changes)
-        for (let e of transaction.effects) {
-            if (e.is(breakpointGutterEffect)) {
-                if (e.value.on)
-                    set = set.update({ add: [deactivateGutterMarker.range(e.value.pos)] })
-                else
-                    set = set.update({ filter: from => from != e.value.pos })
-            }
-        }
-        return set
-    }
-});
-
-const deactivateLineState = StateField.define<DecorationSet>({
+export const deactivateLineState = StateField.define<DecorationSet>({
     create() { return Decoration.none },
     update(set, transaction) {
         set = set.map(transaction.changes);
@@ -181,45 +165,101 @@ export const decorationsTheme = EditorView.theme({
     }
 });
 
-
-const deactivateGutterMarker = new (class extends GutterMarker {
-  toDOM() {
-    let e = document.createElement("i");
-    e.className = "fa-solid fa-eye-slash";
-    return e;
-  }
-})();
-
-function toggleLine(view: EditorView, pos: number) {
-    let breakpoints = view.state.field(breakpointGutterState)
-    let isDeactivated = false
-    breakpoints.between(pos, pos, () => { isDeactivated = true })
-    view.dispatch({
-        effects: [
-            breakpointGutterEffect.of({ pos, on: !isDeactivated }),
-            deactivateLineEffect.of({ pos, on: !isDeactivated })
-        ]
-    })
+class EyeGutterMarker extends GutterMarker {
+    constructor(readonly isVisible: boolean) { 
+        super(); 
+    }
+    
+    toDOM() {
+        let e = document.createElement("i");
+        e.className = this.isVisible 
+            ? ["fa-solid", "fa-eye-slash", "cursor-pointer"].join(" ") // Active State
+            // We split it into multiple lines for readability.
+            // This is the default state when the eye is not visible
+            : [
+                "fa-solid",
+                "fa-eye-slash",
+                "cursor-pointer",
+                "opacity-0",
+                "hover:opacity-50",
+                "transition-opacity",
+                "duration-150"
+              ].join(" ");
+        return e;
+    }
 }
 
-export const breakpointGutter = [
-    breakpointGutterState,
+const eyeMarkerHidden = new EyeGutterMarker(false);
+const eyeMarkerVisible = new EyeGutterMarker(true);
+
+
+const eyeMarkerStateField = StateField.define<RangeSet<GutterMarker>>({
+    create() { return RangeSet.empty },
+    update(set, transaction) {
+        set = set.map(transaction.changes)
+        for (let e of transaction.effects) {
+            if (e.is(eyeMarkerGutterEffect)) {
+                // We only keep track of the on state, i.e when the eye is visible
+                // for the hidden decorators, we let the lineMarker handle that
+                if (e.value.on) {
+                    set = set.update({ filter: from => from != e.value.pos });
+                    set = set.update({ add: [eyeMarkerVisible.range(e.value.pos)] });
+                } else {
+                    set = set.update({ filter: from => from != e.value.pos });
+                }
+            }
+        }
+        return set
+    }
+});
+
+function toggleLine(view: EditorView, pos: number) {
+    let isCurrentlyVisible = false;
+    const eyeMarkers = view.state.field(eyeMarkerStateField);
+    eyeMarkers.between(pos, pos, () => { isCurrentlyVisible = true });
+    const nextState = !isCurrentlyVisible;
+    view.dispatch({
+        effects: [
+            eyeMarkerGutterEffect.of({ pos: pos, on: nextState }),
+            deactivateLineEffect.of({ pos: pos, on: nextState })
+        ]
+    });
+}
+
+export const eyeMarkerGutter = [
+    eyeMarkerStateField,
     deactivateLineState,
     gutter({
-        class: "cm-breakpoint-gutter",
-        markers: v => v.state.field(breakpointGutterState),
-        initialSpacer: () => deactivateGutterMarker,
+        class: "cm-eye-marker-gutter",
+
+        lineMarker: (_, __, otherMarkers) => {
+            // If there's already a visible eye marker, don't add another one
+            // This prevents having two eye icons at the same time
+            const hasVisibleEye = otherMarkers.some(m => m instanceof EyeGutterMarker);
+            if (hasVisibleEye) return null;
+            return eyeMarkerHidden;
+        },
+
+        markers: v => v.state.field(eyeMarkerStateField),
+        
+        initialSpacer: () => eyeMarkerVisible,
+        
         domEventHandlers: {
             mousedown(view, line) {
-                toggleLine(view, line.from)
-                return true
+                toggleLine(view, line.from);
+                return true;
             }
         }
     }),
     EditorView.baseTheme({
-        ".cm-breakpoint-gutter .cm-gutterElement": {
+        ".cm-eye-marker-gutter .cm-gutterElement": {
             paddingLeft: "5px",
-            cursor: "default"
+            paddingRight: "5px",
+            cursor: "default",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minWidth: "20px"
         },
         ".cm-disabled-line": {
             textDecoration: "line-through"
