@@ -40,7 +40,7 @@ from . import dynamo
 
 from .dynamo import DictOf, OptionalOf, ListOf, SetOf, RecordOf, EitherOf
 
-from hedy_content import MAX_LEVEL
+from hedy.content import MAX_LEVEL
 
 is_offline = getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS')
 
