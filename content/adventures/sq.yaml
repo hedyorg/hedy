@@ -895,26 +895,6 @@ adventures:
                     {print} Faleminderit per porosinë.
                     {print} ushqimi  juaj dhe  pije  do të jenë këtu!'
                     ```
-            6:
-                story_text: |
-                    Në këtë nivel komanda `{if}` ju lejon që të `{ask}`(pyesni) klientët tuaj dhe të trajtoni përgjigje të ndryshme.
-                    Në shembullin më poshtë, ju mund ta shikoni që mund ta `{ask}`(pyesni) klientin `{if}`(nëse) duan ta dëgjojnë specialitetin dhe Hedy mund të përgjigjet varësisht çka thotë klienti .
-                example_code: |
-                    ```
-                    {print} 'Mirë se erdhët në Restorant Hedy!'
-                    specialitet {is} {ask} 'A doni të dëgjoni specilialitetin tonë sotë?'
-                    {if} specialitet {is} po {print} 'E veçanta e sotme është mishi i pulës dhe orizi.' {else} {print} 'Ska problem.'
-                    ushqimi {is} {ask} 'Çfarë dëshironi të hani?'
-                    {print} 'Një ' ushqimi ', është duke arritur!'
-                    pije {is} {ask} 'Çfarë dëshironi të pini?'
-                    {if} pije {is} kola {print} 'Më falni, nuk kemi kola!' {else} {print} 'Zgjedhje e mirë!'
-                    çfarëdo {is} {ask} 'A dëshironi diçka {else}(tjetër)?'
-                    {print} 'Më lejo të përsërisë porosinë tuaj...'
-                    {print} 'Një ' ushqimi
-                    {if} pije {is} kola {print} 'dhe...' {else} {print} 'Një ' pije
-                    {if} çfarëdo {is} jo {print} 'Kjo ishte!' {else} {print} 'Një ' çfarëdo
-                    {print} 'Faleminderit për porosinë tuaj dhe shijoni ushqimin tuaj!'
-                    ```
             7:
                 story_text: |
                     Në këtë nivel mund të përdorni matematikën për të kalkuluar çmimin total të klientit tuaj, e cila do ta bëjë restorantin tuaj më reale.

@@ -1418,8 +1418,8 @@ adventures:
                     Make your own wheel of fortune, where you can win different prizes and get corresponding reactions
                 example_code: |
                     ```
-                    prizes is 1 million dollars, an apple pie, nothing
-                    your_prize is prizes {at} {random}
+                    prizes {is} 1 million dollars, an apple pie, nothing
+                    your_prize {is} prizes {at} {random}
                     {print} 'You win ' your_prize
                     {if} your_prize {is} '1 million dollars'
                     {print} 'Yeah! You are rich!'
@@ -1547,16 +1547,14 @@ adventures:
                     good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
                     bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
                     {if} person {in} friends
-                    {print} good_answer {at} {random}
-                    {else}
                     {print} bad_answer {at} {random}
+                    {else}
+                    {print} good_answer {at} {random}
                     ```
             7:
                 story_text: |
                     In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
                     For example you could calculate how rich you'll get or how many kids you will have when you grow up.
-
-
 
                     ### Exercise
                     Can you think of your own (silly) fortune telling machine?
@@ -2296,8 +2294,10 @@ adventures:
                     ```
                     animals {is} dog, cow, sheep
                     answer {is} {ask} 'What is your favorite animal?'
-                    _ answer _ animals _ 'Mine too!'
-                    _ _ 'My favorite animals are dogs, cows and sheep'
+                    _ answer _ animals
+                    _ 'Mine too!'
+                    _
+                    _ 'My favorite animals are dogs, cows and sheep'
                     ```
     is_command:
         name: '{is}'
@@ -2446,7 +2446,7 @@ adventures:
                     {print} 'A ticket is $2'
                     people = {ask} 'How many tickets would you like?'
                     price = people * 2
-                    {print} 'That will be $' price 'please'
+                    {print} 'That will be $' price ' please'
                     ```
     music:
         name: music
@@ -2565,21 +2565,18 @@ adventures:
                     ```
             6:
                 story_text: |
-                    With `{elif}` you can play different tunes for different situations. For example if a person is feeling happy, you can play them a happy tune.
+                    With `{elif}` you can play different notes for different situations. For example if a person is feeling happy, you can play them a happy note.
                     ### Exercise
-                    First create a sad tune, then create at least 2 other tunes for different moods.
+                    First create a sad note, then create at least 2 other tunes for different moods.
                 example_code: |
                     ```
-                    mood = {ask} 'How are you feeling today?'
+                    mood {is} {ask} 'How are you feeling today?'
                     {if} mood {is} happy
-                        {play} C4
-                        {play} E4
-                        {play} G4
-                        {play} C5
+                    {play} C4
                     {elif} mood {is} sad
-                        {play} _
+                    {play} _
                     {elif} mood {is} _
-                        {play} _
+                    {play} _
                     ```
             7:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\nThis calls for musical maths! Try out the example code a couple of times with different starting numbers.\nThen, see if you can compose a song using the numbers.\n"
@@ -3163,7 +3160,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Level 7 adds the `{repeat}` command. `{repeat}` can be used to execute one line of code multiple times. Like this:
+                    This level adds the `{repeat}` command. `{repeat}` can be used to execute one line of code multiple times. Like this:
 
                     ### Exercise
                     Play around with the `{repeat}` command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?
@@ -3354,7 +3351,7 @@ adventures:
                     drinks_in_stock {is} water, lemonade, cola, orange juice
                     drink {is} {ask} 'What would you like to drink?'
                     {if} drink {in} drinks_in_stock
-                    {print} 'One ' drink 'coming up!'
+                    {print} 'One ' drink ' coming up!'
                     {else}
                     {print} 'Sorry, we do not sell that'
                     ```
@@ -4437,7 +4434,7 @@ adventures:
         default_save_name: New Year's Countdown
         description: Countdown to the New Year!
         levels:
-            8:
+            9:
                 story_text: |
                     Countdown to the New Year.
 

@@ -898,8 +898,10 @@ adventures:
                     persoon {is} {ask} 'Wie ben jij?'
                     goed_antwoord {is} Hoera! Jij wint!, Jij gaat zeker winnen!, We hebben een WINNAAR!
                     fout_antwoord {is} Helaas! probeer nog eens!, Een ander wint!, Verliezer!
-                    {if} persoon {in} vrienden {print} goed_antwoord {at} {random}
-                    {else} {print} fout_antwoord {at} {random}
+                    {if} persoon {in} vrienden
+                    {print} fout_antwoord {at} {random}
+                    {else}
+                    {print} goed_antwoord {at} {random}
                     ```
             7:
                 story_text: |
@@ -1609,8 +1611,10 @@ adventures:
                     ```
                     dieren {is} koe, schaap, varken
                     antwoord {is} {ask} 'Wat is je lieverlingsdier?'
-                    _ antwoord _ dieren _ 'Mijne ook!'
-                    _ _ 'Mijn lievelingsdieren zijn koeien, schapen en varkens'
+                    _ antwoord _ dieren
+                    _ 'Mijne ook!'
+                    _
+                    _ 'Mijn lievelingsdieren zijn koeien, schapen en varkens'
                     ```
     is_command:
         levels:
@@ -2258,7 +2262,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    In level 7 leer je het `{repeat}` commando. Met `{repeat}` kan je een regel code meerdere keren laten uitvoeren. Zoals dit:
+                    In dit level leer je het `{repeat}` commando. Met `{repeat}` kan je een regel code meerdere keren laten uitvoeren. Zoals dit:
 
                     ### Opdracht
                     Probeer het `{repeat}` commando uit. Kan jij het happy birthday liedje in 3 regels code opschrijven in plaats van 4?
@@ -2443,8 +2447,10 @@ adventures:
                     ```
                     drank_voorraad {is} water, limonade, cola, sinaasappelsap
                     drank {is} {ask} 'Wat wilt u drinken?'
-                    {if} drank {in} drank_voorraad {print} 'Een ' drank 'komt eraan!'
-                    {else} {print} 'Sorry, dat hebben we niet'
+                    {if} drank {in} drank_voorraad
+                    {print} 'Een ' drank 'komt eraan!'
+                    {else}
+                    {print} 'Sorry, dat hebben we niet'
                     ```
             7:
                 story_text: |
