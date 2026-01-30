@@ -7,7 +7,6 @@ import time
 import functools
 import os
 from io import StringIO
-from os import path
 import re
 import string
 import random
@@ -27,25 +26,6 @@ commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 
 IS_WINDOWS = os.name == 'nt'
-
-prefixes_dir = path.join(path.dirname(__file__), 'prefixes')
-
-# Define code that will be used if some turtle command is present
-with open(f'{prefixes_dir}/turtle.py', encoding='utf-8') as f:
-    TURTLE_PREFIX_CODE = f.read()
-
-# Preamble that will be used for non-Turtle programs
-# numerals list generated from: https://replit.com/@mevrHermans/multilangnumerals
-with open(f'{prefixes_dir}/normal.py', encoding='utf-8') as f:
-    NORMAL_PREFIX_CODE = f.read()
-
-# Define code that will be used if a pressed command is used
-with open(f'{prefixes_dir}/pressed.py', encoding='utf-8') as f:
-    PRESSSED_PREFIX_CODE = f.read()
-
-# Define code that will be used if music code is used
-with open(f'{prefixes_dir}/music.py', encoding='utf-8') as f:
-    MUSIC_PREFIX_CODE = f.read()
 
 
 class Timer:
@@ -343,32 +323,74 @@ def code_blocks_from_markdown(markdown):
             yield MarkdownCode(node.literal.strip(), node.info)
 
 
-def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):
+def error_page(
+    error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None
+):
     if error not in [400, 403, 404, 500, 401]:
         error = 404
-    default = gettext('default_404')
+    default = gettext("default_404")
     error_image = error
     if error == 401:
-        default = gettext('default_401')
+        default = gettext("default_401")
         error_image = 403
     if error == 403:
-        default = gettext('default_403')
+        default = gettext("default_403")
     elif error == 500:
-        default = gettext('default_500')
+        default = gettext("default_500")
+    # The exception sent by flask is a wrapper around the original exception
+    original_exception = (
+        exception.original_exception
+        if exception and hasattr(exception, "original_exception")
+        else exception
+    )
+    original_exception = (
+        "".join(
+            traceback.TracebackException.from_exception(
+                original_exception, capture_locals=False
+            ).format()
+        )
+        if original_exception
+        else None
+    )
 
-    hx_request = bool(request.headers.get('Hx-Request'))
+    hx_request = bool(request.headers.get("Hx-Request"))
     if hx_request:
-        # For HTMX-request, just return the error as plain text body
-        return make_response(f'{default} {exception}', error)
+        # Return a json response, so we have access to the exception in the frontend
+        return make_response(
+            {
+                "code": error,
+                "message": default,
+                "stack_trace": original_exception,
+            },
+            error,
+        )
 
-    if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
+    if (
+        request.accept_mimetypes.accept_json
+        and not request.accept_mimetypes.accept_html
+    ):
         # Produce a JSON response instead of an HTML response
-        return make_response({"code": error,
-                              "error": default,
-                              "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}, error)
+        return make_response(
+            {
+                "code": error,
+                "message": default,
+                "stack_trace": original_exception,
+            },
+            error,
+        )
 
-    return render_template("error-page.html", menu=menu, error_image=error_image, iframe=iframe,
-                           page_error=page_error or ui_message or default or '', default=default), error
+    return (
+        render_template(
+            "error-page.html",
+            menu=menu,
+            error_image=error_image,
+            iframe=iframe,
+            page_error=page_error or ui_message or default or "",
+            default=default,
+            stack_trace=original_exception,
+        ),
+        error,
+    )
 
 
 def session_id():

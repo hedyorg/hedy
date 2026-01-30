@@ -12,4 +12,10 @@
           {{_('go_back_to_main')}}
       </button>
   </div>
+  <script>
+        console.error('======================================');
+        console.error('There was a server error, please report to the maintainers at hello@hedy.org');
+        console.error('{{ stack_trace | tojson | safe }}');
+        console.error('======================================');
+  </script>
 {% endblock %}
