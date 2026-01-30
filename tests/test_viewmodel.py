@@ -1,4 +1,4 @@
-import hedy_translation as ht
+import hedy.translation as ht
 
 
 def test_lang_switch_table():

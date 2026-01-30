@@ -236,7 +236,7 @@ adventures:
                     ```
             6:
                 story_text: "Agora que você pode usar `{elif}`, pode criar uma história ainda mais interativa! Você pode criar vários personagens, por exemplo, com características diferentes.\nOu você pode fazer com que seu jogador escolha qual caminho seguir, qual porta abrir ou qual poção mágica beber...\n\n### Exercício\nCrie sua própria história com 3 ou mais opções usando {elif}."
-                example_code: "```\ncharacter = {ask} 'Quem vai te ajudar na sua jornada?'\n{if} character {is} 'Daisy'\n{print} 'Você escolheu Daisy! Ela é a mais inteligente de todas!'\n{print} \"Daisy imediatamente diz que você não deve comer aquelas frutas ali.\"\n{elif} character {is} 'Jason'\n{print} 'Você escolheu Jason! Ele é o mais forte de todos!'\n{print} 'Jason levanta uma pedra, mostrando um mapa secreto embaixo'\n{elif} character {is} 'Sam'\n{print} 'Você escolheu Sam! Elas são as mais rápidas de todas!'\n{print} 'Sam sobe em uma árvore e vê que há uma vila não muito longe...'\n```\n\n            \n"
+                example_code: "```\ncharacter = {ask} 'Quem vai te ajudar na sua jornada?'\n{if} character {is} 'Daisy'\n{print} 'Você escolheu Daisy! Ela é a mais inteligente de todas!'\n{print} \"Daisy imediatamente diz que você não deve comer aquelas frutas ali.\"\n{elif} character {is} 'Jason'\n{print} 'Você escolheu Jason! Ele é o mais forte de todos!'\n{print} 'Jason levanta uma pedra, mostrando um mapa secreto embaixo'\n{elif} character {is} 'Sam'\n{print} 'Você escolheu Sam! Elas são as mais rápidas de todas!'\n{print} 'Sam sobe em uma árvore e vê que há uma vila não muito longe...'\n```\n"
     add_remove_command:
         default_save_name: comando_some_remova
         description: introduzindo {add} {to_list} e {remove} {from}
@@ -344,7 +344,7 @@ adventures:
                 story_text: A última coisa que teremos de mudar para que o código seja de Python é trocar `{ask}` por `{input}`.
         name: '{ask}'
     calculator:
-        name: Calculadora
+        name: calculadora
         default_save_name: Calculadora
         description: Crie uma calculadora
         levels:
@@ -418,16 +418,73 @@ adventures:
                     media = _
                     {print}('A sua média foi ', media)
                     ```
+                story_text: |
+                    Nesta aventura, você construirá uma calculadora que calcula sua média de notas. Se você conseguir fazer sua calculadora funcionar, poderá passar para a próxima aventura, que permite adicionar dois recursos extras.
+
+                    ### Exercício 1
+                    Preencha os espaços em branco para fazer a calculadora funcionar.
+
+                    * Comece na quarta linha e adicione uma pergunta para descobrir qual nota o aluno tirou.
+                    * Na quinta linha, você deverá calcular o total de todas as notas, então o total = total + nota.
+                    * Em seguida, defina o valor de retorno. Queremos retornar a média, então o total dividido pela quantidade de provas (4).
+
+                    * Por fim, finalize o código chamando a função na linha 8.
+
+                    Conseguiu? Ótimo! Gostaria de adicionar ainda mais recursos à sua calculadora? **Esta aventura continua na próxima aventura!**
             11:
                 story_text: "Este jogo de calculadora te ajuda a praticar a tabuada de multiplicação!\n### Exercício\nPreencha as lacunas. Queremos que o programa faça estas perguntas:\n```\nQuanto é 1 vezes 1?\nQuanto é 1 vezes 2?\nQuanto é 1 vezes 3?\nQuanto é 2 vezes 1?\nQuanto é 2 vezes 2?\nQuanto é 2 vezes 3?\nQuanto é 3 vezes 1?\nQuanto é 3 vezes 2?\nQuanto é 3 vezes 3?\n_\n```\n"
                 example_code: "```\nnúmeros = 1, 2, 3\n{for} _\n    {for} _\n        resposta = {ask} _\n        correta = número_1 * número_2\n        {if} resposta {is} correta\n            {print} 'Ótimo trabalho!'\n        {else}\n            {print} 'Isso está errado. A resposta certa é ' correta\n```\n"
+            16:
+                story_text: |
+                    Você pode adicionar o loop `{while}` ao jogo da calculadora que aprendeu a criar em um nível anterior.
+                    Isso garante que o jogador não possa prosseguir para a próxima pergunta se responder incorretamente.
+
+                    ### Exercício
+                    Adicione o loop `{while}` na função, pergunte ao jogador qual é o resultado de número_1 vezes número_2 e imprima a resposta.
+
+                    Em seguida, chame a função.
+                example_code: |
+                    ```
+                    {define} new_question():
+                        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        number_1 = numbers[random]
+                        number_2 = numbers[random]
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print}('Bem feito!')
+
+                    {print}('Dê 10 respostas corretas para ganhar!')
+                    {for} i {in} {range} 1 {to} 10:
+                        _
+                    {print}('Você ganhou!')
+                    ```
     calculator_2:
         default_save_name: Calculadora 2
         description: Calculadora 2
-        name: Calculadora 2
+        name: calculadora 2
         levels:
             15:
                 example_code: "```\n# Use seu próprio código da aventura anterior.\n```\n"
+                story_text: |
+                    ### Exercício 2
+                    **Esta é a segunda parte desta aventura.** A aventura começa na aventura anterior.
+
+                    Claro, nem sempre você quer calcular a média de 4 provas. Você pode querer calcular a média de 10 provas ou apenas de 2...
+                    Podemos resolver esse problema adicionando o argumento e a variável 'quantidade_de_provas'.
+
+                    * Comece uma nova linha na linha 3. Defina o argumento 'quantidade_de_provas' perguntando ao aluno quantas provas ele fez.
+
+                    * Altere o 4 na linha 4 para o novo argumento 'quantidade_de_provas'.
+
+                    * Por fim, altere o 4 na linha 6 para 'quantidade_de_provas'.
+
+                    Teste seu novo programa. Ele funciona?
+
+                    ### Exercício 3
+                    Você queria melhorar ainda mais o seu programa? Ótimo! No programa anterior, você só conseguia calcular a média de uma disciplina, mas seria melhor se você pudesse calcular a média de todas as disciplinas que quisesse! Não vamos dizer como fazer, mas daremos uma dica: Comece seu código na linha 1 com: {define} calculate_mean_grade {with} subject.
             10:
                 example_code: |
                     ```
@@ -436,6 +493,15 @@ adventures:
                     {if}_______
                         {print}_
                     ```
+                story_text: |
+                    ### Exercício 1
+                    Vamos tornar o programa de prática um pouco mais difícil. O jogador agora precisa responder corretamente a duas perguntas. Preencha os espaços em branco para completar o programa.
+
+                    ### Exercício 2
+                    Às vezes, os cálculos têm várias respostas corretas. Por exemplo, 10 pode ser dividido por 5 e por 2. Portanto, a pergunta 'Qual número divide 10?' pode ser respondida por 2 e por 5.
+                    Peça um cálculo que tenha várias respostas corretas, peça ao jogador para respondê-lo e determine se está correto usando `{ou}`.
+
+                    Esvazie o campo de programação e crie sua própria solução.
     clear_command:
         default_save_name: comando_limpe
         description: comando {clear}

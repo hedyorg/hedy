@@ -133,20 +133,21 @@ adventures:
                     ```
             6:
                 story_text: |-
-                    En una historia, alguien dice algunas palabras varias veces. Por ejemplo, cuando alguien pide ayuda o canta una canción.
-                    Puedes poner este tipo de repeticiones en tu historia, en este nivel con `{repeat}`.
+                    ¡Ahora que puedes usar `{elif}` puedes crear una historia incluso más interactiva! Podrías crear varios personajes que, por ejemplo, tengan diferentes características.
+                    O podrías hacer que tu jugador elija qué camino tomar, qué puerta abrir o qué poción mágica beber...
 
                     ### Ejercicio
-                    Añade repeticiones a tu propia historia. Vuelve a tus programas guardados, elige tu programa de historia de un nivel anterior y
-                    encuentra una línea que contenga `{print}` y ¡repítela!
+                    Crea tu propia historia con 3 opciones o más usando {elif}.
                 example_code: |
                     ```
-                    {print} 'La princesa grita pidiendo ayuda'
-                    {repeat} 5 {times} {print} '¡Ayuda!'
-                    {print} 'Por qué nadie viene en mi ayuda?'
+                    character{is} {ask} '¿Quién te ayudará en tu aventura?'
+                    {if} character {is} 'Daisy'
+                    {print} '¡Has elegido a Daisy! ¡Ella es la más inteligente de todos!'
+                    {elif} character {is} 'Jason'
+                    {print} '¡Has elegido a Jason! ¡Él es el más fuerte de todos!'
+                    {elif} character {is} 'Sam'
+                    {print} '¡Has elegido a Sam! ¡Él es el más rápido de todos!'
                     ```
-
-                                
             9:
                 story_text: "En este nivel puedes usar varias líneas en tus comandos `{if}`, ¡de esta manera puedes mejorar tu final malo o bueno!\n\n### Ejercicio 1\n El código de ejemplo muestra dos finales diferentes; uno donde los personajes usan una máquina del tiempo y otro en el que no.\nCompleta los espacios en blanco con al menos una frase por cada final. \n**Extra** Haz que la historia dure más. ¿Qué ocurre en la historia? Puedes también añadir un segundo `{ask}` con diferentes opciones.\n\n### Ejercicio 2\nVuelve a tus historias guardadas, escoge la historia del nivel 5. Escribe un final bueno y uno malo de al menos tres líneas cada uno.\n"
                 example_code: |
@@ -187,6 +188,23 @@ adventures:
                             {print} 'Robin deja la tienda y se va a casa'
                     {else}
                         {print} 'Robin se va a casa'
+                    ```
+                story_text_2: |
+                    Al usar los comandos `{and}` y `{or}`, puedes hacer tus historias más versátiles. Puedes hacer dos preguntas y responder a la combinación de ambas.
+
+                    ### Ejercicio 1
+                    Mira el código de ejemplo y termínalo. Luego añade al menos 2 códigos `{if}`más con `{and}` o `{or}`.
+
+                    ### Ejercicio 2
+                    Encuentra una historia de un nivel anterior, añade un `{and}` o un `{or}`.
+                    example_code: |
+                    ```
+                    {print} 'Nuestro héroe está caminando por el bosque'
+                    {print} 'El camino se divide en dos'
+                    path = {ask} '¿Qué camino deberíamos elegir?'
+                    weapon = {ask} '¿Qué arma esté sacando?'
+                    {if} path {is} 'left' {and} weapon {is} 'sword'
+                        _
                     ```
             11:
                 story_text: |
@@ -237,6 +255,19 @@ adventures:
                     ```
                     nombre = {input}("Cual es tu nombre?")
                     {print}('Bienvenido a esta historia!')
+                    ```
+            8:
+                story_text: |
+                    En una historia, alguien podría hablar varias veces seguidas. Por ejemplo, cuando alguien pide ayuda o canta una canción.
+                    En este nivel puedes hacer ese tipo de repeticiones en tu historia usando `{repeat}`.
+
+                    ### Ejercicio
+                    Añade repeticiones a tu propia historia. ¡Vuelve a tus programas guardados, elige tu programa de una historia de un nivel anterior y encuentra una línea que contenga `{print}` y repítela!.
+                example_code: |
+                    ```
+                    {print} 'La princesa siguió pidiendo ayuda'
+                    {repeat} 5 {times} {print} '¡Ayuda!'
+                    {print} '¿Por qué nadie me ayuda?'
                     ```
     add_remove_command:
         name: '{add} {to_list} y {remove} {from}'

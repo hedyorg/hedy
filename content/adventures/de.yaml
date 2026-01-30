@@ -269,9 +269,9 @@ adventures:
                     ```
                     character = {ask} 'Wer wird Ihnen bei Ihrer Suche helfen? '
                     {if} character  {is} 'Daisy'
-                    {print} 'Du hast Daisy ausgesucht! Sie ist die schlauste aller! '
+                    {print} 'Du hast Daisy ausgesucht! Sie ist die schlauste aller!'
                     {elif} character  {is} 'Jason'
-                    {print} 'Du hast Jason ausgewählt! Er ist der Größte von allen! '
+                    {print} 'Du hast Jason ausgewählt! Er ist der Größte von allen!'
                     {elif} character {is} 'Sam'
                     {print} 'Du hast Sam ausgewählt! Sie sind die schnellsten von allen! '
                     ```
@@ -739,6 +739,122 @@ adventures:
                     {print} 'Das wird $' gesamt ' bitte '
                     ```
             8:
+                story_text: |-
+                    ### Übung
+                    Debugge diesen Code. Viel Glück!
+                example_code: |-
+                    **Achtung! Dieser Code muss debuggt werden!**
+                    ```
+                    {print} 'Willkommen bei Maniküre und Pediküre von Hedy'
+                    bodyparts {is} {ask} 'Möchten Sie heute Ihre Finger- oder Zehennägel machen lassen? Oder beides?'
+                    {if} body {is} ‚both‘
+                    price = 25
+                    {else}
+                    18
+                    {print} 'Das macht dann $' price
+                    color = {ask} 'Welche Farbe möchten Sie?'
+                    sparkles = {ask} 'Möchten Sie dazu etwas Glitzer? Dafür berechnen wir 3 $ extra.'
+                    {if} sparkles {is} yes
+                    price = price + 3
+                    {else} {print} 'Also kein Aufpreis'
+                    {repeat} 3 {print} 'Noch eine Sekunde...'
+                    {print} 'Fertig! Das macht dann $' price ‚ bitte!'
+                    'Danke! Auf Wiedersehen!'
+                    ```
+                answer_code: |-
+                    ```
+                    {print} 'Willkommen bei Maniküre und Pediküre von Hedy'
+                    bodyparts = {ask} 'Lässt du dir heute die Fingernägel oder Zehennägel machen? Oder beides?'
+                    {if} bodyparts {is} 'beides'
+                    price = 25
+                    {else}
+                    price = 18
+                    {print} 'Das macht dann $' price
+                    color = {ask} 'Welche Farbe möchtest du?'
+                    sparkles = {ask} 'Möchten Sie dazu etwas Glitzer? Dafür berechnen wir 3 Dollar extra.'
+                    {if} sparkles {is} 'ja'
+                    price = price + 3
+                    {else} 
+                    {print} 'Also keine zusätzlichen Kosten
+                    {repeat} 3 {times} {print} 'Noch eine Sekunde...'
+                    {print} 'Alles fertig! Das macht dann bitte  $' price ' bitte!'
+                    {print} 'Danke Byebye!'
+                    ```
+            9:
+                story_text: |-
+                    ### Exercise
+                    Debugge diesen Code. Viel Glück!
+                example_code: |
+                    **Warning! Dieser Code muss debugged werden! **
+                    ```
+                    answer = 'Welcome to our pizza shop. Möchten Sie bestellen?'
+                    if answer
+                    amount 'Wie viele Pizzas möchten Sie kaufen?'
+                    else
+                    print "Du kaufst trotzdem einen!"
+                    amount = 1
+                    'Wir haben Margherita und Pepperoni Pizzas.'
+                    repeat amount
+                    chosen_pizza = ask 'Was für eine Art Pizza möchten Sie? '
+                    print 'Eine ' chosen_pizza '. '
+                    price = amount * 10
+                    Das ist ' price ' Dollar bitte. '
+                    ```
+                answer_code: |
+                    ```
+                    answer = ask 'Willkommen in unserer Pizzeria. Möchtest du bestellen?'
+                    if answer is yes
+                        amount = ask 'Wie viele Pizzen möchtest du kaufen?'
+                    else
+                        print "Du kaufst sowieso eine!"
+                        amount = 1
+                    print 'Wir haben Margherita und Peperoni Pizzen.'
+                    repeat amount times
+                        chosen_pizza = ask 'Welche Art von Pizza hättest du gerne?'
+                        print 'Eine ' chosen_pizza '.'
+                    price = amount * 10
+                    print 'Das macht ' price ' Dollar, bitte.'
+                    ```
+            10:
+                story_text: |-
+                    ### Exercise
+                    Debugge diesen Code. Viel Glück!
+                example_code: |
+                    **Achtung! Dieser Code muss debuggt werden!**
+                    ```
+                    {print} 'Willkommen in unserem Sandwich-Laden'
+                    amount 'Wie viele Sandwiches möchtest du kaufen?'
+                    {repeat} amount {times}
+                    {ask} {is} {ask} 'Welche Brotsorte hättest du gerne für dein Sandwich?'
+                    types_of_bread {is} Weißbrot, Vollkornbrot, Roggenbrot, Knoblauchbrot, glutenfrei
+                    {if} chosen_bread in types_of_bread
+                    {print} 'Wunderbar!'
+                    {else}
+                    'Tut mir leid, das verkaufen wir nicht'
+                    topping {is} {ask} 'Welche Art von Belag hättest du gerne?'
+                    sauce {is} {ask} 'Welche Art von Soße hättest du gerne?'
+                    {print} Ein chosen_bread mit topping und sauce.
+                    price = amount * 6
+                    {print} 'Das macht 'price Dollar' bitte'
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Willkommen in unserem Sandwich-Laden'
+                    amount = {ask} 'Wie viele Sandwiches möchtest du kaufen?'
+                    {repeat} amount {times}
+                        chosen_bread = {ask} 'Welche Brotsorte hättest du gerne für dein Sandwich?'
+                        types_of_bread = Weißbrot, Vollkornbrot, Roggenbrot, Knoblauchbrot, glutenfrei
+                        {if} chosen_bread {in} types_of_bread
+                            {print} 'Wunderbar!'
+                        {else}
+                            {print} "Tut mir leid, das verkaufen wir nicht"
+                        topping = {ask} 'Welche Art von Belag hättest du gerne?'
+                        sauce = {ask} 'Welche Art von Soße hättest du gerne?'
+                        {print} 'Ein ' chosen_bread ' mit ' topping ' und ' sauce '.'
+                    price = amount * 6
+                    {print} 'Das macht ' price ' Dollar, bitte.'
+                    ```
+            11:
                 story_text: |-
                     ### Übung
                     Debugge diesen Code. Viel Glück!
