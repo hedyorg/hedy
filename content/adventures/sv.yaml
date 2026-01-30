@@ -1049,8 +1049,10 @@ adventures:
                     ```
                     djur är hund, ko, får
                     svaret är fråga 'Vilket är ditt favoritdjur?'
-                    _ svar _ djur _ 'Mitt också!'
-                    _ _ 'Mina favoritdjur är hundar, kor och får'
+                    _ svar _ djur
+                    _ 'Mitt också!'
+                    _
+                    _ 'Mina favoritdjur är hundar, kor och får'
                     ```
     is_command:
         default_save_name: kommandot_är
@@ -1422,7 +1424,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Nivå 7 lägger till kommandot `{repeat}`. `{repeat}` kan användas för att köra en kodrad flera gånger. Så här:
+                    Nivå 8 lägger till kommandot `{repeat}`. `{repeat}` kan användas för att köra en kodrad flera gånger. Så här:
 
                     ### Övning
                     Lek litet med kommandot upprepa. Kan du göra happy birthday på bara tre rader kod istället för fyra nu?
@@ -1609,8 +1611,10 @@ adventures:
                     ```
                     drycker_i_lager {is} vatten, läsk, cola, apelsinjuice
                     dryck {is} {ask} 'Vad vill du dricka?'
-                    {if} dryck {in} drycker_i_lager {print} 'En' dryck 'på väg!'
-                    {else} {print} 'Tyvärr, vi har inte det'
+                    {if} dryck {in} drycker_i_lager
+                    {print} 'En' dryck 'på väg!'
+                    {else}
+                    {print} 'Tyvärr, vi har inte det'
                     ```
             7:
                 story_text: |

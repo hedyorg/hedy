@@ -1245,8 +1245,10 @@ adventures:
                     ```
                     animals {is} 狗, 牛, 羊
                     answer {is} {ask} '你最喜欢的动物是哪个?'
-                    _ answer _ animals _ '我也是!'
-                    _ _ '我最喜欢的动物是狗, 牛, 羊。'
+                    _ answer _ animals
+                    _ '我也是!'
+                    _
+                    _ '我最喜欢的动物是狗, 牛, 羊。'
                     ```
     is_command:
         default_save_name: is_命令
@@ -1759,7 +1761,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    第7级增加了 `{repeat}` 命令。`{repeat}` 可用于多次执行一行代码。是这样的:
+                    第8级增加了 `{repeat}` 命令。`{repeat}` 可用于多次执行一行代码。是这样的:
 
                     ### 练习
                     练习使用 `{repeat}` 命令。你能用3行代码而不是现在的4行代码来写生日快乐歌吗?

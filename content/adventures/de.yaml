@@ -1588,8 +1588,10 @@ adventures:
                     ```
                     tiere {is} Hund, Kuh, Schaf
                     antwort {is} {ask} 'Was is dein Lieblingstier?'
-                    _ antwort _ tiere _ 'Meines auch!'
-                    _ _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
+                    _ antwort _ tiere
+                    _ 'Meines auch!'
+                    _
+                    _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
                     ```
         name: '{in}'
     is_command:
@@ -2141,7 +2143,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    In Level 7 kommt der `{repeat}` Befehl. `{repeat}` kann benutzt werden, um eine Zeile Code mehrmals auszuführen. So:
+                    In Level 8 kommt der `{repeat}` Befehl. `{repeat}` kann benutzt werden, um eine Zeile Code mehrmals auszuführen. So:
 
                     ### Übung
                     Spiele mit dem `{repeat}` Befehl. Kannst du Happy Birthday mit 3 Zeilen anstellen von 4 machen?
@@ -2314,26 +2316,6 @@ adventures:
                     Getränke {is} {ask} Was würden Sie gerne dazu trinken?
                     {print} Danke für Ihre Bestellung.
                     {print} Ihre  Essen  und  Getränke  kommen sofort!
-                    ```
-            6:
-                story_text: |
-                    In diesem Level erlaubt dir der `{if}`-Befehl deinen Kundinnen oder Kunden Fragen zu stellen (`{ask}`) und verschiedene Antworten zu geben.
-                    In dem unteren Beispiel siehst du, dass du die Kundin oder den Kunden fragen (`{ask}`) kannst, ob (`{if}`) sie oder er die Tagesgerichte erfahren möchte, und Hedy kann dementsprechend antworten.
-                example_code: |
-                    ```
-                    {print} 'Willkommen im Restaurant Chez Hedy'
-                    Tagesgericht {is} {ask} 'Würden Sie gerne das heutige Tagesgericht erfahren?'
-                    {if} Tagesgericht {is} ja {print} 'Das Tagesgericht ist Nudeln mit Tomatensoße.' {else} {print} 'Ok, kein Problem.'
-                    Essen {is} {ask} 'Was würden Sie gerne essen?'
-                    {print} 'Einmal ' Essen ', kommt sofort!'
-                    Getränk {is} {ask} 'Was würden Sie gerne dazu trinken?'
-                    {if} Getränk {is} Cola {print} 'Tut mir leid, die Cola ist aus!' {else} {print} 'Großartige Wahl!'
-                    etwas {is} {ask} 'Hätten Sie gerne noch etwas?'
-                    {print} 'Lassen Sie mich Ihre Bestellung noch einmal wiederholen...'
-                    {print} 'Einmal ' Essen
-                    {if} Getränk {is} Cola {print} 'und...' {else} {print} 'Einmal ' Getränk
-                    {if} etwas {is} nein {print} 'Das ist alles!' {else} {print} 'Einmal ' etwas
-                    {print} 'Danke für Ihre Bestellung und guten Appetit!'
                     ```
             7:
                 story_text: |
