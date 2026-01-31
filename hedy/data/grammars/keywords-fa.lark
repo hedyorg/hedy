@@ -1,12 +1,12 @@
-_DEFINE: ("" | "define") _SPACE?
-_CALL: ("" | "call") _SPACE?
-_WITH: ("" | "with") _SPACE?
-_DEF: ("" | "def") _SPACE?
-_RETURN: ("" | "return") _SPACE?
+_DEFINE: ("define" | "define") _SPACE?
+_CALL: ("call" | "call") _SPACE?
+_WITH: ("with" | "with") _SPACE?
+_DEF: ("def" | "def") _SPACE?
+_RETURN: ("return" | "return") _SPACE?
 _PRINT: ("چاپ" | "print") _SPACE?
-_PLAY: ("" | "play") _SPACE
+_PLAY: ("play" | "play") _SPACE
 _ASK: ("بپرس" | "ask")
-_ECHO: ("" | "echo") _SPACE?
+_ECHO: ("echo" | "echo") _SPACE?
 _FORWARD: ("به جلو" | "forward") _SPACE?
 _TURN: ("دور بزن" | "turn") _SPACE?
 left: ("چپ" | "left") _SPACE?
@@ -22,33 +22,33 @@ purple: ("بنفش" | "purple") _SPACE?
 red: ("قرمز" | "red") _SPACE?
 white: ("سفید" | "white") _SPACE?
 yellow: ("زرد" | "yellow") _SPACE?
-_IS: _SPACE ("" | "is") _SPACE
-_STANDALONE_IS: ("" | "is")
-_SLEEP: ("" | "sleep") _SPACE?
-_ADD_LIST: ("" | "add") _SPACE
-_TO_LIST: _SPACE? ("" | "to")
-_REMOVE: ("" | "remove") _SPACE
-_FROM: _SPACE? ("" | "from")
-_AT: _SPACE ("" | "at") _SPACE
-random: ("" | "random") _SPACE?
-_IN: _SPACE ("" | "in") _SPACE
-_NOT_IN: _SPACE ("" | "not in") _SPACE
-_IF: ("" | "if") _SPACE
-_ELSE: "" | "else"
-_AND: _SPACE? ("" | "and") _SPACE
-_REPEAT: ("" | "repeat") _SPACE
-_TIMES: _SPACE ("" | "times")
-_FOR: ("" | "for") _SPACE
-_RANGE: ("" | "range") _SPACE?
-_TO: _SPACE ("" | "to") _SPACE
-_STEP: "" | "step"
-_ELIF: _SPACE? ("" | "elif") _SPACE
-_INPUT: ("" | "input")
-_OR: _SPACE? ("" | "or") _SPACE
-_WHILE: ("" | "while") _SPACE
-_LENGTH: "" | "length"
+_IS: _SPACE ("is" | "is") _SPACE
+_STANDALONE_IS: ("is" | "is")
+_SLEEP: ("sleep" | "sleep") _SPACE?
+_ADD_LIST: ("add" | "add") _SPACE
+_TO_LIST: _SPACE? ("to" | "to")
+_REMOVE: ("remove" | "remove") _SPACE
+_FROM: _SPACE? ("from" | "from")
+_AT: _SPACE ("at" | "at") _SPACE
+random: ("random" | "random") _SPACE?
+_IN: _SPACE ("in" | "in") _SPACE
+_NOT_IN: _SPACE ("not in" | "not in") _SPACE
+_IF: ("if" | "if") _SPACE
+_ELSE: "else" | "else"
+_AND: _SPACE? ("and" | "and") _SPACE
+_REPEAT: ("repeat" | "repeat") _SPACE
+_TIMES: _SPACE ("times" | "times")
+_FOR: ("for" | "for") _SPACE
+_RANGE: ("range" | "range") _SPACE?
+_TO: _SPACE ("to" | "to") _SPACE
+_STEP: "step" | "step"
+_ELIF: _SPACE? ("elif" | "elif") _SPACE
+_INPUT: ("input" | "input")
+_OR: _SPACE? ("or" | "or") _SPACE
+_WHILE: ("while" | "while") _SPACE
+_LENGTH: "length" | "length"
 _COLOR : ("رنگ" | "color") _SPACE?
-_PRESSED: ("" | "pressed") _SPACE?
-clear: ("" | "clear") _SPACE?
-TRUE: ("" | "" | "true" | "True") _SPACE?
-FALSE: ("" | "" | "false" | "False") _SPACE?
+_PRESSED: ("pressed" | "pressed") _SPACE?
+clear: ("clear" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?

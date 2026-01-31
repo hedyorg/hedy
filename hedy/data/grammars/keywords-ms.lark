@@ -1,14 +1,14 @@
-_DEFINE: ("" | "define") _SPACE?
+_DEFINE: ("define" | "define") _SPACE?
 _CALL: ("panggil" | "call") _SPACE?
-_WITH: ("" | "with") _SPACE?
-_DEF: ("" | "def") _SPACE?
+_WITH: ("with" | "with") _SPACE?
+_DEF: ("def" | "def") _SPACE?
 _RETURN: ("kembali" | "return") _SPACE?
-_PRINT: ("" | "print") _SPACE?
+_PRINT: ("print" | "print") _SPACE?
 _PLAY: ("main" | "play") _SPACE
 _ASK: ("tanya" | "ask")
-_ECHO: ("" | "echo") _SPACE?
-_FORWARD: ("" | "forward") _SPACE?
-_TURN: ("" | "turn") _SPACE?
+_ECHO: ("echo" | "echo") _SPACE?
+_FORWARD: ("forward" | "forward") _SPACE?
+_TURN: ("turn" | "turn") _SPACE?
 left: ("kiri" | "left") _SPACE?
 right: ("kanan" | "right") _SPACE?
 black: ("hitam" | "black") _SPACE?
@@ -22,33 +22,33 @@ purple: ("ungu" | "purple") _SPACE?
 red: ("merah" | "red") _SPACE?
 white: ("putih" | "white") _SPACE?
 yellow: ("kuning" | "yellow") _SPACE?
-_IS: _SPACE ("" | "is") _SPACE
-_STANDALONE_IS: ("" | "is")
+_IS: _SPACE ("is" | "is") _SPACE
+_STANDALONE_IS: ("is" | "is")
 _SLEEP: ("tidur" | "sleep") _SPACE?
 _ADD_LIST: ("tambah" | "add") _SPACE
-_TO_LIST: _SPACE? ("" | "to")
-_REMOVE: ("" | "remove") _SPACE
-_FROM: _SPACE? ("" | "from")
-_AT: _SPACE ("" | "at") _SPACE
-random: ("" | "random") _SPACE?
-_IN: _SPACE ("" | "in") _SPACE
-_NOT_IN: _SPACE ("" | "not in") _SPACE
+_TO_LIST: _SPACE? ("to" | "to")
+_REMOVE: ("remove" | "remove") _SPACE
+_FROM: _SPACE? ("from" | "from")
+_AT: _SPACE ("at" | "at") _SPACE
+random: ("random" | "random") _SPACE?
+_IN: _SPACE ("in" | "in") _SPACE
+_NOT_IN: _SPACE ("not in" | "not in") _SPACE
 _IF: ("kalau" | "if") _SPACE
-_ELSE: "" | "else"
+_ELSE: "else" | "else"
 _AND: _SPACE? ("dan" | "and") _SPACE
-_REPEAT: ("" | "repeat") _SPACE
-_TIMES: _SPACE ("" | "times")
-_FOR: ("" | "for") _SPACE
-_RANGE: ("" | "range") _SPACE?
-_TO: _SPACE ("" | "to") _SPACE
+_REPEAT: ("repeat" | "repeat") _SPACE
+_TIMES: _SPACE ("times" | "times")
+_FOR: ("for" | "for") _SPACE
+_RANGE: ("range" | "range") _SPACE?
+_TO: _SPACE ("to" | "to") _SPACE
 _STEP: "langkah" | "step"
-_ELIF: _SPACE? ("" | "elif") _SPACE
-_INPUT: ("" | "input")
+_ELIF: _SPACE? ("elif" | "elif") _SPACE
+_INPUT: ("input" | "input")
 _OR: _SPACE? ("atau" | "or") _SPACE
-_WHILE: ("" | "while") _SPACE
+_WHILE: ("while" | "while") _SPACE
 _LENGTH: "panjang" | "length"
 _COLOR : ("warna" | "color") _SPACE?
 _PRESSED: ("ditekan" | "pressed") _SPACE?
-clear: ("" | "clear") _SPACE?
-TRUE: ("" | "" | "true" | "True") _SPACE?
-FALSE: ("" | "" | "false" | "False") _SPACE?
+clear: ("clear" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?

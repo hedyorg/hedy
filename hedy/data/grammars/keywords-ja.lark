@@ -26,13 +26,13 @@ _IS: _SPACE ("は" | "is") _SPACE
 _STANDALONE_IS: ("は" | "is")
 _SLEEP: ("やすむ" | "sleep") _SPACE?
 _ADD_LIST: ("たす" | "add") _SPACE
-_TO_LIST: _SPACE? ("" | "to")
+_TO_LIST: _SPACE? ("to" | "to")
 _REMOVE: ("どける" | "remove") _SPACE
 _FROM: _SPACE? ("から" | "from")
-_AT: _SPACE ("" | "at") _SPACE
+_AT: _SPACE ("at" | "at") _SPACE
 random: ("てきとう" | "random") _SPACE?
 _IN: _SPACE ("の" | "in") _SPACE
-_NOT_IN: _SPACE ("" | "not in") _SPACE
+_NOT_IN: _SPACE ("not in" | "not in") _SPACE
 _IF: ("もし" | "if") _SPACE
 _ELSE: "そうじゃない" | "else"
 _AND: _SPACE? ("それと" | "and") _SPACE
@@ -40,7 +40,7 @@ _REPEAT: ("くりかえす" | "repeat") _SPACE
 _TIMES: _SPACE ("かい" | "times")
 _FOR: ("このあいだ" | "for") _SPACE
 _RANGE: ("はんい" | "range") _SPACE?
-_TO: _SPACE ("" | "to") _SPACE
+_TO: _SPACE ("to" | "to") _SPACE
 _STEP: "とばし" | "step"
 _ELIF: _SPACE? ("そうじゃなくてもし" | "elif") _SPACE
 _INPUT: ("いれる" | "input")

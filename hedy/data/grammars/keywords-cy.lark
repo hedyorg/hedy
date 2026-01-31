@@ -1,10 +1,10 @@
-_DEFINE: ("" | "define") _SPACE?
-_CALL: ("" | "call") _SPACE?
-_WITH: ("" | "with") _SPACE?
-_DEF: ("" | "def") _SPACE?
-_RETURN: ("" | "return") _SPACE?
+_DEFINE: ("define" | "define") _SPACE?
+_CALL: ("call" | "call") _SPACE?
+_WITH: ("with" | "with") _SPACE?
+_DEF: ("def" | "def") _SPACE?
+_RETURN: ("return" | "return") _SPACE?
 _PRINT: ("argraffu" | "print") _SPACE?
-_PLAY: ("" | "play") _SPACE
+_PLAY: ("play" | "play") _SPACE
 _ASK: ("gofyn" | "ask")
 _ECHO: ("adleisio" | "echo") _SPACE?
 _FORWARD: ("ymlaen" | "forward") _SPACE?
@@ -13,7 +13,7 @@ left: ("chwith" | "left") _SPACE?
 right: ("dde" | "right") _SPACE?
 black: ("du" | "black") _SPACE?
 blue: ("glas" | "blue") _SPACE?
-brown: ("" | "brown") _SPACE?
+brown: ("brown" | "brown") _SPACE?
 gray: ("llwyd" | "gray") _SPACE?
 green: ("gwyrdd" | "green") _SPACE?
 orange: ("oren" | "orange") _SPACE?
@@ -42,13 +42,13 @@ _FOR: ("ar gyfer" | "for") _SPACE
 _RANGE: ("ystod" | "range") _SPACE?
 _TO: _SPACE ("i" | "to") _SPACE
 _STEP: "cam" | "step"
-_ELIF: _SPACE? ("" | "elif") _SPACE
+_ELIF: _SPACE? ("elif" | "elif") _SPACE
 _INPUT: ("mewnbwn" | "input")
 _OR: _SPACE? ("neu" | "or") _SPACE
 _WHILE: ("tra" | "while") _SPACE
 _LENGTH: "hyd" | "length"
 _COLOR : ("lliw" | "color") _SPACE?
 _PRESSED: ("gwasgu" | "pressed") _SPACE?
-clear: ("" | "clear") _SPACE?
-TRUE: ("" | "" | "true" | "True") _SPACE?
-FALSE: ("" | "" | "false" | "False") _SPACE?
+clear: ("clear" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?
