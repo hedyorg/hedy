@@ -203,6 +203,26 @@ adventures:
 
                     Eğer bilmiyorsanız <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> hikayeye bir göz atın</a> , ve kitapta yazıldığı gibi yazdığınızdan emin olun. (Bunun gibi bir Türkçe kitap biliyorsanız onu da yazabilirsiniz)
                 example_code: "```\nhayvanlar = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n {print} 'What do you see?'\n```\n"
+            13:
+                story_text: |
+                    Başka bir hikaye yazdıracağız, ancak şimdi `{print}` ile parantez kullanmak zorundayız.
+
+                    ### Alıştırma 1
+                    En az 5 cümlelik bir hikaye oluşturun. Henüz herhangi bir 'isim' kullanmak zorunda değilsiniz.
+                example_code: |
+                    ```
+                    {print}('Bu hikayeye hoş geldiniz!')
+                    ```
+                story_text_2: |
+                    ### Alıştırma 2
+                    Sizin için zaten bir `{input}` hazırladık. Öncelikle hikayenizde `isim` değişkenini kullanın.
+                    Ardından ikinci bir `{ask}` ekleyin ve bu değişkeni de kullanın.
+                    İpucu: `{print}` içinde, metin ve değişkenler arasındaki virgülleri unutmayın!
+                example_code_2: |
+                    ```
+                    isim = {input}("Senin adın ne?")
+                    {print}('Bu hikayeye hoş geldin!')
+                    ```
             16:
                 story_text: |
                     `{while}` döngüsünü kullanmak hikayelerinizi daha ilginç hale getirebilir. Örneğin, oyun bitene kadar oynayabilmek için `{while} oyun == 'devam'` kullanabilirsiniz.
@@ -224,26 +244,6 @@ adventures:
                         {else}
                             {print} 'Hayır, burada değiller: ' yer
                     {print} 'Şimdi eve girebilirsiniz!'
-                    ```
-            13:
-                story_text: |
-                    Başka bir hikaye yazdıracağız, ancak şimdi `{print}` ile parantez kullanmak zorundayız.
-
-                    ### Alıştırma 1
-                    En az 5 cümlelik bir hikaye oluşturun. Henüz herhangi bir 'isim' kullanmak zorunda değilsiniz.
-                example_code: |
-                    ```
-                    {print}('Bu hikayeye hoş geldiniz!')
-                    ```
-                story_text_2: |
-                    ### Alıştırma 2
-                    Sizin için zaten bir `{input}` hazırladık. Öncelikle hikayenizde `isim` değişkenini kullanın.
-                    Ardından ikinci bir `{ask}` ekleyin ve bu değişkeni de kullanın.
-                    İpucu: `{print}` içinde, metin ve değişkenler arasındaki virgülleri unutmayın!
-                example_code_2: |
-                    ```
-                    isim = {input}("Senin adın ne?")
-                    {print}('Bu hikayeye hoş geldin!')
                     ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
@@ -284,7 +284,10 @@ adventures:
                     _
                     {print} Size çeşitler {at} {random} milkshake hazırladık
                     ```
+    and_or_command:
+        levels: {}
     ask_command:
+        name: sor
         default_save_name: sor_komutu
         description: sor komutuna giriş
         levels:
@@ -348,7 +351,6 @@ adventures:
                     isim = {input}('Senin adın ne?')
                     {print}('Demek senin ismin ', isim)
                     ```
-        name: sor
     calculator:
         name: Hesap Makinesi
         default_save_name: Hesap Makinesi
@@ -436,6 +438,8 @@ adventures:
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
                     Then `{call}` the function.
+    calculator_2:
+        levels: {}
     clear_command:
         default_save_name: temizle_komutu
         description: temizle komutu
@@ -457,6 +461,8 @@ adventures:
                     {clear}
                     {print} 'SÜRPRİZ!'
                     ```
+    congratulations:
+        levels: {}
     debugging:
         name: hata ayıklama
         default_save_name: hata ayıklama
@@ -825,6 +831,10 @@ adventures:
                         {print} isim ' evcil hayvan olarak ' pets {at} {random} ' besleyecek.'
                         {sleep}
                     ```
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
     harry_potter:
         description: Harry Potter maceraları
         levels:
@@ -1000,6 +1010,10 @@ adventures:
                     {if} oyuncu {is} canlı
                         {print} 'Harika! Hayatta kaldınız!'
                     ```
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
     if_command:
         default_save_name: eğer_komutu
         description: eğer komutuna giriş
@@ -2351,17 +2365,3 @@ adventures:
         name: Yeni Yıl
         default_save_name: Yeni Yıl Geri Sayımı
         description: Yeni Yıl için Geri Sayım!
-    and_or_command:
-        levels: {}
-    functions:
-        levels: {}
-    hotel:
-        levels: {}
-    hospital:
-        levels: {}
-    calculator_2:
-        levels: {}
-    congratulations:
-        levels: {}
-    guess_my_number:
-        levels: {}

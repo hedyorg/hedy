@@ -116,6 +116,8 @@ adventures:
                     Encontra uma forma de incluíres na tua história, pelo menos, 2 comandos `{if}` e `{else}`.
                     Podes fazê-lo com um final feliz e outro triste, mas podes também experimentar outras maneiras de incorporar os comandos.
                 example_code: "```\nnome {is} {ask} 'Quem está a andar na floresta?'\n{print} nome 'caminha pela floresta'\n{print} nome 'encontra um monstro'\nfim {is} {ask} 'Preferes um final bom ou mau?'\n{if} fim {is}bom{print} nome 'pega na espada e o monstro foge rapidamente'\n{else} {print} 'O monstro comeu' nome\n"
+            6:
+                story_text: "Agora que podes usar `{elif}` podes criar uma história ainda mais interativa! Podes criar múltiplos personagens que tenham por exemplo, diferentes personalidades\n\n###Exercício\nCria a tua própria história com 3 ou mais opções usando o {elif}."
             8:
                 story_text: |
                     Numa históra, alguém pode repetir palavras várias vezes. Por exemplo, quando gritam por ajuda ou cantam uma canção.
@@ -188,13 +190,6 @@ adventures:
 
                     Vai ver <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> a história</a>, se ainda não a conheces, e assegura-te que é escrita conforme está no livro.
                 example_code: "```\nanimais = _ , _, ­­­_  \n{print} 'Urso Castanho, Urso Castanho'\n{print} 'O que vês aqui?'\n```\n"
-            16:
-                story_text: |
-                    Recorrendo ao ciclo `{while}` podes tornar as tuas histórias mais interessantes. Por exemplo, podes usar `{while} game == 'on'` para que possas jogar até o jogo chegar ao fim.
-                    Ou então podes usar `{while} sword == 'lost'` para que o jogador não possa continuar o jogo, até que encontre algum objecto.
-
-                    ### Exercício
-                    O código de exemplo mostra-te como usar o ciclo `{while}` numa história. Agora, **pensa no teu próprio cenário** no qual o jogador tem de encontrar algo antes que possa continuar.
             13:
                 story_text: |
                     Vamos agora escrever outra história, mas agora temos de usar chavetas com o `{print}`.
@@ -215,8 +210,37 @@ adventures:
                     nome = {input}("Qual é o teu nome?")
                     {print}('Bem-vindo(a) a esta história!')
                     ```
-            6:
-                story_text: "Agora que podes usar `{elif}` podes criar uma história ainda mais interativa! Podes criar múltiplos personagens que tenham por exemplo, diferentes personalidades\n\n###Exercício\nCria a tua própria história com 3 ou mais opções usando o {elif}."
+            16:
+                story_text: |
+                    Recorrendo ao ciclo `{while}` podes tornar as tuas histórias mais interessantes. Por exemplo, podes usar `{while} game == 'on'` para que possas jogar até o jogo chegar ao fim.
+                    Ou então podes usar `{while} sword == 'lost'` para que o jogador não possa continuar o jogo, até que encontre algum objecto.
+
+                    ### Exercício
+                    O código de exemplo mostra-te como usar o ciclo `{while}` numa história. Agora, **pensa no teu próprio cenário** no qual o jogador tem de encontrar algo antes que possa continuar.
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
+    ask_command:
+        levels: {}
+    calculator:
+        levels: {}
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
+    dice:
+        levels: {}
+    dishes:
+        levels: {}
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
     fortune:
         levels:
             3:
@@ -231,89 +255,65 @@ adventures:
                     {sleep} 2
                     {print} respostas {at} {random}
                     ```
-    restaurant:
+    functions:
         levels: {}
-    language:
+    guess_my_number:
+        levels: {}
+    harry_potter:
         levels: {}
     haunted:
         levels: {}
-    repeat_command:
+    hospital:
         levels: {}
-    turtle:
+    hotel:
         levels: {}
-    calculator:
+    if_command:
         levels: {}
-    secret:
+    in_command:
         levels: {}
-    rock:
+    is_command:
         levels: {}
-    dishes:
+    language:
         levels: {}
-    dice:
+    maths:
+        levels: {}
+    music:
         levels: {}
     parrot:
         levels: {}
     piggybank:
         levels: {}
-    songs:
-        levels: {}
-    quizmaster:
-        levels: {}
-    add_remove_command:
-        levels: {}
-    while_command:
-        levels: {}
-    for_command:
-        levels: {}
-    random_command:
-        levels: {}
-    debugging:
-        levels: {}
-    clear_command:
-        levels: {}
-    ask_command:
-        levels: {}
-    music:
-        levels: {}
-    functions:
-        levels: {}
-    and_or_command:
-        levels: {}
-    elif_command:
-        levels: {}
-    repeat_command_2:
-        levels: {}
-    hospital:
-        levels: {}
-    quotation_marks:
-        levels: {}
-    calculator_2:
-        levels: {}
     pressit:
-        levels: {}
-    is_command:
-        levels: {}
-    sleep_command:
-        levels: {}
-    maths:
-        levels: {}
-    turtle_draw_it:
-        levels: {}
-    congratulations:
         levels: {}
     print_command:
         levels: {}
-    hotel:
+    quizmaster:
         levels: {}
-    harry_potter:
+    quotation_marks:
         levels: {}
-    if_command:
+    random_command:
         levels: {}
-    guess_my_number:
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    restaurant:
+        levels: {}
+    rock:
         levels: {}
     rock_2:
         levels: {}
-    in_command:
+    secret:
+        levels: {}
+    sleep_command:
+        levels: {}
+    songs:
         levels: {}
     songs_2:
+        levels: {}
+    turtle:
+        levels: {}
+    turtle_draw_it:
+        levels: {}
+    while_command:
         levels: {}

@@ -121,6 +121,23 @@ adventures:
                     {if} end {is} good {print} name 'достаёт свой меч, и монстр быстро убегает'
                     {else} {print} 'Монстр съел' name
                     ```
+            6:
+                story_text: |-
+                    Теперь, когда вы можете использовать `{инесл}` вы можете создать еще более интерактивную историю! Например, вы можете создать несколько персонажей, каждый из которых будет иметь разные черты характера. 
+                    Или вы можете позволить игроку выбрать, по какой дороге идти, какую дверь открыть или какое волшебное зелье выпить... 
+
+                    # ## Упражнение 
+                    Создайте свою собственную историю с 3 или более вариантами, используя {инесл} .
+                example_code: |
+                    "` 
+                    характер {это}  {вопрос} — Кто поможет тебе в твоих поисках? 
+                    {если} характер {это} 'Маргаритка' 
+                    {печатать} «Вы выбрали Дейзи! Она самая умная из всех!» 
+                    {инесл} характер {это} 'Джейсон' 
+                    {печатать} «Вы выбрали Джейсона! Он самый сильный из них всех!» 
+                    {инесл} характер {это} 'Один' 
+                    {печатать} «Вы выбрали Сэма!» Они самые быстрые из всех! 
+                    "`
             8:
                 story_text: |
                     В рассказе кто-то произносит слова несколько раз. Например, когда кто-то зовет на помощь или поет песню.
@@ -178,13 +195,6 @@ adventures:
 
                     Посмотрите на  <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">рассказ</a> если вы его не видели раньше и убедитесь что ваш рассказ напечатан так же как и в книге.
                 example_code: "```\nживотные = _ , _ , _ \n{print} 'Бурый мишка, Бурый мишка'\n{print} 'Что ты видишь?'\n```\n"
-            16:
-                story_text: |
-                    Использование цикла `{while}` может сделать ваши истории более интересными. Например, вы можете использовать `{while} game == 'on'`, чтобы можно было играть до тех пор, пока игра не закончится.
-                    Или вы можете использовать `{while} sword == 'lost'`, чтобы игрок не мог продолжить игру, пока не найдет что-нибудь.
-
-                    ### Exercise
-                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
             13:
                 example_code: |
                     ```
@@ -200,23 +210,19 @@ adventures:
                     имя = {input}("Как вас зовут?")
                     {print}('Добро пожаловать в эту историю!')
                     ```
-            6:
-                story_text: |-
-                    Теперь, когда вы можете использовать `{инесл}` вы можете создать еще более интерактивную историю! Например, вы можете создать несколько персонажей, каждый из которых будет иметь разные черты характера. 
-                    Или вы можете позволить игроку выбрать, по какой дороге идти, какую дверь открыть или какое волшебное зелье выпить... 
+            16:
+                story_text: |
+                    Использование цикла `{while}` может сделать ваши истории более интересными. Например, вы можете использовать `{while} game == 'on'`, чтобы можно было играть до тех пор, пока игра не закончится.
+                    Или вы можете использовать `{while} sword == 'lost'`, чтобы игрок не мог продолжить игру, пока не найдет что-нибудь.
 
-                    # ## Упражнение 
-                    Создайте свою собственную историю с 3 или более вариантами, используя {инесл} .
-                example_code: |
-                    "` 
-                    характер {это}  {вопрос} — Кто поможет тебе в твоих поисках? 
-                    {если} характер {это} 'Маргаритка' 
-                    {печатать} «Вы выбрали Дейзи! Она самая умная из всех!» 
-                    {инесл} характер {это} 'Джейсон' 
-                    {печатать} «Вы выбрали Джейсона! Он самый сильный из них всех!» 
-                    {инесл} характер {это} 'Один' 
-                    {печатать} «Вы выбрали Сэма!» Они самые быстрые из всех! 
-                    "`
+                    ### Exercise
+                    The example code shows you how to use the `{while}` loop in a story. Now **think of your own scenario** in which the player has to find something before they can continue.
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
+    ask_command:
+        levels: {}
     calculator:
         name: Калькулятор
         default_save_name: Калькулятор
@@ -268,6 +274,14 @@ adventures:
                 story_text: |
                     Вы можете добавить цикл `{while}` в игру-калькулятор, которую вы научились делать в предыдущем уровне.
                     Это гарантирует, что игрок не сможет перейти к следующему вопросу {if} при неправильном ответе.
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
     dice:
         name: Кубики
         default_save_name: Кубики
@@ -425,6 +439,10 @@ adventures:
                     _ день _ дни
                         {print} имена {at} {random} ''моет посуду в '' день
                     ```
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
     fortune:
         name: Предсказатель
         default_save_name: Гадалка
@@ -543,6 +561,12 @@ adventures:
             11:
                 story_text: |
                     В этом уровне вы узнаете, как программировать игру MASH (mansion, apartement, shack, house). В этой игре вы можете предсказать всем игрокам сразу, каким будет их будущее.
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
     haunted:
         name: Дом с привидениями
         default_save_name: Дом с привидениями
@@ -616,6 +640,16 @@ adventures:
                     ```
             10:
                 story_text: "В этом уровне вы можете использовать вложенность, которая позволяет сделать дом с привидениями еще более интерактивным!\n\n### Упражнение\n Сейчас очень трудно выиграть в этой игре, можете ли вы сделать так, чтобы выиграть было легче?\nИзмените свой код так, чтобы в нем была только одна неправильная дверь и две правильные, а не одна правильная дверь и две неправильные? \nПодсказка: Это означает замену переменной correct_door на wrong_door, а также изменение кода `{if}` и `{else}`.\nИ, конечно, вы можете изменить историю и сделать ее своей. Измените монстров или сделайте это счастливым игровым шоу, в котором вы получаете подарок!\n"
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
+    is_command:
+        levels: {}
     language:
         name: Язык
         default_save_name: Язык
@@ -626,6 +660,10 @@ adventures:
                     Создайте свою собственную программу для тренировки словарного запаса на новом языке.
 
                     Можете ли вы сделать эту программу для другого языка? Или вы можете добавить больше слов во французскую программу?
+    maths:
+        levels: {}
+    music:
+        levels: {}
     parrot:
         name: Попугай
         default_save_name: Попугай
@@ -726,6 +764,8 @@ adventures:
                     недели = экономия / пособие
                     {print} 'Ты можешь купить _ за _ недель'
                     ```
+    pressit:
+        levels: {}
     print_command:
         levels:
             1:
@@ -736,6 +776,14 @@ adventures:
         name: Викторина
         default_save_name: Викторина
         description: Составьте свою собственную викторину!
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
         levels: {}
     restaurant:
         name: Ресторан
@@ -1007,6 +1055,8 @@ adventures:
                             выиграл = 'да'
                     _
                     ```
+    rock_2:
+        levels: {}
     secret:
         name: СуперШпион
         default_save_name: СуперШпион
@@ -1024,6 +1074,8 @@ adventures:
                     {else}
                         {print} 'Отправиться на вокзал в 10.00'
                      ```
+    sleep_command:
+        levels: {}
     songs:
         name: Спойте песню!
         default_save_name: Песня
@@ -1110,6 +1162,8 @@ adventures:
                         {print} 'там ' звук
                         {print} 'везде ' звук звук звук
                     ```
+    songs_2:
+        levels: {}
     turtle:
         name: Черепаха
         default_save_name: Черепаха
@@ -1186,65 +1240,11 @@ adventures:
                 story_text_2: |
                     Кроме того, теперь мы можем усовершенствовать программу, которая рисует различные фигуры.
                     Можете ли вы определить, насколько черепаха должна повернуться здесь? Доработайте код, и вы сможете нарисовать любой многоугольник, какой захотите!
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}
     years:
         name: Новый год
         default_save_name: Новогодний отсчет
         description: Обратный отсчет до Нового года!
-    while_command:
-        levels: {}
-    for_command:
-        levels: {}
-    random_command:
-        levels: {}
-    debugging:
-        levels: {}
-    clear_command:
-        levels: {}
-    add_remove_command:
-        levels: {}
-    ask_command:
-        levels: {}
-    music:
-        levels: {}
-    functions:
-        levels: {}
-    and_or_command:
-        levels: {}
-    elif_command:
-        levels: {}
-    songs_2:
-        levels: {}
-    hotel:
-        levels: {}
-    repeat_command_2:
-        levels: {}
-    hospital:
-        levels: {}
-    quotation_marks:
-        levels: {}
-    calculator_2:
-        levels: {}
-    pressit:
-        levels: {}
-    is_command:
-        levels: {}
-    sleep_command:
-        levels: {}
-    maths:
-        levels: {}
-    turtle_draw_it:
-        levels: {}
-    repeat_command:
-        levels: {}
-    congratulations:
-        levels: {}
-    harry_potter:
-        levels: {}
-    if_command:
-        levels: {}
-    guess_my_number:
-        levels: {}
-    rock_2:
-        levels: {}
-    in_command:
-        levels: {}

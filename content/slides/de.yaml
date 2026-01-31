@@ -102,98 +102,135 @@ levels:
             code: |-
                 {forward} 50
         11:
+            header: 'Zeichnen mit der Schildkröte: {turn}'
+            text: '`{turn}` wird benutzt, um die Schildkröte nach rechts oder links zu drehen.'
             code: |-
                 {forward} 50
                 {turn} {left}
-            header: 'Zeichnen mit der Schildkröte: {turn}'
-            text: '`{turn}` wird benutzt, um die Schildkröte nach rechts oder links zu drehen.'
+        12:
+            header: Debugging
+            text: Debugging von Code bedeutet, die Fehler im Code zu entfernen. Lass uns gemeinsam diesen Code debuggen. Klick auf den Marienkäfer, um den Debugger zu starten.
+            code: "Ich bin DJ Hedy\n{print} Welches Lied würdest du gerne hören?\n{ask} Ich mag dieses Lied auch!\n{print} Als nächstes … {echo}"
+            debug: Wahr
         13:
             header: Lass den Programmierspaß beginnen!
             text: Genieß die Abenteuer in Level 1!
-        12:
-            debug: Wahr
-            text: Debugging von Code bedeutet, die Fehler im Code zu entfernen. Lass uns gemeinsam diesen Code debuggen. Klick auf den Marienkäfer, um den Debugger zu starten.
-            header: Debugging
-            code: "Ich bin DJ Hedy\n{print} Welches Lied würdest du gerne hören?\n{ask} Ich mag dieses Lied auch!\n{print} Als nächstes … {echo}"
     2:
+        1:
+            header: Willkommen in Level 2
+            text: "In diesem Level lernst du, Variablen zu nutzen.\n\nEine Variable ist ein Wort, das genutzt werden kann, um Informationen zu speichern.\n\nZum Beispiel: Ein Name, Alter oder die Lieblingsmannschaft"
         2:
+            header: Variablen
+            text: Um eine Variable zu erstellen oder 'zu setzen', nutzen wir den `{is}` Befehl
             code: |-
                 name {is} Hedy
                 alter {is} 15
                 {print} name ist alter Jahre alt
-            text: Um eine Variable zu erstellen oder 'zu setzen', nutzen wir den `{is}` Befehl
-            header: Variablen
         3:
-            text: |
             header: Interaktiv
+            text: |
             code: "name {is} {ask} Wie heißt du?\n{print} Hallo name"
         4:
+            header: Mehrere Variablen
             text: ''
             code: |-
                 name {is} {ask} Was ist dein Name?
                 {print} Hallo name
                 alter {is} {ask} Wie alt bist du?
                 {print} name ist alter Jahre alt.
-            header: Mehrere Variablen
         5:
+            header: Schlafen
+            text: Du kannst auch den `{sleep}` Befehl benutzen, um deinen Code für eine Weile zu pausieren.
             code: |-
                 {print} Meine Lieblingsfarbe ist...
                 {sleep} 2
                 {print} Grün!
-            text: Du kannst auch den `{sleep}` Befehl benutzen, um deinen Code für eine Weile zu pausieren.
-            header: Schlafen
         6:
+            header: Schlaf 5
+            text: "Du kannst eine Zahl hinter den`{sleep}` Befehl schreiben, wenn du die Pause länger machen möchtest.\n\nWenn du möchtest, kannst du sogar eine Variable statt einer Zahl nutzen, um die Länge des Schlafen-Befehls zu bestimmen."
             code: |-
                 pause {is} 10
                 {print} Meine Lieblingsfarbe ist...
                 {sleep} pause
                 {print} Grün!
-            header: Schlaf 5
-            text: "Du kannst eine Zahl hinter den`{sleep}` Befehl schreiben, wenn du die Pause länger machen möchtest.\n\nWenn du möchtest, kannst du sogar eine Variable statt einer Zahl nutzen, um die Länge des Schlafen-Befehls zu bestimmen."
         7:
-            debug: Wahr
             header: Debugging
-            code: "{print} Willkommen in Donut-Laden!\nFüllung {is} Welche Füllung möchtest du?\n{print} Du hast gewählt … Füllung! Lecker!\nTopping {ask} Welches Topping möchtest du?\nTopping ist lecker!\n{print} Ich hol dir deinen Donut. {sleep}\n{print} Bitteschön! A Füllung Donut mit Topping!\n{ask} Schönen Tag noch!"
             text: Debugging eines Codes bedeutet, Fehler zu entfernen. Lass und diesen Code gemeinsam debuggen. Klick auf den Marienkäfer um den Debugger zu starten.
-        1:
-            header: Willkommen in Level 2
-            text: "In diesem Level lernst du, Variablen zu nutzen.\n\nEine Variable ist ein Wort, das genutzt werden kann, um Informationen zu speichern.\n\nZum Beispiel: Ein Name, Alter oder die Lieblingsmannschaft"
-        8:
-            text: Genieße die Abenteuer in Level 2!
-            header: Lass den Programmierspaß beginnen!
-    3:
-        4:
-            text: Du kannst den `{at}` `{random}` Befehl auch in einem Satz benutzen.
-            header: Zufällig in einem Satz
-            code: "tiere {is} Hunde, Katzen, Kängurus\n{print} Meine Lieblingstiere sind tiere {at} {random}"
-        2:
-            text: "Du erstellst eine Liste mit`{is}`.\n\nTrenne die Elemente in deiner Liste mit einem Komma."
-            code: tiere {is} Hunde, Katzen, Kängurus
-            header: Eine Liste erstellen
-        6:
-            header: Entfernen von
-            code: "tiere {is} Hunde, Katzen, Kängurus\nnicht_mögen {is} {ask} Welche Tiere magst du nicht?\n{remove} nicht_mögen {from} tiere\n{print} Ich wähle tiere {at} {random}"
-            text: "Das Gegenstück zum `{add}` `{to}` Befehl ist der `{remove}` `{from}` Befehl.\nDieser Befehlt entfernt ein Element von der Liste."
-        7:
+            code: "{print} Willkommen in Donut-Laden!\nFüllung {is} Welche Füllung möchtest du?\n{print} Du hast gewählt … Füllung! Lecker!\nTopping {ask} Welches Topping möchtest du?\nTopping ist lecker!\n{print} Ich hol dir deinen Donut. {sleep}\n{print} Bitteschön! A Füllung Donut mit Topping!\n{ask} Schönen Tag noch!"
             debug: Wahr
-            header: Debugging
-            text: Lass uns den Code debuggen!
-            code: "musik_genres {is} Rock, Pop, Metal, Indie, Jazz\nwahl_genre ist musik_genres {at} {random}\n{print} Hören wir uns wahl_genre an\ngut {ask} Magst du dieses Genre?\n{remove} wahl_genre {from} wahl_genre\nzweite_wahl {is} musik_genres\n{print} oder bevorzugst du … zweite_wahl {at} {random}\n{remove} zweite_wahl {to} musik_genres\n{print} Ich mag _genre {random} am liebsten!"
+        8:
+            header: Lass den Programmierspaß beginnen!
+            text: Genieße die Abenteuer in Level 2!
+    3:
         1:
             header: Willkommen in Level 3
             text: In diesem Level lernst du, wie du eine Liste erstellst, Elemente zu dieser Liste hinzufügst und entfernst und ein zufälliges Element aus der Liste auswählst.
+        2:
+            header: Eine Liste erstellen
+            text: "Du erstellst eine Liste mit`{is}`.\n\nTrenne die Elemente in deiner Liste mit einem Komma."
+            code: tiere {is} Hunde, Katzen, Kängurus
+        3:
+            header: Zufällig
+            text: "Du kannst die Liste mit dem `{at}` `{random}` Befehl nutzen.\nDer Computer wählt dann zufällig ein Element der Liste.\nJedes Mal, wenn du den Code ausführst, gibt er etwas anderes aus."
+            code: "tiere {is} Hunde, Katzen, Kängurus\n{print} tiere {at} {random}"
+        4:
+            header: Zufällig in einem Satz
+            text: Du kannst den `{at}` `{random}` Befehl auch in einem Satz benutzen.
+            code: "tiere {is} Hunde, Katzen, Kängurus\n{print} Meine Lieblingstiere sind tiere {at} {random}"
+        5:
+            header: Hinzufügen
+            text: "Du kannst der Liste Elemente mit dem `{add}` `{to}` Befehl hinzufügen.\n\nDu kannst auswählen, was du zur Liste hinzugefügt wird oder den `{add}` `{to}` Befehl in Kombination mit dem `{ask}` Befehl nutzen.\nSo kannst du den Spieler entscheiden lassen, was der Liste hinzugefügt wird."
+            code: "tiere {is} Hunde, Katzen, Kängurus\nmag {is} {ask} Welches ist dein Lieblingstier?\n{add} mag {to_list} tiere\n{print} Ich wähle tiere {at} {random}"
+        6:
+            header: Entfernen von
+            text: "Das Gegenstück zum `{add}` `{to}` Befehl ist der `{remove}` `{from}` Befehl.\nDieser Befehlt entfernt ein Element von der Liste."
+            code: "tiere {is} Hunde, Katzen, Kängurus\nnicht_mögen {is} {ask} Welche Tiere magst du nicht?\n{remove} nicht_mögen {from} tiere\n{print} Ich wähle tiere {at} {random}"
+        7:
+            header: Debugging
+            text: Lass uns den Code debuggen!
+            code: "musik_genres {is} Rock, Pop, Metal, Indie, Jazz\nwahl_genre ist musik_genres {at} {random}\n{print} Hören wir uns wahl_genre an\ngut {ask} Magst du dieses Genre?\n{remove} wahl_genre {from} wahl_genre\nzweite_wahl {is} musik_genres\n{print} oder bevorzugst du … zweite_wahl {at} {random}\n{remove} zweite_wahl {to} musik_genres\n{print} Ich mag _genre {random} am liebsten!"
+            debug: Wahr
         8:
             header: Legen wir los!
             text: Genieße die Abenteuer in Level 3!
-        3:
-            text: "Du kannst die Liste mit dem `{at}` `{random}` Befehl nutzen.\nDer Computer wählt dann zufällig ein Element der Liste.\nJedes Mal, wenn du den Code ausführst, gibt er etwas anderes aus."
-            code: "tiere {is} Hunde, Katzen, Kängurus\n{print} tiere {at} {random}"
-            header: Zufällig
-        5:
-            code: "tiere {is} Hunde, Katzen, Kängurus\nmag {is} {ask} Welches ist dein Lieblingstier?\n{add} mag {to_list} tiere\n{print} Ich wähle tiere {at} {random}"
-            text: "Du kannst der Liste Elemente mit dem `{add}` `{to}` Befehl hinzufügen.\n\nDu kannst auswählen, was du zur Liste hinzugefügt wird oder den `{add}` `{to}` Befehl in Kombination mit dem `{ask}` Befehl nutzen.\nSo kannst du den Spieler entscheiden lassen, was der Liste hinzugefügt wird."
-            header: Hinzufügen
     4:
+        1:
+            header: Willkommen in Level 4
+            text: In diesem Level lernst du, wie du Anführungszeichen benutzt.
+            code: "{print} 'Schreib mit Anführungszeichen!'"
+        2:
+            header: Problem
+            text: 'In den vorherigen Leveln bist du vielleicht über folgendes Problem gestolpert:'
+            code: "name {is} Sophie\n{print} Mein Name ist name"
+            debug: Wahr
+        3:
+            header: Es mit Anführungszeichen beheben
+            text: "In diesem Level werden wir das Problem mithilfe von Anführungszeichen lösen.\n\nDamit sieht unser Code auch schon mehr nach 'echtem' Python-Code aus."
+        4:
+            header: ''
+            text: ''
+            code: ''
+        5:
+            header: ''
+            text: ''
+            code: ''
+        6:
+            header: ''
+            text: ''
+            code: |-
+                name {is} Harry
+                {print} 'Hallo ' name
+        7:
+            header: ''
+            text: ''
+            code: |-
+                name {is} Harry
+                {print} 'Hallo ' name ', wie geht es dir?'
+        8:
+            header: ''
+            text: ''
+            code: ''
+            debug: Wahr
         9:
             header: ''
             text: ''
@@ -205,424 +242,387 @@ levels:
                 {print} '1'
                 {clear}
                 {print} 'ÜBERRASCHUNG!'
-        2:
-            text: 'In den vorherigen Leveln bist du vielleicht über folgendes Problem gestolpert:'
-            debug: Wahr
-            header: Problem
-            code: "name {is} Sophie\n{print} Mein Name ist name"
-        1:
-            header: Willkommen in Level 4
-            code: "{print} 'Schreib mit Anführungszeichen!'"
-            text: In diesem Level lernst du, wie du Anführungszeichen benutzt.
-        3:
-            header: Es mit Anführungszeichen beheben
-            text: "In diesem Level werden wir das Problem mithilfe von Anführungszeichen lösen.\n\nDamit sieht unser Code auch schon mehr nach 'echtem' Python-Code aus."
-        6:
-            code: |-
-                name {is} Harry
-                {print} 'Hallo ' name
-            text: ''
-            header: ''
-        7:
-            code: |-
-                name {is} Harry
-                {print} 'Hallo ' name ', wie geht es dir?'
-            header: ''
-            text: ''
-        8:
-            debug: Wahr
-            code: ''
-            header: ''
-            text: ''
         10:
             header: Debugging
+            text: ''
+            code: ''
             debug: Wahr
-            code: ''
-            text: ''
-        4:
-            code: ''
-            text: ''
-            header: ''
-        5:
-            header: ''
-            text: ''
-            code: ''
         11:
-            text: ''
             header: ''
+            text: ''
     5:
-        3:
-            debug: Wahr
-            text: ''
-            header: ''
-            code: ''
-        7:
-            header: Debugging
-            debug: Wahr
-            text: ''
-            code: ''
-        8:
-            text: ''
-            header: ''
-        4:
-            code: ''
-            header: ''
-            text: ''
-        2:
-            code: ''
-            header: ''
-            text: ''
-        5:
-            header: ''
-            code: ''
-            text: ''
         1:
             header: ''
             text: ''
-        6:
-            text: ''
-            header: ''
-            code: ''
-    6:
         2:
-            code: "{print} '5 plus 5 ist ' 5 + 5"
             header: ''
             text: ''
+            code: ''
         3:
-            code: "{print} '5 minus 5 ist ' 5 - 5"
-            text: ''
             header: ''
+            text: ''
+            code: ''
+            debug: Wahr
         4:
-            code: "{print} '5 mal 5 ist ' 5 * 5"
             header: ''
             text: ''
+            code: ''
         5:
-            code: "{print} '5 geteilt durch 5 ist ' 5 / 5"
             header: ''
             text: ''
+            code: ''
         6:
+            header: ''
+            text: ''
+            code: ''
+        7:
+            header: Debugging
+            text: ''
+            code: ''
+            debug: Wahr
+        8:
+            header: ''
+            text: ''
+    6:
+        1:
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: "{print} '5 plus 5 ist ' 5 + 5"
+        3:
+            header: ''
+            text: ''
+            code: "{print} '5 minus 5 ist ' 5 - 5"
+        4:
+            header: ''
+            text: ''
+            code: "{print} '5 mal 5 ist ' 5 * 5"
+        5:
+            header: ''
+            text: ''
+            code: "{print} '5 geteilt durch 5 ist ' 5 / 5"
+        6:
+            header: ''
+            text: ''
             code: |-
                 {print} '5 plus 5 ist ' 5 + 5
                 {print} '5 minus 5 ist ' 5 - 5
                 {print} '5 mal 5 ist ' 5 * 5
                 {print} '5 geteilt durch 5 ist ' 5 / 5
+        7:
             header: ''
             text: ''
-        7:
             code: |-
                 name = Hedy
                 antwort = 20 + 4
+        8:
             header: ''
             text: ''
+            code: ''
         9:
             header: Debugging
+            text: ''
+            code: ''
             debug: Wahr
-            text: ''
-            code: ''
-        8:
-            text: ''
-            header: ''
-            code: ''
-        1:
-            header: ''
-            text: ''
         10:
             header: ''
             text: ''
     7:
-        3:
-            debug: Wahr
-            text: ''
+        1:
             header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
+            debug: Wahr
+        4:
+            header: ''
+            text: ''
             code: ''
         5:
             header: Debugging
+            text: ''
+            code: ''
             debug: Wahr
-            text: ''
-            code: ''
-        4:
-            text: ''
-            code: ''
-            header: ''
-        2:
-            code: ''
-            text: ''
-            header: ''
-        1:
-            text: ''
-            header: ''
         6:
-            text: ''
             header: ''
+            text: ''
     8:
+        1:
+            header: ''
+            text: ''
         2:
+            header: ''
+            text: ''
             code: "{repeat} 5 {times} {print} 'Hilfe!'"
             debug: Wahr
+        3:
             header: ''
             text: ''
+            code: ''
+        4:
+            header: ''
+            text: ''
+            code: ''
         5:
+            header: ''
+            text: ''
+            code: ''
             debug: Wahr
-            text: ''
-            header: ''
-            code: ''
-        9:
-            code: ''
-            header: ''
-            debug: ''
-            text: ''
-        7:
-            text: ''
-            code: ''
-            header: ''
-        3:
-            text: ''
-            code: ''
-            header: ''
-        8:
-            text: ''
-            header: ''
-        1:
-            header: ''
-            text: ''
         6:
             header: ''
             text: ''
             code: ''
+        7:
+            header: ''
+            text: ''
+            code: ''
+        8:
+            header: ''
+            text: ''
+        9:
+            header: ''
+            text: ''
+            code: ''
+            debug: ''
         10:
-            text: ''
-            header: ''
-        4:
-            header: ''
-            text: ''
-            code: ''
-    13:
-        7:
-            header: ''
-            code: ''
-            text: ''
-        5:
-            text: ''
-            header: ''
-            code: ''
-        8:
-            code: ''
-            debug: ''
-            header: ''
-            text: ''
-        9:
-            text: ''
-            header: ''
-        1:
-            header: ''
-            text: ''
-        2:
-            text: ''
-            header: ''
-            code: ''
-        6:
-            header: ''
-            code: ''
-            text: ''
-        3:
-            code: ''
-            text: ''
-            header: ''
-        4:
             header: ''
             text: ''
     9:
-        4:
-            code: ''
-            text: ''
+        1:
             header: ''
-        7:
             text: ''
-            code: ''
-            header: ''
         2:
-            code: ''
-            text: ''
             header: ''
-        8:
             text: ''
             code: ''
-            header: ''
-            debug: ''
         3:
             header: ''
             text: ''
             code: ''
-        6:
+        4:
+            header: ''
+            text: ''
             code: ''
-            text: ''
-            header: ''
-        1:
-            header: ''
-            text: ''
         5:
             header: ''
-            code: ''
             text: ''
+            code: ''
+        6:
+            header: ''
+            text: ''
+            code: ''
+        7:
+            header: ''
+            text: ''
+            code: ''
+        8:
+            header: ''
+            text: ''
+            code: ''
+            debug: ''
         9:
-            text: ''
-            header: ''
-    16:
-        3:
-            code: ''
-            header: ''
-            debug: ''
-            text: ''
-        2:
-            code: ''
             header: ''
             text: ''
-        1:
-            text: ''
-            header: ''
-        4:
-            text: ''
-            header: ''
-    17:
-        5:
-            header: ''
-            text: ''
-        4:
-            text: ''
-            debug: ''
-            code: ''
-            header: ''
-        1:
-            header: ''
-            text: ''
-        3:
-            code: ''
-            header: ''
-            text: ''
-        2:
-            header: ''
-            text: ''
-            code: ''
-    15:
-        3:
-            text: ''
-            code: ''
-            debug: ''
-            header: ''
-        4:
-            header: ''
-            text: ''
-        2:
-            header: ''
-            text: ''
-            code: ''
-        1:
-            text: ''
-            header: ''
-    12:
-        5:
-            header: ''
-            code: ''
-            text: ''
-        3:
-            text: ''
-            code: ''
-            header: ''
-        2:
-            text: ''
-            code: ''
-            header: ''
-        8:
-            text: ''
-            header: ''
-        7:
-            debug: ''
-            text: ''
-            code: ''
-            header: ''
-        6:
-            text: ''
-            header: ''
-        1:
-            header: ''
-            text: ''
-        4:
-            header: ''
-            text: ''
-    14:
-        2:
-            text: ''
-            code: ''
-            header: ''
-        4:
-            header: ''
-            text: ''
-        5:
-            header: ''
-            code: ''
-            text: ''
-        1:
-            text: ''
-            header: ''
-        6:
-            debug: ''
-            text: ''
-            code: ''
-            header: ''
-        7:
-            header: ''
-            text: ''
-        3:
-            text: ''
-            header: ''
-            code: ''
     10:
+        1:
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
         4:
             header: ''
             text: ''
+            code: ''
             debug: ''
-            code: ''
-        2:
-            header: ''
-            code: ''
-            text: ''
         5:
-            header: ''
-            text: ''
-        3:
-            header: ''
-            text: ''
-            code: ''
-        1:
-            header: ''
-            text: ''
-    18:
-        1:
-            text: ''
-            header: ''
-        2:
-            editor: ''
-            text: ''
-            header: ''
-        3:
             header: ''
             text: ''
     11:
         1:
-            text: ''
             header: ''
+            text: ''
         2:
             header: ''
-            code: ''
             text: ''
+            code: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
         4:
             header: ''
-            debug: ''
-            code: ''
             text: ''
-        3:
             code: ''
+            debug: ''
+        5:
+            header: ''
+            text: ''
+    12:
+        1:
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
+        4:
             header: ''
             text: ''
         5:
-            text: ''
             header: ''
+            text: ''
+            code: ''
+        6:
+            header: ''
+            text: ''
+        7:
+            header: ''
+            text: ''
+            code: ''
+            debug: ''
+        8:
+            header: ''
+            text: ''
+    13:
+        1:
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
+        4:
+            header: ''
+            text: ''
+        5:
+            header: ''
+            text: ''
+            code: ''
+        6:
+            header: ''
+            text: ''
+            code: ''
+        7:
+            header: ''
+            text: ''
+            code: ''
+        8:
+            header: ''
+            text: ''
+            code: ''
+            debug: ''
+        9:
+            header: ''
+            text: ''
+    14:
+        1:
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
+        4:
+            header: ''
+            text: ''
+        5:
+            header: ''
+            text: ''
+            code: ''
+        6:
+            header: ''
+            text: ''
+            code: ''
+            debug: ''
+        7:
+            header: ''
+            text: ''
+    15:
+        1:
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
+            debug: ''
+        4:
+            header: ''
+            text: ''
+    16:
+        1:
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
+            debug: ''
+        4:
+            header: ''
+            text: ''
+    17:
+        1:
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            code: ''
+        3:
+            header: ''
+            text: ''
+            code: ''
+        4:
+            header: ''
+            text: ''
+            code: ''
+            debug: ''
+        5:
+            header: ''
+            text: ''
+    18:
+        1:
+            header: ''
+            text: ''
+        2:
+            header: ''
+            text: ''
+            editor: ''
+        3:
+            header: ''
+            text: ''

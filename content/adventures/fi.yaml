@@ -132,6 +132,8 @@ adventures:
                     {if} loppu {is} hyvä {print} nimi 'tarttuu miekkaan ja hirviö juoksee vikkelään pois'
                     {else} {print} nimi 'joutuu hirviön syömäksi'
                     ```
+            6:
+                story_text: "Nyt kun voit käyttää `{elif}`, voit luoda entistä interaktiivisemman tarinan! Voisit esimerkiksi luoda useita hahmoja, joilla kaikilla on erilaisia ominaisuuksia.\nTai voit antaa pelaajan valita, minkä tien hän ottaa, minkä oven hän avaa tai minkä taikajuoman hän juo...\n\n### Harjoitus\nLuo oma tarinasi, jossa on 3 tai useampia vaihtoehtoja käyttäen {elif}."
             8:
                 story_text: |
                     Tarinassa joku sanoo sanan monta kertaa. Esimerkiksi, kun joku huutaa apua tai laulaa laulun.
@@ -204,6 +206,26 @@ adventures:
 
                     Vilkaise <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> tarinaa</a> jos et tunne sitä, ja varmista, että tulostat sen kuten se on kirjassa.
                 example_code: "```\neläimet = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+            13:
+                story_text: |
+                    Nyt tulostamme uuden tarinan, mutta tällä kertaa meidän täytyy käyttää sulkeita `{print}` komennon kanssa.
+
+                    ### Harjoitus 1
+                    Luo tarina jossa on ainakin 5 lausetta. Sinun ei tarvitse käyttää 'nimi' vielä.
+                example_code: |
+                    ```
+                    {print}('Tervetuloa tähän tarinaan!')
+                    ```
+                story_text_2: |
+                    ### Harjoitus 2
+                    Me olemme valmistelleet `{input}` sinua varten. Ensin, käytä `name` muuttujaa tarinassasi.
+                    Sitten lisää toinen `{ask}` ja käytä sitä muuttujaa myös.
+                    Vinkki: Muista pilkut `{print}` komennossa tekstin ja muuttujien välillä!
+                example_code_2: |
+                    ```
+                    nimi = {input}("Mikä on nimesi?")
+                    {print}('Tervetuloa tähän tarinaan!')
+                    ```
             16:
                 story_text: |
                     Jos käytät `{while}` looppia voit tehdä tarinoistasi mielenkiintoisempia. Esimerkiksi, voit käyttää `{while} game == 'on'` jolloin voit pelata kunnes peli päättyy.
@@ -225,32 +247,10 @@ adventures:
                             {print} sijainti ' - Ne eivät olleet siellä.'
                     {print} 'Nyt voit mennä taloon!'
                     ```
-            13:
-                story_text: |
-                    Nyt tulostamme uuden tarinan, mutta tällä kertaa meidän täytyy käyttää sulkeita `{print}` komennon kanssa.
-
-                    ### Harjoitus 1
-                    Luo tarina jossa on ainakin 5 lausetta. Sinun ei tarvitse käyttää 'nimi' vielä.
-                example_code: |
-                    ```
-                    {print}('Tervetuloa tähän tarinaan!')
-                    ```
-                story_text_2: |
-                    ### Harjoitus 2
-                    Me olemme valmistelleet `{input}` sinua varten. Ensin, käytä `name` muuttujaa tarinassasi.
-                    Sitten lisää toinen `{ask}` ja käytä sitä muuttujaa myös.
-                    Vinkki: Muista pilkut `{print}` komennossa tekstin ja muuttujien välillä!
-                example_code_2: |
-                    ```
-                    nimi = {input}("Mikä on nimesi?")
-                    {print}('Tervetuloa tähän tarinaan!')
-                    ```
-            6:
-                story_text: "Nyt kun voit käyttää `{elif}`, voit luoda entistä interaktiivisemman tarinan! Voisit esimerkiksi luoda useita hahmoja, joilla kaikilla on erilaisia ominaisuuksia.\nTai voit antaa pelaajan valita, minkä tien hän ottaa, minkä oven hän avaa tai minkä taikajuoman hän juo...\n\n### Harjoitus\nLuo oma tarinasi, jossa on 3 tai useampia vaihtoehtoja käyttäen {elif}."
-    haunted:
-        levels:
-            2:
-                example_code_2: "```\nhirviö_1 {is} _\nhirviö_2 {is} _\nhirviö_3 {is} _\n{print} Astut kummitustaloon.\n{print} Yhtäkkiä näet hirviö_1\n{print} Juokset toiseen huoneeseen...\n{print} Mutta siellä odottaa hirviö_2!\n{print} Voi ei! Mene nopeasti keittiöön.\n{print} Mutta kun astut sisään, hirviö_3 hyökkää kimppuusi!\n```\n"
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
     ask_command:
         levels:
             2:
@@ -258,87 +258,87 @@ adventures:
                 example_code_2: "```\nlemmikki {is} {ask} Mikä on lempieläimesi?  \n{print} Minä pidän lemmikki\n```\n"
             13:
                 story_text: "```\nlemmikki {is} {ask} Mikä on lempieläimesi?  \n{print} Minä pidän lemmikki\n```"
-    restaurant:
-        levels: {}
-    add_remove_command:
-        levels: {}
-    parrot:
-        levels: {}
-    rock:
-        levels: {}
-    if_command:
-        levels: {}
-    debugging:
-        levels: {}
-    fortune:
-        levels: {}
     calculator:
-        levels: {}
-    dice:
-        levels: {}
-    while_command:
-        levels: {}
-    for_command:
-        levels: {}
-    dishes:
-        levels: {}
-    random_command:
-        levels: {}
-    turtle:
-        levels: {}
-    clear_command:
-        levels: {}
-    quizmaster:
-        levels: {}
-    music:
-        levels: {}
-    functions:
-        levels: {}
-    and_or_command:
-        levels: {}
-    songs:
-        levels: {}
-    elif_command:
-        levels: {}
-    songs_2:
-        levels: {}
-    hotel:
-        levels: {}
-    repeat_command_2:
-        levels: {}
-    hospital:
-        levels: {}
-    quotation_marks:
         levels: {}
     calculator_2:
         levels: {}
-    language:
-        levels: {}
-    pressit:
-        levels: {}
-    is_command:
-        levels: {}
-    sleep_command:
-        levels: {}
-    maths:
-        levels: {}
-    turtle_draw_it:
-        levels: {}
-    repeat_command:
-        levels: {}
-    piggybank:
+    clear_command:
         levels: {}
     congratulations:
         levels: {}
-    print_command:
+    debugging:
         levels: {}
-    secret:
+    dice:
         levels: {}
-    harry_potter:
+    dishes:
+        levels: {}
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
+    fortune:
+        levels: {}
+    functions:
         levels: {}
     guess_my_number:
         levels: {}
-    rock_2:
+    harry_potter:
+        levels: {}
+    haunted:
+        levels:
+            2:
+                example_code_2: "```\nhirviö_1 {is} _\nhirviö_2 {is} _\nhirviö_3 {is} _\n{print} Astut kummitustaloon.\n{print} Yhtäkkiä näet hirviö_1\n{print} Juokset toiseen huoneeseen...\n{print} Mutta siellä odottaa hirviö_2!\n{print} Voi ei! Mene nopeasti keittiöön.\n{print} Mutta kun astut sisään, hirviö_3 hyökkää kimppuusi!\n```\n"
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
         levels: {}
     in_command:
+        levels: {}
+    is_command:
+        levels: {}
+    language:
+        levels: {}
+    maths:
+        levels: {}
+    music:
+        levels: {}
+    parrot:
+        levels: {}
+    piggybank:
+        levels: {}
+    pressit:
+        levels: {}
+    print_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    restaurant:
+        levels: {}
+    rock:
+        levels: {}
+    rock_2:
+        levels: {}
+    secret:
+        levels: {}
+    sleep_command:
+        levels: {}
+    songs:
+        levels: {}
+    songs_2:
+        levels: {}
+    turtle:
+        levels: {}
+    turtle_draw_it:
+        levels: {}
+    while_command:
         levels: {}

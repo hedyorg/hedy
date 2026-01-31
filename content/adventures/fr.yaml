@@ -1,6 +1,7 @@
 adventures:
     story:
         name: Histoire
+        default_save_name: Histoire
         description: Écrivez une histoire courte
         levels:
             1:
@@ -130,6 +131,9 @@ adventures:
                     {if} fin {is} heureuse {print} nom " sort son épée et le monstre s'enfuie à toutes jambes"
                     {else} {print} "Le monstre mange " nom
                     ```
+            6:
+                story_text: "Maintenant que vous pouvez utiliser `{elif}` vous pouvez créer une histoire encore plus interactive ! Vous pourriez créer plusieurs personnages, par exemple, qui auraient tous des attributs différents.\nOu vous pourriez faire choisir à votre joueur quel chemin emprunter, quelle porte ouvrir ou quelle potion magique boire...\n\n###Exercice\nCréez votre propre histoire avec 3 options ou plus en utilisant {elif}."
+                example_code: "```\npersonnage =  {ask}  'Qui va vous aider dans votre quête?'\n{if} personnage {is} 'Daisy'\n    {print} 'Vous avez chosi Daysi! C'est la plus futée de tous!'\n    {print} \"Daisy vous dit immédiatement que vous ne devriez pas manger cez baies là-bas.\"\n{elif} personnage {is} 'Jason'\n    {print} 'Vous avez chosi Jason! C'est le plus fort de tous!'\n    {print} 'Jason soulève un rocher, en découvrant une carte secrète en dessous.'\n{elif} character {is} 'Sam'\n    {print} ''Vous avez chosi Sam! C'est le plus rapide de tous!'\n    {print} 'Sam grimpe à un arbre et voit qu'il y a un village pas très loin...'\n\n```\n"
             8:
                 story_text: |
                     Dans une histoire, on se répète parfois. Par exemple, quand une personne appelle à l'aide ou chante une chanson.
@@ -201,23 +205,6 @@ adventures:
 
                     Regarde <a href="https://fr.slideshare.net/smt786/our-brun-dismoi">l'histoire</a> si tu ne la connais pas et assure-toi ensuite de la programmer comme dans le livre.
                 example_code: "```\nanimaux = _ , _ , _ \n{print} \"Ours brun, Ours brun\"\n{print} \"Que vois-tu ?\"\n```\n"
-            16:
-                example_code: |
-                    ```
-                    keys = 'lost'
-                    {print} 'You are standing in your garden and you have lost your keys.'
-                    {print} 'Where do you want to look for them ?'
-                    {print} 'You can choose : tree, flowerbed, rock, postbox'
-                    {while} keys == 'lost'
-                        location = {ask} 'Where do you want to look ?'
-                        {if} location == 'flowerbed'
-                            {print} 'Here they are !'
-                            keys = 'found'
-                        {else}
-                            {print} 'Nope they are not at the ' location
-                    {print} 'Now you can enter the house !'
-                    ```
-                story_text: "Utiliser une boucle `{while}` peut rendre vos histoires plus intéressantes. Par exemple, utiliser `{while} game == 'on'` pourrait faire durer une partie jusqu'à ce que le jeu soit fermé.\nVous pourriez également utiliser `{while} sword == 'lost'` pour que le joueur ne puisse continuer tant que l'épée n'est pas retrouvée.\n\n### Exercice\nLe code en exemple vous montre comment utiliser la boucle `{while}` dans le contexte d'une histoire. Essayez à votre tour de **trouver votre propre scénario** dans lequel le joueur doit trouver quelque chose avant de pouvoir continuer.\n"
             13:
                 story_text: |
                     We are going to print another story, but now we have to use brackets with `{print}`.
@@ -238,11 +225,26 @@ adventures:
                     name = {input}("Quel est votre nom ?")
                     {print}('Bienvenue dans cette histoire !')
                     ```
-            6:
-                story_text: "Maintenant que vous pouvez utiliser `{elif}` vous pouvez créer une histoire encore plus interactive ! Vous pourriez créer plusieurs personnages, par exemple, qui auraient tous des attributs différents.\nOu vous pourriez faire choisir à votre joueur quel chemin emprunter, quelle porte ouvrir ou quelle potion magique boire...\n\n###Exercice\nCréez votre propre histoire avec 3 options ou plus en utilisant {elif}."
-                example_code: "```\npersonnage =  {ask}  'Qui va vous aider dans votre quête?'\n{if} personnage {is} 'Daisy'\n    {print} 'Vous avez chosi Daysi! C'est la plus futée de tous!'\n    {print} \"Daisy vous dit immédiatement que vous ne devriez pas manger cez baies là-bas.\"\n{elif} personnage {is} 'Jason'\n    {print} 'Vous avez chosi Jason! C'est le plus fort de tous!'\n    {print} 'Jason soulève un rocher, en découvrant une carte secrète en dessous.'\n{elif} character {is} 'Sam'\n    {print} ''Vous avez chosi Sam! C'est le plus rapide de tous!'\n    {print} 'Sam grimpe à un arbre et voit qu'il y a un village pas très loin...'\n\n```\n"
-        default_save_name: Histoire
+            16:
+                story_text: "Utiliser une boucle `{while}` peut rendre vos histoires plus intéressantes. Par exemple, utiliser `{while} game == 'on'` pourrait faire durer une partie jusqu'à ce que le jeu soit fermé.\nVous pourriez également utiliser `{while} sword == 'lost'` pour que le joueur ne puisse continuer tant que l'épée n'est pas retrouvée.\n\n### Exercice\nLe code en exemple vous montre comment utiliser la boucle `{while}` dans le contexte d'une histoire. Essayez à votre tour de **trouver votre propre scénario** dans lequel le joueur doit trouver quelque chose avant de pouvoir continuer.\n"
+                example_code: |
+                    ```
+                    keys = 'lost'
+                    {print} 'You are standing in your garden and you have lost your keys.'
+                    {print} 'Where do you want to look for them ?'
+                    {print} 'You can choose : tree, flowerbed, rock, postbox'
+                    {while} keys == 'lost'
+                        location = {ask} 'Where do you want to look ?'
+                        {if} location == 'flowerbed'
+                            {print} 'Here they are !'
+                            keys = 'found'
+                        {else}
+                            {print} 'Nope they are not at the ' location
+                    {print} 'Now you can enter the house !'
+                    ```
     add_remove_command:
+        name: '{add} {to_list} & {remove} {from}'
+        default_save_name: add_remove_command
         description: Introduction {add} {to_list} et {remove} {from}
         levels:
             3:
@@ -279,9 +281,11 @@ adventures:
                     _
                     {print} Voici un milkshake parfums {at} {random}
                     ```
-        name: '{add} {to_list} & {remove} {from}'
-        default_save_name: add_remove_command
+    and_or_command:
+        levels: {}
     ask_command:
+        name: '{ask}'
+        default_save_name: ask_command
         description: Introduction à la commande {ask}
         levels:
             1:
@@ -346,8 +350,6 @@ adventures:
                     nom = {input}("quel est ton nom ?")
                     {print}("Ainsi ton nom est ", nom)
                     ```
-        name: '{ask}'
-        default_save_name: ask_command
     calculator:
         name: Calculatrice
         default_save_name: Calculatrice
@@ -410,7 +412,10 @@ adventures:
                     note_moyenne = {call} _
                     {print} 'Ta note moyenne est ' note_moyenne
                     ```
+    calculator_2:
+        levels: {}
     clear_command:
+        name: '{clear}'
         description: La commande {clear}
         levels:
             4:
@@ -430,7 +435,8 @@ adventures:
                     {clear}
                     {print} "SURPRISE !"
                     ```
-        name: '{clear}'
+    congratulations:
+        levels: {}
     debugging:
         name: débugage
         default_save_name: débugage
@@ -700,6 +706,8 @@ adventures:
                     {for} jour {in} jours
                         {print} jour ", la vaisselle sera faite par " noms {at} {random}
                     ```
+    elif_command:
+        levels: {}
     for_command:
         default_save_name: pour
         description: La commande {for}
@@ -906,6 +914,8 @@ adventures:
                         {call} joue_un_tour
                         {sleep} 2
                     ```
+    guess_my_number:
+        levels: {}
     harry_potter:
         description: Les aventures d'Harry Potter
         levels:
@@ -1077,6 +1087,8 @@ adventures:
                     {if} santé {is} vivant
                         {print} "Génial ! tu as survécu"
                     ```
+    hospital:
+        levels: {}
     hotel:
         name: hôtel
         default_save_name: hôtel
@@ -1490,6 +1502,8 @@ adventures:
                     nom = "Hedy"
                     {print}("Mon nom est ", nom)
                     ```
+    quizmaster:
+        levels: {}
     quotation_marks:
         name: '"Les guillemets"'
         description: Introduction des guillemets
@@ -2615,17 +2629,3 @@ adventures:
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
                     ```
-    and_or_command:
-        levels: {}
-    elif_command:
-        levels: {}
-    quizmaster:
-        levels: {}
-    hospital:
-        levels: {}
-    calculator_2:
-        levels: {}
-    congratulations:
-        levels: {}
-    guess_my_number:
-        levels: {}

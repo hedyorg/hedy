@@ -202,22 +202,6 @@ adventures:
 
                     Regarde <a href="https://fr.slideshare.net/smt786/our-brun-dismoi">l'histoire</a> si tu ne la connais pas et assure-toi ensuite de la programmer comme dans le livre.
                 example_code: "```\nanimaux = _ , _ , _ \n{print} \"Ours brun, Ours brun\"\n{print} \"Que vois-tu ?\"\n```\n"
-            16:
-                example_code: |
-                    ```
-                    keys = 'lost'
-                    {print} 'You are standing in your garden and you have lost your keys.'
-                    {print} 'Where do you want to look for them ?'
-                    {print} 'You can choose : tree, flowerbed, rock, postbox'
-                    {while} keys == 'lost'
-                        location = {ask} 'Where do you want to look ?'
-                        {if} location == 'flowerbed'
-                            {print} 'Here they are !'
-                            keys = 'found'
-                        {else}
-                            {print} 'Nope they are not at the ' location
-                    {print} 'Now you can enter the house !'
-                    ```
             13:
                 story_text: |
                     We are going to print another story, but now we have to use brackets with `{print}`.
@@ -237,6 +221,22 @@ adventures:
                     ```
                     naam = {input}("Quel est votre nom?")
                     {print}('Bienvenue dans cette histoire!')
+                    ```
+            16:
+                example_code: |
+                    ```
+                    keys = 'lost'
+                    {print} 'You are standing in your garden and you have lost your keys.'
+                    {print} 'Where do you want to look for them ?'
+                    {print} 'You can choose : tree, flowerbed, rock, postbox'
+                    {while} keys == 'lost'
+                        location = {ask} 'Where do you want to look ?'
+                        {if} location == 'flowerbed'
+                            {print} 'Here they are !'
+                            keys = 'found'
+                        {else}
+                            {print} 'Nope they are not at the ' location
+                    {print} 'Now you can enter the house !'
                     ```
     add_remove_command:
         description: Introduction {add} {to_list} et {remove} {from}
@@ -275,6 +275,8 @@ adventures:
                     _
                     {print} Voici un milkshake parfums {at} {random}
                     ```
+    and_or_command:
+        levels: {}
     ask_command:
         description: Introduction à la commande {ask}
         levels:
@@ -461,6 +463,8 @@ adventures:
                     {clear}
                     {print} "SURPRISE !"
                     ```
+    congratulations:
+        levels: {}
     debugging:
         name: débugage
         default_save_name: débugage
@@ -751,6 +755,8 @@ adventures:
                     {for} jour {in} jours
                         {print} jour ", la vaisselle sera faite par " noms {at} {random}
                     ```
+    elif_command:
+        levels: {}
     for_command:
         default_save_name: pour
         description: La commande {for}
@@ -918,7 +924,6 @@ adventures:
                         {print} nom " aura un " annimaux {at} {random} " comme animal de compagnie"
                         {sleep}
                     ```
-
     functions:
         name: fonctions
         default_save_name: fonctions
@@ -958,6 +963,8 @@ adventures:
                         {call} joue_un_tour
                         {sleep} 2
                     ```
+    guess_my_number:
+        levels: {}
     harry_potter:
         description: Les aventures d'Harry Potter
         levels:
@@ -1129,6 +1136,8 @@ adventures:
                     {if} santé {is} vivant
                         {print} "Génial ! tu as survécu"
                     ```
+    hospital:
+        levels: {}
     hotel:
         name: hôtel
         default_save_name: hôtel
@@ -1531,6 +1540,8 @@ adventures:
                     temperature = 25
                     {print}("Il fait ", temperature, " degrés dehors")
                     ```
+    quizmaster:
+        levels: {}
     quotation_marks:
         name: '"Les guillemets"'
         description: Introduction des guillemets
@@ -2624,15 +2635,3 @@ adventures:
 
                         réponse = {ask} "Combien font 5 fois 5 ?"
                     {print} "Une réponse correcte a été donnée"
-    elif_command:
-        levels: {}
-    and_or_command:
-        levels: {}
-    guess_my_number:
-        levels: {}
-    quizmaster:
-        levels: {}
-    hospital:
-        levels: {}
-    congratulations:
-        levels: {}

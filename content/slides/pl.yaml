@@ -52,12 +52,12 @@ levels:
 
                 Do stworzenia interaktywnych historii potrzebujemy trzech kodów tekstowych.
         2:
+            header: '{print}'
             text: |-
                 Pierwszym kodem, którego możesz użyć na poziomie 1 jest `{print}`.
 
                 `{print}` służy do wyświetlania tekstu na ekranie.
             code: '{print} Pokaż tekst na ekranie'
-            header: '{print}'
         3:
             header: Komenda {print}
             text: |-
@@ -68,6 +68,7 @@ levels:
 
                 {print} Zacznij programować!'
         4:
+            header: ''
             text: |-
                 Drugim kodem tekstowym, którego możesz użyć w poziomie 1 jest `{ask}`.
 
@@ -75,8 +76,8 @@ levels:
             code: |-
                 {print} Witaj we własnej grze w kamień, papier i nożyce!
                 {ask} Co wybierzesz?
-            header: ''
         5:
+            header: ''
             text: |-
                 Jak mogliście zobaczyć w poprzednim przykładzie. Jeśli użyjecie komendy `{ask}`, możecie zadać pytanie.
                 Odpowiedź jednak nie wyświetla się na ekranie.
@@ -87,7 +88,6 @@ levels:
                 {print} Witaj!
                 {ask} Jak masz na imię?
                 {echo} witaj
-            header: ''
         6:
             header: Programowanie!
             text: |-
@@ -342,6 +342,7 @@ levels:
             header: Witamy na poziomie 5
             text: 'Na tym poziomie nauczysz się używać 3 nowych poleceń: `{ if }`, `{ else } `i` { w } `.'
         2:
+            header: ''
             text: |-
                 Polecenie `{ if }` pozwala wybrać jedną z dwóch opcji.
                 W tym przykładzie komputer wydrukuje 'ładnie', jeśli podana odpowiedź to Hedy.
@@ -349,7 +350,6 @@ levels:
             code: |-
                 imię {is} {ask} 'Jak masz na imię?'
                 {if} imię {is} Hedy {print} 'fajnie'
-            header: ''
         3:
             header: Nie zapomnij napisać
             text: |-
@@ -840,18 +840,21 @@ levels:
             text: ''
         2:
             header: Polecenie 'and'
+            text: ''
             code: |-
                 imię = {ask} 'Jak masz na imię?'
                 wiek = {ask} 'Ile masz lat?'
                 {if} imię {is} 'Hedy' {and} wiek {is} 2
                     {print} 'Jesteś prawdziwym Hedy!'
-            text: ''
         3:
             header: Polecenie 'or'
+            text: ''
             code: |-
                 imię = {ask} 'Jak masz na imię?'
                 {if} imię  {is} 'Hedy' {or} imię  {is} 'hedy'
                     {print} 'Witaj!!'
+        4:
+            header: ''
             text: ''
         5:
             header: Przykład
@@ -867,6 +870,7 @@ levels:
                 {call} piosenka  {with} 'ocean'
         6:
             header: Przykład ze zmienną
+            text: ''
             code: |-
                 {define} piosenka {with} miejsce
                     {print} 'Moja Bonnie jest w ' miejsce
@@ -874,7 +878,6 @@ levels:
                 {call} piosenka {with} 'ocean'
                 {call} piosenka {with} 'morze'
                 {call} piosenka {with} 'ocean'
-            text: ''
         7:
             header: Jeszcze więcej pytań!
             text: |-
@@ -898,6 +901,8 @@ levels:
                 {call} piosenka {with} 'morze'
                 {call} piosenka {with} 'ocean'
         8:
+            header: ''
+            text: ''
             code: |-
                 {define} szczęście {with} imię
                     {print} '🥳'
@@ -919,41 +924,41 @@ levels:
                 {else} nastrój = smutny
                     {define} smutek {to} imię
             debug: ''
-            header: ''
-            text: ''
         9:
             header: Chodźmy!
             text: Ciesz się przygodami na poziomie 13!
-        4:
-            header: ''
-            text: ''
     14:
         1:
             header: Witamy na poziomie 14
             text: ''
         2:
             header: Symbole
+            text: ''
             code: |-
                 wiek = {ask} 'Ile masz lat?'
                 {if} wiek  < 13
                     {print} 'Jesteś młodszy ode mnie!'
                 {else}
                     {print} 'Jesteś starszy ode mnie!'
-            text: ''
         3:
             header: Symbole
+            text: ''
             code: |-
                 odpowiedź = {ask} 'Chcesz dowiedzieć się więcej?'
                 {if} odpowiedź == 'tak'
                     {print} 'Przejdź do następnej przygody!'
                 {if} odpowiedź != 'tak'
                     {print} 'Szkoda!'
+        4:
+            header: ''
             text: ''
         5:
             header: Wartość zwracana
             text: Na przykład w tym kodzie funkcja oblicz_nowa_cena obliczy nową cenę dowolnego elementu. Daje ci nową cenę jako wartość zwrotu.
             code: ''
         6:
+            header: ''
+            text: ''
             code: |-
                 przedmiot = 'nie kupiony'
                 {print} 'Chciałbym kupić ten przedmiot'
@@ -973,27 +978,24 @@ levels:
                 {else}
                     {print} 'Kupię to! Dziękuję!'
             debug: ''
-            text: ''
-            header: ''
         7:
             header: Zabierajmy się do roboty!
             text: Ciesz się przygodami na poziomie 14!
-        4:
-            header: ''
-            text: ''
     15:
         1:
             header: Witamy na poziomie 15
             text: ''
         2:
             header: 'polecenie {while}'
+            text: ''
             code: |-
                 odpowiedź = 0
                 {while} odpowiedź != 25
                     odpowiedź = {ask} 'ile to jest 5 razy 5?'
                 {print} 'Podano poprawną odpowiedź'
-            text: ''
         3:
+            header: ''
+            text: ''
             code: |-
                 liczby = 1, 2
 
@@ -1015,9 +1017,7 @@ levels:
                     {else} odpowiedź = losowa_liczba
                         {print} 'poprawnie'
                         odgadnięcia = 10
-            text: ''
             debug: ''
-            header: ''
         4:
             header: Wypróbujmy to!
             text: Ciesz się przygodami na poziomie 15!
@@ -1027,6 +1027,7 @@ levels:
             text: ''
         2:
             header: Nawiasy kwadratowe
+            text: ''
             code: |-
                 przyjaciele = ['Ahmed', 'Ben', 'Cayden']
                 {print} przyjaciele[1] ' jest pierwszym przyjacielem na liście'
@@ -1036,8 +1037,9 @@ levels:
                 szczęśliwe_liczby = [15, 18, 6]
                 {for} i {in} {range} 1 {to} 3
                     {print}przyjaciele[i] 's szczęśliwa liczba to ' szczęśliwe_liczby[i]
-            text: ''
         3:
+            header: ''
+            text: ''
             code: |-
                 {print} 'Test przyjaźni'
                 {subjects} = ['„piosenka”, „film”, „jedzenie”, „picie”']
@@ -1067,18 +1069,17 @@ levels:
                     {print} 'Stać cię na więcej'
                 {else} wynik < 50
                     {print} 'Czy znasz nawet tę osobę??!'
-            header: ''
             debug: ''
-            text: ''
         4:
-            text: Ciesz się przygodami na poziomie 16!
             header: Wypróbujmy to!
+            text: Ciesz się przygodami na poziomie 16!
     17:
         1:
             header: Witamy na poziomie 17
             text: ''
         2:
             header: Dwukropek
+            text: ''
             code: |-
                 nagrody= ['1 milion dolarów', 'jabłko', 'nic']
                 twoja_nagroda  = nagrody [{random}]
@@ -1087,9 +1088,9 @@ levels:
                     {print} 'Tak! Jesteś bogaty!'
                 {else}:
                     {print} 'Powodzenia następnym razem..'
-            text: ''
         3:
             header: Polecenie elif
+            text: ''
             code: |-
                 nagrody = ['1 milion dolarów', 'jabłko', 'nic']
                 twoja_nagroda = nagrody[{random}]
@@ -1100,8 +1101,9 @@ levels:
                     {print} 'Cudownie, szarlotka!'
                 {else}:
                     {print} 'Powodzenia następnym razem..'
-            text: ''
         4:
+            header: ''
+            text: ''
             code: |-
                 {define} zapytaj_o_kierunek
                     kierunek = {ask} 'Gdzie chcesz się dostać?'
@@ -1120,9 +1122,7 @@ levels:
                     {sleep}
                     kontynuuj= 'czy chcesz narysować trochę więcej??'
                     {sleep}
-            text: ''
             debug: ''
-            header: ''
         5:
             header: Wypróbujmy to!
             text: Ciesz się przygodami na poziomie 17!
@@ -1132,8 +1132,8 @@ levels:
             text: ''
         2:
             header: Sposób Pythona
-            editor: ''
             text: ''
+            editor: ''
         3:
             header: Ostatnie przygody!
             text: Ciesz się ostatnimi przygodami na poziomie 18!

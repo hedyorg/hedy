@@ -77,6 +77,7 @@ levels:
                 {print} Welkom bij je eigen steen papier schaar!
                 {ask} Wat is je keuze?
         5:
+            header: ''
             text: |-
                 Zoals je kon zien in het vorige voorbeeld. Als je het `{ask}` commando gebruikt kun je een vraag stellen.
                 Alleen wordt het antwoord niet gepresenteerd in het uitvoer scherm.
@@ -87,7 +88,6 @@ levels:
                 {print} Hallo!
                 {ask} Wat is je naam?
                 {echo} Hallo
-            header: ''
         6:
             header: Programmeren maar!
             text: |-
@@ -489,8 +489,8 @@ levels:
         3:
             header: Vergeet print niet
             text: Als je {repeat} gebruikt, vergeet dan {print} niet.
-            debug: ''
             code: ''
+            debug: ''
         4:
             header: '{repeat} met {ask}'
             text: Je kunt {repeat} ook gebruiken met `{ask}`, `{if}` of `{else}`.
@@ -526,8 +526,8 @@ levels:
                 Voor dit level zag `{repeat}` er zo uit:
 
                 Je kon het maar gebruiken over 1 regel.
-            debug: ''
             code: ''
+            debug: ''
         3:
             header: '{repeat} nu'
             text: |-
@@ -1019,6 +1019,7 @@ levels:
             header: Welkom bij level 15
             text: In dit level leer je over de `{while}` lus.
         2:
+            header: ''
             text: |-
                 Nu gaan we een nieuwe lus leren: De {while} lus! We gaan door zo lang het statement dat we hebben waar is. Vergeet dus niet in de loop de waarde te veranderen.
 
@@ -1028,8 +1029,8 @@ levels:
                 {while} antwoord  != 25
                     answer = {ask} 'Hoeveel is 5 maal 5?'
                 {print} 'Je antwoord is goed'
-            header: ''
         3:
+            header: ''
             text: Laten we deze code debuggen!
             code: |-
                 getallen = 1, 2
@@ -1053,7 +1054,6 @@ levels:
                         {print} 'Goedzo! Je hebt het geraden'
                         gokjes = 10
             debug: ''
-            header: ''
         4:
             header: Proberen maar!
             text: Veel plezier met de avonturen in level 15!
@@ -1074,6 +1074,7 @@ levels:
                 {for} i {in} {range} 1 {to} 3
                     {print} vrienden[i] 'zijn geluks nummer is ' geluks_nummers[i]
         3:
+            header: ''
             text: Laten we deze code debuggen!
             code: |-
                 {print} 'Test je vriendschap'
@@ -1104,7 +1105,6 @@ levels:
                     {print} 'Dat kan beter'
                 {else} score < 50
                     {print} 'Jij noemt jezelf een vriend(in)?!'
-            header: ''
             debug: ''
         4:
             header: Proberen maar!
@@ -1138,6 +1138,7 @@ levels:
                 {else}:
                     {print} 'Meer geluk volgende keer..'
         4:
+            header: ''
             text: Laten we deze code debuggen!
             code: |-
                 {define} vraag_richting
@@ -1158,7 +1159,6 @@ levels:
                     doorspelen = 'Wil je nog iets tekenen?'
                     {sleep}
             debug: ''
-            header: ''
         5:
             header: Aan het werk!
             text: Veel plezier met de avonturen in level 17!
