@@ -262,8 +262,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     ],
     13: [
         'print_command',
-        'is_command',
         'ask_command',
+        'if_command',
+        'operators',
         'for_command',
         'story',
         'songs',
@@ -271,8 +272,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'debugging',
         'hospital'
     ],
-    14: [
+    14: ['list',
         'random_command',
+        'for_command',
         'haunted',
         'songs',
         'language',
