@@ -203,6 +203,26 @@ adventures:
 
                     Eğer bilmiyorsanız <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> hikayeye bir göz atın</a> , ve kitapta yazıldığı gibi yazdığınızdan emin olun. (Bunun gibi bir Türkçe kitap biliyorsanız onu da yazabilirsiniz)
                 example_code: "```\nhayvanlar = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n {print} 'What do you see?'\n```\n"
+            13:
+                story_text: |
+                    Başka bir hikaye yazdıracağız, ancak şimdi `{print}` ile parantez kullanmak zorundayız.
+
+                    ### Alıştırma 1
+                    En az 5 cümlelik bir hikaye oluşturun. Henüz herhangi bir 'isim' kullanmak zorunda değilsiniz.
+                example_code: |
+                    ```
+                    {print}('Bu hikayeye hoş geldiniz!')
+                    ```
+                story_text_2: |
+                    ### Alıştırma 2
+                    Sizin için zaten bir `{input}` hazırladık. Öncelikle hikayenizde `isim` değişkenini kullanın.
+                    Ardından ikinci bir `{ask}` ekleyin ve bu değişkeni de kullanın.
+                    İpucu: `{print}` içinde, metin ve değişkenler arasındaki virgülleri unutmayın!
+                example_code_2: |
+                    ```
+                    isim = {input}("Senin adın ne?")
+                    {print}('Bu hikayeye hoş geldin!')
+                    ```
             16:
                 story_text: |
                     `{while}` döngüsünü kullanmak hikayelerinizi daha ilginç hale getirebilir. Örneğin, oyun bitene kadar oynayabilmek için `{while} oyun == 'devam'` kullanabilirsiniz.
@@ -224,26 +244,6 @@ adventures:
                         {else}
                             {print} 'Hayır, burada değiller: ' yer
                     {print} 'Şimdi eve girebilirsiniz!'
-                    ```
-            13:
-                story_text: |
-                    Başka bir hikaye yazdıracağız, ancak şimdi `{print}` ile parantez kullanmak zorundayız.
-
-                    ### Alıştırma 1
-                    En az 5 cümlelik bir hikaye oluşturun. Henüz herhangi bir 'isim' kullanmak zorunda değilsiniz.
-                example_code: |
-                    ```
-                    {print}('Bu hikayeye hoş geldiniz!')
-                    ```
-                story_text_2: |
-                    ### Alıştırma 2
-                    Sizin için zaten bir `{input}` hazırladık. Öncelikle hikayenizde `isim` değişkenini kullanın.
-                    Ardından ikinci bir `{ask}` ekleyin ve bu değişkeni de kullanın.
-                    İpucu: `{print}` içinde, metin ve değişkenler arasındaki virgülleri unutmayın!
-                example_code_2: |
-                    ```
-                    isim = {input}("Senin adın ne?")
-                    {print}('Bu hikayeye hoş geldin!')
                     ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
@@ -285,6 +285,7 @@ adventures:
                     {print} Size çeşitler {at} {random} milkshake hazırladık
                     ```
     ask_command:
+        name: sor
         default_save_name: sor_komutu
         description: sor komutuna giriş
         levels:
@@ -348,7 +349,6 @@ adventures:
                     isim = {input}('Senin adın ne?')
                     {print}('Demek senin ismin ', isim)
                     ```
-        name: sor
     calculator:
         name: Hesap Makinesi
         default_save_name: Hesap Makinesi
@@ -1083,10 +1083,8 @@ adventures:
                     ```
                     hayvanlar eşit köpek, inek, koyun
                     cevap eşit sor 'En sevdiğin hayvan hangisi?'
-                    _ cevap _ hayvanlar
-                    _ 'Benimki de öyle!'
-                    _
-                    _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
+                    _ cevap _ hayvanlar _ 'Benimki de öyle!'
+                    _ _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
                     ```
     is_command:
         default_save_name: eşit_komutu
@@ -1162,7 +1160,6 @@ adventures:
         name: matematik
         default_save_name: matematik
         description: matematiğe giriş
-        levels: {}
     music:
         levels:
             7:
@@ -1470,7 +1467,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Seviye 8 de `{repeat}` komutunu ekliyoruz. `{repeat}` bir kod satırını birden çok kez çalıştırmak için kullanılabilir. Bunun gibi:
+                    Seviye 7 de `{repeat}` komutunu ekliyoruz. `{repeat}` bir kod satırını birden çok kez çalıştırmak için kullanılabilir. Bunun gibi:
 
                     ### Alıştırma
                     Tekrarla komutu ile oynayın. Mutlu yıllar şarkısını şimdi 4 yerine sadece 3 satır kodla yapabilir misiniz?
@@ -1653,10 +1650,8 @@ adventures:
                     ```
                     depodaki_içecekler {is} su, limonata, kola, portakal suyu
                     içecek {is} {ask} 'Ne içmek istersiniz?'
-                    {if} içecek {in} depodaki_içecekler
-                    {print} 'Bir ' içecek ' hemen geliyor!'
-                    {else}
-                    {print} 'Üzgünüm, ondan satmıyoruz'
+                    {if} içecek {in} depodaki_içecekler {print} 'Bir ' içecek ' hemen geliyor!'
+                    {else} {print} 'Üzgünüm, ondan satmıyoruz'
                     ```
             7:
                 story_text: |

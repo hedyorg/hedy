@@ -131,6 +131,23 @@ adventures:
                     {if} kếtthúc {is} vui {print} tên ' nắm lấy thanh kiếm và con quái vật nhanh chóng chạy đi mất'
                     {else} {print} 'Con quái vật nuốt chửng' tên
                     ```
+            6:
+                story_text: |-
+                    Bây giờ bạn có thể dùng `{elif}`để tăng sự tương tác của câu chuyện! Bạn có thể tạo nhiều nhân vật với tính cách khác nhau. 
+                    Hoặc bạn có thể cho nhân vật của bạn lựa chọn đi đường nào, mở cánh cửa nào, hoặc uống loại nước thần kì nào... 
+
+                    ### Bài tập
+                    Dựng một câu chuyện với ít nhất ba lựa chọn bằng cách dùng {elif}.
+                example_code: |
+                    ```
+                    nhân vật {is} {ask} 'Ai sẽ giúp bạn trong cuộc hành trình của bạn?'
+                    {if} nhân vật {is} 'Daisy'
+                    {print} 'Bạn đã chọn Daisy! Cô ấy là người thông minh nhất!'
+                    {elif} nhân vật {is} 'Jason'
+                    {print} 'Bạn đã chọn Jason! Anh ấy là người mạnh nhất!'
+                    {elif} nhân vật {is} 'Sam'
+                    {print} 'Bạn đã chọn Sam! Đây là người nhanh nhất!'
+                    ```
             8:
                 story_text: |
                     Trong một câu chuyện, đôi lúc sẽ có người nói. Ví dụ, khi có người kêu cứu hoặc hát một bài.
@@ -181,23 +198,6 @@ adventures:
                     ### Bài tập 3
                     Quay lại cấp độ 8 trong câu chuyện và sử dụng ít nhất 2 lần `{if}` ở trong 1 `{if}`khác.
                 example_code: "```\n{print} 'Robin đang đi bọ xuống trung tâm thành phố'\nlocation = {ask}'Liệu Robin sẽ vào 1 cửa hàng, hay cô ấy sẽ đi về nhà?'\n{if} location {is} \"cửa hàng\"\n    {print} 'Cô ấy vào trong cửa hàng'\n    {print} 'Robin thấy 1 cuốn sách trông rất thú vị'\n    sách = {ask} 'Robin có mua sách không?'\n    {if} sách {is} có\n    _{print} 'Robin mua quyển sách và đi về nhà'\n    _{else}\n    _{print} 'Robin rời cửa hàng và về nhà'\n{else} \n    {print}'Robin về nhà'    \n```\n"
-            6:
-                story_text: |-
-                    Bây giờ bạn có thể dùng `{elif}`để tăng sự tương tác của câu chuyện! Bạn có thể tạo nhiều nhân vật với tính cách khác nhau. 
-                    Hoặc bạn có thể cho nhân vật của bạn lựa chọn đi đường nào, mở cánh cửa nào, hoặc uống loại nước thần kì nào... 
-
-                    ### Bài tập
-                    Dựng một câu chuyện với ít nhất ba lựa chọn bằng cách dùng {elif}.
-                example_code: |
-                    ```
-                    nhân vật {is} {ask} 'Ai sẽ giúp bạn trong cuộc hành trình của bạn?'
-                    {if} nhân vật {is} 'Daisy'
-                    {print} 'Bạn đã chọn Daisy! Cô ấy là người thông minh nhất!'
-                    {elif} nhân vật {is} 'Jason'
-                    {print} 'Bạn đã chọn Jason! Anh ấy là người mạnh nhất!'
-                    {elif} nhân vật {is} 'Sam'
-                    {print} 'Bạn đã chọn Sam! Đây là người nhanh nhất!'
-                    ```
             11:
                 example_code: |
                     ```
@@ -205,13 +205,6 @@ adventures:
                     {print} 'Gấu nâu, gấu nâu ơi'
                     {print} 'Bạn nhìn thấy gì?'
                     ```
-            16:
-                story_text: |
-                    Bạn có thể dùng vòng lặp `{while}` để làm câu chuyện của bạn thêm thú vị. Ví dụ như, bạn có thể dùng `{while} game == 'on'` để chơi đến ghi trò chơi kết thúc.
-                    Hoặc bạn có thể dùng `{while} sword == 'lost'` để người chơi không thể tiếp tục đến khi họ tìm được thứ gì đấy. 
-
-                    ### Bài tập
-                    Code ví dụ sau đây sẽ cho bạn thấy làm thế nào để dùng vòng lặp `{while}` trong một câu chuyện. Bây giờ, hãy **nghĩ về một cảnh** mà người chơi phải tìm được một thứ gì đó trước khi họ có thể tiếp tục.
             13:
                 story_text: |
                     Chúng ta sẽ in một câu chuyện khác, nhưng lần này chúng ta sẽ dùng `{print}`.
@@ -227,6 +220,13 @@ adventures:
                     tên = {input}("Tên bạn là gì?")
                     {print}('Chào mừng đến với câu chuyện!')
                     ```
+            16:
+                story_text: |
+                    Bạn có thể dùng vòng lặp `{while}` để làm câu chuyện của bạn thêm thú vị. Ví dụ như, bạn có thể dùng `{while} game == 'on'` để chơi đến ghi trò chơi kết thúc.
+                    Hoặc bạn có thể dùng `{while} sword == 'lost'` để người chơi không thể tiếp tục đến khi họ tìm được thứ gì đấy. 
+
+                    ### Bài tập
+                    Code ví dụ sau đây sẽ cho bạn thấy làm thế nào để dùng vòng lặp `{while}` trong một câu chuyện. Bây giờ, hãy **nghĩ về một cảnh** mà người chơi phải tìm được một thứ gì đó trước khi họ có thể tiếp tục.
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
         default_save_name: add_remove_command

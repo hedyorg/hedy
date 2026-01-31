@@ -557,6 +557,28 @@ adventures:
                     print Köszönjük a rendelésedet.
                     print 'A(z)  etel  és a(z)  ital  mindjárt itt lesz!
                     ```
+            6:
+                story_text: |
+                    A 4. szinten az if parancs lehetővé teszi, hogy kérdéseket tegyél fel ügyfeleidnek, és különböző módon felelj a válaszaikra.
+                    Az alábbi példában láthatod, hogy megkérdezheted az ügyfeledet, hogy szeretné-e hallani a különlegességeket, és Hedy ennek megfelelően válaszolhat.
+                example_code: |
+                    ```
+                    print 'Üdvözlünk a Hedy Étteremben!'
+                    kulonleges is ask 'Szeretnél hallani ma a különlegességeinkről?'
+                    if kulonleges is igen print 'Mai különlegességünk piri piri csirke és rizs.' else print 'Nem probléma.'
+                    etel is ask 'Mit szeretnél enni?'
+                    print 'Egy ' etel', mindjárt jön!'
+                    ital is ask 'Mit szeretnél inni hozzá?'
+                    if ital is kóla print 'Sajnálom a kóla kifogyott!' else print 'Jó választás!!'
+                    mas is ask 'Szeretnél valami mást?'
+                    print 'Hadd ismételjem el a rendelésedet...'
+                    print 'Egy ' etel
+                    if ital is kóla print 'és...' else print 'Egy ' ital
+                    if mas is nem print 'Ez minden!' else print 'Egy  ' mas
+                    print 'Köszönjük a rendelésedet, jó étvágyat !'
+                    ```
+
+                    Tudnál még több kérdést feltenni az ügyfeleknek, amikor rendelnek, és különböző  módon felelni a válaszaikra az if paranccsal?
             7:
                 story_text: |-
                     A 6. szinten matematikai számításokkal kiszámíthatod az ügyfelek megrendelésének teljes árát, ami reálisabbá teheti a virtuális éttermet.

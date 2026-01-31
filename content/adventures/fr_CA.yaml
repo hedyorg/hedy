@@ -202,22 +202,6 @@ adventures:
 
                     Regarde <a href="https://fr.slideshare.net/smt786/our-brun-dismoi">l'histoire</a> si tu ne la connais pas et assure-toi ensuite de la programmer comme dans le livre.
                 example_code: "```\nanimaux = _ , _ , _ \n{print} \"Ours brun, Ours brun\"\n{print} \"Que vois-tu ?\"\n```\n"
-            16:
-                example_code: |
-                    ```
-                    keys = 'lost'
-                    {print} 'You are standing in your garden and you have lost your keys.'
-                    {print} 'Where do you want to look for them ?'
-                    {print} 'You can choose : tree, flowerbed, rock, postbox'
-                    {while} keys == 'lost'
-                        location = {ask} 'Where do you want to look ?'
-                        {if} location == 'flowerbed'
-                            {print} 'Here they are !'
-                            keys = 'found'
-                        {else}
-                            {print} 'Nope they are not at the ' location
-                    {print} 'Now you can enter the house !'
-                    ```
             13:
                 story_text: |
                     We are going to print another story, but now we have to use brackets with `{print}`.
@@ -237,6 +221,22 @@ adventures:
                     ```
                     naam = {input}("Quel est votre nom?")
                     {print}('Bienvenue dans cette histoire!')
+                    ```
+            16:
+                example_code: |
+                    ```
+                    keys = 'lost'
+                    {print} 'You are standing in your garden and you have lost your keys.'
+                    {print} 'Where do you want to look for them ?'
+                    {print} 'You can choose : tree, flowerbed, rock, postbox'
+                    {while} keys == 'lost'
+                        location = {ask} 'Where do you want to look ?'
+                        {if} location == 'flowerbed'
+                            {print} 'Here they are !'
+                            keys = 'found'
+                        {else}
+                            {print} 'Nope they are not at the ' location
+                    {print} 'Now you can enter the house !'
                     ```
     add_remove_command:
         description: Introduction {add} {to_list} et {remove} {from}
@@ -918,7 +918,6 @@ adventures:
                         {print} nom " aura un " annimaux {at} {random} " comme animal de compagnie"
                         {sleep}
                     ```
-
     functions:
         name: fonctions
         default_save_name: fonctions
@@ -1226,10 +1225,8 @@ adventures:
                     ```
                     animaux {is} chien, vache, mouton
                     réponse {is} {ask} "Quel est ton animal préféré ?"
-                    _ réponse _ animaux
-                    _ "c'est aussi le mien !"
-                    _
-                    _ "mes animaux préférés sont chien, vache et mouton"
+                    _ réponse _ animaux _ "c'est aussi le mien !"
+                    _ _ "mes animaux préférés sont chien, vache et mouton"
                     ```
 
                     couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
@@ -1291,7 +1288,6 @@ adventures:
                     ```
     maths:
         description: Introduction des maths
-        levels: {}
     music:
         name: musique
         default_save_name: musique
@@ -1605,7 +1601,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Le niveau 8 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour exécuter une ligne de code plusieurs fois. Comme ceci :
+                    Le niveau 7 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour exécuter une ligne de code plusieurs fois. Comme ceci :
 
                     ### Exercice
                     Joue avec la commande `{repeat}`. Peux-tu faire la chanson d'anniversaire avec seulement 3 lignes de code à la place de 4 maintenant ?
@@ -1799,10 +1795,8 @@ adventures:
                     ```
                     boisson_en_stock {is} eau, limonade, coca, jus d'orange
                     choix {is} {ask} "Que voulez vous boire ?"
-                    {if} choix {in} boisson_en_stock
-                    {print} choix " en préparation !"
-                    {else}
-                    {print} "Désolé, nous n'avons pas de " choix
+                    {if} choix {in} boisson_en_stock {print} choix " en préparation !"
+                    {else} {print} "Désolé, nous n'avons pas de " choix
                     ```
             7:
                 story_text: |

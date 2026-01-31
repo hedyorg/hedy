@@ -560,7 +560,6 @@ adventures:
                 story_text: |
                     En ĉi tiu nivelo vi lernas kiel uzi citilojn en viaj ludoj.
                     Ĉu vi povas igi vian Hantatan Domon rulebla en Nivelo 4?
-
     language:
         name: Lingvo
         default_save_name: Lingvo
@@ -725,6 +724,23 @@ adventures:
                     trinkaĵo {is} {ask} Kion vi volas trinki por via manĝo?
                     {print} Dankon pro via mendo.
                     {print} Your  manĝaĵo  and  trinkaĵo  will be right there!
+                    ```
+            6:
+                example_code: |
+                    ```
+                    {print} 'Bonvenon al Restoracio Hedy!'
+                    special {is} {ask} 'Would you like to hear our specials today?'
+                    {if} special {is} jes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
+                    manĝaĵo {is} {ask} 'What would you like to eat?'
+                    {print} 'Unu ' manĝaĵo ', coming right up!'
+                    trinkaĵo {is} {ask} 'What would you like to drink with that?'
+                    {if} trinkaĵo {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
+                    anything {is} {ask} 'Would you like anything {else}?'
+                    {print} 'Mi ripetos vian mendon…'
+                    {print} 'Unu ' manĝaĵo
+                    {if} trinkaĵo {is} cola {print} 'kaj…' {else} {print} 'Unu ' trinkaĵo
+                    {if} anything {is} ne {print} 'Thats it!' {else} {print} 'Unu ' anything
+                    {print} 'Dankon pro via mendo. Ĝuu vian manĝon!'
                     ```
             7:
                 example_code: |

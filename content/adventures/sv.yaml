@@ -203,6 +203,26 @@ adventures:
 
                     Titta på <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> berättelsen</a> om du inte känner till den, och se till att den skrivs ut som i boken.
                 example_code: "```\ndjur = _ , _ , _ , _ \n{print} 'Brunbjörn, brunbjörn'\n {print} 'Vad ser du?'\n```\n"
+            13:
+                story_text: |
+                    Vi ska skriva ut en annan historia, men nu måste vi använda parenteser med `{print}`.
+
+                    ### Övning 1
+                    Skapa en berättelse med minst fem meningar. Du behöver inte använda 'namn' än.
+                example_code: |
+                    ```
+                    {print}('Välkommen till den här berättelsen!')
+                    ```
+                story_text_2: |
+                    ### Övning 2
+                    Vi har redan förberett en `{input}` åt dig. Använd först variabeln `name` i din berättelse.
+                    Lägg sedan till en andra `{ask}` och använd den variabeln också.
+                    Tips: Kom ihåg kommatecken i en `{print}` mellan text och variabler!
+                example_code_2: |
+                    ```
+                    namn = {input}("Vad heter du?")
+                    {print}('Välkommen till den här berättelsen!')
+                    ```
             16:
                 story_text: |
                     Med `{while}`-loopen kan du göra dina berättelser mer intressanta. Du kan t.ex. använda `{while} game == 'on'` så att du kan spela tills spelet är slut.
@@ -224,26 +244,6 @@ adventures:
                         {else}
                             {print} 'Nej, de är inte här: ' plats
                     {print} 'Nu kan du gå in i huset!'
-                    ```
-            13:
-                story_text: |
-                    Vi ska skriva ut en annan historia, men nu måste vi använda parenteser med `{print}`.
-
-                    ### Övning 1
-                    Skapa en berättelse med minst fem meningar. Du behöver inte använda 'namn' än.
-                example_code: |
-                    ```
-                    {print}('Välkommen till den här berättelsen!')
-                    ```
-                story_text_2: |
-                    ### Övning 2
-                    Vi har redan förberett en `{input}` åt dig. Använd först variabeln `name` i din berättelse.
-                    Lägg sedan till en andra `{ask}` och använd den variabeln också.
-                    Tips: Kom ihåg kommatecken i en `{print}` mellan text och variabler!
-                example_code_2: |
-                    ```
-                    namn = {input}("Vad heter du?")
-                    {print}('Välkommen till den här berättelsen!')
                     ```
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
@@ -1049,10 +1049,8 @@ adventures:
                     ```
                     djur är hund, ko, får
                     svaret är fråga 'Vilket är ditt favoritdjur?'
-                    _ svar _ djur
-                    _ 'Mitt också!'
-                    _
-                    _ 'Mina favoritdjur är hundar, kor och får'
+                    _ svar _ djur _ 'Mitt också!'
+                    _ _ 'Mina favoritdjur är hundar, kor och får'
                     ```
     is_command:
         default_save_name: kommandot_är
@@ -1120,7 +1118,6 @@ adventures:
         name: matte
         default_save_name: matte
         description: Introduktion till matte
-        levels: {}
     music:
         levels:
             7:
@@ -1424,7 +1421,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Nivå 8 lägger till kommandot `{repeat}`. `{repeat}` kan användas för att köra en kodrad flera gånger. Så här:
+                    Nivå 7 lägger till kommandot `{repeat}`. `{repeat}` kan användas för att köra en kodrad flera gånger. Så här:
 
                     ### Övning
                     Lek litet med kommandot upprepa. Kan du göra happy birthday på bara tre rader kod istället för fyra nu?
@@ -1611,10 +1608,8 @@ adventures:
                     ```
                     drycker_i_lager {is} vatten, läsk, cola, apelsinjuice
                     dryck {is} {ask} 'Vad vill du dricka?'
-                    {if} dryck {in} drycker_i_lager
-                    {print} 'En' dryck 'på väg!'
-                    {else}
-                    {print} 'Tyvärr, vi har inte det'
+                    {if} dryck {in} drycker_i_lager {print} 'En' dryck 'på väg!'
+                    {else} {print} 'Tyvärr, vi har inte det'
                     ```
             7:
                 story_text: |
