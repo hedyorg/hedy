@@ -86,10 +86,12 @@ adventures:
                     Ствары ўласную гісторыю з 3 ці больш варыянтамі, выкарыстоўваючы {elif}.
     and_or_command:
         name: '{and} ды {or}'
+        levels: {}
     calculator_2:
         name: калькулятар 2
         default_save_name: Калькулятар 2
         description: Калькулятар 2
+        levels: {}
     elif_command:
         name: '{elif}'
         levels:
@@ -115,6 +117,7 @@ adventures:
         name: гары потэр
         default_save_name: Гары Потэр
         description: Прыгоды Гары Потэра
+        levels: {}
     in_command:
         name: '{in}'
         levels:
@@ -296,6 +299,7 @@ adventures:
     while_command:
         name: '{while}'
         description: '{while}'
+        levels: {}
     turtle:
         name: чарапаха
         default_save_name: Чарапаха
@@ -378,6 +382,29 @@ adventures:
 
                     **Дадаткова** Замест выкарыстання "налева" і "направа" перарабі напрамкі на "поўнач", "усход", "поўдзень" і "захад".
                     Такім чынам, можна дадаць яшчэ больш напрамкаў, такіх як "паўночны ўсход", "паўднёва-захад" і г.д.
+            7:
+                story_text: |
+                    На гэтым узроўні паспрабуем выкарыстаць вылічэнні для рысавання розных фігур.
+                    Магчыма, табе расказвалі ў школе, што паварот на поўны круг складае 360 градусаў. Калі не, то цяпер ты ведаеш!
+                    Вось чаму для квадрата таксама выкарыстоўваецца 90 градусаў. 360 падзяліць на 4 — будзе 90.
+                    Цяпер, калі мы можам займацца матэматыкай з Hedy, мы можам рысаваць любыя фігуры, якія захочам!
+                example_code: |
+                    ```
+                    вуглы = {ask} 'Колькі вуглоў ты хочаш?'
+                    вугал = 360 / вуглы
+                    {forward} 50
+                    {turn} вугал
+                    {forward} 50
+                    {turn} вугал
+                    {forward} 50
+                    {turn} вугал
+                    {forward} 50
+                    {turn} вугал
+                    {forward} 50
+                    {turn} вугал
+                    {forward} 50
+                    {turn} вугал
+                    ```
     sleep_command:
         name: '{sleep}'
         levels:
@@ -387,6 +414,7 @@ adventures:
     repeat_command:
         name: '{repeat}'
         description: Каманда {repeat}
+        levels: {}
     random_command:
         name: '{random}'
         levels:
@@ -469,6 +497,7 @@ adventures:
                     Вось прыклад з няправільным спосабам выкарыстання апострафа.
     repeat_command_2:
         name: '{repeat} 2'
+        levels: {}
     restaurant:
         name: рэстаран
         default_save_name: Рэстаран
@@ -666,6 +695,11 @@ adventures:
                     ```
             7:
                 story_text: "### Практыкаванне\nУзнаві рысункі з дапамогай чарапахі!\n\n**Дадаткова** Хай гулец вырашыць, якога колеру павінен быць квадрат.\n\n***Дадаткова*** Можаш таксама зрабіць першую літару свайго імені і сцяг сваёй краіны?\n\n<div class=\"w-full flex flex-row gap-2\">\nКвадрат <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"150\">\nЛітары <img src=\"https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad\" width=\"100\">\nСцяг <img src=\"https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e\" width=\"300\">\n</div>\n"
+                example_code: |
+                    Падказка для квадрата:
+                    ```
+                    выбраны_колер = {ask} _
+                    ```
             8:
                 story_text: "### Практыкаванне\nУзнаві рысункі з дапамогай чарапахі!\n\n<div class=\"w-full flex flex-row gap-2\">\nШасцікутнік <img src=\"https://github.com/hedyorg/hedy/assets/80678586/92e492e1-1593-489b-aaf0-51d2a29755f4\" width=\"200\">\nТрохвугольнік <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1\" width=\"200\">\nВеер <img src=\"https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e\" width=\"200\">\n</div>\n"
             9:
@@ -1157,3 +1191,47 @@ adventures:
                     ### Практыкаванне
                     Завершы код, каб падлічыць, колькі ў цябе грошай і колькі часу яшчэ трэба адкладаць, каб купіць тое, што ты хочаш!
                     **Дадаткова** Магчыма, ты ўжо маеш крыху зэканомленых грошай? Аднімі гэтую суму ад сумы, якую табе трэба будзе адкласці.
+    quizmaster:
+        levels:
+            7:
+                story_text: |
+                    ### Практыкаванне
+                    У гэтай прыгодзе ты можаш стварыць віктарыну! Запоўні пропускі, дадай больш пытанняў і атрымлівай асалоду ад уласнай віктарыны!
+                    Віктарына можа быць пра што заўгодна: пра тваё хобі, любімую жывёлу, любімую кнігу ці пра што толькі табе прыйдзе ў галаву!
+                example_code: |
+                    ```
+                    {print} 'Ствары сваю віктарыну'
+                    ачкі_а = 0
+                    ачкі_б = 0
+                    {print} 'Пытанне'
+                    {print} 'Варыянт А'
+                    {print} 'Варыянт Б'
+                    адказ = {ask} 'Які твой адказ?'
+                    {if} адказ {is} 'А'
+                    ачкі_а = ачкі_а + 1
+                    {if} адказ {is} 'Б'
+                    ачкі_б = ачкі_б + 1
+                    {print} 'Канец віктарыны!'
+                    {print} 'Давай паглядзім вынікі!'
+                    {if} ачкі_а > ачкі_б
+                    {print} 'Ты належыш да клуба А'
+                    {if} ачкі_б > ачкі_а
+                    {print} 'Ты належыш да клуба Б'
+                    ```
+        description: Ствары сваю віктарыну!
+    for_command:
+        levels: {}
+    functions:
+        levels: {}
+    songs:
+        levels: {}
+    songs_2:
+        levels: {}
+    hotel:
+        levels: {}
+    congratulations:
+        levels: {}
+    secret:
+        levels: {}
+    guess_my_number:
+        levels: {}

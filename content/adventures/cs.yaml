@@ -347,11 +347,7 @@ adventures:
                     _
                     {print} name
                     ```
-                story_text_2: |
-
             3:
-                story_text: |
-
                 example_code: |
                     ```
                     words {is} squawk, Hedy
@@ -800,6 +796,13 @@ adventures:
                 story_text: "## Seznamy\nKdyž chceme zjistit, zda je něco v seznamu, můžeme nyní použít příkaz `{in}`.\nTento kód vypíše hezké!, pokud zvolíte zelenou nebo žlutou a jiném případě meh-\n"
                 story_text_2: "### Cvičení\nDokončete příklad kódu doplněním prázdných míst příkazy, které jste se naučili.\nPo dokončení kódu zkuste vytvořit vlastní kód a použijte otázku, kterou jste sami vymysleli.\n"
                 example_code: "```\npretty_colors {is} green, yellow\nfavorite_color {is} {ask} 'What is your favorite color?'\n{if} favorite_color {in} pretty_colors\n{print} 'pretty!'\n{else}\n{print} 'meh'\n```\n"
+                example_code_2: |
+                    ```
+                    zvířata {is} pes, kráva, ovce
+                    odpověď {is} {ask} 'Jaké je vaše oblíbené zvíře?'
+                    _ odpověď _ zvířata _ 'Moje taky!'
+                    _ _ 'Moje oblíbená zvířata jsou psi, krávy a ovce'
+                    ```
         name: '{in}'
         default_save_name: v_příkazu
     language:
@@ -989,3 +992,19 @@ adventures:
                 story_text: "Dalším novým příkazem v této úrovni je `{sleep}`, který na sekundu pozastaví váš program. Pokud za příkazem {sleep} napíšete číslo, program se na tuto dobu pozastaví.\n\n### Cvičení\nProcvičte si tento nový příkaz tak, že vytvoříte vlastní kód, ve kterém použijete příkaz {sleep} alespoň třikrát. S každým příkazem {sleep} by se měla doba pozastavení lišit.\n"
                 example_code: "```\n{print} Moje oblíbená barva je...\n{sleep} 2\n{print} zelená!\n```\n"
         default_save_name: spánek_příkaz
+    elif_command:
+        levels: {}
+    and_or_command:
+        levels: {}
+    songs_2:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    quizmaster:
+        levels: {}
+    while_command:
+        levels: {}
+    hospital:
+        levels: {}
+    congratulations:
+        levels: {}

@@ -1174,10 +1174,8 @@ adventures:
                     ```
                     animaux {is} chien, vache, mouton
                     réponse {is} {ask} "Quel est ton animal préféré ?"
-                    _ réponse _ animaux
-                    _ "c'est aussi le mien !"
-                    _
-                    _ "mes animaux préférés sont chien, vache et mouton"
+                    _ réponse _ animaux _ "c'est aussi le mien !"
+                    _ _ "mes animaux préférés sont chien, vache et mouton"
                     ```
 
                     couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
@@ -1564,7 +1562,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Le niveau 8 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour exécuter une ligne de code plusieurs fois. Comme ceci :
+                    Le niveau 7 ajoute la commande `{repeat}`. `{repeat}` peut être utilisée pour exécuter une ligne de code plusieurs fois. Comme ceci :
 
                     ### Exercice
                     Joue avec la commande `{repeat}`. Peux-tu faire la chanson d'anniversaire avec seulement 3 lignes de code à la place de 4 maintenant ?
@@ -1758,10 +1756,8 @@ adventures:
                     ```
                     boisson_en_stock {is} eau, limonade, coca, jus d'orange
                     choix {is} {ask} "Que voulez vous boire ?"
-                    {if} choix {in} boisson_en_stock
-                    {print} choix " en préparation !"
-                    {else}
-                    {print} "Désolé, nous n'avons pas de " choix
+                    {if} choix {in} boisson_en_stock {print} choix " en préparation !"
+                    {else} {print} "Désolé, nous n'avons pas de " choix
                     ```
             7:
                 story_text: |
@@ -2619,3 +2615,17 @@ adventures:
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
                     ```
+    and_or_command:
+        levels: {}
+    elif_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    hospital:
+        levels: {}
+    calculator_2:
+        levels: {}
+    congratulations:
+        levels: {}
+    guess_my_number:
+        levels: {}

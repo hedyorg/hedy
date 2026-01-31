@@ -654,6 +654,7 @@ adventures:
         name: Ŝparujo
         default_save_name: Ŝparujo
         description: Kalkulu vian poŝmonon!
+        levels: {}
     restaurant:
         name: Restoracio
         default_save_name: Restoracio
@@ -807,6 +808,23 @@ adventures:
                         {print} mendo
                         pli = {ask} 'Ĉu vi volas mendi ion pli?'
                     {print} 'Dankon!'
+                    ```
+            6:
+                example_code: |
+                    ```
+                    {print} 'Bonvenon al Restoracio Hedy!'
+                    special {is} {ask} 'Would you like to hear our specials today?'
+                    {if} special {is} jes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
+                    manĝaĵo {is} {ask} 'What would you like to eat?'
+                    {print} 'Unu ' manĝaĵo ', coming right up!'
+                    trinkaĵo {is} {ask} 'What would you like to drink with that?'
+                    {if} trinkaĵo {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
+                    anything {is} {ask} 'Would you like anything {else}?'
+                    {print} 'Mi ripetos vian mendon…'
+                    {print} 'Unu ' manĝaĵo
+                    {if} trinkaĵo {is} cola {print} 'kaj…' {else} {print} 'Unu ' trinkaĵo
+                    {if} anything {is} ne {print} 'Thats it!' {else} {print} 'Unu ' anything
+                    {print} 'Dankon pro via mendo. Ĝuu vian manĝon!'
                     ```
     rock:
         name: Roko, papero, tondilo
@@ -1142,3 +1160,63 @@ adventures:
                     Ankaŭ ni nun povas plibonigi la programon, kiu desegnas malsamajn figurojn.
                     Ĉu vi povas eltrovi kiom malproksimen la testudo devas turni ĉi tien? Finu la kodon kaj vi povas desegni ajnan plurangulon, kiun vi ŝatus!
                 example_code_2: "```\nanguloj = {ask} 'Kiom da anguloj mi desegnu?'\nangulo = 360 / anguloj \n{repeat} anguloj {times}\n    {turn} _\n    {forward} _\n```\n"
+    add_remove_command:
+        levels: {}
+    if_command:
+        levels: {}
+    debugging:
+        levels: {}
+    while_command:
+        levels: {}
+    for_command:
+        levels: {}
+    random_command:
+        levels: {}
+    clear_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    ask_command:
+        levels: {}
+    music:
+        levels: {}
+    functions:
+        levels: {}
+    and_or_command:
+        levels: {}
+    elif_command:
+        levels: {}
+    hotel:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    hospital:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    calculator_2:
+        levels: {}
+    pressit:
+        levels: {}
+    is_command:
+        levels: {}
+    sleep_command:
+        levels: {}
+    maths:
+        levels: {}
+    turtle_draw_it:
+        levels: {}
+    repeat_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    print_command:
+        levels: {}
+    harry_potter:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    rock_2:
+        levels: {}
+    in_command:
+        levels: {}

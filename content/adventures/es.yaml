@@ -1199,10 +1199,8 @@ adventures:
                     ```
                     animales {is} perro, vaca, oveja
                     respuesta {is} {ask} '¿Cuál es tu animal preferido?'
-                    _ respuesta _ animales
-                    _ '¡También el mío!'
-                    _
-                    _ 'Mis animales preferidos son perros, vacas y ovejas'
+                    _ respuesta _ animales _ '¡También el mío!'
+                    _ _ 'Mis animales preferidos son perros, vacas y ovejas'
                     ```
         name: '{in}'
     is_command:
@@ -1740,7 +1738,7 @@ adventures:
             8:
                 story_text: |
                     ## ¡Repetir! ¡Repetir! ¡Repetir!
-                    El nivel 8 añade el comando `{repeat}`.  `{repeat}` se puede utilizar para ejecutar una línea de código varias veces. Así:
+                    El nivel 7 añade el comando `{repeat}`.  `{repeat}` se puede utilizar para ejecutar una línea de código varias veces. Así:
 
                     ### Ejercicio
                     Juega con el comando `{repeat}`. ¿Puedes hacer la canción de cumpleaños feliz en sólo 3 líneas de código en lugar de 4 ahora?
@@ -1930,10 +1928,8 @@ adventures:
                     ```
                     bebidas_disponibles {is} agua, limonada, refresco de cola, zumo de naranja
                     bebida {is} {ask} '¿Qué quieres beber?'
-                    {if} bebida {in} bebidas_disponibles
-                    {print} '¡Una ' bebida 'de camino!'
-                    {else}
-                    {print} 'Lo siento, no servimos eso'
+                    {if} bebida {in} bebidas_disponibles {print} '¡Una ' bebida 'de camino!'
+                    {else} {print} 'Lo siento, no servimos eso'
                     ```
             7:
                 story_text: |
@@ -2840,3 +2836,15 @@ adventures:
             15:
                 example_code: "```\n# Utiliza tu propio código de la aventura anterior.\n```\n"
                 story_text: "### Ejercicio 2\n**Esta es la segunda parte de esta aventura.** La aventura comienza en la aventura anterior.\nPor supuesto, no quieres calcular la media de 4 pruebas. Podrías querer calcular la media de 10 pruebas, o solo 2...\nPodemos solucionar este problema añadiendo el argumento y la variable 'candidad_de_pruebas'.\n* Empieza una nueva línea en la línea 3. Establece el argumento candidad_de_pruebas preguntando al alumno cuántas pruebas ha realizado.\n* Cambia el 4 de la línea 4 por el nuevo argumento candidad_de_pruebas.\n* Por último, cambia el 4 en la línea 6 a candidad_de_pruebas\n\nPrueba el nuevo programa. ¿Funciona?\n\n### Ejercicio 3\n¿Querías mejorar aún más el programa? ¡Genial! En el programa anterior solo podías calcular la nota media de una asignatura, pero sería mejor si pudieras calcular la nota media de todas las asignaturas que quisieras!\nNo te diremos cómo hacerlo, pero te daremos un consejo: Empieza tu código en la línea con: {define} calcular_nota_media {with} asignatura.\n"
+    quizmaster:
+        levels: {}
+    hospital:
+        levels: {}
+    elif_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    and_or_command:
+        levels: {}

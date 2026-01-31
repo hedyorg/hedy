@@ -460,6 +460,7 @@ adventures:
     debugging:
         name: hata ayıklama
         default_save_name: hata ayıklama
+        levels: {}
     dice:
         name: Zar
         default_save_name: Zar
@@ -657,6 +658,7 @@ adventures:
     elif_command:
         default_save_name: değileğer
         description: değileğer
+        levels: {}
     for_command:
         description: için komutu
         levels:
@@ -1083,10 +1085,8 @@ adventures:
                     ```
                     hayvanlar eşit köpek, inek, koyun
                     cevap eşit sor 'En sevdiğin hayvan hangisi?'
-                    _ cevap _ hayvanlar
-                    _ 'Benimki de öyle!'
-                    _
-                    _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
+                    _ cevap _ hayvanlar _ 'Benimki de öyle!'
+                    _ _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
                     ```
     is_command:
         default_save_name: eşit_komutu
@@ -1404,6 +1404,7 @@ adventures:
         name: Kısa sınav ustası
         default_save_name: Kısa sınav ustası
         description: Kendi kısa sınavınızı yapın!
+        levels: {}
     quotation_marks:
         name: '''tırnak işaretleri'''
         description: Tırnak işaretlerine giriş
@@ -1470,7 +1471,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Seviye 8 de `{repeat}` komutunu ekliyoruz. `{repeat}` bir kod satırını birden çok kez çalıştırmak için kullanılabilir. Bunun gibi:
+                    Seviye 7 de `{repeat}` komutunu ekliyoruz. `{repeat}` bir kod satırını birden çok kez çalıştırmak için kullanılabilir. Bunun gibi:
 
                     ### Alıştırma
                     Tekrarla komutu ile oynayın. Mutlu yıllar şarkısını şimdi 4 yerine sadece 3 satır kodla yapabilir misiniz?
@@ -1653,10 +1654,8 @@ adventures:
                     ```
                     depodaki_içecekler {is} su, limonata, kola, portakal suyu
                     içecek {is} {ask} 'Ne içmek istersiniz?'
-                    {if} içecek {in} depodaki_içecekler
-                    {print} 'Bir ' içecek ' hemen geliyor!'
-                    {else}
-                    {print} 'Üzgünüm, ondan satmıyoruz'
+                    {if} içecek {in} depodaki_içecekler {print} 'Bir ' içecek ' hemen geliyor!'
+                    {else} {print} 'Üzgünüm, ondan satmıyoruz'
                     ```
             7:
                 story_text: |
@@ -2352,3 +2351,17 @@ adventures:
         name: Yeni Yıl
         default_save_name: Yeni Yıl Geri Sayımı
         description: Yeni Yıl için Geri Sayım!
+    and_or_command:
+        levels: {}
+    functions:
+        levels: {}
+    hotel:
+        levels: {}
+    hospital:
+        levels: {}
+    calculator_2:
+        levels: {}
+    congratulations:
+        levels: {}
+    guess_my_number:
+        levels: {}

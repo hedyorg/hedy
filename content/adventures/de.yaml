@@ -1588,10 +1588,8 @@ adventures:
                     ```
                     tiere {is} Hund, Kuh, Schaf
                     antwort {is} {ask} 'Was is dein Lieblingstier?'
-                    _ antwort _ tiere
-                    _ 'Meines auch!'
-                    _
-                    _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
+                    _ antwort _ tiere _ 'Meines auch!'
+                    _ _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
                     ```
         name: '{in}'
     is_command:
@@ -2123,8 +2121,6 @@ adventures:
                     _
                     ```
             14:
-                story_text: |
-
                 example_code: |
                     ```
                     freunde = ['Ahmed', 'Ben', 'Clemens']
@@ -2143,7 +2139,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    In Level 8 kommt der `{repeat}` Befehl. `{repeat}` kann benutzt werden, um eine Zeile Code mehrmals auszuführen. So:
+                    In Level 7 kommt der `{repeat}` Befehl. `{repeat}` kann benutzt werden, um eine Zeile Code mehrmals auszuführen. So:
 
                     ### Übung
                     Spiele mit dem `{repeat}` Befehl. Kannst du Happy Birthday mit 3 Zeilen anstellen von 4 machen?
@@ -2432,6 +2428,26 @@ adventures:
                     {print} 'Dankeschön!'
                     ```
                 story_text: "Mit `{while}` kannst du sicherstellen, dass deine Kunden Bestellungen aufgeben bis sie fertig sind.\n\n### Übung\nFüge den `{while}` Befehl dem Code hinzu.\n"
+            6:
+                example_code: |
+                    ```
+                    {print} 'Willkommen im Restaurant Chez Hedy'
+                    Tagesgericht {is} {ask} 'Würden Sie gerne das heutige Tagesgericht erfahren?'
+                    {if} Tagesgericht {is} ja {print} 'Das Tagesgericht ist Nudeln mit Tomatensoße.' {else} {print} 'Ok, kein Problem.'
+                    Essen {is} {ask} 'Was würden Sie gerne essen?'
+                    {print} 'Einmal ' Essen ', kommt sofort!'
+                    Getränk {is} {ask} 'Was würden Sie gerne dazu trinken?'
+                    {if} Getränk {is} Cola {print} 'Tut mir leid, die Cola ist aus!' {else} {print} 'Großartige Wahl!'
+                    etwas {is} {ask} 'Hätten Sie gerne noch etwas?'
+                    {print} 'Lassen Sie mich Ihre Bestellung noch einmal wiederholen...'
+                    {print} 'Einmal ' Essen
+                    {if} Getränk {is} Cola {print} 'und...' {else} {print} 'Einmal ' Getränk
+                    {if} etwas {is} nein {print} 'Das ist alles!' {else} {print} 'Einmal ' etwas
+                    {print} 'Danke für Ihre Bestellung und guten Appetit!'
+                    ```
+                story_text: |
+                    In diesem Level erlaubt dir der `{if}`-Befehl deinen Kundinnen oder Kunden Fragen zu stellen (`{ask}`) und verschiedene Antworten zu geben.
+                    In dem unteren Beispiel siehst du, dass du die Kundin oder den Kunden fragen (`{ask}`) kannst, ob (`{if}`) sie oder er die Tagesgerichte erfahren möchte, und Hedy kann dementsprechend antworten.
         default_save_name: Restaurant
         name: Restaurant
     rock:
@@ -3219,3 +3235,11 @@ adventures:
             16:
                 story_text: |
                     Glückwunsch! Du hast das letzte Level von Hedy erreicht! Der Code, den Sie hier erstellt haben, kann in reale Python-Umgebungen wie Replit oder PyCharm kopiert werden und Sie können dort weiter lernen! Beachten Sie jedoch, dass Python nur Englisch-Befehle lesen kann, also wenn Sie andere Sprachen verwendet haben, müssen Sie jetzt auf Englisch wechseln.
+    quizmaster:
+        levels: {}
+    hospital:
+        levels: {}
+    elif_command:
+        levels: {}
+    guess_my_number:
+        levels: {}

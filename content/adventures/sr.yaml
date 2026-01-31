@@ -797,6 +797,7 @@ adventures:
         name: '{elif}'
         description: '{elif}'
         default_save_name: elif
+        levels: {}
     for_command:
         default_save_name: за
         description: '{for} команда'
@@ -1010,6 +1011,7 @@ adventures:
         name: Погоди мој број
         default_save_name: погоди мој број
         description: погоди мој број
+        levels: {}
     harry_potter:
         name: Хари Потер
         default_save_name: Хари Потер
@@ -1282,10 +1284,8 @@ adventures:
                     ```
                     животиње {is} пас, крава, овца
                     одговор {is} {ask} 'Која је твоја омиљена животиња?'
-                    _ одговор _ животиње
-                    _ 'И моја омиљена!'
-                    _
-                    _ 'Моје омиљене животиње су пси, краве и овце'
+                    _ одговор _ животиње _ 'И моја омиљена!'
+                    _ _ 'Моје омиљене животиње су пси, краве и овце'
                     ```
         default_save_name: in_command
         name: '{in}'
@@ -1728,6 +1728,7 @@ adventures:
         name: Квизмајстор
         default_save_name: Квизмајстор
         description: Направите свој квиз!
+        levels: {}
     quotation_marks:
         name: '''наводници'''
         default_save_name: наводници
@@ -1822,7 +1823,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Ниво 8 додаје команду `{repeat}`. `{repeat}` се може користити за извршавање једне линије кода више пута. Овако:
+                    Ниво 7 додаје команду `{repeat}`. `{repeat}` се може користити за извршавање једне линије кода више пута. Овако:
 
                     ### Вежба
                     Играјте се са командом `{repeat}`. Можете ли направити песму за рођендан у само 3 линије кода уместо 4 сада?
@@ -2012,10 +2013,8 @@ adventures:
                     ```
                     drinks_in_stock {is} вода, лимунада, кола, сок од поморанџе
                     drink {is} {ask} 'Шта бисте желели да пијете?'
-                    {if} drink {in} drinks_in_stock
-                    {print} 'Једна ' drink ' стиже!'
-                    {else}
-                    {print} 'Жао нам је, не продајемо то'
+                    {if} drink {in} drinks_in_stock {print} 'Једна ' drink ' стиже!'
+                    {else} {print} 'Жао нам је, не продајемо то'
                     ```
             7:
                 story_text: |
@@ -2960,3 +2959,9 @@ adventures:
         name: Нова година
         default_save_name: Одбројавање до Нове године
         description: Одбројавање до Нове године!
+    and_or_command:
+        levels: {}
+    hospital:
+        levels: {}
+    congratulations:
+        levels: {}

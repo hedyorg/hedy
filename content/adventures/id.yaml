@@ -933,6 +933,28 @@ adventures:
                     {print} 'Itu akan menjadi ' harga ' dolar'
                     {print} 'Selamat menikmati makananmu!'
                     ```
+            6:
+                example_code: |
+                    ```
+                    print 'Selamat datang di rumah makan Hedy!'
+                    spesial is ask 'Apakah kamu ingin tahu menu spesial kami hari ini?'
+                    if spesial is ya print 'Menu spesial hari ini adalah ayam dan nasi' else print 'Tidak masalah.'
+                    makanan is ask 'Apa makanan yang ingin kamu makan?'
+                    print 'Satu ' makanan ', akan segera datang!'
+                    minuman is ask 'Apa minuman yang kamu inginkan?'
+                    if minuman is cola print 'Saya minta maaf karena kami kehabisan cola!' else print 'Pilihan yang baik!'
+                    apapun is ask 'Apakah kamu ingin yang lain?'
+                    print 'Saya akan mengulang pesanan kamu...'
+                    print 'Satu ' makanan
+                    if minuman is cola print 'dan... ' else print 'Satu ' minuman
+                    if apapun is tidak print 'Itu saja!' else print 'Satu ' apapun
+                    print 'Terima kasih atas pesanannya dan selamat menikmati!'
+                    ```
+
+                    Dapatkah kamu memikirkan pertanyaan-pertanyaan lain untuk pembeli ketika mereka memesan makanan, dan membuat respon yang bervariasi bergantung dari jawaban mereka?
+                story_text: |
+                    Pada level 4 perintah `if` memungkinkan kamu untuk menanyakan pertanyaan ke pembeli dan memberi respon yang berbeda bergantung pada jawaban yang diberikan.
+                    Pada contoh dibawah, kamu dapat melihat bahwa kamu dapat menanyakan pembeli apakah mereka ingin tahu menu spesial dan Hedy dapat merespon sesuai dengan jawaban yang diberikan.
     rock:
         name: Batu, gunting, kertas
         default_save_name: Batu
@@ -1144,8 +1166,65 @@ adventures:
                 example_code_2: "```\njumlahsudut = {ask} 'Berapa banyak sudut yang kamu mau?'\nsudut = 360 / jumlahsudut \n{repeat} jumlahsudut {times}\n    {turn} _\n    {forward} _\n```\n"
     pressit:
         default_save_name: Ditekan
+        levels: {}
     years:
         name: Tahun Baru
         default_save_name: Hitung Mundur Tahun Baru
         description: Hitung Mundur menuju Tahun Baru!
+        levels: {}
+    while_command:
+        levels: {}
+    for_command:
+        levels: {}
+    random_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    music:
+        levels: {}
+    functions:
+        levels: {}
+    and_or_command:
+        levels: {}
+    elif_command:
+        levels: {}
+    songs_2:
+        levels: {}
+    hotel:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    hospital:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    calculator_2:
+        levels: {}
+    is_command:
+        levels: {}
+    sleep_command:
+        levels: {}
+    maths:
+        levels: {}
+    turtle_draw_it:
+        levels: {}
+    repeat_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    print_command:
+        levels: {}
+    harry_potter:
+        levels: {}
+    if_command:
+        levels: {}
+    language:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    rock_2:
+        levels: {}
+    in_command:
+        levels: {}
+    secret:
         levels: {}

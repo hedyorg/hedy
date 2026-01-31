@@ -1363,6 +1363,13 @@ adventures:
                 story_text: "## Llistes\nSi volem comprovar que una cosa és dins d'una llista utilitzem la comanda `{in}`.  \nEl codi següent imprimeix \"Bé!\" si tries verd o groc, i \"Buu\" en cas contrari.\n"
                 example_code: "```\ncolors_bonics {is} verd, groc\ncolor_preferit {is} {ask} \"Quin és el teu color preferit?\"\n{if} color_preferit {in} colors_bonics\n{print} \"Bé!\"\n{else}\n{print} \"Buu\"\n```\n"
                 story_text_2: "### Exercici\nCompleta el codi d'exemple omplint els buits amb les comandes que has après.\nQuan hagis acabat el codi, intenta crear un programa propi i fes servir una pregunta que hagis pensat tu mateix.\n"
+                example_code_2: |
+                    ```
+                    animals {is} gos, vaca, ovella
+                    resposta {is} {ask} "Quin és el teu animal preferit?"
+                    _ resposta _ animals _ "Ala, el meu també!"
+                    _ _ "Els meus animals preferits són els gossos, les vaques i les ovelles."
+                    ```
     if_command:
         levels:
             5:
@@ -1603,7 +1610,7 @@ adventures:
         levels:
             8:
                 example_code: "```\n{repeat} 3 {times} {print} \"Hedy és divertit!\"\n```\n"
-                story_text: "El nivell 8 afegeix la comanda `{repeat}`. La comanda `{repeat}` es pot utilitzar per executar una línia de codi diverses vegades. Així:\n\n### Exercici\nJuga amb la comanda `{repeat}`. Pots fer la cançó de moltes felicitats amb només 3 línies de codi en lloc de les 4 d'ara?\n"
+                story_text: "El nivell 7 afegeix la comanda `{repeat}`. La comanda `{repeat}` es pot utilitzar per executar una línia de codi diverses vegades. Així:\n\n### Exercici\nJuga amb la comanda `{repeat}`. Pots fer la cançó de moltes felicitats amb només 3 línies de codi en lloc de les 4 d'ara?\n"
             9:
                 example_code: "```\n{repeat} 5 {times}\n    {print} \"Hola a tothom\"\n    {print} \"Això es repeteix 5 cops\"\n```\n"
                 story_text: "En aquest nivell pots repetir múltiples línies de codi amb només 1 comanda `{repeat}`.\nPer a fer-ho has de crear un bloc amb les línies que vols repetir.\nLes línies en aquest bloc necessitaran **indentació**.\nAixò significa posar quatre espais al començament de cada línia. També hauràs d'indentar quan només vulguis crear un bloc d'una línia.\n"

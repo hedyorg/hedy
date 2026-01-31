@@ -997,10 +997,12 @@ adventures:
         default_save_name: adivinhe o número
         description: adivinhe o número
         name: Adivinhe o número
+        levels: {}
     harry_potter:
         description: Aventuras de Harry Potter
         default_save_name: Harry Potter
         name: Harry Potter
+        levels: {}
     haunted:
         name: Casa mal-assombrada
         default_save_name: Casa mal-assombrada
@@ -1200,10 +1202,8 @@ adventures:
                     ```
                     animais {is} cachorro, vaca, ovelha
                     resposta {is} {ask} 'Qual é o seu animal favorito?'
-                    _ resposta _ animais
-                    _ 'O meu também!'
-                    _
-                    _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
+                    _ resposta _ animais _ 'O meu também!'
+                    _ _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
                     ```
         name: '{in}'
     is_command:
@@ -1739,6 +1739,7 @@ adventures:
         name: Superespião
         default_save_name: Superespião
         description: Faça seu próprio código de espião
+        levels: {}
     sleep_command:
         default_save_name: comando_durma
         description: introduzindo o comando {sleep}
@@ -2083,10 +2084,12 @@ adventures:
         name: Hospital
         default_save_name: Hospital
         description: Hospital
+        levels: {}
     hotel:
         name: hotel
         default_save_name: hotel
         description: hotel
+        levels: {}
     congratulations:
         name: Parabéns
         default_save_name: E agora
@@ -2096,3 +2099,11 @@ adventures:
                 story_text: |
                     Parabéns! Você chegou ao fim do Hedy Básico! Você pode continuar aprendendo Hedy Avançado (níveis 9-12), onde você pode aprender conceitos mais complexos de programação.
                     Ou fique à vontade para permanecer no Hedy Básico e criar seus próprios programas, claro!
+    repeat_command:
+        levels: {}
+    while_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    quizmaster:
+        levels: {}

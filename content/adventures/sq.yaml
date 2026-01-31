@@ -814,6 +814,7 @@ adventures:
         name: Drejtues konkursi
         default_save_name: Drejtues konkursi
         description: Bëni kuizin tuaj!
+        levels: {}
     restaurant:
         name: Restorant
         default_save_name: Restorant
@@ -1015,6 +1016,26 @@ adventures:
                         më_shumë = {ask} 'A dëshironi diçka {else}(tjetër)?'
                     {print} 'Falemenderit!'
                     ```
+            6:
+                example_code: |
+                    ```
+                    {print} 'Mirë se erdhët në Restorant Hedy!'
+                    specialitet {is} {ask} 'A doni të dëgjoni specilialitetin tonë sotë?'
+                    {if} specialitet {is} po {print} 'E veçanta e sotme është mishi i pulës dhe orizi.' {else} {print} 'Ska problem.'
+                    ushqimi {is} {ask} 'Çfarë dëshironi të hani?'
+                    {print} 'Një ' ushqimi ', është duke arritur!'
+                    pije {is} {ask} 'Çfarë dëshironi të pini?'
+                    {if} pije {is} kola {print} 'Më falni, nuk kemi kola!' {else} {print} 'Zgjedhje e mirë!'
+                    çfarëdo {is} {ask} 'A dëshironi diçka {else}(tjetër)?'
+                    {print} 'Më lejo të përsërisë porosinë tuaj...'
+                    {print} 'Një ' ushqimi
+                    {if} pije {is} kola {print} 'dhe...' {else} {print} 'Një ' pije
+                    {if} çfarëdo {is} jo {print} 'Kjo ishte!' {else} {print} 'Një ' çfarëdo
+                    {print} 'Faleminderit për porosinë tuaj dhe shijoni ushqimin tuaj!'
+                    ```
+                story_text: |
+                    Në këtë nivel komanda `{if}` ju lejon që të `{ask}`(pyesni) klientët tuaj dhe të trajtoni përgjigje të ndryshme.
+                    Në shembullin më poshtë, ju mund ta shikoni që mund ta `{ask}`(pyesni) klientin `{if}`(nëse) duan ta dëgjojnë specialitetin dhe Hedy mund të përgjigjet varësisht çka thotë klienti .
     rock:
         name: Gur, letër, gërshërë
         default_save_name: Gur
@@ -1385,3 +1406,61 @@ adventures:
                     Gjithashtu, mund ta përmirësojmë programin që vizaton figura.
                     A mund ta kuptoni sa herë duhet që breshka të kthehet këtu? Përfundojeni kodin dhe pastaj mund të vizatoni çdo poligon që dëshironi!
                 example_code_2: "```\nkëndet = {ask} 'Sa kënde duhet të vizatoj?'\nkëndi = 360 / këndet \n{repeat} këndet {times}\n    {turn} _\n    {forward} _\n```\n"
+    add_remove_command:
+        levels: {}
+    if_command:
+        levels: {}
+    debugging:
+        levels: {}
+    while_command:
+        levels: {}
+    for_command:
+        levels: {}
+    random_command:
+        levels: {}
+    clear_command:
+        levels: {}
+    ask_command:
+        levels: {}
+    music:
+        levels: {}
+    functions:
+        levels: {}
+    and_or_command:
+        levels: {}
+    elif_command:
+        levels: {}
+    hotel:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    hospital:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    calculator_2:
+        levels: {}
+    pressit:
+        levels: {}
+    is_command:
+        levels: {}
+    sleep_command:
+        levels: {}
+    maths:
+        levels: {}
+    turtle_draw_it:
+        levels: {}
+    repeat_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    print_command:
+        levels: {}
+    harry_potter:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    rock_2:
+        levels: {}
+    in_command:
+        levels: {}
