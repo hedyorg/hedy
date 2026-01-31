@@ -368,10 +368,7 @@ def task_normalize_yaml():
     Makes indentation and key ordering uniform, even if the files get rewritten by
     Weblate.
     """
-    yamls = [
-        *glob('content/**/*.yaml', recursive=True),
-        *glob('hedy/data/**/*.yaml', recursive=True),
-    ]
+    yamls = glob('content/**/*.yaml', recursive=True)
 
     return dict(
         title=lambda _: 'Normalize YAML',

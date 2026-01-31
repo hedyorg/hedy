@@ -123,6 +123,10 @@ adventures:
             9:
                 story_text: "På dette niveau can du bruge flere linjer i dine `{if}` kommandoer. På denne måde kan du opgradere din glade eller triste slutning!\n\n### Opgave 1\nKode eksemplet viser to forskellige slutninger; en hvor karakterene hopper ind i en tidsmaskine, og en hvor de ikke gør.\nFærdiggør de tomme felter med mindst en sætning per slutning.\n**Ekstra** Gør historien længere. Hvad sker der i historien? Du kan også tilføje endnu en `{ask}` med andre muligheder.\n\n### Opgave 2\nGo tilbage til dine gemte programmer, og vælg dit historie program fra niveau 5. Skriv nu en god og en dårlig slutning der hver er 3 linjer lange!\n"
                 example_code: "```\n{print} 'ÅH NEJ! T-rexen nærmer sig!'\nslut = {ask} 'Vil du have en glad eller en trist slutning?'\n{if} slut {is} glad\n    {print} 'Richard når lige at hoppe ind i tidsmaskinen!'\n    {print} _\n{else}\n    {print} 'Åh nej! Richard er for langsom...'\n    {print} _\n```\n"
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
     ask_command:
         description: Introduction ask command
         levels:
@@ -136,10 +140,19 @@ adventures:
                     yndlingsdyr {is} {ask} Hvad er dit yndlingsdyr?
                     {print} Jeg elsker yndlingsdyr
                     ```
+    calculator:
+        levels: {}
     calculator_2:
         name: Lommeregner 2
         default_save_name: Lommeregner 2
         description: Lommeregner 2
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
     dice:
         name: Terninger
         default_save_name: Terninger
@@ -275,10 +288,31 @@ adventures:
                     _ dag _ dage
                         {print} navne {at} {random} ' tager opvasken på ' day
                     ```
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
+    fortune:
+        levels: {}
     functions:
         name: funktioner
         default_save_name: funktioner
         description: funktioner
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
+    haunted:
+        levels: {}
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
     is_command:
         description: introducing is command
         levels:
@@ -294,12 +328,47 @@ adventures:
                     navn = Hedy
                     svar = 20 + 4
                     ```
+    language:
+        levels: {}
+    maths:
+        levels: {}
+    music:
+        levels: {}
+    parrot:
+        levels: {}
+    piggybank:
+        levels: {}
+    pressit:
+        levels: {}
     print_command:
         default_save_name: skriv
+        levels: {}
+    quizmaster:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    restaurant:
+        levels: {}
+    rock:
+        levels: {}
+    rock_2:
+        levels: {}
+    secret:
+        levels: {}
+    sleep_command:
+        levels: {}
     songs:
         levels:
             14:
                 example_code: "```\nalle_dyr = ['gris', 'hund', 'ko']\nlyde = ['øh', 'vuf', 'muh']\n{for} i {in} {range} 1 {to} 3\n    dyr = alle_dyr[i]\n    lyd = lyde[i]\n    {print} 'Jens Hansen havde en bondegård'\n    {print} 'ih ah ih ah oh!'\n    {print} 'og på den gård der var en ' dyr\n    {print} 'ih ah ih ah oh!'\n    {print} 'Der var ' lyd lyd' her'\n    {print} 'og ' lyd lyd' der'\n    {print} lyde ' her'\n    {print} lyde ' der'\n    {print} 'alle steder ' lyde lyde\n```\n\n```\nlinjer = ['Hvad skal vi gøre med den fulde sømand', 'Smid ham i brummen til han vågner', 'Han skal klynges op i masten']\n{for} linje {in} linjer\n    {for} i {in} {range} 1 {to} 3\n        {print} linje \n    {print} 'Tidligt om morgnen.'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Hu hej, se hun sejler'\n    {print} 'Tidligt om morgnen.'\n```\n"
+    songs_2:
+        levels: {}
     turtle:
         name: Skildpadde
         default_save_name: Skildpadde
@@ -436,3 +505,7 @@ adventures:
                     Denne kode skaber tre sorte trekanter og fem lyserøde firkanter.
 
                      **(ekstra)** Lav en figur du selv vælger bestående af mindst to forskellige former.
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}

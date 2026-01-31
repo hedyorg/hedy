@@ -140,35 +140,11 @@ def custom_rewrite_data(obj, strip_strings):
                 del obj[custom_order_key]
         for key in sorted(obj.keys()):
             copy[key] = custom_rewrite_data(obj[key], strip_strings)
-
-        # Remove empty strings and empty dicts/lists
-        for key in list(copy.keys()):
-            value = copy[key]
-            if value == "":
-                del copy[key]
-            elif value == {}:
-                del copy[key]
-            elif value == []:
-                del copy[key]
-
         return copy
     if isinstance(obj, list):
         # with lists simply recurse into the directory structure
         for (i, el) in enumerate(obj):
             obj[i] = custom_rewrite_data(el, strip_strings)
-
-        # Remove trailing empty strings and empty dicts/lists
-        while len(obj) > 0:
-            value = obj[-1]
-            if value == "":
-                obj.pop()
-            elif value == {}:
-                obj.pop()
-            elif value == []:
-                obj.pop()
-            else:
-                break
-
         return obj
     if isinstance(obj, str):
         # No string ever needs to have leading whitespace, and it messes
