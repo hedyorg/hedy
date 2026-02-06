@@ -1445,52 +1445,6 @@ adventures:
 
                     {call} calculate_budget with _, _, _
                     ```
-    pressit:
-        name: Presse une touche
-        levels:
-            6:
-                story_text: |
-                    À ce niveau il y a un nouveau mot clé : `{pressed}` !
-                    Avec `{pressed}` tu peux utiliser des touches de ton clavier pour contrôler quelles lignes sont jouées.
-
-                    ### Exercice
-                    Regarde l'exemple et ajoute une ligne de code de plus qui réagit à une touche.
-                example_code: |
-                    ```
-                    {print} "Voulez-vous une bonne (b) ou une mauvaise (m) fin ?"
-                    {if} b {is} {pressed} {print} "Ils vécurent heureux et eurent beaucoup d'enfants ❤️"
-                    {else} {print} "Le prince fut mangé par un hippopotame 😭"
-                    ```
-                story_text_2: |
-                    Tu peux aussi associer les commande de la tortue à des touches.
-
-                    ### Exercice
-                    Copie les lignes plusieurs fois pour créer une image plus grande.
-            8:
-                story_text: |
-                    Maintenant que tu sais tout sur le `{repeat}`, nous pouvons appuyer sur les touches plusieurs fois.
-
-                    ### Exercice
-                    Le code que tu as vu au niveau 5 ne détecte la touche qu'une seule fois. Copie l'exemple et ajoute-lui un `{repeat}` pour que tu puisses appuyer sur les touches plusieurs fois.
-            10:
-                story_text: |
-                    Maintenant que tu sais comment combiner les éléments, tu peux créer un jeu tactile avec `{pressed}`.
-
-                    ### Exercice
-                    Termine le code. À chaque fois, une lettre doit être choisie au hasard, qu'il faut appuyer. Tu gagnes un point par bonne réponse, mais deux points sont retirés si tu te trompes.
-                    **Bonus** Efface l'écran après chaque lettre, et affiche le score à la fin.
-                example_code: |
-                    ```
-                    points = 0
-                    lettre = a, b, c, d, e
-                    {repeat} 10 {times}
-                        lettre = _ _ _
-                        {print} "Presse la touche " letter
-                        {if} lettre {is} {pressed}
-                        _
-                        _
-                        _
-                    ```
     print_command:
         default_save_name: affiche
         description: Introduction à la commande affiche

@@ -2934,65 +2934,6 @@ adventures:
 
                     _
                     ```
-    pressit:
-        name: '{pressed}'
-        default_save_name: Pressed
-        description: Try linking a keyboard key to a command!
-        levels:
-            6:
-                story_text: |
-                    In this level there is another new keyword: `{pressed}`!
-                    With `{pressed}` you can use keys on your keyboard to control what lines are used.
-
-                    ### Exercise
-                    Look at the example and add one more line of code that reacts to a key press.
-                example_code: |
-                    ```
-                    {print} 'Do you want a good (g) or bad (b) ending?'
-                    {if} g {is} {pressed} {print} 'They lived happily ever after ❤'
-                    {else} {print} 'The prince was eaten by a hippopotamus 😭'
-                    ```
-                story_text_2: |
-                    You can also link turtle commands to keys.
-
-                    ### Exercise
-                    Copy the lines a few times so you can create a larger drawing.
-                example_code_2: |
-                    ```
-                    {if} y {is} {pressed} {forward} 15
-                    {else} {turn} 90
-                    ```
-            8:
-                story_text: |
-                    Now that you have learned about `{repeat}`, we can press keys multiple times.
-                    You can use it to make the turtle walk forward and turn.
-
-                    ### Exercise
-                    The code you have seen in level 5 only checks the key once. Copy the example code and add a `{repeat}` to it, so that you can press the keys many times.
-                    Use this code to draw something nice.
-                example_code: |
-                    ```
-                    {if} x {is} {pressed} {forward} 15 {else} {turn} 90
-                    ```
-            10:
-                story_text: |
-                    Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
-
-                    ### Exercise
-                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and two points deduction for a wrong press.
-                    **Extra** Clear the screen after each letter, and show the user how many points they have scored.
-                example_code: |
-                    ```
-                    points = 0
-                    letters = a, b, c, d, e
-                    {repeat} 10 {times}
-                        letter = _ _ _
-                        {print} 'Press the letter ' letter
-                        {if} letter {is} {pressed}
-                        _
-                        _
-                        _
-                    ```
     print_command:
         name: '{print}'
         default_save_name: print

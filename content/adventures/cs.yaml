@@ -814,22 +814,6 @@ adventures:
                 example_code: "```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
         default_save_name: Jazyk
         description: Procvičování slovíček v cizím jazyce
-    pressit:
-        description: Zkuste propojit klávesu klávesnice s příkazem!
-        levels:
-            6:
-                story_text_2: "Příkazy želvy můžete také propojit s klávesami.\n\n### Cvičení\nNěkolikrát zkopírujte čáry, abyste mohli vytvořit větší výkres.\n"
-                example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
-                story_text: "V této úrovni se objevuje další nové klíčové slovo: `{pressed}`!\nPomocí `{pressed}` můžete pomocí kláves na klávesnici ovládat, které řádky se použijí.\n\n### Cvičení\nPodívejte se na příklad a přidejte ještě jeden řádek kódu, který reaguje na stisk klávesy.\n"
-                example_code: "```\n{print} 'Do you want a good (g) or bad (b) ending?'\n{if} g {is} {pressed} {print} 'They lived happily ever after ❤'\n{else} {print} 'The prince was eaten by a hippopotamus 😭'\n```\n"
-            8:
-                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
-                story_text: "Nyní, když jste se dozvěděli o `{repeat}`, můžeme stisknout klávesy vícekrát.\nMůžete je použít k tomu, aby želva chodila dopředu a otáčela se.\n\n### Cvičení\nKód, který jste viděli v úrovni 5, kontroluje klávesu pouze jednou. Zkopírujte si ukázkový kód a přidejte do něj `{repeat}`, abyste mohli klávesy stisknout vícekrát.\nPomocí tohoto kódu nakreslete něco pěkného.\n"
-            10:
-                example_code: "```\nbody = 0\npísmena = a, b, c, d, e\n{repeat} 10 {times}\n    písmeno = _ _ _\n    {print} 'Zmáčkni písmenor ' písmeno\n    {if} písmeno {is} {pressed}\n    _\n    _\n    _\n```\n"
-                story_text: "Nyní, když víte, jak kombinovat příkazy, můžete vytvořit nástroj typu dotyk pomocí `{pressed}`.\n\n### Cvičení\nDokončete kód. Pokaždé by mělo být vybráno náhodné písmeno, které musíte stisknout. Za správné stisknutí získáte bod a za špatné stisknutí se vám odečtou dva body.\n**Extra** Po každém stisknutí písmene vymažte obrazovku a ukažte uživateli, kolik bodů získal.\n"
-        name: Stisky kláves
-        default_save_name: Stisknuté
     repeat_command:
         name: '{repeat}'
         default_save_name: opakování_příkaz

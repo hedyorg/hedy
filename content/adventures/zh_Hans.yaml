@@ -1581,46 +1581,7 @@ adventures:
 
                     {call} _
                     ```
-    pressit:
-        name: 按键
-        default_save_name: 按下
-        description: 试试把键盘键和命令联系起来吧！
-        levels:
-            6:
-                story_text: |
-                    在这个关卡中还有一个新的关键字:`{pressed}`!
-                    使用`{pressed}`，您可以使用键盘上的键来控制使用的行。
-
-                    ### 练习
-                    看看这个例子，再添加一行对按键作出反应的代码。
-                example_code: |
-                    ```
-                    {print} '你想要好 (g) 还是坏 (b) 结局？'
-                    {if} g {is} {pressed} {print} '从此以后，他们幸福地生活在一起了 ❤'
-                    {else} {print} '王子被河马给吃了😭'
-                    ```
-                story_text_2: |
-                    您还可以将turtle命令链接到按键。
-
-                    ### 练习
-                    复制几次路线，这样你就可以创建一个更大的图纸。
-            8:
-                story_text: |
-                    现在您已经了解了`{repeat}`，我们可以多次按键。
-                    你可以用它来让乌龟向前走和转身。
-
-                    ### 练习
-                    你在第5关看到的代码只检查一次按键。复制示例代码并添加`{repeat}`，这样您就可以多次按下这些键。
-                    使用这段代码来画一些漂亮的东西。
-            10:
-                story_text: |
-                    现在你知道了如何组合语句，你可以用`{pressed}`创建一个触摸类型工具。
-
-                    ### 练习
-                    完成代码。每次随机选择一个字母，你必须按下。按对得一分，按错扣两分。
-                    **额外**在每个字母之后清除屏幕，并显示用户他们得了多少分。
-                example_code: "```\n积分 = 0\n字母们 = a, b, c, d, e\n{repeat} 10{times}\n    字母 = _ _ _ \n    {print} '按下字母' 字母\n    {if} 字母{is} {pressed}\n    _\n    _\n    _\n```\n"
-    print_command:
+       print_command:
         description: 介绍print命令
         levels:
             1:

@@ -1374,23 +1374,6 @@ adventures:
 
                     {call} calculate_budget with _, _, _
                     ```
-    pressit:
-        levels:
-            10:
-                story_text: |
-                    Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
-
-                    ### Exercise
-                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and and two points deduction for a wrong press.
-                    **(extra)** Clear the screen after each letter, and show the user how many points they have scored.
-            6:
-                story_text: "Neste nível, temos uma nova palavra: `{pressed}`!\nCom `{pressed}`, você pode usar teclas para controlar quais linhas são usadas.\n\n### Exercício\nVeja o código exemplo e adicione mais uma linha de código que reaja a um aperto de tecla.\n"
-                example_code: "```\n{print} 'Você quer um final feliz (f) ou triste (t)?'\n{if} f {is} {pressed} {print} 'Eles viveram felizes para sempre ❤'\n{else} {print} 'O príncipe foi devorado por um hipopótamo 😭'\n```\n"
-                example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
-                story_text_2: "Você também pode associar comandos da tartaruga a teclas.\n\n### Exercício\nCopie as linhas de código algumas vezes para poder criar um desenho maior.\n"
-        name: Apertos de tecla
-        description: Tente ligar uma tecla a um comando!
-        default_save_name: Apertado
     print_command:
         default_save_name: imprima
         description: Introdução ao comando imprima
