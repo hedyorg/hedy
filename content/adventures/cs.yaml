@@ -160,6 +160,8 @@ adventures:
                     _
                     {print} Dostanete příchuť {at} {random} mléčný_koktejl.
                     ```
+    and_or_command:
+        levels: {}
     ask_command:
         name: '{ask}'
         default_save_name: ask_command
@@ -235,6 +237,8 @@ adventures:
             4:
                 story_text: "Je čas na nový příkaz! Příkazem `{clear}` můžete vymazat veškerý text z výstupní obrazovky. Tímto způsobem můžete zabránit tomu, aby byla obrazovka příliš zaplněna textem.\nPozor! Používáte-li příkaz `{clear}`, může se stát, že nad ním budete muset použít příkaz `{sleep}`. Jinak vám Hedy vymaže obrazovku, aniž by vám dal čas na čtení, jak vidíte v příkladu!\n"
                 example_code: "```\n{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'čekej na to...'\n{sleep} 3\n{clear}\n{print} 'PŘEKVAPENÍ!'\n```\n"
+    congratulations:
+        levels: {}
     debugging:
         name: ladění
         default_save_name: ladění
@@ -306,6 +310,8 @@ adventures:
             11:
                 story_text: "### Cvičení\nPřidejte druhou povinnost, například vysávání nebo úklid, a ujistěte se, že je také rozdělena na celý týden.\n<br> **Extra** Program není spravedlivý, můžete mít smůlu a umývat celý týden. Jak byste mohli program udělat spravedlivější?\n"
                 example_code: "```\ndays = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\nnames = mom, dad, Emma, Sophie\n{for} day {in} days\n    {print} names {at} {random} ' does the dishes on ' day\n```\n"
+    elif_command:
+        levels: {}
     for_command:
         name: '{for}'
         default_save_name: pro
@@ -358,6 +364,8 @@ adventures:
             12:
                 story_text: "V této úrovni se naučíte používat **funkce**. Funkce je blok kódu, který můžete snadno použít vícekrát. Používání funkcí nám pomáhá uspořádat části kódu, které můžeme používat opakovaně.\nChcete-li vytvořit funkci, použijte `{define}` a pojmenujte ji. Poté vložte všechny řádky, které chcete ve funkci mít, do odsazeného bloku pod řádek `{define}`.\nV kódu ponechte jeden prázdný řádek, aby vypadal pěkně a přehledně. Skvělá práce! Vytvořili jste funkci!\n\nNyní, kdykoli budeme tento blok kódu potřebovat, stačí použít <code>{call}</code> s názvem funkce, abychom ji vyvolali! Nemusíme tento blok kódu psát znovu.\n\nPodívejte se na tento příklad kódu hry Twister. Funkce 'turn' obsahuje blok kódu, který vybírá, kam má jít která končetina.\n\n### Cvičení\nDokončete tento kód nastavením 2 proměnných zvolená_končetina a zvolená_barva.\nPoté zvolte, kolikrát chcete zavolat funkci, aby se twisterový spinner roztočil.\n\n### Cvičení 2\nVylepšete svůj kód přidáním proměnné s názvem ' lidi'. Pomocí této proměnné dejte všem hráčům ve hře jejich vlastní příkaz.\nNapříklad: „Ahmed, pravá ruka na zelenou“ nebo „Jessica, levá noha na žlutou“.\n"
                 example_code: "```\nstrany = 'levá', 'pravá'\nkončetiny = 'ruka', 'noha'\nbarvy = 'červená', 'modrá', 'zelená', 'žlutá'\n\n{define} otočit\n    zvolená_strana = strany {at} {random}\n    zvolená_končetina = končetiny _\n    zvolená_barva = barvy _\n    {print} zvolená_strana ' ' zvolená_končetina ' na ' zvolená_barva\n\n{print} 'Zahrajeme si hru Twister!'\n{for} i {in} {range} 1 {to} _\n    {call} otočit\n    {sleep} 2\n```\n"
+    guess_my_number:
+        levels: {}
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
@@ -442,6 +450,8 @@ adventures:
                 example_code: "```\n{print} 'Escape from the Haunted House!'\nplayer = alive\ndoors = 1, 2, 3\nmonsters = zombie, vampire, giant spider\n{repeat} 3 {times}\n    {if} player {is} alive\n        correct_door {is} doors {at} {random}\n        {print} 'There are 3 doors in front of you...'\n        chosen_door = {ask} 'Which door do you choose?'\n        {if} chosen_door {is} correct_door\n            {print} 'No monsters here!'\n        {else}\n            {print} 'You are eaten by a ' monsters {at} {random}\n            player = dead\n    {else}\n        {print} 'GAME OVER'\n{if} player {is} alive\n    {print} 'Great! You survived!'\n```\n"
             14:
                 story_text: "### Cvičení\nTato hra se strašidelným domem využívá spojení mezi seznamy, které můžete použít v této úrovni.\nNapříklad: všechny vlastnosti, které patří zombie, jsou ve všech seznamech na prvním místě, čarodějnice na druhém a upír na třetím.\nPodívejte se na kód a doplňte   `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]`  na správná prázdná místa, aby kód fungoval!\n"
+    hospital:
+        levels: {}
     hotel:
         name: hotel
         default_save_name: hotel
@@ -509,6 +519,7 @@ adventures:
         name: matematika
         default_save_name: matematika
         description: Představujeme matematiku
+        levels: {}
     music:
         name: hudba
         default_save_name: Hudba
@@ -658,6 +669,8 @@ adventures:
                 example_code: "```\n{print}('Ahoj!')\n{for} i {in} {range}(1, 10):\n    {print}('To je řada ', i)\n```\n"
                 story_text_2: Pokud chcete vytisknout více než jednu položku, musíte je oddělit čárkami.
                 example_code_2: "```\nteplota = 25\n{print} ('To je ', teplota, ' stupňů')\n```\n```\njméno = 'Hedy'\n{print} ('Mé jméno je ', jméno)\n```\n"
+    quizmaster:
+        levels: {}
     quotation_marks:
         name: "'uvozovky'"
         default_save_name: uvozovky
@@ -845,6 +858,8 @@ adventures:
                 example_code: "```\nrodina = dítě, maminka, tatínek, babička, dědeček\n_ _ _ _ \n  {print}_\n```\n"
                 story_text_2: "### Cvičení 2\nVytiskněte si písničku Pět malých opiček skáčou po posteli. Pokud si text nepamatujete, vyhledejte ho.\n\n**Extra** Vytiskněte si písničku Old MacDonald had a farm a ujistěte se, že všechna zvířata vydávají různé zvuky, pomocí `{if}`.\n"
                 example_code_2: "```\nopice = 5, 4, 3, 2, 1\n```\n"
+    songs_2:
+        levels: {}
     turtle:
         name: Želva
         default_save_name: Želva
@@ -990,3 +1005,7 @@ adventures:
                 example_code: "Nápověda:\n```\nvybrané_písmeno {is} {ask} 'Které písmeno byste chtěli vidět? F, E nebo L?'\n{if} _\n```\n"
             7:
                 story_text: "### Cvičení\nZrekonstruujte kresby s želvou!\n\n**Extra** Nechte hráče rozhodnout, jakou barvu má mít čtverec.\n\n***Extra*** Dokážete vytvořit i písmeno svého křestního jména a vlajku své země?\n\n<div class=\"w-full flex flex-row gap-2\">\nČtverec <img src=\"https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623\" width=\"150\">\nPísmena <img src=\"https://github.com/hedyorg/hedy/assets/80678586/e75f4fa5-f1f5-4b48-806c-916c28e4e8ad\" width=\"100\">\nVlajka <img src=\"https://github.com/hedyorg/hedy/assets/80678586/877fc337-df80-4185-8005-a6c28904f66e\" width=\"300\">\n</div>\n"
+    while_command:
+        levels: {}
+    years:
+        levels: {}

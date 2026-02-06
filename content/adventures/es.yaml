@@ -308,6 +308,8 @@ adventures:
                     _
                     {print} Recibe un batido de sabores {at} {random}
                     ```
+    and_or_command:
+        levels: {}
     ask_command:
         name: '{ask}'
         default_save_name: comando_preguntar
@@ -460,6 +462,8 @@ adventures:
                     {clear}
                     {print} '¡SORPRESA!'
                     ```
+    congratulations:
+        levels: {}
     debugging:
         name: depurando
         default_save_name: depurando
@@ -727,6 +731,8 @@ adventures:
                     {for} día {in} días
                         {print} nombres {at} {random} ' Hará los platos el ' día
                     ```
+    elif_command:
+        levels: {}
     for_command:
         name: '{for}'
         default_save_name: para
@@ -939,6 +945,8 @@ adventures:
                         {call} turno
                         {sleep} 2
                     ```
+    guess_my_number:
+        levels: {}
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
@@ -1119,6 +1127,8 @@ adventures:
             14:
                 story_text: "### Ejercicio\nEste juego de la casa encantada utiliza la conexión entre las listas que puedes usar en este nivel.\nPor ejemplo: todas las propiedades que pertenecen al zombi son las primeras en todas las listas, la bruja las segundas y el vampiro las terceras.\n¡Revisa el código y rellena  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` en los huecos correctos para hacer que el código funcione!\n"
                 example_code: "```\nnumeros = [1, 2, 3]\ni = numeros[{random}]\nsugerencia = ['gruñir', 'una carcajada', 'aleteo de alas de murciélago']\nmonstruos= ['zombi', 'bruja', 'vampiro']\nmal_destino = ['Se comen tu cerebro', 'Estás maldecido para siempre', 'Te muerden']\nbuen_destino = ['Lanzas el jamón. El zombi se distrae y empieza a comérselo.', 'Prendes fuego a las cortinas. La brujaThe witch huye por miedo al fuego', 'El vampiro odia el ajo y huye']\narmas = ['jamón', 'mechero', 'ajo']\n{print} 'Te encuentras frente a una mansión antigua'\n{print} 'Algo no va bien aquí'\n{print} 'Oyes ' _\n{print} 'Vas a explorar qué es'\n{print} 'Entras en la cocina y ves un mechero, un jamón crudo y un ajo.'\ntu_arma = {ask} '¿Qué traes contigo?'\n{print} 'Con tu ' tu_arma ' entras en el salón'\n{print} 'Allí te encuentras un ' _\narma_necesaria = _\n{if} tu_arma == arma_necesaria\n    {print} 'Utilizas tu ' tu_arma\n    {print} _\n    {print} '¡GANASTE!'\n{else}\n    {print} 'Es elegido el arma equivocada...'\n    {print} _\n    {print} 'FIN DEL JUEGO'\n```\n"
+    hospital:
+        levels: {}
     hotel:
         name: hotel
         default_save_name: hotel
@@ -1295,6 +1305,7 @@ adventures:
         name: cálculos
         default_save_name: cálculos
         description: Introducción a cálculos
+        levels: {}
     music:
         name: música
         default_save_name: música
@@ -1676,6 +1687,8 @@ adventures:
                     nombre = 'Hedy'
                     {print}('Mi nombre es ', nombre)
                     ```
+    quizmaster:
+        levels: {}
     quotation_marks:
         name: '''comillas'''
         default_save_name: comillas
@@ -2835,3 +2848,5 @@ adventures:
                         respuesta = {ask} '¿Cuánto es 5 veces 5?'
                     {print} 'La respuesta es correcta'
                     ```
+    years:
+        levels: {}

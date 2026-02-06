@@ -50,6 +50,8 @@ adventures:
                 example_code_2: "```\nživali {is} pes, mačka, kenguru\nnajman_ljuba {is} {ask} Katere živali ne marate najbolj?\n{remove} najman_ljuba {from} živali\n{print} Jaz izberem živali {at} {random}\n```\n"
                 story_text_3: "#### Vaja\nPreizkusite nove ukaze v tej virtualni restavraciji. Na seznam dodajte okus, katerega ima obiskovalec rad, in odstranite okuse, na katere je alergičen.\n"
                 example_code_3: "```\n{print} Skrivnosten napitek\nokusi {is} jagoda, čokolada, vanilija\nupanje {is} {ask} Na kakšen okus upate?\n_\nalergije {is} {ask} Ali ste alergični na katere koli okuse?\n_\n{print} Dobiš napitek z okusom {at} {random} okusi\n```\n"
+    and_or_command:
+        levels: {}
     ask_command:
         default_save_name: ukaz_vprašaj
         description: Predstavitev ukaza {ask}
@@ -85,6 +87,12 @@ adventures:
                 story_text: "Na prejšnji stopnji ste ustvarili kalkulator, na tej stopnji pa lahko to kodo razširite, tako da postavlja več vprašanj.\n\n### Vaja 1\nAli lahko končate vrstico 10, da bo koda delovala?\n\n### Vaja 2\nPosredujte igralcu povratne informacije, ko vnese odgovor, na primer `{print} 'Pravilno!'` ali pa `{print} 'Napačno! Pravilen odgovor je ' pravilen_odgovor`.\n"
             15:
                 example_code: "```\n{define} calculate_mean_grade\n    total = 0\n    {for} i {in} {range} 1 {to} 4\n        grade = {ask} _\n        total = total + _\n        return _ / 4\n\nmean_grade = {call} _\n{print} 'Your mean grade is ' mean_grade\n```\n\n        total = total + _\n        return _ / 4\n\nmean_grade = {call} _\n{print} 'Your mean grade is ' mean_grade\n"
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
     debugging:
         name: Razhroščevanje
         default_save_name: Razhroščevanje
@@ -95,6 +103,14 @@ adventures:
                 example_code: "**Opozorilo! V tej kodi je treba odpraviti napake!**\n```\n{print} Obožujem programiranje\nAli tudi vi radi programirate?\n{echo}\n{print} Kateri so vaši hobiji?\n{echo} Vaši hobiji so\n```\n"
             2:
                 story_text: "Dobrodošli na razhroščevalni dogodivščini. Razhroščevanje kode pomeni odpravljanje napak v programu.\nTo pomeni, da vam bomo v teh dogodivščinah razhroščevanja dali kodo, ki še ne deluje.\nUgotoviti boste morali, kaj je narobe, in odpraviti napake.\n\n### Vaja\nOdstranite napake v tej kodi. Srečno!"
+    dice:
+        levels: {}
+    dishes:
+        levels: {}
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
     fortune:
         name: Vedeževalec
         default_save_name: Vedeževalec
@@ -106,6 +122,10 @@ adventures:
         levels:
             12:
                 example_code: "```\nsides = 'left', 'right'\nlimbs = 'hand', 'foot'\ncolors = 'red', 'blue', 'green', 'yellow'\n\n{define} turn\n    chosen_side = sides {at} {random}\n    chosen_limb = limbs _\n    chosen_color = colors _\n    {print} chosen_side ' ' chosen_limb ' on ' chosen_color\n\n{print} 'Lets play a game of Twister!'\n{for} i {in} {range} 1 to _\n    {call} turn\n    {sleep} 2\n```\n"
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
     haunted:
         name: Hiša strahov
         levels:
@@ -113,12 +133,24 @@ adventures:
                 story_text: "V tej dogodivščini si boste ustvarili igro, v kateri morate pobegniti iz hiše strahov tako, da izberete prava vrata.\nČe boste izbrali prava vrata, boste preživeli, v nasprotnem primeru pa vas lahko ujame strašna pošast...\n\nV 1. stopnji začnemo igro o hiši strahov tako, da si izmislimo strašljivo zgodbo in vprašamo igralca, katero pošast bo videl v hiši strahov.\n"
                 example_code: "```\n{print} Kako smo prišli sem?\n{print} Spomnim se, da mi je prijatelj rekel, naj grem v stari dvorec...\n{print} in nenadoma je vse postalo črno.\n{print} Toda kako smo se znašli na tleh...?\n{print} Glava me boli, kot da bi me udaril bejzbolski kij!\n{print} Kaj je to za zvok?\n{print} O ne! Zdi se mi, da v tej hiši nismo sami!\n{print} Moramo pobegniti!\n{print} Pred mano so tri vrata..\n{ask} Katera vrata naj izberem?\n{echo} Izberem vrata\n{print} ...?\n```\n"
                 story_text_2: "### Vaja\nKopirajte vzorčno kodo na vnosno okno s klikom na rumeni gumb.\nZdaj dokončajte zgodbo tako, da dodate vsaj 5 vrstic kode.\nNe pozabite, da vsako vrstico programa začnete z ukazom `{print}`.\n"
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
     is_command:
         levels:
             2:
                 story_text: "## Spremenljivke\nBesedo lahko poimenujete z `{is}`. To se imenuje **spremenljivka**. V tem primeru smo ustvarili dve spremenljivki, ki ju imenujemo ime in starost. Besedo ime lahko uporabite kjer koli v kodi in zamenjana bo s Hedy, kot v tem primeru:\n"
                 story_text_2: "### Vaja\nČas je za izdelavo lastnih spremenljivk!\nV vzorčni kodi smo naredili primer spremenljivke `priljubljena_žival`. V vrstici 1 je spremenljivka nastavljena, v 2. vrstici pa smo spremenljivko uporabili v ukazu `{print}`.\nNajprej dokončajte naš primer tako, da podčrtaj nadomestite z svojo najljubšo živaljo. Nato sami izdelajte še tri primere nastavljanja spremenljivke. Izberite spremenljivko in jo nastavite z ukazom `{is}`. Nato jo uporabite z ukazom `{print}`, tako kot smo to storili skupaj.\n"
                 example_code_2: "```\npriljubljena_žival {is} _\n{print} Všeč mi je priljubljena_žival\n```\n"
+    language:
+        levels: {}
+    maths:
+        levels: {}
     music:
         name: Glasba
         default_save_name: Glasba
@@ -137,6 +169,10 @@ adventures:
                 example_code: "```\n{print} Jaz sem papiga Hedy\n{ask} kako je pa tebi ime?\n{echo}\n{echo}\n```\n"
                 story_text_2: "### Vaja\nKopirajte kodo iz primera v vnosno okno s klikom na rumeni gumb.\nPapiga naj postavi drugačno vprašanje. Izpolnite prazna mesta v primeru!\n**Dodatek** Papagaju lahko dovolite, da postavi več vprašanj. Pod svoj program vnesite še nekaj vrstic kode.\n"
                 example_code_2: "```\n{print} Jaz sem papiga Hedy\n{ask} _\n{echo}\n{echo}\n"
+    piggybank:
+        levels: {}
+    pressit:
+        levels: {}
     print_command:
         default_save_name: Izpiši
         description: Uvod v ukaz izpiši
@@ -150,6 +186,9 @@ adventures:
         name: Kvizmojster
         default_save_name: Kvizmojster
         description: Naredite svoj kviz!
+        levels: {}
+    quotation_marks:
+        levels: {}
     random_command:
         levels:
             3:
@@ -164,6 +203,8 @@ adventures:
             10:
                 story_text: "Great job! You've reached another new level! In the previous level you've learned to use multiple lines of code in an {if} or {repeat} command. But you can't yet combine the two...\nGood news! In this level you will be allowed to put an {if} inside an {if}, or inside a {repeat} command. Putting a block of code inside another block of code is called nesting.                     ``` Putting a block of code inside another block of code is called nesting.\n"
                 example_code: "```\nanswer = {ask} 'Are you ready to learn something new?'\n{if} answer {is} yes\n    {print} 'Great! You can learn to use the repeat command in the if command!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n    {print} 'Hooray!'\n{else}\n    {print} 'Maybe you should practice some more in the previous level'\n"
+    repeat_command_2:
+        levels: {}
     restaurant:
         name: Restavracija
         default_save_name: Restavracija
@@ -213,6 +254,9 @@ adventures:
                 example_code: "```\n{print} Moja najljubša barva je...\n{sleep} 2\n{print} zelena!\n```\n"
     songs:
         description: Izpiši pesem
+        levels: {}
+    songs_2:
+        levels: {}
     turtle:
         name: Želva
         default_save_name: Želva
@@ -247,3 +291,7 @@ adventures:
             12:
                 story_text: "### Exercise\nRecreate the drawings with the turtle!\nHint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:\n</div>\nBracelet Designing program <img src=\"https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951\" width=\"500\">\n"
                 example_code: "```\n{define} draw_a_square\n_\n\n{color} white\n{turn} -90\n{forward} 300\n{turn} 180\n\n{for} i {in} {range} 1 {to} 5\n    {color} gray\n    {forward} 100\n    shape = {ask} 'What kind of shape would you like next on the bracelet?'\n    chosen_color = {ask} 'In which color?'\n    {color} chosen_color\n    {if} shape = 'square'\n        {call} draw_a_square\n```\n"
+    while_command:
+        levels: {}
+    years:
+        levels: {}

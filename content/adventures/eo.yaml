@@ -176,6 +176,12 @@ adventures:
                             {print} 'Ne, ĝi ne estas ĉe la ' loko
                     {print} 'Nun vi povas eniri la domon!'
                     ```
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
+    ask_command:
+        levels: {}
     calculator:
         name: Kalkulilo
         default_save_name: Kalkulilo
@@ -231,6 +237,14 @@ adventures:
                             poentaro = poentaro + 1
                     {print} 'Bonege! Jen via poentaro: ' poentaro '/10!'
                     ```
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
     dice:
         name: Ĵetkuboj
         default_save_name: Ĵetkuboj
@@ -399,6 +413,10 @@ adventures:
                     {for} tago {in} tagoj
                         {print} nomoj {at} {random} ' lavas telerojn je ' tago
                     ```
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
     fortune:
         name: Aŭguristo
         default_save_name: Aŭguristo
@@ -514,6 +532,12 @@ adventures:
             11:
                 story_text: |
                     En ĉi tiu nivelo, vi povas montri plurvortajn aŭguraĵojn jene:
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
     haunted:
         name: Hantata domo
         default_save_name: Hantata domo
@@ -560,6 +584,16 @@ adventures:
                 story_text: |
                     En ĉi tiu nivelo vi lernas kiel uzi citilojn en viaj ludoj.
                     Ĉu vi povas igi vian Hantatan Domon rulebla en Nivelo 4?
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
+    is_command:
+        levels: {}
     language:
         name: Lingvo
         default_save_name: Lingvo
@@ -594,6 +628,10 @@ adventures:
                             {print} 'Malĝuste, ' francaj_vortoj[i] ' signifas la jenon: ' traduko[i]
                     {print} 'Vi respondis ' poentaro ' fojojn ĝuste.'
                     ```
+    maths:
+        levels: {}
+    music:
+        levels: {}
     parrot:
         name: Papago
         default_save_name: Papago
@@ -653,6 +691,21 @@ adventures:
         name: Ŝparujo
         default_save_name: Ŝparujo
         description: Kalkulu vian poŝmonon!
+        levels: {}
+    pressit:
+        levels: {}
+    print_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
     restaurant:
         name: Restoracio
         default_save_name: Restoracio
@@ -928,6 +981,8 @@ adventures:
                             {print} 'Vi gajnas la partion!'
                             gajnis = 'jes'
                     ```
+    rock_2:
+        levels: {}
     secret:
         name: Superspiono
         default_save_name: Superspiono
@@ -945,6 +1000,8 @@ adventures:
                     {else}
                         {print} 'Iru al la stacidomo je la 10a horo'
                      ```
+    sleep_command:
+        levels: {}
     songs:
         name: Kantu!
         default_save_name: Kanto
@@ -1158,3 +1215,9 @@ adventures:
                     Ankaŭ ni nun povas plibonigi la programon, kiu desegnas malsamajn figurojn.
                     Ĉu vi povas eltrovi kiom malproksimen la testudo devas turni ĉi tien? Finu la kodon kaj vi povas desegni ajnan plurangulon, kiun vi ŝatus!
                 example_code_2: "```\nanguloj = {ask} 'Kiom da anguloj mi desegnu?'\nangulo = 360 / anguloj \n{repeat} anguloj {times}\n    {turn} _\n    {forward} _\n```\n"
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}
+    years:
+        levels: {}

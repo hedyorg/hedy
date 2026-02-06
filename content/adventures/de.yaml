@@ -1093,6 +1093,8 @@ adventures:
                     {for} tag {in} tage
                         {print} namen {at} {random} ' ist mit dem Abwasch dran am ' tag
                     ```
+    elif_command:
+        levels: {}
     for_command:
         name: '{for}'
         default_save_name: für
@@ -1347,6 +1349,8 @@ adventures:
                     punkte = berechne_punkte(antwort, richtige_antwort)
                     {print} ('Dein Punktestand ist... ', punkte)
                     ```
+    guess_my_number:
+        levels: {}
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
@@ -1524,6 +1528,8 @@ adventures:
                     {if} Spieler {is} am_Leben
                         {print} 'Großartig! Du hast überlebt'
                     ```
+    hospital:
+        levels: {}
     hotel:
         name: Hotel
         default_save_name: Hotel
@@ -1686,6 +1692,7 @@ adventures:
         name: Mathe
         default_save_name: Mathe
         description: Mathe einführen
+        levels: {}
     music:
         name: Musik
         default_save_name: Musik
@@ -2103,6 +2110,8 @@ adventures:
                     name = 'Hedy'
                     {print}('Mein Name ist ', name)
                     ```
+    quizmaster:
+        levels: {}
     quotation_marks:
         name: '''Anführungszeichen'''
         default_save_name: Anführungszeichen
@@ -3233,3 +3242,5 @@ adventures:
             16:
                 story_text: "Wir lernen jetzt eine neue Schleife, die `{while}` Schleife! Wir bleiben in der Schleife, so lange bis die Aussage wahr ist.\nDeswegen - vergiss nicht, den Wert in der Schleife zu verändern.\n\nIm Beispiel Code bleiben wir in der Schleife, bis eine richtige Antwort gegeben wurde.\nFalls die richtige Antwort nie gegeben wird, endet die Schleife nie!"
                 example_code: "```\nantwort = 0\n{while} antwort != 25\n    antwort = {ask} 'Was ist 5 mal 5?'\n{print} 'Eine richtige Antwort wurde gegeben'\n```\n"
+    years:
+        levels: {}
