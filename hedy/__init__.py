@@ -1842,7 +1842,7 @@ class ConvertToPython_1(ConvertToPython):
     def interpolate_answer(self, argument) -> str:
         answer_keyword = hedy_translation.translate_keyword_from_en('answer', self.language)
         if answer_keyword in argument:
-            argument = argument.replace(answer_keyword, f'{{locals().get(\'answer\') or \'{answer_keyword}\'}}')
+            argument = argument.replace(answer_keyword, f"{{locals().get('answer') or '{answer_keyword}'}}")
         return argument
 
     def echo(self, meta, args):  # todo: keep for backwards compatibility, maybe remove later?
