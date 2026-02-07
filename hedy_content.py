@@ -175,7 +175,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'dice',
         'dishes',
         'piggybank',
-        'quizmaster',
         'turtle',
         'turtle_draw_it',
         'calculator',
@@ -268,6 +267,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'for_command',
         'story',
         'songs',
+        'quizmaster',
         'turtle_draw_it',
         'debugging',
         'hospital'

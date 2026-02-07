@@ -2158,7 +2158,35 @@ adventures:
                     {print}('Mijn naam is ', naam)
                     ```
     quizmaster:
+        name: quizmaster
+        default_save_name: Quizmaster
         description: Maak je eigen quiz!
+        levels:
+            13:
+                story_text: |
+                    ### Opdracht
+                    In dit avontuur kan je je eigen quiz maken. Vul de lege plekken in, voeg meer vragen toe en geniet van je eigen quiz!
+                    Je kunt een quiz maken over wat je dan maar leuk vindt: je hobby, je favoriete dier, je favoriete boek en ga zo maar door!
+                example_code: |
+                    ```
+                    {print} ('Maak je eigen quiz')
+                    points_a = 0
+                    points_b = 0
+                    {print} ('Vraag')
+                    {print} ('Antwoord optie A')
+                    {print} ('Antwoord optie B')
+                    antwoord = {ask} 'Welk antwoord?'
+                    {if} antwoord {is} 'A':
+                        punten_a = punten_a + 1
+                    {if} antwoord {is} 'B':
+                        punten_b = punten_b + 1
+                    {print} 'Eind van de quiz!'
+                    {print} 'Laten we de uitslag bekijken!'
+                    {if} punten_a > punten_b:
+                        {print} ('Welkom bij de A club!')
+                    {if} points_b > points_a:
+                        {print} ('Welkom bij de B club')
+                    ```
     quotation_marks:
         name: '''aanhalingstekens'''
         default_save_name: haakjes

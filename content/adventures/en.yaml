@@ -3138,30 +3138,30 @@ adventures:
         default_save_name: Quizmaster
         description: Make your own quiz!
         levels:
-            7:
+            13:
                 story_text: |
                     ### Exercise
                     In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
                     You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
                 example_code: |
                     ```
-                    {print} 'Make your own quiz'
+                    {print} ('Make your own quiz')
                     points_a = 0
                     points_b = 0
-                    {print} 'Question'
-                    {print} 'Answer option A'
-                    {print} 'Answer option B'
+                    {print} ('Question')
+                    {print} ('Answer option A')
+                    {print} ('Answer option B')
                     answer = {ask} 'Which answer?'
-                    {if} answer is 'A'
-                    points_a = points_a + 1
-                    {if} answer is 'B'
-                    points_b = points_b + 1
+                    {if} answer {is} 'A':
+                        points_a = points_a + 1
+                    {if} answer {is} 'B':
+                        points_b = points_b + 1
                     {print} 'End of the quiz!'
                     {print} 'Lets see the results!'
-                    {if} points_a > points_b
-                    {print} 'You belong to the A club'
-                    {if} points_b > points_a
-                    {print} 'You belong to the B club'
+                    {if} points_a > points_b:
+                        {print} ('You belong to the A club')
+                    {if} points_b > points_a:
+                        {print} ('You belong to the B club')
                     ```
     quotation_marks:
         name: '''quotation marks'''
