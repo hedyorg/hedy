@@ -1,4 +1,5 @@
 import { multiLevelTester, singleLevelTester } from "../tools/lezer/lezer_tester"
+import { codeMirrorContent } from '../tools/programs/program';
 
 describe('Lezer parser tests for level 1', () => {
     describe('Successfull tests', () => {
@@ -109,4 +110,14 @@ describe('Lezer parser tests for level 1', () => {
             multiLevelTester('Test command after error parses correctly', code, expectedTree, 1, 3);
         });
     })
+
+    describe('Max amount of lines for level 1', () => {
+        it('Typing more than 100 lines should not be posible', () => {
+            cy.focused().type('a line!\n'.repeat(101));
+            codeMirrorContent().should('have.text', 'a line!\n'.repeat(100)); // First 100 lines should be in editor
+
+            cy.get('#warningbox').should('be.visible');
+            cy.get('#warningbox p.details').should('contain.text', 'Your program may not be longer than 100 lines!');
+        });
+    });
 });
