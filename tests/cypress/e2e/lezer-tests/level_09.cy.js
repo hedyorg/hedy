@@ -1,4 +1,5 @@
 import { multiLevelTester } from "../tools/lezer/lezer_tester";
+import { codeMirrorContent } from '../tools/programs/program';
 
 describe('Tests level 9', () => {    
 
@@ -142,4 +143,14 @@ describe('Tests level 9', () => {
 
         multiLevelTester('Test equality check equal sign', code, expectedTree, 9, 11);
     })
+
+    describe('Max amount of lines for level 9', () => {
+        it('Typing more than 200 lines should not be posible', () => {
+            cy.focused().type('a line!\n'.repeat(201));
+            codeMirrorContent().should('have.text', 'a line!\n'.repeat(200)); // First 200 lines should be in editor
+
+            cy.get('#warningbox').should('be.visible');
+            cy.get('#warningbox p.details').should('contain.text', 'Your program may not be longer than 200 lines!');
+        });
+    });
 })  
