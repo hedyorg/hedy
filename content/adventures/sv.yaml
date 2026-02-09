@@ -203,6 +203,26 @@ adventures:
 
                     Titta på <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> berättelsen</a> om du inte känner till den, och se till att den skrivs ut som i boken.
                 example_code: "```\ndjur = _ , _ , _ , _ \n{print} 'Brunbjörn, brunbjörn'\n {print} 'Vad ser du?'\n```\n"
+            13:
+                story_text: |
+                    Vi ska skriva ut en annan historia, men nu måste vi använda parenteser med `{print}`.
+
+                    ### Övning 1
+                    Skapa en berättelse med minst fem meningar. Du behöver inte använda 'namn' än.
+                example_code: |
+                    ```
+                    {print}('Välkommen till den här berättelsen!')
+                    ```
+                story_text_2: |
+                    ### Övning 2
+                    Vi har redan förberett en `{input}` åt dig. Använd först variabeln `name` i din berättelse.
+                    Lägg sedan till en andra `{ask}` och använd den variabeln också.
+                    Tips: Kom ihåg kommatecken i en `{print}` mellan text och variabler!
+                example_code_2: |
+                    ```
+                    namn = {input}("Vad heter du?")
+                    {print}('Välkommen till den här berättelsen!')
+                    ```
             16:
                 story_text: |
                     Med `{while}`-loopen kan du göra dina berättelser mer intressanta. Du kan t.ex. använda `{while} game == 'on'` så att du kan spela tills spelet är slut.
@@ -224,26 +244,6 @@ adventures:
                         {else}
                             {print} 'Nej, de är inte här: ' plats
                     {print} 'Nu kan du gå in i huset!'
-                    ```
-            13:
-                story_text: |
-                    Vi ska skriva ut en annan historia, men nu måste vi använda parenteser med `{print}`.
-
-                    ### Övning 1
-                    Skapa en berättelse med minst fem meningar. Du behöver inte använda 'namn' än.
-                example_code: |
-                    ```
-                    {print}('Välkommen till den här berättelsen!')
-                    ```
-                story_text_2: |
-                    ### Övning 2
-                    Vi har redan förberett en `{input}` åt dig. Använd först variabeln `name` i din berättelse.
-                    Lägg sedan till en andra `{ask}` och använd den variabeln också.
-                    Tips: Kom ihåg kommatecken i en `{print}` mellan text och variabler!
-                example_code_2: |
-                    ```
-                    namn = {input}("Vad heter du?")
-                    {print}('Välkommen till den här berättelsen!')
                     ```
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
@@ -284,6 +284,8 @@ adventures:
                     _
                     {print} Du får en milkshake med smaker {at} {random}
                     ```
+    and_or_command:
+        levels: {}
     ask_command:
         default_save_name: kommandot_fråga
         description: Introduktion till kommandot fråga
@@ -438,6 +440,8 @@ adventures:
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
                     Then `{call}` the function.
+    calculator_2:
+        levels: {}
     clear_command:
         default_save_name: kommandot_sudda
         description: kommandot sudda
@@ -446,6 +450,10 @@ adventures:
                 story_text: |
                     Dags för ett nytt kommando! Med `{clear}` kan du sudda all text från utdataskärmen. På så sätt kan du hindra att skärmen blir för full med text.
                     Se upp! Om du använder ett `{clear}`-kommando, så kom ihåg att använda ett `{sleep}` ovanför det. Annars kommer Hedy att sudda skärmen utan att ge dig tid att läsa!
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
     dice:
         name: Tärning
         default_save_name: Tärning
@@ -643,6 +651,7 @@ adventures:
     elif_command:
         default_save_name: annarsom
         description: annarsom
+        levels: {}
     for_command:
         default_save_name: för
         description: kommandot för
@@ -810,6 +819,10 @@ adventures:
                         {print} namn ' kommer att få en ' husdjur {at} {random} ' som husdjur.
                        {sleep}
                     ```
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
     harry_potter:
         description: Harry Potter-äventyr
         levels:
@@ -974,6 +987,10 @@ adventures:
                     {if} spelare {is} lever
                         {print} 'Bra! Du överlevde!'
                     ```
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
     if_command:
         default_save_name: kommandot_if
         description: Introduktion till kommandot if
@@ -1353,6 +1370,7 @@ adventures:
         name: Quizmästare
         default_save_name: Quizmästare
         description: Gör ditt eget quiz!
+        levels: {}
     quotation_marks:
         name: '''citattecken'''
         default_save_name: citattecken
@@ -2262,3 +2280,4 @@ adventures:
         name: Nyårsdagen
         default_save_name: Nedräkning till nyår
         description: Nedräkning till det nya året!
+        levels: {}

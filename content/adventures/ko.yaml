@@ -5,6 +5,8 @@ adventures:
         description: 짧은 이야기를 만듭니다
         levels:
             1:
+                story_text: "레벨 1에서는 여러분이 직접 입력한 여러 주인공으로 이야기를 만들 수 있습니다. \n\n첫 번째 줄에  `{ask}`를 사용해서 이야기의 주인공아 누가 될 지를 물어보세요. \n\n첫 번째 줄 이후로는, 출력해야 하는 문장이 있다면 `{print}`로 시작하세요. \n문장의 맨 끝에 여러분의 주인공이 나오게 하고 싶다면  `{echo}`를 사용하세요.\n"
+                example_code: "```\n{ask} 이 이야기의 주인공은\n{print} 주인공은 숲 속을 걷고 있습니다.\n{echo} 겁에 질려있네요,\n{print} 사방에서 온갖 시끄러운 소리가 들려옵니다.\n{print} 어쩌면 이 곳이 귀신들린 숲은 아닐까 두려워하고 있습니다.\n```\n"
                 story_text_2: |
                     ### 연습문제
                     이제 최소 6줄의 코드로 된 자신만의 이야기를 만들어 보세요.
@@ -12,9 +14,9 @@ adventures:
                     적어도 하나의 `{ask}` 명령과 하나의 `{echo}` 명령을 사용합니다.
                     당신은 당신이 좋아하는 어떤 주제에 대해서도 그것을 만들 수 있다.
                     주제가 생각나지 않는다면, 우리가 선택한 것 중 하나를 이용해 보세요: 영화를 보러 가거나, 스포츠 경기를 하거나, 동물원에서 하루를 보내거나.
-                story_text: "레벨 1에서는 여러분이 직접 입력한 여러 주인공으로 이야기를 만들 수 있습니다. \n\n첫 번째 줄에  `{ask}`를 사용해서 이야기의 주인공아 누가 될 지를 물어보세요. \n\n첫 번째 줄 이후로는, 출력해야 하는 문장이 있다면 `{print}`로 시작하세요. \n문장의 맨 끝에 여러분의 주인공이 나오게 하고 싶다면  `{echo}`를 사용하세요.\n"
-                example_code: "```\n{ask} 이 이야기의 주인공은\n{print} 주인공은 숲 속을 걷고 있습니다.\n{echo} 겁에 질려있네요,\n{print} 사방에서 온갖 시끄러운 소리가 들려옵니다.\n{print} 어쩌면 이 곳이 귀신들린 숲은 아닐까 두려워하고 있습니다.\n```\n"
             2:
+                story_text: "레벨 2에서는 여러분의 이야기를 더 재미있게 만들 수 있습니다. 여러분이 만든 주인공의 이름이 문장 어디에든 들어갈 수 있게 되었습니다.\n\n그러기 위해서는 프로그래밍을 조금 더 해야 해요. 당신은 이제 주인공의 이름을 먼저 지어줘야 합니다. \n\n지어준 이름을 문장 어디에나 넣을 수 있습니다.\n"
+                example_code: "```\n이름 {is} {ask} 주인공의 이름이 무엇인가요?\n{print} 이름 은 숲속을 달릴거예요.\n{print} name 은 조금 겁에 질려있습니다.\n{print} 갑자기 소름끼치는 소음이 들려옵니다.\n{sleep}\n{print} 이름 은 여기가 귀신들린 숲이 아닐까 두려워하고 있습니다.\n```"
                 story_text_2: |
                     ### 연습문제
                     이제 이전 레벨에서 만들었던 자신의 스토리에 변수를 추가해야 할 때입니다.
@@ -24,13 +26,13 @@ adventures:
                     코드에 있는 `{ask}`명령어와 `{echo}` 명령어를 이 레벨에서 배운 올바른 형태로 변경합니다.
 
                     **추가** 코드에  `{sleep}` 명령을 추가하여 스토리에 긴장감을 조성해 보세요.
-                example_code: "```\n이름 {is} {ask} 주인공의 이름이 무엇인가요?\n{print} 이름 은 숲속을 달릴거예요.\n{print} name 은 조금 겁에 질려있습니다.\n{print} 갑자기 소름끼치는 소음이 들려옵니다.\n{sleep}\n{print} 이름 은 여기가 귀신들린 숲이 아닐까 두려워하고 있습니다.\n```"
-                story_text: "레벨 2에서는 여러분의 이야기를 더 재미있게 만들 수 있습니다. 여러분이 만든 주인공의 이름이 문장 어디에든 들어갈 수 있게 되었습니다.\n\n그러기 위해서는 프로그래밍을 조금 더 해야 해요. 당신은 이제 주인공의 이름을 먼저 지어줘야 합니다. \n\n지어준 이름을 문장 어디에나 넣을 수 있습니다.\n"
             3:
                 story_text: |
                     레벨 3에서는 여러분의 이야기를 더 재미있게 만들 수 있습니다. 몬스터, 동물이나 장애물에 랜덤성을 사용할 수 있게 됐습니다. 이렇게요:
+                example_code: "```\n동물들 {is} 🦔, 🐿, 🦉, 🦇\n{print} 이제 동물들 {at} {random} 의 울음소리가 들리기 시작합니다.\n```\n"
                 story_text_2: |
                     `{add}` 명령어도 여러분의 이야기에 유용하게 쓰일 수 있습니다.
+                example_code_2: "```\n{print} 소리가 들려옵니다.\n동물들 {is} 🐿, 🦔, 🦇, 🦉\n동물 {is} {ask} 어떤 동물의 소리일까요?\n{add} 동물 {to_list} 동물들\n{print} 동물들 {at} {random} 이었습니다. \n```\n"
                 story_text_3: |
                     `{remove}` 명령을 스토리에 사용할 수 있는 예제입니다
 
@@ -38,8 +40,6 @@ adventures:
                     이전 레벨들의 스토리를 이 레벨로 복사해 보세요.
                     본 레벨에서 우리는 `{at} {random}`, `{add} {to_list}` 및 `{remove} {from}` 명령 3개를 새로 배웠습니다.
                     스토리에 새 코드 줄을 추가하여 모든 새 명령이 스토리에 한 번 이상 포함되도록 합시다.
-                example_code: "```\n동물들 {is} 🦔, 🐿, 🦉, 🦇\n{print} 이제 동물들 {at} {random} 의 울음소리가 들리기 시작합니다.\n```\n"
-                example_code_2: "```\n{print} 소리가 들려옵니다.\n동물들 {is} 🐿, 🦔, 🦇, 🦉\n동물 {is} {ask} 어떤 동물의 소리일까요?\n{add} 동물 {to_list} 동물들\n{print} 동물들 {at} {random} 이었습니다. \n```\n"
                 example_code_3: |
                     ```
                     {print}가방이 너무 무거워졌습니다.
@@ -93,6 +93,23 @@ adventures:
                     결말 {is} {ask} ' 좋은 결말과 나쁜 결말 중 어느 것을 고르시겠습니까?'
                     {if} 결말 {is} 좋은 결말 {print} 이름 ' 이 검을 들자 괴물은 도망쳤습니다'
                     {else} {print} ' 괴물은 ' 이름 ' 을 잡아먹었습니다.'
+                    ```
+            6:
+                story_text: |-
+                    이제 `{elif}` 를 이용하여 더욱 더 상호작용이 가득한 이야기를 만들 수 있습니다! 예를들어 여러 등장인물을 만들 수 있고, 각자 다른 특성을 보유하게 할 수 있습니다.
+                    혹은 플레이어가 어느 길을 가야 할지, 어느 문을 열어야 할지, 어느 마법 물약을 마셔야 할지 정하게 할 수 있습니다...
+
+                    ### 연습문제
+                    {elif}를 이용하여 3개 이상의 선택지가 있는 당신만의 이야기를 만들어 보세요.
+                example_code: |
+                    ```
+                    등장인물 {is}{ask} '누가 당신의 임무를 돕게 하겠습니까?'
+                    {if} 등장인물 {is} '영희'
+                    {print} '영희를 고르셨습니다! 그녀는 셋중 가장 똑똑합니다!'
+                    {elif} 등장인물 {is} '철수'
+                    {print} '철수를 고르셨습니다! 그는 셋중 가장 힘이 쎕니다!'
+                    {elif} 등장인물 {is} '민수'
+                    {print} '민수를 고르셨습니다! 그는 셋중 가장 빠릅니다!'
                     ```
             8:
                 story_text: |
@@ -151,23 +168,6 @@ adventures:
                     우리는 이미 당신을 위해 `{input}`을 준비했습니다. 먼저 당신의 이야기에 `name` 변수를 사용하세요.
                     그런 다음 두 번째 `{ask}`를 추가하고 그 변수도 사용합니다.
                     팁: 텍스트와 변수 사이의 `{print}`에 있는 쉼표를 기억하세요!
-            6:
-                story_text: |-
-                    이제 `{elif}` 를 이용하여 더욱 더 상호작용이 가득한 이야기를 만들 수 있습니다! 예를들어 여러 등장인물을 만들 수 있고, 각자 다른 특성을 보유하게 할 수 있습니다.
-                    혹은 플레이어가 어느 길을 가야 할지, 어느 문을 열어야 할지, 어느 마법 물약을 마셔야 할지 정하게 할 수 있습니다...
-
-                    ### 연습문제
-                    {elif}를 이용하여 3개 이상의 선택지가 있는 당신만의 이야기를 만들어 보세요.
-                example_code: |
-                    ```
-                    등장인물 {is}{ask} '누가 당신의 임무를 돕게 하겠습니까?'
-                    {if} 등장인물 {is} '영희'
-                    {print} '영희를 고르셨습니다! 그녀는 셋중 가장 똑똑합니다!'
-                    {elif} 등장인물 {is} '철수'
-                    {print} '철수를 고르셨습니다! 그는 셋중 가장 힘이 쎕니다!'
-                    {elif} 등장인물 {is} '민수'
-                    {print} '민수를 고르셨습니다! 그는 셋중 가장 빠릅니다!'
-                    ```
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         description: introducing add to and remove from
@@ -180,6 +180,8 @@ adventures:
                 story_text_3: |
                     ### Exercise
                     이 가상 레스토랑에서 새로운 명령어를 사용해 보십시오. 플레이어가 원하는 맛을 목록에 추가하고 알레르기가 있는 맛을 제거하십시오.
+    and_or_command:
+        levels: {}
     ask_command:
         description: Introduction ask command
         levels:
@@ -229,6 +231,8 @@ adventures:
                 story_text: 파이썬 코드를 얻기 위해 우리가 해야 할 마지막 변화는 `{ask}`를 `{input}`으로 바꾸는 것이다.
     calculator:
         levels: {}
+    calculator_2:
+        levels: {}
     clear_command:
         description: clear 명령어
         levels:
@@ -249,6 +253,12 @@ adventures:
                     {clear}
                     {print} '서프라이즈!'
                     ```
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
+    dice:
+        levels: {}
     dishes:
         description: Use the computer to see who does the dishes (Start at level 2)
         levels:
@@ -277,7 +287,12 @@ adventures:
                     ### 연습문제
                     예제 코드를 입력 화면에 복사하고 빈칸을 입력하면 코드가 작동합니다.
                     **추가** 코드를 바꿔서 점쟁이가 당신의 이름뿐만 아니라 당신의 나이, 당신이 좋아하는 스포츠 팀, 또는 당신 자신에 관한 다른 것들도 예측할 수 있도록 하세요.
-
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
     haunted:
         name: 유령의 집
         default_save_name: 유령의 집
@@ -291,6 +306,10 @@ adventures:
             2:
                 story_text: |
                     이 유령이 나오는 집에서는 이모지로 몬스터를 고를 수 있습니다. 물론 단어도 사용할 수 있습니다.
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
     if_command:
         description: Introducing the if command
         levels:
@@ -320,6 +339,12 @@ adventures:
                     변수를 직접 만들어 볼 시간!
                     예제 코드에서 우리는 `favorite_animal` 변수의 예를 만들었다. 1행에서 변수가 설정되어 있고, 2행에서 우리는 인쇄 명령에 변수를 사용했다.
                     먼저 빈칸에 가장 좋아하는 동물을 채우는 것으로 예제를 끝내라. 그런 다음 적어도 3개의 코드를 직접 만들어라. 변수를 골라서, {is} 명령어로 변수를 설정한다. 그런 다음 우리가 했던 것처럼 {print} 명령어로 사용한다.
+    language:
+        levels: {}
+    maths:
+        levels: {}
+    music:
+        levels: {}
     parrot:
         name: 앵무새
         default_save_name: 앵무새
@@ -356,6 +381,10 @@ adventures:
 
                     ### 연습문제
                     누락된 명령어 4개를 입력하여 코드를 마무리합니다.
+    piggybank:
+        levels: {}
+    pressit:
+        levels: {}
     print_command:
         levels:
             1:
@@ -378,6 +407,8 @@ adventures:
                     ```
                     _ 안녕하세요!
                     ```
+    quizmaster:
+        levels: {}
     quotation_marks:
         name: '''따옴표'''
         levels:
@@ -473,11 +504,19 @@ adventures:
                 story_text: |
                     ### 연습문제
                     컴퓨터를 이길 때까지 게임을 해! 하지만 일단 예제 코드를 완성하고...
+    rock_2:
+        levels: {}
+    secret:
+        levels: {}
     sleep_command:
         description: introducing sleep command
         levels:
             2:
                 story_text: "이 레벨의 또 다른 새로운 명령어는 `{sleep}`으로 프로그램을 잠시 일시 중지한다. {sleep} 명령 뒤에 숫자를 입력하면 해당 시간 동안 프로그램이 일시 중지된다. \n\n### 연습 문제\n{sleep} 명령어를 적어도 3번 사용하는 자신만의 코드를 만들어 이 새로운 명령어를 연습한다. {sleep} 명령어마다 일시 중지 시간이 달라야 한다.\n"
+    songs:
+        levels: {}
+    songs_2:
+        levels: {}
     turtle:
         name: 거북이
         default_save_name: 거북이
@@ -498,3 +537,9 @@ adventures:
             9:
                 story_text_2: |
                     **Extra** 다양한 도형을 그리는 프로그램을 개선할 수 있습니다. 코드를 완성하면 원하는 다각형을 그릴 수 있습니다!
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}
+    years:
+        levels: {}
