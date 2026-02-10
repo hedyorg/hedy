@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block full_width_content %}
+<div tabindex="0" class="flex-grow px-8 common-page-container"
+ data-level="{{level}}" data-kwlang="{{ current_language().lang }}">
+  <div class="flex flex-row gap-6 items-center">
+    <h1> {{ _('level') }} {{level}} — {{initial_adventure.name}}</h1>
+    {% if False and  can_checkoff_program %}
+      <input type="checkbox"
+        id="adventure_checkbox"
+        class="student_adventure_checkbox text-green-700 text-center p-3 text-lg cursor-pointer self-center {% if student_adventure.ticked %}fa-solid fa-check{% endif %} "
+        hx-post="/for-teachers/check_adventure?level={{ level }}&student_name={{ initial_adventure.username }}&adventure_name={{ initial_adventure.adventure_name }}&program_id={{ program_id }}"
+        hx-swap="none"
+        hx-disabled-elt="this"
+        {% if student_adventure.ticked %}checked{% endif %}
+        _="on click toggle .fa-solid .fa-check on me"
+      >
+
+      {% if can_unsubmit_program %}
+        <div class="text-center">
+          <button id="unsubmit-program-button" class="green-btn" data-cy="unsubmit_btn" onclick="hedyApp.unsubmit_program('{{initial_adventure.id}}', '{{_('unsubmit_warning')}}')">{{_('unsubmit_program')}}</button>
+        </div>
+      {% endif %}
+
+      <div class="flex-1"></div>
+      {% if next_program_id %}
+      <a class="green-btn" href="/hedy/{{ next_program_id }}/view">
+        {{_('next_adventure')}}
+      </a>
+      {% endif %}
+      {% if next_classmate_program_id %}
+        <a class="green-btn" href="/hedy/{{ next_classmate_program_id }}/view">{{ _('next_student') }}</a>
+      {% endif %}
+      {% if class_id %}
+        <a class="green-btn" href="/for-teachers/class/{{ class_id }}">
+          {{_('back_to_class')}}
+        </a>
+      {% endif %}
+    {% endif %}
+  </div>
+  <div class="flex flex-row gap-6 items-center">
+    <h2 class="p-0 m-0">{{_('level_title')}} {{level}}</h2>
+  </div>
+  <div class="flex flex-col">
+    <div class="flex flex-row gap-3">
+        {% if initial_adventure.submitted %}
+            <span> {{_('written_by')}} </span> <span class="font-bold">{{ initial_adventure.username }} </span>
+        {% endif %}
+    </div>
+    <span id="submitted-program-details" class="p-0 m-0">{{program_timestamp}}</span>
+  </div>
+
+  {% include "hedy-page/editor-and-output.html" %}
+</div>
+{% endblock %}
