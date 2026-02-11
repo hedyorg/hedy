@@ -1372,7 +1372,7 @@ def index(level, program_id):
 
 @app.route('/hedy/<id>/view/redesign', methods=['GET'])
 @requires_login
-#TODO: rename to view_program once the old view_program is removed
+# TODO: rename to view_program once the old view_program is removed
 def view_program_redesing(user, id):
     result = g_db().program_by_id(id)
 
@@ -1386,6 +1386,42 @@ def view_program_redesing(user, id):
 
     code = result['code']
     level = int(result.get('level', 1))
+
+    keyword_lang = g.keyword_lang
+    adventure_info = ADVENTURES[g.lang].get_adventures_subset(
+        subset=[result["adventure_name"]], keyword_lang=keyword_lang
+    )
+    if adventure_info:
+        adventure_content = adventure_info[result["adventure_name"]]
+        extra_stories = (
+            adventure_content.get("levels", {}).get(level, {}).get("extra_stories", [])
+        )
+        solutions = adventure_content.get("levels", {}).get(level, {}).get("solutions", [])
+        adventure = Adventure(
+            short_name=result["adventure_name"],
+            name=adventure_content["name"],
+            image=adventure_content.get("image", None),
+            text=adventure_content["levels"][level].get("story_text", ""),
+            example_code=adventure_content["levels"][level].get("example_code", ""),
+            extra_stories=extra_stories,
+            is_teacher_adventure=False,
+            save_name=adventure_content["name"],
+            solutions=solutions,
+        )
+    elif not adventure_info and prog_perms.can_checkoff:
+        teacher_adventures = g_db().batch_get_adventures([result["adventure_name"]])
+        db_teacher_adventure = teacher_adventures.get(result["adventure_name"])
+        adventure = (
+            Adventure.from_teacher_adventure_database_row(db_teacher_adventure)
+            if db_teacher_adventure
+            else None
+        )
+    else:
+        adventure = None
+
+    logger.info('*'*100)
+    logger.info(adventure)
+    logger.info('*'*100)
 
     # Try to translate the program from the language of the program to the language of the viewer
     #
@@ -1422,12 +1458,13 @@ def view_program_redesing(user, id):
 
     arguments_dict = {
         'program_id': id,
-        'page_title': f'{result["name"]} – Hedy',
+        'page_title': f'{result["name"]} – {result["username"]} - Hedy',
         'level': result['level'],  # Necessary for running
         'initial_adventure': dict(result, editor_contents=code),
         'editor_readonly': True,
         'student_adventure': student_adventure,
-        'is_students_teacher': False
+        'is_students_teacher': False,
+        'raw': True
     }
 
     if "submitted" in result and result['submitted']:
@@ -1438,6 +1475,7 @@ def view_program_redesing(user, id):
 
     classes = g_db().get_student_classes_ids(result['username'])
     next_classmate_adventure_id = None
+    next_submitted_classmate_program_id = None
     if classes:
         class_id = classes[0]
         class_ = g_db().get_class(class_id) or {}
@@ -1446,41 +1484,59 @@ def view_program_redesing(user, id):
         for student in students[index + 1:]:
             id = f"{student}-{result['adventure_name']}-{result['level']}"
             next_classmate_adventure = g_db().student_adventure_by_id(id) or {}
-            next_classmate_adventure_id = next_classmate_adventure.get('program_id')
-            if next_classmate_adventure_id:
+            candidate_program_id = next_classmate_adventure.get('program_id')
+            if candidate_program_id and next_classmate_adventure_id is None:
+                next_classmate_adventure_id = candidate_program_id
+            if candidate_program_id and not next_submitted_classmate_program_id:
+                program_row = g_db().program_by_id(candidate_program_id)
+                if program_row and program_row.get('submitted'):
+                    next_submitted_classmate_program_id = candidate_program_id
+            if next_classmate_adventure_id and next_submitted_classmate_program_id:
                 break
 
     student_customizations = g_db().get_student_class_customizations(result['username'])
     adventure_index = 0
     adventures_for_this_level = student_customizations.get('sorted_adventures', {}).get(str(result['level']), [])
-    for index, adventure in enumerate(adventures_for_this_level):
-        if adventure['name'] == result['adventure_name']:
+    for index, adventure_content in enumerate(adventures_for_this_level):
+        if adventure_content['name'] == result['adventure_name']:
             adventure_index = index
             break
 
     next_program_id = None
+    next_submitted_program_id = None
     for i in range(adventure_index + 1, len(adventures_for_this_level)):
         next_adventure = adventures_for_this_level[i]
         next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
         next_student_adventure = g_db().student_adventure_by_id(next_adventure_id) or {}
-        next_program_id = next_student_adventure.get('program_id')
-        if next_program_id:
+        candidate_program_id = next_student_adventure.get('program_id')
+        if candidate_program_id and next_program_id is None:
+            next_program_id = candidate_program_id
+        if candidate_program_id and not next_submitted_program_id:
+            program_row = g_db().program_by_id(candidate_program_id)
+            if program_row and program_row.get('submitted'):
+                next_submitted_program_id = candidate_program_id
+        if next_program_id and next_submitted_program_id:
             break
 
     arguments_dict['can_checkoff_program'] = prog_perms.can_checkoff
     arguments_dict['can_unsubmit_program'] = prog_perms.can_unsubmit
-
-    return render_template("hedy-page/view-program/view-program-page.html",
-                           blur_button_available=True,
-                           javascript_page_options=dict(
-                               page='view-program',
-                               lang=g.lang,
-                               level=int(result['level']),
-                               code=code),
-                           class_id=student_customizations.get('id'),
-                           next_program_id=next_program_id,
-                           next_classmate_program_id=next_classmate_adventure_id,
-                           **arguments_dict)
+    logger.info('*'*100)
+    logger.info(next_submitted_program_id)
+    logger.info('*'*100)
+    return render_template(
+        "hedy-page/view-program/view-program-page.html",
+        blur_button_available=True,
+        javascript_page_options=dict(
+            page="view-program", lang=g.lang, level=int(result["level"]), code=code
+        ),        
+        class_id=student_customizations.get("id"),
+        next_program_id=next_program_id,
+        next_submitted_program_id=next_submitted_program_id,
+        next_classmate_program_id=next_classmate_adventure_id,
+        next_submitted_classmate_program_id=next_submitted_classmate_program_id,
+        adventure=adventure,
+        **arguments_dict,
+    )
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 @requires_login
@@ -1549,6 +1605,7 @@ def view_program(user, id):
 
     classes = g_db().get_student_classes_ids(result['username'])
     next_classmate_adventure_id = None
+    next_submitted_classmate_program_id = None
     if classes:
         class_id = classes[0]
         class_ = g_db().get_class(class_id) or {}
@@ -1557,8 +1614,14 @@ def view_program(user, id):
         for student in students[index + 1:]:
             id = f"{student}-{result['adventure_name']}-{result['level']}"
             next_classmate_adventure = g_db().student_adventure_by_id(id) or {}
-            next_classmate_adventure_id = next_classmate_adventure.get('program_id')
-            if next_classmate_adventure_id:
+            candidate_program_id = next_classmate_adventure.get('program_id')
+            if candidate_program_id and next_classmate_adventure_id is None:
+                next_classmate_adventure_id = candidate_program_id
+            if candidate_program_id and not next_submitted_classmate_program_id:
+                program_row = g_db().program_by_id(candidate_program_id)
+                if program_row and program_row.get('submitted'):
+                    next_submitted_classmate_program_id = candidate_program_id
+            if next_classmate_adventure_id and next_submitted_classmate_program_id:
                 break
 
     student_customizations = g_db().get_student_class_customizations(result['username'])
@@ -1570,12 +1633,19 @@ def view_program(user, id):
             break
 
     next_program_id = None
+    next_submitted_program_id = None
     for i in range(adventure_index + 1, len(adventures_for_this_level)):
         next_adventure = adventures_for_this_level[i]
         next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
         next_student_adventure = g_db().student_adventure_by_id(next_adventure_id) or {}
-        next_program_id = next_student_adventure.get('program_id')
-        if next_program_id:
+        candidate_program_id = next_student_adventure.get('program_id')
+        if candidate_program_id and next_program_id is None:
+            next_program_id = candidate_program_id
+        if candidate_program_id and not next_submitted_program_id:
+            program_row = g_db().program_by_id(candidate_program_id)
+            if program_row and program_row.get('submitted'):
+                next_submitted_program_id = candidate_program_id
+        if next_program_id and next_submitted_program_id:
             break
 
     arguments_dict['can_checkoff_program'] = prog_perms.can_checkoff
@@ -1590,7 +1660,9 @@ def view_program(user, id):
                                code=code),
                            class_id=student_customizations.get('id'),
                            next_program_id=next_program_id,
+                           next_submitted_program_id=next_submitted_program_id,
                            next_classmate_program_id=next_classmate_adventure_id,
+                           next_submitted_classmate_program_id=next_submitted_classmate_program_id,
                            **arguments_dict)
 
 
