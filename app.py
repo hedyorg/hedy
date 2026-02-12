@@ -1480,19 +1480,28 @@ def view_program_redesing(user, id):
         class_id = classes[0]
         class_ = g_db().get_class(class_id) or {}
         students = sorted(class_.get('students', []))
-        index = students.index(result['username'])
-        for student in students[index + 1:]:
-            id = f"{student}-{result['adventure_name']}-{result['level']}"
-            next_classmate_adventure = g_db().student_adventure_by_id(id) or {}
-            candidate_program_id = next_classmate_adventure.get('program_id')
-            if candidate_program_id and next_classmate_adventure_id is None:
-                next_classmate_adventure_id = candidate_program_id
-            if candidate_program_id and not next_submitted_classmate_program_id:
-                program_row = g_db().program_by_id(candidate_program_id)
-                if program_row and program_row.get('submitted'):
-                    next_submitted_classmate_program_id = candidate_program_id
-            if next_classmate_adventure_id and next_submitted_classmate_program_id:
-                break
+        # Iterate over all other students starting from the next one, wrapping to the start.
+        if students:
+            try:
+                start_index = students.index(result['username'])
+            except ValueError:
+                start_index = -1
+            num_students = len(students)
+            for offset in range(1, num_students):
+                student = students[(start_index + offset) % num_students]
+                if student == result['username']:
+                    continue
+                id = f"{student}-{result['adventure_name']}-{result['level']}"
+                next_classmate_adventure = g_db().student_adventure_by_id(id) or {}
+                candidate_program_id = next_classmate_adventure.get('program_id')
+                if candidate_program_id and next_classmate_adventure_id is None:
+                    next_classmate_adventure_id = candidate_program_id
+                if candidate_program_id and not next_submitted_classmate_program_id:
+                    program_row = g_db().program_by_id(candidate_program_id)
+                    if program_row and program_row.get('submitted'):
+                        next_submitted_classmate_program_id = candidate_program_id
+                if next_classmate_adventure_id and next_submitted_classmate_program_id:
+                    break
 
     student_customizations = g_db().get_student_class_customizations(result['username'])
     adventure_index = 0
@@ -1504,19 +1513,22 @@ def view_program_redesing(user, id):
 
     next_program_id = None
     next_submitted_program_id = None
-    for i in range(adventure_index + 1, len(adventures_for_this_level)):
-        next_adventure = adventures_for_this_level[i]
-        next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
-        next_student_adventure = g_db().student_adventure_by_id(next_adventure_id) or {}
-        candidate_program_id = next_student_adventure.get('program_id')
-        if candidate_program_id and next_program_id is None:
-            next_program_id = candidate_program_id
-        if candidate_program_id and not next_submitted_program_id:
-            program_row = g_db().program_by_id(candidate_program_id)
-            if program_row and program_row.get('submitted'):
-                next_submitted_program_id = candidate_program_id
-        if next_program_id and next_submitted_program_id:
-            break
+    # Iterate over the rest of the adventures, wrapping to the start, excluding the current one.
+    num_adventures = len(adventures_for_this_level)
+    if num_adventures > 0:
+        for offset in range(1, num_adventures):
+            next_adventure = adventures_for_this_level[(adventure_index + offset) % num_adventures]
+            next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
+            next_student_adventure = g_db().student_adventure_by_id(next_adventure_id) or {}
+            candidate_program_id = next_student_adventure.get('program_id')
+            if candidate_program_id and next_program_id is None:
+                next_program_id = candidate_program_id
+            if candidate_program_id and not next_submitted_program_id:
+                program_row = g_db().program_by_id(candidate_program_id)
+                if program_row and program_row.get('submitted'):
+                    next_submitted_program_id = candidate_program_id
+            if next_program_id and next_submitted_program_id:
+                break
 
     arguments_dict['can_checkoff_program'] = prog_perms.can_checkoff
     arguments_dict['can_unsubmit_program'] = prog_perms.can_unsubmit
@@ -1634,19 +1646,22 @@ def view_program(user, id):
 
     next_program_id = None
     next_submitted_program_id = None
-    for i in range(adventure_index + 1, len(adventures_for_this_level)):
-        next_adventure = adventures_for_this_level[i]
-        next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
-        next_student_adventure = g_db().student_adventure_by_id(next_adventure_id) or {}
-        candidate_program_id = next_student_adventure.get('program_id')
-        if candidate_program_id and next_program_id is None:
-            next_program_id = candidate_program_id
-        if candidate_program_id and not next_submitted_program_id:
-            program_row = g_db().program_by_id(candidate_program_id)
-            if program_row and program_row.get('submitted'):
-                next_submitted_program_id = candidate_program_id
-        if next_program_id and next_submitted_program_id:
-            break
+    # Iterate over the rest of the adventures, wrapping to the start, excluding the current one.
+    num_adventures = len(adventures_for_this_level)
+    if num_adventures > 0:
+        for offset in range(1, num_adventures):
+            next_adventure = adventures_for_this_level[(adventure_index + offset) % num_adventures]
+            next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
+            next_student_adventure = g_db().student_adventure_by_id(next_adventure_id) or {}
+            candidate_program_id = next_student_adventure.get('program_id')
+            if candidate_program_id and next_program_id is None:
+                next_program_id = candidate_program_id
+            if candidate_program_id and not next_submitted_program_id:
+                program_row = g_db().program_by_id(candidate_program_id)
+                if program_row and program_row.get('submitted'):
+                    next_submitted_program_id = candidate_program_id
+            if next_program_id and next_submitted_program_id:
+                break
 
     arguments_dict['can_checkoff_program'] = prog_perms.can_checkoff
     arguments_dict['can_unsubmit_program'] = prog_perms.can_unsubmit

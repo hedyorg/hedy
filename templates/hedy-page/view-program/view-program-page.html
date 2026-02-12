@@ -10,9 +10,17 @@
         <span class="text-sm">{{ _('written_by') }}</span>
         <span class="font-bold">{{ initial_adventure.username }}</span>
         {% endif %}
-
         <span class="text-sm">{{ _('last_changed') }}</span>
         <span id="submitted-program-details" class="p-0 m-0 font-bold">{{ program_timestamp }}</span>
+        <span class="mt-3" >Accept</span>
+        <input type="checkbox"
+            id="adventure_checkbox"
+            class="mt-3 student_adventure_checkbox text-green-700 cursor-pointer {% if student_adventure.ticked %}fa-solid fa-check{% endif %}"
+            hx-post="/for-teachers/check_adventure?level={{ level }}&student_name={{ initial_adventure.username }}&adventure_name={{ initial_adventure.adventure_name }}&program_id={{ program_id }}"
+            hx-swap="none"
+            hx-disabled-elt="this"
+            {% if student_adventure.ticked %}checked{% endif %}
+        >
     </div>
 
     <div class="cursor-pointer mt-4 w-fit" _="on click toggle .hidden on #adventure then
@@ -105,22 +113,19 @@
 
     
     {% include "hedy-page/editor-and-output.html" %}
-    
-    <button class="green-btn-new"
-    onclick="hedyApp.unsubmit_program('{{initial_adventure.id}}', '{{_('unsubmit_warning')}}')">{{
-        _('allow_resubmit') }}
-    </button>
-    {% if next_program_id %}
-        <a class="green-btn" href="/hedy/{{ next_program_id }}/view">{{ _("next_adventure") }}</a>
-    {% endif %}
-    {% if next_submitted_program_id %}
-        <a class="green-btn" href="/hedy/{{ next_program_id }}/view">{{ _("next_adventure") }}</a>
-    {% endif %}
-    {% if next_classmate_program_id %}
-        <a class="green-btn" href="/hedy/{{ next_classmate_program_id }}/view">{{ _("next_student") }}</a>
-    {% endif %}
-    {% if class_id %}
-        <a class="green-btn" href="/for-teachers/class/{{ class_id }}">{{ _("back_to_class") }}</a>
+    {% if can_checkoff_program %}
+    <div class="flex items-center gap-3 mt-4">
+        <button class="green-btn-new"
+            onclick="hedyApp.unsubmit_program('{{initial_adventure.id}}', '{{_('unsubmit_warning')}}')">{{
+            _('allow_resubmit') }}
+        </button>
+        {% if next_submitted_program_id %}
+            <a class="green-btn-new" href="/hedy/{{ next_submitted_program_id }}/view/redesign">{{ _("next_adventure") }}</a>
+        {% endif %}
+        {% if next_submitted_classmate_program_id %}
+            <a class="green-btn-new" href="/hedy/{{ next_submitted_classmate_program_id }}/view/redesign">{{ _("next_student") }}</a>
+        {% endif %}
+    </div>
     {% endif %}
 </div>
 {% endblock %}
