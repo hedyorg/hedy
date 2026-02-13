@@ -414,15 +414,15 @@ adventures:
                     Heb je het voor elkaar gekregen? Geweldig! Wil je nog meer opties bouwen voor de rekenmachine? **Kijk in het volgende avontuur, daar gaat het avontuur verder!**
                 example_code: |
                     ```
-                    {define} bereken_gemiddelde_cijfer
+                    {def} bereken_gemiddelde_cijfer():
                         totaal = 0
-                        {for} i {in} {range} 1 {to} 4
-                            cijfer = {ask} _
+                        {for} i {in} {range}(1,4):
+                            cijfer = {input} _
                             totaal = totaal + _
                             {return} _ / 4
 
-                    gemiddelde_cijfer = {call} _
-                    print 'Je staat gemiddeld een ' gemiddelde_cijfer
+                    gemiddelde_cijfer = _
+                    print('Je staat gemiddeld een ', gemiddelde_cijfer)
                     ```
 
                             totaal = totaal + _
