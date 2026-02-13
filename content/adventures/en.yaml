@@ -1676,12 +1676,31 @@ adventures:
                     If you call this function it will run all the code inside the function. Great for when you have to repeat a piece of code!
 
                     In this level we will continue with functions and show you how it can be even more usefull. 
-                    We start writing it the Python way. We will use `{def}` now and add a colon: 
-                example_code: |
-                    {def} play_scale:
-                        {play} C4
-                    {print} chosen_side ' ' chosen_limb ' on ' chosen_color
+                    We start writing it the Python way. We will use `{def}` now and add `():` behind the function.
+                    To call the function, simply type the name of the function and (), like we did in line 8.
 
+                    ### Exercise
+                    Add a function that plays a sad tune (like C6-C5-C4) and call the function when a wrong answer is given.
+                example_code: |
+                    ```
+                    {def} play_happy_tune():
+                        {play} C4
+                        {play} C5
+                        {play} C6
+
+                    answer = {input}('What is 2 + 2?')
+                    {if} answer == 4:
+                        {print} 'Right!'
+                        play_happy_tune()
+                    {else}
+                        {print} 'Wrong!'
+                    ```
+    functions_2:
+        name: functions with arguments
+        default_save_name: functions 2
+        description: functions 2
+        levels:
+            15:
                 story_text: |
                     Now that you've learned how to use functions, you'll learn how to use a function with an argument.
                     An **argument** is a variable that is used within a function. It is not used outside the function.
@@ -1694,7 +1713,8 @@ adventures:
                     ### Exercise
                     The next verse of this song goes:
 
-                    ```not_hedy_code
+                    ```
+                    not_hedy_code
                     Last night as I lay on my pillow
                     Last night as I lay on my bed
                     Last night as I lay on my pillow
@@ -1711,7 +1731,14 @@ adventures:
                     song('sea')
                     song('ocean')
                     ```
-                story_text_2: |
+
+    functions_3:
+        name: functions with return value
+        default_save_name: functions 3
+        description: functions 3
+        levels:
+            15:
+                story_text: |
                     In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
                     You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
 
@@ -1720,7 +1747,7 @@ adventures:
                     ### Exercise
                     Finish this code. We have already made the variable new_price for you, you only need to set it.
                     You should finish the line of code by calling the function that calculates the new price.
-                example_code_2: |
+                example_code: |
                     ```
                     {def} calculate_new_price(amount, percentage):
                         percentage = percentage / 100
@@ -1732,32 +1759,6 @@ adventures:
 
                     new_price = _ calculate_new_price(old_price, _)
                     {print}('The new price is ', new_price, ' dollar')
-                    ```
-                story_text_3: |
-                    Let's make functions the Pythons way! To define a function, we no longer use:
-
-                    `{define} name_function {with} argument_1, argument_2):`
-
-                    but we use:
-
-                    `{def} name_function(argument_1, argument_2):`.
-
-                    If you don't want to use arguments, you just leave the space between the parentheses empty.
-                example_code_3: |
-                    ```
-                    {def} calculate_score(answer, correct_answer):
-                        {if} answer == correct_answer:
-                            score = 1
-                        {elif} answer == '?':
-                            score = 0
-                        {else}:
-                            score = -1
-                        {return} score
-
-                    answer = {input} ('Where can you find the Eiffel Tower?')
-                    correct_answer = 'Paris'
-                    score = calculate_score(answer, correct_answer)
-                    {print} ('Your score is... ', score)
                     ```
     guess_my_number:
         name: guess my number
@@ -2764,63 +2765,50 @@ adventures:
                     ```
             15:
                 story_text: |
-                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
-
-                    ### Exercise
-                    Can you finish the song of Yankee Doodle?
-                    Can you think of another song to program this way?
-                example_code: |
-                    ```
-                    {print} 'Yankee Doodle'
-                    {define} _ (note_1, note_2, note_3
-                        {play} C4
-                        {play} C4
-                        {play} D4
-                        {play} E4
-                        {play} _
-                        {play} _
-                        {play} _
-
-                    line_1(29, 31, 30)
-                    line_1(29, 28, 0)
-                    line_1(32, 31, 30)
-
-                    {play} C4
-                    {play} B3
-                    {play} G3
-                    {play} A3
-                    {play} B3
-                    {play} C4
-                    {play} C4
-                    ```
-                story_text_2: |
                     You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
 
                     ### Exercise
                     Make sure the fire alarm rings when there is a fire!
-                example_code_2: |
+                example_code: |
                     ```
-                    {define} fire_alarm
+                    {def} fire_alarm():
                         {print} 'FIRE!'
-                        note = 40
-                        {for} i {in} {range} 1 {to} 100
-                            {if} note _ 50
-                                note = note + 5
-                                {play} _
-                            {else}
-                                note = 40
+                        {for} i {in} {range} _
+                            {play} 45
+                            {play} 50
 
-                    fire = {ask} 'Is there a fire?'
-                    {if} fire _ 'yes'
-                        fire_alarm_
+                    fire = {input}('Is there a fire?')
+                    {if} fire _
+                        _
                     ```
-                story_text_3: |
+            16:
+                story_text: |
+                    **Warning** This adventure can become extremely annoying!
+                    We can also use the `{while}` command to repeat a song forever.
+
                     ### Exercise
-                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
-                    Take a good look at how the functions are defined and called upon in the example code.
-                    Finish the song!
-                example_code_3: |
+                    Finish the never-ending song.
+                example_code: |
+                    ```
+                    {define} song
+                        {play} _
+
+                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
+                    {while} yes_or_no = 'yes'
+                        song()
+                        {print} '🥳'
+                    ```
+    music_2:
+        name: music
+        default_save_name: music 2
+        description: music 2
+        levels:
+            15:
+                story_text: |
+                    ### Exercise
+                    Make a karaoke version of 'What shall we do with the drunken sailor'.
+                    You can look up the correct musical notes online, or try to figure them out yourself!
+                example_code: |
                     ```
                     {def} line_1():
                         {for} i {in} {range}(1, 5):
@@ -2846,22 +2834,42 @@ adventures:
                     line_3()
                     {print} ('Early in the morning')
                     ```
-            16:
+    music_3:
+        name: music 3
+        default_save_name: music 3
+        description: music 3
+        levels:
+            15:
                 story_text: |
-                    **Warning** This adventure can become extremely annoying!
-                    We can also use the `{while}` command to repeat a song forever.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the tune are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
-                    Finish the never-ending song.
+                    Can you finish the song of Yankee Doodle?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
-                    {define} song
+                    {print} 'Yankee Doodle'
+                    {def} _ (note_1, note_2, note_3)
+                        {play} C4
+                        {play} C4
+                        {play} D4
+                        {play} E4
+                        {play} note_1
+                        {play} _
                         {play} _
 
-                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
-                    {while} yes_or_no = 'yes'
-                        song()
-                        {print} '🥳'
+                    tune(29, 31, 30)
+                    tune(29, 28, 0)
+                    tune(32, 31, 30)
+
+                    {play} C4
+                    {play} B3
+                    {play} G3
+                    {play} A3
+                    {play} B3
+                    {play} C4
+                    {play} C4
                     ```
     operators:
         name: operators
@@ -2876,7 +2884,7 @@ adventures:
                     ```
                     height = {input}('What is your height in cm?')
                     {if} height >= 160:
-                        {print} ('Yeahh, you are tall enough. Enjoy your ride in the roller coaster!')
+                        {print} ('Yeah, you are tall enough. Enjoy your ride in the roller coaster!')
                     ```
                 story_text_3: |
                     You can also compare if something is *not* equal to something else using `!=` like this:
@@ -4443,7 +4451,7 @@ adventures:
             15:
                 story_text: |
                     ### Exercise
-                    Create a program that asks the player how many corners their figure should have and then creates that figure.
+                    Create a program that asks the player how many sides their figure should have and then creates that figure.
                     The figure in the image is the output when the player fills in 10.
 
                     <div class="w-full flex flex-row gap-2">
@@ -4452,20 +4460,20 @@ adventures:
                     </div>
                 example_code: |
                     ```
-                    {define} calculate_degrees(amount_of_corners)
-                        _ 360 / amount_of_corners
+                    {def} calculate_degrees(amount_of_sides)
+                        degrees = 360 / _
+                        _ degrees
 
-
-                    {define} draw_figure(degrees)
-                        _
-                            {forward} 400/amount_of_corners
+                    {def} draw_figure(degrees, amount_of_sides)
+                        {for} i {in} {range} _
+                            {forward} 70
                             {turn} _
 
-                    amount_of_corners = {ask} _
-                    degrees = _(_)
+                    amount_of_sides = {input}('How many sides do you want the figure to have?')
+                    degrees = calculate_degrees(amount_of_sides)
 
-                    _ {with}
-                    _ {with}
+                    _
+                    _
                     ```
             16:
                 story_text: |

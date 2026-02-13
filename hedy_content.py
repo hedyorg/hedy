@@ -283,12 +283,16 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     ],
     15: [
         'functions',
-        'songs',
-        'piggybank',
         'music',
+        'music_2',
+        'functions_2',
+        'songs',
+        'music_3',
         'hotel',
+        'functions_3',
         'calculator',
         'calculator_2',
+        'piggybank',
         'turtle_draw_it',
         'debugging',
         'hospital'
