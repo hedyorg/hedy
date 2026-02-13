@@ -2781,6 +2781,18 @@ adventures:
                     {if} fire _
                         _
                     ```
+                answer_code: |
+                    ```
+                    {def} fire_alarm():
+                        {print} 'FIRE!'
+                        {for} i {in} {range} (1,20)
+                            {play} 45
+                            {play} 50
+
+                    fire = {ask} 'Is there a fire?'
+                    {if} fire == 'yes'
+                        fire_alarm()
+                    ```
             16:
                 story_text: |
                     **Warning** This adventure can become extremely annoying!
