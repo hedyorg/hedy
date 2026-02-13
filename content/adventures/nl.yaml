@@ -131,6 +131,8 @@ adventures:
                     {if} einde {is} goed {print} naam ' pakt haar zwaard en het monster rent snel weg'
                     {else} {print} 'Het monster eet ' naam ' op'
                     ```
+            6:
+                story_text: "Nu we  `{elif}` kunnen gebruiken, kun je een interactief verhaal maken! Je kunt bijvoorbeeld verschillende karakters kiezen, die allemaal verschillende eigenschappen hebben. \nOf je kunt de speler laten kiezen welke weg ze inslaan, welke deur ze willen openen of welk toverdrankje ze willen drinken...\n\n### Opdracht\nMaak je eigen verhaal met 3 of meer opties door de {elif} te gebruiken."
             8:
                 story_text: |
                     Soms zegt iemand in een verhaal iets meerdere keren. Bijvoorbeeld als iemand om hulp roept, of een liedje zingt.
@@ -185,6 +187,26 @@ adventures:
                     {print} 'Bruintje beer, bruintje beer'
                     {print} 'Wat zie je?'
                     ```
+            13:
+                story_text: |
+                    We gaan weer een verhaal printen, maar we moeten daarbij steeds haakjes gebruiken bij de `{print}`.
+
+                    ### Opdracht 1
+                    Maak een verhaal van minstens 5 zinnen. Je hoeft `naam` nog niet te gebruiken.
+                example_code: |
+                    ```
+                    {print}('Welkom bij dit verhaal!')
+                    ```
+                story_text_2: |
+                    ### Opdracht 2
+                    We hebben al een `{input}` voor jou klaargezet. Gebruik eerst de variabele `naam` in je verhaal.
+                    Voeg daarna een tweede `{ask}` toe en gebruik die variabele ook.
+                    Tip: Denk aan de komma's in een `{print}` tussen tekst en variabelen!
+                example_code_2: |
+                    ```
+                    naam = {input}('Hoe heet jij?')
+                    {print}('Welkom bij dit verhaal!')
+                    ```
             16:
                 story_text: |
                     In dit level kun je de `{while}` loop gebruiken om je verhaaltjes nog interessanter te maken. Zo kun je `{while} spelletje == 'aan'` gebruiken om het spel te laten werken totdat je game over bent.
@@ -206,28 +228,6 @@ adventures:
                             {print} 'Helaas, ze liggen niet bij de ' locatie
                     {print} 'Nu kun je het huis in!'
                     ```
-            13:
-                story_text: |
-                    We gaan weer een verhaal printen, maar we moeten daarbij steeds haakjes gebruiken bij de `{print}`.
-
-                    ### Opdracht 1
-                    Maak een verhaal van minstens 5 zinnen. Je hoeft `naam` nog niet te gebruiken.
-                example_code: |
-                    ```
-                    {print}('Welkom bij dit verhaal!')
-                    ```
-                story_text_2: |
-                    ### Opdracht 2
-                    We hebben al een `{input}` voor jou klaargezet. Gebruik eerst de variabele `naam` in je verhaal.
-                    Voeg daarna een tweede `{ask}` toe en gebruik die variabele ook.
-                    Tip: Denk aan de komma's in een `{print}` tussen tekst en variabelen!
-                example_code_2: |
-                    ```
-                    naam = {input}('Hoe heet jij?')
-                    {print}('Welkom bij dit verhaal!')
-                    ```
-            6:
-                story_text: "Nu we  `{elif}` kunnen gebruiken, kun je een interactief verhaal maken! Je kunt bijvoorbeeld verschillende karakters kiezen, die allemaal verschillende eigenschappen hebben. \nOf je kunt de speler laten kiezen welke weg ze inslaan, welke deur ze willen openen of welk toverdrankje ze willen drinken...\n\n### Opdracht\nMaak je eigen verhaal met 3 of meer opties door de {elif} te gebruiken."
     add_remove_command:
         description: 'Introduceren van: {add} {to_list} (toevoegen aan to_list) en {remove} {from} (verwijderen uit from)'
         levels:
@@ -263,6 +263,8 @@ adventures:
                     _
                     {print} Je krijgt een {at} {random} milkshake
                     ```
+    and_or_command:
+        levels: {}
     ask_command:
         default_save_name: vraag_commando
         description: Introductie {ask} (vraag) commando
@@ -497,7 +499,12 @@ adventures:
                     {clear}
                     {print} 'VERRASSING!'
                     ```
+    congratulations:
+        levels: {}
     debugging:
+        name: debugging
+        default_save_name: Debugging
+        description: Debugging avontuur
         levels:
             1:
                 story_text: |-
@@ -570,9 +577,6 @@ adventures:
                     {print} 'auteur is jouw favoriete auteur'
                     {print} Hmmm... ik denk dat je boeken {at} {random} leuk zou vinden
                     ```
-        name: debugging
-        default_save_name: Debugging
-        description: Debugging avontuur
     dice:
         name: dobbelsteen
         default_save_name: Dobbelsteen
@@ -788,6 +792,7 @@ adventures:
                     ```
     elif_command:
         default_save_name: alsanders
+        levels: {}
     for_command:
         default_save_name: voor
         description: '{for} commando'
@@ -1086,6 +1091,7 @@ adventures:
                     ```
     guess_my_number:
         name: raad mijn getal
+        levels: {}
     harry_potter:
         description: Harry Potter avonturen
         levels:
@@ -1389,7 +1395,6 @@ adventures:
                     ### Oefening
                     Teken de markeringen van het heliplatform.
                     <img src="https://github.com/user-attachments/assets/96deeb9e-b155-4a3d-91f3-3c447df7ce2b" width="200">
-
             9:
                 story_text: |
                     Onze ambulance is aan onderhoud toe. Het geschilderde rode kruis aan de zijkant is vervaagd en de sirene werkt niet meer.
@@ -1401,7 +1406,6 @@ adventures:
                     * Een sirene geluid produceren als het rode kruis klaar is.
 
                     HINT: gebruik het {repeat} commando.
-
             10:
                 story_text: |
                     Het personeel van onze spoedeisende hulp heeft een probleem. Ze zeggen dat er veel patiënten binnenkomen die eigenlijk niet in een noodsituatie verkeren en gewoon naar hun huisarts zouden moeten gaan.
@@ -2114,6 +2118,7 @@ adventures:
                     ```
     quizmaster:
         description: Maak je eigen quiz!
+        levels: {}
     quotation_marks:
         name: '''aanhalingstekens'''
         default_save_name: haakjes
@@ -2790,22 +2795,6 @@ adventures:
     songs_2:
         name: zing nog een lied!
         levels:
-            12:
-                story_text: |
-                    Liedjes bevatten vaak veel herhaling. We kunnen daarvoor een functie gebruiken!
-                    ### Opdracht
-                    Kijk naar de voorbeeldcode met de functie. Vul het lied aan tot het compleet is.
-                example_code: |
-                    ```
-                    {define} slaap
-                        {print} 'Slaap kindje slaap'
-                        {print} _
-
-                    {call} slaap
-                    {print} 'Een schaap met witte voetjes'
-                    {print} 'die drinkt zijn melk zo zoetjes'
-                    {call} _
-                    ```
             11:
                 story_text: |
                     ### Opdracht
@@ -2831,6 +2820,22 @@ adventures:
                     ```
                     voorwerp = 'wielen', 'deuren', _
                     movement = 'rond en rond', 'open en dicht', _
+                    ```
+            12:
+                story_text: |
+                    Liedjes bevatten vaak veel herhaling. We kunnen daarvoor een functie gebruiken!
+                    ### Opdracht
+                    Kijk naar de voorbeeldcode met de functie. Vul het lied aan tot het compleet is.
+                example_code: |
+                    ```
+                    {define} slaap
+                        {print} 'Slaap kindje slaap'
+                        {print} _
+
+                    {call} slaap
+                    {print} 'Een schaap met witte voetjes'
+                    {print} 'die drinkt zijn melk zo zoetjes'
+                    {call} _
                     ```
     turtle:
         name: tekenen
@@ -3304,3 +3309,5 @@ adventures:
                         antwoord = {ask} 'Wat is 5 keer 5?'
                     {print} 'Je hebt een correct antwoord gegeven'
                     ```
+    years:
+        levels: {}

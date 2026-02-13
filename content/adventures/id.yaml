@@ -54,6 +54,7 @@ adventures:
                     hewan is burung, landak, armadilo
                     print Dia sekarang mendengar suara seekor hewan at random
                     ```
+                example_code: "```\nhewan {is} 🦔, 🐿, 🦉, 🦇\n{print} Sekarang mereka mendengar suara dari hewan {at} {random}\n```\n"
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
                 example_code_2: |
@@ -71,7 +72,6 @@ adventures:
                     Salin cerita Anda dari level sebelumnya ke level ini.
                     Di level ini Anda telah mempelajari 3 perintah baru `{at} {random}` , `{add} {to_list}` dan `{remove} {from}`.
                     Tambahkan baris kode baru ke cerita Anda, sehingga semua perintah baru ditampilkan setidaknya sekali dalam cerita Anda.
-                example_code: "```\nhewan {is} 🦔, 🐿, 🦉, 🦇\n{print} Sekarang mereka mendengar suara dari hewan {at} {random}\n```\n"
             4:
                 story_text: |
                     ### Latihan
@@ -172,21 +172,6 @@ adventures:
                     {print} 'Beruang coklat, Beruang coklat'
                     {print} 'Apa yang kamu lihat?'
                     ```
-            16:
-                example_code: |
-                    ```
-                    keys = 'lost'
-                    {print} 'You are standing in your garden and you have lost your keys.'
-                    {print} 'Where do you want to look for them?'
-                    {print} 'You can choose: tree, flowerbed, rock, postbox'
-                    {while} keys == 'lost'
-                        location = {ask} 'Where do you want to look?'
-                        {if} location == 'flowerbed'
-                            {print} 'Here they are!'
-                            keys = 'found'
-                        {else}
-                            {print} 'Nope they are not at the ' location
-                    {print} 'Now you can enter the house!'
             13:
                 example_code: |
                     ```
@@ -202,6 +187,21 @@ adventures:
                     naam = {input}("Siapa namamu?")
                     {print}('Selamat datang di cerita ini!')
                     ```
+            16:
+                example_code: |
+                    ```
+                    keys = 'lost'
+                    {print} 'You are standing in your garden and you have lost your keys.'
+                    {print} 'Where do you want to look for them?'
+                    {print} 'You can choose: tree, flowerbed, rock, postbox'
+                    {while} keys == 'lost'
+                        location = {ask} 'Where do you want to look?'
+                        {if} location == 'flowerbed'
+                            {print} 'Here they are!'
+                            keys = 'found'
+                        {else}
+                            {print} 'Nope they are not at the ' location
+                    {print} 'Now you can enter the house!'
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: tambahkan_perintah_hapus
@@ -241,6 +241,8 @@ adventures:
                     _
                     {print} Anda mendapatkan milkshake rasa {at} {random}
                     ```
+    and_or_command:
+        levels: {}
     ask_command:
         default_save_name: tanya_perintah
         description: Pendahuluan menanyakan perintah
@@ -357,6 +359,8 @@ adventures:
                             skor = skor + 1
                     {print} 'Kerja bagus! Skor Anda adalah... 'skor' dari 10!'
                     ```
+    calculator_2:
+        levels: {}
     clear_command:
         default_save_name: perintah_jelas
         description: perintah yang jelas
@@ -378,6 +382,8 @@ adventures:
                     {clear}
                     {print} 'KEJUTAN!'
                     ```
+    congratulations:
+        levels: {}
     debugging:
         name: melakukan debug
         default_save_name: melakukan debug
@@ -594,6 +600,10 @@ adventures:
 
                     Sekarang kamu dapat menyalin baris 3 ke 5 beberapa kali (misal 7 kali untuk seminggu penuh) untuk menghitung jumlah jatah cuci piring selama seminggu.
                     Apakah kamu mau membuat kodenya untuk seminggu penuh?
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
     fortune:
         name: Peramal
         default_save_name: peramal
@@ -690,6 +700,12 @@ adventures:
                         {print} pertanyaan
                         {print} 'Bola kristal saya menyatakan...' jawaban {at} {random}
                     ```
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
     haunted:
         name: Rumah berhantu
         default_save_name: rumahhantu
@@ -753,6 +769,22 @@ adventures:
                     ```
                     Sekarang permainan ini jadi cukup sulit untuk dimenangkan. Dapatkah kamu membuat permainan ini lebih mudah?
                     Sebagai contoh dengan hanya memiliki 1 pintu yang salah dan 2 pintu benar ketimbang 2 pintu salah dan 1 pintu benar?
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
+    is_command:
+        levels: {}
+    language:
+        levels: {}
+    maths:
+        levels: {}
+    music:
+        levels: {}
     parrot:
         levels:
             5:
@@ -789,6 +821,21 @@ adventures:
 
                     {call} _
                     ```
+    pressit:
+        default_save_name: Ditekan
+        levels: {}
+    print_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
     restaurant:
         name: Rumah makan
         default_save_name: rumahmakan
@@ -1001,6 +1048,12 @@ adventures:
             5:
                 story_text: "Pada level 4 kamu bisa menentukan siapa yang menang. \nUntuk hal itu, kamu memerlukan perintah `if`\n\nSimpan pilihan kamu dengan sebuah nama favoritmu dan pilihan komputer dengan nama pilihan komputer.\nLalu kamu bisa menggunakan `if` untuk melihat apakah kedua pilihan tersebut sama atau berbeda.\nDapatkah kamu menyelesaikan kode ini?"
                 example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\n pil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri.\n"
+    rock_2:
+        levels: {}
+    secret:
+        levels: {}
+    sleep_command:
+        levels: {}
     songs:
         name: Nyanyikan sebuah lagu!
         default_save_name: Lagu
@@ -1062,6 +1115,8 @@ adventures:
                     _ _ _ _
                       {print} _
                     ```
+    songs_2:
+        levels: {}
     turtle:
         name: Kura-kura
         default_save_name: kurakura

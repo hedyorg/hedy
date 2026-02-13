@@ -131,8 +131,6 @@ adventures:
                     {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
                     {else} {print} 'The monster eats ' name
                     ```
-
-
             6:
                 story_text: |-
                     Now that you can use `{elif}` you can create an even more interactive story! You could create multiple characters for example, that all have different traits.
@@ -228,6 +226,26 @@ adventures:
 
                     Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
                 example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+            13:
+                story_text: |
+                    We are going to print another story, but now we have to use brackets with `{print}`.
+
+                    ### Exercise 1
+                    Create a story of at least 5 sentences. You don't have to use 'name' just yet.
+                example_code: |
+                    ```
+                    {print}('Welcome to this story!')
+                    ```
+                story_text_2: |
+                    ### Exercise 2
+                    We have already prepared an `{input}` for you. First, use the `name` variable in your story.
+                    Then add a second `{ask}` and use that variable as well.
+                    Tip: Remember the commas in a `{print}` between text and variables!
+                example_code_2: |
+                    ```
+                    name = {input}("What's your name?")
+                    {print}('Welcome to this story!')
+                    ```
             16:
                 story_text: |
                     Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.
@@ -249,26 +267,6 @@ adventures:
                         {else}:
                             {print}('Nope they are not at the ', location)
                     {print}('Now you can enter the house!')
-                    ```
-            13:
-                story_text: |
-                    We are going to print another story, but now we have to use brackets with `{print}`.
-
-                    ### Exercise 1
-                    Create a story of at least 5 sentences. You don't have to use 'name' just yet.
-                example_code: |
-                    ```
-                    {print}('Welcome to this story!')
-                    ```
-                story_text_2: |
-                    ### Exercise 2
-                    We have already prepared an `{input}` for you. First, use the `name` variable in your story.
-                    Then add a second `{ask}` and use that variable as well.
-                    Tip: Remember the commas in a `{print}` between text and variables!
-                example_code_2: |
-                    ```
-                    name = {input}("What's your name?")
-                    {print}('Welcome to this story!')
                     ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
@@ -308,6 +306,26 @@ adventures:
                     allergies {is} {ask} Are you allergic to any flavors?
                     _
                     {print} You get a flavors {at} {random} milkshake
+                    ```
+    and_or_command:
+        name: '{and} & {or}'
+        default_save_name: and_or_command
+        description: 'and, or'
+        levels:
+            10:
+                story_text: |-
+                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but you can use `{and}` and `{or}`.
+                    If you use `{and}`, then both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
+                example_code: |
+                    ```
+                    name = {ask} 'what is your name?'
+                    age = {ask} 'what is your age?'
+                    {if} name {is} 'Hedy' {and} age {is} 2
+                        {print} 'You are the real Hedy!'
+                    {elif} name {is} 'Hedy' {or} age {is} 2
+                        {print} 'So close.. but you are not Hedy!'
+                    {else}
+                        {print} 'You are not Hedy!'
                     ```
     ask_command:
         name: '{ask}'
@@ -375,26 +393,6 @@ adventures:
                     {print}('My name is Hedy!')
                     name = {input}('What is your name?')
                     {print}('So your name is ', name)
-                    ```
-    and_or_command:
-        name: '{and} & {or}'
-        default_save_name: and_or_command
-        description: 'and, or'
-        levels:
-            10:
-                story_text: |-
-                    We are now going to learn `{and}` and `{or}`! If you want to check two statements, you don't have to use two `{if}`s but you can use `{and}` and `{or}`.
-                    If you use `{and}`, then both statements, left and right of the `{and}` need to be true. We can also use `{or}`. Then only one statement needs to be correct.
-                example_code: |
-                    ```
-                    name = {ask} 'what is your name?'
-                    age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
-                        {print} 'You are the real Hedy!'
-                    {elif} name {is} 'Hedy' {or} age {is} 2
-                        {print} 'So close.. but you are not Hedy!'
-                    {else}
-                        {print} 'You are not Hedy!'
                     ```
     calculator:
         name: calculator
@@ -542,6 +540,22 @@ adventures:
         default_save_name: Calculator 2
         description: Calculator 2
         levels:
+            10:
+                story_text: |
+                    ### Exercise 1
+                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+
+                    ### Exercise 2
+                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
+                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
+                    Empty the programming field and create your own solution.
+                example_code: |
+                    ```
+                    answer1 = {ask} 'What is 10 times 7?'
+                    answer2 = {ask} 'What is 6 times 7?'
+                    {if} _ _ _ _ _ _ _
+                        {print} _
+                    ```
             15:
                 story_text: |
                     ### Exercise 2
@@ -560,22 +574,6 @@ adventures:
                 example_code: |
                     ```
                     # Use your own code from the previous adventure.
-                    ```
-            10:
-                story_text: |
-                    ### Exercise 1
-                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
-
-                    ### Exercise 2
-                    Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
-                    Ask for a calculation that has multiple correct answers, ask the player to answer it, and determine if it is correct using `{or}`.
-                    Empty the programming field and create your own solution.
-                example_code: |
-                    ```
-                    answer1 = {ask} 'What is 10 times 7?'
-                    answer2 = {ask} 'What is 6 times 7?'
-                    {if} _ _ _ _ _ _ _
-                        {print} _
                     ```
     clear_command:
         name: '{clear}'
@@ -1075,7 +1073,7 @@ adventures:
                     {def} ask_user:
                         answer = {input}('What should the ', question, ' in the story be?')
                         {call} answer
-                    
+
                     questions = ['name', 'verb', 'location', 'hiding spot', 'sound', 'cause of the noise'
 
                     chosen _name = ask_user(questions[0])
@@ -1100,7 +1098,7 @@ adventures:
                     {def} ask_user(question):
                         answer = {input}('What should the ', question, ' in the story be?')
                         {return} answer
-                    
+
                     questions = ['name', 'verb', 'location', 'hiding spot', 'sound', 'cause of the noise']
 
                     chosen_name = ask_user(questions[1])
@@ -1419,8 +1417,8 @@ adventures:
                     Make your own wheel of fortune, where you can win different prizes and get corresponding reactions
                 example_code: |
                     ```
-                    prizes is 1 million dollars, an apple pie, nothing
-                    your_prize is prizes {at} {random}
+                    prizes {is} 1 million dollars, an apple pie, nothing
+                    your_prize {is} prizes {at} {random}
                     {print} 'You win ' your_prize
                     {if} your_prize {is} '1 million dollars'
                     {print} 'Yeah! You are rich!'
@@ -1548,16 +1546,14 @@ adventures:
                     good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
                     bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
                     {if} person {in} friends
-                    {print} good_answer {at} {random}
-                    {else}
                     {print} bad_answer {at} {random}
+                    {else}
+                    {print} good_answer {at} {random}
                     ```
             7:
                 story_text: |
                     In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
                     For example you could calculate how rich you'll get or how many kids you will have when you grow up.
-
-
 
                     ### Exercise
                     Can you think of your own (silly) fortune telling machine?
@@ -2123,29 +2119,29 @@ adventures:
                     * Print the personnel number.
             14:
                 story_text: |
-                  Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
-                  Can you help by writing a program that'll print the correct tasklist for that day?
-                  ### Exercise
-                  The program should:
-                  * Wish the janitor a goodmorning.
-                  * Ask the janitor what day of the week it is, which month and which day of the month.
-                  * Print the correct tasklist for that day.
-                  The tasks that should be done:
-                  * Everyday tasks: mop the floor, clean the toilets, open the curtains
-                  * On mondays and thursdays: water the plants
-                  * On tuesday and fridays: mop the floors
-                  * On saturdays: wash the coffeemachine
-                  * On the first of each month: wash the windows
-                  * On the 7th of each month: refill the vending machines
-                  * On the 14th of each month: check the batteries for the fire alarms
-                  * Everyday in wintermonths: turn on the heaters
-                  * Everyday in summermonths: turn on the airconditioning
+                    Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
+                    Can you help by writing a program that'll print the correct tasklist for that day?
+                    ### Exercise
+                    The program should:
+                    * Wish the janitor a goodmorning.
+                    * Ask the janitor what day of the week it is, which month and which day of the month.
+                    * Print the correct tasklist for that day.
+                    The tasks that should be done:
+                    * Everyday tasks: mop the floor, clean the toilets, open the curtains
+                    * On mondays and thursdays: water the plants
+                    * On tuesday and fridays: mop the floors
+                    * On saturdays: wash the coffeemachine
+                    * On the first of each month: wash the windows
+                    * On the 7th of each month: refill the vending machines
+                    * On the 14th of each month: check the batteries for the fire alarms
+                    * Everyday in wintermonths: turn on the heaters
+                    * Everyday in summermonths: turn on the airconditioning
                 example_code: |
-                  The program should end like this:
-                    ```
-                    _The program should end like this_
-                    make_tasklist(day, month, date)
-                    ```
+                    The program should end like this:
+                      ```
+                      _The program should end like this_
+                      make_tasklist(day, month, date)
+                      ```
             15:
                 story_text: |
                     After surgery our patients can sometimes experience a lot of pain. In those cases our patients can be given a morphine pump. They can administer some morphine themselves if they are in pain.
@@ -2297,8 +2293,10 @@ adventures:
                     ```
                     animals {is} dog, cow, sheep
                     answer {is} {ask} 'What is your favorite animal?'
-                    _ answer _ animals _ 'Mine too!'
-                    _ _ 'My favorite animals are dogs, cows and sheep'
+                    _ answer _ animals
+                    _ 'Mine too!'
+                    _
+                    _ 'My favorite animals are dogs, cows and sheep'
                     ```
     is_command:
         name: '{is}'
@@ -2447,7 +2445,7 @@ adventures:
                     {print} 'A ticket is $2'
                     people = {ask} 'How many tickets would you like?'
                     price = people * 2
-                    {print} 'That will be $' price 'please'
+                    {print} 'That will be $' price ' please'
                     ```
     music:
         name: music
@@ -2566,21 +2564,18 @@ adventures:
                     ```
             6:
                 story_text: |
-                    With `{elif}` you can play different tunes for different situations. For example if a person is feeling happy, you can play them a happy tune.
+                    With `{elif}` you can play different notes for different situations. For example if a person is feeling happy, you can play them a happy note.
                     ### Exercise
-                    First create a sad tune, then create at least 2 other tunes for different moods.
+                    First create a sad note, then create at least 2 other tunes for different moods.
                 example_code: |
                     ```
-                    mood = {ask} 'How are you feeling today?'
+                    mood {is} {ask} 'How are you feeling today?'
                     {if} mood {is} happy
-                        {play} C4
-                        {play} E4
-                        {play} G4
-                        {play} C5
+                    {play} C4
                     {elif} mood {is} sad
-                        {play} _
+                    {play} _
                     {elif} mood {is} _
-                        {play} _
+                    {play} _
                     ```
             7:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\nThis calls for musical maths! Try out the example code a couple of times with different starting numbers.\nThen, see if you can compose a song using the numbers.\n"
@@ -3105,7 +3100,7 @@ adventures:
         levels:
             8:
                 story_text: |
-                    Level 7 adds the `{repeat}` command. `{repeat}` can be used to execute one line of code multiple times. Like this:
+                    This level adds the `{repeat}` command. `{repeat}` can be used to execute one line of code multiple times. Like this:
 
                     ### Exercise
                     Play around with the `{repeat}` command. Can you make the happy birthday song in only 3 lines of code instead of 4 now?
@@ -3296,7 +3291,7 @@ adventures:
                     drinks_in_stock {is} water, lemonade, cola, orange juice
                     drink {is} {ask} 'What would you like to drink?'
                     {if} drink {in} drinks_in_stock
-                    {print} 'One ' drink 'coming up!'
+                    {print} 'One ' drink ' coming up!'
                     {else}
                     {print} 'Sorry, we do not sell that'
                     ```
@@ -3728,21 +3723,26 @@ adventures:
                     ```
                     monkeys = 5, 4, 3, 2, 1
                     ```
-            15:
+            13:
                 story_text: |
-                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with `{ask}` commands as well?
-                    In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
+                    Now that we are using Python syntax, the songs you've coded before will need Python syntax too!
+
+                    ### Exercise 1
+                    The Drunken sailor song is given as sample code, but not yet working.
+                    Can you make sure everything works again? To help you, we've put _ in the places of _some_ errors.
+
+                    ### Exercise 2
+                    Now also look up your Old MacDonald song from before and correct it.
                 example_code: |
                     ```
-                    {define} song (place)
-                        {print} 'My Bonnie is ' place
-
-                    chosen_place = {ask} 'Where do you want Bonnie to be?'
-                    synonym = {ask} 'What is another word for that?'
-
-                    song(chosen_place)
-                    song(synonym)
-                    song (chosen_place)
+                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    {for} line {in} lines _
+                        {for} i {in} {range} (1, 3) _
+                            {print} _ line _
+                        {print} 'early in the morning'
+                        {for} i {in} {range} (1, 3)
+                            {print} 'way hay and up she rises'
+                        {print} 'early in the morning'
                     ```
             14:
                 story_text: |
@@ -3779,48 +3779,27 @@ adventures:
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
-            13:
+            15:
                 story_text: |
-                    Now that we are using Python syntax, the songs you've coded before will need Python syntax too!
-
-                    ### Exercise 1
-                    The Drunken sailor song is given as sample code, but not yet working.
-                    Can you make sure everything works again? To help you, we've put _ in the places of _some_ errors.
-
-                    ### Exercise 2
-                    Now also look up your Old MacDonald song from before and correct it.
+                    In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with `{ask}` commands as well?
+                    In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
                 example_code: |
                     ```
-                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
-                    {for} line {in} lines _
-                        {for} i {in} {range} (1, 3) _
-                            {print} _ line _
-                        {print} 'early in the morning'
-                        {for} i {in} {range} (1, 3)
-                            {print} 'way hay and up she rises'
-                        {print} 'early in the morning'
+                    {define} song (place)
+                        {print} 'My Bonnie is ' place
+
+                    chosen_place = {ask} 'Where do you want Bonnie to be?'
+                    synonym = {ask} 'What is another word for that?'
+
+                    song(chosen_place)
+                    song(synonym)
+                    song (chosen_place)
                     ```
     songs_2:
         name: sing a song! 2
         default_save_name: Song 2
         description: Sing a song 2
         levels:
-            12:
-                story_text: |
-                    Songs contain a lot of repetition. We can capture it with a function!
-                    ### Exercise
-                    Look at the example code with the function. Fill out the two lines so the full song is printed.
-                example_code: |
-                    ```
-                    {define} twinkle
-                        {print} 'Twinkle'
-                        {print} _
-
-                    {call} twinkle
-                    {print} 'Up above the world so high'
-                    {print} 'Like a diamond in the sky'
-                    _
-                    ```
             11:
                 story_text: |
                     ### Exercise
@@ -3847,6 +3826,22 @@ adventures:
                     ```
                     object = 'wheels', 'doors', _
                     movement = 'round and round', 'open and shut', _
+                    ```
+            12:
+                story_text: |
+                    Songs contain a lot of repetition. We can capture it with a function!
+                    ### Exercise
+                    Look at the example code with the function. Fill out the two lines so the full song is printed.
+                example_code: |
+                    ```
+                    {define} twinkle
+                        {print} 'Twinkle'
+                        {print} _
+
+                    {call} twinkle
+                    {print} 'Up above the world so high'
+                    {print} 'Like a diamond in the sky'
+                    _
                     ```
     turtle:
         name: turtle
@@ -3888,7 +3883,6 @@ adventures:
 
                     **Extra** Change the letter into a different letter, like the first one of your name.
                     You can also make multiple letters, by setting the color to `{color}` `{white}` in between.
-
                 example_code: |
                     ```
                     {forward} 80
@@ -3902,7 +3896,6 @@ adventures:
 
                     ### Exercise
                     Change the code such that it creates a triangle. Hint: you only have to change the code in one place.
-
                 example_code_2: |
                     ```
                     {print} Drawing figures
@@ -4379,7 +4372,7 @@ adventures:
         default_save_name: New Year's Countdown
         description: Countdown to the New Year!
         levels:
-            8:
+            9:
                 story_text: |
                     Countdown to the New Year.
 
