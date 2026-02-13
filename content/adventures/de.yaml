@@ -131,6 +131,18 @@ adventures:
                     {if} ende {is} gut {print} name ' zieht ihr Schwert und das Monster ergreift die Flucht.'
                     {else} {print} 'Das Monster frisst ' name '.'
                     ```
+            6:
+                story_text: "Nun da du `{elif}` benutzen kannst, kannst du eine noch interaktivere Geschichte kreieren! Du könntest zum Beispiel mehrere Charaktere, die alle unterschiedliche Eigenschaften haben, erstellen.\nOder du könntest deine Spieler entscheiden lassen, welchen Weg sie wählen, welche Tür sie öffnen oder welchen magischen Trank sie trinken wollen...\n\n### Übung\nErstelle eine eigene Geschichte mit 3 oder mehr Auswahlmöglichkeiten, indem du {elif} einsetzt."
+                example_code: |
+                    ```
+                    character = {ask} 'Wer wird Ihnen bei Ihrer Suche helfen? '
+                    {if} character  {is} 'Daisy'
+                    {print} 'Du hast Daisy ausgesucht! Sie ist die schlauste aller!'
+                    {elif} character  {is} 'Jason'
+                    {print} 'Du hast Jason ausgewählt! Er ist der Größte von allen!'
+                    {elif} character {is} 'Sam'
+                    {print} 'Du hast Sam ausgewählt! Sie sind die schnellsten von allen! '
+                    ```
             8:
                 story_text: |
                     In einer Geschichte kommt es manchmal vor, dass jemand ein Wort mehrmals hintereinander sagt. So zum Beispiel, wenn jemand um Hilfe ruft, oder etwas singt.
@@ -220,7 +232,26 @@ adventures:
 
                     Schau dir <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf">die Geschichte</a> an, falls du sie nicht kennst und stelle sicher, dass es wie im Buch ausgegeben wird.
                 example_code: "```\ntiere = _ , _ , _ \n{print} 'Brauner Bär'\n{print} 'Was siehst du?'\n```\n"
+            13:
+                story_text: |
+                    Wir werden eine andere Geschichte ausgeben, aber nun müssen wir Klammern mit `{print}` benutzen.
 
+                    ### Übung 1
+                    Erstelle eine Geschichte mit mindestens 5 Sätzen. Du musst 'name' noch nicht benutzen.
+                example_code: |
+                    ```
+                    {print}('Willkommen in dieser Geschichte!')
+                    ```
+                story_text_2: |
+                    ### Übung 2
+                    Wir haben bereits einen `{input}` Befehl für dich vorbereitet. Benutze zuerst die `name` Variable in deiner Geschichte.
+                    Füge dann einen zweiten `{ask}` Befehl hinzu und benutze diese Variable ebenfalls.
+                    Tipp: Denke an die Kommas im `{print}` Befehl zwischen Text und Variablen!
+                example_code_2: |
+                    ```
+                    name = {input}("Wie ist dein Name?")
+                    {print}('Willkommen in dieser Geschichte!')
+                    ```
             16:
                 story_text: |
                     Mit der `{while}`-Schleife kannst du deine Geschichten noch interessanter gestalten. So kannst du zum Beispiel mit `{while} game == 'on'` dein Spiel so lange laufen lassen, bis es tatsächlich vorbei ist.
@@ -243,40 +274,9 @@ adventures:
                             {print} 'Nö, sie sind nicht beim ' Ort '.'
                     {print} 'Jetzt kannst Du ins Haus!'
                     ```
-            13:
-                story_text: |
-                    Wir werden eine andere Geschichte ausgeben, aber nun müssen wir Klammern mit `{print}` benutzen.
-
-                    ### Übung 1
-                    Erstelle eine Geschichte mit mindestens 5 Sätzen. Du musst 'name' noch nicht benutzen.
-                example_code: |
-                    ```
-                    {print}('Willkommen in dieser Geschichte!')
-                    ```
-                story_text_2: |
-                    ### Übung 2
-                    Wir haben bereits einen `{input}` Befehl für dich vorbereitet. Benutze zuerst die `name` Variable in deiner Geschichte.
-                    Füge dann einen zweiten `{ask}` Befehl hinzu und benutze diese Variable ebenfalls.
-                    Tipp: Denke an die Kommas im `{print}` Befehl zwischen Text und Variablen!
-                example_code_2: |
-                    ```
-                    name = {input}("Wie ist dein Name?")
-                    {print}('Willkommen in dieser Geschichte!')
-                    ```
-            6:
-                story_text: "Nun da du `{elif}` benutzen kannst, kannst du eine noch interaktivere Geschichte kreieren! Du könntest zum Beispiel mehrere Charaktere, die alle unterschiedliche Eigenschaften haben, erstellen.\nOder du könntest deine Spieler entscheiden lassen, welchen Weg sie wählen, welche Tür sie öffnen oder welchen magischen Trank sie trinken wollen...\n\n### Übung\nErstelle eine eigene Geschichte mit 3 oder mehr Auswahlmöglichkeiten, indem du {elif} einsetzt."
-                example_code: |
-                    ```
-                    character = {ask} 'Wer wird Ihnen bei Ihrer Suche helfen? '
-                    {if} character  {is} 'Daisy'
-                    {print} 'Du hast Daisy ausgesucht! Sie ist die schlauste aller!'
-                    {elif} character  {is} 'Jason'
-                    {print} 'Du hast Jason ausgewählt! Er ist der Größte von allen!'
-                    {elif} character {is} 'Sam'
-                    {print} 'Du hast Sam ausgewählt! Sie sind die schnellsten von allen! '
-                    ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
+        default_save_name: hinzufügen_entfernen_Befehl
         description: Einführung von {add} {to_list} und {remove} {from}
         levels:
             3:
@@ -313,8 +313,28 @@ adventures:
                     _
                     {print} Du bekommst einen geschmacksrichtungen {at} {random} Milchshake
                     ```
-        default_save_name: hinzufügen_entfernen_Befehl
+    and_or_command:
+        name: '{and} & {or}'
+        default_save_name: and_or_command
+        description: and, or
+        levels:
+            10:
+                story_text: |-
+                    Wir lernen jetzt `{and}` und `{or}`! Wenn Sie zwei Aussagen überprüfen möchten, müssen Sie nicht zwei `{if}`s verwenden, aber Sie können `{and}` und `{or}` verwenden.
+                    Wenn Sie `{and}` verwenden, müssen beide Aussagen, links und rechts von `{and}` wahr sein. Wir können auch `{or}` verwenden. Dann muss nur eine Aussage korrekt sein.
+                example_code: |
+                    ```
+                    Name = {ask} 'was ist eure Name?'
+                    Alter = {ask} 'was ist eure Alter?'
+                    {if} Name {is} 'Hedys {and} Alter {is} 2
+                        {print} 'du bist das reales Hedy!'
+                    {elif} Name {is} 'Hedys {or} Alter {is} 2
+                        {print} 'So Abschluss.. Aber du bist nicht Hedy!'
+                    {else}
+                        {print} 'Du bist nicht Hedy!'
+                    ```
     ask_command:
+        name: '{ask}'
         default_save_name: frage_Befehl
         description: Einführung des {ask} Befehls
         levels:
@@ -380,7 +400,6 @@ adventures:
                     name = {input}('Wie heißt du?')
                     {print}('Aha, dein Name ist ', name)
                     ```
-        name: '{ask}'
     calculator:
         name: Taschenrechner
         default_save_name: Taschenrechner
@@ -507,7 +526,25 @@ adventures:
                 example_code: "```\n{define} new_question():\n    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n    number_1 = numbers[random]\n    number_2 = numbers[random]\n    correct = number_1 * number_2\n    answer = 0\n    _\n    _\n    _\n    {print} ('Gut gemacht!')\n\n{print} ('Gib 10 richtige Antworten, um zu gewinnen!')\n{for} i {in} {range} 1 {to} 10:\n    _\n{print} ('Gewonnen!')\n```\n"
     calculator_2:
         name: Taschenrechner 2
+        default_save_name: Taschenrechner 2
+        description: Taschenrechner 2
         levels:
+            10:
+                story_text: |
+                    ### Exercise 1
+                    Machen wir das Übungsprogramm etwas härter. Der Spieler muss nun zwei Fragen korrekt beantworten. Füllen Sie die Leerzeichen aus, um das Programm abzuschließen.
+
+                    ### Exercise 2
+                    Manchmal haben Berechnungen mehrere korrekte Antworten. Beispielsweise kann 10 durch 5 und durch 2 geteilt werden. Die Frage "Welche Zahl teilt 10?" kann also von 2 und von 5 beantwortet werden.
+                    Fragen Sie nach einer Berechnung, die mehrere korrekte Antworten hat, fragen Sie den Spieler, ihn zu beantworten, und bestimmen Sie, ob es korrekt ist mit `{or}`.
+                    Leeren Sie das Programmierfeld und erstellen Sie Ihre eigene Lösung.
+                example_code: |
+                    ```
+                    answer1 = {ask} 'Was ist 10 mal 7?'
+                    answer2 = {ask} 'Was ist 6 mal 7?'
+                    {if} _ _ _ _ _ _ _
+                        {print} _
+                    ```
             15:
                 story_text: |
                     ### Übung 2
@@ -527,25 +564,10 @@ adventures:
                     ```
                     # Benutze deinen eigenen Code aus dem letzten Abenteuer.
                     ```
-            10:
-                story_text: |
-                    ### Exercise 1
-                    Machen wir das Übungsprogramm etwas härter. Der Spieler muss nun zwei Fragen korrekt beantworten. Füllen Sie die Leerzeichen aus, um das Programm abzuschließen.
-
-                    ### Exercise 2
-                    Manchmal haben Berechnungen mehrere korrekte Antworten. Beispielsweise kann 10 durch 5 und durch 2 geteilt werden. Die Frage "Welche Zahl teilt 10?" kann also von 2 und von 5 beantwortet werden.
-                    Fragen Sie nach einer Berechnung, die mehrere korrekte Antworten hat, fragen Sie den Spieler, ihn zu beantworten, und bestimmen Sie, ob es korrekt ist mit `{or}`.
-                    Leeren Sie das Programmierfeld und erstellen Sie Ihre eigene Lösung.
-                example_code: |
-                    ```
-                    answer1 = {ask} 'Was ist 10 mal 7?'
-                    answer2 = {ask} 'Was ist 6 mal 7?'
-                    {if} _ _ _ _ _ _ _
-                        {print} _
-                    ```
-        default_save_name: Taschenrechner 2
-        description: Taschenrechner 2
     clear_command:
+        name: '{clear}'
+        default_save_name: löschen_Befehl
+        description: '{clear} Befehl'
         levels:
             4:
                 story_text: |
@@ -564,10 +586,26 @@ adventures:
                     {clear}
                     {print} 'ÜBERRASCHUNG!'
                     ```
-        default_save_name: löschen_Befehl
-        description: '{clear} Befehl'
-        name: '{clear}'
+    congratulations:
+        name: Glückwünsche
+        default_save_name: now_what
+        description: Ende von Hedy
+        levels:
+            8:
+                story_text: |
+                    Glückwunsch! Sie haben das Ende von Hedy Basic erreicht! Sie können weiter in Hedy Advanced (Ebene 9-12) lernen, wo Sie komplexere Programmierkonzepte lernen können.
+                    Oder fühlen Sie sich frei, in Hedy Basic zu bleiben und kommen Sie selbstverständlich mit Ihren eigenen Programmen!
+            12:
+                story_text: |
+                    Glückwunsch! Sie haben das Ende von Hedy Advanced erreicht! Sie können weiterhin in Hedy Expert (Level 13-16) lernen, wie man echten Python-Code schreibt.
+                    Oder fühlen Sie sich frei, in Hedy Advanced zu bleiben und kommen Sie selbstverständlich mit Ihren eigenen Programmen!
+            16:
+                story_text: |
+                    Glückwunsch! Du hast das letzte Level von Hedy erreicht! Der Code, den Sie hier erstellt haben, kann in reale Python-Umgebungen wie Replit oder PyCharm kopiert werden und Sie können dort weiter lernen! Beachten Sie jedoch, dass Python nur Englisch-Befehle lesen kann, also wenn Sie andere Sprachen verwendet haben, müssen Sie jetzt auf Englisch wechseln.
     debugging:
+        name: Debugging
+        default_save_name: Debugging
+        description: Debugging-Abenteuer
         levels:
             1:
                 story_text: |-
@@ -858,9 +896,6 @@ adventures:
                 story_text: |-
                     ### Übung
                     Debugge diesen Code. Viel Glück!
-        description: Debugging-Abenteuer
-        name: Debugging
-        default_save_name: Debugging
     dice:
         name: Würfel
         default_save_name: Würfel
@@ -1058,7 +1093,10 @@ adventures:
                     {for} tag {in} tage
                         {print} namen {at} {random} ' ist mit dem Abwasch dran am ' tag
                     ```
+    elif_command:
+        levels: {}
     for_command:
+        name: '{for}'
         default_save_name: für
         description: '{for} Befehl'
         levels:
@@ -1091,7 +1129,6 @@ adventures:
                 story_text: |
                     Zuletzt, machen wir aus `{for} i {in} {range} 1 {to} 5` so richtigen Python Code:
                 example_code: "```\n{for} i {in} {range}(1,5):\n    {print} (i)\n```\n"
-        name: '{for}'
     fortune:
         name: Wahrsagerin
         default_save_name: Wahrsagerin
@@ -1312,7 +1349,11 @@ adventures:
                     punkte = berechne_punkte(antwort, richtige_antwort)
                     {print} ('Dein Punktestand ist... ', punkte)
                     ```
+    guess_my_number:
+        levels: {}
     harry_potter:
+        name: Harry Potter
+        default_save_name: Harry Potter
         description: Harry Potter Abenteuer
         levels:
             11:
@@ -1331,8 +1372,6 @@ adventures:
                     _ {print} name ' ist gut in ' fächer {at} {random}
                     _ {print} name ' hat am meisten Angst vor ' ängste {at} {random}
                     ```
-        default_save_name: Harry Potter
-        name: Harry Potter
     haunted:
         name: Spukhaus
         default_save_name: Spukhaus
@@ -1489,8 +1528,12 @@ adventures:
                     {if} Spieler {is} am_Leben
                         {print} 'Großartig! Du hast überlebt'
                     ```
+    hospital:
+        levels: {}
     hotel:
         name: Hotel
+        default_save_name: Hotel
+        description: Hotel
         levels:
             15:
                 story_text: |
@@ -1498,9 +1541,9 @@ adventures:
                     Du hast dich vielleicht gefragt, warum du eine Funktion verwenden solltest, weil die Funktionen im Beispiel nur eine Zeile lange sind.
                     Jetzt werden wir dir zeigen, wie größere Funktionen aussehen. Wir werden jetzt auch mehrere Argumente verwenden. Du wirst sehen, wie viel besser es ist, eine Funktion zu verwenden, wenn die Funktion größer wird.
                     Hier ist ein Beispiel einer Funktion mit Argumenten, kombiniert mit dem `{ask}` Befehl.
-        default_save_name: Hotel
-        description: Hotel
     if_command:
+        name: '{if} & {else}'
+        default_save_name: if_Befehl
         description: Einführung des {if} Befehls
         levels:
             5:
@@ -1562,9 +1605,8 @@ adventures:
                     {else}
                         {print} 'Du willst nicht weiter machen.'
                     ```
-        default_save_name: if_Befehl
-        name: '{if} & {else}'
     in_command:
+        name: '{in}'
         default_save_name: in_Befehl
         description: Einführung des {in} Befehls
         levels:
@@ -1588,13 +1630,11 @@ adventures:
                     ```
                     tiere {is} Hund, Kuh, Schaf
                     antwort {is} {ask} 'Was is dein Lieblingstier?'
-                    _ antwort _ tiere
-                    _ 'Meines auch!'
-                    _
-                    _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
+                    _ antwort _ tiere _ 'Meines auch!'
+                    _ _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
                     ```
-        name: '{in}'
     is_command:
+        name: '{is}'
         default_save_name: ist_Befehl
         description: Einführung des {is}-Befehls
         levels:
@@ -1626,7 +1666,6 @@ adventures:
                     name = Hedy
                     antwort = 20 + 4
                     ```
-        name: '{is}'
     language:
         name: Sprache
         default_save_name: Sprache
@@ -2037,6 +2076,9 @@ adventures:
                 story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n**Extra** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
                 example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _\n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
+        name: '{print}'
+        default_save_name: drucke
+        description: Einführung des {print} Befehls
         levels:
             1:
                 story_text: |
@@ -2068,11 +2110,12 @@ adventures:
                     name = 'Hedy'
                     {print}('Mein Name ist ', name)
                     ```
-        name: '{print}'
-        description: Einführung des {print} Befehls
-        default_save_name: drucke
+    quizmaster:
+        levels: {}
     quotation_marks:
         name: '''Anführungszeichen'''
+        default_save_name: Anführungszeichen
+        description: Einführung der Anführungszeichen
         levels:
             4:
                 story_text: |
@@ -2088,9 +2131,8 @@ adventures:
                     {print} 'Wir müssen ' antwort ' benutzen'
                     ```
                 story_text_2: "## Verkürzungen im Englischen\nWichtig! Da wir jetzt Anführungszeichen verwenden, wird Hedy verwirrt, wenn du bei englischen Texten das Apostroph für Verkürzungen wie I'm oder What's verwendest.\nEntferne diese Apostrophe und ändere die Schreibweise in I am oder What is sein.\nSchaue dir den Beispielcode an, um die falsche Verwendung von Apostrophen zu lernen.\n"
-        description: Einführung der Anführungszeichen
-        default_save_name: Anführungszeichen
     random_command:
+        name: '{random}'
         default_save_name: zufällig_Befehl
         description: Einführung des {at} {random} Befehls
         levels:
@@ -2123,8 +2165,6 @@ adventures:
                     _
                     ```
             14:
-                story_text: |
-
                 example_code: |
                     ```
                     freunde = ['Ahmed', 'Ben', 'Clemens']
@@ -2136,14 +2176,14 @@ adventures:
                     {for} i {in} {range} 1 {to} 3
                         {print} freunde[i] 's Glückszahl ist ' glückszahl[i]
                     ```
-        name: '{random}'
     repeat_command:
+        name: '{repeat}'
         default_save_name: wiederhole_Befehl
         description: '{repeat} Befehl'
         levels:
             8:
                 story_text: |
-                    In Level 8 kommt der `{repeat}` Befehl. `{repeat}` kann benutzt werden, um eine Zeile Code mehrmals auszuführen. So:
+                    In Level 7 kommt der `{repeat}` Befehl. `{repeat}` kann benutzt werden, um eine Zeile Code mehrmals auszuführen. So:
 
                     ### Übung
                     Spiele mit dem `{repeat}` Befehl. Kannst du Happy Birthday mit 3 Zeilen anstellen von 4 machen?
@@ -2179,8 +2219,8 @@ adventures:
                         {else}
                             {print} 'Pizza ist besser!'
                     ```
-        name: '{repeat}'
     repeat_command_2:
+        name: '{repeat} 2'
         default_save_name: wiederhole_Befehl_2
         description: '{repeat} Befehl 2'
         levels:
@@ -2221,8 +2261,9 @@ adventures:
                     _ {print} 'Den Muffin Mann'
                     _ {print} 'Kennst du den Muffin Mann, der wohnt in Drury Lane.'
                     ```
-        name: '{repeat} 2'
     restaurant:
+        name: Restaurant
+        default_save_name: Restaurant
         description: Erstelle dein eigenes virtuelles Restaurant
         levels:
             1:
@@ -2316,6 +2357,26 @@ adventures:
                     Getränke {is} {ask} Was würden Sie gerne dazu trinken?
                     {print} Danke für Ihre Bestellung.
                     {print} Ihre  Essen  und  Getränke  kommen sofort!
+                    ```
+            6:
+                story_text: |
+                    In diesem Level erlaubt dir der `{if}`-Befehl deinen Kundinnen oder Kunden Fragen zu stellen (`{ask}`) und verschiedene Antworten zu geben.
+                    In dem unteren Beispiel siehst du, dass du die Kundin oder den Kunden fragen (`{ask}`) kannst, ob (`{if}`) sie oder er die Tagesgerichte erfahren möchte, und Hedy kann dementsprechend antworten.
+                example_code: |
+                    ```
+                    {print} 'Willkommen im Restaurant Chez Hedy'
+                    Tagesgericht {is} {ask} 'Würden Sie gerne das heutige Tagesgericht erfahren?'
+                    {if} Tagesgericht {is} ja {print} 'Das Tagesgericht ist Nudeln mit Tomatensoße.' {else} {print} 'Ok, kein Problem.'
+                    Essen {is} {ask} 'Was würden Sie gerne essen?'
+                    {print} 'Einmal ' Essen ', kommt sofort!'
+                    Getränk {is} {ask} 'Was würden Sie gerne dazu trinken?'
+                    {if} Getränk {is} Cola {print} 'Tut mir leid, die Cola ist aus!' {else} {print} 'Großartige Wahl!'
+                    etwas {is} {ask} 'Hätten Sie gerne noch etwas?'
+                    {print} 'Lassen Sie mich Ihre Bestellung noch einmal wiederholen...'
+                    {print} 'Einmal ' Essen
+                    {if} Getränk {is} Cola {print} 'und...' {else} {print} 'Einmal ' Getränk
+                    {if} etwas {is} nein {print} 'Das ist alles!' {else} {print} 'Einmal ' etwas
+                    {print} 'Danke für Ihre Bestellung und guten Appetit!'
                     ```
             7:
                 story_text: |
@@ -2421,6 +2482,7 @@ adventures:
                     _ {print} Name ' bestellt ' Essen ' als ' Kurs
                     ```
             16:
+                story_text: "Mit `{while}` kannst du sicherstellen, dass deine Kunden Bestellungen aufgeben bis sie fertig sind.\n\n### Übung\nFüge den `{while}` Befehl dem Code hinzu.\n"
                 example_code: |
                     ```
                     {print} 'Willkommen bei McHedy'
@@ -2431,9 +2493,6 @@ adventures:
                         mehr = {ask} 'Würden Sie gerne noch etwas bestellen?'
                     {print} 'Dankeschön!'
                     ```
-                story_text: "Mit `{while}` kannst du sicherstellen, dass deine Kunden Bestellungen aufgeben bis sie fertig sind.\n\n### Übung\nFüge den `{while}` Befehl dem Code hinzu.\n"
-        default_save_name: Restaurant
-        name: Restaurant
     rock:
         name: Schere, Stein, Papier
         default_save_name: Stein_2
@@ -2614,6 +2673,7 @@ adventures:
                         {print} 'Gehe um 10 Uhr zum Bahnhof'
                      ```
     sleep_command:
+        name: '{sleep}'
         default_save_name: schlafe_Befehl
         description: Einführung des {sleep} Befehls
         levels:
@@ -2629,9 +2689,9 @@ adventures:
                     {sleep} 2
                     {print} Grün!
                     ```
-        name: '{sleep}'
     songs:
         name: Singe ein Lied!
+        default_save_name: Lied
         description: Drucke einen Songtext
         levels:
             8:
@@ -2695,9 +2755,10 @@ adventures:
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
                     ```
-        default_save_name: Lied
     songs_2:
         name: Singe ein Lied! 2
+        default_save_name: Lied 2
+        description: Singe ein Lied 2
         levels:
             12:
                 story_text: |
@@ -2719,8 +2780,6 @@ adventures:
                     {call} _
                     {print} 'Aber nur meine Liebe Laterne nicht'
                     ```
-        default_save_name: Lied 2
-        description: Singe ein Lied 2
     turtle:
         name: Schildkröte
         default_save_name: Schildkröte
@@ -3176,46 +3235,12 @@ adventures:
                     Stern
                     Ein Stern wird üblicherweise mit 144° Drehungen gezeichnet. Wenn du das zum Beispiel leicht in einen 143° Winkel abänderst und das Muster mehrfach mit einer {while} Schleife wiederholst, kannst du die gezeigte Figur zeichnen.
     while_command:
+        name: '{while}'
+        default_save_name: solange_Befehl
         description: '{while}'
         levels:
             16:
                 story_text: "Wir lernen jetzt eine neue Schleife, die `{while}` Schleife! Wir bleiben in der Schleife, so lange bis die Aussage wahr ist.\nDeswegen - vergiss nicht, den Wert in der Schleife zu verändern.\n\nIm Beispiel Code bleiben wir in der Schleife, bis eine richtige Antwort gegeben wurde.\nFalls die richtige Antwort nie gegeben wird, endet die Schleife nie!"
                 example_code: "```\nantwort = 0\n{while} antwort != 25\n    antwort = {ask} 'Was ist 5 mal 5?'\n{print} 'Eine richtige Antwort wurde gegeben'\n```\n"
-        default_save_name: solange_Befehl
-        name: '{while}'
-    and_or_command:
-        name: '{and} & {or}'
-        default_save_name: and_or_command
-        description: and, or
-        levels:
-            10:
-                story_text: |-
-                    Wir lernen jetzt `{and}` und `{or}`! Wenn Sie zwei Aussagen überprüfen möchten, müssen Sie nicht zwei `{if}`s verwenden, aber Sie können `{and}` und `{or}` verwenden.
-                    Wenn Sie `{and}` verwenden, müssen beide Aussagen, links und rechts von `{and}` wahr sein. Wir können auch `{or}` verwenden. Dann muss nur eine Aussage korrekt sein.
-                example_code: |
-                    ```
-                    Name = {ask} 'was ist eure Name?'
-                    Alter = {ask} 'was ist eure Alter?'
-                    {if} Name {is} 'Hedys {and} Alter {is} 2
-                        {print} 'du bist das reales Hedy!'
-                    {elif} Name {is} 'Hedys {or} Alter {is} 2
-                        {print} 'So Abschluss.. Aber du bist nicht Hedy!'
-                    {else}
-                        {print} 'Du bist nicht Hedy!'
-                    ```
-    congratulations:
-        name: Glückwünsche
-        default_save_name: now_what
-        description: Ende von Hedy
-        levels:
-            8:
-                story_text: |
-                    Glückwunsch! Sie haben das Ende von Hedy Basic erreicht! Sie können weiter in Hedy Advanced (Ebene 9-12) lernen, wo Sie komplexere Programmierkonzepte lernen können.
-                    Oder fühlen Sie sich frei, in Hedy Basic zu bleiben und kommen Sie selbstverständlich mit Ihren eigenen Programmen!
-            12:
-                story_text: |
-                    Glückwunsch! Sie haben das Ende von Hedy Advanced erreicht! Sie können weiterhin in Hedy Expert (Level 13-16) lernen, wie man echten Python-Code schreibt.
-                    Oder fühlen Sie sich frei, in Hedy Advanced zu bleiben und kommen Sie selbstverständlich mit Ihren eigenen Programmen!
-            16:
-                story_text: |
-                    Glückwunsch! Du hast das letzte Level von Hedy erreicht! Der Code, den Sie hier erstellt haben, kann in reale Python-Umgebungen wie Replit oder PyCharm kopiert werden und Sie können dort weiter lernen! Beachten Sie jedoch, dass Python nur Englisch-Befehle lesen kann, also wenn Sie andere Sprachen verwendet haben, müssen Sie jetzt auf Englisch wechseln.
+    years:
+        levels: {}

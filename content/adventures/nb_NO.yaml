@@ -163,6 +163,12 @@ adventures:
                             {print} 'Nei, de er ikke ved ' location
                     {print} 'Nå kan du gå inn i huset!'
                     ```
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
+    ask_command:
+        levels: {}
     calculator:
         name: Kalkulator
         default_save_name: Kalkulator
@@ -218,6 +224,14 @@ adventures:
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
                     Then `{call}` the function.
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
     dice:
         name: Terninger
         default_save_name: Terninger
@@ -384,18 +398,45 @@ adventures:
                     {for} day {in} dager
                         {print} navn {at} {random} ' tar oppvasken på ' day
                     ```
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
     fortune:
         name: Spåkone
         default_save_name: Spåkone
         description: La Hedy forutsi fremtiden
+        levels: {}
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
     haunted:
         name: Spøkelseshus
         default_save_name: Spøkelseshus
         description: flykt fra det forheksede huset
+        levels: {}
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
+    is_command:
+        levels: {}
     language:
         name: Språk
         default_save_name: språk
         description: Øv på ord fra andre språk
+        levels: {}
+    maths:
+        levels: {}
+    music:
+        levels: {}
     parrot:
         name: Papegøye
         default_save_name: Papegøye
@@ -455,6 +496,21 @@ adventures:
         name: Sparebøsse
         default_save_name: Sparebøsse
         description: Tell sparepengene dine!
+        levels: {}
+    pressit:
+        levels: {}
+    print_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
     restaurant:
         description: Lag din egen virtuelle restaurant
         levels:
@@ -531,6 +587,26 @@ adventures:
                     drikken {is} {ask} Vil du ha noe å drikke til?
                     {print} Takk for bestillingen.
                     {print} maten 'og  drikken ' kommer snart!
+                    ```
+            6:
+                story_text: |
+                    På dette nivået lar `{if}`-kommandoen deg å spørre kunder spørsmål og gi forskjellige ting til svar.
+                    I eksempelet under kan du se at du kan spørre kunden om de har lyst å høre om dagens rett og Hedy kan svare deretter.
+                example_code: |
+                    ```
+                    {print} 'Velkommen til Hedys restaurant!'
+                    vil_høre {is} {ask} 'Vil du høre om dagens rett?'
+                    {if} vil_høre {is} ja {print} 'Dagens rett er kylling piri piri med ris.' {else} {print} 'Ikke noe problem.'
+                    matønske {is} {ask} 'Hva har du lyst å spise?'
+                    {print} 'en ' matønske ' er på vei!'
+                    drikke {is} {ask} 'Hva har du lyst å drikke til?'
+                    {if} drikke {is} cola {print} 'Beklager, vi er tom for cola!' {else} {print} 'Godt valg!'
+                    annet {is} {ask} 'Vil du ha noe annet?'
+                    {print} 'La meg lese opp bestillingen...'
+                    {print} 'En ' matønske
+                    {if} drikke {is} cola {print} 'og...' {else} {print} 'En ' drikke
+                    {if} annet {is} nei {print} 'Det var det!' {else} {print} 'En ' annet
+                    {print} 'Takk for bestillingen og vel bekomme!'
                     ```
             7:
                 story_text: |
@@ -755,6 +831,8 @@ adventures:
                             {print} 'Du vant!'
                             vunnet = 'yes'
                     ```
+    rock_2:
+        levels: {}
     secret:
         name: SuperSpion
         default_save_name: språk
@@ -770,6 +848,8 @@ adventures:
                     else
                         print 'Go to the trainstation at 10.00'
                      ```
+    sleep_command:
+        levels: {}
     songs:
         name: Syng en sang!
         default_save_name: Sang
@@ -862,6 +942,8 @@ adventures:
                         {print} 'there a ' lyd
                         {print} 'everywhere a ' lyd lyd
                     ```
+    songs_2:
+        levels: {}
     turtle:
         name: Skilpadde
         default_save_name: Skilpadde
@@ -998,3 +1080,9 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}
+    years:
+        levels: {}
