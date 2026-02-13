@@ -46,7 +46,7 @@ adventures:
                 story_text_2: |
                     ### Opdracht
                     Het is tijd om variabelen toe te voegen aan jouw eigen verhaal, dat je in level 1 hebt geschreven.
-                    Ga naar 'Mijn programma's', zoek jouw level 1 verhaal avontuur op en kopieer de code. Plak de code daarna in het invoerscherm hier in dit level.
+                    Ga naar jouw level 1 verhaal avontuur op en kopieer de code. Plak de code daarna in het invoerscherm hier in dit level.
 
                     Deze code werkt nog niet, omdat je nog geen variabelen gebruikt hebt.
                     Verander de `{ask}` en `{echo}` commando's in jouw code naar de juiste vorm, die je in dit level geleerd hebt.
@@ -824,7 +824,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Tot slot maken we echte Python code van `{for} i {in} {range} 1 {to} 5` door rondje haakjes te gebruiken en afscheid te nemen van {to} en daarvoor in de plaats een komma te gebruiken tussen het begin en eindgetal. Op deze manier:
+                    Tot slot maken we echte Python code van `{repeat} 5 {times}` op deze manier:
     fortune:
         name: waarzegger
         default_save_name: Waarzegger
@@ -2073,51 +2073,6 @@ adventures:
 
                     {call} _
                     ```
-    pressit:
-        name: toetsaanslag
-        default_save_name: Toetsaanslag
-        description: Koppel een toets aan code
-        levels:
-            6:
-                story_text: "In dit level leren we nog een commando: `{pressed}`.\nMet `{pressed}` kun je toetsen op het toetsenbord gebruiken om te bepalen welken stukjes code er worden uitgevoerd.\n\n### Opdracht\n Bekijk het voorbeeld en voeg nog een regel toe die op toetsen reageert. \n"
-                example_code: |
-                    ```
-                    {print} 'Wil je een goed (g) of slecht (a) einde?'
-                    {if} g {is} {pressed} {print} 'Ze leefden nog lang en gelukkig ❤'
-                    {else} {print} 'De prins werd opgegeten door een nijlpaard 😭'
-                    ```
-                story_text_2: |
-                    Je kan iedere code koppelen aan een toets, ook de tekenschildpad.
-
-                    ### Opdracht
-                    Kopieer de regels code zodat je een grotere tekening kan maken.
-            8:
-                story_text: |
-                    Nu je `{repeat}` hebt geleerd kunnen we meerdere keren kijken of er een toets is ingedrukt.
-                    Je kunt dit gebruiken om de schildpad te besturen.
-
-                    ### Opdracht
-                    De voorbeeldcode kijkt één keer of er een toets is ingedrukt.
-                    Pas de code aan door {repeat} toe te voegen en maak daar een mooie tekening mee.
-            10:
-                story_text: |
-                    We kunnen nu met `{pressed}` een programma maken om typen te oefenen.
-
-                    ### Opdracht
-                    Maak de code af. Er moet steeds een willekeurige letter worden gekozen. Doe je het goed dan krijg je een punt erbij, bij een foute toets gaan er twee punten af!
-                    **Extra** Maak het scherm weer leeg na iedere letter en toon de gebruiker hoeveel punten hij heeft gescoord.
-                example_code: |
-                    ```
-                    punten = 1
-                    letters = a, b, c, d, e
-                    {repeat} 10 {times}
-                        letter = _ _ _
-                        {print} 'Typ de letter ' letter
-                        {if} letter {is} {pressed}
-                        _
-                        _
-                        _
-                    ```
     print_command:
         description: Introductie print commando
         levels:
@@ -3267,7 +3222,7 @@ adventures:
                     {forward} 300
                     {turn} 180
 
-                    {for} i {in} {range} 1 {to} 5
+                    {repeat} 5 {times}
                         {color} gray
                         {forward} 100
                         gekozen_vorm = {ask} 'Wat voor vorm wil je op de armband?'

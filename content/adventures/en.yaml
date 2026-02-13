@@ -46,7 +46,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    Go to your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
 
                     This code won't work in this level, because you have not used variables yet.
                     Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
@@ -1357,7 +1357,7 @@ adventures:
                     {print} 'The dishwasher is' dishwasher
                     {if} dishwasher {is} Emma
                     emma_washes = emma_washes + 1
-                    {print} 'Emma will do the dishes this week' emma_washes 'times'
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
 
                     Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
@@ -1411,6 +1411,7 @@ adventures:
             6:
                 story_text: |
                     In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
+                    NOTE: You now have use 2 lines when using {if}, {else} or {elif}. 1 line for the {if} keyword (for example `{if} name {is} Hedy`), and one line for what is going to happen if the condition is met (for example `{print} hello`).
                     Check it out!
                     ### Exercise
                     Make your own wheel of fortune, where you can win different prizes and get corresponding reactions
@@ -1458,7 +1459,7 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Lastly, we'll turn `{for} i {in} {range} 1 {to} 5` into real Python code, like this:
+                    Lastly, we'll turn `{repeat} 5 {times}` into real Python code, like this:
                 example_code: |
                     ```
                     {for} i {in} {range}(1,5):
@@ -2928,65 +2929,6 @@ adventures:
 
                     _
                     ```
-    pressit:
-        name: '{pressed}'
-        default_save_name: Pressed
-        description: Try linking a keyboard key to a command!
-        levels:
-            6:
-                story_text: |
-                    In this level there is another new keyword: `{pressed}`!
-                    With `{pressed}` you can use keys on your keyboard to control what lines are used.
-
-                    ### Exercise
-                    Look at the example and add one more line of code that reacts to a key press.
-                example_code: |
-                    ```
-                    {print} 'Do you want a good (g) or bad (b) ending?'
-                    {if} g {is} {pressed} {print} 'They lived happily ever after ❤'
-                    {else} {print} 'The prince was eaten by a hippopotamus 😭'
-                    ```
-                story_text_2: |
-                    You can also link turtle commands to keys.
-
-                    ### Exercise
-                    Copy the lines a few times so you can create a larger drawing.
-                example_code_2: |
-                    ```
-                    {if} y {is} {pressed} {forward} 15
-                    {else} {turn} 90
-                    ```
-            8:
-                story_text: |
-                    Now that you have learned about `{repeat}`, we can press keys multiple times.
-                    You can use it to make the turtle walk forward and turn.
-
-                    ### Exercise
-                    The code you have seen in level 5 only checks the key once. Copy the example code and add a `{repeat}` to it, so that you can press the keys many times.
-                    Use this code to draw something nice.
-                example_code: |
-                    ```
-                    {if} x {is} {pressed} {forward} 15 {else} {turn} 90
-                    ```
-            10:
-                story_text: |
-                    Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
-
-                    ### Exercise
-                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and two points deduction for a wrong press.
-                    **Extra** Clear the screen after each letter, and show the user how many points they have scored.
-                example_code: |
-                    ```
-                    points = 0
-                    letters = a, b, c, d, e
-                    {repeat} 10 {times}
-                        letter = _ _ _
-                        {print} 'Press the letter ' letter
-                        {if} letter {is} {pressed}
-                        _
-                        _
-                        _
-                    ```
     print_command:
         name: '{print}'
         default_save_name: print
@@ -3622,10 +3564,10 @@ adventures:
                 example_code: |
                     ```
                     won = 'no'
-                    options = 'rock', 'paper', 'scissors'
+                    options = ['rock', 'paper', 'scissors']
                     {while} won == 'no'
                         your_choice = {ask} 'What do you choose?'
-                        computer_choice = options {at} {random}
+                        computer_choice = options[{random}]
                         {print} 'you chose ' your_choice
                         {print} 'the computer chose ' computer_choice
                         {if} computer_choice == your_choice
@@ -4337,7 +4279,7 @@ adventures:
                     {forward} 300
                     {turn} 180
 
-                    {for} i {in} {range} 1 {to} 5
+                    {repeat} 5 {times}
                         {color} gray
                         {forward} 100
                         shape = {ask} 'What kind of shape would you like next on the bracelet?'
