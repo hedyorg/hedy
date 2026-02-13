@@ -1695,6 +1695,26 @@ adventures:
                     {else}
                         {print} 'Wrong!'
                     ```
+                answer_code: |-
+                    ```
+                    {def} play_happy_tune():
+                        {play} C4
+                        {play} C5
+                        {play} C6
+
+                    {def} play_sad_tune():
+                        {play} C6
+                        {play} C5
+                        {play} C4
+
+                    answer = {input}('What is 2 + 2?')
+                    {if} answer == 4:
+                        {print} 'Right!'
+                        play_happy_tune()
+                    {else}
+                        {print} 'Wrong!'
+                        play_sad_tune()
+                    ```
     functions_2:
         name: functions with arguments
         default_save_name: functions 2
@@ -2846,6 +2866,45 @@ adventures:
                     line_3()
                     {print} ('Early in the morning')
                     ```
+                answer_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} B
+                        {play} C5
+                        {play} D5
+
+                    {def} line_4():
+                        {play} C5
+                        {play} A
+                        {play} G
+                        {play} E
+                        {play} D
+                        {play} D
+
+                    {print} ('The drunken sailor')
+                    {print} ('What shall we do with the drunken sailor?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('Early in the morning')
+                    line_4()
+                    ```
     music_3:
         name: music 3
         default_save_name: music 3
@@ -2870,6 +2929,30 @@ adventures:
                         {play} note_1
                         {play} _
                         {play} _
+
+                    tune(29, 31, 30)
+                    tune(29, 28, 0)
+                    tune(32, 31, 30)
+
+                    {play} C4
+                    {play} B3
+                    {play} G3
+                    {play} A3
+                    {play} B3
+                    {play} C4
+                    {play} C4
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Yankee Doodle'
+                    {def} tune (note_1, note_2, note_3)
+                        {play} C4
+                        {play} C4
+                        {play} D4
+                        {play} E4
+                        {play} note_1
+                        {play} note_2
+                        {play} note_3
 
                     tune(29, 31, 30)
                     tune(29, 28, 0)
@@ -4486,6 +4569,23 @@ adventures:
 
                     _
                     _
+                    ```
+                answer_code: |
+                    ```
+                    {def} calculate_degrees(amount_of_sides)
+                        degrees = 360 / amount_of_sides
+                        {return} degrees
+
+                    {def} draw_figure(degrees, amount_of_sides)
+                        {for} i {in} {range} (1, amount_of_sides)
+                            {forward} 70
+                            {turn} degrees
+
+                    amount_of_sides = {input}('How many sides do you want the figure to have?')
+                    degrees = calculate_degrees(amount_of_sides)
+
+                    calculate_degrees(amount_of_sides)
+                    draw_figure(degrees, amount_of_sides)
                     ```
             16:
                 story_text: |
