@@ -915,12 +915,6 @@ adventures:
                         call kolej
                         {sleep} 2
                     ```
-            15:
-                story_text_2: "Na poprzednich poziomach nauczyłeś(aś) się jak stworzyć funkcje i używać argumentów z nimi. Innym świetnym wykorzystaniem funkcji to wykonywanie obliczeń dla Ciebie.\nMożesz przekazać do funkcji obliczenia a ona da Ci na nie odpowiedź. Odpowiedź jest nazywana **wartością zwracaną**.\n\nNa przykład w tym kodzie funkcja oblicz_nową_cenę oblicza nową cenę dowolnej rzeczy. Zwróci Ci nową cenę jako wartość zwracaną.\n\n### Ćwiczenie\nDokończ ten kod. Przygotowaliśmy już dla Ciebie zmienną nowa_cena, musisz ją tylko ustawić.\nPowinieneś(powinnaś) dokończyć linię kodu wywołując funkcję obliczającą nową cenę.\n"
-                example_code_2: "```\n{def} oblicz_nową_cenę(kwota, procent):\n    procent = procent / 100\n    kwota_zniżki = kwota * procent \n    {return} kwota - kwota_zniżki \n\nstara_cena = {input} ('Jaka jest cena na metce?')\nzniżka = {input} ('Ile procent wynosi zniżka?')\n\nnowa_cena = _ oblicz nową_cenę(stara_cena, _)\n{print}('Nowa cena to ', nowa_cena, ' złotych')\n```\n"
-                example_code: "```\n{def} piosenka(miejsce):\n    {print} ('Moja Bonnie jest nad ', place)\n\npiosenka('oceanem')\npiosenka('morzem')\npiosenka('oceanem')\n```\n"
-                story_text_3: "Zróbmy funkcje tak jak w Pythonie! Aby zdefiniować funkcję nie będziemy używać:\n\n`{define} name_function {with} argument_1, argument_2):`\n\nale używamy:\n\n`{def} name_function(argument_1, argument_2):`.\n\nJeśli nie chcesz używać argumentów po prostu zostaw miejsce między nawiasami puste.\n"
-                example_code_3: "```\n{def} oblicz_wynik(odpowiedź, poprawna_odpowiedź):\n    {if} odpowiedź == poprawna_odpowiedź:\n        wynik = 1\n    {elif} odpowiedź == '?':\n        wynik = 0\n    {else}:\n        wynik = -1\n    {return} wynik \n\nodpowiedź = {input} ('Gdzie można znaleźć więżę Eiffela?')\npoprawna_odpowiedź = 'Paryż'\nwynik = oblicz_wynik(odpowiedź, poprawna_odpowiedź)\n{print} ('Twój wynik to... ', wynik)\n```\n"
     guess_my_number:
         name: zgadnij moją liczbę
         default_save_name: Zgadnij moją liczbę

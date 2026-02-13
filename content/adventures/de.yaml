@@ -1283,35 +1283,6 @@ adventures:
                         {call} zug
                         {sleep} 2
                     ```
-            15:
-                story_text: |
-                    Lass uns Funktionen verwenden, wie es in Python geht! Um eine Funktion zu definieren, benutzen wir nicht länger:
-
-                    `{define} name_funktion {with} argument_1, argument_2:`
-
-                    sondern:
-
-                    `{def} name_funktion(argument_1, argument_2):`.
-
-
-                    Wenn du keine Argumente verwenden willst, lässt du den Platz zwischen den Klammern einfach leer.
-                    Um eine Funktion aufzurufen, müssen wir den `{call}` Befehl nicht mehr verwenden. Schreib einfach den Namen der Funktion.
-                example_code: |
-                    ```
-                    {def} berechne_punkte(antwort, richtige_antwort):
-                        {if} antwort == richtige_antwort:
-                            punkte = 1
-                        {elif} antwort == '?':
-                            punkte = 0
-                        {else}:
-                            punkte = -1
-                        {return} punkte
-
-                    antwort = {input} ('Wo findest du den Eiffelturm?')
-                    richtige_antwort = 'Paris'
-                    punkte = berechne_punkte(antwort, richtige_antwort)
-                    {print} ('Dein Punktestand ist... ', punkte)
-                    ```
     harry_potter:
         description: Harry Potter Abenteuer
         levels:
