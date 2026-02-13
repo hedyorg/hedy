@@ -3308,23 +3308,6 @@ adventures:
                     <div class="w-full flex flex-row gap-2">
                      <img src="https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2" width="200">
                     </div>
-                example_code: |
-                    ```
-                    {define} bereken_graden {with} aantal_hoeken
-                        _ 360 / aantal_hoeken
-
-
-                    {define} teken_figuur {with} graden
-                        _
-                            {forward} 400 / aantal_hoeken
-                            {turn} _
-
-                    aantal_hoeken = {ask} _
-                    graden = {call} _ {with} _
-
-                    {call} _ {with}
-                    {call} _ {with}
-                    ```
             16:
                 story_text: |
                     ### Opdracht

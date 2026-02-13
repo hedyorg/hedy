@@ -3143,23 +3143,6 @@ adventures:
                      <img src="https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b" width="300">
                      <img src="https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2" width="200">
                     </div>
-                example_code: |
-                    ```
-                    {define} berechne_winkel {with} anzahl_ecken
-                        _ 360 / anzahl_ecken
-
-
-                    {define} zeichne_figur {with} winkel
-                        _
-                            {forward} 400/anzahl_ecken
-                            {turn} _
-
-                    anzahl_ecken = {ask} _
-                    winkel = {call} _ {with} _
-
-                    {call} _ {with}
-                    {call} _ {with}
-                    ```
             16:
                 story_text: |
                     ### Übung

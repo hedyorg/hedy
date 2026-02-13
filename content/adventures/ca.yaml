@@ -1820,7 +1820,6 @@ adventures:
                 example_code_2: "Pista per les llums de Nadal:\n\nComença movent-te a la part esquerra de la pantalla amb una línia blanca invisible. Després penja les llums de Nadal!\n```\n{color} blanc\n{turn} -90\n{forward} 300\n{turn} 90\n\ncolors = vermell, blau, groc, lila, verd, taronja, rosa\n{for} color_escollit {in} colors\n_\n```\n"
             15:
                 story_text: "### Exercici\nCrea un programa que pregunti al jugador quants costats ha de tenir la seva figura i després crea aquesta figura.\nLa figura de la imatge és el resultat quan el jugador introdueix 10.\n\n<div class=\"w-full flex flex-row gap-2\">\n <img src=\"https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b\" width=\"300\">\n <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2\" width=\"200\">\n</div>\n"
-                example_code: "```\n{define} calcula_graus (num_vertexs)\n    _ 360 / num_vertexs\n\n\n{define} dibuixa_figura (graus)\n    _\n        {forward} 400/num_vertexs\n        {turn} _\n\nnum_vertexs = {ask} _\ngraus =  _(_)\n\n_ {with}\n_ {with}\n```\n"
         description: Dibuixa la imatge amb la tortuga
         name: dibuixa-ho!
     rock_2:
