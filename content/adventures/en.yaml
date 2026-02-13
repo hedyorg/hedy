@@ -1751,7 +1751,6 @@ adventures:
                     song('sea')
                     song('ocean')
                     ```
-
     functions_3:
         name: functions with return value
         default_save_name: functions 3
@@ -2921,7 +2920,7 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Yankee Doodle'
-                    {def} _ (note_1, note_2, note_3)
+                    {def} _ (note_1, note_2, note_3):
                         {play} C4
                         {play} C4
                         {play} D4
@@ -2931,7 +2930,7 @@ adventures:
                         {play} _
 
                     tune(29, 31, 30)
-                    tune(29, 28, 0)
+                    tune(29, 28, 1)
                     tune(32, 31, 30)
 
                     {play} C4
@@ -2945,7 +2944,7 @@ adventures:
                 answer_code: |
                     ```
                     {print} 'Yankee Doodle'
-                    {def} tune (note_1, note_2, note_3)
+                    {def} tune (note_1, note_2, note_3):
                         {play} C4
                         {play} C4
                         {play} D4
@@ -2955,7 +2954,7 @@ adventures:
                         {play} note_3
 
                     tune(29, 31, 30)
-                    tune(29, 28, 0)
+                    tune(29, 28, 1)
                     tune(32, 31, 30)
 
                     {play} C4

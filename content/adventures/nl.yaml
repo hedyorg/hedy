@@ -1005,13 +1005,60 @@ adventures:
                     ```
             15:
                 story_text: |
+                    In een eerder level heb je al kennisgemaakt met functies. Je schrijft een stukje code in de functie.
+                    Vervolgens roep je de functie aan en wordt het stukje code gerund. Dit werkt heel goed als je een stukje code steeds moet herhalen!
+
+                    In dit level gaan we verder met functies en breiden we de mogelijkheden steeds verder uit.
+                    We beginnen met simpele functies op de Python manier te schrijven. We korten `{define}` af naar `{def}` en voegen `():` achter de functie toe.
+                    Om de functie aan te roepen, typen we gewoonweg de naam van de functie en (), zoals gedaan in regel 8 van het voorbeeld.
+
+                    ### Opdracht
+                    Voeg een functie toe die een sip deuntje speelt (zoals C6-C5-C4) en roep die functie op als er een fout antwoord gegeven wordt.
+                example_code: |
+                    ```
+                    {def} speel_blij_deuntje():
+                        {play} C4
+                        {play} C5
+                        {play} C6
+
+                    antwoord = {input}('Wat is 2 + 2?')
+                    {if} antwoord == 4:
+                        {print} 'Goed!'
+                        speel_blij_deuntje()
+                    {else}
+                        {print} 'Fout!'
+                    ```
+                answer_code: |
+                    ```
+                    {def} speel_blij_deuntje():
+                        {play} C4
+                        {play} C5
+                        {play} C6
+
+                    {def} speel_sip_deuntje():
+                        {play} C6
+                        {play} C5
+                        {play} C4
+
+                    antwoord = {input}('Wat is 2 + 2?')
+                    {if} antwoord == 4:
+                        {print} 'Goed!'
+                        speel_blij_deuntje()
+                    {else}
+                        {print} 'Fout!'
+                        speel_sip_deuntje()
+                    ```
+    functions_2:
+        name: functies met argumenten
+        levels:
+            15:
+                story_text: |
                     Nu je hebt geleerd om functies te gebruiken, leer je dit level hoe je functies kunt gebruiken met argumenten.
                     Een **argument** is een variabele die in een functie gebruikt wordt. Het wordt daarbuiten niet gebruikt.
 
                     In deze code hebben we bijvoorbeeld het eerste stukje van het liedje 'My Bonnie is over the ocean' geprogrammeerd.
                     In dit voorbeeld hebben we het argument 'plek' gebruikt. Plek is een variabele die alleen in de functie gebruikt wordt, een argument dus.
-                    Om 'plek' te gebruiken hebben we `{with} plek` achter `{define} lied` gezet.
-                    Als de functie aangeroepen wordt vervangt de computer het argument 'plek' met de tekst die na `{call} lied {with}` staat.
+                    Om 'plek' te gebruiken hebben we het argument `plek` achter `{def} lied` gezet.
 
                     ### Opdracht
                     Het volgende couplet gaat zo:
@@ -1026,14 +1073,18 @@ adventures:
                     Kun jij dat programmeren?
                 example_code: |
                     ```
-                    {define} lied {with} plek
-                        {print} 'My Bonnie is over the ' plek
+                    {def} lied(plek):
+                        {print} ('My Bonnie is over the ', plek)
 
-                    {call} lied {with} 'ocean'
-                    {call} lied {with} 'sea'
-                    {call} lied {with} 'ocean'
+                    lied('ocean')
+                    lied('sea')
+                    lied('ocean')
                     ```
-                story_text_2: |
+    functions_3:
+        name: functies met return value
+        levels:
+            15:
+                story_text: |
                     In de vorige levels heb je geleerd om functies met argumenten te maken. Je kunt functies ook goed gebruiken om iets uit te rekenen.
                     Je kunt de functie een som geven en de functie geeft jou dan het antwoord. Dit antwoord noem je de **return value**.
 
@@ -1042,7 +1093,7 @@ adventures:
                     ### Opdracht
                     Maak deze code af. We hebben de nieuwe variabele nieuwe_prijs al voor je gemaakt, maar jij moet hem nog instellen.
                     Maak de regel af door de functie te roepen en de nieuwe prijs te berekenen.
-                example_code_2: |
+                example_code: |
                     ```
                     {define} bereken_nieuwe_prijs {with} bedrag, percentage
                         percentage = percentage / 100
@@ -1054,35 +1105,6 @@ adventures:
 
                     nieuwe_prijs = _ bereken_nieuwe_prijs {with} oude_prijs, _
                     {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
-                    ```
-                story_text_3: |
-                    Laten we functies ook op de Python-manier maken! Om een functie te maken gebruiken we niet langer:
-
-
-                    `{define} naam_functie {with} argument_1, argument_2:`
-
-                    Maar we gebruiken nu:
-
-                    `{def} naam_functie(argument_1, argument_2):`.
-
-
-                    Als je geen argumenten wil gebruiken dan laat je de ruimte tussen de haakjes leeg.
-                    Om een functie op te roepen hoef je geen `{call}` meer te gebruiken, maar typ je gewoon de naam van de functie.
-                example_code_3: |
-                    ```
-                    {def} bereken_score(antwoord, goede_antwoord):
-                        {if} antwoord == goede_antwoord:
-                            score = 1
-                        {elif} antwoord == '?':
-                            score = 0
-                        {else}:
-                            score = -1
-                        {return} score
-
-                    antwoord = {input} ('Waar staat de Eiffeltoren?')
-                    goede_antwoord = 'Parijs'
-                    score = bereken_score(antwoord, goede_antwoord)
-                    {print} ('Je score is... ', score)
                     ```
     guess_my_number:
         name: raad mijn getal
@@ -1864,37 +1886,6 @@ adventures:
                     {call} _
                     ```
             15:
-                story_text: |
-                    Je kunt een functie met een argument gebruiken bij liedjes die steeds bijna hetzelfde zijn, maar een heel klein verschilletje bevatten.
-                    Een voorbeeld van zo'n liedje is het Engelse deuntje 'Yankee Doodle'. De eerste 4 noten van elke regel zijn steeds gelijk, maar het einde verschilt steeds.
-
-                    ### Voorbeeldcode
-                    Kun jij Yanklee Doodle afmaken?
-                    Kun je een ander liedje programmeren op deze manier?
-                example_code: |
-                    ```
-                    {print} 'Yankee Doodle'
-                    {define} _ {with} noot_1, noot_2, noot_3
-                        {play} C4
-                        {play} C4
-                        {play} D4
-                        {play} E4
-                        {play} _
-                        {play} _
-                        {play} _
-
-                    {call} regel_1 {with} 29, 31, 30
-                    {call} regel_1 {with} 29, 28, 0
-                    {call} regel_1 {with} 32, 31, 30
-
-                    {play} C4
-                    {play} B3
-                    {play} G3
-                    {play} A3
-                    {play} B3
-                    {play} C4
-                    {play} C4
-                    ```
                 story_text_2: |
                     Je kunt natuurlijk voor de lol een liedje programmeren, maar de muzieknoten kunnen ook nuttig ingezet worden, zoals bij dit brandalarm!
 
@@ -1932,6 +1923,144 @@ adventures:
                     {while} ja_of_nee = 'ja'
                         {call} lied
                         {print} '🥳'
+                    ```
+    music_2:
+        name: muziek 2
+        default_save_name: muziek 2
+        description: muziek 2
+        levels:
+            15:
+                story_text: |
+                    ### Opdracht
+                    Maak een karaokeversie van 'Wat gaan we doen met de dronken zeeman?'
+                    Je kunt de juiste muzieknoten online opzoeken of kijk of het je lukt om ze zelf te ontdekken!
+                example_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                    _
+
+                    {print} ('De dronken zeeman')
+                    {print} ('Wat zullen we doen met de dronken zeeman?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('s Morgens in de vroegte')
+                    ```
+                answer_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} B
+                        {play} C5
+                        {play} D5
+
+                    {def} line_4():
+                        {play} C5
+                        {play} A
+                        {play} G
+                        {play} E
+                        {play} D
+                        {play} D
+
+                    {print} ('De dronken zeeman')
+                    {print} ('Wat zullen we doen met de dronken zeeman?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('s Morgens in de vroegte')
+                    line_4()
+                    ```
+    music_3:
+        name: muziek 3
+        default_save_name: muziek 3
+        description: muziek 3
+        levels:
+            15:
+                story_text: |
+                    Je kunt een functie met een argument gebruiken bij liedjes die steeds bijna hetzelfde zijn, maar een heel klein verschilletje bevatten.
+                    Een voorbeeld van zo'n liedje is het Engelse deuntje 'Yankee Doodle'. De eerste 4 noten van elke regel zijn steeds gelijk, maar het einde verschilt steeds.
+
+                    ### Voorbeeldcode
+                    Kun jij Yanklee Doodle afmaken?
+                    Kun je een ander liedje programmeren op deze manier?
+                example_code: |
+                    ```
+                    {print} 'Yankee Doodle'
+                    {def} _ (noot_1, noot_2, noot_3):
+                        {play} C4
+                        {play} C4
+                        {play} D4
+                        {play} E4
+                        {play} noot_1
+                        {play} _
+                        {play} _
+
+                    deuntje(29, 31, 30)
+                    deuntje(29, 28, 1)
+                    deuntje(32, 31, 30)
+
+                    {play} C4
+                    {play} B3
+                    {play} G3
+                    {play} A3
+                    {play} B3
+                    {play} C4
+                    {play} C4
+                    ```
+                answer_code: |
+                    ```
+                    ```
+                    {print} 'Yankee Doodle'
+                    {def} deuntje(noot_1, noot_2, noot_3):
+                        {play} C4
+                        {play} C4
+                        {play} D4
+                        {play} E4
+                        {play} noot_1
+                        {play} noot_2
+                        {play} noot_3
+
+                    deuntje(29, 31, 30)
+                    deuntje(29, 28, 1)
+                    deuntje(32, 31, 30)
+
+                    {play} C4
+                    {play} B3
+                    {play} G3
+                    {play} A3
+                    {play} B3
+                    {play} C4
+                    {play} C4
+                    ```
                     ```
     parrot:
         name: papegaai
@@ -3308,6 +3437,40 @@ adventures:
                     <div class="w-full flex flex-row gap-2">
                      <img src="https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2" width="200">
                     </div>
+                example_code: |
+                    ```
+                    {def} bereken_graden(hoeveel_kanten)
+                        graden = 360 / _
+                        _ graden
+
+                    {def} teken_figuur(graden, hoeveel_kanten)
+                        {for} i {in} {range} _
+                            {forward} 70
+                            {turn} _
+
+                    hoeveel_kanten = {input}('Hoeveel kanten moet het figuur krijgen?')
+                    graden = bereken_graden(hoeveel_kanten)
+
+                    _
+                    _
+                    ```
+                answer_code: |
+                    ```
+                    {def} bereken_graden(hoeveel_kanten)
+                        graden = 360 / hoeveel_kanten
+                        {return} graden
+
+                    {def} teken_figuur(graden, hoeveel_kanten)
+                        {for} i {in} {range} (1, hoeveel_kanten)
+                            {forward} 70
+                            {turn} graden
+
+                    hoeveel_kanten = {input}('Hoeveel kanten moet het figuur krijgen?')
+                    graden = bereken_graden(hoeveel_kanten)
+
+                    bereken_graden(hoeveel_kanten)
+                    teken_figuur(graden, hoeveel_kanten)
+                    ```
             16:
                 story_text: |
                     ### Opdracht
