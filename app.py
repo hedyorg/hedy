@@ -1478,7 +1478,7 @@ def view_program_redesing(user, id):
         "raw": True,
         "show_edit_button": True if prog_perms.can_edit else False,
         "program_timestamp": utils.localized_date_format(result["date"]),
-    }    
+    }
     classes = g_db().get_student_classes_ids(result["username"])
     next_classmate_adventure_id = None
     next_submitted_classmate_program_id = None
