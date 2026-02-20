@@ -1370,7 +1370,7 @@ def index(level, program_id):
         ))
 
 
-@app.route('/hedy/<id>/view/redesign', methods=['GET'])
+@app.route("/hedy/<id>/view/redesign", methods=["GET"])
 @requires_login
 # TODO: rename to view_program once the old view_program is removed
 def view_program_redesing(user, id):
@@ -1378,14 +1378,15 @@ def view_program_redesing(user, id):
 
     prog_perms = get_current_user_program_permissions(result)
     if not result or not prog_perms:
-        return utils.error_page(error=404, ui_message=gettext('no_such_program'))
+        return utils.error_page(error=404, ui_message=gettext("no_such_program"))
 
     # The program is valid, verify if the creator also have a public profile
-    result['public_profile'] = True if g_db().get_public_profile_settings(
-        result['username']) else None
+    result["public_profile"] = (
+        True if g_db().get_public_profile_settings(result["username"]) else None
+    )
 
-    code = result['code']
-    level = int(result.get('level', 1))
+    code = result["code"]
+    level = int(result.get("level", 1))
 
     keyword_lang = g.keyword_lang
     adventure_info = ADVENTURES[g.lang].get_adventures_subset(
@@ -1396,7 +1397,9 @@ def view_program_redesing(user, id):
         extra_stories = (
             adventure_content.get("levels", {}).get(level, {}).get("extra_stories", [])
         )
-        solutions = adventure_content.get("levels", {}).get(level, {}).get("solutions", [])
+        solutions = (
+            adventure_content.get("levels", {}).get(level, {}).get("solutions", [])
+        )
         adventure = Adventure(
             short_name=result["adventure_name"],
             name=adventure_content["name"],
@@ -1408,20 +1411,19 @@ def view_program_redesing(user, id):
             save_name=adventure_content["name"],
             solutions=solutions,
         )
-    elif not adventure_info and prog_perms.can_checkoff:
+    elif not adventure_info:
         teacher_adventures = g_db().batch_get_adventures([result["adventure_name"]])
         db_teacher_adventure = teacher_adventures.get(result["adventure_name"])
-        adventure = (
-            Adventure.from_teacher_adventure_database_row(db_teacher_adventure)
-            if db_teacher_adventure
-            else None
-        )
+        if db_teacher_adventure and (
+            db_teacher_adventure.get("public") == 1 or prog_perms.can_edit
+        ):
+            adventure = (
+                Adventure.from_teacher_adventure_database_row(db_teacher_adventure)
+                if db_teacher_adventure
+                else None
+            )
     else:
         adventure = None
-
-    logger.info('*'*100)
-    logger.info(adventure)
-    logger.info('*'*100)
 
     # Try to translate the program from the language of the program to the language of the viewer
     #
@@ -1439,75 +1441,81 @@ def view_program_redesing(user, id):
     #   that matters.
     source_language = result.get("lang")
     target_language = g.keyword_lang
-    if source_language != target_language and source_language in ALL_KEYWORD_LANGUAGES.keys():
+    if (
+        source_language != target_language
+        and source_language in ALL_KEYWORD_LANGUAGES.keys()
+    ):
         try:
             code = hedy_translation.translate_keywords(
-                code, from_lang=source_language, to_lang=target_language, level=level)
+                code, from_lang=source_language, to_lang=target_language, level=level
+            )
         except Exception as e:
             # Not really a good place to leave this error, but at least we don't
             # want it crashing the page load. Log it as a warning then.
-            logger.warning(f"Error translating program {id} from {source_language} to {target_language}: {e}")
+            logger.warning(
+                f"Error translating program {id} from {source_language} to {target_language}: {e}"
+            )
 
-    result['code'] = code
-    student_adventure_id = f"{result['username']}-{result['adventure_name']}-{result['level']}"
+    result["code"] = code
+    student_adventure_id = (
+        f"{result['username']}-{result['adventure_name']}-{result['level']}"
+    )
     student_adventure = g_db().student_adventure_by_id(student_adventure_id)
     if not student_adventure:
         # store the adventure in case it's not in the table
         student_adventure = g_db().store_student_adventure(
-            dict(id=f"{student_adventure_id}", ticked=False, program_id=id))
+            dict(id=f"{student_adventure_id}", ticked=False, program_id=id)
+        )
 
     arguments_dict = {
-        'program_id': id,
-        'page_title': f'{result["name"]} – {result["username"]} - Hedy',
-        'level': result['level'],  # Necessary for running
-        'initial_adventure': dict(result, editor_contents=code),
-        'editor_readonly': True,
-        'student_adventure': student_adventure,
-        'is_students_teacher': False,
-        'raw': True
-    }
-
-    if "submitted" in result and result['submitted']:
-        arguments_dict['show_edit_button'] = False
-        arguments_dict['program_timestamp'] = utils.localized_date_format(result['date'])
-    else:
-        arguments_dict['show_edit_button'] = True
-
-    classes = g_db().get_student_classes_ids(result['username'])
+        "program_id": id,
+        "page_title": f'{result["name"]} – {result["username"]} - Hedy',
+        "level": result["level"],  # Necessary for running
+        "program": dict(result, editor_contents=code),
+        "editor_readonly": True,
+        "student_adventure": student_adventure,
+        "is_students_teacher": False,
+        "raw": True,
+        "show_edit_button": True if prog_perms.can_edit else False,
+        "program_timestamp": utils.localized_date_format(result["date"]),
+    }    
+    classes = g_db().get_student_classes_ids(result["username"])
     next_classmate_adventure_id = None
     next_submitted_classmate_program_id = None
     if classes:
         class_id = classes[0]
         class_ = g_db().get_class(class_id) or {}
-        students = sorted(class_.get('students', []))
+        students = sorted(class_.get("students", []))
         # Iterate over all other students starting from the next one, wrapping to the start.
         if students:
             try:
-                start_index = students.index(result['username'])
+                start_index = students.index(result["username"])
             except ValueError:
                 start_index = -1
             num_students = len(students)
             for offset in range(1, num_students):
                 student = students[(start_index + offset) % num_students]
-                if student == result['username']:
+                if student == result["username"]:
                     continue
                 id = f"{student}-{result['adventure_name']}-{result['level']}"
                 next_classmate_adventure = g_db().student_adventure_by_id(id) or {}
-                candidate_program_id = next_classmate_adventure.get('program_id')
+                candidate_program_id = next_classmate_adventure.get("program_id")
                 if candidate_program_id and next_classmate_adventure_id is None:
                     next_classmate_adventure_id = candidate_program_id
                 if candidate_program_id and not next_submitted_classmate_program_id:
                     program_row = g_db().program_by_id(candidate_program_id)
-                    if program_row and program_row.get('submitted'):
+                    if program_row and program_row.get("submitted"):
                         next_submitted_classmate_program_id = candidate_program_id
                 if next_classmate_adventure_id and next_submitted_classmate_program_id:
                     break
 
-    student_customizations = g_db().get_student_class_customizations(result['username'])
+    student_customizations = g_db().get_student_class_customizations(result["username"])
     adventure_index = 0
-    adventures_for_this_level = student_customizations.get('sorted_adventures', {}).get(str(result['level']), [])
+    adventures_for_this_level = student_customizations.get("sorted_adventures", {}).get(
+        str(result["level"]), []
+    )
     for index, adventure_content in enumerate(adventures_for_this_level):
-        if adventure_content['name'] == result['adventure_name']:
+        if adventure_content["name"] == result["adventure_name"]:
             adventure_index = index
             break
 
@@ -1517,30 +1525,34 @@ def view_program_redesing(user, id):
     num_adventures = len(adventures_for_this_level)
     if num_adventures > 0:
         for offset in range(1, num_adventures):
-            next_adventure = adventures_for_this_level[(adventure_index + offset) % num_adventures]
-            next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
-            next_student_adventure = g_db().student_adventure_by_id(next_adventure_id) or {}
-            candidate_program_id = next_student_adventure.get('program_id')
+            next_adventure = adventures_for_this_level[
+                (adventure_index + offset) % num_adventures
+            ]
+            next_adventure_id = (
+                f"{result['username']}-{next_adventure['name']}-{result['level']}"
+            )
+            next_student_adventure = (
+                g_db().student_adventure_by_id(next_adventure_id) or {}
+            )
+            candidate_program_id = next_student_adventure.get("program_id")
             if candidate_program_id and next_program_id is None:
                 next_program_id = candidate_program_id
             if candidate_program_id and not next_submitted_program_id:
                 program_row = g_db().program_by_id(candidate_program_id)
-                if program_row and program_row.get('submitted'):
+                if program_row and program_row.get("submitted"):
                     next_submitted_program_id = candidate_program_id
             if next_program_id and next_submitted_program_id:
                 break
 
-    arguments_dict['can_checkoff_program'] = prog_perms.can_checkoff
-    arguments_dict['can_unsubmit_program'] = prog_perms.can_unsubmit
-    logger.info('*'*100)
-    logger.info(next_submitted_program_id)
-    logger.info('*'*100)
+    arguments_dict["can_checkoff_program"] = prog_perms.can_checkoff
+    arguments_dict["can_unsubmit_program"] = prog_perms.can_unsubmit
+
     return render_template(
         "hedy-page/view-program/view-program-page.html",
         blur_button_available=True,
         javascript_page_options=dict(
             page="view-program", lang=g.lang, level=int(result["level"]), code=code
-        ),        
+        ),
         class_id=student_customizations.get("id"),
         next_program_id=next_program_id,
         next_submitted_program_id=next_submitted_program_id,
@@ -1549,6 +1561,7 @@ def view_program_redesing(user, id):
         adventure=adventure,
         **arguments_dict,
     )
+
 
 @app.route('/hedy/<id>/view', methods=['GET'])
 @requires_login

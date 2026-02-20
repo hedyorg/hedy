@@ -3,22 +3,24 @@
 <div tabindex="0" class="flex-grow px-8 common-page-container" data-level="{{level}}"
     data-kwlang="{{ current_language().lang }}">
     <div class="flex flex-row gap-6 items-center">
-        <h1> {{ _('level') }} {{level}} — {{initial_adventure.name}}</h1>
+        <h1> {{ _('level') }} {{level}} — {{program.name}}</h1>
     </div>
     <div class="flex flex-row items-start gap-6 w-full">
-        <div class="grid grid-cols-2 justify-start items-start">
-            {% if initial_adventure.submitted %}
+        <div class="grid grid-cols-2 justify-start items-start">            
             <span class="text-sm">{{ _('written_by') }}</span>
-            <span class="font-bold">{{ initial_adventure.username }}</span>
-            {% endif %}
+            <span class="font-bold">{{ program.username }}</span>
             <span class="text-sm">{{ _('last_changed') }}</span>
             <span id="submitted-program-details" class="p-0 m-0 font-bold">{{ program_timestamp }}</span>
         </div>
         <div class="flex-1"></div>
+        {% if submitted in program and program.submitted %}
         <div class="mt-1">
             <span class="text-sm py-1 px-3 border rounded no-underline">{{_('submitted_header')}}</span>
         </div>
+        {% endif %}
     </div>
+
+    {% if adventure %}
 
     <div class="cursor-pointer mt-4 w-fit" _="on     click toggle .hidden on #adventure then
             toggle .rotate-180 on #icon">
@@ -107,19 +109,20 @@
         </div>
     </div>
     
+    {% endif %}
     {% include "hedy-page/editor-and-output.html" %}
 
-    {% if can_checkoff_program %}
+    {% if can_checkoff_program and submitted in program and program.submitted %}
     <div class="w-full flex items-center flex-row gap-3 mt-4">
         <div class="flex flex-row w-1/2 gap-4"> 
             <button class="green-btn-new "
-                onclick="hedyApp.unsubmit_program('{{initial_adventure.id}}', '{{_('unsubmit_warning')}}')"> <i class="fa-solid fa-arrow-rotate-right"></i> {{
+                onclick="hedyApp.unsubmit_program('{{program.id}}', '{{_('unsubmit_warning')}}')"> <i class="fa-solid fa-arrow-rotate-right"></i> {{
                 _('allow_resubmit') }}
             </button>
             <button
                 id="adventure_checkbox"
                 class="btn-shape-new relative font-semibold overflow-hidden transition-all duration-300 border-2 border-green-500 {% if student_adventure.ticked %}bg-green-500 text-white{% else %}bg-white text-green-600 hover:bg-green-50{% endif %}"
-                hx-post="/for-teachers/check_adventure?level={{ level }}&student_name={{ initial_adventure.username }}&adventure_name={{ initial_adventure.adventure_name }}&program_id={{ program_id }}"
+                hx-post="/for-teachers/check_adventure?level={{ level }}&student_name={{ program.username }}&adventure_name={{ program.adventure_name }}&program_id={{ program_id }}"
                 hx-swap="none"
                 hx-disabled-elt="this"
                 _="on click 
