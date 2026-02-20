@@ -1056,3 +1056,22 @@ div[class^="ace_incorrect_hedy_code"] {
             transform: translateX(100%);
           }
     }
+
+
+.student_adventure_checkbox{
+  -webkit-appearance:none; appearance:none;
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:2px; border:2px solid #cbd5e1; background:#ffffff;
+  width:22px !important; height:22px !important; cursor:pointer; transition:transform .16s ease, box-shadow .16s ease, background-color .22s ease, border-color .22s ease;
+  position:relative; padding:0 !important; box-sizing:border-box; font-size:0; line-height:0;
+}
+.student_adventure_checkbox:hover{ transform:translateY(-1.5px); box-shadow:0 8px 18px rgba(16,24,40,0.07); }
+.student_adventure_checkbox::after{
+  content: '';
+  width:10px; height:5px; display:block; border-left:2.5px solid transparent; border-bottom:2.5px solid transparent;
+  position:absolute; top:50%; left:50%;
+  transform: translate(-50%,-50%) scale(0) rotate(-45deg);
+  transform-origin: center; transition: transform .18s cubic-bezier(.2,.8,.2,1), border-color .16s ease;
+}
+.student_adventure_checkbox:checked{ background:#bbf7d0; border-color:#34d399; transform: scale(0.995); }
+.student_adventure_checkbox:checked::after{ border-left-color:#065f46; border-bottom-color:#065f46; transform: translate(-50%,-50%) scale(1) rotate(-45deg); }
