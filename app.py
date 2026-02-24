@@ -1392,6 +1392,7 @@ def view_program_redesing(user, id):
     adventure_info = ADVENTURES[g.lang].get_adventures_subset(
         subset=[result["adventure_name"]], keyword_lang=keyword_lang
     )
+    adventure = None
     if adventure_info:
         adventure_content = adventure_info[result["adventure_name"]]
         extra_stories = (
@@ -1421,9 +1422,7 @@ def view_program_redesing(user, id):
                 Adventure.from_teacher_adventure_database_row(db_teacher_adventure)
                 if db_teacher_adventure
                 else None
-            )
-    else:
-        adventure = None
+            )    
 
     # Try to translate the program from the language of the program to the language of the viewer
     #
