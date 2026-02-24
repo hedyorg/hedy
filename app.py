@@ -1479,7 +1479,6 @@ def view_program_redesing(user, id):
         "program_timestamp": utils.localized_date_format(result["date"]),
     }
     classes = g_db().get_student_classes_ids(result["username"])
-    next_classmate_adventure_id = None
     next_submitted_classmate_program_id = None
     if classes:
         class_id = classes[0]
@@ -1498,14 +1497,12 @@ def view_program_redesing(user, id):
                     continue
                 id = f"{student}-{result['adventure_name']}-{result['level']}"
                 next_classmate_adventure = g_db().student_adventure_by_id(id) or {}
-                candidate_program_id = next_classmate_adventure.get("program_id")
-                if candidate_program_id and next_classmate_adventure_id is None:
-                    next_classmate_adventure_id = candidate_program_id
+                candidate_program_id = next_classmate_adventure.get("program_id")                
                 if candidate_program_id and not next_submitted_classmate_program_id:
                     program_row = g_db().program_by_id(candidate_program_id)
                     if program_row and program_row.get("submitted"):
                         next_submitted_classmate_program_id = candidate_program_id
-                if next_classmate_adventure_id and next_submitted_classmate_program_id:
+                if next_submitted_classmate_program_id:
                     break
 
     student_customizations = g_db().get_student_class_customizations(result["username"])
@@ -1518,7 +1515,6 @@ def view_program_redesing(user, id):
             adventure_index = index
             break
 
-    next_program_id = None
     next_submitted_program_id = None
     # Iterate over the rest of the adventures, wrapping to the start, excluding the current one.
     num_adventures = len(adventures_for_this_level)
@@ -1534,13 +1530,11 @@ def view_program_redesing(user, id):
                 g_db().student_adventure_by_id(next_adventure_id) or {}
             )
             candidate_program_id = next_student_adventure.get("program_id")
-            if candidate_program_id and next_program_id is None:
-                next_program_id = candidate_program_id
             if candidate_program_id and not next_submitted_program_id:
                 program_row = g_db().program_by_id(candidate_program_id)
                 if program_row and program_row.get("submitted"):
                     next_submitted_program_id = candidate_program_id
-            if next_program_id and next_submitted_program_id:
+            if next_submitted_program_id:
                 break
 
     arguments_dict["can_checkoff_program"] = prog_perms.can_checkoff
@@ -1553,9 +1547,7 @@ def view_program_redesing(user, id):
             page="view-program", lang=g.lang, level=int(result["level"]), code=code
         ),
         class_id=student_customizations.get("id"),
-        next_program_id=next_program_id,
         next_submitted_program_id=next_submitted_program_id,
-        next_classmate_program_id=next_classmate_adventure_id,
         next_submitted_classmate_program_id=next_submitted_classmate_program_id,
         adventure=adventure,
         **arguments_dict,
