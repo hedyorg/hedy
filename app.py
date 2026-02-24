@@ -1497,7 +1497,7 @@ def view_program_redesing(user, id):
                     continue
                 id = f"{student}-{result['adventure_name']}-{result['level']}"
                 next_classmate_adventure = g_db().student_adventure_by_id(id) or {}
-                candidate_program_id = next_classmate_adventure.get("program_id")
+                candidate_program_id = next_classmate_adventure.get("program_id")                
                 if candidate_program_id and not next_submitted_classmate_program_id:
                     program_row = g_db().program_by_id(candidate_program_id)
                     if program_row and program_row.get("submitted"):
