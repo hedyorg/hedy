@@ -712,6 +712,7 @@ class Database:
         # if requested, add the classes in which the user is a second teacher
         if add_classes_as_second_teacher:
             user = self.user_by_username(username)
+            user = user if user else {}
             second_teacher_classes = [self.classes.get({"id": cls}) for cls in user.get("second_teacher_in", [])]
             classes.extend([cls for cls in second_teacher_classes if cls])
 
