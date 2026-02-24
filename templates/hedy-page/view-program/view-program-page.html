@@ -13,7 +13,7 @@
             <span id="submitted-program-details" class="p-0 m-0 font-bold">{{ program_timestamp }}</span>
         </div>
         <div class="flex-1"></div>
-        {% if submitted in program and program.submitted %}
+        {% if 'submitted' in program and program.submitted %}
         <div class="mt-1">
             <span class="text-sm py-1 px-3 border rounded no-underline">{{_('submitted_header')}}</span>
         </div>
@@ -112,7 +112,7 @@
     {% endif %}
     {% include "hedy-page/editor-and-output.html" %}
 
-    {% if can_checkoff_program and submitted in program and program.submitted %}
+    {% if can_checkoff_program and 'submitted' in program and program.submitted %}
     <div class="w-full flex items-center flex-row gap-3 mt-4">
         <div class="flex flex-row w-1/2 gap-4"> 
             <button class="green-btn-new "
