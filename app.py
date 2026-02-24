@@ -1422,7 +1422,7 @@ def view_program_redesing(user, id):
                 Adventure.from_teacher_adventure_database_row(db_teacher_adventure)
                 if db_teacher_adventure
                 else None
-            )
+            )    
 
     # Try to translate the program from the language of the program to the language of the viewer
     #
