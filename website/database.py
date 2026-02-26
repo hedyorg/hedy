@@ -633,7 +633,9 @@ class Database:
         self.programs.del_many({"username": username})
 
         # Remove user from classes of which they are a student
-        classes = self.users.get({"username": username}).get("classes") or []
+        user = self.user_by_username(username)
+        user = user if user else {}
+        classes = user.get("classes") or []
         for class_id in classes:
             self.remove_student_from_class(class_id, username)
 
@@ -712,6 +714,7 @@ class Database:
         # if requested, add the classes in which the user is a second teacher
         if add_classes_as_second_teacher:
             user = self.user_by_username(username)
+            user = user if user else {}
             second_teacher_classes = [self.classes.get({"id": cls}) for cls in user.get("second_teacher_in", [])]
             classes.extend([cls for cls in second_teacher_classes if cls])
 
