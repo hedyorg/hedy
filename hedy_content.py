@@ -260,6 +260,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'print_command',
         'ask_command',
         'if_command',
+        'is_command',
         'operators',
         'for_command',
         'story',

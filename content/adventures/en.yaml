@@ -2314,14 +2314,10 @@ adventures:
                     ```
             13:
                 story_text: |
-                    Before you have used with the different commands `{if}`, `{else}` and `{elif}`. After `{if}` and `{elif}` you put a condition. It will only run the code beneath it if the statement is true. 
-                    `{else}` is for when those conditions are all not true.  
-                    From this level you will have to put a colon behind the line with `{if}`, `{else}` or `{elif}`. And do not forget to put an indentation on the next line!
-                
-                story_text_: |
                     In the `{if}` statement you need to put a condition. The way we write this condition also changes a bit in this level. From this level on we will use symbols instead of words
                     Before we just used `{is}` to compare two things. Now, you can use two equal signs: `==`. This is what most programming languages do as well.
-                example_code_: |
+                    We also need a colon at the end of the if statement now.
+                example_code: |
                     ```
                     favorite_color = {input}('What is you favorite_color')
                     {if} favorite_color == green:
@@ -2332,33 +2328,6 @@ adventures:
                         {print} ('Meh, I don't agree')
                     
                     ```
-                
-                story_text_2: |
-                    But we have seen more conditions. Before we used `{greater} {than}` and `{less} {than}`, but most programming languages use symbols for this.
-                    From mathematics, you might already know the symbols the `<` and `>`.
-                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
-                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
-                    Try it!
-                example_code_2: |
-                    ```
-                    age = {input}('How old are you?')
-                    {if} age > 12:
-                        {print}('You are older than I am!')
-                    ```
-                    ```
-                    age = {input}('How old are you?')
-                    {if} age < 12:
-                        {print}('You are younger than me!')
-                    {else}:
-                        {print}('You are older than me!')
-                    ```
-                                
-                    ```
-                    name = {input}('What is your name?')
-                    {if} name __ 'Hedy':
-                        {print}('You are cool!')
-                    {else}_
-                        {print} ('Nice to meet you!')
     in_command:
         name: '{in}'
         default_save_name: in_command
@@ -2422,6 +2391,32 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
+            13:
+                story_text: |
+                    From mathematics, you might already know the symbols the `<` and `>`.
+                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
+                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
+                    Try it!
+                example_code: |
+                    ```
+                    age = {input}('How old are you?')
+                    {if} age > 12:
+                        {print}('You are older than I am!')
+                    ```
+                    ```
+                    age = {input}('How old are you?')
+                    {if} age < 12:
+                        {print}('You are younger than me!')
+                    {else}:
+                        {print}('You are older than me!')
+                    ```
+
+                    ```
+                    name = {input}('What is your name?')
+                    {if} name __ 'Hedy':
+                        {print}('You are cool!')
+                    {else}_
+                        {print} ('Nice to meet you!')
     language:
         name: language
         default_save_name: Language
@@ -2963,6 +2958,8 @@ adventures:
                     ```
     operators:
         name: operators
+        default_save_name: operators
+        description: operators
         levels:
             13:
                 story_text: |
