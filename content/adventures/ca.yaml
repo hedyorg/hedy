@@ -1485,22 +1485,6 @@ adventures:
         name: canta una cançó! 2
         default_save_name: Cançó 2
         description: Canta una cançó 2
-    pressit:
-        levels:
-            6:
-                example_code_2: "```\n{if} x {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
-                example_code: "```\n{print} \"Vols un final feliç (f) o un de trist (t)?\"\n{if} f {is} {pressed} {print} \"Van viure feliços sempre més ❤\"\n{else} {print} \"Un hipopòtam es va menjar el princep 😭\"\n```\n"
-                story_text: "En aquest nivell hi ha una nova paraula clau: `{pressed}`!\nAmb `{pressed}` pots utilitzar les tecles del teu teclat per controlar quines línies s'usen.\n\n### Exercici\nMira l'exemple i afegeix una línia de codi més que reaccioni a una tecla pressionada.\n"
-                story_text_2: "També pots vincular comandes de tortuga a les tecles.\n\n### Exercici\nCopia les línies unes quantes vegades perquè puguis crear un dibuix més gran.\n"
-            8:
-                story_text: "Ara que has après sobre `{repeat}`, podem prémer les tecles múltiples vegades.\nPots utilitzar-lo per fer que la tortuga camini cap endavant i giri.\n\n### Exercici\nEl codi que has vist al nivell 5 només comprova la tecla una vegada. Copia el codi d'exemple i afegeix un `{repeat}` perquè puguis prémer les tecles moltes vegades.\nUsa aquest codi per dibuixar-hi alguna cosa bonica.\n"
-                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
-            10:
-                story_text: "Ara que saps com combinar instruccions, pots crear una eina de mecanografia tàctil amb `{pressed}`.\n\n### Exercici\nAcaba el codi. Cada vegada s'ha de triar una lletra aleatòria, que hauràs de prémer. Obteniu un punt per cada pressió correcta i dos punts de deducció per una pressió incorrecta.\n**Extra** Neteja la pantalla després de cada lletra i mostra a l'usuari quants punts ha aconseguit.\n"
-                example_code: "```\npunts = 0\nlletres = a, b, c, d, e\n{repeat} 10 {times}\n    lletra = _ _ _\n    {print} \"Prem la lletra \" lletra\n    {if} lletra {is} {pressed}\n    _\n    _\n    _\n```\n"
-        description: Prova de vincular una tecla amb una comanda!
-        name: '{pressed}'
-        default_save_name: Premut
     piggybank:
         default_save_name: Guardiola
         name: guardiola

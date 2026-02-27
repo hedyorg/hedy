@@ -1568,58 +1568,6 @@ adventures:
             15:
                 story_text: "### Ejercicio\n¡En este nivel puedes dejar que Hedy te diga si has ahorrado suficiente dinero!\n¡Completa el código rellenando los huecos en blanco!\n"
                 example_code: "```\n_ calcular_presupuesto {with} deseo, dinero, asignación\n    para_ahorrar = deseo - dinero\n    semanas = para_ahorrar / asignación\n    {if} deseo _ dinero\n        {print} '¡Tienes que ahorrar un poco más!'\n        {print} 'Necesitarás ' semanas ' semanas más.'\n    {else}\n        {print} '¡Genial! Tienes suficiente'\n        {print} '¡Vayamos de compras!'\n\ndinero = {ask} '¿Cuánto dinero has ahorrado?'\ndeseo = {ask} '¿Cuánto dinero necesitas?'\nasignación = {ask} '¿Cuánto dinero ahorras cada semana?'\n\n{call} _\n```\n"
-    pressit:
-        name: pulsaciones de teclas
-        default_save_name: Presionado
-        description: ¡Intenta vincular una tecla del teclado a un comando!
-        levels:
-            6:
-                story_text: |
-                    ¡En este nivel hay otra nueva palabra clave: `{pressed}`!
-                    Con `{pressed}` puedes usar las teclas de tu teclado para controlar qué líneas se usarán.
-
-                    ### Desafío
-                    Mira el ejemplo y agrega una línea más de código que reaccione al presionar una tecla.
-                example_code: |
-                    ```
-                    {print} '¿Quieres un final bueno (g) o malo (b)?'
-                    {if} g {is} {pressed} {print} 'Vivieron felices para siempre ❤'
-                    {else} {print} 'El príncipe fue comido por un hipopótamo 😭'
-                    ```
-                story_text_2: |
-                    También puedes enlazar los comandos de la tortuga a teclas del teclado.
-
-                    ### Desafío
-                    Copia las líneas varias veces para que así puedas hacer un dibujo más grande.
-                example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
-            8:
-                story_text: |
-                    Ahora que ya has aprendido acerca de `{repeat}`, podemos presionar las teclas múltiples veces.
-                    Puedes usarlo para hacer que la tortuga camine hacia adelante y gire.
-
-                    ### Ejercicio
-                    El código que viste en el nivel 5 solamente comprueba la tecla una sola vez. Copia el código de ejemplo y agrégale un `{repeat}`, así podrás presionar la tecla múltiples veces.
-                    Usa este código para dibujar algo bonito.
-                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
-            10:
-                story_text: |
-                    Ahora que sabes como combinar sentencias, puedes crear una herramienta de mecanografía con `{pressed}`
-
-                    ### Ejercicio
-                    Completa el código. Cada vez se elegirá una letra al azar, que deberás pulsar. Obtienes un punto cuando presionas la tecla correcta, y una deducción de dos puntos cuando presionas una tecla equivocada.
-                    **Extra** Limpia la pantalla tras cada letra, y muestra al usuario cuántos puntos han obtenido.
-                example_code: |
-                    ```
-                    puntos = 0
-                    letras = a, b, c, d, e
-                    {repeat} 10 {times}
-                        letra = _ _ _
-                        {print} 'Presiona la letra ' letra
-                        {if} letra {is} {pressed}
-                        _
-                        _
-                        _
-                    ```
     print_command:
         default_save_name: imprimir
         description: Introducción al comando imprimir

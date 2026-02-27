@@ -1257,56 +1257,6 @@ adventures:
 
                     {call} calculate_budget with _, _, _
                     ```
-    pressit:
-        name: Knapptryckningar
-        default_save_name: Tryckt
-        description: Prova att koppla en tangent till ett kommando!
-        levels:
-            6:
-                story_text: |
-                    På den här nivån finns ytterligare ett nytt nyckelord: `{pressed}`!
-                    Med `{pressed}` kan du använda tangenterna på ditt tangentbord för att styra vilka rader som används.
-
-                    ### Övning
-                    Titta på exemplet och lägg till ytterligare en kodrad som reagerar på en tangenttryckning.
-                example_code: |
-                    ```
-                    {print} 'Vill du ha ett lyckligt (l) eller olyckligt (o) slut?'
-                    {if} l {is} {pressed} {print} 'De levde lyckliga i alla sina dagar ❤'
-                    {else} {print} 'Prinsen blev uppäten av en flodhäst 😭'
-                    ```
-                story_text_2: |
-                    Du kan också koppla sköldpaddskommandon till knappar.
-
-                    ### Övning
-                    Kopiera raderna några gånger så att du kan skapa en större ritning.
-            8:
-                story_text: |
-                    Nu när du har lärt dig om `{repeat}`, kan vi trycka på tangenterna flera gånger.
-                    Du kan använda det för att få sköldpaddan att gå framåt och vända sig.
-
-                    ### Övning
-                    Koden som du har sett på nivå 5 kontrollerar bara tangenten en gång. Kopiera exempelkoden och lägg till en `{repeat}` till den, så att du kan trycka på tangenterna många gånger.
-                    Använd denna kod för att rita något snyggt.
-            10:
-                story_text: |
-                    Nu när du vet hur man kombinerar påståenden kan du skapa ett verktyg för att skriva på tangentbord med `{pressed}`-kommandot.
-
-                    ### Övning
-                    Gör klart koden. Varje gång ska en slumpmässig bokstav väljas, som du måste trycka på. Du får en poäng för en korrekt tryckning och två poängs avdrag för en felaktig tryckning.
-                    **Extrauppgift** Rensa skärmen efter varje bokstav, och visa användaren hur många poäng de har fått.
-                example_code: |
-                    ```
-                    poäng = 0
-                    bokstäver = a, b, c, d, e
-                    {repeat} 10 {times}
-                        bokstav = _ _ _
-                        {print} 'Tryck på bokstaven ' bokstav
-                        {if} bokstav {is} {pressed}
-                        _
-                        _
-                        _
-                    ```
     print_command:
         default_save_name: skriv
         description: Introduktion till kommandot print

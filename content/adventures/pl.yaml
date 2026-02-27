@@ -1647,47 +1647,6 @@ adventures:
                     ```
             7:
                 story_text: "W tej przygodzie nauczysz się jak zrobić cyfrową skarbonkę.\n\n### Ćwiczenie\nDokończ kod obliczający ile masz pieniędzy i ile musisz oszczędzać, żeby kupić to co chcesz!\n**Dodatkowo** Może już masz odłożone jakieś pieniądze? Odejmij tę kwotę od kwoty, którą musisz oszczędzić.\n"
-    pressit:
-        name: '{pressed}'
-        default_save_name: Naciśnij
-        description: Spróbuj przypisać klawisz do konkretnego polecenia!
-        levels:
-            6:
-                story_text: |
-                    Na tym poziomie pojawia się kolejne nowe polecenie: `{pressed}`!
-                    Dzięki poleceniu `{pressed}` możesz użyć przycisków na swojej klawiaturze by kontrolować które linie zostaną użyte.
-
-                    ### Ćwiczenie
-                    Spójrz na przykładowy kod i dodaj jeszcze jedną linię , która reaguje na naciśnięcie przycisku.
-                example_code: |
-                    ```
-                    {print} 'Wolisz dobre (d) czy złe (z) zakończenie?'
-                    {if} d {is} {pressed} {print} 'I żyli długo i szczęśliwie ❤'
-                    {else} {print} 'Książę został zjedzony przez hipopotama 😭'
-                    ```
-                story_text_2: |
-                    Możesz również przypisać polecenia żółwia do klawiszy.
-
-                    ### Ćwiczenie
-                    Skopiuj linie kilka razy by móc stworzyć większy rysunek.
-                example_code_2: "```\n{if} y {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
-            8:
-                story_text: |
-                    Teraz, gdy dowiedziałeś się o `{repeat}`, możemy naciskać klawisze wiele razy.
-                    Możesz ich użyć, aby żółw szedł naprzód i obracał się.
-
-                    ### Ćwiczenie
-                    Kod, który widziałeś na poziomie 5, sprawdza klawisz tylko raz. Skopiuj przykładowy kod i dodaj do niego `{repeat}`, aby można było wielokrotnie naciskać klawisze.
-                    Użyj tego kodu, aby narysować coś ładnego.
-                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
-            10:
-                story_text: |
-                    Teraz, gdy wiesz, jak łączyć instrukcje, możesz utworzyć narzędzie typu dotykowego za pomocą `{pressed}`.
-
-                    ### Ćwiczenie
-                    Dokończ kod. Za każdym razem należy wybrać losową literę, którą należy nacisnąć. Dostajesz punkt za poprawną naciśnięcie i odliczenie dwóch punktów za niewłaściwą prasę.
-                    **Dodatkowo** Wyczyść ekran po każdej literze i pokaż użytkownikowi, ile punktów zdobył.
-                example_code: "```\npunkty = 0\nlitery = a, b, c, d, e\n{repeat} 10 {times}\n    litera = _ _ _\n    {print} 'Naciśnij literę ' litera.\n    {if} litera {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         description: Wprowadzenie polecenia print
         levels:

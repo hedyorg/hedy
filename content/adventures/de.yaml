@@ -1963,45 +1963,6 @@ adventures:
 
                     {call} _
                     ```
-    pressit:
-        name: Tastengedrücke
-        default_save_name: Gedrückt
-        description: Versuche eine Taste an einen Befehl zu binden!
-        levels:
-            6:
-                story_text: |
-                    In diesem Level gibt es ein neues Schlüsselwort: `{pressed}`!
-                    Mit `{pressed}` kannst du mit den Tasten auf deiner Tastatur steuern, welche Zeilen verwendet werden.
-
-                    ### Übung
-                    Schau dir das Beispiel an und füge eine weitere Zeile hinzu, die auf Tasten reagiert.
-                example_code: |
-                    ```
-                    {print} 'Möchtest du ein gutes (g) oder ein böses (b) Ende?'
-                    {if} g {is} {pressed} {print} 'Sie lebten glücklich bis ans Ende ihrer Tage ❤'
-                    {else} {print} 'Der Prinz wurde von einem Nilpferd gefressen 😭'
-                    ```
-                story_text_2: |
-                    Sie können jeden Code mit einem Schlüssel verknüpfen, einschließlich der Zeichenschildkröte.
-
-                    ### Übung
-                    Kopieren Sie die Codezeilen, damit Sie eine größere Zeichnung erstellen können.
-                example_code_2: |
-                    ```
-                    {if} x {is} {pressed} {forward} 50
-                    {else} {turn} 90
-                    ```
-            8:
-                story_text: |
-                    Nun da du `{repeat}` kennengelernt hast, können wir Tasten mehrfach drücken!
-                    Du kannst dazu nutzen, die Schildkröte vorwärts gehen und sich drehen zu lassen.
-
-                    ### Übung
-                    Der Code, den du in Level 5 gesehen hast, prüft die Taste nur einmal. Kopiere den Beispielcode und füge ein `{repeat}` hinzu, so dass du die Tasten mehrmals drücken kannst.
-                    Benutze diesen Code, um etwas Schönes zu zeichnen.
-            10:
-                story_text: "Da du jetzt weißt wie man Befehle kombiniert, kannst du mit Hilfe von `{pressed}` ein Touch-Type-Tool erstellen. \n\n### Übung\nVervollständige den Code. Jedes Mal soll ein zufälliger Buchstabe ausgewählt werden. Diesen muss man drücken. Du bekommst einen Punkt für die richtige Taste und zwei Punkte Abzug für die falsche Taste.\n**Extra** Lösche den Bildschirm nach jedem Buchstaben und zeige dem Benutzer, wie viele Punkte er erreicht hat.\n"
-                example_code: "```\nPunkte = 0\nBuchstaben = a, b, c, d, e\n{repeat} 10 {times}\n    Buchstabe = _ _ _\n    {print} 'Drück den Buchstaben ' Buchstabe\n    {if} Buchstabe {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         levels:
             1:
