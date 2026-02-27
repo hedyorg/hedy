@@ -1419,41 +1419,7 @@ adventures:
                 story_text: "Utilitza funcions a les teves cançons! Com pots veure en el codi d'exemple, pots fer una funció per a cada línia de \"Quan les oques van al camp\". Un cop hagis programat les tres primeres línies, només has de cridar les funcions en l'ordre en què vols que es reprodueixin.\n\n### Exercici\nAcaba la cançó de \"Quan les oques van al camp\".\nDesprés, revisa totes les cançons que has programat en els nivells anteriors. Pots fer aquests codis més curts i millors utilitzant funcions també?\n"
                 example_code: "```\n{define} primera_linia\n    {play} C\n    {play} C\n    {play} G\n    {play} G\n    {play} A\n    {play} A\n    {play} G\n    {sleep}\n\n{define} segona_linia\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {play} D\n    {play} C\n    {sleep}\n\n{define} tercera_linia\n    {play} G\n    {play} G\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {sleep}\n\n{call} primera_linia\n_\n_\n```\n"
             15:
-                story_text: "Pots utilitzar una funció amb un argument per a cançons que tenen una línia gairebé igual, però lleugerament diferent cada vegada.\nUn exemple és la cançó \"Un ianqui baixa la ciutat\". Les primeres 4 notes de les primeres línies són iguals, però cada vegada van seguides d'un parell de notes diferents. \n\n### Exercici\nPots acabar la cançó d'\"Un ianqui baixa la ciutat\"?\nPots pensar en una altra cançó per programar així?\n"
-                example_code: "```\n{print} \"Un ianqui baixa la ciutat\"\n{define} _ (nota_1, nota_2, nota_3)\n    {play} C4\n    {play} C4\n    {play} D4\n    {play} E4\n    {play} _\n    {play} _\n    {play} _\n\nlinia_1(29, 31, 30)\nlinia_1(29, 28, 0)\nlinia_1(32, 31, 30)\n\n{play} C4\n{play} B3\n{play} G3\n{play} A3\n{play} B3\n{play} C4\n{play} C4\n```\n"
-                example_code_2: "```\n{define} alarma_foc\n    {print} \"FOOC!\"\n    nota = 40\n    {for} i {in} {range} 1 {to} 100\n        {if} nota _ 50\n            nota = nota + 5\n            {play} _\n        {else}\n            nota = 40\n\nfoc = {ask} \"Hi ha foc?\"\n{if} foc _ \"sí\"\n    alarma_foc _\n```\n"
-                story_text_2: "Pots programar música per diversió, però també pots fer servir les notes musicals per fer alguna cosa tan útil com una alarma d'incendi!\n\n### Exercici\nAssegura't que l'alarma sona quan hi ha un incendi!\n"
-                story_text_3: |
-                    ### Exercici
-                    Fins i tot en aquest últim nivell de Hedy podem fer una mica de música! Ves amb compte amb tota la sintaxi que es necessita ara.
-                    Fixa't bé en com es defineixen i es criden les funcions en el codi d'exemple.
-                    Acaba la cançó:
-                example_code_3: |
-                    ```
-                    {def} linia_1():
-                        {for} i {in} {range}(1, 5):
-                            {play} A
-                        {play} D
-                        {play} F
-                        {play} A
-
-                    {def} linia_2():
-                        {for} i {in} {range}(1, 5):
-                            {play} G
-                        {play} C
-                        {play} E
-                        {play} G
-
-                    {def} linia_3():
-                    _
-
-                    {print} ("The drunken sailor")
-                    {print} ("What shall we do with the drunken sailor?")
-                    linia_1()
-                    linia_2()
-                    linia_3()
-                    {print} ("Early in the morning")
-                    ```
+                story_text: "Pots programar música per diversió, però també pots fer servir les notes musicals per fer alguna cosa tan útil com una alarma d'incendi!\n\n### Exercici\nAssegura't que l'alarma sona quan hi ha un incendi!\n"
             16:
                 story_text: "**Avís** Aquesta aventura pot arribar a ser extremadament molesta!  \nTambé podem utilitzar la comanda `{while}` per repetir una cançó infinitament.\n\n### Exercici  \nAcaba la cançó interminable.\n"
                 example_code: "```\n{define} cançó\n    {play} _\n\nsi_o_no = {ask} \"Vols sentir la cançó que mai s'acaba?\"\n{while} si_o_no = \"sí\"\n    cançó()\n    {print} \"🥳\"\n```\n"

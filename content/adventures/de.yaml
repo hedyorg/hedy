@@ -1801,19 +1801,16 @@ adventures:
                     Stelle sicher, dass der Feueralarm ertönt, wenn es brennt!
                 example_code_2: |
                     ```
-                    {define} feueralarm
+                    {def} feueralarm():
                         {print} 'FEUER!'
                         note = 40
-                        {for} i {in} {range} 1 {to} 100
-                            {if} note _ 50
-                                note = note + 5
-                                {play} _
-                            {else}
-                                note = 40
+                        {for} i {in} {range} _
+                            {play} 45
+                            {play} 50
 
-                    feuer = {ask} 'Brennt es?'
+                    feuer = {input}('Brennt es?')
                     {if} feuer _ 'ja'
-                        {call} feueralarm
+                        _
                     ```
             16:
                 story_text: |
