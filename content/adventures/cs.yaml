@@ -807,6 +807,10 @@ adventures:
                 example_code: "```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
         default_save_name: Jazyk
         description: Procvičování slovíček v cizím jazyce
+    lists:
+        levels:
+            14:
+                story_text: "Budeme vytvářet seznamy způsobem Pythonu, s hranatými závorkami kolem seznamů! Zachováme také uvozovky kolem každé položky, jak jsme se naučili v předchozích úrovních.\nHranaté závorky používáme k upozornění na místo v seznamu. Například: `friends[1]` je první jméno v seznamu přátel, jak vidíte v první části příkladu kódu.\nDruhá část příkladového kódu vám ukáže, že můžeme také porovnat 2 seznamy pomocí proměnné i."
     pressit:
         description: Zkuste propojit klávesu klávesnice s příkazem!
         levels:
@@ -900,10 +904,8 @@ adventures:
                 story_text: "## Náhodně\nV této úrovni můžete vytvořit seznam pomocí příkazu `{is}`. Můžete nechat počítač, aby z tohoto seznamu vybral náhodnou položku. To provedete příkazem `{at} {random}`.\n"
                 story_text_2: "Příkaz `{at} {random}` můžete použít také ve větě.\n"
             14:
-                story_text_2: "Nyní, když jste se naučili používat závorky v seznamech, můžete začít používat příkaz {at} {random} i v jazyce Python!\nJednoduše napíšete název seznamu a za ním příkaz `[random]`!"
-                example_code_2: "```\novoce = ['jablko', 'banán', 'třešeň']\n{print} ovoce[random]\n```"
-                story_text: "Budeme vytvářet seznamy způsobem Pythonu, s hranatými závorkami kolem seznamů! Zachováme také uvozovky kolem každé položky, jak jsme se naučili v předchozích úrovních.\nHranaté závorky používáme k upozornění na místo v seznamu. Například: `friends[1]` je první jméno v seznamu přátel, jak vidíte v první části příkladu kódu.\nDruhá část příkladového kódu vám ukáže, že můžeme také porovnat 2 seznamy pomocí proměnné i."
-                example_code: "```\nfriends = ['Ahmed', 'Ben', 'Cayden']\n{print} friends[1] ' is the first friend on the list.'\n{print} friends[2] ' is the second friend on the list.'\n{print} friends[3] ' is the third friend on the list.'\n#now we will match 2 lists using the variable i\nlucky_numbers = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} friends[i] 's lucky number is ' lucky_numbers[i]\n```\n"
+                story_text: "Nyní, když jste se naučili používat závorky v seznamech, můžete začít používat příkaz {at} {random} i v jazyce Python!\nJednoduše napíšete název seznamu a za ním příkaz `[random]`!"
+                example_code: "```\novoce = ['jablko', 'banán', 'třešeň']\n{print} ovoce[random]\n```"
         description: představujeme {at} {random} příkaz
         name: '{random}'
         default_save_name: random_příkaz

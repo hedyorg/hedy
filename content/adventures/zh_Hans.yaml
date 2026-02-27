@@ -1729,30 +1729,6 @@ adventures:
                     prices {is} _
                     _
                     ```
-            14:
-                story_text: |-
-                    我们将用Python的方式创建列表，用方括号括住列表!就像我们在之前的关卡中学到的那样。我们也会在每个项目周围加上引号。
-                    我们用方括号指出列表中的位置。例如:`friends[1]`是好友列表中的第一个名字，您可以在示例代码的第一部分中看到。
-                    示例代码的第二部分向您展示了我们也可以使用变量i匹配两个列表。
-                example_code: |
-                    ```
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' 是列表中的第一个朋友.'
-                    {print} friends[2] ' 是列表中的第二个朋友.'
-                    {print} friends[3] ' 是列表中的第三个朋友.'
-                    #现在我们用变量i匹配两个列表
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                        {print} friends[i] '的幸运号码是' lucky_numbers[i]
-                    ```
-                story_text_2: |-
-                    现在您已经学会了在列表中使用括号，您也可以开始以Python的方式使用{at}{random}命令了!
-                    你只需键入你的名单的名称后面加上`[random]`!
-                example_code_2: |-
-                    ```
-                    fruit = ['苹果', '香蕉', '樱桃']
-                    {print} fruit[random]
-                    ```
     repeat_command:
         default_save_name: repeat_命令
         description: '{repeat}命令'
