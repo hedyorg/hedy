@@ -1475,7 +1475,7 @@ adventures:
                     ```
                     friends = [Ahmed, Ben, Cayden]
                     lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} (1, 3):
+                    {for} i {in} {range}(1, 3):
                         {print} (friends[i], 's lucky number is ', lucky_numbers[i])
                     ```
     fortune:
@@ -1734,19 +1734,21 @@ adventures:
                     ### Exercise
                     The next verse of this song goes:
 
-                    ```
-                    not_hedy_code
                     Last night as I lay on my pillow
+
                     Last night as I lay on my bed
+
                     Last night as I lay on my pillow
+
                     I dreamed that my Bonnie is dead
-                    ```
+
+
 
                     Can you program this verse in the same way as the example?
                 example_code: |
                     ```
                     {def} song(place):
-                        {print} ('My Bonnie is over the ', place)
+                        {print}('My Bonnie is over the ', place)
 
                     song('ocean')
                     song('sea')
@@ -2321,12 +2323,11 @@ adventures:
                     ```
                     favorite_color = {input}('What is you favorite_color')
                     {if} favorite_color == green:
-                        {print} ('Yeahh, it is mine too!')
+                        {print}('Yeahh, it is mine too!')
                     {elif} favorite_color == pink:
-                        {print} ('Great choice!')
+                        {print}('Great choice!')
                     {else}:
-                        {print} ('Meh, I don't agree')
-                    
+                        {print}('Meh, I don't agree')
                     ```
     in_command:
         name: '{in}'
