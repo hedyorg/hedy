@@ -1116,32 +1116,6 @@ adventures:
             7:
                 story_text: "També fem un canvi en com emmagatzemar una paraula en una variable! Ara pots utilitzar `=` en lloc de `{is}` quan emmagatzemes un nom o un número en una variable, així:\n"
                 example_code: "```\nnom = Hedy\nresposta = 20 + 4\n```\n"
-            13:
-                example_code_2: "```\nnom = {input}(\"Com et dius?\")\n{if} nom == \"Hedy\":\n    {print}(\"Que guai que ets!\")\n```\n"
-                story_text_3: "Pots comparar si alguna cosa *no* és igual a una altra fent servir `!=`, d'aquesta manera:\n"
-                example_code_3: "```\nnom= {input}(\"Com et dius\")\n{if} nom!= \"Hedy\":\n    {print}(\"No ets pas Hedy\")\n```\n"
-                story_text: |
-                    Avui aprendrem més elements nous. Potser ja els coneixes de les matemàtiques, el `<` i el `>`. Abans feiem servir `{greater} {than}` i `{less} {than}`, però la majoria de llenguatges de programació utilitzen aquests símbols per a fer això.
-                    El `<` comprova si el primer número és més petit que el segon, per exemple edat `<` 12 comprova si l'edat és més petita que 12.
-                    Si vols comprovar si el primer número és més petit o igual que el segon, pots utilitzar `<=`, per exemple edat `<=` 11.
-                    El `>` comprova si el primer número és més gran que el segon, per exemple punts `>` 10 comprova si els punts són més grans que 10.
-                    Si vols comprovar si el primer número és més gran o igual que el segon, pots utilitzar `>=`, per exemple punts `>=` 11.
-                    Utilitza aquestes comparacions en un `{if}`, com ara:
-                example_code: |
-                    ```
-                    edat = {input}("Quants anys tens?")
-                    {if} edat > 12:
-                        {print}("Ets més gran que jo!")
-                    ```
-                    ```
-                    edat = {input}("Quants anys tens?")
-                    {if} edat < 12:
-                        {print}("Ets més jove que jo!")
-                    {else}:
-                        {print}("Ets més gran que jo!")
-                    ```
-                story_text_2: |
-                    A partir d'aquest nivell, si vols comparar exactament, pots fer servir dos signes d'igual. Això és el que fan la majoria de llenguatges de programació:
         name: '{is}'
     parrot:
         name: lloro

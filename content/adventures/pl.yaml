@@ -1227,6 +1227,7 @@ adventures:
                     ```
         name: '{in}'
     is_command:
+        name: '{is}'
         default_save_name: Polecenie_is
         description: Wprowadzenie polecenia {is}
         levels:
@@ -1258,13 +1259,6 @@ adventures:
                     imię = Hedy
                     odpowiedź = 20 + 4
                     ```
-            13:
-                story_text_2: "Od tego poziomu jeśli chcesz porównać szczegółowo możesz użyć dwóch symboli równości. Tak jest w większości języków programowania:\n"
-                example_code_2: "```\nimię = {input}('Jak masz na imię?')\n{if} imię == 'Hedy':\n    {print}('Jesteś super!')\n```\n"
-                story_text_3: "Możesz także porównać czy coś *nie* jest równe czemuś innemu używając `!=` w ten sposób:\n"
-                example_code_3: "```\nimię = {input}('Jak masz na imię?')\n{if} imię != 'Hedy':\n    {print}('Nie jesteś Hedy')\n```\n"
-                example_code: "```\nwiek = {input}('Ile masz lat?')\n{if} wiek > 12:\n    {print}('Jesteś starszy(a) ode mnie!')\n```\n```\nwiek = {input}('Ile masz lat?')\n{if} wiek < 12:\n    {print}('Jesteś młodszy(a) ode mnie!')\n{else}:\n    {print}('Jesteś starszy(a) ode mnie!')\n```\n"
-        name: '{is}'
     language:
         name: język
         default_save_name: Język
