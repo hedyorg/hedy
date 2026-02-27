@@ -3812,19 +3812,13 @@ adventures:
                 example_code: |
                     ```
                     won = 'no'
-                    options = 'rock', 'paper', 'scissors'
+                    options = ['rock', 'paper', 'scissors']
                     {while} won == 'no'
-                        your_choice = {ask} 'What do you choose?'
-                        computer_choice = options {at} {random}
-                        {print} 'you chose ' your_choice
-                        {print} 'the computer chose ' computer_choice
+                        your_choice = {input}('What do you choose?')
+                        computer_choice = options[{random}]
+                        {print}('you chose ', your_choice)
+                        {print}('the computer chose ', computer_choice)
                         {if} computer_choice == your_choice
-                            {print} 'Tie!'
-                        {if} computer_choice == 'rock' {and} your_choice == 'scissors'
-                            {print} 'You lose!'
-                        {if} computer_choice == 'rock' {and} your_choice == 'paper'
-                            {print} 'You win!'
-                            won = 'yes'
                     _
                     ```
     rock_2:

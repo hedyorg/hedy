@@ -2873,19 +2873,13 @@ adventures:
                 example_code: |
                     ```
                     gewonnen = 'nee'
-                    opties = 'steen', 'papier', 'schaar'
+                    opties = ['steen', 'papier', 'schaar']
                     {while} gewonnen == 'nee'
-                        jouw_keuze = {ask} 'Wat kies jij?'
-                        computer_keuze = opties {at} {random}
-                        {print} 'jij koos ' jouw_keuze
-                        {print} 'de computer koos ' computer_keuze
+                        jouw_keuze = {input}('Wat kies jij?')
+                        computer_keuze = opties[{random}]
+                        {print}('jij koos ' jouw_keuze)
+                        {print}('de computer koos ', computer_keuze)
                         {if} computer_keuze == jouw_keuze
-                            {print} 'Gelijkspel!'
-                        {if} computer_keuze == 'steen' {and} jouw_keuze == 'schaar'
-                            {print} 'Je verliest!'
-                        {if} computer_keuze == 'steen' {and} jouw_keuze == 'papier'
-                            {print} 'Je wint!'
-                            gewonnen = 'ja'
                     _
                     ```
     rock_2:
