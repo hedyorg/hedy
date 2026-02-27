@@ -1852,32 +1852,6 @@ adventures:
         name: presentador
         default_save_name: Presentador
         description: Fes les teves preguntes!
-        levels:
-            7:
-                story_text: |
-                    ### Exercici
-                    En aquesta aventura pots crear el teu propi qüestionari de preguntes! Omple els buits, afegeix més preguntes i gaudeix de la teva creació!
-                    Pots fer-ho sobre qualsevol cosa que t'agradi: el teu hobby, el teu animal preferit, el teu llibre preferit o qualsevol altra cosa!
-                example_code: |
-                    ```
-                    {print} "Crea el teu propi qüestionari"
-                    punts_a = 0
-                    punts_b = 0
-                    {print} "Pregunta"
-                    {print} "Opció de resposta A"
-                    {print} "Opció de resposta B"
-                    resposta = {ask} "Quina resposta?"
-                    {if} resposta is "A"
-                    punts_a = punts_a + 1
-                    {if} resposta is "B"
-                    punts_b = punts_b + 1
-                    {print} "Fi del qüestionari!"
-                    {print} "Vegem-ne els resultats!"
-                    {if} punts_a > punts_b
-                    {print} "Pertanys al club A"
-                    {if} punts_b > punts_a
-                    {print} "Pertanys al club B"
-                    ```
     years:
         name: any nou
         default_save_name: Compte enrere d'any nou
