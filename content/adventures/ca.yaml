@@ -1352,6 +1352,10 @@ adventures:
                 story_text: "### Exercici\nDona un cop d'ull al codi d'exemple. Aquest és un programa per practicar vocabulari en francès. Ara crea el teu propi programa per practicar el teu vocabulari en un nou idioma.\nSi no coneixes cap altre idioma, pots utilitzar Google Translate o fer servir emojis i la teva llengua materna.\n"
         name: llengua
         description: Practica paraules amb una llengua estrangera
+    lists:
+        levels:
+            14:
+                story_text: "A partir d'ara farem les llistes a la manera Pythoniana, amb claudàtors al seu voltant! També mantindrem les cometes al voltant de cada element com hem après als nivells anteriors.\nUtilitzem claudàtors per indicar una posició en una llista. Per exemple: `friends[1]` és el primer nom de la llista d'amics, com pots veure en la primera part del codi d'exemple.\nLa segona part del codi d'exemple et mostra que també podem combinar dues llistes fent servir la variable i."
     maths:
         levels:
             7:
@@ -1518,10 +1522,8 @@ adventures:
                 story_text_3: "### Exercici\nProva la comanda `{at} {random}` per crear el teu propi concurs (com els que es veuen a la TV) on tries una porta o maleta i aquesta conté un superpremi!\nCreus que ho pots fer? Hem posat les primeres línies al codi d'exemple.\n"
                 example_code_3: "```\n{print} El super-concurs!\n{print} Hi ha 3 caixes davant teu...\nescollit {is} {ask} Quina esculls?\npremis {is}  _\n_ a la caixa _ hi ha _\n```\n"
             14:
-                story_text_2: "Ara que ja has après a utilitzar els claudàtors en les llistes, també pots començar a fer servir la comanda {at} {random} a la manera de Python!\nNomés has d'escriure el nom de la teva llista amb `[random]` darrere!"
-                example_code: "```\namics = [\"Moha\", \"Bernat\", \"Tomeu\"]\n{print} \"En \" amics[1] \"  és el primer amic de la llista.\"\n{print} \"En \" amics[2] \" és el segon amic de la llista.\"\n{print} \"En \" amics[1] \" és el tercer  amic de la llista.\"\n# Ara mirarem dues llistes fent servir la variable i \nnumeros_sort = [15, 18, 6]\n{for} i {in} {range} (1, 3)\n    {print} \"El numero de la sort d'en \" amics[i] \" és el \" numeros_sort[i]\n```\n"
-                example_code_2: "```\nfruita = [\"poma\", \"plàtan\", \"cirera\"]\n{print} fruita[random]\n```"
-                story_text: "A partir d'ara farem les llistes a la manera Pythoniana, amb claudàtors al seu voltant! També mantindrem les cometes al voltant de cada element com hem après als nivells anteriors.\nUtilitzem claudàtors per indicar una posició en una llista. Per exemple: `friends[1]` és el primer nom de la llista d'amics, com pots veure en la primera part del codi d'exemple.\nLa segona part del codi d'exemple et mostra que també podem combinar dues llistes fent servir la variable i."
+                story_text: "Ara que ja has après a utilitzar els claudàtors en les llistes, també pots començar a fer servir la comanda {at} {random} a la manera de Python!\nNomés has d'escriure el nom de la teva llista amb `[random]` darrere!"
+                example_code: "```\nfruita = [\"poma\", \"plàtan\", \"cirera\"]\n{print} fruita[random]\n```"
         name: '{random}'
         default_save_name: comanda_random
         description: Introduint la comanda {at} {random}

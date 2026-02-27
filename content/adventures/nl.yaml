@@ -1681,6 +1681,28 @@ adventures:
                     {if} kikker {is} grenouille {print} 'Super!'
                     {else} {print} 'Helaas, kikker is grenouille'
                     ```
+    lists:
+        name: lijstjes
+        default_save_name: lijst
+        description: lijst
+        levels:
+            14:
+                story_text: |-
+                    We zijn aangekomen bij de laatste paar Hedy levels. We komen dus steeds dichter bij echte Python code.
+                    In dit level gaan we leren hoe je lijsten maakt op de Python-manier. Dat werkt met vierkante haakjes zetten om lijstjes, dat zijn deze: `[` en `]`.
+                    Als we woorden in de lijst willen zetten, moeten we om de woorden ook enkele aanhalingstekens zetten. Bij getallen hoeft dat niet.
+                    We kunnen in dit level ook met een getal plekken in lijstjes aanwijzen.
+                example_code: |
+                    ```
+                    vrienden = ['Ahmed', 'Ben', 'Cayden']
+                    {print}(vrienden[1], ' is de eerste vriend op mijn lijstje')
+                    {print}(vrienden[2], ' is de tweede vriend op mijn lijstje')
+                    {print}(vrienden[3], ' is de derde vriend op mijn lijstje')
+                    #nu matchen we 2 lijstjes door de variabele i te gebruiken
+                    geluksgetallen = [15, 18, 6]
+                    {for} i {in} {range} 1 {to} 3:
+                       {print}('het geluksgetal van ', vrienden[i], 'is ', geluksgetallen[i])
+                    ```
     maths:
         name: rekenen
         default_save_name: rekenen
@@ -2384,23 +2406,6 @@ adventures:
                     _
                     ```
             14:
-                story_text: |-
-                    We zijn aangekomen bij de laatste paar Hedy levels. We komen dus steeds dichter bij echte Python code.
-                    In dit level gaan we leren hoe je lijsten maakt op de Python-manier. Dat werkt met vierkante haakjes zetten om lijstjes, dat zijn deze: `[` en `]`.
-                    Als we woorden in de lijst willen zetten, moeten we om de woorden ook enkele aanhalingstekens zetten. Bij getallen hoeft dat niet.
-                    We kunnen in dit level ook met een getal plekken in lijstjes aanwijzen.
-                example_code: |
-                    ```
-                    vrienden = ['Ahmed', 'Ben', 'Cayden']
-                    {print} vrienden[1] ' is de eerste vriend op mijn lijstje'
-                    {print} vrienden[2] ' is de tweede vriend op mijn lijstje'
-                    {print} vrienden[3] ' is de derde vriend op mijn lijstje'
-                    #nu matchen we 2 lijstjes door de variabele i te gebruiken
-                    geluksgetallen = [15, 18, 6]
-                    {for} i {in} {range} 1 {to} 3
-                       {print} 'het geluksgetal van ' vrienden[i]
-                       {print} 'is ' geluksgetallen[i]
-                    ```
                 story_text_2: |-
                     Nu je hebt geleerd om de rechte haken te gebruiken bij je lijstjes, kun je ook `{at} {random}` leren gebruiken op de Python-manier!
                     Je typt simpelweg de naam van de lijst en typt er `[random]` achter.

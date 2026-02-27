@@ -1292,6 +1292,24 @@ adventures:
                             {print} ('Źle, ', francuskie_słowa[i], ' oznacza ', tłumaczenie[i])
                     {print} ('Odpowiedziałeś poprawnie na ', wynik, ' pytań.')
                     ```
+    lists:
+        levels:
+            14:
+                story_text: |-
+                    Będziemy tworzyć listy po Pythonie, z nawiasami kwadratowymi wokół list! Również używamy znaku cudzysłowu wokół każdego elementu, jak nauczyliśmy się na poprzednich poziomach.
+                    Używamy nawiasów kwadratowych, aby wskazać miejsce na liście. Na przykład: `friends[1]` to imię na liście znajomych, jak widać w pierwszej części przykładowego kodu.
+                    Druga część przykładowego kodu pokazuje, że możemy również dopasować 2 listy za pomocą zmiennej i.
+                example_code: |
+                    ```
+                    przyjaciele = ['Ahmed', 'Ben', 'Cayden']
+                    {print}(przyjaciele[1], ' jest pierwszym przyjacielem na liście.')
+                    {print}(przyjaciele[2], ' jest drugim przyjacielem na liście.')
+                    {print}(przyjaciele[3], ' jest trzecim przyjacielem na liście.')
+                    #teraz dopasujemy 2 listy za pomocą zmiennej i
+                    szczęśliwe_liczby = [15, 18, 6]
+                    {for} i {in} {range} (1, 3):
+                        {print} (przyjaciele[i], 's szczęśliwy numer to ', szczęśliwe_liczby[i])
+                    ```
     maths:
         name: Matematyka
         default_save_name: matematyka
@@ -1784,21 +1802,6 @@ adventures:
                     _
                     ```
             14:
-                story_text: |-
-                    Będziemy tworzyć listy po Pythonie, z nawiasami kwadratowymi wokół list! Również używamy znaku cudzysłowu wokół każdego elementu, jak nauczyliśmy się na poprzednich poziomach.
-                    Używamy nawiasów kwadratowych, aby wskazać miejsce na liście. Na przykład: `friends[1]` to imię na liście znajomych, jak widać w pierwszej części przykładowego kodu.
-                    Druga część przykładowego kodu pokazuje, że możemy również dopasować 2 listy za pomocą zmiennej i.
-                example_code: |
-                    ```
-                    przyjaciele = ['Ahmed', 'Ben', 'Cayden']
-                    {print} przyjaciele[1] ' jest pierwszym przyjacielem na liście.'
-                    {print} przyjaciele[2] ' jest drugim przyjacielem na liście.'
-                    {print} przyjaciele[3] ' jest trzecim przyjacielem na liście.'
-                    #teraz dopasujemy 2 listy za pomocą zmiennej i
-                    szczęśliwe_liczby = [15, 18, 6]
-                    {for} i {in} {range} (1, 3)
-                        {print} przyjaciele[i] 's szczęśliwy numer to ' szczęśliwe_liczby[i]
-                    ```
                 story_text_2: |-
                     Teraz, gdy nauczyłeś się używać nawiasów na listach, możesz także zacząć używać polecenia {at}{random} w Pythonie!
                     Po prostu wpisz nazwę swojej listy z `[random]` za nią!

@@ -1275,6 +1275,10 @@ adventures:
                     {print} 'Tuviste ' puntuación ' respuestas correctas.'
                     ```
                 story_text: "### Ejercicio\nEcha un vistazo al código de ejemplo. Este es un programa para practicar vocabulario en francés. Ahora haz tu propio programa para practicar tu vocabulario en tu nuevo idioma.\nSi no sabes ningún otro idioma, puedes utilizar el traductor de Google o puedes utilizar emojis y tu idioma materno.\n"
+    lists:
+        levels:
+            14:
+                story_text: "Vamos a hacer listas al estilo de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas dobles alrededor de cada elemento como aprendimos en los niveles anteriores.\nUtilizamos corchetes para apuntar a un lugar de la lista. Por ejemplo: `friends[1]` es el primer nombre en la lista de amigos, como puedes ver en la primera parte del código de ejemplo.\nLa segunda parte del código de ejemplo muestra que también podemos enparejar 2 listas utilizando la variable i."
     maths:
         name: cálculos
         default_save_name: cálculos
@@ -1726,10 +1730,8 @@ adventures:
                     _
                     ```
             14:
-                story_text_2: "Ahora que has aprendido a utilizar los corchetes en las listas, ¡también puedes utilizar el comando {at} {random} al estilo Python!\n¡Simplemente escribe el nombre de tu lista con `[random]` detrás de ella!"
-                example_code_2: "```\nfruta = ['manzana', 'plátano', 'cereza']\n{print} fruta[random]\n```"
-                example_code: "```\namigos = ['Ahmed', 'Ben', 'Cayden']\n{print} amigos[1] ' es el primer amigo de la lista.'\n{print} amigos[2] ' es el segundo amigo de la lista.'\n{print} amigos[3] ' es el tercer amigo de la lista.'\n#ahora emparejaremos 2 listas utilizando la variable i\nnumeros_suerte = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} 'El número de la suerte de ' amigos[i] ' es ' numeros_suerte[i]\n```\n"
-                story_text: "Vamos a hacer listas al estilo de Python, ¡con corchetes alrededor de las listas! También mantendremos las comillas dobles alrededor de cada elemento como aprendimos en los niveles anteriores.\nUtilizamos corchetes para apuntar a un lugar de la lista. Por ejemplo: `friends[1]` es el primer nombre en la lista de amigos, como puedes ver en la primera parte del código de ejemplo.\nLa segunda parte del código de ejemplo muestra que también podemos enparejar 2 listas utilizando la variable i."
+                story_text: "Ahora que has aprendido a utilizar los corchetes en las listas, ¡también puedes utilizar el comando {at} {random} al estilo Python!\n¡Simplemente escribe el nombre de tu lista con `[random]` detrás de ella!"
+                example_code: "```\nfruta = ['manzana', 'plátano', 'cereza']\n{print} fruta[random]\n```"
         name: '{random}'
     repeat_command:
         default_save_name: comando_repetir
