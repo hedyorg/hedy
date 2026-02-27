@@ -2469,34 +2469,28 @@ adventures:
             14:
                 story_text: |-
                     Now, we are going to make lists the Python way. First we put square brackets, `[]`,  around every list! 
-                    We also keep the quotation marks around each item like we have learned in previous levels. 
-                story_text_2: |-
-                    
+                    We also keep the quotation marks around each item like we have learned in previous levels.
                     From now, we use square brackets to point out a place in a list. 
                     For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code.
-                    
-
-                example_code_2: |
+                example_code: |
                     ```
                     friends = ['Ahmed', 'Ben', 'Cayden']
                     {print} (friends[1], ' is the first friend on the list.')
                     {print} (friends[2], ' is the second friend on the list.')
                     {print} (friends[3], ' is the third friend on the list.')
-
                     ```
-                story_text_3: |
-                    You can also still check if an element in list. Like in the example:
+                story_text_2: |
+                    You can also still check if an element is in the list. Like in the example:
 
-                example_code_3: |
+                example_code_2: |
                     ```
                     {print} ('Welcome in our shop!')
-                    buy = What would you like to buy?'
-                    products = ['apple', 'milk', 'cheese']
-                    if 'buy' in products:
+                    product = {input}('What would you like to buy?')
+                    stock = ['apple', 'milk', 'cheese']
+                    {if} product {in} stock:
                         {print} ('Great. That is possible!')
-                    else:
-                        {print} ('Unfortunately, we do not have that product.')
-                    
+                    {else}:
+                        {print} ('Unfortunately, we do not have ', product)
                     ```           
     maths:
         name: maths
