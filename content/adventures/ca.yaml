@@ -254,14 +254,6 @@ adventures:
                     _
                     {print} T'ha tocat un batut de gustos {at} {random}
                     ```
-    and_or_command:
-        name: '{and} i {or}'
-        default_save_name: i_o_command
-        description: i, o
-        levels:
-            10:
-                story_text: "Ara aprendrem `{and}` i `{or}`! Si vols comprovar dues afirmacions, no cal que utilitzis dues comandes `{if}`, sinó que pots fer servir `{and}` i `{or}`.\nSi fas servir `{and}`, totes dues afirmacions, la de l’esquerra i la de la dreta de l'`{and}`, han de ser certes. També podem fer servir `{or}`. I , només una de les dues afirmacions haurà de ser correcta."
-                example_code: "```\nnom = {ask} \"quin és el teu nom?\"\nedat = {ask} \"quants anys tens?\"\n{if} nom {is} \"Hedy\" {and} edat {is} 2\n    {print} \"Ets la Hedy real!\"\n{elif} nom {is} \"Hedy\" {or} edat {is} 2\n    {print} \"Quasi... però no ets la Hedy!\"\n{else}\n    {print} \"No ets la Hedy!\"\n```\n"
     ask_command:
         name: '{ask}'
         default_save_name: comanda_ask
@@ -389,22 +381,6 @@ adventures:
             4:
                 story_text: "És hora d’una nova comanda! Amb `{clear}` pots esborrar tot el text de la pantalla de sortida. D’aquesta manera pots evitar que la pantalla s’ompli massa de text.\nCompte! Si fas servir una comanda `{clear}`, potser necessitaràs utilitzar un `{sleep}` a sobre d’ella. En cas contrari, Hedy esborrarà la pantalla sense donar-te temps per llegir, tal com pots veure a l'exemple!\n"
                 example_code: "```\n{print} \"3\"\n{clear}\n{print} \"2\"\n{clear}\n{print} \"1\"\n{clear}\n{print} \"espera...\"\n{sleep} 3\n{clear}\n{print} \"Sorpresa!\"\n```\n"
-    congratulations:
-        name: enhorabona
-        default_save_name: i_ara_què
-        description: el final de Hedy
-        levels:
-            8:
-                story_text: |
-                    Enhorabona! Has arribat al final de Hedy Bàsic. Pots continuar aprenent-ne a Hedy Avançat (nivells 9-12), on podràs aprendre conceptes de programació més complexos.
-                    Però sempre pots quedar-te a Hedy Bàsic i continuar fent programes!
-            12:
-                story_text: |
-                    Enhorabona! Has arribat al final de Hedy Avançat. Pots continuar aprenent-ne a Hedy Expert (nivells 13-16), on podràs aprendre conceptes de programació més complexos.
-                    Però sempre pots quedar-te a Hedy Avançat i continuar fent programes!
-            16:
-                story_text: |
-                    Enhorabona! Has arribat a l'últim nivell de Hedy! El codi que has creat aquí es pot copiar a entorns de Python reals com Replit o PyCharm, i pots continuar aprenent-hi. Tingues en compte, però, que el Python només pot llegir ordres en anglès; per tant, si has fet servir altres llengües, ara caldrà que t'hi canviïs.
     debugging:
         name: depuració
         default_save_name: depuració
@@ -946,14 +922,6 @@ adventures:
                     Afegeix-hi una segona tasca, com passar l'aspiradora o endreçar, i assegura't que també estigui dividida durant tota la setmana.
                     <br> **Extra** El programa no és just, pots tenir mala sort i haver de rentar durnat tota la setmana. Com pots fer el programa més just?
                 example_code: "```\ndies = dilluns, dimarts, dimecres, dijous, divendres, dissabte, diumenge\nnoms = mare, pare, Emma, Sofia\n{for} dia {in} dies\n    {print} noms {at} {random} \" renta plats el \" dia\n```\n"
-    elif_command:
-        name: '{elif}'
-        default_save_name: sinosi
-        description: '{elif}'
-        levels:
-            6:
-                story_text: "En aquest nivell farem servir una nova comanda: `{elif}`. `{elif}` és una combinació de les paraules clau `{else}` i `{if}`, i la serà molt útil quan volem crear 3 (o més!) opcions.\nDona-hi un cop d’ull!\n### Exercici\nFes la teva pròpia roda de la fortuna, on pots guanyar diferents premis i obtenir reaccions corresponents.\n"
-                example_code: "```\npremis is 1 milió d'euros, un pastís de poma, res\nel_teu_premi is premis {at} {random}\n{print} \"Guanyes \" el_teu_premi\n{if} el_teu_premi {is} \"1 milió d'euros\"\n{print} \"Sí! Ets ric!\"\n{elif} el_teu_premi {is} \"un pastís de poma\"\n{print} \"Mmm, un pastís de poma!\"\n{else}\n{print} \"Més sort la propera vegada..\"\n```\n"
     for_command:
         name: '{for}'
         default_save_name: per
@@ -1106,9 +1074,6 @@ adventures:
                         call següent_torn
                         {sleep} 2
                     ```
-        name: funcions
-        default_save_name: funcions
-        description: funcions
     haunted:
         name: la casa embruixada
         default_save_name: La casa embruixada
@@ -1138,51 +1103,6 @@ adventures:
             14:
                 story_text: "### Exercici\nAquest joc de la casa embruixada utilitza la connexió entre les llistes que pots fer servir en aquest nivell.\nPer exemple: totes les propietats que pertanyen al zombi són primeres en totes les llistes, la bruixa segona i el vampir tercer.\nConsulta el codi i omple els espais buits amb `armes[i]`, `monstres[i]`, `mala_sort[i]`, `bona_sort[i]`, `pista[i]` als llocs correctes perquè el codi funcioni!\n"
                 example_code: "```\nnumeros = [1, 2, 3]\ni = numeros[{random}]\npista = [\"uns grunyits\", \"una rialla malèfica\", \"l'aleteig de les ales d'un ratpenat\"]\nmonstres = [\"un zombie\", \"una bruixa\", \"un vampir\"]\nmala_sort = [\"Se't menjen el cervell\", \"Estas maleït per sempre més\", \"Et mossega el coll\"]\nbona_sort = [\"Llençes el penil. El zombie es distreu menjant-se'l.\", \"Cales foc a les cortines. La bruixa fuig volant pel temor al foc.\", \"El vampir respira el teu alè d'all i fuig.\"]\narmes = [\"pernil\", \"encenedor\", \"allioli\"]\n{print} \"Estàs davant d'una antiga mansió\"\n{print} \"Quelcom no acaba de funcionar bé\"\n{print} \"Sents un soroll com \" _\n{print} \"T'apropes a explorar-ho\"\n{print} \"Entres a la cuina i et trobes un encenedor, un tall de pernil i un pot d'allioli.\"\narma_escollida = {input} \"Què t'emportes de la cuina?\"\n{print} \"Am el \" arma_escollida \" entres al menjador\"\n{print} \"Et trobes de sobte \" _\narma_necessaria = _\n{if} arma_escollida == arma_necessaria\n    {print} \"Utilitzes el \" arma_escollida\n    {print} _\n    {print} \"Guanyes!\"\n{else}\n    {print} \"Has seleccionat una arma equivocada...\"\n    {print} _\n    {print} \"GAME OVER\"\n```\n"
-    hospital:
-        name: hospital
-        default_save_name: hospital
-        description: Hospital
-        levels:
-            1:
-                story_text: "Benvingut a l'Aventura de l'Hospital. En aquesta aventura ajudaràs el director d'un hospital a solucionar alguns problemes que ocorren al seu hospital. Aquesta és la teva primera tasca:\n\nHi ha una cua horriblement llarga a la nostra recepció i l'empleat està molt ocupat. Podries ajudar aquest empleat programant un quiosc d'autoregistre?\n### Exercici\nEl quiosc d'autoregistre ha de:\n* Donar la benvinguda al pacient\n* Demanar el seu nom i repetir-lo\n* Demanar la seva data de naixement i repetir-la\n* Preguntar en quin departament té la seva cita\n* Preguntar amb quin metge té la seva cita\n* Agrair al pacient per registrar-se amb èxit\n* Dir al pacient que esperi assegut a la sala d'espera\n"
-            2:
-                story_text: |
-                    La sala de maternitat del nostre hospital voldria música perquè els nadons s'adormin. Pots programar una cançó de bressol?
-                    ### Exercici
-                    Tria una cançó per reproduir:
-                    * Do, Re, Mi, Al jardí (fàcil)
-                    * Plou i fa sol (mitjà)
-                    * Cançó de bressol de Brahms (difícil)
-                    CONSELL: Pots intentar pensar les notes musicals tu mateix, però també les pots cercar a internet.
-            3:
-                story_text: "Hi ha un problema a la infermeria. Tot l'equip d'infermers es queixen que el calendari dels torns de nit no és just. Alguns infermers han de treballar 2 torns de nit per setmana, mentre que d’altres no en fan cap.\nPots ajudar als infermers creant un programa que faci un calendari de torns de nit just?\n### Exercici\nEl programa ha de:\n* Mostrar quin infermer ha de treballar el torn de nit en quin dia de la setmana.\n* Assegurar-se que cada infermer només hagi de treballar un torn de nit per setmana.\nEls noms dels infermers són: Maria, Mireia, Àlex, Damià, Cristina, Iu, Jordi\n"
-            4:
-                story_text: "Els nostres infermers tenen moltes tasques per fer en un dia. Una d'aquestes tasques és passar per tots els pacients al matí i preguntar-los que els agradaria esmorzar.\nPots alleugerir la càrrega de treball dels nostres infermers creant un programa en què els pacients triïn el seu esmorzar i enviïn la seva comanda directament al personal de cuina?\n### Exercici\nEl programa ha de:\n* Demanar al pacient que introdueixi el seu nom i número d'habitació\n* Saludar el pacient pel seu nom\n* Mostrar tots els aliments (entrepans, cereals, fruita, etc.) i begudes del menú\n* Preguntar al pacient què li agradaria menjar\n* Preguntar-li què li agradaria beure\n* Repetir la comanda al pacient\n* Agrair al pacient per fer la comanda\n* Dir-li que la seva comanda serà portada al seu número d'habitació en 15 minuts.\n"
-            5:
-                story_text: "El nostre centre de cremades vol alleugerir la càrrega de treball utilitzant una eina de triatge en línia. D'aquesta manera, els pacients no només poden registrar el seu nom i data de naixement, sinó també quin tipus de cremada tenen (de primer, segon o tercer grau) i rebre assessorament sobre què fer a continuació.\nPots ajudar-los?\n### Exercici\nEl programa ha de:\n* Començar amb una salutació i el registre simple del nom i la data de naixement del pacient\n* Realitzar un triatge. La pell només està vermella: cremada de primer grau. Hi ha butllofes: cremada de segon grau. La pell ha desaparegut/està ennegrida/blanquejada per la cremada: cremada de tercer grau.\n* Donar al pacient el consell adequat. Primer grau: Refreda la cremada amb aigua i aplica una mica de crema. No cal que vegis un metge. Segon grau: El metge et veurà et prescriurà una crema especial. Si us plau, espera a la sala d'espera. Tercer grau: Si us plau, dirigeix-te ara a la recepció. Necessitaràs atenció urgent tan aviat com sigui possible.\n"
-            6:
-                story_text: "Les nostres llevadores reben moltes preguntes de dones embarassades sobre què poden i no poden menjar durant l'embaràs. Pots ajudar les seves pacients creant una aplicació que els indiqui si un aliment és segur o no?\n### Exercici\nEl programa ha de:\n* Preguntar a la pacient que li agradaria menjar.\n* Comprovar si està a la llista d'\"aliments no segurs\"\n* Si està a la llista d'aliments no segurs, dir a la pacient que no és segur menjar-lo.\n* Si no està a la llista, dir a la pacient que probablement és segur menjar-lo.\n* Després, l'aplicació també avisa a la persona que sempre utilitzi el sentit comú perquè la llista pot no ser 100% completa. I aconsella a la persona que sempre eviti carns, peixos i ous crus i alcohol.\nDurant l'embaràs, no és segur menjar: sushi, gambes, tonyina, formatge blau, tiramisú, ous poc cuits, carpaccio, entrecot poc fet, steak tartar\n"
-            7:
-                story_text: "Les nostres infermeres controlen el balanç de líquids dels nostres pacients. El balanç de líquids és la quantitat de líquid que el pacient ha guanyat avui (bevent, menjant o per via intravenosa) menys la quantitat de líquid que la persona ha perdut avui (orinent o vomitant).\nEl balanç de líquids ha de romandre positiu. Si el balanç de líquids és negatiu, la infermera ha d'administrar més líquid per via intravenosa.\nPots ajudar les nostres infermeres fent una eina que puguin utilitzar per calcular el balanç de líquids dels seus pacients?\n### Exercici\nEl programa ha de:\n* Preguntar quants líquids ha guanyat el pacient bevent aquest dia.\n* Preguntar quants líquids ha guanyat el pacient menjant aquest dia.\n* Preguntar quants líquids ha guanyat el pacient per via intravenosa aquest dia.\n* Preguntar quants líquids ha perdut el pacient orinant aquest dia.\n* Preguntar quants líquids ha perdut el pacient vomitant aquest dia.\n* Calcular el balanç de líquids del pacient i mostrar-lo a la infermera.\n* Dir a la infermera que comprovi si el balanç és positiu o negatiu per decidir si el pacient necessita més líquid per via intravenosa avui o no.\n"
-            8:
-                story_text: "El nostre heliport per a l'helicòpter de trauma ha perdut la seva capa de pintura. Pots escriure un programa per a la tortuga per tornar a dibuixar les marques?\n### Exercici\nDibuixa les marques a l'heliport.\n<img src=\"https://github.com/user-attachments/assets/96deeb9e-b155-4a3d-91f3-3c447df7ce2b\" width=\"200\">\n"
-            9:
-                story_text: "La nostra ambulància li toca una mica de manteniment. La creu vermella pintada al costat s'està esvaint i la sirena ja no funciona.\nPots arreglar-ho?\n### Exercici\nEl programa ha de:\n* Pintar una creu vermella amb la tortuga de dibuix.\n* Fer un so de sirena després d'acabar la creu vermella.\nPISTA: utilitza la comanda repeat.\n"
-            10:
-                story_text: "El personal de les nostres urgències té un problema. Diuen que hi arriben molts pacients que realment no tenen una emergència i que en realitat haurien d'anar al seu metge de capçalera.\nAquesta gent està omplint la sala d'espera i suposa una gran càrrega de treball per al nostre personal. Vols ajudar el personal d'urgències fent una aplicació de triatge que indiqui al pacient si ha d'anar a urgències o no?\n### Exercici\nEl teu programa ha d'indicar al pacient si ha d'\"anar a urgències tan aviat com sigui possible\", \"trucar al teu proveïdor d'atenció mèdica per discutir la teva situació\" o \"anar al teu metge de capçalera quan puguis\".\nEl programa farà aquestes preguntes:\n* És la teva situació potencialment mortal?\n* Tens problemes per respirar?\n* De sobte no pots parlar, veure, caminar o moure't?\n* Has ingerit o inhalat verí?\n* T'has trencat un os?\n* Tens una reacció al·lèrgica greu?\n* Tens un dolor intens?\nSi el pacient respon \"sí\" a qualsevol d'aquestes preguntes, el programa li dirà que vagi a urgències tan aviat com sigui possible. No farà cap altra pregunta, perquè el temps és crucial.\nSi el pacient respon \"no\" a totes les qüestions, el programa preguntarà:\n* Pot esperar fins demà?\nSi la resposta és \"sí\", el programa dirà al pacient que vagi al metge de capçalera quan pugui. Si la resposta és \"no\", el programa aconsellarà trucar al seu proveïdor d'atenció mèdica per discutir la situació.\n"
-            11:
-                story_text: "Tenim un problema a la clínica de vacunació. La pantalla que crida el següent pacient per anar a l'àrea de vacunació està espatllada. Pots arreglar-ho?\n### Exercici\nEl programa ha de:\n* Tenir una llista de noms de pacients amb cita\n* Preguntar a la infermera si hi ha pacients nous avui i, en cas afirmatiu, quants.\n* Afegir els noms dels nous pacients a la llista també\n* Després, el programa ha de cridar un pacient perquè vagi a l'àrea de vacunació.\n* El programa ha d'esperar 10 segons, esborrar la pantalla i cridar el següent pacient, fins que hagi cridat a tots els pacients de la llista.\n"
-            12:
-                story_text: "Estem dissenyant una nova planta d'hospital i ens agradaria dibuixar un plànol per a aquesta nova planta.\nVoldríem tenir espai per a 5 pacients a la planta. Tots els pacients han de tenir un llit i una tauleta de nit.\nEl plànol hauria de tenir una aparença semblant a aquesta:\n<img src=\"https://github.com/user-attachments/assets/078929cb-c9af-4bcf-87a2-0398ad91d3f0\" width=\"500\">\n### Exercici\nEl programa ha de:\n* Dibuixar el plànol per a la nova planta!\n* Utilitzar funcions per dibuixar els llits i les tauletes de nit.\n"
-            13:
-                story_text: "El nostre hospital no només té molts pacients, sinó també molt personal. Cada membre del personal necessita una credencial que indiqui la seva informació.\nPots fer un programa perquè un nou empleat pugui omplir la seva informació i rebre una credencial impresa?\n### Exercici\nEl programa ha de:\n* Donar la benvinguda al nou empleat\n* Preguntar-li el seu títol, nom, cognom, data de naixement, lloc de naixement, funció, departament i número de personal.\n* Agrair al nou empleat i dir-li que la seva credencial s'imprimirà aviat.\n* Fer una pausa al programa durant 2 segons.\n* Imprimir el títol, nom i cognom.\n* Imprimir la data de naixement i el lloc de naixement.\n* Imprimir la funció i el departament.\n* Imprimir el número de personal.\n"
-            14:
-                story_text: "Els nostres conserges tenen una llista gran de tasques. Algunes tasques es fan cada dia, altres en un dia, estació o data determinats. Això és molt confús i porta a situacions en què algunes tasques s'obliden.\nPots ajudar escrivint un programa que imprimeixi la llista de tasques correcta per a aquest dia?\n### Exercici\nEl programa ha de:\n* Desitjar bon dia al conserge.\n* Preguntar al conserge quin dia de la setmana és, quin mes i quin dia del mes.\n* Imprimir la llista de tasques correcta per a aquest dia.\nLes tasques que s'han de fer:\n* Tasques diàries: fregar el terra, netejar els lavabos, obrir les cortines\n* Dilluns i dijous: regar les plantes\n* Dimarts i divendres: fregar els sostres\n* Dissabtes: rentar la màquina de cafè\n* El primer de cada mes: rentar les finestres\n* El 7 de cada mes: omplir les màquines expenedores\n* El 14 de cada mes: comprovar les bateries dels detectors d'incendis\n* Cada dia durant els mesos d'hivern: engegar les escalfadores\n* Cada dia durant els mesos d'estiu: engegar l'aire condicionat\n"
-                example_code: "El programa ha d'acabar així:\n  ```\n  _ El programa ha d'acabar així _\n  llista_tasques(dia, mes, any)\n  ```\n"
-            15:
-                story_text: "Després d'una cirurgia, els nostres pacients de vegades poden experimentar molt dolor. En aquests casos, es pot donar als pacients una bomba de morfina. Poden administrar-se una mica de morfina ells mateixos si tenen dolor.\nAquestes bombes s'han de programar amb molta cura, perquè els pacients no se n'administrin massa. Pots programar una bomba de morfina per a nosaltres?\n### Exercici\nEl programa ha de:\n* Preguntar a la infermera quants mil·lilitres de morfina ha rebut avui el pacient.\n* Dir a la infermera que doni el dispositiu al pacient\n* Preguntar al pacient quant dolor experimenta en una escala de l'1 al 10.\n* Dir al pacient que premi el botó x si vol una mica més de morfina.\n* Cridar la funció començar_bombeig amb els arguments nivell_dolor i nivell_morfina si es prem x.\n* La funció ha d'imprimir 'Se us administraran 20 ml més de morfina' mentre el nivell de dolor del pacient sigui superior o igual a 6 i el nivell de morfina sigui inferior a 120.\n* Després d'administrar nova morfina, el programa ha de fer una pausa de 2 minuts (mentre proves el programa pots utilitzar 2 segons).\n* Després d'aquests 2 minuts, s'ha d'actualitzar el nivell de morfina (+20ml) i s'ha d'actualitzar el nivell de dolor preguntant al pacient com se sent ara.\n* Si el nivell de morfina és massa alt o el pacient ja no té dolor, el programa ha de dir als pacients que no rebran més morfina. Si tenen molt dolor, digues-los que truquin a la infermera.\n* Digues al pacient que la bomba es tancarà ara, i que premi x si necessita que la bomba s'iniciï de nou.\n"
-            16:
-                story_text: "Els nostres estudiants de medicina han d’aprendre els termes mèdics de totes les parts del cos. Sembla que els costa recordar tots els noms anatòmics i que troben l’estudi molt avorrit.\nPots ajudar-los creant un joc que els permeti practicar els termes mèdics?\nAquests són els termes que els estudiants han de saber: corpus = cos, caput = cap, ocolus = ull, nasus = nas, auris = orella, os = boca, collum = coll, manus = mà, pectus = pit, humerus = espatlla, venter = estómac, tergum = esquena\n### Exercici\nEl programa ha de:\n* Ser un joc que permeti als estudiants practicar els termes mèdics.\n* Donar als estudiants un punt i un elogi quan han donat la resposta correcta.\n* Treure un punt i dir-los que la resposta és incorrecta quan s’han equivocat.\n* També mostrar als estudiants la resposta correcta durant uns segons si han respost malament, esborrar la resposta de la pantalla i continuar preguntant fins que l’encertin.\n* Continuar jugant fins que l’estudiant hagi respost correctament totes les preguntes.\n* Mostrar la puntuació final a l’estudiant.  \n* Donar a l’estudiant una valoració basada en la seva puntuació: 12 punts: Impressionant!, 8 - 11 punts: Bona feina, continua practicant!, 7 o menys: Hauries d’estudiar més!\n"
     hotel:
         name: hotel
         default_save_name: hotel
@@ -1249,7 +1169,6 @@ adventures:
             7:
                 story_text: "També fem un canvi en com emmagatzemar una paraula en una variable! Ara pots utilitzar `=` en lloc de `{is}` quan emmagatzemes un nom o un número en una variable, així:\n"
                 example_code: "```\nnom = Hedy\nresposta = 20 + 4\n```\n"
-        name: '{is}'
     parrot:
         name: lloro
         default_save_name: Lloro
@@ -1275,33 +1194,6 @@ adventures:
             5:
                 story_text: "Premia el teu lloro-robot si diu la paraula correcta!\n\n### Exercici\nAcaba el codi omplint les 4 comandes que falten.\n"
                 example_code: "```\nparaules {is} parrup, Hedy\n{print} \"Ensenya al teu lloro-robot!\"\nnova_paraula {is} {ask} \"Quina paraula vols ensenyar-li?\"\n{add} nova_paraula {to_list} paraules\nparuala_dita {is} paraules {at} {random}\n{print} \"🧒 Digues \" nova_paraula \", Hedy!\"\n{print} \"🦜 \" paruala_dita\n_ paruala_dita {is} nova_paraula _ \"🧒 Ben fet, Hedy! 🍪\"\n_ _ \"🧒 No, Hedy! Has de dir \" nova_paraula\n```\n"
-    piggybank:
-        name: guardiola
-        default_save_name: Guardiola
-        description: Conta el teu efectiu!
-        levels:
-            7:
-                story_text: "En aquesta aventura aprendràs a crear una guardiola digital.\n\n### Exercici\nAcaba el codi per calcular quants diners tens i quant temps necessites estalviar per comprar allò que vols!\n**Extra** Potser ja has estalviat alguns diners? Dedueix-los de la quantitat que hauràs d'estalviar.\n"
-                example_code: "```\n{print} \"La teva guardiola digital\"\ndesig = {ask} \"Què vols comprar?\"\npreu = {ask} \"Quant costa?\"\nestalviat = {ask} \"Quants diners ja has estalviat?\"\npaga = {ask} \"Quants diners aconsegueixes cada setmana?\"\na_estalviar = preu - estalviat\nweeks = a_estalviar / paga\n{print} \"Ho podràs comprar \" _ \" en \" _ \" setmanes.\"\n```\n"
-            15:
-                story_text: "### Exercici\nEn aquest nivell pots fer que Hedy t'expliqui si has estalviat prou diners!\nAcaba aquest codi omplint els buits!\n"
-                example_code: "```\n_ calcula_pressupost (objectiu, diners, paga):\n    a_estalviar = objectiu- diners\n    setmanes = a_estalviar / paga\n    {if} objectiu _ diners\n        {print} (\"Has d'estalviar més!\")\n        {print} (\"Necessites \", setmanes, \" setmanes més.\")\n    {else}\n        {print} (\"Perfecte! Ja en tens suficient\")\n        {print} (\"Ja ho pots comprar!\")\n\ndiners = {input} (\"Quant has estalviat?\")\nobjectiu= {input} (\"Quants diners necessites?\")\npaga = {input} (\"Quants diners aconsegueixes cada setmana?\")\n\n_\n```\n"
-    pressit:
-        name: '{pressed}'
-        default_save_name: Premut
-        description: Prova de vincular una tecla amb una comanda!
-        levels:
-            6:
-                story_text: "En aquest nivell hi ha una nova paraula clau: `{pressed}`!\nAmb `{pressed}` pots utilitzar les tecles del teu teclat per controlar quines línies s'usen.\n\n### Exercici\nMira l'exemple i afegeix una línia de codi més que reaccioni a una tecla pressionada.\n"
-                example_code: "```\n{print} \"Vols un final feliç (f) o un de trist (t)?\"\n{if} f {is} {pressed} {print} \"Van viure feliços sempre més ❤\"\n{else} {print} \"Un hipopòtam es va menjar el princep 😭\"\n```\n"
-                story_text_2: "També pots vincular comandes de tortuga a les tecles.\n\n### Exercici\nCopia les línies unes quantes vegades perquè puguis crear un dibuix més gran.\n"
-                example_code_2: "```\n{if} x {is} {pressed} {forward} 15\n{else} {turn} 90\n```\n"
-            8:
-                story_text: "Ara que has après sobre `{repeat}`, podem prémer les tecles múltiples vegades.\nPots utilitzar-lo per fer que la tortuga camini cap endavant i giri.\n\n### Exercici\nEl codi que has vist al nivell 5 només comprova la tecla una vegada. Copia el codi d'exemple i afegeix un `{repeat}` perquè puguis prémer les tecles moltes vegades.\nUsa aquest codi per dibuixar-hi alguna cosa bonica.\n"
-                example_code: "```\n{if} x {is} {pressed} {forward} 15 {else} {turn} 90\n```\n"
-            10:
-                story_text: "Ara que saps com combinar instruccions, pots crear una eina de mecanografia tàctil amb `{pressed}`.\n\n### Exercici\nAcaba el codi. Cada vegada s'ha de triar una lletra aleatòria, que hauràs de prémer. Obteniu un punt per cada pressió correcta i dos punts de deducció per una pressió incorrecta.\n**Extra** Neteja la pantalla després de cada lletra i mostra a l'usuari quants punts ha aconseguit.\n"
-                example_code: "```\npunts = 0\nlletres = a, b, c, d, e\n{repeat} 10 {times}\n    lletra = _ _ _\n    {print} \"Prem la lletra \" lletra\n    {if} lletra {is} {pressed}\n    _\n    _\n    _\n```\n"
     print_command:
         name: '{print}'
         default_save_name: imprimeix
@@ -1347,36 +1239,6 @@ adventures:
                     nom= "Hedy"
                     {print}("Em dic ", nom)
                     ```
-    quizmaster:
-        name: presentador
-        default_save_name: Presentador
-        description: Fes les teves preguntes!
-        levels:
-            7:
-                story_text: |
-                    ### Exercici
-                    En aquesta aventura pots crear el teu propi qüestionari de preguntes! Omple els buits, afegeix més preguntes i gaudeix de la teva creació!
-                    Pots fer-ho sobre qualsevol cosa que t'agradi: el teu hobby, el teu animal preferit, el teu llibre preferit o qualsevol altra cosa!
-                example_code: |
-                    ```
-                    {print} "Crea el teu propi qüestionari"
-                    punts_a = 0
-                    punts_b = 0
-                    {print} "Pregunta"
-                    {print} "Opció de resposta A"
-                    {print} "Opció de resposta B"
-                    resposta = {ask} "Quina resposta?"
-                    {if} resposta is "A"
-                    punts_a = punts_a + 1
-                    {if} resposta is "B"
-                    punts_b = punts_b + 1
-                    {print} "Fi del qüestionari!"
-                    {print} "Vegem-ne els resultats!"
-                    {if} punts_a > punts_b
-                    {print} "Pertanys al club A"
-                    {if} punts_b > punts_a
-                    {print} "Pertanys al club B"
-                    ```
     quotation_marks:
         name: '"cometes"'
         default_save_name: cometes
@@ -1395,164 +1257,6 @@ adventures:
                     {print} "Amb l'Anna hem d'anar a fer de cangur als meus nebots"
                     {print} "M'encanta! la meva germana n'estarà orgullosa"
                     ```
-    random_command:
-        name: '{random}'
-        default_save_name: comanda_random
-        description: Introduint la comanda {at} {random}
-        levels:
-            3:
-                story_text: "## A l'atzar\nEn aquest nivell pots fer una llista utilitzant la comanda `{is}`. Pots fer que l'ordinador triï un element a l'atzar d'aquesta llista. Ho fas amb `{at} {random}`.\n"
-                example_code: "```\nanimals {is} gossos, gats, cangurs\n{print} animals {at} {random}\n```\n"
-                story_text_2: "Pots fer servir la comanda `{at} {random}` també en una frase.\n"
-                example_code_2: "```\nmenjar {is} entrepà, tall de pizza, amanida, kebab\n{print} Menjaré menjar {at} {random} per dinar.\n```\n"
-                story_text_3: "### Exercici\nProva la comanda `{at} {random}` per crear el teu propi concurs (com els que es veuen a la TV) on tries una porta o maleta i aquesta conté un superpremi!\nCreus que ho pots fer? Hem posat les primeres línies al codi d'exemple.\n"
-                example_code_3: "```\n{print} El super-concurs!\n{print} Hi ha 3 caixes davant teu...\nescollit {is} {ask} Quina esculls?\npremis {is}  _\n_ a la caixa _ hi ha _\n```\n"
-            14:
-                story_text: "A partir d'ara farem les llistes a la manera Pythoniana, amb claudàtors al seu voltant! També mantindrem les cometes al voltant de cada element com hem après als nivells anteriors.\nUtilitzem claudàtors per indicar una posició en una llista. Per exemple: `friends[1]` és el primer nom de la llista d'amics, com pots veure en la primera part del codi d'exemple.\nLa segona part del codi d'exemple et mostra que també podem combinar dues llistes fent servir la variable i."
-                example_code: "```\namics = [\"Moha\", \"Bernat\", \"Tomeu\"]\n{print} \"En \" amics[1] \"  és el primer amic de la llista.\"\n{print} \"En \" amics[2] \" és el segon amic de la llista.\"\n{print} \"En \" amics[1] \" és el tercer  amic de la llista.\"\n# Ara mirarem dues llistes fent servir la variable i \nnumeros_sort = [15, 18, 6]\n{for} i {in} {range} (1, 3)\n    {print} \"El numero de la sort d'en \" amics[i] \" és el \" numeros_sort[i]\n```\n"
-                story_text_2: "Ara que ja has après a utilitzar els claudàtors en les llistes, també pots començar a fer servir la comanda {at} {random} a la manera de Python!\nNomés has d'escriure el nom de la teva llista amb `[random]` darrere!"
-                example_code_2: "```\nfruita = [\"poma\", \"plàtan\", \"cirera\"]\n{print} fruita[random]\n```"
-    repeat_command:
-        name: '{repeat}'
-        default_save_name: comanda_repeteix
-        description: comanda {repeat}
-        levels:
-            8:
-                story_text: "El nivell 7 afegeix la comanda `{repeat}`. La comanda `{repeat}` es pot utilitzar per executar una línia de codi diverses vegades. Així:\n\n### Exercici\nJuga amb la comanda `{repeat}`. Pots fer la cançó de moltes felicitats amb només 3 línies de codi en lloc de les 4 d'ara?\n"
-                example_code: "```\n{repeat} 3 {times} {print} \"Hedy és divertit!\"\n```\n"
-            9:
-                story_text: "En aquest nivell pots repetir múltiples línies de codi amb només 1 comanda `{repeat}`.\nPer a fer-ho has de crear un bloc amb les línies que vols repetir.\nLes línies en aquest bloc necessitaran **indentació**.\nAixò significa posar quatre espais al començament de cada línia. També hauràs d'indentar quan només vulguis crear un bloc d'una línia.\n"
-                example_code: "```\n{repeat} 5 {times}\n    {print} \"Hola a tothom\"\n    {print} \"Això es repeteix 5 cops\"\n```\n"
-            10:
-                story_text: "Bona feina! Has assolit un altre nivell nou! En el nivell anterior has après a utilitzar múltiples línies de codi en una comanda `{if}` o `{repeat}`.\nPerò encara no hem pogut combinar les dues...\n\nDoncs bones notícies! En aquest nivell se't permetrà posar una comanda `{if}` dins d'una altra comanda `{if}`, una comanda `{repeat}` dins d'una altra comanda `{repeat}` i fins i tot una dins de l'altra.\nProva-ho!\n"
-                example_code: "```\n{repeat} 3 {times}\n    comanda = {ask} \"Què vols demanar?\"\n    {if} comanda {is} pizza\n        {print} \"Nyam! nyam... 🤤\"\n    {else}\n        {print} \"Bah.. la pizza és millor!\"\n```\n"
-    repeat_command_2:
-        name: '{repeat} 2'
-        default_save_name: comanda_repeteix_2
-        description: Comanda {repeat} 2
-        levels:
-            8:
-                story_text: "## Repetir amb altres comandes i amb variables\nAra has practicat la comanda `{repeat}` en combinació amb la comanda `{print}`, però sabies que també podries utilitzar altres comandes amb `{repeat}`?\nEn aquest codi d'exemple pots veure que la comanda `{repeat}` també es pot fer servir amb una comanda `{ask}`, `{if}` o `{else}`.\n"
-                example_code: "```\n{repeat} 2 {times} resposta = {ask} \"Sabies que podries fer una pregunta diverses vegades?\"\n{if} resposta {is} sí \n{repeat} 2 {times} {print} \"Així que ja ho sabies!\"\n{else}\n{repeat} 3 {times} {print} \"Has après alguna cosa nova!\"\n```\n"
-                story_text_2: "Una altra cosa interessant que pots fer amb la comanda `{repeat}` és utilitzar variables per establir la quantitat de vegades que alguna cosa s'ha de repetir. En el codi d'exemple pots veure que primer preguntem a la persona quants anys té.\nDesprés, en la línia 3, la pregunta es repeteix \"edat\" vegades. Així que hem usat la variable \"edat\" amb la comanda `{repeat}`.\n"
-                example_code_2: "```\n{print} \"Eii! És el teu aniversari!\"\nedat = {ask} \"Quants anys fas?\"\n{repeat} edat {times} {print} \"Visca!\"\n```\n"
-            9:
-                story_text: "### En el bloc o no?\nEn aquest nivell has de pensar detingudament quines línies de codi haurien d'estar en el bloc i quines no.\nPer exemple: Si vols cantar la cançó *el gegant del Pi*. Només vols que la línia amb el text \"ara balla\" es repeteixi dues vegades.\nAixò vol dir que l'última línia no hauria de començar amb indentació, ja que no pertany al bloc.\nSi comences l'última línia amb indentació, la cançó no sortirà bé.\n\n### Exercici\nCada línia del codi d'exemple comença amb un espai buit. Elimina els buits i intenta esbrinar quina línia necessita indentació i quina no per fer la cançó del *gegant del Pi*.\n"
-                example_code: "```\n_ {print} \"El gegant del Pi\"\n_ {repeat} 2 {times}\n_ {print} \"ara balla\"\n_ {print} \"El gegant del Pi ara balla pel camí\"\n```\n"
-    restaurant:
-        name: restaurant
-        default_save_name: Restaurant
-        description: Crea el teu propi restaurant virtual
-        levels:
-            1:
-                story_text: "En el nivell 1 pots crear el teu propi restaurant virtual i prendre les comandes dels clients.\n"
-                story_text_2: "### Exercici\nCopia el codi d'exemple a la teva pantalla d'entrada fent clic al botó groc.\nPrimer, omple amb la comanda correcta als buits perquè el codi funcioni correctament.\nA continuació, afegeix almenys 4 línies més de codi al programa del restaurant.\nPregunta al client què li agradaria beure i pregunta si vol pagar en efectiu o amb targeta.\nFinalment, pensa en una manera agradable d'acomiadar el teu client.\n"
-                example_code_2: "```\n{print} Benvingut al restaurant de Hedy 🍟 \n_ Què voldria prendre? \n{echo} Així que voldria\n {print} Gràcies per la teva comanda!\n{print} Ja està de camí!\n```\n"
-            2:
-                story_text: "En el nivell 2 pots expandir el teu restaurant utilitzant variables. En el nivell 1 Hedy només es podia fer `{echo}` de la comanda una vegada i recordar només l'última cosa que s'ha demanat.\nAra pots fer servir variables i Hedy pot recordar tant el menjar com les guarnicions!\n"
-                example_code: "```\n{print} Benvinguts al restaurant de Hedy!\n{print} Avui servim pizza i lasanya.\nmenjar {is} {ask} Què t'agradria menjar?\n{print} Bona elecció! La menjar m'encanta!\nguarnició {is} {ask} Què hi prefereixes verdures o carn?\n{print} menjar amb guarnició en marxa!\n```\n"
-                story_text_2: "### Exercici\nCopia el teu propi codi del restaurant del nivell anterior a la pantalla d'entrada a continuació.\nCorregeix el codi substituint les comandes `{ask}` i `{echo}` i utilitzant variables, com has après en aquest nivell.\n\nAra que el teu codi torna a funcionar, és hora d'afegir-hi alguna cosa més.\nMira l'última línia del codi d'exemple: `{print} menjar amb guarnició en marxa!`\nEn aquesta única línia s'han fet servir 2 variables per crear un resum de la comanda.\nAra afegeix el teu propi resum amb el menjar i les begudes que ha demanat el client.\n\n**Extra** Ara que has après a utilitzar variables, pots fer servir tantes variables com vulguis en una línia. Pots afegir més variables al teu codi, com menjar al local o emportar-s'ho a casa, pagar en efectiu o amb targeta, amb palleta o sense, etc.?\n"
-            3:
-                story_text: "Tens problemes per decidir què vols prendre per a sopar? Pots deixar que Hedy triï per tu!\nSimplement, afegeix llistes dels teus menjars preferits (o dels menys preferits) i Hedy escollirà el teu sopar de manera aleatòria.\nTambé pots divertir-te una mica deixant que Hedy triï el preu del teu sopar! Què n'obtindràs?\n"
-                example_code: "```\nplats {is} espaguetis, cols de Brussel·les, peus de porc\n{print} Soparàs plats {at} {random} per sopar!\npreus {is} 1 euro, 10 euros, 100 euros\n{print} Puja a un total de preus {at} {random}, siusplau.\n```\n"
-                story_text_2: "### Exercici\nAra fes la teva pròpia versió del restaurant aleatori.\nFes una llista d'entrants, plats principals, postres, begudes i preus tu mateix.\nDesprés utilitza les comandes `{print}` i `{at} {random}` per dir al client què hi haurà al seu menú aquesta nit.\n"
-                example_code_2: "```\n{print} Benvingut al teu restaurant aleatori!\nprimers {is} _\nsegons {is} _\npostres {is} _\nbegudes {is} _\npreus {is} _\n_\n```\n"
-            4:
-                story_text: "Al restaurant has d'utilitzar també les cometes quan facis servir la comanda `{print}` o `{ask}`.\n\n### Exercici\nAfegeix les cometes a aquest codi per fer-lo funcionar! Ves amb compte: les variables no han d'estar entre cometes.\nDesprés, utilitza la comanda `{clear}` per mostrar només una línia cada vegada a la pantalla de sortida.\n\n### Exercici 2\nTorna al nivell anterior i copia el teu codi del restaurant. Fes que el codi funcioni en aquest nivell afegint cometes als llocs adequats i afegeix algunes comandes `{clear}`.\n"
-                example_code: "```\n_ Afegiu les cometes a aquest codi _\n{print} Benvingut al Restaurant del xef Hedy!\n{print} Avui servim pizza o lasanya.\nmenjar {is} {ask} Què li agradria menjar?\n{print} Bona elecció! La menjar m'encanta!\nguarnició  {is} {ask} Què hi prefereix verdures o carn?\n{print} menjar amb guarnició en marxa!\nbegudes {is} {ask} Què voldria beure?\n{print} Gràcies per la comanda.\n{print} menjar de guarnició i begudes en marxa!\n```\n"
-            6:
-                story_text: "### Exercici\nEl codi d'exemple mostra com podries programar quan t'has quedat sense un plat del menú al teu restaurant.\nCopia el teu codi del restaurant dels nivells anteriors. Crea un problema al teu restaurant i programa'l, tal com ho ha fet el codi d'exemple.\nPer exemple, el problema pot ser que t'has quedat sense un element del menú, o que no acceptes targetes de crèdit, o que la màquina de gelat està trencada.\n\n**Extra** Has programat el problema i les respostes adequades? Llavors intenta afegir més comandes `{if}` i `{else}` al teu codi.\nIntenta afegir un `{if}` després de cada comanda `{ask}` en el teu codi per fer-lo tan interactiu com sigui possible!\n"
-                example_code: "```\nbegudes_estoc {is} aigua, llionada, coca-cola, suc de taronja\nbeguda {is} {ask} \"Què vols beure?\"\n{if} beguda {in} begudes_estoc\n{print} \"Una \" beguda \" en marxa!\"\n{else}\n{print} \"Ho sentim, ja no en servim.\"\n```\n"
-            7:
-                story_text: "En aquest nivell pots utilitzar les matemàtiques per calcular el preu total de la comanda del teu client, el que pot fer que el teu restaurant virtual sigui més realista.\nPerò també pots afegir moltes més coses al teu restaurant virtual, per exemple, més plats.\n\n### Exercici\nPots afegir moltes més coses al teu restaurant virtual. Per exemple, pots...\n- preguntar quantes persones vindran i multiplicar el preu per aquesta quantitat?\n- afegir un altre plat?\n- donar un descompte quan entren un codi de cupó (secret)?\n- afegir un menú infantil?\n- pensar en altres coses divertides per afegir?\n"
-                example_code: "Pots fer un codi de restaurant senzill, com aquest:\n```\n{print} \"Benvinguts al restaurant del xef Hedy\"\n{print} \"Avui a la nostra carta tenim:\"\n{print} \"Com a plats principals tenim pizza, lasanya, or espaguetis\"\nplat = {ask} \"Què voldrà com a plat principal?\"\npreu = 0\n{if} plat {is} pizza\npreu = 10\n{if} plat {is} lassanya \npreu = 12\n{if} plat {is} espaguetis \npreu = 8\n{print} \"Has demanat \" plat\n{print} \"Costarà \" preu \" euros, si us plau\"\n{print} \"Moltes gràcies, Bon profit!\"\n```\n"
-            8:
-                story_text: "En aquest nivell has après a utilitzar la comanda `{repeat}` per repetir una línia de codi un cert nombre de vegades.\nPots fer servir això al teu restaurant per preguntar ( `{ask}`) a diverses persones què els agradaria menjar.\n\n### Exercici\nPots completar el codi? Hedy necessita repetir aquesta pregunta tantes vegades com persones hi hagi. Així que si hi ha 5 persones, la pregunta s'ha de fer 5 vegades.\n**Extra** Amplia el teu codi amb més preguntes, per exemple sobre quines begudes o salsa volen.\n"
-                example_code: "```\n{print} \"Benvinguts al restaurant del xef Hedy\"\ngent = {ask} \"Quantes persones sereu a taula?\"\n```\n"
-            9:
-                story_text: "En aquest nivell pots fer que el teu restaurant virtual sigui més elaborat repetint diverses línies de codi. Com això:\n\n### Exercici\nAquest codi es pot ampliar amb més elements al menú, per exemple oferint begudes i/o diversos plats o postres. Afegeix almenys un element més.\n**Extra** Afegeix encara més elements, tantes opcions com vulguis!\n"
-                example_code: "```\n{print} \"Benvinguts al restaurant del xef Hedy\"\ngent = {ask} \"Quantes persones sereu a taula?\"\n{print} \"Perfecte!\"\n{repeat} gent {times}\n    menjar = {ask} \"Què voldrà menjar?\"\n    {print} menjar\n{print} \"Moltes gràcies per la comanda!\"\n{print} \"Bon profit!\"\n```\n"
-            10:
-                story_text: "En aquest nivell pots utilitzar la nidificació per fer que el teu restaurant sigui més realista i divertit!\n\n### Exercici\nLa indentació s'ha eliminat del codi d'exemple.\nPots esbrinar quanta indentació necessita cada línia perquè el codi funcioni correctament?\nSi el client demana pizza, Hedy no hauria de preguntar quina salsa vol el client.\n\n**Extra** El restaurant no disposa de totes les salses. Fes una llista de les salses disponibles i dona una resposta amb cada comanda en funció de si està disponible. <br>\n**Extra** Les pizzes tenen ingredients. Pregunta als clients què volen. <br>\n**Extra** Els clients potser volen beguda. Pregunta'ls-hi també! <br>\n"
-                example_code: "```\n{print} \"Benvinguts al restaurant del xef Hedy\"\ngent = {ask} \"Quantes persones sereu a taula?\"\n{print} \"Perfecte!\"\npreu = 0\n{repeat} gent {times}\n_ menjar = {ask} \"Què voldrà menjar?\"\n_ {print} menjar\n_ {if} menjar {is} patates fregides\n_ preu = preu + 3\n_ salsa = {ask} \"Quina salsa vol per les patates?\"\n_ {if} salsa {is} no\n_ {print} \"sense salsa\"\n_ {else}\n_ preu = preu + 1\n_ {print} \"amb \" salsa\n_ {if} menjar {is} pizza\n_ preu = preu + 4\n{print} \"En total costarà \" preu \" euros\"\n{print} \"Bon profit!\"\n```\n"
-                story_text_2: |
-                    En aquest nivell aprendràs noves ordres per ampliar encara més el teu codi.
-
-                    ### Exercici 1
-                    Col·loca un `{and}` i un `{or}` al lloc lògic del programa.
-
-                    ### Exercici 2
-                    Amplia el teu restaurant amb almenys un `{and}` i un `{or}` més.
-                    Per exemple, crea un cupó de descompte especial que només s'apliqui a la pizza, o dona una beguda gratuïta al teu client amb patates fregides i pancakes. O una cosa completament diferent, i tant!
-                example_code_2: |
-                    ```
-                    preu = 10
-                    menjar = {ask} "Què voldries menjar?"
-                    beguda = {ask} "Què voldries beure?"
-                    {if} menjar {is} "entrepà" _ beguda {is} "suc"
-                        {print} "Aquest és el nostre menú amb descompte"
-                        preu = preu - 3
-                    {if} beguda {is} "aigua" _ beguda {is} "suc"
-                        {print} "Quina tria més saludable!"
-                    {print} "Seran " preu " euros"
-                    ```
-            11:
-                story_text: "En aquest nivell aprendràs com demanar fàcilment comandes per a diferents plats.\n\n### Exercici 1\nAcaba el codi amb una comanda `{ask}` en els buits de manera que se li pregunti al client què vol menjar per a cada plat.\n"
-                example_code: "```\nplats = entrant, primer plat, postres\n{for} plat {in} plats\n    {print} \"Què vol de \" plat \"?\"\n    _ \n    _\n```\n"
-                story_text_2: "### Exercici\nPer descomptat, també pots fer una comanda per a diverses persones!\nPots afegir la quantitat correcta d'indentació abans de cada línia perquè el codi funcioni correctament?\nConsell: algunes línies no necessiten cap indentació.\n"
-                example_code_2: "```\n_ plats = primer plat, segon plat, postre\n_ noms= Toni, Olga\n_ {for} nom {in} noms\n_ {for} plat {in} plats\n_ menjar = {ask} nom \", què t'agradaria menjar com a \" plat \"?\"\n_ {print} nom \" demana \" menjar \" com a \" plat\n```\n"
-            16:
-                story_text: "Amb la comanda `{while}` pots assegurar-te que els teus clients puguin continuar afegint comandes fins que hagin acabat.\n\n### Exercici\nAfegeix correctament la comanda `{while}` a aquest codi.\n"
-                example_code: "```\n{print} \"Benvinguts al McHedy\"\ncontinuar = \"sí\"\n_\n    comanda = {ask} \"Què vol demanar?\"\n    {print} comanda\n    continuar = {ask} \"Voldria demanar alguna cosa més?\"\n{print} \"Gràcies!\"\n```\n"
-    rock:
-        name: pedra, paper, tisores
-        default_save_name: Pedra_2
-        description: Crea el teu propi joc de pedra, paper, tisores
-        levels:
-            1:
-                story_text: "Al nivell 1 començarem fent el joc de pedra, paper, tisores.\n\nAmb la comanda `{ask}` podrem triar, i amb la comanda `{echo}` podràs repetir l'elecció mostrant-la per pantalla.\n"
-                example_code: "```\n{print} què vols escollir?\n{ask} tria entre pedra, paper o tisores\n{echo} la teva elecció és:\n```\n"
-                story_text_2: "### Exercici\nEn lloc d'utilitzar paraules, també pots fer servir emojis: ✊✋✌\nPots crear un programa usant emojis?\n"
-                example_code_2: "```\n{print} què vols escollir?\n{ask} tria entre _\n{echo} la teva elecció és:\n```\n"
-            2:
-                story_text: "En aquest nivell pots practicar l'ús de variables, i així podràs fer el joc de pedra, paper, tisores al pròxim nivell!\n### Exercici\nAcaba el codi omplint la **variable** en el buit.\nAquest joc no és molt interactiu, però no et preocupis! A la pròxima aventura aprendràs com utilitzar variables amb la comanda `{ask}` per fer el teu joc interactiu!\n"
-                example_code: "```\neleccio {is} pedra\n{print} Escullo _\n```"
-            3:
-                story_text: "Pots utilitzar la comanda `{at} {random}` per fer que l'ordinador triï pedra, paper o tisores!\n\n### Exercici\nAcaba el codi fent servir la comanda `{at} {random}`.\n"
-                example_code: "```\nopcions {is} pedra, paper, tisores\n{print} opcions _\n```\n"
-                story_text_2: "**Extra** Fes un joc per a dos jugadors. Primer demana als dos jugadors que introdueixin els seus noms. Després deixa que l'ordinador triï les seves eleccions aleatòriament.\n"
-                example_code_2: "```\nopcions {is} pedra, paper, tisores\njugador_1 {is} {ask} Nom del jugador 1:\n_\n```\n"
-            4:
-                story_text: "En aquest nivell podem programar encara més el joc de pedra, paper, tisores. Però si vols afegir text recorda que hauràs d'utilitzar cometes.\n### Exercici\nOmple les cometes en els buits. Recorda que la variable `opcions` ha d'estar fora de les cometes.\n"
-                example_code: "```\nopcions {is} pedra, paper, tisores\n{print} _ L'ordinador ha escollit ... _ opcions {at} {random}\n```\n"
-            5:
-                story_text: "En aquest nivell podem determinar si hi ha empat o no. Per això necessites la nova comanda `{if}`.\n\n### Exercici\nAcaba el codi omplint els buits:\n* Fes que l'ordinador triï una opció aleatòria\n* Pregunta al jugador què vol triar\n* Omple les variables correctes a la línia 4 i 5\n* Acaba la línia 6 perquè Hedy pugui comprovar si hi ha empat o no.\n"
-                example_code: "```\nopcions {is} pedra, paper, tisores\neleccio_ordinador {is} _\neleccio {is} _\n{print} \"Has escollit \" _\n{print} \"L'ordinador ha escollit \" _\n{if} _ {is} _ {print} \"empat!\" {else} {print} \"no hi ha empat\"\n```\n\nOmple els buits amb codi correcte per veure si és un empat.\n"
-            10:
-                story_text: "En aquest nivell amb la comanda `{and}`pots escurçar el codi del joc de pedra, paper, tisores!, mira l'exemple.\n\n### Exercici\nAcaba el codi de manera que sempre es mostri qui ha guanyat. Executa el teu codi diverses vegades per assegurar-te que sempre es mostra el guanyador.\n"
-                example_code: "```\nopcions = \"pedra\", \"paper\", \"tisores\"\nteva_eleccio = {ask} \"Què vols escollir?\"\nordinador_eleccio = opcions {at} {random}\n{print} \"Has escollit \" teva_eleccio\n{print} \"L'ordinador escull \" ordinador_eleccio\n{if} ordinador_eleccio {is} teva_eleccio\n    {print} \"Empat\"\n{elif} ordinador_eleccio {is} \"pedra\" {and} teva_eleccio {is} \"paper\"\n    {print} \"Has guanyat!\"\n{elif} ordinador_eleccio {is} \"pedra\" {and} teva_eleccio {is} \"tisores\"\n    {print} \"Has perdut!\"\n_\n```\n"
-            11:
-                story_text: "### Exercici\nEn els nivells anteriors has fet sovint el teu propi joc de pedra, paper, tisores. Pots acabar el codi i utilitzar correctament la comanda `{for}` i fer que el joc funcioni?\n"
-                example_code: "```\nopcions = _\njugadors = _\n{for} _\n```\n"
-            16:
-                story_text: "### Exercici\nJuga fins a guanyar l'ordinador! Però primer, acaba el codi d'exemple...\n"
-                example_code: "```\nguanyar = \"no\"\nopcions = \"pedra\", \"paper\", \"tisores\"\n{while} guanyar == \"no\"\n    teva_eleccio = {ask} \"Què esculls?\"\n    ordinador_eleccio = opcions {at} {random}\n    {print} \"Has escollit \" teva_eleccio\n    {print} \"L'Ordinador ha escollit \" ordinador_eleccio\n    {if} ordinador_eleccio == teva_eleccio\n        {print} \"Empat\"\n    {if} ordinador_eleccio == \"pedra\" {and} teva_eleccio == \"tisores\"\n        {print} \"Has perdut!\"\n    {if} ordinador_eleccio == \"pedra\" {and} teva_eleccio == \"paper\"\n        {print} \"Has gunayat!\"\n        guanyar = \"sí\"\n_\n```\n"
-    rock_2:
-        name: pedra, paper, tisores 2
-        default_save_name: pedra_2
-        description: 2a part de pedra, paper, tisores
-        levels:
-            2:
-                story_text: "Ara que has après a utilitzar la comanda `{ask}`, també pots fer que el teu codi de pedra, paper, tisores sigui interactiu!\n\n### Exercici\nFes que el codi de pedra, paper, tisores sigui interactiu afegint la comanda `{ask}` amb una pregunta al teu codi de pedra, paper, tisores.\n"
-                example_code: "```\neleccio {is} _\n{print} Escullo eleccio\n```\n"
-    secret:
-        name: superespia
-        default_save_name: SuperEspia
-        description: Fes el teu propi codi espia
-        levels:
-            10:
-                story_text: "Podem simplificar el codi de superespia amb `{and}`, de manera que només necessitem un `{if}`.\n\n### Exercici 1\nCompleta el codi omplint la comanda correcta en el buit. Consell: El superespia ha de respondre TOTES les preguntes correctament abans d'obtenir la informació confidencial!\n\n### Exercici 2\nVolem confondre encara més l'enemic! Crea una llista amb respostes falses i selecciona'n una a l'atzar quan es doni una resposta incorrecta.\n"
-                example_code: "```\nnom = {ask} \"Com et dius?\"\npassword = {ask} \"Quina és la contrasenya?\"\n{if} nom {is} \"Agent007\" _ password {is} \"TOPSECRET\"\n    {print} \"Ves a l'aeroport demà a les 02:00\"\n{else}\n    {print} \"Ves a l'estació de tren avui a les 10:00\"\n ```\n"
     sleep_command:
         name: '{sleep}'
         default_save_name: comanda_sleep
@@ -1623,34 +1327,6 @@ adventures:
             15:
                 example_code: "```\n{def} missatge_benvinguda (tractament, cognom, pais, num_habitacio)_\n    {print} (\"Benvingut a l'Hotel Hedy, \", tractament \", \" cognom)\n    nice_trip {is} {input} (\"Ha tingut un bon viatge des de \", pais, \"?\")\n    {if} nice_trip == \"si\":\n        {print} (\"Fantàstic!\")\n    {else}\n        {print} (\"Quina llàstima...\")\n        {print} (\"Afortunadament podrà descançar a la seva habitació.\")\n    {print} (\"La seva habitació és la \", num_habitacio)\n\n{print} (\"Hola, si us plau omple les dades per al check-in')\ntractament= {input} (\"Quin tractament prefereix (sr, sra, dr, etc.)?\")\ncognom = {input} (\"Com es diu de cognom?\")\npais_origen= {input}(\"A quin país resideix?\")\n\nmissatge_benvinguda(tractament, cognom, pais_origen, 105)\n```\n"
                 story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {ask}.\nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.\nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.\nAquí tens un exemple d'una funció amb arguments combinada amb comandes `{ask}`.\n"
-    in_command:
-        default_save_name: comanda_in
-        name: '{in}'
-        description: Introducció a la comanda {in}
-        levels:
-            6:
-                example_code_2: "```\nanimals {is} gos, vaca, ovella\nresposta {is} {ask} \"Quin és el teu animal preferit?\"\n_ resposta _ animals _ \"Ala, el meu també!\"\n_ _ \"Els meus animals preferits són els gossos, les vaques i les ovelles.\"\n```\n"
-                story_text: "## Llistes\nSi volem comprovar que una cosa és dins d'una llista utilitzem la comanda `{in}`.  \nEl codi següent imprimeix \"Bé!\" si tries verd o groc, i \"Buu\" en cas contrari.\n"
-                example_code: "```\ncolors_bonics {is} verd, groc\ncolor_preferit {is} {ask} \"Quin és el teu color preferit?\"\n{if} color_preferit {in} colors_bonics\n{print} \"Bé!\"\n{else}\n{print} \"Buu\"\n```\n"
-                story_text_2: "### Exercici\nCompleta el codi d'exemple omplint els buits amb les comandes que has après.\nQuan hagis acabat el codi, intenta crear un programa propi i fes servir una pregunta que hagis pensat tu mateix.\n"
-    if_command:
-        levels:
-            5:
-                example_code_3: "```\nresposta {is} {ask} \"2 + 2 = ?\"\n_ _ _ 4 _ \"Correcte!\"\n_ _ \"No 2 + 2 = 4\"\n```\n"
-                example_code: "```\nnom {is} {ask} \"Com et dius?\"\n{if} nom {is} Hedy {print} \"bé!\" {else} {print} \"buu!\"\n```\n"
-                story_text: "## If... else....\nEn el nivell 5 hi ha una cosa nova, la comanda`{if}`! Amb el `{if}` pots triar entre dues opcions diferents.  \nAquest codi imprimeix \"bé!\" si introdueixes Hedy com a nom, i \"buu!\" si introdueixes alguna altra cosa.  \nLes comandes `{ask}` i `{print}` continuen funcionant igual que ho feien en el nivell 4.\n"
-                story_text_3: "### Exercici\nIntenta crear el teu propi codi amb `{if}` i `{else}`. Comença amb el codi d'exemple si vols.\n"
-                story_text_2: "De vegades, el codi d'un `{if}` és massa llarg i no hi cap bé en una sola línia. <br> Pots dividir el codi en dues línies, començant la segona línia amb `{else}`, així:\n"
-                example_code_2: "```\nnom {is} {ask} \"Com et dius?\"\n{if} nom {is} Hedy {print} \"bé!\"\n{else} {print} \"buu!\"\n```\n"
-            9:
-                example_code: "```\nnom = {ask} \"Com et dius?\"\n{if} nom {is} Hedy\n    {print} \"Benvingut Hedy\"\n    {print} \"Pots jugar al teu ordinador!\"\n```\n"
-                story_text: "## Condicionals\nHas après a repetir un bloc de línies de codi després d'una comanda `{repeat}`.  \nAra també pots utilitzar la indentació per crear blocs després d'una comanda `{if}` o `{else}`.  \nDona-li un cop d'ull al codi d'exemple.\n\n### Exercici\nAfegeix una comanda `{else}` al codi d'exemple. Crea un bloc de línies usant la indentació. Això es fa començant cada línia amb 4 espais.\n"
-            10:
-                example_code: "```\ncontinuar = {ask} \"Vols continuar?\"\n{if} continuar = sí\n    segur = {ask} \"Segur?\"\n    {if} segur {is} sí\n        {print} \"Continuem, doncs\"\n    {else}\n        {print} \"No n'estàs segur\"\n{else}\n    {print} \"No vols continuar\"\n```\n"
-                story_text: "En aquest nivell també pots posar una comanda `{if}` dins d'una altra comanda `{if}`.\n"
-        name: '{if} & {else}'
-        description: Introducció a la comanda {if}
-        default_save_name: comanda_if
     language:
         default_save_name: Llengua
         levels:
@@ -1759,9 +1435,6 @@ adventures:
                     ```
         description: Reprodueix una nota!
     songs_2:
-        name: canta una cançó! 2
-        default_save_name: Cançó 2
-        description: Canta una cançó 2
         levels:
             11:
                 story_text: |
@@ -2024,8 +1697,6 @@ adventures:
                 example_code: "Pista del programa dissenya el teu braçalet\n```\n{define} dibuixa_un_quadrat\n_\n\n{color} blanc\n{turn} -90\n{forward} 300\n{turn} 180\n\n{for} i {in} {range} 1 {to} 5\n    {color} gris\n    {forward} 100\n    forma = {ask} \"Quina és la forma següent del teu braçalet?\"\n    color_escollit = {ask} \"De quin color?\"\n    {color} color_escollit\n    {if} forma = \"quadrat\"\n        {call} dibuixa_un_quadrat\n```\n"
             15:
                 story_text: "### Exercici\nCrea un programa que pregunti al jugador quants costats ha de tenir la seva figura i després crea aquesta figura.\nLa figura de la imatge és el resultat quan el jugador introdueix 10.\n\n<div class=\"w-full flex flex-row gap-2\">\n <img src=\"https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b\" width=\"300\">\n <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2\" width=\"200\">\n</div>\n"
-        description: Dibuixa la imatge amb la tortuga
-        name: dibuixa-ho!
     rock_2:
         levels:
             2:
