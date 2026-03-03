@@ -590,17 +590,11 @@ adventures:
             11:
                 story_text: "### Cvičení\nTrvá všem házení kostkami příliš dlouho? V této úrovni můžete nechat Hedy házet všemi kostkami najednou!\nZměňte jména na jména svých přátel nebo rodiny a dokončete šifru.\n"
                 example_code: "```\nhráči = Ann, John, Jesse\nmožnosti = 1, 2, 3, 4, 5, 6\n_ _ _ _\n    {print} hráč ' hodí ' volby {at} {random}\n    {sleep}\n```\n"
-            8:
-                example_code: "```\nvolby = 1, 2, 3, 4, 5, 6\n_ _ _ _ _ _ _\n```\n"
-                story_text: "V této úrovni si také můžete znovu vyrobit kostku. Pomocí kódu `{repeat}` můžete snadno hodit celou ruku kostek.\n\n### Cvičení\nPokuste se dokončit ukázkový kód!  **Extra** Přemýšlejte o nějaké hře, kterou znáte a která zahrnuje kostky, a naprogramujte ji pomocí `{repeat}`.\n"
             7:
-                example_code_2: "Podařilo se vám vypočítat skóre pro 8 kostek? To vyžadovalo hodně kopírování a vkládání, že? V 7. úrovni vám to usnadníme!\n"
                 story_text: "V tomto případě můžete také znovu vytvořit kostku žížaly, ale nyní můžete také vypočítat, kolik bodů bylo hozeno.\nMožná víte, že žížala počítá 5 bodů za žížaly. Nyní si po hodu můžete ihned spočítat, kolik bodů jste hodili.\nToto je kód pro výpočet bodů pro jednu kostku:\n\nCvičení: ### Cvičení\nDokážete kód upravit tak, abyste získali celkový počet bodů za 8 kostek? K tomu musíte zkopírovat a vložit několik řádků kódu.\n"
                 example_code: "```\nchoices = 1, 2, 3, 4, 5, earthworm\npoints = 0\nthrow = choices {at} {random}\n{print} 'you threw ' throw\n{if} throw {is} earthworm\npoints = points + 5\n{else}\npoints = points + throw\n{print} 'those are ' points ' points'\n```\n"
             3:
-                example_code_2: "```\nvolby {is} _\n```\n"
                 example_code: "```\nmožnosti {is} 1, 2, 3, 4, 5, žížala\n{print} Hodil jsi _ {at} {random} !\n```\n"
-                story_text_2: "### Cvičení\nKostky ve výše uvedeném příkladu jsou kostky pro konkrétní hru. Dokážete vyrobit normální kostky?\nNebo jiné speciální kostky z jiné hry?\n"
                 story_text: "V této úrovni si můžeme vybrat ze seznamu. Díky tomu můžeme nechat počítač vybrat jednu stranu kostky.\nPodívejte se na hry, které máte doma ve skříni.\nJsou mezi nimi hry s (speciální) kostkou? Pomocí tohoto kódu ji můžete také zkopírovat.\nNapříklad kostku hry Žížaly s čísly 1 až 5 a žížalou na ní.\n\n![Kostka žížal s čísly 1 až 5 a žížalou na ní](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)\n"
             4:
                 story_text: "V této úrovni můžete také vytvářet kostky. Tentokrát si to však můžete vyzkoušet sami, bez ukázkového kódu!\n\n### Cvičení\nV této úrovni si vytvořte vlastní kostky.\nTip: Pokud netušíte, jak kostky vyrobit. Podívejte se na své kostky z předchozí úrovně, ale nezapomeňte přidat uvozovky.\n"
