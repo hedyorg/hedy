@@ -11,7 +11,10 @@ describe('Navigation buttons', () => {
     navigateHomeButton('hedy_button', Cypress.env('hedy_page'))
     navigateHomeButton('for_teacher_button', Cypress.env('teachers_page'))
     navigateHomeButton('manual_button', Cypress.env('manual_page'))
-    navigateHomeButton('programs_button', Cypress.env('programs_page'))
+    goToHome();
+    cy.getDataCy('user_dropdown').find('a.menubar-text').first().click();
+    cy.getDataCy('programs_button').click();
+    cy.url().should('include', Cypress.env('programs_page'))
   })
 
   it('As a student: Is able to click all menubar buttons', () => {
@@ -19,7 +22,10 @@ describe('Navigation buttons', () => {
     navigateHomeButton('hedy_button', Cypress.env('hedy_page'))
     notNavigateHomeButton('for_teacher_button')
     notNavigateHomeButton('manual_button')
-    navigateHomeButton('programs_button', Cypress.env('programs_page'))
+    goToHome();
+    cy.getDataCy('user_dropdown').find('a.menubar-text').first().click();
+    cy.getDataCy('programs_button').click();
+    cy.url().should('include', Cypress.env('programs_page'))
   })
 
   it('As a user: Is able to click all menubar buttons', () => {
@@ -27,7 +33,10 @@ describe('Navigation buttons', () => {
     navigateHomeButton('hedy_button', Cypress.env('hedy_page'))
     notNavigateHomeButton('for_teacher_button')
     notNavigateHomeButton('manual_button')
-    navigateHomeButton('programs_button', Cypress.env('programs_page'))
+    goToHome();
+    cy.getDataCy('user_dropdown').find('a.menubar-text').first().click();
+    cy.getDataCy('programs_button').click();
+    cy.url().should('include', Cypress.env('programs_page'))
   })
 })
 

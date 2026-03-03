@@ -68,6 +68,29 @@ describe('Lezer parser tests for level 13', () => {
                 multiLevelTester('AssignList boolean values', code, expectedTree, 13, 16)
             });
         })
+        describe('Test if pressed with number', () => {
+            const code = `if 1 is pressed:\nprint('hello')`
+            const expectedTree =
+                `Program(
+                    Command(
+                        If(
+                            if,
+                            Condition(PressedCheck(Number,is,pressed)),
+                            Op
+                        )
+                    ),
+                    Command(
+                        Print(
+                            print,
+                            Op,
+                            PrintArguments(Expression(String)),
+                            Op
+                        )
+                    )
+                )`
+
+            multiLevelTester('Test if pressed with number', code, expectedTree, 13, 16);
+        })
         describe('Play tests', () => {
             describe('Play list access random', () => {
                 const code = 'play list[random]'

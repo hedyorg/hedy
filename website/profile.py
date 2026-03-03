@@ -3,8 +3,8 @@ import datetime
 from flask import make_response, request, session
 from website.flask_helpers import gettext_with_fallback as gettext
 
-from safe_format import safe_format
-from hedy_content import ALL_KEYWORD_LANGUAGES, ALL_LANGUAGES, COUNTRIES
+from hedy.safe_format import safe_format
+from website_content import ALL_KEYWORD_LANGUAGES, ALL_LANGUAGES, COUNTRIES
 from utils import is_testing_request, timems, valid_email
 from website.auth import (
     SESSION_LENGTH,

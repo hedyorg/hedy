@@ -54,12 +54,12 @@ levels:
 
                 Etkileşimli hikayeler oluşturmak için üç metin koduna ihtiyacımız var.
         2:
+            header: '`{print}`'
             text: |-
                 Seviye 1'de kullanabileceğiniz ilk kod "`{print}`".
 
                 "`{print}`" ekranda metin göstermek için kullanılır.
             code: '{print} Bu yazıyı ekranda göster'
-            header: '`{print}`'
         3:
             header: '"`{print}`" komutu'
             text: |-
@@ -70,20 +70,20 @@ levels:
 
                 {print} Artık programlamaya başladık!'
         4:
+            header: '`{ask}`'
             text: |-
                 Seviye 1'de kullanabileceğiniz ikinci kod "`{ask}`".
 
                 "`{ask}`" cevaplanmasını istediğimiz bir soru sormak için kullanılır.
-            header: '`{ask}`'
             code: "{print} Kendi taş kağıt makas oyununa hoş geldin!\n{ask} Hangisini seçeceksin?"
         5:
+            header: '`{echo}`'
             text: |-
                 Önceki örnekte görebileceğiniz gibi, eğer "`{ask}`" komutunu kullanırsanız, bir soru sorabilirsiniz.
                 Ancak cevap çıktı ekranında gösterilmez.
 
                 Eğer verilen cevabın gösterilmesini istiyorsanız, bu seviyenin son komutunu kullanabilirsiniz: "`{echo}`".
                 "`{echo}`" komutu bir "`{ask}`" komutuna verilen cevabı ekranda göstermek için kullanılır.
-            header: '`{echo}`'
             code: "{print} Merhaba!\n{ask} Adın ne senin?\n{echo} merhaba"
         6:
             header: Programlama!
@@ -114,9 +114,9 @@ levels:
                 {forward} 50
                 {turn} {left}
         12:
-            code: "Ben DJ Hedy\n{print} Hangi şarkıyı dinlemek istersiniz?\n{ask} O şarkıyı ben de severim!\n{print} Sıradaki parçamız... {echo}"
             header: Hata Ayıklama
             text: Bir kodun hatalarını ayıklamak, koddaki hatalardan kurtulmak demektir. Gelin bu kodda birlikte hata ayıklayalım. Hata ayıklayıcıyı başlatmak için uğur böceği düğmesine tıklayın.
+            code: "Ben DJ Hedy\n{print} Hangi şarkıyı dinlemek istersiniz?\n{ask} O şarkıyı ben de severim!\n{print} Sıradaki parçamız... {echo}"
             debug: 'True'
         13:
             header: Programlama eğlencesi başlasın!
@@ -158,14 +158,14 @@ levels:
 
                 İsterseniz, "`{sleep}`" komutunun süresine karar vermek için bir sayı yerine bir değişken bile kullanabilirsiniz.
             code: "süre {is} 10\n{print} En sevdiğim renk...\n{sleep} süre\n{print} yeşil!"
+        7:
+            header: Hata Ayıklama
+            text: Bir kodun hatalarını ayıklamak, koddaki hatalardan kurtulmak demektir. Gelin bu kodda birlikte hata ayıklayalım. Hata ayıklayıcıyı başlatmak için uğur böceği düğmesine tıklayın.
+            code: "{print} Donut dükkanına hoş geldiniz!\ndolgu {is} İçinde ne tür bir dolgu istersiniz?\n{print} Seçimin... Dolgu! Hmm!\nsos {ask} Üstüne ne tür bir sos istersiniz?\nsos çok lezzetli!\n{print} Gidip çöreğini getireyim. {sleep}\n{print} Al bakalım! sos soslu dolgu dolgulu bir çörek!\n{ask} İyi günler dilerim!"
+            debug: 'True'
         8:
             header: Programlama eğlencesi başlasın!
             text: Seviye 2'deki maceraların tadını çıkarın!
-        7:
-            text: Bir kodun hatalarını ayıklamak, koddaki hatalardan kurtulmak demektir. Gelin bu kodda birlikte hata ayıklayalım. Hata ayıklayıcıyı başlatmak için uğur böceği düğmesine tıklayın.
-            debug: 'True'
-            header: Hata Ayıklama
-            code: "{print} Donut dükkanına hoş geldiniz!\ndolgu {is} İçinde ne tür bir dolgu istersiniz?\n{print} Seçimin... Dolgu! Hmm!\nsos {ask} Üstüne ne tür bir sos istersiniz?\nsos çok lezzetli!\n{print} Gidip çöreğini getireyim. {sleep}\n{print} Al bakalım! sos soslu dolgu dolgulu bir çörek!\n{ask} İyi günler dilerim!"
     3:
         1:
             header: Seviye 3'e hoş geldiniz
@@ -202,24 +202,24 @@ levels:
                 "`{add}` `{to_list}`" komutunun tersi "`{remove}` `{from}`" komutudur.
                 Bu komut listeden bir öğeyi kaldırır.
             code: "hayvanlar {is} köpek, kedi, kanguru\nsevilmeyen {is} {ask} Hangi hayvanı sevmiyorsun?\n{remove} sevilmeyen {from} hayvanlar\n{print} Benim seçimim hayvanlar {at} {random}"
-        8:
-            header: Hadi işe koyulalım!
-            text: Seviye 3'teki maceraların tadını çıkarın!
         7:
             header: Hata Ayıklama
             text: Bu kodda hata ayıklayalım!
             code: "müzik_türleri {is} rock, pop, metal, indie, caz\nseçilen_tür {is} müzik {at} {random}\n{print} Hadi seçilen türü dinleyelim\ngüzel {ask} Bu türü sever misin?\n{remove} seçilen_tür {to_list} seçilen_tür\nikinci_tercih {is} müzik_türleri\n{print} yoksa şunu mu tercih edersiniz... ikinci_tercih {at} {random}\n{remove} ikinci_tercih {from} müzik_türleri\n{print} Ben en çok müzik_türleri {random} severim!"
             debug: 'True'
+        8:
+            header: Hadi işe koyulalım!
+            text: Seviye 3'teki maceraların tadını çıkarın!
     4:
         1:
             header: Seviye 4'e hoş geldiniz
             text: Bu seviyede tırnak işaretlerini nasıl kullanacağınızı öğreneceksiniz.
             code: "{print} 'tırnak işaretleriyle yazdıralım!'"
         2:
-            text: 'Önceki seviyelerde, bu sorunla karşılaşmış olabilirsiniz:'
-            debug: 'True'
             header: Sorun var
+            text: 'Önceki seviyelerde, bu sorunla karşılaşmış olabilirsiniz:'
             code: "adım {is} Sophie\n{print} Benim adım adım"
+            debug: 'True'
         3:
             header: Bunu tırnak işaretleri ile düzeltelim
             text: |-
@@ -252,8 +252,8 @@ levels:
                 Dikkatli olun! Artık tırnak işareti kullandığınıza göre, kısaltmalarda ve özel isimlerde kesme işareti kullanamazsınız. (Bundan kaçınmaya alternatif bir çözüm, cümleleri çift tırnak arasına almaktır, deneyip görün)
 
                 Lütfen aşağıdaki ekranda "Hedy'nin" veya "TC'de" gibi bir özel isim veya kısaltma yazdırmayı deneyin ve ne olduğunu görün...
-            debug: 'True'
             code: "{print} 'Böyle işe yaramaz: Hedy'yi çağır!'"
+            debug: 'True'
         9:
             header: '`{clear}`'
             text: |-
@@ -262,14 +262,14 @@ levels:
 
                 Bununla birlikte her zaman "`{sleep}`" komutunu da kullanmaya da dikkat edin. Eğer bunu yapmazsanız bilgisayar daha siz okuyamadan tüm metni silecektir!
             code: "{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'SÜRPRİZ!'"
+        10:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım!
+            code: "{clear}\n{print} Sahile gitmek için ne güzel bir gün!\n{ask} 'Kumdan kale mi yapmak yoksa okyanusta yüzmek istersin?'\n{print} 'Demek aktivite istiyorsunuz '\n{print} 'Hedy'yi de çağıralım'\n{print} 'Şu güzel deniz kabuklarına bak!'\nrenkler {is} 'turuncu, gümüş, beyaz, kahverengi'\n{print} 'Renklerden en sevdiğim renkler {at} {random}'\nseçim {is} {ask} Hangisini seviyorsun?"
+            debug: 'True'
         11:
             header: Hazır Ol, Ayarla, Başla!
             text: Seviye 4'teki maceraların tadını çıkarın!
-        10:
-            header: Hata Ayıklama
-            code: "{clear}\n{print} Sahile gitmek için ne güzel bir gün!\n{ask} 'Kumdan kale mi yapmak yoksa okyanusta yüzmek istersin?'\n{print} 'Demek aktivite istiyorsunuz '\n{print} 'Hedy'yi de çağıralım'\n{print} 'Şu güzel deniz kabuklarına bak!'\nrenkler {is} 'turuncu, gümüş, beyaz, kahverengi'\n{print} 'Renklerden en sevdiğim renkler {at} {random}'\nseçim {is} {ask} Hangisini seviyorsun?"
-            text: Bu kodda hata ayıklayalım!
-            debug: 'True'
     5:
         1:
             header: Seviye 5'e hoş geldiniz
@@ -311,14 +311,14 @@ levels:
 
                 Hedy'nin büyük/küçük harfe duyarlı olduğunu lütfen unutmayın. Bu, "yeşil" yerine "Yeşil" yanıtını verirseniz, Hedy'nin "eh işte" yazdıracağı anlamına gelir.
             code: "güzel_renkler {is} yeşil, sarı\nsevilen_renk {is} {ask} 'En sevdiğin renk hangisi?'\n{if} sevilen_renk {in} güzel_renkler {print} 'güzel!'\n{else} {print} 'eh işte'"
-        8:
-            header: Hadi başlayalım!
-            text: Seviye 5'teki maceraların tadını çıkarın!
         7:
             header: Hata Ayıklama
             text: Bu kodda hata ayıklayalım!
             code: "{print} HedyAir Güvenlik'e Hoş Geldiniz!\nuçak_bileti {is} {ask} 'Uçak biletiniz yanınızda mı?'\n{if} uçak_bileti evet {print} Harika!\n{else} Lütfen uçak biletinizi hazırlayın..\npasaport {is} 'Pasaportunuzu görebilir miyim, lütfen?'\n{if} pasaport {is} evet 'Teşekkür ederim.'\n{else} 'Pasaportunuz olmadan uçamazsınız'\nbildirim {is} {ask} Bildirmek istediğiniz bir eşyanız var mı?\n{if} bildirim {is} evet\nbildirilecek_eşya {is} {ask} 'Neyi bildirmek istersiniz'\n{else} Pekala.\n{print} Teşekkür ederim. Lütfen A22 kapısına gidin.'"
             debug: 'True'
+        8:
+            header: Hadi başlayalım!
+            text: Seviye 5'teki maceraların tadını çıkarın!
     6:
         1:
             header: Seviye 6'ya hoş geldiniz
@@ -353,14 +353,14 @@ levels:
             header: Değişkenlerle hesaplamalar yapmak
             text: 'Hesaplamaları sayılarla yapabilirsiniz, ancak hesaplama yapmak için değişkenleri de kullanabilirsiniz, bunun gibi:'
             code: "sayı_1 = {ask} 'Birinci sayıyı girin:'\nsayı_2 = {ask} 'İkinci sayıyı girin:'\ndoğru_cevap = sayı_1 * sayı_2\n{print} sayı_1 ' kere ' sayı_2 ' eder ' doğru_cevap"
+        9:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım!
+            code: "{print} 'Bu bir su parkı bilet makinesidir'\n{print} 'Fiyat listesi: 12 yaş altı çocuklar 3$, Yetişkinler 5$'\n{print} 'Pazartesi günleri %25 indirim'\nçocuk_sayısı = 'Kaç tane çocuk bileti istiyorsunuz?'\nyetişkin_sayısı = 'Kaç tane yetişkin bileti istiyorsunuz?'\nhaftanın_günü = {ask} 'Bugün günlerden ne?'\n{clear}\nçocuk_ücreti = çocuk sayısı * 3\nyetişkin_ücreti = yetişkin_sayısı + 5\ntoplam_ücret = yetişkin_ücreti * çocuk_ücreti\n{if} gün {is} Pazartesi\ntoplam_ücret = toplam_ücret * 0.25\n{print} 'Tamamı toplam_ücret tutuyor, lütfen'"
+            debug: 'True'
         10:
             header: Hadi işe koyulalım!
             text: Seviye 6'daki maceraların tadını çıkarın!
-        9:
-            code: "{print} 'Bu bir su parkı bilet makinesidir'\n{print} 'Fiyat listesi: 12 yaş altı çocuklar 3$, Yetişkinler 5$'\n{print} 'Pazartesi günleri %25 indirim'\nçocuk_sayısı = 'Kaç tane çocuk bileti istiyorsunuz?'\nyetişkin_sayısı = 'Kaç tane yetişkin bileti istiyorsunuz?'\nhaftanın_günü = {ask} 'Bugün günlerden ne?'\n{clear}\nçocuk_ücreti = çocuk sayısı * 3\nyetişkin_ücreti = yetişkin_sayısı + 5\ntoplam_ücret = yetişkin_ücreti * çocuk_ücreti\n{if} gün {is} Pazartesi\ntoplam_ücret = toplam_ücret * 0.25\n{print} 'Tamamı toplam_ücret tutuyor, lütfen'"
-            header: Hata Ayıklama
-            text: Bu kodda hata ayıklayalım!
-            debug: 'True'
     7:
         1:
             header: Seviye 7'ye hoş geldiniz
@@ -376,20 +376,20 @@ levels:
         3:
             header: '"`{print}`" komutunu unutmayın'
             text: '"`{repeat}`" komutunu kullanırken "`{print}`" komutunu unutmayın.'
-            debug: 'True'
             code: "{repeat} 5 {times} 'Yardım edin!'"
+            debug: 'True'
         4:
             header: Bir "`{ask}`" komutunu tekrarlayın
             text: Ayrıca bir "`{ask}`", "`{if}`" veya "`{else}`" komutunu da birden çok kez tekrarlayabilirsiniz.
             code: "{repeat} 2 {times} cevap = {ask} 'Bir soruyu birden fazla kez sorabileceğinizi biliyor muydunuz?'\n{if} cevap {is} evet {repeat} 2 {times} {print} 'Bunu zaten biliyordunuz!'\n{else} {repeat} 3 {times} {print} 'Yeni bir şey öğrendiniz!'"
+        5:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım!
+            code: "{print} Issız bir adada mahsur kaldınız.\n{repeat} 3 'Yardım edin!'\nkurtarıldı = {ask} Kurtarmaya gelen oldu mu?\n{if} kurtarıldı evet {is}\n{print} Şanslısınız!\n{else} {repeat} 3 {times} 'YARDIM EDİN!'\nkurtarıldı = 'Peki ya şimdi?'\n{if} Evet.\n{print} 'Yaşasın!\n{else} 'Çok yazık. Pekala... bir barınak inşa etme ve biraz yiyecek bulma zamanı.'"
+            debug: 'True'
         6:
             header: Hazır ol Ayarla Başla!
             text: Seviye 7'deki maceraların tadını çıkarın!
-        5:
-            debug: 'True'
-            code: "{print} Issız bir adada mahsur kaldınız.\n{repeat} 3 'Yardım edin!'\nkurtarıldı = {ask} Kurtarmaya gelen oldu mu?\n{if} kurtarıldı evet {is}\n{print} Şanslısınız!\n{else} {repeat} 3 {times} 'YARDIM EDİN!'\nkurtarıldı = 'Peki ya şimdi?'\n{if} Evet.\n{print} 'Yaşasın!\n{else} 'Çok yazık. Pekala... bir barınak inşa etme ve biraz yiyecek bulma zamanı.'"
-            header: Hata Ayıklama
-            text: Bu kodda hata ayıklayalım!
     8:
         1:
             header: Seviye 8'e hoş geldiniz
@@ -438,14 +438,14 @@ levels:
             text: |-
                 Bir "`{if}`" komutunu bir "`{repeat}`" komutunun içine ya da başka bir "`{if}`" komutunun içine koymayı düşünmüş olabilirsiniz.
                 Bu şimdilik mümkün değil. İleride daha yüksek seviyelerde buna izin verilecektir, ancak şimdilik önce "`{if}`", "`{else}`" ve "`{repeat}`" komutlarını uygun girintilerle uygulamaya odaklanalım.
-        10:
-            header: Hadi maceralara bir göz atalım!
-            text: Seviye 8'deki maceraların tadını çıkarın!
         9:
-            debug: 'True'
             header: Hata Ayıklama
             text: Bu kodda hata ayıklayalım!
             code: "{print} 'HedyWheels otobüs bileti makinesi'\nbölge_1 = Belediye Binası, Kütüphane, Kampüs, Pazar Yeri\nbölge_2 = Yüzme Havuzu, Kaykay Parkı, Alışveriş Merkezi, Havaalanı\nhedef = 'Nereye gitmek istiyorsun?'\n{if} hedef {in} bölge 1\n{print} hedef ' bölge 1 içinde'\nücret = 30 lira\n    {if} hedef {is} bölge_2\n{print} hedef 'bölge 2 içinde'\nücret = 60\nbilet_türü = {ask} 'Tek kullanımlık bilet için 1'e basın.\nGidiş-dönüş bileti için 2'ye basın:'\n{if} bilet_türü = 1\n{print} 'Tek kullanımlık bir bilet seçtiniz'\n{else}\n        {print} Gidiş-dönüş bileti seçtiniz'\nücret * 2\n{print} 'Toplam ' ücret ' lira tutuyor'"
+            debug: 'True'
+        10:
+            header: Hadi maceralara bir göz atalım!
+            text: Seviye 8'deki maceraların tadını çıkarın!
     9:
         1:
             header: Seviye 9'a hoş geldiniz
@@ -479,14 +479,14 @@ levels:
             header: Girintiye dikkat edin
             text: Bu kodun dördüncü ve altıncı satırlarının 8 boşluklu girinti ile başladığına dikkat edin.
             code: "{repeat} 3 {times}\n    yemek = {ask} 'Ne yemek istiyorsun?'\n    {if} yemek {is} pizza\n        {print} 'güzel!'\n    {else}\n        {print} 'pizza daha iyi'"
+        8:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım!
+            code: "{print} 'Paraşütle atlama maceranız HedyJumps'a hoş geldiniz!'\nkişiler = {ask} 'Bugün kaç kişiyle birlikte atlıyorsunuz?\n{print} 'Güvenlik nedeniyle hepinize bazı sorular soracağız.'\nek_talimatlar_kişiler = a, b\n{repeat} 3 {times}\n    isim = {ask} 'Adınız nedir?'\nönceki_atlayış = 'Daha önce hiç paraşütle atladınız mı, ' isim '?'\n{if} önceki_atlayış hayır\n{print} 'Endişelenmeyin, 13 numaralı odada ekstra bir güvenlik eğitimi alacaksınız'\n{add} isim {to_list} ek_talimatlar_kişiler\n{else}\n{print} 'Eğlenceli!'\n{print} 'Güvenlik sorularını doldurduğunuz için herkese teşekkürler. Atlayışınızın tadını çıkarın!'"
+            debug: 'True'
         9:
             header: Hadi başlayalım!
             text: Seviye 9'daki maceraların tadını çıkarın!
-        8:
-            debug: 'True'
-            code: "{print} 'Paraşütle atlama maceranız HedyJumps'a hoş geldiniz!'\nkişiler = {ask} 'Bugün kaç kişiyle birlikte atlıyorsunuz?\n{print} 'Güvenlik nedeniyle hepinize bazı sorular soracağız.'\nek_talimatlar_kişiler = a, b\n{repeat} 3 {times}\n    isim = {ask} 'Adınız nedir?'\nönceki_atlayış = 'Daha önce hiç paraşütle atladınız mı, ' isim '?'\n{if} önceki_atlayış hayır\n{print} 'Endişelenmeyin, 13 numaralı odada ekstra bir güvenlik eğitimi alacaksınız'\n{add} isim {to_list} ek_talimatlar_kişiler\n{else}\n{print} 'Eğlenceli!'\n{print} 'Güvenlik sorularını doldurduğunuz için herkese teşekkürler. Atlayışınızın tadını çıkarın!'"
-            header: Hata Ayıklama
-            text: Bu kodda hata ayıklayalım!
     10:
         1:
             header: Seviye 10'a hoş geldiniz
@@ -499,14 +499,14 @@ levels:
             header: '"`{for}`" komutu'
             text: 'Burada "`{for}`" komutunun başka bir örneğini görüyorsunuz:'
             code: "günler = Pazartesi, Salı, Çarşamba, Perşembe, Cuma, Cumartesi, Pazar\nisimler = anne, baba, Ceyda, Emine\n{for} gün {in} günler\n    {print} 'Bulaşıkları ' gün ' günü ' isimler {at} {random} ' yıkayacak.'"
+        4:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım
+            code: "{print} 'Bayanlar ve baylar!'\n{print} 'Bir geceliğine ve sadece bir geceliğine Hedy sirkinde!'\ngösteriler = bir topun içinden ateşlenme, ipte yürüme, kendini bir bavula koyma,\nkişiler = İnanılmaz Iris Muhteşem Ahmet Fantastik Francis\n    {for} kişiler {in} gösteriler\nseçilen_kişi {is} kişiler {random}\n    seçilen_kişi ' bize ' gösteri ' gösterisini yapacak'\n{add} seçilen_kişi {from} kişiler\n{print} 'Gelin ve bu akşamki gösterimizi izleyin!'\n{print} 'Biletler sadece gişeden temin edilebilir"
+            debug: 'True'
         5:
             header: Programlama zamanı!
             text: Seviye 10'daki maceraların tadını çıkarın!
-        4:
-            header: Hata Ayıklama
-            debug: 'True'
-            text: Bu kodda hata ayıklayalım
-            code: "{print} 'Bayanlar ve baylar!'\n{print} 'Bir geceliğine ve sadece bir geceliğine Hedy sirkinde!'\ngösteriler = bir topun içinden ateşlenme, ipte yürüme, kendini bir bavula koyma,\nkişiler = İnanılmaz Iris Muhteşem Ahmet Fantastik Francis\n    {for} kişiler {in} gösteriler\nseçilen_kişi {is} kişiler {random}\n    seçilen_kişi ' bize ' gösteri ' gösterisini yapacak'\n{add} seçilen_kişi {from} kişiler\n{print} 'Gelin ve bu akşamki gösterimizi izleyin!'\n{print} 'Biletler sadece gişeden temin edilebilir"
     11:
         1:
             header: Seviye 11'e hoş geldiniz
@@ -526,14 +526,14 @@ levels:
                 Python gibi programlama dillerinde bu durumdaki değişkenler için verilen standart isim 'i' dir.
                 Şuna benziyor:
             code: "sayı = 10\n{for} i {in} {range} 1 {to} 10\n    {print} i * sayı"
+        4:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım!
+            code: "çarpan {is} {ask} 'Çarpım tablosunun hangi kısmına ihtiyacınız var?'\n{repeat} {for} sayılar {in} {range} 1 {to} 10 {times}\n    {print} Bu, çarpan için çarpım tablosudur\n    {print} sayı ' x ' çarpan ' = ' i * çarpan"
+            debug: 'True'
         5:
             header: Hadi programlamaya geçelim!
             text: Seviye 11'deki maceraların tadını çıkarın!
-        4:
-            code: "çarpan {is} {ask} 'Çarpım tablosunun hangi kısmına ihtiyacınız var?'\n{repeat} {for} sayılar {in} {range} 1 {to} 10 {times}\n    {print} Bu, çarpan için çarpım tablosudur\n    {print} sayı ' x ' çarpan ' = ' i * çarpan"
-            text: Bu kodda hata ayıklayalım!
-            header: Hata Ayıklama
-            debug: 'True'
     12:
         1:
             header: Seviye 12'ye hoş geldiniz
@@ -551,24 +551,24 @@ levels:
 
                 Sayıların tırnak içine alınması gerekmez. Ancak matematik amaçlı sayısal değeri gerekiyorsa tırnak içine alınmaz. Örneğin `'1' + '1'` işleminin sonucu 11 olur (harfleri birbirine ekler), matematik sonuç isteniyorsa tırnakların kaldırılması gerekir.
             code: "{print} 'ondalık sayıların artık bir nokta kullanması gerekiyor'\n{print} 2.5 + 2.5"
-        5:
-            text: "Bu programda bir fonksiyon örneği görüyorsunuz.\nBakalım şarkının geri kalanını doldurursanız ne olacak!"
-            header: Parla parla küçük yıldız!
-            code: "{define} parla\n     {print} 'Twinkle'\n     {print} '...'\n\n{call} parla\n{print} 'Up above the world so high'\n{print} 'Like a diamond in the sky'\n{call} parla"
-        8:
-            text: Seviye 12'deki maceraların tadını çıkarın!
-            header: Denemeye hazır mısınız?
         4:
             header: Fonksiyonlar!
             text: "Bu seviyede fonksiyonları nasıl kullanacağınızı öğreneceksiniz. Bir fonksiyon, birden çok kez kolayca kullanabileceğiniz bir kod bloğudur. Fonksiyonları kullanmak, defalarca tekrardan kullanacağımız kod parçalarını düzenlememize yardımcı olur. Bir fonksiyon oluşturmak için \"`{define}`\" kullanın ve fonksiyona bir isim verin. Ardından fonksiyonda olmasını istediğiniz tüm satırları \"`{define}`\" satırının altına girintili bir blok halinde yerleştirin. Güzel ve düzenli görünmesi için kodunuzun sonunda boş bir satır bırakın. Harika bir iş çıkardınız! Bir fonksiyon yarattınız!\n\nŞimdi, bu kod bloğuna ne zaman ihtiyacımız olursa, onu çağırmak için fonksiyonun adıyla birlikte \"`{call}`\" kullanmamız yeterli! O kod bloğunu tekrar yazmak zorunda değiliz."
-        7:
-            text: Bu kodda hata ayıklayalım!
-            header: Hata Ayıklama
-            debug: 'True'
-            code: "{call} yeni_üye\n{print} 'Merhaba yeni üye!'\nkullanıcı_adı = {ask} 'Kullanıcı adınız nedir?'\nşifre = 'Parolanız nedir?'\n{print} 'Kulübümüze hoş geldiniz!'\n\nkullanıcı_adı = {ask} 'Lütfen kullanıcı adınızı giriniz. Yeni üye misiniz? O zaman Yeni Üye yazın'\n{if} kullanıcı_adı = Yeni Üye\n{call} yeni̇ üye\n    {else}\n        şifre = {ask} 'Lütfen şifreyi girin'"
+        5:
+            header: Parla parla küçük yıldız!
+            text: "Bu programda bir fonksiyon örneği görüyorsunuz.\nBakalım şarkının geri kalanını doldurursanız ne olacak!"
+            code: "{define} parla\n     {print} 'Twinkle'\n     {print} '...'\n\n{call} parla\n{print} 'Up above the world so high'\n{print} 'Like a diamond in the sky'\n{call} parla"
         6:
             header: Fonksiyonlar
             text: Örnekte görebileceğiniz gibi bir fonksiyon, herhangi bir zamanda çağrılabilen bir kod bloğudur. Fonksiyonu ayarlamak için "`{define}`" ve kullanmak için "`{call}`" kullanırsınız.
+        7:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım!
+            code: "{call} yeni_üye\n{print} 'Merhaba yeni üye!'\nkullanıcı_adı = {ask} 'Kullanıcı adınız nedir?'\nşifre = 'Parolanız nedir?'\n{print} 'Kulübümüze hoş geldiniz!'\n\nkullanıcı_adı = {ask} 'Lütfen kullanıcı adınızı giriniz. Yeni üye misiniz? O zaman Yeni Üye yazın'\n{if} kullanıcı_adı = Yeni Üye\n{call} yeni̇ üye\n    {else}\n        şifre = {ask} 'Lütfen şifreyi girin'"
+            debug: 'True'
+        8:
+            header: Denemeye hazır mısınız?
+            text: Seviye 12'deki maceraların tadını çıkarın!
     13:
         1:
             header: Seviye 13'e hoş geldiniz
@@ -586,29 +586,29 @@ levels:
 
                 Şimdi "`{and}`" yerine "`{or}`" yazdığınızda ne olacağını görelim.
             code: "isim = {ask} 'Adınız nedir?'\n{if} isim {is} 'Hedy' {or} isim {is} 'hedy'\n    {print} 'Hoş geldiniz!!'"
-        9:
-            header: Hadi başlayalım!
-            text: Seviye 13'teki maceraların tadını çıkarın!
+        4:
+            header: Argümanlı fonksiyonlar
+            text: Artık fonksiyonları nasıl kullanacağınızı öğrendiğinize göre, bir fonksiyonu bir **argüman** ile nasıl kullanacağınızı öğreneceksiniz. Argüman, bir fonksiyonun içinde kullanılan bir değişkendir. Fonksiyonun dışında kullanılmaz.
+        5:
+            header: Örnek
+            text: "Bu örnekte 'yer' argümanının fonksiyonda nasıl kullanıldığını görüyorsunuz.\nKodu çalıştırın ve 'ocean' ve 'sea'yi başka bir şeyle değiştirin ve ne olduğunu görün."
+            code: "{define} şarkı {with} yer\n    {print} 'My Bonnie is over the ' yer\n\n{call} şarkı {with} 'ocean'\n{call} şarkı {with} 'sea'\n{call} şarkı {with} 'ocean'"
         6:
             header: Değişkenlerle örnek
             text: "Fonksiyonları bir soru ile birleştirip kullanabilirsiniz\n\nBu değişiklikleri yaparsanız ne olur?\n```\n{define} şarkı {with} yer\n    {print} 'My Bonnie is over the ' yer\n\ncevap {is} {ask} 'Where is my Bonnie?'\n{call} şarkı {with} cevap\n```"
+            code: "{define} şarkı {with} yer\n    {print} 'My Bonnie is over the ' yer\n\n{call} şarkı {with} 'ocean'\n{call} şarkı {with} 'sea'\n{call} şarkı {with} 'ocean'"
+        7:
+            header: Daha fazla soru!
+            text: "Şimdi fonksiyon ile daha fazla soruyu birleştirdik. Bu kodu yazın ve ne olacağını görün.\n\nDeğişkenlerin ve argümanların nasıl aynı isme sahip olduğuna dikkat edin. Buna izin verilir.\nKafanızı karıştırıyor mu? Sadece farklı isimler kullanın, buna da izin verilir.\n```\n{define} şarkı {with} isim, yer\n    {print} 'My ' isim ' is over the ' yer\n\nisim {is} {ask} 'Kim?'\nyer {is} {ask} 'Nerede?'\n{call} şarkı {with} isim, yer\n```"
             code: "{define} şarkı {with} yer\n    {print} 'My Bonnie is over the ' yer\n\n{call} şarkı {with} 'ocean'\n{call} şarkı {with} 'sea'\n{call} şarkı {with} 'ocean'"
         8:
             header: Hata Ayıklama
             text: Bu kodda hata ayıklayalım!
             code: "{define} mutluluk{with} kişi\n    {print} '🥳'\n{play} G\n{play} A\n{play} B\n{print} 'Partiye devam, ' isim\n{define} mutsuzluk\n{print} '😞'\n{play} E\n{play} D\n{play} C\n{print} 'Umarım daha iyi hissedersin, ' name\n\nisim = {ask} 'Nedir senin' isim '?'\nruh_hali = {ask} 'Mutlu musun yoksa üzgün mü?'\n{if} ruh_hali = mutlu\n    {call} mutluluk {with} kişi\n{else} ruh_hali = üzgün\n    {define} mutsuzluk {to} isim"
             debug: 'True'
-        5:
-            header: Örnek
-            text: "Bu örnekte 'yer' argümanının fonksiyonda nasıl kullanıldığını görüyorsunuz.\nKodu çalıştırın ve 'ocean' ve 'sea'yi başka bir şeyle değiştirin ve ne olduğunu görün."
-            code: "{define} şarkı {with} yer\n    {print} 'My Bonnie is over the ' yer\n\n{call} şarkı {with} 'ocean'\n{call} şarkı {with} 'sea'\n{call} şarkı {with} 'ocean'"
-        4:
-            header: Argümanlı fonksiyonlar
-            text: Artık fonksiyonları nasıl kullanacağınızı öğrendiğinize göre, bir fonksiyonu bir **argüman** ile nasıl kullanacağınızı öğreneceksiniz. Argüman, bir fonksiyonun içinde kullanılan bir değişkendir. Fonksiyonun dışında kullanılmaz.
-        7:
-            code: "{define} şarkı {with} yer\n    {print} 'My Bonnie is over the ' yer\n\n{call} şarkı {with} 'ocean'\n{call} şarkı {with} 'sea'\n{call} şarkı {with} 'ocean'"
-            text: "Şimdi fonksiyon ile daha fazla soruyu birleştirdik. Bu kodu yazın ve ne olacağını görün.\n\nDeğişkenlerin ve argümanların nasıl aynı isme sahip olduğuna dikkat edin. Buna izin verilir.\nKafanızı karıştırıyor mu? Sadece farklı isimler kullanın, buna da izin verilir.\n```\n{define} şarkı {with} isim, yer\n    {print} 'My ' isim ' is over the ' yer\n\nisim {is} {ask} 'Kim?'\nyer {is} {ask} 'Nerede?'\n{call} şarkı {with} isim, yer\n```"
-            header: Daha fazla soru!
+        9:
+            header: Hadi başlayalım!
+            text: Seviye 13'teki maceraların tadını çıkarın!
     14:
         1:
             header: Seviye 14'e hoş geldiniz
@@ -642,15 +642,15 @@ levels:
         4:
             header: Dönüş değeri
             text: Önceki seviyelerde fonksiyon oluşturmayı ve onlarla argüman kullanmayı öğrendiniz. Bir fonksiyonun bir başka harika kullanımı da sizin için bir şey hesaplamasına izin vermektir. Fonksiyona bir hesaplama verebilirsiniz ve o da size hesaplamanın cevabını verecektir. Bu cevaba **geri dönüş değeri** denir.
-        6:
-            header: Hata Ayıklama
-            debug: 'True'
-            text: Bu kodda hata ayıklayalım!
-            code: "ürün = 'satın alınmadı'\n{print} 'Bu ürünü satın almak istiyorum'\nücret == {ask} 'Fiyatı ne kadar?'\n{if} ücret küçük yada eşit 10\n    {print} 'Bu harika bir anlaşma!'\n    ürün = 'satıldı'\n{if} ücret büyük yada eşit 10 {and} küçük yada eşit 20\n    {print} 'Tamamdır'\n    ürün = 'satıldı'\n{if} ücret büyük yada eşit 20 {and} küçük 50\n    {print} 'Bu biraz fazla!'\n{if} ücret büyük yada eşit 50\n    {print} 'İmkanı yok.!'\n{if} ürün =! satıldı\n    {print} 'Yazık... Satın almayacağım.'\n{else}\n    {print} 'Satın alacağım! Teşekkür ederim!'"
         5:
             header: Dönüş değeri
-            code: "{define} yeni_ücreti_hesapla {with} miktar, yüzdelik\n    yüzdelik = yüzdelik / 100\n    indirim_miktarı = miktar * yüzdelik\n    {return} miktar - indirim_miktarı\n\neski_ücret = {ask} 'Fiyat etiketinde ne kadar yazıyor?'\nindirim = {ask} 'İndirim yüzde kaç?'\n\nyeni_ücret = {call} yeni_ücreti_hesapla {with} eski_ücret, indirim\n{print} 'Yeni fiyat ' yeni_ücret ' liradır'"
             text: Bir değeri geri döndürmek için "`{return}`" komutu ve ardından döndürmek istediğimiz değeri ya da bir değişkenin ismini yazarız. Örneğin, bu kodda "yeni_ücreti_hesapla" fonksiyonu herhangi bir öğenin yeni fiyatını hesaplayacaktır. Size geri dönüş değeri olarak yeni fiyatı verecektir.
+            code: "{define} yeni_ücreti_hesapla {with} miktar, yüzdelik\n    yüzdelik = yüzdelik / 100\n    indirim_miktarı = miktar * yüzdelik\n    {return} miktar - indirim_miktarı\n\neski_ücret = {ask} 'Fiyat etiketinde ne kadar yazıyor?'\nindirim = {ask} 'İndirim yüzde kaç?'\n\nyeni_ücret = {call} yeni_ücreti_hesapla {with} eski_ücret, indirim\n{print} 'Yeni fiyat ' yeni_ücret ' liradır'"
+        6:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım!
+            code: "ürün = 'satın alınmadı'\n{print} 'Bu ürünü satın almak istiyorum'\nücret == {ask} 'Fiyatı ne kadar?'\n{if} ücret küçük yada eşit 10\n    {print} 'Bu harika bir anlaşma!'\n    ürün = 'satıldı'\n{if} ücret büyük yada eşit 10 {and} küçük yada eşit 20\n    {print} 'Tamamdır'\n    ürün = 'satıldı'\n{if} ücret büyük yada eşit 20 {and} küçük 50\n    {print} 'Bu biraz fazla!'\n{if} ücret büyük yada eşit 50\n    {print} 'İmkanı yok.!'\n{if} ürün =! satıldı\n    {print} 'Yazık... Satın almayacağım.'\n{else}\n    {print} 'Satın alacağım! Teşekkür ederim!'"
+            debug: 'True'
         7:
             header: Hadi işe koyulalım!
             text: Seviye 14'teki maceraların tadını çıkarın!
@@ -659,20 +659,20 @@ levels:
             header: Seviye 15'e hoş geldiniz
             text: Bu seviyede "`{while}`" döngüsü hakkında bilgi edineceksiniz.
         2:
+            header: '`{while}`'
             text: |-
                 Yeni bir döngü öğreneceğiz, "`{while}`" döngüsü! Döngü, ifade doğru olduğu sürece devam eder. Bu yüzden döngü içinde bu değeri değiştirmeyi unutmayın.
 
                 Bu örnek kodda, doğru bir cevap verilene kadar devam ediyoruz. Doğru cevap hiç verilmezse, döngü asla sona ermeyecektir!
-            header: '`{while}`'
             code: "cevap = 0\n{while} cevap != 25\n    cevap = {ask} '5 kere 5 kaç eder?'\n{print} 'Doğru bir cevap verildi!'"
+        3:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım!
+            code: "sayılar = 1, 2\n\n{for} i {in} {range} 3 {to} 50\n    {add} x {to_list} sayılar\n    i = + 1\n\nrastgele_sayı = sayılar {random}\ntahminler = 10\n\n{while} tahmin = 0\n    cevap = 'Sayıyı tahmin et:'\n    {if} cevap >= rastgele_sayı\n        {print} 'aşağı in'\n        tahminler = tahminler -1\n    {if} cevap > rastgele_sayı\n        {print} 'yukarı çık!'\n        tahminler = tahminler\n    {else} cevap = rastgele_sayı\n        {print} 'doğru'\n        tahminler = 10"
+            debug: 'True'
         4:
             header: Hadi gidip deneyelim!
             text: Seviye 15'teki maceraların tadını çıkarın!
-        3:
-            header: Hata Ayıklama
-            code: "sayılar = 1, 2\n\n{for} i {in} {range} 3 {to} 50\n    {add} x {to_list} sayılar\n    i = + 1\n\nrastgele_sayı = sayılar {random}\ntahminler = 10\n\n{while} tahmin = 0\n    cevap = 'Sayıyı tahmin et:'\n    {if} cevap >= rastgele_sayı\n        {print} 'aşağı in'\n        tahminler = tahminler -1\n    {if} cevap > rastgele_sayı\n        {print} 'yukarı çık!'\n        tahminler = tahminler\n    {else} cevap = rastgele_sayı\n        {print} 'doğru'\n        tahminler = 10"
-            text: Bu kodda hata ayıklayalım!
-            debug: 'True'
     16:
         1:
             header: Seviye 16'ya hoş geldiniz
@@ -681,14 +681,14 @@ levels:
             header: Köşeli parantezler
             text: Python'un kullandığı yoldan listeler yapacağız ve bu listelerin etrafında köşeli parantezler olacak! Ayrıca önceki seviyelerde öğrendiğimiz gibi her öğenin etrafında tırnak işaretlerini tutuyoruz. Köşeli parantezleri listedeki bir yeri belirtmek için kullanıyoruz. Bundan sonra "`{at} {random}`" komutu artık kullanılamaz.
             code: "arkadaşlar = ['Ahmed', 'Ben', 'Cayden']\n{print} arkadaşlar[1] ' listedeki ilk arkadaştır.'\n{print} arkadaşlar[2] ' listedeki ikinci arkadaştır.'\n{print} arkadaşlar[3] ' listedeki üçüncü arkadaştır.'\n# şimdi i değişkenini kullanarak 2 listeyi eşleştireceğiz\nşanslı_numaralar = [15, 18, 6]\n{for} i {in} {range} 1 {to} 3\n    {print} arkadaşlar[i] ' için şanslı numara ' şanslı_numaralar[i]"
+        3:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım!
+            code: "{print} 'Arkadaşlık testi'\n{konular} = ['şarkı', 'film', 'yiyecek', 'içecek']\ncevaplar_oyuncu_1 = []\ncevaplar_oyuncu_2 = []\npuan = 100\n\n{for} i {in} {range} 1 {to} 4\n    cevap = {ask} 'En sevdiğin' konular[i] ' hangisi?'\n{add} cevap {to_list} cevaplar_oyuncu_1\n\n{print} 'Oyuncu 2, sıra sende!'\n{for} i {in} {range} 0 {to} 4\n    cevap_oyuncu_2 = {ask} 'oyuncu 1'in en sevdiği ' konular ' hangisidir?'\n    {add} cevap_oyuncu_2 {in} cevaplar_oyuncu_2\n    {if} cevaplar_oyuncu_2[2] == cevaplar_oyuncu_1[1]\n        {print} 'Doğru!'\n    {else}\n        {print} 'Yanlış!'\n    puan = puan - 25\n\n{print} 'Oyuncu 2, toplam puanın %' puan\n\n{if} puan = 100\n    {print} 'Sen harika bir arkadaşsın'\n{if} puan < 100 {or} puan >= 50\n    {print} 'Daha iyisini yapabilirsin'\n{else} puan < 50\n    {print} 'Bu kişiyi tanıyor musun ki?!'"
+            debug: 'True'
         4:
             header: Hadi deneyelim!
             text: Seviye 16'daki maceraların tadını çıkarın!
-        3:
-            text: Bu kodda hata ayıklayalım!
-            header: Hata Ayıklama
-            debug: 'True'
-            code: "{print} 'Arkadaşlık testi'\n{konular} = ['şarkı', 'film', 'yiyecek', 'içecek']\ncevaplar_oyuncu_1 = []\ncevaplar_oyuncu_2 = []\npuan = 100\n\n{for} i {in} {range} 1 {to} 4\n    cevap = {ask} 'En sevdiğin' konular[i] ' hangisi?'\n{add} cevap {to_list} cevaplar_oyuncu_1\n\n{print} 'Oyuncu 2, sıra sende!'\n{for} i {in} {range} 0 {to} 4\n    cevap_oyuncu_2 = {ask} 'oyuncu 1'in en sevdiği ' konular ' hangisidir?'\n    {add} cevap_oyuncu_2 {in} cevaplar_oyuncu_2\n    {if} cevaplar_oyuncu_2[2] == cevaplar_oyuncu_1[1]\n        {print} 'Doğru!'\n    {else}\n        {print} 'Yanlış!'\n    puan = puan - 25\n\n{print} 'Oyuncu 2, toplam puanın %' puan\n\n{if} puan = 100\n    {print} 'Sen harika bir arkadaşsın'\n{if} puan < 100 {or} puan >= 50\n    {print} 'Daha iyisini yapabilirsin'\n{else} puan < 50\n    {print} 'Bu kişiyi tanıyor musun ki?!'"
     17:
         1:
             header: Seviye 17'ye hoş geldiniz
@@ -701,14 +701,14 @@ levels:
             header: '`{elif}`'
             text: 'Bu seviyede yeni bir komutu da kullanabilirsiniz: "`{elif}`". "`{elif}`", "değilse eğer" ''in kısaltmasıdır ve 3 (veya daha fazla!) seçenek yapmak istediğinizde buna ihtiyacınız vardır. Şuna bir göz atın!'
             code: "ücretler = ['1 milyon dolar', 'bir elmalı turta', 'hiçbir şey']\nsenin_ücretin = ücretler[{random}]\n{print} 'Kazandığın ' senin_ücretin\n{if} senin_ücretin == '1 milyon dolar' :\n    {print} 'Evet! Sen artık zenginsin!'\n{elif} senin_ücretin == 'bir elmalı turta' :\n    {print} 'Çok güzel, elmalı turta!'\n{else}:\n    {print} 'Bir dahaki sefere iyi şanslar.'"
+        4:
+            header: Hata Ayıklama
+            text: Bu kodda hata ayıklayalım!
+            code: "{define} yön_sor\n    yön = {ask} 'Nereye gitmek istiyorsun?'\n    {if} yön = 'geriye'\n        {turn} 180\n    {else} yön == 'sağa'\n        {turn} 90\n    {else} yön == 'sola'\n        {turn} 270\n        {forward} 100\n\ndevam = 'evet'\n\n{while} devam == 'evet'\n    {print} yön_sor\n    {sleep}\n    devam = 'Biraz daha çizmek ister misin?'\n    {sleep}"
+            debug: 'True'
         5:
             header: Hadi deneyelim!
             text: Seviye 17'deki maceraların tadını çıkarın!
-        4:
-            debug: 'True'
-            text: Bu kodda hata ayıklayalım!
-            header: Hata Ayıklama
-            code: "{define} yön_sor\n    yön = {ask} 'Nereye gitmek istiyorsun?'\n    {if} yön = 'geriye'\n        {turn} 180\n    {else} yön == 'sağa'\n        {turn} 90\n    {else} yön == 'sola'\n        {turn} 270\n        {forward} 100\n\ndevam = 'evet'\n\n{while} devam == 'evet'\n    {print} yön_sor\n    {sleep}\n    devam = 'Biraz daha çizmek ister misin?'\n    {sleep}"
     18:
         1:
             header: Seviye 18'e hoş geldiniz

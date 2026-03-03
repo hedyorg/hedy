@@ -11,14 +11,16 @@ import { indentOnInput, defaultHighlightStyle, syntaxHighlighting, LanguageSuppo
 import { highlightSelectionMatches, searchKeymap } from "@codemirror/search";
 import {
     errorLineField, debugLineField, decorationsTheme, addDebugLine,
-    addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers,
-    breakpointGutterState, breakpointGutter, addIncorrectLineEffect,
+    addErrorLine, addErrorWord, removeDebugLine, removeErrorMarkers, 
+    addIncorrectLineEffect,
     incorrectLineField,
     removeIncorrectLineEffect,
     addDebugWords,
     placeholders,
     basicIndent,
-    variableHighlighter
+    variableHighlighter,
+    eyeMarkerGutter,
+    deactivateLineState
 } from "./cm-decorations";
 import { LRLanguage } from "@codemirror/language"
 import { PARSER_FACTORIES } from "./lezer-parsers/language-packages";
@@ -115,7 +117,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 doc: '',
                 extensions: [
                     mainEditorStyling,
-                    breakpointGutter,
+                    eyeMarkerGutter,
                     lineNumbers(),
                     highlightActiveLineGutter(),
                     highlightSpecialChars(),
@@ -457,7 +459,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         if (currentContent === '') {
             return '';
         }
-        const gutterMarkers = this.view.state.field(breakpointGutterState);
+        const lineMarkers = this.view.state.field(deactivateLineState);
         const deactivatedLines: number[] = []
         let to: number;
         let lines: string[];
@@ -470,7 +472,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             to = this.view.state.doc.line(currentDebugLine).to;
             lines = currentContent.split('\n').slice(0, currentDebugLine);
         }
-        gutterMarkers.between(0, to, (from: number) => {
+        lineMarkers.between(0, to, (from: number) => {
             deactivatedLines.push(this.view.state.doc.lineAt(from).number);
         });
         const resultingLines = [];

@@ -14,10 +14,10 @@ from website.flask_helpers import gettext_with_fallback as gettext
 import jinja_partials
 
 import hedy
-import hedy_content
+import website_content as hedy_content
 import hedyweb
 import utils
-from safe_format import safe_format
+from hedy.safe_format import safe_format
 from datetime import date
 
 from website.server_types import SortedAdventure
@@ -68,10 +68,12 @@ class ForTeachersModule(WebsiteModule):
         class_customizations = [
             self.db.get_class_customizations(_class["id"]) for _class in teacher_classes
         ]
-        class_customizations = {
-            customizations["id"]: customizations
-            for customizations in class_customizations
-        }
+        class_customizations_dict = {}
+        for customizations in class_customizations:
+            if not customizations or "id" not in customizations:
+                continue
+            class_customizations_dict[customizations["id"]] = customizations
+        class_customizations = class_customizations_dict
         adventures = []
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         # Get the adventures that are created by my second teachers.
