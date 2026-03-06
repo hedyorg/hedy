@@ -6,7 +6,7 @@ from website.flask_helpers import gettext_with_fallback as _
 import json
 import bs4
 
-import hedy_content
+import website_content as hedy_content
 import utils
 from website.auth import requires_teacher
 from website.flask_helpers import render_template
@@ -14,7 +14,7 @@ from website.flask_helpers import render_template
 from . import dynamo
 from .database import Database
 from .website_module import WebsiteModule, route
-from safe_format import safe_format
+from hedy.safe_format import safe_format
 
 # For now, hardcoded limits for how often an adventure has to be cloned to
 # qualify for stars.

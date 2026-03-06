@@ -55,15 +55,9 @@ adventures:
             3:
                 story_text: |
                     На нивоу 3 можеш учинити своју причу забавнијом. Можеш користити случајност за било које чудовиште, животињу или другу препреку, овако:
+                example_code: "```\nживотиње {is} 🦔, 🐿, 🦉, 🦇\n{print} Они одмах чују звук животиње {at} {random}\n```\n"
                 story_text_2: |
                     Команда `{add}` такође може бити корисна у твојој причи.
-                story_text_3: |
-                    Ово је пример команде `{remove}` у твојој причи
-
-                    ### Вежба
-                    Копирај своју причу са претходних нивоа у овај ниво.
-                    На овом нивоу си научио 3 нове команде `{at} {random}`, `{add} {to_list}` и `{remove} {from}`.
-                    Додај нове линије кода у своју причу, тако да све нове команде буду коришћене бар једном у твојој причи.
                 example_code_2: |
                     ```
                     {print} Они чују звук
@@ -72,6 +66,13 @@ adventures:
                     {add} животиња {to_list} животиње
                     {print} то је била животиње {at} {random}
                     ```
+                story_text_3: |
+                    Ово је пример команде `{remove}` у твојој причи
+
+                    ### Вежба
+                    Копирај своју причу са претходних нивоа у овај ниво.
+                    На овом нивоу си научио 3 нове команде `{at} {random}`, `{add} {to_list}` и `{remove} {from}`.
+                    Додај нове линије кода у своју причу, тако да све нове команде буду коришћене бар једном у твојој причи.
                 example_code_3: |
                     ```
                     {print} Његов ранац је постао превише тежак.
@@ -80,7 +81,6 @@ adventures:
                     dump {is} {ask} Који предмет треба да избаци?
                     {remove} dump {from} bag
                     ```
-                example_code: "```\nживотиње {is} 🦔, 🐿, 🦉, 🦇\n{print} Они одмах чују звук животиње {at} {random}\n```\n"
             4:
                 story_text: |
                     ### Вежба
@@ -173,6 +173,26 @@ adventures:
 
                     Погледај <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> причу</a> ако је не знаш, и увери се да је исписана као у књизи.
                 example_code: "```\nживотиње = _ , _ , _ \n{print} 'Браон медведе, Браон медведе'\n{print} 'Шта видиш?'\n```\n"
+            13:
+                story_text: |
+                    Направићемо још једну причу, али сада морамо користити заграде са `{print}`.
+
+                    ### Вежба 1
+                    Направите причу од најмање 5 реченица. Још увек не морате користити 'име'.
+                example_code: |
+                    ```
+                    {print}('Добродошли у ову причу!')
+                    ```
+                story_text_2: |
+                    ### Вежба 2
+                    Већ смо припремили `{input}` за вас. Прво, користите променљиву `name` у вашој причи.
+                    Затим додајте други `{ask}` и користите ту променљиву такође.
+                    Савет: Запамтите зарезе у `{print}` између текста и променљивих!
+                example_code_2: |
+                    ```
+                    име = {input}("Како се зовете?")
+                    {print}('Добродошли у ову причу!')
+                    ```
             16:
                 story_text: |
                     Коришћење `{while}` петље може учинити твоје приче занимљивијим. На пример, можеш користити `{while} game == 'on'` тако да можеш играти док игра не буде завршена.
@@ -195,27 +215,9 @@ adventures:
                             {print} 'Не, нису код ' location
                     {print} 'Сада можеш ући у кућу!'
                     ```
-            13:
-                story_text: |
-                    Направићемо још једну причу, али сада морамо користити заграде са `{print}`.
-
-                    ### Вежба 1
-                    Направите причу од најмање 5 реченица. Још увек не морате користити 'име'.
-                example_code: |
-                    ```
-                    {print}('Добродошли у ову причу!')
-                    ```
-                story_text_2: |
-                    ### Вежба 2
-                    Већ смо припремили `{input}` за вас. Прво, користите променљиву `name` у вашој причи.
-                    Затим додајте други `{ask}` и користите ту променљиву такође.
-                    Савет: Запамтите зарезе у `{print}` између текста и променљивих!
-                example_code_2: |
-                    ```
-                    име = {input}("Како се зовете?")
-                    {print}('Добродошли у ову причу!')
-                    ```
     add_remove_command:
+        name: '{add} {to_list} & {remove} {from}'
+        default_save_name: add_remove_command
         description: увођење {add} {to_list} и {remove} {from}
         levels:
             3:
@@ -252,9 +254,11 @@ adventures:
                     _
                     {print} Добијате милкшејк са укусом {at} {random}
                     ```
-        name: '{add} {to_list} & {remove} {from}'
-        default_save_name: add_remove_command
+    and_or_command:
+        levels: {}
     ask_command:
+        name: '{ask}'
+        default_save_name: ask_command
         description: Увод у команду {ask}
         levels:
             1:
@@ -319,8 +323,6 @@ adventures:
                     name = {input}('Како се зовеш?')
                     {print}('Дакле, твоје име је ', name)
                     ```
-        default_save_name: ask_command
-        name: '{ask}'
     calculator:
         name: Калкулатор
         default_save_name: Калкулатор
@@ -487,6 +489,7 @@ adventures:
                     # Користи свој код из претходне авантуре.
                     ```
     clear_command:
+        name: '{clear}'
         default_save_name: команда_очисти
         description: '{clear} команда'
         levels:
@@ -507,7 +510,8 @@ adventures:
                     {clear}
                     {print} 'ИЗНЕНАЂЕЊЕ!'
                     ```
-        name: '{clear}'
+    congratulations:
+        levels: {}
     debugging:
         name: отклањање грешака
         default_save_name: отклањање грешака
@@ -794,11 +798,12 @@ adventures:
                         {print} имена {at} {random} ' ради судове у ' дан
                     ```
     elif_command:
-        levels:
         name: '{elif}'
-        description: '{elif}'
         default_save_name: elif
+        description: '{elif}'
+        levels: {}
     for_command:
+        name: '{for}'
         default_save_name: за
         description: '{for} команда'
         levels:
@@ -831,7 +836,6 @@ adventures:
                 story_text: |
                     На крају, претворићемо `{for} i {in} {range} 1 {to} 5` у стварни Python код, овако:
                 example_code: "```\n{for} i {in} {range}(1,5):\n    {print} (i)\n```\n"
-        name: '{for}'
     fortune:
         name: Пророчанство
         default_save_name: Пророчанство
@@ -1011,7 +1015,7 @@ adventures:
         name: Погоди мој број
         default_save_name: погоди мој број
         description: погоди мој број
-        levels:
+        levels: {}
     harry_potter:
         name: Хари Потер
         default_save_name: Хари Потер
@@ -1067,12 +1071,12 @@ adventures:
             2:
                 story_text: |
                     У овој уклетој кући можете изабрати своје чудовиште са емоџијима. Наравно, можете користити и речи.
+                example_code: "```\nчудовиште_1 {is} 👻\nчудовиште_2 {is} 🤡\nчудовиште_3 {is} 👶\n{print} Улазите у уклету кућу.\n{print} Одједном видите чудовиште_1\n{print} Трчите у другу собу...\n{print} Али чудовиште_2 вас тамо чека!\n{print} О не! Брзо идите у кухињу.\n{print} Али када уђете, чудовиште_3 вас напада!\n```\n"
                 story_text_2: |
                     ### Вежба
                     У горњем примеру чудовишта су унапред одређена. Тако да сваки пут када покренете свој код, излаз је исти.
                     Можете ли додати `{ask}` команде да учините уклету кућу интерактивном и да играчи изаберу чудовишта на која наилазе?
                 example_code_2: "```\nчудовиште_1 {is} _\nчудовиште_2 {is} _\nчудовиште_3 {is} _\n{print} Улазите у уклету кућу.\n{print} Одједном видите чудовиште_1\n{print} Трчите у другу собу...\n{print} Али чудовиште_2 вас тамо чека!\n{print} О не! Брзо идите у кухињу.\n{print} Али када уђете, чудовиште_3 вас напада!\n```\n"
-                example_code: "```\nчудовиште_1 {is} 👻\nчудовиште_2 {is} 🤡\nчудовиште_3 {is} 👶\n{print} Улазите у уклету кућу.\n{print} Одједном видите чудовиште_1\n{print} Трчите у другу собу...\n{print} Али чудовиште_2 вас тамо чека!\n{print} О не! Брзо идите у кухињу.\n{print} Али када уђете, чудовиште_3 вас напада!\n```\n"
             3:
                 story_text: |
                     На претходним нивоима направили сте увод у своју игру уклете куће, али као што сте можда приметили, прича би увек имала страшан крај.
@@ -1161,6 +1165,8 @@ adventures:
                         {print} _
                         {print} 'КРАЈ ИГРЕ'
                     ```
+    hospital:
+        levels: {}
     hotel:
         name: хотел
         default_save_name: хотел
@@ -1199,6 +1205,7 @@ adventures:
                     {call} welcome_message {with} title, name, homecountry, 105
     if_command:
         name: '{if} и {else}'
+        default_save_name: if_command
         description: Увођење команде {if}
         levels:
             5:
@@ -1260,8 +1267,9 @@ adventures:
                     {else}
                         {print} 'Не желиш да наставиш'
                     ```
-        default_save_name: if_command
     in_command:
+        name: '{in}'
+        default_save_name: in_command
         description: Увођење команде {in}
         levels:
             6:
@@ -1287,9 +1295,9 @@ adventures:
                     _ одговор _ животиње _ 'И моја омиљена!'
                     _ _ 'Моје омиљене животиње су пси, краве и овце'
                     ```
-        default_save_name: in_command
-        name: '{in}'
     is_command:
+        name: '{is}'
+        default_save_name: is_command
         description: увођење команде {is}
         levels:
             2:
@@ -1320,8 +1328,6 @@ adventures:
                     име = Хеди
                     одговор = 20 + 4
                     ```
-        name: '{is}'
-        default_save_name: is_command
     language:
         name: Језик
         default_save_name: Језик
@@ -1516,34 +1522,6 @@ adventures:
                         {call} song
                         {print} '🥳'
                     ```
-            14:
-                story_text: |
-                    Надоградите свој код за "Старог Макдоналда"!
-
-                    ### Вежба
-                    Узмите свој код из авантуре "Певај песму" и додајте музичке ноте!
-                    Можете направити функцију за сваки ред у песми и позвати ту функцију након што се ред одштампа.
-                    Дефинисали смо први ред за вас и позвали га у коду. Можете ли завршити целу песму?
-                example_code: |
-                    ```
-                    {define} line_1
-                        {for} i {in} {range} 1 {to} 3
-                            {play} G
-                        {play} D
-                        {for} i {in} {range} 1 {to} 2
-                            {play} E
-                        {play} D
-
-                    animals = ['pig', 'dog', 'cow']
-                    sounds = ['oink', 'woof', 'moo']
-                    for i in range 1 to 3
-                        animal = animals[i]
-                        sound = sounds[i]
-                        print 'Старац Макдоналд имао је фарму'
-                        call line_1
-                        print 'Е И Е И О!'
-                        _
-                    ```
     parrot:
         name: Папагај
         default_save_name: Папагај
@@ -1708,6 +1686,7 @@ adventures:
                         _
                     ```
     print_command:
+        name: '{print}'
         default_save_name: команда за приказивање
         description: Увод у команду за приказивање
         levels:
@@ -1751,12 +1730,11 @@ adventures:
                     име = 'Хеди'
                     {print}('Моје име је ', име)
                     ```
-        name: '{print}'
     quizmaster:
         name: Квизмајстор
         default_save_name: Квизмајстор
         description: Направите свој квиз!
-        levels:
+        levels: {}
     quotation_marks:
         name: '''наводници'''
         default_save_name: наводници
@@ -1790,6 +1768,8 @@ adventures:
                     {print} "What's more fun than that?"
                     ```
     random_command:
+        name: '{random}'
+        default_save_name: random_command
         description: увођење команде random
         levels:
             3:
@@ -1803,6 +1783,11 @@ adventures:
                     ```
                 story_text_2: |
                     Можете користити команду `{at} {random}` и у реченици.
+                example_code_2: |
+                    ```
+                    храна {is} сендвич, парче пице, салата, бурито
+                    {print} Ја ћу имати храна {at} {random} за ручак.
+                    ```
                 story_text_3: |
                     ### Вежба
                     Испробајте команду `{at} {random}` тако што ћете направити своју сопствену игрицу (као оне на ТВ-у) где бирате врата или кофер и он садржи велику награду!
@@ -1814,11 +1799,6 @@ adventures:
                     изабрано {is} {ask} Који кофер бирате?
                     награде {is} _
                     _
-                    ```
-                example_code_2: |
-                    ```
-                    храна {is} сендвич, парче пице, салата, бурито
-                    {print} Ја ћу имати храна {at} {random} за ручак.
                     ```
             14:
                 story_text: |-
@@ -1844,9 +1824,9 @@ adventures:
                     fruit = ['јабука', 'банана', 'трешња']
                     {print} fruit[random]
                     ```
-        default_save_name: random_command
-        name: '{random}'
     repeat_command:
+        name: '{repeat}'
+        default_save_name: repeat_command
         description: команда {repeat}
         levels:
             8:
@@ -1887,9 +1867,9 @@ adventures:
                         {else}
                             {print} 'пица је боља!'
                     ```
-        default_save_name: repeat_command
-        name: '{repeat}'
     repeat_command_2:
+        name: '{repeat} 2'
+        default_save_name: repeat_command_2
         description: команда {repeat} 2
         levels:
             8:
@@ -1929,8 +1909,6 @@ adventures:
                     _ {print} 'Човек од мафина'
                     _ {print} 'Да ли знаш човека од мафина, који живи у Друри Лејну?'
                     ```
-        default_save_name: repeat_command_2
-        name: '{repeat} 2'
     restaurant:
         name: Ресторан
         default_save_name: Ресторан
@@ -2297,6 +2275,7 @@ adventures:
                     ```
     rock_2:
         name: Камен, папир, маказе 2
+        default_save_name: rock_2
         description: Други део камен, папир, маказе
         levels:
             2:
@@ -2310,7 +2289,6 @@ adventures:
                     избор {is} _
                     {print} Бирам избор
                     ```
-        default_save_name: rock_2
     secret:
         name: СуперШпијун
         default_save_name: СуперШпијун
@@ -2335,6 +2313,8 @@ adventures:
                         {print} 'Иди на железничку станицу у 10.00'
                      ```
     sleep_command:
+        name: '{sleep}'
+        default_save_name: sleep_command
         description: увођење команде {sleep}
         levels:
             2:
@@ -2349,8 +2329,6 @@ adventures:
                     {sleep} 2
                     {print} зелена!
                     ```
-        default_save_name: sleep_command
-        name: '{sleep}'
     songs:
         name: Певај песму!
         default_save_name: Песма
@@ -2465,22 +2443,6 @@ adventures:
         default_save_name: Песма 2
         description: Певај песму 2
         levels:
-            12:
-                story_text: |
-                    Песме садрже много понављања. Можемо их обухватити функцијом!
-                    ### Вежба
-                    Погледајте пример кода са функцијом. Попуните две линије тако да се цела песма испише.
-                example_code: |
-                    ```
-                    {define} twinkle
-                        {print} 'Трепери'
-                        {print} _
-
-                    {call} twinkle
-                    {print} 'Горе изнад света тако високо'
-                    {print} 'Као дијамант на небу'
-                    {call} _
-                    ```
             11:
                 story_text: |
                     ### Вежба
@@ -2508,6 +2470,22 @@ adventures:
                     object = 'точкови', 'врата', _
                     movement =  'окрећу се и окрећу', 'отварају се и затварају', _
                     ```
+            12:
+                story_text: |
+                    Песме садрже много понављања. Можемо их обухватити функцијом!
+                    ### Вежба
+                    Погледајте пример кода са функцијом. Попуните две линије тако да се цела песма испише.
+                example_code: |
+                    ```
+                    {define} twinkle
+                        {print} 'Трепери'
+                        {print} _
+
+                    {call} twinkle
+                    {print} 'Горе изнад света тако високо'
+                    {print} 'Као дијамант на небу'
+                    {call} _
+                    ```
     turtle:
         name: Корњача
         default_save_name: Корњача
@@ -2520,10 +2498,10 @@ adventures:
                     Користећи `{forward}` црташ линију напред. Број иза одређује колико далеко ће корњача ићи. `{turn} {right}` окреће четвртину у смеру казаљке на сату, `{turn} {left}` окреће супротно од казаљке на сату.
 
                     Ако желиш да идеш уназад, користиш команду `{forward}` али са негативним бројем. На пример `{forward} -100`
+                example_code: "```\n{forward} 100\n{turn} {left}\n```\n"
                 story_text_2: |
                     ### Вежба
                     Ово је почетак малог степеништа. Можете ли направити да има 5 степеника?
-                example_code: "```\n{forward} 100\n{turn} {left}\n```\n"
                 example_code_2: "```\n{forward} 20\n{turn} {right}\n{forward} 20\n{turn} {left}\n{forward} 20\n```\n"
             2:
                 story_text: |
@@ -2537,6 +2515,7 @@ adventures:
 
                     **Додатно** Промени слово у друго слово, као што је прво слово твог имена.
                     Можеш такође направити више слова, постављањем боје на `{color}` `{white}` између. 
+                example_code: "```\n{forward} 80\n{turn} 90\n{forward} 50\n{turn} 180\n{forward} 100\n```\n"
                 story_text_2: |
                     Можеш користити променљиве у корњачином `turn`.
 
@@ -2553,7 +2532,6 @@ adventures:
                     {turn} угао
                     {forward} 25
                     ```
-                example_code: "```\n{forward} 80\n{turn} 90\n{forward} 50\n{turn} 180\n{forward} 100\n```\n"
             3:
                 story_text: |
                     На овом нивоу можеш користити `{at} {random}` са корњачом за цртање. Случајан избор чини да корњача сваки пут иде другачијим путем.
@@ -2904,47 +2882,6 @@ adventures:
                         {if} облик = 'квадрат'
                             {call} нацртај_квадрат
                     ```
-            14:
-                story_text: |
-                    ### Вежба
-                    Преправите цртеже са корњачом!
-
-                    Улица у различитим величинама <img src="https://github.com/hedyorg/hedy/assets/80678586/cdae9d97-d5ef-46f3-8838-24fa7b5b1bec" width="300">
-                    Шарена улица  <img src="https://github.com/hedyorg/hedy/assets/80678586/9893e0bd-c0f8-49bc-a5a7-217182407724" width="300">
-                    Снежна олуја <img src="https://github.com/hedyorg/hedy/assets/80678586/111b0a1b-b0e1-47c3-b032-81cea05e6bbc" width="300">
-                example_code: |
-                    Савет Улица у различитим величинама
-                    ```
-                    {define} нацртај_кућу {with} величина
-                    _
-
-                    {call} нацртај_кућу {with} 90
-                    {call} нацртај_кућу {with} 60
-                    {call} нацртај_кућу {with} 30
-                    ```
-
-                    Савет Шарена улица
-                    ```
-                    {define} нацртај_кућу {with} изабрана_боја
-                    _
-                    ```
-
-                    Савет Снежна олуја
-                    ```
-                    {define} нацртај_пахуљицу {with} дужина, боја
-                        _
-
-                    бројеви = 10, 20, 30
-                    боје = _
-
-                    {for} i {in} {range} 1 {to} 5
-                        случајни_број = _
-                        случајна_боја = _
-                        {call} нацртај_пахуљицу {with} случајни_број, случајна_боја
-                        {color} бела
-                        {turn} случајни_број * 5
-                        {forward} 80
-                    ```
             15:
                 story_text: |
                     ### Вежба
@@ -3006,7 +2943,9 @@ adventures:
                     Звезда
                     Звезда се обично црта користећи окретање од 144 степена. Ако ово мало промените на 143 степена, на пример, и поновите образац више пута са {while} петљом, можете направити ову фигуру.
     while_command:
+        name: '{while}'
         default_save_name: док_команда
+        description: '{while}'
         levels:
             16:
                 story_text: |-
@@ -3022,9 +2961,8 @@ adventures:
                         одговор = {ask} 'Колико је 5 пута 5?'
                     {print} 'Дат је тачан одговор'
                     ```
-        name: '{while}'
-        description: '{while}'
     years:
         name: Нова година
         default_save_name: Одбројавање до Нове године
         description: Одбројавање до Нове године!
+        levels: {}

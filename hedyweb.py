@@ -1,6 +1,6 @@
 import collections
 
-from website.yaml_file import YamlFile
+from hedy.yaml_file import YamlFile
 import glob
 from os import path
 

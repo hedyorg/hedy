@@ -6,3 +6,134 @@ adventures:
         levels:
             1:
                 story_text: "レベル1では、異なる主人公で物語を作ることができます。\n\n最初の行で {ask} を使用して、物語の主人公が誰になるかを尋ねてください。\n\nその後、文を印刷する必要がある場合は {print} で始めます。\n\n文の最後に主人公を表示したい場合は {echo} を使用してください。\n"
+                example_code: |
+                    ```
+                    {ask} この物語の主人公は
+                    {print} 主人公はこれから森の中を歩きます
+                    {echo} はちょっと怖がっています
+                    {print} あちこちから不気味な音が聞こえます
+                    {print} ここは幽霊の出る森かもしれない……
+                    ```
+                story_text_2: |
+                    ### 練習問題
+                    6行以上のコードで、自分だけの物語を作ってみましょう。
+                    例題のコードと同じ物語にしてはいけません。
+                    `{ask}` と `{echo}` コマンドを少なくとも1回ずつ使いましょう。
+                    テーマは好きなものでかまいません。
+                    もし思いつかなければ、次の中から選んでください：映画を観に行く、スポーツの試合、動物園での一日。
+            2:
+                story_text: |
+                    レベル2では、お話をもっと楽しくできます。主人公の名前を、文のどこにでも入れられるようになるのです。
+
+                    そのためには、少しだけ追加のプログラムを書く必要があります。まず最初に、主人公の名前を設定しておきましょう。
+
+                    そうすれば、その名前を文のどこにでも使えるようになります。
+                example_code: |-
+                    ```
+                    name {is} {ask} 主人公の名前は？
+                    {print} name はこれから森の中を走ります
+                    {print} name は少しこわい
+                    {print} 突然、へんな音が聞こえた...
+                    {sleep}
+                    {print} name は「ここ、お化けの出る森かも...」とこわくなった
+                    ```
+                story_text_2: |
+                    ### 練習問題
+                    さあ、前のレベルで作った自分のお話に変数を追加してみましょう！
+
+                    「マイプログラム」を開いて、レベル1で作ったストーリーアドベンチャーを探してください。そのコードをコピーして、このレベルの入力画面に貼り付けましょう。
+
+                    このままだとコードはうまく動きません。まだ変数を使っていないからです。
+                    コードの中にある `{ask}` コマンドと `{echo}` コマンドを、このレベルで習った正しい形に書きかえましょう。
+
+                    **おまけ** `{sleep}` コマンドを追加して、お話をもっとドキドキさせてみよう！
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
+    ask_command:
+        levels: {}
+    calculator:
+        levels: {}
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
+    dice:
+        levels: {}
+    dishes:
+        levels: {}
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
+    fortune:
+        levels: {}
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
+    haunted:
+        levels: {}
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
+    is_command:
+        levels: {}
+    language:
+        levels: {}
+    maths:
+        levels: {}
+    music:
+        levels: {}
+    parrot:
+        levels: {}
+    piggybank:
+        levels: {}
+    pressit:
+        levels: {}
+    print_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    restaurant:
+        levels: {}
+    rock:
+        levels: {}
+    rock_2:
+        levels: {}
+    secret:
+        levels: {}
+    sleep_command:
+        levels: {}
+    songs:
+        levels: {}
+    songs_2:
+        levels: {}
+    turtle:
+        levels: {}
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}
+    years:
+        levels: {}

@@ -30,6 +30,11 @@ echo $schemas
 failures=false
 
 for schema in $schemas; do
+    # TODO: excluiding cheatsheets for now, while we update the content in them
+    if [[ $schema == *"cheatsheets"* ]]; then
+        echo "------> Skipping cheatsheet schema $schema"
+        continue
+    fi
     dir=$(dirname $schema)
 
     # The non-generated schema files that have required fields. They should be

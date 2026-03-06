@@ -2,68 +2,221 @@ import { multiLevelTester, singleLevelTester } from "../tools/lezer/lezer_tester
 
 describe('Lezer parser tests for level 8', () => {
     describe('Successful tests', () => {
-        describe('Test if text in list print', () => {
-            const code = `
-            if text in list
-              print 'in'`
-            const expectedTree =
-            `Program(
-                Command(If(if,Condition(InListCheck(Text,in,Text)))),
-                Command(Print(print,String)))`
+        describe('Test repeat with integer', () => {
+            const code = "repeat 3 times print 'Hedy is fun!'"
+            const expectedTree = `
+                    Program(
+                        Command(
+                            Repeat(
+                                repeat,
+                                Number,
+                                times,
+                                Command(
+                                    Print(print,String)
+                                )
+                            )
+                        )
+                    )`
 
-            multiLevelTester('Test if text in list print', code, expectedTree, 8, 11);
+            singleLevelTester('Test repeat with integer ', code, expectedTree, 8)
         })
 
-        describe('Test if number in list print', () => {
-            const code =
-            `if 5 in list
-                print 'in'`
-            const expectedTree =
-            `Program(
-                Command(If(if,Condition(InListCheck(Int,in,Text)))),
-                Command(Print(print,String))
-            )`
+        describe('Test repeat with text', () => {
+            const code = "repeat n times print 'Hedy is fun!'"
+            const expectedTree = `
+                Program(
+                    Command(
+                        Repeat(
+                            repeat,
+                            Text,
+                            times,
+                            Command(
+                                Print(print,String)
+                            )
+                        )
+                    )
+                )`
 
-            multiLevelTester('Test if number in list print', code, expectedTree, 8, 11);
+            singleLevelTester('Test repeat with text', code, expectedTree, 8)
         })
 
-        describe('Test if text not in list print', () => {
-            const code = `
-            if text not in list
-              print 'in'`
-            const expectedTree =
-            `Program(
-                Command(If(if,Condition(NotInListCheck(Text,not_in,not_in,Text)))),
-                Command(Print(print,String)))`
+        describe('Test repeat with if inside', () => {
+            const code = "repeat 3 times if name is Hedy print 'hello world'"
+            const expectedTree = `
+                Program(
+                    Command(
+                        Repeat(
+                            repeat,
+                            Number,
+                            times,
+                            Command(
+                                If(
+                                    if,
+                                    Condition(EqualityCheck(Expression(Text),is,Expression(Text))),
+                                    IfLessCommand(Print(print,String))
+                                )
+                            )
+                        )
+                    )
+                )`
 
-            multiLevelTester('Test if text not in list print', code, expectedTree, 8, 11);
+            singleLevelTester('Test repeat with if inside', code, expectedTree, 8)
         })
 
-        describe('Test if number not in list print', () => {
-            const code =
-            `if 5 not in list
-                print 'in'`
-            const expectedTree =
-            `Program(
-                Command(If(if,Condition(NotInListCheck(Int,not_in,not_in,Text)))),
-                Command(Print(print,String))
-            )`
-
-            multiLevelTester('Test if number not in list print', code, expectedTree, 8, 11);
-        })
-
-        describe('Test equality check equal sign', () => {
-            const code = 
-                `if order = burger
-                    price is 5`
-            const expectedTree = 
-                `Program(
-                    Command(If(if,Condition(EqualityCheck(Text,Op,Expression(Text))))),
-                    Command(Assign(Text,is,Expression(Int)))
+        describe('Test repeat with if and else inside', () => {
+            const code = "repeat 3 times if name is Hedy print 'hello world' else print 'hello world'"
+            const expectedTree = `
+                Program(
+                    Command(
+                        Repeat(
+                            repeat,
+                            Number,
+                            times,
+                            Command(
+                                If(
+                                    if,
+                                    Condition(EqualityCheck(Expression(Text),is,Expression(Text))),
+                                    IfLessCommand(Print(print,String)),
+                                    Else(
+                                        else,
+                                        IfLessCommand(Print(print,String))
+                                    )
+                                )
+                            )
+                        )
+                    )
                 )
                 `
-            
-            multiLevelTester('Test equality check equal sign', code, expectedTree, 8, 11);
+
+            singleLevelTester('Test repeat with if and else inside', code, expectedTree, 8)
+        })
+
+        describe('Test repeat with if and else inside, if command on new line', () => {
+            const code = "repeat 3 times if name is Hedy\nprint 'hello world' else print 'hello world'"
+            const expectedTree = `
+                Program(
+                    Command(
+                        Repeat(
+                            repeat,
+                            Number,
+                            times,
+                            Command(
+                                If(
+                                    if,
+                                    Condition(EqualityCheck(Expression(Text),is,Expression(Text))),
+                                    IfLessCommand(Print(print,String)),
+                                    Else(
+                                        else,
+                                        IfLessCommand(Print(print,String))
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+                `
+
+            singleLevelTester('Test repeat with if and else inside, if command on new line', code, expectedTree, 8)
+        })
+
+        describe('Test repeat with if and else inside, if command on new line', () => {
+            const code = "repeat 3 times if name is Hedy\nprint 'hello world'\nelse print 'hello world'"
+            const expectedTree = `
+                Program(
+                    Command(
+                        Repeat(
+                            repeat,
+                            Number,
+                            times,
+                            Command(
+                                If(
+                                    if,
+                                    Condition(EqualityCheck(Expression(Text),is,Expression(Text))),
+                                    IfLessCommand(Print(print,String))))
+                                )
+                            ),
+                            Command(
+                                Else(
+                                    else,
+                                    IfLessCommand(Print(print,String)
+                                )
+                            )
+                        )
+                    )
+                `
+
+            singleLevelTester('Test repeat with if and else inside, if command on new line', code, expectedTree, 8)
+        })
+
+        describe('Test if with repeat inside', () => {
+            const code = "if name is Hedy repeat 3 times print 'hello world'"
+            const expectedTree = `
+                Program(
+                    Command(
+                        If(
+                            if,
+                            Condition(EqualityCheck(Expression(Text),is,Expression(Text))),
+                            IfLessCommand(
+                                Repeat(
+                                    repeat,
+                                    Number,
+                                    times,
+                                    Command(Print(print,String))
+                                )
+                            )
+                        )
+                    )
+                )
+                `
+
+            singleLevelTester('Test if with repeat inside', code, expectedTree, 8)
+        })
+
+        describe('Combined test', () => {
+            let code = `repeat 2 times answer = ask 'Did you know you could ask a question multiple times?'
+            if answer is yes repeat 2 times print 'You knew that already!'
+            else repeat 3 times print 'You have learned something new!'`
+
+            code = code.split('\n').map(line => line.trim()).join('\n')
+
+            const expectedTree = `
+            Program(
+                Command(
+                    Repeat(
+                        repeat,
+                        Number,
+                        times,
+                        Command(Ask(Text,Op,ask,String))
+                    )
+                ),
+                Command(
+                    If(if,
+                        Condition(EqualityCheck(Expression(Text),is,Expression(Text))),
+                        IfLessCommand(
+                            Repeat(
+                                repeat,
+                                Number,
+                                times,
+                                Command(Print(print,String)))
+                            )
+                    )
+                ),
+                Command(
+                    Else(
+                        else,
+                        IfLessCommand(
+                            Repeat(
+                                repeat,
+                                Number,
+                                times,
+                                Command(Print(print,String))
+                            )
+                        )
+                    )
+                )
+            )`
+
+            singleLevelTester('Combined test', code, expectedTree, 8)
         })
     })
 })

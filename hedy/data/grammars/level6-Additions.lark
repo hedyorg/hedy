@@ -1,0 +1,33 @@
+// adds elif in and not in
+// Not yet in the traverser
+
+//if, conditions and else on different lines from level 6
+
+if_clause: _IF (condition|condition_spaces) _SPACE? _EOL _if_less_command
+else_clause: _ELSE _SPACE? _EOL _if_less_command
+elif_clause: _ELIF (condition|condition_spaces) _SPACE? _EOL _if_less_command
+
+ifelifelse: if_clause (_EOL elif_clause)* (_EOL else_clause)?
+
+
+condition: in_list_check | not_in_list_check  | smaller | bigger | not_equal | smaller_equal | bigger_equal | equality_check
+
+in_list_check: textwithoutspaces _IN var_access
+not_in_list_check: textwithoutspaces _NOT_IN var_access
+equality_check: comparison_arg (_IS | _EQUALS) comparison_arg _SPACE?
+equality_check_dequals: comparison_arg _DOUBLE_EQUALS comparison_arg _SPACE?
+smaller: comparison_arg _SMALLER comparison_arg _SPACE?
+bigger: comparison_arg _LARGER comparison_arg _SPACE?
+smaller_equal: comparison_arg _SMALLER_EQUALS comparison_arg _SPACE?
+bigger_equal: comparison_arg _LARGER_EQUALS comparison_arg _SPACE?
+not_equal: comparison_arg _NOT_EQUALS comparison_arg _SPACE?
+
+?comparison_arg: textwithoutspaces | var_access | list_access | NUMBER
+
+// More advances ins migt be needed lateron?
+// in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _IN var_access
+// not_in_list_check: (list_access | var_access | text_in_quotes | NUMBER) _NOT_IN var_access
+
+command: -= ifelse | if_clause
+command: += ifelifelse | ifelse | if_clause
+

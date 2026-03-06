@@ -5,8 +5,8 @@ from flask import make_response, redirect, request, session
 from website.flask_helpers import gettext_with_fallback as gettext
 
 from config import config
-from safe_format import safe_format
-from hedy_content import ALL_LANGUAGES, COUNTRIES
+from hedy.safe_format import safe_format
+from website_content import ALL_LANGUAGES, COUNTRIES
 from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times, remove_class_preview
 from website.newsletter import create_subscription
 from website.auth import (

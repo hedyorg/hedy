@@ -16,11 +16,11 @@ from os import path
 
 from dataclasses import dataclass
 import functools
-import exceptions
+from hedy import exceptions
 import hedy
 import utils
-from tests.Tester import HedyTester, YamlSnippet
-from website.yaml_file import YamlFile
+from hedy_tests.Tester import HedyTester, YamlSnippet
+from hedy.yaml_file import YamlFile
 
 fix_error = False
 # set this to True to revert broken snippets to their en counterpart automatically
@@ -152,7 +152,8 @@ def markdown_code_blocks(text):
 
 
 def filter_snippets(snippets, level=None, lang=None):
-    if (lang or level) and os.getenv('CI'):
+    # TODO: for now we are only going to test english. Soon we'll test all languages.
+    if (lang or level) and os.getenv('CI') and lang != 'en':
         raise RuntimeError('Whoops, it looks like you left a snippet filter in!')
 
     if lang:

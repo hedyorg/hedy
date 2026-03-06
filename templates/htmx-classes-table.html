@@ -21,23 +21,46 @@
             <td class="text-center p-2">{{class.students|length}}</td>
             <td class="text-center p-2">
               <div class="flex justify-center text-blue-900">
-                <button class="flex flex-col w-1/4"
+                <button class="flex flex-col w-1/5"
                 _="on click window.open('/for-teachers/customize-class/{{class.id}}', '_self')">
                   <span class="fas fa-pen block my-auto lg:my-0"></span>
                   <span class="hidden lg:block mt-1">{{_('customize')}}</span>
                 </button>
-                <button class="flex flex-col w-1/4"
+                <button class="flex flex-col w-1/5 disabled:text-gray-600"
+                  {% 
+                    if 'content_version' in class_customizations.get(class.id, {})
+                    and class_customizations[class.id].content_version >= last_content_version 
+                  %}  disabled {% endif %}
+                    hx-confirm="{{_('update_class_prompt')}}"
+                    data-success-message="{{ _('class_updated_successfully') }}"
+                    data-failure-message="{{ _('feedback_message_error') }}"
+                    hx-trigger="click"
+                    hx-post="/for-teachers/update-content/{{ class.id }}"
+                    hx-target="#classes_table"
+                    hx-swap="outerHTML"
+                  >
+                  {% if 'content_version' in class_customizations.get(class.id, {})
+                    and class_customizations[class.id].content_version >= last_content_version 
+                  %}
+                    <span class="fa-solid fa-circle-check my-auto lg:my-0"></span>
+                    <span class="hidden lg:block mt-1">{{_('updated')}}</span>
+                  {% else %}                  
+                    <span class="fa-solid fa-rotate my-auto lg:my-0"></span>
+                    <span class="hidden lg:block mt-1">{{_('update')}}</span>
+                  {% endif %}
+                </button>
+                <button class="flex flex-col w-1/5"
                   data-cy="duplicate_{{class.name}}"
                   onclick='hedyApp.duplicate_class("{{class.id}}", "{{class.second_teachers}}", {{_('second_teacher_copy_prompt')|default(None)|tojson}}, {{_('class_name_prompt')|default(None)|tojson}}, {% if class.teacher != username %}"{{class.name}}"{% else %}""{% endif %})'>
                   <span class="fas fa-copy block my-auto lg:my-0"></span>
                   <span class="hidden lg:block mt-1">{{_('duplicate')}}</span>
                 </button>
-                <button class="flex flex-col w-1/4"
+                <button class="flex flex-col w-1/5"
                 _="on click window.open('/for-teachers/class/{{class.id}}/preview', '_self')">
                   <span class="fas fa-eye block my-auto lg:my-0"></span>
                   <span class="hidden lg:block mt-1">{{_('preview')}}</span>
                 </button>
-                <button data-cy="remove_class" class="flex flex-col w-1/4"
+                <button data-cy="remove_class" class="flex flex-col w-1/5"
                     hx-confirm="{{_('delete_class_prompt')}}"
                     hx-trigger="click"
                     hx-delete="/class/{{class.id}}"

@@ -39,15 +39,15 @@
             else if not arrow.classList.contains('rotate-180')
                 add .rotate-180 to arrow
             end">
-          {% set dropdown_levels = customizations["available_levels"] if customizations["teachers_adventure"] else range(1, max_level + 1) %}
+          {% set dropdown_levels = available_levels %}
           {% for dropdown_level in dropdown_levels %}
             <button id="level_button_{{ dropdown_level }}" data-cy="level_button_{{ dropdown_level }}" class="flex justify-between items-center gap-2 px-2 py-2 border-b border-dashed border-blue-500
-            {% if dropdown_level == level %}bg-white{% elif dropdown_level not in customizations['available_levels'] and not specific_adventure %}bg-gray-400 tooltip{% else %}hover:bg-blue-100 bg-blue-200c{% endif %}"
-            {% if (dropdown_level == level or dropdown_level not in customizations['available_levels']) and not specific_adventure %}disabled{% endif %}
+            {% if dropdown_level == level %}bg-white{% elif dropdown_level not in available_levels and not specific_adventure %}bg-gray-400 tooltip{% else %}hover:bg-blue-100 bg-blue-200c{% endif %}"
+            {% if (dropdown_level == level or dropdown_level not in available_levels) and not specific_adventure %}disabled{% endif %}
             style="width: 100%;"
             _="on click hedyApp.goToLevel({{dropdown_level}})">
               {% if not specific_adventure %}
-              <div class="{% if dropdown_level in customizations['available_levels'] %}hidden{% endif %} text-center opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 items-top">
+              <div class="{% if dropdown_level in available_levels %}hidden{% endif %} text-center opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 items-top">
                 <span class="tooltiptext text-xs font-medium absolute rounded shadow-lg !fixed p-2" style="inset: auto; margin-left: -90px; margin-top: -30px; color:black; ">
                   {{ _('tooltip_level_locked') }}
                 </span>

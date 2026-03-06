@@ -67,14 +67,14 @@ if naam is Ernie print 'Jij bent oranje' else print 'Jij bent geel!'
 
 ### Goed of fout?
 
-**🤔 Vraag**: Is deze code goed of fout?
+**<i class="fa-solid fa-question"></i> Vraag**: Is deze code goed of fout?
 ```hedy
 concierge is Michael
 print Vandaag is concierge at random bij de receptie
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
-**🤔 Vraag**: Is deze code goed of fout?
+**<i class="fa-solid fa-question"></i> Vraag**: Is deze code goed of fout?
 ```hedy
 klassen is 1, 2, 5, 8, 12, 24
 print De prijs valt op nummer .... klassen at random
@@ -83,20 +83,20 @@ Antwoord: <br> 〇 Goed<br> 〇 Fout
 
 
 
-**🤔 Vraag**: Is deze code goed of fout?
+**<i class="fa-solid fa-question"></i> Vraag**: Is deze code goed of fout?
 ```hedy
 naam is Gea
 print 'Goedemorgen ' voornaam!
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
-**🤔 Vraag**: Is deze code goed of fout?
+**<i class="fa-solid fa-question"></i> Vraag**: Is deze code goed of fout?
 ```hedy
 print 'Daar staat een auto, fout geparkeerd!
 ```
 Antwoord: <br> 〇 Goed<br> 〇 Fout
 
-**🤔 Vraag**: Is deze code goed of fout?
+**<i class="fa-solid fa-question"></i> Vraag**: Is deze code goed of fout?
 ```hedy
 print "De auto's staan op straat"
 print 'Dat mag niet!!'
@@ -111,7 +111,7 @@ Denk eraan dat computers heel precies zijn, iedere spatie of punt of komma telt!
 * Zit er een `ask` in de code? Kies dan zelf een antwoord.
 * Zit er een `random` in de code?  Kies dan een mogelijke keus van de computer.
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+**<i class="fa-solid fa-laptop-code"></i> Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 weer is zonnig, regen, wolken, onweer             ______________________________
@@ -119,7 +119,7 @@ print 'Vandaag wordt het... ' weer at random!
 
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+**<i class="fa-solid fa-laptop-code"></i> Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 docenten is Hermans, Merbis, Bagci, Senkal        ______________________________
@@ -128,7 +128,7 @@ if docent is Hermans print 'Jammer!'
 
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+**<i class="fa-solid fa-laptop-code"></i> Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 toestand is ask Hoe gaat het met jou?             ______________________________
@@ -136,7 +136,7 @@ print 'Dus het gaat ' toestand ' met jou.'
 
 ```
 
-**💻 Vraag**: Wat is de uitvoer van deze code? <br>
+**<i class="fa-solid fa-laptop-code"></i> Vraag**: Wat is de uitvoer van deze code? <br>
 Code:									                        Uitvoer:
 ```hedy
 getallen is 1, 2, 3                               ______________________________
@@ -152,52 +152,52 @@ if getal is 10 print 'Gewonnen!' else print 'Helaas'
 We hebben deze lessen veel nieuwe commando's en woorden geleerd.
 In deze opdracht mag je er twee commando's uitleggen (is en if). Kies er daarna drie die je nog weet, en leg die uit.
 
-**📖 Vraag**: Wat doet het commando `is`?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat doet het commando `is`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat doet het commando `if`?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat doet het commando `if`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat doet het commando `______`?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat doet het commando `______`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat doet het commando `______`?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat doet het commando `______`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat doet het commando `______`?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat doet het commando `______`?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 Hetzelfde voor woorden. Eerst leg je twee woorden uit (variabele en lijst), dan kies je er zelf nog drie die je kan uitleggen.
 
-**📖 Vraag**: Wat betekent het woord variabele?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat betekent het woord variabele?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat betekent het woord lijst?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat betekent het woord lijst?
 Antwoord: ____________________________________________________________________________________________________<br>
 
-**📖 Vraag**: Wat betekent het woord __________?
-Antwoord: ____________________________________________________________________________________________________<br>
-
-
-**📖 Vraag**: Wat betekent het woord __________?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat betekent het woord __________?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 
-**📖 Vraag**: Wat betekent het woord __________?
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat betekent het woord __________?
+Antwoord: ____________________________________________________________________________________________________<br>
+
+
+**<i class="fa-solid fa-book-open"></i> Vraag**: Wat betekent het woord __________?
 Antwoord: ____________________________________________________________________________________________________<br>
 
 ### De laatste vragen!
 
 
 
-**✍️ Vraag**: Weet jij nog meer over programmeren met Hedy dan er in deze toets staat?
+**<i class="fa-solid fa-pen-clip"></i> Vraag**: Weet jij nog meer over programmeren met Hedy dan er in deze toets staat?
 Noem iets dat jij weet, maar niet in deze toets stond. Als het klopt, krijg je bonus. <br>
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>
  <br>
 
-**✍️ Vraag**: Verzin een goede toetsvraag
+**<i class="fa-solid fa-pen-clip"></i> Vraag**: Verzin een goede toetsvraag
 Wat had jij een goede vraag gevonden voor deze toets? Zet er ook het antwoord bij!  <br>
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________<br>

@@ -2,7 +2,11 @@
 import {goToPage} from "../tools/navigation/nav";
 
 // The rest of the tests of the hedy_page applies on the hour-of-code, the subset is an additional feature.
-const subsetsPerLevel = {1: ["print_command", "parrot", "turtle", "debugging"], 6: ["songs", "dishes", "turtle", "debugging" ]}
+const subsetsPerLevel = {
+    1: [ "print_command", "parrot", "turtle", "debugging","hospital"],
+    6: ["story", "music", "fortune", "debugging", "hospital"]
+}
+
 describe("Testing subset passed through the URL", () => {
     for (const level of Object.keys(subsetsPerLevel)) {
         const subset = subsetsPerLevel[level]

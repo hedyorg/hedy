@@ -1,7 +1,7 @@
 from flask import g
 
 import hedy
-from hedy_content import KEYWORDS_ADVENTURES, adventures_order_per_level
+from website_content import KEYWORDS_ADVENTURES, adventures_order_per_level
 from website.auth import current_user
 from website.flask_hedy import g_db
 
@@ -33,10 +33,14 @@ def load_all_adventures_for_index(customizations, user_programs, all_languages_a
     sorted_adventures = customizations.get('sorted_adventures')
     if not sorted_adventures:
         return all_adventures
+    # We make sure to only get valid levels
+    sorted_adventures = {k: v for k, v in sorted_adventures.items() if int(k) <= hedy.HEDY_MAX_LEVEL}
 
     builtin_map = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
     adventure_ids = []
     for level, order_for_level in sorted_adventures.items():
+        if int(level) > hedy.HEDY_MAX_LEVEL:
+            continue
         for a in order_for_level:
             if a['from_teacher']:
                 adventure_ids.append(a['name'])

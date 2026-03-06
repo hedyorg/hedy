@@ -1,54 +1,47 @@
 @top Program { newline* (Command newline+)* Command? }
 Command {
-    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove| If | Else | ErrorInvalid
+    Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove| If | Else | Elif | ErrorInvalid
 }
 
 IfLessCommand {
     Assign | AssignList | Ask | Clear |Print | Play | Turtle | Sleep | Add | Remove | ErrorInvalid
 }
 
-Print { print ( String | ListAccess | Expression )+ }
-Ask { Text (is+ | Op<"=">) ask+ ( String | ListAccess | Expression )+ }
+Print { print ( String | Text | ListAccess )+ }
+Ask { Text (is+ | Op<"=">) ask+ ( String | Text | ListAccess )+ }
 
 // Commas in every language are allowed
-AssignList { Text (is+ | Op<"=">) (Text+ | Int ) ~ambig  (Op<',' | '،' | '，' | '、' > (Text+ | Int ))+ } 
-Assign { Text (is+ | Op<"=">) (Expression ~ambig  | ListAccess)+ }
-Sleep { sleep+ (Expression | ListAccess )? }
-ListAccess { Text at+ (random+ | Text | Int) }
+AssignList { Text is+ Text+ (Op<',' | '،' | '，' | '、' > Text+)+ }
+Assign { Text (is+ | Op<"=">) (Text+ | ListAccess) }
+Sleep { sleep+ (Text | ListAccess )? }
+ListAccess { Text at+ (random+ | Text) }
 Add { add+ Text+ to_list+ Text }
 Remove { remove+ Text+ from+ Text }
 Clear { clear+ }
-Play { play+ (ListAccess | Expression) }
+Play { play+ (ListAccess | Text+) }
 
 Turtle[@isGroup=turtle] {
-    Forward { forward+ (Expression | ListAccess ) } |
-    Turn { turn+ (Expression | ListAccess ) } |
-    Color { color+ (Expression | ListAccess)  }
+    Forward { forward+ (Text | ListAccess ) } |
+    Turn { turn+ (Text | ListAccess ) } |
+    Color { color+ (Text | ListAccess)  }
 }   
 
 If { ifs+ Condition newline* IfLessCommand Else? }
 Else { !else elses+ newline* IfLessCommand }
+Elif { elif+ Condition newline* IfLessCommand Else? }
 
 Condition { 
-    EqualityCheck { (Text | Int)  (is+ | Op<"=">) (String | Expression | pressed+) } |
-    InListCheck { (Text | Int) ins+ Text } |
-    NotInListCheck { (Text | Int) not_in+ Text }
+    PressedCheck { Text is+ pressed+ } |
+    EqualityCheck { Text (is+ |  Op<"="> ) (String | Text ) } |
+    NotEqualCheck { Text (Op<"!=">) (String | Text ) } |
+    ComparisonCheck { Text  (Op<(">" | "<")"="?>) (String | Text ) } |
+    InListCheck { Text ins+  Text } |
+    NotInListCheck { Text not_in+  Text }
 }
 
 ErrorInvalid[@dynamicPrecedence=-10] { Text+ }
 
 Op<expr> { expr }
-
-binaryExpression {
-    Expression !times Op<"*" | "/"> Expression |
-    Expression !plus Op<"+" | "-"> Expression
-}
-
-Expression {
-    Int |
-    Text |
-    binaryExpression
-}
 
 @precedence {
     times @left,
@@ -62,7 +55,8 @@ Expression {
     random[@name="random"],
     ifs[@name="if"],
     elses[@name="else"],
-    pressed[@name="pressed"]
+    pressed[@name="pressed"],
+    elif[@name="elif"]
 }
 
 @external extend { Text } extendKeyword from "./tokens" {
@@ -83,31 +77,23 @@ Expression {
 }
 
 @tokens {
-    @precedence {
-        Int,
-        Text
-    }
-    symbol { $[!%&().:;<>?@\[\]\\\^\{\}`~$_] }
+    symbol { $[%&()*+\-./:;?@\[\]\\\^\{\}`~$_] }
     Comment { "#" ![\n]* }
     newline { '\n' }
     // A char can be anything that goes after the character ! (A1)
     // Excluding the commas in different languages:
     // ، (U+00060C) ，(U+00FF0C) 、 (U+003001)
-    // We are also excluding the arab and Pajabi numeral systems.
-    identifierChar { 
-        @asciiLetter | 
-        $[\u{0000a1}-\u{00060b}] | $[\u{00060d}-\u{000659}] |
-        $[\u{000670}-\u{0006EF}] | $[\u{0006FA}-\u{003000}] |
-        $[\u{003002}-\u{00ff0b}] | $[\u{00ff0d}-\u{10ffff}]
+    identifierChar {
+        @asciiLetter | $[\u{0000a1}-\u{00060b}] |
+        $[\u{00060d}-\u{003000}] | 
+        $[\u{003002}-\u{00ff0b}] | 
+        $[\u{00ff0d}-\u{10ffff}]
     }
-    Text { (identifierChar | symbol | digit)+ }
+    Text { (identifierChar | symbol | @digit)+ }
     space { " " }
-    digit { $[٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹0123456789] } // latin, arab and pa_PK (Panjabi) scripts
-    Int { digit+ }
     String {
         '"' ( ![\\\n"] )* '"' |
         "'" ( ![\\\n'] )* "'"
     }    
 }
-
 @skip { Comment | space }

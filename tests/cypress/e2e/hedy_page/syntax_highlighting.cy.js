@@ -13,7 +13,7 @@ context('chai-colors', () => {
   
     it('has the word print highlighted in examples', () => {
       cy.get('#adventures_tab pre .cm-editor')
-        .eq(1)
+        .eq(0)
         .contains('print')
         .should('be.visible')
         .should('have.css', 'color')

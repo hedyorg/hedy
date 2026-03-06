@@ -48,9 +48,9 @@ describe('Is able to run code', () => {
   it ("Old programs do not execute after cancellation", () => {
     // Only works for now if the old program is stuck in an ask, and doesn't return an
     // exception
-    cy.visit('/hedy/14#tic')
+    cy.visit('/hedy/14#random')
 
-    const program_1 = "for i in range 1 to 10\n  choice = ask 'What is your choice?'"
+    const program_1 = "for i in range (1, 10)\n  choice = input ('What is your choice?')"
     cy.intercept('/parse').as('parse')
     codeEditorContent().clear()
     codeEditorContent().type(program_1)
@@ -58,7 +58,7 @@ describe('Is able to run code', () => {
     cy.wait('@parse')
 
     clickAdventureIndexButton()
-    cy.getDataCy('quizmaster').click()
+    cy.getDataCy('language').eq(1).click()
     const program_2 = "name = ask 'what is your name?'"
     codeEditorContent().clear()
     codeEditorContent().type(program_2)

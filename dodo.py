@@ -170,7 +170,7 @@ def task_generate_static_babel_content():
         actions=[
             [python3, script],
         ],
-        targets=['static_babel_content.json'],
+        targets=['hedy/data/static_babel_content.json'],
         uptodate=[babel_version_unchanged],
     )
 
@@ -227,15 +227,15 @@ def task_typescript():
 
 def task_lark():
     """Generate Lark grammar files based on keyword information in YAMLs."""
-    script = 'content/yaml_to_lark_utils.py'
-    keyword_yamls = glob('content/keywords/*.yaml')
-    grammars = ['grammars/keywords-' + replace_ext(path.basename(y), '.lark') for y in keyword_yamls]
+    script = 'hedy/yaml_to_lark_utils.py'
+    keyword_yamls = glob('hedy/data/keywords/*.yaml')
+    grammars = ['hedy/data/grammars/keywords-' + replace_ext(path.basename(y), '.lark') for y in keyword_yamls]
 
     return dict(
         title=lambda _: 'Create Lark grammar files',
         file_dep=[
             script,
-            'grammars/keywords-template.lark',
+            'hedy/data/grammars/keywords-template.lark',
             *keyword_yamls,
         ],
         actions=[
@@ -368,7 +368,10 @@ def task_normalize_yaml():
     Makes indentation and key ordering uniform, even if the files get rewritten by
     Weblate.
     """
-    yamls = glob('content/**/*.yaml', recursive=True)
+    yamls = [
+        *glob('content/**/*.yaml', recursive=True),
+        *glob('hedy/data/**/*.yaml', recursive=True),
+    ]
 
     return dict(
         title=lambda _: 'Normalize YAML',

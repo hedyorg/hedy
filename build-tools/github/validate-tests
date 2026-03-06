@@ -1,11 +1,12 @@
 #!/bin/bash
 # Helper script to run unit tests
 set -eu
+set -x
 scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir/../..
 
 echo "------> Dynamically create grammar files to make sure they are up-to-date before testing"
-python content/yaml_to_lark_utils.py
+python hedy/yaml_to_lark_utils.py
 
 echo "------> Python unit tests"
 
@@ -17,13 +18,22 @@ fi
 
 
 # Snippets (>20 000 tests) can take a long time, so we have an option to skip them
-slow_suites=test_level,test_translation_level,test_snippets
+slow_suites="{hedy_tests/test_level,hedy_tests/test_translation_level,tests/test_snippets}"
 workers=${WORKERS:-4}
 
 # This is expected to run from the repo root
-eval python -m pytest -n $workers --ignore=tests/{$slow_suites} "$@"
+eval python -m pytest -n $workers \
+    --ignore=hedy_tests/test_level \
+    --ignore=hedy_tests/test_translation_level \
+    --ignore=tests/test_snippets \
+    "$@"
 
 if $all; then
   # Add in the slow suites
-  eval python -m pytest -n $workers --tb=no tests/{$slow_suites} "$@"
+  eval python -m pytest -n $workers --tb=no \
+    hedy_tests/test_level \
+    hedy_tests/test_translation_level \
+    tests/test_snippets \
+    "$@"
+
 fi

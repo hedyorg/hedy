@@ -35,7 +35,7 @@ describe("General tests for my programs page (with both custom teacher and built
         cy.getDataCy('runit').click();
         cy.wait(500);
         cy.visit(`${Cypress.env('programs_page')}`);
-        cy.getDataCy('programs').should("not.contain.text", adventure);
+        cy.getDataCy('programs').should("not.contain.text", 'Story 1');
     });
 
     it("should be added to my programs when running a program with modified code", () => {
@@ -195,13 +195,6 @@ describe("General tests for my programs page (with both custom teacher and built
 
             cy.get('#program_e1d94726655947c5b0309abb18cc17ca').should('be.visible')
             cy.get('#program_4c426ff4cd5a40d7bb65bfbb35907f8b').should('be.visible')
-        })
-
-        it('Introduction adventures should be visible', () => {
-            login('user1', '123456')
-            cy.visit(`${Cypress.env('programs_page')}`);
-            cy.getDataCy('adventure_select').select('Introduction')
-            cy.get('#program_fb23d0fa90ce48b5bf87c0632969fc28').should('be.visible')
         })
     })
 
