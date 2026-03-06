@@ -35,7 +35,7 @@ levels:
                 Dit klinkt misschien heel ingewikkeld, maar we gaan het gelukkig stap voor stap leren.
         5:
             header: Programmeren met Hedy
-            text: In Hedy gebruiken we speciale codes, zoals `{print}`.
+            text: In Hedy gebruiken we speciale codes, keywords, zoals `{print}`.
             code: '{print} Welkom bij Hedy!'
             notes: |-
                 Laten we naar Hedy kijken. In Hedy gebruiken we commando's ('keywords') om de computer een bepaalde instructie te geven.
@@ -70,7 +70,7 @@ levels:
 
         10:
             header: Prorgammeren met Hedy
-            text: ... de uitvoer kan muziek zijn!
+            text: of de uitvoer kan muziek zijn!
             code: |-
                 {play} C4
                 {play} D4
@@ -86,8 +86,8 @@ levels:
                 {print} Je kunt de code regel voor regel uitvoeren.
                 {print} Dit maakt het makkelijk om de fout te vinden...
                 {print} ... en op te lossen!
-                {print} Of klik op de slapende smiley om een regel code uit te zetten.
-            debug: 'Waar'
+                {print} Of klik op het oogje naast het regelnummer om een regel code uit te zetten.
+            debug: 'True'
             notes: |-
                 **Hoe debug je je code**
                 Kijk dit <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a> om te zien hoe de debugger werkt of lees onderstaande instructies.
@@ -189,7 +189,7 @@ levels:
                 {print} Welk liedje wil je horen?
                 {ask} Dat liedje vind ik ook leuk!
                 {print} Het volgende nummer is ... {echo}
-            debug: 'Waar'
+            debug: 'True'
             notes: |-
                 **Hoe debug je je code**
                 Kijk dit <a href="https://www.youtube.com/watch?v=jwitgommeRY;t=2s" target="_blank">video</a> om te zien hoe de debugger werkt of lees onderstaande instructies.
@@ -252,7 +252,7 @@ levels:
                 {turn} {left}
                 {forward} 50
                 {turn} {left}
-            debug: 'Waar'
+            debug: 'True'
             notes: |-
                 De debugger kan handig zijn als je een tekening wilt maken.
                 De studenten kunnen nu verdergaan met de rest van de avonturen in dit level.
@@ -658,7 +658,7 @@ levels:
                 Kijk maar eens wat er gebeurt als je een hoge komma gebruikt voor auto's  of voor 's middags. Deze maken Hedy in de war....
             code: |-
                 {print} 'De oma's rijden in de auto's.'
-        debug: 'Waar'
+        debug: 'True'
 
         9:
             header: De oplossing
@@ -702,7 +702,7 @@ levels:
                 kleuren {is} 'oranje, zilver, wit, bruin'
                 {print} 'Ik houd van kleuren {at} {random} !'
                 keuze {is} {ask} Welke kleur vind jij mooi?
-            debug: 'Waar'
+            debug: 'True'
             notes: |-
                 Laat zien hoe je de foutzoeker kan gebruiken.
                 Maak opdracht 6 uit het werkboek.
@@ -922,7 +922,7 @@ levels:
                 {elif} {is} 2
                 {print} 'dat is dan 2.50 alstublieft'
                 {else} 'Sorry, dat zijn er te veel.'
-            debug: 'Waar'
+            debug: 'True'
             notes: Debug deze code met je studenten.
 
         7:
@@ -1122,7 +1122,7 @@ levels:
                 {if} ja
                 {print} 'Hoera!
                 {else} 'Dat is jammer.. Nou ja... tijd om een hut te bouwen en wat eten te zoeken.'
-            debug: 'waar'
+            debug: 'True'
             notes: |-
                 Debug deze code samen met je studenten.
         6:
@@ -1204,7 +1204,7 @@ levels:
             code: |-
                 {if} naam {is} Hedy {print} 'leuk'
                 {else} {print} 'minder leuk!'
-            debug: 'Waar'
+            debug: 'True'
             notes: |-
                 Dit is hoe {if} en {else} er altijd uit hebben gezien. Hoe zullen ze eruit gaan zien nu we inspringing kunnen gebruiken?
         6:
@@ -1253,7 +1253,7 @@ levels:
                         {print} Je koos voor een retour ticket'
                 prijs * 2
                 {print} 'Dat wordt dan ' prijs ' euro alstublieft'
-            debug: 'Waar'
+            debug: 'True'
             notes: Debug deze code samen met je studenten.
         9:
             header: Klaar voor de start, af!
@@ -1289,7 +1289,7 @@ levels:
                 {if} level = 9
                     {if} student = nieuwsgierig
                         {print} 'See you next level!'
-            debug: 'Waar'
+            debug: 'True'
     10:
         1:
             header: Welkom bij level 10
@@ -1368,7 +1368,7 @@ levels:
                 {else}
                 {print} 'Gaaf!'
                 {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
-            debug: 'waar'
+            debug: 'True'
             notes: Debug deze code samen met je studenten.
         7:
             header: Klaar voor de start, af!
@@ -1403,7 +1403,7 @@ levels:
                 dieren = hond, kat, goudvis
                 {for} dier in dieren
                 {print} 'I love ' dier
-            debug: 'waar'
+            debug: 'True'
     11:
         1:
             header: Welkom bij level 11
@@ -1445,7 +1445,7 @@ levels:
                 {add} gekozen_persoon {from} mensen
                 {print} 'Komt dat zien! Alleen vanavond!'
                 {print} 'Laatste tickets verkrijgbaar aan de kassa
-            debug: 'waar'
+            debug: 'True'
             notes: |-
                     Debug deze code samen met je studenten.
         5:
