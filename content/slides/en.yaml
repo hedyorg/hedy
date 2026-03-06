@@ -1470,7 +1470,6 @@ levels:
                     {else}
                         password = {ask} 'Please enter password'
             debug: 'True'
-       
         8:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 11!
@@ -1498,8 +1497,7 @@ levels:
         12:
             header: Sneak peek into the next level...
             text: |-
-                Next level we will make some changes in the language so you can use it in all places where Python is used. 
-
+                Next level we will make some changes in the language so you can use it in all places where Python is used.
     13:
         1:  
             header: Welcome to level 13
@@ -1521,9 +1519,7 @@ levels:
 
         3: 
             header: '{print} in Python'
-
             text: For {print} you will have you to use parentheses from now on
-               
             code: |-
                 {print} ('This code now looks like real Python language.')
                 {print} ('You can print now outside of Hedy.')
@@ -1552,8 +1548,8 @@ levels:
                 {for} i in {range} (1, 10):
                     {print} (i)
                 {print} ('We have counted to 10.')
-            notes: Ask your students to recall how they used this 
-        
+            notes: |-
+                Ask your students to recall how they used this
         6:
             header: '{print} multiple items' 
             text: |-
@@ -1563,7 +1559,7 @@ levels:
                     {print} ('You have completed Hedy level', i)
                 level = 13
                 {print} ('Congrats, you are now in level', level, 'of Hedy.')
-            notes:
+            notes: |-
                 Let your students predict what will be the outcome of this code. 
                 Than run the code and show how the code prints the text inside the quotation marks literally and what is outside as the value of the variable. 
                 Show what happens if you put 'level' in the last line also in quotation marks.
@@ -1904,7 +1900,6 @@ levels:
             text: |-
                 By the end of this lesson, you can:
                 * make a {while} loop.
-
         2:
             header: A new loop
             text: |-
@@ -1917,11 +1912,9 @@ levels:
                     {print} ('You cannot go outside without a jacket.')
                     temperature = temperature + 2
                 {print} ('It is ', temperature, ' degrees. Now you can go outside without a jacket.')
-            
             notes: Ask your students to predict what the output of this code is going to be. For which temperature will it print that you can go outside without a jacket?
                 Show what happens to if they are correct. Then, ask your students what happens if you remove the line 'temperature = temperature + 2'. 
-                Show them that this will result in a endless loop because the temperature always stays below 25. 
-
+                Show them that this will result in a endless loop because the temperature always stays below 25.
         3: 
             header: '{while} and {input}'
             text: You can also combine the {while} keyword with asking a question.
@@ -1931,7 +1924,6 @@ levels:
                 {print} ('You are correct. Nice to meet you. I am Hedy!')
             notes: Ask your students again to predict the outcome. How many times will you get asked the question?
                 Show them that the question will be asked until you gave the correct answer, namely 'Hedy'.
-
         4:
             header: Debugging
             text: Let's debug this code!
@@ -1979,13 +1971,9 @@ levels:
             notes: |-
                 Let some students show their work to the class.
         10:
-            header: Sneak peak into your future...
+            header: Sneak peek into your future...
             text: |-
                 This was the last level. But that does not mean you have to stop programming now. 
                 You have learned a lot and you can make a lot of interesting programs with it. 
                 What would you like to program yourself?
             notes: Let your students discuss what things would like to program in the future. Encourage them to do so!
-
-        
-
-
