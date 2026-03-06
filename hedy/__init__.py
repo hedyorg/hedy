@@ -646,6 +646,8 @@ class LookupEntryCollector(visitors.Visitor):
         self.lookup_entries = []
 
     def ask(self, tree):
+        if self.level == 1:
+            self.add_to_lookup("answer", tree, tree.meta.line)
         # in level 1 there is no variable name on the left side of the ask command
         if self.level > 1:
             self.add_to_lookup(tree.children[0].children[0], tree, tree.meta.line)
@@ -1830,19 +1832,19 @@ class ConvertToPython_1(ConvertToPython):
         return LiteralValue(int(args[0]), num_sys=get_num_sys(input_text))
 
     def print(self, meta, args):
-        argument = process_characters_needing_escape(self.unpack(args[0]))
-        argument = self.interpolate_answer(argument)
+        argument = self.interpolate_answer(self.unpack(args[0]))
+        argument = process_characters_needing_escape(argument)
         return f"print(f'{argument}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
-        argument = process_characters_needing_escape(self.unpack(args[0]))
-        argument = self.interpolate_answer(argument)
+        argument = self.interpolate_answer(self.unpack(args[0]))
+        argument = process_characters_needing_escape(argument)
         return f"answer = input(f'{argument}'){self.add_debug_breakpoint()}"
 
     def interpolate_answer(self, argument) -> str:
         answer_keyword = hedy_translation.translate_keyword_from_en('answer', self.language)
         if answer_keyword in argument:
-            argument = argument.replace(answer_keyword, f'{{locals().get(\'answer\') or \'{answer_keyword}\'}}')
+            argument = argument.replace(answer_keyword, f"{{globals().get('answer') or '{answer_keyword}'}}")
         return argument
 
     def echo(self, meta, args):  # todo: keep for backwards compatibility, maybe remove later?
