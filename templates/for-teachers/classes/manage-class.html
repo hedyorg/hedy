@@ -1,0 +1,74 @@
+{% extends "auth.html" %}
+{% block regular_content %}
+<h1>{{ class_info.name }}</h1>
+<h2 class="text-4xl mt-3">{{ _('manage_students') }}</h2>
+<div class="md:px-16 overflow-x-auto h-full" id="classes_table">
+  <div class="w-full h-full mb-48">
+    <div class="w-full h-full border rounded-lg shadow-md">
+      <table class="w-full divide-y divide-gray-400">
+        <thead class="bg-gray-200 divide-y divide-gray-400">
+          <tr>
+            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('students')}}</th>
+            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('class_logs')}}</th>
+            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('actions')}}</th>
+
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          {% for student in students %}
+          <tr>
+            <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+              {{ student.username }}
+            </td>
+            <td data-cy="teacher_cell" class="py-3 text-center"> {{ student.last_login }} </td>
+            <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+              <div class="relative inline-block text-left" name="menu">
+                <button class="blue-btn-new p-1.5 flex justify-center rounded-full"
+                      _="on click
+                        remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
+                        add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
+                        if #menu-{{loop.index}} matches .hidden
+                          remove .hidden from #menu-{{loop.index}}
+                          wait 10ms
+                          toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
+                        else
+                          toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
+                          wait 180ms
+                          add .hidden to #menu-{{loop.index}}
+                         "
+                        >
+                  <i class="fa-solid fa-ellipsis"></i>
+                </button> 
+                <div id="menu-{{loop.index}}" class="hidden
+                  {# For the last 5 elements we display the menu from the bottom up #}
+                  {% if (teacher_classes|length > 7) and (loop.index >=  teacher_classes|length - 4)%}
+                    bottom-10
+                  {% endif %}
+                z-30 menu origin-top-left absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
+                  <ul class="list-none divide-y divide-gray-200 p-2">
+                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100" onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
+                      <i class="fa-solid fa-key text-sm"></i>
+                        <span class="m-3">{{ _('reset_password') }}</span>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4" hx-get="/for-teachers/class/{{ class_info['id'] }}/remove_student_modal/{{ student.username }}" hx-target="#modal_target">
+                      <i class="fa-solid fa-trash text-red-700 text-sm"></i> <span class="m-3 text-red-700">{{ _('remove') }}</span> 
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <h2>{{ _('add_students') }}</h2>
+    <div class="flex flex-col sm:flex-row gap-6">
+        <button class="blue-btn-new" data-cy="invite_student" onclick='hedyApp.invite_to_class("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}}, "student")'>
+          {{_('invite_by_username')}}
+        </button>
+        <button class="blue-btn-new" data-cy="create_accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
+    </div>
+</div>
+</div>
+
+{% endblock %}

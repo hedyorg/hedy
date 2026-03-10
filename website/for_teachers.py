@@ -556,6 +556,40 @@ class ForTeachersModule(WebsiteModule):
             sort_orders=sort_orders
         )
 
+    @route("/redesign/class/<class_id>/manage", methods=["GET"])
+    @requires_login
+    def manage_class(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        students = Class.get("students", [])
+        student_information = []
+        for student in students:
+            student_info = self.db.user_by_username(student)
+            if student_info and "last_login" in student_info:
+                student_info["last_login"] = utils.localized_date_format(
+                    student_info["last_login"]
+                )
+            else:
+                student_info["last_login"] = gettext("never")
+
+            student_information.append(student_info)
+
+        return render_template(
+            "for-teachers/classes/manage-class.html",
+            class_id=class_id,
+            class_info=Class,
+            students=student_information,
+            javascript_page_options=dict(
+                page="manage-students",
+            ),
+        )
+
     @route("/redesign/program/<class_id>/grade", methods=["POST"])
     @requires_login
     def tick_student_adventure(self, user, class_id):

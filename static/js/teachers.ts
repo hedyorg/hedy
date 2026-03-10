@@ -1112,11 +1112,11 @@ export function add_user_to_invite_list(username: string, button: HTMLButtonElem
   userList?.appendChild(clone)
 }
 
-export interface InitializeAllClassesPageOptions {
-  readonly page: 'classes';
+export interface InitializeContextMenuPageOptions {
+  readonly page: 'classes' | 'manage-students';
 }
 
-export function initializeAllClassesPage(_options: InitializeAllClassesPageOptions) {
+export function initializeContextMenuEventHandler(_options: InitializeContextMenuPageOptions) {
   // Event listener to close the adventures dropdown when you click outside of it
   document.addEventListener('click', (ev) => {
     const target = ev.target as HTMLElement;
