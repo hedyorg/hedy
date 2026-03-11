@@ -1315,61 +1315,6 @@ adventures:
 
                     {call} calculate_budget with _, _, _
                     ```
-    pressit:
-        name: Tuşa basma
-        default_save_name: Basılı
-        description: Bir klavye tuşu ile bir komutu birbirine bağlamayı deneyin!
-        levels:
-            6:
-                story_text: |
-                    Bu seviyede yeni bir anahtar kelimemiz daha var: `{pressed}`!
-                    `{pressed}` ile, klavyenizdeki tuşları kullanarak hangi satırların kullanılacağını kontrol edebilirsiniz.
-
-                    ### Alıştırma
-                    Örneğe bir bakın, ve bir tuşa basıldığında tepki veren bir kod satırı daha ekleyin.
-                example_code: |
-                    ```
-                    {print} 'İyi (i) mi yoksa kötü (k) bir son mu istiyorsunuz?'
-                    {if} i {is} {pressed} {print} 'Sonsuza kadar mutlu yaşadılar. ❤'
-                    {else} {print} 'Prens bir su aygırı tarafından yenmiş. 😭'
-                    ```
-                story_text_2: |
-                    Kaplumbağa komutlarını da tuşlara bağlayabilirsiniz.
-
-                    ### Alıştırma
-                    Satırları birkaç kez kopyalayın, böylece daha büyük bir çizim yapabilirsiniz.
-                example_code_2: |
-                    ```
-                    {if} i {is} {pressed} {forward} 15
-                    {else} {turn} 90
-                    ```
-            8:
-                story_text: |
-                    Artık `{repeat}` hakkında bilgi sahibi olduğunuza göre, tuşlara birden çok kez basabiliriz.
-                    Kaplumbağanın ileri doğru yürümesini ve dönmesini sağlamak için kullanabilirsiniz.
-
-                    ### Alıştırma
-                    Seviye 5'te gördüğünüz kod, tuşu yalnızca bir kez kontrol ediyor. Örnek kodu kopyalayın ve tuşlara birçok kez basabilmeniz için ona bir `{repeat}` ekleyin.
-                    Güzel bir şey çizmek için bu kodu kullanın.
-            10:
-                story_text: |
-                    Artık ifadeleri nasıl birleştireceğinizi bildiğinize göre, `{pressed}` ile dokunma-türü bir araç oluşturabilirsiniz.
-
-                    ### Alıştırma
-                    Kodu tamamlayın. Her seferinde basmanız gereken rastgele bir harf seçilmelidir. Doğru basınca bir puan ödül, yanlış basarsanız iki puan kesinti alırsınız.
-                    **Ek Görev** Her harften sonra ekranı temizleyin ve kullanıcıya kaç puan aldığını gösterin.
-                example_code: |
-                    ```
-                    puan = 0
-                    harfler = a, b, c, d, e
-                    {repeat} 10 {times}
-                        harf = _ _ _
-                        {print} 'Hemen şu tuşa bas: ' harf
-                        {if} harf {is} {pressed}
-                        _
-                        _
-                        _
-                    ```
     print_command:
         default_save_name: yazdır
         description: yazdır komutuna giriş
@@ -2316,32 +2261,6 @@ adventures:
                     {for} chosen_color {in} colors
                         color _
                         {repeat} _
-                    ```
-            12:
-                story_text: |
-                    ### Exercise
-                    Recreate the drawings with the turtle!
-                    Hint: Bracelet designing program. Firstly, define a function **for each shape** you want to use on the bacelet. Then, add the shapes to the bacelet like this:
-                    </div>
-                    Bracelet Designing program <img src="https://github.com/hedyorg/hedy/assets/80678586/549d7f3a-c492-4b4a-b173-746eb3400951" width="500">
-                example_code: |
-                    ```
-                    {define} draw_a_square
-                    _
-
-                    {color} white
-                    {turn} -90
-                    {forward} 300
-                    {turn} 180
-
-                    {for} i {in} {range} 1 {to} 5
-                        {color} gray
-                        {forward} 100
-                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
-                        chosen_color = {ask} 'In which color?'
-                        {color} chosen_color
-                        {if} shape = 'square'
-                            {call} draw_a_square
                     ```
     while_command:
         default_save_name: iken_komutu
