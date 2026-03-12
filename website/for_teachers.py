@@ -566,7 +566,10 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
+        invites = self.db.get_class_invites(class_id=class_id)
+        print('*'*100)
+        print(invites)
+        print('*'*100)
         students = Class.get("students", [])
         student_information = []
         for student in students:
@@ -577,9 +580,18 @@ class ForTeachersModule(WebsiteModule):
                 )
             else:
                 student_info["last_login"] = gettext("never")
+            student_info["is_invite"] = False
 
             student_information.append(student_info)
-
+        for invite in invites:
+            invite["is_invite"] = True
+            invite["last_login"] = invite["timestamp"]
+            student_information.append(invite)
+        # The invites and the students are going to be displayed in the same table, therefore, we join
+        # the two lists, and differentiate them by using the field is_invite
+        # On the invitatios the last_login is going to be the date of the invitation, and on the
+        # students it's going to be the last login of the student
+        student_information = student_information + invites
         return render_template(
             "for-teachers/classes/manage-class.html",
             class_id=class_id,
@@ -955,6 +967,82 @@ class ForTeachersModule(WebsiteModule):
                               htmx_endpoint=htmx_endpoint,
                               htmx_target=htmx_target,
                               hyperscript=hyperscript)
+
+    @route("/redesign/class/<class_id>/manage/remove_student_modal/<student_id>", methods=["GET"])
+    @requires_teacher
+    def get_remove_student_modal_redesign(self, user, class_id, student_id):
+        is_invite = request.args.get('is_invite', type=int)
+        Class = self.db.get_class(session['class_id'])
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        modal_text = gettext('remove_student_prompt')
+        htmx_endpoint = f'/for-teachers/redesign/class/{class_id}/manage/remove_student/{student_id}?is_invite={is_invite}'
+        htmx_target = "#students-table"
+        hyperscript = ""
+
+        return render_partial(
+            'modal/htmx-modal-confirm.html',
+            modal_text=modal_text,
+            htmx_endpoint=htmx_endpoint,
+            htmx_target=htmx_target,
+            hyperscript=hyperscript
+        )
+
+    @route(
+        "/redesign/class/<class_id>/manage/remove_student/<student_id>",
+        methods=["POST"],
+    )
+    @requires_login
+    def remove_student_from_class_redesign(self, user, class_id, student_id):
+        is_invite = bool(request.args.get("is_invite", type=int))
+        Class = self.db.get_class(class_id)
+        if not Class or not (utils.can_edit_class(user, Class)):
+            return make_response(gettext("ajax_error"), 400)
+        print(is_invite)
+        if is_invite:
+            self.db.remove_user_class_invite(student_id, class_id)
+        else:
+            self.db.remove_student_from_class(Class["id"], student_id)
+
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        invites = self.db.get_class_invites(class_id=class_id)
+
+        students = Class.get("students", [])
+        student_information = []
+        for student in students:
+            student_info = self.db.user_by_username(student)
+            if student_info and "last_login" in student_info:
+                student_info["last_login"] = utils.localized_date_format(
+                    student_info["last_login"]
+                )
+            else:
+                student_info["last_login"] = gettext("never")
+            student_info["is_invite"] = False
+
+            student_information.append(student_info)
+        for invite in invites:
+            invite["is_invite"] = True
+            invite["last_login"] = invite["timestamp"]
+            student_information.append(invite)
+        # The invites and the students are going to be displayed in the same table, therefore, we join
+        # the two lists, and differentiate them by using the field is_invite
+        # On the invitatios the last_login is going to be the date of the invitation, and on the
+        # students it's going to be the last login of the student
+        student_information = student_information + invites
+        print(student_information)
+        return jinja_partials.render_partial(
+            "for-teachers/classes/manage-class-table.html",
+            class_id=class_id,
+            class_info=Class,
+            students=student_information,
+        )
 
     @route("/class/<class_id>/remove_student/<student_id>", methods=["POST"])
     @requires_login
