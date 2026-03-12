@@ -18,7 +18,7 @@ import website_content as hedy_content
 import hedyweb
 import utils
 from hedy.safe_format import safe_format
-from datetime import date
+from datetime import date, datetime
 
 from website.server_types import SortedAdventure
 from website.flask_helpers import render_template
@@ -602,6 +602,141 @@ class ForTeachersModule(WebsiteModule):
             ),
         )
 
+    @route("/redesign/class/<class_id>/manage/filter_sort", methods=["GET"])
+    @requires_login
+    def filter_sort_management_page(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        invites = self.db.get_class_invites(class_id=class_id)
+        students = Class.get("students", [])
+        student_information = []
+        for student in students:
+            student_info = self.db.user_by_username(student)
+            if student_info:
+                # Store original timestamp for sorting before formatting
+                student_info["_sort_timestamp"] = student_info.get("last_login")
+                student_info["is_invite"] = False
+                student_information.append(student_info)
+        
+        for invite in invites:
+            invite["is_invite"] = True
+            # Store original timestamp for sorting
+            invite["_sort_timestamp"] = invite.get("unformatted_timestamp")
+            student_information.append(invite)
+
+        # Apply Sorting based on request args
+        sort_field = None
+        sort_order = "none"
+        
+        student_order = request.args.get("student")
+        timestamp_order = request.args.get("timestamp")
+
+        if student_order in ["ascendent", "descendent"]:
+            sort_field = "student"
+            sort_order = student_order
+        elif timestamp_order in ["ascendent", "descendent"]:
+            sort_field = "timestamp"
+            sort_order = timestamp_order
+
+        if sort_field:
+            reverse = (sort_order == "descendent")
+            if sort_field == "student":
+                student_information.sort(
+                    key=lambda x: (x.get("username") or "").lower(), 
+                    reverse=reverse
+                )
+            elif sort_field == "timestamp":
+                # Handle None values by putting them at the start (or end depending on logic)
+                # Here handled by treating None as min datetime
+                def get_ts(x):
+                    ts = x.get("_sort_timestamp")
+                    if ts is None:
+                        return datetime.min
+                    return ts
+                student_information.sort(key=get_ts, reverse=reverse)
+
+        # Format dates for display
+        for item in student_information:
+             if item.get("is_invite"):
+                  item["last_login"] = item.get("timestamp")
+             else:
+                  if "last_login" in item:
+                       item["last_login"] = utils.localized_date_format(
+                            item["last_login"]
+                       )
+                  else:
+                       item["last_login"] = gettext("never")
+
+        return render_partial(
+            "for-teachers/classes/manage-class-table-body.html",
+            class_info=Class,
+            students=student_information,
+        )
+    
+    @route("/redesign/class/<class_id>/manage/invite", methods=["POST"])
+    @requires_teacher
+    def invite_users(self, user):
+        if not isinstance(request.form.getlist('usernames'), list):
+            return make_response(gettext("username_invalid"), 400)
+        if not isinstance(request.args.get('class_id'), str):
+            return make_response(gettext("request_invalid"), 400)
+        if not isinstance(request.args.get('invite_as'), str):
+            return make_response(gettext("request_invalid"), 400)
+        if len(request.form.getlist('usernames')) < 1:
+            return make_response(gettext("username_empty"), 400)
+
+        usernames = request.form.getlist('usernames')
+        class_id = request.args.get('class_id')
+        invite_as = 'student' #request.args.get('invite_as')
+        Class = self.db.get_class(class_id)
+        if not Class or not (utils.can_edit_class(user, Class)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        users = self.db.users_by_username(usernames)
+
+        for user in users:
+            self.db.add_class_invite(
+                username=user["username"],
+                class_id=class_id,
+                invited_as=invite_as,
+                invited_as_text=gettext(invite_as)
+            )
+        invites = self.db.get_class_invites(class_id=Class["id"])
+        students = Class.get("students", [])
+        student_information = []
+        for student in students:
+            student_info = self.db.user_by_username(student)
+            if student_info and "last_login" in student_info:
+                student_info["last_login"] = utils.localized_date_format(
+                    student_info["last_login"]
+                )
+            else:
+                student_info["last_login"] = gettext("never")
+            student_info["is_invite"] = False
+
+            student_information.append(student_info)
+        for invite in invites:
+            invite["is_invite"] = True
+            invite["last_login"] = invite["timestamp"]
+            student_information.append(invite)
+        # The invites and the students are going to be displayed in the same table, therefore, we join
+        # the two lists, and differentiate them by using the field is_invite
+        # On the invitatios the last_login is going to be the date of the invitation, and on the
+        # students it's going to be the last login of the student
+        student_information = student_information + invites
+        return render_partial(
+            "for-teachers/classes/manage-class-table-body.html",
+            class_info=Class,
+            students=student_information,
+        )
+
+
     @route("/redesign/program/<class_id>/grade", methods=["POST"])
     @requires_login
     def tick_student_adventure(self, user, class_id):
@@ -980,13 +1115,14 @@ class ForTeachersModule(WebsiteModule):
         htmx_endpoint = f'/for-teachers/redesign/class/{class_id}/manage/remove_student/{student_id}?is_invite={is_invite}'
         htmx_target = "#students-table"
         hyperscript = ""
-
+        htmx_success_message = gettext("student_removed_successfully")
         return render_partial(
             'modal/htmx-modal-confirm.html',
             modal_text=modal_text,
             htmx_endpoint=htmx_endpoint,
             htmx_target=htmx_target,
-            hyperscript=hyperscript
+            hyperscript=hyperscript,
+            htmx_success_message=htmx_success_message
         )
 
     @route(

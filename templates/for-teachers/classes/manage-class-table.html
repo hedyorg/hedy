@@ -1,63 +1,49 @@
-<table class="w-full divide-y divide-gray-400" id="students-table">
-        <thead class="bg-gray-200 divide-y divide-gray-400">
-          <tr>
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('students')}}</th>
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('class_logs')}}</th>
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('actions')}}</th>
 
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          {% for student in students %}
-          <tr>
-            <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
-              {{ student.username }}
-            </td>
-            <td data-cy="teacher_cell" class="py-3 text-center"> 
-              {% if student.is_invite %}
-                {{ _('invited_on') }} {{ student.last_login }}
-              {% else %}
-                {{ student.last_login }} 
-              {% endif %}
-            </td>
-            <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
-              <div class="relative inline-block text-left" name="menu">
-                <button class="blue-btn-new p-1.5 flex justify-center rounded-full"
-                      _="on click
-                        remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
-                        add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
-                        if #menu-{{loop.index}} matches .hidden
-                          remove .hidden from #menu-{{loop.index}}
-                          wait 10ms
-                          toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
-                        else
-                          toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
-                          wait 180ms
-                          add .hidden to #menu-{{loop.index}}
-                         "
-                        >
-                  <i class="fa-solid fa-ellipsis"></i>
-                </button> 
-                <div id="menu-{{loop.index}}" class="hidden
-                  {# For the last 5 elements we display the menu from the bottom up #}
-                  {% if (teacher_classes|length > 7) and (loop.index >=  teacher_classes|length - 4)%}
-                    bottom-10
-                  {% endif %}
-                z-30 menu origin-top-left absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
-                  <ul class="list-none divide-y divide-gray-200 p-2">
-                    {% if not student.is_invite %}
-                    <li class="px-6 py-3 cursor-pointer hover:bg-gray-200 active:bg-gray-400  rounded-t-lg  text-blue-900 ease-in transition duration-100" {% if not student.is_invite %} onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})' {% endif %}>
-                      <i class="fa-solid fa-key text-sm"></i>
-                        <span class="m-3">{{ _('reset_password') }}</span>
-                    </li>
-                    {% endif %}
-                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4" hx-get="/for-teachers/redesign/class/{{ class_info['id'] }}/manage/remove_student_modal/{{ student.username }}?is_invite={{ student.is_invite | int }}" hx-target="#modal_target">
-                      <i class="fa-solid fa-trash text-red-700 text-sm"></i> <span class="m-3 text-red-700">{{ _('remove') }}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </td>
-          {% endfor %}
-        </tbody>
-      </table>
+{% macro sortable_th(field, label, sort_orders) %}
+    {% set sort_val = sort_orders.get(field) if sort_orders else None %}
+    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider min-w-36 {% if field == 'student' %} rounded-t-lg {% endif %}">
+        {{ _(label) }}
+        <button class="ml-2" type="submit"
+            _="on click
+                if #{{ field }}-sort matches .fa-sort then
+                    remove .fa-sort from #{{ field }}-sort
+                    add .fa-sort-up to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'ascendent'
+                else if #{{ field }}-sort matches .fa-sort-up then
+                    remove .fa-sort-up from #{{ field }}-sort
+                    add .fa-sort-down to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'descendent'
+                else if #{{ field }}-sort matches .fa-sort-down then
+                    remove .fa-sort-down from #{{ field }}-sort
+                    add .fa-sort to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'none'
+                end">
+            <i id="{{ field }}-sort"
+               class="fa-solid
+               {% if sort_val is none %}fa-sort
+               {% elif sort_val is true %}fa-sort-up
+               {% elif sort_val is false %}fa-sort-down
+               {% endif %}"></i>
+        </button>
+        <input id="{{ field }}-sort-input" type="hidden" name="{{ field }}" value="{% if sort_val is none %}none{% elif sort_val is true %}ascendent{% elif sort_val is false %}descendent{% endif %}">
+    </th>
+{% endmacro %}
+
+<table class="w-full divide-y divide-gray-400" id="students-table">
+  <thead class="bg-gray-200 divide-y divide-gray-400">
+    <tr>
+      {{ sortable_th('student', 'students', sort_orders) }}
+      {{ sortable_th('timestamp', 'class_logs', sort_orders) }}
+      <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('actions')}}</th>
+
+    </tr>
+  </thead>
+  {{
+    render_partial(
+      "for-teachers/classes/manage-class-table-body.html", 
+      students=students, 
+      class_info=class_info, 
+      teacher_classes=teacher_classes
+    )
+  }}
+</table>

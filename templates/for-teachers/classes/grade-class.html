@@ -148,7 +148,7 @@
                                 rounded-lg no-underline hover:bg-blue-200"
                             _="on click
                                 set @data-temp-value of #adventure-filter-input to '{{ adventure.short_name }}'
-                                put '{{ adventure.name }}' into #adventure-button-span
+                                put '{{ adventure.name|replace("'", "") }}' into #adventure-button-span
                                 remove .bg-blue-200 .selected from .adventure-select
                                 add .bg-blue-200 .selected to me"
                         >

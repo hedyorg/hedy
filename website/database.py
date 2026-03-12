@@ -1226,6 +1226,7 @@ class Database:
                     "username": invite["username"],
                     "invited_as_text": invite["invited_as_text"],
                     "invited_as": invite["invited_as"],
+                    "unformatted_timestamp": invite["timestamp"],
                     "timestamp": utils.localized_date_format(invite["timestamp"], short_format=True, only_date=True),
                     "expire_timestamp": utils.localized_date_format(invite["ttl"], short_format=True),
                 }

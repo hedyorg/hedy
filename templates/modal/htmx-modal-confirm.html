@@ -13,6 +13,12 @@
                     hx-swap="{{ htmx_swap or 'innerHTML' }}"
                     {% if htmx_indicator is defined %}hx-indicator="{{ htmx_indicator }}" {% endif %}
                     _="
+                        on htmx:afterRequest
+                        {% if htmx_success_message %}
+                        if detail.successful
+                             call hedyApp.modal.notifySuccess('{{ htmx_success_message }}')
+                        end
+                        {% endif %}
                         on click trigger closeModal
                         {% if hyperscript %}
                         then {{ hyperscript }}
