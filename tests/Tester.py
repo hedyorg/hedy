@@ -12,16 +12,13 @@ import os
 from contextlib import contextmanager
 import inspect
 import unittest
-import utils
 import typing
 from hedy.content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 
 from hedy.sourcemap import SourceRange
 from functools import cache
 
-from app import create_app
 from hedy.error import get_error_text
-from flask_babel import force_locale
 import hedy
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(hedy.__file__)))
@@ -663,12 +660,9 @@ class HedyTester(unittest.TestCase):
         except BaseException:
             location = 'No Location Found'
 
-        # Must run this in the context of the Flask app, because FlaskBabel requires that.
-        with create_app().app_context():
-            with force_locale('en'):
-                error_message = get_error_text(E, 'en')
-                error_message = error_message.replace('<span class="command-highlighted">', '`')
-                error_message = error_message.replace('</span>', '`')
+        error_message = get_error_text(E, 'en')
+        error_message = error_message.replace('<span class="command-highlighted">', '`')
+        error_message = error_message.replace('</span>', '`')
 
         def add_arrow(code):
             """Adds an arrow to the given code snippet on the line that caused the error."""

@@ -19,7 +19,7 @@ from logging.config import dictConfig as logConfig
 from os import path
 from iso639 import languages
 
-import hedy.static_babel_content as static_babel_content
+import static_babel_content
 from markupsafe import Markup
 from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
                    redirect, request, send_file, url_for, Blueprint,
