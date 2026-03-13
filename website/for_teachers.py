@@ -589,9 +589,8 @@ class ForTeachersModule(WebsiteModule):
             student_information.append(invite)
         # The invites and the students are going to be displayed in the same table, therefore, we join
         # the two lists, and differentiate them by using the field is_invite
-        # On the invitatios the last_login is going to be the date of the invitation, and on the
+        # On the invitations the last_login is going to be the date of the invitation, and on the
         # students it's going to be the last login of the student
-        student_information = student_information + invites
         return render_template(
             "for-teachers/classes/manage-class.html",
             class_id=class_id,
@@ -681,20 +680,25 @@ class ForTeachersModule(WebsiteModule):
     
     @route("/redesign/class/<class_id>/manage/invite", methods=["POST"])
     @requires_teacher
-    def invite_users(self, user):
-        if not isinstance(request.form.getlist('usernames'), list):
-            return make_response(gettext("username_invalid"), 400)
-        if not isinstance(request.args.get('class_id'), str):
-            return make_response(gettext("request_invalid"), 400)
-        if not isinstance(request.args.get('invite_as'), str):
-            return make_response(gettext("request_invalid"), 400)
-        if len(request.form.getlist('usernames')) < 1:
-            return make_response(gettext("username_empty"), 400)
-
+    def invite_users(self, user, class_id):
+        #if not isinstance(request.form.getlist('usernames'), list):
+        #    return make_response(gettext("username_invalid"), 400)
+        #if not isinstance(request.args.get('class_id'), str):
+        #    return make_response(gettext("request_invalid"), 400)
+        #if not isinstance(request.args.get('invite_as'), str):
+        #    return make_response(gettext("request_invalid"), 400)
+        #if len(request.form.getlist('usernames')) < 1:
+        #    return make_response(gettext("username_empty"), 400)
+        print(user)
+        print(class_id)
         usernames = request.form.getlist('usernames')
-        class_id = request.args.get('class_id')
+        print(usernames)
+        # class_id = request.args.get('class_id')
         invite_as = 'student' #request.args.get('invite_as')
         Class = self.db.get_class(class_id)
+
+        print(usernames, class_id, invite_as, Class)
+
         if not Class or not (utils.can_edit_class(user, Class)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
@@ -727,9 +731,8 @@ class ForTeachersModule(WebsiteModule):
             student_information.append(invite)
         # The invites and the students are going to be displayed in the same table, therefore, we join
         # the two lists, and differentiate them by using the field is_invite
-        # On the invitatios the last_login is going to be the date of the invitation, and on the
+        # On the invitations the last_login is going to be the date of the invitation, and on the
         # students it's going to be the last login of the student
-        student_information = student_information + invites
         return render_partial(
             "for-teachers/classes/manage-class-table-body.html",
             class_info=Class,
@@ -1169,9 +1172,8 @@ class ForTeachersModule(WebsiteModule):
             student_information.append(invite)
         # The invites and the students are going to be displayed in the same table, therefore, we join
         # the two lists, and differentiate them by using the field is_invite
-        # On the invitatios the last_login is going to be the date of the invitation, and on the
+        # On the invitations the last_login is going to be the date of the invitation, and on the
         # students it's going to be the last login of the student
-        student_information = student_information + invites
         print(student_information)
         return jinja_partials.render_partial(
             "for-teachers/classes/manage-class-table.html",

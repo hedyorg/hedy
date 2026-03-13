@@ -13,7 +13,7 @@
     </td>
     <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
         <div class="relative inline-block text-left" name="menu">
-        <button class="blue-btn-new p-1.5 flex justify-center rounded-full"
+        <button type="button" class="blue-btn-new p-1.5 flex justify-center rounded-full"
                 _="on click
                 remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
                 add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
