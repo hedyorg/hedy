@@ -37,7 +37,6 @@ hedy = sys.modules[__name__]
 
 HEDY_MAX_LEVEL = MAX_LEVEL
 HEDY_MAX_LEVEL_SKIPPING_FAULTY = 5
-MAX_LINES = 100
 LEVEL_STARTING_INDENTATION = 9
 
 # Boolean variables to allow code which is under construction to not be executed
@@ -4047,13 +4046,6 @@ def location_of_first_blank(code_snippet):
     return 0
 
 
-def check_program_size_is_valid(input_string):
-    number_of_lines = input_string.count('\n')
-    # parser is not made for huge programs!
-    if number_of_lines > MAX_LINES:
-        raise exceptions.InputTooBigException(lines_of_code=number_of_lines, max_lines=MAX_LINES)
-
-
 def process_input_string(input_string, level, lang, preprocess_ifs_enabled=True):
     result = input_string.replace('\r\n', '\n')
 
@@ -4191,7 +4183,6 @@ def determine_roles(lookup, input_string, level, lang):
 
 def transpile_inner(input_string, level, lang="en", populate_source_map=False, is_debug=False, unused_allowed=False,
                     microbit=False):
-    check_program_size_is_valid(input_string)
     input_string = process_input_string(input_string, level, lang)
 
     level = int(level)
