@@ -515,8 +515,9 @@ def enrich_context_with_user_info():
 
 @app.app_context_processor
 def add_generated_css_file():
+    debug_or_offline_mode = is_debug_mode() or utils.is_offline_mode()
     return {
-        "generated_css_file": '/css/generated.full.css' if is_debug_mode() else '/css/generated.css'
+        "generated_css_file": '/css/generated.full.css' if debug_or_offline_mode else '/css/generated.css'
     }
 
 
