@@ -225,6 +225,7 @@ def task_typescript():
     )
 
 
+
 def task_prefixes():
     """Generate Python prefixes for TypeScript"""
     import hedy.data

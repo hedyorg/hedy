@@ -1,4 +1,3 @@
-import hedy.data
 import json
 import regex as re
 
@@ -14,6 +13,7 @@ from hedy.yaml_file import YamlFile  # noqa
 # destinations of files containing syntax highlighting rules
 OUTPUT_PATH_TRANSLATION = "highlighting/highlighting-trad.json"
 
+import hedy.data
 
 # Files containing translations of keywords
 KEYWORDS_PATH = hedy.data.keywords_dir
