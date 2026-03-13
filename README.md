@@ -59,4 +59,3 @@ Thank you very much for taking your time to help Hedy.
 
 [![Contributors](https://contrib.rocks/image?repo=hedyorg/hedy)]([https://github.com/codemaniac-sahil/news-webapp-api](https://github.com/hedyorg/hedy)https://github.com/hedyorg/hedy/graphs/contributors)
 <p align="right">(<a href="#top">🔼 Back to top</a>)</p>
-
