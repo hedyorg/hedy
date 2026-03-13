@@ -42,7 +42,11 @@
                 <span class="m-3">{{ _('reset_password') }}</span>
             </li>
             {% endif %}
-            <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4" hx-get="/for-teachers/redesign/class/{{ class_info['id'] }}/manage/remove_student_modal/{{ student.username }}?is_invite={{ student.is_invite | int }}" hx-target="#modal_target">
+            <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4"
+                hx-get="/for-teachers/redesign/class/{{ class_info['id'] }}/manage/remove_student_modal/{{ student.username }}?is_invite={{ student.is_invite | int }}" 
+                hx-target="#modal_target"
+                hx-swap="innerHTML"
+            >
                 <i class="fa-solid fa-trash text-red-700 text-sm"></i> <span class="m-3 text-red-700">{{ _('remove') }}</span>
             </li>
             </ul>
