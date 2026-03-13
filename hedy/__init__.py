@@ -1831,13 +1831,21 @@ class ConvertToPython_1(ConvertToPython):
 
     def print(self, meta, args):
         argument = process_characters_needing_escape(self.unpack(args[0]))
-        return f"print('{argument}'){self.add_debug_breakpoint()}"
+        argument = self.interpolate_answer(argument)
+        return f"print(f'{argument}'){self.add_debug_breakpoint()}"
 
     def ask(self, meta, args):
         argument = process_characters_needing_escape(self.unpack(args[0]))
-        return f"answer = input('{argument}'){self.add_debug_breakpoint()}"
+        argument = self.interpolate_answer(argument)
+        return f"answer = input(f'{argument}'){self.add_debug_breakpoint()}"
 
-    def echo(self, meta, args):
+    def interpolate_answer(self, argument) -> str:
+        answer_keyword = hedy_translation.translate_keyword_from_en('answer', self.language)
+        if answer_keyword in argument:
+            argument = argument.replace(answer_keyword, f'{{locals().get(\'answer\') or \'{answer_keyword}\'}}')
+        return argument
+
+    def echo(self, meta, args):  # todo: keep for backwards compatibility, maybe remove later?
         if not args:
             return f"print(answer){self.add_debug_breakpoint()}"  # no arguments, just print answer
 
