@@ -5,6 +5,7 @@ from website import log_queue, querylog
 
 lock = Lock()
 
+
 class TestQueryLog(unittest.TestCase):
     def setUp(self):
         self.records = []
@@ -42,4 +43,3 @@ class TestQueryLog(unittest.TestCase):
         self.assertEqual(self.records[0]['banaan'], 'geel')
         self.assertEqual(self.records[0]['bloem'], 'rood')
         self.assertEqual(self.records[0]['terminated'], True)
-
