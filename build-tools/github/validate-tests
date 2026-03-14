@@ -5,9 +5,6 @@ set -x
 scriptdir=$(cd $(dirname $0) && pwd)
 cd $scriptdir/../..
 
-echo "------> Dynamically create grammar files to make sure they are up-to-date before testing"
-python hedy/yaml_to_lark_utils.py
-
 echo "------> Python unit tests"
 
 all=false
