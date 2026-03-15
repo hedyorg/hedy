@@ -58,6 +58,11 @@ from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo, Sol
 from website.flask_hedy import g_db
 from website.newsletter import add_used_slides_to_subscription, get_subscription_status
 
+# Configure the external functions that the Hedy library uses, to link to web dependencies
+# (Gettext, Flask, etc)
+hedy.external.initialize_gettext(gettext)
+hedy.yaml_file.initialize_yaml_cache(lambda: g.setdefault('yaml_cache', {}) if utils.has_request_context() else {})
+
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
