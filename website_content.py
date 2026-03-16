@@ -4,7 +4,7 @@ from os import path
 import iso3166
 from unidecode import unidecode
 
-import hedy.static_babel_content as static_babel_content
+import static_babel_content
 import utils
 from utils import customize_babel_locale
 from hedy.yaml_file import YamlFile

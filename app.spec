@@ -20,7 +20,7 @@ venv_dir = [p for p in sys.path if 'site-packages' in p][0]
 data_files = [
     # Files
     ('README.md', '.'),
-    ('hedy/data/static_babel_content.json', 'hedy/data'),
+    ('static_babel_content.json', 'hedy/data'),
 
     # Folders
     ('content', 'content'),

@@ -19,11 +19,11 @@ from logging.config import dictConfig as logConfig
 from os import path
 from iso639 import languages
 
-import hedy.static_babel_content as static_babel_content
+import static_babel_content
 from markupsafe import Markup
 from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
                    redirect, request, send_file, url_for, Blueprint,
-                   send_from_directory, session, current_app)
+                   send_from_directory, session, current_app, has_request_context)
 from flask_babel import Babel, format_timedelta
 from website.flask_helpers import gettext_with_fallback as gettext
 from website.flask_commonmark import Commonmark
@@ -57,6 +57,11 @@ from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo, Solution
 from website.flask_hedy import g_db
 from website.newsletter import add_used_slides_to_subscription, get_subscription_status
+
+# Configure the external functions that the Hedy library uses, to link to web dependencies
+# (Gettext, Flask, etc)
+hedy.external.initialize_gettext(gettext)
+hedy.yaml_file.initialize_yaml_cache(lambda: g.setdefault('yaml_cache', {}) if has_request_context() else {})
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
