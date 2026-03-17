@@ -170,7 +170,7 @@ def task_generate_static_babel_content():
         actions=[
             [python3, script],
         ],
-        targets=['hedy/data/static_babel_content.json'],
+        targets=['static_babel_content.json'],
         uptodate=[babel_version_unchanged],
     )
 
@@ -225,38 +225,18 @@ def task_typescript():
     )
 
 
-def task_lark():
-    """Generate Lark grammar files based on keyword information in YAMLs."""
-    script = 'hedy/yaml_to_lark_utils.py'
-    keyword_yamls = glob('hedy/data/keywords/*.yaml')
-    grammars = ['hedy/data/grammars/keywords-' + replace_ext(path.basename(y), '.lark') for y in keyword_yamls]
-
-    return dict(
-        title=lambda _: 'Create Lark grammar files',
-        file_dep=[
-            script,
-            'hedy/data/grammars/keywords-template.lark',
-            *keyword_yamls,
-        ],
-        actions=[
-            [python3, script],
-        ],
-        targets=grammars,
-    )
-
-
 def task_prefixes():
     """Generate Python prefixes for TypeScript"""
+    import hedy.data
+    prefixes_dir = hedy.data.prefixes_dir
+
     script = 'build-tools/heroku/generate-prefixes-ts'
 
     return dict(
         title=lambda _: 'Generate Python prefixes for TypeScript',
-        file_dep=[
-            script,
-            *glob('prefixes/*.py'),
-        ],
+        file_dep=[script],
         actions=[
-            [bash, script],
+            [bash, script, prefixes_dir],
         ],
         targets=[
             'static/js/pythonPrefixes.ts'
@@ -370,7 +350,6 @@ def task_normalize_yaml():
     """
     yamls = [
         *glob('content/**/*.yaml', recursive=True),
-        *glob('hedy/data/**/*.yaml', recursive=True),
     ]
 
     return dict(
@@ -397,7 +376,6 @@ def task_backend():
             'generate_optional_yaml_schemas',
             'compile_babel',
             'generate_static_babel_content',
-            'lark',
         ],
     )
 

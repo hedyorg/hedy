@@ -46,7 +46,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Now it's time to add variables to your own story that you've made in the previous level.
-                    Go to 'My programs', look for your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
+                    Go to your level 1 story adventure and copy the code. Paste the code in your input screen in this level.
 
                     This code won't work in this level, because you have not used variables yet.
                     Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
@@ -570,7 +570,7 @@ adventures:
 
                     ### Exercise 3
                     Did you want to make your program even better? Great! In the previous program you could only calculate the mean grade of 1 subject, but it would be better if you could calculate the mean grade for all subjects you want!
-                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: {define} calculate_mean_grade {with} subject.
+                    We won't tell you how to do it, but we will give you one tip: Start your code in line 1 with: `{def} calculate_mean_grade(subject):`.
                 example_code: |
                     ```
                     # Use your own code from the previous adventure.
@@ -1354,10 +1354,10 @@ adventures:
                     people = mom, dad, Emma, Sophie
                     emma_washes = 0
                     dishwasher = people {at} {random}
-                    {print} 'The dishwasher is' dishwasher
+                    {print} 'The dishwasher is ' dishwasher
                     {if} dishwasher {is} Emma
                     emma_washes = emma_washes + 1
-                    {print} 'Emma will do the dishes this week' emma_washes 'times'
+                    {print} 'Emma will do the dishes this week ' emma_washes ' times'
                     ```
 
                     Now you can copy lines 3 to 5 a few times (e.g. 7 times for a whole week) to calculate for a whole week again.
@@ -1411,6 +1411,7 @@ adventures:
             6:
                 story_text: |
                     In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
+                    NOTE: You now have use 2 lines when using {if}, {else} or {elif}. 1 line for the {if} keyword (for example `{if} name {is} Hedy`), and one line for what is going to happen if the condition is met (for example `{print} hello`).
                     Check it out!
                     ### Exercise
                     Make your own wheel of fortune, where you can win different prizes and get corresponding reactions
@@ -1456,13 +1457,24 @@ adventures:
                         {print} 'If youre happy and you know it, ' action
                         {sleep} 3
                     ```
-            13:
+            14:
                 story_text: |
-                    Lastly, we'll turn `{for} i {in} {range} 1 {to} 5` into real Python code, like this:
+                    Lastly, we'll turn `{repeat} 5 {times}` into real Python code. Just as with `{if}`, you will have to use a colon. Like this:
                 example_code: |
                     ```
                     {for} i {in} {range}(1,5):
-                        {print} (i)
+                        {print}(i)
+                    ```
+                story_text_2: |
+                    Remember, this command is also very usefull in combination with a list.
+                    You can match 2 lists using the variable `{in} {range}`. 
+
+                example_code_2: |
+                    ```
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    lucky_numbers = [15, 18, 6]
+                    {for} i {in} {range}(1, 3):
+                        {print}(friends[i], 's lucky number is ', lucky_numbers[i])
                     ```
     fortune:
         name: fortune teller
@@ -1657,6 +1669,56 @@ adventures:
                     ```
             15:
                 story_text: |
+                    In level 12 we have introduced you to functions. You write a piece of code inside the functions. 
+                    If you call this function it will run all the code inside the function. Great for when you have to repeat a piece of code!
+
+                    In this level we will continue with functions and show you how it can be even more usefull. 
+                    We start writing it the Python way. We will use `{def}` now and add `():` behind the function.
+                    To call the function, simply type the name of the function and (), like we did in line 8.
+
+                    ### Exercise
+                    Add a function that plays a sad tune (like C6-C5-C4) and call the function when a wrong answer is given.
+                example_code: |
+                    ```
+                    {def} play_happy_tune():
+                        {play} C4
+                        {play} C5
+                        {play} C6
+
+                    answer = {input}('What is 2 + 2?')
+                    {if} answer == 4:
+                        {print} 'Right!'
+                        play_happy_tune()
+                    {else}
+                        {print} 'Wrong!'
+                    ```
+                answer_code: |-
+                    ```
+                    {def} play_happy_tune():
+                        {play} C4
+                        {play} C5
+                        {play} C6
+
+                    {def} play_sad_tune():
+                        {play} C6
+                        {play} C5
+                        {play} C4
+
+                    answer = {input}('What is 2 + 2?')
+                    {if} answer == 4:
+                        {print} 'Right!'
+                        play_happy_tune()
+                    {else}
+                        {print} 'Wrong!'
+                        play_sad_tune()
+                    ```
+    functions_2:
+        name: functions with arguments
+        default_save_name: functions 2
+        description: functions 2
+        levels:
+            15:
+                story_text: |
                     Now that you've learned how to use functions, you'll learn how to use a function with an argument.
                     An **argument** is a variable that is used within a function. It is not used outside the function.
 
@@ -1668,24 +1730,33 @@ adventures:
                     ### Exercise
                     The next verse of this song goes:
 
-                    ```not_hedy_code
                     Last night as I lay on my pillow
+
                     Last night as I lay on my bed
+
                     Last night as I lay on my pillow
+
                     I dreamed that my Bonnie is dead
-                    ```
+
+
 
                     Can you program this verse in the same way as the example?
                 example_code: |
                     ```
                     {def} song(place):
-                        {print} ('My Bonnie is over the ', place)
+                        {print}('My Bonnie is over the ', place)
 
                     song('ocean')
                     song('sea')
                     song('ocean')
                     ```
-                story_text_2: |
+    functions_3:
+        name: functions with return value
+        default_save_name: functions 3
+        description: functions 3
+        levels:
+            15:
+                story_text: |
                     In the previous levels you have learned to create functions and use arguments with them. Another great use of a function is to let it calculate something for you.
                     You can give the function a calculation and it will give you the answer of the calculation. This answer is called a **return value**.
 
@@ -1694,7 +1765,7 @@ adventures:
                     ### Exercise
                     Finish this code. We have already made the variable new_price for you, you only need to set it.
                     You should finish the line of code by calling the function that calculates the new price.
-                example_code_2: |
+                example_code: |
                     ```
                     {def} calculate_new_price(amount, percentage):
                         percentage = percentage / 100
@@ -1706,32 +1777,6 @@ adventures:
 
                     new_price = _ calculate_new_price(old_price, _)
                     {print}('The new price is ', new_price, ' dollar')
-                    ```
-                story_text_3: |
-                    Let's make functions the Pythons way! To define a function, we no longer use:
-
-                    `{define} name_function {with} argument_1, argument_2):`
-
-                    but we use:
-
-                    `{def} name_function(argument_1, argument_2):`.
-
-                    If you don't want to use arguments, you just leave the space between the parentheses empty.
-                example_code_3: |
-                    ```
-                    {def} calculate_score(answer, correct_answer):
-                        {if} answer == correct_answer:
-                            score = 1
-                        {elif} answer == '?':
-                            score = 0
-                        {else}:
-                            score = -1
-                        {return} score
-
-                    answer = {input} ('Where can you find the Eiffel Tower?')
-                    correct_answer = 'Paris'
-                    score = calculate_score(answer, correct_answer)
-                    {print} ('Your score is... ', score)
                     ```
     guess_my_number:
         name: guess my number
@@ -2265,6 +2310,21 @@ adventures:
                     {else}
                         {print} 'You do not want to continue'
                     ```
+            13:
+                story_text: |
+                    In the `{if}` statement you need to put a condition. The way we write this condition also changes a bit in this level. From this level on we will use symbols instead of words
+                    Before we just used `{is}` to compare two things. Now, you can use two equal signs: `==`. This is what most programming languages do as well.
+                    We also need a colon at the end of the if statement now.
+                example_code: |
+                    ```
+                    favorite_color = {input}('What is your favorite_color?')
+                    {if} favorite_color == 'green':
+                        {print}('Yeahh, it is mine too!')
+                    {elif} favorite_color == 'pink':
+                        {print}('Great choice!')
+                    {else}:
+                        {print}("Meh, I don't agree")
+                    ```
     in_command:
         name: '{in}'
         default_save_name: in_command
@@ -2332,12 +2392,10 @@ adventures:
                     ```
             13:
                 story_text: |
-                    We are going to learn more new items. You might know them already from mathematics, the `<` and `>`. Before we used `{greater} {than}` and `{less} {than}`, but most programming languages use symbols for this.
+                    From mathematics, you might already know the symbols the `<` and `>`.
                     The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
-                    If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.
                     The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
-                    If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.
-                    You use these comparisons in an `{if}`, like this:
+                    Try it!
                 example_code: |
                     ```
                     age = {input}('How old are you?')
@@ -2351,22 +2409,13 @@ adventures:
                     {else}:
                         {print}('You are older than me!')
                     ```
-                story_text_2: |
-                    From this level on, if you want to compare exactly, you can use two equal signs. This is what most programming languages do:
-                example_code_2: |
+
                     ```
                     name = {input}('What is your name?')
-                    {if} name == 'Hedy':
+                    {if} name __ 'Hedy':
                         {print}('You are cool!')
-                    ```
-                story_text_3: |
-                    You can also compare if something is *not* equal to something else using `!=` like this:
-                example_code_3: |
-                    ```
-                    name = {input}('What is your name?')
-                    {if} name != 'Hedy':
-                        {print}('You are not Hedy')
-                    ```
+                    {else}_
+                        {print} ('Nice to meet you!')
     language:
         name: language
         default_save_name: Language
@@ -2409,6 +2458,37 @@ adventures:
                             {print} ('Wrong, ', french_words[i], ' means ', translation[i])
                     {print} ('You gave ', score, ' correct answers.')
                     ```
+    lists:
+        name: lists
+        default_save_name: lists
+        description: lists
+        levels:
+            14:
+                story_text: |-
+                    Now, we are going to make lists the Python way. First we put square brackets, `[]`,  around every list! 
+                    We also keep the quotation marks around each item like we have learned in previous levels.
+                    From now, we use square brackets to point out a place in a list. 
+                    For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code.
+                example_code: |
+                    ```
+                    friends = ['Ahmed', 'Ben', 'Cayden']
+                    {print} (friends[1], ' is the first friend on the list.')
+                    {print} (friends[2], ' is the second friend on the list.')
+                    {print} (friends[3], ' is the third friend on the list.')
+                    ```
+                story_text_2: |
+                    You can also still check if an element is in the list. Like in the example:
+
+                example_code_2: |
+                    ```
+                    {print} ('Welcome in our shop!')
+                    product = {input}('What would you like to buy?')
+                    stock = ['apple', 'milk', 'cheese']
+                    {if} product {in} stock:
+                        {print} ('Great. That is possible!')
+                    {else}:
+                        {print} ('Unfortunately, we do not have ', product)
+                    ```           
     maths:
         name: maths
         default_save_name: maths
@@ -2691,63 +2771,62 @@ adventures:
                     ```
             15:
                 story_text: |
-                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
-                    One example is the song 'Yankee Doodle'. The first 4 notes of the first lines are the same, but each time they are followed by a different couple of notes.
-
-                    ### Exercise
-                    Can you finish the song of Yankee Doodle?
-                    Can you think of another song to program this way?
-                example_code: |
-                    ```
-                    {print} 'Yankee Doodle'
-                    {define} _ (note_1, note_2, note_3
-                        {play} C4
-                        {play} C4
-                        {play} D4
-                        {play} E4
-                        {play} _
-                        {play} _
-                        {play} _
-
-                    line_1(29, 31, 30)
-                    line_1(29, 28, 0)
-                    line_1(32, 31, 30)
-
-                    {play} C4
-                    {play} B3
-                    {play} G3
-                    {play} A3
-                    {play} B3
-                    {play} C4
-                    {play} C4
-                    ```
-                story_text_2: |
                     You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
 
                     ### Exercise
                     Make sure the fire alarm rings when there is a fire!
-                example_code_2: |
+                example_code: |
                     ```
-                    {define} fire_alarm
+                    {def} fire_alarm():
                         {print} 'FIRE!'
-                        note = 40
-                        {for} i {in} {range} 1 {to} 100
-                            {if} note _ 50
-                                note = note + 5
-                                {play} _
-                            {else}
-                                note = 40
+                        {for} i {in} {range} _
+                            {play} 45
+                            {play} 50
+
+                    fire = {input}('Is there a fire?')
+                    {if} fire _
+                        _
+                    ```
+                answer_code: |
+                    ```
+                    {def} fire_alarm():
+                        {print} 'FIRE!'
+                        {for} i {in} {range} (1,20)
+                            {play} 45
+                            {play} 50
 
                     fire = {ask} 'Is there a fire?'
-                    {if} fire _ 'yes'
-                        fire_alarm_
+                    {if} fire == 'yes'
+                        fire_alarm()
                     ```
-                story_text_3: |
+            16:
+                story_text: |
+                    **Warning** This adventure can become extremely annoying!
+                    We can also use the `{while}` command to repeat a song forever.
+
                     ### Exercise
-                    Even in this last level of Hedy we can make some music! Be careful of all the syntax that is needed now.
-                    Take a good look at how the functions are defined and called upon in the example code.
-                    Finish the song!
-                example_code_3: |
+                    Finish the never-ending song.
+                example_code: |
+                    ```
+                    {define} song
+                        {play} _
+
+                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
+                    {while} yes_or_no = 'yes'
+                        song()
+                        {print} '🥳'
+                    ```
+    music_2:
+        name: music 2
+        default_save_name: music 2
+        description: music 2
+        levels:
+            15:
+                story_text: |
+                    ### Exercise
+                    Make a karaoke version of 'What shall we do with the drunken sailor'.
+                    You can look up the correct musical notes online, or try to figure them out yourself!
+                example_code: |
                     ```
                     {def} line_1():
                         {for} i {in} {range}(1, 5):
@@ -2773,22 +2852,131 @@ adventures:
                     line_3()
                     {print} ('Early in the morning')
                     ```
-            16:
+                answer_code: |
+                    ```
+                    {def} line_1():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} D
+                        {play} F
+                        {play} A
+
+                    {def} line_2():
+                        {for} i {in} {range}(1, 5):
+                            {play} G
+                        {play} C
+                        {play} E
+                        {play} G
+
+                    {def} line_3():
+                        {for} i {in} {range}(1, 5):
+                            {play} A
+                        {play} B
+                        {play} C5
+                        {play} D5
+
+                    {def} line_4():
+                        {play} C5
+                        {play} A
+                        {play} G
+                        {play} E
+                        {play} D
+                        {play} D
+
+                    {print} ('The drunken sailor')
+                    {print} ('What shall we do with the drunken sailor?')
+                    line_1()
+                    line_2()
+                    line_3()
+                    {print} ('Early in the morning')
+                    line_4()
+                    ```
+    music_3:
+        name: music 3
+        default_save_name: music 3
+        description: music 3
+        levels:
+            15:
                 story_text: |
-                    **Warning** This adventure can become extremely annoying!
-                    We can also use the `{while}` command to repeat a song forever.
+                    You can use a function with an argument for songs that have line that are almost the same, but slightly different each time.
+                    One example is the song 'Yankee Doodle'. The first 4 notes of the tune are the same, but each time they are followed by a different couple of notes.
 
                     ### Exercise
-                    Finish the never-ending song.
+                    Can you finish the song of Yankee Doodle?
+                    Can you think of another song to program this way?
                 example_code: |
                     ```
-                    {define} song
+                    {print} 'Yankee Doodle'
+                    {def} _ (note_1, note_2, note_3):
+                        {play} C4
+                        {play} C4
+                        {play} D4
+                        {play} E4
+                        {play} note_1
+                        {play} _
                         {play} _
 
-                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
-                    {while} yes_or_no = 'yes'
-                        song()
-                        {print} '🥳'
+                    tune(29, 31, 30)
+                    tune(29, 28, 1)
+                    tune(32, 31, 30)
+
+                    {play} C4
+                    {play} B3
+                    {play} G3
+                    {play} A3
+                    {play} B3
+                    {play} C4
+                    {play} C4
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Yankee Doodle'
+                    {def} tune (note_1, note_2, note_3):
+                        {play} C4
+                        {play} C4
+                        {play} D4
+                        {play} E4
+                        {play} note_1
+                        {play} note_2
+                        {play} note_3
+
+                    tune(29, 31, 30)
+                    tune(29, 28, 1)
+                    tune(32, 31, 30)
+
+                    {play} C4
+                    {play} B3
+                    {play} G3
+                    {play} A3
+                    {play} B3
+                    {play} C4
+                    {play} C4
+                    ```
+    operators:
+        name: operators
+        default_save_name: operators
+        description: operators
+        levels:
+            13:
+                story_text: |
+                    With mathematics you might have seen more symbols for comparing two sides of the equation. For example when something is greater than and equal to. 
+                    We have this in progamming as well and we call it operators. 
+                    If you want to check if the first number is smaller or equal to the second, you can use `<=`, for example age `<=` 11.
+                    If you want to check if the first number is bigger or equal to the second, you can use `>=`, for example points `>=` 11.
+                example_code: |
+                    ```
+                    height = {input}('What is your height in cm?')
+                    {if} height >= 160:
+                        {print} ('Yeah, you are tall enough. Enjoy your ride in the roller coaster!')
+                    ```
+                story_text_3: |
+                    You can also compare if something is *not* equal to something else using `!=` like this:
+                example_code_3: |
+                    ```
+                    name = {input}('What is your name?')
+                    {if} name != 'Hedy':
+                        {print}('You are not Hedy')
+
                     ```
     parrot:
         name: parrot
@@ -2928,65 +3116,6 @@ adventures:
 
                     _
                     ```
-    pressit:
-        name: '{pressed}'
-        default_save_name: Pressed
-        description: Try linking a keyboard key to a command!
-        levels:
-            6:
-                story_text: |
-                    In this level there is another new keyword: `{pressed}`!
-                    With `{pressed}` you can use keys on your keyboard to control what lines are used.
-
-                    ### Exercise
-                    Look at the example and add one more line of code that reacts to a key press.
-                example_code: |
-                    ```
-                    {print} 'Do you want a good (g) or bad (b) ending?'
-                    {if} g {is} {pressed} {print} 'They lived happily ever after ❤'
-                    {else} {print} 'The prince was eaten by a hippopotamus 😭'
-                    ```
-                story_text_2: |
-                    You can also link turtle commands to keys.
-
-                    ### Exercise
-                    Copy the lines a few times so you can create a larger drawing.
-                example_code_2: |
-                    ```
-                    {if} y {is} {pressed} {forward} 15
-                    {else} {turn} 90
-                    ```
-            8:
-                story_text: |
-                    Now that you have learned about `{repeat}`, we can press keys multiple times.
-                    You can use it to make the turtle walk forward and turn.
-
-                    ### Exercise
-                    The code you have seen in level 5 only checks the key once. Copy the example code and add a `{repeat}` to it, so that you can press the keys many times.
-                    Use this code to draw something nice.
-                example_code: |
-                    ```
-                    {if} x {is} {pressed} {forward} 15 {else} {turn} 90
-                    ```
-            10:
-                story_text: |
-                    Now that you know how to combine statements, you can create a touch type tool with `{pressed}`.
-
-                    ### Exercise
-                    Finish the code. Each time a random letter should be chosen, which you have to press. You get a point for a correct press, and two points deduction for a wrong press.
-                    **Extra** Clear the screen after each letter, and show the user how many points they have scored.
-                example_code: |
-                    ```
-                    points = 0
-                    letters = a, b, c, d, e
-                    {repeat} 10 {times}
-                        letter = _ _ _
-                        {print} 'Press the letter ' letter
-                        {if} letter {is} {pressed}
-                        _
-                        _
-                        _
-                    ```
     print_command:
         name: '{print}'
         default_save_name: print
@@ -3014,8 +3143,11 @@ adventures:
                     ```
             13:
                 story_text: |-
-                    We arrived at real Python code! That means we need to use parentheses with `{print}` and `{range}` from now on.
-                    It also means you can use Hedy code from this level in any Python environment as long as you use the English commands. If you haven't until now, you can switch the toggle in the commands menu to do so.
+                    We arrived at code that looks more like real Python!
+                    In this level you will not see any new commands, but we only introduce a slightly different way of writing them, which is more similar to how it is done in Python code. 
+                    That means with `{print}` and `{range}` we have to use parentheses from now on. 
+                    It also means you can use the basic Hedy code from this level in any Python environment as long as you use the English commands. 
+                    If you haven't until now, you can switch the toggle in the commands menu to do so.
                 example_code: |
                     ```
                     {print}('Hello!')
@@ -3030,37 +3162,38 @@ adventures:
                     ```
                     ```
                     name = 'Hedy'
-                    {print}('My name is ', name)
+                    {print}_'My name is ', name_
+
                     ```
     quizmaster:
         name: quizmaster
         default_save_name: Quizmaster
         description: Make your own quiz!
         levels:
-            7:
+            13:
                 story_text: |
                     ### Exercise
                     In this adventure you can make your own quiz! Fill in the blanks, add more questions and enjoy your own quiz!
                     You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
                 example_code: |
                     ```
-                    {print} 'Make your own quiz'
+                    {print} ('Make your own quiz')
                     points_a = 0
                     points_b = 0
-                    {print} 'Question'
-                    {print} 'Answer option A'
-                    {print} 'Answer option B'
+                    {print} ('Question')
+                    {print} ('Answer option A')
+                    {print} ('Answer option B')
                     answer = {ask} 'Which answer?'
-                    {if} answer is 'A'
-                    points_a = points_a + 1
-                    {if} answer is 'B'
-                    points_b = points_b + 1
+                    {if} answer {is} 'A':
+                        points_a = points_a + 1
+                    {if} answer {is} 'B':
+                        points_b = points_b + 1
                     {print} 'End of the quiz!'
                     {print} 'Lets see the results!'
-                    {if} points_a > points_b
-                    {print} 'You belong to the A club'
-                    {if} points_b > points_a
-                    {print} 'You belong to the B club'
+                    {if} points_a > points_b:
+                        {print} ('You belong to the A club')
+                    {if} points_b > points_a:
+                        {print} ('You belong to the B club')
                     ```
     quotation_marks:
         name: '''quotation marks'''
@@ -3129,27 +3262,20 @@ adventures:
                     ```
             14:
                 story_text: |-
-                    We are going to make lists the Python way, with square brackets around the lists! We also keep the quotation marks around each item like we have learned in previous levels.
-                    We use square brackets to point out a place in a list. For example: `friends[1]` is the first name on the list of friends, as you can see in the first part of the example code.
-                    The second part of the example code shows you that we can also match 2 lists using the variable i.
-                example_code: |
-                    ```
-                    friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} friends[1] ' is the first friend on the list.'
-                    {print} friends[2] ' is the second friend on the list.'
-                    {print} friends[3] ' is the third friend on the list.'
-                    #now we will match 2 lists using the variable i
-                    lucky_numbers = [15, 18, 6]
-                    {for} i {in} {range} (1, 3)
-                        {print} friends[i] 's lucky number is ' lucky_numbers[i]
-                    ```
-                story_text_2: |-
-                    Now that you've learned to use the brackets in lists, you can also start using the {at} {random} command in the Python way!
-                    You simply type the name of your list with `[random]` behind it!
-                example_code_2: |-
+                    Now that you've learned to use the brackets in lists we will also introduce a different way of using the `{at} {random}` command. 
+                    You simply type the name of your list with `[random]` behind it, where you normally would type a number!
+                example_code: |-
                     ```
                     fruit = ['apple', 'banana', 'cherry']
-                    {print} fruit[random]
+                    {print} (fruit[random])
+                    ```
+                story_text_2: |-
+                    ### Exercise
+                    Finish the code. Let the computer pick a random winner.
+                example_code_2: |-
+                    ```
+                    names = _'Sarah', 'Jason', 'Meghan'_
+                    {print} ('The winner is:' _ )
                     ```
     repeat_command:
         name: '{repeat}'
@@ -3622,19 +3748,13 @@ adventures:
                 example_code: |
                     ```
                     won = 'no'
-                    options = 'rock', 'paper', 'scissors'
+                    options = ['rock', 'paper', 'scissors']
                     {while} won == 'no'
-                        your_choice = {ask} 'What do you choose?'
-                        computer_choice = options {at} {random}
-                        {print} 'you chose ' your_choice
-                        {print} 'the computer chose ' computer_choice
+                        your_choice = {input}('What do you choose?')
+                        computer_choice = options[{random}]
+                        {print}('you chose ', your_choice)
+                        {print}('the computer chose ', computer_choice)
                         {if} computer_choice == your_choice
-                            {print} 'Tie!'
-                        {if} computer_choice == 'rock' {and} your_choice == 'scissors'
-                            {print} 'You lose!'
-                        {if} computer_choice == 'rock' {and} your_choice == 'paper'
-                            {print} 'You win!'
-                            won = 'yes'
                     _
                     ```
     rock_2:
@@ -4337,7 +4457,7 @@ adventures:
                     {forward} 300
                     {turn} 180
 
-                    {for} i {in} {range} 1 {to} 5
+                    {repeat} 5 {times}
                         {color} gray
                         {forward} 100
                         shape = {ask} 'What kind of shape would you like next on the bracelet?'
@@ -4349,7 +4469,7 @@ adventures:
             15:
                 story_text: |
                     ### Exercise
-                    Create a program that asks the player how many corners their figure should have and then creates that figure.
+                    Create a program that asks the player how many sides their figure should have and then creates that figure.
                     The figure in the image is the output when the player fills in 10.
 
                     <div class="w-full flex flex-row gap-2">
@@ -4358,20 +4478,37 @@ adventures:
                     </div>
                 example_code: |
                     ```
-                    {define} calculate_degrees(amount_of_corners)
-                        _ 360 / amount_of_corners
+                    {def} calculate_degrees(amount_of_sides)
+                        degrees = 360 / _
+                        _ degrees
 
-
-                    {define} draw_figure(degrees)
-                        _
-                            {forward} 400/amount_of_corners
+                    {def} draw_figure(degrees, amount_of_sides)
+                        {for} i {in} {range} _
+                            {forward} 70
                             {turn} _
 
-                    amount_of_corners = {ask} _
-                    degrees = _(_)
+                    amount_of_sides = {input}('How many sides do you want the figure to have?')
+                    degrees = calculate_degrees(amount_of_sides)
 
-                    _ {with}
-                    _ {with}
+                    _
+                    _
+                    ```
+                answer_code: |
+                    ```
+                    {def} calculate_degrees(amount_of_sides)
+                        degrees = 360 / amount_of_sides
+                        {return} degrees
+
+                    {def} draw_figure(degrees, amount_of_sides)
+                        {for} i {in} {range} (1, amount_of_sides)
+                            {forward} 70
+                            {turn} degrees
+
+                    amount_of_sides = {input}('How many sides do you want the figure to have?')
+                    degrees = calculate_degrees(amount_of_sides)
+
+                    calculate_degrees(amount_of_sides)
+                    draw_figure(degrees, amount_of_sides)
                     ```
             16:
                 story_text: |
