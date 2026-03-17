@@ -510,6 +510,74 @@ class ForTeachersModule(WebsiteModule):
         sorted_adventures = sorted(student_adventures.items(), key=functools.cmp_to_key(cmp_items))
         return dict(sorted_adventures)
 
+    @staticmethod
+    def _normalize_manage_class_sort_timestamp(timestamp):
+        if timestamp is None:
+            return float("-inf")
+        if isinstance(timestamp, datetime):
+            return timestamp.timestamp()
+        try:
+            normalized_timestamp = int(timestamp)
+        except (TypeError, ValueError):
+            return float("-inf")
+        if normalized_timestamp > 10_000_000_000:
+            return normalized_timestamp / 1000
+        return normalized_timestamp
+
+    def _build_manage_class_rows(self, Class):
+        student_information = []
+
+        for student_username in Class.get("students", []):
+            student_info = self.db.user_by_username(student_username)
+            if not student_info:
+                continue
+
+            last_login = student_info.get("last_login")
+            normalized_student = dict(student_info)
+            normalized_student["is_invite"] = False
+            normalized_student["_sort_name"] = (normalized_student.get("username") or "").lower()
+            normalized_student["_sort_timestamp"] = self._normalize_manage_class_sort_timestamp(last_login)
+            normalized_student["last_login"] = (
+                utils.localized_date_format(last_login)
+                if last_login is not None
+                else gettext("never")
+            )
+            student_information.append(normalized_student)
+
+        invites = self.db.get_class_invites(class_id=Class["id"])
+        for invite in invites:
+            normalized_invite = dict(invite)
+            normalized_invite["is_invite"] = True
+            normalized_invite["_sort_name"] = (normalized_invite.get("username") or "").lower()
+            normalized_invite["_sort_timestamp"] = self._normalize_manage_class_sort_timestamp(
+                normalized_invite.get("unformatted_timestamp")
+            )
+            normalized_invite["last_login"] = normalized_invite.get("timestamp") or gettext("never")
+            student_information.append(normalized_invite)
+
+        return student_information
+
+    def _sort_manage_class_rows(self, student_information, student_order, timestamp_order):
+        sort_instructions = []
+        if timestamp_order in ["ascendent", "descendent"]:
+            sort_instructions.append(("timestamp", timestamp_order == "descendent"))
+        if student_order in ["ascendent", "descendent"]:
+            sort_instructions.append(("student", student_order == "descendent"))
+
+        for sort_field, reverse in sort_instructions:
+            if sort_field == "timestamp":
+                student_information.sort(
+                    key=lambda item: item.get("_sort_timestamp", float("-inf")),
+                    reverse=reverse,
+                )
+            else:
+                student_information.sort(
+                    key=lambda item: item.get("_sort_name", ""),
+                    reverse=reverse,
+                )
+
+        return student_information
+
     @route("/redesign/class/<class_id>/grade/filter_sort", methods=["GET"])
     @requires_login
     def filter_sort_grading_page(self, user, class_id):
@@ -566,29 +634,7 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        invites = self.db.get_class_invites(class_id=class_id)
-
-        students = Class.get("students", [])
-        student_information = []
-        for student in students:
-            student_info = self.db.user_by_username(student)
-            if student_info and "last_login" in student_info:
-                student_info["last_login"] = utils.localized_date_format(
-                    student_info["last_login"]
-                )
-            else:
-                student_info["last_login"] = gettext("never")
-            student_info["is_invite"] = False
-
-            student_information.append(student_info)
-        for invite in invites:
-            invite["is_invite"] = True
-            invite["last_login"] = invite["timestamp"]
-            student_information.append(invite)
-        # The invites and the students are going to be displayed in the same table, therefore, we join
-        # the two lists, and differentiate them by using the field is_invite
-        # On the invitations the last_login is going to be the date of the invitation, and on the
-        # students it's going to be the last login of the student
+        student_information = self._build_manage_class_rows(Class)
         return render_template(
             "for-teachers/classes/manage-class.html",
             class_id=class_id,
@@ -601,7 +647,7 @@ class ForTeachersModule(WebsiteModule):
 
     @route("/redesign/class/<class_id>/manage/filter_sort", methods=["GET"])
     @requires_login
-    def filter_sort_management_page(self, user, class_id):
+    def sort_management_page(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(
                 error=401, ui_message=gettext("retrieve_class_error")
@@ -609,66 +655,14 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
-        invites = self.db.get_class_invites(class_id=class_id)
-        students = Class.get("students", [])
-        student_information = []
-        for student in students:
-            student_info = self.db.user_by_username(student)
-            if student_info:
-                # Store original timestamp for sorting before formatting
-                student_info["_sort_timestamp"] = student_info.get("last_login")
-                student_info["is_invite"] = False
-                student_information.append(student_info)
-        
-        for invite in invites:
-            invite["is_invite"] = True
-            # Store original timestamp for sorting
-            invite["_sort_timestamp"] = invite.get("unformatted_timestamp")
-            student_information.append(invite)
-
-        # Apply Sorting based on request args
-        sort_field = None
-        sort_order = "none"
-        
         student_order = request.args.get("student")
         timestamp_order = request.args.get("timestamp")
-
-        if student_order in ["ascendent", "descendent"]:
-            sort_field = "student"
-            sort_order = student_order
-        elif timestamp_order in ["ascendent", "descendent"]:
-            sort_field = "timestamp"
-            sort_order = timestamp_order
-
-        if sort_field:
-            reverse = (sort_order == "descendent")
-            if sort_field == "student":
-                student_information.sort(
-                    key=lambda x: (x.get("username") or "").lower(), 
-                    reverse=reverse
-                )
-            elif sort_field == "timestamp":
-                # Handle None values by putting them at the start (or end depending on logic)
-                # Here handled by treating None as min datetime
-                def get_ts(x):
-                    ts = x.get("_sort_timestamp")
-                    if ts is None:
-                        return datetime.min
-                    return ts
-                student_information.sort(key=get_ts, reverse=reverse)
-
-        # Format dates for display
-        for item in student_information:
-             if item.get("is_invite"):
-                  item["last_login"] = item.get("timestamp")
-             else:
-                  if "last_login" in item:
-                       item["last_login"] = utils.localized_date_format(
-                            item["last_login"]
-                       )
-                  else:
-                       item["last_login"] = gettext("never")
+        student_information = self._build_manage_class_rows(Class)
+        student_information = self._sort_manage_class_rows(
+            student_information,
+            student_order,
+            timestamp_order,
+        )
 
         return render_partial(
             "for-teachers/classes/manage-class-table-body.html",
@@ -699,28 +693,7 @@ class ForTeachersModule(WebsiteModule):
                 invited_as=invite_as,
                 invited_as_text=gettext(invite_as)
             )
-        invites = self.db.get_class_invites(class_id=Class["id"])
-        students = Class.get("students", [])
-        student_information = []
-        for student in students:
-            student_info = self.db.user_by_username(student)
-            if student_info and "last_login" in student_info:
-                student_info["last_login"] = utils.localized_date_format(
-                    student_info["last_login"]
-                )
-            else:
-                student_info["last_login"] = gettext("never")
-            student_info["is_invite"] = False
-
-            student_information.append(student_info)
-        for invite in invites:
-            invite["is_invite"] = True
-            invite["last_login"] = invite["timestamp"]
-            student_information.append(invite)
-        # The invites and the students are going to be displayed in the same table, therefore, we join
-        # the two lists, and differentiate them by using the field is_invite
-        # On the invitations the last_login is going to be the date of the invitation, and on the
-        # students it's going to be the last login of the student
+        student_information = self._build_manage_class_rows(Class)
         return render_partial(
             "for-teachers/classes/manage-class-table-body.html",
             class_info=Class,
@@ -1139,29 +1112,7 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-        invites = self.db.get_class_invites(class_id=class_id)
-
-        students = Class.get("students", [])
-        student_information = []
-        for student in students:
-            student_info = self.db.user_by_username(student)
-            if student_info and "last_login" in student_info:
-                student_info["last_login"] = utils.localized_date_format(
-                    student_info["last_login"]
-                )
-            else:
-                student_info["last_login"] = gettext("never")
-            student_info["is_invite"] = False
-
-            student_information.append(student_info)
-        for invite in invites:
-            invite["is_invite"] = True
-            invite["last_login"] = invite["timestamp"]
-            student_information.append(invite)
-        # The invites and the students are going to be displayed in the same table, therefore, we join
-        # the two lists, and differentiate them by using the field is_invite
-        # On the invitations the last_login is going to be the date of the invitation, and on the
-        # students it's going to be the last login of the student
+        student_information = self._build_manage_class_rows(Class)
         return jinja_partials.render_partial(
             "for-teachers/classes/manage-class-table.html",
             class_id=class_id,
