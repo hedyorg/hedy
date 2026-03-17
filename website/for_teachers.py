@@ -669,7 +669,7 @@ class ForTeachersModule(WebsiteModule):
             class_info=Class,
             students=student_information,
         )
-    
+
     @route("/redesign/class/<class_id>/manage/invite", methods=["POST"])
     @requires_teacher
     def invite_users(self, user, class_id):
@@ -699,7 +699,6 @@ class ForTeachersModule(WebsiteModule):
             class_info=Class,
             students=student_information,
         )
-
 
     @route("/redesign/program/<class_id>/grade", methods=["POST"])
     @requires_login
@@ -1067,26 +1066,32 @@ class ForTeachersModule(WebsiteModule):
                               htmx_target=htmx_target,
                               hyperscript=hyperscript)
 
-    @route("/redesign/class/<class_id>/manage/remove_student_modal/<student_id>", methods=["GET"])
+    @route(
+        "/redesign/class/<class_id>/manage/remove_student_modal/<student_id>",
+        methods=["GET"],
+    )
     @requires_teacher
     def get_remove_student_modal_redesign(self, user, class_id, student_id):
-        is_invite = request.args.get('is_invite', type=int)
-        Class = self.db.get_class(session['class_id'])
+        is_invite = request.args.get("is_invite", type=int)
+        Class = self.db.get_class(session["class_id"])
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        modal_text = gettext('remove_student_prompt')
-        htmx_endpoint = f'/for-teachers/redesign/class/{class_id}/manage/remove_student/{student_id}?is_invite={is_invite}'
+        modal_text = gettext("remove_student_prompt")
+        htmx_endpoint = f"/for-teachers/redesign/\
+            class/{class_id}/manage/remove_student/\
+            {student_id}?is_invite={is_invite}"
+        htmx_endpoint = htmx_endpoint.replace(" ", "")
         htmx_target = "#students-table"
         hyperscript = ""
         htmx_success_message = gettext("student_removed_successfully")
         return render_partial(
-            'modal/htmx-modal-confirm.html',
+            "modal/htmx-modal-confirm.html",
             modal_text=modal_text,
             htmx_endpoint=htmx_endpoint,
             htmx_target=htmx_target,
             hyperscript=hyperscript,
-            htmx_success_message=htmx_success_message
+            htmx_success_message=htmx_success_message,
         )
 
     @route(
