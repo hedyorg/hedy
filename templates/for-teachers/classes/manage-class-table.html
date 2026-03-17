@@ -38,12 +38,14 @@
 
     </tr>
   </thead>
-  {{
-    render_partial(
-      "for-teachers/classes/manage-class-table-body.html", 
-      students=students, 
-      class_info=class_info, 
-      teacher_classes=teacher_classes
-    )
-  }}
+  <tbody class="bg-white divide-y divide-gray-200" id="manage-students-table-body">
+    {{
+      render_partial(
+        "for-teachers/classes/manage-class-table-body.html", 
+        students=students, 
+        class_info=class_info, 
+        teacher_classes=teacher_classes
+      )
+    }}
+  </tbody>
 </table>

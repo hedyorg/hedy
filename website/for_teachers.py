@@ -567,9 +567,7 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         invites = self.db.get_class_invites(class_id=class_id)
-        print('*'*100)
-        print(invites)
-        print('*'*100)
+
         students = Class.get("students", [])
         student_information = []
         for student in students:
@@ -681,23 +679,13 @@ class ForTeachersModule(WebsiteModule):
     @route("/redesign/class/<class_id>/manage/invite", methods=["POST"])
     @requires_teacher
     def invite_users(self, user, class_id):
-        #if not isinstance(request.form.getlist('usernames'), list):
-        #    return make_response(gettext("username_invalid"), 400)
-        #if not isinstance(request.args.get('class_id'), str):
-        #    return make_response(gettext("request_invalid"), 400)
-        #if not isinstance(request.args.get('invite_as'), str):
-        #    return make_response(gettext("request_invalid"), 400)
-        #if len(request.form.getlist('usernames')) < 1:
-        #    return make_response(gettext("username_empty"), 400)
-        print(user)
-        print(class_id)
+        if not isinstance(request.form.getlist('usernames'), list):
+            return make_response(gettext("username_invalid"), 400)
+        if len(request.form.getlist('usernames')) < 1:
+            return make_response(gettext("username_empty"), 400)
         usernames = request.form.getlist('usernames')
-        print(usernames)
-        # class_id = request.args.get('class_id')
-        invite_as = 'student' #request.args.get('invite_as')
+        invite_as = 'student'
         Class = self.db.get_class(class_id)
-
-        print(usernames, class_id, invite_as, Class)
 
         if not Class or not (utils.can_edit_class(user, Class)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
@@ -1138,7 +1126,7 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or not (utils.can_edit_class(user, Class)):
             return make_response(gettext("ajax_error"), 400)
-        print(is_invite)
+
         if is_invite:
             self.db.remove_user_class_invite(student_id, class_id)
         else:
@@ -1174,7 +1162,6 @@ class ForTeachersModule(WebsiteModule):
         # the two lists, and differentiate them by using the field is_invite
         # On the invitations the last_login is going to be the date of the invitation, and on the
         # students it's going to be the last login of the student
-        print(student_information)
         return jinja_partials.render_partial(
             "for-teachers/classes/manage-class-table.html",
             class_id=class_id,
@@ -1468,7 +1455,6 @@ class ForTeachersModule(WebsiteModule):
     @route("/customize-class/<class_id>", methods=["GET"])
     @requires_login
     def get_class_customization_page(self, user, class_id):
-        print("GET /customize-class/<class_id> called")
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)

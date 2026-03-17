@@ -7,7 +7,7 @@
     <div class="w-full h-full border rounded-lg shadow-md">
       <form hx-get="/for-teachers/redesign/class/{{ class_info.id }}/manage/filter_sort"
           hx-target="#manage-students-table-body"
-          hx-swap="outerHTML"
+          hx-swap="innerHTML"
           hx-trigger="submit"
           hx-include="
               #student-sort-input, 

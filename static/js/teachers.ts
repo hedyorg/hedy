@@ -1101,7 +1101,7 @@ export function invite_to_class_redesign(class_id: string, prompt: string, type:
     'hx-post': `/for-teachers/redesign/class/${class_id}/manage/invite`,
     'hx-target': '#manage-students-table-body',
     'hx-include': "[name='usernames']",
-    'hx-swap': 'outerHTML'
+    'hx-swap': 'innerHTML'
   }
   htmx.process(document.body)
   modal.htmx_search(

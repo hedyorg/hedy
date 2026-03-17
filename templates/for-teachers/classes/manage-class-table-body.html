@@ -1,57 +1,63 @@
-<tbody class="bg-white divide-y divide-gray-200" id="manage-students-table-body">
-    {% for student in students %}
-    <tr>
-    <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
-        {{ student.username }}
+{% if students|length == 0 %}
+<tr>
+    <td class="text-center rounded-b-lg py-4" colspan="3">
+        {{ _('no_students') }}
     </td>
-    <td data-cy="teacher_cell" class="py-3 text-center"> 
-        {% if student.is_invite %}
-        {{ _('invited_on') }} {{ student.last_login }}
-        {% else %}
-        {{ student.last_login }} 
-        {% endif %}
-    </td>
-    <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
-        <div class="relative inline-block text-left" name="menu">
-        <button type="button" class="blue-btn-new p-1.5 flex justify-center rounded-full"
-                _="on click
-                remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
-                add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
-                if #menu-{{loop.index}} matches .hidden
-                    remove .hidden from #menu-{{loop.index}}
-                    wait 10ms
-                    toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
-                else
-                    toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
-                    wait 180ms
-                    add .hidden to #menu-{{loop.index}}
-                    "
-                >
-            <i class="fa-solid fa-ellipsis"></i>
-        </button> 
-        <div id="menu-{{loop.index}}" class="hidden
-            {# For the last 5 elements we display the menu from the bottom up #}
-            {% if (teacher_classes|length > 7) and (loop.index >=  teacher_classes|length - 4)%}
-            bottom-10
-            {% endif %}
-        z-30 menu origin-top-left absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
-            <ul class="list-none divide-y divide-gray-200 p-2">
-            {% if not student.is_invite %}
-            <li class="px-6 py-3 cursor-pointer hover:bg-gray-200 active:bg-gray-400  rounded-t-lg  text-blue-900 ease-in transition duration-100" {% if not student.is_invite %} onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})' {% endif %}>
-                <i class="fa-solid fa-key text-sm"></i>
-                <span class="m-3">{{ _('reset_password') }}</span>
-            </li>
-            {% endif %}
-            <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4"
-                hx-get="/for-teachers/redesign/class/{{ class_info['id'] }}/manage/remove_student_modal/{{ student.username }}?is_invite={{ student.is_invite | int }}" 
-                hx-target="#modal_target"
-                hx-swap="innerHTML"
+</tr>
+{% else %}
+{% for student in students %}
+<tr>
+<td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+    {{ student.username }}
+</td>
+<td data-cy="teacher_cell" class="py-3 text-center"> 
+    {% if student.is_invite %}
+    {{ _('invited_on') }} {{ student.last_login }}
+    {% else %}
+    {{ student.last_login }} 
+    {% endif %}
+</td>
+<td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+    <div class="relative inline-block text-left" name="menu">
+    <button type="button" class="blue-btn-new p-1.5 flex justify-center rounded-full"
+            _="on click
+            remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
+            add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
+            if #menu-{{loop.index}} matches .hidden
+                remove .hidden from #menu-{{loop.index}}
+                wait 10ms
+                toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
+            else
+                toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
+                wait 180ms
+                add .hidden to #menu-{{loop.index}}
+                "
             >
-                <i class="fa-solid fa-trash text-red-700 text-sm"></i> <span class="m-3 text-red-700">{{ _('remove') }}</span>
-            </li>
-            </ul>
-        </div>
-        </div>
-    </td>
-    {% endfor %}
-</tbody>
+        <i class="fa-solid fa-ellipsis"></i>
+    </button> 
+    <div id="menu-{{loop.index}}" class="hidden
+        {# For the last 5 elements we display the menu from the bottom up #}
+        {% if (teacher_classes|length > 7) and (loop.index >=  teacher_classes|length - 4)%}
+        bottom-10
+        {% endif %}
+    z-30 menu origin-top-left absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
+        <ul class="list-none divide-y divide-gray-200 p-2">
+        {% if not student.is_invite %}
+        <li class="px-6 py-3 cursor-pointer hover:bg-gray-200 active:bg-gray-400  rounded-t-lg  text-blue-900 ease-in transition duration-100" {% if not student.is_invite %} onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})' {% endif %}>
+            <i class="fa-solid fa-key text-sm"></i>
+            <span class="m-3">{{ _('reset_password') }}</span>
+        </li>
+        {% endif %}
+        <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4"
+            hx-get="/for-teachers/redesign/class/{{ class_info['id'] }}/manage/remove_student_modal/{{ student.username }}?is_invite={{ student.is_invite | int }}" 
+            hx-target="#modal_target"
+            hx-swap="innerHTML"
+        >
+            <i class="fa-solid fa-trash text-red-700 text-sm"></i> <span class="m-3 text-red-700">{{ _('remove') }}</span>
+        </li>
+        </ul>
+    </div>
+    </div>
+</td>
+{% endfor %}
+{% endif %}
