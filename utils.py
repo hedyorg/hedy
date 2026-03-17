@@ -1,6 +1,5 @@
 from flask import session, request, make_response
 from website.flask_helpers import render_template
-from bs4 import BeautifulSoup
 import contextlib
 import datetime
 import time
@@ -294,16 +293,6 @@ def random_password_generator(size=6):
     """
     base_58_chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
     return random_id_generator(size, base_58_chars)
-
-
-def markdown_to_html_tags(markdown):
-    """
-    This function takes a Markdown string and returns a list with each of the HTML elements obtained
-    by rendering the Markdown into HTML.
-    """
-    _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
-    soup = BeautifulSoup(_html, 'html.parser')
-    return soup.find_all()
 
 
 MarkdownCode = collections.namedtuple('MarkdownCode', ('code', 'info'))

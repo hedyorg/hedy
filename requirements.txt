@@ -1,43 +1,18 @@
-# The version of https://github.com/hedyorg/hedylang
-hedylang==0.0.3
+# Requirements for developing & running tools
 
-Flask==3.1.3
-Werkzeug==3.1.6
-# We cannot go higher than this, because starting 1.2.1+
-# we parse "100" as text instead of a number.
-lark==1.1.9
-gunicorn==23.0.0
-flask-compress==1.4.0
-requests==2.32.4
-attrs>=22.2.0
-bcrypt==3.2.0
-boto3>=1.16.50
-MarkupSafe==2.1.2
-ruamel.yaml==0.18.6
-PySumTypes==0.0.1
-beautifulsoup4==4.9.3
-regex==2021.8.28
-retrying==1.3.3
+# Requirements for actually running Hedy are in requirements-prod.txt
+-r requirements-prod.txt
+
 pytest==8.0.0
 parameterized==0.8.1
-Flask-Babel==4.0.0
-iso-639>=0.4.5
 setuptools==78.1.1
-iso3166~=2.0.2
-turtlethread>=0.0.6
 pre-commit==2.20.0
-Babel[jinja2]>=2.15.0
-jinja-partials==0.1.1
 hypothesis==6.98.4
 tqdm==4.66.3
 pytest-xdist==3.3.1
-email-validator==2.1.0.post1
 doit==0.36.0
 doit_watch>=0.1.0
-uflash>=2.0.0
 pyinstaller==6.18.0
 pylint==3.1.0
-commonmark==0.9.1
 colorama==0.4.6
 check-jsonschema==0.30.0
-Unidecode==1.4.0

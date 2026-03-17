@@ -3,4 +3,21 @@
 *.md
 .dockerignore
 Dockerfile
-License.txt
+
+# A download of the Dynamo DB, never needs to make it into the Docker context.
+db.sqlite3
+db.sqlite3-journal
+
+# This never needs to make it into context
+content/research/*
+
+# This file is huge, we'll always use a production CSS build in Docker
+static/css/generated.full.css
+
+# Don't care about mapfiles
+static/js/appbundle.js.map
+
+# Ignore node_modules and [v]env, we'll do a proper build inside the container
+node_modules
+.env
+.venv
