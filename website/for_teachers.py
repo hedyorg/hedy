@@ -669,7 +669,7 @@ class ForTeachersModule(WebsiteModule):
             class_info=Class,
             students=student_information,
         )
-
+    
     @route("/redesign/class/<class_id>/manage/invite", methods=["POST"])
     @requires_teacher
     def invite_users(self, user, class_id):
@@ -699,6 +699,7 @@ class ForTeachersModule(WebsiteModule):
             class_info=Class,
             students=student_information,
         )
+
 
     @route("/redesign/program/<class_id>/grade", methods=["POST"])
     @requires_login
@@ -1075,8 +1076,7 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         modal_text = gettext('remove_student_prompt')
-        htmx_endpoint = f'/for-teachers/redesign/class/{class_id}\
-            /manage/remove_student/{student_id}?is_invite={is_invite}'.replace(" ", "")
+        htmx_endpoint = f'/for-teachers/redesign/class/{class_id}/manage/remove_student/{student_id}?is_invite={is_invite}'
         htmx_target = "#students-table"
         hyperscript = ""
         htmx_success_message = gettext("student_removed_successfully")
