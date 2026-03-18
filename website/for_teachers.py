@@ -1076,7 +1076,8 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         modal_text = gettext('remove_student_prompt')
-        htmx_endpoint = f'/for-teachers/redesign/class/{class_id}/manage/remove_student/{student_id}?is_invite={is_invite}'
+        htmx_endpoint = f'/for-teachers/redesign/class/{class_id}\
+            /manage/remove_student/{student_id}?is_invite={is_invite}'.replace(" ", "")
         htmx_target = "#students-table"
         hyperscript = ""
         htmx_success_message = gettext("student_removed_successfully")
