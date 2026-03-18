@@ -669,7 +669,7 @@ class ForTeachersModule(WebsiteModule):
             class_info=Class,
             students=student_information,
         )
-    
+
     @route("/redesign/class/<class_id>/manage/invite", methods=["POST"])
     @requires_teacher
     def invite_users(self, user, class_id):
@@ -699,7 +699,6 @@ class ForTeachersModule(WebsiteModule):
             class_info=Class,
             students=student_information,
         )
-
 
     @route("/redesign/program/<class_id>/grade", methods=["POST"])
     @requires_login
