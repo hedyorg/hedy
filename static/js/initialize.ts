@@ -5,7 +5,7 @@ import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializ
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
-import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeAllClassesPageOptions, initializeAllClassesPage, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage, InitializeGradePageOptions, initializeGradePage } from './teachers';
+import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeContextMenuPageOptions, initializeContextMenuEventHandler, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage, InitializeGradePageOptions, initializeGradePage } from './teachers';
 
 export interface InitializeOptions {
   /**
@@ -57,7 +57,7 @@ type InitializePageOptions =
   | InitializeAdminUsersPageOptions
   | InitializeCustomizeAdventurePage
   | InitializeMyProfilePage
-  | InitializeAllClassesPageOptions
+  | InitializeContextMenuPageOptions
   | InitializeClassPerformanceGraphPageOptions
   | InitializeGradePageOptions
   ;
@@ -121,7 +121,8 @@ export function initialize(options: InitializeOptions) {
       initializeMyProfilePage(options.javascriptPageOptions);
       break;
     case 'classes':
-      initializeAllClassesPage(options.javascriptPageOptions);
+    case 'manage-students':
+      initializeContextMenuEventHandler(options.javascriptPageOptions);
       break;
     
     case 'performance-graph':
