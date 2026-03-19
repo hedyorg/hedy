@@ -8,6 +8,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 from os import path
 import sys
+from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 dirname = 'offlinehedy'
 appname = 'run-hedy-server'
@@ -16,6 +17,12 @@ appname = 'run-hedy-server'
 # pyinstaller, otherwise it will not bundle the libraries we installed
 # from the venv.
 venv_dir = [p for p in sys.path if 'site-packages' in p][0]
+
+# hedy loads some files (for example in hedy/prefixes/*.py) directly from disk
+# at import time, so they must be added as data files explicitly.
+hedy_hiddenimports = collect_submodules('hedy')
+hedy_data_files = collect_data_files('hedy')
+hedy_prefix_py_files = collect_data_files('hedy.prefixes', include_py_files=True)
 
 data_files = [
     # Files
@@ -29,12 +36,14 @@ data_files = [
     ('translations', 'translations'),
 ]
 
+data_files += hedy_data_files + hedy_prefix_py_files
+
 a = Analysis(
     ['app.py'],
     pathex=[venv_dir],
     binaries=[],
     datas=data_files,
-    hiddenimports=[],
+    hiddenimports=hedy_hiddenimports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
