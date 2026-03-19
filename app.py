@@ -18,6 +18,7 @@ from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
 from iso639 import languages
+import webbrowser
 
 import static_babel_content
 from markupsafe import Markup
@@ -2706,6 +2707,9 @@ def on_offline_mode():
     smoke_test = '--smoketest' in sys.argv
     if smoke_test:
         sys.exit(0)
+
+    # Automatically open Hedy in browser
+    webbrowser.open('http://localhost/')
 
 
 if __name__ == '__main__':
