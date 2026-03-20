@@ -1690,18 +1690,37 @@ levels:
                 Ask your students to recall how a print keyword was written before.
                 Than show the new code and make sure they all see where the parentheses are.
         4:
-            header: '{for} in real Python'
-            text: |-
-                From now on, whenever you use the {for} keyword you will have to put a colon a the end of the line:
+            header: '{ask}'
+            text: We will also replace `{ask}` for the `{input}` keyword used in Python, again with parentheses.
             code: |-
-                animals = dog, cat, blobfish
-                {for} animal in animals:
-                    {print} ('I love ' animal)
-            notes: |-
-                Make the students aware that this not only happens with the {for} keyword but with every line that is followed by a line with indentation.
-                You will see this in next slides.
-
+                age = {input} ('how old are you?')
+                {print} ('You are', age, 'years old.')
         5:
+            header: '{print} with variables'
+            text: |-
+                You can combine printing variables and text by using commas to seperate them:
+            code: |-
+                level = {input}('Which level are you at?')
+                {print}('Good luck with level', level)
+            notes: |-
+                Let your students predict what will be the outcome of this code.
+                Than run the code and show how the code prints the text inside the quotation marks literally and what is outside as the value of the variable.
+                Show what happens if you put 'level' in the last line also in quotation marks.
+        6:
+            header: '`{if}` and `{else}`'
+            text: |-
+                In the if statement you will have tu use two equal signs: ==. This is what most programming languages do as well. We also need a colon at the end of the if statement now.
+            code: |-
+                favorite_bird = input('What is your favorite bird?')
+                {if} favorite_bird == 'penguin':
+                    {print}('Yeahh, it is mine too!')
+                {elif} favorite_bird == 'parrot':
+                    {print}('Great choice!')
+                {else}:
+                    {print}("Meh, I don't agree")
+            notes: |-
+                Your students will have to get used to all the new syntax. This can be a tricky and frustrating process, give them lots of opportunities to practice the new syntax.
+        7:
             header: '{range} in real Python'
             text: |-
                 To count with the {range} keyword you now also need parentheses.
@@ -1711,28 +1730,10 @@ levels:
                 {print} ('We have counted to 10.')
             notes: |-
                 Ask your students to recall how they used this
-        6:
-            header: '{print} multiple items'
-            text: |-
-                If you want, you can combine printing variables and text by using commas to seperate it:
-            code: |-
-                for i in {range} (1, 12):
-                    {print} ('You have completed Hedy level', i)
-                level = 13
-                {print} ('Congrats, you are now in level', level, 'of Hedy.')
-            notes: |-
-                Let your students predict what will be the outcome of this code.
-                Than run the code and show how the code prints the text inside the quotation marks literally and what is outside as the value of the variable.
-                Show what happens if you put 'level' in the last line also in quotation marks.
-        7:
-            header: Ask
-            text: We will also replace {ask} for the {input} keyword used in Python.
-            code: |-
-                age = {input} ('how old are you?')
-                {print} ('You are', age, 'years old.')
         8:
             header: Smaller and greater
-            text: From now on we will use symbols for smaller than and greater than
+            text: |-
+                you might already know the symbols the < and >. The < checks if the first number is smaller than the second, for example age < 12 checks if age is smaller than 12. The > checks if the first number is bigger than the second, for example points > 10 checks if points is larger than 10.
             code: |-
                 number = {input} ('pick a number below 10')
                 {if} number < 10:
@@ -1744,7 +1745,6 @@ levels:
                 Run the code with different numbers.
                 Finally, try the number 10 en show that the code now gives no output.
                 The number 10 is neither greater than nor smaller than 10 and thus it gives no output, but we will solve this in the next slide.
-
         9:
             header: Greater or equal
             text: |-
@@ -1788,7 +1788,6 @@ levels:
             notes: |-
                 Ask your students what the think the symbol '!=' means.
                 Then show, by running the code, that it stands for not equal to.
-
         12:
             header: Debugging
             text: Let's debug this code!
@@ -1828,6 +1827,19 @@ levels:
                 In the next level you will learn how to use lists the real Python way.
 
     14:
+        41:
+            header: '{for} in real Python'
+            text: |-
+                From now on, whenever you use the {for} keyword you will have to put a colon a the end of the line:
+            code: |-
+                animals = dog, cat, blobfish
+                {for} animal in animals:
+                    {print} ('I love ' animal)
+            notes: |-
+                Make the students aware that this not only happens with the {for} keyword but with every line that is followed by a line with indentation.
+                You will see this in next slides.
+
+
         1:
             header: Welcome to level 14
             text: |-
