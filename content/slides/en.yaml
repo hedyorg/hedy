@@ -1939,7 +1939,31 @@ levels:
             text: |-
                 By the end of this lesson, you can:
                 * Make your code shorter and more efficient by using functions.
+                * Use functions with arguments
+                * Use `{return} {value}` in functions
+            notes: |-
+                Let the students tell about what they remember about functions and what to use functions for.
         2:
+            header: Remember Functions?
+            text: |-
+                Fucntions can make your code more organized and nea, by repeating a piece of code in a fucntion.
+                In real python code, functions are defined with `{def}` then the name of the function followed by ():
+                You do not have to use `{call}` to call the function, simply type the name with ().
+            code: |-
+                def square():
+                    {for} i {in} {range} (1,4):
+                        {turn} 90
+                        {forward} 10
+
+                square()
+                {forward} 50
+                square()
+                {forward} 50
+                square()
+                {forward} 50
+            notes: |-
+                Show the students what functions look like now. Tell them that the parentheses will be used later.
+        3:
             header: Too much code?
             text: The code below has a lot of repetition.
             code: |-
@@ -1959,7 +1983,7 @@ levels:
                 Show the code to your students. Do they see all the repetition?
                 Ask them if they can come up with a way of writing this code with less lines.
                 They will probably not be able to figure out a way, so show them the next slide!
-        3:
+        4:
             header: Use a function!
             text: |-
                 Now we will try to have the same output with less lines of code.
@@ -1985,28 +2009,44 @@ levels:
                 Less possibility to make mistakes and easier to find them if you make them.
 
                 Show that you can change something in the function, such that all the output changes.
-        4:
+        5:
             header: Functions with more arguments
             text: |-
                 The input that is in the brackets of a function we call the argument.
                 You can use multiple arguments for one function:
             code: |-
                 {def} fairy_tale(princess, prince, something_poisonous, expression_of_love)
-                answer = input('Do you want me to tell you a fairy tale?')
-                if answer == yes:
+                answer = {input}('Do you want me to tell you a fairy tale?')
+                {if} answer == yes:
                     {print} ('Once upon a time there was a girl named ', princess)
                     {print} ('She ate some ', something_poisonous, ' and nearly died...')
                     {print} ('But prince ', prince, ' came to visit her and gave her a ', expression_of_love )
                     {print} ('This healed ', princess ' and she fell in love with ', prince)
-                    {print} (princess, ' and ', prince, ' married and lived a long and happy life.')
-                else:
+                    {print} (princess, ' and ', prince, ' lived happily ever after.')
+                {else}:
                     {print} ('No problem. Perhaps next time.')
 
                 fairy_tale('Snowwhite', 'Casper', 'poison', 'kiss')
-
-
             notes: Run the code and show that you can change all four arguments to get a different story.
-        5:
+        6:
+            header: Return value
+            text: |-
+                Sometimes you want to use a number that has been calculated in a function outside a function.
+                You can use the command `{return}` to use the value outside of the code.
+            code: |-
+                {def} calculate_new_price(amount, percentage):
+                    percentage = percentage / 100
+                    discount_amount = amount * percentage
+                    {return} amount - discount_amount
+
+                old_price = input ('How much is on the price tag?')
+                discount = input ('What percentage is the discount?')
+
+                new_price = _ calculate_new_price(old_price, discount)
+                print('The new price is ', new_price, ' dollar')
+            notes: |-
+                Can your students think of any other situations where it would be nice to return a value from a function?
+        7:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -2028,17 +2068,17 @@ levels:
             notes: |-
                 Debug this code together.
 
-        6:
+        8:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 15!
             notes: |-
                 Your students can now work on all the adventures in level 15.
-        7:
+        9:
             header: Let's review!
             text: What did you learn today?
             notes: |-
                 Ask the students to list what they've learned today.
-        8:
+        10:
             header: Let's review!
             text: |-
                 Which adventure did you like best? Why?
@@ -2047,12 +2087,12 @@ levels:
 
             notes: |-
                 Ask the students for their opinion.
-        9:
+        11:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
             notes: |-
                 Let some students show their work to the class.
-        10:
+        12:
             header: Sneak peek into the next level...
             text: |-
                 Next level you will learn the last keyword, to make a {while} loop:
@@ -2061,7 +2101,6 @@ levels:
                 {while} level <= 16:
                     {print} ('Do not use while')
                     level = level + 1
-
     16:
         1:
             header: Welcome to level 16!
@@ -2081,7 +2120,8 @@ levels:
                     {print} ('You cannot go outside without a jacket.')
                     temperature = temperature + 2
                 {print} ('It is ', temperature, ' degrees. Now you can go outside without a jacket.')
-            notes: Ask your students to predict what the output of this code is going to be. For which temperature will it print that you can go outside without a jacket?
+            notes: |-
+                Ask your students to predict what the output of this code is going to be. For which temperature will it print that you can go outside without a jacket?
                 Show what happens to if they are correct. Then, ask your students what happens if you remove the line 'temperature = temperature + 2'.
                 Show them that this will result in a endless loop because the temperature always stays below 25.
         3:
@@ -2091,7 +2131,8 @@ levels:
                 {while} answer != Hedy:
                     answer = {input} ('What is my name?')
                 {print} ('You are correct. Nice to meet you. I am Hedy!')
-            notes: Ask your students again to predict the outcome. How many times will you get asked the question?
+            notes: |-
+                Ask your students again to predict the outcome. How many times will you get asked the question?
                 Show them that the question will be asked until you gave the correct answer, namely 'Hedy'.
         4:
             header: Debugging
