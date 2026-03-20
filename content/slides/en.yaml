@@ -903,6 +903,27 @@ levels:
                 With `{in}` you can let the computer check if an item is in a list. Show the example.
                 Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
         6:
+            header: Keeping your code clean
+            text: |-
+               Now that you are getting to know more and more codes, your programs will be getting longer.
+               Sometimes your codes will be messy and hard to read. To make your code nice and readable you can add comments in your code using a hashtag at the start of the line like this:
+            code: |-
+                # Naming the character
+                name {is} {ask} 'What will your character be called?'
+                {print} 'They are called ' name
+
+                # Throwing the dice
+                numbers = 1, 2, 3
+                throw = numbers {at} {random}
+
+                # Assigning the pet
+                {if} throw {is} 1
+                    {print} name ' gets a dog'
+                {elif} throw {is} 2
+                    {print} name ' gets a cat'
+                {else}
+                    {print} name 'gets a parrot'
+        7:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -921,7 +942,7 @@ levels:
                 {print} 'that will be 2.50, please.'
                 {else} 'sorry, that is too much.'
             debug: 'True'
-        7:
+        8:
             header: Let's review!
             text: |-
                 Which adventure did you like best? Why?
@@ -930,17 +951,17 @@ levels:
 
             notes: |-
                 Ask the students for their opinion.
-        8:
+        9:
             header: Let's review!
             text: What did you learn today?
             notes: |-
                 Ask the students to list what they've learned today.
-        9:
+        10:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
             notes: |-
                 Let some students show their work to the class.
-        10:
+        11:
             header: Sneak peek into the next level...
             text: |-
                 In the next level you'll learn how to use maths in Hedy
@@ -1113,6 +1134,13 @@ levels:
             notes: |
                 Again let the students predict the output.
         5:
+            header: 'Use # for a neat code'
+            text: |-
+                Remember to keep your code neat and readable by using lines starting with # explaining what that part of the code does!
+            code: |-
+                # printing the advise
+                {print} 'Keep your code organized like this!'
+        6:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1129,17 +1157,17 @@ levels:
             debug: 'True'
             notes: |-
                 Debug this code with your students.
-        6:
+        7:
             header: Ready Set Go!
             text: Enjoy the adventures in level 8!
             notes: |-
                 Your students can now make all the workbook exercises and all the adventures of this level.
-        7:
+        8:
             header: Let's review!
             text: What did you learn today?
             notes: |-
                 Ask the students to list what they've learned today.
-        8:
+        9:
             header: Let's review!
             text: |-
                 Which adventure did you like best? Why?
@@ -1148,19 +1176,19 @@ levels:
 
             notes: |-
                 Ask the students for their opinion.
-        9:
+        10:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
             notes: |-
                 Let some students show their work to the class.
-        10:
+        11:
             header: Congratulations!
             text: |-
                 You have reached the end of Hedy Basic!
                 You now have a basic understanding of programming and have created your first programs!
 
                 If you want to keep on learning, you can go to level 9 for Hedy Advanced!
-        11:
+        12:
             header: Sneak peek into the next level...
             text: |-
                 Now that you've learned how to repeat one line of code, it's time to repeat multiple lines at once!
@@ -1438,6 +1466,13 @@ levels:
                     {print} "You've won a price!"
             debug: True
         10:
+            header: 'Use # for a neat code'
+            text: |-
+                Remember to keep your code neat and readable by using lines starting with # explaining what that part of the code does!
+            code: |-
+                # printing the advise
+                {print} 'Keep your code organized like this!'
+        11:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1457,17 +1492,17 @@ levels:
             debug: 'True'
             notes: |-
                 Debug this code with your students.
-        11:
+        12:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 10!
             notes: |-
                 Your students can now work on all the adventures in level 10.
-        12:
+        13:
             header: Let's review!
             text: What did you learn today?
             notes: |-
                 Ask the students to list what they've learned today.
-        13:
+        14:
             header: Let's review!
             text: |-
                 Which adventure did you like best? Why?
@@ -1476,12 +1511,12 @@ levels:
 
             notes: |-
                 Ask the students for their opinion.
-        14:
+        15:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
             notes: |-
                 Let some students show their work to the class.
-        15:
+        16:
             header: Sneak peek into the next level...
             text: |-
                 Next level we will learn to use the {for} keyword.
@@ -1614,6 +1649,16 @@ levels:
                 {print} 'Like a diamond in the sky'
                 {call} twinkle
         5:
+            header: 'Use # for a neat code'
+            text: |-
+                Remember to keep your code neat and readable by using lines starting with # explaining what that part of the code does!
+                This is especially useful when making functions!
+            code: |-
+                # This function gives you great advise
+                {define} advise
+                    {print} 'Keep your code organized like this!'
+                    {print} 'You will thank yourself later!'
+        6:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1631,17 +1676,17 @@ levels:
             debug: 'True'
             notes: |-
                 This debugging exercise is quite hard. We recommend you let the students work on the adventures first before letting them debug this code.
-        6:
+        7:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 12!
             notes: |-
                 Your students can now work on all the adventures in level 12.
-        7:
+        8:
             header: Let's review!
             text: What did you learn today?
             notes: |-
                 Ask the students to list what they've learned today.
-        8:
+        9:
             header: Let's review!
             text: |-
                 Which adventure did you like best? Why?
@@ -1650,12 +1695,12 @@ levels:
 
             notes: |-
                 Ask the students for their opinion.
-        9:
+        10:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
             notes: |-
                 Let some students show their work to the class.
-        10:
+        11:
             header: Congratulations!
             text: |-
                 You have reached the end of Hedy Advanced! You can continue learning in Hedy Expert (level 13-16), where you can learn how to write real Python code. Or feel free to stay in Hedy Advanced and come up with your own programs, of course!
@@ -1789,6 +1834,13 @@ levels:
                 Ask your students what the think the symbol '!=' means.
                 Then show, by running the code, that it stands for not equal to.
         12:
+            header: 'Use # for a neat code'
+            text: |-
+                Remember to keep your code neat and readable by using lines starting with # explaining what that part of the code does!
+            code: |-
+                # printing the advise
+                {print}('Keep your code organized like this!')
+        13:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1797,17 +1849,17 @@ levels:
             debug: 'True'
             notes: |-
                 Debug this code together.
-        13:
+        14:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 13!
             notes: |-
                 Your students can now work on all the adventures in level 13.
-        14:
+        15:
             header: Let's review!
             text: What did you learn today?
             notes: |-
                 Ask the students to list what they've learned today.
-        15:
+        16:
             header: Let's review!
             text: |-
                 Which adventure did you like best? Why?
@@ -1816,12 +1868,12 @@ levels:
 
             notes: |-
                 Ask the students for their opinion.
-        16:
+        17:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
             notes: |-
                 Let some students show their work to the class.
-        17:
+        18:
             header: Sneak peek into the next level...
             text: |-
                 In the next level you will learn how to use lists the real Python way.

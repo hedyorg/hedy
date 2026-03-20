@@ -950,6 +950,27 @@ levels:
                 With `{in}` you can let the computer check if an item is in a list. Show the example.
                 Please note that Hedy is case sensitive. This means that if you answer "Green" instead of "green", Hedy will print "meh".
         6:
+            header: Hou het netjes
+            text: |-
+               Nu je steeds meer codes leert, zullen je programma's steeds langer worden.
+               Dit kan voor een rommeltje zorgen. Gebruik regels met hashtags ervoro om je code structuur te geven.
+            code: |-
+                # Hoofdpersoon een naam geven
+                naam {is} {ask} 'Wat is de naam van je hoofdpersoon?'
+                {print} 'De hoofdpersoon heet ' naam
+
+                # Dobbelen
+                getallen = 1, 2, 3
+                gegooid = getallen {at} {random}
+
+                # Een huisdier aanwijzen
+                {if} gegooid {is} 1
+                    {print} naam ' krijgt een hond'
+                {elif} gegooid {is} 2
+                    {print} naam ' krijgt een kat'
+                {else}
+                     {print} naam 'krijgt een papegaai'
+        7:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -969,12 +990,12 @@ levels:
                 {else} 'Sorry, dat zijn er te veel.'
             debug: 'True'
             notes: Debug deze code met je leerlingen.
-        7:
+        8:
             header: Een korte terugblik...
             text: Wat heb je vandaag geleerd?
             notes: |-
                 Vraag de leerlingen om op te noemen wat ze vandaag hebben geleerd.
-        8:
+        9:
             header: Een korte terugblik...
             text: |-
                 Welk avontuur vond je het leukst? Waarom?
@@ -983,13 +1004,13 @@ levels:
 
             notes: |-
                 Vraag de leerlingen naar hun mening
-        9:
+        10:
             header: Laat zien en vertel!
             text: Is er iemand die zijn programma aan de klas wil laten zien?
             notes: |-
                 Laat een aantal leerlingen hun werk aan de klas laten zien.
                 Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de leerlingen te klikken.
-        10:
+        11:
             header: Tipje van de sluier voor het volgende level...
             text: In het volgende level leer je hoe in Hedy kunt rekenen.
     7:
@@ -1009,7 +1030,6 @@ levels:
             code: '{print} ''5 plus 5 is '' 5 + 5'
             notes: |-
                 Laat de voorbeeldcode kort aan je leerlingen zien.
-
         3:
             header: Aftrekken
             text: Wil je twee getallen van elkaar aftrekken, gebruik dan het minteken.
@@ -1163,6 +1183,13 @@ levels:
             notes: |-
                 Laat je leerlingen opnieuw de uivoer voorspellen.
         5:
+            header: 'Gebruik # om het netjes te houden'
+            text: |-
+                Vergeet niet om je code netjes en leesbaar te houden door regels met een # toe te voegen die je vertellen wat een bepaald stukje code doet.
+            code: |-
+                # advies printen
+                {print} 'Zo blijft je code netjes!!'
+        6:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             code: |-
@@ -1179,17 +1206,17 @@ levels:
             debug: 'True'
             notes: |-
                 Debug deze code samen met je leerlingen.
-        6:
+        7:
             header: Klaar voor de start, af!
             text: Veel plezier met de avonturen in level 8!
             notes: |-
                 Je leerlingen kunnen nu alle werboekopdrachten en alle avonturen van dit level maken.
-        7:
+        8:
             header: Een korte terugblik...
             text: Wat heb je vandaag geleerd?
             notes: |-
                 Vraag de leerlingen om op te noemen wat ze vandaag hebben geleerd.
-        8:
+        9:
             header: Een korte terugblik...
             text: |-
                 Welk avontuur vond je het leukst? Waarom?
@@ -1198,20 +1225,20 @@ levels:
 
             notes: |-
                 Vraag de leerlingen naar hun mening
-        9:
+        10:
             header: Laat zien en vertel!
             text: Is er iemand die zijn programma aan de klas wil laten zien?
             notes: |-
                 Laat een aantal leerlingen hun werk aan de klas laten zien.
                 Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de leerlingen te klikken.
-        10:
+        11:
             header: Gefeliciteerd!
             text: |-
                 Je hebt het einde bereikt van Hedy Basic!
                 Je hebt de basis van het programmeren in de vingers en hebt je eerts programma's gemaakt! Gaaf!
 
                 Wil je nog meer leren programmeren, ga dan door naar level 9 voor Hedy Advanced!
-        11:
+        12:
             header: Tipje van de sluier voor het volgende level...
             text: In het volgende level leer je hoe een regel code meerdere keren kunt herhalen.
     9:
@@ -1496,6 +1523,13 @@ levels:
                     {print} 'Je wint een prijs!'
             debug: True
         10:
+            header: 'Gebruik # om het netjes te houden'
+            text: |-
+                Vergeet niet om je code netjes en leesbaar te houden door regels met een # toe te voegen die je vertellen wat een bepaald stukje code doet.
+            code: |-
+                # advies printen
+                {print} 'Zo blijft je code netjes!!'
+        11:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             code: |-
@@ -1514,17 +1548,17 @@ levels:
                 {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
             debug: 'True'
             notes: Debug deze code samen met je leerlingen.
-        11:
+        12:
             header: Klaar voor de start, af!
             text: Veel plezier met de avonturen in level 10!
             notes: |-
                 Je leerlingen kunnen nu alle avonturen van dit level maken.
-        12:
+        13:
             header: Een korte terugblik...
             text: Wat heb je vandaag geleerd?
             notes: |-
                 Vraag de leerlingen om op te noemen wat ze vandaag hebben geleerd.
-        13:
+        14:
             header: Een korte terugblik...
             text: |-
                 Welk avontuur vond je het leukst? Waarom?
@@ -1533,13 +1567,13 @@ levels:
 
             notes: |-
                 Vraag de leerlingen naar hun mening
-        14:
+        15:
             header: Laat zien en vertel!
             text: Is er iemand die zijn programma aan de klas wil laten zien?
             notes: |-
                 Laat een aantal leerlingen hun werk aan de klas laten zien.
                 Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de leerlingen te klikken.
-        15:
+        16:
             header: Tipje van de sluier voor het volgende level...
             text: |-
                 In het volgende level leren we het {for} commando te gebruiken.
