@@ -1,13 +1,18 @@
 import unittest
+from .lock import Lock
 
 from website import log_queue, querylog
+
+lock = Lock()
 
 
 class TestQueryLog(unittest.TestCase):
     def setUp(self):
         self.records = []
         querylog.LOG_QUEUE.set_transmitter(self._fake_transmitter)
+        querylog.LOG_QUEUE.clear()
 
+    @lock.synchronized
     def _fake_transmitter(self, ts, records):
         self.records.extend(records)
 
@@ -22,8 +27,6 @@ class TestQueryLog(unittest.TestCase):
         self.assertEqual(self.records[0]['bloem'], 'rood')
 
     def test_emergency_recovery(self):
-        querylog.LOG_QUEUE.clear()
-
         querylog.begin_global_log_record(banaan='geel')
         querylog.log_value(bloem='rood')
 
