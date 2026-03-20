@@ -17,7 +17,7 @@ import jinja_partials
 from typing import Optional
 from logging.config import dictConfig as logConfig
 from os import path
-from iso639 import languages
+from iso639 import ALL_LANGUAGES as languages
 
 import static_babel_content
 from markupsafe import Markup
@@ -442,7 +442,7 @@ def before_request_proxy_testing():
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
-if os.getenv('REDIRECT_HTTP_TO_HTTPS'):
+if os.getenv('REDIRECT_HTTP_TO_HTTPS') in ['true', '1']:
     @app.before_app_request
     def before_request_https():
         if request.url.startswith('http://'):

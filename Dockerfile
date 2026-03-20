@@ -54,4 +54,4 @@ RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev
 COPY --from=builder --exclude=node_modules /app /app
 
 EXPOSE 8000
-ENTRYPOINT ["gunicorn", "app:create_app()"]
+ENTRYPOINT ["gunicorn", "app:create_app()", "--bind", "0.0.0.0:8000"]

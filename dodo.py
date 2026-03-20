@@ -423,6 +423,28 @@ def task_precommit():
     )
 
 
+def task_build_container():
+    """Build a Docker container for the app."""
+    return dict(
+        title=lambda _: 'Build Docker container',
+        actions=[
+            'docker build -t hedy:latest .',
+        ],
+        verbosity=2,  # show everything live
+    )
+
+def task_run_container():
+    """Run a Docker container for the app."""
+    return dict(
+        title=lambda _: 'Build Docker container',
+        task_dep=['build_container'],
+        actions=[
+            'docker run --rm --env-file .env-alpha -p 127.0.0.1:8000:8000 hedy --name=hedy --access-logfile - --log-file -',
+        ],
+        verbosity=2,  # show everything live
+    )
+
+
 def task__offline():
     """Build the offline Hedy distribution."""
 
