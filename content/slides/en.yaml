@@ -1573,17 +1573,37 @@ levels:
             text: |-
                 By the end of this lesson, you can:
                 * use functions
-        4:
+            notes: |-
+                In this level the students will get to know functions. This can be a hard concept to grasp for the kids.
+                The more the students practice with the adventures, the better their understanding will be.
+                So please make sure the students don't spend too much time trying to understand, and more time doing it themselves as they will understand it by doing it!
+        2:
             header: Functions!
             text: |-
-                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times. Using functions helps us organize pieces of code that we can use again and again. To create a function, use `{define}` and give the function a name. Then put all the lines you want in the function in a indented block under the `{define}` line. Leave one empty line in your code to make it look nice and neat. Great job! You have created a function!
+                In this level you'll learn how to use functions. A function is a block of code you can easily use multiple times.
 
-                Now, whenever we need that block of code, we just use `{call}` with the function's name to call it up! We don't have to type that block of code again.
-        5:
+                Exercise:
+                * Write down the lyrics to 'twinkle twinkle little star'
+                * Mark the returning lyrics
+            notes: |-
+                To show the students what a function could be used for, we use twinkle twinkle little star.
+                The lyrics that are repeated are: 'Twinkle', 'Twinkle', 'Little star', 'How I wonder what you are?'
+        3:
             header: Twinkle Twinkle little star!
             text: |-
                 In this program you see an example of a function.
                 Let's see what happens if you fill in the rest of the song!
+            code: |-
+                {define} twinkle
+                     {print} 'Twinkle'
+                     {print} '...'
+            notes: |-
+                Add the returning lyrics to the function: 'Twinkle', 'Little star', 'How I wonder what you are?'.
+                Tell the students that this part is the function and show them that you have called the function twinkle.
+                In the next slide we will call the function twice to finish the song.
+        4:
+            header: Functions
+            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
             code: |-
                 {define} twinkle
                      {print} 'Twinkle'
@@ -1593,10 +1613,7 @@ levels:
                 {print} 'Up above the world so high'
                 {print} 'Like a diamond in the sky'
                 {call} twinkle
-        6:
-            header: Functions
-            text: As you could see in the example a function is a block of code that can be called anytime. You use `{define}` to set the function and `{call}` to use it.
-        7:
+        5:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1612,17 +1629,19 @@ levels:
                     {else}
                         password = {ask} 'Please enter password'
             debug: 'True'
-        8:
+            notes: |-
+                This debugging exercise is quite hard. We recommend you let the students work on the adventures first before letting them debug this code.
+        6:
             header: Let's check out the adventures!
-            text: Enjoy the adventures in level 11!
+            text: Enjoy the adventures in level 12!
             notes: |-
                 Your students can now work on all the adventures in level 12.
-        9:
+        7:
             header: Let's review!
             text: What did you learn today?
             notes: |-
                 Ask the students to list what they've learned today.
-        10:
+        8:
             header: Let's review!
             text: |-
                 Which adventure did you like best? Why?
@@ -1631,15 +1650,15 @@ levels:
 
             notes: |-
                 Ask the students for their opinion.
-        11:
+        9:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
             notes: |-
                 Let some students show their work to the class.
-        12:
-            header: Sneak peek into the next level...
+        10:
+            header: Congratulations!
             text: |-
-                Congratulations! You have reached the end of Hedy Advanced! You can continue learning in Hedy Expert (level 13-16), where you can learn how to write real Python code. Or feel free to stay in Hedy Advanced and come up with your own programs, of course!
+                You have reached the end of Hedy Advanced! You can continue learning in Hedy Expert (level 13-16), where you can learn how to write real Python code. Or feel free to stay in Hedy Advanced and come up with your own programs, of course!
 
                 Next level we will make some changes in the language so you can use it in all places where Python is used.
     13:
