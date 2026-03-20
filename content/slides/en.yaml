@@ -1827,30 +1827,18 @@ levels:
                 In the next level you will learn how to use lists the real Python way.
 
     14:
-        41:
-            header: '{for} in real Python'
-            text: |-
-                From now on, whenever you use the {for} keyword you will have to put a colon a the end of the line:
-            code: |-
-                animals = dog, cat, blobfish
-                {for} animal in animals:
-                    {print} ('I love ' animal)
-            notes: |-
-                Make the students aware that this not only happens with the {for} keyword but with every line that is followed by a line with indentation.
-                You will see this in next slides.
-
-
         1:
             header: Welcome to level 14
             text: |-
                 By the end of this lesson, you can:
                 * use lists the real Python way.
+                * use {for} the real Python way.
         2:
             header: Make a list in Python
             text: |-
                 If you want to make a list you now need square brackets.
             code: |-
-                prices = [4, 8, 9]
+                numbers = [4, 8, 9]
         3:
             header: Lists with words
             text: |-
@@ -1867,26 +1855,30 @@ levels:
                 {print} (winners[1], 'won the first prize.')
                 {print} (winners[2], 'won the second prize.')
                 {print} (winners[3], 'won the third prize.')
-
-                {for} i {in} {range} (1,3):
-                    {print} (winners[i], 'won prize', i)
             notes: |-
                 Ask your students first what they think the output of the first part of the code is going to be.
-                Then, run the code to see if they are correct. Ask them what the difference will be with the output of the second part of the code.
-                Show that the second part of the code is a shorter way with nearly the same result.
+                Then, run the code to see if they are correct.
         5:
-            header: Random element from list
+            header: Random element from a list
             text: As earlier, we also want to get a random element from list.
             code: |-
                 candidates = ['Amber', 'Bryan', 'Clara']
                 winner = candidates[random]
                 {print} ('Congratulations,', winner, 'you earned a prize.')
-
             notes: |-
                 Run the code multiple times to show that it really gives a random name.
-
-
         6:
+            header: '{for} in real Python'
+            text: |-
+                From now on, whenever you use the {for} keyword you will have to put a colon a the end of the line:
+            code: |-
+                animals = dog, cat, blobfish
+                {for} animal in animals:
+                    {print} ('I love ' animal)
+            notes: |-
+                Make the students aware that this not only happens with the {for} keyword but with every line that is followed by a line with indentation.
+                You will see this in next slides.
+        7:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1896,30 +1888,57 @@ levels:
 
                 total = 0
 
-                for i range (1,3)
+                {for} i {range} (1,3):
                     number = ('How many ', items[i], ' would you like to buy?')
                     total = total + prices*number
 
-                if total < 50:
+                {if} total < 50:
                 total = + 10
                 {print} (You have to pay 10 extra for shipment.)
 
                 presents = [earrings, sunglasses, earplugs ]
-                else
+                {else}
                     {print} 'You get free shipping and a little present.'
-                    present = present random
+                    present = present {random}
                     {print} 'Your present is a pair of', present
 
                 {print} (Thanks for shopping at Hedyclothes. Please pay, total,)
             debug: 'True'
             notes: Debug this code together.
+        8:
+            header: Let's check out the adventures!
+            text: Enjoy the adventures in level 14!
+            notes: |-
+                Your students can now work on all the adventures in level 14.
+        9:
+            header: Let's review!
+            text: What did you learn today?
+            notes: |-
+                Ask the students to list what they've learned today.
+        10:
+            header: Let's review!
+            text: |-
+                Which adventure did you like best? Why?
+
+                Which adventure did you like least? Why?
+
+            notes: |-
+                Ask the students for their opinion.
+        11:
+            header: Show and tell!
+            text: Would anyone like to show the class a program they've made?
+            notes: |-
+                Let some students show their work to the class.
+        12:
+            header: Sneak peek into the next level...
+            text: |-
+                In the next level you will learn how to use functions the real Python way.
     15:
         1:
             header: Welcome to level 15!
             text: |-
                 By the end of this lesson, you can:
                 * Make your code shorter and more efficient by using functions.
-
         2:
             header: Too much code?
             text: The code below has a lot of repetition.
@@ -2047,8 +2066,9 @@ levels:
         1:
             header: Welcome to level 16!
             text: |-
-                By the end of this lesson, you can:
-                * make a {while} loop.
+                By the end of this lesson:
+                * you can make a {while} loop.
+                * you have finished all of Hedy!
         2:
             header: A new loop
             text: |-
