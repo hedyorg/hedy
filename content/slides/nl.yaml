@@ -2,7 +2,10 @@ levels:
     0:
         1:
             header: Welkom bij Hedy!
-            text: Hedy is een programmeertaal.
+            text: |-
+                Welkom bij de programmeertaal Hedy!
+
+                Leerkrachten, druk op de s op je toetsenbord om de aantekeningen bij de slides te lezen.
             notes: |-
                 Vraag je leerlingen om op te schrijven wat er in ze opkomt bij 'programmeren'. Maak een kort rondje om hun antwoorden te horen.
         2:
@@ -294,6 +297,38 @@ levels:
                 Om het concept beter te begrijpen kan het helpen om je leerlingen allerlei voorbeelden te geven.
 
         2:
+            header: Probleem
+            text: |-
+                In het vorige level liep je misschien wel tegen dit probleem aan...
+            code: |-
+                {print} Welkom bij ons restaurant!
+                {ask} Wat wil je eten?
+                {echo} Je wil dit graag eten ...
+                {ask} Wat wil je drinken?
+                {echo} Je wil dit graag drinken ...
+                {print} Bedankt voor je bestelling!
+                {echo} Geniet van je ...
+            notes: |-
+                Laat de leerlingen het programma bekijken en de uitvoer voorspellen.
+                Hopelijk komen ze tot de conclusie dat in de laatste zin alleen wordt gezegd 'Geniet van je (drinken dat ze hebben gekozen)' en dat de computer het eten is vergeten.
+                Met 'echo' kan je maar één item opslaan in het computergeheugen, maar het zou toch veel fijner zijn als dat er meer zouden zijn?! Daarom leren we in dit level werken met variabelen.
+        3:
+            header: Wat is een variabele?
+            text: |-
+                Een variabele is een woord waarin de computer een stukje informatie kan opslaan, zoals jouw antwoorden.
+                Dit klinkt lastig, maar kijk maar eens naar het voorbeeld.
+            code: |-
+                eten {is} hamburger
+                drinken {is} water
+                {print} Je wil graag een eten en drinken bestellen.
+            notes: |-
+                We gebruiken het woord variabele bij het programmeren om een plek te omschrijven in een computergeheugen waarin informatie wordt opgeslagen, die steeds kan veranderen.
+                De variabele is een soort doos, waarin je de antwoorden stopt. De doos blijft hetzelfde, maar de inhoud kan steeds veranderen.
+
+                Laat aan je leerlingen zien hoe variabelen werken. Laat zien dat de namen van de variabelen in de laatste regel vervangen worden door de waarde van de desbetreffende variabele.
+                Laat ook zien dat je variabelen dus in het midden van een zin kunt gebruiken, in plaats van alleen aan het einde van de zin zoals bij echo.
+
+        4:
             header: Variabelen
             text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando. De naam van de variabele komt voor '{is}' en de waarde van de variabele komt erachter.
             code: |-
@@ -301,10 +336,9 @@ levels:
                 leeftijd {is} 15
                 {print} naam is leeftijd jaar
             notes: |-
-                Laat aan je leerlingen zien hoe variabelen werken. Laat zien dat de namen van de variabelen in de laatste regel vervangen worden door de waarde van de desbetreffende variabele.
                 De leerlingen kunnen nu het Steen, papier, schaar avontuur maken. Maak ook werkboek opdracht 1.
                 The leerlings can now make the Rock, paper, scissors adventure. Make workbook exercise 1.
-        3:
+        5:
             header: Interactief
             text: |-
                 We kunnen ook een variabele instellen door vragen te stellen.
@@ -317,7 +351,7 @@ levels:
                 Nu kunnen onze programma's echt interactief worden. De gebruker kan input geven die vervolgens in het programma gebruikt wordt.
                 Vraag de leerlingen om hun eigen voorbeelden te verzinnen. Maak opdracht 2 en 3 uit het werkboek.
                 Ask the leerlings to come up with their own examples. Make workbook exercise 2 and 3.
-        4:
+        6:
             header: Meerdere variabelen
             text: Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in plaats van maar één `{echo}` commando.
             code: |-
@@ -330,7 +364,7 @@ levels:
                 De leerlingen kunnen nu Steen, papier schaar deel 2 maken en het spookhuis
                 Maak opdracht 4-6 van het werkboek.
 
-        5:
+        7:
             header: Het '{sleep}' commando
             text: Je kunt het `{sleep}` commando gebruiken om de code een tijdje op pauze te zetten.
             code: |-
@@ -340,7 +374,7 @@ levels:
             notes: |-
                 Laat aan leerlingen het '{sleep}' commando zien. Vraag hen wat ze denken dat het is.
                 Verander het nummer 2 in een ander getal om te laten zien dat ze zelf kunnen kiezen hoeveel secondes het programma op pauze wordt gezet.
-        6:
+        8:
             header: '{sleep} 5'
             text: |-
                 Je kunt een getal achter het {sleep} commando typen als je een langere stilte wilt.
@@ -355,7 +389,7 @@ levels:
                 Laat de code zien. Als je wil kan je de 10 zelfs veranderen in een '{ask}' commando.
                 De leerlingen kunnen nu aan het Papegaai, Verhaal, Muziek en Restaurant avontuur werken.
 
-        7:
+        9:
             header: Tekenen met variabelen
             text: |-
                 In level 1 heb je geleerd hoe je het commando {forward} 100 kunt gebruiken.
@@ -366,7 +400,7 @@ levels:
             notes: |-
                 Laat de leerlingen zien dat ze nu ook variabelen kunnen gebruiken voor de tekenende schildpad.
                 Voer de code een aantal keer uit met verschillende antwoorden om het nut van variabelen te laten zien.
-        8:
+        10:
             header: Tekenen met graden
             text: |-
                 Eerder kon je het commando {turn} {left} of {turn} {right} gebruiken om te draaien, maar nu kan je graden gebruiken.
@@ -376,7 +410,7 @@ levels:
                 {forward} 100
             notes: |-
                 Laat de leerlingen deze code zien. In de volgende slide laten we verschillende hoeken zien.
-        9:
+        11:
             header: Graden
             text: |-
                 Een hele cirkel is 360 graden.
@@ -393,7 +427,7 @@ levels:
                 Als de leerlingen nog nooit van graden hebben gehoord, kan het handig zijn om ze een gradenwiel te laten zien.
                 Je kunt er zelfs een voor ze uitprinten.
                 Gebruik de voorbeeldcode op de slide om de leerlingen verschillende hoeken te laten zien.
-        10:
+        12:
             header: Graden en variabelen
             text: |-
                 Graden kunnen ook variabelen zijn!
@@ -403,7 +437,7 @@ levels:
                 {forward} 100
             notes: |-
                 Laat de leerlingen zien dat je van het aantal graden ook een veriabele kunt maken.
-        11:
+        13:
             header: Tekenen met kleur
             text: |-
                 Je kunt nu het commando `{color}` gebruiken om bij het tekenen een kleur in te stellen.
@@ -413,7 +447,7 @@ levels:
             notes: |-
                 Laat de leerlingen zien dat ze verschillende kleuren kunnen gebruiken.
                 Ze kunnen de witte kleur gebruiken om onzichtbare lijnen te maken (aangezien de achtergrond ook wit is).
-        12:
+        14:
             header: Foutzoeken
             text: Foutenzoeken van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen.
                 Klik op het lieveheersbeestje om de foutzoeker te starten.
@@ -430,12 +464,12 @@ levels:
             notes: |-
                 Voorbeeld voor hoe je de foutzoeker kan gebruiken.
                 De leerlingen kunnen nu alle avonturen van dit level afmaken.
-        13:
+        15:
             header: Een korte terugblik...
             text: Wat heb je vandaag geleerd?
             notes: |-
                 Vraag de leerlingen om op te noemen wat ze vandaag hebben geleerd.
-        14:
+        16:
             header: Een korte terugblik...
             text: |-
                 Welk avontuur vond je het leukst? Waarom?
@@ -444,13 +478,13 @@ levels:
 
             notes: |-
                 Vraag de leerlingen naar hun mening
-        15:
+        17:
             header: Laat zien en vertel!
             text: Is er iemand die zijn programma aan de klas wil laten zien?
             notes: |-
                 Laat een aantal leerlingen hun werk aan de klas laten zien.
                 Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de leerlingen te klikken.
-        16:
+        18:
             header: Tipje van de sluier voor het volgende level
             text: |-
                 In het volgende level ga je leren hoe je een lijst moet maken. Ook laat je de computer een random item uit die lijst kiezen.
