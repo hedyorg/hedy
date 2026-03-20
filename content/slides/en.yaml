@@ -1668,19 +1668,17 @@ levels:
                 Welcome to  Hedy Expert (level 13-16)!
 
                 By the end of this lesson, you can:
-                * write code that is all real Python code
+                * write code that is (almost) real Python code
         2:
             header: Real Python code
             text: |-
                 The code we have used until now, was simplified.
                 But from now we will use real Python code, that you could use elsewhere.
-
             notes: |-
                 Explain to your students that Python is a widely used programming language.
                 Up until now we used different simplified versions of this language.
                 But now we have reached the point where all the language that you use in Hedy is real Python code and thus can be used elsewhere.
                 Also tell that there are quite some changes, but they are relatively minor changes.
-
         3:
             header: '{print} in Python'
             text: For {print} you will have you to use parentheses from now on
@@ -1691,7 +1689,6 @@ levels:
             notes: |-
                 Ask your students to recall how a print keyword was written before.
                 Than show the new code and make sure they all see where the parentheses are.
-
         4:
             header: '{for} in real Python'
             text: |-
@@ -1736,14 +1733,12 @@ levels:
         8:
             header: Smaller and greater
             text: From now on we will use symbols for smaller than and greater than
-
             code: |-
                 number = {input} ('pick a number below 10')
                 {if} number < 10:
                     {print}('Nice, you picked a number!')
                 {if} number > 10:
                     {print}('That is not a number below 10.')
-
             notes: |-
                 Show the code to your students. Ask them to predict what happens for which numbers.
                 Run the code with different numbers.
@@ -1761,7 +1756,6 @@ levels:
                     print('Nice, you picked a number!')
                 {if} number >= 10:
                     print('That is not a number below 10.')
-
             notes: |-
                Now, you can do the same. Run the code with different numbers, but also run it with 10.
                Make sure your students understand where the difference comes from.
@@ -1778,16 +1772,13 @@ levels:
                     print('Nice, you picked a number!')
                 {if} number >= 10:
                     print('That is not a number below 10.')
-
             notes: |-
                Now, you can do the same. Run the code with different numbers, but also run it with 10.
                Make sure your students understand where the difference comes from.
                Show them that you can do the same for smaller than or equal to by changing '>='into '>' and '<=' into '<'.
-
         11:
             header: Is or is not
             text: From now, you should also use symbols for equal and not equal to.
-
             code: |-
                 answer = {input} ('How much is 5+5?')
                 {if} answer = 10:
@@ -1802,21 +1793,7 @@ levels:
             header: Debugging
             text: Let's debug this code!
             code: |-
-                {print} ('Let's play hide and seek')
-                people = input How many people are playing?
 
-                {for} i in range 1,10
-                {print} i
-
-                {print} 'Ready or not, here I come'
-
-                for i in range (1, people):
-                name = {input} (What is your name?)
-                hidden = {input} (name, Are you hidden?)
-                if hidden == no
-                    {print} (name, ' I see you!')
-                else:
-                    {print} ('Come closer', name, 'I cannot find you.')
 
             debug: 'True'
             notes: |-
@@ -1856,7 +1833,6 @@ levels:
             text: |-
                 By the end of this lesson, you can:
                 * use lists the real Python way.
-
         2:
             header: Make a list in Python
             text: |-
@@ -1867,11 +1843,8 @@ levels:
             header: Lists with words
             text: |-
                 If the list is with words instead of numbers, you will also have to use quotation marks.
-
             code: |-
                 favorite_animals = ['dogs', 'sheep', 'parrots', 'kangaroos']
-
-
         4:
             header: Get an element from the list.
             text: |-
