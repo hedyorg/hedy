@@ -665,7 +665,6 @@ levels:
             header: Aanhalingstekens en vraag
             text: Dit geldt ook voor het `{ask}` commando.
             code: naam {is} {ask} 'Wat is je naam?'
-
         6:
             header: Aanhalingstekens en variabelen
             text: |-
@@ -692,8 +691,7 @@ levels:
                 Kijk maar eens wat er gebeurt als je een hoge komma gebruikt voor auto's  of voor 's middags. Deze maken Hedy in de war....
             code: |-
                 {print} 'De oma's rijden in de auto's.'
-        debug: 'True'
-
+            debug: 'True'
         9:
             header: De oplossing
             text: |-
@@ -1138,8 +1136,10 @@ levels:
             text: Je kunt `{repeat}` ook gebruiken met `{ask}`, `{if}` of `{else}` commando.
             code: |-
                 {repeat} 2 {times} antwoord = {ask} 'Wist je dat je een vraag meerdere keren kunt stellen?'
-                {if} antwoord {is} ja {repeat} 2 {times} {print} 'Je wist het al!'
-                {else} {repeat} 3 {times} {print} 'Je hebt wat nieuws geleerd!'
+                {if} antwoord {is} ja
+                {repeat} 2 {times} {print} 'Je wist het al!'
+                {else}
+                {repeat} 3 {times} {print} 'Je hebt wat nieuws geleerd!'
             notes: |-
                 Laat je studenten opnieuw de uivoer voorspellen.
         5:
@@ -1185,19 +1185,30 @@ levels:
                 Laat een aantal studenten hun werk aan de klas laten zien.
                 Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken.
         10:
+            header: Gefeliciteerd!
+            text: |-
+                Je hebt het einde bereikt van Hedy Basic!
+                Je hebt de basis van het programmeren in de vingers en hebt je eerts programma's gemaakt! Gaaf!
+
+                Wil je nog meer leren programmeren, ga dan door naar level 9 voor Hedy Advanced!
+        11:
             header: Tipje van de sluier voor het volgende level...
             text: In het volgende level leer je hoe een regel code meerdere keren kunt herhalen.
     9:
         1:
             header: Welkom bij level 9
             text: |-
+                Welkom bij Hedy Advanced!
+
+                In de vorige levels heb je de basis van het programmeren in de vingers gekregen. Vanaf dit level gaan we stapje verder een leer je ingewikkeldere programma's maken en lastigere codes te gebruiken.
+
                 Aan het eind van deze les kan je:
                 * verschillende regels code herhalen
                 * inspringen gebruiken bij de commando's: herhaal, als en anders.
         2:
             header: 'Het {repeat} commando in level 8'
             text: |-
-                Het `{repeat}` commando
+                `{repeat}` zag er eerst zo uit
             code: '{repeat} 5 {times} {print} ''Help!'''
             debug: 'True'
             notes: |-
@@ -1234,10 +1245,12 @@ levels:
         5:
             header: '{if} en {else} hiervoor'
             text: |-
-                Hoe zullen het {if} en {else} commando eruit zien met inspringing?
+                Hoe zullen het {if} en {else} commando eruit zien met inspringen?
             code: |-
-                {if} naam {is} Hedy {print} 'leuk'
-                {else} {print} 'minder leuk!'
+                {if} naam {is} Hedy
+                {print} 'leuk'
+                {else}
+                {print} 'minder leuk!'
             debug: 'True'
             notes: |-
                 Dit is hoe {if} en {else} er altijd uit hebben gezien. Hoe zullen ze eruit gaan zien nu we inspringing kunnen gebruiken?
@@ -1330,7 +1343,8 @@ levels:
             text: |-
                 Aan het eind van dit level kan je:
                 * {if} en {repeat} commandos 'nesten'
-                * inpsringing op de juiste manier gebruiken bij {repeat} {if} and {else}
+                * inpsringen op de juiste manier gebruiken bij {repeat} {if} en {else}
+                * {and} en {or} correct gebruiken
             notes:
                 Het gebruik van een {if} commando in een ander {if} commando wordt nesten genoemd.
         2:
@@ -1386,6 +1400,82 @@ levels:
                 Speel wat met de inspringing en laat zien wat er gebeurd als je de inspringing van het tweede {if} commando verwijdert, bijvoorbeeld.
 
         6:
+            header: Rommelige code
+            text: |-
+                Nesten is heel handig, maar kan ook leiden tot rommelige code.
+            code: |-
+                {print} 'Ik ga raden wie jij bent!'
+                haarkleur = {ask} 'Wat is je haarkleur?'
+                bril = {ask} 'Draag je een bril?'
+                {if} haarkleur {is} zwart
+                    {if} bril {is} ja
+                        {print} 'Jij bent Jade!'
+                    {else}
+                        {print} 'Jij bent Ahmed!'
+                {elif} haarkleur {is} blond
+                    {if} bril {is} ja
+                        {print} 'Jij bent Patrick!'
+                    {else}
+                        {print} 'Jij bent Miranda!'
+                {else}
+                    {print} 'Jij bent Jackie!'
+            notes: |-
+                Vraag aan de leerlingen wie er blond haar heeft en geen bril. Je zult merken dat de leerlingen echt even goed moeten kijken voordat ze het zien.
+                Laat ze dan de code op de volgende slide zien. Die code is veel beter leesbaar door het gebruik van {and}.
+        7:
+            header: '{and} keyword'
+            text: |-
+                Het `{and}` keyword komt hier goed van pas.
+
+                Op deze manier is de code veel beter leesbaar en hoef je niet zo druk bezig te zijn met correct inspringen.
+            code: |-
+                {print} 'Ik ga raden wie jij bent!'
+                haarkleur = {ask} 'Wat is je haarkleur?'
+                bril = {ask} 'Draag je een bril?'
+                {if} haarkleur {is} zwart {and} bril {is} ja
+                    {print} 'Jij bent Jade!'
+                {elif} haarkleur {is} zwart {and} bril {is} nee
+                    {print} 'Jij bent Ahmed!'
+                {elif} haarkleur {is} blond {and} bril {is} ja
+                    {print} 'Jij bent Patrick!'
+                {elif} haarkleur {is} blond {and} bril {is} nee
+                    {print} 'Jij bent Miranda!'
+                {else}
+                    {print} 'Jij bent Jackie!'
+            notes: |-
+                Als je nu zou vragen wie er blond haar heeft en geen bril dan kun je veel sneller het antwoord vinden.
+                Leesbare code schrijven is een belangrijke vaardigheid om aan te leren en het {and} keyword voelt waarschijnlijk natuurlijk aan voor de leerlingen.
+        8:
+            header: '{or}'
+            text: |-
+                Net als de `{and}` bestaat er ook een `{or}`.
+            code: |-
+                {print} 'Kies een getal van 1 tot 6'
+                {print} 'Bij twee van deze getallen kun je een prijs winnen'
+
+                getallenlijst = 1, 2, 3, 4, 5, 6
+                prijs_getal = getallenlijst {at} {random}
+                {remove} prijs_getal {from} getallenlijst
+                tweede_prijs_getal = getallenlijst {at} {random}
+
+                gekozen_getal = {ask} 'Welk getal kies jij?'
+                {if} gekozen_getal {is} prijsgetal {or} gekozen_getal {is} tweede_prijs_getal
+                    {print} 'Hoera! Je wint een prijs!'
+                {else}
+                    {print} 'Sorry, geen prijs voor jou...'
+            notes: |-
+                Laat de leerlingen deze code zien. Waarschijnlijk voelt deze code natuurlijk aan.
+        9:
+            header: 'Let op!'
+            text: |-
+                Let op dat je wel twee volledige conditionals maakt bij het {or} keyword.
+                Debug deze code.
+            code: |-
+                kleur = {ask} 'Welke kleur heeft jouw kaartje?'
+                {if} kleur {is} blauw {or} rood
+                    {print} 'Je wint een prijs!'
+            debug: True              
+        10:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             code: |-
@@ -1404,17 +1494,17 @@ levels:
                 {print} 'Bedankt voor het invullen allemaal! Veel plezier vandaag!'
             debug: 'True'
             notes: Debug deze code samen met je studenten.
-        7:
+        11:
             header: Klaar voor de start, af!
             text: Veel plezier met de avonturen in level 10!
             notes: |-
                 Je studenten kunnen nu alle avonturen van dit level maken.
-        8:
+        12:
             header: Een korte terugblik...
             text: Wat heb je vandaag geleerd?
             notes: |-
                 Vraag de studenten om op te noemen wat ze vandaag hebben geleerd.
-        9:
+        13:
             header: Een korte terugblik...
             text: |-
                 Welk avontuur vond je het leukst? Waarom?
@@ -1423,13 +1513,13 @@ levels:
 
             notes: |-
                 Vraag de studenten naar hun mening
-        10:
+        14:
             header: Laat zien en vertel!
             text: Is er iemand die zijn programma aan de klas wil laten zien?
             notes: |-
                 Laat een aantal studenten hun werk aan de klas laten zien.
                 Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de studenten te klikken.
-        11:
+        15:
             header: Tipje van de sluier voor het volgende level...
             text: |-
                 In het volgende level leren we het {for} commando te gebruiken.

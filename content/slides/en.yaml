@@ -1070,8 +1070,10 @@ levels:
             text: You can also repeat an `{ask}`, `{if}` or `{else}` keyword multiple times.
             code: |-
                 {repeat} 2 {times} answer = {ask} 'Did you know you could ask a question multiple times?'
-                {if} answer {is} yes {repeat} 2 {times} {print} 'You knew that already!'
-                {else} {repeat} 3 {times} {print} 'You have learned something new!'
+                {if} answer {is} yes
+                {repeat} 2 {times} {print} 'You knew that already!'
+                {else}
+                {repeat} 3 {times} {print} 'You have learned something new!'
             notes: |
                 Again let the students predict the output.
         5:
@@ -1116,6 +1118,13 @@ levels:
             notes: |-
                 Let some students show their work to the class.
         10:
+            header: Congratulations!
+            text: |-
+                You have reached the end of Hedy Basic!
+                You now have a basic understanding of programming and have created your first programs!
+
+                If you want to keep on learning, you can go to level 9 for Hedy Advanced!
+        11:
             header: Sneak peek into the next level...
             text: |-
                 Now that you've learned how to repeat one line of code, it's time to repeat multiple lines at once!
@@ -1123,13 +1132,17 @@ levels:
         1:
             header: Welcome to level 9
             text: |-
+                Welcome to Hedy Advanced!
+
+                In the previous levels you have learned the basics of computing! Now it's time to move on to write more intricate programs and learn some harder keywords.
+
                 By the end of this lesson, you can:
                 * repeat multiple lines of code
                 * use indentation properly with {repeat} {if} and {else}
         2:
             header: '{repeat} keywords in level 8'
             text: |-
-                The repeat keyword.
+                The repeat keyword used to look like this.
             code: '{repeat} 5 {times} {print} ''Help!'''
             debug: 'True'
             notes: |-
@@ -1166,8 +1179,10 @@ levels:
             text: |-
                 What will the {if} and {else} keywords look like with indentation?
             code: |-
-                {if} name {is} Hedy {print} 'nice'
-                {else} {print} 'boo!'
+                {if} name {is} Hedy
+                {print} 'nice'
+                {else}
+                {print} 'boo!'
             debug: 'True'
             notes: |-
                 This is what the {if} and {else} have always looked like. What will they look like now that we can use indentation?
@@ -1258,6 +1273,7 @@ levels:
                 By the end of this lesson, you can:
                 * nest {if} and {repeat} keywords
                 * use indentation properly with {repeat} {if} and {else}
+                * use {and} and {or} keywords
             notes:
                 Using an {if} keyword inside another {if} keyword is called nesting.
         2:
@@ -1310,6 +1326,83 @@ levels:
             notes: |-
                 Play around with the indentation and show the students what happens if you remove the indentation of the second {if} keyword, for example.
         6:
+            header: Messy code
+            text: |-
+                Nesting can be very useful, but sometimes it can make your code look super messy. Take a look at this example:
+            code: |-
+                {print} 'Let me guess who you are'
+                haircolor = {ask} 'What is your haircolor?'
+                glasses = {ask} 'Do you wear glasses?'
+                {if} haircolor {is} black
+                    {if} glasses {is} yes
+                        {print} 'You must be Jade!'
+                    {else}
+                        {print} 'You must be Ahmed!'
+                {elif} haircolor {is} blonde
+                    {if} glasses {is} yes
+                        {print} 'You must be Patrick!'
+                    {else}
+                        {print} 'You must be Miranda!'
+                {else}
+                    {print} 'You must be Jackie!'
+            notes: |-
+                Ask the students which person has blonde hair and no glasses. It will take them a while to read this code.
+                Show them that in the next slide, the code is much easier to read when using the and keyword.
+        7:
+            header: '{and} keyword'
+            text: |-
+                In this case the `{and}` keyword comes in handy.
+
+                This way the code is much more readable and you don't have to worry about the indentation so much!
+            code: |-
+                {print} 'Let me guess who you are'
+                haircolor = {ask} 'What is your haircolor?'
+                glasses = {ask} 'Do you wear glasses?'
+                {if} haircolor {is} black {and} glasses {is} yes
+                    {print} 'You must be Jade!'
+                {elif} haircolor {is} black {and} glasses {is} no
+                    {print} 'You must be Ahmed!'
+                {elif} haircolor {is} blonde {and} glasses {is} yes
+                    {print} 'You must be Patrick!'
+                {elif} haircolor {is} blonde {and} glasses {is} no
+                    {print} 'You must be Miranda!'
+                {else}
+                    {print} 'You must be Jackie!'
+            notes: |-
+                If you'd ask the students now who has blonde hair and no glasses, they could answer much more quickly.
+                Making a code readable is a valuable skills for your students to learn and the and keyword will probably feel very natural to them.
+        8:
+            header: '{or} keyword'
+            text: |-
+                Much like the `{and}` keyword, there also is an `{or}`!
+            code: |-
+                {print} 'Pick a number from 1 to 6'
+                {print} 'Two of these numbers will get you a price!'
+
+                list_of_numbers = 1, 2, 3, 4, 5, 6
+                price_number = list_of_numbers {at} {random}
+                {remove} price_number {from} list_of_numbers
+                second_price_number = list_of_numbers {at} {random}
+
+                chosen_number = {ask} 'Which number do you pick?'
+                {if} chosen_number {is} price_number {or} chosen_number {is} second_price_number
+                    {print} 'Hooray! You have won a price!'
+                {else}
+                    {print} 'Sorry, no price for you...'
+            notes: |-
+                Show the students this code. It will very likely feel natural to them.
+        9:
+            header: 'Warning!'
+            text: |-
+                Please don't forget to make two full conditionals when using the `{or}`.
+                Debug this code.
+            code: |-
+                color = {ask} 'What is the color of your ticket?'
+                {if} color {is} blue {or} red
+                    {print} "You've won a price!"
+            debug: True
+
+        10:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1329,17 +1422,17 @@ levels:
             debug: 'True'
             notes: |-
                 Debug this code with your students.
-        7:
+        11:
             header: Let's check out the adventures!
             text: Enjoy the adventures in level 10!
             notes: |-
                 Your students can now work on all the adventures in level 10.
-        8:
+        12:
             header: Let's review!
             text: What did you learn today?
             notes: |-
                 Ask the students to list what they've learned today.
-        9:
+        13:
             header: Let's review!
             text: |-
                 Which adventure did you like best? Why?
@@ -1348,12 +1441,12 @@ levels:
 
             notes: |-
                 Ask the students for their opinion.
-        10:
+        14:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
             notes: |-
                 Let some students show their work to the class.
-        11:
+        15:
             header: Sneak peek into the next level...
             text: |-
                 Next level we will learn to use the {for} keyword.
