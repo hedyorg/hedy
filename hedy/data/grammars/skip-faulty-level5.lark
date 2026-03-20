@@ -1,0 +1,4 @@
+error_invalid.-100: textwithoutspaces _SPACE* text?
+command: += error_invalid
+_if_less_command: += error_invalid
+_non_empty_program: _EOL* (command) _SPACE* (_EOL+ command _SPACE*)* _EOL*

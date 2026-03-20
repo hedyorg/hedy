@@ -1,0 +1,54 @@
+_DEFINE: ("define" | "define") _SPACE?
+_CALL: ("call" | "call") _SPACE?
+_WITH: ("with" | "with") _SPACE?
+_DEF: ("def" | "def") _SPACE?
+_RETURN: ("return" | "return") _SPACE?
+_PRINT: ("แสดง" | "print") _SPACE?
+_PLAY: ("play" | "play") _SPACE
+_ASK: ("ถามว่า" | "ask")
+_ECHO: ("พูด" | "echo") _SPACE?
+_FORWARD: ("เดินหน้า" | "forward") _SPACE?
+_TURN: ("เลี้ยว" | "turn") _SPACE?
+left: ("ซ้าย" | "left") _SPACE?
+right: ("ขวา" | "right") _SPACE?
+black: ("ดำ" | "black") _SPACE?
+blue: ("น้ำเงิน" | "blue") _SPACE?
+brown: ("น้ำตาล" | "brown") _SPACE?
+gray: ("เทา" | "gray") _SPACE?
+green: ("เขียว" | "green") _SPACE?
+orange: ("ส้ม" | "orange") _SPACE?
+pink: ("ชมพู" | "pink") _SPACE?
+purple: ("ม่วง" | "purple") _SPACE?
+red: ("แดง" | "red") _SPACE?
+white: ("ขาว" | "white") _SPACE?
+yellow: ("เหลือง" | "yellow") _SPACE?
+_IS: _SPACE ("คือ" | "is") _SPACE
+_STANDALONE_IS: ("คือ" | "is")
+_SLEEP: ("รอ" | "sleep") _SPACE?
+_ADD_LIST: ("เพิ่ม" | "add") _SPACE
+_TO_LIST: _SPACE? ("ไปยัง" | "to")
+_REMOVE: ("ลบ" | "remove") _SPACE
+_FROM: _SPACE? ("จาก" | "from")
+_AT: _SPACE ("แบบ" | "at") _SPACE
+random: ("สุ่ม" | "random") _SPACE?
+_IN: _SPACE ("อยู่ใน" | "in") _SPACE
+_NOT_IN: _SPACE ("ไม่อยู่ใน" | "not in") _SPACE
+_IF: ("ถ้า" | "if") _SPACE
+_ELSE: "ไม่อย่างนั้น" | "else"
+_AND: _SPACE? ("และ" | "and") _SPACE
+_REPEAT: ("ทำซ้ำ" | "repeat") _SPACE
+_TIMES: _SPACE ("ครั้ง" | "times")
+_FOR: ("ให้" | "for") _SPACE
+_RANGE: ("ช่วง" | "range") _SPACE?
+_TO: _SPACE ("จนถึง" | "to") _SPACE
+_STEP: "เดิน" | "step"
+_ELIF: _SPACE? ("หรือถ้า" | "elif") _SPACE
+_INPUT: ("รับข้อมูล" | "input")
+_OR: _SPACE? ("หรือ" | "or") _SPACE
+_WHILE: ("เมื่อไหร่ก็ตามที่" | "while") _SPACE
+_LENGTH: "ความยาว" | "length"
+_COLOR : ("สี" | "color") _SPACE?
+_PRESSED: ("ปุ่มที่ถูกกด" | "pressed") _SPACE?
+clear: ("ลบกระดาน" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?

@@ -4,7 +4,7 @@ from app import create_app
 from hedy import exceptions
 from website_content import ALL_LANGUAGES
 from hedy.error import get_error_text, _highlight, _get_missing_arguments
-from tests.Tester import HedyTester
+from hedy_tests.Tester import HedyTester
 
 
 def exception_language_input():

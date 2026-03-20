@@ -8,7 +8,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 from os import path
 import sys
-from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 dirname = 'offlinehedy'
 appname = 'run-hedy-server'
@@ -18,32 +17,28 @@ appname = 'run-hedy-server'
 # from the venv.
 venv_dir = [p for p in sys.path if 'site-packages' in p][0]
 
-# hedy loads some files (for example in hedy/prefixes/*.py) directly from disk
-# at import time, so they must be added as data files explicitly.
-hedy_hiddenimports = collect_submodules('hedy')
-hedy_data_files = collect_data_files('hedy')
-hedy_prefix_py_files = collect_data_files('hedy.prefixes', include_py_files=True)
-
 data_files = [
     # Files
     ('README.md', '.'),
-    ('static_babel_content.json', '.'),
+    ('hedy/data/static_babel_content.json', 'hedy/data'),
 
     # Folders
     ('content', 'content'),
+    ('hedy/data/grammars', 'hedy/data/grammars'),
+    ('hedy/data/keywords', 'hedy/data/keywords'),
+    ('hedy/data/grammars-Total', 'hedy/data/grammars-Total'),
+    ('hedy/prefixes', 'hedy/prefixes'),
     ('static', 'static'),
     ('templates', 'templates'),
     ('translations', 'translations'),
 ]
-
-data_files += hedy_data_files + hedy_prefix_py_files
 
 a = Analysis(
     ['app.py'],
     pathex=[venv_dir],
     binaries=[],
     datas=data_files,
-    hiddenimports=hedy_hiddenimports,
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
