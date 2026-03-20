@@ -950,6 +950,8 @@ levels:
             text: |-
                 By the end of this lesson, you can:
                 * use maths in Hedy
+                * use decimal numbers in Hedy
+                * use variables in maths in Hedy
             notes: |-
                 Ask your students to predict when they would need maths in a code (for example calculating a price, an amount of people, points in a game etc).
                 You could also ask them to predict what this would look like. They will most likely come up with + and - themselves.
@@ -1012,13 +1014,20 @@ levels:
                 If you've made them come up with some examples of how to use maths in Hedy in the previous slides, ask them what they think this code would look like.
                 For example, if a student came up with the answer 'calculating points of a game' they could now come up with the code:
                 ```
-                if answer = correct_answer
+                {if} answer = correct_answer
                     points = points + 1
-                else
+                {else}
                     points = points - 1
                 ```
                 If you think this is too hard for your students to do individually or in pairs, you could do this exercise together with the whole class.
         9:
+            header: Decimal numbers
+            text: |-
+                So far, Hedy did not allow for decimal numbers like 1.5, but now we do allow that. Note that computers use the . for decimal numbers.
+            code: |-
+                {print} 'Two and a half plus two and a half is...'
+                {print} 2.5 + 2.5
+        10:
             header: Debugging
             text: Let's debug this code!
             code: |-
@@ -1038,13 +1047,13 @@ levels:
             debug: 'True'
             notes: |-
                 Debug this code together with your students.
-        10:
+        11:
             header: Let's get to work!
             text: Enjoy the adventures in level 7!
             notes: |-
                 The students can now make all the adventures in this level.
                 Make workbook exercise 3, 4 and 5.
-        11:
+        12:
             header: Let's review!
             text: |-
                 Which adventure did you like best? Why?
@@ -1053,17 +1062,17 @@ levels:
 
             notes: |-
                 Ask the students for their opinion.
-        12:
+        13:
             header: Let's review!
             text: What did you learn today?
             notes: |-
                 Ask the students to list what they've learned today.
-        13:
+        14:
             header: Show and tell!
             text: Would anyone like to show the class a program they've made?
             notes: |-
                 Let some students show their work to the class.
-        14:
+        15:
             header: Sneak peek into the next level...
             text: |-
                 In the next level you'll learn how to repeat a line of code multiple times!
@@ -1562,26 +1571,8 @@ levels:
         1:
             header: Welcome to level 12
             text: |-
-                A
-                From this level on you are allowed to use decimal numbers and there are some changes to the quotation marks.
-                You can also use functions from this level on!
-        2:
-            header: Quotation marks
-            text: |-
-                This level makes some changes to the usage of quotation marks.
-                From now on, **all texts** need to be in quotation marks. This includes values of variables, items on lists and text after {if} keywords.
-            code: |-
-                name = 'Hedy the Robot'
-                {print} 'Hello ' name
-        3:
-            header: Decimal numbers
-            text: |-
-                From this level on you are also allowed to use decimal numbers. This can make programs like your restaurant even better!
-
-                Numbers do not need quotation marks.
-            code: |-
-                {print} 'decimal numbers now need to use a dot'
-                {print} 2.5 + 2.5
+                By the end of this lesson, you can:
+                * use functions
         4:
             header: Functions!
             text: |-

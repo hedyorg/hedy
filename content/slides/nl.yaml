@@ -998,6 +998,8 @@ levels:
             text: |-
                 Aan het eind van dit level kan je:
                 * Rekenen met Hedy
+                * Kommagetallen gebruiken in Hedy
+                * Rekenen met variabelen in Hedy
             notes: |-
                 Vraag je leerlingen te voorspellen wanneer je rekenen in je code nodig hebt (bijvoorbeeld als je een prijs uitrekent, als je een aantal mensen wilt weten, score in een game wil bijhouden, etc.)
                 Je kunt ze ook vragen te voorspellen hoe dit eruit ziet. De kans is groot dat ze zelf al komen met + en - en misschien ook met de rest.
@@ -1061,14 +1063,20 @@ levels:
                 Als je ze gevraagd hebt om voorbeelden te verzinnen over hoe je wiskunde gebruikt in Hedy, vraag ze dan hoe ze denken dat deze code eruit gaat zien.
                 Als een leerling heeft bedacht om punten te tellen bij een spel dan zouden ze nu een code zoals hieronder kunnen bedenken:
                 ```
-                als antwoord = goede_antwoord
+                {als} antwoord = goede_antwoord
                     punten = punten + 1
-                anders
+                {anders}
                     punten = punten - 1
                 ```
-                Als je denkt dat dit voor stundenten te moeilijk is om individueel of in tweetallen te doen, kan je deze opdracht met de hele klas samen doen.
-
+                Als je denkt dat dit voor leerlingen te moeilijk is om individueel of in tweetallen te doen, kan je deze opdracht met de hele klas samen doen.
         9:
+            header: Kommagetallen
+            text: |-
+                Tot nu toe mocht je nog geen kommagetallen zoals 1,5 gebruiken in Hedy. Let op! Computers gebruiken punten in plaats van komma's voor kommagetallen!
+            code: |-
+                {print} 'Tweeënhalf plus tweeënhalf is...'
+                {print} 2.5 + 2.5
+        10:
             header: Debugging (foutzoeken)
             text: Laten we deze code debuggen!
             code: |-
@@ -1088,18 +1096,18 @@ levels:
             debug: 'True'
             notes: |-
                 Debug deze code samen met je leerlingen.
-        10:
+        11:
             header: Aan de slag!
             text: Veel plezier met de avonturen in level 7!
             notes: |-
                 Je leerlingen kunnen nu alle avonturen in dit level maken.
                 Maak daarnaast werkboekopdracht 3,4, en 5.
-        11:
+        12:
             header: Een korte terugblik...
             text: Wat heb je vandaag geleerd?
             notes: |-
                 Vraag de leerlingen om op te noemen wat ze vandaag hebben geleerd.
-        12:
+        13:
             header: Een korte terugblik...
             text: |-
                 Welk avontuur vond je het leukst? Waarom?
@@ -1108,13 +1116,13 @@ levels:
 
             notes: |-
                 Vraag de leerlingen naar hun mening
-        13:
+        14:
             header: Laat zien en vertel!
             text: Is er iemand die zijn programma aan de klas wil laten zien?
             notes: |-
                 Laat een aantal leerlingen hun werk aan de klas laten zien.
                 Je kunt dit doen door naar de klassenpagina te gaan en op de avonturen van de leerlingen te klikken.
-        14:
+        15:
             header: Tipje van de sluier voor het volgende level...
             text: In het volgende level leer je hoe een regel code meerdere keren kunt herhalen.
     8:
