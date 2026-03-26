@@ -64,6 +64,7 @@ jobs:
       if: steps.daily-version.outputs.created
       uses: softprops/action-gh-release@v2
       with:
+        tag_name: ${{ steps.daily-version.outputs.version }}
         working_directory: .
         files: |
           *.zip
