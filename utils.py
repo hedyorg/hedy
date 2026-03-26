@@ -192,7 +192,7 @@ def version():
         return 'DEV'
 
     vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
-    the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
+    the_date = datetime.date.fromisoformat(vrz.split('T')[0]) if vrz else datetime.date.today()
 
     commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
     return the_date.strftime('%Y %b %d') + f'({commit})'
