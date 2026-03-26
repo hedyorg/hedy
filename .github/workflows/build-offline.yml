@@ -50,16 +50,6 @@ jobs:
         tag_name: ${{ steps.daily-version.outputs.version }}
         generate_release_notes: true
 
-    - name: Debug zip visibility before upload
-      if: steps.daily-version.outputs.created
-      shell: pwsh
-      run: |
-        $expectedZip = "offlinehedy-${{ steps.daily-version.outputs.version }}.zip"
-        Write-Host "Upload step runs from: $(Get-Location)"
-        Write-Host "Zip files matching *.zip in workspace root:"
-        Get-ChildItem -Path . -Filter *.zip -File | Select-Object Name, FullName, Length | Format-Table -AutoSize
-        Write-Host "Does expected zip exist? $(Test-Path $expectedZip)"
-
     - name: Upload Assets
       if: steps.daily-version.outputs.created
       uses: softprops/action-gh-release@v2
