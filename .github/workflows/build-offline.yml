@@ -42,27 +42,6 @@ jobs:
       run: |
         cd dist/offlinehedy &&  Compress-Archive -Path . -Destination ../../offlinehedy-${{ steps.daily-version.outputs.version }}.zip
 
-    - name: Debug zip after creation
-      shell: pwsh
-      run: |
-        $expectedZip = "offlinehedy-${{ steps.daily-version.outputs.version }}.zip"
-        Write-Host "Expected zip file: $expectedZip"
-        Write-Host "Working directory: $(Get-Location)"
-        Write-Host "Root directory listing:"
-        Get-ChildItem -Force | Format-Table -AutoSize
-        Write-Host "dist directory listing (if present):"
-        if (Test-Path dist) {
-          Get-ChildItem -Recurse -File dist | Select-Object FullName | Format-Table -AutoSize
-        } else {
-          Write-Host "dist directory does not exist"
-        }
-        if (Test-Path $expectedZip) {
-          Write-Host "Zip created successfully at workspace root"
-        } else {
-          Write-Error "Expected zip not found at workspace root"
-        }
-
-
     - if: steps.daily-version.outputs.created
       name: Create Release
       uses: shogo82148/actions-create-release@v1
@@ -83,7 +62,9 @@ jobs:
 
     - name: Upload Assets
       if: steps.daily-version.outputs.created
-      uses: shogo82148/actions-upload-release-asset@v1
+      uses: softprops/action-gh-release@v2
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: '*.zip'
+        working_directory: .
+        files: |
+          *.zip
+
