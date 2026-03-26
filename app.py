@@ -2311,10 +2311,12 @@ def other_languages(lang_param=None):
     other_langs = [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
 
     # Get English names for all Hedy supported languages using iso639 and their codes
+    # Make a part1 map of all languages
+    part1_map = {language.part1: language for language in languages}
     for lang_code in other_langs:
         lang = lang_code.get('lang')
-        if lang in languages.part1:
-            language = languages.get(part1=lang)
+        language = part1_map.get(lang)
+        if language:
             lang_code['english'] = language.name
         else:
             lang_code['english'] = non_iso_transl.get(lang, '')
