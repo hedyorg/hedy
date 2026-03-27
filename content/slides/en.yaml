@@ -297,6 +297,7 @@ levels:
                 {print} Thank you for ordering with us!
                 {echo} Please enjoy your ...
             notes: |-
+                Warning: This code doens't work in this level. Don't run the program, just discuss it.
                 Let your students take a look at the program and let them predict the output.
                 Hopefully they will come to the conclusion that the last line will only say 'Enjoy your (drink they ordered)' and that the computer will have forgotten the food.
                 With 'echo' the computer can only remember one item. In this level you will learn to use variables to solve this problem.
@@ -314,6 +315,7 @@ levels:
                 The variable is a like a box or container that holds the thing that is changing. The box stays the same but whatever is inside can change or vary.
                 Show the students how the variables work. Point out that the names of the variables in the last line are replaced with the values of the variable.
                 Also point out that you can use variables anywhere in a sentence, unlike 'echo' which only printed the value at the end of the line.
+                The blue box that appears in your output screen shows you the variables you've used and what they have been set to.
         4:
             header: Variables
             text: To make or 'set' a variable we use the `{is}` keyword. The name of the variable comes before the `{is}` and the value of the variable behind it.
@@ -528,6 +530,7 @@ levels:
                 {print} I choose animals {at} {random}
             notes: |-
                 Run the program multiple times to show that the animal that was picked is now added to the list.
+                The blue box that appears in your output screen shows you the variables you've used and what they have been set to.
         8:
             header: Remove from
             text: |-
@@ -601,6 +604,7 @@ levels:
                 {print} My name is name
             debug: 'True'
             notes: |-
+                This code doesn't work in this level!
                 Let the students predict the output. The problem is that if you use the variable name, you can no longer use the word name in your text.
                 The output of this code will be 'My Sophie is Sophie'.
         3:
@@ -616,6 +620,7 @@ levels:
                 The computer now knows the difference between the text 'name' and the variable name.
                 Show the students that the computer now prints 'My name is Sophie'.
                 A student might say you could have also easily fixed this problem by giving the variable is different name. That is true, but it is an important skill in programming to show the computer different types of data and for yourself to know the difference between normal text and variables.
+                Type quotation marks like ' or the double quotes like this ", backticks like this ` do not work!
         4:
             header: Quotation marks with print
             text: Each time you use the `{print}` keyword you need to put the text that you want to appear on the screen in quotation marks.
@@ -658,6 +663,7 @@ levels:
                 {print} "I'm using double quotes"
                 {print} "It's easy to do!"
             notes: |-
+                It is important to start and end with the same type of quotation marks, you can't start a line with a ' and and on a " for example.
                 You can now let the students make all the adventures before the 'clear keyword' adventure.
         10:
             header: Clear
@@ -1737,7 +1743,7 @@ levels:
         6:
             header: '`{if}` and `{else}`'
             text: |-
-                In the if statement you will have tu use two equal signs: ==. This is what most programming languages do as well. We also need a colon at the end of the if statement now.
+                In the if statement you will have to use two equal signs: ==. This is what most programming languages do as well. We also need a colon at the end of the if statement now.
             code: |-
                 favorite_bird = input('What is your favorite bird?')
                 {if} favorite_bird == 'penguin':
