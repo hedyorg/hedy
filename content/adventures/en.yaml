@@ -2661,6 +2661,7 @@ adventures:
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
+                    # Printing and playing 3 notes:
                     {print} number
                     {play} number
                     number = number + 1
@@ -3085,10 +3086,12 @@ adventures:
                 example_code: |
                     ```
                     {print} 'The digital piggy bank'
+                    #Asking about income and wanted purchase
                     wish = {ask} 'What would you like to buy?'
                     price = {ask} 'How much does that cost?'
                     saved = {ask} 'How much money have you saved already?'
                     allowance = {ask} 'How much pocket money do you get per week?'
+                    #Calculating time needed to save
                     to_save = price - saved
                     weeks = to_save / allowance
                     {print} 'You can buy a ' _ ' in ' _ ' weeks.'
@@ -3830,9 +3833,11 @@ adventures:
                 example_code: |
                     ```
                     verse = 99
+                    #Singing one verse
                     {print} verse ' bottles of beer on the wall'
                     {print} verse ' bottles of beer'
                     {print} 'Take one down, pass it around'
+                    #Singing the next verse
                     verse = verse - 1
                     {print} verse ' bottles of beer on the wall'
                     {sleep}
