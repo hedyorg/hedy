@@ -739,10 +739,13 @@ adventures:
                     Kun jij de code nu zo maken dat je de totaalscore krijgt voor 8 dobbelstenen? Daarvoor moet je sommige stukken van de code knippen en plakken.
                 example_code: |
                     ```
+                    #Opzet van het spel
                     keuzes = 1, 2, 3, 4, 5, regenworm
                     punten = 0
+                    #De dobbelsteen gooien
                     worp = keuzes {at} {random}
                     {print} 'je gooide ' worp
+                    #De punten tellen
                     {if} worp {is} regenworm punten = punten + 5
                     {else} punten = punten + worp
                     {print} 'dat zijn dan ' punten ' punten'
@@ -1697,6 +1700,7 @@ adventures:
                 example_code: |
                     ```
                     getal = {ask} 'Noem een getal tussen 1 en 67:'
+                    #3 noten printen en spelen:
                     {print} getal
                     {play} getal
                     getal = getal + 1
@@ -2012,10 +2016,14 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Het digitale spaarvarken'
+                    #Vragen naar uitgaven en gewenste aankoop:
                     wens = {ask} 'Wat zou je graag willen hebben?'
                     prijs = {ask} 'Hoeveel kost dat?'
+                    gespaard = {ask} 'Hoeveel geld heb je al gespaard?'
                     zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
-                    weken = prijs / zakgeld
+                    #Uitrekenen hoeveel tijd er nog nodig is om nog te sparen:
+                    te_sparen = prijs - gespaard
+                    weken = te_sparen / zakgeld
                     {print} 'Je kunt over ' _ ' weken een ' _ ' kopen!'
                     ```
             15:
@@ -2791,6 +2799,7 @@ adventures:
                 example_code: |
                     ```
                     couplet = 1
+                    #Het eesrste couplet:
                     {print} 'Ik heb het potje met vet'
                     {print} 'al op de tafel gezet'
                     {print} 'Ik heb het'
@@ -2798,6 +2807,7 @@ adventures:
                     {print} 'veh heh het'
                     {print} 'al op de tafel gezet'
                     couplet = couplet + 1
+                    #Het tweede couplet:
                     {print} 'Door naar het ' couplet 'e couplet'
                     {sleep}
                     ```
