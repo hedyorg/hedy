@@ -1090,6 +1090,30 @@ export function invite_to_class(class_id: string, prompt: string, type: "student
   );
 }
 
+export function invite_to_class_redesign(class_id: string, prompt: string, type: "student" | "second_teacher") {
+  const vals = {class_id, 'user_type': type}
+  const input_attributes = {
+    'hx-get': '/search',
+    'hx-target': '#search_results',
+    'hx-vals': JSON.stringify(vals)
+  }
+  const ok_button_attributes = {
+    'hx-post': `/for-teachers/redesign/class/${class_id}/manage/invite`,
+    'hx-target': '#manage-students-table-body',
+    'hx-include': "[name='usernames']",
+    'hx-swap': 'innerHTML'
+  }
+  htmx.process(document.body)
+  modal.htmx_search(
+    prompt,
+    input_attributes,
+    ok_button_attributes,
+    '#manage-students-table-body',
+    ClientMessages['invite'],
+    ClientMessages['invitations_sent']
+  );
+}
+
 export function add_user_to_invite_list(username: string, button: HTMLButtonElement) {
   button.closest('li')?.remove() // We remove the user from the list
   const userList = document.getElementById('users_to_invite')
@@ -1112,11 +1136,11 @@ export function add_user_to_invite_list(username: string, button: HTMLButtonElem
   userList?.appendChild(clone)
 }
 
-export interface InitializeAllClassesPageOptions {
-  readonly page: 'classes';
+export interface InitializeContextMenuPageOptions {
+  readonly page: 'classes' | 'manage-students';
 }
 
-export function initializeAllClassesPage(_options: InitializeAllClassesPageOptions) {
+export function initializeContextMenuEventHandler(_options: InitializeContextMenuPageOptions) {
   // Event listener to close the adventures dropdown when you click outside of it
   document.addEventListener('click', (ev) => {
     const target = ev.target as HTMLElement;
