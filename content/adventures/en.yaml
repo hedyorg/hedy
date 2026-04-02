@@ -177,9 +177,11 @@ adventures:
                     ```
                     {print} 'OH NO! The T-rex is closing in!'
                     end = {ask} 'Do you want a happy or a sad ending?'
+                    #Telling the happy ending of the story:
                     {if} end {is} happy
                         {print} 'Just in time Richard jumps back into the time machine!'
                         {print} _
+                    #Telling the sad ending of the story:
                     {else}
                         {print} 'Oh no! Richard is too slow...'
                         {print} _
@@ -444,14 +446,18 @@ adventures:
                 example_code: |
                     ```
                     score = 0
+                    #Asking 10 math questions:
                     {repeat} 10 {times}
+                        #Picking a random question:
                         numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         number_1 = numbers {at} {random}
                         number_2 = numbers {at} {random}
                         correct_answer = number_1 * number_2
+                        #Asking the question:
                         {print} 'What is ' number_1 ' times ' number_2 '?'
                         answer = {ask} 'Type your answer here...'
                         {print} 'Your answer is ' answer
+                        #Counting the points
                         {if} _ {is} _
                             score = score + 1
                     {print} 'Great job! Your score is... ' score ' out of 10!'
@@ -1269,8 +1275,10 @@ adventures:
                     Change the names into names of your friends or family, and finish the code.
                 example_code: |
                     ```
+                    #Setting up the game:
                     players = Ann, John, Jesse
                     choices = 1, 2, 3, 4, 5, 6
+                    #Letting every player throw the dice:
                     _ _ _ _
                         {print} player ' throws ' choices {at} {random}
                         {sleep}
@@ -1601,9 +1609,11 @@ adventures:
                     Can you fill in right command on the blanks?
                 example_code: |
                     ```
+                    #Introducing the fortune teller
                     {print} 'I am Hedy the fortune teller!'
                     {print} 'You can ask me 3 questions.'
                     answers = yes, no, maybe
+                    #Asking and answering a question 3 times:
                     _ _ _
                        question = {ask} 'What do you want to know?'
                        {print} question
@@ -1618,10 +1628,12 @@ adventures:
                     Fill in the blanks by using the new command that you've learned this level.
                 example_code: |
                     ```
+                    #Defining the different options:
                     houses = mansion, apartment, shack, house
                     loves = nobody, a royal, their neighbour, their true love
                     pets = dog, cat, elephant
                     names = Jenna, Ryan, Jim
+                    #Predict the future for all people: 
                     _
                         {print} name ' lives in a ' houses {at} {random}
                         {print} name ' will marry ' loves {at} {random}
@@ -1818,10 +1830,12 @@ adventures:
                     **Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
                 example_code: |
                     ```
+                    #Defining the different options:
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
                     subjects = potions, defence against the dark arts, charms, transfiguration
                     fears = Voldemort, spiders, failing your OWL test
                     names = Harry, Ron, Hermione
+                    #Predict the future for all people: 
                     _
                     _ {print} name ' is placed in ' houses {at} {random}
                     _ {print} name ' is great at ' subjects {at} {random}
@@ -2694,11 +2708,13 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Brother John'
+                    #Play first line twice:
                     {repeat} 2 {times}
                         {play} C
                         {play} D
                         {play} E
                         {play} C
+                    #Play second line twice:
                     {repeat} 2 {times}
                         {play} E
                         {play} F
@@ -3497,10 +3513,12 @@ adventures:
                 example_code: |
                     You can make a simple restaurant code, like this:
                     ```
+                    #Welcoming the customer:
                     {print} 'Welcome to Restaurant Chez Hedy'
                     {print} 'Here is our menu:'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
                     price = 0
                     {if} main {is} pizza
                     price = 10
@@ -3508,6 +3526,7 @@ adventures:
                     price = 12
                     {if} main {is} spaghetti
                     price = 8
+                    #Telling the price to the customer:
                     {print} 'You have ordered ' main
                     {print} 'That will be ' price ' dollars, please'
                     {print} 'Thank you, enjoy your meal!'
@@ -3534,9 +3553,11 @@ adventures:
                     **Extra** Add even more items, as many options as you like!
                 example_code: |
                     ```
+                    #Welcoming customers to the restaurant:
                     {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
+                    #Asking all people what they want to order:
                     {repeat} people {times}
                         food = {ask} 'What would you like to order?'
                         {print} food
@@ -3547,10 +3568,12 @@ adventures:
                 story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the customer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
                 example_code: |
                     ```
+                    #welcoming customers to the restaurant:
                     {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
                     price = 0
+                    #Asking all people what they want to order:
                     {repeat} people {times}
                     _ food = {ask} 'What would you like to order?'
                     _ {print} food
@@ -3721,11 +3744,14 @@ adventures:
                     Finish the code such that a winner is always decided on. Run your code a few times to verify there is always a winner printed.
                 example_code: |
                     ```
+                    #Computer and player choosing rock, paper or scissors:
                     options = 'rock', 'paper', 'scissors'
                     your_choice = {ask} 'What do you choose?'
                     computer_choice = options {at} {random}
+                    #Printing which options were chosen:
                     {print} 'You choose ' your_choice
                     {print} 'The computer chooses ' computer_choice
+                    #Printing who is the winner:
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'
                     {elif} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
@@ -4168,8 +4194,10 @@ adventures:
                     Now that we can do math with Hedy, we can draw all the figures we want!
                 example_code: |
                     ```
+                    # defining the angle for the figure:
                     angles = {ask} 'How many angles do you want?'
                     angle = 360 / angles
+                    #drawing a figure with angles:
                     {forward} 50
                     {turn} angle
                     {forward} 50
