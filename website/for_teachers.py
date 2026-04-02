@@ -18,7 +18,7 @@ import website_content as hedy_content
 import hedyweb
 import utils
 from hedy.safe_format import safe_format
-from datetime import date
+from datetime import date, datetime
 
 from website.server_types import SortedAdventure
 from website.flask_helpers import render_template
@@ -510,6 +510,74 @@ class ForTeachersModule(WebsiteModule):
         sorted_adventures = sorted(student_adventures.items(), key=functools.cmp_to_key(cmp_items))
         return dict(sorted_adventures)
 
+    @staticmethod
+    def _normalize_manage_class_sort_timestamp(timestamp):
+        if timestamp is None:
+            return float("-inf")
+        if isinstance(timestamp, datetime):
+            return timestamp.timestamp()
+        try:
+            normalized_timestamp = int(timestamp)
+        except (TypeError, ValueError):
+            return float("-inf")
+        if normalized_timestamp > 10_000_000_000:
+            return normalized_timestamp / 1000
+        return normalized_timestamp
+
+    def _build_manage_class_rows(self, Class):
+        student_information = []
+
+        for student_username in Class.get("students", []):
+            student_info = self.db.user_by_username(student_username)
+            if not student_info:
+                continue
+
+            last_login = student_info.get("last_login")
+            normalized_student = dict(student_info)
+            normalized_student["is_invite"] = False
+            normalized_student["_sort_name"] = (normalized_student.get("username") or "").lower()
+            normalized_student["_sort_timestamp"] = self._normalize_manage_class_sort_timestamp(last_login)
+            normalized_student["last_login"] = (
+                utils.localized_date_format(last_login)
+                if last_login is not None
+                else gettext("never")
+            )
+            student_information.append(normalized_student)
+
+        invites = self.db.get_class_invites(class_id=Class["id"])
+        for invite in invites:
+            normalized_invite = dict(invite)
+            normalized_invite["is_invite"] = True
+            normalized_invite["_sort_name"] = (normalized_invite.get("username") or "").lower()
+            normalized_invite["_sort_timestamp"] = self._normalize_manage_class_sort_timestamp(
+                normalized_invite.get("unformatted_timestamp")
+            )
+            normalized_invite["last_login"] = normalized_invite.get("timestamp") or gettext("never")
+            student_information.append(normalized_invite)
+
+        return student_information
+
+    def _sort_manage_class_rows(self, student_information, student_order, timestamp_order):
+        sort_instructions = []
+        if timestamp_order in ["ascendent", "descendent"]:
+            sort_instructions.append(("timestamp", timestamp_order == "descendent"))
+        if student_order in ["ascendent", "descendent"]:
+            sort_instructions.append(("student", student_order == "descendent"))
+
+        for sort_field, reverse in sort_instructions:
+            if sort_field == "timestamp":
+                student_information.sort(
+                    key=lambda item: item.get("_sort_timestamp", float("-inf")),
+                    reverse=reverse,
+                )
+            else:
+                student_information.sort(
+                    key=lambda item: item.get("_sort_name", ""),
+                    reverse=reverse,
+                )
+
+        return student_information
+
     @route("/redesign/class/<class_id>/grade/filter_sort", methods=["GET"])
     @requires_login
     def filter_sort_grading_page(self, user, class_id):
@@ -554,6 +622,82 @@ class ForTeachersModule(WebsiteModule):
             students=sorted(Class.get("students", [])),
             student_adventures=filtered_adventures,
             sort_orders=sort_orders
+        )
+
+    @route("/redesign/class/<class_id>/manage", methods=["GET"])
+    @requires_login
+    def manage_class(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        student_information = self._build_manage_class_rows(Class)
+        return render_template(
+            "for-teachers/classes/manage-class.html",
+            class_id=class_id,
+            class_info=Class,
+            students=student_information,
+            javascript_page_options=dict(
+                page="manage-students",
+            ),
+        )
+
+    @route("/redesign/class/<class_id>/manage/filter_sort", methods=["GET"])
+    @requires_login
+    def sort_management_page(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        student_order = request.args.get("student")
+        timestamp_order = request.args.get("timestamp")
+        student_information = self._build_manage_class_rows(Class)
+        student_information = self._sort_manage_class_rows(
+            student_information,
+            student_order,
+            timestamp_order,
+        )
+
+        return render_partial(
+            "for-teachers/classes/manage-class-table-body.html",
+            class_info=Class,
+            students=student_information,
+        )
+
+    @route("/redesign/class/<class_id>/manage/invite", methods=["POST"])
+    @requires_teacher
+    def invite_users(self, user, class_id):
+        if not isinstance(request.form.getlist('usernames'), list):
+            return make_response(gettext("username_invalid"), 400)
+        if len(request.form.getlist('usernames')) < 1:
+            return make_response(gettext("username_empty"), 400)
+        usernames = request.form.getlist('usernames')
+        invite_as = 'student'
+        Class = self.db.get_class(class_id)
+
+        if not Class or not (utils.can_edit_class(user, Class)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        users = self.db.users_by_username(usernames)
+
+        for user in users:
+            self.db.add_class_invite(
+                username=user["username"],
+                class_id=class_id,
+                invited_as=invite_as,
+                invited_as_text=gettext(invite_as)
+            )
+        student_information = self._build_manage_class_rows(Class)
+        return render_partial(
+            "for-teachers/classes/manage-class-table-body.html",
+            class_info=Class,
+            students=student_information,
         )
 
     @route("/redesign/program/<class_id>/grade", methods=["POST"])
@@ -922,6 +1066,60 @@ class ForTeachersModule(WebsiteModule):
                               htmx_target=htmx_target,
                               hyperscript=hyperscript)
 
+    @route("/redesign/class/<class_id>/manage/remove_student_modal/<student_id>", methods=["GET"])
+    @requires_teacher
+    def get_remove_student_modal_redesign(self, user, class_id, student_id):
+        is_invite = request.args.get('is_invite', type=int)
+        Class = self.db.get_class(session['class_id'])
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        modal_text = gettext('remove_student_prompt')
+        htmx_endpoint = f'/for-teachers/redesign/class/{class_id}\
+            /manage/remove_student/{student_id}?is_invite={is_invite}'.replace(" ", "")
+        htmx_target = "#students-table"
+        hyperscript = ""
+        htmx_success_message = gettext("student_removed_successfully")
+        return render_partial(
+            'modal/htmx-modal-confirm.html',
+            modal_text=modal_text,
+            htmx_endpoint=htmx_endpoint,
+            htmx_target=htmx_target,
+            hyperscript=hyperscript,
+            htmx_success_message=htmx_success_message
+        )
+
+    @route(
+        "/redesign/class/<class_id>/manage/remove_student/<student_id>",
+        methods=["POST"],
+    )
+    @requires_login
+    def remove_student_from_class_redesign(self, user, class_id, student_id):
+        is_invite = bool(request.args.get("is_invite", type=int))
+        Class = self.db.get_class(class_id)
+        if not Class or not (utils.can_edit_class(user, Class)):
+            return make_response(gettext("ajax_error"), 400)
+
+        if is_invite:
+            self.db.remove_user_class_invite(student_id, class_id)
+        else:
+            self.db.remove_student_from_class(Class["id"], student_id)
+
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        student_information = self._build_manage_class_rows(Class)
+        return jinja_partials.render_partial(
+            "for-teachers/classes/manage-class-table.html",
+            class_id=class_id,
+            class_info=Class,
+            students=student_information,
+        )
+
     @route("/class/<class_id>/remove_student/<student_id>", methods=["POST"])
     @requires_login
     def leave_class(self, user, class_id, student_id):
@@ -1208,7 +1406,6 @@ class ForTeachersModule(WebsiteModule):
     @route("/customize-class/<class_id>", methods=["GET"])
     @requires_login
     def get_class_customization_page(self, user, class_id):
-        print("GET /customize-class/<class_id> called")
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)

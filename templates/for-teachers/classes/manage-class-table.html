@@ -1,0 +1,51 @@
+
+{% macro sortable_th(field, label, sort_orders) %}
+    {% set sort_val = sort_orders.get(field) if sort_orders else None %}
+    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider min-w-36 {% if field == 'student' %} rounded-t-lg {% endif %}">
+        {{ _(label) }}
+        <button class="ml-2" type="submit"
+            _="on click
+                if #{{ field }}-sort matches .fa-sort then
+                    remove .fa-sort from #{{ field }}-sort
+                    add .fa-sort-up to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'ascendent'
+                else if #{{ field }}-sort matches .fa-sort-up then
+                    remove .fa-sort-up from #{{ field }}-sort
+                    add .fa-sort-down to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'descendent'
+                else if #{{ field }}-sort matches .fa-sort-down then
+                    remove .fa-sort-down from #{{ field }}-sort
+                    add .fa-sort to #{{ field }}-sort
+                    set value of #{{ field }}-sort-input to 'none'
+                end">
+            <i id="{{ field }}-sort"
+               class="fa-solid
+               {% if sort_val is none %}fa-sort
+               {% elif sort_val is true %}fa-sort-up
+               {% elif sort_val is false %}fa-sort-down
+               {% endif %}"></i>
+        </button>
+        <input id="{{ field }}-sort-input" type="hidden" name="{{ field }}" value="{% if sort_val is none %}none{% elif sort_val is true %}ascendent{% elif sort_val is false %}descendent{% endif %}">
+    </th>
+{% endmacro %}
+
+<table class="w-full divide-y divide-gray-400" id="students-table">
+  <thead class="bg-gray-200 divide-y divide-gray-400">
+    <tr>
+      {{ sortable_th('student', 'students', sort_orders) }}
+      {{ sortable_th('timestamp', 'class_logs', sort_orders) }}
+      <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('actions')}}</th>
+
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200" id="manage-students-table-body">
+    {{
+      render_partial(
+        "for-teachers/classes/manage-class-table-body.html", 
+        students=students, 
+        class_info=class_info, 
+        teacher_classes=teacher_classes
+      )
+    }}
+  </tbody>
+</table>
