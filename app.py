@@ -2687,8 +2687,9 @@ def on_offline_mode():
         (g, r'                    __/ |'),
         (g, r'   o f f l i n e   |___/ '),
         ('', ''),
-        ('', 'Use a web browser to visit the following website:'),
+        ('', 'Use a web browser to visit (one of) the following website(s):'),
         ('', ''),
+        (Fore.BLUE, f'   http://localhost/ {Fore.BLACK}(only works on this machine)'.ljust(70)),
         *[(Fore.BLUE, f'   http://{ip}/') for ip in ip_addresses],
         ('', ''),
         ('', ''),
@@ -2697,7 +2698,7 @@ def on_offline_mode():
     # Init and deinit so we don't mess with Werkzeug's use of this library later on.
     with colorama_text():
         for style, text in lines:
-            print(Back.WHITE + Fore.BLACK + ''.ljust(10) + style + text.ljust(60) + Style.RESET_ALL)
+            print(Back.WHITE + Fore.BLACK + ''.ljust(10) + style + text.ljust(65) + Style.RESET_ALL)
 
     # We have this option for testing the offline build. A lot of modules read
     # files upon import, and those happen before the offline build 'cd' we do
