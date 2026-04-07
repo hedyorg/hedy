@@ -1,0 +1,172 @@
+{% extends "auth.html" %}
+{% block regular_content %}
+{% set level_display = level|default('1') %}
+<h1>{{ class_info.name }}</h1>
+<div class="flex flex-row gap-5">
+    <h2 class="text-4xl mt-3">{{ _('configure') }}</h2>
+    <div id="level_button" class="dropdown relative">
+        <button class="blue-btn-new rounded inline-flex w-fit gap-2 text-xl" id="dropdown_level_button"
+            onclick="$('#level_dropdown').slideToggle('medium');">
+            <span>{{ _('level_title') }} {{ level_display }}</span> <i id="level-arrow"
+                class="fa-solid fa-angle-down"></i>
+        </button>
+        <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
+            style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
+            id="level_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
+            set arrow to #level-arrow
+            if *display == 'none'
+            remove .rotate-180 from arrow
+            else if not arrow.classList.contains('rotate-180')
+            add .rotate-180 to arrow
+            end">
+            {% for dropdown_level in range(1, 17) %}
+            <a id="level_button_{{dropdown_level}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+            {% if loop.index == level_display|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
+            hover:bg-blue-200" {% if dropdown_level==level_display|int %}disabled{% endif %}
+                href="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ dropdown_level }}">
+                <div class="flex-grow h-min" tabindex=0>
+                    {{ _('level_title') }} {{ dropdown_level }}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="flex flex-col xl:flex-row gap-6 mt-5 bg-white border border-gray-300 p-5 rounded-lg">
+    <section class="flex flex-col gap-6 w-full">
+        {% if level_display|int not in customizations['levels'] %}
+            <p class="text-red-600 font-medium text-sm m-0">This level is currently unavailable for your students</p>
+        {% endif %}
+        <div class="flex items-center gap-3">
+            <label class="switch">
+                <input {% if level_display|int in customizations['levels'] %}checked{% endif %} type="checkbox" aria-label="{{ _('available') }}">
+                <span class="slider round"></span>
+            </label>
+            <span class="text-base">Available for students</span>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+            <a
+                href="/for-teachers/class/{{ class_info.id }}/preview?level={{ level_display }}"
+                class="blue-btn-new no-underline"
+            >
+                Preview level {{ level_display }} as a student
+            </a>
+            <button type="button" class="blue-btn-new">View teaching materials of level {{ level_display }}</button>
+        </div>
+
+        <div class="flex flex-col gap-4">
+            <div>
+                <h3 class="m-0 text-2xl">Adventures at level {{ level_display }}</h3>
+                <p class="text-sm text-gray-500 mt-1 mb-0">(Drag to reorder)</p>
+            </div>
+
+            <div class="w-full overflow-x-auto border rounded-lg">
+                <table class="w-full divide-y divide-gray-400">
+                    <thead class="bg-gray-200 divide-y divide-gray-400">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Adventure</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Source</th>
+                            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{ _('remove') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-3 text-blue-900">
+                                    <i class="fa-solid fa-grip-lines text-gray-400"></i>
+                                    <a href="#" class="hover:underline">Scissors paper stone</a>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-gray-600">built-in</td>
+                            <td class="px-4 py-3 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-700 transition-colors" aria-label="{{ _('remove') }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-3 text-blue-900">
+                                    <i class="fa-solid fa-grip-lines text-gray-400"></i>
+                                    <a href="#" class="hover:underline">Restaurant</a>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-gray-600">built-in</td>
+                            <td class="px-4 py-3 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-700 transition-colors" aria-label="{{ _('remove') }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-3 text-blue-900">
+                                    <i class="fa-solid fa-grip-lines text-gray-400"></i>
+                                    <a href="#" class="hover:underline">My custom adventure</a>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-gray-600">my adventures</td>
+                            <td class="px-4 py-3 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-700 transition-colors" aria-label="{{ _('remove') }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3">
+                                <div class="flex items-center gap-3 text-blue-900">
+                                    <i class="fa-solid fa-grip-lines text-gray-400"></i>
+                                    <a href="#" class="hover:underline">Everybody loves the teacher</a>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3 text-gray-600">my adventures</td>
+                            <td class="px-4 py-3 text-center">
+                                <button type="button" class="text-red-600 hover:text-red-700 transition-colors" aria-label="{{ _('remove') }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <button type="button" class="blue-btn-new">Add adventures</button>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-3 pt-2 border-t border-gray-200">
+            <h3 class="m-0 text-2xl">{{ _('danger_zone') }}</h3>
+            <div class="flex flex-wrap gap-3">
+                <button type="button" class="blue-btn-new">Reset to default adventures</button>
+                <button type="button" class="red-btn-new">Remove all adventures</button>
+            </div>
+        </div>
+    </section>
+
+    <aside class="w-full xl:w-80 border border-gray-400 rounded-lg p-4 bg-gray-50 flex flex-col gap-4 h-fit">
+        <h3 class="text-xl m-0">Add adventures</h3>
+
+        <div class="flex flex-col gap-2">
+            <h4 class="text-sm uppercase tracking-wide text-gray-600 m-0">Built-in adventures</h4>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox"> Introduction</label>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox"> Maths</label>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox"> Ghost house</label>
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <h4 class="text-sm uppercase tracking-wide text-gray-600 m-0">Custom adventures</h4>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox"> Superspy</label>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox"> Rabbit</label>
+            <button type="button" class="blue-btn-new w-fit">Create adventure</button>
+        </div>
+
+        <button type="button" class="green-btn-new w-fit">Add</button>
+        <p class="text-xs text-gray-500 m-0">You see shared adventures from second teachers here.</p>
+    </aside>
+</div>
+</div>
+
+{% endblock %}

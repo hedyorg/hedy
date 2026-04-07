@@ -623,6 +623,142 @@ class ForTeachersModule(WebsiteModule):
             student_adventures=filtered_adventures,
             sort_orders=sort_orders
         )
+    
+    @route("/redesign/class/<class_id>/configure", methods=["GET"])
+    @requires_login
+    def configure_class(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        if hedy_content.Adventures(g.lang).has_adventures():
+            default_adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
+        else:
+            default_adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
+
+        teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
+        second_teacher_adventures = self.db.get_second_teacher_adventures(
+            [self.db.get_class(class_id)], user["username"])
+        teacher_adventures += second_teacher_adventures
+        
+        customizations = self.db.get_class_customizations(class_id)
+        # START HERE
+        # Check how to deal with usages of this endpoint through other endpoints
+        migrate_customizations = False
+        if migrate_customizations:
+            if customizations:
+                # in case this class has thew new way to select adventures
+                if 'sorted_adventures' in customizations:
+                    # remove from customizations adventures that we have removed
+                    self.purge_customizations(customizations['sorted_adventures'],
+                                              default_adventures, teacher_adventures)
+                # it uses the old way so convert it to the new one
+                elif 'adventures' in customizations:
+                    customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+                    for adventure, levels in customizations['adventures'].items():
+                        for level in levels:
+                            customizations['sorted_adventures'][str(level)].append(
+                                {"name": adventure, "from_teacher": False})
+                customizations["updated_by"] = user["username"]
+                self.db.update_class_customizations(customizations)
+            else:
+                # Since it doesn't have customizations loaded, we create a default customization object.
+                # This makes further updating with HTMX easier
+                adventures_to_db = {}
+                for level, default_adventures in hedy_content.adventures_order_per_level().items():
+                    adventures_to_db[str(level)] = [{'name': adventure, 'from_teacher': False}
+                                                    for adventure in default_adventures]
+
+                customizations = {
+                    "id": class_id,
+                    "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
+                    "opening_dates": {},
+                    "other_settings": [],
+                    "level_thresholds": {},
+                    "sorted_adventures": adventures_to_db,
+                    "updated_by": user["username"],
+                    "quiz_parsons_tabs_migrated": True,
+                }
+                self.db.update_class_customizations(customizations)
+
+        second_teacher_invites = [
+            invite
+            for invite in self.db.get_class_invites(class_id=class_id)
+            if invite.get("invited_as") == "second_teacher"
+        ]
+
+        return render_template(
+            "for-teachers/classes/configure-class.html",
+            class_id=class_id,
+            class_info=Class,
+            customizations=customizations,
+            second_teacher_invites=second_teacher_invites,
+            max_level=hedy.HEDY_MAX_LEVEL,
+            javascript_page_options=dict(
+                page="configure-class",
+            ),
+        )
+    
+    @route("/customize-levels/<class_id>", methods=["POST"])
+    @requires_teacher
+    def update_class_customization_level(self, user, class_id):
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return make_response(gettext("ajax_error"), 400)
+        if not isinstance(body.get("levels"), list):
+            return make_response(gettext("request_invalid"), 400)
+
+        # Values are always strings from the front-end -> convert to numbers
+        levels = [int(i) for i in body["levels"]]
+
+        customizations = self.db.get_class_customizations(class_id)
+        customizations = {
+            "id": class_id,
+            "levels": levels,
+            "opening_dates": {},
+            "other_settings": [],
+            "level_thresholds": {},
+            "sorted_adventures": customizations["sorted_adventures"],
+            "dashboard_customization": {},
+            "updated_by": user["username"],
+        }
+
+        self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user["email"])
+        response = {"success": gettext("class_customize_success")}
+
+        return make_response(response, 200)
+
+    @route("/redesign/class/<class_id>/customize-level/<level>", methods=["GET"])
+    @requires_login
+    def customize_level(self, user, class_id, level):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        customizations = self.db.get_class_customizations(class_id)
+        return render_template(
+            "for-teachers/classes/customize-level.html",
+            class_id=class_id,
+            class_info=Class,
+            level=level,
+            customizations=customizations,
+            javascript_page_options=dict(
+                page="customize-level",
+            ),
+        )
 
     @route("/redesign/class/<class_id>/manage", methods=["GET"])
     @requires_login
@@ -698,6 +834,56 @@ class ForTeachersModule(WebsiteModule):
             "for-teachers/classes/manage-class-table-body.html",
             class_info=Class,
             students=student_information,
+        )
+
+    @route("/redesign/class/<class_id>/configure/invite", methods=["POST"])
+    @requires_teacher
+    def invite_second_teachers_configure(self, user, class_id):
+        if not isinstance(request.form.getlist('usernames'), list):
+            return make_response(gettext("username_invalid"), 400)
+        if len(request.form.getlist('usernames')) < 1:
+            return make_response(gettext("username_empty"), 400)
+
+        usernames = request.form.getlist('usernames')
+        Class = self.db.get_class(class_id)
+        if not Class or not (utils.can_edit_class(user, Class)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        users = self.db.users_by_username(usernames)
+        existing_invites = {
+            invite.get("username")
+            for invite in self.db.get_class_invites(class_id=class_id)
+            if invite.get("invited_as") == "second_teacher"
+        }
+        existing_second_teachers = {
+            teacher.get("username")
+            for teacher in Class.get("second_teachers", [])
+        }
+
+        for invited_user in users:
+            username = invited_user.get("username")
+            if not username:
+                continue
+            if username == Class.get("teacher"):
+                continue
+            if username in existing_second_teachers or username in existing_invites:
+                continue
+            self.db.add_class_invite(
+                username=username,
+                class_id=class_id,
+                invited_as="second_teacher",
+                invited_as_text=gettext("second_teacher")
+            )
+
+        second_teacher_invites = [
+            invite
+            for invite in self.db.get_class_invites(class_id=Class["id"])
+            if invite.get("invited_as") == "second_teacher"
+        ]
+        return render_partial(
+            "for-teachers/classes/configure-class-teachers-table-body.html",
+            class_info=Class,
+            second_teacher_invites=second_teacher_invites,
         )
 
     @route("/redesign/program/<class_id>/grade", methods=["POST"])
@@ -1287,10 +1473,15 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        preview_level = request.args.get("level", default=None, type=int)
         session["preview_class"] = {
             "id": Class["id"],
             "name": Class["name"],
         }
+
+        if preview_level and 1 <= preview_level <= hedy.HEDY_MAX_LEVEL:
+            return redirect(f"/hedy/{preview_level}")
         return redirect("/hedy")
 
     @route("/clear-preview-class", methods=["GET"])

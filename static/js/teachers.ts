@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { modal } from './modal';
 import { theKeywordLanguage } from "./app";
 import { ClientMessages } from './client-messages';
@@ -485,6 +486,30 @@ export function save_customizations(class_id: string) {
     });
 }
 
+export function save_customizations_levels(class_id: string) {
+    let levels: (string | undefined)[] = [];
+    $('[id^=enable_level_]').each(function() {
+        if ($(this).is(":checked")) {
+            levels.push(<string>$(this).attr('level'));
+        }
+    });
+
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/customize-levels/' + class_id,
+      data: JSON.stringify({
+          levels: levels,
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+      modal.notifySuccess(response.success);  
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+
+}
+
 export function restore_customization_to_default(prompt: string) {
     modal.confirm (prompt, async function () {
       // We need to know the current level that is selected by the user
@@ -792,6 +817,10 @@ export interface InitializeCustomizeClassPageOptions {
   readonly class_id: string;
 }
 
+export interface InitializeConfigureClassPageOptions {
+  readonly page: 'configure-class';
+}
+
 export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
   $(document).ready(function(){
       $('#back_to_class').on('click', () => {
@@ -811,6 +840,12 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
       autoSave("customize_class");
+  });
+}
+
+export function initializeConfigureClassPage(_options: InitializeConfigureClassPageOptions) {
+  $(document).ready(function() {
+    autoSave("configure_class");
   });
 }
 
@@ -1109,6 +1144,30 @@ export function invite_to_class_redesign(class_id: string, prompt: string, type:
     input_attributes,
     ok_button_attributes,
     '#manage-students-table-body',
+    ClientMessages['invite'],
+    ClientMessages['invitations_sent']
+  );
+}
+
+export function invite_second_teacher_to_configure_class(class_id: string, prompt: string) {
+  const vals = {class_id, 'user_type': 'second_teacher'}
+  const input_attributes = {
+    'hx-get': '/search',
+    'hx-target': '#search_results',
+    'hx-vals': JSON.stringify(vals)
+  }
+  const ok_button_attributes = {
+    'hx-post': `/for-teachers/redesign/class/${class_id}/configure/invite`,
+    'hx-target': '#configure-teachers-table-body',
+    'hx-include': "[name='usernames']",
+    'hx-swap': 'innerHTML'
+  }
+  htmx.process(document.body)
+  modal.htmx_search(
+    prompt,
+    input_attributes,
+    ok_button_attributes,
+    '#configure-teachers-table-body',
     ClientMessages['invite'],
     ClientMessages['invitations_sent']
   );
