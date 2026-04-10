@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+{% block full_width_content %}
+<div tabindex="0" class="flex-grow px-8 common-page-container" data-level="{{level}}"
+    data-kwlang="{{ current_language().lang }}">
+    <div class="flex flex-row gap-6 items-center">
+        <h1> {{ _('level') }} {{level}} — {{program.name}}</h1>
+    </div>
+    <div class="flex flex-row items-start gap-6 w-full">
+        <div class="grid grid-cols-2 justify-start items-start">            
+            <span class="text-sm">{{ _('written_by') }}</span>
+            <span class="font-bold">{{ program.username }}</span>
+            <span class="text-sm">{{ _('last_changed') }}</span>
+            <span id="submitted-program-details" class="p-0 m-0 font-bold">{{ program_timestamp }}</span>
+        </div>
+        <div class="flex-1"></div>
+        {% if 'submitted' in program and program.submitted %}
+        <div class="mt-1">
+            <span class="text-sm py-1 px-3 border rounded no-underline">{{_('submitted_header')}}</span>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if adventure %}
+
+    <div class="cursor-pointer mt-4 w-fit" _="on     click toggle .hidden on #adventure then
+            toggle .rotate-180 on #icon">
+        <h2>Adventure <i id="icon" class="transition-all duration-300 ease-in-out fa-solid fa-caret-down"></i></h2>
+    </div>
+
+    <div id="adventure" data-tabtarget="{{adv_name}}" class="hidden">
+        {% set show_solution = False %}
+        {% if show_solution %}
+        <div class="h-full w-full list-none flex flex-row items-center gap-x-2 xl:gap-x-6 mb-4 mx-2">
+            <div class="cust-adv-tab cust-adv-tab-text cust-adv-tab_{{adv_name}} active flex-initial truncate flex items-center justify-center"
+                data-cy="adventure_content" _="on click remove .active from .cust-adv-tab_{{adv_name}}
+                                     add .active to me
+                                     add .hidden to .tab_content_{{adv_name}}
+                                     remove .hidden from .adventure_content_{{adv_name}}">
+                <div class="cust-adv-text">{{_('adventure')}}</div>
+            </div>
+            <div class="cust-adv-tab cust-adv-tab-text cust-adv-tab_{{adv_name}} flex-initial truncate flex items-center justify-center"
+                data-cy="adventure_solution" _="on click remove .active from .cust-adv-tab_{{adv_name}}
+                                     add .active to me
+                                     add .hidden to .tab_content_{{adv_name}}
+                                     remove .hidden from .adventure_solution_{{adv_name}}">
+                <div class="cust-adv-text">{{_('solution')}}</div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="w-full overflow-auto bg-white mb-5 shadow-md">
+            <div class="tab_content_{{adv_name}} adventure_content_{{adv_name}}
+                             turn-pre-into-ace show-copy-button text-adventure-copy">
+                <div class="lg:flex lg:flex-row {% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
+                    <div
+                        class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                        {% if adventure.is_teacher_adventure %}{{ adventure.text|safe }}{% else %}{{
+                        adventure.text|commonmark }}{% endif %}
+                    </div>
+                    {% if adventure.example_code %}
+                    <div class="border"></div>
+                    <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                        {% if adventure.is_teacher_adventure %}{{ adventure.example_code|safe }}{% else %}{{
+                        adventure.example_code|commonmark }}{% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="{% if not adventure.extra_stories %}hidden{% endif %}" id="extra_{{adv_name}}">
+                    {% for story in adventure.extra_stories %}
+                    <div class="lg:flex lg:flex-row border-t-2">
+                        <div class="lg:w-1/2 w-full p-2 ltr:mr-2 rtl:ml-2">
+                            <div class="max-w-prose">
+                                {{ story.text|commonmark }}
+                            </div>
+                        </div>
+                        {% if story.example_code %}
+                        <div class="border"></div>
+                        <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                            {{ story.example_code|commonmark }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% if show_solution %}
+            <div class="tab_content_{{adv_name}} adventure_solution_{{adv_name}} hidden
+                                 turn-pre-into-ace show-copy-button text-adventure-copy">
+                <div class="{% if adventure.is_teacher_adventure %}teacher-adv{% endif %}">
+                    {% for solution in adventure.solutions %}
+                    <div class="lg:flex lg:flex-row border-t-2">
+                        <div class="lg:w-1/2 w-full p-2 ltr:mr-2 rtl:ml-2">
+                            {% if solution.text %}
+                            <div class="max-w-prose">
+                                {{ solution.text|commonmark }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="border"></div>
+                        <div class="lg:w-1/2 w-full p-2 ltr:ml-2 rtl:mr-2">
+                            {{ solution.code|commonmark }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% endif %}
+    {% include "hedy-page/editor-and-output.html" %}
+
+    {% if can_checkoff_program and 'submitted' in program and program.submitted %}
+    <div class="w-full flex items-center flex-row gap-3 mt-4">
+        <div class="flex flex-row w-1/2 gap-4"> 
+            <button class="green-btn-new "
+                onclick="hedyApp.unsubmit_program('{{program.id}}', '{{_('unsubmit_warning')}}')"> <i class="fa-solid fa-arrow-rotate-right"></i> {{
+                _('allow_resubmit') }}
+            </button>
+            <button
+                id="adventure_checkbox"
+                class="btn-shape-new relative font-semibold overflow-hidden transition-all duration-300 border-2 border-green-500 {% if student_adventure.ticked %}bg-green-500 text-white{% else %}bg-white text-green-600 hover:bg-green-50{% endif %}"
+                hx-post="/for-teachers/check_adventure?level={{ level }}&student_name={{ program.username }}&adventure_name={{ program.adventure_name }}&program_id={{ program_id }}"
+                hx-swap="none"
+                hx-disabled-elt="this"
+                _="on click 
+                    toggle .bg-green-500 .text-white .bg-white .text-green-600 .hover:bg-green-50 on me
+                    if me matches .bg-green-500
+                    put 'Solution Approved' into #adventure-button-text.innerHTML
+                    add .scale-125 to #adventure-button-icon
+                    else
+                    put 'Accept program' into #adventure-button-text.innerHTML
+                    remove .scale-125 from #adventure-button-icon
+                    end"
+            >
+                <div class="relative z-10 flex items-center gap-2">
+                    <div id="adventure-button-icon" class="transition-all duration-300 {% if student_adventure.ticked %}scale-125{% endif %}">
+                        <i class="fa-solid fa-thumbs-up text-lg"></i>
+                    </div>
+                    <span id="adventure-button-text">{% if student_adventure.ticked %}Solution Approved{% else %}Accept program{% endif %}</span>
+                </div>
+            </button>
+        </div>
+        <div class="flex flex-row w-1/2 justify-end items-center gap-4">
+            {% if next_submitted_program_id %}
+                <a class="blue-btn-new" href="/hedy/{{ next_submitted_program_id }}/view/redesign"> <i class="fa-solid fa-puzzle-piece"></i> {{ _("next_adventure") }} </a>
+            {% endif %}
+            {% if next_submitted_classmate_program_id %}
+                <a class="blue-btn-new" href="/hedy/{{ next_submitted_classmate_program_id }}/view/redesign">  <i class="fa-solid fa-child-reaching"></i> {{ _("next_student") }}</i></a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

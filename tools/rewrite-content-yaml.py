@@ -146,8 +146,9 @@ def custom_rewrite_data(obj, strip_strings):
             value = copy[key]
             if value == "":
                 del copy[key]
-            elif value == {}:
-                del copy[key]
+            # Not this one, because Weblate will just add them back
+            # elif value == {}:
+            #    del copy[key]
             elif value == []:
                 del copy[key]
 
@@ -162,6 +163,7 @@ def custom_rewrite_data(obj, strip_strings):
             value = obj[-1]
             if value == "":
                 obj.pop()
+            # Not this one, because Weblate will just add them back
             elif value == {}:
                 obj.pop()
             elif value == []:

@@ -54,7 +54,6 @@ adventures:
                     hewan is burung, landak, armadilo
                     print Dia sekarang mendengar suara seekor hewan at random
                     ```
-                example_code: "```\nhewan {is} 🦔, 🐿, 🦉, 🦇\n{print} Sekarang mereka mendengar suara dari hewan {at} {random}\n```\n"
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
                 example_code_2: |
@@ -72,6 +71,7 @@ adventures:
                     Salin cerita Anda dari level sebelumnya ke level ini.
                     Di level ini Anda telah mempelajari 3 perintah baru `{at} {random}` , `{add} {to_list}` dan `{remove} {from}`.
                     Tambahkan baris kode baru ke cerita Anda, sehingga semua perintah baru ditampilkan setidaknya sekali dalam cerita Anda.
+                example_code: "```\nhewan {is} 🦔, 🐿, 🦉, 🦇\n{print} Sekarang mereka mendengar suara dari hewan {at} {random}\n```\n"
             4:
                 story_text: |
                     ### Latihan
@@ -172,21 +172,6 @@ adventures:
                     {print} 'Beruang coklat, Beruang coklat'
                     {print} 'Apa yang kamu lihat?'
                     ```
-            13:
-                example_code: |
-                    ```
-                    {print}('Selamat datang di cerita ini!')
-                    ```
-                story_text_2: |
-                    ### Latihan 2
-                    Kami telah menyiapkan `{input}` untuk Anda. Pertama, gunakan variabel `name` dalam cerita Anda.
-                    Kemudian tambahkan `{ask}` kedua dan gunakan variabel itu juga.
-                    Tip: Ingat koma di `{print}` antara teks dan variabel!
-                example_code_2: |
-                    ```
-                    naam = {input}("Siapa namamu?")
-                    {print}('Selamat datang di cerita ini!')
-                    ```
             16:
                 example_code: |
                     ```
@@ -202,6 +187,21 @@ adventures:
                         {else}
                             {print} 'Nope they are not at the ' location
                     {print} 'Now you can enter the house!'
+            13:
+                example_code: |
+                    ```
+                    {print}('Selamat datang di cerita ini!')
+                    ```
+                story_text_2: |
+                    ### Latihan 2
+                    Kami telah menyiapkan `{input}` untuk Anda. Pertama, gunakan variabel `name` dalam cerita Anda.
+                    Kemudian tambahkan `{ask}` kedua dan gunakan variabel itu juga.
+                    Tip: Ingat koma di `{print}` antara teks dan variabel!
+                example_code_2: |
+                    ```
+                    naam = {input}("Siapa namamu?")
+                    {print}('Selamat datang di cerita ini!')
+                    ```
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
         default_save_name: tambahkan_perintah_hapus
@@ -789,8 +789,6 @@ adventures:
 
                     {call} _
                     ```
-    pressit:
-        default_save_name: Ditekan
     restaurant:
         name: Rumah makan
         default_save_name: rumahmakan
@@ -1170,3 +1168,4 @@ adventures:
         name: Tahun Baru
         default_save_name: Hitung Mundur Tahun Baru
         description: Hitung Mundur menuju Tahun Baru!
+        levels: {}

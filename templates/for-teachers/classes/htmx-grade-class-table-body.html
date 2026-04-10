@@ -29,7 +29,7 @@
                 <div class="turn-pre-into-ace  overflow-auto rounded-md">
                     <pre level="{{ program.level }}" class="view-program min-h-4/5 h-4/5 py-4">{{ program.code }}</pre>
                     <div class="flex flex-row gap-5 items-center">
-                        <a href="/hedy/{{ program.program_id }}/view" target="_blank" class="blue-btn-new"> {{ _('view_program') }} </a>
+                        <a href="/hedy/{{ program.program_id }}/view/redesign" target="_blank" class="blue-btn-new"> {{ _('view_program') }} </a>
                         {% if not program.is_modified %}
                             <span> This code is very similar to example code.</span>
                         {% endif %}

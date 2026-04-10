@@ -281,6 +281,8 @@ adventures:
                     _
                     {print} Voici un milkshake parfums {at} {random}
                     ```
+    and_or_command:
+        levels: {}
     ask_command:
         name: '{ask}'
         default_save_name: ask_command
@@ -410,6 +412,8 @@ adventures:
                     note_moyenne = {call} _
                     {print} 'Ta note moyenne est ' note_moyenne
                     ```
+    calculator_2:
+        levels: {}
     clear_command:
         name: '{clear}'
         description: La commande {clear}
@@ -431,6 +435,8 @@ adventures:
                     {clear}
                     {print} "SURPRISE !"
                     ```
+    congratulations:
+        levels: {}
     debugging:
         name: débugage
         default_save_name: débugage
@@ -700,6 +706,8 @@ adventures:
                     {for} jour {in} jours
                         {print} jour ", la vaisselle sera faite par " noms {at} {random}
                     ```
+    elif_command:
+        levels: {}
     for_command:
         default_save_name: pour
         description: La commande {for}
@@ -906,6 +914,8 @@ adventures:
                         {call} joue_un_tour
                         {sleep} 2
                     ```
+    guess_my_number:
+        levels: {}
     harry_potter:
         description: Les aventures d'Harry Potter
         levels:
@@ -1077,6 +1087,8 @@ adventures:
                     {if} santé {is} vivant
                         {print} "Génial ! tu as survécu"
                     ```
+    hospital:
+        levels: {}
     hotel:
         name: hôtel
         default_save_name: hôtel
@@ -1237,6 +1249,7 @@ adventures:
                     ```
     maths:
         description: Introduction des maths
+        levels: {}
     music:
         name: musique
         default_save_name: musique
@@ -1397,54 +1410,6 @@ adventures:
 
                     {call} calculate_budget with _, _, _
                     ```
-    pressit:
-        name: Presse une touche
-        default_save_name: Pressé
-        description: Essaie d'associer une touche du clavier à une commande !
-        levels:
-            6:
-                story_text: |
-                    À ce niveau il y a un nouveau mot clé : `{pressed}` !
-                    Avec `{pressed}` tu peux utiliser des touches de ton clavier pour contrôler quelles lignes sont jouées.
-
-                    ### Exercice
-                    Regarde l'exemple et ajoute une ligne de code de plus qui réagit à une touche.
-                example_code: |
-                    ```
-                    {print} "Voulez-vous une bonne (b) ou une mauvaise (m) fin ?"
-                    {if} b {is} {pressed} {print} "Ils vécurent heureux et eurent beaucoup d'enfants ❤️"
-                    {else} {print} "Le prince fut mangé par un hippopotame 😭"
-                    ```
-                story_text_2: |
-                    Tu peux aussi associer les commande de la tortue à des touches.
-
-                    ### Exercice
-                    Copie les lignes plusieurs fois pour créer une image plus grande.
-            8:
-                story_text: |
-                    Maintenant que tu sais tout sur le `{repeat}`, nous pouvons appuyer sur les touches plusieurs fois.
-
-                    ### Exercice
-                    Le code que tu as vu au niveau 5 ne détecte la touche qu'une seule fois. Copie l'exemple et ajoute-lui un `{repeat}` pour que tu puisses appuyer sur les touches plusieurs fois.
-            10:
-                story_text: |
-                    Maintenant que tu sais comment combiner les éléments, tu peux créer un jeu tactile avec `{pressed}`.
-
-                    ### Exercice
-                    Termine le code. À chaque fois, une lettre doit être choisie au hasard, qu'il faut appuyer. Tu gagnes un point par bonne réponse, mais deux points sont retirés si tu te trompes.
-                    **Bonus** Efface l'écran après chaque lettre, et affiche le score à la fin.
-                example_code: |
-                    ```
-                    points = 0
-                    lettre = a, b, c, d, e
-                    {repeat} 10 {times}
-                        lettre = _ _ _
-                        {print} "Presse la touche " letter
-                        {if} lettre {is} {pressed}
-                        _
-                        _
-                        _
-                    ```
     print_command:
         default_save_name: affiche
         description: Introduction à la commande affiche
@@ -1489,6 +1454,8 @@ adventures:
                     nom = "Hedy"
                     {print}("Mon nom est ", nom)
                     ```
+    quizmaster:
+        levels: {}
     quotation_marks:
         name: '"Les guillemets"'
         description: Introduction des guillemets
@@ -2559,7 +2526,7 @@ adventures:
                     {forward} 300
                     {turn} 180
 
-                    {for} i {in} {range} 1 {to} 5
+                    {repeat} 5 {times}
                         {color} gris
                         {forward} 100
                         forme = {ask} "Quelle forme veux-tu ensuite dans ton bracelet ?"
@@ -2614,3 +2581,5 @@ adventures:
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
                     ```
+    years:
+        levels: {}
