@@ -141,7 +141,7 @@
                         <i class="fa-regular fa-lightbulb w-4" style="line-height: inherit;" aria-hidden="true"></i>
                     {% endif %}
                     <span class="text-sm text-gray-600">
-                        {% if adventure.is_teacher_adventure %}{{ _('my_adventures')|lowerte }}{% else %}{{ _('built_in') }}{% endif %}
+                        {% if adventure.is_teacher_adventure %}{{ _('my_adventures')|lower }}{% else %}{{ _('built_in') }}{% endif %}
                     </span>
                 </div>
                 <button
