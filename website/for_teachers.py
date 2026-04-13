@@ -623,7 +623,7 @@ class ForTeachersModule(WebsiteModule):
             student_adventures=filtered_adventures,
             sort_orders=sort_orders
         )
-    
+
     @route("/redesign/class/<class_id>/configure", methods=["GET"])
     @requires_login
     def configure_class(self, user, class_id):
@@ -644,7 +644,7 @@ class ForTeachersModule(WebsiteModule):
         second_teacher_adventures = self.db.get_second_teacher_adventures(
             [self.db.get_class(class_id)], user["username"])
         teacher_adventures += second_teacher_adventures
-        
+
         customizations = self.db.get_class_customizations(class_id)
         # START HERE
         # Check how to deal with usages of this endpoint through other endpoints
@@ -702,7 +702,7 @@ class ForTeachersModule(WebsiteModule):
                 page="configure-class",
             ),
         )
-    
+
     @route("/customize-levels/<class_id>", methods=["POST"])
     @requires_teacher
     def update_class_customization_level(self, user, class_id):
