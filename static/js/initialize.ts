@@ -5,7 +5,7 @@ import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializ
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
 import { logs } from './logs';
-import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeConfigureClassPage, InitializeConfigureClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeContextMenuPageOptions, initializeContextMenuEventHandler, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage, InitializeGradePageOptions, initializeGradePage } from './teachers';
+import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeConfigureClassPage, InitializeConfigureClassPageOptions, initializeCustomizeLevelPage, InitializeCustomizeLevelPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeContextMenuPageOptions, initializeContextMenuEventHandler, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage, InitializeGradePageOptions, initializeGradePage } from './teachers';
 
 export interface InitializeOptions {
   /**
@@ -61,6 +61,7 @@ type InitializePageOptions =
   | InitializeContextMenuPageOptions
   | InitializeClassPerformanceGraphPageOptions
   | InitializeGradePageOptions
+  | InitializeCustomizeLevelPageOptions
   ;
 
 
@@ -92,6 +93,10 @@ export function initialize(options: InitializeOptions) {
 
     case 'customize-class':
       initializeCustomizeClassPage(options.javascriptPageOptions);
+      break;
+
+    case 'customize-level':
+      initializeCustomizeLevelPage(options.javascriptPageOptions);
       break;
 
     case 'configure-class':

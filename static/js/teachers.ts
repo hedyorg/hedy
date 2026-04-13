@@ -817,6 +817,12 @@ export interface InitializeCustomizeClassPageOptions {
   readonly class_id: string;
 }
 
+export interface InitializeCustomizeLevelPageOptions {
+  readonly page: 'customize-level';
+  readonly class_id?: string;
+  readonly level?: number;
+}
+
 export interface InitializeConfigureClassPageOptions {
   readonly page: 'configure-class';
 }
@@ -840,12 +846,46 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
       autoSave("customize_class");
+
+      // Re-bind autosave on page restore paths where browser behavior differs.
+      window.addEventListener('pageshow', function() {
+        autoSave("customize_class");
+      });
+  });
+}
+
+export function initializeCustomizeLevelPage(_options: InitializeCustomizeLevelPageOptions) {
+  $(document).ready(function() {
+    // Prevent stale cached page when navigating back/forward
+    window.addEventListener('pageshow', function(event) {
+      var navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+      var isBackForward = navEntries.length > 0 && navEntries[0].type === 'back_forward';
+      var historyTraversal = event.persisted || isBackForward;
+      if (historyTraversal) {
+        window.location.href = window.location.href;
+      }
+    });
   });
 }
 
 export function initializeConfigureClassPage(_options: InitializeConfigureClassPageOptions) {
-  $(document).ready(function() {
+  $(document).ready(function () {
     autoSave("configure_class");
+
+  // An ugly hack, but if someone goes back trhough the page, the cache
+  // causes the old version of the page to be shown
+  // So we hard reload it
+    window.addEventListener("pageshow", function (event) {
+      var navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+      var isBackForward = navEntries.length > 0 && navEntries[0].type === 'back_forward';
+      var historyTraversal = event.persisted || isBackForward;
+      if (historyTraversal) {
+        window.location.href = window.location.href;
+        return;
+      }
+
+      autoSave("configure_class");
+    });
   });
 }
 
@@ -875,9 +915,9 @@ export function initializeClassOverviewPage(_options: InitializeClassOverviewPag
   // causes the old version of the page to be shown
   // So we hard reload it
   window.addEventListener( "pageshow", function ( event ) {
-    var historyTraversal = event.persisted ||
-                           ( typeof window.performance != "undefined" &&
-                                window.performance.navigation.type === 2 );
+    var navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+    var isBackForward = navEntries.length > 0 && navEntries[0].type === 'back_forward';
+    var historyTraversal = event.persisted || isBackForward;
     if ( historyTraversal ) {
       window.location.href = window.location.href
     }
