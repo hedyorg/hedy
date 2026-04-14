@@ -277,18 +277,41 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def get_classes(self, user):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
         for _class in teacher_classes:
-            _class['date'] = utils.localized_date_format(_class['date'], only_date=True)
+            _class["date"] = utils.localized_date_format(_class["date"], only_date=True)
         logger.info(teacher_classes)
-        return render_template("for-teachers/classes/classes.html",
-                               current_page="classes",
-                               page_title=gettext("classes"),
-                               teacher_classes=teacher_classes,
-                               javascript_page_options=dict(
-                                   page='classes',
-                               ))
+        return render_template(
+            "for-teachers/classes/classes.html",
+            current_page="classes",
+            page_title=gettext("classes"),
+            teacher_classes=teacher_classes,
+            javascript_page_options=dict(
+                page="classes",
+            ),
+        )
+
+    @route("/class/<class_id>", methods=["DELETE"])
+    @requires_login
+    def delete_class_redesign(self, user, class_id):
+        Class = self.db.get_class(class_id)
+        if not Class:
+            return make_response(gettext("no_such_class"), 404)
+        if Class["teacher"] != user["username"]:
+            return make_response(gettext("unauthorized"), 401)
+
+        self.db.delete_class(Class)
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        for _class in teacher_classes:
+            _class["date"] = utils.localized_date_format(_class["date"], only_date=True)
+
+        return render_partial(
+            "for-teachers/classes/htmx-classes-table.html",
+            teacher_classes=teacher_classes,
+        )
 
     @route("/class/new", methods=["GET"])
     @requires_teacher

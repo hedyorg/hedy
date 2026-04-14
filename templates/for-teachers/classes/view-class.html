@@ -42,7 +42,15 @@
         <h2>{{ _('danger_zone') }}</h2>
         <div class="flex flex-col gap-5">
             <button class="green-btn-new w-fit">{{ _('archive_class') }}</button>
-            <button class="red-btn-new w-fit">{{_('delete_class') }}</button>
+            <button
+                type="button"
+                class="red-btn-new w-fit"
+                data-cy="delete_class"
+                hx-confirm="{{_('delete_class_prompt')}}"
+                hx-delete="/for-teachers/class/{{ _class.id }}"
+                hx-swap="none"
+                hx-on::after-request="if (event.detail.successful) { window.location.href='/for-teachers/class/all'; }"
+            >{{_('delete_class') }}</button>
         </div>
     </div>
 </div>

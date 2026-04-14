@@ -47,17 +47,38 @@
                   {% endif %}
                 z-30 menu origin-top-left absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
                   <ul class="list-none divide-y divide-gray-200 p-2">
-                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100">
-                      <i class="fa-solid fa-circle-check text-sm"></i>
-                        <span class="m-3">Grading</span>
+                    <a href="/for-teachers/redesign/class/{{class.id}}/grade" class="no-underline  text-blue-900">
+                      <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100">
+                        <i class="fa-solid fa-circle-check text-sm"></i>
+                        <span  class="m-3">{{_('grading')}}</span>
+                      </li>
+                    </a>
+                    <a href="/for-teachers/redesign/class/{{class.id}}/configure" class="no-underline text-blue-900">
+                      <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 gap-4">
+                        <i class="fa-solid fa-gears text-sm"></i>
+                        <span class="m-3">{{_('configure')}}</span> 
+                      </li>
+                    </a>
+                    <a class="no-underline text-blue-900" aria-disabled="true">
+                      <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100">
+                        <i class="fa-solid fa-box-archive text-sm"></i> 
+                        <span class="m-3">{{_('archive')}}</span>
+                      </li>
+                    </a>
+                    <li class="rounded-b-lg">
+                      <button
+                        data-cy="remove_class"
+                        class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-b-lg text-red-700 ease-in transition duration-100 font-bold"
+                        hx-confirm="{{_('delete_class_prompt')}}"
+                        hx-trigger="click"
+                        hx-delete="/for-teachers/class/{{class.id}}"
+                        hx-target="#classes_table"
+                        hx-swap="outerHTML"
+                      >
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                        <span class="m-3">{{_('delete')}}</span>
+                      </button>
                     </li>
-                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4">
-                      <i class="fa-solid fa-gears text-sm"></i> <span class="m-3">Configure</span> 
-                    </li>
-                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100">
-                      <i class="fa-solid fa-box-archive text-sm"></i>  <span class="m-3">Archive</span> </li>
-                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-b-lg  text-red-700 ease-in transition duration-100">
-                      <i class="fa-solid fa-trash-can text-sm"></i> <span class="m-3">Delete</span> </li>
                   </ul>
                 </div>
               </div>

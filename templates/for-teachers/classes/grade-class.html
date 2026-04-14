@@ -18,17 +18,17 @@
         #timestamp-sort-input, 
         #ticked-sort-input"
 >
-    <div class="flex flex-row gap-5 justify-between items-center">
-        <div class="flex flex-row gap-14 items-center">
+    <div class="flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-center">
+        <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6 lg:gap-14">
             <!-- LEVEL -->
-            <div class="flex flex-row gap-2 w-full items-center">
-                <label for="dropdown_level_button" class="text-xl font-slab leading-6 text-blue-800">{{ _('level') }}</label>
+            <div class="flex flex-row gap-2 w-full items-center justify-between sm:w-auto sm:justify-start">
+                <label for="dropdown_level_button" class="text-lg sm:text-xl font-slab leading-6 text-blue-800">{{ _('level') }}</label>
                 <div id="level_button" class="dropdown relative">
-                    <button type="button" class="blue-btn-new rounded inline-flex items-center w-fit gap-2 text-xl" id="dropdown_level_button"
+                    <button type="button" class="blue-btn-new rounded inline-flex items-center w-fit gap-2 text-base sm:text-xl whitespace-nowrap" id="dropdown_level_button"
                         onclick="$('#level_dropdown').slideToggle('medium');">
                         <span id="level-button-span">{{ _('all') }}</span> <i id="level-arrow" class="fa-solid fa-angle-down"></i>
                     </button>
-                    <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
+                    <div class="absolute block rounded-md ltr:right-0 rtl:left-0 sm:ltr:left-0 sm:rtl:right-0 ltr:mr-1 rtl:ml-1 w-max max-w-[85vw] overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
                         style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
                         id="level_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" 
                         _="on mutation of @style
@@ -68,14 +68,14 @@
                 </div>    
             </div>
             <!-- STUDENTS -->
-            <div class="flex flex-row w-full gap-2 items-center">
-                <label for="dropdown_student_button" class="text-xl font-slab leading-6 text-blue-800">{{ _('students')|capitalize }}</label>
+            <div class="flex flex-row w-full gap-2 items-center justify-between sm:w-auto sm:justify-start">
+                <label for="dropdown_student_button" class="text-lg sm:text-xl font-slab leading-6 text-blue-800">{{ _('students')|capitalize }}</label>
                 <div id="student_button" class="dropdown relative">
-                    <button type="button" class="blue-btn-new w-max rounded inline-flex items-center w-fit gap-2 text-xl"
+                    <button type="button" class="blue-btn-new w-max rounded inline-flex items-center w-fit gap-2 text-base sm:text-xl whitespace-nowrap"
                         id="dropdown_student_button" onclick="$('#student_dropdown').slideToggle('medium');">
                         <span id="student-button-span">{{ _('all') }}</span> <i id="student-arrow" class="fa-solid fa-angle-down"></i>
                     </button>
-                    <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
+                    <div class="absolute block rounded-md ltr:right-0 rtl:left-0 sm:ltr:left-0 sm:rtl:right-0 ltr:mr-1 rtl:ml-1 w-max max-w-[85vw] overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
                         style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
                         id="student_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
                         _="on mutation of @style
@@ -114,14 +114,14 @@
                 </div>
             </div>
             <!-- ADVENTURES -->
-            <div class="flex flex-row w-full gap-2 items-center">
-                <label for="dropdown_adventure_button" class="text-xl font-slab leading-6 text-blue-800">{{ _('adventures')|capitalize }}</label>
+            <div class="flex flex-row w-full gap-2 items-center justify-between sm:w-auto sm:justify-start">
+                <label for="dropdown_adventure_button" class="text-lg sm:text-xl font-slab leading-6 text-blue-800">{{ _('adventures')|capitalize }}</label>
                 <div id="adventure_button" class="dropdown relative">
-                    <button type="button" class="blue-btn-new w-max rounded inline-flex items-center w-fit gap-2 text-xl"
+                    <button type="button" class="blue-btn-new w-max rounded inline-flex items-center w-fit gap-2 text-base sm:text-xl whitespace-nowrap"
                         id="dropdown_adventure_button" onclick="$('#adventure_dropdown').slideToggle('medium');">
                         <span id="adventure-button-span">{{ _('all') }}</span> <i id="adventure-arrow" class="fa-solid fa-angle-down"></i>
                     </button>
-                    <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
+                    <div class="absolute block rounded-md ltr:right-0 rtl:left-0 sm:ltr:left-0 sm:rtl:right-0 ltr:mr-1 rtl:ml-1 w-max max-w-[85vw] overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
                         style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
                         id="adventure_dropdown"
                         _="on mutation of @style
@@ -160,7 +160,7 @@
                 </div>
             </div>
         </div>
-        <button class="blue-btn-new inline-flex items-center w-fit gap-2 text-xl" type="submit" 
+        <button class="blue-btn-new inline-flex items-center justify-center w-full sm:w-fit gap-2 text-base sm:text-xl" type="submit" 
         _="on click
             set value of #level-filter-input to @data-temp-value of #level-filter-input
             set value of #student-filter-input to @data-temp-value of #student-filter-input
