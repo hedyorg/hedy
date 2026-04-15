@@ -1,5 +1,16 @@
 {% extends "auth.html" %}
 {% block regular_content %}
+<div class="px-4 md:px-16 mt-2 mb-4 flex flex-col gap-2">
+	<div class="flex flex-wrap items-center gap-2 text-lg">
+		<i class="fa-solid fa-chalkboard-user text-sm text-blue-800" aria-hidden="true"></i>
+		<span class="text-gray-700">&rsaquo;</span>
+		<a href="/for-teachers/class/all" class="no-underline hover:underline text-blue-800">{{ _('classes') }}</a>
+		<span class="text-gray-700">&rsaquo;</span>
+		<a href="/for-teachers/redesign/class/{{ class_info.id }}" class="no-underline hover:underline text-blue-800">{{ class_info.name }}</a>
+		<span class="text-gray-700">&rsaquo;</span>
+		<span class="font-semibold">{{ _('configure') }}</span>
+	</div>
+</div>
 <h1 style="overflow-wrap: anywhere;">
 	{{ class_info.name }}
 	<i class="fa-solid fa-pencil cursor-pointer text-2xl mx-2"

@@ -1,6 +1,15 @@
 {% extends "auth.html" %}
 {% block regular_content %}
 <div class="flex flex-col gap-10">
+    <div class="px-4 md:px-16 mt-2 -mb-4 flex flex-col gap-2">
+        <div class="flex flex-wrap items-center gap-2 text-lg">
+            <i class="fa-solid fa-chalkboard-user text-sm text-blue-800" aria-hidden="true"></i>
+            <span class="text-gray-700">&rsaquo;</span>
+            <a href="/for-teachers/class/all" class="no-underline hover:underline text-blue-800">{{ _('classes') }}</a>
+            <span class="text-gray-700">&rsaquo;</span>
+            <span class="font-semibold break-words">{{ _class.name }}</span>
+        </div>
+    </div>
     <h1 class="md:px-16 my-5" style="overflow-wrap: anywhere;"> {{ _class.name }} </h1>
     <div class="flex flex-row gap-4 md:px-16">
         <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md px-10 rounded-lg w-full p-8">

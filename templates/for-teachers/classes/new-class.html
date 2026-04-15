@@ -1,6 +1,14 @@
 {% extends "auth.html" %}
 {% block regular_content %}
 <div class="flex flex-col">
+        <div class="flex flex-wrap items-center gap-2 text-lg">
+            <i class="fa-solid fa-chalkboard-user text-sm text-blue-800" aria-hidden="true"></i>
+            <span class="text-gray-700">&rsaquo;</span>
+            <a href="/for-teachers/class/all" class="no-underline hover:underline text-blue-800">{{ _('classes') }}</a>
+            <span class="text-gray-700">&rsaquo;</span>
+            <span class="font-semibold">{{ _('create_class') }}</span>
+        </div>
+    </div>
     <h1 class="px-4 md:px-16">{{ _('create_class') }}</h1>
     <form id="create_class_form" onsubmit="hedyApp.create_class_redesign(this); event.preventDefault();">
         <div class="flex flex-col px-4 sm:px-6 md:px-8 md:mx-16 my-5 w-full md:w-3/4 max-w-4xl bg-white border border-gray-400 shadow-md rounded-lg py-6 md:py-8">

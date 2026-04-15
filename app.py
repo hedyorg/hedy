@@ -1543,6 +1543,8 @@ def view_program_redesing(user, id):
             if next_submitted_program_id:
                 break
 
+    class_info = g_db().get_class(class_id) if class_id else None
+
     arguments_dict["can_checkoff_program"] = prog_perms.can_checkoff
     arguments_dict["can_unsubmit_program"] = prog_perms.can_unsubmit
 
@@ -1553,6 +1555,7 @@ def view_program_redesing(user, id):
             page="view-program", lang=g.lang, level=int(result["level"]), code=code
         ),
         class_id=student_customizations.get("id"),
+        class_info=class_info,
         next_submitted_program_id=next_submitted_program_id,
         next_submitted_classmate_program_id=next_submitted_classmate_program_id,
         adventure=adventure,

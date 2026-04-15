@@ -2,6 +2,25 @@
 {% block full_width_content %}
 <div tabindex="0" class="flex-grow px-4 sm:px-8 common-page-container" data-level="{{level}}"
     data-kwlang="{{ current_language().lang }}">
+    <div class="mt-2 mb-4 flex flex-col gap-2">
+        <div class="flex flex-wrap items-center gap-2 text-lg">
+            <i class="fa-solid fa-chalkboard-user text-sm text-blue-800" aria-hidden="true"></i>
+            {% if class_id is defined and class_id and class_info is defined and class_info %}
+                <span class="text-gray-700">&rsaquo;</span>
+                <a href="/for-teachers/class/all" class="no-underline hover:underline text-blue-800">{{ _('classes') }}</a>
+                <span class="text-gray-700">&rsaquo;</span>
+                <a href="/for-teachers/redesign/class/{{ class_id|default('') }}" class="no-underline hover:underline text-blue-800">{{ class_info.name }}</a>
+                <span class="text-gray-700">&rsaquo;</span>
+                <a href="/for-teachers/redesign/class/{{ class_id|default('') }}/grade" class="no-underline hover:underline text-blue-800">{{ _('grading') }}</a>
+            {% endif %}
+            <span class="text-gray-700">&rsaquo;</span>
+            <span class="font-semibold">{{ _('level_title') }} {{ level }}</span>
+            {% if adventure %}
+                <span class="text-gray-700">&rsaquo;</span>
+                <span class="font-semibold">{{ adventure.name }}</span>
+            {% endif %}
+        </div>
+    </div>
     <div class="flex flex-row gap-6 items-center">
         <h1 class="m-0 break-words">{{ _('level') }} {{level}} — {{program.name}}</h1>
     </div>
