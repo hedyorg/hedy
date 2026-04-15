@@ -907,6 +907,43 @@ class ForTeachersModule(WebsiteModule):
             class_id, level, adventures, available_adventures
         )
 
+    @route("/redesign/class/<class_id>/customize-level/<level>/restore-default-adventures", methods=["POST"])
+    @requires_login
+    def restore_default_adventures_customize_level(self, user, class_id, level):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return make_response(gettext("request_invalid"), 400)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return make_response(gettext("request_invalid"), 400)
+
+        customizations, adventures, _, available_adventures, _ = self.get_class_info(
+            user, class_id, migrate_customizations=True
+        )
+
+        level_key = str(level)
+        customizations["sorted_adventures"][level_key] = [
+            {"name": adventure_id, "from_teacher": False}
+            for adventure_id in hedy_content.adventures_order_per_level().get(level, [])
+        ]
+
+        self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user["email"])
+
+        customizations, adventures, _, available_adventures, _ = self.get_class_info(
+            user, class_id, migrate_customizations=True
+        )
+
+        return self._render_customize_level_adventures_partial(
+            class_id, level, adventures, available_adventures
+        )
+
     @route("/redesign/class/<class_id>/customize-level/<level>/remove-adventure", methods=["POST"])
     @requires_login
     def remove_adventure_customize_level(self, user, class_id, level):
@@ -987,6 +1024,37 @@ class ForTeachersModule(WebsiteModule):
         )
         return self._render_customize_level_adventures_partial(
             class_id, level, adventures, available_adventures
+        )
+
+    @route("/redesign/class/<class_id>/customize-level/<level>/remove-all-adventures-modal", methods=["GET"])
+    @requires_login
+    def get_remove_all_adventures_customize_level_modal(self, user, class_id, level):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return make_response(gettext("request_invalid"), 400)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return make_response(gettext("request_invalid"), 400)
+
+        modal_text = gettext("remove_customizations_prompt")
+        htmx_endpoint = f"/for-teachers/redesign/class/{class_id}/customize-level/{level}/sort-adventures"
+        htmx_target = "#level_adventures_panel"
+        htmx_swap = "outerHTML"
+        htmx_indicator = "#level_adventures_indicator"
+
+        return render_partial(
+            "modal/htmx-modal-confirm.html",
+            modal_text=modal_text,
+            htmx_endpoint=htmx_endpoint,
+            htmx_target=htmx_target,
+            htmx_swap=htmx_swap,
+            htmx_indicator=htmx_indicator,
         )
 
     @route("/redesign/class/<class_id>/manage", methods=["GET"])

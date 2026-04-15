@@ -12,6 +12,7 @@
         </td>
         <td data-cy="teacher_cell" class="py-3 text-center">{{ program.student }}</td>
         <td class="py-3 tet-center items-center">
+            <div class="flex flex-col gap-2 w-52 md:w-auto">
             <div class="flex flex-row  items-center cursor-pointer hover:bg-blue-200 p-3 rounded-lg transition-all ease-in duration-100"
             _="on click
                 toggle .sliding-content-closed .sliding-content-open on #program_{{ program.program_id }}

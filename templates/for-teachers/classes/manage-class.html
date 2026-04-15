@@ -1,8 +1,8 @@
 {% extends "auth.html" %}
 {% block regular_content %}
-<h1>{{ class_info.name }}</h1>
+<h1 style="overflow-wrap: anywhere;">{{ class_info.name }}</h1>
 <h2 class="text-4xl mt-3">{{ _('manage_students') }}</h2>
-<div class="md:px-16 overflow-x-auto h-full" id="classes_table">
+<div class="md:px-16 h-full" id="classes_table">
   <div class="w-full h-full mb-48">
     <div class="w-full h-full border rounded-lg shadow-md">
       <form hx-get="/for-teachers/redesign/class/{{ class_info.id }}/manage/filter_sort"
@@ -14,14 +14,16 @@
               #timestamp-sort-input
           "
       >
-        {{
-          render_partial(
-            "for-teachers/classes/manage-class-table.html", 
-            students=students, 
-            class_info=class_info, 
-            teacher_classes=teacher_classes
-          )
-        }}
+        <div class="w-full overflow-x-auto">
+          {{
+            render_partial(
+              "for-teachers/classes/manage-class-table.html", 
+              students=students, 
+              class_info=class_info, 
+              teacher_classes=teacher_classes
+            )
+          }}
+        </div>
       </form>
     </div>
     <h2>{{ _('add_students') }}</h2>

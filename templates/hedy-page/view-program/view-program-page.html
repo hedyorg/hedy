@@ -1,20 +1,19 @@
 {% extends "layout.html" %}
 {% block full_width_content %}
-<div tabindex="0" class="flex-grow px-8 common-page-container" data-level="{{level}}"
+<div tabindex="0" class="flex-grow px-4 sm:px-8 common-page-container" data-level="{{level}}"
     data-kwlang="{{ current_language().lang }}">
     <div class="flex flex-row gap-6 items-center">
-        <h1> {{ _('level') }} {{level}} — {{program.name}}</h1>
+        <h1 class="m-0 break-words">{{ _('level') }} {{level}} — {{program.name}}</h1>
     </div>
-    <div class="flex flex-row items-start gap-6 w-full">
-        <div class="grid grid-cols-2 justify-start items-start">            
+    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 w-full mt-2">
+        <div class="grid grid-cols-[auto,1fr] gap-x-3 gap-y-1 items-start min-w-0">
             <span class="text-sm">{{ _('written_by') }}</span>
-            <span class="font-bold">{{ program.username }}</span>
+            <span class="font-bold break-all">{{ program.username }}</span>
             <span class="text-sm">{{ _('last_changed') }}</span>
-            <span id="submitted-program-details" class="p-0 m-0 font-bold">{{ program_timestamp }}</span>
+            <span id="submitted-program-details" class="p-0 m-0 font-bold break-words">{{ program_timestamp }}</span>
         </div>
-        <div class="flex-1"></div>
         {% if 'submitted' in program and program.submitted %}
-        <div class="mt-1">
+        <div class="sm:mt-1 self-start">
             <span class="text-sm py-1 px-3 border rounded no-underline">{{_('submitted_header')}}</span>
         </div>
         {% endif %}
@@ -22,7 +21,7 @@
 
     {% if adventure %}
 
-    <div class="cursor-pointer mt-4 w-fit" _="on     click toggle .hidden on #adventure then
+    <div class="cursor-pointer mt-4 w-fit" _="on click toggle .hidden on #adventure then
             toggle .rotate-180 on #icon">
         <h2>Adventure <i id="icon" class="transition-all duration-300 ease-in-out fa-solid fa-caret-down"></i></h2>
     </div>
@@ -113,15 +112,15 @@
     {% include "hedy-page/editor-and-output.html" %}
 
     {% if can_checkoff_program and 'submitted' in program and program.submitted %}
-    <div class="w-full flex items-center flex-row gap-3 mt-4">
-        <div class="flex flex-row w-1/2 gap-4"> 
-            <button class="green-btn-new "
-                onclick="hedyApp.unsubmit_program('{{program.id}}', '{{_('unsubmit_warning')}}')"> <i class="fa-solid fa-arrow-rotate-right"></i> {{
+    <div class="w-full flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
+        <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-3"> 
+            <button class="green-btn-new w-full sm:w-auto" data-unsubmit-warning="{{ _('unsubmit_warning') }}"
+                onclick="hedyApp.unsubmit_program('{{program.id}}', this.dataset.unsubmitWarning)"> <i class="fa-solid fa-arrow-rotate-right"></i> {{
                 _('allow_resubmit') }}
             </button>
             <button
                 id="adventure_checkbox"
-                class="btn-shape-new relative font-semibold overflow-hidden transition-all duration-300 border-2 border-green-500 {% if student_adventure.ticked %}bg-green-500 text-white{% else %}bg-white text-green-600 hover:bg-green-50{% endif %}"
+                class="btn-shape-new w-full sm:w-auto relative font-semibold overflow-hidden transition-all duration-300 border-2 border-green-500 {% if student_adventure.ticked %}bg-green-500 text-white{% else %}bg-white text-green-600 hover:bg-green-50{% endif %}"
                 hx-post="/for-teachers/check_adventure?level={{ level }}&student_name={{ program.username }}&adventure_name={{ program.adventure_name }}&program_id={{ program_id }}"
                 hx-swap="none"
                 hx-disabled-elt="this"
@@ -143,12 +142,12 @@
                 </div>
             </button>
         </div>
-        <div class="flex flex-row w-1/2 justify-end items-center gap-4">
+        <div class="flex flex-col sm:flex-row w-full sm:w-auto sm:ml-auto justify-start sm:justify-end items-stretch sm:items-center gap-3">
             {% if next_submitted_program_id %}
-                <a class="blue-btn-new" href="/hedy/{{ next_submitted_program_id }}/view/redesign"> <i class="fa-solid fa-puzzle-piece"></i> {{ _("next_adventure") }} </a>
+                <a class="blue-btn-new w-full sm:w-auto" href="/hedy/{{ next_submitted_program_id }}/view/redesign"> <i class="fa-solid fa-puzzle-piece"></i> {{ _("next_adventure") }} </a>
             {% endif %}
             {% if next_submitted_classmate_program_id %}
-                <a class="blue-btn-new" href="/hedy/{{ next_submitted_classmate_program_id }}/view/redesign">  <i class="fa-solid fa-child-reaching"></i> {{ _("next_student") }}</i></a>
+                <a class="blue-btn-new w-full sm:w-auto" href="/hedy/{{ next_submitted_classmate_program_id }}/view/redesign">  <i class="fa-solid fa-child-reaching"></i> {{ _("next_student") }}</i></a>
             {% endif %}
         </div>
     </div>

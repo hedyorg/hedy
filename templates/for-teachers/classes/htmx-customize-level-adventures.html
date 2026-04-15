@@ -1,6 +1,6 @@
 {% set level = level|default(1) %}
 {% set class_id = class_id|default('') %}
-<div id="level_adventures_panel" class="flex flex-col w-1/2 gap-3">
+<div id="level_adventures_panel" class="flex flex-col w-full md:w-1/2 gap-3">
     <div class="flex flex-wrap items-center gap-3">
         <button
             type="button"
@@ -146,7 +146,7 @@
                 </div>
                 <button
                     type="button"
-                    class="text-red-600 hover:text-red-700 transition-colors mx-3"
+                    class="text-red-600 hover:text-red-700 transition-colors mx-1 md:mx-1 inline-flex items-center justify-center w-11 md:w-fit md:h-fit h-11 rounded-full"
                     aria-label="{{ _('remove') }}"
                     hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/remove-adventure?adventure_id={{ adventure.short_name }}"
                     hx-target="#level_adventures_panel"

@@ -7,14 +7,14 @@
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('name')}}</th>
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('teacher')}}</th>
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('students')[0]|upper}}{{_('students')[1:]}}</th>
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('created')}}
+            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('created')}}</th>
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('actions')}}</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           {% for class in teacher_classes %}
           <tr >
-            <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+            <td class="text-center px-3 {% if loop.last %} rounded-b-lg {% endif %}">
               <a href="/for-teachers/redesign/class/{{class.id}}" class="view_class" data-cy="view_class_link">
                 {{class.name|e}}
               </a>
@@ -116,6 +116,7 @@
           {% endfor %}
         </tbody>
       </table>
+      </div>
     </div>
       <a class="blue-btn-new inline-flex items-center mt-10"
           id="create_class_button"

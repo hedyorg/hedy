@@ -1,25 +1,25 @@
 {% if students|length == 0 %}
 <tr>
-    <td class="text-center rounded-b-lg py-4" colspan="3">
+    <td class="text-center rounded-b-lg py-3 px-2 sm:px-4" colspan="3">
         {{ _('no_students') }}
     </td>
 </tr>
 {% else %}
 {% for student in students %}
 <tr>
-<td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+<td class="py-2.5 px-2 sm:px-4 text-center whitespace-nowrap {% if loop.last %} rounded-b-lg {% endif %}">
     {{ student.username }}
 </td>
-<td data-cy="teacher_cell" class="py-3 text-center"> 
+<td data-cy="teacher_cell" class="py-2.5 px-2 sm:px-4 text-center whitespace-nowrap"> 
     {% if student.is_invite %}
     {{ _('invited_on') }} {{ student.last_login }}
     {% else %}
     {{ student.last_login }} 
     {% endif %}
 </td>
-<td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+<td class="py-2.5 px-2 sm:px-4 text-center {% if loop.last %} rounded-b-lg {% endif %}">
     <div class="relative inline-block text-left" name="menu">
-    <button type="button" class="blue-btn-new p-1.5 flex justify-center rounded-full"
+    <button type="button" class="blue-btn-new p-1 sm:p-1.5 flex justify-center rounded-full"
             _="on click
             remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
             add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
