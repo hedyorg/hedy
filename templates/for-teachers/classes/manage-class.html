@@ -1,49 +1,46 @@
 {% extends "auth.html" %}
 {% block regular_content %}
-<div class="px-4 md:px-16 mt-2 mb-4 flex flex-col gap-2">
-  <div class="flex flex-wrap items-center gap-2 text-lg">
-    <i class="fa-solid fa-chalkboard-user text-sm text-blue-800" aria-hidden="true"></i>
-    <span class="text-gray-700">&rsaquo;</span>
-    <a href="/for-teachers/class/all" class="no-underline hover:underline text-blue-800">{{ _('classes') }}</a>
-    <span class="text-gray-700">&rsaquo;</span>
-    <a href="/for-teachers/redesign/class/{{ class_info.id }}" class="no-underline hover:underline text-blue-800">{{ class_info.name }}</a>
-    <span class="text-gray-700">&rsaquo;</span>
-    <span class="font-semibold">{{ _('manage_students') }}</span>
+{% from 'incl/breadcrumb.html' import breadcrumb %}
+<div class="flex flex-col px-4 md:px-16">
+  {{ breadcrumb([
+      {'label': _('classes'), 'url': '/for-teachers/class/all'},
+      {'label': class_info.name, 'url': '/for-teachers/redesign/class/' ~ class_info.id},
+      {'label': _('manage_students')}
+  ]) }}
+  <h1 style="overflow-wrap: anywhere;">{{ class_info.name }}</h1>
+  <h2 class="text-4xl mt-3">{{ _('manage_students') }}</h2>
+  <div class="h-full" id="classes_table">
+    <div class="w-full h-full mb-48">
+      <div class="w-full h-full border rounded-lg shadow-md">
+        <form hx-get="/for-teachers/redesign/class/{{ class_info.id }}/manage/filter_sort"
+            hx-target="#manage-students-table-body"
+            hx-swap="innerHTML"
+            hx-trigger="submit"
+            hx-include="
+                #student-sort-input, 
+                #timestamp-sort-input
+            "
+        >
+          <div class="w-full overflow-x-auto">
+            {{
+              render_partial(
+                "for-teachers/classes/manage-class-table.html", 
+                students=students, 
+                class_info=class_info, 
+                teacher_classes=teacher_classes
+              )
+            }}
+          </div>
+        </form>
+      </div>
+      <h2>{{ _('add_students') }}</h2>
+      <div class="flex flex-col sm:flex-row gap-6">
+          <button class="blue-btn-new" data-cy="invite_student" onclick='hedyApp.invite_to_class_redesign("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}}, "student")'>
+            {{_('invite_by_username')}}
+          </button>
+          <button class="blue-btn-new" data-cy="create_accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
+      </div>
   </div>
-</div>
-<h1 style="overflow-wrap: anywhere;">{{ class_info.name }}</h1>
-<h2 class="text-4xl mt-3">{{ _('manage_students') }}</h2>
-<div class="md:px-16 h-full" id="classes_table">
-  <div class="w-full h-full mb-48">
-    <div class="w-full h-full border rounded-lg shadow-md">
-      <form hx-get="/for-teachers/redesign/class/{{ class_info.id }}/manage/filter_sort"
-          hx-target="#manage-students-table-body"
-          hx-swap="innerHTML"
-          hx-trigger="submit"
-          hx-include="
-              #student-sort-input, 
-              #timestamp-sort-input
-          "
-      >
-        <div class="w-full overflow-x-auto">
-          {{
-            render_partial(
-              "for-teachers/classes/manage-class-table.html", 
-              students=students, 
-              class_info=class_info, 
-              teacher_classes=teacher_classes
-            )
-          }}
-        </div>
-      </form>
-    </div>
-    <h2>{{ _('add_students') }}</h2>
-    <div class="flex flex-col sm:flex-row gap-6">
-        <button class="blue-btn-new" data-cy="invite_student" onclick='hedyApp.invite_to_class_redesign("{{class_info.id}}", {{_('invite_prompt')|default(None)|tojson}}, "student")'>
-          {{_('invite_by_username')}}
-        </button>
-        <button class="blue-btn-new" data-cy="create_accounts" onclick="window.open('/for-teachers/create-accounts/{{ class_info.id }}', '_self')">{{_('create_accounts')}}</button>
-    </div>
-</div>
+  </div>
 </div>
 {% endblock %}

@@ -1,15 +1,10 @@
 {% extends "auth.html" %}
 {% block regular_content %}
-    <div class="flex flex-col">
-        <div class="px-4 md:px-16 mt-2 mb-4 flex flex-col gap-2">
-            <div class="flex flex-wrap items-center gap-2 text-lg">
-                <i class="fa-solid fa-chalkboard-user text-sm text-blue-800" aria-hidden="true"></i>
-                <span class="text-gray-700">&rsaquo;</span>
-                <span class="font-semibold">{{ _('classes') }}</span>
-            </div>
-        </div>
-        <h1 class="md:px-16 ">{{ _('classes') }}</h1>
-        <h2 class="md:px-16 my-5">{{_('active_classes')}}</h2>        
+    <div class="flex flex-col px-4 md:px-16">
+        {% from 'incl/breadcrumb.html' import breadcrumb %}
+        {{ breadcrumb([{'label': _('classes')}]) }}
+        <h1>{{ _('classes') }}</h1>
+        <h2 class="my-5">{{_('active_classes')}}</h2>        
         {% if teacher_classes %}
             {{ render_partial('for-teachers/classes/htmx-classes-table.html', teacher_classes=teacher_classes) }}
         {% endif %}    

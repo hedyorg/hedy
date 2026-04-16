@@ -1,113 +1,110 @@
 {% extends "auth.html" %}
 {% block regular_content %}
 {% set level_display = level|default('1') %}
-<div class="px-4 md:px-16 mt-2 mb-4 flex flex-col gap-2">
-    <div class="flex flex-wrap items-center gap-2 text-lg">
-        <i class="fa-solid fa-chalkboard-user text-sm text-blue-800" aria-hidden="true"></i>
-        <span class="text-gray-700">&rsaquo;</span>
-        <a href="/for-teachers/class/all" class="no-underline hover:underline text-blue-800">{{ _('classes') }}</a>
-        <span class="text-gray-700">&rsaquo;</span>
-        <a href="/for-teachers/redesign/class/{{ class_info.id }}" class="no-underline hover:underline text-blue-800">{{ class_info.name }}</a>
-        <span class="text-gray-700">&rsaquo;</span>
-        <a href="/for-teachers/redesign/class/{{ class_info.id }}/configure" class="no-underline hover:underline text-blue-800">{{ _('configure') }}</a>
-        <span class="text-gray-700">&rsaquo;</span>
-        <span class="font-semibold">{{ _('level_title') }} {{ level_display }}</span>
-    </div>
-</div>
-<h1 style="overflow-wrap: anywhere;">{{ class_info.name }}</h1>
-<div class="flex flex-row gap-5">
-    <h2 class="text-4xl mt-3">{{ _('configure') }}</h2>
-    <div id="level_button" class="dropdown relative">
-        <button class="blue-btn-new rounded inline-flex w-fit gap-2 text-xl" id="dropdown_level_button"
-            onclick="$('#level_dropdown').slideToggle('medium');">
-            <span>{{ _('level_title') }} {{ level_display }}</span> <i id="level-arrow"
-                class="fa-solid fa-angle-down"></i>
-        </button>
-        <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
-            style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
-            id="level_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
-            set arrow to #level-arrow
-            if *display == 'none'
-            remove .rotate-180 from arrow
-            else if not arrow.classList.contains('rotate-180')
-            add .rotate-180 to arrow
-            end">
-            {% for dropdown_level in range(1, 17) %}
-            <a id="level_button_{{dropdown_level}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
-            {% if loop.index == level_display|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
-            hover:bg-blue-200" {% if dropdown_level==level_display|int %}disabled{% endif %}
-                href="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ dropdown_level }}">
-                <div class="flex-grow h-min" tabindex=0>
-                    {{ _('level_title') }} {{ dropdown_level }}
-                </div>
-            </a>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+<div class="flex flex-col  px-4 md:px-16">
 
-<div class="flex flex-col xl:flex-row gap-6 mt-5 bg-white border border-gray-300 p-5 rounded-lg">
-    <section class="flex flex-col gap-6 w-full">
-        {{
-            render_partial(
-                'for-teachers/classes/htmx-customize-level-availability.html',
-                class_id=class_id,
-                level=level_display|int,
-                customizations=customizations
-            )
-        }}
-
-        <div class="flex flex-wrap gap-3">
-            <a
-                href="/for-teachers/class/{{ class_info.id }}/preview?level={{ level_display }}"
-                class="blue-btn-new no-underline"
-            >
-                {{ _('preview_as_student') }}
-            </a>
-        </div>
-
-        <div class="flex flex-col gap-4">
-            <div>
-                <h3 class="m-0 text-2xl">{{ _('adventures_at_level') }} {{ level_display }}</h3>
-                <p class="text-sm text-gray-500 mt-1 mb-0">(Drag to reorder)</p>
+    {% from 'incl/breadcrumb.html' import breadcrumb %}
+    {{ breadcrumb([
+        {'label': _('classes'), 'url': '/for-teachers/class/all'},
+        {'label': class_info.name, 'url': '/for-teachers/redesign/class/' ~ class_info.id},
+        {'label': _('configure'), 'url': '/for-teachers/redesign/class/' ~ class_info.id ~ '/configure'},
+        {'label': _('level_title') ~ ' ' ~ level_display}
+    ]) }}
+    <h1 style="overflow-wrap: anywhere;">{{ class_info.name }}</h1>
+    <div class="flex flex-row gap-5">
+        <h2 class="text-4xl mt-3">{{ _('configure') }}</h2>
+        <div id="level_button" class="dropdown relative">
+            <button class="blue-btn-new rounded inline-flex w-fit gap-2 text-xl" id="dropdown_level_button"
+                onclick="$('#level_dropdown').slideToggle('medium');">
+                <span>{{ _('level_title') }} {{ level_display }}</span> <i id="level-arrow"
+                    class="fa-solid fa-angle-down"></i>
+            </button>
+            <div class="absolute block rounded-md ltr:left-0 rtl:right-0 ltr:mr-1 rtl:ml-1 w-max overflow-y-auto p-4 shadow-lg dropdown-blue z-30 w-fit min-w-44"
+                style="display: none; margin: 0.25rem 0px 0px; padding-top: 0px; padding-right: 0px !important; padding-bottom: 0px; padding-left: 0px !important; max-height: 35rem;"
+                id="level_dropdown" style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;" _="on mutation of @style
+                set arrow to #level-arrow
+                if *display == 'none'
+                remove .rotate-180 from arrow
+                else if not arrow.classList.contains('rotate-180')
+                add .rotate-180 to arrow
+                end">
+                {% for dropdown_level in range(1, 17) %}
+                <a id="level_button_{{dropdown_level}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
+                {% if loop.index == level_display|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
+                hover:bg-blue-200" {% if dropdown_level==level_display|int %}disabled{% endif %}
+                    href="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ dropdown_level }}">
+                    <div class="flex-grow h-min" tabindex=0>
+                        {{ _('level_title') }} {{ dropdown_level }}
+                    </div>
+                </a>
+                {% endfor %}
             </div>
-
+        </div>
+    </div>
+    
+    <div class="flex flex-col xl:flex-row gap-6 mt-5 bg-white border border-gray-300 p-5 rounded-lg">
+        <section class="flex flex-col gap-6 w-full">
             {{
                 render_partial(
-                    'for-teachers/classes/htmx-customize-level-adventures.html',
+                    'for-teachers/classes/htmx-customize-level-availability.html',
                     class_id=class_id,
                     level=level_display|int,
-                    adventures=adventures[level_display|int],
-                    available_adventures=available_adventures[level_display|int]
+                    customizations=customizations
                 )
             }}
-        </div>
-
-        <div class="flex flex-col gap-3 pt-2 border-t border-gray-200">
-            <h3 class="m-0 text-2xl">{{ _('danger_zone') }}</h3>
+    
             <div class="flex flex-wrap gap-3">
-                <button
-                    type="button"
-                    class="blue-btn-new"
-                    hx-post="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ level_display|int }}/restore-default-adventures"
-                    hx-target="#level_adventures_panel"
-                    hx-swap="outerHTML"
-                    hx-indicator="#level_adventures_indicator"
-                    hx-confirm="{{ _('reset_adventure_prompt') }}"
+                <a
+                    href="/for-teachers/class/{{ class_info.id }}/preview?level={{ level_display }}"
+                    class="blue-btn-new no-underline"
                 >
-                    Reset to default adventures
-                </button>
-                <button
-                    type="button"
-                    class="red-btn-new"
-                    hx-get="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ level_display|int }}/remove-all-adventures-modal"
-                    hx-target="#modal_target"
-                >
-                    Remove all adventures
-                </button>
+                    {{ _('preview_as_student') }}
+                </a>
             </div>
-        </div>
-    </section>
+    
+            <div class="flex flex-col gap-4">
+                <div>
+                    <h3 class="m-0 text-2xl">{{ _('adventures_at_level') }} {{ level_display }}</h3>
+                    <p class="text-sm text-gray-500 mt-1 mb-0">(Drag to reorder)</p>
+                </div>
+    
+                {{
+                    render_partial(
+                        'for-teachers/classes/htmx-customize-level-adventures.html',
+                        class_id=class_id,
+                        level=level_display|int,
+                        adventures=adventures[level_display|int],
+                        available_adventures=available_adventures[level_display|int]
+                    )
+                }}
+            </div>
+    
+            <div class="flex flex-col gap-3 pt-2 border-t border-gray-200">
+                <h3 class="m-0 text-2xl">{{ _('danger_zone') }}</h3>
+                <div class="flex flex-wrap gap-3">
+                    <button
+                        type="button"
+                        class="blue-btn-new"
+                        hx-post="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ level_display|int }}/restore-default-adventures"
+                        hx-target="#level_adventures_panel"
+                        hx-swap="outerHTML"
+                        hx-indicator="#level_adventures_indicator"
+                        hx-confirm="{{ _('reset_adventure_prompt') }}"
+                    >
+                        Reset to default adventures
+                    </button>
+                    <button
+                        type="button"
+                        class="red-btn-new"
+                        hx-get="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ level_display|int }}/remove-all-adventures-modal"
+                        hx-target="#modal_target"
+                    >
+                        Remove all adventures
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
 </div>
 
 {% endblock %}
