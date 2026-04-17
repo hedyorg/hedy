@@ -106,6 +106,16 @@ adventures:
                     {print} _ He hears the sound of a _ animals {at} {random}
                     {print} name _ is afraid this is a haunted forest _
                     ```
+                answer_code: |
+                    ```
+                    name {is} {ask} 'What is your name?'
+                    {print}  'The main character is called' name
+                    {print} name  ' is now going to walk in the woods'
+                    {print} name ' is a bit scared'
+                    animals {is} 🦔, 🐿, 🦉, 🦇
+                    {print} 'He hears the sound of a ' animals {at} {random}
+                    {print} name ' is afraid this is a haunted forest'
+                    ```
             5:
                 story_text: |
                     In this level you can program different endings, which will make your story even more fun.
@@ -653,6 +663,22 @@ adventures:
                     {print} '2'
                     {clear}
                     {print} '1'
+                    {clear}
+                    {print} 'wait for it...'
+                    {sleep} 3
+                    {clear}
+                    {print} 'SURPRISE!'
+                    ```
+                answer_code: |
+                    ```
+                    {print} '3'
+                    {sleep}
+                    {clear}
+                    {print} '2'
+                    {sleep}
+                    {clear}
+                    {print} '1'
+                    {sleep}
                     {clear}
                     {print} 'wait for it...'
                     {sleep} 3
@@ -1281,6 +1307,11 @@ adventures:
                     ### Exercise
                     Make your own dice in this level.
                     Tip: If you have no idea how to make dice. Take a peek at your dice from the previous level, but don't forget to add quotation marks.
+                answer_code: |
+                    ```
+                    choices is 1, 2, 3, 4, 5, 6
+                    {print} 'I throw ' choices {at} {random}
+                    ```
             5:
                 story_text: |
                     We are going to add the `{if}` and `{else}` commands to our dice!
@@ -1421,6 +1452,13 @@ adventures:
                     {print} _ the dishes are done by _
                     {sleep}
                     {print} people {at} _
+                    ```
+                answer_code: |
+                    ```
+                    people is mom, dad, Emma, Sophie
+                    {print} 'the dishes are done by...'
+                    {sleep}
+                    {print} people {at} {random}
                     ```
             5:
                 story_text: |
@@ -1627,11 +1665,21 @@ adventures:
                 example_code: |
                     ```
                     _ Add the quotation marks to this code _
-                    {print} Im Hedy the fortune teller!
+                    {print} I'm Hedy the fortune teller!
                     question {is} {ask} What do you want to know?
                     {print} This is your question:  question
                     answers {is} yes, no, maybe
                     {print} My crystal ball says...
+                    {sleep} 2
+                    {print} answers {at} {random}
+                    ```
+                answer_code: |
+                    ```
+                    {print} "I'm Hedy the fortune teller!"
+                    question {is} {ask} 'What do you want to know?'
+                    {print} 'This is your question: '  question
+                    answers {is} yes, no, maybe
+                    {print} 'My crystal ball says...'
                     {sleep} 2
                     {print} answers {at} {random}
                     ```
@@ -2090,6 +2138,17 @@ adventures:
                     {sleep}
                     {print} monsters {at} {random}
                      ```
+                answer_code: |
+                    ```
+                    {print} 'Escape from the haunted house!'
+                    {print} 'There are 3 doors in front of you...'
+                    choice {is} {ask} 'Which door do you choose?'
+                    {print} 'You picked door ...' choice
+                    monsters {is} a zombie, a vampire, NOTHING YOUVE ESCAPED
+                    {print} 'You see...'
+                    {sleep}
+                    {print} monsters {at} {random}
+                    ```
             5:
                 story_text: |
                     Up until this level the haunted house game always asked the player to choose a door, but as you might have noticed, they didn't really have to answer correctly.
@@ -3389,6 +3448,15 @@ adventures:
                     {print} _ 🧒 Say _ new_word _, Hedy!_
                     {print} _ 🦜 _ words {at} {random}
                     ```
+                answer_code: |
+                    ```
+                    words is squawk, Hedy
+                    {print} 'Train your parrot!'
+                    new_word {is} {ask} 'Which word do you want to teach them?'
+                    {add} new_word {to} words
+                    {print} ' 🧒 Say ' new_word ', Hedy!'
+                    {print} ' 🦜 ' words {at} {random}
+                    ```
             5:
                 story_text: |
                     Reward your parrot if it says the correct word!
@@ -3842,6 +3910,18 @@ adventures:
                     {print} Thank you for your order.
                     {print} Your  food  and  drinks  will be right there!
                     ```
+                answer_code: |
+                    ```
+                    {print} 'Welcome to Restaurant Chez Hedy!'
+                    {print} 'Today we are serving pizza or lasagna.'
+                    food {is} {ask} 'What would you like to eat?'
+                    {print} 'Great choice! The  food  is my favorite!'
+                    topping {is} {ask} 'Would you like meat or veggies on that?'
+                    {print} food ' with topping is on its way!'
+                    drinks {is} {ask} 'What would you like to drink with that?'
+                    {print} 'Thank you for your order.'
+                    {print} 'Your  food  and  drinks  will be right there!'
+                    ```
             6:
                 story_text: |
                     ### Exercise
@@ -4098,6 +4178,14 @@ adventures:
                     ```
                     choices {is} rock, paper, scissors
                     {print} _The computer chooses..._ choices {at} {random}
+                    ```
+                answer_code: |
+                    ```
+                    choices is rock, paper, scissors
+                    player_1 {is} {ask} 'Name of player 1:'
+                    player_2 {is} {ask} 'Name of player 2:'
+                    {print} player_1 ' chooses ' choices {at} {random}
+                    {print} player_2 ' chooses ' choices {at} {random}
                     ```
             5:
                 story_text: |
