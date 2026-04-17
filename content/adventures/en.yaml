@@ -1327,6 +1327,14 @@ adventures:
                     _ throw {is} earthworm {print} 'You can stop throwing.'
                     _ {print} 'You have to throw it again!'
                     ```
+                answer_code: |
+                    ```
+                    choices {is} 1, 2, 3, 4, 5, earthworm
+                    throw {is} choices {at} {random}
+                    {print} 'you have thrown ' throw
+                    {if} throw {is} earthworm {print} 'You can stop throwing.'
+                    {else} {print} 'You have to throw it again!'
+                    ```
             7:
                 story_text: |
                     You can also make an Earthworm die again in this, but now you can also calculate how many points have been rolled.
@@ -1472,6 +1480,13 @@ adventures:
                     dishwasher {is} people {at} {random}
                     _ dishwasher {is} Sophie {print} _ too bad I have to do the dishes _
                     _ {print} 'luckily no dishes because ' _ ' is already washing up'
+                    ```
+                answer_code: |
+                    ```
+                    people {is} mom, dad, Emma, Sophie
+                    dishwasher {is} people {at} {random}
+                    {if} dishwasher {is} Sophie {print} 'too bad I have to do the dishes'
+                    {else} {print} 'luckily no dishes because ' dishwasher ' is already washing up'
                     ```
             7:
                 story_text: |
@@ -2170,6 +2185,19 @@ adventures:
                     _ _ _ _ {print} 'Great! Youve escaped!'
                     {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
                     ```
+                answer_code: |
+                    ```
+                    {print} 'Escape from the haunted house!'
+                    {print} 'There are 3 doors in front of you...'
+                    doors {is} 1, 2, 3
+                    monsters {is} werewolf, mummy, vampire, zombie
+                    chosen_door {is} {ask} 'Which door do you choose?'
+                    {print} 'You chose door...' chosen_door
+                    {sleep}
+                    correct_door is doors {at} {random}
+                    {if} chosen_door {is} correct_door {print} 'Great! Youve escaped!'
+                    {else} {print} 'Oh no! You are being eaten by a...' monsters {at} {random}
+                    ```
             10:
                 story_text: "In this level you can use nesting, which allows you to make the haunted house even more interactive!\n\n### Exercise\nNow it's very hard to win this game, can you make it easier to win?\nChange your code so it only has one wrong door and two correct doors instead of one correct door and two wrong ones? \nTip: This means changing the variable correct_door into wrong_door, and switching the `{if}` and `{else}` code.\nAnd of course you may also change the story and make it your own. Change the monsters or make it a happy game show where you get a gift!\n"
                 example_code: |
@@ -2610,6 +2638,12 @@ adventures:
                     _ _ _ 4 _ 'Great job!'
                     _ _ 'No 2 + 2 = 4'
                     ```
+                answer_code: |
+                    ```
+                    answer {is} {ask} '2 + 2 = ?'
+                    {if} answer {is} 4 {print} 'Great job!'
+                    {else} {print} 'No 2 + 2 = 4'
+                    ```
             9:
                 story_text: |
                     ## If... Else...
@@ -2777,6 +2811,25 @@ adventures:
                     frog {is} {ask} '🐸'
                     {if} frog {is} grenouille {print} 'Super!'
                     {else} {print} 'No, frog is grenouille'
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Learn French!'
+                    cat {is} {ask} '🐱'
+                    {if} cat {is} chat {print} 'Terrific!'
+                    {else} {print} 'No, cat is chat'
+                    frog {is} {ask} '🐸'
+                    {if} frog {is} grenouille {print} 'Super!'
+                    {else} {print} 'No, frog is grenouille'
+                    owl {is} {ask} '🦉'
+                    {if} owl {is} hibou {print} 'Right!'
+                    {else} {print} 'No, owl is hibou'
+                    kangaroo {is} {ask} '🦘'
+                    {if} kangaroo {is} kangourou {print} 'Good job!'
+                    {else} {print} 'No, kangaroo is kangourou'
+                    ladybug {is} {ask} '🐞'
+                    {if} ladybug {is} coccinelle {print} 'Amazing!'
+                    {else} {print} 'No, ladybug is coccinelle'
                     ```
             14:
                 story_text: |
@@ -3474,6 +3527,18 @@ adventures:
                     {print} '🦜 ' said_word
                     _ said_word {is} new_word _ '🧒 Great job, Hedy! 🍪'
                     _ _ '🧒 No, Hedy! Say ' new_word
+                    ```
+                answer_code: |
+                    ```
+                    words is squawk, Hedy
+                    {print} 'Train your parrot!'
+                    new_word {is} {ask} 'Which word do you want to teach them?'
+                    {add} new_word {to} words
+                    said_word is words {at} {random}
+                    {print} '🧒 Say ' new_word ', Hedy!'
+                    {print} '🦜 ' said_word
+                    {if} said_word {is} new_word {print} '🧒 Great job, Hedy! 🍪'
+                    {else} {print} '🧒 No, Hedy! Say ' new_word
                     ```
     piggybank:
         name: piggy bank
@@ -4208,6 +4273,15 @@ adventures:
                     ```
 
                     Fill in the correct code on the blanks to see if it is a draw.
+                answer_code: |
+                    ```
+                    options {is} rock, paper, scissors
+                    computer_choice {is} options {at} {random}
+                    choice {is} {ask} 'what do you choose: rock, paper or scissors?'
+                    {print} 'you chose ' choice
+                    {print} 'computer chose ' computer_choice
+                    {if} computer_choice {is} choice {print} 'tie!' {else} {print} 'no tie'
+                    ```
             10:
                 story_text: |
                     With the `{and}` command you can shorten your rock, paper, scissors code! Check out the example code.
@@ -4764,6 +4838,13 @@ adventures:
                     direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
                     {if} direction {is} left {turn} _
                     {if} direction {is} right {turn} _
+                    {forward} 100
+                    ```
+                answer_code: |
+                    ```
+                    direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
+                    {if} direction {is} left {turn} -90
+                    {if} direction {is} right {turn} 90
                     {forward} 100
                     ```
             7:
