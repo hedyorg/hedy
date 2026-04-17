@@ -1412,10 +1412,11 @@ adventures:
                     thrown = 0
                     tries = 0
                     {while} thrown == 0:
-                        number = options[random]
+                        number = options{{random}]
                         tries = tries + 1
                         {if} number = 6:
-                            thrown = thrown + 1
+                            thrown = 1
+                            {print}('You have thrown 6 in ', tries, ' tries!')
                         {else}:
                             {print}('You have not thrown 6, instead you threw ', number)
                         {sleep} 1
