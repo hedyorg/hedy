@@ -332,6 +332,16 @@ adventures:
                     _
                     {print} You get a flavors {at} {random} milkshake
                     ```
+                answer_code: |
+                    ```
+                    {print} Mystery milkshake
+                    flavors {is} strawberry, chocolate, vanilla
+                    hope {is} {ask} What flavor are you hoping for?
+                    {add} hope {to} flavors
+                    allergies {is} {ask} Are you allergic to any flavors?
+                    {remove} allergies {from} flavors
+                    {print} You get a flavors {at} {random} milkshake
+                    ```
     and_or_command:
         name: '{and} & {or}'
         default_save_name: and_or_command
@@ -1259,6 +1269,11 @@ adventures:
                     ```
                     choices {is} _
                     ```
+                answer_code: |
+                    ```
+                    choices {is} 1, 2, 3, 4, 5, 6
+                    {print} You throw... choices {at} {random}
+                    ```
             4:
                 story_text: |
                     In this level you can also create dice. But this time you can try it yourself, without an example code!
@@ -1386,6 +1401,13 @@ adventures:
                     Then think of a task that needs to be done, and let the computer decide who has to do the task with the `{at} {random}` command.
 
                     **Extra** Don't feel like doing the dishes yourself? Hack the program by removing your name from the list with the `{remove}` `{from}` command.
+                answer_code: |-
+                    ```
+                    people is mom, dad, Emma, Sophie
+                    name {is} {ask} what is your name?
+                    {remove} name {from} people
+                    {print} people {at} {random} has to do the dishes
+                    ```
             4:
                 story_text: |
                     With quotation marks you can make your dishwashing program even better.
@@ -1585,6 +1607,16 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Now, Hedy can only answer yes, no or maybe. Can you give Hedy more answer options, like 'definitely' or 'ask again'.
+                answer_code: |-
+                    ```
+                    {print} I’m Hedy the fortune teller!
+                    question {is} {ask} What do you want to know?
+                    {print} This is what you want to know: question
+                    answers {is} yes, no, maybe, definitely, i dont know, try again
+                    {print} My crystal ball says...
+                    {sleep} 2
+                    {print} answers {at} {random}
+                    ```
             4:
                 story_text: |
                     ### Exercise
@@ -2025,6 +2057,17 @@ adventures:
                     _ You see...
                     {sleep}
                     _ _ _ _
+                    ```
+                answer_code: |
+                    ```
+                    {print} Escape from the haunted house!
+                    {print} There are 3 doors in front of you...
+                    choice {is} {ask} Which door do you choose?
+                    {print} You picked door ... choice
+                    monsters {is} a zombie, a vampire, a witch, a mummy, NOTHING YOUVE ESCAPED
+                    {print} You see...
+                    {sleep}
+                    {print} monsters {at} {random}
                     ```
             4:
                 story_text: |
@@ -2836,6 +2879,16 @@ adventures:
                     {play} notes {at} {random}
                     {play} notes {at} {random}
                     ```
+                answer_code: |
+                    ```
+                    notes {is} A4, B4, C4, D4, E4, F4, G4
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    {play} notes {at} {random}
+                    ```
             4:
                 story_text: |
                     Use the `{clear}` command to create a karaoke machine!
@@ -3313,6 +3366,15 @@ adventures:
                     {print} 🧒 Say new_word, Hedy!
                     {print} 🦜 words {at} {random}
                     ```
+                answer_code: |
+                    ```
+                    words {is} squawk, Hedy
+                    {print} Train your parrot!
+                    new_word {is} {ask} Which word do you want to teach them?
+                    {add} new_word {to} words
+                    {print} 🧒 Say new_word, Hedy!
+                    {print} 🦜 words {at} {random}
+                    ```
             4:
                 story_text: |
                     In this level we have to use quotation marks with the commands `{ask}` and `{print}`.
@@ -3544,6 +3606,14 @@ adventures:
                     prizes {is} _
                     _
                     ```
+                answer_code: |-
+                    ```
+                    {print} The big gameshow!
+                    {print} There are 3 suitcases in front of you...
+                    chosen {is} {ask} Which suitcase do you choose?
+                    prices {is} a taco, a pen, a million dollar
+                    {print} You win... prices {at} {random}
+                    ```
             14:
                 story_text: |-
                     Now that you've learned to use the brackets in lists we will also introduce a different way of using the `{at} {random}` command. 
@@ -3734,6 +3804,20 @@ adventures:
                     drinks {is} _
                     prices {is} _
                     _
+                    ```
+                answer_code: |
+                    ```
+                    {print} Welcome to your own random restaurant!
+                    starters {is} soup, salad, nothing
+                    mains {is} brussels sprouts, fried spider legs, pizza
+                    desserts {is} chocolate cake, french cheese board, panna cotta
+                    drinks {is} cola, water, beer
+                    prices {is} 50 sents, 50 euros, 500 euros
+                    {print} you will have starters {at} {random}
+                    {print} followed by mains {at} {random}
+                    {print} lastly you will get desserts {at} {random}
+                    {print} you will drink drinks {at} {random}
+                    {print} that will be prices {at} {random} please!
                     ```
             4:
                 story_text: |
@@ -3996,6 +4080,14 @@ adventures:
                     choices {is} rock, paper, scissors
                     player_1 {is} {ask} Name of player 1:
                     _
+                    ```
+                answer_code: |
+                    ```
+                    choices {is} rock, paper, scissors
+                    player_1 {is} {ask} Name of player 1:
+                    player_2 {is} {ask} Name of player 2:
+                    {print} player_1 chooses choices {at} {random}
+                    {print} player_2 chooses choices {at} {random}
                     ```
             4:
                 story_text: |
@@ -4513,6 +4605,18 @@ adventures:
                 example_code: |
                     ```
                     angles {is} 10, 50, 90, 150, 250
+                    {turn} angles {at} {random}
+                    {forward} 25
+                    ```
+                answer_code: |
+                    ```
+                    angles is 10, 50, 90, 150, 250
+                    {turn} angles {at} {random}
+                    {forward} 25
+                    {turn} angles {at} {random}
+                    {forward} 25
+                    {turn} angles {at} {random}
+                    {forward} 25
                     {turn} angles {at} {random}
                     {forward} 25
                     ```
