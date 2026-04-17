@@ -411,6 +411,15 @@ adventures:
                     favorite_animal {is} {ask} What is your favorite animal?
                     {print} I like favorite_animal
                     ```
+                answer_code: |
+                    ```
+                    favorite_animals {is} {ask} What is your favorite animal?
+                    {print} I like favorite_animals
+                    favorite_drink {is} {ask} What is your favorite drink?
+                    {print} I like to drink favorite_drink
+                    favorite_book {is} {ask} What is your favorite book?
+                    {print} I like to read favorite_book
+                    ```
             13:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
                 example_code: |
@@ -1933,6 +1942,25 @@ adventures:
                     Copy the example code to your input screen by clicking the yellow button.
                     Now finish the story by adding at least 5 lines of code.
                     Remember to start each line of codes with a `{print}` command.
+                answer_code: |
+                    ```
+                    {print} How did I get here?
+                    {print} I remember my friend telling me to go into the old mansion...
+                    {print} and suddenly everything went black.
+                    {print} But how did I end up on the floor...?
+                    {print} My head hurts like Ive been hit by a baseball bat!
+                    {print} What's that sound?
+                    {print} Oh no! I feel like Im not alone in this house!
+                    {print} I need to get out of here!
+                    {print} There are 3 doors in front of me..
+                    {ask} Which door should i pick?
+                    {echo} I choose door
+                    {print} I open the door carefully
+                    {print} I look around the corner
+                    {print} Oh no!
+                    {print} There is pack of hungry wolves looking at me
+                    {print} I quickly close the door.
+                    ```
             2:
                 story_text: |
                     In this haunted house you can choose your monsters with emojis. Of course you could also use words.
@@ -1957,6 +1985,18 @@ adventures:
                     monster_1 {is} _
                     monster_2 {is} _
                     monster_3 {is} _
+                    {print} You enter the haunted house.
+                    {print} Suddenly you see a monster_1
+                    {print} You run into the other room...
+                    {print} But a monster_2 is waiting there for you!
+                    {print} Oh no! Quickly get to the kitchen.
+                    {print} But as you enter monster_3 attacks you!
+                    ```
+                answer_code: |
+                    ```
+                    monster_1 {is} {ask} What kind of monster is a little scary to you?
+                    monster_2 {is} {ask} What other monster are you afraid of?
+                    monster_3 {is} {ask} What is the scariest monster you could think of?
                     {print} You enter the haunted house.
                     {print} Suddenly you see a monster_1
                     {print} You run into the other room...
@@ -2570,6 +2610,15 @@ adventures:
                     ```
                     favorite_animal {is} _
                     {print} I like favorite_animal
+                    ```
+                answer_code: |
+                    ```
+                    favorite_animals {is} cows
+                    {print} I like favorite_animals
+                    favorite_drink {is} lemonade
+                    {print} I like to drink favorite_drink
+                    favorite_book {is} Harry Potter
+                    {print} I like to read favorite_book
                     ```
             7:
                 story_text: |
@@ -3210,6 +3259,16 @@ adventures:
                     {ask} _
                     {echo}
                     {echo}
+                answer_code: |
+                    ```
+                    {print} Im Hedy the parrot
+                    {ask} What is your favorite word?
+                    {echo}
+                    {echo}
+                    {ask} Can this parrot answer even more questions?
+                    {echo}
+                    {echo}
+                    ```
             2:
                 story_text: |
                     In the previous level you've made a parrot that will repeat after you. In this level we'll make the parrot interactive using a variable and `{ask}` command.
@@ -3230,6 +3289,16 @@ adventures:
                     Then fill in a `{sleep}` command on line 4 and 6 to let the parrot stay quiet for a little bit.
 
                     **Extra** Can you make the parrot ask for more then only your name by adding more lines of code?
+                answer_code: |
+                    ```
+                    {print} Im Hedy the parrot
+                    name is {ask} what is your name?
+                    {print} name
+                    {sleep} 2
+                    {print} squawk
+                    {sleep} 2
+                    {print} name
+                    ```
             3:
                 story_text: |
                     Teach your parrot a new word with `{add}`.
@@ -3346,6 +3415,15 @@ adventures:
                 example_code_2: |
                     ```
                     _ Hello!
+                    ```
+                answer_code: |
+                    ```
+                    {print} Hello!
+                    {print} I am programming
+                    {print} This is so easy
+                    {print} And very cool!
+                    {print} This is only level 1
+                    {print} I hope to learn much more of this!
                     ```
             13:
                 story_text: |-
@@ -3592,6 +3670,19 @@ adventures:
                     {echo} So you would like to order
                     {print} Thank you for your order!
                     {print} It's on its way!
+                    ```
+                answer_code: |
+                    ```
+                    {print} Welcome to Hedy's restaurant 🍟
+                    {ask} What would you like to order?
+                    {echo} So you would like to order
+                    {ask} What would you like to drink?
+                    {echo} So you want to drink
+                    {ask} Would you like to pay with cash or by card
+                    {echo} you would like to pay
+                    {print} Thank you for your order!
+                    {print} It's on its way!
+                    {print} Goodbye!
                     ```
             2:
                 story_text: |
@@ -3865,6 +3956,12 @@ adventures:
                     {ask} choose from _
                     {echo} so your choice was:
                     ```
+                answer_code: |
+                    ```
+                    {print} what do you choose?
+                    {ask} choose from ✊✋✌
+                    {echo} so your choice was:
+                    ```
             2:
                 story_text: |
                     In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
@@ -3875,6 +3972,11 @@ adventures:
                     ```
                     choice {is} rock
                     {print} I choose _
+                    ```
+                answer_code: |
+                    ```
+                    choice {is} rock
+                    {print} I choose choice
                     ```
             3:
                 story_text: |
@@ -4021,6 +4123,11 @@ adventures:
                     choice {is} _
                     {print} I choose choice
                     ```
+                answer_code: |
+                    ```
+                    choice {is} {ask} Rock, paper, or scissors?
+                    {print} I choose choice
+                    ```
     secret:
         name: super spy
         default_save_name: SuperSpy
@@ -4060,6 +4167,19 @@ adventures:
                     {print} My favorite color is...
                     {sleep} 2
                     {print} green!
+                    ```
+                answer_code: |
+                    ```
+                    {print} And the winner is...
+                    {sleep} 2
+                    {print} Maria!
+                    {print} She won a...
+                    {sleep} 1
+                    {print} brand new ferrari!
+                    {print} and that not all!
+                    {print} She also wins...
+                    {sleep} 5
+                    {print} a trip to France!
                     ```
     songs:
         name: sing a song!
@@ -4324,6 +4444,29 @@ adventures:
                     {forward} 20
                     {turn} {left}
                     {forward} 20
+                    ```
+                answer_code: |
+                    ```
+                    {forward} 20
+                    {turn} right
+                    {forward} 20
+                    {turn} left
+                    {forward} 20
+                    {turn} right
+                    {forward} 20
+                    {turn} left
+                    {forward} 20
+                    {turn} right
+                    {forward} 20
+                    {turn} left
+                    {forward} 20
+                    {turn} right
+                    {forward} 20
+                    {turn} left
+                    {forward} 20
+                    {turn} right
+                    {forward} 20
+                    {turn} left
                     ```
             2:
                 story_text: |
