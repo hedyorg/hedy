@@ -2019,6 +2019,33 @@ adventures:
                         {print} _
                         {print} ('GAME OVER')
                     ```
+                answer_code: |
+                    ```
+                    numbers = [1, 2, 3]
+                    i = numbers[random]
+                    hint = ['growling', 'a cackling laugh', 'fluttering batwings']
+                    monsters = ['zombie', 'witch', 'vampire']
+                    bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
+                    good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
+                    weapons = ['ham', 'lighter', 'garlic']
+                    {print} ('You are standing in front of an old mansion')
+                    {print} ('Something is not right here')
+                    {print} ('You hear ', hint[i])
+                    {print} ('You are going to explore it')
+                    {print} ('You enter the kitchen and see a lighter, a raw ham and a garlic.')
+                    your_weapon = input ('What do you bring with you?')
+                    {print} ('With your ', your_weapon, ' you enter the living room')
+                    {print} ('There you find a ', monsters[i])
+                    needed_weapon = weapons[i]
+                    {if} your_weapon == needed_weapon:
+                        {print} ('You use your ', your_weapon)
+                        {print} good_fate[i]
+                        {print} ('YOU WIN!')
+                    {else}:
+                        {print} ('You have chosen the wrong weapon...')
+                        {print} bad_fate[i]
+                        {print} ('GAME OVER')
+                    ```
     hospital:
         name: hospital
         default_save_name: hospital
@@ -2212,12 +2239,46 @@ adventures:
                     * On the 14th of each month: check the batteries for the fire alarms
                     * Everyday in wintermonths: turn on the heaters
                     * Everyday in summermonths: turn on the airconditioning
-                example_code: |
-                    The program should end like this:
-                      ```
-                      _The program should end like this_
-                      make_tasklist(day, month, date)
-                      ```
+                answer_code: |
+                    ```
+                    {print}("Good morning Janitor")
+
+                    #asking the date
+                    day = {input}("What day of the week is it?")
+                    current_month = {input}("What month is it?")
+                    date = {input}("What is the date?")
+
+                    #printing the task list
+                    print("Janitor, your tasks for today are: ")
+
+                    #deciding the tasks based on day of the week
+                    {if} day == "monday" {or} day == "thursday":
+                        {print}("water the plants")
+                    {elif} day == "tuesday" {or} day == "friday":
+                        {print}("mop the floors")
+                    {elif} day == "saturday":
+                        {print}("wash the coffeemachine")
+
+                    #deciding the tasks based on date
+                    {if} date == 1:
+                        {print}("wash the windows")
+                    {elif} date == 7:
+                        {print}("refill the vending machines")
+                    {elif} date == 14:
+                        {print}("check the batteries for the fire alarms")
+
+                    #making a list of summer months and winter months
+                    summer_months = ["april", "may", "june", "july", "august", "september"]
+                    winter_months = ["october", "november", "december", "january", "february", "march"]
+
+                    #deciding tasks based on summer or winter
+                    {for} month {in} summer_months:
+                        {if} current_month == month:
+                            {print}("turn on the airconditioning")
+                    {for} month {in} winter_months:
+                        {if} current_month == month:
+                            {print}("turn on the heaters")
+                    ```
             15:
                 story_text: |
                     After surgery our patients can sometimes experience a lot of pain. In those cases our patients can be given a morphine pump. They can administer some morphine themselves if they are in pain.
@@ -3991,7 +4052,7 @@ adventures:
                     ```
 
                     ```
-                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', "put him in a long boat till he's sober"]
                     {for} line {in} lines
                         {for} i {in} {range} (1, 3)
                             {print} line
@@ -3999,6 +4060,23 @@ adventures:
                         {for} i {in} {range} (1, 3)
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
+                    ```
+                answer_code: |
+                    ```
+                    animals = ['pig', 'dog', 'cow']
+                    sounds = ['oink', 'woof', 'moo']
+                    {for} i {in} {range} (1, 3):
+                        animal = animals[i]
+                        sound = sounds[i]
+                        {print} 'Old MacDonald had a farm'
+                        {print} 'E I E I O!'
+                        {print} 'and on that farm he had a ' animal
+                        {print} 'E I E I O!'
+                        {print} 'with a ' sound sound ' here'
+                        {print} 'and a ' sound sound ' there'
+                        {print} 'here a ' sound
+                        {print} 'there a ' sound
+                        {print} 'everywhere a ' sound sound
                     ```
             15:
                 story_text: |
