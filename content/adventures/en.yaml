@@ -246,6 +246,16 @@ adventures:
                     name = {input}("What's your name?")
                     {print}('Welcome to this story!')
                     ```
+                answer_code: |
+                    ```
+                    name = {input}("What's your name?")
+                    {print}('Welcome to this story!')
+                    {print}('Once upon a time there was a parrot called ', name '.')
+                    {print}(name, ' loved programming!')
+                    {print}("Sadly, the other parrots didn't know how to program.")
+                    {print}('One day ', name, ' decided to teach programming to the other parrots.')
+                    {print}('The lessons turned out to be a huge success with the other parrots!')
+                    ```
             16:
                 story_text: |
                     Using the `{while}` loop can make your stories more interesting. For example, you can use `{while} game == 'on'` so you can play until the game is over.
@@ -2161,6 +2171,28 @@ adventures:
                     * Print the date of birth and the place of birth.
                     * Print the function and department.
                     * Print the personnel number.
+                answer_code: |
+                    ```
+                    {print}('Welcome to the hospital!')
+
+                    title = {input}('What is your title?')
+                    first_name = {input}('What is your first name?')
+                    last_name = {input}('What is your last name?')
+                    date_of_birth = {input}('What is your date of birth?')
+                    place_of_birth = {input}('What is your place of birth?')
+                    function = {input}('What is your function?')
+                    department = {input}('What is your department?')
+                    personnel_number = {input}('What is your personnel number?')
+
+                    {print}('Thank you ', first_name, '. Your badge will be printed soon!')
+
+                    {sleep} 2
+
+                    {print}(title, ' ' first_name, ' ', last_name)
+                    {print}(date_of_birth, ' ' place_of_birth)
+                    {print}(function, ' ' department)
+                    {print}(personnel_number)
+                    ```
             14:
                 story_text: |
                     Our janitors have a big list of tasks. Some tasks are done everyday, others on a certain day, season or date. This is very confusing and leads to situations where some tasks are forgotten.
@@ -3921,6 +3953,17 @@ adventures:
                         {for} i {in} {range} (1, 3)
                             {print} 'way hay and up she rises'
                         {print} 'early in the morning'
+                    ```
+                answer_code: |
+                    ```
+                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    {for} line {in} lines:
+                        {repeat} 3 {times}:
+                            {print}(line)
+                        {print}('early in the morning')
+                        {repeat} 3 {times}:
+                            {print}('way hay and up she rises')
+                        {print}('early in the morning')
                     ```
             14:
                 story_text: |
