@@ -278,6 +278,21 @@ adventures:
                             {print}('Nope they are not at the ', location)
                     {print}('Now you can enter the house!')
                     ```
+                answer_code: |
+                    ```
+                    rackets = 'lost'
+                    {print}('You are with your friends and you want to play tennis, but you forgot where you put the rackets.')
+                    {print}('Where do you want to look for them?')
+                    {print}('You can choose: bedroom, shed, cupboard, desk')
+                    {while} rackets == 'lost':
+                        location = {input}('Where do you want to look?')
+                     	{if} location == 'desk':
+                            	{print}('Here they are! You found 6 rackets!')
+                            	keys = 'found'
+                    	{else}:
+                            	{print}('Nope they are not at the ', location)
+                    {print}('Now you can play tennis with all your friends.’)
+                    ```
     add_remove_command:
         name: '{add} {to_list} & {remove} {from}'
         default_save_name: add_remove_command
@@ -543,6 +558,24 @@ adventures:
                     {print}('Give 10 correct answers to win!')
                     {for} i {in} {range} 1 {to} 10:
                         _
+                    {print}('You win!')
+                    ```
+                answer_code: |
+                    ```
+                    {def} new_question():
+                    	numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    	number_1 = numbers[{random}]
+                    	number_2 = numbers[{random}]
+                    	correct = number_1 * number_2
+                    	answer = 0
+                    	{while} answer != correct:
+                        	answer = {input}('What is ', number_1, ' * ', number_2, '?')
+                        	{print} ('You said that ', number_1, ' * ', number_2, ' is ', answer )
+                    	{print} ('Well done!')
+
+                    {print}('Give 10 correct answers to win!')
+                    {for} i {in} {range} (1, 10):
+                    	new_question()
                     {print}('You win!')
                     ```
     calculator_2:
@@ -1294,7 +1327,7 @@ adventures:
                     Firstly, add a `{while}` loop that checks if 6 has been thrown or not.
                     As long as you haven't thrown 6 already, throw the dice on a random number.
                     Print what the player has thrown.
-                    Add a try to the amount of tries
+                    Add a try to the amount of tries.
                     Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
                 example_code: |
                     ```
@@ -1308,6 +1341,21 @@ adventures:
                     _
                     _
                     {print}('Yes! You have thrown 6 in ', tries, ' tries.')
+                    ```
+                answer_code: |
+                    ```
+                    options = [1, 2, 3, 4, 5, 6]
+                    {print} 'Throw 6 as fast as you can!'
+                    thrown = 0
+                    tries = 0
+                    {while} thrown == 0:
+                        number = options[random]
+                        tries = tries + 1
+                        {if} number = 6:
+                            thrown = thrown + 1
+                        {else}:
+                            {print}('You have not thrown 6, instead you threw ', number)
+                        {sleep} 1
                     ```
     dishes:
         name: dishes?
@@ -1816,6 +1864,23 @@ adventures:
                                 {print} '(You win!')
                                 game = 'over'
                     ```
+                answer_code: |
+                    ```
+                    {print} 'Guess my number between 1 and 10'
+                    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                    number = numbers[random]
+                    game = 'on'
+                    {for} i {in} {range} (1,10):
+                    	{if} game == 'on':
+                        	guess = ask 'Which number do you think it is?'
+                        	{if} guess > number:
+                            	{print} 'Lower!'
+                        	{if} guess < number:
+                            	{print} 'Higher!'
+                        	{if} guess == number:
+                            	{print} 'You win!'
+                            	game = 'over'
+                    ```
     harry_potter:
         name: harry potter
         default_save_name: Harry Potter
@@ -2309,6 +2374,37 @@ adventures:
                     * Keep playing until the student has answered all the questions correctly.
                     * Show the final score to the student.
                     * Give the student feedback based on their score: 12 points: Amazing!, 8 - 11 points: Good job, keep practising!, 7 or less: You should study more!
+                answer_code: |
+                    ```
+                    points = 0
+                    latin_terms = ['corpus', 'caput',  'ocolus',  'nasus', 'auris', 'os', 'collum',  'manus', 'pectus',  'humerus', 'venter', 'tergum']
+                    english_terms = ['body', 'head', 'eye', 'nose', 'ear', 'mouth', 'neck', 'hand', 'chest', 'shoulder', 'stomach', 'back']
+
+                    {for} i {in} {range}(1, 12):
+                    	correct_answer = english_terms[i]
+                    	answer = 0
+                    	{while} answer != correct_answer:
+                        	answer = {input}('What is the English name for ', latin_terms[i], '?')
+                        	{if} answer != correct_answer:
+                            	{print}('That is incorrect')
+                            	{print}('The correct answer for ', latin_terms[i], ' is ', english_terms[i])
+                            	{sleep} 3
+                            	clear
+                            	points = points - 1
+                    	points = points + 1
+                    	{print}('Correct!')
+
+                    {print}("Congratulations, you've practised all the terms!")
+                    {print}('Your score is:', points)
+
+                    {if} points == 12:
+                    	{print}('Amazing!')
+
+                    {if} points <=7:
+                    	{print}('You should study more!')
+                    {else}:
+                    	{print}('Good job, keep practising!')
+                    ```
     hotel:
         name: hotel
         default_save_name: hotel
@@ -2908,6 +3004,23 @@ adventures:
                     {while} yes_or_no = 'yes'
                         song()
                         {print} '🥳'
+                    ```
+                answer_code: |
+                    ```
+                    def song ():
+                        {play} C3
+                        {play} D3
+                        {play} E3
+                        {play} F3
+                        {play} E3
+                        {play} D3
+                        {play} C3
+                        {sleep} 1
+
+                    yes_or_no = {input}('Do you want to hear my never-ending song?')
+                    {while} yes_or_no = 'yes':
+                    song()
+                    {print}('🥳')
                     ```
     music_2:
         name: music 2
@@ -3708,13 +3821,23 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print} 'Welcome at McHedy'
+                    {print}('Welcome at McHedy')
                     more = 'yes'
                     _
-                        order = {ask} 'What would you like to order?'
-                        {print} order
-                        more = {ask} 'Would you like to order anything else?'
-                    {print} 'Thank you!'
+                        order = {input}('What would you like to order?')
+                        {print}(order)
+                        more = {input}('Would you like to order anything else?')
+                    {print}('Thank you!')
+                    ```
+                answer_code: |
+                    ```
+                    {print} ('Welcome at McHedy')
+                    more = 'yes'
+                    {while} more == 'yes':
+                    	order = {input}('What would you like to order?')
+                    	{print} ( order )
+                    	more = {input}('Would you like to order anything else?')
+                    {print} ('Thank you!')
                     ```
     rock:
         name: rock, paper, scissors
@@ -3842,13 +3965,45 @@ adventures:
                     ```
                     won = 'no'
                     options = ['rock', 'paper', 'scissors']
-                    {while} won == 'no'
+                    {while} won == 'no':
                         your_choice = {input}('What do you choose?')
                         computer_choice = options[{random}]
                         {print}('you chose ', your_choice)
                         {print}('the computer chose ', computer_choice)
                         {if} computer_choice == your_choice
                     _
+                    ```
+                answer_code: |
+                    ```
+                    won = 'no'
+                    round = 0
+                    options = ['rock', 'paper', 'scissors']
+                    {print}('We will play rock, paper, scissors')
+                    {while} won == 'no':
+                    	your_choice = {input}('What do you choose?')
+                    	computer_choice = options[random]
+                    	{print} ('you chose ',  your_choice)
+                    	{print} ('the computer chose ',  computer_choice)
+                    	{if} computer_choice == your_choice:
+                        	{print} ('Tie!')
+                    	{if} computer_choice == 'rock' {and} your_choice == 'scissors':
+                        	{print} ('You lose!')
+                    	{if} computer_choice == 'rock' {and} your_choice == 'paper':
+                        	{print} ('You win!')
+                        	won = 'yes'
+                    	{if} computer_choice == 'paper' {and} your_choice == 'rock':
+                        	{print} ('You lose!')
+                    	{if} computer_choice == 'paper' {and} your_choice == 'scissors':
+                        	{print} ('You win!')
+                        	won = 'yes'
+                    	{if} computer_choice == 'scissors' {and} your_choice == 'paper':
+                        	{print} ('You lose!')
+                    	{if} computer_choice == 'scissors' {and} your_choice == 'rock':
+                        	{print} ('You win!')
+                        	won = 'yes'
+                    	round = round + 1
+                    	{sleep} 1
+                    {print}('Congratulations, you won from the computer in ', round, ' tries.')
                     ```
     rock_2:
         name: rock, paper, scissors 2
@@ -4664,6 +4819,34 @@ adventures:
                 example_code_3: |
                     Star
                     A star is usually drawn using 144-degree-turns. If you change this slightly to 143 degrees for example and repeat the pattern multiple times with a {while} loop you can make this figure.
+                answer_code: |
+                    ```
+                    distance = 5
+                    {while} distance < 200
+                    	distance = distance + 5
+                    	{forward} distance
+                    	{turn} 90
+                    ```
+
+                    ```
+                    {def} draw_a_square(side):
+                    	{for} i {in} {range}(1,4):
+                        	{forward} side
+                        	{turn} 90
+
+                    i = 100
+                    {while} i > 1
+                    	draw_a_square(i)
+                    	{turn} 10
+                    	i = i - 3
+                    ```
+
+                    ```
+                    distance = 150
+                    {for} i {in} {range}(1, 50):
+                    	{forward} distance
+                    	{turn} 143
+                    ```
     while_command:
         name: '{while}'
         default_save_name: while_command
