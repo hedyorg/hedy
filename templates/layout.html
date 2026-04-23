@@ -207,9 +207,9 @@
     </div>
     <div id="redesign_search_modal"
          data-cy="redesign_search_modal"
-         class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 sm:px-6">
+        class="hidden fixed inset-0 z-50 items-start sm:items-center justify-center overflow-y-auto px-4 py-4 sm:px-6 sm:py-6">
       <div id="redesign_search_backdrop" class="absolute inset-0 bg-black opacity-60"></div>
-      <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+      <div class="relative w-full max-w-lg max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-3rem)] overflow-y-auto rounded-2xl border border-gray-200 bg-white shadow-2xl">
         <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
           <h3 class="m-0 text-2xl font-semibold">{{ _('invite') }}</h3>
           <button id="redesign_search_close_button"
