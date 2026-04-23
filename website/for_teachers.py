@@ -1055,6 +1055,7 @@ class ForTeachersModule(WebsiteModule):
             htmx_target=htmx_target,
             htmx_swap=htmx_swap,
             htmx_indicator=htmx_indicator,
+            modal_variant="redesign",
         )
 
     @route("/redesign/class/<class_id>/manage", methods=["GET"])
@@ -1118,10 +1119,21 @@ class ForTeachersModule(WebsiteModule):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
         users = self.db.users_by_username(usernames)
+        existing_students = set(Class.get("students", []))
+        existing_invites = {
+            invite.get("username")
+            for invite in self.db.get_class_invites(class_id=class_id)
+            if invite.get("invited_as") == "student"
+        }
 
         for user in users:
+            username = user.get("username")
+            if not username:
+                continue
+            if username in existing_students or username in existing_invites:
+                continue
             self.db.add_class_invite(
-                username=user["username"],
+                username=username,
                 class_id=class_id,
                 invited_as=invite_as,
                 invited_as_text=gettext(invite_as)
@@ -1569,7 +1581,8 @@ class ForTeachersModule(WebsiteModule):
             htmx_endpoint=htmx_endpoint,
             htmx_target=htmx_target,
             hyperscript=hyperscript,
-            htmx_success_message=htmx_success_message
+            htmx_success_message=htmx_success_message,
+            modal_variant='redesign'
         )
 
     @route(

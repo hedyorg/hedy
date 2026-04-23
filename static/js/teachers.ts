@@ -15,8 +15,22 @@ declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
 const editorCreator = new HedyCodeMirrorEditorCreator();
 
+function promptByPageVariant(message: string, defaultValue: string, confirmCb: (value: string) => void, title: string = '') {
+  const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
+  modal.prompt(message, defaultValue, confirmCb, isRedesignPage ? 'redesign' : 'legacy', title);
+}
+
+function confirmByPageVariant(message: string, confirmCb: () => void, declineCb: () => void = function(){}) {
+  const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
+  if (isRedesignPage) {
+    modal.confirmRedesign(message, confirmCb, declineCb);
+    return;
+  }
+  modal.confirm(message, confirmCb, declineCb);
+}
+
 export function create_class(class_name_prompt: string) {
-  modal.prompt (class_name_prompt, '', function (class_name) {
+  promptByPageVariant(class_name_prompt, '', function (class_name) {
     $.ajax({
       type: 'POST',
       url: '/class',
@@ -83,8 +97,8 @@ export function create_class_redesign(form: HTMLFormElement) {
   }
 }
 
-export function rename_class(id: string, class_name_prompt: string) {
-    modal.prompt (class_name_prompt, '', function (class_name) {
+export function rename_class(id: string, class_name_prompt: string, prompt_title: string = '') {
+  promptByPageVariant(class_name_prompt, '', function (class_name) {
         $.ajax({
           type: 'PUT',
           url: '/class/' + id,
@@ -98,7 +112,7 @@ export function rename_class(id: string, class_name_prompt: string) {
         }).fail(function(err) {
           return modal.notifyError(err.responseText);
         });
-    });
+    }, prompt_title);
 }
 
 export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
@@ -114,7 +128,7 @@ export function duplicate_class(id: string, teacher_classes: string[], second_te
 }
 
 function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, defaultValue: string = '') {
-    modal.prompt (prompt, defaultValue, function (class_name) {
+  promptByPageVariant(prompt, defaultValue, function (class_name) {
     $.ajax({
       type: 'POST',
       url: '/duplicate_class',
@@ -390,25 +404,25 @@ export function delete_adventure(adventure_id: string, prompt: string) {
   });
 }
 
-export function change_password_student(username: string, enter_password: string, password_prompt: string) {
-    modal.prompt ( enter_password + " " + username + ":", '', function (password) {
-        modal.confirm (password_prompt, function () {
-            $.ajax({
-              type: 'POST',
-              url: '/auth/change_student_password',
-              data: JSON.stringify({
-                  username: username,
-                  password: password
-              }),
-              contentType: 'application/json',
-              dataType: 'json'
-            }).done(function (response) {
-              modal.notifySuccess(response.success);
-            }).fail(function (err) {
-              modal.notifyError(err.responseText);
-            });
-        });
+export function change_password_student(username: string, enter_password: string, password_prompt: string, prompt_title: string = '') {
+  promptByPageVariant(enter_password + " " + username + ":", '', function (password) {
+    confirmByPageVariant(password_prompt, function () {
+      $.ajax({
+        type: 'POST',
+        url: '/auth/change_student_password',
+        data: JSON.stringify({
+          username: username,
+          password: password
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+      }).done(function (response) {
+        modal.notifySuccess(response.success);
+      }).fail(function (err) {
+        modal.notifyError(err.responseText);
+      });
     });
+  }, prompt_title);
 }
 
 export function show_doc_section(section_key: string) {
@@ -1159,7 +1173,7 @@ export function initializeGradePage(_options: InitializeGradePageOptions) {
 }
 
 export function invite_support_teacher(requester: string) {
-  modal.prompt(`Invite a teacher to support ${requester}.`, '', function (username) {
+  promptByPageVariant(`Invite a teacher to support ${requester}.`, '', function (username) {
     $.ajax({
         type: 'POST',
         url: "/super-teacher/invite-support",
@@ -1201,10 +1215,10 @@ export function invite_to_class(class_id: string, prompt: string, type: "student
 }
 
 export function invite_to_class_redesign(class_id: string, prompt: string, type: "student" | "second_teacher") {
-  const vals = {class_id, 'user_type': type}
+  const vals = {class_id, 'user_type': type, 'modal_variant': 'redesign'}
   const input_attributes = {
     'hx-get': '/search',
-    'hx-target': '#search_results',
+    'hx-target': '#redesign_search_results',
     'hx-vals': JSON.stringify(vals)
   }
   const ok_button_attributes = {
@@ -1220,15 +1234,16 @@ export function invite_to_class_redesign(class_id: string, prompt: string, type:
     ok_button_attributes,
     '#manage-students-table-body',
     ClientMessages['invite'],
-    ClientMessages['invitations_sent']
+    ClientMessages['invitations_sent'],
+    'redesign'
   );
 }
 
 export function invite_second_teacher_to_configure_class(class_id: string, prompt: string) {
-  const vals = {class_id, 'user_type': 'second_teacher'}
+  const vals = {class_id, 'user_type': 'second_teacher', 'modal_variant': 'redesign'}
   const input_attributes = {
     'hx-get': '/search',
-    'hx-target': '#search_results',
+    'hx-target': '#redesign_search_results',
     'hx-vals': JSON.stringify(vals)
   }
   const ok_button_attributes = {
@@ -1244,19 +1259,58 @@ export function invite_second_teacher_to_configure_class(class_id: string, promp
     ok_button_attributes,
     '#configure-teachers-table-body',
     ClientMessages['invite'],
-    ClientMessages['invitations_sent']
+    ClientMessages['invitations_sent'],
+    'redesign'
   );
 }
 
-export function add_user_to_invite_list(username: string, button: HTMLButtonElement) {
+function toggleRedesignInviteListVisibility() {
+  const container = document.getElementById('redesign_users_to_invite_container')
+  const userList = document.getElementById('redesign_users_to_invite')
+  if (!container || !userList) return
+  const hasUsers = userList.querySelectorAll('li').length > 0
+  container.classList.toggle('hidden', !hasUsers)
+}
+
+export function add_user_to_invite_list(username: string, button: HTMLButtonElement, modalVariant?: 'legacy' | 'redesign') {
   button.closest('li')?.remove() // We remove the user from the list
-  const userList = document.getElementById('users_to_invite')
+  const inRedesignModal = modalVariant ? modalVariant === 'redesign' : !!button.closest('#redesign_search_modal')
+  const userList = document.getElementById(inRedesignModal ? 'redesign_users_to_invite' : 'users_to_invite')
   for (const userLi of userList?.querySelectorAll('li') || []) {
-    const p = userLi.querySelector('p')
-    if (p?.textContent?.trim() === username) {
+    const existingInput = userLi.querySelector('input[name="usernames"]') as HTMLInputElement | null
+    if (existingInput?.value === username) {
       return
     }
   }
+
+  if (inRedesignModal && userList) {
+    const li = document.createElement('li');
+    li.className = 'relative rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm';
+
+    const p = document.createElement('p');
+    p.className = 'details m-0 pr-6 text-sm text-gray-800';
+    p.textContent = username;
+
+    const close = document.createElement('span');
+    close.className = 'close cursor-pointer absolute top-1 right-1 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark';
+    close.addEventListener('click', () => {
+      li.remove();
+      toggleRedesignInviteListVisibility();
+    });
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'usernames';
+    input.value = username;
+
+    li.appendChild(p);
+    li.appendChild(close);
+    li.appendChild(input);
+    userList.appendChild(li);
+    toggleRedesignInviteListVisibility();
+    return;
+  }
+
   const template = document.querySelector('#user_list_template') as HTMLTemplateElement
   const clone = template.content.cloneNode(true) as HTMLElement
   let close = clone.querySelector('.close');  

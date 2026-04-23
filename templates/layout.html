@@ -133,6 +133,129 @@
           <div id="modal_preview_content"></div>
        </div>
     </div>
+    <div id="redesign_confirm_modal"
+         data-cy="redesign_confirm_modal"
+         class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 sm:px-6">
+      <div id="redesign_confirm_backdrop" class="absolute inset-0 bg-black opacity-60"></div>
+      <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+        <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
+          <h3 class="m-0 text-2xl font-semibold">{{ _('confirm') }}</h3>
+          <button id="redesign_confirm_close_button"
+                  data-cy="redesign_confirm_close_button"
+                  type="button"
+                  class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
+                  aria-label="{{ _('cancel') }}">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+        <div class="px-5 py-5 sm:px-6">
+          <p id="redesign_confirm_text" data-cy="redesign_confirm_text" class="m-0 leading-7 text-lg text-gray-700"></p>
+        </div>
+        <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+          <button id="redesign_confirm_yes_button"
+                  data-cy="redesign_confirm_yes_button"
+                  type="button"
+                  class="green-btn-new">
+            {{ _('yes') }}
+          </button>
+          <button id="redesign_confirm_no_button"
+                  data-cy="redesign_confirm_no_button"
+                  type="button"
+                  class="blue-btn-new">
+            {{ _('no') }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="redesign_prompt_modal"
+         data-cy="redesign_prompt_modal"
+         class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 sm:px-6">
+      <div id="redesign_prompt_backdrop" class="absolute inset-0 bg-black opacity-60"></div>
+      <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+        <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
+          <h3 id="redesign_prompt_title" class="m-0 text-2xl font-semibold"></h3>
+          <button id="redesign_prompt_close_button"
+                  data-cy="redesign_prompt_close_button"
+                  type="button"
+                  class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
+                  aria-label="{{ _('cancel') }}">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+        <div class="space-y-4 px-5 py-5 sm:px-6">
+          <p id="redesign_prompt_text" data-cy="redesign_prompt_text" class="m-0 leading-7 text-lg text-gray-700"></p>
+          <input id="redesign_prompt_input"
+                 data-cy="redesign_prompt_input"
+                 type="text"
+                 class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base text-gray-900 outline-none ring-blue-200 transition duration-100 focus:border-blue-500 focus:ring-2">
+        </div>
+        <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+          <button id="redesign_prompt_cancel_button"
+                  data-cy="redesign_prompt_cancel_button"
+                  type="button"
+                  class="blue-btn-new">
+            {{ _('cancel') }}
+          </button>
+          <button id="redesign_prompt_ok_button"
+                  data-cy="redesign_prompt_ok_button"
+                  type="button"
+                  class="green-btn-new">
+            {{ _('ok') }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="redesign_search_modal"
+         data-cy="redesign_search_modal"
+         class="hidden fixed inset-0 z-50 items-center justify-center px-4 py-6 sm:px-6">
+      <div id="redesign_search_backdrop" class="absolute inset-0 bg-black opacity-60"></div>
+      <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+        <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
+          <h3 class="m-0 text-2xl font-semibold">{{ _('invite') }}</h3>
+          <button id="redesign_search_close_button"
+                  data-cy="redesign_search_close_button"
+                  type="button"
+                  class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
+                  aria-label="{{ _('cancel') }}">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+        <div class="space-y-4 px-5 py-5 sm:px-6">
+          <p id="redesign_search_text" class="m-0 leading-7 text-lg text-gray-700"></p>
+          <input id="redesign_search_input"
+                 data-cy="redesign_search_input"
+                 type="search"
+                 name="search"
+                 class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base text-gray-900 outline-none ring-blue-200 transition duration-100 focus:border-blue-500 focus:ring-2"
+                 hx-trigger="input changed delay:500ms, search"
+                 hx-target="#redesign_search_results">
+          <div id="redesign_users_to_invite_container" class="hidden rounded-lg border border-gray-300 bg-gray-50 p-3 inline-block w-full">
+            <p class="m-0 mb-2 text-sm font-semibold text-gray-700">{{ _('invite') }}</p>
+            <ul id="redesign_users_to_invite" class="grid grid-cols-1 gap-2 mb-0 list-none max-h-56 overflow-y-auto pr-1">
+            </ul>
+          </div>
+          <div class="rounded-lg border border-gray-300 bg-gray-50 p-3">
+            <p class="m-0 mb-2 text-base font-semibold text-sm text-gray-700">{{ _('search_results') }}</p>
+            <ul id="redesign_search_results" class="list-none flex flex-col gap-2 mb-0 max-h-64 overflow-y-auto pr-1" hx-on::after-settle="document.getElementById('redesign_search_input').focus()">
+            </ul>
+          </div>
+        </div>
+        <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+          <button id="redesign_search_cancel_button"
+                  data-cy="redesign_search_cancel_button"
+                  type="button"
+                  class="blue-btn-new">
+            {{ _('cancel') }}
+          </button>
+          <button id="redesign_search_ok_button"
+                  data-cy="redesign_search_ok_button"
+                  type="button"
+                  class="green-btn-new">
+            {{ _('ok') }}
+          </button>
+        </div>
+      </div>
+    </div>
     <div id="modal_alert" class="z-50 fixed hidden" role="alert" style="top: 10%; left: 50%; transform: translate(-50%, -50%);">
          <div id="modal_alert_container" data-cy="modal_alert_container"
            class="mx-auto relative flex items-center justify-center gap-3 bg-green-100 border-green-400 text-green-700 border rounded px-6 py-2">

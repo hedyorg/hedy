@@ -13,7 +13,8 @@
 		<i class="fa-solid fa-pencil cursor-pointer text-2xl mx-2"
 		data-class-id="{{ class_info.id }}"
 		data-prompt="{{ _('rename_class_prompt') }}"
-		onclick="hedyApp.rename_class(this.dataset.classId, this.dataset.prompt)"
+		data-title="{{ _('rename_class') }}"
+		onclick="hedyApp.rename_class(this.dataset.classId, this.dataset.prompt, this.dataset.title)"
 		title="{{ _('rename_class') }}">
 	</i>
 	</h1>

@@ -1,3 +1,53 @@
+{% if modal_variant == 'redesign' %}
+<div id="htmx_modal" data-cy="htmx_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 sm:px-6"
+    _="on closeModal remove me">
+    <div _="on click trigger closeModal" class="absolute inset-0 bg-black opacity-60"></div>
+    <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl"
+         data-cy="confirm_modal">
+        <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
+            <h3 class="m-0 text-2xl font-semibold">{{ _('confirm') }}</h3>
+            <button type="button"
+                    data-cy="htmx_modal_close_button"
+                    class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"
+                    aria-label="{{ _('cancel') }}"
+                    _="on click trigger closeModal">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+        <div class="px-5 py-5 sm:px-6">
+            <p class="m-0 leading-7 text-lg text-gray-700">{{ modal_text }}</p>
+        </div>
+        <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+            <button type="button"
+                    data-cy="htmx_modal_yes_button"
+                    class="green-btn-new"
+                    hx-post="{{ htmx_endpoint }}"
+                    hx-target="{{ htmx_target }}"
+                    hx-swap="{{ htmx_swap or 'innerHTML' }}"
+                    {% if htmx_indicator is defined %}hx-indicator="{{ htmx_indicator }}" {% endif %}
+                    _="
+                        on htmx:afterRequest
+                        {% if htmx_success_message %}
+                        if detail.successful
+                             call hedyApp.modal.notifySuccess('{{ htmx_success_message }}')
+                        end
+                        {% endif %}
+                        on click trigger closeModal
+                        {% if hyperscript %}
+                        then {{ hyperscript }}
+                        {% endif %}
+                     ">
+                {{_('yes')}}
+            </button>
+            <button type="button"
+                    class="blue-btn-new"
+                    _="on click trigger closeModal">
+                    {{_('no')}}
+            </button>
+        </div>
+    </div>
+</div>
+{% else %}
 <div id="htmx_modal" data-cy="htmx_modal"
     _="on closeModal remove me">
     <div _="on click trigger closeModal" class="fixed bg-black z-50 w-full h-full opacity-75"></div>
@@ -6,8 +56,8 @@
          data-cy="confirm_modal">
         <div class="text-white mb-8 text-xl">{{ modal_text }}</div>
         <div class="ltr:ml-auto rtl:mr-auto ltr:mr-auto rtl:ml-auto mt-4 flex flex-row justify-center">
-            <button data-cy="htmx_modal_yes_button" 
-                    class="green-btn block m-4 w-40 pb-4 pt-4" 
+            <button data-cy="htmx_modal_yes_button"
+                    class="green-btn block m-4 w-40 pb-4 pt-4"
                     hx-post="{{ htmx_endpoint }}"
                     hx-target="{{ htmx_target }}"
                     hx-swap="{{ htmx_swap or 'innerHTML' }}"
@@ -33,3 +83,4 @@
         </div>
     </div>
 </div>
+{% endif %}

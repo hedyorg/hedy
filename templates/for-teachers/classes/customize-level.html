@@ -85,6 +85,7 @@
                     <button
                         type="button"
                         class="blue-btn-new"
+                        data-confirm-modal="redesign"
                         hx-post="/for-teachers/redesign/class/{{ class_info.id }}/customize-level/{{ level_display|int }}/restore-default-adventures"
                         hx-target="#level_adventures_panel"
                         hx-swap="outerHTML"

@@ -88,17 +88,23 @@ htmx.on('htmx:sendError', () => {
 
 htmx.on("htmx:confirm", function(e: any) {
     e.preventDefault();
-    const modalPrompt = e.target.getAttribute("hx-confirm");
+    const eventTarget = e.target as HTMLElement;
+    const confirmElement = eventTarget.closest('[hx-confirm]') as HTMLElement | null;
+    const modalElement = confirmElement ?? eventTarget;
+    const modalPrompt = modalElement.getAttribute("hx-confirm");
     // this is to prevent window.confirm. Just passing true to issueRequest isn't enough.
     if (!modalPrompt) {
         // if no confirm attribute was attached, just continue with the  request.
         e.detail.issueRequest(true);
         return;
     }
-    modal.confirm(modalPrompt, () => {
-        e.target.removeAttribute("hx-confirm");
+    const confirmModalVariant = modalElement.getAttribute('data-confirm-modal');
+    const confirmFn = confirmModalVariant === 'redesign' ? modal.confirmRedesign.bind(modal) : modal.confirm.bind(modal);
+
+    confirmFn(modalPrompt, () => {
+        modalElement.removeAttribute("hx-confirm");
         e.detail.issueRequest(true);
-        const success_message = e.target.getAttribute("data-success-message")
+        const success_message = modalElement.getAttribute("data-success-message")
         if (success_message) {
             modal.notifySuccess(success_message);
         }
