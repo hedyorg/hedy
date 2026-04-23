@@ -953,7 +953,7 @@ interface dataPoint {
 }
 const MAX_BUBBLE_SIZE = 44;
 const MIN_BUBBLE_SIZE = 10;
-const BUBBLE_SCALING_EXPONENT = 0.8;
+const BUBBLE_SCALING_EXPONENT = 0.9;
 
 function getBubbleSizeLimits(graphElement: HTMLCanvasElement) {
   const containerWidth = graphElement.parentElement?.clientWidth || graphElement.clientWidth || window.innerWidth;
