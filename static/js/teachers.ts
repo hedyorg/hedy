@@ -951,37 +951,68 @@ interface dataPoint {
   successful_runs: number,
   name: string
 }
-const MAX_BUBBLE_SIZE = 62;
-const MIN_BUBBLE_SIZE = 12;
+const MAX_BUBBLE_SIZE = 44;
+const MIN_BUBBLE_SIZE = 10;
+const BUBBLE_SCALING_EXPONENT = 0.8;
+
+function getBubbleSizeLimits(graphElement: HTMLCanvasElement) {
+  const containerWidth = graphElement.parentElement?.clientWidth || graphElement.clientWidth || window.innerWidth;
+  const isSmallViewport = window.matchMedia('(max-width: 768px)').matches;
+
+  // Keep bubbles readable on small screens and avoid oversized circles on wide charts.
+  const responsiveMax = Math.round(containerWidth * (isSmallViewport ? 0.06 : 0.045));
+  const maxBubbleSize = Math.min(MAX_BUBBLE_SIZE, Math.max(24, responsiveMax));
+  const minBubbleSize = Math.min(Math.max(6, Math.round(maxBubbleSize * 0.35)), MIN_BUBBLE_SIZE);
+
+  return { minBubbleSize, maxBubbleSize };
+}
+
+function getBubbleRadius(value: number, min: number, max: number, minBubbleSize: number, maxBubbleSize: number): number {
+  const range = max - min;
+  if (range <= 0) {
+    return Math.round((minBubbleSize + maxBubbleSize) / 2);
+  }
+
+  // Use a mild power curve so outliers are softened without making high values look too similar.
+  const normalized = Math.pow((value - min) / range, BUBBLE_SCALING_EXPONENT);
+  return minBubbleSize + normalized * (maxBubbleSize - minBubbleSize);
+}
 
 export function initializeGraph(is_redesign: boolean = false) {
   const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
   if (graphElement === undefined || graphElement === null) return;
   const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
-  console.log('Graph data:', graphData);
-  let min = Infinity;
-  let max = 0;
   const students = graphData.graph_students
+  if (students.length === 0) {
+    return;
+  }
+
+  let min = Infinity;
+  let max = -Infinity;
   for (const student of students) {
     if (student.successful_runs < min) {
       min = student.successful_runs
-    } else if (student.successful_runs > max) {
+    }
+    if (student.successful_runs > max) {
       max = student.successful_runs
     }
   }
-  if (max == 0) {
-    max = 12
+
+  const buildData = () => {
+    const { minBubbleSize, maxBubbleSize } = getBubbleSizeLimits(graphElement)
+    return students.map((student: student) => {
+      const radius = getBubbleRadius(student.successful_runs, min, max, minBubbleSize, maxBubbleSize)
+      return {
+        x: student.adventures_tried,
+        y: student.number_of_errors,
+        r: radius,
+        successful_runs: student.successful_runs,
+        name: student.username
+      }
+    })
   }
-  let data: dataPoint[] = students.map((student: student) => {
-  const radius  = (student.successful_runs - min) * (MAX_BUBBLE_SIZE - MIN_BUBBLE_SIZE) / (max - min) + MIN_BUBBLE_SIZE
-    return {
-      x: student.adventures_tried,
-      y: student.number_of_errors,
-      r: radius,
-      successful_runs: student.successful_runs,
-      name: student.username
-    }
-  });
+
+  const data: dataPoint[] = buildData();
   new Chart(
     graphElement,
     {
@@ -998,6 +1029,10 @@ export function initializeGraph(is_redesign: boolean = false) {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        resizeDelay: 120,
+        onResize: (chart) => {
+          chart.data.datasets[0].data = buildData()
+        },
         onHover: (event, chartElement) => {
           //@ts-ignore
           event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default'
