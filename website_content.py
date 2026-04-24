@@ -236,6 +236,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'songs_2',
         'turtle',
         'turtle_draw_it',
+        'turtle_draw_it_2',
         'debugging',
         'hospital',
         'congratulations'
