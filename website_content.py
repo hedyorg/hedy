@@ -250,7 +250,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'story',
         'songs',
         'quizmaster',
-        'turtle_draw_it',
         'debugging',
         'hospital'
     ],
