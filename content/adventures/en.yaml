@@ -5855,6 +5855,17 @@ adventures:
                     {color} 'gray'
                     {forward} 100
                     ```
+            14:
+                story_text: |
+                answer_code: |
+                    ```
+                    {for} amount_of_combs {in} {range} (1,6):
+                        {for} walls_of_one_comb {in} {range}(1,6):
+                            {forward} 30
+                            {turn} 60
+                        {forward} 30
+                        {turn} -60
+                    ```
             15:
                 story_text: |
                     ### Exercise
