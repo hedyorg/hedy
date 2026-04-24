@@ -20,13 +20,33 @@ function promptByPageVariant(message: string, defaultValue: string, confirmCb: (
   modal.prompt(message, defaultValue, confirmCb, isRedesignPage ? 'redesign' : 'legacy', title);
 }
 
-function confirmByPageVariant(message: string, confirmCb: () => void, declineCb: () => void = function(){}) {
+function confirmByPageVariant(
+  message: string,
+  confirmCb: () => void,
+  declineCb: () => void = function(){},
+  redesignOptions?: {
+    confirmButtonClass?: string;
+    confirmButtonLabel?: string;
+    confirmActionsClass?: string;
+  },
+) {
   const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
   if (isRedesignPage) {
-    modal.confirmRedesign(message, confirmCb, declineCb);
+    modal.confirmRedesign(message, confirmCb, declineCb, redesignOptions);
     return;
   }
   modal.confirm(message, confirmCb, declineCb);
+}
+
+function getRedesignRemoveConfirmOptions(confirmLabel?: string) {
+  if (!confirmLabel) {
+    return undefined;
+  }
+
+  return {
+    confirmButtonClass: 'red-btn-new',
+    confirmButtonLabel: confirmLabel,
+  };
 }
 
 export function create_class(class_name_prompt: string) {
@@ -202,23 +222,38 @@ export function join_class(id: string, name: string) {
     });
 }
 
-export function remove_student_invite(username: string, class_id: string, prompt: string) {
-  return modal.confirm (prompt, function () {
-      $.ajax({
-          type: 'POST',
-          url: '/remove_student_invite',
-          data: JSON.stringify({
-              username: username,
-              class_id: class_id
-          }),
-          contentType: 'application/json',
-          dataType: 'json'
-      }).done(function () {
-          location.reload();
-      }).fail(function (err) {
-          return modal.notifyError(err.responseText);
-      });
-  });
+export function remove_student_invite(username: string, class_id: string, prompt: string, confirmLabel?: string) {
+  return confirmByPageVariant(prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/remove_student_invite',
+      data: JSON.stringify({
+        username: username,
+        class_id: class_id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+      location.reload();
+    }).fail(function (err) {
+      return modal.notifyError(err.responseText);
+    });
+  }, function(){}, getRedesignRemoveConfirmOptions(confirmLabel));
+}
+
+export function remove_second_teacher(second_teacher: string, class_id: string, prompt: string, confirmLabel?: string) {
+  return confirmByPageVariant(prompt, function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/class/' + class_id + '/second-teacher/' + second_teacher,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+      location.reload();
+    }).fail(function (err) {
+      return modal.notifyError(err.responseText);
+    });
+  }, function(){}, getRedesignRemoveConfirmOptions(confirmLabel));
 }
 
 export function remove_student(class_id: string, student_id: string, prompt: string) {

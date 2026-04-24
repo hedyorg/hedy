@@ -100,6 +100,9 @@ htmx.on("htmx:confirm", function(e: any) {
     }
     const confirmModalVariant = modalElement.getAttribute('data-confirm-modal');
     const confirmFn = confirmModalVariant === 'redesign' ? modal.confirmRedesign.bind(modal) : modal.confirm.bind(modal);
+    const confirmButtonClass = modalElement.getAttribute('data-confirm-button-class') ?? undefined;
+    const confirmButtonLabel = modalElement.getAttribute('data-confirm-button-label') ?? undefined;
+    const confirmActionsClass = modalElement.getAttribute('data-confirm-actions-class') ?? undefined;
 
     confirmFn(modalPrompt, () => {
         modalElement.removeAttribute("hx-confirm");
@@ -108,5 +111,9 @@ htmx.on("htmx:confirm", function(e: any) {
         if (success_message) {
             modal.notifySuccess(success_message);
         }
+    }, undefined, {
+        confirmButtonClass,
+        confirmButtonLabel,
+        confirmActionsClass,
     });
 });

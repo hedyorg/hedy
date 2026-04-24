@@ -4,6 +4,10 @@ declare const htmx: typeof import('./htmx');
  */
 
 class Modal {
+  private readonly redesignConfirmDefaultButtonClass: string;
+  private readonly redesignConfirmDefaultButtonLabel: string;
+  private readonly redesignConfirmDefaultActionsClass: string;
+
   constructor() {
     // Just one binding, never needs stat
     $('#modal_confirm_button').on('click', () => this.hide());
@@ -23,6 +27,12 @@ class Modal {
     $('#redesign_search_close_button').on('click', () => this.hideRedesignSearch());
     $('#redesign_search_cancel_button').on('click', () => this.hideRedesignSearch());
     $('#redesign_search_backdrop').on('click', () => this.hideRedesignSearch());
+
+    const redesignConfirmYesButton = $('#redesign_confirm_yes_button');
+    const redesignConfirmActions = $('#redesign_confirm_actions');
+    this.redesignConfirmDefaultButtonClass = String(redesignConfirmYesButton.attr('class') ?? 'green-btn-new');
+    this.redesignConfirmDefaultButtonLabel = String(redesignConfirmYesButton.text()).trim();
+    this.redesignConfirmDefaultActionsClass = String(redesignConfirmActions.attr('class') ?? '');
   }
 
   private _timeout?: ReturnType<typeof setTimeout>
@@ -192,8 +202,24 @@ class Modal {
     });
   }
 
-  public confirmRedesign(message: string, confirmCb: () => void, declineCb: () => void = function(){}) {
+  public confirmRedesign(
+    message: string,
+    confirmCb: () => void,
+    declineCb: () => void = function(){},
+    options?: {
+      confirmButtonClass?: string;
+      confirmButtonLabel?: string;
+      confirmActionsClass?: string;
+    },
+  ) {
     this.hide();
+    const redesignConfirmYesButton = $('#redesign_confirm_yes_button');
+    const redesignConfirmActions = $('#redesign_confirm_actions');
+
+    redesignConfirmYesButton.attr('class', options?.confirmButtonClass ?? this.redesignConfirmDefaultButtonClass);
+    redesignConfirmYesButton.text(options?.confirmButtonLabel ?? this.redesignConfirmDefaultButtonLabel);
+    redesignConfirmActions.attr('class', options?.confirmActionsClass ?? this.redesignConfirmDefaultActionsClass);
+
     $('#redesign_confirm_text').text(message);
     $('#redesign_confirm_modal').removeClass('hidden').addClass('flex');
     $('body').addClass('overflow-hidden');

@@ -8,7 +8,20 @@
     <td class="py-3 text-center font-medium">{{ second_teacher.username }}</td>
     <td class="py-3 text-center">{{ second_teacher.role or _('teacher') }}</td>
     <td class="px-4 py-3 text-center">
-        <button type="button" class="text-red-500" disabled>
+        <button
+            type="button"
+            class="group inline-flex items-center gap-2 rounded px-2 py-1 transition-transform duration-150 {% if class_info.teacher == username %}text-red-600 hover:text-red-700 hover:scale-105{% else %}text-gray-300 cursor-not-allowed{% endif %}"
+            title="{{ _('remove') }}"
+            {% if class_info.teacher == username %}
+            data-second-teacher="{{ second_teacher.username }}"
+            data-class-id="{{ class_info.id }}"
+            data-prompt="{{ _('remove_user_prompt') }}"
+            data-confirm-label="{{ _('remove') }}"
+            onclick="hedyApp.remove_second_teacher(this.dataset.secondTeacher, this.dataset.classId, this.dataset.prompt, this.dataset.confirmLabel)"
+            {% else %}
+            disabled
+            {% endif %}
+        >
             <i class="fa-solid fa-trash"></i>
         </button>
     </td>
@@ -19,11 +32,18 @@
     <td class="py-3 text-center font-medium">{{ invite.username }}</td>
     <td class="py-3 text-center">{{ _('invited_on') }} {{ invite.timestamp }}</td>
     <td class="px-4 py-3 text-center">
-          <a href="#" class="group inline-flex items-center gap-2 text-red-600 hover:text-red-700 rounded px-2 py-1 transition-transform transform hover:scale-105 duration-150"
-              title="{{ _('delete') }}"
-              onclick='hedyApp.remove_student_invite("{{ invite.username }}", "{{ class_info.id }}", {{_("delete_invite_prompt")|default(None)|tojson}})'>
-                <i class="fa-solid fa-trash transition-transform duration-150 transform group-hover:-translate-y-0.5" aria-hidden="true"></i>
-          </a>
+        <button
+            type="button"
+            class="group inline-flex items-center gap-2 text-red-600 hover:text-red-700 rounded px-2 py-1 transition-transform transform hover:scale-105 duration-150"
+            title="{{ _('remove') }}"
+            data-invite-username="{{ invite.username }}"
+            data-class-id="{{ class_info.id }}"
+            data-prompt="{{ _('delete_invite_prompt') }}"
+            data-confirm-label="{{ _('remove') }}"
+            onclick="hedyApp.remove_student_invite(this.dataset.inviteUsername, this.dataset.classId, this.dataset.prompt, this.dataset.confirmLabel)"
+        >
+            <i class="fa-solid fa-trash transition-transform duration-150 transform group-hover:-translate-y-0.5" aria-hidden="true"></i>
+        </button>
     </td>
 </tr>
 {% endfor %}

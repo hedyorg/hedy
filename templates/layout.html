@@ -151,18 +151,18 @@
         <div class="px-5 py-5 sm:px-6">
           <p id="redesign_confirm_text" data-cy="redesign_confirm_text" class="m-0 leading-7 text-lg text-gray-700"></p>
         </div>
-        <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+        <div id="redesign_confirm_actions" class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+          <button id="redesign_confirm_no_button"
+                  data-cy="redesign_confirm_no_button"
+                  type="button"
+                  class="blue-btn-new">
+            {{ _('cancel') }}
+          </button>
           <button id="redesign_confirm_yes_button"
                   data-cy="redesign_confirm_yes_button"
                   type="button"
                   class="green-btn-new">
             {{ _('yes') }}
-          </button>
-          <button id="redesign_confirm_no_button"
-                  data-cy="redesign_confirm_no_button"
-                  type="button"
-                  class="blue-btn-new">
-            {{ _('no') }}
           </button>
         </div>
       </div>

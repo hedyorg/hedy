@@ -69,6 +69,8 @@
                       <button
                         data-cy="remove_class"
                         data-confirm-modal="redesign"
+                        data-confirm-button-class="red-btn-new"
+                        data-confirm-button-label="{{_('delete')}}"
                         class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-b-lg text-red-700 ease-in transition duration-100 font-bold"
                         hx-confirm="{{_('delete_class_prompt')}}"
                         hx-trigger="click"
@@ -84,35 +86,6 @@
                 </div>
               </div>
             </td>
-            <!--DISABLED FOR NOW :)-->
-            {#
-            <td class="text-center">
-              <div class="flex justify-center text-blue-900">
-                <button class="flex flex-col w-1/4"
-                  _="on click window.open('/for-teachers/customize-class/{{class.id}}', '_self')">
-                  <span class="fas fa-pen block my-auto lg:my-0"></span>
-                  <span class="hidden lg:block mt-1">{{_('customize')}}</span>
-                </button>
-                <button class="flex flex-col w-1/4" data-cy="duplicate_{{class.name}}"
-                  onclick='hedyApp.duplicate_class("{{class.id}}", "{{class.second_teachers}}", {{_('
-                  second_teacher_copy_prompt')|default(None)|tojson}}, {{_('class_name_prompt')|default(None)|tojson}}, {%
-                  if class.teacher !=username %}"{{class.name}}"{% else %}""{% endif %})'>
-                  <span class="fas fa-copy block my-auto lg:my-0"></span>
-                  <span class="hidden lg:block mt-1">{{_('duplicate')}}</span>
-                </button>
-                <button class="flex flex-col w-1/4"
-                  _="on click window.open('/for-teachers/class/{{class.id}}/preview', '_self')">
-                  <span class="fas fa-eye block my-auto lg:my-0"></span>
-                  <span class="hidden lg:block mt-1">{{_('preview')}}</span>
-                </button>
-                <button data-cy="remove_class" class="flex flex-col w-1/4" hx-confirm="{{_('delete_class_prompt')}}"
-                  hx-trigger="click" hx-delete="/class/{{class.id}}" hx-target="#classes_table" hx-swap="outerHTML">
-                  <span class="fas fa-trash block text-red-700 my-auto lg:my-0"></span>
-                  <span class="text-red-700 hidden lg:block mt-1">{{_('remove')}}</span>
-                </button>
-              </div>
-            </td>
-            #}
           </tr>
           {% endfor %}
         </tbody>

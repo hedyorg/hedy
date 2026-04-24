@@ -1,4 +1,7 @@
 {% if modal_variant == 'redesign' %}
+{% set redesign_actions_class = confirm_actions_class or 'flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6' %}
+{% set redesign_confirm_button_class = confirm_button_class or 'green-btn-new' %}
+{% set redesign_confirm_button_label = confirm_button_label or _('yes') %}
 <div id="htmx_modal" data-cy="htmx_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 sm:px-6"
     _="on closeModal remove me">
     <div _="on click trigger closeModal" class="absolute inset-0 bg-black opacity-60"></div>
@@ -17,10 +20,15 @@
         <div class="px-5 py-5 sm:px-6">
             <p class="m-0 leading-7 text-lg text-gray-700">{{ modal_text }}</p>
         </div>
-        <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+        <div class="{{ redesign_actions_class }}">
+            <button type="button"
+                class="blue-btn-new"
+                _="on click trigger closeModal">
+                {{_('cancel')}}
+            </button>
             <button type="button"
                     data-cy="htmx_modal_yes_button"
-                    class="green-btn-new"
+                class="{{ redesign_confirm_button_class }}"
                     hx-post="{{ htmx_endpoint }}"
                     hx-target="{{ htmx_target }}"
                     hx-swap="{{ htmx_swap or 'innerHTML' }}"
@@ -37,12 +45,7 @@
                         then {{ hyperscript }}
                         {% endif %}
                      ">
-                {{_('yes')}}
-            </button>
-            <button type="button"
-                    class="blue-btn-new"
-                    _="on click trigger closeModal">
-                    {{_('no')}}
+                {{ redesign_confirm_button_label }}
             </button>
         </div>
     </div>

@@ -1582,6 +1582,8 @@ class ForTeachersModule(WebsiteModule):
             htmx_target=htmx_target,
             hyperscript=hyperscript,
             htmx_success_message=htmx_success_message,
+            confirm_button_label=gettext('remove'),
+            confirm_button_class='red-btn-new',
             modal_variant='redesign'
         )
 

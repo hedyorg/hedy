@@ -765,7 +765,16 @@ function change_to_unsubmitted () {
 }
 
 export async function unsubmit_program (id: string, prompt: string) {
-  await modal.confirmP(prompt);
+  const isRedesignPage = window.location.pathname.includes('/redesign');
+  if (isRedesignPage) {
+    await new Promise<void>((resolve) => {
+      modal.confirmRedesign(prompt, resolve, function(){}, {
+        confirmButtonLabel: 'Unsubmit',
+      });
+    });
+  } else {
+    await modal.confirmP(prompt);
+  }
   tryCatchPopup(async () => {
     const response = await postJson('/programs/unsubmit', { id });
     modal.notifySuccess(response.message);
