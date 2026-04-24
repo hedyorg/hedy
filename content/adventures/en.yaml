@@ -194,6 +194,19 @@ adventures:
                         {print} 'Oh no! Richard is too slow...'
                         {print} _
                     ```
+                answer_code: |
+                    ```
+                    {print} 'OH NO! The T-rex is closing in!'
+                    end = {ask} 'Do you want a happy or a sad ending?'
+                    {if} end {is} happy
+                        {print} 'Just in time Richard jumps back into the time machine!'
+                        {print} 'Pfiew glad we made it'
+                        {print} 'Just in time'
+                    {else}
+                        {print} 'Oh no! Richard is too slow...'
+                        {print} 'The T-rex lets out a massive ROAR'
+                        {print} 'It opens its mouth and devours Richard in one bite'
+                    ```
             10:
                 story_text: "In this level you can use `{if}` and `{repeat}` commands inside other `{if}` and `{repeat}` commands. \nThis gives you many options and really helps you to make your story interactive.\n\n### Exercise 1\nFinish the code so the `{if}` works correctly.\n\n### Exercise 2\nAdd an `{if}` and `{else}` for the part of the story where Robin goes home too.\n\n### Exercise 3\nGo back to your level 8 story and use at least two `{if}`s inside another `{if}`.\n"
                 example_code: |
@@ -228,6 +241,28 @@ adventures:
                     {if} path {is} 'left' {and} weapon {is} 'sword'
                         _
                     ```
+                answer_code: |
+                    ```
+                    {print} 'Robin is walking downtown'
+                    location = {ask} 'Is Robin going into a shop, or does she go home?'
+                    {if} location {is} shop
+                        {print} 'She enters the shop.'
+                        {print} 'Robin sees an interesting looking book'
+                        book = {ask} 'Does Robin buy the book?'
+                        {if} book {is} yes
+                            {print} 'Robin buys the book and goes home'
+                        {else}
+                            {print} 'Robin leaves the shop and goes home'
+                    {else}
+                        {print} 'Robin goes home'
+                        icecream = {ask} 'Does she stop for icecream on the way home?'
+                        {if} icecream {is} yes
+                            {print} 'Robin stops for icecream first'
+                            {print} 'She chooses a lemon sorbet'
+                            {print} 'Its delicious'
+                        {else}
+                            {print} 'She goes straight home'
+                    ```
             11:
                 story_text: |
                     In this level you can use the `{for}` command in your story. In this way you could easily program the children's book 'Brown bear, Brown bear, what do you see'.
@@ -236,6 +271,24 @@ adventures:
 
                     Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
                 example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+                answer_code: |
+                    ```
+                    animals = Red Bird, Yellow Duck, Blue Horse, Green Frog, Purple Cat, White Dog, Black Sheep, Gold Fish, Teacher
+                    {print} 'Brown bear, Brown bear'
+                    {print} 'What do you see?'
+                    {for} animal {in} animals
+                        {print} 'I see a ' animal ' looking at me'
+                        {print} animal ', ' animal
+                        {print} 'What do you see?'
+                    {print} 'I see children looking at me'
+                    {print} 'Children, Children'
+                    {print} 'What do you see?'
+                    {print} 'We see a '
+                    {for} animal {in} animals
+                        {print} animal
+                    {print} 'looking at us'
+                    {print} 'Thats what we see!'
+                    ```
             13:
                 story_text: |
                     We are going to print another story, but now we have to use brackets with `{print}`.
@@ -533,6 +586,18 @@ adventures:
                     {for} _
                         {for} _
                             answer = {ask} _
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
+                            {else}
+                                {print} 'That is wrong. The right answer is ' correct
+                    ```
+                answer_code: |
+                    ```
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    {for} number_1 {in} numbers
+                        {for} number_2 {in} numbers
+                            answer = {ask} 'How much is ' number_2 ' times ' number_1 '?'
                             correct = number_1 * number_2
                             {if} answer {is} correct
                                 {print} 'Great job!'
@@ -1532,6 +1597,15 @@ adventures:
                     people = mom, dad, Emma, Sophie
                     {repeat} _ _ {print} 'Dishwashing will be done by ' _ _ _
                     ```
+                answer_code: |
+                    ```
+                    people = mom, dad, Emma, Sophie
+                    repeat 7 times {print} 'Dishwashing will be done by ' people {at} {random}
+
+                    #Extra
+                    repeat 7 times {print} 'Walking the dog will be done by ' people {at} {random}
+                    repeat 7 times {print} 'Taking out the trash will be done by' people {at} {random}
+                    ```
             11:
                 story_text: |
                     In this level you can make a schedule for the whole week in an easy way!
@@ -1756,6 +1830,14 @@ adventures:
                     options = they love you, they love you not
                     _ _ _ _ options {at} {random}
                     ```
+                answer_code: |
+                    ```
+                    {print} 'I have a flower with magic petals'
+                    {print} 'If you pick the petals the flower will tell you if your crush loves you back'
+                    amount = {ask} 'How many petals do you want to pick?'
+                    options = they love you, they love you not
+                    repeat amount times {print} options {at} {random}
+                    ```
             9:
                 story_text: |
                     In the next example you can have your fortune teller ask multiple questions and also print them!
@@ -1772,6 +1854,17 @@ adventures:
                        {print} question
                        {sleep}
                        {print} 'My crystal ball says... ' answers {at} {random}
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'I am Hedy the fortune teller!'
+                    {print} 'You can ask me 3 questions.'
+                    answers = yes, no, maybe
+                    {repeat} 3 {times}
+                       question = {ask} 'What do you want to know?'
+                       {print} question
+                       {sleep}
+                       {print} 'My crystal ball says...' answers {at} {random}
                     ```
             11:
                 story_text: |
@@ -3852,6 +3945,13 @@ adventures:
                     _ {print} 'The muffin man'
                     _ {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
+                answer_code: |
+                    ```
+                    {print} 'Do you know the muffin man?'
+                    {repeat} 2 {times}
+                        {print} 'The muffin man'
+                    {print} 'Do you know the muffin man, who lives on Drury Lane?'
+                    ```
     restaurant:
         name: restaurant
         default_save_name: Restaurant
@@ -4049,6 +4149,15 @@ adventures:
                     {print} 'Welcome to Restaurant Chez Hedy'
                     people = {ask} 'How many people are joining us today?'
                     ```
+                answer_code: |
+                    ```
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    people = {ask} 'How many people are joining us today?'
+                    repeat people times order is {ask} 'What whould you like to order?'
+
+                    # Exrtra
+                    repeat people times drink is {ask} 'What whould you like to drink?'
+                    ```
             9:
                 story_text: |
                     In this level you can make your virtual restaurant more elaborate by repeating multiple lines of code. Like this:
@@ -4064,6 +4173,21 @@ adventures:
                     {repeat} people {times}
                         food = {ask} 'What would you like to order?'
                         {print} food
+                    {print} 'Thank you for ordering!'
+                    {print} 'Enjoy your meal!'
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Welcome to Restaurant Chez Hedy!'
+                    people = {ask} 'How many people will be joining us today?'
+                    {print} 'Great!'
+                    {repeat} people {times}
+                        starter = {ask} 'What would you like to order as a starter?'
+                        {print} starter
+                        main = {ask} 'What would you like for your main dish?'
+                        {print} main
+                        dessert = {ask} 'What would you like for your dessert?'
+                        {print} dessert
                     {print} 'Thank you for ordering!'
                     {print} 'Enjoy your meal!'
                     ```
@@ -4113,6 +4237,28 @@ adventures:
                         {print} 'That is a healthy choice'
                     {print} 'That will be ' price ' dollars'
                     ```
+                answer_code: |
+                    ```
+                    {print} 'Welcome to Restaurant Chez Hedy!'
+                    people = {ask} 'How many people will be joining us today?'
+                    {print} 'Great!'
+                    price = 0
+                    {repeat} people {times}
+                        food = {ask} 'What would you like to order?'
+                        {print} food
+                        {if} food {is} fries
+                            price = price + 3
+                            sauce = {ask} 'What kind of sauce would you like with your fries?'
+                            {if} sauce {is} no
+                                {print} 'no sauce'
+                            {else}
+                                price = price + 1
+                                {print} 'with ' sauce
+                        {if} food {is} pizza
+                            price = price + 4
+                    {print} 'That will be ' price ' dollar'
+                    {print} 'Enjoy your meal!'
+                    ```
             11:
                 story_text: |
                     In this level you'll learn how to easily ask orders for different courses.
@@ -4133,6 +4279,15 @@ adventures:
                     _ {for} course {in} courses
                     _ food = {ask} name ', what would you like to eat as your ' course '?'
                     _ {print} name ' orders ' food ' as their ' course
+                    ```
+                answer_code: |
+                    ```
+                    courses = appetizer, main course, dessert
+                    names = Timon, Onno
+                    {for} name {in} names
+                        {for} course {in} courses
+                            food = {ask} name ', what would you like to eat as your ' course '?'
+                            {print} name ' orders ' food ' as their ' course'
                     ```
             16:
                 story_text: |
@@ -4908,6 +5063,18 @@ adventures:
                         {color} {white}
                         {forward} 50
                         {color} {black}
+                    ```
+                answer_code: |
+                    ```
+                    {color} pink
+                    {repeat} 4 {times}
+                        {repeat} 4 {times}
+                            {forward} 50
+                            {turn} 90
+                        {color} white
+                        {turn} 270
+                        {forward} 50
+                        {color} pink
                     ```
             11:
                 story_text: |
