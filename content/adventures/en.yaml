@@ -27,6 +27,16 @@ adventures:
                     Use at least one `{ask}` and one `{echo}` command.
                     You can make it about any topic you like.
                     If you can't think of a topic, use one of our choices: going to the movies, a sports match or a day at the zoo.
+                answer_code: |
+                    ```
+                    {print} One day I went to the zoo
+                    {ask} What animal did i see first?
+                    {echo} First I saw a
+                    {print} Then I saw a penguin
+                    {print} It was having lunch
+                    {ask} What was the penguin eating?
+                    {echo} The penguin was eating
+                    ```
             2:
                 story_text: |
                     In level 2 you can make your story more fun. Your main character's name can now be anywhere in the sentence.
@@ -456,6 +466,15 @@ adventures:
                     ```
                     _ How are you doing?
                     _
+                    ```
+                answer_code: |
+                    ```
+                    {ask} How are you doing?
+                    {echo} You're doing
+                    {ask} What is your favorite sport?
+                    {echo} You like
+                    {ask} What is your least favorite sport?
+                    {echo} You don't like
                     ```
             2:
                 story_text: |
@@ -3041,6 +3060,8 @@ adventures:
                     {play} B4
                     {play} C5
                     ```
+                answer_code: |
+                    Own answer
             2:
                 story_text: |
                     ### Exercise
@@ -5152,6 +5173,50 @@ adventures:
                     Star <img src="https://github.com/hedyorg/hedy/assets/80678586/421c4d28-cb99-424b-be26-dcae30d65c80" width="150">
                     Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/3cbebcae-5258-47c5-a6ac-e7ee36c1d1ce" width="200">
                     </div>
+                answer_code: |
+                    Star
+                    ```
+                    {forward} 100
+                    {turn} 144
+                    {forward} 100
+                    {turn} 144
+                    {forward} 100
+                    {turn} 144
+                    {forward} 100
+                    {turn} 144
+                    {forward} 100
+                    {turn} 144
+                    ```
+
+                    Arrow
+                    ```
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 20
+                    {turn} 225
+                    {forward} 50
+                    {turn} 270
+                    {forward} 50
+                    {turn} 225
+                    {forward} 20
+                    {turn} 90
+                    {forward} 100
+                    {turn} 270
+                    {forward} 30
+                    ```
+
+                    Triangle
+                    ```
+                    {turn} 90
+                    {forward} 50
+                    {turn} 240
+                    {forward} 100
+                    {turn} 240
+                    {forward} 100
+                    {turn} 240
+                    {forward} 50
+                    ```
             4:
                 story_text: |
                     ### Exercise
@@ -5168,6 +5233,117 @@ adventures:
                     ```
                     colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
                     color _
+                    ```
+                answer_code: |
+                    Rainbow
+                    ```
+                    {turn} 90
+                    {color} red
+                    {forward} 100
+                    {turn} 90
+                    {forward} 3
+                    {turn} 90
+                    {color} orange
+                    {forward} 100
+                    {turn} -90
+                    {forward} 3
+                    {turn} -90
+                    {color} yellow
+                    {forward} 100
+                    {turn} 90
+                    {forward} 3
+                    {turn} 90
+                    {color} green
+                    {forward} 100
+                    {turn} -90
+                    {forward} 3
+                    {turn} -90
+                    {color} blue
+                    {forward} 100
+                    {turn} 90
+                    {forward} 3
+                    {turn} 90
+                    {color} purple
+                    {forward} 100
+                    {turn} -90
+                    {forward} 3
+                    {turn} -90
+                    {color} pink
+                    {forward} 100
+                    ```
+
+                    Colored star
+                    ```
+                    {color} blue
+                    {forward} 100
+                    {turn} 144
+                    {color} green
+                    {forward} 100
+                    {turn} 144
+                    {color} orange
+                    {forward} 100
+                    {turn} 144
+                    {color} red
+                    {forward} 100
+                    {turn} 144
+                    {color} purple
+                    {forward} 100
+                    {turn} 144
+                    ```
+
+                    Nested squares
+                    ```
+                    colors is red, orange, yellow, green, blue, purple, pink
+                    {color} colors {at} {random}
+                    distance is 100
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {color} colors {at} {random}
+                    distance is 80
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {color} colors {at} {random}
+                    distance is 60
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {color} colors {at} {random}
+                    distance is 40
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {color} colors {at} {random}
+                    distance is 20
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
+                    {forward} distance
+                    {turn} 90
                     ```
             5:
                 story_text: |
@@ -5186,6 +5362,73 @@ adventures:
                     ```
                     chosen_letter {is} {ask} 'Which letter would you like to see? F, E or L?'
                     {if} _
+                    ```
+                answer_code: |
+                    F
+                    ```
+                    {forward} 100
+                    {turn} 90
+                    {forward} 80
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    {forward} 60
+                    {turn} -90
+                    {forward} 20
+                    {turn} -90
+                    {forward} 40
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    {forward} 40
+                    {turn} -90
+                    {forward} 40
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    ```
+
+                    E
+                    ```
+                    {forward} 100
+                    {turn} 90
+                    {forward} 80
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    {forward} 60
+                    {turn} -90
+                    {forward} 20
+                    {turn} -90
+                    {forward} 40
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    {forward} 40
+                    {turn} -90
+                    {forward} 20
+                    {turn} -90
+                    {forward} 60
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    {forward} 80
+                    {turn} 90
+                    ```
+                    L
+                    ```
+                    {forward} 100
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    {forward} 80
+                    {turn} -90
+                    {forward} 60
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    {forward} 80
+                    {turn} 90
                     ```
             7:
                 story_text: |
@@ -5206,6 +5449,48 @@ adventures:
                     ```
                     chosen_color = {ask} _
                     ```
+                answer_code: |
+                    square
+                    ```
+                    chosen_color = {ask} 'What color do you want the square to be?'
+                    {color} chosen_color
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    ```
+                    H
+                    ```
+                    {forward} 100
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    {forward} 40
+                    {turn} 270
+                    {forward} 30
+                    {turn} 270
+                    {forward} 40
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    {forward} 40
+                    {turn} 270
+                    {forward} 30
+                    {turn} 270
+                    {forward} 40
+                    {turn} 90
+                    {forward} 20
+                    {turn} 90
+                    ```
+
             8:
                 story_text: |
                     ### Exercise
@@ -5216,6 +5501,68 @@ adventures:
                     Triangle <img src="https://github.com/hedyorg/hedy/assets/80678586/3629a5e6-1f02-4851-aab9-c5430ba4a1f1" width="200">
                     Fan <img src="https://github.com/hedyorg/hedy/assets/80678586/1ba2ff71-1230-4fe3-8255-b2c504cf1b4e" width="200">
                     </div>
+                answer_code: |
+                    Sierpinski triangle
+                    ```
+                    {turn} 90
+                    {forward} 120
+                    {turn} 240
+                    {forward} 240
+                    {turn} 240
+                    {forward} 240
+                    {turn} 240
+                    {forward} 120
+                    {turn} -60
+                    {forward} 120
+                    {turn} -120
+                    {forward} 120
+                    {turn} -120
+                    {forward} 120
+                    {turn} -120
+                    ```
+
+                    Fan
+                    ```
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 65
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 65
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    {forward} 100
+                    {turn} 90
+                    ```
+
+                    Simple hexagon
+                    ```
+                    {forward} 60
+                    {turn} 60
+                    {forward} 60
+                    {turn} 60
+                    {forward} 60
+                    {turn} 60
+                    {forward} 60
+                    {turn} 60
+                    {forward} 60
+                    {turn} 60
+                    {forward} 60
+                    ```
             9:
                 story_text: |
                     ### Exercise
@@ -5228,6 +5575,31 @@ adventures:
                     Randomly colored star (5) <img src="https://github.com/hedyorg/hedy/assets/80678586/dbe39006-c050-4833-b5c4-f9d1fb1c0781" width="150">
                     Randomly colored spiral (7) <img src="https://github.com/hedyorg/hedy/assets/80678586/9bcdb3f1-367d-4ae0-878f-d09005424a35" width="150">
                     </div>
+                answe_code: |
+                    random colors star
+                    ```
+                    colors = blue, purple, pink, red
+                    {repeat} 5 {times}
+                        {color} colors {at} {random}
+                        {forward} 100
+                        {turn} 144
+                    ```
+                    Square level 8
+                    ```
+                    {repeat} 4 {times}
+                        {forward} 100
+                        {turn} 90
+                    ```
+                    Random colors spiral
+                    ```
+                    colors = red, blue, pink, purple
+                    distance = 5
+                    {repeat} 20 {times}
+                       {color} colors {at} {random}
+                       {forward} distance
+                       distance = distance + 5
+                       {turn} 90
+                    ```
             10:
                 story_text: |
                     ### Exercise
@@ -5257,6 +5629,73 @@ adventures:
                         color_1 = red
                         color_2 = white
                         color_3 = blue
+                    ```
+                answer_code: |
+                    Nested squares
+                    ```
+                    colors = red, blue, orange, yellow, pink, purple, green, brown, black
+                    distance = 120
+                    {repeat} 5 {times}
+                        {color} colors {at} {random}
+                        distance = distance - 20
+                        {repeat} 4 {times}
+                            {forward} distance
+                            {turn} 90
+                    ```
+
+                    Flags
+                    ```
+                    country = {ask} 'which country would you like to see the flag of?'
+                    {if} country is 'the Netherlands'
+                        color_1 = red
+                        color_2 = white
+                        color_3 = blue
+                    {if} country is 'Germany'
+                        color_1 = black
+                        color_2 = red
+                        color_3 = yellow
+                    {turn} 90
+                    {color} color_1
+                    {repeat} 4 {times}
+                        {forward} 100
+                        {turn} 90
+                        {forward} 2
+                        {turn} 90
+                        {forward} 100
+                        {turn} -90
+                        {forward} 2
+                        {turn} -90
+                    {color} color_2
+                    {repeat} 4 {times}
+                        {forward} 100
+                        {turn} 90
+                        {forward} 2
+                        {turn} 90
+                        {forward} 100
+                        {turn} -90
+                        {forward} 2
+                        {turn} -90
+                    {color} color_3
+                    {repeat} 4 {times}
+                        {forward} 100
+                        {turn} 90
+                        {forward} 2
+                        {turn} 90
+                        {forward} 100
+                        {turn} -90
+                        {forward} 2
+                        {turn} -90
+                    ```
+
+                    Cross
+                    ```
+                    {repeat} 4 {times}
+                        {forward} 50
+                        {turn} 90
+                        {forward} 50
+                        {turn} -90
+                        {forward} 50
+                        {turn} 90
                     ```
             11:
                 story_text: |
@@ -5298,6 +5737,55 @@ adventures:
                     {for} chosen_color {in} colors
                     _
                     ```
+                answer_code: |
+                    Traffic Light
+                    ```
+                    colors = red, yellow, green
+                    {turn} 90
+                    {for} chosen_color {in} colors
+                        {color} chosen_color
+                        {repeat} 20 {times}
+                            {forward} 75
+                            {turn} 90
+                            {forward} 1
+                            {turn} 90
+                            {forward} 75
+                            {turn} -90
+                            {forward} 1
+                            {turn} -90
+                    ```
+
+                    Nested Hexagons
+                    ```
+                    distances = 100, 80, 60, 40, 20
+                    {for} distance {in} distances
+                        {repeat} 6 {times}
+                            {forward} distance
+                            {turn} 60
+                    ```
+
+                    Christmas lights
+                    ```
+                    {color} white
+                    {turn} -90
+                    {forward} 300
+                    {turn} 90
+                    colors = red, blue, yellow, purple, green, orange, pink
+                    {for} chosen_color {in} colors
+                        {color} chosen_color
+                        {turn} 150
+                        {forward} 20
+                        {turn} 60
+                        {forward} 50
+                        {turn} 120
+                        {forward} 50
+                        {turn} 60
+                        {forward} 20
+                        {turn} 60
+                        {color} black
+                        {forward} 120
+                        {turn} -90
+                    ```
             12:
                 story_text: |
                     ### Exercise
@@ -5325,6 +5813,47 @@ adventures:
                         {color} chosen_color
                         {if} shape = 'square'
                             {call} draw_a_square
+                    ```
+                answer_code: |
+                    Bracelet
+                    ```
+                    #defining all the shapes
+                    {define} draw_a_square
+                        {repeat} 4 {times}
+                            {turn} 90
+                            {forward} 30
+
+                    {define} draw_a_triangle
+                        {repeat} 3 {times}
+                            {turn} 120
+                            {forward} 30
+
+                    {define} draw_a_star
+                        {repeat} 5 {times}
+                            {turn} 144
+                            {forward} 30
+
+                    #starting at the leftside of the screen
+                    {color} white
+                    {turn} -90
+                    {forward} 300
+                    {turn} 180
+
+                    #making the bracelet
+                    {repeat} 5 {times}
+                        {color} gray
+                        {forward} 100
+                        shape = {ask} 'What kind of shape would you like next on the bracelet?'
+                        chosen_color = {ask} 'In which color?'
+                        {color} chosen_color
+                        {if} shape = 'square'
+                            {call} draw_a_square
+                        {elif} shape = 'triangle'
+                            {call} draw_a_triangle
+                        {elif} shape = "star"
+                            {call} draw_a_star
+                    {color} gray
+                    {forward} 100
                     ```
             15:
                 story_text: |
