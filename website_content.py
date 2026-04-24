@@ -269,6 +269,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'music_2',
         'functions_2',
         'songs',
+        'turtle_draw_it_2',
         'music_3',
         'hotel',
         'functions_3',

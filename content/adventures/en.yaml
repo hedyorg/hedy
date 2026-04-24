@@ -5960,6 +5960,76 @@ adventures:
                     	{forward} distance
                     	{turn} 143
                     ```
+    turtle_draw_it_2:
+        name: draw it!
+        default_save_name: Draw it 2
+        description: Draw it 2
+        levels:
+            15:
+                story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+                example_code: |
+                    This code creates one house (size 60)
+                    ```
+                    {turn} 270
+                    {forward} 60
+                    {turn} 90
+                    {forward} 60
+                    {turn} 30
+                    {forward} 60
+                    {turn} 120
+                    {forward} 60
+                    {turn} 30
+                    {forward} 60
+                    {turn} 270
+                    {forward} 30
+                    ```
+                answer_code: |
+                    street in different colors
+                    ```
+                    {def} house(chosen_color):
+                        {color} chosen_color
+                        {for} i {in} {range}(1,4):
+                            {forward} 60
+                            {turn} 90
+                        {forward} 60
+                        {turn} 30
+                        {forward} 60
+                        {turn} 120
+                        {forward} 60
+                        {turn} 30
+                        {forward} 60
+                        {turn} 270
+                        {forward} 30
+                        {turn} 270
+
+                    house('red')
+                    house('purple')
+                    house('blue')
+                    ```
+
+                    Street with different sizes
+                    ```
+                    def house(size):
+                        {for} i {in} {range} (1,4):
+                            {forward} size
+                            {turn} 90
+                        {forward} size
+                        {turn} 30
+                        {forward} size
+                        {turn} 120
+                        {forward} size
+                        {turn} 30
+                        {forward} size
+                        {turn} 270
+                        {forward} 30
+                        {turn} 270
+
+                    house(90)
+                    house(60)
+                    house(30)
+                    ```
     while_command:
         name: '{while}'
         default_save_name: while_command
