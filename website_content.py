@@ -259,6 +259,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
          'for_command',
          'haunted',
          'songs',
+         'turtle_draw_it',
          'language',
          'debugging',
          'hospital'

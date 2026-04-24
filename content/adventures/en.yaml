@@ -5857,7 +5857,25 @@ adventures:
                     ```
             14:
                 story_text: |
+                    ### Exercise
+                    Recreate the drawings with the turtle!
+
+                    <div class="w-full flex flex-row gap-2">
+                    Beehive (6) <img src="https://github.com/hedyorg/hedy/assets/80678586/ec02469c-907b-4695-9382-d39a8f3c00ec" width="200">
+                    Fan (5)  <img src="https://github.com/hedyorg/hedy/assets/80678586/a032ab35-c70c-4e67-9b4e-036a03ecce87" width="200">
+                    </div>
+                example_code: |
+                    Hint Beehive:
+                    ```
+                    {for} amount_of_combs _
+                        {for} walls_of_one_comb _
+                            {forward} _
+                            {turn} _
+                        {forward} _
+                        {turn} _
+                    ```
                 answer_code: |
+                    beehive
                     ```
                     {for} amount_of_combs {in} {range} (1,6):
                         {for} walls_of_one_comb {in} {range}(1,6):
@@ -5865,6 +5883,14 @@ adventures:
                             {turn} 60
                         {forward} 30
                         {turn} -60
+                    ```
+                    fan
+                    ```
+                    {for} i {in} {range} (1,12):
+                        {for} i {in} {range} (1,4):
+                            {forward} 60
+                            {turn} 90
+                        {turn} 30
                     ```
             15:
                 story_text: |
