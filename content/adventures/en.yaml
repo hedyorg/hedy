@@ -1942,6 +1942,24 @@ adventures:
                         call next_turn
                         {sleep} 2
                     ```
+                answer_code: |
+                    ```
+                    sides = 'left', 'right'
+                    limbs = 'hand', 'foot'
+                    colors = 'red', 'blue', 'green', 'yellow'
+                    players = 'Ahmed', 'Jessica'
+
+                    {define} next_turn
+                        {for} player {in} players
+                            chosen_side = sides {at} {random}
+                            chosen_limb = limbs {at} {random}
+                            chosen_color = colors {at} {random}
+                            {print} player ', put your ' chosen_side ' ' chosen_limb ' on ' chosen_color
+                            {sleep} 2
+
+                    {print} 'Lets play a game of Twister!'
+                    {call} next_turn
+                    ```
             15:
                 story_text: |
                     In level 12 we have introduced you to functions. You write a piece of code inside the functions. 
