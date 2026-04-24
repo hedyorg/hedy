@@ -1013,7 +1013,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       $('#keybinding_modal').hide();
 
       if (hasTurtle) {
-        $('#save_files_container').show();
+        // TODO: disabled until we fix it
+        // $('#save_files_container').show();
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
@@ -1094,7 +1095,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         $('#keybinding_modal').hide();
 
         if (hasTurtle) {
-          $('#save_files_container').show();
+          // $('#save_files_container').show();
+          // TODO: disabled until we fix it
         }
 
         if (cb) cb ();
