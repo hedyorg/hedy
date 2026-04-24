@@ -62,6 +62,18 @@ adventures:
                     Change the `{ask}` commands and `{echo}` commands in your code to the correct form that you've learned in this level.
 
                     **Extra** Add a `{sleep}` command to your code to build up tension in your story.
+                answer_code: |
+                    ```
+                    {print} One day I went to the zoo
+                    first_animal {is} {ask} What animal did i see first?
+                    {print} First I saw a first_animal
+                    {print} Then I saw a penguin
+                    {print} It was having lunch
+                    food {is} {ask} What was the penguin eating?
+                    {print} The penguin was eating...
+                    {sleep} 3
+                    {print} food
+                    ```
             3:
                 story_text: |
                     In level 3 you can make your story more fun. You can use randomness for any monster, animal or other obstacle, like this:
@@ -94,6 +106,19 @@ adventures:
                     bag {is} water, flashlight, brick
                     dump {is} {ask} Which item should he dump?
                     {remove} dump {from} bag
+                    ```
+                answer_code: |
+                    ```
+                    animals {is} lion, zebra, flamingo
+                    {print} Hello kids! Today we're going to the zoo!
+                    favorite_animal {is} {ask} Which animal do you wanna go to today?
+                    {add} favorite_animal {to} animals
+                    {sleep} 2
+                    {print} Let's head to the animals {at} {random}
+                    {sleep}
+                    least_favorite_animal {is} {ask} Which animal do you not want to see?
+                    {remove} least_favorite_animal {from} animals
+                    {print} Let's go to the animals {at} {random} now!
                     ```
             4:
                 story_text: |
@@ -151,6 +176,15 @@ adventures:
                     {if} end {is} good {print} name ' takes the sword and the monster quickly runs away'
                     {else} {print} 'The monster eats ' name
                     ```
+                answer_code: |
+                    ```
+                    name {is} {ask} 'Who is the hero?'
+                    {print} 'Oh no the plane is crashing, who is gonna save us?'
+                    {print} "Look who is flying through the air, it's " name
+                    end {is} {ask} 'Will you save the plane or destroy it?'
+                    {if} end {is} save {print} name "landed the plane, he saved us!"
+                    {else} {print} "Oh no! " name " is destroying the plane, help!"
+                    ```
             6:
                 story_text: |-
                     Now that you can use `{elif}` you can create an even more interactive story! You could create multiple characters for example, that all have different traits.
@@ -168,6 +202,8 @@ adventures:
                     {elif} character {is} 'Sam'
                     {print} 'You have picked Sam! They are the quickest of them all!'
                     ```
+                answer_code: |
+                    Own answer
             8:
                 story_text: |
                     In a story, someone says words several times. For example, when someone calls for help or sings a song.
@@ -182,6 +218,9 @@ adventures:
                     {repeat} 5 {times} {print} 'Help!'
                     {print} 'Why is nobody helping me?'
                     ```
+                answer_code: |
+                    {print} 'All the kids wanted to go to the zoo and kept shouting that!'
+                    {repeat} 3 {times} {print} "Let's go to the zoo!"
             9:
                 story_text: |
                     In this level you can use multiple lines in your `{if}` commands, this way you can upgrade your happy or sad ending!
@@ -435,6 +474,8 @@ adventures:
                     {else}
                         {print} 'You are not Hedy!'
                     ```
+                answer_code: |
+                    Own Answer
     ask_command:
         name: '{ask}'
         default_save_name: ask_command
@@ -520,6 +561,8 @@ adventures:
                     name = {input}('What is your name?')
                     {print}('So your name is ', name)
                     ```
+                answer_code: |
+                    Own answer
     calculator:
         name: calculator
         default_save_name: Calculator
@@ -558,6 +601,25 @@ adventures:
                     {if} _
                     {else} _
                     ```
+                answer_code: |
+                    Exercise
+                    ```
+                    correct_answer = 11 * 27
+                    answer = {ask} 'How much is 11 times 27?'
+                    {if} answer {is} correct_answer {print} 'good job!'
+                    {else} {print} 'Wrong! It was ' correct_answer
+                    ```
+
+                    Extra
+                    ```
+                    numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                    number_1 = numbers {at} {random}
+                    number_2 = numbers {at} {random}
+                    correct_answer = number_1 * number_2
+                    given_answer = {ask} 'What is ' number_1 ' times ' number_2 '?'
+                    {if} given_answer {is} correct_answer {print} 'Good job!'
+                    {else} {print} 'Wrong! It was ' correct_answer
+                    ```
             10:
                 story_text: |
                     In a previous level, you've created a calculator. In this level, you can expand that code so it asks multiple questions.
@@ -581,6 +643,18 @@ adventures:
                         {if} _ {is} _
                             score = score + 1
                     {print} 'Great job! Your score is... ' score ' out of 10!'
+                    ```
+                answer_code: |
+                    ```
+                    numbers = 1, 2, 3
+                    {for} number_1 {in} numbers
+                        {for} number_2 {in} numbers
+                            answer = {ask} "How much is " number_1 " times " number_2
+                            correct = number_1 * number_2
+                            {if} answer {is} correct
+                                {print} 'Great job!'
+                            {else}
+                                {print} 'That is wrong. The right answer is ' correct
                     ```
             11:
                 story_text: |
@@ -647,6 +721,18 @@ adventures:
                     mean_grade = _
                     {print}('Your mean grade is ', mean_grade)
                     ```
+                answer_code: |
+                    ```
+                    {def} calculate_mean_grade():
+                        total = 0
+                        {for} i {in} {range} 1 {to} 4:
+                            grade = {ask} "What grade did you got for your exam " i '?'
+                            total = total + grade
+                        {return} total / 4
+
+                    mean_grade = calculate_mean_grade
+                    {print} 'Your mean grade is ' mean_grade
+                    ```
             16:
                 story_text: |
                     You can add the `{while}` loop to the calculator game you've learned to make in a previous level.
@@ -712,6 +798,23 @@ adventures:
                     {if} _ _ _ _ _ _ _
                         {print} _
                     ```
+                answer_codes: |
+                    Exercise 1
+                    ```
+                    answer1 = {ask} 'What is 10 times 7?'
+                    answer2 = {ask} 'What is 6 times 7?'
+                    {if} answer1 = 70 {and} answer2 = 42
+                        {print} "Correct!"
+                    ```
+
+                    Exercise 2
+                    ```
+                    answer = {ask} "What number divides 12"
+                    {if} answer {is} 1 {or} answer {is} 2 {or} answer {is} 3 {or} answer {is} 4 {or} answer {is} 6 {or} answer {is} 12
+                        {print} "Correct!"
+                    {else}
+                        {print} "Wrong!"
+                    ```
             15:
                 story_text: |
                     ### Exercise 2
@@ -730,6 +833,37 @@ adventures:
                 example_code: |
                     ```
                     # Use your own code from the previous adventure.
+                    ```
+                answer_code: |
+                    Exercise 2
+                    ```
+                    {def} calculate_mean_grade():
+                        total = 0
+                        amount_of_tests = {input}("How many test have you made?")
+                        {for} i {in} {range} (1, amount_of_tests):
+                            grade = {input}("What grade did you get for your exam ", i, '?')
+                            total = total + grade
+                        {return} total / amount_of_tests
+
+                    mean_grade = calculate_mean_grade
+                    {print}('Your mean grade is ', mean_grade)
+                    ```
+
+                    Exercise 3
+                    ```
+                    {def} calculate_mean_grade(subject):
+                        total = 0
+                        amount_of_tests = {input}("How many test have you made of ", subject)
+                        {for} i {in} {range} (1, amount_of_tests):
+                            grade = {ask} ("What grade did you get for your exam ", i, '?')
+                            total = total + grade
+                        {return} total / amount_of_tests
+
+                    amount_of_subjects = {input}('For how many subjects do you want to calculate the mean grade?')
+                    {repeat} amount_of_subjects {times}
+                        subject = {input}('For which subject do you want to calculate your mean grade?')
+                        mean_grade = {call} calculate_mean_grade(subject)
+                        {print} ('Your mean grade for ', subject, ' is ', mean_grade)
                     ```
     clear_command:
         name: '{clear}'
@@ -778,13 +912,19 @@ adventures:
                 story_text: |
                     Congratulations! You have reached the end of Hedy Basic! You can continue learning in Hedy Advanced (level 9-12), where you can learn more complex programming concepts.
                     Or feel free to stay in Hedy Basic and come up with your own programs, of course!
+                answer_code: |
+                    Own Answer
             12:
                 story_text: |
                     Congratulations! You have reached the end of Hedy Advanced! You can continue learning in Hedy Expert (level 13-16), where you can learn how to write real Python code.
                     Or feel free to stay in Hedy Advanced and come up with your own programs, of course!
+                answer_code: |
+                    Own Answer
             16:
                 story_text: |
                     Congratulations! You have reached the last level of Hedy! The code you have created here can be copied to real Python environments like Replit or PyCharm, and you can continue learning there! Note however that Python can only read English commands, so if you have been using other languages, you will need to switch to English now.
+                answer_code: |
+                    Own Answer
     debugging:
         name: debugging
         default_save_name: debugging
@@ -1441,6 +1581,51 @@ adventures:
                     ```
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of copy and pasting, right? We are going to make that easier in level 7!
+                answer_code: |
+                    ```
+                    choices = 1, 2, 3, 4, 5, earthworm
+                    points = 0
+
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
+
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
+
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
+
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
+
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
+
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
+
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
+
+                    throw = choices {at} {random}
+                    {print} 'you threw ' throw
+                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {print} 'those are ' points ' points'
+                    ```
             8:
                 story_text: |
                     You can also make a dice again in this level. With the `{repeat}` code you can easily roll a whole hand of dice.
@@ -1452,6 +1637,11 @@ adventures:
                     choices = 1, 2, 3, 4, 5, 6
                     _ _ _ _ _ _ _
                     ```
+                answer_code: |
+                    ```
+                    choices = 1, 2, 3, 4, 5, 6
+                    {repeat} 5 {times} {print} choices {at} {random}
+                    ```
             11:
                 story_text: |
                     ### Exercise
@@ -1462,6 +1652,14 @@ adventures:
                     players = Ann, John, Jesse
                     choices = 1, 2, 3, 4, 5, 6
                     _ _ _ _
+                        {print} player ' throws ' choices {at} {random}
+                        {sleep}
+                    ```
+                answer_code: |
+                    ```
+                    players = Ann, John, Jesse
+                    choices = 1, 2, 3, 4, 5, 6
+                    {for} player {in} players
                         {print} player ' throws ' choices {at} {random}
                         {sleep}
                     ```
@@ -1605,6 +1803,39 @@ adventures:
                     {print} 'Tuesday the dishes are done by: ' dishwasher
                     {remove} dishwasher {from} people
                     ```
+                answer_code: |
+                    ```
+                    people = mom, dad, Emma, Sophie
+                    dishwasher = people {at} {random}
+                    {print} 'Monday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
+
+                    dishwasher = people {at} {random}
+                    {print} 'Tuesday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
+
+                    dishwasher = people {at} {random}
+                    {print} 'Wednesday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
+
+                    dishwasher = people {at} {random}
+                    {print} 'Thursday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
+
+                    people = mom, dad, Emma, Sophie
+                    dishwasher = people {at} {random}
+                    {print} 'Friday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
+
+                    dishwasher = people {at} {random}
+                    {print} 'Saturday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
+
+                    dishwasher = people {at} {random}
+                    {print} 'Sunday the dishes are done by: ' dishwasher
+                    {remove} dishwasher {from} people
+
+                    ```
             8:
                 story_text: |
                     With the `{repeat}` you can repeat pieces of code. You can use this to calculate who will be washing dishes for multiple days!
@@ -1639,6 +1870,18 @@ adventures:
                     {for} day {in} days
                         {print} names {at} {random} ' does the dishes on ' day
                     ```
+                answer_code: |
+                    ```
+                    days = Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+                    names = mom, dad, Emma, Sophie
+
+                    {for} day {in} days
+                        {print} names {at} random ' does the dishes on ' day
+
+                    {for} day {in} days
+                        {print} names {at} random ' takes out the trash on ' day
+
+                    ```
     elif_command:
         name: '{elif}'
         default_save_name: elif
@@ -1663,6 +1906,8 @@ adventures:
                     {else}
                     {print} 'Better luck next time..'
                     ```
+                answer_code: |
+                    Own answer
     for_command:
         name: '{for}'
         default_save_name: for
@@ -1693,6 +1938,17 @@ adventures:
                         {print} 'If youre happy and you know it, ' action
                         {sleep} 3
                     ```
+                answer_code: |
+                    ```
+                    actions = clap your hands, stomp your feet, shout Hurray!
+                    {for} action {in} actions
+                        {repeat} 2 {times}
+                            {print} 'If youre happy and you know it, ' action
+                            {sleep} 2
+                        {print} 'If youre happy and you know it, and you really want to show it'
+                        {print} 'If youre happy and you know it, ' action
+                        {sleep} 3
+                    ```
             14:
                 story_text: |
                     Lastly, we'll turn `{repeat} 5 {times}` into real Python code. Just as with `{if}`, you will have to use a colon. Like this:
@@ -1712,6 +1968,8 @@ adventures:
                     {for} i {in} {range}(1, 3):
                         {print}(friends[i], 's lucky number is ', lucky_numbers[i])
                     ```
+                answer_code: |
+                    Own answer
     fortune:
         name: fortune teller
         default_save_name: Fortune Teller
@@ -1737,6 +1995,21 @@ adventures:
                     ### Exercise
                     Copy the example code into your input screen and fill in the blanks to make the code work.
                     **Extra** Change the code and let the fortune teller not only predict your name, but also your age, your favorite sports team or something else about yourself.
+                answer_code: |
+                    ```
+                    {print} Hello, I'm Hedy the fortune teller!
+                    {ask} Who are you?
+                    {print} Let me take a look in my crystal ball
+                    {print} I see... I see...
+                    {echo} Your name is
+                    {ask} How many years have you been living?
+                    {print} Interesting
+                    {echo} My crystal ball tells me you are
+                    {ask} What sport do you play?
+                    {print} The ball... the ball...
+                    {print} It tells me your favorite sport...
+                    {echo} It tells me you play
+                    ```
             3:
                 story_text: |
                     In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only `{echo}`.
@@ -1817,6 +2090,20 @@ adventures:
                     {else}
                     {print} good_answer {at} {random}
                     ```
+                answer_code: |
+                    ```
+                    friends {is} Jordan, Lucy, Dave
+                    {print} 'I can predict the future...'
+                    {sleep} 2
+                    {clear}
+                    {print} 'I can predict whether your sports favorite team will win or not'
+                    person {is} {ask} 'Who are you?'
+                    good_answer {is} Hurray! Your team will win!, Your team will definitely win!, Your team will win! Hooray!
+                    bad_answer {is} Bad luck! Your team won't win!, Bummer... Your favorite sports team will lose..., Your favorite team will lose
+                    {if} person {is} {in} friends {print} bad_answer {at random}
+                    {else} {print} good_answer {at random}
+
+                    ```
             7:
                 story_text: |
                     In this level you can use math in your predictions as a fortune teller. This allows you to make up (silly) formulas to calculate the future.
@@ -1837,6 +2124,8 @@ adventures:
                     {sleep}
                     {print} kids ' kids!'
                     ```
+                answer_code: |
+                    Own answer
             8:
                 story_text: |
                     ### Exercise
@@ -1898,6 +2187,18 @@ adventures:
                     pets = dog, cat, elephant
                     names = Jenna, Ryan, Jim
                     _
+                        {print} name ' lives in a ' houses {at} {random}
+                        {print} name ' will marry ' loves {at} {random}
+                        {print} name ' will get a ' pets {at} {random} ' as their pet.'
+                        {sleep}
+                    ```
+                answer_code: |
+                    ```
+                    houses = mansion, apartment, shack, house
+                    loves = nobody, a royal, their neighbour, their true love
+                    pets = dog, cat, elephant
+                    names = Jenna, Ryan, Jim
+                    {for} name {in} names
                         {print} name ' lives in a ' houses {at} {random}
                         {print} name ' will marry ' loves {at} {random}
                         {print} name ' will get a ' pets {at} {random} ' as their pet.'
@@ -2043,6 +2344,16 @@ adventures:
                     song('sea')
                     song('ocean')
                     ```
+                answer_code: |
+                    ```
+                    {define} song {with} place
+                        {print} 'Last night as I lay on my ' place
+
+                    {call} song {with} 'pillow'
+                    {call} song {with} 'bed'
+                    {call} song {with} 'pillow'
+                    {print} "I dreamed that my Bonnie is dead"
+                    ```
     functions_3:
         name: functions with return value
         default_save_name: functions 3
@@ -2070,6 +2381,20 @@ adventures:
 
                     new_price = _ calculate_new_price(old_price, _)
                     {print}('The new price is ', new_price, ' dollar')
+                    ```
+                answer_code: |
+                    ```
+                    {def} calculate_new_price(amount, percentage):
+                        percentage = percentage / 100
+                        discount_amount = amount * percentage
+                        {return} round(amount - discount_amount, 2)
+
+                    old_price = {input}('How much is on the price tag?')
+                    discount = {input}('What percentage is the discount?')
+
+                    new_price = calculate_new_price(old_price, discount)
+                    {print}('The new price is ', new_price ', dollar')
+
                     ```
     guess_my_number:
         name: guess my number
@@ -2136,6 +2461,17 @@ adventures:
                     _ {print} name ' is placed in ' houses {at} {random}
                     _ {print} name ' is great at ' subjects {at} {random}
                     _ {print} name 's greatest fear is ' fears {at} {random}
+                    ```
+                answer_code: |
+                    ```
+                    houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
+                    subjects = potions, defence against the dark arts, charms, transfiguration
+                    fears = Voldemort, spiders, failing your OWL test
+                    names = Harry, Ron, Hermione
+                    {for} name {in} names
+                        {print} name ' is placed in ' houses {at} {random}
+                        {print} name ' is great at ' subjects {at} {random}
+                        {print} name 's greatest fear is ' fears {at} {random}
                     ```
     haunted:
         name: haunted house
@@ -2351,6 +2687,28 @@ adventures:
                             {print} 'GAME OVER'
                     {if} player {is} alive
                         {print} 'Great! You survived!'
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Escape from the Haunted House!'
+                    player = alive
+                    doors = 1, 2, 3
+                    monsters = zombie, vampire, giant spider
+                    {repeat} 3 {times}
+                        {if} player {is} alive
+                            wrong_door {is} doors {at} {random}
+                            {print} 'There are 3 doors in front of you...'
+                            chosen_door = {ask} 'Which door do you choose?'
+                            {if} chosen_door {is} wrong_door
+                                {print} 'You are eaten by a ' monsters {at} {random}
+                                player = dead
+                            {else}
+                                {print} 'No monsters here!'
+                        {else}
+                            {print} 'GAME OVER'
+                    {if} player {is} alive
+                        {print} 'Great! You survived!'
+
                     ```
             14:
                 story_text: |
@@ -2713,10 +3071,10 @@ adventures:
         levels:
             15:
                 story_text: |
-                    In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {ask}.
+                    In the previous adventure you have learned how to use an argument in a function, and you've learned how to combine it with an {input}.
                     You might have wondered why you would use functions, because the functions in the example were only one line of code.
                     Now we will show you what a bigger function looks like and we will use multiple arguments now as well. You'll see how much better it is to use a function once the function gets bigger.
-                    Here is an example of a function with arguments combined with `{ask}` commands.
+                    Here is an example of a function with arguments combined with `{input}` commands.
                 example_code: |
                     ```
                     {def} welcome_message(title, last_name, country, room_number):
@@ -2736,6 +3094,8 @@ adventures:
 
                     welcome_message(title, name, homecountry, 105)
                     ```
+                answer_code: |
+                    Own Answer
     if_command:
         name: '{if} & {else}'
         default_save_name: if_command
@@ -2791,6 +3151,17 @@ adventures:
                         {print} 'Welcome Hedy'
                         {print} 'You can play on your computer!'
                     ```
+                answer_code: |
+                    ```
+                    name = {ask} 'What is your name?'
+                    {if} name {is} Hedy
+                        {print} 'Welcome Hedy'
+                        {print} 'You can play on your computer!'
+                    {else}
+                        {print} 'Error...'
+                        {sleep} 2
+                        {print} 'You are not Hedy!'
+                    ```
             10:
                 story_text: |
                     In this level you can also put an `{if}` command inside another `{if}` command.
@@ -2821,6 +3192,8 @@ adventures:
                     {else}:
                         {print}("Meh, I don't agree")
                     ```
+                answer_code: |
+                    Own answer
     in_command:
         name: '{in}'
         default_save_name: in_command
@@ -2852,6 +3225,13 @@ adventures:
                     _ 'Mine too!'
                     _
                     _ 'My favorite animals are dogs, cows and sheep'
+                    ```
+                answer_code: |
+                    ```
+                    animals {is} dog, cow, sheep
+                    answer {is} {ask} 'What is your favorite animal?'
+                    {if} answer {is} {in} animals {print} 'Mine too!'
+                    {else} {print} 'My favorite animals are dogs, cows and sheep'
                     ```
     is_command:
         name: '{is}'
@@ -2895,6 +3275,8 @@ adventures:
                     name = Hedy
                     answer = 20 + 4
                     ```
+                answer_code: |
+                    Own answer
             13:
                 story_text: |
                     From mathematics, you might already know the symbols the `<` and `>`.
@@ -2921,6 +3303,8 @@ adventures:
                         {print}('You are cool!')
                     {else}_
                         {print} ('Nice to meet you!')
+                answer_code: |
+                    Own answer
     language:
         name: language
         default_save_name: Language
@@ -2982,6 +3366,21 @@ adventures:
                             {print} ('Wrong, ', french_words[i], ' means ', translation[i])
                     {print} ('You gave ', score, ' correct answers.')
                     ```
+                answer_code: |
+                    ```
+                    spanish_words = ['hola', 'vale', 'te quiero']
+                    translation = ['hello', 'okay', 'I love you']
+                    score = 0
+                    {for} i {in} {range}(1,3):
+                        answer = {ask} 'What does ' spanish_words[i] ' mean?'
+                        correct_answer = translation[i]
+                        {if} answer == correct_answer
+                            {print} 'Correct!'
+                            score = score + 1
+                        {else}
+                            {print} 'Wrong, ' spanish_words[i] ' means ' translation[i]
+                    {print} 'You gave ' score ' correct answers.'
+                    ```
     lists:
         name: lists
         default_save_name: lists
@@ -3012,7 +3411,9 @@ adventures:
                         {print} ('Great. That is possible!')
                     {else}:
                         {print} ('Unfortunately, we do not have ', product)
-                    ```           
+                    ```
+                answer_code: |
+                    Own answer
     maths:
         name: maths
         default_save_name: maths
@@ -3050,6 +3451,8 @@ adventures:
                     price = people * 2
                     {print} 'That will be $' price ' please'
                     ```
+                answer_code: |
+                    Own answer
     music:
         name: music
         default_save_name: music
@@ -3110,6 +3513,45 @@ adventures:
                     {play} F
                     {play} F
                     ```
+                answer_code: |
+                    Old Mac Donald
+                    ```
+                    {print} Old Mac Donald had a farm
+                    {play} C5
+                    {play} C5
+                    {play} C5
+                    {play} G4
+                    {play} A4
+                    {play} A4
+                    {play} G4
+                    {sleep} 1
+                    {play} E5
+                    {play} E5
+                    {play} D5
+                    {play} D5
+                    {play} C5
+                    ```
+                    #Twinkle Twinkle Little Star
+                    ```
+                    {print} Twinkle Twinkle Little Star
+                    {play} C
+                    {play} C
+                    {play} G
+                    {play} G
+                    {play} A
+                    {play} A
+                    {play} G
+                    {sleep} 1
+                    {play} F
+                    {play} F
+                    {play} E
+                    {play} E
+                    {play} D
+                    {play} D
+                    {play} C
+
+                    ```
+
             3:
                 story_text: |
                     Create a random melody!
@@ -3163,6 +3605,59 @@ adventures:
                     {print} 'Mary had a little lamb'
                     {play} E
                     ```
+                answer_code: |
+                    Mary had a little lamb
+                    ```
+                    {print} 'Mary had a little lamb'
+                    {play} E
+                    {play} D
+                    {play} C
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {clear}
+
+                    {print} 'Little lamb, little lamb'
+                    {play} D
+                    {play} D
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {clear}
+
+                    {print} 'Mary had a little lamb'
+                    {play} E
+                    {play} D
+                    {play} C
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    ```
+
+                    Old MacDonald
+                    ```
+                    {print} "Old MacDonald had a farm"
+                    {play} C
+                    {play} C
+                    {play} C
+                    {play} G
+                    {play} A
+                    {play} A
+                    {play} G
+                    {clear}
+
+                    {print} "EE i ee i o"
+                    {play} E
+                    {play} E
+                    {play} D
+                    {play} D
+                    {play} C
+                    {clear}
+                    ```
+
             5:
                 story_text: |
                     You don't always have to use the `{play}` command to play a whole song, sometimes you just want to play one note.
@@ -3176,6 +3671,24 @@ adventures:
                     answer {is} {ask} 'What is the capital of Zimbabwe?'
                     {if} answer {is} Harare {play} C6
                     _
+                    ```
+                answer_code: |
+                    ```
+                    answer {is} {ask} 'What is the capital of Zimbabwe?'
+                    {if} answer {is} Harare {play} C6
+                    {else} {play} C3
+
+                    answer {is} {ask} 'What is the capital of France?'
+                    {if} answer {is} Paris {play} C6
+                    {else} {play} C3
+
+                    answer {is} {ask} 'Which animal is the king of all the animals?'
+                    {if} answer {is} Lion {play} C6
+                    {else} {play} C3
+
+                    answer {is} {ask} 'What is the currency used in Japan?'
+                    {if} answer {is} Yen {play} C6
+                    {else} {play} C3
                     ```
             6:
                 story_text: |
@@ -3206,6 +3719,8 @@ adventures:
                     {print} number
                     {play} number
                     ```
+                answer_code: |
+                    Own answer
             8:
                 story_text: |
                     Using the `{repeat}` command can make your codes for melodies a lot shorter!
@@ -3220,6 +3735,43 @@ adventures:
                     {repeat} 2 {times} {play} G4
                     _
                     ```
+                answer_code: |
+                    Twinkle Twinkle Little star
+                    ```
+                    {print} 'Twinkle Twinkle Little Star'
+                    {repeat} 2 {times} {play} C4
+                    {repeat} 2 {times} {play} G4
+                    {repeat} 2 {times} {play} A4
+                    {play} G4
+                    ```
+
+                    Mary had a little lamb
+                    ```
+                    {play} E
+                    {play} D
+                    {play} C
+                    {play} D
+                    {repeat} 3 {times} {play} E
+                    {repeat} 3 {times} {play} D
+                    {repeat} 3 {times} {play} E
+                    {play} E
+                    {play} D
+                    {play} C
+                    {play} D
+                    {repeat} 3 {times} {play} E
+                    ```
+
+                    #Old MacDonald
+                    ```
+                    {repeat} 3 {times} {play} C
+                    {play} G
+                    {repeat} 2 {times} {play} A
+                    {play} G
+                    {repeat} 2 {times} {play} E
+                    {repeat} 2 {times} {play} D
+                    {play} C
+                    ```
+
             9:
                 story_text: |
                     Now that we can use the `{repeat}` command for multiple lines, we can make songs even more easily!
@@ -3238,6 +3790,32 @@ adventures:
                         {play} E
                         {play} F
                         {play} G
+                        {sleep} 1
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Brother John'
+                    {repeat} 2 {times}
+                        {play} C
+                        {play} D
+                        {play} E
+                        {play} C
+                    {repeat} 2 {times}
+                        {play} E
+                        {play} F
+                        {play} G
+                        {sleep} 1
+                    {repeat} 2 {times}
+                        {play} G
+                        {play} A
+                        {play} G
+                        {play} F
+                        {play} E
+                        {play} C
+                    {repeat} 2 {times}
+                        {play} C
+                        {play} G3
+                        {play} C
                         {sleep} 1
                     ```
             10:
@@ -3261,6 +3839,22 @@ adventures:
                             first_time {is} no
                         {else}
                             _
+                    ```
+                answer_code: |
+                    ```
+                    first_time = yes
+                    {repeat} 2 {times}
+                        {repeat} 2 {times}
+                            {play} C
+                        {play} D
+                        {play} C
+                        {if} first_time {is} yes
+                            {play} F
+                            {play} E
+                            first_time = no
+                        {else}
+                            {play} G
+                            {play} F
                     ```
             12:
                 story_text: |
@@ -3305,6 +3899,22 @@ adventures:
                     _
                     _
                     ```
+                answer_code: |
+                    ```
+                    first_time = yes
+                    {repeat} 2 {times}
+                        {repeat} 2 {times}
+                            {play} C
+                        {play} D
+                        {play} C
+                        {if} first_time {is} yes
+                            {play} F
+                            {play} E
+                            first_time = no
+                        {else}
+                            {play} G
+                            {play} F
+                        ```
             15:
                 story_text: |
                     You can program music for fun, but you can also use the musical notes to make something useful like a fire alarm!
@@ -3531,6 +4141,8 @@ adventures:
                         {print}('You are not Hedy')
 
                     ```
+                answer_code: |
+                    Own answer
     parrot:
         name: parrot
         default_save_name: Parrot
@@ -3696,6 +4308,17 @@ adventures:
                     weeks = to_save / allowance
                     {print} 'You can buy a ' _ ' in ' _ ' weeks.'
                     ```
+                answer_code: |
+                    ```
+                    {print} 'The digital piggy bank'
+                    wish = {ask} 'What would you like to buy?'
+                    price = {ask} 'How much does that cost?'
+                    saved = {ask} 'How much money have you saved already?'
+                    allowance = {ask} 'How much pocket money do you get per week?'
+                    to_save = price - saved
+                    weeks = to_save / allowance
+                    {print} 'You can buy a ' wish ' in ' weeks ' weeks.'
+                    ```
             15:
                 story_text: |
                     ### Exercise
@@ -3718,6 +4341,24 @@ adventures:
                     allowance = {input}('How much pocket money do you get each week?')
 
                     _
+                    ```
+                answer_code: |
+                    ```
+                    {def} calculate_budget(wish, money, allowance):
+                        to_save = wish - money
+                        weeks = to_save / allowance
+                        {if} wish > money:
+                            {print}('You need to save up some more!')
+                            {print}('You will need ', weeks ', more weeks.')
+                        {else}:
+                            {print}("Great! You have enough")
+                            {print}("Let's go shopping!")
+
+                    money = {input}('How much money have you saved?')
+                    wish = {input}('How much money do you need?')
+                    allowance = {input}('How much pocket money do you get each week?')
+
+                    calculate_budget(wish, money, allowance)
                     ```
     print_command:
         name: '{print}'
@@ -3777,6 +4418,8 @@ adventures:
                     {print}_'My name is ', name_
 
                     ```
+                answer_code: |
+                    Own answer
     quizmaster:
         name: quizmaster
         default_save_name: Quizmaster
@@ -3807,6 +4450,8 @@ adventures:
                     {if} points_b > points_a:
                         {print} ('You belong to the B club')
                     ```
+                answer_code: |
+                    Own answer
     quotation_marks:
         name: '''quotation marks'''
         default_save_name: quotation_marks
@@ -3839,6 +4484,8 @@ adventures:
                     {print} "I'm babysitting my sister's kids"
                     {print} "What's more fun than that?"
                     ```
+                answer_code: |
+                    Own answer
     random_command:
         name: '{random}'
         default_save_name: random_command
@@ -3897,6 +4544,11 @@ adventures:
                     names = _'Sarah', 'Jason', 'Meghan'_
                     {print} ('The winner is:' _ )
                     ```
+                answer_code: |
+                    ```
+                    names = ['Sarah', 'Jason', 'Meghan']
+                    {print} ('The winner is:' names[random] )
+                    ```
     repeat_command:
         name: '{repeat}'
         default_save_name: repeat_command
@@ -3912,6 +4564,12 @@ adventures:
                     ```
                     {repeat} 3 {times} {print} 'Hedy is fun!'
                     ```
+                answer_code: |
+                    ```
+                    {repeat} 2 {times} {print} 'happy birthday to you'
+                    {print} 'happy birthday dear Hedy'
+                    {print} 'happy birthday to you'
+                    ```
             9:
                 story_text: |
                     In this level you can repeat multiple lines of code with only 1 `{repeat}` command.
@@ -3923,6 +4581,13 @@ adventures:
                     {repeat} 5 {times}
                         {print} 'Hello everyone'
                         {print} 'This is all repeated 5 times'
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Do you know the muffin man?'
+                    {repeat} 2 times
+                        {print} 'The muffin man'
+                    {print} 'Do you know the muffin man, who lives on Drury Lane?'
                     ```
             10:
                 story_text: |
@@ -3940,6 +4605,8 @@ adventures:
                         {else}
                             {print} 'pizza is better!'
                     ```
+                answer_code: |
+                    Own answer
     repeat_command_2:
         name: '{repeat} 2'
         default_save_name: repeat_command_2
@@ -3967,6 +4634,8 @@ adventures:
                     age = {ask} 'How old are you now?'
                     {repeat} age {times} {print} 'Hip Hip Hurray!'
                     ```
+                answer_code: |
+                    Own answer
             9:
                 story_text: |
                     ### In the block or not?
@@ -4051,6 +4720,22 @@ adventures:
                     Now add your own summary of the food and drinks ordered by the customer.
 
                     **Extra** Now that you've learned how to use variables, you can use as many variables in one line as you'd like. Can you add more variables to your code, like eat in or take-away, cash or card, with or without a straw etc.?
+                answer_code: |
+                    ```
+                    {print} Welcome to Hedy's restaurant 🍟
+                    food {is} {ask} What would you like to order?
+                    {print} So you would like to order food
+                    drink {is} {ask} What would you like to drink?
+                    {print} So you would like a drink
+                    straw {is} {ask} Would you like a straw with that?
+                    {print} alright!
+                    payment {is} {ask} Would you like to pay cash or card?
+                    {print} No problem
+                    place {is} {ask} would you like to eat in or take-away?
+                    {print} Thank you for your order!
+                    {print} It's on its way!
+                    {print} Thank you! Goodbye!
+                    ```
             3:
                 story_text: |
                     Having trouble to decide what you wanna have for dinner? You can let Hedy choose for you!
@@ -4145,6 +4830,13 @@ adventures:
                     {else}
                     {print} 'Sorry, we do not sell that'
                     ```
+                answer_code: |
+                    ```
+                    food_in_stock {is} burger, fries, pancakes, chicken nuggets
+                    food {is} {ask} 'What would you like to eat?'
+                    {if} food {is} {in} food_in_stock {print} 'One ' food ' coming up!'
+                    {else} {print} 'Sorry, we do not sell that'
+                    ```
             7:
                 story_text: |
                     In this level you can use maths to calculate the total price of your customer's order, which can make your virtual restaurant more realistic.
@@ -4173,6 +4865,25 @@ adventures:
                     price = 8
                     {print} 'You have ordered ' main
                     {print} 'That will be ' price ' dollars, please'
+                    {print} 'Thank you, enjoy your meal!'
+                    ```
+                answer_code: |
+                    ```
+                    {print} 'Welcome to Restaurant Chez Hedy'
+                    {print} 'Here is our menu:'
+                    {print} 'Our main courses are pizza, lasagne, or spaghetti'
+                    main = {ask} 'Which main course would you like?'
+                    price = 0
+                    {if} main {is} pizza price = 10
+                    {if} main {is} lasagne price = 12
+                    {if} main {is} spaghetti price = 8
+                    {print} 'You have ordered ' main
+                    amount = {ask} 'For how many people do you want to order this?'
+                    correct_discount = Hedy
+                    given_discount = {ask} 'Fill in the discount code here if u know one'
+                    {if} given_discount = correct_discount  price = price / 2
+                    {else} {print} 'Wrong code!'
+                    {print} 'That will be ' price * amount ' dollars, please'
                     {print} 'Thank you, enjoy your meal!'
                     ```
             8:
@@ -4498,6 +5209,28 @@ adventures:
                         {print} 'The computer wins!'
                     _
                     ```
+                answer_code: |
+                    ```
+                    options = rock, paper, scissors
+                    your_choice = {ask} 'What do you choose?'
+                    computer_choice = options {at} {random}
+                    {print} 'You choose ' your_choice
+                    {print} 'The computer chooses ' computer_choice
+                    {if} computer_choice {is} your_choice
+                        {print} 'Tie'
+                    {elif} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
+                        {print} 'You win!'
+                    {elif} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
+                        {print} 'The computer wins!'
+                    {elif} computer_choice {is} 'paper' {and} your_choice {is} 'scissors'
+                        {print} 'You win!'
+                    {elif} computer_choice {is} 'paper' {and} your_choice {is} 'rock'
+                        {print} 'The computer wins!'
+                    {elif} computer_choice {is} 'scissors' {and} your_choice {is} 'rock'
+                        {print} 'You win!'
+                    {elif} computer_choice {is} 'scissors' {and} your_choice {is} 'paper'
+                        {print} 'The computer wins!'
+                    ```
             11:
                 story_text: |
                     ### Exercise
@@ -4507,6 +5240,13 @@ adventures:
                     choices = _
                     players = _
                     {for} _
+                    ```
+                answer_code: |
+                    ```
+                    choices = rock, paper, scissors
+                    players = Rocky, Hedy
+                    {for} player {in} players
+                        {print} player ' did ' choices {at} {random}
                     ```
             16:
                 story_text: |
@@ -4600,6 +5340,30 @@ adventures:
                     {else}
                         {print} 'Go to the train station at 10.00'
                      ```
+                answer_code: |
+                    Exercise 1
+                    ```
+                    name = {ask} 'What is your name?'
+                    password = {ask} 'What is your password?'
+                    {if} name {is} 'Agent007' and password {is} 'TOPSECRET'
+                        {print} 'Go to the airport at 02.00'
+                    {else}
+                        {print} 'Go to the train station at 10.00'
+                    ```
+                    Exercise 2
+                    ```
+                    fake_locations = "the zoo ", "the fountain ", "the library"
+                    fake_times = "10.00 PM", "01.00 AM", "07.00 AM", "09.00 PM"
+
+                    name = {ask} 'What is your name?'
+                    password = {ask} 'What is your password?'
+
+                    {if} name {is} 'Agent007' {and} password {is} 'TOPSECRET'
+                        {print} 'Go to the airport at 02.00'
+                    {else}
+                        {print} 'Go to ' fake_locations {at} {random} 'at ' fake_times {at} {random}
+
+                    ```
     sleep_command:
         name: '{sleep}'
         default_save_name: sleep_command
@@ -4667,6 +5431,47 @@ adventures:
                     {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
                     {sleep}
                     ```
+                answer_code: |
+                    ```
+                    number = 6
+                    number = number - 1
+                    {print} number ' little monkeys jumping on the bed'
+                    {print} 'One fell off and bumped his head'
+                    {print} 'Mama called the doctor and the doctor said'
+                    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    {sleep}
+                    number = number - 1
+                    {print} number ' little monkeys jumping on the bed'
+                    {print} 'One fell off and bumped his head'
+                    {print} 'Mama called the doctor and the doctor said'
+                    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    {sleep}
+                    number = number - 1
+                    {print} number ' little monkeys jumping on the bed'
+                    {print} 'One fell off and bumped his head'
+                    {print} 'Mama called the doctor and the doctor said'
+                    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    {sleep}
+                    number = number - 1
+                    {print} number ' little monkeys jumping on the bed'
+                    {print} 'One fell off and bumped his head'
+                    {print} 'Mama called the doctor and the doctor said'
+                    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    {sleep}
+                    number = number - 1
+                    {print} number ' little monkey jumping on the bed'
+                    {print} 'One fell off and bumped his head'
+                    {print} 'Mama called the doctor and the doctor said'
+                    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    {sleep}
+                    number = number - 1
+                    {print} number ' little monkeys jumping on the bed'
+                    {print} 'One fell off and bumped his head'
+                    {print} 'Mama called the doctor and the doctor said'
+                    {print} 'NO MORE MONKEYS JUMPING ON THE BED!'
+                    {sleep}
+
+                    ```
             8:
                 story_text: |
                     Songs often contain a lot of repetition. For example... Baby Shark! If you sing it, you keep singing the same thing:
@@ -4683,6 +5488,11 @@ adventures:
                 example_code: |
                     ```
                     {repeat} _ _ {print} 'Baby Shark tututudutudu'
+                    {print} 'Baby Shark'
+                    ```
+                answer_code: |
+                    ```
+                    {repeat} 3 {times} {print} 'Baby Shark tututudutudu'
                     {print} 'Baby Shark'
                     ```
             9:
@@ -4702,6 +5512,16 @@ adventures:
                     verse = verse - 1
                     {print} verse ' bottles of beer on the wall'
                     ```
+                answer_code: |
+                    ```
+                    verse = 99
+                    {repeat} 99 {times}
+                        {print} verse ' bottles of beer on the wall'
+                        {print} verse ' bottles of beer'
+                        {print} 'Take one down, pass it around'
+                        verse = verse - 1
+                        {print} verse ' bottles of beer on the wall'
+                    ```
             11:
                 story_text: |
                     With `{for}` you can print make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
@@ -4718,6 +5538,50 @@ adventures:
                     ```
                     monkeys = 5, 4, 3, 2, 1
                     ```
+                answer_code: |
+                    Exercise 1
+                    ```
+                    family = baby, mammy, daddy, grandma, grandpa
+                    {for} name {in} family
+                      {print} name " shark doo, doo, doo, doo, doo, doo."
+                    ```
+
+                    Exercise 2
+                    ```
+                    monkeys = 5, 4, 3, 2, 1
+                    {for} monkey {in} monkeys
+                        {print} monkey " little monkeys jumping on the bed."
+                        {print} "One fell off and bumped his head."
+                        {print} "Mama called the doctor and the doctor said,"
+                        {print} "No more monkeys jumping on the bed!"
+                        {print} ""
+                    ```
+
+                    Extra
+                    ```
+                    animals = cow, pig, chicken
+                    {for} animal {in} animals
+                        {if} animal = 'cow'
+                            note = C4
+                        {if} animal = 'pig'
+                            note = A3
+                        {if} animal = 'chicken'
+                            note = C7
+                        {play} note
+                        {print} "Old MacDonald had a farm"
+                        {print} "Ee i ee i o"
+                        {print} "And on his farm he had some " animal "s"
+                        {play} note
+                        {print} "Ee i ee i oh"
+                        {print} "With a " animal " here"
+                        {print} "And a " animal " there"
+                        {play} note
+                        {print} "Here a " animal ", there a " animal
+                        {print} "Everywhere a " animal
+                        {play} note
+                        {print} ""
+                        {sleep} 2
+                        ```
             13:
                 story_text: |
                     Now that we are using Python syntax, the songs you've coded before will need Python syntax too!
@@ -4866,6 +5730,17 @@ adventures:
                     {print} 'Like a diamond in the sky'
                     _
                     ```
+                answer_code: |
+                    ```
+                    {define} twinkle
+                        {print} 'Twinkle'
+                        {print} 'Twinkle little star'
+
+                    {call} twinkle
+                    {print} 'Up above the world so high'
+                    {print} 'Like a diamond in the sky'
+                    {call} twinkle
+                    ```
     turtle:
         name: turtle
         default_save_name: Turtle
@@ -4952,6 +5827,30 @@ adventures:
                     {forward} 25
                     {turn} angle
                     {forward} 25
+                    ```
+                answer_code: |
+                    ```
+                    {forward} 100
+                    {turn} 90
+                    {forward} 50
+                    {turn} 45
+                    {forward} 10
+                    {turn} 45
+                    {forward} 40
+                    {turn} 45
+                    {forward} 10
+                    {turn} 45
+                    {forward} 48
+                    {turn} 180
+                    {forward} 48
+                    {turn} 45
+                    {forward} 10
+                    {turn} 45
+                    {forward} 38
+                    {turn} 45
+                    {forward} 10
+                    {turn} 45
+                    {forward} 50
                     ```
             3:
                 story_text: |
@@ -5084,6 +5983,39 @@ adventures:
                         {turn} _
                         {forward} _
                     ```
+                answer_code: |
+                    Exercise 1
+                    ```
+                    angle = 120
+                    {repeat} 3 {times}
+                        {turn} angle
+                        {forward} 60
+                    ```
+
+                    Exercise 2
+                    ```
+                    angle = 120
+                    {repeat} 3 {times}
+                        {turn} angle
+                        {forward} 50
+                    {color} white
+                    {forward} 100
+                    {color} black
+                    angle = 90
+                    {repeat} 4 {times}
+                        {turn} angle
+                        {forward} 50
+                    ```
+
+                    Extra
+                    ```
+                    figure = {ask} 'How many angles should I draw?'
+                    angle = 360 / figure
+                    {repeat} figure {times}
+                        {turn} angle
+                        {forward} 50
+                    ```
+
             10:
                 story_text: |
                     Now that we can use a `{repeat}` inside a `{repeat}`, we can create more complex figures.
@@ -5132,6 +6064,33 @@ adventures:
                     {for} distance {in} distances
                         {forward} distance
                     ```
+                answer_code: |
+                    Exercise 1
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110
+                    {for} distance {in} distances
+                        {turn} 90
+                        {forward} distance
+                    ```
+
+                    Extra
+                    ```
+                    {turn} 90
+                    distances = 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110
+                    {for} distance {in} distances
+                        {turn} #own answer
+                        {forward} distance
+                    ```
+
+                    Exercise 2
+                    ```
+                    {turn} 90
+                    distances = 110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+                    {for} distance {in} distances
+                        {turn} 90
+                        {forward} distance
+                    ```
             12:
                 story_text: |
                     We can use functions to draw more complex figures with less code.
@@ -5156,6 +6115,54 @@ adventures:
                     {forward} 50
                     {call} square
                     ```
+                answer_code: |
+                    Exercise 1
+                    ```
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} 90
+                            {forward} 25
+
+                    {call} square
+                    {color} "white"
+                    {forward} 50
+                    {color} "black"
+                    {call} square
+                    {color} "white"
+                    {forward} 50
+                    {color} "black"
+                    {call} square
+                    ```
+
+                    Exercise 2
+                    ```
+                    {define} square
+                        {repeat} 4 {times}
+                            {turn} 90
+                            {forward} 25
+
+                    {call} square
+                    {repeat} 2 {times}
+                        {color} "white"
+                        {forward} 50
+                        {color} "black"
+                        {call} square
+                    ```
+
+                    Exercise 3
+                    ```
+                    {define} triangle
+                        {repeat} 3 {times}
+                            {turn} 120
+                            {forward} 25
+
+                    {call} triangle
+                    {repeat} 2 {times}
+                        {color} "white"
+                        {forward} 50
+                        {color} "black"
+                        {call} triangle
+                    ```
     turtle_draw_it:
         name: draw it!
         default_save_name: Draw it
@@ -5171,6 +6178,50 @@ adventures:
                         Square <img src="https://github.com/hedyorg/hedy/assets/80678586/03b96c2c-7b94-4032-9f9f-3f3b13573623" width="200">
                         Stairs <img src="https://github.com/hedyorg/hedy/assets/80678586/d4301e62-ec66-4031-827c-7d21f73ba106" width="200">
                     </div>
+                answer_code: |
+                    Rectangle
+                    ```
+                    {turn} right
+                    {forward} 50
+                    {turn} right
+                    {forward} 100
+                    {turn} right
+                    {forward} 50
+                    {turn} right
+                    {forward} 100
+                    ```
+
+                    Square
+                    ```
+                    {turn} right
+                    {forward} 100
+                    {turn} right
+                    {forward} 100
+                    {turn} right
+                    {forward} 100
+                    {turn} right
+                    {forward} 100
+                    ```
+
+                    Stairs
+                    ```
+                    {turn} right
+                    {forward} 20
+                    {turn} left
+                    {forward} 20
+                    {turn} right
+                    {forward} 20
+                    {turn} left
+                    {forward} 20
+                    {turn} right
+                    {forward} 20
+                    {turn} right
+                    {forward} 60
+                    {turn} right
+                    {forward} 60
+                    {turn} right
+                    {forward} 20
+                    ```
             2:
                 story_text: |
                     ### Exercise
@@ -5181,6 +6232,47 @@ adventures:
                     Arrow <img src="https://github.com/hedyorg/hedy/assets/80678586/803d8f42-9708-448c-82ea-d035697f08c9" width="150">
                     Boat <img src="https://github.com/hedyorg/hedy/assets/80678586/94ef7189-442a-4c8f-827d-12a69203c2e9" width="150">
                     </div>
+                answer_code: |
+                    Triangle
+                    ```
+                    {forward} 50
+                    {turn} 135
+                    {forward} 70
+                    {turn} 135
+                    {forward} 50
+                    ```
+                    Arrow
+                    ```
+                    {turn} 90
+                    {forward} 100
+                    {turn} 130
+                    {forward} 40
+                    {turn} 140
+                    {forward} 60
+                    {turn} 140
+                    {forward} 40
+                    ```
+                    Boat
+                    ```
+                    {turn} -90
+                    {forward} 55
+                    {turn}  45
+                    {forward} 60
+                    {turn} 135
+                    {forward} 70
+                    {turn} -90
+                    {forward} 60
+                    {turn} 135
+                    {forward} 25
+                    {turn} 90
+                    {forward} 25
+                    {turn} -45
+                    {forward} 24
+                    {turn} -90
+                    {forward} 70
+                    {turn} 135
+                    {forward} 60
+                    ```
             3:
                 story_text: |
                     ### Exercise
@@ -6137,6 +7229,8 @@ adventures:
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
                     ```
+                answer_code: |
+                    Own answer
     years:
         name: new year's
         default_save_name: New Year's Countdown
@@ -6152,6 +7246,15 @@ adventures:
                     ```
                     number = 10
                     {repeat} _
+                        {print} number
+                        {sleep}
+                        number = number - 1
+                    {print} 'Happy New Year!'
+                    ```
+                answer_code: |
+                    ```
+                    number = 10
+                    {repeat} 10 {times}
                         {print} number
                         {sleep}
                         number = number - 1
