@@ -5834,14 +5834,14 @@ adventures:
                             {forward} 30
 
                     #starting at the leftside of the screen
-                    {color} white
+                    {color} 'white'
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     #making the bracelet
                     {repeat} 5 {times}
-                        {color} gray
+                        {color} 'gray'
                         {forward} 100
                         shape = {ask} 'What kind of shape would you like next on the bracelet?'
                         chosen_color = {ask} 'In which color?'
@@ -5852,7 +5852,7 @@ adventures:
                             {call} draw_a_triangle
                         {elif} shape = "star"
                             {call} draw_a_star
-                    {color} gray
+                    {color} 'gray'
                     {forward} 100
                     ```
             15:
