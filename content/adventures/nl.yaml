@@ -444,6 +444,7 @@ adventures:
                     Gebruik daarna `{call}` om de functie op te roepen.
                 example_code: |
                     ```
+                    #Een vraag definiëren:
                     {define} nieuwe_vraag
                         nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         nummer_1 = nummers {at} {random}
@@ -454,7 +455,8 @@ adventures:
                         _
                         _
                         {print} 'Well done!'
-
+                    
+                    #De vragen stellen:
                     {print} 'Geef 10 goede antwoorden om te winnen!'
                     {for} i {in} {range} 1 {to} 10
                         _
@@ -998,16 +1000,19 @@ adventures:
                     Bijvoorbeeld: 'Ahmed, rechterhand op groen' of 'Jessica, linkervoet op geel'.
                 example_code: |
                     ```
+                    #De Twister opties geven:
                     kanten = 'linker', 'rechter'
                     ledematen = 'hand', 'voet'
                     kleuren = 'rood', 'blauw', 'groen', 'geel'
 
+                    #Één Twister draai definiëren
                     {define} draai
                         gekozen_kant = kanten {at} {random}
                         gekozen_ledemaat = ledematen _
                         gekozen_kleur = kleuren _
                         {print} gekozen_kant gekozen_ledemaat ' op ' gekozen_kleur
 
+                    #Een potje Twister spelen:
                     {print} 'Klaar voor een potje Twister?'
                     {repeat} _
                         {call} draai
@@ -1026,11 +1031,13 @@ adventures:
                     Voeg een functie toe die een sip deuntje speelt (zoals C6-C5-C4) en roep die functie op als er een fout antwoord gegeven wordt.
                 example_code: |
                     ```
+                    #Een blij en verdrietig deuntje definiëren:
                     {def} speel_blij_deuntje():
                         {play} C4
                         {play} C5
                         {play} C6
-
+                    
+                    #Vragen stellen:
                     antwoord = {input}('Wat is 2 + 2?')
                     {if} antwoord == 4:
                         {print} 'Goed!'
@@ -1297,6 +1304,7 @@ adventures:
                     Kijk maar naar de code en vul een van deze variabelen in op de lege plekken: `wapens[i]`, `monsters[i]`, `goedlot[i]`, `noodlot[i]`, `hint[i]`
                 example_code: |
                     ```
+                    #Verschillende monsters en bijpassende gebeurtenissen verzinnen:
                     getallen = [1, 2, 3]
                     i = getallen[{random}]
                     hint = ['gegrom', 'kakelende lach', 'vleermuis gefladder']
@@ -1304,6 +1312,8 @@ adventures:
                     noodlot = ['Je brein wordt opgepeuzeld', 'Je wordt vervloekt', 'Je wordt gebeten']
                     goedlot = ['Je gooit de ham naar de zombie die er lekker aan begint te knagen.', 'Je zet de gordijnen in de fik. De heks vlucht, bang voor het vuur', 'De vampier haat knoflook en vlucht weg']
                     wapens = ['rauwe ham', 'aansteker', 'knoflook']
+
+                    #Het verhaal van het spookhuis vertellen:
                     {print} 'Je staat bij een oude verlaten villa'
                     {print} 'Iets is hier niet pluis...'
                     {print} 'Je hoort ' _
@@ -1884,6 +1894,7 @@ adventures:
                     Kijk daarna terug naar liedjes die je geprogrammeerd hebt in voorgaande levels. Kun je die liedjes inkorten en verbeteren door functies te gebruiken?
                 example_code: |
                     ```
+                    #Definieer de eerste regel:
                     {define} eerste_regel
                         {play} C
                         {play} C
@@ -1894,6 +1905,7 @@ adventures:
                         {play} G
                         {sleep}
 
+                    #Definieer tweede regel:
                     {define} tweede_regel
                         {play} F
                         {play} F
@@ -1904,6 +1916,7 @@ adventures:
                         {play} C
                         {sleep}
 
+                    #Definieer de derde regel:
                     {define} derde_regel
                         {play} G
                         {play} G
@@ -1914,6 +1927,7 @@ adventures:
                         {play} D
                         {sleep}
 
+                    #De regels van het lied zingen:
                     {call} _
                     {call} _
                     {call} _
@@ -1952,9 +1966,11 @@ adventures:
                     Maak dit liedje zonder einde af.
                 example_code: |
                     ```
+                    #Een liedje schrijvenL
                     {define} lied
                         {play} _
 
+                    #Het liedje afspelen:
                     ja_of_nee = {ask} 'Wil je mijn liedje zonder einde horen?'
                     {while} ja_of_nee = 'ja'
                         {call} lied
@@ -2296,6 +2312,8 @@ adventures:
                     {print} ('Maak je eigen quiz')
                     points_a = 0
                     points_b = 0
+
+                    #Stellen van quizvragen:
                     {print} ('Vraag')
                     {print} ('Antwoord optie A')
                     {print} ('Antwoord optie B')
@@ -2304,6 +2322,8 @@ adventures:
                         punten_a = punten_a + 1
                     {if} antwoord {is} 'B':
                         punten_b = punten_b + 1
+                    
+                    #Uitslag van de quiz printen:
                     {print} 'Eind van de quiz!'
                     {print} 'Laten we de uitslag bekijken!'
                     {if} punten_a > punten_b:
@@ -2981,10 +3001,12 @@ adventures:
                     Kijk naar de voorbeeldcode met de functie. Vul het lied aan tot het compleet is.
                 example_code: |
                     ```
+                    #Functie maken voor de eerste twee herhalende regels:
                     {define} slaap
                         {print} 'Slaap kindje slaap'
                         {print} _
 
+                    #Zingen van de verschillende versjes:
                     {call} slaap
                     {print} 'Een schaap met witte voetjes'
                     {print} 'die drinkt zijn melk zo zoetjes'
@@ -2996,7 +3018,10 @@ adventures:
                     Maak het liedje af door de ontbrekende regels en variabelen in te vullen. Vul daarna de lijsten aan met nog meer dieren die iets doen, zoals leeuwen die samen geeuwen, koeien die bootje roeien of...?
                 example_code: |
                     ```
+                    #Bepalen welke dieren in elk vers wat doen
                     dieren = 'beren broodjes smeren', 'apen lekker slapen', 'bijen autorijden', _
+                    
+                    #Het liedje herhalen met de verschillende dieren:
                     _
                         {print} 'Ik zag twee ' _
                         {print} 'Oh het was een wonder'
@@ -3195,10 +3220,13 @@ adventures:
                     Verander het aantal figuren met `{repeat}` en de vorm van het figuur met `{define}`
                 example_code: |
                     ```
+                    #Functie maken voor vierkant:
                     {define} vierkant
                         {repeat} 4 {times}
                             {turn} _
                             {forward} _
+                    
+                    #Drie vierkanten tekenen:
                     {call} vierkant
                     {forward} 50
                     {call} vierkant
@@ -3395,14 +3423,17 @@ adventures:
                 example_code: |
                     Hint voor het ontwerpen van armbanden. Definieer eerst een functie **voor elke vorm** die je wilt gebruiken op de armband. Voeg daarna op deze manier vormen aan de armband toe:
                     ```
+                    #Functies maken voor elke vorm:
                     {define} teken_een_vierkant
                     _
 
+                    #Het begin van de armband tekenen:
                     {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
+                    #Verschillende vormen aan de armband tekenen:
                     {repeat} 5 {times}
                         {color} gray
                         {forward} 100
