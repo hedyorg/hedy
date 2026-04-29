@@ -87,7 +87,7 @@
             <td data-cy="student_{{ student }}" class="text-center font-medium text-blue-900"> {{ students_info[student].adventures_ticked }} </td>      
             <td class="text-center text-blue-900">
               <div class="flex justify-center gap-6">
-                <button title="{{ _('change_password') }}" class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}})'>
+                <button title="{{ _('change_password') }}" class="flex flex-col items-center" onclick='hedyApp.change_password_student("{{student}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}}, {{_('reset_password')|default(None)|tojson}})'>
                   <span class="fas fa-pen block mb-4 mt-4"></span>
                 </button>
                 <button title="{{ _('programs') }}" class="flex flex-col items-center" onclick=window.open('/programs?user={{student}}')>

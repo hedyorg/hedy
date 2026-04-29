@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { modal } from './modal';
 import { theKeywordLanguage } from "./app";
 import { ClientMessages } from './client-messages';
@@ -14,8 +15,42 @@ declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
 const editorCreator = new HedyCodeMirrorEditorCreator();
 
+function promptByPageVariant(message: string, defaultValue: string, confirmCb: (value: string) => void, title: string = '') {
+  const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
+  modal.prompt(message, defaultValue, confirmCb, isRedesignPage ? 'redesign' : 'legacy', title);
+}
+
+function confirmByPageVariant(
+  message: string,
+  confirmCb: () => void,
+  declineCb: () => void = function(){},
+  redesignOptions?: {
+    confirmButtonClass?: string;
+    confirmButtonLabel?: string;
+    confirmActionsClass?: string;
+  },
+) {
+  const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
+  if (isRedesignPage) {
+    modal.confirmRedesign(message, confirmCb, declineCb, redesignOptions);
+    return;
+  }
+  modal.confirm(message, confirmCb, declineCb);
+}
+
+function getRedesignRemoveConfirmOptions(confirmLabel?: string) {
+  if (!confirmLabel) {
+    return undefined;
+  }
+
+  return {
+    confirmButtonClass: 'red-btn-new',
+    confirmButtonLabel: confirmLabel,
+  };
+}
+
 export function create_class(class_name_prompt: string) {
-  modal.prompt (class_name_prompt, '', function (class_name) {
+  promptByPageVariant(class_name_prompt, '', function (class_name) {
     $.ajax({
       type: 'POST',
       url: '/class',
@@ -82,8 +117,8 @@ export function create_class_redesign(form: HTMLFormElement) {
   }
 }
 
-export function rename_class(id: string, class_name_prompt: string) {
-    modal.prompt (class_name_prompt, '', function (class_name) {
+export function rename_class(id: string, class_name_prompt: string, prompt_title: string = '') {
+  promptByPageVariant(class_name_prompt, '', function (class_name) {
         $.ajax({
           type: 'PUT',
           url: '/class/' + id,
@@ -97,7 +132,7 @@ export function rename_class(id: string, class_name_prompt: string) {
         }).fail(function(err) {
           return modal.notifyError(err.responseText);
         });
-    });
+    }, prompt_title);
 }
 
 export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
@@ -113,7 +148,7 @@ export function duplicate_class(id: string, teacher_classes: string[], second_te
 }
 
 function apiDuplicateClass(id: string, prompt: string, second_teacher: boolean, defaultValue: string = '') {
-    modal.prompt (prompt, defaultValue, function (class_name) {
+  promptByPageVariant(prompt, defaultValue, function (class_name) {
     $.ajax({
       type: 'POST',
       url: '/duplicate_class',
@@ -187,23 +222,38 @@ export function join_class(id: string, name: string) {
     });
 }
 
-export function remove_student_invite(username: string, class_id: string, prompt: string) {
-  return modal.confirm (prompt, function () {
-      $.ajax({
-          type: 'POST',
-          url: '/remove_student_invite',
-          data: JSON.stringify({
-              username: username,
-              class_id: class_id
-          }),
-          contentType: 'application/json',
-          dataType: 'json'
-      }).done(function () {
-          location.reload();
-      }).fail(function (err) {
-          return modal.notifyError(err.responseText);
-      });
-  });
+export function remove_student_invite(username: string, class_id: string, prompt: string, confirmLabel?: string) {
+  return confirmByPageVariant(prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/remove_student_invite',
+      data: JSON.stringify({
+        username: username,
+        class_id: class_id
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+      location.reload();
+    }).fail(function (err) {
+      return modal.notifyError(err.responseText);
+    });
+  }, function(){}, getRedesignRemoveConfirmOptions(confirmLabel));
+}
+
+export function remove_second_teacher(second_teacher: string, class_id: string, prompt: string, confirmLabel?: string) {
+  return confirmByPageVariant(prompt, function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/class/' + class_id + '/second-teacher/' + second_teacher,
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+      location.reload();
+    }).fail(function (err) {
+      return modal.notifyError(err.responseText);
+    });
+  }, function(){}, getRedesignRemoveConfirmOptions(confirmLabel));
 }
 
 export function remove_student(class_id: string, student_id: string, prompt: string) {
@@ -389,25 +439,25 @@ export function delete_adventure(adventure_id: string, prompt: string) {
   });
 }
 
-export function change_password_student(username: string, enter_password: string, password_prompt: string) {
-    modal.prompt ( enter_password + " " + username + ":", '', function (password) {
-        modal.confirm (password_prompt, function () {
-            $.ajax({
-              type: 'POST',
-              url: '/auth/change_student_password',
-              data: JSON.stringify({
-                  username: username,
-                  password: password
-              }),
-              contentType: 'application/json',
-              dataType: 'json'
-            }).done(function (response) {
-              modal.notifySuccess(response.success);
-            }).fail(function (err) {
-              modal.notifyError(err.responseText);
-            });
-        });
+export function change_password_student(username: string, enter_password: string, password_prompt: string, prompt_title: string = '') {
+  promptByPageVariant(enter_password + " " + username + ":", '', function (password) {
+    confirmByPageVariant(password_prompt, function () {
+      $.ajax({
+        type: 'POST',
+        url: '/auth/change_student_password',
+        data: JSON.stringify({
+          username: username,
+          password: password
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+      }).done(function (response) {
+        modal.notifySuccess(response.success);
+      }).fail(function (err) {
+        modal.notifyError(err.responseText);
+      });
     });
+  }, prompt_title);
 }
 
 export function show_doc_section(section_key: string) {
@@ -483,6 +533,30 @@ export function save_customizations(class_id: string) {
     }).fail(function (err) {
       modal.notifyError(err.responseText);
     });
+}
+
+export function save_customizations_levels(class_id: string) {
+    let levels: (string | undefined)[] = [];
+    $('[id^=enable_level_]').each(function() {
+        if ($(this).is(":checked")) {
+            levels.push(<string>$(this).attr('level'));
+        }
+    });
+
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/customize-levels/' + class_id,
+      data: JSON.stringify({
+          levels: levels,
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function (response) {
+      modal.notifySuccess(response.success);  
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+
 }
 
 export function restore_customization_to_default(prompt: string) {
@@ -792,6 +866,16 @@ export interface InitializeCustomizeClassPageOptions {
   readonly class_id: string;
 }
 
+export interface InitializeCustomizeLevelPageOptions {
+  readonly page: 'customize-level';
+  readonly class_id?: string;
+  readonly level?: number;
+}
+
+export interface InitializeConfigureClassPageOptions {
+  readonly page: 'configure-class';
+}
+
 export function initializeCustomizeClassPage(options: InitializeCustomizeClassPageOptions) {
   $(document).ready(function(){
       $('#back_to_class').on('click', () => {
@@ -811,6 +895,46 @@ export function initializeCustomizeClassPage(options: InitializeCustomizeClassPa
       // the third argument is used to trigger a GET request on the specified element
       // if the trigger (input in this case) is changed.
       autoSave("customize_class");
+
+      // Re-bind autosave on page restore paths where browser behavior differs.
+      window.addEventListener('pageshow', function() {
+        autoSave("customize_class");
+      });
+  });
+}
+
+export function initializeCustomizeLevelPage(_options: InitializeCustomizeLevelPageOptions) {
+  $(document).ready(function() {
+    // Prevent stale cached page when navigating back/forward
+    window.addEventListener('pageshow', function(event) {
+      var navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+      var isBackForward = navEntries.length > 0 && navEntries[0].type === 'back_forward';
+      var historyTraversal = event.persisted || isBackForward;
+      if (historyTraversal) {
+        window.location.href = window.location.href;
+      }
+    });
+  });
+}
+
+export function initializeConfigureClassPage(_options: InitializeConfigureClassPageOptions) {
+  $(document).ready(function () {
+    autoSave("configure_class");
+
+  // An ugly hack, but if someone goes back trhough the page, the cache
+  // causes the old version of the page to be shown
+  // So we hard reload it
+    window.addEventListener("pageshow", function (event) {
+      var navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+      var isBackForward = navEntries.length > 0 && navEntries[0].type === 'back_forward';
+      var historyTraversal = event.persisted || isBackForward;
+      if (historyTraversal) {
+        window.location.href = window.location.href;
+        return;
+      }
+
+      autoSave("configure_class");
+    });
   });
 }
 
@@ -840,9 +964,9 @@ export function initializeClassOverviewPage(_options: InitializeClassOverviewPag
   // causes the old version of the page to be shown
   // So we hard reload it
   window.addEventListener( "pageshow", function ( event ) {
-    var historyTraversal = event.persisted ||
-                           ( typeof window.performance != "undefined" &&
-                                window.performance.navigation.type === 2 );
+    var navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+    var isBackForward = navEntries.length > 0 && navEntries[0].type === 'back_forward';
+    var historyTraversal = event.persisted || isBackForward;
     if ( historyTraversal ) {
       window.location.href = window.location.href
     }
@@ -876,37 +1000,68 @@ interface dataPoint {
   successful_runs: number,
   name: string
 }
-const MAX_BUBBLE_SIZE = 62;
-const MIN_BUBBLE_SIZE = 12;
+const MAX_BUBBLE_SIZE = 44;
+const MIN_BUBBLE_SIZE = 10;
+const BUBBLE_SCALING_EXPONENT = 0.9;
+
+function getBubbleSizeLimits(graphElement: HTMLCanvasElement) {
+  const containerWidth = graphElement.parentElement?.clientWidth || graphElement.clientWidth || window.innerWidth;
+  const isSmallViewport = window.matchMedia('(max-width: 768px)').matches;
+
+  // Keep bubbles readable on small screens and avoid oversized circles on wide charts.
+  const responsiveMax = Math.round(containerWidth * (isSmallViewport ? 0.06 : 0.045));
+  const maxBubbleSize = Math.min(MAX_BUBBLE_SIZE, Math.max(24, responsiveMax));
+  const minBubbleSize = Math.min(Math.max(6, Math.round(maxBubbleSize * 0.35)), MIN_BUBBLE_SIZE);
+
+  return { minBubbleSize, maxBubbleSize };
+}
+
+function getBubbleRadius(value: number, min: number, max: number, minBubbleSize: number, maxBubbleSize: number): number {
+  const range = max - min;
+  if (range <= 0) {
+    return Math.round((minBubbleSize + maxBubbleSize) / 2);
+  }
+
+  // Use a mild power curve so outliers are softened without making high values look too similar.
+  const normalized = Math.pow((value - min) / range, BUBBLE_SCALING_EXPONENT);
+  return minBubbleSize + normalized * (maxBubbleSize - minBubbleSize);
+}
 
 export function initializeGraph(is_redesign: boolean = false) {
   const graphElement = document.getElementById('adventure_bubble') as HTMLCanvasElement
   if (graphElement === undefined || graphElement === null) return;
   const graphData: InitializeGraphOptions = JSON.parse(graphElement.dataset['graph'] || '') ;
-  console.log('Graph data:', graphData);
-  let min = Infinity;
-  let max = 0;
   const students = graphData.graph_students
+  if (students.length === 0) {
+    return;
+  }
+
+  let min = Infinity;
+  let max = -Infinity;
   for (const student of students) {
     if (student.successful_runs < min) {
       min = student.successful_runs
-    } else if (student.successful_runs > max) {
+    }
+    if (student.successful_runs > max) {
       max = student.successful_runs
     }
   }
-  if (max == 0) {
-    max = 12
+
+  const buildData = () => {
+    const { minBubbleSize, maxBubbleSize } = getBubbleSizeLimits(graphElement)
+    return students.map((student: student) => {
+      const radius = getBubbleRadius(student.successful_runs, min, max, minBubbleSize, maxBubbleSize)
+      return {
+        x: student.adventures_tried,
+        y: student.number_of_errors,
+        r: radius,
+        successful_runs: student.successful_runs,
+        name: student.username
+      }
+    })
   }
-  let data: dataPoint[] = students.map((student: student) => {
-  const radius  = (student.successful_runs - min) * (MAX_BUBBLE_SIZE - MIN_BUBBLE_SIZE) / (max - min) + MIN_BUBBLE_SIZE
-    return {
-      x: student.adventures_tried,
-      y: student.number_of_errors,
-      r: radius,
-      successful_runs: student.successful_runs,
-      name: student.username
-    }
-  });
+
+  const data: dataPoint[] = buildData();
   new Chart(
     graphElement,
     {
@@ -923,6 +1078,10 @@ export function initializeGraph(is_redesign: boolean = false) {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        resizeDelay: 120,
+        onResize: (chart) => {
+          chart.data.datasets[0].data = buildData()
+        },
         onHover: (event, chartElement) => {
           //@ts-ignore
           event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default'
@@ -1049,7 +1208,7 @@ export function initializeGradePage(_options: InitializeGradePageOptions) {
 }
 
 export function invite_support_teacher(requester: string) {
-  modal.prompt(`Invite a teacher to support ${requester}.`, '', function (username) {
+  promptByPageVariant(`Invite a teacher to support ${requester}.`, '', function (username) {
     $.ajax({
         type: 'POST',
         url: "/super-teacher/invite-support",
@@ -1091,10 +1250,10 @@ export function invite_to_class(class_id: string, prompt: string, type: "student
 }
 
 export function invite_to_class_redesign(class_id: string, prompt: string, type: "student" | "second_teacher") {
-  const vals = {class_id, 'user_type': type}
+  const vals = {class_id, 'user_type': type, 'modal_variant': 'redesign'}
   const input_attributes = {
     'hx-get': '/search',
-    'hx-target': '#search_results',
+    'hx-target': '#redesign_search_results',
     'hx-vals': JSON.stringify(vals)
   }
   const ok_button_attributes = {
@@ -1110,19 +1269,83 @@ export function invite_to_class_redesign(class_id: string, prompt: string, type:
     ok_button_attributes,
     '#manage-students-table-body',
     ClientMessages['invite'],
-    ClientMessages['invitations_sent']
+    ClientMessages['invitations_sent'],
+    'redesign'
   );
 }
 
-export function add_user_to_invite_list(username: string, button: HTMLButtonElement) {
+export function invite_second_teacher_to_configure_class(class_id: string, prompt: string) {
+  const vals = {class_id, 'user_type': 'second_teacher', 'modal_variant': 'redesign'}
+  const input_attributes = {
+    'hx-get': '/search',
+    'hx-target': '#redesign_search_results',
+    'hx-vals': JSON.stringify(vals)
+  }
+  const ok_button_attributes = {
+    'hx-post': `/for-teachers/redesign/class/${class_id}/configure/invite`,
+    'hx-target': '#configure-teachers-table-body',
+    'hx-include': "[name='usernames']",
+    'hx-swap': 'innerHTML'
+  }
+  htmx.process(document.body)
+  modal.htmx_search(
+    prompt,
+    input_attributes,
+    ok_button_attributes,
+    '#configure-teachers-table-body',
+    ClientMessages['invite'],
+    ClientMessages['invitations_sent'],
+    'redesign'
+  );
+}
+
+function toggleRedesignInviteListVisibility() {
+  const container = document.getElementById('redesign_users_to_invite_container')
+  const userList = document.getElementById('redesign_users_to_invite')
+  if (!container || !userList) return
+  const hasUsers = userList.querySelectorAll('li').length > 0
+  container.classList.toggle('hidden', !hasUsers)
+}
+
+export function add_user_to_invite_list(username: string, button: HTMLButtonElement, modalVariant?: 'legacy' | 'redesign') {
   button.closest('li')?.remove() // We remove the user from the list
-  const userList = document.getElementById('users_to_invite')
+  const inRedesignModal = modalVariant ? modalVariant === 'redesign' : !!button.closest('#redesign_search_modal')
+  const userList = document.getElementById(inRedesignModal ? 'redesign_users_to_invite' : 'users_to_invite')
   for (const userLi of userList?.querySelectorAll('li') || []) {
-    const p = userLi.querySelector('p')
-    if (p?.textContent?.trim() === username) {
+    const existingInput = userLi.querySelector('input[name="usernames"]') as HTMLInputElement | null
+    if (existingInput?.value === username) {
       return
     }
   }
+
+  if (inRedesignModal && userList) {
+    const li = document.createElement('li');
+    li.className = 'relative rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm';
+
+    const p = document.createElement('p');
+    p.className = 'details m-0 pr-6 text-sm text-gray-800';
+    p.textContent = username;
+
+    const close = document.createElement('span');
+    close.className = 'close cursor-pointer absolute top-1 right-1 text-gray-600 hover:text-red-400 fa-regular fa-circle-xmark';
+    close.addEventListener('click', () => {
+      li.remove();
+      toggleRedesignInviteListVisibility();
+    });
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'usernames';
+    input.value = username;
+
+    li.appendChild(p);
+    li.appendChild(close);
+    li.appendChild(input);
+    userList.appendChild(li);
+    toggleRedesignInviteListVisibility();
+    return;
+  }
+
   const template = document.querySelector('#user_list_template') as HTMLTemplateElement
   const clone = template.content.cloneNode(true) as HTMLElement
   let close = clone.querySelector('.close');  

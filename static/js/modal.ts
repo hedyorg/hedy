@@ -4,6 +4,10 @@ declare const htmx: typeof import('./htmx');
  */
 
 class Modal {
+  private readonly redesignConfirmDefaultButtonClass: string;
+  private readonly redesignConfirmDefaultButtonLabel: string;
+  private readonly redesignConfirmDefaultActionsClass: string;
+
   constructor() {
     // Just one binding, never needs stat
     $('#modal_confirm_button').on('click', () => this.hide());
@@ -14,6 +18,21 @@ class Modal {
     $('#modal_repair_button').on('click', () => this.hide());
     $('#modal_preview_button').on('click', () => this.hide());
     $('#modal_alert_button').on('click', () => this.hide_alert());
+    $('#redesign_confirm_close_button').on('click', () => this.hideRedesignConfirm());
+    $('#redesign_confirm_no_button').on('click', () => this.hideRedesignConfirm());
+    $('#redesign_confirm_backdrop').on('click', () => this.hideRedesignConfirm());
+    $('#redesign_prompt_close_button').on('click', () => this.hideRedesignPrompt());
+    $('#redesign_prompt_cancel_button').on('click', () => this.hideRedesignPrompt());
+    $('#redesign_prompt_backdrop').on('click', () => this.hideRedesignPrompt());
+    $('#redesign_search_close_button').on('click', () => this.hideRedesignSearch());
+    $('#redesign_search_cancel_button').on('click', () => this.hideRedesignSearch());
+    $('#redesign_search_backdrop').on('click', () => this.hideRedesignSearch());
+
+    const redesignConfirmYesButton = $('#redesign_confirm_yes_button');
+    const redesignConfirmActions = $('#redesign_confirm_actions');
+    this.redesignConfirmDefaultButtonClass = String(redesignConfirmYesButton.attr('class') ?? 'green-btn-new');
+    this.redesignConfirmDefaultButtonLabel = String(redesignConfirmYesButton.text()).trim();
+    this.redesignConfirmDefaultActionsClass = String(redesignConfirmActions.attr('class') ?? '');
   }
 
   private _timeout?: ReturnType<typeof setTimeout>
@@ -34,6 +53,26 @@ class Modal {
     $('#modal_repair').hide();
     $('#modal_preview').hide();
     $('#modal_search').hide();
+    this.hideRedesignConfirm();
+    this.hideRedesignPrompt();
+    this.hideRedesignSearch();
+  }
+
+  public hideRedesignConfirm() {
+    $('#redesign_confirm_modal').addClass('hidden').removeClass('flex');
+    $('body').removeClass('overflow-hidden');
+  }
+
+  public hideRedesignPrompt() {
+    $('#redesign_prompt_modal').addClass('hidden').removeClass('flex');
+    $('#redesign_prompt_input').val('');
+    $('body').removeClass('overflow-hidden');
+  }
+
+  public hideRedesignSearch() {
+    $('#redesign_search_modal').addClass('hidden').removeClass('flex');
+    $('#redesign_search_input').val('');
+    $('body').removeClass('overflow-hidden');
   }
 
   public hide_alert() {
@@ -163,6 +202,50 @@ class Modal {
     });
   }
 
+  public confirmRedesign(
+    message: string,
+    confirmCb: () => void,
+    declineCb: () => void = function(){},
+    options?: {
+      confirmButtonClass?: string;
+      confirmButtonLabel?: string;
+      confirmActionsClass?: string;
+    },
+  ) {
+    this.hide();
+    const redesignConfirmYesButton = $('#redesign_confirm_yes_button');
+    const redesignConfirmActions = $('#redesign_confirm_actions');
+
+    redesignConfirmYesButton.attr('class', options?.confirmButtonClass ?? this.redesignConfirmDefaultButtonClass);
+    redesignConfirmYesButton.text(options?.confirmButtonLabel ?? this.redesignConfirmDefaultButtonLabel);
+    redesignConfirmActions.attr('class', options?.confirmActionsClass ?? this.redesignConfirmDefaultActionsClass);
+
+    $('#redesign_confirm_text').text(message);
+    $('#redesign_confirm_modal').removeClass('hidden').addClass('flex');
+    $('body').addClass('overflow-hidden');
+
+    // If there's a timeout from a previous modal that hasn't been cleared yet, clear it to avoid hiding the present message before its due time.
+    if(this._timeout) {
+      clearTimeout(this._timeout);
+      this._timeout = undefined;
+    }
+
+    $('#redesign_confirm_yes_button').off('click').on('click', () => {
+      this.hideRedesignConfirm();
+      confirmCb();
+    });
+
+    $('#redesign_confirm_no_button, #redesign_confirm_close_button').off('click').on('click', () => {
+      this.hideRedesignConfirm();
+      declineCb();
+    });
+
+    $('#redesign_confirm_backdrop').off('click').on('click', () => {
+      this.hideRedesignConfirm();
+      declineCb();
+    });
+  }
+
   /**
    * Modal for a htmx-based search.
    * 
@@ -172,7 +255,11 @@ class Modal {
    * @param result_target The target element to update with the search results
    * @param confirm_label Optional text to use for the confirmation
    */
-  public htmx_search(message: string, input_attr: Record<string, string>, confirm_attr: Record<string, string>, result_target: string, confirm_label?: string, success_message?: string) {
+  public htmx_search(message: string, input_attr: Record<string, string>, confirm_attr: Record<string, string>, result_target: string, confirm_label?: string, success_message?: string, modalVariant: 'legacy' | 'redesign' = 'legacy') {
+    if (modalVariant === 'redesign') {
+      return this.htmx_search_redesign(message, input_attr, confirm_attr, result_target, confirm_label, success_message);
+    }
+
     this.hide();
     $('#modal_search_text').text(message);
     if (confirm_label) $('#modal_ok_search_button').text(confirm_label)
@@ -187,6 +274,22 @@ class Modal {
       this.clear_search_boxes();
     });
   }
+
+  public htmx_search_redesign(message: string, input_attr: Record<string, string>, confirm_attr: Record<string, string>, result_target: string, confirm_label?: string, success_message?: string) {
+    this.hide();
+    $('#redesign_search_text').text(message);
+    if (confirm_label) $('#redesign_search_ok_button').text(confirm_label)
+    $('#redesign_search_input').attr(input_attr);
+    $('#redesign_search_ok_button').attr(confirm_attr);
+    $(result_target).attr({'hx-on::after-settle': `hedyApp.close_htmx_search_modal("${success_message}")`});
+    htmx.process(document.body)
+    $('#redesign_search_modal').removeClass('hidden').addClass('flex');
+    $('body').addClass('overflow-hidden');
+    $('#redesign_search_cancel_button').off('click').on('click', () => {
+      this.hideRedesignSearch();
+      this.clear_search_boxes();
+    });
+  }
   
   public clear_search_boxes() {
     $('#modal_search_input').val("");
@@ -194,9 +297,20 @@ class Modal {
     if (users_to_invite) users_to_invite.innerHTML = ''
     const search_results = document.getElementById('search_results')
     if (search_results) search_results.innerHTML = ''
+    $('#redesign_search_input').val("");
+    const redesign_users_to_invite_container = document.getElementById('redesign_users_to_invite_container');
+    if (redesign_users_to_invite_container) redesign_users_to_invite_container.classList.add('hidden')
+    const redesign_users_to_invite = document.getElementById('redesign_users_to_invite');
+    if (redesign_users_to_invite) redesign_users_to_invite.innerHTML = ''
+    const redesign_search_results = document.getElementById('redesign_search_results')
+    if (redesign_search_results) redesign_search_results.innerHTML = ''
   }
 
-  public prompt(message: string, defaultValue: string, confirmCb: (x: string) => void) {
+  public prompt(message: string, defaultValue: string, confirmCb: (x: string) => void, modalVariant: 'legacy' | 'redesign' = 'legacy', title: string = '') {
+    if (modalVariant === 'redesign') {
+      return this.promptRedesign(message, defaultValue, confirmCb, title);
+    }
+
     this.hide();
     $('#modal_prompt_text').text(message);
     this.show();
@@ -219,6 +333,46 @@ class Modal {
         confirmCb(value);
       }
     });
+  }
+
+  public promptRedesign(message: string, defaultValue: string, confirmCb: (x: string) => void, title: string = '') {
+    this.hide();
+    $('#redesign_prompt_title').text(title);
+    $('#redesign_prompt_text').text(message);
+    $('#redesign_prompt_input').val(defaultValue || '');
+    $('#redesign_prompt_modal').removeClass('hidden').addClass('flex');
+    $('body').addClass('overflow-hidden');
+
+    if(this._timeout) {
+      clearTimeout(this._timeout);
+      this._timeout = undefined;
+    }
+
+    const submit = () => {
+      const value = $('#redesign_prompt_input').val();
+      this.hideRedesignPrompt();
+      if (typeof value === 'string') {
+        confirmCb(value);
+      }
+    };
+
+    $('#redesign_prompt_ok_button').off('click').on('click', submit);
+    $('#redesign_prompt_input').off('keydown').on('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        submit();
+      }
+    });
+
+    $('#redesign_prompt_cancel_button, #redesign_prompt_close_button').off('click').on('click', () => {
+      this.hideRedesignPrompt();
+    });
+
+    $('#redesign_prompt_backdrop').off('click').on('click', () => {
+      this.hideRedesignPrompt();
+    });
+
+    $('#redesign_prompt_input').trigger('focus');
   }
 }
 

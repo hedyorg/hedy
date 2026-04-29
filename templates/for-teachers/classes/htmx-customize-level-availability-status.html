@@ -1,0 +1,6 @@
+{% set level = level|default(1) %}
+<div id="level_availability_status">
+    {% if level|int not in customizations['levels'] %}
+        <p class="text-red-600 font-medium text-sm m-0">This level is currently unavailable for your students</p>
+    {% endif %}
+</div>

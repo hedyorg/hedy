@@ -1,0 +1,28 @@
+{% set level = level|default(1) %}
+{% set class_id = class_id|default('') %}
+<div id="level_availability_panel" class="flex flex-col gap-2">
+    {{
+        render_partial(
+            'for-teachers/classes/htmx-customize-level-availability-status.html',
+            level=level,
+            customizations=customizations
+        )
+    }}
+
+    <div class="flex items-center gap-3">
+        <label class="switch">
+            <input
+                type="checkbox"
+                {% if level|int in customizations['levels'] %}checked{% endif %}
+                aria-label="{{ _('available') }}"
+                hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/availability"
+                hx-trigger="change"
+                hx-target="#level_availability_status"
+                hx-swap="outerHTML"
+                hx-vals="js:{enabled: event.target.checked}"
+            >
+            <span class="slider round"></span>
+        </label>
+        <span class="text-base">{{ _('available_for_students') }}</span>
+    </div>
+</div>

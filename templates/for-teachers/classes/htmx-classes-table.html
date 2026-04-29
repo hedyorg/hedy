@@ -1,4 +1,4 @@
-<div class="md:px-16 overflow-x-auto h-full" id="classes_table">
+<div class="overflow-x-auto h-full" id="classes_table">
   <div class="w-full h-full mb-48">
     <div class="w-full h-full border rounded-lg shadow-md">
       <table class="w-full divide-y divide-gray-400">
@@ -7,14 +7,14 @@
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('name')}}</th>
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('teacher')}}</th>
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('students')[0]|upper}}{{_('students')[1:]}}</th>
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('created')}}
+            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('created')}}</th>
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('actions')}}</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           {% for class in teacher_classes %}
           <tr >
-            <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
+            <td class="text-center px-3 {% if loop.last %} rounded-b-lg {% endif %}">
               <a href="/for-teachers/redesign/class/{{class.id}}" class="view_class" data-cy="view_class_link">
                 {{class.name|e}}
               </a>
@@ -47,54 +47,50 @@
                   {% endif %}
                 z-30 menu origin-top-left absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
                   <ul class="list-none divide-y divide-gray-200 p-2">
-                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100">
-                      <i class="fa-solid fa-circle-check text-sm"></i>
-                        <span class="m-3">Grading</span>
+                    <a href="/for-teachers/redesign/class/{{class.id}}/grade" class="no-underline  text-blue-900">
+                      <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100">
+                        <i class="fa-solid fa-circle-check text-sm"></i>
+                        <span  class="m-3">{{_('grading')}}</span>
+                      </li>
+                    </a>
+                    <a href="/for-teachers/redesign/class/{{class.id}}/configure" class="no-underline text-blue-900">
+                      <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 gap-4">
+                        <i class="fa-solid fa-gears text-sm"></i>
+                        <span class="m-3">{{_('configure')}}</span> 
+                      </li>
+                    </a>
+                    <a class="no-underline text-blue-900" aria-disabled="true">
+                      <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100">
+                        <i class="fa-solid fa-box-archive text-sm"></i> 
+                        <span class="m-3">{{_('archive')}}</span>
+                      </li>
+                    </a>
+                    <li class="rounded-b-lg">
+                      <button
+                        data-cy="remove_class"
+                        data-confirm-modal="redesign"
+                        data-confirm-button-class="red-btn-new"
+                        data-confirm-button-label="{{_('delete')}}"
+                        class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-b-lg text-red-700 ease-in transition duration-100 font-bold"
+                        hx-confirm="{{_('delete_class_prompt')}}"
+                        hx-trigger="click"
+                        hx-delete="/for-teachers/class/{{class.id}}"
+                        hx-target="#classes_table"
+                        hx-swap="outerHTML"
+                      >
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                        <span class="m-3">{{_('delete')}}</span>
+                      </button>
                     </li>
-                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4">
-                      <i class="fa-solid fa-gears text-sm"></i> <span class="m-3">Configure</span> 
-                    </li>
-                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100">
-                      <i class="fa-solid fa-box-archive text-sm"></i>  <span class="m-3">Archive</span> </li>
-                    <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-b-lg  text-red-700 ease-in transition duration-100">
-                      <i class="fa-solid fa-trash-can text-sm"></i> <span class="m-3">Delete</span> </li>
                   </ul>
                 </div>
               </div>
             </td>
-            <!--DISABLED FOR NOW :)-->
-            {#
-            <td class="text-center">
-              <div class="flex justify-center text-blue-900">
-                <button class="flex flex-col w-1/4"
-                  _="on click window.open('/for-teachers/customize-class/{{class.id}}', '_self')">
-                  <span class="fas fa-pen block my-auto lg:my-0"></span>
-                  <span class="hidden lg:block mt-1">{{_('customize')}}</span>
-                </button>
-                <button class="flex flex-col w-1/4" data-cy="duplicate_{{class.name}}"
-                  onclick='hedyApp.duplicate_class("{{class.id}}", "{{class.second_teachers}}", {{_('
-                  second_teacher_copy_prompt')|default(None)|tojson}}, {{_('class_name_prompt')|default(None)|tojson}}, {%
-                  if class.teacher !=username %}"{{class.name}}"{% else %}""{% endif %})'>
-                  <span class="fas fa-copy block my-auto lg:my-0"></span>
-                  <span class="hidden lg:block mt-1">{{_('duplicate')}}</span>
-                </button>
-                <button class="flex flex-col w-1/4"
-                  _="on click window.open('/for-teachers/class/{{class.id}}/preview', '_self')">
-                  <span class="fas fa-eye block my-auto lg:my-0"></span>
-                  <span class="hidden lg:block mt-1">{{_('preview')}}</span>
-                </button>
-                <button data-cy="remove_class" class="flex flex-col w-1/4" hx-confirm="{{_('delete_class_prompt')}}"
-                  hx-trigger="click" hx-delete="/class/{{class.id}}" hx-target="#classes_table" hx-swap="outerHTML">
-                  <span class="fas fa-trash block text-red-700 my-auto lg:my-0"></span>
-                  <span class="text-red-700 hidden lg:block mt-1">{{_('remove')}}</span>
-                </button>
-              </div>
-            </td>
-            #}
           </tr>
           {% endfor %}
         </tbody>
       </table>
+      </div>
     </div>
       <a class="blue-btn-new inline-flex items-center mt-10"
           id="create_class_button"

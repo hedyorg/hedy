@@ -1,7 +1,7 @@
 
 {% macro sortable_th(field, label, sort_orders) %}
     {% set sort_val = sort_orders.get(field) if sort_orders else None %}
-    <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider min-w-36 {% if field == 'student' %} rounded-t-lg {% endif %}">
+  <th class="py-2 px-2 sm:px-4 text-center  font-medium text-gray-700 uppercase tracking-wider min-w-28 sm:min-w-36 {% if field == 'student' %} rounded-t-lg {% endif %}">
         {{ _(label) }}
         <button class="ml-2" type="submit"
             _="on click
@@ -29,16 +29,16 @@
     </th>
 {% endmacro %}
 
-<table class="w-full divide-y divide-gray-400" id="students-table">
+<table class="w-full min-w-[36rem] divide-y divide-gray-400 " id="students-table">
   <thead class="bg-gray-200 divide-y divide-gray-400">
     <tr>
       {{ sortable_th('student', 'students', sort_orders) }}
       {{ sortable_th('timestamp', 'class_logs', sort_orders) }}
-      <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('actions')}}</th>
+      <th class="py-2 px-2 sm:px-4 text-center  font-medium text-gray-700 uppercase tracking-wider rounded-t-lg min-w-24">{{_('actions')}}</th>
 
     </tr>
   </thead>
-  <tbody class="bg-white divide-y divide-gray-200" id="manage-students-table-body">
+  <tbody class="bg-white divide-y divide-gray-200 " id="manage-students-table-body">
     {{
       render_partial(
         "for-teachers/classes/manage-class-table-body.html", 

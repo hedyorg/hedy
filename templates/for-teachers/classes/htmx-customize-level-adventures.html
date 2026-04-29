@@ -1,0 +1,166 @@
+{% set level = level|default(1) %}
+{% set class_id = class_id|default('') %}
+<div id="level_adventures_panel" class="flex flex-col w-full md:w-1/2 gap-3">
+    <div class="flex flex-wrap items-center gap-3">
+        <button
+            type="button"
+            class="blue-btn-new"
+            _="on click remove .hidden from #add_adventures_modal_level_{{ level }} then add .overflow-hidden to <body/>"
+        >
+            {{ _('add_adventures') }}
+        </button>
+
+        <div
+            id="add_adventures_modal_level_{{ level }}"
+            class="hidden fixed inset-0 z-50 flex items-center justify-center"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="add_adventures_modal_title_{{ level }}"
+            _="on closeAddAdventuresModal add .hidden to me then remove .overflow-hidden from <body/>"
+        >
+            <div class="absolute inset-0 bg-black opacity-60" _="on click trigger closeAddAdventuresModal"></div>
+
+            <div class="relative bg-white border border-gray-300 rounded-lg w-[92vw] max-w-lg max-h-[85vh] overflow-hidden m-4 flex flex-col">
+                <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3">
+                    <h3 id="add_adventures_modal_title_{{ level }}" class="text-xl m-0 font-semibold">{{ _('add_adventures') }}</h3>
+                    <button
+                        type="button"
+                        class="text-gray-700 hover:text-black transition-colors"
+                        aria-label="{{ _('close') }}"
+                        _="on click trigger closeAddAdventuresModal"
+                    >
+                        <i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <form
+                    class="p-4 overflow-y-auto flex flex-col gap-4"
+                    hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/add-adventure"
+                    hx-target="#level_adventures_panel"
+                    hx-swap="outerHTML"
+                    hx-indicator="#level_adventures_indicator"
+                >
+                    <div class="border border-gray-200 rounded p-3">
+                        <h4 class="m-0 mb-2 text-lg font-slab text-blue-700 font-semibold">{{ _('built_in_adventures') }}</h4>
+                        <div class="flex flex-col gap-2">
+                            {% set builtins = namespace(has_items=false) %}
+                            {% for adventure in available_adventures %}
+                                {% if not adventure.is_teacher_adventure %}
+                                    {% set builtins.has_items = true %}
+                                    <label class="group flex items-center gap-3 cursor-pointer rounded-md px-2 py-1.5 transition-colors duration-150 hover:bg-gray-50">
+                                        <input class="peer sr-only" type="checkbox" name="adventure_id" value="{{ adventure.short_name }}">
+                                        <span class="flex h-5 w-5 items-center justify-center rounded border border-gray-300 bg-white text-white transition-all duration-150 ease-out peer-checked:border-green-600 peer-checked:bg-green-600 peer-checked:scale-105">
+                                            <i class="fa-solid fa-check text-xs opacity-0 transition-opacity duration-150 peer-checked:opacity-100" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="flex items-center gap-2 transition-colors duration-150 group-hover:text-green-800">
+                                            {% if adventure.is_command_adventure %}
+                                                <i class="fa-regular fa-lightbulb w-4" style="line-height: inherit;" aria-hidden="true"></i>
+                                            {% endif %}
+                                            <span>{{ adventure.long_name }}</span>
+                                        </span>
+                                    </label>
+                                {% endif %}
+                            {% endfor %}
+                            {% if not builtins.has_items %}
+                                <p class="text-sm text-gray-500 m-0">{{ _('no_built_in_adventures_available') }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded p-3">
+                        <h4 class="m-0 mb-2 text-lg font-slab text-blue-700 font-semibold">{{ _('custom_adventures') }}</h4>
+                        <div class="flex flex-col gap-2">
+                            {% set custom = namespace(has_items=false) %}
+                            {% for adventure in available_adventures %}
+                                {% if adventure.is_teacher_adventure %}
+                                    {% set custom.has_items = true %}
+                                    <label class="group flex items-center gap-3 cursor-pointer rounded-md px-2 py-1.5 transition-colors duration-150 hover:bg-gray-50">
+                                        <input class="peer sr-only" type="checkbox" name="adventure_id" value="{{ adventure.short_name }}">
+                                        <span class="flex h-5 w-5 items-center justify-center rounded border border-gray-300 bg-white text-white transition-all duration-150 ease-out peer-checked:border-green-600 peer-checked:bg-green-600 peer-checked:scale-105">
+                                            <i class="fa-solid fa-check text-xs opacity-0 transition-opacity duration-150 peer-checked:opacity-100" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="flex items-center gap-2">
+                                            <span class="flex items-center gap-2 transition-colors duration-150 group-hover:text-green-800">
+                                                {% if adventure.is_command_adventure %}
+                                                    <i class="fa-regular fa-lightbulb w-4" style="line-height: inherit;" aria-hidden="true"></i>
+                                                {% endif %}
+                                                <span>{{ adventure.long_name }}</span>
+                                            </span>
+                                            {% if adventure.is_second_teacher_adventure %}
+                                                <span class="text-gray-600">
+                                                    <i class="fa-solid fa-user-group" aria-hidden="true"></i>
+                                                </span>
+                                            {% endif %}
+                                        </span>
+                                    </label>
+                                {% endif %}
+                            {% endfor %}
+                            {% if not custom.has_items %}
+                                <p class="text-sm text-gray-500 m-0">{{ _('no_custom_adventures_available') }}</p>
+                            {% endif %}
+                        </div>
+
+                        <a href="/for-teachers/customize-adventure" class="inline-flex mt-3 blue-btn-new no-underline">{{ _('create_adventure') }}</a>
+                    </div>
+
+                    <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
+                        <button type="button" class="blue-btn-new" _="on click trigger closeAddAdventuresModal">
+                            {{ _('cancel') }}
+                        </button>
+                        <button type="submit" class="green-btn-new">
+                            {{ _('add') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="level_adventures_indicator" class="htmx-indicator custom-indicator text-sm text-gray-600">
+            {{ _('updating_indicator') }} <i class="fa fa-spinner fa-spin"></i>
+        </div>
+    </div>
+
+    <ul
+        id="level_{{ level }}"
+        class="flex flex-col gap-2 sortable"
+        hx-trigger="end"
+        hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/sort-adventures"
+        hx-target="#level_adventures_panel"
+        hx-swap="outerHTML"
+        hx-include="[name='adventure']"
+        hx-indicator="#level_adventures_indicator"
+    >
+        {% for adventure in adventures %}
+            <li class="border border-gray-200 rounded-lg px-3 py-2 bg-white flex items-center gap-3">
+                <i class="fa-solid fa-grip-lines text-gray-400" aria-hidden="true"></i>
+                <span class="text-blue-900 flex-1 flex items-center gap-2">
+                    <span>{{ adventure.long_name }}</span>
+                </span>
+                <div class="flex flex-row gap-4">
+                    {% if adventure.is_command_adventure %}
+                        <i class="fa-regular fa-lightbulb w-4" style="line-height: inherit;" aria-hidden="true"></i>
+                    {% endif %}
+                    <span class="text-sm text-gray-600">
+                        {% if adventure.is_teacher_adventure %}{{ _('my_adventures')|lower }}{% else %}{{ _('built_in') }}{% endif %}
+                    </span>
+                </div>
+                <button
+                    type="button"
+                    class="text-red-600 hover:text-red-700 transition-colors mx-1 md:mx-1 inline-flex items-center justify-center w-11 md:w-fit md:h-fit h-11 rounded-full"
+                    aria-label="{{ _('remove') }}"
+                    hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/remove-adventure?adventure_id={{ adventure.short_name }}"
+                    hx-target="#level_adventures_panel"
+                    hx-swap="outerHTML"
+                    hx-indicator="#level_adventures_indicator"
+                >
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+                <input type="hidden" value="{{ adventure.short_name }}" name="adventure">
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if adventures|length == 0 %}
+        <p class="text-sm text-gray-500 m-0">{{ _('no_adventures_in_level') }}</p>
+    {% endif %}
+</div>
