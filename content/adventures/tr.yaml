@@ -2276,9 +2276,9 @@ adventures:
                 example_code: |
                     ```
                     cevap = 0
-                    {while} cevap != 25
-                        cevap = {ask} '5 kere 5 kaç eder?'
-                    {print} 'Doğru cevap verilmiştir'
+                    {while} cevap != 25:
+                        cevap = {input}('5 kere 5 kaç eder?')
+                    {print}('Doğru cevap verilmiştir')
                     ```
     years:
         name: Yeni Yıl

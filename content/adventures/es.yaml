@@ -2747,9 +2747,9 @@ adventures:
                 example_code: |
                     ```
                     respuesta = 0
-                    {while} respuesta != 25
-                        respuesta = {ask} '¿Cuánto es 5 veces 5?'
-                    {print} 'La respuesta es correcta'
+                    {while} respuesta != 25:
+                        respuesta = {input}('¿Cuánto es 5 veces 5?')
+                    {print}('La respuesta es correcta')
                     ```
         description: '{while}'
         name: '{while}'

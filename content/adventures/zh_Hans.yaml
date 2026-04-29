@@ -2726,9 +2726,9 @@ adventures:
                 example_code: |
                     ```
                     答案 = 0
-                    {while} 答案 != 25
-                        答案 = {ask} '5乘以5是多少?'
-                    {print} '一个正确的回答给出'
+                    {while} 答案 != 25:
+                        答案 = {input}('5乘以5是多少?')
+                    {print}('一个正确的回答给出')
                     ```
     years:
         name: 新年

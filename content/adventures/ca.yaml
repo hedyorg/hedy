@@ -1720,7 +1720,7 @@ adventures:
         levels:
             16:
                 story_text: "Aprendrem un nou bucle, el bucle `{while}`! Continuem el bucle mentre la declaració sigui certa.\nAixí que no oblidis canviar el valor dins del bucle.\n\nEn el codi d'exemple, continuem fins que s'hagi donat una resposta correcta.\nSi mai es dóna la resposta correcta, el bucle mai acaba!"
-                example_code: "```\nresposta = 0\n{while} resposta != 25\n    resposta = {ask} \"Quan fa 5 per 5?\"\n{print} \"La resposta donada és correcte\"\n```\n"
+                example_code: "```\nresposta = 0\n{while} resposta != 25:\n    resposta = {input}(\"Quan fa 5 per 5?\")\n{print}(\"La resposta donada és correcte\")\n```\n"
     and_or_command:
         name: '{and} i {or}'
         default_save_name: i_o_command

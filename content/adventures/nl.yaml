@@ -3468,7 +3468,7 @@ adventures:
                 example_code: |
                     ```
                     antwoord = 0
-                    {while} antwoord != 25
-                        antwoord = {ask} 'Wat is 5 keer 5?'
-                    {print} 'Je hebt een correct antwoord gegeven'
+                    {while} antwoord != 25:
+                        antwoord = {input}('Wat is 5 keer 5?')
+                    {print}('Je hebt een correct antwoord gegeven')
                     ```
