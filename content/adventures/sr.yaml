@@ -1511,7 +1511,7 @@ adventures:
 
                     yes_or_no = {input}('Да ли желите да чујете моју бескрајну песму?')
                     {while} yes_or_no = 'да':
-                        {call} song
+                        song()
                         {print} '🥳'
                     ```
     parrot:

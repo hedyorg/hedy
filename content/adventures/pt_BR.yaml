@@ -1329,7 +1329,7 @@ adventures:
             10:
                 story_text: "From this level on you can - among other things - use a {repeat} command inside a {repeat} command.\nThat makes songs like 'Happy birthday' even shorter!\n\n### Exercise\nFinish the song!\n"
             16:
-                example_code: "```\n{def} música\n    {play} _\n\nsim_ou_não = {input}('Quer ouvir a minha música infinita?')\n{while} sim_ou_não = 'sim':\n    {call} música\n    {print} '🥳'\n```\n"
+                example_code: "```\n{def} música\n    {play} _\n\nsim_ou_não = {input}('Quer ouvir a minha música infinita?')\n{while} sim_ou_não = 'sim':\n    música()\n    {print} '🥳'\n```\n"
                 story_text: "**Aviso** Essa aventura pode ficar extremamente irritante!\nTambém podemos usar o comando {while} para repetir uma música infinitamente.\n\n### Exercício\nComplete a música infinita.\n"
     parrot:
         name: Papagaia
