@@ -1408,7 +1408,7 @@ adventures:
                 story_text: "Pots programar música per diversió, però també pots fer servir les notes musicals per fer alguna cosa tan útil com una alarma d'incendi!\n\n### Exercici\nAssegura't que l'alarma sona quan hi ha un incendi!\n"
             16:
                 story_text: "**Avís** Aquesta aventura pot arribar a ser extremadament molesta!  \nTambé podem utilitzar la comanda `{while}` per repetir una cançó infinitament.\n\n### Exercici  \nAcaba la cançó interminable.\n"
-                example_code: "```\n{define} cançó\n    {play} _\n\nsi_o_no = {ask} \"Vols sentir la cançó que mai s'acaba?\"\n{while} si_o_no = \"sí\"\n    cançó()\n    {print} \"🥳\"\n```\n"
+                example_code: "```\n{def} cançó\n    {play} _\n\nsi_o_no = {input}(\"Vols sentir la cançó que mai s'acaba?\")\n{while} si_o_no = \"sí\":\n    cançó()\n    {print} \"🥳\"\n```\n"
             10:
                 story_text: "A partir d'aquest nivell pots, entre altres coses, utilitzar una comanda `{repeat}` dins d'una altra comanda `{repeat}`.  \nAixò fa que cançons com \"Moltes felicitats\" siguin encara més curtes!\n\n### Exercici\nAcaba la cançó!\n"
                 example_code: "```\nprimer_cop = si\n{repeat} 2 {times}\n    {repeat} 2 {times}\n        {play} C\n    {play} D\n    {play} C\n    {if} primer_cop {is} si\n        {play} F\n        {play} E\n        primer_cop {is} no\n    {else}\n        _\n```\n"

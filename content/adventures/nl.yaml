@@ -1933,11 +1933,11 @@ adventures:
                     Maak dit liedje zonder einde af.
                 example_code: |
                     ```
-                    {define} lied
+                    {def} lied
                         {play} _
 
-                    ja_of_nee = {ask} 'Wil je mijn liedje zonder einde horen?'
-                    {while} ja_of_nee = 'ja'
+                    ja_of_nee = {input}('Wil je mijn liedje zonder einde horen?')
+                    {while} ja_of_nee = 'ja':
                         {call} lied
                         {print} '🥳'
                     ```

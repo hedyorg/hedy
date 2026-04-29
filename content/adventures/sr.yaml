@@ -1506,11 +1506,11 @@ adventures:
                     Завршите бескрајну песму.
                 example_code: |
                     ```
-                    {define} song
+                    {def} song
                         {play} _
 
-                    yes_or_no = {ask} 'Да ли желите да чујете моју бескрајну песму?'
-                    {while} yes_or_no = 'да'
+                    yes_or_no = {input}('Да ли желите да чујете моју бескрајну песму?')
+                    {while} yes_or_no = 'да':
                         {call} song
                         {print} '🥳'
                     ```

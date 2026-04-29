@@ -1514,11 +1514,11 @@ adventures:
                     Dokończ niekończącą się piosenkę
                 example_code: |
                     ```
-                    {define} piosenka
+                    {def} piosenka
                         {play} _
 
-                    tak_lub_nie = {ask} 'Czy chcesz usłyszeć moją niekończącą się piosenkę?'
-                    {while} tak_lub_nie = 'tak'
+                    tak_lub_nie = {input}('Czy chcesz usłyszeć moją niekończącą się piosenkę?')
+                    {while} tak_lub_nie = 'tak':
                         piosenka()
                         {print} '🥳'
                     ```

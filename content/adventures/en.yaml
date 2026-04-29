@@ -3954,17 +3954,17 @@ adventures:
                     Finish the never-ending song.
                 example_code: |
                     ```
-                    {define} song
+                    {def} song
                         {play} _
 
-                    yes_or_no = {ask} 'Do you want to hear my never-ending song?'
-                    {while} yes_or_no = 'yes'
+                    yes_or_no = {input}('Do you want to hear my never-ending song?')
+                    {while} yes_or_no = 'yes':
                         song()
                         {print} '🥳'
                     ```
                 answer_code: |
                     ```
-                    def song ():
+                    {def} song ():
                         {play} C3
                         {play} D3
                         {play} E3
@@ -3976,8 +3976,8 @@ adventures:
 
                     yes_or_no = {input}('Do you want to hear my never-ending song?')
                     {while} yes_or_no = 'yes':
-                    song()
-                    {print}('🥳')
+                        song()
+                        {print}('🥳')
                     ```
     music_2:
         name: music 2

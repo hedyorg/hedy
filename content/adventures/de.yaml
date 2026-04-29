@@ -1814,11 +1814,11 @@ adventures:
                     Vervollständige das Lied-das-niemals-endet.
                 example_code: |
                     ```
-                    {define} lied
+                    {def} lied
                         {play} _
 
-                    ja_oder_nein = {ask} 'Willst du mein Lied-das-niemals-endet hören?'
-                    {while} ja_oder_nein = 'ja'
+                    ja_oder_nein = {input}('Willst du mein Lied-das-niemals-endet hören?')
+                    {while} ja_oder_nein = 'ja':
                         {call} song
                         {print} '🥳'
                     ```
