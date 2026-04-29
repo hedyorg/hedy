@@ -1677,7 +1677,7 @@ adventures:
                 example_code: |
                     ```
                     options = [1, 2, 3, 4, 5, 6]
-                    {print} 'Throw 6 as fast as you can!'
+                    {print}('Throw 6 as fast as you can!')
                     thrown = 0
                     tries = 0
                     _
@@ -1690,11 +1690,11 @@ adventures:
                 answer_code: |
                     ```
                     options = [1, 2, 3, 4, 5, 6]
-                    {print} 'Throw 6 as fast as you can!'
+                    {print}('Throw 6 as fast as you can!')
                     thrown = 0
                     tries = 0
                     {while} thrown == 0:
-                        number = options{{random}]
+                        number = options[{random}]
                         tries = tries + 1
                         {if} number = 6:
                             thrown = 1
