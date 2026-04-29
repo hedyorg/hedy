@@ -398,11 +398,11 @@ adventures:
                     {print}('You can choose: bedroom, shed, cupboard, desk')
                     {while} rackets == 'lost':
                         location = {input}('Where do you want to look?')
-                     	{if} location == 'desk':
-                            	{print}('Here they are! You found 6 rackets!')
-                            	keys = 'found'
-                    	{else}:
-                            	{print}('Nope they are not at the ', location)
+                        {if} location == 'desk':
+                            {print}('Here they are! You found 6 rackets!')
+                            keys = 'found'
+                        {else}:
+                            {print}('Nope they are not at the ', location)
                     {print}('Now you can play tennis with all your friends.')
                     ```
     add_remove_command:
@@ -606,8 +606,10 @@ adventures:
                     ```
                     correct_answer = 11 * 27
                     answer = {ask} 'How much is 11 times 27?'
-                    {if} answer {is} correct_answer {print} 'good job!'
-                    {else} {print} 'Wrong! It was ' correct_answer
+                    {if} answer {is} correct_answer 
+                    {print} 'good job!'
+                    {else}
+                    {print} 'Wrong! It was ' correct_answer
                     ```
 
                     Extra
@@ -617,8 +619,10 @@ adventures:
                     number_2 = numbers {at} {random}
                     correct_answer = number_1 * number_2
                     given_answer = {ask} 'What is ' number_1 ' times ' number_2 '?'
-                    {if} given_answer {is} correct_answer {print} 'Good job!'
-                    {else} {print} 'Wrong! It was ' correct_answer
+                    {if} given_answer {is} correct_answer
+                    {print} 'Good job!'
+                    {else}
+                    {print} 'Wrong! It was ' correct_answer
                     ```
             10:
                 story_text: |
@@ -725,8 +729,8 @@ adventures:
                     ```
                     {def} calculate_mean_grade():
                         total = 0
-                        {for} i {in} {range} 1 {to} 4:
-                            grade = {ask} "What grade did you got for your exam " i '?'
+                        {for} i {in} {range}(1, 4):
+                            grade = {input} "What grade did you got for your exam " i '?'
                             total = total + grade
                         {return} total / 4
 
@@ -762,19 +766,19 @@ adventures:
                 answer_code: |
                     ```
                     {def} new_question():
-                    	numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                    	number_1 = numbers[{random}]
-                    	number_2 = numbers[{random}]
-                    	correct = number_1 * number_2
-                    	answer = 0
-                    	{while} answer != correct:
-                        	answer = {input}('What is ', number_1, ' * ', number_2, '?')
-                        	{print} ('You said that ', number_1, ' * ', number_2, ' is ', answer )
-                    	{print} ('Well done!')
+                        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        number_1 = numbers[{random}]
+                        number_2 = numbers[{random}]
+                        correct = number_1 * number_2
+                        answer = 0
+                        {while} answer != correct:
+                            answer = {input}('What is ', number_1, ' * ', number_2, '?')
+                            {print} ('You said that ', number_1, ' * ', number_2, ' is ', answer )
+                        {print} ('Well done!')
 
                     {print}('Give 10 correct answers to win!')
                     {for} i {in} {range} (1, 10):
-                    	new_question()
+                        new_question()
                     {print}('You win!')
                     ```
     calculator_2:
@@ -862,7 +866,7 @@ adventures:
                     amount_of_subjects = {input}('For how many subjects do you want to calculate the mean grade?')
                     {repeat} amount_of_subjects {times}
                         subject = {input}('For which subject do you want to calculate your mean grade?')
-                        mean_grade = {call} calculate_mean_grade(subject)
+                        mean_grade = calculate_mean_grade(subject)
                         {print} ('Your mean grade for ', subject, ' is ', mean_grade)
                     ```
     clear_command:
@@ -1588,42 +1592,66 @@ adventures:
 
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm
+                    points = points + 5
+                    {else}
+                    points = points + throw
                     {print} 'those are ' points ' points'
 
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm
+                    points = points + 5
+                    {else}
+                    points = points + throw
                     {print} 'those are ' points ' points'
 
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm
+                    points = points + 5
+                    {else}
+                    points = points + throw
                     {print} 'those are ' points ' points'
 
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm
+                    points = points + 5
+                    {else}
+                    points = points + throw
                     {print} 'those are ' points ' points'
 
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm
+                    points = points + 5
+                    {else}
+                    points = points + throw
                     {print} 'those are ' points ' points'
 
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm
+                    points = points + 5
+                    {else}
+                    points = points + throw
                     {print} 'those are ' points ' points'
 
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm
+                    points = points + 5
+                    {else}
+                    points = points + throw
                     {print} 'those are ' points ' points'
 
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm
+                    points = points + 5
+                    {else}
+                    points = points + throw
                     {print} 'those are ' points ' points'
                     ```
             8:
@@ -2100,8 +2128,10 @@ adventures:
                     person {is} {ask} 'Who are you?'
                     good_answer {is} Hurray! Your team will win!, Your team will definitely win!, Your team will win! Hooray!
                     bad_answer {is} Bad luck! Your team won't win!, Bummer... Your favorite sports team will lose..., Your favorite team will lose
-                    {if} person {is} {in} friends {print} bad_answer {at random}
-                    {else} {print} good_answer {at random}
+                    {if} person {is} {in} friends
+                    {print} bad_answer {at random}
+                    {else}
+                    {print} good_answer {at random}                    
 
                     ```
             7:
@@ -2349,9 +2379,9 @@ adventures:
                     {define} song {with} place
                         {print} 'Last night as I lay on my ' place
 
-                    {call} song {with} 'pillow'
-                    {call} song {with} 'bed'
-                    {call} song {with} 'pillow'
+                    song('pillow')
+                    song('bed')
+                    song('pillow')
                     {print} "I dreamed that my Bonnie is dead"
                     ```
     functions_3:
@@ -2387,7 +2417,7 @@ adventures:
                     {def} calculate_new_price(amount, percentage):
                         percentage = percentage / 100
                         discount_amount = amount * percentage
-                        {return} round(amount - discount_amount, 2)
+                        {return} amount - discount_amount
 
                     old_price = {input}('How much is on the price tag?')
                     discount = {input}('What percentage is the discount?')
@@ -2431,15 +2461,15 @@ adventures:
                     number = numbers[random]
                     game = 'on'
                     {for} i {in} {range} (1,10):
-                    	{if} game == 'on':
-                        	guess = ask 'Which number do you think it is?'
-                        	{if} guess > number:
-                            	{print} 'Lower!'
-                        	{if} guess < number:
-                            	{print} 'Higher!'
-                        	{if} guess == number:
-                            	{print} 'You win!'
-                            	game = 'over'
+                        {if} game == 'on':
+                            guess = ask 'Which number do you think it is?'
+                            {if} guess > number:
+                                {print} 'Lower!'
+                            {if} guess < number:
+                                {print} 'Higher!'
+                            {if} guess == number:
+                                {print} 'You win!'
+                                game = 'over'
                     ```
     harry_potter:
         name: harry potter
@@ -3040,29 +3070,29 @@ adventures:
                     english_terms = ['body', 'head', 'eye', 'nose', 'ear', 'mouth', 'neck', 'hand', 'chest', 'shoulder', 'stomach', 'back']
 
                     {for} i {in} {range}(1, 12):
-                    	correct_answer = english_terms[i]
-                    	answer = 0
-                    	{while} answer != correct_answer:
-                        	answer = {input}('What is the English name for ', latin_terms[i], '?')
-                        	{if} answer != correct_answer:
-                            	{print}('That is incorrect')
-                            	{print}('The correct answer for ', latin_terms[i], ' is ', english_terms[i])
-                            	{sleep} 3
-                            	clear
-                            	points = points - 1
-                    	points = points + 1
-                    	{print}('Correct!')
+                        correct_answer = english_terms[i]
+                        answer = 0
+                        {while} answer != correct_answer:
+                            answer = {input}('What is the English name for ', latin_terms[i], '?')
+                            {if} answer != correct_answer:
+                                {print}('That is incorrect')
+                                {print}('The correct answer for ', latin_terms[i], ' is ', english_terms[i])
+                                {sleep} 3
+                                clear
+                                points = points - 1
+                        points = points + 1
+                        {print}('Correct!')
 
                     {print}("Congratulations, you've practised all the terms!")
                     {print}('Your score is:', points)
 
                     {if} points == 12:
-                    	{print}('Amazing!')
+                        {print}('Amazing!')
 
                     {if} points <=7:
-                    	{print}('You should study more!')
+                        {print}('You should study more!')
                     {else}:
-                    	{print}('Good job, keep practising!')
+                        {print}('Good job, keep practising!')
                     ```
     hotel:
         name: hotel
@@ -3230,8 +3260,10 @@ adventures:
                     ```
                     animals {is} dog, cow, sheep
                     answer {is} {ask} 'What is your favorite animal?'
-                    {if} answer {is} {in} animals {print} 'Mine too!'
-                    {else} {print} 'My favorite animals are dogs, cows and sheep'
+                    {if} answer {is} {in}
+                    animals {print} 'Mine too!'
+                    {else}
+                    {print} 'My favorite animals are dogs, cows and sheep'
                     ```
     is_command:
         name: '{is}'
@@ -3904,16 +3936,16 @@ adventures:
                     first_time = yes
                     {repeat} 2 {times}
                         {repeat} 2 {times}
-                            {play} C
-                        {play} D
-                        {play} C
+                            call {play} C
+                        call {play} D
+                        call {play} C
                         {if} first_time {is} yes
-                            {play} F
-                            {play} E
+                            call {play} F
+                            call {play} E
                             first_time = no
                         {else}
-                            {play} G
-                            {play} F
+                            call {play} G
+                            call {play} F
                         ```
             15:
                 story_text: |
@@ -4834,8 +4866,10 @@ adventures:
                     ```
                     food_in_stock {is} burger, fries, pancakes, chicken nuggets
                     food {is} {ask} 'What would you like to eat?'
-                    {if} food {is} {in} food_in_stock {print} 'One ' food ' coming up!'
-                    {else} {print} 'Sorry, we do not sell that'
+                    {if} food {is} {in} food_in_stock
+                    {print} 'One ' food ' coming up!'
+                    {else}
+                    {print} 'Sorry, we do not sell that'
                     ```
             7:
                 story_text: |
@@ -4874,15 +4908,20 @@ adventures:
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
                     price = 0
-                    {if} main {is} pizza price = 10
-                    {if} main {is} lasagne price = 12
-                    {if} main {is} spaghetti price = 8
+                    {if} main {is} pizza
+                    price = 10
+                    {if} main {is} lasagne
+                    price = 12
+                    {if} main {is} spaghetti
+                    price = 8
                     {print} 'You have ordered ' main
                     amount = {ask} 'For how many people do you want to order this?'
                     correct_discount = Hedy
                     given_discount = {ask} 'Fill in the discount code here if u know one'
-                    {if} given_discount = correct_discount  price = price / 2
-                    {else} {print} 'Wrong code!'
+                    {if} given_discount {is} correct_discount
+                    price = price / 2
+                    {else}
+                    {print} 'Wrong code!'
                     {print} 'That will be ' price * amount ' dollars, please'
                     {print} 'Thank you, enjoy your meal!'
                     ```
@@ -5037,7 +5076,7 @@ adventures:
                     {for} name {in} names
                         {for} course {in} courses
                             food = {ask} name ', what would you like to eat as your ' course '?'
-                            {print} name ' orders ' food ' as their ' course'
+                            {print} name ' orders ' food ' as their ' course
                     ```
             16:
                 story_text: |
@@ -5060,9 +5099,9 @@ adventures:
                     {print} ('Welcome at McHedy')
                     more = 'yes'
                     {while} more == 'yes':
-                    	order = {input}('What would you like to order?')
-                    	{print} ( order )
-                    	more = {input}('Would you like to order anything else?')
+                        order = {input}('What would you like to order?')
+                        {print} ( order )
+                        more = {input}('Would you like to order anything else?')
                     {print} ('Thank you!')
                     ```
     rock:
@@ -5271,29 +5310,29 @@ adventures:
                     options = ['rock', 'paper', 'scissors']
                     {print}('We will play rock, paper, scissors')
                     {while} won == 'no':
-                    	your_choice = {input}('What do you choose?')
-                    	computer_choice = options[random]
-                    	{print} ('you chose ',  your_choice)
-                    	{print} ('the computer chose ',  computer_choice)
-                    	{if} computer_choice == your_choice:
-                        	{print} ('Tie!')
-                    	{if} computer_choice == 'rock' {and} your_choice == 'scissors':
-                        	{print} ('You lose!')
-                    	{if} computer_choice == 'rock' {and} your_choice == 'paper':
-                        	{print} ('You win!')
-                        	won = 'yes'
-                    	{if} computer_choice == 'paper' {and} your_choice == 'rock':
-                        	{print} ('You lose!')
-                    	{if} computer_choice == 'paper' {and} your_choice == 'scissors':
-                        	{print} ('You win!')
-                        	won = 'yes'
-                    	{if} computer_choice == 'scissors' {and} your_choice == 'paper':
-                        	{print} ('You lose!')
-                    	{if} computer_choice == 'scissors' {and} your_choice == 'rock':
-                        	{print} ('You win!')
-                        	won = 'yes'
-                    	round = round + 1
-                    	{sleep} 1
+                        your_choice = {input}('What do you choose?')
+                        computer_choice = options[random]
+                        {print} ('you chose ',  your_choice)
+                        {print} ('the computer chose ',  computer_choice)
+                        {if} computer_choice == your_choice:
+                            {print} ('Tie!')
+                        {if} computer_choice == 'rock' {and} your_choice == 'scissors':
+                            {print} ('You lose!')
+                        {if} computer_choice == 'rock' {and} your_choice == 'paper':
+                            {print} ('You win!')
+                            won = 'yes'
+                        {if} computer_choice == 'paper' {and} your_choice == 'rock':
+                            {print} ('You lose!')
+                        {if} computer_choice == 'paper' {and} your_choice == 'scissors':
+                            {print} ('You win!')
+                            won = 'yes'
+                        {if} computer_choice == 'scissors' {and} your_choice == 'paper':
+                            {print} ('You lose!')
+                        {if} computer_choice == 'scissors' {and} your_choice == 'rock':
+                            {print} ('You win!')
+                            won = 'yes'
+                        round = round + 1
+                        {sleep} 1
                     {print}('Congratulations, you won from the computer in ', round, ' tries.')
                     ```
     rock_2:
@@ -5581,7 +5620,7 @@ adventures:
                         {play} note
                         {print} ""
                         {sleep} 2
-                        ```
+                    ```
             13:
                 story_text: |
                     Now that we are using Python syntax, the songs you've coded before will need Python syntax too!
@@ -7079,29 +7118,29 @@ adventures:
                     ```
                     distance = 5
                     {while} distance < 200
-                    	distance = distance + 5
-                    	{forward} distance
-                    	{turn} 90
+                        distance = distance + 5
+                        {forward} distance
+                        {turn} 90
                     ```
 
                     ```
                     {def} draw_a_square(side):
-                    	{for} i {in} {range}(1,4):
-                        	{forward} side
-                        	{turn} 90
+                        {for} i {in} {range}(1,4):
+                            {forward} side
+                            {turn} 90
 
                     i = 100
                     {while} i > 1
-                    	draw_a_square(i)
-                    	{turn} 10
-                    	i = i - 3
+                        draw_a_square(i)
+                        {turn} 10
+                        i = i - 3
                     ```
 
                     ```
                     distance = 150
                     {for} i {in} {range}(1, 50):
-                    	{forward} distance
-                    	{turn} 143
+                        {forward} distance
+                        {turn} 143
                     ```
     turtle_draw_it_2:
         name: draw more!
