@@ -2222,9 +2222,9 @@ adventures:
                 example_code: |
                     ``
                     svar = 0
-                    {while} svar != 25
-                        svar = {ask} 'Vad är 5 gånger 5?'
-                    {print} 'Ett korrekt svar har getts'
+                    {while} svar != 25:
+                        svar = {input}('Vad är 5 gånger 5?')
+                    {print}('Ett korrekt svar har getts')
                     ```
     years:
         name: Nyårsdagen

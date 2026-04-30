@@ -236,6 +236,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'songs_2',
         'turtle',
         'turtle_draw_it',
+        'turtle_draw_it_2',
         'debugging',
         'hospital',
         'congratulations'
@@ -250,7 +251,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'story',
         'songs',
         'quizmaster',
-        'turtle_draw_it',
         'debugging',
         'hospital'
     ],
@@ -259,6 +259,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
          'for_command',
          'haunted',
          'songs',
+         'turtle_draw_it',
          'language',
          'debugging',
          'hospital'
@@ -269,6 +270,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'music_2',
         'functions_2',
         'songs',
+        'turtle_draw_it_2',
         'music_3',
         'hotel',
         'functions_3',

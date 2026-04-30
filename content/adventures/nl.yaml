@@ -675,7 +675,7 @@ adventures:
                 example_code: |
                     ```
                     opties = 1, 2, 3, 4, 5, 6
-                    {print} 'Gooi 6 in zo min mogelijk beurten!'
+                    {print}('Gooi 6 in zo min mogelijk beurten!')
                     gegooid = 0
                     pogingen = 0
                     _
@@ -1506,11 +1506,6 @@ adventures:
                     * Op de 14e dag van elke maand: de batterijen van de brandalarm controleren
                     * Elke dag in de wintermaanden: de verwarming aanzetten
                     * Elke dag in de zomermaanden: de airconditioning aanzetten
-                example_code: |
-                    Het programma moet zo eindigen:
-                      ```
-                      maak_takenlijst(dag, maand, datum)
-                      ```
             15:
                 story_text: |
                     Na de operatie kunnen onze patiënten soms veel pijn ervaren. In die gevallen kan aan onze patiënten een morfinepomp worden gegeven. Zo kunnen ze zelf wat morfine toedienen als ze pijn hebben.
@@ -1938,12 +1933,12 @@ adventures:
                     Maak dit liedje zonder einde af.
                 example_code: |
                     ```
-                    {define} lied
+                    {def} lied
                         {play} _
 
-                    ja_of_nee = {ask} 'Wil je mijn liedje zonder einde horen?'
-                    {while} ja_of_nee = 'ja'
-                        {call} lied
+                    ja_of_nee = {input}('Wil je mijn liedje zonder einde horen?')
+                    {while} ja_of_nee = 'ja':
+                        lied()
                         {print} '🥳'
                     ```
     music_2:
@@ -3473,7 +3468,7 @@ adventures:
                 example_code: |
                     ```
                     antwoord = 0
-                    {while} antwoord != 25
-                        antwoord = {ask} 'Wat is 5 keer 5?'
-                    {print} 'Je hebt een correct antwoord gegeven'
+                    {while} antwoord != 25:
+                        antwoord = {input}('Wat is 5 keer 5?')
+                    {print}('Je hebt een correct antwoord gegeven')
                     ```

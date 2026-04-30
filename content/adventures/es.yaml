@@ -1449,7 +1449,7 @@ adventures:
                 story_text: "¡En este nivel aprenderás a como utilizar el comando `{play}` para tocar una nota!\n\nEscribe `{play}` seguido de la nota que quieras tocar. La escala es C-D-E-F-G-A-B.\nComo puedes ver hay 7 letras diferentes, pero podemos tocar más que solo 7 notas.\nEscribe un número entre 0 y 9 detras de la letra para elegir la escala, por ejemplo, después de B4 viene C5.\nC0 es la nota más grave que puedes tocar, B9 es la más aguda.\n\n### Ejercicio\n¡Prueba el código de ejemplo y después juega con él! ¿Puedes crear tu propia melodía?\nEn el siguiente nivel aprenderás a como tocar algunas canciones existentes."
             16:
                 story_text: "**Precaución** ¡Esta aventura puede ser extremadamente molesta!\nTambién podemos utilizar el comando {while} para repetir una canción para siempre.\n\n### Ejercicio\nCompleta la canción interminable.\n"
-                example_code: "```\n{define} cancion\n    {play} _\n\nsi_o_no = {ask} '¿Quieres oír mi canción interminable?'\n{while} si_o_no = 'sí'\n    {call} cancion\n    {print} '🥳'\n```\n"
+                example_code: "```\n{def} cancion\n    {play} _\n\nsi_o_no = {input}('¿Quieres oír mi canción interminable?')\n{while} si_o_no = 'sí':\n    cancion()\n    {print} '🥳'\n```\n"
     parrot:
         name: Loro
         default_save_name: Loro
@@ -2747,9 +2747,9 @@ adventures:
                 example_code: |
                     ```
                     respuesta = 0
-                    {while} respuesta != 25
-                        respuesta = {ask} '¿Cuánto es 5 veces 5?'
-                    {print} 'La respuesta es correcta'
+                    {while} respuesta != 25:
+                        respuesta = {input}('¿Cuánto es 5 veces 5?')
+                    {print}('La respuesta es correcta')
                     ```
         description: '{while}'
         name: '{while}'
