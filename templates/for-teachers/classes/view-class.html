@@ -1,8 +1,13 @@
 {% extends "auth.html" %}
 {% block regular_content %}
-<div class="flex flex-col gap-10">
-    <h1 class="md:px-16 my-5"> {{ _class.name }} </h1>
-    <div class="flex flex-row gap-4 md:px-16">
+<div class="flex flex-col gap-10  px-4 md:px-16">
+    {% from 'incl/breadcrumb.html' import breadcrumb %}
+    {{ breadcrumb([
+        {'label': _('classes'), 'url': '/for-teachers/class/all'},
+        {'label': _class.name}
+    ], wrapper_class='mt-2 -mb-4') }}
+    <h1 class="my-5" style="overflow-wrap: anywhere;"> {{ _class.name }} </h1>
+    <div class="flex flex-row gap-4">
         <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md px-10 rounded-lg w-full p-8">
             <h2 class="m-0 basis-1/12"><a href="/for-teachers/redesign/class/{{ _class.id }}/graph">{{ _('performance_graph') }}</a></h2>
             <div class="text-black basis-10/12">
@@ -11,7 +16,7 @@
         </div>
     </div>
 
-    <div class="flex flex-row gap-4 md:px-16">
+    <div class="flex flex-row gap-4">
         <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md px-10 rounded-lg w-full p-8">
             <h2 class="m-0 basis-1/12"><a href="/for-teachers/redesign/class/{{ _class.id }}/grade">{{ _('grading') }}</a></h2>
             <div class="text-black basis-10/12">
@@ -20,7 +25,7 @@
         </div>
     </div>
 
-    <div class="flex flex-row gap-4 md:px-16">
+    <div class="flex flex-row gap-4">
         <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md px-10 rounded-lg w-full p-8">
             <h2 class="m-0 basis-1/12"><a href="/for-teachers/redesign/class/{{ _class.id }}/manage">{{ _('manage_students') }}</a></h2>
             <div class="text-black basis-10/12">
@@ -29,20 +34,31 @@
         </div>
     </div>
 
-    <div class="flex flex-row gap-4 md:px-16">
+    <div class="flex flex-row gap-4">
         <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md px-10 rounded-lg w-full p-8">
-            <h2 class="m-0 basis-1/12"><a href="/for-teachers/class/all">{{ _('configure') }}</a></h2>
+            <h2 class="m-0 basis-1/12"><a href="/for-teachers/redesign/class/{{ _class.id }}/configure">{{ _('configure') }}</a></h2>
             <div class="text-black basis-10/12">
                 <p>{{ _('configure_class_info') }}</p>
             </div>
         </div>
     </div>
 
-    <div class="flex flex-col md:px-16 gap-3">
+    <div class="flex flex-col gap-3">
         <h2>{{ _('danger_zone') }}</h2>
         <div class="flex flex-col gap-5">
             <button class="green-btn-new w-fit">{{ _('archive_class') }}</button>
-            <button class="red-btn-new w-fit">{{_('delete_class') }}</button>
+            <button
+                type="button"
+                class="red-btn-new w-fit"
+                data-cy="delete_class"
+                data-confirm-modal="redesign"
+                data-confirm-button-class="red-btn-new"
+                data-confirm-button-label="{{_('delete')}}"
+                hx-confirm="{{_('delete_class_prompt')}}"
+                hx-delete="/for-teachers/class/{{ _class.id }}"
+                hx-swap="none"
+                hx-on::after-request="if (event.detail.successful) { window.location.href='/for-teachers/class/all'; }"
+            >{{_('delete_class') }}</button>
         </div>
     </div>
 </div>

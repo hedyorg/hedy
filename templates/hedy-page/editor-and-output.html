@@ -136,20 +136,20 @@
   </div>
   <!-- Col 2: run button (move below editor in single-column layout), level buttons -->
   <div class="order-2 lg:order-3" id="code_related_buttons">
-    <div id="button_row" class="flex flex-row gap-2 mb-4">
-      <div id="run_button_container" class="gap-2 flex flex-row flex-initial">
+    <div id="button_row" class="flex flex-wrap items-start gap-2 mb-4">
+      <div id="run_button_container" class="gap-2 flex flex-wrap flex-initial w-full sm:w-auto">
           <button id="runit" data-cy="runit" class="green-btn-new" title="{{_('run_code_button')}}" data-loading disabled onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "run")'>
             <span class="fa fa-play ltr:mr-1 rtl:ml-1"></span>
             <span>{{_('run_code_button')}}</span>
           </button>
           <button id="stopit" data-cy="stopit" class="red-btn-new" title="{{_('stop_code_button')}}" onclick="hedyApp.stopit()" style="display: none;">{{_('stop_code_button')}}</button>
-          <div class="flex-1 md:hidden"></div>
+          <div class="hidden sm:block flex-1"></div>
           <button id="debug_button" class="blue-btn-new" title="{{_('debug')}}" data-loading disabled onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
               <span class="fa fa-bug ltr:mr-1 rtl:ml-1"></span>
               {{_('debug')}}
            </button>
       </div>
-      <div id="debug_container" class="flex-initial gap-2 inline-flex items-center">
+      <div id="debug_container" class="flex-initial gap-2 inline-flex flex-wrap items-center w-full sm:w-auto">
           <button id="debug_restart" class="green-btn-new hidden" title="{{_('restart')}}" onclick='hedyApp.runit({{ level }}, "{{ g.lang }}", {% if raw %}{{raw | lower}}{% else %}false{% endif %}, {{_('already_program_running')|default(None)|tojson}}, "debug")'>
             <span class="fa fa-repeat ltr:mr-1 rtl:ml-1"></span>
             <span class="inline-flex lg:hidden xl:inline-flex" >{{_('restart')}}</span>
@@ -163,7 +163,7 @@
             <span class="inline-flex	 lg:hidden xl:inline-flex">{{_('continue')}}</span>
         </button>
       </div>
-      <div class="flex-1"></div>
+      <div class="hidden md:block flex-1"></div>
       {% if username and current_user_is_in_class %}
         <button class="blue-btn-new w-fit" id="hand_in" title="{{_('hand_in')}}" _="on click remove .hidden from #share_modal" data-loading disabled >
           <i class="fa-solid fa-paper-plane ltr:mr-1 rtl:ml-1"></i>
@@ -181,7 +181,7 @@
         {{ _('outdated_class_warning') }}
       </div>
     {% endif %}
-    <div class="flex justify-between gap-2 items-start overflow-visible">
+    <div class="flex flex-wrap sm:flex-nowrap justify-start sm:justify-between gap-2 items-start overflow-visible">
       <div id="saveMicrobitFilesContainer" {% if not microbit_feature %} class="hidden" {% endif %} >
         <button id="runMicrobit" class="green-btn-new" onclick="hedyApp.saveMicrobit({{ level }});" > {{ _('Save Microbit code ') }}
             <img src="{{ static('/images/microbit_logo_icon_248480.png') }}" style="width: 25px; height: 25px; margin-left: 1px; display: inline;" alt=""/>
