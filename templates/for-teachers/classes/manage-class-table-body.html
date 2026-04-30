@@ -6,7 +6,7 @@
 </tr>
 {% else %}
 {% for student in students %}
-<tr>
+<tr data-cy="manage_student_row_{{ student.username }}">
 <td class="py-2.5 px-2 sm:px-4 text-center whitespace-nowrap {% if loop.last %} rounded-b-lg {% endif %}">
     {{ student.username }}
 </td>
@@ -19,7 +19,7 @@
 </td>
 <td class="py-2.5 px-2 sm:px-4 text-center {% if loop.last %} rounded-b-lg {% endif %}">
     <div class="relative inline-block text-left" name="menu">
-    <button type="button" class="blue-btn-new p-1 sm:p-1.5 flex justify-center rounded-full"
+    <button type="button" class="blue-btn-new p-1 sm:p-1.5 flex justify-center rounded-full" data-cy="manage_student_actions_{{ student.username }}"
             _="on click
             remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
             add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
@@ -35,20 +35,20 @@
             >
         <i class="fa-solid fa-ellipsis"></i>
     </button> 
-    <div id="menu-{{loop.index}}" class="hidden
-        {# For the last 5 elements we display the menu from the bottom up #}
-        {% if (teacher_classes|length > 7) and (loop.index >=  teacher_classes|length - 4)%}
+    <div id="menu-{{loop.index}}" data-cy="manage_student_menu_{{ student.username }}" class="hidden
+        {# Open upward for the last rows so the menu stays within the table viewport. #}
+        {% if loop.revindex <= 2 %}
         bottom-10
         {% endif %}
     z-30 menu origin-top-left absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
         <ul class="list-none divide-y divide-gray-200 p-2">
         {% if not student.is_invite %}
-        <li class="px-6 py-3 cursor-pointer hover:bg-gray-200 active:bg-gray-400  rounded-t-lg  text-blue-900 ease-in transition duration-100" {% if not student.is_invite %} onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}}, {{_('reset_password')|default(None)|tojson}})' {% endif %}>
+        <li data-cy="reset_student_password_{{ student.username }}" class="px-6 py-3 cursor-pointer hover:bg-gray-200 active:bg-gray-400  rounded-t-lg  text-blue-900 ease-in transition duration-100" {% if not student.is_invite %} onclick='hedyApp.change_password_student("{{student.username}}", {{_('enter_password')|default(None)|tojson}}, {{_('password_change_prompt')|default(None)|tojson}}, {{_('reset_password')|default(None)|tojson}})' {% endif %}>
             <i class="fa-solid fa-key text-sm"></i>
             <span class="m-3">{{ _('reset_password') }}</span>
         </li>
         {% endif %}
-        <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4"
+        <li data-cy="remove_student_{{ student.username }}" class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100 gap-4"
             hx-get="/for-teachers/redesign/class/{{ class_info['id'] }}/manage/remove_student_modal/{{ student.username }}?is_invite={{ student.is_invite | int }}" 
             hx-target="#modal_target"
             hx-swap="innerHTML"

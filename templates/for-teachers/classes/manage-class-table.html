@@ -3,7 +3,7 @@
     {% set sort_val = sort_orders.get(field) if sort_orders else None %}
   <th class="py-2 px-2 sm:px-4 text-center  font-medium text-gray-700 uppercase tracking-wider min-w-28 sm:min-w-36 {% if field == 'student' %} rounded-t-lg {% endif %}">
         {{ _(label) }}
-        <button class="ml-2" type="submit"
+        <button class="ml-2" type="submit" data-cy="sort_{{ field }}"
             _="on click
                 if #{{ field }}-sort matches .fa-sort then
                     remove .fa-sort from #{{ field }}-sort

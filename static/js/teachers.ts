@@ -981,6 +981,35 @@ export function initializePerformanceGraphPage() {
   initializeGraph(true);
 }
 
+export function loadPerformanceGraphPrograms(usernames: string[], level: number | string, isRedesign: boolean = false) {
+  document.getElementById('programs_container')?.classList.remove('hidden')
+
+  if (isRedesign) {
+    htmx.ajax(
+      'GET',
+      '/for-teachers/redesign/get_student_programs',
+      {
+        target: '#programs_container',
+        values: {
+          usernames,
+          level: level.toString(),
+        },
+      },
+    )
+    return;
+  }
+
+  if (usernames.length === 0) {
+    return;
+  }
+
+  htmx.ajax(
+    'GET',
+    `/for-teachers/get_student_programs/${usernames[0]}`,
+    '#programs_container'
+  )
+}
+
 interface InitializeGraphOptions {
   readonly graph_students: student[];
   readonly level: number
@@ -1091,32 +1120,12 @@ export function initializeGraph(is_redesign: boolean = false) {
         },
         onClick: (_e, activePoints, chart) => {
           if (activePoints.length === 0) return;
-          const item: dataPoint = chart.data.datasets[0].data[activePoints[0].index] as dataPoint
           let usernames: string[] = []
           for(const point of activePoints) {
             const item: dataPoint = chart.data.datasets[0].data[point.index] as dataPoint
             usernames.push(item.name)
           }
-          document.getElementById('programs_container')?.classList.remove('hidden')
-          if (is_redesign) {
-            htmx.ajax(
-              'GET',
-              `/for-teachers/redesign/get_student_programs`,
-              {
-                target: '#programs_container',
-                values: {
-                  'usernames': usernames,
-                  'level': graphData.level.toString()
-                }
-              },
-            )
-          } else {
-            htmx.ajax(
-              'GET',
-              `/for-teachers/get_student_programs/${item.name}`,
-              '#programs_container'
-            )
-          }
+          loadPerformanceGraphPrograms(usernames, graphData.level, is_redesign)
         },
         scales: {
           x: {
@@ -1361,6 +1370,32 @@ export function add_user_to_invite_list(username: string, button: HTMLButtonElem
 
 export interface InitializeContextMenuPageOptions {
   readonly page: 'classes' | 'manage-students';
+}
+
+const contextMenuOpenDownClasses = ['top-full', 'mt-1', 'origin-top-right'];
+const contextMenuOpenUpClasses = ['bottom-full', 'mb-1', 'origin-bottom-right'];
+
+function applyContextMenuDirection(menu: HTMLElement, direction: 'up' | 'down') {
+  menu.classList.remove(...contextMenuOpenDownClasses, ...contextMenuOpenUpClasses);
+  menu.classList.add(...(direction === 'up' ? contextMenuOpenUpClasses : contextMenuOpenDownClasses));
+}
+
+export function positionContextMenu(button: HTMLElement) {
+  const menuContainer = button.closest('[name="menu"]');
+  const menu = menuContainer?.querySelector('div[id^="menu-"]') as HTMLElement | null;
+  if (!menu) {
+    return;
+  }
+
+  applyContextMenuDirection(menu, 'down');
+
+  const buttonRect = button.getBoundingClientRect();
+  const menuHeight = menu.offsetHeight || menu.scrollHeight;
+  const spaceBelow = window.innerHeight - buttonRect.bottom;
+  const spaceAbove = buttonRect.top;
+  const shouldOpenUp = menuHeight > spaceBelow && spaceAbove > spaceBelow;
+
+  applyContextMenuDirection(menu, shouldOpenUp ? 'up' : 'down');
 }
 
 export function initializeContextMenuEventHandler(_options: InitializeContextMenuPageOptions) {

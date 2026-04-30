@@ -1565,7 +1565,7 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def get_remove_student_modal_redesign(self, user, class_id, student_id):
         is_invite = request.args.get('is_invite', type=int)
-        Class = self.db.get_class(session['class_id'])
+        Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 

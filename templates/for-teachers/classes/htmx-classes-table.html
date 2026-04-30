@@ -1,6 +1,6 @@
-<div class="overflow-x-auto h-full" id="classes_table">
-  <div class="w-full h-full mb-48">
-    <div class="w-full h-full border rounded-lg shadow-md">
+<div class="overflow-visible h-full" id="classes_table">
+  <div class="w-full h-full mb-8">
+    <div class="w-full h-full border rounded-lg shadow-md overflow-visible">
       <table class="w-full divide-y divide-gray-400">
         <thead class="bg-gray-200 divide-y divide-gray-400">
           <tr>
@@ -30,6 +30,7 @@
                         add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
                         if #menu-{{loop.index}} matches .hidden
                           remove .hidden from #menu-{{loop.index}}
+                          call hedyApp.positionContextMenu(me)
                           wait 10ms
                           toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
                         else
@@ -40,12 +41,7 @@
                         >
                   <i class="fa-solid fa-ellipsis"></i>
                 </button> 
-                <div id="menu-{{loop.index}}" class="hidden
-                  {# For the last 5 elements we display the menu from the bottom up #}
-                  {% if (teacher_classes|length > 7) and (loop.index >=  teacher_classes|length - 4)%}
-                    bottom-10
-                  {% endif %}
-                z-30 menu origin-top-left absolute right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
+                <div id="menu-{{loop.index}}" class="hidden z-30 menu origin-top-right absolute top-full right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
                   <ul class="list-none divide-y divide-gray-200 p-2">
                     <a href="/for-teachers/redesign/class/{{class.id}}/grade" class="no-underline  text-blue-900">
                       <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100">
