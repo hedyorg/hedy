@@ -1814,12 +1814,12 @@ adventures:
                     Vervollständige das Lied-das-niemals-endet.
                 example_code: |
                     ```
-                    {define} lied
+                    {def} lied
                         {play} _
 
-                    ja_oder_nein = {ask} 'Willst du mein Lied-das-niemals-endet hören?'
-                    {while} ja_oder_nein = 'ja'
-                        {call} song
+                    ja_oder_nein = {input}('Willst du mein Lied-das-niemals-endet hören?')
+                    {while} ja_oder_nein = 'ja':
+                        lied()
                         {print} '🥳'
                     ```
     parrot:
@@ -3089,7 +3089,7 @@ adventures:
         levels:
             16:
                 story_text: "Wir lernen jetzt eine neue Schleife, die `{while}` Schleife! Wir bleiben in der Schleife, so lange bis die Aussage wahr ist.\nDeswegen - vergiss nicht, den Wert in der Schleife zu verändern.\n\nIm Beispiel Code bleiben wir in der Schleife, bis eine richtige Antwort gegeben wurde.\nFalls die richtige Antwort nie gegeben wird, endet die Schleife nie!"
-                example_code: "```\nantwort = 0\n{while} antwort != 25\n    antwort = {ask} 'Was ist 5 mal 5?'\n{print} 'Eine richtige Antwort wurde gegeben'\n```\n"
+                example_code: "```\nantwort = 0\n{while} antwort != 25:\n    antwort = {input}('Was ist 5 mal 5?')\n{print}('Eine richtige Antwort wurde gegeben')\n```\n"
         default_save_name: solange_Befehl
         name: '{while}'
     and_or_command:

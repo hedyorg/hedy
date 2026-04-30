@@ -676,9 +676,9 @@ adventures:
                 example_code: |
                     ```
                     risposta = 0
-                    {while} risposta != 25
-                        risposta = {ask} 'Quanto fa 5 per 5?'
-                    {print} 'La risposta é corretta'
+                    {while} risposta != 25:
+                        risposta = {input}('Quanto fa 5 per 5?')
+                    {print}('La risposta é corretta')
                     ```
     years:
         name: Anno nuovo

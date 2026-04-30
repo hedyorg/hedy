@@ -1408,7 +1408,7 @@ adventures:
                 story_text: "Pots programar música per diversió, però també pots fer servir les notes musicals per fer alguna cosa tan útil com una alarma d'incendi!\n\n### Exercici\nAssegura't que l'alarma sona quan hi ha un incendi!\n"
             16:
                 story_text: "**Avís** Aquesta aventura pot arribar a ser extremadament molesta!  \nTambé podem utilitzar la comanda `{while}` per repetir una cançó infinitament.\n\n### Exercici  \nAcaba la cançó interminable.\n"
-                example_code: "```\n{define} cançó\n    {play} _\n\nsi_o_no = {ask} \"Vols sentir la cançó que mai s'acaba?\"\n{while} si_o_no = \"sí\"\n    cançó()\n    {print} \"🥳\"\n```\n"
+                example_code: "```\n{def} cançó\n    {play} _\n\nsi_o_no = {input}(\"Vols sentir la cançó que mai s'acaba?\")\n{while} si_o_no = \"sí\":\n    cançó()\n    {print} \"🥳\"\n```\n"
             10:
                 story_text: "A partir d'aquest nivell pots, entre altres coses, utilitzar una comanda `{repeat}` dins d'una altra comanda `{repeat}`.  \nAixò fa que cançons com \"Moltes felicitats\" siguin encara més curtes!\n\n### Exercici\nAcaba la cançó!\n"
                 example_code: "```\nprimer_cop = si\n{repeat} 2 {times}\n    {repeat} 2 {times}\n        {play} C\n    {play} D\n    {play} C\n    {if} primer_cop {is} si\n        {play} F\n        {play} E\n        primer_cop {is} no\n    {else}\n        _\n```\n"
@@ -1720,7 +1720,7 @@ adventures:
         levels:
             16:
                 story_text: "Aprendrem un nou bucle, el bucle `{while}`! Continuem el bucle mentre la declaració sigui certa.\nAixí que no oblidis canviar el valor dins del bucle.\n\nEn el codi d'exemple, continuem fins que s'hagi donat una resposta correcta.\nSi mai es dóna la resposta correcta, el bucle mai acaba!"
-                example_code: "```\nresposta = 0\n{while} resposta != 25\n    resposta = {ask} \"Quan fa 5 per 5?\"\n{print} \"La resposta donada és correcte\"\n```\n"
+                example_code: "```\nresposta = 0\n{while} resposta != 25:\n    resposta = {input}(\"Quan fa 5 per 5?\")\n{print}(\"La resposta donada és correcte\")\n```\n"
     and_or_command:
         name: '{and} i {or}'
         default_save_name: i_o_command
@@ -1763,7 +1763,6 @@ adventures:
                 story_text: "El nostre hospital no només té molts pacients, sinó també molt personal. Cada membre del personal necessita una credencial que indiqui la seva informació.\nPots fer un programa perquè un nou empleat pugui omplir la seva informació i rebre una credencial impresa?\n### Exercici\nEl programa ha de:\n* Donar la benvinguda al nou empleat\n* Preguntar-li el seu títol, nom, cognom, data de naixement, lloc de naixement, funció, departament i número de personal.\n* Agrair al nou empleat i dir-li que la seva credencial s'imprimirà aviat.\n* Fer una pausa al programa durant 2 segons.\n* Imprimir el títol, nom i cognom.\n* Imprimir la data de naixement i el lloc de naixement.\n* Imprimir la funció i el departament.\n* Imprimir el número de personal.\n"
             14:
                 story_text: "Els nostres conserges tenen una llista gran de tasques. Algunes tasques es fan cada dia, altres en un dia, estació o data determinats. Això és molt confús i porta a situacions en què algunes tasques s'obliden.\nPots ajudar escrivint un programa que imprimeixi la llista de tasques correcta per a aquest dia?\n### Exercici\nEl programa ha de:\n* Desitjar bon dia al conserge.\n* Preguntar al conserge quin dia de la setmana és, quin mes i quin dia del mes.\n* Imprimir la llista de tasques correcta per a aquest dia.\nLes tasques que s'han de fer:\n* Tasques diàries: fregar el terra, netejar els lavabos, obrir les cortines\n* Dilluns i dijous: regar les plantes\n* Dimarts i divendres: fregar els sostres\n* Dissabtes: rentar la màquina de cafè\n* El primer de cada mes: rentar les finestres\n* El 7 de cada mes: omplir les màquines expenedores\n* El 14 de cada mes: comprovar les bateries dels detectors d'incendis\n* Cada dia durant els mesos d'hivern: engegar les escalfadores\n* Cada dia durant els mesos d'estiu: engegar l'aire condicionat\n"
-                example_code: "El programa ha d'acabar així:\n  ```\n  _ El programa ha d'acabar així _\n  llista_tasques(dia, mes, any)\n  ```\n"
             1:
                 story_text: "Benvingut a l'Aventura de l'Hospital. En aquesta aventura ajudaràs el director d'un hospital a solucionar alguns problemes que ocorren al seu hospital. Aquesta és la teva primera tasca:\n\nHi ha una cua horriblement llarga a la nostra recepció i l'empleat està molt ocupat. Podries ajudar aquest empleat programant un quiosc d'autoregistre?\n### Exercici\nEl quiosc d'autoregistre ha de:\n* Donar la benvinguda al pacient\n* Demanar el seu nom i repetir-lo\n* Demanar la seva data de naixement i repetir-la\n* Preguntar en quin departament té la seva cita\n* Preguntar amb quin metge té la seva cita\n* Agrair al pacient per registrar-se amb èxit\n* Dir al pacient que esperi assegut a la sala d'espera\n"
             15:

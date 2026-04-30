@@ -686,7 +686,7 @@ adventures:
                 example_code: |
                     ```
                     options = 1, 2, 3, 4, 5, 6
-                    {print} 'Баци 6 што брже можеш!'
+                    {print}('Баци 6 што брже можеш!')
                     thrown = 0
                     tries = 0
                     _
@@ -1506,12 +1506,12 @@ adventures:
                     Завршите бескрајну песму.
                 example_code: |
                     ```
-                    {define} song
+                    {def} song
                         {play} _
 
-                    yes_or_no = {ask} 'Да ли желите да чујете моју бескрајну песму?'
-                    {while} yes_or_no = 'да'
-                        {call} song
+                    yes_or_no = {input}('Да ли желите да чујете моју бескрајну песму?')
+                    {while} yes_or_no = 'да':
+                        song()
                         {print} '🥳'
                     ```
     parrot:
@@ -2853,9 +2853,9 @@ adventures:
                 example_code: |
                     ```
                     одговор = 0
-                    {while} одговор != 25
-                        одговор = {ask} 'Колико је 5 пута 5?'
-                    {print} 'Дат је тачан одговор'
+                    {while} одговор != 25:
+                        одговор = {input}('Колико је 5 пута 5?')
+                    {print}('Дат је тачан одговор')
                     ```
         name: '{while}'
         description: '{while}'
