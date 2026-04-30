@@ -2582,12 +2582,9 @@ adventures:
                 example_code: |
                     ```
                     réponse = 0
-                    {while} réponse != 25
-                        réponse = {ask} "Combien font 5 fois 5 ?"
-                    {print} "Une réponse correcte a été donnée"
+                    {while} réponse != 25:
+                        réponse = {input}("Combien font 5 fois 5 ?")
+                    {print}("Une réponse correcte a été donnée")
                     ```
-
-                        réponse = {ask} "Combien font 5 fois 5 ?"
-                    {print} "Une réponse correcte a été donnée"
     years:
         levels: {}
