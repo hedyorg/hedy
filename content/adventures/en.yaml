@@ -649,16 +649,37 @@ adventures:
                     {print} 'Great job! Your score is... ' score ' out of 10!'
                     ```
                 answer_code: |
+                    Exercise 1
                     ```
-                    numbers = 1, 2, 3
-                    {for} number_1 {in} numbers
-                        {for} number_2 {in} numbers
-                            answer = {ask} "How much is " number_1 " times " number_2
-                            correct = number_1 * number_2
-                            {if} answer {is} correct
-                                {print} 'Great job!'
-                            {else}
-                                {print} 'That is wrong. The right answer is ' correct
+                    score = 0
+                    {repeat} 10 {times}
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct_answer = number_1 * number_2
+                        {print} 'What is ' number_1 ' times ' number_2 '?'
+                        answer = {ask} 'Type your answer here...'
+                        {print} 'Your answer is ' answer
+                        {if} answer {is} correct_answer
+                            score = score + 1
+                    {print} 'Great job! Your score is... ' score ' out of 10!'
+                    ```
+                    Exercise 2
+                    ```
+                    score = 0
+                    {repeat} 10 {times}
+                        numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        number_1 = numbers {at} {random}
+                        number_2 = numbers {at} {random}
+                        correct_answer = number_1 * number_2
+                        {print} 'What is ' number_1 ' times ' number_2 '?'
+                        answer = {ask} 'Type your answer here...'
+                        {print} 'Your answer is ' answer
+                        {if} answer {is} correct_answer
+                            score = score + 1
+                        {else}
+                            {print} 'Wrong! The correct answer is ' correct_answer
+                    {print} 'Great job! Your score is... ' score ' out of 10!'
                     ```
             11:
                 story_text: |
