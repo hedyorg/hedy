@@ -2577,9 +2577,9 @@ adventures:
                 example_code: |
                     ```
                     answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
+                    {while} answer != 25:
+                        answer = {input}('What is 5 times 5?')
+                    {print}('A correct answer has been given')
                     ```
     years:
         levels: {}

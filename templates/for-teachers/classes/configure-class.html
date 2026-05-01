@@ -1,0 +1,102 @@
+{% extends "auth.html" %}
+{% block regular_content %}
+{% from 'incl/breadcrumb.html' import breadcrumb %}
+<div class="flex flex-col px-4 md:px-16">
+
+	{{ breadcrumb([
+		{'label': _('classes'), 'url': '/for-teachers/class/all'},
+		{'label': class_info.name, 'url': '/for-teachers/redesign/class/' ~ class_info.id},
+		{'label': _('configure')}
+	]) }}
+	<h1 style="overflow-wrap: anywhere;">
+		{{ class_info.name }}
+		<i class="fa-solid fa-pencil cursor-pointer text-2xl mx-2"
+		data-class-id="{{ class_info.id }}"
+		data-prompt="{{ _('rename_class_prompt') }}"
+		data-title="{{ _('rename_class') }}"
+		onclick="hedyApp.rename_class(this.dataset.classId, this.dataset.prompt, this.dataset.title)"
+		title="{{ _('rename_class') }}">
+	</i>
+	</h1>
+	<h2 class="text-4xl mt-3">{{ _('configure_class') }}</h2>
+	
+		<div class="flex flex-col gap-16 mt-5 bg-white border border-gray-300 p-5 rounded-lg">
+			<section class="flex flex-col gap-4">
+				<div class="flex items-center gap-2">
+					<h3 class="m-0 text-2xl">{{ _('available_levels') }}</h3>
+				</div>
+				<form id="configure_class" onsubmit="event.preventDefault(); hedyApp.save_customizations_levels('{{class_info.id}}')">
+					<div class="flex flex-wrap gap-x-4 gap-y-3">
+						{% for level in range(1, max_level + 1) %}
+						<label class="flex flex-col items-center gap-1 text-sm text-blue-900">
+							<span class="font-semibold">{{ level }}</span>
+							<span class="switch">
+								<input type="checkbox" id="enable_level_{{ level }}"
+									  {% if customizations and level in customizations['levels'] %}checked{% endif %}
+								   onchange="hedyApp.enable_level({{level}})"
+								   data-level="{{ level }}"
+								   level="{{ level }}"
+								>
+								<span class="slider round"></span>
+							</span>
+						</label>
+						{% endfor %}
+					</div>
+				</form>
+			</section>
+	
+			<section class="flex flex-col gap-4">
+				<h3 class="m-0 text-2xl">{{ _('customize_levels') }}</h3>
+				<div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+					<label for="customize_level" class="text-base">{{ _('level_title') }}</label>
+					<select id="customize_level" class="border border-gray-400 rounded px-3 py-2 w-full sm:w-56">
+						{% for level in range(1, 17) %}
+						<option value="{{ level }}">{{ _('level_title') }} {{ level }}</option>
+						{% endfor %}
+					</select>
+					<button
+						type="button"
+						class="blue-btn-new w-fit"
+						onclick="window.location.href='/for-teachers/redesign/class/{{ class_info.id }}/customize-level/' + document.getElementById('customize_level').value">
+						{{ _('customize') }}
+					</button>
+				</div>
+			</section>
+	
+			<section class="flex flex-col gap-4">
+				<h3 class="m-0 text-2xl">{{ _('additional_teachers') }}</h3>
+				<div class="w-full overflow-x-auto border rounded-lg">
+					<table class="w-full divide-y divide-gray-400" id="configure-teachers-table">
+						<thead class="bg-gray-200 divide-y divide-gray-400">
+							<tr>
+								<th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{ _('name') }}</th>
+								<th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{ _('role') }}</th>
+								<th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{ _('remove') }}</th>
+							</tr>
+						</thead>
+						<tbody class="bg-white divide-y divide-gray-200" id="configure-teachers-table-body">
+							{{
+								render_partial(
+									"for-teachers/classes/configure-class-teachers-table-body.html",
+									class_info=class_info,
+									second_teacher_invites=second_teacher_invites
+								)
+							}}
+						</tbody>
+					</table>
+				</div>
+	
+				<div>
+					<button class="green-btn-new"
+						type="button"
+						data-class-id="{{ class_info.id }}"
+						data-prompt="{{ _('second_teacher_prompt') }}"
+						onclick="hedyApp.invite_second_teacher_to_configure_class(this.dataset.classId, this.dataset.prompt)">
+						{{ _('invite_teacher') }}
+					</button>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+{% endblock %}

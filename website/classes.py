@@ -315,8 +315,9 @@ class MiscClassPages(WebsiteModule):
         search = request.args.get('search', '')
         user_type = request.args.get('user_type')
         class_id = request.args.get('class_id')
+        modal_variant = request.args.get('modal_variant', '')
         if search == '':
-            return render_template('modal/htmx-search-results-list.html', usernames=[])
+            return render_template('modal/htmx-search-results-list.html', usernames=[], modal_variant=modal_variant)
         if user_type == 'student':
             results = g_db().get_student_that_starts_with(search.lower())
         elif user_type == 'second_teacher':
@@ -326,12 +327,20 @@ class MiscClassPages(WebsiteModule):
         # Get sets of usernames
         usernames = set(r['username'] for r in results)
         already_invited = set(inv['username'] for inv in self.db.get_class_invites(class_id=class_id))
+        class_users = set()
+        Class = self.db.get_class(class_id) if class_id else None
+        if Class:
+            if user_type == 'student':
+                class_users = set(Class.get('students', []))
+            elif user_type == 'second_teacher':
+                class_users = set(teacher.get('username') for teacher in Class.get('second_teachers', []))
+                class_users.add(Class.get('teacher'))
         # Set computation to come up with who can still be invited
-        invitable = usernames - already_invited - set([user['username']])
+        invitable = usernames - already_invited - class_users - set([user['username']])
         # Turn into a sorted list
         usernames = list(sorted(invitable))
         usernames = sorted(usernames)
-        return render_template('modal/htmx-search-results-list.html', usernames=usernames)
+        return render_template('modal/htmx-search-results-list.html', usernames=usernames, modal_variant=modal_variant)
 
     @route("/invite", methods=["POST"])
     @requires_teacher

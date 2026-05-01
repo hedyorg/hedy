@@ -1,16 +1,21 @@
 {% extends "auth.html" %}
 {% block regular_content %}
-<div class="flex flex-col">
-    <h1 class="md:px-16 ">{{ _('create_class') }}</h1>
+{% from 'incl/breadcrumb.html' import breadcrumb %}
+<div class="flex flex-col px-4 md:px-16">
+    {{ breadcrumb([
+        {'label': _('classes'), 'url': '/for-teachers/class/all'},
+        {'label': _('create_class')}
+    ]) }}
+    <h1>{{ _('create_class') }}</h1>
     <form id="create_class_form" onsubmit="hedyApp.create_class_redesign(this); event.preventDefault();">
-        <div class="flex flex-col px-8 md:mx-16 my-5 w-full md:w-3/4 bg-white border border-gray-400 shadow-md rounded-lg py-8">
-            <div class="flex flex-col gap-5 mx-2 mb-10">
-                <div class="flex flex-row gap-20 items-center mb-10" >
+        <div class="flex flex-col px-4 my-5 w-full md:w-3/4 max-w-4xl bg-white border border-gray-400 shadow-md rounded-lg py-6 md:py-8">
+            <div class="flex flex-col gap-5 mx-2 mb-8 md:mb-10">
+                <div class="flex flex-col md:flex-row gap-3 md:gap-20 md:items-center mb-8 md:mb-10">
                     <label for="class_name" class="text-xl">{{ _('class_name') }}</label>
-                    <input type="text" id="class_name" name="class_name" class="border border-gray-300 rounded-lg p-2 w-2/3" required>
+                    <input type="text" id="class_name" name="class_name" class="border border-gray-300 rounded-lg p-2 w-full md:w-2/3" required>
                 </div>
-                <div class="flex flex-row gap-10 mb-5">
-                    <div>
+                <div class="flex flex-row items-start gap-4 sm:gap-6 md:gap-10 mb-5">
+                    <div class="pt-1">
                         <input type="radio" name="creation_type" required value="standard">
                     </div>
                     <div class="flex flex-col gap-2">
@@ -18,8 +23,8 @@
                         <p class="mt-0">{{ _('standard_new_class_explanation') }}</p>
                     </div>
                 </div>
-                <div class="flex flex-row gap-10 mb-5">
-                    <div>
+                <div class="flex flex-row items-start gap-4 sm:gap-6 md:gap-10 mb-5">
+                    <div class="pt-1">
                         <input type="radio" name="creation_type" required value="copy">
                     </div>
                     <div class="flex flex-col gap-2">
@@ -28,26 +33,26 @@
                         {% if not teacher_classes %}
                             <p>{{ _('no_existing_class') }}</p>
                         {% else %}
-                            <div class="flex flex-row">
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
                                 <span class="">{{ _('class')  }}</span>
-                                <select class="ml-2 border border-gray-300 rounded-lg p-1 w-1/2" name="class_to_copy" id="class_to_copy">
+                                <select class="sm:ml-2 border border-gray-300 rounded-lg p-1 w-full sm:w-1/2 md:w-auto" name="class_to_copy" id="class_to_copy">
                                     {% for class in teacher_classes %}
                                         <option value="{{ class.id }}">{{ class.name|e }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
-                            <div class="flex flex-row items-center gap-2">
-                                <label class="switch">
+                            <div class="flex flex-row items-start sm:items-center gap-4 sm:gap-2 flex-wrap">
+                                <label class="switch flex-shrink-0">
                                     <input id="copy_second_teachers" type="checkbox">
                                     <span class="slider round"></span>
                                 </label>
-                                <label for="copy_second_teachers"> {{ _('copy_second_teachers') }}</label>
+                                <label for="copy_second_teachers" class="ml-2 sm:ml-0 flex-1 break-words"> {{ _('copy_second_teachers') }}</label>
                             </div>
                         {% endif %}
                     </div>
                 </div>
-                <div class="flex flex-row gap-10 mb-5">
-                    <div>
+                <div class="flex flex-row items-start gap-4 sm:gap-6 md:gap-10 mb-5">
+                    <div class="pt-1">
                         <input type="radio" name="creation_type" required value="plain">
                     </div>
                     <div class="flex flex-col gap-2">

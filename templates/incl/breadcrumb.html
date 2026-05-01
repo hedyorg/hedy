@@ -1,0 +1,32 @@
+{#
+  Breadcrumb macro for redesign pages.
+
+  Usage:
+    {% from 'incl/breadcrumb.html' import breadcrumb %}
+    {{ breadcrumb([
+        {'label': _('classes'), 'url': '/for-teachers/class/all'},
+        {'label': class_info.name}
+    ]) }}
+
+  Parameters:
+    crumbs        – list of dicts, each with a 'label' key.  Include 'url' to render
+                    the crumb as a link; omit it for the current (non-linked) page.
+    wrapper_class – classes for the outer <div>; defaults to the standard page padding.
+#}
+{% macro breadcrumb(crumbs, wrapper_class='mt-2 mb-4') %}
+<div class="{{ wrapper_class }} flex flex-col gap-2">
+    <div class="flex flex-wrap items-center gap-2 text-lg">
+        <a href="/for-teachers/redesign">
+            <i class="fa-solid fa-chalkboard-user text-sm text-blue-800" aria-hidden="true"></i>
+        </a>
+        {% for crumb in crumbs %}
+        <span class="text-gray-700">&rsaquo;</span>
+        {% if crumb.get('url') %}
+        <a href="{{ crumb.url }}" class="no-underline hover:underline text-blue-800">{{ crumb.label }}</a>
+        {% else %}
+        <span class="font-semibold break-words">{{ crumb.label }}</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endmacro %}

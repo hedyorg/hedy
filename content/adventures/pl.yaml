@@ -592,7 +592,7 @@ adventures:
                 example_code: |
                     ```
                     opcje = 1, 2, 3, 4, 5, 6
-                    {print} 'Wyzuć 6 tak szybko, jak to możliwe!'
+                    {print}('Wyzuć 6 tak szybko, jak to możliwe!')
                     wyrzucono = 0
                     próby = 0
                     _
@@ -1514,11 +1514,11 @@ adventures:
                     Dokończ niekończącą się piosenkę
                 example_code: |
                     ```
-                    {define} piosenka
+                    {def} piosenka
                         {play} _
 
-                    tak_lub_nie = {ask} 'Czy chcesz usłyszeć moją niekończącą się piosenkę?'
-                    {while} tak_lub_nie = 'tak'
+                    tak_lub_nie = {input}('Czy chcesz usłyszeć moją niekończącą się piosenkę?')
+                    {while} tak_lub_nie = 'tak':
                         piosenka()
                         {print} '🥳'
                     ```
@@ -2764,9 +2764,9 @@ adventures:
                 example_code: |
                     ```
                     odpowiedź = 0
-                    {while} odpowiedź != 25
-                        odpowiedź = {ask} 'Ile to jest 5 razy 5?'
-                    {print} 'Podano poprawną odpowiedź'
+                    {while} odpowiedź != 25:
+                        odpowiedź = {input}('Ile to jest 5 razy 5?')
+                    {print}('Podano poprawną odpowiedź')
                     ```
         description: '{while}'
         name: '{while}'
@@ -2827,8 +2827,6 @@ adventures:
         name: szpital
         description: Szpital
         levels:
-            14:
-                example_code: "Program powinien się kończyć w ten sposób:\n  ```\n  _Program powinien się kończyć w ten sposób_\n  zrób_listę_zadań(dzień, miesiąc, data)\n  ```\n"
             8:
                 story_text: "Farba na Naszym lądowisku dla helikoptera ratunkowego starła się. Czy możesz napisać program dla żółwia, który narysuje oznaczenia ponownie?\n### Ćwiczenie\nNarysuj oznaczenia na lądowisku dla helikoptera.\n<img src=\"https://github.com/user-attachments/assets/96deeb9e-b155-4a3d-91f3-3c447df7ce2b\" width=\"200\">\n"
             9:
