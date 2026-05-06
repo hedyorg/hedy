@@ -10,6 +10,7 @@ import { autoSave } from './autosave';
 import { HedySelect } from './custom-elements';
 import { Chart } from 'chart.js';
 import { setLoadingVisibility } from './loading';
+import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
@@ -1419,30 +1420,82 @@ export interface InitializeContextMenuPageOptions {
   readonly page: 'classes' | 'manage-students';
 }
 
-const contextMenuOpenDownClasses = ['top-full', 'mt-1', 'origin-top-right'];
-const contextMenuOpenUpClasses = ['bottom-full', 'mb-1', 'origin-bottom-right'];
+const contextMenuOriginTopClasses = ['origin-top-right'];
+const contextMenuOriginBottomClasses = ['origin-bottom-right'];
+const contextMenuAutoUpdateHandlers = new Map<HTMLElement, () => void>();
 
-function applyContextMenuDirection(menu: HTMLElement, direction: 'up' | 'down') {
-  menu.classList.remove(...contextMenuOpenDownClasses, ...contextMenuOpenUpClasses);
-  menu.classList.add(...(direction === 'up' ? contextMenuOpenUpClasses : contextMenuOpenDownClasses));
+function applyContextMenuOrigin(menu: HTMLElement, placement: string) {
+  const opensUp = placement.startsWith('top');
+  menu.classList.remove(...contextMenuOriginTopClasses, ...contextMenuOriginBottomClasses);
+  menu.classList.add(...(opensUp ? contextMenuOriginBottomClasses : contextMenuOriginTopClasses));
 }
 
-export function positionContextMenu(button: HTMLElement) {
+function stopContextMenuAutoUpdate(menu: HTMLElement) {
+  const stop = contextMenuAutoUpdateHandlers.get(menu);
+  if (stop) {
+    stop();
+    contextMenuAutoUpdateHandlers.delete(menu);
+  }
+}
+
+function cleanupInactiveContextMenus() {
+  for (const [menu, stop] of contextMenuAutoUpdateHandlers.entries()) {
+    if (menu.classList.contains('hidden')) {
+      stop();
+      contextMenuAutoUpdateHandlers.delete(menu);
+    }
+  }
+}
+
+export function teardownContextMenu(button: HTMLElement) {
   const menuContainer = button.closest('[name="menu"]');
   const menu = menuContainer?.querySelector('div[id^="menu-"]') as HTMLElement | null;
   if (!menu) {
     return;
   }
 
-  applyContextMenuDirection(menu, 'down');
+  stopContextMenuAutoUpdate(menu);
+}
 
-  const buttonRect = button.getBoundingClientRect();
-  const menuHeight = menu.offsetHeight || menu.scrollHeight;
-  const spaceBelow = window.innerHeight - buttonRect.bottom;
-  const spaceAbove = buttonRect.top;
-  const shouldOpenUp = menuHeight > spaceBelow && spaceAbove > spaceBelow;
+export function positionContextMenu(button: HTMLElement, allowFlip = true) {
+  const menuContainer = button.closest('[name="menu"]');
+  const menu = menuContainer?.querySelector('div[id^="menu-"]') as HTMLElement | null;
+  if (!menu) {
+    return;
+  }
 
-  applyContextMenuDirection(menu, shouldOpenUp ? 'up' : 'down');
+  cleanupInactiveContextMenus();
+  stopContextMenuAutoUpdate(menu);
+  // Use fixed positioning so menus are not clipped by table overflow containers.
+  menu.style.position = 'fixed';
+  menu.style.zIndex = '2147483647';
+
+  const updatePosition = () => {
+    const middleware = [
+      offset(4),
+      ...(allowFlip
+        ? [
+            flip({
+              fallbackPlacements: ['top-end', 'bottom-start', 'top-start'],
+            }),
+          ]
+        : []),
+      shift({ padding: 8 }),
+    ];
+
+    computePosition(button, menu, {
+      strategy: 'fixed',
+      placement: 'bottom-end',
+      middleware,
+    }).then(({ x, y, placement }) => {
+      menu.style.left = `${x}px`;
+      menu.style.top = `${y}px`;
+      applyContextMenuOrigin(menu, placement);
+    });
+  };
+
+  updatePosition();
+  contextMenuAutoUpdateHandlers.set(menu, autoUpdate(button, menu, updatePosition));
 }
 
 export function initializeContextMenuEventHandler(_options: InitializeContextMenuPageOptions) {
@@ -1457,6 +1510,7 @@ export function initializeContextMenuEventHandler(_options: InitializeContextMen
     }
     if (document.querySelectorAll('[name="menu"]>div.menu-content-open').length) {
       document.querySelectorAll('[name="menu"]>div.menu-content-open').forEach((el) => {
+        stopContextMenuAutoUpdate(el as HTMLElement);
         el.classList.remove('menu-content-open');
         el.classList.add('menu-content-closed');
         setTimeout(() => {

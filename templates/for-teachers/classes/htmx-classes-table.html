@@ -45,10 +45,11 @@
                         add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
                         if #menu-{{loop.index}} matches .hidden
                           remove .hidden from #menu-{{loop.index}}
-                          call hedyApp.positionContextMenu(me)
+                          call hedyApp.positionContextMenu(me, true)
                           wait 10ms
                           toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
                         else
+                          call hedyApp.teardownContextMenu(me)
                           toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
                           wait 180ms
                           add .hidden to #menu-{{loop.index}}
@@ -56,13 +57,7 @@
                         >
                   <i class="fa-solid fa-ellipsis"></i>
                 </button> 
-                <div id="menu-{{loop.index}}" class="hidden z-30 menu absolute right-0 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150
-                {% if loop.revindex <= 2 %}
-                origin-bottom-right bottom-full mb-1
-                {% else %}
-                origin-top-right top-full mt-1
-                {% endif %}
-                ">
+                <div id="menu-{{loop.index}}" class="hidden z-30 menu origin-top-right absolute w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-opacity transition-transform duration-150">
                   <ul class="list-none divide-y divide-gray-200 p-2">
                     <a href="/for-teachers/redesign/class/{{class.id}}/grade" class="no-underline  text-blue-900">
                       <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100">
