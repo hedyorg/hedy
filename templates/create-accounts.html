@@ -2,7 +2,7 @@
 
 {% block regular_content %}
 <div>
-    <button class="back-btn" id="go_back_button" data-cy="go_back_button" onclick="window.open('/for-teachers/class/{{ current_class.id }}', '_self');">
+    <button class="back-btn" id="go_back_button" data-cy="go_back_button" onclick="window.open('{{ request.args.get('return_to') or '/for-teachers/class/' ~ current_class.id }}', '_self');">
         <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
         {{_('go_back')}}
     </button>

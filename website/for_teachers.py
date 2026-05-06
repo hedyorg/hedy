@@ -1569,7 +1569,11 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        modal_text = gettext('remove_student_prompt')
+        modal_text_template = gettext('remove_student_prompt')
+        try:
+            modal_text = modal_text_template.format(student='', student_name='')
+        except (KeyError, IndexError, ValueError):
+            modal_text = modal_text_template
         htmx_endpoint = f'/for-teachers/redesign/class/{class_id}\
             /manage/remove_student/{student_id}?is_invite={is_invite}'.replace(" ", "")
         htmx_target = "#students-table"
@@ -1584,6 +1588,8 @@ class ForTeachersModule(WebsiteModule):
             htmx_success_message=htmx_success_message,
             confirm_button_label=gettext('remove'),
             confirm_button_class='red-btn-new',
+            modal_title=gettext('remove'),
+            modal_title_name=student_id,
             modal_variant='redesign'
         )
 

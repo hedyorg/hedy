@@ -760,6 +760,7 @@ export function submit_program (id: string) {
 
 function change_to_unsubmitted () {
     $('#unsubmit-program-button').hide();
+  $('#adventure_checkbox').hide();
     $('#submitted-program-title').hide();
     $('#submitted-program-details').hide();
 }

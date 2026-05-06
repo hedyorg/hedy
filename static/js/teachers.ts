@@ -28,6 +28,8 @@ function confirmByPageVariant(
     confirmButtonClass?: string;
     confirmButtonLabel?: string;
     confirmActionsClass?: string;
+    confirmTitle?: string;
+    confirmTitleName?: string;
   },
 ) {
   const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
@@ -38,14 +40,25 @@ function confirmByPageVariant(
   modal.confirm(message, confirmCb, declineCb);
 }
 
-function getRedesignRemoveConfirmOptions(confirmLabel?: string) {
-  if (!confirmLabel) {
+function getRedesignRemoveConfirmOptions(confirmLabel?: string, confirmTitle?: string, confirmTitleName?: string) {
+  if (!confirmLabel && !confirmTitle && !confirmTitleName) {
     return undefined;
   }
 
   return {
     confirmButtonClass: 'red-btn-new',
     confirmButtonLabel: confirmLabel,
+    confirmTitle,
+    confirmTitleName,
+  };
+}
+
+function getRedesignDeleteClassConfirmOptions(confirmLabel: string | undefined, confirmTitle: string | undefined, className: string) {
+  return {
+    confirmButtonClass: 'red-btn-new',
+    confirmButtonLabel: confirmLabel,
+    confirmTitle,
+    confirmTitleName: className.toUpperCase(),
   };
 }
 
@@ -101,7 +114,7 @@ export function create_class_redesign(form: HTMLFormElement) {
   } else if (radio.value === 'standard' || radio.value === 'plain') {
     $.ajax({
       type: 'POST',
-      url: '/class',
+      url: '/class/redesign',
       data: JSON.stringify({
         creation_type: radio?.value,
         name: className?.value,
@@ -198,6 +211,27 @@ export function delete_class(id: string, prompt: string) {
   });
 }
 
+export function delete_class_redesign(
+  id: string,
+  prompt: string,
+  className: string,
+  button: HTMLElement,
+  confirmLabel?: string,
+  confirmTitle?: string,
+) {
+  return modal.confirmRedesign(prompt, function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/for-teachers/class/' + id,
+      contentType: 'application/json',
+    }).done(function () {
+      button.closest('tr')?.remove();
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+  }, function(){}, getRedesignDeleteClassConfirmOptions(confirmLabel, confirmTitle, className));
+}
+
 export function join_class(id: string, name: string) {
   $.ajax({
       type: 'POST',
@@ -241,7 +275,13 @@ export function remove_student_invite(username: string, class_id: string, prompt
   }, function(){}, getRedesignRemoveConfirmOptions(confirmLabel));
 }
 
-export function remove_second_teacher(second_teacher: string, class_id: string, prompt: string, confirmLabel?: string) {
+export function remove_second_teacher(
+  second_teacher: string,
+  class_id: string,
+  prompt: string,
+  confirmLabel?: string,
+  confirmTitle?: string,
+) {
   return confirmByPageVariant(prompt, function () {
     $.ajax({
       type: 'DELETE',
@@ -253,7 +293,7 @@ export function remove_second_teacher(second_teacher: string, class_id: string, 
     }).fail(function (err) {
       return modal.notifyError(err.responseText);
     });
-  }, function(){}, getRedesignRemoveConfirmOptions(confirmLabel));
+  }, function(){}, getRedesignRemoveConfirmOptions(confirmLabel, confirmTitle, second_teacher));
 }
 
 export function remove_student(class_id: string, student_id: string, prompt: string) {
@@ -734,8 +774,9 @@ export function createAccounts(prompt: string) {
     const accounts = $('#accounts_input').val() as string;
     const numberOfAccounts = accounts.split('\n').filter(l => l.trim()).length;
     const updatedPrompt = prompt.replace('{number_of_accounts}', numberOfAccounts.toString());
+  const useRedesignModal = new URLSearchParams(window.location.search).get('modal') === 'redesign';
 
-    modal.confirm (updatedPrompt, function () {
+  const createAccountsHandler = function () {
         const className = $('#classes').val() as string;
         const generatePasswords = $('#passwords_toggle').is(":checked") as boolean;
 
@@ -778,7 +819,13 @@ export function createAccounts(prompt: string) {
             // If the error is simple text (e.g. 'request invalid'), display it to the user
             modal.notifyError(err.responseText);
         });
-    });
+        };
+
+        if (useRedesignModal) {
+          modal.confirmRedesign(updatedPrompt, createAccountsHandler, function(){});
+        } else {
+          modal.confirm(updatedPrompt, createAccountsHandler);
+        }
 }
 
 function createHtmlForAccountsTable(accounts: Array<any>) {

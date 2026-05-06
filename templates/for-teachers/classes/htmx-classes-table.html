@@ -1,4 +1,4 @@
-<div class="overflow-x-auto h-full" id="classes_table">
+<div class="overflow-x-auto overflow-y-visible h-full" id="classes_table">
   <div class="w-full h-full mb-8">
     <div class="w-full h-full border rounded-lg shadow-md">
       <table class="w-full divide-y divide-gray-400">
@@ -19,7 +19,22 @@
                 {{class.name|e}}
               </a>
             </td>
-            <td data-cy="teacher_cell" class="py-3 text-center">{{class.teacher}}</td>
+            <td data-cy="teacher_cell" class="py-3 text-center">
+              {{ class.teacher }}
+              {% if class.second_teachers %}
+                {% set second_teacher_names = [] %}
+                {% for second_teacher in class.second_teachers %}
+                  {% if second_teacher.username is defined %}
+                    {% set _ = second_teacher_names.append(second_teacher.username) %}
+                  {% elif second_teacher is string %}
+                    {% set _ = second_teacher_names.append(second_teacher) %}
+                  {% endif %}
+                {% endfor %}
+                {% if second_teacher_names %}
+                  <span class="text-sm text-gray-600">, {{ second_teacher_names | join(', ') }}</span>
+                {% endif %}
+              {% endif %}
+            </td>
             <td class="text-center">{{ class.students|length }}</td>
             <td class="text-center">{{ class.date }}</td>
             <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
@@ -41,7 +56,13 @@
                         >
                   <i class="fa-solid fa-ellipsis"></i>
                 </button> 
-                <div id="menu-{{loop.index}}" class="hidden z-30 menu origin-top-right absolute top-full right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
+                <div id="menu-{{loop.index}}" class="hidden z-30 menu absolute right-0 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150
+                {% if loop.revindex <= 2 %}
+                origin-bottom-right bottom-full mb-1
+                {% else %}
+                origin-top-right top-full mt-1
+                {% endif %}
+                ">
                   <ul class="list-none divide-y divide-gray-200 p-2">
                     <a href="/for-teachers/redesign/class/{{class.id}}/grade" class="no-underline  text-blue-900">
                       <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100">
@@ -64,15 +85,12 @@
                     <li class="rounded-b-lg">
                       <button
                         data-cy="remove_class"
-                        data-confirm-modal="redesign"
-                        data-confirm-button-class="red-btn-new"
-                        data-confirm-button-label="{{_('delete')}}"
+                        data-class-name="{{ class.name|e }}"
+                        data-delete-class-prompt="{{ _('delete_class_prompt')|e }}"
+                        data-delete-class-title="{{ _('delete')|e }}"
+                        data-delete-label="{{ _('delete')|e }}"
                         class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-b-lg text-red-700 ease-in transition duration-100 font-bold"
-                        hx-confirm="{{_('delete_class_prompt')}}"
-                        hx-trigger="click"
-                        hx-delete="/for-teachers/class/{{class.id}}"
-                        hx-target="#classes_table"
-                        hx-swap="outerHTML"
+                        onclick="hedyApp.delete_class_redesign('{{ class.id }}', this.dataset.deleteClassPrompt, this.dataset.className, this, this.dataset.deleteLabel, this.dataset.deleteClassTitle)"
                       >
                         <i class="fa-solid fa-trash-can text-sm"></i>
                         <span class="m-3">{{_('delete')}}</span>

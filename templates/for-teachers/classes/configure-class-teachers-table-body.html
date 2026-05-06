@@ -16,8 +16,9 @@
             data-second-teacher="{{ second_teacher.username }}"
             data-class-id="{{ class_info.id }}"
             data-prompt="{{ _('remove_user_prompt') }}"
+            data-confirm-title="{{ _('remove') }}"
             data-confirm-label="{{ _('remove') }}"
-            onclick="hedyApp.remove_second_teacher(this.dataset.secondTeacher, this.dataset.classId, this.dataset.prompt, this.dataset.confirmLabel)"
+            onclick="hedyApp.remove_second_teacher(this.dataset.secondTeacher, this.dataset.classId, this.dataset.prompt, this.dataset.confirmLabel, this.dataset.confirmTitle)"
             {% else %}
             disabled
             {% endif %}

@@ -54,6 +54,8 @@
                 data-confirm-modal="redesign"
                 data-confirm-button-class="red-btn-new"
                 data-confirm-button-label="{{_('delete')}}"
+                data-confirm-title="{{_('delete')}}"
+                data-confirm-title-name="{{ _class.name|upper|e }}"
                 hx-confirm="{{_('delete_class_prompt')}}"
                 hx-delete="/for-teachers/class/{{ _class.id }}"
                 hx-swap="none"

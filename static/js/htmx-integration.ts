@@ -103,6 +103,8 @@ htmx.on("htmx:confirm", function(e: any) {
     const confirmButtonClass = modalElement.getAttribute('data-confirm-button-class') ?? undefined;
     const confirmButtonLabel = modalElement.getAttribute('data-confirm-button-label') ?? undefined;
     const confirmActionsClass = modalElement.getAttribute('data-confirm-actions-class') ?? undefined;
+    const confirmTitle = modalElement.getAttribute('data-confirm-title') ?? undefined;
+    const confirmTitleName = modalElement.getAttribute('data-confirm-title-name') ?? undefined;
 
     confirmFn(modalPrompt, () => {
         modalElement.removeAttribute("hx-confirm");
@@ -115,5 +117,7 @@ htmx.on("htmx:confirm", function(e: any) {
         confirmButtonClass,
         confirmButtonLabel,
         confirmActionsClass,
+        confirmTitle,
+        confirmTitleName,
     });
 });

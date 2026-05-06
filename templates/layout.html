@@ -139,7 +139,10 @@
       <div id="redesign_confirm_backdrop" class="absolute inset-0 bg-black opacity-60"></div>
       <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
         <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
-          <h3 class="m-0 text-2xl font-semibold">{{ _('confirm') }}</h3>
+          <h3 class="m-0 flex min-w-0 items-center gap-2 text-2xl font-semibold">
+            <span id="redesign_confirm_title">{{ _('confirm') }}</span>
+            <span id="redesign_confirm_title_name" class="hidden inline-block max-w-[14rem] truncate align-bottom" title=""></span>
+          </h3>
           <button id="redesign_confirm_close_button"
                   data-cy="redesign_confirm_close_button"
                   type="button"
