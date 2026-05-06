@@ -359,14 +359,18 @@ adventures:
                 example_code: |
                     ```
                     score = 0
+                    #Tien rekensommen vragen:
                     {repeat} 10 {times}
+                        #Verzinnen van een willekeurige som:
                         getallen = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         getal_1 = getallen {at} {random}
                         getal_2 = getallen {at} {random}
+                        #Om een antwoord op de som vragen
                         goede_antwoord = getal_1 * getal_2
                         {print} 'Hoeveel is ' getal_1 ' keer ' getal_2 '?'
                         antwoord = {ask} 'Vul hier het antwoord in:'
                         {print} 'Jouw antwoord is ' antwoord
+                        #De score uitrekenen:
                         {if} _ {is} _
                             score = score + 1
                     {print} 'Je score is ' score ' van 10!'
@@ -440,6 +444,7 @@ adventures:
                     Gebruik daarna `{call}` om de functie op te roepen.
                 example_code: |
                     ```
+                    #Een vraag definiëren:
                     {define} nieuwe_vraag
                         nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         nummer_1 = nummers {at} {random}
@@ -450,7 +455,8 @@ adventures:
                         _
                         _
                         {print} 'Well done!'
-
+                    
+                    #De vragen stellen:
                     {print} 'Geef 10 goede antwoorden om te winnen!'
                     {for} i {in} {range} 1 {to} 10
                         _
@@ -655,8 +661,10 @@ adventures:
                      Verander de namen in jouw eigen vrienden of je familie, en maak de code af zodat iedereen met de dobbelsteen dobbelt.
                 example_code: |
                     ```
+                    #Het spel klaarzetten:
                     spelers = Anne, Jonneke, Jessie, Ilona
                     keuzes = 1, 2, 3, 4, 5, 6
+                    #Elke speler met de dobbelsteen laten gooien:
                     _ _ _ _
                         {print} speler ' gooit ' keuzes {at} {random}
                         {sleep}
@@ -943,9 +951,11 @@ adventures:
                     Voeg het juiste commando toevoegen op de streepjes?
                 example_code: |
                     ```
+                    #De waarzegger introduceren:
                     {print} 'Ik ben Hedy de waarzegger!'
                     {print} 'Je mag 3 vragen stellen!'
                     antwoorden = ja, nee, misschien
+                    #Drie vragen stellen en beantwoorden:
                     _ _ _
                         vraag = {ask} 'Wat wil je weten?'
                         {print} vraag
@@ -956,10 +966,12 @@ adventures:
                 story_text: "In dit level kun je met een druk op de knop het hele leven voorspellen van al je vrienden tegelijk!\n\n### Opdracht \nVul de lege plekken op met code die je in dit level geleerd hebt.\n"
                 example_code: |
                     ```
+                    #Alle opties bedenken:
                     huizen = villa, appartement, krot, rijtjeshuis
                     liefdes = niemand, een prins(es), zomaar iemand, je ware liefde
                     huisdieren = hond, cavia, olifant
                     namen = Jenna, Ryan, Jim
+                    #De toekomst voor alle mensen voorspellen:
                     _ _ _ _
                         {print} naam ' woont in een ' huizen {at} {random}
                         {print} naam ' trouwt met ' liefdes {at} {random}
@@ -988,16 +1000,19 @@ adventures:
                     Bijvoorbeeld: 'Ahmed, rechterhand op groen' of 'Jessica, linkervoet op geel'.
                 example_code: |
                     ```
+                    #De Twister opties geven:
                     kanten = 'linker', 'rechter'
                     ledematen = 'hand', 'voet'
                     kleuren = 'rood', 'blauw', 'groen', 'geel'
 
+                    #Één Twister draai definiëren
                     {define} draai
                         gekozen_kant = kanten {at} {random}
                         gekozen_ledemaat = ledematen _
                         gekozen_kleur = kleuren _
                         {print} gekozen_kant gekozen_ledemaat ' op ' gekozen_kleur
 
+                    #Een potje Twister spelen:
                     {print} 'Klaar voor een potje Twister?'
                     {repeat} _
                         {call} draai
@@ -1016,11 +1031,13 @@ adventures:
                     Voeg een functie toe die een sip deuntje speelt (zoals C6-C5-C4) en roep die functie op als er een fout antwoord gegeven wordt.
                 example_code: |
                     ```
+                    #Een blij en verdrietig deuntje definiëren:
                     {def} speel_blij_deuntje():
                         {play} C4
                         {play} C5
                         {play} C6
-
+                    
+                    #Vragen stellen:
                     antwoord = {input}('Wat is 2 + 2?')
                     {if} antwoord == 4:
                         {print} 'Goed!'
@@ -1118,11 +1135,12 @@ adventures:
                     **Extra** Verander het thema van de waarzegger ook eens in iets anders! Zoals jouw eigen favoriete (sport)club, boek of show
                 example_code: |
                     ```
+                    #Alle opties bepalen:
                     afdelingen = Griffoendor, Zwadderich, Huffelpuf, Ravenklauw
                     vakken = toverdranken, verdediging tegen de zwarte kunsten, bezweringen, transfiguratie
                     angsten = Voldemort, spinnen, je S.L.I.J.M.B.A.L.len niet halen
                     namen = Harry, Ron, Hermelien
-                    _
+                    #De toekomst voor alle personen voorspellen:
                     _ {print} naam ' wordt geplaatst in ' afdelingen {at} {random}
                     _ {print} naam ' is goed in ' vakken {at} {random}
                     _ {print} naam 's grootste angst is ' angsten {at} {random}
@@ -1286,6 +1304,7 @@ adventures:
                     Kijk maar naar de code en vul een van deze variabelen in op de lege plekken: `wapens[i]`, `monsters[i]`, `goedlot[i]`, `noodlot[i]`, `hint[i]`
                 example_code: |
                     ```
+                    #Verschillende monsters en bijpassende gebeurtenissen verzinnen:
                     getallen = [1, 2, 3]
                     i = getallen[{random}]
                     hint = ['gegrom', 'kakelende lach', 'vleermuis gefladder']
@@ -1293,6 +1312,8 @@ adventures:
                     noodlot = ['Je brein wordt opgepeuzeld', 'Je wordt vervloekt', 'Je wordt gebeten']
                     goedlot = ['Je gooit de ham naar de zombie die er lekker aan begint te knagen.', 'Je zet de gordijnen in de fik. De heks vlucht, bang voor het vuur', 'De vampier haat knoflook en vlucht weg']
                     wapens = ['rauwe ham', 'aansteker', 'knoflook']
+
+                    #Het verhaal van het spookhuis vertellen:
                     {print} 'Je staat bij een oude verlaten villa'
                     {print} 'Iets is hier niet pluis...'
                     {print} 'Je hoort ' _
@@ -1792,6 +1813,7 @@ adventures:
                 example_code: |
                     ```
                     getal = {ask} 'Noem een getal tussen 1 en 67:'
+                    #3 noten printen en spelen:
                     {print} getal
                     {play} getal
                     getal = getal + 1
@@ -1824,11 +1846,13 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Vader Jacob'
+                    #Speel de eerste regel twee keer:
                     {repeat} 2 {times}
                         {play} C
                         {play} D
                         {play} E
                         {play} C
+                    #Speel de tweede regel twee keer:
                     {repeat} 2 {times}
                         {play} E
                         {play} F
@@ -1865,6 +1889,7 @@ adventures:
                     Kijk daarna terug naar liedjes die je geprogrammeerd hebt in voorgaande levels. Kun je die liedjes inkorten en verbeteren door functies te gebruiken?
                 example_code: |
                     ```
+                    #Definieer de eerste regel:
                     {define} eerste_regel
                         {play} C
                         {play} C
@@ -1875,6 +1900,7 @@ adventures:
                         {play} G
                         {sleep}
 
+                    #Definieer tweede regel:
                     {define} tweede_regel
                         {play} F
                         {play} F
@@ -1885,6 +1911,7 @@ adventures:
                         {play} C
                         {sleep}
 
+                    #Definieer de derde regel:
                     {define} derde_regel
                         {play} G
                         {play} G
@@ -1895,6 +1922,7 @@ adventures:
                         {play} D
                         {sleep}
 
+                    #De regels van het lied zingen:
                     {call} _
                     {call} _
                     {call} _
@@ -1933,9 +1961,10 @@ adventures:
                     Maak dit liedje zonder einde af.
                 example_code: |
                     ```
+                    #Een liedje schrijvenL
                     {def} lied
                         {play} _
-
+                    #Het liedje afspelen:
                     ja_of_nee = {input}('Wil je mijn liedje zonder einde horen?')
                     {while} ja_of_nee = 'ja':
                         lied()
@@ -2186,10 +2215,14 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Het digitale spaarvarken'
+                    #Vragen naar uitgaven en gewenste aankoop:
                     wens = {ask} 'Wat zou je graag willen hebben?'
                     prijs = {ask} 'Hoeveel kost dat?'
+                    gespaard = {ask} 'Hoeveel geld heb je al gespaard?'
                     zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
-                    weken = prijs / zakgeld
+                    #Uitrekenen hoeveel tijd je nog moet sparen:
+                    te_sparen = prijs - gespaard
+                    weken = te_sparen / zakgeld
                     {print} 'Je kunt over ' _ ' weken een ' _ ' kopen!'
                     ```
             15:
@@ -2273,6 +2306,8 @@ adventures:
                     {print} ('Maak je eigen quiz')
                     points_a = 0
                     points_b = 0
+
+                    #Stellen van quizvragen:
                     {print} ('Vraag')
                     {print} ('Antwoord optie A')
                     {print} ('Antwoord optie B')
@@ -2281,6 +2316,8 @@ adventures:
                         punten_a = punten_a + 1
                     {if} antwoord {is} 'B':
                         punten_b = punten_b + 1
+                    
+                    #Uitslag van de quiz printen:
                     {print} 'Eind van de quiz!'
                     {print} 'Laten we de uitslag bekijken!'
                     {if} punten_a > punten_b:
@@ -2573,14 +2610,17 @@ adventures:
                 example_code: |
                     Je kunt een simpel restaurant maken:
                     ```
+                    #De klant welkom heten:
                     {print} 'Welkom bij McHedy'
                     {print} 'U kunt kiezen uit een hamburger, een kroket of een kaassouffle'
                     {print} 'U krijgt frietjes en drinken bij uw bestelling. '
                     eten = {ask} 'Wat wilt u bestellen?'
+                    #De prijs berekenen:
                     prijs = 0
                     {if} eten {is} hamburger prijs = 8
                     {if} eten {is} kroket prijs = 6
                     {if} eten {is} kaassoufle prijs = 5
+                    #De prijs vertellen aan de klant:
                     {print} 'U heeft een ' eten ' besteld'
                     {print} 'Dat is dan ' prijs ' euro, alstublieft!'
                     {print} 'Bedankt en eet smakelijk!'
@@ -2607,9 +2647,11 @@ adventures:
                     Breid je code uit met meer dingen op het menu. Bijvoorbeeld: vragen of ze drinken willen, of toetjes. Voeg minstens nog een extra vraag toe. **Extra** Voeg alles toe aan het menu dat je kan verzinnen, zoveel dingen als je wil!
                 example_code: |
                     ```
+                    #De klanten welkom heten bij het restaurant:
                     {print} 'Welkom bij McHedy!'
                     {print} 'U kunt hier uw bestelling doorgeven'
                     mensen = {ask} 'Voor hoeveel personen wilt u bestellen?'
+                    #Alle mensen vragen wat ze willen bestellen:
                     {repeat} mensen {times}
                         eten = {ask} 'Wat wilt u eten?'
                         {print} eten
@@ -2629,10 +2671,12 @@ adventures:
                     **Extra** Willen de klanten ook wat drinken? Vraag dat ook.<br>
                 example_code: |
                     ```
+                    #De klanten welkom heten bij het restaurant:
                     {print} 'Welkom bij restaurant Hedy'
                     mensen = {ask} 'Met hoeveel mensen bent u vanavond?'
                     {print} 'Mooi, welkom allemaal'
                     prijs = 0
+                    #Alle mensen vragen wat ze willen bestellen:
                     {repeat} mensen {times}
                     _ eten = {ask} 'Wat wilt u bestellen?'
                     _ {print} eten
@@ -2792,11 +2836,14 @@ adventures:
                     vragen hoeveel potjes er gespeeld gaan worden.
                 example_code: |
                     ```
+                    #Computer en speler kiezen steen, papier of schaar:
                     keuzes = steen, papier, schaar
                     jouw_keuze = {ask} 'Wat kies jij?'
                     computer_keuze = keuzes {at} {random}
+                    #Printen welke opties er gekozen zijn:
                     {print} 'Jij kiest ' jouw_keuze
                     {print} 'De computer kiest ' computer_keuze
+                    #Printen wie er gewonnen heeft:
                     {if} computer_keuze {is} jouw_keuze
                         {print} 'Gelijkspel'
                     {if} computer_keuze {is} steen
@@ -2948,10 +2995,12 @@ adventures:
                     Kijk naar de voorbeeldcode met de functie. Vul het lied aan tot het compleet is.
                 example_code: |
                     ```
+                    #Functie maken voor de eerste twee herhalende regels:
                     {define} slaap
                         {print} 'Slaap kindje slaap'
                         {print} _
 
+                    #Zingen van de verschillende versjes:
                     {call} slaap
                     {print} 'Een schaap met witte voetjes'
                     {print} 'die drinkt zijn melk zo zoetjes'
@@ -2963,7 +3012,10 @@ adventures:
                     Maak het liedje af door de ontbrekende regels en variabelen in te vullen. Vul daarna de lijsten aan met nog meer dieren die iets doen, zoals leeuwen die samen geeuwen, koeien die bootje roeien of...?
                 example_code: |
                     ```
+                    #Bepalen welke dieren in elk vers wat doen
                     dieren = 'beren broodjes smeren', 'apen lekker slapen', 'bijen autorijden', _
+                    
+                    #Het liedje herhalen met de verschillende dieren:
                     _
                         {print} 'Ik zag twee ' _
                         {print} 'Oh het was een wonder'
@@ -3095,8 +3147,10 @@ adventures:
                     Nu we met Hedy kunnen rekenen, kunnen we alle figuren tekenen die we maar willen!
                 example_code: |
                     ```
+                    #de hoeken van de figuur definiëren:
                     hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
                     hoek = 360 / hoeken
+                    #het figuur met de hoeken tekenen:
                     {forward} 50
                     {turn} hoek
                     {forward} 50
@@ -3160,10 +3214,13 @@ adventures:
                     Verander het aantal figuren met `{repeat}` en de vorm van het figuur met `{define}`
                 example_code: |
                     ```
+                    #Functie maken voor vierkant:
                     {define} vierkant
                         {repeat} 4 {times}
                             {turn} _
                             {forward} _
+                    
+                    #Drie vierkanten tekenen:
                     {call} vierkant
                     {forward} 50
                     {call} vierkant
@@ -3360,14 +3417,17 @@ adventures:
                 example_code: |
                     Hint voor het ontwerpen van armbanden. Definieer eerst een functie **voor elke vorm** die je wilt gebruiken op de armband. Voeg daarna op deze manier vormen aan de armband toe:
                     ```
+                    #Functies maken voor elke vorm:
                     {define} teken_een_vierkant
                     _
 
+                    #Het begin van de armband tekenen:
                     {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
+                    #Verschillende vormen aan de armband tekenen:
                     {repeat} 5 {times}
                         {color} gray
                         {forward} 100
