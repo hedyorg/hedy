@@ -8,7 +8,10 @@ export function createAdventure(name)
     cy.getDataCy('create_adventure_button').click();
 
     if (name) {
-        cy.intercept('/for-teachers/customize-adventure').as('customizeAdventure');      
+        cy.intercept({
+            method: 'POST',
+            url: '/for-teachers/customize-adventure'
+        }).as('customizeAdventure');
         cy.getDataCy('custom_adventure_name').clear().type(name);
         cy.wait(500)
         cy.getDataCy('level_select').click();

@@ -198,7 +198,10 @@ describe('Redesigned class performance graph page', () => {
 
     cy.wait('@loadClosableGraphPrograms').its('response.statusCode').should('eq', 200);
     cy.get(`#${selectedStudent}_programs_container`).should('be.visible').within(() => {
-      cy.getDataCy('hide').should('not.exist');
+      cy.getDataCy('hide')
+        .should('be.visible')
+        .and('not.have.class', 'red-btn-new')
+        .and('not.have.class', 'text-red-700');
       cy.get('.red-btn-new').should('not.exist');
     });
   });
