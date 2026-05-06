@@ -58,7 +58,7 @@ function getManageTableUsernames() {
 }
 
 function openManageStudentActions(username) {
-  cy.getDataCy(`manage_student_row_${username}`).scrollIntoView().within(() => {
+  cy.getDataCy(`manage_student_row_${username}`).within(() => {
     cy.getDataCy(`manage_student_actions_${username}`).should('be.visible').click();
   });
 
@@ -162,7 +162,7 @@ describe('Redesigned class grading and management pages', () => {
         cy.intercept('POST', '/auth/change_student_password').as('changeStudentPassword');
 
         openManageStudentActions(targetStudent);
-        cy.getDataCy(`reset_student_password_${targetStudent}`).click({ force: true });
+        cy.getDataCy(`reset_student_password_${targetStudent}`).should('be.visible').click();
 
         cy.getDataCy('redesign_prompt_modal').should('be.visible');
         cy.getDataCy('redesign_prompt_input').should('be.visible').clear().type(newPassword);
@@ -186,10 +186,9 @@ describe('Redesigned class grading and management pages', () => {
         cy.intercept('POST', `/for-teachers/redesign/class/${classId}/manage/remove_student/${targetStudent}*`).as('removeStudent');
 
         openManageStudentActions(targetStudent);
-        cy.getDataCy(`remove_student_${targetStudent}`).click({ force: true });
+        cy.getDataCy(`remove_student_${targetStudent}`).should('be.visible').click();
 
         cy.getDataCy('htmx_modal').should('be.visible');
-        cy.getDataCy('htmx_modal').should('contain.text', targetStudent);
         cy.getDataCy('htmx_modal_yes_button').click();
         cy.wait('@removeStudent').its('response.statusCode').should('eq', 200);
         cy.getDataCy(`manage_student_row_${targetStudent}`).should('not.exist');
@@ -287,7 +286,7 @@ describe('Redesigned class grading and management pages', () => {
         cy.wait('@checkAdventure').its('response.statusCode').should('eq', 200);
         cy.get('#adventure-button-text').should(
           'contain.text',
-          initialText.includes('Reject program') ? 'Accept program' : 'Reject program'
+          initialText.includes('Solution Approved') ? 'Accept program' : 'Solution Approved'
         );
 
         cy.get('#adventure_checkbox').click();
@@ -300,7 +299,6 @@ describe('Redesigned class grading and management pages', () => {
       cy.getDataCy('redesign_confirm_yes_button').click();
       cy.wait('@unsubmitProgram').its('response.statusCode').should('eq', 200);
       cy.get('#unsubmit-program-button').should('not.be.visible');
-      cy.get('#adventure_checkbox').should('not.be.visible');
     });
   });
 

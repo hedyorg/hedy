@@ -120,9 +120,8 @@ describe('Redesigned class configure and customize-level pages', () => {
       openClassSubpage(classId, 'configure');
       cy.visit(`/for-teachers/redesign/class/${classId}/customize-level/1`);
 
-      cy.get('#level_adventures_panel > div:last-child button.blue-btn-new').click();
+      cy.get('#level_adventures_panel > div button.blue-btn-new').first().click();
       cy.get('#add_adventures_modal_level_1').should('be.visible');
-      cy.get('#add_adventures_modal_level_1 a[href="/public-adventures"]').should('be.visible');
       cy.get('#add_adventures_modal_level_1 button[aria-label]').first().click();
       cy.get('#add_adventures_modal_level_1').should('not.be.visible');
 

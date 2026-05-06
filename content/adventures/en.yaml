@@ -236,9 +236,11 @@ adventures:
                     ```
                     {print} 'OH NO! The T-rex is closing in!'
                     end = {ask} 'Do you want a happy or a sad ending?'
+                    #Telling the happy ending of the story:
                     {if} end {is} happy
                         {print} 'Just in time Richard jumps back into the time machine!'
                         {print} _
+                    #Telling the sad ending of the story:
                     {else}
                         {print} 'Oh no! Richard is too slow...'
                         {print} _
@@ -636,14 +638,18 @@ adventures:
                 example_code: |
                     ```
                     score = 0
+                    #Asking 10 math questions:
                     {repeat} 10 {times}
+                        #Picking a random question:
                         numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         number_1 = numbers {at} {random}
                         number_2 = numbers {at} {random}
                         correct_answer = number_1 * number_2
+                        #Asking the question:
                         {print} 'What is ' number_1 ' times ' number_2 '?'
                         answer = {ask} 'Type your answer here...'
                         {print} 'Your answer is ' answer
+                        #Counting the points
                         {if} _ {is} _
                             score = score + 1
                     {print} 'Great job! Your score is... ' score ' out of 10!'
@@ -768,6 +774,7 @@ adventures:
                     Then call the function.
                 example_code: |
                     ```
+                    #Defining a question:
                     {define} new_question():
                         numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                         number_1 = numbers[random]
@@ -779,6 +786,7 @@ adventures:
                         _
                         {print}('Well done!')
 
+                    #Asking the questions:
                     {print}('Give 10 correct answers to win!')
                     {for} i {in} {range} 1 {to} 10:
                         _
@@ -1698,8 +1706,10 @@ adventures:
                     Change the names into names of your friends or family, and finish the code.
                 example_code: |
                     ```
+                    #Setting up the game:
                     players = Ann, John, Jesse
                     choices = 1, 2, 3, 4, 5, 6
+                    #Letting every player throw the dice:
                     _ _ _ _
                         {print} player ' throws ' choices {at} {random}
                         {sleep}
@@ -2204,9 +2214,11 @@ adventures:
                     Can you fill in right command on the blanks?
                 example_code: |
                     ```
+                    #Introducing the fortune teller
                     {print} 'I am Hedy the fortune teller!'
                     {print} 'You can ask me 3 questions.'
                     answers = yes, no, maybe
+                    #Asking and answering a question 3 times:
                     _ _ _
                        question = {ask} 'What do you want to know?'
                        {print} question
@@ -2232,10 +2244,12 @@ adventures:
                     Fill in the blanks by using the new command that you've learned this level.
                 example_code: |
                     ```
+                    #Defining the different options:
                     houses = mansion, apartment, shack, house
                     loves = nobody, a royal, their neighbour, their true love
                     pets = dog, cat, elephant
                     names = Jenna, Ryan, Jim
+                    #Predict the future for all people: 
                     _
                         {print} name ' lives in a ' houses {at} {random}
                         {print} name ' will marry ' loves {at} {random}
@@ -2278,16 +2292,19 @@ adventures:
                     For example: 'Ahmed, right hand on green' or 'Jessica, left foot on yellow'.
                 example_code: |
                     ```
+                    #Giving the Twister options:
                     sides = 'left', 'right'
                     limbs = 'hand', 'foot'
                     colors = 'red', 'blue', 'green', 'yellow'
 
+                    #Defining one Twister turn:
                     {define} next_turn
                         chosen_side = sides {at} {random}
                         chosen_limb = limbs _
                         chosen_color = colors _
                         {print} chosen_side ' ' chosen_limb ' on ' chosen_color
 
+                    #Playing a Twister game:
                     {print} 'Lets play a game of Twister!'
                     {repeat} _
                         call next_turn
@@ -2324,11 +2341,13 @@ adventures:
                     Add a function that plays a sad tune (like C6-C5-C4) and call the function when a wrong answer is given.
                 example_code: |
                     ```
+                    #Defining a happy and sad tune:
                     {def} play_happy_tune():
                         {play} C4
                         {play} C5
                         {play} C6
 
+                    #Asking questions:
                     answer = {input}('What is 2 + 2?')
                     {if} answer == 4:
                         {print} 'Right!'
@@ -2459,10 +2478,13 @@ adventures:
                     Fill in the correct symbols on the blanks to get the game to work.
                 example_code: |
                     ```
+                    #Choosing a random number:
                     {print}('Guess my number')
                     numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                     number = numbers[{random}]
                     game = 'on'
+
+                    #Playing the game:
                     {for} i {in} {range} (1, 10):
                         {if} game == 'on':
                             guess = {input}('Which number do you think it is?')
@@ -2503,10 +2525,12 @@ adventures:
                     **Extra** Change the theme of the fortune teller into something else, such as your favorite book, film or tv show.
                 example_code: |
                     ```
+                    #Defining the different options:
                     houses = Gryffindor, Slytherin, Hufflepuff, Ravenclaw
                     subjects = potions, defence against the dark arts, charms, transfiguration
                     fears = Voldemort, spiders, failing your OWL test
                     names = Harry, Ron, Hermione
+                    #Predicting the future for all people: 
                     _
                     _ {print} name ' is placed in ' houses {at} {random}
                     _ {print} name ' is great at ' subjects {at} {random}
@@ -2768,6 +2792,7 @@ adventures:
                     Check out the code and fill in `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` on the correct blanks to get the code to work!
                 example_code: |
                     ```
+                    #Defining the different monsters and their attributes:
                     numbers = [1, 2, 3]
                     i = numbers[{random}]
                     hint = ['growling', 'a cackling laugh', 'fluttering batwings']
@@ -2775,6 +2800,8 @@ adventures:
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
                     good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
+
+                    #Telling the story of the haunted house:
                     {print} ('You are standing in front of an old mansion')
                     {print} ('Something is not right here')
                     {print} ('You hear ', _)
@@ -3405,8 +3432,11 @@ adventures:
                     If you don't know any other languages, you can use Google translate or you can use emojis and your native language.
                 example_code: |
                     ```
+                    #Lists of French words and their translations:
                     french_words = ['bonjour', 'ordinateur', 'pomme de terre']
                     translation = ['hello', 'computer', 'potato']
+
+                    #Practising the words:
                     score = 0
                     {for} i {in} {range} (1,3):
                         answer = {input} ('What does ', french_words[i], ' mean?')
@@ -3416,6 +3446,8 @@ adventures:
                             score = score + 1
                         {else}:
                             {print} ('Wrong, ', french_words[i], ' means ', translation[i])
+                    
+                    #Printing the score:
                     {print} ('You gave ', score, ' correct answers.')
                     ```
                 answer_code: |
@@ -3762,6 +3794,7 @@ adventures:
                 example_code: |
                     ```
                     number = {ask} 'Say a starting number between 1 and 67'
+                    # Printing and playing 3 notes:
                     {print} number
                     {play} number
                     number = number + 1
@@ -3833,11 +3866,13 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Brother John'
+                    #Play first line twice:
                     {repeat} 2 {times}
                         {play} C
                         {play} D
                         {play} E
                         {play} C
+                    #Play second line twice:
                     {repeat} 2 {times}
                         {play} E
                         {play} F
@@ -3917,6 +3952,7 @@ adventures:
                     Then look back at all the songs you've programmed in the levels before, can you make those codes better and shorter using functions too?
                 example_code: |
                     ```
+                    #Defining the first line of the song:
                     {define} first_line
                         {play} C
                         {play} C
@@ -3927,6 +3963,7 @@ adventures:
                         {play} G
                         {sleep}
 
+                    #Defining the second line of the song:
                     {define} second_line
                         {play} F
                         {play} F
@@ -3937,6 +3974,7 @@ adventures:
                         {play} C
                         {sleep}
 
+                    #Defining the third line of the song:
                     {define} third_line
                         {play} G
                         {play} G
@@ -3947,6 +3985,7 @@ adventures:
                         {play} D
                         {sleep}
 
+                    #Playing the lines of the song:
                     {call} first_line
                     _
                     _
@@ -4352,10 +4391,12 @@ adventures:
                 example_code: |
                     ```
                     {print} 'The digital piggy bank'
+                    #Asking about income and wanted purchase
                     wish = {ask} 'What would you like to buy?'
                     price = {ask} 'How much does that cost?'
                     saved = {ask} 'How much money have you saved already?'
                     allowance = {ask} 'How much pocket money do you get per week?'
+                    #Calculating time needed to save
                     to_save = price - saved
                     weeks = to_save / allowance
                     {print} 'You can buy a ' _ ' in ' _ ' weeks.'
@@ -4487,6 +4528,8 @@ adventures:
                     {print} ('Make your own quiz')
                     points_a = 0
                     points_b = 0
+
+                    #Playing the quiz:
                     {print} ('Question')
                     {print} ('Answer option A')
                     {print} ('Answer option B')
@@ -4495,6 +4538,8 @@ adventures:
                         points_a = points_a + 1
                     {if} answer {is} 'B':
                         points_b = points_b + 1
+
+                    #Printing the endresults:
                     {print} 'End of the quiz!'
                     {print} 'Lets see the results!'
                     {if} points_a > points_b:
@@ -4906,10 +4951,12 @@ adventures:
                 example_code: |
                     You can make a simple restaurant code, like this:
                     ```
+                    #Welcoming the customer:
                     {print} 'Welcome to Restaurant Chez Hedy'
                     {print} 'Here is our menu:'
                     {print} 'Our main courses are pizza, lasagne, or spaghetti'
                     main = {ask} 'Which main course would you like?'
+                    #Calculating the price:
                     price = 0
                     {if} main {is} pizza
                     price = 10
@@ -4917,6 +4964,7 @@ adventures:
                     price = 12
                     {if} main {is} spaghetti
                     price = 8
+                    #Telling the price to the customer:
                     {print} 'You have ordered ' main
                     {print} 'That will be ' price ' dollars, please'
                     {print} 'Thank you, enjoy your meal!'
@@ -4976,9 +5024,11 @@ adventures:
                     **Extra** Add even more items, as many options as you like!
                 example_code: |
                     ```
+                    #Welcoming customers to the restaurant:
                     {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
+                    #Asking all people what they want to order:
                     {repeat} people {times}
                         food = {ask} 'What would you like to order?'
                         {print} food
@@ -5004,10 +5054,12 @@ adventures:
                 story_text: "In this level you can use nesting to make your restaurant more realistic and more fun!\n\n### Exercise\nThe indentation was removed in the example code. \nCan you figure out how much indentation each line needs in order for the code to work properly?\nIf the customer orders pizza, Hedy shouldn't ask what sauce the customer wants.\n\n**Extra** A restaurant does not stock all sauces. Make a list of available sauces and give a reply with each order whether you sell it. <br>\n**Extra** Pizzas have toppings. Ask customers what they want.<br>\n**Extra** Do customers want a drink? Ask them too! <br>\n"
                 example_code: |
                     ```
+                    #welcoming customers to the restaurant:
                     {print} 'Welcome to Restaurant Chez Hedy!'
                     people = {ask} 'How many people will be joining us today?'
                     {print} 'Great!'
                     price = 0
+                    #Asking all people what they want to order:
                     {repeat} people {times}
                     _ food = {ask} 'What would you like to order?'
                     _ {print} food
@@ -5255,11 +5307,14 @@ adventures:
                     Finish the code such that a winner is always decided on. Run your code a few times to verify there is always a winner printed.
                 example_code: |
                     ```
+                    #Computer and player choosing rock, paper or scissors:
                     options = 'rock', 'paper', 'scissors'
                     your_choice = {ask} 'What do you choose?'
                     computer_choice = options {at} {random}
+                    #Printing which options were chosen:
                     {print} 'You choose ' your_choice
                     {print} 'The computer chooses ' computer_choice
+                    #Printing who is the winner:
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'
                     {elif} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
@@ -5470,9 +5525,11 @@ adventures:
                 example_code: |
                     ```
                     verse = 99
+                    #Singing one verse
                     {print} verse ' bottles of beer on the wall'
                     {print} verse ' bottles of beer'
                     {print} 'Take one down, pass it around'
+                    #Singing the next verse
                     verse = verse - 1
                     {print} verse ' bottles of beer on the wall'
                     {sleep}
@@ -5682,8 +5739,11 @@ adventures:
                     Complete the Old MacDonald song by setting the variable `animal` to `animals[i]` and `sound` to `sounds[i]`.
                 example_code: |
                     ```
+                    #Defining three animals and their sounds:
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
+
+                    #Singing Old MacDonald with three animals:
                     {for} i {in} {range} (1, 3)
                         animal = _
                         sound = _
@@ -5752,9 +5812,11 @@ adventures:
                     Finish the nursery rhyme!
                 example_code: |
                     ```
+                    #Defining the different elements of the ten verses:
                     number = 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'
                     object = 'on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again'
 
+                    #Repeating the same verse with the different elements:
                     _
                         {print} 'This old man'
                         {print} 'He played ' _
@@ -5780,10 +5842,12 @@ adventures:
                     Look at the example code with the function. Fill out the two lines so the full song is printed.
                 example_code: |
                     ```
+                    #Defining a function for the repeating lines:
                     {define} twinkle
                         {print} 'Twinkle'
                         {print} _
 
+                    #Singing different verses of the song:
                     {call} twinkle
                     {print} 'Up above the world so high'
                     {print} 'Like a diamond in the sky'
@@ -6008,8 +6072,10 @@ adventures:
                     Now that we can do math with Hedy, we can draw all the figures we want!
                 example_code: |
                     ```
+                    # defining the angle for the figure:
                     angles = {ask} 'How many angles do you want?'
                     angle = 360 / angles
+                    #drawing a figure with angles:
                     {forward} 50
                     {turn} angle
                     {forward} 50
@@ -6164,10 +6230,13 @@ adventures:
                     Change both the number of figures with the `{repeat}` and the shape of the figures in the `{define}`
                 example_code: |
                     ```
+                    #Making a function for a square:
                     {define} square
                         {repeat} 4 {times}
                             {turn} _
                             {forward} _
+                    
+                    #Drawing three squares:
                     {call} square
                     {forward} 50
                     {call} square
@@ -6962,14 +7031,17 @@ adventures:
                 example_code: |
                     Hint Bracelet Designing program
                     ```
+                    #Making functions for the different shapes:
                     {define} draw_a_square
                     _
 
+                    #Drawing the beginning of the bracelet:
                     {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
+                    #Drawing the shapes on the bracelet:
                     {repeat} 5 {times}
                         {color} gray
                         {forward} 100
