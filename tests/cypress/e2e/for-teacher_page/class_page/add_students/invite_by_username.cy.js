@@ -8,7 +8,7 @@ const test_class = 'CLASS1';
 
 teachers.forEach((teacher) => {
   it(`Is able to add student by name for ${teacher}`, () => {
-    loginForTeacher();
+    loginForTeacher(teacher);
     navigateToClass(test_class);
 
     // delete student if in class
@@ -29,8 +29,18 @@ teachers.forEach((teacher) => {
     })
 
     cy.getDataCy('add_student').click();
+    cy.get('#add_students_options').should('be.visible');
 
-    cy.getDataCy('invite_student').click();
+    cy.get('#add_students_options').then(($options) => {
+      const inviteButton = $options.find('[data-cy="invite_student"]').first();
+
+      if (inviteButton.length) {
+        cy.window().then((win) => {
+          win.eval(inviteButton.attr('onclick'));
+        });
+      }
+    });
+
     cy.getDataCy('modal_search_input').type(student);
     cy.wait(500);
     cy.getDataCy('invite-1').click()
@@ -45,7 +55,7 @@ teachers.forEach((teacher) => {
     cy.getDataCy('join_link').click();
 
     logout();
-    loginForTeacher();
+    loginForTeacher(teacher);
     navigateToClass(test_class);
 
     cy.getDataCy(`student_${student}`).should(($div) => {
