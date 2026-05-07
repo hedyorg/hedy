@@ -1,11 +1,31 @@
 {% extends "auth.html" %}
 
 {% block regular_content %}
+{% from 'incl/breadcrumb.html' import breadcrumb %}
+{% set is_redesign = request.args.get('modal') == 'redesign' or '/for-teachers/redesign/' in (request.args.get('return_to') or '') %}
+{% set primary_button_class = 'blue-btn-new' if is_redesign else 'blue-btn' %}
 <div>
+    {% if is_redesign %}
+    {% if '/manage' in (request.args.get('return_to') or '') %}
+    {{ breadcrumb([
+        {'label': _('classes'), 'url': '/for-teachers/class/all'},
+        {'label': current_class.name, 'url': '/for-teachers/redesign/class/' ~ current_class.id},
+        {'label': _('manage_students'), 'url': request.args.get('return_to')},
+        {'label': _('create_accounts')}
+    ]) }}
+    {% else %}
+    {{ breadcrumb([
+        {'label': _('classes'), 'url': '/for-teachers/class/all'},
+        {'label': current_class.name, 'url': '/for-teachers/redesign/class/' ~ current_class.id},
+        {'label': _('create_accounts')}
+    ]) }}
+    {% endif %}
+    {% else %}
     <button class="back-btn" id="go_back_button" data-cy="go_back_button" onclick="window.open('{{ request.args.get('return_to') or '/for-teachers/class/' ~ current_class.id }}', '_self');">
         <span class="fa fa-arrow-{% if g.dir == "ltr" %}left{% else %}right{% endif %}">&nbsp;</span>
         {{_('go_back')}}
     </button>
+    {% endif %}
     <h2 id="create_accounts_title">{{_('create_student_accounts')}} {{current_class.name}}</h2>
     <h2 id="accounts_results_title" class="hidden">{{_('student_accounts_created')}}</h2>
     <div>
@@ -46,7 +66,7 @@
                 <div class="flex flex-row mt-4">
                     <div class="ltr:ml-auto flex flex-row items-center gap-2">
                       <button id="create_accounts_submit" type="submit" data-cy="create_accounts_button"
-                              class="blue-btn px-4">{{_('create_accounts')}}</button>
+                              class="{{ primary_button_class }} px-4">{{_('create_accounts')}}</button>
                     </div>
                 </div>
             </div>
@@ -54,10 +74,10 @@
 
         <div id="accounts_results" class="gap-4 mt-4 items-center hidden">
             <div class="flex flex-row gap-4">
-                <button id="copy_accounts" class="blue-btn px-4 mb-3" onclick="hedyApp.copyAccountsToClipboard('{{_('copy_clipboard')}}')">
+                <button id="copy_accounts" class="{{ primary_button_class }} px-4 mb-3" onclick="hedyApp.copyAccountsToClipboard('{{_('copy_clipboard')}}')">
                   {{_('copy_accounts_to_clipboard')}}
                 </button>
-                <button id="print_accounts" class="blue-btn px-4 mb-3"
+                <button id="print_accounts" class="{{ primary_button_class }} px-4 mb-3"
                         onclick="hedyApp.printAccounts('{{_('print_accounts_title')}}')">
                   {{_('print_accounts')}}
                 </button>
