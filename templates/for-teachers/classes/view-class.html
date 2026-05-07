@@ -9,7 +9,7 @@
     <div class="my-5 flex items-center gap-3 flex-wrap">
         <h1 class="m-0" style="overflow-wrap: anywhere;"> {{ _class.name }} </h1>
         {% if _class.archived %}
-        <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-gray-200 text-gray-800 border border-gray-400">Archived</span>
+        <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-gray-200 text-gray-800 border border-gray-400">{{ _('archived') }}</span>
         {% endif %}
     </div>
     <div class="flex flex-row gap-4">
@@ -58,14 +58,14 @@
                 data-cy="unarchive_class"
                 data-confirm-modal="redesign"
                 data-confirm-button-class="green-btn-new"
-                data-confirm-button-label="{{_('archive')}}"
-                data-confirm-title="{{_('archive_class')}}"
+                data-confirm-button-label="{{_('unarchive')}}"
+                data-confirm-title="{{_('unarchive_class')}}"
                 data-confirm-title-name="{{ _class.name|upper|e }}"
-                hx-confirm="{{_('are_you_sure')}}"
+                hx-confirm="{{_('are_you_sure_soft')}}"
                 hx-post="/for-teachers/class/{{ _class.id }}/unarchive"
                 hx-swap="none"
                 hx-on::after-request="if (event.detail.successful) { window.location.reload(); }"
-            >Unarchive</button>
+            >{{ _('unarchive') }}</button>
             {% else %}
             <button
                 type="button"
@@ -76,7 +76,7 @@
                 data-confirm-button-label="{{_('archive')}}"
                 data-confirm-title="{{_('archive_class')}}"
                 data-confirm-title-name="{{ _class.name|upper|e }}"
-                hx-confirm="{{_('are_you_sure')}}"
+                hx-confirm="{{_('are_you_sure_soft')}}"
                 hx-post="/for-teachers/class/{{ _class.id }}/archive"
                 hx-swap="none"
                 hx-on::after-request="if (event.detail.successful) { window.location.reload(); }"

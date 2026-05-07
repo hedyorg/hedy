@@ -69,7 +69,7 @@
                       <button
                         data-cy="archive_class"
                         data-class-name="{{ class.name|e }}"
-                        data-archive-class-prompt="{{ _('are_you_sure')|e }}"
+                        data-archive-class-prompt="{{ _('are_you_sure_soft')|e }}"
                         data-archive-class-title="{{ _('archive_class')|e }}"
                         data-archive-label="{{ _('archive')|e }}"
                         class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 font-bold"
@@ -85,14 +85,14 @@
                       <button
                         data-cy="unarchive_class"
                         data-class-name="{{ class.name|e }}"
-                        data-unarchive-class-prompt="{{ _('are_you_sure')|e }}"
-                        data-unarchive-class-title="{{ _('archive_class')|e }}"
-                        data-unarchive-label="{{ _('archive')|e }}"
+                        data-unarchive-class-prompt="{{ _('are_you_sure_soft')|e }}"
+                        data-unarchive-class-title="{{ _('unarchive_class')|e }}"
+                        data-unarchive-label="{{ _('unarchive')|e }}"
                         class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 font-bold"
                         onclick="hedyApp.unarchive_class_redesign('{{ class.id }}', this.dataset.unarchiveClassPrompt, this.dataset.className, this, this.dataset.unarchiveLabel, this.dataset.unarchiveClassTitle)"
                       >
                         <i class="fa-solid fa-box-open text-sm"></i>
-                        <span class="m-3">Unarchive</span>
+                        <span class="m-3">{{ _('unarchive') }}</span>
                       </button>
                     </li>
                     {% endif %}

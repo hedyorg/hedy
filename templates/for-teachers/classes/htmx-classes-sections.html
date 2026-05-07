@@ -8,6 +8,6 @@
   {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}
 </a>
 
-<h2 class="my-5">{{_('archive')}} {{_('classes')|lower}}</h2>
+<h2 class="my-5">{{_('archived_classes') }}</h2>
 {{ render_partial('for-teachers/classes/htmx-classes-table.html', teacher_classes=archived_classes, is_archived=True) }}
 

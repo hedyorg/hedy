@@ -116,11 +116,11 @@ export function create_class_redesign(form: HTMLFormElement) {
   const classToCopy = form.querySelector('#class_to_copy') as HTMLSelectElement | null
   const copySecondTeachers = form.querySelector('#copy_second_teachers') as HTMLInputElement | null;
 
-  if (!radio || !className || !classToCopy) {
+  if (!radio || !className) {
     throw new Error("Missing required elements in the form");
   }
 
-  if (radio.value === 'copy' && classToCopy.value === '') {
+  if (radio.value === 'copy' && (!classToCopy || classToCopy.value === '')) {
     modal.notifyError(ClientMessages.Other_error);
     return;
   }
@@ -130,7 +130,7 @@ export function create_class_redesign(form: HTMLFormElement) {
       type: 'POST',
       url: '/duplicate_class',
       data: JSON.stringify({
-        id: classToCopy.value,
+        id: classToCopy!.value,
         name: className.value,
         copy_second_teachers: copySecondTeachers?.checked || false,
       }),
