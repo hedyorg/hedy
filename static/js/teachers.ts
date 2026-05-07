@@ -65,6 +65,33 @@ function getRedesignDeleteClassConfirmOptions(confirmLabel: string | undefined, 
   };
 }
 
+function getRedesignArchiveClassConfirmOptions(
+  confirmLabel: string | undefined,
+  confirmTitle: string | undefined,
+  className: string,
+) {
+  return {
+    confirmButtonClass: 'green-btn-new',
+    confirmButtonLabel: confirmLabel,
+    confirmTitle,
+    confirmTitleName: className.toUpperCase(),
+  };
+}
+
+function refreshClassesTableContainer(response: unknown) {
+  const classesContainer = document.getElementById('classes_table_container');
+  if (!classesContainer || typeof response !== 'string') {
+    return;
+  }
+
+  classesContainer.innerHTML = response;
+  htmx.process(document.body);
+
+  // Reprocess Hyperscript attributes in the swapped DOM so menu buttons keep working.
+  const hyperscript = (window as unknown as { _hyperscript?: { processNode?: (node: HTMLElement) => void } })._hyperscript;
+  hyperscript?.processNode?.(classesContainer);
+}
+
 export function create_class(class_name_prompt: string) {
   promptByPageVariant(class_name_prompt, '', function (class_name) {
     $.ajax({
@@ -234,6 +261,50 @@ export function delete_class_redesign(
       modal.notifyError(err.responseText);
     });
   }, function(){}, getRedesignDeleteClassConfirmOptions(confirmLabel, confirmTitle, className));
+}
+
+export function archive_class_redesign(
+  id: string,
+  prompt: string,
+  className: string,
+  _button: HTMLElement,
+  confirmLabel?: string,
+  confirmTitle?: string,
+) {
+  closeOpenContextMenus();
+  return modal.confirmRedesign(prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/class/' + id + '/archive',
+      contentType: 'application/json',
+    }).done(function (response) {
+      refreshClassesTableContainer(response);
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+  }, function(){}, getRedesignArchiveClassConfirmOptions(confirmLabel, confirmTitle, className));
+}
+
+export function unarchive_class_redesign(
+  id: string,
+  prompt: string,
+  className: string,
+  _button: HTMLElement,
+  confirmLabel?: string,
+  confirmTitle?: string,
+) {
+  closeOpenContextMenus();
+  return modal.confirmRedesign(prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/class/' + id + '/unarchive',
+      contentType: 'application/json',
+    }).done(function (response) {
+      refreshClassesTableContainer(response);
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+  }, function(){}, getRedesignArchiveClassConfirmOptions(confirmLabel, confirmTitle, className));
 }
 
 export function join_class(id: string, name: string) {
@@ -1423,6 +1494,8 @@ export interface InitializeContextMenuPageOptions {
   readonly page: 'classes' | 'manage-students';
 }
 
+let contextMenuClickListenerInitialized = false;
+
 const contextMenuOriginTopClasses = ['origin-top-right'];
 const contextMenuOriginBottomClasses = ['origin-bottom-right'];
 const contextMenuAutoUpdateHandlers = new Map<HTMLElement, () => void>();
@@ -1518,6 +1591,11 @@ export function positionContextMenu(button: HTMLElement, allowFlip = true) {
 }
 
 export function initializeContextMenuEventHandler(_options: InitializeContextMenuPageOptions) {
+  if (contextMenuClickListenerInitialized) {
+    return;
+  }
+  contextMenuClickListenerInitialized = true;
+
   // Event listener to close the adventures dropdown when you click outside of it
   document.addEventListener('click', (ev) => {
     const target = ev.target as HTMLElement;

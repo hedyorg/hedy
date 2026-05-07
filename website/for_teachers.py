@@ -281,18 +281,32 @@ class ForTeachersModule(WebsiteModule):
                 error=401, ui_message=gettext("retrieve_class_error")
             )
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
-        for _class in teacher_classes:
-            _class["date"] = utils.localized_date_format(_class["date"], only_date=True)
+        active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
         logger.info(teacher_classes)
         return render_template(
             "for-teachers/classes/classes.html",
             current_page="classes",
             page_title=gettext("classes"),
-            teacher_classes=teacher_classes,
+            active_classes=active_classes,
+            archived_classes=archived_classes,
             javascript_page_options=dict(
                 page="classes",
             ),
         )
+
+    @staticmethod
+    def _split_teacher_classes_by_archive_state(teacher_classes):
+        active_classes = []
+        archived_classes = []
+
+        for _class in teacher_classes:
+            _class["date"] = utils.localized_date_format(_class["date"], only_date=True)
+            if _class.get("archived"):
+                archived_classes.append(_class)
+            else:
+                active_classes.append(_class)
+
+        return active_classes, archived_classes
 
     @route("/class/<class_id>", methods=["DELETE"])
     @requires_login
@@ -305,12 +319,50 @@ class ForTeachersModule(WebsiteModule):
 
         self.db.delete_class(Class)
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
-        for _class in teacher_classes:
-            _class["date"] = utils.localized_date_format(_class["date"], only_date=True)
+        active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
 
         return render_partial(
-            "for-teachers/classes/htmx-classes-table.html",
-            teacher_classes=teacher_classes,
+            "for-teachers/classes/htmx-classes-sections.html",
+            active_classes=active_classes,
+            archived_classes=archived_classes,
+        )
+
+    @route("/class/<class_id>/archive", methods=["POST"])
+    @requires_login
+    def archive_class_redesign(self, user, class_id):
+        Class = self.db.get_class(class_id)
+        if not Class:
+            return make_response(gettext("no_such_class"), 404)
+        if Class["teacher"] != user["username"]:
+            return make_response(gettext("unauthorized"), 401)
+
+        self.db.update_class_data(class_id, {"archived": True})
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
+
+        return render_partial(
+            "for-teachers/classes/htmx-classes-sections.html",
+            active_classes=active_classes,
+            archived_classes=archived_classes,
+        )
+
+    @route("/class/<class_id>/unarchive", methods=["POST"])
+    @requires_login
+    def unarchive_class_redesign(self, user, class_id):
+        Class = self.db.get_class(class_id)
+        if not Class:
+            return make_response(gettext("no_such_class"), 404)
+        if Class["teacher"] != user["username"]:
+            return make_response(gettext("unauthorized"), 401)
+
+        self.db.update_class_data(class_id, {"archived": False})
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
+
+        return render_partial(
+            "for-teachers/classes/htmx-classes-sections.html",
+            active_classes=active_classes,
+            archived_classes=archived_classes,
         )
 
     @route("/class/new", methods=["GET"])

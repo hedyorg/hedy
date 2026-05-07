@@ -107,6 +107,77 @@ describe('Redesigned class overview navigation', () => {
     });
   });
 
+  it('keeps context menu functional after archiving one class and allows archiving another', () => {
+    cy.get('@classId').then((firstClassId) => {
+      createRedesignClass({ className: uniqueName('overview-archive-second') }).then(({ classId: secondClassId }) => {
+        cy.intercept('POST', '/for-teachers/class/*/archive').as('archiveClass');
+        cy.visit('/for-teachers/class/all');
+
+        openClassesContextMenuForClass(firstClassId);
+        cy.get('@targetRow').find('button[data-cy="archive_class"]').should('be.visible').click();
+        cy.getDataCy('redesign_confirm_modal').should('be.visible');
+        cy.getDataCy('redesign_confirm_yes_button').click();
+        cy.wait('@archiveClass').its('response.statusCode').should('eq', 200);
+        cy.getDataCy('redesign_confirm_modal').should('not.be.visible');
+
+        // Regression assertion: context menu should still open for another class
+        openClassesContextMenuForClass(secondClassId);
+        cy.get('@contextMenu').should('be.visible').and('not.have.class', 'hidden').and('have.class', 'menu-content-open');
+
+        cy.get('@targetRow').find('button[data-cy="archive_class"]').should('be.visible').click();
+        cy.getDataCy('redesign_confirm_modal').should('be.visible');
+        cy.getDataCy('redesign_confirm_yes_button').click();
+        cy.wait('@archiveClass').its('response.statusCode').should('eq', 200);
+      });
+    });
+  });
+
+  it('shows unarchive action in archived classes table and moves class back to active', () => {
+    cy.get('@classId').then((classId) => {
+      cy.intercept('POST', '/for-teachers/class/*/archive').as('archiveClass');
+      cy.intercept('POST', '/for-teachers/class/*/unarchive').as('unarchiveClass');
+
+      cy.visit('/for-teachers/class/all');
+      openClassesContextMenuForClass(classId);
+      cy.get('@targetRow').find('button[data-cy="archive_class"]').should('be.visible').click();
+      cy.getDataCy('redesign_confirm_yes_button').click();
+      cy.wait('@archiveClass').its('response.statusCode').should('eq', 200);
+
+      cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).closest('tr').as('archivedRow');
+      cy.get('@archivedRow').find('button.blue-btn-new').first().click();
+      cy.get('@archivedRow').find('div[id^="menu-"]').should('be.visible').and('not.have.class', 'hidden');
+      cy.get('@archivedRow').find('button[data-cy="unarchive_class"]').should('be.visible').click();
+      cy.getDataCy('redesign_confirm_yes_button').click();
+      cy.wait('@unarchiveClass').its('response.statusCode').should('eq', 200);
+
+      cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).closest('tr').as('activeRow');
+      cy.get('@activeRow').find('button.blue-btn-new').first().click();
+      cy.get('@activeRow').find('button[data-cy="archive_class"]').should('be.visible');
+    });
+  });
+
+  it('toggles archive/unarchive button and archived badge on class overview page', () => {
+    cy.get('@classId').then((classId) => {
+      cy.intercept('POST', '/for-teachers/class/*/archive').as('archiveClass');
+      cy.intercept('POST', '/for-teachers/class/*/unarchive').as('unarchiveClass');
+
+      openClassOverview(classId);
+      cy.getDataCy('archive_class').should('be.visible').click();
+      cy.getDataCy('redesign_confirm_yes_button').click();
+      cy.wait('@archiveClass').its('response.statusCode').should('eq', 200);
+
+      cy.contains('span', 'Archived').should('be.visible');
+      cy.getDataCy('archive_class').should('not.exist');
+      cy.getDataCy('unarchive_class').should('be.visible').click();
+      cy.getDataCy('redesign_confirm_yes_button').click();
+      cy.wait('@unarchiveClass').its('response.statusCode').should('eq', 200);
+
+      cy.contains('span', 'Archived').should('not.exist');
+      cy.getDataCy('archive_class').should('be.visible');
+      cy.getDataCy('unarchive_class').should('not.exist');
+    });
+  });
+
   it('positions classes table context menu within viewport on mobile/tablet/desktop', () => {
     cy.get('@classId').then((classId) => {
       const viewports = ['iphone-6', 'ipad-2', [1280, 800]];

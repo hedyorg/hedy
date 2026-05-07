@@ -4,9 +4,8 @@
         {% from 'incl/breadcrumb.html' import breadcrumb %}
         {{ breadcrumb([{'label': _('classes')}]) }}
         <h1>{{ _('classes') }}</h1>
-        <h2 class="my-5">{{_('active_classes')}}</h2>        
-        {% if teacher_classes %}
-            {{ render_partial('for-teachers/classes/htmx-classes-table.html', teacher_classes=teacher_classes) }}
-        {% endif %}    
+        <div id="classes_table_container">
+            {{ render_partial('for-teachers/classes/htmx-classes-sections.html', active_classes=active_classes, archived_classes=archived_classes) }}
+        </div>
     </div>
 {% endblock %}
