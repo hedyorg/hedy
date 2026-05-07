@@ -59,6 +59,6 @@ teachers.forEach((teacher) => {
     cy.url()
       .should('eq', Cypress.config('baseUrl') + Cypress.env('teachers_page'));
     openAdventureView();
-    cy.getDataCy('adventures_table').should("not.contain.text", advName);
+    cy.getDataCyLike(`edit_link_${advName}`).should('not.exist');
   })
 })

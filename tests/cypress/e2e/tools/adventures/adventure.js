@@ -39,8 +39,11 @@ export function deleteAdventure(name) {
 }
 
 export function openAdventureView(){
-    cy.getDataCy('adventures_table').then($viewAdventure => {
-        if (!$viewAdventure.is(':visible')) {
+    cy.get('body').then(($body) => {
+        const $table = $body.find('[data-cy="adventures_table"]');
+        const isVisible = $table.length > 0 && $table.is(':visible');
+
+        if (!isVisible && $body.find('[data-cy="view_adventures"]').length > 0) {
             cy.getDataCy('view_adventures').click();
         }
     });

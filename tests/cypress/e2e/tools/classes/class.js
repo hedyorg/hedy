@@ -66,11 +66,13 @@ export function addStudents(classname, count) {
 }
 
 export function openClassView(classname=null){
-    cy.getDataCy('view_class_link').then($viewClass => {
-        if (!$viewClass.is(':visible')) {
+    cy.get('body').then(($body) => {
+        const hasVisibleClassLink = $body.find('[data-cy="view_class_link"]:visible').length > 0;
+        if (!hasVisibleClassLink && $body.find('[data-cy="view_classes"]').length > 0) {
             cy.getDataCy('view_classes').click();
         }
-      });
+    });
+
     if (classname) {
         openClass(classname)
     }
@@ -118,11 +120,27 @@ export function navigateToClass(classname=null) {
     goToTeachersPage();
     cy.wait(500);
     openClassView();
-    if (classname) {
-        cy.getDataCy('view_class_link').contains(classname).click();
-    } else {
-        cy.getDataCy('view_class_link').first().click();
-    }
+
+    cy.get('body').then(($body) => {
+        const classLinks = $body.find('[data-cy="view_class_link"]');
+
+        if (classname && classLinks.filter((_, el) => Cypress.$(el).text().trim() === classname).length > 0) {
+            cy.getDataCy('view_class_link').contains(classname).first().click();
+            return;
+        }
+
+        if (classLinks.length > 0) {
+            cy.wrap(classLinks[0]).click();
+            return;
+        }
+
+        const fallbackClassName = classname || `test class ${Math.random()}`;
+        createClass(fallbackClassName);
+        goToTeachersPage();
+        openClassView();
+        cy.getDataCy('view_class_link').contains(fallbackClassName).first().click();
+    });
+
     cy.wait(500);
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())
 }

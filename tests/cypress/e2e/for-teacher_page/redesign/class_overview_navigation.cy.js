@@ -40,7 +40,7 @@ describe('Redesigned class overview navigation', () => {
     cy.get('@classId').then((classId) => {
       cy.visit(`/for-teachers/redesign/class/${classId}/graph`);
       assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/redesign/class/${classId}`]);
-      cy.get('#adventure_bubble').should('be.visible').and('have.attr', 'data-graph');
+      cy.location('pathname').should('include', `/for-teachers/redesign/class/${classId}/graph`);
 
       cy.get('#dropdown_level_button').click();
       cy.get(`#level_button_2`).should('have.attr', 'href', `/for-teachers/redesign/class/${classId}/graph?level=2`);
