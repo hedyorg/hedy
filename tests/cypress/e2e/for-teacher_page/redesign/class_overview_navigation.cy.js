@@ -1,5 +1,12 @@
 import { loginAndOpenClasses, createRedesignClass, openClassOverview, assertBreadcrumbLinks, uniqueName } from './helpers';
 
+function openClassesContextMenuForClass(classId) {
+  cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).closest('tr').as('targetRow');
+  cy.get('@targetRow').find('button.blue-btn-new').first().click();
+  cy.get('@targetRow').find('div[id^="menu-"]').as('contextMenu');
+  cy.get('@contextMenu').should('be.visible').and('not.have.class', 'hidden').and('have.class', 'menu-content-open');
+}
+
 describe('Redesigned class overview navigation', () => {
   beforeEach(() => {
     loginAndOpenClasses();
@@ -56,6 +63,74 @@ describe('Redesigned class overview navigation', () => {
       cy.get('@targetRow').find('div[id^="menu-"]').should('be.visible').and('not.have.class', 'hidden');
       cy.get('@targetRow').find('a[href*="/configure"]').should('be.visible').click();
       cy.url().should('include', `/for-teachers/redesign/class/${classId}/configure`);
+    });
+  });
+
+  it('toggles classes table context menu open/close with animation classes', () => {
+    cy.get('@classId').then((classId) => {
+      cy.visit('/for-teachers/class/all');
+      openClassesContextMenuForClass(classId);
+
+      cy.get('@contextMenu')
+        .should('have.class', 'transition-opacity')
+        .and('have.class', 'transition-transform')
+        .and('have.class', 'duration-150')
+        .and('have.class', 'menu-content-open')
+        .and('not.have.class', 'menu-content-closed');
+
+      cy.get('@targetRow').find('button.blue-btn-new').first().click();
+      cy.get('@contextMenu').should('have.class', 'menu-content-closed').and('not.have.class', 'menu-content-open');
+      cy.wait(220);
+      cy.get('@contextMenu').should('have.class', 'hidden');
+
+      cy.get('@targetRow').find('button.blue-btn-new').first().click();
+      cy.get('@contextMenu').should('be.visible').and('have.class', 'menu-content-open').and('not.have.class', 'hidden');
+    });
+  });
+
+  it('hides classes table context menu when delete modal opens', () => {
+    cy.get('@classId').then((classId) => {
+      cy.visit('/for-teachers/class/all');
+      openClassesContextMenuForClass(classId);
+
+      cy.get('@targetRow').find('button[data-cy="remove_class"]').should('be.visible').click();
+      cy.getDataCy('redesign_confirm_modal').should('be.visible');
+
+      cy.wait(220);
+      cy.get('@contextMenu')
+        .should('have.class', 'hidden')
+        .and('have.class', 'menu-content-closed')
+        .and('not.have.class', 'menu-content-open');
+
+      cy.getDataCy('redesign_confirm_no_button').click();
+      cy.getDataCy('redesign_confirm_modal').should('not.be.visible');
+    });
+  });
+
+  it('positions classes table context menu within viewport on mobile/tablet/desktop', () => {
+    cy.get('@classId').then((classId) => {
+      const viewports = ['iphone-6', 'ipad-2', [1280, 800]];
+
+      cy.wrap(viewports).each((viewport) => {
+        if (Array.isArray(viewport)) {
+          cy.viewport(viewport[0], viewport[1]);
+        } else {
+          cy.viewport(viewport);
+        }
+
+        cy.visit('/for-teachers/class/all');
+        openClassesContextMenuForClass(classId);
+
+        cy.window().then((win) => {
+          cy.get('@contextMenu').then(($menu) => {
+            const rect = $menu[0].getBoundingClientRect();
+            expect(rect.top).to.be.at.least(0);
+            expect(rect.left).to.be.at.least(0);
+            expect(rect.right).to.be.at.most(win.innerWidth);
+            expect(rect.bottom).to.be.at.most(win.innerHeight);
+          });
+        });
+      });
     });
   });
 

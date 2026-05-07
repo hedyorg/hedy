@@ -22,17 +22,8 @@
             <td data-cy="teacher_cell" class="py-3 text-center">
               {{ class.teacher }}
               {% if class.second_teachers %}
-                {% set second_teacher_names = [] %}
-                {% for second_teacher in class.second_teachers %}
-                  {% if second_teacher.username is defined %}
-                    {% set _ = second_teacher_names.append(second_teacher.username) %}
-                  {% elif second_teacher is string %}
-                    {% set _ = second_teacher_names.append(second_teacher) %}
-                  {% endif %}
-                {% endfor %}
-                {% if second_teacher_names %}
-                  <span class="text-sm text-gray-600">, {{ second_teacher_names | join(', ') }}</span>
-                {% endif %}
+                {% set second_count = class.second_teachers | length %}
+                <span class="text-sm text-gray-600">+{{ second_count }} {{ _('teacher')|lower if second_count == 1 else _('teachers')|lower  }}</span>
               {% endif %}
             </td>
             <td class="text-center">{{ class.students|length }}</td>

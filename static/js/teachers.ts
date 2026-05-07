@@ -17,6 +17,7 @@ declare let window: CustomWindow;
 const editorCreator = new HedyCodeMirrorEditorCreator();
 
 function promptByPageVariant(message: string, defaultValue: string, confirmCb: (value: string) => void, title: string = '') {
+  closeOpenContextMenus();
   const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
   modal.prompt(message, defaultValue, confirmCb, isRedesignPage ? 'redesign' : 'legacy', title);
 }
@@ -33,6 +34,7 @@ function confirmByPageVariant(
     confirmTitleName?: string;
   },
 ) {
+  closeOpenContextMenus();
   const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
   if (isRedesignPage) {
     modal.confirmRedesign(message, confirmCb, declineCb, redesignOptions);
@@ -220,6 +222,7 @@ export function delete_class_redesign(
   confirmLabel?: string,
   confirmTitle?: string,
 ) {
+  closeOpenContextMenus();
   return modal.confirmRedesign(prompt, function () {
     $.ajax({
       type: 'DELETE',
@@ -1447,6 +1450,22 @@ function cleanupInactiveContextMenus() {
   }
 }
 
+export function closeOpenContextMenus() {
+  const openMenus = document.querySelectorAll('[name="menu"]>div.menu-content-open');
+  if (!openMenus.length) {
+    return;
+  }
+
+  openMenus.forEach((el) => {
+    stopContextMenuAutoUpdate(el as HTMLElement);
+    el.classList.remove('menu-content-open');
+    el.classList.add('menu-content-closed');
+    setTimeout(() => {
+      el.classList.add('hidden');
+    }, 200);
+  });
+}
+
 export function teardownContextMenu(button: HTMLElement) {
   const menuContainer = button.closest('[name="menu"]');
   const menu = menuContainer?.querySelector('div[id^="menu-"]') as HTMLElement | null;
@@ -1502,21 +1521,18 @@ export function initializeContextMenuEventHandler(_options: InitializeContextMen
   // Event listener to close the adventures dropdown when you click outside of it
   document.addEventListener('click', (ev) => {
     const target = ev.target as HTMLElement;
+    const modalTrigger = target.closest('[hx-target="#modal_target"], [data-confirm-modal]');
+    if (modalTrigger) {
+      closeOpenContextMenus();
+      return;
+    }
+
     const parents = document.querySelectorAll('[name="menu"]')
     for (const parent of parents) {
       if (parent.contains(target)) {
         return;
       }
     }
-    if (document.querySelectorAll('[name="menu"]>div.menu-content-open').length) {
-      document.querySelectorAll('[name="menu"]>div.menu-content-open').forEach((el) => {
-        stopContextMenuAutoUpdate(el as HTMLElement);
-        el.classList.remove('menu-content-open');
-        el.classList.add('menu-content-closed');
-        setTimeout(() => {
-          el.classList.add('hidden');
-        }, 200);
-      });
-    }
+    closeOpenContextMenus();
   });
 }
