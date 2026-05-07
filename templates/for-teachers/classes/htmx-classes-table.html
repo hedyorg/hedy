@@ -115,6 +115,10 @@
               </div>
             </td>
           </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" class="text-center py-6 px-4 text-sm text-gray-600">{{ _('no_existing_class') }}</td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
