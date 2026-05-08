@@ -32,6 +32,9 @@
                         <p class="mt-0">{{ _('copy_class_explanation') }}</p>
                         {% if not teacher_classes %}
                             <p>{{ _('no_existing_class') }}</p>
+                            <select class="hidden" name="class_to_copy" id="class_to_copy" aria-hidden="true" tabindex="-1">
+                                <option value=""></option>
+                            </select>
                         {% else %}
                             <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-0">
                                 <span class="">{{ _('class')  }}</span>

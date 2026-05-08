@@ -7,6 +7,7 @@ class Modal {
   private readonly redesignConfirmDefaultButtonClass: string;
   private readonly redesignConfirmDefaultButtonLabel: string;
   private readonly redesignConfirmDefaultActionsClass: string;
+  private readonly redesignConfirmDefaultTitle: string;
 
   constructor() {
     // Just one binding, never needs stat
@@ -30,9 +31,11 @@ class Modal {
 
     const redesignConfirmYesButton = $('#redesign_confirm_yes_button');
     const redesignConfirmActions = $('#redesign_confirm_actions');
+    const redesignConfirmTitle = $('#redesign_confirm_title');
     this.redesignConfirmDefaultButtonClass = String(redesignConfirmYesButton.attr('class') ?? 'green-btn-new');
     this.redesignConfirmDefaultButtonLabel = String(redesignConfirmYesButton.text()).trim();
     this.redesignConfirmDefaultActionsClass = String(redesignConfirmActions.attr('class') ?? '');
+    this.redesignConfirmDefaultTitle = String(redesignConfirmTitle.text()).trim();
   }
 
   private _timeout?: ReturnType<typeof setTimeout>
@@ -210,15 +213,29 @@ class Modal {
       confirmButtonClass?: string;
       confirmButtonLabel?: string;
       confirmActionsClass?: string;
+      confirmTitle?: string;
+      confirmTitleName?: string;
     },
   ) {
     this.hide();
     const redesignConfirmYesButton = $('#redesign_confirm_yes_button');
     const redesignConfirmActions = $('#redesign_confirm_actions');
+    const redesignConfirmTitle = $('#redesign_confirm_title');
+    const redesignConfirmTitleName = $('#redesign_confirm_title_name');
 
     redesignConfirmYesButton.attr('class', options?.confirmButtonClass ?? this.redesignConfirmDefaultButtonClass);
     redesignConfirmYesButton.text(options?.confirmButtonLabel ?? this.redesignConfirmDefaultButtonLabel);
     redesignConfirmActions.attr('class', options?.confirmActionsClass ?? this.redesignConfirmDefaultActionsClass);
+    redesignConfirmTitle.text(options?.confirmTitle ?? this.redesignConfirmDefaultTitle);
+    if (options?.confirmTitleName) {
+      redesignConfirmTitleName.text(options.confirmTitleName);
+      redesignConfirmTitleName.attr('title', options.confirmTitleName);
+      redesignConfirmTitleName.removeClass('hidden');
+    } else {
+      redesignConfirmTitleName.text('');
+      redesignConfirmTitleName.attr('title', '');
+      redesignConfirmTitleName.addClass('hidden');
+    }
 
     $('#redesign_confirm_text').text(message);
     $('#redesign_confirm_modal').removeClass('hidden').addClass('flex');

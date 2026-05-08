@@ -4,6 +4,7 @@
 import { initializeHighlightedCodeBlocks } from './app';
 import { ClientMessages } from './client-messages';
 import { modal } from './modal';
+import { closeOpenContextMenus } from './teachers';
 import Sortable from 'sortablejs';
 
 declare const htmx: typeof import('./htmx');
@@ -103,6 +104,10 @@ htmx.on("htmx:confirm", function(e: any) {
     const confirmButtonClass = modalElement.getAttribute('data-confirm-button-class') ?? undefined;
     const confirmButtonLabel = modalElement.getAttribute('data-confirm-button-label') ?? undefined;
     const confirmActionsClass = modalElement.getAttribute('data-confirm-actions-class') ?? undefined;
+    const confirmTitle = modalElement.getAttribute('data-confirm-title') ?? undefined;
+    const confirmTitleName = modalElement.getAttribute('data-confirm-title-name') ?? undefined;
+
+    closeOpenContextMenus();
 
     confirmFn(modalPrompt, () => {
         modalElement.removeAttribute("hx-confirm");
@@ -115,5 +120,19 @@ htmx.on("htmx:confirm", function(e: any) {
         confirmButtonClass,
         confirmButtonLabel,
         confirmActionsClass,
+        confirmTitle,
+        confirmTitleName,
     });
+});
+
+htmx.on('htmx:beforeRequest', function (e: any) {
+    const requestElement = e.detail?.elt as HTMLElement | undefined;
+    if (!requestElement) {
+        return;
+    }
+
+    const targetSelector = requestElement.getAttribute('hx-target');
+    if (targetSelector === '#modal_target') {
+        closeOpenContextMenus();
+    }
 });

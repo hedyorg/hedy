@@ -1,15 +1,7 @@
 {% set level = level|default(1) %}
 {% set class_id = class_id|default('') %}
-<div id="level_adventures_panel" class="flex flex-col w-full md:w-1/2 gap-3">
+<div id="level_adventures_panel" class="flex flex-col w-full md:w-1/2 gap-1">
     <div class="flex flex-wrap items-center gap-3">
-        <button
-            type="button"
-            class="blue-btn-new"
-            _="on click remove .hidden from #add_adventures_modal_level_{{ level }} then add .overflow-hidden to <body/>"
-        >
-            {{ _('add_adventures') }}
-        </button>
-
         <div
             id="add_adventures_modal_level_{{ level }}"
             class="hidden fixed inset-0 z-50 flex items-center justify-center"
@@ -100,7 +92,10 @@
                             {% endif %}
                         </div>
 
-                        <a href="/for-teachers/customize-adventure" class="inline-flex mt-3 blue-btn-new no-underline">{{ _('create_adventure') }}</a>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <a href="/for-teachers/customize-adventure" class="inline-flex blue-btn-new no-underline">{{ _('create_adventure') }}</a>
+                            <a href="/public-adventures" class="inline-flex blue-btn-new no-underline">{{ _('public_adventures') }}</a>
+                        </div>
                     </div>
 
                     <div class="flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6">
@@ -122,7 +117,7 @@
 
     <ul
         id="level_{{ level }}"
-        class="flex flex-col gap-2 sortable"
+        class="flex flex-col gap-1 sortable mt-0"
         hx-trigger="end"
         hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/sort-adventures"
         hx-target="#level_adventures_panel"
@@ -163,4 +158,14 @@
     {% if adventures|length == 0 %}
         <p class="text-sm text-gray-500 m-0">{{ _('no_adventures_in_level') }}</p>
     {% endif %}
+
+    <div class="flex flex-wrap items-center gap-3 pt-1 mt-2">
+        <button
+            type="button"
+            class="blue-btn-new"
+            _="on click remove .hidden from #add_adventures_modal_level_{{ level }} then add .overflow-hidden to <body/>"
+        >
+            {{ _('add_adventures') }}
+        </button>
+    </div>
 </div>

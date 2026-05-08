@@ -186,7 +186,7 @@ describe('Redesigned class performance graph page', () => {
     cy.get(`#${selectedStudent}_programs_container`).find('[data-cy="no-programs"]').should('be.visible');
   });
 
-  it('closes a loaded student programs panel', () => {
+  it('does not show a destructive close button on loaded student programs panel', () => {
     const selectedStudent = students[0];
 
     openClassSubpage(classId, 'graph');
@@ -198,9 +198,12 @@ describe('Redesigned class performance graph page', () => {
 
     cy.wait('@loadClosableGraphPrograms').its('response.statusCode').should('eq', 200);
     cy.get(`#${selectedStudent}_programs_container`).should('be.visible').within(() => {
-      cy.getDataCy('hide').click();
+      cy.getDataCy('hide')
+        .should('be.visible')
+        .and('not.have.class', 'red-btn-new')
+        .and('not.have.class', 'text-red-700');
+      cy.get('.red-btn-new').should('not.exist');
     });
-    cy.get(`#${selectedStudent}_programs_container`).should('not.exist');
   });
 
   it('returns 404 for a non-existing redesigned class graph id', () => {

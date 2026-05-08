@@ -47,6 +47,7 @@ class ClassModule(WebsiteModule):
             "id": uuid.uuid4().hex,
             "date": utils.timems(),
             "teacher": user["username"],
+            "archived": False,
             # TODO: remove once we deploy new redesign
             "link": utils.random_id_generator(7),
             "name": body["name"],
@@ -82,6 +83,7 @@ class ClassModule(WebsiteModule):
                 "id": uuid.uuid4().hex,
                 "date": utils.timems(),
                 "teacher": user["username"],
+                "archived": False,
                 # TODO: remove once we deploy new redesign
                 "link": utils.random_id_generator(7),
                 "name": body["name"],
@@ -281,6 +283,7 @@ class MiscClassPages(WebsiteModule):
             "id": class_id,
             "date": utils.timems(),
             "teacher": user["username"],
+            "archived": False,
             # TODO: remove once we deploy new redesign
             "link": utils.random_id_generator(7),
             "name": body.get("name"),
