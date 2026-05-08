@@ -1,9 +1,16 @@
-# Using a Merge queue makes Mergify automatically keep the PR
-# up-to-date with 'main', one PR at a time.
 queue_rules:
   - name: default_queue
-    merge_conditions:
+    batch_size: 1
+    queue_conditions:
+      - "#approved-reviews-by>=1"
+      - "#changes-requested-reviews-by=0"
       - "check-success=build"
+      - "check-success=cypress"
+    merge_conditions:
+      - "#approved-reviews-by>=1"
+      - "#changes-requested-reviews-by=0"
+      - "check-success=build"
+      - "check-success=cypress"
     merge_method: squash
     commit_message_template: |-
       {{ title }} (#{{number}})
@@ -27,5 +34,6 @@ pull_request_rules:
         message: Thank you for contributing! Your pull request is now going on the merge train (choo choo! Do not click update from main anymore, and be sure to [allow changes to be pushed to your fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork)).
       queue:
         name: default_queue
+
 merge_queue:
   max_parallel_checks: 1
