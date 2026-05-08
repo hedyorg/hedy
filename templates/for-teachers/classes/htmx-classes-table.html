@@ -67,13 +67,19 @@
                     </a>
                     <li>
                       <button
+                        type="button"
                         data-cy="archive_class"
                         data-class-name="{{ class.name|e }}"
-                        data-archive-class-prompt="{{ _('are_you_sure_soft')|e }}"
-                        data-archive-class-title="{{ _('archive_class')|e }}"
-                        data-archive-label="{{ _('archive')|e }}"
+                        data-confirm-modal="redesign"
+                        data-confirm-button-class="green-btn-new"
+                        data-confirm-button-label="{{_('archive')|e}}"
+                        data-confirm-title="{{_('archive_class')|e}}"
+                        data-confirm-title-name="{{ class.name|upper|e }}"
                         class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 font-bold"
-                        onclick="hedyApp.archive_class_redesign('{{ class.id }}', this.dataset.archiveClassPrompt, this.dataset.className, this, this.dataset.archiveLabel, this.dataset.archiveClassTitle)"
+                        hx-confirm="{{_('are_you_sure_soft')}}"
+                        hx-post="/for-teachers/class/{{ class.id }}/archive"
+                        hx-target="#classes_table_container"
+                        hx-swap="innerHTML"
                       >
                         <i class="fa-solid fa-box-archive text-sm"></i>
                         <span class="m-3">{{_('archive')}}</span>
@@ -83,13 +89,19 @@
                     {% if is_archived %}
                     <li>
                       <button
+                        type="button"
                         data-cy="unarchive_class"
                         data-class-name="{{ class.name|e }}"
-                        data-unarchive-class-prompt="{{ _('are_you_sure_soft')|e }}"
-                        data-unarchive-class-title="{{ _('unarchive_class')|e }}"
-                        data-unarchive-label="{{ _('unarchive')|e }}"
+                        data-confirm-modal="redesign"
+                        data-confirm-button-class="green-btn-new"
+                        data-confirm-button-label="{{_('unarchive')|e}}"
+                        data-confirm-title="{{_('unarchive_class')|e}}"
+                        data-confirm-title-name="{{ class.name|upper|e }}"
                         class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 font-bold"
-                        onclick="hedyApp.unarchive_class_redesign('{{ class.id }}', this.dataset.unarchiveClassPrompt, this.dataset.className, this, this.dataset.unarchiveLabel, this.dataset.unarchiveClassTitle)"
+                        hx-confirm="{{_('are_you_sure_soft')}}"
+                        hx-post="/for-teachers/class/{{ class.id }}/unarchive"
+                        hx-target="#classes_table_container"
+                        hx-swap="innerHTML"
                       >
                         <i class="fa-solid fa-box-open text-sm"></i>
                         <span class="m-3">{{ _('unarchive') }}</span>
@@ -98,13 +110,19 @@
                     {% endif %}
                     <li class="rounded-b-lg {% if is_archived %}rounded-t-lg{% endif %}">
                       <button
+                        type="button"
                         data-cy="remove_class"
                         data-class-name="{{ class.name|e }}"
-                        data-delete-class-prompt="{{ _('delete_class_prompt')|e }}"
-                        data-delete-class-title="{{ _('delete')|e }}"
-                        data-delete-label="{{ _('delete')|e }}"
+                        data-confirm-modal="redesign"
+                        data-confirm-button-class="red-btn-new"
+                        data-confirm-button-label="{{_('delete')|e}}"
+                        data-confirm-title="{{_('delete')|e}}"
+                        data-confirm-title-name="{{ class.name|upper|e }}"
                         class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-b-lg text-red-700 ease-in transition duration-100 font-bold"
-                        onclick="hedyApp.delete_class_redesign('{{ class.id }}', this.dataset.deleteClassPrompt, this.dataset.className, this, this.dataset.deleteLabel, this.dataset.deleteClassTitle)"
+                        hx-confirm="{{_('delete_class_prompt')}}"
+                        hx-delete="/for-teachers/class/{{ class.id }}"
+                        hx-target="#classes_table_container"
+                        hx-swap="innerHTML"
                       >
                         <i class="fa-solid fa-trash-can text-sm"></i>
                         <span class="m-3">{{_('delete')}}</span>
