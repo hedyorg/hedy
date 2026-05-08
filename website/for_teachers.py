@@ -3,6 +3,7 @@ from difflib import SequenceMatcher
 import functools
 import os
 import re
+import time
 import uuid
 from venv import logger
 
@@ -308,6 +309,41 @@ class ForTeachersModule(WebsiteModule):
 
         return active_classes, archived_classes
 
+    def _get_teacher_classes_after_class_update(
+        self,
+        username,
+        class_id,
+        *,
+        expected_archived=None,
+        should_exist=True,
+        max_retries=5,
+        retry_delay_s=0.1,
+    ):
+        """Fetch teacher classes and retry briefly until a class mutation is visible.
+
+        Class lists are queried through an index and can be eventually consistent.
+        Retrying here prevents HTMX responses from lagging one action behind.
+        """
+        teacher_classes = []
+
+        for attempt in range(max_retries + 1):
+            teacher_classes = self.db.get_teacher_classes(username, True)
+            matching_class = next((c for c in teacher_classes if c.get("id") == class_id), None)
+
+            if should_exist is False and matching_class is None:
+                return teacher_classes
+
+            if should_exist is True and matching_class is not None:
+                if expected_archived is None:
+                    return teacher_classes
+                if bool(matching_class.get("archived", False)) == expected_archived:
+                    return teacher_classes
+
+            if attempt < max_retries:
+                time.sleep(retry_delay_s)
+
+        return teacher_classes
+
     @route("/class/<class_id>", methods=["DELETE"])
     @requires_login
     def delete_class_redesign(self, user, class_id):
@@ -318,7 +354,11 @@ class ForTeachersModule(WebsiteModule):
             return make_response(gettext("unauthorized"), 401)
 
         self.db.delete_class(Class)
-        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        teacher_classes = self._get_teacher_classes_after_class_update(
+            user["username"],
+            class_id,
+            should_exist=False,
+        )
         active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
 
         return render_partial(
@@ -337,7 +377,12 @@ class ForTeachersModule(WebsiteModule):
             return make_response(gettext("unauthorized"), 401)
 
         self.db.update_class_data(class_id, {"archived": True})
-        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        teacher_classes = self._get_teacher_classes_after_class_update(
+            user["username"],
+            class_id,
+            expected_archived=True,
+            should_exist=True,
+        )
         active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
 
         return render_partial(
@@ -356,7 +401,12 @@ class ForTeachersModule(WebsiteModule):
             return make_response(gettext("unauthorized"), 401)
 
         self.db.update_class_data(class_id, {"archived": False})
-        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        teacher_classes = self._get_teacher_classes_after_class_update(
+            user["username"],
+            class_id,
+            expected_archived=False,
+            should_exist=True,
+        )
         active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
 
         return render_partial(
