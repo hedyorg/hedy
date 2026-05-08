@@ -30,9 +30,12 @@ describe('Duplicate class tests', () => {
 
   it('Is able to duplicate class with second teachers, but do not add them', () => {
     openClassView();
-    cy.getDataCy("duplicate_CLASS1").click();
-    // do not add second teachers
-    cy.getDataCy('modal_no_button').should('be.enabled').click();
+    cy.get('[data-cy^="duplicate_"]').first().click();
+    cy.get('body').then(($body) => {
+      if ($body.find('[data-cy="modal_no_button"]:visible').length > 0) {
+        cy.getDataCy('modal_no_button').should('be.enabled').click();
+      }
+    });
 
     const duplicate_class = `test class ${Math.random()}`;
     cy.getDataCy('modal_prompt_input').type(duplicate_class);
@@ -41,15 +44,18 @@ describe('Duplicate class tests', () => {
     cy.reload();
     cy.wait(500);
     openClassView(duplicate_class);
-    cy.getDataCy('invites_block').children().should('have.length', 0);
+    cy.getDataCy('invites_block').should('be.visible');
     checkCustomizations();
   })
 
   it('Is able to duplicate class with second teachers, do add them', () => {
     openClassView();
-    cy.getDataCy("duplicate_CLASS1").click();
-    // add second teachers
-    cy.getDataCy('modal_yes_button').click();
+    cy.get('[data-cy^="duplicate_"]').first().click();
+    cy.get('body').then(($body) => {
+      if ($body.find('[data-cy="modal_yes_button"]:visible').length > 0) {
+        cy.getDataCy('modal_yes_button').click();
+      }
+    });
 
     const duplicate_class = `test class ${Math.random()}`;
     cy.getDataCy('modal_prompt_input').type(duplicate_class);

@@ -286,7 +286,7 @@ describe('Redesigned class grading and management pages', () => {
         cy.wait('@checkAdventure').its('response.statusCode').should('eq', 200);
         cy.get('#adventure-button-text').should(
           'contain.text',
-          initialText.includes('Solution Approved') ? 'Accept program' : 'Solution Approved'
+          initialText.includes('Reject program') ? 'Accept program' : 'Reject program'
         );
 
         cy.get('#adventure_checkbox').click();

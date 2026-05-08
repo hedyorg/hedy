@@ -4,8 +4,13 @@
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-4 mb-4">
             <h2 class="text-2xl sm:text-3xl mt-0 break-words">{{ username }}</h2>
             <h2 class="text-xl sm:text-3xl mt-0 break-words" id="program_name_{{username}}"></h2>
-            <button class="red-btn-new w-full sm:w-auto" data-cy="hide" _="on click remove #{{ username }}_programs_container">
-                {{ _('close') }}
+            <button
+                class="self-end sm:self-auto inline-flex h-9 w-9 items-center justify-center rounded-full text-gray-600 hover:bg-gray-200 hover:text-gray-800 transition"
+                data-cy="hide"
+                aria-label="{{ _('close') }}"
+                title="{{ _('close') }}"
+                _="on click remove #{{ username }}_programs_container">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
             </button>
         </div>
         {% if programs|length == 0 %}

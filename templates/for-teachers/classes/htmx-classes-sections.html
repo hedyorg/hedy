@@ -1,0 +1,13 @@
+<h2 class="my-5">{{_('active_classes')}}</h2>
+{{ render_partial('for-teachers/classes/htmx-classes-table.html', teacher_classes=active_classes, is_archived=False) }}
+
+<a class="blue-btn-new inline-flex items-center mt-5 mb-10"
+    id="create_class_button"
+    data-cy="create_class_button"
+    href="/for-teachers/class/new"
+  {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}
+</a>
+
+<h2 class="my-5">{{_('archived_classes') }}</h2>
+{{ render_partial('for-teachers/classes/htmx-classes-table.html', teacher_classes=archived_classes, is_archived=True) }}
+

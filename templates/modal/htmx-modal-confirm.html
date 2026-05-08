@@ -2,13 +2,20 @@
 {% set redesign_actions_class = confirm_actions_class or 'flex flex-col-reverse gap-3 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-end sm:px-6' %}
 {% set redesign_confirm_button_class = confirm_button_class or 'green-btn-new' %}
 {% set redesign_confirm_button_label = confirm_button_label or _('yes') %}
+{% set redesign_modal_title = modal_title or _('confirm') %}
+{% set redesign_modal_title_name = modal_title_name|default('') %}
 <div id="htmx_modal" data-cy="htmx_modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 sm:px-6"
     _="on closeModal remove me">
     <div _="on click trigger closeModal" class="absolute inset-0 bg-black opacity-60"></div>
     <div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl"
          data-cy="confirm_modal">
         <div class="flex items-start justify-between border-b border-gray-200 px-5 py-4 sm:px-6">
-            <h3 class="m-0 text-2xl font-semibold">{{ _('confirm') }}</h3>
+            <h3 class="m-0 flex min-w-0 items-center gap-2 text-2xl font-semibold">
+                <span class="shrink-0">{{ redesign_modal_title }}</span>
+                {% if redesign_modal_title_name %}
+                <span class="inline-block max-w-[14rem] truncate align-bottom" title="{{ redesign_modal_title_name }}">{{ redesign_modal_title_name }}</span>
+                {% endif %}
+            </h3>
             <button type="button"
                     data-cy="htmx_modal_close_button"
                     class="-m-1 rounded p-1 text-gray-500 transition duration-100 hover:bg-gray-100 hover:text-gray-700"

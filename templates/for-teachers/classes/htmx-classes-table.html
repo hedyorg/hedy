@@ -1,4 +1,5 @@
-<div class="overflow-x-auto h-full" id="classes_table">
+{% set is_archived = is_archived|default(False) %}
+<div class="overflow-x-auto overflow-y-visible h-full" id="classes_table">
   <div class="w-full h-full mb-8">
     <div class="w-full h-full border rounded-lg shadow-md">
       <table class="w-full divide-y divide-gray-400">
@@ -13,66 +14,97 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
           {% for class in teacher_classes %}
-          <tr >
+          {% set menu_id = 'menu-' ~ ('archived-' if is_archived else 'active-') ~ class.id %}
+          <tr>
             <td class="text-center px-3 {% if loop.last %} rounded-b-lg {% endif %}">
               <a href="/for-teachers/redesign/class/{{class.id}}" class="view_class" data-cy="view_class_link">
                 {{class.name|e}}
               </a>
             </td>
-            <td data-cy="teacher_cell" class="py-3 text-center">{{class.teacher}}</td>
+            <td data-cy="teacher_cell" class="py-3 text-center">
+              {{ class.teacher }}
+              {% if class.second_teachers %}
+                {% set second_count = class.second_teachers | length %}
+                <span class="text-sm text-gray-600">+{{ second_count }} {{ _('teacher')|lower if second_count == 1 else _('teachers')|lower  }}</span>
+              {% endif %}
+            </td>
             <td class="text-center">{{ class.students|length }}</td>
             <td class="text-center">{{ class.date }}</td>
             <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
               <div class="relative inline-block text-left" name="menu">
                 <button class="blue-btn-new p-1.5 flex justify-center rounded-full"
                       _="on click
-                        remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
-                        add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
-                        if #menu-{{loop.index}} matches .hidden
-                          remove .hidden from #menu-{{loop.index}}
-                          call hedyApp.positionContextMenu(me)
+                        remove .menu-content-open from <div.menu:not(#{{ menu_id }})/>
+                        add .hidden .menu-content-closed to <div.menu:not(#{{ menu_id }})/>
+                        if #{{ menu_id }} matches .hidden
+                          remove .hidden from #{{ menu_id }}
+                          call hedyApp.positionContextMenu(me, true)
                           wait 10ms
-                          toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
+                          toggle .menu-content-open .menu-content-closed on #{{ menu_id }}
                         else
-                          toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
+                          call hedyApp.teardownContextMenu(me)
+                          toggle .menu-content-open .menu-content-closed on #{{ menu_id }}
                           wait 180ms
-                          add .hidden to #menu-{{loop.index}}
+                          add .hidden to #{{ menu_id }}
                          "
                         >
                   <i class="fa-solid fa-ellipsis"></i>
-                </button> 
-                <div id="menu-{{loop.index}}" class="hidden z-30 menu origin-top-right absolute top-full right-0 mt-1 w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-all duration-150">
+                </button>
+                <div id="{{ menu_id }}" class="hidden z-30 menu origin-top-right absolute w-56 bg-white rounded-lg shadow-lg grid ring-1 ring-gray-200 menu-content-closed grow-0 ease-in transition-opacity transition-transform duration-150">
                   <ul class="list-none divide-y divide-gray-200 p-2">
-                    <a href="/for-teachers/redesign/class/{{class.id}}/grade" class="no-underline  text-blue-900">
-                      <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg  text-blue-900 ease-in transition duration-100">
+                    {% if not is_archived %}
+                    <a href="/for-teachers/redesign/class/{{class.id}}/grade" class="no-underline text-blue-900">
+                      <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-t-lg text-blue-900 ease-in transition duration-100">
                         <i class="fa-solid fa-circle-check text-sm"></i>
-                        <span  class="m-3">{{_('grading')}}</span>
+                        <span class="m-3">{{_('grading')}}</span>
                       </li>
                     </a>
                     <a href="/for-teachers/redesign/class/{{class.id}}/configure" class="no-underline text-blue-900">
                       <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 gap-4">
                         <i class="fa-solid fa-gears text-sm"></i>
-                        <span class="m-3">{{_('configure')}}</span> 
+                        <span class="m-3">{{_('configure')}}</span>
                       </li>
                     </a>
-                    <a class="no-underline text-blue-900" aria-disabled="true">
-                      <li class="px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer  text-blue-900 ease-in transition duration-100">
-                        <i class="fa-solid fa-box-archive text-sm"></i> 
+                    <li>
+                      <button
+                        data-cy="archive_class"
+                        data-class-name="{{ class.name|e }}"
+                        data-archive-class-prompt="{{ _('are_you_sure_soft')|e }}"
+                        data-archive-class-title="{{ _('archive_class')|e }}"
+                        data-archive-label="{{ _('archive')|e }}"
+                        class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 font-bold"
+                        onclick="hedyApp.archive_class_redesign('{{ class.id }}', this.dataset.archiveClassPrompt, this.dataset.className, this, this.dataset.archiveLabel, this.dataset.archiveClassTitle)"
+                      >
+                        <i class="fa-solid fa-box-archive text-sm"></i>
                         <span class="m-3">{{_('archive')}}</span>
-                      </li>
-                    </a>
-                    <li class="rounded-b-lg">
+                      </button>
+                    </li>
+                    {% endif %}
+                    {% if is_archived %}
+                    <li>
+                      <button
+                        data-cy="unarchive_class"
+                        data-class-name="{{ class.name|e }}"
+                        data-unarchive-class-prompt="{{ _('are_you_sure_soft')|e }}"
+                        data-unarchive-class-title="{{ _('unarchive_class')|e }}"
+                        data-unarchive-label="{{ _('unarchive')|e }}"
+                        class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 font-bold"
+                        onclick="hedyApp.unarchive_class_redesign('{{ class.id }}', this.dataset.unarchiveClassPrompt, this.dataset.className, this, this.dataset.unarchiveLabel, this.dataset.unarchiveClassTitle)"
+                      >
+                        <i class="fa-solid fa-box-open text-sm"></i>
+                        <span class="m-3">{{ _('unarchive') }}</span>
+                      </button>
+                    </li>
+                    {% endif %}
+                    <li class="rounded-b-lg {% if is_archived %}rounded-t-lg{% endif %}">
                       <button
                         data-cy="remove_class"
-                        data-confirm-modal="redesign"
-                        data-confirm-button-class="red-btn-new"
-                        data-confirm-button-label="{{_('delete')}}"
+                        data-class-name="{{ class.name|e }}"
+                        data-delete-class-prompt="{{ _('delete_class_prompt')|e }}"
+                        data-delete-class-title="{{ _('delete')|e }}"
+                        data-delete-label="{{ _('delete')|e }}"
                         class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer rounded-b-lg text-red-700 ease-in transition duration-100 font-bold"
-                        hx-confirm="{{_('delete_class_prompt')}}"
-                        hx-trigger="click"
-                        hx-delete="/for-teachers/class/{{class.id}}"
-                        hx-target="#classes_table"
-                        hx-swap="outerHTML"
+                        onclick="hedyApp.delete_class_redesign('{{ class.id }}', this.dataset.deleteClassPrompt, this.dataset.className, this, this.dataset.deleteLabel, this.dataset.deleteClassTitle)"
                       >
                         <i class="fa-solid fa-trash-can text-sm"></i>
                         <span class="m-3">{{_('delete')}}</span>
@@ -83,16 +115,13 @@
               </div>
             </td>
           </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" class="text-center py-6 px-4 text-sm text-gray-600">{{ _('no_existing_class') }}</td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
-      </div>
     </div>
-      <a class="blue-btn-new inline-flex items-center mt-10"
-          id="create_class_button"
-          data-cy="create_class_button"
-          href="/for-teachers/class/new"
-        {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{_('create_class')}}
-      </a>
   </div>
 </div>

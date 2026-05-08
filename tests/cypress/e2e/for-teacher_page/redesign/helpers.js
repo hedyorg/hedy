@@ -34,7 +34,7 @@ export function createRedesignClass(options = {}) {
     });
   }
 
-  cy.intercept('POST', '/class').as('createClass');
+  cy.intercept('POST', '/class/redesign').as('createClass');
   cy.get(`input[name="creation_type"][value="${creationType}"]`).check({ force: true });
   cy.get('#create_class_form button.green-btn-new').click();
 

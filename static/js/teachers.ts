@@ -10,12 +10,14 @@ import { autoSave } from './autosave';
 import { HedySelect } from './custom-elements';
 import { Chart } from 'chart.js';
 import { setLoadingVisibility } from './loading';
+import { autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 
 declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
 const editorCreator = new HedyCodeMirrorEditorCreator();
 
 function promptByPageVariant(message: string, defaultValue: string, confirmCb: (value: string) => void, title: string = '') {
+  closeOpenContextMenus();
   const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
   modal.prompt(message, defaultValue, confirmCb, isRedesignPage ? 'redesign' : 'legacy', title);
 }
@@ -28,8 +30,11 @@ function confirmByPageVariant(
     confirmButtonClass?: string;
     confirmButtonLabel?: string;
     confirmActionsClass?: string;
+    confirmTitle?: string;
+    confirmTitleName?: string;
   },
 ) {
+  closeOpenContextMenus();
   const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
   if (isRedesignPage) {
     modal.confirmRedesign(message, confirmCb, declineCb, redesignOptions);
@@ -38,15 +43,53 @@ function confirmByPageVariant(
   modal.confirm(message, confirmCb, declineCb);
 }
 
-function getRedesignRemoveConfirmOptions(confirmLabel?: string) {
-  if (!confirmLabel) {
+function getRedesignRemoveConfirmOptions(confirmLabel?: string, confirmTitle?: string, confirmTitleName?: string) {
+  if (!confirmLabel && !confirmTitle && !confirmTitleName) {
     return undefined;
   }
 
   return {
     confirmButtonClass: 'red-btn-new',
     confirmButtonLabel: confirmLabel,
+    confirmTitle,
+    confirmTitleName,
   };
+}
+
+function getRedesignDeleteClassConfirmOptions(confirmLabel: string | undefined, confirmTitle: string | undefined, className: string) {
+  return {
+    confirmButtonClass: 'red-btn-new',
+    confirmButtonLabel: confirmLabel,
+    confirmTitle,
+    confirmTitleName: className.toUpperCase(),
+  };
+}
+
+function getRedesignArchiveClassConfirmOptions(
+  confirmLabel: string | undefined,
+  confirmTitle: string | undefined,
+  className: string,
+) {
+  return {
+    confirmButtonClass: 'green-btn-new',
+    confirmButtonLabel: confirmLabel,
+    confirmTitle,
+    confirmTitleName: className.toUpperCase(),
+  };
+}
+
+function refreshClassesTableContainer(response: unknown) {
+  const classesContainer = document.getElementById('classes_table_container');
+  if (!classesContainer || typeof response !== 'string') {
+    return;
+  }
+
+  classesContainer.innerHTML = response;
+  htmx.process(document.body);
+
+  // Reprocess Hyperscript attributes in the swapped DOM so menu buttons keep working.
+  const hyperscript = (window as unknown as { _hyperscript?: { processNode?: (node: HTMLElement) => void } })._hyperscript;
+  hyperscript?.processNode?.(classesContainer);
 }
 
 export function create_class(class_name_prompt: string) {
@@ -73,11 +116,11 @@ export function create_class_redesign(form: HTMLFormElement) {
   const classToCopy = form.querySelector('#class_to_copy') as HTMLSelectElement | null
   const copySecondTeachers = form.querySelector('#copy_second_teachers') as HTMLInputElement | null;
 
-  if (!radio || !className || !classToCopy) {
+  if (!radio || !className) {
     throw new Error("Missing required elements in the form");
   }
 
-  if (radio.value === 'copy' && classToCopy.value === '') {
+  if (radio.value === 'copy' && (!classToCopy || classToCopy.value === '')) {
     modal.notifyError(ClientMessages.Other_error);
     return;
   }
@@ -87,7 +130,7 @@ export function create_class_redesign(form: HTMLFormElement) {
       type: 'POST',
       url: '/duplicate_class',
       data: JSON.stringify({
-        id: classToCopy.value,
+        id: classToCopy!.value,
         name: className.value,
         copy_second_teachers: copySecondTeachers?.checked || false,
       }),
@@ -101,7 +144,7 @@ export function create_class_redesign(form: HTMLFormElement) {
   } else if (radio.value === 'standard' || radio.value === 'plain') {
     $.ajax({
       type: 'POST',
-      url: '/class',
+      url: '/class/redesign',
       data: JSON.stringify({
         creation_type: radio?.value,
         name: className?.value,
@@ -198,6 +241,72 @@ export function delete_class(id: string, prompt: string) {
   });
 }
 
+export function delete_class_redesign(
+  id: string,
+  prompt: string,
+  className: string,
+  button: HTMLElement,
+  confirmLabel?: string,
+  confirmTitle?: string,
+) {
+  closeOpenContextMenus();
+  return modal.confirmRedesign(prompt, function () {
+    $.ajax({
+      type: 'DELETE',
+      url: '/for-teachers/class/' + id,
+      contentType: 'application/json',
+    }).done(function () {
+      button.closest('tr')?.remove();
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+  }, function(){}, getRedesignDeleteClassConfirmOptions(confirmLabel, confirmTitle, className));
+}
+
+export function archive_class_redesign(
+  id: string,
+  prompt: string,
+  className: string,
+  _button: HTMLElement,
+  confirmLabel?: string,
+  confirmTitle?: string,
+) {
+  closeOpenContextMenus();
+  return modal.confirmRedesign(prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/class/' + id + '/archive',
+      contentType: 'application/json',
+    }).done(function (response) {
+      refreshClassesTableContainer(response);
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+  }, function(){}, getRedesignArchiveClassConfirmOptions(confirmLabel, confirmTitle, className));
+}
+
+export function unarchive_class_redesign(
+  id: string,
+  prompt: string,
+  className: string,
+  _button: HTMLElement,
+  confirmLabel?: string,
+  confirmTitle?: string,
+) {
+  closeOpenContextMenus();
+  return modal.confirmRedesign(prompt, function () {
+    $.ajax({
+      type: 'POST',
+      url: '/for-teachers/class/' + id + '/unarchive',
+      contentType: 'application/json',
+    }).done(function (response) {
+      refreshClassesTableContainer(response);
+    }).fail(function (err) {
+      modal.notifyError(err.responseText);
+    });
+  }, function(){}, getRedesignArchiveClassConfirmOptions(confirmLabel, confirmTitle, className));
+}
+
 export function join_class(id: string, name: string) {
   $.ajax({
       type: 'POST',
@@ -241,7 +350,13 @@ export function remove_student_invite(username: string, class_id: string, prompt
   }, function(){}, getRedesignRemoveConfirmOptions(confirmLabel));
 }
 
-export function remove_second_teacher(second_teacher: string, class_id: string, prompt: string, confirmLabel?: string) {
+export function remove_second_teacher(
+  second_teacher: string,
+  class_id: string,
+  prompt: string,
+  confirmLabel?: string,
+  confirmTitle?: string,
+) {
   return confirmByPageVariant(prompt, function () {
     $.ajax({
       type: 'DELETE',
@@ -253,7 +368,7 @@ export function remove_second_teacher(second_teacher: string, class_id: string, 
     }).fail(function (err) {
       return modal.notifyError(err.responseText);
     });
-  }, function(){}, getRedesignRemoveConfirmOptions(confirmLabel));
+  }, function(){}, getRedesignRemoveConfirmOptions(confirmLabel, confirmTitle, second_teacher));
 }
 
 export function remove_student(class_id: string, student_id: string, prompt: string) {
@@ -734,8 +849,9 @@ export function createAccounts(prompt: string) {
     const accounts = $('#accounts_input').val() as string;
     const numberOfAccounts = accounts.split('\n').filter(l => l.trim()).length;
     const updatedPrompt = prompt.replace('{number_of_accounts}', numberOfAccounts.toString());
+  const useRedesignModal = new URLSearchParams(window.location.search).get('modal') === 'redesign';
 
-    modal.confirm (updatedPrompt, function () {
+  const createAccountsHandler = function () {
         const className = $('#classes').val() as string;
         const generatePasswords = $('#passwords_toggle').is(":checked") as boolean;
 
@@ -778,7 +894,13 @@ export function createAccounts(prompt: string) {
             // If the error is simple text (e.g. 'request invalid'), display it to the user
             modal.notifyError(err.responseText);
         });
-    });
+        };
+
+        if (useRedesignModal) {
+          modal.confirmRedesign(updatedPrompt, createAccountsHandler, function(){});
+        } else {
+          modal.confirm(updatedPrompt, createAccountsHandler);
+        }
 }
 
 function createHtmlForAccountsTable(accounts: Array<any>) {
@@ -1372,50 +1494,123 @@ export interface InitializeContextMenuPageOptions {
   readonly page: 'classes' | 'manage-students';
 }
 
-const contextMenuOpenDownClasses = ['top-full', 'mt-1', 'origin-top-right'];
-const contextMenuOpenUpClasses = ['bottom-full', 'mb-1', 'origin-bottom-right'];
+let contextMenuClickListenerInitialized = false;
 
-function applyContextMenuDirection(menu: HTMLElement, direction: 'up' | 'down') {
-  menu.classList.remove(...contextMenuOpenDownClasses, ...contextMenuOpenUpClasses);
-  menu.classList.add(...(direction === 'up' ? contextMenuOpenUpClasses : contextMenuOpenDownClasses));
+const contextMenuOriginTopClasses = ['origin-top-right'];
+const contextMenuOriginBottomClasses = ['origin-bottom-right'];
+const contextMenuAutoUpdateHandlers = new Map<HTMLElement, () => void>();
+
+function applyContextMenuOrigin(menu: HTMLElement, placement: string) {
+  const opensUp = placement.startsWith('top');
+  menu.classList.remove(...contextMenuOriginTopClasses, ...contextMenuOriginBottomClasses);
+  menu.classList.add(...(opensUp ? contextMenuOriginBottomClasses : contextMenuOriginTopClasses));
 }
 
-export function positionContextMenu(button: HTMLElement) {
+function stopContextMenuAutoUpdate(menu: HTMLElement) {
+  const stop = contextMenuAutoUpdateHandlers.get(menu);
+  if (stop) {
+    stop();
+    contextMenuAutoUpdateHandlers.delete(menu);
+  }
+}
+
+function cleanupInactiveContextMenus() {
+  for (const [menu, stop] of contextMenuAutoUpdateHandlers.entries()) {
+    if (menu.classList.contains('hidden')) {
+      stop();
+      contextMenuAutoUpdateHandlers.delete(menu);
+    }
+  }
+}
+
+export function closeOpenContextMenus() {
+  const openMenus = document.querySelectorAll('[name="menu"]>div.menu-content-open');
+  if (!openMenus.length) {
+    return;
+  }
+
+  openMenus.forEach((el) => {
+    stopContextMenuAutoUpdate(el as HTMLElement);
+    el.classList.remove('menu-content-open');
+    el.classList.add('menu-content-closed');
+    setTimeout(() => {
+      el.classList.add('hidden');
+    }, 200);
+  });
+}
+
+export function teardownContextMenu(button: HTMLElement) {
   const menuContainer = button.closest('[name="menu"]');
   const menu = menuContainer?.querySelector('div[id^="menu-"]') as HTMLElement | null;
   if (!menu) {
     return;
   }
 
-  applyContextMenuDirection(menu, 'down');
+  stopContextMenuAutoUpdate(menu);
+}
 
-  const buttonRect = button.getBoundingClientRect();
-  const menuHeight = menu.offsetHeight || menu.scrollHeight;
-  const spaceBelow = window.innerHeight - buttonRect.bottom;
-  const spaceAbove = buttonRect.top;
-  const shouldOpenUp = menuHeight > spaceBelow && spaceAbove > spaceBelow;
+export function positionContextMenu(button: HTMLElement, allowFlip = true) {
+  const menuContainer = button.closest('[name="menu"]');
+  const menu = menuContainer?.querySelector('div[id^="menu-"]') as HTMLElement | null;
+  if (!menu) {
+    return;
+  }
 
-  applyContextMenuDirection(menu, shouldOpenUp ? 'up' : 'down');
+  cleanupInactiveContextMenus();
+  stopContextMenuAutoUpdate(menu);
+  // Use fixed positioning so menus are not clipped by table overflow containers.
+  menu.style.position = 'fixed';
+  menu.style.zIndex = '2147483647';
+
+  const updatePosition = () => {
+    const middleware = [
+      offset(4),
+      ...(allowFlip
+        ? [
+            flip({
+              fallbackPlacements: ['top-end', 'bottom-start', 'top-start'],
+            }),
+          ]
+        : []),
+      shift({ padding: 8 }),
+    ];
+
+    computePosition(button, menu, {
+      strategy: 'fixed',
+      placement: 'bottom-end',
+      middleware,
+    }).then(({ x, y, placement }) => {
+      menu.style.left = `${x}px`;
+      menu.style.top = `${y}px`;
+      applyContextMenuOrigin(menu, placement);
+    });
+  };
+
+  updatePosition();
+  contextMenuAutoUpdateHandlers.set(menu, autoUpdate(button, menu, updatePosition));
 }
 
 export function initializeContextMenuEventHandler(_options: InitializeContextMenuPageOptions) {
+  if (contextMenuClickListenerInitialized) {
+    return;
+  }
+  contextMenuClickListenerInitialized = true;
+
   // Event listener to close the adventures dropdown when you click outside of it
   document.addEventListener('click', (ev) => {
     const target = ev.target as HTMLElement;
+    const modalTrigger = target.closest('[hx-target="#modal_target"], [data-confirm-modal]');
+    if (modalTrigger) {
+      closeOpenContextMenus();
+      return;
+    }
+
     const parents = document.querySelectorAll('[name="menu"]')
     for (const parent of parents) {
       if (parent.contains(target)) {
         return;
       }
     }
-    if (document.querySelectorAll('[name="menu"]>div.menu-content-open').length) {
-      document.querySelectorAll('[name="menu"]>div.menu-content-open').forEach((el) => {
-        el.classList.remove('menu-content-open');
-        el.classList.add('menu-content-closed');
-        setTimeout(() => {
-          el.classList.add('hidden');
-        }, 200);
-      });
-    }
+    closeOpenContextMenus();
   });
 }
