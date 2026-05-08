@@ -2,8 +2,8 @@
 # up-to-date with 'main', one PR at a time.
 queue_rules:
   - name: default_queue
-    conditions:
-        - "check-success=build"
+    merge_conditions:
+      - "check-success=build"
     merge_method: squash
     commit_message_template: |-
       {{ title }} (#{{number}})
@@ -17,7 +17,7 @@ queue_rules:
 pull_request_rules:
   - name: Automatic squash merge on approval
     conditions:
-        - and:
+      - and:
           - "#approved-reviews-by>=1"
           - "#changes-requested-reviews-by=0"
           - "check-success=build"
