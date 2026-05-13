@@ -899,8 +899,10 @@ adventures:
                     pessoa {is} {ask} 'Quem é você?'
                     resposta_boa {is} Oba! Você ganhou!, Você certamente vai ganhar!, Temos um vencedor!
                     resposta_ruim {is} Sem sorte! Tente novamente!, Outra pessoa vai ganhar, Você perdeu!
-                    {if} pessoa {in} amigos {print} resposta_boa {at} {random}
-                    {else} {print} resposta_ruim {at} {random}
+                    {if} pessoa {in} amigos 
+                    {print} resposta_boa {at} {random}
+                    {else} 
+                    {print} resposta_ruim {at} {random}
                     ```
             7:
                 story_text: |
