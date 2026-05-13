@@ -604,7 +604,10 @@ adventures:
                     puntos = 0
                     tirada = opciones {at} {random}
                     {print} 'tú lanzaste ' tirada
-                    {if} tirada {is} lombriz puntos = puntos + 5 {else} puntos = puntos + tirada
+                    {if} tirada {is} lombriz 
+                    puntos = puntos + 5 
+                    {else} 
+                    puntos = puntos + tirada
                     {print} 'esos son ' puntos ' puntos'
                     ```
                 example_code_2: |
