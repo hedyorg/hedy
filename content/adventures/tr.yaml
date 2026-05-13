@@ -759,8 +759,10 @@ adventures:
                     kişi {is} {ask} 'Sen kimsin?'
                     iyi_cevap {is} Yaşasın! Sen kazandın!, Kesinlikle sen kazanacaksın!, Bir kazananımız var!
                     kötü_cevap {is} Kötü şans! Tekrar dene!, Başka biri kazanacak, Sen kaybedeceksin!
-                    {if} kişi {in} arkadaşlar {print} iyi_cevap {at} {random}
-                    {else} {print} kötü_cevap {at} {random}
+                    {if} kişi {in} arkadaşlar 
+                    {print} iyi_cevap {at} {random}
+                    {else} 
+                    {print} kötü_cevap {at} {random}
                     ```
             7:
                 story_text: |
