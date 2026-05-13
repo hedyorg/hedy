@@ -906,8 +906,10 @@ adventures:
                     persoon {is} {ask} 'Wie ben jij?'
                     goed_antwoord {is} Hoera! Jij wint!, Jij gaat zeker winnen!, We hebben een WINNAAR!
                     fout_antwoord {is} Helaas! probeer nog eens!, Een ander wint!, Verliezer!
-                    {if} persoon {in} vrienden {print} goed_antwoord {at} {random}
-                    {else} {print} fout_antwoord {at} {random}
+                    {if} persoon {in} vrienden 
+                    {print} goed_antwoord {at} {random}
+                    {else} 
+                    {print} fout_antwoord {at} {random}
                     ```
             7:
                 story_text: |
@@ -2592,8 +2594,10 @@ adventures:
                     ```
                     drank_voorraad {is} water, limonade, cola, sinaasappelsap
                     drank {is} {ask} 'Wat wilt u drinken?'
-                    {if} drank {in} drank_voorraad {print} 'Een ' drank 'komt eraan!'
-                    {else} {print} 'Sorry, dat hebben we niet'
+                    {if} drank {in} drank_voorraad 
+                    {print} 'Een ' drank ' komt eraan!'
+                    {else} 
+                    {print} 'Sorry, dat hebben we niet'
                     ```
             7:
                 story_text: |

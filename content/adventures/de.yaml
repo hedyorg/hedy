@@ -1175,8 +1175,10 @@ adventures:
                     person {is} {ask} 'Wer bist du?'
                     gute_antwort {is} Hurra! Du gewinnst!, Du wirst sicher gewinnen!, Wir haben einen Gewinner!
                     schlechte_antwort {is} Pech gehabt! Versuch nochmal!, Eine andere Person wird gewinnen, Du verlierst!
-                    {if} person {in} freunde {print} gute_antwort {at} {random}
-                    {else} {print} schlechte_antwort {at} {random}
+                    {if} person {in} freunde 
+                    {print} gute_antwort {at} {random}
+                    {else} 
+                    {print} schlechte_antwort {at} {random}
                     ```
             7:
                 story_text: |
@@ -2234,16 +2236,28 @@ adventures:
                     ```
                     {print} 'Willkommen im Restaurant Chez Hedy'
                     Tagesgericht {is} {ask} 'Würden Sie gerne das heutige Tagesgericht erfahren?'
-                    {if} Tagesgericht {is} ja {print} 'Das Tagesgericht ist Nudeln mit Tomatensoße.' {else} {print} 'Ok, kein Problem.'
+                    {if} Tagesgericht {is} ja 
+                    {print} 'Das Tagesgericht ist Nudeln mit Tomatensoße.' 
+                    {else} 
+                    {print} 'Ok, kein Problem.'
                     Essen {is} {ask} 'Was würden Sie gerne essen?'
                     {print} 'Einmal ' Essen ', kommt sofort!'
                     Getränk {is} {ask} 'Was würden Sie gerne dazu trinken?'
-                    {if} Getränk {is} Cola {print} 'Tut mir leid, die Cola ist aus!' {else} {print} 'Großartige Wahl!'
+                    {if} Getränk {is} Cola 
+                    {print} 'Tut mir leid, die Cola ist aus!' 
+                    {else} 
+                    {print} 'Großartige Wahl!'
                     etwas {is} {ask} 'Hätten Sie gerne noch etwas?'
                     {print} 'Lassen Sie mich Ihre Bestellung noch einmal wiederholen...'
                     {print} 'Einmal ' Essen
-                    {if} Getränk {is} Cola {print} 'und...' {else} {print} 'Einmal ' Getränk
-                    {if} etwas {is} nein {print} 'Das ist alles!' {else} {print} 'Einmal ' etwas
+                    {if} Getränk {is} Cola 
+                    {print} 'und...' 
+                    {else} 
+                    {print} 'Einmal ' Getränk
+                    {if} etwas {is} nein 
+                    {print} 'Das ist alles!' 
+                    {else} 
+                    {print} 'Einmal ' etwas
                     {print} 'Danke für Ihre Bestellung und guten Appetit!'
                     ```
             7:

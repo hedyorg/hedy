@@ -51,8 +51,8 @@ adventures:
 
                     Contohnya seperti ini:
                     ```
-                    hewan is burung, landak, armadilo
-                    print Dia sekarang mendengar suara seekor hewan at random
+                    hewan {is} burung, landak, armadilo
+                    {print} Dia sekarang mendengar suara seekor hewan at random
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
@@ -125,9 +125,9 @@ adventures:
                     temukan baris yang berisi `{print}` dan ulangi!
                 example_code: |
                     ```
-                    print 'Sang pangeran mencari bantuan'
-                    repeat 5 times print 'Tolong!'
-                    print 'Kenapa tidak ada seorangpun yang menolongku?'
+                    {print} 'Sang pangeran mencari bantuan'
+                    repeat 5 times {print} 'Tolong!'
+                    {print} 'Kenapa tidak ada seorangpun yang menolongku?'
                     ```
             9:
                 example_code: |
@@ -472,8 +472,8 @@ adventures:
                     ![Dadu earthworms dengan angka 1 sampai 5 dan sebuah cacing tanah](https://cdn.jsdelivr.net/gh/felienne/hedy@24f19e9ac16c981517e7243120bc714912407eb5/coursedata/img/dobbelsteen.jpeg)
                 example_code: |
                     ```
-                    pilihan is 1, 2, 3, 4, 5, cacing
-                    print pilihan at random
+                    pilihan {is} 1, 2, 3, 4, 5, cacing
+                    {print} pilihan at random
                     ```
             4:
                 story_text: |-
@@ -488,10 +488,10 @@ adventures:
                     Karenanya buatlah respon milikmu sendiri. Misal 'yeah!' untuk 6 dan 'Kasihan' untuk nilai lainnya.
                 example_code: |
                     ```
-                    pilihan is 1, 2, 3, 4, 5, cacing
-                    lemparan is _
-                    print 'kamu memiliki' _ 'lemparan'
-                    if _ is cacing print 'Kamu dapat berhenti melempar.' _ print 'Kamu harus mendengarnya sekali lagi!'
+                    pilihan {is} 1, 2, 3, 4, 5, cacing
+                    lemparan {is} _
+                    {print} 'kamu memiliki' _ 'lemparan'
+                    {if} _ {is} cacing {print} 'Kamu dapat berhenti melempar.' _ {print} 'Kamu harus mendengarnya sekali lagi!'
                     ```
             7:
                 story_text: |
@@ -503,12 +503,12 @@ adventures:
                     Bisakah kamu membuat kodenya sehingga mendapatkan total skor untuk 8 dadu? Untuk melakukannya, Anda harus menyalin dan menempelkan beberapa baris kode.
                 example_code: |
                     ```
-                    pilihan is 1, 2, 3, 4, 5, cacing
-                    poin is 0
-                    lemparan is pilihan at random
-                    print 'kamu mendapatkan' lemparan
-                    if lemparan is cacing poin is poin + 5 else poin is poin + lemparan
-                    print 'ini adalah poinnya: ' poin
+                    pilihan {is} 1, 2, 3, 4, 5, cacing
+                    poin {is} 0
+                    lemparan {is} pilihan at random
+                    {print} 'kamu mendapatkan' lemparan
+                    {if} lemparan {is} cacing poin {is} poin + 5 {else} poin {is} poin + lemparan
+                    {print} 'ini adalah poinnya: ' poin
                     ```
                     Dapatkan kamu membuat kodenya untuk menghitung total poin dari lemparan dadu 8 kali? Untuk melakukannya, kamu harus menyalin beberapa baris kode.
 
@@ -523,8 +523,8 @@ adventures:
                     Tapi mungkin kamu mau membuat dadu baru. Tentu kamu boleh melakukannya!
                 example_code: |
                     ```
-                    pilihan is 1, 2, 3, 4, 5, cacing
-                    repeat _ _ print _ _ _
+                    pilihan {is} 1, 2, 3, 4, 5, cacing
+                    repeat _ _ {print} _ _ _
                     ```
     dishes:
         name: Cuci piring?
@@ -540,8 +540,8 @@ adventures:
                     Kamu pertama harus membuat daftar anggota keluargamu. Lalu pilihlah dengan `at random` dari dalam daftar tersebut.
                 example_code: |
                     ```
-                    orang is ibu, ayah, Emma, Sophie
-                    print orang at random
+                    orang {is} ibu, ayah, Emma, Sophie
+                    {print} orang at random
                     ```
                 story_text_2: |
                     Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
@@ -555,24 +555,24 @@ adventures:
                     Tip: Jangan lupa tanda kutip satu!
                 example_code: |
                     ```
-                    orang is ibu, ayah, Emma, Sophie
-                    print _ cuci piring akan dilakukan oleh _
-                    print orang at _
+                    orang {is} ibu, ayah, Emma, Sophie
+                    {print} _ cuci piring akan dilakukan oleh _
+                    {print} orang at _
                     ```
             5:
                 story_text: "Dengan `if` kamu bisa melakukan banyak hal menyenangkan dalam pengambilan pilihan dalam program tersebut. Kamu dapat membuat program kamu merespon pilihan yang sudah diberikan oleh komputer.\n\nDapatkah kamu melengkapi kode ini agar menampilkan 'Yahh' ketika yang dipilih adalah giliranmu dan 'Yeah!' untuk yang lainnya. \nJangan lupakan tanda kutip satu!\n"
                 example_code: |
                     ```
-                    orang is ibu, ayah, Emma, Sophie
-                    pencucipirng is orang at random
-                    if pencucipiring is Sophie print _ Yahh aku harus mencuci piring _ else print 'untungnya tidak ada piring yang perlu dicuci karena'  _ 'sudah mencucinya'
+                    orang {is} ibu, ayah, Emma, Sophie
+                    pencucipirng {is} orang at random
+                    {if} pencucipiring {is} Sophie {print} _ Yahh aku harus mencuci piring _ {else} {print} 'untungnya tidak ada piring yang perlu dicuci karena'  _ 'sudah mencucinya'
                     ```
             7:
                 story_text: Dengan `repeat`, kamu dapat mengulang bagian-bagian kode. Kamu dapat melakukan ini untuk menentukan siapa yang akan mencuci piring selama seminggu kedepan.
                 example_code: |
                     ```
-                    orang is ibu, ayah, Emma, Sophie
-                    repeat _ _ print 'pencuci piringnya adalah' _
+                    orang {is} ibu, ayah, Emma, Sophie
+                    repeat _ _ {print} 'pencuci piringnya adalah' _
                     ```
                 story_text_2: |
                     Jika Anda sangat kurang beruntung, program sebelumnya mungkin memilih Anda untuk mencuci piring selama seminggu penuh! Itu tidak adil!
@@ -584,12 +584,12 @@ adventures:
                 story_text: "Seberapa sering semua orang mencuci piring? Apakah adil? Kamu harus menghitungnya di level 6.\n"
                 example_code: |
                     ```
-                    orang is ibu, ayah, Emma, Sophie
-                    emma_cuci is 0
-                    pencucipiring is orang at random
-                    print 'Pencuci piringnya adalah' pencucipiring
-                    if pencucipiring is Emma emma_cuci is emma_cuci + 1
-                    print 'Emma akan mencuci piring minggu ini sebanyak' emma_cuci 'kali'
+                    orang {is} ibu, ayah, Emma, Sophie
+                    emma_cuci {is} 0
+                    pencucipiring {is} orang at random
+                    {print} 'Pencuci piringnya adalah' pencucipiring
+                    {if} pencucipiring {is} Emma emma_cuci {is} emma_cuci + 1
+                    {print} 'Emma akan mencuci piring minggu ini sebanyak' emma_cuci 'kali'
                     ```
 
                     Sekarang kamu dapat menyalin baris 3 ke 5 beberapa kali (misal 7 kali untuk seminggu penuh) untuk menghitung jumlah jatah cuci piring selama seminggu.
@@ -607,7 +607,7 @@ adventures:
                     Di level mendatang, Anda dapat mempelajari cara membuat mesin peramal sendiri!
                     Di level 1 Anda dapat memulai dengan mudah dengan membiarkan Hedy memperkenalkan dirinya sebagai peramal dan membiarkannya `{echo}` jawaban para pemain.
                     Seperti ini:
-                example_code: "```\nprint Halo, aku Hedy sang peramal!\nask Siapa kamu?\nprint Ijinkan aku melihat bola kristal ku\nprint Aku lihat... Aku lihat...\necho Nama kamu adalah \n```\n\nHedy sekarang hanya memberitahukan nama kamu. Dapatkah kamu membuat Hedy dapat memberitahukan hal-hal lain tentang masa depan kamu?\n\nTentu saja, Hedy bukan peramal yang baik, karena dia hanya bisa mengulang jawaban yang diberikan oleh pengguna!\nLihatlah level 2 dan tingkatkan kemampuan peramal kamu.\n"
+                example_code: "```\n{print} Halo, aku Hedy sang peramal!\n{ask} Siapa kamu?\n{print} Ijinkan aku melihat bola kristal ku\n{print} Aku lihat... Aku lihat...\necho Nama kamu adalah \n```\n\nHedy sekarang hanya memberitahukan nama kamu. Dapatkah kamu membuat Hedy dapat memberitahukan hal-hal lain tentang masa depan kamu?\n\nTentu saja, Hedy bukan peramal yang baik, karena dia hanya bisa mengulang jawaban yang diberikan oleh pengguna!\nLihatlah level 2 dan tingkatkan kemampuan peramal kamu.\n"
                 story_text_2: |
                     ### Exercise
                     Hedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?
@@ -620,11 +620,11 @@ adventures:
                 example_code: |
                     Pada contoh ini kamu bisa menanyakan pertanyaan benar-salah ke Hedy dan Hedy akan merespon dengan jawaban acak untukmu.
                     ```
-                    print Aku Hedy sang peramal!
-                    pertanyaan is ask Apa yang ingin kamu tahu?
-                    print Ini apa yang ingin kamu tahu: pertanyaan
-                    jawaban is ya, tidak, mungkin
-                    print Bola kristal ku menyatakan.. jawaban at random
+                    {print} Aku Hedy sang peramal!
+                    pertanyaan {is} {ask} Apa yang ingin kamu tahu?
+                    {print} Ini apa yang ingin kamu tahu: pertanyaan
+                    jawaban {is} ya, tidak, mungkin
+                    {print} Bola kristal ku menyatakan.. jawaban at random
                     ```
 
                     Sekarang, Hedy hanya dapat menjawab ya, tidak, atau mungkin. Dapatkah kamu memberikan Hedy alternatif jawaban yang lebih banyak, seperti 'tentu saja' atau 'tanya lagi'.
@@ -638,10 +638,13 @@ adventures:
                     Cek contoh berikut dan temukan caranya.
                 example_code: |
                     ```
-                    print 'Aku Hedy sang peramal!'
-                    print 'Aku dapat meramal apakah kamu akan memenangkan undian besok!'
-                    orang is ask 'Siapa kamu?'
-                    if orang is Hedy print 'Kamu pasti menang!' else print 'Nasib buruk! Orang lain yang akan menang!'
+                    {print} 'Aku Hedy sang peramal!'
+                    {print} 'Aku dapat meramal apakah kamu akan memenangkan undian besok!'
+                    orang {is} {ask} 'Siapa kamu?'
+                    {if} orang {is} Hedy 
+                    {print} 'Kamu pasti menang!' 
+                    {else} 
+                    {print} 'Nasib buruk! Orang lain yang akan menang!'
                     ```
             7:
                 story_text: |-
@@ -649,32 +652,32 @@ adventures:
                     Sebagai contoh kamu dapat meramal seberapa kaya kamu dan berapa banyak anak yang akan kamu dapat ketika kamu dewasa.
                 example_code: |
                     ```
-                    print 'Aku Hedy sang peramal'
-                    print 'Aku dapat meramal berapa banyak anak yang akan kamu peroleh ketika kamu dewasa!'
-                    umur is ask 'Berapa umurmu?'
-                    saudara is ask 'Berapa banyak saudara yang kamu miliki?'
-                    tinggi is ask 'Seberapa tinggi kamu dalam satuan sentimeter?'
-                    anak is tinggi / umur
-                    anak is anak - saudara
-                    print 'Kamu akan memiliki...'
-                    print anak ' anak!'
+                    {print} 'Aku Hedy sang peramal'
+                    {print} 'Aku dapat meramal berapa banyak anak yang akan kamu peroleh ketika kamu dewasa!'
+                    umur {is} {ask} 'Berapa umurmu?'
+                    saudara {is} {ask} 'Berapa banyak saudara yang kamu miliki?'
+                    tinggi {is} {ask} 'Seberapa tinggi kamu dalam satuan sentimeter?'
+                    anak {is} tinggi / umur
+                    anak {is} anak - saudara
+                    {print} 'Kamu akan memiliki...'
+                    {print} anak ' anak!'
                     ```
 
                     Jika contoh sebelumnya kurang lucu, lihatlah yang ini!
 
                     ```
-                    print 'Aku Hedy sang peramal!'
-                    print 'Aku akan meramal seberapa pintar kamu!'
-                    sepakbola is ask 'Dalam skala 1-10 seberapa tertarik kamu dengan sepakbola?'
-                    pisang is ask 'Berapa banyak pisang yang kamu makan minggu ini?'
-                    higienis is ask 'Berapa kali kamu mencuci tangan hari ini?'
-                    hasil is pisang + higienis
-                    hasil is hasil * sepakbola
-                    print 'Kamu ' hasil ' persen pintar.'
+                    {print} 'Aku Hedy sang peramal!'
+                    {print} 'Aku akan meramal seberapa pintar kamu!'
+                    sepakbola {is} {ask} 'Dalam skala 1-10 seberapa tertarik kamu dengan sepakbola?'
+                    pisang {is} {ask} 'Berapa banyak pisang yang kamu makan minggu ini?'
+                    higienis {is} {ask} 'Berapa kali kamu mencuci tangan hari ini?'
+                    hasil {is} pisang + higienis
+                    hasil {is} hasil * sepakbola
+                    {print} 'Kamu ' hasil ' persen pintar.'
                     ```
             8:
                 story_text: Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
-                example_code: "```\nprint 'Aku Hedy sang peramal!'\nprint 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan is ask 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 times print 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang kamu lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.\n"
+                example_code: "```\n{print} 'Aku Hedy sang peramal!'\n{print} 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan {is} {ask} 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 times {print} 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang kamu lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.\n"
             9:
                 story_text: |-
                     Pada level 5 kamu telah belajar bagaimana menggunakan perintah `repeat` untuk membuat sang peramal menjawab tiga pertanyaan sekaligus, namun kita masih tidak bisa menampilkan pertanyaan-pertanyaannya sekaligus.
@@ -701,7 +704,7 @@ adventures:
                     Jika kamu memilih pintu yang benar kamu akan bertahan hidup, tapi kalau tidak seekor monster akan...
 
                     Pada level 1 kita memulai permainan rumah berhantu dengan membuat cerita menyeramkan dan menanyakan monster apa yang pemain akan lihat di rumah berhantu.
-                example_code: "```\nprint Kenapa aku ada disini?\nprint Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\nprint dan tiba-tiba semuanya menjadi gelap.\nprint Tapi bagaimana caranya aku tergeletak di lantai...?\nprint Kepalaku sakit seperti telah dipukul dengan tongkat pemukul basebal!\nprint Suara apa itu?\nprint Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\nprint Aku perlu keluar dari sini!\nprint Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\necho Aku memilih pintu \nprint ...?\n ```\n\nDapatkah kamu menyelesaikan cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
+                example_code: "```\n{print} Kenapa aku ada disini?\n{print} Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\n{print} dan tiba-tiba semuanya menjadi gelap.\n{print} Tapi bagaimana caranya aku tergeletak di lantai...?\n{print} Kepalaku sakit seperti telah dipukul dengan tongkat pemukul basebal!\n{print} Suara apa itu?\n{print} Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\n{print} Aku perlu keluar dari sini!\n{print} Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\necho Aku memilih pintu \n{print} ...?\n ```\n\nDapatkah kamu menyelesaikan cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
             3:
                 story_text: |-
                     Pada level 1 kamu telah membuat pendahuluan tentang permainan rumah berhantu kamu, tapi seperti yang mungkin sudah kamu ketahui, ceritanya selalu memiliki akhir yang mengerikan.
@@ -718,38 +721,38 @@ adventures:
                     Pada level 4 kamu hanya bisa memenangkan permainan dengan memilih pintu yang sama dengan yang dipilih Hedy secara acak.
                 example_code: |
                     ```
-                    print 'Kabur dari rumah berhantu!'
-                    print 'Ada 3 pintu di depan kamu...'
-                    pintu is 1,2,3
-                    monster is werewolf, mumi, vampir, zombie
-                    pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
-                    print 'Kamu memilih pintu... ' pintuterpilih
-                    pintutepat is pintu {at} {random}
-                    if pintuterpilih is pintutepat print 'Bagus! Kamu berhasil kabur!'
-                    else print 'Oh tidak! Kamu dimakan oleh ... ' monster {at} {random}
+                    {print} 'Kabur dari rumah berhantu!'
+                    {print} 'Ada 3 pintu di depan kamu...'
+                    pintu {is} 1,2,3
+                    monster {is} werewolf, mumi, vampir, zombie
+                    pintuterpilih {is} {ask} 'Pintu mana yang mau kamu pilih?'
+                    {print} 'Kamu memilih pintu... ' pintuterpilih
+                    pintutepat {is} pintu {at} {random}
+                    {if} pintuterpilih {is} pintutepat {print} 'Bagus! Kamu berhasil kabur!'
+                    {else} {print} 'Oh tidak! Kamu dimakan oleh ... ' monster {at} {random}
                     ```
             10:
                 story_text: "Pada level 7 kamu bisa mengulangi beberapa baris kode, memungkinkan kamu untuk membuat permainan rumah berhantu kamu semakin interaktif.\n"
                 example_code: |
                     ```
-                    print 'Kabur dari rumah berhantu!'
-                    pemain is hidup
-                    pintu is 1, 2, 3
-                    monster is zombie, vampir, laba-laba besar
+                    {print} 'Kabur dari rumah berhantu!'
+                    pemain {is} hidup
+                    pintu {is} 1, 2, 3
+                    monster {is} zombie, vampir, laba-laba besar
                     repeat 3 times
-                        if pemain is hidup
-                            pintubenar is pintu {at} {random}
-                            print 'Ada 3 pintu di depan kamu...'
-                            pintuterpilih is ask 'Pintu mana yang mau kamu pilih?'
-                            if pintuterpilih is pintubenar
-                                print 'Tidak ada monster disini!'
+                        {if} pemain {is} hidup
+                            pintubenar {is} pintu {at} {random}
+                            {print} 'Ada 3 pintu di depan kamu...'
+                            pintuterpilih {is} {ask} 'Pintu mana yang mau kamu pilih?'
+                            {if} pintuterpilih {is} pintubenar
+                                {print} 'Tidak ada monster disini!'
                             else
-                                print 'Kamu dimakan oleh ' monster {at} {random}
-                                pemain is meninggal
+                                {print} 'Kamu dimakan oleh ' monster {at} {random}
+                                pemain {is} meninggal
                         else
-                            print 'PERMAINAN BERAKHIR'
-                    if pemain is hidup
-                        print 'Bagus! Kamu berhasil bertahan hidup!'
+                            {print} 'PERMAINAN BERAKHIR'
+                    {if} pemain {is} hidup
+                        {print} 'Bagus! Kamu berhasil bertahan hidup!'
                     ```
                     Sekarang permainan ini jadi cukup sulit untuk dimenangkan. Dapatkah kamu membuat permainan ini lebih mudah?
                     Sebagai contoh dengan hanya memiliki 1 pintu yang salah dan 2 pintu benar ketimbang 2 pintu salah dan 1 pintu benar?
@@ -801,11 +804,11 @@ adventures:
                     Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
                 example_code_2: |
                     ```
-                    print Selamat datang di rumah makan Hedy
-                    ask Apa yang mau kamu pesan?
+                    {print} Selamat datang di rumah makan Hedy
+                    {ask} Apa yang mau kamu pesan?
                     echo Jadi kamu mau pesan
-                    print Terima kasih atas pesanannya!
-                    print Makanan kamu sedang disiapkan!
+                    {print} Terima kasih atas pesanannya!
+                    {print} Makanan kamu sedang disiapkan!
                     ```
 
                     Dapatkah kamu menambahkan beberapa baris di kode program rumah makan kamu? Misal, dapatkah kamu menanyakan pembeli apa yang mau mereka minum, memberitahukan harga, atau menyampaikan 'selamat menikmati'?
@@ -815,15 +818,15 @@ adventures:
                     Sekarang kamu dapat menggunakan variabel dan Hedy dapat mengingat makanan dan minuman yang dipesan!
                 example_code: |
                     ```
-                    print Selamat datang di rumah makan Hedy!
-                    print Hari ini kami menyediakan pizza atau lasagna.
-                    makanan is ask Apa yang ingin kamu makan?
-                    print Pilihan baik! makanan itu juga kesukaanku!
-                    topping is ask Apakah kamu mau daging atau sayuran diatas makanan itu?
-                    print makanan dengan topping sedang dipersiapkan!
-                    minuman is ask Apa minuman yang kamu inginkan?
-                    print Terima kasih atas pesanannya.
-                    print makanan dan minuman kamu akan segera tersedia!
+                    {print} Selamat datang di rumah makan Hedy!
+                    {print} Hari ini kami menyediakan pizza atau lasagna.
+                    makanan {is} {ask} Apa yang ingin kamu makan?
+                    {print} Pilihan baik! makanan itu juga kesukaanku!
+                    topping {is} {ask} Apakah kamu mau daging atau sayuran diatas makanan itu?
+                    {print} makanan dengan topping sedang dipersiapkan!
+                    minuman {is} {ask} Apa minuman yang kamu inginkan?
+                    {print} Terima kasih atas pesanannya.
+                    {print} makanan dan minuman kamu akan segera tersedia!
                     ```
             3:
                 story_text: |-
@@ -832,19 +835,19 @@ adventures:
                     Kamu juga dapat membuat ini menjadi lebih menyenangkan, dengan meminta Hedy untuk memilih harga makan malam kamu juga. Berapa harga yang akan kamu dapatkan?
                 example_code: |
                     ```
-                    print Selamat datang di rumah makan Hedy!
-                    print Satu-satunya rumah makan yang akan memilih makananmu acak juga harganya!
-                    pembuka is salad, sup, carpaccio
-                    makanan_utama is pizza, kubis, spaghetti
-                    penutup is brownies, es krim, keju
-                    minuman is cola, sirup, air
-                    harga is sepuluh ribu rupiah, seratus ribu rupiah, satu juta rupiah
-                    print Kamu akan mulai dengan: pembuka at random
-                    print Lalu kami akan menyajikan: makanan_utama at random
-                    print Dan sebagai pencuci mulut: penutup at random
-                    print Kamu akan mendapatkan minuman at random untuk diminum
-                    print Harganya akan menjadi harga at random
-                    print Terima kasih dan selamat menikmati!
+                    {print} Selamat datang di rumah makan Hedy!
+                    {print} Satu-satunya rumah makan yang akan memilih makananmu acak juga harganya!
+                    pembuka {is} salad, sup, carpaccio
+                    makanan_utama {is} pizza, kubis, spaghetti
+                    penutup {is} brownies, es krim, keju
+                    minuman {is} cola, sirup, air
+                    harga {is} sepuluh ribu rupiah, seratus ribu rupiah, satu juta rupiah
+                    {print} Kamu akan mulai dengan: pembuka at random
+                    {print} Lalu kami akan menyajikan: makanan_utama at random
+                    {print} Dan sebagai pencuci mulut: penutup at random
+                    {print} Kamu akan mendapatkan minuman at random untuk diminum
+                    {print} Harganya akan menjadi harga at random
+                    {print} Terima kasih dan selamat menikmati!
                     ```
 
                     Dapatkan kamu memikirkan hal apa yang bisa membuat kode rumah makan kamu semakin menarik?
@@ -852,35 +855,47 @@ adventures:
                 example_code: |
                     ```
                     _ Add the quotation marks to this code _
-                    print Selamat datang di rumah makan Hedy!
-                    print Hari ini kami menyediakan pizza atau lasagna.
-                    makanan is ask Apa yang ingin kamu makan?
-                    print Pilihan baik! Makanan itu juga kesukaanku!
-                    topping is ask Apakah kamu mau daging atau sayuran diatas makanan itu?
-                    print makanan  dengan  topping sedang dipersiapkan!
-                    minuman is ask Apa minuman yang kamu inginkan?
-                    print Terima kasih atas pesanannya.
-                    print makanan  dan minuman kamu akan segera tersedia!
+                    {print} Selamat datang di rumah makan Hedy!
+                    {print} Hari ini kami menyediakan pizza atau lasagna.
+                    makanan {is} {ask} Apa yang ingin kamu makan?
+                    {print} Pilihan baik! Makanan itu juga kesukaanku!
+                    topping {is} {ask} Apakah kamu mau daging atau sayuran diatas makanan itu?
+                    {print} makanan  dengan  topping sedang dipersiapkan!
+                    minuman {is} {ask} Apa minuman yang kamu inginkan?
+                    {print} Terima kasih atas pesanannya.
+                    {print} makanan  dan minuman kamu akan segera tersedia!
                     ```
             6:
                 story_text: |
-                    Pada level 4 perintah `if` memungkinkan kamu untuk menanyakan pertanyaan ke pembeli dan memberi respon yang berbeda bergantung pada jawaban yang diberikan.
+                    Pada level 4 perintah `{if}` memungkinkan kamu untuk menanyakan pertanyaan ke pembeli dan memberi respon yang berbeda bergantung pada jawaban yang diberikan.
                     Pada contoh dibawah, kamu dapat melihat bahwa kamu dapat menanyakan pembeli apakah mereka ingin tahu menu spesial dan Hedy dapat merespon sesuai dengan jawaban yang diberikan.
                 example_code: |
                     ```
-                    print 'Selamat datang di rumah makan Hedy!'
-                    spesial is ask 'Apakah kamu ingin tahu menu spesial kami hari ini?'
-                    if spesial is ya print 'Menu spesial hari ini adalah ayam dan nasi' else print 'Tidak masalah.'
-                    makanan is ask 'Apa makanan yang ingin kamu makan?'
-                    print 'Satu ' makanan ', akan segera datang!'
-                    minuman is ask 'Apa minuman yang kamu inginkan?'
-                    if minuman is cola print 'Saya minta maaf karena kami kehabisan cola!' else print 'Pilihan yang baik!'
-                    apapun is ask 'Apakah kamu ingin yang lain?'
-                    print 'Saya akan mengulang pesanan kamu...'
-                    print 'Satu ' makanan
-                    if minuman is cola print 'dan... ' else print 'Satu ' minuman
-                    if apapun is tidak print 'Itu saja!' else print 'Satu ' apapun
-                    print 'Terima kasih atas pesanannya dan selamat menikmati!'
+                    {print} 'Selamat datang di rumah makan Hedy!'
+                    spesial {is} {ask} 'Apakah kamu ingin tahu menu spesial kami hari ini?'
+                    {if} spesial {is} ya 
+                    {print} 'Menu spesial hari ini adalah ayam dan nasi' 
+                    {else} 
+                    {print} 'Tidak masalah.'
+                    makanan {is} {ask} 'Apa makanan yang ingin kamu makan?'
+                    {print} 'Satu ' makanan ', akan segera datang!'
+                    minuman {is} {ask} 'Apa minuman yang kamu inginkan?'
+                    {if} minuman {is} cola 
+                    {print} 'Saya minta maaf karena kami kehabisan cola!' 
+                    {else} 
+                    {print} 'Pilihan yang baik!'
+                    apapun {is} {ask} 'Apakah kamu ingin yang lain?'
+                    {print} 'Saya akan mengulang pesanan kamu...'
+                    {print} 'Satu ' makanan
+                    {if} minuman {is} cola 
+                    {print} 'dan... ' 
+                    {else} 
+                    {print} 'Satu ' minuman
+                    {if} apapun {is} tidak 
+                    {print} 'Itu saja!' 
+                    {else} 
+                    {print} 'Satu ' apapun
+                    {print} 'Terima kasih atas pesanannya dan selamat menikmati!'
                     ```
 
                     Dapatkah kamu memikirkan pertanyaan-pertanyaan lain untuk pembeli ketika mereka memesan makanan, dan membuat respon yang bervariasi bergantung dari jawaban mereka?
@@ -889,17 +904,17 @@ adventures:
                 example_code: |
                     Kamu dapat membuat kode rumah makan sederhana, seperti ini
                     ```
-                    print 'Selamat datang di rumah makan Hedy'
-                    print 'Ini menu kami:'
-                    print 'Makanan utama kami ada pizza, lasagna, atau spaghetti'
-                    main is ask 'Makanan mana yang kamu mau?'
-                    harga is 0
-                    if main is pizza harga is 10000
-                    if main is lasagna harga is 12000
-                    if main is spaghetti harga is 8000
-                    print 'Kamu sudah memesan ' main
-                    print 'Itu akan seharga ' harga ' rupiah'
-                    print 'Terima kasih, selamat menikmati!'
+                    {print} 'Selamat datang di rumah makan Hedy'
+                    {print} 'Ini menu kami:'
+                    {print} 'Makanan utama kami ada pizza, lasagna, atau spaghetti'
+                    main {is} {ask} 'Makanan mana yang kamu mau?'
+                    harga {is} 0
+                    {if} main {is} pizza harga {is} 10000
+                    {if} main {is} lasagna harga {is} 12000
+                    {if} main {is} spaghetti harga {is} 8000
+                    {print} 'Kamu sudah memesan ' main
+                    {print} 'Itu akan seharga ' harga ' rupiah'
+                    {print} 'Terima kasih, selamat menikmati!'
                     ```
             8:
                 story_text: |
@@ -907,30 +922,30 @@ adventures:
                     Kamu dapat menggunakan itu di rumah makan kamu dengan cara menanyakan ke beberapa orang apa yang mau mereka makan, seperti ini:
                 example_code: |
                     ```
-                    print 'Selamat datang di rumah makan Hedy!'
-                    orang is ask 'Berapa banyak orang yang akan datang hari ini?'
-                    repeat orang times makanan is ask 'Apa yang ingin kamu makan?'
-                    print 'Terima kasih atas pesanannya! Makanan akan segera datang!'
+                    {print} 'Selamat datang di rumah makan Hedy!'
+                    orang {is} {ask} 'Berapa banyak orang yang akan datang hari ini?'
+                    repeat orang times makanan {is} {ask} 'Apa yang ingin kamu makan?'
+                    {print} 'Terima kasih atas pesanannya! Makanan akan segera datang!'
                     ```
             10:
                 story_text: |-
                     Pada level 7 kamu bisa membuat rumah makan virtual kamu lebih detil dengan mengulang beberapa baris kode. Seperti ini:
                     ```
-                    print 'Selamat datang di rumah makan Hedy!'
-                    orang is ask 'Berapa banyak orang yang akan bergabung dengan kita?'
-                    print 'Baik!'
-                    print 'Menu hari ini adalah pizza atau salad'
-                    harga is 0
+                    {print} 'Selamat datang di rumah makan Hedy!'
+                    orang {is} {ask} 'Berapa banyak orang yang akan bergabung dengan kita?'
+                    {print} 'Baik!'
+                    {print} 'Menu hari ini adalah pizza atau salad'
+                    harga {is} 0
                     repeat orang times
-                        makanan is ask 'Apa yang kamu mau pesan?'
-                        print makanan
-                        if makanan is pizza
-                            harga is harga + 10000
+                        makanan {is} {ask} 'Apa yang kamu mau pesan?'
+                        {print} makanan
+                        {if} makanan {is} pizza
+                            harga {is} harga + 10000
                         else
-                            harga is harga + 8000
-                    print 'Terima kasih untuk pesanannya!'
-                    print 'Harganya akan menjadi ' harga ' rupiah'
-                    print 'Selamat menikmati!'
+                            harga {is} harga + 8000
+                    {print} 'Terima kasih untuk pesanannya!'
+                    {print} 'Harganya akan menjadi ' harga ' rupiah'
+                    {print} 'Selamat menikmati!'
                     ```
                     Tentu, kode kamu dapat diperdetil dengan penambahan jenis makanan dan minuman pada menu. Jadi, silakan menambahkan pilihan-pilihan tersebut sesuai dengan keinginanmu!
                 example_code: |
@@ -965,7 +980,7 @@ adventures:
                     Pada level 1 kamu dapat memulai dengan permainan batu gunting kertas
 
                     Dengan perintah `ask` kamu bisa mengambil salah satu pilihan, dan dengan `echo` kamu bisa menampilkan pilihan tersebut.
-                example_code: "```\nprint apa yang kamu pilih?\nask pilih dari batu, gunting, atau kertas\necho jadi pilhan kamu adalah: \n```\n"
+                example_code: "```\n{print} apa yang kamu pilih?\n{ask} pilih dari batu, gunting, atau kertas\necho jadi pilhan kamu adalah: \n```\n"
             2:
                 story_text: |
                     In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
@@ -982,8 +997,8 @@ adventures:
                     Selesaikan kode menggunakan `{at} {random}` perintah.
                 example_code: |
                     ```
-                    pilihan is batu, gunting, kertas
-                    print pilihan at random
+                    pilihan {is} batu, gunting, kertas
+                    {print} pilihan at random
                     ```
 
                     Kamu dapat menggunakan perintah `ask` lagi pada level 2. Dapatkah kamu menampilkan pilihan kamu dan pilihan komputer?
@@ -1000,7 +1015,7 @@ adventures:
                     ```
             5:
                 story_text: "Pada level 4 kamu bisa menentukan siapa yang menang. \nUntuk hal itu, kamu memerlukan perintah `if`\n\nSimpan pilihan kamu dengan sebuah nama favoritmu dan pilihan komputer dengan nama pilihan komputer.\nLalu kamu bisa menggunakan `if` untuk melihat apakah kedua pilihan tersebut sama atau berbeda.\nDapatkah kamu menyelesaikan kode ini?"
-                example_code: "```\npilihan is batu, gunting, kertas\npil_komputer is _\n pil_kamu is ask Apa yang kamu pilih?\nprint 'kamu memilih ' _\nprint 'komputer memilih ' _\nif _ is _ print 'seri' else print 'tidak seri'\nif pil_kamu is batu and pil_komputer is kertas print 'komputer menang'\n```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri.\n"
+                example_code: "```\npilihan {is} batu, gunting, kertas\npil_komputer {is} _\n pil_kamu {is} {ask} Apa yang kamu pilih?\n{print} 'kamu memilih ' _\n{print} 'komputer memilih ' _\n{if} _ {is} _ {print} 'seri' {else} {print} 'tidak seri'\n{if} pil_kamu {is} batu and pil_komputer {is} kertas {print} 'komputer menang'\n```\n\nPertama-tama, kamu perlu mengisi kotak kosong yang tersedia dengan kode yang benar untuk melihat apakah hasil permainan seri.\n"
     songs:
         name: Nyanyikan sebuah lagu!
         default_save_name: Lagu
@@ -1018,8 +1033,8 @@ adventures:
                     Kamu dapat membuat lagu ini menjadi lebih pendek dengan sebuah `repeat`! Bisakah kamu menyelesaikan kodenya?
                 example_code: |
                     ```
-                    repeat _ _ print 'Baby Shark tututudutudu'
-                    print 'Baby Shark'
+                    repeat _ _ {print} 'Baby Shark tututudutudu'
+                    {print} 'Baby Shark'
                     ```
 
                     Setelah Baby Shark, kamu juga dapat membuat program untuk menyanyikan lagu lain. Ada banyak lagu yang mengulang-ulang kalimat.
@@ -1027,12 +1042,12 @@ adventures:
                 story_text: "Lagu-lagu sering memiliki banyak pengulangan. Terkadang pengulangannya didasarkan dari perhitungan. Misal, di sebuah lagu 'Botol'. Kamu dapat membuat program untuk menyanyikan lagu tersebut dengan sedikit matematika.\n"
                 example_code: |
                     ```
-                    reff is 99
-                    print reff ' botol di dinding'
-                    print reff ' botol'
-                    print 'Ambil satu, berikan ke teman'
-                    reff is reff - 1
-                    print reff ' botol di dinding'
+                    reff {is} 99
+                    {print} reff ' botol di dinding'
+                    {print} reff ' botol'
+                    {print} 'Ambil satu, berikan ke teman'
+                    reff {is} reff - 1
+                    {print} reff ' botol di dinding'
                     ```
 
                     Kamu sekarang dapat mengulang baris 2 ke baris 6 sebanyak yang kamu mau dengan menyalin ulang baris-baris tersebut.
@@ -1040,20 +1055,20 @@ adventures:
                     # Melihat kedepan
                     Pada level 5, kita belajar untuk mengulang satu baris dengan `repeat` seperti ini:
 
-                    ` repeat 3 times print 'Baby Shark Tutududududu`
+                    ` repeat 3 times {print} 'Baby Shark Tutududududu`
 
                     Tapi kamu akan lihat pada materi ini, terkadang kamu perlu untuk mengulang beberapa baris bersamaan. Ini bisa dilakukan dengan menyalin ulang, namun itu merepotkan. Pada level 7 kamu akan belajar bagaimana cara melakukannya dengan lebih mudah.
             9:
                 story_text: "Pada level 6, kamu menuliskan lagu 'botol'. Kamu membuat sebuah reff lalu mengulangnya hingga 99 kali. Pada level 7, kamu dapat melakukannya hanya dengan menambahkan satu baris program.\n"
                 example_code: |
                     ```
-                    reff is 99
+                    reff {is} 99
                     repeat 99 times
-                        print reff ' botol di dinding'
-                        print reff ' botol'
-                        print 'Ambil satu, berikan ke teman'
-                        reff is reff - 1
-                        print reff ' botol di dinding'
+                        {print} reff ' botol di dinding'
+                        {print} reff ' botol'
+                        {print} 'Ambil satu, berikan ke teman'
+                        reff {is} reff - 1
+                        {print} reff ' botol di dinding'
                     ```
             11:
                 example_code: |
@@ -1083,8 +1098,8 @@ adventures:
                     Gunakan 90 untuk memindahkan arahnya seperempat lingkaran. Kita sebut ini sudut. Satu putaran penuh bernilai 360 derajat. Dapatkah kamu mengerti hasil kode ini? Mungkinkah sebuah segitiga atau sebuah lingkaran?
                 example_code: |
                     ```
-                    print Menggambar bentuk
-                    sudut is 90
+                    {print} Menggambar bentuk
+                    sudut {is} 90
                     turn sudut
                     forward 25
                     turn sudut
@@ -1096,7 +1111,7 @@ adventures:
                     Gunakan `at random` untuk memilih nilai dari sebuah list. Kamu dapat menyalin baris 2 dan 3 sehingga membentuk jalur pergerakan yang lebih acak.
                 example_code: |
                     ```
-                    sudut is 10, 50, 90, 150, 250
+                    sudut {is} 10, 50, 90, 150, 250
                     turn sudut at random
                     forward 25
                     ```
@@ -1104,8 +1119,8 @@ adventures:
                 story_text: "Pada level 3 kamu harus menggunakan tanda kutip satu pada perintah `print` dan `ask`. Begitu juga ketika menggambar!\n"
                 example_code: |
                     ```
-                    print 'Menggambar bentuk'
-                    sudut is 90
+                    {print} 'Menggambar bentuk'
+                    sudut {is} 90
                     turn sudut
                     forward 25
                     turn sudut
@@ -1136,8 +1151,8 @@ adventures:
                     Sekarang karena kamu bisa menggunakan matematika dengan Hedy, kamu bisa menggambar semua bentuk yang kamu inginkan!
                 example_code: |
                     ```
-                    jumlahsudut is ask 'Berapa banyak sudut yang kamu mau?'
-                    sudut is 360 / jumlahsudut
+                    jumlahsudut {is} {ask} 'Berapa banyak sudut yang kamu mau?'
+                    sudut {is} 360 / jumlahsudut
                     forward 50
                     turn sudut
                     forward 50
@@ -1157,7 +1172,7 @@ adventures:
                     Kita hanya perlu mengisi sudut sekali dan menggunakan variabel tersebut dalam `repeat`.
                 example_code: |
                     ```
-                    sudut is 90
+                    sudut {is} 90
                     repeat 10 times
                         turn sudut
                         forward 50

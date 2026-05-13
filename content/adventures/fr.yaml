@@ -806,8 +806,10 @@ adventures:
                     personne {is} {ask} "Qui es-tu ?"
                     bonnes_réponses {is} Hourra ! Tu as gagné !, Tu vas certainement gagner !, Nous avons un gagnant !
                     mauvaises_réponses {is} Pas de chance ! Essaye encore !, C'est une autre personne qui gagnera, Tu as perdu !
-                    {if} personne {in} amis {print} bonnes_réponses {at} {random}
-                    {else} {print} mauvaises_réponses {at} {random}
+                    {if} personne {in} amis 
+                    {print} bonnes_réponses {at} {random}
+                    {else} 
+                    {print} mauvaises_réponses {at} {random}
                     ```
             7:
                 story_text: |
@@ -1725,8 +1727,10 @@ adventures:
                     ```
                     boisson_en_stock {is} eau, limonade, coca, jus d'orange
                     choix {is} {ask} "Que voulez vous boire ?"
-                    {if} choix {in} boisson_en_stock {print} choix " en préparation !"
-                    {else} {print} "Désolé, nous n'avons pas de " choix
+                    {if} choix {in} boisson_en_stock 
+                    {print} choix " en préparation !"
+                    {else} 
+                    {print} "Désolé, nous n'avons pas de " choix
                     ```
             7:
                 story_text: |
