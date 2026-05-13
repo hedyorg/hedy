@@ -454,7 +454,10 @@ adventures:
                     points = 0
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm 
+                    points = points + 5 
+                    {else} 
+                    points = points + throw
                     {print} 'those are ' points ' points'
                     ```
                 example_code_2: |
@@ -862,16 +865,26 @@ adventures:
         description: Знайомство з командою {in}
         levels:
             6:
+                story_text: "## Списки\nКоли ми хочемо перевірити, чи є щось у списку, ми тепер можемо використовувати команду `{in}`.\nЦей код гарно друкується! якщо ви обираєте зелений або жовтий, і meh інакше.\n"
+                example_code: |
+                    ```
+                    pretty_colors {is} зелений, жовтий
+                    favorite_color {is} {ask} 'Який твій улюблений колір?'
+                    {if} favorite_color {in} pretty_colors 
+                    {print} 'красиво!'
+                    {else} 
+                    {print} 'мех'
+                    ```
+                story_text_2: "### Вправи\nЗавершіть приклад коду, заповнивши пропуски командами, які ви вивчили. \nКоли ви закінчите код, спробуйте створити власний код і використайте запитання, яке ви самі придумали.\n"
                 example_code_2: |
                     ``` 
                     тварини {is} собака, корова, вівця 
                     answer {is} {ask} 'Яка твоя улюблена тварина?' 
-                    _ відповідь _ тварини _ «Я теж!» 
-                    _ _ «Мої улюблені тварини собаки, корови та вівці» 
+                    _ відповідь _ тварини 
+                    _ «Я теж!» 
+                    _ 
+                    _ «Мої улюблені тварини собаки, корови та вівці» 
                     ```
-                story_text: "## Списки\nКоли ми хочемо перевірити, чи є щось у списку, ми тепер можемо використовувати команду `{in}`.\nЦей код гарно друкується! якщо ви обираєте зелений або жовтий, і meh інакше.\n"
-                example_code: "```\npretty_colors {is} зелений, жовтий\nfavorite_color {is} {ask} 'Який твій улюблений колір?'\n{if} favorite_color {in} pretty_colors {print} 'красиво!'\n{else} {print} 'мех'\n```\n"
-                story_text_2: "### Вправи\nЗавершіть приклад коду, заповнивши пропуски командами, які ви вивчили. \nКоли ви закінчите код, спробуйте створити власний код і використайте запитання, яке ви самі придумали.\n"
         name: '{in}'
         default_save_name: in_command
     is_command:

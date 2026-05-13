@@ -475,8 +475,8 @@ adventures:
                 answer_code: "```\n{print} \"Benvinguda a Manicures i Pedicures per Hedy\"\nparts_del_cos = {ask} \"Avui et fas les ungles de les mans o dels peus? O totes dues?\"\n{if} parts_del_cos {is} \"totes dues\"\npreu = 25\n{else}\npreu = 18\n{print} \"Seran \" preu \" euros\"\ncolor = {ask} \"Quin color vols?\"\nbrillants = {ask} \"Vols brillants? Cobrem 3 euros extres per això.\"\n{if} brillants {is} \"sí\"\npreu = preu + 3\n{else} \n{print} \"Així que sense càrrec extra\"\n{repeat} 3 {times} {print} \"Un segon més...\"\n{print} \"Tot llest! Seran \" preu \" euros, si us plau!\"\n{print} \"Gràcies! Adéu!\"\n```"
             9:
                 story_text: "### Exercici\nDepura aquest codi. Bona sort!"
-                example_code: "**Avís! Aquest codi necessita depuració!**\n```\nresposta = \"Benvingut a la nostra pizzeria. Vols fer una comanda?\"\nif resposta\nquantitat \"Quantes pizzes vols comprar?\"\nelse\nprint \"En compres una igualment!\"\nquantitat = 1\n\"Tenim pizzes Margherita i Pepperoni.\"\nrepeat quantitat\npizza_escollida = ask \"Quin tipus de pizza vols?\"\nprint \"Una \" pizza_escollida \".\"\npreu = quantitat * 10\n\"Seran \" preu \" euros, si us plau.\"\n```\n"
-                answer_code: "```\nresposta = ask \"Benvingut a la nostra pizzeria. Vols fer una comanda?\"\nif resposta is sí\n    quantitat = ask \"Quantes pizzes vols comprar?\"\nelse\n    print \"En compres una igualment!\"\n    quantitat = 1\nprint \"Tenim pizzes Margherita i Pepperoni.\"\nrepeat quantitat times\n    pizza_escollida = ask \"Quin tipus de pizza vols?\"\n    print \"Una \" pizza_escollida \".\"\npreu = quantitat * 10\nprint \"Seran \" preu \" euros, si us plau.\"\n```\n"
+                example_code: "**Avís! Aquest codi necessita depuració!**\n```\nresposta = \"Benvingut a la nostra pizzeria. Vols fer una comanda?\"\nif resposta\nquantitat \"Quantes pizzes vols comprar?\"\nelse\n{print} \"En compres una igualment!\"\nquantitat = 1\n\"Tenim pizzes Margherita i Pepperoni.\"\nrepeat quantitat\npizza_escollida = {ask} \"Quin tipus de pizza vols?\"\n{print} \"Una \" pizza_escollida \".\"\npreu = quantitat * 10\n\"Seran \" preu \" euros, si us plau.\"\n```\n"
+                answer_code: "```\nresposta = {ask} \"Benvingut a la nostra pizzeria. Vols fer una comanda?\"\nif resposta {is} sí\n    quantitat = {ask} \"Quantes pizzes vols comprar?\"\nelse\n    {print} \"En compres una igualment!\"\n    quantitat = 1\n{print} \"Tenim pizzes Margherita i Pepperoni.\"\nrepeat quantitat times\n    pizza_escollida = {ask} \"Quin tipus de pizza vols?\"\n    {print} \"Una \" pizza_escollida \".\"\npreu = quantitat * 10\n{print} \"Seran \" preu \" euros, si us plau.\"\n```\n"
             10:
                 story_text: "### Exercici\nDepura aquest codi. Bona sort!"
                 example_code: "**Avís! Aquest codi necessita depuració!**\n```\n{print} \"Benvingut a la nostra botiga de entrepans\"\nquantitat \"Quants entrepans vols comprar?\"\n{repeat} quantitat {times}\n{ask} {is} {ask} \"Quin tipus de pa vols per al teu entrepà?\"\ntipus_de_pa {is} blanc, integral, sègol, all, sense gluten\n{if} pa_escollit in tipus_de_pa\n{print} \"Fantàstic!\"\n{else}\n\"Ho sento, no en venem\"\ncobertura {is} {ask} \"Quin tipus de cobertura vols?\"\nsalsa {is} {ask} \"Quin tipus de salsa vols?\"\n{print} Un pa_escollit amb cobertura i salsa.\npreu = quantitat * 6\n{print} \"Seran \"preu euros\" si us plau\"\n```\n"
@@ -520,7 +520,7 @@ adventures:
                             {if} mes {is} 'no'
                         {print} 'D'acord'
                             {else}
-                            print 'I ' mes
+                            {print} 'I ' mes
                     {print} 'Gràcies'
 
                     {print} 'Benvingut al nostre restaurant'
@@ -544,7 +544,7 @@ adventures:
                         {if} mes {is} "no"
                             {print} "D"acord"
                         {else}
-                            print "I " mes
+                            {print} "I " mes
                         {print} "Gràcies"
 
                     {print} "Benvingut al nostre restaurant"
@@ -631,7 +631,7 @@ adventures:
                     països = ["Catalunya", "Polònia", "Turquia", "Zimbàbue", "Tailàndia", "Brasil", "Perú", "Austràlia", "India", "Romania"]
                     capitals = ["Barcelona", "Varsòvia", "Ankara", "Harare", "Bangkok", "Brasilia", "Lima", "Canberra", "Nova Deli", "Bucarest"]
                     punts = 0
-                    {for} i in {range}(1, 10)
+                    {for} i {in} {range}(1, 10)
                         resposta = {input}("Quina és la capital de ", països[i])
                         correcte = capitals[i]
                         {if} resposta == correcte
@@ -715,8 +715,8 @@ adventures:
                         beguda = {input}"aigua, cua, te fred, llimonada o cafè?"
                         nombre_de_begudes = {input}("Quantes d'aquestes begudes voldries?")
 
-                        print ()("HAS DEMANAT")
-                        print (nombre_de_begudes " " beguda)
+                        {print} ()("HAS DEMANAT")
+                        {print} (nombre_de_begudes " " beguda)
 
                     "Benvingut a Hedy pizza"
                     mes_menjar = input "T'agradaria demanar una pizza?"
@@ -728,7 +728,7 @@ adventures:
                         call comanda_beguda
                         més_begudes == input("T'agradaria demanar més begudes?")
 
-                    print "Gràcies per la teva comanda!"
+                    {print} "Gràcies per la teva comanda!"
                     ```
                 answer_code: |
                     ```
@@ -1136,14 +1136,25 @@ adventures:
         levels:
             6:
                 story_text: "## Llistes\nSi volem comprovar que una cosa és dins d'una llista utilitzem la comanda `{in}`.  \nEl codi següent imprimeix \"Bé!\" si tries verd o groc, i \"Buu\" en cas contrari.\n"
-                example_code: "```\ncolors_bonics {is} verd, groc\ncolor_preferit {is} {ask} \"Quin és el teu color preferit?\"\n{if} color_preferit {in} colors_bonics\n{print} \"Bé!\"\n{else}\n{print} \"Buu\"\n```\n"
+                example_code: |
+                    ```
+                    colors_bonics {is} verd, groc
+                    color_preferit {is} {ask} "Quin és el teu color preferit?"
+                    {if} color_preferit {in} colors_bonics
+                    {print} "Bé!"
+                    {else}
+                    {print} "Buu"
+                    ```
+                    
                 story_text_2: "### Exercici\nCompleta el codi d'exemple omplint els buits amb les comandes que has après.\nQuan hagis acabat el codi, intenta crear un programa propi i fes servir una pregunta que hagis pensat tu mateix.\n"
                 example_code_2: |
                     ```
                     animals {is} gos, vaca, ovella
                     resposta {is} {ask} "Quin és el teu animal preferit?"
-                    _ resposta _ animals _ "Ala, el meu també!"
-                    _ _ "Els meus animals preferits són els gossos, les vaques i les ovelles."
+                    _ resposta _ animals 
+                    _ "Ala, el meu també!"
+                    _ 
+                    _ "Els meus animals preferits són els gossos, les vaques i les ovelles."
                     ```
     is_command:
         name: '{is}'
@@ -1736,7 +1747,7 @@ adventures:
         levels:
             6:
                 story_text: "En aquest nivell farem servir una nova comanda: `{elif}`. `{elif}` és una combinació de les paraules clau `{else}` i `{if}`, i la serà molt útil quan volem crear 3 (o més!) opcions.\nDona-hi un cop d’ull!\n### Exercici\nFes la teva pròpia roda de la fortuna, on pots guanyar diferents premis i obtenir reaccions corresponents.\n"
-                example_code: "```\npremis is 1 milió d'euros, un pastís de poma, res\nel_teu_premi is premis {at} {random}\n{print} \"Guanyes \" el_teu_premi\n{if} el_teu_premi {is} \"1 milió d'euros\"\n{print} \"Sí! Ets ric!\"\n{elif} el_teu_premi {is} \"un pastís de poma\"\n{print} \"Mmm, un pastís de poma!\"\n{else}\n{print} \"Més sort la propera vegada..\"\n```\n"
+                example_code: "```\npremis {is} 1 milió d'euros, un pastís de poma, res\nel_teu_premi {is} premis {at} {random}\n{print} \"Guanyes \" el_teu_premi\n{if} el_teu_premi {is} \"1 milió d'euros\"\n{print} \"Sí! Ets ric!\"\n{elif} el_teu_premi {is} \"un pastís de poma\"\n{print} \"Mmm, un pastís de poma!\"\n{else}\n{print} \"Més sort la propera vegada..\"\n```\n"
     hospital:
         levels:
             3:

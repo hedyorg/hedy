@@ -604,7 +604,10 @@ adventures:
                     puntos = 0
                     tirada = opciones {at} {random}
                     {print} 'tú lanzaste ' tirada
-                    {if} tirada {is} lombriz puntos = puntos + 5 {else} puntos = puntos + tirada
+                    {if} tirada {is} lombriz 
+                    puntos = puntos + 5 
+                    {else} 
+                    puntos = puntos + tirada
                     {print} 'esos son ' puntos ' puntos'
                     ```
                 example_code_2: |
@@ -1190,8 +1193,10 @@ adventures:
                     ```
                     colores_bonitos {is} verde, amarillo
                     color_favorito {is} {ask} '¿Cuál es tu color favorito?'
-                    {if} color_favorito {in} colores_bonitos {print} '!bonito!'
-                    {else} {print} 'meh'
+                    {if} color_favorito {in} colores_bonitos 
+                    {print} '!bonito!'
+                    {else} 
+                    {print} 'meh'
                     ```
                 story_text_2: |
                     ### Ejercicio
@@ -1201,8 +1206,10 @@ adventures:
                     ```
                     animales {is} perro, vaca, oveja
                     respuesta {is} {ask} '¿Cuál es tu animal preferido?'
-                    _ respuesta _ animales _ '¡También el mío!'
-                    _ _ 'Mis animales preferidos son perros, vacas y ovejas'
+                    _ respuesta _ animales 
+                    _ '¡También el mío!'
+                    _ 
+                    _ 'Mis animales preferidos son perros, vacas y ovejas'
                     ```
         name: '{in}'
     is_command:
@@ -2536,7 +2543,7 @@ adventures:
 
                     ```
                     colores {is} rojo, naranja, amarillo, verde, azul, morado, rosa, marrón, gris, negro
-                    color _
+                    {color} _
                     ```
             5:
                 story_text: |

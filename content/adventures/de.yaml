@@ -788,32 +788,32 @@ adventures:
                     **Warning! Dieser Code muss debugged werden! **
                     ```
                     answer = 'Welcome to our pizza shop. Möchten Sie bestellen?'
-                    if answer
+                    {if} answer
                     amount 'Wie viele Pizzas möchten Sie kaufen?'
                     else
-                    print "Du kaufst trotzdem einen!"
+                    {print} "Du kaufst trotzdem einen!"
                     amount = 1
                     'Wir haben Margherita und Pepperoni Pizzas.'
-                    repeat amount
-                    chosen_pizza = ask 'Was für eine Art Pizza möchten Sie? '
-                    print 'Eine ' chosen_pizza '. '
+                    {repeat} amount
+                    chosen_pizza = {ask} 'Was für eine Art Pizza möchten Sie? '
+                    {print} 'Eine ' chosen_pizza '. '
                     price = amount * 10
                     Das ist ' price ' Dollar bitte. '
                     ```
                 answer_code: |
                     ```
-                    answer = ask 'Willkommen in unserer Pizzeria. Möchtest du bestellen?'
-                    if answer is yes
-                        amount = ask 'Wie viele Pizzen möchtest du kaufen?'
+                    answer = {ask} 'Willkommen in unserer Pizzeria. Möchtest du bestellen?'
+                    {if} answer {is} yes
+                        amount = {ask} 'Wie viele Pizzen möchtest du kaufen?'
                     else
-                        print "Du kaufst sowieso eine!"
+                        {print} "Du kaufst sowieso eine!"
                         amount = 1
-                    print 'Wir haben Margherita und Peperoni Pizzen.'
-                    repeat amount times
-                        chosen_pizza = ask 'Welche Art von Pizza hättest du gerne?'
-                        print 'Eine ' chosen_pizza '.'
+                    {print} 'Wir haben Margherita und Peperoni Pizzen.'
+                    {repeat} amount times
+                        chosen_pizza = {ask} 'Welche Art von Pizza hättest du gerne?'
+                        {print} 'Eine ' chosen_pizza '.'
                     price = amount * 10
-                    print 'Das macht ' price ' Dollar, bitte.'
+                    {print} 'Das macht ' price ' Dollar, bitte.'
                     ```
             10:
                 story_text: |-
@@ -827,7 +827,7 @@ adventures:
                     {repeat} amount {times}
                     {ask} {is} {ask} 'Welche Brotsorte hättest du gerne für dein Sandwich?'
                     types_of_bread {is} Weißbrot, Vollkornbrot, Roggenbrot, Knoblauchbrot, glutenfrei
-                    {if} chosen_bread in types_of_bread
+                    {if} chosen_bread {in} types_of_bread
                     {print} 'Wunderbar!'
                     {else}
                     'Tut mir leid, das verkaufen wir nicht'
@@ -923,7 +923,10 @@ adventures:
                     Punkte = 0
                     Wurf = Würfelseiten {at} {random}
                     {print} 'Du hast ' Wurf ' gewürfelt.'
-                    {if} Wurf {is} Regenwurm Punkte = Punkte + 5 {else} Punkte = Punkte + Wurf
+                    {if} Wurf {is} Regenwurm 
+                    Punkte = Punkte + 5 
+                    {else} 
+                    Punkte = Punkte + Wurf
                     {print} 'Jetzt hast Du ' Punkte ' Punkte.'
                     ```
                 example_code_2: |
@@ -1550,8 +1553,10 @@ adventures:
                     ```
                     hübsche_farben {is} grün, gelb
                     lieblingsfarbe {is} {ask} 'Was ist deine Lieblingsfarbe?'
-                    {if} lieblingsfarbe {in} hübsche_farben {print} 'Hübsch!'
-                    {else} {print} 'bäh'
+                    {if} lieblingsfarbe {in} hübsche_farben 
+                    {print} 'Hübsch!'
+                    {else} 
+                    {print} 'bäh'
                     ```
                 story_text_2: |
                     ### Übung
@@ -1561,8 +1566,10 @@ adventures:
                     ```
                     tiere {is} Hund, Kuh, Schaf
                     antwort {is} {ask} 'Was is dein Lieblingstier?'
-                    _ antwort _ tiere _ 'Meines auch!'
-                    _ _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
+                    _ antwort _ tiere 
+                    _ 'Meines auch!'
+                    _ 
+                    _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
                     ```
         name: '{in}'
     is_command:

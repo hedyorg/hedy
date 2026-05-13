@@ -658,7 +658,10 @@ adventures:
                     pontos = 0
                     jogada = escolhas {at} {random}
                     {print} 'você tirou ' jogada
-                    {if} jogada {is} minhoca pontos = pontos + 5 {else} pontos = pontos + jogada
+                    {if} jogada {is} minhoca 
+                    pontos = pontos + 5 
+                    {else} 
+                    pontos = pontos + jogada
                     {print} 'isso dá ' pontos ' pontos'
                     ```
                 example_code_2: |
@@ -1191,8 +1194,10 @@ adventures:
                     ```
                     cores_belas {is} verde, amarelo
                     cor_favorita {is} {ask} 'Qual é a sua cor favorita?'
-                    {if} cor_favorita {in} cores_belas {print} 'bela!'
-                    {else} {print} 'meh'
+                    {if} cor_favorita {in} cores_belas 
+                    {print} 'bela!'
+                    {else} 
+                    {print} 'meh'
                     ```
                 story_text_2: |
                     ### Exercício
@@ -1202,8 +1207,10 @@ adventures:
                     ```
                     animais {is} cachorro, vaca, ovelha
                     resposta {is} {ask} 'Qual é o seu animal favorito?'
-                    _ resposta _ animais _ 'O meu também!'
-                    _ _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
+                    _ resposta _ animais 
+                    _ 'O meu também!'
+                    _ 
+                    _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
                     ```
         name: '{in}'
     is_command:
@@ -2050,7 +2057,7 @@ adventures:
 
                     ```
                     colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
-                    color _
+                    {color} _
                     ```
             5:
                 example_code: "Dica:\n```\nletra_escolhida {is} {ask} 'Qual letra você gostaria de ver? F, E ou L?'\n{if} _\n```\n"
