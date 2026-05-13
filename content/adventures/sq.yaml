@@ -1331,7 +1331,7 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise 2
-                    Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
+                    Print the song Five little moneys jumping on the bed. Look up the text {if} you don't remember.
 
                     **(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
     songs_2:
@@ -1432,9 +1432,9 @@ adventures:
                 example_code_2: |
                     ```
                     direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
-                    if direction is left turn _
-                    if direction is right turn _
-                    forward 100
+                    {if} direction {is} left {turn} _
+                    {if} direction {is} right {turn} _
+                    {forward} 100
                     ```
             7:
                 story_text: |

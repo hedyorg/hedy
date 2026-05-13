@@ -52,7 +52,7 @@ adventures:
                     Contohnya seperti ini:
                     ```
                     hewan {is} burung, landak, armadilo
-                    {print} Dia sekarang mendengar suara seekor hewan at random
+                    {print} Dia sekarang mendengar suara seekor hewan {at} {random}
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
@@ -126,7 +126,10 @@ adventures:
                 example_code: |
                     ```
                     {print} 'Sang pangeran mencari bantuan'
-                    repeat 5 times {print} 'Tolong!'
+                    {repeat} 5 {times} {print} 'Tolong!'
+                    {print} 'Kenapa tidak ada seorangpun yang menolongku?'
+                    {print} 'Sang pangeran mencari bantuan'
+                    {repeat} 5 {times} {print} 'Tolong!'
                     {print} 'Kenapa tidak ada seorangpun yang menolongku?'
                     ```
             9:
@@ -473,7 +476,7 @@ adventures:
                 example_code: |
                     ```
                     pilihan {is} 1, 2, 3, 4, 5, cacing
-                    {print} pilihan at random
+                    {print} pilihan {at} {random}
                     ```
             4:
                 story_text: |-
@@ -505,7 +508,7 @@ adventures:
                     ```
                     pilihan {is} 1, 2, 3, 4, 5, cacing
                     poin {is} 0
-                    lemparan {is} pilihan at random
+                    lemparan {is} pilihan {at} {random}
                     {print} 'kamu mendapatkan' lemparan
                     {if} lemparan {is} cacing poin {is} poin + 5 {else} poin {is} poin + lemparan
                     {print} 'ini adalah poinnya: ' poin
@@ -524,7 +527,9 @@ adventures:
                 example_code: |
                     ```
                     pilihan {is} 1, 2, 3, 4, 5, cacing
-                    repeat _ _ {print} _ _ _
+                    {repeat} _ _ {print} _ _ _
+                    pilihan {is} 1, 2, 3, 4, 5, cacing
+                    {repeat} _ _ {print} _ _ _
                     ```
     dishes:
         name: Cuci piring?
@@ -541,7 +546,7 @@ adventures:
                 example_code: |
                     ```
                     orang {is} ibu, ayah, Emma, Sophie
-                    {print} orang at random
+                    {print} orang {at} {random}
                     ```
                 story_text_2: |
                     Don't feel like doing the dishes yourself? Hack the program to remove your name from the list.
@@ -558,13 +563,16 @@ adventures:
                     orang {is} ibu, ayah, Emma, Sophie
                     {print} _ cuci piring akan dilakukan oleh _
                     {print} orang at _
+                    orang {is} ibu, ayah, Emma, Sophie
+                    {print} _ cuci piring akan dilakukan oleh _
+                    {print} orang at _
                     ```
             5:
                 story_text: "Dengan `if` kamu bisa melakukan banyak hal menyenangkan dalam pengambilan pilihan dalam program tersebut. Kamu dapat membuat program kamu merespon pilihan yang sudah diberikan oleh komputer.\n\nDapatkah kamu melengkapi kode ini agar menampilkan 'Yahh' ketika yang dipilih adalah giliranmu dan 'Yeah!' untuk yang lainnya. \nJangan lupakan tanda kutip satu!\n"
                 example_code: |
                     ```
                     orang {is} ibu, ayah, Emma, Sophie
-                    pencucipirng {is} orang at random
+                    pencucipirng {is} orang {at} {random}
                     {if} pencucipiring {is} Sophie {print} _ Yahh aku harus mencuci piring _ {else} {print} 'untungnya tidak ada piring yang perlu dicuci karena'  _ 'sudah mencucinya'
                     ```
             7:
@@ -572,7 +580,9 @@ adventures:
                 example_code: |
                     ```
                     orang {is} ibu, ayah, Emma, Sophie
-                    repeat _ _ {print} 'pencuci piringnya adalah' _
+                    {repeat} _ _ {print} 'pencuci piringnya adalah' _
+                    orang {is} ibu, ayah, Emma, Sophie
+                    {repeat} _ _ {print} 'pencuci piringnya adalah' _
                     ```
                 story_text_2: |
                     Jika Anda sangat kurang beruntung, program sebelumnya mungkin memilih Anda untuk mencuci piring selama seminggu penuh! Itu tidak adil!
@@ -586,7 +596,7 @@ adventures:
                     ```
                     orang {is} ibu, ayah, Emma, Sophie
                     emma_cuci {is} 0
-                    pencucipiring {is} orang at random
+                    pencucipiring {is} orang {at} {random}
                     {print} 'Pencuci piringnya adalah' pencucipiring
                     {if} pencucipiring {is} Emma emma_cuci {is} emma_cuci + 1
                     {print} 'Emma akan mencuci piring minggu ini sebanyak' emma_cuci 'kali'
@@ -624,7 +634,7 @@ adventures:
                     pertanyaan {is} {ask} Apa yang ingin kamu tahu?
                     {print} Ini apa yang ingin kamu tahu: pertanyaan
                     jawaban {is} ya, tidak, mungkin
-                    {print} Bola kristal ku menyatakan.. jawaban at random
+                    {print} Bola kristal ku menyatakan.. jawaban {at} {random}
                     ```
 
                     Sekarang, Hedy hanya dapat menjawab ya, tidak, atau mungkin. Dapatkah kamu memberikan Hedy alternatif jawaban yang lebih banyak, seperti 'tentu saja' atau 'tanya lagi'.
@@ -677,7 +687,7 @@ adventures:
                     ```
             8:
                 story_text: Pada level 6 kamu dapat menggunakan perintah `repeat` untuk membuat mesin kamu meramal beberapa kali
-                example_code: "```\n{print} 'Aku Hedy sang peramal!'\n{print} 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 times pertanyaan {is} {ask} 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 times {print} 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang kamu lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.\n"
+                example_code: "```\n{print} 'Aku Hedy sang peramal!'\n{print} 'Kamu dapat bertanya 3 pertanyaan!'\nrepeat 3 {times} pertanyaan {is} {ask} 'Apa yang ingin kamu tahu?'\njawaban {is} ya, tidak, mungkin\nrepeat 3 {times} {print} 'Bola kristal saya mengatakan... 'jawaban {at} {random}\n```\n\nSeperti yang kamu lihat, pertanyaan-pertanyaan yang diberikan tidak ditampilkan pada contoh. Ini karena variabel 'pertanyaan' telah diulang tiga kali.\nSetiap kali pemain memberikan pertanyaan baru, Hedy menimpa pertanyaan sebelumnya. \nArtinya kamu tidak bisa menanyakan dengan cara seperti ini.\n\nDengan menggunakan tiga variabel (misal 'pertanyaan1', 'pertanyaan2' dan 'pertanyaan3') kamu dapat memecahkan masalah ini dan menampilkan semua pertanyaan.\nIni berarti kamu hanya dapat menggunakan perintah `repeat` untuk jawaban. Kamu harus menanyakan dan menampilkan semua pertanyaan secara terpisah.\nDapatkah kamu melakukannya?\n\nPada level 7 tampilan perintah `repeat` akan berubah, memungkinkan kamu untuk mengulang beberapa baris sekaligus.\n"
             9:
                 story_text: |-
                     Pada level 5 kamu telah belajar bagaimana menggunakan perintah `repeat` untuk membuat sang peramal menjawab tiga pertanyaan sekaligus, namun kita masih tidak bisa menampilkan pertanyaan-pertanyaannya sekaligus.
@@ -739,7 +749,11 @@ adventures:
                     pemain {is} hidup
                     pintu {is} 1, 2, 3
                     monster {is} zombie, vampir, laba-laba besar
-                    repeat 3 times
+                    {print} 'Kabur dari rumah berhantu!'
+                    pemain {is} hidup
+                    pintu {is} 1, 2, 3
+                    monster {is} zombie, vampir, laba-laba besar
+                    {repeat} 3 times
                         {if} pemain {is} hidup
                             pintubenar {is} pintu {at} {random}
                             {print} 'Ada 3 pintu di depan kamu...'
@@ -747,6 +761,8 @@ adventures:
                             {if} pintuterpilih {is} pintubenar
                                 {print} 'Tidak ada monster disini!'
                             else
+                                {print} 'Kamu dimakan oleh ' monster {at} {random}
+                                pemain {is} meninggal
                                 {print} 'Kamu dimakan oleh ' monster {at} {random}
                                 pemain {is} meninggal
                         else
@@ -809,6 +825,8 @@ adventures:
                     echo Jadi kamu mau pesan
                     {print} Terima kasih atas pesanannya!
                     {print} Makanan kamu sedang disiapkan!
+                    {print} Terima kasih atas pesanannya!
+                    {print} Makanan kamu sedang disiapkan!
                     ```
 
                     Dapatkah kamu menambahkan beberapa baris di kode program rumah makan kamu? Misal, dapatkah kamu menanyakan pembeli apa yang mau mereka minum, memberitahukan harga, atau menyampaikan 'selamat menikmati'?
@@ -842,11 +860,11 @@ adventures:
                     penutup {is} brownies, es krim, keju
                     minuman {is} cola, sirup, air
                     harga {is} sepuluh ribu rupiah, seratus ribu rupiah, satu juta rupiah
-                    {print} Kamu akan mulai dengan: pembuka at random
-                    {print} Lalu kami akan menyajikan: makanan_utama at random
-                    {print} Dan sebagai pencuci mulut: penutup at random
-                    {print} Kamu akan mendapatkan minuman at random untuk diminum
-                    {print} Harganya akan menjadi harga at random
+                    {print} Kamu akan mulai dengan: pembuka {at} {random}
+                    {print} Lalu kami akan menyajikan: makanan_utama {at} {random}
+                    {print} Dan sebagai pencuci mulut: penutup {at} {random}
+                    {print} Kamu akan mendapatkan minuman {at} {random} untuk diminum
+                    {print} Harganya akan menjadi harga {at} {random}
                     {print} Terima kasih dan selamat menikmati!
                     ```
 
@@ -924,7 +942,7 @@ adventures:
                     ```
                     {print} 'Selamat datang di rumah makan Hedy!'
                     orang {is} {ask} 'Berapa banyak orang yang akan datang hari ini?'
-                    repeat orang times makanan {is} {ask} 'Apa yang ingin kamu makan?'
+                    {repeat} orang {times} makanan {is} {ask} 'Apa yang ingin kamu makan?'
                     {print} 'Terima kasih atas pesanannya! Makanan akan segera datang!'
                     ```
             10:
@@ -936,12 +954,16 @@ adventures:
                     {print} 'Baik!'
                     {print} 'Menu hari ini adalah pizza atau salad'
                     harga {is} 0
-                    repeat orang times
+                    {repeat} orang times
                         makanan {is} {ask} 'Apa yang kamu mau pesan?'
                         {print} makanan
                         {if} makanan {is} pizza
                             harga {is} harga + 10000
                         else
+                            harga {is} harga + 8000
+                    {print} 'Terima kasih untuk pesanannya!'
+                    {print} 'Harganya akan menjadi ' harga ' rupiah'
+                    {print} 'Selamat menikmati!'
                             harga {is} harga + 8000
                     {print} 'Terima kasih untuk pesanannya!'
                     {print} 'Harganya akan menjadi ' harga ' rupiah'
@@ -998,7 +1020,7 @@ adventures:
                 example_code: |
                     ```
                     pilihan {is} batu, gunting, kertas
-                    {print} pilihan at random
+                    {print} pilihan {at} {random}
                     ```
 
                     Kamu dapat menggunakan perintah `ask` lagi pada level 2. Dapatkah kamu menampilkan pilihan kamu dan pilihan komputer?
@@ -1033,7 +1055,9 @@ adventures:
                     Kamu dapat membuat lagu ini menjadi lebih pendek dengan sebuah `repeat`! Bisakah kamu menyelesaikan kodenya?
                 example_code: |
                     ```
-                    repeat _ _ {print} 'Baby Shark tututudutudu'
+                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
+                    {print} 'Baby Shark'
+                    {repeat} _ _ {print} 'Baby Shark tututudutudu'
                     {print} 'Baby Shark'
                     ```
 
@@ -1048,6 +1072,12 @@ adventures:
                     {print} 'Ambil satu, berikan ke teman'
                     reff {is} reff - 1
                     {print} reff ' botol di dinding'
+                    reff {is} 99
+                    {print} reff ' botol di dinding'
+                    {print} reff ' botol'
+                    {print} 'Ambil satu, berikan ke teman'
+                    reff {is} reff - 1
+                    {print} reff ' botol di dinding'
                     ```
 
                     Kamu sekarang dapat mengulang baris 2 ke baris 6 sebanyak yang kamu mau dengan menyalin ulang baris-baris tersebut.
@@ -1055,7 +1085,7 @@ adventures:
                     # Melihat kedepan
                     Pada level 5, kita belajar untuk mengulang satu baris dengan `repeat` seperti ini:
 
-                    ` repeat 3 times {print} 'Baby Shark Tutududududu`
+                    ` {repeat} 3 {times} {print} 'Baby Shark Tutududududu`
 
                     Tapi kamu akan lihat pada materi ini, terkadang kamu perlu untuk mengulang beberapa baris bersamaan. Ini bisa dilakukan dengan menyalin ulang, namun itu merepotkan. Pada level 7 kamu akan belajar bagaimana cara melakukannya dengan lebih mudah.
             9:
@@ -1063,7 +1093,13 @@ adventures:
                 example_code: |
                     ```
                     reff {is} 99
-                    repeat 99 times
+                    reff {is} 99
+                    {repeat} 99 times
+                        {print} reff ' botol di dinding'
+                        {print} reff ' botol'
+                        {print} 'Ambil satu, berikan ke teman'
+                        reff {is} reff - 1
+                        {print} reff ' botol di dinding'
                         {print} reff ' botol di dinding'
                         {print} reff ' botol'
                         {print} 'Ambil satu, berikan ke teman'
@@ -1100,10 +1136,12 @@ adventures:
                     ```
                     {print} Menggambar bentuk
                     sudut {is} 90
-                    turn sudut
-                    forward 25
-                    turn sudut
-                    forward 25
+                    {print} Menggambar bentuk
+                    sudut {is} 90
+                    {turn} sudut
+                    {forward} 25
+                    {turn} sudut
+                    {forward} 25
                     ```
             3:
                 story_text: |
@@ -1112,8 +1150,8 @@ adventures:
                 example_code: |
                     ```
                     sudut {is} 10, 50, 90, 150, 250
-                    turn sudut at random
-                    forward 25
+                    {turn} sudut {at} {random}
+                    {forward} 25
                     ```
             4:
                 story_text: "Pada level 3 kamu harus menggunakan tanda kutip satu pada perintah `print` dan `ask`. Begitu juga ketika menggambar!\n"
@@ -1121,10 +1159,12 @@ adventures:
                     ```
                     {print} 'Menggambar bentuk'
                     sudut {is} 90
-                    turn sudut
-                    forward 25
-                    turn sudut
-                    forward 25
+                    {print} 'Menggambar bentuk'
+                    sudut {is} 90
+                    {turn} sudut
+                    {forward} 25
+                    {turn} sudut
+                    {forward} 25
                     ```
             5:
                 story_text: 'Pada level 4 kita akan mengambil sebuah pilihan dengan `if`. Sebagai contoh: mengambil satu dari kumpulan bentuk.
@@ -1153,18 +1193,18 @@ adventures:
                     ```
                     jumlahsudut {is} {ask} 'Berapa banyak sudut yang kamu mau?'
                     sudut {is} 360 / jumlahsudut
-                    forward 50
-                    turn sudut
-                    forward 50
-                    turn sudut
-                    forward 50
-                    turn sudut
-                    forward 50
-                    turn sudut
-                    forward 50
-                    turn sudut
-                    forward 50
-                    turn sudut
+                    {forward} 50
+                    {turn} sudut
+                    {forward} 50
+                    {turn} sudut
+                    {forward} 50
+                    {turn} sudut
+                    {forward} 50
+                    {turn} sudut
+                    {forward} 50
+                    {turn} sudut
+                    {forward} 50
+                    {turn} sudut
                     ```
             9:
                 story_text: |
@@ -1173,9 +1213,10 @@ adventures:
                 example_code: |
                     ```
                     sudut {is} 90
-                    repeat 10 times
-                        turn sudut
-                        forward 50
+                    sudut {is} 90
+                    {repeat} 10 times
+                        {turn} sudut
+                        {forward} 50
                     ```
                 story_text_2: Selain itu, kita juga bisa meningkatkan kemampuan program untuk menggambar banyak bentuk. Dapatkah kamu tebak seberapa jauh sang kura-kura perlu berbelok disini? Selesaikan kodenya dan kamu dapat menggambar bentuk poligon apapun yang kamu suka!
                 example_code_2: "```\njumlahsudut = {ask} 'Berapa banyak sudut yang kamu mau?'\nsudut = 360 / jumlahsudut \n{repeat} jumlahsudut {times}\n    {turn} _\n    {forward} _\n```\n"

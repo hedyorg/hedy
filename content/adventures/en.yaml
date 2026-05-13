@@ -1182,32 +1182,32 @@ adventures:
                     **Warning! This code needs to be debugged!**
                     ```
                     answer = 'Welcome to our pizza shop. Would you like to order?'
-                    if answer
+                    {if} answer
                     amount 'How many pizzas would you like to buy?'
                     else
-                    print "You're buying one anyways!"
+                    {print} "You're buying one anyways!"
                     amount = 1
                     'We have Margherita and Pepperoni pizzas.'
-                    repeat amount
-                    chosen_pizza = ask 'What kind of pizza would you like?'
-                    print 'One ' chosen_pizza '.'
+                    {repeat} amount
+                    chosen_pizza = {ask} 'What kind of pizza would you like?'
+                    {print} 'One ' chosen_pizza '.'
                     price = amount * 10
                     That will be ' price ' dollars please.'
                     ```
                 answer_code: |
                     ```
-                    answer = ask 'Welcome to our pizza shop. Would you like to order?'
-                    if answer is yes
-                        amount = ask 'How many pizzas would you like to buy?'
+                    answer = {ask} 'Welcome to our pizza shop. Would you like to order?'
+                    {if} answer is yes
+                        amount = {ask} 'How many pizzas would you like to buy?'
                     else
-                        print "You're buying one anyways!"
+                        {print} "You're buying one anyways!"
                         amount = 1
-                    print 'We have Margherita and Pepperoni pizzas.'
-                    repeat amount times
-                        chosen_pizza = ask 'What kind of pizza would you like?'
-                        print 'One ' chosen_pizza '.'
+                    {print} 'We have Margherita and Pepperoni pizzas.'
+                    {repeat} amount times
+                        chosen_pizza = {ask} 'What kind of pizza would you like?'
+                        {print} 'One ' chosen_pizza '.'
                     price = amount * 10
-                    print 'That will be ' price ' dollars please.'
+                    {print} 'That will be ' price ' dollars please.'
                     ```
             10:
                 story_text: |-
@@ -1287,7 +1287,7 @@ adventures:
                             {if} more {is} 'no'
                         {print} 'Alright'
                             {else}
-                            print 'And ' more
+                            {print} 'And ' more
                     {print} 'Thank you'
 
                     {print} 'Welcome to our restaurant'
@@ -1311,7 +1311,7 @@ adventures:
                         {if} more {is} 'no'
                             {print} 'Alright'
                         {else}
-                            print 'And ' more
+                            {print} 'And ' more
                         {print} 'Thank you'
 
                     {print} 'Welcome to our restaurant'
@@ -1398,7 +1398,7 @@ adventures:
                     countries = ['The Netherlands', 'Poland', 'Turkey', 'Zimbabwe', 'Thailand', 'Brasil', 'Peru', 'Australia', 'India', 'Romania']
                     capitals = ['Amsterdam', 'Warsaw', 'Istanbul', 'Harare', 'Bangkok', 'Brasilia', 'Lima', 'Canberra', 'New Delhi', 'Bucharest']
                     score = 0
-                    {for} i in {range}(1, 10)
+                    {for} i {in} {range}(1, 10)
                         answer = {input}("What's the capital of ", countries[i])
                         correct = capitals[i]
                         {if} answer == correct
@@ -1482,8 +1482,8 @@ adventures:
                         drink = {input}'water, coke, icetea, lemonade or coffee?'
                         number_of_drinks = {input}('How many of these drinks would you like?')
 
-                        print ()('YOU ORDERED')
-                        print (number_of_drinks ' ' drink)
+                        {print} ()('YOU ORDERED')
+                        {print} (number_of_drinks ' ' drink)
 
                     'Welcome to Hedy pizza'
                     more_food = input 'Would you like to order a pizza?'
@@ -1495,7 +1495,7 @@ adventures:
                         call drink_order
                         more_drinks == input('Would you like to order more drinks?')
 
-                    print 'Thanks for ordering!'
+                    {print} 'Thanks for ordering!'
                     ```
                 answer_code: |
                     ```
@@ -1730,7 +1730,7 @@ adventures:
 
                     Firstly, add a `{while}` loop that checks if 6 has been thrown or not.
                     As long as you haven't thrown 6 already, throw the dice on a random number.
-                    Print what the player has thrown.
+                    {print} what the player has thrown.
                     Add a try to the amount of tries.
                     Wait a second before you throw again, or - in case you've thrown a 6 - before the game ends.
                 example_code: |
@@ -1909,11 +1909,11 @@ adventures:
                 answer_code: |
                     ```
                     people = mom, dad, Emma, Sophie
-                    repeat 7 times {print} 'Dishwashing will be done by ' people {at} {random}
+                    {repeat} 7 {times} {print} 'Dishwashing will be done by ' people {at} {random}
 
                     #Extra
-                    repeat 7 times {print} 'Walking the dog will be done by ' people {at} {random}
-                    repeat 7 times {print} 'Taking out the trash will be done by' people {at} {random}
+                    {repeat} 7 {times} {print} 'Walking the dog will be done by ' people {at} {random}
+                    {repeat} 7 {times} {print} 'Taking out the trash will be done by' people {at} {random}
                     ```
             11:
                 story_text: |
@@ -2204,7 +2204,7 @@ adventures:
                     {print} 'If you pick the petals the flower will tell you if your crush loves you back'
                     amount = {ask} 'How many petals do you want to pick?'
                     options = they love you, they love you not
-                    repeat amount times {print} options {at} {random}
+                    {repeat} amount {times} {print} options {at} {random}
                     ```
             9:
                 story_text: |
@@ -2504,7 +2504,7 @@ adventures:
                     game = 'on'
                     {for} i {in} {range} (1,10):
                         {if} game == 'on':
-                            guess = ask 'Which number do you think it is?'
+                            guess = {ask} 'Which number do you think it is?'
                             {if} guess > number:
                                 {print} 'Lower!'
                             {if} guess < number:
@@ -5010,10 +5010,10 @@ adventures:
                     ```
                     {print} 'Welcome to Restaurant Chez Hedy'
                     people = {ask} 'How many people are joining us today?'
-                    repeat people times order is {ask} 'What whould you like to order?'
+                    {repeat} people {times} order = {ask} 'What whould you like to order?'
 
                     # Exrtra
-                    repeat people times drink is {ask} 'What whould you like to drink?'
+                    {repeat} people {times} drink = {ask} 'What whould you like to drink?'
                     ```
             9:
                 story_text: |
@@ -6470,7 +6470,7 @@ adventures:
 
                     ```
                     colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
-                    color _
+                    {color} _
                     ```
                 answer_code: |
                     Rainbow
