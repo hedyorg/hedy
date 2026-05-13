@@ -899,8 +899,10 @@ adventures:
                     pessoa {is} {ask} 'Quem é você?'
                     resposta_boa {is} Oba! Você ganhou!, Você certamente vai ganhar!, Temos um vencedor!
                     resposta_ruim {is} Sem sorte! Tente novamente!, Outra pessoa vai ganhar, Você perdeu!
-                    {if} pessoa {in} amigos {print} resposta_boa {at} {random}
-                    {else} {print} resposta_ruim {at} {random}
+                    {if} pessoa {in} amigos 
+                    {print} resposta_boa {at} {random}
+                    {else} 
+                    {print} resposta_ruim {at} {random}
                     ```
             7:
                 story_text: |
@@ -1621,8 +1623,16 @@ adventures:
                 example_code: "```\n_ Adicione aspas neste código _\n{print} Bem-vindo(a) ao Restaurante Chez Hedy!\n{print} Hoje, estamos servindo pizza ou lasanha.\ncomida {is} {ask} O que você gostaria de comer?\n{print} Ótima escolha!  comida  é meu prato preferido!\ncobertura {is} {ask} Você quer cobertura de carne ou de vegetais?\n{print} comida  com  cobertura  a caminho!\nbebida {is} {ask} O que você gostaria de beber?\n{print} Agradecemos por seu pedido.\n{print} Sua  comida  e  bebida  estarão aqui logo, logo!\n```\n"
                 story_text: "Agora, no programa de restaurante, você também precisa de aspas para usar os comandos `{print}` ou `{ask}`.\n\n### Exercício\nAdicione aspas neste código para fazê-lo funcionar! Mas atenção: variáveis não devem ser colocadas em aspas.\nEm seguida, use o comando `{clear}` para mostrar apenas uma linha por vez na sua tela de saída.\n\n### Exercício 2\nVolte ao nível anterior e copie o seu código do restaurante. Faça o código funcionar neste nível colocando aspas nos lugares certos e adicione alguns comandos `{clear}`.\n"
             6:
-                example_code: "```\nbebidas_disponíveis {is} água, limonada, coca, suco de laranja\nbebida {is} {ask} 'O que você gostaria de beber?'\n{if} bebida {in} bebidas_disponíveis {print} 'Um copo de ' bebida ' saindo!'\n{else} {print} 'Desculpe, não vendemos isso'\n```\n"
                 story_text: "### Exercício\nO código exemplo mostra como você poderia programar o caso de algum item do cardápio já ter acabado no seu restaurante.\nCopie o seu próprio código do restaurante dos níveis anteriores. Crie um problema em seu restaurante e programe-o, assim como o código exemplo fez.\nPor exemplo, você também pode ter algum item do cardápio em falta, ou você não aceita cartão de crédito, ou talvez a máquina de sorvetes esteja quebrada.\n\n**Extra** Já programou o problema e as respostas apropriadas? Então tente adicionar mais comandos `{if}` e `{else}` ao seu código.\nTente adicionar um `{if}` depois de todo comando `{ask}` em seu código para torná-lo o mais interativo possível!\n"
+                example_code: |
+                    ```
+                    bebidas_disponíveis {is} água, limonada, coca, suco de laranja
+                    bebida {is} {ask} 'O que você gostaria de beber?'
+                    {if} bebida {in} bebidas_disponíveis 
+                    {print} 'Um copo de ' bebida ' saindo!'
+                    {else} 
+                    {print} 'Desculpe, não vendemos isso'
+                    ```
     rock:
         name: Pedra, papel, tesoura
         default_save_name: Pedra_2
