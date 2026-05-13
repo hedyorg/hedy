@@ -33,11 +33,11 @@ adventures:
 
                 example_code: |
                     ```
-                    nev is ask Mi a neve a főszereplőnek?
-                    print nev most futni fog az erdőben
-                    print nev kissé fél
-                    print Őrült zajokat hall mindenütt
-                    print nev fél hogy ez egy kísértetjárta erdő
+                    nev {is} {ask} Mi a neve a főszereplőnek?
+                    {print} nev most futni fog az erdőben
+                    {print} nev kissé fél
+                    {print} Őrült zajokat hall mindenütt
+                    {print} nev fél hogy ez egy kísértetjárta erdő
                     ```
                 story_text_2: |
                     ### Exercise
@@ -53,8 +53,8 @@ adventures:
                     In level 3 you can make your story more fun. Hozzáadhatsz valami véletlenszerűt is a történetéhez. Bármilyen szörnyet, állatot vagy más akadályt.
                 example_code: |
                     ```
-                    allatok is bagoly, sündisznó, tatu
-                    print Most hallja a allatok at random hangját
+                    allatok {is} bagoly, sündisznó, tatu
+                    {print} Most hallja a allatok at random hangját
                     ```
                 story_text_2: |
                     The command `{add}` can also come in handy in your story. For example
@@ -73,11 +73,11 @@ adventures:
                     szinten. Kombinálhatod ezt egy `if`-fel, és akkor már készítettél is egy egész programot!
                 example_code: |-
                     ```
-                    nev is ask 'Ki jár az erdőben?'
-                    print nev ' sétál az erdőn'
-                    print nev ' találkozik egy szörnnyel'
-                    vege is ask ' Egy jó vagy rossz véget szeretnél?'
-                    if vege is jó print nev ' előveszi a kardot és a szörny gyorsan elszalad' else print 'A szörny megeszi ' nev '-t'
+                    nev {is} {ask} 'Ki jár az erdőben?'
+                    {print} nev ' sétál az erdőn'
+                    {print} nev ' találkozik egy szörnnyel'
+                    vege {is} {ask} ' Egy jó vagy rossz véget szeretnél?'
+                    {if} vege {is} jó {print} nev ' előveszi a kardot és a szörny gyorsan elszalad' {else} {print} 'A szörny megeszi ' nev '-t'
                     ```
             8:
                 story_text: |
@@ -85,9 +85,9 @@ adventures:
                     Az ilyen ismétlést beírhatod a 6. szintbe tartozó történetbe a 'repeat' paranccsal.
                 example_code: |
                     ```
-                    print 'A herceg folyamatosan segítséget kért'
-                    repeat 5 times print 'Segítség!'
-                    print 'Miért nem segít nekem senki?'
+                    {print} 'A herceg folyamatosan segítséget kért'
+                    repeat 5 times {print} 'Segítség!'
+                    {print} 'Miért nem segít nekem senki?'
                     ```
     add_remove_command:
         levels: {}
@@ -109,9 +109,9 @@ adventures:
                 example_code: |
                     ```
                     jo_valasz = 11 * 27
-                    valasz = ask 'Mennyi 11 és 27 szorzata?'
-                    if valasz is jo_valasz print 'nagyszerű!'
-                    else print 'Nem jó! Ennyi: ' jo_valasz
+                    valasz = {ask} 'Mennyi 11 és 27 szorzata?'
+                    {if} valasz is jo_valasz {print} 'nagyszerű!'
+                    {else} {print} 'Nem jó! Ennyi: ' jo_valasz
                     ```
                 story_text_2: |
                     You can also let the computer do random calculations on its own using {random}.
@@ -122,9 +122,9 @@ adventures:
                     tabla = tablazat at random
                     szam = szamok at random
                     jo_valasz = tabla * szam
-                    valasz = ask 'Mennyi ' tabla ' és ' szam ' szorzata?'
-                    if valasz is jo_valasz print 'rendben'
-                    else print 'hiba! ennyi: ' jo_valasz
+                    valasz = {ask} 'Mennyi ' tabla ' és ' szam ' szorzata?'
+                    {if} valasz {is} jo_valasz {print} 'rendben'
+                    {else} {print} 'hiba! ennyi: ' jo_valasz
                     ```
                 story_text_3: |
                     You can also let the computer do random calculations on its own using {random}.
@@ -146,12 +146,12 @@ adventures:
                         szam1 = szamok at random
                         szam2 = szamok at random
                         helyesvalasz = szam1 * szam2
-                        print 'Mennyi ' szam1 ' * ' szam2 '?'
-                        valasz = ask 'Gépeld ide a válaszodat...'
-                        print 'A válaszod: ' valasz
-                        if valasz is helyesvalasz
+                        {print} 'Mennyi ' szam1 ' * ' szam2 '?'
+                        valasz = {ask} 'Gépeld ide a válaszodat...'
+                        {print} 'A válaszod: ' valasz
+                        {if} valasz {is} helyesvalasz
                             pontszam = pontszam + 1
-                    print 'Szép munka! A pontszámod... ' pontszam ' a 10-ből!'
+                    {print} 'Szép munka! A pontszámod... ' pontszam ' a 10-ből!'
                     ```
     calculator_2:
         levels: {}
@@ -176,13 +176,13 @@ adventures:
                     ! [Giliszta játék kockája a 1–5-ig számokkal és egy gilisztával]
                     Véletlenül megpróbáltál olyan mondatot megfogalmazni, amely tartalmazza a
                     dobásokat?
-                    Például. `print Választottam a dobasok közül`. Próbáld ki, ha még nem tetted meg.
+                    Például. `{print} Választottam a dobasok közül`. Próbáld ki, ha még nem tetted meg.
                     Ez nem működik megfelelően! Aztán megkapod: Az [1, 2, 3, 4, 5, földigiliszta] közül
                     választottam. Ezt meg tudod majd oldani a 3. szinten.
                 example_code: |-
                     ```
-                    dobasok is 1, 2, 3, 4, 5, giliszta
-                    print dobasok at random
+                    dobasok {is} 1, 2, 3, 4, 5, giliszta
+                    {print} dobasok at random
                     ```
             4:
                 story_text: |-
@@ -197,10 +197,10 @@ adventures:
                     rendben van! Ezután állítsd be a saját reakcióját. Pl. „Igen” 6-ra és „kár” valami másra.
                 example_code: |-
                     ```
-                    dobasok is 1, 2, 3, 4, 5, giliszta
+                    dobasok {is} 1, 2, 3, 4, 5, giliszta
                     dobas _
-                    print 'Te' _ 'dobtál'
-                    if _ is giliszta print 'Megállhatsz.' _ print 'Dobj újra!'
+                    {print} 'Te' _ 'dobtál'
+                    {if} _ {is} giliszta {print} 'Megállhatsz.' _ {print} 'Dobj újra!'
                     ```
             7:
                 story_text: |-
@@ -219,9 +219,9 @@ adventures:
                     dobasok = 1, 2, 3, 4, 5, giliszta
                     pontok = 0
                     dobas = dobasok at random
-                    print 'a dobásod' dobas
-                    if dobas is giliszta pontok = pontok + 5 else pontok = pontok + dobas
-                    print 'Pontok:' pontok
+                    {print} 'a dobásod' dobas
+                    {if} dobas {is} giliszta pontok = pontok + 5 {else} pontok = pontok + dobas
+                    {print} 'Pontok:' pontok
                     ```
                 example_code_2: |
                     Did you manage to calculate the score for 8 dice? That required a lot of cutting and pasting, right? We are going to make that easier in level 7!
@@ -234,8 +234,8 @@ adventures:
                     De talán teljesen más kockát akarsz készíteni. Természetesen lehet!
                 example_code: |-
                     ```
-                    dobások is 1, 2, 3, 4, 5, giliszta
-                    repeat _ _ print _ _
+                    dobások {is} 1, 2, 3, 4, 5, giliszta
+                    repeat _ _ {print} _ _
                     ```
             11:
                 story_text: |
@@ -264,13 +264,13 @@ adventures:
 
                     Véletlenül megpróbáltál olyan mondatot alkotni, amely az emberek szót tartalmazta?
 
-                    Pl. `print Ezek közül az emberek közül választottam`. Próbáld ki, ha még nem tetted meg.
+                    Pl. `{print} Ezek közül az emberek közül választottam`. Próbáld ki, ha még nem tetted meg.
 
                     Ez nem működik megfelelően! Aztán megkapod: [apu, anya, Edit, Gizi] közül választottam. Ezt meg tudod majd oldani a 3. szinten.
                 example_code: |-
                     ```
-                    emberek is anya, apa, Edit, Gizi
-                    print emberek at random
+                    emberek {is} anya, apa, Edit, Gizi
+                    {print} emberek at random
                     ```
             4:
                 story_text: |
@@ -281,9 +281,9 @@ adventures:
                     Tipp: Ne felejtsd el az idézőjeleket.
                 example_code: |
                     ```
-                    emberek is anya, apa, Edit, Gizi
-                    print _ ő mosogat: _
-                    print emberek at _
+                    emberek {is} anya, apa, Edit, Gizi
+                    {print} _ ő mosogat: _
+                    {print} emberek at _
                     ```
             5:
                 story_text: |
@@ -294,9 +294,9 @@ adventures:
                     Ne felejtsd el az idézeteket!
                 example_code: |-
                     ```
-                    emberek is anya, apa, Edit, Gizi
-                    mosogato is emberek at random
-                    if mosogato is Gizi print _ sajnos mosogatnom kell _ else print 'szerencsére nem én,
+                    emberek {is} anya, apa, Edit, Gizi
+                    mosogato {is} emberek at random
+                    {if} mosogato {is} Gizi {print} _ sajnos mosogatnom kell _ {else} {print} 'szerencsére nem én,
                     mert' _ 'már mosogat'
                     ```
             7:
@@ -313,9 +313,9 @@ adventures:
                     emberek = anya, apa, Edit, Gizi
                     edit_mosogat = 0
                     mosogato = emberek at random
-                    print 'A mosogató' mosogato
-                    if mosogato is Edit edit_mosogat = edit_mosogat + 1
-                    print 'Edit ezen a héten' edit_mosogat 'alkalommal mosogatott'
+                    {print} 'A mosogató' mosogato
+                    {if} mosogato {is} Edit edit_mosogat = edit_mosogat + 1
+                    {print} 'Edit ezen a héten' edit_mosogat 'alkalommal mosogatott'
                     ```
             8:
                 story_text: |
@@ -323,8 +323,8 @@ adventures:
                     kiszámíthatod, hogy kik fogj mosogatni az egész héten.
                 example_code: |
                     ```
-                    emberek is anya, apa, Edit, Gizi
-                    repeat _ _ print 'a mosogató:' _
+                    emberek {is} anya, apa, Edit, Gizi
+                    repeat _ _ {print} 'a mosogató:' _
                     ```
     elif_command:
         levels: {}
@@ -345,10 +345,10 @@ adventures:
                     Mint ez:
                 example_code: |
                     ```
-                    print Szia, Hedy, a jósnő vagyok!
-                    ask Ki vagy te?
-                    print Hadd nézzek bele a kristálygömbömbe
-                    print Látom... Látom...
+                    {print} Szia, Hedy, a jósnő vagyok!
+                    {ask} Ki vagy te?
+                    {print} Hadd nézzek bele a kristálygömbömbe
+                    {print} Látom... Látom...
                     echo A neved
                     ```
                     Hedy most csak a nevedet mondja meg. Ki tudod bővíteni a kódot, hogy Hedy több dolgot meg tudjon jósolni rólad?
@@ -369,11 +369,11 @@ adventures:
                 example_code: |-
                     Ebben a példában a játékos igen-nem kérdést tehet fel Hedynek, és Hedy véletlenszerű választ ad.
                     ```
-                    print Szia Hedy a jósnő vagyok!
-                    kerdes is ask Mit akarsz tudni?
-                    print Ez az amit tudni akarsz: kerdes
-                    valasz is igen, nem, talan
-                    print A kristálygömböm azt mondja... valasz at random
+                    {print} Szia Hedy a jósnő vagyok!
+                    kerdes {is} {ask} Mit akarsz tudni?
+                    {print} Ez az amit tudni akarsz: kerdes
+                    valasz {is} igen, nem, talan
+                    {print} A kristálygömböm azt mondja... valasz at random
                     ```
                 story_text_2: |
                     ### Exercises
@@ -384,28 +384,28 @@ adventures:
                     Például kiszámíthatod, hogy milyen gazdag leszel, vagy hány gyermeked lesz, ha felnősz.
                 example_code: |
                     ```
-                    print 'Hedy, a jósnő vagyok!'
-                    print 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
-                    kor is ask 'Hány éves vagy?'
-                    testver is ask 'Hány testvéred van?'
-                    magassag is ask 'Hány cm magas vagy?'
-                    gyerekek is magassag / kor
-                    gyerekek is gyerekek - testver
-                    print 'Neked ...'
-                    print gyerekek ' gyereked lesz!'
+                    {print} 'Hedy, a jósnő vagyok!'
+                    {print} 'Meg tudom jósolni, hány gyermeked lesz, ha felnősz!'
+                    kor {is} {ask} 'Hány éves vagy?'
+                    testver {is} {ask} 'Hány testvéred van?'
+                    magassag {is} {ask} 'Hány cm magas vagy?'
+                    gyerekek {is} magassag / kor
+                    gyerekek {is} gyerekek - testver
+                    {print} 'Neked ...'
+                    {print} gyerekek ' gyereked lesz!'
                     ```
 
                     Ha az előző példa nem volt elég buta a számodra, akkor nézd meg ezt!
 
                     ```
-                    print 'Hedy vagyok a buta jósnő!'
-                    print 'Meg tudom jósolni, milyen okos vagy!'
-                    foci is ask '1-10-es skálás mennyire szereted a focit?'
-                    banan is ask 'Hány banánt ettél a héten?'
-                    higienia is ask 'Hányszor mostad meg a kezed ma?'
-                    eredmeny is banan + higienia
-                    eredmeny is eredmeny * foci
-                    print 'Te ' eredmeny ' százalék okos vagy.'
+                    {print} 'Hedy vagyok a buta jósnő!'
+                    {print} 'Meg tudom jósolni, milyen okos vagy!'
+                    foci {is} {ask} '1-10-es skálás mennyire szereted a focit?'
+                    banan {is} {ask} 'Hány banánt ettél a héten?'
+                    higienia {is} {ask} 'Hányszor mostad meg a kezed ma?'
+                    eredmeny {is} banan + higienia
+                    eredmeny {is} eredmeny * foci
+                    {print} 'Te ' eredmeny ' százalék okos vagy.'
                     ```
             8:
                 story_text: |-
@@ -422,11 +422,11 @@ adventures:
                     A 7. szinten az ismétlés parancs elrendezése megváltozik, ami lehetővé teszi több sor ismétlését egyszerre.
                 example_code: |
                     ```
-                    print 'Hedy, a jósnő vagyok!'
-                    print 'Feltehetsz 3 kérdést!'
-                    repeat 3 times kerdes is ask 'Mit akarsz tudni?'
-                    valasz is igen, nem, talan
-                    repeat 3 times print 'A kristálygömböm azt mondja... ' valasz at random
+                    {print} 'Hedy, a jósnő vagyok!'
+                    {print} 'Feltehetsz 3 kérdést!'
+                    repeat 3 times kerdes {is} {ask} 'Mit akarsz tudni?'
+                    valasz {is} igen, nem, talan
+                    repeat 3 times {print} 'A kristálygömböm azt mondja... ' valasz at random
                     ```
             9:
                 story_text: |-
@@ -435,13 +435,13 @@ adventures:
                     A következő példában a jósnő 3 kérdést tehet fel, és kiírathatja őket!
                 example_code: |
                     ```
-                    print 'Hedy a jósnő vagyok!'
-                    print 'Feltehetsz 3 kérdést.'
-                    valasz is igen, nem, talán
+                    {print} 'Hedy a jósnő vagyok!'
+                    {print} 'Feltehetsz 3 kérdést.'
+                    valasz {is} igen, nem, talán
                     repeat 3 times
-                        kerdes is ask 'Mit akarsz tudni?'
-                        print kerdes
-                        print 'A kristálygömböm azt mondja...' valasz at random
+                        kerdes {is} {ask} 'Mit akarsz tudni?'
+                        {print} kerdes
+                        {print} 'A kristálygömböm azt mondja...' valasz at random
                     ```
     functions:
         levels: {}
@@ -462,18 +462,18 @@ adventures:
                     Az 1. szinten elkezdjük a kísértetjárta ház játékunkat egy ijesztő történet kitalálásával, és megkérdezzük a játékost, hogy milyen szörnyet látnak a kísértetjárta házban.
                 example_code: |
                     ```
-                    print Hogyan kerültem ide?
-                    print Emlékszem, a barátom azt mondta, menjek be a régi kastélyba ...
-                    print és hirtelen minden elsötétült.
-                    print De hogy kerületem a padlóra...?
-                    print és fejem úgy fáj, mintha egy baseball ütővel ütötték volna meg!
-                    print Mi ez a hang?
-                    print Ó, nem! Úgy érzem, nem vagyok egyedül ebben a házban!
-                    print El kell mennem innen!
-                    print Három ajtó van előttem ...
-                    ask Melyik ajtót válasszam?
+                    {print} Hogyan kerültem ide?
+                    {print} Emlékszem, a barátom azt mondta, menjek be a régi kastélyba ...
+                    {print} és hirtelen minden elsötétült.
+                    {print} De hogy kerületem a padlóra...?
+                    {print} és fejem úgy fáj, mintha egy baseball ütővel ütötték volna meg!
+                    {print} Mi ez a hang?
+                    {print} Ó, nem! Úgy érzem, nem vagyok egyedül ebben a házban!
+                    {print} El kell mennem innen!
+                    {print} Három ajtó van előttem ...
+                    {ask} Melyik ajtót válasszam?
                     echo Az ajtó, amit választok
-                    print ...?
+                    {print} ...?
                     ```
                     Be tudod fejezni az ijesztő történetet? Vagy kitalálsz egy saját kísértetáz történetet?
             3:
@@ -499,15 +499,15 @@ adventures:
                     A 4. szinten csak akkor nyerheti meg a játékot, ha ugyanazt az ajtót választja, amelyet Hedy véletlenszerűen választott ki.
                 example_code: |
                     ```
-                    print 'Szabadulj ki a kísértetházból!'
-                    print 'Három ajtó van előtted...'
-                    ajtok is 1,2,3
-                    szornyek is verfarkas, mumia, vampir, zombi
-                    valasztottajto is ask 'Melyik ajtót választod?'
-                    print 'Az ajtó, amit választottál...' valasztottajto
-                    helyesajto is ajtok at random
-                    if valasztottajto is helyesajto print 'Nagyszerű! Kiszabadultál!'
-                    else print 'Jaj ne! Megevett a ...' szornyek at random
+                    {print} 'Szabadulj ki a kísértetházból!'
+                    {print} 'Három ajtó van előtted...'
+                    ajtok {is} 1,2,3
+                    szornyek {is} verfarkas, mumia, vampir, zombi
+                    valasztottajto {is} {ask} 'Melyik ajtót választod?'
+                    {print} 'Az ajtó, amit választottál...' valasztottajto
+                    helyesajto {is} ajtok at random
+                    {if} valasztottajto {is} helyesajto {print} 'Nagyszerű! Kiszabadultál!'
+                    {else} {print} 'Jaj ne! Megevett a ...' szornyek at random
                     ```
     hospital:
         levels: {}
@@ -557,11 +557,11 @@ adventures:
                     Can you think of more lines to add to your restaurant code? For example, can you {ask} the guests what they'd like to drink, tell them the price, or wish them a pleasant meal?
                 example_code_2: |
                     ```
-                    print Üdvözlünk a Hedy étteremben
-                    ask Mit rendelsz?
+                    {print} Üdvözlünk a Hedy étteremben
+                    {ask} Mit rendelsz?
                     echo Szóval ezt szeretnéd megrendelni
-                    print Köszönjük a rendelésedet!
-                    print Már úton van!
+                    {print} Köszönjük a rendelésedet!
+                    {print} Már úton van!
                     ```
             2:
                 story_text: |
@@ -569,15 +569,15 @@ adventures:
                     Most már használhatsz változókat, és Hedy emlékszik mind az ételekre, mind az italokra!
                 example_code: |-
                     ```
-                    print Üdvözlünk a Hedy étteremben!
-                    print Ma pizzát vagy lasagnat szolgálunk fel.
-                    etel is ask Mit szeretnél enni?
-                    print Jó választás! A etel a kedvencem!
-                    feltet is ask 'Szeretnél rá húst vagy zöldséget?'
-                    print etel rajta feltet úton van!
-                    ital is ask 'Mit szeretnél inni?'
-                    print Köszönjük a rendelésedet.
-                    print A etel és ital mindjárt itt lesz!
+                    {print} Üdvözlünk a Hedy étteremben!
+                    {print} Ma pizzát vagy lasagnat szolgálunk fel.
+                    etel {is} {ask} Mit szeretnél enni?
+                    {print} Jó választás! A etel a kedvencem!
+                    feltet {is} {ask} 'Szeretnél rá húst vagy zöldséget?'
+                    {print} etel rajta feltet úton van!
+                    ital {is} {ask} 'Mit szeretnél inni?'
+                    {print} Köszönjük a rendelésedet.
+                    {print} A etel és ital mindjárt itt lesz!
                     ```
             3:
                 story_text: |-
@@ -586,33 +586,33 @@ adventures:
                     Szórakozhatsz egy kicsit, ha hagyod, hogy Hedy megválassza a vacsora árát is! Mit fogsz kapni?
                 example_code: |
                     ```
-                    print Üdvözöljük a Hedy's Random étteremben!
-                    print Az egyetlen étterem amely véletlenszerűen kiválasztja az étkezést és annak árát az Ön számára!
-                    eloetelek is saláta, leves, sajt
-                    foetel is pizza, kelbimbó, spagetti
-                    desszertek is brownie, fagylalt, francia sajtok
-                    ital is kóla, sör, víz
-                    arak is 1000 forint, 2000 forint, 3000 forint
-                    print A következővel indul: eloetelek at random
-                    print Ezután kiszolgáljuk: foetel at random
-                    print És desszertként: desszertek at random
-                    print Igyon egy italt
-                    print Ez lesz: arak at random
-                    print Köszönöm és élvezze az étkezést!
+                    {print} Üdvözöljük a Hedy's Random étteremben!
+                    {print} Az egyetlen étterem amely véletlenszerűen kiválasztja az étkezést és annak árát az Ön számára!
+                    eloetelek {is} saláta, leves, sajt
+                    foetel {is} pizza, kelbimbó, spagetti
+                    desszertek {is} brownie, fagylalt, francia sajtok
+                    ital {is} kóla, sör, víz
+                    arak {is} 1000 forint, 2000 forint, 3000 forint
+                    {print} A következővel indul: eloetelek at random
+                    {print} Ezután kiszolgáljuk: foetel at random
+                    {print} És desszertként: desszertek at random
+                    {print} Igyon egy italt
+                    {print} Ez lesz: arak at random
+                    {print} Köszönöm és élvezze az étkezést!
                     ```
             4:
                 example_code: |
                     ```
                     _ Add the quotation marks to this code _
-                    print Üdvözlünk a Hedy Étteremben!
-                    print Ma pizzát vagy lasagnat szolgálunk fel.
-                    etel is ask Mit szeretnél enni?
-                    print Jó választás! A(z)  etel  nekem is kedvencem!
-                    feltet is ask 'Szeretnél hús vagy zöldséget rá?
-                    print etel  , rajta a(z)  feltet  már úton van!
-                    ital is ask Mit szeretnél inni hozzá?
-                    print Köszönjük a rendelésedet.
-                    print 'A(z)  etel  és a(z)  ital  mindjárt itt lesz!
+                    {print} Üdvözlünk a Hedy Étteremben!
+                    {print} Ma pizzát vagy lasagnat szolgálunk fel.
+                    etel {is} {ask} Mit szeretnél enni?
+                    {print} Jó választás! A(z)  etel  nekem {is} kedvencem!
+                    feltet {is} {ask} 'Szeretnél hús vagy zöldséget rá?
+                    {print} etel  , rajta a(z)  feltet  már úton van!
+                    ital {is} {ask} Mit szeretnél inni hozzá?
+                    {print} Köszönjük a rendelésedet.
+                    {print} 'A(z)  etel  és a(z)  ital  mindjárt itt lesz!
                     ```
             6:
                 story_text: |
@@ -620,19 +620,31 @@ adventures:
                     Az alábbi példában láthatod, hogy megkérdezheted az ügyfeledet, hogy szeretné-e hallani a különlegességeket, és Hedy ennek megfelelően válaszolhat.
                 example_code: |
                     ```
-                    print 'Üdvözlünk a Hedy Étteremben!'
-                    kulonleges is ask 'Szeretnél hallani ma a különlegességeinkről?'
-                    if kulonleges is igen print 'Mai különlegességünk piri piri csirke és rizs.' else print 'Nem probléma.'
-                    etel is ask 'Mit szeretnél enni?'
-                    print 'Egy ' etel', mindjárt jön!'
-                    ital is ask 'Mit szeretnél inni hozzá?'
-                    if ital is kóla print 'Sajnálom a kóla kifogyott!' else print 'Jó választás!!'
-                    mas is ask 'Szeretnél valami mást?'
-                    print 'Hadd ismételjem el a rendelésedet...'
-                    print 'Egy ' etel
-                    if ital is kóla print 'és...' else print 'Egy ' ital
-                    if mas is nem print 'Ez minden!' else print 'Egy  ' mas
-                    print 'Köszönjük a rendelésedet, jó étvágyat !'
+                    {print} 'Üdvözlünk a Hedy Étteremben!'
+                    kulonleges {is} {ask} 'Szeretnél hallani ma a különlegességeinkről?'
+                    {if} kulonleges {is} igen 
+                    {print} 'Mai különlegességünk piri piri csirke és rizs.' 
+                    {else} 
+                    {print} 'Nem probléma.'
+                    etel {is} {ask} 'Mit szeretnél enni?'
+                    {print} 'Egy ' etel', mindjárt jön!'
+                    ital {is} {ask} 'Mit szeretnél inni hozzá?'
+                    {if} ital {is} kóla 
+                    {print} 'Sajnálom a kóla kifogyott!' 
+                    {else} 
+                    {print} 'Jó választás!!'
+                    mas {is} {ask} 'Szeretnél valami mást?'
+                    {print} 'Hadd ismételjem el a rendelésedet...'
+                    {print} 'Egy ' etel
+                    {if} ital {is} kóla 
+                    {print} 'és...' 
+                    {else} 
+                    {print} 'Egy ' ital
+                    {if} mas {is} nem 
+                    {print} 'Ez minden!' 
+                    {else} 
+                    {print} 'Egy  ' mas
+                    {print} 'Köszönjük a rendelésedet, jó étvágyat !'
                     ```
 
                     Tudnál még több kérdést feltenni az ügyfeleknek, amikor rendelnek, és különböző  módon felelni a válaszaikra az if paranccsal?
@@ -643,17 +655,17 @@ adventures:
                     Készíthetsz egyszerű éttermi kódot, például.
                 example_code: |
                     ```
-                    print 'Üdvözlünk a Hedy Étteremben'
-                    print 'Ez a menünk:'
-                    print 'Fő ételeink: pizza, lasagne vagy spagetti'
-                    foetel is ask 'Melyik főételt szeretnéd?'
-                    ar is 0
-                    if foetel is pizza ar is 1000
-                    if foetel is lasagne ar is 1200
-                    if foetel is spagetti ar is 800
-                    print 'Ezt rendelted: ' foetel
-                    print 'Ez ' ar ' forint lesz, kérem'
-                    print 'Köszönöm, jó étvágyat!'
+                    {print} 'Üdvözlünk a Hedy Étteremben'
+                    {print} 'Ez a menünk:'
+                    {print} 'Fő ételeink: pizza, lasagne vagy spagetti'
+                    foetel {is} {ask} 'Melyik főételt szeretnéd?'
+                    ar {is} 0
+                    {if} foetel {is} pizza ar {is} 1000
+                    {if} foetel {is} lasagne ar {is} 1200
+                    {if} foetel {is} spagetti ar {is} 800
+                    {print} 'Ezt rendelted: ' foetel
+                    {print} 'Ez ' ar ' forint lesz, kérem'
+                    {print} 'Köszönöm, jó étvágyat!'
                     ```
 
                     De még sok mindent hozzáadhatsz a virtuális éttermedhez, például több tanfolyamot.
@@ -676,10 +688,10 @@ adventures:
                     A 7. szinten megtanulhatod, hogyan kell több sor kódot egyszerre megismételni, ami lehetővé teszi több rendelés kérését és kiíratását is!
                 example_code: |
                     ```
-                    print 'Üdvözlünk a Hedy étteremben!'
-                    emberek is ask 'Hány ember jön ma?'
-                    repeat emberek times food is ask 'Mit szeretnél ennit?'
-                    print 'Köszönjük megrendelésedet! Mindjárt jön!'
+                    {print} 'Üdvözlünk a Hedy étteremben!'
+                    emberek {is} {ask} 'Hány ember jön ma?'
+                    repeat emberek times food {is} {ask} 'Mit szeretnél ennit?'
+                    {print} 'Köszönjük megrendelésedet! Mindjárt jön!'
                     ```
             10:
                 story_text: |-
@@ -688,21 +700,21 @@ adventures:
                     Természetesen ez a kód bővíthető a menü további elemeivel, italokkal és/vagy több fogással, így nyugodtan adj hozzá annyi lehetőséget, amennyit csak akarsz!
                 example_code: |
                     ```
-                    print 'Üdvözlünk a Hedy étteremben!'
-                    emberek is ask 'Hány ember jön ma??'
-                    print 'Nagyszerű!'
-                    print 'A mai menü pizza vagy saláta'
-                    ar is 0
+                    {print} 'Üdvözlünk a Hedy étteremben!'
+                    emberek {is} {ask} 'Hány ember jön ma??'
+                    {print} 'Nagyszerű!'
+                    {print} 'A mai menü pizza vagy saláta'
+                    ar {is} 0
                     repeat emberek times
-                        etel is ask 'Mit szeretnél rendelni?'
-                        print etel
-                        if etel is pizza
-                            ar is ar + 1000
+                        etel {is} {ask} 'Mit szeretnél rendelni?'
+                        {print} etel
+                        {if} etel {is} pizza
+                            ar {is} ar + 1000
                         else
-                            ar is ar + 800
-                    print 'Köszönjük rendelésedet!'
-                    print 'Ez ' ar ' forint lesz'
-                    print 'Köszönöm, jó étvágyat!!'
+                            ar {is} ar + 800
+                    {print} 'Köszönjük rendelésedet!'
+                    {print} 'Ez ' ar ' forint lesz'
+                    {print} 'Köszönöm, jó étvágyat!!'
                     ```
     rock:
         name: Kő, papír, olló
@@ -718,14 +730,14 @@ adventures:
                     Az ismétlés természetesen kissé unalmas, mert a számítógép nem választ semmit. Ezt később mi magunk is elkészítjük.
                 example_code: |-
                     ```
-                    print Mit választottál?
-                    ask Válassz kő, papír és olló közül
+                    {print} Mit választottál?
+                    {ask} Válassz kő, papír és olló közül
                     echo ez volt a választásod:
                     ```
             3:
                 story_text: |
                     A 2. szinten listákat írhatunk be, és választhatunk belőlük dolgokat.
-                    Először készíts egy listát az `is` segítségével. Ezután hagyhatod, hogy a számítógép a `at
+                    Először készíts egy listát az `{is}` segítségével. Ezután hagyhatod, hogy a számítógép a `at
                     random` segítségével válasszon ki valamit a listából.
                     Például megengedheted, hogy a számítógép kő, papír és olló közül válogasson.
 
@@ -734,13 +746,13 @@ adventures:
 
                     Véletlenül megpróbáltál olyan mondatot megfogalmazni, amely tartalmazza a valasztas
                     változót?
-                    Például. ```print Az enyém: valasztas```. Próbáld ki, ha még nem tetted meg.
+                    Például. ```{print} Az enyém: valasztas```. Próbáld ki, ha még nem tetted meg.
                     Ez nem működik megfelelően! Aztán megkapod: a [kő, papír, olló] közül választottam.
                     Ezt meg tudod majd oldani a 3. szinten.
                 example_code: |-
                     ```
-                    valasztas is kő, papír, olló
-                    print valasztas at random
+                    valasztas {is} kő, papír, olló
+                    {print} valasztas at random
                     ```
             5:
                 story_text: |-
@@ -754,13 +766,13 @@ adventures:
                     Először töltsd ki a helyes kódot a pontok helyén, és nézd meg, hogy döntetlen-e.
                 example_code: |-
                     ```
-                    lehetoseg is kő, papír, olló
-                    szamitogepe is _
-                    valaszt is ask Mit választasz?
-                    print 'ezt választottad: ' _
-                    print 'a számítógép választása: ' _
-                    if _ is _ print 'döntetlen!' else print 'nem döntetlen'
-                    if valaszt is kő and szamitogepe is papír print 'számítógép nyert'
+                    lehetoseg {is} kő, papír, olló
+                    szamitogepe {is} _
+                    valaszt {is} {ask} Mit választasz?
+                    {print} 'ezt választottad: ' _
+                    {print} 'a számítógép választása: ' _
+                    {if} _ {is} _ {print} 'döntetlen!' {else} {print} 'nem döntetlen'
+                    {if} valaszt {is} kő and szamitogepe {is} papír {print} 'számítógép nyert'
                     ```
     rock_2:
         levels: {}
@@ -783,17 +795,17 @@ adventures:
                     # Előretekintve
                     Az 5. szinten megtanultunk 1 sort megismételni az `repeat` szóval, így:
 
-                    * repeat 3 times print 'Baby Shark Tutududududu'
+                    * repeat 3 times `{print}` 'Baby Shark Tutududududu'
 
                     De ahogyan ebben a leckében látni fogod, néha több sort is meg akarsz együtt ismételni. Ezt meg lehet tenni vágással és beillesztéssel, de ez sok munka. A 7. szinten megtanulod, hogyan kell ezt könnyebben megtenni.
                 example_code: |
                     ```
                     verssor = 99
-                    print verssor ' üveg sör a falon'
-                    print verssor ' üveg sör'
-                    print 'Vegyél egyet, add tovább'
+                    {print} verssor ' üveg sör a falon'
+                    {print} verssor ' üveg sör'
+                    {print} 'Vegyél egyet, add tovább'
                     verssor = verssor - 1
-                    print verssor ' üveg sör a falon'
+                    {print} verssor ' üveg sör a falon'
                     ```
             8:
                 story_text: |
@@ -812,11 +824,11 @@ adventures:
                 example_code: |
                     ```
                     verssor = 99
-                    print verssor ' üveg sör a falon'
-                    print verssor ' üveg sör'
-                    print 'Vegyél egyet, add tovább'
+                    {print} verssor ' üveg sör a falon'
+                    {print} verssor ' üveg sör'
+                    {print} 'Vegyél egyet, add tovább'
                     verssor = verssor - 1
-                    print verssor 'üveg sör a falon'
+                    {print} verssor 'üveg sör a falon'
                     ```
     songs_2:
         levels: {}
@@ -842,8 +854,8 @@ adventures:
                     Tudsz ábrát készíteni ezzel a kóddal? Talán egy háromszög vagy egy kör?
                 example_code: |
                     ```
-                    print Ábrák rajzolása
-                    angle is 90
+                    {print} Ábrák rajzolása
+                    angle {is} 90
                     turn angle
                     forward 25
                     turn angle
@@ -870,27 +882,27 @@ adventures:
                     Use `at random` to choose a value from a list. You can copy and paste lines 2 and 3 so create a longer random path.
                 example_code: |
                     ```
-                    angles is 10, 50, 90, 150, 250
+                    angles {is} 10, 50, 90, 150, 250
                     turn angles at random
                     forward 25
                     ```
             4:
-                story_text: "A 3. szinten idézőjeleket kell használni a \"print\" és az \"ask\" szöveggel. A teknős használata közben is\n"
+                story_text: "A 3. szinten idézőjeleket kell használni a \"{print}\" és az \"ask\" szöveggel. A teknős használata közben is\n"
                 example_code: |
                     ```
-                    print 'Teknős verseny'
-                    irany is ask 'Hány fokot forduljon?'
+                    {print} 'Teknős verseny'
+                    irany {is} {ask} 'Hány fokot forduljon?'
                     turn irany
-                    tavolsag is ask 'Milyen messze menjen?'
+                    tavolsag {is} {ask} 'Milyen messze menjen?'
                     forward tavolsag
                     ```
             5:
                 story_text: "A 4. szinten választást hozhatsz létre az `if` utasítással. Például választhatsz különböző típusú alakzatok között.\n"
                 example_code: |
                     ```
-                    print 'Ábrák rajzolása'
-                    alakzat is ask 'Négyzetet vagy háromszöget akarsz rajzolni?'
-                    if alakzat is háromszög szog is 120 else szog is 90
+                    {print} 'Ábrák rajzolása'
+                    alakzat {is} {ask} 'Négyzetet vagy háromszöget akarsz rajzolni?'
+                    {if} alakzat {is} háromszög szog {is} 120 {else} szog {is} 90
                     turn szog
                     forward 25
                     turn szog
@@ -903,8 +915,8 @@ adventures:
                 example_code_2: |
                     ```
                     direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
-                    if direction is left turn _
-                    if direction is right turn _
+                    {if} direction {is} left turn _
+                    {if} direction {is} right turn _
                     forward 100
                     ```
             7:
@@ -915,8 +927,8 @@ adventures:
                     Most, hogy tudunk matematikázni Hedyvel, megrajzolhatjuk az összes kívánt alakzatot!
                 example_code: |
                     ```
-                    szogek is ask 'Hány szöget akarsz?'
-                    szog is 360 / szogek
+                    szogek {is} {ask} 'Hány szöget akarsz?'
+                    szog {is} 360 / szogek
                     forward 50
                     turn szog
                     forward 50
@@ -940,7 +952,7 @@ adventures:
                     Kitalálod, mennyit kell itt fordulnia a teknősnek? Fejezd be a kódot, és rajzolhatsz tetszőleges sokszöget!
                 example_code: |
                     ```
-                    szog is 90
+                    szog {is} 90
                     repeat 10 times
                         turn szog
                         forward 50
