@@ -529,7 +529,10 @@ adventures:
                     puan = 0
                     atılan = seçimler {at} {random}
                     {print} 'Attığın zar ' atılan
-                    {if} atılan {is} solucan puan = puan + 5 {else} puan = puan + atılan
+                    {if} atılan {is} solucan 
+                    puan = puan + 5 
+                    {else} 
+                    puan = puan + atılan
                     {print} 'toplam puan ' puan ' oldu'
                     ```
                 example_code_2: |

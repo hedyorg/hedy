@@ -516,7 +516,10 @@ adventures:
                     poäng = 0
                     kast = val {at} {random}
                     {print} 'du kastade ' kast
-                    {if} kast {is} daggmask poäng = poäng + 5 {else} poäng = poäng + kast
+                    {if} kast {is} daggmask 
+                    poäng = poäng + 5 
+                    {else} 
+                    poäng = poäng + kast
                     {print} 'det är ' poäng ' poäng'
                     ```
                 example_code_2: |

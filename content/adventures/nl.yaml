@@ -637,8 +637,10 @@ adventures:
                     punten = 0
                     worp = keuzes {at} {random}
                     {print} 'je gooide ' worp
-                    {if} worp {is} regenworm punten = punten + 5
-                    {else} punten = punten + worp
+                    {if} worp {is} regenworm 
+                    punten = punten + 5
+                    {else} 
+                    punten = punten + worp
                     {print} 'dat zijn dan ' punten ' punten'
                     ```
                 example_code_2: |

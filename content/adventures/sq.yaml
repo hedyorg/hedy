@@ -309,7 +309,10 @@ adventures:
                     pikët = 0
                     hedhja = zgjedhjet {at} {random}
                     {print} 'ju keni hedhur' hedhja
-                    {if} hedhja {is} krimi_tokes pikët = pikët+ 5 {else} pikët= pikët + hedhja
+                    {if} hedhja {is} krimi_tokes 
+                    pikët = pikët+ 5 
+                    {else} 
+                    pikët= pikët + hedhja
                     {print} 'këto janë' pikët ' pikë'
                     ```
                 example_code_2: |

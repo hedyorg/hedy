@@ -278,7 +278,10 @@ adventures:
                     poeng = 0
                     verdi = valgene {at} {random}
                     {print} 'du trillet' verdi
-                    {if} verdi {is} makk poeng = poeng + 5 {else} poeng = poeng + verdi
+                    {if} verdi {is} makk 
+                    poeng = poeng + 5 
+                    {else} 
+                    poeng = poeng + verdi
                     {print} 'det er' poeng ' poeng'
                     ```
                     Kan du gjøre det slik at koden gir deg den totale poengsummen for 8 terningkast? For å gjøre det må du kopiere og lime inn et par linjer kode.

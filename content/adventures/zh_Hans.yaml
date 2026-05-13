@@ -594,7 +594,10 @@ adventures:
                     points = 0
                     throw = choices {at} {random}
                     {print} '你投出了 ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm 
+                    points = points + 5 
+                    {else} 
+                    points = points + throw
                     {print} '那些是 ' points '分数'
                     ```
                 example_code_2: |

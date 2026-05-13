@@ -510,7 +510,10 @@ adventures:
                     poin {is} 0
                     lemparan {is} pilihan {at} {random}
                     {print} 'kamu mendapatkan' lemparan
-                    {if} lemparan {is} cacing poin {is} poin + 5 {else} poin {is} poin + lemparan
+                    {if} lemparan {is} cacing 
+                    poin {is} poin + 5 
+                    {else} 
+                    poin {is} poin + lemparan
                     {print} 'ini adalah poinnya: ' poin
                     ```
                     Dapatkan kamu membuat kodenya untuk menghitung total poin dari lemparan dadu 8 kali? Untuk melakukannya, kamu harus menyalin beberapa baris kode.
