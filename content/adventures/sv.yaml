@@ -1060,8 +1060,10 @@ adventures:
                     ```
                     snygga_färger {is} grönt, gult
                     favoritfärg {is} {ask} 'Vilken är din favoritfärg?'
-                    {if} favoritfärg {in} snygga_färger {print} 'snyggt!'
-                    {else} {print} 'meh'
+                    {if} favoritfärg {in} snygga_färger 
+                    {print} 'snyggt!'
+                    {else} 
+                    {print} 'meh'
                     ```
                 story_text_2: |
                     ### Övning
@@ -1071,8 +1073,10 @@ adventures:
                     ```
                     djur är hund, ko, får
                     svaret är fråga 'Vilket är ditt favoritdjur?'
-                    _ svar _ djur _ 'Mitt också!'
-                    _ _ 'Mina favoritdjur är hundar, kor och får'
+                    _ svar _ djur 
+                    _ 'Mitt också!'
+                    _ 
+                    _ 'Mina favoritdjur är hundar, kor och får'
                     ```
     is_command:
         default_save_name: kommandot_är

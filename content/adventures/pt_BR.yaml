@@ -1194,8 +1194,10 @@ adventures:
                     ```
                     cores_belas {is} verde, amarelo
                     cor_favorita {is} {ask} 'Qual é a sua cor favorita?'
-                    {if} cor_favorita {in} cores_belas {print} 'bela!'
-                    {else} {print} 'meh'
+                    {if} cor_favorita {in} cores_belas 
+                    {print} 'bela!'
+                    {else} 
+                    {print} 'meh'
                     ```
                 story_text_2: |
                     ### Exercício
@@ -1205,8 +1207,10 @@ adventures:
                     ```
                     animais {is} cachorro, vaca, ovelha
                     resposta {is} {ask} 'Qual é o seu animal favorito?'
-                    _ resposta _ animais _ 'O meu também!'
-                    _ _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
+                    _ resposta _ animais 
+                    _ 'O meu também!'
+                    _ 
+                    _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
                     ```
         name: '{in}'
     is_command:

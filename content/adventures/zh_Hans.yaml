@@ -1237,8 +1237,10 @@ adventures:
                     ```
                     pretty_colors {is} 绿色, 黄色
                     favorite_color {is} {ask} '什么是你最喜欢的颜色?'
-                    {if} favorite_color {in} pretty_colors {print} '漂亮!'
-                    {else} {print} 'meh'
+                    {if} favorite_color {in} pretty_colors 
+                    {print} '漂亮!'
+                    {else} 
+                    {print} 'meh'
                     ```
                 story_text_2: |
                     ### 练习
@@ -1248,8 +1250,10 @@ adventures:
                     ```
                     animals {is} 狗, 牛, 羊
                     answer {is} {ask} '你最喜欢的动物是哪个?'
-                    _ answer _ animals _ '我也是!'
-                    _ _ '我最喜欢的动物是狗, 牛, 羊。'
+                    _ answer _ animals 
+                    _ '我也是!'
+                    _ 
+                    _ '我最喜欢的动物是狗, 牛, 羊。'
                     ```
     is_command:
         default_save_name: is_命令

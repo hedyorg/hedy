@@ -1093,8 +1093,10 @@ adventures:
                     ```
                     güzel_renkler {is} yeşil, sarı
                     favori_renk {is} {ask} 'En sevdiğin renk nedir?'
-                    {if} favori_renk {in} güzel_renkler {print} 'güzel!'
-                    {else} {print} 'eh işte'
+                    {if} favori_renk {in} güzel_renkler 
+                    {print} 'güzel!'
+                    {else} 
+                    {print} 'eh işte'
                     ```
                 story_text_2: |
                     ### Alıştırma
@@ -1104,8 +1106,10 @@ adventures:
                     ```
                     hayvanlar eşit köpek, inek, koyun
                     cevap eşit sor 'En sevdiğin hayvan hangisi?'
-                    _ cevap _ hayvanlar _ 'Benimki de öyle!'
-                    _ _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
+                    _ cevap _ hayvanlar 
+                    _ 'Benimki de öyle!'
+                    _ 
+                    _ 'En sevdiğim hayvanlar köpekler, inekler ve koyunlar'
                     ```
     is_command:
         default_save_name: eşit_komutu

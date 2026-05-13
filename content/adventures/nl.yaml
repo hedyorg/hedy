@@ -1640,8 +1640,10 @@ adventures:
                     ```
                     mooie_kleuren {is} geel, rood
                     lievelingskleur {is} {ask} 'Wat is jouw lievelingskleur?'
-                    {if} lievelingskleur {in} mooie_kleuren {print} 'mooi!'
-                    {else} {print} 'mwah'
+                    {if} lievelingskleur {in} mooie_kleuren 
+                    {print} 'mooi!'
+                    {else} 
+                    {print} 'mwah'
                     ```
                 story_text_2: |
                     ### Opdracht
@@ -1651,8 +1653,10 @@ adventures:
                     ```
                     dieren {is} koe, schaap, varken
                     antwoord {is} {ask} 'Wat is je lieverlingsdier?'
-                    _ antwoord _ dieren _ 'Mijne ook!'
-                    _ _ 'Mijn lievelingsdieren zijn koeien, schapen en varkens'
+                    _ antwoord _ dieren 
+                    _ 'Mijne ook!'
+                    _ 
+                    _ 'Mijn lievelingsdieren zijn koeien, schapen en varkens'
                     ```
     is_command:
         levels:

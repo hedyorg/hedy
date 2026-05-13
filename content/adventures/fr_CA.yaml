@@ -1229,8 +1229,10 @@ adventures:
                     ```
                     jolies_couleurs {is} vert, jaune
                     couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
-                    {if} couleur_préférée {in} jolies_couleurs {print} "jolie !"
-                    {else} {print} "bof"
+                    {if} couleur_préférée {in} jolies_couleurs 
+                    {print} "jolie !"
+                    {else} 
+                    {print} "bof"
                     ```
                 story_text_2: |
                     ### Exercice
@@ -1240,13 +1242,12 @@ adventures:
                     ```
                     animaux {is} chien, vache, mouton
                     réponse {is} {ask} "Quel est ton animal préféré ?"
-                    _ réponse _ animaux _ "c'est aussi le mien !"
-                    _ _ "mes animaux préférés sont chien, vache et mouton"
+                    _ réponse _ animaux 
+                    _ "c'est aussi le mien !"
+                    _ 
+                    _ "mes animaux préférés sont chien, vache et mouton"
                     ```
-
-                    couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
-                    {if} couleur_préférée {in} jolies_couleurs {print} "jolie !"
-                    {else} {print} "bof"
+                    
     is_command:
         default_save_name: command_est
         description: Introduction de la commande {is}
