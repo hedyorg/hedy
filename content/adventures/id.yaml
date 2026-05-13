@@ -641,7 +641,10 @@ adventures:
                     {print} 'Aku Hedy sang peramal!'
                     {print} 'Aku dapat meramal apakah kamu akan memenangkan undian besok!'
                     orang {is} {ask} 'Siapa kamu?'
-                    {if} orang {is} Hedy {print} 'Kamu pasti menang!' {else} {print} 'Nasib buruk! Orang lain yang akan menang!'
+                    {if} orang {is} Hedy 
+                    {print} 'Kamu pasti menang!' 
+                    {else} 
+                    {print} 'Nasib buruk! Orang lain yang akan menang!'
                     ```
             7:
                 story_text: |-
