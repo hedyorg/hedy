@@ -129,15 +129,27 @@ describe('Redesigned class configure and customize-level pages', () => {
         const originalAdventureIds = [...$inputs].map((input) => input.value);
         expect(originalAdventureIds.length).to.be.greaterThan(0);
         cy.wrap(originalAdventureIds).as('originalAdventureIds');
+        cy.wrap(originalAdventureIds[0]).as('removedAdventureId');
       });
 
       cy.intercept('POST', `/for-teachers/redesign/class/${classId}/customize-level/1/remove-adventure*`).as('removeAdventure');
-      cy.get('#level_1 li button[aria-label]').first().click();
-      cy.wait('@removeAdventure').its('response.statusCode').should('eq', 200);
+      cy.get('@removedAdventureId').then((removedAdventureId) => {
+        cy.get(`#level_1 li button[aria-label][hx-post*="adventure_id=${removedAdventureId}"]`).first().click();
+      });
+      cy.wait('@removeAdventure').then(({ request, response }) => {
+        expect(response.statusCode).to.eq(200);
+        cy.get('@removedAdventureId').then((removedAdventureId) => {
+          expect(request.url).to.include(`adventure_id=${removedAdventureId}`);
+        });
+      });
 
       cy.get('@originalAdventureIds').then((originalAdventureIds) => {
         cy.get('#level_1 input[name="adventure"]').then(($inputsAfterRemove) => {
           const modifiedAdventureIds = [...$inputsAfterRemove].map((input) => input.value);
+          cy.get('@removedAdventureId').then((removedAdventureId) => {
+            expect(modifiedAdventureIds.length).to.eq(originalAdventureIds.length - 1);
+            expect(modifiedAdventureIds).to.not.include(removedAdventureId);
+          });
           expect(modifiedAdventureIds).to.not.deep.equal(originalAdventureIds);
         });
       });
