@@ -291,7 +291,10 @@ adventures:
                     poentaro = 0
                     ĵeto = elektoj {at} {random}
                     {print} 'la rezulto de via ĵeto estas' ĵeto
-                    {if} ĵeto {is} lumbriko poentaro = poentaro + 5 {else} poentaro = poentaro + ĵeto
+                    {if} ĵeto {is} lumbriko 
+                    poentaro = poentaro + 5 
+                    {else} 
+                    poentaro = poentaro + ĵeto
                     {print} 'those are' poentaro ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
