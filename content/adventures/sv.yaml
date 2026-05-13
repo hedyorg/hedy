@@ -747,8 +747,10 @@ adventures:
                     person {is} {ask} 'Vem är du?'
                     bra_svar {is} Hurra! Du vinner!, Du kommer definitivt att vinna!, Vi har en vinnare!
                     dåligt_svar {is} Otur! Försök igen!, En annan person kommer att vinna, Du förlorar!
-                    {if} person {in} vänner {print} bra_svar {at} {random}
-                    {else} {print} dåligt_svar {at} {random}
+                    {if} person {in} vänner 
+                    {print} bra_svar {at} {random}
+                    {else} 
+                    {print} dåligt_svar {at} {random}
                     ```
             7:
                 story_text: |
