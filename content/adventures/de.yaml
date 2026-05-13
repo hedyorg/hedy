@@ -923,7 +923,10 @@ adventures:
                     Punkte = 0
                     Wurf = Würfelseiten {at} {random}
                     {print} 'Du hast ' Wurf ' gewürfelt.'
-                    {if} Wurf {is} Regenwurm Punkte = Punkte + 5 {else} Punkte = Punkte + Wurf
+                    {if} Wurf {is} Regenwurm 
+                    Punkte = Punkte + 5 
+                    {else} 
+                    Punkte = Punkte + Wurf
                     {print} 'Jetzt hast Du ' Punkte ' Punkte.'
                     ```
                 example_code_2: |
