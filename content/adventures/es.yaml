@@ -820,8 +820,10 @@ adventures:
                     persona {is} {ask} '¿Quién eres?'
                     respuesta_buena {is} ¡Hurra! ¡Ganaste!, ¡Seguro que ganarás!, ¡Tenemos un ganador!
                     respuesta_mala {is} ¡Mala suerte! ¡Inténtalo de nuevo!, ¡Otra persona ganará, Tú perderás!
-                    {if} persona {in} amigos {print} respuesta_buena {at} {random}
-                    {else} {print} respuesta_mala {at} {random}
+                    {if} persona {in} amigos 
+                    {print} respuesta_buena {at} {random}
+                    {else} 
+                    {print} respuesta_mala {at} {random}
                     ```
             7:
                 story_text: |
@@ -1878,8 +1880,10 @@ adventures:
                     ```
                     bebidas_disponibles {is} agua, limonada, refresco de cola, zumo de naranja
                     bebida {is} {ask} '¿Qué quieres beber?'
-                    {if} bebida {in} bebidas_disponibles {print} '¡Una ' bebida 'de camino!'
-                    {else} {print} 'Lo siento, no servimos eso'
+                    {if} bebida {in} bebidas_disponibles 
+                    {print} '¡Una ' bebida 'de camino!'
+                    {else} 
+                    {print} 'Lo siento, no servimos eso'
                     ```
             7:
                 story_text: |
