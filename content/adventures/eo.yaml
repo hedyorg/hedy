@@ -782,16 +782,28 @@ adventures:
                     ```
                     {print} 'Bonvenon al Restoracio Hedy!'
                     special {is} {ask} 'Would you like to hear our specials today?'
-                    {if} special {is} jes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
+                    {if} special {is} jes 
+                    {print} 'Todays special is chicken piri piri and rice.' 
+                    {else} 
+                    {print} 'No problem.'
                     manĝaĵo {is} {ask} 'What would you like to eat?'
                     {print} 'Unu ' manĝaĵo ', coming right up!'
                     trinkaĵo {is} {ask} 'What would you like to drink with that?'
-                    {if} trinkaĵo {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
+                    {if} trinkaĵo {is} cola 
+                    {print} 'Im sorry, we are out of cola!' 
+                    {else} 
+                    {print} 'Great choice!'
                     anything {is} {ask} 'Would you like anything {else}?'
                     {print} 'Mi ripetos vian mendon…'
                     {print} 'Unu ' manĝaĵo
-                    {if} trinkaĵo {is} cola {print} 'kaj…' {else} {print} 'Unu ' trinkaĵo
-                    {if} anything {is} ne {print} 'Thats it!' {else} {print} 'Unu ' anything
+                    {if} trinkaĵo {is} cola 
+                    {print} 'kaj…' 
+                    {else} 
+                    {print} 'Unu ' trinkaĵo
+                    {if} anything {is} ne 
+                    {print} 'Thats it!' 
+                    {else} 
+                    {print} 'Unu ' anything
                     {print} 'Dankon pro via mendo. Ĝuu vian manĝon!'
                     ```
             7:
