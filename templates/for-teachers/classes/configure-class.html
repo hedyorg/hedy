@@ -33,7 +33,7 @@
 							<span class="switch">
 								<input type="checkbox" id="enable_level_{{ level }}"
 									  {% if customizations and level in customizations['levels'] %}checked{% endif %}
-								   onchange="hedyApp.enable_level({{level}})"
+								   onchange="hedyApp.enable_level({{level}}); hedyApp.save_customizations_levels('{{ class_info.id }}')"
 								   data-level="{{ level }}"
 								   level="{{ level }}"
 								>

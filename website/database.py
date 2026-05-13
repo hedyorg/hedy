@@ -546,6 +546,9 @@ class Database:
         # Swap the ticked value when a request is sent
         return self.STUDENT_ADVENTURES.update({"id": id}, {"ticked": not ticked})
 
+    def set_student_adventure_ticked(self, id, ticked):
+        return self.STUDENT_ADVENTURES.update({"id": id}, {"ticked": ticked})
+
     def store_student_adventure(self, student_adventure):
         # Store the adventure data in this table in case it doesn't match the programs table.
         self.STUDENT_ADVENTURES.create(student_adventure)

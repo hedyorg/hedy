@@ -1,5 +1,5 @@
 <h2 class="my-5">{{_('active_classes')}}</h2>
-{{ render_partial('for-teachers/classes/htmx-classes-table.html', teacher_classes=active_classes, is_archived=False) }}
+{{ render_partial('for-teachers/classes/htmx-classes-table.html', teacher_classes=active_classes, is_archived=False, class_customizations=class_customizations, last_content_version=last_content_version) }}
 
 <a class="blue-btn-new inline-flex items-center mt-5 mb-10"
     id="create_class_button"
@@ -9,5 +9,5 @@
 </a>
 
 <h2 class="my-5">{{_('archived_classes') }}</h2>
-{{ render_partial('for-teachers/classes/htmx-classes-table.html', teacher_classes=archived_classes, is_archived=True) }}
+{{ render_partial('for-teachers/classes/htmx-classes-table.html', teacher_classes=archived_classes, is_archived=True, class_customizations=class_customizations, last_content_version=last_content_version) }}
 

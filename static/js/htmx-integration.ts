@@ -110,7 +110,6 @@ htmx.on("htmx:confirm", function(e: any) {
     closeOpenContextMenus();
 
     confirmFn(modalPrompt, () => {
-        modalElement.removeAttribute("hx-confirm");
         e.detail.issueRequest(true);
         const success_message = modalElement.getAttribute("data-success-message")
         if (success_message) {
