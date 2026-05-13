@@ -642,8 +642,10 @@ adventures:
                     person {is} {ask} 'Who are you?'
                     good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
                     bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
-                    {if} person {in} friends {print} good_answer {at} {random}
-                    {else} {print} bad_answer {at} {random}
+                    {if} person {in} friends 
+                    {print} good_answer {at} {random}
+                    {else} 
+                    {print} bad_answer {at} {random}
                     ```
             7:
                 story_text: |
