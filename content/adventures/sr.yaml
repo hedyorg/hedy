@@ -911,8 +911,10 @@ adventures:
                     person {is} {ask} 'Ко си ти?'
                     good_answer {is} Ура! Побеђујеш!, Дефинитивно ћеш победити!, Имамо победника!
                     bad_answer {is} Лоша срећа! Покушај поново!, Други ће победити, Губиш!
-                    {if} person {in} friends {print} good_answer {at} {random}
-                    {else} {print} bad_answer {at} {random}
+                    {if} person {in} friends 
+                    {print} good_answer {at} {random}
+                    {else} 
+                    {print} bad_answer {at} {random}
                     ```
             7:
                 story_text: |
