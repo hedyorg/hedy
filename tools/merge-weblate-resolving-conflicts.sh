@@ -11,8 +11,12 @@ git checkout -B weblate-hedy-adventures-conflicts weblate-main/main
 
 # Normalize files in Weblate main repo
 doit run _autopr _autopr_weblate
-git add grammars
-git commit -am 'Normalize Weblate branch' --allow-empty
+git add -A
+git commit -m 'Normalize Weblate branch' --allow-empty
+
+# Drop legacy Weblate trees that no longer exist on main to avoid modify/delete conflicts.
+git rm -r --ignore-unmatch hedy/data/keywords hedy/data/grammars
+git commit -m 'Drop obsolete Weblate trees' --allow-empty
 
 # Merge from origin, preferring Weblate's changes
 git fetch origin
