@@ -6,7 +6,6 @@
         <thead class="bg-gray-200 divide-y divide-gray-400">
           <tr>
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('name')}}</th>
-            <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('teacher')}}</th>
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('students')[0]|upper}}{{_('students')[1:]}}</th>
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider">{{_('created')}}</th>
             <th class="py-3 px-4 text-center text-sm font-medium text-gray-700 uppercase tracking-wider rounded-t-lg">{{_('actions')}}</th>
@@ -15,20 +14,14 @@
         <tbody class="bg-white divide-y divide-gray-200">
           {% for class in teacher_classes %}
           {% set menu_id = 'menu-' ~ ('archived-' if is_archived else 'active-') ~ class.id %}
+          {% set class_is_updated = 'content_version' in (class_customizations|default({})).get(class.id, {}) and class_customizations[class.id].content_version >= last_content_version %}
           <tr>
             <td class="text-center px-3 {% if loop.last %} rounded-b-lg {% endif %}">
               <a href="/for-teachers/redesign/class/{{class.id}}" class="view_class" data-cy="view_class_link">
                 {{class.name|e}}
               </a>
             </td>
-            <td data-cy="teacher_cell" class="py-3 text-center">
-              {{ class.teacher }}
-              {% if class.second_teachers %}
-                {% set second_count = class.second_teachers | length %}
-                <span class="text-sm text-gray-600">+{{ second_count }} {{ _('teacher')|lower if second_count == 1 else _('teachers')|lower  }}</span>
-              {% endif %}
-            </td>
-            <td class="text-center">{{ class.students|length }}</td>
+            <td class="text-center py-3">{{ class.students|length }}</td>
             <td class="text-center">{{ class.date }}</td>
             <td class="text-center {% if loop.last %} rounded-b-lg {% endif %}">
               <div class="relative inline-block text-left" name="menu">
@@ -65,6 +58,35 @@
                         <span class="m-3">{{_('configure')}}</span>
                       </li>
                     </a>
+                    <li>
+                      <button
+                        type="button"
+                        data-cy="update_class"
+                        data-class-name="{{ class.name|e }}"
+                        data-confirm-modal="redesign"
+                        data-confirm-button-class="green-btn-new"
+                        data-confirm-button-label="{{_('update')|e}}"
+                        data-confirm-title="{{_('update')|e}}"
+                        data-confirm-title-name="{{ class.name|upper|e }}"
+                        class="w-full text-left px-6 py-3 hover:bg-gray-200 active:bg-gray-400 cursor-pointer text-blue-900 ease-in transition duration-100 gap-4 disabled:text-gray-600 disabled:cursor-not-allowed font-bold"
+                        {% if class_is_updated %}disabled{% endif %}
+                        hx-confirm="{{_('update_class_prompt')}}"
+                        data-success-message="{{ _('class_updated_successfully') }}"
+                        data-failure-message="{{ _('feedback_message_error') }}"
+                        hx-trigger="click"
+                        hx-post="/for-teachers/redesign/update-content/{{ class.id }}"
+                        hx-target="#classes_table_container"
+                        hx-swap="innerHTML"
+                      >
+                        {% if class_is_updated %}
+                        <i class="fa-solid fa-circle-check text-sm"></i>
+                        <span class="m-3">{{_('updated')}}</span>
+                        {% else %}
+                        <i class="fa-solid fa-rotate text-sm"></i>
+                        <span class="m-3">{{_('update')}}</span>
+                        {% endif %}
+                      </button>
+                    </li>
                     <li>
                       <button
                         type="button"
@@ -135,7 +157,7 @@
           </tr>
           {% else %}
           <tr>
-            <td colspan="5" class="text-center py-6 px-4 text-sm text-gray-600">{{ _('no_existing_class') }}</td>
+            <td colspan="4" class="text-center py-6 px-4 text-sm text-gray-600">{{ _('no_existing_class') }}</td>
           </tr>
           {% endfor %}
         </tbody>

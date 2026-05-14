@@ -282,6 +282,7 @@ class ForTeachersModule(WebsiteModule):
                 error=401, ui_message=gettext("retrieve_class_error")
             )
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
         active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
         logger.info(teacher_classes)
         return render_template(
@@ -290,6 +291,8 @@ class ForTeachersModule(WebsiteModule):
             page_title=gettext("classes"),
             active_classes=active_classes,
             archived_classes=archived_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
             javascript_page_options=dict(
                 page="classes",
             ),
@@ -308,6 +311,17 @@ class ForTeachersModule(WebsiteModule):
                 active_classes.append(_class)
 
         return active_classes, archived_classes
+
+    def _get_class_customizations_map(self, teacher_classes):
+        class_customizations = [
+            self.db.get_class_customizations(_class["id"])
+            for _class in teacher_classes
+        ]
+        return {
+            customizations["id"]: customizations
+            for customizations in class_customizations
+            if customizations and "id" in customizations
+        }
 
     def _get_teacher_classes_after_class_update(
         self,
@@ -360,11 +374,14 @@ class ForTeachersModule(WebsiteModule):
             should_exist=False,
         )
         active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
 
         return render_partial(
             "for-teachers/classes/htmx-classes-sections.html",
             active_classes=active_classes,
             archived_classes=archived_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
         )
 
     @route("/class/<class_id>/archive", methods=["POST"])
@@ -384,11 +401,14 @@ class ForTeachersModule(WebsiteModule):
             should_exist=True,
         )
         active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
 
         return render_partial(
             "for-teachers/classes/htmx-classes-sections.html",
             active_classes=active_classes,
             archived_classes=archived_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
         )
 
     @route("/class/<class_id>/unarchive", methods=["POST"])
@@ -408,11 +428,14 @@ class ForTeachersModule(WebsiteModule):
             should_exist=True,
         )
         active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
 
         return render_partial(
             "for-teachers/classes/htmx-classes-sections.html",
             active_classes=active_classes,
             archived_classes=archived_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
         )
 
     @route("/class/new", methods=["GET"])
@@ -671,6 +694,8 @@ class ForTeachersModule(WebsiteModule):
 
         invites = self.db.get_class_invites(class_id=Class["id"])
         for invite in invites:
+            if invite.get("invited_as") != "student":
+                continue
             normalized_invite = dict(invite)
             normalized_invite["is_invite"] = True
             normalized_invite["_sort_name"] = (normalized_invite.get("username") or "").lower()
@@ -2047,17 +2072,7 @@ class ForTeachersModule(WebsiteModule):
                 class_id=class_id
             ))
 
-    @route("/update-content/<class_id>", methods=["POST"])
-    @requires_login
-    def update_class_content(self, user, class_id):
-        if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(
-                error=401, ui_message=gettext("retrieve_class_error")
-            )
-        Class = self.db.get_class(class_id)
-        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
-            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
-
+    def _update_class_content_to_latest(self, user, class_id):
         session["class_id"] = class_id
         customizations, _, _, _, _ = self.get_class_info(
             user, class_id, migrate_customizations=True
@@ -2095,21 +2110,52 @@ class ForTeachersModule(WebsiteModule):
                     db_adventures[level].append(adventure)
 
         customizations["sorted_adventures"] = db_adventures
-        customizations["content_version"] = hedy_content.LAST_CONTENT_VERSION
+        _set_customizations_content_version(customizations)
 
         self.db.update_class_customizations(customizations)
 
+    @route("/update-content/<class_id>", methods=["POST"])
+    @requires_login
+    def update_class_content(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        self._update_class_content_to_latest(user, class_id)
+
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
-        class_customizations = [
-            self.db.get_class_customizations(_class["id"]) for _class in teacher_classes
-        ]
-        class_customizations = {
-            customizations["id"]: customizations
-            for customizations in class_customizations
-        }
+        class_customizations = self._get_class_customizations_map(teacher_classes)
         return render_partial(
             "htmx-classes-table.html",
             teacher_classes=teacher_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
+        )
+
+    @route("/redesign/update-content/<class_id>", methods=["POST"])
+    @requires_login
+    def update_class_content_redesign(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        self._update_class_content_to_latest(user, class_id)
+
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
+        active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
+        return render_partial(
+            "for-teachers/classes/htmx-classes-sections.html",
+            active_classes=active_classes,
+            archived_classes=archived_classes,
             class_customizations=class_customizations,
             last_content_version=hedy_content.LAST_CONTENT_VERSION,
         )
@@ -2355,6 +2401,7 @@ class ForTeachersModule(WebsiteModule):
                     "updated_by": user["username"],
                     "quiz_parsons_tabs_migrated": True,
                 }
+                _set_customizations_content_version(customizations)
                 self.db.update_class_customizations(customizations)
         sorted_adventures = {
             k: v for k, v in customizations.get('sorted_adventures', {}).items() if int(k) <= hedy.HEDY_MAX_LEVEL
@@ -2478,7 +2525,7 @@ class ForTeachersModule(WebsiteModule):
             "restored_by": user["username"],
             "updated_by": user["username"],
         }
-        customizations["content_version"] = hedy_content.LAST_CONTENT_VERSION
+        _set_customizations_content_version(customizations)
 
         self.db.update_class_customizations(customizations)
         available_adventures = self.get_unused_adventures(
@@ -2525,7 +2572,7 @@ class ForTeachersModule(WebsiteModule):
                 adventures[lvl].append(sorted_adventure)
 
         customizations['sorted_adventures'] = db_adventures
-        customizations['content_version'] = hedy_content.LAST_CONTENT_VERSION
+        _set_customizations_content_version(customizations)
 
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
         self.db.update_class_customizations(customizations)
@@ -3133,7 +3180,15 @@ def _create_customizations(db, class_id, include_adventures=True):
             "selected_levels": [1]
         },
     }
+    _set_customizations_content_version(customizations)
     db.update_class_customizations(customizations)
+    return customizations
+
+
+def _set_customizations_content_version(customizations, content_version=None):
+    if content_version is None:
+        content_version = hedy_content.LAST_CONTENT_VERSION
+    customizations["content_version"] = content_version
     return customizations
 
 

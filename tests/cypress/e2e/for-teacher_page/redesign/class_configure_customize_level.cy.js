@@ -144,12 +144,11 @@ describe('Redesigned class configure and customize-level pages', () => {
       });
 
       cy.get('@originalAdventureIds').then((originalAdventureIds) => {
-        cy.get('#level_1 input[name="adventure"]').then(($inputsAfterRemove) => {
+        cy.get('#level_1 input[name="adventure"]').should(($inputsAfterRemove) => {
           const modifiedAdventureIds = [...$inputsAfterRemove].map((input) => input.value);
-          cy.get('@removedAdventureId').then((removedAdventureId) => {
-            expect(modifiedAdventureIds.length).to.eq(originalAdventureIds.length - 1);
-            expect(modifiedAdventureIds).to.not.include(removedAdventureId);
-          });
+          const removedAdventureId = originalAdventureIds[0];
+          expect(modifiedAdventureIds.length).to.eq(originalAdventureIds.length - 1);
+          expect(modifiedAdventureIds).to.not.include(removedAdventureId);
           expect(modifiedAdventureIds).to.not.deep.equal(originalAdventureIds);
         });
       });
@@ -161,7 +160,7 @@ describe('Redesigned class configure and customize-level pages', () => {
       cy.wait('@restoreDefault').its('response.statusCode').should('eq', 200);
 
       cy.get('@originalAdventureIds').then((originalAdventureIds) => {
-        cy.get('#level_1 input[name="adventure"]').then(($inputsAfterRestore) => {
+        cy.get('#level_1 input[name="adventure"]').should(($inputsAfterRestore) => {
           const restoredAdventureIds = [...$inputsAfterRestore].map((input) => input.value);
           expect(restoredAdventureIds).to.deep.equal(originalAdventureIds);
         });

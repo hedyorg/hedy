@@ -5,7 +5,7 @@
         {{ breadcrumb([{'label': _('classes')}]) }}
         <h1>{{ _('classes') }}</h1>
         <div id="classes_table_container">
-            {{ render_partial('for-teachers/classes/htmx-classes-sections.html', active_classes=active_classes, archived_classes=archived_classes) }}
+            {{ render_partial('for-teachers/classes/htmx-classes-sections.html', active_classes=active_classes, archived_classes=archived_classes, class_customizations=class_customizations, last_content_version=last_content_version) }}
         </div>
     </div>
 {% endblock %}
