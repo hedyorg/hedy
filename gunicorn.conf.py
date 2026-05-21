@@ -5,6 +5,7 @@ max_requests = 10000
 
 prod_name = "hedy"
 
+
 def worker_exit(server, worker):
     # When the worker is being exited (perhaps because of a timeout),
     # give the query_log handler a chance to flush to disk.

@@ -37,6 +37,7 @@ import dataclasses
 import os
 import sys
 
+
 @dataclasses.dataclass
 class EnvironmentSettings:
     hot_reload_py: bool
@@ -103,12 +104,14 @@ def is_local_dev():
 
 CACHED_ENV_BEHAVIOR = None
 
+
 def current_env():
     """Return the EnvironmentSettings for the current environment."""
     global CACHED_ENV_BEHAVIOR
     if CACHED_ENV_BEHAVIOR is None:
-         CACHED_ENV_BEHAVIOR = _compute_env_behavior()
+        CACHED_ENV_BEHAVIOR = _compute_env_behavior()
     return CACHED_ENV_BEHAVIOR
+
 
 def _compute_env_behavior():
     is_gunicorn = "gunicorn" in os.environ.get("SERVER_SOFTWARE", "")

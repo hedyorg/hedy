@@ -441,6 +441,7 @@ def task_build_container():
         verbosity=2,  # show everything live
     )
 
+
 def task_container():
     """Run a Docker container for the app.
 
