@@ -4,10 +4,11 @@ import os
 from flask import make_response, redirect, request, session
 from website.flask_helpers import gettext_with_fallback as gettext
 
+import envs
 from config import config
 from hedy.safe_format import safe_format
 from website_content import ALL_LANGUAGES, COUNTRIES
-from utils import extract_bcrypt_rounds, is_heroku, is_testing_request, timems, times, remove_class_preview
+from utils import extract_bcrypt_rounds, is_testing_request, timems, times, remove_class_preview
 from website.newsletter import create_subscription
 from website.auth import (
     RESET_LENGTH,
@@ -100,7 +101,7 @@ class AuthModule(WebsiteModule):
             TOKEN_COOKIE_NAME,
             value=cookie,
             httponly=True,
-            secure=is_heroku(),
+            secure=envs.current_env().secure_cookies,
             samesite="Lax",
             path="/",
             max_age=365 * 24 * 60 * 60,
@@ -197,7 +198,7 @@ class AuthModule(WebsiteModule):
             TOKEN_COOKIE_NAME,
             value=cookie,
             httponly=True,
-            secure=is_heroku(),
+            secure=envs.current_env().secure_cookies,
             samesite="Lax",
             path="/",
             max_age=365 * 24 * 60 * 60,
@@ -502,7 +503,7 @@ class AuthModule(WebsiteModule):
                     username=user["username"],
                 )
             except BaseException:
-                return user, make_response({gettext("mail_error_change_processed")}, 400)
+                return user, make_response(gettext("mail_error_change_processed"), 400)
             resp = make_response({}, 200)
         return user, resp
 

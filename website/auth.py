@@ -12,10 +12,11 @@ from flask_babel import force_locale
 from website.flask_helpers import gettext_with_fallback as gettext
 from website.flask_hedy import g_db
 
+import envs
 import utils
 from config import config
 from hedy.safe_format import safe_format
-from utils import is_debug_mode, timems, times
+from utils import timems, times
 from website import querylog
 TOKEN_COOKIE_NAME = config["session"]["cookie_name"]
 
@@ -333,7 +334,7 @@ def send_email(recipient, subject, body_plain, body_html):
     except email_error as error:
         print("Email send error", error.response["Error"]["Message"])
     except NoCredentialsError as e:
-        if not is_debug_mode():
+        if envs.current_env().cloud_services:
             raise e
     else:
         print("Email sent to " + recipient)

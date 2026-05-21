@@ -1,5 +1,9 @@
-# This file is used to configure gunicorn,
-# used on Heroku.
+# This file is used to configure gunicorn, used for production workloads.
+
+# Restart after this many requests, to limit memory usage
+max_requests = 10000
+
+prod_name = "hedy"
 
 def worker_exit(server, worker):
     # When the worker is being exited (perhaps because of a timeout),

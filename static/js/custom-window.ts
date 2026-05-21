@@ -1,4 +1,4 @@
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ClassicEditor from "./ckeditor";
 
 /*
     In this file, you could define any additional variables

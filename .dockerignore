@@ -3,4 +3,40 @@
 *.md
 .dockerignore
 Dockerfile
-License.txt
+
+# Hidden files are not interesting usually
+.*
+
+# Should not be copied
+__pycache__
+*.log
+*.tsbuildinfo
+
+# A download of the Dynamo DB, never needs to make it into the Docker context.
+db.sqlite3*
+
+# No state
+dev_database.json
+
+# This never needs to make it into context
+content/research/*
+
+# Don't need to rebuild the container if the tests change
+tests
+docs
+
+# This file is huge, we'll always use a production CSS build in Docker
+static/css/generated.full.css
+
+# Don't care about the build output
+static/js/appbundle.js*
+*.map
+
+# Ignore node_modules and [v]env, we'll do a proper build inside the container
+node_modules
+.env
+.venv
+
+# This will mess with doit running inside the container
+.doit.db.json
+.env*
