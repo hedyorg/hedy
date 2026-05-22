@@ -1,4 +1,4 @@
-import ClassicEditor from "./ckeditor";
+import type ClassicEditor from "./ckeditor";
 
 /*
     In this file, you could define any additional variables
