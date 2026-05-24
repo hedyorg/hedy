@@ -43,13 +43,15 @@ def request(method, path, headers={}, body='', cookies=None, follow_redirects=Tr
         headers['content-type'] = 'application/json'
         body = json.dumps(body)
 
+    headers['accept'] = 'application/json'
+
     start = utils.timems()
 
     response = getattr(requests, method)(HOST + path, headers=headers, data=body,
                                          cookies=cookies, allow_redirects=follow_redirects)
 
     # Remember all cookies in the cookie jar
-    if cookies is not None:
+    if cookies is not None and response.cookies is not None:
         cookies.update(response.cookies)
 
     ret = {'time': utils.timems() - start}

@@ -1,6 +1,5 @@
 from flask import session, request, make_response
 from website.flask_helpers import render_template
-from bs4 import BeautifulSoup
 import contextlib
 import datetime
 import time
@@ -12,9 +11,9 @@ import string
 import random
 import uuid
 import unicodedata
-import sys
 import traceback
 import collections
+import envs
 
 from email_validator import EmailNotValidError, validate_email
 from flask_babel import format_date, format_datetime, format_timedelta
@@ -69,29 +68,8 @@ def times():
     return int(round(time.time()))
 
 
-DEBUG_MODE = False
-
-
-def is_debug_mode():
-    """Return whether or not we're in debug mode.
-
-    We do more expensive things that are better for development in debug mode.
-    """
-    return DEBUG_MODE
-
-
-def is_offline_mode():
-    """Return whether or not we're in offline mode.
-
-    Offline mode is a special build of Hedy that teachers can download and run
-    on their own computers.
-    """
-    return getattr(sys, 'frozen', False) and offline_data_dir() is not None
-
-
 def offline_data_dir():
-    """Return the data directory in offline mode."""
-    return getattr(sys, '_MEIPASS')
+    return envs.offline_data_dir()
 
 
 def set_debug_mode(debug_mode):
@@ -146,7 +124,7 @@ def is_testing_request(request):
 
     Test requests are only allowed on non-Heroku instances.
     """
-    return not is_heroku() and bool('X-Testing' in request.headers and request.headers['X-Testing'])
+    return bool('X-Testing' in request.headers and request.headers['X-Testing']) and envs.current_env().allow_x_testing
 
 
 def is_redesign_enabled():
@@ -164,36 +142,16 @@ def isoformat(timestamp):
     return dt.isoformat() + 'Z'
 
 
-def is_production():
-    """Whether we are serving production traffic."""
-    return os.getenv('IS_PRODUCTION', '') != ''
-
-
-def is_heroku():
-    """Whether we are running on Heroku.
-
-    Only use this flag if you are making a decision that really has to do with
-    Heroku-based hosting or not.
-
-    If you are trying to make a decision whether something needs to be done
-    "for real" or not, prefer using:
-
-    - `is_production()` to see if we're serving customer traffic and trying to
-      optimize for safety and speed.
-    - `is_debug_mode()` to see if we're on a developer machine and we're trying
-      to optimize for developer productivity.
-
-    """
-    return os.getenv('DYNO', '') != ''
-
-
 def version():
     # """Get the version from the Heroku environment variables."""
-    if not is_heroku():
+    if envs.is_dev():
         return 'DEV'
 
+    if not envs.is_heroku():
+        return 'NO_VERSION_INFO'
+
     vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
-    the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
+    the_date = datetime.date.fromisoformat(vrz.split('T')[0]) if vrz else datetime.date.today()
 
     commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
     return the_date.strftime('%Y %b %d') + f'({commit})'
@@ -294,16 +252,6 @@ def random_password_generator(size=6):
     """
     base_58_chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
     return random_id_generator(size, base_58_chars)
-
-
-def markdown_to_html_tags(markdown):
-    """
-    This function takes a Markdown string and returns a list with each of the HTML elements obtained
-    by rendering the Markdown into HTML.
-    """
-    _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
-    soup = BeautifulSoup(_html, 'html.parser')
-    return soup.find_all()
 
 
 MarkdownCode = collections.namedtuple('MarkdownCode', ('code', 'info'))

@@ -91,9 +91,7 @@ def task_tailwind():
     We will automatically switch between DEV and PROD mode depending
     on where we run.
     """
-    prod = os.getenv('DYNO') is not None
-
-    if prod:
+    if is_running_on_heroku():
         script = 'build-tools/heroku/tailwind/generate-prod-css'
         target = 'static/css/generated.css'
     else:
@@ -218,6 +216,7 @@ def task_typescript():
             [npx, 'esbuild', 'static/js/index.ts',
              '--bundle', '--sourcemap', '--minify', '--target=es2017',
              '--global-name=hedyApp', '--platform=browser',
+             '--loader:.svg=text',
              '--outfile=static/js/appbundle.js'],
         ],
         targets=['static/js/appbundle.js'],
@@ -342,6 +341,15 @@ def task_devserver():
     )
 
 
+def task_fulldev():
+    """Build the frontend, then run the devserver. Requires Node."""
+    return dict(
+        title=lambda _: 'Run full development environment',
+        task_dep=['frontend', 'devserver'],
+        actions=None,
+    )
+
+
 def task_normalize_yaml():
     """Normalize the YAML files by running a script.
 
@@ -420,6 +428,41 @@ def task_precommit():
     return dict(
         title=lambda _: 'Precommit checks',
         actions=['pre-commit run --show-diff-on-failure --color=always --all-files'],
+    )
+
+
+def task_build_container():
+    """Build a Docker container for the app."""
+    return dict(
+        title=lambda _: 'Build Docker container',
+        actions=[
+            LongRunning('docker build -t hedy:latest .'),
+        ],
+        verbosity=2,  # show everything live
+    )
+
+
+def task_container():
+    """Run a Docker container for the app.
+
+    Uses the `dev_database.json` in the current directory.
+    """
+    return dict(
+        title=lambda _: 'Run Docker container',
+        task_dep=['build_container'],
+        actions=[
+            LongRunning(' '.join([
+                'docker', 'run', '--rm',
+                '-p', '127.0.0.1:8080:8000',
+                '-v', './dev_database.json:/app/dev_database.json',
+                '--env-file', '.env-dev',
+                '--name=hedy',
+                'hedy',
+                '--access-logfile', '-',
+                '--log-file', '-',
+            ])),
+        ],
+        verbosity=2,  # show everything live
     )
 
 
