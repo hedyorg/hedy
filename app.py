@@ -46,11 +46,11 @@ from website_content import (adventures_order_per_level, KEYWORDS_ADVENTURES, AL
                              ALL_LANGUAGES, COUNTRIES, FRIENDLY_SORTED_COUNTRIES, HOUR_OF_CODE_ADVENTURES)
 
 from logging_config import LOGGING_CONFIG
-from utils import dump_yaml_rt, load_yaml_rt, timems, version, strip_accents
+from utils import timems, version, strip_accents
 from website import (ab_proxying, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger,
                      profile, programs, querylog, statistics,
-                     translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
+                     tags, surveys, super_teacher, public_adventures, user_activity, feedback)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, is_students_teacher,
                           has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
                           forget_current_user)
@@ -2400,27 +2400,6 @@ def translating_page():
     return render_template('translating.html')
 
 
-@app.route('/update_yaml', methods=['POST'])
-def update_yaml():
-    filename = path.join('coursedata', request.form['file'])
-    # The file MUST point to something inside our 'coursedata' directory
-    filepath = path.abspath(filename)
-    expected_path = path.abspath('coursedata')
-    if not filepath.startswith(expected_path):
-        raise RuntimeError('Invalid path given')
-
-    data = load_yaml_rt(filepath)
-    for key, value in request.form.items():
-        if key.startswith('c:'):
-            translating.apply_form_change(
-                data, key[2:], translating.normalize_newlines(value))
-
-    data = translating.normalize_yaml_blocks(data)
-
-    return Response(dump_yaml_rt(data), mimetype='application/x-yaml',
-                    headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
-
-
 @app.route('/user/<username>')
 def public_user_page(username):
     if not current_user()['username']:
@@ -2577,6 +2556,9 @@ def get_current_user_program_permissions(program):
 
     Verify that the program is either public, the current user is the creator, teacher or the user is admin.
     """
+    if not program:
+        return None
+
     user = current_user()
 
     is_current_user_author = program['username'] == user['username']
@@ -2587,7 +2569,7 @@ def get_current_user_program_permissions(program):
     if can_view:
         can_edit = is_current_user_author
         can_checkoff = students_teacher
-        can_unsubmit = program.get('submitted', False) and (is_admin or students_teacher)
+        can_unsubmit = program.get('submitted', False) and (is_admin(user) or students_teacher)
         return ProgramPermissions(can_edit, can_checkoff, can_unsubmit)
 
     return None
