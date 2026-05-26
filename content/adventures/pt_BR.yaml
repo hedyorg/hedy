@@ -123,6 +123,9 @@ adventures:
                     {if} final {is} feliz {print} nome ' pega a espada e o monstro foge rapidamente'
                     {else} {print} 'O monstro devora ' nome
                     ```
+            6:
+                story_text: "Agora que você pode usar `{elif}`, pode criar uma história ainda mais interativa! Você pode criar vários personagens, por exemplo, com características diferentes.\nOu você pode fazer com que seu jogador escolha qual caminho seguir, qual porta abrir ou qual poção mágica beber...\n\n### Exercício\nCrie sua própria história com 3 ou mais opções usando {elif}."
+                example_code: "```\nPersonagem {is} {ask} 'Quem vai te ajudar na sua jornada?'\n{if} character {is} 'Daisy'\n{print} 'Você escolheu Daisy! Ela é a mais inteligente de todas!'\n{elif} character {is} 'Jason'\n{print} 'Você escolheu Jason! Ele é o mais forte de todos!'\n{elif} character {is} 'Sam'\n{print} 'Você escolheu Sam! Sam é a pessoa mais rápida de todas!'\n```\n"
             8:
                 story_text: |
                     Em uma história, alguém diz a mesma palavra várias vezes. Por exemplo, quando alguém pede ajuda ou canta uma música.
@@ -466,6 +469,22 @@ adventures:
         description: Calculadora 2
         name: calculadora 2
         levels:
+            10:
+                story_text: |
+                    ### Exercício 1
+                    Vamos tornar o programa de prática um pouco mais difícil. O jogador agora precisa responder corretamente a duas perguntas. Preencha os espaços em branco para completar o programa.
+
+                    ### Exercício 2
+                    Às vezes, os cálculos têm várias respostas corretas. Por exemplo, 10 pode ser dividido por 5 e por 2. Portanto, a pergunta 'Qual número divide 10?' pode ser respondida por 2 e por 5.
+                    Peça um cálculo que tenha várias respostas corretas, peça ao jogador para respondê-lo e determine se está correto usando `{or}`.
+                    Esvazie o campo de programação e crie sua própria solução.
+                example_code: |
+                    ```
+                    resposta1={ask} 'Quanto é 10 vezes 7?'
+                    resposta2={ask} 'Quanto é 6 vezes 7?'
+                    {if}_______
+                        {print}_
+                    ```
             15:
                 example_code: "```\n# Use seu próprio código da aventura anterior.\n```\n"
                 story_text: |
@@ -509,7 +528,22 @@ adventures:
         levels:
             4:
                 example_code: "```\n{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'espere...'\n{sleep} 3\n{clear}\n{print} 'SURPRESA!'\n```\n"
-                story_text: "Hora de aprender um comando novo! Com o `{clear}`, você conseque limpar todo o texto da sua tela de saída. Dessa forma, você pode evitar que sua tela fique cheia demais de texto.\nAtenção! Se você for usar um comando `{clear}`, talvez você também precise colocar um `{sleep}` logo acima dele. Caso contrário, Hedy vai limpar sua tela sem te dar tempo para ler, como acontece nesse exemplo!\n"
+    congratulations:
+        name: Parabéns
+        default_save_name: E agora
+        description: Fim da Hedy
+        levels:
+            8:
+                story_text: |
+                    Parabéns! Você chegou ao fim do Hedy Básico! Você pode continuar aprendendo Hedy Avançado (níveis 9-12), onde você pode aprender conceitos mais complexos de programação.
+                    Ou fique à vontade para permanecer no Hedy Básico e criar seus próprios programas, claro!
+            12:
+                story_text: |
+                    Parabéns! Você chegou ao final de Hedy Advanced! Você pode continuar aprendendo no Hedy Expert (nível 13-16), onde você pode aprender como escrever códigos reais de Python.
+                    Ou sinta-se livre para continuar en Hedy Advanced e crie seus próprios programas, é claro!
+            16:
+                story_text: |
+                    Parabéns! Você chegou ao último nível do Hedy! O código que você criou aqui pode ser copiado para ambientes Python reais, como o Replit ou o PyCharm, e você pode continuar aprendendo por lá! Observe, no entanto, que o Python só pode ler comandos em inglês, então, se você estiver usando outros idiomas, precisará mudar para o inglês agora.
     debugging:
         name: depuração
         default_save_name: depuração

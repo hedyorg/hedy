@@ -412,6 +412,19 @@ adventures:
                     note_moyenne = {call} _
                     {print} 'Ta note moyenne est ' note_moyenne
                     ```
+            11:
+                example_code: |
+                    '''
+                    nombres = 1, 2, 3
+                    {for}_
+                    	{for}_
+                    		réponse = {ask}_
+                    		correcte = nombre_1 * nombres_2
+                    		{if} réponse {is} correcte
+                    			{print} 'Bon travail !'
+                    		{else}
+                    			{print} 'Ce n'est pas ça. La bonne réponse est 'correcte
+                    '''
     calculator_2:
         levels: {}
     clear_command:
@@ -436,7 +449,11 @@ adventures:
                     {print} "SURPRISE !"
                     ```
     congratulations:
-        levels: {}
+        levels:
+            8:
+                story_text: |
+                    Félicitation ! Tu as atteins la fin de Hedy Basic ! Tu peux continuer d'apprendre sur Hedy Advanced (niveaux 9-12), où tu peux apprendre des concepts de programmation plus complexes.
+                    Ou bien n'hésite pas à continuer avec Hedy Basic et imaginer tes propres programmes, bien sûr !
     debugging:
         name: débugage
         default_save_name: débugage

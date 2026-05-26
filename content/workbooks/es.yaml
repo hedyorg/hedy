@@ -1,785 +1,998 @@
 levels:
-    1:
-        intro: "### Imprimir y entrada\nAl final de esta lección, podrás:\n* Escribir código que imprima texto\n* Crear una historia con entrada"
-        exercises:
-        -   contents: "### Ejercicios\nUn ordenador no hace algo por sí mismo. Siempre debes de darle una tarea a un ordenador. Dicha tarea se denomina comando. Para imprimir el código, utilizamos el comando  `imprimir`.\n\n### Imprimir texto\nEn la pantalla acabas de leer el comando `imprimir`.\nUn comando `imprimir` imprime una palabra, cuando está entre comillas. Por ejemplo `imprimir hola`.\n##### Ejercicio 1: Predecir el resultado"
-            type: text
-        -   code: imprimir Hola a todos
-            answer: Hola a todos
-            lines: '1'
-            type: output
-        -   code: imprimir Buenos días
-            answer: Buenos días
-            lines: '1'
-            type: output
-        -   new-page
+  1:
+    intro: "### Imprimir y entrada\nAl final de esta lección, podrás:\n* Escribir
+      código que imprima texto\n* Crear una historia con entrada"
+    exercises:
+    - contents: "### Ejercicios\nUn ordenador no hace algo por sí mismo. Siempre debes
+        de darle una tarea a un ordenador. Dicha tarea se denomina comando. Para imprimir
+        el código, utilizamos el comando `imprimir`.\n\n### Imprimir texto\nEn la
+        pantalla acabas de leer el comando `imprimir`.\nUn comando `imprimir` imprime
+        una palabra, cuando está entre comillas. Por ejemplo `imprimir hola`.\n#####
+        Ejercicio 1: Predecir el resultado"
+      type: text
+    - code: imprimir Hola a todos
+      answer: Hola a todos
+      lines: '1'
+      type: output
+    - code: imprimir Buenos días
+      answer: Buenos días
+      lines: '1'
+      type: output
+    - página-nueva
 
-        -   contents: "#### Ejercicio 2: ¿Error?\nA veces se cuela un error en tu código. No es gran cosa, pero Hedy no puede leer correctamente tu código.\n¿Cuál de estos programas piensas que está mal?"
-            type: text
-        -   code: prnt ¡Hola a todos!
-            answer: Incorrecto
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: imprimir imprimir
-            answer: Correcto
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   contents: "### Pedir información\n\nSolo el texto es un poco aburrido. También puedes pedir _entrada_ en Hedy. Entrada es el texto que le das al ordenador.\n El ordenador recuerda ese texto y te lo puede mostrar más tarde.\nEste código muestra la pregunta '¿Cómo te llamas?'\n\n```hedy\npreguntar ¿Cómo te llamas?\n ```\n\n### Mostrar la entrada\n\nEl comando preguntar guarda la respuesta, pero no la muestra todavía. Para eso necesitarás el comando `eco`. `eco` mostrará la respuesta al final de la frase.\nAsí:\n\n```hedy\npreguntar ¿cómo te llamas?\n eco así que te llamas:\n```\n\nSi alguien llamado Olivia usara este código, el resultado sería:\n\n```hedy\nasí que te llamas Olivia\n```\n\nTen en cuenta que el ordenador imprimirá el texto exactamente como lo has introducido. Por tanto, ¡con los dos puntos y el mismo uso de mayúsculas o minúsculas!\n\n #### Ejercicio 3: Predecir el resultado\n\nPredice el resultado de estos programas. Imagina que has introducido tu propio nombre."
-            type: text
-        -   code: "preguntar ¿cómo te llamas?\neco así que te llamas:"
-            answer: 'así que te llamas: **nombre**'
-            lines: '2'
-            type: output
-        -   code: "preguntar ¿Cómo te llamas?\neco Encantado de conocerte,"
-            answer: Encantado de conocerte, **nombre**
-            lines: '2'
-            type: output
-        -   contents: "#### Ejercicio 4: Vocabulario de programación\n\nEn cada lección vamos a aprender palabras nuevas, incluso en esta lección. ¿Sabes qué significan estos términos? Explícalo con tus propias palabras."
-            type: text
-        -   answer: Una tarea que le darás al ordenador, p. ej., imprimir.
-            lines: '1'
-            type: define
-            word: comando
-        -   answer: Lo que escribes en el ordenador cuando Hedy muestra una pantalla de pregunta
-            lines: '1'
-            type: define
-            word: entrada
-        -   answer: Lo que Hedy muestra en la pantalla de la derecha después de que hayas pulsado el botón 'ejecutar código'.
-            lines: '1'
-            type: define
-            word: resultado
-        -   contents: "#### Ejercicio 5: Comandos\n\nYa hemos aprendido 3 comandos: `imprimir`, `preguntar` y `eco`. ¿Qué hacen? Explícalo con tus propias palabras."
-            type: text
-        -   answer: Muestra texto por pantalla.
-            lines: '1'
-            type: define
-            word: el comando `imprimir`
-        -   answer: Pide al usuario que introduzca datos.
-            lines: '1'
-            type: define
-            word: el comando `preguntar`
-        -   answer: Repite los datos introducidos por el usuario.
-            lines: '1'
-            type: define
-            word: el comando `eco`
-    2:
-        intro: "### Variables\nAl final de esta lección, puedes:\n* Guardar algo en una variable\n* Crear una historia o dibujar utilizando variables"
-        exercises:
-        -   code: "nombre es Mo\nimprimir nombre"
-            contents: "### Uso de variables\n\nAcabas de ver el comando `es` en la pantalla.\n Un comando `es` guarda algo en la memoria del ordenador y le asigna un nombre. Lo llamamos variable.\nLo que se guarda en la variable se llama valor de la variable."
-            type: text
-        -   contents: '#### Ejercicio 1: Marca el fragmento de código correcto'
-            type: text
-        -   code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nimprimir Tienes edad años"
-            answer: En todas las líneas
-            goal: variables
-            type: circle
-        -   code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nImprimir Tienes edad años"
-            answer: Líneas 1 & 3
-            goal: lugares donde se **establece** la variable
-            type: circle
-        -   code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nimprimir Tienes edad años"
-            answer: Líneas 2 y 4
-            goal: lugares donde las variables se **utilizan**
-            type: circle
-        -   contents: "##### Ejercicio 2: Predecir el resultado\nConsejo: ¿Te cuesta predecir el resultado? Sigue estos pasos:\n\n1. Marcar el lugar donde se establece una variable\n2. Marcar el lugar donde se utiliza una variable\n3. Trazar una línea entre estos dos lugares\n4. Escriba el valor (lo que viene después de `es`) en el lugar donde se utiliza la variable."
-            type: text
-        -   code: "nombre es Mo\nimprimir ¡Buen trabajo nombre!"
-            answer: ¡Gran trabajo Mo!
-            lines: '1'
-            type: output
-        -   code: "nombre es Mo\nimprimir ¡Gran trabajo Mo!"
-            answer: ¡Gran trabajo Mo!
-            lines: '1'
-            type: output
-        -   code: "primer_nombre es Layla\nimprimir ¡Buenos días primer_nombre!"
-            answer: ¡Buenos días Layla!
-            lines: '1'
-            type: output
-        -   contents: "#### Ejercicio 3: ¿Error?\nLee los programas cuidadosamente ¿Cuáles son los correctos?"
-            type: text
-        -   code: "apellido es Johnson\nimprimir ¡Buenos días apellido!"
-            answer: Correcto
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "nombre es\nimprimir ¡Buenos días, nombre!"
-            answer: Incorrecto. Nombre no está establecido.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "nombre es Johnson\nimprimir ¡Buenos días mr nombre!\nimprimir ¡Hola mr nombre!"
-            answer: Correcto. Se permite que utilices una variable varias veces.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: nombre es preguntar ¿Cómo te llamas?
-            contents: "### Pedir información\n\nSolo guardar texto no es muy útil. En el nivel 1 hemos visto el comando `preguntar`.\n\nDesde ahora se permite que combines `preguntar`con `es`, tal que así:"
-            type: text
-        -   code: "nombre es preguntar ¿Cómo te llamas?\nimprimir así que te llamas: nombre"
-            contents: "### Mostrar entrada\nCon las variables, ya no necesitamos más `eco`. Simplemente utiliza `imprimir` para mostrar la respuesta."
-            type: text
-        -   contents: "Si alguien llamado Olivia utilizase este código, el resultado sería: `así que te llamas: Olivia`\n### Ejercicio 4: Predecir el resultado\nPredice el resultado de estos programas. Imagina que has utilizado tu propio nombre."
-            type: text
-        -   code: "nombre es preguntar ¿Cómo te llamas?\nimprimir así que te llamas: nombre"
-            answer: 'así que te llamas: **nombre**'
-            lines: '1'
-            type: output
-        -   code: "animo es preguntar ¿Qué tal estas hoy?\nimprimir Así que hoy te sientes animo"
-            answer: Así que hoy te sientes **animo**
-            lines: '1'
-            type: output
-        -   contents: "#### Ejercicio 5: Vocabulario de programación\n¡Hemos aprendido nuevas palabras en este nivel! Explícalas con tus propias palabras."
-            type: text
-        -   answer: Nombre que se le da a algo, como un apellido o una edad.
-            lines: '1'
-            type: define
-            word: variable
-        -   answer: Lo que se guarda en una variable, como Andrés o 12.
-            lines: '1'
-            type: define
-            word: valor
-        -   answer: Puedes establecer una variable con un comando `es`
-            lines: '1'
-            type: define
-            word: ajuste
-        -   answer: Un programa en el que un usuario puede introducir datos.
-            lines: '1'
-            type: define
-            word: interactivo
-        -   contents: "#### Ejercicio 6: Comandos\nHemos aprendido nuevos comandos: `es` y `es preguntar` juntos. ¿Qué hacen? Explícalo con tus propias palabras."
-            type: text
-        -   answer: Guardar un valor (tras `es`) en una variable (antes de `es`)
-            lines: '1'
-            type: define
-            word: el comando `es`
-        -   answer: Pedir al usuario que introduzca datos y guardarlos en una variable.
-            lines: '1'
-            type: define
-            word: el comando `es preguntar`
-    3:
-        intro: "### Listas y aleatoriedad\nAl final de esta lección, puedes:\n* Guardar varios elementos en una variable, lo que denomina una lista.\n* Crear una historio en la que ocurren cosas aleatorias.\n* Crear un dibujo en el que se dibujan cosas aleatorias."
-        exercises:
-        -   code: "amigos es Mo, Layla, Danny\nimprimir Hoy visitaré amigos en aleatorio"
-            contents: "### Variables\nAcabas de ver el comando `es`utilizado con una lista.\n Como cualquier otra variable, utilizamos `es`para guardar algo."
-            type: text
-        -   contents: '#### Ejercicio 1: Marca el fragmento de código correcto'
-            type: text
-        -   code: "hoy es lunes\nclases es 1HC, 1HB, 1HA\naulas es 011, 304, 305, 501"
-            answer: clases y aulas
-            goal: listas
-            type: circle
-        -   code: "clases es 1HC, 1HB, 1HA\nimprimir ¡hoy clases en aleatorio tienen el día libre!"
-            answer: El final de la línea 2
-            goal: lugar(es) donde se utiliza el texto de una lista
-            type: circle
-        -   contents: "##### Ejercicio 2: Predecir el resultado\n¿Te cuesta predecir el resultado? Sigue estos pasos de nuevo para predecir el resultado de la variable:\n 1. Marcar el lugar donde se establece una variable\n2. Marcar el lugar donde se utiliza una variable\n3. Trazar una línea entre estos dos lugares\n4. Elige un elemento aleatorio de la lista cuando se utiliza `en` `aleatorio`."
-            type: text
-        -   code: "profesores es Hermans, Merbis, Bagci, Senkal\nimprimir ¡Hoy te darán clase preforesores en aleatorio!"
-            answer: ¡Hoy te darán clase **elige un profesor**!
-            lines: '1'
-            type: output
-        -   code: "profesores es Hermans, Merbis, Bagci, Senkal\nimprimir El profesor de hoy es Hermans."
-            answer: El profesor de hoy es Hermans.
-            lines: '1'
-            type: output
-        -   code: "tiempo es soleado, lluvioso, nublado, tormentoso\nimprimir ¡Qué maravilloso día tiempo!"
-            answer: ¡Qué maravilloso día tiempo!
-            lines: '1'
-            type: output
-        -   contents: "#### Ejercicio 3: ¿Error?\nLee los programas cuidadosamente ¿Cuáles son los correctos?"
-            type: text
-        -   code: "rocas es guijarros, piedras, cantos rodados\nimprimir ¡Me encanta programar! ¡Esto rocas!"
-            answer: Incorrecto. No puedes imprimir una lista
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "profesores es Hermans\nimprimir Hoy será profesores en aleatorio"
-            answer: Incorrecto. Profesores no es una lista
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "profesores es soleado, lluvioso, nublado, tormentoso\nimprimir Hoy será profesores en aleatorio"
-            answer: Correcto, al ordenador no le importa si el nombre de variable no tiene sentido.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   contents: "## Aventuras\nEs un buen momento para empezar con estas aventuras:\n Introducción\nAleatorio\nDados\nPiedra, papel, tijera\nMúsica\nEl adivino\n Restaurante\nLa casa embrujada\nPlatos"
-            type: text
-        -   code: "respuestas es sí, no, quizás\nimprimir La respuesta es respuestas en aleatorio"
-            contents: "### Ajustar listas\n\nHasta ahora siempre hemos establecido nuestras listas al inicio del programa."
-            type: text
-        -   code: "animales es 🐿, 🦔, 🦇, 🦉\nanimal es preguntar ¿Qué hace ese sonido?\nañadir animal a animales\nimprimir Fue... animales en aleatorio"
-            contents: "Pero a veces quieres que el usuario añada elementos a la lista.\n Puedes utilizar el comando `añadir a` para ello. También puedes eliminar elementos de la lista con `borrar de`."
-            type: text
-        -   contents: '#### Ejercicio 4: ¿Correcto o incorrecto?'
-            type: text
-        -   code: "letras es a,b,c,d\nborrar a a letras"
-            answer: Incorrecto. Es `borrar de`, no `borrar a`.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "comida es pizza, patatas, tacos\nborrar hamburguesa de comida"
-            answer: Correcto, se permite que borres algo que no está en la lista. Pero no tiene sentido hacerlo
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "comida es pizza, patatas, tacos\nañadir pizza a comida"
-            answer: Correcto, se permite que añadas algo a una lista dos o varias veces.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   contents: "#### Ejercicio5: Escribe el código\nEcha un buen vistazo al resultado y escribe un código correspondiente a él.\n**Asegúrate que tu código contiene al menos una opción aleatoria, ¡así no utilizaras solo imprimir!**"
-            type: text
-        -   output: "¡Bienvenido a la noche de bingo!\nLos 3 números de la suerte son:\n 5 y 3 y 10"
-            answer: "numeros es 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nimprimir ¡Bienvenido a la noche de bingo!\nimprimir Los 3 números de la suerte son:\nimprimir numeros en aleatorio y imprimir numeros en aleatorio y imprimir numeros en aleatorio"
-            type: entrada de datos
-        -   output: "Esta noche vamos a ver una película.\nElegimos: Al revés"
-            answer: "peliculas es Los vengadores, Barbie, Al revés\nimprimir Esta noche vamos a ver una película.\nimprimir Elegimos: peliculas en aleatorio"
-            type: entrada de datos
-        -   contents: "#### Ejercicio 6: Vocabulario de programación\n¡Hemos vuelto a aprender nuevas palabras de programación! Explícalas con tus propias palabras."
-            type: text
-        -   answer: Una variable en la que almacenar varios valores
-            lines: '1'
-            type: define
-            word: lista
-        -   answer: Elegido por el ordenador.
-            lines: '1'
-            type: define
-            word: aleatorio
-        -   answer: poner algo en una lista
-            lines: '1'
-            type: define
-            word: añadir
-        -   contents: "#### Ejercicio 7: Comandos\nEl comando `es` ha cambiado en este nivel y hemos aprendido algunos comandos nuevos.\n¿Qué hacen? Explícalo con tus propias palabras."
-            type: text
-        -   answer: Guardar el valor (antes de es) en una variable o lista (tras es)
-            lines: '1'
-            type: define
-            word: 'El comando `es`(Ten en cuenta: ¡ahora `es` puede hacer muchas cosas!)'
-        -   answer: 'Añadir un elemento a una lista. Tiene el siguiente aspecto: añadir elemento a lista'
-            lines: '1'
-            type: define
-            word: 'El comando `añadir a` '
-        -   answer: 'Eliminar un elemento de una lista. Tiene el siguiente aspecto: eliminar elemento de lista'
-            lines: '1'
-            type: define
-            word: 'El comando `borrar de` '
-        -   answer: Elige un elemento aleatorio de una lista.
-            lines: '1'
-            type: define
-            word: 'El comando `en aleatorio` '
-        -   contents: '#### ¿Qué opinas?'
-            type: text
-        -   text: ¿Qué ejercicio te ha gustado más de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué te ha gustado de este ejercicio?
-            lines: '5'
-            type: pregunta
-        -   text: ¿Qué ejercicio te ha gustado menos de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué no te ha gustado de ese ejercicio?
-            lines: '5'
-            type: pregunta
-    4:
-        intro: "## Comillas\nAl final de esta lección, puedes:\n* entender por qué se necesitan comillas en la programación.\n* poner comillas en los lugares correctos.\n * comprender los mensajes de error sobre el uso indebido de las comillas."
-        exercises:
-        -   code: "amigo es preguntar '¿cómo te llamas?'\nimprimir '¡Genial! Iré al centro comercial con ' amigo"
-            contents: "### Comillas\n\nHemos aprendido a usar comillas, cuando un texto necesita aparecer literalmente de esa manera en la pantalla.\nUtilizamos comillas con `imprimir` y `preguntar'."
-            type: text
-        -   contents: "##### Ejercicio 1: Terminar el código.\nRealiza este ejercicio en dos pasos:\n1. Coloca las comillas correctamente en el código.\n2. ¿Lo hiciste? Entonces predice el resultado de este código."
-            type: text
-        -   code: "imprimir ¡Hola a todos!\nimprimir Bienvenido a Hedy"
-            answer: "¡Hola a todos!\nBienvenido a Hedy"
-            lines: '2'
-            type: output
-        -   contents: No te olvides de hacer ambos pasos de este ejercicio. Pon las comillas en el lado izquierdo y el código en el lado derecho.
-            type: text
-        -   code: "nombre es Hermans\nclase es 305\nimprimir ¡Hoy nombre imparte la clase en el aula clase!"
-            answer: ¡Hoy Hermans imparte la clase en el aula 305!
-            lines: '1'
-            type: output
-        -   code: "profesores es Hermans, Merbis, Bagci, Senkal\nimprimir Hoy da clase profesores en aleatorio."
-            answer: Hoy da clase Hermans
-            lines: '1'
-            type: output
-        -   code: "rocas es guijarros, piedras, cantos rodados\nimprimir ¡Me encanta programar! ¡Esto rocas!"
-            answer: ¡Me encanta programar! Esto rocas
-            lines: '1'
-            type: output
-        -   code: "imprimir ¡Hoy hace un tiempo estupendo!\nnombre es Bozo"
-            answer: ¡Hoy hace un tiempo estupendo!
-            lines: '1'
-            type: output
-        -   contents: "#### Ejercicio 2: ¿Error?\nLee los programas cuidadosamente ¿Cuáles son los correctos?"
-            type: text
-        -   code: imprimir 'Iré al zoológico mañana'
-            answer: Incorrecto. No puedes utilizar un apóstrofo cuando utilizas las comillas simples.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: imprimir 'He visto una llama en el zoo
-            answer: Incorrecto. Necesitas comillas al final de la frase.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: imprimir "Creo que daré de comer a la llama"
-            answer: ¡Correcto! Puedes utilizar el apóstrofo cuando utilizas las comillas dobles.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "imprimir 'La llama se escapó a la calle'\nimprimir \"Qué aventura\""
-            answer: ¡Correcto! No tienes que utilizar las mismas comillas en cada frase, pero te lo recomendamos
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   contents: "#### Preguntar\n¡Recuerda utilizar comillas después de `preguntar` también!\n\n#### Ejercicio 3: ¿Error?\n¡Lee los programas cuidadosamente! ¿Cuáles son correctos?"
-            type: text
-        -   code: preguntar '¿Ves esos dos conejos?'
-            answer: Incorrecto. ¡Recuerda utilizar una variable con preguntar!
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: nombre es preguntar 'Cómo te llamas
-            answer: Incorrecto. Necesitas un par de comillas.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: dueño es preguntar "¿Es esa la capibara de Jack o de Lucy?"
-            answer: Correcto.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "dueño es preguntar \"¿Es esa la capibara de Jack o de Lucy?\"\nimprimir 'Es de dueño'"
-            answer: Incorrecto. Se imprimirá la palabra 'dueño', no el valor de la variable
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   contents: "#### Ejercicio 4: Escribe el código\nEcha un vistazo al resultado y escribe un código que se ajuste a él."
-            type: text
-        -   output: "Bienvenido a la noche de bingo\n¡Aquí viene el primer número...!"
-            answer: "imprimir 'Bienvenido a la noche de bingo'\nimprimir '¡Aquí viene el primer número...!'"
-            type: entrada
-        -   output: "Esta noche vamos a ir al cine\n¿Qué tipo de película te apetece?"
-            answer: "imprimir 'Esta noche vamos a ir al cine'\npelicula es preguntar '¿Qué tipo de película te apetece?'"
-            type: entrada
-        -   contents: "#### Ejercicio 5: Vocabulario de programación\n¡Hemos aprendido nuevas palabras de programación! Explícalas con tus propias palabras."
-            type: text
-        -   answer: Apóstrofos que utilizas para imprimir o decir algo.
-            lines: '1'
-            type: define
-            word: comillas
-        -   answer: Puedes utilizar las comillas cuando quieras imprimir el texto literal en la pantalla
-            lines: '1'
-            type: define
-            word: ¿cómo utilizar las comillas en Hedy?
-        -   contents: "#### Ejercicio 6: Comandos\nTambién hemos aprendido algunos comandos nuevos en el nivel 4."
-            type: text
-        -   answer: Vacía la pantalla
-            lines: '1'
-            type: define
-            word: el comando `limpiar`
-        -   answer: cambia el color de la tortuga
-            lines: '1'
-            type: define
-            word: el comando `color`
-        -   contents: '#### ¿Qué opinas?'
-            type: text
-        -   text: ¿Qué ejercicio te ha gustado más de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué te ha gustado?
-            lines: '5'
-            type: pregunta
-        -   text: ¿Qué ejercicio te ha gustado menos de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué no te ha gustado?
-            lines: '5'
-            type: pregunta
-    5:
-        intro: "## si sino\nAl final de esta lección, puedes:\n* deja que el ordenador reaccione a diferentes entradas."
-        exercises:
-        -   code: "amigo es preguntar \"¿Cómo te llamas?\"\nsi amigo es Yasmine imprimir \"¡Hola Yasmine!\" sino imprimir \"¡No, no me refería a ti!\""
-            contents: "### Tomando decisiones\nHasta ahora Hedy siempre ejecutaba todas y cada una de las líneas de código. A partir de ahora puedes dejar que sólo ejecute ciertas líneas en ciertos casos, con un `si`.\nEl código que sigue detrás del `si` se llama condicional.\nEn este ejemplo la condición es `amigo es Yasmine`."
-            type: text
-        -   contents: "#### Ejercicio 1: Marca las condiciones\n¿Qué es una condicional? ¡Marca las condicionales en los siguientes programas!"
-            type: text
-        -   code: "hoy es preguntar '¿Qué día es?'\nsi hoy es viernes imprimir 'Sí' sino imprimir 'No'"
-            answer: hoy es viernes
-            goal: la condicional
-            type: circle
-        -   code: "hoy es preguntar '¿Qué día es hoy?'\nsi hoy es sábado imprimir '¡Hoy no hay colegio!'\nsino imprimir 'Tienes que ir al colegio'"
-            answer: hoy es sábado
-            goal: la condicional
-            type: circle
-        -   code: "edad es preguntar '¿Cuántos años tienes?'\nSi edad es 16 imprimir 'Perfecto'\n sino imprimir '¡Eres demasiado joven!'"
-            answer: edad es 16
-            goal: la condicional
-            type: circle
-        -   contents: "##### Ejercicio 2: Marcar las líneas correctas\n ¿Qué código se ejecutará? Marque solo esas partes.\nFinge que hoy es viernes y tienes 12 años."
-            type: text
-        -   code: "hoy es preguntar '¿Qué día es hoy?'\nsi hoy es viernes imprimir 'Viva' sino imprimir 'No'"
-            answer: imprimir '¡hurra!'
-            goal: el código que se **imprimirá**
-            type: circle
-        -   code: "hoy es preguntar '¿Qué día es hoy?'\nsi hoy es sábado imprimir '¡No hay escuela hoy!'\nsino imprimir 'Tienes que ir a la escuela'"
-            answer: imprimir 'Tienes que ir a la escuela'
-            goal: el código que se **imprimirá**
-            type: circle
-        -   code: "edad es preguntar '¿Cuántos años tienes?'\nsi edad es 16 imprimir 'Perfecto'\n sino imprimir '¡Eres demasiado joven!'"
-            answer: imprimir '¡Eres demasiado joven!'
-            goal: el código que se **imprimirá**
-            type: circle
-        -   contents: "#### Ejercicio 3: ¿Error?\n¡Lee atentamente los programas! ¿Cuáles son los correctos?"
-            type: text
-        -   code: "La edad es preguntar '¿Cuántos años tienes?'\nSi la edad es 16, escribe \"¡Correcto!\". De lo contrario, \"¡Eres demasiado joven!\""
-            answer: Incorrecto. No hay ningún `imprimir` después de `sino`
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "animal es preguntar '¿Qué clase de animal es ese?'\nsi animal es llama, imprimir 'Bahhhhh'"
-            answer: ¡Correcto! No siempre necesitas un `sino`
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: imprimir "¡Estoy tan feliz!"
-            answer: ¡Correcto! Puedes utilizar el apóstrofo cuando uses comillas dobles.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "si nombre Hedy\nimprimir '¡Programar es divertido!'"
-            answer: Incorrecto. Tiene que haber un `es`en la primera línea.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "preguntar '¿A qué escuela vas?'\nsi escuela es LK imprimir '¡Sí!'"
-            answer: Incorrecto. No hay variables en la primera línea.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "cantidad es preguntar \"¿cuántos capibaras hay por ahí?\"\nsi cantidad es 5 imprimir 'Hay cantidad capibaras por allí.'"
-            answer: Incorrecto. La variable cantidad se imprime como texto.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   contents: "#### Ejercicio 4: Predecir el resultado\n¿Cuál será el resultado de estos programas?\n¡Atención! A veces se utiliza `aleatorio` en un programa. Puedes elegir tú mismo un elemento aleatorio.\n¡Esto significa que varias respuestas pueden ser correctas!"
-            type: text
-        -   code: "profesores es Hermans, Merbis, Bagci, Senkal\nprofesor es profesores en aleatorio\nsi profesor es Hermans imprimir '¡Viva!'"
-            answer: ¡Hurra! o sin resultado
-            lines: '1'
-            type: output
-        -   code: "profesores es Hermans, Merbis, Bagci, Senkal\nprofesor es profesore en aleatorio\nsi profesor es Hermans, imprimir \"¡Qué lástima!\" sino imprimir \"¡Viva!\""
-            answer: ¡Que mal! o ¡Hurra!
-            lines: '1'
-            type: output
-        -   code: "números es 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nimprimir '¡Bienvenido a la noche de bingo!'\nnúmero es números en aleatorio\nsi número es 10 imprimir '¡Gané!' o imprimir 'Que pena'"
-            answer: "¡Bienvenido a la noche del bingo!\n¡Gané! o Qué pena"
-            lines: '2'
-            type: output
-        -   code: "número es preguntar '¿Cuál es tu número favorito?'\nsi número es 10, imprimir '¡El mío también!'"
-            answer: ¡También el mio! o sin resultado
-            lines: '1'
-            type: output
-        -   contents: "#### Ejercicio 5: Vocabulario de programación\n¡Hemos aprendido nuevo vocabulario de programación en esta lección! Explícalo con tus propias palabras."
-            type: text
-        -   answer: Algo que es verdadero o falso. Sigue detrás del `si`.
-            lines: '1'
-            type: define
-            word: conditional
-        -   contents: "#### Ejercicio 6: Comandos\nHemos aprendido algunos comandos nuevos en el nivel 5."
-            type: text
-        -   answer: Decide qué código se ejecutará. Si el condicional es verdadero, se ejecutará el código que hay detrás.
-            lines: '1'
-            type: define
-            word: el comando `si`
-        -   answer: Decide qué código se ejecutará. Si el condicional es falso, se ejecutará el código que hay detrás.
-            lines: '1'
-            type: define
-            word: el comando `sino`
-        -   contents: '#### ¿Qué opinas?'
-            type: text
-        -   text: ¿Qué ejercicio te ha gustado más de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué te ha gustado?
-            lines: '5'
-            type: pregunta
-        -   text: ¿Qué ejercicio te ha gustado menos de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué no te ha gustado?
-            lines: '5'
-            type: pregunta
-    6:
-        intro: "## Matemáticas\nAl final de esta lección, puedes:\n* utilizar las matemáticas en Hedy"
-        exercises:
-        -   code: imprimir 'cinco veces cinco es ' 5 * 5
-            contents: "### Matemáticas\nHacer cálculos es una tarea importante para los ordenadores.\n\nLa suma se realiza con el signo más normal: `5 + 5`.\nLa resta también se hace con el signo menos normal: `5 - 5`.\nCon las multiplicaciones puede parecer un poco diferente de lo habitual, utilizamos el asterisco (por encima del 8): `5 * 5`.\nLa división se hace con la barra diagonal: `5 / 5`.\n \nTen en cuenta que el código matemático no necesita comillas."
-            type: text
-        -   contents: "#### Ejercicio 1: Predice el resultado\n¿Cuál crees que será el resultado de estos programas?"
-            type: text
-        -   code: "imprimir 'dos más diez es ' 2 * 10\nimprimir 5 * 5 ' es 30 menos 5'\n imprimir 10 / 2"
-            answer: "dos más diez es 20\n25 es 30 menos 5\n5"
-            lines: '3'
-            type: output
-        -   contents: "#### Ejercicio 2: Matemáticas\nSigue estos pasos para completar el ejercicio:\n1. Termina los programas rellenando una suma en las líneas. El código tiene que tener sentido.\n2. ¿Has terminado? Escribe cuál crees que será el resultado del código."
-            type: text
-        -   code: "imprimir 'cinco más diez es ' __\nimprimir 'seis menos cinco es ' ___\n imprimir 'cien dividido por cinco es ' ___\n___ _________________________ 4 * 12"
-            answer: "cinco más diez es 50\nseis menos cinco es 1\ncien dividido entre cinco es 20\ncuatro veces doce es 48"
-            lines: '4'
-            type: output
-        -   contents: "### Ejercicio 2: Matemáticas con preguntar y variables\nTambién puede guardar una suma en una variable, compararla con `preguntar' y ejecutarla con un `si`.\nVamos a practicar eso ahora.\nPredice el resultado de estos programas.\nCuando se utilizan `preguntar`y `aleatorio`, puedes inventarte tus propias respuestas."
-            type: text
-        -   code: "suma = 2 * 5\nimprimir 'La respuesta a esta suma es ' suma"
-            answer: La respuesta a la suma es 10
-            lines: '1'
-            type: output
-        -   code: "respuesta_correcta = 142 / 2\ntu_respuesta = preguntar '¿Cuánto es 142 dividido por 2?'\nsi respuesta_correcta es tu_respuesta\nimprimir 'Gran trabajo'\n sino imprimir '¡Qué pena!'"
-            answer: ¡Gran trajabo! o ¡Mala suerte!
-            lines: '1'
-            type: output
-        -   code: "numeros es 2, 4, 6, 7, 9, 11, 17\nnumero es numeros en aleatorio\nimprimir '¿Cuánto es ' numero ' veces 7?'"
-            answer: '¿Cuánto es 7 veces 7? (o cualquier otro número de la lista: 2, 4, 6, 9, 11, 17)'
-            lines: '1'
-            type: output
-        -   code: "favorito es preguntar '¿Cuál es tu número favorito?'\nimprimir '3 veces ' favorito ' es ' 3 * favorito"
-            answer: 3 veces 6 (por ejemplo) es 18
-            lines: '1'
-            type: output
-        -   contents: "### Ejercicio 3: Entrada\nSe te mostrará un resultado. Escribe un programa que pueda producir este resultado.\nTen en cuenta: Varias respuestas pueden ser correctas. Elige la que quieras, siempre que sea correcta.\nRellena todas las líneas, ¡así que fíjate bien en la cantidad de líneas!"
-            type: text
-        -   output: 'Este es un número muy grande: 68'
-            answer: imprimir 'Este es un número muy grande:' 4*17
-            type: entrada
-        -   output: 100 es la respuesta a 1000/10.
-            answer: imprimir 1000/10 ' es la respuesta a 1000/10.'
-            type: entrada
-        -   output: 14 es un múltiplo aleatorio de 7
-            answer: "numeros is 1,2,3,4,5,6,7,8,9,10\nimprimir numeros en aleatoio * 7 ' es un múltiplo aleatorio de 7'"
-            type: entrada
-        -   contents: "#### Ejercicio 4: Vocabulario de programación\nHemos aprendido a utilizar algunos signos nuevos en nuestro código. ¿Qué signos se utilizan en qué casos?"
-            type: text
-        -   answer: '*'
-            lines: '1'
-            type: define
-            word: veces
-        -   answer: /
-            lines: '1'
-            type: define
-            word: dividido por
-        -   contents: '#### ¿Qué te ha parecido?'
-            type: text
-        -   text: ¿Qué ejercicio te ha gustado más de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué te ha gustado?
-            lines: '5'
-            type: pregunta
-        -   text: ¿Qué ejercicio te ha gustado menos de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué no te ha gustado?
-            lines: '5'
-            type: pregunta
-    7:
-        intro: "## ¡Repetir!\nAl final de esta lección, podrás:\n* ejecutar una línea de código varias veces"
-        exercises:
-        -   code: repetir 5 veces imprimir '¡Baby shark!'
-            contents: "### Repetición\nA veces quieres repetir una línea de código varias veces, por ejemplo en una canción o una historia."
-            type: text
-        -   contents: "#### Ejercicio 1: Predecir el resultado\n¿Cuál será el resultado de estos programas?"
-            type: text
-        -   code: repetir 3 veces imprimir '¡Baby shark!'
-            answer: "¡Baby shark!\n¡Baby shark!\n¡Baby shark!"
-            lines: '3'
-            type: output
-        -   code: repetir 1 vez imprimir '¡Hola a todos!'
-            answer: ¡Hola a todos!
-            lines: '1'
-            type: output
-        -   code: "a es 4\nrepetir una vez imprimir 'Hola a todos'"
-            answer: "¡Hola a todos!\n¡Hola a todos!\n¡Hola a todos!\n¡Hola a todos!"
-            lines: '4'
-            type: output
-        -   contents: "### Ejercicio 2: Entrada\nEcha un vistazo al resultado. Escribe un programa que pueda pertenecer a este resultado.\n\nTen en cuenta: Pueden ser correctas varias respuestas. Elige la que quieras, mientras sea correcta.\n Rellena todas las líneasFill up all the lines, ¡así que fíjate bien en la cantidad de líneas!\n"
-            type: text
-        -   output: "¡Hola a todos!\nEsto es una línea.\nEsto es una línea."
-            answer: "imprimir '¡Hola a todos!'\nrepetir 2 veces imprimir 'Esto es una línea.'"
-            lines: '2'
-            type: entrada
-        -   output: "Esta es la línea 1\nEsta es la línea 2\nEsta es la línea 3"
-            answer: "imprimir 'Esta es la línea 1'\nimprimir 'Esta es la línea 2'\nimprimir 'Esta es la línea 3'"
-            lines: '3'
-            type: entrada
-        -   contents: "### Ejercicio 3: Correcto o incorrecto\nPresta mucha atención a los programas y decide si provocarán un mensaje de error o no."
-            type: text
-        -   code: "imprimir 'El príncipe seguía gritando pidiendo ayuda'\nrepetir 3 veces '¡Ayuda!'"
-            answer: Incorrecto, falta imprimir
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "avanzar 100\nrepetir 3 veces girar 90"
-            answer: Correcto
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "gente = mamá, papá, Emma, Sophie\nrepetir 7 veces imprimir 'La vajilla será lavada por ' gente"
-            answer: Incorrecto, falta en aleatorio
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "opciones = 1, 2, 3, 4, 5, 6\nrepetir 5 veces imprimir 'Lanzaste: ' opciones en aleatorio"
-            answer: Correcto
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   contents: "#### Ejercicio 6: Vocabulario de programación\n¡Hemos vuelto a aprender una nueva palabra de programación! Explícala con tus propias palabras."
-            type: text
-        -   answer: repetir una línea varias veces
-            lines: '1'
-            type: define
-            word: repetir
-        -   contents: '#### ¿Qué te ha parecido?'
-            type: text
-        -   text: ¿Qué ejercicio te ha gustado más de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué te ha gustado?
-            lines: '5'
-            type: pregunta
-        -   text: ¿Qué ejercicio te ha gustado menos de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué no te ha gustado?
-            lines: '5'
-            type: pregunta
-    8:
-        intro: "## ¡Repetir!\nAl final de esta lección, serás capaz de:\n* repetir varias líneas de código"
-        exercises:
-        -   code: "repetir 5 veces\n    imprimir 'Baby shark!'"
-            contents: "### Repetición\nTal vez te hayas dado cuenta de que antes sólo podías repetir 1 línea de código, muy simple.\nA menudo se desea repetir varias líneas, para hacer un programa más complejo.\nEn Hedy, y también en Python, ¡esto se hace con la indentación!\nLa indentación significa empezar una ñínea con un par de espacios."
-            type: text
-        -   contents: "#### Ejercicio 1: ¿Qué líneas se repetirán?\n\nConsejo: Presta mucha atención a la indentación (empezar una línea con espacios)."
-            type: text
-        -   code: "repetir 3 veces\n    imprimir 'Baby shark!'\n    imprimir 'Tudu tudu tudu!'                  \nimprimir 'Baby shark!'"
-            answer: Líneas 2 y 3
-            goal: indentación
-            type: circle
-        -   code: "imprimir '¡Hola!'\nrepetir 2 veces\n    imprimir 'Sí, hola a todos'"
-            answer: Línea 3
-            goal: indentación
-            type: circle
-        -   code: "nombre es preguntar '¿Cómo te llamas?'\nis name es Hedy\n    imprimir 'Sí'\nsino\n    imprimir 'No'"
-            answer: ¡Sin líneas! Hay indentación debido a el si y sino, pero no se repetirán líneas.
-            goal: indentación
-            type: circle
-        -   contents: "#### Ejercicio 2: Predecir el resultado\n¿Cuál será el resultado de estos programas?"
-            type: text
-        -   code: "imprimir '¡Hola!'\nrepetir 1 vez \n    imprimir ':)'"
-            answer: "¡Hola!\n:)"
-            type: output
-        -   code: "imprimir '¡Hola!'\nrepetir 5 veces \n    imprimir ':('\nimprimir '¡Hecho!'"
-            answer: "¡Hola!\n:(\n:(\n:(\n:(\n:(\n¡Hecho!"
-            type: output
-        -   contents: "## Si y sino\nAl utilizar `si` y `sino` tembién necesitas la indentación. De esta manera puedes ejecutar varias líneas cuando una condición es verdadera o falsa.\n\n### Ejercicio 3: Predecir la salida\n\nPredice el resultado de estos programas.\n"
-            type: text
-        -   code: "nombre es preguntas '¿Cómo te llamas?'\nsi nombre es Hedy\n    imprimir 'Sí'\nsino\n    imprimir 'No'"
-            answer: No
-            lines: '1'
-            type: output
-        -   code: "números es 1, 2, 3, 4, 5, 6, 7\nopción es números en aleatorio\nsi opción es cinco\n    imprimir '¡Hurra!'\n    imprimir '¡Hurra!'\nsino\n    imprimir '¡Oh no!'"
-            answer: ¡Oh no!
-            lines: '2'
-            type: output
-        -   code: "dados = 1, 2, 3, 4, 5, 6\nrepetir 3 veces \n    imprimir 'Sacaste: ' dados en aleatorio\n    imprimir 'Juego terminado'"
-            answer: "Sacaste: < 1, 2, 3, 4, 5, ó 6>\nJuego terminado\nSacaste: < 1, 2, 3, 4, 5, ó 6>\nJuego terminado\nSacaste: < 1, 2, 3, 4, 5, ó 6>\nJuego terminado"
-            lines: '6'
-            type: output
-        -   contents: "### Ejercicio 4: ¿Correcto o incorrecto?\nPresta mucha atención a los programas y decide si provocarán un mensaje de error o no."
-            type: text
-        -   code: "nombre es Hermans\nsi nombre es Senkal\n  imprimir '¡Hurra!'\nsino\n imprimir 'Mala suerte'"
-            answer: Incorrecto, no hay indentación después de sino
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "número es 10\n  si número es 5\nimprimir '¡Hurra!'\n  sino\nimprimir 'Mala suerte'"
-            answer: Incorrecto, la indentación se usó al revés.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "gente = mamá, papá, Emma, Sophie\nrepetir 7 veces imprimir 'La vajilla será lavada por ' gente en aleatorio"
-            answer: Incorrecto, ya no puedes utilizar el comando repetir solo en una línea.
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   code: "día es preguntar '¿Qué día es?'\nsi día es viernes\n    imprimir '¡Sí!'"
-            answer: Bien
-            options:
-            -   Correcto
-            -   Incorrecto
-            type: MC-code
-        -   contents: "#### Ejercicio 5: Escribir el código\nEcha un buen vistazo al resultado y escribe un código correspondiente. Utiliza `repetir` si es posible.\n\n ¡Cuidado con la cantidad de líneas que necesita tu código!"
-            type: text
-        -   output: "¡Yuju!\n¡Yuju!\n¡Yuju!\n¡Yuju!"
-            answer: "repetir 4 veces\n    imprimir '¡Yuju!'"
-            type: entrada
-        -   output: "¿Estás durmiendo?\n¿Estás durmiendo?\nHermano John\nHermano John\n ¡Suenan las campanas de la mañana!\n¡Suenan las campanas de la mañana!\nDing Dang Dong\nDing Dang Dong"
-            answer: "repetir 2 veces\n    imprimir '¿Estás durmiendo?'\nrepetir 2 veces\n    imprimir 'Hermano John'\nrepetir 2 veces\n    imprimir '¡Suenan las campanas de la mañana!'\nrepetir 2 veces\n    imprimir '¡Ding Dang Dong!'"
-            type: entrada
-        -   contents: "#### Ejercicio 6: Vocabulario de programación\nHemos vuelto a aprender un nuevo término de programación: ¡indentación! Explícalo con tus propias palabras."
-            type: text
-        -   answer: Comenzando una línea con varios espacios
-            lines: '1'
-            type: define
-            word: ¿Cómo creas una indentación?
-        -   contents: '#### ¿Qué te ha parecido?'
-            type: text
-        -   text: ¿Qué ejercicio te ha gustado más de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué te ha gustado?
-            lines: '5'
-            type: pregunta
-        -   text: ¿Qué ejercicio te ha gustado menos de este nivel?
-            lines: '1'
-            type: pregunta
-        -   text: ¿Qué no te ha gustado?
-            lines: '5'
-            type: pregunta
+    - contents: "#### Ejercicio 2: ¿Error?\nA veces se cuela un error en tu código.
+        No es gran cosa, pero Hedy no puede leer correctamente tu código.\n¿Cuál de
+        estos programas piensas que está mal?"
+      type: text
+    - code: prnt ¡Hola a todos!
+      answer: Incorrecto
+      options:
+      - Derecho
+      - Incorrecto
+      type: MC-code
+    - code: imprimir imprimir
+      answer: Derecho
+      options:
+      - Derecho
+      - Incorrecto
+      type: MC-code
+    - contents: "### Pedir información\n\nSolo el texto es un poco aburrido. También
+        puedes pedir _entrada_ en Hedy. Entrada es el texto que le das al ordenador.\n\
+        \ El ordenador recuerda ese texto y te lo puede mostrar más tarde.\nEste código
+        muestra la pregunta '¿Cómo te llamas?'\n\n```hedy\npreguntar ¿Cómo te llamas?\n\
+        \ ```\n\n### Mostrar la entrada\n\nEl comando preguntar guarda la respuesta,
+        pero no la muestra todavía. Para eso necesitarás el comando `eco`. `eco` mostrará
+        la respuesta al final de la frase.\nAsí:\n\n```hedy\npreguntar ¿cómo te llamas?\n\
+        \ eco así que te llamas:\n```\n\nSi alguien llamado Olivia usara este código,
+        el resultado sería:\n\n```hedy\nasí que te llamas Olivia\n```\n\nTen en cuenta
+        que el ordenador imprimirá el texto exactamente como lo has introducido. Por
+        tanto, ¡con los dos puntos y el mismo uso de mayúsculas o minúsculas!\n\n\
+        \ #### Ejercicio 3: Predecir el resultado\n\nPredice el resultado de estos
+        programas. Imagina que has introducido tu propio nombre."
+      type: text
+    - code: "preguntar ¿cómo te llamas?\neco así que te llamas:"
+      answer: 'así que tu nombre es: **name**'
+      lines: '2'
+      type: output
+    - code: "preguntar ¿Cómo te llamas?\neco Encantado de conocerte,"
+      answer: Encantado de conocerte, **nombre**
+      lines: '2'
+      type: output
+    - contents: "#### Ejercicio 4: Vocabulario de programación\n\nEn cada lección
+        vamos a aprender palabras nuevas, incluso en esta lección. ¿Sabes qué significan
+        estos términos? Explícalo con tus propias palabras."
+      type: text
+    - answer: Una tarea que le darás al ordenador, p. ej., imprimir.
+      lines: '1'
+      type: define
+      word: comando
+    - answer: Lo que escribes en el ordenador cuando Hedy muestra una pantalla 
+        de pregunta
+      lines: '1'
+      type: define
+      word: entrada
+    - answer: Lo que Hedy muestra en la pantalla de la derecha después de que 
+        hayas pulsado el botón 'ejecutar código'.
+      lines: '1'
+      type: define
+      word: resultado
+    - contents: "#### Ejercicio 5: Comandos\n\nYa hemos aprendido 3 comandos: `imprimir`,
+        `preguntar` y `eco`. ¿Qué hacen? Explícalo con tus propias palabras."
+      type: text
+    - answer: Muestra texto por pantalla.
+      lines: '1'
+      type: define
+      word: el comando `imprimir`
+    - answer: Pide al usuario que introduzca datos.
+      lines: '1'
+      type: define
+      word: el comando `preguntar`
+    - answer: Repite los datos introducidos por el usuario.
+      lines: '1'
+      type: define
+      word: el comando `eco`
+  2:
+    intro: "### Variables\nAl final de esta lección, puedes:\n* Guardar algo en una
+      variable\n* Crear una historia o dibujar utilizando variables"
+    exercises:
+    - code: "nombre es Mo\nimprimir nombre"
+      contents: "### Uso de variables\n\nAcabas de ver el comando `es` en la pantalla.\n\
+        \ Un comando `es` guarda algo en la memoria del ordenador y le asigna un nombre.
+        Lo llamamos variable.\nLo que se guarda en la variable se llama valor de la
+        variable."
+      type: text
+    - contents: '#### Ejercicio 1: Marca el fragmento de código correcto'
+      type: text
+    - code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nimprimir Tienes edad
+        años"
+      answer: En todas las líneas
+      goal: variables
+      type: círculo
+    - code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nImprimir Tienes edad
+        años"
+      answer: Líneas 1 & 3
+      goal: lugares donde se **establece** la variable
+      type: círculo
+    - code: "nombre es Hedy\nimprimir Hola nombre\nedad es 17\nimprimir Tienes edad
+        años"
+      answer: Líneas 2 y 4
+      goal: lugares donde las variables se **utilizan**
+      type: círculo
+    - contents: "##### Ejercicio 2: Predecir el resultado\nConsejo: ¿Te cuesta predecir
+        el resultado? Sigue estos pasos:\n\n1. Marcar el lugar donde se establece
+        una variable\n2. Marcar el lugar donde se utiliza una variable\n3. Trazar
+        una línea entre estos dos lugares\n4. Escriba el valor (lo que viene después
+        de `es`) en el lugar donde se utiliza la variable."
+      type: text
+    - code: "nombre es Mo\nimprimir ¡Buen trabajo nombre!"
+      answer: ¡Gran trabajo Mo!
+      lines: '1'
+      type: output
+    - code: "nombre es Mo\nimprimir ¡Gran trabajo Mo!"
+      answer: ¡Gran trabajo Mo!
+      lines: '1'
+      type: output
+    - code: "primer_nombre es Layla\nimprimir ¡Buenos días primer_nombre!"
+      answer: ¡Buenos días Layla!
+      lines: '1'
+      type: output
+    - contents: "#### Ejercicio 3: ¿Error?\nLee los programas cuidadosamente ¿Cuáles
+        son los correctos?"
+      type: text
+    - code: "apellido es Johnson\nimprimir ¡Buenos días apellido!"
+      answer: Correcto
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "nombre es\nimprimir ¡Buenos días, nombre!"
+      answer: Incorrecto. Nombre no está establecido.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "nombre es Johnson\nimprimir ¡Buenos días mr nombre!\nimprimir ¡Hola mr
+        nombre!"
+      answer: Correcto. Se permite que utilices una variable varias veces.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: nombre es preguntar ¿Cómo te llamas?
+      contents: "### Pedir información\n\nSolo guardar texto no es muy útil. En el
+        nivel 1 hemos visto el comando `preguntar`.\n\nDesde ahora se permite que
+        combines `preguntar`con `es`, tal que así:"
+      type: text
+    - code: "nombre es preguntar ¿Cómo te llamas?\nimprimir así que te llamas: nombre"
+      contents: "### Mostrar entrada\nCon las variables, ya no necesitamos más `eco`.
+        Simplemente utiliza `imprimir` para mostrar la respuesta."
+      type: text
+    - contents: "Si alguien llamado Olivia utilizase este código, el resultado sería:
+        `así que te llamas: Olivia`\n### Ejercicio 4: Predecir el resultado\nPredice
+        el resultado de estos programas. Imagina que has utilizado tu propio nombre."
+      type: text
+    - code: "nombre es preguntar ¿Cómo te llamas?\nimprimir así que te llamas: nombre"
+      answer: 'así que te llamas: **nombre**'
+      lines: '1'
+      type: output
+    - code: "animo es preguntar ¿Qué tal estas hoy?\nimprimir Así que hoy te sientes
+        animo"
+      answer: Así que hoy te sientes **animo**
+      lines: '1'
+      type: output
+    - contents: "#### Ejercicio 5: Vocabulario de programación\n¡Hemos aprendido nuevas
+        palabras en este nivel! Explícalas con tus propias palabras."
+      type: text
+    - answer: Nombre que se le da a algo, como un apellido o una edad.
+      lines: '1'
+      type: define
+      word: variable
+    - answer: Lo que se guarda en una variable, como Andrés o 12.
+      lines: '1'
+      type: define
+      word: valor
+    - answer: Puedes establecer una variable con un comando `es`
+      lines: '1'
+      type: define
+      word: ajuste
+    - answer: Un programa en el que un usuario puede introducir datos.
+      lines: '1'
+      type: define
+      word: interactivo
+    - contents: "#### Ejercicio 6: Comandos\nHemos aprendido nuevos comandos: `es`
+        y `es preguntar` juntos. ¿Qué hacen? Explícalo con tus propias palabras."
+      type: text
+    - answer: Guardar un valor (tras `es`) en una variable (antes de `es`)
+      lines: '1'
+      type: define
+      word: el comando `es`
+    - answer: Pedir al usuario que introduzca datos y guardarlos en una 
+        variable.
+      lines: '1'
+      type: define
+      word: el comando `es preguntar`
+  3:
+    intro: "### Listas y aleatoriedad\nAl final de esta lección, puedes:\n* Guardar
+      varios elementos en una variable, lo que denomina una lista.\n* Crear una historio
+      en la que ocurren cosas aleatorias.\n* Crear un dibujo en el que se dibujan
+      cosas aleatorias."
+    exercises:
+    - code: "amigos es Mo, Layla, Danny\nimprimir Hoy visitaré amigos en aleatorio"
+      contents: "### Variables\nAcabas de ver el comando `es`utilizado con una lista.\n\
+        \ Como cualquier otra variable, utilizamos `es`para guardar algo."
+      type: text
+    - contents: '#### Ejercicio 1: Marca el fragmento de código correcto'
+      type: text
+    - code: "hoy es lunes\nclases es 1HC, 1HB, 1HA\naulas es 011, 304, 305, 501"
+      answer: clases y aulas
+      goal: listas
+      type: círculo
+    - code: "clases es 1HC, 1HB, 1HA\nimprimir ¡hoy clases en aleatorio tienen el
+        día libre!"
+      answer: El final de la línea 2
+      goal: lugar(es) donde se utiliza el texto de una lista
+      type: círculo
+    - contents: "##### Ejercicio 2: Predecir el resultado\n¿Te cuesta predecir el
+        resultado? Sigue estos pasos de nuevo para predecir el resultado de la variable:\n\
+        \ 1. Marcar el lugar donde se establece una variable\n2. Marcar el lugar donde
+        se utiliza una variable\n3. Trazar una línea entre estos dos lugares\n4. Elige
+        un elemento aleatorio de la lista cuando se utiliza `en` `aleatorio`."
+      type: text
+    - code: "profesores es Hermans, Merbis, Bagci, Senkal\nimprimir ¡Hoy te darán
+        clase preforesores en aleatorio!"
+      answer: ¡Hoy te darán clase **elige un profesor**!
+      lines: '1'
+      type: output
+    - code: "profesores es Hermans, Merbis, Bagci, Senkal\nimprimir El profesor de
+        hoy es Hermans."
+      answer: El profesor de hoy es Hermans.
+      lines: '1'
+      type: output
+    - code: "tiempo es soleado, lluvioso, nublado, tormentoso\nimprimir ¡Qué maravilloso
+        día tiempo!"
+      answer: ¡Qué maravilloso día tiempo!
+      lines: '1'
+      type: output
+    - contents: "#### Ejercicio 3: ¿Error?\nLee los programas cuidadosamente ¿Cuáles
+        son los correctos?"
+      type: text
+    - code: "rocas es guijarros, piedras, cantos rodados\nimprimir ¡Me encanta programar!
+        ¡Esto rocas!"
+      answer: Incorrecto. No puedes imprimir una lista
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "profesores es Hermans\nimprimir Hoy será profesores en aleatorio"
+      answer: Incorrecto. Profesores no es una lista
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "profesores es soleado, lluvioso, nublado, tormentoso\nimprimir Hoy será
+        profesores en aleatorio"
+      answer: Correcto, al ordenador no le importa si el nombre de variable no 
+        tiene sentido.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - contents: "## Aventuras\nEs un buen momento para empezar con estas aventuras:\n\
+        \ Introducción\nAleatorio\nDados\nPiedra, papel, tijera\nMúsica\nEl adivino\n\
+        \ Restaurante\nLa casa embrujada\nPlatos"
+      type: text
+    - code: "respuestas es sí, no, quizás\nimprimir La respuesta es respuestas en
+        aleatorio"
+      contents: "### Ajustar listas\n\nHasta ahora siempre hemos establecido nuestras
+        listas al inicio del programa."
+      type: text
+    - code: "animales es 🐿, 🦔, 🦇, 🦉\nanimal es preguntar ¿Qué hace ese sonido?\nañadir
+        animal a animales\nimprimir Fue... animales en aleatorio"
+      contents: "Pero a veces quieres que el usuario añada elementos a la lista.\n\
+        \ Puedes utilizar el comando `añadir a` para ello. También puedes eliminar
+        elementos de la lista con `borrar de`."
+      type: text
+    - contents: '#### Ejercicio 4: ¿Correcto o incorrecto?'
+      type: text
+    - code: "letras es a,b,c,d\nborrar a a letras"
+      answer: Incorrecto. Es `borrar de`, no `borrar a`.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "comida es pizza, patatas, tacos\nborrar hamburguesa de comida"
+      answer: Correcto, se permite que borres algo que no está en la lista. Pero
+        no tiene sentido hacerlo
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "comida es pizza, patatas, tacos\nañadir pizza a comida"
+      answer: Correcto, se permite que añadas algo a una lista dos o varias 
+        veces.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - contents: "#### Ejercicio5: Escribe el código\nEcha un buen vistazo al resultado
+        y escribe un código correspondiente a él.\n**Asegúrate que tu código contiene
+        al menos una opción aleatoria, ¡así no utilizaras solo imprimir!**"
+      type: text
+    - output: "¡Bienvenido a la noche de bingo!\nLos 3 números de la suerte son:\n\
+        \ 5 y 3 y 10"
+      answer: "numeros es 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nimprimir ¡Bienvenido a la
+        noche de bingo!\nimprimir Los 3 números de la suerte son:\nimprimir numeros
+        en aleatorio y imprimir numeros en aleatorio y imprimir numeros en aleatorio"
+      type: entrada de datos
+    - output: "Esta noche vamos a ver una película.\nElegimos: Al revés"
+      answer: "peliculas es Los vengadores, Barbie, Al revés\nimprimir Esta noche
+        vamos a ver una película.\nimprimir Elegimos: peliculas en aleatorio"
+      type: entrada de datos
+    - contents: "#### Ejercicio 6: Vocabulario de programación\n¡Hemos vuelto a aprender
+        nuevas palabras de programación! Explícalas con tus propias palabras."
+      type: text
+    - answer: Una variable en la que almacenar varios valores
+      lines: '1'
+      type: define
+      word: lista
+    - answer: Elegido por el ordenador.
+      lines: '1'
+      type: define
+      word: aleatorio
+    - answer: poner algo en una lista
+      lines: '1'
+      type: define
+      word: añadir
+    - contents: "#### Ejercicio 7: Comandos\nEl comando `es` ha cambiado en este nivel
+        y hemos aprendido algunos comandos nuevos.\n¿Qué hacen? Explícalo con tus
+        propias palabras."
+      type: text
+    - answer: Guardar el valor (antes de es) en una variable o lista (tras es)
+      lines: '1'
+      type: define
+      word: 'El comando `es`(Ten en cuenta: ¡ahora `es` puede hacer muchas cosas!)'
+    - answer: 'Añadir un elemento a una lista. Tiene el siguiente aspecto: añadir
+        elemento a lista'
+      lines: '1'
+      type: define
+      word: 'El comando `añadir a` '
+    - answer: 'Eliminar un elemento de una lista. Tiene el siguiente aspecto: eliminar
+        elemento de lista'
+      lines: '1'
+      type: define
+      word: 'El comando `borrar de` '
+    - answer: Elige un elemento aleatorio de una lista.
+      lines: '1'
+      type: define
+      word: 'El comando `en aleatorio` '
+    - contents: '#### ¿Qué opinas?'
+      type: text
+    - text: ¿Qué ejercicio te ha gustado más de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué te ha gustado de este ejercicio?
+      lines: '5'
+      type: cuestión
+    - text: ¿Qué ejercicio te ha gustado menos de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué no te ha gustado de ese ejercicio?
+      lines: '5'
+      type: cuestión
+  4:
+    intro: "## Comillas\nAl final de esta lección, puedes:\n* entender por qué se
+      necesitan comillas en la programación.\n* poner comillas en los lugares correctos.\n\
+      \ * comprender los mensajes de error sobre el uso indebido de las comillas."
+    exercises:
+    - code: "amigo es preguntar '¿cómo te llamas?'\nimprimir '¡Genial! Iré al centro
+        comercial con ' amigo"
+      contents: "### Comillas\n\nHemos aprendido a usar comillas, cuando un texto
+        necesita aparecer literalmente de esa manera en la pantalla.\nUtilizamos comillas
+        con `imprimir` y `preguntar'."
+      type: text
+    - contents: "##### Ejercicio 1: Terminar el código.\nRealiza este ejercicio en
+        dos pasos:\n1. Coloca las comillas correctamente en el código.\n2. ¿Lo hiciste?
+        Entonces predice el resultado de este código."
+      type: text
+    - code: "imprimir ¡Hola a todos!\nimprimir Bienvenido a Hedy"
+      answer: "¡Hola a todos!\nBienvenido a Hedy"
+      lines: '2'
+      type: output
+    - contents: No te olvides de hacer ambos pasos de este ejercicio. Pon las 
+        comillas en el lado izquierdo y el código en el lado derecho.
+      type: text
+    - code: "nombre es Hermans\nclase es 305\nimprimir ¡Hoy nombre imparte la clase
+        en el aula clase!"
+      answer: ¡Hoy Hermans imparte la clase en el aula 305!
+      lines: '1'
+      type: output
+    - code: "profesores es Hermans, Merbis, Bagci, Senkal\nimprimir Hoy da clase profesores
+        en aleatorio."
+      answer: Hoy da clase Hermans
+      lines: '1'
+      type: output
+    - code: "rocas es guijarros, piedras, cantos rodados\nimprimir ¡Me encanta programar!
+        ¡Esto rocas!"
+      answer: ¡Me encanta programar! Esto rocas
+      lines: '1'
+      type: output
+    - code: "imprimir ¡Hoy hace un tiempo estupendo!\nnombre es Bozo"
+      answer: ¡Hoy hace un tiempo estupendo!
+      lines: '1'
+      type: output
+    - contents: "#### Ejercicio 2: ¿Error?\nLee los programas cuidadosamente ¿Cuáles
+        son los correctos?"
+      type: text
+    - code: imprimir 'Iré al zoológico mañana'
+      answer: Incorrecto. No puedes utilizar un apóstrofo cuando utilizas las 
+        comillas simples.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: imprimir 'He visto una llama en el zoo
+      answer: Incorrecto. Necesitas comillas al final de la frase.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: imprimir "Creo que daré de comer a la llama"
+      answer: ¡Correcto! Puedes utilizar el apóstrofo cuando utilizas las 
+        comillas dobles.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "imprimir 'La llama se escapó a la calle'\nimprimir \"Qué aventura\""
+      answer: ¡Correcto! No tienes que utilizar las mismas comillas en cada 
+        frase, pero te lo recomendamos
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - contents: "#### Preguntar\n¡Recuerda utilizar comillas después de `preguntar`
+        también!\n\n#### Ejercicio 3: ¿Error?\n¡Lee los programas cuidadosamente!
+        ¿Cuáles son correctos?"
+      type: text
+    - code: preguntar '¿Ves esos dos conejos?'
+      answer: Incorrecto. ¡Recuerda utilizar una variable con preguntar!
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: nombre es preguntar 'Cómo te llamas
+      answer: Incorrecto. Necesitas un par de comillas.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: propietario es preguntar "¿Es esa la capibara de Jack o de Lucy?"
+      answer: Correcto.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "propietario es preguntar \"¿Es esa la capibara de Jack o de Lucy?\"\n\
+        imprimir 'Es de dueño'"
+      answer: Incorrecto. Se imprimirá la palabra 'dueño', no el valor de la 
+        variable
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - contents: "#### Ejercicio 4: Escribe el código\nEcha un vistazo al resultado
+        y escribe un código que se ajuste a él."
+      type: text
+    - output: "Bienvenido a la noche de bingo\n¡Aquí viene el primer número...!"
+      answer: "imprimir 'Bienvenido a la noche de bingo'\nimprimir '¡Aquí viene el
+        primer número...!'"
+      type: entrada
+    - output: "Esta noche vamos a ir al cine\n¿Qué tipo de película te apetece?"
+      answer: "imprimir 'Esta noche vamos a ir al cine'\npelícula es preguntar '¿Qué
+        tipo de película te apetece?'"
+      type: entrada
+    - contents: "#### Ejercicio 5: Vocabulario de programación\n¡Hemos aprendido nuevas
+        palabras de programación! Explícalas con tus propias palabras."
+      type: text
+    - answer: Apóstrofos que utilizas para imprimir o decir algo.
+      lines: '1'
+      type: define
+      word: comillas
+    - answer: Puedes utilizar las comillas cuando quieras imprimir el texto 
+        literal en la pantalla
+      lines: '1'
+      type: define
+      word: ¿cómo utilizar las comillas en Hedy?
+    - contents: "#### Ejercicio 6: Comandos\nTambién hemos aprendido algunos comandos
+        nuevos en el nivel 4."
+      type: text
+    - answer: Vacía la pantalla
+      lines: '1'
+      type: define
+      word: el comando `limpiar`
+    - answer: cambia el color de la tortuga
+      lines: '1'
+      type: define
+      word: el comando `color`
+    - contents: '#### ¿Qué opinas?'
+      type: text
+    - text: ¿Qué ejercicio te ha gustado más de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué te ha gustado?
+      lines: '5'
+      type: cuestión
+    - text: ¿Qué ejercicio te ha gustado menos de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué no te ha gustado?
+      lines: '5'
+      type: cuestión
+  5:
+    intro: "## si sino\nAl final de esta lección, puedes:\n* deja que el ordenador
+      reaccione a diferentes entradas."
+    exercises:
+    - code: "amigo es preguntar \"¿Cómo te llamas?\"\nsi amigo es Yasmine imprimir
+        \"¡Hola Yasmine!\" sino imprimir \"¡No, no me refería a ti!\""
+      contents: "### Tomando decisiones\nHasta ahora Hedy siempre ejecutaba todas
+        y cada una de las líneas de código. A partir de ahora puedes dejar que sólo
+        ejecute ciertas líneas en ciertos casos, con un `si`.\nEl código que sigue
+        detrás del `si` se llama condicional.\nEn este ejemplo la condición es `amigo
+        es Yasmine`."
+      type: text
+    - contents: "#### Ejercicio 1: Marca las condiciones\n¿Qué es una condicional?
+        ¡Marca las condicionales en los siguientes programas!"
+      type: text
+    - code: "hoy es preguntar '¿Qué día es?'\nsi hoy es viernes imprimir 'Sí' sino
+        imprimir 'No'"
+      answer: hoy es viernes
+      goal: la condicional
+      type: círculo
+    - code: "hoy es preguntar '¿Qué día es hoy?'\nsi hoy es sábado imprimir '¡Hoy
+        no hay colegio!'\nsino imprimir 'Tienes que ir al colegio'"
+      answer: hoy es sábado
+      goal: la condicional
+      type: círculo
+    - code: "edad es preguntar '¿Cuántos años tienes?'\nSi edad es 16 imprimir 'Perfecto'\n\
+        \ sino imprimir '¡Eres demasiado joven!'"
+      answer: edad es 16
+      goal: la condicional
+      type: círculo
+    - contents: "##### Ejercicio 2: Marcar las líneas correctas\n ¿Qué código se ejecutará?
+        Marque solo esas partes.\nFinge que hoy es viernes y tienes 12 años."
+      type: text
+    - code: "hoy es preguntar '¿Qué día es hoy?'\nsi hoy es viernes imprimir 'Viva'
+        sino imprimir 'No'"
+      answer: imprimir '¡hurra!'
+      goal: el código que se **imprimirá**
+      type: círculo
+    - code: "hoy es preguntar '¿Qué día es hoy?'\nsi hoy es sábado imprimir '¡No hay
+        escuela hoy!'\nsino imprimir 'Tienes que ir a la escuela'"
+      answer: imprimir 'Tienes que ir a la escuela'
+      goal: el código que se **imprimirá**
+      type: círculo
+    - code: "edad es preguntar '¿Cuántos años tienes?'\nsi edad es 16 imprimir 'Perfecto'\n\
+        sino imprimir '¡Eres demasiado joven!'"
+      answer: imprimir '¡Eres demasiado joven!'
+      goal: el código que se **imprimirá**
+      type: círculo
+    - contents: "#### Ejercicio 3: ¿Error?\n¡Lee atentamente los programas! ¿Cuáles
+        son los correctos?"
+      type: text
+    - code: "La edad es preguntar '¿Cuántos años tienes?'\nSi la edad es 16, escribe
+        \"¡Correcto!\". De lo contrario, \"¡Eres demasiado joven!\""
+      answer: Incorrecto. No hay ningún `imprimir` después de `sino`
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "animal es preguntar '¿Qué clase de animal es ese?'\nsi animal es llama,
+        imprimir 'Bahhhhh'"
+      answer: ¡Correcto! No siempre necesitas un `sino`
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: imprimir "¡Estoy tan feliz!"
+      answer: ¡Correcto! Puedes utilizar el apóstrofo cuando uses comillas 
+        dobles.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "si nombre Hedy\nimprimir '¡Programar es divertido!'"
+      answer: Incorrecto. Tiene que haber un `es`en la primera línea.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "preguntar '¿A qué escuela vas?'\nsi escuela es LK imprimir '¡Sí!'"
+      answer: Incorrecto. No hay variables en la primera línea.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "cantidad es preguntar \"¿cuántos capibaras hay por ahí?\"\nsi cantidad
+        es 5 imprimir 'Hay cantidad capibaras por allí.'"
+      answer: Incorrecto. La variable cantidad se imprime como texto.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - contents: "#### Ejercicio 4: Predecir el resultado\n¿Cuál será el resultado
+        de estos programas?\n¡Atención! A veces se utiliza `aleatorio` en un programa.
+        Puedes elegir tú mismo un elemento aleatorio.\n¡Esto significa que varias
+        respuestas pueden ser correctas!"
+      type: text
+    - code: "profesores es Hermans, Merbis, Bagci, Senkal\nprofesor es profesores
+        en aleatorio\nsi profesor es Hermans imprimir '¡Viva!'"
+      answer: ¡Hurra! o sin resultado
+      lines: '1'
+      type: output
+    - code: "profesores es Hermans, Merbis, Bagci, Senkal\nprofesor es profesore en
+        aleatorio\nsi profesor es Hermans, imprimir \"¡Qué lástima!\" sino imprimir
+        \"¡Viva!\""
+      answer: ¡Que mal! o ¡Hurra!
+      lines: '1'
+      type: output
+    - code: "números es 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nimprimir '¡Bienvenido a la
+        noche de bingo!'\nnúmero es números en aleatorio\nsi número es 10 imprimir
+        '¡Gané!' o imprimir 'Que pena'"
+      answer: "¡Bienvenido a la noche del bingo!\n¡Gané! o Qué pena"
+      lines: '2'
+      type: output
+    - code: "número es preguntar '¿Cuál es tu número favorito?'\nsi número es 10,
+        imprimir '¡El mío también!'"
+      answer: ¡También el mio! o sin resultado
+      lines: '1'
+      type: output
+    - contents: "#### Ejercicio 5: Vocabulario de programación\n¡Hemos aprendido nuevo
+        vocabulario de programación en esta lección! Explícalo con tus propias palabras."
+      type: text
+    - answer: Algo que es verdadero o falso. Sigue detrás del `si`.
+      lines: '1'
+      type: define
+      word: condicional
+    - contents: "#### Ejercicio 6: Comandos\nHemos aprendido algunos comandos nuevos
+        en el nivel 5."
+      type: text
+    - answer: Decide qué código se ejecutará. Si el condicional es verdadero, se
+        ejecutará el código que hay detrás.
+      lines: '1'
+      type: define
+      word: el comando `si`
+    - answer: Decide qué código se ejecutará. Si el condicional es falso, se 
+        ejecutará el código que hay detrás.
+      lines: '1'
+      type: define
+      word: el comando `sino`
+    - contents: '#### ¿Qué opinas?'
+      type: text
+    - text: ¿Qué ejercicio te ha gustado más de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué te ha gustado?
+      lines: '5'
+      type: cuestión
+    - text: ¿Qué ejercicio te ha gustado menos de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué no te ha gustado?
+      lines: '5'
+      type: cuestión
+  6:
+    intro: "## Matemáticas\nAl final de esta lección, puedes:\n* utilizar las matemáticas
+      en Hedy"
+    exercises:
+    - code: imprimir 'cinco veces cinco es ' 5 * 5
+      contents: "### Matemáticas\nHacer cálculos es una tarea importante para los
+        ordenadores.\n\nLa suma se realiza con el signo más normal: `5 + 5`.\nLa resta
+        también se hace con el signo menos normal: `5 - 5`.\nCon las multiplicaciones
+        puede parecer un poco diferente de lo habitual, utilizamos el asterisco (por
+        encima del 8): `5 * 5`.\nLa división se hace con la barra diagonal: `5 / 5`.\n\
+        \ \nTen en cuenta que el código matemático no necesita comillas."
+      type: text
+    - contents: "#### Ejercicio 1: Predice el resultado\n¿Cuál crees que será el resultado
+        de estos programas?"
+      type: text
+    - code: "imprimir 'dos más diez es ' 2 * 10\nimprimir 5 * 5 ' es 30 menos 5'\n\
+        \ imprimir 10 / 2"
+      answer: "dos más diez es 20\n25 es 30 menos 5\n5"
+      lines: '3'
+      type: output
+    - contents: "#### Ejercicio 2: Matemáticas\nSigue estos pasos para completar el
+        ejercicio:\n1. Termina los programas rellenando una suma en las líneas. El
+        código tiene que tener sentido.\n2. ¿Has terminado? Escribe cuál crees que
+        será el resultado del código."
+      type: text
+    - code: "imprimir 'cinco más diez es ' __\nimprimir 'seis menos cinco es ' ___\n\
+        \ imprimir 'cien dividido por cinco es ' ___\n___ _________________________
+        4 * 12"
+      answer: "cinco más diez es 50\nseis menos cinco es 1\ncien dividido entre cinco
+        es 20\ncuatro veces doce es 48"
+      lines: '4'
+      type: output
+    - contents: "### Ejercicio 2: Matemáticas con preguntar y variables\nTambién puede
+        guardar una suma en una variable, compararla con `preguntar' y ejecutarla
+        con un `si`.\nVamos a practicar eso ahora.\nPredice el resultado de estos
+        programas.\nCuando se utilizan `preguntar`y `aleatorio`, puedes inventarte
+        tus propias respuestas."
+      type: text
+    - code: "suma = 2 * 5\nimprimir 'La respuesta a esta suma es ' suma"
+      answer: La respuesta a la suma es 10
+      lines: '1'
+      type: output
+    - code: "respuesta_correcta = 142 / 2\ntu_respuesta = preguntar '¿Cuánto es 142
+        dividido por 2?'\nsi respuesta_correcta es tu_respuesta\nimprimir 'Gran trabajo'\n\
+        \ sino imprimir '¡Qué pena!'"
+      answer: ¡Gran trajabo! o ¡Mala suerte!
+      lines: '1'
+      type: output
+    - code: "numeros es 2, 4, 6, 7, 9, 11, 17\nnumero es numeros en aleatorio\nimprimir
+        '¿Cuánto es ' numero ' veces 7?'"
+      answer: '¿Cuánto es 7 veces 7? (o cualquier otro número de la lista: 2, 4, 6,
+        9, 11, 17)'
+      lines: '1'
+      type: output
+    - code: "favorito es preguntar '¿Cuál es tu número favorito?'\nimprimir '3 veces
+        ' favorito ' es ' 3 * favorito"
+      answer: 3 veces 6 (por ejemplo) es 18
+      lines: '1'
+      type: output
+    - contents: "### Ejercicio 3: Entrada\nSe te mostrará un resultado. Escribe un
+        programa que pueda producir este resultado.\nTen en cuenta: Varias respuestas
+        pueden ser correctas. Elige la que quieras, siempre que sea correcta.\nRellena
+        todas las líneas, ¡así que fíjate bien en la cantidad de líneas!"
+      type: text
+    - output: 'Este es un número muy grande: 68'
+      answer: imprimir 'Este es un número muy grande:' 4*17
+      type: entrada
+    - output: 100 es la respuesta a 1000/10.
+      answer: imprimir 1000/10 ' es la respuesta a 1000/10.'
+      type: entrada
+    - output: 14 es un múltiplo aleatorio de 7
+      answer: "numeros is 1,2,3,4,5,6,7,8,9,10\nimprimir numeros en aleatoio * 7 '
+        es un múltiplo aleatorio de 7'"
+      type: entrada
+    - contents: "#### Ejercicio 4: Vocabulario de programación\nHemos aprendido a
+        utilizar algunos signos nuevos en nuestro código. ¿Qué signos se utilizan
+        en qué casos?"
+      type: text
+    - answer: '*'
+      lines: '1'
+      type: define
+      word: veces
+    - answer: /
+      lines: '1'
+      type: define
+      word: dividido por
+    - contents: '#### ¿Qué te ha parecido?'
+      type: text
+    - text: ¿Qué ejercicio te ha gustado más de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué te ha gustado?
+      lines: '5'
+      type: cuestión
+    - text: ¿Qué ejercicio te ha gustado menos de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué no te ha gustado?
+      lines: '5'
+      type: cuestión
+  7:
+    intro: "## ¡Repetir!\nAl final de esta lección, podrás:\n* ejecutar una línea
+      de código varias veces"
+    exercises:
+    - code: repetir 5 veces imprimir '¡Baby shark!'
+      contents: "### Repetición\nA veces quieres repetir una línea de código varias
+        veces, por ejemplo en una canción o una historia."
+      type: text
+    - contents: "#### Ejercicio 1: Predecir el resultado\n¿Cuál será el resultado
+        de estos programas?"
+      type: text
+    - code: repetir 3 veces imprimir '¡Baby shark!'
+      answer: "¡Baby shark!\n¡Baby shark!\n¡Baby shark!"
+      lines: '3'
+      type: output
+    - code: repetir 1 vez imprimir '¡Hola a todos!'
+      answer: ¡Hola a todos!
+      lines: '1'
+      type: output
+    - code: "a es 4\nrepetir una vez imprimir 'Hola a todos'"
+      answer: "¡Hola a todos!\n¡Hola a todos!\n¡Hola a todos!\n¡Hola a todos!"
+      lines: '4'
+      type: output
+    - contents: "### Ejercicio 2: Entrada\nEcha un vistazo al resultado. Escribe un
+        programa que pueda pertenecer a este resultado.\n\nTen en cuenta: Pueden ser
+        correctas varias respuestas. Elige la que quieras, mientras sea correcta.\n\
+        \ Rellena todas las líneasFill up all the lines, ¡así que fíjate bien en la
+        cantidad de líneas!\n"
+      type: text
+    - output: "¡Hola a todos!\nEsto es una línea.\nEsto es una línea."
+      answer: "imprimir '¡Hola a todos!'\nrepetir 2 veces imprimir 'Esto es una línea.'"
+      lines: '2'
+      type: entrada
+    - output: "Esta es la línea 1\nEsta es la línea 2\nEsta es la línea 3"
+      answer: "imprimir 'Esta es la línea 1'\nimprimir 'Esta es la línea 2'\nimprimir
+        'Esta es la línea 3'"
+      lines: '3'
+      type: entrada
+    - contents: "### Ejercicio 3: Correcto o incorrecto\nPresta mucha atención a los
+        programas y decide si provocarán un mensaje de error o no."
+      type: text
+    - code: "imprimir 'El príncipe seguía gritando pidiendo ayuda'\nrepetir 3 veces
+        '¡Ayuda!'"
+      answer: Incorrecto, falta imprimir
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "avanzar 100\nrepetir 3 veces girar 90"
+      answer: Correcto
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "gente = mamá, papá, Emma, Sophie\nrepetir 7 veces imprimir 'La vajilla
+        será lavada por ' gente"
+      answer: Incorrecto, falta en aleatorio
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "opciones = 1, 2, 3, 4, 5, 6\nrepetir 5 veces imprimir 'Lanzaste: ' opciones
+        en aleatorio"
+      answer: Correcto
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - contents: "#### Ejercicio 6: Vocabulario de programación\n¡Hemos vuelto a aprender
+        una nueva palabra de programación! Explícala con tus propias palabras."
+      type: text
+    - answer: repetir una línea varias veces
+      lines: '1'
+      type: define
+      word: repetir
+    - contents: '#### ¿Qué te ha parecido?'
+      type: texto
+    - text: ¿Qué ejercicio te ha gustado más de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué te ha gustado?
+      lines: '5'
+      type: cuestión
+    - text: ¿Qué ejercicio te ha gustado menos de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué no te ha gustado?
+      lines: '5'
+      type: cuestión
+  8:
+    intro: "## ¡Repetir!\nAl final de esta lección, serás capaz de:\n* repetir varias
+      líneas de código"
+    exercises:
+    - code: "repetir 5 veces\n    imprimir 'Baby shark!'"
+      contents: "### Repetición\nTal vez te hayas dado cuenta de que antes sólo podías
+        repetir 1 línea de código, muy simple.\nA menudo se desea repetir varias líneas,
+        para hacer un programa más complejo.\nEn Hedy, y también en Python, ¡esto
+        se hace con la indentación!\nLa indentación significa empezar una ñínea con
+        un par de espacios."
+      type: text
+    - contents: "#### Ejercicio 1: ¿Qué líneas se repetirán?\n\nConsejo: Presta mucha
+        atención a la indentación (empezar una línea con espacios)."
+      type: text
+    - code: "repetir 3 veces\n    print 'Baby shark!'\n    print 'Tudu tudu tudu!'\
+        \ \nprint 'Baby shark!'"
+      answer: Líneas 2 y 3
+      goal: indentación
+      type: círculo
+    - code: "imprimir '¡Hola!'\nrepetir 2 veces\n    imprimir 'Sí, hola a todos'"
+      answer: Línea 3
+      goal: indentación
+      type: circle
+    - code: "nombre es preguntar '¿Cómo te llamas?'\nsi nombre es Hedy\n    imprimir
+        'Sí'\nsino\n    imprimir 'No'"
+      answer: ¡Sin líneas! Hay indentación debido a el si y sino, pero no se 
+        repetirán líneas.
+      goal: indentación
+      type: circle
+    - contents: "#### Ejercicio 2: Predecir el resultado\n¿Cuál será el resultado
+        de estos programas?"
+      type: text
+    - code: "print '¡Hola!'\nrepeat 1 vez \n    print ':)'"
+      answer: "¡Hola!\n:)"
+      type: output
+    - code: "print '¡Hola!'\nrepeat 5 veces \n    print ':('\nprint '¡Hecho!'"
+      answer: "¡Hola!\n:(\n:(\n:(\n:(\n:(\n¡Hecho!"
+      type: output
+    - contents: "## Si y sino\nAl utilizar `si` y `sino` tembién necesitas la indentación.
+        De esta manera puedes ejecutar varias líneas cuando una condición es verdadera
+        o falsa.\n\n### Ejercicio 3: Predecir la salida\n\nPredice el resultado de
+        estos programas.\n"
+      type: text
+    - code: "nombre es preguntas '¿Cómo te llamas?'\nsi nombre es Hedy\n    imprimir
+        'Sí'\nsino\n    imprimir 'No'"
+      answer: No
+      lines: '1'
+      type: output
+    - code: "números es 1, 2, 3, 4, 5, 6, 7\nopción es números en aleatorio\nsi opción
+        es cinco\n    imprimir '¡Hurra!'\n    imprimir '¡Hurra!'\nsino\n    imprimir
+        '¡Oh no!'"
+      answer: ¡Oh no!
+      lines: '2'
+      type: output
+    - code: "dados = 1, 2, 3, 4, 5, 6\nrepeat 3 times \n    print 'Sacaste: ' dados
+        en aleatorio\n    print 'Juego terminado'"
+      answer: "Sacaste: < 1, 2, 3, 4, 5, ó 6>\nJuego terminado\nSacaste: < 1, 2, 3,
+        4, 5, ó 6>\nJuego terminado\nSacaste: < 1, 2, 3, 4, 5, ó 6>\nJuego terminado"
+      lines: '6'
+      type: output
+    - contents: "### Ejercicio 4: ¿Correcto o incorrecto?\nPresta mucha atención a
+        los programas y decide si provocarán un mensaje de error o no."
+      type: text
+    - code: "nombre es Hermans\nsi nombre es Senkal\n  imprimir '¡Hurra!'\nsino\n\
+        \ imprimir 'Mala suerte'"
+      answer: Incorrecto, no hay indentación después de sino
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "número es 10\n  si número es 5\nimprimir '¡Hurra!'\n  sino\nimprimir
+        'Mala suerte'"
+      answer: Incorrecto, la indentación se usó al revés.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "gente = mamá, papá, Emma, Sophie\nrepetir 7 veces imprimir 'La vajilla
+        será lavada por ' gente en aleatorio"
+      answer: Incorrecto, ya no puedes utilizar el comando repetir solo en una 
+        línea.
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - code: "día es preguntar '¿Qué día es?'\nsi día es viernes\n    imprimir '¡Sí!'"
+      answer: Bien
+      options:
+      - Correcto
+      - Incorrecto
+      type: MC-code
+    - contents: "#### Ejercicio 5: Escribir el código\nEcha un buen vistazo al resultado
+        y escribe un código correspondiente. Utiliza `repetir` si es posible.\n\n\
+        \ ¡Cuidado con la cantidad de líneas que necesita tu código!"
+      type: text
+    - output: "¡Yuju!\n¡Yuju!\n¡Yuju!\n¡Yuju!"
+      answer: "repetir 4 veces\n    imprimir '¡Yuju!'"
+      type: entrada
+    - output: "¿Estás durmiendo?\n¿Estás durmiendo?\nHermano John\nHermano John\n\
+        \ ¡Suenan las campanas de la mañana!\n¡Suenan las campanas de la mañana!\n\
+        Ding Dang Dong\nDing Dang Dong"
+      answer: "repetir 2 veces\n    imprimir '¿Estás durmiendo?'\nrepetir 2 veces\n\
+        \    imprimir 'Hermano John'\nrepetir 2 veces\n    imprimir '¡Suenan las campanas
+        de la mañana!'\nrepetir 2 veces\n    imprimir '¡Ding Dang Dong!'"
+      type: entrada
+    - contents: "#### Ejercicio 6: Vocabulario de programación\nHemos vuelto a aprender
+        un nuevo término de programación: ¡indentación! Explícalo con tus propias
+        palabras."
+      type: text
+    - answer: Comenzando una línea con varios espacios
+      lines: '1'
+      type: define
+      word: ¿Cómo creas un sangrado?
+    - contents: '#### ¿Qué te ha parecido?'
+      type: text
+    - text: ¿Qué ejercicio te ha gustado más de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué te ha gustado?
+      lines: '5'
+      type: cuestión
+    - text: ¿Qué ejercicio te ha gustado menos de este nivel?
+      lines: '1'
+      type: cuestión
+    - text: ¿Qué no te ha gustado?
+      lines: '5'
+      type: cuestión

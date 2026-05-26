@@ -131,6 +131,18 @@ adventures:
                     {if} ende {is} gut {print} name ' zieht ihr Schwert und das Monster ergreift die Flucht.'
                     {else} {print} 'Das Monster frisst ' name '.'
                     ```
+            6:
+                story_text: "Nun da du `{elif}` benutzen kannst, kannst du eine noch interaktivere Geschichte kreieren! Du könntest zum Beispiel mehrere Charaktere, die alle unterschiedliche Eigenschaften haben, erstellen.\nOder du könntest deine Spieler entscheiden lassen, welchen Weg sie wählen, welche Tür sie öffnen oder welchen magischen Trank sie trinken wollen...\n\n### Übung\nErstelle eine eigene Geschichte mit 3 oder mehr Auswahlmöglichkeiten, indem du {elif} einsetzt."
+                example_code: |
+                    ```
+                    character {is} {ask} 'Wer wird Ihnen bei Ihrer Suche helfen? '
+                    {if} character  {is} 'Daisy'
+                    {print} 'Du hast Daisy ausgesucht! Sie ist die schlauste von allen!'
+                    {elif} character  {is} 'Jason'
+                    {print} 'Du hast Jason ausgewählt! Er ist der Größte von allen!'
+                    {elif} character {is} 'Sam'
+                    {print} 'Du hast Sam ausgewählt! Sie sind die schnellsten von allen! '
+                    ```
             8:
                 story_text: |
                     In einer Geschichte kommt es manchmal vor, dass jemand ein Wort mehrmals hintereinander sagt. So zum Beispiel, wenn jemand um Hilfe ruft, oder etwas singt.
@@ -205,12 +217,12 @@ adventures:
                     Finde eine Geschichte aus einer vorherigen Ebene und füge eine `{and}` oder `{or}` hinzu.
                     Beispiel_Code: |
                     `` `
-                    {print} 'Unser Held geht durch den Wald '
-                    {print} 'Der Pfad teilt zwei Wege '
-                    path = {ask} 'Welcher Pfad sollte sie wählen? '
-                    Waffe = {ask} 'Welche Waffe zieht sie? '
-                    {if} Pfad {is} 'link' {and} Waffe {is} Schwert '
-                        _.
+                    {print} 'Unser Held geht durch den Wald'
+                    {print} 'Der Pfad teilt zwei Wege'
+                    Pfad = {ask} 'Welcher Pfad sollte sie wählen?'
+                    Waffe = {ask} 'Welche Waffe zieht sie?'
+                    {if} Pfad {is} 'link' {and} Waffe {is} 'Schwert'
+                        _
                     `` `
             11:
                 story_text: |
@@ -858,9 +870,14 @@ adventures:
                 story_text: |-
                     ### Übung
                     Debugge diesen Code. Viel Glück!
-        description: Debugging-Abenteuer
-        name: Debugging
-        default_save_name: Debugging
+                example_code: |
+                    **Warnung! Dieser Code muss auf Fehler überprüft werden!**
+                    ```
+                    namen = Muad Hasan Samira Noura
+                    aktivitäten = Drachen fliegen, schwimmen gehen, wandern gehen, sich in der Sonne sonnen
+                    {for} name {is} namen
+                    {print} Am Strand liebt es name aktivitäten zu machen {at}{random}
+                    ```
     dice:
         name: Würfel
         default_save_name: Würfel

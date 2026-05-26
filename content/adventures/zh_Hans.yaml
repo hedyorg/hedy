@@ -410,6 +410,41 @@ adventures:
                     ### 练习
                     在函数中添加`{while}`循环，询问玩家数1乘以数2是多少，并打印他们的答案。
                     然后`{call}`（调用）函数。
+                example_code: |
+                    ```
+                    {define} new_question():
+                        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        number_1 = numbers[random]
+                        number_2 = numbers[random]
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print}('做得好!')
+
+                    {print}('给出十个正确答案以获胜!')
+                    {for} i {in} {range} 1 {to} 10:
+                        _
+                    {print}('你赢了!')
+                    ```
+            11:
+                story_text: |
+                    这个计算游戏帮助你练习乘法表！
+                    ### 练习
+                    请填空。我们想要这个程序提问玩家下列问题：
+                    ```
+                    1乘以1是多少？
+                    1乘以2是多少？
+                    1乘以3是多少？
+                    2乘以1是多少？
+                    2乘以2是多少？
+                    2乘以3是多少？
+                    3乘以1是多少？
+                    3乘以2是多少？
+                    3乘以3是多少？
+                    _
+                    ```
     calculator_2:
         name: 计算器2
         default_save_name: 计算器2
@@ -852,7 +887,7 @@ adventures:
                     ```
             7:
                 story_text: |
-                    在本级中，作为一个算命仙你可以用数学帮你算命。这使你可以编造（傻傻的）公式来算命。
+                    在本关中，作为一个算命仙你可以用数学帮你算命。这使你可以编造（傻傻的）公式来算命。
                     例如，你可以算出你将来会变得多么有钱，或者你以后会有多少个孩子。
 
 
@@ -912,17 +947,17 @@ adventures:
         levels:
             12:
                 story_text: |
-                    在这个级别中，您将学习如何使用**函数**。函数是可以轻松地多次使用的代码块。使用函数可以帮助我们组织可以反复使用的代码片段。
-                    要创建一个函数，使用 `{define}`并给函数一个名称。然后将函数中需要的所有行放在`{define}`行下面的缩进块中。
+                    在这关中，您将学习如何使用**方法**。方法是可以轻松地多次使用的代码块。使用方法可以帮助我们组织可以反复使用的代码片段。
+                    要创建一个方法，使用 `{define}`并给函数一个名称。然后将方法中需要的所有行放在`{define}`行下面的缩进块中。
                     在代码中留下一行空行，使其看起来美观整洁。太棒了!你已经创建了一个函数!
 
-                    现在，每当我们需要这段代码时，我们只需使用<code>{call}</code>和函数名一起调用它!我们不需要再输入那块代码了。
+                    现在，每当我们需要这段代码时，我们只需使用<code>{call}</code>和方法名一起调用它!我们不需要再输入那块代码了。
 
-                    看看这个扭扭游戏的示例代码。函数 'turn' 包含一段代码，用于选择哪个肢体应该去哪里。
+                    看看这个扭扭游戏的示例代码。方法 'turn' 包含一段代码，用于选择哪个肢体应该去哪里。
 
                     ### 练习
                     通过设置两个变量chosen_limb和chosen_color来完成这段代码。
-                    然后，选择要调用该函数的次数，以使捻线器旋转几次。
+                    然后，选择要调用该方法的次数，以使捻线器旋转几次。
 
                     ### 练习2
                     通过添加一个名为“people”的变量来改进你的代码。使用这个变量给所有玩家在游戏中自己的命令。
@@ -1311,24 +1346,55 @@ adventures:
                     如果你不懂任何其他语言，你可以使用谷歌翻译，或者你可以使用表情符号和你的母语。
                 example_code: |
                     ```
-                    法语词汇 = ['bonjour', 'ordinateur', 'pomme de terre']
-                    词语翻译 = ['hello', 'computer', 'potato']
-                    得分 = 0
+                    french_words = ['bonjour', 'ordinateur', 'pomme de terre']
+                    translation = ['hello', 'computer', 'potato']
+                    score = 0
                     {for} i {in} {range} 1 {to} 3
-                        答案 = {ask} '什么是' 法语词汇[i] ' 的含义?'
-                        正确答案 = 词语翻译[i]
-                        {if} 答案 == 正确答案
+                        answer = {ask} '什么是' french_words[i] ' 的含义?'
+                        correct = translation[i]
+                        {if} answer == correct:
                             {print} '答对了!'
-                            得分 = 得分 + 1
-                        {else}
-                            {print} '错了, ' 法语词汇[i] ' 的意思是 ' 词语翻译[i]
-                    {print} '你得到' 得分 ' 个正确答案.'
+                            score = score + 1
+                        {else}:
+                            {print} '错了, ' french_words[i] ' 的意思是 ' translation[i]
+                    {print} '你得到' score ' 个正确答案.'
                     ```
     maths:
         name: 数学
         default_save_name: 数学
         description: 介绍 数学
-        levels: {}
+        levels:
+            7:
+                story_text: |
+                    在这一关，你将学习一些新内容：你现在也可以进行计算了。
+
+                    加法很简单，就像数学里一样写：例如 `5 + 5`。减法也可以正常使用：`5 - 5`。
+
+                    乘法有点不同，因为键盘上没有乘号。你可以去找找，真的没有！
+                    这就是为什么我们用 8 上方的星号来表示乘法：`5 * 5`。把它读作“5 乘 5”，这样最容易记住。
+                example_code: |
+                    ```
+                    {print} '5 加 5 是 ' 5 + 5
+                    {print} '5 减 5 是 ' 5 - 5
+                    {print} '5 乘 5 是 ' 5 * 5
+                    {print} '5 除以 5 is ' 5 / 5
+                    ```
+                story_text_2: |-
+                    **带小数点的数字**
+                    目前为止，海蒂还不曾允许如1.5之类的数字，但我们现在可以这样做。注意电脑使用`.`来表达小数。
+                example_code_2: |
+                    ```
+                    {print} '两个半加两个半是…'
+                    {print} 2.5 + 2.5
+                    ```
+                story_text_3: '**数学和变量**'
+                example_code_3: |
+                    ```
+                    {print} '一张票是2美元'
+                    people = {ask} '你需要几张票？'
+                    price = people * 2
+                    {print} ' 需付款 'price' 美元'
+                    ```
     music:
         name: 音乐
         default_save_name: 音乐
