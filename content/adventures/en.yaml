@@ -6123,9 +6123,9 @@ adventures:
                     {repeat} 3 {times}
                         {turn} angle
                         {forward} 50
-                    {color} white
+                    {color} {white}
                     {forward} 100
-                    {color} black
+                    {color} {black}
                     angle = 90
                     {repeat} 4 {times}
                         {turn} angle
@@ -6162,15 +6162,15 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {color} pink
+                    {color} {pink}
                     {repeat} 4 {times}
                         {repeat} 4 {times}
                             {forward} 50
                             {turn} 90
-                        {color} white
+                        {color} {white}
                         {turn} 270
                         {forward} 50
-                        {color} pink
+                        {color} {pink}
                     ```
             11:
                 story_text: |
@@ -6476,55 +6476,55 @@ adventures:
                     Rainbow
                     ```
                     {turn} 90
-                    {color} red
+                    {color} {red}
                     {forward} 100
                     {turn} 90
                     {forward} 3
                     {turn} 90
-                    {color} orange
+                    {color} {orange}
                     {forward} 100
                     {turn} -90
                     {forward} 3
                     {turn} -90
-                    {color} yellow
-                    {forward} 100
-                    {turn} 90
-                    {forward} 3
-                    {turn} 90
-                    {color} green
-                    {forward} 100
-                    {turn} -90
-                    {forward} 3
-                    {turn} -90
-                    {color} blue
+                    {color} {yellow}
                     {forward} 100
                     {turn} 90
                     {forward} 3
                     {turn} 90
-                    {color} purple
+                    {color} {green}
                     {forward} 100
                     {turn} -90
                     {forward} 3
                     {turn} -90
-                    {color} pink
+                    {color} {blue}
+                    {forward} 100
+                    {turn} 90
+                    {forward} 3
+                    {turn} 90
+                    {color} {purple}
+                    {forward} 100
+                    {turn} -90
+                    {forward} 3
+                    {turn} -90
+                    {color} {pink}
                     {forward} 100
                     ```
 
                     Colored star
                     ```
-                    {color} blue
+                    {color} {blue}
                     {forward} 100
                     {turn} 144
-                    {color} green
+                    {color} {green}
                     {forward} 100
                     {turn} 144
-                    {color} orange
+                    {color} {orange}
                     {forward} 100
                     {turn} 144
-                    {color} red
+                    {color} {red}
                     {forward} 100
                     {turn} 144
-                    {color} purple
+                    {color} {purple}
                     {forward} 100
                     {turn} 144
                     ```
@@ -6962,7 +6962,7 @@ adventures:
 
                     Start by moving to the left side of the screen with an invisible white line. Then hang up the Christmas lights!
                     ```
-                    {color} white
+                    {color} {white}
                     {turn} -90
                     {forward} 300
                     {turn} 90
@@ -7000,7 +7000,7 @@ adventures:
 
                     Christmas lights
                     ```
-                    {color} white
+                    {color} {white}
                     {turn} -90
                     {forward} 300
                     {turn} 90
@@ -7016,7 +7016,7 @@ adventures:
                         {turn} 60
                         {forward} 20
                         {turn} 60
-                        {color} black
+                        {color} {black}
                         {forward} 120
                         {turn} -90
                     ```
@@ -7036,14 +7036,14 @@ adventures:
                     _
 
                     #Drawing the beginning of the bracelet:
-                    {color} white
+                    {color} {white}
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     #Drawing the shapes on the bracelet:
                     {repeat} 5 {times}
-                        {color} gray
+                        {color} {gray}
                         {forward} 100
                         shape = {ask} 'What kind of shape would you like next on the bracelet?'
                         chosen_color = {ask} 'In which color?'
