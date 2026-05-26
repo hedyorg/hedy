@@ -88,8 +88,8 @@ jobs:
     - name: Switch back to main
       run: |
         git checkout --detach
-        git reset --soft main
-        git checkout main
+        git reset --soft origin/main
+        git checkout -B main
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v6
