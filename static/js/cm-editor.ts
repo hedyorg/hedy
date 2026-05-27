@@ -287,6 +287,12 @@ export class HedyCodeMirrorEditor implements HedyEditor {
      * @param content the content that wants to be set in the editor
      */
     public set contents(content: string) {
+        // Tabs can't be typed into the editor: indentWithTab inserts the indent
+        // unit (spaces) instead. But code loaded from a custom/public adventure or
+        // an example can contain literal tabs, which Hedy doesn't recognize as
+        // indentation. Normalize them to the indent unit so loaded code indents
+        // the same way typed code does.
+        content = content.replace(/\t/g, indentSize);
         let transaction = this.view.state.update({ changes: { from: 0, to: this.view.state.doc.length, insert: content } });
         this.view.dispatch(transaction);
     }
