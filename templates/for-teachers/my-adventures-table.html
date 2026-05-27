@@ -1,0 +1,80 @@
+<div id="my-adventures-table-wrapper" class="teacher-table-shell overflow-x-auto">
+  <table class="teacher-table min-w-[48rem]" id="my-adventures-table">
+    <thead class="teacher-table-head">
+      <tr>
+        <th class="teacher-table-th rounded-tl-lg">{{ _('name') }}</th>
+        <th class="teacher-table-th">{{ _('level') }}</th>
+        <th class="teacher-table-th">{{ _('last_update') }}</th>
+        <th class="teacher-table-th">{{ _('used_in') }}</th>
+        <th class="teacher-table-th">{{ _('public') }}</th>
+        <th class="teacher-table-th rounded-tr-lg min-w-24">{{ _('actions') }}</th>
+      </tr>
+    </thead>
+    <tbody class="teacher-table-body">
+      {% if my_adventures|length == 0 %}
+      <tr>
+        <td class="teacher-table-td text-center rounded-b-lg py-3" colspan="6">
+          {{ _('no_custom_adventures_available') }}
+        </td>
+      </tr>
+      {% else %}
+      {% for adventure in my_adventures %}
+      <tr data-cy="my_adventure_row_{{ adventure.id }}">
+        <td class="teacher-table-td whitespace-nowrap {% if loop.last %}rounded-bl-lg{% endif %}">
+          <a class="view_class" href="/for-teachers/customize-adventure/{{ adventure.id }}">{{ adventure.name }}</a>
+        </td>
+        <td class="teacher-table-td whitespace-nowrap">{{ adventure.level_display }}</td>
+        <td class="teacher-table-td whitespace-nowrap">{{ adventure.date }}</td>
+        <td class="teacher-table-td whitespace-nowrap">{{ adventure.used_in }}</td>
+        <td class="teacher-table-td whitespace-nowrap">
+          {% if adventure.public %}
+          <i class="fa-solid fa-check text-green-700" aria-label="{{ _('yes') }}"></i>
+          {% else %}
+          <i class="fa-solid fa-minus text-gray-400" aria-label="{{ _('no') }}"></i>
+          {% endif %}
+        </td>
+        <td class="teacher-table-td {% if loop.last %}rounded-br-lg{% endif %}">
+          <div class="relative inline-block text-left" name="menu">
+            <button type="button" class="blue-btn-new teacher-menu-button" data-cy="manage_adventure_actions_{{ adventure.id }}"
+                    _="on click
+                    remove .menu-content-open from <div.menu:not(#menu-{{loop.index}})/>
+                    add .hidden .menu-content-closed to <div.menu:not(#menu-{{loop.index}})/>
+                    if #menu-{{loop.index}} matches .hidden
+                        remove .hidden from #menu-{{loop.index}}
+                        call hedyApp.positionContextMenu(me)
+                        wait 10ms
+                        toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
+                    else
+                        call hedyApp.teardownContextMenu(me)
+                        toggle .menu-content-open .menu-content-closed on #menu-{{loop.index}}
+                        wait 180ms
+                        add .hidden to #menu-{{loop.index}}
+                        ">
+              <i class="fa-solid fa-ellipsis"></i>
+            </button>
+            <div id="menu-{{loop.index}}" data-cy="manage_adventure_menu_{{ adventure.id }}" class="teacher-context-menu hidden menu origin-top-right absolute grid menu-content-closed grow-0 ease-in transition-opacity transition-transform duration-150">
+              <ul class="list-none divide-y divide-gray-200 p-2">
+                <li class="teacher-context-menu-item rounded-t-lg">
+                  <a class="no-underline text-blue-900" href="/for-teachers/customize-adventure/{{ adventure.id }}">
+                    <i class="fa-solid fa-pen text-sm"></i>
+                    <span class="m-3">{{ _('customize_adventure') }}</span>
+                  </a>
+                </li>
+                <li data-cy="remove_adventure_{{ adventure.id }}" class="teacher-context-menu-item teacher-context-menu-item-danger"
+                    hx-delete="/for-teachers/adventures/my/{{ adventure.id }}"
+                    hx-confirm="{{ _('delete_adventure_prompt') }}"
+                    hx-target="#my-adventures-table-wrapper"
+                    hx-swap="outerHTML">
+                  <i class="fa-solid fa-trash text-sm"></i>
+                  <span class="m-3">{{ _('remove') }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
+</div>

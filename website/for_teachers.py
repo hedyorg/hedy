@@ -160,6 +160,88 @@ class ForTeachersModule(WebsiteModule):
                 welcome_teacher=welcome_teacher,
             ))
 
+    @route("/adventures", methods=["GET"])
+    @requires_teacher
+    def for_teachers_adventures_page(self, user):
+        return render_template(
+            "for-teachers/adventures.html",
+            current_page="for-teachers",
+            page_title=gettext("adventures"),
+            user=user,
+        )
+
+    def _get_my_adventures(self, user):
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        class_names_by_id = {
+            teacher_class.get("id"): teacher_class.get("name")
+            for teacher_class in teacher_classes
+            if teacher_class.get("id")
+        }
+
+        my_adventures = []
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        for adventure in teacher_adventures:
+            levels = adventure.get("levels") or []
+            if levels:
+                level_display = ", ".join(str(level) for level in levels)
+            elif adventure.get("level"):
+                level_display = str(adventure.get("level"))
+            else:
+                level_display = "-"
+
+            adventure_classes = adventure.get("classes") or []
+            used_in = [
+                class_names_by_id[class_id]
+                for class_id in adventure_classes
+                if class_id in class_names_by_id
+            ]
+
+            my_adventures.append(
+                {
+                    "id": adventure.get("id"),
+                    "name": adventure.get("name"),
+                    "level_display": level_display,
+                    "date": utils.localized_date_format(adventure.get("date")),
+                    "used_in": ", ".join(used_in) if used_in else "-",
+                    "public": bool(adventure.get("public")),
+                }
+            )
+
+        return my_adventures
+
+    @route("/adventures/my", methods=["GET"])
+    @requires_teacher
+    def for_teachers_my_adventures_page(self, user):
+        return render_template(
+            "for-teachers/my-adventures.html",
+            current_page="for-teachers",
+            page_title=gettext("my_adventures"),
+            my_adventures=self._get_my_adventures(user),
+            user=user,
+        )
+
+    @route("/adventures/my/<adventure_id>", methods=["DELETE"])
+    @requires_teacher
+    def delete_my_adventure(self, user, adventure_id):
+        adventure = self.db.get_adventure(adventure_id)
+        if not adventure:
+            return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
+        if adventure.get("creator") != user["username"]:
+            return make_response(gettext("unauthorized"), 401)
+
+        self.db.delete_adventure(adventure_id)
+
+        tags = self.db.read_tags(adventure.get("tags", []))
+        for tag in tags:
+            tagged_in = [tagged_adventure for tagged_adventure in tag["tagged_in"] if tagged_adventure["id"] != adventure_id]
+            if len(tag["tagged_in"]) != len(tagged_in):
+                self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
+
+        return render_partial(
+            "for-teachers/my-adventures-table.html",
+            my_adventures=self._get_my_adventures(user),
+        )
+
     @route("/workbooks/<level>", methods=["GET"])
     def get_workbooks(self, level):
         try:
