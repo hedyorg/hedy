@@ -29,11 +29,12 @@ export function autoSave(formId: string,
   if (!handler) {
     // Debounce function to prevent excessive requests
     handler = debounce((e: Event) => {
-      if ((e.target as HTMLElement).dataset["autosaved"]) {
-      // If the event is not from a customEvent with is the element autosaved, we pass.
-      return
+      // The CKEditor change:data event passes an EventInfo whose `target` is the
+      // editor's document model, not an HTMLElement, so guard the dataset access.
+      const target = e.target as HTMLElement | null;
+      if (target?.dataset?.autosaved) {
+        return;
       }
-      // Now we can simply trigger the submit event on the parent form element.
       formElement.requestSubmit()
     }, timeout);
 
