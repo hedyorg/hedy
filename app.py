@@ -16,13 +16,12 @@ import zipfile
 import jinja_partials
 from typing import Optional
 from logging.config import dictConfig as logConfig
-from os import path
 from iso639 import ALL_LANGUAGES as languages
 import webbrowser
 
 import static_babel_content
 from markupsafe import Markup
-from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
+from flask import (Flask, abort, after_this_request, g, jsonify, make_response,
                    redirect, request, send_file, url_for, Blueprint,
                    send_from_directory, session, current_app, has_request_context)
 from flask_babel import Babel, format_timedelta
