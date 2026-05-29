@@ -27,7 +27,11 @@ jobs:
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
 
-    - name: Build and run Docker container
+    - name: Build Docker container
+      run: |
+        nohup doit run build_container
+
+    - name: Run Docker container
       run: |
         nohup doit run container > /tmp/hedy-container.log 2>&1 &
 
