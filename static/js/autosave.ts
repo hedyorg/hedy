@@ -32,7 +32,7 @@ export function autoSave(formId: string,
       // The CKEditor change:data event passes an EventInfo whose `target` is the
       // editor's document model, not an HTMLElement, so guard the dataset access.
       const target = e.target as HTMLElement | null;
-      if (target?.dataset?.autosaved) {
+      if (target?.dataset?.["autosaved"]) {
         return;
       }
       formElement.requestSubmit()
