@@ -1,0 +1,64 @@
+# This workflow runs Cypress tests against the app in Docker using doit.
+
+name: Cypress tests (Docker PR)
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  cypress-docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v6
+      with:
+        python-version: 3.12
+        cache: pip
+
+    - name: Install Python dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+
+    - name: Build and run Docker container
+      run: |
+        nohup doit run container > /tmp/hedy-container.log 2>&1 &
+
+    - name: Wait for app to be ready
+      run: |
+        for i in {1..60}; do
+          if curl -fsS http://127.0.0.1:8080/ > /dev/null; then
+            echo "Hedy is ready on port 8080"
+            exit 0
+          fi
+          sleep 2
+        done
+        echo "Hedy container did not become ready in time"
+        tail -n 200 /tmp/hedy-container.log || true
+        exit 1
+
+    - name: Cypress run
+      uses: cypress-io/github-action@v6
+      with:
+        install: false
+        record: false
+        working-directory: tests/
+
+    - name: Print container logs on failure
+      if: failure()
+      run: |
+        docker ps -a || true
+        docker logs hedy || true
+        tail -n 200 /tmp/hedy-container.log || true
+
+    - name: Stop Docker container
+      if: always()
+      run: |
+        docker rm -f hedy || true
