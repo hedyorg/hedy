@@ -4,6 +4,7 @@ from typing import Optional
 
 from flask import g, make_response, request
 from website.flask_helpers import gettext_with_fallback as gettext
+import jinja_partials
 import website_content as hedy_content
 
 import utils
