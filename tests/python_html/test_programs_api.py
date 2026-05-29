@@ -33,7 +33,7 @@ def test_save_program(client: Client, given: Given):
         'code': 'print Hello world',
         'name': 'My Program',
         'level': 1,
-        'adventure_name': 'default',
+            'adventure_name': 'default',
     })
     data = response.get_json()
     assert 'id' in data
@@ -153,7 +153,7 @@ def test_save_then_list_program(client: Client, given: Given):
         'code': 'print Hello',
         'name': 'Saved Program',
         'level': 2,
-        'adventure_name': 'default',
+            'adventure_name': 'default',
     })
     response = client.get('/programs/list')
     programs = response.get_json()['programs']
@@ -166,7 +166,7 @@ def test_save_and_delete_program(client: Client, given: Given):
         'code': 'print Hello',
         'name': 'To Delete',
         'level': 1,
-        'adventure_name': 'default',
+            'adventure_name': 'default',
     })
     program_id = save_resp.get_json()['id']
     client.post_json('/programs/delete/', {'id': program_id})
