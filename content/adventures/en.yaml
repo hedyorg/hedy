@@ -5764,7 +5764,7 @@ adventures:
                 example_code: |
                     ```
                     #Defining the different elements of the ten verses:
-                    number = one, two, three, four, five, six, seven, eight, nine, ten
+                    number = 1
                     object = on his drum, on his shoe, on his knee, on his door, on his hive, on his sticks, up in heaven, on his gate, on his vine, once again
 
                     #Repeating the same verse with the different elements:
@@ -5777,14 +5777,25 @@ adventures:
                         {print} 'This old man came rolling home'
                         {sleep} 8
                         {clear}
+                        number = number + 1
                     ```
-                story_text_2: |
-                    ### Exercise 2
-                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
-                example_code_2: |
+                answer_code: |
                     ```
-                    object = wheels, doors, _
-                    movement = round and round, open and shut, _
+                    #Defining the different elements of the ten verses:
+                    number = 1
+                    objects = on his drum, on his shoe, on his knee, on his door, on his hive, on his sticks, up in heaven, on his gate, on his vine, once again
+
+                    #Repeating the same verse with the different elements:
+                    {for} thing {in} objects
+                        {print} 'This old man'
+                        {print} 'He played ' _
+                        {print} 'He played knick-knack ' _
+                        {print} 'With a knick-knack paddywhack'
+                        {print} 'Give the dog a bone'
+                        {print} 'This old man came rolling home'
+                        {sleep} 8
+                        {clear}
+                        number = number + 1
                     ```
             12:
                 story_text: |
