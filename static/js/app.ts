@@ -16,7 +16,7 @@ import {
 } from './debugging';
 import { localDelete, localLoad, localSave } from './local';
 import { initializeLoginLinks } from './auth';
-import { postJson, postNoResponse } from './comm';
+import { postJson } from './comm';
 import { LocalSaveWarning } from './local-save-warning';
 import { HedyEditor, EditorType } from './editor';
 import { stopDebug } from "./debugging";
@@ -288,10 +288,8 @@ export function initializeCodePage(options: InitializeCodePageOptions) {
 
   initializeSpeech();
 
-  // Share/hand in modals
-  $('#share_program_button').on('click', () => $('#share_modal').show());
+  // hand in modals
   $('#hand_in_button').on('click', () => $('#hand_in_modal').show());
-  initializeShareProgramButtons();
   initializeHandInButton();
 
   if (options.suppress_save_and_load) {
@@ -1650,15 +1648,7 @@ function updatePageElements() {
       ? adventure.save_info
       : { id : '*dummy*' };
 
-    // SHARING SETTINGS
-    // Star on "share" button is filled if program is already public, outlined otherwise
-    const isPublic = !!saveInfo.public;
-    $('#share_program_button')
-      .toggleClass('active-bluebar-btn', isPublic);
-    $(`#share-${isPublic ? 'public' : 'private'}`).prop('checked', true);
-
     // Show <...data-view="if-public-url"> only if we have a public url
-    $('[data-view="if-public"]').toggle(isPublic);
     $('[data-view="if-public-url"]').toggle(!!saveInfo.public_url);
     $('input[data-view="public-url"]').val(saveInfo.public_url ?? '');
 
@@ -1682,7 +1672,6 @@ function updatePageElements() {
     theGlobalEditor.isReadOnly = isSubmitted;
     // All of these are for the buttons added in the new version of the code-page
     $('#program_name_container').show()
-    $('#share_program_button').show()
     $('#read_outloud_button_container').show()
     $('#cheatsheet_dropdown_container').show()
     $('#commands_dropdown_container').show()
@@ -1712,25 +1701,6 @@ function reconfigurePageBasedOnTab() {
  */
 export function closeContainingModal(target: HTMLElement) {
   $(target).closest('[data-modal="true"]').hide();
-}
-
-function initializeShareProgramButtons() {
-  $('input[type="radio"][name="public"]').on('change', (ev) => {
-    if ((ev.target as HTMLInputElement).checked) {
-      // Async-safe copy of current tab
-      const adventure = theAdventures[currentTab];
-
-      tryCatchPopup(async () => {
-        await saveIfNecessary();
-
-        const saveInfo = isServerSaveInfo(adventure?.save_info) ? adventure?.save_info : undefined;
-        if (!saveInfo) {
-          throw new Error('This program does not have an id');
-        }
-        await postNoResponse(`/programs/share/${saveInfo.id}`, {})
-      });
-    }
-  })
 }
 
 function initializeHandInButton() {
@@ -1851,8 +1821,6 @@ async function saveIfNecessary() {
       code:  code,
       adventure_name: adventureName,
       program_id: saveInfo?.id,
-      // We pass 'public' in here to save the backend a lookup
-      share: saveInfo?.public,
       short_name: adventure.short_name,
     });
 

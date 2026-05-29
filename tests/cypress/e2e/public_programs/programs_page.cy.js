@@ -2,7 +2,6 @@ import { createAdventure, deleteAdventure } from "../tools/adventures/adventure"
 import { executeHelloWorldProgram, deleteProgram } from "../tools/programs/program";
 import { loginForTeacher } from "../tools/login/login";
 import { navigateToClass } from "../tools/classes/class";
-import { makeProfilePublic } from "../tools/profile/profile";
 
 describe("General tests for my programs page (with both custom teacher and built-in adventure)", () => {
     const uniqueName = (prefix) => `${prefix}${Date.now()}${Math.floor(Math.random() * 1000)}`;
@@ -20,26 +19,6 @@ describe("General tests for my programs page (with both custom teacher and built
         configureAdventureForClass(name);
         cy.getDataCy('preview_class_link').click();
         executeHelloWorldProgram(name);
-    };
-
-    const getProgramId = (name = programName) => cy.getDataCy(name).first().invoke('attr', 'data-id');
-
-    const ensureProgramShareState = (shouldBePublic) => {
-        cy.visit(`${Cypress.env('programs_page')}`);
-        getProgramId().then((programId) => {
-            cy.getDataCy(`share_option_dropdown_${programId}`).then(($dropdown) => {
-                const isCurrentlyPublic = $dropdown.text().includes('Public');
-                if (isCurrentlyPublic !== shouldBePublic) {
-                    cy.wrap($dropdown).click();
-                    cy.getDataCy(`share_button_${programId}`).click();
-                }
-            });
-
-            cy.getDataCy(`share_option_dropdown_${programId}`).should('contain.text', shouldBePublic ? 'Public' : 'Private');
-            cy.getDataCy(`non_submitted_button_container_${programId}`)
-                .getDataCy(`submit_btn_${programId}`)
-                .should(shouldBePublic ? 'be.visible' : 'not.be.visible');
-        });
     };
 
     before(() => {

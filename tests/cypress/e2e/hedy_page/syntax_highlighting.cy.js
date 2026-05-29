@@ -1,5 +1,4 @@
-import { loginForUser } from "../tools/login/login";
-import { goToHedyPage, goToAdventurePage } from "../tools/navigation/nav";
+import { goToAdventurePage } from "../tools/navigation/nav";
 import chaiColors from 'chai-colors'
 
 // to know if the keywords do have the appropiate color
@@ -22,25 +21,6 @@ context('chai-colors', () => {
     })
   });
 })
-describe('The view program page', () => {
-  let programName;
-  beforeEach(async () => {
-    loginForUser();
-    goToHedyPage();
-    programName = Math.random().toString(36);
-    cy.get('#program_name').clear().type(programName);
-    cy.get('#share_program_button').click();
-    cy.get('#share_public').click();
-    cy.get('button[data-action="copy_to_clipboard"]').click();
-
-    const urlFromClipboard = await new Promise((ok) =>
-      cy.window().then((win) =>
-        win.navigator.clipboard.readText().then(ok)));
-
-    cy.visit(urlFromClipboard);
-  });
-})
-
 describe('The raw program page', () => {
   beforeEach(() => {
     cy.visit('/adventure/story/1/raw');
