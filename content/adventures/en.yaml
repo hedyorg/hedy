@@ -1948,8 +1948,8 @@ adventures:
         levels:
             6:
                 story_text: |
-                    In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
-                    NOTE: You now have use 2 lines when using {if}, {else} or {elif}. 1 line for the {if} keyword (for example `{if} name {is} Hedy`), and one line for what is going to happen if the condition is met (for example `{print} hello`).
+                    In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the commands `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
+                    NOTE: You now have use 2 lines when using {if}, {else} or {elif}. 1 line for the {if} command (for example `{if} name {is} Hedy`), and one line for what is going to happen if the condition is met (for example `{print} hello`).
                     Check it out!
                     ### Exercise
                     Make your own wheel of fortune, where you can win different prizes and get corresponding reactions
@@ -1958,9 +1958,9 @@ adventures:
                     prizes {is} 1 million dollars, an apple pie, nothing
                     your_prize {is} prizes {at} {random}
                     {print} 'You win ' your_prize
-                    {if} your_prize {is} '1 million dollars'
+                    {if} your_prize {is} 1 million dollars
                     {print} 'Yeah! You are rich!'
-                    {elif} your_prize {is} 'an apple pie'
+                    {elif} your_prize {is} an apple pie
                     {print} 'Lovely, an apple pie!'
                     {else}
                     {print} 'Better luck next time..'
