@@ -874,7 +874,8 @@ class TestLegacyCustomizeClassFlows:
 
         default_adv = hedy_content.adventures_order_per_level()[1][0]
 
-        add_response = client.post('/for-teachers/add-adventure/level/1', data={'adventure_id': default_adv}, check=False)
+        add_response = client.post('/for-teachers/add-adventure/level/1',
+                                   data={'adventure_id': default_adv}, check=False)
         assert add_response.status_code == 200
 
         sort_response = client.post('/for-teachers/sort-adventures?level=1', data={'adventure': [default_adv]})
@@ -1286,7 +1287,8 @@ class TestForTeachersHeavyInternalMethods:
         monkeypatch.setattr(for_teachers_module, 'render_partial', lambda *args, **kwargs: {'ok': True})
         monkeypatch.setattr(for_teachers_module.jinja_partials, 'render_partial', lambda *args, **kwargs: {'ok': True})
         get_remove_modal = _unwrap_route(for_teachers_module.ForTeachersModule.get_remove_student_modal)
-        get_remove_modal_redesign = _unwrap_route(for_teachers_module.ForTeachersModule.get_remove_student_modal_redesign)
+        get_remove_modal_redesign = _unwrap_route(
+            for_teachers_module.ForTeachersModule.get_remove_student_modal_redesign)
         remove_redesign = _unwrap_route(for_teachers_module.ForTeachersModule.remove_student_from_class_redesign)
         with app.test_request_context('/?level=1'):
             _set_en_locale()
@@ -1408,11 +1410,15 @@ class TestForTeachersHeavyInternalMethods:
         user = {'username': 'teacher1'}
 
         invalid_cases = [
-            {'id': 1, 'name': 'n', 'levels': ['1'], 'content': 'x' * 30, 'public': False, 'language': 'en', 'classes': []},
-            {'id': 'adv1', 'name': 1, 'levels': ['1'], 'content': 'x' * 30, 'public': False, 'language': 'en', 'classes': []},
+            {'id': 1, 'name': 'n', 'levels': ['1'], 'content': 'x' *
+                30, 'public': False, 'language': 'en', 'classes': []},
+            {'id': 'adv1', 'name': 1, 'levels': ['1'], 'content': 'x' *
+                30, 'public': False, 'language': 'en', 'classes': []},
             {'id': 'adv1', 'name': 'n', 'levels': [], 'content': 'x' * 30, 'public': False, 'language': 'en', 'classes': []},
-            {'id': 'adv1', 'name': 'n', 'levels': ['1'], 'content': 1, 'public': False, 'language': 'en', 'classes': []},
-            {'id': 'adv1', 'name': 'n', 'levels': ['1'], 'content': 'x' * 30, 'public': 'no', 'language': 'en', 'classes': []},
+            {'id': 'adv1', 'name': 'n', 'levels': ['1'], 'content': 1,
+                'public': False, 'language': 'en', 'classes': []},
+            {'id': 'adv1', 'name': 'n', 'levels': ['1'], 'content': 'x' *
+                30, 'public': 'no', 'language': 'en', 'classes': []},
         ]
 
         for body in invalid_cases:
@@ -1544,7 +1550,8 @@ class TestForTeachersHeavyInternalMethods:
 
     def test_class_survey_and_load_survey(self, app, monkeypatch):
         mod = self._module()
-        monkeypatch.setattr(for_teachers_module.utils, 'get_unanswered_questions', lambda survey, questions: (questions, {'q': 'a'}))
+        monkeypatch.setattr(for_teachers_module.utils, 'get_unanswered_questions',
+                            lambda survey, questions: (questions, {'q': 'a'}))
         monkeypatch.setattr(for_teachers_module, 'render_partial', lambda *args, **kwargs: {'ok': True})
         with app.test_request_context('/'):
             _set_en_locale()
