@@ -49,7 +49,8 @@ def test_signup_duplicate_username(client: Client, given: Given):
 def test_signup_duplicate_email(client: Client):
     body = signup_body()
     client.post_json('/auth/signup', body)
-    response = client.post_json('/auth/signup', {**signup_body(username='anotheruser'), 'email': body['email']}, check=False)
+    response = client.post_json(
+        '/auth/signup', {**signup_body(username='anotheruser'), 'email': body['email']}, check=False)
     assert response.status_code == 403
 
 
