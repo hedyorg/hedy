@@ -13,15 +13,17 @@ describe('Start buttons', () => {
     navigateHomeButton('start_teaching_button', Cypress.env('teachers_page'))
   })
 
-  it('As a student: start_learning goes to hedy, start_teaching goes to signup', () => {
+  it('As a student: start_learning goes to hedy, start_teaching goes to profile', () => {
     loginForStudent();
     navigateHomeButton('start_learning_button', Cypress.env('hedy_page'))
-    navigateHomeButton('start_teaching_button', Cypress.env('signup_page'))
+    // Already logged in, so /signup redirects to the profile page
+    navigateHomeButton('start_teaching_button', Cypress.env('profile_page'))
   })
 
-  it('As a user: start_learning goes to hedy, start_teaching goes to signup', () => {
+  it('As a user: start_learning goes to hedy, start_teaching goes to profile', () => {
     loginForUser();
     navigateHomeButton('start_learning_button', Cypress.env('hedy_page'))
-    navigateHomeButton('start_teaching_button', Cypress.env('signup_page'))
+    // Already logged in, so /signup redirects to the profile page
+    navigateHomeButton('start_teaching_button', Cypress.env('profile_page'))
   })
 })
