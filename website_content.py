@@ -249,7 +249,6 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'operators',
         'for_command',
         'story',
-        'songs',
         'quizmaster',
         'debugging',
         'hospital'
