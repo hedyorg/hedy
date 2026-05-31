@@ -1,0 +1,32 @@
+[run]
+branch=True
+parallel=True
+source=
+    .
+omit =
+    dodo.py
+    batchhedy/*
+    tests/*
+    tests_e2e.py
+    .venv/*
+    node_modules/*
+    coverage/*
+    __pycache__/*
+    */__pycache__/*
+    .pytest_cache/*
+    .mypy_cache/*
+    .hypothesis/*
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:
+    raise NotImplementedError
+    pass
+    @abc.abstractmethod
+
+[html]
+directory = coverage/html
+
+[json]
+output = coverage/coverage.json
