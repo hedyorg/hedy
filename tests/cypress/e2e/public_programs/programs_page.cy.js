@@ -2,7 +2,6 @@ import { createAdventure, deleteAdventure } from "../tools/adventures/adventure"
 import { executeHelloWorldProgram, deleteProgram } from "../tools/programs/program";
 import { loginForTeacher } from "../tools/login/login";
 import { navigateToClass } from "../tools/classes/class";
-import { makeProfilePublic } from "../tools/profile/profile";
 
 describe("General tests for my programs page (with both custom teacher and built-in adventure)", () => {
     const uniqueName = (prefix) => `${prefix}${Date.now()}${Math.floor(Math.random() * 1000)}`;
@@ -20,26 +19,6 @@ describe("General tests for my programs page (with both custom teacher and built
         configureAdventureForClass(name);
         cy.getDataCy('preview_class_link').click();
         executeHelloWorldProgram(name);
-    };
-
-    const getProgramId = (name = programName) => cy.getDataCy(name).first().invoke('attr', 'data-id');
-
-    const ensureProgramShareState = (shouldBePublic) => {
-        cy.visit(`${Cypress.env('programs_page')}`);
-        getProgramId().then((programId) => {
-            cy.getDataCy(`share_option_dropdown_${programId}`).then(($dropdown) => {
-                const isCurrentlyPublic = $dropdown.text().includes('Public');
-                if (isCurrentlyPublic !== shouldBePublic) {
-                    cy.wrap($dropdown).click();
-                    cy.getDataCy(`share_button_${programId}`).click();
-                }
-            });
-
-            cy.getDataCy(`share_option_dropdown_${programId}`).should('contain.text', shouldBePublic ? 'Public' : 'Private');
-            cy.getDataCy(`non_submitted_button_container_${programId}`)
-                .getDataCy(`submit_btn_${programId}`)
-                .should(shouldBePublic ? 'be.visible' : 'not.be.visible');
-        });
     };
 
     before(() => {
@@ -85,90 +64,7 @@ describe("General tests for my programs page (with both custom teacher and built
         cy.wait(500);
         cy.visit(`${Cypress.env('programs_page')}`);
         cy.getDataCy('programs').should("contain.text", adventure);
-    });
-
-    it('can make program public', () => {
-        ensureProgramShareState(true);
-    });
-
-    it('can favourite and unfavourite a public program', () => {
-        cy.intercept({
-            url: '/auth/public_profile',
-            method: "POST"
-        }).as('public_profile')
-        makeProfilePublic();
-        cy.wait('@public_profile')
-        ensureProgramShareState(true);
-        cy.visit(`${Cypress.env('programs_page')}`);
-        cy.getDataCy(`${programName}`)
-            .first()
-            .then($el => {
-                const programId = $el[0].getAttribute("data-id");
-                //favourite a program:
-                cy.getDataCy(`favourite_program_container_${programId}`).click();
-                cy.getDataCy('modal_confirm_text').should('contain.text', 'favourite');
-                cy.getDataCy('modal_yes_button').click();
-                //unfavourite a program:
-                cy.wait(500);
-                cy.getDataCy(`favourite_program_container_${programId}`).click();
-                cy.getDataCy('modal_confirm_text').should('contain.text', 'unfavourite');
-                cy.getDataCy('modal_yes_button').click();
-            })
-    });
-
-    it("second-teachers can view each other's public programs", () => {
-        ensureProgramShareState(true);
-        loginForTeacher("teacher4");
-        navigateToClass();
-        cy.get("#second_teachers_container tbody tr")
-            .each(($tr, i) => {
-                if ($tr.text().includes("teacher1")) {
-                    cy.get(`#second_teachers_container tbody :nth-child(${i+1}) [data-cy="programs"]`).click();
-                    cy.getDataCy('programs')
-                        .should("contain.text", programName);
-                    // but second teacher should is not permitted to see submit or delete btns.
-                    cy.getDataCy(`${programName}`)
-                    .first()
-                    .then($el => {
-                        const programId = $el[0].getAttribute("data-id");
-                        cy.getDataCy(`submit_btn_${programId}`)
-                            .should('not.be.visible');
-                        cy.getDataCy(`more_options_${programId}`).click();
-                        cy.getDataCy(`program_options_dropdown_${programId}`).should("be.visible");
-                        cy.getDataCy(`delete_non_submitted_program_${programId}`).should("not.exist");
-                    })
-                }
-            })
-
-    });
-
-    it('can make program private', () => {
-        ensureProgramShareState(false);
-    });
-
-    it("second-teachers can NOT view each other's public programs after making them private", () => {
-        ensureProgramShareState(false);
-        loginForTeacher("teacher4");
-        navigateToClass();
-
-        cy.get('body').then(($body) => {
-            const hasTeacherRow = $body.find('[data-cy="second_teacher_username_cell"]').toArray()
-                .some((el) => Cypress.$(el).text().includes('teacher1'));
-
-            if (hasTeacherRow) {
-                cy.contains('[data-cy="second_teacher_username_cell"]', 'teacher1')
-                    .closest('tr')
-                    .within(() => {
-                        cy.getDataCy('programs').click();
-                    });
-                cy.document().its('body.innerText').should('not.contain', programName);
-            } else {
-                cy.visit(`${Cypress.env('programs_page')}`);
-                cy.document().its('body.innerText').should('not.contain', programName);
-            }
-        });
-    });
-
+    }); 
 
     it("delete created program", () => {
         deleteProgram(programName);

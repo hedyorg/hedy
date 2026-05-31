@@ -47,9 +47,6 @@
             <div class="dropdown-menu z-30 min-w-full" id="program_options_dropdown_{{ program.id }}" data-cy="program_options_dropdown_{{ program.id }}"
               style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;">
                 <button class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500" onclick="hedyApp.copy_to_clipboard(`{{program.code}}`, '{{_('copy_clipboard')}}')">{{_('copy_code')}}</button>
-                {% if program.public %}
-                    <button class="gray-btn text-blue-500 min-w-full flex justify-between items-center gap-2 border-b border-gray-500" onclick="hedyApp.copy_to_clipboard(hedyApp.viewProgramLink('{{program.id}}'), '{{_('copy_clipboard')}}')">{{_('copy_link_to_share')}}</button>
-                {% endif %}
                 {% if not second_teachers_programs %}
                     {% if not program.submitted %}
                     <button class="gray-btn text-red-500 min-w-full flex justify-between items-center gap-2" data-cy="delete_non_submitted_program_{{ program.id }}" onclick="hedyApp.delete_program('{{ program.id }}', '{{_('delete_confirm')}}')">{{_('delete')}}</button>
@@ -71,39 +68,6 @@
         <a href="/hedy/{{program.level|string}}/{{program.id}}" target="_blank"><button class="blue-btn">{{_('open')}}</button></a>
         {% if not graph_view %}
             <button class="green-btn" data-cy="submit_btn_{{ program.id }}" {% if not program.public or second_teachers_programs %} style="display: none;" {% endif %} onclick="hedyApp.modal.confirm ('{{_('submit_warning')}}', function () {hedyApp.submit_program ('{{program.id}}')})">{{_('submit_program')}}</button>
-            {% if not second_teachers_programs %}
-            <div class="dropdown relative">
-                <button class="white-btn inline-flex items-center gap-2" data-cy="share_option_dropdown_{{ program.id }}"
-                onclick="$('#share_dropdown_{{ program.id }}').slideToggle('medium');">
-                <span class="fa fa-{% if program.public %}globe{% else %}lock{% endif %}"></span>
-                <span>{% if program.public %}{{_('public')}}{% else %}{{_('private')}}{% endif %}</span>
-                <svg id="share_arrow_{{ program.id }}" class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-                </button>
-                <div class="dropdown-menu z-30 min-w-full" id="share_dropdown_{{ program.id }}"
-                style="display: none; padding: 0px !important; margin: 0px; margin-top: 0.25rem;"
-                _="on mutation of @style
-                    set arrow to #share_arrow_{{ program.id }}
-                    if *display == 'none'
-                        remove .rotate-180 from arrow
-                    else if not arrow.classList.contains('rotate-180')
-                        add .rotate-180 to arrow
-                    end">
-                    <button data-cy="share_button_{{ program.id }}" class="gray-btn text-blue-500 min-w-full inline-flex items-center gap-2"
-                    hx-post="/programs/share/{{program.id}}/{{second_teachers_programs}}"
-                    data-cy="unshare_program_{{ program.id }}"
-                    hx-swap="outerHTML"
-                    hx-target="#program_{{ program.id }}"
-                    >
-                    <span class="fa fa-{% if program.public %}lock{% else %}globe{% endif %}"></span>
-                    <div class="mr-auto" tabindex=0>
-                        {% if program.public %}{{_('private')}}{% else %}{{_('public')}}{% endif %}
-                    </div>
-                    </button>
-                </div>
-            </div>
-            {% endif %}
         {% endif %}
     </div>
 </div>

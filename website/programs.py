@@ -4,10 +4,8 @@ from typing import Optional
 
 from flask import g, make_response, request
 from website.flask_helpers import gettext_with_fallback as gettext
-import jinja_partials
 import website_content as hedy_content
 
-import hedy
 import utils
 from config import config
 from website.auth import (
@@ -49,8 +47,7 @@ class ProgramsLogic:
                            error: bool,
                            program_id: Optional[str] = None,
                            adventure_name: Optional[str] = None,
-                           short_name: Optional[str] = None,
-                           set_public: Optional[bool] = None):
+                           short_name: Optional[str] = None):
         """Store a user program (either new or overwrite an existing one).
 
         Returns the program record.
@@ -69,9 +66,6 @@ class ProgramsLogic:
             "error": error,
             "adventure_name": adventure_name,
         }
-
-        if set_public is not None:
-            updates['public'] = 1 if set_public else 0
 
         if program_id:
             # Updates an existing program
@@ -179,30 +173,12 @@ class ProgramsModule(WebsiteModule):
             return make_response(gettext("request_invalid"), 400)
         if 'program_id' in body and not isinstance(body.get("program_id"), str):
             return make_response(gettext("request_invalid"), 400)
-        if 'shared' in body and not isinstance(body.get("shared"), bool):
-            return make_response(gettext("request_invalid"), 400)
         if "adventure_name" in body:
             if not isinstance(body.get("adventure_name"), str):
                 return make_response(gettext("request_invalid"), 400)
 
         error = None
         program_id = body.get('program_id')
-
-        # We don't NEED to pass this in, but it saves the database a lookup if we do.
-        program_public = body.get("shared")
-
-        if program_public:
-            # If a program is marked as public, we need to know whether it contains
-            # an error or not. Parse it here and add the status.
-            # WARNING: compiling is expensive! We may regret doing this on every save, especially
-            # when saves become common!
-            try:
-                hedy.transpile(body.get("code"), body.get("level"), g.lang)
-                error = False
-            except BaseException:
-                error = True
-                if not body.get("force_save", True):
-                    return make_response({"parse_error": True, "message": gettext("save_parse_warning")})
 
         program = self.logic.store_user_program(
             program_id=program_id,
@@ -211,7 +187,6 @@ class ProgramsModule(WebsiteModule):
             name=body['name'],
             user=user,
             error=error,
-            set_public=program_public,
             adventure_name=body.get('adventure_name'),
             short_name=body.get('short_name', body.get('adventure_name')))
 
@@ -222,40 +197,6 @@ class ProgramsModule(WebsiteModule):
             "id": program['id'],
             "save_info": SaveInfo.from_program(Program.from_database_row(program))
         }, 200)
-
-    @route("/share/<program_id>", methods=['POST'], defaults={'second_teachers_programs': False})
-    @route("/share/<program_id>/<second_teachers_programs>", methods=["POST"])
-    @requires_login
-    def share_unshare_program(self, user, program_id, second_teachers_programs):
-        program = self.db.program_by_id(program_id)
-        if not program or program["username"] != user["username"]:
-            return make_response(gettext("request_invalid"), 404)
-
-        # This only happens in the situation were a user un-shares their favourite program -> Delete from public profile
-        public_profile = self.db.get_public_profile_settings(current_user()["username"])
-        if (
-            public_profile
-            and "favourite_program" in public_profile
-            and public_profile["favourite_program"] == program_id
-        ):
-            self.db.set_favourite_program(user["username"], program_id, None)
-
-        if program.get("public"):
-            public = 0
-        else:
-            public = 1
-        program = self.db.set_program_public_by_id(program_id, public)
-
-        keyword_lang = g.keyword_lang
-        adventure_names = hedy_content.Adventures(g.lang).get_adventure_names(keyword_lang)
-        program["date"] = utils.delta_timestamp(program["date"])
-        program["preview_code"] = "\n".join(program["code"].split("\n")[:4])
-        program["number_lines"] = program["code"].count('\n') + 1
-        return jinja_partials.render_partial('htmx-program.html',
-                                             program=program,
-                                             adventure_names=adventure_names,
-                                             public_profile=public_profile,
-                                             second_teachers_programs=second_teachers_programs == 'True')
 
     @route("/submit", methods=["POST"])
     @requires_login
