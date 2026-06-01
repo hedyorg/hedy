@@ -194,7 +194,6 @@ class TestAjaxRoutes:
         assert response.status_code == 400
         assert response.get_data(as_text=True).strip() != ''
 
-
 class TestErrorTracking:
     """Test error logging and tracking endpoints."""
 
