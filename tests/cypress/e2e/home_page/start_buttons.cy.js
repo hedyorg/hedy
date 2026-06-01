@@ -2,28 +2,29 @@ import { loginForStudent, loginForTeacher, loginForUser } from "../tools/login/l
 import { navigateHomeButton } from "../tools/navigation/nav";
 
 describe('Start buttons', () => {
-  it('When not logged in: start_learning goes to hedy, start_teaching goes to signup', () => {
+  it('When not logged in: Should be able to click on start buttons', () => {
     navigateHomeButton('start_learning_button', Cypress.env('hedy_page'))
-    navigateHomeButton('start_teaching_button', Cypress.env('signup_page'))
+    // start_teaching button is tested in teacher_mode.cy.js
   })
 
-  it('As a teacher: start_learning goes to hedy, start_teaching goes to teachers page', () => {
+  it('As a teacher: Should be able to click on start buttons', () => {
     loginForTeacher();
     navigateHomeButton('start_learning_button', Cypress.env('hedy_page'))
     navigateHomeButton('start_teaching_button', Cypress.env('teachers_page'))
+    cy.getDataCy('teacher_mode_banner').should("not.exist");
   })
 
-  it('As a student: start_learning goes to hedy, start_teaching goes to profile', () => {
+  it('As a student: Should be able to click on start buttons', () => {
     loginForStudent();
     navigateHomeButton('start_learning_button', Cypress.env('hedy_page'))
-    // Already logged in, so /signup redirects to the profile page
-    navigateHomeButton('start_teaching_button', Cypress.env('profile_page'))
+    navigateHomeButton('start_teaching_button', Cypress.env('teachers_page'))
+    cy.getDataCy('teacher_mode_banner').should("be.visible");
   })
 
-  it('As a user: start_learning goes to hedy, start_teaching goes to profile', () => {
+  it('As a user: Should be able to click on start buttons', () => {
     loginForUser();
     navigateHomeButton('start_learning_button', Cypress.env('hedy_page'))
-    // Already logged in, so /signup redirects to the profile page
-    navigateHomeButton('start_teaching_button', Cypress.env('profile_page'))
+    navigateHomeButton('start_teaching_button', Cypress.env('teachers_page'))
+    cy.getDataCy('teacher_mode_banner').should("be.visible");
   })
 })

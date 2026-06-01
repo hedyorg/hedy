@@ -2281,6 +2281,17 @@ adventures:
                     ```
                     monos = 5, 4, 3, 2, 1
                     ```
+            13:
+                story_text: |
+                    En el nivel 16 hicimos canciones usando listas. Sin embargo estos programas no funcionan bien en este nivel. Los dos puntos del nivel 17 y los paréntesis del nivel 18 aún se tienen que ser añadir.
+
+                    ### Ejercicio 1
+                    Se da la canción del Marinero borracho como ejemplo, pero todavía no funciona.
+                    ¿Puedes asegurarte de que todo funciona de nuevo? Para ayudarte, hemos puesto _ en los lugares de _algunos_ errores.
+
+                    ### Ejercicio 2
+                    Ahora también busca tu canción de Old MacDonald del nivel 16, y corrígela.
+                example_code: "```\nlíneas = ['Qué haremos con el marinero borracho', 'Afeitarle el vientre con una navaja oxidada', 'Meterlo en un barco largo hasta que esté sobrio']\n{for} línea {in} líneas _ \n    {for} i {in} {range} 1 {to} 3 _ \n        {print} _ línea _ \n    {print} 'pronto por la mañana'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Ella se levanta de un camino de heno'\n    {print} 'pronto por la mañana'\n```\n"
     songs_2:
         levels:
             12:
@@ -2297,6 +2308,8 @@ adventures:
                     ```
                 story_text: "Las canciones contienen un montón de repeticiones. ¡Podemos capturarlas en una función!\n### Ejercicio\nMira el código de ejemplo con la función. Rellena las dos líneas para que se imprima la canción entera.\n"
             11:
+                example_code_2: "```\nobjeto = 'ruedas', 'puertas', _\nmovimiento =  'gira y gira', 'abre y cierra', _]\n```\n"
+                story_text_2: "### Ejercicio 2\nAhora crea tu propio código para la canción infantil «Las ruedas del autobús» de la misma manera.\n"
                 story_text: "### Ejercicio\n¡Completa la canción infantil!\n"
                 example_code: "```\nnumero = ['uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez']\nobjeto = ['en su tambor', 'en su zapato', 'en su rodilla', 'en su puerta', 'en su colmena', 'en sus bastones', 'arriba en el cielo', 'en su portal', 'en su viña', 'una vez más']\n\n_\n    {print} 'Este viejo hombre'\n    {print} 'Él tocó ' _\n    {print} 'Él tocó knick-knack ' _\n    {print} 'Con un knick-knack paddywhack'\n    {print} 'Le da un hueso al can'\n    {print} 'Este viejo hombre vino rodando a casa'\n    {sleep} 8\n    {clear}\n```\n"
         default_save_name: Canción 2

@@ -26,7 +26,6 @@ from glob import glob
 import sys
 import platform
 
-from doit import task_params
 from doit.tools import LongRunning
 
 if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
@@ -240,37 +239,6 @@ def task_prefixes():
         ],
         targets=[
             'static/js/pythonPrefixes.ts'
-        ],
-    )
-
-
-@task_params([dict(
-    name='spec',
-    short='s',
-    long='spec',
-    default='tests'
-)])
-def task_test(spec):
-    """Run branch coverage for in-process Flask Python/HTML tests."""
-    return dict(
-        file_dep=[
-            *(set(glob('*.py')) - set(['dodo.py', 'gunicorn.conf.py'])),
-            *glob('test/**/*.py', recursive=True),
-            *glob('website/**/*.py', recursive=True),
-        ],
-        title=lambda _: f'Run {spec} with coverage',
-        actions=[
-            [
-                python3,
-                '-m',
-                'pytest',
-                '--cov=.',
-                '--cov-report=html',
-                '--cov-report=json',
-                spec,
-                '-q',
-                '-n=4',
-            ],
         ],
     )
 

@@ -2034,6 +2034,27 @@ adventures:
                     ```
                     maymunlar = 5, 4, 3, 2, 1
                     ```
+            13:
+                story_text: |
+                    Seviye 16'da listeleri kullanarak şarkılar yaptık. Ancak bu programlar bu seviyede artık düzgün çalışmazlar. Seviye 17'deki iki nokta üst üste ve seviye 18'deki parantezlerin hala eklenmesi gerekiyor.
+
+                    ### Alıştırma 1
+                    Sarhoş denizci şarkısı örnek kod olarak verilmiştir, ancak henüz çalışmamaktadır.
+                    Her şeyin tekrar çalıştığından emin olabilir misiniz? Size yardımcı olmak için _bazı_ hataların yerlerine _ koyduk.
+
+                    ### Alıştırma 2
+                    Şimdi de 16. seviyedeki Ali Baba şarkınıza bakın ve düzeltin.
+                example_code: |
+                    ```
+                    satırlar = ['sarhoş bir denizciye ne yapmalı', 'paslı usturayla karnını traş etmeli', 'ayılana kadar uzun kayığa koymalı']
+                    {for} satır {in} satırlaar _
+                        {for} i {in} {range} 1 {to} 3 _
+                            {print} _ satır _
+                        {print} 'sabah erkenden'
+                        {for} i {in} {range} 1 {to} 3
+                            {print} 'hey heyy ve işte doğuyor'
+                        {print} 'sabah erkenden'
+                    ```
     songs_2:
         levels:
             12:

@@ -2621,6 +2621,27 @@ adventures:
                     ```
                     affen = 5, 4, 3, 2, 1
                     ```
+            13:
+                story_text: |
+                    In Level 16 haben wir Lieder mit Listen gemacht. Diese Programme funktionieren jedoch nicht mehr ganz in diesem Level. Die Doppelpunkte aus Level 17 und die Klammern aus Level 18 müssen noch hinzugefügt werden.
+
+                    ### Übung 1
+                    Das Drunken sailor Lied ist im Beispiel-Code, aber es funktioniert noch nicht.
+                    Kannst du sicherstellen, dass alles wieder funktioniert? Um dir zu helfen haben wir _ an die Stellen _einiger_ Fehler gesetzt.
+
+                    ### Übung 2
+                    Schau auch deinen Old MacDonald Song aus Level 16 nach und korrigiere ihn.
+                example_code: |
+                    ```
+                    zeilen = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    {for} zeile {in} zeilen _
+                        {for} i {in} {range} 1 {to} 3 _
+                            {print} _ zeile _
+                        {print} 'early in the morning'
+                        {for} i {in} {range} 1 {to} 3
+                            {print} 'way hay and up she rises'
+                        {print} 'early in the morning'
+                    ```
         default_save_name: Lied
     songs_2:
         name: Singe ein Lied! 2

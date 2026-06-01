@@ -1327,37 +1327,51 @@ adventures:
                 example_code: |
                     **Warning! This code needs to be debugged!**
                     ```
-                    {print} 'Press your fingertips gently against the side of your neck'
-                    {print}'(just under your jawline)'
-                    {print} 'Count the number of beats you feel for 15 seconds'
-                    beats == {ask} 'How many beats do you feel in 15 seconds?'
-                    heartbeat = beats*4
-                    {print} 'Your heartbeat is ' heartbeat
-                    {if} heartbeat >= 60 {or} heartbeat <= 100
-                        {print} 'Your heartbeat seems fine'
+                    {define} calculate_heartbeat
+                        {print} 'Press your fingertips gently against the side of your neck'
+                        {print}'(just under your jawline)'
+                        {print} 'Count the number of beats you feel for 15 seconds'
+                        beats == {ask} 'How many beats do you feel in 15 seconds?'
+                        heartbeat = beats*4
+                        {print} 'Your heartbeat is ' heartbeat
+                        {if} heartbeat >= 60 {or} heartbeat <= 100
+                            {print} 'Your heartbeat seems fine'
+                        {else}
+                            {if} heartbeat > 60
+                                {print} 'Your heartbeat seems to be too low'
+                            {if} heartbeat < 100
+                                {print} 'Your heartbeat seems to be too high'
+                            {print} 'You might want to contact a medical professional'
+
+                    measure_heartbeat = {input} 'Would you like to measure your heartbeat?'
+                    {if} measure_heartbeat = 'yes'
+                        measure_heartbeat()
                     {else}
-                        {if} heartbeat > 60
-                            {print} 'Your heartbeat seems to be too low'
-                        {if} heartbeat < 100
-                            {print} 'Your heartbeat seems to be too high'
-                        {print} 'You might want to contact a medical professional'
+                        {print}('no problem')
                     ```
                 answer_code: |
                     ```
-                    {print}('Press your fingertips gently against the side of your neck')
-                    {print}('just under your jawline')
-                    {print}('Count the number of beats you feel for 15 seconds')
-                    beats = {input}('How many beats do you feel in 15 seconds?')
-                    heartbeat = beats*4
-                    {print}('Your heartbeat is ', heartbeat)
+                    {define} calculate_heartbeat
+                        {print}('Press your fingertips gently against the side of your neck')
+                        {print}('just under your jawline')
+                        {print}('Count the number of beats you feel for 15 seconds')
+                        beats = {input}('How many beats do you feel in 15 seconds?')
+                        heartbeat = beats*4
+                        {print}('Your heartbeat is ', heartbeat)
                         {if} heartbeat >= 60 {and} heartbeat <= 100
-                        {print}('Your heartbeat seems fine')
+                            {print}('Your heartbeat seems fine')
+                        {else}
+                            {if} heartbeat < 60
+                                {print}('Your heartbeat seems to be too low')
+                            {if} heartbeat > 100
+                                {print}('Your heartbeat seems to be too high')
+                            {print}('You might want to contact a medical professional')
+
+                    measure_heartbeat = {input}('Would you like to measure your heartbeat?')
+                    {if} measure_heartbeat == 'yes'
+                        calculate_heartbeat()
                     {else}
-                        {if} heartbeat < 60
-                            {print}('Your heartbeat seems to be too low')
-                        {if} heartbeat > 100
-                            {print}('Your heartbeat seems to be too high')
-                        {print}('You might want to contact a medical professional')
+                        {print}('no problem')
                     ```
             14:
                 story_text: |-
@@ -1934,8 +1948,8 @@ adventures:
         levels:
             6:
                 story_text: |
-                    In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the commands `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
-                    NOTE: You now have use 2 lines when using {if}, {else} or {elif}. 1 line for the {if} command (for example `{if} name {is} Hedy`), and one line for what is going to happen if the condition is met (for example `{print} hello`).
+                    In this level you can also use a new command: `{elif}`. `{elif}` is a combination of the keywords `{else}` and `{if}` and you need it when you want to make 3 (or more!) options.
+                    NOTE: You now have use 2 lines when using {if}, {else} or {elif}. 1 line for the {if} keyword (for example `{if} name {is} Hedy`), and one line for what is going to happen if the condition is met (for example `{print} hello`).
                     Check it out!
                     ### Exercise
                     Make your own wheel of fortune, where you can win different prizes and get corresponding reactions
@@ -1944,9 +1958,9 @@ adventures:
                     prizes {is} 1 million dollars, an apple pie, nothing
                     your_prize {is} prizes {at} {random}
                     {print} 'You win ' your_prize
-                    {if} your_prize {is} 1 million dollars
+                    {if} your_prize {is} '1 million dollars'
                     {print} 'Yeah! You are rich!'
-                    {elif} your_prize {is} an apple pie
+                    {elif} your_prize {is} 'an apple pie'
                     {print} 'Lovely, an apple pie!'
                     {else}
                     {print} 'Better luck next time..'
@@ -4477,12 +4491,14 @@ adventures:
                 story_text: |-
                     We arrived at code that looks more like real Python!
                     In this level you will not see any new commands, but we only introduce a slightly different way of writing them, which is more similar to how it is done in Python code. 
-                    That means with `{print}` we have to use parentheses from now on.
+                    That means with `{print}` and `{range}` we have to use parentheses from now on. 
                     It also means you can use the basic Hedy code from this level in any Python environment as long as you use the English commands. 
                     If you haven't until now, you can switch the toggle in the commands menu to do so.
                 example_code: |
                     ```
                     {print}('Hello!')
+                    {for} i {in} {range}(1, 10):
+                        {print}('This is line ', i)
                     ```
                 story_text_2: If you want to print more than one item, you need to separate them by commas.
                 example_code_2: |
@@ -4493,6 +4509,7 @@ adventures:
                     ```
                     name = 'Hedy'
                     {print}_'My name is ', name_
+
                     ```
                 answer_code: |
                     Own answer
@@ -5681,6 +5698,38 @@ adventures:
                         {print} ""
                         {sleep} 2
                     ```
+            13:
+                story_text: |
+                    Now that we are using Python syntax, the songs you've coded before will need Python syntax too!
+
+                    ### Exercise 1
+                    The Drunken sailor song is given as sample code, but not yet working.
+                    Can you make sure everything works again? To help you, we've put _ in the places of _some_ errors.
+
+                    ### Exercise 2
+                    Now also look up your Old MacDonald song from before and correct it.
+                example_code: |
+                    ```
+                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    {for} line {in} lines _
+                        {for} i {in} {range} (1, 3) _
+                            {print} _ line _
+                        {print} 'early in the morning'
+                        {for} i {in} {range} (1, 3)
+                            {print} 'way hay and up she rises'
+                        {print} 'early in the morning'
+                    ```
+                answer_code: |
+                    ```
+                    lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
+                    {for} line {in} lines:
+                        {repeat} 3 {times}
+                            {print}(line)
+                        {print}('early in the morning')
+                        {repeat} 3 {times}
+                            {print}('way hay and up she rises')
+                        {print}('early in the morning')
+                    ```
             14:
                 story_text: |
                     In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
@@ -5764,8 +5813,8 @@ adventures:
                 example_code: |
                     ```
                     #Defining the different elements of the ten verses:
-                    number = 1
-                    object = on his drum, on his shoe, on his knee, on his door, on his hive, on his sticks, up in heaven, on his gate, on his vine, once again
+                    number = 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'
+                    object = 'on his drum', 'on his shoe', 'on his knee', 'on his door', 'on his hive', 'on his sticks', 'up in heaven', 'on his gate', 'on his vine', 'once again'
 
                     #Repeating the same verse with the different elements:
                     _
@@ -5777,25 +5826,14 @@ adventures:
                         {print} 'This old man came rolling home'
                         {sleep} 8
                         {clear}
-                        number = number + 1
                     ```
-                answer_code: |
+                story_text_2: |
+                    ### Exercise 2
+                    Now create your own code for the nursery rhyme 'The wheels on the bus' on the same way!
+                example_code_2: |
                     ```
-                    #Defining the different elements of the ten verses:
-                    number = 1
-                    objects = on his drum, on his shoe, on his knee, on his door, on his hive, on his sticks, up in heaven, on his gate, on his vine, once again
-
-                    #Repeating the same verse with the different elements:
-                    {for} thing {in} objects
-                        {print} 'This old man'
-                        {print} 'He played ' _
-                        {print} 'He played knick-knack ' _
-                        {print} 'With a knick-knack paddywhack'
-                        {print} 'Give the dog a bone'
-                        {print} 'This old man came rolling home'
-                        {sleep} 8
-                        {clear}
-                        number = number + 1
+                    object = 'wheels', 'doors', _
+                    movement = 'round and round', 'open and shut', _
                     ```
             12:
                 story_text: |
@@ -6085,9 +6123,9 @@ adventures:
                     {repeat} 3 {times}
                         {turn} angle
                         {forward} 50
-                    {color} {white}
+                    {color} white
                     {forward} 100
-                    {color} {black}
+                    {color} black
                     angle = 90
                     {repeat} 4 {times}
                         {turn} angle
@@ -6124,15 +6162,15 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {color} {pink}
+                    {color} pink
                     {repeat} 4 {times}
                         {repeat} 4 {times}
                             {forward} 50
                             {turn} 90
-                        {color} {white}
+                        {color} white
                         {turn} 270
                         {forward} 50
-                        {color} {pink}
+                        {color} pink
                     ```
             11:
                 story_text: |
@@ -6438,55 +6476,55 @@ adventures:
                     Rainbow
                     ```
                     {turn} 90
-                    {color} {red}
+                    {color} red
                     {forward} 100
                     {turn} 90
                     {forward} 3
                     {turn} 90
-                    {color} {orange}
+                    {color} orange
                     {forward} 100
                     {turn} -90
                     {forward} 3
                     {turn} -90
-                    {color} {yellow}
-                    {forward} 100
-                    {turn} 90
-                    {forward} 3
-                    {turn} 90
-                    {color} {green}
-                    {forward} 100
-                    {turn} -90
-                    {forward} 3
-                    {turn} -90
-                    {color} {blue}
+                    {color} yellow
                     {forward} 100
                     {turn} 90
                     {forward} 3
                     {turn} 90
-                    {color} {purple}
+                    {color} green
                     {forward} 100
                     {turn} -90
                     {forward} 3
                     {turn} -90
-                    {color} {pink}
+                    {color} blue
+                    {forward} 100
+                    {turn} 90
+                    {forward} 3
+                    {turn} 90
+                    {color} purple
+                    {forward} 100
+                    {turn} -90
+                    {forward} 3
+                    {turn} -90
+                    {color} pink
                     {forward} 100
                     ```
 
                     Colored star
                     ```
-                    {color} {blue}
+                    {color} blue
                     {forward} 100
                     {turn} 144
-                    {color} {green}
+                    {color} green
                     {forward} 100
                     {turn} 144
-                    {color} {orange}
+                    {color} orange
                     {forward} 100
                     {turn} 144
-                    {color} {red}
+                    {color} red
                     {forward} 100
                     {turn} 144
-                    {color} {purple}
+                    {color} purple
                     {forward} 100
                     {turn} 144
                     ```
@@ -6924,7 +6962,7 @@ adventures:
 
                     Start by moving to the left side of the screen with an invisible white line. Then hang up the Christmas lights!
                     ```
-                    {color} {white}
+                    {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 90
@@ -6962,7 +7000,7 @@ adventures:
 
                     Christmas lights
                     ```
-                    {color} {white}
+                    {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 90
@@ -6978,7 +7016,7 @@ adventures:
                         {turn} 60
                         {forward} 20
                         {turn} 60
-                        {color} {black}
+                        {color} black
                         {forward} 120
                         {turn} -90
                     ```
@@ -6998,14 +7036,14 @@ adventures:
                     _
 
                     #Drawing the beginning of the bracelet:
-                    {color} {white}
+                    {color} white
                     {turn} -90
                     {forward} 300
                     {turn} 180
 
                     #Drawing the shapes on the bracelet:
                     {repeat} 5 {times}
-                        {color} {gray}
+                        {color} gray
                         {forward} 100
                         shape = {ask} 'What kind of shape would you like next on the bracelet?'
                         chosen_color = {ask} 'In which color?'

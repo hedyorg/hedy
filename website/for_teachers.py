@@ -31,6 +31,8 @@ from website.auth import (
     requires_login,
     requires_teacher,
     store_new_student_account,
+    prepare_user_db,
+    remember_current_user,
 )
 from .database import Database
 from .auth_pages import AuthModule
@@ -1932,6 +1934,37 @@ class ForTeachersModule(WebsiteModule):
     def clear_preview_class(self):
         utils.remove_class_preview()
         return redirect("/for-teachers")
+
+    @route("/preview-teacher-mode", methods=["GET"])
+    def preview_teacher_mode(self):
+        id = uuid.uuid4().hex[:5]
+        username = f"testteacher_{id}"
+        user = self.db.user_by_username(username)
+        if not user:
+            user_pass = os.getenv("PREVIEW_TEACHER_MODE_PASSWORD", "")
+            username, hashed, _ = prepare_user_db(username, user_pass)
+            user = {
+                "username": username,
+                "password": hashed,
+                "is_teacher": 1,
+                "created": utils.timems(),
+                "last_login": utils.timems(),
+            }
+            self.db.store_user(user)
+        else:
+            self.db.forget_user(username)
+
+        session["preview_teacher_mode"] = {
+            "username": username,
+        }
+        remember_current_user(user)
+        return redirect("/for-teachers")
+
+    @route("/exit-preview-teacher-mode", methods=["GET"])
+    # Note: we explicitly do not need login here, anyone can exit preview mode
+    def exit_teacher_mode(self):
+        self.auth.logout()
+        return redirect("/hedy")
 
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
     @requires_teacher
