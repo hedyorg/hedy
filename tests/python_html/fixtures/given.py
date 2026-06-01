@@ -30,7 +30,7 @@ class Given:
     def a_student_account(self, username=None, password=None, teacher_username=None, language='en'):
         """Create a student account."""
         if username is None:
-            username = f'student{self.student_ctr}'
+            username = f'student{unique_id()}'
             self.student_ctr += 1
         password = password or unique_id()
         student = {
@@ -43,9 +43,9 @@ class Given:
         return {'username': username, 'password': password}
 
     def a_teacher_account(self, username=None, password=None, teacher_username=None, language='en'):
-        """Create a student account."""
+        """Create a teacher account."""
         if username is None:
-            username = f'student{self.teacher_ctr}'
+            username = f'teacher{unique_id()}'
             self.teacher_ctr += 1
         password = password or unique_id()
         username, hashed, _ = auth.prepare_user_db(username, password)
@@ -60,6 +60,28 @@ class Given:
         }
         self.db.store_user(teacher)
         return {'username': username, 'password': password}
+
+    def a_user_with_email(self, username=None, password=None, email=None, language='en'):
+        """Create a teacher-style account that has an email address set."""
+        if username is None:
+            username = f'student{self.teacher_ctr}'
+            self.teacher_ctr += 1
+        password = password or unique_id()
+        email = email or f'{username}@example.com'
+        username, hashed, hashed_token = auth.prepare_user_db(username, password)
+        user = {
+            'username': username,
+            'password': hashed,
+            'email': email,
+            'language': language,
+            'keyword_language': language,
+            'is_teacher': 1,
+            'created': now_javascript(),
+            'last_login': now_javascript(),
+            'verification_pending': hashed_token,
+        }
+        self.db.store_user(user)
+        return {'username': username, 'password': password, 'email': email}
 
     def assign_second_teacher(self, username, class_id):
         user = self.db.user_by_username(username)
