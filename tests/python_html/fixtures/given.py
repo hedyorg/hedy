@@ -62,9 +62,9 @@ class Given:
         return {'username': username, 'password': password}
 
     def a_user_with_email(self, username=None, password=None, email=None, language='en'):
-        """Create a teacher-style account that has an email address set."""
+        """Create a user account that has an email address set."""
         if username is None:
-            username = f'student{self.teacher_ctr}'
+            username = f'user{unique_id()}'
             self.teacher_ctr += 1
         password = password or unique_id()
         email = email or f'{username}@example.com'

@@ -1,6 +1,7 @@
 """Tests for authentication endpoints (/auth/*)."""
 import uuid
 import pytest
+from website.auth import TOKEN_COOKIE_NAME
 
 from .fixtures.flask import Client
 from .fixtures.given import Given
@@ -133,6 +134,7 @@ def test_login_success(client: Client, given: Given):
     assert response.status_code == 200
     data = response.get_json()
     assert isinstance(data, dict)
+    assert TOKEN_COOKIE_NAME in response.headers.get('Set-Cookie', '')
 
 
 def test_login_wrong_password(client: Client, given: Given):

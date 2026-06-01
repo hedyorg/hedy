@@ -120,7 +120,9 @@ def test_parse_valid_code(client: Client):
         'raw': False,
     })
     data = assert_json_response(response)
-    assert isinstance(data, dict)
+    assert 'Code' in data
+    assert isinstance(data['Code'], str)
+    assert data['Code'].strip() != ''
 
 
 def test_parse_code_with_error(client: Client):
@@ -181,7 +183,7 @@ def test_parse_with_explicit_lang(client: Client):
         'lang': 'en',
     })
     data = assert_json_response(response)
-    assert isinstance(data, dict)
+    assert 'Code' in data
 
 
 def test_parse_higher_level_code(client: Client):
@@ -192,7 +194,9 @@ def test_parse_higher_level_code(client: Client):
         'raw': False,
     })
     data = assert_json_response(response)
-    assert isinstance(data, dict)
+    assert 'Code' in data or 'Error' in data
+    if 'Error' in data:
+        assert 'Location' in data
 
 
 # ---------------------------------------------------------------------------
@@ -244,18 +248,21 @@ def test_signup_page_redirects_when_logged_in(client: Client, given: Given):
     response = client.get('/signup', check=False)
     # Should redirect to /my-profile
     assert response.status_code == 302
+    assert response.headers['Location'].endswith('/my-profile')
 
 
 def test_login_page_redirects_when_logged_in(client: Client, given: Given):
     given.logged_in_as_new_teacher()
     response = client.get('/login', check=False)
     assert response.status_code == 302
+    assert response.headers['Location'].endswith('/my-profile')
 
 
 def test_recover_page_redirects_when_logged_in(client: Client, given: Given):
     given.logged_in_as_new_teacher()
     response = client.get('/recover', check=False)
     assert response.status_code == 302
+    assert response.headers['Location'].endswith('/my-profile')
 
 
 # ---------------------------------------------------------------------------

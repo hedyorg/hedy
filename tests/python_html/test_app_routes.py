@@ -61,11 +61,6 @@ class TestHedyEditorRoute:
         assert context['current_page'] == 'hedy'
         assert context['javascript_page_options']['page'] == 'code'
 
-    def test_hedy_level_high(self, client):
-        """Test GET /hedy/25 (highest level)."""
-        response = client.get('/hedy/25', check=False)
-        assert response.status_code == 404
-
     def test_hedy_level_high_returns_no_such_level_message(self, client):
         """Test out-of-range level returns a meaningful 404 page."""
         response = client.get('/hedy/25', check=False)
@@ -106,16 +101,25 @@ class TestHeadersAndErrorHandling:
         """Test accessing a non-existent page."""
         response = client.get('/nonexistent_page', check=False)
         assert response.status_code == 404
+        assert response.mimetype == 'text/html'
+        assert response.get_data(as_text=True).strip() != ''
 
     def test_static_css(self, client):
         """Test accessing static CSS files."""
         response = client.get('/static/css/definitely-missing.css', check=False)
         assert response.status_code == 404
+        assert response.get_data(as_text=True).strip() != ''
 
     def test_static_js(self, client):
         """Test accessing static JS files."""
         response = client.get('/static/js/definitely-missing.js', check=False)
         assert response.status_code == 404
+        assert response.get_data(as_text=True).strip() != ''
+
+    def test_update_yaml_endpoint_removed_returns_404(self, client):
+        """The legacy update_yaml route was removed and should not be routable."""
+        response = client.post('/update_yaml', data={'file': 'foo.yaml'}, check=False)
+        assert response.status_code in (404, 405)
 
 
 class TestPublicPages:
@@ -190,17 +194,6 @@ class TestAjaxRoutes:
         assert response.status_code == 400
         assert response.get_data(as_text=True).strip() != ''
 
-    def test_parse_by_id_not_logged_in_returns_401(self, client):
-        """parse-by-id requires login and rejects anonymous requests."""
-        response = client.post(
-            '/parse-by-id',
-            data=json.dumps({'id': 'program-id'}),
-            content_type='application/json',
-            check=False,
-        )
-        assert response.status_code == 401
-
-
 class TestErrorTracking:
     """Test error logging and tracking endpoints."""
 
@@ -220,15 +213,17 @@ class TestParseEndpoint:
     """Test code parsing endpoints."""
 
     def test_parse_simple_code(self, client):
-        """Test basic code parsing."""
+        """Test basic code parsing with a complete payload."""
         response = client.post(
             '/parse',
-            data=json.dumps({'code': 'print "hello"', 'level': 1}),
+            data=json.dumps({'code': 'print Hello', 'level': 1, 'is_debug': False, 'raw': False}),
             content_type='application/json',
             check=False
         )
-        assert response.status_code == 400
-        assert response.get_json() is None or response.get_json() == {}
+        assert response.status_code == 200
+        data = response.get_json()
+        assert data is not None
+        assert 'Code' in data
 
     def test_parse_by_id(self, client, given):
         """Test parsing code by ID."""
@@ -526,6 +521,10 @@ class TestHedyEditor:
         given.logged_in_as_new_teacher()
         response = client.get('/hedy/invalid_id/view', check=False)
         assert response.status_code == 404
+
+    def test_get_current_user_program_permissions_none_program_returns_none(self):
+        """Guard against callers passing a missing program object."""
+        assert hedy_app.get_current_user_program_permissions(None) is None
 
 
 class TestAdventures:

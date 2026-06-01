@@ -2,7 +2,6 @@
 import json
 from flask import Flask, template_rendered
 import pytest
-import pytest
 from flask.testing import FlaskClient
 
 from app import create_app

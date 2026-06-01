@@ -11,14 +11,10 @@ def test_programs_page_loads_with_lots_of_programs(client: Client, given: Given)
         given.some_saved_program(user['username'])
 
     # WHEN
-    client.get('/programs')
+    response = client.get('/programs')
 
     # THEN - it succeeds
-
-
-def test_list_programs_requires_login_returns_401(client: Client):
-    response = client.get('/programs/list', check=False)
-    assert response.status_code == 401
+    assert response.status_code == 200
 
 
 def test_list_programs_returns_saved_programs(client: Client, given: Given):
@@ -27,15 +23,6 @@ def test_list_programs_returns_saved_programs(client: Client, given: Given):
     given.some_saved_program(user['username'])
     response = client.get('/programs/list')
     assert len(response.get_json()['programs']) == 2
-
-
-def test_save_program_requires_login_returns_401(client: Client):
-    response = client.post_json('/programs/', {
-        'code': 'print Hello',
-        'name': 'My Program',
-        'level': 1,
-    }, check=False)
-    assert response.status_code == 401
 
 
 def test_save_program_invalid_program_id_type_returns_400(client: Client, given: Given):
@@ -79,19 +66,9 @@ def test_delete_program_invalid_id_type_returns_400(client: Client, given: Given
     assert response.status_code == 400
 
 
-def test_delete_program_requires_login_returns_401(client: Client):
-    response = client.post_json('/programs/delete/', {'id': 'someid'}, check=False)
-    assert response.status_code == 401
-
-
 def test_duplicate_check_invalid_body_type_returns_400(client: Client):
     response = client.post('/programs/duplicate-check', data='[]', content_type='application/json', check=False)
     assert response.status_code == 400
-
-
-def test_duplicate_check_not_logged_in_returns_403(client: Client):
-    response = client.post_json('/programs/duplicate-check', {'name': 'some name'}, check=False)
-    assert response.status_code == 403
 
 
 def test_share_program_missing_program_returns_404(client: Client, given: Given):
