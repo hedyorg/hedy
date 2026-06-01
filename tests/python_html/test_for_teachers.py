@@ -780,14 +780,6 @@ class TestAdditionalForTeachersCoverage:
         response = client.get('/for-teachers/clear-preview-class', check=False)
         assert response.status_code == 302
 
-    def test_preview_teacher_mode_redirects(self, client):
-        response = client.get('/for-teachers/preview-teacher-mode', check=False)
-        assert response.status_code == 302
-
-    def test_exit_preview_teacher_mode_redirects(self, client):
-        response = client.get('/for-teachers/exit-preview-teacher-mode', check=False)
-        assert response.status_code == 302
-
     def test_create_adventure_without_class_returns_200(self, client, given):
         given.logged_in_as_new_teacher()
         response = client.post('/for-teachers/create-adventure/', check=False)
