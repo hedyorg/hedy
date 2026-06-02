@@ -3001,6 +3001,7 @@ class ForTeachersModule(WebsiteModule):
                 adventures=[adventure],
                 initial_tab='',
                 current_user_name=user['username'],
+                form_id='customize_adventure'
             )
         )
 

@@ -78,6 +78,38 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
             setTimeout(showWarningIfMultipleLevels, 100)
         })
     })
+
+    updateAdventureLevelsFromSwitches('customize_adventure');
+    const levelSwitches = document.querySelectorAll('input[name="adventure_levels"]') as NodeListOf<HTMLInputElement>;
+    levelSwitches.forEach((el) => {
+        el.addEventListener('change', () => {
+            showWarningIfMultipleLevels();
+            const formElement = document.getElementById('customize_adventure') as HTMLFormElement | null;
+            if (formElement) {
+                update_adventure_redesign(formElement);
+            }
+        });
+    });
+}
+
+function updateAdventureLevelsFromSwitches(formId: string) {
+    const form = document.getElementById(formId) as HTMLFormElement | null;
+    if (!form) {
+        return;
+    }
+
+    const selected = Array.from(
+        document.querySelectorAll('input[name="adventure_levels"]:checked')
+    ).map((input) => (input as HTMLInputElement).value);
+
+    form.dataset['adventureLevels'] = JSON.stringify(selected);
+
+    const numberOfSnippets = document.querySelectorAll('pre[data-language="Hedy"]').length;
+    if (selected.length > 1 && numberOfSnippets > 0) {
+        $('#warningbox').show();
+    } else {
+        $('#warningbox').hide();
+    }
 }
 
 function parseJsonStringArray(rawValue: string | undefined): string[] {
@@ -100,6 +132,20 @@ function getAdventureNameFromPage(fallback: string): string {
     const title = document.querySelector('h1');
     const titleText = title?.firstChild?.textContent?.trim();
     return titleText || fallback;
+}
+
+function getSelectedAdventureLevels(formElement: HTMLFormElement): string[] {
+    const selectedSwitches = Array.from(document.querySelectorAll('input[name="adventure_levels"]:checked')) as HTMLInputElement[];
+    if (selectedSwitches.length > 0) {
+        return selectedSwitches.map((input) => input.value);
+    }
+
+    const levelsDropdown = document.querySelector('#levels_dropdown') as HedySelect | null;
+    if (levelsDropdown?.selected?.length) {
+        return levelsDropdown.selected.map((value) => String(value));
+    }
+
+    return parseJsonStringArray(formElement.dataset['adventureLevels']);
 }
 
 function getFormattedAdventureContent(content: string, levels: string[], language: string): string {
@@ -148,7 +194,7 @@ export function update_adventure_redesign(formElement: HTMLFormElement) {
         return;
     }
 
-    const levels = parseJsonStringArray(formElement.dataset['adventureLevels']);
+    const levels = getSelectedAdventureLevels(formElement);
     if (levels.length === 0) {
         return;
     }
@@ -189,8 +235,14 @@ export function update_adventure_redesign(formElement: HTMLFormElement) {
 }
 
 function showWarningIfMultipleLevels() {
-    const levelsDropdown = document.querySelector('#levels_dropdown') as HedySelect | null;
-    const numberOfLevels = levelsDropdown?.selected?.length || 0;
+    const levelSwitches = document.querySelectorAll('input[name="adventure_levels"]:checked');
+    let numberOfLevels = levelSwitches.length;
+
+    if (numberOfLevels === 0) {
+        const levelsDropdown = document.querySelector('#levels_dropdown') as HedySelect | null;
+        numberOfLevels = levelsDropdown?.selected?.length || 0;
+    }
+
     const numberOfSnippets = document.querySelectorAll('pre[data-language="Hedy"]').length
     if(numberOfLevels > 1 && numberOfSnippets > 0) {
         $('#warningbox').show()

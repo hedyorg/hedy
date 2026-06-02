@@ -241,6 +241,26 @@
     </div>
 
     <div class="tab_content usage hidden px-6 py-2">
+        <div class="mb-8 flex flex-col gap-3">
+            <span class="text-xl">{{_('available_in')}}</span>
+            <div class="flex flex-wrap gap-x-4 gap-y-3" id="adventure-level-switches">
+                {% for level in range(1, max_level + 1) %}
+                <label class="flex flex-col items-center gap-1 text-sm text-blue-900">
+                    <span class="font-semibold">{{ level }}</span>
+                    <span class="switch">
+                        <input type="checkbox"
+                            name="adventure_levels"
+                            value="{{ level }}"
+                            data-level="{{ level }}"
+                            {% if level|string in adventure.levels %}checked{% endif %}
+                            >
+                        <span class="slider round"></span>
+                    </span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
         {% set usedInClasses = adventure_classes|length %}
         {% if usedInClasses > 0 %}
             <div class="flex flex-col gap-4">
