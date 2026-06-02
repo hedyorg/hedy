@@ -21,7 +21,7 @@
       {% for adventure in my_adventures %}
       <tr data-cy="my_adventure_row_{{ adventure.id }}">
         <td class="teacher-table-td whitespace-nowrap {% if loop.last %}rounded-bl-lg{% endif %}">
-          <a class="view_class" href="/for-teachers/customize-adventure/{{ adventure.id }}">{{ adventure.name }}</a>
+          <a class="view_class" href="/for-teachers/redesign/customize-adventure/{{ adventure.id }}">{{ adventure.name }}</a>
         </td>
         <td class="teacher-table-td whitespace-nowrap">{{ adventure.level_display }}</td>
         <td class="teacher-table-td whitespace-nowrap">{{ adventure.date }}</td>
@@ -54,17 +54,10 @@
             </button>
             <div id="menu-{{loop.index}}" data-cy="manage_adventure_menu_{{ adventure.id }}" class="teacher-context-menu hidden menu origin-top-right absolute grid menu-content-closed grow-0 ease-in transition-opacity transition-transform duration-150">
               <ul class="list-none divide-y divide-gray-200 p-2">
-                <li class="teacher-context-menu-item rounded-t-lg">
-                  <a class="no-underline text-blue-900" href="/for-teachers/customize-adventure/{{ adventure.id }}">
-                    <i class="fa-solid fa-pen text-sm"></i>
-                    <span class="m-3">{{ _('customize_adventure') }}</span>
-                  </a>
-                </li>
-                <li data-cy="remove_adventure_{{ adventure.id }}" class="teacher-context-menu-item teacher-context-menu-item-danger"
-                    hx-delete="/for-teachers/adventures/my/{{ adventure.id }}"
-                    hx-confirm="{{ _('delete_adventure_prompt') }}"
-                    hx-target="#my-adventures-table-wrapper"
-                    hx-swap="outerHTML">
+                <li data-cy="remove_adventure_{{ adventure.id }}" class="teacher-context-menu-item teacher-context-menu-item-danger gap-4"
+                    hx-get="/for-teachers/adventures/{{ adventure.id }}/remove-modal"
+                    hx-target="#modal_target"
+                    hx-swap="innerHTML">
                   <i class="fa-solid fa-trash text-sm"></i>
                   <span class="m-3">{{ _('remove') }}</span>
                 </li>

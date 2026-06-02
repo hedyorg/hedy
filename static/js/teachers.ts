@@ -178,6 +178,29 @@ export function rename_class(id: string, class_name_prompt: string, prompt_title
     }, prompt_title);
 }
 
+export function rename_adventure(
+  adventureId: string,
+  adventureNamePrompt: string,
+  promptTitle: string = '',
+  defaultValue: string = '',
+) {
+  promptByPageVariant(adventureNamePrompt, defaultValue, function (adventureName) {
+    $.ajax({
+      type: 'PUT',
+      url: '/for-teachers/customize-adventure/' + adventureId + '/name',
+      data: JSON.stringify({
+        name: adventureName,
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+      location.reload();
+    }).fail(function (err) {
+      return modal.notifyError(err.responseText);
+    });
+  }, promptTitle);
+}
+
 export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
   if (teacher_classes && !defaultValue){
     modal.confirm(second_teacher_prompt, function () {
@@ -476,6 +499,23 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
    } else {
        update_db_adventure(adventure_id);
    }
+}
+
+export function update_adventure_language(adventure_id: string) {
+  const language = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
+
+  $.ajax({
+    type: 'PUT',
+    url: '/for-teachers/customize-adventure/' + adventure_id + '/language',
+    data: JSON.stringify({
+      language,
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function () {
+  }).fail(function (err) {
+    modal.notifyError(err.responseText, 0);
+  });
 }
 
 function show_preview(content: string) {
@@ -1491,7 +1531,7 @@ export function add_user_to_invite_list(username: string, button: HTMLButtonElem
 }
 
 export interface InitializeContextMenuPageOptions {
-  readonly page: 'classes' | 'manage-students';
+  readonly page: 'classes' | 'manage-students' | 'my-adventures';
 }
 
 let contextMenuClickListenerInitialized = false;

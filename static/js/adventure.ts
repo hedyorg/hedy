@@ -18,13 +18,41 @@ export interface InitializeCustomizeAdventurePage {
 let $editor: ClassicEditor;
 let keywordHasAlert: Map<string, boolean> = new Map()
 
-export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
-    const editorContainer = document.querySelector('#adventure-editor') as HTMLElement;
-    const editorSolutionExampleContainer = document.querySelector('#adventure-solution-editor') as HTMLElement;
-    // Initialize the editor with the default language
-    let lang = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
+function addEditorExplanationButton(editor: ClassicEditor, explanationId: string) {
+    const toolbarItems = editor.ui.view.toolbar.element?.querySelector('.ck-toolbar__items') as HTMLElement | null;
+    if (!toolbarItems) {
+        return;
+    }
 
-    if (editorContainer) {
+    if (toolbarItems.querySelector('.hedy-editor-explanation-toggle')) {
+        return;
+    }
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'ck ck-button ck-off hedy-editor-explanation-toggle';
+    button.setAttribute('aria-label', 'Toggle editor explanation');
+    button.title = 'Editor explanation';
+    button.innerHTML = '<svg class="ck ck-icon" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"></path></svg>';
+    button.addEventListener('click', () => {
+        const explanation = document.getElementById(explanationId);
+        if (!explanation) {
+            return;
+        }
+        explanation.classList.toggle('hidden');
+    });
+
+    toolbarItems.appendChild(button);
+}
+
+export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
+    const editorContainer = document.querySelector('#adventure-editor') as HTMLElement | null;
+    const editorSolutionExampleContainer = document.querySelector('#adventure-solution-editor') as HTMLElement | null;
+    const languagesDropdown = document.querySelector('#languages_dropdown') as HedySelect | null;
+    // Initialize the editor with the default language
+    let lang = languagesDropdown?.selected?.[0] || 'en';
+
+    if (editorContainer && editorSolutionExampleContainer) {
         await initializeEditor(lang, editorContainer);
         await initializeEditor(lang, editorSolutionExampleContainer, true);
         showWarningIfMultipleKeywords(traductionMap(lang))
@@ -34,21 +62,135 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     }
 
     $('#language').on('change', () => {
-        lang = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
+        const selectedLanguage = (document.querySelector('#languages_dropdown') as HedySelect | null)?.selected?.[0];
+        if (selectedLanguage) {
+            lang = selectedLanguage;
+        }
     })
 
     // Autosave customize adventure page
     autoSave("customize_adventure")
 
     showWarningIfMultipleLevels()
-    document.querySelectorAll('#levels_dropdown div div .option').forEach((el) => {
+    const levelOptions = document.querySelectorAll('#levels_dropdown div div .option');
+    levelOptions.forEach((el) => {
         el.addEventListener('click', () => {
             setTimeout(showWarningIfMultipleLevels, 100)
         })
     })
 }
+
+function parseJsonStringArray(rawValue: string | undefined): string[] {
+    if (!rawValue) {
+        return [];
+    }
+
+    try {
+        const parsed = JSON.parse(rawValue);
+        if (!Array.isArray(parsed)) {
+            return [];
+        }
+        return parsed.map((value) => String(value));
+    } catch {
+        return [];
+    }
+}
+
+function getAdventureNameFromPage(fallback: string): string {
+    const title = document.querySelector('h1');
+    const titleText = title?.firstChild?.textContent?.trim();
+    return titleText || fallback;
+}
+
+function getFormattedAdventureContent(content: string, levels: string[], language: string): string {
+    if (!content) {
+        return '';
+    }
+
+    const html = new DOMParser().parseFromString(content, 'text/html');
+    const snippets = html.querySelectorAll('pre[data-language="Hedy"]') || [];
+    const snippetsFormatted = [];
+    const keywordsFormatted = [];
+    const minLevel = levels.map((value) => parseInt(value, 10)).reduce((a, b) => Math.min(a, b), Infinity);
+
+    for (const el of snippets) {
+        snippetsFormatted.push(el.textContent || '');
+    }
+
+    for (const el of html.querySelectorAll('code:not(pre code)')) {
+        keywordsFormatted.push(el.textContent || '');
+    }
+
+    for (let i = 0; i < snippets.length; i++) {
+        snippetsFormatted[i] = addCurlyBracesToCode(snippetsFormatted[i], minLevel, language || 'en');
+    }
+
+    for (let i = 0; i < keywordsFormatted.length; i++) {
+        keywordsFormatted[i] = addCurlyBracesToKeyword(keywordsFormatted[i]);
+    }
+
+    let i = 0;
+    let j = 0;
+    for (const tag of html.getElementsByTagName('code')) {
+        if (tag.className === 'language-python') {
+            tag.innerText = snippetsFormatted[i++] || '';
+        } else {
+            tag.innerText = keywordsFormatted[j++] || '';
+        }
+    }
+
+    return html.getElementsByTagName('body')[0].outerHTML.replace(/<br>/g, '\n');
+}
+
+export function update_adventure_redesign(formElement: HTMLFormElement) {
+    const adventureId = formElement.dataset['adventureId'];
+    if (!adventureId) {
+        return;
+    }
+
+    const levels = parseJsonStringArray(formElement.dataset['adventureLevels']);
+    if (levels.length === 0) {
+        return;
+    }
+
+    const classes = parseJsonStringArray(formElement.dataset['adventureClasses']);
+    const language = (document.querySelector('#languages_dropdown') as HedySelect | null)?.selected?.[0]
+        || formElement.dataset['adventureLanguage']
+        || 'en';
+    const fallbackName = formElement.dataset['adventureName'] || '';
+    const adventureName = getAdventureNameFromPage(fallbackName);
+    const isPublic = formElement.dataset['adventurePublic'] === '1' || formElement.dataset['adventurePublic'] === 'true';
+
+    const content = DOMPurify.sanitize(window.ckEditor?.getData() || '');
+    const solutionExample = DOMPurify.sanitize(window.ckSolutionEditor?.getData() || '');
+
+    const formattedContent = getFormattedAdventureContent(content, levels, language);
+    const formattedSolution = getFormattedAdventureContent(solutionExample, levels, language);
+
+    $.ajax({
+        type: 'POST',
+        url: '/for-teachers/customize-adventure',
+        data: JSON.stringify({
+            id: adventureId,
+            name: adventureName,
+            content: content,
+            formatted_content: formattedContent,
+            formatted_solution_code: formattedSolution,
+            public: isPublic,
+            language,
+            classes,
+            levels,
+        }),
+        contentType: 'application/json',
+        dataType: 'json'
+    }).fail(function (err) {
+        console.error('Could not autosave redesign adventure', err);
+    });
+}
+
 function showWarningIfMultipleLevels() {
-    const numberOfLevels = (document.querySelector('#levels_dropdown') as HedySelect).selected.length;
+    const levelsDropdown = document.querySelector('#levels_dropdown') as HedySelect | null;
+    const numberOfLevels = levelsDropdown?.selected?.length || 0;
     const numberOfSnippets = document.querySelectorAll('pre[data-language="Hedy"]').length
     if(numberOfLevels > 1 && numberOfSnippets > 0) {
         $('#warningbox').show()
@@ -119,9 +261,11 @@ function initializeEditor(language: string, editorContainer: HTMLElement, soluti
             .then(editor => {
                 if (solutionExample) {
                     window.ckSolutionEditor = editor;
+                    addEditorExplanationButton(editor, 'explanation_solution');
                 } else {
                     window.ckEditor = editor;
                     $editor = editor;
+                    addEditorExplanationButton(editor, 'explanation');
                 }
                 editor.model.document.on("change:data", e => autoSave("customize_adventure", e))
                 resolve();

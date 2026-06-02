@@ -9,8 +9,10 @@
     ], 'mt-2 mb-4') }}
 
   <h1 class="my-5">{{ _('my_adventures') }}</h1>
+  
+  {{ render_partial('for-teachers/my-adventures-table.html', my_adventures=my_adventures) }}
 
-  <div class="mb-4 flex justify-start">
+  <div class="my-4 flex justify-start">
     <a class="blue-btn-new inline-flex items-center"
        id="create_new_adventure_button"
        data-cy="create_new_adventure_button"
@@ -19,6 +21,5 @@
     </a>
   </div>
 
-  {{ render_partial('for-teachers/my-adventures-table.html', my_adventures=my_adventures) }}
 </div>
 {% endblock %}
