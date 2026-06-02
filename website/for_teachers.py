@@ -238,8 +238,7 @@ class ForTeachersModule(WebsiteModule):
 
         tags = self.db.read_tags(adventure.get("tags", []))
         for tag in tags:
-            tagged_in = [tagged_adventure for tagged_adventure in tag["tagged_in"]
-                         if tagged_adventure["id"] != adventure_id]
+            tagged_in = [tagged_adventure for tagged_adventure in tag["tagged_in"] if tagged_adventure["id"] != adventure_id]
             if len(tag["tagged_in"]) != len(tagged_in):
                 self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
 
