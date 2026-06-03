@@ -3,8 +3,9 @@ import { CustomWindow } from './custom-window';
 import { PARSER_FACTORIES, keywords } from "./lezer-parsers/language-packages";
 import { SyntaxNode } from "@lezer/common";
 import DOMPurify from "dompurify";
+import { stopit, theGlobalEditor } from "./app";
 import { ClientMessages } from "./client-messages";
-import { autoSave } from "./autosave";
+import { HedyCodeMirrorEditorCreator } from "./cm-editor";
 import { HedySelect } from "./custom-elements";
 import { traductionMap } from "./lezer-parsers/tokens";
 
@@ -17,6 +18,201 @@ export interface InitializeCustomizeAdventurePage {
 
 let $editor: ClassicEditor;
 let keywordHasAlert: Map<string, boolean> = new Map()
+let draftPersistenceInterval: ReturnType<typeof setInterval> | undefined;
+let lastPersistedDraftSerialized = '';
+const previewEditorCreator = new HedyCodeMirrorEditorCreator();
+
+const ADVENTURE_DRAFT_STORAGE_PREFIX = 'hedy.customize_adventure_draft.';
+const ADVENTURE_DRAFT_CHECK_INTERVAL_MS = 1000;
+
+interface AdventureDraft {
+    readonly content: string;
+    readonly solutionExample: string;
+    readonly updatedAt: number;
+}
+
+function getCustomizeAdventureFormElement(): HTMLFormElement | null {
+    return document.getElementById('customize_adventure') as HTMLFormElement | null;
+}
+
+function getAdventureDraftStorageKey(formElement: HTMLFormElement): string | null {
+    const adventureId = formElement.dataset['adventureId'];
+    if (!adventureId) {
+        return null;
+    }
+    return `${ADVENTURE_DRAFT_STORAGE_PREFIX}${adventureId}`;
+}
+
+function parseAdventureDraft(rawValue: string | null): AdventureDraft | null {
+    if (!rawValue) {
+        return null;
+    }
+
+    try {
+        const parsed = JSON.parse(rawValue) as Partial<AdventureDraft>;
+        if (typeof parsed.content !== 'string' || typeof parsed.solutionExample !== 'string') {
+            return null;
+        }
+
+        return {
+            content: parsed.content,
+            solutionExample: parsed.solutionExample,
+            updatedAt: typeof parsed.updatedAt === 'number' ? parsed.updatedAt : Date.now(),
+        };
+    } catch {
+        return null;
+    }
+}
+
+function readAdventureDraft(storageKey: string): AdventureDraft | null {
+    return parseAdventureDraft(localStorage.getItem(storageKey));
+}
+
+function buildCurrentAdventureDraft(): AdventureDraft {
+    return {
+        content: DOMPurify.sanitize(window.ckEditor?.getData() || ''),
+        solutionExample: DOMPurify.sanitize(window.ckSolutionEditor?.getData() || ''),
+        updatedAt: Date.now(),
+    };
+}
+
+function persistAdventureDraftIfChanged(force = false) {
+    const formElement = getCustomizeAdventureFormElement();
+    if (!formElement) {
+        return;
+    }
+
+    const storageKey = getAdventureDraftStorageKey(formElement);
+    if (!storageKey) {
+        return;
+    }
+
+    const draft = buildCurrentAdventureDraft();
+    const serialized = JSON.stringify(draft);
+
+    if (!force && serialized === lastPersistedDraftSerialized) {
+        return;
+    }
+
+    localStorage.setItem(storageKey, serialized);
+    lastPersistedDraftSerialized = serialized;
+}
+
+function loadAdventureDraftIntoEditors() {
+    const formElement = getCustomizeAdventureFormElement();
+    if (!formElement) {
+        return;
+    }
+
+    const storageKey = getAdventureDraftStorageKey(formElement);
+    if (!storageKey) {
+        return;
+    }
+
+    const draft = readAdventureDraft(storageKey);
+    if (!draft) {
+        lastPersistedDraftSerialized = JSON.stringify(buildCurrentAdventureDraft());
+        return;
+    }
+
+    window.ckEditor?.setData(draft.content);
+    window.ckSolutionEditor?.setData(draft.solutionExample);
+
+    lastPersistedDraftSerialized = JSON.stringify({
+        content: draft.content,
+        solutionExample: draft.solutionExample,
+        updatedAt: draft.updatedAt,
+    });
+}
+
+function initializePreviewCodeBlocks(previewContainer: HTMLElement) {
+    const level = parseInt(
+        previewContainer.closest('[data-level]')?.getAttribute('data-level') || '1',
+        10,
+    );
+    const keywordLanguage =
+        previewContainer.closest('[data-kwlang]')?.getAttribute('data-kwlang')
+        || (document.querySelector('#languages_dropdown') as HedySelect | null)?.selected?.[0]
+        || 'en';
+    const dir = $('body').attr('dir') || 'ltr';
+
+    for (const preview of Array.from(previewContainer.querySelectorAll('pre'))) {
+        preview.classList.add('relative', 'text-lg', 'rounded', 'overflow-x-hidden');
+        preview.setAttribute('data-lang', keywordLanguage);
+        const codeNode = preview.querySelector('code');
+        let code = '';
+
+        if (codeNode) {
+            codeNode.hidden = true;
+            code = codeNode.innerText;
+        } else {
+            code = preview.textContent || '';
+            preview.textContent = '';
+        }
+
+        const exampleEditor = previewEditorCreator.initializeReadOnlyEditor(preview as HTMLElement, dir);
+        exampleEditor.contents = code.trimEnd();
+
+        if (preview.classList.contains('show-copy-button') || preview.closest('.show-copy-button')) {
+            const buttonContainer = $('<div>').addClass('absolute ltr:right-0 rtl:left-0 top-0 mx-1 mt-1').appendTo(preview);
+            const symbol = dir === 'rtl' ? '⇤' : '⇥';
+            $('<button>')
+                .css({ fontFamily: 'sans-serif' })
+                .addClass('yellow-btn')
+                .attr('data-cy', 'paste_example_code_preview')
+                .text(symbol)
+                .appendTo(buttonContainer)
+                .on('click', () => {
+                    if (!theGlobalEditor?.isReadOnly) {
+                        theGlobalEditor.contents = `${exampleEditor.contents}\n`;
+                    }
+                    stopit();
+                });
+        }
+
+        if (!Number.isNaN(level) && level > 0) {
+            exampleEditor.setHighlighterForLevel(level, keywordLanguage);
+        }
+    }
+}
+
+function updatePreviewFromAdventureDraft() {
+    const previewContainer = document.getElementById('adventure-preview-content');
+    if (!previewContainer) {
+        return;
+    }
+
+    const formElement = getCustomizeAdventureFormElement();
+    if (!formElement) {
+        return;
+    }
+
+    const storageKey = getAdventureDraftStorageKey(formElement);
+    if (!storageKey) {
+        return;
+    }
+
+    const storedDraft = readAdventureDraft(storageKey);
+    previewContainer.innerHTML = storedDraft
+        ? storedDraft.content
+        : DOMPurify.sanitize(window.ckEditor?.getData() || '');
+    initializePreviewCodeBlocks(previewContainer);
+}
+
+function initializeAdventureDraftPersistence() {
+    if (draftPersistenceInterval) {
+        clearInterval(draftPersistenceInterval);
+    }
+
+    persistAdventureDraftIfChanged(true);
+    draftPersistenceInterval = setInterval(() => {
+        persistAdventureDraftIfChanged();
+    }, ADVENTURE_DRAFT_CHECK_INTERVAL_MS);
+
+    window.addEventListener('beforeunload', () => {
+        persistAdventureDraftIfChanged(true);
+    }, { capture: true });
+}
 
 function addEditorExplanationButton(editor: ClassicEditor, explanationId: string) {
     const toolbarItems = editor.ui.view.toolbar.element?.querySelector('.ck-toolbar__items') as HTMLElement | null;
@@ -55,6 +251,8 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     if (editorContainer && editorSolutionExampleContainer) {
         await initializeEditor(lang, editorContainer);
         await initializeEditor(lang, editorSolutionExampleContainer, true);
+        loadAdventureDraftIntoEditors();
+        initializeAdventureDraftPersistence();
         showWarningIfMultipleKeywords(traductionMap(lang))
         $editor.model.document.on('change:data', () => {
             showWarningIfMultipleKeywords(traductionMap(lang))
@@ -67,9 +265,6 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
             lang = selectedLanguage;
         }
     })
-
-    // Autosave customize adventure page
-    autoSave("customize_adventure")
 
     showWarningIfMultipleLevels()
     const levelOptions = document.querySelectorAll('#levels_dropdown div div .option');
@@ -84,22 +279,22 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     levelSwitches.forEach((el) => {
         el.addEventListener('change', () => {
             showWarningIfMultipleLevels();
-            const formElement = document.getElementById('customize_adventure') as HTMLFormElement | null;
-            if (formElement) {
-                update_adventure_redesign(formElement);
-            }
+            persistAdventureDraftIfChanged(true);
         });
     });
 
     const publicSwitch = document.querySelector('input[name="adventure_public"]') as HTMLInputElement | null;
     if (publicSwitch) {
         publicSwitch.addEventListener('change', () => {
-            const formElement = document.getElementById('customize_adventure') as HTMLFormElement | null;
-            if (formElement) {
-                update_adventure_redesign(formElement);
-            }
+            persistAdventureDraftIfChanged(true);
         });
     }
+
+    const previewTab = document.getElementById('preview-tab');
+    previewTab?.addEventListener('click', () => {
+        persistAdventureDraftIfChanged(true);
+        updatePreviewFromAdventureDraft();
+    });
 }
 
 function updateAdventureLevelsFromSwitches(formId: string) {
@@ -318,6 +513,39 @@ function findCoincidences(name: string, TRADUCTION: Map<string, string>) {
     return coincidences;
 }
 
+function enableArrowDownToExitCodeBlock(editor: ClassicEditor) {
+    editor.editing.view.document.on('keydown', (_eventInfo: unknown, data: any) => {
+        if (data?.keyCode !== 40) {
+            return;
+        }
+
+        const selection = editor.model.document.selection;
+        const position = selection.getFirstPosition();
+        if (!position) {
+            return;
+        }
+
+        const parent = position.parent;
+        if (!parent.is('element', 'codeBlock')) {
+            return;
+        }
+
+        const isAtEndOfCodeBlock = position.offset === parent.maxOffset;
+        if (!isAtEndOfCodeBlock) {
+            return;
+        }
+
+        editor.model.change((writer) => {
+            const paragraph = writer.createElement('paragraph');
+            writer.insert(paragraph, writer.createPositionAfter(parent));
+            writer.setSelection(paragraph, 0);
+        });
+
+        data.preventDefault();
+        data.stopPropagation();
+    });
+}
+
 function initializeEditor(language: string, editorContainer: HTMLElement, solutionExample=false): Promise<void> {
     return new Promise((resolve, reject) => {
         ClassicEditor
@@ -330,6 +558,7 @@ function initializeEditor(language: string, editorContainer: HTMLElement, soluti
                 language,
             })
             .then(editor => {
+                enableArrowDownToExitCodeBlock(editor);
                 if (solutionExample) {
                     window.ckSolutionEditor = editor;
                     addEditorExplanationButton(editor, 'explanation_solution');
@@ -338,7 +567,6 @@ function initializeEditor(language: string, editorContainer: HTMLElement, soluti
                     $editor = editor;
                     addEditorExplanationButton(editor, 'explanation');
                 }
-                editor.model.document.on("change:data", e => autoSave("customize_adventure", e))
                 resolve();
             })
             .catch(error => {

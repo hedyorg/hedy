@@ -315,7 +315,7 @@
     
     <div class="tab_content preview hidden">
               <div class="lg:flex lg:flex-row turn-pre-into-ace show-copy-button teacher-adv">
-                    <div class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
+                    <div id="adventure-preview-content" class="w-full {% if adventure.example_code or adventure.is_teacher_adventure %}lg:w-1/2 {% endif %} p-2 ltr:mr-2 rtl:ml-2">
                         {{ content|safe }}
                     </div>
                   {% if adventure.example_code %}
