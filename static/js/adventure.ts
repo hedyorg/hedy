@@ -90,6 +90,16 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
             }
         });
     });
+
+    const publicSwitch = document.querySelector('input[name="adventure_public"]') as HTMLInputElement | null;
+    if (publicSwitch) {
+        publicSwitch.addEventListener('change', () => {
+            const formElement = document.getElementById('customize_adventure') as HTMLFormElement | null;
+            if (formElement) {
+                update_adventure_redesign(formElement);
+            }
+        });
+    }
 }
 
 function updateAdventureLevelsFromSwitches(formId: string) {
@@ -146,6 +156,15 @@ function getSelectedAdventureLevels(formElement: HTMLFormElement): string[] {
     }
 
     return parseJsonStringArray(formElement.dataset['adventureLevels']);
+}
+
+function getAdventurePublicValue(formElement: HTMLFormElement): boolean {
+    const publicSwitch = document.querySelector('input[name="adventure_public"]') as HTMLInputElement | null;
+    if (publicSwitch) {
+        return publicSwitch.checked;
+    }
+
+    return formElement.dataset['adventurePublic'] === '1' || formElement.dataset['adventurePublic'] === 'true';
 }
 
 function getFormattedAdventureContent(content: string, levels: string[], language: string): string {
@@ -205,7 +224,7 @@ export function update_adventure_redesign(formElement: HTMLFormElement) {
         || 'en';
     const fallbackName = formElement.dataset['adventureName'] || '';
     const adventureName = getAdventureNameFromPage(fallbackName);
-    const isPublic = formElement.dataset['adventurePublic'] === '1' || formElement.dataset['adventurePublic'] === 'true';
+    const isPublic = getAdventurePublicValue(formElement);
 
     const content = DOMPurify.sanitize(window.ckEditor?.getData() || '');
     const solutionExample = DOMPurify.sanitize(window.ckSolutionEditor?.getData() || '');
