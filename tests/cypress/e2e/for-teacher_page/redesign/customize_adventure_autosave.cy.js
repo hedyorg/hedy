@@ -1,7 +1,45 @@
 import { loginForTeacher } from '../../tools/login/login';
 
+function waitForUploadContaining(alias, marker, getValue, remainingAttempts = 6) {
+  cy.wait(alias, { timeout: 20000 }).then(({ request, response }) => {
+    expect(response?.statusCode).to.eq(200);
+
+    const value = getValue(request.body);
+    if (typeof value === 'string' && value.includes(marker)) {
+      return;
+    }
+
+    if (remainingAttempts <= 1) {
+      throw new Error(`Expected uploaded payload to contain marker ${marker}`);
+    }
+
+    waitForUploadContaining(alias, marker, getValue, remainingAttempts - 1);
+  });
+}
+
+function waitForUploadWithEmptyContent(alias, remainingAttempts = 6) {
+  cy.wait(alias, { timeout: 20000 }).then(({ request, response }) => {
+    expect(response?.statusCode).to.eq(200);
+
+    const plain = request.body.content
+      .replace(/<[^>]+>/g, '')
+      .replace(/&nbsp;/g, '')
+      .trim();
+
+    if (plain === '') {
+      return;
+    }
+
+    if (remainingAttempts <= 1) {
+      throw new Error('Expected uploaded payload to contain empty content');
+    }
+
+    waitForUploadWithEmptyContent(alias, remainingAttempts - 1);
+  });
+}
+
 describe('Customize adventure redesign autosave', () => {
-  it('autosaves editor content when CKEditor changes', () => {
+  it('uploads latest local draft content and solution to backend', () => {
     loginForTeacher('teacher1');
     cy.visit('/for-teachers/adventures/manage');
 
@@ -12,22 +50,21 @@ describe('Customize adventure redesign autosave', () => {
 
     cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
 
-    const marker = `autosave-redesign-${Date.now()}`;
+    const contentMarker = `autosave-redesign-content-${Date.now()}`;
+    const solutionMarker = `autosave-redesign-solution-${Date.now()}`;
 
-    cy.wait(1200);
-    cy.intercept('POST', '/for-teachers/customize-adventure').as('autosaveAdventure');
+    cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
 
     cy.window().then((win) => {
-      win.ckEditor.setData(`<p>${marker}</p><p>This content is long enough for autosave validation.</p>`);
+      win.ckEditor.setData(`<p>${contentMarker}</p><p>This content is long enough for autosave validation.</p>`);
+      win.ckSolutionEditor.setData(`<p>${solutionMarker}</p><pre data-language="Hedy"><code class="language-python">print hello</code></pre>`);
     });
 
-    cy.wait('@autosaveAdventure', { timeout: 15000 }).then(({ request, response }) => {
-      expect(response?.statusCode).to.eq(200);
-      expect(request.body.content).to.contain(marker);
-    });
+    waitForUploadContaining('@uploadAdventureDraft', contentMarker, (body) => body.content);
+    waitForUploadContaining('@uploadAdventureDraft', solutionMarker, (body) => body.formatted_solution_code);
   });
 
-  it('autosaves successfully when editor content is emptied', () => {
+  it('uploads successfully when editor content is emptied', () => {
     loginForTeacher('teacher1');
     cy.visit('/for-teachers/adventures/manage');
 
@@ -38,20 +75,12 @@ describe('Customize adventure redesign autosave', () => {
 
     cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
 
-    cy.wait(1200);
-    cy.intercept('POST', '/for-teachers/customize-adventure').as('autosaveAdventure');
+    cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
 
     cy.window().then((win) => {
       win.ckEditor.setData('');
     });
 
-    cy.wait('@autosaveAdventure', { timeout: 15000 }).then(({ request, response }) => {
-      expect(response?.statusCode).to.eq(200);
-      const plain = request.body.content
-        .replace(/<[^>]+>/g, '')
-        .replace(/&nbsp;/g, '')
-        .trim();
-      expect(plain).to.eq('');
-    });
+    waitForUploadWithEmptyContent('@uploadAdventureDraft');
   });
 });

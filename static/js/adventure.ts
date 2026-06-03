@@ -19,11 +19,15 @@ export interface InitializeCustomizeAdventurePage {
 let $editor: ClassicEditor;
 let keywordHasAlert: Map<string, boolean> = new Map()
 let draftPersistenceInterval: ReturnType<typeof setInterval> | undefined;
-let lastPersistedDraftSerialized = '';
+let draftUploadInterval: ReturnType<typeof setInterval> | undefined;
+let lastPersistedDraftFingerprint = '';
+let lastUploadedDraftFingerprint = '';
+let isUploadingAdventureDraft = false;
 const previewEditorCreator = new HedyCodeMirrorEditorCreator();
 
 const ADVENTURE_DRAFT_STORAGE_PREFIX = 'hedy.customize_adventure_draft.';
 const ADVENTURE_DRAFT_CHECK_INTERVAL_MS = 1000;
+const ADVENTURE_UPLOAD_CHECK_INTERVAL_MS = 5000;
 
 interface AdventureDraft {
     readonly content: string;
@@ -76,6 +80,13 @@ function buildCurrentAdventureDraft(): AdventureDraft {
     };
 }
 
+function getAdventureDraftFingerprint(draft: Pick<AdventureDraft, 'content' | 'solutionExample'>): string {
+    return JSON.stringify({
+        content: draft.content,
+        solutionExample: draft.solutionExample,
+    });
+}
+
 function persistAdventureDraftIfChanged(force = false) {
     const formElement = getCustomizeAdventureFormElement();
     if (!formElement) {
@@ -87,15 +98,21 @@ function persistAdventureDraftIfChanged(force = false) {
         return;
     }
 
-    const draft = buildCurrentAdventureDraft();
-    const serialized = JSON.stringify(draft);
+    const currentDraft = buildCurrentAdventureDraft();
+    const fingerprint = getAdventureDraftFingerprint(currentDraft);
 
-    if (!force && serialized === lastPersistedDraftSerialized) {
+    if (!force && fingerprint === lastPersistedDraftFingerprint) {
         return;
     }
 
-    localStorage.setItem(storageKey, serialized);
-    lastPersistedDraftSerialized = serialized;
+    const draftToPersist: AdventureDraft = {
+        content: currentDraft.content,
+        solutionExample: currentDraft.solutionExample,
+        updatedAt: Date.now(),
+    };
+
+    localStorage.setItem(storageKey, JSON.stringify(draftToPersist));
+    lastPersistedDraftFingerprint = fingerprint;
 }
 
 function loadAdventureDraftIntoEditors() {
@@ -111,18 +128,52 @@ function loadAdventureDraftIntoEditors() {
 
     const draft = readAdventureDraft(storageKey);
     if (!draft) {
-        lastPersistedDraftSerialized = JSON.stringify(buildCurrentAdventureDraft());
+        lastPersistedDraftFingerprint = getAdventureDraftFingerprint(buildCurrentAdventureDraft());
         return;
     }
 
     window.ckEditor?.setData(draft.content);
     window.ckSolutionEditor?.setData(draft.solutionExample);
 
-    lastPersistedDraftSerialized = JSON.stringify({
-        content: draft.content,
-        solutionExample: draft.solutionExample,
-        updatedAt: draft.updatedAt,
-    });
+    lastPersistedDraftFingerprint = getAdventureDraftFingerprint(draft);
+}
+
+function uploadAdventureDraftIfChanged(force = false) {
+    if (isUploadingAdventureDraft) {
+        return;
+    }
+
+    const formElement = getCustomizeAdventureFormElement();
+    if (!formElement) {
+        return;
+    }
+
+    persistAdventureDraftIfChanged(force);
+
+    const storageKey = getAdventureDraftStorageKey(formElement);
+    if (!storageKey) {
+        return;
+    }
+
+    const draft = readAdventureDraft(storageKey) || buildCurrentAdventureDraft();
+    const fingerprint = getAdventureDraftFingerprint(draft);
+    if (!force && fingerprint === lastUploadedDraftFingerprint) {
+        return;
+    }
+
+    const uploadRequest = update_adventure_redesign(formElement, draft);
+    if (!uploadRequest) {
+        return;
+    }
+
+    isUploadingAdventureDraft = true;
+    uploadRequest
+        .done(() => {
+            lastUploadedDraftFingerprint = fingerprint;
+        })
+        .always(() => {
+            isUploadingAdventureDraft = false;
+        });
 }
 
 function initializePreviewCodeBlocks(previewContainer: HTMLElement) {
@@ -205,12 +256,21 @@ function initializeAdventureDraftPersistence() {
     }
 
     persistAdventureDraftIfChanged(true);
+
     draftPersistenceInterval = setInterval(() => {
         persistAdventureDraftIfChanged();
     }, ADVENTURE_DRAFT_CHECK_INTERVAL_MS);
 
+    if (draftUploadInterval) {
+        clearInterval(draftUploadInterval);
+    }
+    draftUploadInterval = setInterval(() => {
+        uploadAdventureDraftIfChanged();
+    }, ADVENTURE_UPLOAD_CHECK_INTERVAL_MS);
+
     window.addEventListener('beforeunload', () => {
         persistAdventureDraftIfChanged(true);
+        uploadAdventureDraftIfChanged(true);
     }, { capture: true });
 }
 
@@ -280,6 +340,7 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
         el.addEventListener('change', () => {
             showWarningIfMultipleLevels();
             persistAdventureDraftIfChanged(true);
+            uploadAdventureDraftIfChanged(true);
         });
     });
 
@@ -287,12 +348,14 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     if (publicSwitch) {
         publicSwitch.addEventListener('change', () => {
             persistAdventureDraftIfChanged(true);
+            uploadAdventureDraftIfChanged(true);
         });
     }
 
     const previewTab = document.getElementById('preview-tab');
     previewTab?.addEventListener('click', () => {
         persistAdventureDraftIfChanged(true);
+        uploadAdventureDraftIfChanged(true);
         updatePreviewFromAdventureDraft();
     });
 }
@@ -402,7 +465,7 @@ function getFormattedAdventureContent(content: string, levels: string[], languag
     return html.getElementsByTagName('body')[0].outerHTML.replace(/<br>/g, '\n');
 }
 
-export function update_adventure_redesign(formElement: HTMLFormElement) {
+export function update_adventure_redesign(formElement: HTMLFormElement, draftOverride?: Pick<AdventureDraft, 'content' | 'solutionExample'>) {
     const adventureId = formElement.dataset['adventureId'];
     if (!adventureId) {
         return;
@@ -421,13 +484,13 @@ export function update_adventure_redesign(formElement: HTMLFormElement) {
     const adventureName = getAdventureNameFromPage(fallbackName);
     const isPublic = getAdventurePublicValue(formElement);
 
-    const content = DOMPurify.sanitize(window.ckEditor?.getData() || '');
-    const solutionExample = DOMPurify.sanitize(window.ckSolutionEditor?.getData() || '');
+    const content = draftOverride?.content ?? DOMPurify.sanitize(window.ckEditor?.getData() || '');
+    const solutionExample = draftOverride?.solutionExample ?? DOMPurify.sanitize(window.ckSolutionEditor?.getData() || '');
 
     const formattedContent = getFormattedAdventureContent(content, levels, language);
     const formattedSolution = getFormattedAdventureContent(solutionExample, levels, language);
 
-    $.ajax({
+    return $.ajax({
         type: 'POST',
         url: '/for-teachers/customize-adventure',
         data: JSON.stringify({
@@ -536,6 +599,12 @@ function enableArrowDownToExitCodeBlock(editor: ClassicEditor) {
         }
 
         editor.model.change((writer) => {
+            const nextNode = parent.nextSibling;
+            if (nextNode && nextNode.is('element')) {
+                writer.setSelection(nextNode, 0);
+                return;
+            }
+
             const paragraph = writer.createElement('paragraph');
             writer.insert(paragraph, writer.createPositionAfter(parent));
             writer.setSelection(paragraph, 0);
