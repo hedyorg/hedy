@@ -252,7 +252,7 @@
 
         <div class="flex flex-col gap-1">
             <h2 class="text-2xl">{{_('tags')}}</h2>
-            <div class="flex flex-row items-start">
+            <div class="flex flex-col items-start">
                 <div class="flex flex-1">
                     <div class="flex flex-1 flex-row w-full relative" id="add_tags">
                         <input type="text" name="tag" autocomplete="off" placeholder="{{_('tag_input_placeholder')}}" id="search_tags_input"  data-cy="search_tags_input"
@@ -285,8 +285,8 @@
                         ></div>
                     </div>
                 </div>
-                <div class="flex-1">
-                    {{ render_partial('htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}
+                <div class="w-1/2">
+                    {{ render_partial('for-teachers/adventures/htmx-tags-list.html', tags=adventure_tags, adventure_id=adventure.id, creator=adventure.creator) }}
                 </div>
             </div>
         </div>
