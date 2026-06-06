@@ -454,7 +454,10 @@ adventures:
                     points = 0
                     throw = choices {at} {random}
                     {print} 'you threw ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm 
+                    points = points + 5 
+                    {else} 
+                    points = points + throw
                     {print} 'those are ' points ' points'
                     ```
                 example_code_2: |
@@ -642,8 +645,10 @@ adventures:
                     person {is} {ask} 'Who are you?'
                     good_answer {is} Hurray! You win!, You will definitely win!, We have a winner!
                     bad_answer {is} Bad luck! Try again!, Another person will win, You lose!
-                    {if} person {in} friends {print} good_answer {at} {random}
-                    {else} {print} bad_answer {at} {random}
+                    {if} person {in} friends 
+                    {print} good_answer {at} {random}
+                    {else} 
+                    {print} bad_answer {at} {random}
                     ```
             7:
                 story_text: |
@@ -860,16 +865,26 @@ adventures:
         description: Знайомство з командою {in}
         levels:
             6:
+                story_text: "## Списки\nКоли ми хочемо перевірити, чи є щось у списку, ми тепер можемо використовувати команду `{in}`.\nЦей код гарно друкується! якщо ви обираєте зелений або жовтий, і meh інакше.\n"
+                example_code: |
+                    ```
+                    pretty_colors {is} зелений, жовтий
+                    favorite_color {is} {ask} 'Який твій улюблений колір?'
+                    {if} favorite_color {in} pretty_colors 
+                    {print} 'красиво!'
+                    {else} 
+                    {print} 'мех'
+                    ```
+                story_text_2: "### Вправи\nЗавершіть приклад коду, заповнивши пропуски командами, які ви вивчили. \nКоли ви закінчите код, спробуйте створити власний код і використайте запитання, яке ви самі придумали.\n"
                 example_code_2: |
                     ``` 
                     тварини {is} собака, корова, вівця 
                     answer {is} {ask} 'Яка твоя улюблена тварина?' 
-                    _ відповідь _ тварини _ «Я теж!» 
-                    _ _ «Мої улюблені тварини собаки, корови та вівці» 
+                    _ відповідь _ тварини 
+                    _ «Я теж!» 
+                    _ 
+                    _ «Мої улюблені тварини собаки, корови та вівці» 
                     ```
-                story_text: "## Списки\nКоли ми хочемо перевірити, чи є щось у списку, ми тепер можемо використовувати команду `{in}`.\nЦей код гарно друкується! якщо ви обираєте зелений або жовтий, і meh інакше.\n"
-                example_code: "```\npretty_colors {is} зелений, жовтий\nfavorite_color {is} {ask} 'Який твій улюблений колір?'\n{if} favorite_color {in} pretty_colors {print} 'красиво!'\n{else} {print} 'мех'\n```\n"
-                story_text_2: "### Вправи\nЗавершіть приклад коду, заповнивши пропуски командами, які ви вивчили. \nКоли ви закінчите код, спробуйте створити власний код і використайте запитання, яке ви самі придумали.\n"
         name: '{in}'
         default_save_name: in_command
     is_command:
@@ -936,7 +951,7 @@ adventures:
                 story_text: "Використовуйте функції у своїх піснях! Як ви можете бачити в прикладі коду, ви можете створити функцію для кожного рядка Twinkle Twinkle Little Star. Після того, як ви запрограмували перші три рядки, все, що вам потрібно зробити, це викликати функції в тому порядку, в якому ви хочете їх відтворювати. \n\n### Вправи\nЗакінчіть пісню Twinkle Twinkle Little Star. \nПотім подивіться на всі пісні, які ви запрограмували на попередніх рівнях, чи можете ви зробити ці коди кращими та коротшими за допомогою функцій?\n"
                 example_code: "``` \n{define} перший_рядок \n    {play} C \n    {play} C \n    {play} Г \n    {play} Г \n    {play} А \n    {play} А \n    {play} Г \n    {sleep}\n\n{define} другий_рядок \n    {play} Ф \n    {play} Ф \n    {play} E \n    {play} E \n    {play} D \n    {play} D \n    {play} C \n    {sleep}\n\n{define} третій_рядок \n    {play} Г \n    {play} Г \n    {play} Ф \n    {play} Ф \n    {play} E \n    {play} E \n    {play} D \n    {sleep}\n\n{call} _\n{call} _\n{call} _\n{call} _\n{call} _\n{call} _\n```\n"
             16:
-                example_code: "```\n{define} пісня\n    {play} _\n\nyes_or_no = {ask} «Хочеш почути мою нескінченну пісню?»\n{while} yes_or_no = 'так'\n    {call} пісня\n    {print} '🥳'\n```\n"
+                example_code: "```\n{def} пісня\n    {play} _\n\nyes_or_no = {input}('Хочеш почути мою нескінченну пісню?')\n{while} yes_or_no = 'так':\n    пісня()\n    {print} '🥳'\n```\n"
                 story_text: "**Попередження** Ця пригода може стати надзвичайно дратівливою!\nМи також можемо використовувати команду `{while}`, щоб вічно повторювати пісню.\n\n### Вправи\nЗакінчіть нескінченну пісню.\n"
             8:
                 story_text: "Використання команди `{repeat}` може зробити коди для мелодій набагато коротшими! \n\n### Вправи\nЗавершіть код для Twinkle Twinkle Little Star, використовуючи команду `{repeat}`. \nПотім поверніться до пісень, створених на попередніх рівнях. Чи можете ви також скоротити ці коди?\n"
@@ -1249,8 +1264,10 @@ adventures:
                     ```
                     drinks_in_stock {is} water, lemonade, cola, orange juice
                     drink {is} {ask} 'What would you like to drink?'
-                    {if} drink {in} drinks_in_stock {print} 'One ' drink 'coming up!'
-                    {else} {print} 'Sorry, we do not sell that'
+                    {if} drink {in} drinks_in_stock 
+                    {print} 'One ' drink 'coming up!'
+                    {else} 
+                    {print} 'Sorry, we do not sell that'
                     ```
             7:
                 story_text: |
@@ -1604,9 +1621,6 @@ adventures:
 
                     **Екстра** Надрукуйте пісню «У старого Макдональда була ферма» та переконайтеся, що всі тварини видають різні звуки, використовуючи `{if}`.
                 example_code_2: "й й\nмавпи = 5, 4, 3, 2, 1\nй й\n"
-            13:
-                story_text: "На рівні 16 ми зробили пісні за допомогою списків. Ці програми, однак, більше не працюють належним чином на цьому рівні. Полонини від рівня 17 і кронштейни від рівня 18 все ще потрібно додавати.\n\n### Exercise 1\nП'яна вітрильник пісня надається як зразок коду, але ще не працює.\nЧи можна зробити все знову? Щоб допомогти вам, ми одягаємо _ в місцях _ some_ похибки.\n\n### Exercise 2\nТепер також подивіться свою пісню Old MacDonald від рівня 16, і виправте її.\n"
-                example_code: "й й\nлінії = ['Чому ми робимо з п'ятим вітрильником', - поклавши його живіт з ірстим бритвом', - в'яжемо його в довге катері до сараю']]\n{for} лінії {in} _\n{for} i {in} {range} 1 {to} 1 час\n{print} _ лінія _\n{print} 'поранку'\n{for} i {in} {range} 1 {to} 3 хв\n{print} 'way hay і вгору вона піднімається Р\n{print} 'поранку'\nй й\n"
         description: Друк пісень
         name: Пісня!
         default_save_name: Пісня
@@ -1627,9 +1641,7 @@ adventures:
                 story_text: "Пісні містять безліч повторень. Ми можемо захопити його функцією!\n### Exercise\nПодивіться на прикладний код з функцією. Наповнювати дві лінії, щоб надрукувати повну пісню.\n"
             11:
                 example_code: "й й\nномер = ['one', 'два', 'трій', 'four', 'six', 'six', 'eight', 'nine', 'ten']\nоб'єкт = ['на його барабані', 'на його взутті', 'на його коліні', 'на його двері', 'на його хтиві', 'на його палиці', 'на небі', 'на його хвіртки', 'на його ване', 'на його знову']\n\nУ\n{print} 'Ця стара людина'\n{print} 'Віграти' _\n{print} 'Віграти knick-knack' _\n{print} 'З кнік-кнаком paddywhack Р\n{print} 'Див собаку кісточку'\n{print} 'Ця стара людина прийшла в рулон будинку Р\n{sleep} 8\n{clear}\nй й\n"
-                example_code_2: "й й\nоб'єкт = ['wheels', 'doors', _]\nрух = [ 'круглий і круглий', 'відкритий і відключення', _]\nй й\n"
                 story_text: "### Exercise\nОздоблення дитячої рифом!\n"
-                story_text_2: "### Вправа 2\nТепер таким же чином створіть власний код для дитячого віршика «Колеса в автобусі»!\n"
         default_save_name: Пісня 2
         name: Пісня! 2
         description: Пісня 2
@@ -1820,8 +1832,8 @@ adventures:
         description: '{while}'
         levels:
             16:
-                example_code: "```\nвідповідь = 0\n{while} відповідь != 25\n    answer = {ask} 'Скільки буде 5 помножити на 5?'\n{print} \"Дано правильну відповідь\"\n```\n"
                 story_text: "Збираємося дізнатися нову петлю, петлі `{while}`! Продовжуємо петлю до тих пір, поки заява неправда.\nТак не забудьте змінити значення в петлі.\n\nУ прикладному коді ми продовжуємо до дати коректної відповіді.\nЯкщо вірна відповідь ніколи не дається, петля ніколи не закінчується!"
+                example_code: "```\nвідповідь = 0\n{while} відповідь != 25:\n    answer = {input}('Скільки буде 5 помножити на 5?')\n{print}(\"Дано правильну відповідь\")\n```\n"
         default_save_name: while_command
         name: '{while}'
     years:

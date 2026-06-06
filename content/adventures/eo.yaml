@@ -291,7 +291,10 @@ adventures:
                     poentaro = 0
                     ĵeto = elektoj {at} {random}
                     {print} 'la rezulto de via ĵeto estas' ĵeto
-                    {if} ĵeto {is} lumbriko poentaro = poentaro + 5 {else} poentaro = poentaro + ĵeto
+                    {if} ĵeto {is} lumbriko 
+                    poentaro = poentaro + 5 
+                    {else} 
+                    poentaro = poentaro + ĵeto
                     {print} 'those are' poentaro ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
@@ -470,7 +473,10 @@ adventures:
                     {print} 'Mi estas Hedy la aŭguristo!'
                     {print} 'Mi povas aŭguri, ĉu vi gajnos la loterion morgaŭ!'
                     homo {is} {ask} 'Kiu vi estas?'
-                    {if} homo {is} Hedy {print} 'Vi certe gajnos!🤩' {else} {print} 'Misfortune, aliulo gajnos!😭'
+                    {if} homo {is} Hedy 
+                    {print} 'Vi certe gajnos!🤩' 
+                    {else} 
+                    {print} 'Misfortune, aliulo gajnos!😭'
                     ```
             7:
                 story_text: |
@@ -782,16 +788,28 @@ adventures:
                     ```
                     {print} 'Bonvenon al Restoracio Hedy!'
                     special {is} {ask} 'Would you like to hear our specials today?'
-                    {if} special {is} jes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
+                    {if} special {is} jes 
+                    {print} 'Todays special is chicken piri piri and rice.' 
+                    {else} 
+                    {print} 'No problem.'
                     manĝaĵo {is} {ask} 'What would you like to eat?'
                     {print} 'Unu ' manĝaĵo ', coming right up!'
                     trinkaĵo {is} {ask} 'What would you like to drink with that?'
-                    {if} trinkaĵo {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
+                    {if} trinkaĵo {is} cola 
+                    {print} 'Im sorry, we are out of cola!' 
+                    {else} 
+                    {print} 'Great choice!'
                     anything {is} {ask} 'Would you like anything {else}?'
                     {print} 'Mi ripetos vian mendon…'
                     {print} 'Unu ' manĝaĵo
-                    {if} trinkaĵo {is} cola {print} 'kaj…' {else} {print} 'Unu ' trinkaĵo
-                    {if} anything {is} ne {print} 'Thats it!' {else} {print} 'Unu ' anything
+                    {if} trinkaĵo {is} cola 
+                    {print} 'kaj…' 
+                    {else} 
+                    {print} 'Unu ' trinkaĵo
+                    {if} anything {is} ne 
+                    {print} 'Thats it!' 
+                    {else} 
+                    {print} 'Unu ' anything
                     {print} 'Dankon pro via mendo. Ĝuu vian manĝon!'
                     ```
             7:
@@ -1172,9 +1190,9 @@ adventures:
                 example_code_2: |
                     ```
                     direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
-                    if direction is left turn _
-                    if direction is right turn _
-                    forward 100
+                    {if} direction {is} left {turn} _
+                    {if} direction {is} right {turn} _
+                    {forward} 100
                     ```
             7:
                 story_text: |

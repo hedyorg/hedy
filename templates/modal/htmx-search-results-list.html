@@ -1,12 +1,16 @@
+{% set is_redesign = modal_variant == 'redesign' %}
+{% set row_classes = 'px-3 py-2 m-1 group text-sm flex flex-row justify-between items-center rounded-lg bg-gray-200 text-base' if is_redesign else 'p-4 m-1 group flex flex-row justify-between items-center bg-blue-100 rounded w-4/5' %}
+{% set button_classes = 'green-btn-new text-sm px-4 py-1' if is_redesign else 'green-btn' %}
+
 {% if usernames|length == 0 %}
-<li class="p-4 m-1 group flex flex-row justify-between items-center bg-blue-100 rounded w-4/5">
+<li class="{{ row_classes }}">
     <span>{{_('no_usernames_found')}}</span>    
 </li>
 {% endif %}
 
 {% for username in usernames %}
-    <li class="p-4 m-1 group flex flex-row justify-between items-center bg-blue-100 rounded w-4/5">
+    <li class="{{ row_classes }}">
         <span>{{ username }}</span>
-        <button class="green-btn" data-cy="invite-{{ loop.index }}" onclick="hedyApp.add_user_to_invite_list('{{ username }}', this);">{{_('add')}}</button>
+        <button class="{{ button_classes }}" data-cy="invite-{{ loop.index }}" onclick="hedyApp.add_user_to_invite_list('{{ username }}', this, '{{ 'redesign' if is_redesign else 'legacy' }}');">{{_('add')}}</button>
     </li>
 {% endfor %}

@@ -788,32 +788,32 @@ adventures:
                     **Warning! Dieser Code muss debugged werden! **
                     ```
                     answer = 'Welcome to our pizza shop. Möchten Sie bestellen?'
-                    if answer
+                    {if} answer
                     amount 'Wie viele Pizzas möchten Sie kaufen?'
                     else
-                    print "Du kaufst trotzdem einen!"
+                    {print} "Du kaufst trotzdem einen!"
                     amount = 1
                     'Wir haben Margherita und Pepperoni Pizzas.'
-                    repeat amount
-                    chosen_pizza = ask 'Was für eine Art Pizza möchten Sie? '
-                    print 'Eine ' chosen_pizza '. '
+                    {repeat} amount
+                    chosen_pizza = {ask} 'Was für eine Art Pizza möchten Sie? '
+                    {print} 'Eine ' chosen_pizza '. '
                     price = amount * 10
                     Das ist ' price ' Dollar bitte. '
                     ```
                 answer_code: |
                     ```
-                    answer = ask 'Willkommen in unserer Pizzeria. Möchtest du bestellen?'
-                    if answer is yes
-                        amount = ask 'Wie viele Pizzen möchtest du kaufen?'
+                    answer = {ask} 'Willkommen in unserer Pizzeria. Möchtest du bestellen?'
+                    {if} answer {is} yes
+                        amount = {ask} 'Wie viele Pizzen möchtest du kaufen?'
                     else
-                        print "Du kaufst sowieso eine!"
+                        {print} "Du kaufst sowieso eine!"
                         amount = 1
-                    print 'Wir haben Margherita und Peperoni Pizzen.'
-                    repeat amount times
-                        chosen_pizza = ask 'Welche Art von Pizza hättest du gerne?'
-                        print 'Eine ' chosen_pizza '.'
+                    {print} 'Wir haben Margherita und Peperoni Pizzen.'
+                    {repeat} amount times
+                        chosen_pizza = {ask} 'Welche Art von Pizza hättest du gerne?'
+                        {print} 'Eine ' chosen_pizza '.'
                     price = amount * 10
-                    print 'Das macht ' price ' Dollar, bitte.'
+                    {print} 'Das macht ' price ' Dollar, bitte.'
                     ```
             10:
                 story_text: |-
@@ -827,7 +827,7 @@ adventures:
                     {repeat} amount {times}
                     {ask} {is} {ask} 'Welche Brotsorte hättest du gerne für dein Sandwich?'
                     types_of_bread {is} Weißbrot, Vollkornbrot, Roggenbrot, Knoblauchbrot, glutenfrei
-                    {if} chosen_bread in types_of_bread
+                    {if} chosen_bread {in} types_of_bread
                     {print} 'Wunderbar!'
                     {else}
                     'Tut mir leid, das verkaufen wir nicht'
@@ -923,7 +923,10 @@ adventures:
                     Punkte = 0
                     Wurf = Würfelseiten {at} {random}
                     {print} 'Du hast ' Wurf ' gewürfelt.'
-                    {if} Wurf {is} Regenwurm Punkte = Punkte + 5 {else} Punkte = Punkte + Wurf
+                    {if} Wurf {is} Regenwurm 
+                    Punkte = Punkte + 5 
+                    {else} 
+                    Punkte = Punkte + Wurf
                     {print} 'Jetzt hast Du ' Punkte ' Punkte.'
                     ```
                 example_code_2: |
@@ -1172,8 +1175,10 @@ adventures:
                     person {is} {ask} 'Wer bist du?'
                     gute_antwort {is} Hurra! Du gewinnst!, Du wirst sicher gewinnen!, Wir haben einen Gewinner!
                     schlechte_antwort {is} Pech gehabt! Versuch nochmal!, Eine andere Person wird gewinnen, Du verlierst!
-                    {if} person {in} freunde {print} gute_antwort {at} {random}
-                    {else} {print} schlechte_antwort {at} {random}
+                    {if} person {in} freunde 
+                    {print} gute_antwort {at} {random}
+                    {else} 
+                    {print} schlechte_antwort {at} {random}
                     ```
             7:
                 story_text: |
@@ -1548,8 +1553,10 @@ adventures:
                     ```
                     hübsche_farben {is} grün, gelb
                     lieblingsfarbe {is} {ask} 'Was ist deine Lieblingsfarbe?'
-                    {if} lieblingsfarbe {in} hübsche_farben {print} 'Hübsch!'
-                    {else} {print} 'bäh'
+                    {if} lieblingsfarbe {in} hübsche_farben 
+                    {print} 'Hübsch!'
+                    {else} 
+                    {print} 'bäh'
                     ```
                 story_text_2: |
                     ### Übung
@@ -1559,8 +1566,10 @@ adventures:
                     ```
                     tiere {is} Hund, Kuh, Schaf
                     antwort {is} {ask} 'Was is dein Lieblingstier?'
-                    _ antwort _ tiere _ 'Meines auch!'
-                    _ _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
+                    _ antwort _ tiere 
+                    _ 'Meines auch!'
+                    _ 
+                    _ 'Meine Lieblingstiere sind Hunde, Kühe und Schafe'
                     ```
         name: '{in}'
     is_command:
@@ -1814,12 +1823,12 @@ adventures:
                     Vervollständige das Lied-das-niemals-endet.
                 example_code: |
                     ```
-                    {define} lied
+                    {def} lied
                         {play} _
 
-                    ja_oder_nein = {ask} 'Willst du mein Lied-das-niemals-endet hören?'
-                    {while} ja_oder_nein = 'ja'
-                        {call} song
+                    ja_oder_nein = {input}('Willst du mein Lied-das-niemals-endet hören?')
+                    {while} ja_oder_nein = 'ja':
+                        lied()
                         {print} '🥳'
                     ```
     parrot:
@@ -2231,16 +2240,28 @@ adventures:
                     ```
                     {print} 'Willkommen im Restaurant Chez Hedy'
                     Tagesgericht {is} {ask} 'Würden Sie gerne das heutige Tagesgericht erfahren?'
-                    {if} Tagesgericht {is} ja {print} 'Das Tagesgericht ist Nudeln mit Tomatensoße.' {else} {print} 'Ok, kein Problem.'
+                    {if} Tagesgericht {is} ja 
+                    {print} 'Das Tagesgericht ist Nudeln mit Tomatensoße.' 
+                    {else} 
+                    {print} 'Ok, kein Problem.'
                     Essen {is} {ask} 'Was würden Sie gerne essen?'
                     {print} 'Einmal ' Essen ', kommt sofort!'
                     Getränk {is} {ask} 'Was würden Sie gerne dazu trinken?'
-                    {if} Getränk {is} Cola {print} 'Tut mir leid, die Cola ist aus!' {else} {print} 'Großartige Wahl!'
+                    {if} Getränk {is} Cola 
+                    {print} 'Tut mir leid, die Cola ist aus!' 
+                    {else} 
+                    {print} 'Großartige Wahl!'
                     etwas {is} {ask} 'Hätten Sie gerne noch etwas?'
                     {print} 'Lassen Sie mich Ihre Bestellung noch einmal wiederholen...'
                     {print} 'Einmal ' Essen
-                    {if} Getränk {is} Cola {print} 'und...' {else} {print} 'Einmal ' Getränk
-                    {if} etwas {is} nein {print} 'Das ist alles!' {else} {print} 'Einmal ' etwas
+                    {if} Getränk {is} Cola 
+                    {print} 'und...' 
+                    {else} 
+                    {print} 'Einmal ' Getränk
+                    {if} etwas {is} nein 
+                    {print} 'Das ist alles!' 
+                    {else} 
+                    {print} 'Einmal ' etwas
                     {print} 'Danke für Ihre Bestellung und guten Appetit!'
                     ```
             7:
@@ -2599,27 +2620,6 @@ adventures:
                 example_code_2: |
                     ```
                     affen = 5, 4, 3, 2, 1
-                    ```
-            13:
-                story_text: |
-                    In Level 16 haben wir Lieder mit Listen gemacht. Diese Programme funktionieren jedoch nicht mehr ganz in diesem Level. Die Doppelpunkte aus Level 17 und die Klammern aus Level 18 müssen noch hinzugefügt werden.
-
-                    ### Übung 1
-                    Das Drunken sailor Lied ist im Beispiel-Code, aber es funktioniert noch nicht.
-                    Kannst du sicherstellen, dass alles wieder funktioniert? Um dir zu helfen haben wir _ an die Stellen _einiger_ Fehler gesetzt.
-
-                    ### Übung 2
-                    Schau auch deinen Old MacDonald Song aus Level 16 nach und korrigiere ihn.
-                example_code: |
-                    ```
-                    zeilen = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', 'put him in a long boat till hes sober']
-                    {for} zeile {in} zeilen _
-                        {for} i {in} {range} 1 {to} 3 _
-                            {print} _ zeile _
-                        {print} 'early in the morning'
-                        {for} i {in} {range} 1 {to} 3
-                            {print} 'way hay and up she rises'
-                        {print} 'early in the morning'
                     ```
         default_save_name: Lied
     songs_2:
@@ -3089,7 +3089,7 @@ adventures:
         levels:
             16:
                 story_text: "Wir lernen jetzt eine neue Schleife, die `{while}` Schleife! Wir bleiben in der Schleife, so lange bis die Aussage wahr ist.\nDeswegen - vergiss nicht, den Wert in der Schleife zu verändern.\n\nIm Beispiel Code bleiben wir in der Schleife, bis eine richtige Antwort gegeben wurde.\nFalls die richtige Antwort nie gegeben wird, endet die Schleife nie!"
-                example_code: "```\nantwort = 0\n{while} antwort != 25\n    antwort = {ask} 'Was ist 5 mal 5?'\n{print} 'Eine richtige Antwort wurde gegeben'\n```\n"
+                example_code: "```\nantwort = 0\n{while} antwort != 25:\n    antwort = {input}('Was ist 5 mal 5?')\n{print}('Eine richtige Antwort wurde gegeben')\n```\n"
         default_save_name: solange_Befehl
         name: '{while}'
     and_or_command:

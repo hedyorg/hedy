@@ -43,13 +43,15 @@ def request(method, path, headers={}, body='', cookies=None, follow_redirects=Tr
         headers['content-type'] = 'application/json'
         body = json.dumps(body)
 
+    headers['accept'] = 'application/json'
+
     start = utils.timems()
 
     response = getattr(requests, method)(HOST + path, headers=headers, data=body,
                                          cookies=cookies, allow_redirects=follow_redirects)
 
     # Remember all cookies in the cookie jar
-    if cookies is not None:
+    if cookies is not None and response.cookies is not None:
         cookies.update(response.cookies)
 
     ret = {'time': utils.timems() - start}
@@ -1114,6 +1116,8 @@ class TestClasses(AuthHelper):
         self.assertIsInstance(Class['students'], list)
         self.assertEqual(len(Class['students']), 0)
         self.assertEqual(Class['teacher'], self.username)
+        self.assertIn('archived', Class)
+        self.assertFalse(Class['archived'])
 
         # WHEN retrieving the class
         # THEN receive an OK response code from the server
@@ -1126,6 +1130,63 @@ class TestClasses(AuthHelper):
         self.assertEqual(Class['name'], 'class1')
         self.assertIsInstance(Class['students'], list)
         self.assertEqual(len(Class['students']), 0)
+
+    def test_archive_class_redesign(self):
+        # GIVEN a teacher with one class
+        self.given_fresh_teacher_is_logged_in()
+        self.post_data('class', {'name': 'class-to-archive'})
+        Class = self.get_data('classes')[0]
+
+        # WHEN archiving the class via redesign endpoint
+        # THEN receive a successful response
+        self.post_data(f'for-teachers/class/{Class["id"]}/archive', {}, expect_http_code=200)
+
+        # WHEN retrieving classes
+        classes = self.get_data('classes')
+        self.assertEqual(len(classes), 1)
+        self.assertTrue(classes[0].get('archived', False))
+
+    def test_unarchive_class_redesign(self):
+        # GIVEN a teacher with one class that is archived
+        self.given_fresh_teacher_is_logged_in()
+        self.post_data('class', {'name': 'class-to-unarchive'})
+        Class = self.get_data('classes')[0]
+        self.post_data(f'for-teachers/class/{Class["id"]}/archive', {}, expect_http_code=200)
+
+        # WHEN unarchiving the class via redesign endpoint
+        self.post_data(f'for-teachers/class/{Class["id"]}/unarchive', {}, expect_http_code=200)
+
+        # THEN class is active again
+        classes = self.get_data('classes')
+        self.assertEqual(len(classes), 1)
+        self.assertFalse(classes[0].get('archived', False))
+
+    def test_archive_class_redesign_unauthorized(self):
+        # GIVEN a teacher with one class
+        self.given_fresh_teacher_is_logged_in()
+        self.post_data('class', {'name': 'class-owned-by-teacher-a'})
+        Class = self.get_data('classes')[0]
+
+        # GIVEN another teacher
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN trying to archive class owned by first teacher
+        # THEN receive unauthorized
+        self.post_data(f'for-teachers/class/{Class["id"]}/archive', {}, expect_http_code=401)
+
+    def test_unarchive_class_redesign_unauthorized(self):
+        # GIVEN a teacher with one class that is archived
+        self.given_fresh_teacher_is_logged_in()
+        self.post_data('class', {'name': 'class-owned-by-teacher-a'})
+        Class = self.get_data('classes')[0]
+        self.post_data(f'for-teachers/class/{Class["id"]}/archive', {}, expect_http_code=200)
+
+        # GIVEN another teacher
+        self.given_fresh_teacher_is_logged_in()
+
+        # WHEN trying to unarchive class owned by first teacher
+        # THEN receive unauthorized
+        self.post_data(f'for-teachers/class/{Class["id"]}/unarchive', {}, expect_http_code=401)
 
     def test_invalid_update_class(self):
         # GIVEN a user with teacher permissions and a class

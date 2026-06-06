@@ -592,7 +592,7 @@ adventures:
                 example_code: |
                     ```
                     opcje = 1, 2, 3, 4, 5, 6
-                    {print} 'Wyzuć 6 tak szybko, jak to możliwe!'
+                    {print}('Wyzuć 6 tak szybko, jak to możliwe!')
                     wyrzucono = 0
                     próby = 0
                     _
@@ -1222,8 +1222,10 @@ adventures:
                     ```
                     zwierzęta {is} pies, krowa, owca
                     odpowiedź {is} {ask} 'Jakie jest Twoje ulubione zwierzę?'
-                    _ odpowiedź _ zwierzęta _ 'Moje też!'
-                    _ _ 'Moje ulubione zwierzęta to psy, krowy i owce'
+                    _ odpowiedź _ zwierzęta 
+                    _ 'Moje też!'
+                    _ 
+                    _ 'Moje ulubione zwierzęta to psy, krowy i owce'
                     ```
         name: '{in}'
     is_command:
@@ -1514,11 +1516,11 @@ adventures:
                     Dokończ niekończącą się piosenkę
                 example_code: |
                     ```
-                    {define} piosenka
+                    {def} piosenka
                         {play} _
 
-                    tak_lub_nie = {ask} 'Czy chcesz usłyszeć moją niekończącą się piosenkę?'
-                    {while} tak_lub_nie = 'tak'
+                    tak_lub_nie = {input}('Czy chcesz usłyszeć moją niekończącą się piosenkę?')
+                    {while} tak_lub_nie = 'tak':
                         piosenka()
                         {print} '🥳'
                     ```
@@ -2260,27 +2262,6 @@ adventures:
                     ```
                     małpki = 5, 4, 3, 2, 1
                     ```
-            13:
-                story_text: |
-                    W poziomie 16 stworzyliśmy piosenki przy użyciu list. Te programy nie będą już działały poprawnie w tym poziomie. Dwukropki z poziomu 17 i nawiasy kwadratowe z poziomu 18 muszą zostać dodane.
-
-                    ### Ćwiczenie 1
-                    Piosenka o pijanym marynarzu ma przykładowy kod, ale jeszcze nie działa.
-                    Czy możesz się upewnić, że wszystko znów zacznie działać? By Ci pomóc powstawialiśmy _ w _niektórych_ miejscach z błędami.
-
-                    ### Ćwiczenie 2
-                    Teraz znajdź swoją piosenkę o dziadku z farmą z poziomu 16 i popraw ją.
-                example_code: |
-                    ```
-                    wersy = ['Co zrobimy z pijanym marynarzem?', 'Zgolim mu brzuch żyletką tępą', 'Wsadzim go w łódź aż wytrzeźwieje']
-                    {for} wers {in} wersy _
-                        {for} i {in} {range} (1, 3) _
-                            {print} _ wers _
-                        {print} 'Wcześnie o poranku!'
-                        {for} i {in} {range} (1, 3)
-                            {print} 'Hej ho i już się wznosi,'
-                        {print} 'Wcześnie o poranku!'
-                    ```
             7:
                 story_text_2: "Piosenka tego dziecka odlicza w dół od 5 małych małpek do 1 małpki.\nJeśli skopiujesz linie 2 - 7 i wkleisz je pod spodem, możesz zaśpiewać całą piosenkę!\n"
                 example_code: "```\nwiersz = 99\n{print} wiersz ' butelek piwa na ścianie'\n{print} wiersz ' butelek piwa'\n{print} 'Zdejmij jedną i podaj ją dalej'\nwiersz = wiersz - 1\n{print} wiersz ' butelek piwa na ścianie'\n{sleep}\n```\n"
@@ -2313,14 +2294,6 @@ adventures:
                 story_text: |
                     ### Ćwiczenie
                     Skończ piosenkę!
-                story_text_2: |
-                    ### Ćwiczenie
-                    Teraz stwórz swój własny kod „Koła w autobusie” w ten sam sposób!
-                example_code_2: |
-                    ```
-                    obiekt = ['koła', 'drzwi', _]
-                    ruch= [ 'w kółko', 'otwarte i zamknięte', _]
-                    ```
     turtle:
         name: żółw
         default_save_name: Żółw
@@ -2764,9 +2737,9 @@ adventures:
                 example_code: |
                     ```
                     odpowiedź = 0
-                    {while} odpowiedź != 25
-                        odpowiedź = {ask} 'Ile to jest 5 razy 5?'
-                    {print} 'Podano poprawną odpowiedź'
+                    {while} odpowiedź != 25:
+                        odpowiedź = {input}('Ile to jest 5 razy 5?')
+                    {print}('Podano poprawną odpowiedź')
                     ```
         description: '{while}'
         name: '{while}'
@@ -2827,8 +2800,6 @@ adventures:
         name: szpital
         description: Szpital
         levels:
-            14:
-                example_code: "Program powinien się kończyć w ten sposób:\n  ```\n  _Program powinien się kończyć w ten sposób_\n  zrób_listę_zadań(dzień, miesiąc, data)\n  ```\n"
             8:
                 story_text: "Farba na Naszym lądowisku dla helikoptera ratunkowego starła się. Czy możesz napisać program dla żółwia, który narysuje oznaczenia ponownie?\n### Ćwiczenie\nNarysuj oznaczenia na lądowisku dla helikoptera.\n<img src=\"https://github.com/user-attachments/assets/96deeb9e-b155-4a3d-91f3-3c447df7ce2b\" width=\"200\">\n"
             9:

@@ -658,7 +658,10 @@ adventures:
                     pontos = 0
                     jogada = escolhas {at} {random}
                     {print} 'você tirou ' jogada
-                    {if} jogada {is} minhoca pontos = pontos + 5 {else} pontos = pontos + jogada
+                    {if} jogada {is} minhoca 
+                    pontos = pontos + 5 
+                    {else} 
+                    pontos = pontos + jogada
                     {print} 'isso dá ' pontos ' pontos'
                     ```
                 example_code_2: |
@@ -899,8 +902,10 @@ adventures:
                     pessoa {is} {ask} 'Quem é você?'
                     resposta_boa {is} Oba! Você ganhou!, Você certamente vai ganhar!, Temos um vencedor!
                     resposta_ruim {is} Sem sorte! Tente novamente!, Outra pessoa vai ganhar, Você perdeu!
-                    {if} pessoa {in} amigos {print} resposta_boa {at} {random}
-                    {else} {print} resposta_ruim {at} {random}
+                    {if} pessoa {in} amigos 
+                    {print} resposta_boa {at} {random}
+                    {else} 
+                    {print} resposta_ruim {at} {random}
                     ```
             7:
                 story_text: |
@@ -1189,8 +1194,10 @@ adventures:
                     ```
                     cores_belas {is} verde, amarelo
                     cor_favorita {is} {ask} 'Qual é a sua cor favorita?'
-                    {if} cor_favorita {in} cores_belas {print} 'bela!'
-                    {else} {print} 'meh'
+                    {if} cor_favorita {in} cores_belas 
+                    {print} 'bela!'
+                    {else} 
+                    {print} 'meh'
                     ```
                 story_text_2: |
                     ### Exercício
@@ -1200,8 +1207,10 @@ adventures:
                     ```
                     animais {is} cachorro, vaca, ovelha
                     resposta {is} {ask} 'Qual é o seu animal favorito?'
-                    _ resposta _ animais _ 'O meu também!'
-                    _ _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
+                    _ resposta _ animais 
+                    _ 'O meu também!'
+                    _ 
+                    _ 'Meus animais favoritos são cachorros, vacas e ovelhas.'
                     ```
         name: '{in}'
     is_command:
@@ -1329,7 +1338,7 @@ adventures:
             10:
                 story_text: "From this level on you can - among other things - use a {repeat} command inside a {repeat} command.\nThat makes songs like 'Happy birthday' even shorter!\n\n### Exercise\nFinish the song!\n"
             16:
-                example_code: "```\n{define} música\n    {play} _\n\nsim_ou_não = {ask} 'Quer ouvir a minha música infinita?'\n{while} sim_ou_não = 'sim'\n    {call} música\n    {print} '🥳'\n```\n"
+                example_code: "```\n{def} música\n    {play} _\n\nsim_ou_não = {input}('Quer ouvir a minha música infinita?')\n{while} sim_ou_não = 'sim':\n    música()\n    {print} '🥳'\n```\n"
                 story_text: "**Aviso** Essa aventura pode ficar extremamente irritante!\nTambém podemos usar o comando {while} para repetir uma música infinitamente.\n\n### Exercício\nComplete a música infinita.\n"
     parrot:
         name: Papagaia
@@ -1621,8 +1630,16 @@ adventures:
                 example_code: "```\n_ Adicione aspas neste código _\n{print} Bem-vindo(a) ao Restaurante Chez Hedy!\n{print} Hoje, estamos servindo pizza ou lasanha.\ncomida {is} {ask} O que você gostaria de comer?\n{print} Ótima escolha!  comida  é meu prato preferido!\ncobertura {is} {ask} Você quer cobertura de carne ou de vegetais?\n{print} comida  com  cobertura  a caminho!\nbebida {is} {ask} O que você gostaria de beber?\n{print} Agradecemos por seu pedido.\n{print} Sua  comida  e  bebida  estarão aqui logo, logo!\n```\n"
                 story_text: "Agora, no programa de restaurante, você também precisa de aspas para usar os comandos `{print}` ou `{ask}`.\n\n### Exercício\nAdicione aspas neste código para fazê-lo funcionar! Mas atenção: variáveis não devem ser colocadas em aspas.\nEm seguida, use o comando `{clear}` para mostrar apenas uma linha por vez na sua tela de saída.\n\n### Exercício 2\nVolte ao nível anterior e copie o seu código do restaurante. Faça o código funcionar neste nível colocando aspas nos lugares certos e adicione alguns comandos `{clear}`.\n"
             6:
-                example_code: "```\nbebidas_disponíveis {is} água, limonada, coca, suco de laranja\nbebida {is} {ask} 'O que você gostaria de beber?'\n{if} bebida {in} bebidas_disponíveis {print} 'Um copo de ' bebida ' saindo!'\n{else} {print} 'Desculpe, não vendemos isso'\n```\n"
                 story_text: "### Exercício\nO código exemplo mostra como você poderia programar o caso de algum item do cardápio já ter acabado no seu restaurante.\nCopie o seu próprio código do restaurante dos níveis anteriores. Crie um problema em seu restaurante e programe-o, assim como o código exemplo fez.\nPor exemplo, você também pode ter algum item do cardápio em falta, ou você não aceita cartão de crédito, ou talvez a máquina de sorvetes esteja quebrada.\n\n**Extra** Já programou o problema e as respostas apropriadas? Então tente adicionar mais comandos `{if}` e `{else}` ao seu código.\nTente adicionar um `{if}` depois de todo comando `{ask}` em seu código para torná-lo o mais interativo possível!\n"
+                example_code: |
+                    ```
+                    bebidas_disponíveis {is} água, limonada, coca, suco de laranja
+                    bebida {is} {ask} 'O que você gostaria de beber?'
+                    {if} bebida {in} bebidas_disponíveis 
+                    {print} 'Um copo de ' bebida ' saindo!'
+                    {else} 
+                    {print} 'Desculpe, não vendemos isso'
+                    ```
     rock:
         name: Pedra, papel, tesoura
         default_save_name: Pedra_2
@@ -2040,7 +2057,7 @@ adventures:
 
                     ```
                     colors {is} red, orange, yellow, green, blue, purple, pink, brown, gray, black
-                    color _
+                    {color} _
                     ```
             5:
                 example_code: "Dica:\n```\nletra_escolhida {is} {ask} 'Qual letra você gostaria de ver? F, E ou L?'\n{if} _\n```\n"

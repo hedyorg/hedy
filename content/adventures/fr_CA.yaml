@@ -623,7 +623,10 @@ adventures:
                     points = 0
                     lancé = choix {at} {random}
                     {print} "Tu as obtenu " lancé
-                    {if} lancé {is} ver points = points + 5 {else} points = points + lancé
+                    {if} lancé {is} ver 
+                    points = points + 5 
+                    {else} 
+                    points = points + lancé
                     {print} "Cela fait un total de " points " points"
                     ```
                 example_code_2: |
@@ -852,8 +855,10 @@ adventures:
                     personne {is} {ask} "Qui es-tu ?"
                     bonnes_réponses {is} Hourra ! Tu as gagné !, Tu vas certainement gagner !, Nous avons un gagnant !
                     mauvaises_réponses {is} Pas de chance ! Essaye encore !, C'est une autre personne qui gagnera, Tu as perdu !
-                    {if} personne {in} amis {print} bonnes_réponses {at} {random}
-                    {else} {print} mauvaises_réponses {at} {random}
+                    {if} personne {in} amis 
+                    {print} bonnes_réponses {at} {random}
+                    {else} 
+                    {print} mauvaises_réponses {at} {random}
                     ```
             7:
                 story_text: |
@@ -1224,8 +1229,10 @@ adventures:
                     ```
                     jolies_couleurs {is} vert, jaune
                     couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
-                    {if} couleur_préférée {in} jolies_couleurs {print} "jolie !"
-                    {else} {print} "bof"
+                    {if} couleur_préférée {in} jolies_couleurs 
+                    {print} "jolie !"
+                    {else} 
+                    {print} "bof"
                     ```
                 story_text_2: |
                     ### Exercice
@@ -1235,13 +1242,12 @@ adventures:
                     ```
                     animaux {is} chien, vache, mouton
                     réponse {is} {ask} "Quel est ton animal préféré ?"
-                    _ réponse _ animaux _ "c'est aussi le mien !"
-                    _ _ "mes animaux préférés sont chien, vache et mouton"
+                    _ réponse _ animaux 
+                    _ "c'est aussi le mien !"
+                    _ 
+                    _ "mes animaux préférés sont chien, vache et mouton"
                     ```
-
-                    couleur_préférée {is} {ask} "Quelle est ta couleur préférée ?"
-                    {if} couleur_préférée {in} jolies_couleurs {print} "jolie !"
-                    {else} {print} "bof"
+                    
     is_command:
         default_save_name: command_est
         description: Introduction de la commande {is}
@@ -1762,8 +1768,10 @@ adventures:
                     ```
                     boisson_en_stock {is} eau, limonade, coca, jus d'orange
                     choix {is} {ask} "Que voulez vous boire ?"
-                    {if} choix {in} boisson_en_stock {print} choix " en préparation !"
-                    {else} {print} "Désolé, nous n'avons pas de " choix
+                    {if} choix {in} boisson_en_stock 
+                    {print} choix " en préparation !"
+                    {else} 
+                    {print} "Désolé, nous n'avons pas de " choix
                     ```
             7:
                 story_text: |
@@ -2156,16 +2164,6 @@ adventures:
                     ```
                     singes = 5, 4, 3, 2, 1
                     ```
-            13:
-                story_text: |
-                    In level 16 we made songs using lists. These programs however are no longer working properly in this level. The colons from level 17 and the brackets from level 18 still need to be added.
-
-                    ### Exercice 1
-                    The Drunken sailor song is given as sample code, but not yet working.
-                    Can you make sure everything works again? To help you, we've put _ in the places of _some_ errors.
-
-                    ### Exercice 2
-                    Now also look up your Old MacDonald song from level 16, and correct it.
     songs_2:
         name: Chante une chanson ! 2
         default_save_name: Chanson 2
@@ -2486,13 +2484,13 @@ adventures:
                     ```
                     colors = red, blue, orange, yellow, pink, purple, green, brown, black
                     distance = 120
-                    repeat 5 times
+                    {repeat} 5 times
                     _
                     ```
                     Hint for the flags:
                     ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
+                    country = {ask} 'which country would you like to see the flag of?'
+                    {if} country {is} 'the Netherlands'
                         color_1 = red
                         color_2 = white
                         color_3 = blue
@@ -2582,12 +2580,9 @@ adventures:
                 example_code: |
                     ```
                     réponse = 0
-                    {while} réponse != 25
-                        réponse = {ask} "Combien font 5 fois 5 ?"
-                    {print} "Une réponse correcte a été donnée"
+                    {while} réponse != 25:
+                        réponse = {input}("Combien font 5 fois 5 ?")
+                    {print}("Une réponse correcte a été donnée")
                     ```
-
-                        réponse = {ask} "Combien font 5 fois 5 ?"
-                    {print} "Une réponse correcte a été donnée"
     years:
         levels: {}

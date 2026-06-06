@@ -594,7 +594,10 @@ adventures:
                     points = 0
                     throw = choices {at} {random}
                     {print} '你投出了 ' throw
-                    {if} throw {is} earthworm points = points + 5 {else} points = points + throw
+                    {if} throw {is} earthworm 
+                    points = points + 5 
+                    {else} 
+                    points = points + throw
                     {print} '那些是 ' points '分数'
                     ```
                 example_code_2: |
@@ -637,7 +640,7 @@ adventures:
                 example_code: |
                     ```
                     options = 1, 2, 3, 4, 5, 6
-                    {print} '尽早投出6!'
+                    {print}('尽早投出6!')
                     thrown = 0
                     tries = 0
                     _
@@ -1234,8 +1237,10 @@ adventures:
                     ```
                     pretty_colors {is} 绿色, 黄色
                     favorite_color {is} {ask} '什么是你最喜欢的颜色?'
-                    {if} favorite_color {in} pretty_colors {print} '漂亮!'
-                    {else} {print} 'meh'
+                    {if} favorite_color {in} pretty_colors 
+                    {print} '漂亮!'
+                    {else} 
+                    {print} 'meh'
                     ```
                 story_text_2: |
                     ### 练习
@@ -1245,8 +1250,10 @@ adventures:
                     ```
                     animals {is} 狗, 牛, 羊
                     answer {is} {ask} '你最喜欢的动物是哪个?'
-                    _ answer _ animals _ '我也是!'
-                    _ _ '我最喜欢的动物是狗, 牛, 羊。'
+                    _ answer _ animals 
+                    _ '我也是!'
+                    _ 
+                    _ '我最喜欢的动物是狗, 牛, 羊。'
                     ```
     is_command:
         default_save_name: is_命令
@@ -2246,27 +2253,6 @@ adventures:
                     ```
                     猴子们 = 5, 4, 3, 2, 1
                     ```
-            13:
-                story_text: |
-                    在第16关，我们使用列表制作歌曲。然而，这些程序在这个级别不再正常工作。仍然需要添加第17关的冒号和第18关的括号。
-
-                    ### 练习1
-                    醉酒水手歌是作为示例代码给出的，但还不能工作。
-                    你能确保一切正常吗?为了帮助你，我们在一些错误的地方加上了_。
-
-                    ### 练习2
-                    现在也看看你的老麦克唐纳歌曲从16级，并纠正它。
-                example_code: |
-                    ```
-                    一些行 = ['我们应该如何处理醉酒的水手'，'用生锈的剃刀剃他的肚子'，'让他躺在船上醒酒']
-                    {for} 行 {in} 一些行 _
-                        {for} i {in} {range} 1 {to} 3 _
-                            {print} _ 行 _
-                         {print} '凌晨'
-                         {for} i {in} {range} 1 {to} 3
-                             {print} 'way hay and up she rises'
-                         {print} '凌晨'
-                    ```
     songs_2:
         name: 唱首歌! 2
         default_save_name: 歌曲 2
@@ -2726,9 +2712,9 @@ adventures:
                 example_code: |
                     ```
                     答案 = 0
-                    {while} 答案 != 25
-                        答案 = {ask} '5乘以5是多少?'
-                    {print} '一个正确的回答给出'
+                    {while} 答案 != 25:
+                        答案 = {input}('5乘以5是多少?')
+                    {print}('一个正确的回答给出')
                     ```
     years:
         name: 新年
