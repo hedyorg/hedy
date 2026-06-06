@@ -1284,8 +1284,8 @@ adventures:
                         {print} gewählte_seite ' ' gewähltes_körperteil ' auf ' gewählte_farbe
 
                     {print} 'Lass uns eine Runde Twister spielen!'
-                    {for} i {in} {range} 1 {to} _
-                        {call} zug
+                    {repeat} _ _
+                        {call} zum
                         {sleep} 2
                     ```
     harry_potter:
