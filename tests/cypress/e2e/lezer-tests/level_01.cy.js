@@ -1,5 +1,6 @@
 import { multiLevelTester, singleLevelTester } from "../tools/lezer/lezer_tester"
-import { codeMirrorContent } from '../tools/programs/program';
+import { codeMirrorContent, codeEditorContent } from '../tools/programs/program';
+import { goToHedyLevel } from "../tools/navigation/nav";
 
 describe('Lezer parser tests for level 1', () => {
     describe('Successfull tests', () => {
@@ -112,9 +113,15 @@ describe('Lezer parser tests for level 1', () => {
     })
 
     describe('Max amount of lines for level 1', () => {
+        beforeEach(() => {
+            goToHedyLevel(1);
+            codeEditorContent().click();
+            cy.focused().clear();
+        });
+
         it('Typing more than 100 lines should not be posible', () => {
-            cy.focused().type('a line!\n'.repeat(101));
-            codeMirrorContent().should('have.text', 'a line!\n'.repeat(100)); // First 100 lines should be in editor
+            codeEditorContent().type('a line!\n'.repeat(101), { delay: 0 });
+            codeMirrorContent().should('contain.text', 'a line!');
 
             cy.get('#warningbox').should('be.visible');
             cy.get('#warningbox p.details').should('contain.text', 'Your program may not be longer than 100 lines!');
