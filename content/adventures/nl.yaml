@@ -2472,8 +2472,10 @@ adventures:
                 example_code: |
                     ```
                     {repeat} 2 {times} antwoord = {ask} 'Wist je al dat je een vraag ook kunt herhalen?'
-                    {if} antwoord {is} ja {repeat} 2 {times} {print} 'Daar was jij al achter!'
-                    {else} {repeat} 3 {times} {print} 'Je hebt weer iets nieuws geleerd!'
+                    {if} antwoord {is} ja
+                    {repeat} 2 {times} {print} 'Daar was jij al achter!'
+                    {else}
+                    {repeat} 3 {times} {print} 'Je hebt weer iets nieuws geleerd!'
                     ```
                 story_text_2: |
                     Met `{repeat}` kun je ook variabelen gebruiken om in te stellen hoe vaak iets herhaald moet worden. In het voorbeeld zie je dat we eerst vragen hoe oud iemand is met de variabele leeftijd.
