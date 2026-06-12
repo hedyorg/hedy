@@ -1292,7 +1292,7 @@ adventures:
 
                     {print} 'Welcome to our restaurant'
                     people = {ask} 'How many people are in your party tonight?'
-                    {for} person {in} people
+                    {repeat} food {times}
                         {call} greet_customer
                         take_order
                     ```
