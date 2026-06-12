@@ -8,7 +8,10 @@ export function createAdventure(name)
     cy.getDataCy('create_adventure_button').click();
 
     if (name) {
-        cy.intercept('/for-teachers/customize-adventure').as('customizeAdventure');      
+        cy.intercept({
+            method: 'POST',
+            url: '/for-teachers/customize-adventure'
+        }).as('customizeAdventure');
         cy.getDataCy('custom_adventure_name').clear().type(name);
         cy.wait(500)
         cy.getDataCy('level_select').click();
@@ -36,8 +39,11 @@ export function deleteAdventure(name) {
 }
 
 export function openAdventureView(){
-    cy.getDataCy('adventures_table').then($viewAdventure => {
-        if (!$viewAdventure.is(':visible')) {
+    cy.get('body').then(($body) => {
+        const $table = $body.find('[data-cy="adventures_table"]');
+        const isVisible = $table.length > 0 && $table.is(':visible');
+
+        if (!isVisible && $body.find('[data-cy="view_adventures"]').length > 0) {
             cy.getDataCy('view_adventures').click();
         }
     });

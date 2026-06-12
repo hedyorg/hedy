@@ -8,29 +8,22 @@ import boto3
 
 import config
 import utils
-from utils import is_heroku
+import envs
 
 logger = logging.getLogger(__name__)
 
 
 def s3_querylog_transmitter_from_env():
-    """Return an S3 transmitter, or return None."""
+    """Return an S3 transmitter, or return None if we are not set up for a transmitter."""
+    return s3_parselog_transmitter_from_env(config_key="s3-query-logs")
+
+
+def s3_parselog_transmitter_from_env(config_key):
+    """Return an S3 transmitter, or return None if we are not set up for a transmitter."""
     have_aws_creds = os.getenv("AWS_ACCESS_KEY_ID") and os.getenv("AWS_SECRET_ACCESS_KEY")
 
     if not have_aws_creds:
-        if is_heroku():
-            logger.warning("Unable to initialize S3 querylogger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)")
-        return None
-
-    return make_s3_transmitter(config.config["s3-query-logs"])
-
-
-def s3_parselog_transmitter_from_env(config_key="s3-parse-logs"):
-    """Return an S3 transmitter, or return None."""
-    have_aws_creds = os.getenv("AWS_ACCESS_KEY_ID") and os.getenv("AWS_SECRET_ACCESS_KEY")
-
-    if not have_aws_creds:
-        if is_heroku():
+        if envs.current_env().cloud_services:
             logger.warning("Unable to initialize S3 parse logger (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)")
         return None
 

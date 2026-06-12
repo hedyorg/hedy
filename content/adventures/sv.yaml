@@ -341,8 +341,8 @@ adventures:
                     Kopiera din kod från föregående flik och gör variablerna interaktiva med `{ask}`-kommandon.
                 example_code_2: |
                     ```
-                    favoritdjur is ask Vilket är ditt favoritdjur?
-                    print Jag gillar favoritdjur
+                    favoritdjur {is} {ask} Vilket är ditt favoritdjur?
+                    {print} Jag gillar favoritdjur
                     ```
             13:
                 story_text: |
@@ -516,7 +516,10 @@ adventures:
                     poäng = 0
                     kast = val {at} {random}
                     {print} 'du kastade ' kast
-                    {if} kast {is} daggmask poäng = poäng + 5 {else} poäng = poäng + kast
+                    {if} kast {is} daggmask 
+                    poäng = poäng + 5 
+                    {else} 
+                    poäng = poäng + kast
                     {print} 'det är ' poäng ' poäng'
                     ```
                 example_code_2: |
@@ -747,8 +750,10 @@ adventures:
                     person {is} {ask} 'Vem är du?'
                     bra_svar {is} Hurra! Du vinner!, Du kommer definitivt att vinna!, Vi har en vinnare!
                     dåligt_svar {is} Otur! Försök igen!, En annan person kommer att vinna, Du förlorar!
-                    {if} person {in} vänner {print} bra_svar {at} {random}
-                    {else} {print} dåligt_svar {at} {random}
+                    {if} person {in} vänner 
+                    {print} bra_svar {at} {random}
+                    {else} 
+                    {print} dåligt_svar {at} {random}
                     ```
             7:
                 story_text: |
@@ -1055,8 +1060,10 @@ adventures:
                     ```
                     snygga_färger {is} grönt, gult
                     favoritfärg {is} {ask} 'Vilken är din favoritfärg?'
-                    {if} favoritfärg {in} snygga_färger {print} 'snyggt!'
-                    {else} {print} 'meh'
+                    {if} favoritfärg {in} snygga_färger 
+                    {print} 'snyggt!'
+                    {else} 
+                    {print} 'meh'
                     ```
                 story_text_2: |
                     ### Övning
@@ -1066,8 +1073,10 @@ adventures:
                     ```
                     djur är hund, ko, får
                     svaret är fråga 'Vilket är ditt favoritdjur?'
-                    _ svar _ djur _ 'Mitt också!'
-                    _ _ 'Mina favoritdjur är hundar, kor och får'
+                    _ svar _ djur 
+                    _ 'Mitt också!'
+                    _ 
+                    _ 'Mina favoritdjur är hundar, kor och får'
                     ```
     is_command:
         default_save_name: kommandot_är
@@ -1273,56 +1282,6 @@ adventures:
                     allowance = {ask} 'How much pocket money do you get each week?'
 
                     {call} calculate_budget with _, _, _
-                    ```
-    pressit:
-        name: Knapptryckningar
-        default_save_name: Tryckt
-        description: Prova att koppla en tangent till ett kommando!
-        levels:
-            6:
-                story_text: |
-                    På den här nivån finns ytterligare ett nytt nyckelord: `{pressed}`!
-                    Med `{pressed}` kan du använda tangenterna på ditt tangentbord för att styra vilka rader som används.
-
-                    ### Övning
-                    Titta på exemplet och lägg till ytterligare en kodrad som reagerar på en tangenttryckning.
-                example_code: |
-                    ```
-                    {print} 'Vill du ha ett lyckligt (l) eller olyckligt (o) slut?'
-                    {if} l {is} {pressed} {print} 'De levde lyckliga i alla sina dagar ❤'
-                    {else} {print} 'Prinsen blev uppäten av en flodhäst 😭'
-                    ```
-                story_text_2: |
-                    Du kan också koppla sköldpaddskommandon till knappar.
-
-                    ### Övning
-                    Kopiera raderna några gånger så att du kan skapa en större ritning.
-            8:
-                story_text: |
-                    Nu när du har lärt dig om `{repeat}`, kan vi trycka på tangenterna flera gånger.
-                    Du kan använda det för att få sköldpaddan att gå framåt och vända sig.
-
-                    ### Övning
-                    Koden som du har sett på nivå 5 kontrollerar bara tangenten en gång. Kopiera exempelkoden och lägg till en `{repeat}` till den, så att du kan trycka på tangenterna många gånger.
-                    Använd denna kod för att rita något snyggt.
-            10:
-                story_text: |
-                    Nu när du vet hur man kombinerar påståenden kan du skapa ett verktyg för att skriva på tangentbord med `{pressed}`-kommandot.
-
-                    ### Övning
-                    Gör klart koden. Varje gång ska en slumpmässig bokstav väljas, som du måste trycka på. Du får en poäng för en korrekt tryckning och två poängs avdrag för en felaktig tryckning.
-                    **Extrauppgift** Rensa skärmen efter varje bokstav, och visa användaren hur många poäng de har fått.
-                example_code: |
-                    ```
-                    poäng = 0
-                    bokstäver = a, b, c, d, e
-                    {repeat} 10 {times}
-                        bokstav = _ _ _
-                        {print} 'Tryck på bokstaven ' bokstav
-                        {if} bokstav {is} {pressed}
-                        _
-                        _
-                        _
                     ```
     print_command:
         default_save_name: skriv
@@ -1627,8 +1586,10 @@ adventures:
                     ```
                     drycker_i_lager {is} vatten, läsk, cola, apelsinjuice
                     dryck {is} {ask} 'Vad vill du dricka?'
-                    {if} dryck {in} drycker_i_lager {print} 'En' dryck 'på väg!'
-                    {else} {print} 'Tyvärr, vi har inte det'
+                    {if} dryck {in} drycker_i_lager 
+                    {print} 'En' dryck 'på väg!'
+                    {else} 
+                    {print} 'Tyvärr, vi har inte det'
                     ```
             7:
                 story_text: |
@@ -2014,16 +1975,6 @@ adventures:
                     ```
                     apor = 5, 4, 3, 2, 1
                     ```
-            13:
-                story_text: |
-                    På nivå 16 gjorde vi låtar med hjälp av listor. De programmen fungerar inte längre korrekt på denna nivå. Kolonen från nivå 17 och parenteserna från nivå 18 behöver fortfarande läggas till.
-
-                    ### Övning 1
-                    Drunken sailor-låten ges som exempelkod, men fungerar inte än.
-                    Kan du se till att allt fungerar igen? För att hjälpa dig har vi placerat _ på platsen för _några_ av felen.
-
-                    ### Övning 2
-                    Slå nu också upp din Old MacDonald-låt från nivå 16 och korrigera den.
     songs_2:
         levels:
             12:
@@ -2205,13 +2156,13 @@ adventures:
                     ```
                     colors = red, blue, orange, yellow, pink, purple, green, brown, black
                     distance = 120
-                    repeat 5 times
+                    {repeat} 5 times
                     _
                     ```
                     Hint for the flags:
                     ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
+                    country = {ask} 'which country would you like to see the flag of?'
+                    {if} country is 'the Netherlands'
                         color_1 = red
                         color_2 = white
                         color_3 = blue
@@ -2229,7 +2180,7 @@ adventures:
                     ```
                     colors = red, yellow, green
                     {for} chosen_color {in} colors
-                        color _
+                        {color} _
                         {repeat} _
                     ```
             12:
@@ -2249,7 +2200,7 @@ adventures:
                     {forward} 300
                     {turn} 180
 
-                    {for} i {in} {range} 1 {to} 5
+                    {repeat} 5 {times}
                         {color} gray
                         {forward} 100
                         shape = {ask} 'What kind of shape would you like next on the bracelet?'
@@ -2272,9 +2223,9 @@ adventures:
                 example_code: |
                     ``
                     svar = 0
-                    {while} svar != 25
-                        svar = {ask} 'Vad är 5 gånger 5?'
-                    {print} 'Ett korrekt svar har getts'
+                    {while} svar != 25:
+                        svar = {input}('Vad är 5 gånger 5?')
+                    {print}('Ett korrekt svar har getts')
                     ```
     years:
         name: Nyårsdagen

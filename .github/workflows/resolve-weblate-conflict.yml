@@ -35,7 +35,7 @@ jobs:
     # Make a distinction between Pull Request checkout and Push checkout. Push checkout
     # works mostly automatically, but for PRs we must be very explicit to get the right
     # branch and also support forks.
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       name: Checkout branch
       with:
         fetch-depth: 0
@@ -49,7 +49,7 @@ jobs:
     #  Actual build
 
     - name: Set up Python 3.12
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v6
       with:
         python-version: 3.12
     - name: Install Python dependencies

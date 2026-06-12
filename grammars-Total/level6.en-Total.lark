@@ -1,0 +1,178 @@
+?atom: NUMBER | _MINUS NUMBER | var_access | textwithoutspaces // we now allow floats with NUMBER
+?comparison_arg: textwithoutspaces | var_access | list_access | NUMBER
+_color_literal : black | blue | brown | gray | green | orange | pink | purple | red | white | yellow
+_elif_clause: _ELIF (condition|error_condition|condition_spaces) _EOL _if_less_command
+_else_clause: _ELSE _EOL _if_less_command
+_empty_program: (_EOL | _SPACE)*
+_if_clause: _IF (condition|error_condition|condition_spaces) _EOL _if_less_command
+_if_less_command: print | ask | play | turtle | assign_list | add | remove | sleep | error_print_no_quotes | assign
+_non_empty_program: _EOL* (command | error_invalid) _SPACE* (_EOL+ command _SPACE*)* _EOL* //lines may end on spaces and might be separated by many newlines
+_print_ask_argument.1: (_SPACE | list_access | error_list_access | quoted_text | var_access_print)*
+add: _ADD_LIST text_add_remove_list _TO_LIST _SPACE var_access
+ask: var _IS _ASK _SPACE? (_print_ask_argument)?
+assign: var _IS (list_access | textwithinnerspaces) _SPACE? -> assign
+assign_list: var _IS textwithinnerspaces (_COMMA textwithinnerspaces)+ _SPACE?
+bigger: comparison_arg _LARGER comparison_arg _SPACE?
+bigger_equal: comparison_arg _LARGER_EQUALS comparison_arg _SPACE?
+command: clear | error_non_decimal | print | ask | play | turtle | assign_list | add | remove | error_add_missing_to | error_remove_missing_from | error_add_missing_list | error_remove_missing_list | sleep | error_list_access | error_ask_no_quotes | error_invalid_space | error_print_no_quotes | error_print_one_quote_only | error_text_no_print | empty_line | if_pressed_else | error_if_pressed_missing_else | if_pressed_without_else | ifelse | ifs | ifelse | ifs | error_else_no_if | assign | ifelifelse
+condition: in_list_check | not_in_list_check | equality_check | smaller | bigger | not_equal | smaller_equal | bigger_equal
+condition_spaces: textwithoutspaces _IS textwithoutspaces (_SPACE textwithoutspaces)+
+equality_check: comparison_arg (_IS | _EQUALS) comparison_arg _SPACE?
+equality_check_dequals: comparison_arg _DOUBLE_EQUALS comparison_arg _SPACE?
+error_add_missing_list: _ADD_LIST text_add_remove_list _TO_LIST _SPACE?
+error_add_missing_to: _ADD_LIST text_add_remove_list _SPACE?
+error_ask_dep_2: _ASK not_letter_or_numeral error_text_dep_2?
+error_ask_missing_variable: _STANDALONE_IS _SPACE _ASK _SPACE? text
+error_ask_no_quotes: var _IS _ASK not_letter_or_numeral text -> error_print_nq
+error_ask_one_quote_only: var _IS _ASK _SPACE? "'" textwithoutsinglequote -> error_print_nq | var _IS _ASK _SPACE? "\"" textwithoutdoublequote -> error_print_nq | var _IS _ASK _SPACE? textwithoutsinglequote "'" -> error_print_nq | var _IS _ASK _SPACE? textwithoutdoublequote "\"" -> error_print_nq
+error_condition: condition_spaces _SPACE
+error_echo_dep_2: _ECHO error_text_dep_2?
+error_else_no_if.-1: _else_clause
+error_if_pressed_missing_else: if_pressed_without_else
+error_invalid.-100: textwithoutspaces _SPACE* (quoted_text | textwithspaces)?
+error_invalid_space: _SPACE any
+error_list_access: var_access _SPACE textwithoutspaces _SPACE random
+error_non_decimal: ((textwithoutspaces | _SPACE)*)? NON_DECIMAL (text*)?
+error_print_no_quotes: _PRINT (textwithoutspaces | list_access | var_access) (_SPACE (textwithoutspaces | list_access | var_access))* -> error_print_nq
+error_print_one_quote_only: _PRINT "'" textwithoutsinglequote -> error_print_nq | _PRINT "\"" textwithoutdoublequote -> error_print_nq | _PRINT textwithoutsinglequote "'" -> error_print_nq | _PRINT textwithoutdoublequote "\"" -> error_print_nq
+error_remove_missing_from: _REMOVE text_add_remove_list _SPACE?
+error_remove_missing_list: _REMOVE text_add_remove_list _FROM _SPACE?
+error_text_dep_2: /([^\n#]+)/ -> text //anything can be parsed except for a newline and a comment hash
+error_text_no_print: quoted_text
+if_pressed_else: _IF (LETTER_OR_NUMERAL | var) _IS _PRESSED _EOL* _if_less_command (_SPACE+ _EOL* | _SPACE* _EOL+) _ELSE (_SPACE+ _EOL* | _SPACE* _EOL+) _if_less_command
+if_pressed_without_else: _IF (LETTER_OR_NUMERAL | var) _IS _PRESSED _EOL* _if_less_command
+ifelifelse: _if_clause (_EOL _elif_clause)+ _EOL _else_clause
+ifelse: _if_clause _EOL _else_clause
+ifs: _if_clause // 'if' is a reserved word in Python, hence the name of the rule is 'ifs'
+in_list_check: textwithoutspaces _IN var_access
+list_access: var_access _AT (INT | random | var_access)
+nospace: /[^\n, ]/
+not_equal: comparison_arg _NOT_EQUALS comparison_arg _SPACE?
+not_in_list_check: textwithoutspaces _NOT_IN var_access
+not_letter_or_numeral: /[^\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/ -> text
+play: _PLAY (list_access | textwithoutspaces)
+print: _PRINT (_print_ask_argument)?
+program: _empty_program | _non_empty_program
+quoted_text: (/'((?:[^\\']|\\.)*)'/ | /"((?:[^\\"]|\\.)*)"/ | /‘((?:[^\\‘]|\\.)*)’/ | /“((?:[^\\”]|\\.)*)”/ | /„((?:[^\\“”]|\\.)*)[“”]/ | /”((?:[^\\”]|\\.)*)”/ | /«((?:[^\\»]|\\.)*)»/ | /《((?:[^\\》]|\\.)*)》/ | /「((?:[^\\」]|\\.)*)」/ ) -> text //text can be between single or double quotes, but quotes may be escaped with \
+remove: _REMOVE text_add_remove_list _FROM _SPACE var_access
+sleep: _SLEEP (INT | list_access | var_access)?
+smaller: comparison_arg _SMALLER comparison_arg _SPACE?
+smaller_equal: comparison_arg _SMALLER_EQUALS comparison_arg _SPACE?
+start: program
+text: /([^\n،,，、#]+)/ -> text
+text_add_remove_list: /(?:[^\n,،，、# ]| (?!to|from))+/ -> text
+textwithinnerspaces: /(?:[^#\n،,，、 ]| (?!else))*[^#\n،,，、 ]/ -> text
+textwithoutdoublequote: /([^\n"]+)/ -> text
+textwithoutsinglequote: /([^\n']+)/ -> text
+textwithoutspaces: /(?:[^#\n،,，、 *+\-\/e]|e(?!lse ))+/ _END_BLOCK* -> text
+textwithspaces: /(?:[^#\n،,，、 ]| (?!else))+/ -> text
+turtle: _FORWARD ((NUMBER | list_access | textwithoutspaces))? -> forward | _TURN ((NUMBER | list_access | textwithoutspaces))? -> turn | _COLOR (_color_literal | list_access | textwithoutspaces)? -> color
+var: NAME // used for variable definitions, e.g. a = 1
+var_access: NAME // used for variable references, e.g. for i in range. It parses the same as var, but does not result in a lookup table entry
+var_access_print: NAME // used for variable references in print statements, e.g. print a.  Parses the same as var_access but need to be processed differently in the tree for handling the varunquotedexception
+_DEFINE: ("define" | "define") _SPACE?
+_CALL: ("call" | "call") _SPACE?
+_WITH: ("with" | "with") _SPACE?
+_DEF: ("def" | "def") _SPACE?
+_RETURN: ("return" | "return") _SPACE?
+_PRINT: ("print" | "print") _SPACE?
+_PLAY: ("play" | "play") _SPACE
+_ASK: ("ask" | "ask")
+_ECHO: ("echo" | "echo") _SPACE?
+_FORWARD: ("forward" | "forward") _SPACE?
+_TURN: ("turn" | "turn") _SPACE?
+left: ("left" | "left") _SPACE?
+right: ("right" | "right") _SPACE?
+black: ("black" | "black") _SPACE?
+blue: ("blue" | "blue") _SPACE?
+brown: ("brown" | "brown") _SPACE?
+gray: ("gray" | "gray") _SPACE?
+green: ("green" | "green") _SPACE?
+orange: ("orange" | "orange") _SPACE?
+pink: ("pink" | "pink") _SPACE?
+purple: ("purple" | "purple") _SPACE?
+red: ("red" | "red") _SPACE?
+white: ("white" | "white") _SPACE?
+yellow: ("yellow" | "yellow") _SPACE?
+_IS: _SPACE ("is" | "is") _SPACE
+_STANDALONE_IS: ("is" | "is")
+_SLEEP: ("sleep" | "sleep") _SPACE?
+_ADD_LIST: ("add" | "add") _SPACE
+_TO_LIST: _SPACE? ("to" | "to")
+_REMOVE: ("remove" | "remove") _SPACE
+_FROM: _SPACE? ("from" | "from")
+_AT: _SPACE ("at" | "at") _SPACE
+random: ("random" | "random") _SPACE?
+_IN: _SPACE ("in" | "in") _SPACE
+_NOT_IN: _SPACE ("not in" | "not in") _SPACE
+_IF: ("if" | "if") _SPACE
+_ELSE: "else" | "else"
+_AND: _SPACE? ("and" | "and") _SPACE
+_REPEAT: ("repeat" | "repeat") _SPACE
+_TIMES: _SPACE ("times" | "times")
+_FOR: ("for" | "for") _SPACE
+_RANGE: ("range" | "range") _SPACE?
+_TO: _SPACE ("to" | "to") _SPACE
+_STEP: "step" | "step"
+_ELIF: _SPACE? ("elif" | "elif") _SPACE
+_INPUT: ("input" | "input")
+_OR: _SPACE? ("or" | "or") _SPACE
+_WHILE: ("while" | "while") _SPACE
+_LENGTH: "length" | "length"
+_COLOR : ("color" | "color") _SPACE?
+_PRESSED: ("pressed" | "pressed") _SPACE?
+clear: ("clear" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?
+
+// If the comment takes up the whole line, it should also encompass its leading newline. In this way the whole
+// comment line can be skipped for the commands containing it. Comments should escape ENDBLOCKS not only in the start
+// but at any point, because if the body of a command (e.g. `if`) ends up with a comment, the ENDBLOCK would appear
+// right after it. Therefore, the ENDBLOCK should not be counted as a part of the comment.
+COMMENT: /[\n ]*\#(?!ENDBLOCK)(?:[^\n#]|#(?!ENDBLOCK))*/
+%ignore COMMENT
+
+// Internal symbol added by the preprocess_blocks function to indicate the end of blocks
+_END_BLOCK: "#ENDBLOCK"
+
+NEGATIVE_NUMBER: _MINUS /\p{Nd}+/ ("." /\p{Nd}+/)?
+POSITIVE_NUMBER: /\p{Nd}+/ ("." /\p{Nd}+/)?
+NUMBER: NEGATIVE_NUMBER | POSITIVE_NUMBER
+INT: _MINUS? /\p{Nd}+/
+NON_DECIMAL: _MINUS? /[\p{Nl}\p{No}]+/
+
+// FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html
+// Exact grammar stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
+
+NAME: LETTER_OR_UNDERSCORE LETTER_OR_NUMERAL*
+LETTER_OR_UNDERSCORE: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
+LETTER_OR_NUMERAL: LETTER_OR_UNDERSCORE | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
+
+//symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
+_EOL: "\r"?"\n"+
+_SPACE: " "+
+_COMMA: _SPACE? (","|"،"|"，"|"、") _SPACE? //support latin and arabic and Chinese commas and always allow these to be surrounded by spaces
+_COLON: _SPACE? ":" _SPACE? | _SPACE? "：" _SPACE?
+_LEFT_BRACKET : _SPACE? "(" _SPACE? | _SPACE? "（" _SPACE?
+_RIGHT_BRACKET : _SPACE? ")" _SPACE? | _SPACE? "）" _SPACE?
+_LEFT_SQUARE_BRACKET :  _SPACE? "[" _SPACE?
+_RIGHT_SQUARE_BRACKET : _SPACE? "]" _SPACE?
+_HASH: "#"
+_SMALLER : _SPACE? "<" _SPACE?
+_LARGER: _SPACE? ">" _SPACE?
+_EQUALS: _SPACE? "=" _SPACE? //always allow = to be surrounded by spaces
+_DOUBLE_EQUALS: _SPACE? "==" _SPACE?
+_NOT_EQUALS: _SPACE? "!=" _SPACE?
+_SMALLER_EQUALS : _SPACE? "<=" _SPACE?
+_LARGER_EQUALS: _SPACE? ">=" _SPACE?
+_SINGLE_QUOTE: "'" | "‘" | "’"
+_DOUBLE_QUOTE: "\"" | "“" | "”"
+_QUOTE: _SINGLE_QUOTE | _DOUBLE_QUOTE
+_PLUS: _SPACE? "+" _SPACE?
+_MINUS: _SPACE? "-" _SPACE?
+_MULTIPLY: _SPACE? "*" _SPACE?
+_DIVIDE: _SPACE? "/" _SPACE?
+
+
+empty_line: _SPACE
+any: /.+/ -> text

@@ -72,13 +72,16 @@ def create_subscription(email, country, teacher=True, created_class=False, custo
 @run_if_mailchimp_config_present
 def create_subscription_at_signup(email, country):
     """ Subscribes the user to the newsletter when they sign up. """
-    fire_and_forget(lambda _: create_subscription(email, country))
+    if email:
+        fire_and_forget(lambda _: create_subscription(email, country))
 
 
 @run_if_mailchimp_config_present
 def update_subscription(current_email, new_email, new_country):
     def update():
         """ Updates the newsletter subscription when the user changes their email or/and their country """
+        if not current_email:
+            return
         response = get_mailchimp_subscriber(current_email)
         if response and response.status_code == 200:
             current_tags = response.json().get('tags', [])
@@ -114,6 +117,8 @@ def create_subscription_event(email, tag):
     """ When certain events occur, e.g. a newsletter subscriber creates or customizes a class, these events
     should be reflected in their subscription, so that we can send them relevant content """
     def create():
+        if not email:
+            return
         r = get_mailchimp_subscriber(email)
         if r.status_code == 200:
             current_tags = r.json().get('tags', [])

@@ -309,7 +309,10 @@ adventures:
                     pikët = 0
                     hedhja = zgjedhjet {at} {random}
                     {print} 'ju keni hedhur' hedhja
-                    {if} hedhja {is} krimi_tokes pikët = pikët+ 5 {else} pikët= pikët + hedhja
+                    {if} hedhja {is} krimi_tokes 
+                    pikët = pikët+ 5 
+                    {else} 
+                    pikët= pikët + hedhja
                     {print} 'këto janë' pikët ' pikë'
                     ```
                 example_code_2: |
@@ -499,7 +502,10 @@ adventures:
                     {print} 'Jam Hedy fallxhori!'
                     {print} 'Mund të parashikoj nëse do të fitosh llotarinë nesër!'
                     person {is} {ask} 'Kush jeni ju?'
-                    {if} person {is} Hedy {print} 'Ju sigurisht do të fitoni!🤩' {else} {print} 'Fat i keq! Dikush tjetër do të fitojë!😭'
+                    {if} person {is} Hedy 
+                    {print} 'Ju sigurisht do të fitoni!🤩' 
+                    {else} 
+                    {print} 'Fat i keq! Dikush tjetër do të fitojë!😭'
                     ```
             7:
                 story_text: |
@@ -848,8 +854,7 @@ adventures:
                     javë = për_të_ruajtur / kompensim
                     {print} 'Mund të blesh një ' _' në ' _ ' javë.'
                     ```
-    pressit:
-        levels: {}
+
     print_command:
         levels: {}
     quizmaster:
@@ -954,16 +959,28 @@ adventures:
                     ```
                     {print} 'Mirë se erdhët në Restorant Hedy!'
                     specialitet {is} {ask} 'A doni të dëgjoni specilialitetin tonë sotë?'
-                    {if} specialitet {is} po {print} 'E veçanta e sotme është mishi i pulës dhe orizi.' {else} {print} 'Ska problem.'
+                    {if} specialitet {is} po 
+                    {print} 'E veçanta e sotme është mishi i pulës dhe orizi.' 
+                    {else} 
+                    {print} 'Ska problem.'
                     ushqimi {is} {ask} 'Çfarë dëshironi të hani?'
                     {print} 'Një ' ushqimi ', është duke arritur!'
                     pije {is} {ask} 'Çfarë dëshironi të pini?'
-                    {if} pije {is} kola {print} 'Më falni, nuk kemi kola!' {else} {print} 'Zgjedhje e mirë!'
-                    çfarëdo {is} {ask} 'A dëshironi diçka {else}(tjetër)?'
+                    {if} pije {is} kola 
+                    {print} 'Më falni, nuk kemi kola!' 
+                    {else} 
+                    {print} 'Zgjedhje e mirë!'
+                    çfarëdo {is} {ask} 'A dëshironi diçka (tjetër)?'
                     {print} 'Më lejo të përsërisë porosinë tuaj...'
                     {print} 'Një ' ushqimi
-                    {if} pije {is} kola {print} 'dhe...' {else} {print} 'Një ' pije
-                    {if} çfarëdo {is} jo {print} 'Kjo ishte!' {else} {print} 'Një ' çfarëdo
+                    {if} pije {is} kola 
+                    {print} 'dhe...' 
+                    {else} 
+                    {print} 'Një ' pije
+                    {if} çfarëdo {is} jo 
+                    {print} 'Kjo ishte!' 
+                    {else} 
+                    {print} 'Një ' çfarëdo
                     {print} 'Faleminderit për porosinë tuaj dhe shijoni ushqimin tuaj!'
                     ```
             7:
@@ -1315,11 +1332,6 @@ adventures:
                         {print} 'atje një ' zëri
                         {print} 'gjithkund një ' zëri zëri
                     ```
-                story_text_2: |
-                    ### Exercise 2
-                    Print the song Five little moneys jumping on the bed. Look up the text if you don't remember.
-
-                    **(extra)** Print the song Old MacDonald had a farm, and make sure all animals make a different sound, using an `{if}`.
     songs_2:
         levels:
             12:
@@ -1418,9 +1430,9 @@ adventures:
                 example_code_2: |
                     ```
                     direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
-                    if direction is left turn _
-                    if direction is right turn _
-                    forward 100
+                    {if} direction {is} left {turn} _
+                    {if} direction {is} right {turn} _
+                    {forward} 100
                     ```
             7:
                 story_text: |

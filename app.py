@@ -16,14 +16,14 @@ import zipfile
 import jinja_partials
 from typing import Optional
 from logging.config import dictConfig as logConfig
-from os import path
-from iso639 import languages
+from iso639 import ALL_LANGUAGES as languages
+import webbrowser
 
-import hedy.static_babel_content as static_babel_content
+import static_babel_content
 from markupsafe import Markup
-from flask import (Flask, Response, abort, after_this_request, g, jsonify, make_response,
+from flask import (Flask, abort, after_this_request, g, jsonify, make_response,
                    redirect, request, send_file, url_for, Blueprint,
-                   send_from_directory, session, current_app)
+                   send_from_directory, session, current_app, has_request_context)
 from flask_babel import Babel, format_timedelta
 from website.flask_helpers import gettext_with_fallback as gettext
 from website.flask_commonmark import Commonmark
@@ -34,6 +34,7 @@ import hedy
 import website_content as hedy_content
 from hedy import translation as hedy_translation
 import hedyweb
+import envs
 import utils
 from dataclasses import dataclass
 from hedy.error import get_error_text
@@ -44,11 +45,11 @@ from website_content import (adventures_order_per_level, KEYWORDS_ADVENTURES, AL
                              ALL_LANGUAGES, COUNTRIES, FRIENDLY_SORTED_COUNTRIES, HOUR_OF_CODE_ADVENTURES)
 
 from logging_config import LOGGING_CONFIG
-from utils import dump_yaml_rt, is_debug_mode, load_yaml_rt, timems, version, strip_accents
+from utils import timems, version, strip_accents
 from website import (ab_proxying, admin, auth_pages, aws_helpers,
                      cdn, classes, database, for_teachers, s3_logger,
                      profile, programs, querylog, statistics,
-                     translating, tags, surveys, super_teacher, public_adventures, user_activity, feedback)
+                     tags, surveys, super_teacher, public_adventures, user_activity, feedback)
 from website.auth import (current_user, is_admin, is_teacher, is_second_teacher, is_super_teacher, is_students_teacher,
                           has_public_profile, login_user_from_token_cookie, requires_login, requires_login_redirect,
                           forget_current_user)
@@ -57,6 +58,11 @@ from website.log_fetcher import log_fetcher
 from website.frontend_types import Adventure, Program, ExtraStory, SaveInfo, Solution
 from website.flask_hedy import g_db
 from website.newsletter import add_used_slides_to_subscription, get_subscription_status
+
+# Configure the external functions that the Hedy library uses, to link to web dependencies
+# (Gettext, Flask, etc)
+hedy.external.initialize_gettext(gettext)
+hedy.yaml_file.initialize_yaml_cache(lambda: g.setdefault('yaml_cache', {}) if has_request_context() else {})
 
 logConfig(LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
@@ -131,7 +137,7 @@ def create_app(for_testing=False):
     # For settings with multiple workers, an environment variable is required,
     # otherwise cookies will be constantly removed and re-set by different
     # workers.
-    if utils.is_production():
+    if envs.current_env().require_secret:
         if not os.getenv('SECRET_KEY'):
             raise RuntimeError(
                 'The SECRET KEY must be provided for non-dev environments.')
@@ -146,7 +152,7 @@ def create_app(for_testing=False):
     if for_testing:
         app_obj.config.update(TESTING=True)
 
-    if utils.is_heroku():
+    if envs.current_env().secure_cookies:
         app_obj.config.update(
             SESSION_COOKIE_SECURE=True,
             SESSION_COOKIE_HTTPONLY=True,
@@ -417,13 +423,6 @@ def initialize_session():
                        is_teacher=is_teacher(g.user), is_admin=is_admin(g.user), is_super_teacher=is_admin(g.user))
 
 
-if os.getenv('IS_PRODUCTION'):
-    @app.before_app_request
-    def reject_e2e_requests():
-        if utils.is_testing_request(request):
-            return 'No E2E tests are allowed in production', 400
-
-
 def g_for_teachers():
     """Get the FOR_TEACHERS object from the current Flask app."""
     return current_app.config['hedy_globals']['FOR_TEACHERS']
@@ -437,7 +436,7 @@ def before_request_proxy_testing():
 
 # HTTP -> HTTPS redirect
 # https://stackoverflow.com/questions/32237379/python-flask-redirect-to-https-from-http/32238093
-if os.getenv('REDIRECT_HTTP_TO_HTTPS'):
+if os.getenv('REDIRECT_HTTP_TO_HTTPS') in ['true', '1']:
     @app.before_app_request
     def before_request_https():
         if request.url.startswith('http://'):
@@ -446,13 +445,12 @@ if os.getenv('REDIRECT_HTTP_TO_HTTPS'):
             return redirect(url, code=302)
 
 
-# We don't need to log in offline mode
-if utils.is_offline_mode():
-    parse_logger = s3_logger.NullLogger()
-else:
+if envs.current_env().event_logs:
     parse_logger = s3_logger.S3Logger(name="parse", config_key="s3-parse-logs")
     querylog.LOG_QUEUE.set_transmitter(
         aws_helpers.s3_querylog_transmitter_from_env())
+else:
+    parse_logger = s3_logger.NullLogger()
 
 
 @app.before_app_request
@@ -491,12 +489,6 @@ def setup_language():
         return make_response(gettext("request_invalid"), 404)
 
 
-if utils.is_heroku() and not os.getenv('HEROKU_RELEASE_CREATED_AT'):
-    logger.warning(
-        'Cannot determine release; enable Dyno metadata by running'
-        '"heroku labs:enable runtime-dyno-metadata -a <APP_NAME>"')
-
-
 # A context processor injects variables in the context that are available to all templates.
 @app.app_context_processor
 def enrich_context_with_user_info():
@@ -516,7 +508,7 @@ def enrich_context_with_user_info():
 @app.app_context_processor
 def add_generated_css_file():
     return {
-        "generated_css_file": '/css/generated.full.css' if is_debug_mode() else '/css/generated.css'
+        "generated_css_file": '/css/generated.css' if envs.current_env().min_tailwind else '/css/generated.full.css'
     }
 
 
@@ -548,7 +540,7 @@ def set_security_headers(response):
 @app.teardown_request
 def teardown_request_finish_logging(exc):
     log_record = querylog.finish_global_log_record(exc)
-    if is_debug_mode():
+    if envs.current_env().event_logs and not envs.current_env().cloud_services:
         logger.debug(repr(log_record.as_data()))
 
 
@@ -945,13 +937,12 @@ def version_page():
     This is an admin-only page, it does not need to be linked.
    (Also does not have any sensitive information so it's fine to be unauthenticated).
     """
-    app_name = os.getenv('HEROKU_APP_NAME')
-
+    app_name = os.getenv('HEROKU_APP_NAME', 'Not running on Heroku')
     vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
     the_date = datetime.date.fromisoformat(
         vrz[:10]) if vrz else datetime.date.today()
 
-    commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
+    commit = os.getenv('HEROKU_SLUG_COMMIT', '???? Not running on Heroku')[0:6]
 
     return render_template('version-page.html',
                            app_name=app_name,
@@ -1370,6 +1361,193 @@ def index(level, program_id):
         ))
 
 
+@app.route("/hedy/<id>/view/redesign", methods=["GET"])
+@requires_login
+# TODO: rename to view_program once the old view_program is removed
+def view_program_redesing(user, id):
+    result = g_db().program_by_id(id)
+
+    prog_perms = get_current_user_program_permissions(result)
+    if not result or not prog_perms:
+        return utils.error_page(error=404, ui_message=gettext("no_such_program"))
+
+    # The program is valid, verify if the creator also have a public profile
+    result["public_profile"] = (
+        True if g_db().get_public_profile_settings(result["username"]) else None
+    )
+
+    code = result["code"]
+    level = int(result.get("level", 1))
+
+    keyword_lang = g.keyword_lang
+    adventure_info = ADVENTURES[g.lang].get_adventures_subset(
+        subset=[result["adventure_name"]], keyword_lang=keyword_lang
+    )
+    adventure = None
+    if adventure_info:
+        adventure_content = adventure_info[result["adventure_name"]]
+        extra_stories = (
+            adventure_content.get("levels", {}).get(level, {}).get("extra_stories", [])
+        )
+        solutions = (
+            adventure_content.get("levels", {}).get(level, {}).get("solutions", [])
+        )
+        adventure = Adventure(
+            short_name=result["adventure_name"],
+            name=adventure_content["name"],
+            image=adventure_content.get("image", None),
+            text=adventure_content["levels"][level].get("story_text", ""),
+            example_code=adventure_content["levels"][level].get("example_code", ""),
+            extra_stories=extra_stories,
+            is_teacher_adventure=False,
+            save_name=adventure_content["name"],
+            solutions=solutions,
+        )
+    elif not adventure_info:
+        teacher_adventures = g_db().batch_get_adventures([result["adventure_name"]])
+        db_teacher_adventure = teacher_adventures.get(result["adventure_name"])
+        if db_teacher_adventure and (
+            db_teacher_adventure.get("public") == 1 or prog_perms.can_edit
+        ):
+            adventure = (
+                Adventure.from_teacher_adventure_database_row(db_teacher_adventure)
+                if db_teacher_adventure
+                else None
+            )
+
+    # Try to translate the program from the language of the program to the language of the viewer
+    #
+    # - We do this in 2 steps: first translate from the source language to English,
+    #   then from English to the target language. There must be a reason for this, but I don't
+    #   know what it is.
+    # - In the past we used to do this "normalization via English" step for every program,
+    #   even if we would end up translating nl -> nl. I don't know if that was for a particular
+    #   reason but I've changed it to only do the translation if the source and target languages
+    #   are different.
+    # - Translation may fail, because it requires parsing the program and the program
+    #   may be syntactically invalid (missing indentation, programming mistakes, etc). Or it
+    #   may contain blanks, which will always yield an unparseable program.
+    # - We don't currently have a way to surface this error to the user. I don't know if
+    #   that matters.
+    source_language = result.get("lang")
+    target_language = g.keyword_lang
+    if (
+        source_language != target_language
+        and source_language in ALL_KEYWORD_LANGUAGES.keys()
+    ):
+        try:
+            code = hedy_translation.translate_keywords(
+                code, from_lang=source_language, to_lang=target_language, level=level
+            )
+        except Exception as e:
+            # Not really a good place to leave this error, but at least we don't
+            # want it crashing the page load. Log it as a warning then.
+            logger.warning(
+                f"Error translating program {id} from {source_language} to {target_language}: {e}"
+            )
+
+    result["code"] = code
+    student_adventure_id = (
+        f"{result['username']}-{result['adventure_name']}-{result['level']}"
+    )
+    student_adventure = g_db().student_adventure_by_id(student_adventure_id)
+    if not student_adventure:
+        # store the adventure in case it's not in the table
+        student_adventure = g_db().store_student_adventure(
+            dict(id=f"{student_adventure_id}", ticked=False, program_id=id)
+        )
+
+    arguments_dict = {
+        "program_id": id,
+        "page_title": f'{result["name"]} – {result["username"]} - Hedy',
+        "level": result["level"],  # Necessary for running
+        "program": dict(result, editor_contents=code),
+        "editor_readonly": True,
+        "student_adventure": student_adventure,
+        "is_students_teacher": False,
+        "raw": True,
+        "show_edit_button": prog_perms.can_edit and result.get("submitted") != 1,
+        "program_timestamp": utils.localized_date_format(result["date"]),
+    }
+    classes = g_db().get_student_classes_ids(result["username"])
+    next_submitted_classmate_program_id = None
+    if classes:
+        class_id = classes[0]
+        class_ = g_db().get_class(class_id) or {}
+        students = sorted(class_.get("students", []))
+        # Iterate over all other students starting from the next one, wrapping to the start.
+        if students:
+            try:
+                start_index = students.index(result["username"])
+            except ValueError:
+                start_index = -1
+            num_students = len(students)
+            for offset in range(1, num_students):
+                student = students[(start_index + offset) % num_students]
+                if student == result["username"]:
+                    continue
+                id = f"{student}-{result['adventure_name']}-{result['level']}"
+                next_classmate_adventure = g_db().student_adventure_by_id(id) or {}
+                candidate_program_id = next_classmate_adventure.get("program_id")
+                if candidate_program_id and not next_submitted_classmate_program_id:
+                    program_row = g_db().program_by_id(candidate_program_id)
+                    if program_row and program_row.get("submitted"):
+                        next_submitted_classmate_program_id = candidate_program_id
+                if next_submitted_classmate_program_id:
+                    break
+
+    student_customizations = g_db().get_student_class_customizations(result["username"])
+    adventure_index = 0
+    adventures_for_this_level = student_customizations.get("sorted_adventures", {}).get(
+        str(result["level"]), []
+    )
+    for index, adventure_content in enumerate(adventures_for_this_level):
+        if adventure_content["name"] == result["adventure_name"]:
+            adventure_index = index
+            break
+
+    next_submitted_program_id = None
+    # Iterate over the rest of the adventures, wrapping to the start, excluding the current one.
+    num_adventures = len(adventures_for_this_level)
+    if num_adventures > 0:
+        for offset in range(1, num_adventures):
+            next_adventure = adventures_for_this_level[
+                (adventure_index + offset) % num_adventures
+            ]
+            next_adventure_id = (
+                f"{result['username']}-{next_adventure['name']}-{result['level']}"
+            )
+            next_student_adventure = (
+                g_db().student_adventure_by_id(next_adventure_id) or {}
+            )
+            candidate_program_id = next_student_adventure.get("program_id")
+            if candidate_program_id and not next_submitted_program_id:
+                program_row = g_db().program_by_id(candidate_program_id)
+                if program_row and program_row.get("submitted"):
+                    next_submitted_program_id = candidate_program_id
+            if next_submitted_program_id:
+                break
+
+    class_info = g_db().get_class(class_id) if class_id else None
+
+    arguments_dict["can_checkoff_program"] = prog_perms.can_checkoff
+    arguments_dict["can_unsubmit_program"] = prog_perms.can_unsubmit
+
+    return render_template(
+        "hedy-page/view-program/view-program-page.html",
+        blur_button_available=True,
+        javascript_page_options=dict(
+            page="view-program", lang=g.lang, level=int(result["level"]), code=code
+        ),
+        class_id=student_customizations.get("id"),
+        class_info=class_info,
+        next_submitted_program_id=next_submitted_program_id,
+        next_submitted_classmate_program_id=next_submitted_classmate_program_id,
+        adventure=adventure,
+        **arguments_dict,
+    )
+
+
 @app.route('/hedy/<id>/view', methods=['GET'])
 @requires_login
 def view_program(user, id):
@@ -1437,6 +1615,7 @@ def view_program(user, id):
 
     classes = g_db().get_student_classes_ids(result['username'])
     next_classmate_adventure_id = None
+    next_submitted_classmate_program_id = None
     if classes:
         class_id = classes[0]
         class_ = g_db().get_class(class_id) or {}
@@ -1445,8 +1624,14 @@ def view_program(user, id):
         for student in students[index + 1:]:
             id = f"{student}-{result['adventure_name']}-{result['level']}"
             next_classmate_adventure = g_db().student_adventure_by_id(id) or {}
-            next_classmate_adventure_id = next_classmate_adventure.get('program_id')
-            if next_classmate_adventure_id:
+            candidate_program_id = next_classmate_adventure.get('program_id')
+            if candidate_program_id and next_classmate_adventure_id is None:
+                next_classmate_adventure_id = candidate_program_id
+            if candidate_program_id and not next_submitted_classmate_program_id:
+                program_row = g_db().program_by_id(candidate_program_id)
+                if program_row and program_row.get('submitted'):
+                    next_submitted_classmate_program_id = candidate_program_id
+            if next_classmate_adventure_id and next_submitted_classmate_program_id:
                 break
 
     student_customizations = g_db().get_student_class_customizations(result['username'])
@@ -1458,13 +1643,23 @@ def view_program(user, id):
             break
 
     next_program_id = None
-    for i in range(adventure_index + 1, len(adventures_for_this_level)):
-        next_adventure = adventures_for_this_level[i]
-        next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
-        next_student_adventure = g_db().student_adventure_by_id(next_adventure_id) or {}
-        next_program_id = next_student_adventure.get('program_id')
-        if next_program_id:
-            break
+    next_submitted_program_id = None
+    # Iterate over the rest of the adventures, wrapping to the start, excluding the current one.
+    num_adventures = len(adventures_for_this_level)
+    if num_adventures > 0:
+        for offset in range(1, num_adventures):
+            next_adventure = adventures_for_this_level[(adventure_index + offset) % num_adventures]
+            next_adventure_id = f"{result['username']}-{next_adventure['name']}-{result['level']}"
+            next_student_adventure = g_db().student_adventure_by_id(next_adventure_id) or {}
+            candidate_program_id = next_student_adventure.get('program_id')
+            if candidate_program_id and next_program_id is None:
+                next_program_id = candidate_program_id
+            if candidate_program_id and not next_submitted_program_id:
+                program_row = g_db().program_by_id(candidate_program_id)
+                if program_row and program_row.get('submitted'):
+                    next_submitted_program_id = candidate_program_id
+            if next_program_id and next_submitted_program_id:
+                break
 
     arguments_dict['can_checkoff_program'] = prog_perms.can_checkoff
     arguments_dict['can_unsubmit_program'] = prog_perms.can_unsubmit
@@ -1478,7 +1673,9 @@ def view_program(user, id):
                                code=code),
                            class_id=student_customizations.get('id'),
                            next_program_id=next_program_id,
+                           next_submitted_program_id=next_submitted_program_id,
                            next_classmate_program_id=next_classmate_adventure_id,
+                           next_submitted_classmate_program_id=next_submitted_classmate_program_id,
                            **arguments_dict)
 
 
@@ -2102,10 +2299,12 @@ def other_languages(lang_param=None):
     other_langs = [make_lang_obj(lang) for lang in ALL_LANGUAGES.keys() if lang != current_lang]
 
     # Get English names for all Hedy supported languages using iso639 and their codes
+    # Make a part1 map of all languages
+    part1_map = {language.part1: language for language in languages}
     for lang_code in other_langs:
         lang = lang_code.get('lang')
-        if lang in languages.part1:
-            language = languages.get(part1=lang)
+        language = part1_map.get(lang)
+        if language:
             lang_code['english'] = language.name
         else:
             lang_code['english'] = non_iso_transl.get(lang, '')
@@ -2198,27 +2397,6 @@ def get_user_messages():
 @app.route('/translating')
 def translating_page():
     return render_template('translating.html')
-
-
-@app.route('/update_yaml', methods=['POST'])
-def update_yaml():
-    filename = path.join('coursedata', request.form['file'])
-    # The file MUST point to something inside our 'coursedata' directory
-    filepath = path.abspath(filename)
-    expected_path = path.abspath('coursedata')
-    if not filepath.startswith(expected_path):
-        raise RuntimeError('Invalid path given')
-
-    data = load_yaml_rt(filepath)
-    for key, value in request.form.items():
-        if key.startswith('c:'):
-            translating.apply_form_change(
-                data, key[2:], translating.normalize_newlines(value))
-
-    data = translating.normalize_yaml_blocks(data)
-
-    return Response(dump_yaml_rt(data), mimetype='application/x-yaml',
-                    headers={'Content-disposition': 'attachment; filename=' + request.form['file'].replace('/', '-')})
 
 
 @app.route('/user/<username>')
@@ -2377,6 +2555,9 @@ def get_current_user_program_permissions(program):
 
     Verify that the program is either public, the current user is the creator, teacher or the user is admin.
     """
+    if not program:
+        return None
+
     user = current_user()
 
     is_current_user_author = program['username'] == user['username']
@@ -2387,7 +2568,7 @@ def get_current_user_program_permissions(program):
     if can_view:
         can_edit = is_current_user_author
         can_checkoff = students_teacher
-        can_unsubmit = program.get('submitted', False) and (is_admin or students_teacher)
+        can_unsubmit = program.get('submitted', False) and (is_admin(user) or students_teacher)
         return ProgramPermissions(can_edit, can_checkoff, can_unsubmit)
 
     return None
@@ -2477,8 +2658,9 @@ def on_offline_mode():
         (g, r'                    __/ |'),
         (g, r'   o f f l i n e   |___/ '),
         ('', ''),
-        ('', 'Use a web browser to visit the following website:'),
+        ('', 'Use a web browser to visit (one of) the following website(s):'),
         ('', ''),
+        (Fore.BLUE, f'   http://localhost/ {Fore.BLACK}(only works on this machine)'.ljust(70)),
         *[(Fore.BLUE, f'   http://{ip}/') for ip in ip_addresses],
         ('', ''),
         ('', ''),
@@ -2487,7 +2669,7 @@ def on_offline_mode():
     # Init and deinit so we don't mess with Werkzeug's use of this library later on.
     with colorama_text():
         for style, text in lines:
-            print(Back.WHITE + Fore.BLACK + ''.ljust(10) + style + text.ljust(60) + Style.RESET_ALL)
+            print(Back.WHITE + Fore.BLACK + ''.ljust(10) + style + text.ljust(65) + Style.RESET_ALL)
 
     # We have this option for testing the offline build. A lot of modules read
     # files upon import, and those happen before the offline build 'cd' we do
@@ -2498,15 +2680,15 @@ def on_offline_mode():
     if smoke_test:
         sys.exit(0)
 
+    # Automatically open Hedy in browser
+    webbrowser.open('http://localhost/')
+
 
 if __name__ == '__main__':
     # Start the server on a developer machine. Flask is initialized in DEBUG mode, so it
     # hot-reloads files. We also flip our own internal "debug mode" flag to True, so our
     # own file loading routines also hot-reload.
-    no_debug_mode_requested = os.getenv('NO_DEBUG_MODE')
-    utils.set_debug_mode(not no_debug_mode_requested)
-
-    if utils.is_offline_mode():
+    if envs.is_offline_mode():
         on_offline_mode()
 
     app_obj = create_app()
@@ -2520,7 +2702,7 @@ if __name__ == '__main__':
         if key not in os.environ:
             os.environ[key] = value
 
-    if utils.is_debug_mode():
+    if not envs.current_env().statics_caching:
         # For local debugging, fetch all static files on every request
         app_obj.config['SEND_FILE_MAX_AGE_DEFAULT'] = None
 
@@ -2536,9 +2718,9 @@ if __name__ == '__main__':
 
         tracemalloc.start()
         start_snapshot = tracemalloc.take_snapshot()
-    debug = utils.is_debug_mode() and not (is_in_debugger or profile_memory)
+    debug = envs.current_env().hot_reload_py and not (is_in_debugger or profile_memory)
     if debug:
-        logger.debug('app starting in debug mode')
+        logger.debug('app starting with hot reloading enabled')
 
     # Threaded option enables multiple instances for multiple user access support
     app_obj.run(threaded=True, debug=debug,

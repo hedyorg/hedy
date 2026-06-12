@@ -760,12 +760,22 @@ export function submit_program (id: string) {
 
 function change_to_unsubmitted () {
     $('#unsubmit-program-button').hide();
+  $('#adventure_checkbox').hide();
     $('#submitted-program-title').hide();
     $('#submitted-program-details').hide();
 }
 
 export async function unsubmit_program (id: string, prompt: string) {
-  await modal.confirmP(prompt);
+  const isRedesignPage = window.location.pathname.includes('/redesign');
+  if (isRedesignPage) {
+    await new Promise<void>((resolve) => {
+      modal.confirmRedesign(prompt, resolve, function(){}, {
+        confirmButtonLabel: 'Unsubmit',
+      });
+    });
+  } else {
+    await modal.confirmP(prompt);
+  }
   tryCatchPopup(async () => {
     const response = await postJson('/programs/unsubmit', { id });
     modal.notifySuccess(response.message);
@@ -1013,7 +1023,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
       $('#keybinding_modal').hide();
 
       if (hasTurtle) {
-        $('#save_files_container').show();
+        // TODO: disabled until we fix it
+        // $('#save_files_container').show();
       }
 
       // Check if the program was correct but the output window is empty: Return a warning
@@ -1094,7 +1105,8 @@ export function runPythonProgram(this: any, code: string, sourceMap: any, hasTur
         $('#keybinding_modal').hide();
 
         if (hasTurtle) {
-          $('#save_files_container').show();
+          // $('#save_files_container').show();
+          // TODO: disabled until we fix it
         }
 
         if (cb) cb ();

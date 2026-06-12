@@ -1,7 +1,7 @@
 import csv
 import json
 import hedy
-from hedy_tests.Tester import Snippet
+from tests.Tester import Snippet
 
 most_recent_file_name = 'tools/botswana-programs.json'
 snippets = []

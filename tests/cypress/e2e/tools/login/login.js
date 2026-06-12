@@ -26,8 +26,8 @@ export function login(username, password) {
     cy.clearAllLocalStorage()
     cy.clearAllSessionStorage();
     goToLogin();
-    cy.getDataCy('username').type(username);
-    cy.getDataCy('password').type(password);
+    cy.getDataCy('username', { timeout: 15000 }).type(username);
+    cy.getDataCy('password', { timeout: 15000 }).type(password);
     cy.getDataCy('login_button').click();
     cy.wait('@login');
 }

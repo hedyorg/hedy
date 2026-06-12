@@ -61,8 +61,8 @@ tests/coverage/
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
-db.sqlite3-journal
+*.sqlite3
+*.sqlite3-journal
 
 # Flask stuff:
 instance/
@@ -152,7 +152,8 @@ node_modules
 _*
 !__init__.py
 # Ignore pickled versions of YAML files
-*.yaml.pickle
+*.pickle
+*.pkl
 dev_database.json
 
 batchhedy/input/*
@@ -191,5 +192,12 @@ file_logger.json
 # More info in #4540
 foo.txt
 
+coverage/
+.coverage
+
 # Generated schema json files
 *.generated.schema.json
+.env*
+!.env-dev
+throwaway-scripts
+machine_files

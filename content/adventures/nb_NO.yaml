@@ -278,7 +278,10 @@ adventures:
                     poeng = 0
                     verdi = valgene {at} {random}
                     {print} 'du trillet' verdi
-                    {if} verdi {is} makk poeng = poeng + 5 {else} poeng = poeng + verdi
+                    {if} verdi {is} makk 
+                    poeng = poeng + 5 
+                    {else} 
+                    poeng = poeng + verdi
                     {print} 'det er' poeng ' poeng'
                     ```
                     Kan du gjøre det slik at koden gir deg den totale poengsummen for 8 terningkast? For å gjøre det må du kopiere og lime inn et par linjer kode.
@@ -497,8 +500,7 @@ adventures:
         default_save_name: Sparebøsse
         description: Tell sparepengene dine!
         levels: {}
-    pressit:
-        levels: {}
+
     print_command:
         levels: {}
     quizmaster:
@@ -635,7 +637,7 @@ adventures:
                     ```
                     {print} 'Velkommen Hedys restaurant!'
                     antall_personer = {ask} 'Hvor mange personer er dere i dag?'
-                    {repeat} antall_personer times mat = {ask} 'Hva vil du spise?'
+                    {repeat} antall_personer {times} mat = {ask} 'Hva vil du spise?'
                     {print} 'Takk for bestillingen, den er på vei!'
                     ```
             9:
@@ -841,12 +843,12 @@ adventures:
             10:
                 example_code: |
                     ```
-                    name = ask 'Hva heter du??'
-                    passord = ask 'Hva er ditt passord?'
-                    if name is 'Agent007' and passord is 'TOPSECRET'
-                        print 'Go to the airport at 02.00'
+                    name = {ask} 'Hva heter du??'
+                    passord = {ask} 'Hva er ditt passord?'
+                    {if} name {is} 'Agent007' and passord {is} 'TOPSECRET'
+                        {print} 'Go to the airport at 02.00'
                     else
-                        print 'Go to the trainstation at 10.00'
+                        {print} 'Go to the trainstation at 10.00'
                      ```
     sleep_command:
         levels: {}
@@ -1031,9 +1033,9 @@ adventures:
                 example_code_2: |
                     ```
                     direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
-                    if direction is left turn _
-                    if direction is right turn _
-                    forward 100
+                    {if} direction {is} left {turn} _
+                    {if} direction {is} right {turn} _
+                    {forward} 100
                     ```
             7:
                 story_text: |

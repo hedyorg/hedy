@@ -28,7 +28,7 @@
     </th>
 {% endmacro %}
 
-<div id="table_container">
+<div id="table_container" class="w-full overflow-x-auto">
     <form id="sort-form"
           hx-get="/for-teachers/redesign/class/{{ class_info.id }}/grade/filter_sort"
           hx-target="#grade-class-table-body"

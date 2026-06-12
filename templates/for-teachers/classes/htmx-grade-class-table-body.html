@@ -12,6 +12,7 @@
         </td>
         <td data-cy="teacher_cell" class="py-3 text-center">{{ program.student }}</td>
         <td class="py-3 tet-center items-center">
+            <div class="flex flex-col gap-2 w-52 md:w-auto">
             <div class="flex flex-row  items-center cursor-pointer hover:bg-blue-200 p-3 rounded-lg transition-all ease-in duration-100"
             _="on click
                 toggle .sliding-content-closed .sliding-content-open on #program_{{ program.program_id }}
@@ -29,7 +30,7 @@
                 <div class="turn-pre-into-ace  overflow-auto rounded-md">
                     <pre level="{{ program.level }}" class="view-program min-h-4/5 h-4/5 py-4">{{ program.code }}</pre>
                     <div class="flex flex-row gap-5 items-center">
-                        <a href="/hedy/{{ program.program_id }}/view" target="_blank" class="blue-btn-new"> {{ _('view_program') }} </a>
+                        <a href="/hedy/{{ program.program_id }}/view/redesign" target="_blank" class="blue-btn-new"> {{ _('view_program') }} </a>
                         {% if not program.is_modified %}
                             <span> This code is very similar to example code.</span>
                         {% endif %}

@@ -292,6 +292,13 @@ class ProgramsModule(WebsiteModule):
         if not result:
             return make_response(gettext("request_invalid"), 400)
 
+        student_adventure_id = (
+            f"{result.get('username')}-{result.get('adventure_name')}-{result.get('level')}"
+        )
+        student_adventure = self.db.student_adventure_by_id(student_adventure_id)
+        if student_adventure:
+            self.db.set_student_adventure_ticked(student_adventure_id, False)
+
         program = self.db.submit_program_by_id(body["id"], False)
 
         response = {

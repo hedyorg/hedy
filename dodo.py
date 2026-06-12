@@ -26,6 +26,7 @@ from glob import glob
 import sys
 import platform
 
+from doit import task_params
 from doit.tools import LongRunning
 
 if os.getenv('GITHUB_ACTION') and platform.system() == 'Windows':
@@ -91,9 +92,7 @@ def task_tailwind():
     We will automatically switch between DEV and PROD mode depending
     on where we run.
     """
-    prod = os.getenv('DYNO') is not None
-
-    if prod:
+    if is_running_on_heroku():
         script = 'build-tools/heroku/tailwind/generate-prod-css'
         target = 'static/css/generated.css'
     else:
@@ -170,7 +169,7 @@ def task_generate_static_babel_content():
         actions=[
             [python3, script],
         ],
-        targets=['hedy/data/static_babel_content.json'],
+        targets=['static_babel_content.json'],
         uptodate=[babel_version_unchanged],
     )
 
@@ -218,6 +217,7 @@ def task_typescript():
             [npx, 'esbuild', 'static/js/index.ts',
              '--bundle', '--sourcemap', '--minify', '--target=es2017',
              '--global-name=hedyApp', '--platform=browser',
+             '--loader:.svg=text',
              '--outfile=static/js/appbundle.js'],
         ],
         targets=['static/js/appbundle.js'],
@@ -225,41 +225,52 @@ def task_typescript():
     )
 
 
-def task_lark():
-    """Generate Lark grammar files based on keyword information in YAMLs."""
-    script = 'hedy/yaml_to_lark_utils.py'
-    keyword_yamls = glob('hedy/data/keywords/*.yaml')
-    grammars = ['hedy/data/grammars/keywords-' + replace_ext(path.basename(y), '.lark') for y in keyword_yamls]
-
-    return dict(
-        title=lambda _: 'Create Lark grammar files',
-        file_dep=[
-            script,
-            'hedy/data/grammars/keywords-template.lark',
-            *keyword_yamls,
-        ],
-        actions=[
-            [python3, script],
-        ],
-        targets=grammars,
-    )
-
-
 def task_prefixes():
     """Generate Python prefixes for TypeScript"""
+    import hedy.data
+    prefixes_dir = hedy.data.prefixes_dir
+
     script = 'build-tools/heroku/generate-prefixes-ts'
 
     return dict(
         title=lambda _: 'Generate Python prefixes for TypeScript',
-        file_dep=[
-            script,
-            *glob('prefixes/*.py'),
-        ],
+        file_dep=[script],
         actions=[
-            [bash, script],
+            [bash, script, prefixes_dir],
         ],
         targets=[
             'static/js/pythonPrefixes.ts'
+        ],
+    )
+
+
+@task_params([dict(
+    name='spec',
+    short='s',
+    long='spec',
+    default='tests'
+)])
+def task_test(spec):
+    """Run branch coverage for in-process Flask Python/HTML tests."""
+    return dict(
+        file_dep=[
+            *(set(glob('*.py')) - set(['dodo.py', 'gunicorn.conf.py'])),
+            *glob('test/**/*.py', recursive=True),
+            *glob('website/**/*.py', recursive=True),
+        ],
+        title=lambda _: f'Run {spec} with coverage',
+        actions=[
+            [
+                python3,
+                '-m',
+                'pytest',
+                '--cov=.',
+                '--cov-report=html',
+                '--cov-report=json',
+                spec,
+                '-q',
+                '-n=4',
+            ],
         ],
     )
 
@@ -362,6 +373,15 @@ def task_devserver():
     )
 
 
+def task_fulldev():
+    """Build the frontend, then run the devserver. Requires Node."""
+    return dict(
+        title=lambda _: 'Run full development environment',
+        task_dep=['frontend', 'devserver'],
+        actions=None,
+    )
+
+
 def task_normalize_yaml():
     """Normalize the YAML files by running a script.
 
@@ -370,7 +390,6 @@ def task_normalize_yaml():
     """
     yamls = [
         *glob('content/**/*.yaml', recursive=True),
-        *glob('hedy/data/**/*.yaml', recursive=True),
     ]
 
     return dict(
@@ -397,7 +416,6 @@ def task_backend():
             'generate_optional_yaml_schemas',
             'compile_babel',
             'generate_static_babel_content',
-            'lark',
         ],
     )
 
@@ -442,6 +460,41 @@ def task_precommit():
     return dict(
         title=lambda _: 'Precommit checks',
         actions=['pre-commit run --show-diff-on-failure --color=always --all-files'],
+    )
+
+
+def task_build_container():
+    """Build a Docker container for the app."""
+    return dict(
+        title=lambda _: 'Build Docker container',
+        actions=[
+            LongRunning('docker build -t hedy:latest .'),
+        ],
+        verbosity=2,  # show everything live
+    )
+
+
+def task_container():
+    """Run a Docker container for the app.
+
+    Uses the `dev_database.json` in the current directory.
+    """
+    return dict(
+        title=lambda _: 'Run Docker container',
+        task_dep=['build_container'],
+        actions=[
+            LongRunning(' '.join([
+                'docker', 'run', '--rm',
+                '-p', '127.0.0.1:8080:8000',
+                '-v', './dev_database.json:/app/dev_database.json',
+                '--env-file', '.env-dev',
+                '--name=hedy',
+                'hedy',
+                '--access-logfile', '-',
+                '--log-file', '-',
+            ])),
+        ],
+        verbosity=2,  # show everything live
     )
 
 
