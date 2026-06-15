@@ -1018,7 +1018,7 @@ adventures:
 
                     #Een potje Twister spelen:
                     {print} 'Klaar voor een potje Twister?'
-                    {repeat} _
+                    {repeat} _ _
                         {call} draai
                         {sleep} 2
                     ```
@@ -1116,16 +1116,16 @@ adventures:
                     Maak de regel af door de functie te roepen en de nieuwe prijs te berekenen.
                 example_code: |
                     ```
-                    {define} bereken_nieuwe_prijs {with} bedrag, percentage
+                    {def} bereken_nieuwe_prijs(bedrag, percentage):
                         percentage = percentage / 100
                         korting_bedrag = bedrag * percentage
                         {return} bedrag - korting_bedrag
 
-                    oude_prijs = {ask} 'Wat staat er op het prijskaartje?'
-                    korting = {ask} 'Hoeveel procent korting krijg je?'
+                    oude_prijs = {input}('Wat staat er op het prijskaartje?')
+                    korting = {input}('Hoeveel procent korting krijg je?')
 
-                    nieuwe_prijs = _ bereken_nieuwe_prijs {with} oude_prijs, _
-                    {print} 'De nieuwe prijs is ' nieuwe_prijs ' euro'
+                    nieuwe_prijs = bereken_nieuwe_prijs _ oude_prijs, _ _
+                    {print}('De nieuwe prijs is ', nieuwe_prijs, ' euro')
                     ```
     guess_my_number:
         name: raad mijn getal
