@@ -1431,12 +1431,70 @@ adventures:
                     * De verpleegkundige vertellen om te controleren of de balans positief of negatief is, om te beslissen of de patiënt vandaag meer infuusvloeistof nodig heeft of niet.
             8:
                 story_text: |
-                    Ons heliplatform van de traumahelikopter kan wel een likje verf gebruiken. Kun jij een programma voor de tekenturtle schrijven om de markeringen opnieuw te tekenen?
+                    Onze patiënten vergeten soms hun mediactie in te nemen, wat voor grote gezondheidsrisico's kan zorgen. Om te zorgen dat de patiënten op tijd hun pillen slikken, geven we ze een pillenwekkertje mee.
+                    Kun jij ons helpen zo'n pillenwekkertje te programmeren?
 
-                    ### Oefening
-                    Teken de markeringen van het heliplatform.
-                    <img src="https://github.com/user-attachments/assets/96deeb9e-b155-4a3d-91f3-3c447df7ce2b" width="200">
+                    ### Opdracht
+                    Het programma moet:
 
+                    #Deel 1, Instellingen voor de verpleegkundige
+                    * Begin door de verpleegkundige de mogelijkheid te geven de naam van de patiënt in te voeren.
+                    * Laat de verpleegkundige vervolgens invullen hoeveel pillen de patiënt moet innemen bij de eerste dosis (08:00 uur), de tweede dosis (12:00 uur) en de laatste dosis van de dag (16:00 uur).
+                    * Bedank de verpleegkundige en vertel haar of hem het alarm aan de patiënt te geven. Wis het scherm twee seconden na dit bericht.
+
+                    #Deel 2, Eerste dosis
+                    * Begroet de patiënt bij naam en vertel dat dit alarm zal afgaan wanneer het tijd is om de medicatie in te nemen.
+                    * Laat het alarm 3 keer piepen.
+                    * Vertel de patiënt dat het 08:00 uur is en tijd voor de eerste dosis.
+                    * Vraag de patiënt: "Heb je de pil ingenomen?" even vaak als het aantal pillen dat bij de eerste dosis moet worden ingenomen.
+                    * Vertel de patiënt dat alle pillen van de eerste dosis zijn ingenomen en wis het scherm na 2 seconden.
+
+                    #Deel 3, Tweede dosis
+                    * Wacht 4 seconden (in werkelijkheid zou dit 4 uur zijn).
+                    * Laat het alarm op dezelfde manier afgaan als bij de eerste dosis.
+
+                    #Deel 4, Laatste dosis
+                    * Wacht 4 seconden (in werkelijkheid 4 uur).
+                    * Laat het alarm afgaan voor de laatste dosis van de dag.
+                answer_code: |-
+                    ```
+                    #Instellingen voor de verpleegkundige
+                    {print} 'Goedemorgen, verpleegkundige. Vul alstublieft de juiste informatie voor de patiënt in.'
+                    naam {is} {ask} 'Hoe heet deze patiënt?'
+                    eerste_dosis {is} {ask} 'Hoeveel pillen neemt ' naam ' om 8 uur in?'
+                    tweede_dosis {is} {ask} 'Hoeveel pillen neemt ' naam ' om 12 uur in?'
+                    laatste_dosis {is} {ask} 'Hoeveel pillen neemt ' naam ' om 16 uur in?'
+                    {print} 'Bedankt, u kunt de tracker nu aan de patiënt geven.'
+                    {sleep} 2
+                    {clear}
+
+                    #Eerste dosis
+                    {print} 'Hallo ' naam ', ik ben je medicatiewekker. Ik zal piepen wanneer je je medicijnen moet innemen.'
+                    {repeat} 3 {times} {play} C4
+                    {print} "Het is 8 uur 's ochtends, tijd voor je eerste dosis"
+                    {repeat} eerste_dosis {times} pil {is} {ask} 'Heb je de pil ingenomen?'
+                    {print} 'Je hebt al je eerste dosis ingenomen, ' naam
+                    {sleep} 2
+                    {clear}
+
+                    #Tweede dosis
+                    {sleep} 4
+                    {repeat} 3 {times} {play} C4
+                    {print} "Het is 12 uur 's middags, tijd voor je tweede dosis"
+                    {repeat} tweede_dosis {times} pil {is} {ask} 'Heb je de pil ingenomen?'
+                    {print} 'Je hebt al je tweede dosis ingenomen, ' naam
+                    {sleep} 2
+                    {clear}
+
+                    #Laatste dosis
+                    {sleep} 4
+                    {repeat} 3 {times} {play} C4
+                    {print} "Het is 16:00 uur, tijd voor je laatste dosis"
+                    {repeat} laatste_dosis {times} pil {is} {ask} 'Heb je de pil ingenomen?'
+                    {print} 'Je hebt vandaag al je pillen ingenomen, ' naam
+                    {sleep} 2
+                    {clear}
+                    ```
             9:
                 story_text: |
                     Onze ambulance is aan onderhoud toe. Het geschilderde rode kruis aan de zijkant is vervaagd en de sirene werkt niet meer.
