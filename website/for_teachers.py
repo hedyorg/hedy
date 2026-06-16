@@ -183,9 +183,7 @@ class ForTeachersModule(WebsiteModule):
             if levels:
                 if len(levels) > 3:
                     displayed_levels = ", ".join(str(level) for level in levels[:3])
-                    remaining_levels = len(levels) - 3
-                    # TODO: either translate this or find other way to display this
-                    level_display = f"{displayed_levels} ({remaining_levels} more)"
+                    level_display = f"{displayed_levels}..."
                 else:
                     level_display = ", ".join(str(level) for level in levels)
             elif adventure.get("level"):
@@ -238,8 +236,7 @@ class ForTeachersModule(WebsiteModule):
 
         tags = self.db.read_tags(adventure.get("tags", []))
         for tag in tags:
-            tagged_in = [tagged_adventure for tagged_adventure in tag["tagged_in"]
-                         if tagged_adventure["id"] != adventure_id]
+            tagged_in = [tagged_adventure for tagged_adventure in tag["tagged_in"] if tagged_adventure["id"] != adventure_id]
             if len(tag["tagged_in"]) != len(tagged_in):
                 self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
 
@@ -2920,6 +2917,8 @@ class ForTeachersModule(WebsiteModule):
     def get_new_adventure(self, user):
         class_id = request.args.get("class_id")
         level = request.args.get("level")
+        adventure_name = request.args.get("name", "")
+        ui_variant = request.args.get("ui")
 
         adventure_id = uuid.uuid4().hex
         adventure = self.create_basic_adventure(user, adventure_id)
@@ -2932,7 +2931,12 @@ class ForTeachersModule(WebsiteModule):
             session['class_id'] = class_id
             adventure["classes"] = [class_id]
 
+        if isinstance(adventure_name, str):
+            adventure["name"] = adventure_name.strip()
+
         session["new_adventure"] = adventure
+        if ui_variant == "legacy":
+            return redirect(f"/for-teachers/customize-adventure/{adventure['id']}?new_adventure=1")
         return redirect(f"/for-teachers/redesign/customize-adventure/{adventure['id']}?new_adventure=1")
 
     def _render_customize_adventure_page(self, user, adventure_id, template_name, *, javascript_page="customize-adventure"):
@@ -2963,21 +2967,42 @@ class ForTeachersModule(WebsiteModule):
         # We only need the name, id and if it already has the adventure set as data to the front-end
         classes = self.db.get_teacher_classes(user["username"], True)
         adventure_used_in_classes = []
+        current_levels = {str(level) for level in adventure.get("levels", [])}
+
+        def level_sort_key(level_value):
+            try:
+                return int(level_value)
+            except (TypeError, ValueError):
+                return level_value
+
         for Class in classes:
-            customizations = self.db.get_class_customizations(Class.get("id"))
-            for level in adventure.get("levels", []):
-                # TODO: change name to id in sorted_adventures (probably it's only teachers' adventures!)
-                adventures_for_level = customizations.get(
-                    "sorted_adventures", {}).get(level, []) if customizations else []
+            customizations = self.db.get_class_customizations(Class.get("id")) or {}
+            sorted_adventures = customizations.get("sorted_adventures", {})
+            used_levels = []
+
+            for level, adventures_for_level in sorted_adventures.items():
                 if any(adv for adv in adventures_for_level if adv.get("name") == adventure.get("id")):
-                    adventure_used_in_classes.append({
-                        "name": Class.get("name"),
-                        "id": Class.get("id"),
-                        "teacher": Class.get("teacher"),
-                        "students": Class.get("students", []),
-                        "date": Class.get("date")
-                    })
-                    break
+                    used_levels.append(str(level))
+
+            if not used_levels:
+                continue
+
+            used_levels = sorted(set(used_levels), key=level_sort_key)
+            invalid_levels = sorted(
+                [level for level in used_levels if level not in current_levels],
+                key=level_sort_key,
+            )
+
+            adventure_used_in_classes.append({
+                "name": Class.get("name"),
+                "id": Class.get("id"),
+                "teacher": Class.get("teacher"),
+                "students": Class.get("students", []),
+                "date": Class.get("date"),
+                "used_levels": used_levels,
+                "invalid_levels": invalid_levels,
+                "has_invalid_levels": len(invalid_levels) > 0,
+            })
 
         return render_template(
             template_name,
@@ -3092,6 +3117,7 @@ class ForTeachersModule(WebsiteModule):
             "public": 1 if body["public"] else 0,
             "language": body["language"],
             "content": body["content"],
+            "formatted_content": body.get("formatted_content", body["content"]),
             "solution_example": body.get("formatted_solution_code"),
         }
 

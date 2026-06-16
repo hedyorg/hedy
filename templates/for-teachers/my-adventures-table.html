@@ -5,7 +5,6 @@
         <th class="teacher-table-th rounded-tl-lg">{{ _('name') }}</th>
         <th class="teacher-table-th">{{ _('level') }}</th>
         <th class="teacher-table-th">{{ _('last_update') }}</th>
-        <th class="teacher-table-th">{{ _('used_in') }}</th>
         <th class="teacher-table-th">{{ _('public') }}</th>
         <th class="teacher-table-th rounded-tr-lg min-w-24">{{ _('actions') }}</th>
       </tr>
@@ -25,7 +24,6 @@
         </td>
         <td class="teacher-table-td whitespace-nowrap">{{ adventure.level_display }}</td>
         <td class="teacher-table-td whitespace-nowrap">{{ adventure.date }}</td>
-        <td class="teacher-table-td whitespace-nowrap">{{ adventure.used_in }}</td>
         <td class="teacher-table-td whitespace-nowrap">
           {% if adventure.public %}
           <i class="fa-solid fa-check text-green-700" aria-label="{{ _('yes') }}"></i>

@@ -3,7 +3,7 @@ import { CustomWindow } from './custom-window';
 import { PARSER_FACTORIES, keywords } from "./lezer-parsers/language-packages";
 import { SyntaxNode } from "@lezer/common";
 import DOMPurify from "dompurify";
-import { stopit, theGlobalEditor } from "./app";
+import { stopit, theGlobalEditor, theKeywordLanguage } from "./app";
 import { ClientMessages } from "./client-messages";
 import { HedyCodeMirrorEditorCreator } from "./cm-editor";
 import { HedySelect } from "./custom-elements";
@@ -176,14 +176,30 @@ function uploadAdventureDraftIfChanged(force = false) {
         });
 }
 
-function initializePreviewCodeBlocks(previewContainer: HTMLElement) {
-    const level = parseInt(
+function getPreviewHighlightLevel(previewContainer: HTMLElement): number {
+    const formElement = getCustomizeAdventureFormElement();
+    if (formElement) {
+        const selectedLevels = getSelectedAdventureLevels(formElement)
+            .map((value) => parseInt(value, 10))
+            .filter((value) => !Number.isNaN(value) && value > 0);
+
+        if (selectedLevels.length > 0) {
+            return Math.min(...selectedLevels);
+        }
+    }
+
+    const fallbackLevel = parseInt(
         previewContainer.closest('[data-level]')?.getAttribute('data-level') || '1',
         10,
     );
+    return Number.isNaN(fallbackLevel) || fallbackLevel < 1 ? 1 : fallbackLevel;
+}
+
+function initializePreviewCodeBlocks(previewContainer: HTMLElement) {
+    const level = getPreviewHighlightLevel(previewContainer);
     const keywordLanguage =
         previewContainer.closest('[data-kwlang]')?.getAttribute('data-kwlang')
-        || (document.querySelector('#languages_dropdown') as HedySelect | null)?.selected?.[0]
+        || theKeywordLanguage
         || 'en';
     const dir = $('body').attr('dir') || 'ltr';
 
@@ -247,6 +263,9 @@ function updatePreviewFromAdventureDraft() {
     previewContainer.innerHTML = storedDraft
         ? storedDraft.content
         : DOMPurify.sanitize(window.ckEditor?.getData() || '');
+
+    // Keep the container level in sync with the selected levels before rendering snippets.
+    previewContainer.setAttribute('data-level', String(getPreviewHighlightLevel(previewContainer)));
     initializePreviewCodeBlocks(previewContainer);
 }
 
@@ -338,9 +357,11 @@ export async function initializeCustomAdventurePage(_options: InitializeCustomiz
     const levelSwitches = document.querySelectorAll('input[name="adventure_levels"]') as NodeListOf<HTMLInputElement>;
     levelSwitches.forEach((el) => {
         el.addEventListener('change', () => {
+            updateAdventureLevelsFromSwitches('customize_adventure');
             showWarningIfMultipleLevels();
             persistAdventureDraftIfChanged(true);
             uploadAdventureDraftIfChanged(true);
+            updatePreviewFromAdventureDraft();
         });
     });
 
@@ -378,9 +399,28 @@ function updateAdventureLevelsFromSwitches(formId: string) {
     } else {
         $('#warningbox').hide();
     }
+
+    updateInvalidAdventureLevelWarnings(selected);
 }
 
-function parseJsonStringArray(rawValue: string | undefined): string[] {
+function updateInvalidAdventureLevelWarnings(selectedLevels: string[]) {
+    const selectedLevelSet = new Set(selectedLevels);
+    let hasAnyInvalidLevels = false;
+
+    document.querySelectorAll('.js-invalid-level-warning').forEach((element) => {
+        const usedLevels = parseJsonStringArray(element.getAttribute('data-used-levels'));
+        const hasInvalidLevels = usedLevels.some((level) => !selectedLevelSet.has(level));
+        element.classList.toggle('hidden', !hasInvalidLevels);
+        hasAnyInvalidLevels = hasAnyInvalidLevels || hasInvalidLevels;
+    });
+
+    const invalidLevelsWarning = document.getElementById('invalid-levels-warning');
+    if (invalidLevelsWarning) {
+        invalidLevelsWarning.classList.toggle('hidden', !hasAnyInvalidLevels);
+    }
+}
+
+function parseJsonStringArray(rawValue: string | null | undefined): string[] {
     if (!rawValue) {
         return [];
     }
@@ -431,34 +471,41 @@ function getFormattedAdventureContent(content: string, levels: string[], languag
     }
 
     const html = new DOMParser().parseFromString(content, 'text/html');
-    const snippets = html.querySelectorAll('pre[data-language="Hedy"]') || [];
-    const snippetsFormatted = [];
-    const keywordsFormatted = [];
+    const snippets: string[] = [];
+    const snippetsFormatted: string[] = [];
+    const keywordsFormatted: string[] = [];
+    const keywordCandidates: string[] = [];
     const minLevel = levels.map((value) => parseInt(value, 10)).reduce((a, b) => Math.min(a, b), Infinity);
 
-    for (const el of snippets) {
-        snippetsFormatted.push(el.textContent || '');
-    }
+    for (const tag of html.getElementsByTagName('code')) {
+        const isSnippet = tag.classList.contains('language-python')
+            || tag.closest('pre[data-language="Hedy"]') !== null;
 
-    for (const el of html.querySelectorAll('code:not(pre code)')) {
-        keywordsFormatted.push(el.textContent || '');
+        if (isSnippet) {
+            snippets.push(tag.textContent || '');
+        } else {
+            keywordCandidates.push(tag.textContent || '');
+        }
     }
 
     for (let i = 0; i < snippets.length; i++) {
-        snippetsFormatted[i] = addCurlyBracesToCode(snippetsFormatted[i], minLevel, language || 'en');
+        snippetsFormatted[i] = addCurlyBracesToCode(snippets[i], minLevel, language || 'en');
     }
 
-    for (let i = 0; i < keywordsFormatted.length; i++) {
-        keywordsFormatted[i] = addCurlyBracesToKeyword(keywordsFormatted[i]);
+    for (let i = 0; i < keywordCandidates.length; i++) {
+        keywordsFormatted[i] = addCurlyBracesToKeyword(keywordCandidates[i], language);
     }
 
     let i = 0;
     let j = 0;
     for (const tag of html.getElementsByTagName('code')) {
-        if (tag.className === 'language-python') {
-            tag.innerText = snippetsFormatted[i++] || '';
+        const isSnippet = tag.classList.contains('language-python')
+            || tag.closest('pre[data-language="Hedy"]') !== null;
+
+        if (isSnippet) {
+            tag.textContent = snippetsFormatted[i++] || '';
         } else {
-            tag.innerText = keywordsFormatted[j++] || '';
+            tag.textContent = keywordsFormatted[j++] || '';
         }
     }
 
@@ -477,7 +524,7 @@ export function update_adventure_redesign(formElement: HTMLFormElement, draftOve
     }
 
     const classes = parseJsonStringArray(formElement.dataset['adventureClasses']);
-    const language = (document.querySelector('#languages_dropdown') as HedySelect | null)?.selected?.[0]
+    const language = theKeywordLanguage
         || formElement.dataset['adventureLanguage']
         || 'en';
     const fallbackName = formElement.dataset['adventureName'] || '';
@@ -712,8 +759,10 @@ export function addCurlyBracesToCode(code: string, level: number, language: stri
     return formattedCode;
 }
 
-export function addCurlyBracesToKeyword(name: string) {
-    let lang =  (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
+export function addCurlyBracesToKeyword(name: string, language?: string) {
+    const lang = language
+        || theKeywordLanguage
+        || 'en';
     let TRADUCTION = traductionMap(lang);
 
     for (const [key, regexString] of TRADUCTION) {

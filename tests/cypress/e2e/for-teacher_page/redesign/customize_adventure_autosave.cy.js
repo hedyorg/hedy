@@ -62,6 +62,7 @@ describe('Customize adventure redesign autosave', () => {
 
     waitForUploadContaining('@uploadAdventureDraft', contentMarker, (body) => body.content);
     waitForUploadContaining('@uploadAdventureDraft', solutionMarker, (body) => body.formatted_solution_code);
+    waitForUploadContaining('@uploadAdventureDraft', '{print}', (body) => body.formatted_solution_code);
   });
 
   it('uploads successfully when editor content is emptied', () => {
@@ -82,5 +83,39 @@ describe('Customize adventure redesign autosave', () => {
     });
 
     waitForUploadWithEmptyContent('@uploadAdventureDraft');
+  });
+
+  it('uploads formatted_content with curly braces for snippets and inline keywords, using minimum selected level', () => {
+    loginForTeacher('teacher1');
+    cy.visit('/for-teachers/adventures/manage');
+
+    cy.get('tr[data-cy^="my_adventure_row_"] a.view_class')
+      .first()
+      .should('be.visible')
+      .click();
+
+    cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+
+    cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
+
+    cy.window().then((win) => {
+      win.ckEditor.setData(
+        `<p>Inline keyword: <code>not in</code></p>` +
+        `<pre><code class="language-python">if name is Hedy\n    print hello</code></pre>` +
+        `<p>This sentence keeps payload long enough for backend validation.</p>`
+      );
+    });
+
+    waitForUploadContaining('@uploadAdventureDraft', '{not_in}', (body) => body.formatted_content);
+    waitForUploadContaining('@uploadAdventureDraft', '{print}', (body) => body.formatted_content);
+
+    // Adventure has multiple levels and should use the minimum one.
+    // At minimum level, `if` should not be transformed into a keyword placeholder.
+    cy.wait('@uploadAdventureDraft', { timeout: 20000 }).then(({ request, response }) => {
+      expect(response?.statusCode).to.eq(200);
+      expect(request.body.formatted_content).to.include('{not_in}');
+      expect(request.body.formatted_content).to.include('{print} hello');
+      expect(request.body.formatted_content).to.not.include('{if}');
+    });
   });
 });

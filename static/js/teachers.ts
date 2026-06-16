@@ -16,8 +16,18 @@ declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
 const editorCreator = new HedyCodeMirrorEditorCreator();
 
-function promptByPageVariant(message: string, defaultValue: string, confirmCb: (value: string) => void, title: string = '') {
+function promptByPageVariant(
+  message: string,
+  defaultValue: string,
+  confirmCb: (value: string) => void,
+  title: string = '',
+  modalVariantOverride?: 'legacy' | 'redesign',
+) {
   closeOpenContextMenus();
+  if (modalVariantOverride) {
+    modal.prompt(message, defaultValue, confirmCb, modalVariantOverride, title);
+    return;
+  }
   const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
   modal.prompt(message, defaultValue, confirmCb, isRedesignPage ? 'redesign' : 'legacy', title);
 }
@@ -199,6 +209,37 @@ export function rename_adventure(
       return modal.notifyError(err.responseText);
     });
   }, promptTitle);
+}
+
+export function create_adventure_with_name(event: Event, triggerElement: HTMLElement) {
+  event.preventDefault();
+
+  const adventureNamePrompt = triggerElement.dataset['prompt'] || 'Name';
+  const promptTitle = triggerElement.dataset['title'] || '';
+  const classId = triggerElement.dataset['classId'];
+  const level = triggerElement.dataset['level'];
+  const emptyNameError = triggerElement.dataset['emptyNameError'] || 'Please enter a name.';
+  const modalVariant = triggerElement.dataset['modalVariant'] as ('legacy' | 'redesign' | undefined);
+
+  promptByPageVariant(adventureNamePrompt, '', function (adventureName) {
+    const trimmedName = adventureName.trim();
+    if (!trimmedName) {
+      return modal.notifyError(emptyNameError);
+    }
+
+    const params = new URLSearchParams();
+    params.set('name', trimmedName);
+    if (classId) {
+      params.set('class_id', classId);
+    }
+    if (level) {
+      params.set('level', level);
+    }
+
+    window.location.assign('/for-teachers/customize-adventure?' + params.toString());
+  }, promptTitle, modalVariant);
+
+  return false;
 }
 
 export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {

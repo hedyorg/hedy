@@ -13,12 +13,18 @@
   {{ render_partial('for-teachers/my-adventures-table.html', my_adventures=my_adventures) }}
 
   <div class="my-4 flex justify-start">
-    <a class="blue-btn-new inline-flex items-center"
+    <button type="button"
+       class="blue-btn-new inline-flex items-center"
        id="create_new_adventure_button"
        data-cy="create_new_adventure_button"
-       href="/for-teachers/customize-adventure"
+       data-prompt="{{ _('name') }}"
+       data-title="{{ _('create_adventure') }}"
+       data-empty-name-error="{{ _('adventure_empty') }}"
+       data-modal-variant="redesign"
+       data-level="1"
+       onclick="return hedyApp.create_adventure_with_name(event, this)"
       {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{ _('create_adventure') }}
-    </a>
+    </button>
   </div>
 
 </div>
