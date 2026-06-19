@@ -4339,26 +4339,25 @@ adventures:
                     {print} ("Welcome to our amsument park: 'Hedy High'")
                     {print} ("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
 
-                    #Trying two attractions:
-                    {for} i {in} {range} (2):
-                        attraction = {input} ('Which attraction would you like to try?')
+                    #Try one of the three attractions:
+                    attraction = {input} ('Which attraction would you like to try?')
 
-                        {if} attraction == 'Haunted house':
-                            age = {input} ('How old are you?')
-                            {if} age > 12 :
-                                {print} ('You are old enough. Enjoy getting scared!')
-                            _ :
-                                {print} ('Sorry, you have to wait till you are old enough.')
-                        
-                        {if} attraction == 'Rollercoaster':
-                            fear = {input} ('Are you afraid of heights?')
-                            {if} fear == 'yes':
-                                {print} ('Sorry, it is better for you to stay on the ground.')
-                            {elif} _ :
-                                height = _
+                    {if} attraction == 'Haunted house':
+                        age = {input} ('How old are you?')
+                        {if} age > 12 :
+                            {print} ('You are old enough. Enjoy getting scared!')
+                        _ :
+                            {print} ('Sorry, you have to wait till you are old enough.')
+                    
+                    {if} attraction == 'Rollercoaster':
+                        fear = {input} ('Are you afraid of heights?')
+                        {if} fear == 'yes':
+                            {print} ('Sorry, it is better for you to stay on the ground.')
+                        {elif} _ :
+                            height = _
 
-                        {if} attraction == 'Carousel':
-                            _
+                    {if} attraction == 'Carousel':
+                        _
 
                         ```
                 answer_code: |
@@ -4366,35 +4365,34 @@ adventures:
                         {print} ("Welcome to our amsument park: 'Hedy High'")
                         {print} ("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
 
-                        #Trying two attractions:
-                        {for} i {in} {range} (2):
-                            attraction = {input} ('Which attraction would you like to try?')
+                        #Try one of the three attractions:
+                        attraction = {input} ('Which attraction would you like to try?')
 
-                            {if} attraction == 'Haunted house':
-                                age = {input} ('How old are you?')
-                                {if} age > 12 :
-                                    {print} ('You are old enough. Enjoy getting scared!')
+                        {if} attraction == 'Haunted house':
+                            age = {input} ('How old are you?')
+                            {if} age > 12 :
+                                {print} ('You are old enough. Enjoy getting scared!')
+                            {else}:
+                                {print} ('Sorry, you have to wait till you are old enough.')
+                        
+                        {if} attraction == 'Rollercoaster':
+                            fear = {input} ('Are you afraid of heights?')
+                            {if} fear == 'yes':
+                                {print} ('Sorry, it is better for you to stay on the ground.')
+                            {elif} fear == 'no' :
+                                height = {input} ('What is your length in centimetres')
+                                {if} height > 150:
+                                    {print} ('Enjoy your ride!')
                                 {else}:
-                                    {print} ('Sorry, you have to wait till you are old enough.')
-                            
-                            {if} attraction == 'Rollercoaster':
-                                fear = {input} ('Are you afraid of heights?')
-                                {if} fear == 'yes':
-                                    {print} ('Sorry, it is better for you to stay on the ground.')
-                                {elif} fear == 'no' :
-                                    height = {input} ('What is your length in centimetres')
-                                    {if} height > 150:
-                                        {print} ('Enjoy your ride!')
-                                    {else}:
-                                        {print} ('Sorry you are not tall enough')
+                                    {print} ('Sorry you are not tall enough')
 
 
-                            {if} attraction == 'Carousel':
-                                age = {input} ('How old are you?')
-                                {if} age < 10:
-                                    {print} ('This is a perfect attraction for you. Enjoy!')
-                                {else}:
-                                    {print} ('Sorry you are too old.')
+                        {if} attraction == 'Carousel':
+                            age = {input} ('How old are you?')
+                            {if} age < 10:
+                                {print} ('This is a perfect attraction for you. Enjoy!')
+                            {else}:
+                                {print} ('Sorry you are too old.')
 
                         ```
     parrot:

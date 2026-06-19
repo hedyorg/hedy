@@ -2235,8 +2235,33 @@ adventures:
                     {print} ("Welkom bij het pretpark: 'Hedy Hoog'")
                     {print} ("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
 
-                    #Twee attracties uitproberen:
-                    {for} i {in} {range} (2):
+                    #Probeer een van de drie attracties uit:
+                    attractie = {input} ('Welke attractie wil je proberen?')
+
+                    {if} attractie == 'spookhuis':
+                        leeftijd = {input} ('Hoe oud ben je?')
+                        {if} leeftijd > 12 :
+                            {print} ('Je bent out genoeg. Geniet ervan!')
+                        _ :
+                            {print} ('Sorry, je bent nu nog niet oud genoeg. ')
+                    
+                    {if} attractie == 'Achtbaan':
+                        angst = {input} ('Heb je hoogtevrees?')
+                        {if} angst == 'ja':
+                            {print} ('Sorry, het is better als je op de grond blijft.')
+                        {elif} _ :
+                            lengte = _
+
+                    {if} attractie == 'Draaimolen':
+                        _
+
+                    ```
+                answer_code: |
+                        ```
+                        {print} ("Welkom bij het pretpark: 'Hedy Hoog'")
+                        {print} ("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
+
+                        #Probeer een van de drie attracties uit:
                         attractie = {input} ('Welke attractie wil je proberen?')
 
                         {if} attractie == 'spookhuis':
@@ -2250,47 +2275,20 @@ adventures:
                             angst = {input} ('Heb je hoogtevrees?')
                             {if} angst == 'ja':
                                 {print} ('Sorry, het is better als je op de grond blijft.')
-                            {elif} _ :
-                                lengte = _
-
-                        {if} attractie == 'Draaimolen':
-                            _
-
-                        ```
-                answer_code: |
-                        ```
-                        {print} ("Welkom bij het pretpark: 'Hedy Hoog'")
-                        {print} ("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
-
-                        #Twee attracties uitproberen:
-                        {for} i {in} {range} (2):
-                            attractie = {input} ('Welke attractie wil je proberen?')
-
-                            {if} attractie == 'spookhuis':
-                                leeftijd = {input} ('Hoe oud ben je?')
-                                {if} leeftijd > 12 :
-                                    {print} ('Je bent out genoeg. Geniet ervan!')
-                                _ :
-                                    {print} ('Sorry, je bent nu nog niet oud genoeg. ')
-                            
-                            {if} attractie == 'Achtbaan':
-                                angst = {input} ('Heb je hoogtevrees?')
-                                {if} angst == 'ja':
-                                    {print} ('Sorry, het is better als je op de grond blijft.')
-                                {elif} angst == 'nee' :
-                                    lengte = {input} ('Wat is je lengte in centimeters')
-                                    {if} lengte > 150:
-                                        {print} ('Geniet van het ritje!')
-                                    {else}:
-                                        {print} ('Sorry, je bent niet lang genoeg')
-
-
-                            {if} attractie == 'draaimolen':
-                                leeftijd = {input} ('Hoe oud ben je?')
-                                {if} leeftijd < 10:
-                                    {print} ('Dit is de perfecte attractie voor jou. Veel plezier!')
+                            {elif} angst == 'nee' :
+                                lengte = {input} ('Wat is je lengte in centimeters')
+                                {if} lengte > 150:
+                                    {print} ('Geniet van het ritje!')
                                 {else}:
-                                    {print} ('Helaas, je bent al te oud.')
+                                    {print} ('Sorry, je bent niet lang genoeg')
+
+
+                        {if} attractie == 'draaimolen':
+                            leeftijd = {input} ('Hoe oud ben je?')
+                            {if} leeftijd < 10:
+                                {print} ('Dit is de perfecte attractie voor jou. Veel plezier!')
+                            {else}:
+                                {print} ('Helaas, je bent al te oud.')
 
                         ```
     parrot:
