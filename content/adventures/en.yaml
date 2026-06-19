@@ -728,6 +728,51 @@ adventures:
                             {else}
                                 {print} 'That is wrong. The right answer is ' correct
                     ```
+            13: 
+                story_text: |
+                    In this level you will make a program to practice multiplication tables. 
+                    You choose which multiplication table you want to practice and than get asked all the multiplications until 10.
+                    Finish the code: Print whether the answer is correct or incorrect and print the correct answer if a mistake was made. 
+                    Also, give points for every correct answer and show the final score.
+
+                example_code: |
+                    ```
+                    #Asking for the multiplication table:
+                    number = {input} ('Of which number do you want to practice the multiplications?')
+                    score = 0
+
+                    #Asking the questions:
+                    {for} i {in} {range} (1,10):
+                        answer = {input} ('How much is ', i, ' times ', number, '?' )
+                        correct_answer = number * i
+                        {if} answer _
+                            score = 
+                            {print} ('Yes, that is correct!')
+                        _
+
+                    #Printing the score:
+                    ```
+                answer_code: |
+                    ```
+                    #Asking for the multiplication table:
+                    number = {input} ('Of which number do you want to practice the multiplications?')
+                    score = 0
+
+                    #Asking the questions:
+                    {for} i {in} {range} (1,10):
+                        answer = {input} ('How much is ', i, ' times ', number, '?' )
+                        correct_answer = number * i
+                        if answer == correct_answer:
+                            score = score + 1
+                            {print} ('Yes, that is correct!')
+                        else:
+                            {print} ('Sorry that was wrong, the correct answer is: ', correct_answer)
+
+                    #Printing the score:
+                    {print}('You are finished.')
+                    {print}('Your final score is: ', score)
+
+                    ```
             15:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
@@ -3484,6 +3529,65 @@ adventures:
                     ```
                 answer_code: |
                     Own answer
+    market:
+        name: market
+        default_save_name: market
+        description: market
+        levels:
+            13:
+                story_text: | 
+                    In this adventure you can write a code for a market. Take a look at the example code. 
+                    In this market they sell apples, bread and cheese. Can you tell customers how much each product costs and ask them how much they want to buy?
+                    Maybe you can even add extra products to this market. Make sure you also tell the customer how much he has to pay.
+                example_code: |
+                    ```
+                    #Introducing to the Hedy market:
+                    {print} 'Welcome to the Hedy market!'
+                    {print} 'Here, we sell bread, apples and cheese'
+                    
+                    #Asking how much you want to buy:
+                    price_bread = 5
+                    {print} ('One bread costs ', _ )
+                    bread_number = {input}('How many loafs of bread would you like to buy?')
+                    total_bread = price_bread*_
+
+                    price_apple =
+
+
+                    #Telling to total price:
+
+
+
+
+                    ```
+                answer_code: |
+                ```
+                    #Introducing to the Hedy market:
+                    {print} 'Welcome to the Hedy market!'
+                    {print} 'Here, we sell bread, apples and cheese'
+                    
+                    #Asking how much you want to buy:
+                    price_bread = 5
+                    {print} ('One bread costs ', price_bread)
+                    bread_number = {input}('How many loafs of bread would you like to buy?')
+                    total_bread = price_bread*bread_number
+
+                    price_apple = 1
+                    {print} ('One apple costs ', price_apple)
+                    apple_number = {input}('How many loafs of bread would you like to buy?')
+                    total_apple = price_apple*apple_number
+
+                    price_cheese = 8
+                    {print} ('One piece of cheese costs ', price_cheese )
+                    cheese_number = {input}('How many pieces of cheese would you like to buy?')
+                    total_cheese = price_cheese*cheese_number
+
+                    #Telling to total price:
+                    total = total_bread + total_apple + total_cheese
+                    print('That will be ', total, ' in total.' )
+                    print('Have a nice day!')
+
+                    ```
     maths:
         name: maths
         default_save_name: maths
@@ -4220,6 +4324,78 @@ adventures:
                     ```
                 answer_code: |
                     Own answer
+    park:
+        name: amusement park
+        default_save_name: Amusement park
+        levels:
+            13:
+                story_text: | 
+                    This adventure is about an amusment park with some attractions. However, to attend the attractions you need to meet certain requirements concerning height and age for example.
+                    Finish the example code. For the haunted house there is a minimum age. The rollercoaster you cannot ride if you have fear of heights of course. Add a minimum length to the rollercoaster.
+                    The carousel is the attraction for the little kids. So, add a maximum age for it. Feel free to add more attractions!
+                example_code: |
+                    ```
+                    {print} ("Welcome to our amsument park: 'Hedy High'")
+                    {print} ("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
+
+                    #Trying two attractions:
+                    {for} i {in} {range} (2):
+                        attraction = {input} ('Which attraction would you like to try?')
+
+                        {if} attraction == 'Haunted house':
+                            age = {input} ('How old are you?')
+                            {if} age > 12 :
+                                {print} ('You are old enough. Enjoy getting scared!')
+                            _ :
+                                {print} ('Sorry, you have to wait till you are old enough.')
+                        
+                        {if} attraction == 'Rollercoaster':
+                            fear = {input} ('Are you afraid of heights?')
+                            {if} fear == 'yes':
+                                {print} ('Sorry, it is better for you to stay on the ground.')
+                            {elif} _ :
+                                height = _
+
+                        {if} attraction == 'Carousel':
+                            _
+
+                        ```
+                answer_code: |
+                        ```
+                        {print} ("Welcome to our amsument park: 'Hedy High'")
+                        {print} ("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
+
+                        #Trying two attractions:
+                        {for} i {in} {range} (2):
+                            attraction = {input} ('Which attraction would you like to try?')
+
+                            {if} attraction == 'Haunted house':
+                                age = {input} ('How old are you?')
+                                {if} age > 12 :
+                                    {print} ('You are old enough. Enjoy getting scared!')
+                                {else}:
+                                    {print} ('Sorry, you have to wait till you are old enough.')
+                            
+                            {if} attraction == 'Rollercoaster':
+                                fear = {input} ('Are you afraid of heights?')
+                                {if} fear == 'yes':
+                                    {print} ('Sorry, it is better for you to stay on the ground.')
+                                {elif} fear == 'no' :
+                                    height = {input} ('What is your length in centimetres')
+                                    {if} height > 150:
+                                        {print} ('Enjoy your ride!')
+                                    {else}:
+                                        {print} ('Sorry you are not tall enough')
+
+
+                            {if} attraction == 'Carousel':
+                                age = {input} ('How old are you?')
+                                {if} age < 10:
+                                    {print} ('This is a perfect attraction for you. Enjoy!')
+                                {else}:
+                                    {print} ('Sorry you are too old.')
+
+                        ```
     parrot:
         name: parrot
         default_save_name: Parrot
@@ -5680,6 +5856,38 @@ adventures:
                         {play} note
                         {print} ""
                         {sleep} 2
+                    ```
+            13: 
+                story_text: |
+                    We start with singing the song about ducks, starting with a ten ducks but one by one they get lost. 
+                    Finish the code. Write a for-loop with the ten verses you want to sing. At the end of every verse, make sure that one duck less comes back.
+                example_code: |
+                    ```
+                    #singing the duck song:
+
+                    {for} i _ :
+                        ducks = 10-i
+                        {print} (_, ' little ducks went swimming one day')
+                        {print} ('Over the hill and far away')
+                        {print} ("Mother duck said: 'quack, quack, quack' ")
+                        ducks_minus = ducks-1
+                        {print} ('But only ' _)
+                        
+
+                    ```
+                answer_code: |
+                    ```
+                    #singing the duck song:
+
+                    {for} i {in} {range} (0, 10):
+                        ducks = 10-i
+                        {print} (ducks, ' little ducks went swimming one day')
+                        {print} ('Over the hill and far away')
+                        {print} ("Mother duck said: 'quack, quack, quack' ")
+                        ducks_minus = ducks-1
+                        {print} ('But only ', ducks_minus, ' came back.' )
+                        
+
                     ```
             14:
                 story_text: |

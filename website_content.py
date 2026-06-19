@@ -243,9 +243,13 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     ],
     13: [
         'print_command',
+        'songs',
         'ask_command',
+        'market',
         'if_command',
+        'calculator',
         'is_command',
+        'park',
         'operators',
         'for_command',
         'story',
