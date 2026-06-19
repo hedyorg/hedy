@@ -1676,7 +1676,7 @@ adventures:
                 example_code: |
                     ```
                     doorgaan = {ask} 'Wil je doorgaan?'
-                    {if} doorgaan = ja
+                    {if} doorgaan is ja
                         zeker = {ask} 'Weet je het zeker?'
                         {if} zeker {is} ja
                             {print} 'We gaan door'

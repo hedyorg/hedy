@@ -3291,7 +3291,7 @@ adventures:
                 example_code: |
                     ```
                     continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
+                    {if} continue is yes
                         sure = {ask} 'Are you sure?'
                         {if} sure {is} yes
                             {print} 'We will continue'

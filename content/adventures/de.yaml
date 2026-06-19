@@ -1529,7 +1529,7 @@ adventures:
                 example_code: |
                     ```
                     weiter = {ask} 'Willst Du weiter machen?'
-                    {if} weiter = ja
+                    {if} weiter is ja
                         sicher = {ask} 'Bist du sicher?'
                         {if} sicher {is} ja
                             {print} 'Wir machen weiter.'
