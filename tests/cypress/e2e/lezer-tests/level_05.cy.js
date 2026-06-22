@@ -2,6 +2,15 @@ import { multiLevelTester, singleLevelTester } from "../tools/lezer/lezer_tester
 
 describe('Lezer parser tests for level 5', () => {
     describe('Successfull tests', () => {
+        describe('Assign tests', () => {
+            describe('Test quoted text with comma stays assignment', () => {
+                const code = 'this_is_not_a_list is "Hey, Hello!"';
+                const expectedTree = 'Program(Command(Assign(Text,is,String)))';
+
+                multiLevelTester('Test quoted text with comma stays assignment', code, expectedTree, 5, 12);
+            });
+        });
+
         describe('If Tests', () => {
             describe('Test if clause with print same line', () => {
                 const code = "if name is Hedy print 'hello Hedy'";

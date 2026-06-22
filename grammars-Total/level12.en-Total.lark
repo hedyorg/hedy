@@ -20,8 +20,8 @@ _print_ask_argument.1: (_SPACE | quoted_text | list_access | expression | print_
 add: _ADD_LIST (atom | list_access | call) _TO_LIST _SPACE var_access
 and_condition: (condition) (_AND condition)*
 ask: var (_IS | _EQUALS) _ASK _SPACE? (_print_ask_argument)?
-assign: var (_IS | _EQUALS) (INT | list_access | expression | textwithoutspaces | textwithinnerspaces) _SPACE?
-assign_list: var (_IS | _EQUALS) (INT | textwithinnerspaces) (_COMMA (INT | textwithinnerspaces))+ _SPACE?
+assign: var (_IS | _EQUALS) (INT | list_access | expression | quoted_text | textwithoutspaces | textwithinnerspaces) _SPACE?
+assign_list: var (_IS | _EQUALS) (INT | textwithinnerspaces_unquoted) (_COMMA (INT | textwithinnerspaces_unquoted))+ _SPACE?
 bigger: comparison_arg _LARGER comparison_arg _SPACE?
 bigger_equal: comparison_arg _LARGER_EQUALS comparison_arg _SPACE?
 call: _CALL function_name (_SPACE _WITH arguments)?
@@ -82,6 +82,7 @@ start: program
 text: /([^\n،,，、#]+)/ -> text
 text_add_remove_list: /(?:[^\n,،，、# ]| (?!to|from))+/ -> text
 textwithinnerspaces: /(?:[^#\n،,，、 ]| (?!else))*[^#\n،,，、 ]/ -> text
+textwithinnerspaces_unquoted: /(?:[^#\n،,，、 '"“”‘’„«»《》「」]| (?!else))*[^#\n،,，、 '"“”‘’„«»《》「」]/ -> text
 textwithoutdoublequote: /([^\n"]+)/ -> text
 textwithoutsinglequote: /([^\n']+)/ -> text
 textwithoutspaces: /(?:[^#\n،,，、 *+\-\/e]|e(?!lse ))+/ _END_BLOCK* -> text

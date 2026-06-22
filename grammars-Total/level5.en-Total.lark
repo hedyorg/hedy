@@ -7,8 +7,8 @@ _non_empty_program: _EOL* (command | error_invalid) _SPACE* (_EOL+ command _SPAC
 _print_ask_argument.1: (_SPACE | list_access | error_list_access | quoted_text | var_access_print)*
 add: _ADD_LIST text_add_remove_list _TO_LIST _SPACE var_access
 ask: var _IS _ASK _SPACE? (_print_ask_argument)?
-assign: var _IS (list_access | textwithinnerspaces) _SPACE? -> assign
-assign_list: var _IS textwithinnerspaces (_COMMA textwithinnerspaces)+ _SPACE?
+assign: var _IS (list_access | quoted_text | textwithinnerspaces) _SPACE? -> assign
+assign_list: var _IS textwithinnerspaces_unquoted (_COMMA textwithinnerspaces_unquoted)+ _SPACE?
 command: clear | error_non_decimal | print | ask | play | turtle | assign_list | add | remove | error_add_missing_to | error_remove_missing_from | error_add_missing_list | error_remove_missing_list | sleep | error_list_access | error_ask_no_quotes | error_invalid_space | error_print_no_quotes | error_print_one_quote_only | error_text_no_print | empty_line | if_pressed_else | error_if_pressed_missing_else | if_pressed_without_else | ifelse | ifs | ifelse | ifs | error_else_no_if | assign
 condition: equality_check
 condition_spaces: textwithoutspaces _IS textwithoutspaces (_SPACE textwithoutspaces)+
@@ -50,6 +50,7 @@ start: program
 text: /([^\n،,，、#]+)/ -> text
 text_add_remove_list: /(?:[^\n,،，、# ]| (?!to|from))+/ -> text
 textwithinnerspaces: /(?:[^#\n،,，、 ]| (?!else))*[^#\n،,，、 ]/ -> text
+textwithinnerspaces_unquoted: /(?:[^#\n،,，、 '"“”‘’„«»《》「」]| (?!else))*[^#\n،,，、 '"“”‘’„«»《》「」]/ -> text
 textwithoutdoublequote: /([^\n"]+)/ -> text
 textwithoutsinglequote: /([^\n']+)/ -> text
 textwithoutspaces: /(?:[^#\n،,，、 *+\-\/e]|e(?!lse ))+/ _END_BLOCK* -> text
