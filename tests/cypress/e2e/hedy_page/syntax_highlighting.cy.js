@@ -20,6 +20,32 @@ context('chai-colors', () => {
         .and('be.colored', '#ff6188')
   
     })
+
+    it('highlights answer as a variable after ask in level 1', () => {
+      cy.visit('/hedy/1?keyword_language=en');
+      cy.get('#editor .cm-content').click();
+      cy.focused().clear();
+      cy.focused().type('ask what is your name{enter}print answer');
+
+      cy.get('#editor .cm-content .cm-line')
+        .contains('answer')
+        .should('be.visible')
+        .should('have.css', 'color')
+        .and('be.colored', '#c2e3ff')
+    })
+
+    it('highlights translated answer keyword after ask in level 1', () => {
+      cy.visit('/hedy/1?language=es&keyword_language=es');
+      cy.get('#editor .cm-content').click();
+      cy.focused().clear();
+      cy.focused().type('preguntar como te llamas{enter}imprimir respuesta');
+
+      cy.get('#editor .cm-content .cm-line')
+        .contains('respuesta')
+        .should('be.visible')
+        .should('have.css', 'color')
+        .and('be.colored', '#c2e3ff')
+    })
   });
 })
 describe('The view program page', () => {
