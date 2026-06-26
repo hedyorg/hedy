@@ -1159,7 +1159,7 @@ adventures:
                     In dit avontuur leer je een echte spookhuis game maken, waarbij de spelers moeten ontsnappen uit jouw spookhuis door je juiste deur te kiezen.
                     Als je de goede deur kiest overleef je het, maar anders...
 
-                    In level 1 beginnen we ons spookhuisspel door een spannend verhaal te verzinnen en de speler te vragen welk monster ze tegenkomen in het spookhuis.
+                    In level 1 beginnen we ons spookhuisspel door een spannend verhaal te verzinnen en de speler te vragen welke deur ze kiezen in het spookhuis.
                 example_code: |
                     ```
                     {print} Hoe ben ik hier terechtgekomen?
@@ -1172,7 +1172,7 @@ adventures:
                     {print} Ik moet maken dat ik wegkom!
                     {print} Er staan drie deuren voor me, maar welke moet ik kiezen?
                     {ask} Welke deur kies ik?
-                    {echo} Ik kies deur
+                    {print} Ik kies deur {answer}
                     {print} _
                     ```
                 story_text_2: |

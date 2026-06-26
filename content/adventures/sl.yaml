@@ -121,7 +121,7 @@ adventures:
         levels:
             1:
                 story_text: "V tej dogodivščini si boste ustvarili igro, v kateri morate pobegniti iz hiše strahov tako, da izberete prava vrata.\nČe boste izbrali prava vrata, boste preživeli, v nasprotnem primeru pa vas lahko ujame strašna pošast...\n\nV 1. stopnji začnemo igro o hiši strahov tako, da si izmislimo strašljivo zgodbo in vprašamo igralca, katero pošast bo videl v hiši strahov.\n"
-                example_code: "```\n{print} Kako smo prišli sem?\n{print} Spomnim se, da mi je prijatelj rekel, naj grem v stari dvorec...\n{print} in nenadoma je vse postalo črno.\n{print} Toda kako smo se znašli na tleh...?\n{print} Glava me boli, kot da bi me udaril bejzbolski kij!\n{print} Kaj je to za zvok?\n{print} O ne! Zdi se mi, da v tej hiši nismo sami!\n{print} Moramo pobegniti!\n{print} Pred mano so tri vrata..\n{ask} Katera vrata naj izberem?\n{echo} Izberem vrata\n{print} ...?\n```\n"
+                example_code: "```\n{print} Kako smo prišli sem?\n{print} Spomnim se, da mi je prijatelj rekel, naj grem v stari dvorec...\n{print} in nenadoma je vse postalo črno.\n{print} Toda kako smo se znašli na tleh...?\n{print} Glava me boli, kot da bi me udaril bejzbolski kij!\n{print} Kaj je to za zvok?\n{print} O ne! Zdi se mi, da v tej hiši nismo sami!\n{print} Moramo pobegniti!\n{print} Pred mano so tri vrata..\n{ask} Katera vrata naj izberem?\n{print} Izberem vrata {answer}\n{print} ...?\n```\n"
                 story_text_2: "### Vaja\nKopirajte vzorčno kodo na vnosno okno s klikom na rumeni gumb.\nZdaj dokončajte zgodbo tako, da dodate vsaj 5 vrstic kode.\nNe pozabite, da vsako vrstico programa začnete z ukazom `{print}`.\n"
     is_command:
         levels:

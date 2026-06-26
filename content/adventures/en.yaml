@@ -2543,7 +2543,7 @@ adventures:
                     In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.
                     If you pick the right door you'll survive, but if not a terrible monster might...
 
-                    In level 1 we start our haunted house game by making up a scary story and ask the player what monster they'll see in the haunted house.
+                    In level 1 we start our haunted house game by making up a scary story and ask the player which door they'll choose in the haunted house.
                 example_code: |
                     ```
                     {print} How did I get here?
@@ -2556,14 +2556,14 @@ adventures:
                     {print} I need to get out of here!
                     {print} There are 3 doors in front of me..
                     {ask} Which door should i pick?
-                    {echo} I choose door
+                    {print} I choose door {asnwer}
                     {print} ...?
                     ```
                 story_text_2: |
                     ### Exercise
                     Copy the example code to your input screen by clicking the yellow button.
                     Now finish the story by adding at least 5 lines of code.
-                    Remember to start each line of codes with a `{print}` `{ask}` or `{echo}` command.
+                    Remember to start each line of codes with a `{print}` or `{ask}`.
                 answer_code: |
                     ```
                     {print} How did I get here?
@@ -2576,7 +2576,7 @@ adventures:
                     {print} I need to get out of here!
                     {print} There are 3 doors in front of me..
                     {ask} Which door should i pick?
-                    {echo} I choose door
+                    {print} I choose door {answer}
                     {print} I open the door carefully
                     {print} I look around the corner
                     {print} Oh no!
