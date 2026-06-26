@@ -3364,8 +3364,8 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## Variables
-                    You can name a word with `{is}`. This is called a **variable**. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:
+                    ## Setting Variables
+                    You have learned to set variables by using input from the player by using ask, but did you know you could also set the variables yourself?
                 example_code: |
                     ```
                     name {is} Hedy
@@ -3374,13 +3374,18 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Time to make your own variables!
-                    In the example code we made an example of the variable `favorite_animal`. In line 1 the variable is set, and in line 2 we used the variable in a `{print}` command.
-                    Firstly, finish our example by filling in your favorite animal on the blank. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the `{is}` command. Then use it with a `{print}` command, just like we did.
+                    Finish the program by setting the 6 variables.
                 example_code_2: |
                     ```
-                    favorite_animal {is} _
-                    {print} I like favorite_animal
+                    name {is} _
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} I am name and I am age years old.
+                    {print} I live in place and go to name_school.
+                    {print} My favorite subject is favorite_subject, but I don't like least_favorite_subject.
                     ```
                 answer_code: |
                     ```

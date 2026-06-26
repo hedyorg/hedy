@@ -1726,8 +1726,8 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## Variabelen
-                    Je kunt een waarde in een woord opslaan met het commando `{is}`. Deze waarde noemen we een **variabele**. In dit voorbeeld hebben we een variabele gemaakt die 'naam' heet en een variabele 'leeftijd'. Je kunt een variabele plaatsen overal in de zin waar je wil en Hedy vervangt de variabele dan voor de waarde. Kijk maar:
+                    ## Variabelen instellen
+                    Je hebt geleerd hoe je variabelen kunt gebruiken met de input (antwoorden) van de gebruikers, maar wist je dat je variabelen ook zelf kunt instellen? 
                 example_code: |
                     ```
                     naam {is} Hedy
@@ -1736,13 +1736,19 @@ adventures:
                     ```
                 story_text_2: |
                     ### Opdracht
-                    Tijd om je eigen variabelen te maken!
-                    In het voorbeeld hebben we de variabele `lievelingsdier` gemaakt. In regel 1 wordt de variabele 'ingesteld', en in regel 2 gebruiken we de variabele met een `{print}`.
-                    Maak eerst ons voorbeeld af door jouw lievelingsdier in te vullen op de plek van het streepje. Bedenk daarna zelf minstens 3 van zulk soort codes. Kies daarbij een variabele en stel hem in met het `{is}` commando. Gebruik daarna de variabele in een zin met een `{print}` commando, zoals wij in het voorbeeld hebben gedaan.
+                    Maak het programma af door de 6 variabelen in te stellen.
                 example_code_2: |
                     ```
-                    lievelingsdier {is} _
-                    {print} Ik hou van lievelingsdier
+                    naam {is} _
+                    _
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} Ik heet naam en ik ben leeftijd jaar oud.
+                    {print} Ik woon in woonplaats en ga naar naam_school
+                    {print} Mijn favoriete vak is favoriete_vak, maar ik hou niet van stomste_vak
                     ```
             7:
                 story_text: |
