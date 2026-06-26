@@ -1292,7 +1292,7 @@ adventures:
 
                     {print} 'Welcome to our restaurant'
                     people = {ask} 'How many people are in your party tonight?'
-                    {for} person {in} people
+                    {repeat} food {times}
                         {call} greet_customer
                         take_order
                     ```
@@ -2292,7 +2292,7 @@ adventures:
 
                     #Playing a Twister game:
                     {print} 'Lets play a game of Twister!'
-                    {repeat} _
+                    {repeat} _ _
                         call next_turn
                         {sleep} 2
                     ```
@@ -2563,7 +2563,7 @@ adventures:
                     ### Exercise
                     Copy the example code to your input screen by clicking the yellow button.
                     Now finish the story by adding at least 5 lines of code.
-                    Remember to start each line of codes with a `{print}` command.
+                    Remember to start each line of codes with a `{print}` `{ask}` or `{echo}` command.
                 answer_code: |
                     ```
                     {print} How did I get here?
@@ -2920,10 +2920,70 @@ adventures:
                     * Tell the nurse to check whether the balance is positive or negative to decide if the patient needs more IV fluid today or not.
             8:
                 story_text: |
-                    Our helipad for the trauma helikopter has lost its paintcoat. Can your write a program for the turtle to redraw the markings?
+                    Our patients sometimes forget to take their medicine, causing grave health concerns. To make sure the patients take all of their prescribed pills, we give them an alarmclock that beeps everytime they need to take their pills.
+                    Can you help by creating a pill alarm?
+
                     ### Exercise
-                    Draw the markings on the helipad.
-                    <img src="https://github.com/user-attachments/assets/96deeb9e-b155-4a3d-91f3-3c447df7ce2b" width="200">
+                    The program should:
+
+                    #Part 1, Settings for the nurse
+                    * Start by giving the nurse the opportunity to set the patients name.
+                    * Then they should fill in how many pills the patient should take in their first (8AM), second (noon) and last dose of the day (4PM).
+                    * Thank the nurse and tell them to give the alarm to the patient. Clear the screen two seconds after this message.
+
+                    #Part 2, First dose
+                    * Greet the patient by name and tell them this alarm will beep when they need to take their medicine.
+                    * Beep 3 times
+                    * Tell the patient it's 8 am and time for their first dose.
+                    * Ask the patient 'Did you take the pill?' as many times as pills they should take in the first dose.
+                    * Tell the patient they have taken all of their first dose and clear the screen after 2 seconds.
+
+                    #Part 3, Second dose
+                    * Wait for 4 seconds (in reality this would be 4 hours)
+                    * Ring the alarm the same way you did for the first dose.
+
+                    #Part 4, Last dose
+                    * Wait for 4 seconds (in reality 4 hours)
+                    * Ring the alarm for the last dose of the day.
+                answer_code: |-
+                    ```
+                    #Settings for the nurse
+                    {print} 'Goodmorning, nurse. Please fill in the correct information for the patient. '
+                    name {is} {ask} 'What is this patient called?'
+                    first_dose {is} {ask} 'How many pills does ' name ' take at 8am?'
+                    second_dose {is} {ask} 'How many pills does ' name ' take at noon?'
+                    last_dose {is} {ask} 'How many pills does ' name ' take at 4pm'
+                    {print} 'Thank you, you can give the tracker to the patient now.'
+                    {sleep} 2
+                    {clear}
+
+                    #First dose
+                    {print} 'Hello' name ' I am your medication tracker. I will beep when you need to take your medicine.'
+                    {repeat} 3 {times} {play} C4
+                    {print} "It's 8AM, time for your first dose"
+                    {repeat} first_dose {times} pill {is} {ask} 'Did you take the pill?'
+                    {print} 'You have taken all of your first dose, ' name
+                    {sleep} 2
+                    {clear}
+
+                    #Second dose
+                    {sleep} 4
+                    {repeat} 3 {times} {play} C4
+                    {print} "It's noon, time for your second dose"
+                    {repeat} second_dose {times} pill {is} {ask} 'Did you take the pill?'
+                    {print} 'You have taken all of your second dose, ' name
+                    {sleep} 2
+                    {clear}
+
+                    #Last dose
+                    {sleep} 4
+                    {repeat} 3 {times} {play} C4
+                    {print} "It's 4PM, time for your last dose"
+                    {repeat} last_dose {times} pill {is} {ask} 'Did you take the pill?'
+                    {print} 'You have taken all the pills for today, ' name
+                    {sleep} 2
+                    {clear}
+                    ```
             9:
                 story_text: |
                     Our ambulance is due for some service. The painted red cross on the side is fading and the siren is no longer working.
