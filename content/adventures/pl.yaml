@@ -1850,7 +1850,14 @@ adventures:
                     Następnie dodaj co najmniej 4 kolejne linie kodu do programu restauracji.
                     Zapytaj klienta, co chciałby wypić i czy chce zapłacić gotówką, czy kartą.
                     Na koniec wymyśl jakiś miły sposób pożegnania się z klientem.
-                example_code_2: "``` \n{print} Witaj w restauracji Hedy 🍟\n_ Co chcesz zamówić?\n {echo} A więc chcesz zamówić\n{print} Dziękuje za zamówienie!\n{print} Zaraz podamy!\n```\n"
+                example_code_2: |
+                    ``` 
+                    {print} Witaj w restauracji Hedy 🍟
+                    _ Co chcesz zamówić?
+                    {print} A więc chcesz zamówić {answer}
+                    {print} Dziękuje za zamówienie!
+                    {print} Zaraz podamy!
+                    ```
             2:
                 story_text: |
                     Na poziomie 2 możesz rozbudować swoją restaurację za pomocą zmiennych. Na poziomie 1 Hedy mogła wyświetlić `{echo}` zamówienie tylko raz i pamiętała tylko ostatnią zamówioną rzecz.
