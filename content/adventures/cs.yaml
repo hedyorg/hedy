@@ -618,16 +618,16 @@ adventures:
                 story_text_2: "### Cvičení\nZkopírujte kód příkladu do vstupní obrazovky a vyplňte prázdná místa, aby kód fungoval.\n**Extra** Změňte kód a nechte věštce předpovědět nejen vaše jméno, ale také váš věk, oblíbený sportovní tým nebo něco jiného o sobě.\n"
                 example_code: "```\n_ Dobrý den, jsem Hedy, věštkyně!\n_ Kdo jsi ty?\n_ Podívám se do své křišťálové koule.\n_ Vidím... Vidím...\n_ Tvé jméno je _ \n```\n"
                 story_text: "Byli jste někdy na pouti a nechali si předpovědět budoucnost od věštce? Nebo jste si někdy hráli s kouzelnou osmičkou?\nPak asi víte, že vám budoucnost ve skutečnosti předpovědět nemohou, ale i tak je to zábava!\n\nV nadcházejících úrovních se můžete naučit, jak si vytvořit vlastní věštecký stroj!\nV 1. úrovni můžete začít jednoduše tím, že necháte Hedy, aby se představila jako věštkyně, a necháte ji `{answer}` odpovědi hráčů.\nTřeba takto:\n"
+            3:
+                story_text: "V předchozích úrovních jste vytvořili svůj první věštecký stroj, ale Hedy nedokázala nic předpovědět.\nV této úrovni můžete použít proměnnou a příkaz `{at} {random}`, aby Hedy opravdu vybrala odpověď za vás. Podívejte se například na tento kód:\n"
+                story_text_2: "### Cvičení\nNyní může Hedy odpovědět pouze ano, ne nebo možná. Můžete dát Hedy více možností odpovědí, například „určitě“ nebo „zeptejte se znovu“.\n"
+                example_code: "```\n{print} I’m Hedy the fortune teller!\nquestion {is} {ask} What do you want to know?\n{print} This is what you want to know: question\nanswers {is} yes, no, maybe\n{print} My crystal ball says...\n{sleep} 2\n{print} answers {at} {random}\n```\n"
             4:
                 example_code: "```\n_ Do tohoto kódu přidejte uvozovky _\n{print} Jsem věštkyně Hedy!\notázka {is} {ask} Co chcete vědět?\n{print} Toto je vaše otázka: otázka\nodpovědi {is} ano, ne, možná\n{print} Moje křišťálová koule říká...\n{sleep} 2\n{print} odpovědi {at} {random}\n```\n"
                 story_text: "### Cvičení\nZ tohoto příkladu kódu jsme odstranili všechny uvozovky, dokážete je doplnit na všechna správná místa?\n\n### Cvičení 2\nVraťte se na předchozí úroveň a zkopírujte svůj kód věštce. Zajistěte, aby kód fungoval v této úrovni přidáním uvozovek na správná místa.\n"
             8:
                 example_code: "```\n{print} 'Mám květinu s kouzelnými okvětními lístky'\n{print} 'Když utrhneš okvětní lístky, květina ti řekne, jestli tě tvoje láska miluje zpátky.'\nmnožství = {ask} 'Kolik okvětních lístků chceš utrhnout?'\nmožnosti = milují tě, nemilují tě\n_ _ _ _ možnosti {at} {random}\n```\n"
                 story_text: "### Cvičení\nDokončete tento program, který vám řekne, zda vás vaše láska miluje, nebo ne.\n"
-            3:
-                story_text_2: "### Cvičení\nNyní může Hedy odpovědět pouze ano, ne nebo možná. Můžete dát Hedy více možností odpovědí, například „určitě“ nebo „zeptejte se znovu“.\n"
-                story_text: "V předchozích úrovních jste vytvořili svůj první věštecký stroj, ale Hedy nedokázala nic předpovědět, pouze `{echo}`.\nV této úrovni můžete použít proměnnou a příkaz `{at} {random}`, aby Hedy opravdu vybrala odpověď za vás. Podívejte se například na tento kód:\n"
-                example_code: "```\n{print} I’m Hedy the fortune teller!\nquestion {is} {ask} What do you want to know?\n{print} This is what you want to know: question\nanswers {is} yes, no, maybe\n{print} My crystal ball says...\n{sleep} 2\n{print} answers {at} {random}\n```\n"
             9:
                 example_code: "```\n{print} 'Jsem věštkyně Hedy!'\n{print} 'Můžete mi položit tři otázky.'\nodpovědi = ano, ne, možná\n_ _ _\n   otázka = {ask} 'Co chceš vědět?'\n   {print} otázka\n   {sleep}\n   {print} 'Moje křišťálová koule říká... ' odpovědi {at} {random}\n```\n"
                 story_text: "V dalším příkladu můžete nechat věštce položit více otázek a také je vytisknout!\n\n### Cvičení\nDokážete doplnit správný příkaz na prázdná místa?\n"

@@ -931,7 +931,7 @@ adventures:
                     Copia el codi d'exemple a la teva pantalla d'entrada i omple els buits per fer funcionar el teu codi.
                     **Extra** Canvia el codi i deixa que l'endevina no només predigui el teu nom, sinó també la teva edat, el teu esport preferit o alguna altra cosa sobre tu mateix.
             3:
-                story_text: "Als nivells anteriors has creat la teva primera màquina de prediccions, però Hedy realment no podia predir res, només feia `{echo}`.  \nEn aquest nivell pots utilitzar una variable i la comanda `{at} {random}` per fer que Hedy realment triï una resposta per a tu. Fixa't en aquest codi, per exemple:\n"
+                story_text: "Als nivells anteriors has creat la teva primera màquina de prediccions, però Hedy realment no podia predir res.  \nEn aquest nivell pots utilitzar una variable i la comanda `{at} {random}` per fer que Hedy realment triï una resposta per a tu. Fixa't en aquest codi, per exemple:\n"
                 example_code: "```\n{print} Sóc Hedy, l'endeví!\npregunta {is} {ask} Què vols saber?\n{print} Això és el que vols saber: pregunta\nrespostes {is} sí, no, potser\n{print} La meva bola de cristall diu...\n{sleep} 2\n{print} respostes {at} {random}\n```\n"
                 story_text_2: "### Exercici\nAra, Hedy només pot respondre sí, no o potser. Pots donar-li més opcions de resposta, com 'definitivament' o 'pregunta de nou'?\n"
             4:
