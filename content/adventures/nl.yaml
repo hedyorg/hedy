@@ -8,23 +8,20 @@ adventures:
                 story_text: |
                     In level 1 kun je een verhaal maken met steeds een andere hoofdpersoon die je zelf invoert.
 
-                    Gebruik als eerste regel `{ask}` en vraag wie de hoofdpersoon van jouw verhaal wordt.
-
-                    Na die eerste regel begin je met `{print}` als de zin moet worden geprint.
-                    Je gebruikt `{echo}` als je wilt dat jouw hoofdpersoon op het einde van de zin komt.
+                    Gebruik als eerste regel `{ask}` en vraag wie de hoofdpersoon van jouw verhaal wordt. Gebruik daarna `{answer}` elke keer als je de naam van de hoofdpersoon wil noemen.
                 example_code: |
                     ```
                     {ask} De hoofdpersoon van dit verhaal is
-                    {print} De hoofdpersoon gaat nu in het bos lopen
-                    {echo} Hij is wel een beetje bang, die
+                    {print} {answer} gaat nu in het bos lopen
+                    {print} Hij is wel een beetje bang, die {answer}
                     {print} Overal hoort hij gekke geluiden
-                    {print} Hij is bang dat dit een spookbos is
+                    {print} {answer} is bang dat dit een spookbos is
                     ```
                 story_text_2: |
                     ### Opdracht
                     Maak nu je eigen verhaal van minstens 6 regels code.
                     Dit verhaaltje mag niet hetzelfde zijn als de voorbeeldcode.
-                    Gebruik minstens een `{ask}` en een `{echo}` commando.
+                    Gebruik minstens een `{ask}` en een `{answer}`.
                     Je mag zelf een onderwerp kiezen.
                     Geen inspiratie? Kies dan een van onze onderwerpen: naar de bioscoop, een sportwedstrijd of een dagje naar de dierentuin.
             2:
@@ -287,7 +284,11 @@ adventures:
                     _ Met jou gaat het _
                     ```
             2:
-                story_text: "## Het vraag commando\nNu we **variabelen** in onze codes kunnen gebruiken, hebben we het `{echo}` commando niet langer nodig.\nWe kunnen variabelen gebruiken om antwoorden in op te slaan. Hierdoor kunnen we antwoorden op meerdere vragen gebruiken in onze codes. \nKijk maar eens naar het voorbeeld:\n\nOp deze manier worden je programma's steeds interactiever!\n"
+                story_text: |
+                    ## Variabelen gebruiken
+                    In de vorige levels heb je geleerd om `{answer}` te gebruiken om het antwoord op een vraag te printen. Maar wat als je meerdere antwoorden wil printen..?
+                    In dit level leer je meerdere **variabelen** te gebruiken. Een variabele is een plek waar je een antwoord (ookwel *input*) in opslaat van de gebruikers.
+
                 example_code: |
                     ```
                     naam {is} {ask} Wat is je naam?
@@ -295,11 +296,16 @@ adventures:
                     leeftijd {is} {ask} Hoe oud ben je?
                     {print} naam is leeftijd jaar oud
                     ```
-                story_text_2: "### Opdracht\nJe hebt in het vorige avontuur al geleerd hoe je variabelen kunt instellen met het`{is}` commando.\nDaar heb je minstens 3 variabelen gemaakt en ze gebruikt met een print commando.\nNu gaan we de variabelen interactief maken in plaats van ze in te stellen, zoals we deden in ons voorbeeld. \n\nKopieer je code van het vorige avontuur en maak de variabelen interactief door `{ask}` commando's te gebruiken.\n"
+                story_text_2: |
+                    ### Opdracht
+                    Tijd om je eigen variabelen te maken! Vraag de speler wat diens favoriete drankje en favoriete boek zijn en print de antwoorden.
+                    Voeg tenslotte een laatste regel toe waarin je alle dingen die de speler leuk vindt opsomt.
                 example_code_2: |
                     ```
                     lievelingsdier {is} {ask} Wat is je lievelingsdier?
                     {print} Ik hou van lievelingsdier
+
+                    {print} Dus jij houdt van _ , _ en _
                     ```
             13:
                 story_text: Als laatste veranderen we het woord dat je moet gebruiken voor `{ask}`. Vanaf nu noemen we vraag `{input}`.
@@ -1159,7 +1165,7 @@ adventures:
                     In dit avontuur leer je een echte spookhuis game maken, waarbij de spelers moeten ontsnappen uit jouw spookhuis door je juiste deur te kiezen.
                     Als je de goede deur kiest overleef je het, maar anders...
 
-                    In level 1 beginnen we ons spookhuisspel door een spannend verhaal te verzinnen en de speler te vragen welk monster ze tegenkomen in het spookhuis.
+                    In level 1 beginnen we ons spookhuisspel door een spannend verhaal te verzinnen en de speler te vragen welke deur ze kiezen in het spookhuis.
                 example_code: |
                     ```
                     {print} Hoe ben ik hier terechtgekomen?
@@ -1172,7 +1178,7 @@ adventures:
                     {print} Ik moet maken dat ik wegkom!
                     {print} Er staan drie deuren voor me, maar welke moet ik kiezen?
                     {ask} Welke deur kies ik?
-                    {echo} Ik kies deur
+                    {print} Ik kies deur {answer}
                     {print} _
                     ```
                 story_text_2: |
@@ -1720,8 +1726,8 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## Variabelen
-                    Je kunt een waarde in een woord opslaan met het commando `{is}`. Deze waarde noemen we een **variabele**. In dit voorbeeld hebben we een variabele gemaakt die 'naam' heet en een variabele 'leeftijd'. Je kunt een variabele plaatsen overal in de zin waar je wil en Hedy vervangt de variabele dan voor de waarde. Kijk maar:
+                    ## Variabelen instellen
+                    Je hebt geleerd hoe je variabelen kunt gebruiken met de input (antwoorden) van de gebruikers, maar wist je dat je variabelen ook zelf kunt instellen?
                 example_code: |
                     ```
                     naam {is} Hedy
@@ -1730,13 +1736,19 @@ adventures:
                     ```
                 story_text_2: |
                     ### Opdracht
-                    Tijd om je eigen variabelen te maken!
-                    In het voorbeeld hebben we de variabele `lievelingsdier` gemaakt. In regel 1 wordt de variabele 'ingesteld', en in regel 2 gebruiken we de variabele met een `{print}`.
-                    Maak eerst ons voorbeeld af door jouw lievelingsdier in te vullen op de plek van het streepje. Bedenk daarna zelf minstens 3 van zulk soort codes. Kies daarbij een variabele en stel hem in met het `{is}` commando. Gebruik daarna de variabele in een zin met een `{print}` commando, zoals wij in het voorbeeld hebben gedaan.
+                    Maak het programma af door de 6 variabelen in te stellen.
                 example_code_2: |
                     ```
-                    lievelingsdier {is} _
-                    {print} Ik hou van lievelingsdier
+                    naam {is} _
+                    _
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} Ik heet naam en ik ben leeftijd jaar oud.
+                    {print} Ik woon in woonplaats en ga naar naam_school
+                    {print} Mijn favoriete vak is favoriete_vak, maar ik hou niet van stomste_vak
                     ```
             7:
                 story_text: |
@@ -2198,8 +2210,8 @@ adventures:
                     ```
                     {print} Ik ben Hedy de papegaai
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {antwoord}
+                    {print} {antwoord}
                     ```
             2:
                 story_text: |
@@ -2815,15 +2827,15 @@ adventures:
                 story_text: |
                     In level 1 kun je een begin maken met een steen, papier, schaar spel.
 
-                    Met `{ask}` kun je een keuze maken en met `{echo}` kan je die keuze herhalen.
+                    Met `{ask}` kun je een keuze maken en met `{answer}` kan je die keuze printen.
+
+                    Let op: Dit programma werkt nog niet echt als een spel. In de latere levels leer je hoe je hier een echt spelletje van maakt!
                 example_code: |
                     ```
                     {print} Wat kies jij?
                     {ask} Kies uit steen, papier of schaar
-                    {echo} Dus jouw keuze was:
+                    {print} Dus jouw keuze was: {answer}
                     ```
-
-                    Je kunt in plaats van woorden natuurlijk ook emoji's gebruiken: ✊✋✌
                 story_text_2: |
                     ### Opdracht
                     In plaats van woorden kun je ook emojis gebruiken: ✊✋✌
@@ -2832,18 +2844,18 @@ adventures:
                     ```
                     {print} Wat kies jij?
                     {ask} kies uit: _
-                    {echo} Dus jouw keuze was :
+                    {print} Dus jouw keuze was : {answer}
                     ```
             2:
                 story_text: |
-                    In dit level kun je variabelen gebruiken om alvast een stukje van het spelletje te programmeren. In het volgende level leer je het spelletje maken.
+                    Nu je `{ask}` hebt geleerd te gebruiken, kun je de steen, papier, schaar code ook interactief maken!
+
                     ### Opdracht
-                    Maak de code af door de **variabele** in te vullen op de lege plek.
-                    Dit spel is nog niet echt interactief, maar wees gerust, in het volgende avontuur leer je `{ask}` gebruiken met variabelen.
-                example_code: |-
+                    Maak de steen, papier, schaarcode interactief met het `{ask}` commando.
+                example_code: |
                     ```
-                    keuze {is} steen
-                    {print} ik kies _
+                    keuze {is} _
+                    {print} Ik kies keuze
                     ```
             3:
                 story_text: |
@@ -2948,22 +2960,6 @@ adventures:
                         {print}('de computer koos ', computer_keuze)
                         {if} computer_keuze == jouw_keuze
                     _
-                    ```
-    rock_2:
-        name: steen, papier, schaar 2
-        default_save_name: Steen2
-        description: Deel 2 van steen, papier schaar
-        levels:
-            2:
-                story_text: |
-                    Nu je `{ask}` hebt geleerd te gebruiken, kun je de steen, papier, schaar code ook interactief maken!
-
-                    ### Opdracht
-                    Maak de steen, papier, schaarcode interactief met het `{ask}` commando.
-                example_code: |
-                    ```
-                    keuze {is} _
-                    {print} Ik kies keuze
                     ```
     secret:
         name: geheim agent

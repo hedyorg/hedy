@@ -15,8 +15,8 @@ adventures:
                 example_code: |
                     ```
                     {ask} Der Name der Hauptfigur lautet
-                    {print} Die Hauptfigur läuft nun durch einen dunklen Wald
-                    {echo} Er ist etwas verängstigt,
+                    {print} {answer} läuft nun durch einen dunklen Wald
+                    {print} Er ist etwas verängstigt, {answer}
                     {print} Er hört überall seltsame Geräusche
                     {print} Er befürchtet, dass es in diesem Wald spukt
                     ```
@@ -319,13 +319,6 @@ adventures:
                     {ask} Wie heißt du?
                     ```
             2:
-                story_text: |
-                    ## Der `{ask}` Befehl
-                    Jetzt, wo du **Variablen** in deinen Programmen benutzen kannst, brauchen wir den `{echo}` Befehl nicht mehr.
-                    Wir können Variablen verwenden, um die Antworten auf unsere Fragen zu speichern. Dadurch können wir die Antwort an mehreren Stellen im Code verwenden.
-                    Probiere es aus:
-
-                    Damit wird dein Code viel interaktiver!
                 example_code: |
                     ```
                     name {is} {ask} Wie heißt du?
@@ -1293,7 +1286,7 @@ adventures:
                     {print} Ich muss hier raus!
                     {print} Vor mir sind drei Türen...
                     {ask} Durch welche Tür soll ich gehen?
-                    {echo} Ich nehme Tür
+                    {print} Ich nehme Tür {answer}
                     {print} ...?
                     ```
                 story_text_2: |
@@ -1538,24 +1531,11 @@ adventures:
         description: Einführung des {is}-Befehls
         levels:
             2:
-                story_text: |
-                    ## Variablen
-                    Du kannst einem Wort mit `{is}` einen Wert geben. Dieses Wort nennt man eine **Variable**. In diesem Beispiel haben wir eine Variable namens name und eine Variable names alter benutzt. Du kannst das Wort name irgendwo in deinem Code verwenden. Es wird von Hedy automatisch ersetzt, wie hier:
                 example_code: |
                     ```
                     name {is} Hedy
                     alter {is} 15
                     {print} name ist alter Jahre alt.
-                    ```
-                story_text_2: |
-                    ### Übung
-                    Es ist Zeit, deine eigenen Variablen zu definieren.
-                    Im Beispiel-Code zeigen wir ein Beispiel mit der Variable `lieblingstier`. In Zeile 1 wird die Variable gesetzt, und in Zeile 2 verwenden wir die Variable in einem `{print}` Befehl.
-                    Zuerst, vervollständige unser Beispiel, in dem du dein Lieblingstier in die Leerstelle einträgst. Dann denke dir mindestens 3 eigene Code-Beispiele aus. Wähle eine Variable und gib der Variable mit dem `{is}` Befehl einen Wert. Dann verwenden den `{print}` Befehl, so wie wir es gezeigt haben.
-                example_code_2: |
-                    ```
-                    lieblingstier {is} _
-                    {print} Ich mag lieblingstier
                     ```
             7:
                 story_text: |
@@ -2340,12 +2320,12 @@ adventures:
                 story_text: |
                     In Level 1 kannst du mit einem Schere, Stein, Papier-Spiel beginnen.
 
-                    Mit `{ask}` kannst du eine Wahl treffen und mit `{echo}` kannst du diese Wahl wiederholen.
+                    Mit `{ask}` kannst du eine Wahl treffen und mit `{answer}` kannst du diese Wahl wiederholen.
                 example_code: |
                     ```
                     {print} Was wählst du?
                     {ask} Wähle aus Stein, Schere oder Papier
-                    {echo} Also war deine Wahl:
+                    {print} Also war deine Wahl: {answer}
                     ```
                 story_text_2: |
                     ### Übung
@@ -2355,15 +2335,7 @@ adventures:
                     ```
                     {print} Was wählst du?
                     {ask} Wähle aus _
-                    {echo} Also war deine Wahl:
-                    ```
-            2:
-                story_text: |
-                    In diesem Level kannst du üben, Variablen zu benutzen, damit du im nächsten Level das Spiel Schere, Stein, Papier machen kannst!
-                example_code: |-
-                    ```
-                    Auswahl {is} Stein
-                    {print} Ich wähle _
+                    {print} Also war deine Wahl: {answer}
                     ```
             3:
                 story_text: |
@@ -2471,11 +2443,6 @@ adventures:
                             gewonnen = 'ja'
                     _
                     ```
-    rock_2:
-        name: Schere, Stein, Papier 2
-        default_save_name: Stein_2
-        description: Teil 2 von Schere, Stein, Papier
-        levels:
             2:
                 story_text: |
                     Jetzt, da du gelernt hast, wie man den `{ask}` Befehl einsetzt, kannst du den Stein, Schere, Papier Code auch interaktiv machen!

@@ -9,14 +9,11 @@ adventures:
                     Na poziomie 1 możesz stworzyć opowieść z różnymi postaciami które stworzysz samodzielnie.
 
                     W pierwszej linii użyj polecenia `{ask}` i zapytaj kto będzie głównym bohaterem twojej opowieści.
-
-                    Kolejne linie zacznij od polecenia `{print}` jeżeli chcesz wyświetlić tekst.
-                    Użyj polecenia `{echo}` jeżeli chcesz aby imię twojego bohatera znalazło się na końcu wypowiedzi.
                 example_code: |
                     ```
                     {ask} Głównym bohaterem historii jest
                     {print} Główny bohater idzie przez las
-                    {echo}  Jest troszkę przestraszony,
+                    {print} Jest troszkę przestraszony, {answer}
                     {print} Wszędzie słyszy jakieś dziwnie odgłosy
                     {print} Obawia się że to jest nawiedzony las
                     ```
@@ -273,31 +270,12 @@ adventures:
                     {ask} Jak masz na imię?
                     ```
             2:
-                story_text: |
-                    ## Komenda `{ask}`
-                    Teraz gdy potrafimy używać **zmiennych** w naszym kodzie, nie potrzebujemy już komendy `{echo}`.
-                    Możemy używać zmiennych, aby zapisać odpowiedzi do naszych pytań i w ten sposób używać tych odpowiedzi w wielu zapytaniach w naszym kodzie.
-                    Spójrz na to:
-
-                    W ten sposób Twój kod staje się interaktywny!
                 example_code: |
                     ```
                     imię {is} {ask} Jak masz na imię?
                     {print} Cześć imię
                     wiek {is} {ask} Ile masz lat?
                     {print} imię ma ... lat.
-                    ```
-                story_text_2: |
-                    ### Ćwiczenie
-                    W poprzedniej przygodzie ćwiczyłeś ustawianie zmiennych za pomocą polecenia `{is}`.
-                    Utworzyłeś co najmniej 3 zmienne i użyłeś ich za pomocą polecenia `{print}`.
-                    Teraz zamiast ustawiać zmienne, chcemy, abyś uczynił je interaktywnymi, tak jak zrobiliśmy to w naszym przykładzie.
-
-                    Skopiuj swój kod z poprzedniej przygody i spraw, aby zmienne były interaktywne, używając poleceń `{ask}`.
-                example_code_2: |
-                    ```
-                    ulubione_zwierzę {is} {ask} Jakie jest Twoje ulubione zwierzę?
-                    {print} Lubię ulubione_zwierzę
                     ```
             13:
                 story_text: Ostatnią zmianą, którą musimy wprowadzić, aby uzyskać kod Pythona, jest zamiana `{ask}` na `{input}`.
@@ -939,7 +917,7 @@ adventures:
                     {print} Muszę się stąd wydostać!
                     {print} Przede mną jest 3 drzwi...
                     {ask} Które drzwi powinienem wybrać?
-                    {echo} Wybieram drzwi
+                    {print} Wybieram drzwi {answer}
                     {print} ...?
                     ```
                 story_text_2: |
@@ -1207,24 +1185,11 @@ adventures:
         description: Wprowadzenie polecenia {is}
         levels:
             2:
-                story_text: |
-                    ## Zmienne
-                    Możesz nadać nazwę słowu za pomocą `{is}`. Nazywa się to **zmienną**. W tym przykładzie stworzyliśmy zmienną o nazwie name oraz zmienną o nazwie age. Możesz użyć słowo name gdziekolwiek w swoim kodzie  i będzie ono zastąpione Hedy, w ten oto sposób: :
                 example_code: |
                     ```
                     imię {is} Hedy
                     wiek {is} 15
                     {print} imię ma wiek lat
-                    ```
-                story_text_2: |
-                    ### Ćwiczenie
-                    Czas na tworzenie własnych zmiennych!
-                    W przykładowym kodzie podaliśmy przykład zmiennej `ulubione_zwierzę`. W wierszu 1 zmienna jest ustawiona, a w wierszu 2 użyliśmy zmiennej w komendzie {print}.
-                    Po pierwsze, dokończ nasz przykład, wypełniając swoje ulubione zwierzę w pustym miejscu. Następnie sam napisz co najmniej 3 z tych kodów. Wybierz zmienną i ustaw ją za pomocą polecenia {is}. Następnie użyj go z poleceniem {print}, tak jak my to zrobiliśmy.
-                example_code_2: |
-                    ```
-                    ulubione_zwierzę {is} _
-                    {print} Lubię ulubione_zwierzę
                     ```
             7:
                 story_text: |
@@ -2020,12 +1985,12 @@ adventures:
                 story_text: |
                     Na poziomie 1 możesz zacząć tworzyć grę papier, kamień, nożyce.
 
-                    Za pomocą  `{ask}` możesz zapytać a za pomocą `{echo}` możesz powtórzyć co zostało wybrane.
+                    Za pomocą  `{ask}` możesz zapytać a za pomocą `{answer}` możesz powtórzyć co zostało wybrane.
                 example_code: |
                     ```
                     {print} Co wybierasz?
                     {ask} wybierz: papier, kamień lub nożyce
-                    {echo} a więc wybrałeś:
+                    {print} a więc wybrałeś: {answer}
                     ```
                 story_text_2: |
                     ### Wyzwanie
@@ -2035,18 +2000,7 @@ adventures:
                     ```
                     {print} co wybierasz?
                     {ask} wybierz z _
-                    {echo} a więć wybrałeś:
-                    ```
-            2:
-                story_text: |
-                    Na tym poziomie możesz ćwiczyć przy użyciu zmiennych. Dzięki temu będziesz mógł  stworzyć grę w kamień, papier, nożyczki na następnym poziomie!
-                    ### Ćwiczenie
-                    Zakończ kod, wypełniając **zmienną** w pustych polach.
-                    Ta gra nie jest zbyt interaktywna, ale nie martw się! W następnej przygodzie dowiesz się, jak używać zmiennych za pomocą polecenia `{ask}`, co sprawi, że Twoja gra będzie interaktywna!
-                example_code: |-
-                    ```
-                    wybór {is} kamień
-                    {print} Wybieram_
+                    {print} a więć wybrałeś: {answer}
                     ```
             3:
                 story_text: |
@@ -2116,11 +2070,6 @@ adventures:
                     ### Ćwiczenie
                     Graj, aż pokonasz komputer! Najpierw dokończ przykładowy kod...
                 example_code: "```\nwygrana = 'nie'\nopcje = 'kamień', 'papier', 'nożyce'\n {while} wygrana == 'nie'\n    twój_wybór = {ask} 'Co wybierasz?'\n    wybór_komputera = opcje {at} {random}\n    {print} 'Ty wybrałeś' twój_wybór \n    {print} 'komputer wybrał ' wybór_komputera\n    {if}  wybór_komputera == twój_wybór\n        {print} 'Remis!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'nożyce'\n        {print} 'Przegrywasz!'\n    {if} wybór_komputera == 'kamień' {and} twój_wybór == 'papier'\n        {print} 'Wygrywasz!'\n        wygrana = 'tak'\n_\n```\n"
-    rock_2:
-        name: papier, kamień, nożyce 2
-        default_save_name: Kamień_2
-        description: Część 2 papier, kamień, nożyce
-        levels:
             2:
                 story_text: |
                     Znając komendę `{ask}` możemy uczynić naszą grę w papier, kamień, nożyce interaktywną!

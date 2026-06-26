@@ -9,14 +9,11 @@ adventures:
                     Seviye 1'de, kendi oluşturduğunuz farklı bir ana karakterle bir hikaye oluşturabilirsiniz.
 
                     İlk satırda `{ask}` kullanın ve hikayenin ana karakterinin kim olacağını sorun.
-
-                    Bu ilk satırdan sonra, cümlenin yazdırılması gerekiyorsa `{print}` ile başlayın.
-                    Ana karakterinizin cümlenin sonunda olmasını istiyorsanız `{echo}` kullanırsınız.
                 example_code: |
                     ```
                     {ask} Bu hikayenin ana karakteri kim?
                     {print} Ana karakter şimdi ormanda yürüyecek
-                    {echo} Biraz korkmuşlar,
+                    {print} Biraz korkmuşlar, {answer}
                     {print} Her yerde çılgın sesler duyuyorlar.
                     {print} Buranın perili bir orman olmasından korkuyorlar.
                     ```
@@ -24,7 +21,7 @@ adventures:
                     ### Alıştırma
                     Şimdi en az 6 satır koddan oluşan kendi hikayenizi oluşturun.
                     Bu hikaye örnek kod ile aynı olamaz.
-                    En az bir tane `{ask}` ve bir tane `{echo}` komutu kullanın.
+                    En az bir tane `{ask}` ve bir tane `{answer}` komutu kullanın.
                     İstediğiniz herhangi bir konu hakkında yapabilirsiniz.
                     Aklınıza bir konu gelmiyorsa, seçeneklerimizden birini kullanın: sinemaya gitmek, bir spor karşılaşması veya hayvanat bahçesinde bir gün.
             2:
@@ -292,31 +289,12 @@ adventures:
                     {ask} Senin adın ne?
                     ```
             2:
-                story_text: |
-                    ## sor komutu
-                    Artık kodlarımızda **değişkenleri** kullanabildiğimize göre, `{echo}` komutuna artık ihtiyacımız yok.
-                    Sorularımızın cevaplarını saklamak için değişkenler kullanabiliriz ve bu şekilde kodlarımızda birden fazla sorunun cevabını kullanabiliriz.
-                    Şuna bir bakın:
-
-                    Bu şekilde kodunuz etkileşimli hale geliyor!
                 example_code: |
                     ```
                     isim {is} {ask} Senin adın ne?
                     {print} Merhaba isim
                     yaş {is} {ask} Kaç yaşındasın?
                     {print} isim yaş yaşındadır.
-                    ```
-                story_text_2: |
-                    ### Alıştırma
-                    Önceki sekmede `{is}` komutu ile değişkenleri ayarlama alıştırması yaptınız.
-                    En az 3 değişken oluşturdunuz ve bunları bir yazdır komutu ile kullandınız.
-                    Şimdi, değişkenleri ayarlamak yerine, örneğimizde yaptığımız gibi değişkenleri etkileşimli hale getirmenizi istiyoruz.
-
-                    Kodunuzu önceki sekmeden kopyalayın ve `{ask}` komutlarını kullanarak değişkenleri etkileşimli hale getirin.
-                example_code_2: |
-                    ```
-                    favori_hayvan {is} {ask} En sevdiğin hayvan hangisi?
-                    {print} En sevdiğim hayvan favori_hayvan
                     ```
             13:
                 story_text: Python kodunu elde etmek için yapmamız gereken son değişiklik `{ask}` ifadesini `{input}` olarak değiştirmektir.
@@ -857,7 +835,7 @@ adventures:
                     {print} Buradan çıkmam lazım!
                     {print} Önümde 3 kapı var...
                     {ask} Hangi kapıyı seçmeliyim?
-                    {echo} Seçtiğim kapı
+                    {print} Seçtiğim kapı {answer}
                     {print} ...?
                     ```
                 story_text_2: |
@@ -1091,24 +1069,11 @@ adventures:
         description: eşit komutuna giriş
         levels:
             2:
-                story_text: |
-                    ## Değişkenler
-                    Bir kelimeyi `{is}` ile isimlendirebilirsiniz. Buna bir **değişken** denir. Bu örnekte isim adında bir değişken ile yaş adında bir değişken oluşturduk. Kodunuzun herhangi bir yerinde isim kelimesini kullanabilirsiniz ve Hedy bu kelimeyi değiştirilecektir, bunun gibi:
                 example_code: |
                     ```
                     isim {is} Hedy
                     yaş {is} 15
                     {print} isim yaş yaşındadır
-                    ```
-                story_text_2: |
-                    ### Alıştırma
-                    Kendi değişkenlerinizi oluşturma zamanı!
-                    Örnek kodda `favori_hayvan` değişkeni ile bir örnek yaptık. Satır 1'de değişken ayarlandı ve satır 2'de değişkeni bir `{print}` komutunda kullandık.
-                    Öncelikle, boşluklara en sevdiğiniz hayvanı doldurarak örneğimizi tamamlayın. Daha sonra bu kodlardan en az 3 tane daha kendiniz ekleyin. Bir değişken seçin ve bu değişkeni `{is}` komutu ile ayarlayın. Daha sonra tıpkı bizim yaptığımız gibi `{print}` komutu ile kullanın.
-                example_code_2: |
-                    ```
-                    favori_hayvan {is} _
-                    {print} En sevdiğim havyan favori_hayvan
                     ```
             7:
                 story_text: |
@@ -1727,12 +1692,12 @@ adventures:
                 story_text: |
                     Seviye 1'de, taş, kağıt, makas oyunu yazmaya başlayabilirsiniz.
 
-                    `{ask}` ile bir seçim yapabilir ve `{echo}` ile bu seçimi tekrarlayabilirsiniz.
+                    `{ask}` ile bir seçim yapabilir ve `{answer}` ile bu seçimi tekrarlayabilirsiniz.
                 example_code: |
                     ```
                     {print} Neyi seçiyorsun?
                     {ask} taş, kağıt veya makas arasından seçim yap
-                    {echo} Demek senin seçimin:
+                    {print} Demek senin seçimin: {answer}
                     ```
                 story_text_2: |
                     ### Alıştırma
@@ -1742,18 +1707,7 @@ adventures:
                     ```
                     {print} Neyi seçiyorsun?
                     {ask} Bunlardan birini seçin _
-                    {echo} Demek senin seçimin:
-                    ```
-            2:
-                story_text: |
-                    Bu seviyede değişkenleri kullanarak pratik yapabilir, böylece taş, kağıt, makas oyununuzu yeni bir seviyeye taşımız olursunuz!
-                    ### Alıştırma
-                    Boşluklardaki **değişkeni** doldurarak kodu tamamlayın.
-                    Bu oyun çok etkileşimli değil, ama endişelenmeyin! Bir sonraki sekmede oyununuzu etkileşimli hale getirmek için değişkenleri `{ask}` komutu ile birlikte nasıl kullanacağınızı öğreneceksiniz!
-                example_code: |-
-                    ```
-                    seçim {is} taş
-                    {print} Benim seçimim _
+                    {print} Demek senin seçimin: {answer}
                     ```
             3:
                 story_text: |
@@ -1856,10 +1810,6 @@ adventures:
                             kazandı = 'evet'
                     _
                     ```
-    rock_2:
-        name: Taş, kağıt, makas 2
-        description: Taş, kağıt, makasın 2. bölümü
-        levels:
             2:
                 story_text: |
                     Artık `{ask}` komutunu nasıl kullanacağınızı öğrendiğinize göre, taş, kağıt, makas kodunuzu da etkileşimli hale getirebilirsiniz!

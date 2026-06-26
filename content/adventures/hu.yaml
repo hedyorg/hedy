@@ -9,19 +9,16 @@ adventures:
                     Az 1. szinten elkészíthetsz egy történetet egy másik főszereplővel, amelyet te magad adsz meg.
 
                     Az első sorba írt `{ask}` bekéri a történet főszereplőjének a nevét.
-
-                    Az első sor után kezdd a `{print}` utasítással, ha a mondatot ki kell íratni.
-                    Akkor használd az `{echo}` parancsot, ha azt szeretnéd, hogy főszereplő neve a mondat végén legyen.
                 example_code: |
                     ```
                     {ask} A történet főszereplője
-                    {print} A főszereplő most az erdőben fog sétálni
-                    {echo} Kicsit fél, szegény
+                    {print} {answer} most az erdőben fog sétálni
+                    {print} Kicsit fél, szegény {answer}
                     {print} Őrült zajokat hall mindenütt
                     {print} Fél, hogy ez egy kísértet-járta erdő
                     ```
                 story_text_2: |
-                    Tudsz saját történetet írni Hedy-ben a `{print}` , `{ask}` és `{echo}` használatával?
+                    Tudsz saját történetet írni Hedy-ben a `{print}` , `{ask}` és `{answer}` használatával?
             2:
                 story_text: |
                     A 2. szinten szórakoztatóbbá teheted a történetedet. Fő karaktered neve mostantól
@@ -482,7 +479,7 @@ adventures:
                     {print} El kell mennem innen!
                     {print} Három ajtó van előttem ...
                     {ask} Melyik ajtót válasszam?
-                    echo Az ajtó, amit választok
+                    {print} Az ajtó, amit választok {answer}
                     {print} ...?
                     {print} ...?
                     ```
@@ -737,14 +734,14 @@ adventures:
                 story_text: |
                     Az 1. szinten kezdhetsz egy kő, papír, olló játékkal.
 
-                    A `ask` utasítással választhatsz, és az` echo'-val megismételheted ezt a választást.
+                    A `{ask}` utasítással választhatsz, és az `{answer}`-val megismételheted ezt a választást.
 
                     Az ismétlés természetesen kissé unalmas, mert a számítógép nem választ semmit. Ezt később mi magunk is elkészítjük.
                 example_code: |-
                     ```
                     {print} Mit választottál?
                     {ask} Válassz kő, papír és olló közül
-                    echo ez volt a választásod:
+                    {print} ez volt a választásod: {answer}
                     ```
             3:
                 story_text: |
@@ -787,8 +784,6 @@ adventures:
                     {if} _ {is} _ {print} 'döntetlen!' {else} {print} 'nem döntetlen'
                     {if} valaszt {is} kő and szamitogepe {is} papír {print} 'számítógép nyert'
                     ```
-    rock_2:
-        levels: {}
     secret:
         levels: {}
     sleep_command:

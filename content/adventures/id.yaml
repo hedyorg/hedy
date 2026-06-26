@@ -10,14 +10,12 @@ adventures:
 
                     Di baris pertama, gunakan `{ask}` dan tanya siapa yang akan menjadi karakter utama
 
-                    Setelah baris pertama, lanjut dengan`{print}`jika kalimat perlu untuk di cetak.
-                    Kamu juga dapat menggunakan`{echo}`apabila kamu ingin karakter utama mu berada di akhir kalimat.
-                example_code: "```\n{ask} Karakter utama dari cerita ini yaitu\n{print} Karakter utama akan berjalan menuju kedalam hutan\n{echo} Mereka sedikit ketakutan,\n{print} Mereka mendengar suara aneh dimana-mana\n{print} Mereka takut jika ternyata ini adalah hutan berhantu\n```\n"
+                example_code: "```\n{ask} Karakter utama dari cerita ini yaitu\n{print} Karakter utama akan berjalan menuju kedalam hutan\n{print} Mereka sedikit ketakutan, {answer}\n{print} Mereka mendengar suara aneh dimana-mana\n{print} Mereka takut jika ternyata ini adalah hutan berhantu\n```\n"
                 story_text_2: |
                     ### latihan
                     Sekarang buatlah ceritamu sendiri yang terdiri dari 6 baris kode.
                     Ceritanya tidak boleh sama dengan contoh cerita sebelumnya.
-                    Setidaknya gunakan minimal satu perintah`{ask}` dan`{echo}`
+                    Setidaknya gunakan minimal satu perintah`{ask}` dan`{answer}`
                     Kamu dapat membuat topik yang kamu inginkan
                     Kalau kamu tidak dapat menentukan topik, gunakan salah satu dari pilihan ini: pergi menonton film, melihat pertandingan olahraga, atau hari mengunjungi kebun binatang
             2:
@@ -249,31 +247,12 @@ adventures:
                     {ask} Siapa namamu?
                     ```
             2:
-                story_text: |
-                    ## Perintah tanya
-                    Sekarang kita dapat menggunakan **variabel** dalam kode kita, kita tidak lagi memerlukan perintah `{echo}`.
-                    Kita dapat menggunakan variabel untuk menyimpan jawaban atas pertanyaan kita dan dengan cara ini kita dapat menggunakan jawaban atas beberapa pertanyaan dalam kode kita.
-                    Coba lihat:
-
-                    Dengan cara ini kode Anda menjadi interaktif!
                 example_code: |
                     ```
                     nama {is} {ask} Siapa namamu?
                     {print} Halo nama
                     umur {is} {ask} Berapa umurmu?
                     {print} nama berumur tahun.
-                    ```
-                story_text_2: |
-                    ### Latihan
-                    Pada tab sebelumnya Anda telah berlatih mengatur variabel dengan perintah `{is}`.
-                    Anda telah membuat setidaknya 3 variabel dan menggunakannya dengan perintah cetak.
-                    Sekarang, daripada mengatur variabel, kami ingin Anda membuat variabel menjadi interaktif, seperti yang kami lakukan pada contoh kami.
-
-                    Salin kode Anda dari tab sebelumnya dan buat variabelnya interaktif dengan menggunakan perintah `{ask}`.
-                example_code_2: |
-                    ```
-                    favorit_animals {is} {ask} Apa hewan favoritmu?
-                    {print} Saya suka binatang_favorit
                     ```
     calculator:
         name: Kalkulator
@@ -702,7 +681,7 @@ adventures:
                     Jika kamu memilih pintu yang benar kamu akan bertahan hidup, tapi kalau tidak seekor monster akan...
 
                     Pada level 1 kita memulai permainan rumah berhantu dengan membuat cerita menyeramkan dan menanyakan monster apa yang pemain akan lihat di rumah berhantu.
-                example_code: "```\n{print} Kenapa aku ada disini?\n{print} Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\n{print} dan tiba-tiba semuanya menjadi gelap.\n{print} Tapi bagaimana caranya aku tergeletak di lantai...?\n{print} Kepalaku sakit seperti telah dipukul dengan tongkat pemukul basebal!\n{print} Suara apa itu?\n{print} Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\n{print} Aku perlu keluar dari sini!\n{print} Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\necho Aku memilih pintu \n{print} ...?\n ```\n\nDapatkah kamu menyelesaikan cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
+                example_code: "```\n{print} Kenapa aku ada disini?\n{print} Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\n{print} dan tiba-tiba semuanya menjadi gelap.\n{print} Tapi bagaimana caranya aku tergeletak di lantai...?\n{print} Kepalaku sakit seperti telah dipukul dengan tongkat pemukul basebal!\n{print} Suara apa itu?\n{print} Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\n{print} Aku perlu keluar dari sini!\n{print} Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\n{print} Aku memilih pintu {answer} \n{print} ...?\n ```\n\nDapatkah kamu menyelesaikan cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
             3:
                 story_text: |-
                     Pada level 1 kamu telah membuat pendahuluan tentang permainan rumah berhantu kamu, tapi seperti yang mungkin sudah kamu ketahui, ceritanya selalu memiliki akhir yang mengerikan.
@@ -984,16 +963,8 @@ adventures:
                 story_text: |
                     Pada level 1 kamu dapat memulai dengan permainan batu gunting kertas
 
-                    Dengan perintah `ask` kamu bisa mengambil salah satu pilihan, dan dengan `echo` kamu bisa menampilkan pilihan tersebut.
-                example_code: "```\n{print} apa yang kamu pilih?\n{ask} pilih dari batu, gunting, atau kertas\necho jadi pilhan kamu adalah: \n```\n"
-            2:
-                story_text: |
-                    In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
-                example_code: |
-                    ```
-                    choice {is} _
-                    {print} I choose choice
-                    ```
+                    Dengan perintah `{ask}` kamu bisa mengambil salah satu pilihan, dan dengan `{answer}` kamu bisa menampilkan pilihan tersebut.
+                example_code: "```\n{print} apa yang kamu pilih?\n{ask} pilih dari batu, gunting, atau kertas\n{print} jadi pilhan kamu adalah: {answer} \n```\n"
             3:
                 story_text: |
                     Kamu bisa menggunakan `{at} {random}` perintah untuk membiarkan komputer mengambil batu, kertas atau gunting!

@@ -8,34 +8,32 @@ adventures:
                 story_text: |
                     In level 1 you can make a story with a different main character that you enter yourself.
 
-                    In the first line, use `{ask}` and ask who the main character of the story will be.
+                    In the first line, use `{ask}` and ask who the main character of the story will be. Then use {answer} if you want to use the character's name.
 
-                    After that first line, start with `{print}` if the sentence needs to be printed.
-                    You use `{echo}` if you want your main character to be at the end of the sentence.
                 example_code: |
                     ```
                     {ask} The main character of this story is
-                    {print} The main character is now going to walk in the forest
-                    {echo} They're a bit scared,
-                    {print} They hear crazy noises everywhere
+                    {print} {answer} is now going to walk in the forest
+                    {print} A bit scared, {answer} walks on
+                    {print} {answer} hears crazy noises everywhere
                     {print} They're afraid this is a haunted forest
                     ```
                 story_text_2: |
                     ### Exercise
                     Now create your own story of at least 6 lines of code.
                     This story cannot be the same as the example code.
-                    Use at least one `{ask}` and one `{echo}` command.
+                    Use at least one `{ask}` and one `{answer}`.
                     You can make it about any topic you like.
                     If you can't think of a topic, use one of our choices: going to the movies, a sports match or a day at the zoo.
                 answer_code: |
                     ```
                     {print} One day I went to the zoo
                     {ask} What animal did i see first?
-                    {echo} First I saw a
+                    {print} First I saw a {answer}
                     {print} Then I saw a penguin
                     {print} It was having lunch
                     {ask} What was the penguin eating?
-                    {echo} The penguin was eating
+                    {print} The penguin was having {answer} for lunch
                     ```
             2:
                 story_text: |
@@ -521,12 +519,13 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ## The `{ask}` command
-                    Now that we can use **variables** in our codes, we no longer need the `{echo}` command.
-                    We can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.
-                    Check it out:
+                    ## Using variables
+                    In the previous levels you have learned to use `{answer}` to print the answer to a question, but what if you want to use more than one answer?
+                    In this level you'll learn how to use multiple **variables**. A variable is a place to store an answer (or *input*) from the users. You have already been using the variable `{answer}`, but now you'll learn how to use more variables!
+                    This example show you how you can use the variables 'name' and 'age'.
 
-                    This way your code is becoming interactive!
+                    ## {ask}
+                    Do you see how the `{ask}` command has changed as well? To tell the computer in which variable you want to store your answer, you start your line with the variable name, then {is} and then the {ask}.
                 example_code: |
                     ```
                     name {is} {ask} What is your name?
@@ -536,24 +535,24 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    In the previous adventure you have practised with setting variables with the `{is}` command.
-                    You have created at least 3 variables and used them with a `{print}` command.
-                    Now, instead of setting the variables we want you to make the variables interactive, like we did in our example.
-
-                    Copy your code from the previous adventure and make the variables interactive by using `{ask}` commands.
+                    Time to make your own variables! Ask the player what their favorite drink and favorite book are and print the answers.
+                    Finish the program by listing all the things the player likes in one line.
                 example_code_2: |
                     ```
                     favorite_animal {is} {ask} What is your favorite animal?
                     {print} I like favorite_animal
+
+                    {print} So you like _, _ and _.
                     ```
                 answer_code: |
                     ```
-                    favorite_animals {is} {ask} What is your favorite animal?
-                    {print} I like favorite_animals
+                    favorite_animal {is} {ask} What is your favorite animal?
+                    {print} I like favorite_animal
                     favorite_drink {is} {ask} What is your favorite drink?
                     {print} I like to drink favorite_drink
                     favorite_book {is} {ask} What is your favorite book?
                     {print} I like to read favorite_book
+                    {print} so you like favorite_animal, favorite_drinks and favorite_book
                     ```
             13:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
@@ -2543,7 +2542,7 @@ adventures:
                     In this adventure you are working towards making a game in which you have to escape from a haunted house by picking the correct door.
                     If you pick the right door you'll survive, but if not a terrible monster might...
 
-                    In level 1 we start our haunted house game by making up a scary story and ask the player what monster they'll see in the haunted house.
+                    In level 1 we start our haunted house game by making up a scary story and ask the player which door they'll choose in the haunted house.
                 example_code: |
                     ```
                     {print} How did I get here?
@@ -2556,14 +2555,14 @@ adventures:
                     {print} I need to get out of here!
                     {print} There are 3 doors in front of me..
                     {ask} Which door should i pick?
-                    {echo} I choose door
+                    {print} I choose door {asnwer}
                     {print} ...?
                     ```
                 story_text_2: |
                     ### Exercise
                     Copy the example code to your input screen by clicking the yellow button.
                     Now finish the story by adding at least 5 lines of code.
-                    Remember to start each line of codes with a `{print}` `{ask}` or `{echo}` command.
+                    Remember to start each line of codes with a `{print}` or `{ask}`.
                 answer_code: |
                     ```
                     {print} How did I get here?
@@ -2576,7 +2575,7 @@ adventures:
                     {print} I need to get out of here!
                     {print} There are 3 doors in front of me..
                     {ask} Which door should i pick?
-                    {echo} I choose door
+                    {print} I choose door {answer}
                     {print} I open the door carefully
                     {print} I look around the corner
                     {print} Oh no!
@@ -3365,8 +3364,8 @@ adventures:
         levels:
             2:
                 story_text: |
-                    ## Variables
-                    You can name a word with `{is}`. This is called a **variable**. In this example we made a variable called name and a variable called age. You can use the word name anywhere in your code and it will be replaced by Hedy, like this:
+                    ## Setting Variables
+                    You have learned to set variables by using input from the player by using ask, but did you know you could also set the variables yourself?
                 example_code: |
                     ```
                     name {is} Hedy
@@ -3375,13 +3374,18 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    Time to make your own variables!
-                    In the example code we made an example of the variable `favorite_animal`. In line 1 the variable is set, and in line 2 we used the variable in a `{print}` command.
-                    Firstly, finish our example by filling in your favorite animal on the blank. Then make at least 3 of these codes yourself. Pick a variable, and set the variable with the `{is}` command. Then use it with a `{print}` command, just like we did.
+                    Finish the program by setting the 6 variables.
                 example_code_2: |
                     ```
-                    favorite_animal {is} _
-                    {print} I like favorite_animal
+                    name {is} _
+                    _
+                    _
+                    _
+                    _
+                    _
+                    {print} I am name and I am age years old.
+                    {print} I live in place and go to name_school.
+                    {print} My favorite subject is favorite_subject, but I don't like least_favorite_subject.
                     ```
                 answer_code: |
                     ```
@@ -5221,19 +5225,21 @@ adventures:
                     ```
     rock:
         name: rock, paper, scissors
-        default_save_name: Rock_2
+        default_save_name: rock
         description: Make your own rock, paper, scissors game
         levels:
             1:
                 story_text: |
                     In level 1 you can start with a rock, paper, scissors game.
 
-                    With `{ask}` you can make a choice, and with `{echo}` you can repeat that choice.
+                    With `{ask}` you can make a choice, and with `{answer}` you can print that choice.
+
+                    Note: This game doens't really work yet, but in the next levels you'll learn how to turn this into a real game!
                 example_code: |
                     ```
                     {print} what do you choose?
                     {ask} choose from rock, paper or scissors
-                    {echo} so your choice was:
+                    {print} so your choice was: {answer}
                     ```
                 story_text_2: |
                     ### Exercise
@@ -5243,28 +5249,28 @@ adventures:
                     ```
                     {print} what do you choose?
                     {ask} choose from _
-                    {echo} so your choice was:
+                    {print} so your choice was: {answer}
                     ```
                 answer_code: |
                     ```
                     {print} what do you choose?
                     {ask} choose from ✊✋✌
-                    {echo} so your choice was:
+                    {print} so your choice was: {answer}
                     ```
             2:
                 story_text: |
-                    In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
+                    Now that you have learned how to use the `{ask}` command, you can make your rock, paper, scissors code interactive too!
+
                     ### Exercise
-                    Finish the code by filling in the **variable** on the blank.
-                    This game is not very interactive, but no worries! In the next adventure you'll learn how to use variables with the `{ask}` command to make your game interactive!
-                example_code: |-
+                    Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
+                example_code: |
                     ```
-                    choice {is} rock
-                    {print} I choose _
+                    choice {is} _
+                    {print} I choose choice
                     ```
                 answer_code: |
                     ```
-                    choice {is} rock
+                    choice {is} {ask} Rock, paper, or scissors?
                     {print} I choose choice
                     ```
             3:
@@ -5452,27 +5458,6 @@ adventures:
                         round = round + 1
                         {sleep} 1
                     {print}('Congratulations, you won from the computer in ', round, ' tries.')
-                    ```
-    rock_2:
-        name: rock, paper, scissors 2
-        default_save_name: rock_2
-        description: Part 2 of rock, paper, scissors
-        levels:
-            2:
-                story_text: |
-                    Now that you have learned how to use the `{ask}` command, you can make your rock, paper, scissors code interactive too!
-
-                    ### Exercise
-                    Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
-                example_code: |
-                    ```
-                    choice {is} _
-                    {print} I choose choice
-                    ```
-                answer_code: |
-                    ```
-                    choice {is} {ask} Rock, paper, or scissors?
-                    {print} I choose choice
                     ```
     secret:
         name: super spy
