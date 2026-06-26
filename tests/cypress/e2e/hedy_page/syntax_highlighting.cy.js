@@ -27,8 +27,7 @@ context('chai-colors', () => {
       cy.focused().clear();
       cy.focused().type('ask what is your name{enter}print answer');
 
-      cy.get('#editor .cm-content .cm-line')
-        .contains('answer')
+      cy.contains('#editor .cm-content .cm-highlight-var', 'answer')
         .should('be.visible')
         .should('have.css', 'color')
         .and('be.colored', '#c2e3ff')
@@ -40,8 +39,7 @@ context('chai-colors', () => {
       cy.focused().clear();
       cy.focused().type('preguntar como te llamas{enter}imprimir respuesta');
 
-      cy.get('#editor .cm-content .cm-line')
-        .contains('respuesta')
+      cy.contains('#editor .cm-content .cm-highlight-var', 'respuesta')
         .should('be.visible')
         .should('have.css', 'color')
         .and('be.colored', '#c2e3ff')
