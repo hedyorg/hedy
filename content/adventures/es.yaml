@@ -321,24 +321,6 @@ adventures:
                     {print} ¡Hola!
                     {ask} ¿Cómo te llamas?
                     ```
-                story_text_2: |
-                    ## El comando `{echo}`
-                    Si quieres que el ordenador te repita la respuesta, puedes usar el comando `{echo}`. Se hará eco de la respuesta al final de la frase. En este ejemplo después de hola.
-                example_code_2: |
-                    ```
-                    {print} ¡Hola!
-                    {ask} ¿Cómo te llamas?
-                    {echo} hola
-                    ```
-                story_text_3: |
-                    ### Ejercicio
-                    Prueba los comandos `{ask}` y `{echo}`. Lo primero, rellena los huecos en blanco para hacer que el programa funcione.
-                    Después, haz 2 preguntas más usando el comando `{ask}`, tras cada `{ask}` usa un `{echo}` para imprimir la respuesta en pantalla.
-                example_code_3: |
-                    ```
-                    _ ¿Qué tal estás?
-                    _
-                    ```
             2:
                 story_text: |
                     ## El comando `{ask}`
@@ -353,18 +335,6 @@ adventures:
                     {print} Hola nombre
                     edad {is} {ask} ¿Cuántos años tienes?
                     {print} nombre tiene edad años.
-                    ```
-                story_text_2: |
-                    ### Ejercicio
-                    En la aventura anterior has practicado estableciendo variables con el comando `{is}`.
-                    Has creado al menos 3 variables y las has usado con el comando `{print}`.
-                    Ahora, en vez de establecer las variables queremos que hagas las variables interactivas, como hicimos en nuestro ejemplo.
-
-                    Copia tu código de la aventura anterior y haz las variables interactivas usando el comando `{ask}`.
-                example_code_2: |
-                    ```
-                    favorite_animal {is} {ask} ¿Cuál es tu animal favorito?
-                    {print} Me gusta favorite_animal
                     ```
             13:
                 story_text: El último cambio que tenemos que hacer para conseguir el código en Python es cambiar `{ask}` por `{input}`.
@@ -1471,8 +1441,8 @@ adventures:
                     ```
                     {print} Soy Hedy la lora
                     {ask} ¿Cuál es tu nombre?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Desafío
@@ -1483,8 +1453,8 @@ adventures:
                     ```
                     {print} Soy Hedy el loro
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     En el nivel anterior has hecho un loro que repetirá todo después de ti. En este nivel harás que el loro interactivo usando una variable y el comando `{ask}`.

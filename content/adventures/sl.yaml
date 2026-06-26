@@ -57,10 +57,6 @@ adventures:
             1:
                 story_text: "## Ukaz vprašaj\nZdaj, ko znate uporabljati ukaz `{print}`, ste pripravljeni na učenje naslednjega ukaza: `{ask}`. Z ukazom `{ask}` lahko postavite vprašanje. Oglejte si ga:\n"
                 example_code: "```\n{print} Pozdravljeni!\n{ask} Kako vam je ime?\n```\n"
-                story_text_2: "## Ukaz `{echo}`\nČe želite, da vam računalnik ponovi odgovor, lahko uporabite ukaz `{echo}`. Odgovor bo ponovljen na koncu stavka, v tem primeru torej za pozdravom.\n"
-                example_code_2: "```\n{print} Pozdravljeni!\n{ask} Kako vam je ime?\n{echo} zdravo\n```\n"
-                story_text_3: "#### Vaja\nPreizkusite ukaza `{ask}` in `{echo}`. Najprej izpolnite prazna mesta, da bo program deloval.\nNato postavite še dve vprašanji z ukazom `{ask}`, po vsakem ukazu `{ask}` pa dodajte še ukaz `{echo}` za izpis odgovora na zaslon.\n"
-                example_code_3: "```\n_ Kako ste?\n_\n```\n"
             2:
                 story_text: "## Ukaz vprašaj\nZdaj, ko lahko uporabljamo **spremenljivke** v naših programih, ne potrebujemo več ukaza `{echo}`.\nSpremenljivke lahko uporabimo za shranjevanje odgovorov na vprašanja. Tako lahko uporabimo odgovor na več vprašanj v naših programih.\nPreverite:\n\nNa ta način vaša koda postaja interaktivna!\n"
                 example_code: "```\nime {is} {ask} Kako vam je ime?\n{print} Pozdravljeni ime\nstarost {is} {ask} Koliko ste stari?\n{print} ime je star-a starost let.\n```\n"
@@ -150,9 +146,9 @@ adventures:
         levels:
             1:
                 story_text: "Ustvarite svojo spletno papigo, ki vas bo posnemala!\n"
-                example_code: "```\n{print} Jaz sem papiga Hedy\n{ask} kako je pa tebi ime?\n{echo}\n{echo}\n```\n"
+                example_code: "```\n{print} Jaz sem papiga Hedy\n{ask} kako je pa tebi ime?\n{print} {answer}\n{print} {answer}\n```\n"
                 story_text_2: "### Vaja\nKopirajte kodo iz primera v vnosno okno s klikom na rumeni gumb.\nPapiga naj postavi drugačno vprašanje. Izpolnite prazna mesta v primeru!\n**Dodatek** Papagaju lahko dovolite, da postavi več vprašanj. Pod svoj program vnesite še nekaj vrstic kode.\n"
-                example_code_2: "```\n{print} Jaz sem papiga Hedy\n{ask} _\n{echo}\n{echo}\n"
+                example_code_2: "```\n{print} Jaz sem papiga Hedy\n{ask} _\n{print} {answer}\n{print} {answer}\n"
     print_command:
         default_save_name: Izpiši
         description: Uvod v ukaz izpiši

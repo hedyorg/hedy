@@ -327,24 +327,6 @@ adventures:
                     {print} Hallo!
                     {ask} Wie heißt du?
                     ```
-                story_text_2: |
-                    ## Der `{echo}` Befehl
-                    Wenn du möchtest, dass der Computer die Antwort für dich wiederholt, kannst du den `{echo}` Befehl verwenden. Beachte, dass die Antwort am Ende des Satzes wiederholt wird - also in diesem Beispiel nach Hallo.
-                example_code_2: |
-                    ```
-                    {print} Hallo!
-                    {ask} Wie heißt du?
-                    {echo} Hallo
-                    ```
-                story_text_3: |
-                    ### Übung
-                    Probiere die `{ask}` und `{echo}` Befehle aus. Zuerst fülle die Lücken, damit das Programm funktioniert.
-                    Dann frage zwei weitere Fragen mit dem `{ask}` Befehl. Nach jedem `{ask}` benutze ein `{echo}`, um die Antwort auf dem Bildschirm auszugeben.
-                example_code_3: |
-                    ```
-                    _ Wie geht es dir?
-                    _
-                    ```
             2:
                 story_text: |
                     ## Der `{ask}` Befehl
@@ -359,18 +341,6 @@ adventures:
                     {print} Hallo name
                     alter {is} {ask} Wie alt bist du?
                     {print} name ist alter Jahre alt.
-                    ```
-                story_text_2: |
-                    ### Übung
-                    In der vorherigen Übung hast du die Definition von Variablen mit dem `{is}` Befehl geübt.
-                    Du hast mindestens 3 Variablen festgelegt und sie mit dem `{print}` Befehl verwendet.
-                    Jetzt wollen wir die Variablen nicht einfach festlegen, sondern flexibel machen - so wie in unserem Beispiel.
-
-                    Kopiere den Code der vorherigen Übung hierher und mache sie mit `{ask}` Befehlen interaktiv.
-                example_code_2: |
-                    ```
-                    lieblingstier {is} {ask} Was ist dein Lieblingstier?
-                    {print} Mein Lieblingstier ist lieblingstier
                     ```
             13:
                 story_text: Die letzte Anpassung, die wir machen müssen, um Python Code zu erhalten, ist `{ask}` in `{input}` zu ändern.
@@ -1843,8 +1813,8 @@ adventures:
                     ```
                     {print} Ich bin Hedy der Papagei!
                     {ask} Wie lautet Dein Name?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Übung
@@ -1855,8 +1825,8 @@ adventures:
                     ```
                     {print} Ich bin Hedy der Papagei
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     Lass Deinen zahmen Papageien noch etwas echter klingen!

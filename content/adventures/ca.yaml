@@ -268,24 +268,6 @@ adventures:
                     {print} Hola!
                     {ask} Com et dius?
                     ```
-                story_text_2: |
-                    ## La comanda `{echo}`
-                    Si vols que l'ordinador et repeteixi la resposta, pots utilitzar l'ordre `{echo}`. La resposta es mostrarà al final de la frase, com en aquest exemple després d'hola.
-                example_code_2: |
-                    ```
-                    {print} Hola!
-                    {ask} Com et dius?
-                    {echo} Hola
-                    ```
-                story_text_3: |
-                    ### Exercici
-                    Prova les comandes `{ask}` i `{echo}`. Abans de res, omple els buits perquè aquest programa funcioni.
-                    A continuació, fes 2 preguntes més utilitzant la comanda `{ask}`, després de cada `{ask}` usa `{echo}` per imprimir la resposta a la pantalla.
-                example_code_3: |
-                    ```
-                    _ Com vas?
-                    _
-                    ```
             2:
                 story_text: |
                     ## La comanda `{ask}`
@@ -1187,9 +1169,9 @@ adventures:
         levels:
             1:
                 story_text: "Crea el teu propi lloro-robot que repeteixi tot el que dius!\n"
-                example_code: "```\n{print} Sóc Hedy el lloro-robot\n{ask} Com et dius?\n{echo}\n{echo}\n```\n"
+                example_code: "```\n{print} Sóc Hedy el lloro-robot\n{ask} Com et dius?\n{print} {answer}\n{print} {answer}\n```\n"
                 story_text_2: "### Exercici\nCopia el codi d'exemple al bloc de codi fent clic al botó groc.\nDesprés omple els buits fent que el lloro-robot faci una pregunta diferent.\n**Extra** El lloro pot fer múltiples preguntes. Afegeix línies de codi extra a sota.\n"
-                example_code_2: "```\n{print} Sóc Hedy el lloro-robot\n{ask} _\n{echo}\n{echo}\n"
+                example_code_2: "```\n{print} Sóc Hedy el lloro-robot\n{ask} _\n{print} {answer}\n{print} {answer}\n"
             2:
                 story_text: |
                     En el nivell anterior has fet un lloro-robot que repetia el que li deies. En aquest nivell farem que el lloro sigui interactiu utilitzant una variable i la comanda `{ask}` .

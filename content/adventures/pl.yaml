@@ -281,24 +281,6 @@ adventures:
                     {print} Cześć!
                     {ask} Jak masz na imię?
                     ```
-                story_text_2: |
-                    ## Komenda `{echo}`
-                    Jeśli chcesz aby komputer powtórzył odpowiedź, możesz użyć komendy `{echo}`. Odpowiedź zostanie wypisana na końcu zdania, czyli w tym przypadku po "cześć"
-                example_code_2: |
-                    ```
-                    {print} Cześć!
-                    {ask} Jak masz na imię?
-                    {echo} cześć
-                    ```
-                story_text_3: |
-                    ### Ćwiczenie
-                    Wypróbuj komend `{ask}` i `{echo}`. Najpierw wypełnij puste miejsca, aby program zadziałał.
-                    Następnie zadaj 2 kolejne pytania, używając komendy `{ask}`. Po każdym `{ask}` użyj `{echo}` aby wypisać odpowiedź na ekranie.
-                example_code_3: |
-                    ```
-                    _ Jak się masz?
-                    _
-                    ```
             2:
                 story_text: |
                     ## Komenda `{ask}`
@@ -1539,8 +1521,8 @@ adventures:
                     ```
                     {print} Jestem papuga Hedy
                     {ask} Jak masz na imię?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Ćwiczenie

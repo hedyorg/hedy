@@ -299,24 +299,6 @@ adventures:
                     {print} Hej!
                     {ask} Vad heter du?
                     ```
-                story_text_2: |
-                    ## Kommandot eko
-                    Om du vill att datorn ska upprepa svaret kan du använda kommandot `{echo}`. Tänk på att svaret återges i slutet av meningen, så i det här exemplet efter hej.
-                example_code_2: |
-                    ```
-                    {print} Hej!
-                    {ask} Vad heter du?
-                    {echo} hej
-                    ```
-                story_text_3: |
-                    ### Övning
-                    Prova kommandona `{ask}` och `{echo}`. Fyll först i de tomma fälten för att få programmet att fungera.
-                    Ställ sedan ytterligare två frågor med kommandot `{ask}`. Efter varje `{ask}` använder du ett `{echo}` för att skriva ut svaret på skärmen.
-                example_code_3: |
-                    ```
-                    _ Hur mår du?
-                    _
-                    ```
             2:
                 story_text: |
                     ## Kommandot fråga
@@ -1161,8 +1143,8 @@ adventures:
                     ```
                     {print} Jag heter papegojan Hedy
                     {ask} vad heter du?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Övning
@@ -1173,8 +1155,8 @@ adventures:
                     ```
                     {print} Jag heter papegojan Hedy
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     På förra nivån skapade du en papegoja som härmar dig. På den här nivån kommer vi att göra papegojan interaktiv med en variabel och `{ask}`-kommandot.
