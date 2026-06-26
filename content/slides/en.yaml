@@ -291,16 +291,16 @@ levels:
             code: |-
                 {print} Welcome to the restaurant!
                 {ask} What would you like to eat
-                {echo} You would like to eat...
+                {print} You would like to eat... {answer}
                 {ask} What would you like to drink?
-                {echo} You would like to drink ...
+                {print} You would like to drink ... {answer}
                 {print} Thank you for ordering with us!
-                {echo} Please enjoy your ...
+                {print} Please enjoy your ... {answer}
             notes: |-
                 Warning: This code doens't work in this level. Don't run the program, just discuss it.
                 Let your students take a look at the program and let them predict the output.
                 Hopefully they will come to the conclusion that the last line will only say 'Enjoy your (drink they ordered)' and that the computer will have forgotten the food.
-                With 'echo' the computer can only remember one item. In this level you will learn to use variables to solve this problem.
+                With 'ask' the computer can only remember one item. In this level you will learn to use variables to solve this problem.
         3:
             header: What is a variable?
             text: |-

@@ -304,16 +304,16 @@ levels:
             code: |-
                 {print} Welkom bij ons restaurant!
                 {ask} Wat wil je eten?
-                {echo} Je wil dit graag eten ...
+                {print} Je wil dit graag eten ... {answer}
                 {ask} Wat wil je drinken?
-                {echo} Je wil dit graag drinken ...
+                {print} Je wil dit graag drinken ... {answer}
                 {print} Bedankt voor je bestelling!
-                {echo} Geniet van je ...
+                {print} Geniet van je ... {answer}
             notes: |-
                 Let op: Deze code werkt niet meer in dit level.
                 Laat de leerlingen het programma bekijken en de uitvoer voorspellen.
                 Hopelijk komen ze tot de conclusie dat in de laatste zin alleen wordt gezegd 'Geniet van je (drinken dat ze hebben gekozen)' en dat de computer het eten is vergeten.
-                Met 'echo' kan je maar één item opslaan in het computergeheugen, maar het zou toch veel fijner zijn als dat er meer zouden zijn?! Daarom leren we in dit level werken met variabelen.
+                Met 'ask' kan je maar één item opslaan in het computergeheugen, maar het zou toch veel fijner zijn als dat er meer zouden zijn?! Daarom leren we in dit level werken met variabelen.
         3:
             header: Wat is een variabele?
             text: |-
