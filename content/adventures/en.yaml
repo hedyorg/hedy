@@ -469,9 +469,9 @@ adventures:
                     ```
                     name = {ask} 'what is your name?'
                     age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
+                    {if} name {is} Hedy {and} age {is} 2
                         {print} 'You are the real Hedy!'
-                    {elif} name {is} 'Hedy' {or} age {is} 2
+                    {elif} name {is} Hedy {or} age {is} 2
                         {print} 'So close.. but you are not Hedy!'
                     {else}
                         {print} 'You are not Hedy!'
@@ -2852,6 +2852,20 @@ adventures:
                     * Ask with which doctor they have their appointment
                     * Thank the patient for succesfully registering
                     * Tell the patient to take a seat in the waiting room
+                answer_code: |
+                    ```
+                    {print} Hello, welcome to the hospital
+                    {ask} What is you name?
+                    {print} Your name is answer
+                    {ask} What is your date of birth?
+                    {print} Your DOB is answer
+                    {ask} On which department do you have an appointment?
+                    {print} You have an appointment here: answer
+                    {ask} Which doctor is your appointment with?
+                    {print} with doctor answer
+                    {print} Thank you. You've registrated succesfully!
+                    {print} Please take a seat in the waiting room.
+                    ```
             2:
                 story_text: |
                     The maternity ward of our hospital would like some music for the babies to fall asleep to. Can you program a lullaby?
@@ -2861,6 +2875,80 @@ adventures:
                     * Itsy Bitsy Spider (medium)
                     * Brahms lullaby (hard)
                     HINT: You can try to think of the correct musical notes yourself, but you can also search for them on the internet.
+                answer_code: |
+                    Mary had a little lamb
+                    ```
+                    {play} A
+                    {play} G
+                    {play} F
+                    {play} G
+                    {play} A
+                    {play} A
+                    {play} A
+                    {sleep} 1
+                    {play} G
+                    {play} G
+                    {play} G
+                    {sleep} 1
+                    {play} A
+                    {play} C
+                    {play} C
+                    {sleep} 1
+                    {play} A
+                    {play} G
+                    {play} F
+                    {play} G
+                    {play} A
+                    {play} A
+                    {play} A
+                    {play} A
+                    {play} G
+                    {play} G
+                    {play} A
+                    {play} G
+                    {play} F
+                    ```
+                    Itsy Bitsy Spider
+                    ```
+                    {play} G
+                    {play} C
+                    {play} C
+                    {play} C
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {play} D
+                    {play} C
+                    {play} D
+                    {play} E
+                    {play} C
+                    ```
+                    Brahms lullaby
+                    ```
+                    {play} F
+                    {play} F
+                    {play} A
+                    {play} F
+                    {play} F
+                    {play} A
+                    {play} C
+                    {play} C
+                    {play} E
+                    {play} G
+                    {play} F
+                    {play} E
+                    {play} F
+                    {play} F
+                    {play} A
+                    {play} F
+                    {play} A
+                    {play} C
+                    {play} C
+                    {play} E
+                    {play} G
+                    {play} F
+                    ```
             3:
                 story_text: |
                     There is a problem in the nurses' office. All the nurses are complaining that the shedule for the night shifts is unfair. Some nurses have to work 2 night shifts a week, while others work none at all.
@@ -2870,6 +2958,31 @@ adventures:
                     * Show which nurse has to work the night shift on which day of the week.
                     * Make sure that each nurse has to work only one night shift a week.
                     The nurses names are: Meredith, Miranda, Alex, Derek, Christina, Izzy, George
+                answer_code: |
+                    ```
+                    nurses {is} Meredith, Miranda, Alex, Derek, Christina, Izzy, George
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Monday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Tuesday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Wednesday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Thursday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Friday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Saturday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Sunday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    ```
             4:
                 story_text: |
                     Our nurses have a lot of tasks to accomplish in one day. One of these tasks is going around all the patients in the morning and ask them what they would like to have for breakfast.
@@ -2884,6 +2997,21 @@ adventures:
                     * Repeat the order back to the patient
                     * Thank the patient for ordering
                     * Tell them that their order will be brought to their roomnumber in 15 minutes.
+                answer_code: |
+                    ```
+                    name {is} {ask} 'please enter your name: '
+                    roomnumber {is} {ask} 'please enter your roomnumber:'
+                    {print} 'Hello ' name
+                    {print} 'On todays menu we have: '
+                    {print} 'a sandwich, cereal, banana, apple'
+                    {print} 'and these are the drinks: '
+                    {print} 'orange juice, tea, coffee, water'
+                    food {is} {ask} 'What would you like to eat?'
+                    drink {is} {ask} 'What would you like to drink?'
+                    {print} 'you have ordered: ' food ' and ' drink
+                    {print} 'Thank you for your order'
+                    {print} 'Your order will arrive in 15 minutes.'
+                    ```
             5:
                 story_text: |
                     Our centre for burnwounds would like to lessen the workload by using an online triage tool. This way the patients can not only register their name and date of birth, but also what kind of burnwound they have (first, second or third degree) and advise on what to do next.
@@ -2893,6 +3021,20 @@ adventures:
                     * Start with a greeting and simple registration of the patients name and date of birth
                     * Preform a triage. Is the skin only red: first degree burn. Are there blisters: second degree burn. Is the skin gone/blackened/whitened from the burn: third degree burn.
                     * Give the patient the appropriate advise. First degree: Cool the burn with water and apply some cream on it. You do not need to see a doctor. Second degree: The doctor will see you and prescribe a special cream. Please wait in the waiting area. Third degree: Please go the the service desk now. You will need urgent care a.s.a.p.
+                answer_code: |
+                    ```
+                    name {is} {ask} 'please enter your name'
+                    dob {is} {ask} 'please enter your date of birth'
+                    first_degree {is} {ask} 'Is the skin red?'
+                    second_degree {is} {ask} 'Are there blisters on the skin?'
+                    third_degree {is} {ask} ' Is the skin gone/blackened/whitened from the burn'
+                    {if} first_degree {is} 'yes'
+                    {print} 'Cool the burn with water and apply some cream on it. You do not need to see a doctor.'
+                    {if} second_degree {is} 'yes'
+                    {print} 'The doctor will see you and prescribe a special cream. Please wait in the waiting area.'
+                    {if} third_degree {is} 'yes'
+                    {print} 'Please go the the service desk now. You will need urgent care a.s.a.p.'
+                    ```
             6:
                 story_text: |
                     Our midwifes get a lot of questions from pregnant ladies about what they can and can't eat while pregnant. Can you help their patients by creating an app that tells them if food is safe or not?
@@ -2904,11 +3046,22 @@ adventures:
                     * If it is not on the list, it tells the patient that it is probably safe to eat.
                     * Then the app also warns the person to always use common sense because the list might not be 100% complete. And it advises the person to always avoid raw meats, fish and eggs and alcohol.
                     When you are pregnant it is unsafe to eat: sushi, shrimp, tuna, blue cheese, tiramisu, runny eggs, carpaccio, rare steak, tartar
+                answer_code: |
+                    ```
+                    {print} "To eat or not to eat, that's the question!"
+                    food {is} {ask} 'What would you like to eat?'
+                    unsafe_foods {is} sushi, shrimp, tuna, blue cheese, tiramisu, runny eggs, carpaccio, rare steak, tartar
+                    {if} food {in} unsafe_foods
+                    {print} food " is unsafe to eat"
+                    {else}
+                    {print} food " is probably safe to eat"
+                    {print} 'Always use common sense because our list might not be 100% complete. Always avoid raw meats, fish and eggs and alcohol. '
+                    ```
             7:
                 story_text: |
                     Our nurses keep track of the fluid balance of our patients. The fluid balance is how much fluid the patient has gained today (by drinking, eating or IV) minus how much fluid the person lost today (by peeing or vomiting).
                     The fluid balance needs to stay positive. If the fluid balance is negative the nurse needs to administer more IV fluid.
-                    Can you help our nurses by making a tool they coudl use to calculate their patients fluid balance?
+                    Can you help our nurses by making a tool they could use to calculate their patient's fluid balance?
                     ### Exercise
                     The program should:
                     * Ask how much fluid the patient gained from drinking that day.
@@ -2918,6 +3071,17 @@ adventures:
                     * Ask how much fluid the patient lost from vomiting that day.
                     * Calculate the patients fluid balance and display it to the nurse.
                     * Tell the nurse to check whether the balance is positive or negative to decide if the patient needs more IV fluid today or not.
+                answer_code: |
+                    ```
+                    intake_drinking = {ask} 'how much fluid did the patient gain from drinking?'
+                    intake_eating = {ask} 'how much fluid did the patient gain from eating?'
+                    intake_IV = {ask} 'how much fluid did the patient gain from the IV?'
+                    discharge_urine = {ask} 'how much fluid did the patient lose from peeing?'
+                    discharge_vomit = {ask} 'how much fluid did the patient lose from vomiting?'
+                    fluid_balance = intake_drinking + intake_eating + intake_IV - discharge_urine - discharge_vomit
+                    {print} "The patient's fluid balance is " fluid_balance
+                    {print} 'Please, check whether the balance is positive or negative to decide if the patient needs more IV fluid today or not'
+                    ```
             8:
                 story_text: |
                     Our patients sometimes forget to take their medicine, causing grave health concerns. To make sure the patients take all of their prescribed pills, we give them an alarmclock that beeps everytime they need to take their pills.
@@ -2993,6 +3157,20 @@ adventures:
                     * Paint a red cross with the drawing turtle.
                     * Make a siren sound after finishing the red cross.
                     HINT: use the repeat command.
+                answer_code: |
+                    ```
+                    {color} red
+                    {repeat} 4 {times}
+                        {forward} 50
+                        {turn} 90
+                        {forward} 50
+                        {turn} 90
+                        {forward} 50
+                        {turn} -90
+                    {repeat} 10 {times}
+                        {play} C
+                        {play} A
+                    ```
             10:
                 story_text: |
                     The staff at our emergency room has a problem. They say that there are a lot of patients coming in who don't really have an emergency and who should actually go to their gp.
@@ -3011,6 +3189,38 @@ adventures:
                     If the patient answers 'no' to all the questions the program will ask:
                     * Can it wait till tomorrow?
                     If the answer is 'yes' the program will tell the patient to go to the gp at their earliest convenience. If the answer is 'no' the program will advise to call their healthcare provider to discuss the situation.
+                answer_code: |
+                    ```
+                    lifethreatening = {ask} 'Is your situation life-threatening?'
+                    {if} lifethreatening {is} 'yes'
+                        {print} 'Go to the emergency room A.S.A.P!'
+                    {else}
+                        breathing = {ask} 'Do you experience trouble breathing?'
+                        {if} breathing {is} 'yes'
+                            {print} 'Go to the emergency room A.S.A.P!'
+                        {else}
+                            ability = {ask} 'Are you suddenly not able to speak, see, walk, or move?'
+                            {if} ability {is} 'yes'
+                                {print} 'Go to the emergency room A.S.A.P!'
+                            {else}
+                                poison = {ask} 'Did you ingest or inhale poison?'
+                                {if} poison {is} 'yes'
+                                    {print} 'Go to the emergency room A.S.A.P!'
+                                {else}
+                                    broken_bone = {ask} 'Did you break a bone?'
+                                    {if} broken_bone {is} 'yes'
+                                        {print} 'Go to the emergency room A.S.A.P!'
+                                    {else}
+                                        allergy = {ask} 'Do you have a serious allergic reaction?'
+                                        {if} allergy {is} 'yes'
+                                            {print} 'Go to the emergency room A.S.A.P!'
+                                        {else}
+                                            wait = {ask} 'Can it wait until tomorrow?'
+                                            {if} wait {is} 'yes'
+                                                {print} 'Go to the gp at your earliest convenience.'
+                                            {else}
+                                                {print} 'Call your healthcare provider to discuss the situation'
+                    ```
             11:
                 story_text: |
                     We have a problem in the vaccination clinic. The screen that calls the next patient to go to the vaccination area is broken down. Can you fix it?
@@ -3021,6 +3231,28 @@ adventures:
                     * Add the names of the new patients to the list as well
                     * Then the program should call on a patient to go to the vaccination area.
                     * The program should wait 10 seconds, clear the screen and call on the next patient, until every patient on the list has been called on.
+                answer_code: |
+                    ```
+                    patients {is} Bert, Julia, Abby, Oscar, Ernie, Rosita, Zoe
+                    amount_patients = 7
+
+                    new_patients = {ask} 'Are there any new patients today?'
+                    {if} new_patients {is} 'yes'
+                        amount_new_patients = {ask} 'How many?'
+                        amount_patients = amount_patients + amount_new_patients
+                        {repeat} amount_new_patients {times}
+                            name = {ask} 'What is their name?'
+                            {add} name {to} patients
+                    {else}
+                        {print} 'No new patients today'
+
+                    {repeat} amount_patients {times}
+                        chosen_patient = patients {at} {random}
+                        {print} chosen_patient ', come to the vaccination area please'
+                        {remove} chosen_patient {from} patients
+                        {sleep} 10
+                        {clear}
+                    ```
             12:
                 story_text: |
                     We are designing a new hospital ward and we would like to draw a floorplan for this new ward.
@@ -3291,7 +3523,7 @@ adventures:
                 example_code: |
                     ```
                     continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
+                    {if} continue is yes
                         sure = {ask} 'Are you sure?'
                         {if} sure {is} yes
                             {print} 'We will continue'
@@ -5134,10 +5366,10 @@ adventures:
                     price = 10
                     food = {ask} 'What would you like to eat?'
                     drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' _ drinks {is} 'juice'
+                    {if} food {is} sandwich _ drinks {is} juice
                         {print} 'That is our discount menu'
                         price = price - 3
-                    {if} drinks {is} 'water' _ drinks {is} 'juice'
+                    {if} drinks {is} water _ drinks {is} juice
                         {print} 'That is a healthy choice'
                     {print} 'That will be ' price ' dollars'
                     ```
@@ -5492,7 +5724,7 @@ adventures:
                     ```
                     name = {ask} 'What is your name?'
                     password = {ask} 'What is your password?'
-                    {if} name {is} 'Agent007' _ password {is} 'TOPSECRET'
+                    {if} name {is} Agent007 _ password {is} TOPSECRET
                         {print} 'Go to the airport at 02.00'
                     {else}
                         {print} 'Go to the train station at 10.00'
@@ -5502,7 +5734,7 @@ adventures:
                     ```
                     name = {ask} 'What is your name?'
                     password = {ask} 'What is your password?'
-                    {if} name {is} 'Agent007' and password {is} 'TOPSECRET'
+                    {if} name {is} Agent007 and password {is} TOPSECRET
                         {print} 'Go to the airport at 02.00'
                     {else}
                         {print} 'Go to the train station at 10.00'
@@ -6881,7 +7113,7 @@ adventures:
                     Hint for the flags:
                     ```
                     country = {ask} 'which country would you like to see the flag of?'
-                    {if} country {is} 'the Netherlands'
+                    {if} country {is} Netherlands
                         color_1 = red
                         color_2 = white
                         color_3 = blue

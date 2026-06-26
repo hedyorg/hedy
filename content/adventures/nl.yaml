@@ -1676,7 +1676,7 @@ adventures:
                 example_code: |
                     ```
                     doorgaan = {ask} 'Wil je doorgaan?'
-                    {if} doorgaan = ja
+                    {if} doorgaan is ja
                         zeker = {ask} 'Weet je het zeker?'
                         {if} zeker {is} ja
                             {print} 'We gaan door'
@@ -2983,7 +2983,7 @@ adventures:
                     ```
                     naam = {ask} 'Hoe heet je?'
                     wachtwoord = {ask} 'Wat is het wachtwoord?'
-                    {if} naam {is} 'Agent007' _ wachtwoord {is} 'TOPSECRET'
+                    {if} naam {is} Agent007 _ wachtwoord {is} TOPSECRET
                         {print} 'Ga naar het vliegveld om 02:00'
                     {else}
                         {print} 'Ga naar het treinstation om 10:00'
@@ -3425,7 +3425,7 @@ adventures:
                     Hint voor de vlaggen:
                     ```
                     land = {ask} 'Van welk land wil je de vlag zien?'
-                    {if} land {is} 'Nederland'
+                    {if} land {is} Nederland
                         kleur_1 = red
                         kleur_2 = white
                         kleur_3 = blue
