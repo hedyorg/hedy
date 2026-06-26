@@ -493,31 +493,31 @@ adventures:
                     {ask} What is your name?
                     ```
                 story_text_2: |
-                    ## The `{echo}` command
-                    If you want the computer to repeat the answer back to you, you can use the `{echo}` command. The answer will be echoed back at the end of the sentence, so in this example after hello.
+                    ## The `{answer}`
+                    If you want to print the answer, you can do so like this:
                 example_code_2: |
                     ```
                     {print} Hello!
                     {ask} What is your name?
-                    {echo} hello
+                    {print} Hi, {answer}!
                     ```
                 story_text_3: |
                     ### Exercise
-                    Try out the `{ask}` and `{echo}` commands. Firstly, fill in the blanks to make this program work.
-                    Then ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{echo}` to print the answer on the screen.
+                    Try out the `{ask}`command and the `{answer}`. Firstly, fill in the blanks to make this program work.
+                    Then ask 2 more questions using the `{ask}` command, after each `{ask}` use an `{answer}` to print the answer on the screen.
                 example_code_3: |
                     ```
                     _ How are you doing?
-                    _
+                    _ You're doing _
                     ```
                 answer_code: |
                     ```
                     {ask} How are you doing?
-                    {echo} You're doing
+                    {print} You're doing answer
                     {ask} What is your favorite sport?
-                    {echo} You like
+                    {print} You like {answer}
                     {ask} What is your least favorite sport?
-                    {echo} You don't like
+                    {print} {answer} is your least favorite
                     ```
             2:
                 story_text: |

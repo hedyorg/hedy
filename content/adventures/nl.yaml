@@ -277,14 +277,14 @@ adventures:
                     {ask} Wat is jouw naam?
                     ```
                 story_text_2: |
-                    ## Het `{echo}` commando
-                    Als je wilt dat de computer jouw antwoord herhaalt, kun je het `{echo}` commando gebruiken. Let op: jouw antwoord wordt herhaald aan het einde van de zin. In dit voorbeeld komt jouw antwoord dus na Hoi.
-                example_code_2: "```\n{print} Hallo!\n{ask} Hoe heet je? \n{echo} Hoi\n```\n"
-                story_text_3: "### Opdracht \nProbeer het`{ask}`commando en het`{echo}` commando uit. Vul eerst een goede code in op de plek van het streepje, om het programma aan de praat te krijgen.\nStel daarna nog twee vragen door het `{ask}` commando te gebruiken. Gebruik na elke `{ask}` ook een `{echo}` om het antwoord op het scherm te tonen.\n"
+                    ## `{answer}`
+                    Je kunt het antwoord op de vraag zo printen:
+                example_code_2: "```\n{print} Hallo!\n{ask} Hoe heet je? \n{print} Hoi, {answer}!\n```\n"
+                story_text_3: "### Opdracht \nProbeer het`{ask}`commando uit en print ook de antwoorden. Vul eerst een goede code in op de plek van het streepje, om het programma aan de praat te krijgen.\nStel daarna nog twee vragen door het `{ask}` commando te gebruiken. Gebruik na elke `{ask}` ook een `{answer}` om het antwoord op het scherm te tonen.\n"
                 example_code_3: |
                     ```
                     _ Hoe gaat het?
-                    _
+                    _ Met jou gaat het _
                     ```
             2:
                 story_text: "## Het vraag commando\nNu we **variabelen** in onze codes kunnen gebruiken, hebben we het `{echo}` commando niet langer nodig.\nWe kunnen variabelen gebruiken om antwoorden in op te slaan. Hierdoor kunnen we antwoorden op meerdere vragen gebruiken in onze codes. \nKijk maar eens naar het voorbeeld:\n\nOp deze manier worden je programma's steeds interactiever!\n"
