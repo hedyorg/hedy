@@ -2769,7 +2769,17 @@ adventures:
                     ```
             2:
                 story_text: "Witamy w przygodzie debugowania. Debugowanie kodu oznacza pozbywanie się pomyłek znajdujących się w kodzie.\nOznacza to, że w tych przygodach debugowania, pokażemy wam kod, który jeszcze nie działa.\nBędziecie musieli dowiedzieć się, co jest z nim nie tak oraz poprawić wszelkie pomyłki.\n\n### Ćwiczenie\nZdebuguj ten kod. Powodzenia!"
-                example_code: "**Uwaga! Ten kod musi zostać zdebugowany!**\n```\nmiejsce docelowe {ask} Gdzie jedzie Pan/Pani na wakacje?\n{print} Lot do miejsca docelowego odlatuje o 3 po południu.\n{ask} Czy dał Pan/Pani już swój bagaż do sprawdzenia?\n{echo}\n{print} Proszę pozwolić, że wydrukuję kartę pokładową.\n{sleep}\nProszę bardzo! Miłej podróży!\n```\n"
+                example_code: |
+                    **Uwaga! Ten kod musi zostać zdebugowany!**
+                    ```
+                    miejsce docelowe {ask} Gdzie jedzie Pan/Pani na wakacje?
+                    {print} Lot do miejsca docelowego odlatuje o 3 po południu.
+                    {ask} Czy dał Pan/Pani już swój bagaż do sprawdzenia?
+                    {answer}
+                    {print} Proszę pozwolić, że wydrukuję kartę pokładową.
+                    {sleep}
+                    Proszę bardzo! Miłej podróży!
+                    ```
             3:
                 story_text: "Witamy w przygodzie debugowania. Debugowanie kodu oznacza pozbywanie się pomyłek znajdujących się w kodzie.\nOznacza to, że w tych przygodach debugowania, pokażemy wam kod, który jeszcze nie działa.\nBędziecie musieli dowiedzieć się, co jest z nim nie tak oraz poprawić wszelkie pomyłki.\n\n### Ćwiczenie\nPozbądź się pomyłek z tego kodu. Powodzenia!"
                 example_code: "**Uwaga! Ten kod musi zostać zdebugowany!**\n```\nfilmy_do_wyboru {is} drakula, szybcy i wściekli, kevin sam w domu, barbie\nwybrany_film {is} filmy {at} {random}\n{print} Dzisiejszego wieczoru będziemy oglądać wybrane_filmy\nlubić {ask} Lubisz ten film?\n{print} Jutro obejrzymy coś innego.\n{add} wybrany_film {to_list} filmy_do_wyboru\n{print} Jutro obejrzymy jutrzejszy_film\njutrzejszy_film {is} filmy_do_wyboru {at} {random}\nPójdę po popcorn! {print}\n```\n"
