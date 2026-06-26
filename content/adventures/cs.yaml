@@ -724,20 +724,97 @@ adventures:
     debugging:
         levels:
             1:
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} Miluji programování\nTaké milujete programování?\n{echo}\n{print} Jaké jsou vaše koníčky?\n{echo} Vaše koníčky jsou\n```\n"
-                story_text: "Vítejte v dobrodružství ladění. Ladění kódu znamená odstraňování chyb v kódu.\nTo znamená, že v těchto ladicích dobrodružstvích vám ukážeme kód, který zatím nefunguje.\nBudete muset zjistit, co je špatně, a chyby opravit.\n\n### Cvičení\nVylaďte tento kód. Hodně štěstí!"
+                example_code: |-
+                    **Upozornění! Tento kód je třeba odladit!**
+                    ```
+                    {print} Miluji programování
+                    Také milujete programování?
+                    {answer}
+                    {print} Jaké jsou vaše koníčky?
+                    {print} Vaše koníčky jsou
+                    ```
+                story_text: |- 
+                    Vítejte v dobrodružství ladění. Ladění kódu znamená odstraňování chyb v kódu.
+                    To znamená, že v těchto ladicích dobrodružstvích vám ukážeme kód, který zatím nefunguje.
+                    Budete muset zjistit, co je špatně, a chyby opravit.
+                    
+                    ### Cvičení
+                    Vylaďte tento kód. Hodně štěstí!
             2:
-                example_code: "**Upozornění! Tento kód je třeba vyladit!**\n```\ndestination {ask} Kam jedete na dovolenou?\n{print} Let do dstination odlétá v 15:00.\n{ask} Už jste si odbavili zavazadla?\n{echo}\n{print} Dovolte mi, abych vám vytiskl palubní vstupenku.\n{sleep}\nTady máte! Šťastnou cestu!\n```\n"
-                story_text: "Vítejte v dobrodružství ladění. Ladění kódu znamená odstraňování chyb v kódu.\nTo znamená, že v těchto ladicích dobrodružstvích vám nabídneme kód, který zatím nefunguje.\nBudete muset zjistit, co je špatně, a chyby opravit.\n\n### Cvičení\nVylaďte tento kód. Hodně štěstí!"
+                example_code: |-
+                    **Upozornění! Tento kód je třeba vyladit!**
+                    ```
+                    destination {ask} Kam jedete na dovolenou?
+                    {print} Let do dstination odlétá v 15:00.
+                    {ask} Už jste si odbavili zavazadla?
+                    {echo}
+                    {print} Dovolte mi, abych vám vytiskl palubní vstupenku.
+                    {sleep}
+                    Tady máte! Šťastnou cestu!
+                    ```
+                story_text: |-
+                    Vítejte v dobrodružství ladění. Ladění kódu znamená odstraňování chyb v kódu.
+                    To znamená, že v těchto ladicích dobrodružstvích vám nabídneme kód, který zatím nefunguje.
+                    Budete muset zjistit, co je špatně, a chyby opravit.
+                    
+                    ### Cvičení
+                    Vylaďte tento kód. Hodně štěstí!
             3:
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\nmovie_choices {is} dracula, fast and furious, home alone, barbie\nchosen_movie {is} movies {at} {random}\n{print} Dnes večer se budeme dívat na vybrané _filmy\nlike {ask} Líbí se ti ten film?\n{print} Zítra se podíváme na něco jiného.\n{add} vybraný_film {to_list} movie_choices\n{print} Zítra se podíváme na zítřejší_film\ntomorrows_movie {is} movie_choices {at} {random}\nJdu pro popcorn! {print}\n```\n"
-                story_text: "Vítejte v dobrodružství ladění. Ladění kódu znamená odstraňování chyb v kódu.\nTo znamená, že v těchto ladicích dobrodružstvích vám předložíme kód, který zatím nefunguje.\nBudete muset zjistit, co je špatně, a chyby opravit.\n\n### Cvičení\nVylaďte tento kód. Hodně štěstí!"
+                example_code: |-
+                    **Upozornění! Tento kód je třeba odladit!**
+                    ```
+                    movie_choices {is} dracula, fast and furious, home alone, barbie
+                    chosen_movie {is} movies {at} {random}
+                    {print} Dnes večer se budeme dívat na vybrané _filmy
+                    like {ask} Líbí se ti ten film?
+                    {print} Zítra se podíváme na něco jiného.
+                    {add} vybraný_film {to_list} movie_choices
+                    {print} Zítra se podíváme na zítřejší_film
+                    tomorrows_movie {is} movie_choices {at} {random}
+                    Jdu pro popcorn! {print}
+                    ```
+                story_text: |-
+                    Vítejte v dobrodružství ladění. Ladění kódu znamená odstraňování chyb v kódu.
+                    To znamená, že v těchto ladicích dobrodružstvích vám předložíme kód, který zatím nefunguje.
+                    Budete muset zjistit, co je špatně, a chyby opravit.
+                    
+                    ### Cvičení
+                    Vylaďte tento kód. Hodně štěstí!
             4:
-                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} 'Vítejte v online knihovně!\n{ask} Jaký žánr knih máte rádi?\n{print} Máte rádi žánr\nautor {is} {ask} 'Kdo je tvůj oblíbený autor?\n{print} 'autor je váš oblíbený autor'\n{print} Hmmm... myslím, že byste měl zkusit... knih {at} {random}\n```\n"
+                story_text: |-
+                    ### Cvičení
+                    Vylaďte tento kód. Hodně štěstí!"
+                    example_code: |-
+                    **Upozornění! Tento kód je třeba odladit!**
+                    ```
+                    {print} 'Vítejte v online knihovně!
+                    {ask} Jaký žánr knih máte rádi?
+                    {print} Máte rádi žánr
+                    autor {is} {ask} 'Kdo je tvůj oblíbený autor?
+                    {print} 'autor je váš oblíbený autor'
+                    {print} Hmmm... myslím, že byste měl zkusit... knih {at} {random}
+                    ```
             5:
-                story_text: "### Cvičení\nVylaďte tento kód. Hodně štěstí!"
-                example_code: "**Upozornění! Tento kód je třeba odladit!**\n```\n{print} Vítejte v bazénu Hedy!\ntřída {is} {ask} 'Přišli jste dnes do třídy?'\n{if} třída ano\n{print} 'Skvělé! Připojujete se ke třídě!\n{print} {else} 'Do třídy se nepřihlásíte'\nsleva {is} 'Máte slevový kód?'\n{if} sleva {is} ano\nsleva_odpověď {is} {ask} 'Jaký je váš slevový kód?'\nslevový_kód = Senior4231, Student8786, NewMember6709\n{if} slevová_odpověď {is} {in} slevové_kódy\n{print} 'To bude 3,50 USD'\n'To bude 5,50 $'\n{print} 'Hezké koupání!'\n```\n"
+                story_text: |-
+                    ### Cvičení
+                    Vylaďte tento kód. Hodně štěstí!"
+                    example_code: |-
+                    **Upozornění! Tento kód je třeba odladit!**
+                    ```
+                    {print} Vítejte v bazénu Hedy!
+                    třída {is} {ask} 'Přišli jste dnes do třídy?'
+                    {if} třída ano
+                    {print} 'Skvělé! Připojujete se ke třídě!
+                    {print} {else} 'Do třídy se nepřihlásíte'
+                    sleva {is} 'Máte slevový kód?'
+                    {if} sleva {is} ano
+                    sleva_odpověď {is} {ask} 'Jaký je váš slevový kód?'
+                    slevový_kód = Senior4231, Student8786, NewMember6709
+                    {if} slevová_odpověď {is} {in} slevové_kódy
+                    {print} 'To bude 3,50 USD'
+                    'To bude 5,50 $'
+                    {print} 'Hezké koupání!'
+                    ```
         description: ladění dobrodružství
         name: ladění
         default_save_name: ladění
@@ -747,8 +824,22 @@ adventures:
         default_save_name: vymaž_příkaz
         levels:
             4:
-                example_code: "```\n{print} '3'\n{clear}\n{print} '2'\n{clear}\n{print} '1'\n{clear}\n{print} 'čekej na to...'\n{sleep} 3\n{clear}\n{print} 'PŘEKVAPENÍ!'\n```\n"
-                story_text: "Je čas na nový příkaz! Příkazem `{clear}` můžete vymazat veškerý text z výstupní obrazovky. Tímto způsobem můžete zabránit tomu, aby byla obrazovka příliš zaplněna textem.\nPozor! Používáte-li příkaz `{clear}`, může se stát, že nad ním budete muset použít příkaz `{sleep}`. Jinak vám Hedy vymaže obrazovku, aniž by vám dal čas na čtení, jak vidíte v příkladu!\n"
+                example_code: |-
+                    ```
+                    {print} '3'
+                    {clear}
+                    {print} '2'
+                    {clear}
+                    {print} '1'
+                    {clear}
+                    {print} 'čekej na to...'
+                    {sleep} 3
+                    {clear}
+                    {print} 'PŘEKVAPENÍ!'
+                    ```
+                story_text: |-
+                    Je čas na nový příkaz! Příkazem `{clear}` můžete vymazat veškerý text z výstupní obrazovky. Tímto způsobem můžete zabránit tomu, aby byla obrazovka příliš zaplněna textem.
+                    Pozor! Používáte-li příkaz `{clear}`, může se stát, že nad ním budete muset použít příkaz `{sleep}`. Jinak vám Hedy vymaže obrazovku, aniž by vám dal čas na čtení, jak vidíte v příkladu!
     if_command:
         description: Představujeme{if} příkaz
         default_save_name: pokud_příkaz

@@ -2762,8 +2762,22 @@ adventures:
         description: przygoda z debugowaniem
         levels:
             1:
-                story_text: "Witamy w przygodzie debugowania. Debugowanie kodu oznacza pozbywanie się pomyłek znajdujących się w kodzie.\nOznacza to, że w tych przygodach debugowania, pokażemy wam kod, który jeszcze nie działa.\nBędziecie musieli dowiedzieć się, co jest z nim nie tak oraz poprawić wszelkie pomyłki.\n\n### Ćwiczenie\nZdebuguj ten kod. Powodzenia!"
-                example_code: "**Uwaga! Ten kod wymaga usunięcia z niego błędów!**\n```\n{print} Uwielbiam programować\nCzy ty też uwielbiasz programować?\n{echo}\n{print} Jakie są twoje zainteresowania?\n{echo} Moje zainteresowania to\n```\n"
+                story_text: |- 
+                    Witamy w przygodzie debugowania. Debugowanie kodu oznacza pozbywanie się pomyłek znajdujących się w kodzie.
+                    Oznacza to, że w tych przygodach debugowania, pokażemy wam kod, który jeszcze nie działa.
+                    Będziecie musieli dowiedzieć się, co jest z nim nie tak oraz poprawić wszelkie pomyłki.
+                    
+                    ### Ćwiczenie
+                    Zdebuguj ten kod. Powodzenia!
+                example_code: |- 
+                    **Uwaga! Ten kod wymaga usunięcia z niego błędów!**
+                    ```
+                    {print} Uwielbiam programować
+                    Czy ty też uwielbiasz programować?
+                    {answer}
+                    {print} Jakie są twoje zainteresowania?
+                    {print} Moje zainteresowania to
+                    ```
             2:
                 story_text: "Witamy w przygodzie debugowania. Debugowanie kodu oznacza pozbywanie się pomyłek znajdujących się w kodzie.\nOznacza to, że w tych przygodach debugowania, pokażemy wam kod, który jeszcze nie działa.\nBędziecie musieli dowiedzieć się, co jest z nim nie tak oraz poprawić wszelkie pomyłki.\n\n### Ćwiczenie\nZdebuguj ten kod. Powodzenia!"
                 example_code: "**Uwaga! Ten kod musi zostać zdebugowany!**\n```\nmiejsce docelowe {ask} Gdzie jedzie Pan/Pani na wakacje?\n{print} Lot do miejsca docelowego odlatuje o 3 po południu.\n{ask} Czy dał Pan/Pani już swój bagaż do sprawdzenia?\n{echo}\n{print} Proszę pozwolić, że wydrukuję kartę pokładową.\n{sleep}\nProszę bardzo! Miłej podróży!\n```\n"
