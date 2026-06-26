@@ -267,31 +267,12 @@ adventures:
                     {ask} Com et dius?
                     ```
             2:
-                story_text: |
-                    ## La comanda `{ask}`
-                    Ara que sabem utilitzar **variables** als nostres codis, ja no necessitem la comanda `{echo}`.
-                    Podem fer servir variables per emmagatzemar les respostes a les nostres preguntes i podem respondre múltiples preguntes en els nostres codis.
-                    Comprova-ho:
-
-                    D'aquesta manera, el teu codi es torna interactiu!
                 example_code: |
                     ```
                     nom {is} {ask} Com et dius?
                     {print} Hola nom
                     edat {is} {ask} Quants anys tens?
                     {print} nom té edat anys.
-                    ```
-                story_text_2: |
-                    ### Exercici
-                    A l'aventura anterior heu practicat a establir variables amb la comanda `{is}`.
-                    Has creat almenys 3 variables i les has utilitzat amb una comanda `{print}`.
-                    Ara, en lloc d'establir les variables, volem que les facis interactives, com hem fet al nostre exemple.
-
-                    Copia el teu codi de l'aventura anterior i fes que les variables siguin interactives mitjançant la comanda `{ask}`.
-                example_code_2: |
-                    ```
-                    animal_preferit {is} {ask} Quin és el teu animal preferit?
-                    {print} M'agrada el animal_preferit
                     ```
             13:
                 story_text: El canvi final que haurem de fer per obtenir codi Python és canviar `{ask}` per `{input}`.

@@ -297,31 +297,12 @@ adventures:
                     {ask} Vad heter du?
                     ```
             2:
-                story_text: |
-                    ## Kommandot fråga
-                    Nu när vi kan använda **variabler** i vår kod behöver vi inte längre kommandot `{echo}`.
-                    Vi kan använda variabler för att lagra svaren på våra frågor och på så sätt kan vi använda svaret på flera frågor i vår kod.
-                    Kolla in det:
-
-                    På så sätt blir din kod interaktiv!
                 example_code: |
                     ```
                     namn {is} {ask} Vad heter du?
                     {print} Hej namn
                     ålder {is} {ask} Hur gammal är du?
                     {print} namn är ålder år gammal.
-                    ```
-                story_text_2: |
-                    ### Övning
-                    I förra fliken övade du på att tilldela variabler med kommandot `{is}`.
-                    Du har skapat minst tre variabler och använt dem med ett print-kommando.
-                    Nu vill vi att du istället för att sätta variablerna gör dem interaktiva, som vi gjorde i vårt exempel.
-
-                    Kopiera din kod från föregående flik och gör variablerna interaktiva med `{ask}`-kommandon.
-                example_code_2: |
-                    ```
-                    favoritdjur {is} {ask} Vilket är ditt favoritdjur?
-                    {print} Jag gillar favoritdjur
                     ```
             13:
                 story_text: |

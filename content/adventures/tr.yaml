@@ -298,31 +298,12 @@ adventures:
                     {ask} Senin adın ne?
                     ```
             2:
-                story_text: |
-                    ## sor komutu
-                    Artık kodlarımızda **değişkenleri** kullanabildiğimize göre, `{echo}` komutuna artık ihtiyacımız yok.
-                    Sorularımızın cevaplarını saklamak için değişkenler kullanabiliriz ve bu şekilde kodlarımızda birden fazla sorunun cevabını kullanabiliriz.
-                    Şuna bir bakın:
-
-                    Bu şekilde kodunuz etkileşimli hale geliyor!
                 example_code: |
                     ```
                     isim {is} {ask} Senin adın ne?
                     {print} Merhaba isim
                     yaş {is} {ask} Kaç yaşındasın?
                     {print} isim yaş yaşındadır.
-                    ```
-                story_text_2: |
-                    ### Alıştırma
-                    Önceki sekmede `{is}` komutu ile değişkenleri ayarlama alıştırması yaptınız.
-                    En az 3 değişken oluşturdunuz ve bunları bir yazdır komutu ile kullandınız.
-                    Şimdi, değişkenleri ayarlamak yerine, örneğimizde yaptığımız gibi değişkenleri etkileşimli hale getirmenizi istiyoruz.
-
-                    Kodunuzu önceki sekmeden kopyalayın ve `{ask}` komutlarını kullanarak değişkenleri etkileşimli hale getirin.
-                example_code_2: |
-                    ```
-                    favori_hayvan {is} {ask} En sevdiğin hayvan hangisi?
-                    {print} En sevdiğim hayvan favori_hayvan
                     ```
             13:
                 story_text: Python kodunu elde etmek için yapmamız gereken son değişiklik `{ask}` ifadesini `{input}` olarak değiştirmektir.

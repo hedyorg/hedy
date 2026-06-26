@@ -58,10 +58,7 @@ adventures:
                 story_text: "## Ukaz vprašaj\nZdaj, ko znate uporabljati ukaz `{print}`, ste pripravljeni na učenje naslednjega ukaza: `{ask}`. Z ukazom `{ask}` lahko postavite vprašanje. Oglejte si ga:\n"
                 example_code: "```\n{print} Pozdravljeni!\n{ask} Kako vam je ime?\n```\n"
             2:
-                story_text: "## Ukaz vprašaj\nZdaj, ko lahko uporabljamo **spremenljivke** v naših programih, ne potrebujemo več ukaza `{echo}`.\nSpremenljivke lahko uporabimo za shranjevanje odgovorov na vprašanja. Tako lahko uporabimo odgovor na več vprašanj v naših programih.\nPreverite:\n\nNa ta način vaša koda postaja interaktivna!\n"
                 example_code: "```\nime {is} {ask} Kako vam je ime?\n{print} Pozdravljeni ime\nstarost {is} {ask} Koliko ste stari?\n{print} ime je star-a starost let.\n```\n"
-                story_text_2: "### Vaja\nV prejšnjem zavihku ste vadili nastavljanje spremenljivk z ukazom `{is}`.\nUstvarili ste vsaj 3 spremenljivke in jih uporabili z ukazom za izpisovanje.\nZdaj, namesto da nastavite spremenljivke, želimo, da spremenljivke naredite interaktivne, kot smo mi storili v našem primeru.\n\nKopirajte svojo kodo iz prejšnjega zavihka in naredite spremenljivke interaktivne z uporabo ukazov `{ask}`.\n"
-                example_code_2: "```\npriljubljena_žival {is} {ask} Katera žival vam je najljubša?\n{print} Rad-a imam priljubljena_žival\n```\n"
             13:
                 story_text: Zadnja sprememba, ki jo bomo morali narediti, da dobimo kodo Python, je sprememba iz `{ask}` v `{input}`.
                 example_code: "```\n{print}('Moje ime je Hedy!')\nime = {input}('Kako je pa vam ime?')\n{print}('Torej vam je ime ', ime)\n```\n"

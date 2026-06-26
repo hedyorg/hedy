@@ -256,31 +256,12 @@ adventures:
                     {ask} Siapa namamu?
                     ```
             2:
-                story_text: |
-                    ## Perintah tanya
-                    Sekarang kita dapat menggunakan **variabel** dalam kode kita, kita tidak lagi memerlukan perintah `{echo}`.
-                    Kita dapat menggunakan variabel untuk menyimpan jawaban atas pertanyaan kita dan dengan cara ini kita dapat menggunakan jawaban atas beberapa pertanyaan dalam kode kita.
-                    Coba lihat:
-
-                    Dengan cara ini kode Anda menjadi interaktif!
                 example_code: |
                     ```
                     nama {is} {ask} Siapa namamu?
                     {print} Halo nama
                     umur {is} {ask} Berapa umurmu?
                     {print} nama berumur tahun.
-                    ```
-                story_text_2: |
-                    ### Latihan
-                    Pada tab sebelumnya Anda telah berlatih mengatur variabel dengan perintah `{is}`.
-                    Anda telah membuat setidaknya 3 variabel dan menggunakannya dengan perintah cetak.
-                    Sekarang, daripada mengatur variabel, kami ingin Anda membuat variabel menjadi interaktif, seperti yang kami lakukan pada contoh kami.
-
-                    Salin kode Anda dari tab sebelumnya dan buat variabelnya interaktif dengan menggunakan perintah `{ask}`.
-                example_code_2: |
-                    ```
-                    favorit_animals {is} {ask} Apa hewan favoritmu?
-                    {print} Saya suka binatang_favorit
                     ```
     calculator:
         name: Kalkulator

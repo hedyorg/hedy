@@ -287,31 +287,12 @@ adventures:
                     {ask} Qual é o seu nome?
                     ```
             2:
-                story_text: |
-                    ## O comando `{ask}`
-                    Agora que podemos usar **variáveis** em nossos códigos, não precisamos mais do comando `{echo}`.
-                    Podemos usar variáveis para guardar as respostas às nossas perguntas e, assim, usá-las em diversas outras partes de nossos códigos.
-                    Veja:
-
-                    Assim, o seu código está ficando interativo!
                 example_code: |
                     ```
                     nome {is} {ask} Qual é o seu nome?
                     {print} Olá nome
                     idade {is} {ask} Quantos anos você tem?
                     {print} nome tem idade anos.
-                    ```
-                story_text_2: |
-                    ### Exercício
-                    Na aventura anterior, você praticou a definição de variáveis com o comando `{is}`.
-                    Você criou pelo menos 3 variáveis e usou elas com um comando `{print}`.
-                    Agora, ao invés de definir as variáveis, queremos que você as torne interativas, assim como fizemos em nosso exemplo.
-
-                    Copie o seu código da aventura anterior e torne as variáveis interativas usando comandos `{ask}`.
-                example_code_2: |
-                    ```
-                    animal_favorito {is} {ask} Qual é o seu animal favorito?
-                    {print} Eu gosto de animal_favorito
                     ```
             13:
                 example_code: |

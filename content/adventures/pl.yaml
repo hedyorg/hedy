@@ -279,31 +279,12 @@ adventures:
                     {ask} Jak masz na imię?
                     ```
             2:
-                story_text: |
-                    ## Komenda `{ask}`
-                    Teraz gdy potrafimy używać **zmiennych** w naszym kodzie, nie potrzebujemy już komendy `{echo}`.
-                    Możemy używać zmiennych, aby zapisać odpowiedzi do naszych pytań i w ten sposób używać tych odpowiedzi w wielu zapytaniach w naszym kodzie.
-                    Spójrz na to:
-
-                    W ten sposób Twój kod staje się interaktywny!
                 example_code: |
                     ```
                     imię {is} {ask} Jak masz na imię?
                     {print} Cześć imię
                     wiek {is} {ask} Ile masz lat?
                     {print} imię ma ... lat.
-                    ```
-                story_text_2: |
-                    ### Ćwiczenie
-                    W poprzedniej przygodzie ćwiczyłeś ustawianie zmiennych za pomocą polecenia `{is}`.
-                    Utworzyłeś co najmniej 3 zmienne i użyłeś ich za pomocą polecenia `{print}`.
-                    Teraz zamiast ustawiać zmienne, chcemy, abyś uczynił je interaktywnymi, tak jak zrobiliśmy to w naszym przykładzie.
-
-                    Skopiuj swój kod z poprzedniej przygody i spraw, aby zmienne były interaktywne, używając poleceń `{ask}`.
-                example_code_2: |
-                    ```
-                    ulubione_zwierzę {is} {ask} Jakie jest Twoje ulubione zwierzę?
-                    {print} Lubię ulubione_zwierzę
                     ```
             13:
                 story_text: Ostatnią zmianą, którą musimy wprowadzić, aby uzyskać kod Pythona, jest zamiana `{ask}` na `{input}`.
