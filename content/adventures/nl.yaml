@@ -2833,14 +2833,14 @@ adventures:
                     ```
             2:
                 story_text: |
-                    In dit level kun je variabelen gebruiken om alvast een stukje van het spelletje te programmeren. In het volgende level leer je het spelletje maken.
+                    Nu je `{ask}` hebt geleerd te gebruiken, kun je de steen, papier, schaar code ook interactief maken!
+
                     ### Opdracht
-                    Maak de code af door de **variabele** in te vullen op de lege plek.
-                    Dit spel is nog niet echt interactief, maar wees gerust, in het volgende avontuur leer je `{ask}` gebruiken met variabelen.
-                example_code: |-
+                    Maak de steen, papier, schaarcode interactief met het `{ask}` commando.
+                example_code: |
                     ```
-                    keuze {is} steen
-                    {print} ik kies _
+                    keuze {is} _
+                    {print} Ik kies keuze
                     ```
             3:
                 story_text: |
@@ -2945,22 +2945,6 @@ adventures:
                         {print}('de computer koos ', computer_keuze)
                         {if} computer_keuze == jouw_keuze
                     _
-                    ```
-    rock_2:
-        name: steen, papier, schaar 2
-        default_save_name: Steen2
-        description: Deel 2 van steen, papier schaar
-        levels:
-            2:
-                story_text: |
-                    Nu je `{ask}` hebt geleerd te gebruiken, kun je de steen, papier, schaar code ook interactief maken!
-
-                    ### Opdracht
-                    Maak de steen, papier, schaarcode interactief met het `{ask}` commando.
-                example_code: |
-                    ```
-                    keuze {is} _
-                    {print} Ik kies keuze
                     ```
     secret:
         name: geheim agent

@@ -2004,17 +2004,6 @@ adventures:
                     {ask} escoge _
                     {print} tu elección fue {answer}
                     ```
-            2:
-                story_text: |
-                    En este nivel puedes practicar el uso de las variables, ¡para poder hacer el juego de piedra, papel o tijera en el siguiente nivel!
-                    ### Ejercicio
-                    Termina el código rellenando la **variable** en el espacio en blanco.
-                    Este juego no es muy interactivo, ¡pero no te preocupes! En la siguiente aventura aprenderás a usar variables con el comando `{ask}` ¡para hacer tu juego interactivo!
-                example_code: |-
-                    ```
-                    opción {is} piedra
-                    {print} Yo elijo _
-                    ```
             3:
                 story_text: |
                     ¡Puedes usar el comando `{at} {random}` para dejar que el ordenador elija piedra, papel o tijeras!
@@ -2108,11 +2097,6 @@ adventures:
                             ganó = 'sí'
                     _
                     ```
-    rock_2:
-        name: Piedra, papel, tijeras 2
-        default_save_name: piedra_2
-        description: Parte 2 de piedra, papel, tijeras
-        levels:
             2:
                 story_text: |
                     Ahora que has aprendido a utilizar el comando `{ask}`, ¡también puedes hacer que tu código de piedra, papel o tijera sea interactivo!

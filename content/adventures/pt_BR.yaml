@@ -1645,17 +1645,6 @@ adventures:
                     {ask} escolha entre _
                     {print} então sua escolha foi: {answer}
                     ```
-            2:
-                story_text: |
-                    Neste nível, você pode praticar o uso de variáveis. Assim, você vai conseguir criar o jogo de pedra, papel e tesoura no próximo nível!
-                    ### Exercício
-                    Complete o código preenchendo a lacuna com a **variável**.
-                    Este jogo não é muito interativo, mas não se preocupe! Na próxima aventura, você aprenderá a usar variáveis com o comando `{ask}` para tornar o seu jogo mais interativo!
-                example_code: |-
-                    ```
-                    escolha {is} pedra
-                    {print} Eu escolho _
-                    ```
             3:
                 story_text: |
                     Você pode usar o comando `{at} {random}` para deixar o computador escolher pedra, papel ou tesoura!
@@ -1691,11 +1680,6 @@ adventures:
             5:
                 example_code: "```\nopções {is} pedra, papel, tesoura\nescolha_do_computador {is} _\nescolha {is} _\n{print} 'você escolheu ' _\n{print} 'o computador escolheu ' _\n{if} _ {is} _ {print} 'empatado!' {else} {print} 'sem empate'\n```\n\nPreencha as lacunas com o código certo para ver se há empate.\n"
                 story_text: "Neste nível, podemos determinar se houve ou não um empate. Para tanto, você precisa do novo comando `{if}`.\n\n### Exercício\nComplete o código preenchendo as lacunas:\n* Deixe o computador escolher aleatoriamente\n* Pergunte ao(à) jogador(a) qual opção ele(a) quer escolher\n* Preencha as linhas 4 e 5 com as variáveis corretas\n* Complete a linha 6 para que Hedy possa checar se houve ou não um empate.\n"
-    rock_2:
-        name: Pedra, papel e tesoura 2
-        default_save_name: pedra_2
-        description: Parte 2 de pedra, papel e tesoura
-        levels:
             2:
                 story_text: |
                     Agora que você aprendeu a usar o comando `{ask}`, você pode deixar o código do seu jogo de pedra, papel e tesoura mais interativo!

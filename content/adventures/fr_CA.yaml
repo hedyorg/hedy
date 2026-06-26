@@ -1898,17 +1898,6 @@ adventures:
                     {ask} Choisis parmi _
                     {print} ainsi, tu as choisi : {answer}
                     ```
-            2:
-                story_text: |
-                    À ce niveau tu peux t'entrainer à utiliser les variables pour faire passer le jeu pierre, papier, ciseaux au niveau supérieur !
-                    ### Exercice
-                    Termine le code en écrivant la **variable** dans les espaces vides.
-                    Ce jeu n'est pas très interactif, mais ne t'inquiet pas ! Dans l'onglet suivant, tu apprendras comment utiliser les variables avec la commande `{ask}` pour rendre ton jeu interactif !
-                example_code: |
-                    ```
-                    choix {is} pierre
-                    {print} Je choisis _
-                    ```
             3:
                 story_text: |
                     Tu peux utiliser la commande `{at} {random}` pour faire choisir à l'ordinateur la pierre, le papier ou les ciseaux !
@@ -1996,9 +1985,6 @@ adventures:
                             {print} 'You win!'
                             won = 'yes'
                     ```
-    rock_2:
-        name: Pierre, papier, ciseaux 2
-        levels:
             2:
                 story_text: |
                     Maintenant que tu as appris comment utiliser la commande `{ask}`, tu peux rendre ton code de pierre, papier, ciseaux interactif !

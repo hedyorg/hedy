@@ -5253,18 +5253,18 @@ adventures:
                     ```
             2:
                 story_text: |
-                    In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
+                    Now that you have learned how to use the `{ask}` command, you can make your rock, paper, scissors code interactive too!
+
                     ### Exercise
-                    Finish the code by filling in the **variable** on the blank.
-                    This game is not very interactive, but no worries! In the next adventure you'll learn how to use variables with the `{ask}` command to make your game interactive!
-                example_code: |-
+                    Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
+                example_code: |
                     ```
-                    choice {is} rock
-                    {print} I choose _
+                    choice {is} _
+                    {print} I choose choice
                     ```
                 answer_code: |
                     ```
-                    choice {is} rock
+                    choice {is} {ask} Rock, paper, or scissors?
                     {print} I choose choice
                     ```
             3:
@@ -5452,27 +5452,6 @@ adventures:
                         round = round + 1
                         {sleep} 1
                     {print}('Congratulations, you won from the computer in ', round, ' tries.')
-                    ```
-    rock_2:
-        name: rock, paper, scissors 2
-        default_save_name: rock_2
-        description: Part 2 of rock, paper, scissors
-        levels:
-            2:
-                story_text: |
-                    Now that you have learned how to use the `{ask}` command, you can make your rock, paper, scissors code interactive too!
-
-                    ### Exercise
-                    Make the rock, paper, scissors code interactive by adding the `{ask}` command and a question to your rock, paper, scissors code.
-                example_code: |
-                    ```
-                    choice {is} _
-                    {print} I choose choice
-                    ```
-                answer_code: |
-                    ```
-                    choice {is} {ask} Rock, paper, or scissors?
-                    {print} I choose choice
                     ```
     secret:
         name: super spy
