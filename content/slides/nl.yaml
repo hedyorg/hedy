@@ -152,17 +152,16 @@ levels:
                 Zorg dat je leerlingen door hebben dat de computer enkel je instructies zal volgen en zelf niets doet.
                 Als je wilt dat je computer het antwoord print moet je dus expliciet die instructie geven.
         5:
-            header: '{echo}'
+            header: '{answer}'
             text: |-
-                Om het antwoord in het uitvoerscherm te laten zien kan je `{echo}` gebruiken.
-                `{echo}` kan niet los worden gebruikt, maar gaat altijd samen met `{ask}`.
+                Om het antwoord in het uitvoerscherm te laten zien kan je `{answer}` gebruiken.
+                `{answer}` kan niet los worden gebruikt, maar gaat altijd samen met `{ask}`.
             code: |-
                 {print} Hallo!
                 {ask} Wat is je naam?
-                {echo} Hallo
+                {print} Hallo {answer}
             notes: |-
-                Om te zorgen dat de computer het antwoord tegen je herhaalt gebruikt je het commando 'echo.
-                Wijs je leerlingen erop dat het antwoord dat je getypt hebt bij de 'echo' opdracht achter de zin verschijnt.
+                Om te zorgen dat de computer het antwoord tegen je herhaalt gebruikt je het commando 'answer'.
         6:
             header: Programmeren maar!
             text: Hier kan je een lijst van de avonturen vinden.
@@ -193,7 +192,7 @@ levels:
                 Ik ben DJ Hedy
                 {print} Welk liedje wil je horen?
                 {ask} Dat liedje vind ik ook leuk!
-                {print} Het volgende nummer is ... {echo}
+                {print} Het volgende nummer is ... {answer}
             debug: 'True'
             notes: |-
                 **Hoe debug je je code**

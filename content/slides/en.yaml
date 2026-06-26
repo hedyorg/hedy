@@ -149,16 +149,16 @@ levels:
                 Show that the computer now asks you a question. Fill in an answer and also show that once you fill in the answer, nothing happens.
                 Make your students aware that the computer will only follow your instructions, it will not do anything by itself. This means that if you want the computer to print the answer, you have to give that instruction.
         5:
-            header: '{echo}'
+            header: '{answer}'
             text: |-
-                To show the answer in the output screen, you can use: `{echo}`.
-                `{echo}` is never used by itself, always with an `{ask}`.
+                To show the answer in the output screen, you can use: `{answer}`.
+                `{answer}` is never used by itself, always with an `{ask}`.
             code: |-
                 {print} Hello!
                 {ask} What is your name?
-                {echo} hello
+                {print} hello {answer}
             notes: |-
-                To make the computer repeat the answer back to you, you use the `echo` keyword. Point out that the answer you've typed in will appear at the end of the sentence.
+                To make the computer repeat the answer back to you, you use the `answer` keyword.
         6:
             header: Programming!
             text: Here you can find a list of the adventures.
@@ -187,7 +187,7 @@ levels:
                 I am DJ Hedy
                 {print} What song would you like to hear?
                 {ask} I like that song too!
-                {print} Next up... {echo}
+                {print} Next up... {answer}
             debug: 'True'
             notes: |-
                 **How to debug a code**
