@@ -1123,21 +1123,12 @@ adventures:
         description: Introducció a la comanda {is}
         levels:
             2:
-                story_text: |
-                    ## Variables
-                    Pots anomenar una paraula amb `{is}`. Això s'anomena **variable**. En aquest exemple hem fet una variable anomenada nom i una variable anomenada edat. Pots utilitzar la paraula nom a qualsevol part del vostre codi i Hedy ho substituirà, així:
                 example_code: |
                     ```
                     nom {is} Hedy
                     edat {is} 15
                     {print} nom té edat anys
                     ```
-                story_text_2: |
-                    ### Exercici
-                    És hora de crear les teves pròpies variables!
-                    En el codi d'exemple t'hem preparat un exemple on es crea la variable `animal_preferit`. A la línia 1 es defineix la variable, i a la línia 2 l'hem utilitzat dins una comanda `{print}`.
-                    Abans de res, acaba l'exemple omplint el nom del vostre animal preferit a l'espai buit. A continuació, fes almenys 3 codis similars a aquest. Tria una variable i configura-la amb la comanda {is}. Després, fes-la servir amb la comanda {print}, com a l'exemple.
-                example_code_2: "```\nanimal_preferit {is} _\n{print} M'agraden els/les animal_preferit \n```\n"
             7:
                 story_text: "També fem un canvi en com emmagatzemar una paraula en una variable! Ara pots utilitzar `=` en lloc de `{is}` quan emmagatzemes un nom o un número en una variable, així:\n"
                 example_code: "```\nnom = Hedy\nresposta = 20 + 4\n```\n"
