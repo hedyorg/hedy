@@ -469,9 +469,9 @@ adventures:
                     ```
                     name = {ask} 'what is your name?'
                     age = {ask} 'what is your age?'
-                    {if} name {is} 'Hedy' {and} age {is} 2
+                    {if} name {is} Hedy {and} age {is} 2
                         {print} 'You are the real Hedy!'
-                    {elif} name {is} 'Hedy' {or} age {is} 2
+                    {elif} name {is} Hedy {or} age {is} 2
                         {print} 'So close.. but you are not Hedy!'
                     {else}
                         {print} 'You are not Hedy!'
@@ -3523,7 +3523,7 @@ adventures:
                 example_code: |
                     ```
                     continue = {ask} 'Do you want to continue?'
-                    {if} continue = yes
+                    {if} continue is yes
                         sure = {ask} 'Are you sure?'
                         {if} sure {is} yes
                             {print} 'We will continue'
@@ -5366,10 +5366,10 @@ adventures:
                     price = 10
                     food = {ask} 'What would you like to eat?'
                     drinks = {ask} 'What would you like to drink?'
-                    {if} food {is} 'sandwich' _ drinks {is} 'juice'
+                    {if} food {is} sandwich _ drinks {is} juice
                         {print} 'That is our discount menu'
                         price = price - 3
-                    {if} drinks {is} 'water' _ drinks {is} 'juice'
+                    {if} drinks {is} water _ drinks {is} juice
                         {print} 'That is a healthy choice'
                     {print} 'That will be ' price ' dollars'
                     ```
@@ -5724,7 +5724,7 @@ adventures:
                     ```
                     name = {ask} 'What is your name?'
                     password = {ask} 'What is your password?'
-                    {if} name {is} 'Agent007' _ password {is} 'TOPSECRET'
+                    {if} name {is} Agent007 _ password {is} TOPSECRET
                         {print} 'Go to the airport at 02.00'
                     {else}
                         {print} 'Go to the train station at 10.00'
@@ -5734,7 +5734,7 @@ adventures:
                     ```
                     name = {ask} 'What is your name?'
                     password = {ask} 'What is your password?'
-                    {if} name {is} 'Agent007' and password {is} 'TOPSECRET'
+                    {if} name {is} Agent007 and password {is} TOPSECRET
                         {print} 'Go to the airport at 02.00'
                     {else}
                         {print} 'Go to the train station at 10.00'
@@ -7113,7 +7113,7 @@ adventures:
                     Hint for the flags:
                     ```
                     country = {ask} 'which country would you like to see the flag of?'
-                    {if} country {is} 'the Netherlands'
+                    {if} country {is} Netherlands
                         color_1 = red
                         color_2 = white
                         color_3 = blue
