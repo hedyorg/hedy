@@ -132,9 +132,9 @@ adventures:
         levels:
             1:
                 story_text: "Ustvarite svojo spletno papigo, ki vas bo posnemala!\n"
-                example_code: "```\n{print} Jaz sem papiga Hedy\n{ask} kako je pa tebi ime?\n{echo}\n{echo}\n```\n"
+                example_code: "```\n{print} Jaz sem papiga Hedy\n{ask} kako je pa tebi ime?\n{print} {answer}\n{print} {answer}\n```\n"
                 story_text_2: "### Vaja\nKopirajte kodo iz primera v vnosno okno s klikom na rumeni gumb.\nPapiga naj postavi drugačno vprašanje. Izpolnite prazna mesta v primeru!\n**Dodatek** Papagaju lahko dovolite, da postavi več vprašanj. Pod svoj program vnesite še nekaj vrstic kode.\n"
-                example_code_2: "```\n{print} Jaz sem papiga Hedy\n{ask} _\n{echo}\n{echo}\n"
+                example_code_2: "```\n{print} Jaz sem papiga Hedy\n{ask} _\n{print} {answer}\n{print} {answer}\n"
     print_command:
         default_save_name: Izpiši
         description: Uvod v ukaz izpiši
