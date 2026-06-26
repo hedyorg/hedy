@@ -9,14 +9,11 @@ adventures:
                     Seviye 1'de, kendi oluşturduğunuz farklı bir ana karakterle bir hikaye oluşturabilirsiniz.
 
                     İlk satırda `{ask}` kullanın ve hikayenin ana karakterinin kim olacağını sorun.
-
-                    Bu ilk satırdan sonra, cümlenin yazdırılması gerekiyorsa `{print}` ile başlayın.
-                    Ana karakterinizin cümlenin sonunda olmasını istiyorsanız `{echo}` kullanırsınız.
                 example_code: |
                     ```
                     {ask} Bu hikayenin ana karakteri kim?
                     {print} Ana karakter şimdi ormanda yürüyecek
-                    {echo} Biraz korkmuşlar,
+                    {print} Biraz korkmuşlar, {answer}
                     {print} Her yerde çılgın sesler duyuyorlar.
                     {print} Buranın perili bir orman olmasından korkuyorlar.
                     ```
@@ -24,7 +21,7 @@ adventures:
                     ### Alıştırma
                     Şimdi en az 6 satır koddan oluşan kendi hikayenizi oluşturun.
                     Bu hikaye örnek kod ile aynı olamaz.
-                    En az bir tane `{ask}` ve bir tane `{echo}` komutu kullanın.
+                    En az bir tane `{ask}` ve bir tane `{answer}` komutu kullanın.
                     İstediğiniz herhangi bir konu hakkında yapabilirsiniz.
                     Aklınıza bir konu gelmiyorsa, seçeneklerimizden birini kullanın: sinemaya gitmek, bir spor karşılaşması veya hayvanat bahçesinde bir gün.
             2:

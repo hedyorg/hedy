@@ -10,21 +10,19 @@ adventures:
 
                     À la première ligne, utilise `{ask}` pour demander le nom du personnage de ton histoire.
 
-                    Après la première ligne, commence avec `{print}` si la phrase a besoin d'être affichée.
-                    Ou utilise `{echo}` si tu veux que le nom de ton personnage principal soit ajouté à la fin de la phrase.
                 example_code: |
                     ```
                     {ask} Le nom du personnage principal de cette histoire est
-                    {print} Le personnage principal est en train de marcher dans la forêt
-                    {echo} Il a un peu peur,
+                    {print} {answer} est en train de marcher dans la forêt
+                    {print} Il a un peu peur, {answer}
                     {print} Il entend de drôles de bruits tout autour
-                    {print} Il craint que cette forêt soit hantée
+                    {print} {answer} craint que cette forêt soit hantée
                     ```
                 story_text_2: |
                     ### Défi
                     Crée maintenant ta propre histoire à l'aide d'au moins 6 lignes de code.
                     Cette histoire doit être différente de celle proposée dans le code d'exemple.
-                    Utilise au moins une commande `{ask}` et une commande `{echo}`.
+                    Utilise au moins une commande `{ask}` et une commande `{answer}`.
                     Tu peux choisir n'importe quel sujet.
                     Si tu n'as pas d'idée, tu peux parler de l'un des sujets suivants : un film, un match ou une journée au zoo.
             2:

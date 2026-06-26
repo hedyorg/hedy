@@ -9,22 +9,19 @@ adventures:
                     På nivå 1 kan du göra en berättelse där du får ange namnet på huvudkaraktären själv.
 
                     På första raden, använd `{ask}` för att fråga vem huvudkaraktären i din saga ska vara.
-
-                    Efter den första raden, börja med `{print}` om en mening ska skrivas ut på skärmen.
-                    Du använder `{echo}` om du vill att namnet på huvudkaraktären ska vara på slutet av meningen.
                 example_code: |
                     ```
                     {ask} Huvudkaraktären i den här berättelsen är
-                    {print} Huvudkaraktären kommer nu att ta en promenad i skogen
-                    {echo} De är lite rädda,
+                    {print} {answer} kommer nu att ta en promenad i skogen
+                    {print} De är lite rädda, {answer}
                     {print} De hör galna ljud överallt
-                    {print} De är rädda för att detta är en hemsökt skog
+                    {print} {answer} är rädda för att detta är en hemsökt skog
                     ```
                 story_text_2: |
                     ### Övning
                     Gör nu en egen berättelse med minst sex kodrader.
                     Berättelsen får inte vara samma som exempelkoden.
-                    Använd minst ett `{ask}` - och ett `{echo}` -kommando.
+                    Använd minst ett `{ask}` och ett `{answer}`.
                     Du kan göra den om vilket ämne som helst.
                     Om du inte kan komma på något ämne kan du använda ett av våra val: ett biobesök, en sportmatch eller en dag i djurparken.
             2:

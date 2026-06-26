@@ -10,13 +10,11 @@ adventures:
 
                     På første linje, brug `{ask}` til at spørge hvem hovedpersonen skal være.
 
-                    Efter den første linje, start med `{print}` hvis sætningen skal printes.
-                    Brug `{echo}` hvis du vil have din hovedpersonen i slutningen af sætningen.
                 example_code: |
                     ```
                     {ask} Hovedpersonen i denne historie er
-                    {print} Hovedpersonen går nu ind i skoven
-                    {echo} De er lidt bange,
+                    {print} {answer} går nu ind i skoven
+                    {print} De er lidt bange, {answer}
                     {print} De hører mærkelige lyde alle steder
                     {print} De er bange for at det en hjemsøgt skov
                     ```

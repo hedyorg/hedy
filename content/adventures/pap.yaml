@@ -9,16 +9,13 @@ adventures:
                     Na level 1 bo por traha un storia cu un differente persona cu bo mes ta traha.
 
                     Na prome regel bo to usa `{ask}` y bo to haci pregunta pa ken ta e persona mas importante den e storia.
-
-                    Despues di e prome regel, bo ta cuminsa cu `{print}` si e regel mester di print.
-                    Bo por usa `{echo}` ora bo kier cu e nomber mester ta na final di e regel.
                 example_code: |
                     ```
                     {ask} E persona principal den e storia ta
-                    {print} E personaje principal ta bai cana den e  mondi
-                    {echo} E tin un tiki miedo,
+                    {print} {answer} ta bai cana den e  mondi
+                    {print} E tin un tiki miedo, {answer}
                     {print} E ta tende oido stranjo na tur caminda
-                    {print} E tin miedo cu den mondi por tin spiritu
+                    {print} {answer} tin miedo cu den mondi por tin spiritu
                     ```
     add_remove_command:
         levels: {}
