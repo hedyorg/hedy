@@ -9,19 +9,16 @@ adventures:
                     Az 1. szinten elkészíthetsz egy történetet egy másik főszereplővel, amelyet te magad adsz meg.
 
                     Az első sorba írt `{ask}` bekéri a történet főszereplőjének a nevét.
-
-                    Az első sor után kezdd a `{print}` utasítással, ha a mondatot ki kell íratni.
-                    Akkor használd az `{echo}` parancsot, ha azt szeretnéd, hogy főszereplő neve a mondat végén legyen.
                 example_code: |
                     ```
                     {ask} A történet főszereplője
-                    {print} A főszereplő most az erdőben fog sétálni
-                    {echo} Kicsit fél, szegény
+                    {print} {answer} most az erdőben fog sétálni
+                    {print} Kicsit fél, szegény {answer}
                     {print} Őrült zajokat hall mindenütt
                     {print} Fél, hogy ez egy kísértet-járta erdő
                     ```
                 story_text_2: |
-                    Tudsz saját történetet írni Hedy-ben a `{print}` , `{ask}` és `{echo}` használatával?
+                    Tudsz saját történetet írni Hedy-ben a `{print}` , `{ask}` és `{answer}` használatával?
             2:
                 story_text: |+
                     A 2. szinten szórakoztatóbbá teheted a történetedet. Fő karaktered neve mostantól

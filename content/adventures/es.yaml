@@ -9,14 +9,11 @@ adventures:
                     En el nivel 1 puedes crear una historia con un protagonista que tú elijas.
 
                     En la primera línea, usa `{ask}` y pregunta quién es el personaje principal de tu historia.
-
-                    A continuación, utiliza `{print}` si necesitas mostrar una frase por pantalla.
-                    Utiliza `{echo}` si quieres que el nombre de tu personaje aparezca al final de la frase.
                 example_code: |
                     ```
                     {ask} El protagonista de esta historia es
-                    {print} El protagonista camina por un bosque
-                    {echo} Está bastante asustado
+                    {print} {answer} camina por un bosque
+                    {print} Está bastante asustado {answer}
                     {print} Por todos lados se oyen extraños ruidos
                     {print} Tiene miedo de que éste sea un bosque encantado
                     ```

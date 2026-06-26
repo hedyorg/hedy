@@ -9,19 +9,16 @@ adventures:
                     Në nivelin 1, ju mund të krijoni një tregim me një tjetër personazh kryesor që mund ta shtoni vetë.
 
                     Në rreshtin e parë, përdorni komandën `{ask}` dhe pyetni cili do jetë personazhi kryesor në tregim.
-
-                    Pas rreshtit të parë, filloni me `{print}` nëse fjalia duhet të printohet.
-                    Përdorni `{echo}` Nëse doni që personazhi kryesor të jetë në fund të fjalisë.
                 example_code: |
                     ```
                     {ask} Personazhi kryesor në tregim është
-                    {print} Personazhi kryesor tani ecën në pyll
-                    {echo} Ai është i pak i frikësuar,
+                    {print} {answer} tani ecën në pyll
+                    {print} Ai është i pak i frikësuar, {answer}
                     {print} Ai dëgjon zëra kudo
-                    {print} Ai frikësohet se ky pyll është me fantazma
+                    {print} {answer} frikësohet se ky pyll është me fantazma
                     ```
                 story_text_2: |
-                    A mund ta bëni historinë tuaj në Hedy tani duke përdorur `{print}`, `{ask}` dhe `{echo}`?
+                    A mund ta bëni historinë tuaj në Hedy tani duke përdorur `{print}`, `{ask}` dhe `{answer}`?
             2:
                 story_text: |
                     Në nivelin e 2, ju mund ta bëni tregimin më jetë më argëtues. Emri i personazhit tuaj kryesor mund të jetë kudo në fjali.

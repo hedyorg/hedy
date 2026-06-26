@@ -9,14 +9,11 @@ adventures:
                     V úrovni 1 můžete vytvořit příběh s jinou hlavní postavou, kterou sami zadáte.
 
                     V prvním řádku použijte `{ask}` a zeptejte se, kdo bude hlavní postavou příběhu.
-
-                    Po tomto prvním řádku začněte `{print}`, pokud je třeba větu vytisknout.
-                    `{echo}` použijte, pokud chcete, aby byla vaše hlavní postava na konci věty.
                 example_code: |
                     ```
                     {ask} Hlavní postavou tohoto příběhu je
                     {print} Hlavní postava se nyní chystá procházet lesem
-                    {echo} Trochu se bojí,
+                    {print} Trochu se bojí, {answer}
                     {print} Všude slyší podivné zvuky
                     {print} Bojí se, že je to strašidelný les
                     ```

@@ -8,34 +8,32 @@ adventures:
                 story_text: |
                     In level 1 you can make a story with a different main character that you enter yourself.
 
-                    In the first line, use `{ask}` and ask who the main character of the story will be.
+                    In the first line, use `{ask}` and ask who the main character of the story will be. Then use {answer} if you want to use the character's name.
 
-                    After that first line, start with `{print}` if the sentence needs to be printed.
-                    You use `{echo}` if you want your main character to be at the end of the sentence.
                 example_code: |
                     ```
                     {ask} The main character of this story is
-                    {print} The main character is now going to walk in the forest
-                    {echo} They're a bit scared,
-                    {print} They hear crazy noises everywhere
+                    {print} {answer} is now going to walk in the forest
+                    {print} A bit scared, {answer} walks on
+                    {print} {answer} hears crazy noises everywhere
                     {print} They're afraid this is a haunted forest
                     ```
                 story_text_2: |
                     ### Exercise
                     Now create your own story of at least 6 lines of code.
                     This story cannot be the same as the example code.
-                    Use at least one `{ask}` and one `{echo}` command.
+                    Use at least one `{ask}` and one `{answer}`.
                     You can make it about any topic you like.
                     If you can't think of a topic, use one of our choices: going to the movies, a sports match or a day at the zoo.
                 answer_code: |
                     ```
                     {print} One day I went to the zoo
                     {ask} What animal did i see first?
-                    {echo} First I saw a
+                    {print} First I saw a {answer}
                     {print} Then I saw a penguin
                     {print} It was having lunch
                     {ask} What was the penguin eating?
-                    {echo} The penguin was eating
+                    {print} The penguin was having {answer} for lunch
                     ```
             2:
                 story_text: |

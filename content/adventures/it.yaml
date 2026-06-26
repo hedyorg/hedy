@@ -9,14 +9,11 @@ adventures:
                     Nel livello 1 puoi creare una storia con un personaggio principale diverso che inserisci tu stesso.
 
                     Nella prima riga, usa `{ask}` e chiedi chi sarà il personaggio principale della storia.
-
-                    Dopo la prima riga, inizia con `{print}`  se la frase deve essere stampata.
-                    Usa `{echo}`  se vuoi che il tuo personaggio principale sia alla fine della frase.
                 example_code: |
                     ```
                     {ask} Il personaggio principale di questa storia è
                     {print} Il personaggio principale ora camminerà nella foresta
-                    {echo} È un po' spaventato,
+                    {print} È un po' spaventato,{answer}
                     {print} Sente rumori terrificanti ovunque
                     {print} Ha paura che questa sia una foresta infestata
                     ```
@@ -24,7 +21,7 @@ adventures:
                     ### Esercizio
                     Ora crea la tua storia di almeno 6 righe di codice.
                     Questa storia non può essere uguale al codice di esempio.
-                    Utilizza almeno un comando `{ask}` e un comando `{echo}`.
+                    Utilizza almeno un comando `{ask}` e un comando `{answer}`.
                     Puoi farlo su qualsiasi argomento che ti piace.
                     Se non riesci a pensare a un argomento, usa una delle nostre scelte: andare al cinema, una partita sportiva o una giornata allo zoo.
             2:

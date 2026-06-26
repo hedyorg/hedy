@@ -9,15 +9,12 @@ adventures:
                     No nível 1 você pode fazer uma história com um personagem principal diferente que você mesmo(a) insere.
 
                     Na primeira linha, use `{ask}` e pergunte quem será o personagem principal da história.
-
-                    Após essa primeira linha, comece com `{print}` se a frase precisar ser impressa.
-                    Você usa `{echo}` se quiser que seu personagem principal esteja no final da frase.
                 example_code: |
                     ```
                     {ask} O(a) personagem principal desta história é
-                    {print} O(a) personagem principal agora vai andar pela floresta
-                    {echo} Ele(a) está um pouco assustado(a),
-                    {print} Ele(a) ouve barulhos estranhos vindo de todos os lados
+                    {print} O(a) {answer} agora vai andar pela floresta
+                    {echo} Ele(a) está um pouco assustado(a), {answer}
+                    {print} {answer} ouve barulhos estranhos vindo de todos os lados
                     {print} Ele(a) tem medo de que essa seja uma floresta mal-assombrada
                     ```
                 story_text_2: "### Exercício \nAgora crie sua própria história com pelo menos 6 linhas de código.\nEssa história não pode ser a mesma do código de exemplo.\nUse pelo menos um comando `{ask}` e um comando `{echo}`.\nVocê pode escolher qualquer tópico para a história.\nSe não conseguir pensar em um tópico, pode usar uma das nossas sugestões: ir ao cinema, uma partida esportiva ou um dia no zoológico.\n"

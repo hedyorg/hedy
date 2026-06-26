@@ -10,13 +10,11 @@ adventures:
 
                     A la primera línia, utilitza `{ask}` per preguntar qui serà el protagonista de la història.
 
-                    Després d'aquesta primera línia, comença amb `{print}` quan calgui imprimir la frase.
-                    Fes servir `{echo}` quan vulguis que el nom del protagonista estigui al final de la frase.
                 example_code: |
                     ```
                     {ask} Qui és el protagonista d'aquesta història?
                     {print} El protagonista ha anat a fer una volta al bosc
-                    {echo} Està una mica espantat,
+                    {print} Està una mica espantat, {answer}
                     {print} Escolta uns sorolls estranys al seu voltant
                     {print} S'adona que potser està dins d'un bosc encantat
                     ```
@@ -24,7 +22,7 @@ adventures:
                     ### Exercici
                     Ara crea una història pròpia d'almenys 6 línies de codi.
                     Aquesta història no pot ser la mateixa que el codi d'exemple.
-                    Fes servir almenys una comanda `{ask}` i una d'`{echo}`.
+                    Fes servir almenys una comanda `{ask}` i una d'`{answer}`.
                     Pots fer-ho sobre qualsevol tema que t'agradi.
                     Si no se t'acut cap tema, et proposem algunes opcions: camí cap al cinema, jugant un partit d'algun esport o la visita d'un dia al zoo.
             2:
