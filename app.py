@@ -513,6 +513,20 @@ def add_generated_css_file():
 
 
 @app.app_context_processor
+def add_frontend_feature_flags():
+    return {
+        "frontend_environment": envs.frontend_environment(),
+        "feature_flags": {
+            "answer_interpolation": {
+                "production": False,
+                "local": True,
+                "alpha": True,
+            }
+        },
+    }
+
+
+@app.app_context_processor
 def add_hx_detection():
     """Detect when a request is sent by HTMX.
 
