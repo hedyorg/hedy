@@ -320,48 +320,44 @@ levels:
                 Een variabele is een woord waarin de computer een stukje informatie kan opslaan, zoals jouw antwoorden.
                 Dit klinkt lastig, maar kijk maar eens naar het voorbeeld.
             code: |-
-                eten {is} hamburger
-                drinken {is} water
-                {print} Je wil graag een eten en drinken bestellen.
+                antwoord {is} {ask} Wat is je naam?
+                {print} Hallo antwoord
             notes: |-
                 We gebruiken het woord variabele bij het programmeren om een plek te omschrijven in een computergeheugen waarin informatie wordt opgeslagen, die steeds kan veranderen.
                 De variabele is een soort doos, waarin je de antwoorden stopt. De doos blijft hetzelfde, maar de inhoud kan steeds veranderen.
 
-                Laat aan je leerlingen zien hoe variabelen werken. Laat zien dat de namen van de variabelen in de laatste regel vervangen worden door de waarde van de desbetreffende variabele.
-                Laat ook zien dat je variabelen dus in het midden van een zin kunt gebruiken, in plaats van alleen aan het einde van de zin zoals bij echo.
+                Laat aan je leerlingen zien hoe variabelen werken. Laat zien dat de naam van de variabele in de laatste regel vervangen worden door de waarde van die variabele.
+                
                 Het blauwe vlak dat in je uitvoerscherm verschijnt laat zient welke variabele in jouw programma gebruikt worden en waarop ze zijn ingesteld.
         4:
+            header: Het `{is}` commando
+            text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando. De naam van de variabele komt voor '{is}' en het `{ask}` commando komt erachter. We kunnen zelf de naam van de variabele kiezen en iets anders gebruiken dan `antwoord`.
+            code: |-
+                naam {is} {ask} Wat is je naam?
+                {print} Hallo naam
+            notes: |-
+                Vraag de leerlingen om hun eigen voorbeelden te verzinnen.
+        5:
             header: Variabelen
-            text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando. De naam van de variabele komt voor '{is}' en de waarde van de variabele komt erachter.
+            text: |-
+                We kunnen ook een variabele instellen zonder een vraag te stellen.
+                De naam van de variabele komt voor `{is}` en de waarde van de variabele komt erachter.
+            code: |-
+                eten {is} hamburger
+                drinken {is} water
+                {print} Ik wil graag een eten.
+                {print} Ik wil graag een beetje drinken.
+            notes: |-
+                Vraag de leerlingen om hun eigen voorbeelden te verzinnen.
+        6:
+            header: Meerdere variabelen
+            text: Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in plaats van maar één `antwoord`.
             code: |-
                 naam {is} Hedy
                 leeftijd {is} 15
                 {print} naam is leeftijd jaar
             notes: |-
-                De leerlingen kunnen nu het Steen, papier, schaar avontuur maken.
-        5:
-            header: Interactief
-            text: |-
-                We kunnen ook een variabele instellen door vragen te stellen.
-                Het antwoord op de vraag wordt dan opgeslagen in de variabele.
-                Zo hebben we het `{echo}` commando niet meer nodig.
-            code: |-
-                naam {is} {ask} Wat is je naam?
-                {print} Hallo naam
-            notes: |-
-                Nu kunnen onze programma's echt interactief worden. De gebruker kan input geven die vervolgens in het programma gebruikt wordt.
-                Vraag de leerlingen om hun eigen voorbeelden te verzinnen.
-        6:
-            header: Meerdere variabelen
-            text: Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in plaats van maar één `{echo}` commando.
-            code: |-
-                "naam {is} {ask} Wat is je naam ?
-                {print} Hallo naam
-                leeftijd {is} {ask} Hoe oud ben je?
-                {print} naam is leeftijd jaar."
-            notes: |-
-                Wijs de leerlingen er op dat het '{echo}' commando nu niet meer nodig is. Het werkt daarom ook niet meer in Hedy.
-                De leerlingen kunnen nu Steen, papier schaar deel 2 maken en het spookhuis
+                De leerlingen kunnen nu Steen, papier schaar maken en het spookhuis
         7:
             header: Het '{sleep}' commando
             text: Je kunt het `{sleep}` commando gebruiken om de code een tijdje op pauze te zetten.
