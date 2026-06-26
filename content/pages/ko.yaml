@@ -201,24 +201,6 @@ teacher-guide:
                 solution_code: |-
                     {ask} 나의 코드가 왜 잘 실행되지?
                     {print} 왜냐하면 내가 대문자를 제거해서이다!
-        -   title: 학생들은 ask 명령어 없이 echo 명령어를 사용하기도 한다
-            example:
-                error_text: echo 명령어는 ask 명령어 이 후에 대답을 반복하도록 되어 있다. ask 명령어를 사용하지 않으면 echo 명령어는 아무것도 할 수 없다.
-                error_code: "{echo} 너의 이름은"
-                solution_text: ask 명령어를 추가하여 작동시킵니다.
-                solution_code: |-
-                    {ask} 너의 이름은 무엇이니?
-                    {echo} 나의 이름은
-        -   title: 학생들은 그들의 echo 명령어로 만들어진 변수가 문장의 중간에 있기를 원한다
-            example:
-                error_text: 그리고 그들이 맞아요! 그래서 그들은 다음 레벨에서 적절한 변수를 사용하는 법을 배우게 될 것입니다.
-                error_code: |-
-                    {ask} 어떤 프로그래밍 언어가 재밌어?
-                    {echo} 가장 재밌는 언어는!
-                solution_text: "레벨 1에서는 이 상태를 유지해야 합니다:"
-                solution_code: |-
-                    {ask} 어떤 프로그래밍 언어가 재밌어?
-                    {echo} 최고는...
         -   title: "거북이: 학생들은 거북이를 화면에서 걷게 했습니다"
             example:
                 error_text: 학생들은 자주 거북이를 사용할 때 큰 숫자를 시도하는 것을 좋아하는데, 이것은 화살이 화면을 벗어나 걷게 만든다.
