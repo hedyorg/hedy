@@ -730,13 +730,14 @@ adventures:
                 story_text: |
                     På nivå 1 kan du starte med spillet stein, saks, papir.
 
-                    Med `{ask}` kan du ta et valg og med `{echo}` kan du gjenta det valget.
+                    Med `{ask}` kan du ta et valg og med `{answer}` kan du gjenta det valget.
                 example_code: |
                     ```
                     {print} hva velger du?
                     {ask} velg mellom stein, saks, papir
-                    {echo} du valgte:
+                    {print} du valgte: {answer}
                     ```
+                story_text_2: |
                     Istedenfor å bruke ord så kan du selvfølgelig bruke emoji: ✊✋✌
             2:
                 story_text: |

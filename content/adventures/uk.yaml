@@ -1364,14 +1364,8 @@ adventures:
         default_save_name: Рок_2
         levels:
             1:
-                example_code: |
-                    ```
-                    {print} what do you choose?
-                    {ask} choose from rock, paper or scissors
-                    {echo} so your choice was:
-                    ```
-                example_code_2: "й й\n{print} що ви вибрали?\n{ask} вибрати з _\n{echo} так що ваш вибір був:\nй й\n"
-                story_text: "На рівні 1 ви можете почати з породи, паперу, ножиць гри.\n\nЗ `{ask}` ви можете зробити вибір, і з `{echo}` ви можете повторити цей вибір.\n"
+                example_code_2: "й й\n{print} що ви вибрали?\n{ask} вибрати з _\n{print} так що ваш вибір був: {answer}\nй й\n"
+                story_text: "На рівні 1 ви можете почати з породи, паперу, ножиць гри.\n\nЗ `{ask}` ви можете зробити вибір, і з `{answer}` ви можете повторити цей вибір.\n"
                 story_text_2: "### Exercise\nЗамість слів, ви також можете використовувати смайлики: ✊✋✌\nЧи можна створити код за допомогою смайликів?\n"
             2:
                 story_text: |

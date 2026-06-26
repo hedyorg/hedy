@@ -1631,12 +1631,12 @@ adventures:
                 story_text: |
                     No nível 1, você pode começar com um jogo de pedra, papel e tesoura.
 
-                    Com o comando `{ask}` você pode fazer uma escolha, e com `{echo}` você pode repetir essa escolha.
+                    Com o comando `{ask}` você pode fazer uma escolha, e com `{answer}` você pode repetir essa escolha.
                 example_code: |
                     ```
                     {print} o que você escolhe?
                     {ask} escolha entre pedra, papel ou tesoura
-                    {echo} então sua escolha foi:
+                    {print} então sua escolha foi: {answer}
                     ```
                 story_text_2: |
                     ### Exercício
@@ -1646,7 +1646,7 @@ adventures:
                     ```
                     {print} o que você escolhe?
                     {ask} escolha entre _
-                    {echo} então sua escolha foi:
+                    {print} então sua escolha foi: {answer}
                     ```
             2:
                 story_text: |

@@ -450,12 +450,12 @@ adventures:
                 story_text: |
                     V úrovni 1 můžete začít hrou kámen, nůžky, papír.
 
-                    Pomocí `{ask}` můžete provést výběr a pomocí `{echo}` můžete tuto volbu zopakovat.
+                    Pomocí `{ask}` můžete provést výběr a pomocí `{answer}` můžete tuto volbu zopakovat.
                 example_code: |
                     ```
                     {print} Co si vybereš?
                     {ask} Vyber si kámen, nůžky, papír
-                    {echo} Tvá volba byla:
+                    {print} Tvá volba byla: {answer}
                     ```
                 story_text_2: |
                     ### Cvičení
@@ -465,7 +465,7 @@ adventures:
                     ```
                     {print} Co si vybereš?
                     {ask} Tvá volba from _
-                    {echo} Tak tvá volba byla:
+                    {print} Tak tvá volba byla: {answer}
                     ```
             2:
                 story_text: "V této úrovni si můžete procvičit používání proměnných, abyste v další úrovni mohli hrát hru kámen, nůžky, papír!\n### Cvičení\nDokončete kód doplněním **proměnné** na prázdné místo.\nTato hra není příliš interaktivní, ale žádný strach! V příštím dobrodružství se naučíš, jak používat proměnné s příkazem `{ask}`, aby tvá hra byla interaktivní!\n"

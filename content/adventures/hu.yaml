@@ -751,14 +751,14 @@ adventures:
                 story_text: |
                     Az 1. szinten kezdhetsz egy kő, papír, olló játékkal.
 
-                    A `ask` utasítással választhatsz, és az` echo'-val megismételheted ezt a választást.
+                    A `{ask}` utasítással választhatsz, és az `{answer}`-val megismételheted ezt a választást.
 
                     Az ismétlés természetesen kissé unalmas, mert a számítógép nem választ semmit. Ezt később mi magunk is elkészítjük.
                 example_code: |-
                     ```
                     {print} Mit választottál?
                     {ask} Válassz kő, papír és olló közül
-                    echo ez volt a választásod:
+                    {print} ez volt a választásod: {answer}
                     ```
             3:
                 story_text: |

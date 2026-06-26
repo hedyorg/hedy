@@ -1505,10 +1505,10 @@ adventures:
         default_save_name: Pedra_2
         levels:
             1:
-                example_code_2: "```\n{print} què vols escollir?\n{ask} tria entre _\n{echo} la teva elecció és:\n```\n"
-                story_text: "Al nivell 1 començarem fent el joc de pedra, paper, tisores.\n\nAmb la comanda `{ask}` podrem triar, i amb la comanda `{echo}` podràs repetir l'elecció mostrant-la per pantalla.\n"
+                example_code_2: "```\n{print} què vols escollir?\n{ask} tria entre _\n{print} la teva elecció és: {answer}\n```\n"
+                story_text: "Al nivell 1 començarem fent el joc de pedra, paper, tisores.\n\nAmb la comanda `{ask}` podrem triar, i amb la comanda `{answer}` podràs repetir l'elecció mostrant-la per pantalla.\n"
                 story_text_2: "### Exercici\nEn lloc d'utilitzar paraules, també pots fer servir emojis: ✊✋✌\nPots crear un programa usant emojis?\n"
-                example_code: "```\n{print} què vols escollir?\n{ask} tria entre pedra, paper o tisores\n{echo} la teva elecció és:\n```\n"
+                example_code: "```\n{print} què vols escollir?\n{ask} tria entre pedra, paper o tisores\n{print} la teva elecció és: {answer}\n```\n"
             2:
                 example_code: "```\neleccio {is} pedra\n{print} Escullo _\n```"
                 story_text: "En aquest nivell pots practicar l'ús de variables, i així podràs fer el joc de pedra, paper, tisores al pròxim nivell!\n### Exercici\nAcaba el codi omplint la **variable** en el buit.\nAquest joc no és molt interactiu, però no et preocupis! A la pròxima aventura aprendràs com utilitzar variables amb la comanda `{ask}` per fer el teu joc interactiu!\n"

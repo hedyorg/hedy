@@ -1707,12 +1707,12 @@ adventures:
                 story_text: |
                     I nivå 1 kan du börja med ett sten, sax, påse-spel.
 
-                    Med `{ask}` kan du göra ett val, och med `{echo}` kan du upprepa det valet.
+                    Med `{ask}` kan du göra ett val, och med `{answer}` kan du upprepa det valet.
                 example_code: |
                     ```
                     {print} Vad väljer du?
                     {ask} Välj mellan sten, sax eller påse.
-                    {echo} Så ditt val var:
+                    {print} Så ditt val var: {answer}
                     ```
                 story_text_2: |
                     ### Övning
@@ -1722,7 +1722,7 @@ adventures:
                     ```
                     {print} vad väljer du?
                     {ask} välj bland _
-                    {echo} så ditt val var:
+                    {print} så ditt val var: {answer}
                     ```
             2:
                 story_text: |

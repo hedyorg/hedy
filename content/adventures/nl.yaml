@@ -2815,15 +2815,15 @@ adventures:
                 story_text: |
                     In level 1 kun je een begin maken met een steen, papier, schaar spel.
 
-                    Met `{ask}` kun je een keuze maken en met `{echo}` kan je die keuze herhalen.
+                    Met `{ask}` kun je een keuze maken en met `{answer}` kan je die keuze printen.
+
+                    Let op: Dit programma werkt nog niet echt als een spel. In de latere levels leer je hoe je hier een echt spelletje van maakt!
                 example_code: |
                     ```
                     {print} Wat kies jij?
                     {ask} Kies uit steen, papier of schaar
-                    {echo} Dus jouw keuze was:
+                    {print} Dus jouw keuze was: {answer}
                     ```
-
-                    Je kunt in plaats van woorden natuurlijk ook emoji's gebruiken: ✊✋✌
                 story_text_2: |
                     ### Opdracht
                     In plaats van woorden kun je ook emojis gebruiken: ✊✋✌
@@ -2832,7 +2832,7 @@ adventures:
                     ```
                     {print} Wat kies jij?
                     {ask} kies uit: _
-                    {echo} Dus jouw keuze was :
+                    {print} Dus jouw keuze was : {answer}
                     ```
             2:
                 story_text: |

@@ -1883,12 +1883,12 @@ adventures:
                 story_text: |
                     Au niveau 1 tu peux commencer à programmer le jeu pierre, papier, ciseaux.
 
-                    Avec `{ask}` tu peux faire un choix, et avec `{echo}` tu peux répéter ce choix.
+                    Avec `{ask}` tu peux faire un choix, et avec `{answer}` tu peux répéter ce choix.
                 example_code: |
                     ```
                     {print} Que choisis-tu ?
                     {ask} Choisis parmi pierre, papier, ciseaux
-                    {echo} ainsi, tu as choisi :
+                    {print} ainsi, tu as choisi : {answer}
                     ```
                 story_text_2: |
                     ### Exercice
@@ -1898,7 +1898,7 @@ adventures:
                     ```
                     {print} Que choisis-tu ?
                     {ask} Choisis parmi _
-                    {echo} ainsi, tu as choisi :
+                    {print} ainsi, tu as choisi : {answer}
                     ```
             2:
                 story_text: |

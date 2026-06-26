@@ -2036,12 +2036,12 @@ adventures:
                 story_text: |
                     Na poziomie 1 możesz zacząć tworzyć grę papier, kamień, nożyce.
 
-                    Za pomocą  `{ask}` możesz zapytać a za pomocą `{echo}` możesz powtórzyć co zostało wybrane.
+                    Za pomocą  `{ask}` możesz zapytać a za pomocą `{answer}` możesz powtórzyć co zostało wybrane.
                 example_code: |
                     ```
                     {print} Co wybierasz?
                     {ask} wybierz: papier, kamień lub nożyce
-                    {echo} a więc wybrałeś:
+                    {print} a więc wybrałeś: {answer}
                     ```
                 story_text_2: |
                     ### Wyzwanie
@@ -2051,7 +2051,7 @@ adventures:
                     ```
                     {print} co wybierasz?
                     {ask} wybierz z _
-                    {echo} a więć wybrałeś:
+                    {print} a więć wybrałeś: {answer}
                     ```
             2:
                 story_text: |

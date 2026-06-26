@@ -1747,12 +1747,12 @@ adventures:
                 story_text: |
                     Seviye 1'de, taş, kağıt, makas oyunu yazmaya başlayabilirsiniz.
 
-                    `{ask}` ile bir seçim yapabilir ve `{echo}` ile bu seçimi tekrarlayabilirsiniz.
+                    `{ask}` ile bir seçim yapabilir ve `{answer}` ile bu seçimi tekrarlayabilirsiniz.
                 example_code: |
                     ```
                     {print} Neyi seçiyorsun?
                     {ask} taş, kağıt veya makas arasından seçim yap
-                    {echo} Demek senin seçimin:
+                    {print} Demek senin seçimin: {answer}
                     ```
                 story_text_2: |
                     ### Alıştırma
@@ -1762,7 +1762,7 @@ adventures:
                     ```
                     {print} Neyi seçiyorsun?
                     {ask} Bunlardan birini seçin _
-                    {echo} Demek senin seçimin:
+                    {print} Demek senin seçimin: {answer}
                     ```
             2:
                 story_text: |

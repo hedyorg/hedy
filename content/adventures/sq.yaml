@@ -1112,13 +1112,12 @@ adventures:
                 story_text: |
                     Në nivelin 1, ju mund të filloni me lojën gur, letër, gërshërë.
 
-                    Me komandën `{ask}` ju mund të bëni një zgjidhje, dhe me komandën `{echo}` ju mund ta përsëritni atë zgjidhje.
+                    Me komandën `{ask}` ju mund të bëni një zgjidhje, dhe me komandën `{answer}` ju mund ta përsëritni atë zgjidhje.
                 example_code: |
                     ```
                     {print} çfarë zgjidhni?
                     {ask} zgjidhni gur, letër apo gërshërë
-                    {echo} zgjidhja e juaj ishte:
-                    ```
+                    {print} zgjidhja e juaj ishte: {answer}             ```
                 story_text_2: |
                     Në vend që të përdorni fjalë, mund të përdorni edhe emoji: ✊✋✌
                     A mund të krijoni një kod duke përdorur emojis?
@@ -1126,7 +1125,7 @@ adventures:
                     ```
                     {print} çfarë zgjidhni?
                     {ask} zgjidhni nga _
-                    {echo} kështu që zgjedhja juaj ishte:
+                    {print} kështu që zgjedhja juaj ishte: {answer}
                     ```
             2:
                 story_text: |

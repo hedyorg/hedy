@@ -1997,12 +1997,12 @@ adventures:
                 story_text: |
                     在第1级，你可以开始一个石头剪刀布游戏。
 
-                    你可以用`{ask}`做出选择，然后用`{echo}`复述这个选择。
+                    你可以用`{ask}`做出选择，然后用`{answer}`复述这个选择。
                 example_code: |
                     ```
                     {print} 你选哪一个？
                     {ask} 从石头、剪刀和布中选一个
-                    {echo} 所以你选的是：
+                    {print} 所以你选的是：{answer}
                     ```
                 story_text_2: |
                     ### 挑战
@@ -2012,7 +2012,7 @@ adventures:
                     ```
                     {print} 你选择什么？
                     {ask} 从_中选择
-                    {echo} 所以你的选择是：
+                    {print} 所以你的选择是：{answer}
                     ```
             2:
                 story_text: |

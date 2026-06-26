@@ -183,10 +183,10 @@ adventures:
         default_save_name: Kamen_2
         levels:
             1:
-                story_text: "Na prvi stopnji lahko začnete z igro kamen, papir, škarje.\n\nZ `{ask}` se lahko odločite za svojo izbiro, z `{echo}` pa lahko to izbiro ponovite.\n"
-                example_code: "```\n{print} Kaj boste izbrali?\n{ask} Izberite med kamen, papir in škarje\n{echo} Torej vaša izbira je:\n```\n"
+                story_text: "Na prvi stopnji lahko začnete z igro kamen, papir, škarje.\n\nZ `{ask}` se lahko odločite za svojo izbiro, z `{answer}` pa lahko to izbiro ponovite.\n"
+                example_code: "```\n{print} Kaj boste izbrali?\n{ask} Izberite med kamen, papir in škarje\n{print} Torej vaša izbira je: {answer}\n```\n"
                 story_text_2: "### Vaja\nNamesto besed lahko uporabite tudi emoji-je: ✊✋✌\nAli lahko ustvarite kodo z uporabo emoji-jev?\n"
-                example_code_2: "```\n{print} Kaj boste izbrail?\n{ask} Izberite med _\n{echo} Torej vaša izibra je:\n```\n"
+                example_code_2: "```\n{print} Kaj boste izbrail?\n{ask} Izberite med _\n{print} Torej vaša izibra je: {answer}\n```\n"
             2:
                 story_text: "Na tej stopnji lahko vadite uporabo spremenljivk, da boste lahko na naslednji stopnji izvedli igro kamen, papir in škarje!\n### Vaja\nDokončajte program tako, da v prazna mesta vpišete **spremenljivko**.\nTa igra ni ravno interaktivna, vendar brez skrbi! V naslednjem zavihku se boste naučili, kako uporabiti spremenljivke z ukazom `{ask}` tako, da bo vaša igra postala interaktivna!\n"
                 example_code: "```\nIzbira {is} kamen\n{print} Jaz izberem _\n```"

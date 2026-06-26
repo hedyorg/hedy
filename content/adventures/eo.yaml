@@ -903,13 +903,14 @@ adventures:
                 story_text: |
                     En Nivelo 1, vi komencu per la ludo «roko, papero, tondilo».
 
-                    Per `{ask}` oni povas fari elekton, kaj per `{echo}` oni povas ripeti tiun elekton.
+                    Per `{ask}` oni povas fari elekton, kaj per `{answer}` oni povas ripeti tiun elekton.
                 example_code: |
                     ```
                     {print} kion vi elektas?
                     {ask} elektu el roko, papero aŭ tondilo
-                    {echo} do via elekto estis:
+                    {print} do via elekto estis: {answer}
                     ```
+                story_text_2: |
                     Anstataŭ vortoj, vi ankaŭ povus uzi vinjetosignojn kompreneble: ✊✋✌
             2:
                 story_text: |

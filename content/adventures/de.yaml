@@ -2360,12 +2360,12 @@ adventures:
                 story_text: |
                     In Level 1 kannst du mit einem Schere, Stein, Papier-Spiel beginnen.
 
-                    Mit `{ask}` kannst du eine Wahl treffen und mit `{echo}` kannst du diese Wahl wiederholen.
+                    Mit `{ask}` kannst du eine Wahl treffen und mit `{answer}` kannst du diese Wahl wiederholen.
                 example_code: |
                     ```
                     {print} Was wählst du?
                     {ask} Wähle aus Stein, Schere oder Papier
-                    {echo} Also war deine Wahl:
+                    {print} Also war deine Wahl: {answer}
                     ```
                 story_text_2: |
                     ### Übung
@@ -2375,7 +2375,7 @@ adventures:
                     ```
                     {print} Was wählst du?
                     {ask} Wähle aus _
-                    {echo} Also war deine Wahl:
+                    {print} Also war deine Wahl: {answer}
                     ```
             2:
                 story_text: |

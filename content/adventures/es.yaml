@@ -1990,12 +1990,12 @@ adventures:
                 story_text: |
                     En el nivel 1 comenzamos el juego de piedra, papel o tijera.
 
-                    Con `{ask}` puedes tomar una opción, y con `{echo}` puedes repetir la opción elegida.
+                    Con `{ask}` puedes tomar una opción, y con `{answer}` puedes repetir la opción elegida.
                 example_code: |
                     ```
                     {print} ¿Qué eliges?
                     {ask} elige piedra, papel o tijera
-                    {echo} has elegido:
+                    {print} has elegido: {answer}
                     ```
                 story_text_2: |
                     ### Ejercicio
@@ -2005,7 +2005,7 @@ adventures:
                     ```
                     {print} ¿Qué escoges?
                     {ask} escoge _
-                    {echo} tu elección fue
+                    {print} tu elección fue {answer}
                     ```
             2:
                 story_text: |
