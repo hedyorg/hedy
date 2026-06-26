@@ -3046,11 +3046,22 @@ adventures:
                     * If it is not on the list, it tells the patient that it is probably safe to eat.
                     * Then the app also warns the person to always use common sense because the list might not be 100% complete. And it advises the person to always avoid raw meats, fish and eggs and alcohol.
                     When you are pregnant it is unsafe to eat: sushi, shrimp, tuna, blue cheese, tiramisu, runny eggs, carpaccio, rare steak, tartar
+                answer_code: |
+                    ```
+                    {print} "To eat or not to eat, that's the question!"
+                    food {is} {ask} 'What would you like to eat?'
+                    unsafe_foods {is} sushi, shrimp, tuna, blue cheese, tiramisu, runny eggs, carpaccio, rare steak, tartar
+                    {if} food {in} unsafe_foods
+                    {print} food " is unsafe to eat"
+                    {else}
+                    {print} food " is probably safe to eat"
+                    {print} 'Always use common sense because our list might not be 100% complete. Always avoid raw meats, fish and eggs and alcohol. '
+                    ```
             7:
                 story_text: |
                     Our nurses keep track of the fluid balance of our patients. The fluid balance is how much fluid the patient has gained today (by drinking, eating or IV) minus how much fluid the person lost today (by peeing or vomiting).
                     The fluid balance needs to stay positive. If the fluid balance is negative the nurse needs to administer more IV fluid.
-                    Can you help our nurses by making a tool they coudl use to calculate their patients fluid balance?
+                    Can you help our nurses by making a tool they could use to calculate their patient's fluid balance?
                     ### Exercise
                     The program should:
                     * Ask how much fluid the patient gained from drinking that day.
@@ -3060,6 +3071,17 @@ adventures:
                     * Ask how much fluid the patient lost from vomiting that day.
                     * Calculate the patients fluid balance and display it to the nurse.
                     * Tell the nurse to check whether the balance is positive or negative to decide if the patient needs more IV fluid today or not.
+                answer_code: |
+                    ```
+                    intake_drinking = {ask} 'how much fluid did the patient gain from drinking?'
+                    intake_eating = {ask} 'how much fluid did the patient gain from eating?'
+                    intake_IV = {ask} 'how much fluid did the patient gain from the IV?'
+                    discharge_urine = {ask} 'how much fluid did the patient lose from peeing?'
+                    discharge_vomit = {ask} 'how much fluid did the patient lose from vomiting?'
+                    fluid_balance = intake_drinking + intake_eating + intake_IV - discharge_urine - discharge_vomit
+                    {print} "The patient's fluid balance is " fluid_balance
+                    {print} 'Please, check whether the balance is positive or negative to decide if the patient needs more IV fluid today or not'
+                    ```
             8:
                 story_text: |
                     Our patients sometimes forget to take their medicine, causing grave health concerns. To make sure the patients take all of their prescribed pills, we give them an alarmclock that beeps everytime they need to take their pills.
@@ -3135,6 +3157,20 @@ adventures:
                     * Paint a red cross with the drawing turtle.
                     * Make a siren sound after finishing the red cross.
                     HINT: use the repeat command.
+                answer_code: |
+                    ```
+                    {color} red
+                    {repeat} 4 {times}
+                        {forward} 50
+                        {turn} 90
+                        {forward} 50
+                        {turn} 90
+                        {forward} 50
+                        {turn} -90
+                    {repeat} 10 {times}
+                        {play} C
+                        {play} A
+                    ```
             10:
                 story_text: |
                     The staff at our emergency room has a problem. They say that there are a lot of patients coming in who don't really have an emergency and who should actually go to their gp.
@@ -3153,6 +3189,38 @@ adventures:
                     If the patient answers 'no' to all the questions the program will ask:
                     * Can it wait till tomorrow?
                     If the answer is 'yes' the program will tell the patient to go to the gp at their earliest convenience. If the answer is 'no' the program will advise to call their healthcare provider to discuss the situation.
+                answer_code: |
+                    ```
+                    lifethreatening = {ask} 'Is your situation life-threatening?'
+                    {if} lifethreatening {is} 'yes'
+                        {print} 'Go to the emergency room A.S.A.P!'
+                    {else}
+                        breathing = {ask} 'Do you experience trouble breathing?'
+                        {if} breathing {is} 'yes'
+                            {print} 'Go to the emergency room A.S.A.P!'
+                        {else}
+                            ability = {ask} 'Are you suddenly not able to speak, see, walk, or move?'
+                            {if} ability {is} 'yes'
+                                {print} 'Go to the emergency room A.S.A.P!'
+                            {else}
+                                poison = {ask} 'Did you ingest or inhale poison?'
+                                {if} poison {is} 'yes'
+                                    {print} 'Go to the emergency room A.S.A.P!'
+                                {else}
+                                    broken_bone = {ask} 'Did you break a bone?'
+                                    {if} broken_bone {is} 'yes'
+                                        {print} 'Go to the emergency room A.S.A.P!'
+                                    {else}
+                                        allergy = {ask} 'Do you have a serious allergic reaction?'
+                                        {if} allergy {is} 'yes'
+                                            {print} 'Go to the emergency room A.S.A.P!'
+                                        {else}
+                                            wait = {ask} 'Can it wait until tomorrow?'
+                                            {if} wait {is} 'yes'
+                                                {print} 'Go to the gp at your earliest convenience.'
+                                            {else}
+                                                {print} 'Call your healthcare provider to discuss the situation'
+                    ```
             11:
                 story_text: |
                     We have a problem in the vaccination clinic. The screen that calls the next patient to go to the vaccination area is broken down. Can you fix it?
@@ -3163,6 +3231,28 @@ adventures:
                     * Add the names of the new patients to the list as well
                     * Then the program should call on a patient to go to the vaccination area.
                     * The program should wait 10 seconds, clear the screen and call on the next patient, until every patient on the list has been called on.
+                answer_code: |
+                    ```
+                    patients {is} Bert, Julia, Abby, Oscar, Ernie, Rosita, Zoe
+                    amount_patients = 7
+
+                    new_patients = {ask} 'Are there any new patients today?'
+                    {if} new_patients {is} 'yes'
+                        amount_new_patients = {ask} 'How many?'
+                        amount_patients = amount_patients + amount_new_patients
+                        {repeat} amount_new_patients {times}
+                            name = {ask} 'What is their name?'
+                            {add} name {to} patients
+                    {else}
+                        {print} 'No new patients today'
+
+                    {repeat} amount_patients {times}
+                        chosen_patient = patients {at} {random}
+                        {print} chosen_patient ', come to the vaccination area please'
+                        {remove} chosen_patient {from} patients
+                        {sleep} 10
+                        {clear}
+                    ```
             12:
                 story_text: |
                     We are designing a new hospital ward and we would like to draw a floorplan for this new ward.
