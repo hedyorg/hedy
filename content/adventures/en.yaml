@@ -2852,6 +2852,20 @@ adventures:
                     * Ask with which doctor they have their appointment
                     * Thank the patient for succesfully registering
                     * Tell the patient to take a seat in the waiting room
+                answer_code: |
+                    ```
+                    {print} Hello, welcome to the hospital
+                    {ask} What is you name?
+                    {print} Your name is answer
+                    {ask} What is your date of birth?
+                    {print} Your DOB is answer
+                    {ask} On which department do you have an appointment?
+                    {print} You have an appointment here: answer
+                    {ask} Which doctor is your appointment with?
+                    {print} with doctor answer
+                    {print} Thank you. You've registrated succesfully!
+                    {print} Please take a seat in the waiting room.
+                    ```
             2:
                 story_text: |
                     The maternity ward of our hospital would like some music for the babies to fall asleep to. Can you program a lullaby?
@@ -2861,6 +2875,80 @@ adventures:
                     * Itsy Bitsy Spider (medium)
                     * Brahms lullaby (hard)
                     HINT: You can try to think of the correct musical notes yourself, but you can also search for them on the internet.
+                answer_code: |
+                    Mary had a little lamb
+                    ```
+                    {play} A
+                    {play} G
+                    {play} F
+                    {play} G
+                    {play} A
+                    {play} A
+                    {play} A
+                    {sleep} 1
+                    {play} G
+                    {play} G
+                    {play} G
+                    {sleep} 1
+                    {play} A
+                    {play} C
+                    {play} C
+                    {sleep} 1
+                    {play} A
+                    {play} G
+                    {play} F
+                    {play} G
+                    {play} A
+                    {play} A
+                    {play} A
+                    {play} A
+                    {play} G
+                    {play} G
+                    {play} A
+                    {play} G
+                    {play} F
+                    ```
+                    Itsy Bitsy Spider
+                    ```
+                    {play} G
+                    {play} C
+                    {play} C
+                    {play} C
+                    {play} D
+                    {play} E
+                    {play} E
+                    {play} E
+                    {play} D
+                    {play} C
+                    {play} D
+                    {play} E
+                    {play} C
+                    ```
+                    Brahms lullaby
+                    ```
+                    {play} F
+                    {play} F
+                    {play} A
+                    {play} F
+                    {play} F
+                    {play} A
+                    {play} C
+                    {play} C
+                    {play} E
+                    {play} G
+                    {play} F
+                    {play} E
+                    {play} F
+                    {play} F
+                    {play} A
+                    {play} F
+                    {play} A
+                    {play} C
+                    {play} C
+                    {play} E
+                    {play} G
+                    {play} F
+                    ```
             3:
                 story_text: |
                     There is a problem in the nurses' office. All the nurses are complaining that the shedule for the night shifts is unfair. Some nurses have to work 2 night shifts a week, while others work none at all.
@@ -2870,6 +2958,31 @@ adventures:
                     * Show which nurse has to work the night shift on which day of the week.
                     * Make sure that each nurse has to work only one night shift a week.
                     The nurses names are: Meredith, Miranda, Alex, Derek, Christina, Izzy, George
+                answer_code: |
+                    ```
+                    nurses {is} Meredith, Miranda, Alex, Derek, Christina, Izzy, George
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Monday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Tuesday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Wednesday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Thursday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Friday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Saturday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    chosen_nurse {is} nurses {at} {random}
+                    {print} The Sunday shift will be covered by chosen_nurse
+                    {remove} chosen_nurse {from} nurses
+                    ```
             4:
                 story_text: |
                     Our nurses have a lot of tasks to accomplish in one day. One of these tasks is going around all the patients in the morning and ask them what they would like to have for breakfast.
@@ -2884,6 +2997,21 @@ adventures:
                     * Repeat the order back to the patient
                     * Thank the patient for ordering
                     * Tell them that their order will be brought to their roomnumber in 15 minutes.
+                answer_code: |
+                    ```
+                    name {is} {ask} 'please enter your name: '
+                    roomnumber {is} {ask} 'please enter your roomnumber:'
+                    {print} 'Hello ' name
+                    {print} 'On todays menu we have: '
+                    {print} 'a sandwich, cereal, banana, apple'
+                    {print} 'and these are the drinks: '
+                    {print} 'orange juice, tea, coffee, water'
+                    food {is} {ask} 'What would you like to eat?'
+                    drink {is} {ask} 'What would you like to drink?'
+                    {print} 'you have ordered: ' food ' and ' drink
+                    {print} 'Thank you for your order'
+                    {print} 'Your order will arrive in 15 minutes.'
+                    ```
             5:
                 story_text: |
                     Our centre for burnwounds would like to lessen the workload by using an online triage tool. This way the patients can not only register their name and date of birth, but also what kind of burnwound they have (first, second or third degree) and advise on what to do next.
@@ -2893,6 +3021,20 @@ adventures:
                     * Start with a greeting and simple registration of the patients name and date of birth
                     * Preform a triage. Is the skin only red: first degree burn. Are there blisters: second degree burn. Is the skin gone/blackened/whitened from the burn: third degree burn.
                     * Give the patient the appropriate advise. First degree: Cool the burn with water and apply some cream on it. You do not need to see a doctor. Second degree: The doctor will see you and prescribe a special cream. Please wait in the waiting area. Third degree: Please go the the service desk now. You will need urgent care a.s.a.p.
+                answer_code: |
+                    ```
+                    name {is} {ask} 'please enter your name'
+                    dob {is} {ask} 'please enter your date of birth'
+                    first_degree {is} {ask} 'Is the skin red?'
+                    second_degree {is} {ask} 'Are there blisters on the skin?'
+                    third_degree {is} {ask} ' Is the skin gone/blackened/whitened from the burn'
+                    {if} first_degree {is} 'yes'
+                    {print} 'Cool the burn with water and apply some cream on it. You do not need to see a doctor.'
+                    {if} second_degree {is} 'yes'
+                    {print} 'The doctor will see you and prescribe a special cream. Please wait in the waiting area.'
+                    {if} third_degree {is} 'yes'
+                    {print} 'Please go the the service desk now. You will need urgent care a.s.a.p.'
+                    ```
             6:
                 story_text: |
                     Our midwifes get a lot of questions from pregnant ladies about what they can and can't eat while pregnant. Can you help their patients by creating an app that tells them if food is safe or not?
