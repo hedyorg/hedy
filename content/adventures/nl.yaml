@@ -284,7 +284,11 @@ adventures:
                     _ Met jou gaat het _
                     ```
             2:
-                story_text: "## Het vraag commando\nNu we **variabelen** in onze codes kunnen gebruiken, hebben we het `{echo}` commando niet langer nodig.\nWe kunnen variabelen gebruiken om antwoorden in op te slaan. Hierdoor kunnen we antwoorden op meerdere vragen gebruiken in onze codes. \nKijk maar eens naar het voorbeeld:\n\nOp deze manier worden je programma's steeds interactiever!\n"
+                story_text: |
+                    ## Variabelen gebruiken
+                    In de vorige levels heb je geleerd om `{answer}` te gebruiken om het antwoord op een vraag te printen. Maar wat als je meerdere antwoorden wil printen..?
+                    In dit level leer je meerdere **variabelen** te gebruiken. Een variabele is een plek waar je een antwoord (ookwel *input*) in opslaat van de gebruikers.
+
                 example_code: |
                     ```
                     naam {is} {ask} Wat is je naam?
@@ -292,11 +296,16 @@ adventures:
                     leeftijd {is} {ask} Hoe oud ben je?
                     {print} naam is leeftijd jaar oud
                     ```
-                story_text_2: "### Opdracht\nJe hebt in het vorige avontuur al geleerd hoe je variabelen kunt instellen met het`{is}` commando.\nDaar heb je minstens 3 variabelen gemaakt en ze gebruikt met een print commando.\nNu gaan we de variabelen interactief maken in plaats van ze in te stellen, zoals we deden in ons voorbeeld. \n\nKopieer je code van het vorige avontuur en maak de variabelen interactief door `{ask}` commando's te gebruiken.\n"
+                story_text_2: |
+                    ### Opdracht
+                    Tijd om je eigen variabelen te maken! Vraag de speler wat diens favoriete drankje en favoriete boek zijn en print de antwoorden.
+                    Voeg tenslotte een laatste regel toe waarin je alle dingen die de speler leuk vindt opsomt.
                 example_code_2: |
                     ```
                     lievelingsdier {is} {ask} Wat is je lievelingsdier?
                     {print} Ik hou van lievelingsdier
+
+                    {print} Dus jij houdt van _ , _ en _
                     ```
             13:
                 story_text: Als laatste veranderen we het woord dat je moet gebruiken voor `{ask}`. Vanaf nu noemen we vraag `{input}`.

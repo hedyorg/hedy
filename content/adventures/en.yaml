@@ -519,12 +519,13 @@ adventures:
                     ```
             2:
                 story_text: |
-                    ## The `{ask}` command
-                    Now that we can use **variables** in our codes, we no longer need the `{echo}` command.
-                    We can use variables to store the answers to our questions and this way we can use the answer to multiple questions in our codes.
-                    Check it out:
+                    ## Using variables
+                    In the previous levels you have learned to use `{answer}` to print the answer to a question, but what if you want to use more than one answer?
+                    In this level you'll learn how to use multiple **variables**. A variable is a place to store an answer (or *input*) from the users. You have already been using the variable `{answer}`, but now you'll learn how to use more variables!
+                    This example show you how you can use the variables 'name' and 'age'.
 
-                    This way your code is becoming interactive!
+                    ## {ask}
+                    Do you see how the `{ask}` command has changed as well? To tell the computer in which variable you want to store your answer, you start your line with the variable name, then {is} and then the {ask}.
                 example_code: |
                     ```
                     name {is} {ask} What is your name?
@@ -534,24 +535,24 @@ adventures:
                     ```
                 story_text_2: |
                     ### Exercise
-                    In the previous adventure you have practised with setting variables with the `{is}` command.
-                    You have created at least 3 variables and used them with a `{print}` command.
-                    Now, instead of setting the variables we want you to make the variables interactive, like we did in our example.
-
-                    Copy your code from the previous adventure and make the variables interactive by using `{ask}` commands.
+                    Time to make your own variables! Ask the player what their favorite drink and favorite book are and print the answers.
+                    Finish the program by listing all the things the player likes in one line.
                 example_code_2: |
                     ```
                     favorite_animal {is} {ask} What is your favorite animal?
                     {print} I like favorite_animal
+
+                    {print} So you like _, _ and _.
                     ```
                 answer_code: |
                     ```
-                    favorite_animals {is} {ask} What is your favorite animal?
-                    {print} I like favorite_animals
+                    favorite_animal {is} {ask} What is your favorite animal?
+                    {print} I like favorite_animal
                     favorite_drink {is} {ask} What is your favorite drink?
                     {print} I like to drink favorite_drink
                     favorite_book {is} {ask} What is your favorite book?
                     {print} I like to read favorite_book
+                    {print} so you like favorite_animal, favorite_drinks and favorite_book
                     ```
             13:
                 story_text: The final change we will need to make to get Python code is changing `{ask}` into `{input}`.
@@ -5219,7 +5220,7 @@ adventures:
                     ```
     rock:
         name: rock, paper, scissors
-        default_save_name: Rock_2
+        default_save_name: rock
         description: Make your own rock, paper, scissors game
         levels:
             1:

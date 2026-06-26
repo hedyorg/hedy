@@ -1674,14 +1674,6 @@ adventures:
                 example_code: "Pista del programa dissenya el teu braçalet\n```\n{define} dibuixa_un_quadrat\n_\n\n{color} blanc\n{turn} -90\n{forward} 300\n{turn} 180\n\n{for} i {in} {range} 1 {to} 5\n    {color} gris\n    {forward} 100\n    forma = {ask} \"Quina és la forma següent del teu braçalet?\"\n    color_escollit = {ask} \"De quin color?\"\n    {color} color_escollit\n    {if} forma = \"quadrat\"\n        {call} dibuixa_un_quadrat\n```\n"
             15:
                 story_text: "### Exercici\nCrea un programa que pregunti al jugador quants costats ha de tenir la seva figura i després crea aquesta figura.\nLa figura de la imatge és el resultat quan el jugador introdueix 10.\n\n<div class=\"w-full flex flex-row gap-2\">\n <img src=\"https://github.com/hedyorg/hedy/assets/80678586/ee32f40e-dea1-4e7c-a813-3ef63671254b\" width=\"300\">\n <img src=\"https://github.com/hedyorg/hedy/assets/80678586/3621bf77-527d-41e8-a44f-c5a21bb4ffd2\" width=\"200\">\n</div>\n"
-    rock_2:
-        levels:
-            2:
-                example_code: "```\neleccio {is} _\n{print} Escullo eleccio\n```\n"
-                story_text: "Ara que has après a utilitzar la comanda `{ask}`, també pots fer que el teu codi de pedra, paper, tisores sigui interactiu!\n\n### Exercici\nFes que el codi de pedra, paper, tisores sigui interactiu afegint la comanda `{ask}` amb una pregunta al teu codi de pedra, paper, tisores.\n"
-        default_save_name: pedra_2
-        description: 2a part de pedra, paper, tisores
-        name: pedra, paper, tisores 2
     secret:
         name: superespia
         levels:
