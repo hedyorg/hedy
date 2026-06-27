@@ -2387,13 +2387,13 @@ adventures:
             16:
                 example_code: |
                     ```
-                    {print} 'Willkommen bei McHedy'
+                    {print}('Willkommen bei McHedy')
                     mehr = 'ja'
                     _
-                        Bestellung = {ask} 'Was würden Sie gerne bestellen?'
-                        {print} Bestellung
-                        mehr = {ask} 'Würden Sie gerne noch etwas bestellen?'
-                    {print} 'Dankeschön!'
+                        Bestellung = {input}('Was würden Sie gerne bestellen?')
+                        {print}(Bestellung)
+                        mehr = {input}('Würden Sie gerne noch etwas bestellen?')
+                    {print}('Dankeschön!')
                     ```
                 story_text: "Mit `{while}` kannst du sicherstellen, dass deine Kunden Bestellungen aufgeben bis sie fertig sind.\n\n### Übung\nFüge den `{while}` Befehl dem Code hinzu.\n"
         default_save_name: Restaurant

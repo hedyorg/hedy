@@ -2796,13 +2796,13 @@ adventures:
                     Voeg het `{while}` commando op de juiste wijze toe aan deze code.
                 example_code: |
                     ```
-                    {print} 'Welkom bij McHedy'
+                    {print}('Welkom bij McHedy')
                     meer = 'ja'
                     _
-                        bestelling = {ask} 'Wat wil je bestellen?'
-                        {print} bestelling
-                        meer = {ask} 'Wilt u nog iets bestellen?'
-                    {print} 'Bedankt!'
+                        bestelling = {input}('Wat wil je bestellen?')
+                        {print}(bestelling)
+                        meer = {input}('Wilt u nog iets bestellen?')
+                    {print}('Bedankt!')
                     ```
     rock:
         name: steen, papier, schaar

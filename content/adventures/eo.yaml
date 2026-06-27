@@ -886,13 +886,13 @@ adventures:
             16:
                 example_code: |
                     ```
-                    {print} 'Bonvenon al McHedy'
+                    {print}('Bonvenon al McHedy')
                     pli = 'jes'
                     _
-                        mendo = {ask} 'Kion vi volas mendi?'
-                        {print} mendo
-                        pli = {ask} 'Ĉu vi volas mendi ion pli?'
-                    {print} 'Dankon!'
+                        mendo = {input}('Kion vi volas mendi?')
+                        {print}(mendo)
+                        pli = {input}('Ĉu vi volas mendi ion pli?')
+                    {print}('Dankon!')
                     ```
     rock:
         name: Roko, papero, tondilo

@@ -1418,7 +1418,16 @@ adventures:
                 example_code: "```\n{print} 'Welcome to Restaurant Chez Hedy!'\npeople = {ask} 'How many people will be joining us today?'\n{print} 'Great!'\n{repeat} people {times}\n    food = {ask} 'What would you like to order?'\n    {print} food\n{print} 'Thank you for ordering!'\n{print} 'Enjoy your meal!'\n```\n"
                 story_text: "У цьому рівні ви можете зробити свій віртуальний ресторан більш розроблений, повторюючи декілька рядків коду. Як це:\n\n### Exercise\nЦей код може бути розширений з більш детальною інформацією в меню, наприклад, пропонують напої та / або кілька курсів або десертів. Додати принаймні один елемент.\n**Extra*** Додати ще більше товарів, скільки вам подобається!\n"
             16:
-                example_code: "й й\n{print} 'Welcome в McHedy Р\nбільше = \"так Р\nУ\nзамовлення = {ask} 'Що б ви хотіли замовити? Р\n{print} замовлення\nбільше = {ask} \"Що вам подобається замовити щось інше? Р\n{print} 'Дякуй! Р\nй й\n"
+                example_code: |
+                    ```
+                    {print} ('Welcome в McHedy')
+                    більше = 'так'
+                    _
+                    замовлення = {input}('Що б ви хотіли замовити?')
+                    {print} (замовлення)
+                    більше = {input}('Що вам подобається замовити щось інше?')
+                    {print}('Дякуй! Р')
+                    ```
                 story_text: "З `{while}` ви можете переконатися, що ваші костюми можуть тримати додавати замовлення, поки вони не будуть виконані.\n\n### Exercise\nПравильно додайте команду `{while}` до цього коду.\n"
         default_save_name: Ресторани
         description: Створення віртуального ресторану

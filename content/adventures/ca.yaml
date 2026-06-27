@@ -1734,7 +1734,16 @@ adventures:
                     ```
             16:
                 story_text: "Amb la comanda `{while}` pots assegurar-te que els teus clients puguin continuar afegint comandes fins que hagin acabat.\n\n### Exercici\nAfegeix correctament la comanda `{while}` a aquest codi.\n"
-                example_code: "```\n{print} \"Benvinguts al McHedy\"\ncontinuar = \"sí\"\n_\n    comanda = {ask} \"Què vol demanar?\"\n    {print} comanda\n    continuar = {ask} \"Voldria demanar alguna cosa més?\"\n{print} \"Gràcies!\"\n```\n"
+                example_code: |
+                    ```
+                    {print}("Benvinguts al McHedy")
+                    continuar = "sí"
+                    _
+                        comanda = {input}("Què vol demanar?")
+                        {print}(comanda)
+                        continuar = {input}("Voldria demanar alguna cosa més?")
+                    {print}("Gràcies!")
+                    ```
         name: restaurant
         description: Crea el teu propi restaurant virtual
     turtle:

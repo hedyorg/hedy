@@ -2072,13 +2072,13 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print} 'Bienvenido a McHedy'
+                    {print}('Bienvenido a McHedy')
                     más = 'sí'
                     _
-                        pedido = {ask} '¿Qué te gustaría ordenar?'
-                        {print} pedido
-                        más = {ask} '¿Te gustaría pedir algo más?'
-                    {print} '¡Gracias!'
+                        pedido = {input}('¿Qué te gustaría ordenar?')
+                        {print}(pedido)
+                        más = {input}('¿Te gustaría pedir algo más?')
+                    {print}('¡Gracias!')
                     ```
     rock:
         name: Piedra, papel o tijera

@@ -2062,7 +2062,16 @@ adventures:
 
                     ### Ćwiczenie
                     Poprawnie dodaj do tego kodu polecenie `{while}`
-                example_code: "```\n{print} 'Witamy w McHedy'\nwięcej = 'tak'\n_\n    zamówienie = {ask} 'Co chcesz zamówić?'\n    {print} zamówienie \n    więcej = {ask} 'Czy chciałby Pan/Pani zamówić coś jeszcze?'\n{print} 'Dziękuję!'\n```\n"
+                example_code: |
+                    ```
+                    {print}('Witamy w McHedy')
+                    więcej = 'tak'
+                    _
+                        zamówienie = {input}('Co chcesz zamówić?')
+                        {print}(zamówienie )
+                        więcej = {input}('Czy chciałby Pan/Pani zamówić coś jeszcze?')
+                    {print}('Dziękuję!')
+                    ```
     rock:
         name: papier, kamień, nożyce
         default_save_name: Kamień_2

@@ -1095,13 +1095,13 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print} 'Mirë se vini në McHedy'
+                    {print}('Mirë se vini në McHedy')
                     më_shumë = 'po'
                     _
-                        porosia = {ask} 'Çfarë dëshironi të porosisni?'
-                        {print} porosia
-                        më_shumë = {ask} 'A dëshironi diçka {else}(tjetër)?'
-                    {print} 'Falemenderit!'
+                        porosia = {input}('Çfarë dëshironi të porosisni?')
+                        {print}(porosia)
+                        më_shumë = {input}('A dëshironi diçka {else}(tjetër)?')
+                    {print}('Falemenderit!')
                     ```
     rock:
         name: Gur, letër, gërshërë
