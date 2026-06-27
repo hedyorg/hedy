@@ -1429,43 +1429,23 @@ adventures:
         default_save_name: música
         name: música
         levels:
+            1:
+                story_text: "En aquest nivell aprendràs com utilitzar la comanda `{play}` per a tocar una melodia!\n\nEscriu `{play}` seguit de la nota que vols tocar. Farem servir l'escala alfabètica que té les notes C-D-E-F-G-A-B i que s'equivalen a Do (C), Re (D), Mi (E), Fa (F), Sol (G), La (A), Si (B).\nCom pots veure, hi ha només 7 lletres, però podem tocar-ne més canviant l'escala.\nEscriu un número entre 0 i 9 darrere de la lletra per triar l'escala, per exemple, després de B4 ve C5.\nC0 és la nota més baixa que pots tocar, B9 és la més alta.\n\n### Exercici\nProva el codi d'exemple i experimenta amb ell! Ets capaç de crear una melodia pròpia?\nEn el següent nivell aprendràs a tocar algunes cançons existents."
+                example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
             2:
                 example_code: "```\n{print} En MacDonald viu al camp\n{play} C5\n{play} C5\n{play} C5\n{play} G4\n{play} A4\n{play} A4\n{play} G4\n```\n"
                 story_text_2: Com pots veure, també es pot utilitzar la comanda `{sleep}` per afegir una pausa a la cançó.
                 example_code_2: "```\n{print} Quan les oques van al camp\n{play} C\n{play} C\n{play} G\n{play} G\n{play} A\n{play} A\n{play} G\n{sleep} 1\n{play} F\n{play} F\n```\n"
                 story_text: "### Exercici  \nAcaba les cançons! Ja hem començat el codi per algunes melodies.\n"
-            1:
-                story_text: "En aquest nivell aprendràs com utilitzar la comanda `{play}` per a tocar una melodia!\n\nEscriu `{play}` seguit de la nota que vols tocar. Farem servir l'escala alfabètica que té les notes C-D-E-F-G-A-B i que s'equivalen a Do (C), Re (D), Mi (E), Fa (F), Sol (G), La (A), Si (B).\nCom pots veure, hi ha només 7 lletres, però podem tocar-ne més canviant l'escala.\nEscriu un número entre 0 i 9 darrere de la lletra per triar l'escala, per exemple, després de B4 ve C5.\nC0 és la nota més baixa que pots tocar, B9 és la més alta.\n\n### Exercici\nProva el codi d'exemple i experimenta amb ell! Ets capaç de crear una melodia pròpia?\nEn el següent nivell aprendràs a tocar algunes cançons existents."
-                example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
-            4:
-                story_text: "Utilitza la comanda `{clear}` per crear una màquina de karaoke!\n\n### Exercici\nAcaba la versió de karaoke de \"Plou i fa sol\".\nDesprés, crea una versió de karaoke de qualsevol cançó que t'agradi!\n"
-                example_code: "```\n{print} \"Plou i fa sol\"\n{play} G\n{play} E\n{play} F\n{play} G\n{clear}\n{print} \"Les bruixes es pentinen\"\n{play} A\n{play} F\n{play} F\n{play} F\n{play} A\n{play} G\n{play} E\n{clear}\n{print} \"Plou i fa sol\"\n{play} G\n{play} E\n{play} F\n{play} G\n{clear}\n{print} \"Les bruixes porten dol\"\n{play} A\n```\n"
             3:
                 example_code: "```\nnotes {is} A4, B4, C4\n{play} notes {at} {random}\n{play} notes {at} {random}\n{play} notes {at} {random}\n```\n"
                 story_text: "Crea una melodia aleatòria!\n\n### Exercici  \nEl codi d'exemple crea una melodia aleatòria, però és molt curta i no s'utilitzen massa notes.\nAfegeix més notes a la llista i crea una melodia més llarga copiant la darrera línia unes quantes vegades.\n"
+            4:
+                story_text: "Utilitza la comanda `{clear}` per crear una màquina de karaoke!\n\n### Exercici\nAcaba la versió de karaoke de \"Plou i fa sol\".\nDesprés, crea una versió de karaoke de qualsevol cançó que t'agradi!\n"
+                example_code: "```\n{print} \"Plou i fa sol\"\n{play} G\n{play} E\n{play} F\n{play} G\n{clear}\n{print} \"Les bruixes es pentinen\"\n{play} A\n{play} F\n{play} F\n{play} F\n{play} A\n{play} G\n{play} E\n{clear}\n{print} \"Plou i fa sol\"\n{play} G\n{play} E\n{play} F\n{play} G\n{clear}\n{print} \"Les bruixes porten dol\"\n{play} A\n```\n"
             5:
                 story_text: "No sempre has d'utilitzar la comanda `{play}` per tocar tota una cançó, de vegades només vols tocar una nota. \nPer exemple, si vols fer un qüestionari, pots tocar una nota alta i alegre si la resposta és correcta i una nota baixa i trista si la resposta és incorrecta.\n\n### Exercici\nAcaba la primera pregunta afegint una línia de codi que toqui una nota C3 si es dona una resposta incorrecta.  \nDesprés, pensa en 3 preguntes més per afegir a aquest qüestionari.\n"
                 example_code: "```\nresposta {is} {ask} \"Quina és la capital de Zimbabwe?\"\n{if} resposta {is} Harare {play} C6\n_\n```\n"
-            7:
-                story_text: "En lloc de tocar notes, ara també pots tocar números. Simplement, escriu `{play} 1` per la nota més baixa, `{play} 70` per la nota més alta, o qualsevol número entremig.\n\n### Exercici\nAixò demana matemàtiques musicals! Prova el codi d'exemple unes quantes vegades amb diferents números inicials.\nDesprés, mira si pots compondre una cançó utilitzant els números.\n"
-                example_code: "```\nnum = {ask} \"Digues un número de l'1 al 67\"\n{print} num\n{play} num\nnum = num + 1\n{print} num\n{play} num\nnum = num + 1\n{print} num\n{play} num\n```\n"
-            8:
-                example_code: "```\n{print} \"Quan les oques van al camp\"\n{repeat} 2 {times} {play} C4\n{repeat} 2 {times} {play} G4\n_\n```\n"
-                story_text: "Utilitzar la comanda `{repeat}` pot fer que els teus codis per a melodies siguin molt més curts!\n\n### Exercici\nAcaba el codi per a \"Quan les oques van al camp\" usant la comanda `{repeat}`.\nDesprés, torna a les cançons que has fet en els nivells anteriors. Pots fer més curts aquells codis també?\n"
-            12:
-                story_text: "Utilitza funcions a les teves cançons! Com pots veure en el codi d'exemple, pots fer una funció per a cada línia de \"Quan les oques van al camp\". Un cop hagis programat les tres primeres línies, només has de cridar les funcions en l'ordre en què vols que es reprodueixin.\n\n### Exercici\nAcaba la cançó de \"Quan les oques van al camp\".\nDesprés, revisa totes les cançons que has programat en els nivells anteriors. Pots fer aquests codis més curts i millors utilitzant funcions també?\n"
-                example_code: "```\n{define} primera_linia\n    {play} C\n    {play} C\n    {play} G\n    {play} G\n    {play} A\n    {play} A\n    {play} G\n    {sleep}\n\n{define} segona_linia\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {play} D\n    {play} C\n    {sleep}\n\n{define} tercera_linia\n    {play} G\n    {play} G\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {sleep}\n\n{call} primera_linia\n_\n_\n```\n"
-            15:
-                story_text: "Pots programar música per diversió, però també pots fer servir les notes musicals per fer alguna cosa tan útil com una alarma d'incendi!\n\n### Exercici\nAssegura't que l'alarma sona quan hi ha un incendi!\n"
-            16:
-                story_text: "**Avís** Aquesta aventura pot arribar a ser extremadament molesta!  \nTambé podem utilitzar la comanda `{while}` per repetir una cançó infinitament.\n\n### Exercici  \nAcaba la cançó interminable.\n"
-                example_code: "```\n{def} cançó\n    {play} _\n\nsi_o_no = {input}(\"Vols sentir la cançó que mai s'acaba?\")\n{while} si_o_no = \"sí\":\n    cançó()\n    {print} \"🥳\"\n```\n"
-            10:
-                story_text: "A partir d'aquest nivell pots, entre altres coses, utilitzar una comanda `{repeat}` dins d'una altra comanda `{repeat}`.  \nAixò fa que cançons com \"Moltes felicitats\" siguin encara més curtes!\n\n### Exercici\nAcaba la cançó!\n"
-                example_code: "```\nprimer_cop = si\n{repeat} 2 {times}\n    {repeat} 2 {times}\n        {play} C\n    {play} D\n    {play} C\n    {if} primer_cop {is} si\n        {play} F\n        {play} E\n        primer_cop {is} no\n    {else}\n        _\n```\n"
-            9:
-                story_text: "Ara que podem utilitzar la comanda `{repeat}` per a múltiples línies, podem fer cançons encara més fàcilment!\n\n### Exercici  \nAcaba la cançó de (Frère Jacques, també coneguda com a Germà Jaume). No oblidis usar `{repeat}`!\n"
-                example_code: "```\n{print} \"Frère Jacques\"\n{repeat} 2 {times}\n    {play} C\n    {play} D\n    {play} E\n    {play} C\n{repeat} 2 {times}\n    {play} E\n    {play} F\n    {play} G\n    {sleep} 1\n```\n"
             6:
                 story_text: |
                     Amb `{elif}` pots reproduir diferents melodies per a diferents situacions. Per exemple, si una persona està contenta, li pots reproduir una melodia alegre.
@@ -1484,6 +1464,26 @@ adventures:
                     {elif} estat_anim {is} _
                         {play} _
                     ```
+            7:
+                story_text: "En lloc de tocar notes, ara també pots tocar números. Simplement, escriu `{play} 1` per la nota més baixa, `{play} 70` per la nota més alta, o qualsevol número entremig.\n\n### Exercici\nAixò demana matemàtiques musicals! Prova el codi d'exemple unes quantes vegades amb diferents números inicials.\nDesprés, mira si pots compondre una cançó utilitzant els números.\n"
+                example_code: "```\nnum = {ask} \"Digues un número de l'1 al 67\"\n{print} num\n{play} num\nnum = num + 1\n{print} num\n{play} num\nnum = num + 1\n{print} num\n{play} num\n```\n"
+            8:
+                example_code: "```\n{print} \"Quan les oques van al camp\"\n{repeat} 2 {times} {play} C4\n{repeat} 2 {times} {play} G4\n_\n```\n"
+                story_text: "Utilitzar la comanda `{repeat}` pot fer que els teus codis per a melodies siguin molt més curts!\n\n### Exercici\nAcaba el codi per a \"Quan les oques van al camp\" usant la comanda `{repeat}`.\nDesprés, torna a les cançons que has fet en els nivells anteriors. Pots fer més curts aquells codis també?\n"
+            9:
+                story_text: "Ara que podem utilitzar la comanda `{repeat}` per a múltiples línies, podem fer cançons encara més fàcilment!\n\n### Exercici  \nAcaba la cançó de (Frère Jacques, també coneguda com a Germà Jaume). No oblidis usar `{repeat}`!\n"
+                example_code: "```\n{print} \"Frère Jacques\"\n{repeat} 2 {times}\n    {play} C\n    {play} D\n    {play} E\n    {play} C\n{repeat} 2 {times}\n    {play} E\n    {play} F\n    {play} G\n    {sleep} 1\n```\n"
+            10:
+                story_text: "A partir d'aquest nivell pots, entre altres coses, utilitzar una comanda `{repeat}` dins d'una altra comanda `{repeat}`.  \nAixò fa que cançons com \"Moltes felicitats\" siguin encara més curtes!\n\n### Exercici\nAcaba la cançó!\n"
+                example_code: "```\nprimer_cop = si\n{repeat} 2 {times}\n    {repeat} 2 {times}\n        {play} C\n    {play} D\n    {play} C\n    {if} primer_cop {is} si\n        {play} F\n        {play} E\n        primer_cop {is} no\n    {else}\n        _\n```\n"
+            12:
+                story_text: "Utilitza funcions a les teves cançons! Com pots veure en el codi d'exemple, pots fer una funció per a cada línia de \"Quan les oques van al camp\". Un cop hagis programat les tres primeres línies, només has de cridar les funcions en l'ordre en què vols que es reprodueixin.\n\n### Exercici\nAcaba la cançó de \"Quan les oques van al camp\".\nDesprés, revisa totes les cançons que has programat en els nivells anteriors. Pots fer aquests codis més curts i millors utilitzant funcions també?\n"
+                example_code: "```\n{define} primera_linia\n    {play} C\n    {play} C\n    {play} G\n    {play} G\n    {play} A\n    {play} A\n    {play} G\n    {sleep}\n\n{define} segona_linia\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {play} D\n    {play} C\n    {sleep}\n\n{define} tercera_linia\n    {play} G\n    {play} G\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {sleep}\n\n{call} primera_linia\n_\n_\n```\n"
+            15:
+                story_text: "Pots programar música per diversió, però també pots fer servir les notes musicals per fer alguna cosa tan útil com una alarma d'incendi!\n\n### Exercici\nAssegura't que l'alarma sona quan hi ha un incendi!\n"
+            16:
+                story_text: "**Avís** Aquesta aventura pot arribar a ser extremadament molesta!  \nTambé podem utilitzar la comanda `{while}` per repetir una cançó infinitament.\n\n### Exercici  \nAcaba la cançó interminable.\n"
+                example_code: "```\n{def} cançó\n    {play} _\n\nsi_o_no = {input}(\"Vols sentir la cançó que mai s'acaba?\")\n{while} si_o_no = \"sí\":\n    cançó()\n    {print} \"🥳\"\n```\n"
         description: Reprodueix una nota!
     songs_2:
         levels:

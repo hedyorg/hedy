@@ -2004,19 +2004,17 @@ adventures:
                     Zorg dat het brandalarm afgaat als er brand is!
                 example_code: |
                     ```
-                    {define} brandalarm
-                        {print} 'BRAND!'
+                    {def} brandalarm():
+                        {print}('BRAND!')
                         noot = 40
-                        {for} i {in} {range} 1 {to} 100
-                            {if} noot _ 50
-                                noot = noot + 5
-                                {play} _
-                            {else}
-                                noot = 40
+                        {for} i {in} {range}_
+                            {play} 45
+                            {play} 50
 
-                    brand = {ask} 'Is er brand?'
-                    {if} brand _ 'ja'
-                        {call} brandalarm
+
+                    brand = {input}('Is er brand?')
+                    {if} brand _
+                        _
                     ```
             16:
                 story_text: |

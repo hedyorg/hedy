@@ -1804,14 +1804,14 @@ adventures:
                 example_code: |
                     ```
                     {def} feueralarm():
-                        {print} 'FEUER!'
+                        {print}('FEUER!')
                         note = 40
                         {for} i {in} {range} _
                             {play} 45
                             {play} 50
 
                     feuer = {input}('Brennt es?')
-                    {if} feuer _ 'ja'
+                    {if} feuer _ 'ja':
                         _
                     ```
             16:

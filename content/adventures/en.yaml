@@ -4293,7 +4293,7 @@ adventures:
                 example_code: |
                     ```
                     {def} fire_alarm():
-                        {print} 'FIRE!'
+                        {print}('FIRE!')
                         {for} i {in} {range} _
                             {play} 45
                             {play} 50
@@ -4305,13 +4305,13 @@ adventures:
                 answer_code: |
                     ```
                     {def} fire_alarm():
-                        {print} 'FIRE!'
-                        {for} i {in} {range} (1,20)
+                        {print}('FIRE!')
+                        {for} i {in} {range}(1,20):
                             {play} 45
                             {play} 50
 
-                    fire = {ask} 'Is there a fire?'
-                    {if} fire == 'yes'
+                    fire = {input}('Is there a fire?')
+                    {if} fire == 'yes':
                         fire_alarm()
                     ```
             16:
