@@ -1314,15 +1314,15 @@ adventures:
                     法语词汇 = ['bonjour', 'ordinateur', 'pomme de terre']
                     词语翻译 = ['hello', 'computer', 'potato']
                     得分 = 0
-                    {for} i {in} {range} 1 {to} 3
-                        答案 = {ask} '什么是' 法语词汇[i] ' 的含义?'
+                    {for} i {in} {range}(1, 3)
+                        答案 = {input}('什么是', 法语词汇[i], ' 的含义?')
                         正确答案 = 词语翻译[i]
-                        {if} 答案 == 正确答案
-                            {print} '答对了!'
+                        {if} 答案 == 正确答案:
+                            {print}('答对了!')
                             得分 = 得分 + 1
-                        {else}
-                            {print} '错了, ' 法语词汇[i] ' 的意思是 ' 词语翻译[i]
-                    {print} '你得到' 得分 ' 个正确答案.'
+                        {else}:
+                            {print}('错了, ', 法语词汇[i], ' 的意思是 ', 词语翻译[i])
+                    {print}('你得到', 得分, ' 个正确答案.')
                     ```
     maths:
         name: 数学

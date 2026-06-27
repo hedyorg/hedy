@@ -1171,15 +1171,15 @@ adventures:
                     fransızca_kelimeler = ['bonjour', 'ordinateur', 'pomme de terre']
                     çevirisi = ['merhaba', 'bilgisayar', 'patates']
                     puan = 0
-                    {for} i {in} {range} 1 {to} 3
-                        cevap = {ask} fransızca_kelimeler[i] ' kelimesinin anlamı nedir?'
+                    {for} i {in} {range}(1, 3)
+                        cevap = {input}(fransızca_kelimeler[i], ' kelimesinin anlamı nedir?')
                         doğrusu = çevirisi[i]
-                        {if} cevap == doğrusu
-                            {print} 'Doğru bildin!'
+                        {if} cevap == doğrusu:
+                            {print}('Doğru bildin!')
                             puan = puan + 1
                         {else}
-                            {print} 'Yanlış, ' fransızca_kelimeler[i] ' kelimesi ' çevirisi[i] ' anlamına geliyor'
-                    {print} 'Toplam ' puan ' doğru cevap verdin.'
+                            {print}('Yanlış, ', fransızca_kelimeler[i], ' kelimesi ', çevirisi[i], ' anlamına geliyor')
+                    {print}('Toplam ', puan, ' doğru cevap verdin.')
                     ```
     maths:
         name: matematik

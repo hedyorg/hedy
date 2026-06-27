@@ -3716,17 +3716,17 @@ adventures:
 
                     #Practising the words:
                     score = 0
-                    {for} i {in} {range} (1,3):
-                        answer = {input} ('What does ', french_words[i], ' mean?')
+                    {for} i {in} {range}(1,3):
+                        answer = {input}('What does ', french_words[i], ' mean?')
                         correct = translation[i]
                         {if} answer == correct:
-                            {print} ('Correct!')
+                            {print}('Correct!')
                             score = score + 1
                         {else}:
-                            {print} ('Wrong, ', french_words[i], ' means ', translation[i])
+                            {print}('Wrong, ', french_words[i], ' means ', translation[i])
                     
                     #Printing the score:
-                    {print} ('You gave ', score, ' correct answers.')
+                    {print}('You gave ', score, ' correct answers.')
                     ```
                 answer_code: |
                     ```
@@ -3734,14 +3734,14 @@ adventures:
                     translation = ['hello', 'okay', 'I love you']
                     score = 0
                     {for} i {in} {range}(1,3):
-                        answer = {ask} 'What does ' spanish_words[i] ' mean?'
+                        answer = {input}('What does ', spanish_words[i], ' mean?')
                         correct_answer = translation[i]
-                        {if} answer == correct_answer
-                            {print} 'Correct!'
+                        {if} answer == correct_answer:
+                            {print}('Correct!')
                             score = score + 1
-                        {else}
-                            {print} 'Wrong, ' spanish_words[i] ' means ' translation[i]
-                    {print} 'You gave ' score ' correct answers.'
+                        {else}:
+                            {print}('Wrong, ', spanish_words[i], ' means ', translation[i])
+                    {print}('You gave ', score, ' correct answers.')
                     ```
     lists:
         name: lists

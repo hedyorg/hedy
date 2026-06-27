@@ -754,15 +754,15 @@ adventures:
                     fjalë_franceze = ['bonjour', 'ordinator', 'pomme de terre']
                     përkthimi = ['përshëndetje', 'kompjuter', 'patate']
                     rezultati = 0
-                    {for} i {in} {range} 1 {to} 3
-                        përgjigje = {ask} 'Çfarë do të thotë 'fjalë_franceze[i]'?'
+                    {for} i {in} {range}(1, 3):
+                        përgjigje = {input}('Çfarë do të thotë ', fjalë_franceze[i], '?')
                         saktë = përkthimi[i]
-                        {if} përgjigje == saktë
-                            {print} 'E saktë!'
+                        {if} përgjigje == saktë:
+                            {print}('E saktë!')
                             rezultati = rezultati + 1
-                        {else}
-                            {print} 'E gabuar, 'fjalë_franceze[i]' do të thotë 'përkthimi[i]
-                    {print} 'Ju dhatë ' rezultati ' përgjigje të sakta.'
+                        {else}:
+                            {print}('E gabuar, ', fjalë_franceze[i], ' do të thotë ', përkthimi[i])
+                    {print}('Ju dhatë ', rezultati, ' përgjigje të sakta.')
                     ```
     maths:
         levels: {}

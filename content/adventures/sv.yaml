@@ -1130,15 +1130,15 @@ adventures:
                     franska_ord = ['bonjour', 'ordinateur', 'pomme de terre']
                     översättning = ['hej', 'dator', 'potatis']
                     poäng = 0
-                    {for} i {in} {range} 1 {to} 3
-                        svar = {ask} 'Vad betyder ' franska_ord[i] '?'
+                    {for} i {in} {range}(1, 3)
+                        svar = {input}('Vad betyder ', franska_ord[i], '?')
                         rätt = översättning[i]
-                        {if} svar == rätt
-                            {print} 'Rätt!'
+                        {if} svar == rätt:
+                            {print}('Rätt!')
                             poäng = poäng + 1
-                        {else}
-                            {print} 'Fel, ' franska_ord[i] ' betyder ' översättning[i]
-                    {print} 'Du gav ' poäng ' rätta svar.'
+                        {else}:
+                            {print}('Fel, ', franska_ord[i], ' betyder ', översättning[i])
+                    {print}('Du gav ', poäng, ' rätta svar.')
                     ```
     maths:
         name: matte

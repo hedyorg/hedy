@@ -1299,15 +1299,15 @@ adventures:
                     palabras_francesas = ['bonjour', 'ordinateur', 'pomme de terre']
                     traducción = ['hola', 'computadora', 'papa']
                     puntuación = 0
-                    {for} i {in} {range} 1 {to} 3
-                        respuesta = {ask} '¿Qué significa ' palabras_francesas[i] '?'
+                    {for} i {in} {range}(1, 3):
+                        respuesta = {input}('¿Qué significa ', palabras_francesas[i], '?')
                         correcta = traducción[i]
-                        {if} respuesta == correcta
-                            {print} '¡Correcto!'
+                        {if} respuesta == correcta:
+                            {print}('¡Correcto!')
                             puntuación = puntuación + 1
-                        {else}
-                            {print} 'No, ' palabras_francesas[i] ' significa ' traducción[i]
-                    {print} 'Tuviste ' puntuación ' respuestas correctas.'
+                        {else}:
+                            {print}('No, ', palabras_francesas[i], ' significa ', traducción[i])
+                    {print}('Tuviste ', puntuación, ' respuestas correctas.')
                     ```
                 story_text: "### Ejercicio\nEcha un vistazo al código de ejemplo. Este es un programa para practicar vocabulario en francés. Ahora haz tu propio programa para practicar tu vocabulario en tu nuevo idioma.\nSi no sabes ningún otro idioma, puedes utilizar el traductor de Google o puedes utilizar emojis y tu idioma materno.\n"
     lists:

@@ -941,7 +941,6 @@ adventures:
                     **Додатково** Звичайно, ви можете вибрати мову, відмінну від французької. Ви можете змінити код на будь-яку мову, яку хочете вивчити.
                 example_code: "``` \n{print} \"Вивчай французьку!\" \nкіт {is} {ask} '🐱' \n{if} cat {is} chat {print} \"Чудово!\" \n{else} {print} \"Ні, кіт - це чат\" \nжаба {is} {ask} '🐸' \n{if} жаба {is} grenouille {print} \"Супер!\" \n{else} {print} \"Ні, жаба - це Гренуй\" \n```\n"
             14:
-                example_code: "```\nfrench_words = ['bonjour', 'ordinateur', 'pomme de terre']\ntranslation = ['hello', 'computer', 'potato']\nscore = 0\n{for} i {in} {range} 1 {to} 3\n    answer = {ask} 'What does ' french_words[i] ' mean?'\n    correct = translation[i]\n    {if} answer == correct\n        {print} 'Correct!'\n        score = score + 1\n    {else}\n        {print} 'Wrong, ' french_words[i] ' means ' translation[i]\n{print} 'You gave ' score ' correct answers.'\n```\n"
                 story_text: "### Вправи\nПодивіться на приклад коду. Це програма для відпрацювання французької лексики. Тепер створіть власну програму, щоб тренувати свій словниковий запас новою мовою. \nЯкщо ви не знаєте жодної іншої мови, ви можете скористатися перекладачем Google або використовувати емодзі та свою рідну мову.\n"
         name: Мова
         description: Відпрацювання слів іноземною мовою

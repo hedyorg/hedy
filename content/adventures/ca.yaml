@@ -1368,8 +1368,25 @@ adventures:
                 story_text: "Crea el teu propi programa per practicar vocabulari en un nou idioma.\n\n### Exercici\nAllarga el codi afegint almenys 3 paraules addicionals permetent al jugador aprendre-les.\n**Extra** Per descomptat pots fer servir una llengua diferent del francès. Canvia el codi per qualsevol llengua que et vingui de gust aprendre.\n"
                 example_code: "```\n{print} \"Aprèn Francès!\"\ngat {is} {ask} \"🐱\"\n{if} gat {is} chat {print} \"Genial!\"\n{else} {print} \"No, gat es diu chat\"\ngranota {is} {ask} \"🐸\"\n{if} granota {is} grenouille {print} \"Super!\"\n{else} {print} \"No, granota es diu grenouille\"\n```\n"
             14:
-                example_code: "```\nparaules_frances = [\"bonjour\", \"ordinateur\", \"pomme de terre\"]\ntraduccio = [\"Bon dia\", \"ordinador\", \"patata\"]\npunts = 0\n{for} i {in} {range} (1,3):\n    resposta = {input} (\"Què vol dir \", paraules_frances[i], \"?\")\n    correcta = traduccio[i]\n    {if} resposta == correcta:\n        {print} (\"Correcte!\")\n        punts = punts + 1\n    {else}:\n        {print} (\"Malament, \", paraules_frances[i], \" significa \", traduccio[i])\n{print} (\"Has encertat \", punts, \" respostes.\")\n```\n"
-                story_text: "### Exercici\nDona un cop d'ull al codi d'exemple. Aquest és un programa per practicar vocabulari en francès. Ara crea el teu propi programa per practicar el teu vocabulari en un nou idioma.\nSi no coneixes cap altre idioma, pots utilitzar Google Translate o fer servir emojis i la teva llengua materna.\n"
+                example_code: |
+                    ```
+                    paraules_frances = ["bonjour", "ordinateur", "pomme de terre"]
+                    traduccio = ["Bon dia", "ordinador", "patata"]
+                    punts = 0
+                    {for} i {in} {range}(1,3):
+                        resposta = {input}("Què vol dir ", paraules_frances[i], "?")
+                        correcta = traduccio[i]
+                        {if} resposta == correcta:
+                            {print}("Correcte!")
+                            punts = punts + 1
+                        {else}:
+                            {print}("Malament, ", paraules_frances[i], " significa ", traduccio[i])
+                    {print}("Has encertat ", punts, " respostes.")
+                    ```
+                story_text: "### Exercici
+                    Dona un cop d'ull al codi d'exemple. Aquest és un programa per practicar vocabulari en francès. Ara crea el teu propi programa per practicar el teu vocabulari en un nou idioma.
+                    Si no coneixes cap altre idioma, pots utilitzar Google Translate o fer servir emojis i la teva llengua materna.
+                    "
         name: llengua
         description: Practica paraules amb una llengua estrangera
     lists:

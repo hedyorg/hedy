@@ -1284,15 +1284,15 @@ adventures:
                     francuskie_słowa= ['bonjour', 'ordinateur', 'pomme de terre']
                     tłumaczenie = ['witam', 'komputer', 'ziemniak']
                     wynik = 0
-                    {for} i {in} {range} (1,3):
-                        odpowiedź = {input}('Co to znaczy ', francuskie_słowa[i] ' ?')
+                    {for} i {in} {range}(1,3):
+                        odpowiedź = {input}('Co to znaczy ', francuskie_słowa[i], ' ?')
                         poprawnie = tłumaczenie[i]
-                        {if} odpowiedź == poprawnie
-                            {print} ('Poprawnie!')
+                        {if} odpowiedź == poprawnie:
+                            {print}('Poprawnie!')
                             wynik = wynik + 1
-                        {else}
-                            {print} ('Źle, ', francuskie_słowa[i], ' oznacza ', tłumaczenie[i])
-                    {print} ('Odpowiedziałeś poprawnie na ', wynik, ' pytań.')
+                        {else}:
+                            {print}('Źle, ', francuskie_słowa[i], ' oznacza ', tłumaczenie[i])
+                    {print}('Odpowiedziałeś poprawnie na ', wynik, ' pytań.')
                     ```
     lists:
         levels:
