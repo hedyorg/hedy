@@ -1359,7 +1359,25 @@ adventures:
                         {print} "early in the morning"
                     ```
             15:
-                example_code: "```\n{def} missatge_benvinguda (tractament, cognom, pais, num_habitacio)_\n    {print} (\"Benvingut a l'Hotel Hedy, \", tractament \", \" cognom)\n    nice_trip {is} {input} (\"Ha tingut un bon viatge des de \", pais, \"?\")\n    {if} nice_trip == \"si\":\n        {print} (\"Fantàstic!\")\n    {else}\n        {print} (\"Quina llàstima...\")\n        {print} (\"Afortunadament podrà descançar a la seva habitació.\")\n    {print} (\"La seva habitació és la \", num_habitacio)\n\n{print} (\"Hola, si us plau omple les dades per al check-in')\ntractament= {input} (\"Quin tractament prefereix (sr, sra, dr, etc.)?\")\ncognom = {input} (\"Com es diu de cognom?\")\npais_origen= {input}(\"A quin país resideix?\")\n\nmissatge_benvinguda(tractament, cognom, pais_origen, 105)\n```\n"
+                example_code: |
+                    ```
+                    {def} missatge_benvinguda (tractament, cognom, pais, num_habitacio)_
+                        {print}("Benvingut a l'Hotel Hedy, ", tractament ", " cognom)
+                        nice_trip = {input}("Ha tingut un bon viatge des de ", pais, "?")
+                        {if} nice_trip == "si":
+                            {print}("Fantàstic!")
+                        {else}:
+                            {print}("Quina llàstima...")
+                            {print}("Afortunadament podrà descançar a la seva habitació.")
+                        {print}("La seva habitació és la ", num_habitacio)
+
+                    {print}("Hola, si us plau omple les dades per al check-in')
+                    tractament= {input}("Quin tractament prefereix (sr, sra, dr, etc.)?")
+                    cognom = {input}("Com es diu de cognom?")
+                    pais_origen= {input}("A quin país resideix?")
+
+                    missatge_benvinguda(tractament, cognom, pais_origen, 105)
+                    ```
                 story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {ask}.\nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.\nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.\nAquí tens un exemple d'una funció amb arguments combinada amb comandes `{ask}`.\n"
     language:
         default_save_name: Llengua

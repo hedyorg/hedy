@@ -2267,7 +2267,18 @@ adventures:
                 example_code: "```\nwiersz = 99\n{print} wiersz ' butelek piwa na ścianie'\n{print} wiersz ' butelek piwa'\n{print} 'Zdejmij jedną i podaj ją dalej'\nwiersz = wiersz - 1\n{print} wiersz ' butelek piwa na ścianie'\n{sleep}\n```\n"
                 example_code_2: "```\nliczba = 6\nliczba = liczba - 1\n{print} liczba ' małych małpek po łóżku skakało'\n{print} 'jedna spadła i mniej zostało'\n{print} 'Dzwoni mama do doktora, a pan doktor na to'\n{print} 'Żadnych więcej małpek co po łóżku skaczą!'\n{sleep}\n```\n"
             15:
-                example_code: "```\n{define} piosenka (miejsce)\n    {print} 'Moja Bonnie jest nad ' place\n\nwybrane_miejsce = {ask} 'Gdzie chcesz, żeby była Bonnie?'\nsynonim = {ask} 'Jakie jest inne określenie na to miejsce? '\n\npiosenka (wybrane_miejsce )\npiosenka (synonim )\npiosenka (wybrane_miejsce )\n```\n"
+                example_code: |
+                    ```
+                    {def} piosenka(miejsce):
+                        {print}('Moja Bonnie jest nad ', place)
+
+                    wybrane_miejsce = {input}('Gdzie chcesz, żeby była Bonnie?')
+                    synonim = {input}('Jakie jest inne określenie na to miejsce? ')
+
+                    piosenka(wybrane_miejsce )
+                    piosenka(synonim )
+                    piosenka(wybrane_miejsce )
+                    ```
                 story_text: "W poprzedniej przygodzie nauczyłeś(aś) się jak używać argumentów funkcji ale czy wiedziałeś(aś), że możesz je połączyć z poleceniem`{ask}` ?\nW tym przykładzie zmieniliśmy program 'Moja Bonnie' i zrobiliśmy go bardziej interaktywnym. Teraz pytamy gdzie jest Bonnie.\n"
     songs_2:
         name: zaśpiewaj piosenkę! 2

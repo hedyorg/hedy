@@ -6034,15 +6034,15 @@ adventures:
                     In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
                 example_code: |
                     ```
-                    {define} song (place)
-                        {print} 'My Bonnie is ' place
+                    {def} song(place):
+                        {print}('My Bonnie is ', place)
 
-                    chosen_place = {ask} 'Where do you want Bonnie to be?'
-                    synonym = {ask} 'What is another word for that?'
+                    chosen_place = {input}('Where do you want Bonnie to be?')
+                    synonym = {input}('What is another word for that?')
 
                     song(chosen_place)
                     song(synonym)
-                    song (chosen_place)
+                    song(chosen_place)
                     ```
     songs_2:
         name: sing a song! 2
