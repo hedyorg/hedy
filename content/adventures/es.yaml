@@ -1115,7 +1115,33 @@ adventures:
                     ```
             14:
                 story_text: "### Ejercicio\nEste juego de la casa encantada utiliza la conexión entre las listas que puedes usar en este nivel.\nPor ejemplo: todas las propiedades que pertenecen al zombi son las primeras en todas las listas, la bruja las segundas y el vampiro las terceras.\n¡Revisa el código y rellena  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` en los huecos correctos para hacer que el código funcione!\n"
-                example_code: "```\nnumeros = [1, 2, 3]\ni = numeros[{random}]\nsugerencia = ['gruñir', 'una carcajada', 'aleteo de alas de murciélago']\nmonstruos= ['zombi', 'bruja', 'vampiro']\nmal_destino = ['Se comen tu cerebro', 'Estás maldecido para siempre', 'Te muerden']\nbuen_destino = ['Lanzas el jamón. El zombi se distrae y empieza a comérselo.', 'Prendes fuego a las cortinas. La brujaThe witch huye por miedo al fuego', 'El vampiro odia el ajo y huye']\narmas = ['jamón', 'mechero', 'ajo']\n{print} 'Te encuentras frente a una mansión antigua'\n{print} 'Algo no va bien aquí'\n{print} 'Oyes ' _\n{print} 'Vas a explorar qué es'\n{print} 'Entras en la cocina y ves un mechero, un jamón crudo y un ajo.'\ntu_arma = {ask} '¿Qué traes contigo?'\n{print} 'Con tu ' tu_arma ' entras en el salón'\n{print} 'Allí te encuentras un ' _\narma_necesaria = _\n{if} tu_arma == arma_necesaria\n    {print} 'Utilizas tu ' tu_arma\n    {print} _\n    {print} '¡GANASTE!'\n{else}\n    {print} 'Es elegido el arma equivocada...'\n    {print} _\n    {print} 'FIN DEL JUEGO'\n```\n"
+                example_code: |
+                    ```
+                    numeros = [1, 2, 3]
+                    i = numeros[{random}]
+                    sugerencia = ['gruñir', 'una carcajada', 'aleteo de alas de murciélago']
+                    monstruos= ['zombi', 'bruja', 'vampiro']
+                    mal_destino = ['Se comen tu cerebro', 'Estás maldecido para siempre', 'Te muerden']
+                    buen_destino = ['Lanzas el jamón. El zombi se distrae y empieza a comérselo.', 'Prendes fuego a las cortinas. La brujaThe witch huye por miedo al fuego', 'El vampiro odia el ajo y huye']
+                    armas = ['jamón', 'mechero', 'ajo']
+                    {print}('Te encuentras frente a una mansión antigua')
+                    {print}('Algo no va bien aquí')
+                    {print}('Oyes ', _)
+                    {print}('Vas a explorar qué es')
+                    {print}('Entras en la cocina y ves un mechero, un jamón crudo y un ajo.')
+                    tu_arma = {input}('¿Qué traes contigo?')
+                    {print}('Con tu ', tu_arma ', entras en el salón')
+                    {print}('Allí te encuentras un ', _)
+                    arma_necesaria = _
+                    {if} tu_arma == arma_necesaria
+                        {print}('Utilizas tu ', tu_arma)
+                        {print} _
+                        {print}('¡GANASTE!')
+                    {else}
+                        {print}('Es elegido el arma equivocada...')
+                        {print} _
+                        {print}('FIN DEL JUEGO')
+                    ```
     if_command:
         default_save_name: comando_si
         description: Introducción al comando {if}

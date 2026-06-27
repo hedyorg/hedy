@@ -2788,23 +2788,23 @@ adventures:
                     weapons = ['ham', 'lighter', 'garlic']
 
                     #Telling the story of the haunted house:
-                    {print} ('You are standing in front of an old mansion')
-                    {print} ('Something is not right here')
-                    {print} ('You hear ', _)
-                    {print} ('You are going to explore it')
-                    {print} ('You enter the kitchen and see a lighter, a raw ham and a garlic.')
-                    your_weapon = {input} ('What do you bring with you?')
-                    {print} ('With your ', your_weapon, ' you enter the living room')
-                    {print} ('There you find a ', _)
+                    {print}('You are standing in front of an old mansion')
+                    {print}('Something is not right here')
+                    {print}('You hear ', _)
+                    {print}('You are going to explore it')
+                    {print}('You enter the kitchen and see a lighter, a raw ham and a garlic.')
+                    your_weapon = {input}('What do you bring with you?')
+                    {print}('With your ', your_weapon, ' you enter the living room')
+                    {print}('There you find a ', _)
                     needed_weapon = _
                     {if} your_weapon == needed_weapon:
-                        {print} ('You use your ', your_weapon)
+                        {print}('You use your ', your_weapon)
                         {print} _
-                        {print} ('YOU WIN!')
+                        {print}('YOU WIN!')
                     {else}:
-                        {print} ('You have chosen the wrong weapon...')
+                        {print}('You have chosen the wrong weapon...')
                         {print} _
-                        {print} ('GAME OVER')
+                        {print}('GAME OVER')
                     ```
                 answer_code: |
                     ```
@@ -2815,23 +2815,23 @@ adventures:
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
                     good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
-                    {print} ('You are standing in front of an old mansion')
-                    {print} ('Something is not right here')
-                    {print} ('You hear ', hint[i])
-                    {print} ('You are going to explore it')
-                    {print} ('You enter the kitchen and see a lighter, a raw ham and a garlic.')
-                    your_weapon = input ('What do you bring with you?')
-                    {print} ('With your ', your_weapon, ' you enter the living room')
-                    {print} ('There you find a ', monsters[i])
+                    {print}('You are standing in front of an old mansion')
+                    {print}('Something is not right here')
+                    {print}('You hear ', hint[i])
+                    {print}('You are going to explore it')
+                    {print}('You enter the kitchen and see a lighter, a raw ham and a garlic.')
+                    your_weapon = {input}('What do you bring with you?')
+                    {print}('With your ', your_weapon, ' you enter the living room')
+                    {print}('There you find a ', monsters[i])
                     needed_weapon = weapons[i]
                     {if} your_weapon == needed_weapon:
-                        {print} ('You use your ', your_weapon)
-                        {print} good_fate[i]
-                        {print} ('YOU WIN!')
+                        {print}('You use your ', your_weapon)
+                        {print}(good_fate[i])
+                        {print}('YOU WIN!')
                     {else}:
-                        {print} ('You have chosen the wrong weapon...')
-                        {print} bad_fate[i]
-                        {print} ('GAME OVER')
+                        {print}('You have chosen the wrong weapon...')
+                        {print}(bad_fate[i])
+                        {print}('GAME OVER')
                     ```
     hospital:
         name: hospital

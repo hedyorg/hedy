@@ -1318,23 +1318,23 @@ adventures:
                     wapens = ['rauwe ham', 'aansteker', 'knoflook']
 
                     #Het verhaal van het spookhuis vertellen:
-                    {print} 'Je staat bij een oude verlaten villa'
-                    {print} 'Iets is hier niet pluis...'
-                    {print} 'Je hoort ' _
-                    {print} 'Je gaat op ontdekking'
-                    {print} 'Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook'
-                    jouw_wapen = {ask} 'Wat neem je mee?'
-                    {print} 'Met je ' jouw_wapen ' loop je door naar de woonkamer'
-                    {print} 'Daar zie je een ' _
+                    {print}('Je staat bij een oude verlaten villa')
+                    {print}('Iets is hier niet pluis...')
+                    {print}('Je hoort ', _)
+                    {print}('Je gaat op ontdekking')
+                    {print}('Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook')
+                    jouw_wapen = {input}('Wat neem je mee?')
+                    {print}('Met je ', jouw_wapen, ' loop je door naar de woonkamer')
+                    {print}('Daar zie je een ', _)
                     benodigde_wapen = _
                     {if} jouw_wapen == benodigde_wapen
-                        {print} 'Je gebruikt je ' jouw_wapen
+                        {print}('Je gebruikt je ', jouw_wapen)
                         {print} _
-                        {print} 'Jij wint!'
+                        {print}('Jij wint!')
                     {else}
-                        {print} 'Je hebt helaas het verkeerde wapen'
+                        {print}('Je hebt helaas het verkeerde wapen')
                         {print} _
-                        {print} 'GAME OVER'
+                        {print}('GAME OVER')
                     ```
     hospital:
         name: ziekenhuis
