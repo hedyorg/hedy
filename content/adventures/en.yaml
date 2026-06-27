@@ -5987,46 +5987,46 @@ adventures:
                     sounds = ['oink', 'woof', 'moo']
 
                     #Singing Old MacDonald with three animals:
-                    {for} i {in} {range} (1, 3)
+                    {for} i {in} {range}(1, 3):
                         animal = _
                         sound = _
-                        {print} 'Old MacDonald had a farm'
-                        {print} 'E I E I O!'
-                        {print} 'and on that farm he had a ' animal
-                        {print} 'E I E I O!'
-                        {print} 'with a ' sound sound ' here'
-                        {print} 'and a ' sound sound ' there'
-                        {print} 'here a ' sound
-                        {print} 'there a ' sound
-                        {print} 'everywhere a ' sound sound
+                        {print}('Old MacDonald had a farm')
+                        {print}('E I E I O!')
+                        {print}('and on that farm he had a ', animal)
+                        {print}('E I E I O!')
+                        {print}('with a ', sound sound, ' here')
+                        {print}('and a ', sound sound, ' there')
+                        {print}('here a ', sound)
+                        {print}('there a ', sound)
+                        {print}('everywhere a ', sound sound)
                     ```
 
                     ```
                     lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', "put him in a long boat till he's sober"]
-                    {for} line {in} lines
-                        {for} i {in} {range} (1, 3)
-                            {print} line
-                        {print} 'early in the morning'
-                        {for} i {in} {range} (1, 3)
-                            {print} 'way hay and up she rises'
-                        {print} 'early in the morning'
+                    {for} line {in} lines:
+                        {for} i {in} {range}(1, 3):
+                            {print}(line)
+                        {print}('early in the morning')
+                        {for} i {in} {range}(1, 3):
+                            {print}('way hay and up she rises')
+                        {print}('early in the morning')
                     ```
                 answer_code: |
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} (1, 3):
+                    {for} i {in} {range}(1, 3):
                         animal = animals[i]
                         sound = sounds[i]
-                        {print} 'Old MacDonald had a farm'
-                        {print} 'E I E I O!'
-                        {print} 'and on that farm he had a ' animal
-                        {print} 'E I E I O!'
-                        {print} 'with a ' sound sound ' here'
-                        {print} 'and a ' sound sound ' there'
-                        {print} 'here a ' sound
-                        {print} 'there a ' sound
-                        {print} 'everywhere a ' sound sound
+                        {print}('Old MacDonald had a farm')
+                        {print}('E I E I O!')
+                        {print}('and on that farm he had a ', animal)
+                        {print}('E I E I O!')
+                        {print}('with a ', sound sound, ' here')
+                        {print}('and a ', sound sound, ' there')
+                        {print}('here a ', sound)
+                        {print}('there a ', sound)
+                        {print}('everywhere a ', sound sound)
                     ```
             15:
                 story_text: |
