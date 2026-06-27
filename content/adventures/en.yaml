@@ -3433,18 +3433,18 @@ adventures:
                 example_code: |
                     ```
                     {def} welcome_message(title, last_name, country, room_number):
-                        {print} ('Welcome to Hotel Hedy, ', title, ' ', last_name)
-                        nice_trip {is} {input} ('Did you have a nice trip from ', country, '?')
+                        {print}('Welcome to Hotel Hedy, ', title, ' ', last_name)
+                        nice_trip = {input}('Did you have a nice trip from ', country, '?')
                         {if} nice_trip == 'yes':
-                            {print} ('Lovely!')
+                            {print}('Lovely!')
                         {else}:
-                            {print} ('Sorry to hear that.')
-                            {print} ('Hopefully you can take a nice rest in you room.')
-                        {print} ('Your room number is ', room_number)
+                            {print}('Sorry to hear that.')
+                            {print}('Hopefully you can take a nice rest in you room.')
+                        {print}('Your room number is ', room_number)
 
-                    {print} ('Hello. Please fill in your information to check in.')
-                    title = {input} ('What is your title (mr, mrs, ms, dr, etc.)?')
-                    name = {input} ('What is your last name?')
+                    {print}('Hello. Please fill in your information to check in.')
+                    title = {input}('What is your title (mr, mrs, ms, dr, etc.)?')
+                    name = {input}('What is your last name?')
                     homecountry = {input}('What country do you come from?')
 
                     welcome_message(title, name, homecountry, 105)

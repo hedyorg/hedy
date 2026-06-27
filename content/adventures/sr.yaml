@@ -1177,29 +1177,23 @@ adventures:
                     Ево примера функције са аргументима комбинованим са {ask} командама.
                 example_code: |
                     ```
-                    {define} welcome_message {with} title, last_name, country, room_number
-                        {print} 'Добродошли у Хотел Хеди, ' title ' ' last_name
-                        nice_trip {is} {ask} 'Да ли сте имали лепо путовање из, ' country '?'
-                        {if} nice_trip {is} 'да'
-                            {print} 'Дивно!'
-                        {else}
-                            {print} 'Жао ми је што то чујем.'
-                            {print} 'Надам се да ћете се лепо одморити у својој соби.'
-                        {print} 'Ваш број собе је ' room_number
+                    {def} welcome_message (title, last_name, country, room_number):
+                        {print}('Добродошли у Хотел Хеди, ', title, ' ', last_name)
+                        nice_trip = {input}('Да ли сте имали лепо путовање из, ', country, '?')
+                        {if} nice_trip == 'да':
+                            {print}('Дивно!')
+                        {else}:
+                            {print}('Жао ми је што то чујем.')
+                            {print}('Надам се да ћете се лепо одморити у својој соби.')
+                        {print}('Ваш број собе је ', room_number)
 
-                    {print} 'Здраво. Молимо вас да попуните своје податке за пријаву.'
-                    title = {ask} 'Која је ваша титула (г., гђа., гђица., др, итд.)?'
-                    name = {ask} 'Које је ваше презиме?'
-                    homecountry = {ask} 'Из које земље долазите?'
+                    {print}('Здраво. Молимо вас да попуните своје податке за пријаву.')
+                    title = {input}('Која је ваша титула (г., гђа., гђица., др, итд.)?')
+                    name = {input}('Које је ваше презиме?')
+                    homecountry = {input}('Из које земље долазите?')
 
-                    {call} welcome_message {with} title, name, homecountry, 105
+                    welcome_message (title, name, homecountry, 105)
                     ```
-
-                    title = {ask} 'Која је ваша титула (г., гђа., гђица., др, итд.)?'
-                    name = {ask} 'Које је ваше презиме?'
-                    homecountry = {ask} 'Из које земље долазите?'
-
-                    {call} welcome_message {with} title, name, homecountry, 105
     if_command:
         name: '{if} и {else}'
         description: Увођење команде {if}

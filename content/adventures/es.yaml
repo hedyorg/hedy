@@ -2784,7 +2784,25 @@ adventures:
         levels:
             15:
                 story_text: "En la aventura anterior has aprendido a utilizar un argumento en una función, y has aprendido a cómo combinarlo con un {ask}.\nTe estarás preguntando por qué utilizar las funciones, porque en el ejemplo las funciones en el son de una línea de código.\nAhora te mostraremos como es una función más grande y también utilizaremos varios argumentos. Verás como es mucho mejor utilizar una función una vez que se vuelve más grande.\nAquí tienes un ejemplo de una función con argumentos combinada con comandos {ask}.\n"
-                example_code: "```\n{define} mensaje_bienvenida {with} titulo, apellido, pais, numero_habitacion\n    {print} 'Bienvenido al Hotel Hedy, ' titulo ' ' apellido\n    buen_viaje {is} {ask} '¿Tuviste un buen viaje desde ' pais '?'\n    {if} buen_viaje {is} 'sí'\n        {print} '¡Maravilloso!'\n    {else}\n        {print} 'Siento oir eso.'\n        {print} 'Espero que puedas tener un buen descanso en tu habitación'\n    {print} 'Tu número de habitación es ' numero_habitacion\n\n{print} 'Hola. Por favor, rellena tu información para registrarte.'\ntitulo = {ask} '¿Cuál es tu título (Sr., Sra., Dña., D., etc.)?'\nnombre = {ask} '¿Cómo te apellidas?'\npais_procedencia = {ask} '¿De qué país procede?'\n\n{call} mensaje_bienvenida {with} titulo, nombre, pais_procedencia, 105\n```\n\ntitulo = {ask} '¿Cuál es tu título (Sr., Sra., Dña., D., etc.)?'\nnombre = {ask} '¿Cómo te apellidas?'\npais_procedencia = {ask} '¿De qué país procede?'\n\n{call} mensaje_bienvenida {with} titulo, nombre, pais_procedencia, 105\n"
+                example_code: |
+                    ```
+                    {def} mensaje_bienvenida (titulo, apellido, pais, numero_habitacion):
+                        {print}('Bienvenido al Hotel Hedy, ', titulo, ' ', apellido)
+                        buen_viaje = {input}('¿Tuviste un buen viaje desde ', pais, '?')
+                        {if} buen_viaje == 'sí':
+                            {print}('¡Maravilloso!')
+                        {else}:
+                            {print}('Siento oir eso.')
+                            {print}('Espero que puedas tener un buen descanso en tu habitación')
+                        {print}('Tu número de habitación es ', numero_habitacion)
+
+                    {print}('Hola. Por favor, rellena tu información para registrarte.')
+                    titulo = {input}('¿Cuál es tu título (Sr., Sra., Dña., D., etc.)?')
+                    nombre = {input}('¿Cómo te apellidas?')
+                    pais_procedencia = {input}('¿De qué país procede?')
+
+                    mensaje_bienvenida(titulo, nombre, pais_procedencia, 105)
+                    ```
     calculator_2:
         name: Calculadora 2
         default_save_name: Calculadora 2

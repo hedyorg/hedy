@@ -1128,7 +1128,25 @@ adventures:
                     Być może zastanawiałeś się, dlaczego używasz funkcji, ponieważ funkcje w tym przykładzie były tylko jednym wierszem kodu.
                     Teraz pokażemy Ci, jak wygląda większa funkcja, i będziemy również korzystać z wielu argumentów. Zobaczysz, że lepiej jest korzystać z funkcji, jeżeli funkcja się powiększy.
                     Oto przykład funkcji z argumentami połączonymi z poleceniami `{ask}`.
-                example_code: "```\n{def} wiadomość_powitalna(tytuł, nazwisko, kraj, numer_pokoju):\n    {print} ('Witaj w Hotelu Hedy, ', tytuł, ' ', nazwisko)\n    miła_podróż {is} {input} ('Czy miał Pana/Pani miłą podróż z ', kraj, '?')\n    {if} miła_podróż == 'tak':\n        {print} ('Wspaniale!')\n    {else}:\n        {print} ('Przykro mi to słyszeć.')\n        {print} ('Na szczęście może Pan/Pani odpocząć w swoim pokoju hotelowym.')\n    {print} ('Pana/Pani numer pokoju to ', numer_pokoju)\n\n{print} ('Witam. Proszę podać dane do zameldowania.')\ntytuł = {input} ('Jaki jest Pana/Pani tytuł (Pan, Pani, Panna, Doktor, itp.)?')\nnazwa = {input} ('Jak ma Pan/Pani na nazwisko?')\nkrajpochodzenia = {input}('Z jakiego kraju Pan/Pani przyjechał(a)?')\n\nwiadomość_powitalna(tytuł , nazwa , krajpochodzenia , 105)\n```\n"
+                example_code: |
+                    ```
+                    {def} wiadomość_powitalna(tytuł, nazwisko, kraj, numer_pokoju):
+                        {print}('Witaj w Hotelu Hedy, ', tytuł, ' ', nazwisko)
+                        miła_podróż = {input}('Czy miał Pana/Pani miłą podróż z ', kraj, '?')
+                        {if} miła_podróż == 'tak':
+                            {print}('Wspaniale!')
+                        {else}:
+                            {print}('Przykro mi to słyszeć.')
+                            {print}('Na szczęście może Pan/Pani odpocząć w swoim pokoju hotelowym.')
+                        {print}('Pana/Pani numer pokoju to ', numer_pokoju)
+
+                    {print}('Witam. Proszę podać dane do zameldowania.')
+                    tytuł = {input}('Jaki jest Pana/Pani tytuł (Pan, Pani, Panna, Doktor, itp.)?')
+                    nazwa = {input}('Jak ma Pan/Pani na nazwisko?')
+                    krajpochodzenia = {input}('Z jakiego kraju Pan/Pani przyjechał(a)?')
+
+                    wiadomość_powitalna(tytuł , nazwa , krajpochodzenia , 105)
+                    ```
         name: hotel
         default_save_name: hotel
         description: hotel
