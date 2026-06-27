@@ -2378,9 +2378,9 @@ adventures:
                     {print} ('Antwoord optie A')
                     {print} ('Antwoord optie B')
                     antwoord = {ask} 'Welk antwoord?'
-                    {if} antwoord {is} 'A':
+                    {if} antwoord == 'A':
                         punten_a = punten_a + 1
-                    {if} antwoord {is} 'B':
+                    {if} antwoord == 'B':
                         punten_b = punten_b + 1
                     
                     #Uitslag van de quiz printen:

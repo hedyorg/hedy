@@ -4809,9 +4809,9 @@ adventures:
                     {print} ('Answer option A')
                     {print} ('Answer option B')
                     answer = {ask} 'Which answer?'
-                    {if} answer {is} 'A':
+                    {if} answer == 'A':
                         points_a = points_a + 1
-                    {if} answer {is} 'B':
+                    {if} answer == 'B':
                         points_b = points_b + 1
 
                     #Printing the endresults:
