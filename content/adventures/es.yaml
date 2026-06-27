@@ -418,6 +418,9 @@ adventures:
                     {print} 'Tu nota media es ' nota_media
                     ```
                 story_text: "En esta aventura vamos a crear una calculadora que calcule tu nota media por ti. Si consigues que tu calculadora funcione, puedes avanzar a la siguiente aventura, que te permitirá añadir dos funciones adicionales.\n\n### Ejercicio 1\nRellena los huecos en blanco para hacer que la calculadora funcione.\n* Empieza por la cuarta línea, añade una pregunta para averiguar que nota obtuvo el alumno.\n* En la quinta línea, querrás calcular el total de todas las notas, así que total = total + nota.\n* Después tenemos que establecer el valor devuelto. Queremos devolver la media, así que el total dividio por la cantidad de pruebas (4).\n* Por último completamos el código llamando a la función de la línea 8.\n\n¿Lo conseguiste? ¡Increíble! ¿Quieres añadir aún más a tu calculadora? **¡Esta aventura continúa en la siguiente aventura!**\n"
+            11:
+                example_code: "```\nnumeros = 1, 2, 3\n{for} _\n    {for} _\n        respuesta = {ask} _\n        correcta = numero_1 * numero_2\n        {if} respuesta {is} correcta\n            {print} '¡Gran trabajo!'\n        {else}\n            {print} 'No es correcto. La respuesta correcta es ' correcta\n```\n"
+                story_text: "¡Este juego de calculadora te ayuda a practicar las tablas de multiplicación!\n### Ejercicio\nRellena los huecos en blanco. Queremos que este programa pregunte al jugador las siguientes preguntas:\n```\n¿Cuánto es 1 veces 1?\n¿Cuánto es 1 veces 2?\n¿Cuánto es 1 veces 3?\n¿Cuánto es 2 veces 1?\n¿Cuánto es 2 veces 2?\n¿Cuánto es 2 veces 3?\n¿Cuánto es 3 veces 1?\n¿Cuánto es 3 veces 2?\n¿Cuánto es 3 veces 3?\n_\n```\n"
             16:
                 story_text: |
                     Puedes agregar el bucle `{while}` al jugo de la calculadora que aprendiste a hacer en el nivel anterior.
@@ -426,10 +429,24 @@ adventures:
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
                     Then `{call}` the function.
-                example_code: "```\n{define} nueva_pregunta\n    numeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    numero_1 = numeros {at} {random}\n    numero_2 = numeros {at} {random}\n    correcta = numero_1 * numero_2\n    respuesta = 0\n    _\n    _\n    _\n    {print} '¡Bien hecho!'\n\n{print} 'Da 10 respuestas correctas para ganar!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} '¡Ganaste!'\n```\n"
-            11:
-                example_code: "```\nnumeros = 1, 2, 3\n{for} _\n    {for} _\n        respuesta = {ask} _\n        correcta = numero_1 * numero_2\n        {if} respuesta {is} correcta\n            {print} '¡Gran trabajo!'\n        {else}\n            {print} 'No es correcto. La respuesta correcta es ' correcta\n```\n"
-                story_text: "¡Este juego de calculadora te ayuda a practicar las tablas de multiplicación!\n### Ejercicio\nRellena los huecos en blanco. Queremos que este programa pregunte al jugador las siguientes preguntas:\n```\n¿Cuánto es 1 veces 1?\n¿Cuánto es 1 veces 2?\n¿Cuánto es 1 veces 3?\n¿Cuánto es 2 veces 1?\n¿Cuánto es 2 veces 2?\n¿Cuánto es 2 veces 3?\n¿Cuánto es 3 veces 1?\n¿Cuánto es 3 veces 2?\n¿Cuánto es 3 veces 3?\n_\n```\n"
+                example_code: |
+                    ```
+                    {def} nueva_pregunta:
+                        numeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        numero_1 = numeros {at} {random}
+                        numero_2 = numeros {at} {random}
+                        correcta = numero_1 * numero_2
+                        respuesta = 0
+                        _
+                        _
+                        _
+                        {print}('¡Bien hecho!')
+
+                    {print}('Da 10 respuestas correctas para ganar!')
+                    {for} i {in} {range}(1, 10):
+                        _
+                    {print} '¡Ganaste!'
+                    ```
     clear_command:
         default_save_name: comando_limpiar
         description: Comando {clear}

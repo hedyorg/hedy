@@ -504,7 +504,24 @@ adventures:
                     ### Übung
                     Ergänze die `{while}` Schleife in der Funktion, frage die Spieler, was zahl_1 mal zahl_2 ist und drucke ihre Antwort.
                     Dann rufe die Funktion auf.
-                example_code: "```\n{define} new_question():\n    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n    number_1 = numbers[random]\n    number_2 = numbers[random]\n    correct = number_1 * number_2\n    answer = 0\n    _\n    _\n    _\n    {print} ('Gut gemacht!')\n\n{print} ('Gib 10 richtige Antworten, um zu gewinnen!')\n{for} i {in} {range} 1 {to} 10:\n    _\n{print} ('Gewonnen!')\n```\n"
+                example_code: |
+                    ```
+                    {def} new_question():
+                        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        number_1 = numbers[random]
+                        number_2 = numbers[random]
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print}('Gut gemacht!')
+
+                    {print}('Gib 10 richtige Antworten, um zu gewinnen!')
+                    {for} i {in} {range}(1, 10):
+                        _
+                    {print} ('Gewonnen!')
+                    ```
     calculator_2:
         name: Taschenrechner 2
         levels:

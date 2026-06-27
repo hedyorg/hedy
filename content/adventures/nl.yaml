@@ -445,7 +445,7 @@ adventures:
                 example_code: |
                     ```
                     #Een vraag definiëren:
-                    {define} nieuwe_vraag
+                    {def} nieuwe_vraag():
                         nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         nummer_1 = nummers {at} {random}
                         nummer_2 = nummers {at} {random}
@@ -454,13 +454,13 @@ adventures:
                         _
                         _
                         _
-                        {print} 'Well done!'
+                        {print}('Goed gedaan!')
                     
                     #De vragen stellen:
-                    {print} 'Geef 10 goede antwoorden om te winnen!'
-                    {for} i {in} {range} 1 {to} 10
+                    {print}('Geef 10 goede antwoorden om te winnen!')
+                    {for} i {in} {range}(1, 10):
                         _
-                    {print} 'Je hebt gewonnen!'
+                    {print}('Je hebt gewonnen!')
                     ```
     calculator_2:
         name: rekenmachine 2

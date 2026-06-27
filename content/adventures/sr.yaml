@@ -446,7 +446,7 @@ adventures:
                     Затим `{call}` функцију.
                 example_code: |
                     ```
-                    {define} new_question
+                    {def} new_question():
                         numbers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         number_1 = numbers {at} {random}
                         number_2 = numbers {at} {random}
@@ -455,12 +455,12 @@ adventures:
                         _
                         _
                         _
-                        {print} 'Браво!'
+                        {print}('Браво!')
 
-                    {print} 'Дајте 10 тачних одговора да победите!'
-                    {for} i {in} {range} 1 {to} 10
+                    {print}('Дајте 10 тачних одговора да победите!')
+                    {for} i {in} {range}(1, 10):
                         _
-                    {print} 'Победили сте!'
+                    {print}('Победили сте!')
                     ```
     calculator_2:
         name: Калкулатор 2

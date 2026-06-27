@@ -668,15 +668,32 @@ adventures:
                 story_text: "Když už umíte počítat, můžete si kalkulačku vyrobit sami!\n"
                 example_code_2: "```\ncorrect_answer = 11 * 27\nodpověď = {ask} 'Kolik je 11 krát 27?'\n{if} odpověď {is} _ {print} 'dobrá práce!'\n{else} {print} 'Špatně! Bylo to ' _\n```\n"
                 example_code: "```\nnumber_1 = {ask} 'Fill in the first number:'\nnumber_2 = {ask} 'Fill in the second number:'\ncorrect_answer = number_1 * number_2\n{print} number_1 ' times ' number_2 ' is ' correct_answer\n```\n"
-            16:
-                story_text: "Smyčku `{while}` můžete přidat do hry s kalkulačkou, kterou jste se naučili vytvořit v předchozí úrovni.\nTím zajistíte, že hráč nebude moci pokračovat na další otázku, pokud odpoví špatně.\n\n### Cvičení\nPřidejte do funkce smyčku `{while}`, zeptejte se hráče, kolik je číslo_1 krát číslo_2, a vypište jeho odpověď.\nPoté `{call}`  funkci.\n"
-                example_code: "```\n{define} nová_otázka\n    čísla = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\nčíslo_1 = čísla {at} {random}\nčíslo_2 = čísla {at} {random}\n    správně = číslo_1 * číslo_2\n    odpověď = 0\n    _\n    _\n    _\n    {print} 'Dobrá práce!'\n\n{print} 'Dejte 10 správných odpovědí a vyhrajte!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} 'Vyhrál jsi!'\n```\n"
             11:
                 story_text: "Tato hra s kalkulačkou vám pomůže procvičit si násobilku!\n### Cvičení\nDoplňte prázdná místa. Chceme, aby tento program položil hráči tyto otázky:\n```\nKolik je 1 krát 1?\nKolik je 1 krát 2?\nKolik je 1 krát 3?\nKolik je 2 krát 1?\nKolik je 2 krát 2?\nKolik je 2 krát 3?\nKolik je 3 krát 1?\nKolik je 3 krát 2?\nKolik je 3 krát 3?\n_\n```\n"
                 example_code: "```\nnumbers = 1, 2, 3\n{for} _\n    {for} _\n        odpověď = {ask} _\n        správně = číslo_1 * číslo_2\n        {if} odpověď {is} správně\n            {print} 'Skvělá práce!'\n        {else}\n            {print} 'To je špatně. Správná odpověď je ' správně\n```\n"
             10:
                 example_code: "```\nscore = 0\n{repeat} 10 {times}\n    čísla = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    číslor_1 = čísla {at} {random}\n    číslo_2 = čísla {at} {random}\n    správná_odpověď = číslo_1 * číslo_2\n    {print} 'Kolik je ' číslo_1 ' krát ' číslo_2 '?'\n    odpověď = {ask} 'Zde napište svou odpověď...'\n    {print} 'Vaše odpověď je ' odpověď\n    {if} _ {is} _\n        skóre = skóre + 1\n{print} 'Skvělá práce! Vaše skóre je... ' skóre ' z 10!'\n```\n"
                 story_text: "V předchozí úrovni jste vytvořili kalkulačku. V této úrovni můžete tento kód rozšířit tak, aby se ptal na více otázek.\n\n### Cvičení 1\nDokážete dokončit řádek 10, aby kód fungoval?\n\n### Cvičení 2\nDejte hráči zpětnou vazbu, když zadá odpověď, například `{print} 'Correct!'` nebo `{print} 'Wrong! The correct answer is ' correct_answer`.\n"
+            16:
+                story_text: "Smyčku `{while}` můžete přidat do hry s kalkulačkou, kterou jste se naučili vytvořit v předchozí úrovni.\nTím zajistíte, že hráč nebude moci pokračovat na další otázku, pokud odpoví špatně.\n\n### Cvičení\nPřidejte do funkce smyčku `{while}`, zeptejte se hráče, kolik je číslo_1 krát číslo_2, a vypište jeho odpověď.\nPoté `{call}`  funkci.\n"
+                example_code: |
+                    ```
+                    {def} nová_otázka():
+                        čísla = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        číslo_1 = čísla {at} {random}
+                        číslo_2 = čísla {at} {random}
+                        správně = číslo_1 * číslo_2
+                        odpověď = 0
+                        _
+                        _
+                        _
+                        {print}('Dobrá práce!')
+
+                    {print}('Dejte 10 správných odpovědí a vyhrajte!')
+                    {for} i {in} {range}(1, 10):
+                        _
+                    {print}('Vyhrál jsi!')
+                    ```
         name: Kalkulačka
         default_save_name: Kalkulačka
     add_remove_command:
