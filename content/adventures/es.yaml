@@ -1484,7 +1484,16 @@ adventures:
                 story_text: "'Utiliza las funciones en tus canciones! Como puedes ver en el código de ejemplo, puedes hacer una función por cada estrofa de Estrellita Dónde Estás. Una vez que has programado las tres primeras estrofas, todo lo que tienes que hacer es llamar a las funciones en el orden en el que quieres que suenen.\n\n### Ejercicio\nCompleta la canción Estrellita Dónde Estás.\nDespués echa un vistazo a las canciones que has programado en los niveles anteriores, ¿puedes mejorar y acortar también esos códigos utilizando las funciones?\n"
             16:
                 story_text: "**Precaución** ¡Esta aventura puede ser extremadamente molesta!\nTambién podemos utilizar el comando {while} para repetir una canción para siempre.\n\n### Ejercicio\nCompleta la canción interminable.\n"
-                example_code: "```\n{def} cancion\n    {play} _\n\nsi_o_no = {input}('¿Quieres oír mi canción interminable?')\n{while} si_o_no = 'sí':\n    cancion()\n    {print} '🥳'\n```\n"
+                example_code: |
+                    ```
+                    {def} cancion():
+                        {play} _
+
+                    si_o_no = {input}('¿Quieres oír mi canción interminable?')
+                    {while} si_o_no = 'sí':
+                        cancion()
+                        {print}('🥳')
+                    ```
     parrot:
         name: Loro
         default_save_name: Loro

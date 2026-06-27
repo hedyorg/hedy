@@ -1534,13 +1534,13 @@ adventures:
                     Dokończ niekończącą się piosenkę
                 example_code: |
                     ```
-                    {def} piosenka
+                    {def} piosenka():
                         {play} _
 
                     tak_lub_nie = {input}('Czy chcesz usłyszeć moją niekończącą się piosenkę?')
                     {while} tak_lub_nie = 'tak':
                         piosenka()
-                        {print} '🥳'
+                        {print}('🥳')
                     ```
             6:
                 example_code: "```\nnastrój = {ask} 'Jak się dzisiaj czujesz?'\n{if} nastrój {is} szczęśliwy\n    {play} C4\n    {play} E4\n    {play} G4\n    {play} C5\n{elif} nastrój {is} smutny\n    {play} _\n{elif} nastrój {is} _\n    {play} _\n```\n"

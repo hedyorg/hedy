@@ -2026,13 +2026,13 @@ adventures:
                 example_code: |
                     ```
                     #Een liedje schrijvenL
-                    {def} lied
+                    {def} lied():
                         {play} _
                     #Het liedje afspelen:
                     ja_of_nee = {input}('Wil je mijn liedje zonder einde horen?')
                     {while} ja_of_nee = 'ja':
                         lied()
-                        {print} '🥳'
+                        {print}('🥳')
                     ```
     music_2:
         name: muziek 2

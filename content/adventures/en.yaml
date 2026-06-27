@@ -4323,17 +4323,17 @@ adventures:
                     Finish the never-ending song.
                 example_code: |
                     ```
-                    {def} song
+                    {def} song():
                         {play} _
 
                     yes_or_no = {input}('Do you want to hear my never-ending song?')
                     {while} yes_or_no = 'yes':
                         song()
-                        {print} '🥳'
+                        {print}('🥳')
                     ```
                 answer_code: |
                     ```
-                    {def} song ():
+                    {def} song():
                         {play} C3
                         {play} D3
                         {play} E3

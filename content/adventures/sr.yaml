@@ -1509,13 +1509,13 @@ adventures:
                     Завршите бескрајну песму.
                 example_code: |
                     ```
-                    {def} song
+                    {def} song():
                         {play} _
 
                     yes_or_no = {input}('Да ли желите да чујете моју бескрајну песму?')
                     {while} yes_or_no = 'да':
                         song()
-                        {print} '🥳'
+                        {print}('🥳')
                     ```
     parrot:
         name: Папагај
