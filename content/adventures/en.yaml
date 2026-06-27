@@ -2336,10 +2336,10 @@ adventures:
                     #Asking questions:
                     answer = {input}('What is 2 + 2?')
                     {if} answer == 4:
-                        {print} 'Right!'
+                        {print}('Right!')
                         play_happy_tune()
-                    {else}
-                        {print} 'Wrong!'
+                    {else}:
+                        {print}('Wrong!')
                     ```
                 answer_code: |-
                     ```
@@ -2355,10 +2355,10 @@ adventures:
 
                     answer = {input}('What is 2 + 2?')
                     {if} answer == 4:
-                        {print} 'Right!'
+                        {print}('Right!')
                         play_happy_tune()
                     {else}
-                        {print} 'Wrong!'
+                        {print}('Wrong!')
                         play_sad_tune()
                     ```
     functions_2:

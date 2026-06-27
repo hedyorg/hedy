@@ -1044,10 +1044,10 @@ adventures:
                     #Vragen stellen:
                     antwoord = {input}('Wat is 2 + 2?')
                     {if} antwoord == 4:
-                        {print} 'Goed!'
+                        {print}('Goed!')
                         speel_blij_deuntje()
-                    {else}
-                        {print} 'Fout!'
+                    {else}:
+                        {print}('Fout!')
                     ```
                 answer_code: |
                     ```
@@ -1063,10 +1063,10 @@ adventures:
 
                     antwoord = {input}('Wat is 2 + 2?')
                     {if} antwoord == 4:
-                        {print} 'Goed!'
+                        {print}('Goed!')
                         speel_blij_deuntje()
-                    {else}
-                        {print} 'Fout!'
+                    {else}:
+                        {print}('Fout!')
                         speel_sip_deuntje()
                     ```
     functions_2:
