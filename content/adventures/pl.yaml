@@ -1653,11 +1653,11 @@ adventures:
                         do_zaoszczędzenia = pragnienie - pieniądze
                         tygodnie = do_zaoszczędzenia / kieszonkowe
                         {if} pragnienie _  pieniądze:
-                            {print} ('Musisz jeszcze trochę zaoszczędzić!')
-                            {print} ('Będziesz potrzebował jeszcze ', tygodnie , ' tygodni.')
+                            {print}('Musisz jeszcze trochę zaoszczędzić!')
+                            {print}('Będziesz potrzebował jeszcze ', tygodnie , ' tygodni.')
                         {else}:
-                            {print} ('Świetnie! Masz wystarczająco dużo!')
-                            {print} ('Chodźmy na zakupy!')
+                            {print}('Świetnie! Masz wystarczająco dużo!')
+                            {print}('Chodźmy na zakupy!')
 
                     pieniądze = {input}('Ile pieniędzy zaoszczędziłeś?')
                     pragnienie = {input}('Ile pieniędzy potrzebujesz?')

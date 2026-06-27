@@ -1444,21 +1444,21 @@ adventures:
             15:
                 example_code: |
                     ```
-                    _ calculate_budget with wish, money, allowance
+                    _ calculate_budget(wish, money, allowance):
                         to_save = wish - money
                         weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
-                        {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
+                        {if} wish _ money:
+                            {print}('You need to save up some more!')
+                            {print}('Youll need ' weeks ' more weeks.')
+                        {else}:
+                            {print}('Great! You have enough')
+                            {print}('Lets go shopping!')
 
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
+                    money = {input}('How much money have you saved?')
+                    wish = {input}('How much money do you need?')
+                    allowance = {input}('How much pocket money do you get each week?')
 
-                    {call} calculate_budget with _, _, _
+                    _
                     ```
     print_command:
         default_save_name: affiche

@@ -1567,21 +1567,21 @@ adventures:
                     通过填空来完成这段代码!
                 example_code: |
                     ```
-                    _ 计算预算 {with} 愿望, 金钱, 零花钱
+                    _ 计算预算 (愿望, 金钱, 零花钱):
                         尚待储蓄 = 愿望 - 金钱
                         周数 = 尚待储蓄 / 零花钱
-                        {if} 愿望 _ 金钱
-                            {print} '你需要存更多钱!'
-                            {print} '你需要' 周数 ' 更多的周.'
-                        {else}
-                            {print} '太棒了，你已经存够了钱'
-                            {print} '让我们去消费吧!'
+                        {if} 愿望 _ 金钱:
+                            {print}('你需要存更多钱!')
+                            {print}('你需要' 周数 ' 更多的周.')
+                        {else}:
+                            {print}('太棒了，你已经存够了钱')
+                            {print}('让我们去消费吧!')
 
-                    money = {ask} '你存了多少钱?'
-                    wish = {ask} '你需要多少钱?'
-                    allowance = {ask} '你每周拿到多少零花钱?'
+                    money = {input}('你存了多少钱?')
+                    wish = {input}('你需要多少钱?')
+                    allowance = {input}('你每周拿到多少零花钱?')
 
-                    {call} _
+                    _
                     ```
     print_command:
         description: 介绍print命令

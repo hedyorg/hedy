@@ -1547,12 +1547,29 @@ adventures:
         default_save_name: Guardiola
         name: guardiola
         levels:
-            15:
-                story_text: "### Exercici\nEn aquest nivell pots fer que Hedy t'expliqui si has estalviat prou diners!\nAcaba aquest codi omplint els buits!\n"
-                example_code: "```\n_ calcula_pressupost (objectiu, diners, paga):\n    a_estalviar = objectiu- diners\n    setmanes = a_estalviar / paga\n    {if} objectiu _ diners\n        {print} (\"Has d'estalviar més!\")\n        {print} (\"Necessites \", setmanes, \" setmanes més.\")\n    {else}\n        {print} (\"Perfecte! Ja en tens suficient\")\n        {print} (\"Ja ho pots comprar!\")\n\ndiners = {input} (\"Quant has estalviat?\")\nobjectiu= {input} (\"Quants diners necessites?\")\npaga = {input} (\"Quants diners aconsegueixes cada setmana?\")\n\n_\n```\n"
             7:
                 example_code: "```\n{print} \"La teva guardiola digital\"\ndesig = {ask} \"Què vols comprar?\"\npreu = {ask} \"Quant costa?\"\nestalviat = {ask} \"Quants diners ja has estalviat?\"\npaga = {ask} \"Quants diners aconsegueixes cada setmana?\"\na_estalviar = preu - estalviat\nweeks = a_estalviar / paga\n{print} \"Ho podràs comprar \" _ \" en \" _ \" setmanes.\"\n```\n"
                 story_text: "En aquesta aventura aprendràs a crear una guardiola digital.\n\n### Exercici\nAcaba el codi per calcular quants diners tens i quant temps necessites estalviar per comprar allò que vols!\n**Extra** Potser ja has estalviat alguns diners? Dedueix-los de la quantitat que hauràs d'estalviar.\n"
+            15:
+                story_text: "### Exercici\nEn aquest nivell pots fer que Hedy t'expliqui si has estalviat prou diners!\nAcaba aquest codi omplint els buits!\n"
+                example_code: |
+                    ```
+                    _ calcula_pressupost(objectiu, diners, paga):
+                        a_estalviar = objectiu- diners
+                        setmanes = a_estalviar / paga
+                        {if} objectiu _ diners:
+                            {print}("Has d'estalviar més!")
+                            {print}("Necessites ", setmanes, " setmanes més.")
+                        {else}:
+                            {print}("Perfecte! Ja en tens suficient")
+                            {print}("Ja ho pots comprar!")
+
+                    diners = {input}("Quant has estalviat?")
+                    objectiu= {input}("Quants diners necessites?")
+                    paga = {input}("Quants diners aconsegueixes cada setmana?")
+
+                    _
+                    ```
         description: Conta el teu efectiu!
     random_command:
         levels:

@@ -1602,7 +1602,24 @@ adventures:
                     ```
             15:
                 story_text: "### Ejercicio\n¡En este nivel puedes dejar que Hedy te diga si has ahorrado suficiente dinero!\n¡Completa el código rellenando los huecos en blanco!\n"
-                example_code: "```\n_ calcular_presupuesto {with} deseo, dinero, asignación\n    para_ahorrar = deseo - dinero\n    semanas = para_ahorrar / asignación\n    {if} deseo _ dinero\n        {print} '¡Tienes que ahorrar un poco más!'\n        {print} 'Necesitarás ' semanas ' semanas más.'\n    {else}\n        {print} '¡Genial! Tienes suficiente'\n        {print} '¡Vayamos de compras!'\n\ndinero = {ask} '¿Cuánto dinero has ahorrado?'\ndeseo = {ask} '¿Cuánto dinero necesitas?'\nasignación = {ask} '¿Cuánto dinero ahorras cada semana?'\n\n{call} _\n```\n"
+                example_code: |
+                    ```
+                    _ calcular_presupuesto(deseo, dinero, asignación):
+                        para_ahorrar = deseo - dinero
+                        semanas = para_ahorrar / asignación
+                        {if} deseo _ dinero:
+                            {print}('¡Tienes que ahorrar un poco más!')
+                            {print}('Necesitarás ' semanas ' semanas más.')
+                        {else}:
+                            {print}('¡Genial! Tienes suficiente')
+                            {print}('¡Vayamos de compras!')
+
+                    dinero = {input}('¿Cuánto dinero has ahorrado?')
+                    deseo = {input}('¿Cuánto dinero necesitas?')
+                    asignación = {input}('¿Cuánto dinero ahorras cada semana?')
+
+                    _
+                    ```
     print_command:
         default_save_name: imprimir
         description: Introducción al comando imprimir

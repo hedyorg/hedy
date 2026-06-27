@@ -1949,21 +1949,21 @@ adventures:
                     Vervollständige den Code, in dem du die Leerstellen füllst.
                 example_code: |
                     ```
-                    _ berechne_budget {with} wunsch, erspartes, taschengeld
+                    _ berechne_budget(wunsch, erspartes, taschengeld):
                         zu_sparen = wunsch - erspartes
                         wochen = zu_sparen / taschengeld
-                        {if} wunsch _ erspartes
-                            {print} 'Du musst noch weiter sparen!'
-                            {print} 'Du brauchst noch ' wochen ' weitere Wochen.'
-                        {else}
-                            {print} 'Großartige! Du hast genug'
-                            {print} 'Kommt, wir gehen einkaufen!'
+                        {if} wunsch _ erspartes:
+                            {print}('Du musst noch weiter sparen!')
+                            {print}('Du brauchst noch ', wochen, ' weitere Wochen.')
+                        {else}:
+                            {print}('Großartige! Du hast genug')
+                            {print}('Kommt, wir gehen einkaufen!')
 
-                    erspartes = {ask} 'Wie viel Geld hast du gespart?'
-                    wunsch = {ask} 'Wie viel Geld brauchst du?'
-                    taschengeld = {ask} 'Wie viel Taschengeld bekommst du jede Woche?'
+                    erspartes = {input}('Wie viel Geld hast du gespart?')
+                    wunsch = {input}('Wie viel Geld brauchst du?')
+                    taschengeld = {input}('Wie viel Taschengeld bekommst du jede Woche?')
 
-                    {call} _
+                    _
                     ```
     print_command:
         levels:

@@ -4701,11 +4701,11 @@ adventures:
                         to_save = wish - money
                         weeks = to_save / allowance
                         {if} wish _ money:
-                            {print} ('You need to save up some more!')
-                            {print} ("You'll need ', weeks, ' more weeks.")
+                            {print}('You need to save up some more!')
+                            {print}("You'll need ', weeks, ' more weeks.")
                         {else}:
-                            {print} ('Great! You have enough')
-                            {print} ("Let's go shopping!")
+                            {print}('Great! You have enough')
+                            {print}("Let's go shopping!")
 
                     money = {input}('How much money have you saved?')
                     wish = {input}('How much money do you need?')

@@ -2296,21 +2296,21 @@ adventures:
                     Maak de code af door de lege plekken in te vullen!
                 example_code: |
                     ```
-                    _ bereken_budget {with} wens, geld, zakgeld
+                    _ bereken_budget(wens, geld, zakgeld):
                         sparen = wens - geld
                         weken = sparen / zakgeld
-                        {if} wens _ geld
-                            {print} 'Helaas even doorsparen!'
-                            {print} 'Je moet nog ' weken ' weken.'
-                        {else}
-                            {print} 'Hoera, je hebt genoeg!'
-                            {print} 'Op naar de winkel!'
+                        {if} wens _ geld:
+                            {print}('Helaas even doorsparen!')
+                            {print}('Je moet nog ' weken ' weken.')
+                        {else}:
+                            {print}('Hoera, je hebt genoeg!')
+                            {print}('Op naar de winkel!')
 
-                    geld = {ask} 'Hoeveel geld heb je al gespaard?'
-                    wens = {ask} 'Hoeveel geld heb je nodig?'
-                    zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
+                    geld = {input}('Hoeveel geld heb je al gespaard?')
+                    wens = {input}('Hoeveel geld heb je nodig?')
+                    zakgeld = {input}('Hoeveel zakgeld krijg je per week?')
 
-                    {call} _
+                    _
                     ```
     print_command:
         description: Introductie print commando
