@@ -2431,8 +2431,8 @@ adventures:
                         discount_amount = amount * percentage
                         {return} amount - discount_amount
 
-                    old_price = {input} ('How much is on the price tag?')
-                    discount = {input} ('What percentage is the discount?')
+                    old_price = {input}('How much is on the price tag?')
+                    discount = {input}('What percentage is the discount?')
 
                     new_price = _ calculate_new_price(old_price, _)
                     {print}('The new price is ', new_price, ' dollar')
