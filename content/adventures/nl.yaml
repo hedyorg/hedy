@@ -3550,7 +3550,7 @@ adventures:
                     Spiraal
                     ```
                     afstand = 5
-                    {while} afstand < 200
+                    {while} afstand < 200:
                         afstand = afstand + 5
                          _
                     ```
@@ -3559,14 +3559,14 @@ adventures:
                 example_code_2: |
                     Waaier
                     ```
-                    {define} teken_een_vierkant {with} zijde
+                    {def} teken_een_vierkant(zijde):
                     _
 
                     i = 100
-                    {while} i > 1
-                        _ {with} i
+                    {while} i > 1:
+                        _ (i)
                         _
-                        i {is} i - 3
+                        i = i - 3
                     ```
                 story_text_3: |
                     Ster <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">

@@ -1832,10 +1832,28 @@ adventures:
                             {call} draw_a_quarte
                     ```
             16:
-                example_code: "Спіраль\nй й\nвідстань = 5\n{while} відстань < 200\nвідстань = відстань + 5\nУ\nй й\n"
+                example_code: |
+                    Спіраль
+                    ```
+                    відстань = 5
+                    {while} відстань < 200:
+                        відстань = відстань + 5
+                        _
+                    ```
                 story_text_3: "Зірка <img src=\"https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93\" width=\"150\">\n"
+                example_code_2: |
+                    Вентилятор
+                    ```
+                    {def} Draw_a_square(сторона)
+                    _
+
+                    i = 100
+                    {while} i > 1:
+                        _ (i)
+                        _
+                        i = i - 3
+                    ```
                 example_code_3: "Зірки\nЗірка зазвичай тягнеться за допомогою 144-дегре-повернення. Якщо ви зміните цей трохи до 143 градусів, наприклад і повторіть візерунок кілька разів за допомогою петлі {while} ви можете зробити цей малюнок.\n"
-                example_code_2: "Вентилятор\nй й\n{define} Draw_a_square {with} сторона\nУ\n\nдо 100\n{while} i > 1 час\n{with} i\nУ\nI = I - 3\nй й\n"
                 story_text: "### Exercise\nВідтворити малюнки з черепахою!\n\nSpiral <img src=\"https://github.com/hedyorg/hedy/assets/80678586/6943223c-018b-435b-a391-23723cc7a6ad\" width=\"150\">\n"
                 story_text_2: "Вентилятор <img src=\"https://github.com/hedyorg/hedy/assets/80678586/cb671065-b47b-49f0-b298-dcbcd2a5e28f\" width=\"150\">\n"
             1:

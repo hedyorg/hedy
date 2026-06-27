@@ -2761,7 +2761,7 @@ adventures:
                     Espiral
                     ```
                     distancia = 5
-                    {while} distancia < 200
+                    {while} distancia < 200:
                         distancia = distancia + 5
                          _
                     ```
@@ -2770,12 +2770,12 @@ adventures:
                 example_code_2: |
                     Abanico
                     ```
-                    {define} dibuja_un_cuadrado {with} lado
+                    {def} dibuja_un_cuadrado(lado):
                     _
 
                     i = 100
-                    {while} i > 1
-                        _ {with} i
+                    {while} i > 1:
+                        _ (i)
                         _
                         i = i - 3
                     ```

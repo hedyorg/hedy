@@ -7437,7 +7437,7 @@ adventures:
                     Spiral
                     ```
                     distance = 5
-                    {while} distance < 200
+                    {while} distance < 200:
                         distance = distance + 5
                          _
                     ```
@@ -7446,11 +7446,11 @@ adventures:
                 example_code_2: |
                     Fan
                     ```
-                    {define} draw_a_square(side)
+                    {def} draw_a_square(side):
                     _
 
                     i = 100
-                    {while} i > 1
+                    {while} i > 1:
                         _(i)
                         _
                         i = i - 3
@@ -7463,7 +7463,7 @@ adventures:
                 answer_code: |
                     ```
                     distance = 5
-                    {while} distance < 200
+                    {while} distance < 200:
                         distance = distance + 5
                         {forward} distance
                         {turn} 90
@@ -7476,7 +7476,7 @@ adventures:
                             {turn} 90
 
                     i = 100
-                    {while} i > 1
+                    {while} i > 1:
                         draw_a_square(i)
                         {turn} 10
                         i = i - 3

@@ -2670,7 +2670,7 @@ adventures:
                     螺旋
                     ```
                     距离 = 5
-                    {while} 距离 < 200
+                    {while} 距离 < 200:
                         距离 = 距离 + 5
                          _
                     ```
@@ -2679,12 +2679,12 @@ adventures:
                 example_code_2: |
                     扇形
                     ```
-                    {define} 画一个正方形{with} 边长
+                    {def} 画一个正方形(边长):
                     _
 
                     i = 100
-                    {while} i > 1
-                        _ {with} i
+                    {while} i > 1:
+                        _ (i)
                         _
                         i = i - 3
                     ```

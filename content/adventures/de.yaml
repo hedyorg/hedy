@@ -3061,7 +3061,7 @@ adventures:
                     Spirale
                     ```
                     entfernung = 5
-                    {while} entfernung < 200
+                    {while} entfernung < 200:
                         entfernung = entfernung + 5
                          _
                     ```
@@ -3070,12 +3070,12 @@ adventures:
                 example_code_2: |
                     Fächer
                     ```
-                    {define} zeichne_ein_quadrat {with} seitenlänge
+                    {def} zeichne_ein_quadrat(seitenlänge)
                     _
 
                     i = 100
-                    {while} i > 1
-                        _ {with} i
+                    {while} i > 1:
+                        _ (i)
                         _
                         i = i - 3
                     ```
