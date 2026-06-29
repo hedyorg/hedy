@@ -3592,6 +3592,13 @@ adventures:
                     {else}:
                         {print}("Meh, I don't agree")
                     ```
+                    ```
+                    name = {input}('What is your name?')
+                    {if} name _ 'Hedy':
+                        {print}('You are cool!')
+                    {else} _
+                        {print} ('Nice to meet you!')
+                    ```
                 answer_code: |
                     Own answer
     in_command:
@@ -3698,13 +3705,6 @@ adventures:
                     {else}:
                         {print}('You are older than me!')
                     ```
-
-                    ```
-                    name = {input}('What is your name?')
-                    {if} name __ 'Hedy':
-                        {print}('You are cool!')
-                    {else}_
-                        {print} ('Nice to meet you!')
                 answer_code: |
                     Own answer
     language:
