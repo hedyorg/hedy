@@ -445,7 +445,7 @@ adventures:
                     Em seguida, chame a função.
                 example_code: |
                     ```
-                    {define} new_question():
+                    {def} new_question():
                         numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                         number_1 = numbers[random]
                         number_2 = numbers[random]
@@ -457,7 +457,7 @@ adventures:
                         {print}('Bem feito!')
 
                     {print}('Dê 10 respostas corretas para ganhar!')
-                    {for} i {in} {range} 1 {to} 10:
+                    {for} i {in} {range}(1, 10):
                         _
                     {print}('Você ganhou!')
                     ```
@@ -1338,7 +1338,16 @@ adventures:
             10:
                 story_text: "From this level on you can - among other things - use a {repeat} command inside a {repeat} command.\nThat makes songs like 'Happy birthday' even shorter!\n\n### Exercise\nFinish the song!\n"
             16:
-                example_code: "```\n{def} música\n    {play} _\n\nsim_ou_não = {input}('Quer ouvir a minha música infinita?')\n{while} sim_ou_não = 'sim':\n    música()\n    {print} '🥳'\n```\n"
+                example_code: |
+                    ```
+                    {def} música():
+                        {play} _
+
+                    sim_ou_não = {input}('Quer ouvir a minha música infinita?')
+                    {while} sim_ou_não = 'sim':
+                        música()
+                        {print}('🥳')
+                    ```
                 story_text: "**Aviso** Essa aventura pode ficar extremamente irritante!\nTambém podemos usar o comando {while} para repetir uma música infinitamente.\n\n### Exercício\nComplete a música infinita.\n"
     parrot:
         name: Papagaia
@@ -1425,25 +1434,6 @@ adventures:
             7:
                 story_text: |
                     In this adventure you learn how to make a digital piggy bank, to calculate how much money you have and how long you need to save up to buy what you want!
-            15:
-                example_code: |
-                    ```
-                    _ calculate_budget with wish, money, allowance
-                        to_save = wish - money
-                        weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
-                        {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
-
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
-
-                    {call} calculate_budget with _, _, _
-                    ```
     print_command:
         default_save_name: imprima
         description: Introdução ao comando imprima

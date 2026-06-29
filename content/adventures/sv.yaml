@@ -1130,15 +1130,15 @@ adventures:
                     franska_ord = ['bonjour', 'ordinateur', 'pomme de terre']
                     översättning = ['hej', 'dator', 'potatis']
                     poäng = 0
-                    {for} i {in} {range} 1 {to} 3
-                        svar = {ask} 'Vad betyder ' franska_ord[i] '?'
+                    {for} i {in} {range}(1, 3)
+                        svar = {input}('Vad betyder ', franska_ord[i], '?')
                         rätt = översättning[i]
-                        {if} svar == rätt
-                            {print} 'Rätt!'
+                        {if} svar == rätt:
+                            {print}('Rätt!')
                             poäng = poäng + 1
-                        {else}
-                            {print} 'Fel, ' franska_ord[i] ' betyder ' översättning[i]
-                    {print} 'Du gav ' poäng ' rätta svar.'
+                        {else}:
+                            {print}('Fel, ', franska_ord[i], ' betyder ', översättning[i])
+                    {print}('Du gav ', poäng, ' rätta svar.')
                     ```
     maths:
         name: matte
@@ -1263,25 +1263,6 @@ adventures:
                     att_spara = pris - sparat
                     veckor = att_spara / fickpeng
                     {print} 'Du kan köpa en ' _ ' om ' _ ' veckor.'
-                    ```
-            15:
-                example_code: |
-                    ```
-                    _ calculate_budget with wish, money, allowance
-                        to_save = wish - money
-                        weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
-                        {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
-
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
-
-                    {call} calculate_budget with _, _, _
                     ```
     print_command:
         default_save_name: skriv
@@ -1708,13 +1689,13 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print} 'Välkommen till McHedy'
+                    {print}('Välkommen till McHedy')
                     mer = 'ja'
                     _
-                        order = {ask} 'Vad vill du beställa?'
-                        {print} order
-                        mer = {ask} 'Vill du beställa något mer?'
-                    {print} 'Tack!'
+                        order = {input}('Vad vill du beställa?')
+                        {print}(order)
+                        mer = {input}('Vill du beställa något mer?')
+                    {print}('Tack!')
                     ```
     rock:
         name: Sten, sax, påse

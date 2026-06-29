@@ -1144,29 +1144,23 @@ adventures:
                     下面是一个将参数与`{ask}`命令组合在一起的函数示例。
                 example_code: |
                     ```
-                    {define} 欢迎信息 {with} 称谓, 姓氏, 国家, 房间号
-                        {print} '欢迎来到海蒂旅馆, ' 称谓 ' ' 姓氏
-                        好旅程 {is} {ask} '你是否有一个好旅程来自, ' 国家 '?'
-                        {if} 好旅程 {is} '是'
-                            {print} '棒棒哒!'
+                    {def} 欢迎信息( 称谓, 姓氏, 国家, 房间号):
+                        {print}('欢迎来到海蒂旅馆, ', 称谓, ' ', 姓氏)
+                        好旅程 = {input}('你是否有一个好旅程来自, ', 国家, '?')
+                        {if} 好旅程 == '是':
+                            {print}('棒棒哒!')
                         {else}
-                            {print} '抱歉听到这些.'
-                            {print} '期盼您能在您的房间里好好休息.'
-                        {print} '您的房间号是' 房间号
+                            {print}('抱歉听到这些.')
+                            {print}('期盼您能在您的房间里好好休息.')
+                        {print}('您的房间号是', 房间号)
 
-                    {print} '您好. 请完善入住信息.'
-                    称谓 = {ask} '您的称谓是什么(mr, mrs, ms, dr, etc.)?'
-                    姓氏 = {ask} '您的姓氏是什么?'
-                    祖国 = {ask} '您来自哪个国家?'
+                    {print}('您好. 请完善入住信息.')
+                    称谓 = {input}('您的称谓是什么(mr, mrs, ms, dr, etc.)?')
+                    姓氏 = {input}('您的姓氏是什么?')
+                    祖国 = {input}('您来自哪个国家?')
 
-                    {call} 欢迎信息 {with} 称谓, 姓氏, 祖国, 105
+                    欢迎信息(称谓, 姓氏, 祖国, 105)
                     ```
-
-                    称谓 = {ask} '您的称谓是什么(mr, mrs, ms, dr, etc.)?'
-                    姓氏 = {ask} '您的姓氏是什么?'
-                    祖国 = {ask} '您来自哪个国家?'
-
-                    {call} 欢迎信息 {with} 称谓, 姓氏, 祖国, 105
     if_command:
         default_save_name: if_命令
         description: 介绍{if}命令
@@ -1314,15 +1308,15 @@ adventures:
                     法语词汇 = ['bonjour', 'ordinateur', 'pomme de terre']
                     词语翻译 = ['hello', 'computer', 'potato']
                     得分 = 0
-                    {for} i {in} {range} 1 {to} 3
-                        答案 = {ask} '什么是' 法语词汇[i] ' 的含义?'
+                    {for} i {in} {range}(1, 3)
+                        答案 = {input}('什么是', 法语词汇[i], ' 的含义?')
                         正确答案 = 词语翻译[i]
-                        {if} 答案 == 正确答案
-                            {print} '答对了!'
+                        {if} 答案 == 正确答案:
+                            {print}('答对了!')
                             得分 = 得分 + 1
-                        {else}
-                            {print} '错了, ' 法语词汇[i] ' 的意思是 ' 词语翻译[i]
-                    {print} '你得到' 得分 ' 个正确答案.'
+                        {else}:
+                            {print}('错了, ', 法语词汇[i], ' 的意思是 ', 词语翻译[i])
+                    {print}('你得到', 得分, ' 个正确答案.')
                     ```
     maths:
         name: 数学
@@ -1573,21 +1567,21 @@ adventures:
                     通过填空来完成这段代码!
                 example_code: |
                     ```
-                    _ 计算预算 {with} 愿望, 金钱, 零花钱
+                    _ 计算预算 (愿望, 金钱, 零花钱):
                         尚待储蓄 = 愿望 - 金钱
                         周数 = 尚待储蓄 / 零花钱
-                        {if} 愿望 _ 金钱
-                            {print} '你需要存更多钱!'
-                            {print} '你需要' 周数 ' 更多的周.'
-                        {else}
-                            {print} '太棒了，你已经存够了钱'
-                            {print} '让我们去消费吧!'
+                        {if} 愿望 _ 金钱:
+                            {print}('你需要存更多钱!')
+                            {print}('你需要' 周数 ' 更多的周.')
+                        {else}:
+                            {print}('太棒了，你已经存够了钱')
+                            {print}('让我们去消费吧!')
 
-                    money = {ask} '你存了多少钱?'
-                    wish = {ask} '你需要多少钱?'
-                    allowance = {ask} '你每周拿到多少零花钱?'
+                    money = {input}('你存了多少钱?')
+                    wish = {input}('你需要多少钱?')
+                    allowance = {input}('你每周拿到多少零花钱?')
 
-                    {call} _
+                    _
                     ```
     print_command:
         description: 介绍print命令
@@ -1998,13 +1992,13 @@ adventures:
                     正确地将`{while}`命令添加到此代码中。
                 example_code: |
                     ```
-                    {print} '欢迎来到麦海蒂快餐店'
+                    {print}('欢迎来到麦海蒂快餐店')
                     更多 = '是'
                     _
-                        点单 = {ask} '您要点什么？'
-                        {print} 点单
-                        更多 = {ask} '您还要点别的吗？'
-                    {print} '谢谢惠顾！'
+                        点单 = {ask}('您要点什么？')
+                        {print}(点单)
+                        更多 = {ask}('您还要点别的吗？')
+                    {print}('谢谢惠顾！')
                     ```
     rock:
         name: 石头剪刀布
@@ -2676,7 +2670,7 @@ adventures:
                     螺旋
                     ```
                     距离 = 5
-                    {while} 距离 < 200
+                    {while} 距离 < 200:
                         距离 = 距离 + 5
                          _
                     ```
@@ -2685,12 +2679,12 @@ adventures:
                 example_code_2: |
                     扇形
                     ```
-                    {define} 画一个正方形{with} 边长
+                    {def} 画一个正方形(边长):
                     _
 
                     i = 100
-                    {while} i > 1
-                        _ {with} i
+                    {while} i > 1:
+                        _ (i)
                         _
                         i = i - 3
                     ```

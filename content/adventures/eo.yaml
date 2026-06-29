@@ -624,15 +624,15 @@ adventures:
                     francaj_vortoj = ['bonjour', 'ordinateur', 'pomme de terre']
                     traduko = ['saluton', 'komputilo', 'terpomo']
                     poentaro = 0
-                    {for} i {in} {range} 1 {to} 3
-                        respondo = {ask} 'Kion signifas ' francaj_vortoj[i] '?'
+                    {for} i {in} {range}(1, 3)
+                        respondo = {input}('Kion signifas ', francaj_vortoj[i], '?')
                         ĝusta = traduko[i]
-                        {if} respondo == ĝusta
-                            {print} 'Ĝuste!'
+                        {if} respondo == ĝusta:
+                            {print}('Ĝuste!')
                             poentaro = poentaro + 1
-                        {else}
-                            {print} 'Malĝuste, ' francaj_vortoj[i] ' signifas la jenon: ' traduko[i]
-                    {print} 'Vi respondis ' poentaro ' fojojn ĝuste.'
+                        {else}:
+                            {print}('Malĝuste, ', francaj_vortoj[i], ' signifas la jenon: ', traduko[i])
+                    {print}('Vi respondis ', poentaro, ' fojojn ĝuste.')
                     ```
     maths:
         levels: {}
@@ -886,13 +886,13 @@ adventures:
             16:
                 example_code: |
                     ```
-                    {print} 'Bonvenon al McHedy'
+                    {print}('Bonvenon al McHedy')
                     pli = 'jes'
                     _
-                        mendo = {ask} 'Kion vi volas mendi?'
-                        {print} mendo
-                        pli = {ask} 'Ĉu vi volas mendi ion pli?'
-                    {print} 'Dankon!'
+                        mendo = {input}('Kion vi volas mendi?')
+                        {print}(mendo)
+                        pli = {input}('Ĉu vi volas mendi ion pli?')
+                    {print}('Dankon!')
                     ```
     rock:
         name: Roko, papero, tondilo
