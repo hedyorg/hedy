@@ -365,34 +365,7 @@ adventures:
     songs:
         levels:
             14:
-                example_code: |
-                    ```
-                    alle_dyr = ['gris', 'hund', 'ko']
-                    lyde = ['øh', 'vuf', 'muh']
-                    {for} i {in} {range}(1, 3)
-                        dyr = _
-                        lyd = _
-                        {print}('Jens Hansen havde en bondegård')
-                        {print}('ih ah ih ah oh!')
-                        {print}('og på den gård der var en ', dyr)
-                        {print}('ih ah ih ah oh!')
-                        {print}('Der var ', lyd lyd, ' her')
-                        {print}('og ', lyd lyd, ' der')
-                        {print}(lyde, ' her')
-                        {print}(lyde, ' der')
-                        {print}('alle steder ', lyde lyde)
-                    ```
-
-                    ```
-                    linjer = ['Hvad skal vi gøre med den fulde sømand', 'Smid ham i brummen til han vågner', 'Han skal klynges op i masten']
-                    {for} linje {in} linjer:
-                        {for} i {in} {range}(1, 3)
-                            {print}(linje)
-                        {print}('Tidligt om morgnen.')
-                        {for} i {in} {range}(1, 3)
-                            {print}('Hu hej, se hun sejler')
-                        {print}('Tidligt om morgnen.')
-                    ```
+                example_code: "```\nalle_dyr = ['gris', 'hund', 'ko']\nlyde = ['øh', 'vuf', 'muh']\n{for} i {in} {range} 1 {to} 3\n    dyr = alle_dyr[i]\n    lyd = lyde[i]\n    {print} 'Jens Hansen havde en bondegård'\n    {print} 'ih ah ih ah oh!'\n    {print} 'og på den gård der var en ' dyr\n    {print} 'ih ah ih ah oh!'\n    {print} 'Der var ' lyd lyd' her'\n    {print} 'og ' lyd lyd' der'\n    {print} lyde ' her'\n    {print} lyde ' der'\n    {print} 'alle steder ' lyde lyde\n```\n\n```\nlinjer = ['Hvad skal vi gøre med den fulde sømand', 'Smid ham i brummen til han vågner', 'Han skal klynges op i masten']\n{for} linje {in} linjer\n    {for} i {in} {range} 1 {to} 3\n        {print} linje \n    {print} 'Tidligt om morgnen.'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Hu hej, se hun sejler'\n    {print} 'Tidligt om morgnen.'\n```\n"
     songs_2:
         levels: {}
     turtle:

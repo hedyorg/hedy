@@ -490,7 +490,7 @@ adventures:
                 example_code: |
                     ```
                     #Een vraag definiëren:
-                    {def} nieuwe_vraag():
+                    {define} nieuwe_vraag
                         nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         nummer_1 = nummers {at} {random}
                         nummer_2 = nummers {at} {random}
@@ -499,13 +499,13 @@ adventures:
                         _
                         _
                         _
-                        {print}('Goed gedaan!')
+                        {print} 'Well done!'
                     
                     #De vragen stellen:
-                    {print}('Geef 10 goede antwoorden om te winnen!')
-                    {for} i {in} {range}(1, 10):
+                    {print} 'Geef 10 goede antwoorden om te winnen!'
+                    {for} i {in} {range} 1 {to} 10
                         _
-                    {print}('Je hebt gewonnen!')
+                    {print} 'Je hebt gewonnen!'
                     ```
     calculator_2:
         name: rekenmachine 2
@@ -1089,10 +1089,10 @@ adventures:
                     #Vragen stellen:
                     antwoord = {input}('Wat is 2 + 2?')
                     {if} antwoord == 4:
-                        {print}('Goed!')
+                        {print} 'Goed!'
                         speel_blij_deuntje()
-                    {else}:
-                        {print}('Fout!')
+                    {else}
+                        {print} 'Fout!'
                     ```
                 answer_code: |
                     ```
@@ -1108,10 +1108,10 @@ adventures:
 
                     antwoord = {input}('Wat is 2 + 2?')
                     {if} antwoord == 4:
-                        {print}('Goed!')
+                        {print} 'Goed!'
                         speel_blij_deuntje()
-                    {else}:
-                        {print}('Fout!')
+                    {else}
+                        {print} 'Fout!'
                         speel_sip_deuntje()
                     ```
     functions_2:
@@ -1363,23 +1363,23 @@ adventures:
                     wapens = ['rauwe ham', 'aansteker', 'knoflook']
 
                     #Het verhaal van het spookhuis vertellen:
-                    {print}('Je staat bij een oude verlaten villa')
-                    {print}('Iets is hier niet pluis...')
-                    {print}('Je hoort ', _)
-                    {print}('Je gaat op ontdekking')
-                    {print}('Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook')
-                    jouw_wapen = {input}('Wat neem je mee?')
-                    {print}('Met je ', jouw_wapen, ' loop je door naar de woonkamer')
-                    {print}('Daar zie je een ', _)
+                    {print} 'Je staat bij een oude verlaten villa'
+                    {print} 'Iets is hier niet pluis...'
+                    {print} 'Je hoort ' _
+                    {print} 'Je gaat op ontdekking'
+                    {print} 'Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook'
+                    jouw_wapen = {ask} 'Wat neem je mee?'
+                    {print} 'Met je ' jouw_wapen ' loop je door naar de woonkamer'
+                    {print} 'Daar zie je een ' _
                     benodigde_wapen = _
                     {if} jouw_wapen == benodigde_wapen
-                        {print}('Je gebruikt je ', jouw_wapen)
+                        {print} 'Je gebruikt je ' jouw_wapen
                         {print} _
-                        {print}('Jij wint!')
+                        {print} 'Jij wint!'
                     {else}
-                        {print}('Je hebt helaas het verkeerde wapen')
+                        {print} 'Je hebt helaas het verkeerde wapen'
                         {print} _
-                        {print}('GAME OVER')
+                        {print} 'GAME OVER'
                     ```
     hospital:
         name: ziekenhuis
@@ -2108,17 +2108,19 @@ adventures:
                     Zorg dat het brandalarm afgaat als er brand is!
                 example_code: |
                     ```
-                    {def} brandalarm():
-                        {print}('BRAND!')
+                    {define} brandalarm
+                        {print} 'BRAND!'
                         noot = 40
-                        {for} i {in} {range}_
-                            {play} 45
-                            {play} 50
+                        {for} i {in} {range} 1 {to} 100
+                            {if} noot _ 50
+                                noot = noot + 5
+                                {play} _
+                            {else}
+                                noot = 40
 
-
-                    brand = {input}('Is er brand?')
-                    {if} brand _
-                        _
+                    brand = {ask} 'Is er brand?'
+                    {if} brand _ 'ja'
+                        {call} brandalarm
                     ```
             16:
                 story_text: |
@@ -2130,13 +2132,13 @@ adventures:
                 example_code: |
                     ```
                     #Een liedje schrijvenL
-                    {def} lied():
+                    {def} lied
                         {play} _
                     #Het liedje afspelen:
                     ja_of_nee = {input}('Wil je mijn liedje zonder einde horen?')
                     {while} ja_of_nee = 'ja':
                         lied()
-                        {print}('🥳')
+                        {print} '🥳'
                     ```
     music_2:
         name: muziek 2
@@ -2228,7 +2230,7 @@ adventures:
                     Kun je een ander liedje programmeren op deze manier?
                 example_code: |
                     ```
-                    {print}('Yankee Doodle')
+                    {print} 'Yankee Doodle'
                     {def} _ (noot_1, noot_2, noot_3):
                         {play} C4
                         {play} C4
@@ -2253,7 +2255,7 @@ adventures:
                 answer_code: |
                     ```
                     ```
-                    {print}('Yankee Doodle')
+                    {print} 'Yankee Doodle'
                     {def} deuntje(noot_1, noot_2, noot_3):
                         {play} C4
                         {play} C4
@@ -2471,21 +2473,21 @@ adventures:
                     Maak de code af door de lege plekken in te vullen!
                 example_code: |
                     ```
-                    _ bereken_budget(wens, geld, zakgeld):
+                    _ bereken_budget {with} wens, geld, zakgeld
                         sparen = wens - geld
                         weken = sparen / zakgeld
-                        {if} wens _ geld:
-                            {print}('Helaas even doorsparen!')
-                            {print}('Je moet nog ' weken ' weken.')
-                        {else}:
-                            {print}('Hoera, je hebt genoeg!')
-                            {print}('Op naar de winkel!')
+                        {if} wens _ geld
+                            {print} 'Helaas even doorsparen!'
+                            {print} 'Je moet nog ' weken ' weken.'
+                        {else}
+                            {print} 'Hoera, je hebt genoeg!'
+                            {print} 'Op naar de winkel!'
 
-                    geld = {input}('Hoeveel geld heb je al gespaard?')
-                    wens = {input}('Hoeveel geld heb je nodig?')
-                    zakgeld = {input}('Hoeveel zakgeld krijg je per week?')
+                    geld = {ask} 'Hoeveel geld heb je al gespaard?'
+                    wens = {ask} 'Hoeveel geld heb je nodig?'
+                    zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
 
-                    _
+                    {call} _
                     ```
     print_command:
         description: Introductie print commando
@@ -2551,9 +2553,9 @@ adventures:
                     {print} ('Antwoord optie A')
                     {print} ('Antwoord optie B')
                     antwoord = {ask} 'Welk antwoord?'
-                    {if} antwoord == 'A':
+                    {if} antwoord {is} 'A':
                         punten_a = punten_a + 1
-                    {if} antwoord == 'B':
+                    {if} antwoord {is} 'B':
                         punten_b = punten_b + 1
                     
                     #Uitslag van de quiz printen:
@@ -2633,12 +2635,12 @@ adventures:
                     ```
             14:
                 story_text_2: |-
-                    Nu je hebt geleerd om de rechte haken te gebruiken bij je lijstjes, kun je ook `{at} {random}` leren gebruiken op een andere manier!
+                    Nu je hebt geleerd om de rechte haken te gebruiken bij je lijstjes, kun je ook `{at} {random}` leren gebruiken op de Python-manier!
                     Je typt simpelweg de naam van de lijst en typt er `[random]` achter.
                 example_code_2: |-
                     ```
                     fruit = ['appel', 'banaan', 'kers']
-                    {print}(fruit[random])
+                    {print} fruit[random]
                     ```
     repeat_command:
         default_save_name: herhaal
@@ -2971,13 +2973,13 @@ adventures:
                     Voeg het `{while}` commando op de juiste wijze toe aan deze code.
                 example_code: |
                     ```
-                    {print}('Welkom bij McHedy')
+                    {print} 'Welkom bij McHedy'
                     meer = 'ja'
                     _
-                        bestelling = {input}('Wat wil je bestellen?')
-                        {print}(bestelling)
-                        meer = {input}('Wilt u nog iets bestellen?')
-                    {print}('Bedankt!')
+                        bestelling = {ask} 'Wat wil je bestellen?'
+                        {print} bestelling
+                        meer = {ask} 'Wilt u nog iets bestellen?'
+                    {print} 'Bedankt!'
                     ```
     rock:
         name: steen, papier, schaar
@@ -3711,11 +3713,11 @@ adventures:
                     </div>
                 example_code: |
                     ```
-                    {def} bereken_graden(hoeveel_kanten):
+                    {def} bereken_graden(hoeveel_kanten)
                         graden = 360 / _
                         _ graden
 
-                    {def} teken_figuur(graden, hoeveel_kanten):
+                    {def} teken_figuur(graden, hoeveel_kanten)
                         {for} i {in} {range} _
                             {forward} 70
                             {turn} _
@@ -3753,7 +3755,7 @@ adventures:
                     Spiraal
                     ```
                     afstand = 5
-                    {while} afstand < 200:
+                    {while} afstand < 200
                         afstand = afstand + 5
                          _
                     ```
@@ -3762,14 +3764,14 @@ adventures:
                 example_code_2: |
                     Waaier
                     ```
-                    {def} teken_een_vierkant(zijde):
+                    {define} teken_een_vierkant {with} zijde
                     _
 
                     i = 100
-                    {while} i > 1:
-                        _ (i)
+                    {while} i > 1
+                        _ {with} i
                         _
-                        i = i - 3
+                        i {is} i - 3
                     ```
                 story_text_3: |
                     Ster <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">

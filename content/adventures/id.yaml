@@ -795,21 +795,21 @@ adventures:
             15:
                 example_code: |
                     ```
-                    _ hitung_anggaran(keinginan, uang, tunjangan):
+                    _ hitung_anggaran {with} keinginan, uang, tunjangan
                         untuk_menyimpan = keinginan - uang
                         minggu = untuk_menyimpan / uang saku
-                        {if} berharap _ uang:
-                            {print}('Anda perlu menabung lebih banyak lagi!')
-                            {print}('Anda memerlukan ' minggu ' minggu lagi.')
-                        {else}:
-                            {print}('Bagus! Kamu punya cukup')
-                            {print}('Ayo berbelanja!')
+                        {if} berharap _ uang
+                            {print} 'Anda perlu menabung lebih banyak lagi!'
+                            {print} 'Anda memerlukan ' minggu ' minggu lagi.'
+                        {else}
+                            {print} 'Bagus! Kamu punya cukup'
+                            {print} 'Ayo berbelanja!'
 
-                    uang = {input}('Berapa banyak uang yang sudah kamu tabung?')
-                    harapan = {input}('Berapa banyak uang yang Anda perlukan?')
-                    tunjangan = {input}('Berapa uang jajan yang anda dapat setiap minggunya?')
+                    uang = {ask} 'Berapa banyak uang yang sudah kamu tabung?'
+                    harapan = {ask} 'Berapa banyak uang yang Anda perlukan?'
+                    tunjangan = {ask} 'Berapa uang jajan yang anda dapat setiap minggunya?'
 
-                    _
+                    {call} _
                     ```
     restaurant:
         name: Rumah makan

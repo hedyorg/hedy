@@ -713,13 +713,13 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print}('Velkommen til McHedy')
+                    {print} 'Velkommen til McHedy'
                     mer = 'ja'
                     _
-                        ønsker = {input}('Hva vil du bestille?')
-                        {print}(ønsker)
-                        mer = {input}('Vil du ha noe mer?')
-                    {print}('Takk!')
+                        ønsker = {ask} 'Hva vil du bestille?'
+                        {print} ønsker
+                        mer = {ask} 'Vil du ha noe mer?'
+                    {print} 'Takk!'
                     ```
     rock:
         name: Stein, saks, papir
