@@ -3834,12 +3834,12 @@ adventures:
                 example_code: |
                     ```
                     #Introducing to the Hedy market:
-                    {print} 'Welcome to the Hedy market!'
-                    {print} 'Here, we sell bread, apples and cheese'
+                    {print}('Welcome to the Hedy market!')
+                    {print}('Here, we sell bread, apples and cheese')
                     
                     #Asking how much you want to buy:
                     price_bread = 5
-                    {print} ('One bread costs ', _ )
+                    {print}('One bread costs ', _ )
                     bread_number = {input}('How many loafs of bread would you like to buy?')
                     total_bread = price_bread*_
 
@@ -3855,22 +3855,22 @@ adventures:
                 answer_code: |
                     ```
                     #Introducing to the Hedy market:
-                    {print} 'Welcome to the Hedy market!'
-                    {print} 'Here, we sell bread, apples and cheese'
+                    {print}('Welcome to the Hedy market!')
+                    {print}('Here, we sell bread, apples and cheese')
                     
                     #Asking how much you want to buy:
                     price_bread = 5
-                    {print} ('One bread costs ', price_bread)
+                    {print}('One bread costs ', price_bread)
                     bread_number = {input}('How many loafs of bread would you like to buy?')
                     total_bread = price_bread*bread_number
 
                     price_apple = 1
-                    {print} ('One apple costs ', price_apple)
+                    {print}('One apple costs ', price_apple)
                     apple_number = {input}('How many loafs of bread would you like to buy?')
                     total_apple = price_apple*apple_number
 
                     price_cheese = 8
-                    {print} ('One piece of cheese costs ', price_cheese )
+                    {print}('One piece of cheese costs ', price_cheese )
                     cheese_number = {input}('How many pieces of cheese would you like to buy?')
                     total_cheese = price_cheese*cheese_number
 
@@ -4628,23 +4628,23 @@ adventures:
                     The carousel is the attraction for the little kids. So, add a maximum age for it. Feel free to add more attractions!
                 example_code: |
                     ```
-                    {print} ("Welcome to our amsument park: 'Hedy High'")
-                    {print} ("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
+                    {print}("Welcome to our amsument park: 'Hedy High'")
+                    {print}("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
 
                     #Try one of the three attractions:
-                    attraction = {input} ('Which attraction would you like to try?')
+                    attraction = {input}('Which attraction would you like to try?')
 
                     {if} attraction == 'Haunted house':
-                        age = {input} ('How old are you?')
-                        {if} age > 12 :
-                            {print} ('You are old enough. Enjoy getting scared!')
+                        age = {input}('How old are you?')
+                        {if} age > 12:
+                            {print}('You are old enough. Enjoy getting scared!')
                         _ :
-                            {print} ('Sorry, you have to wait till you are old enough.')
+                            {print}('Sorry, you have to wait till you are old enough.')
                     
                     {if} attraction == 'Rollercoaster':
                         fear = {input} ('Are you afraid of heights?')
                         {if} fear == 'yes':
-                            {print} ('Sorry, it is better for you to stay on the ground.')
+                            {print}('Sorry, it is better for you to stay on the ground.')
                         {elif} _ :
                             height = _
 
@@ -4654,37 +4654,37 @@ adventures:
                         ```
                 answer_code: |
                         ```
-                        {print} ("Welcome to our amsument park: 'Hedy High'")
-                        {print} ("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
+                        {print}("Welcome to our amsument park: 'Hedy High'")
+                        {print}("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
 
                         #Try one of the three attractions:
-                        attraction = {input} ('Which attraction would you like to try?')
+                        attraction = {input}('Which attraction would you like to try?')
 
                         {if} attraction == 'Haunted house':
                             age = {input} ('How old are you?')
-                            {if} age > 12 :
-                                {print} ('You are old enough. Enjoy getting scared!')
+                            {if} age > 12:
+                                {print}('You are old enough. Enjoy getting scared!')
                             {else}:
-                                {print} ('Sorry, you have to wait till you are old enough.')
+                                {print}('Sorry, you have to wait till you are old enough.')
                         
                         {if} attraction == 'Rollercoaster':
-                            fear = {input} ('Are you afraid of heights?')
+                            fear = {input}('Are you afraid of heights?')
                             {if} fear == 'yes':
-                                {print} ('Sorry, it is better for you to stay on the ground.')
+                                {print}('Sorry, it is better for you to stay on the ground.')
                             {elif} fear == 'no' :
-                                height = {input} ('What is your length in centimetres')
+                                height = {input}('What is your length in centimetres')
                                 {if} height > 150:
-                                    {print} ('Enjoy your ride!')
+                                    {print}('Enjoy your ride!')
                                 {else}:
-                                    {print} ('Sorry you are not tall enough')
+                                    {print}('Sorry you are not tall enough')
 
 
                         {if} attraction == 'Carousel':
-                            age = {input} ('How old are you?')
+                            age = {input}('How old are you?')
                             {if} age < 10:
-                                {print} ('This is a perfect attraction for you. Enjoy!')
+                                {print}('This is a perfect attraction for you. Enjoy!')
                             {else}:
-                                {print} ('Sorry you are too old.')
+                                {print}('Sorry you are too old.')
 
                         ```
     parrot:
@@ -6158,11 +6158,11 @@ adventures:
 
                     {for} i _ :
                         ducks = 10-i
-                        {print} (_, ' little ducks went swimming one day')
-                        {print} ('Over the hill and far away')
-                        {print} ("Mother duck said: 'quack, quack, quack' ")
+                        {print}(_, ' little ducks went swimming one day')
+                        {print}('Over the hill and far away')
+                        {print}("Mother duck said: 'quack, quack, quack' ")
                         ducks_minus = ducks-1
-                        {print} ('But only ' _)
+                        {print}('But only ' _)
                         
 
                     ```
@@ -6170,13 +6170,13 @@ adventures:
                     ```
                     #singing the duck song:
 
-                    {for} i {in} {range} (0, 10):
+                    {for} i {in} {range}(0, 10):
                         ducks = 10-i
-                        {print} (ducks, ' little ducks went swimming one day')
-                        {print} ('Over the hill and far away')
-                        {print} ("Mother duck said: 'quack, quack, quack' ")
+                        {print}(ducks, ' little ducks went swimming one day')
+                        {print}('Over the hill and far away')
+                        {print}("Mother duck said: 'quack, quack, quack' ")
                         ducks_minus = ducks-1
-                        {print} ('But only ', ducks_minus, ' came back.' )
+                        {print}('But only ', ducks_minus, ' came back.' )
                         
 
                     ```

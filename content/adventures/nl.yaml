@@ -1843,12 +1843,12 @@ adventures:
                 example_code: |
                     ```
                     #Introduceren van de Hedy markt:
-                    {print} 'Welkom bij de Hedy markt!'
-                    {print} 'We verkopen hier brood, appels en kaas'
+                    {print}('Welkom bij de Hedy markt!')
+                    {print}('We verkopen hier brood, appels en kaas')
                     
                     #Vragen hoeveel je wil kopen:
                     prijs_brood = 5
-                    {print} ('Één brood kost ', _ )
+                    {print}('Één brood kost ', _ )
                     brood_aantal = {input}('Hoeveel broden wil je kopen?')
                     totaal_brood = prijs_brood*_
 
@@ -1864,22 +1864,22 @@ adventures:
                 answer_code: |
                     ```
                     Introduceren van de Hedy markt:
-                    {print} 'Welkom bij de Hedy markt!'
-                    {print} 'We verkopen hier brood, appels en kaas'
+                    {print}('Welkom bij de Hedy markt!')
+                    {print}('We verkopen hier brood, appels en kaas')
                     
                     #Vragen hoeveel je wil kopen:
                     prijs_brood = 5
-                    {print} ('Één brood kost ', prijs_brood )
+                    {print}('Één brood kost ', prijs_brood )
                     brood_aantal = {input}('Hoeveel broden wil je kopen?')
                     totaal_brood = prijs_bread*brood_aantal
 
                     prijs_appel = 1
-                    {print} ('Één appel kost', prijs_appel)
+                    {print}('Één appel kost', prijs_appel)
                     appel_aantal = {input}('Hoeveel broden wil je kopen?')
                     totaal_appel = prijs_appel*appel_aantal
 
                     prijs_kaas = 8
-                    {print} ('Één stuk kaas kost ', prijs_kaas)
+                    {print}('Één stuk kaas kost ', prijs_kaas)
                     kaas_aantal = {input}('Hoeveel stukken kaas wil je kopen?')
                     totaal_kaas= prijs_kaas*kaas_aantal
 
@@ -2290,23 +2290,23 @@ adventures:
                     De draaimolen is de attractie voor jonge kinderen. Zorg daarom dat je daar een maximum leeftijd aan toevoegt. Als je wil kan je ook nog meer attracties toevoegen!
                 example_code: |
                     ```
-                    {print} ("Welkom bij het pretpark: 'Hedy Hoog'")
-                    {print} ("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
+                    {print}("Welkom bij het pretpark: 'Hedy Hoog'")
+                    {print}("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
 
                     #Probeer een van de drie attracties uit:
-                    attractie = {input} ('Welke attractie wil je proberen?')
+                    attractie = {input}('Welke attractie wil je proberen?')
 
                     {if} attractie == 'spookhuis':
-                        leeftijd = {input} ('Hoe oud ben je?')
-                        {if} leeftijd > 12 :
-                            {print} ('Je bent out genoeg. Geniet ervan!')
+                        leeftijd = {input}('Hoe oud ben je?')
+                        {if} leeftijd > 12:
+                            {print}('Je bent out genoeg. Geniet ervan!')
                         _ :
-                            {print} ('Sorry, je bent nu nog niet oud genoeg. ')
+                            {print}('Sorry, je bent nu nog niet oud genoeg. ')
                     
                     {if} attractie == 'Achtbaan':
-                        angst = {input} ('Heb je hoogtevrees?')
+                        angst = {input}('Heb je hoogtevrees?')
                         {if} angst == 'ja':
-                            {print} ('Sorry, het is better als je op de grond blijft.')
+                            {print}('Sorry, het is better als je op de grond blijft.')
                         {elif} _ :
                             lengte = _
 
@@ -2316,37 +2316,37 @@ adventures:
                     ```
                 answer_code: |
                         ```
-                        {print} ("Welkom bij het pretpark: 'Hedy Hoog'")
-                        {print} ("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
+                        {print}("Welkom bij het pretpark: 'Hedy Hoog'")
+                        {print}("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
 
                         #Probeer een van de drie attracties uit:
-                        attractie = {input} ('Welke attractie wil je proberen?')
+                        attractie = {input}('Welke attractie wil je proberen?')
 
                         {if} attractie == 'spookhuis':
                             leeftijd = {input} ('Hoe oud ben je?')
-                            {if} leeftijd > 12 :
-                                {print} ('Je bent out genoeg. Geniet ervan!')
+                            {if} leeftijd > 12:
+                                {print}('Je bent out genoeg. Geniet ervan!')
                             _ :
-                                {print} ('Sorry, je bent nu nog niet oud genoeg. ')
+                                {print}('Sorry, je bent nu nog niet oud genoeg. ')
                         
                         {if} attractie == 'Achtbaan':
-                            angst = {input} ('Heb je hoogtevrees?')
+                            angst = {input}('Heb je hoogtevrees?')
                             {if} angst == 'ja':
-                                {print} ('Sorry, het is better als je op de grond blijft.')
+                                {print}('Sorry, het is better als je op de grond blijft.')
                             {elif} angst == 'nee' :
-                                lengte = {input} ('Wat is je lengte in centimeters')
+                                lengte = {input}('Wat is je lengte in centimeters')
                                 {if} lengte > 150:
-                                    {print} ('Geniet van het ritje!')
+                                    {print}('Geniet van het ritje!')
                                 {else}:
-                                    {print} ('Sorry, je bent niet lang genoeg')
+                                    {print}('Sorry, je bent niet lang genoeg')
 
 
                         {if} attractie == 'draaimolen':
-                            leeftijd = {input} ('Hoe oud ben je?')
+                            leeftijd = {input}('Hoe oud ben je?')
                             {if} leeftijd < 10:
-                                {print} ('Dit is de perfecte attractie voor jou. Veel plezier!')
+                                {print}('Dit is de perfecte attractie voor jou. Veel plezier!')
                             {else}:
-                                {print} ('Helaas, je bent al te oud.')
+                                {print}('Helaas, je bent al te oud.')
 
                         ```
     parrot:
@@ -3240,22 +3240,22 @@ adventures:
 
                     {for} i _ :
                         eendjes = 10-i
-                        {print} (_, ' kleine visjes, die zwommen naar de zee')
-                        {print} ("'Nee',  zei de moeder ik ga niet mee")
-                        {print} ("Ik blijf liever zwemmen in die vieze oude sloot")
-                        {print} ("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
+                        {print}(_, ' kleine visjes, die zwommen naar de zee')
+                        {print}("'Nee',  zei de moeder ik ga niet mee")
+                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
+                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
                         
 
                     ```
                 answer_code: |
                     ```
 
-                    {for} i {in} {range} (10) :
+                    {for} i {in} {range}(0, 10) :
                         eendjes = 10-i
-                        {print} (_, ' kleine visjes, die zwommen naar de zee')
-                        {print} ("'Nee',  zei de moeder ik ga niet mee")
-                        {print} ("Ik blijf liever zwemmen in die vieze oude sloot")
-                        {print} ("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
+                        {print}(_, ' kleine visjes, die zwommen naar de zee')
+                        {print}("'Nee',  zei de moeder ik ga niet mee")
+                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
+                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
 
                     ```
     songs_2:
