@@ -4642,7 +4642,7 @@ adventures:
                             {print}('Sorry, you have to wait till you are old enough.')
                     
                     {if} attraction == 'Rollercoaster':
-                        fear = {input} ('Are you afraid of heights?')
+                        fear = {input}('Are you afraid of heights?')
                         {if} fear == 'yes':
                             {print}('Sorry, it is better for you to stay on the ground.')
                         {elif} _ :
@@ -4661,7 +4661,7 @@ adventures:
                         attraction = {input}('Which attraction would you like to try?')
 
                         {if} attraction == 'Haunted house':
-                            age = {input} ('How old are you?')
+                            age = {input}('How old are you?')
                             {if} age > 12:
                                 {print}('You are old enough. Enjoy getting scared!')
                             {else}:
@@ -4975,27 +4975,27 @@ adventures:
                     You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
                 example_code: |
                     ```
-                    {print} ('Make your own quiz')
+                    {print}('Make your own quiz')
                     points_a = 0
                     points_b = 0
 
                     #Playing the quiz:
-                    {print} ('Question')
-                    {print} ('Answer option A')
-                    {print} ('Answer option B')
-                    answer = {ask} 'Which answer?'
+                    {print}('Question')
+                    {print}('Answer option A')
+                    {print}('Answer option B')
+                    answer = {input}('Which answer?')
                     {if} answer == 'A':
                         points_a = points_a + 1
                     {if} answer == 'B':
                         points_b = points_b + 1
 
                     #Printing the endresults:
-                    {print} 'End of the quiz!'
-                    {print} 'Lets see the results!'
+                    {print}('End of the quiz!')
+                    {print}('Lets see the results!')
                     {if} points_a > points_b:
-                        {print} ('You belong to the A club')
+                        {print}('You belong to the A club')
                     {if} points_b > points_a:
-                        {print} ('You belong to the B club')
+                        {print}('You belong to the B club')
                     ```
                 answer_code: |
                     Own answer

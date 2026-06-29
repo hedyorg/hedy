@@ -2321,7 +2321,7 @@ adventures:
                         attractie = {input}('Welke attractie wil je proberen?')
 
                         {if} attractie == 'spookhuis':
-                            leeftijd = {input} ('Hoe oud ben je?')
+                            leeftijd = {input}('Hoe oud ben je?')
                             {if} leeftijd > 12:
                                 {print}('Je bent out genoeg. Geniet ervan!')
                             _ :
@@ -2542,27 +2542,27 @@ adventures:
                     Je kunt een quiz maken over wat je dan maar leuk vindt: je hobby, je favoriete dier, je favoriete boek en ga zo maar door!
                 example_code: |
                     ```
-                    {print} ('Maak je eigen quiz')
+                    {print}('Maak je eigen quiz')
                     points_a = 0
                     points_b = 0
 
                     #Stellen van quizvragen:
-                    {print} ('Vraag')
-                    {print} ('Antwoord optie A')
-                    {print} ('Antwoord optie B')
-                    antwoord = {ask} 'Welk antwoord?'
+                    {print}('Vraag')
+                    {print}('Antwoord optie A')
+                    {print}('Antwoord optie B')
+                    antwoord = {input}('Welk antwoord?')
                     {if} antwoord == 'A':
                         punten_a = punten_a + 1
                     {if} antwoord == 'B':
                         punten_b = punten_b + 1
                     
                     #Uitslag van de quiz printen:
-                    {print} 'Eind van de quiz!'
-                    {print} 'Laten we de uitslag bekijken!'
+                    {print}('Eind van de quiz!')
+                    {print}('Laten we de uitslag bekijken!')
                     {if} punten_a > punten_b:
-                        {print} ('Welkom bij de A club!')
+                        {print}('Welkom bij de A club!')
                     {if} points_b > points_a:
-                        {print} ('Welkom bij de B club')
+                        {print}('Welkom bij de B club')
                     ```
     quotation_marks:
         name: '''aanhalingstekens'''
