@@ -361,7 +361,24 @@ adventures:
                 example_code: "```\n{def} calcula_mitjana_nota():\n    total = 0\n    {for} i {in} {range} (1, 4):\n        nota = {input} _\n        total = total + _\n        {return} _ / 4\n\nmitjana_nota = _\n{print} (\"La teva nota mitjana és \", mitjana_nota)\n```\n"
             16:
                 story_text: "Pots afegir el bucle `{while}` al joc de la calculadora que has après a fer en un nivell anterior.\nAixò assegura que el jugador no pugui continuar a la següent pregunta si respon incorrectament.\n\n### Exercici\nAfegeix el bucle `{while}` a la funció, pregunta al jugador quant fa nombre_1 per nombre_2 i imprimeix la seva resposta.\nDesprés crida la funció.\n"
-                example_code: "```\n{define} nova_pregunta():\n    nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n    num_1 = nums[random]\n    num_2 = nums[random]\n    correcte = num_1 * num_2\n    resposta = 0\n    _\n    _\n    _\n    {print} (\"Ben fet!\")\n\n{print} (\"Respon correctament 10 vegades per guanyar!\")\n{for} i {in} {range} 1 {to} 10:\n    _\n{print} (\"Enhorabona!! Has guanyat!\")\n```\n"
+                example_code: |
+                    ```
+                    {def} nova_pregunta():
+                        nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        num_1 = nums[random]
+                        num_2 = nums[random]
+                        correcte = num_1 * num_2
+                        resposta = 0
+                        _
+                        _
+                        _
+                        {print}("Ben fet!")
+
+                    {print}("Respon correctament 10 vegades per guanyar!")
+                    {for} i {in} {range}(1, 10):
+                        _
+                    {print}("Enhorabona!! Has guanyat!")
+                    ```
     calculator_2:
         name: calculadora 2
         default_save_name: Calculadora 2
@@ -1102,15 +1119,59 @@ adventures:
                 example_code: "```\n{print} \"Escapa de la casa embruixada!\"\njugador = viu\nportes = 1, 2, 3\nmonsters = zombie, vampir, aranya gegant\n{repeat} 3 {times}\n    {if} jugador {is} viu\n        porta_correcta {is} portes {at} {random}\n        {print} \"Hi ha tres portes davant teu...\"\n        porta_escollida = {ask} \"Quina porta esculls?\"\n        {if} porta_escollida {is} porta_correcta\n            {print} \"No hi ha monstres aquí!\"\n        {else}\n            {print} \"Se t'ha menjat un \" monsters {at} {random}\n            jugador = mort\n    {else}\n        {print} \"GAME OVER\"\n{if} jugador {is} viu\n    {print} \"Fantastic! Has sobreviscut!\"\n```\n"
             14:
                 story_text: "### Exercici\nAquest joc de la casa embruixada utilitza la connexió entre les llistes que pots fer servir en aquest nivell.\nPer exemple: totes les propietats que pertanyen al zombi són primeres en totes les llistes, la bruixa segona i el vampir tercer.\nConsulta el codi i omple els espais buits amb `armes[i]`, `monstres[i]`, `mala_sort[i]`, `bona_sort[i]`, `pista[i]` als llocs correctes perquè el codi funcioni!\n"
-                example_code: "```\nnumeros = [1, 2, 3]\ni = numeros[{random}]\npista = [\"uns grunyits\", \"una rialla malèfica\", \"l'aleteig de les ales d'un ratpenat\"]\nmonstres = [\"un zombie\", \"una bruixa\", \"un vampir\"]\nmala_sort = [\"Se't menjen el cervell\", \"Estas maleït per sempre més\", \"Et mossega el coll\"]\nbona_sort = [\"Llençes el penil. El zombie es distreu menjant-se'l.\", \"Cales foc a les cortines. La bruixa fuig volant pel temor al foc.\", \"El vampir respira el teu alè d'all i fuig.\"]\narmes = [\"pernil\", \"encenedor\", \"allioli\"]\n{print} \"Estàs davant d'una antiga mansió\"\n{print} \"Quelcom no acaba de funcionar bé\"\n{print} \"Sents un soroll com \" _\n{print} \"T'apropes a explorar-ho\"\n{print} \"Entres a la cuina i et trobes un encenedor, un tall de pernil i un pot d'allioli.\"\narma_escollida = {input} \"Què t'emportes de la cuina?\"\n{print} \"Am el \" arma_escollida \" entres al menjador\"\n{print} \"Et trobes de sobte \" _\narma_necessaria = _\n{if} arma_escollida == arma_necessaria\n    {print} \"Utilitzes el \" arma_escollida\n    {print} _\n    {print} \"Guanyes!\"\n{else}\n    {print} \"Has seleccionat una arma equivocada...\"\n    {print} _\n    {print} \"GAME OVER\"\n```\n"
+                example_code: \
+                    ```
+                    numeros = [1, 2, 3]
+                    i = numeros[{random}]
+                    pista = ["uns grunyits", "una rialla malèfica", "l'aleteig de les ales d'un ratpenat"]
+                    monstres = ["un zombie", "una bruixa", "un vampir"]
+                    mala_sort = ["Se't menjen el cervell", "Estas maleït per sempre més", "Et mossega el coll"]
+                    bona_sort = ["Llençes el penil. El zombie es distreu menjant-se'l.", "Cales foc a les cortines. La bruixa fuig volant pel temor al foc.", "El vampir respira el teu alè d'all i fuig."]
+                    armes = ["pernil", "encenedor", "allioli"]
+                    {print}("Estàs davant d'una antiga mansió")
+                    {print}("Quelcom no acaba de funcionar bé")
+                    {print}("Sents un soroll com ", _)
+                    {print}("T'apropes a explorar-ho")
+                    {print}("Entres a la cuina i et trobes un encenedor, un tall de pernil i un pot d'allioli.")
+                    arma_escollida = {input}("Què t'emportes de la cuina?")
+                    {print}("Am el ", arma_escollida, " entres al menjador")
+                    {print}("Et trobes de sobte ", _)
+                    arma_necessaria = _
+                    {if} arma_escollida == arma_necessaria
+                        {print}("Utilitzes el ", arma_escollida)
+                        {print} _
+                        {print}("Guanyes!")
+                    {else}
+                        {print}("Has seleccionat una arma equivocada...")
+                        {print} _
+                        {print}("GAME OVER")
+                    ```
     hotel:
         name: hotel
         default_save_name: hotel
         description: hotel
         levels:
             15:
-                story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {ask}.\nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.\nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.\nAquí tens un exemple d'una funció amb arguments combinada amb comandes `{ask}`.\n"
-                example_code: "```\n{def} missatge_benvinguda (tractament, cognom, pais, num_habitacio)_\n    {print} (\"Benvingut a l'Hotel Hedy, \", tractament \", \" cognom)\n    nice_trip {is} {input} (\"Ha tingut un bon viatge des de \", pais, \"?\")\n    {if} nice_trip == \"si\":\n        {print} (\"Fantàstic!\")\n    {else}\n        {print} (\"Quina llàstima...\")\n        {print} (\"Afortunadament podrà descançar a la seva habitació.\")\n    {print} (\"La seva habitació és la \", num_habitacio)\n\n{print} (\"Hola, si us plau omple les dades per al check-in')\ntractament= {input} (\"Quin tractament prefereix (sr, sra, dr, etc.)?\")\ncognom = {input} (\"Com es diu de cognom?\")\npais_origen= {input}(\"A quin país resideix?\")\n\nmissatge_benvinguda(tractament, cognom, pais_origen, 105)\n```\n"
+                story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {input}.\nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.\nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.\nAquí tens un exemple d'una funció amb arguments combinada amb comandes `{input}`.\n"
+                example_code: |
+                    ```
+                    {def} missatge_benvinguda (tractament, cognom, pais, num_habitacio):
+                        {print}("Benvingut a l'Hotel Hedy, ", tractament, ", ", cognom)
+                        nice_trip = {input}("Ha tingut un bon viatge des de ", pais, "?")
+                        {if} nice_trip == "si":
+                            {print}("Fantàstic!")
+                        {else}:
+                            {print}("Quina llàstima...")
+                            {print}("Afortunadament podrà descançar a la seva habitació.")
+                        {print}("La seva habitació és la ", num_habitacio)
+
+                    {print}("Hola, si us plau omple les dades per al check-in')
+                    tractament= {input}("Quin tractament prefereix (sr, sra, dr, etc.)?")
+                    cognom = {input}("Com es diu de cognom?")
+                    pais_origen= {input}("A quin país resideix?")
+
+                    missatge_benvinguda(tractament, cognom, pais_origen, 105)
+                    ```
     if_command:
         name: '{if} & {else}'
         default_save_name: comanda_if
@@ -1308,18 +1369,18 @@ adventures:
                     ```
                     animals = ["un porc", "un gos", "una vaca"]
                     sons = ["oinc", "bub", "muu"]
-                    {for} i {in} {range} (1, 3)
+                    {for} i {in} {range}(1, 3):
                         animal = _
                         so = _
-                        {print} "En MacDonald viu al camp"
-                        {print} "I A I A O!"
-                        {print} "I a la granja té " animal
-                        {print} "I A I A O!"
-                        {print} "Fa " so so " per 'quí"
-                        {print} "Fa " so so "  per 'llà."
-                        {print} so ", per 'quí"
-                        {print} so ", per 'llà"
-                        {print} " tot arreu un " so so
+                        {print}("En MacDonald viu al camp")
+                        {print}("I A I A O!")
+                        {print}("I a la granja té ", animal)
+                        {print}("I A I A O!")
+                        {print}("Fa ", so so, " per 'quí")
+                        {print}("Fa ", so so, "  per 'llà.")
+                        {print}(so ", per, 'quí")
+                        {print}(so ", per, 'llà")
+                        {print}(" tot arreu un ", so so)
                     ```
 
                     ```
@@ -1333,7 +1394,25 @@ adventures:
                         {print} "early in the morning"
                     ```
             15:
-                example_code: "```\n{def} missatge_benvinguda (tractament, cognom, pais, num_habitacio)_\n    {print} (\"Benvingut a l'Hotel Hedy, \", tractament \", \" cognom)\n    nice_trip {is} {input} (\"Ha tingut un bon viatge des de \", pais, \"?\")\n    {if} nice_trip == \"si\":\n        {print} (\"Fantàstic!\")\n    {else}\n        {print} (\"Quina llàstima...\")\n        {print} (\"Afortunadament podrà descançar a la seva habitació.\")\n    {print} (\"La seva habitació és la \", num_habitacio)\n\n{print} (\"Hola, si us plau omple les dades per al check-in')\ntractament= {input} (\"Quin tractament prefereix (sr, sra, dr, etc.)?\")\ncognom = {input} (\"Com es diu de cognom?\")\npais_origen= {input}(\"A quin país resideix?\")\n\nmissatge_benvinguda(tractament, cognom, pais_origen, 105)\n```\n"
+                example_code: |
+                    ```
+                    {def} missatge_benvinguda (tractament, cognom, pais, num_habitacio)_
+                        {print}("Benvingut a l'Hotel Hedy, ", tractament ", " cognom)
+                        nice_trip = {input}("Ha tingut un bon viatge des de ", pais, "?")
+                        {if} nice_trip == "si":
+                            {print}("Fantàstic!")
+                        {else}:
+                            {print}("Quina llàstima...")
+                            {print}("Afortunadament podrà descançar a la seva habitació.")
+                        {print}("La seva habitació és la ", num_habitacio)
+
+                    {print}("Hola, si us plau omple les dades per al check-in')
+                    tractament= {input}("Quin tractament prefereix (sr, sra, dr, etc.)?")
+                    cognom = {input}("Com es diu de cognom?")
+                    pais_origen= {input}("A quin país resideix?")
+
+                    missatge_benvinguda(tractament, cognom, pais_origen, 105)
+                    ```
                 story_text: "En l'aventura anterior has après com utilitzar un argument en una funció i com combinar-lo amb un {ask}.\nPotser t'has preguntat per què hauries d'usar funcions, ja que les funcions de l'exemple només tenien una línia de codi.\nAra et mostrarem com és una funció més gran i també farem servir múltiples arguments. Veuràs com és molt millor utilitzar una funció quan aquesta es fa més gran.\nAquí tens un exemple d'una funció amb arguments combinada amb comandes `{ask}`.\n"
     language:
         default_save_name: Llengua
@@ -1342,8 +1421,25 @@ adventures:
                 story_text: "Crea el teu propi programa per practicar vocabulari en un nou idioma.\n\n### Exercici\nAllarga el codi afegint almenys 3 paraules addicionals permetent al jugador aprendre-les.\n**Extra** Per descomptat pots fer servir una llengua diferent del francès. Canvia el codi per qualsevol llengua que et vingui de gust aprendre.\n"
                 example_code: "```\n{print} \"Aprèn Francès!\"\ngat {is} {ask} \"🐱\"\n{if} gat {is} chat {print} \"Genial!\"\n{else} {print} \"No, gat es diu chat\"\ngranota {is} {ask} \"🐸\"\n{if} granota {is} grenouille {print} \"Super!\"\n{else} {print} \"No, granota es diu grenouille\"\n```\n"
             14:
-                example_code: "```\nparaules_frances = [\"bonjour\", \"ordinateur\", \"pomme de terre\"]\ntraduccio = [\"Bon dia\", \"ordinador\", \"patata\"]\npunts = 0\n{for} i {in} {range} (1,3):\n    resposta = {input} (\"Què vol dir \", paraules_frances[i], \"?\")\n    correcta = traduccio[i]\n    {if} resposta == correcta:\n        {print} (\"Correcte!\")\n        punts = punts + 1\n    {else}:\n        {print} (\"Malament, \", paraules_frances[i], \" significa \", traduccio[i])\n{print} (\"Has encertat \", punts, \" respostes.\")\n```\n"
-                story_text: "### Exercici\nDona un cop d'ull al codi d'exemple. Aquest és un programa per practicar vocabulari en francès. Ara crea el teu propi programa per practicar el teu vocabulari en un nou idioma.\nSi no coneixes cap altre idioma, pots utilitzar Google Translate o fer servir emojis i la teva llengua materna.\n"
+                example_code: |
+                    ```
+                    paraules_frances = ["bonjour", "ordinateur", "pomme de terre"]
+                    traduccio = ["Bon dia", "ordinador", "patata"]
+                    punts = 0
+                    {for} i {in} {range}(1,3):
+                        resposta = {input}("Què vol dir ", paraules_frances[i], "?")
+                        correcta = traduccio[i]
+                        {if} resposta == correcta:
+                            {print}("Correcte!")
+                            punts = punts + 1
+                        {else}:
+                            {print}("Malament, ", paraules_frances[i], " significa ", traduccio[i])
+                    {print}("Has encertat ", punts, " respostes.")
+                    ```
+                story_text: "### Exercici
+                    Dona un cop d'ull al codi d'exemple. Aquest és un programa per practicar vocabulari en francès. Ara crea el teu propi programa per practicar el teu vocabulari en un nou idioma.
+                    Si no coneixes cap altre idioma, pots utilitzar Google Translate o fer servir emojis i la teva llengua materna.
+                    "
         name: llengua
         description: Practica paraules amb una llengua estrangera
     lists:
@@ -1386,43 +1482,23 @@ adventures:
         default_save_name: música
         name: música
         levels:
+            1:
+                story_text: "En aquest nivell aprendràs com utilitzar la comanda `{play}` per a tocar una melodia!\n\nEscriu `{play}` seguit de la nota que vols tocar. Farem servir l'escala alfabètica que té les notes C-D-E-F-G-A-B i que s'equivalen a Do (C), Re (D), Mi (E), Fa (F), Sol (G), La (A), Si (B).\nCom pots veure, hi ha només 7 lletres, però podem tocar-ne més canviant l'escala.\nEscriu un número entre 0 i 9 darrere de la lletra per triar l'escala, per exemple, després de B4 ve C5.\nC0 és la nota més baixa que pots tocar, B9 és la més alta.\n\n### Exercici\nProva el codi d'exemple i experimenta amb ell! Ets capaç de crear una melodia pròpia?\nEn el següent nivell aprendràs a tocar algunes cançons existents."
+                example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
             2:
                 example_code: "```\n{print} En MacDonald viu al camp\n{play} C5\n{play} C5\n{play} C5\n{play} G4\n{play} A4\n{play} A4\n{play} G4\n```\n"
                 story_text_2: Com pots veure, també es pot utilitzar la comanda `{sleep}` per afegir una pausa a la cançó.
                 example_code_2: "```\n{print} Quan les oques van al camp\n{play} C\n{play} C\n{play} G\n{play} G\n{play} A\n{play} A\n{play} G\n{sleep} 1\n{play} F\n{play} F\n```\n"
                 story_text: "### Exercici  \nAcaba les cançons! Ja hem començat el codi per algunes melodies.\n"
-            1:
-                story_text: "En aquest nivell aprendràs com utilitzar la comanda `{play}` per a tocar una melodia!\n\nEscriu `{play}` seguit de la nota que vols tocar. Farem servir l'escala alfabètica que té les notes C-D-E-F-G-A-B i que s'equivalen a Do (C), Re (D), Mi (E), Fa (F), Sol (G), La (A), Si (B).\nCom pots veure, hi ha només 7 lletres, però podem tocar-ne més canviant l'escala.\nEscriu un número entre 0 i 9 darrere de la lletra per triar l'escala, per exemple, després de B4 ve C5.\nC0 és la nota més baixa que pots tocar, B9 és la més alta.\n\n### Exercici\nProva el codi d'exemple i experimenta amb ell! Ets capaç de crear una melodia pròpia?\nEn el següent nivell aprendràs a tocar algunes cançons existents."
-                example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
-            4:
-                story_text: "Utilitza la comanda `{clear}` per crear una màquina de karaoke!\n\n### Exercici\nAcaba la versió de karaoke de \"Plou i fa sol\".\nDesprés, crea una versió de karaoke de qualsevol cançó que t'agradi!\n"
-                example_code: "```\n{print} \"Plou i fa sol\"\n{play} G\n{play} E\n{play} F\n{play} G\n{clear}\n{print} \"Les bruixes es pentinen\"\n{play} A\n{play} F\n{play} F\n{play} F\n{play} A\n{play} G\n{play} E\n{clear}\n{print} \"Plou i fa sol\"\n{play} G\n{play} E\n{play} F\n{play} G\n{clear}\n{print} \"Les bruixes porten dol\"\n{play} A\n```\n"
             3:
                 example_code: "```\nnotes {is} A4, B4, C4\n{play} notes {at} {random}\n{play} notes {at} {random}\n{play} notes {at} {random}\n```\n"
                 story_text: "Crea una melodia aleatòria!\n\n### Exercici  \nEl codi d'exemple crea una melodia aleatòria, però és molt curta i no s'utilitzen massa notes.\nAfegeix més notes a la llista i crea una melodia més llarga copiant la darrera línia unes quantes vegades.\n"
+            4:
+                story_text: "Utilitza la comanda `{clear}` per crear una màquina de karaoke!\n\n### Exercici\nAcaba la versió de karaoke de \"Plou i fa sol\".\nDesprés, crea una versió de karaoke de qualsevol cançó que t'agradi!\n"
+                example_code: "```\n{print} \"Plou i fa sol\"\n{play} G\n{play} E\n{play} F\n{play} G\n{clear}\n{print} \"Les bruixes es pentinen\"\n{play} A\n{play} F\n{play} F\n{play} F\n{play} A\n{play} G\n{play} E\n{clear}\n{print} \"Plou i fa sol\"\n{play} G\n{play} E\n{play} F\n{play} G\n{clear}\n{print} \"Les bruixes porten dol\"\n{play} A\n```\n"
             5:
                 story_text: "No sempre has d'utilitzar la comanda `{play}` per tocar tota una cançó, de vegades només vols tocar una nota. \nPer exemple, si vols fer un qüestionari, pots tocar una nota alta i alegre si la resposta és correcta i una nota baixa i trista si la resposta és incorrecta.\n\n### Exercici\nAcaba la primera pregunta afegint una línia de codi que toqui una nota C3 si es dona una resposta incorrecta.  \nDesprés, pensa en 3 preguntes més per afegir a aquest qüestionari.\n"
                 example_code: "```\nresposta {is} {ask} \"Quina és la capital de Zimbabwe?\"\n{if} resposta {is} Harare {play} C6\n_\n```\n"
-            7:
-                story_text: "En lloc de tocar notes, ara també pots tocar números. Simplement, escriu `{play} 1` per la nota més baixa, `{play} 70` per la nota més alta, o qualsevol número entremig.\n\n### Exercici\nAixò demana matemàtiques musicals! Prova el codi d'exemple unes quantes vegades amb diferents números inicials.\nDesprés, mira si pots compondre una cançó utilitzant els números.\n"
-                example_code: "```\nnum = {ask} \"Digues un número de l'1 al 67\"\n{print} num\n{play} num\nnum = num + 1\n{print} num\n{play} num\nnum = num + 1\n{print} num\n{play} num\n```\n"
-            8:
-                example_code: "```\n{print} \"Quan les oques van al camp\"\n{repeat} 2 {times} {play} C4\n{repeat} 2 {times} {play} G4\n_\n```\n"
-                story_text: "Utilitzar la comanda `{repeat}` pot fer que els teus codis per a melodies siguin molt més curts!\n\n### Exercici\nAcaba el codi per a \"Quan les oques van al camp\" usant la comanda `{repeat}`.\nDesprés, torna a les cançons que has fet en els nivells anteriors. Pots fer més curts aquells codis també?\n"
-            12:
-                story_text: "Utilitza funcions a les teves cançons! Com pots veure en el codi d'exemple, pots fer una funció per a cada línia de \"Quan les oques van al camp\". Un cop hagis programat les tres primeres línies, només has de cridar les funcions en l'ordre en què vols que es reprodueixin.\n\n### Exercici\nAcaba la cançó de \"Quan les oques van al camp\".\nDesprés, revisa totes les cançons que has programat en els nivells anteriors. Pots fer aquests codis més curts i millors utilitzant funcions també?\n"
-                example_code: "```\n{define} primera_linia\n    {play} C\n    {play} C\n    {play} G\n    {play} G\n    {play} A\n    {play} A\n    {play} G\n    {sleep}\n\n{define} segona_linia\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {play} D\n    {play} C\n    {sleep}\n\n{define} tercera_linia\n    {play} G\n    {play} G\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {sleep}\n\n{call} primera_linia\n_\n_\n```\n"
-            15:
-                story_text: "Pots programar música per diversió, però també pots fer servir les notes musicals per fer alguna cosa tan útil com una alarma d'incendi!\n\n### Exercici\nAssegura't que l'alarma sona quan hi ha un incendi!\n"
-            16:
-                story_text: "**Avís** Aquesta aventura pot arribar a ser extremadament molesta!  \nTambé podem utilitzar la comanda `{while}` per repetir una cançó infinitament.\n\n### Exercici  \nAcaba la cançó interminable.\n"
-                example_code: "```\n{def} cançó\n    {play} _\n\nsi_o_no = {input}(\"Vols sentir la cançó que mai s'acaba?\")\n{while} si_o_no = \"sí\":\n    cançó()\n    {print} \"🥳\"\n```\n"
-            10:
-                story_text: "A partir d'aquest nivell pots, entre altres coses, utilitzar una comanda `{repeat}` dins d'una altra comanda `{repeat}`.  \nAixò fa que cançons com \"Moltes felicitats\" siguin encara més curtes!\n\n### Exercici\nAcaba la cançó!\n"
-                example_code: "```\nprimer_cop = si\n{repeat} 2 {times}\n    {repeat} 2 {times}\n        {play} C\n    {play} D\n    {play} C\n    {if} primer_cop {is} si\n        {play} F\n        {play} E\n        primer_cop {is} no\n    {else}\n        _\n```\n"
-            9:
-                story_text: "Ara que podem utilitzar la comanda `{repeat}` per a múltiples línies, podem fer cançons encara més fàcilment!\n\n### Exercici  \nAcaba la cançó de (Frère Jacques, també coneguda com a Germà Jaume). No oblidis usar `{repeat}`!\n"
-                example_code: "```\n{print} \"Frère Jacques\"\n{repeat} 2 {times}\n    {play} C\n    {play} D\n    {play} E\n    {play} C\n{repeat} 2 {times}\n    {play} E\n    {play} F\n    {play} G\n    {sleep} 1\n```\n"
             6:
                 story_text: |
                     Amb `{elif}` pots reproduir diferents melodies per a diferents situacions. Per exemple, si una persona està contenta, li pots reproduir una melodia alegre.
@@ -1440,6 +1516,35 @@ adventures:
                         {play} _
                     {elif} estat_anim {is} _
                         {play} _
+                    ```
+            7:
+                story_text: "En lloc de tocar notes, ara també pots tocar números. Simplement, escriu `{play} 1` per la nota més baixa, `{play} 70` per la nota més alta, o qualsevol número entremig.\n\n### Exercici\nAixò demana matemàtiques musicals! Prova el codi d'exemple unes quantes vegades amb diferents números inicials.\nDesprés, mira si pots compondre una cançó utilitzant els números.\n"
+                example_code: "```\nnum = {ask} \"Digues un número de l'1 al 67\"\n{print} num\n{play} num\nnum = num + 1\n{print} num\n{play} num\nnum = num + 1\n{print} num\n{play} num\n```\n"
+            8:
+                example_code: "```\n{print} \"Quan les oques van al camp\"\n{repeat} 2 {times} {play} C4\n{repeat} 2 {times} {play} G4\n_\n```\n"
+                story_text: "Utilitzar la comanda `{repeat}` pot fer que els teus codis per a melodies siguin molt més curts!\n\n### Exercici\nAcaba el codi per a \"Quan les oques van al camp\" usant la comanda `{repeat}`.\nDesprés, torna a les cançons que has fet en els nivells anteriors. Pots fer més curts aquells codis també?\n"
+            9:
+                story_text: "Ara que podem utilitzar la comanda `{repeat}` per a múltiples línies, podem fer cançons encara més fàcilment!\n\n### Exercici  \nAcaba la cançó de (Frère Jacques, també coneguda com a Germà Jaume). No oblidis usar `{repeat}`!\n"
+                example_code: "```\n{print} \"Frère Jacques\"\n{repeat} 2 {times}\n    {play} C\n    {play} D\n    {play} E\n    {play} C\n{repeat} 2 {times}\n    {play} E\n    {play} F\n    {play} G\n    {sleep} 1\n```\n"
+            10:
+                story_text: "A partir d'aquest nivell pots, entre altres coses, utilitzar una comanda `{repeat}` dins d'una altra comanda `{repeat}`.  \nAixò fa que cançons com \"Moltes felicitats\" siguin encara més curtes!\n\n### Exercici\nAcaba la cançó!\n"
+                example_code: "```\nprimer_cop = si\n{repeat} 2 {times}\n    {repeat} 2 {times}\n        {play} C\n    {play} D\n    {play} C\n    {if} primer_cop {is} si\n        {play} F\n        {play} E\n        primer_cop {is} no\n    {else}\n        _\n```\n"
+            12:
+                story_text: "Utilitza funcions a les teves cançons! Com pots veure en el codi d'exemple, pots fer una funció per a cada línia de \"Quan les oques van al camp\". Un cop hagis programat les tres primeres línies, només has de cridar les funcions en l'ordre en què vols que es reprodueixin.\n\n### Exercici\nAcaba la cançó de \"Quan les oques van al camp\".\nDesprés, revisa totes les cançons que has programat en els nivells anteriors. Pots fer aquests codis més curts i millors utilitzant funcions també?\n"
+                example_code: "```\n{define} primera_linia\n    {play} C\n    {play} C\n    {play} G\n    {play} G\n    {play} A\n    {play} A\n    {play} G\n    {sleep}\n\n{define} segona_linia\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {play} D\n    {play} C\n    {sleep}\n\n{define} tercera_linia\n    {play} G\n    {play} G\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {sleep}\n\n{call} primera_linia\n_\n_\n```\n"
+            15:
+                story_text: "Pots programar música per diversió, però també pots fer servir les notes musicals per fer alguna cosa tan útil com una alarma d'incendi!\n\n### Exercici\nAssegura't que l'alarma sona quan hi ha un incendi!\n"
+            16:
+                story_text: "**Avís** Aquesta aventura pot arribar a ser extremadament molesta!  \nTambé podem utilitzar la comanda `{while}` per repetir una cançó infinitament.\n\n### Exercici  \nAcaba la cançó interminable.\n"
+                example_code: |
+                    ```
+                    {def} cançó():
+                        {play} _
+                    
+                    si_o_no = {input}("Vols sentir la cançó que mai s'acaba?")
+                    {while} si_o_no = "sí":
+                        cançó()
+                        {print}("🥳")
                     ```
         description: Reprodueix una nota!
     songs_2:
@@ -1468,12 +1573,29 @@ adventures:
         default_save_name: Guardiola
         name: guardiola
         levels:
-            15:
-                story_text: "### Exercici\nEn aquest nivell pots fer que Hedy t'expliqui si has estalviat prou diners!\nAcaba aquest codi omplint els buits!\n"
-                example_code: "```\n_ calcula_pressupost (objectiu, diners, paga):\n    a_estalviar = objectiu- diners\n    setmanes = a_estalviar / paga\n    {if} objectiu _ diners\n        {print} (\"Has d'estalviar més!\")\n        {print} (\"Necessites \", setmanes, \" setmanes més.\")\n    {else}\n        {print} (\"Perfecte! Ja en tens suficient\")\n        {print} (\"Ja ho pots comprar!\")\n\ndiners = {input} (\"Quant has estalviat?\")\nobjectiu= {input} (\"Quants diners necessites?\")\npaga = {input} (\"Quants diners aconsegueixes cada setmana?\")\n\n_\n```\n"
             7:
                 example_code: "```\n{print} \"La teva guardiola digital\"\ndesig = {ask} \"Què vols comprar?\"\npreu = {ask} \"Quant costa?\"\nestalviat = {ask} \"Quants diners ja has estalviat?\"\npaga = {ask} \"Quants diners aconsegueixes cada setmana?\"\na_estalviar = preu - estalviat\nweeks = a_estalviar / paga\n{print} \"Ho podràs comprar \" _ \" en \" _ \" setmanes.\"\n```\n"
                 story_text: "En aquesta aventura aprendràs a crear una guardiola digital.\n\n### Exercici\nAcaba el codi per calcular quants diners tens i quant temps necessites estalviar per comprar allò que vols!\n**Extra** Potser ja has estalviat alguns diners? Dedueix-los de la quantitat que hauràs d'estalviar.\n"
+            15:
+                story_text: "### Exercici\nEn aquest nivell pots fer que Hedy t'expliqui si has estalviat prou diners!\nAcaba aquest codi omplint els buits!\n"
+                example_code: |
+                    ```
+                    _ calcula_pressupost(objectiu, diners, paga):
+                        a_estalviar = objectiu- diners
+                        setmanes = a_estalviar / paga
+                        {if} objectiu _ diners:
+                            {print}("Has d'estalviar més!")
+                            {print}("Necessites ", setmanes, " setmanes més.")
+                        {else}:
+                            {print}("Perfecte! Ja en tens suficient")
+                            {print}("Ja ho pots comprar!")
+
+                    diners = {input}("Quant has estalviat?")
+                    objectiu= {input}("Quants diners necessites?")
+                    paga = {input}("Quants diners aconsegueixes cada setmana?")
+
+                    _
+                    ```
         description: Conta el teu efectiu!
     random_command:
         levels:
@@ -1486,7 +1608,7 @@ adventures:
                 example_code_3: "```\n{print} El super-concurs!\n{print} Hi ha 3 caixes davant teu...\nescollit {is} {ask} Quina esculls?\npremis {is}  _\n_ a la caixa _ hi ha _\n```\n"
             14:
                 story_text: "Ara que ja has après a utilitzar els claudàtors en les llistes, també pots començar a fer servir la comanda {at} {random} a la manera de Python!\nNomés has d'escriure el nom de la teva llista amb `[random]` darrere!"
-                example_code: "```\nfruita = [\"poma\", \"plàtan\", \"cirera\"]\n{print} fruita[random]\n```"
+                example_code: "```\nfruita = [\"poma\", \"plàtan\", \"cirera\"]\n{print}(fruita[random])\n```"
         name: '{random}'
         default_save_name: comanda_random
         description: Introduint la comanda {at} {random}
@@ -1612,7 +1734,16 @@ adventures:
                     ```
             16:
                 story_text: "Amb la comanda `{while}` pots assegurar-te que els teus clients puguin continuar afegint comandes fins que hagin acabat.\n\n### Exercici\nAfegeix correctament la comanda `{while}` a aquest codi.\n"
-                example_code: "```\n{print} \"Benvinguts al McHedy\"\ncontinuar = \"sí\"\n_\n    comanda = {ask} \"Què vol demanar?\"\n    {print} comanda\n    continuar = {ask} \"Voldria demanar alguna cosa més?\"\n{print} \"Gràcies!\"\n```\n"
+                example_code: |
+                    ```
+                    {print}("Benvinguts al McHedy")
+                    continuar = "sí"
+                    _
+                        comanda = {input}("Què vol demanar?")
+                        {print}(comanda)
+                        continuar = {input}("Voldria demanar alguna cosa més?")
+                    {print}("Gràcies!")
+                    ```
         name: restaurant
         description: Crea el teu propi restaurant virtual
     turtle:

@@ -435,7 +435,7 @@ adventures:
                     Następnie wywołaj funkcję.
                 example_code: |
                     ```
-                    {define} nowe_pytanie():
+                    {def} nowe_pytanie():
                         liczby = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                         liczba_1 = liczby[random]
                         liczba_2 = liczby[random]
@@ -447,7 +447,7 @@ adventures:
                         {print}('Dobra robota!')
 
                     {print}('Odpowiedz poprawnie na 10 pytań, aby wygrać!')
-                    {for} i {in} {range} 1 {to} 10
+                    {for} i {in} {range}(1, 10):
                         _
                     {print}('Wygrałeś!')
                     ```
@@ -1128,7 +1128,25 @@ adventures:
                     Być może zastanawiałeś się, dlaczego używasz funkcji, ponieważ funkcje w tym przykładzie były tylko jednym wierszem kodu.
                     Teraz pokażemy Ci, jak wygląda większa funkcja, i będziemy również korzystać z wielu argumentów. Zobaczysz, że lepiej jest korzystać z funkcji, jeżeli funkcja się powiększy.
                     Oto przykład funkcji z argumentami połączonymi z poleceniami `{ask}`.
-                example_code: "```\n{def} wiadomość_powitalna(tytuł, nazwisko, kraj, numer_pokoju):\n    {print} ('Witaj w Hotelu Hedy, ', tytuł, ' ', nazwisko)\n    miła_podróż {is} {input} ('Czy miał Pana/Pani miłą podróż z ', kraj, '?')\n    {if} miła_podróż == 'tak':\n        {print} ('Wspaniale!')\n    {else}:\n        {print} ('Przykro mi to słyszeć.')\n        {print} ('Na szczęście może Pan/Pani odpocząć w swoim pokoju hotelowym.')\n    {print} ('Pana/Pani numer pokoju to ', numer_pokoju)\n\n{print} ('Witam. Proszę podać dane do zameldowania.')\ntytuł = {input} ('Jaki jest Pana/Pani tytuł (Pan, Pani, Panna, Doktor, itp.)?')\nnazwa = {input} ('Jak ma Pan/Pani na nazwisko?')\nkrajpochodzenia = {input}('Z jakiego kraju Pan/Pani przyjechał(a)?')\n\nwiadomość_powitalna(tytuł , nazwa , krajpochodzenia , 105)\n```\n"
+                example_code: |
+                    ```
+                    {def} wiadomość_powitalna(tytuł, nazwisko, kraj, numer_pokoju):
+                        {print}('Witaj w Hotelu Hedy, ', tytuł, ' ', nazwisko)
+                        miła_podróż = {input}('Czy miał Pana/Pani miłą podróż z ', kraj, '?')
+                        {if} miła_podróż == 'tak':
+                            {print}('Wspaniale!')
+                        {else}:
+                            {print}('Przykro mi to słyszeć.')
+                            {print}('Na szczęście może Pan/Pani odpocząć w swoim pokoju hotelowym.')
+                        {print}('Pana/Pani numer pokoju to ', numer_pokoju)
+
+                    {print}('Witam. Proszę podać dane do zameldowania.')
+                    tytuł = {input}('Jaki jest Pana/Pani tytuł (Pan, Pani, Panna, Doktor, itp.)?')
+                    nazwa = {input}('Jak ma Pan/Pani na nazwisko?')
+                    krajpochodzenia = {input}('Z jakiego kraju Pan/Pani przyjechał(a)?')
+
+                    wiadomość_powitalna(tytuł , nazwa , krajpochodzenia , 105)
+                    ```
         name: hotel
         default_save_name: hotel
         description: hotel
@@ -1284,15 +1302,15 @@ adventures:
                     francuskie_słowa= ['bonjour', 'ordinateur', 'pomme de terre']
                     tłumaczenie = ['witam', 'komputer', 'ziemniak']
                     wynik = 0
-                    {for} i {in} {range} (1,3):
-                        odpowiedź = {input}('Co to znaczy ', francuskie_słowa[i] ' ?')
+                    {for} i {in} {range}(1,3):
+                        odpowiedź = {input}('Co to znaczy ', francuskie_słowa[i], ' ?')
                         poprawnie = tłumaczenie[i]
-                        {if} odpowiedź == poprawnie
-                            {print} ('Poprawnie!')
+                        {if} odpowiedź == poprawnie:
+                            {print}('Poprawnie!')
                             wynik = wynik + 1
-                        {else}
-                            {print} ('Źle, ', francuskie_słowa[i], ' oznacza ', tłumaczenie[i])
-                    {print} ('Odpowiedziałeś poprawnie na ', wynik, ' pytań.')
+                        {else}:
+                            {print}('Źle, ', francuskie_słowa[i], ' oznacza ', tłumaczenie[i])
+                    {print}('Odpowiedziałeś poprawnie na ', wynik, ' pytań.')
                     ```
     lists:
         levels:
@@ -1310,7 +1328,7 @@ adventures:
                     #teraz dopasujemy 2 listy za pomocą zmiennej i
                     szczęśliwe_liczby = [15, 18, 6]
                     {for} i {in} {range} (1, 3):
-                        {print} (przyjaciele[i], 's szczęśliwy numer to ', szczęśliwe_liczby[i])
+                        {print}(przyjaciele[i], 's szczęśliwy numer to ', szczęśliwe_liczby[i])
                     ```
     maths:
         name: Matematyka
@@ -1516,13 +1534,13 @@ adventures:
                     Dokończ niekończącą się piosenkę
                 example_code: |
                     ```
-                    {def} piosenka
+                    {def} piosenka():
                         {play} _
 
                     tak_lub_nie = {input}('Czy chcesz usłyszeć moją niekończącą się piosenkę?')
                     {while} tak_lub_nie = 'tak':
                         piosenka()
-                        {print} '🥳'
+                        {print}('🥳')
                     ```
             6:
                 example_code: "```\nnastrój = {ask} 'Jak się dzisiaj czujesz?'\n{if} nastrój {is} szczęśliwy\n    {play} C4\n    {play} E4\n    {play} G4\n    {play} C5\n{elif} nastrój {is} smutny\n    {play} _\n{elif} nastrój {is} _\n    {play} _\n```\n"
@@ -1635,11 +1653,11 @@ adventures:
                         do_zaoszczędzenia = pragnienie - pieniądze
                         tygodnie = do_zaoszczędzenia / kieszonkowe
                         {if} pragnienie _  pieniądze:
-                            {print} ('Musisz jeszcze trochę zaoszczędzić!')
-                            {print} ('Będziesz potrzebował jeszcze ', tygodnie , ' tygodni.')
+                            {print}('Musisz jeszcze trochę zaoszczędzić!')
+                            {print}('Będziesz potrzebował jeszcze ', tygodnie , ' tygodni.')
                         {else}:
-                            {print} ('Świetnie! Masz wystarczająco dużo!')
-                            {print} ('Chodźmy na zakupy!')
+                            {print}('Świetnie! Masz wystarczająco dużo!')
+                            {print}('Chodźmy na zakupy!')
 
                     pieniądze = {input}('Ile pieniędzy zaoszczędziłeś?')
                     pragnienie = {input}('Ile pieniędzy potrzebujesz?')
@@ -1769,7 +1787,7 @@ adventures:
                 example_code_2: |-
                     ```
                     owoc = ['jabłko', 'banan', 'wiśnia']
-                    {print} owoc[random]
+                    {print}(owoc[random])
                     ```
         name: '{random}'
     repeat_command:
@@ -2044,7 +2062,16 @@ adventures:
 
                     ### Ćwiczenie
                     Poprawnie dodaj do tego kodu polecenie `{while}`
-                example_code: "```\n{print} 'Witamy w McHedy'\nwięcej = 'tak'\n_\n    zamówienie = {ask} 'Co chcesz zamówić?'\n    {print} zamówienie \n    więcej = {ask} 'Czy chciałby Pan/Pani zamówić coś jeszcze?'\n{print} 'Dziękuję!'\n```\n"
+                example_code: |
+                    ```
+                    {print}('Witamy w McHedy')
+                    więcej = 'tak'
+                    _
+                        zamówienie = {input}('Co chcesz zamówić?')
+                        {print}(zamówienie )
+                        więcej = {input}('Czy chciałby Pan/Pani zamówić coś jeszcze?')
+                    {print}('Dziękuję!')
+                    ```
     rock:
         name: papier, kamień, nożyce
         default_save_name: Kamień_2
@@ -2267,7 +2294,18 @@ adventures:
                 example_code: "```\nwiersz = 99\n{print} wiersz ' butelek piwa na ścianie'\n{print} wiersz ' butelek piwa'\n{print} 'Zdejmij jedną i podaj ją dalej'\nwiersz = wiersz - 1\n{print} wiersz ' butelek piwa na ścianie'\n{sleep}\n```\n"
                 example_code_2: "```\nliczba = 6\nliczba = liczba - 1\n{print} liczba ' małych małpek po łóżku skakało'\n{print} 'jedna spadła i mniej zostało'\n{print} 'Dzwoni mama do doktora, a pan doktor na to'\n{print} 'Żadnych więcej małpek co po łóżku skaczą!'\n{sleep}\n```\n"
             15:
-                example_code: "```\n{define} piosenka (miejsce)\n    {print} 'Moja Bonnie jest nad ' place\n\nwybrane_miejsce = {ask} 'Gdzie chcesz, żeby była Bonnie?'\nsynonim = {ask} 'Jakie jest inne określenie na to miejsce? '\n\npiosenka (wybrane_miejsce )\npiosenka (synonim )\npiosenka (wybrane_miejsce )\n```\n"
+                example_code: |
+                    ```
+                    {def} piosenka(miejsce):
+                        {print}('Moja Bonnie jest nad ', place)
+
+                    wybrane_miejsce = {input}('Gdzie chcesz, żeby była Bonnie?')
+                    synonim = {input}('Jakie jest inne określenie na to miejsce? ')
+
+                    piosenka(wybrane_miejsce )
+                    piosenka(synonim )
+                    piosenka(wybrane_miejsce )
+                    ```
                 story_text: "W poprzedniej przygodzie nauczyłeś(aś) się jak używać argumentów funkcji ale czy wiedziałeś(aś), że możesz je połączyć z poleceniem`{ask}` ?\nW tym przykładzie zmieniliśmy program 'Moja Bonnie' i zrobiliśmy go bardziej interaktywnym. Teraz pytamy gdzie jest Bonnie.\n"
     songs_2:
         name: zaśpiewaj piosenkę! 2
@@ -2701,7 +2739,7 @@ adventures:
                     Spirala
                     ```
                     odległość = 5
-                    {while} odległość < 200
+                    {while} odległość < 200:
                         odległość = odległość + 5
                          _
                     ```
@@ -2710,11 +2748,11 @@ adventures:
                 example_code_2: |
                     Wachlarz
                     ```
-                    {define} narysuj_kwadrat(bok)
+                    {def} narysuj_kwadrat(bok):
                     _
 
                     i = 100
-                    {while} i > 1
+                    {while} i > 1:
                         _(i)
                         _
                         i = i - 3
