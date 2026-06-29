@@ -2519,11 +2519,11 @@ adventures:
                     {for} i {in} {range}(1, 10):
                         {if} game == 'on':
                             guess = {input}('Which number do you think it is?')
-                            {if} guess _ number
+                            {if} guess _ number:
                                 {print}('Lower!')
-                            {if} guess _ number
+                            {if} guess _ number:
                                 {print}('Higher!')
-                            {if} guess _ number
+                            {if} guess _ number:
                                 {print}('You win!')
                                 game = 'over'
                     ```
@@ -4481,12 +4481,12 @@ adventures:
                     {def} line_3():
                     _
 
-                    {print} ('The drunken sailor')
-                    {print} ('What shall we do with the drunken sailor?')
+                    {print}('The drunken sailor')
+                    {print}('What shall we do with the drunken sailor?')
                     line_1()
                     line_2()
                     line_3()
-                    {print} ('Early in the morning')
+                    {print}('Early in the morning')
                     ```
                 answer_code: |
                     ```
@@ -4519,12 +4519,12 @@ adventures:
                         {play} D
                         {play} D
 
-                    {print} ('The drunken sailor')
-                    {print} ('What shall we do with the drunken sailor?')
+                    {print}('The drunken sailor')
+                    {print}('What shall we do with the drunken sailor?')
                     line_1()
                     line_2()
                     line_3()
-                    {print} ('Early in the morning')
+                    {print}('Early in the morning')
                     line_4()
                     ```
     music_3:
