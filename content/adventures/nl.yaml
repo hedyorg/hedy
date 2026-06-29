@@ -414,16 +414,16 @@ adventures:
                 example_code: |
                     ```
                     #Vragen welke tafel je wil oefenen :
-                    getal = {input} ('Van welk getal wil je de tafel van vermenigvuldiging wil je oefenen?')
+                    getal = {input}('Van welk getal wil je de tafel van vermenigvuldiging wil je oefenen?')
                     score = 0
 
                     #Vragen stellen:
-                    {for} i {in} {range} (1,10):
-                        antwoord = {input} ('Hoeveel is ', i, ' keer ', getal, '?' )
+                    {for} i {in} {range}(1,10):
+                        antwoord = {input}('Hoeveel is ', i, ' keer ', getal, '?' )
                         goede_antwoord = getal * i
                         {if} antwoord _
                             score = 
-                            {print} ('Ja dat klopt!')
+                            {print}('Ja dat klopt!')
                         _
 
                     #De score printen:
@@ -431,18 +431,18 @@ adventures:
                 answer_code: |
                     ```
                     #Vragen welke tafel je wil oefenen :
-                    getal = {input} ('Van welk getal wil je de tafel van vermenigvuldiging wil je oefenen?')
+                    getal = {input}('Van welk getal wil je de tafel van vermenigvuldiging wil je oefenen?')
                     score = 0
 
                     #Vragen stellen:
-                    {for} i {in} {range} (1,10):
-                        antwoord = {input} ('Hoeveel is ', i, ' keer ', getal, '?' )
+                    {for} i {in} {range}(1,10):
+                        antwoord = {input}('Hoeveel is ', i, ' keer ', getal, '?' )
                         goede_antwoord = getal * i
                         {if} antwoord == goed_antwoord
                             score = score + 1
-                            {print} ('Ja dat klopt!')
+                            {print}('Ja dat klopt!')
                         else:
-                            {print} ('Helaas, dat klopt niet. Het goede antwoord is: ', goede_antwoord)
+                            {print}('Helaas, dat klopt niet. Het goede antwoord is: ', goede_antwoord)
 
                     #De score printen:
                     {print}('Je bent klaar')
