@@ -33,7 +33,6 @@ from urllib.parse import quote_plus
 import hedy
 import website_content as hedy_content
 from hedy import translation as hedy_translation
-from hedy.external import initialize_frontend_feature_flags_from_context
 import hedyweb
 import envs
 import utils
@@ -920,7 +919,7 @@ def get_frontend_feature_flags_context():
 
 def initialize_hedylang_feature_flags_for_request():
     """Initialize hedylang feature flags before each transpilation operation."""
-    initialize_frontend_feature_flags_from_context(get_frontend_feature_flags_context())
+    hedy.external.initialize_frontend_feature_flags_from_context(get_frontend_feature_flags_context())
 
 
 @app.route('/report_error', methods=['POST'])
