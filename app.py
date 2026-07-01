@@ -919,7 +919,30 @@ def get_frontend_feature_flags_context():
 
 def initialize_hedylang_feature_flags_for_request():
     """Initialize hedylang feature flags before each transpilation operation."""
-    hedy.external.initialize_frontend_feature_flags_from_context(get_frontend_feature_flags_context())
+    context = get_frontend_feature_flags_context()
+    external = getattr(hedy, "external", None)
+
+    if external is None:
+        logger.warning("hedy.external is unavailable; skipping feature-flag initialization")
+        return
+
+    init_from_context = getattr(external, "initialize_frontend_feature_flags_from_context", None)
+    if callable(init_from_context):
+        init_from_context(context)
+        return
+
+    # Backward-compatible path for older hedylang versions.
+    init_legacy = getattr(external, "initialize_frontend_feature_flags", None)
+    if callable(init_legacy):
+        init_legacy(
+            frontend_environment=context.get("frontend_environment"),
+            feature_flags=context.get("feature_flags"),
+        )
+        return
+
+    logger.warning(
+        "hedy.external has no supported frontend feature-flag initializer; skipping initialization"
+    )
 
 
 @app.route('/report_error', methods=['POST'])
