@@ -2940,7 +2940,14 @@ class ForTeachersModule(WebsiteModule):
             return redirect(f"/for-teachers/customize-adventure/{adventure['id']}?new_adventure=1")
         return redirect(f"/for-teachers/redesign/customize-adventure/{adventure['id']}?new_adventure=1")
 
-    def _render_customize_adventure_page(self, user, adventure_id, template_name, *, javascript_page="customize-adventure"):
+    def _render_customize_adventure_page(
+        self,
+        user,
+        adventure_id,
+        template_name,
+        *,
+        javascript_page="customize-adventure",
+    ):
         if not adventure_id:
             return make_response(gettext("adventure_empty"), 400)
         if not isinstance(adventure_id, str):
@@ -2948,20 +2955,31 @@ class ForTeachersModule(WebsiteModule):
 
         adventure = self.db.get_adventure(adventure_id)
         if not adventure and request.args.get("new_adventure"):
-            adventure = session.get("new_adventure", self.create_basic_adventure(user, adventure_id))
+            adventure = session.get(
+                "new_adventure", self.create_basic_adventure(user, adventure_id)
+            )
 
         if not adventure:
-            return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
+            return utils.error_page(
+                error=404, ui_message=gettext("retrieve_adventure_error")
+            )
         if adventure["creator"] != user["username"] and not is_teacher(user):
-            return utils.error_page(error=401, ui_message=gettext("retrieve_adventure_error"))
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_adventure_error")
+            )
 
-        adventure['content'] = safe_format(adventure['content'],
-                                           **hedy_content.KEYWORDS.get(g.keyword_lang))
-        adventure['solution_example'] = safe_format(adventure.get('solution_example', ''),
-                                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
+        adventure["content"] = safe_format(
+            adventure["content"], **hedy_content.KEYWORDS.get(g.keyword_lang)
+        )
+        adventure["solution_example"] = safe_format(
+            adventure.get("solution_example", ""),
+            **hedy_content.KEYWORDS.get(g.keyword_lang),
+        )
 
         # We don't change adventure["content"] because it's used in the editor, while this is for previwing only.
-        preview_content, adventure["example_code"] = halve_adventure_content(adventure["content"])
+        preview_content, adventure["example_code"] = halve_adventure_content(
+            adventure["content"]
+        )
 
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
         # This is a quite expensive retrieval, but we should be fine as this page is not called often
@@ -2982,7 +3000,11 @@ class ForTeachersModule(WebsiteModule):
             used_levels = []
 
             for level, adventures_for_level in sorted_adventures.items():
-                if any(adv for adv in adventures_for_level if adv.get("name") == adventure.get("id")):
+                if any(
+                    adv
+                    for adv in adventures_for_level
+                    if adv.get("name") == adventure.get("id")
+                ):
                     used_levels.append(str(level))
 
             if not used_levels:
@@ -2994,16 +3016,18 @@ class ForTeachersModule(WebsiteModule):
                 key=level_sort_key,
             )
 
-            adventure_used_in_classes.append({
-                "name": Class.get("name"),
-                "id": Class.get("id"),
-                "teacher": Class.get("teacher"),
-                "students": Class.get("students", []),
-                "date": Class.get("date"),
-                "used_levels": used_levels,
-                "invalid_levels": invalid_levels,
-                "has_invalid_levels": len(invalid_levels) > 0,
-            })
+            adventure_used_in_classes.append(
+                {
+                    "name": Class.get("name"),
+                    "id": Class.get("id"),
+                    "teacher": Class.get("teacher"),
+                    "students": Class.get("students", []),
+                    "date": Class.get("date"),
+                    "used_levels": used_levels,
+                    "invalid_levels": invalid_levels,
+                    "has_invalid_levels": len(invalid_levels) > 0,
+                }
+            )
 
         return render_template(
             template_name,
@@ -3026,10 +3050,10 @@ class ForTeachersModule(WebsiteModule):
                 lang=g.lang,
                 level=adventure.get("level", ""),
                 adventures=[adventure],
-                initial_tab='',
-                current_user_name=user['username'],
-                form_id='customize_adventure'
-            )
+                initial_tab="",
+                current_user_name=user["username"],
+                form_id="customize_adventure",
+            ),
         )
 
     @route("/customize-adventure/<adventure_id>", methods=["GET"])
