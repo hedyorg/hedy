@@ -1483,7 +1483,7 @@ adventures:
                 example_code: |
                     ```
                     weiter = {ask} 'Willst Du weiter machen?'
-                    {if} weiter = ja
+                    {if} weiter is ja
                         sicher = {ask} 'Bist du sicher?'
                         {if} sicher {is} ja
                             {print} 'Wir machen weiter.'
@@ -2472,7 +2472,7 @@ adventures:
                     ```
                     Name = {ask} 'Wie heißt du?'
                     Passwort = {ask} 'Wie lautet dein Passwort?'
-                    {if} Name {is} 'Agent007' _ Passwort {is} 'STRENGGEHEIM'
+                    {if} Name {is} Agent007 _ Passwort {is} STRENGGEHEIM
                         {print} 'Gehe um 2 Uhr zum Flughafen'
                     {else}
                         {print} 'Gehe um 10 Uhr zum Bahnhof'
@@ -2885,7 +2885,7 @@ adventures:
                     Hinweis für die Flaggen:
                     ```
                     land = {ask} 'Von welchem Land willst Du die Flagge sehen?'
-                    {if} land {is} 'Deutschland'
+                    {if} land {is} Deutschland
                         farbe_1 = Rot
                         farbe_2 = Weiß
                         farbe_3 = Schwarz
@@ -3022,9 +3022,9 @@ adventures:
                     ```
                     Name = {ask} 'was ist eure Name?'
                     Alter = {ask} 'was ist eure Alter?'
-                    {if} Name {is} 'Hedys {and} Alter {is} 2
+                    {if} Name {is} Hedy {and} Alter {is} 2
                         {print} 'du bist das reales Hedy!'
-                    {elif} Name {is} 'Hedys {or} Alter {is} 2
+                    {elif} Name {is} Hedy {or} Alter {is} 2
                         {print} 'So Abschluss.. Aber du bist nicht Hedy!'
                     {else}
                         {print} 'Du bist nicht Hedy!'
