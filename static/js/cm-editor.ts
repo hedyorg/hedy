@@ -3,7 +3,7 @@ import {
     EditorView, ViewUpdate, drawSelection, dropCursor, highlightActiveLine,
     highlightActiveLineGutter, highlightSpecialChars, keymap, lineNumbers
 } from '@codemirror/view'
-import { EditorState, Compartment, StateEffect, Prec, Extension, Facet } from '@codemirror/state'
+import { EditorState, Compartment, StateEffect, Prec, Extension, Facet, Transaction } from '@codemirror/state'
 import { EventEmitter } from "./event-emitter";
 import { deleteTrailingWhitespace, defaultKeymap, historyKeymap, indentWithTab } from '@codemirror/commands'
 import { history } from "@codemirror/commands"
@@ -28,11 +28,13 @@ import { theGlobalSourcemap, theLevel } from "./app";
 import { monokai } from "./cm-monokai-theme";
 import { error } from "./modal";
 import { Tag, styleTags, tags as t } from "@lezer/highlight";
+import { ClientMessages } from "./client-messages";
 
 
 // CodeMirror requires # of indentation to be in spaces.
 const indentSize = ' '.repeat(4);
 export const level = Facet.define<number, number>();
+export const keywordLanguage = Facet.define<string, string>();
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -85,7 +87,31 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     private incorrectLineMapping: Record<string, number> = {};
 
     constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, __: string = "ltr") {
+        const levelStr = $(element).closest('[data-level]').attr('data-level');
+        const lang = $(element).closest('[data-kwlang]').attr('data-kwlang') ?? 'en';
+        const levelInt = levelStr ? parseInt(levelStr, 10) : theLevel;
         let state: EditorState;
+
+        let lineLimitFilter = EditorState.transactionFilter.of(
+            (tr: Transaction) => {
+                if (!tr.docChanged) return tr;
+
+                const maxLineLength = this.getMaxLineLengthForLevel(theLevel);
+                const error_message = ClientMessages["program_size_too_long"].replace(
+                    "{amount_lines}", String(maxLineLength)
+                );
+                
+                const nextLineCount = tr.newDoc.lines;
+
+                if (nextLineCount > maxLineLength) {
+                    error.showWarning(error_message);
+                    return []; // cancel transaction
+                }
+
+                return tr;
+            }
+        );
+
         if (editorType === EditorType.MAIN) {
 
             const mainEditorStyling = EditorView.theme({
@@ -116,6 +142,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             state = EditorState.create({
                 doc: '',
                 extensions: [
+                    lineLimitFilter,
                     mainEditorStyling,
                     eyeMarkerGutter,
                     lineNumbers(),
@@ -145,6 +172,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     Prec.high(decorationsTheme),
                     placeholders,
                     theLevel ? level.of(theLevel) : [],
+                    keywordLanguage.of(lang),
                     Prec.highest(variableHighlighter)
                 ]
             });
@@ -157,6 +185,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             }
             // base set of extensions for every type of read-only editor
             let extensions: Extension[] = [
+                lineLimitFilter,
                 highlightSpecialChars(),
                 drawSelection(),
                 syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
@@ -164,6 +193,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
                 placeholders,
                 theLevel ? level.of(theLevel) : [],
+                keywordLanguage.of(lang),
                 Prec.high(decorationsTheme),
                 Prec.highest(variableHighlighter)
             ];
@@ -226,10 +256,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
             state: state
         });
 
-        const levelStr = $(element).closest('[data-level]').attr('data-level');
-        const lang = $(element).closest('[data-kwlang]').attr('data-kwlang') ?? 'en';
-        const levelInt = levelStr ? parseInt(levelStr, 10) : theLevel;
-
         if (levelInt) {
             this.setHighlighterForLevel(levelInt, lang);
         }
@@ -280,6 +306,18 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     */
     public get contents(): string {
         return this.view.state.doc.toString();
+    }
+
+    /**
+     * @param level 
+     * @returns the maximum line length for the given level
+     */
+    getMaxLineLengthForLevel(level: number): number {
+        if (level >= 9) {
+            return 200;
+        } else {
+            return 100;
+        }
     }
 
     /**
