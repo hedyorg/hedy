@@ -980,6 +980,14 @@ adventures:
                     {print} What are your hobbies?
                     {echo} Your hobbies are
                     ```
+                answer_code: |
+                    ```
+                    {print} I love programming
+                    {print} Do you love programming too?
+                    {print} {answer}
+                    {print} What are your hobbies?
+                    {print} Your hobbies are {answer}
+                    ```
             2:
                 story_text: |-
                     Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
@@ -998,6 +1006,16 @@ adventures:
                     {print} Let me print your boarding pass for you.
                     {sleep}
                     Here you go! Have a nice trip!
+                    ```
+                answer_code: |-
+                    ```
+                    destination {is} {ask} 'Where are you going on holidays?'
+                    {print} 'The flight to ' destination ' leaves at 3 pm.'
+                    check_in {is} {ask} 'Did you check in your luggage yet?'
+                    {print} check_in
+                    {print} 'Let me print your boarding pass for you.'
+                    {sleep}
+                    {print} 'Here you go! Have a nice trip!'
                     ```
             3:
                 story_text: |-
@@ -1020,6 +1038,18 @@ adventures:
                     tomorrows_movie {is} movie_choices {at} {random}
                     I'll go get the popcorn! {print}
                     ```
+                answer_code: |-
+                    ```
+                    movie_choices is dracula, fast and furious, home alone, barbie
+                    chosen_movie is movie_choices {at} {random}
+                    {print} Tonight we will watch chosen_movie
+                    like is {ask} Do you like that movie?
+                    {print} Tomorrow we will watch something else.
+                    {remove} chosen_movie {from} movie_choices
+                    tomorrows_movie is movie_choices {at} {random}
+                    {print} Tomorrow we will watch tomorrows_movie
+                    {print} I'll go get the popcorn!
+                    ```
             4:
                 story_text: |-
                     ### Exercise
@@ -1032,7 +1062,17 @@ adventures:
                     {print} You like genre
                     author {is} {ask} 'Who's your favorite author?'
                     {print} 'author is your favorite author'
-                    {print} Hmmm... i think you should try... books {at} {random}
+                    {print} Hmmm... I think you should try... books {at} {random}
+                    ```
+                answer_code: |-
+                    ```
+                    {print} 'Welcome to the online library!'
+                    genre {is} {ask} 'What genre of books do you like?'
+                    {print} 'You like ' genre
+                    author {is} {ask} "Who's your favorite author?"
+                    {print} author ' is your favorite author'
+                    books {is} Winnie the pooh, 1984, Romeo and Juliet
+                    {print} 'Hmmm... I think you should try...' books {at} {random}
                     ```
             5:
                 story_text: |-
@@ -3263,6 +3303,58 @@ adventures:
                     The program should:
                     * Draw the floorplan for the new ward!
                     * Use functions to draw the beds and bedside tables.
+                answer_code: |-
+                    ```
+                    {define} draw_a_bed_and_bedside_table
+                    #draw the bed
+                        {color} 'blue'
+                        {repeat} 2 {times}
+                            {forward} 25
+                            {turn} 90
+                            {forward} 50
+                            {turn} 90
+                        {forward} 25
+                        {color} 'black'
+                        {forward} 10
+                    #draw the bedside table
+                        {color} 'orange'
+                        {repeat} 4 {times}
+                            {forward} 10
+                            {turn} 90
+                        {forward} 10
+                        {color} 'black'
+
+                    #start position
+                    {color} 'white'
+                    {forward} -90
+                    {turn} -90
+                    {color} 'black'
+                    {forward} 150
+                    {turn} 90
+
+                    #make the drawing
+                    {call} draw_a_bed_and_bedside_table
+                    {forward} 30
+                    {call} draw_a_bed_and_bedside_table
+                    {forward} 30
+                    {turn} 90
+                    {forward} 100
+                    {call} draw_a_bed_and_bedside_table
+                    {forward} 100
+                    {turn} 90
+                    {call} draw_a_bed_and_bedside_table
+                    {forward} 30
+                    {call} draw_a_bed_and_bedside_table
+                    {forward} 30
+                    {turn} 90
+                    {forward} 60
+                    {color} 'black'
+                    {turn} 45
+                    {forward} 30
+                    {color} 'white'
+                    {forward} 30
+                    {turn} 45
+                    ```
             13:
                 story_text: |
                     Our hospital does not only have a lot of patients, but also a lot of personnel. Each member of the staff needs a badge that states their information.
@@ -3374,6 +3466,35 @@ adventures:
                     * After those 2 minutes, the morphine level should be updated (+20ml) and the pain level should be updated by asking the patient how they are feeling now.
                     * If the morphine level is too high or the patient is no longer in pain, the program should tell the patients that they won't be getting more morphine. If they are in a lot of pain, tell them to call the nurse.
                     * Tell the patient that the pump will be shut down now, and to press x if they need the pump to start again.
+                answer_code: |-
+                    ```
+                    {print}('Morphine pump')
+                    morphine_level = {input}('How many ml of Morphine has the patient already had today?')
+                    {print}('please give this device to the patient now')
+
+                    pain_level = {input}('How much pain are you experiencing from 1 to 10?')
+                    {print}('Press X to administer morphine')
+
+                    {define} morphine(pain_level, morphine_level):
+                        {print}('You will be administered 20 more ml of morphine')
+                        {sleep} 2
+                        morphine_level = morphine_level + 20
+                        pain_level = {input}('How much pain are you experiencing from 1 to 10?')
+                        {print}('The pump will shut down now')
+                        {return} morphine_level
+                        {return} pain_level
+                        {sleep} 2
+
+                    {for} i {in} {range} (1,10):
+                        wait_for_x = {input}('Press X to administer morphine')
+                        {if} wait_for_x == 'x'
+                            {if} pain_level >= 6 {and} morphine_level <120:
+                                morphine_level = morphine(pain_level, morphine_level)
+                                pain_level = morphine(pain_level, morphine_level)
+                            {else}:
+                                {print}('It would not be safe to administer any more morphine now')
+                                {print}('Please call a nurse if you are in too much pain')
+                    ```
             16:
                 story_text: |
                     Our medical students have to learn the medical terms for all the bodyparts. They seem to be struggling to remind all the anatomical names and they seem to find the studying very boring.
