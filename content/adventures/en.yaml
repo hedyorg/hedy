@@ -722,38 +722,6 @@ adventures:
                     ```
             13: 
                 story_text: |
-                    In this level you will make a program to practice multiplication. 
-                    You choose which numbers you want to multiply. 
-                    Finish the code: Print whether the answer is correct or incorrect and print the correct answer if a mistake was made.
-
-                example_code: |
-                    ```
-                    #Asking for the multiplication variables:
-                    number_1 = {input}('what is the first number you want to multiply?')
-                    number_2 = {input}('what is the second number you want to multiply?')
-                    
-                    #Ask for the answer and check it:
-                    answer = {input}('How much is ',number_1, ' times ', number_2, '?' )
-                    correct_answer = number_1 * number_2
-                    {if} answer _
-                        {print}('Yes, that is correct!')
-                    _
-                answer_code: |
-                    ```
-                    #Asking for the multiplication variables:
-                    number_1 = {input}('what is the first number you want to multiply?')
-                    number_2 = {input}('what is the second number you want to multiply?')
-                    
-                    #Ask for the answer and check it:
-                    answer = {input}('How much is ',number_1, ' times ', number_2, '?' )
-                    correct_answer = number_1 * number_2
-                    {if} answer answer == correct_answer:
-                        {print}('Yes, that is correct!')
-                    {else}:
-                        {print}('Sorry that was wrong, the correct answer is: ', correct_answer)
-                    ```
-            14:
-                story_text: |
                     In this level you will make a program to practice multiplication tables. 
                     You choose which multiplication table you want to practice and than get asked all the multiplications until 10.
                     Finish the code: Print whether the answer is correct or incorrect and print the correct answer if a mistake was made. 
@@ -778,7 +746,7 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                     #Asking for the multiplication table:
+                    #Asking for the multiplication table:
                     number = {input}('Of which number do you want to practice the multiplications?')
                     score = 0
 
@@ -786,15 +754,16 @@ adventures:
                     {for} i {in} {range}(1,10):
                         answer = {input}('How much is ', i, ' times ', number, '?' )
                         correct_answer = number * i
-                        {if} answer == correct_answer:
+                        if answer == correct_answer:
                             score = score + 1
                             {print}('Yes, that is correct!')
-                        {else}:
+                        else:
                             {print}('Sorry that was wrong, the correct answer is: ', correct_answer)
 
                     #Printing the score:
                     {print}('You are finished.')
                     {print}('Your final score is: ', score)
+
                     ```
             15:
                 story_text: |
@@ -991,7 +960,7 @@ adventures:
                     video_game = 8
                     teddy_bear = 10
 
-                    {print}('Tin Can Alley!')
+                    {print}('TIn Can Alley!')
                     age = {input}('How old are you?')
                     already_had_turn = {input}('Have you already had a turn?')
 
@@ -2607,32 +2576,6 @@ adventures:
                     {print}('The new price is ', new_price ', dollar')
 
                     ```
-    greater_than_command:
-        name: greater than and less than
-        default_save_name: greater than and less than
-        description: greater than and less than command
-        levels:
-            13:
-                story_text: |
-                    From mathematics, you might already know the symbols the `<` and `>`.
-                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
-                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
-                    Try it!
-                example_code: |
-                    ```
-                    age = {input}('How old are you?')
-                    {if} age > 12:
-                        {print}('You are older than I am!')
-                    ```
-                    ```
-                    age = {input}('How old are you?')
-                    {if} age < 12:
-                        {print}('You are younger than me!')
-                    {else}:
-                        {print}('You are older than me!')
-                    ```
-                answer_code: |
-                    Own answer
     guess_my_number:
         name: guess my number
         default_save_name: guess my number
@@ -3820,6 +3763,27 @@ adventures:
                     ```
                     name = Hedy
                     answer = 20 + 4
+                    ```
+                answer_code: |
+                    Own answer
+            13:
+                story_text: |
+                    From mathematics, you might already know the symbols the `<` and `>`.
+                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
+                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
+                    Try it!
+                example_code: |
+                    ```
+                    age = {input}('How old are you?')
+                    {if} age > 12:
+                        {print}('You are older than I am!')
+                    ```
+                    ```
+                    age = {input}('How old are you?')
+                    {if} age < 12:
+                        {print}('You are younger than me!')
+                    {else}:
+                        {print}('You are older than me!')
                     ```
                 answer_code: |
                     Own answer

@@ -398,39 +398,6 @@ adventures:
                     ```
             13: 
                 story_text: |
-                    In dit level ga vermenigvuldigingen oefenen.
-                    Je kunt kiezen welke getallen je wilt vermenigvuldigingen. 
-                    Maak de code af: Print of het antwoord goed of fout is en print het goede antwoord als het verkeerde antwoord werd gegeven. 
-
-                example_code: |
-                    ```
-                    #Vragen met welke getallen je wil oefenen:
-                    getal_1 = {input}('wat is het eerste getal dat wil vermenigvuldigen?')
-                    getal_2 = {input}('wat is het tweede getal dat wil vermenigvuldigen?')
-
-                    #Vragen het antwoord en controleer het:
-                    antwoord = {input}('Hoeveel is ', getal_1, ' keer ', getal_2, '?' )
-                        goede_antwoord = getal_1 * getal_2
-                        {if} antwoord _
-                            {print}('Ja dat klopt!')
-                        _
-                    ```
-                answer_code: |
-                    ```
-                    #Vragen met welke getallen je wil oefenen:
-                    getal_1 = {input}('wat is het eerste getal dat wil vermenigvuldigen?')
-                    getal_2 = {input}('wat is het tweede getal dat wil vermenigvuldigen?')
-
-                    #Vragen het antwoord en controleer het:
-                    antwoord = {input}('Hoeveel is ', getal_1, ' keer ', getal_2, '?' )
-                    goede_antwoord = getal_1 * getal_2
-                    {if} antwoord == goed_antwoord:
-                        {print}('Ja dat klopt!')
-                    {else}:
-                        {print}('Helaas, dat klopt niet. Het goede antwoord is: ', goede_antwoord)
-                    ```
-            14: 
-                story_text: |
                     In dit level ga je een programma schrijven om de tafels van 10 (of hoger!) te oefenen.
                     Je kunt kiezen welke tafel je wil oefenen en daarna moet je alle vermenigvuldigingen tot en met tien beantwoorden. 
                     Maak de code af: Print of het antwoord goed of fout is en print het goede antwoord als het verkeerde antwoord werd gegeven. 
@@ -466,7 +433,7 @@ adventures:
                         {if} antwoord == goed_antwoord
                             score = score + 1
                             {print}('Ja dat klopt!')
-                        {else}:
+                        else:
                             {print}('Helaas, dat klopt niet. Het goede antwoord is: ', goede_antwoord)
 
                     #De score printen:
