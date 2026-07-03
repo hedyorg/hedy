@@ -3653,6 +3653,32 @@ adventures:
                     {else}
                         {print} 'You do not want to continue'
                     ```
+                story_text_2: |
+                    ### Exercise
+                    Software is almost always secured with two factor authentication nowadays. You don't need one password but you'll need two.
+                    Make your own security system that requires two correct passwords, by putting an {if} inside an {if}.
+                example_code_2: |
+                    ```
+                    password_1 =
+                    password_2 =
+                    _
+                    ```
+                answer_code: |
+                    ```
+                    password_1 = Crocodile
+                    password_2 = Macaroni
+
+                    guess_1 = {ask} 'What is the first password?'
+                    {if} guess_1 = password_1
+                        {print} 'Crocodile is correct.'
+                            guess_2 = {ask} 'What is the second password?'
+                            {if} guess_2 = password_2
+                                {print} 'Welcome!'
+                            {else}
+                                {print} 'INTRUDER!'
+                    {else}
+                        {print} 'ACCESS DENIED'
+                    ```
             13:
                 story_text: |
                     In the `{if}` statement you need to put a condition. The way we write this condition also changes a bit in this level. From this level on we will use symbols instead of words
