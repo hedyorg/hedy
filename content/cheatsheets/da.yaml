@@ -55,38 +55,6 @@
     demo_code: |-
         navn {is} Hedy
         {print} 'mit navn er ' navn
-6:
--   name: '{print}'
-    explanation: Udskriv nøjagtigt ved hjælp af citationstegn.
-    demo_code: '{print} ''5 gange 5 er '' 5 * 5'
--   name: '{ask}'
-    explanation: Bed om en udregning og kontroller om den er korrekt.
-    demo_code: |-
-        svar = {ask} 'Hvad er 10 plus 10?'
-        {if} svar {is} 20 {print} 'Ja!' {else} {print} 'Ups'
--   name: '`{ask}` og `{if}` med skildpadde'
-    explanation: Spørg brugeren hvor mange vinkler de ønsker.
-    demo_code: |-
-        vinkler = {ask} 'Hvor mange vinkler?'
-        vinkel = 360 / vinkler
-        {forward} 50
-7:
--   name: '{print}'
-    explanation: Udskriv nøjagtigt ved hjælp af citationstegn.
-    demo_code: '{print} ''Hej og velkommen til Hedy.'''
--   name: '{ask}'
-    explanation: Stil spørgsmål med `{ask}`.
-    demo_code: |-
-        farve = {ask} 'Hvad er din yndlingsfarve?'
-        {print} farve ' er din favorit!'
--   name: '{if}'
-    explanation: Træf et valg med `{if}`.
-    demo_code: |-
-        farve = {ask} 'Hvad er din yndlingsfarve?'
-        {if} farve {is} grøn {print} 'pænt!' {else} {print} 'tja'
--   name: '{repeat} med skildpadde'
-    explanation: Gentag en linje kode med `{repeat}`.
-    demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
     explanation: Udskriv noget. Husk at bruge citationstegn til nøjagtig udskrivning.

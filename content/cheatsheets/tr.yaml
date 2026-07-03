@@ -55,23 +55,6 @@
     demo_code: |-
         isim {is} Hedy
         {print} 'benim adım ' isim
-7:
--   name: '{print}'
-    explanation: Tırnak işaretlerini kullanarak tam olarak yazdırın.
-    demo_code: '{print} "Merhaba, Hedy''ye hoş geldiniz."'
--   name: '{ask}'
-    explanation: '`{ask}` ile bir şeyler sorun.'
-    demo_code: |-
-        renk = {ask} 'En sevdiğin renk nedir?'
-        {print} renk ' senin favorin!'
--   name: '{if}'
-    explanation: '`{if}` ile bir seçim yapın.'
-    demo_code: |-
-        renk = {ask} 'En sevdiğin renk nedir?'
-        {if} renk {is} yeşil {print} 'güzel!' {else} {print} 'eh işte'
--   name: '{repeat} ile kaplumbağa'
-    explanation: '`{repeat}` ile bir kod satırını yineleyin.'
-    demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
     explanation: Bir şey yazdırın. Tam yazım için tırnak işareti kullanmayı unutmayın.

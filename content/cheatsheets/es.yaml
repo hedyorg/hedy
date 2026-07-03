@@ -55,23 +55,6 @@
     demo_code: |-
         nombre {is} Hedy
         {print} 'Mi nombre es ' nombre
-7:
--   name: '{print}'
-    explanation: Imprime exactamente utilizando comillas.
-    demo_code: '{print} ''Hola bienvenido a Hedy.'''
--   name: '{ask}'
-    explanation: Pregunta algo con `{ask}`.
-    demo_code: |-
-        color = {ask} '¿Cuál es tu color favorito?'
-        {print} 'Tu color favorito es el ' color
--   name: '{if}'
-    explanation: Toma una decisión con `{if}`.
-    demo_code: |-
-        color = {ask} '¿Cuál es tu color favorito?'
-        {if} color {is} verde {print} '¡qué bonito!' {else} {print} 'no es tan bonito'
--   name: '{repeat} con la tortuga'
-    explanation: Repite una línea de código con `{repeat}`.
-    demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
     explanation: Imprime algo. Recuerda usar las comillas simples para imprimir el texto literal.

@@ -55,23 +55,6 @@
     demo_code: |-
         이름 {is} Hedy
         {print} '나의 이름은 ' 이름
-7:
--   name: '{print}'
-    explanation: 따옴표를 사용하여 정확하게 print합니다.
-    demo_code: '{print} ''안녕 어서와 Hedy.'''
--   name: '{ask}'
-    explanation: '`{ask}`로 물어본다.'
-    demo_code: |-
-        색깔 = {ask} '너의 가장 좋아하는 색깔은 무었이니?'
-        {print} 색깔 ' 이 너가 좋아하는 것이다!'
--   name: '{if}'
-    explanation: '`{if}`로 선택하세요.'
-    demo_code: |-
-        색깔 = {ask} '너의 가장 좋아하는 색깔은 무었이니?'
-        {if} 색깔 {is} 녹색 {print} '예쁘다!' {else} {print} '그저 그래'
--   name: '{repeat}를 거북이와 함께'
-    explanation: 코드 행을 `{repeat}`로 반복합니다.
-    demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
     explanation: 무언가를 print하라. 문자 그대로 print할 때 따옴표를 사용하는 것을 기억하라.

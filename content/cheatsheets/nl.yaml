@@ -78,23 +78,6 @@
         lievelingskleur {is} {ask} 'Wat is je lievelingskleur?'
         {if} lievelingskleur {is} groen {print} 'mooi!' 
         {else} {print} 'bah'
-7:
--   name: '{print}'
-    explanation: Iets letterlijk printen met aanhalingstekens.
-    demo_code: '{print} ''Hallo, welkom bij Hedy.'''
--   name: '{ask}'
-    explanation: Iets vragen met `{ask}`.
-    demo_code: |-
-        kleur = {ask} 'Wat is je lievelingskleur?'
-        {print} kleur ' is je lievelingskleur!'
--   name: '{if}'
-    explanation: Maak een keuze met `{if}`.
-    demo_code: |-
-        kleur = {ask} 'Wat is je favoriete kleur?'
-        {if} kleur {is} groen {print} 'mooi!' {else} {print} 'meh'
--   name: '{repeat} met de tekenschildpad'
-    explanation: Herhaal een regel code met `{repeat}`.
-    demo_code: '{repeat} 3 {times} {forward} 10'
 8:
 -   name: '{print}'
     explanation: Print iets. Denk eraan een aanhalingsteken te gebruiken als je iets letterlijk wil printen.
