@@ -55,21 +55,6 @@
     demo_code: |-
         nimi {is} Hedy
         {print} 'minun nimeni on' nimi
-6:
--   name: '{print}'
-    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
-    demo_code: '{print} ''5 kertaa 5 on '' 5 * 5'
--   name: '{ask}'
-    explanation: Kysy laskun tulos ja tarkista onko se oikein.
-    demo_code: |-
-        vastaus = {ask} 'Paljonko on 10 plus 10?'
-        {if} vastaus {is} 20 {print} 'Kyllä!' {else} {print} 'Oho'
--   name: '`{ask}` ja `{if}` kilpikonnan kanssa'
-    explanation: Ask the user how many angles they want.
-    demo_code: |-
-        angles = {ask} 'How many angles?'
-        angle = 360 / angles
-        {forward} 50
 7:
 -   name: '{print}'
     explanation: Tulosta tarkasti käyttäen heittomerkkejä.

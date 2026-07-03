@@ -55,21 +55,6 @@
     demo_code: |-
         nombre {is} Hedy
         {print} 'Mi nombre es ' nombre
-6:
--   name: '{print}'
-    explanation: Imprime exactamente utilizando comillas.
-    demo_code: '{print} ''5 multiplicado por 5 es '' 5 * 5'
--   name: '{ask}'
-    explanation: Pregunta por una operación y comprueba que sea correcta.
-    demo_code: |-
-        resultado = {ask} '¿Cuánto es 10 más 10?'
-        {if} resultado {is} 20 {print} '¡¡Correcto!!' {else} {print} '¡Casi!, inténtalo otra vez'
--   name: '`{ask}` y `{if}` con tortuga'
-    explanation: Pregunta al usuario cuántos ángulos quiere.
-    demo_code: |-
-        ángulos = {ask} '¿Cuántos ángulos?'
-        ángulo = 360 / ángulos
-        {forward} 50
 7:
 -   name: '{print}'
     explanation: Imprime exactamente utilizando comillas.

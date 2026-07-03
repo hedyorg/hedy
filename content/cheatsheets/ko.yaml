@@ -55,21 +55,6 @@
     demo_code: |-
         이름 {is} Hedy
         {print} '나의 이름은 ' 이름
-6:
--   name: '{print}'
-    explanation: 따옴표를 사용하여 정확하게 print합니다.
-    demo_code: '{print} ''5 곱하기 5 는 '' 5 * 5'
--   name: '{ask}'
-    explanation: 계산을 요청하고 정확한지 확인한다.
-    demo_code: |-
-        대답 = {ask} '10 더하기 10 무엇이니?'
-        {if} 대답 {is} 20 {print} '응!' {else} {print} '이런'
--   name: '`{ask}` 와 `{if}`를 거북이와 함께'
-    explanation: 사용자에게 원하는 각도를 물어봅니다.
-    demo_code: |-
-        각도 = {ask} '각도가 얼마지?'
-        각도 = 360 / 각도
-        {forward} 50
 7:
 -   name: '{print}'
     explanation: 따옴표를 사용하여 정확하게 print합니다.

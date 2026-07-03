@@ -78,21 +78,6 @@
         lievelingskleur {is} {ask} 'Wat is je lievelingskleur?'
         {if} lievelingskleur {is} groen {print} 'mooi!' 
         {else} {print} 'bah'
-6:
--   name: '{print}'
-    explanation: Iets letterlijk printen met aanhalingstekens.
-    demo_code: '{print} ''5 keer 5 is '' 5 * 5'
--   name: '{ask}'
-    explanation: Het antwoord van een som vragen en kijken of het goed is.
-    demo_code: |-
-        antwoord = {ask} 'Hoeveel is 10 plus 10?'
-        {if} antwoord {is} 20 {print} 'Goedzo!' {else} {print} 'Foutje'
--   name: '`{ask}` en `{if}` met schildpad'
-    explanation: De gebruiker vragen hoeveel hoeken hij wil.
-    demo_code: |-
-        hoeken = {ask} 'Hoeveel hoeken krijgt dit figuur?'
-        hoek = 360 / hoeken
-        {forward} 50
 7:
 -   name: '{print}'
     explanation: Iets letterlijk printen met aanhalingstekens.

@@ -55,21 +55,6 @@
     demo_code: |-
         nom {is} Hedy
         {print} "mon nom est " nom
-6:
--   name: '{print}'
-    explanation: Affiche exactement ce qui est entre les guillemets.
-    demo_code: '{print} "5 fois 5 font " 5 * 5'
--   name: '{ask}'
-    explanation: Demandes un calcul et vérifie s'il est correcte.
-    demo_code: |-
-        reponse = {ask} "Combien font 10 plus 10 ?"
-        {if} reponse {is} 20 {print} "Oui !" {else} {print} "Oups"
--   name: '`{ask}` et `{if}` avec la tortue'
-    explanation: Demande à l'utilisateur combien il veut de sommets.
-    demo_code: |-
-        nombre_sommets = {ask} "Nombre de sommets"
-        angle = 360 / nombre_sommets
-        {forward} 50
 7:
 -   name: '{print}'
     explanation: Affiche exactement ce qui est entre les guillemets.
