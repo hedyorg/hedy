@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: '{for} silmukka'
-    explanation: Voimme käyttää komentoa `{for}` komennon `{range}` kanssa.
-    demo_code: |-
-        {for} laskuri {in} {range} 1 {to} 5
-            {print} laskuri
--   name: '{ask}'
-    explanation: Kysy vastausta ja tarkista, onko se oikein. Voimme nyt tulostaa 2 riviä.
-    demo_code: |-
-        vastaus = {ask} 'Paljonko on 5 + 5?'
-        {if} vastaus {is} 10
-            {print} 'Hienoa!'
-            {print} 'Vastaus on tosiaan ' vastaus
-        {else}
-            {print} 'Oho!'
-            {print} 'Vastaus on 10'
 12:
 -   name: float directly
     explanation: Desimaaliluvut.

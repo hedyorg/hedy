@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello'
-11:
--   name: '{for}-loop'
-    explanation: Vi kan använda `{for}` med ett `{range}`.
-    demo_code: |-
-        {for} räknare {in} {range} 1 {to} 5
-            {print} räknare
--   name: '{ask}'
-    explanation: Fråga efter svaret på en addition och kolla om det är korrekt. Vi kan nu skriva ut två rader.
-    demo_code: |-
-        svar = {ask} 'Vad är 5 plus 5?'
-        {if} svar {is} 10
-            {print} 'Bra jobbat!'
-            {print} 'Ja, svaret var ' svar
-        {else}
-            {print} 'Hoppsan!'
-            {print} 'Svaret är 10'
 12:
 -   name: flyt direkt
     explanation: Decimaltal.

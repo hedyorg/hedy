@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: לולאת {for}
-    explanation: ביכולתנו להשתמש ב`{for}` יחד עם `{range}`.
-    demo_code: |-
-        {for} מונה {in} {range} 1 {to} 5
-            {print} מונה
--   name: '{ask}'
-    explanation: בקשו את התשובה לתרגיל חיבור ובדקו אם היא נכונה. עכשיו אנחנו יכולים להדפיס שתי שורות.
-    demo_code: |-
-        תשובה = {ask} 'כמה זה 5 ועוד 5?'
-        {if} תשובה {is} 10
-            {print} 'כל הכבוד!'
-            {print} 'בהחלט, התשובה היא ' תשובה
-        {else}
-            {print} 'אופס!'
-            {print} 'התשובה היא 10'
 12:
 -   name: float directly
     explanation: מספרים עשרוניים.

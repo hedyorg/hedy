@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: pętla {for}
-    explanation: Możemy użyć `{for}` razem z `{range}`.
-    demo_code: |-
-        {for} licznik {in} {range} 1 {to} 5
-            {print} licznik
--   name: '{ask}'
-    explanation: Zapytaj o wynik dodawania i sprawdź czy jest poprawny. Teraz możemy wypisać dwie linie.
-    demo_code: |-
-        odpowiedź = {ask} 'Ile to 5 plus 5?'
-        {if} odpowiedź {is} 10
-            {print} 'Bardzo dobrze!'
-            {print} 'Rzeczywiście, odpowiedź to ' odpowiedź
-        {else}
-            {print} 'Ups!'
-            {print} 'Poprawna odpowiedź to 10'
 12:
 -   name: float directly
     explanation: Liczby dziesiętne.

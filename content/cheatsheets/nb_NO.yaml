@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: '{for} løkke'
-    explanation: Vi kan bruke `{for}` med en {range}
-    demo_code: |-
-        {for} teller {in} {range} 1 {to} 5
-            {print} teller
--   name: '{ask}'
-    explanation: '{ask} etter svaret på et regnestykke og sjekk om det er korrekt. Vi kan skrive ut to linjer nå.'
-    demo_code: |-
-        svaret = {ask} 'Hva er 5 pluss 5?'
-        {if} svaret {is} 10
-            {print} 'Bra jobbet!'
-            {print} 'Det var rett og svaret var ' svaret
-        else
-            {print} 'Oops!'
-            {print} 'Svaret er 10'
 12:
 -   name: flyt direkte
     explanation: Desimaltall

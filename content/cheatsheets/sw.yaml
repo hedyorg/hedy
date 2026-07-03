@@ -54,23 +54,6 @@
     demo_code: |-
         jina is Juma
         print 'Naitwa ' jina
-11:
--   name: '{for} loop'
-    explanation: Tumatumia `for` badala ya `repeat`
-    demo_code: |-
-        for i in range 1 to 10
-          print i
-        print 'Tayari au la, nakuja!'
--   name: '{ask}'
-    explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
-            {print} 'Oops!'
-            {print} 'The answer is 10'
 12:
 -   name: float directly
     explanation: Decimal numbers

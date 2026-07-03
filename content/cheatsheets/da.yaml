@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: '{for}-løkke (sløjfe)'
-    explanation: Vi kan bruge `{for}` med et `{range}`.
-    demo_code: |-
-        {for} tæller {in} {range} 1 {to} 5
-            {print} tæller
--   name: '{ask}'
-    explanation: Spørg om svaret på en addition og kontroller, om det er korrekt. Vi kan nu udskrive 2 linjer.
-    demo_code: |-
-        svar = {ask} 'Hvad er 5 plus 5?'
-        {if} svar {is} 10
-            {print} 'Godt klaret!'
-            {print} 'Svaret er nemlig ' svar
-        {else}
-            {print} 'Ups!'
-            {print} 'Svaret er 10'
 12:
 -   name: flyt direkte
     explanation: Decimaltal.

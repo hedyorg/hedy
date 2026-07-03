@@ -59,22 +59,6 @@
         name {is} Hedy
         {print} 'Το όνομά μου είναι ' name
 5:
-11:
--   name: repeat
-    explanation: αντικαθιστούμε τη `repeat` με τη `for`
-    demo_code: |-
-        {for} counter {in} {range} 1 {to} 5
-            {print} counter
--   name: '{ask}'
-    explanation: ζήτα μια απάντηση για ένα  άθροισμα  και έλεγξε αν είναι σωστή. Μπορείς τώρα να εμφανίσεις 2 γραμμές.
-    demo_code: |-
-        answer = {ask} 'Πόσο κάνει 5 και 5;'
-        {if} answer {is} 10
-            {print} 'Πολύ σωστά!'
-            {print} 'Πράγματι, η απάντηση ήταν  ' answer
-        else
-            {print} 'Λάθος!'
-            {print} 'Η απάντηση είναι 10'
 12:
 -   name: float directly
     explanation: Calculation with decimals

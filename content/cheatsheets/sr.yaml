@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: '{for} петља'
-    explanation: Можемо користити `{for}` са `{range}`.
-    demo_code: |-
-        {for} counter {in} {range} 1 {to} 5
-            {print} counter
--   name: '{ask}'
-    explanation: Питај за одговор на збир и провери да ли је тачан. Сада можемо одштампати 2 линије.
-    demo_code: |-
-        одговор = {ask} 'Колико је 5 плус 5?'
-        {if} одговор {is} 10
-            {print} 'Браво!'
-            {print} 'Заиста, одговор је био ' одговор
-        {else}
-            {print} 'Упс!'
-            {print} 'Одговор је 10'
 12:
 -   name: директно са децималним бројевима
     explanation: Децимални бројеви.

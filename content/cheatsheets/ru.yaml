@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: '{for} цикл'
-    explanation: Мы можем использовать `{for}` с `{range}`.
-    demo_code: |-
-        {for} счетчик {in} {range} 1 {to} 5
-            {print} счетчик
--   name: '{ask}'
-    explanation: Задайте ответ на сумму и проверьте его правильность. Теперь мы можем напечатать 2 строки.
-    demo_code: |-
-        ответ = {ask} 'Сколько будет 5 плюс 5?'
-        {if} ответ {is} 10
-            {print} 'Молодец!'
-            {print} 'Действительно, ответ был ' ответ
-        {else}
-            {print} 'Упс!'
-            {print} 'Ответ: 10'
 12:
 -   name: плавать напрямую
     explanation: Десятичные числа.

@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: '{for} döngüsü'
-    explanation: '`{for}` ile bir `{range}` ''ı birlikte kullanabiliriz.'
-    demo_code: |-
-        {for} sayaç {in} {range} 1 {to} 5
-            {print} sayaç
--   name: '{ask}'
-    explanation: Bir toplamın cevabını sorun ve doğru olup olmadığını kontrol edin. Şimdi 2 satır yazdırabiliriz.
-    demo_code: |-
-        cevap = {ask} '5 artı 5 kaç eder?'
-        {if} cevap {is} 10
-            {print} 'Aferin sana!'
-            {print} 'Gerçekten de cevabı ' cevap
-        {else}
-            {print} 'Oops!'
-            {print} 'Cevap 10 olacaktı'
 12:
 -   name: doğrudan ondalıklı
     explanation: Ondalık sayılar.

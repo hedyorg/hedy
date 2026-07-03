@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: '`{for}`-iteracio'
-    explanation: Oni povas uzi `{for}` kun `{range}`.
-    demo_code: |-
-        {for} nombro {in} {range} 1 {to} 5
-            {print} nombro
--   name: '{ask}'
-    explanation: Demandi pri sumo kaj kontroli, ĉu la respondo estas ĝusta. Ni povas nun presi du liniojn.
-    demo_code: |-
-        respondo = {ask} 'Kio estas 5 plus 5?'
-        {if} respondo {is} 10
-            {print} 'Bonege!'
-            {print} 'Ja la prava respondo estas ' respondo
-        {else}
-            {print} 'Ho!'
-            {print} 'La prava respondo estas 10'
 12:
 -   name: decimala nombro rekte
     explanation: Decimalaj nombroj.

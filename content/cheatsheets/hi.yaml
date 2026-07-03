@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: '{for} लूप'
-    explanation: हम `{for}` का उपयोग `{range}` के साथ कर सकते हैं।
-    demo_code: |-
-        {for} काउंटर {in} {range} 1 {to} 5
-            {print} काउंटर
--   name: '{ask}'
-    explanation: एक राशि का उत्तर मांगें और जांचें कि क्या यह सही है। अब हम 2 लाइन प्रिंट कर सकते हैं।
-    demo_code: |-
-        उत्तर = {ask} '5 जमा 5 क्या है?'
-        {if} उत्तर {is} 10
-            {print} 'अच्छा किया!'
-            {print} 'वास्तव में, उत्तर था' उत्तर
-        {else}
-            {print} 'उफ़!'
-            {print} 'जवाब 10 है'
 12:
 -   name: फ्लोट सीधे
     explanation: दशमलव संख्याएं।

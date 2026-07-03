@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: Laço {for}
-    explanation: Nós podemos usar `{for}` com um `{range}`.
-    demo_code: |-
-        {for} contador {in} {range} 1 {to} 5
-            {print} contador
--   name: '{ask}'
-    explanation: Pergunte pela resposta de uma soma e verifique se está correta. Agora você pode imprimir duas linhas.
-    demo_code: |-
-        resposta = {ask} 'Quanto é 5 mais 5?'
-        {if} resposta {is} 10
-            {print} 'Muito bem!'
-            {print} 'De fato, a resposta era ' resposta
-        {else}
-            {print} 'Ops!'
-            {print} 'A resposta é 10'
 12:
 -   name: números reais
     explanation: Números decimais.

@@ -67,22 +67,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hallo!'
-11:
--   name: '{for}-Schleife'
-    explanation: Wir können `{for}` mit `{range}` benutzen.
-    demo_code: |-
-        {for} Zähler {in} {range} 1 {to} 5
-            {print} Zähler
--   name: '{ask}'
-    explanation: Frage nach der Antwort zu einer Summe und überprüfe, ob sie stimmt. Wir können jetzt zwei Zeilen ausgeben.
-    demo_code: |-
-        antwort = {ask} 'Was ist 5 plus 5?'
-        {if} antwort {is} 10
-            {print} 'Gut gemacht!'
-            {print} 'Tatsächlich, die Antwort war ' antwort
-        {else}
-            {print} 'Huch!'
-            {print} 'Die Antwort war 10'
 12:
 -   name: float direkt
     explanation: Dezimalzahlen.

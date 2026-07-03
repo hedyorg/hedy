@@ -71,22 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-11:
--   name: '{for} 반복'
-    explanation: '`{range}`와 함께 `{for}`를 사용할 수 있습니다.'
-    demo_code: |-
-        {for} counter {in} {range} 1 {to} 5
-            {print} counter
--   name: '{ask}'
-    explanation: 합계에 대한 답을 물어보고 맞는지 확인해보세요. 이제 2줄을 print할 수 있습니다.
-    demo_code: |-
-        대답 = {ask} '5 더하기 5은 무엇이니?'
-        {if} 대답 {is} 10
-            {print} '잘했어!'
-            {print} '결국, 대답은 ' 대답
-        {else}
-            {print} '이런!'
-            {print} '정답은 10'
 12:
 -   name: float directly
     explanation: 십진수 숫자.

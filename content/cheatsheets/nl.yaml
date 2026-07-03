@@ -94,23 +94,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hallo!'
-11:
--   name: '{for} met i'
-    explanation: We kunnen `{for}` met een `{range}` gebruiken.
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 10
-            {print} i
-        {print} 'Wie niet weg is, is gezien'
--   name: '{ask}'
-    explanation: Vraag het antwoord van een som en controleer of het goed is. We kunnen nu 2 regels printen.
-    demo_code: |-
-        antwoord = {ask} 'Wat is 5 + 5?'
-        {if} antwoord {is} 10
-            {print} 'Goed gedaan!'
-            {print} 'Klopt, het antwoord was ' antwoord
-        {else}
-            {print} 'Oeps!'
-            {print} 'Het antwoord is 10'
 12:
 -   name: assign text
     explanation: Decimale getallen.
