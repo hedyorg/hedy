@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: 두 부분 모두 정확해야 합니다.
-    demo_code: |-
-        대답1 = {ask} '3+2은 무었이니?'
-        대답2 = {ask} '2+2은 무었이니?'
-        {if} 대답1 {is} 5 {and} 대답2 {is} 4
-            {print} '모든 대답은 맞았어!'
-        {else}
-            {print} '일부 대답은 틀렸어!'
--   name: '{or}'
-    explanation: 두 부분 중 적어도 1개는 맞아야 한다. 둘 다 맞다면 역시 괜찮다.
-    demo_code: |-
-        대답1 = {ask} '3+2는 무었이니?'
-        대답2 = {ask} '2+2 무었이니?'
-        {if} 대답1 {is} 5 {or} 대답2 {is} 4
-            {print} '일부 대답은 맞았어!'
-        {else}
-            {print} '모든 대답이 틀렸어!'
 14:
 -   name: Smaller
     explanation: 우리는 `<`를 사용하여 첫 번째 숫자가 두 번째 숫자보다 작은지 확인합니다.

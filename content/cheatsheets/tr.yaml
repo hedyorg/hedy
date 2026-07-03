@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: İki parçanın da doğru olması gerekir.
-    demo_code: |-
-        cevap1 = {ask} '3+2 kaç eder?'
-        cevap2 = {ask} '2+2 kaç eder?'
-        {if} cevap1 {is} 5 {and} cevap2 {is} 4
-            {print} 'Her iki cevap ta doğru!'
-        {else}
-            {print} 'En azından bir cevap yanlış!'
--   name: '{or}'
-    explanation: İki parçadan en az birinin doğru olması gerekir. Her ikisi de doğruysa, bu da iyidir.
-    demo_code: |-
-        cevap1 = {ask} '3+2 kaç eder?'
-        cevap2 = {ask} '2+2 kaç eder?'
-        {if} cevap1 {is} 5 {or} cevap2 {is} 4
-            {print} 'En azından bir cevap doğru!'
-        {else}
-            {print} 'Her iki cevap ta yanlış!'
 14:
 -   name: Daha küçük
     explanation: İlk sayının ikinci sayıdan küçük olup olmadığını kontrol etmek için `<` kullanırız.

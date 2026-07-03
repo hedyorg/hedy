@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: על שני החלקים להיות נכונים.
-    demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
-        {else}
-            {print} 'At least one answer is wrong!'
--   name: '{or}'
-    explanation: לפחות אחד משני החלקים צריך להיות נכון. זה בסדר גם אם שניהם נכונים.
-    demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {or} answer2 {is} 4
-            {print} 'At least one answer is correct!'
-        {else}
-            {print} 'Both answers are wrong!'
 14:
 -   name: קטן יותר
     explanation: אנחנו משתמשים ב-`<` כדי לבדוק אם המספר הראשון קטן מהמספר השני.

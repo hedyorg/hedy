@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: Begge deler må være korrekt
-    demo_code: |-
-        svar1 = {ask} 'Hva er 3 + 2?'
-        svar2 = {ask} 'Hva er 2 + 2?'
-        {if} svar1 {is} 5 {and} svar2 {is} 4
-            {print} 'Begge svarene må være rett!'
-        {else}
-            {print} 'Minst et svar et feil!'
--   name: '{or}'
-    explanation: Minst et av svarene må være rett. Det vil også fungere hvis begge er rett.
-    demo_code: |-
-        svar1 = {ask} 'Hva er 3 + 2?'
-        svar2 = {ask} 'Hva er 2 + 2?'
-        {if} svar1 {is} 5 {or} svar2 {is} 4
-            {print} 'Ihvertfall ett svar er riktig!'
-        {else}
-            {print} 'Begge svarene er feil!'
 14:
 -   name: Mindre
     explanation: Vi bruker `<` for å sjekke om det første tallet er mindre enn det andre tallet.

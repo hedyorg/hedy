@@ -59,13 +59,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: Oba dela morata biti praivlna.
-    demo_code: "odgovor1 = {ask} 'Koliko je 3+2?'\nodgovor2 = {ask} 'Koliko je 2+2?'\n{if} odgovor1 {is} 5 {and} odgovor2 {is} 4\n     {print} 'Oba odgovora sta pravilna!'\n{else}\n     {print} 'Vsaj en odgovor je napačen!'"
--   name: '{or}'
-    explanation: Vsaj 1 od obeh delov mora biti pravilen. Če je oboje pravilno, je tudi v redu.
-    demo_code: "odgovor1 = {ask} 'Koliko is 3+2?'\nodgovor2 = {ask} 'Koliko is 2+2?'\n{if} odgovor1 {is} 5 {or} odgovor2 {is} 4\n    {print} 'Vsaj en odgovor je pravilen!'\n{else}\n    {print} 'Oba odgovora sta nepravilna!'"
 14:
 -   name: Manjši
     explanation: Za preverjanje, ali je prvo število manjše od drugega, uporabimo `<`.

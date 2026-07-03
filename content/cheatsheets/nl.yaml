@@ -94,25 +94,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hallo!'
-13:
--   name: '{and}'
-    explanation: Twee delen, allebei moeten kloppen.
-    demo_code: |-
-        antwoord1 = {ask} 'Hoeveel is 3+2?'
-        antwoord2 = {ask} 'Hoeveel is 2+2?'
-        {if} antwoord1 {is} 5 {and} antwoord2 {is} 4
-            {print} 'beide antwoorden zijn goed!'
-        {else}
-            {print} 'Minimaal 1 antwoord is fout!'
--   name: '{or}'
-    explanation: Tenminste 1 van de 2 delen moet kloppen. Als ze allebei kloppen, is het ook goed.
-    demo_code: |-
-        antwoord1 = {ask} 'Hoeveel is 3+2?'
-        antwoord2 = {ask} 'Hoeveel is 2+2?'
-        {if} antwoord1 {is} 5 {or} antwoord2 {is} 4
-            {print} 'Je hebt minimaal 1 antwoord goed!'
-        {else}
-            {print} 'Beide antwoorden zijn fout!'
 14:
 -   name: Kleiner
     explanation: De `<` kijkt of het eerste getal kleiner is dan het tweede getal.

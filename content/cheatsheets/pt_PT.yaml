@@ -55,25 +55,6 @@
     demo_code: |-
         nome is Hedy
         print 'O meu nome é ' nome
-13:
--   name: And
-    explanation: Ambas as instruções (à esquerda e à direita do `and`) têm de ser correctas.
-    demo_code: |-
-        resultado1 = ask 'Quanto é 3+2?'
-        resultado2 = ask 'Quanto é 2+2?'
-        if resultado1 is 5 and resultado2 is 4
-            print 'Ambas as respostas estão certas!'
-        else
-            print 'Pelo menos uma resposta está errada!'
--   name: Or
-    explanation: '`or` Pelo menos uma das instruções à esquerda e à direita do `or`, tem de estar correcta. Se ambas estiverem correctas, também não tem problema.'
-    demo_code: |-
-        resultado1 = ask 'Quanto é 3+2?'
-        resultado2 = ask 'Quanto é 2+2?'
-        if resultado1 is 5 or resultado2 is 4
-            print 'Pelo menos uma resposta está correcta!'
-        else
-            print 'Ambas as respostas estão erradas!'
 14:
 -   name: Menor
     explanation: Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se queremos saber se uma variável é menor que 15, usamos `variavel < 15`

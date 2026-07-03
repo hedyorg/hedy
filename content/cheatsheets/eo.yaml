@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: Ambaŭ partoj devas esti ĝustaj.
-    demo_code: |-
-        respondo1 = {ask} 'Kio estas 3+2?'
-        respondo2 = {ask} 'Kio estas 2+2?'
-        {if} respondo1 {is} 5 {and} respondo2 {is} 4
-            {print} 'Ambaŭ respondoj pravas!'
-        {else}
-            {print} 'Almenaŭ unu respondo malpravas!'
--   name: '{or}'
-    explanation: Almenaŭ unu el la du partoj devas esti ĝusta. Se ambaŭ estas ĝustaj, tio ankaŭ sufiĉas.
-    demo_code: |-
-        respondo1 = {ask} 'Kio estas 3+2?'
-        respondo2 = {ask} 'Kio estas 2+2?'
-        {if} respondo1 {is} 5 {or} respondo2 {is} 4
-            {print} 'Almenaŭ unu respondo pravas!'
-        {else}
-            {print} 'Ambaŭ respondoj malpravas!'
 14:
 -   name: Pli malgranda
     explanation: Oni uzas la signon `<` por kontroli, ĉu la unua nombro estas pli malgranda ol la dua nombro.

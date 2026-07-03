@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: Ambas partes necesitan ser correctas.
-    demo_code: |-
-        respuesta1 = {ask} '¿Cuánto es 3+2?'
-        respuesta2 = {ask} '¿Cuánto es 2+2?'
-        {if} respuesta1 {is} 5 {and} respuesta2 {is} 4
-            {print} '¡Ambas respuestas están bien!'
-        {else}
-            {print} '¡Al menos una de las respuestas está equivocada!'
--   name: '{or}'
-    explanation: Al menos 1 de ambas partes necesita ser correcta. Si ambas son correctas, también está bien.
-    demo_code: |-
-        respuesta1 = {ask} '¿Cuánto es 3+2?'
-        respuesta2 = {ask} '¿Cuánto es 2+2?'
-        {if} respuesta1 {is} 5 {or} respuesta2 {is} 4
-            {print} '¡Al menos una respuesta es correcta!'
-        {else}
-            {print} '¡Ambas respuestas están equivocadas!'
 14:
 -   name: Más pequeño
     explanation: Usamos el `<` para comprobar si el primer número es más pequeño que el segundo.

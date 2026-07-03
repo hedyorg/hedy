@@ -67,25 +67,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hallo!'
-13:
--   name: '{and}'
-    explanation: Beide Teile müssen korrekt sein.
-    demo_code: |-
-        antwort1 = {ask} 'Was ergibt 3+2?'
-        antwort2 = {ask} 'Was ergibt 2+2?'
-        {if} antwort1 {is} 5 {and} antwort2 {is} 4
-            {print} 'Beide Antworten sind richtig!'
-        {else}
-            {print} 'Mindestens eine Antwort ist falsch!'
--   name: '{or}'
-    explanation: Mindestens einer der beiden Teile muss korrekt sein. Wenn beide korrekt sind, ist es auch in Ordnung.
-    demo_code: |-
-        antwort1 = {ask} 'Was ergibt 3+2?'
-        antwort2 = {ask} 'Was ergibt 2+2?'
-        {if} antwort1 {is} 5 {or} antwort2 {is} 4
-            {print} 'Mindestens eine Antwort ist richtig!'
-        {else}
-            {print} 'Beide Antworten sind falsch!'
 14:
 -   name: Kleiner
     explanation: Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist.

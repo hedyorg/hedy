@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: Kaksi osaa joiden molempien on oltava oikein.
-    demo_code: |-
-        vastaus1 = {ask} 'Paljonko on 3+2'
-        vastaus2 = {ask} 'Paljonko on 2+2?'
-        {if} vastaus1 {is} 5 {and} vastaus2 {is} 4
-            {print} 'Molemmat vastaukset ovat oikein!'
-        {else}
-            {print} 'Ainakin toinen vastauksista on väärin!'
--   name: '{or}'
-    explanation: Ainakin toisen vastauksista on oltava oikein. Jos molemmat vastaukset ovat oikein, sekin on ok.
-    demo_code: |-
-        vastaus1 = {ask} 'Paljonko on 3+2'
-        vastaus2 = {ask} 'Paljonko on 2+2?'
-        {if} vastaus1 {is} 5 {or} vastaus2 {is} 4
-            {print} 'Ainakin toinen vastauksista on oikein!'
-        {else}
-            {print} 'Molemmat vastaukset ovat väärin!'
 14:
 -   name: Pienempi
     explanation: Käytämme merkkiä `<` tarkistaaksemme onko ensimmäinen numero toista numeroa pienempi.

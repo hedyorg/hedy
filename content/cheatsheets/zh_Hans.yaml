@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: 左边和右边的两个语句都必须是正确的。
-    demo_code: |-
-        答案1 = {ask} '3+2等于几？'
-        答案2 = {ask} '2+2等于几？'
-        {if} 答案1 {is} 5 {and} 答案2 {is} 4
-            {print} '这两个答案都正确！'
-        {else}
-            {print} '至少有一个答案是错的！'
--   name: '{or}'
-    explanation: 左右两边两个语句中, 至少有一个是正确的，如果两个都是正确的，也是可以的.
-    demo_code: |-
-        答案1 = {ask} '3+2等于几？'
-        答案2 = {ask} '2+2等于几？'
-        {if} 答案1 {is} 5 {or} 答案2 {is} 4
-            {print} '至少有一个答案是正确的！'
-        {else}
-            {print} '这两个答案都是错的！'
 14:
 -   name: Smaller 小于
     explanation: 我们用小于号 `<` 用来判断第一个数字是否小于第二个数字.

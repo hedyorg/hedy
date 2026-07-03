@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: To dele som begge skal være korrekte.
-    demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
-        {else}
-            {print} 'At least one answer is wrong!'
--   name: '{or}'
-    explanation: Mindst en af de to dele skal være korrekte. Hvis begge er korrekte, er det også fint.
-    demo_code: |-
-        svar1 = {ask} 'Hvad er 3+2?'
-        svar2 = {ask} 'Hvad er 2+2?'
-        {if} svar1 {is} 5 {or} svar2 {is} 4
-            {print} 'Mindst et svar er korrekt!'
-        {else}
-            {print} 'Begge svar er forkerte!'
 14:
 -   name: Mindre end
     explanation: Vi bruger `<` til at kontrollere om det første tal er mindre end det andet.

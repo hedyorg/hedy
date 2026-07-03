@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: Oby dwie części muszą być poprawne.
-    demo_code: |-
-        odpowiedź1 = {ask} 'ile to 3+2?'
-        odpowiedź2 = {ask} 'Ile to 2+2?'
-        {if} odpowiedź1 {is} 5 {and} odpowiedź2 {is} 4
-            {print} 'Obydwie odpowiedzi są poprawne!'
-        {else}
-            {print} 'Co najmniej jedna odpowiedź nie jest poprawna!'
--   name: '{or}'
-    explanation: Co najmniej jedna z dwóch części muszą być poprawne. Jeśli oby dwie są, to też w porządku.
-    demo_code: |-
-        odpowiedź1 = {ask} 'Ile to 3+2?'
-        odpowiedź2 = {ask} 'Ile to 2+2?'
-        {if} odpowiedź1 {is} 5 {or} odpowiedź2 {is} 4
-            {print} 'Co najmniej jedna odpowiedź jest prawidłowa!'
-        {else}
-            {print} 'Oby dwie odpowiedzi są błędne!'
 14:
 -   name: Mniejszy
     explanation: Używamy `<` aby sprawdzić czy pierwsza liczba jest mniejsza od drugiej liczby.

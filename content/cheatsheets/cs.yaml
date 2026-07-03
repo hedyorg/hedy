@@ -55,25 +55,6 @@
     demo_code: |-
         jmeno is Hedy
         print 'Jmenuji se ' jmeno
-13:
--   name: and
-    explanation: Obě tvrzení (nalevo i napravo od `and`) musí být pravdivé.
-    demo_code: |-
-        odpoved1 = ask 'Kolik je 3 + 2?'
-        odpoved2 = ask 'Kolik je 2 + 2?'
-        if odpoved1 is 5 and odpoved2 is 4
-            print 'Obě odpovědi jsou správně!'
-        else
-            print 'Minimálně jedna z odpovědí je špatně!'
--   name: or
-    explanation: Alespoň jedno z tvrzení (nalevo a napravo od `or`) musí být pravdivé, pokud platí obě, je to taky v pořádku.
-    demo_code: |-
-        odpoved1 = ask 'Kolik je 3 + 2?'
-        odpoved2 = ask 'Kolik je 2 + 2?'
-        if odpoved1 is 5 or odpoved2 is 4
-            print 'Alespoň jedna odpověď je správně!'
-        else
-            print 'Obě odpovědi jsou špatně!'
 14:
 -   name: Menší
     explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.

@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-13:
--   name: '{and}'
-    explanation: Les deux parties doivent être correctes.
-    demo_code: |-
-        reponse1 = {ask} 'Que font 3 + 2 ?'
-        reponse2 = {ask} 'Que font 2 + 2 ?'
-        {if} reponse1 {is} 5 {and} reponse2 {is} 4
-            {print} 'Les deux réponses sont correctes !'
-        {else}
-            {print} 'Au moins une des deux réponses est fausse !'
--   name: '{or}'
-    explanation: Au moins une des deux parties doit être correcte. Si les deux sont correctes, ça marche aussi.
-    demo_code: |-
-        reponse1 = {ask} 'Que font 3 + 2 ?'
-        reponse2 = {ask} 'Que font 2 + 2 ?'
-        {if} reponse1 {is} 5 {or} reponse2 {is} 4
-            {print} 'Au moins une des deux réponses est correcte !'
-        {else}
-            {print} 'Les deux réponses sont fausses !'
 14:
 -   name: Plus petit
     explanation: On utilise `<` pour vérifier si le premier nombre est plus petit que le second.

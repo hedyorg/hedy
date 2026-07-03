@@ -71,25 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello'
-13:
--   name: '{and}'
-    explanation: Två delar som båda måste vara rätt.
-    demo_code: |-
-        svar1 = {ask} 'Vad är 3+2?'
-        svar2 = {ask} 'Vad är 2+2?'
-        {if} svar1 {is} 5 {and} svar2 {is} 4
-            {print} 'Båda svaren är rätt!'
-        {else}
-            {print} 'Minst ett svar är fel!'
--   name: '{or}'
-    explanation: Minst ett av de två delarna måste vara rätt. Om båda är rätt går det också bra.
-    demo_code: |-
-        svar1 = {ask} 'Vad är 3+2?'
-        svar2 = {ask} 'Vad är 2+2?'
-        {if} svar1 {is} 5 {or} svar2 {is} 4
-            {print} 'Minst ett svar är rätt!'
-        {else}
-            {print} 'Båda svaren är fel!'
 14:
 -   name: Mindre än
     explanation: Vi använder `<` för att kolla om det första talet är mindre än det andra.
