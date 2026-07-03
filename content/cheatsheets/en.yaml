@@ -59,18 +59,21 @@
 -   name: Make a list with `{is}`
     explanation: Make a list with is.
     demo_code: |-
-        animals {is} dog, cat, kangaroo
+        animals {is} duck, dog, rhino
 -   name: Choose random
     explanation: Choose a random word from a group with `{at} {random}`.
     demo_code: |-
+        animals {is} duck, dog, rhino
         {print} animals {at} {random}
 -   name: '{add}'
     explanation: '`{add}` an item `{to_list}` a list.'
     demo_code: |-
-        {add} dog {to_list} animals
+        animals {is} duck, dog, rhino
+        {add} cat {to_list} animals
 -   name: '{remove}'
     explanation: '`{remove}` an item `{from}` a list.'
     demo_code: |-
+        animals {is} duck, dog, rhino
         {remove} dog {from} animals
 -   name: 'Keywords you have learned before this level'
     explanation: '`{print}`, `{is}`, `{ask}`, `{play}`, `{turn}`, `{forward}`, `{sleep}`'
