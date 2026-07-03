@@ -208,22 +208,14 @@ adventures:
                     ```
             13:
                 story_text: |
-                    We gaan weer een verhaal printen, maar we moeten daarbij steeds haakjes gebruiken bij de `{print}`.
+                    We gaan een verhaal maken, we moeten daarbij steeds haakjes gebruiken bij de `{print}`.
 
                     ### Opdracht 1
-                    Maak een verhaal van minstens 5 zinnen. Je hoeft `naam` nog niet te gebruiken.
+                    Maak een verhaal van minstens 5 zinnen. Gebruik eerst de variabele `naam` in je verhaal. Maak dan nog 2 variabelen en gebruik die ook.
+                    Tip: Denk aan de komma's in een `{print}` tussen tekst en variabelen!
                 example_code: |
                     ```
-                    {print}('Welkom bij dit verhaal!')
-                    ```
-                story_text_2: |
-                    ### Opdracht 2
-                    We hebben al een `{input}` voor jou klaargezet. Gebruik eerst de variabele `naam` in je verhaal.
-                    Voeg daarna een tweede `{ask}` toe en gebruik die variabele ook.
-                    Tip: Denk aan de komma's in een `{print}` tussen tekst en variabelen!
-                example_code_2: |
-                    ```
-                    naam = {input}('Hoe heet jij?')
+                    naam = _ 
                     {print}('Welkom bij dit verhaal!')
                     ```
             6:
@@ -3316,34 +3308,6 @@ adventures:
                     ```
                     visjes = 10, 9, 8, 7, 6, 5, 4, 3, 2
                     ```
-            13: 
-                story_text: |
-                    We beginnen met het liedje van de visjes. Het liedje begint met tien visjes die naar de zee zwemmen, maar er gaat er steeds eentje af.
-                    Maak de code af. Schrijf een {for}-loop met de tien verzen die je wilt zingen.
-                example_code: |
-                    ```
-                    #Het eendjes liedje zingen:
-
-                    {for} i _ :
-                        eendjes = 10-i
-                        {print}(_, ' kleine visjes, die zwommen naar de zee')
-                        {print}("'Nee',  zei de moeder ik ga niet mee")
-                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
-                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
-                        
-
-                    ```
-                answer_code: |
-                    ```
-
-                    {for} i {in} {range}(0, 10) :
-                        eendjes = 10-i
-                        {print}(_, ' kleine visjes, die zwommen naar de zee')
-                        {print}("'Nee',  zei de moeder ik ga niet mee")
-                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
-                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
-
-                    ```
     songs_2:
         name: zing nog een lied!
         levels:
@@ -3385,6 +3349,34 @@ adventures:
                         {print} 'Ik stond erbij en ik keek er naar'
                         {sleep} 5
                         {clear}
+                    ```
+            14: 
+                story_text: |
+                    We beginnen met het liedje van de visjes. Het liedje begint met tien visjes die naar de zee zwemmen, maar er gaat er steeds eentje af.
+                    Maak de code af. Schrijf een {for}-loop met de tien verzen die je wilt zingen.
+                example_code: |
+                    ```
+                    #Het eendjes liedje zingen:
+
+                    {for} i _ :
+                        eendjes = 10-i
+                        {print}( _ , ' kleine visjes, die zwommen naar de zee')
+                        {print}("'Nee',  zei de moeder ik ga niet mee")
+                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
+                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
+                        
+
+                    ```
+                answer_code: |
+                    ```
+
+                    {for} i {in} {range}(0, 10) :
+                        eendjes = 10-i
+                        {print}(_, ' kleine visjes, die zwommen naar de zee')
+                        {print}("'Nee',  zei de moeder ik ga niet mee")
+                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
+                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
+
                     ```
     turtle:
         name: tekenen

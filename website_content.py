@@ -243,6 +243,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     ],
     13: [
         'print_command',
+        'story',
         'ask_command',
         'market',
         'if_command',
@@ -252,13 +253,13 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'quizmaster',
         'operators',
         'for_command',
-        'story',
         'debugging',
         'hospital'
     ],
     14: ['lists',
          'random_command',
          'for_command',
+         'songs_2',
          'haunted',
          'songs',
          'turtle_draw_it',

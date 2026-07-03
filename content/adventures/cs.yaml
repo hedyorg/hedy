@@ -129,13 +129,11 @@ adventures:
                     {print} 'Co vidíš?'
                     ```
             13:
-                story_text: "Budeme tisknout další příběh, ale nyní musíme použít závorky s `{print}`.\n\n### Cvičení 1\nVytvořte příběh o minimálně 5 větách. Zatím nemusíte používat 'jméno'.\n"
                 example_code: |
                     ```
+                    jmeno = _
                     {print}('Vítejte v tomto příběhu!')
                     ```
-                story_text_2: "## Cvičení 2\nJiž jsme pro vás připravili `{input}`. Nejprve ve svém příběhu použijte proměnnou `name`.\nPoté přidejte druhou proměnnou `{ask}` a použijte ji také.\nTip: Nezapomeňte na čárky v `{print}` mezi textem a proměnnými!\n"
-                example_code_2: "```\njmeno = {input}(\"Jak se jmenujete?\")\n{print}('Vítejte v tomto příběhu!')\n```\n"
             16:
                 story_text: "oužití smyčky `{while}` může vaše příběhy učinit zajímavějšími. Můžete například použít `{while} game == 'on'`, abyste mohli hrát, dokud hra neskončí.\nNebo můžete použít `{while} sword == 'lost'`, takže hráč nemůže pokračovat ve hře, dokud něco nenajde.\n\n### Cvičení\nPříklad kódu ukazuje, jak v příběhu použít cyklus `{while}`. Nyní si **vymyslete vlastní scénář**, ve kterém musí hráč něco najít, než bude moci pokračovat.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
