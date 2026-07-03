@@ -6140,38 +6140,6 @@ adventures:
                         {print} ""
                         {sleep} 2
                     ```
-            13: 
-                story_text: |
-                    We start with singing the song about ducks, starting with a ten ducks but one by one they get lost. 
-                    Finish the code. Write a for-loop with the ten verses you want to sing. At the end of every verse, make sure that one duck less comes back.
-                example_code: |
-                    ```
-                    #singing the duck song:
-
-                    {for} i _ :
-                        ducks = 10-i
-                        {print}(_, ' little ducks went swimming one day')
-                        {print}('Over the hill and far away')
-                        {print}("Mother duck said: 'quack, quack, quack' ")
-                        ducks_minus = ducks-1
-                        {print}('But only ' _)
-                        
-
-                    ```
-                answer_code: |
-                    ```
-                    #singing the duck song:
-
-                    {for} i {in} {range}(0, 10):
-                        ducks = 10-i
-                        {print}(ducks, ' little ducks went swimming one day')
-                        {print}('Over the hill and far away')
-                        {print}("Mother duck said: 'quack, quack, quack' ")
-                        ducks_minus = ducks-1
-                        {print}('But only ', ducks_minus, ' came back.' )
-                        
-
-                    ```
             14:
                 story_text: |
                     In this level, you can program a song like OldMacDonald even more quickly. You can connect the right animal to the right sound by simply putting them in the same place in the list.
@@ -6316,6 +6284,38 @@ adventures:
                     {print} 'Up above the world so high'
                     {print} 'Like a diamond in the sky'
                     {call} twinkle
+                    ```
+            14: 
+                story_text: |
+                    We start with singing the song about ducks, starting with a ten ducks but one by one they get lost. 
+                    Finish the code. Write a for-loop with the ten verses you want to sing. At the end of every verse, make sure that one duck less comes back.
+                example_code: |
+                    ```
+                    #singing the duck song:
+
+                    {for} i _ :
+                        ducks = 10-i
+                        {print}( _ , ' little ducks went swimming one day')
+                        {print}('Over the hill and far away')
+                        {print}("Mother duck said: 'quack, quack, quack' ")
+                        ducks_minus = ducks-1
+                        {print}('But only ' _ )
+                        
+
+                    ```
+                answer_code: |
+                    ```
+                    #singing the duck song:
+
+                    {for} i {in} {range}(0, 10):
+                        ducks = 10-i
+                        {print}(ducks, ' little ducks went swimming one day')
+                        {print}('Over the hill and far away')
+                        {print}("Mother duck said: 'quack, quack, quack' ")
+                        ducks_minus = ducks-1
+                        {print}('But only ', ducks_minus, ' came back.' )
+                        
+
                     ```
     turtle:
         name: turtle

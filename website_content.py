@@ -259,6 +259,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
     14: ['lists',
          'random_command',
          'for_command',
+         'songs_2',
          'haunted',
          'songs',
          'turtle_draw_it',

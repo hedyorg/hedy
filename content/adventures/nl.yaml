@@ -3220,34 +3220,6 @@ adventures:
                     ```
                     visjes = 10, 9, 8, 7, 6, 5, 4, 3, 2
                     ```
-            13: 
-                story_text: |
-                    We beginnen met het liedje van de visjes. Het liedje begint met tien visjes die naar de zee zwemmen, maar er gaat er steeds eentje af.
-                    Maak de code af. Schrijf een {for}-loop met de tien verzen die je wilt zingen.
-                example_code: |
-                    ```
-                    #Het eendjes liedje zingen:
-
-                    {for} i _ :
-                        eendjes = 10-i
-                        {print}(_, ' kleine visjes, die zwommen naar de zee')
-                        {print}("'Nee',  zei de moeder ik ga niet mee")
-                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
-                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
-                        
-
-                    ```
-                answer_code: |
-                    ```
-
-                    {for} i {in} {range}(0, 10) :
-                        eendjes = 10-i
-                        {print}(_, ' kleine visjes, die zwommen naar de zee')
-                        {print}("'Nee',  zei de moeder ik ga niet mee")
-                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
-                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
-
-                    ```
     songs_2:
         name: zing nog een lied!
         levels:
@@ -3289,6 +3261,34 @@ adventures:
                         {print} 'Ik stond erbij en ik keek er naar'
                         {sleep} 5
                         {clear}
+                    ```
+            14: 
+                story_text: |
+                    We beginnen met het liedje van de visjes. Het liedje begint met tien visjes die naar de zee zwemmen, maar er gaat er steeds eentje af.
+                    Maak de code af. Schrijf een {for}-loop met de tien verzen die je wilt zingen.
+                example_code: |
+                    ```
+                    #Het eendjes liedje zingen:
+
+                    {for} i _ :
+                        eendjes = 10-i
+                        {print}( _ , ' kleine visjes, die zwommen naar de zee')
+                        {print}("'Nee',  zei de moeder ik ga niet mee")
+                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
+                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
+                        
+
+                    ```
+                answer_code: |
+                    ```
+
+                    {for} i {in} {range}(0, 10) :
+                        eendjes = 10-i
+                        {print}(_, ' kleine visjes, die zwommen naar de zee')
+                        {print}("'Nee',  zei de moeder ik ga niet mee")
+                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
+                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
+
                     ```
     turtle:
         name: tekenen
