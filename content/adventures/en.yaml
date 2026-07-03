@@ -943,6 +943,94 @@ adventures:
                         mean_grade = calculate_mean_grade(subject)
                         {print} ('Your mean grade for ', subject, ' is ', mean_grade)
                     ```
+    carnival:
+        name: carnival
+        default_save_name: carnival
+        levels:
+            13:
+                story_text: |
+                    Welcome to the Hedy carnival! We are going to play Tin Can Alley! Knock over the tin cans and choose your price!
+
+                    ### Exercise
+                    Fill in the correct commands after the {if} to get the program to work.
+
+                    The program should work if the player has not had a turn yet and is younger than 18.
+                    Then, a list should be displayed showing which prizes the player can choose from.
+                    If the player has enough points for a prize (see the prize list), that prize should be printed.
+                    The player can only win the video game if they are 14 years old or older.
+                    The player can only win the balloon if they are 5 years old or younger.
+
+                example_code: |
+                    ```
+                    #prize list
+                    balloon = 1
+                    lollipop = 2
+                    video_game = 8
+                    teddy_bear = 10
+
+                    {print}('TIn Can Alley!')
+                    age = {input}('How old are you?')
+                    already_had_turn = {input}('Have you already had a turn?')
+
+                    # Which prizes can the player choose?
+                    {if} _ :
+                        {print}('You may play')
+                        points = {input}('How many points did you score?')
+                        {print}('You can choose from these prizes:')
+
+                        {if} _ :
+                            {print}('teddy bear')
+
+                        {if} _ :
+                            {print}('lollipop')
+
+                        {if} _ :
+                            {print}('video game')
+
+                        {if} _ :
+                            {print}('balloon')
+
+                        chosen_prize = {input}('Which prize would you like?')
+                        {print}('Congratulations on your', chosen_prize)
+
+                    {else}:
+                        {print}('Sorry, you may not play')
+                    ```
+                answer_code: |
+                    ```
+                    #prize list
+                    balloon = 1
+                    lollipop = 2
+                    video_game = 8
+                    teddy_bear = 10
+
+                    {print}('Tin Can Alley!')
+                    age = {input}('How old are you?')
+                    already_had_turn = {input}('Have you already had a turn?')
+
+                    {if} already_had_turn != 'yes' {or} age > 18:
+                        {print}('You may play')
+                        points = {input}('How many points did you score?')
+                        {print}('You can choose from these prizes:')
+
+                        {if} points >= teddy_bear:
+                            {print}('teddy bear')
+
+                        {if} points >= lollipop:
+                            {print}('lollipop')
+
+                        {if} age >= 14 {and} points >= video_game:
+                            {print}('video game')
+
+                        {if} age <= 5 {and} points >= balloon:
+                            {print}('balloon')
+
+                        chosen_prize = {input}('Which prize would you like?')
+                        {print}('Congratulations on your', chosen_prize)
+
+                    {else}:
+                        {print}('Sorry, you may not play')
+                    ```
     clear_command:
         name: '{clear}'
         default_save_name: clear_command

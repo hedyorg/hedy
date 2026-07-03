@@ -529,6 +529,94 @@ adventures:
                     ```
                     # Gebruik je eigen code van het vorige avontuur
                     ```
+    carnival:
+        name: kermis
+        default_save_name: kermis
+        levels:
+            13:
+                story_text: |
+                    Welkom op de Hedy kermis! We gaan blikgooien. Gooi zo veel mogelijk blikjes om en kies een leuke prijs!
+
+                    ### Opdracht
+                    Vul de juiste commando's in na de {if} om het programma te laten werken.
+
+                    Het programma moet werken als de speler nog niet aan de beurt is geweest en jonger is dan 18.
+                    Daarna wordt er een lijstje gemaakt van welke prijzen de speler kan kiezen.
+                    Als de speler genoeg punten heeft voor een prijs (zie prijslijst) moet hij geprint worden.
+                    De speler kan de videogame alleen winnen als die 14 jaar of ouder is.
+                    De speler kan de ballon alleen winnen als die 5 jaar of jonger is.
+
+                example_code: |
+                    ```
+                    #prijslijst
+                    ballon = 1
+                    lolly = 2
+                    videogame = 8
+                    beer = 10
+
+                    {print} ('Blikgooien!')
+                    leeftijd = {input}('Hoe oud ben je?')
+                    al_geweest = {input}('Ben je al een keer aan de beurt geweest?')
+
+                    #Welke prijzen kan de speler kiezen
+                    {if} _ :
+                        {print}('Je mag meedoen')
+                        punten = {input}('Hoeveel punten heb je?')
+                        {print}('Deze prijzen kun je kiezen:')
+
+                        {if} _ :
+                            {print}('beer')
+
+                        {if} _ :
+                            {print}('lolly')
+
+                        {if} _:
+                            {print}('videogame')
+
+                        {if} _:
+                            {print}('ballon')
+
+                        gekozen_prijs = {input}('Welke prijs kies je?')
+                        {print}('Van harte gefeliciteerd met je ', gekozen_prijs)
+
+                    {else}:
+                        {print}('Je mag helaas niet meedoen')
+                    ```
+                answer_code: |
+                    ```
+                    #prijslijst
+                    ballon = 1
+                    lolly = 2
+                    videogame = 8
+                    beer = 10
+
+                    {print} ('Blikgooien!')
+                    leeftijd = {input}('Hoe oud ben je?')
+                    al_geweest = {input}('Ben je al een keer aan de beurt geweest?')
+
+                    {if} al_geweest != 'ja' {or} leeftijd > 18:
+                        {print}('Je mag meedoen')
+                        punten = {input}('Hoeveel punten heb je?')
+                        {print}('Deze prijzen kun je kiezen:')
+
+                        {if} punten >= beer:
+                            {print}('beer')
+
+                        {if} punten >= lolly:
+                            {print}('lolly')
+
+                        {if} leeftijd >= 14 {and} punten >= videogame:
+                            {print}('videogame')
+
+                        {if} leeftijd <= 5 {and} punten >= ballon:
+                            {print}('ballon')
+
+                        gekozen_prijs = {input}('Welke prijs kies je?')
+                        {print}('Van harte gefeliciteerd met je ', gekozen_prijs)
+
+                    {else}:
+                        {print}('Je mag helaas niet meedoen')
+                    ```
     clear_command:
         levels:
             4:
