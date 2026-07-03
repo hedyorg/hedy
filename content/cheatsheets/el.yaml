@@ -59,43 +59,38 @@
         name {is} Hedy
         {print} 'Το όνομά μου είναι ' name
 5:
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Μικρότερο
     explanation: Χρησιμοποιούμε το `<` για να ελέγξουμε αν ο πρώτος αριθμός είναι μικρότερος από το δεύτερο αριθμό. Για παράδειγμα, αν θέλουμε να δούμε αν μια μεταβλητή είναι μικρότερη από 15, χρησιμοποιούμε `variable < 15`
     demo_code: |-
-        age = ask 'Πόσο χρονών είσαι;'
-        if age < 13
-            print 'Είσαι νεότερη από εμένα!'
+        age = {input}('Πόσο χρονών είσαι;')
+        {if} age < 13:
+            {print}('Είσαι νεότερη από εμένα!')
 -   name: Μεγαλύτερο
     explanation: Χρησιμοποιούμε το `>` για να ελέγξουμε αν ο πρώτος αριθμός είναι μεγαλύτερος από το δεύτερο αριθμό. Για παράδειγμα, αν θέλουμε να δούμε αν μια μεταβλητή είναι μεγαλύτερη από 15, χρησιμοποιούμε `variable > 15`
     demo_code: |-
-        age = ask 'Πόσο χρονών είσαι;'
-        if age > 13
-            print 'Είσαι μεγαλύτερη από εμένα!'
+        age = {input}('Πόσο χρονών είσαι;')
+        {if} age > 13:
+            {print}('Είσαι μεγαλύτερη από εμένα!')
 -   name: Ισότητα
     explanation: Χρησιμοποιούμε το σύμβολο  `==` για να ελέγξουμε αν 2 πράματα είναι ίδια.
     demo_code: |-
-        answer = {ask} 'Πόσο κάνει 5 x 5;'
-        {if} answer == 25
-            {print} 'Πολύ σωστά!'
+        answer = {input}('Πόσο κάνει 5 x 5;')
+        {if} answer == 25:
+            {print}('Πολύ σωστά!')
 -   name: Ανισότητα
     explanation: Χρησιμοποιούμε το σύμβολο  `!=` για να ελέγξουμε αν δυο πράγματα δεν είναι ίδια.
     demo_code: |-
-        answer = {ask} 'Πόσο κάνει 5 x 5;'
-        {if} answer != 25
-            {print} 'Δεν είναι σωστό!'
+        answer = {input}('Πόσο κάνει 5 x 5;')
+        {if} answer != 25:
+            {print}('Δεν είναι σωστό!')
 -   name: Μικρότερο ή ίσο
     explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
 -   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
 15:
 -   name: Boolean while
     explanation: Μπορούμε να χρησιμοποιήσουμε το βρόχο `while` με το `True` και `False`

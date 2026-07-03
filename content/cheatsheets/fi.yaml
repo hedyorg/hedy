@@ -71,43 +71,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Pienempi
     explanation: Käytämme merkkiä `<` tarkistaaksemme onko ensimmäinen numero toista numeroa pienempi.
     demo_code: |-
-        ikä = {ask} 'Kuinka vanha olet?'
-        {if} ikä < 13
-            {print} 'Olet minua nuorempi!'
+        ikä = {input}('Kuinka vanha olet?')
+        {if} ikä < 13:
+            {print}('Olet minua nuorempi!')
 -   name: Suurempi
     explanation: Käytämme merkkiä `>` tarkistaaksemme onko ensimmäinen numero toista numeroa suurempi.
     demo_code: |-
-        ikä = {ask} 'Kuinka vanha olet?'
-        {if} ikä > 13
-            {print} 'Olet minua vanhempi!'
+        ikä = {input}('Kuinka vanha olet?')
+        {if} ikä > 13:
+            {print}('Olet minua vanhempi!')
 -   name: Yhtä suuri
     explanation: Käytämme merkkejä `==` tarkistaaksemme ovatko kaksi asiaa samoja.
     demo_code: |-
-        vastaus = {ask} 'Paljonko on 5 * 5?'
-        {if} vastaus == 25
-            {print} 'Oikein!'
+        vastaus = {input}('Paljonko on 5 * 5?')
+        {if} vastaus == 25:
+            {print}('Oikein!')
 -   name: Eivät yhtä suuret
     explanation: Käytämme merkkejä `!=` tarkistaaksemme ettei kaksi asiaa ole samoja.
     demo_code: |-
-        vastaus = {ask} 'Paljonko on 5 * 5?'
-        {if} vastaus != 25
-            {print} 'Väärin!'
+        vastaus = {input}('Paljonko on 5 * 5?')
+        {if} vastaus != 25:
+            {print}('Väärin!')
 -   name: Pienempi tai yhtäsuuri
     explanation: Käytämme merkkejä `<=` tarkistaaksemme onko ensimmäinen numero pienempi tai yhtäsuuri kuin jälkimmäinen numero.
     demo_code: |-
-        ikä = {ask} 'Kuinka vanha olet?'
-        {if} ikä <= 12
-            {print} 'Olet minua nuorempi!'
+        ikä = {input}('Kuinka vanha olet?')
+        {if} ikä <= 12:
+            {print}('Olet minua nuorempi!')
 -   name: Suurempi tai yhtäsuuri
     explanation: Käytämme merkkejä `>=` tarkistaaksemme onko ensimmäinen numero suurempi tai yhtäsuuri kuin jälkimmäinen numero.
     demo_code: |-
-        ikä = {ask} 'Kuinka vanha olet?'
-        {if} ikä >= 14
-            {print} 'Olet minua vanhempi!'
+        ikä = {input}('Kuinka vanha olet?')
+        {if} ikä >= 14:
+            {print}('Olet minua vanhempi!')
 15:
 -   name: '{while}'
     explanation: Voimme käyttää `{while}` silmukkaa erisuuruuden kanssa.

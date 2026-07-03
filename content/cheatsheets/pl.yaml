@@ -71,43 +71,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Mniejszy
     explanation: Używamy `<` aby sprawdzić czy pierwsza liczba jest mniejsza od drugiej liczby.
     demo_code: |-
-        wiek = {ask} 'Ile masz lat?'
-        {if} wiek < 13
-            {print} 'Jesteś młodszy ode mnie!'
+        wiek = {input}('Ile masz lat?')
+        {if} wiek < 13:
+            {print}('Jesteś młodszy ode mnie!')
 -   name: Większy
     explanation: Używamy `>` aby sprawdzić czy pierwsza liczba jest większa od drugiej.
     demo_code: |-
-        wiek = {ask} 'Ile masz lat?'
-        {if} wiek > 13
-            {print} 'Jesteś starszy ode mnie!'
+        wiek = {input}('Ile masz lat?')
+        {if} wiek > 13:
+            {print}('Jesteś starszy ode mnie!')
 -   name: Równy
     explanation: Używamy `==` aby sprawdzić czy dwie rzeczy są takie same.
     demo_code: |-
-        odpowiedź = {ask} 'Ile to 5 * 5?'
-        {if} odpowiedź == 25
-            {print} 'To jest poprawna odpowiedź!'
+        odpowiedź = {input}('Ile to 5 * 5?')
+        {if} odpowiedź == 25:
+            {print}('To jest poprawna odpowiedź!')
 -   name: Nierówne
     explanation: Używamy `!=` aby sprawdzić, czy dwie rzeczy są inne.
     demo_code: |-
-        odpowiedź = {ask} 'Ile to 5 * 5?'
-        {if} odpowiedź != 25
-            {print} 'To nie jest poprawna odpowiedź!'
+        odpowiedź = {input}('Ile to 5 * 5?')
+        {if} odpowiedź != 25:
+            {print}('To nie jest poprawna odpowiedź!')
 -   name: Mniejszy lub równy
     explanation: Używamy `<=` aby sprawdzić czy pierwsza liczba jest większa lub równa drugiej liczbie.
     demo_code: |-
-        wiek = {ask} 'Ile masz lat?'
-        {if} wiek <= 12
-            {print} 'Jesteś młodszy ode mnie!'
+        wiek = {input}('Ile masz lat?')
+        {if} wiek <= 12:
+            {print}('Jesteś młodszy ode mnie!')
 -   name: Większy lub równy
     explanation: Używamy `>=` aby sprawdzić czy pierwsza liczba jest większa lub równa drugiej liczbie.
     demo_code: |-
-        wiek = {ask} 'Ile masz lat?'
-        {if} wiek >= 14
-            {print} 'Jesteś starszy ode mnie!'
+        wiek = {input}('Ile masz lat?')
+        {if} wiek >= 14:
+            {print}('Jesteś starszy ode mnie!')
 15:
 -   name: '{while}'
     explanation: Możemy użyć pętli `{while}` z nierównością.

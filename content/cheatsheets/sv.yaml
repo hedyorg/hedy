@@ -71,43 +71,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Mindre än
     explanation: Vi använder `<` för att kolla om det första talet är mindre än det andra.
     demo_code: |-
-        ålder = {ask} 'Hur gammal är du?'
-        {if} ålder < 13
-            {print} 'Du är yngre än jag!'
+        ålder = {input}('Hur gammal är du?')
+        {if} ålder < 13:
+            {print}('Du är yngre än jag!')
 -   name: Större än
     explanation: Vi använder `>` för att kolla om det första talet är större än det andra talet.
     demo_code: |-
-        ålder = {ask} 'Hur gammal är du?'
-        {if} ålder > 13
-            {print} 'Du är äldre än jag!'
+        ålder = {input}('Hur gammal är du?')
+        {if} ålder > 13:
+            {print}('Du är äldre än jag!')
 -   name: Lika med
     explanation: Vi använder `==` för att kolla om två saker är lika.
     demo_code: |-
-        svar = {ask} 'Vad är 5 * 5?'
-        {if} svar == 25
-            {print} 'Det stämmer!'
+        svar = {input}('Vad är 5 * 5?')
+        {if} svar == 25:
+            {print}('Det stämmer!')
 -   name: Olika
     explanation: Vi använder `!=` för att kolla om två saker är olika.
     demo_code: |-
-        svar = {ask} 'Vad är 5 * 5?'
-        {if} svar != 25
-            {print} 'Det stämmer inte!'
+        svar = {input}('Vad är 5 * 5?')
+        {if} svar != 25:
+            {print}('Det stämmer inte!')
 -   name: Mindre än eller lika med
     explanation: Vi använder `<=` för att kolla om det första talet är mindre än eller lika med det andra talet.
     demo_code: |-
-        ålder = {ask} 'Hur gammal är du?'
-        {if} ålder <= 12
-            {print} 'Du är yngre än jag!'
+        ålder = {input}('Hur gammal är du?')
+        {if} ålder <= 12:
+            {print}('Du är yngre än jag!')
 -   name: Större än eller lika med
     explanation: Vi använder `>=` för att kolla om det första talet är större än eller lika med det andra talet.
     demo_code: |-
-        ålder = {ask} 'Hur gammal är du?'
-        {if} ålder >= 14
-            {print} 'Du är äldre än jag!'
+        ålder = {input}('Hur gammal är du?')
+        {if} ålder >= 14:
+            {print}('Du är äldre än jag!')
 15:
 -   name: '{while}'
     explanation: Vi kan använda `{while}` med skilt från.

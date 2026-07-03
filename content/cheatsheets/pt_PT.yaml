@@ -55,43 +55,23 @@
     demo_code: |-
         nome is Hedy
         print 'O meu nome é ' nome
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Menor
     explanation: Usamos o `<` para verificar se o primeiro número é menor que o segundo número. Por exemplo, se queremos saber se uma variável é menor que 15, usamos `variavel < 15`
     demo_code: |-
-        idade = ask 'Quantos anos tens?'
-        if idade < 13
-            print 'És mais novo a do que eu!'
+        idade = {input}('Quantos anos tens?')
+        {if} idade < 13:
+            {print}('És mais novo a do que eu!')
 -   name: Maior
     explanation: Usamos `>` para verificar se o primeiro número é maior que o segundo número. Por exemplo, se queres saber se uma variável é maior do que 15, usamos, utilizamos `variavel > 15`.
     demo_code: |-
-        idade = ask 'Quantos anos tens?'
-        if idade > 13
-            print 'És mais velho a do que eu!'
--   name: Equal
-    explanation: We use the `==` to check if two things are the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
--   name: Not equal
-    explanation: We use the `!=` to check if two things are not the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
--   name: Smaller {or} equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+        idade = {input}('Quantos anos tens?')
+        {if} idade > 13:
+            {print}('És mais velho a do que eu!')
 15:
 -   name: Booleano while
     explanation: Podemos usar o ciclo `while` com `Verdadeiro` e `Falso`.

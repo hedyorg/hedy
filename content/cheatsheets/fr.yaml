@@ -71,43 +71,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Plus petit
     explanation: On utilise `<` pour vérifier si le premier nombre est plus petit que le second.
     demo_code: |-
-        age = {ask} 'Quel âge as-tu ?'
-        {if} age < 13
-            {print} 'Tu es plus jeune que moi !'
+        age = {input}('Quel âge as-tu ?')
+        {if} age < 13:
+            {print}('Tu es plus jeune que moi !')
 -   name: Plus grand
     explanation: On utilise `>` pour vérifier si le premier nombre est plus grand que le second.
     demo_code: |-
-        age = {ask} 'Quel âge as-tu ?'
-        {if} age > 13
-            {print} 'Tu es plus vieux que moi !'
+        age = {input}('Quel âge as-tu ?')
+        {if} age > 13:
+            {print}('Tu es plus vieux que moi !')
 -   name: Égal à
     explanation: On utilise `==` pour vérifier si deux choses sont identiques.
     demo_code: |-
-        reponse = {ask} 'Que font 5 * 5 ?'
-        {if} reponse == 25
-            {print} 'Correct !'
+        reponse = {input}('Que font 5 * 5 ?')
+        {if} reponse == 25:
+            {print}('Correct !')
 -   name: Différent de
     explanation: On utilise `!=` pour verifier que deux choses sont différentes.
     demo_code: |-
-        reponse = {ask} 'Que font 5 * 5 ?'
-        {if} reponse != 25
-            {print} 'Pas correct !'
+        reponse = {input}('Que font 5 * 5 ?')
+        {if} reponse != 25:
+            {print}('Pas correct !')
 -   name: Plus petit ou égal
     explanation: On utilise le `<=` pour vérifier si le premier nombre est plus petit ou égal au second.
     demo_code: |-
-        age = {ask} 'Quel âge as-tu ?'
-        {if} age <= 12
-            {print} 'Tu es plus jeune que moi !'
+        age = {input}('Quel âge as-tu ?')
+        {if} age <= 12:
+            {print}('Tu es plus jeune que moi !')
 -   name: Plus grand ou égal
     explanation: On utilise le `>=` pour vérifier si le premier nombre est plus grand ou égal au second.
     demo_code: |-
-        age = {ask} 'Quel âge as-tu ?'
-        {if} age >= 14
-            {print} 'Tu es plus vieux que moi !'
+        age = {input}('Quel âge as-tu ?')
+        {if} age >= 14:
+            {print}('Tu es plus vieux que moi !')
 15:
 -   name: '{while}'
     explanation: On peut utiliser la boucle `{while}` avec l'opérateur différent de.

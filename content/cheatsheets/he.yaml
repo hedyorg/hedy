@@ -71,43 +71,20 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: קטן יותר
     explanation: אנחנו משתמשים ב-`<` כדי לבדוק אם המספר הראשון קטן מהמספר השני.
     demo_code: |-
-        גיל = {ask} 'בת כמה את?'
-        {if} גיל < 13
-            {print} 'את יותר קטנה ממני!'
+        גיל = {input}('בת כמה את?')
+        {if} גיל < 13:
+            {print}('את יותר קטנה ממני!')
 -   name: גדול יותר
     explanation: אנחנו משתמשים ב-`>` כדי לבדוק אם המספר הראשון גדול מהמספר השני.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age > 13
-            {print} 'You are older than me!'
--   name: Equal
-    explanation: We use the `==` to check if two things are the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That is correct!'
--   name: Not equal
-    explanation: We use the `!=` to check if two things are not the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
--   name: Smaller or equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+
 16:
 -   name: square brackets
     explanation: Lists with square brackets.

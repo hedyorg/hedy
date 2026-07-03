@@ -55,43 +55,47 @@
     demo_code: |-
         jmeno is Hedy
         print 'Jmenuji se ' jmeno
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Menší
     explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.
     demo_code: |-
-        vek = ask 'Kolik je ti let?'
-        if vek < 13
-            print 'Jsi mladší než já!'
+        vek = {input}('Kolik je ti let?')
+        {if} vek < 13:
+            {print}('Jsi mladší než já!')
 -   name: Větší
     explanation: Používáme `>`, abychom zjistili, jestli je první číslo větší než druhé. Například pokud chceme ověřit, že je proměnná větší než 15, použijeme `promenna > 15`.
     demo_code: |-
-        vek = ask 'Kolik je ti let?'
-        if vek > 13
-            print 'Jsi mladší než já!'
+        vek = {input}('Kolik je ti let?')
+        {if} vek > 13:
+            {print}('Jsi mladší než já!')
 -   name: Equal
     explanation: We use the `==` to check if two things are the same.
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
+        answer = {input}('What is 5 * 5?')
+        {if} answer == 25:
+            {print}('That {is} correct!')
 -   name: Not equal
     explanation: We use the `!=` to check if two things are not the same.
     demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
+        answer = {input}('What is 5 * 5?')
+        {if} answer != 25:
+            {print}('That is not correct!')
 -   name: Smaller {or} equal
     explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
+        age = {input}('How old are you?')
+        {if} age <= 12:
+            {print}('You are younger than me!')
 -   name: Bigger or equal
     explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
     demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+        age = {input}('How old are you?')
+        {if} age >= 14:
+            {print}('You are older than me!')
 15:
 -   name: Pravdivostní while
     explanation: Můžeme použít `while` cyklus s `True` a `False`.

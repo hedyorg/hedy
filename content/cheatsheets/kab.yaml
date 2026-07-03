@@ -62,22 +62,37 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Amecṭuḥ
     explanation: Nesseqdac `<` i usenqed ma yella uṭṭun amezwaru meẓẓiy ɣef wis sin.
-    demo_code: "age = {ask} 'How old are you?'\n{if} age < 13\n    {print} 'You are younger than me!'"
 -   name: Meqqer ugar
     explanation: Nesseqdac `>` i usenqed ma yella uṭṭun amezwaru meqqer ɣef wis sin.
-    demo_code: "laεmer = {ask} 'Acḥal deg laεmeṛ-ik?'\n{if} laεmer > 13\n    {print} 'Meqqreḍ fell-i!'"
+    demo_code: |-
+        laεmer = {input}('Acḥal deg laεmeṛ-ik?')
+        {if} laεmer > 13:
+            {print}('Meqqreḍ fell-i!')
 -   name: Yeεdel akked
     explanation: Nesseqdac `==` i usenqed ma yella snat n tɣawsiwin kifkif-nsent.
-    demo_code: "tiririt = {ask} 'Qcu ara d-imudd 5 * 5?'\n{if} tiririt == 25\n    {print} 'Iṣeḥḥa!'"
+    demo_code: |-
+        tiririt = {input}('Qcu ara d-imudd 5 * 5?')
+        {if} tiririt == 25:
+            {print}('Iṣeḥḥa!')
 -   name: Yemgarrad ɣef
     explanation: Nesseqdac `!=` i usenqed ma yella magarradent snat n tɣawsiwin.
-    demo_code: "tiririt = {ask} 'D acu ara d-imudd 5 * 5?'\n{if} tiririt != 25\n    {print} 'Ur iṣeḥḥa ara!'"
+    demo_code: |-
+        tiririt = {input}('D acu ara d-imudd 5 * 5?')
+        {if} tiririt != 25:
+            {print}('Ur iṣeḥḥa ara!')
 -   name: Ameẓẓyan neɣ yeεdel
     explanation: Nesseqdac `<=`i usenqed ma yella uṭṭun amezwaru meẓẓiy neɣ yeεdel akked wuṭṭun wis sin
-    demo_code: "leεmeṛ = {ask} 'Acḥal deg leεmeṛ-ik?'\n{if} leεmeṛ <= 12\n    {print} 'Meẓẓiyet aṭas fell-i!'"
+    demo_code: |-
+        leεmeṛ = {input}('Acḥal deg leεmeṛ-ik?')
+        {if} leεmeṛ <= 12:
+            {print}('Meẓẓiyet aṭas fell-i!')
 -   name: Meqqer ugar neɣ kifkif
 15:
 -   name: '{while}'

@@ -71,43 +71,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Menor
     explanation: Nós usamos o `<` para verificar se o primeiro número é menor que o segundo número.
     demo_code: |-
-        idade = {ask} 'Quantos anos você tem?'
-        {if} idade < 13
-            {print} 'Você é mais novo do que eu!'
+        idade = {input}('Quantos anos você tem?')
+        {if} idade < 13:
+            {print}('Você é mais novo do que eu!')
 -   name: Maior
     explanation: Nós usamos `>` para verificar se o primeiro número é maior que o segundo número.
     demo_code: |-
-        idade = {ask} 'Quantos anos você tem?'
-        {if} idade > 13
-            {print} 'Você é mais velho do que eu!'
+        idade = {input}('Quantos anos você tem?')
+        {if} idade > 13:
+            {print}('Você é mais velho do que eu!')
 -   name: Igual
     explanation: Nós usamos o `==` para verificar se duas coisas são idênticas.
     demo_code: |-
-        resposta = {ask} 'Quanto é 5 * 5?'
-        {if} resposta == 25
-            {print} 'Está correto!'
+        resposta = {input}('Quanto é 5 * 5?')
+        {if} resposta == 25:
+            {print}('Está correto!')
 -   name: Diferente
     explanation: Nós usamos o `!=` para verificar se duas coisas são diferentes.
     demo_code: |-
-        resposta = {ask} 'Quanto é 5 * 5?'
-        {if} resposta != 25
-            {print} 'Não está correto!'
+        resposta = {input}('Quanto é 5 * 5?')
+        {if} resposta != 25:
+            {print}('Não está correto!')
 -   name: Menor ou igual
     explanation: Nós usamos o `<=` para verificar se o primeiro número é menor ou igual ao segundo número.
     demo_code: |-
-        idade = {ask} 'Quantos anos você tem?'
-        {if} idade <= 12
-            {print} 'Você é mais novo do que eu!'
+        idade = {input}('Quantos anos você tem?')
+        {if} idade <= 12:
+            {print}('Você é mais novo do que eu!')
 -   name: Maior ou igual
     explanation: Nós podemos usar o `>=` para verificar se o primeiro número é maior ou igual ao segundo número.
     demo_code: |-
-        idade = {ask} 'Quantos anos você tem?'
-        {if} idade >= 14
-            {print} 'Você é mais velho do que eu!'
+        idade = {input}('Quantos anos você tem?')
+        {if} idade >= 14:
+            {print}('Você é mais velho do que eu!')
 15:
 -   name: '{while}'
     explanation: Nós podemos usar o laço `{while}` com o diferente.

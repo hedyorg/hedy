@@ -94,43 +94,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hallo!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Kleiner
     explanation: De `<` kijkt of het eerste getal kleiner is dan het tweede getal.
     demo_code: |-
-        leeftijd = {ask} 'Hoe oud ben jij?'
-        {if} leeftijd < 13
-            {print} 'Dan ben je jonger dan ik!'
+        leeftijd = {input}('Hoe oud ben jij?')
+        {if} leeftijd < 13:
+            {print}('Dan ben je jonger dan ik!')
 -   name: Groter
     explanation: De `>` kijkt of het eerste getal groter is dan het tweede getal.
     demo_code: |-
-        leeftijd = {ask} 'Hoe oud ben jij?'
-        {if} leeftijd > 13
-            {print} 'Dan ben je ouder dan ik!'
+        leeftijd = {input}('Hoe oud ben jij?')
+        {if} leeftijd > 13:
+            {print}( 'Dan ben je ouder dan ik!')
 -   name: Gelijk
     explanation: We gebruiken `==` om te kijken of twee dingen hetzelfde zijn.
     demo_code: |-
-        antwoord = {ask} 'Wat is 5 * 5?'
-        {if} antwoord == 25
-            {print} 'Klopt!'
+        antwoord = {input}('Wat is 5 * 5?')
+        {if} antwoord == 25:
+            {print}('Klopt!')
 -   name: Ongelijk
     explanation: We gebruiken `!=` om te kijken of twee dingen niet hetzelfde zijn.
     demo_code: |-
-        antwoord = {ask} 'Wat is 5 * 5?'
-        {if} antwoord != 25
-            {print} 'Foutje!'
+        antwoord = {input}('Wat is 5 * 5?')
+        {if} antwoord != 25:
+            {print}('Foutje!')
 -   name: Kleiner of gelijk
     explanation: We gebruiken `<=` om te kijken of het eerste getal kleiner dan of even klein is als het tweede getal.
     demo_code: |-
-        leeftijd = {ask} 'Hoe oud ben jij?'
-        {if} leeftijd <= 12
-            {print} 'Dan ben je jonger dan ik!'
+        leeftijd = {input}('Hoe oud ben jij?')
+        {if} leeftijd <= 12:
+            {print}('Dan ben je jonger dan ik!')
 -   name: Groter of gelijk
     explanation: We gebruiken `>=` om te kijken of het eerste getal groter dan of even groot is als het tweede getal.
     demo_code: |-
-        leeftijd = {ask} 'Hoe oud ben jij?'
-        {if} leeftijd >= 14
-            {print} 'Dan ben je ouder dan ik!'
+        leeftijd = {input}('Hoe oud ben jij?')
+        {if} leeftijd >= 14:
+            {print}('Dan ben je ouder dan ik!')
 15:
 -   name: '{while}'
     explanation: We kunnen dus een `{while}` loop gebruiken met `!=`.

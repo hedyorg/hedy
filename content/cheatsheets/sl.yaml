@@ -59,25 +59,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Manjši
     explanation: Za preverjanje, ali je prvo število manjše od drugega, uporabimo `<`.
-    demo_code: "starost = {ask} 'Koliko ste stari?'\n{if} starost < 13\n    {print} 'Mlajši ste od mene!'"
+    demo_code: |-
+        starost = {input}('Koliko ste stari?')
+        {if} starost < 13:
+            {print}('Mlajši ste od mene!')
 -   name: Večje
     explanation: Za preverjanje, ali je prvo število večje od drugega, uporabimo `>`.
-    demo_code: "starost = {ask} 'Koliko ste stari?'\n{if} starost > 13\n    {print} 'Starejši ste od mene!'"
+    demo_code: |-
+        starost = {input}('Koliko ste stari?')
+        {if} starost > 13:
+            {print}('Starejši ste od mene!')
 -   name: Je enako
     explanation: Za preverjanje, ali sta dve vrednosti enaki, uporabljamo `==`.
-    demo_code: "odgovor = {ask} 'Koliko je 5 * 5?'\n{if} odgovor == 25\n    {print} 'Pravilno!'"
+    demo_code: |-
+        odgovor = {input}('Koliko je 5 * 5?')
+        {if} odgovor == 25:
+            {print}('Pravilno!')
 -   name: Ni enako
     explanation: Za preverjanje, ali dve vrednosti nista enaki, uporabljamo `!=`.
-    demo_code: "odgovor = {ask} 'Koliko je 5 * 5?'\n{if} odgovor != 25\n    {print} 'To ni pravilno!'"
+    demo_code: |-
+        odgovor = {input}('Koliko je 5 * 5?')
+        {if} odgovor != 25:
+            {print}('To ni pravilno!')
 -   name: Manj ali enako
     explanation: Ali je prva vrednost manjša ali enaka drugi preverimo z izrazom `<=`.
-    demo_code: "starost = {ask} 'Koliko ste stari?'\n{if} starost <= 12\n    {print} 'Mlajši ste od mene!'"
+    demo_code: |-
+        starost = {input}('Koliko ste stari?')
+        {if} starost <= 12:
+            {print}('Mlajši ste od mene!')
 -   name: Enako ali več
     explanation: Ali je prva vrednost večja ali enaka drugi preverimo z izrazom `>=`.
-    demo_code: "starost = {ask} 'Koliko ste stari?'\n{if} starost >= 14\n    {print} 'Starejši ste od mene!'"
+    demo_code: |-
+        starost = {input}('Koliko ste stari?')
+        {if} starost >= 14:
+            {print}('Starejši ste od mene!')
 15:
 -   name: '{while}'
     explanation: Zanko `{while}` lahko uporabimo skupaj z ni enako.

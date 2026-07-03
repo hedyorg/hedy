@@ -71,43 +71,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Smaller 小于
     explanation: 我们用小于号 `<` 用来判断第一个数字是否小于第二个数字.
     demo_code: |-
-        age = {ask} '你今年几岁了？'
-        {if} age < 13
-            {print} '你比我年纪小！'
+        age = {input}('你今年几岁了？')
+        {if} age < 13:
+            {print}( '你比我年纪小！')
 -   name: Bigger 大于
     explanation: 我们用大于号`>` 用来判断第一个数字是否大于第二个数字.
     demo_code: |-
-        age = {ask} '你今年几岁了？'
-        {if} age > 13
-            {print} '你比我年纪大！'
+        age = {input}('你今年几岁了？')
+        {if} age > 13:
+            {print}( '你比我年纪大！')
 -   name: 等于
     explanation: We use the `==` to check if two things are the same.
     demo_code: |-
-        回答 = {ask} '5 * 5 等于几？'
-        {if} 回答 == 25
-            {print} '回答正确！'
+        回答 = {input}('5 * 5 等于几？')
+        {if} 回答 == 25:
+            {print}( '回答正确！')
 -   name: 不等于
     explanation: 我们用`!=`来检查两样东西是否不同。
     demo_code: |-
-        答案 = {ask} '什么是 5 * 5？'
-        {if} 答案 != 25
-            {print} '这不对！'
+        答案 = {input}('什么是 5 * 5？')
+        {if} 答案 != 25:
+            {print}( '这不对！')
 -   name: 小于等于
     explanation: 我们使用 `<=` 来检查第一个数字是否小于或等于第二个数字。
     demo_code: |-
-        年龄 = {ask} '你几岁了？'
-        {if} 年龄 <= 12
-            {print}'你比我小！'
+        年龄 = {input}('你几岁了？')
+        {if} 年龄 <= 12:
+            {print}('你比我小！')
 -   name: 大于或等于
     explanation: 我们使用 `>=` 来检查第一个数字是否大于或等于第二个数字。
     demo_code: |-
-        年龄 = {ask} '你几岁了？'
-        {if} 年龄 >= 14
-            {print}'你比我大！'
+        年龄 = {input}('你几岁了？')
+        {if} 年龄 >= 14:
+            {print}('你比我大！')
 15:
 -   name: '{while}循环语句'
     explanation: 我们可以在 `{while}` 循环中使用不等于。

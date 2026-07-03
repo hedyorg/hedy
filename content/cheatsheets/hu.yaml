@@ -55,43 +55,23 @@
     demo_code: |-
         nev {is} Hedy
         {print} 'A nevem ' nev
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Kisebb
     explanation: A `<` ellenőrzi, hogy az első szám kisebb-e, mint a második.
     demo_code: |-
-        kor = ask 'Hány éves vagy?'
-        if kor < 13
-         print 'Fiatalabb vagy, mint én!'
+        kor = {input}('Hány éves vagy?')
+        {if} kor < 13:
+         {print}('Fiatalabb vagy, mint én!')
 -   name: Nagyobb
     explanation: A `>` ellenőrzi, hogy az első szám nagyobb-e, mint a második.
     demo_code: |-
-        kor = ask 'Hány éves vagy?'
-        if kor < 13
-         print 'Idősebb vagy, mint én!'
--   name: Equal
-    explanation: We use the `==` to check if two things are the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
--   name: Not equal
-    explanation: We use the `!=` to check if two things are not the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
--   name: Smaller {or} equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+        kor = {input}('Hány éves vagy?')
+        {if} kor < 13:
+         {print}('Idősebb vagy, mint én!')
 15:
 -   name: Logikai amíg
     explanation: Használhatjuk a `{while}` hurkot a nem egyenlővel.

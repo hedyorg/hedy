@@ -71,43 +71,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Mindre
     explanation: Vi bruker `<` for å sjekke om det første tallet er mindre enn det andre tallet.
     demo_code: |-
-        alder = {ask} 'Hvor gammel er du?'
-        {if} alder < 13
-            {print} 'Du er yngre enn meg!'
+        alder = {input}('Hvor gammel er du?')
+        {if} alder < 13:
+            {print}('Du er yngre enn meg!')
 -   name: Større
     explanation: Vi bruker `>` for å sjekke om det første tallet er større enn det andre.
     demo_code: |-
-        alder = {ask} 'Hvor gammel er du?'
-        {if} alder > 13
-            {print} 'Du er eldre enn meg!'
+        alder = {input}('Hvor gammel er du?')
+        {if} alder > 13:
+            {print}('Du er eldre enn meg!')
 -   name: Er lik
     explanation: Vi bruker `==` for å sjekke om to ting er like.
     demo_code: |-
-        svar = {ask} 'Hva er  5 * 5?'
-        {if} svar == 25
-            {print} 'Det {is} korrekt!'
+        svar = {input}('Hva er  5 * 5?')
+        {if} svar == 25:
+            {print}('Det er ikke korrekt!')
 -   name: Ikke lik
     explanation: Vi bruker`!=` å sjekke om ting er 'ikke lik'.
     demo_code: |-
-        svar = {ask} 'Hva er 5 * 5?'
-        {if} svar != 25
-            {print} 'Det er ikke korrekt!'
+        svar = {input}('Hva er 5 * 5?')
+        {if} svar != 25:
+            {print}('Det er ikke korrekt!')
 -   name: Mindre {or} lik
     explanation: Vi bruker `<=` for å sjekke om det første tallet er mindre enn det andre tallet.
     demo_code: |-
-        alder = {ask} 'Hvor gammel er du?'
-        {if} alder <= 12
-            {print} 'Du er yngre enn meg!'
+        alder = {input}('Hvor gammel er du?')
+        {if} alder <= 12:
+            {print}('Du er yngre enn meg!')
 -   name: Større eller lik
     explanation: Vi bruker `>=` til å sjekke om det første tallet er større eller lik det andre tallet.
     demo_code: |-
-        alder = {ask} 'Hvor gammel er du?'
-        {if} alder >= 14
-            {print} 'Du er eldre enn meg!'
+        alder = {input}('Hvor gammel er du?')
+        {if} alder >= 14:
+            {print}('Du er eldre enn meg!')
 15:
 -   name: '{while}'
     explanation: Vi kan bruke `{while}`løkken med ikke-lik

@@ -71,43 +71,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Smaller
     explanation: 우리는 `<`를 사용하여 첫 번째 숫자가 두 번째 숫자보다 작은지 확인합니다.
     demo_code: |-
-        나이 = {ask} 'How old are you?'
-        {if} 나이 < 13
-            {print} 'You are younger than me!'
+        나이 = {input}('How old are you?')
+        {if} 나이 < 13:
+            {print}('You are younger than me!')
 -   name: Bigger
     explanation: 첫 번째 숫자가 두 번째 숫자보다 큰지 확인할 때는 `>`를 사용합니다.
     demo_code: |-
-        나이 = {ask} 'How old are you?'
-        {if} 나이 > 13
-            {print} 'You are older than me!'
+        나이 = {input}('How old are you?')
+        {if} 나이 > 13:
+            {print}('You are older than me!')
 -   name: Equal
     explanation: 우리는 `==`를 사용하여 두 가지가 같은지 확인합니다.
     demo_code: |-
-        대답 = {ask} '5 * 5는 무었이니?'
-        {if} 대답 == 25
-            {print} '맞았어!'
+        대답 = {input}('5 * 5는 무었이니?')
+        {if} 대답 == 25:
+            {print}('맞았어!')
 -   name: Not equal
     explanation: 우리는 `!=`를 사용하여 두 가지가 같지 않은지 확인합니다.
     demo_code: |-
-        대답 = {ask} '5 * 5는 무었이니?'
-        {if} 대답 != 25
-            {print} '틀렸어!'
+        대답 = {input}('5 * 5는 무었이니?')
+        {if} 대답 != 25:
+            {print}('틀렸어!')
 -   name: Smaller or equal
     explanation: 우리는 `<=`를 사용하여 첫 번째 숫자가 두 번째 숫자보다 작거나 같은지 확인합니다.
     demo_code: |-
-        나이 = {ask} 'How old are you?'
-        {if} 나이 <= 12
-            {print} 'You are younger than me!'
+        나이 = {input}('How old are you?')
+        {if} 나이 <= 12:
+            {print}('You are younger than me!')
 -   name: Bigger or equal
     explanation: 첫 번째 숫자가 두 번째 숫자보다 크거나 같은지 확인하기 위해 `>=`를 사용합니다.
     demo_code: |-
-        나이 = {ask} 'How old are you?'
-        {if} 나이 >= 14
-            {print} 'You are older than me!'
+        나이 = {input}('How old are you?')
+        {if} 나이 >= 14:
+            {print}('You are older than me!')
 15:
 -   name: '{while}'
     explanation: 우리는 `{while}` 루프를 동일하지 않게 사용할 수 있다.

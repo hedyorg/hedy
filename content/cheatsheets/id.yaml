@@ -72,43 +72,27 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Lebih kecil
     explanation: Kita menggunakan `<` untuk mengecek apakah angka pertama lebih kecil daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih kecil dari 15, kita menggunakan `variabel < 15`.
     demo_code: |-
-        umur = ask 'Berapa umur mu?'
-        if umur < 13
-            print 'Kamu lebih muda daripada aku!'
+        umur = {input}('Berapa umur mu?')
+        {if} umur < 13:
+            {print}('Kamu lebih muda daripada aku!')
 -   name: Lebih besar
     explanation: Kita menggunakan `>` untuk mengecek apakah angka pertama lebih besar daripada angka kedua. Sebagai contoh jika kita ingin melihat apakah sebuah variabel lebih besar dari 15, kita menggunakan `variabel > 15`.
     demo_code: |-
-        umur = ask 'Berapa umur mu?'
-        if umur > 13
-            print 'Kamu lebih tua daripada aku!'
--   name: Equal
-    explanation: We use the `==` to check if two things are the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
--   name: Not equal
-    explanation: We use the `!=` to check if two things are not the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
--   name: Smaller {or} equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
+        umur = {input}('Berapa umur mu?')
+        {if} umur > 13:
+            {print}('Kamu lebih tua daripada aku!')
+
+
+
+
 15:
 -   name: Pengulangan while dengan boolean
     explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`

@@ -54,43 +54,27 @@
     demo_code: |-
         namme {is} Hedy
         {print} 'ik bin ' namme
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Lytser
     explanation: De `<` sjocht dus oft it earste getal lytser is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`
     demo_code: |-
-        leeftyd = ask 'Hoe âld bisto?'
-        if leeftyd < 13
-            print 'Dan bist jonger as ik!'
+        leeftyd = {input}('Hoe âld bisto?')
+        {if} leeftyd < 13:
+            {print}('Dan bist jonger as ik!')
 -   name: Grutter
     explanation: De `>` sjocht dus oft it earste getal grutter is as it twadde getal. Ast witte wolst of in fariabele lytser is as 15, dan brûkst dus `fariabele < 15`
     demo_code: |-
-        leeftyd = ask 'Hoe âld bisto?'
-        if leeftyd < 13
-            print 'Dan bist âlder as ik!'
+        leeftyd = {input}('Hoe âld bisto?')
+        {if} leeftyd < 13:
+            {print}('Dan bist âlder as ik!')
 -   name: Equal
-    explanation: We use the `==` to check if two things are the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
 -   name: Not equal
-    explanation: We use the `!=` to check if two things are not the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
 -   name: Smaller {or} equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
 -   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
 15:
 -   name: while
     explanation: We kinne dus in `while`-lus brûke mei de `True` en `False`

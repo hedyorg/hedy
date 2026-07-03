@@ -71,43 +71,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Pli malgranda
     explanation: Oni uzas la signon `<` por kontroli, ĉu la unua nombro estas pli malgranda ol la dua nombro.
     demo_code: |-
-        aĝo = {ask} 'Kian aĝon vi havas?'
-        {if} aĝo < 13
-            {print} 'Vi estas pli juna ol mi!'
+        aĝo = {input}('Kian aĝon vi havas?')
+        {if} aĝo < 13:
+            {print}('Vi estas pli juna ol mi!')
 -   name: Pli granda
     explanation: Oni uzas la signon `>` por kontroli, ĉu la unua nombro estas pli granda ol la dua nombro.
     demo_code: |-
-        aĝo = {ask} 'Kian aĝon vi havas?'
-        {if} aĝo > 13
-            {print} 'Vi estas pli aĝa ol mi!'
+        aĝo = {input}('Kian aĝon vi havas?')
+        {if} aĝo > 13:
+            {print}('Vi estas pli aĝa ol mi!')
 -   name: Egala
     explanation: Oni uzas la signon `==` por kontroli, ĉu la unua egalas la duan.
     demo_code: |-
-        respondo = {ask} 'Kio estas 5 * 5?'
-        {if} respondo == 25
-            {print} 'Vi pravas!'
+        respondo = {input}('Kio estas 5 * 5?')
+        {if} respondo == 25:
+            {print}('Vi pravas!')
 -   name: Ne egala
     explanation: Oni uzas la signon `!=` por kontroli, ĉu la unua diferencas de la duan.
     demo_code: |-
-        respondo = {ask} 'Kio estas 5 * 5?'
-        {if} respondo != 25
-            {print} 'Tio ne pravas!'
+        respondo = {input}('Kio estas 5 * 5?')
+        {if} respondo != 25:
+            {print}('Tio ne pravas!')
 -   name: Pli malgranda aŭ egala
     explanation: Oni uzas la signon `<=` por kontroli, ĉu la unua nombro estas pli malgranda ol aŭ egala al la dua nombro.
     demo_code: |-
-        aĝo = {ask} 'Kian aĝon vi havas?'
-        {if} aĝo <= 12
-            {print} 'Vi estas pli juna ol mi!'
+        aĝo = {input}('Kian aĝon vi havas?')
+        {if} aĝo <= 12:
+            {print}('Vi estas pli juna ol mi!')
 -   name: Pli granda aŭ egala
     explanation: Oni uzas la signon `>=` por kontroli, ĉu la unua nombro estas pli granda ol aŭ egala al la dua nombro.
     demo_code: |-
-        aĝo = {ask} 'Kian aĝon vi havas?'
-        {if} aĝo >= 14
-            {print} 'Vi estas pli aĝa ol mi!'
+        aĝo = {input}('Kian aĝon vi havas?')
+        {if} aĝo >= 14:
+            {print}('Vi estas pli aĝa ol mi!')
 15:
 -   name: '{while}'
     explanation: Oni povas uzi `{while}`-iteracion kun `!=`.

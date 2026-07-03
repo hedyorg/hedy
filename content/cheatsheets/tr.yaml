@@ -71,43 +71,47 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-14:
+13:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Daha küçük
     explanation: İlk sayının ikinci sayıdan küçük olup olmadığını kontrol etmek için `<` kullanırız.
     demo_code: |-
-        yaş = {ask} 'Kaç yaşındasın?'
-        {if} yaş < 13
-            {print} 'Sen benden daha gençsin!'
+        yaş = {input}('Kaç yaşındasın?')
+        {if} yaş < 13:
+            {print}('Sen benden daha gençsin!')
 -   name: Daha büyük
     explanation: İlk sayının ikinci sayıdan büyük olup olmadığını kontrol etmek için `>` kullanırız.
     demo_code: |-
-        yaş = {ask} 'Kaç yaşındasın?'
-        {if} yaş > 13
-            {print} 'Sen benden daha yaşlısın!'
+        yaş = {input}('Kaç yaşındasın?')
+        {if} yaş > 13:
+            {print}('Sen benden daha yaşlısın!')
 -   name: Eşit
     explanation: İki şeyin aynı olduklarını kontrol etmek için `==` kullanırız.
     demo_code: |-
-        cevap = {ask} '5 * 5 kaç eder?'
-        {if} cevap == 25
-            {print} 'Bu doğru!'
+        cevap = {input}('5 * 5 kaç eder?')
+        {if} cevap == 25:
+            {print}('Bu doğru!')
 -   name: Eşit değil
     explanation: İki şeyin aynı olmadıklarını kontrol etmek için `!=` kullanırız.
     demo_code: |-
-        cevap = {ask} '5 * 5 kaç eder?'
-        {if} cevap != 25
-            {print} 'Bu doğru değil!'
+        cevap = {input}('5 * 5 kaç eder?')
+        {if} cevap != 25:
+            {print}('Bu doğru değil!')
 -   name: Küçük veya eşit
     explanation: İlk sayının ikinci sayıdan küçük veya ona eşit olduğunu kontrol etmek için `<=` kullanırız.
     demo_code: |-
-        yaş = {ask} 'Kaç yaşındasın?'
-        {if} yaş <= 12
-            {print} 'Sen benden daha gençsin!'
+        yaş = {input}('Kaç yaşındasın?')
+        {if} yaş <= 12:
+            {print}('Sen benden daha gençsin!')
 -   name: Büyük veya eşit
     explanation: İlk sayının ikinci sayıdan büyük veya ona eşit olduğunu kontrol etmek için `>=` kullanırız.
     demo_code: |-
-        yaş = {ask} 'Kaç yaşındasın?'
-        {if} yaş >= 14
-            {print} 'Sen benden daha yaşlısın!'
+        yaş = {input}('Kaç yaşındasın?')
+        {if} yaş >= 14:
+            {print}('Sen benden daha yaşlısın!')
 15:
 -   name: '{while}'
     explanation: Eşit değil ile `{while}` döngüsünü kullanabiliriz.
