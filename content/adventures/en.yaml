@@ -6153,6 +6153,8 @@ adventures:
                 story_text: |
                     In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with `{ask}` commands as well?
                     In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
+                story_text_2: |
+                    Create a similar interactive program with the childrens' song 'Down by the bay'. 
                 example_code: |
                     ```
                     {define} song (place)
@@ -6164,6 +6166,34 @@ adventures:
                     song(chosen_place)
                     song(synonym)
                     song (chosen_place)
+                    ```
+                example_code_2: |
+                    {def} song (rhyme)
+                        {print} 'Down by the Bay,'
+                        {print} 'Where the watermelons grow,'
+                        {print} 'Back to my home,'
+                        {print} 'I dare not go,'
+                        {print} 'For if I do,'
+                        {print} 'My mother will say:'
+                        {print} 'Did you ever see a ' _
+                        {print} 'Down by the bay'
+
+                    chosen_rhyme = {input} 'what rhyme do you choose?'
+                    _
+                answer_code: |
+                    ```
+                    {def} song(rhyme):
+                        {print} 'Down by the Bay,'
+                        {print} 'Where the watermelons grow,'
+                        {print} 'Back to my home,'
+                        {print} 'I dare not go,'
+                        {print} 'For if I do,'
+                        {print} 'My mother will say:'
+                        {print} 'Did you ever see a ' rhyme
+                        {print} 'Down by the bay'
+
+                    chosen_rhyme = {input} 'What rhyme do you choose?'
+                    song(chosen_rhyme)
                     ```
     songs_2:
         name: sing a song! 2
