@@ -23,16 +23,11 @@
         {forward} 25
         {turn} right
 2:
--   name: is
-    explanation: Dà un nomignolo da usare nel programma ad una parola con `is`.
+-   name: {is}
+    explanation: Dà un nomignolo da usare nel programma ad una parola con `{is}`.
     demo_code: |-
-        nome is Hedy
-        print benvenuta nome
--   name: ask
-    explanation: Chiedi qualcosa con `ask`. Attenzione! Devi dare alla risposta un nome con `is`.
-    demo_code: |-
-        colore is ask Qual è il tuo colore preferito?
-        print colore è il tuo preferito!
+        nome {is} Hedy
+        {print} benvenuta nome
 -   name: '{sleep}'
     explanation: Con `{sleep}` è possibile mettere Hedy in pausa per qualche secondo.
     demo_code: |-
@@ -41,7 +36,7 @@
         {print} Hmm.. I need 3 more seconds...
         {sleep} 3
         {print} Eureka! Ive got it!
--   name: is - turtle
+-   name: '{is} - turtle'
     explanation: Give a number a name using `{is}`. You can choose the name yourself.
     demo_code: |-
         angle {is} 90

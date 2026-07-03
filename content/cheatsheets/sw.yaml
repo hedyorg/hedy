@@ -24,15 +24,10 @@
         {turn} right
 2:
 -   name: '{is}'
-    explanation: Tumia neno `is` kuvipa vitu majina yao
+    explanation: Tumia neno `{is}` kuvipa vitu majina yao
     demo_code: |-
-        nchi is Tanzania
-        print karibu nchi
--   name: '{ask}'
-    explanation: Uliza maswali kwa kutumia neno `ask`. kuonya! Utatakiwa kuvipa jina majibu kwa kutumia neno `is`.
-    demo_code: |-
-        jina is ask Unaitwaje?
-        print Ujambo jina!
+        nchi {is} Tanzania
+        {print} karibu nchi
 -   name: '{sleep}'
     explanation: Let Hedy pause for a (couple of) second(s).
     demo_code: |-
@@ -41,7 +36,7 @@
         {print} Hmm.. I need 3 more seconds...
         {sleep} 3
         {print} Eureka! Ive got it!
--   name: is - turtle
+-   name: '{is} - turtle'
     explanation: Give a number a name using `{is}`. You can choose the name yourself.
     demo_code: |-
         angle {is} 90

@@ -19,16 +19,23 @@
 2:
 -   name: '{is}'
     explanation: Poimenujte besedo, ki jo boste uporabili v programu z uporabo `{is}`. Ime si lahko izberete sami.
-    demo_code: "ime {is} Hedy\n{print} dobrodošli ime"
--   name: '{ask}'
-    explanation: Vprašajte nekaj z `{ask}`. Pozor! Odgovoru morate podati ime z `{is}`.
-    demo_code: "barva {is} {ask} Katera je vaša najljubša barva?\n{print} barva je vaša najljubša barva!"
+    demo_code: |-
+        ime {is} Hedy
+        {print} dobrodošli ime
 -   name: '{sleep}'
     explanation: S `{sleep}`, lahko Hedy zaustavite za sekundo (ali več).
-    demo_code: "{print} Naj malo razmislim...\n{sleep}\n{print} Hmm.. Potrebujem še par sekund...\n{sleep} 2\n{print} Eureka, imam rešitev!"
+    demo_code: |-
+        {print} Naj malo razmislim...
+        {sleep}
+        {print} Hmm.. Potrebujem še par sekund...
+        {sleep} 2
+        {print} Eureka, imam rešitev!
 -   name: '{is} z želvo'
     explanation: Številki dajte ime z `{is}`. Izberete lahko poljubno ime.
-    demo_code: "kot {is} 90\n{turn} kot\n{forward} 100"
+    demo_code: |-
+        kot {is} 90
+        {turn} kot
+        {forward} 100
 3:
 -   name: Izberite naključno
     explanation: Izberite naključno besedo iz skupine z `{at}` in `{random}`.

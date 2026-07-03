@@ -23,10 +23,9 @@
 2:
 -   name: '{is}'
     explanation: Gib einem Wort einen Namen mit `{is}`, den du in deinem Programm wiederverwenden kannst. Du kannst Namen selber wählen.
-    demo_code: "name {is} Hedy \n{print} Willkommen name"
--   name: '{ask}'
-    explanation: Frage etwas mit `{ask}`. Aber pass auf! Du musst der Antwort einen Namen mit `{is}` geben.
-    demo_code: "Farbe {is} {ask} Was ist deine Lieblingsfarbe? \n{print} Du magst am liebsten Farbe !"
+    demo_code: |-
+        name {is} Hedy 
+        {print} Willkommen name
 -   name: '{sleep}'
     explanation: Mit `{sleep}` lässt Hedy für ein paar Sekunden pausieren.
     demo_code: |-

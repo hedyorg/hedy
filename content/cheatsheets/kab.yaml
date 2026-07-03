@@ -23,16 +23,23 @@
 2:
 -   name: '{is}'
     explanation: Mudd isem i wawal ara tesqedceḍ deg wahil s useqdec n `{is}`. Tzemreḍ ad tferneḍ kečč isem-a.
-    demo_code: "isem {is} Hedy\n{print} Ansuf ay isem"
--   name: '{ask}'
-    explanation: Steqsi ɣef kra s `{ask}`. Ḥader! Tesriḍ ad tmuddeḍ i tiririt isem s `{is}`.
-    demo_code: "ini {is} {ask} Anwa ini i tḥemmleḍ?\n{print} d ini i tḥemmleḍ!"
+    demo_code: |-
+        isem {is} Hedy
+        {print} Ansuf ay isem
 -   name: '{sleep}'
     explanation: S `{sleep}`, tzemreḍ ad tesḥebseḍ Hedy i tasint neɣ i wugar n tsinin.
-    demo_code: "{print} Eǧǧ-iyi ad xemmemɣ yiwet n tasint...\n{sleep}\n{print} Hmm.. Sriɣ 3 niden n tsinin...\n{sleep} 3\n{print} Yay! Ufiɣ-tt-id!"
+    demo_code: |-
+        {print} Eǧǧ-iyi ad xemmemɣ yiwet n tasint...
+        {sleep}
+        {print} Hmm.. Sriɣ 3 niden n tsinin...
+        {sleep} 3
+        {print} Yay! Ufiɣ-tt-id!
 -   name: '{is} s yifker'
     explanation: Mudd isem i umḍan ara tesqedceḍ deg wahil s useqdec n `{is}`. Tzemreḍ ad tferneḍ kečč isem-a.
-    demo_code: "tiɣmert {is} 90\n{turn} tiɣmert\n{forward} 100"
+    demo_code: |-
+        tiɣmert {is} 90
+        {turn} tiɣmert
+        {forward} 100
 3:
 -   name: S wudem yerwin
     explanation: Fren awal kan akka seg ugraw s `{at}` akked `{random}`.
