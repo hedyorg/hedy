@@ -55,33 +55,6 @@
     demo_code: |-
         nom {is} Hedy
         {print} "mon nom est " nom
-8:
--   name: '{print}'
-    explanation: Affiche quelque chose. N’oublies pas les guillemets pour afficher exactement ce qui est saisi.
-    demo_code: '{print} "5 fois 5 font " 5 * 5'
--   name: '{ask}'
-    explanation: Demandes le résultat d’une addition et vérifies si elle est correcte. Tu peux désormais afficher 2 lignes.
-    demo_code: |-
-        reponse = {ask} "Combien font 5 plus 5 ?"
-        {if} reponse {is} 10
-            {print} "Bien joué !"
-            {print} "En effet, la réponse était " reponse
-        {else}
-            {print} "Oups !"
-            {print} "La réponse est 10"
--   name: '{repeat} avec la tortue'
-    explanation: Répète plusieurs lignes.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Vérifiez si une touche donnée du clavier est `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} "Vous avez appuyé sur A !"
-        {else}
-            {print} "Vous avez appuyé sur une autre touche !"
 9:
 -   name: '{if} avec plusieurs lignes'
     explanation: Vérifies la réponse d'une addition de nombres avec `{ask}`. On affiche maintenant sur 2 lignes.

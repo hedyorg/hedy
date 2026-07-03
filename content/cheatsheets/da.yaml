@@ -55,33 +55,6 @@
     demo_code: |-
         navn {is} Hedy
         {print} 'mit navn er ' navn
-8:
--   name: '{print}'
-    explanation: Udskriv noget. Husk at bruge citationstegn til nøjagtig udskrivning.
-    demo_code: '{print} ''5 gange 5 er '' 5 * 5'
--   name: '{ask}'
-    explanation: Spørg om svaret på en addition og kontroller, om det er korrekt. Vi kan nu udskrive 2 linjer.
-    demo_code: |-
-        svar = {ask} 'Hvad er 5 plus 5?'
-        {if} svar {is} 10
-            {print} 'Godt klaret!'
-            {print} 'Svaret er nemlig ' svar
-        {else}
-            {print} 'Ups!'
-            {print} 'Svaret er 10'
--   name: '{repeat} med skildpadde'
-    explanation: Gentag flere linjer.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Kontroller om en given tast på tastaturet er `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Du trykkede på A!'
-        {else}
-            {print} 'Du trykkede på en anden tast!'
 9:
 -   name: '{if} med flere linjer'
     explanation: Spørg om svaret på en addition med `{ask}` og se om det er korrekt. Nu udskriver vi to linjer.

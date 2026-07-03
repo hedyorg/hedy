@@ -54,33 +54,6 @@
     demo_code: |-
         নাম {is}  হেডি 
         {print} 'আমার নাম is ' নাম
-8:
--   name: print
-    explanation: কিছু একটা  print করো . মনে রাখবেন আহ্মরিক মুদ্রনের জন্য কোটেশন চিহ্ন ব্যবহার করতে হবে
-    demo_code: print '5 বার 5 is ' 5 * 5
--   name: '`if` একাধিক লাইন সহ'
-    explanation: একটি অঙ্কের উত্তর ask করুণ এবং এটি সঠিক কিনা তা পরীক্ষা করুন আমরা এখন 2  লাইন print করতে পারি.
-    demo_code: |-
-        উত্তর = ask 'করা হয় 5 প্লাস 5 কি?'
-        if উত্তর is 10
-            print 'সাবাশ !'
-            print 'আসলেই উত্তরটি'
-        else
-            print 'উফ!'
-            print 'সঠিক উত্তর 10'
--   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
 9:
 -   name: '`{if}` with multiple lines'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.

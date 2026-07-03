@@ -55,33 +55,6 @@
     demo_code: |-
         namn {is} Hedy
         {print} 'mitt namn är ' namn
-8:
--   name: '{print}'
-    explanation: Skriv ut något. Kom ihåg att använda citattecken för att skriva ut exakt.
-    demo_code: '{print} ''5 gånger 5 är '' 5 * 5'
--   name: '{ask}'
-    explanation: Fråga efter svaret på en addition och kontrollera om det är korrekt. Vi kan nu skriva ut två rader.
-    demo_code: |-
-        svar = {ask} 'Vad är 5 plus 5?'
-        {if} svar {is} 10
-            {print} 'Bra jobbat!'
-            {print} 'Svaret var faktiskt ' svar
-        {else}
-            {print} 'Hoppsan!'
-            {print} 'Svaret är 10'
--   name: '{repeat} med sköldpadda'
-    explanation: Upprepa flera rader.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Kontrollera om en viss tangent är `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Du tryckte på A!'
-        {else}
-            {print} 'Du tryckte på en annan tangent'
 9:
 -   name: '{if} med flera rader'
     explanation: Fråga efter svaret på en addition med `{ask}` och se om det är korrekt. Nu skriver vi ut två rader.

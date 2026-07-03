@@ -55,33 +55,6 @@
     demo_code: |-
         nome is Hedy
         print 'O meu nome é ' nome
-8:
--   name: '{print}'
-    explanation: Escreve alguma coisa. Lembra-te de usar aspas simples para escreveres com exactidão.
-    demo_code: print '5 vezes 5 é ' 5 * 5
--   name: '{ask}'
-    explanation: Pergunta pelo resultado de uma soma e verfica se está correcto. Podemos agora escrever 2 linhas.
-    demo_code: |-
-        resultado = ask 'Quanto é 5 mais 5?'
-        if resultado is 10
-            print 'Muito bem!'
-            print 'De facto, a resposta é ' resultado
-        else
-            print 'Oops!'
-            print 'A resposta certa é 10'
--   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Verifica se uma determinada tecla do teclado é `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Carregou em A!'
-        {else}
-            {print} 'Carregou noutra tecla!'
 9:
 -   name: '`if` with multiple lines'
     explanation: The answer of a sum of questions with 'ask' and see if it is correct. Now we print out two lines.

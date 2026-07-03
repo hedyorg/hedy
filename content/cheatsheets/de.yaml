@@ -51,33 +51,6 @@
     demo_code: |-
         name {is} Hedy
         {print} 'mein Name ist ' name
-8:
--   name: '{print}'
-    explanation: Gib etwas aus. Denke an Anführungszeichen für eine wortwörtliche Ausgabe.
-    demo_code: '{print} ''5 mal 5 ist '' 5 * 5'
--   name: '{ask}'
-    explanation: Frage nach einer Summe und prüfe, ob die Antwort richtig ist. Wir können jetzt zwei Zeilen ausgeben.
-    demo_code: |-
-        antwort = {ask} 'Was ist 5 plus 5?'
-        {if} antwort {is} 10
-            {print} 'Gut gemacht!'
-            {print} 'Tatsächlich, die Antwort war ' antwort
-        {else}
-            {print} 'Huch!'
-            {print} 'Die Antwort ist 10'
--   name: '{repeat} mit Schildkröte'
-    explanation: Wiederhole mehrere Befehlszeilen.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Prüfe, ob eine gegebene Taste auf der Tastatur `{pressed}` ist.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Du hast A gedrückt!'
-        {else}
-            {print} 'Du hast eine andere Taste gedrückt!'
 9:
 -   name: '{if} mit mehreren Befehlszeilen'
     explanation: Frage nach einer Summe mit `{ask}` und prüfe, ob die Antwort korrekt ist. Jetzt geben wir zwei Zeilen aus.

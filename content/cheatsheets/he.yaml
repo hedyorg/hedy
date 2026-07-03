@@ -55,33 +55,6 @@
     demo_code: |-
         שמי {is} הֶדִי
         {print} 'שמי הוא ' שמי
-8:
--   name: '{print}'
-    explanation: הדפיסו משהו. זיכרו להשתמש במירכאות בשביל להדפיס מילולית.
-    demo_code: '{print} ''5 פעמים 5 זה '' 5 * 5'
--   name: '{ask}'
-    explanation: בקשו את התשובה לתרגיל חיבור ובדקו אם היא נכונה. עכשיו אנחנו יכולים להדפיס שתי שורות.
-    demo_code: |-
-        תשובה = {ask} 'כמה זה 5 ועוד 5?'
-        {if} תשובה {is} 10
-            {print} 'כל הכבוד!'
-            {print} 'בהחלט, התשובה היא ' תשובה
-        {else}
-            {print} 'אופס!'
-            {print} 'התשובה היא 10'
--   name: '{repeat} עם הצב'
-    explanation: חזרו על מספר שורות.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: בדוק האם המקש הנתון במקלדת הוא `{pressed}`.
-    demo_code: |-
-        {if} א {is} {pressed}
-            {print} 'לחצת על א'
-        {else}
-            {print} 'לחצת על מקש אחר!'
 9:
 -   name: '{if} עם מספר שורות'
     explanation: קבלו את התשובה למספר שאלות עם `{ask}` ובדקו שהיא נכונה. עכשיו ביכולתנו להדפיס מספר שורות.

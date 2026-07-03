@@ -55,33 +55,6 @@
     demo_code: |-
         名字 {is} 海蒂
         {print} '我的名字是 ' 名字
-8:
--   name: '{print}'
-    explanation: 打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。
-    demo_code: '{print} ''5乘以5等于 5 * 5'''
--   name: '{ask}'
-    explanation: 使用ask提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。
-    demo_code: |-
-        答案 = {ask} '5加5等于几？'
-        {if} 答案 {is} 10
-            {print} '做得好！'
-            {print} '的确，答案就是' 答案
-        {else}
-            {print} '糟糕！'
-            {print} '答案是10'
--   name: '{repeat} 和海龟绘图'
-    explanation: 重复多行。
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: 检查键盘上的某个键是否被 "按下"。`{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} '你按下了A!'
-        {else}
-            {print} '你按下了另外一个按钮!'
 9:
 -   name: '{if} 条件语句和多行'
     explanation: 使用`{ask}`提问加法运算的答案然后检查答案是否正确。我们现在可以打印两行代码了。

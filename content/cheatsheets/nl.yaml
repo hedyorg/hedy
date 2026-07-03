@@ -78,33 +78,6 @@
         lievelingskleur {is} {ask} 'Wat is je lievelingskleur?'
         {if} lievelingskleur {is} groen {print} 'mooi!' 
         {else} {print} 'bah'
-8:
--   name: '{print}'
-    explanation: Print iets. Denk eraan een aanhalingsteken te gebruiken als je iets letterlijk wil printen.
-    demo_code: '{print} ''5 keer 5 is '' 5 * 5'
--   name: '{ask}'
-    explanation: Vraag om het antwoord op een som en controleer of het goed is. We kunnen nu twee regels printen.
-    demo_code: |-
-        antwoord = {ask} 'Hoeveel is 5 plus 5?'
-        {if} antwoord {is} 10
-            {print} 'Goed gedaan!'
-            {print} 'Het antwoord is inderdaad ' antwoord
-        {else}
-            {print} 'Oeps!'
-            {print} 'Het antwoord is 10'
--   name: '`{repeat}` met turtle'
-    explanation: Herhaal meerdere regels.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Controleer of een toets op het toetsenbord is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Je hebt A ingedrukt!'
-        {else}
-            {print} 'Je hebt een andere toets dan A ingedrukt!'
 9:
 -   name: '`{if}` met meerdere regels'
     explanation: Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu printen we twee regels uit.

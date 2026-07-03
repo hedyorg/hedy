@@ -46,33 +46,6 @@
     demo_code: |-
         animals {is} cat, dog, cow
         {remove} dog {from} animals
-8:
--   name: '{print}'
-    explanation: print something. Remember to use a quotation mark for literal printing.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
--   name: '{ask}'
-    explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
-            {print} 'Oops!'
-            {print} 'The answer is 10'
--   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
 9:
 -   name: '`{if}` with multiple lines'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.

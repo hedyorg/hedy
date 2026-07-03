@@ -55,33 +55,6 @@
     demo_code: |-
         nombre {is} Hedy
         {print} 'Mi nombre es ' nombre
-8:
--   name: '{print}'
-    explanation: Imprime algo. Recuerda usar las comillas simples para imprimir el texto literal.
-    demo_code: '{print} ''5 multiplicado por 5 es '' 5 * 5'
--   name: '{ask}'
-    explanation: Pregunta por la respuesta de una suma y comprueba el resultado. Ahora podemos imprimir 2 líneas.
-    demo_code: |-
-        resultado = {ask} '¿Cuánto es 5 más 5?'
-        {if} resultado {is} 10
-            {print} '¡Muy bien!'
-            {print} 'Efectivamente, la respuesta es ' resultado
-        {else}
-            {print} '¡Ups!'
-            {print} 'La respuesta es 10'
--   name: '{repeat} con tortuga'
-    explanation: Repite varias líneas.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Comprueba si una tecla determinada del teclado está `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} '¡Presionaste A!'
-        {else}
-            {print} '¡Presionaste otra tecla!'
 9:
 -   name: '{if} con varias líneas'
     explanation: La respuesta a una pregunta de sumas con `{ask}` y ve si está correcto. Ahora muestra dos líneas.

@@ -55,33 +55,6 @@
     demo_code: |-
         name {is} Hedy
         {print} 'моје име је ' name
-8:
--   name: '{print}'
-    explanation: Испиши нешто. Запамти да користиш наводнике за дословно исписивање.
-    demo_code: '{print} ''5 пута 5 је '' 5 * 5'
--   name: '{ask}'
-    explanation: Питај за одговор на збир и провери да ли је тачан. Сада можемо исписати 2 линије.
-    demo_code: |-
-        answer = {ask} 'Колико је 5 плус 5?'
-        {if} answer {is} 10
-            {print} 'Браво!'
-            {print} 'Заиста, одговор је ' answer
-        {else}
-            {print} 'Упс!'
-            {print} 'Одговор је 10'
--   name: '{repeat} са корњачом'
-    explanation: Понови више линија.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Провери да ли је одређени тастер на тастатури `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Притиснуо си А!'
-        {else}
-            {print} 'Притиснуо си други тастер!'
 9:
 -   name: '{if} са више линија'
     explanation: Одговор на збир питања са `{ask}` и види да ли је тачан. Сада исписујемо две линије.

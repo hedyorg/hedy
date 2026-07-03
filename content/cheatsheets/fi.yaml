@@ -55,33 +55,6 @@
     demo_code: |-
         nimi {is} Hedy
         {print} 'minun nimeni on' nimi
-8:
--   name: '{print}'
-    explanation: Tulosta jotain. Muista käyttää lainausmerkkejä.
-    demo_code: '{print} ''5 kertaa 5 on '' 5 * 5'
--   name: '{ask}'
-    explanation: Kysy vastausta ja tarkista, onko se oikein. Voimme nyt tulostaa 2 riviä.
-    demo_code: |-
-        vastaus = {ask} 'Paljonko on 5 + 5?'
-        {if} vastaus {is} 10
-            {print} 'Hienoa!'
-            {print} 'Vastaus on tosiaan ' vastaus
-        {else}
-            {print} 'Oho!'
-            {print} 'Vastaus on 10'
--   name: '{repeat} kilpikonnan kanssa'
-    explanation: Toista monta riviä.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Tarkista, onko näppäimistön tietty näppäin `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Painoit A!'
-        {else}
-            {print} 'Painoit toista näppäintä!'
 9:
 -   name: '{if} monelle riville'
     explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.

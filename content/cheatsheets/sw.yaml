@@ -54,33 +54,6 @@
     demo_code: |-
         jina is Juma
         print 'Naitwa ' jina
-8:
--   name: '{print}'
-    explanation: Kuchapisha kitu. Kumbuka kutumia fungua semi na funga semi cha aina ya ''.
-    demo_code: print '5 mara 5 ni sawa sawa na ' 5 * 5
--   name: '{ask}'
-    explanation: Uliza jibu ya kujumlisha numberi na kuhakikisha jibu iko sahihi. Sasa tunaweza kuchapisha(print) mstari mbili kwa pamoja.
-    demo_code: |-
-        jibu = ask '5 jumlisha 5 ni sawa sawa na?'
-        if jibu is 10
-            print 'Vizuri sana!'
-            print 'Kwakweli, jibu ilikuwa ' jibu
-        else
-            print 'Sio sahihi!'
-            print 'Jibu ilikuwa 10'
--   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
 9:
 -   name: '`{if}` with multiple lines'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.

@@ -59,33 +59,6 @@
         name {is} Hedy
         {print} 'Το όνομά μου είναι ' name
 5:
-8:
--   name: print
-    explanation: Εμφάνισε κάτι. Θυμήσου να χρησιμοποιήσεις εισαγωγικά για ακριβή εμφάνιση.
-    demo_code: print '5 επί 5 ίσον με ' 5 * 5
--   name: Η `if` με πολλαπλές γραμμές
-    explanation: Ρώτησε την απάντηση σε ένα άθροισμα και έλεγξε αν είναι σωστή. Μπορούμε τώρα να εμφανίσουμε 2 γραμμές.
-    demo_code: |-
-        answer = ask 'Πόσο είναι 5 συν 5;'
-        if answer is 10
-            print 'Μπράβο!'
-            print 'Πράγματι, η απάντηση ήταν ' answer
-        else
-            print 'Ουπς!'
-            print 'Η απάντηση είναι 10'
--   name: '`{repeat}` με χελώνα'
-    explanation: '{repeat} πολλές γραμμές'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
 9:
 -   name: '`{if}` with multiple lines'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.

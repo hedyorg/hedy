@@ -55,33 +55,6 @@
     demo_code: |-
         nev {is} Hedy
         {print} 'A nevem ' nev
-8:
--   name: print
-    explanation: Írass ki valamit. Ne felejts el a posztrófot használni a helyes kiíratáshoz.
-    demo_code: print '5-ször 5 az ' 5 * 5
--   name: '`if` több sorral'
-    explanation: Kérdezz egy műveletet és ellenőrizd, hogy jó-e a válasz. Most két sort fogunk kiíratni.
-    demo_code: |-
-        valasz = ask 'Mennyi 5 + 5?'
-        if valasz is 10
-            print 'Nagyszerű!'
-            print 'Valóban a válasz ' valasz
-        else
-            print 'Hoppá!'
-            print 'A válasz 10'
--   name: '`{repeat}` with turtle'
-    explanation: Több sor ismétlése.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Annak ellenőrzése, hogy a billentyűzet egy adott billentyűje `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Megnyomtad az A-t!'
-        {else}
-            {print} 'Megnyomtál egy másik gombot!'
 9:
 -   name: '`{if}` with multiple lines'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.

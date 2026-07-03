@@ -43,19 +43,6 @@
 -   name: '{is}'
     explanation: Dajte nekemu besedilu ime in uporabite ukaz `{print}` brez narekovajev.
     demo_code: "ime {is} Hedy\n{print} 'moje ime je ' ime"
-8:
--   name: '{print}'
-    explanation: Nekaj izpišite. Pri dobesednem izpisovanju ne pozabite uporabiti narekovajev.
-    demo_code: "{print} '5 krat 5 je ' 5 * 5"
--   name: '{ask}'
-    explanation: Vprašajte za odgovor na vsoto izračuna in preverite, ali je pravilen. Zdaj lahko natisnemo 2 vrstici.
-    demo_code: "answer = {ask} 'What is 5 plus 5?'\n{if} answer {is} 10\n    {print} 'Well done!'\n    {print} 'Indeed, the answer was ' answer\n{else}\n    {print} 'Oops!'\n    {print} 'The answer is 10'"
--   name: '{repeat} z želvo'
-    explanation: Ponovite več vrstic.
-    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
--   name: '{pressed}'
-    explanation: Preveri, ali je dana tipka na tipkovnici `{pressed}`.
-    demo_code: "{if} a {is} {pressed}\n    {print} 'Pritisnili ste A!'\n{else}\n    {print} 'Pritisnili ste drugo tipko!'"
 9:
 -   name: '{if} z več vrsticami'
     explanation: Odgovor na vsoto vprašanj z `{ask}` in preverite, ali je pravilen. Zdaj izpišemo dve vrstici.

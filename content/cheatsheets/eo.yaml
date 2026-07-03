@@ -55,33 +55,6 @@
     demo_code: |-
         nomo {is} Hedy
         {print} 'mia nomo estas ' nomo
-8:
--   name: '{print}'
-    explanation: Presi ion. Ne forgesu uzi citilojn por laŭvorta presado.
-    demo_code: '{print} ''5 multiplikite per 5 estas '' 5 * 5'
--   name: '{ask}'
-    explanation: Demandi pri sumo kaj kontroli, ĉu la respondo estas ĝusta. Ni povas nun presi du liniojn.
-    demo_code: |-
-        respondo = {ask} 'Kio estas 5 plus 5?'
-        {if} respondo {is} 10
-            {print} 'Bonege!'
-            {print} 'Ja la prava respondo estas ' respondo
-        {else}
-            {print} 'Ho!'
-            {print} 'La prava respondo estas 10'
--   name: '{repeat} kun testudo'
-    explanation: Ripeti plurajn liniojn.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
 9:
 -   name: '{if} kun pluraj linioj'
     explanation: La respondo al demando pri sumo per `{ask}`; kontrolu, ĉu ĝi estas ĝusta. Nun ni presu du liniojn.

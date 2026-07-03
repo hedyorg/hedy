@@ -56,33 +56,6 @@
     demo_code: |-
         nama {is} Hedy
         {print} 'nama saya adalah ' nama
-8:
--   name: '{print}'
-    explanation: Tampilkan sesuatu. Ingat untuk menggunakan tanda kutip satu jika ingin menampilkan teks sama persis.
-    demo_code: print '5 kali 5 adalah ' 5 * 5
--   name: '{ask}'
-    explanation: Tanyakan jawaban dari sebuah penjumlahan dan cek apakah itu benar. Kita sekarang bisa menampilkan dua baris.
-    demo_code: |-
-        jawaban = ask 'Apa hasil dari 5 tambah 5?'
-        if jawaban is 10
-            print 'Kerja bagus!'
-            print 'Betul, jawabannya adalah ' jawaban
-        else
-            print 'Ups!'
-            print 'Jawabannya adalah 10'
--   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Periksa apakah tombol tertentu pada keyboard sudah `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Kamu menekan A!'
-        {else}
-            {print} 'Kamu menekan tombol lain!'
 9:
 -   name: '`if` dengan beberapa baris'
     explanation: Cek apakah jawaban dari penjumlahan yang ditanyakan dengan `ask` benar. Sekarang kita menampilkan dua baris.

@@ -58,33 +58,6 @@
     demo_code: |-
         nome {is} Hedy
         {print} 'Il mio nome è ' nome
-8:
--   name: print
-    explanation: Scrivi qualcosa. Ricorda di usare le virgolette per scrivere parole e frasi.
-    demo_code: print '5 volte 5 è ' 5 * 5
--   name: if con più righe
-    explanation: Chiedi la risposta per una somma e controlla se è corretta. Ora possiamo scrivere due righe.
-    demo_code: |-
-        risposta = ask 'Quanto fa 5 più 5?'
-        if risposta is 10
-            print 'Ben fatto!'
-            print 'Esatto, la risposta corretta era ' risposta
-        else
-            print 'Ops!'
-            print 'La risposta è ' risposta
--   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Controlla quando un pulsante dato della tastiera `{pressed}`.
-    demo_code: |-
-        {if} un {is} {pressed}
-            {print} 'Hai premuto A!'
-        {else}
-            {print} 'Hai premuto un altro pulsante!'
 9:
 -   name: '`{if}` with multiple lines'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.

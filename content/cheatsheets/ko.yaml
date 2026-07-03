@@ -55,33 +55,6 @@
     demo_code: |-
         이름 {is} Hedy
         {print} '나의 이름은 ' 이름
-8:
--   name: '{print}'
-    explanation: 무언가를 print하라. 문자 그대로 print할 때 따옴표를 사용하는 것을 기억하라.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
--   name: '{ask}'
-    explanation: 합계에 대한 답을 물어보고 맞는지 확인해보세요. 이제 2줄을 print할 수 있습니다.
-    demo_code: |-
-        대답 = {ask} '5 더하기 5는 무엇이니?'
-        {if} 대답 {is} 10
-            {print} '잘했어!'
-            {print} '결국, 정답은 ' 대답
-        {else}
-            {print} '이런!'
-            {print} '정답은 10'
--   name: '{repeat}를 거북이와 함께'
-    explanation: 여러 줄을 반복합니다.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: 키보드의 주어진 키가 `{pressed}`인지 확인한다.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'A 키를 눌렀습니다!'
-        {else}
-            {print} '다른 키를 눌렀습니다!'
 9:
 -   name: '{if}를 여러 라인과 함께'
     explanation: 질문의 총합을 `{ask}`로 맞춘 다음 그것이 맞는지 확인한다. 이제 우리는 두 줄을 출력한다.

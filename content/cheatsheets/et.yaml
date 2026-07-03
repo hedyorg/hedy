@@ -55,33 +55,6 @@
     demo_code: |-
         nimi {is} Hedy
         {print} 'minu nimi on ' nimi
-8:
--   name: '{print}'
-    explanation: Prindi midagi. Pea meeles, et sõna-sõnalt täpseks printimiseks on vaja jutumärke.
-    demo_code: '{print} ''5 korda 5 on '' 5 * 5'
--   name: '{ask}'
-    explanation: Palu sisestada tehte vastus ja kontrolli, kas sisestatud vastus on õige. Nüüd on võimalik printida 2 rida.
-    demo_code: |-
-        vastus = {ask} 'Mis on 5 pluss 5?'
-        {if} vastus {is} 10
-            {print} 'Tubli!'
-            {print} 'Vastus on tõepoolest ' vastus
-        {else}
-            {print} 'Oi!'
-            {print} 'Õige vastus on 10'
--   name: '{repeat} kilpkonnaga'
-    explanation: Korda mitut rida.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
 9:
 -   name: '{if} mitme reaga'
     explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.

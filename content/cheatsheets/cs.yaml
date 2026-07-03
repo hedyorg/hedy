@@ -55,33 +55,6 @@
     demo_code: |-
         jmeno is Hedy
         print 'Jmenuji se ' jmeno
-8:
--   name: '{print}'
-    explanation: Něco vypiš a hlavně nezapomeň na uvozovky!
-    demo_code: print '5 krát 5 je ' 5 * 5
--   name: '{ask}'
-    explanation: Zeptej se na výsledek příkladu a zkontroluj, zda je správný. Teď už můžeš vypsat více řádků.
-    demo_code: |-
-        vysledek = ask 'Kolik je 5 plus 5?'
-        if vysledek is 10
-            print 'Skvělá práce!'
-            print 'Výsledek opravdu je ' vysledek
-        else
-            print 'Ups, těsně vedle...'
-            print 'Správný výsledek je 10.'
--   name: '`{repeat}` with turtle'
-    explanation: '{repeat} multiple lines'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Zkontrolovat, jestli byla daná klávesa zmáčknuta `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Zmáčknul jsi A!'
-        {else}
-            {print} 'Zmáčknul jsi jinou hlávesu!'
 9:
 -   name: '`{if}` with multiple lines'
     explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.

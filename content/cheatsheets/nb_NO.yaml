@@ -55,33 +55,6 @@
     demo_code: |-
         navn {is} Hedy
         {print} 'Mitt navn er ' navn
-8:
--   name: '{print}'
-    explanation: skriv noe. Husk å bruke fnutter når du skal skrive ut tekst.
-    demo_code: '{print} ''5 {times} 5 {is} '' 5 * 5'
--   name: '{ask}'
-    explanation: spør om svaret på et regnestykke og sjekk om det er rett. Vi kan printe to linjer nå.
-    demo_code: |-
-        svaret = {ask} 'Hva er 5 plus 5?'
-        {if} svaret {is} 10
-            {print} 'Bra jobbet!'
-            {print} 'Du har helt rett, svaret er ' svaret
-        {else}
-            {print} 'Oops!'
-            {print} 'Svaret er 10'
--   name: '`{repeat}` med skilpadden'
-    explanation: '{repeat} flere linjer'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
 9:
 -   name: '`{if}` med flere linjer'
     explanation: '''{ask}'' om svaret på et regnestykke og se om det er korrekt. Nå skriver vi ut to linjer.'

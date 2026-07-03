@@ -55,33 +55,6 @@
     demo_code: |-
         isim {is} Hedy
         {print} 'benim adım ' isim
-8:
--   name: '{print}'
-    explanation: Bir şey yazdırın. Tam yazım için tırnak işareti kullanmayı unutmayın.
-    demo_code: '{print} ''5 kere 5 eşittir '' 5 * 5'
--   name: '{ask}'
-    explanation: Bir toplamanın cevabını isteyin ve doğru olup olmadığını kontrol edin. Şimdi 2 satır yazdırabiliriz.
-    demo_code: |-
-        cevap = {ask} '5 artı 5 kaç eder?'
-        {if} cevap {is} 10
-            {print} 'Aferin sana!'
-            {print} 'Cevap gerçekten de ' cevap
-        {else}
-            {print} 'Oops!'
-            {print} 'Cevap 10 olacaktı'
--   name: '{repeat} ile kaplumbağa'
-    explanation: Birden fazla satırı yineleyin.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: '`{pressed}` ile klavyedeki belirli bir tuşun basılı olup olmadığını kontrol edin.'
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'A ya bastın!'
-        {else}
-            {print} 'Başka bir tuşa bastın!'
 9:
 -   name: '{if} ile çoklu satırlar'
     explanation: '`{ask}` ile bir toplama sorusunun cevabını alın ve doğru olup olmadığına bakın. Şimdi iki satır yazdırıyoruz.'

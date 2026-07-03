@@ -55,33 +55,6 @@
     demo_code: |-
         imię {is} Hedy 
         {print} 'moje imię to ' imię
-8:
--   name: '{print}'
-    explanation: Napisz coś. Pamiętaj, aby użyć apostrofów przy dosłownym wypisywaniu.
-    demo_code: '{print} ''5 razy 5 to '' 5 * 5'
--   name: '{ask}'
-    explanation: Zapytaj się o rozwiązanie dodawania i sprawdź czy jest poprawne. Teraz możemy wypisać dwie linie.
-    demo_code: |-
-        odpowiedź = {ask} 'Ile to 5 plus 5?'
-        {if} odpowiedź {is} 10
-            {print} 'Dobra odpowiedź!'
-            {print} 'Rzeczywiście, odpowiedź to ' odpowiedź
-        {else}
-            {print} 'Ups!'
-            {print} 'Odpowiedź to 10'
--   name: '{repeat} z żółwiem'
-    explanation: Powtórz wiele linii.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Sprawdza czy dany klawisz jest `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Nacisnąłeś A!'
-        {else}
-            {print} 'Nacisnąłeś inny klawisz!'
 9:
 -   name: '{if} z wieloma liniami'
     explanation: Odpowiedź sumy pytań za pomocą `{ask}` i sprawdź czy są poprawne. Teraz drukujemy dwie linie.
