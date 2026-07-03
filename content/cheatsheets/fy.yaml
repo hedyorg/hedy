@@ -54,23 +54,6 @@
     demo_code: |-
         namme {is} Hedy
         {print} 'ik bin ' namme
-9:
--   name: '`{if}` met meerdere regels'
-    explanation: Het antwoord van een som vragen met `{ask}` en kijken of het goed is. Nu printen we twee regels uit.
-    demo_code: |-
-        antwoord = {ask} 'Hoeveel is 10 plus 10?'
-        {if} antwoord {is} 20
-            {print} 'Goedzo!'
-            {print} 'Het antwoord was inderdaad ' antwoord
-        {else}
-            {print} 'Foutje'
-            {print} 'Het antwoord moest zijn 20'
--   name: '`{repeat}` met de turtle'
-    explanation: Meerdere regels samen herhalen
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
 10:
 -   name: '{for} met een lijst'
     explanation: Alle dingen in een lijstje printen

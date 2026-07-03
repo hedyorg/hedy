@@ -66,12 +66,11 @@
         {else}
             {print} 'Niks'
             {print} 'Svaret er 20'
--   name: '{repeat} med skildpadde'
+-   name: '{repeat} med flere linjer'
     explanation: Gentag flere linjer.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: Udskriv noget. Husk at bruge citationstegn til nøjagtig udskrivning.

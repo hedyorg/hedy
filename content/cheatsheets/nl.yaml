@@ -89,12 +89,11 @@
         {else}
             {print} 'Foutje'
             {print} 'Het antwoord moest zijn 20'
--   name: '`{repeat}` met de turtle'
+-   name: '`{repeat}` met meerdere regels'
     explanation: Meerdere regels samen herhalen.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hallo!'
 10:
 -   name: '{print}'
     explanation: Print iets. Vergeet niet om aanhalingstekens te gebruiken als je iets letterlijk wil printen.

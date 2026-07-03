@@ -62,12 +62,11 @@
         {else}
             {print} 'Falsch'
             {print} 'Die Antwort ist 20'
--   name: '{repeat} mit Schildkröte'
+-   name: '{repeat} mit mehreren Befehlszeilen'
     explanation: Wiederhole mehrere Zeilen.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hallo!'
 10:
 -   name: '{print}'
     explanation: Gib etwas aus. Denke an Anführungszeichen für eine wortwörtliche Ausgabe.

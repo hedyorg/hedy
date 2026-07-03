@@ -66,12 +66,11 @@
         {else}
             {print} 'Źle'
             {print} 'Poprawna odpowiedź to 20'
--   name: '{repeat} z żółwiem'
+-   name: '{repeat} z wieloma liniami'
     explanation: Powtórz wiele linii.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: Napisz coś. Pamiętaj aby użyć apostrofów do dosłownego wypisywania.

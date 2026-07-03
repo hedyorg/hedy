@@ -66,12 +66,11 @@
         {else}
             {print} 'Неправильно'
             {print} 'Ответ: 20'
--   name: '{repeat} с черепахой'
+-   name: '{repeat} с несколькими линиями'
     explanation: Повторите несколько строк.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: Напечатайте что-нибудь. Не забывайте использовать кавычки для буквальной печати.

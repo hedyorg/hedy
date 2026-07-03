@@ -55,23 +55,6 @@
     demo_code: |-
         name {is} Hedy
         {print} 'my name is ' name
-9:
--   name: '`{if}` with multiple lines'
-    explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
-    demo_code: |-
-        answer = {ask} 'What is 20 plus 20?'
-        {if} answer {is} 20
-            {print} 'Well done!!'
-            {print} 'The answer is indeed' answer
-        else
-            {print} 'Wrong'
-            {print} 'The answer is 20'
--   name: '`{repeat}` and turtle'
-    explanation: '{repeat} multiple lines'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
 10:
 -   name: '{print}'
     explanation: print something. Remember to use a quotation mark for literal printing.

@@ -66,12 +66,11 @@
         {else}
             {print} 'Yanlış'
             {print} 'Cevap 20 olacaktı'
--   name: '{repeat} ile kaplumbağa'
+-   name: '{repeat} ile çoklu satırlar'
     explanation: Birden fazla satırı tekrarlayın.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: Bir şey yazdırın. Tam yazdırma için tırnak işareti kullanmayı unutmayın.

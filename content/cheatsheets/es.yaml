@@ -66,12 +66,11 @@
         {else}
             {print} 'Mal'
             {print} 'La respuesta es 20'
--   name: '{repeat} con tortuga'
+-   name: '{repeat} con varias líneas'
     explanation: Repite varias líneas.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: Imprime algo. Recuerde utilizar las comillas para la impresión literal.

@@ -66,12 +66,11 @@
         {else}
             {print} 'Неправильно'
             {print} 'Відповідь 20'
--   name: '{repeat} з черепахою'
+-   name: '{repeat} з багатьма лініями'
     explanation: Повторіть кілька рядків.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: Надрукуйте щось. Не забувайте використовувати лапки для літерного друку.

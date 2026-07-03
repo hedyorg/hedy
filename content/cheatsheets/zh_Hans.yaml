@@ -66,12 +66,11 @@
         {else}
             {print} '错'
             {print} '答案是20'
--   name: 海龟绘图与 {repeat}
+-   name: '{repeat}'
     explanation: 重复多行。
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: 打印一些内容。 记得在打印内容的前后两边都用单引号标注清楚。

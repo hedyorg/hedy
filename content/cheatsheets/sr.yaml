@@ -66,12 +66,11 @@
         {else}
             {print} 'Погрешно'
             {print} 'Одговор је 20'
--   name: '{repeat} са корњачом'
+-   name: '{repeat} са више линија'
     explanation: Понови више линија.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: Одштампај нешто. Запамти да користиш наводнике за дословно штампање.

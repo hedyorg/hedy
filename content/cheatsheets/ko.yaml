@@ -66,12 +66,11 @@
         {else}
             {print} '틀렸어'
             {print} '정답은 20'
--   name: '{repeat}를 거북이와 함께'
+-   name: '{repeat}를 여러 라인과 함께'
     explanation: 여러 줄을 반복합니다.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: 무언가를 print하라. 문자 그대로 print할 때 따옴표를 사용하는 것을 기억하라.

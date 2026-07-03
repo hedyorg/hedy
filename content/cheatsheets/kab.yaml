@@ -57,9 +57,13 @@
         {print} 'isem-is d ' isem
 9:
 -   {}
--   name: '{repeat} s yifker'
+-   name: '{repeat}'
     explanation: Ales ugar n yizirigen.
-    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+    demo_code: |-
+        {repeat} 4 {times}
+            {print} 'Hello!'
+        
+
 10:
 -   name: '{print}'
     demo_code: "{print} '5 tikkal 5 d ' 5 * 5"

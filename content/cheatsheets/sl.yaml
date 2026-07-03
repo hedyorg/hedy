@@ -46,10 +46,19 @@
 9:
 -   name: '{if} z več vrsticami'
     explanation: Odgovor na vsoto vprašanj z `{ask}` in preverite, ali je pravilen. Zdaj izpišemo dve vrstici.
-    demo_code: "answer = {ask} 'What is 10 plus 10?'\n{if} answer {is} 20\n    {print} 'Well done!!'\n    {print} 'The answer is indeed' answer\n{else}\n    {print} 'Wrong'\n    {print} 'The answer is 20'"
--   name: '{repeat} z želvo'
+    demo_code: |-
+        answer = {ask} 'What is 10 plus 10?'
+        {if} answer {is} 20
+            {print} 'Well done!!'
+            {print} 'The answer is indeed' answer
+        {else}
+            {print} 'Wrong'
+            {print} 'The answer is 20'
+-   name: '{repeat} z več vrsticami'
     explanation: Ponovite več vrstic.
-    demo_code: "{repeat} 4 {times}\n    {turn} 90\n    {forward} 50"
+    demo_code: |-
+        {repeat} 4 {times}
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: Nekaj natisnite. Pri dobesednem tiskanju ne pozabite uporabiti narekovajev.

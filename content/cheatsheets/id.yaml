@@ -57,22 +57,21 @@
         nama {is} Hedy
         {print} 'nama saya adalah ' nama
 9:
--   name: '`if` dengan beberapa baris'
-    explanation: Cek apakah jawaban dari penjumlahan yang ditanyakan dengan `ask` benar. Sekarang kita menampilkan dua baris.
+-   name: '`{if}` dengan beberapa baris'
+    explanation: Cek apakah jawaban dari penjumlahan yang ditanyakan dengan `{ask}` benar. Sekarang kita menampilkan dua baris.
     demo_code: |-
-        jawaban = ask 'Apa hasil dari 20 tambah 20?'
-        if jawaban is 20
-            print 'Bagus!!'
-            print 'Jawabannya betul' jawaban
-        else
-            print 'Salah'
-            print 'Jawabannya adalah 20'
--   name: '`repeat` dan kura-kura'
+        jawaban = {ask} 'Apa hasil dari 20 tambah 20?'
+        {if} jawaban {is} 20
+            {print} 'Bagus!!'
+            {print} 'Jawabannya betul' jawaban
+        {else}
+            {print} 'Salah'
+            {print} 'Jawabannya adalah 20'
+-   name: '`{repeat}` dengan beberapa baris'
     explanation: Ulangi beberapa kali
     demo_code: |-
-        repeat 4 times
-            turn 90
-            forward 50
+        {repeat} 4 {times}
+            {print} 'Hello!'
 10:
 -   name: print
     explanation: Menampilkan sesuatu. Ingat untuk menggunakan tanda kutip satu untuk menampilkan teks apa adanya.

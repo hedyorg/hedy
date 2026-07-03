@@ -66,12 +66,11 @@
         {else}
             {print} 'Oups'
             {print} 'La réponse est 20'
--   name: '{repeat} avec la tortue'
+-   name: '{repeat} avec plusieurs lignes'
     explanation: Répète des lignes multiples.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: Affiche quelque chose. N’oublies pas les guillemets pour afficher exactement ce qui est saisi.

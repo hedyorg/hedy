@@ -66,12 +66,11 @@
         else
             {print} 'Feil'
             {print} 'Svaret er 40'
--   name: '`{repeat}` og skilpadden'
+-   name: '`{repeat}` med flere linjer'
     explanation: '{repeat} flere linjer'
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello!'
 10:
 -   name: '{print}'
     explanation: skriv ut noe. Husk å bruke fnutter når du skal skrive tekst.

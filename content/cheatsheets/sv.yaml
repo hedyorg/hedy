@@ -66,12 +66,11 @@
         {else}
             {print} 'Fel'
             {print} 'Svaret är 20'
--   name: '{repeat} med sköldpadda'
+-   name: '{repeat} med flera rader'
     explanation: Upprepa flera rader.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
+            {print} 'Hello'
 10:
 -   name: '{print}'
     explanation: Skriv ut något. Kom ihåg att använda citattecken för exakt utskrift.
