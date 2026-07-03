@@ -71,24 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-12:
--   name: float directly
-    explanation: 십진수 숫자.
-    demo_code: |-
-        {print} '계산하세요!'
-        {print} '2.5 더하기 2.5는...'
-        {print} 2.5 + 2.5
--   name: assign text
-    explanation: '`=` 뒤에 따옴표가 있는 텍스트'
-    demo_code: |-
-        이름 = '로봇 Hedy'
-        {print} '안녕' 이름
--   name: quotes after `{if}` comparison
-    explanation: '`{if}` 뒤에 따옴표가 있는 텍스트.'
-    demo_code: |-
-        이름 = {ask} '누구세요?'
-        {if} 이름 = 'Hedy'
-            {print} '안녕하세요!'
 13:
 -   name: '{and}'
     explanation: 두 부분 모두 정확해야 합니다.

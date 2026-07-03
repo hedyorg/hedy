@@ -71,24 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-12:
--   name: 直接浮点数
-    explanation: 十进制数字。
-    demo_code: |-
-        {print} '计算出来！'
-        {print} '二又二分之一加上二又二分之一是……'
-        {print} 2.5 + 2.5
--   name: 文本赋值
-    explanation: '`=`后带引号的文本'
-    demo_code: |-
-        name= '海蒂机器人'
-        {print} '你好，' name
--   name: '`{if}`比较后的引号'
-    explanation: '`{if}`之后的带引号文本。'
-    demo_code: |-
-        name = {ask} '你是谁？'
-        {if} name = 'Hedy'
-            {print} '嗨，你好！'
 13:
 -   name: '{and}'
     explanation: 左边和右边的两个语句都必须是正确的。

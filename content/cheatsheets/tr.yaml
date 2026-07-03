@@ -71,24 +71,6 @@
     demo_code: |-
         {repeat} 4 {times}
             {print} 'Hello!'
-12:
--   name: doğrudan ondalıklı
-    explanation: Ondalık sayılar.
-    demo_code: |-
-        {print} 'Hesaplayın!'
-        {print} 'İki buçuk artı iki buçuk...'
-        {print} 2.5 + 2.5
--   name: metin atayın
-    explanation: '`=` den sonra tırnak işareti içinde olan metin'
-    demo_code: |-
-        isim = 'Robot Hedy'
-        {print} 'Merhaba ' isim
--   name: karşılaştırma için `{if}` 'den sonraki tırnaklar
-    explanation: '`{if}` ''den sonraki tırnak içindeki metin.'
-    demo_code: |-
-        isim = {ask} 'Kimsin sen?'
-        {if} isim = 'Hedy'
-            {print} 'Merhaba oradaki!'
 13:
 -   name: '{and}'
     explanation: İki parçanın da doğru olması gerekir.
