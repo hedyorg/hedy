@@ -35,10 +35,11 @@ adventures:
                 story_text: "Na tej stopnji lahko v svoji zgodbi uporabite ukaz {for}. Na ta način bi lahko preprosto programirali otroško knjigo 'Rjavi medved, Rjavi medved, kaj vidiš'.\n\n### Telovadba\n\nČe zgodbe ne poznate, jo lahko pogledate na <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> zgodbo</a>,, in se prepričate, da je natisnjeno kot v knjigi.\n"
                 example_code: "```\nživali = _ , _ , _ \n{print} 'Rjavi medved, rjavi medved'\n{print} 'Kaj vidiš?'\n```\n"
             13:
-                story_text: "Natisnili bomo še eno zgodbo, vendar moramo zdaj uporabiti oklepaje z `{print}`.\n\n### Vaja 1\nUstvarite zgodbo z vsaj petimi stavki. Zaenkrat vam še ni treba uporabiti spremenljivke 'ime'.\n"
-                example_code: "```\n{print}('Dobrodošel v to zgodbo!')\n```\n"
-                story_text_2: "### Vaja 2\nZa vas smo že pripravili `{input}`. Najprej v svoji zgodbi uporabite spremenljivko `name`.\nNato dodajte `{ask}` še enkrat in rezultat  prav tako shranite v spremenljivko.\nNasvet: Ne pozabite na vejice med besedilom in spremenljivkami pri ukazu `{print}`!\n"
-                example_code_2: "```\nime= {input}(\"Kako vam je ime?\")\n{print}('Dobrodošli v to zgodbo!')\n```\n"
+                example_code: |
+                    ```
+                    ime= _
+                    {print}('Dobrodošli v to zgodbo!')
+                    ```
     add_remove_command:
         default_save_name: ukaz_dodaj_odstrani
         description: predstavitev {add} {to_list} in {remove} {from}

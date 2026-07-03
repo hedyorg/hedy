@@ -207,23 +207,9 @@ adventures:
                     Przykładowy kod pokazuje, jak w historii używać pętli `{while}` . Teraz **pomyśl o swoim scenariuszu**, w którym gracz musi coś znaleźć , zanim będzie mógł kontynuować.
                 example_code: "```\nklucze = 'zgubione'\n{print}('Stoisz w ogrodzie i zgubiłeś swoje klucze.') \n{print}('Gdzie chcesz ich poszukać?')\n{print}('Możesz wybrać: drzewo, doniczka, kamień, skrzynka na listy')\n{while} klucze == 'zgubione':\n    miejsce = {input}('Gdzie chcesz popatrzeć?')\n    {if} miejsce == 'doniczka':\n        {print}('Tutaj są!')\n        klucze = 'znalezione'\n    {else}:\n        {print}('Nie, nie ma ich w ', miejsce)\n{print}('Teraz możesz wejść do domu!')\n```\n"
             13:
-                story_text: |
-                    Napiszemy kolejną opowieść, ale teraz musimy użyć nawiasów z poleceniem`{print}`.
-
-                    ### Ćwiczenie 1
-                    Stwórz opowieść składającą się z co najmniej 5 zdań. Nie musisz jeszcze używać 'imię'
                 example_code: |
                     ```
-                    {print}('Witamy w tej opowieści!')
-                    ```
-                story_text_2: |
-                    ### Ćwiczenie 2
-                    Przygotowaliśmy już dla ciebie polecenie `{input}`. Najpierw użyj zmiennej `name` w twojej opowieści.
-                    Następnie dodaj drugie polecenie `{ask}` i użyj również tej zmiennej.
-                    Wskazówka: Pamiętaj o przecinkach w poleceniu `{print}` pomiędzy tekstem a zmiennymi!
-                example_code_2: |
-                    ```
-                    imię = {input}("Jak się nazywasz?")
+                    imię = _ 
                     {print}('Witamy w tej opowieści!')
                     ```
             6:
