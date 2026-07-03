@@ -3669,13 +3669,13 @@ adventures:
                     password_2 = Macaroni
 
                     guess_1 = {ask} 'What is the first password?'
-                    {if} guess_1 = password_1
+                    {if} guess_1 {is} password_1
                         {print} 'Crocodile is correct.'
-                            guess_2 = {ask} 'What is the second password?'
-                            {if} guess_2 = password_2
-                                {print} 'Welcome!'
-                            {else}
-                                {print} 'INTRUDER!'
+                        guess_2 = {ask} 'What is the second password?'
+                        {if} guess_2 {is} password_2
+                            {print} 'Welcome!'
+                        {else}
+                            {print} 'INTRUDER!'
                     {else}
                         {print} 'ACCESS DENIED'
                     ```
@@ -4214,17 +4214,17 @@ adventures:
                     {elif} mood {is} _
                     {play} _
                     ```
-                answer_code: |-
+                answer_code: |
                     ```
                     mood {is} {ask} 'How are you feeling today?'
                     {if} mood {is} happy
-                        {play} C4
+                    {play} C4
                     {elif} mood {is} sad
-                        {play} C2
+                    {play} C2
                     {elif} mood {is} scared
-                        {play} C8
+                    {play} C8
                     {elif} mood {is} bored
-                        {play} C3
+                    {play} C3
                     ```
             7:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\nThis calls for musical maths! Try out the example code a couple of times with different starting numbers.\nThen, see if you can compose a song using the numbers.\n"
@@ -6206,7 +6206,8 @@ adventures:
                     song (chosen_place)
                     ```
                 example_code_2: |
-                    {def} song (rhyme)
+                    ```
+                    {def} song(rhyme):
                         {print} 'Down by the Bay,'
                         {print} 'Where the watermelons grow,'
                         {print} 'Back to my home,'
@@ -6216,8 +6217,9 @@ adventures:
                         {print} 'Did you ever see a ' _
                         {print} 'Down by the bay'
 
-                    chosen_rhyme = {input} 'what rhyme do you choose?'
+                    chosen_rhyme = {input}('What rhyme do you choose?')
                     _
+                    ```
                 answer_code: |
                     ```
                     {def} song(rhyme):
@@ -6230,7 +6232,7 @@ adventures:
                         {print} 'Did you ever see a ' rhyme
                         {print} 'Down by the bay'
 
-                    chosen_rhyme = {input} 'What rhyme do you choose?'
+                    chosen_rhyme = {input}('What rhyme do you choose?')
                     song(chosen_rhyme)
                     ```
     songs_2:
