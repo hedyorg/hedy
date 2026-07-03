@@ -55,34 +55,6 @@
     demo_code: |-
         nome is Hedy
         print 'O meu nome é ' nome
-5:
--   name: '{print}'
-    explanation: Escreve com exactidão usando aspas simples.
-    demo_code: print 'Olá, bem-vindo(a) à Hedy!'
--   name: '{ask}'
-    explanation: Pergunta algo utilizando `ask`.
-    demo_code: |-
-        cor is ask 'Qual é a tua cor favorita?'
-        print cor ' é a tua favorita!'
--   name: '{if}'
-    explanation: Faz uma escolha com `if`.
-    demo_code: |-
-        cor is ask 'Qual é a tua cor favorita?'
-        if cor is verde print 'Linda!' else print 'pff'
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`
-    demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Check elements with `{in}`
-    demo_code: |-
-        cores_bonitas {is} verde, amarelo
-        cor {is} {ask} 'Qual é a tua cor favorita?'
-        {if} cor {in} cores_bonitas {print} 'bonita!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Verifica se uma determinada tecla do teclado é `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Carregou no A!'' {else} {print} ''Carregou noutra tecla!'''
 6:
 -   name: '{print}'
     explanation: Escreve com exactidão usando aspas simples.

@@ -55,34 +55,6 @@
     demo_code: |-
         name {is} Hedy
         {print} 'моје име је ' name
-5:
--   name: '{print}'
-    explanation: Испиши тачно користећи наводнике.
-    demo_code: '{print} ''Здраво, добродошли у Хеди.'''
--   name: '{ask}'
-    explanation: Питај нешто са `{ask}`.
-    demo_code: |-
-        color {is} {ask} 'Која је твоја омиљена боја?'
-        {print} color ' је твоја омиљена!'
--   name: '{if}'
-    explanation: Направи избор са `{if}`.
-    demo_code: |-
-        color {is} {ask} 'Која је твоја омиљена боја?'
-        {if} color {is} зелена {print} 'лепа!' {else} {print} 'мех'
--   name: '{if} са корњачом'
-    explanation: Направи избор са `{if}`.
-    demo_code: |-
-        answer {is} {ask} 'Колико далеко треба да ходам?'
-        {if} answer {is} далеко {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Провери елементе са `{in}`.
-    demo_code: |-
-        pretty_colors {is} зелена, жута
-        color {is} {ask} 'Која је твоја омиљена боја?'
-        {if} color {in} pretty_colors {print} 'лепа!' {else} {print} 'мех'
--   name: '{pressed}'
-    explanation: Провери да ли је одређени тастер на тастатури `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Притиснуо си А!'' {else} {print} ''Притиснуо си други тастер!'''
 6:
 -   name: '{print}'
     explanation: Испиши тачно користећи наводнике.

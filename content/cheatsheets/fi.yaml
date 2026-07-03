@@ -55,34 +55,6 @@
     demo_code: |-
         nimi {is} Hedy
         {print} 'minun nimeni on' nimi
-5:
--   name: '{print}'
-    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
-    demo_code: '{print} ''Tervetuloa Hedyn pariin.'''
--   name: '{ask}'
-    explanation: Kysy jotain komennolla `{ask}`.
-    demo_code: |-
-        väri {is} {ask} 'Mikä on lempivärisi?'
-        {print} väri ' on lempivärisi!'
--   name: '{if}'
-    explanation: Tee valinta komennolla `{if}`.
-    demo_code: |-
-        väri {is} {ask} 'Mikä on lempivärisi?'
-        {if} väri {is} vihreä {print} 'hieno!' {else} {print} 'plääh'
--   name: '{if} kilpikonnan kanssa'
-    explanation: Tee valinta komennolla `{if}`.
-    demo_code: |-
-        vastaus {is} {ask} 'Kuinka pitkälle minun pitäisi kävellä?'
-        {if} vastaus {is} kauas {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Tarkista onko asia listassa komennolla `{in}`.
-    demo_code: |-
-        hienot_värit {is} vihreä, keltainen
-        väri {is} {ask} 'Mikä on lempivärisi?'
-        {if} väri {in} hienot_värit {print} 'hieno!' {else} {print} 'plääh'
--   name: '{pressed}'
-    explanation: Tarkista, onko näppäimistön tietty näppäin `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Painoit A!'' {else} {print} "Painoit toista näppäintä!"'
 6:
 -   name: '{print}'
     explanation: Tulosta tarkasti käyttäen heittomerkkejä.

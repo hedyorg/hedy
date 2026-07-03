@@ -59,33 +59,6 @@
         name {is} Hedy
         {print} 'Το όνομά μου είναι ' name
 5:
--   name: print
-    explanation: Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά
-    demo_code: print 'Γειά, καλωσήλθες στη Hedy.'
--   name: ask
-    explanation: Ρώτησε κάτι με την `ask`.
-    demo_code: |-
-        color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
-        print 'το ' color ' είναι το αγαπημένο σου!'
--   name: if
-    explanation: Κάνε μια επιλογή με την `if`
-    demo_code: |-
-        color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
-        if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
--   name: '{if} με χελώνα'
-    explanation: Κάνε μια επιλογή με `{if}`
-    demo_code: |-
-        answer {is} {ask} 'Πόσο μακρυά πρέπει να περπατήσω;'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Έλεγξε τα στοιχεία με `{in}`
-    demo_code: |-
-        pretty_colors {is} πράσινο, κίτρινο
-        color {is} {ask} 'Ποιο είναι το αγαπημένο σου χρώμα;'
-        {if} color {in} pretty_colors {print} 'ωραίο!' {else} {print} 'ωχ'
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: print
     explanation: Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά

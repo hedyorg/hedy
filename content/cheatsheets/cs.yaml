@@ -55,34 +55,6 @@
     demo_code: |-
         jmeno is Hedy
         print 'Jmenuji se ' jmeno
-5:
--   name: '{print}'
-    explanation: Vypisujte přesně pomocí uvozovek.
-    demo_code: print 'Ahoj, vítej v Hedy!'
--   name: '{ask}'
-    explanation: Zeptejte se na něco pomocí `{ask}`.
-    demo_code: |-
-        barva {is} {ask} 'Jaká je tvoje nejoblíbenější barva?'
-        {print} barva ' je tvoje nejoblíbenější barva.'
--   name: '{if}'
-    explanation: Rozhodni se pomocí `{if}`.
-    demo_code: |-
-        barva is ask 'Jaká je tvoje nejoblíbenější barva?'
-        if barva is růžová print 'Moje taky!' else print 'Fuj'
--   name: '{if} želva'
-    explanation: Make a choice with `{if}`.
-    demo_code: |-
-        Odpověď {is} {ask} 'Jak daleko mám jít?'
-        {if} odpověď {is} daleko {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Check elements with `{in}`
-    demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Zkontrovat, jestli byla daná klávesa `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Zmáčknul jsi A!'' {else} {print} ''Zmáčknul jsi jinou klávesu!'''
 6:
 -   name: '{print}'
     explanation: Zkus si přesný výpis pomocí uvozovek.

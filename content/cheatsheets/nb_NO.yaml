@@ -55,34 +55,6 @@
     demo_code: |-
         navn {is} Hedy
         {print} 'Mitt navn er ' navn
-5:
--   name: '{print}'
-    explanation: skriv ut nøyaktig det du vil med fnutter
-    demo_code: '{print} ''Hallo, velkommen til Hedy.'''
--   name: '{ask}'
-    explanation: still et spørsmål med `{ask}`.
-    demo_code: |-
-        farge {is} {ask} 'Hva er din favorittfarge?'
-        {print} farge ' er din favoritt'
--   name: '{if}'
-    explanation: Ta et valg med `{if}`
-    demo_code: |-
-        farge {is} {ask} 'Hva er din favorittfarge?'
-        {if} farge {is} grønn {print} 'vakkert!' {else} {print} 'meh'
--   name: '{if} med skilpadden'
-    explanation: Ta et valg med `{if}`
-    demo_code: |-
-        svaret {is} {ask} 'Hvor langt skal vi bevege skilpadden?'
-        {if} svaret {is} langt {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Sjekk om lister inneholder elementer `{in}`
-    demo_code: |-
-        vakre_farger {is} grønn, gul
-        farge {is} {ask} 'Hva er din favoritt farge'
-        {if} farge {in} vakre_farger {print} 'Vakkert!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Sjekk om en gitt knapp på tastaturet er `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: '{print}'
     explanation: skriv ut nøyaktig det du vil med fnutter

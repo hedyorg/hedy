@@ -55,34 +55,6 @@
     demo_code: |-
         الاسم {is} هيدي
         {print} "أنا اسمي " الاسم
-5:
--   name: '{print}'
-    explanation: نطبع النص ما بين علامات الاقتباس حرفياً.
-    demo_code: '{print} "أهلاً بكم ومرحباً في هيدي"'
--   name: '{ask}'
-    explanation: نسأل عن شيء ما من خلال الأمر `{ask}`. نضع نص السؤال ما بين علامات الاقتباس.
-    demo_code: |-
-        اللون {is} {ask} "ما هو لونك المفضل؟"
-        {print} اللون "هو لونك لمفضل!"
--   name: '{if}'
-    explanation: باستخدام الأمر `{if}` يمكننا أن نفحص شيئاً ما وتقوم بالاختيار بناء على نتيجة ذلك الفحص.
-    demo_code: |-
-        اللون {is} {ask} "ما لونك المفضل؟"
-        {if} اللون {is} وردي {print} "هذا رائع!" {else} {print} "يا خسارة!"
--   name: '{if} مع الرسام'
-    explanation: باستخدام الأمر `{if}` يمكننا أن نفحص شيئاً ما وتقوم بالاختيار بناء على نتيجة ذلك الفحص.
-    demo_code: |-
-        الجواب {is} {ask} "كم يجب علي أن امشي؟"
-        {if} الجواب {is} كثيرا {forward} ١٠٠ {else} {forward} ٥
--   name: '{in}'
-    explanation: نستطيع أن نفحص العناصر الموجودة في قائمة معينة من خلال الأمر `{in}`.
-    demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What is your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: تحقق مما إذا كان مفتاح معين على لوحة المفاتيح هو `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} "لقد ضغطت على A!" {else} {print} "لقد ضغطت على مفتاح آخر!"'
 6:
 -   name: '{print}'
     explanation: نطبع على الشاشة النص ما بين علامات الاقتباس حرفياً.

@@ -55,34 +55,6 @@
     demo_code: |-
         namn {is} Hedy
         {print} 'mitt namn är ' namn
-5:
--   name: '{print}'
-    explanation: Skriv ut exakt med hjälp av citationstecken.
-    demo_code: '{print} ''Hej och välkommen till Hedy.'''
--   name: '{ask}'
-    explanation: Fråga något med `{ask}`.
-    demo_code: |-
-        färg {is} {ask} 'Vilken är din favoritfärg?'
-        {print} färg ' är din favorit!'
--   name: '{if}'
-    explanation: Gör ett val med `{if}`.
-    demo_code: |-
-        färg {is} {ask} 'Vilken är din favoritfärg?'
-        {if} färg {is} grön {print} 'fin!' {else} {print} 'sådär'
--   name: '{if} med sköldpadda'
-    explanation: Gör ett val med `{if}`.
-    demo_code: |-
-        svar {is} {ask} 'Hur långt ska jag gå?'
-        {if} svar {is} långt {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Kolla element med `{in}`.
-    demo_code: |-
-        fina_färger {is} grön, gul
-        färg {is} {ask} 'Vilken är din favoritfärg?'
-        {if} färg {in} fina_färger {print} 'fint!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Kontrollera om en viss tangent är `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Du tryckte på A!'' {else} {print} ''Du tryckte på en annan tangent!'''
 6:
 -   name: '{print}'
     explanation: Skriv ut exakt med citattecken.

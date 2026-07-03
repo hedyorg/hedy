@@ -55,34 +55,6 @@
     demo_code: |-
         name {is} Hedy
         {print} 'my name is ' name
-5:
--   name: '{print}'
-    explanation: Imprimeix un text literal usant cometes.
-    demo_code: '{print} ''Hola benvingut a Hedy.'''
--   name: '{ask}'
-    explanation: Demana alguna cosa amb `{ask}`.
-    demo_code: |-
-        color {is} {ask} 'Quin és el teu color preferit?'
-        {print} color ' és el teu preferit!'
--   name: '{if}'
-    explanation: Fes una elecció amb `{if}`.
-    demo_code: |-
-        color {is} {ask} 'Quin és el teu color preferit?'
-        {if} color {is} verd {print} 'que bonic!' {else} {print} 'no és tan bonic'
--   name: '{if} amb tortuga'
-    explanation: Fes una elecció amb `{if}`.
-    demo_code: |-
-        resposta {is} {ask} 'Com de lluny he de caminar?'
-        {if} resposta {is} lluny {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Comprova elements amb `{in}`.
-    demo_code: |-
-        colors_bonics {is} verd, groc
-        color {is} {ask} 'Quin és el teu color preferit?'
-        {if} color {in} colors_bonics {print} 'bonic!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Comprova si una tecla determinada del teclat està `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: '{print}'
     explanation: Print exactly using quotation marks.

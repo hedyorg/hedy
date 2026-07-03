@@ -55,34 +55,6 @@
     demo_code: |-
         navn {is} Hedy
         {print} 'mit navn er ' navn
-5:
--   name: '{print}'
-    explanation: Udskriv nøjagtigt ved hjælp af citationstegn.
-    demo_code: '{print} ''Hej og velkommen til Hedy.'''
--   name: '{ask}'
-    explanation: Stil spørgsmål med `{ask}`.
-    demo_code: |-
-        farve {is} {ask} 'Hvad er din yndlingsfarve?'
-        {print} farve ' er din favorit!'
--   name: '{if}'
-    explanation: Træf et valg med `{if}`.
-    demo_code: |-
-        farve {is} {ask} 'Hvad er din yndlingsfarve?'
-        {if} farve {is} grøn {print} 'pænt!' {else} {print} 'tja'
--   name: '{if} med skildpadde'
-    explanation: Træf et valg med `{if}`.
-    demo_code: |-
-        svar {is} {ask} 'Hvor langt skal jeg gå?'
-        {if} svar {is} langt {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Tjek elementer med `{in}`.
-    demo_code: |-
-        flotte_farver {is} grøn, gul
-        farve {is} {ask} 'Hvad er din yndlingsfarve?'
-        {if} farve {in} flotte_farver {print} 'flot!' {else} {print} 'kedeligt'
--   name: '{pressed}'
-    explanation: Kontroller om en given tast på tastaturet er `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Du trykkede på A!'' {else} {print} ''Du trykkede på en anden tast!'''
 6:
 -   name: '{print}'
     explanation: Udskriv nøjagtigt ved hjælp af citationstegn.

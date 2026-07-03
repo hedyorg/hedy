@@ -55,34 +55,6 @@
     demo_code: |-
         שמי {is} הֶדִי
         {print} 'שמי הוא ' שמי
-5:
--   name: '{print}'
-    explanation: הדפיסו את הטקסט בדיוק עם מירכאות.
-    demo_code: '{print} ''ברוכים.ות הבאים.ות להֶדִי.'''
--   name: '{ask}'
-    explanation: שאלו משהו עם `{ask}`.
-    demo_code: |-
-        צבע {is} {ask} 'מה הצבע האהוב עליך?'
-        {print} צבע ' הוא הצבע האהוב עליך!'
--   name: '{if}'
-    explanation: בצעו בחירה באמצעות `{if}`.
-    demo_code: |-
-        צבע {is} {ask} 'מה הצבע האהוב עליך?'
-        {if} צבע {is} ירוק {print} 'יפה!' {else} {print} 'טוב, נו.'
--   name: '{if} עם צב'
-    explanation: בצעו בחירה באמצעות `{if}`.
-    demo_code: |-
-        תשובה {is} {ask} 'כמה רחוק ללכת?'
-        {if} תשובה {is} רחוק {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: בדוק פריטים באמצעות `{in}`.
-    demo_code: |-
-        צבעים_יפים {is} ירוק, צהוב
-        צבע {is} {ask} 'מה הצבע האהוב עליך?'
-        {if} צבע {in} צבעים_יפים {print} 'יפה!' {else} {print} 'טוב נו...'
--   name: '{pressed}'
-    explanation: בדוק אם מקש נתון במקלדת כן `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: '{print}'
     explanation: הדפיסו את הטקסט בדיוק עם מירכאות.

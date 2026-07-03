@@ -55,34 +55,6 @@
     demo_code: |-
         nimi {is} Hedy
         {print} 'minu nimi on ' nimi
-5:
--   name: '{print}'
-    explanation: Prindi täpselt, kasutades jutumärke.
-    demo_code: '{print} ''Teretulemast Hedy juurde.'''
--   name: '{ask}'
-    explanation: Küsi midagi kasutades `{ask}` käsku.
-    demo_code: |-
-        värv {is} {ask} 'Mis on su lemmikvärv?'
-        {print} värv ' on su lemmik!'
--   name: '{if}'
-    explanation: Vali midagi kasutades `{if}` käsku.
-    demo_code: |-
-        värv {is} {ask} 'Mis on su lemmikvärv?'
-        {if} värv {is} roheline {print} 'ilus!' {else} {print} 'mhh'
--   name: '{if} kilpkonnaga'
-    explanation: Tee valik kasutades `{if}` käsku.
-    demo_code: |-
-        vastus {is} {ask} 'Kui kaugele peaksin jalutama?'
-        {if} vastus {is} kaugele {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Kontrolli elemente, kasutades võtmesõna `{in}`.
-    demo_code: |-
-        ilusad_värvid {is} roheline, kollane
-        värv {is} {ask} 'Mis on su lemmikvärv?'
-        {if} värv {in} ilusad_värvid {print} 'ilus!' {else} {print} 'pähh'
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: '{print}'
     explanation: Prindi täpselt, kasutades jutumärke.

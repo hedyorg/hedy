@@ -55,34 +55,6 @@
     demo_code: |-
         nome {is} Hedy
         {print} 'meu nome é ' nome
-5:
--   name: '{print}'
-    explanation: Imprima exatamente usando aspas simples.
-    demo_code: '{print} ''Olá bem-vindo(a) à Hedy.'''
--   name: '{ask}'
-    explanation: Pergunte algo com `{ask}`.
-    demo_code: |-
-        cor {is} {ask} 'Qual a sua cor favorita?'
-        {print} cor ' é a sua favorita!'
--   name: '{if}'
-    explanation: Faça uma escolha com `{if}`.
-    demo_code: |-
-        cor {is} {ask} 'Qual a sua cor favorita?'
-        {if} cor {is} verde {print} 'bonita!' {else} {print} 'não gostei'
--   name: '{if} com tartaruga'
-    explanation: Faça uma escolha com `{if}`.
-    demo_code: |-
-        resposta {is} {ask} 'Até onde eu devo andar?'
-        {if} resposta {is} longe {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Verifique elementos com `{in}`.
-    demo_code: |-
-        cores_bonitas {is} verde, amarelo
-        cor {is} {ask} 'Qual é a sua cor favorita?'
-        {if} cor {in} cores_bonitas {print} 'bonita!' {else} {print} 'não gostei'
--   name: '{pressed}'
-    explanation: Verifique se uma determinada tecla no teclado está `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Você apertou A!'' {else} {print} ''Você apertou outra tecla!'''
 6:
 -   name: '{print}'
     explanation: Imprima exatamente usando aspas simples.

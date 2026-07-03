@@ -54,34 +54,6 @@
     demo_code: |-
         নাম {is}  হেডি 
         {print} 'আমার নাম is ' নাম
-5:
--   name: print
-    explanation: হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে
-    demo_code: print 'হ্যালো হেডিতে আপনার স্বাগত'
--   name: ask
-    explanation: কিছু ask করার থাকলে ` `ask` ব্যবহার করুন`.
-    demo_code: |-
-        রং is ask 'আপনার প্রিয় রং কি?'
-        print রং ' is আপনার প্রিয়!'
--   name: if
-    explanation: '`if`ব্যবহার করে পছন্দ করুন'
-    demo_code: |-
-        রং is ask 'আপনার প্রিয় রং কি?'
-        if রং is হয় print 'সুন্দর!' else print 'মন্দ'
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`
-    demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Check elements with `{in}`
-    demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: print
     explanation: হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে

@@ -55,34 +55,6 @@
     demo_code: |-
         imię {is} Hedy 
         {print} 'moje imię to ' imię
-5:
--   name: '{print}'
-    explanation: Napisz dokładnie używając apostrofów.
-    demo_code: '{print} ''Witaj w Hedy.'''
--   name: '{ask}'
-    explanation: Zadaj pytanie używając `{ask}`.
-    demo_code: |-
-        kolor {is} {ask} 'Jaki jest twój ulubiony kolor?'
-        {print} kolor ' jest twoim ulubionym!'
--   name: '{if}'
-    explanation: Podejmij decyzję używając `{if}`.
-    demo_code: |-
-        kolor {is} {ask} 'Jaki jest twój ulubiony kolor?'
-        {if} kolor {is} zielony {print} 'ładny!' {else} {print} 'meh'
--   name: '{if} z żółwiem'
-    explanation: Podejmij decyzję używając `{if}`.
-    demo_code: |-
-        odpowiedź {is} {ask} 'Jak daleko powinienem iść?'
-        {if} odpowiedź {is} daleko {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Sprawdź elementy za pomocą `{in}`.
-    demo_code: |-
-        ładne_kolory {is} zielony, żółty
-        kolor {is} {ask} 'Jaki {is} twój ulubiony kolor?'
-        {if} kolor {in} ładne_kolory {print} 'ładny!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Sprawdza czy dany klawisz na klawiaturze jest `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Nacisnąłeś A!'' {else} {print} ''Nacisnąłeś inny klawisz!'''
 6:
 -   name: '{print}'
     explanation: Napisz dokładnie używając apostrofów.

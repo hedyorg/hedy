@@ -51,34 +51,6 @@
     demo_code: |-
         name {is} Hedy
         {print} 'mein Name ist ' name
-5:
--   name: '{print}'
-    explanation: Benutze Anführungszeichen, um einen Text genau so auszugeben.
-    demo_code: '{print} ''Hallo. Willkommen bei Hedy.'''
--   name: '{ask}'
-    explanation: Frage etwas mit `{ask}`.
-    demo_code: |-
-        farbe {is} {ask} 'Was ist deine Lieblingsfarbe?'
-        {print} farbe ' hast du am liebsten!'
--   name: '{if}'
-    explanation: Treffe eine Auswahl mit `{if}`.
-    demo_code: |-
-        farbe {is} {ask} 'Was ist deine Lieblingsfarbe?'
-        {if} farbe {is} grün {print} 'hübsch!' {else} {print} 'bäh'
--   name: '{if} mit Schildkröte'
-    explanation: Triff eine Auswahl mit `{if}`.
-    demo_code: |-
-        Antwort {is} {ask} 'Wie weit soll ich gehen?'
-        {if} Antwort {is} weit {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Prüfe, ob ein Ding in einer Liste enthalten ist mit `{in}`.
-    demo_code: |-
-        schöne_farben {is} Grün, Gelb
-        farbe {is} {ask} 'Was ist deine Lieblingsfarbe?'
-        {if} farbe {in} schöne_farben {print} 'hübsch!' {else} {print} 'bäh'
--   name: '{pressed}'
-    explanation: Prüfe, ob eine gegebene Taste auf der Tastatur `{pressed}` ist.
-    demo_code: '{if} a {is} {pressed} {print} ''Du hast A gedrückt!'' {else} {print} ''Du hast eine andere Taste gedrückt!'''
 6:
 -   name: '{print}'
     explanation: Benutze Anführungszeichen, um einen Text genau so auszugeben.

@@ -43,25 +43,6 @@
 -   name: '{is}'
     explanation: Dajte nekemu besedilu ime in uporabite ukaz `{print}` brez narekovajev.
     demo_code: "ime {is} Hedy\n{print} 'moje ime je ' ime"
-5:
--   name: '{print}'
-    explanation: Izpišite natančno z uporabo narekovajev.
-    demo_code: "{print} 'Pozdravljeni, dobrodošli v Hedy.'"
--   name: '{ask}'
-    explanation: Vprašajte nekaj z ukazom `{ask}`.
-    demo_code: "barva {is} {ask} 'Katera je vaša najljubša barva?'\n{print} barva ' je vaša najljubša barva!'"
--   name: '{if}'
-    explanation: Naredite izbiro z ukazom `{if}`.
-    demo_code: "barva {is} {ask} 'Katera je vaša najljubša barva?'\n{if} barva {is} zlena {print} 'lepo!' {else} {print} 'eh...'"
--   name: '{if} z želvo'
-    explanation: Naredite izbiro z ukazom `{if}`.
-    demo_code: "odgovor {is} {ask} ' Kako daleč naj hodim?'\n{if} odgovor {is} daleč {forward} 100 {else} {forward} 5"
--   name: '{in}'
-    explanation: Elemente preverite z ukazom `{in}`.
-    demo_code: "lepe_barve {is} zelena, rumena\nbarva {is} {ask} 'Katera je vaša najljubša barva?'\n{if} barva {in} lepe_barve  {print} 'Lepo!' {else} {print} 'eh...'"
--   name: '{pressed}'
-    explanation: Preverite če je dana tipka pritisnjena na tipkovnici `{pressed}`.
-    demo_code: "{if} a {is} {pressed} {print} 'Pritisnili ste A!' {else} {print} 'Pritisnili ste neko drugo tipko!'"
 6:
 -   name: '{print}'
     explanation: Natančno natisnite z narekovaji.

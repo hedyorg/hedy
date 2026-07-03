@@ -55,34 +55,6 @@
     demo_code: |-
         nev {is} Hedy
         {print} 'A nevem ' nev
-5:
--   name: print
-    explanation: Pontos kiíratás idézójelekkel.
-    demo_code: print 'Szia, üdvözlünk a Hedy-nél.'
--   name: ask
-    explanation: Kérdezz valamit az `ask`utasítással.
-    demo_code: |-
-        szin is ask 'Mi a kedvenc színed?'
-        print szin ' a kedvenced!'
--   name: if
-    explanation: Válassz az `{if}` utasítással.
-    demo_code: |-
-        szin is ask 'Mi a kedvenc színed?'
-        if szin is zöld print 'szép!' else print 'csúnya'
--   name: if utasítás a teknőssel
-    explanation: Válassz az `{if}` utasítással.
-    demo_code: |-
-        valasz is ask 'Milyen messze menjek?'
-        if valasz is messze forward 100 else forward 5
--   name: '{in}'
-    explanation: 'Ellenőrizd az elemeket ezzel: `{in}`.'
-    demo_code: |-
-        szép_színek {is} zöld, sárga
-        szín {is} {ask} 'Melyik a kedvenc színed?'
-        {if} szín {in} szép_színek {print} 'szép!' {else} {print} 'nem szép'
--   name: '{pressed}'
-    explanation: Ellenőrizze hogy a `{pressed}` kulcs a billentyűzeten van-e.
-    demo_code: '{if} a {is} {pressed} {print} ''Megnyomtad az A-t!'' {else} {print} ''Megynyomtál egy másik gombot!'''
 6:
 -   name: print
     explanation: Pontos kiíratás aposztrófokkal.

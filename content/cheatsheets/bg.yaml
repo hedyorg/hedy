@@ -55,34 +55,6 @@
     demo_code: |-
         име is Иван Димитров Коларов
         print 'Казвам се ' име '.'
-5:
--   name: print
-    explanation: Принтирай точно думите в кавички
-    demo_code: print 'Това е изречение. Повече изречения образуват текст.'
--   name: ask
-    explanation: Запитай с командата `ask`.
-    demo_code: |-
-        възраст is ask 'На колко си години?'
-        print 'Ти си на ' възраст ' години!'
--   name: if
-    explanation: Направи избор с командите `if` и `else`.
-    demo_code: |-
-        цвят is ask 'кой е любимият ти цвят?'
-        if цвят is бял print 'Красив е!' else print 'става'
--   name: if with turtle
-    explanation: Направи избор с `if`
-    demo_code: |-
-        отговор is ask 'Колко метра да вървя напред?'
-        if отговор is далече forward 100 else forward 5
--   name: '{in}'
-    explanation: Check elements with `{in}`
-    demo_code: |-
-        красиви_цветове {is} зелено, жълто
-        цвят {is} {ask} 'Кой is е любимият ти цвят?'
-        {if} цвят {in} красиви_цветове {print} 'красиво!!' {else}  {print} 'meh'
--   name: '{pressed}'
-    explanation: Проверете дали даден клавиш на клавиатурата е `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} "Ти натисна A!" {else} {print} "Ти натисна друг клавиш!"'
 6:
 -   name: print
     explanation: Принтирай точно думите в кавички

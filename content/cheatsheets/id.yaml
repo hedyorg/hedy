@@ -56,34 +56,6 @@
     demo_code: |-
         nama {is} Hedy
         {print} 'nama saya adalah ' nama
-5:
--   name: '{print}'
-    explanation: Tampilkan sama persis dengan menggunakan tanda kutip
-    demo_code: print 'Halo selamat datang di Hedy'
--   name: '{ask}'
-    explanation: Tanyakan sesuatu dengan `ask`
-    demo_code: |-
-        warna is ask 'Apa warna favoritmu?'
-        print warna ' ini adalah kesukaanmu!'
--   name: '{if}'
-    explanation: Ambillah sebuah pilihan dengan `if`
-    demo_code: |-
-        warna is ask 'Apa warna favorit kamu?'
-        if warna is hijau print 'cantik!' else print 'meh!'
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`
-    demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Check elements with `{in}`
-    demo_code: |-
-        pretty_colors {is} hijau, kuning
-        color {is} {ask} 'Apa warna kesukaanmu?'
-        {if} color {in} pretty_colors {print} 'cantik!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Kamu menekan A!'' {else} {print} ''Kamu menekan tombol lain!'''
 6:
 -   name: '{print}'
     explanation: Tampilkan sama persis menggunakan tanda kutip satu

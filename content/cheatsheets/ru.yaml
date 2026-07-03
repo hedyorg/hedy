@@ -55,34 +55,6 @@
     demo_code: |-
         имя {is} Хеди
         {print} 'меня зовут ' имя
-5:
--   name: '{print}'
-    explanation: Печатайте точно, используя кавычки.
-    demo_code: '{print} "Приветствую, добро пожаловать в Хеди."'
--   name: '{ask}'
-    explanation: Спросите что-нибудь с помощью `{ask}`.
-    demo_code: |-
-        цвет {is} {ask} 'Какой ваш любимый цвет?'
-        {print} цвет ' твой любимый!'
--   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: |-
-        цвет {is} {ask} 'Какой ваш любимый цвет?'
-        {if} цвет {is} зеленый {print} 'красивый!' {else} {print} 'мех'
--   name: '{if} с черепахой'
-    explanation: Сделайте выбор с помощью `{if}`.
-    demo_code: |-
-        ответ {is} {ask} 'Как далеко я должен идти?'
-        {if} ответ {is} далеко {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Проверяйте элементы с помощью `{in}`.
-    demo_code: |-
-        красивые_цвета {is} зеленый, желтый
-        цвет {is} {ask} 'Какой ваш любимый цвет?'
-        {if} цвет {in} красивые_цвета {print} 'красивый!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Проверьте, является ли данная клавиша на клавиатуре `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Вы нажали A!'' {else} {print} ''Вы нажали другую клавишу!'''
 6:
 -   name: '{print}'
     explanation: Печатайте точно, используя кавычки.

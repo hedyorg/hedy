@@ -55,34 +55,6 @@
     demo_code: |-
         isim {is} Hedy
         {print} 'benim adım ' isim
-5:
--   name: '{print}'
-    explanation: Tırnak işaretlerini kullanarak tam olarak yazdırın.
-    demo_code: '{print} "Merhaba, Hedy''ye hoş geldiniz."'
--   name: '{ask}'
-    explanation: '`{ask}` ile bir şeyler sorun.'
-    demo_code: |-
-        renk {is} {ask} 'En sevdiğin renk nedir?'
-        {print} renk ' senin favorin!'
--   name: '{if}'
-    explanation: '`{if}` ile seçin yapın.'
-    demo_code: |-
-        renk {is} {ask} 'En sevdiğin renk nedir?'
-        {if} renk {is} yeşil {print} 'güzel!' {else} {print} 'eh işte'
--   name: '{if} kaplumbağayla'
-    explanation: '`{if}` ile seçim yapın.'
-    demo_code: |-
-        cevap {is} {ask} 'Ne kadar yürümeliyim?'
-        {if} cevap {is} uzak {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: '`{in}` ile öğeleri kontrol edin.'
-    demo_code: |-
-        güzel_renkler {is} yeşil, sarı
-        renk {is} {ask} 'En sevdiğin renk nedir?'
-        {if} renk {in} güzel_renkler {print} 'Güzel!' {else} {print} 'eh işte'
--   name: '{pressed}'
-    explanation: '`{pressed}` ile klavyede belirli bir tuşun basılı olup olmadığını kontrol edin.'
-    demo_code: '{if} a {is} {pressed} {print} ''A ya bastın!'' {else} {print} ''Başka bir tuşa bastın!'''
 6:
 -   name: '{print}'
     explanation: Tırnak işaretlerini kullanarak tam olarak yazdırın.

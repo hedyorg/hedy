@@ -54,34 +54,6 @@
     demo_code: |-
         namme {is} Hedy
         {print} 'ik bin ' namme
-5:
--   name: print
-    explanation: Eat letterlik printe mei `print`.
-    demo_code: print 'Hoi wolkom by Hedy.'
--   name: ask
-    explanation: Eat freegje mei `ask`.
-    demo_code: |-
-        kleur is ask 'Wat is dyn favorite kleur?'
-        print 'Dyn favorite is dus ' kleur
--   name: if
-    explanation: In kar meitsje mei `if`
-    demo_code: |-
-        kleur is ask 'Wat is dyn favorite kleur?'
-        if kleur is grien print 'kreas!' else print 'minder kreas'
--   name: if mei teken-skyldpod
-    explanation: In kar meitsje mei `if`
-    demo_code: |-
-        antwurd is ask 'Hoe fier moat ik rinne?'
-        if antwurd is fier forward 100 else forward 5
--   name: '{in}'
-    explanation: Check elements with `{in}`
-    demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: print
     explanation: Eat letterlik printe mei `print`.

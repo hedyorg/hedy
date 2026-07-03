@@ -66,33 +66,18 @@
         sport {is} {ask} 'Wat is je lievelingssport?'
         {print} 'Jouw favoriet is dus ' sport
 5:
--   name: '{print}'
-    explanation: Print letterlijk met aanhalingstekens.
-    demo_code: '{print} ''Hallo, welkom bij Hedy.'''
--   name: '{ask}'
-    explanation: Iets vragen met `{ask}`.
-    demo_code: |-
-        kleur {is} {ask} 'Wat is je lievelingskleur?'
-        {print} kleur 'is je lievelingskleur!'
 -   name: '{if}'
     explanation: Maak een keuze met `{if}`.
     demo_code: |-
-        kleur {is} {ask} 'Wat is je lievelingskleur?'
-        {if} kleur {is} groen {print} 'mooi!' {else} {print} 'bah'
--   name: '{if} met de tekenschildpad'
+        lievelingskleur {is} {ask} 'Wat is je lievelingskleur?'
+        {if} lievelingskleur {is} groen {print} 'mooi!' 
+        {else} {print} 'bah'
+-   name: '{else}'
     explanation: Maak een keuze met `{if}`.
     demo_code: |-
-        antwoord {is} {ask} 'Hoe ver moet ik lopen?'
-        {if} antwoord {is} ver {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Kijk of een onderdeel erin zit met `{in}`.
-    demo_code: |-
-        mooie_kleuren {is} groen, geel
-        kleur {is} {ask} 'Wat is jouw lievelingskleur?'
-        {if} kleur {in} mooie_kleuren {print} 'mooi!' {else} {print} 'bah'
--   name: '{pressed}'
-    explanation: Controleer of een toets op het toetsenbord is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Je hebt A ingedrukt!'' {else} {print} ''Je hebt een andere toets dan A ingedrukt!'''
+        lievelingskleur {is} {ask} 'Wat is je lievelingskleur?'
+        {if} lievelingskleur {is} groen {print} 'mooi!' 
+        {else} {print} 'bah'
 6:
 -   name: '{print}'
     explanation: Iets letterlijk printen met aanhalingstekens.

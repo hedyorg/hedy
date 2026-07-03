@@ -54,34 +54,6 @@
     demo_code: |-
         jina is Juma
         print 'Naitwa ' jina
-5:
--   name: '{print}'
-    explanation: Tumia fungua semi na funga semi ya aina '' ukitumia `print`
-    demo_code: print 'Jambo!! Karibu Hedy.'
--   name: '{ask}'
-    explanation: Uliza maswali kwa kutumia neno `ask`.
-    demo_code: |-
-        mji is ask 'Unaishi wapi?'
-        print mji ', ndo ninapoishi pia.'
--   name: '{if}'
-    explanation: Fanya uamuzi kwa kutumia neno `if`
-    demo_code: |-
-        jibu is ask 'Unapenda nchi yako?'
-        if jibu is ndio print 'vizuri sana!' else print 'Uzalendo ni muhimu'
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`
-    demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Check elements with `{in}`
-    demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
 6:
 -   name: '{print}'
     explanation: Tumia fungua semi na funga semi ya aina ''

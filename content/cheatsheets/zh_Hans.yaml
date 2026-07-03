@@ -55,34 +55,6 @@
     demo_code: |-
         名字 {is} 海蒂
         {print} '我的名字是 ' 名字
-5:
--   name: '{print}'
-    explanation: 打印的内容要用引号标注清楚。
-    demo_code: '{print} ''你好欢迎来到海蒂。'''
--   name: '{ask}'
-    explanation: 用`{ask}`提出问题。
-    demo_code: |-
-        颜色 {is} {ask} '你最喜欢的颜色是什么？'
-        {print} 颜色'是你最喜欢的颜色！'
--   name: '{if}'
-    explanation: 用`{if}`条件语句进行选择。
-    demo_code: |-
-        颜色 {is} {ask} '你最喜欢的颜色是什么？'
-        {if} 颜色 {is} 绿色 {print} '漂亮！' {else} {print} '呵呵'
--   name: '{if} 条件语句与海龟绘图'
-    explanation: 用`{if}`条件语句进行选择。
-    demo_code: |-
-        答案 {is} {ask} '我应该走多远？'
-        {if} 答案 {is} 距离远至 {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: 用 `{in}`检查元素。
-    demo_code: |-
-        漂亮_颜色 {is} 绿色，黄色
-        颜色 {is} {ask} '什么 是你最喜欢的颜色？'
-        {if} 颜色 {in} 漂亮_颜色 {print} '漂亮！' {else} {print} '呵呵'
--   name: '{pressed}'
-    explanation: 检查键盘上的某个键是否按下`{pressed}` 。
-    demo_code: '{if} a {is} {pressed} {print} ''你按了A！'' {else} {print} ''你按了另一个键！'''
 6:
 -   name: '{print}'
     explanation: 打印的内容要用引号标注清楚。

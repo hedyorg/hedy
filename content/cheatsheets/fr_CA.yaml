@@ -55,34 +55,6 @@
     demo_code: |-
         nom {is} Hedy
         {print} "mon nom est " nom
-5:
--   name: '{print}'
-    explanation: Affiche exactement ce qui est entre les guillemets.
-    demo_code: '{print} "Bonjour et bienvenue à Hedy."'
--   name: '{ask}'
-    explanation: Demande quelque chose avec `{ask}`.
-    demo_code: |-
-        couleur {is} {ask} "Quelle est ta couleur préférée ?"
-        {print} couleur " est ta couleur préférée !"
--   name: '{if}'
-    explanation: Fait un choix avec `{if}`.
-    demo_code: |-
-        couleur {is} {ask} "Quelle est ta couleur préférée ?"
-        {if} couleur {is} vert {print} "joli !" {else} {print} "bof"
--   name: '{if} avec la tortue'
-    explanation: Fait un choix avec `{if}`.
-    demo_code: |-
-        réponse {is} {ask} "Jusqu'où dois-je marcher ?"
-        {if} réponse {is} loin {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Reconnaitre des éléments avec `{in}`.
-    demo_code: |-
-        jolies_couleurs {is} vert, jaune
-        couleur {is} {ask} "Quelle est ta couleur préférée ?"
-        {if} couleur {in} jolies_couleurs {print} "joli !" {else} {print} "moche"
--   name: '{pressed}'
-    explanation: Vérifier si une touche donnée du clavier est `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} "Vous avez appuyé sur A !" {else} {print} "Vous avez appuyé sur une autre touche !"'
 6:
 -   name: '{print}'
     explanation: Affiche exactement ce qui est entre les guillemets.

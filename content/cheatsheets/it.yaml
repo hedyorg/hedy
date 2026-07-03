@@ -58,34 +58,6 @@
     demo_code: |-
         nome {is} Hedy
         {print} 'Il mio nome è ' nome
-5:
--   name: print
-    explanation: Scrivi esattamente quello che metti tra virgolette
-    demo_code: print 'Ciao benvenuta/o su Hedy.'
--   name: ask
-    explanation: Chiedi qualcosa con `ask`.
-    demo_code: |-
-        colore is ask 'Qual è il tuo colore preferito?'
-        print colore ' è il tuo preferito!'
--   name: if
-    explanation: Fai una scelta con `if`.
-    demo_code: |-
-        colore is ask 'Qual è il tuo colore preferito?'
-        if colore is verde print 'carino!' else print 'mah'
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`
-    demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Check elements with `{in}`
-    demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Controlla quando un pulsante dato della tastiera è `{pressed}`.
-    demo_code: '{if} un {is} {pressed} {print} ''Hai premuto A!'' {else} {print} ''Hai premuto un altro pulsante!'''
 6:
 -   name: print
     explanation: Scrivi esattamente quello che metti tra virgolette
