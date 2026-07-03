@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Küsi midagi kasutades `{ask}` käsku.
     demo_code: '{ask} Mis on sinu lemmikvärv?'
--   name: '{echo}'
-    explanation: Korda midagi kasutades `{echo}` käsku.
+-   name: '{answer}'
+    explanation: Korda midagi kasutades `{answer}` käsku.
     demo_code: |-
         {ask} Mis on su lemmikvärv?
-        {echo} nii et su lemmikvärv on
--   name: '{print} emotikonid'
-    explanation: Prindi emotikon `{print}` käsuga.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} nii et su lemmikvärv on {answer}
 -   name: '{forward}'
     explanation: Tõmba joon kasutades `{forward}` käsku.
     demo_code: '{forward} 100'

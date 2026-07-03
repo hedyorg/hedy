@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Pregunta alguna cosa amb `{ask}`.
     demo_code: '{ask} Quin és el teu color preferit?'
--   name: '{echo}'
-    explanation: Repeteix el que vulguis usant `{echo}`.
+-   name: '{answer}'
+    explanation: Repeteix el que vulguis usant `{answer}`.
     demo_code: |-
         {ask} Quin és el teu color preferit?
-        {echo} així que el teu color preferit és el
--   name: '{print} emoticones'
-    explanation: Imprimeix un emoticona amb `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} així que el teu color preferit és el {answer}
 -   name: '{forward}'
     explanation: Dibuixa una línia amb `{forward}`.
     demo_code: '{forward} 100'

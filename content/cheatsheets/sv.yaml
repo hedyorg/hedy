@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Fråga något med `{ask}`.
     demo_code: '{ask} Vilken är din favoritfärg?'
--   name: '{echo}'
-    explanation: Repetera något med `{echo}`.
+-   name: '{answer}'
+    explanation: Repetera något med `{answer}`.
     demo_code: |-
         {ask} Vilken är din favoritfärg?
-        {echo} så din favoritfärg är
--   name: '{print} emojis'
-    explanation: Skriv en emoji med `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} så din favoritfärg är {answer}
 -   name: '{forward}'
     explanation: Rita en linje med `{forward}`.
     demo_code: '{forward} 100'

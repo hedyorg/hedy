@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: 用`{ask}`提出问题。
     demo_code: '{ask} 你最喜欢的颜色是什么？'
--   name: '{echo}'
-    explanation: 用`{echo}`重复执行某一任务。
+-   name: '{answer}'
+    explanation: 用`{answer}`重复执行某一任务。
     demo_code: |-
         {ask} 你最喜欢的颜色是什么？
-        {echo} 所以你最喜欢的颜色是
--   name: '{print} 表情符号'
-    explanation: 用 `{print}`打印一个表情符号。
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} 所以你最喜欢的颜色是 {answer}
 -   name: '{forward}'
     explanation: 用 `{forward}`画一条线。
     demo_code: '{forward} 100'

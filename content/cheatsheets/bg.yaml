@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Задай въпрос с `{ask}`.
     demo_code: '{ask} Кой е любимият ти цвят?'
--   name: '{echo}'
-    explanation: Повтори това, което си написал(а) с `{echo}`.
+-   name: '{answer}'
+    explanation: Повтори това, което си написал(а) с `{answer}`.
     demo_code: |-
         {ask} Кой е любимият ти цвят?
-        {echo} значи любимият ти цвят е
--   name: '{print} емотикони'
-    explanation: Отпечатване на емотикон с `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} значи любимият ти цвят е{answer}
 -   name: '{forward}'
     explanation: Начертайте линия с `{forward}`.
     demo_code: '{forward} 100'

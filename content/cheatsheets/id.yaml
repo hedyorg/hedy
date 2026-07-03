@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Tanyakan sesuatu dengan `ask`
     demo_code: ask Apa warna favoritmu?
--   name: '{echo}'
-    explanation: Ulangi sesuatu dengan `echo`
+-   name: '{answer}'
+    explanation: Ulangi sesuatu dengan `{answer}`
     demo_code: |-
-        ask Apa warna favoritmu?
-        echo maka warna favoritmu adalah
--   name: '{print} emojis'
-    explanation: print an emoji with `{print}`
-    demo_code: '{print} 🙋 🌍 ❗'
+        {ask} Apa warna favoritmu?
+        {print} maka warna favoritmu adalah {answer}
 -   name: '{forward}'
     explanation: Draw a line with `{forward}`.
     demo_code: '{forward} 100'

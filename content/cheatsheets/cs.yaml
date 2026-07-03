@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Zeptej se na něco pomocí `{ask}`.
     demo_code: '{ask} Jaká je tvoje nejoblíbenější barva?'
--   name: '{echo}'
-    explanation: Zopakuj něco pomocí `{echo}`.
+-   name: '{answer}'
+    explanation: Zopakuj něco pomocí `{answer}`.
     demo_code: |-
         {ask} Jaká je tvoje nejoblíbenější barva?
-        {echo}  Tvoje nejoblíbenější barva tedy je
--   name: '{print} emoji'
-    explanation: Vypiš emoji pomocí `{print}`
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} Tvoje nejoblíbenější barva tedy je {answer}
 -   name: '{forward}'
     explanation: Nakresli čáru pomocí `{forward}`.
     demo_code: '{forward} 100'

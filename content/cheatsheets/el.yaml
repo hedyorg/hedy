@@ -1,18 +1,17 @@
 1:
--   name: print
-    explanation: Εμφάνισε κάτι με την `print`.
-    demo_code: print Γεια, καλωσήλθες στη Hedy!
--   name: ask
-    explanation: Ρώτησε κάτι με την `ask`.
-    demo_code: ask Ποιο είναι το αγαπημένο σου χρώμα;
--   name: echo
-    explanation: Eπανάλαβε κάτι χρησιμοποιώντας την `{echo}`.
+-   name: {print}
+    explanation: Εμφάνισε κάτι με την `{print}`.
+    demo_code: |-
+        {print} Γεια, καλωσήλθες στη Hedy!
+-   name: {ask}
+    explanation: Ρώτησε κάτι με την `{ask}`.
     demo_code: |-
         {ask} Ποιο είναι το αγαπημένο σου χρώμα;
-        {echo} ώστε το αγαπημένο σου χρώμα είναι το
--   name: '{print} emojis'
-    explanation: εμφάνιση ενός emoji με `{print}`
-    demo_code: '{print} 🙋 🌍 ❗'
+-   name: {answer}
+    explanation: Eπανάλαβε κάτι χρησιμοποιώντας την `{answer}`.
+    demo_code: |-
+        {ask} Ποιο είναι το αγαπημένο σου χρώμα;
+        {print} ώστε το αγαπημένο σου χρώμα είναι το {answer}
 -   name: '{forward}'
     explanation: Σχεδίασε μια γραμμή με `{forward}`.
     demo_code: '{forward} 100'

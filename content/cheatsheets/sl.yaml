@@ -5,12 +5,11 @@
 -   name: '{ask}'
     explanation: Vprašajte kaj z `{ask}`.
     demo_code: '{ask} Katero barvo imate najrajši?'
--   name: '{echo}'
-    explanation: Ponovite nekaj z `{echo}`.
-    demo_code: "{ask} Katero barvo imate najrajši?\n{echo} torej je vaša najljubša barva"
--   name: '{print} emoji-ji'
-    explanation: Izpiši emoji z `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{answer}'
+    explanation: Ponovite nekaj z `{answer}`.
+    demo_code: |-
+        {ask} Katero barvo imate najrajši?
+        {print} torej je vaša najljubša barva {answer}
 -   name: '{forward}'
     explanation: Naredite črto z `{forward}`.
     demo_code: '{forward} 100'

@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: '`{ask}`로 물어본다.'
     demo_code: '{ask} 너의 가장 좋아하는 색깔은 무었이니?'
--   name: '{echo}'
-    explanation: '`{echo}`를 사용하여 무엇인가를 반복한다.'
+-   name: '{answer}'
+    explanation: '`{answer}`를 사용하여 무엇인가를 반복한다.'
     demo_code: |-
         {ask} 너의 가장 좋아하는 색깔은 무었이니?
-        {echo} so your favorite 색깔 is
--   name: '{print} emojis'
-    explanation: '`{print}`로 이모지를 출력 합니다.'
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} so your favorite 색깔 is {answer}
 -   name: '{forward}'
     explanation: '`{forward}`로 선을 그립니다.'
     demo_code: '{forward} 100'

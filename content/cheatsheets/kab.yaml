@@ -5,18 +5,21 @@
 -   name: '{ask}'
     explanation: Ssuter kra s `{ask}`.
     demo_code: '{ask} D acu yini i tesmenyafayeḍ?'
--   name: '{echo}'
-    explanation: Ales kra s useqdec n `{echo}`.
-    demo_code: "{ask} D anwa ini akk i tḥemmleḍ?\n{echo} Ihi, ini akk i tḥemmleḍ d"
--   name: '{print} imujiten'
-    explanation: Sken imujit s `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+-   name: '{answer}'
+    explanation: Ales kra s useqdec n `{answer}`.
+    demo_code: |-
+        {ask} D anwa ini akk i tḥemmleḍ?
+        {print} Ihi, ini akk i tḥemmleḍ d {answer}
 -   name: '{forward}'
     explanation: Suɣen izirig s `{forward}`.
     demo_code: '{forward} 100'
 -   name: '{turn}'
     explanation: Zzi ifker ara isunuɣen s `{turn}`.
-    demo_code: "{forward} 25\n{turn} {left}\n{forward} 25\n{turn} {right}"
+    demo_code: |-
+        {forward} 25
+        {turn} {left}
+        {forward} 25
+        {turn} {right}
 2:
 -   name: '{is}'
     explanation: Mudd isem i wawal ara tesqedceḍ deg wahil s useqdec n `{is}`. Tzemreḍ ad tferneḍ kečč isem-a.

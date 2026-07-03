@@ -2,31 +2,25 @@
 -   name: '{print}'
     explanation: Eat printe mei `{print}`.
     demo_code: '{print} Hoi wolkom by Hedy!'
--   name: freegje
+-   name: '{ask}'
     explanation: Eat freegje mei `{ask}`.
     demo_code: '{ask} Wat is dyn favorite kleur?'
--   name: echo
-    explanation: Eat werhelje mei `{echo}`.
+-   name: {answer}
+    explanation: Eat werhelje mei `{answer}`.
     demo_code: |-
         {ask} Wat is dyn favorite kleur?
-        {echo} Dus dyn favorite kleur is...
--   name: foarút
+        {print} Dus dyn favorite kleur is... {answer}
+-   name: '{forward}'
     explanation: Een line tekenje mei `{forward}`.
     demo_code: '{forward} 100'
--   name: draaie
+-   name: '{turn}'
     explanation: De teken-skyldpod draaie mei `{turn}`
     demo_code: |-
         {forward} 25
         {turn} {left}
         {forward} 25
         {turn} {right}
--   name: '{turn}'
-    explanation: turn the drawing turtle with `{turn}`
-    demo_code: |-
-        {forward} 25
-        {turn} {left}
-        {forward} 25
-        {turn} {right}
+
 2:
 -   name: is
     explanation: In wurd in namme jaan mei `is`. Meist de namme sels kieze.

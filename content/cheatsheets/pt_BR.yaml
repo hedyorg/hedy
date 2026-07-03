@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Pergunte algo com `{ask}`.
     demo_code: '{ask} Qual a sua cor favorita?'
--   name: '{echo}'
-    explanation: Repita algo usando `{echo}`.
+-   name: '{answer}'
+    explanation: Repita algo usando `{answer}`.
     demo_code: |-
         {ask} Qual a sua cor favorita?
-        {echo} então a sua cor favorita é
--   name: '{print} emojis'
-    explanation: Imprima um emoji com `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} então a sua cor favorita é {answer}
 -   name: '{forward}'
     explanation: Desenhe uma linha com `{forward}`.
     demo_code: '{forward} 100'

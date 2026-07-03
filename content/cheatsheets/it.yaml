@@ -1,18 +1,17 @@
 1:
--   name: print
-    explanation: Scrivi qualcosa con `print`.
-    demo_code: print Ciao benvenuta/o su Hedy!
--   name: ask
-    explanation: Chiedi qualcosa con `ask`.
-    demo_code: ask Qual è il tuo colore preferito?
--   name: echo
-    explanation: Ripeti qualcosa usando `echo`.
+-   name: {print}
+    explanation: Scrivi qualcosa con `{print}`.
     demo_code: |-
-        ask Qual è il tuo colore preferito?
-        echo Quindi il tuo colore preferito è
--   name: '{print} emojis'
-    explanation: print an emoji with `{print}`
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} Ciao benvenuta/o su Hedy!
+-   name: {ask}
+    explanation: Chiedi qualcosa con `{ask}`.
+    demo_code: |-
+        {ask} Qual è il tuo colore preferito?
+-   name: {answer}
+    explanation: Ripeti qualcosa usando `{answer}`.
+    demo_code: |-
+        {ask} Qual è il tuo colore preferito?
+        {print} Quindi il tuo colore preferito è {answer}
 -   name: '{forward}'
     explanation: Draw a line with `{forward}`.
     demo_code: '{forward} 100'

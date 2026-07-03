@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Запитайте щось за допомогою `{ask}`.
     demo_code: '{ask} Який ваш улюблений колір?'
--   name: '{echo}'
-    explanation: Повторіть щось, використовуючи `{echo}`.
+-   name: '{answer}'
+    explanation: Повторіть щось, використовуючи `{answer}`.
     demo_code: |-
         {ask} Який ваш улюблений колір?
-        {echo} тож ваш улюблений колір
--   name: '{print} емодзі'
-    explanation: Надрукуйте емодзі за допомогою `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} тож ваш улюблений колір {answer}
 -   name: '{forward}'
     explanation: Проведіть лінію за допомогою `{forward}`.
     demo_code: '{forward} 100'

@@ -1,18 +1,17 @@
 1:
--   name: print
-    explanation: কিছু `print` করার থাকলে `print` ব্যবহার করুন
-    demo_code: print হেডিতে আপনার স্বাগত!
--   name: ask
-    explanation: কিছু `ask` করার থাকলে `ask` ব্যবহার করুন
-    demo_code: ask আপনার প্রিয় রং কি ?
--   name: echo
-    explanation: কিছু পুনরাবৃত্তি করার থাকলে `echo` ব্যবহার করুন
+-   name: {print}
+    explanation: কিছু `{print}` করার থাকলে `{print}` ব্যবহার করুন
     demo_code: |-
-        ask আপনার প্রিয় রং কি ?
-        echo তো আপনার প্রিয় রং হচ্ছে "
--   name: '{print} emojis'
-    explanation: print an emoji with `{print}`
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} হেডিতে আপনার স্বাগত!
+-   name: {ask}
+    explanation: কিছু `{ask}` করার থাকলে `{ask}` ব্যবহার করুন
+    demo_code: |-
+        {ask} আপনার প্রিয় রং কি ?
+-   name: {answer}
+    explanation: কিছু পুনরাবৃত্তি করার থাকলে `{answer}` ব্যবহার করুন
+    demo_code: |-
+        {ask} আপনার প্রিয় রং কি ?
+        {print} তো আপনার প্রিয় রং হচ্ছে {answer}
 -   name: '{forward}'
     explanation: Draw a line with `{forward}`.
     demo_code: '{forward} 100'

@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: 'Kérdezz valamit: `{ask}`.'
     demo_code: '{ask} Mi a kedvenc színed?'
--   name: '{echo}'
-    explanation: 'Ismételj valamit: `{echo}`.'
+-   name: '{answer}'
+    explanation: 'Ismételj valamit: `{answer}`.'
     demo_code: |-
         {ask} Mi a kedvenc színed?
-        {echo} A kedvenc színed tehát
--   name: '{print} emoji'
-    explanation: 'Rajzolj egy emojit: `{print}`.'
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} A kedvenc színed tehát {answer}
 -   name: '{forward}'
     explanation: 'Rajzolj egy vonalat: `{forward}`.'
     demo_code: '{forward} 100'
