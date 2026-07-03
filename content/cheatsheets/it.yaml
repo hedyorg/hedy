@@ -49,19 +49,15 @@
         animals {is} cat, dog, cow
         {remove} dog {from} animals
 4:
--   name: print
+-   name: {print}
     explanation: Scrivi esattamente quello che metti tra virgolette
-    demo_code: print 'Ciao benvenuta/o su Hedy.'
--   name: is
-    explanation: Dai un nomignolo ad un testo e scrivilo con `print` senza usare le virgolette
     demo_code: |-
-        nome is Hedy
-        print 'Il mio nome è ' nome
--   name: ask
-    explanation: Chiedi qualcosa con `ask`.
+        {print} 'Ciao benvenuta/o su Hedy.'
+-   name: {is}
+    explanation: Dai un nomignolo ad un testo e scrivilo con `{print}` senza usare le virgolette
     demo_code: |-
-        colore is ask 'Qual è il tuo colore preferito?'
-        print colore ' è il tuo preferito!'
+        nome {is} Hedy
+        {print} 'Il mio nome è ' nome
 5:
 -   name: print
     explanation: Scrivi esattamente quello che metti tra virgolette

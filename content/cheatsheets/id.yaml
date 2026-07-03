@@ -49,17 +49,13 @@
 4:
 -   name: '{print}'
     explanation: Tampilkan sama persis dengan menggunakan tanda kutip
-    demo_code: print 'Halo selamat datang di Hedy'
+    demo_code: |-
+        {print} 'Halo selamat datang di Hedy'
 -   name: '{is}'
-    explanation: Berikan sebuah nama ke sebuah teks dan `print` tanpa tanda kutip
+    explanation: Berikan sebuah nama ke sebuah teks dan `{print}` tanpa tanda kutip
     demo_code: |-
-        nama is Hedy
-        print 'nama saya adalah ' nama
--   name: '{ask}'
-    explanation: Tanyakan sesuatu dengan `ask`
-    demo_code: |-
-        warna is ask 'Apa warna favoritmu?'
-        print warna ' ini adalah kesukaanmu!'
+        nama {is} Hedy
+        {print} 'nama saya adalah ' nama
 5:
 -   name: '{print}'
     explanation: Tampilkan sama persis dengan menggunakan tanda kutip

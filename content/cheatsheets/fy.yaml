@@ -45,19 +45,15 @@
         animals {is} cat, dog, cow
         {remove} dog {from} animals
 4:
--   name: print
-    explanation: Eat letterlik printe mei `print`.
-    demo_code: print 'Hoi wolkom by Hedy'
--   name: is
-    explanation: In stikje tekst in namme jaan mei `is` en printe sûnder oanhellingstekens
+-   name: '{print}'
+    explanation: Eat letterlik printe mei `{print}`.
     demo_code: |-
-        namme is Hedy
-        print 'ik bin ' namme
--   name: ask
-    explanation: Eat freegje mei `ask`
+        {print} 'Hoi wolkom by Hedy'
+-   name: '{is}'
+    explanation: In stikje tekst in namme jaan mei `{is}` en printe sûnder oanhellingstekens
     demo_code: |-
-        kleur is ask 'Wat is dyn favorite kleur?'
-        print 'Dyn favorite is dus ' kleur
+        namme {is} Hedy
+        {print} 'ik bin ' namme
 5:
 -   name: print
     explanation: Eat letterlik printe mei `print`.

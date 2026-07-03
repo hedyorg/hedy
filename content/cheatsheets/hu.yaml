@@ -50,16 +50,11 @@
 -   name: '{print}'
     explanation: Pontos kiíratás idézőjelekkel.
     demo_code: '{print} "Szia, üdvözlünk a Hedy-nél."'
--   name: is
+-   name: {is}
     explanation: Adj nevet a szövegnek és írasd ki `{print}` segítségével idézőjelek nélkül.
     demo_code: |-
-        nev is Hedy
-        print 'A nevem ' nev
--   name: ask
-    explanation: Kérdezz valamit `ask`segítségével.
-    demo_code: |-
-        szin is ask 'Mi a kedvenc színed?'
-        print szin ' a kedvenc színed !'
+        nev {is} Hedy
+        {print} 'A nevem ' nev
 5:
 -   name: print
     explanation: Pontos kiíratás idézójelekkel.

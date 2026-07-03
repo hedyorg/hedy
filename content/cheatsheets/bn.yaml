@@ -45,17 +45,15 @@
         animals {is} cat, dog, cow
         {remove} dog {from} animals
 4:
--   name: print
-    explanation: হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে
-    demo_code: print 'হ্যালো হেডিতে আপনার স্বাগত'
--   name: is
-    explanation: কিছু পাঠকে নাম দিন এবং কোটেশন চিহ্ন ছাড়া print করুন
-    demo_code: "নাম is  হেডি \nprint 'আমার নাম is ' নাম"
--   name: ask
-    explanation: কিছু ask করার থাকলে `ask` ব্যবহার করুন
+-   name: {print}
+    explanation: হুবহু {print} করুন কোটেশন চিহ্ন ব্যবহার  করে
+    demo_code: |- 
+        {print} 'হ্যালো হেডিতে আপনার স্বাগত'
+-   name: {is}
+    explanation: কিছু পাঠকে নাম দিন এবং কোটেশন চিহ্ন ছাড়া {print} করুন
     demo_code: |-
-        রং is ask 'আপনার প্রিয় রং কি?'
-        print রং 'is আপনার প্রিয়!'
+        নাম {is}  হেডি 
+        {print} 'আমার নাম is ' নাম
 5:
 -   name: print
     explanation: হুবহু print করুন কোটেশন চিহ্ন ব্যবহার  করে

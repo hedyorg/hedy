@@ -49,19 +49,15 @@
         animals {is} γάτα, σκύλος, αγελάδα
         {remove} σκύλος {from} animals
 4:
--   name: print
+-   name: {print}
     explanation: Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά
-    demo_code: print 'Γειά, καλωσήλθες στη Hedy.'
--   name: is
-    explanation: Δώσε ένα όνομα σε κάποιο κείμενο και εμφάνισε με την `print` χωρίς εισαγωγικά
     demo_code: |-
-        name is Hedy
-        print 'Το όνομά μου είναι ' name
--   name: ask
-    explanation: Ρώτησε κάτι με την `ask`.
+        {print} 'Γειά, καλωσήλθες στη Hedy.'
+-   name: {is}
+    explanation: Δώσε ένα όνομα σε κάποιο κείμενο και εμφάνισε με την `{print}` χωρίς εισαγωγικά
     demo_code: |-
-        color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;?'
-        print 'το ' color ' είναι το αγαπημένο σου!'
+        name {is} Hedy
+        {print} 'Το όνομά μου είναι ' name
 5:
 -   name: print
     explanation: Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά
