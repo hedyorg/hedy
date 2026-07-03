@@ -4188,6 +4188,18 @@ adventures:
                     {elif} mood {is} _
                     {play} _
                     ```
+                answer_code: |-
+                    ```
+                    mood {is} {ask} 'How are you feeling today?'
+                    {if} mood {is} happy
+                        {play} C4
+                    {elif} mood {is} sad
+                        {play} C2
+                    {elif} mood {is} scared
+                        {play} C8
+                    {elif} mood {is} bored
+                        {play} C3
+                    ```
             7:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\nThis calls for musical maths! Try out the example code a couple of times with different starting numbers.\nThen, see if you can compose a song using the numbers.\n"
                 example_code: |
@@ -6154,7 +6166,7 @@ adventures:
                     In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with `{ask}` commands as well?
                     In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
                 story_text_2: |
-                    Create a similar interactive program with the childrens' song 'Down by the bay'. 
+                    Create a similar interactive program with the childrens' song 'Down by the bay'.
                 example_code: |
                     ```
                     {define} song (place)
