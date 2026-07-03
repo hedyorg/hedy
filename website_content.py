@@ -252,6 +252,7 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'park',
         'quizmaster',
         'operators',
+        'carnival',
         'for_command',
         'debugging',
         'hospital'
