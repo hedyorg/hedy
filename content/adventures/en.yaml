@@ -977,11 +977,11 @@ adventures:
                     ### Exercise
                     Fill in the correct commands after the {if} to get the program to work.
 
-                    The program should work if the player has not had a turn yet and is younger than 18.
-                    Then, a list should be displayed showing which prizes the player can choose from.
-                    If the player has enough points for a prize (see the prize list), that prize should be printed.
-                    The player can only win the video game if they are 14 years old or older.
-                    The player can only win the balloon if they are 5 years old or younger.
+                    * The program should work if the player has not had a turn yet and is younger than 18.
+                    * Then, a list should be displayed showing which prizes the player can choose from.
+                    * If the player has enough points for a prize (see the prize list), that prize should be printed.
+                    * The player can only win the video game if they are 14 years old or older.
+                    * The player can only win the balloon if they are 5 years old or younger.
 
                 example_code: |
                     ```
@@ -996,7 +996,7 @@ adventures:
                     already_had_turn = {input}('Have you already had a turn?')
 
                     # Which prizes can the player choose?
-                    {if} _ :
+                    {if} _ {or} _:
                         {print}('You may play')
                         points = {input}('How many points did you score?')
                         {print}('You can choose from these prizes:')
@@ -1007,10 +1007,10 @@ adventures:
                         {if} _ :
                             {print}('lollipop')
 
-                        {if} _ :
+                        {if} _ {and} _ :
                             {print}('video game')
 
-                        {if} _ :
+                        {if} _ {and} :
                             {print}('balloon')
 
                         chosen_prize = {input}('Which prize would you like?')
