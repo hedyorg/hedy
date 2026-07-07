@@ -17,6 +17,13 @@ function waitForUploadContaining(alias, marker, getValue, remainingAttempts = 6)
   });
 }
 
+function waitForSingleUpload(alias, assertions) {
+  cy.wait(alias, { timeout: 20000 }).then(({ request, response }) => {
+    expect(response?.statusCode).to.eq(200);
+    assertions(request.body);
+  });
+}
+
 function waitForUploadWithEmptyContent(alias, remainingAttempts = 6) {
   cy.wait(alias, { timeout: 20000 }).then(({ request, response }) => {
     expect(response?.statusCode).to.eq(200);
@@ -60,9 +67,11 @@ describe('Customize adventure redesign autosave', () => {
       win.ckSolutionEditor.setData(`<p>${solutionMarker}</p><pre data-language="Hedy"><code class="language-python">print hello</code></pre>`);
     });
 
-    waitForUploadContaining('@uploadAdventureDraft', contentMarker, (body) => body.content);
-    waitForUploadContaining('@uploadAdventureDraft', solutionMarker, (body) => body.formatted_solution_code);
-    waitForUploadContaining('@uploadAdventureDraft', '{print}', (body) => body.formatted_solution_code);
+    waitForSingleUpload('@uploadAdventureDraft', (body) => {
+      expect(body.content).to.include(contentMarker);
+      expect(body.formatted_solution_code).to.include(solutionMarker);
+      expect(body.formatted_solution_code).to.include('{print}');
+    });
   });
 
   it('uploads successfully when editor content is emptied', () => {
@@ -106,16 +115,12 @@ describe('Customize adventure redesign autosave', () => {
       );
     });
 
-    waitForUploadContaining('@uploadAdventureDraft', '{not_in}', (body) => body.formatted_content);
-    waitForUploadContaining('@uploadAdventureDraft', '{print}', (body) => body.formatted_content);
-
     // Adventure has multiple levels and should use the minimum one.
     // At minimum level, `if` should not be transformed into a keyword placeholder.
-    cy.wait('@uploadAdventureDraft', { timeout: 20000 }).then(({ request, response }) => {
-      expect(response?.statusCode).to.eq(200);
-      expect(request.body.formatted_content).to.include('{not_in}');
-      expect(request.body.formatted_content).to.include('{print} hello');
-      expect(request.body.formatted_content).to.not.include('{if}');
+    waitForSingleUpload('@uploadAdventureDraft', (body) => {
+      expect(body.formatted_content).to.include('{not_in}');
+      expect(body.formatted_content).to.include('{print} hello');
+      expect(body.formatted_content).to.not.include('{if}');
     });
   });
 });

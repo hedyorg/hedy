@@ -7,6 +7,7 @@ import { stopit, theGlobalEditor, theKeywordLanguage } from "./app";
 import { ClientMessages } from "./client-messages";
 import { HedyCodeMirrorEditorCreator } from "./cm-editor";
 import { HedySelect } from "./custom-elements";
+import { autoSave } from "./autosave";
 import { traductionMap } from "./lezer-parsers/tokens";
 
 declare let window: CustomWindow;
@@ -321,6 +322,15 @@ function addEditorExplanationButton(editor: ClassicEditor, explanationId: string
 }
 
 export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
+    const isLegacyAdventureEditPage =
+        window.location.pathname.startsWith('/for-teachers/customize-adventure/') &&
+        !window.location.pathname.startsWith('/for-teachers/redesign/');
+
+    if (isLegacyAdventureEditPage) {
+        autoSave('customize_adventure');
+        window.addEventListener('pageshow', () => autoSave('customize_adventure'));
+    }
+
     const editorContainer = document.querySelector('#adventure-editor') as HTMLElement | null;
     const editorSolutionExampleContainer = document.querySelector('#adventure-solution-editor') as HTMLElement | null;
     const languagesDropdown = document.querySelector('#languages_dropdown') as HedySelect | null;

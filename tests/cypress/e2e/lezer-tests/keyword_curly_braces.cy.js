@@ -1,4 +1,4 @@
-import { addCurlyBracesToCode, addCurlyBracesToKeyword } from '../../../../static/js/adventure'
+import { addCurlyBracesToCode, addCurlyBracesToKeyword } from '../../../../static/js/keyword-curly-braces'
 
 
 describe('Adds curly braces around keywords, mainting the original code as much as possible', () => {
