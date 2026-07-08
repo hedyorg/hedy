@@ -33,45 +33,6 @@ jobs:
           generate_release_notes: true
 
 
-  build_windows:
-    runs-on: windows-latest
-    needs: setup_release
-    steps:
-    - uses: actions/checkout@v6
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v6
-      with:
-        python-version: '3.12'
-        cache: 'pip'
-    - name: Set up NodeJS 18
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'npm'
-    - name: 'Install npx'
-      run: sudo npm install -g npx
-    - run: pip install -r requirements.txt
-      name: 'Python requirements'
-    - run: doit run _offline
-    - name: Smoke test the build
-      run: cd dist && offlinehedy/run-hedy-server --smoketest
-
-
-    - name: Create zip file
-      # Because we're on Windows
-      run: |
-        cd dist/offlinehedy &&  Compress-Archive -Path . -Destination ../../offlinehedy-${{ needs.setup_release.outputs.version }}-windows.zip
-
-    - name: Upload Assets
-      if: needs.setup_release.outputs.created
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: ${{ needs.setup_release.outputs.version }}
-        working_directory: .
-        files: |
-          *.zip
-
-
   build_ubuntu:
     runs-on: ubuntu-latest
     needs: setup_release
@@ -102,6 +63,45 @@ jobs:
       run: |
         cd dist/offlinehedy && zip -r ../../offlinehedy-${{ needs.setup_release.outputs.version }}-ubuntu.zip .
 
+
+    - name: Upload Assets
+      if: needs.setup_release.outputs.created
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ needs.setup_release.outputs.version }}
+        working_directory: .
+        files: |
+          *.zip
+
+
+  build_windows:
+    runs-on: windows-latest
+    needs: setup_release
+    steps:
+    - uses: actions/checkout@v6
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+    - name: Set up NodeJS 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+    - name: 'Install npx'
+      run: sudo npm install -g npx
+    - run: pip install -r requirements.txt
+      name: 'Python requirements'
+    - run: doit run _offline
+    - name: Smoke test the build
+      run: cd dist && offlinehedy/run-hedy-server --smoketest
+
+
+    - name: Create zip file
+      # Because we're on Windows
+      run: |
+        cd dist/offlinehedy &&  Compress-Archive -Path . -Destination ../../offlinehedy-${{ needs.setup_release.outputs.version }}-windows.zip
 
     - name: Upload Assets
       if: needs.setup_release.outputs.created
