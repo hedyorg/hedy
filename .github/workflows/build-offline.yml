@@ -18,9 +18,12 @@ jobs:
       version: ${{ steps.daily-version.outputs.version }}
       created: ${{ steps.daily-version.outputs.created }}
     steps:
+      - uses: actions/checkout@v6
+
       - uses: fregante/daily-version-action@v2
         name: Create tag if necessary
         id: daily-version
+
       - if: steps.daily-version.outputs.created
         name: Create Release
         uses: shogo82148/actions-create-release@v1
