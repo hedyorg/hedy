@@ -49,7 +49,7 @@ jobs:
         node-version: 18
         cache: 'npm'
     - name: 'Install npx'
-      run: npm install -g npx
+      run: sudo npm install -g npx
     - run: pip install -r requirements.txt
       name: 'Python requirements'
     - run: doit run _offline
