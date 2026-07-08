@@ -95,12 +95,76 @@ jobs:
         path: offlinehedy-${{ needs.setup_release.outputs.version }}-windows.zip
 
 
+  build_macos_silicon:
+    runs-on: macos-latest
+    needs: setup_release
+    steps:
+    - uses: actions/checkout@v6
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+    - name: Set up NodeJS 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+    - run: pip install -r requirements.txt
+      name: 'Python requirements'
+    - run: doit run _offline
+    - name: Smoke test the build
+      run: cd dist && offlinehedy/run-hedy-server --smoketest
+
+    - name: Create zip file
+      run: |
+        cd dist/offlinehedy && zip -r ../../offlinehedy-${{ needs.setup_release.outputs.version }}-macos-silicon.zip .
+
+    - name: Upload zip file as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: macos_silicon_build
+        path: offlinehedy-${{ needs.setup_release.outputs.version }}-macos-silicon.zip
+
+
+  build_macos_intel:
+    runs-on: macos-26-intel
+    needs: setup_release
+    steps:
+    - uses: actions/checkout@v6
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+    - name: Set up NodeJS 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+    - run: pip install -r requirements.txt
+      name: 'Python requirements'
+    - run: doit run _offline
+    - name: Smoke test the build
+      run: cd dist && offlinehedy/run-hedy-server --smoketest
+
+    - name: Create zip file
+      run: |
+        cd dist/offlinehedy && zip -r ../../offlinehedy-${{ needs.setup_release.outputs.version }}-macos-intel.zip .
+
+    - name: Upload zip file as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: macos_intel_build
+        path: offlinehedy-${{ needs.setup_release.outputs.version }}-macos-intel.zip
+
+
   deploy_release:
     runs-on: ubuntu-latest
-    needs: [setup_release, build_ubuntu, build_windows]
+    needs: [setup_release, build_ubuntu, build_windows, build_macos_silicon, build_macos_intel]
     steps:
     - if: needs.setup_release.outputs.created
-      name: Create Release
+      name: Create release
       uses: shogo82148/actions-create-release@v1
       id: create_release
       with:
@@ -108,18 +172,28 @@ jobs:
         generate_release_notes: true
 
 
-    - name: Download ubuntu build
+    - name: Download Ubuntu build
       uses: actions/download-artifact@v5
       with:
         name: ubuntu_build
 
-    - name: Download math result for job 1
+    - name: Download Windows build
       uses: actions/download-artifact@v5
       with:
         name: windows_build
 
+    - name: Download MacOS Silicon build
+      uses: actions/download-artifact@v5
+      with:
+        name: macos_silicon_build
 
-    - name: Upload Assets
+    - name: Download MacOS Intel build
+      uses: actions/download-artifact@v5
+      with:
+        name: macos_intel_build
+
+
+    - name: Upload assets
       if: needs.setup_release.outputs.created
       uses: softprops/action-gh-release@v2
       with:
