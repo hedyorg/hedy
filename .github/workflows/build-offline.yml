@@ -112,7 +112,7 @@ jobs:
         cache: 'npm'
     - run: pip install -r requirements.txt
       name: 'Python requirements'
-    - run: doit run _offline
+    - run: doit run _offline_macos
     - name: Smoke test the build
       run: cd dist && offlinehedy/run-hedy-server --smoketest
 
@@ -144,7 +144,7 @@ jobs:
         cache: 'npm'
     - run: pip install -r requirements.txt
       name: 'Python requirements'
-    - run: doit run _offline
+    - run: doit run _offline_macos
     - name: Smoke test the build
       run: cd dist && offlinehedy/run-hedy-server --smoketest
 
