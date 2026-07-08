@@ -49,20 +49,18 @@ jobs:
         node-version: 18
         cache: 'npm'
     - name: 'Install npx'
-      run: npm install -g npx
+      run: sudo npm install -g npx
     - run: pip install -r requirements.txt
       name: 'Python requirements'
     - run: doit run _offline
     - name: Smoke test the build
       run: cd dist && offlinehedy/run-hedy-server --smoketest
 
-
     - name: Install zip
       run: sudo apt-get install zip
     - name: Create zip file
       run: |
         cd dist/offlinehedy && zip -r ../../offlinehedy-${{ needs.setup_release.outputs.version }}-ubuntu.zip .
-
 
     - name: Upload Assets
       if: needs.setup_release.outputs.created
@@ -90,13 +88,12 @@ jobs:
         node-version: 18
         cache: 'npm'
     - name: 'Install npx'
-      run: sudo npm install -g npx
+      run: npm install -g npx
     - run: pip install -r requirements.txt
       name: 'Python requirements'
     - run: doit run _offline
     - name: Smoke test the build
       run: cd dist && offlinehedy/run-hedy-server --smoketest
-
 
     - name: Create zip file
       # Because we're on Windows
