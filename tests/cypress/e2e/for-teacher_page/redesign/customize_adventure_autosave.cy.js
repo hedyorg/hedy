@@ -1,4 +1,5 @@
 import { loginForTeacher } from '../../tools/login/login';
+import { uniqueName } from './helpers';
 
 function waitForUploadContaining(alias, marker, getValue, remainingAttempts = 6) {
   cy.wait(alias, { timeout: 20000 }).then(({ request, response }) => {
@@ -22,6 +23,15 @@ function waitForSingleUpload(alias, assertions) {
     expect(response?.statusCode).to.eq(200);
     assertions(request.body);
   });
+}
+
+function openNewAdventureInRedesign(adventureName = `redesign-flow-${Date.now()}`) {
+  cy.visit('/for-teachers/adventures/manage');
+  cy.getDataCy('create_new_adventure_button').should('be.visible').click();
+  cy.getDataCy('redesign_prompt_modal').should('be.visible');
+  cy.getDataCy('redesign_prompt_input').should('be.visible').clear().type(adventureName);
+  cy.getDataCy('redesign_prompt_ok_button').click();
+  cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
 }
 
 function waitForUploadWithEmptyContent(alias, remainingAttempts = 6) {
@@ -121,6 +131,91 @@ describe('Customize adventure redesign autosave', () => {
       expect(body.formatted_content).to.include('{not_in}');
       expect(body.formatted_content).to.include('{print} hello');
       expect(body.formatted_content).to.not.include('{if}');
+    });
+  });
+
+  it('uploads usage settings changes (public and levels) through redesign autosave', () => {
+    loginForTeacher('teacher1');
+    openNewAdventureInRedesign(uniqueName('usage-settings'));
+
+    cy.getDataCy('solution_example').click();
+
+    cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
+
+    let expectedPublic;
+    cy.get('input[name="adventure_public"]').then(($switch) => {
+      expectedPublic = !$switch.prop('checked');
+      cy.wrap($switch).click({ force: true });
+    });
+
+    waitForSingleUpload('@uploadAdventureDraft', (body) => {
+      expect(body.public).to.eq(expectedPublic);
+    });
+
+    let expectedLevel;
+    cy.get('input[name="adventure_levels"]').then(($levels) => {
+      const levelElements = Array.from($levels);
+      const uncheckedLevel = levelElements.find((element) => !element.checked);
+
+      if (uncheckedLevel) {
+        expectedLevel = uncheckedLevel.value;
+        cy.wrap(uncheckedLevel).check({ force: true });
+        return;
+      }
+
+      const checkedLevel = levelElements.find((element) => element.checked);
+      if (!checkedLevel) {
+        throw new Error('Expected at least one available level switch');
+      }
+
+      expectedLevel = checkedLevel.value;
+      cy.wrap(checkedLevel).check({ force: true });
+    });
+
+    waitForSingleUpload('@uploadAdventureDraft', (body) => {
+      expect(Array.isArray(body.levels)).to.eq(true);
+      expect(body.levels).to.include(expectedLevel);
+    });
+  });
+
+  it('shows and hides public adventure options when public is toggled', () => {
+    loginForTeacher('teacher1');
+    openNewAdventureInRedesign(uniqueName('public-options-flow'));
+
+    cy.getDataCy('solution_example').click();
+
+    cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
+
+    cy.get('input[name="adventure_public"]').click({ force: true });
+    cy.wait('@uploadAdventureDraft');
+    cy.get('#public_adventure_options').should('be.visible');
+    cy.get('#public_adventure_options').find('#languages_dropdown').should('exist');
+
+    cy.get('input[name="adventure_public"]').click({ force: true });
+    cy.wait('@uploadAdventureDraft');
+    cy.get('#public_adventure_options').should('have.class', 'hidden');
+  });
+
+  it('adds tags in redesigned customize adventure usage tab', () => {
+    loginForTeacher('teacher1');
+    openNewAdventureInRedesign(uniqueName('tags-flow'));
+
+    cy.getDataCy('solution_example').click();
+
+    cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
+
+    cy.get('input[name="adventure_public"]').click({ force: true });
+    cy.wait('@uploadAdventureDraft');
+    cy.get('#public_adventure_options').should('be.visible');
+
+    const tagName = uniqueName('adv-tag');
+
+    cy.intercept('POST', '/tags/create/*').as('createTag');
+    cy.getDataCy('search_tags_input').clear().type(tagName);
+    cy.getDataCy('add_adventure_tags').click({ force: true });
+    cy.wait('@createTag').then(({ request, response }) => {
+      expect(request.body).to.include(`tag=${encodeURIComponent(tagName)}`);
+      expect(response?.statusCode).to.be.oneOf([200, 400]);
     });
   });
 });
