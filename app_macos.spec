@@ -83,6 +83,6 @@ coll = COLLECT(
 app = BUNDLE(
     coll,
     name='hedy.app',
-    icon=None,
+    icon="static/images/Hedy-logo.icns",
     bundle_identifier=None,
 )
