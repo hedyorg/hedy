@@ -9,14 +9,11 @@ adventures:
                     En el nivel 1 puedes crear una historia con un protagonista que tú elijas.
 
                     En la primera línea, usa `{ask}` y pregunta quién es el personaje principal de tu historia.
-
-                    A continuación, utiliza `{print}` si necesitas mostrar una frase por pantalla.
-                    Utiliza `{echo}` si quieres que el nombre de tu personaje aparezca al final de la frase.
                 example_code: |
                     ```
                     {ask} El protagonista de esta historia es
-                    {print} El protagonista camina por un bosque
-                    {echo} Está bastante asustado
+                    {print} {answer} camina por un bosque
+                    {print} Está bastante asustado {answer}
                     {print} Por todos lados se oyen extraños ruidos
                     {print} Tiene miedo de que éste sea un bosque encantado
                     ```
@@ -43,15 +40,6 @@ adventures:
                     {sleep}
                     {print} nombre tiene miedo de que éste sea un bosque encantado
                     ```
-                story_text_2: |
-                    ### Ejercicio
-                    Ahora es momento de añadir variables a la historia que hiciste en el nivel anterior.
-                    Ve a 'Mis Programas', busca tu historia del nivel 1 y copia el código. Pega el código en tu pantalla de entrada en este nivel.
-
-                    Este código no funcionará en este nivel, porque no has usado variables aún.
-                    Cambia los comandos `{ask}` y `{echo}` en tu código a la forma correcta que aprendiste en este nivel.
-
-                    **Extra** añade un comando `{sleep}` a tu código para crear tensión en la historia.
             3:
                 story_text: |
                     En el nivel 3 puedes hacer tu historia más divertida. Puedes usar aleatoriedad para cualquier monstruo, animal, o cualquier otro obstáculo, como este:
@@ -321,50 +309,13 @@ adventures:
                     {print} ¡Hola!
                     {ask} ¿Cómo te llamas?
                     ```
-                story_text_2: |
-                    ## El comando `{echo}`
-                    Si quieres que el ordenador te repita la respuesta, puedes usar el comando `{echo}`. Se hará eco de la respuesta al final de la frase. En este ejemplo después de hola.
-                example_code_2: |
-                    ```
-                    {print} ¡Hola!
-                    {ask} ¿Cómo te llamas?
-                    {echo} hola
-                    ```
-                story_text_3: |
-                    ### Ejercicio
-                    Prueba los comandos `{ask}` y `{echo}`. Lo primero, rellena los huecos en blanco para hacer que el programa funcione.
-                    Después, haz 2 preguntas más usando el comando `{ask}`, tras cada `{ask}` usa un `{echo}` para imprimir la respuesta en pantalla.
-                example_code_3: |
-                    ```
-                    _ ¿Qué tal estás?
-                    _
-                    ```
             2:
-                story_text: |
-                    ## El comando `{ask}`
-                    Ahora que podemos usar **variables** en nuestros códigos, ya no necesitamos el comando `{echo}`.
-                    Podemos usar variables para almacenar las respuestas a nuestras pregunta y de esta manera podemos usar la respuesta a varias preguntas en nuestros códigos.
-                    Compruébalo:
-
-                    ¡De esta manera tu código se convierte interactivo!
                 example_code: |
                     ```
                     nombre {is} {ask} ¿Cómo te llamas?
                     {print} Hola nombre
                     edad {is} {ask} ¿Cuántos años tienes?
                     {print} nombre tiene edad años.
-                    ```
-                story_text_2: |
-                    ### Ejercicio
-                    En la aventura anterior has practicado estableciendo variables con el comando `{is}`.
-                    Has creado al menos 3 variables y las has usado con el comando `{print}`.
-                    Ahora, en vez de establecer las variables queremos que hagas las variables interactivas, como hicimos en nuestro ejemplo.
-
-                    Copia tu código de la aventura anterior y haz las variables interactivas usando el comando `{ask}`.
-                example_code_2: |
-                    ```
-                    favorite_animal {is} {ask} ¿Cuál es tu animal favorito?
-                    {print} Me gusta favorite_animal
                     ```
             13:
                 story_text: El último cambio que tenemos que hacer para conseguir el código en Python es cambiar `{ask}` por `{input}`.
@@ -470,9 +421,9 @@ adventures:
                     ```
                     {print} Me encanta programar
                     ¿También te encanta programar?
-                    {echo}
+                    {answer}
                     {print} ¿Cuáles son tus aficiones?
-                    {echo} Tus aficiones son
+                    {print} Tus aficiones son
                     ```
             2:
                 story_text: |-
@@ -488,7 +439,7 @@ adventures:
                     destino {ask} ¿A dónde vas de vacaciones?
                     {print} El vuelo a dstino sale a las 3 pm.
                     {ask} ¿Has facturado ya tu equipaje?
-                    {echo}
+                    {answer}
                     {print} Déjeme imprimirle su tarjeta de embarque.
                     {sleep}
                     ¡Aquí tiene! ¡Buen viaje!
@@ -754,7 +705,7 @@ adventures:
                     Entonces probablemente sepas que realmente no pueden predecir tu futuro, ¡pero sigue siendo divertido jugar!
 
                     ¡En los próximos niveles puedes aprender a crear tu propia máquina de la fortuna!
-                    En el nivel 1 puedes comenzar fácil dejando que Hedy se presente como adivina y dejes que haga `{echo}` de las respuestas de los jugadores.
+                    En el nivel 1 puedes comenzar fácil dejando que Hedy se presente como adivina y dejes que haga `{answer}` de las respuestas de los jugadores.
                     Así:
                 example_code: |
                     ```
@@ -762,7 +713,7 @@ adventures:
                     _ ¿Quién eres tú?
                     _ Déjame echar un vistazo a mi bola de cristal.
                     _ Veo... Veo...
-                    _ Tu nombre es
+                    _ Tu nombre es _
                     ```
                 story_text_2: |
                     ### Ejercicio
@@ -770,7 +721,7 @@ adventures:
                     **Extra** Cambia el código y deja que el adivino no sólo prediga tu nombre, sino también tu edad, tu equipo favorito de deporte o cualquier otra cosa sobre ti mismo.
             3:
                 story_text: |
-                    En los niveles anteriores has creado tu primera máquina de la fortuna, pero Hedy realmente no podía predecir nada, sólo `{echo}`.
+                    En los niveles anteriores has creado tu primera máquina de la fortuna, pero Hedy realmente no podía predecir nada.
                     En este nivel puedes utilizar una variable y el comando `{at} {random}` para dejar que Hedy escoja una respuesta para ti. Mira este código, por ejemplo:
                 example_code: |
                     ```
@@ -980,7 +931,7 @@ adventures:
                     {print} ¡Necesito salir de aquí!
                     {print} Hay 3 puertas...
                     {ask} ¿Cuál puerta debería escoger?
-                    {echo} Escoge la puerta
+                    {print} Escoge la puerta {answer}
                     {print} …?
                     ```
                 story_text_2: |
@@ -1217,24 +1168,11 @@ adventures:
         description: introducción al comando {is}
         levels:
             2:
-                story_text: |
-                    ## Variables
-                    Puedes nombrar una palabra con `{is}`. A esto se le llama **variable**. En este ejemplo creamos una variable llamada nombre y una variable llamada edad. Puedes usar la palabra nombre en cualquier parte de tu código y será reemplazada por Hedy, tal que así:
                 example_code: |
                     ```
                     nombre {is} Hedy
                     edad {is} 15
                     {print} nombre tiene edad años
-                    ```
-                story_text_2: |
-                    ### Ejercicio
-                    ¡Es hora de hacer tus propias variables!
-                    En el código de ejemplo hemos hecho un ejemplo de la variable `favorite_animal`. En la línea 1 la variable está establecida, y en la línea 2 usamos la variable en un comando `{print}`.
-                    En primer lugar, terminar nuestro ejemplo rellenando su animal favorito en el blanco. Luego haga al menos 3 de estos códigos usted mismo. Escoge una variable, y establece la variable con el comando `{is}`. Luego úsala con un comando `{print}`, tal como hicimos.
-                example_code_2: |
-                    ```
-                    animal_favorito {is} _
-                    {print} me gusta animal_favorito
                     ```
             7:
                 story_text: |
@@ -1471,8 +1409,8 @@ adventures:
                     ```
                     {print} Soy Hedy la lora
                     {ask} ¿Cuál es tu nombre?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Desafío
@@ -1483,8 +1421,8 @@ adventures:
                     ```
                     {print} Soy Hedy el loro
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     En el nivel anterior has hecho un loro que repetirá todo después de ti. En este nivel harás que el loro interactivo usando una variable y el comando `{ask}`.
@@ -1796,13 +1734,13 @@ adventures:
                     ```
                     {print} Bienvenido al restaurante Hedy's
                     _ ¿Qué te gustaría pedir?
-                    {echo} Así que te gustaría ordenar
+                    {print} Así que te gustaría ordenar {answer}
                     {print} ¡Gracias por su pedido!
                     {print} ¡Está en camino!
                     ```
             2:
                 story_text: |
-                    En el nivel 2 puedes ampliar su restaurante usando variables. En el nivel 1 Hedy sólo podía `{echo}` la orden una vez y sólo podía recordar lo último que se le pidió.
+                    En el nivel 2 puedes ampliar su restaurante usando variables. En el nivel 1 Hedy sólo podía recordar lo último que se le pidió.
                     ¡Ahora puedes usar variables y Hedy puede recordar tanto la comida como los ingredientes!
                 example_code: |
                     ```
@@ -1813,17 +1751,6 @@ adventures:
                     cobertura {is} {ask} ¿Te gustaría carne o verduras en eso?
                     {print} ¡La comida con cobertura está en camino!
                     ```
-                story_text_2: |
-                    ### Ejercicio
-                    Copia tu propio código del restaurante del nivel anterior a la pantalla de entrada de abajo.
-                    Corrige el código reemplazando los comandos `{ask}` y  `{echo}` y usando variables, como las que has aprendido en este nivel.
-
-                    Ahora que tu código funciona otra vez, es hora de añadir más cosas.
-                    Observa la última línea de código del ejemplo: ¡Marchando la comida `{print}` con cobertura!
-                    En esta línea se han usado 2 variables para crear un resumen de tu pedido.
-                    Ahora añade tu propio resumen de la comida y las bebidas pedidas por el cliente.
-
-                    **Extra** Ahora que has aprendido a usar variables, puedes usar tantas variables como quieras en una línea de código. ¿Puedes añadir más variables a tu código, como comer aquí o para llevar, efectivo o tarjeta, con o sin pajita etc.?
             3:
                 story_text: |
                     ¿Tienes problemas para decidir qué quieres cenar? ¡Puedes dejar que Hedy elija por ti!
@@ -2020,12 +1947,12 @@ adventures:
                 story_text: |
                     En el nivel 1 comenzamos el juego de piedra, papel o tijera.
 
-                    Con `{ask}` puedes tomar una opción, y con `{echo}` puedes repetir la opción elegida.
+                    Con `{ask}` puedes tomar una opción, y con `{answer}` puedes repetir la opción elegida.
                 example_code: |
                     ```
                     {print} ¿Qué eliges?
                     {ask} elige piedra, papel o tijera
-                    {echo} has elegido:
+                    {print} has elegido: {answer}
                     ```
                 story_text_2: |
                     ### Ejercicio
@@ -2035,18 +1962,7 @@ adventures:
                     ```
                     {print} ¿Qué escoges?
                     {ask} escoge _
-                    {echo} tu elección fue
-                    ```
-            2:
-                story_text: |
-                    En este nivel puedes practicar el uso de las variables, ¡para poder hacer el juego de piedra, papel o tijera en el siguiente nivel!
-                    ### Ejercicio
-                    Termina el código rellenando la **variable** en el espacio en blanco.
-                    Este juego no es muy interactivo, ¡pero no te preocupes! En la siguiente aventura aprenderás a usar variables con el comando `{ask}` ¡para hacer tu juego interactivo!
-                example_code: |-
-                    ```
-                    opción {is} piedra
-                    {print} Yo elijo _
+                    {print} tu elección fue {answer}
                     ```
             3:
                 story_text: |
@@ -2141,11 +2057,6 @@ adventures:
                             ganó = 'sí'
                     _
                     ```
-    rock_2:
-        name: Piedra, papel, tijeras 2
-        default_save_name: piedra_2
-        description: Parte 2 de piedra, papel, tijeras
-        levels:
             2:
                 story_text: |
                     Ahora que has aprendido a utilizar el comando `{ask}`, ¡también puedes hacer que tu código de piedra, papel o tijera sea interactivo!
