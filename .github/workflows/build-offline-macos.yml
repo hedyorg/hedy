@@ -12,24 +12,14 @@ on:
 
 
 jobs:
-  setup_release:
-    runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.daily-version.outputs.version }}
-      created: ${{ steps.daily-version.outputs.created }}
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: fregante/daily-version-action@v2
-        name: Create tag if necessary
-        id: daily-version
-
 
   build_macos_silicon:
     runs-on: macos-latest
-    needs: setup_release
     steps:
     - uses: actions/checkout@v6
+    - uses: fregante/daily-version-action@v2
+      name: Create tag if necessary
+      id: daily-version
     - name: Set up Python 3.12
       uses: actions/setup-python@v6
       with:
@@ -48,37 +38,21 @@ jobs:
 
     - name: Create zip file
       run: |
-        cd dist/offlinehedy && zip -r ../../offlinehedy-${{ needs.setup_release.outputs.version }}-macos-silicon.zip .
+        cd dist/offlinehedy && zip -r ../../offlinehedy-${{ steps.daily-version.outputs.version }}-macos-silicon.zip .
 
-    - name: Upload zip file as artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: macos_silicon_build
-        path: offlinehedy-${{ needs.setup_release.outputs.version }}-macos-silicon.zip
-
-
-  deploy_release:
-    runs-on: ubuntu-latest
-    needs: [setup_release, build_macos_silicon]
-    steps:
-    - if: needs.setup_release.outputs.created
+    - if: steps.daily-version.outputs.created
       name: Create release
       uses: shogo82148/actions-create-release@v1
       id: create_release
       with:
-        tag_name: ${{ needs.setup_release.outputs.version }}
+        tag_name: ${{ steps.daily-version.outputs.version }}
         generate_release_notes: true
 
-    - name: Download MacOS Silicon build
-      uses: actions/download-artifact@v5
-      with:
-        name: macos_silicon_build
-
     - name: Upload assets
-      if: needs.setup_release.outputs.created
+      if: steps.daily-version.outputs.created
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{ needs.setup_release.outputs.version }}
+        tag_name: ${{ steps.daily-version.outputs.version }}
         working_directory: .
         files: |
           *.zip
