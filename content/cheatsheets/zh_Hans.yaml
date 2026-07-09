@@ -112,6 +112,11 @@
         年龄 = {input}('你几岁了？')
         {if} 年龄 >= 14:
             {print}('你比我大！')
+14:
+-   name: 'creating a list'
+    explanation: 把列表的内容用中括号括起来。
+    demo_code: |-
+        水果 = ['苹果', '香蕉', '樱桃']
 16:
 -   name: '{while}循环语句'
     explanation: 我们可以在 `{while}` 循环中使用不等于。
@@ -128,36 +133,6 @@
             {print}('我们计算 ', 3 - 计数, ' 的次数更多了')
             计数 = 计数 + 1
         {print}('我们完成啦')
-14:
--   name: 'creating a list'
-    explanation: 把列表的内容用中括号括起来。
-    demo_code: |-
-        水果 = ['苹果', '香蕉', '樱桃']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print}'a 是 1'
-        {elif} a == 2:
-            {print}'a 是 2'
-        {else}:
-            {print}'a 不是 1 或 2'
--   name: '{print}'
-    explanation: 当我们使用一个 `{for}`循环语句的时候, 我们需要 在 `{for}` 后面加上一个冒号 `:` !
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} '无论是否准备好，我都会来的!'
--   name: '{if}'
-    explanation: 我们需要对所有的`{if}`条件语句做同样的处理。
-    demo_code: |-
-        颜色 = {ask} '你最喜欢的颜色是什么？'
-        {if} 颜色 == '绿色':
-            {print} '你最喜欢的颜色是绿色'
-        {else}:
-            {print} '你最喜欢的颜色不是绿色'
 18:
 -   name: '{print}'
     explanation: 你需要在`{print}`后面加上括号。

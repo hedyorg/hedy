@@ -55,22 +55,3 @@
     demo_code: |-
         име is Иван Димитров Коларов
         print 'Казвам се ' име '.'
-18:
--   name: '{print}'
-    explanation: With `{print}` you need to use parentheses
-    demo_code: '{print}(''hi!'')'
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: '{print} със променлива'
-    explanation: Със `{print}`трябва да използваш скоби и запетайки, ако принтираш повече предмети.
-    demo_code: |-
-        име= 'Hedy'
-        {print}('моето име е ', име)
--   name: питай нещо със {input}
-    explanation: Използвай`{input}` ,а не `{ask}`за да питаш нещо.
-    demo_code: |-
-        име = {input}('Какво е твоето име?')
-        {print}('Значи твоето име е ', име)

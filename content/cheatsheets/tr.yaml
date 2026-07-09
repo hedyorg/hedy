@@ -112,6 +112,11 @@
         yaş = {input}('Kaç yaşındasın?')
         {if} yaş >= 14:
             {print}('Sen benden daha yaşlısın!')
+14:
+-   name: 'creating a list'
+    explanation: Köşeli parantezler ile listeler.
+    demo_code: |-
+        meyve = ['elma', 'muz', 'kiraz']
 16:
 -   name: '{while}'
     explanation: Eşit değil ile `{while}` döngüsünü kullanabiliriz.
@@ -128,36 +133,6 @@
             {print}('Bunu ', 3 - sayaç, ' kere daha yapıyoruz')
             sayaç = sayaç + 1
         {print}('İşimizi bitirdik')
-14:
--   name: 'creating a list'
-    explanation: Köşeli parantezler ile listeler.
-    demo_code: |-
-        meyve = ['elma', 'muz', 'kiraz']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a 1 dir'
-        {elif} a == 2:
-            {print} 'a 2 dir'
-        {else}:
-            {print} 'a 1 veya 2 değildir'
--   name: '{print}'
-    explanation: Bir `{for}` kullandığımızda, `{for}` ifadesinin arkasına bir `:` koymamız gerekir!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Hazır ya da değil, işte geliyorum!'
--   name: '{if}'
-    explanation: Aynı şeyi tüm `{if}` ifadelerimiz için de yapmamız gerekiyor.
-    demo_code: |-
-        renk = {ask} 'En sevdiğin renk nedir?'
-        {if} renk == 'yeşil':
-            {print} 'En sevdiğin renk yeşil'
-        {else}:
-            {print} 'En sevdiğin renk yeşil değil'
 18:
 -   name: '{print}'
     explanation: '`{print}` ifadesinden sonra parantez kullanmanız gerekir.'

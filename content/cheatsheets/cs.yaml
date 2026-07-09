@@ -96,6 +96,11 @@
         age = {input}('How old are you?')
         {if} age >= 14:
             {print}('You are older than me!')
+14:
+-   name: 'creating a list'
+    explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
+    demo_code: |-
+        ovoce = ['jablko', 'banán', 'třešně']
 16:
 -   name: Pravdivostní while
     demo_code: |-
@@ -111,36 +116,6 @@
             {print}('Toto zopakujeme ještě ', 3 - pocet, 'krát')
             pocet = pocet + 1
         {print}('Hotovo')
-14:
--   name: 'creating a list'
-    explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
-    demo_code: |-
-        ovoce = ['jablko', 'banán', 'třešně']
-17:
--   name: '{elif}'
-    explanation: Když používáme `for`, musíme na konec příkazu s ním dát `:`!
-    demo_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Už jdu!'
--   name: '{print}'
-    explanation: To stejné musíme udělat i u `if`.
-    demo_code: |-
-        barva = ask 'Jaká je tvoje nejoblíbenější barva?'
-        if barva is 'zelená':
-            print 'Barva je zelená.'
-        else:
-            print 'Barva není zelená.'
--   name: '{if}'
-    explanation: Obdobně je třeba postupovat u všech příkazů `{if}`
-    demo_code: |-
-        a = 2
-        if a is 1:
-            print 'a je 1'
-        elif a is 2:
-            print 'a je 2'
-        else:
-            print 'a není ani 1 ani 2'
 18:
 -   name: '{print}'
     explanation: With `{print}` you need to use parentheses

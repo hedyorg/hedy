@@ -112,6 +112,11 @@
         alder = {input}('Hvor gammel er du?')
         {if} alder >= 14:
             {print}('Du er ældre end mig!')
+14:
+-   name: 'creating a list'
+    explanation: Lister med firkantede parenteser.
+    demo_code: |-
+        frugt = ['æble', 'banan', 'kirsebær']
 16:
 -   name: '{while}'
     explanation: Vi kan bruge en `{while}`-løkke sammen med ikke lig med.
@@ -128,36 +133,6 @@
             {print}('Vi gør dette ', 3 - tælle, ' flere gange')
             tælle = tælle + 1
         {print}('Vi er færdige')
-14:
--   name: 'creating a list'
-    explanation: Lister med firkantede parenteser.
-    demo_code: |-
-        frugt = ['æble', 'banan', 'kirsebær']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a er 1'
-        {elif} a == 2:
-            {print} 'a er 2'
-        {else}:
-            {print} 'a er hverken 1 eller 2'
--   name: '{print}'
-    explanation: Når vi bruger en `{for}`-løkke, skal vi lægge en `:` bag `{for}`-sætningen!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Klar eller ej, her kommer jeg!'
--   name: '{if}'
-    explanation: Vi skal gøre det samme med alle vores `{if}` sætninger.
-    demo_code: |-
-        farve = {ask} 'Hvad er din yndlingsfarve?'
-        {if} farve == 'grøn':
-            {print} 'Din yndlingsfarve er grøn'
-        {else}:
-            {print} 'Din yndlingsfarve er ikke grøn'
 18:
 -   name: '{print}'
     explanation: Efter `{print}` skal du bruge parenteser.

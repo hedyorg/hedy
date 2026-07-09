@@ -112,6 +112,11 @@
         나이 = {input}('How old are you?')
         {if} 나이 >= 14:
             {print}('You are older than me!')
+14:
+-   name: 'creating a list'
+    explanation: 대괄호가 있는 목록입니다.
+    demo_code: |-
+        과일 = ['사과', '바나나', '체리']
 16:
 -   name: '{while}'
     explanation: 우리는 `{while}` 루프를 동일하지 않게 사용할 수 있다.
@@ -128,36 +133,6 @@
             {print} ('우리는 이것을 ', 3 - 숫자, '번 할거야')
             숫자 = 숫자 + 1
         {print}('우리는 해냈어')
-14:
--   name: 'creating a list'
-    explanation: 대괄호가 있는 목록입니다.
-    demo_code: |-
-        과일 = ['사과', '바나나', '체리']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a 는 1'
-        {elif} a == 2:
-            {print} 'a 는 2'
-        {else}:
-            {print} 'a 는 1 또는 2가 아니다'
--   name: '{print}'
-    explanation: '`{for}`를 사용할 때는 `{for}` 문 뒤에 `:`를 넣어야 한다!'
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} '준비 되었거나 아니거나, 나는 출력된다!'
--   name: '{if}'
-    explanation: 우리는 우리의 모든 `{if}` 질문에 대해 똑같이 할 필요가 있다.
-    demo_code: |-
-        색깔 = {ask} '너가 가장 좋아하는 색깔은 무었이니?'
-        {if} 색깔 == '녹색':
-            {print} '너가 가장 좋아하는 색깔은 녹색이다'
-        {else}:
-            {print} '너가 가장 좋아하는 색깔 녹색이 아니다'
 18:
 -   name: '{print}'
     explanation: '`{print}` 뒤에는 괄호를 사용해야 합니다.'

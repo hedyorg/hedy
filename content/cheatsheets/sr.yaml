@@ -112,6 +112,11 @@
         године = {input}('Колико имаш година?')
         {if} године >= 14:
             {print}('Старији си од мене!')
+14:
+-   name: 'creating a list'
+    explanation: Листе са угластим заградама.
+    demo_code: |-
+        воће = ['јабука', 'банана', 'трешња']
 16:
 -   name: '{while}'
     explanation: Можемо користити `{while}` петљу са није једнако.
@@ -128,36 +133,6 @@
             {print}('Ово радимо још ', 3 - бројач, ' пута')
             бројач = бројач + 1
         {print}('Завршили смо')
-14:
--   name: 'creating a list'
-    explanation: Листе са угластим заградама.
-    demo_code: |-
-        воће = ['јабука', 'банана', 'трешња']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        а = 2
-        {if} а == 1:
-            {print} 'а је 1'
-        {elif} а == 2:
-            {print} 'а је 2'
-        {else}:
-            {print} 'а није 1 или 2'
--   name: '{print}'
-    explanation: Када користимо `{for}`, морамо ставити `:` иза `{for}` изјаве!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Ready or not, here I come!'
--   name: '{if}'
-    explanation: Морамо урадити исто са свим нашим `{if}` изјавама.
-    demo_code: |-
-        боја = {ask} 'Која је твоја омиљена боја?'
-        {if} боја == 'зелена':
-            {print} 'Твоја омиљена боја је зелена'
-        {else}:
-            {print} 'Твоја омиљена боја није зелена'
 18:
 -   name: '{print}'
     explanation: После `{print}` мораш користити заграде.

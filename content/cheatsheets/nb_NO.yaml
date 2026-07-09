@@ -112,6 +112,11 @@
         alder = {input}('Hvor gammel er du?')
         {if} alder >= 14:
             {print}('Du er eldre enn meg!')
+14:
+-   name: firkantparantes
+    explanation: Liste med firkantparanteser
+    demo_code: |-
+        frukt = ['eple', 'banan', 'kirsebær']
 16:
 -   name: '{while}'
     explanation: Vi kan bruke `{while}`løkken med ikke-lik
@@ -128,36 +133,6 @@
             {print}('Vi gjør dette ' 3 - telling ' flere ganger')
             telling = telling + 1
         {print}('Vi er ferdig å telle')
-14:
--   name: firkantparantes
-    explanation: Liste med firkantparanteser
-    demo_code: |-
-        frukt = ['eple', 'banan', 'kirsebær']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`.'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a er 1'
-        {elif} a == 2:
-            {print} 'a er 2'
-        {else}:
-            {print} 'a er ikke 1 eller 2'
--   name: '{print}'
-    explanation: Når vi bruker en `{for}` løkke, må vi legge til `:` på slutten av `{for}` linjen!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Klar eller ei, her kommer jeg!'
--   name: '{if}'
-    explanation: Vi må gjøre det samme med alle `{if}`-sjekkene våre
-    demo_code: |-
-        farge = {ask} 'Hva er din favorittfarge?'
-        {if} farge == 'grønn':
-            {print} 'Din favorittfarge er grønn'
-        {else}:
-            {print} 'Din favorittfarge er ikke grønn'
 18:
 -   name: '{print}'
     explanation: Med`{print}` må du bruke paranteser

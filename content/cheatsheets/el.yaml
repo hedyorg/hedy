@@ -58,7 +58,6 @@
     demo_code: |-
         name {is} Hedy
         {print} 'Το όνομά μου είναι ' name
-5:
 13:
 -   name: '{print}'
 -   name: '{print} with a variable'
@@ -91,6 +90,11 @@
 -   name: Μικρότερο ή ίσο
     explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
 -   name: Bigger or equal
+14:
+-   name: 'creating a list'
+    explanation: Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες.
+    demo_code: |-
+        fruit = ['μήλο', 'μπανάνα', 'κεράσι']
 16:
 -   name: '{while}'
     demo_code: |-
@@ -106,36 +110,6 @@
             {print} ('Το κάνουμε αυτό ', 3 - count, ' ακόμα φορές')
             count = count + 1
         {print}('Τελειώσαμε')
-14:
--   name: 'creating a list'
-    explanation: Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες.
-    demo_code: |-
-        fruit = ['μήλο', 'μπανάνα', 'κεράσι']
-17:
--   name: 'for με :'
-    explanation: Όταν χρησιμοποιούμε μια `for`, πρέπει να προσθέσουμε ένα `:` ύστερα από τη δήλωση `for`!
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a είναι 1'
-        {elif} a == 2:
-            {print} 'a είναι 2'
-        {else}:
-            {print} 'a δεν είναι 1 ή 2'
--   name: 'if με :'
-    explanation: Θα πρέπει να κάνουμε το ίδιο με όλες μας τις δηλώσεις `if`
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Έτοιμος ή όχι, έρχομαι!'
--   name: (Προαιρετικό) elif
-    explanation: 'Θα σου δείξουμε μια νέα εντολή που επιτρέπεται να χρησιμοποιείς: την `elif`. H `elif` σημαίνει "else if" ( αλλιώς αν ). Θα ξεκινήσουμε ελέγχοντας αν η `if` είναι αληθής. Αν αυτή δεν είναι αληθής, ελέγχουμε την `elif` και αν επίσης δεν είναι αληθής, πηγαίνουμε στην `else`.'
-    demo_code: |-
-        colour = {ask} 'Ποιο είναι το αγαπημένο σου χρώμα;'
-        {if} colour == 'πράσινο':
-            {print} 'Το αγαπημένο σου χρώμα είναι πράσινο'
-        {else}:
-            {print} 'Το αγαπημένο σου χρώμα δεν είναι πράσινο'
 18:
 -   name: '{print}'
     explanation: With `{print}` you need to use parentheses

@@ -112,6 +112,11 @@
         ålder = {input}('Hur gammal är du?')
         {if} ålder >= 14:
             {print}('Du är äldre än jag!')
+14:
+-   name: 'creating a list'
+    explanation: Listor med hakparenteser.
+    demo_code: |-
+        frukt = ['äpple', 'banan', 'körsbär']
 16:
 -   name: '{while}'
     explanation: Vi kan använda `{while}` med skilt från.
@@ -128,36 +133,6 @@
             {print}('Vi gör det här ', 3 - antal, ' gånger till')
             antal = antal + 1
         {print}('Nu är det klart')
-14:
--   name: 'creating a list'
-    explanation: Listor med hakparenteser.
-    demo_code: |-
-        frukt = ['äpple', 'banan', 'körsbär']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a är 1'
-        {elif} a == 2:
-            {print} 'a är 2'
-        {else}:
-            {print} 'a är inte 1 eller 2'
--   name: '{print}'
-    explanation: När vi använder `{for}` måste vi ha ett `:` efter `{for}`-satsen!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Redo eller inte, här kommer jag!'
--   name: '{if}'
-    explanation: Vi behöver göra samma sak med alla våra `{if}`-satser.
-    demo_code: |-
-        färg = {ask} 'Vilken är din favoritfärg?'
-        {if} färg == 'grönt':
-            {print} 'Din favoritfärg är grönt'
-        {else}:
-            {print} 'Din favoritfärg är inte grönt'
 18:
 -   name: '{print}'
     explanation: Efter `{print}` behöver du ha parenteser.

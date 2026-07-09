@@ -112,6 +112,11 @@
         wiek = {input}('Ile masz lat?')
         {if} wiek >= 14:
             {print}('Jesteś starszy ode mnie!')
+14:
+-   name: 'creating a list'
+    explanation: Lista z nawiasami kwadratowymi.
+    demo_code: |-
+        owoc = ['jabłko', 'banan', 'wiśnia']
 16:
 -   name: '{while}'
     explanation: Możemy użyć pętli `{while}` z nierównością.
@@ -128,36 +133,6 @@
             {print}('Robimy to jeszcze', 3 - licznik, ' razy')
             licznik = licznik + 1
         {print}('Zrobione')
-14:
--   name: 'creating a list'
-    explanation: Lista z nawiasami kwadratowymi.
-    demo_code: |-
-        owoc = ['jabłko', 'banan', 'wiśnia']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a wynosi 1'
-        {elif} a == 2:
-            {print} 'a wynosi 2'
-        {else}:
-            {print} 'a nie wynosi ani 1 ani 2'
--   name: '{print}'
-    explanation: Kiedy używamy `{for}`, musimy postawić `:` za zdaniem `{for}`!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Gotowi czy nie, nadchodzę!'
--   name: '{if}'
-    explanation: Musimy zrobić to samo ze wszystkimi wykorzystaniami `{if}`.
-    demo_code: |-
-        kolor = {ask} 'Jaki jest twój ulubiony kolor?'
-        {if} kolor == 'zielony':
-            {print} 'Twój ulubiony kolor to zielony'
-        {else}:
-            {print} 'Twój ulubiony kolor to nie zielony'
 18:
 -   name: '{print}'
     explanation: Po `{print}` musisz użyć nawiasów.

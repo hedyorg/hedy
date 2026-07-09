@@ -112,6 +112,11 @@
         edad = {input}('¿Cuántos años tienes?')
         {if} edad >= 14:
             {print}('Eres mayor que yo!')
+14:
+-   name: 'creating a list'
+    explanation: Listas con corchetes.
+    demo_code: |-
+        fruta = ['manzana', 'plátano', 'cereza']
 16:
 -   name: '{while}'
     explanation: Podemos usar el bucle `{while}` con no igual.
@@ -128,36 +133,6 @@
             {print}('Hacemos esto ', 3 - contador, ' veces más')
             contador = contador + 1
         {print}('Hemos terminado')
-14:
--   name: 'creating a list'
-    explanation: Listas con corchetes.
-    demo_code: |-
-        fruta = ['manzana', 'plátano', 'cereza']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a es 1'
-        {elif} a == 2:
-            {print} 'a es 2'
-        {else}:
-            {print} 'a no es 1 o 2'
--   name: '{print}'
-    explanation: Cuando usamos un `{for}`, ¡tenemos que poner un `:` tras la sentencia  `{for}`!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Preparado o no, ¡aquí llego!'
--   name: '{if}'
-    explanation: Necesitamos hacer lo mismo con todas nuestras declaraciones `{if}`.
-    demo_code: |-
-        color = {ask} '¿Cuál es tu color favorito?'
-        {if} color == 'verde':
-            {print} 'Tu color favorito es verde'
-        {else}:
-            {print} 'Tu color favorito no es verde'
 18:
 -   name: '{print}'
     explanation: Después de `{print}` necesita usar paréntesis.

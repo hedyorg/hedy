@@ -20,14 +20,12 @@
         {turn} {left}
         {forward} 25
         {turn} {right}
-
 2:
 -   name: {is}
     explanation: In wurd in namme jaan mei `{is}`. Meist de namme sels kieze.
     demo_code: |-
         foarnamme {is} Hedy
         {print} ik bin foarnamme
-
 3:
 -   name: kies_random
     explanation: Eat willekeurichs út in groepke wurden kieze mei `{at}` en `{random}`.
@@ -75,6 +73,11 @@
 -   name: Not equal
 -   name: Smaller {or} equal
 -   name: Bigger or equal
+14:
+-   name: 'creating a list'
+    explanation: We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!
+    demo_code: |-
+        fruit = ['apel', 'banaan', 'kjers']
 16:
 -   name: {while}
     explanation: We kinne dus in `{while}`-lus brûke mei de `True` en `False`
@@ -91,39 +94,6 @@
             {print}('Dit is de ', tel, 'e kear')
             tel = tel + 1
         {print}('We zijn klaar')
-14:
--   name: 'creating a list'
-    explanation: We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!
-    demo_code: |-
-        fruit = ['apel', 'banaan', 'kjers']
-17:
--   name: 'for met :'
-    explanation: By `for` moatst no in `:` efteroan sette!
-    demo_code: |-
-        for i in range 1 to 10:
-            print i
-        print 'Wie niet weg is is gezien'
--   name: 'if met :'
-    explanation: We moatte itselde dwaan mei al ús `if`
-    demo_code: |-
-        kleur = ask 'Wat is dyn favorite kleur?'
-        if kleur is 'grien':
-            print 'De kleur is grien'
-        else:
-            print 'De kleur is net grien'
--   name: (Optioneel) elif
-    explanation: |-
-        Meist ek in nij kommando brûke: `elif`.
-        `elif` is eins 'else if'. Sjochst dus earst nei `if` en as dy net wier is, dan besikest `elif`,
-        en als dy net wier is dan giest nei de `else`.
-    demo_code: |-
-        a = 2
-        if a is 1:
-            print 'a is 1'
-        elif a is 2:
-            print 'a is 2'
-        else:
-            print 'a is net 1 of 2'
 18:
 -   name: '{print}'
     explanation: Bij `{print}` moet je haakjes gebruiken

@@ -89,6 +89,11 @@
         umur = {input}('Berapa umur mu?')
         {if} umur > 13:
             {print}('Kamu lebih tua daripada aku!')
+14:
+-   name: 'creating a list'
+    explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
+    demo_code: |-
+        buah = ['apel', 'pisang', 'ceri']
 16:
 -   name: '{while}'
     demo_code: |-
@@ -104,36 +109,6 @@
             {print}('Kita lakukan ini ', 3 - pembilang, ' kali lagi')
             pembilang = pembilang + 1
         {print}('Kita selesai')
-14:
--   name: 'creating a list'
-    explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
-    demo_code: |-
-        buah = ['apel', 'pisang', 'ceri']
-17:
--   name: '{elif}'
-    explanation: Ketika kita menggunakan `for`, kita perlu menambahkan `:` diakhir statemen `for`
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a adalah 1'
-        {elif} a == 2:
-            {print} 'a adalah 2'
-        {else}:
-            {print} 'a adalah tidak 1 atau 2'
--   name: '{print}'
-    explanation: Saat kita menggunakan `{for}`, kita perlu menaruh `:` dibelakang `{for}` pernyataan!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Siap atau tidak, aku datang!'
--   name: '{if}'
-    explanation: Kami akan memberikan sebuah perintah baru yang bisa kamu pakai:`elif`. `elif` berarti `else if`. Program akan mulai mengecek apakah kondisi di `if` dipenuhi. Jika tidak, program akan mengecek `elif` dan jika tidak memenuhi juga, program akan ke `else`.
-    demo_code: |-
-        color = {ask} 'Apa warna kesukaanmu?'
-        {if} color == 'hijau':
-            {print} 'Warna kesukaanmu hijau'
-        {else}:
-            {print} 'Warna kesukaanmu bukan hijau'
 18:
 -   name: '{print}'
     explanation: With `{print}` you need to use parentheses

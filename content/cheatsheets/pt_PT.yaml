@@ -72,6 +72,11 @@
         idade = {input}('Quantos anos tens?')
         {if} idade > 13:
             {print}('És mais velho a do que eu!')
+14:
+-   name: 'creating a list'
+    explanation: Vamos colocar as listas entre parênteses rectos! Também vamos ter de colocar cada elemento da lista entre aspas simples (').
+    demo_code: |-
+        fruta = ['maçã', 'banana', 'cereja']
 16:
 -   name: '{while}'
     explanation: Podemos usar o ciclo `{while}` com `Verdadeiro` e `Falso`.
@@ -88,36 +93,6 @@
             {print}('Fazemos isto mais ', 3 - contagem, ' vezes.')
             contagem = contagem + 1
         {print}('Acabamos!')
-14:
--   name: 'creating a list'
-    explanation: Vamos colocar as listas entre parênteses rectos! Também vamos ter de colocar cada elemento da lista entre aspas simples (').
-    demo_code: |-
-        fruta = ['maçã', 'banana', 'cereja']
-17:
--   name: '{elif}'
-    explanation: Quando usamos um `for`, temos de colocar `:` a seguir à instrução `for`!
-    demo_code: |-
-        for i in range 1 to 12:
-            print i
-        print 'Preparados ou não, aqui vou eu!'
--   name: '{print}'
-    explanation: Precisamos de fazer a mesma coisa para todas as intruções `if`.
-    demo_code: |-
-        cor = ask 'Qual é a tua cor favorita?'
-        if cor is 'verde':
-            print 'A cor é verde.'
-        else:
-            print 'A cor não é verde.'
--   name: '{if}'
-    explanation: 'Vamos-te mostrar um novo comando que podes usar: `elif`. `elif` significa "else if". Começamos por verificar se o `if` é verdadeiro, se não for esse o caso, verificamos em seguida o `elif`, e se esse também não for verdadeiro, avançamos para o `else`.'
-    demo_code: |-
-        a = 2
-        if a is 1:
-            print 'a é 1'
-        elif a is 2:
-            print 'a é 2'
-        else:
-            print 'a não é 1 nem 2'
 18:
 -   name: '{print}'
     explanation: With `{print}` you need to use parentheses

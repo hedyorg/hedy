@@ -43,31 +43,6 @@
     demo_code: |-
         animals {is} cat, dog, cow
         {remove} dog {from} animals
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a คือ 1'
-        {elif} a == 2:
-            {print} 'a คือ 2'
-        {else}:
-            {print} 'a ไม่ใช่ 1 หรือ 2'
--   name: '{print}'
-    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'สวัสดี!'
--   name: '{if}'
-    explanation: We need to do the same with all of our `{if}` statements.
-    demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color == 'green':
-            {print} 'Your favorite color is green'
-        {else}:
-            {print} 'Your favorite color is not green'
 18:
 -   name: '{print}'
     explanation: After `{print}` you need to use parentheses.

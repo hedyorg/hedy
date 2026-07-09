@@ -72,6 +72,11 @@
         kor = {input}('Hány éves vagy?')
         {if} kor < 13:
          {print}('Idősebb vagy, mint én!')
+14:
+-   name: 'creating a list'
+    explanation: Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük.
+    demo_code: |-
+        gyumolcs = ['alma', 'banán', 'cseresznye']
 16:
 -   name: '{while}'
     explanation: Használhatjuk a `{while}` hurkot a nem egyenlővel.
@@ -89,36 +94,6 @@
           {print}('Ezt ', 3 - szam, ' alkalommal ismételjük')
           szam = szam + 1
         {print}('Készen vagyunk')
-14:
--   name: 'creating a list'
-    explanation: Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük.
-    demo_code: |-
-        gyumolcs = ['alma', 'banán', 'cseresznye']
-17:
--   name: 'for ezzel:'
-    explanation: Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` utasítás végére!
-    demo_code: |-
-        for i in range 1 to 12:
-            print i
-        print 'Aki bújt, aki nem, megyek!'
--   name: 'if ezzel:'
-    explanation: Ugyanúgy kell eljárnunk `if` állítás esetén
-    demo_code: |-
-        szin = ask 'Mi a kedvenc színed?'
-        if szin is 'zöld':
-            print 'a szín zöld'
-        else:
-            print 'A szin nem zöld'
--   name: elif
-    explanation: 'Mutatunk neked egy új utasítást, amit ezután használhatsz: `elif`. Az `elif` azt jelenti "else if". Először leellenőrizzük hogy `if` helyes-e, ha nem helyes, megnézzük az `elif` feltételt és ha ez sem helyes, akkor `else` utasításhoz megyünk.'
-    demo_code: |-
-        a = 2
-        if a is 1:
-            print 'a értéke 1'
-        elif a is 2:
-            print 'a értéke 2'
-        else:
-            print 'a értéke nem 1 vagy 2'
 18:
 -   name: '{print}'
     explanation: A `{print}` után zárójeleket kell használni.

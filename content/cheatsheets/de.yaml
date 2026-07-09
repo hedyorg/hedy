@@ -108,6 +108,11 @@
         Alter = {input}('Wie alt bist du?')
         {if} Alter >= 14:
             {print}('Du bist älter als ich!')
+14:
+-   name: 'creating a list'
+    explanation: Listen mit eckigen Klammern.
+    demo_code: |-
+        obst = ['Apfel', 'Banane', 'Kirsche']
 16:
 -   name: '{while}'
     explanation: Wir können die `{while}`-Schleife mit ungleich verwenden.
@@ -124,36 +129,6 @@
             {print}('Wir machen dies noch ', 3 - zähler, ' mal')
             zähler = zähler + 1
         {print}('Wir sind fertig')
-14:
--   name: 'creating a list'
-    explanation: Listen mit eckigen Klammern.
-    demo_code: |-
-        obst = ['Apfel', 'Banane', 'Kirsche']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a ist gleich 1'
-        {elif} a == 2:
-            {print} 'a ist gleich 2'
-        {else}:
-            {print} 'a ist nicht gleich 1 oder 2'
--   name: '{print}'
-    explanation: Wenn wir ein `{for}` verwenden, müssen wir ein `:` hinter die `{for}` Anweisung schreiben!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Ob ihr bereit seid oder nicht, ich komme!'
--   name: '{if}'
-    explanation: Wir müssen dasselbe mit all unseren `{if}`-Anweisungen tun.
-    demo_code: |-
-        Farbe = {ask} 'Was ist deine Lieblingsfarbe?'
-        {if} Farbe == 'grün':
-            {print} 'Deine Lieblingsfarbe ist grün'
-        {else}:
-            {print} 'Deine Lieblingsfarbe ist nicht grün'
 18:
 -   name: '{print}'
     explanation: Nach `{print}` musst du runde Klammern verwenden.

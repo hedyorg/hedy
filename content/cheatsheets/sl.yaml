@@ -100,6 +100,11 @@
         starost = {input}('Koliko ste stari?')
         {if} starost >= 14:
             {print}('Starejši ste od mene!')
+14:
+-   name: 'creating a list'
+    explanation: Seznami z oglatimi oklepaji.
+    demo_code: |-
+        sadje = ['jabolko', 'banana', 'češnja']
 16:
 -   name: '{while}'
     explanation: Zanko `{while}` lahko uporabimo skupaj z ni enako.
@@ -116,21 +121,6 @@
             {print}('Ponovimo to še ', 3 - števec, '-krat')
             števec = števec + 1
         {print}('Pa smo opravili')
-14:
--   name: 'creating a list'
-    explanation: Seznami z oglatimi oklepaji.
-    demo_code: |-
-        sadje = ['jabolko', 'banana', 'češnja']
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: "a = 2\n{if} a == 1:\n    {print} 'a je 1'\n{elif} a == 2:\n    {print} 'a je 2'\n{else}:\n    {print} 'a ni ne 1, ne 2'"
--   name: '{print}'
-    explanation: Ko uporabimo zanko `{for}`, moramo za ukazom `{for}` postaviti `:`!
-    demo_code: "{for} i {in} {range} 1 {to} 12:\n    {print} i\n{print} 'Pripravljeni ali ne, prihajam!'"
--   name: '{if}'
-    explanation: Enako moramo storiti z vsemi našimi `{if}` stavki .
-    demo_code: "barva = {ask} 'Katera je vaša najljubša barva?'\n{if} barva == 'zelena':\n     {print} 'Vaša najljubša barva je zelena'\n{else}:\n     {print} 'Tvoja najljubša barva ni zelena'"
 18:
 -   name: '{print}'
     explanation: Za ukazom `{print}` morate uporabiti oklepaje.
