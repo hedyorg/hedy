@@ -979,6 +979,14 @@ adventures:
                     {print} What are your hobbies?
                     {print} Your hobbies are
                     ```
+                answer_code: |
+                    ```
+                    {print} I love programming
+                    {print} Do you love programming too?
+                    {print} {answer}
+                    {print} What are your hobbies?
+                    {print} Your hobbies are {answer}
+                    ```
             2:
                 story_text: |-
                     Welcome to a debugging adventure. Debugging a code means getting rid of mistakes in the code.
@@ -997,6 +1005,16 @@ adventures:
                     {print} Let me print your boarding pass for you.
                     {sleep}
                     Here you go! Have a nice trip!
+                    ```
+                answer_code: |-
+                    ```
+                    destination {is} {ask} 'Where are you going on holidays?'
+                    {print} 'The flight to ' destination ' leaves at 3 pm.'
+                    check_in {is} {ask} 'Did you check in your luggage yet?'
+                    {print} check_in
+                    {print} 'Let me print your boarding pass for you.'
+                    {sleep}
+                    {print} 'Here you go! Have a nice trip!'
                     ```
             3:
                 story_text: |-
@@ -1019,6 +1037,18 @@ adventures:
                     tomorrows_movie {is} movie_choices {at} {random}
                     I'll go get the popcorn! {print}
                     ```
+                answer_code: |-
+                    ```
+                    movie_choices is dracula, fast and furious, home alone, barbie
+                    chosen_movie is movie_choices {at} {random}
+                    {print} Tonight we will watch chosen_movie
+                    like is {ask} Do you like that movie?
+                    {print} Tomorrow we will watch something else.
+                    {remove} chosen_movie {from} movie_choices
+                    tomorrows_movie is movie_choices {at} {random}
+                    {print} Tomorrow we will watch tomorrows_movie
+                    {print} I'll go get the popcorn!
+                    ```
             4:
                 story_text: |-
                     ### Exercise
@@ -1031,7 +1061,17 @@ adventures:
                     {print} You like genre
                     author {is} {ask} 'Who's your favorite author?'
                     {print} 'author is your favorite author'
-                    {print} Hmmm... i think you should try... books {at} {random}
+                    {print} Hmmm... I think you should try... books {at} {random}
+                    ```
+                answer_code: |-
+                    ```
+                    {print} 'Welcome to the online library!'
+                    genre {is} {ask} 'What genre of books do you like?'
+                    {print} 'You like ' genre
+                    author {is} {ask} "Who's your favorite author?"
+                    {print} author ' is your favorite author'
+                    books {is} Winnie the pooh, 1984, Romeo and Juliet
+                    {print} 'Hmmm... I think you should try...' books {at} {random}
                     ```
             5:
                 story_text: |-
@@ -3262,6 +3302,58 @@ adventures:
                     The program should:
                     * Draw the floorplan for the new ward!
                     * Use functions to draw the beds and bedside tables.
+                answer_code: |-
+                    ```
+                    {define} draw_a_bed_and_bedside_table
+                    #draw the bed
+                        {color} 'blue'
+                        {repeat} 2 {times}
+                            {forward} 25
+                            {turn} 90
+                            {forward} 50
+                            {turn} 90
+                        {forward} 25
+                        {color} 'black'
+                        {forward} 10
+                    #draw the bedside table
+                        {color} 'orange'
+                        {repeat} 4 {times}
+                            {forward} 10
+                            {turn} 90
+                        {forward} 10
+                        {color} 'black'
+
+                    #start position
+                    {color} 'white'
+                    {forward} -90
+                    {turn} -90
+                    {color} 'black'
+                    {forward} 150
+                    {turn} 90
+
+                    #make the drawing
+                    {call} draw_a_bed_and_bedside_table
+                    {forward} 30
+                    {call} draw_a_bed_and_bedside_table
+                    {forward} 30
+                    {turn} 90
+                    {forward} 100
+                    {call} draw_a_bed_and_bedside_table
+                    {forward} 100
+                    {turn} 90
+                    {call} draw_a_bed_and_bedside_table
+                    {forward} 30
+                    {call} draw_a_bed_and_bedside_table
+                    {forward} 30
+                    {turn} 90
+                    {forward} 60
+                    {color} 'black'
+                    {turn} 45
+                    {forward} 30
+                    {color} 'white'
+                    {forward} 30
+                    {turn} 45
+                    ```
             13:
                 story_text: |
                     Our hospital does not only have a lot of patients, but also a lot of personnel. Each member of the staff needs a badge that states their information.
@@ -3373,6 +3465,35 @@ adventures:
                     * After those 2 minutes, the morphine level should be updated (+20ml) and the pain level should be updated by asking the patient how they are feeling now.
                     * If the morphine level is too high or the patient is no longer in pain, the program should tell the patients that they won't be getting more morphine. If they are in a lot of pain, tell them to call the nurse.
                     * Tell the patient that the pump will be shut down now, and to press x if they need the pump to start again.
+                answer_code: |-
+                    ```
+                    {print}('Morphine pump')
+                    morphine_level = {input}('How many ml of Morphine has the patient already had today?')
+                    {print}('please give this device to the patient now')
+
+                    pain_level = {input}('How much pain are you experiencing from 1 to 10?')
+                    {print}('Press X to administer morphine')
+
+                    {define} morphine(pain_level, morphine_level):
+                        {print}('You will be administered 20 more ml of morphine')
+                        {sleep} 2
+                        morphine_level = morphine_level + 20
+                        pain_level = {input}('How much pain are you experiencing from 1 to 10?')
+                        {print}('The pump will shut down now')
+                        {return} morphine_level
+                        {return} pain_level
+                        {sleep} 2
+
+                    {for} i {in} {range} (1,10):
+                        wait_for_x = {input}('Press X to administer morphine')
+                        {if} wait_for_x == 'x'
+                            {if} pain_level >= 6 {and} morphine_level <120:
+                                morphine_level = morphine(pain_level, morphine_level)
+                                pain_level = morphine(pain_level, morphine_level)
+                            {else}:
+                                {print}('It would not be safe to administer any more morphine now')
+                                {print}('Please call a nurse if you are in too much pain')
+                    ```
             16:
                 story_text: |
                     Our medical students have to learn the medical terms for all the bodyparts. They seem to be struggling to remind all the anatomical names and they seem to find the studying very boring.
@@ -3530,6 +3651,32 @@ adventures:
                             {print} 'You are not sure'
                     {else}
                         {print} 'You do not want to continue'
+                    ```
+                story_text_2: |
+                    ### Exercise
+                    Software is almost always secured with two factor authentication nowadays. You don't need one password but you'll need two.
+                    Make your own security system that requires two correct passwords, by putting an {if} inside an {if}.
+                example_code_2: |
+                    ```
+                    password_1 =
+                    password_2 =
+                    _
+                    ```
+                answer_code: |
+                    ```
+                    password_1 = Crocodile
+                    password_2 = Macaroni
+
+                    guess_1 = {ask} 'What is the first password?'
+                    {if} guess_1 {is} password_1
+                        {print} 'Crocodile is correct.'
+                        guess_2 = {ask} 'What is the second password?'
+                        {if} guess_2 {is} password_2
+                            {print} 'Welcome!'
+                        {else}
+                            {print} 'INTRUDER!'
+                    {else}
+                        {print} 'ACCESS DENIED'
                     ```
             13:
                 story_text: |
@@ -4070,6 +4217,18 @@ adventures:
                     {play} _
                     {elif} mood {is} _
                     {play} _
+                    ```
+                answer_code: |
+                    ```
+                    mood {is} {ask} 'How are you feeling today?'
+                    {if} mood {is} happy
+                    {play} C4
+                    {elif} mood {is} sad
+                    {play} C2
+                    {elif} mood {is} scared
+                    {play} C8
+                    {elif} mood {is} bored
+                    {play} C3
                     ```
             7:
                 story_text: "Instead of playing notes, you can also play numbers now. Simply type `{play} 1` for the lowest note, `{play} 70` for the highest note, or anything in between.\n\n### Exercise\nThis calls for musical maths! Try out the example code a couple of times with different starting numbers.\nThen, see if you can compose a song using the numbers.\n"
@@ -6017,6 +6176,8 @@ adventures:
                 story_text: |
                     In the previous adventure you have learned how to use an argument in a function, but did you know that you could combine them with `{ask}` commands as well?
                     In this example we have changed the 'My Bonnie' program and made it interactive. You are now asked where Bonnie is.
+                story_text_2: |
+                    Create a similar interactive program with the childrens' song 'Down by the bay'.
                 example_code: |
                     ```
                     {define} song (place)
@@ -6028,6 +6189,36 @@ adventures:
                     song(chosen_place)
                     song(synonym)
                     song (chosen_place)
+                    ```
+                example_code_2: |
+                    ```
+                    {def} song(rhyme):
+                        {print} 'Down by the Bay,'
+                        {print} 'Where the watermelons grow,'
+                        {print} 'Back to my home,'
+                        {print} 'I dare not go,'
+                        {print} 'For if I do,'
+                        {print} 'My mother will say:'
+                        {print} 'Did you ever see a ' _
+                        {print} 'Down by the bay'
+
+                    chosen_rhyme = {input}('What rhyme do you choose?')
+                    _
+                    ```
+                answer_code: |
+                    ```
+                    {def} song(rhyme):
+                        {print} 'Down by the Bay,'
+                        {print} 'Where the watermelons grow,'
+                        {print} 'Back to my home,'
+                        {print} 'I dare not go,'
+                        {print} 'For if I do,'
+                        {print} 'My mother will say:'
+                        {print} 'Did you ever see a ' rhyme
+                        {print} 'Down by the bay'
+
+                    chosen_rhyme = {input}('What rhyme do you choose?')
+                    song(chosen_rhyme)
                     ```
     songs_2:
         name: sing a song! 2
@@ -6253,6 +6444,8 @@ adventures:
                 story_text_2: |
                     You can also change the color of the lines with the command `{color}`. Check out the example.
                     You can also use the command `{color} {white}` to make 'invisible' lines. You could use these white lines to move the turtle anywhere in the screen before you start drawing.
+                    ### Exercise
+                    Make your own colored drawing!
                 example_code_2: |
                     ```
                     {color} {white}
@@ -6264,6 +6457,8 @@ adventures:
                     {color} {red}
                     {forward} 50
                     ```
+                answer_code: |
+                    Own answer
             5:
                 story_text: |
                     In level 5 you can make a choice with `{if}`. For example between different types of figures.
@@ -6309,6 +6504,8 @@ adventures:
                     You may have learned in school that turning a full circle is 360 degrees. If not, now you know!
                     That's why you also use 90 degrees for a square. 360 divided by 4 is 90.
                     Now that we can do math with Hedy, we can draw all the figures we want!
+                    ### Exercise
+                    Create your own shapes!
                 example_code: |
                     ```
                     # defining the angle for the figure:
@@ -6328,6 +6525,8 @@ adventures:
                     {forward} 50
                     {turn} angle
                     ```
+                answer_code: |
+                    Own answer
             9:
                 story_text: "Now that we can repeat several lines, we can make figures more easily.\nWe only have to set the angle once and then use that variable in the `{repeat}`.\n\n### Exercise 1\nThe example code creates a square. Change the code so that it create another figure, such as a triangle or a hexagon. \nThis requires a change to two lines of code.\nTip: An entire circle is 360 degrees.\n\n### Exercise 2\nNow create a drawing consisting of at least two polygons.\n"
                 example_code: |
