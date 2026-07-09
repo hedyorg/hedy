@@ -300,8 +300,6 @@
       level: {{ level|tojson|safe }},
       keyword_language: {{ g.keyword_lang|tojson|safe }},
       staticRoot: {{ static('')|tojson|safe }},
-      environment: {{ frontend_environment|tojson|safe }},
-      featureFlags: {{ feature_flags|tojson|safe }},
       {% if initialize_logs %}logs: true,{% endif %}
       javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
       });</script>

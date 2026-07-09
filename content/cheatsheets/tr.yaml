@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: '`{ask}` ile bir şey sor.'
     demo_code: '{ask} En sevdiğin renk nedir?'
--   name: '{echo}'
-    explanation: '`{echo}` kullanarak bir şeyi tekrar edin.'
+-   name: '{answer}'
+    explanation: '`{answer}` kullanarak bir şeyi tekrar edin.'
     demo_code: |-
         {ask} En sevdiğin renk nedir?
-        {echo} demek en sevdiğin renk
--   name: '{print} emojiler'
-    explanation: '`{print}` ile bir emoji yazdır.'
-    demo_code: '{print} 🙋 🌍 ❗'
+        {answer} demek en sevdiğin renk
 -   name: '{forward}'
     explanation: '`{forward}`ile bir çizgi çizin.'
     demo_code: '{forward} 100'
@@ -29,25 +26,10 @@
     demo_code: |-
         isim {is} Hedy
         {print} merhaba isim
--   name: '{ask}'
-    explanation: '`{ask}` ile bir şey sorun. Ama dikkat! Cevaba `{is}` ile bir isim vermeniz gerekir.'
-    demo_code: |-
-        renk {is} {ask} En sevdiğin renk nedir?
-        {print} renk senin favorin!
 -   name: '{sleep}'
     explanation: '`{sleep}` ile Hedy''nin bir(kaç) saniye duraklamasını sağlayın.'
     demo_code: |-
-        {print} Bir saniye düşünmeme izin verin.
-        {sleep}
-        {print} Hmm.. 3 saniyeye daha ihtiyacım var...
         {sleep} 3
-        {print} Evreka! Buldum!
--   name: '{is} ile kablumbağa'
-    explanation: Bir sayıya `{is}` kullanarak bir isim verin. İsmi kendiniz seçebilirsiniz.
-    demo_code: |-
-        açı {is} 90
-        {turn} açı
-        {forward} 100
 3:
 -   name: Rastgele seçin
     explanation: '`{at}` ve `{random}` ile bir gruptan rastgele bir kelime seçin.'
@@ -73,98 +55,6 @@
     demo_code: |-
         isim {is} Hedy
         {print} 'benim adım ' isim
--   name: '{ask}'
-    explanation: '`{ask}` ile bir şeyler sorun.'
-    demo_code: |-
-        renk {is} {ask} 'En sevdiğin renk nedir?'
-        {print} renk ' senin favorin!'
-5:
--   name: '{print}'
-    explanation: Tırnak işaretlerini kullanarak tam olarak yazdırın.
-    demo_code: '{print} "Merhaba, Hedy''ye hoş geldiniz."'
--   name: '{ask}'
-    explanation: '`{ask}` ile bir şeyler sorun.'
-    demo_code: |-
-        renk {is} {ask} 'En sevdiğin renk nedir?'
-        {print} renk ' senin favorin!'
--   name: '{if}'
-    explanation: '`{if}` ile seçin yapın.'
-    demo_code: |-
-        renk {is} {ask} 'En sevdiğin renk nedir?'
-        {if} renk {is} yeşil {print} 'güzel!' {else} {print} 'eh işte'
--   name: '{if} kaplumbağayla'
-    explanation: '`{if}` ile seçim yapın.'
-    demo_code: |-
-        cevap {is} {ask} 'Ne kadar yürümeliyim?'
-        {if} cevap {is} uzak {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: '`{in}` ile öğeleri kontrol edin.'
-    demo_code: |-
-        güzel_renkler {is} yeşil, sarı
-        renk {is} {ask} 'En sevdiğin renk nedir?'
-        {if} renk {in} güzel_renkler {print} 'Güzel!' {else} {print} 'eh işte'
--   name: '{pressed}'
-    explanation: '`{pressed}` ile klavyede belirli bir tuşun basılı olup olmadığını kontrol edin.'
-    demo_code: '{if} a {is} {pressed} {print} ''A ya bastın!'' {else} {print} ''Başka bir tuşa bastın!'''
-6:
--   name: '{print}'
-    explanation: Tırnak işaretlerini kullanarak tam olarak yazdırın.
-    demo_code: '{print} ''5 kere 5 eşittir '' 5 * 5'
--   name: '{ask}'
-    explanation: Bir hesaplama isteyin ve doğru olup olmadığını kontrol edin.
-    demo_code: |-
-        cevap = {ask} '10 artı 10 nedir?'
-        {if} cevap {is} 20 {print} 'Evet!' {else} {print} 'Oops'
--   name: '`{ask}` ve `{if}` ile kaplumbağa'
-    explanation: Kullanıcıya kaç tane açı istediğini sorun.
-    demo_code: |-
-        açılar = {ask} 'Kaç tane açı olacak?'
-        açı = 360 / açılar
-        {forward} 50
-7:
--   name: '{print}'
-    explanation: Tırnak işaretlerini kullanarak tam olarak yazdırın.
-    demo_code: '{print} "Merhaba, Hedy''ye hoş geldiniz."'
--   name: '{ask}'
-    explanation: '`{ask}` ile bir şeyler sorun.'
-    demo_code: |-
-        renk = {ask} 'En sevdiğin renk nedir?'
-        {print} renk ' senin favorin!'
--   name: '{if}'
-    explanation: '`{if}` ile bir seçim yapın.'
-    demo_code: |-
-        renk = {ask} 'En sevdiğin renk nedir?'
-        {if} renk {is} yeşil {print} 'güzel!' {else} {print} 'eh işte'
--   name: '{repeat} ile kaplumbağa'
-    explanation: '`{repeat}` ile bir kod satırını yineleyin.'
-    demo_code: '{repeat} 3 {times} {forward} 10'
-8:
--   name: '{print}'
-    explanation: Bir şey yazdırın. Tam yazım için tırnak işareti kullanmayı unutmayın.
-    demo_code: '{print} ''5 kere 5 eşittir '' 5 * 5'
--   name: '{ask}'
-    explanation: Bir toplamanın cevabını isteyin ve doğru olup olmadığını kontrol edin. Şimdi 2 satır yazdırabiliriz.
-    demo_code: |-
-        cevap = {ask} '5 artı 5 kaç eder?'
-        {if} cevap {is} 10
-            {print} 'Aferin sana!'
-            {print} 'Cevap gerçekten de ' cevap
-        {else}
-            {print} 'Oops!'
-            {print} 'Cevap 10 olacaktı'
--   name: '{repeat} ile kaplumbağa'
-    explanation: Birden fazla satırı yineleyin.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: '`{pressed}` ile klavyedeki belirli bir tuşun basılı olup olmadığını kontrol edin.'
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'A ya bastın!'
-        {else}
-            {print} 'Başka bir tuşa bastın!'
 9:
 -   name: '{if} ile çoklu satırlar'
     explanation: '`{ask}` ile bir toplama sorusunun cevabını alın ve doğru olup olmadığına bakın. Şimdi iki satır yazdırıyoruz.'
@@ -176,180 +66,77 @@
         {else}
             {print} 'Yanlış'
             {print} 'Cevap 20 olacaktı'
--   name: '{repeat} ile kaplumbağa'
+-   name: '{repeat} ile çoklu satırlar'
     explanation: Birden fazla satırı tekrarlayın.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
-10:
--   name: '{print}'
-    explanation: Bir şey yazdırın. Tam yazdırma için tırnak işareti kullanmayı unutmayın.
-    demo_code: '{print} ''5 kere 5 eder '' 5 * 5'
--   name: '{for} ile bir liste'
-    explanation: Bir listedeki her şeyi yazdırın.
-    demo_code: |-
-        hayvanlar {is} köpek, kedi, damlabalık
-        {for} hayvan {in} hayvanlar
-          {print} hayvan ' severim'
-11:
--   name: '{for} döngüsü'
-    explanation: '`{for}` ile bir `{range}` ''ı birlikte kullanabiliriz.'
-    demo_code: |-
-        {for} sayaç {in} {range} 1 {to} 5
-            {print} sayaç
--   name: '{ask}'
-    explanation: Bir toplamın cevabını sorun ve doğru olup olmadığını kontrol edin. Şimdi 2 satır yazdırabiliriz.
-    demo_code: |-
-        cevap = {ask} '5 artı 5 kaç eder?'
-        {if} cevap {is} 10
-            {print} 'Aferin sana!'
-            {print} 'Gerçekten de cevabı ' cevap
-        {else}
-            {print} 'Oops!'
-            {print} 'Cevap 10 olacaktı'
-12:
--   name: doğrudan ondalıklı
-    explanation: Ondalık sayılar.
-    demo_code: |-
-        {print} 'Hesaplayın!'
-        {print} 'İki buçuk artı iki buçuk...'
-        {print} 2.5 + 2.5
--   name: metin atayın
-    explanation: '`=` den sonra tırnak işareti içinde olan metin'
-    demo_code: |-
-        isim = 'Robot Hedy'
-        {print} 'Merhaba ' isim
--   name: karşılaştırma için `{if}` 'den sonraki tırnaklar
-    explanation: '`{if}` ''den sonraki tırnak içindeki metin.'
-    demo_code: |-
-        isim = {ask} 'Kimsin sen?'
-        {if} isim = 'Hedy'
-            {print} 'Merhaba oradaki!'
--   name: listedeki tırnaklar
-    explanation: Tırnak işaretli bir liste.
-    demo_code: |-
-        süperkahramanlar = 'Iron Man', 'Batman', 'Superman'
-        {print} süperkahramanlar {at} {random}
+            {print} 'Hello!'
 13:
--   name: '{and}'
-    explanation: İki parçanın da doğru olması gerekir.
-    demo_code: |-
-        cevap1 = {ask} '3+2 kaç eder?'
-        cevap2 = {ask} '2+2 kaç eder?'
-        {if} cevap1 {is} 5 {and} cevap2 {is} 4
-            {print} 'Her iki cevap ta doğru!'
-        {else}
-            {print} 'En azından bir cevap yanlış!'
--   name: '{or}'
-    explanation: İki parçadan en az birinin doğru olması gerekir. Her ikisi de doğruysa, bu da iyidir.
-    demo_code: |-
-        cevap1 = {ask} '3+2 kaç eder?'
-        cevap2 = {ask} '2+2 kaç eder?'
-        {if} cevap1 {is} 5 {or} cevap2 {is} 4
-            {print} 'En azından bir cevap doğru!'
-        {else}
-            {print} 'Her iki cevap ta yanlış!'
-14:
+-   name: '{print}'
+    explanation: '`{print}` ifadesinden sonra parantez kullanmanız gerekir.'
+    demo_code: '{print}(''Merhaba!'')'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Daha küçük
     explanation: İlk sayının ikinci sayıdan küçük olup olmadığını kontrol etmek için `<` kullanırız.
     demo_code: |-
-        yaş = {ask} 'Kaç yaşındasın?'
-        {if} yaş < 13
-            {print} 'Sen benden daha gençsin!'
+        yaş = {input}('Kaç yaşındasın?')
+        {if} yaş < 13:
+            {print}('Sen benden daha gençsin!')
 -   name: Daha büyük
     explanation: İlk sayının ikinci sayıdan büyük olup olmadığını kontrol etmek için `>` kullanırız.
     demo_code: |-
-        yaş = {ask} 'Kaç yaşındasın?'
-        {if} yaş > 13
-            {print} 'Sen benden daha yaşlısın!'
+        yaş = {input}('Kaç yaşındasın?')
+        {if} yaş > 13:
+            {print}('Sen benden daha yaşlısın!')
 -   name: Eşit
     explanation: İki şeyin aynı olduklarını kontrol etmek için `==` kullanırız.
     demo_code: |-
-        cevap = {ask} '5 * 5 kaç eder?'
-        {if} cevap == 25
-            {print} 'Bu doğru!'
+        cevap = {input}('5 * 5 kaç eder?')
+        {if} cevap == 25:
+            {print}('Bu doğru!')
 -   name: Eşit değil
     explanation: İki şeyin aynı olmadıklarını kontrol etmek için `!=` kullanırız.
     demo_code: |-
-        cevap = {ask} '5 * 5 kaç eder?'
-        {if} cevap != 25
-            {print} 'Bu doğru değil!'
+        cevap = {input}('5 * 5 kaç eder?')
+        {if} cevap != 25:
+            {print}('Bu doğru değil!')
 -   name: Küçük veya eşit
     explanation: İlk sayının ikinci sayıdan küçük veya ona eşit olduğunu kontrol etmek için `<=` kullanırız.
     demo_code: |-
-        yaş = {ask} 'Kaç yaşındasın?'
-        {if} yaş <= 12
-            {print} 'Sen benden daha gençsin!'
+        yaş = {input}('Kaç yaşındasın?')
+        {if} yaş <= 12:
+            {print}('Sen benden daha gençsin!')
 -   name: Büyük veya eşit
     explanation: İlk sayının ikinci sayıdan büyük veya ona eşit olduğunu kontrol etmek için `>=` kullanırız.
     demo_code: |-
-        yaş = {ask} 'Kaç yaşındasın?'
-        {if} yaş >= 14
-            {print} 'Sen benden daha yaşlısın!'
-15:
+        yaş = {input}('Kaç yaşındasın?')
+        {if} yaş >= 14:
+            {print}('Sen benden daha yaşlısın!')
+14:
+-   name: 'creating a list'
+    explanation: Köşeli parantezler ile listeler.
+    demo_code: |-
+        meyve = ['elma', 'muz', 'kiraz']
+16:
 -   name: '{while}'
     explanation: Eşit değil ile `{while}` döngüsünü kullanabiliriz.
     demo_code: |-
         cevap = 0
-        {while} cevap != 25
-            cevap = {ask} '5 kere 5 kaç eder?'
-        {print} 'Doğru bir cevap verilmiştir'
--   name: Küçüktür ile {while}
+        {while} cevap != 25:
+            cevap = {input}('5 kere 5 kaç eder?')
+        {print}('Doğru bir cevap verilmiştir')
+-   name: '{while} with > and <'
     explanation: Ayrıca `{while}` döngüsünü `<` ve `>` ile de kullanabiliriz.
     demo_code: |-
         sayaç = 1
-        {while} sayaç < 3
-            {print} 'Bunu ' 3 - sayaç ' kere daha yapıyoruz'
+        {while} sayaç < 3:
+            {print}('Bunu ', 3 - sayaç, ' kere daha yapıyoruz')
             sayaç = sayaç + 1
-        {print} 'İşimizi bitirdik'
-16:
--   name: köşeli parantezler
-    explanation: Köşeli parantezler ile listeler.
-    demo_code: |-
-        meyve = ['elma', 'muz', 'kiraz']
-        {print} meyve
--   name: Listeden bir öğe alma
-    explanation: Bir listeden bir öğe almak için [sayı] kullanırız, yani meyve[1] demek listeden ilk meyveyi al anlamına gelir!
-    demo_code: |-
-        meyve = ['muz', 'elma', 'kiraz']
-        ilkmeyve = meyve[1]
-        {print} ilkmeyve
--   name: Listeden rastgele bir öğe alın
-    explanation: Bir listeden rastgele bir öğe almak için [{random}] kullanırız, bu nedenle meyve[{random}] listeden rastgele bir meyve al anlamına gelir!
-    demo_code: |-
-        meyve = ['muz', 'elma', 'kiraz']
-        rastgele_meyve = meyve[{random}]
-        {print} rastgele_meyve
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a 1 dir'
-        {elif} a == 2:
-            {print} 'a 2 dir'
-        {else}:
-            {print} 'a 1 veya 2 değildir'
--   name: '{print}'
-    explanation: Bir `{for}` kullandığımızda, `{for}` ifadesinin arkasına bir `:` koymamız gerekir!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Hazır ya da değil, işte geliyorum!'
--   name: '{if}'
-    explanation: Aynı şeyi tüm `{if}` ifadelerimiz için de yapmamız gerekiyor.
-    demo_code: |-
-        renk = {ask} 'En sevdiğin renk nedir?'
-        {if} renk == 'yeşil':
-            {print} 'En sevdiğin renk yeşil'
-        {else}:
-            {print} 'En sevdiğin renk yeşil değil'
+        {print}('İşimizi bitirdik')
 18:
--   name: '{print}'
-    explanation: '`{print}` ifadesinden sonra parantez kullanmanız gerekir.'
-    demo_code: '{print}(''Merhaba!'')'
+
 -   name: '{range}'
     explanation: '`{range}` tan sonra parantez kullanmanız gerekir.'
     demo_code: |-

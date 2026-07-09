@@ -513,11 +513,6 @@ def add_generated_css_file():
 
 
 @app.app_context_processor
-def add_frontend_feature_flags():
-    return get_frontend_feature_flags_context()
-
-
-@app.app_context_processor
 def add_hx_detection():
     """Detect when a request is sent by HTMX.
 
@@ -718,7 +713,6 @@ def parse_by_id(user):
     program = g_db().program_by_id(body.get('id'))
     if program and program.get('username') == user['username']:
         try:
-            initialize_hedylang_feature_flags_for_request()
             hedy.transpile(
                 program.get('code'),
                 program.get('level'),
@@ -735,7 +729,6 @@ def parse_by_id(user):
 def prepare_files():
     body = request.json
     # Prepare the file -> return the "secret" filename as response
-    initialize_hedylang_feature_flags_for_request()
     transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
     filename = utils.random_id_generator(12)
 
@@ -807,7 +800,6 @@ def generate_microbit_file():
         code = body.get("code")
         level = body.get("level")
 
-        initialize_hedylang_feature_flags_for_request()
         transpile_result = hedy.transpile_and_return_python(code, level)
         save_transpiled_code_for_microbit(transpile_result)
         return make_response({'filename': 'Micro-bit.py', 'microbit': True}, 200)
@@ -877,7 +869,6 @@ def transpile_add_stats(code, level, lang_, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
-        initialize_hedylang_feature_flags_for_request()
         result = hedy.transpile(code, level, lang_, is_debug=is_debug)
         statistics.add(
             username, lambda id_: g_db().add_program_stats(id_, level, number_of_lines, None))
@@ -901,48 +892,6 @@ def hedy_error_to_response(ex):
         "Error": get_error_text(ex, keyword_lang),
         "Location": ex.error_location
     }
-
-
-def get_frontend_feature_flags_context():
-    """Return the frontend feature-flag context used by templates and transpilation."""
-    return {
-        "frontend_environment": envs.frontend_environment(),
-        "feature_flags": {
-            "answer_interpolation": {
-                "production": False,
-                "local": True,
-                "alpha": True,
-            }
-        },
-    }
-
-
-def initialize_hedylang_feature_flags_for_request():
-    """Initialize hedylang feature flags before each transpilation operation."""
-    context = get_frontend_feature_flags_context()
-    external = getattr(hedy, "external", None)
-
-    if external is None:
-        logger.warning("hedy.external is unavailable; skipping feature-flag initialization")
-        return
-
-    init_from_context = getattr(external, "initialize_frontend_feature_flags_from_context", None)
-    if callable(init_from_context):
-        init_from_context(context)
-        return
-
-    # Backward-compatible path for older hedylang versions.
-    init_legacy = getattr(external, "initialize_frontend_feature_flags", None)
-    if callable(init_legacy):
-        init_legacy(
-            frontend_environment=context.get("frontend_environment"),
-            feature_flags=context.get("feature_flags"),
-        )
-        return
-
-    logger.warning(
-        "hedy.external has no supported frontend feature-flag initializer; skipping initialization"
-    )
 
 
 @app.route('/report_error', methods=['POST'])
@@ -2150,7 +2099,6 @@ def pre_process_public_program(program):
     # If program does not have an error value set -> parse it and set value
     if 'error' not in program:
         try:
-            initialize_hedylang_feature_flags_for_request()
             hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
             program['error'] = False
         except BaseException:

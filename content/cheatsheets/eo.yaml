@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Demandu ion per `{ask}`.
     demo_code: '{ask} Kio estas via plej ŝatata koloro?'
--   name: '{echo}'
-    explanation: Ripetu ion per `{echo}`.
+-   name: '{answer}'
+    explanation: Ripetu ion per `{answer}`.
     demo_code: |-
         {ask} Kio estas via plej ŝatata koloro?
-        {echo} do via plej ŝatata koloro estas
--   name: '{print} piktogramojn'
-    explanation: Presu piktogramon per `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} do via plej ŝatata koloro estas {answer}
 -   name: '{forward}'
     explanation: Desegnu linion per `{forward}`.
     demo_code: '{forward} 100'
@@ -29,25 +26,10 @@
     demo_code: |-
         nomo {is} Hedy
         {print} bonvenon nomo
--   name: '{ask}'
-    explanation: 'Demandi pri io per `{ask}`. Averto: vi donu nomon al la respondo per `{is}`.'
-    demo_code: |-
-        koloro {is} {ask} Kio estas via plej ŝatata koloro?
-        {print} koloro estas via plej ŝatata!
 -   name: '{sleep}'
     explanation: Per `{sleep}`, vi povas paŭzigi Hedy dum kelkaj sekundoj.
     demo_code: |-
-        {print} Lasu min pensi dum unu sekundo...
-        {sleep}
-        {print} Hm... mi bezonas 3 pliajn sekundojn...
         {sleep} 3
-        {print} Bonege! Mi komprenas!
--   name: '`{is}` kun testudo'
-    explanation: Donu al nombro nomon uzante `{is}`. Vi povas mem elekti la nomon.
-    demo_code: |-
-        angulo {is} 90
-        {turn} angulo
-        {forward} 100
 3:
 -   name: Elekti laŭ hazardo
     explanation: Elektu hazardan vorton el grupo per `{at}` kaj `{random}`.
@@ -73,98 +55,6 @@
     demo_code: |-
         nomo {is} Hedy
         {print} 'mia nomo estas ' nomo
--   name: '{ask}'
-    explanation: Demandu ion per `{ask}`.
-    demo_code: |-
-        koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'
-        {print} koloro ' estas via plej ŝatata!'
-5:
--   name: '{print}'
-    explanation: Presi ekzakte per citiloj.
-    demo_code: '{print} ''Saluton, bonvenon al Hedy.'''
--   name: '{ask}'
-    explanation: Demandu ion per `{ask}`.
-    demo_code: |-
-        koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'
-        {print} koloro ' estas via plej ŝatata!'
--   name: '{if}'
-    explanation: Fari ion kondiĉe per `{if}`.
-    demo_code: |-
-        koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'
-        {if} koloro {is} verda {print} 'bela!' {else} {print} 'ba!'
--   name: '{if} kun testudo'
-    explanation: Fari ion kondiĉe per `{if}`.
-    demo_code: |-
-        respondo {is} {ask} 'Kiel longe mi iru?'
-        {if} respondo {is} malproksimen {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Rekoni elementojn per `{in}`.
-    demo_code: |-
-        belaj_koloroj {is} verda, flava
-        koloro {is} {ask} 'Kio estas via plej ŝatata koloro?'
-        {if} koloro {in} belaj_koloroj {print} 'bela!' {else} {print} 'ba!'
--   name: '{pressed}'
-    explanation: Kontroli ĉu klavo estas `{pressed}` en la klavaro.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
-6:
--   name: '{print}'
-    explanation: Presi ekzakte per citiloj.
-    demo_code: '{print} ''5 multiplikite per 5 estas '' 5 * 5'
--   name: '{ask}'
-    explanation: Demandi pri kalkulo kaj kontroli, ĉu la respondo estas ĝusta.
-    demo_code: |-
-        respondo = {ask} 'Kio estas 10 plus 10?'
-        {if} respondo {is} 20 {print} 'Jes!' {else} {print} 'Vi malpravas'
--   name: '`{ask}` kaj `{if}` kun testudo'
-    explanation: Demandu la uzanton pri kiom da anguloj ŝi/li volas.
-    demo_code: |-
-        anguloj = {ask} 'Kiom da anguloj?'
-        angulo = 360 / anguloj
-        {forward} 50
-7:
--   name: '{print}'
-    explanation: Presi ekzakte per citiloj.
-    demo_code: '{print} ''Saluton, bonvenon al Hedy.'''
--   name: '{ask}'
-    explanation: Demandu ion per `{ask}`.
-    demo_code: |-
-        koloro = {ask} 'Kio estas via plej ŝatata koloro?'
-        {print} koloro ' estas via plej ŝatata!'
--   name: '{if}'
-    explanation: Fari ion kondiĉe per `{if}`.
-    demo_code: |-
-        koloro = {ask} 'Kio estas via plej ŝatata koloro?'
-        {if} koloro {is} verda {print} 'bela!' {else} {print} 'ba!'
--   name: '`{repeat}` kun testudo'
-    explanation: Ripetu kodan linion per `{repeat}`.
-    demo_code: '{repeat} 3 {times} {forward} 10'
-8:
--   name: '{print}'
-    explanation: Presi ion. Ne forgesu uzi citilojn por laŭvorta presado.
-    demo_code: '{print} ''5 multiplikite per 5 estas '' 5 * 5'
--   name: '{ask}'
-    explanation: Demandi pri sumo kaj kontroli, ĉu la respondo estas ĝusta. Ni povas nun presi du liniojn.
-    demo_code: |-
-        respondo = {ask} 'Kio estas 5 plus 5?'
-        {if} respondo {is} 10
-            {print} 'Bonege!'
-            {print} 'Ja la prava respondo estas ' respondo
-        {else}
-            {print} 'Ho!'
-            {print} 'La prava respondo estas 10'
--   name: '{repeat} kun testudo'
-    explanation: Ripeti plurajn liniojn.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
 9:
 -   name: '{if} kun pluraj linioj'
     explanation: La respondo al demando pri sumo per `{ask}`; kontrolu, ĉu ĝi estas ĝusta. Nun ni presu du liniojn.
@@ -176,180 +66,77 @@
         {else}
             {print} 'Vi malpravas.'
             {print} 'La ĝusta respondo estas 20'
--   name: '`{repeat}` kun testudo'
+-   name: '`{repeat}` kun pluraj linioj'
     explanation: Ripeti plurajn liniojn.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
-10:
--   name: '{print}'
-    explanation: Presi ion. Ne forgesu uzi citilojn por laŭvorta presado.
-    demo_code: '{print} ''5 multiplikite per 5 estas '' 5 * 5'
--   name: '`{for}` kun listo'
-    explanation: Presi ĉiujn erojn en listo.
-    demo_code: |-
-        bestoj {is} hundo, kato, fiŝo
-        {for} besto {in} bestoj
-          {print} 'Mi amas ' besto 'n'
-11:
--   name: '`{for}`-iteracio'
-    explanation: Oni povas uzi `{for}` kun `{range}`.
-    demo_code: |-
-        {for} nombro {in} {range} 1 {to} 5
-            {print} nombro
--   name: '{ask}'
-    explanation: Demandi pri sumo kaj kontroli, ĉu la respondo estas ĝusta. Ni povas nun presi du liniojn.
-    demo_code: |-
-        respondo = {ask} 'Kio estas 5 plus 5?'
-        {if} respondo {is} 10
-            {print} 'Bonege!'
-            {print} 'Ja la prava respondo estas ' respondo
-        {else}
-            {print} 'Ho!'
-            {print} 'La prava respondo estas 10'
-12:
--   name: decimala nombro rekte
-    explanation: Decimalaj nombroj.
-    demo_code: |-
-        {print} 'Ni ekkalkulu!'
-        {print} 'Du kaj duono plus du kaj duono estas...'
-        {print} 2.5 + 2.5
--   name: asigni tekston
-    explanation: Teksto kun citiloj post `=`
-    demo_code: |-
-        nomo = 'Hedy la Roboto'
-        {print} 'Saluton ' nomo
--   name: citiloj post komparo en `{if}`
-    explanation: Teksto kun citiloj post `{if}`.
-    demo_code: |-
-        nomo = {ask} 'Kiu vi estas?'
-        {if} nomo = 'Hedy'
-            {print} 'Saluton!'
--   name: citiloj en listo
-    explanation: Listo per citiloj.
-    demo_code: |-
-        superherooj = 'Ferviro', 'Vespertviro', 'Superviro'
-        {print} superherooj {at} {random}
+            {print} 'Hello!'
 13:
--   name: '{and}'
-    explanation: Ambaŭ partoj devas esti ĝustaj.
-    demo_code: |-
-        respondo1 = {ask} 'Kio estas 3+2?'
-        respondo2 = {ask} 'Kio estas 2+2?'
-        {if} respondo1 {is} 5 {and} respondo2 {is} 4
-            {print} 'Ambaŭ respondoj pravas!'
-        {else}
-            {print} 'Almenaŭ unu respondo malpravas!'
--   name: '{or}'
-    explanation: Almenaŭ unu el la du partoj devas esti ĝusta. Se ambaŭ estas ĝustaj, tio ankaŭ sufiĉas.
-    demo_code: |-
-        respondo1 = {ask} 'Kio estas 3+2?'
-        respondo2 = {ask} 'Kio estas 2+2?'
-        {if} respondo1 {is} 5 {or} respondo2 {is} 4
-            {print} 'Almenaŭ unu respondo pravas!'
-        {else}
-            {print} 'Ambaŭ respondoj malpravas!'
-14:
+-   name: '{print}'
+    explanation: Post `{print}` vi devas uzu rondajn krampojn.
+    demo_code: '{print}(''saluton!'')'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Pli malgranda
     explanation: Oni uzas la signon `<` por kontroli, ĉu la unua nombro estas pli malgranda ol la dua nombro.
     demo_code: |-
-        aĝo = {ask} 'Kian aĝon vi havas?'
-        {if} aĝo < 13
-            {print} 'Vi estas pli juna ol mi!'
+        aĝo = {input}('Kian aĝon vi havas?')
+        {if} aĝo < 13:
+            {print}('Vi estas pli juna ol mi!')
 -   name: Pli granda
     explanation: Oni uzas la signon `>` por kontroli, ĉu la unua nombro estas pli granda ol la dua nombro.
     demo_code: |-
-        aĝo = {ask} 'Kian aĝon vi havas?'
-        {if} aĝo > 13
-            {print} 'Vi estas pli aĝa ol mi!'
+        aĝo = {input}('Kian aĝon vi havas?')
+        {if} aĝo > 13:
+            {print}('Vi estas pli aĝa ol mi!')
 -   name: Egala
     explanation: Oni uzas la signon `==` por kontroli, ĉu la unua egalas la duan.
     demo_code: |-
-        respondo = {ask} 'Kio estas 5 * 5?'
-        {if} respondo == 25
-            {print} 'Vi pravas!'
+        respondo = {input}('Kio estas 5 * 5?')
+        {if} respondo == 25:
+            {print}('Vi pravas!')
 -   name: Ne egala
     explanation: Oni uzas la signon `!=` por kontroli, ĉu la unua diferencas de la duan.
     demo_code: |-
-        respondo = {ask} 'Kio estas 5 * 5?'
-        {if} respondo != 25
-            {print} 'Tio ne pravas!'
+        respondo = {input}('Kio estas 5 * 5?')
+        {if} respondo != 25:
+            {print}('Tio ne pravas!')
 -   name: Pli malgranda aŭ egala
     explanation: Oni uzas la signon `<=` por kontroli, ĉu la unua nombro estas pli malgranda ol aŭ egala al la dua nombro.
     demo_code: |-
-        aĝo = {ask} 'Kian aĝon vi havas?'
-        {if} aĝo <= 12
-            {print} 'Vi estas pli juna ol mi!'
+        aĝo = {input}('Kian aĝon vi havas?')
+        {if} aĝo <= 12:
+            {print}('Vi estas pli juna ol mi!')
 -   name: Pli granda aŭ egala
     explanation: Oni uzas la signon `>=` por kontroli, ĉu la unua nombro estas pli granda ol aŭ egala al la dua nombro.
     demo_code: |-
-        aĝo = {ask} 'Kian aĝon vi havas?'
-        {if} aĝo >= 14
-            {print} 'Vi estas pli aĝa ol mi!'
-15:
+        aĝo = {input}('Kian aĝon vi havas?')
+        {if} aĝo >= 14:
+            {print}('Vi estas pli aĝa ol mi!')
+14:
+-   name: 'creating a list'
+    explanation: Listoj per rektaj krampoj.
+    demo_code: |-
+        fruktoj = ['pomo', 'banano', 'ĉerizo']
+16:
 -   name: '{while}'
     explanation: Oni povas uzi `{while}`-iteracion kun `!=`.
     demo_code: |-
         respondo = 0
-        {while} respondo != 25
-            respondo = {ask} 'Kio estas 5 * 5?'
-        {print} 'Vi respondis prave'
+        {while} respondo != 25:
+            respondo = {input}('Kio estas 5 * 5?')
+        {print}('Vi respondis prave')
 -   name: '`{while}` kun plimalgrandeco'
     explanation: Oni povas ankaŭ uzi `{while}`-iteracion kune kun `<` aŭ `>`.
     demo_code: |-
         nombro = 1
-        {while} nombro < 3
-            {print} 'Ni faros tion ' 3 - nombro ' fojojn plu'
+        {while} nombro < 3:
+            {print}('Ni faros tion ', 3 - nombro, ' fojojn plu')
             nombro = nombro + 1
-        {print} 'Ni finiĝis'
-16:
--   name: rektaj krampoj
-    explanation: Listoj per rektaj krampoj.
-    demo_code: |-
-        fruktoj = ['pomo', 'banano', 'ĉerizo']
-        {print} fruktoj
--   name: Akiri eron el listo
-    explanation: Por elekti eron el listo, oni uzas `[numero]`. Tiel, `fruktoj[1]` signifas la unuan eron el la listo `fruktoj`!
-    demo_code: |-
-        fruktoj = ['banano', 'pomo', 'ĉerizo']
-        unuafrukto = fruktoj[1]
-        {print} unuafrukto
--   name: Hazarde elekti eron el listo
-    explanation: Por hazarde elekti eron el listo, oni uzas `[{random}]`. Tiel, `fruktoj[{random}]` signifas hazarde elektitan eron el la listo `fruktoj`!
-    demo_code: |-
-        fruktoj = ['banano', 'pomo', 'ĉerizo']
-        hazarda_frukto = fruktoj[{random}]
-        {print} hazarda_frukto
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a estas 1'
-        {elif} a == 2:
-            {print} 'a estas 2'
-        {else}:
-            {print} 'a ne estas 1 nek 2'
--   name: '{print}'
-    explanation: Kiam oni uzas la ŝlosilvorton `{for}`, oni devas meti `:` post la `{for}`-deklaro!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Jen mi venas!'
--   name: '{if}'
-    explanation: Oni faru la saman pri la ŝlosilvorto `{if}`.
-    demo_code: |-
-        koloro = {ask} 'Kio estas via plej ŝatata koloro?'
-        {if} koloro == 'verda':
-            {print} 'Via plej ŝatata koloro estas verda'
-        {else}:
-            {print} 'Via plej ŝatata koloro ne estas verda'
+        {print}('Ni finiĝis')
 18:
--   name: '{print}'
-    explanation: Post `{print}` vi devas uzu rondajn krampojn.
-    demo_code: '{print}(''saluton!'')'
+
 -   name: '{range}'
     explanation: Post `{range}` vi devas uzi rondajn krampojn.
     demo_code: |-

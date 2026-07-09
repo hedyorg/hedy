@@ -21,7 +21,6 @@ DIGIT = '[__DIGIT__]'
 TRANSLATE_WORDS = [
     "add",
     "and",
-    "answer",
     "ask",
     "at",
     "black",

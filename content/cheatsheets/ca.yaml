@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Pregunta alguna cosa amb `{ask}`.
     demo_code: '{ask} Quin és el teu color preferit?'
--   name: '{echo}'
-    explanation: Repeteix el que vulguis usant `{echo}`.
+-   name: '{answer}'
+    explanation: Repeteix el que vulguis usant `{answer}`.
     demo_code: |-
         {ask} Quin és el teu color preferit?
-        {echo} així que el teu color preferit és el
--   name: '{print} emoticones'
-    explanation: Imprimeix un emoticona amb `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} així que el teu color preferit és el {answer}
 -   name: '{forward}'
     explanation: Dibuixa una línia amb `{forward}`.
     demo_code: '{forward} 100'
@@ -29,25 +26,10 @@
     demo_code: |-
         nom {is} Hedy
         {print} hola nom
--   name: '{ask}'
-    explanation: Demana alguna cosa amb `{ask}`. Alerta! Has de donar un nom a la resposta amb `{is}`.
-    demo_code: |-
-        color {is} {ask} Quin és el teu color preferit?
-        {print} color és el seu preferit!
 -   name: '{sleep}'
     explanation: 'Amb `{sleep}`, pots deixar que Hedy faci una pausa d''un (parell de) segon(s).'
     demo_code: |-
-        {print} Deixa’m pensar en un segon...
-        {sleep}
-        {print} Hmm.. Necessito 3 segons més ...
         {sleep} 3
-        {print} Eureka! Ho tinc!
--   name: '{is} amb tortuga'
-    explanation: Dona un nom a un número usant `{is}`. Pots elegir el nom tu mateix.
-    demo_code: |-
-        angle {is} 90
-        {turn} angle
-        {forward} 100
 3:
 -   name: Tria l'atzar
     explanation: Tria una paraula aleatòriament d'un grup usant `{at}` i `{random}`.
@@ -73,146 +55,3 @@
     demo_code: |-
         name {is} Hedy
         {print} 'my name is ' name
--   name: '{ask}'
-    explanation: Demana alguna cosa amb `{ask}`.
-    demo_code: |-
-        color {is} {ask} 'Quin és el teu color preferit?'
-        {print} color ' és el teu preferit!'
-5:
--   name: '{print}'
-    explanation: Imprimeix un text literal usant cometes.
-    demo_code: '{print} ''Hola benvingut a Hedy.'''
--   name: '{ask}'
-    explanation: Demana alguna cosa amb `{ask}`.
-    demo_code: |-
-        color {is} {ask} 'Quin és el teu color preferit?'
-        {print} color ' és el teu preferit!'
--   name: '{if}'
-    explanation: Fes una elecció amb `{if}`.
-    demo_code: |-
-        color {is} {ask} 'Quin és el teu color preferit?'
-        {if} color {is} verd {print} 'que bonic!' {else} {print} 'no és tan bonic'
--   name: '{if} amb tortuga'
-    explanation: Fes una elecció amb `{if}`.
-    demo_code: |-
-        resposta {is} {ask} 'Com de lluny he de caminar?'
-        {if} resposta {is} lluny {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Comprova elements amb `{in}`.
-    demo_code: |-
-        colors_bonics {is} verd, groc
-        color {is} {ask} 'Quin és el teu color preferit?'
-        {if} color {in} colors_bonics {print} 'bonic!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Comprova si una tecla determinada del teclat està `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
-6:
--   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''5 per 5 és '' 5 * 5'
--   name: '{ask}'
-    explanation: Ask for a calculation and check whether it is correct.
-    demo_code: |-
-        answer = {ask} 'What is 10 plus 10?'
-        {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
--   name: '`{ask}` i `{if}` amb la tortuga'
-    explanation: Ask the user how many angles they want.
-    demo_code: |-
-        angles = {ask} 'How many angles?'
-        angle = 360 / angles
-        {forward} 50
-7:
--   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''Hello welcome to Hedy.'''
--   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: |-
-        color = {ask} 'Quin és el teu color preferit?'
-        {print} color ' és el teu preferit!'
--   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: |-
-        color = {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: '{repeat} with turtle'
-    explanation: Repeat a line of code with `{repeat}`.
-    demo_code: '{repeat} 3 {times} {forward} 10'
-8:
--   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: '{print} ''5 per 5 és '' 5 * 5'
--   name: '{ask}'
-    explanation: Ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        {else}
-            {print} 'Oops!'
-            {print} 'The answer is 10'
--   name: '{repeat} with turtle'
-    explanation: Repeat multiple lines.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
-10:
--   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: '{print} ''5 per 5 és '' 5 * 5'
--   name: '{for} with a list'
-    explanation: Print all things in a list.
-    demo_code: |-
-        animals {is} dog, cat, blobfish
-        {for} animal {in} animals
-          {print} 'I love ' animal
-12:
--   name: float directly
-    explanation: Decimal numbers.
-    demo_code: |-
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
-        {print} 2.5 + 2.5
--   name: assign text
-    explanation: Text with quotation marks after `=`
-    demo_code: |-
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: Cites després de comparació `{if}`
-    explanation: Text with quotation marks after `{if}`.
-    demo_code: |-
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
--   name: quotes in list
-    explanation: A list with quotation marks.
-    demo_code: |-
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
-16:
--   name: square brackets
-    explanation: Lists with square brackets.
-    demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
--   name: Get an item from a list
-    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: Get a random item from a list
-    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[{random}]
-        {print} random_fruit

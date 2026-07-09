@@ -102,21 +102,6 @@ def is_local_dev():
     return is_dev() and not is_ci()
 
 
-def is_alpha():
-    """Whether this deployment is the alpha environment."""
-    app_name = os.getenv('HEROKU_APP_NAME', '').lower()
-    return is_production() and 'alpha' in app_name
-
-
-def frontend_environment():
-    """Return the frontend environment key used for feature flags."""
-    if is_alpha():
-        return 'alpha'
-    if is_production():
-        return 'production'
-    return 'local'
-
-
 CACHED_ENV_BEHAVIOR = None
 
 

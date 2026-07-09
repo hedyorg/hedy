@@ -1,7 +1,6 @@
 """Tests for main app.py routes and functions."""
 import json
 import uuid
-from types import SimpleNamespace
 import pytest
 import app as hedy_app
 from tests.python_html.fixtures.flask import Client
@@ -21,61 +20,6 @@ def assert_html_response(response):
 def last_template_context(template_variables):
     assert template_variables
     return template_variables[-1]
-
-
-class TestFeatureFlagInitialization:
-    """Test compatibility of hedy.external feature flag initialization."""
-
-    def test_initialize_feature_flags_prefers_context_initializer(self, monkeypatch):
-        calls = []
-
-        def initialize_from_context(context):
-            calls.append(("from_context", context))
-
-        def initialize_legacy(frontend_environment=None, feature_flags=None):
-            calls.append(("legacy", frontend_environment, feature_flags))
-
-        monkeypatch.setattr(
-            hedy_app.hedy,
-            'external',
-            SimpleNamespace(
-                initialize_frontend_feature_flags_from_context=initialize_from_context,
-                initialize_frontend_feature_flags=initialize_legacy,
-            ),
-        )
-
-        hedy_app.initialize_hedylang_feature_flags_for_request()
-
-        assert len(calls) == 1
-        assert calls[0][0] == "from_context"
-        assert calls[0][1] == hedy_app.get_frontend_feature_flags_context()
-
-    def test_initialize_feature_flags_uses_legacy_when_context_initializer_missing(self, monkeypatch):
-        calls = []
-
-        def initialize_legacy(frontend_environment=None, feature_flags=None):
-            calls.append((frontend_environment, feature_flags))
-
-        monkeypatch.setattr(
-            hedy_app.hedy,
-            'external',
-            SimpleNamespace(
-                initialize_frontend_feature_flags=initialize_legacy,
-            ),
-        )
-
-        hedy_app.initialize_hedylang_feature_flags_for_request()
-
-        assert len(calls) == 1
-        expected_context = hedy_app.get_frontend_feature_flags_context()
-        assert calls[0][0] == expected_context["frontend_environment"]
-        assert calls[0][1] == expected_context["feature_flags"]
-
-    def test_initialize_feature_flags_is_noop_when_initializer_missing(self, monkeypatch):
-        monkeypatch.setattr(hedy_app.hedy, 'external', SimpleNamespace())
-
-        # Should not raise if neither initializer is available.
-        hedy_app.initialize_hedylang_feature_flags_for_request()
 
 
 class TestMainPageRoute:
@@ -359,12 +303,7 @@ class TestMachineAndMicrobitFiles:
     def test_generate_microbit_files_feature_enabled_returns_200(self, client, monkeypatch):
         """When enabled, generate_microbit_files returns a success payload."""
         monkeypatch.setattr(hedy_app, 'MICROBIT_FEATURE', True)
-        monkeypatch.setattr(
-            hedy_app.hedy,
-            'transpile_and_return_python',
-            lambda code, level: 'print("ok")',
-            raising=False,
-        )
+        monkeypatch.setattr(hedy_app.hedy, 'transpile_and_return_python', lambda code, level: 'print("ok")')
         monkeypatch.setattr(hedy_app, 'save_transpiled_code_for_microbit', lambda transpiled: None)
 
         response = client.post(

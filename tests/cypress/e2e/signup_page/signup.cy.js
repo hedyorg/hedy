@@ -1,9 +1,6 @@
 import { goToSignup, goToProfilePage } from '../tools/navigation/nav.js'
 
 beforeEach(() => {
-  cy.clearCookies();
-  cy.clearAllLocalStorage();
-  cy.clearAllSessionStorage();
   goToSignup();
 })
 
@@ -57,6 +54,9 @@ it('Is able to sign up as a student', () => {
   })
 
 it('Is able to sign up as a teacher', () => {
+    cy.clearCookies();
+    cy.clearAllLocalStorage()
+    cy.clearAllSessionStorage();  
     cy.getDataCy('signup_teacher').click()
     // basic info
     let username = `teacher_${Math.random()}`

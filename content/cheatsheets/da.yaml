@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Stil spørgsmål med `{ask}`.
     demo_code: '{ask} Hvad er din yndlingsfarve?'
--   name: '{echo}'
-    explanation: Gentag ting med `{echo}`.
+-   name: '{answer}'
+    explanation: Gentag ting med `{answer}`.
     demo_code: |-
         {ask} Hvad er din yndlingsfarve?
-        {echo} så din yndlingsfarve er
--   name: '{print} emojier'
-    explanation: Udskriv en emoji med `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} så din yndlingsfarve er {answer}
 -   name: '{forward}'
     explanation: Tegn en linje med `{forward}`.
     demo_code: '{forward} 100'
@@ -29,25 +26,10 @@
     demo_code: |-
         navn {is} Hedy
         {print} velkommen navn
--   name: '{ask}'
-    explanation: Spørg om noget med `{ask}`. Vær opmærksom på at du skal navngive svaret med `{is}`.
-    demo_code: |-
-        farve {is} {ask} Hvad er din yndlingsfarve?
-        {print} farve er din favorit!
 -   name: '{sleep}'
     explanation: 'Med `{sleep}` kan du lade Hedy pause i et (par) sekund(er).'
     demo_code: |-
-        {print} Lad mig tænke i et sekund
-        {sleep}
-        {print} Hmm.. Jeg har brug for 3 sekunder til...
         {sleep} 3
-        {print} Aha! Nu har jeg det!
--   name: '{is} med skildpadde'
-    explanation: Navngiv et tal med `{is}`. Du kan vælge navnet selv.
-    demo_code: |-
-        vinkel {is} 90
-        {turn} vinkel
-        {forward} 100
 3:
 -   name: Vælg tilfældigt
     explanation: Vælg et tilfældigt ord fra en gruppe med `{at}` og `{random}`.
@@ -73,98 +55,6 @@
     demo_code: |-
         navn {is} Hedy
         {print} 'mit navn er ' navn
--   name: '{ask}'
-    explanation: Stil spørgsmål med `{ask}`.
-    demo_code: |-
-        farve {is} {ask} 'Hvad er din yndlingsfarve?'
-        {print} farve ' er din favorit!'
-5:
--   name: '{print}'
-    explanation: Udskriv nøjagtigt ved hjælp af citationstegn.
-    demo_code: '{print} ''Hej og velkommen til Hedy.'''
--   name: '{ask}'
-    explanation: Stil spørgsmål med `{ask}`.
-    demo_code: |-
-        farve {is} {ask} 'Hvad er din yndlingsfarve?'
-        {print} farve ' er din favorit!'
--   name: '{if}'
-    explanation: Træf et valg med `{if}`.
-    demo_code: |-
-        farve {is} {ask} 'Hvad er din yndlingsfarve?'
-        {if} farve {is} grøn {print} 'pænt!' {else} {print} 'tja'
--   name: '{if} med skildpadde'
-    explanation: Træf et valg med `{if}`.
-    demo_code: |-
-        svar {is} {ask} 'Hvor langt skal jeg gå?'
-        {if} svar {is} langt {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Tjek elementer med `{in}`.
-    demo_code: |-
-        flotte_farver {is} grøn, gul
-        farve {is} {ask} 'Hvad er din yndlingsfarve?'
-        {if} farve {in} flotte_farver {print} 'flot!' {else} {print} 'kedeligt'
--   name: '{pressed}'
-    explanation: Kontroller om en given tast på tastaturet er `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Du trykkede på A!'' {else} {print} ''Du trykkede på en anden tast!'''
-6:
--   name: '{print}'
-    explanation: Udskriv nøjagtigt ved hjælp af citationstegn.
-    demo_code: '{print} ''5 gange 5 er '' 5 * 5'
--   name: '{ask}'
-    explanation: Bed om en udregning og kontroller om den er korrekt.
-    demo_code: |-
-        svar = {ask} 'Hvad er 10 plus 10?'
-        {if} svar {is} 20 {print} 'Ja!' {else} {print} 'Ups'
--   name: '`{ask}` og `{if}` med skildpadde'
-    explanation: Spørg brugeren hvor mange vinkler de ønsker.
-    demo_code: |-
-        vinkler = {ask} 'Hvor mange vinkler?'
-        vinkel = 360 / vinkler
-        {forward} 50
-7:
--   name: '{print}'
-    explanation: Udskriv nøjagtigt ved hjælp af citationstegn.
-    demo_code: '{print} ''Hej og velkommen til Hedy.'''
--   name: '{ask}'
-    explanation: Stil spørgsmål med `{ask}`.
-    demo_code: |-
-        farve = {ask} 'Hvad er din yndlingsfarve?'
-        {print} farve ' er din favorit!'
--   name: '{if}'
-    explanation: Træf et valg med `{if}`.
-    demo_code: |-
-        farve = {ask} 'Hvad er din yndlingsfarve?'
-        {if} farve {is} grøn {print} 'pænt!' {else} {print} 'tja'
--   name: '{repeat} med skildpadde'
-    explanation: Gentag en linje kode med `{repeat}`.
-    demo_code: '{repeat} 3 {times} {forward} 10'
-8:
--   name: '{print}'
-    explanation: Udskriv noget. Husk at bruge citationstegn til nøjagtig udskrivning.
-    demo_code: '{print} ''5 gange 5 er '' 5 * 5'
--   name: '{ask}'
-    explanation: Spørg om svaret på en addition og kontroller, om det er korrekt. Vi kan nu udskrive 2 linjer.
-    demo_code: |-
-        svar = {ask} 'Hvad er 5 plus 5?'
-        {if} svar {is} 10
-            {print} 'Godt klaret!'
-            {print} 'Svaret er nemlig ' svar
-        {else}
-            {print} 'Ups!'
-            {print} 'Svaret er 10'
--   name: '{repeat} med skildpadde'
-    explanation: Gentag flere linjer.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Kontroller om en given tast på tastaturet er `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Du trykkede på A!'
-        {else}
-            {print} 'Du trykkede på en anden tast!'
 9:
 -   name: '{if} med flere linjer'
     explanation: Spørg om svaret på en addition med `{ask}` og se om det er korrekt. Nu udskriver vi to linjer.
@@ -176,180 +66,77 @@
         {else}
             {print} 'Niks'
             {print} 'Svaret er 20'
--   name: '{repeat} med skildpadde'
+-   name: '{repeat} med flere linjer'
     explanation: Gentag flere linjer.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
-10:
--   name: '{print}'
-    explanation: Udskriv noget. Husk at bruge citationstegn til nøjagtig udskrivning.
-    demo_code: '{print} ''5 gange 5 er '' 5 * 5'
--   name: '{for} med en liste'
-    explanation: Udskriv alle elementerne i en liste.
-    demo_code: |-
-        alle_dyr {is} hunde, katte, fisk
-        {for} dyr {in} alle_dyr
-          {print} 'Jeg elsker ' dyr
-11:
--   name: '{for}-løkke (sløjfe)'
-    explanation: Vi kan bruge `{for}` med et `{range}`.
-    demo_code: |-
-        {for} tæller {in} {range} 1 {to} 5
-            {print} tæller
--   name: '{ask}'
-    explanation: Spørg om svaret på en addition og kontroller, om det er korrekt. Vi kan nu udskrive 2 linjer.
-    demo_code: |-
-        svar = {ask} 'Hvad er 5 plus 5?'
-        {if} svar {is} 10
-            {print} 'Godt klaret!'
-            {print} 'Svaret er nemlig ' svar
-        {else}
-            {print} 'Ups!'
-            {print} 'Svaret er 10'
-12:
--   name: flyt direkte
-    explanation: Decimaltal.
-    demo_code: |-
-        {print} 'Regn løs!'
-        {print} 'To og en halv plus to og en halv er...'
-        {print} 2.5 + 2.5
--   name: tildel tekst
-    explanation: Tekst med citationstegn efter `=`
-    demo_code: |-
-        navn = 'Robotten Hedy'
-        {print} 'Hej ' navn
--   name: citationstegn efter `{if}`-sammenligning
-    explanation: Tekst med citationstegn efter `{if}`.
-    demo_code: |-
-        navn = {ask} 'Hvem er du?'
-        {if} navn = 'Hedy'
-            {print} 'Hej du!'
--   name: citationstegn i liste
-    explanation: En liste med citationstegn.
-    demo_code: |-
-        superhelte = 'Iron Man', 'Batman', 'Superman'
-        {print} superhelte {at} {random}
+            {print} 'Hello!'
 13:
--   name: '{and}'
-    explanation: To dele som begge skal være korrekte.
-    demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
-        {else}
-            {print} 'At least one answer is wrong!'
--   name: '{or}'
-    explanation: Mindst en af de to dele skal være korrekte. Hvis begge er korrekte, er det også fint.
-    demo_code: |-
-        svar1 = {ask} 'Hvad er 3+2?'
-        svar2 = {ask} 'Hvad er 2+2?'
-        {if} svar1 {is} 5 {or} svar2 {is} 4
-            {print} 'Mindst et svar er korrekt!'
-        {else}
-            {print} 'Begge svar er forkerte!'
-14:
+-   name: '{print}'
+    explanation: Efter `{print}` skal du bruge parenteser.
+    demo_code: '{print}(''hej!'')'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Mindre end
     explanation: Vi bruger `<` til at kontrollere om det første tal er mindre end det andet.
     demo_code: |-
-        alder = {ask} 'Hvor gammel er du?'
-        {if} alder < 13
-            {print} 'Du er yngre end mig!'
+        alder = {input}('Hvor gammel er du?')
+        {if} alder < 13:
+            {print}('Du er yngre end mig!')
 -   name: Større end
     explanation: Vi bruger `>` til at kontrollere om det første tal er større end det andet.
     demo_code: |-
-        alder = {ask} 'Hvor gammel er du?'
-        {if} alder > 13
-            {print} 'Du er ældre end mig!'
+        alder = {input}('Hvor gammel er du?')
+        {if} alder > 13:
+            {print}('Du er ældre end mig!')
 -   name: Lig med
     explanation: Vi bruger `==` til at kontrollere om to ting er ens.
     demo_code: |-
-        svar = {ask} 'Hvad er 5 * 5?'
-        {if} svar == 25
-            {print} 'Det er korrekt!'
+        svar = {input}('Hvad er 5 * 5?')
+        {if} svar == 25:
+            {print}('Det er korrekt!')
 -   name: Ikke lig med
     explanation: Vi bruger `!=` til at kontrollere om to ting ikke er ens.
     demo_code: |-
-        svar = {ask} 'Hvad er 5 * 5?'
-        {if} svar != 25
-            {print} 'Det er ikke korrekt!'
+        svar = {input}('Hvad er 5 * 5?')
+        {if} svar != 25:
+            {print}('Det er ikke korrekt!')
 -   name: Mindre end eller lig med
     explanation: Vi bruger `<=` til at kontrollere om det første tal er mindre end eller lig med det andet.
     demo_code: |-
-        alder = {ask} 'Hvor gammel er du?'
-        {if} alder <= 12
-            {print} 'Du er yngre end mig!'
+        alder = {input}('Hvor gammel er du?')
+        {if} alder <= 12:
+            {print}('Du er yngre end mig!')
 -   name: Større end eller lig med
     explanation: Vi bruger `>=` til at kontrollere om det første tal er større end eller lig med det andet.
     demo_code: |-
-        alder = {ask} 'Hvor gammel er du?'
-        {if} alder >= 14
-            {print} 'Du er ældre end mig!'
-15:
+        alder = {input}('Hvor gammel er du?')
+        {if} alder >= 14:
+            {print}('Du er ældre end mig!')
+14:
+-   name: 'creating a list'
+    explanation: Lister med firkantede parenteser.
+    demo_code: |-
+        frugt = ['æble', 'banan', 'kirsebær']
+16:
 -   name: '{while}'
     explanation: Vi kan bruge en `{while}`-løkke sammen med ikke lig med.
     demo_code: |-
         svar = 0
-        {while} svar != 25
-            svar = {ask} 'Hvad er 5 gange 5?'
-        {print} 'Det er rigtigt'
+        {while} svar != 25:
+            svar = {input}('Hvad er 5 gange 5?')
+        {print}('Det er rigtigt')
 -   name: '{while} mindre end'
     explanation: Vi kan også bruge en `{while}`-løkke med `<` og `>`.
     demo_code: |-
         tælle = 1
-        {while} tælle < 3
-            {print} 'Vi gør dette ' 3 - tælle ' flere gange'
+        {while} tælle < 3:
+            {print}('Vi gør dette ', 3 - tælle, ' flere gange')
             tælle = tælle + 1
-        {print} 'Vi er færdige'
-16:
--   name: firkantede parenteser
-    explanation: Lister med firkantede parenteser.
-    demo_code: |-
-        frugt = ['æble', 'banan', 'kirsebær']
-        {print} frugt
--   name: Tilgå et element i en liste
-    explanation: For at tilgå et element fra en liste bruger vi [tal], så frugt[1] betyder at få den første frugt i listen!
-    demo_code: |-
-        frugt = ['banan', 'æble', 'kirsebær']
-        første_frugt = frugt[1]
-        {print} første_frugt
--   name: Tilgå et tilfældigt element i en liste
-    explanation: For at tilgå et tilfældigt element i en liste bruger vi [{random}]], så frugt{random}] betyder at få en tilfældig frugt fra listen!
-    demo_code: |-
-        frugt = ['banan', 'æble', 'kirsebær']
-        tilfældig_frugt = frugt[{random}]
-        {print} tilfældig_frugt
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a er 1'
-        {elif} a == 2:
-            {print} 'a er 2'
-        {else}:
-            {print} 'a er hverken 1 eller 2'
--   name: '{print}'
-    explanation: Når vi bruger en `{for}`-løkke, skal vi lægge en `:` bag `{for}`-sætningen!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Klar eller ej, her kommer jeg!'
--   name: '{if}'
-    explanation: Vi skal gøre det samme med alle vores `{if}` sætninger.
-    demo_code: |-
-        farve = {ask} 'Hvad er din yndlingsfarve?'
-        {if} farve == 'grøn':
-            {print} 'Din yndlingsfarve er grøn'
-        {else}:
-            {print} 'Din yndlingsfarve er ikke grøn'
+        {print}('Vi er færdige')
 18:
--   name: '{print}'
-    explanation: Efter `{print}` skal du bruge parenteser.
-    demo_code: '{print}(''hej!'')'
+
 -   name: '{range}'
     explanation: Efter `{range}` skal du bruge parenteser.
     demo_code: |-

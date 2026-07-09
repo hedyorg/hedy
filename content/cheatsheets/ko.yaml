@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: '`{ask}`로 물어본다.'
     demo_code: '{ask} 너의 가장 좋아하는 색깔은 무었이니?'
--   name: '{echo}'
-    explanation: '`{echo}`를 사용하여 무엇인가를 반복한다.'
+-   name: '{answer}'
+    explanation: '`{answer}`를 사용하여 무엇인가를 반복한다.'
     demo_code: |-
         {ask} 너의 가장 좋아하는 색깔은 무었이니?
-        {echo} so your favorite 색깔 is
--   name: '{print} emojis'
-    explanation: '`{print}`로 이모지를 출력 합니다.'
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} so your favorite 색깔 is {answer}
 -   name: '{forward}'
     explanation: '`{forward}`로 선을 그립니다.'
     demo_code: '{forward} 100'
@@ -29,25 +26,10 @@
     demo_code: |-
         이름 {is} Hedy
         {print} 어서와 이름
--   name: '{ask}'
-    explanation: '`{ask}`로 물어 보세요. 조심하세요! 답에 `{is}`로 이름을 붙여야 합니다.'
-    demo_code: |-
-        색깔 {is} {ask} 너의 가장 좋아하는 색깔은 무었이니?
-        {print} 색깔 이 너가 좋아하는 것이다!
 -   name: '{sleep}'
     explanation: '`{sleep}`은 Hedy를 잠시 쉬게 해준다.'
     demo_code: |-
-        {print} 잠시 나 생각해볼게...
-        {sleep}
-        {print} 흠.. 나 3초만 기다려줘...
         {sleep} 3
-        {print} 유레카! 내가 해냈어!
--   name: '{is}를 거북이와 함께'
-    explanation: '`{is}`를 사용하여 숫자에 이름을 붙여라. 직접 이름을 선택할 수 있다.'
-    demo_code: |-
-        각도 {is} 90
-        {turn} 각도
-        {forward} 100
 3:
 -   name: Choose random
     explanation: '`{at}`와 `{random}`을 가진 그룹에서 랜덤_과일 단어를 선택한다.'
@@ -73,98 +55,6 @@
     demo_code: |-
         이름 {is} Hedy
         {print} '나의 이름은 ' 이름
--   name: '{ask}'
-    explanation: '`{ask}`로 물어본다.'
-    demo_code: |-
-        색깔 {is} {ask} '너의 가장 좋아하는 색깔은 무었이니?'
-        {print} 색깔 ' 이 너가 좋아하는 것이다!'
-5:
--   name: '{print}'
-    explanation: 따옴표를 사용하여 정확하게 print합니다.
-    demo_code: '{print} ''안녕 어서와 Hedy.'''
--   name: '{ask}'
-    explanation: '`{ask}`로 물어본다.'
-    demo_code: |-
-        색깔 {is} {ask} '너의 가장 좋아하는 색깔은 무었이니?'
-        {print} 색깔 ' 이 너가 좋아하는 것이다!'
--   name: '{if}'
-    explanation: '`{if}`로 선택하세요.'
-    demo_code: |-
-        색깔 {is} {ask} '너의 가장 좋아하는 색깔은 무었이니?'
-        {if} 색깔 {is} 녹색 {print} '예쁘다!' {else} {print} '그저 그래'
--   name: '{if}를 거북이와 함께'
-    explanation: '`{if}`로 선택하세요.'
-    demo_code: |-
-        대답 {is} {ask} '얼마나 내가 걸어가야하지?'
-        {if} 대답 {is} 멀어 {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: '`{in}`로 요소를 점검한다.'
-    demo_code: |-
-        이쁜_색깔들 {is} 녹색, 노랑
-        색깔 {is} {ask} '너의 가장 좋아하는 색깔 {is} 무엇이니?'
-        {if} 색깔 {in} 이쁜_색깔들 {print} '예쁘다!' {else} {print} '그저 그래'
--   name: '{pressed}'
-    explanation: 키보드의 주어진 키가 `{pressed}`인지 확인한다.
-    demo_code: '{if} a {is} {pressed} {print} ''당신은 A를 눌렀습니다!'' {else} {print} ''다른 키를 눌렀습니다!'''
-6:
--   name: '{print}'
-    explanation: 따옴표를 사용하여 정확하게 print합니다.
-    demo_code: '{print} ''5 곱하기 5 는 '' 5 * 5'
--   name: '{ask}'
-    explanation: 계산을 요청하고 정확한지 확인한다.
-    demo_code: |-
-        대답 = {ask} '10 더하기 10 무엇이니?'
-        {if} 대답 {is} 20 {print} '응!' {else} {print} '이런'
--   name: '`{ask}` 와 `{if}`를 거북이와 함께'
-    explanation: 사용자에게 원하는 각도를 물어봅니다.
-    demo_code: |-
-        각도 = {ask} '각도가 얼마지?'
-        각도 = 360 / 각도
-        {forward} 50
-7:
--   name: '{print}'
-    explanation: 따옴표를 사용하여 정확하게 print합니다.
-    demo_code: '{print} ''안녕 어서와 Hedy.'''
--   name: '{ask}'
-    explanation: '`{ask}`로 물어본다.'
-    demo_code: |-
-        색깔 = {ask} '너의 가장 좋아하는 색깔은 무었이니?'
-        {print} 색깔 ' 이 너가 좋아하는 것이다!'
--   name: '{if}'
-    explanation: '`{if}`로 선택하세요.'
-    demo_code: |-
-        색깔 = {ask} '너의 가장 좋아하는 색깔은 무었이니?'
-        {if} 색깔 {is} 녹색 {print} '예쁘다!' {else} {print} '그저 그래'
--   name: '{repeat}를 거북이와 함께'
-    explanation: 코드 행을 `{repeat}`로 반복합니다.
-    demo_code: '{repeat} 3 {times} {forward} 10'
-8:
--   name: '{print}'
-    explanation: 무언가를 print하라. 문자 그대로 print할 때 따옴표를 사용하는 것을 기억하라.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
--   name: '{ask}'
-    explanation: 합계에 대한 답을 물어보고 맞는지 확인해보세요. 이제 2줄을 print할 수 있습니다.
-    demo_code: |-
-        대답 = {ask} '5 더하기 5는 무엇이니?'
-        {if} 대답 {is} 10
-            {print} '잘했어!'
-            {print} '결국, 정답은 ' 대답
-        {else}
-            {print} '이런!'
-            {print} '정답은 10'
--   name: '{repeat}를 거북이와 함께'
-    explanation: 여러 줄을 반복합니다.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: 키보드의 주어진 키가 `{pressed}`인지 확인한다.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'A 키를 눌렀습니다!'
-        {else}
-            {print} '다른 키를 눌렀습니다!'
 9:
 -   name: '{if}를 여러 라인과 함께'
     explanation: 질문의 총합을 `{ask}`로 맞춘 다음 그것이 맞는지 확인한다. 이제 우리는 두 줄을 출력한다.
@@ -176,180 +66,77 @@
         {else}
             {print} '틀렸어'
             {print} '정답은 20'
--   name: '{repeat}를 거북이와 함께'
+-   name: '{repeat}를 여러 라인과 함께'
     explanation: 여러 줄을 반복합니다.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
-10:
--   name: '{print}'
-    explanation: 무언가를 print하라. 문자 그대로 print할 때 따옴표를 사용하는 것을 기억하라.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
--   name: '{for}를 목록과 함께'
-    explanation: 목록에 있는 모든 것을 print합니다.
-    demo_code: |-
-        동물들 {is} 강아지, 고양이, 물고기
-        {for} 동물 {in} 동물들
-          {print} '내가 좋아하는건 ' 동물
-11:
--   name: '{for} 반복'
-    explanation: '`{range}`와 함께 `{for}`를 사용할 수 있습니다.'
-    demo_code: |-
-        {for} counter {in} {range} 1 {to} 5
-            {print} counter
--   name: '{ask}'
-    explanation: 합계에 대한 답을 물어보고 맞는지 확인해보세요. 이제 2줄을 print할 수 있습니다.
-    demo_code: |-
-        대답 = {ask} '5 더하기 5은 무엇이니?'
-        {if} 대답 {is} 10
-            {print} '잘했어!'
-            {print} '결국, 대답은 ' 대답
-        {else}
-            {print} '이런!'
-            {print} '정답은 10'
-12:
--   name: float directly
-    explanation: 십진수 숫자.
-    demo_code: |-
-        {print} '계산하세요!'
-        {print} '2.5 더하기 2.5는...'
-        {print} 2.5 + 2.5
--   name: assign text
-    explanation: '`=` 뒤에 따옴표가 있는 텍스트'
-    demo_code: |-
-        이름 = '로봇 Hedy'
-        {print} '안녕' 이름
--   name: quotes after `{if}` comparison
-    explanation: '`{if}` 뒤에 따옴표가 있는 텍스트.'
-    demo_code: |-
-        이름 = {ask} '누구세요?'
-        {if} 이름 = 'Hedy'
-            {print} '안녕하세요!'
--   name: quotes in list
-    explanation: 따옴표가 있는 목록입니다.
-    demo_code: |-
-        superheroes = '아이언맨', '배트맨', '슈퍼맨'
-        {print} superheroes {at} {random}
+            {print} 'Hello!'
 13:
--   name: '{and}'
-    explanation: 두 부분 모두 정확해야 합니다.
-    demo_code: |-
-        대답1 = {ask} '3+2은 무었이니?'
-        대답2 = {ask} '2+2은 무었이니?'
-        {if} 대답1 {is} 5 {and} 대답2 {is} 4
-            {print} '모든 대답은 맞았어!'
-        {else}
-            {print} '일부 대답은 틀렸어!'
--   name: '{or}'
-    explanation: 두 부분 중 적어도 1개는 맞아야 한다. 둘 다 맞다면 역시 괜찮다.
-    demo_code: |-
-        대답1 = {ask} '3+2는 무었이니?'
-        대답2 = {ask} '2+2 무었이니?'
-        {if} 대답1 {is} 5 {or} 대답2 {is} 4
-            {print} '일부 대답은 맞았어!'
-        {else}
-            {print} '모든 대답이 틀렸어!'
-14:
+-   name: '{print}'
+    explanation: '`{print}` 뒤에는 괄호를 사용해야 합니다.'
+    demo_code: '{print}(''hi!'')'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Smaller
     explanation: 우리는 `<`를 사용하여 첫 번째 숫자가 두 번째 숫자보다 작은지 확인합니다.
     demo_code: |-
-        나이 = {ask} 'How old are you?'
-        {if} 나이 < 13
-            {print} 'You are younger than me!'
+        나이 = {input}('How old are you?')
+        {if} 나이 < 13:
+            {print}('You are younger than me!')
 -   name: Bigger
     explanation: 첫 번째 숫자가 두 번째 숫자보다 큰지 확인할 때는 `>`를 사용합니다.
     demo_code: |-
-        나이 = {ask} 'How old are you?'
-        {if} 나이 > 13
-            {print} 'You are older than me!'
+        나이 = {input}('How old are you?')
+        {if} 나이 > 13:
+            {print}('You are older than me!')
 -   name: Equal
     explanation: 우리는 `==`를 사용하여 두 가지가 같은지 확인합니다.
     demo_code: |-
-        대답 = {ask} '5 * 5는 무었이니?'
-        {if} 대답 == 25
-            {print} '맞았어!'
+        대답 = {input}('5 * 5는 무었이니?')
+        {if} 대답 == 25:
+            {print}('맞았어!')
 -   name: Not equal
     explanation: 우리는 `!=`를 사용하여 두 가지가 같지 않은지 확인합니다.
     demo_code: |-
-        대답 = {ask} '5 * 5는 무었이니?'
-        {if} 대답 != 25
-            {print} '틀렸어!'
+        대답 = {input}('5 * 5는 무었이니?')
+        {if} 대답 != 25:
+            {print}('틀렸어!')
 -   name: Smaller or equal
     explanation: 우리는 `<=`를 사용하여 첫 번째 숫자가 두 번째 숫자보다 작거나 같은지 확인합니다.
     demo_code: |-
-        나이 = {ask} 'How old are you?'
-        {if} 나이 <= 12
-            {print} 'You are younger than me!'
+        나이 = {input}('How old are you?')
+        {if} 나이 <= 12:
+            {print}('You are younger than me!')
 -   name: Bigger or equal
     explanation: 첫 번째 숫자가 두 번째 숫자보다 크거나 같은지 확인하기 위해 `>=`를 사용합니다.
     demo_code: |-
-        나이 = {ask} 'How old are you?'
-        {if} 나이 >= 14
-            {print} 'You are older than me!'
-15:
+        나이 = {input}('How old are you?')
+        {if} 나이 >= 14:
+            {print}('You are older than me!')
+14:
+-   name: 'creating a list'
+    explanation: 대괄호가 있는 목록입니다.
+    demo_code: |-
+        과일 = ['사과', '바나나', '체리']
+16:
 -   name: '{while}'
     explanation: 우리는 `{while}` 루프를 동일하지 않게 사용할 수 있다.
     demo_code: |-
         대답 = 0
-        {while} 대답 != 25
-            대답 = {ask} '5 곱하기 5는 뭐지?'
-        {print} '정답은 다음과 같다'
--   name: Smaller {while}
+        {while} 대답 != 25:
+            대답 = {input}('5 곱하기 5는 뭐지?')
+        {print}('정답은 다음과 같다')
+-   name: '{while} with > and <'
     explanation: 또한 `<`와 `>`와 함께 `{while}` 루프를 사용할 수 있다.
     demo_code: |-
         숫자 = 1
-        {while} 숫자 < 3
-            {print} '우리는 이것을 ' 3 - 숫자 '번 할거야'
+        {while} 숫자 < 3:
+            {print} ('우리는 이것을 ', 3 - 숫자, '번 할거야')
             숫자 = 숫자 + 1
-        {print} '우리는 해냈어'
-16:
--   name: 대과로
-    explanation: 대괄호가 있는 목록입니다.
-    demo_code: |-
-        과일 = ['사과', '바나나', '체리']
-        {print} 과일
--   name: 목록에서 항목 가져오기
-    explanation: 목록에서 항목을 가져오려면 [숫자]를 사용하므로 과일[1]은 목록에서 첫 번째 과일을 가져오라는 의미입니다!
-    demo_code: |-
-        과일 = ['사과', '바나나', '체리']
-        첫번째과일 = 과일[1]
-        {print} 첫번째과일
--   name: 목록에서 랜덤 항목 가져오기
-    explanation: 우리가 사용하는 과일[random] 목록에서 랜덤_과일 품목을 얻으려면 과일[random] 목록에서 랜덤_과일 과일을 얻으라는 뜻이다!
-    demo_code: |-
-        과일 = ['사과', '바나나', '체리']
-        랜덤_과일 = 과일[{random}]
-        {print} 랜덤_과일
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a 는 1'
-        {elif} a == 2:
-            {print} 'a 는 2'
-        {else}:
-            {print} 'a 는 1 또는 2가 아니다'
--   name: '{print}'
-    explanation: '`{for}`를 사용할 때는 `{for}` 문 뒤에 `:`를 넣어야 한다!'
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} '준비 되었거나 아니거나, 나는 출력된다!'
--   name: '{if}'
-    explanation: 우리는 우리의 모든 `{if}` 질문에 대해 똑같이 할 필요가 있다.
-    demo_code: |-
-        색깔 = {ask} '너가 가장 좋아하는 색깔은 무었이니?'
-        {if} 색깔 == '녹색':
-            {print} '너가 가장 좋아하는 색깔은 녹색이다'
-        {else}:
-            {print} '너가 가장 좋아하는 색깔 녹색이 아니다'
+        {print}('우리는 해냈어')
 18:
--   name: '{print}'
-    explanation: '`{print}` 뒤에는 괄호를 사용해야 합니다.'
-    demo_code: '{print}(''hi!'')'
+
 -   name: '{range}'
     explanation: '`{range}` 뒤에는 괄호를 사용해야 합니다.'
     demo_code: |-
