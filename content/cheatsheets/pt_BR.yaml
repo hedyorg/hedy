@@ -128,24 +128,11 @@
             {print}('Fazemos isto mais ', 3 - contagem, ' vezes.')
             contagem = contagem + 1
         {print}('Acabamos')
-26:
--   name: colchetes
+14:
+-   name: 'creating a list'
     explanation: Listas com colchetes.
     demo_code: |-
         fruta = ['maçã', 'banana', 'cereja']
-        {print} fruta
--   name: Obtenha um elemento de uma lista
-    explanation: 'Para obter um elemento de uma lista nós usamos [número] onde fruta[1] significa: obtenha a primeira fruta da lista!'
-    demo_code: |-
-        fruta = ['banana', 'maçã', 'cereja']
-        primeira_fruta = fruta[1]
-        {print} primeira_fruta
--   name: Obtenha um elemento aleatório de uma lista
-    explanation: Para obter um item aleatório de uma lista, usamos [{random}] então fruta[{random}] significa obter uma fruta aleatória da lista!
-    demo_code: |-
-        fruta = ['banana', 'maçã', 'cereja']
-        qualquer_fruta = fruta[{random}]
-        {print} qualquer_fruta
 17:
 -   name: '{elif}'
     explanation: '`{elif}`'

@@ -128,24 +128,11 @@
             {print}('On doit compter encore ' 3 - compteur ' fois')
             compteur = compteur + 1
         {print}('On a fini')
-26:
--   name: crochets
+14:
+-   name: 'creating a list'
     explanation: Liste avec des crochets.
     demo_code: |-
         fruits = ["pomme", "banane", "cerise"]
-        {print} fruits
--   name: Obtenir un élément d'une liste
-    explanation: 'Pour obtenir un élément d''une liste, on utilise [nombre] donc fruits[1] signifie : obtenir le premier fruit de la liste !'
-    demo_code: |-
-        fruits = ["banane", "pomme", "cerise"]
-        premier_fruit = fruits[1]
-        {print} premier_fruit
--   name: Obtenir un élément au hasard dans une liste
-    explanation: 'Pour obtenir un élément au hasard dans une liste, on utilise [{random}] donc fruits[{random}] signifie : obtenir un fruit au hasard de la liste !'
-    demo_code: |-
-        fruits = ["banane", "pomme", "cerise"]
-        fruit_aléatoire = fruits[{random}]
-        {print} fruit_aléatoire
 17:
 -   name: '{elif}'
     explanation: '`{elif}`'

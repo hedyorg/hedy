@@ -128,24 +128,11 @@
             {print}('我们计算 ', 3 - 计数, ' 的次数更多了')
             计数 = 计数 + 1
         {print}('我们完成啦')
-26:
--   name: 中括号
+14:
+-   name: 'creating a list'
     explanation: 把列表的内容用中括号括起来。
     demo_code: |-
         水果 = ['苹果', '香蕉', '樱桃']
-        {print} 水果
--   name: 从一个列表中检索元素
-    explanation: 我们用[数字]从一个列表中检索元素，因此水果[1] 的意思就是从列表水果中检索第一个元素!
-    demo_code: |-
-        fruit = ['香蕉', '苹果', '樱桃']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: 从一个列表中随机选择元素
-    explanation: 我们用[{random}] 从一个列表中随机选择元素，因此fruit[{random}]的意思是从列表中随机选择一个水果!
-    demo_code: |-
-        水果 = ['香蕉', '苹果', '樱桃']
-        随机水果 = 水果[{random}]
-        {print} 随机水果
 17:
 -   name: '{elif}'
     explanation: '`{elif}`'

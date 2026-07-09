@@ -116,16 +116,11 @@
             {print}('Ponovimo to še ', 3 - števec, '-krat')
             števec = števec + 1
         {print}('Pa smo opravili')
-26:
--   name: oglati oklepaji
+14:
+-   name: 'creating a list'
     explanation: Seznami z oglatimi oklepaji.
-    demo_code: "sadje = ['jabolko', 'banana', 'češnja']\n{print} sadje"
--   name: Pridobite predmet s seznama
-    explanation: Za pridobitev predmeta s seznama uporabimo [število], tako da sadje[1] pomeni, da dobimo prvo sadje s seznama!
-    demo_code: "sadje = ['banana', 'jabolko', 'češnja']\nprvo_sadje = sadje[1]\n{print} prvo_sadje"
--   name: Izbrite naključni predmet s seznama
-    explanation: Za izbiro naključnega predmeta s seznama uporabimo [{random}]. Torej, sadje[{random}] pomeni, da izberete naključno sadje s seznama!
-    demo_code: "sadje = ['banana', 'jabolko', 'češnja']\nnaključno_sadje = sadje[{random}]\n{print} naključno_sadje"
+    demo_code: |-
+        sadje = ['jabolko', 'banana', 'češnja']
 17:
 -   name: '{elif}'
     explanation: '`{elif}`'

@@ -128,24 +128,11 @@
             {print}('Hacemos esto ', 3 - contador, ' veces más')
             contador = contador + 1
         {print}('Hemos terminado')
-26:
--   name: corchetes
+14:
+-   name: 'creating a list'
     explanation: Listas con corchetes.
     demo_code: |-
         fruta = ['manzana', 'plátano', 'cereza']
-        {print} fruta
--   name: Coge un elemento de una lista
-    explanation: Para coger un elemento de una lista usamos [número] así que fruta[1] significa, ¡elige la primera fruta de la lista!
-    demo_code: |-
-        fruta = ['plátano', 'manzana', 'cereza']
-        primerafruta = fruta[1]
-        {print} primerafruta
--   name: Coge un elemento aleatorio de una lista
-    explanation: Para obtener un elemento aleatorio de una lista usamos [{random}] así que fruta [{random}] significa, ¡obtén una fruta aleatoria de la lista!
-    demo_code: |-
-        fruta = ['plátano', 'manzana', 'cereza']
-        fruta_aleatoria = fruta[{random}]
-        {print} fruta_aleatoria
 17:
 -   name: '{elif}'
     explanation: '`{elif}`'

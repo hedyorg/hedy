@@ -151,24 +151,11 @@
             {print}('Dit is de ', tel, 'e keer')
             tel = tel + 1
         {print}('We zijn klaar')
-26:
--   name: Haakjes om lijstjes
+14:
+-   name: 'Maak een lijst'
     explanation: Lijstjes met vierkante haken.
     demo_code: |-
         fruit = ['appel', 'banaan', 'kers']
-        {print} fruit
--   name: Pak iets uit een lijst
-    explanation: Om een item uit een lijst te krijgen gebruiken we [nummer] dus met fruit[1] krijg je de eerste fruit uit de lijst!
-    demo_code: |-
-        fruit = ['banaan', 'appel', 'kers']
-        eerstefruit = fruit[1]
-        {print} eerstefruit
--   name: Pak een random item uit een lijst
-    explanation: Om een willekeurig item uit een lijst te kiezen, gebruiken we [{random}]. Dus fruit[{random}] kiest een willekeurig fruit uit de lijst!
-    demo_code: |-
-        fruit = ['banaan', 'appel', 'kers']
-        willekeurig_fruit = fruit[{random}]
-        {print} willekeurig_fruit
 17:
 -   name: '{elif}'
     explanation: '`{elif}`'

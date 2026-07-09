@@ -89,24 +89,11 @@
           {print}('Ezt ', 3 - szam, ' alkalommal ismételjük')
           szam = szam + 1
         {print}('Készen vagyunk')
-26:
--   name: Szögletes zárójel listák körül
+14:
+-   name: 'creating a list'
     explanation: Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük.
     demo_code: |-
         gyumolcs = ['alma', 'banán', 'cseresznye']
-        print gyumolcs
--   name: Vegyünk ki egy elemet a listából
-    explanation: Egy elem kivételéhez egy [szám] jelölést használunk, pédául a gyumolcs[1] azt jelenti, hogy az első elemet kapjuk meg a gyumolcs nevű listából!
-    demo_code: |-
-        gyumolcs = ['alma', 'banán', 'cseresznye']
-        elsogyumolcs = gyumolcs[1]
-        print gyumolcs
--   name: Elem véletlenszerű kiválasztása listából
-    explanation: Véletlenszerű elem kiválasztása listából a [{random}] utasítással történik, például gyumolcs[{random}] utasítás azt jelenti, hogy véletlenszerűen kapjuk vissza a gyümölcs nevű lista egyik elemét!
-    demo_code: |-
-        gyumolcs = ['alma', 'banán', 'cseresznye']
-        veletlengyumolcs = gyumolcs[random]
-        print veletlengyumolcs
 17:
 -   name: 'for ezzel:'
     explanation: Ha a `for` utasítást használjuk, egy  `:`-ot teszünk a `for` utasítás végére!

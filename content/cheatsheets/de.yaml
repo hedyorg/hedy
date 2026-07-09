@@ -124,24 +124,11 @@
             {print}('Wir machen dies noch ', 3 - zähler, ' mal')
             zähler = zähler + 1
         {print}('Wir sind fertig')
-26:
--   name: Eckige Klammern
+14:
+-   name: 'creating a list'
     explanation: Listen mit eckigen Klammern.
     demo_code: |-
         obst = ['Apfel', 'Banane', 'Kirsche']
-        {print} obst
--   name: Nimm ein Element aus einer Liste
-    explanation: Um ein Element aus einer Liste zu erhalten, verwenden wir [zahl]. Mit obst[1] erhalten wir also das erste Obst aus der Liste!
-    demo_code: |-
-        obst = ['Apfel', 'Banane', 'Kirsche']
-        erstesobst = obst[1]
-        {print} erstesobst
--   name: Nimm ein zufälliges Element aus einer Liste
-    explanation: Um ein zufälliges Element aus einer Liste zu erhalten, verwenden wir [{random}]. Mit obst[{random}] erhalten wir also ein zufälliges Obst aus der Liste!
-    demo_code: |-
-        obst = ['Banane', 'Apfel', 'Kirsche']
-        zufälliges_obst = obst[{random}]
-        {print} zufälliges_obst
 17:
 -   name: '{elif}'
     explanation: '`{elif}`'
