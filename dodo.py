@@ -524,7 +524,7 @@ def task__offline_macos():
         title=lambda _: 'Build offline Hedy',
         task_dep=['backend', 'frontend'],
         actions=[
-            'pyinstaller -y app_macos.spec',
+            'pyinstaller -y --windowed app_macos.spec',
             # We copy this here instead of in the 'spec' file so that we can rename
             # the file (spec file copies cannot do that).
             'cp data-for-testing.json dist/offlinehedy/database.json',
