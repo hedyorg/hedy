@@ -112,23 +112,23 @@
         age = {input}('Quel âge as-tu ?')
         {if} age >= 14:
             {print}('Tu es plus vieux que moi !')
-15:
+16:
 -   name: '{while}'
     explanation: On peut utiliser la boucle `{while}` avec l'opérateur différent de.
     demo_code: |-
         reponse = 0
-        {while} reponse != 25
-            reponse = {ask} 'Que fait 5 multiplié par 5 ?'
-        {print} 'Une bonne réponse a été donnée'
+        {while} reponse != 25:
+            reponse = {input}('Que fait 5 multiplié par 5 ?')
+        {print}('Une bonne réponse a été donnée')
 -   name: Plus petit {while}
     explanation: On peut aussi utiliser `{while}` avec `<` et `>`.
     demo_code: |-
         compteur = 1
-        {while} compteur < 3
-            {print} 'On doit compter encore ' 3 - compteur ' fois'
+        {while} compteur < 3:
+            {print}('On doit compter encore ' 3 - compteur ' fois')
             compteur = compteur + 1
-        {print} 'On a fini'
-16:
+        {print}('On a fini')
+26:
 -   name: crochets
     explanation: Liste avec des crochets.
     demo_code: |-

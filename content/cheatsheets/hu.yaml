@@ -72,26 +72,24 @@
         kor = {input}('Hány éves vagy?')
         {if} kor < 13:
          {print}('Idősebb vagy, mint én!')
-15:
--   name: Logikai amíg
+16:
+-   name: '{while}'
     explanation: Használhatjuk a `{while}` hurkot a nem egyenlővel.
     demo_code: |-
         valasz = 0
-        while valasz != 25
-          valasz = ask 'Mennyi 5-ször 5?'
-        print 'A helyes válasz megadásra került'
--   name: Kisebb amíg
+        {while} valasz != 25:
+          valasz = {input}('Mennyi 5-ször 5?')
+        {print}('A helyes válasz megadásra került')
+-   name: '{while} with > and <'
     explanation: |-
-        Használhatjuk a `while` ciklust a `<` és `>` karakterekkel is. Légy óvatos, meg kell
-        változtatnod a számot, hogy a ciklus véget érjen. Ezt úgy tesszük, hogy a szam
-        változó értéke szam + 1 lesz.
+        Használhatjuk a `{while}` ciklust a `<` és `>` karakterekkel is.
     demo_code: |-
         szam = 1
-        while szam < 3
-          print 'Ezt ' 3 - szam ' alkalommal ismételjük'
+        {while} szam < 3:
+          {print}('Ezt ', 3 - szam, ' alkalommal ismételjük')
           szam = szam + 1
-        print 'Készen vagyunk'
-16:
+        {print}('Készen vagyunk')
+26:
 -   name: Szögletes zárójel listák körül
     explanation: Listáknál szögletes zárójelet fogunk használni! A lista egyes elemeit aposztrófok (') közé tesszük.
     demo_code: |-

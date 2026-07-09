@@ -75,23 +75,23 @@
 -   name: Not equal
 -   name: Smaller {or} equal
 -   name: Bigger or equal
-15:
--   name: while
-    explanation: We kinne dus in `while`-lus brûke mei de `True` en `False`
+16:
+-   name: {while}
+    explanation: We kinne dus in `{while}`-lus brûke mei de `True` en `False`
     demo_code: |-
         antwoord = 0
-        while antwoord != 25
-            antwurd = ask 'Wat is 5 kear 5?'
-        print 'Dat wie it goede antwurd!'
--   name: Smaller while
-    explanation: We kinne in `while`-lus ek brûke mei `<` en `>`. Tink der om datst it getal wol grutter makkest. Oars komst de lus net út.
+        {while} antwoord != 25:
+            antwurd = {input}('Wat is 5 kear 5?')
+        {print}('Dat wie it goede antwurd!')
+-   name: Smaller {while}
+    explanation: We kinne in `{while}`-lus ek brûke mei `<` en `>`.
     demo_code: |-
         tel = 1
-        while tel < 3
-            print 'Dit is de ' tel 'e kear'
+        {while} tel < 3
+            {print}('Dit is de ', tel, 'e kear')
             tel = tel + 1
-        print 'We zijn klaar'
-16:
+        {print}('We zijn klaar')
+26:
 -   name: Heakjes om listen
     explanation: We sette no heakjes om listen. Tink ek om de inkelde oanhellingstekens om dingen yn 'e liste!
     demo_code: |-

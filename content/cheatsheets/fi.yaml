@@ -112,23 +112,23 @@
         ikä = {input}('Kuinka vanha olet?')
         {if} ikä >= 14:
             {print}('Olet minua vanhempi!')
-15:
+16:
 -   name: '{while}'
     explanation: Voimme käyttää `{while}` silmukkaa erisuuruuden kanssa.
     demo_code: |-
         vastaus = 0
-        {while} vastaus != 25
-            vastaus = {ask} 'Paljonko on 5 kertaa 5?'
+        {while} vastaus != 25:
+            vastaus = {input}('Paljonko on 5 kertaa 5?')
         {print} 'Oikea vastaus on annettu'
 -   name: Pienempi {while}
     explanation: We can also use the `{while}` loop with `<` and `>`.
     demo_code: |-
         count = 1
-        {while} count < 3
-            {print} 'We do this ' 3 - count ' more times'
+        {while} count < 3:
+            {print}('We do this ', 3 - count, ' more times')
             count = count + 1
-        {print} 'We are done'
-16:
+        {print}('We are done')
+26:
 -   name: square brackets
     explanation: Lists with square brackets.
     demo_code: |-

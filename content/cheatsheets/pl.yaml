@@ -112,23 +112,23 @@
         wiek = {input}('Ile masz lat?')
         {if} wiek >= 14:
             {print}('Jesteś starszy ode mnie!')
-15:
+16:
 -   name: '{while}'
     explanation: Możemy użyć pętli `{while}` z nierównością.
     demo_code: |-
         odpowiedź = 0
-        {while} odpowiedź != 25
-            odpowiedź = {ask} 'ile to 5 razy 5?'
-        {print} 'Udzielono poprawnej odpowiedzi'
+        {while} odpowiedź != 25:
+            odpowiedź = {input}('ile to 5 razy 5?')
+        {print}('Udzielono poprawnej odpowiedzi')
 -   name: Mniejszy {while}
     explanation: Możemy też użyć pętli `{while}` razem z `<` oraz `>`.
     demo_code: |-
         licznik = 1
-        {while} licznik < 3
-            {print} 'Robimy to jeszcze' 3 - licznik ' razy'
+        {while} licznik < 3:
+            {print}('Robimy to jeszcze', 3 - licznik, ' razy')
             licznik = licznik + 1
-        {print} 'Zrobione'
-16:
+        {print}('Zrobione')
+26:
 -   name: nawiasy kwadratowe
     explanation: Lista z nawiasami kwadratowymi.
     demo_code: |-

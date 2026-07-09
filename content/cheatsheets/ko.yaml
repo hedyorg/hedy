@@ -112,23 +112,23 @@
         나이 = {input}('How old are you?')
         {if} 나이 >= 14:
             {print}('You are older than me!')
-15:
+16:
 -   name: '{while}'
     explanation: 우리는 `{while}` 루프를 동일하지 않게 사용할 수 있다.
     demo_code: |-
         대답 = 0
-        {while} 대답 != 25
-            대답 = {ask} '5 곱하기 5는 뭐지?'
-        {print} '정답은 다음과 같다'
--   name: Smaller {while}
+        {while} 대답 != 25:
+            대답 = {input}('5 곱하기 5는 뭐지?')
+        {print}('정답은 다음과 같다')
+-   name: '{while} with > and <'
     explanation: 또한 `<`와 `>`와 함께 `{while}` 루프를 사용할 수 있다.
     demo_code: |-
         숫자 = 1
-        {while} 숫자 < 3
-            {print} '우리는 이것을 ' 3 - 숫자 '번 할거야'
+        {while} 숫자 < 3:
+            {print} ('우리는 이것을 ', 3 - 숫자, '번 할거야')
             숫자 = 숫자 + 1
-        {print} '우리는 해냈어'
-16:
+        {print}('우리는 해냈어')
+26:
 -   name: 대과로
     explanation: 대괄호가 있는 목록입니다.
     demo_code: |-

@@ -108,23 +108,23 @@
         Alter = {input}('Wie alt bist du?')
         {if} Alter >= 14:
             {print}('Du bist älter als ich!')
-15:
+16:
 -   name: '{while}'
     explanation: Wir können die `{while}`-Schleife mit ungleich verwenden.
     demo_code: |-
         antwort = 0
-        {while} antwort != 25
-            antwort = {ask} 'Wieviel ist 5 mal 5?'
-        {print} 'Eine richtige Antwort wurde eingegeben!'
+        {while} antwort != 25:
+            antwort = {input}('Wieviel ist 5 mal 5?')
+        {print}('Eine richtige Antwort wurde eingegeben!')
 -   name: '{while} mit Ungleichungen'
     explanation: Wir können die `{while}`-Schleife auch mit `<` und `>` verwenden.
     demo_code: |-
         zähler = 1
-        {while} zähler < 3
-            {print} 'Wir machen dies noch ' 3 - zähler ' mal'
+        {while} zähler < 3:
+            {print}('Wir machen dies noch ', 3 - zähler, ' mal')
             zähler = zähler + 1
-        {print} 'Wir sind fertig'
-16:
+        {print}('Wir sind fertig')
+26:
 -   name: Eckige Klammern
     explanation: Listen mit eckigen Klammern.
     demo_code: |-

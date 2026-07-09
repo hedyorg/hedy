@@ -112,23 +112,23 @@
         yaş = {input}('Kaç yaşındasın?')
         {if} yaş >= 14:
             {print}('Sen benden daha yaşlısın!')
-15:
+16:
 -   name: '{while}'
     explanation: Eşit değil ile `{while}` döngüsünü kullanabiliriz.
     demo_code: |-
         cevap = 0
-        {while} cevap != 25
-            cevap = {ask} '5 kere 5 kaç eder?'
-        {print} 'Doğru bir cevap verilmiştir'
--   name: Küçüktür ile {while}
+        {while} cevap != 25:
+            cevap = {input}('5 kere 5 kaç eder?')
+        {print}('Doğru bir cevap verilmiştir')
+-   name: '{while} with > and <'
     explanation: Ayrıca `{while}` döngüsünü `<` ve `>` ile de kullanabiliriz.
     demo_code: |-
         sayaç = 1
-        {while} sayaç < 3
-            {print} 'Bunu ' 3 - sayaç ' kere daha yapıyoruz'
+        {while} sayaç < 3:
+            {print}('Bunu ', 3 - sayaç, ' kere daha yapıyoruz')
             sayaç = sayaç + 1
-        {print} 'İşimizi bitirdik'
-16:
+        {print}('İşimizi bitirdik')
+26:
 -   name: köşeli parantezler
     explanation: Köşeli parantezler ile listeler.
     demo_code: |-

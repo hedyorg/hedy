@@ -135,23 +135,23 @@
         leeftijd = {input}('Hoe oud ben jij?')
         {if} leeftijd >= 14:
             {print}('Dan ben je ouder dan ik!')
-15:
+16:
 -   name: '{while}'
     explanation: We kunnen dus een `{while}` loop gebruiken met `!=`.
     demo_code: |-
         antwoord = 0
-        {while} antwoord != 25
-            antwoord = {ask} 'Wat is 5 keer 5?'
-        {print} 'Goed gedaan!'
+        {while} antwoord != 25:
+            antwoord = {input}('Wat is 5 keer 5?')
+        {print}('Goed gedaan!')
 -   name: Kleiner {while}
     explanation: We kunnen een `{while}` lus ook gebruiken met `<` en `>`.
     demo_code: |-
         tel = 1
-        {while} tel < 3
-            {print} 'Dit is de ' tel 'e keer'
+        {while} tel < 3:
+            {print}('Dit is de ', tel, 'e keer')
             tel = tel + 1
-        {print} 'We zijn klaar'
-16:
+        {print}('We zijn klaar')
+26:
 -   name: Haakjes om lijstjes
     explanation: Lijstjes met vierkante haken.
     demo_code: |-

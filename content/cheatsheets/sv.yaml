@@ -112,23 +112,23 @@
         ålder = {input}('Hur gammal är du?')
         {if} ålder >= 14:
             {print}('Du är äldre än jag!')
-15:
+16:
 -   name: '{while}'
     explanation: Vi kan använda `{while}` med skilt från.
     demo_code: |-
         svar = 0
-        {while} svar != 25
-            svar = {ask} 'Vad är 5 gånger 5?'
-        {print} 'Rätt svar har getts'
--   name: Mindre än {while}
+        {while} svar != 25:
+            svar = {input}('Vad är 5 gånger 5?')
+        {print}('Rätt svar har getts')
+-   name: '{while} with > and <'
     explanation: Vi kan också använda `{while}` med `<` och `>`.
     demo_code: |-
         antal = 1
-        {while} antal < 3
-            {print} 'Vi gör det här ' 3 - antal ' gånger till'
+        {while} antal < 3:
+            {print}('Vi gör det här ', 3 - antal, ' gånger till')
             antal = antal + 1
-        {print} 'Nu är det klart'
-16:
+        {print}('Nu är det klart')
+26:
 -   name: hakparenteser
     explanation: Listor med hakparenteser.
     demo_code: |-

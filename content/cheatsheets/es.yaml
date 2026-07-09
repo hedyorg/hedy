@@ -112,23 +112,23 @@
         edad = {input}('¿Cuántos años tienes?')
         {if} edad >= 14:
             {print}('Eres mayor que yo!')
-15:
+16:
 -   name: '{while}'
     explanation: Podemos usar el bucle `{while}` con no igual.
     demo_code: |-
         respuesta = 0
-        {while} respuesta != 25
-            respuesta = {ask} '¿Cuánto es 5 veces 5?'
-        {print} 'Se ha dado una respuesta correcta'
+        {while} respuesta != 25:
+            respuesta = {input}('¿Cuánto es 5 veces 5?')
+        {print}('Se ha dado una respuesta correcta')
 -   name: Menor {while}
     explanation: También podemos usar el bucle `{while}` con `<` y `>`.
     demo_code: |-
         contador = 1
-        {while} contador < 3
-            {print} 'Hacemos esto ' 3 - contador ' veces más'
+        {while} contador < 3:
+            {print}('Hacemos esto ', 3 - contador, ' veces más')
             contador = contador + 1
-        {print} 'Hemos terminado'
-16:
+        {print}('Hemos terminado')
+26:
 -   name: corchetes
     explanation: Listas con corchetes.
     demo_code: |-

@@ -112,23 +112,23 @@
         年龄 = {input}('你几岁了？')
         {if} 年龄 >= 14:
             {print}('你比我大！')
-15:
+16:
 -   name: '{while}循环语句'
     explanation: 我们可以在 `{while}` 循环中使用不等于。
     demo_code: |-
         答案 = 0
-        {while} 答案 != 25
-            答案 = {ask} '5乘以5等于几?'
-        {print} '已经给出了正确答案'
--   name: 小于 {while}
+        {while} 答案 != 25:
+            答案 = {input}('5乘以5等于几?')
+        {print}('已经给出了正确答案')
+-   name: '{while} with > and <'
     explanation: 我们也可以将`{while}` 循环语句和小于号 `<` 及大于号 `>`一起使用。
     demo_code: |-
         计数 = 1
-        {while} 计数 < 3
-            {print} '我们计算 ' 3 - 计数 ' 的次数更多了'
+        {while} 计数 < 3:
+            {print}('我们计算 ', 3 - 计数, ' 的次数更多了')
             计数 = 计数 + 1
-        {print} '我们完成啦'
-16:
+        {print}('我们完成啦')
+26:
 -   name: 中括号
     explanation: 把列表的内容用中括号括起来。
     demo_code: |-

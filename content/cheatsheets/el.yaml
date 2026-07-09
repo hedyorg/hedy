@@ -91,23 +91,22 @@
 -   name: Μικρότερο ή ίσο
     explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
 -   name: Bigger or equal
-15:
--   name: Boolean while
-    explanation: Μπορούμε να χρησιμοποιήσουμε το βρόχο `while` με το `True` και `False`
+16:
+-   name: '{while}'
     demo_code: |-
         answer = 0
-        while answer != 25
-            answer = ask 'Πόσο κάνει 5 φορές το 5;'
-        print 'Δόθηκε η σωστή απάντηση'
--   name: Μικρότερο while
-    explanation: Μπορούμε επίσης να χρησιμοποιήσουμε το βρόχο `while` με το `<` και το `>`. Προσοχή όμως, θα χρειαστεί να αλλάζετε τον αριθμό ώστε να τελειώσει ο βρόχος. Το κάνουμε αυτό με το count = count + 1.
+        {while} answer != 25:
+            answer = {input}('Πόσο κάνει 5 φορές το 5;')
+        {print}('Δόθηκε η σωστή απάντηση')
+-   name: Μικρότερο {while}
+    explanation: Μπορούμε επίσης να χρησιμοποιήσουμε το βρόχο `{while}` με το `<` και το `>`. Προσοχή όμως, θα χρειαστεί να αλλάζετε τον αριθμό ώστε να τελειώσει ο βρόχος. Το κάνουμε αυτό με το count = count + 1.
     demo_code: |-
         count = 1
-        while count < 3
-            print 'Το κάνουμε αυτό ' 3 - count ' ακόμα φορές'
+        {while} count < 3:
+            {print} ('Το κάνουμε αυτό ', 3 - count, ' ακόμα φορές')
             count = count + 1
-        print 'Τελειώσαμε'
-16:
+        {print}('Τελειώσαμε')
+26:
 -   name: Αγκύλες γύρω από λίστες
     explanation: Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες.
     demo_code: |-

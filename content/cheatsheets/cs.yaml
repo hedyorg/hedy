@@ -96,23 +96,22 @@
         age = {input}('How old are you?')
         {if} age >= 14:
             {print}('You are older than me!')
-15:
+16:
 -   name: Pravdivostní while
-    explanation: Můžeme použít `while` cyklus s `True` a `False`.
     demo_code: |-
         odpoved = 0
-        while odpoved != 25
-            odpoved = ask 'Kolik je 5 * 5?'
-        print 'Dostala jsem správnou odpověď!'
--   name: While s operátory menší/větší než
-    explanation: Taky můžeme použít `while` s operátory `<` a `>`. Pozor, je potřeba porovnávané číslo měnit, aby cyklus někdy skončil! Tady to děláme pomocí `pocet + 1`.
+        {while} odpoved != 25:
+            odpoved = {input}('Kolik je 5 * 5?')
+        {print}('Dostala jsem správnou odpověď!')
+-   name: '{while} with > and <'
+    explanation: Taky můžeme použít `{while}` s operátory `<` a `>`.
     demo_code: |-
         pocet = 1
-        while pocet < 3
-            print 'Toto zopakujeme ještě ' 3 - pocet 'krát'
+        {while} pocet < 3:
+            {print}('Toto zopakujeme ještě ', 3 - pocet, 'krát')
             pocet = pocet + 1
-        print 'Hotovo'
-16:
+        {print}('Hotovo')
+26:
 -   name: square brackets
     explanation: Seznamy teď píšeme do hranatých závorek a jejich položky do uvozovek.
     demo_code: |-

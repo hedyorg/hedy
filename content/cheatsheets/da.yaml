@@ -112,23 +112,23 @@
         alder = {input}('Hvor gammel er du?')
         {if} alder >= 14:
             {print}('Du er ældre end mig!')
-15:
+16:
 -   name: '{while}'
     explanation: Vi kan bruge en `{while}`-løkke sammen med ikke lig med.
     demo_code: |-
         svar = 0
-        {while} svar != 25
-            svar = {ask} 'Hvad er 5 gange 5?'
-        {print} 'Det er rigtigt'
+        {while} svar != 25:
+            svar = {input}('Hvad er 5 gange 5?')
+        {print}('Det er rigtigt')
 -   name: '{while} mindre end'
     explanation: Vi kan også bruge en `{while}`-løkke med `<` og `>`.
     demo_code: |-
         tælle = 1
-        {while} tælle < 3
-            {print} 'Vi gør dette ' 3 - tælle ' flere gange'
+        {while} tælle < 3:
+            {print}('Vi gør dette ', 3 - tælle, ' flere gange')
             tælle = tælle + 1
-        {print} 'Vi er færdige'
-16:
+        {print}('Vi er færdige')
+20:
 -   name: firkantede parenteser
     explanation: Lister med firkantede parenteser.
     demo_code: |-

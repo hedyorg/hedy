@@ -100,14 +100,23 @@
         starost = {input}('Koliko ste stari?')
         {if} starost >= 14:
             {print}('Starejši ste od mene!')
-15:
+16:
 -   name: '{while}'
     explanation: Zanko `{while}` lahko uporabimo skupaj z ni enako.
-    demo_code: "odgovor = 0\n{while} odgovor != 25\n    odgovor = {ask} 'Koliko je 5 x 5?'\n{print} 'Podan je bil nepravilen odgovor'"
--   name: Manjši {while}
+    demo_code: |-
+        odgovor = 0
+        {while} odgovor != 25:
+            odgovor = {input}('Koliko je 5 x 5?')
+        {print}('Podan je bil nepravilen odgovor')
+-   name: '{while} with > and <'
     explanation: Zanko `{while}` lahko uporabimo tudi z `<` ali `>`.
-    demo_code: "števec = 1\n{while} števec < 3\n    {print} 'Ponovimo to še ' 3 - števec '-krat'\n    števec = števec + 1\n{print} 'Pa smo opravili'"
-16:
+    demo_code: |-
+        števec = 1
+        {while} števec < 3:
+            {print}('Ponovimo to še ', 3 - števec, '-krat')
+            števec = števec + 1
+        {print}('Pa smo opravili')
+26:
 -   name: oglati oklepaji
     explanation: Seznami z oglatimi oklepaji.
     demo_code: "sadje = ['jabolko', 'banana', 'češnja']\n{print} sadje"

@@ -112,23 +112,23 @@
         idade = {input}('Quantos anos você tem?')
         {if} idade >= 14:
             {print}('Você é mais velho do que eu!')
-15:
+16:
 -   name: '{while}'
     explanation: Nós podemos usar o laço `{while}` com o diferente.
     demo_code: |-
         resposta = 0
-        {while} resposta != 25
-            resposta = {ask} 'Quanto é 5 vezes 5?'
-        {print} 'Foi dada uma boa resposta'
--   name: '{while} menor'
+        {while} resposta != 25:
+            resposta = {input}('Quanto é 5 vezes 5?')
+        {print}('Foi dada uma boa resposta')
+-   name: '{while} with > and <'
     explanation: Nós também podemos usar o laço `{while}` com `<` e `>`.
     demo_code: |-
         contagem = 1
-        {while} contagem < 3
-            {print} 'Fazemos isto mais ' 3 - contagem ' vezes.'
+        {while} contagem < 3:
+            {print}('Fazemos isto mais ', 3 - contagem, ' vezes.')
             contagem = contagem + 1
-        {print} 'Acabamos'
-16:
+        {print}('Acabamos')
+26:
 -   name: colchetes
     explanation: Listas com colchetes.
     demo_code: |-

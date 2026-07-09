@@ -112,23 +112,23 @@
         aĝo = {input}('Kian aĝon vi havas?')
         {if} aĝo >= 14:
             {print}('Vi estas pli aĝa ol mi!')
-15:
+16:
 -   name: '{while}'
     explanation: Oni povas uzi `{while}`-iteracion kun `!=`.
     demo_code: |-
         respondo = 0
-        {while} respondo != 25
-            respondo = {ask} 'Kio estas 5 * 5?'
-        {print} 'Vi respondis prave'
+        {while} respondo != 25:
+            respondo = {input}('Kio estas 5 * 5?')
+        {print}('Vi respondis prave')
 -   name: '`{while}` kun plimalgrandeco'
     explanation: Oni povas ankaŭ uzi `{while}`-iteracion kune kun `<` aŭ `>`.
     demo_code: |-
         nombro = 1
-        {while} nombro < 3
-            {print} 'Ni faros tion ' 3 - nombro ' fojojn plu'
+        {while} nombro < 3:
+            {print}('Ni faros tion ', 3 - nombro, ' fojojn plu')
             nombro = nombro + 1
-        {print} 'Ni finiĝis'
-16:
+        {print}('Ni finiĝis')
+26:
 -   name: rektaj krampoj
     explanation: Listoj per rektaj krampoj.
     demo_code: |-

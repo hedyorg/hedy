@@ -89,27 +89,22 @@
         umur = {input}('Berapa umur mu?')
         {if} umur > 13:
             {print}('Kamu lebih tua daripada aku!')
-
-
-
-
-15:
--   name: Pengulangan while dengan boolean
-    explanation: Kita dapat menggunakan pengulangan `while` dengan `True` dan `False`
+16:
+-   name: '{while}'
     demo_code: |-
         jawaban = 0
-        while jawaban != 25
-            jawaban = ask 'Apa hasil 5 kali 5?'
-        print 'Sebuah jawaban benar telah diberikan'
--   name: Pengulangan while dengan cakupan lebih kecil
-    explanation: Kita dapat juga menggunakan pengulangan `while` dengan `<` dan `>`. Berhati-hatilah, kamu harus mengubah angka yang terlibat agar pengulangan tersebut berakhir. Kita bisa melakukannya dengan `pembilang = pembilang + 1` untuk sekarang.
+        {while} jawaban != 25:
+            jawaban = input('Apa hasil 5 kali 5?')
+        {print}('Sebuah jawaban benar telah diberikan')
+-   name: Pengulangan {while} dengan cakupan lebih kecil
+    explanation: Kita dapat juga menggunakan pengulangan `{while}` dengan `<` dan `>`.
     demo_code: |-
         pembilang = 1
-        while pembilang < 3
-            print 'Kita lakukan ini ' 3 - pembilang ' kali lagi'
+        {while} pembilang < 3:
+            {print}('Kita lakukan ini ', 3 - pembilang, ' kali lagi')
             pembilang = pembilang + 1
-        print 'Kita selesai'
-16:
+        {print}('Kita selesai')
+26:
 -   name: Kurung siku
     explanation: Kita akan menggunakan kurung siku untuk membungkus nilai-nilai didalam list! Kita juga akan membutuhkan tanda kutip satu (') untuk membungkus setiap nilai didalam list.
     demo_code: |-
