@@ -68,9 +68,9 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon="static/images/Hedy-logo.ico",
     windowed=True,
 )
+
 coll = COLLECT(
     exe,
     a.binaries,
@@ -79,4 +79,11 @@ coll = COLLECT(
     upx=False,
     upx_exclude=[],
     name=dirname,
+)
+
+app = BUNDLE(
+    coll,
+    name=appname,
+    icon=None,
+    bundle_identifier=None,
 )
