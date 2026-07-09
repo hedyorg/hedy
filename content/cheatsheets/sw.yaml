@@ -71,22 +71,3 @@
         matunda = ['embe', 'machungwa', 'ndizi']
         matunda_nasibu = matunda[random]
         print matunda_nasibu
-18:
--   name: '{print}'
-    explanation: With `{print}` you need to use parentheses
-    demo_code: '{print}(''hi!'')'
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
-    demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)
