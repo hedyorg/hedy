@@ -18,6 +18,7 @@ from typing import Optional
 from logging.config import dictConfig as logConfig
 from iso639 import ALL_LANGUAGES as languages
 import webbrowser
+from bs4 import BeautifulSoup
 
 import static_babel_content
 from markupsafe import Markup
@@ -345,15 +346,7 @@ def load_customized_adventures(level, customizations, into_adventures):
     for a in order_for_this_level:
         if a['from_teacher'] and (db_row := teacher_adventure_map.get(a['name'])):
             try:
-                if 'formatted_content' in db_row:
-                    db_row['formatted_content'] = safe_format(db_row['formatted_content'],
-                                                              **hedy_content.KEYWORDS.get(g.keyword_lang))
-                else:
-                    db_row['content'] = safe_format(db_row['content'],
-                                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
-                if 'solution_example' in db_row:
-                    db_row['solution_example'] = safe_format(db_row['solution_example'],
-                                                             **hedy_content.KEYWORDS.get(g.keyword_lang))
+                db_row = prepare_teacher_adventure_for_student_view(db_row, level)
             except Exception:
                 # We don't want teacher being able to break the student UI -> pass this adventure
                 pass
@@ -361,6 +354,62 @@ def load_customized_adventures(level, customizations, into_adventures):
             into_adventures.append(Adventure.from_teacher_adventure_database_row(db_row))
         if not a['from_teacher'] and (adv := builtin_adventure_map.get(a['name'])):
             into_adventures.append(adv)
+
+
+def _html_has_visible_text(content):
+    if not content:
+        return False
+    return BeautifulSoup(content, 'html.parser').get_text(separator='').strip() != ''
+
+
+def _translate_teacher_adventure_code_blocks(content, source_language, target_language, level):
+    if not content:
+        return content
+
+    soup = BeautifulSoup(content, 'html.parser')
+    for tag in soup.find_all('code'):
+        code_text = tag.get_text()
+        if not code_text or code_text.strip() == '':
+            continue
+        try:
+            translated = hedy_translation.translate_keywords(
+                code_text,
+                source_language,
+                target_language,
+                level=int(level),
+            )
+        except Exception:
+            continue
+        if translated is not None:
+            tag.string = translated
+
+    return soup.decode_contents() if soup.body else str(soup)
+
+
+def prepare_teacher_adventure_for_student_view(db_row, level):
+    db_row['content'] = safe_format(db_row.get('content', ''),
+                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
+    if 'formatted_content' in db_row:
+        db_row['formatted_content'] = safe_format(db_row['formatted_content'],
+                                                  **hedy_content.KEYWORDS.get(g.keyword_lang))
+    if 'solution_example' in db_row:
+        db_row['solution_example'] = safe_format(db_row['solution_example'],
+                                                 **hedy_content.KEYWORDS.get(g.keyword_lang))
+
+    formatted_is_empty = not _html_has_visible_text(db_row.get('formatted_content', ''))
+    if formatted_is_empty:
+        source_language = db_row.get('language') or 'en'
+        if (source_language != g.keyword_lang
+                and source_language in ALL_KEYWORD_LANGUAGES
+                and g.keyword_lang in ALL_KEYWORD_LANGUAGES):
+            db_row['content'] = _translate_teacher_adventure_code_blocks(
+                db_row.get('content', ''),
+                source_language,
+                g.keyword_lang,
+                level,
+            )
+
+    return db_row
 
 
 @app.before_app_request

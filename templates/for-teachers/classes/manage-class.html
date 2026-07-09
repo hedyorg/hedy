@@ -7,11 +7,11 @@
       {'label': class_info.name, 'url': '/for-teachers/redesign/class/' ~ class_info.id},
       {'label': _('manage_students')}
   ]) }}
-  <h1 style="overflow-wrap: anywhere;">{{ class_info.name }}</h1>
+  <h1 class="break-words">{{ class_info.name }}</h1>
   <h2 class="text-4xl mt-3">{{ _('manage_students') }}</h2>
   <div class="h-full overflow-visible" id="classes_table">
     <div class="w-full h-full mb-48">
-      <div class="w-full h-full border rounded-lg shadow-md">
+      <div class="teacher-table-shell w-full h-full">
         <form hx-get="/for-teachers/redesign/class/{{ class_info.id }}/manage/filter_sort"
             hx-target="#manage-students-table-body"
             hx-swap="innerHTML"

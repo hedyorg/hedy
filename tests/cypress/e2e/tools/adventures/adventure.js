@@ -2,26 +2,24 @@ import { goToTeachersPage } from "../navigation/nav";
 
 export function createAdventure(name)
 {
-    goToTeachersPage();
-
-    // Click 'Create new class' button
-    cy.getDataCy('create_adventure_button').click();
-
     if (name) {
+        cy.visit(`/for-teachers/customize-adventure?ui=legacy&name=${encodeURIComponent(name)}&level=1`);
+
         cy.intercept({
             method: 'POST',
             url: '/for-teachers/customize-adventure'
         }).as('customizeAdventure');
-        cy.getDataCy('custom_adventure_name').clear().type(name);
-        cy.wait(500)
-        cy.getDataCy('level_select').click();
-        cy.wait(500)
-        cy.getDataCy('1').click();
-        cy.wait(500)
-        cy.getDataCy('level_select').click()
-        cy.wait(500)
+
+        cy.getDataCy('custom_adventure_name').should('be.visible').should('have.value', name);
+        cy.get('#submit_adventure').click();
         cy.wait('@customizeAdventure').should('have.nested.property', 'response.statusCode', 200);
+        return;
     }
+
+    goToTeachersPage();
+
+    // Click 'Create new class' button
+    cy.getDataCy('create_adventure_button').click();
 
     cy.wait(1000);
 }
