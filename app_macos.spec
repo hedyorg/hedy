@@ -83,7 +83,7 @@ coll = COLLECT(
 
 app = BUNDLE(
     coll,
-    name=appname,
+    name='hedy.app',
     icon=None,
     bundle_identifier=None,
 )
