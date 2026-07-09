@@ -9,14 +9,11 @@ adventures:
                     Tasolla 1 voit luoda tarinan, jonka päähahmon voit nimetä itse.
 
                     Ensimmäisellä rivillä, käytä `{ask}` ja kysy mikä tarinan päähahmon nimi on.
-
-                    Ensimmäisen rivin jälkeen, aloita rivi `{print}` komennolla jos haluat, että lause tulostetaan.
-                    Voit käyttää myös `{echo}` komentoa jos haluat, että päähahmon nimi tulostetaan lauseen lisäksi lauseen loppuun.
                 example_code: |
                     ```
                     {ask} Tarinan päähahmo on
-                    {print} Päähahmo tulee kävelemään metsässä
-                    {echo} Häntä pelottaa vähän,
+                    {print} {answer} tulee kävelemään metsässä
+                    {print} Häntä pelottaa vähän, {answer}
                     {print} Hän kuulee hulluja ääniä kaikkialla
                     {print} Häntä pelottaa, että tässä metsässä kummittelee
                     ```
@@ -24,7 +21,7 @@ adventures:
                     ### Harjoitus
                     Luo oma tarinasi jossa on vähintään 6 riviä koodia.
                     Tämä tarina ei voi olla sama kuin esimerkissä.
-                    Käytä ainakin yden kerran `{ask}` ja `{echo}` komentoja.
+                    Käytä ainakin yden kerran `{ask}` ja `{answer}`.
                     Tarinan aiheena voi olla mitä vain.
                     Jos et keksi tarinalle aihetta, käytä vaikka jotain näistä: menossa elokuviin, urheiluottelu, tai päivä eläintarhassa.
             2:
@@ -43,16 +40,6 @@ adventures:
                     {sleep}
                     {print} nimi pelkää, että metsässä kummittelee
                     ```
-                story_text_2: |
-                    ### Harjoitus
-                    Nyt on aika lisätä muuttujia omaan tarinaasi, jonka teit aiemmalla tasolla.
-
-                    Mene 'Minun ohjelmani', etsi sinun taso 1 tarina seikkailu ja kopioi koodi. Liitä koodi tämän tason ruudulle.
-
-                    Koodi ei toimi tällä tasolla, koska et ole käyttänyt muuttujia vielä.
-                    Muuta `{ask}` komennot ja `{echo}` komennot koodissasi oikeaan muotoon, jonka olet oppinut tällä tasolla.
-
-                    **Lisätehtävä** Lisää `{sleep}` komento koodiin lisätäksesi jännitystä tarinaasi.
             3:
                 story_text: |
                     Tasolla 3 voit tehdä tarinastasi vieläkin hauskemman. Voit käyttää satunnaisuutta mille tahansa hirviölle, eläimelle tai muulle esteelle, tällä tavalla:
@@ -255,7 +242,6 @@ adventures:
         levels:
             2:
                 example_code: "```\nnimi {is} {ask} Mikä on nimesi?  \n{print} Hei nimi  \nikä {is} {ask} Kuinka vanha olet?  \n{print} nimi on ikä vuotta vanha.\n```\n"
-                example_code_2: "```\nlemmikki {is} {ask} Mikä on lempieläimesi?  \n{print} Minä pidän lemmikki\n```\n"
             13:
                 story_text: "```\nlemmikki {is} {ask} Mikä on lempieläimesi?  \n{print} Minä pidän lemmikki\n```"
     calculator:
@@ -324,8 +310,6 @@ adventures:
     restaurant:
         levels: {}
     rock:
-        levels: {}
-    rock_2:
         levels: {}
     secret:
         levels: {}

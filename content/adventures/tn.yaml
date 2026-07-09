@@ -14,17 +14,6 @@ adventures:
                     {print} Dumela!
                     {ask} O bitswa mang?
                     ```
-                example_code_2: |
-                    ```
-                    {print} Dumela!
-                    {ask} O bidiwa mang?
-                    {echo} Dumela
-                    ```
-                example_code_3: |
-                    ```
-                    _ O tsogile jang?
-                    _
-                    ```
             2:
                 example_code: |
                     ```
@@ -32,11 +21,6 @@ adventures:
                     {print} Dumela name
                     age {is} {ask} O dingwaga tse kafe?
                     {print} name o dingwaga tse age.
-                    ```
-                example_code_2: |
-                    ```
-                    favorite_animal {is} {ask} O rata phologolo ehe?
-                    {print} Ke rata favorite_animal
                     ```
     calculator:
         levels: {}
@@ -92,11 +76,6 @@ adventures:
         levels:
             2:
                 example_code: "```\nname {is} Poloko\nage {is} 15\n{print} name o dingwaga tse age \n```\n"
-                example_code_2: |
-                    ```
-                    favorite_animal {is} _
-                    {print} ke rata favorite_animal
-                    ```
     language:
         levels: {}
     maths:
@@ -159,7 +138,14 @@ adventures:
     restaurant:
         levels:
             1:
-                example_code_2: "```\n{print} Re a go amogela mo semausung sa Mosaditshwene 🍟\n{ask} O bata go reka eng?\n{echo} Good, so o bata go reka \n{print} Thanks you for your order!\n{print} Dijo tsa gago di eta!\n```\n"
+                example_code_2: |
+                    ```
+                    {print} Re a go amogela mo semausung sa Mosaditshwene 🍟
+                    _ O bata go reka eng?
+                    {print} Good, so o bata go reka {answer}
+                    {print} Thanks you for your order!
+                    {print} Dijo tsa gago di eta!
+                    ```
             2:
                 example_code: |
                     ```
@@ -218,8 +204,6 @@ adventures:
                     {print} Your  food  and  drinks  will be right there!
                     ```
     rock:
-        levels: {}
-    rock_2:
         levels: {}
     secret:
         levels: {}
