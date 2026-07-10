@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: Post `{print}` vi devas uzu rondajn krampojn.
     demo_code: '{print}(''saluton!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '`{print}` kun variablo'
+    explanation: Pri `{print}`, oni devas uzi rondajn krampojn kaj komojn, se oni volas presi plurajn aĵojn.
+    demo_code: |-
+        nomo = 'Hedy'
+        {print}('mia nomo estas ', nomo)
+-   name: demandi pri io per `{input}`
+    explanation: Uzi `{input}` anstataŭ `{ask}` por demandi pri io.
+    demo_code: |-
+        nomo = {input}('Kio estas via nomo?')
+        {print}('Do via nomo estas ', nomo)
+
 -   name: '{if} {elif} {else}'
 -   name: Pli malgranda
     explanation: Oni uzas la signon `<` por kontroli, ĉu la unua nombro estas pli malgranda ol la dua nombro.
@@ -119,6 +128,12 @@
     explanation: Listoj per rektaj krampoj.
     demo_code: |-
         fruktoj = ['pomo', 'banano', 'ĉerizo']
+- {}
+-   name: '{range}'
+    explanation: Post `{range}` vi devas uzi rondajn krampojn.
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Saluton, numero ', i)
 16:
 -   name: '{while}'
     explanation: Oni povas uzi `{while}`-iteracion kun `!=`.
@@ -135,20 +150,3 @@
             {print}('Ni faros tion ', 3 - nombro, ' fojojn plu')
             nombro = nombro + 1
         {print}('Ni finiĝis')
-18:
-
--   name: '{range}'
-    explanation: Post `{range}` vi devas uzi rondajn krampojn.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Saluton, numero ', i)
--   name: '`{print}` kun variablo'
-    explanation: Pri `{print}`, oni devas uzi rondajn krampojn kaj komojn, se oni volas presi plurajn aĵojn.
-    demo_code: |-
-        nomo = 'Hedy'
-        {print}('mia nomo estas ', nomo)
--   name: demandi pri io per `{input}`
-    explanation: Uzi `{input}` anstataŭ `{ask}` por demandi pri io.
-    demo_code: |-
-        nomo = {input}('Kio estas via nomo?')
-        {print}('Do via nomo estas ', nomo)

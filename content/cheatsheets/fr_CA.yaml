@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: Avec `{print}` on doit utiliser des parenthèses.
     demo_code: '{print}(''hi!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} avec var'
+    explanation: Avec `{print}` on doit utiliser des parenthèses et des virgules si l'on affiche plusieurs éléments.
+    demo_code: |-
+        nom = "Hedy"
+        {print}("mon nom est ", nom)
+-   name: demande quelque chose avec {input}
+    explanation: Utilisez `{input}` au lieu de `{ask}` pour demander quelque chose.
+    demo_code: |-
+        nom = {input}('Quel est ton nom ?')
+        {print}('Donc, ton nom est ', nom)
+
 -   name: '{if} {elif} {else}'
 -   name: Plus petit
     explanation: On utilise `<` pour vérifier si le premier nombre est plus petit que le second.
@@ -119,6 +128,12 @@
     explanation: Liste avec des crochets.
     demo_code: |-
         fruits = ["pomme", "banane", "cerise"]
+- {}
+-   name: '{range}'
+    explanation: Avec `{range}` on doit utiliser des parenthèses.
+    demo_code: |-
+        {for} i {in} {range} (1,10) :
+            {print}('Salut, ', i, ' fois')
 16:
 -   name: '{while}'
     explanation: On peut utiliser la boucle `{while}` avec l'opérateur différent de.
@@ -135,20 +150,3 @@
             {print}('On doit compter encore ' 3 - compteur ' fois')
             compteur = compteur + 1
         {print}('On a fini')
-18:
-
--   name: '{range}'
-    explanation: Avec `{range}` on doit utiliser des parenthèses.
-    demo_code: |-
-        {for} i {in} {range} (1,10) :
-            {print}('Salut, ', i, ' fois')
--   name: '{print} avec var'
-    explanation: Avec `{print}` on doit utiliser des parenthèses et des virgules si l'on affiche plusieurs éléments.
-    demo_code: |-
-        nom = "Hedy"
-        {print}("mon nom est ", nom)
--   name: demande quelque chose avec {input}
-    explanation: Utilisez `{input}` au lieu de `{ask}` pour demander quelque chose.
-    demo_code: |-
-        nom = {input}('Quel est ton nom ?')
-        {print}('Donc, ton nom est ', nom)

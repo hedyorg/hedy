@@ -96,20 +96,3 @@
           {print}('Ezt ', 3 - szam, ' alkalommal ismételjük')
           szam = szam + 1
         {print}('Készen vagyunk')
-18:
-
--   name: '{print} with var'
-    explanation: A `{range}` után zárójeleket kell használni.
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: '{print} with var'
-    explanation: A `{print}`-nél zárójeleket és vesszőket kell használnod, ha több elemet írsz ki.
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Használd az `{input}`-ot az `{ask}` helyett, ha kérdezni akarsz valamit.
-    demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)

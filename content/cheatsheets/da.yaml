@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: Efter `{print}` skal du bruge parenteser.
     demo_code: '{print}(''hej!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} med variabel'
+    explanation: Med `{print}` skal du bruge parenteser og kommaer hvis du vil udskrive flere elementer.
+    demo_code: |-
+        navn = 'Hedy'
+        {print}('Jeg hedder ', navn)
+-   name: spørg om noget med {input}
+    explanation: Brug `{input}` i stedet for `{ask}` for at spørge om noget.
+    demo_code: |-
+        navn = {input}('Hvad hedder du?')
+        {print}('Så du hedder ', navn)
+
 -   name: '{if} {elif} {else}'
 -   name: Mindre end
     explanation: Vi bruger `<` til at kontrollere om det første tal er mindre end det andet.
@@ -119,6 +128,12 @@
     explanation: Lister med firkantede parenteser.
     demo_code: |-
         frugt = ['æble', 'banan', 'kirsebær']
+- {}
+-   name: '{range}'
+    explanation: Efter `{range}` skal du bruge parenteser.
+    demo_code: |-
+        {for} i {in} {range}(1,10):
+            {print}('Hej nummer ', i)
 16:
 -   name: '{while}'
     explanation: Vi kan bruge en `{while}`-løkke sammen med ikke lig med.
@@ -135,20 +150,3 @@
             {print}('Vi gør dette ', 3 - tælle, ' flere gange')
             tælle = tælle + 1
         {print}('Vi er færdige')
-18:
-
--   name: '{range}'
-    explanation: Efter `{range}` skal du bruge parenteser.
-    demo_code: |-
-        {for} i {in} {range}(1,10):
-            {print}('Hej nummer ', i)
--   name: '{print} med variabel'
-    explanation: Med `{print}` skal du bruge parenteser og kommaer hvis du vil udskrive flere elementer.
-    demo_code: |-
-        navn = 'Hedy'
-        {print}('Jeg hedder ', navn)
--   name: spørg om noget med {input}
-    explanation: Brug `{input}` i stedet for `{ask}` for at spørge om noget.
-    demo_code: |-
-        navn = {input}('Hvad hedder du?')
-        {print}('Så du hedder ', navn)

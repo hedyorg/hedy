@@ -71,8 +71,17 @@
 -   name: '{print}'
     explanation: Nach `{print}` musst du runde Klammern verwenden.
     demo_code: '{print}(''Hi!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} mit Variable'
+    explanation: Mit `{print}` musst du Klammern und Kommas benutzen, wenn du mehrere Elemente ausgeben möchtest.
+    demo_code: |-
+        name = 'Hedy'
+        {print}('Ich heiße ', name)
+-   name: Benutze {input} um nach etwas zu fragen
+    explanation: Benutze `{input}` anstatt von `{ask}` um etwas zu fragen.
+    demo_code: |-
+        name = {input}('Wie heißt du?')
+        {print}('Du heißt also ', name)
+
 -   name: '{if} {elif} {else}'
 -   name: Kleiner
     explanation: Wir verwenden das `<`, um zu prüfen, ob die erste Zahl kleiner als die zweite Zahl ist.
@@ -115,6 +124,12 @@
     explanation: Listen mit eckigen Klammern.
     demo_code: |-
         obst = ['Apfel', 'Banane', 'Kirsche']
+- {}
+-   name: '{range}'
+    explanation: Nach `{range}` musst du runde Klammern verwenden.
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Hallo, mal ', i)
 16:
 -   name: '{while}'
     explanation: Wir können die `{while}`-Schleife mit ungleich verwenden.
@@ -131,20 +146,3 @@
             {print}('Wir machen dies noch ', 3 - zähler, ' mal')
             zähler = zähler + 1
         {print}('Wir sind fertig')
-18:
-
--   name: '{range}'
-    explanation: Nach `{range}` musst du runde Klammern verwenden.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hallo, mal ', i)
--   name: '{print} mit Variable'
-    explanation: Mit `{print}` musst du Klammern und Kommas benutzen, wenn du mehrere Elemente ausgeben möchtest.
-    demo_code: |-
-        name = 'Hedy'
-        {print}('Ich heiße ', name)
--   name: Benutze {input} um nach etwas zu fragen
-    explanation: Benutze `{input}` anstatt von `{ask}` um etwas zu fragen.
-    demo_code: |-
-        name = {input}('Wie heißt du?')
-        {print}('Du heißt also ', name)

@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: Después de `{print}` necesita usar paréntesis.
     demo_code: '{print}(''¡hola!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} con var'
+    explanation: Con `{print}` necesita usar paréntesis y comas si imprimes más elementos.
+    demo_code: |-
+        nombre = 'Hedy'
+        {print}('mi nombre es ', nombre)
+-   name: pregunta algo con {input}
+    explanation: Utiliza `{input}` en lugar de `{ask}` para preguntar algo.
+    demo_code: |-
+        nombre = {input}('¿Cómo te llamas?')
+        {print}('Así que tu nombre es ', nombre)
+
 -   name: '{if} {elif} {else}'
 -   name: Más pequeño
     explanation: Usamos el `<` para comprobar si el primer número es más pequeño que el segundo.
@@ -119,6 +128,12 @@
     explanation: Listas con corchetes.
     demo_code: |-
         fruta = ['manzana', 'plátano', 'cereza']
+- {}
+-   name: '{range}'
+    explanation: Después de `{range}` necesita usar paréntesis.
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Hola, veces ', i)
 16:
 -   name: '{while}'
     explanation: Podemos usar el bucle `{while}` con no igual.
@@ -135,20 +150,3 @@
             {print}('Hacemos esto ', 3 - contador, ' veces más')
             contador = contador + 1
         {print}('Hemos terminado')
-18:
-
--   name: '{range}'
-    explanation: Después de `{range}` necesita usar paréntesis.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hola, veces ', i)
--   name: '{print} con var'
-    explanation: Con `{print}` necesita usar paréntesis y comas si imprimes más elementos.
-    demo_code: |-
-        nombre = 'Hedy'
-        {print}('mi nombre es ', nombre)
--   name: pregunta algo con {input}
-    explanation: Utiliza `{input}` en lugar de `{ask}` para preguntar algo.
-    demo_code: |-
-        nombre = {input}('¿Cómo te llamas?')
-        {print}('Así que tu nombre es ', nombre)
