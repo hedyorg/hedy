@@ -46,7 +46,7 @@
         {turn} 90
         {forward} 100
         {turn} -90
--   name: 'These keywords have stayed the same'
+-   name: 'Keywords you have learned before this level'
     explanation: '`{print}`, `{play}`, `{forward}`'
     demo_code: |-
         # print
@@ -56,7 +56,7 @@
         # forward
         {forward} 100
 3:
--   name: Make a list with `{is}`
+-   name: Make a list with {is}
     explanation: Make a list with is.
     demo_code: |-
         animals {is} duck, dog, rhino
@@ -116,7 +116,7 @@
     explanation: 'Clear the screen with `{clear}`.'
     demo_code: |-
         {clear}
--   name: '`{color} red`'
+-   name: '{color} red'
     explanation: 'Use {color} make the turtle draw in a different color.'
     demo_code: |-
         {color} red
@@ -678,14 +678,14 @@
             {print} ('Hit the road, Jack!')
         {else}:
             {print} ('Nice to meet you!')
--   name: Smaller
-    explanation: We use the `<` to check if the first number is smaller than the second number.
+-   name: Less
+    explanation: We use the `<` to check if the first number is less than the second number.
     demo_code: |-
         age = {input}('How old are you?')
         {if} age < 13:
             {print}('You are younger than me!')
--   name: Bigger
-    explanation: We use the `>` to check if the first number is bigger than the second number.
+-   name: Greater
+    explanation: We use the `>` to check if the first number is greater than the second number.
     demo_code: |-
         age = {input}('How old are you?')
         {if} age > 13:
@@ -702,14 +702,14 @@
         answer = {input}('What is 5 * 5?')
         {if} answer != 25:
             {print}('That is not correct!')
--   name: Smaller or equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
+-   name: Less or equal
+    explanation: We use the `<=` to check if the first number is less than or equal to the second number.
     demo_code: |-
         age = {input}('How old are you?')
         {if} age <= 12:
             {print}('You are younger than me!')
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
+-   name: Greater or equal
+    explanation: We use the `>=` to check if the first number is greater than or equal to the second number.
     demo_code: |-
         age = {input}('How old are you?')
         {if} age >= 14:
