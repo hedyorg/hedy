@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: Po `{print}` musisz użyć nawiasów.
     demo_code: '{print}(''Cześć!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} z argumentami'
+    explanation: Korzystając z `{print}` użyj nawiasów i przycinków jeśli chcesz wypisać więcej elementów.
+    demo_code: |-
+        imię = 'Hedy'
+        {print}('moje imię to  ', imię)
+-   name: zapytaj o coś wykorzystując {input}
+    explanation: Użyj `{input}` zamiast `{ask}` aby się o coś zapytać.
+    demo_code: |-
+        imię = {input}('Jak masz na imię?')
+        {print}('Więc nazywasz się ', imię)
+
 -   name: '{if} {elif} {else}'
 -   name: Mniejszy
     explanation: Używamy `<` aby sprawdzić czy pierwsza liczba jest mniejsza od drugiej liczby.
@@ -119,6 +128,12 @@
     explanation: Lista z nawiasami kwadratowymi.
     demo_code: |-
         owoc = ['jabłko', 'banan', 'wiśnia']
+-   {}
+-   name: '{range}'
+    explanation: Po `{range}` musisz użyć nawiasów.
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Witaj, razy ', i)
 16:
 -   name: '{while}'
     explanation: Możemy użyć pętli `{while}` z nierównością.
@@ -135,20 +150,4 @@
             {print}('Robimy to jeszcze', 3 - licznik, ' razy')
             licznik = licznik + 1
         {print}('Zrobione')
-18:
 
--   name: '{range}'
-    explanation: Po `{range}` musisz użyć nawiasów.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Witaj, razy ', i)
--   name: '{print} z argumentami'
-    explanation: Korzystając z `{print}` użyj nawiasów i przycinków jeśli chcesz wypisać więcej elementów.
-    demo_code: |-
-        imię = 'Hedy'
-        {print}('moje imię to  ', imię)
--   name: zapytaj o coś wykorzystując {input}
-    explanation: Użyj `{input}` zamiast `{ask}` aby się o coś zapytać.
-    demo_code: |-
-        imię = {input}('Jak masz na imię?')
-        {print}('Więc nazywasz się ', imię)

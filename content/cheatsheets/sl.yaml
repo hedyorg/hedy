@@ -63,8 +63,12 @@
 -   name: '{print}'
     explanation: Za ukazom `{print}` morate uporabiti oklepaje.
     demo_code: "{print}('hi!')"
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} s spremenljivko'
+    explanation: Pri ukazu `{print}` morate uporabiti oklepaje in vejice, če natisnete več elementov.
+    demo_code: "ime = 'Hedy'\n{print}('Moje ime je ', ime)"
+-   name: vprašajte nekaj z ukazom {input}
+    explanation: Uporabi `{input}` namesto `{ask}` da nekaj vprašate.
+    demo_code: "ime = {input}('Kako vam je ime?')\n{print}('Torej, ime vam je ', ime)"
 -   name: '{if} {elif} {else}'
 -   name: Manjši
     explanation: Za preverjanje, ali je prvo število manjše od drugega, uporabimo `<`.
@@ -107,6 +111,10 @@
     explanation: Seznami z oglatimi oklepaji.
     demo_code: |-
         sadje = ['jabolko', 'banana', 'češnja']
+-   {}
+-   name: '{range}'
+    explanation: Za ukazom `{range}` morate uporabiti oklepaje.
+    demo_code: "{for} i {in} {range} (1,10):\n    {print}('Živijo, krat ', i)"
 16:
 -   name: '{while}'
     explanation: Zanko `{while}` lahko uporabimo skupaj z ni enako.
@@ -123,14 +131,3 @@
             {print}('Ponovimo to še ', 3 - števec, '-krat')
             števec = števec + 1
         {print}('Pa smo opravili')
-18:
-
--   name: '{range}'
-    explanation: Za ukazom `{range}` morate uporabiti oklepaje.
-    demo_code: "{for} i {in} {range} (1,10):\n    {print}('Živijo, krat ', i)"
--   name: '{print} s spremenljivko'
-    explanation: Pri ukazu `{print}` morate uporabiti oklepaje in vejice, če natisnete več elementov.
-    demo_code: "ime = 'Hedy'\n{print}('Moje ime je ', ime)"
--   name: vprašajte nekaj z ukazom {input}
-    explanation: Uporabi `{input}` namesto `{ask}` da nekaj vprašate.
-    demo_code: "ime = {input}('Kako vam je ime?')\n{print}('Torej, ime vam je ', ime)"
