@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: После `{print}` необходимо использовать круглые скобки.
     demo_code: '{print}("Привет!")'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} с var'
+    explanation: При использовании `{print}` необходимо использовать круглые скобки и запятые, если вы печатаете больше элементов.
+    demo_code: |-
+        имя = 'Hedy'
+        {print}('Меня зовут ', имя)
+-   name: спросить что-нибудь с {input}
+    explanation: Чтобы спросить что-то, используйте `{input}` вместо `{ask}`.
+    demo_code: |-
+        имя = {input}('Как вас зовут?')
+        {print}('Так вас зовут ', имя)
+
 -   name: '{if} {elif} {else}'
 -   name: Меньше
     explanation: Мы используем `<`, чтобы проверить, меньше ли первое число второго.
@@ -119,6 +128,12 @@
     explanation: Списки в квадратных скобках.
     demo_code: |-
         фрукты = ['яблоко', 'банан', 'вишня']
+- {}
+-   name: '{range}'
+    explanation: После `{range}` необходимо использовать круглые скобки.
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+           {print}('Hello, times ', i)
 16:
 -   name: '{while}'
     explanation: Мы можем использовать цикл `{while}` с параметром not equal.
@@ -135,20 +150,3 @@
             {print}('Мы делаем это ', 3 - счёт, ' большее количество раз')
             счёт = счёт + 1
         {print}('Мы закончили')
-18:
-
--   name: '{range}'
-    explanation: После `{range}` необходимо использовать круглые скобки.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-           {print}('Hello, times ', i)
--   name: '{print} с var'
-    explanation: При использовании `{print}` необходимо использовать круглые скобки и запятые, если вы печатаете больше элементов.
-    demo_code: |-
-        имя = 'Hedy'
-        {print}('Меня зовут ', имя)
--   name: спросить что-нибудь с {input}
-    explanation: Чтобы спросить что-то, используйте `{input}` вместо `{ask}`.
-    demo_code: |-
-        имя = {input}('Как вас зовут?')
-        {print}('Так вас зовут ', имя)

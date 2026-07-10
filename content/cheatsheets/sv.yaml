@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: Efter `{print}` behöver du ha parenteser.
     demo_code: '{print}(''hej!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} med var'
+    explanation: Med `{print}` behöver du använda parenteser och kommatecken om du skriver ut fler saker.
+    demo_code: |-
+        namn = 'Hedy'
+        {print}('Jag heter ', namn)
+-   name: fråga något med {input}
+    explanation: Använd `{input}` i stället för `{ask}`  att fråga något.
+    demo_code: |-
+        namn = {input}('Vad heter du?')
+        {print}('Så du heter ', namn)
+
 -   name: '{if} {elif} {else}'
 -   name: Mindre än
     explanation: Vi använder `<` för att kolla om det första talet är mindre än det andra.
@@ -119,6 +128,12 @@
     explanation: Listor med hakparenteser.
     demo_code: |-
         frukt = ['äpple', 'banan', 'körsbär']
+- {}
+-   name: '{range}'
+    explanation: Efter `{range}` behöver du ha parenteser.
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Hej, gånger ', i)
 16:
 -   name: '{while}'
     explanation: Vi kan använda `{while}` med skilt från.
@@ -135,20 +150,3 @@
             {print}('Vi gör det här ', 3 - antal, ' gånger till')
             antal = antal + 1
         {print}('Nu är det klart')
-18:
-
--   name: '{range}'
-    explanation: Efter `{range}` behöver du ha parenteser.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hej, gånger ', i)
--   name: '{print} med var'
-    explanation: Med `{print}` behöver du använda parenteser och kommatecken om du skriver ut fler saker.
-    demo_code: |-
-        namn = 'Hedy'
-        {print}('Jag heter ', namn)
--   name: fråga något med {input}
-    explanation: Använd `{input}` i stället för `{ask}`  att fråga något.
-    demo_code: |-
-        namn = {input}('Vad heter du?')
-        {print}('Så du heter ', namn)

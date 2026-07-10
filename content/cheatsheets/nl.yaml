@@ -98,8 +98,17 @@
 -   name: '{print}'
     explanation: Bij `{print}` moet je haakjes gebruiken.
     demo_code: '{print}(''hallo!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} met var'
+    explanation: Bij `{print}` moet je haakjes en komma's gebruiken als je meerdere dingen print.
+    demo_code: |-
+        naam = 'Hedy'
+        {print}('ik heet', naam)
+-   name: iets vragen met {input}
+    explanation: Gebruik `{input}` in plaats van `{ask}` om iets te vragen.
+    demo_code: |-
+        naam = {input}('Hoe heet jij?')
+        {print}('Dus jij heet ', naam)
+
 -   name: '{if} {elif} {else}'
 -   name: Kleiner
     explanation: De `<` kijkt of het eerste getal kleiner is dan het tweede getal.
@@ -142,6 +151,12 @@
     explanation: Lijstjes met vierkante haken.
     demo_code: |-
         fruit = ['appel', 'banaan', 'kers']
+-   {}
+-   name: '{range}'
+    explanation: Bij `{range}` moet je haakjes gebruiken.
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Hallo nummero ', i)
 16:
 -   name: '{while}'
     explanation: We kunnen dus een `{while}` loop gebruiken met `!=`.
@@ -158,19 +173,3 @@
             {print}('Dit is de ', tel, 'e keer')
             tel = tel + 1
         {print}('We zijn klaar')
-18:
--   name: '{range}'
-    explanation: Bij `{range}` moet je haakjes gebruiken.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hallo nummero ', i)
--   name: '{print} met var'
-    explanation: Bij `{print}` moet je haakjes en komma's gebruiken als je meerdere dingen print.
-    demo_code: |-
-        naam = 'Hedy'
-        {print}('ik heet', naam)
--   name: iets vragen met {input}
-    explanation: Gebruik `{input}` in plaats van `{ask}` om iets te vragen.
-    demo_code: |-
-        naam = {input}('Hoe heet jij?')
-        {print}('Dus jij heet ', naam)

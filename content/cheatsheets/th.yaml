@@ -47,19 +47,3 @@
 -   name: '{print}'
     explanation: After `{print}` you need to use parentheses.
     demo_code: '{print}(''สวัสดี!'')'
-18:
--   name: '{range}'
-    explanation: After `{range}` you need to use parentheses.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hello, times ', i)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you print more items.
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something.
-    demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)

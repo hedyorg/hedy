@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: '`{print}` 뒤에는 괄호를 사용해야 합니다.'
     demo_code: '{print}(''hi!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print}를 변수와 함께'
+    explanation: '`{print}`에서는 항목을 더 print할 경우 괄호와 쉼표를 사용해야 합니다.'
+    demo_code: |-
+        이름 = 'Hedy'
+        {print}('나의 이름은 ', 이름)
+-   name: 무언가 질문할 때는 {input}
+    explanation: 질문할 때는 `{ask}` 대신 `{input}`을 사용한다.
+    demo_code: |-
+        이름 = {input}('너의 이름은 무엇이니?')
+        {print}('그래서 너의 이름은 ', 이름)
+
 -   name: '{if} {elif} {else}'
 -   name: Smaller
     explanation: 우리는 `<`를 사용하여 첫 번째 숫자가 두 번째 숫자보다 작은지 확인합니다.
@@ -119,6 +128,12 @@
     explanation: 대괄호가 있는 목록입니다.
     demo_code: |-
         과일 = ['사과', '바나나', '체리']
+-   {}
+-   name: '{range}'
+    explanation: '`{range}` 뒤에는 괄호를 사용해야 합니다.'
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('안녕, 반복 ', i)
 16:
 -   name: '{while}'
     explanation: 우리는 `{while}` 루프를 동일하지 않게 사용할 수 있다.
@@ -135,20 +150,4 @@
             {print} ('우리는 이것을 ', 3 - 숫자, '번 할거야')
             숫자 = 숫자 + 1
         {print}('우리는 해냈어')
-18:
 
--   name: '{range}'
-    explanation: '`{range}` 뒤에는 괄호를 사용해야 합니다.'
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('안녕, 반복 ', i)
--   name: '{print}를 변수와 함께'
-    explanation: '`{print}`에서는 항목을 더 print할 경우 괄호와 쉼표를 사용해야 합니다.'
-    demo_code: |-
-        이름 = 'Hedy'
-        {print}('나의 이름은 ', 이름)
--   name: 무언가 질문할 때는 {input}
-    explanation: 질문할 때는 `{ask}` 대신 `{input}`을 사용한다.
-    demo_code: |-
-        이름 = {input}('너의 이름은 무엇이니?')
-        {print}('그래서 너의 이름은 ', 이름)

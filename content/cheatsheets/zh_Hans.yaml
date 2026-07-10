@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: 你需要在`{print}`后面加上括号。
     demo_code: '{print}(''hi!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} 与变量'
+    explanation: 使用 `{print}`，如果打印更多项目，则需要使用小括号和逗号。
+    demo_code: |-
+        名字 ='Hedy'
+        {print}('我的名字是'，名字)
+-   name: 用 {input} 提问
+    explanation: 用`{input}`代替`{ask}`来提问。
+    demo_code: |-
+        名字 = {input}('你叫什么名字？')
+        {print}('所以你的名字是'，名字)
+
 -   name: '{if} {elif} {else}'
 -   name: Smaller 小于
     explanation: 我们用小于号 `<` 用来判断第一个数字是否小于第二个数字.
@@ -119,6 +128,12 @@
     explanation: 把列表的内容用中括号括起来。
     demo_code: |-
         水果 = ['苹果', '香蕉', '樱桃']
+- {}
+-   name: '{range}'
+    explanation: 你需要在`{range}`后面加上括号。
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('你好，次数', i)
 16:
 -   name: '{while}循环语句'
     explanation: 我们可以在 `{while}` 循环中使用不等于。
@@ -135,20 +150,3 @@
             {print}('我们计算 ', 3 - 计数, ' 的次数更多了')
             计数 = 计数 + 1
         {print}('我们完成啦')
-18:
-
--   name: '{range}'
-    explanation: 你需要在`{range}`后面加上括号。
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('你好，次数', i)
--   name: '{print} 与变量'
-    explanation: 使用 `{print}`，如果打印更多项目，则需要使用小括号和逗号。
-    demo_code: |-
-        名字 ='Hedy'
-        {print}('我的名字是'，名字)
--   name: 用 {input} 提问
-    explanation: 用`{input}`代替`{ask}`来提问。
-    demo_code: |-
-        名字 = {input}('你叫什么名字？')
-        {print}('所以你的名字是'，名字)

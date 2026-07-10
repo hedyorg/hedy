@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: '`{print}` ifadesinden sonra parantez kullanmanız gerekir.'
     demo_code: '{print}(''Merhaba!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} ile değişken'
+    explanation: '`{print}` ile daha fazla öğe yazdırıyorsanız, parantezler ve virgüller kullanmanız gerekir.'
+    demo_code: |-
+        isim = 'Hedy'
+        {print}('Benim adım ', isim)
+-   name: '{input} ile bir şey sorun'
+    explanation: Bir şey sormak için `{ask}` yerine `{input}` kullanın.
+    demo_code: |-
+        isim = {input}('Adın ne senin?')
+        {print}('Demek senin adın ', isim)
+
 -   name: '{if} {elif} {else}'
 -   name: Daha küçük
     explanation: İlk sayının ikinci sayıdan küçük olup olmadığını kontrol etmek için `<` kullanırız.
@@ -119,6 +128,12 @@
     explanation: Köşeli parantezler ile listeler.
     demo_code: |-
         meyve = ['elma', 'muz', 'kiraz']
+- {}
+-   name: '{range}'
+    explanation: '`{range}` tan sonra parantez kullanmanız gerekir.'
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Merhaba, çarpı ', i)
 16:
 -   name: '{while}'
     explanation: Eşit değil ile `{while}` döngüsünü kullanabiliriz.
@@ -135,20 +150,3 @@
             {print}('Bunu ', 3 - sayaç, ' kere daha yapıyoruz')
             sayaç = sayaç + 1
         {print}('İşimizi bitirdik')
-18:
-
--   name: '{range}'
-    explanation: '`{range}` tan sonra parantez kullanmanız gerekir.'
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Merhaba, çarpı ', i)
--   name: '{print} ile değişken'
-    explanation: '`{print}` ile daha fazla öğe yazdırıyorsanız, parantezler ve virgüller kullanmanız gerekir.'
-    demo_code: |-
-        isim = 'Hedy'
-        {print}('Benim adım ', isim)
--   name: '{input} ile bir şey sorun'
-    explanation: Bir şey sormak için `{ask}` yerine `{input}` kullanın.
-    demo_code: |-
-        isim = {input}('Adın ne senin?')
-        {print}('Demek senin adın ', isim)

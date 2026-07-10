@@ -75,7 +75,11 @@
 -   name: '{print}'
     explanation: Med`{print}` må du bruke paranteser
     demo_code: '{print}(''hei!'')'
--   name: '{print} with a variable'
+-   name: '{print} med var'
+    explanation: Med `{print}` må vi bruke parantes og komma for å skrive ut flere ting
+    demo_code: |-
+        navn = 'Hedy'
+        {print}('Mitt navn er ', navn)
 -   name: 'ask something with {input}'
 -   name: '{if} {elif} {else}'
 -   name: Mindre
@@ -135,20 +139,3 @@
             {print}('Vi gjør dette ' 3 - telling ' flere ganger')
             telling = telling + 1
         {print}('Vi er ferdig å telle')
-18:
-
--   name: '{print} med var'
-    explanation: Med `{print}` må vi bruke parantes og komma for å skrive ut flere ting
-    demo_code: |-
-        navn = 'Hedy'
-        {print}('Mitt navn er ', navn)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
-    demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)

@@ -75,8 +75,17 @@
 -   name: '{print}'
     explanation: После `{print}` мораш користити заграде.
     demo_code: '{print}(''здраво!'')'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
+-   name: '{print} са променљивом'
+    explanation: Са `{print}` мораш користити заграде и зарезе ако штампаш више ставки.
+    demo_code: |-
+        име = 'Hedy'
+        {print}('моје име је ', име)
+-   name: питај нешто са {input}
+    explanation: Користи `{input}` уместо `{ask}` да питаш нешто.
+    demo_code: |-
+        име = {input}('Како се зовеш?')
+        {print}('Дакле, твоје име је ', име)
+
 -   name: '{if} {elif} {else}'
 -   name: Мање
     explanation: Користимо `<` да проверимо да ли је први број мањи од другог броја.
@@ -119,6 +128,12 @@
     explanation: Листе са угластим заградама.
     demo_code: |-
         воће = ['јабука', 'банана', 'трешња']
+- {}
+-   name: '{range}'
+    explanation: После `{range}` мораш користити заграде.
+    demo_code: |-
+        {for} i {in} {range} (1,10):
+            {print}('Здраво, пута ', i)
 16:
 -   name: '{while}'
     explanation: Можемо користити `{while}` петљу са није једнако.
@@ -135,20 +150,3 @@
             {print}('Ово радимо још ', 3 - бројач, ' пута')
             бројач = бројач + 1
         {print}('Завршили смо')
-18:
-
--   name: '{range}'
-    explanation: После `{range}` мораш користити заграде.
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Здраво, пута ', i)
--   name: '{print} са променљивом'
-    explanation: Са `{print}` мораш користити заграде и зарезе ако штампаш више ставки.
-    demo_code: |-
-        име = 'Hedy'
-        {print}('моје име је ', име)
--   name: питај нешто са {input}
-    explanation: Користи `{input}` уместо `{ask}` да питаш нешто.
-    demo_code: |-
-        име = {input}('Како се зовеш?')
-        {print}('Дакле, твоје име је ', име)
