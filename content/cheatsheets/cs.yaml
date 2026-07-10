@@ -56,10 +56,18 @@
         jmeno is Hedy
         print 'Jmenuji se ' jmeno
 13:
--   name: '{print}'
--   name: '{print} with a variable'
--   name: 'ask something with {input}'
--   name: '{if} {elif} {else}'
+- {}
+-   name: '{print} with var'
+    explanation: Po příkazu `{range}` musíš použít závorky
+    demo_code: |-
+        name = 'Hedy'
+        {print}('my name is ', name)
+-   name: zeptej se na něco pomocí {input}
+    explanation: Použij `{input}` místo příkazu`{ask}` na provedení dotazu pro vstupní textové pole
+    demo_code: |-
+        name = {input}('Jak se jmenuješ?')
+        {print}('Tvé jméno tedy je ', name)
+
 -   name: Menší
     explanation: Používáme `<`, abychom zjistili, jestli je první číslo menší než druhé. Například pokud chceme ověřit, že je proměnná menší než 15, použijeme `promenna < 15`.
     demo_code: |-
@@ -116,19 +124,4 @@
             {print}('Toto zopakujeme ještě ', 3 - pocet, 'krát')
             pocet = pocet + 1
         {print}('Hotovo')
-18:
--   name: '{print} with var'
-    explanation: Po příkazu `{range}` musíš použít závorky
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: '{print} with var'
-    explanation: Pro tisk pomocí `{print}` musíš použít závorky a čárky pokud chceš tisknout {print} více slov
-    demo_code: |-
-        name = 'Hedy'
-        {print}('jmenuji se ', name)
--   name: zeptej se na něco pomocí {input}
-    explanation: Použij `{input}` místo příkazu`{ask}` na provedení dotazu pro vstupní textové pole
-    demo_code: |-
-        name = {input}('Jak se jmenuješ?')
-        {print}('Tvé jméno tedy je ', name)
+
