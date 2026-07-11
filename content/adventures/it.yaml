@@ -9,14 +9,11 @@ adventures:
                     Nel livello 1 puoi creare una storia con un personaggio principale diverso che inserisci tu stesso.
 
                     Nella prima riga, usa `{ask}` e chiedi chi sarà il personaggio principale della storia.
-
-                    Dopo la prima riga, inizia con `{print}`  se la frase deve essere stampata.
-                    Usa `{echo}`  se vuoi che il tuo personaggio principale sia alla fine della frase.
                 example_code: |
                     ```
                     {ask} Il personaggio principale di questa storia è
                     {print} Il personaggio principale ora camminerà nella foresta
-                    {echo} È un po' spaventato,
+                    {print} È un po' spaventato,{answer}
                     {print} Sente rumori terrificanti ovunque
                     {print} Ha paura che questa sia una foresta infestata
                     ```
@@ -24,7 +21,7 @@ adventures:
                     ### Esercizio
                     Ora crea la tua storia di almeno 6 righe di codice.
                     Questa storia non può essere uguale al codice di esempio.
-                    Utilizza almeno un comando `{ask}` e un comando `{echo}`.
+                    Utilizza almeno un comando `{ask}` e un comando `{answer}`.
                     Puoi farlo su qualsiasi argomento che ti piace.
                     Se non riesci a pensare a un argomento, usa una delle nostre scelte: andare al cinema, una partita sportiva o una giornata allo zoo.
             2:
@@ -34,15 +31,6 @@ adventures:
                     Devi programmare un po' di più per quello. Ora devi prima nominare il tuo personaggio principale.
 
                     Puoi quindi inserire quel nome ovunque in una frase.
-                story_text_2: |
-                    ### Esercizio
-                    Ora è il momento di aggiungere variabili alla tua storia che hai creato nel livello precedente.
-                    Vai su 'I miei programmi', cerca la tua avventura storia di livello 1 e copia il codice. Incolla il codice nella schermata di input in questo livello.
-
-                    Questo codice non funzionerà in questo livello perché non hai ancora utilizzato le variabili.
-                    Modifica i comandi `{ask}` e `{echo}` nel tuo codice nella forma corretta che hai imparato in questo livello.
-
-                    **Extra** Aggiungi un comando `{sleep}` al tuo codice per aumentare la tensione nella tua storia.
                 example_code: "```\nnome {is} {ask} Qual è il nome del personaggio principale?\n{print} nome sta per correre nel bosco\n{print} nome è un po' spaventato\n{print} All'improvviso sente un rumore inquietante...\n{sleep}\n{print} nome teme che questa sia un bosco infestato\n```"
             3:
                 story_text: |
@@ -253,24 +241,6 @@ adventures:
                     ```
                     {print} Ciao!
                     {ask} Come ti chiami?
-                    ```
-                story_text_2: |
-                    ## The  `{echo}` command
-                    If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
-                example_code_2: |
-                    ```
-                    {print} Ciao!
-                    {ask} Come ti chiami?
-                    {echo} ciao
-                    ```
-                story_text_3: |
-                    ### Esercizio
-                    Prova i comandi `{ask}` e `{echo}` . Prima di tutto, riempi i campi vuoti per far funzionare il programna.
-                    Quindi, formula 2 altre domande utilizzando il comando `{ask}` e, dopo ciascun `{ask}`, utilizza  `{echo}` per far visualizzare a schermo la risposta.
-                example_code_3: |
-                    ```
-                    _ Come va?
-                    _
                     ```
             2:
                 story_text: |
@@ -498,7 +468,7 @@ adventures:
                     Allora probabilmente saprai che non possono davvero predire il tuo futuro, ma è comunque divertente giocarci!
 
                     Nei prossimi livelli potrai imparare a creare la tua macchina per predire il futuro!
-                    Nel livello 1 puoi iniziare in modo semplice lasciando che Hedy si presenti come un'indovino e lasci che `{echo}` le risposte dei giocatori.
+                    Nel livello 1 puoi iniziare in modo semplice lasciando che Hedy si presenti come un'indovino e lasci che `{answer}` le risposte dei giocatori.
                     Come questo:
     haunted:
         name: Casa stregata
@@ -519,8 +489,8 @@ adventures:
                     ```
                     {print} Sono Hedy il pappagallo
                     {ask} Come ti chiami?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Esercizio
@@ -531,8 +501,8 @@ adventures:
                     ```
                     {print} Sono Hedy il pappagallo
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     Crea il tuo amico pappagallo che ripeterà ciò che dici!
@@ -620,13 +590,7 @@ adventures:
     rock:
         name: Sasso, carta, forbice
         default_save_name: Rock
-        levels:
-            2:
-                example_code: |-
-                    ```
-                    la scelta {is} rock
-                    {print} Scelgo _
-                    ```
+        levels: {}
     songs:
         name: Canta una canzone!
         levels:
@@ -701,8 +665,6 @@ adventures:
         name: Harry Potter
         default_save_name: Harry Potter
         description: Avventure di Harry Potter
-    rock_2:
-        name: Sasso, carta, forbici 2
     in_command:
         name: '{in}'
 

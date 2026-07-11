@@ -9,22 +9,19 @@ adventures:
                     På nivå 1 kan du göra en berättelse där du får ange namnet på huvudkaraktären själv.
 
                     På första raden, använd `{ask}` för att fråga vem huvudkaraktären i din saga ska vara.
-
-                    Efter den första raden, börja med `{print}` om en mening ska skrivas ut på skärmen.
-                    Du använder `{echo}` om du vill att namnet på huvudkaraktären ska vara på slutet av meningen.
                 example_code: |
                     ```
                     {ask} Huvudkaraktären i den här berättelsen är
-                    {print} Huvudkaraktären kommer nu att ta en promenad i skogen
-                    {echo} De är lite rädda,
+                    {print} {answer} kommer nu att ta en promenad i skogen
+                    {print} De är lite rädda, {answer}
                     {print} De hör galna ljud överallt
-                    {print} De är rädda för att detta är en hemsökt skog
+                    {print} {answer} är rädda för att detta är en hemsökt skog
                     ```
                 story_text_2: |
                     ### Övning
                     Gör nu en egen berättelse med minst sex kodrader.
                     Berättelsen får inte vara samma som exempelkoden.
-                    Använd minst ett `{ask}` - och ett `{echo}` -kommando.
+                    Använd minst ett `{ask}` och ett `{answer}`.
                     Du kan göra den om vilket ämne som helst.
                     Om du inte kan komma på något ämne kan du använda ett av våra val: ett biobesök, en sportmatch eller en dag i djurparken.
             2:
@@ -43,15 +40,6 @@ adventures:
                     {sleep}
                     {print} namn är rädd att detta är en hemsökt skog
                     ```
-                story_text_2: |
-                    ### Övning
-                    Dags att lägga till variabler till din egen berättelse som du skapade på föregående nivå.
-                    Gå till 'Mina program', leta efter ditt nivå 1-äventyr och kopiera koden. Klistra in koden på din inmatningsskärm på den här nivån.
-
-                    Den här koden fungerar inte på den här nivån eftersom du inte har använt variabler än.
-                    Ändra kommandona `{ask}` och `{echo}` i din kod till rätt form som du har lärt dig på den här nivån.
-
-                    **Extra** Lägg till ett {sleep}-kommando i din kod för att bygga upp spänningen i berättelsen.
             3:
                 story_text: |
                     I nivå 3 kan du göra din berättelse lite roligare. Du kan använda slumpen för monster, djur, eller annat hinder, så här:
@@ -285,50 +273,13 @@ adventures:
                     {print} Hej!
                     {ask} Vad heter du?
                     ```
-                story_text_2: |
-                    ## Kommandot eko
-                    Om du vill att datorn ska upprepa svaret kan du använda kommandot `{echo}`. Tänk på att svaret återges i slutet av meningen, så i det här exemplet efter hej.
-                example_code_2: |
-                    ```
-                    {print} Hej!
-                    {ask} Vad heter du?
-                    {echo} hej
-                    ```
-                story_text_3: |
-                    ### Övning
-                    Prova kommandona `{ask}` och `{echo}`. Fyll först i de tomma fälten för att få programmet att fungera.
-                    Ställ sedan ytterligare två frågor med kommandot `{ask}`. Efter varje `{ask}` använder du ett `{echo}` för att skriva ut svaret på skärmen.
-                example_code_3: |
-                    ```
-                    _ Hur mår du?
-                    _
-                    ```
             2:
-                story_text: |
-                    ## Kommandot fråga
-                    Nu när vi kan använda **variabler** i vår kod behöver vi inte längre kommandot `{echo}`.
-                    Vi kan använda variabler för att lagra svaren på våra frågor och på så sätt kan vi använda svaret på flera frågor i vår kod.
-                    Kolla in det:
-
-                    På så sätt blir din kod interaktiv!
                 example_code: |
                     ```
                     namn {is} {ask} Vad heter du?
                     {print} Hej namn
                     ålder {is} {ask} Hur gammal är du?
                     {print} namn är ålder år gammal.
-                    ```
-                story_text_2: |
-                    ### Övning
-                    I förra fliken övade du på att tilldela variabler med kommandot `{is}`.
-                    Du har skapat minst tre variabler och använt dem med ett print-kommando.
-                    Nu vill vi att du istället för att sätta variablerna gör dem interaktiva, som vi gjorde i vårt exempel.
-
-                    Kopiera din kod från föregående flik och gör variablerna interaktiva med `{ask}`-kommandon.
-                example_code_2: |
-                    ```
-                    favoritdjur {is} {ask} Vilket är ditt favoritdjur?
-                    {print} Jag gillar favoritdjur
                     ```
             13:
                 story_text: |
@@ -667,7 +618,7 @@ adventures:
                     Då vet du säkert att de inte riktigt kan förutse din framtid, men det är ändå kul att spela!
 
                     På de kommande nivåerna kan du lära dig hur du skapar din egen spåmaskin!
-                    På nivå 1 kan du börja enkelt genom att låta Hedy presentera sig som en spådam och låta henne `{echo}` spelarnas svar.
+                    På nivå 1 kan du börja enkelt genom att låta Hedy presentera sig som en spådam och låta henne `{answer}` spelarnas svar.
                     Så här:
                 example_code: |
                     ```
@@ -675,7 +626,7 @@ adventures:
                     _ Vem är du?
                     _ Låt mig ta en titt i min kristallkula.
                     _ Jag ser ... Jag ser ...
-                    _ Ditt namn är
+                    _ Ditt namn är _
                     ```
                 story_text_2: |
                     ### Övning
@@ -683,7 +634,7 @@ adventures:
                     **Extra** Ändra koden och låt spådamen inte bara förutsäga ditt namn utan även din ålder, ditt favoritsportlag eller något annat om dig själv.
             3:
                 story_text: |
-                    På de tidigare nivåerna har du skapat din första spåmaskin, men Hedy kunde inte förutsäga någonting, bara `{echo}`.
+                    På de tidigare nivåerna har du skapat din första spåmaskin, men Hedy kunde inte förutsäga någonting.
                     På den här nivån kan du använda en variabel och kommandot `{at} {random}` för att verkligen låta Hedy välja ett svar åt dig. Titta till exempel på den här koden:
                 example_code: |
                     ```
@@ -852,7 +803,7 @@ adventures:
                     {print} Jag måste ta mig ut härifrån!
                     {print} Det finns tre dörrar framför mig …
                     {ask} Vilken dörr ska jag välja?
-                    {echo} Jag väljer dörr
+                    {print} Jag väljer dörr {answer}
                     {print} …?
                     ```
                 story_text_2: |
@@ -1069,24 +1020,11 @@ adventures:
         description: introduktion till kommandot är
         levels:
             2:
-                story_text: |
-                    ## Variabler
-                    Du kan döpa ett ord med `{is}`. Det kallas för en **variabel**. I det här exemplet har vi skapat en variabel som heter namn och en variabel som heter ålder. Du kan använda ordet namn var som helst i din kod och det kommer att ersättas med Hedy, till exempel så här:
                 example_code: |
                     ```
                     namn {is} Hedy
                     ålder {is} 15
                     {print} namn är ålder år gammal
-                    ```
-                story_text_2: |
-                    ### Övning
-                    Dags att göra dina egna variabler!
-                    I exempelkoden gjorde vi ett exempel på variabeln `favoritdjur`. På rad 1 sätts (tilldelas) variabeln och på rad 2 har vi använt variabeln i ett skriv-kommando.
-                    Avsluta först vårt exempel genom att fylla i ditt favoritdjur i de tomma fälten. Gör sedan minst tre av dessa koder själv. Välj en variabel och sätt variabeln med kommandot {is}. Använd den sedan med ett {print}-kommando, precis som vi gjorde.
-                example_code_2: |
-                    ```
-                    favoritdjur är _
-                    {print} Jag gillar favoritdjur
                     ```
     language:
         name: Språk
@@ -1147,8 +1085,8 @@ adventures:
                     ```
                     {print} Jag heter papegojan Hedy
                     {ask} vad heter du?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Övning
@@ -1159,8 +1097,8 @@ adventures:
                     ```
                     {print} Jag heter papegojan Hedy
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     På förra nivån skapade du en papegoja som härmar dig. På den här nivån kommer vi att göra papegojan interaktiv med en variabel och `{ask}`-kommandot.
@@ -1464,13 +1402,13 @@ adventures:
                     ```
                     {print} Välkommen till Hedys restaurang 🍟
                     _ Vad vill du beställa?
-                    {echo} Så du vill beställa
+                    {print} Så du vill beställa {answer}
                     {print} Tack för din beställning!
                     {print} Den är på väg!
                     ```
             2:
                 story_text: |
-                    På nivå 2 kan du utöka din restaurang genom att använda variabler. På nivå 1 kunde Hedy bara `{echo}` beställningen en gång och bara komma ihåg det sista som beställdes.
+                    På nivå 2 kan du utöka din restaurang genom att använda variabler. På nivå 1 kunde Hedy bara komma ihåg det sista som beställdes.
                     Nu kan du använda variabler och Hedy kan komma ihåg både maten och påläggen!
                 example_code: |
                     ```
@@ -1481,17 +1419,6 @@ adventures:
                     topping {is} {ask} Vill du ha kött eller grönsaker till?
                     {print} mat med topping är på väg!
                     ```
-                story_text_2: |
-                    #### Övning
-                    Kopiera din egen restaurangkod från föregående nivå till inmatningsskärmen nedan.
-                    Rätta koden genom att byta ut kommandona `{ask}` och `{echo}` och använda variabler, som du har lärt dig på den här nivån.
-
-                    Nu när din kod fungerar igen är det dags att lägga till något mer.
-                    Titta på den sista raden i exempelkoden: `{print} mat med topping är på väg!`
-                    På den raden används två variabler för att skapa en sammanfattning av beställningen.
-                    Lägg nu till din egen sammanfattning av den mat och dryck som kunden beställt.
-
-                    **Extra** Nu när du har lärt dig hur man använder variabler kan du använda så många variabler i en rad som du vill. Kan du lägga till fler variabler i din kod, till exempel äta på plats eller take away, kontant eller kort, med eller utan sugrör osv.
             3:
                 story_text: |
                     Har du svårt att bestämma vad du vill äta till middag? Du kan låta Hedy välja åt dig!
@@ -1692,12 +1619,12 @@ adventures:
                 story_text: |
                     I nivå 1 kan du börja med ett sten, sax, påse-spel.
 
-                    Med `{ask}` kan du göra ett val, och med `{echo}` kan du upprepa det valet.
+                    Med `{ask}` kan du göra ett val, och med `{answer}` kan du upprepa det valet.
                 example_code: |
                     ```
                     {print} Vad väljer du?
                     {ask} Välj mellan sten, sax eller påse.
-                    {echo} Så ditt val var:
+                    {print} Så ditt val var: {answer}
                     ```
                 story_text_2: |
                     ### Övning
@@ -1707,18 +1634,7 @@ adventures:
                     ```
                     {print} vad väljer du?
                     {ask} välj bland _
-                    {echo} så ditt val var:
-                    ```
-            2:
-                story_text: |
-                    På den här nivån kan du öva på att variablerna, så att du kan göra spelet sten, sax, påse på nästa nivå!
-                    ### Övning
-                    Avsluta koden genom att fylla i **variabeln** i tomrummen.
-                    Det här spelet är inte särskilt interaktivt, men inga bekymmer! På nästa flik kommer du att lära dig hur du använder variabler med kommandot `{ask}` för att göra ditt spel interaktivt!
-                example_code: |
-                    ```
-                    val är sten
-                    {print} Jag väljer _
+                    {print} så ditt val var: {answer}
                     ```
             3:
                 story_text: |
@@ -1815,11 +1731,6 @@ adventures:
                             vunnit = 'ja'
                     _
                     ```
-    rock_2:
-        name: Sten, sax, påse 2
-        default_save_name: sten_2
-        description: Del 2 av sten, sax, påse
-        levels:
             2:
                 story_text: |
                     Nu när du har lärt dig använda kommandot `{ask} kan du göra din sten, sax, påse-kod interaktiv också!

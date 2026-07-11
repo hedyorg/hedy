@@ -77,10 +77,9 @@ ADVENTURE_ORDER_PER_LEVEL_OLD = {
         'hospital'
     ],
     2: [
-        'is_command',
-        'rock',
         'ask_command',
-        'rock_2',
+        'rock',
+        'is_command',
         'haunted',
         'sleep_command',
         'parrot',

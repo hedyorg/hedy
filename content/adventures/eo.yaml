@@ -9,14 +9,11 @@ adventures:
                     En la 1-a nivelo vi povas krei rakonton kun malsama ĉeffiguro, kiun vi mem enigas.
 
                     En la unua linio, uzu `{ask}` kaj demandu, kiu estos la ĉeffiguro de la rakonto.
-
-                    Post tiu unua linio, komencu per `{print}` se la frazo bezonas esti presita.
-                    Vi uzas `{echo}` se vi volas, ke via ĉeffiguro estu ĉe la fino de la frazo.
                 example_code: |
                     ```
                     {ask} La ĉefrolulo de ĉi tiu rakonto estas
-                    {print} La ĉefrolulo nun promenas en la arbaro
-                    {echo} Li timetas
+                    {print} {answer} nun promenas en la arbaro
+                    {print} Li timetas {answer}
                     {print} Li aŭdas ĉie frenezajn bruojn
                     {print} Li timas, ke ĉi tie estas hantata arbaro
                     ```
@@ -431,15 +428,15 @@ adventures:
                     Tiam vi verŝajne scias, ke ili vere ne povas antaŭdiri vian estontecon, sed estas tamen amuze ludi!
 
                     En la venontaj niveloj vi povas lerni kiel krei vian propran aŭguran maŝinon!
-                    En nivelo 1 vi povas komenci facile lasante Hedy prezenti sin kiel aŭguristo kaj lasi ŝin {echo} la respondojn de la ludantoj.
+                    En nivelo 1 vi povas komenci facile lasante Hedy prezenti sin kiel aŭguristo kaj lasi ŝin `{answer}` la respondojn de la ludantoj.
                     Jene:
                 example_code: |
                     ```
-                    {print} Saluton, mi estas Hedy la aŭguristo!
-                    {ask} Kiu vi estas?
-                    {print} Mi rigardu mian kristalan globon
-                    {print} Mi vidas… mi vidas…
-                    {echo} Via nomo estas
+                    _ Saluton, mi estas Hedy la aŭguristo!
+                    _ Kiu vi estas?
+                    _ Mi rigardu mian kristalan globon
+                    _ Mi vidas… mi vidas…
+                    _ Via nomo estas _
                     ```
                 story_text_2: |
                     ### Exercise
@@ -447,9 +444,6 @@ adventures:
                     Obviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!
                     Take a look in level 2 to improve your fortune teller.
             3:
-                story_text: |
-                    In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
-                    In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
                 example_code: |
                     En ĉi tiu ekzemplo, la ludanto povas demandi Hedy ĉu-demandon, kaj Hedy elektos hazardan respondon por vi.
                     ```
@@ -567,7 +561,7 @@ adventures:
                     {print} Mi devas eliri de ĉi tie!
                     {print} Estas 3 pordoj antaŭ mi..
                     {ask} Kiun pordon mi elektu?
-                    {echo} Mi elektas pordon
+                    {print} Mi elektas pordon {answer}
                     {print} ...?
                     ```
                 story_text_2: |
@@ -650,8 +644,8 @@ adventures:
                     ```
                     {print} Mi estas Hedy la papago
                     {ask} kio estas via nomo?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
             2:
                 story_text: |
@@ -722,8 +716,8 @@ adventures:
                 example_code_2: |
                     ```
                     {print} Bonvenon al Restoracio Hedy 🍟
-                    {ask} Kion vi volas mendi?
-                    {echo} Do vi volas mendi
+                    _ Kion vi volas mendi?
+                    {print}  Do vi volas mendi {answer}
                     {print} Dankon pro via mendo!
                     {print} Ĝi estas kuirata!
                     ```
@@ -903,22 +897,15 @@ adventures:
                 story_text: |
                     En Nivelo 1, vi komencu per la ludo «roko, papero, tondilo».
 
-                    Per `{ask}` oni povas fari elekton, kaj per `{echo}` oni povas ripeti tiun elekton.
+                    Per `{ask}` oni povas fari elekton, kaj per `{answer}` oni povas ripeti tiun elekton.
                 example_code: |
                     ```
                     {print} kion vi elektas?
                     {ask} elektu el roko, papero aŭ tondilo
-                    {echo} do via elekto estis:
+                    {print} do via elekto estis: {answer}
                     ```
+                story_text_2: |
                     Anstataŭ vortoj, vi ankaŭ povus uzi vinjetosignojn kompreneble: ✊✋✌
-            2:
-                story_text: |
-                    En ĉi tiu nivelo, vi povas praktiki uzi la variablojn, por ke vi povu fari la ludon de roko, papero kaj tondilo en la sekva nivelo!
-                example_code: |
-                    ```
-                    elekto {is} _
-                    {print} Mi elektas elekto
-                    ```
             3:
                 story_text: |
                     En ĉi tiu nivelo ni povas eniri listojn kaj elekti aferojn el ili.
@@ -998,8 +985,6 @@ adventures:
                             {print} 'Vi gajnas la partion!'
                             gajnis = 'jes'
                     ```
-    rock_2:
-        levels: {}
     secret:
         name: Superspiono
         default_save_name: Superspiono
