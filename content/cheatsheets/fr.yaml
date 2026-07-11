@@ -75,21 +75,8 @@
 -   name: '{print}'
     explanation: Avec `{print}` on doit utiliser des parenthèses.
     demo_code: '{print}(''hi!'')'
--   name: '{while}'
-    explanation: On peut utiliser la boucle `{while}` avec l'opérateur différent de.
-    demo_code: |-
-        reponse = 0
-        {while} reponse != 25:
-            reponse = {input}('Que fait 5 multiplié par 5 ?')
-        {print}('Une bonne réponse a été donnée')
--   name: Plus petit {while}
-    explanation: On peut aussi utiliser `{while}` avec `<` et `>`.
-    demo_code: |-
-        compteur = 1
-        {while} compteur < 3:
-            {print}('On doit compter encore ' 3 - compteur ' fois')
-            compteur = compteur + 1
-        {print}('On a fini')
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
 -   name: '{if} {elif} {else}'
 -   name: Plus petit
     explanation: On utilise `<` pour vérifier si le premier nombre est plus petit que le second.
@@ -139,3 +126,18 @@
         {for} i {in} {range} (1,10) :
             {print}('Salut, ', i, ' fois')
 16:
+-   name: '{while}'
+    explanation: On peut utiliser la boucle `{while}` avec l'opérateur différent de.
+    demo_code: |-
+        reponse = 0
+        {while} reponse != 25:
+            reponse = {input}('Que fait 5 multiplié par 5 ?')
+        {print}('Une bonne réponse a été donnée')
+-   name: Plus petit {while}
+    explanation: On peut aussi utiliser `{while}` avec `<` et `>`.
+    demo_code: |-
+        compteur = 1
+        {while} compteur < 3:
+            {print}('On doit compter encore ' 3 - compteur ' fois')
+            compteur = compteur + 1
+        {print}('On a fini')
