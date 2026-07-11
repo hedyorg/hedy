@@ -748,7 +748,7 @@ adventures:
                     #Ask for the answer and check it:
                     answer = {input}('How much is ',number_1, ' times ', number_2, '?' )
                     correct_answer = number_1 * number_2
-                    {if} answer answer == correct_answer:
+                    {if} answer == correct_answer:
                         {print}('Yes, that is correct!')
                     {else}:
                         {print}('Sorry that was wrong, the correct answer is: ', correct_answer)
