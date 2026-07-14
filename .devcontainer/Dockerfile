@@ -40,7 +40,7 @@ RUN npm ci
 FROM main
 
 # Setup python packages
-COPY requirements.txt /tmp/requirements.txt
+COPY requirements.txt equirements-prod.txt /tmp/requirements.txt
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 
 # Copy node modules to a tmp folder
