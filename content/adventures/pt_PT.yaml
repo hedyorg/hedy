@@ -10,14 +10,12 @@ adventures:
 
                     Na primeira linha, usa `{ask}` e pergunta à personagem principal como será a história.
 
-                    Após a primeira linha, começa com `{print}` se precisares que a frase seja escrita.
-                    Utilizas `{echo}` se quiseres colocar o teu personagem principal no final da frase.
-                example_code: "```\n{ask} O(A) personagem principal desta história é\n{print} O(A) personagem principal vai caminhar agora na floresta\n{echo} Estão um pouco assustados,\n{print} Ouvem barulhos estranhos por toda a parte\n{print} Receiam que esta floresta seja assombrada\n```\n"
+                example_code: "```\n{ask} O(A) personagem principal desta história é\n{print} O(A) {answer} vai caminhar agora na floresta\n{print} Estão um pouco assustados, {answer}\n{print} Ouvem barulhos estranhos por toda a parte\n{print} Receiam que esta floresta seja assombrada\n```\n"
                 story_text_2: |
                     ### Exercício
                     Agora, cria a tua própria história com pelo menos 6 linhas de código.
                     Esta história não pode ser igual ao código de exemplo.
-                    Usa pelo meno um comando `{ask}` e um `{echo}`.
+                    Usa pelo meno um comando `{ask}` e um `{answer}`.
                     Podes escolher o tema que preferires.
                     Se não conseguires lembrar-te de um tema, escolhe uma das nossas opções: ir ao cinema, um evento desportivo ou um dia no zoo.
             2:
@@ -36,15 +34,6 @@ adventures:
                     {sleep}
                     {print} nome receia que esta floresta seja assombrada
                     ```
-                story_text_2: |
-                    ### Exercício
-                    Chegou o momento de adicionar variáveis à tua história, que construíste no nível anterior.
-                    Vai até 'Os meus programas', procura pela história aventura do nível 1 e copia o código. Cola o código na tua janela de introdução neste nível.
-
-                    Este código não irá funcionar neste nível, porque ainda não usaste variáveis.
-                    Altera os comandos `{ask}` e `{echo}` no teu código para a forma correcta, que aprendeste neste nível.
-
-                    **Extra** Adiciona um comando `{sleep}` ao teu código, para aumentar o nervosismo na tua história.
             3:
                 story_text: |
                     No nível 3 podes tornar a tua história mais divertida. Podes usar a aleatoriedade para qualquer monstro, animal ou outro obstáculo, da seguinte forma:
@@ -299,8 +288,6 @@ adventures:
     restaurant:
         levels: {}
     rock:
-        levels: {}
-    rock_2:
         levels: {}
     secret:
         levels: {}

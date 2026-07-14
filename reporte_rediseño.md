@@ -48,3 +48,12 @@ Manage Students -> create accounts -> confirm modal old design (nice to have it 
 Configure class -> add adventures -> custom adventures (add button search public adventures) MAYBE DONE NEED FURTHER CLARIFICATION
 
 ~~Configure class -> add adventures button now at top of adventures (below list of adventures)~~
+
+
+
+
+
+### Redesign Customize adventure page
+
+* Main adventures page: fine, its just some links. Should look the same as other page that are just links.
+* 
