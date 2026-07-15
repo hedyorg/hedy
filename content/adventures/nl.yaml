@@ -1511,7 +1511,7 @@ adventures:
                     * Een rood kruis schilderen met de teken-turtle.
                     * Een sirene geluid produceren als het rode kruis klaar is.
 
-                    HINT: gebruik het {repeat} commando.
+                    HINT: gebruik het `{repeat}` commando.
 
             10:
                 story_text: |
@@ -1663,7 +1663,7 @@ adventures:
             9:
                 story_text: |
                     ## Als... Anders...
-                    Je hebt al geleerd hoe je een blok aan regels code kunt herhalen met`{repeat}`.
+                    Je hebt al geleerd hoe je een blok aan regels code kunt herhalen met `{repeat}`.
                     Je kunt nu ook inspringen na het `{if}` of `{else}` commando om zo'n blok te vormen.
                     Kijk maar naar het voorbeeld.
 
@@ -1917,7 +1917,7 @@ adventures:
                     ```
             9:
                 story_text: |
-                    Nu we ook meerdere regels kunnen herhalen met `{repeat}, kunnen we de liedjes nog makkelijker programmeren!
+                    Nu we ook meerdere regels kunnen herhalen met `{repeat}`, kunnen we de liedjes nog makkelijker programmeren!
 
                     ### Opdracht
                     Maak het liedje 'Vader Jacob' af. Vergeet `{repeat}` niet te gebruiken!
@@ -2495,25 +2495,16 @@ adventures:
                     ```
             9:
                 story_text: |
-                    `{ask}` en `{print}` werken nog steeds zoals je gewend bent. Maar bij  `{if}`, `{else}`, `{pressed}` en `{repeat}` is er iets veranderd!
-                    Je kunt vanaf dit level meerdere regels samen uitvoeren. Daarvoor moet je deze regels *inspringen*, dat betekent dat ze moeten beginnen met vier spaties.
-                    Ook als je maar één regel in een blok wilt zetten, moet je inspringen!
+                    In dit level kun je meerdere regels code herhalen met slechts één `{repeat}` commando.
+                    Dit doe je door deze regels te laten beginnen met vier spaties.
+                    Dit noemen we ook wel: "de regels **inspringen**". De ingesprongen regels vormen dan samen een blok van code dat herhaald zal worden.
+                    Ook als je maar één regel wilt herhalen, zal je die moeten inspringen.
+                    
                 example_code: |
-                    Zo werkt het `{repeat}` commando vanaf nu:
                     ```
                     {repeat} 5 {times}
                         {print} 'Hallo allemaal'
                         {print} 'Dit wordt allemaal 5 keer herhaald'
-                    ```
-                    Dit is hoe `{if}` en `{else}` vanaf nu werken:
-                    ```
-                    naam {is} {ask} 'Hoe heet je?'
-                    {if} naam {is} Hedy
-                        {print} 'Welkom, Hedy'
-                        {print} 'Je kan nu spelen op je computer!'
-                    {else}
-                        {print} 'INDRINGER!'
-                        {print} 'Je kunt deze computer niet gebruiken!'
                     ```
             10:
                 story_text: |
