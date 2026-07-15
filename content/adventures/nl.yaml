@@ -224,7 +224,22 @@ adventures:
                     {print}('Welkom bij dit verhaal!')
                     ```
             6:
-                story_text: "Nu we  `{elif}` kunnen gebruiken, kun je een interactief verhaal maken! Je kunt bijvoorbeeld verschillende karakters kiezen, die allemaal verschillende eigenschappen hebben. \nOf je kunt de speler laten kiezen welke weg ze inslaan, welke deur ze willen openen of welk toverdrankje ze willen drinken...\n\n### Opdracht\nMaak je eigen verhaal met 3 of meer opties door de {elif} te gebruiken."
+                story_text: |-
+                    Nu we  `{elif}` kunnen gebruiken, kun je een interactief verhaal maken! Je kunt bijvoorbeeld verschillende karakters kiezen, die allemaal verschillende eigenschappen hebben.
+                    Of je kunt de speler laten kiezen welke weg ze inslaan, welke deur ze willen openen of welk toverdrankje ze willen drinken...
+                
+                    ### Opdracht
+                    Maak je eigen verhaal met 3 of meer opties door `{elif}` te gebruiken.
+                example_code: |
+                    ```
+                    karakter {is} {ask} 'Wie helpt je bij jouw missie?'
+                    {if} karakter {is} 'Daphne'
+                    {print} 'Je hebt Daphne gekozen! Ze is de slimste van allemaal!'
+                    {elif} karakter {is} 'Jasper'
+                    {print} 'Je hebt Jasper gekozen! Hij is de sterkste van allemaal!'
+                    {elif} karakter {is} 'Sam'
+                    {print} 'Je hebt Sam gekozen! Die is de snelste van allemaal!'
+                    ```
     add_remove_command:
         description: 'Introduceren van: {add} {to_list} (toevoegen aan to_list) en {remove} {from} (verwijderen uit from)'
         levels:
@@ -804,6 +819,28 @@ adventures:
                     ```
     elif_command:
         default_save_name: alsanders
+        description: '{elif} commando'
+        levels:
+            6:
+                story_text: |
+                    In dit level kun je een nieuw commando gebruiken: `{elif}`. `{elif}` is een combinatie van de `{else}` en `{if}` commando's. Je gebruikt het om 3 (of meer!) opties te maken.
+                    OPMERKING: Je moet nu 2 gebruiken voor {if}, {else} of {elif}. Eén regel voor het {if} commanda (bijvoorbeeld `{if} naam {is} Hedy`), en één regel voor wat er moet gebeuren als de voorwaarde waar is (bijvoorbeeld `{print} hoi`).
+                    Probeer het zelf!
+                    ### Opdracht
+                    Maak je eigen rad van fortuin. Verander de prijzen die je kunt winnen en verander de reacties die je krijgt.
+                example_code: |
+                    ```
+                    prijzen {is} 1 miljoen euro, een appeltaart, niks
+                    jouw_prijs {is} prijzen {at} {random}
+                    {print} 'Je wint ' jouw_prijs
+                    {if} jouw_prijs {is} 1 miljoen euro
+                    {print} 'Yes! Je bent rijk!'
+                    {elif} jouw_prijs {is} een appeltaart
+                    {print} 'Lekker, een appeltaart!'
+                    {else}
+                    {print} 'Ik wens je de volgende keer meer geluk..'
+                    ```
+
     for_command:
         default_save_name: voor
         description: '{for} commando'
@@ -1697,7 +1734,7 @@ adventures:
         levels:
             6:
                 story_text: |
-                    **Lijstjes**
+                    ### Lijstjes
                     Om te kijken of iets in een lijst zit, kun je nu ook gebruik maken van `{in}`.
                     Deze code print mooi als je geel of rood antwoordt, en anders mwah!
                 example_code: |
@@ -1880,6 +1917,21 @@ adventures:
                     antwoord {is} {ask} 'Wat is de hoofdstad van Zimbabwe?'
                     {if} antwoord {is} Harare {play} C6
                     _
+                    ```
+            6:
+                story_text: |
+                    Met `{elif}` kun je verschillende noten spelen in verschillende situaties. Je kunt bijvoorbeeld een vrolijke noot spelen als een persoon vrolijk is.
+                    ### Opdracht
+                    Maak eerst een bedroefde noot bij een bedroefd persoon, maak dan minimaal 2 andere noten voor andere stemmingen.
+                example_code: |
+                    ```
+                    stemming {is} {ask} 'Hoe voel je je vandaag?'
+                    {if} stemming {is} vrolijk
+                    {play} C4
+                    {elif} stemming {is} bedroefd
+                    {play} _
+                    {elif} stemming {is} _
+                    {play} _
                     ```
             7:
                 story_text: |
