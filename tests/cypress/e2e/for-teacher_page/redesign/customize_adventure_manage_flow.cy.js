@@ -8,7 +8,7 @@ function createAdventureFromManage(adventureName = uniqueName('redesign-manage-a
   cy.getDataCy('redesign_prompt_input').clear().type(adventureName);
   cy.getDataCy('redesign_prompt_ok_button').click();
 
-  cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+  cy.url().should('include', '/for-teachers/customize-adventure/');
 
   return cy.location('pathname').then((pathname) => {
     const adventureId = pathname.split('/').pop();
@@ -51,7 +51,7 @@ describe('Redesign manage adventures flow', () => {
       cy.get('@targetRow')
         .find('a.view_class')
         .should('have.attr', 'href')
-        .and('include', `/for-teachers/redesign/customize-adventure/${adventureId}`);
+        .and('include', `/for-teachers/customize-adventure/${adventureId}`);
 
       cy.intercept('POST', `/for-teachers/adventures/${adventureId}/remove`).as('deleteAdventure');
 
@@ -69,7 +69,7 @@ describe('Redesign manage adventures flow', () => {
     const renamedName = uniqueName('rename-target');
 
     createAdventureFromManage(originalName).then(({ adventureId }) => {
-      cy.visit(`/for-teachers/redesign/customize-adventure/${adventureId}`);
+      cy.visit(`/for-teachers/customize-adventure/${adventureId}`);
       cy.get('h1').should('contain.text', originalName);
 
       cy.intercept('PUT', `/for-teachers/customize-adventure/${adventureId}/name`).as('renameAdventure');
@@ -105,9 +105,9 @@ describe('Redesign manage adventures flow', () => {
           }
         });
 
-        cy.visit(`/for-teachers/redesign/class/${classId}/customize-level/1`);
+        cy.visit(`/for-teachers/class/${classId}/customize-level/1`);
 
-        cy.intercept('POST', `/for-teachers/redesign/class/${classId}/customize-level/1/add-adventure`).as('addAdventureToLevel1');
+        cy.intercept('POST', `/for-teachers/class/${classId}/customize-level/1/add-adventure`).as('addAdventureToLevel1');
 
         cy.get('#level_adventures_panel button.blue-btn-new').last().click();
         cy.get('#add_adventures_modal_level_1').should('be.visible');
@@ -124,11 +124,11 @@ describe('Redesign manage adventures flow', () => {
 
         cy.get('#dropdown_level_button').click();
         cy.get('#level_button_2').click();
-        cy.url().should('include', `/for-teachers/redesign/class/${classId}/customize-level/2`);
+        cy.url().should('include', `/for-teachers/class/${classId}/customize-level/2`);
 
         cy.get('#level_2').should('not.contain.text', adventureName);
 
-        cy.visit(`/for-teachers/redesign/customize-adventure/${adventureId}`);
+        cy.visit(`/for-teachers/customize-adventure/${adventureId}`);
         cy.getDataCy('solution_example').click();
         cy.get('#adventure-used-in-table').should('contain.text', className);
         cy.get('#adventure-used-in-table').should('contain.text', '1');

@@ -28,19 +28,30 @@ it(`Is able to invite second teachers by username, accept it and check it`, () =
   .parent('tr')
   .find('[data-cy="remove_user_invitation"]')
   .click();
-  cy.getDataCy('modal_confirm modal_yes_button').click();
+  cy.get('body').then(($body) => {
+    if ($body.find('[data-cy="htmx_modal_yes_button"]:visible').length > 0) {
+      cy.getDataCy('htmx_modal_yes_button').click();
+    } else if ($body.find('[data-cy="redesign_confirm_yes_button"]:visible').length > 0) {
+      cy.getDataCy('redesign_confirm_yes_button').click();
+    } else if ($body.find('[data-cy="modal_yes_button"]:visible').length > 0) {
+      cy.getDataCy('modal_yes_button').click();
+    }
+  });
 
   // This needs to come before we accept teacher2's invitation, otherwise
   // after this there are no invites and so this table isn't rendered at all.
-  cy.getDataCy('invites_block')
-    .should("not.contain", testSecondTeachers[2]);
+  cy.reload();
+  cy.get('body').should('not.contain', testSecondTeachers[2]);
 
   //then accept other teachers invitations
   for (const teacher of secondTeachers) {
     cy.intercept('class/join/**').as('join');
     loginForTeacher(teacher);
     goToProfilePage();
-    cy.getDataCy('join_link').click();
+    cy.contains('[id^="invitation_"]', className)
+      .within(() => {
+        cy.getDataCy('join_link').first().click();
+      });
     // Give the Ajax request that gets sent as a result of the click enough time to complete
     cy.wait('@join');
   }

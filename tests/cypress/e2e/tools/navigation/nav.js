@@ -91,7 +91,31 @@ export function goToEditAdventure()
     // takes the first adventures and goes to its edit page
     // It does not matter which adventure we take (we choose the first one)
     openAdventureView();
-    cy.getDataCy('edit_link_adventure1').first().click();
+    cy.get('body').then(($body) => {
+        if ($body.find('[data-cy^="edit_link_"]').length > 0) {
+            cy.get('[data-cy^="edit_link_"]').first().invoke('attr', 'href').then((href) => {
+                const adventureId = href.split('/').pop();
+                cy.visit(`/for-teachers/legacy/customize-adventure/${adventureId}`);
+            });
+            return;
+        }
+
+        if ($body.find('#my-adventures-table a[href*="/for-teachers/customize-adventure/"]').length > 0) {
+            cy.get('#my-adventures-table a[href*="/for-teachers/customize-adventure/"]').first().invoke('attr', 'href').then((href) => {
+                const adventureId = href.split('/').pop();
+                cy.visit(`/for-teachers/legacy/customize-adventure/${adventureId}`);
+            });
+            return;
+        }
+
+        cy.visit('/for-teachers/customize-adventure?name=autosave-temp&level=1');
+        cy.location('pathname').then((pathname) => {
+            const match = pathname.match(/customize-adventure\/([^/]+)/);
+            if (match && match[1]) {
+                cy.visit(`/for-teachers/legacy/customize-adventure/${match[1]}`);
+            }
+        });
+    });
 }
 
 export function navigateHomeButton(button, path)

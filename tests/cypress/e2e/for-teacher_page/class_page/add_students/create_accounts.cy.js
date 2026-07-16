@@ -18,7 +18,8 @@ teachers.forEach((teacher) => {
       cy.getDataCy('add_student').click();
       cy.getDataCy('create_accounts').click();
 
-      const students = Array.from({length:5}, (_, index) => `student_${index}_${Math.random()}`)
+      const seed = Date.now();
+      const students = Array.from({length:5}, (_, index) => `student_${index}_${seed}`)
       cy.getDataCy('create_accounts_input').type(students.join('\n'));
 
       cy.getDataCy('create_accounts_button').click();
@@ -46,7 +47,12 @@ function ensureStudentsCreatedSuccessfully(students)
   cy.getDataCy('go_back_button').click();
   cy.url().should('include', 'class/');
 
+  cy.location('pathname').then((pathname) => {
+    const classId = pathname.split('/').pop();
+    cy.visit(`/for-teachers/legacy/class/${classId}`);
+  });
+
   cy.wrap(students).each((_, index) => {
-    cy.getDataCy(`student_${students[index]}`).should('contain.text', students[index])
+    cy.contains('[data-cy^="student_"]', students[index]).should('be.visible');
   });
 }

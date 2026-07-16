@@ -20,7 +20,7 @@
       {% for adventure in my_adventures %}
       <tr data-cy="my_adventure_row_{{ adventure.id }}">
         <td class="teacher-table-td whitespace-nowrap {% if loop.last %}rounded-bl-lg{% endif %}">
-          <a class="view_class" href="/for-teachers/redesign/customize-adventure/{{ adventure.id }}">{{ adventure.name }}</a>
+          <a class="view_class" href="/for-teachers/customize-adventure/{{ adventure.id }}">{{ adventure.name }}</a>
         </td>
         <td class="teacher-table-td whitespace-nowrap">{{ adventure.level_display }}</td>
         <td class="teacher-table-td whitespace-nowrap">{{ adventure.date }}</td>

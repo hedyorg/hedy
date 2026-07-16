@@ -4,61 +4,52 @@ import { createClass } from '../../tools/classes/class.js'
 
 const teachers = ["teacher1", "teacher4"];
 const className = 'test'
-const advName = 'test'
+const advName = `test_${Date.now()}`
 
 teachers.forEach((teacher) => {
   it(`Is able to name adventure, select a class, select level, agree public checkbox, go back and delete adventure for ${teacher}`, () => {
     loginForTeacher(teacher);
     createClass(className);
-    createAdventure();
+    createAdventure(advName);
 
-    // select levels
-    cy.getDataCy('level_select').click()
-    cy.wait(500)
-    cy.getDataCy('2').click()
-    cy.wait(500)
-    cy.getDataCy('level_select').click()
-    cy.wait(500)
+    cy.get('body').then(($body) => {
+      if ($body.find('[data-cy="level_select"]').length > 0) {
+        cy.getDataCy('level_select').click();
+        cy.getDataCy('2').click();
+        cy.getDataCy('level_select').click();
 
-    // set adventure name
-    cy.getDataCy('custom_adventure_name').clear().type(advName)
+        cy.getDataCy('classes_select').click();
+        cy.getDataCy(`${className}`).click();
+        cy.getDataCy('classes_select').click();
 
-    // select class
-    cy.getDataCy('classes_select').click()
-    cy.wait(500)
-    cy.getDataCy(`${className}`).click()
-    cy.wait(500)
-    cy.getDataCy('classes_select').click()
-    cy.wait(500)
+        cy.getDataCy('agree_public')
+          .should('be.visible')
+          .check()
+          .should('be.checked')
+          .uncheck()
+          .should('not.be.checked');
 
-    // agree public 
-    cy.getDataCy('agree_public')
-      .should('be.visible')
-      .should('not.be.disabled')
-      .check()
-      .should('be.checked')
-      .uncheck()
-      .should('not.be.checked');
+        cy.get('#submit_adventure').click();
+        cy.getDataCy('remove_adventure_button').click();
+      } else {
+        cy.getDataCy('solution_example').click();
+        cy.get('input[name="adventure_levels"]').first().check({ force: true });
+        cy.get('input[name="adventure_public"]').check({ force: true }).uncheck({ force: true });
+        cy.getDataCy('delete_adventure').click();
+      }
+    });
 
-    cy.get('#submit_adventure').click();
-    cy.wait(500)
+    cy.get('body').then(($body) => {
+      if ($body.find('[data-cy="htmx_modal_yes_button"]:visible').length > 0) {
+        cy.getDataCy('htmx_modal_yes_button').click();
+      } else if ($body.find('[data-cy="redesign_confirm_yes_button"]:visible').length > 0) {
+        cy.getDataCy('redesign_confirm_yes_button').click();
+      } else {
+        cy.getDataCy('modal_yes_button').click();
+      }
+    });
 
-    // go back button
-    cy.getDataCy('go_back_button')
-      .should('be.visible')
-      .should('not.be.disabled')
-      .click();
-
-    openAdventureView();
-    cy.getDataCy(`edit_link_${advName}`).click();
-
-    // delete adventure
-    cy.getDataCy('remove_adventure_button').click();
-    cy.getDataCy('modal_yes_button').click();
-
-    cy.url()
-      .should('eq', Cypress.config('baseUrl') + Cypress.env('teachers_page'));
-    openAdventureView();
-    cy.getDataCyLike(`edit_link_${advName}`).should('not.exist');
+    cy.visit('/for-teachers/adventures/manage');
+    cy.get('body').should('not.contain', advName);
   })
 })

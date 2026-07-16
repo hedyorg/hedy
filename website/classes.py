@@ -26,6 +26,7 @@ class ClassModule(WebsiteModule):
         self.db = db
 
     @route("/", methods=["POST"])
+    @route("/redesign", methods=["POST"])
     @requires_teacher
     def create_class(self, user):
         body = request.json
@@ -36,6 +37,9 @@ class ClassModule(WebsiteModule):
             return make_response(gettext("class_name_invalid"), 400)
         if len(body.get("name")) < 1:
             return make_response(gettext("class_name_empty"), 400)
+        creation_type = body.get("creation_type")
+        if creation_type is not None and not isinstance(creation_type, str):
+            return make_response(gettext("request_invalid"), 400)
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         Classes = self.db.get_teacher_classes(user["username"])
@@ -55,44 +59,10 @@ class ClassModule(WebsiteModule):
 
         self.db.store_class(Class)
         add_class_created_to_subscription(user['email'])
-        response = {"id": Class["id"]}
-        return make_response(response, 200)
-
-    @route("/redesign", methods=["POST"])
-    @requires_teacher
-    def create_class_redesign(self, user):
-        body = request.json
-        # Validations
-        if not isinstance(body, dict):
-            return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("name"), str):
-            return make_response(gettext("class_name_invalid"), 400)
-        if len(body.get("name")) < 1:
-            return make_response(gettext("class_name_empty"), 400)
-        if not isinstance(body.get("creation_type"), str):
-            return make_response(gettext("request_invalid"), 400)
-        response = {}
-        if body.get("creation_type") in ("standard", "plain"):
-            # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
-            Classes = self.db.get_teacher_classes(user["username"])
-            for Class in Classes:
-                if Class["name"] == body["name"]:
-                    return make_response(gettext("class_name_duplicate"), 200)
-
-            Class = {
-                "id": uuid.uuid4().hex,
-                "date": utils.timems(),
-                "teacher": user["username"],
-                "archived": False,
-                # TODO: remove once we deploy new redesign
-                "link": utils.random_id_generator(7),
-                "name": body["name"],
-            }
-            self.db.store_class(Class)
-            add_class_created_to_subscription(user['email'])
-            include_adventures = body.get("creation_type") == "standard"
+        if creation_type in ("standard", "plain"):
+            include_adventures = creation_type == "standard"
             _create_customizations(g_db(), Class["id"], include_adventures=include_adventures)
-            response = {"id": Class["id"]}
+        response = {"id": Class["id"]}
         return make_response(response, 200)
 
     @route("/<class_id>", methods=["PUT"])

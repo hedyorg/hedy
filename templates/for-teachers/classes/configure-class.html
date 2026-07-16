@@ -5,7 +5,7 @@
 
 	{{ breadcrumb([
 		{'label': _('classes'), 'url': '/for-teachers/class/all'},
-		{'label': class_info.name, 'url': '/for-teachers/redesign/class/' ~ class_info.id},
+		{'label': class_info.name, 'url': '/for-teachers/class/' ~ class_info.id},
 		{'label': _('configure')}
 	]) }}
 	<h1 style="overflow-wrap: anywhere;">
@@ -57,7 +57,7 @@
 					<button
 						type="button"
 						class="blue-btn-new w-fit"
-						onclick="window.location.href='/for-teachers/redesign/class/{{ class_info.id }}/customize-level/' + document.getElementById('customize_level').value">
+						onclick="window.location.href='/for-teachers/class/{{ class_info.id }}/customize-level/' + document.getElementById('customize_level').value">
 						{{ _('customize') }}
 					</button>
 				</div>

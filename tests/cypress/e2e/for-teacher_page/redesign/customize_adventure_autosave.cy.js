@@ -31,7 +31,7 @@ function openNewAdventureInRedesign(adventureName = `redesign-flow-${Date.now()}
   cy.getDataCy('redesign_prompt_modal').should('be.visible');
   cy.getDataCy('redesign_prompt_input').should('be.visible').clear().type(adventureName);
   cy.getDataCy('redesign_prompt_ok_button').click();
-  cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+  cy.url().should('include', '/for-teachers/customize-adventure/');
 }
 
 function waitForUploadWithEmptyContent(alias, remainingAttempts = 6) {
@@ -65,7 +65,7 @@ describe('Customize adventure redesign autosave', () => {
       .should('be.visible')
       .click();
 
-    cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+    cy.url().should('include', '/for-teachers/customize-adventure/');
 
     const contentMarker = `autosave-redesign-content-${Date.now()}`;
     const solutionMarker = `autosave-redesign-solution-${Date.now()}`;
@@ -93,7 +93,7 @@ describe('Customize adventure redesign autosave', () => {
       .should('be.visible')
       .click();
 
-    cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+    cy.url().should('include', '/for-teachers/customize-adventure/');
 
     cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
 
@@ -113,7 +113,7 @@ describe('Customize adventure redesign autosave', () => {
       .should('be.visible')
       .click();
 
-    cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+    cy.url().should('include', '/for-teachers/customize-adventure/');
 
     cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
 

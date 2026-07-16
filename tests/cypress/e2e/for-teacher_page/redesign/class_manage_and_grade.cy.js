@@ -1,51 +1,70 @@
-import { loginAndOpenClasses, createRedesignClass, createStudentsForClass, openClassSubpage, assertBreadcrumbLinks, uniqueName } from './helpers';
+import { loginAndOpenClasses, createRedesignClass, openClassSubpage, assertBreadcrumbLinks, uniqueName } from './helpers';
 import { login } from '../../tools/login/login';
 
-function getCreatedStudentCredentials() {
-  return cy.getDataCy('create_accounts_output').find('tr').then(($rows) => {
-    const credentials = [];
+function createStudentsWithKnownPassword(classId, count = 3) {
+  const password = '123456';
+  const usernames = Array.from({ length: count }, (_, idx) => uniqueName(`student-${idx}`));
+  const accounts = usernames.map((username) => `${username};${password}`).join('\n');
 
-    Cypress.$($rows).each((index, row) => {
-      if (index === 0) {
-        return;
-      }
+  cy.visit(`/for-teachers/create-accounts/${classId}`);
+  cy.getDataCy('toggle_circle').click();
+  cy.getDataCy('create_accounts_input').clear().type(accounts);
 
-      const cells = Cypress.$(row).find('td');
-      if (cells.length < 3) {
-        return;
-      }
+  cy.intercept('POST', '/for-teachers/create-accounts').as('createAccounts');
+  cy.getDataCy('create_accounts_button').click();
+  cy.getDataCy('modal_yes_button').click();
+  cy.wait('@createAccounts').its('response.statusCode').should('eq', 200);
+  cy.getDataCy('create_accounts_output').should('be.visible');
 
-      credentials.push({
-        username: Cypress.$(cells[1]).text().trim(),
-        password: Cypress.$(cells[2]).text().trim(),
-      });
-    });
-
-    return credentials;
-  });
+  return cy.wrap(usernames.map((username) => ({ username, password })));
 }
 
 function createAndSubmitProgramForStudent(studentCredential, index) {
   const outputToken = `hello-1-${index}`;
 
-  login(studentCredential.username, studentCredential.password);
-  cy.visit('/hedy/1');
+  const ensureStudentIsLoggedIn = () => {
+    login(studentCredential.username, studentCredential.password);
+    cy.visit('/programs');
+    return cy.get('body').then(($body) => {
+      if ($body.attr('data-logged-in') !== '1') {
+        cy.wait(500);
+        login(studentCredential.username, studentCredential.password);
+        cy.visit('/programs');
+        cy.get('body').should('have.attr', 'data-logged-in', '1');
+      }
+    });
+  };
 
-  cy.get('#editor .cm-content').click();
-  cy.focused().type(`{selectall}{backspace}print ${outputToken}`);
+  return cy.then(() => {
+    ensureStudentIsLoggedIn();
 
-  cy.getDataCy('runit').click();
-  cy.getDataCy('output').should('contain.text', outputToken);
-
-  cy.visit('/programs');
-  cy.get('.program').first().invoke('attr', 'data-id').then((programId) => {
-    cy.request('POST', '/programs/submit', { id: programId }).its('status').should('eq', 200);
+    cy.request('POST', '/programs', {
+      level: 1,
+      lang: 'en',
+      name: `seed-${outputToken}`,
+      code: `print ${outputToken}`,
+      adventure_name: 'default',
+      short_name: 'default',
+    }).then(({ status, body }) => {
+      expect(status).to.eq(200);
+      const programId = body?.id || body?.save_info?.id;
+      expect(programId).to.be.a('string').and.not.be.empty;
+      cy.request('POST', '/programs/submit', { id: programId }).its('status').should('eq', 200);
+    });
   });
 }
 
 function seedSubmittedPrograms(studentCredentials) {
-  cy.wrap(studentCredentials).each((studentCredential, index) => {
-    createAndSubmitProgramForStudent(studentCredential, index + 1);
+  return cy.wrap(studentCredentials).each((studentCredential, index) => {
+    return createAndSubmitProgramForStudent(studentCredential, index + 1);
+  });
+}
+
+function seedGradeProgramsAndReturnToTeacher() {
+  return cy.get('@studentCredentials').then((studentCredentials) => {
+    return seedSubmittedPrograms(studentCredentials);
+  }).then(() => {
+    loginAndOpenClasses();
   });
 }
 
@@ -104,12 +123,9 @@ describe('Redesigned class grading and management pages', () => {
     loginAndOpenClasses();
     createRedesignClass({ className: uniqueName('grade-manage') }).then(({ classId }) => {
       cy.wrap(classId).as('classId');
-      createStudentsForClass(classId, 3).then(() => {
-        getCreatedStudentCredentials().then((studentCredentials) => {
-          cy.wrap(studentCredentials.map(({ username }) => username)).as('students');
-          cy.wrap(studentCredentials).as('studentCredentials');
-          seedSubmittedPrograms(studentCredentials);
-        });
+      createStudentsWithKnownPassword(classId, 3).then((studentCredentials) => {
+        cy.wrap(studentCredentials.map(({ username }) => username)).as('students');
+        cy.wrap(studentCredentials).as('studentCredentials');
       });
     }).then(() => {
       loginAndOpenClasses();
@@ -120,7 +136,7 @@ describe('Redesigned class grading and management pages', () => {
     cy.get('@classId').then((classId) => {
       cy.get('@students').then((students) => {
         openClassSubpage(classId, 'manage');
-        assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/redesign/class/${classId}`]);
+        assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/class/${classId}`]);
 
         cy.get('#manage-students-table-body tr').should('have.length', students.length);
         students.forEach((student) => {
@@ -137,7 +153,7 @@ describe('Redesigned class grading and management pages', () => {
         const descStudents = [...ascStudents].reverse();
 
         openClassSubpage(classId, 'manage');
-        cy.intercept('GET', `/for-teachers/redesign/class/${classId}/manage/filter_sort*`).as('manageFilterSort');
+        cy.intercept('GET', `/for-teachers/class/${classId}/manage/filter_sort*`).as('manageFilterSort');
 
         cy.getDataCy('sort_student').click();
         cy.wait('@manageFilterSort').its('response.statusCode').should('eq', 200);
@@ -183,7 +199,7 @@ describe('Redesigned class grading and management pages', () => {
         const targetStudent = students[1];
 
         openClassSubpage(classId, 'manage');
-        cy.intercept('POST', `/for-teachers/redesign/class/${classId}/manage/remove_student/${targetStudent}*`).as('removeStudent');
+        cy.intercept('POST', `/for-teachers/class/${classId}/manage/remove_student/${targetStudent}*`).as('removeStudent');
 
         openManageStudentActions(targetStudent);
         cy.getDataCy(`remove_student_${targetStudent}`).should('be.visible').click();
@@ -204,7 +220,7 @@ describe('Redesigned class grading and management pages', () => {
         openClassSubpage(classId, 'manage');
 
         cy.intercept('GET', '/search*').as('searchStudents');
-        cy.intercept('POST', `/for-teachers/redesign/class/${classId}/manage/invite`).as('inviteStudent');
+        cy.intercept('POST', `/for-teachers/class/${classId}/manage/invite`).as('inviteStudent');
 
         cy.getDataCy('invite_student').should('be.visible').click();
         cy.getDataCy('redesign_search_modal').should('be.visible');
@@ -222,14 +238,16 @@ describe('Redesigned class grading and management pages', () => {
   });
 
   it('filters programs on grade page using selected student', () => {
+    seedGradeProgramsAndReturnToTeacher();
+
     cy.get('@classId').then((classId) => {
       cy.get('@students').then((students) => {
         const selectedStudent = students[0];
         const otherStudent = students[1];
 
         openClassSubpage(classId, 'grade');
-        assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/redesign/class/${classId}`]);
-        cy.intercept('GET', `/for-teachers/redesign/class/${classId}/grade/filter_sort*`).as('gradeFilterSort');
+        assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/class/${classId}`]);
+        cy.intercept('GET', `/for-teachers/class/${classId}/grade/filter_sort*`).as('gradeFilterSort');
 
         cy.get('#dropdown_student_button').click();
         cy.get('#student_dropdown').should('be.visible');
@@ -246,10 +264,12 @@ describe('Redesigned class grading and management pages', () => {
   });
 
   it('grades and ungrades a student program from grade page', () => {
+    seedGradeProgramsAndReturnToTeacher();
+
     cy.get('@classId').then((classId) => {
       openClassSubpage(classId, 'grade');
       cy.get('.student_adventure_checkbox').should('have.length.greaterThan', 0);
-      cy.intercept('POST', `/for-teachers/redesign/program/${classId}/grade*`).as('tickProgram');
+      cy.intercept('POST', `/for-teachers/program/${classId}/grade*`).as('tickProgram');
 
       cy.get('.student_adventure_checkbox').first().then(($checkbox) => {
         const wasTicked = $checkbox.hasClass('fa-check');
@@ -272,6 +292,8 @@ describe('Redesigned class grading and management pages', () => {
   });
 
   it('views student program, toggles approval, and unsubmits program', () => {
+    seedGradeProgramsAndReturnToTeacher();
+
     cy.get('@classId').then((classId) => {
       openClassSubpage(classId, 'grade');
 
@@ -303,6 +325,8 @@ describe('Redesigned class grading and management pages', () => {
   });
 
   it('navigates from view-program page using next adventure and next student buttons', () => {
+    seedGradeProgramsAndReturnToTeacher();
+
     cy.get('@classId').then((classId) => {
       cy.get('@students').then((students) => {
         const selectedStudent = students[0];
