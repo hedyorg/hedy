@@ -4,7 +4,9 @@ import { IndentContext } from '@codemirror/language'
 import {syntaxTree} from "@codemirror/language"
 import { WidgetType } from "@codemirror/view"
 import { SyntaxNode } from "@lezer/common"
-import { level as levelFacet } from './cm-editor';
+import { keywordLanguage as keywordLanguageFacet, level as levelFacet } from './cm-editor';
+import { isFeatureEnabled } from './feature-flags';
+import { traductionMap } from './lezer-parsers/tokens';
 
 export const addErrorLine = StateEffect.define<{ row: number }>();
 export const addErrorWord = StateEffect.define<{ row: number, col: number }>();
@@ -327,7 +329,10 @@ function highlightVariables(view: EditorView) {
     const level = view.state.facet(levelFacet);
     // double equals because level is actually an array with just one element
     // like: [1]
-    if (level == 1) return Decoration.none;
+    if (level == 1) {
+        if (!isFeatureEnabled('answer_interpolation')) return Decoration.none;
+        return highlightLevelOneAnswerVariable(view);
+    }
     let variableDeco = new RangeSetBuilder<Decoration>();
     let variableData: VariableData[] = []
     let functionsNames = new Set<string>()
@@ -445,6 +450,68 @@ function highlightVariables(view: EditorView) {
     })
 
     return variableDeco.finish()
+}
+
+function highlightLevelOneAnswerVariable(view: EditorView) {
+    const answerRegex = getLevelOneAnswerKeywordRegex(view);
+    if (!answerRegex) return Decoration.none;
+
+    const variableDeco = new RangeSetBuilder<Decoration>();
+    let hasSeenAsk = false;
+    const commandsUsingAnswer = new Set(["Ask", "Print"]);
+
+    for (let {from, to} of view.visibleRanges) {
+        syntaxTree(view.state).iterate({
+            from,
+            to,
+            enter: (node) => {
+                if (node.name === "Ask") {
+                    if (hasSeenAsk) {
+                        const children = node.node.getChildren("Text");
+                        for (const child of children) {
+                            const text = view.state.doc.sliceString(child.from, child.to);
+                            addLevelOneAnswerHighlights(text, child.from, answerRegex, variableDeco);
+                        }
+                    }
+                    hasSeenAsk = true;
+                    return false;
+                }
+
+                if (!hasSeenAsk || !commandsUsingAnswer.has(node.name)) {
+                    return;
+                }
+
+                const children = node.node.getChildren("Text");
+                for (const child of children) {
+                    const text = view.state.doc.sliceString(child.from, child.to);
+                    addLevelOneAnswerHighlights(text, child.from, answerRegex, variableDeco);
+                }
+
+                return false;
+            }
+        })
+    }
+
+    return variableDeco.finish();
+}
+
+function addLevelOneAnswerHighlights(text: string, offset: number, answerRegex: RegExp, variableDeco: RangeSetBuilder<Decoration>) {
+    answerRegex.lastIndex = 0;
+    for (const match of text.matchAll(answerRegex)) {
+        const matchedText = match[0];
+        const index = match.index;
+        if (index === undefined) continue;
+        variableDeco.add(offset + index, offset + index + matchedText.length, highlightVariableMarker)
+    }
+}
+
+function getLevelOneAnswerKeywordRegex(view: EditorView): RegExp | null {
+    const keywordLanguage = view.state.facet(keywordLanguageFacet) || 'en';
+    const translatedAnswer = traductionMap(keywordLanguage).get('answer');
+
+    if (!translatedAnswer) return null;
+
+    return new RegExp(`(?<![\\p{L}\\p{N}_])(?:${translatedAnswer})(?![\\p{L}\\p{N}_])`, 'gu');
 }
 
 function getVarNames(name: string) {

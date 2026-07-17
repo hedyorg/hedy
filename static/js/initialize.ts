@@ -4,6 +4,7 @@ import { initializeMyProfilePage, InitializeMyProfilePage } from './profile';
 import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializeViewProgramPage, InitializeViewProgramPageOptions } from './app';
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
+import { FeatureFlags, FrontendEnvironment, initializeFeatureFlags } from './feature-flags';
 import { logs } from './logs';
 import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeConfigureClassPage, InitializeConfigureClassPageOptions, initializeCustomizeLevelPage, InitializeCustomizeLevelPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeContextMenuPageOptions, initializeContextMenuEventHandler, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage, InitializeGradePageOptions, initializeGradePage } from './teachers';
 
@@ -44,6 +45,10 @@ export interface InitializeOptions {
    */
   readonly staticRoot?: string;
 
+  readonly environment?: FrontendEnvironment;
+
+  readonly featureFlags?: FeatureFlags;
+
   readonly javascriptPageOptions?: InitializePageOptions;
 }
 
@@ -70,6 +75,7 @@ type InitializePageOptions =
  */
 export function initialize(options: InitializeOptions) {
   setClientMessageLanguage(options.lang);
+  initializeFeatureFlags(options.featureFlags, options.environment);
 
   let level = options.level;
 
@@ -132,6 +138,7 @@ export function initialize(options: InitializeOptions) {
       break;
     case 'classes':
     case 'manage-students':
+    case 'my-adventures':
       initializeContextMenuEventHandler(options.javascriptPageOptions);
       break;
     

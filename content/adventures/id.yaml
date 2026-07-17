@@ -10,14 +10,12 @@ adventures:
 
                     Di baris pertama, gunakan `{ask}` dan tanya siapa yang akan menjadi karakter utama
 
-                    Setelah baris pertama, lanjut dengan`{print}`jika kalimat perlu untuk di cetak.
-                    Kamu juga dapat menggunakan`{echo}`apabila kamu ingin karakter utama mu berada di akhir kalimat.
-                example_code: "```\n{ask} Karakter utama dari cerita ini yaitu\n{print} Karakter utama akan berjalan menuju kedalam hutan\n{echo} Mereka sedikit ketakutan,\n{print} Mereka mendengar suara aneh dimana-mana\n{print} Mereka takut jika ternyata ini adalah hutan berhantu\n```\n"
+                example_code: "```\n{ask} Karakter utama dari cerita ini yaitu\n{print} Karakter utama akan berjalan menuju kedalam hutan\n{print} Mereka sedikit ketakutan, {answer}\n{print} Mereka mendengar suara aneh dimana-mana\n{print} Mereka takut jika ternyata ini adalah hutan berhantu\n```\n"
                 story_text_2: |
                     ### latihan
                     Sekarang buatlah ceritamu sendiri yang terdiri dari 6 baris kode.
                     Ceritanya tidak boleh sama dengan contoh cerita sebelumnya.
-                    Setidaknya gunakan minimal satu perintah`{ask}` dan`{echo}`
+                    Setidaknya gunakan minimal satu perintah`{ask}` dan`{answer}`
                     Kamu dapat membuat topik yang kamu inginkan
                     Kalau kamu tidak dapat menentukan topik, gunakan salah satu dari pilihan ini: pergi menonton film, melihat pertandingan olahraga, atau hari mengunjungi kebun binatang
             2:
@@ -36,15 +34,6 @@ adventures:
                     {sleep}
                     {print} nama takut jika ternyata hutan ini merupakan hutan berhantu
                     ```
-                story_text_2: |
-                    ### Latihan
-                    Sekarang saatnya untuk menambahkan variabel ke cerita Anda sendiri yang telah Anda buat di level sebelumnya.
-                    Pergi ke ‘Program Saya’, cari petualangan cerita level 1 Anda dan salin kode tersebut. Tempelkan kode tersebut di layar input Anda di level ini.
-
-                    Kode ini tidak akan berfungsi di level ini, karena Anda belum menggunakan variabel.
-                    Ubah perintah '{ask}' dan '{echo}' dalam kode Anda ke bentuk yang benar yang telah Anda pelajari di level ini.
-
-                    **Ekstra** Tambahkan perintah '{sleep}' ke kode Anda untuk membangun ketegangan dalam cerita Anda.
             3:
                 story_text: |-
                     Kamu dapat menambahkan sesuatu secara acak di cerita kamu. Monster, hewan, atau benda apapun.
@@ -257,50 +246,13 @@ adventures:
                     {print} Halo!
                     {ask} Siapa namamu?
                     ```
-                story_text_2: |
-                    ## Perintah `{echo}`
-                    Jika Anda ingin komputer mengulangi jawabannya kepada Anda, Anda dapat menggunakan perintah `{echo}`. Jawabannya akan digaungkan kembali di akhir kalimat, jadi dalam contoh ini setelah halo.
-                example_code_2: |
-                    ```
-                    {print} Halo!
-                    {ask} Siapa namamu?
-                    {echo} halo
-                    ```
-                story_text_3: |
-                    ### Latihan
-                    Cobalah perintah `{ask}` dan `{echo}`. Pertama, isi bagian yang kosong agar program ini berfungsi.
-                    Kemudian ajukan 2 pertanyaan lagi menggunakan perintah `{ask}`, setelah setiap `{ask}` gunakan `{echo}` untuk mencetak jawabannya di layar.
-                example_code_3: |
-                    ```
-                    _ Apa kabarmu?
-                    _
-                    ```
             2:
-                story_text: |
-                    ## Perintah tanya
-                    Sekarang kita dapat menggunakan **variabel** dalam kode kita, kita tidak lagi memerlukan perintah `{echo}`.
-                    Kita dapat menggunakan variabel untuk menyimpan jawaban atas pertanyaan kita dan dengan cara ini kita dapat menggunakan jawaban atas beberapa pertanyaan dalam kode kita.
-                    Coba lihat:
-
-                    Dengan cara ini kode Anda menjadi interaktif!
                 example_code: |
                     ```
                     nama {is} {ask} Siapa namamu?
                     {print} Halo nama
                     umur {is} {ask} Berapa umurmu?
                     {print} nama berumur tahun.
-                    ```
-                story_text_2: |
-                    ### Latihan
-                    Pada tab sebelumnya Anda telah berlatih mengatur variabel dengan perintah `{is}`.
-                    Anda telah membuat setidaknya 3 variabel dan menggunakannya dengan perintah cetak.
-                    Sekarang, daripada mengatur variabel, kami ingin Anda membuat variabel menjadi interaktif, seperti yang kami lakukan pada contoh kami.
-
-                    Salin kode Anda dari tab sebelumnya dan buat variabelnya interaktif dengan menggunakan perintah `{ask}`.
-                example_code_2: |
-                    ```
-                    favorit_animals {is} {ask} Apa hewan favoritmu?
-                    {print} Saya suka binatang_favorit
                     ```
     calculator:
         name: Kalkulator
@@ -399,9 +351,9 @@ adventures:
                     ```
                     {print} Saya suka pemrograman
                     Apakah Anda juga menyukai pemrograman?
-                    {echo}
+                    {answer}
                     {print} Apa hobimu?
-                    {echo} Hobimu adalah
+                    {print} Hobimu adalah
                     ```
             2:
                 story_text: |-
@@ -417,7 +369,7 @@ adventures:
                     tujuan {ask} Liburan kemana?
                     {print} Penerbangan menuju tujuan berangkat jam 3 sore.
                     {ask} Apakah Anda sudah mendaftarkan bagasi Anda?
-                    {echo}
+                    {answer}
                     {print} Izinkan saya mencetak boarding pass Anda.
                     {sleep}
                     Ini dia! Semoga perjalanan anda menyenangkan!
@@ -620,7 +572,19 @@ adventures:
                     Di level mendatang, Anda dapat mempelajari cara membuat mesin peramal sendiri!
                     Di level 1 Anda dapat memulai dengan mudah dengan membiarkan Hedy memperkenalkan dirinya sebagai peramal dan membiarkannya `{echo}` jawaban para pemain.
                     Seperti ini:
-                example_code: "```\n{print} Halo, aku Hedy sang peramal!\n{ask} Siapa kamu?\n{print} Ijinkan aku melihat bola kristal ku\n{print} Aku lihat... Aku lihat...\necho Nama kamu adalah \n```\n\nHedy sekarang hanya memberitahukan nama kamu. Dapatkah kamu membuat Hedy dapat memberitahukan hal-hal lain tentang masa depan kamu?\n\nTentu saja, Hedy bukan peramal yang baik, karena dia hanya bisa mengulang jawaban yang diberikan oleh pengguna!\nLihatlah level 2 dan tingkatkan kemampuan peramal kamu.\n"
+                example_code: |
+                    ```
+                    _ Halo, aku Hedy sang peramal!
+                    _ Siapa kamu?
+                    _ Ijinkan aku melihat bola kristal ku
+                    _ Aku lihat... Aku lihat...
+                    _ Nama kamu adalah _
+                    ```
+                    
+                    Hedy sekarang hanya memberitahukan nama kamu. Dapatkah kamu membuat Hedy dapat memberitahukan hal-hal lain tentang masa depan kamu?
+                    
+                    Tentu saja, Hedy bukan peramal yang baik, karena dia hanya bisa mengulang jawaban yang diberikan oleh pengguna!
+                    Lihatlah level 2 dan tingkatkan kemampuan peramal kamu.
                 story_text_2: |
                     ### Exercise
                     Hedy now only tells you your name. Can you expand the code so that Hedy can predict more things about you?
@@ -628,7 +592,7 @@ adventures:
                     Take a look in level 2 to improve your fortune teller.
             3:
                 story_text: |
-                    Pada level 1 kamu telah membuat mesin peramal pertama kamu, tapi Hedy tidak bisa benar-benar meramal, hanya mengulang.
+                    Pada level 1 kamu telah membuat mesin peramal pertama kamu, tapi Hedy tidak bisa benar-benar meramal.
                     Pada level 2 kamu dapat menggunakan variabel dan perintah `at random` untuk membantu Hedy memilih sebuah jawaban untukmu. Lihatlah kode berikut sebagai contoh.
                 example_code: |
                     Pada contoh ini kamu bisa menanyakan pertanyaan benar-salah ke Hedy dan Hedy akan merespon dengan jawaban acak untukmu.
@@ -717,7 +681,7 @@ adventures:
                     Jika kamu memilih pintu yang benar kamu akan bertahan hidup, tapi kalau tidak seekor monster akan...
 
                     Pada level 1 kita memulai permainan rumah berhantu dengan membuat cerita menyeramkan dan menanyakan monster apa yang pemain akan lihat di rumah berhantu.
-                example_code: "```\n{print} Kenapa aku ada disini?\n{print} Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\n{print} dan tiba-tiba semuanya menjadi gelap.\n{print} Tapi bagaimana caranya aku tergeletak di lantai...?\n{print} Kepalaku sakit seperti telah dipukul dengan tongkat pemukul basebal!\n{print} Suara apa itu?\n{print} Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\n{print} Aku perlu keluar dari sini!\n{print} Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\necho Aku memilih pintu \n{print} ...?\n ```\n\nDapatkah kamu menyelesaikan cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
+                example_code: "```\n{print} Kenapa aku ada disini?\n{print} Aku ingat temanku menyarankan untuk tidak ke rumah besar tua itu...\n{print} dan tiba-tiba semuanya menjadi gelap.\n{print} Tapi bagaimana caranya aku tergeletak di lantai...?\n{print} Kepalaku sakit seperti telah dipukul dengan tongkat pemukul basebal!\n{print} Suara apa itu?\n{print} Oh tidak! Aku merasa kalau aku tidak sendiri di rumah ini!\n{print} Aku perlu keluar dari sini!\n{print} Ada 3 pintu didepanku...\n{ask} Pintu mana yang harus kupilih?\n{print} Aku memilih pintu {answer} \n{print} ...?\n ```\n\nDapatkah kamu menyelesaikan cerita menyeramkan ini dengan menanyakan monster apa yang akan muncul? Atau membuat cerita rumah berhantu milik kamu sendiri?\n"
             3:
                 story_text: |-
                     Pada level 1 kamu telah membuat pendahuluan tentang permainan rumah berhantu kamu, tapi seperti yang mungkin sudah kamu ketahui, ceritanya selalu memiliki akhir yang mengerikan.
@@ -824,19 +788,14 @@ adventures:
                 example_code_2: |
                     ```
                     {print} Selamat datang di rumah makan Hedy
-                    {ask} Apa yang mau kamu pesan?
-                    echo Jadi kamu mau pesan
-                    {print} Terima kasih atas pesanannya!
-                    {print} Makanan kamu sedang disiapkan!
+                    _ Apa yang mau kamu pesan?
+                    {print} Jadi kamu mau pesan {answer}
                     {print} Terima kasih atas pesanannya!
                     {print} Makanan kamu sedang disiapkan!
                     ```
 
                     Dapatkah kamu menambahkan beberapa baris di kode program rumah makan kamu? Misal, dapatkah kamu menanyakan pembeli apa yang mau mereka minum, memberitahukan harga, atau menyampaikan 'selamat menikmati'?
             2:
-                story_text: |
-                    Pada level 2 kamu bisa mengembangkan kode rumah makan kamu dengan menggunakan variabel. Pada level 1 Hedy hanya dapat mengulang pesanan dan hanya mengingat pesanan terakhir.
-                    Sekarang kamu dapat menggunakan variabel dan Hedy dapat mengingat makanan dan minuman yang dipesan!
                 example_code: |
                     ```
                     {print} Selamat datang di rumah makan Hedy!
@@ -1004,16 +963,8 @@ adventures:
                 story_text: |
                     Pada level 1 kamu dapat memulai dengan permainan batu gunting kertas
 
-                    Dengan perintah `ask` kamu bisa mengambil salah satu pilihan, dan dengan `echo` kamu bisa menampilkan pilihan tersebut.
-                example_code: "```\n{print} apa yang kamu pilih?\n{ask} pilih dari batu, gunting, atau kertas\necho jadi pilhan kamu adalah: \n```\n"
-            2:
-                story_text: |
-                    In this level you can practise using the variables, so that you can make the rock, paper, scissors game in the next level!
-                example_code: |
-                    ```
-                    choice {is} _
-                    {print} I choose choice
-                    ```
+                    Dengan perintah `{ask}` kamu bisa mengambil salah satu pilihan, dan dengan `{answer}` kamu bisa menampilkan pilihan tersebut.
+                example_code: "```\n{print} apa yang kamu pilih?\n{ask} pilih dari batu, gunting, atau kertas\n{print} jadi pilhan kamu adalah: {answer} \n```\n"
             3:
                 story_text: |
                     Kamu bisa menggunakan `{at} {random}` perintah untuk membiarkan komputer mengambil batu, kertas atau gunting!

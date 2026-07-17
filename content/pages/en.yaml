@@ -214,24 +214,14 @@ teacher-guide:
                 solution_code: |-
                     {ask} Why does my code work now?
                     {print} Because I removed the capitals!
-        -   title: Students use echo without ask
+        -   title: Students use answer without ask
             example:
-                error_text: Echo is made to repeat an answer after an ask command. Without ask echo won't do anything.
-                error_code: '{echo} Your name is'
+                error_text: answer is made to repeat an answer after an ask command. Without ask answer won't do anything.
+                error_code: '{print} Your name is {answer}'
                 solution_text: Add an ask command to make it work.
                 solution_code: |-
                     {ask} What's your name?
-                    {echo} Your name is
-        -   title: Students want their echo word (variable) to be in the middle of a sentence
-            example:
-                error_text: And they are right! That's why they will learn to use proper variables in the next level.
-                error_code: |-
-                    {ask} Which programming language is the most fun?
-                    {echo} is the best!
-                solution_text: 'In level 1 we have to keep it at this:'
-                solution_code: |-
-                    {ask} Which programming language is the most fun?
-                    {echo} The best is...
+                    {print} Your name is {answer}
         -   title: 'Turtle: Students let the turtle walk off of the screen'
             example:
                 error_text: Often students love to try out big numbers when using the turtle, which causes the arrow to walk off the screen.

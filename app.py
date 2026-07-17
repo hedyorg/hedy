@@ -18,6 +18,7 @@ from typing import Optional
 from logging.config import dictConfig as logConfig
 from iso639 import ALL_LANGUAGES as languages
 import webbrowser
+from bs4 import BeautifulSoup
 
 import static_babel_content
 from markupsafe import Markup
@@ -345,15 +346,7 @@ def load_customized_adventures(level, customizations, into_adventures):
     for a in order_for_this_level:
         if a['from_teacher'] and (db_row := teacher_adventure_map.get(a['name'])):
             try:
-                if 'formatted_content' in db_row:
-                    db_row['formatted_content'] = safe_format(db_row['formatted_content'],
-                                                              **hedy_content.KEYWORDS.get(g.keyword_lang))
-                else:
-                    db_row['content'] = safe_format(db_row['content'],
-                                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
-                if 'solution_example' in db_row:
-                    db_row['solution_example'] = safe_format(db_row['solution_example'],
-                                                             **hedy_content.KEYWORDS.get(g.keyword_lang))
+                db_row = prepare_teacher_adventure_for_student_view(db_row, level)
             except Exception:
                 # We don't want teacher being able to break the student UI -> pass this adventure
                 pass
@@ -361,6 +354,62 @@ def load_customized_adventures(level, customizations, into_adventures):
             into_adventures.append(Adventure.from_teacher_adventure_database_row(db_row))
         if not a['from_teacher'] and (adv := builtin_adventure_map.get(a['name'])):
             into_adventures.append(adv)
+
+
+def _html_has_visible_text(content):
+    if not content:
+        return False
+    return BeautifulSoup(content, 'html.parser').get_text(separator='').strip() != ''
+
+
+def _translate_teacher_adventure_code_blocks(content, source_language, target_language, level):
+    if not content:
+        return content
+
+    soup = BeautifulSoup(content, 'html.parser')
+    for tag in soup.find_all('code'):
+        code_text = tag.get_text()
+        if not code_text or code_text.strip() == '':
+            continue
+        try:
+            translated = hedy_translation.translate_keywords(
+                code_text,
+                source_language,
+                target_language,
+                level=int(level),
+            )
+        except Exception:
+            continue
+        if translated is not None:
+            tag.string = translated
+
+    return soup.decode_contents() if soup.body else str(soup)
+
+
+def prepare_teacher_adventure_for_student_view(db_row, level):
+    db_row['content'] = safe_format(db_row.get('content', ''),
+                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
+    if 'formatted_content' in db_row:
+        db_row['formatted_content'] = safe_format(db_row['formatted_content'],
+                                                  **hedy_content.KEYWORDS.get(g.keyword_lang))
+    if 'solution_example' in db_row:
+        db_row['solution_example'] = safe_format(db_row['solution_example'],
+                                                 **hedy_content.KEYWORDS.get(g.keyword_lang))
+
+    formatted_is_empty = not _html_has_visible_text(db_row.get('formatted_content', ''))
+    if formatted_is_empty:
+        source_language = db_row.get('language') or 'en'
+        if (source_language != g.keyword_lang
+                and source_language in ALL_KEYWORD_LANGUAGES
+                and g.keyword_lang in ALL_KEYWORD_LANGUAGES):
+            db_row['content'] = _translate_teacher_adventure_code_blocks(
+                db_row.get('content', ''),
+                source_language,
+                g.keyword_lang,
+                level,
+            )
+
+    return db_row
 
 
 @app.before_app_request
@@ -510,6 +559,11 @@ def add_generated_css_file():
     return {
         "generated_css_file": '/css/generated.css' if envs.current_env().min_tailwind else '/css/generated.full.css'
     }
+
+
+@app.app_context_processor
+def add_frontend_feature_flags():
+    return get_frontend_feature_flags_context()
 
 
 @app.app_context_processor
@@ -713,6 +767,7 @@ def parse_by_id(user):
     program = g_db().program_by_id(body.get('id'))
     if program and program.get('username') == user['username']:
         try:
+            initialize_hedylang_feature_flags_for_request()
             hedy.transpile(
                 program.get('code'),
                 program.get('level'),
@@ -729,6 +784,7 @@ def parse_by_id(user):
 def prepare_files():
     body = request.json
     # Prepare the file -> return the "secret" filename as response
+    initialize_hedylang_feature_flags_for_request()
     transpiled_code = hedy.transpile(body.get("code"), body.get("level"), body.get("lang"))
     filename = utils.random_id_generator(12)
 
@@ -800,6 +856,7 @@ def generate_microbit_file():
         code = body.get("code")
         level = body.get("level")
 
+        initialize_hedylang_feature_flags_for_request()
         transpile_result = hedy.transpile_and_return_python(code, level)
         save_transpiled_code_for_microbit(transpile_result)
         return make_response({'filename': 'Micro-bit.py', 'microbit': True}, 200)
@@ -869,6 +926,7 @@ def transpile_add_stats(code, level, lang_, is_debug):
     username = current_user()['username'] or None
     number_of_lines = code.count('\n')
     try:
+        initialize_hedylang_feature_flags_for_request()
         result = hedy.transpile(code, level, lang_, is_debug=is_debug)
         statistics.add(
             username, lambda id_: g_db().add_program_stats(id_, level, number_of_lines, None))
@@ -892,6 +950,48 @@ def hedy_error_to_response(ex):
         "Error": get_error_text(ex, keyword_lang),
         "Location": ex.error_location
     }
+
+
+def get_frontend_feature_flags_context():
+    """Return the frontend feature-flag context used by templates and transpilation."""
+    return {
+        "frontend_environment": envs.frontend_environment(),
+        "feature_flags": {
+            "answer_interpolation": {
+                "production": False,
+                "local": True,
+                "alpha": True,
+            }
+        },
+    }
+
+
+def initialize_hedylang_feature_flags_for_request():
+    """Initialize hedylang feature flags before each transpilation operation."""
+    context = get_frontend_feature_flags_context()
+    external = getattr(hedy, "external", None)
+
+    if external is None:
+        logger.warning("hedy.external is unavailable; skipping feature-flag initialization")
+        return
+
+    init_from_context = getattr(external, "initialize_frontend_feature_flags_from_context", None)
+    if callable(init_from_context):
+        init_from_context(context)
+        return
+
+    # Backward-compatible path for older hedylang versions.
+    init_legacy = getattr(external, "initialize_frontend_feature_flags", None)
+    if callable(init_legacy):
+        init_legacy(
+            frontend_environment=context.get("frontend_environment"),
+            feature_flags=context.get("feature_flags"),
+        )
+        return
+
+    logger.warning(
+        "hedy.external has no supported frontend feature-flag initializer; skipping initialization"
+    )
 
 
 @app.route('/report_error', methods=['POST'])
@@ -2099,6 +2199,7 @@ def pre_process_public_program(program):
     # If program does not have an error value set -> parse it and set value
     if 'error' not in program:
         try:
+            initialize_hedylang_feature_flags_for_request()
             hedy.transpile(program.get('code'), program.get('level'), program.get('lang'))
             program['error'] = False
         except BaseException:

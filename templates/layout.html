@@ -45,13 +45,11 @@
   <head>
     <title>{% if page_title %}{{page_title}}{% else %}Hedy{% endif %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap">
     <link rel="stylesheet" href="{{static(generated_css_file)}}">
     <link rel="stylesheet" href="{{static('/css/additional.css')}}">
     <link rel="icon" type="image/png" href="{{static('/images/Hedy-logo-96x96-laptop.png')}}"/>
     <link rel="stylesheet" href="{{static('/fontawesome/css/all.min.css')}}"/>
+    <link rel="stylesheet" href="{{static('/fonts/balsamiqsans/balsamiqsans.css')}}"/>
   </head>
   <body id="main_container" dir="{{ g.dir }}" class="{% if not raw %}bg-gray-100{% endif %}" hx-ext="disable-element,morph" data-logged-in="{{ 1 if username else 0 }}">
     <div id="modal_target"></div>
@@ -300,6 +298,8 @@
       level: {{ level|tojson|safe }},
       keyword_language: {{ g.keyword_lang|tojson|safe }},
       staticRoot: {{ static('')|tojson|safe }},
+      environment: {{ frontend_environment|tojson|safe }},
+      featureFlags: {{ feature_flags|tojson|safe }},
       {% if initialize_logs %}logs: true,{% endif %}
       javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
       });</script>
