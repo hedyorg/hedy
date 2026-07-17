@@ -280,6 +280,10 @@ adventures:
                     ## Variabelen gebruiken
                     In de vorige levels heb je geleerd om `{answer}` te gebruiken om het antwoord op een vraag te printen. Maar wat als je meerdere antwoorden wil printen..?
                     In dit level leer je meerdere **variabelen** te gebruiken. Een variabele is een plek waar je een antwoord (ookwel *input*) in opslaat van de gebruikers.
+                    In die voorbeeld zie je hoe je de variabelen 'naam' en 'leeftijd' kunt gebruiken.
+
+                    ## {ask}
+                    Zie je ook hoe het `{ask}` commando is veranderd? Om de computer te vertellen in welke variabele je het antwoord wilt bewaren, begin je de regel met de variabelenaam, dan `{is}` en dan `{ask}`.
 
                 example_code: |
                     ```
@@ -290,13 +294,16 @@ adventures:
                     ```
                 story_text_2: |
                     ### Opdracht
-                    Tijd om je eigen variabelen te maken! Vraag de speler wat diens favoriete drankje en favoriete boek zijn en print de antwoorden.
+                    Tijd om je eigen variabelen te maken! Vraag de speler wat diens lievelingsdrankje is, print het antwoord, vraag dan diens lievelingsboek en print het antwoord.
                     Voeg tenslotte een laatste regel toe waarin je alle dingen die de speler leuk vindt opsomt.
                 example_code_2: |
                     ```
                     lievelingsdier {is} {ask} Wat is je lievelingsdier?
                     {print} Ik hou van lievelingsdier
-
+                    _
+                    _
+                    _
+                    _
                     {print} Dus jij houdt van _ , _ en _
                     ```
             13:
@@ -3280,7 +3287,7 @@ adventures:
                     Nog een nieuw commando in dit level is `{sleep}`, waarmee je het programma een tijdje kunt pauzeren. Als je een getal achter {sleep} zet, wacht het programma zoveel seconden.
 
                     ### Opdracht
-                    Ga met dit nieuwe commando oefenen door je eigen code te schrijven waarin je 3 keer het {sleep} commando gebruikt. Bij elk {sleep} commando moet de wachttijd verschillend zijn.
+                    Ga met dit nieuwe commando oefenen door je eigen code te schrijven waarin je 3 keer het `{sleep}` commando gebruikt. Bij elk `{sleep}` commando moet de wachttijd verschillend zijn.
                 example_code: |
                     ```
                     {print} Mijn favoriete kleur is...
