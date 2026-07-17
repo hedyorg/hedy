@@ -158,7 +158,7 @@ adventures:
                         {print} _
                     ```
             10:
-                story_text: "In dit level kun je `{if}` and `{repeat}` commando's in andere `{if}` en `{repeat}` commando's stoppen. \nHierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!\n\n### Opdracht 1\nMaak de code af op de streepjes zodat de `{if}` het doet.\n\n### Opdracht 2\nVoeg een `{if}` en een `{else}` toe aan het gedeelte van het verhaal waar Robin naar huis gaat.\n\n### Opdracht 3\nGa terug naar je verhaal van level 8 en gebruik ook minstens twee keer een `{if}` in een `{if}`.\n"
+                story_text: "In dit level kun je `{if}` and `{repeat}` commando's in andere `{if}` en `{repeat}` commando's stoppen. \nHierdoor krijg je nog meer mogelijkheden om je verhaal echt interactief te maken!\n\n### Opdracht 1\nMaak de code af op de streepjes zodat de `{if}` het doet.\n\n### Opdracht 2\nVoeg een `{if}` en een `{else}` toe aan het gedeelte van het verhaal waar Robin naar huis gaat.\n\n### Opdracht 3\nGa terug naar je verhaal van level 8 en gebruik minstens twee keer een `{if}` in een `{if}`.\n"
                 example_code: |
                     ```
                     {print} 'Robin loopt door de stad'
@@ -173,6 +173,24 @@ adventures:
                     _ {print} 'Robin verlaat de winkel en gaat naar huis'
                     {else}
                         {print} 'Robin gaat naar huis'
+                    ```
+                story_text_2: |
+                    Door de `{and}` en `{or}` commando's te gebruiken, kun je jouw verhalen nog veelzijdiger maken.
+                    Je kunt meerdere vragen stellen en reageren op de combinatie van antwoorden.
+
+                    ### Opdracht 1
+                    Bekijk de voorbeeldcode en maak deze af. Voeg daarna ten minste 2 `{if}` commando's toe waarin je `{and}` of `{or}` gebruikt.
+
+                    ### Opdracht 2
+                    Kies een verhaal uit een vorig level en voeg hier een `{and}` of `{or}` aan toe.
+                example_code_2: |
+                    ```
+                    {print} 'Onze held loopt door het bos'
+                    {print} 'Het pad splitst zich in tweeën'
+                    pad = {ask} 'Welk pad moet ze kiezen?'
+                    wapen = {ask} 'Welk wapen pakt ze?'
+                    {if} pad {is} links {and} wapen {is} zwaard
+                        _
                     ```
             11:
                 story_text: "In dit level kun je het commando `{for}` in je verhaal gebruiken. Op deze manier kun je gemakkelijk het kinderboek 'Beertje bruin, wat zie jij daar?' programmeren.\n\n### Opdracht \n\nKijk naar <a href=\"https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf\"> het verhaal</a>, als je het niet kent, en zorg dat dit hele verhaal wordt uitgeprint.\n"
@@ -260,6 +278,29 @@ adventures:
                     _
                     {print} Je krijgt een {at} {random} milkshake
                     ```
+    and_or_command:
+        name: '{and} & {or}'
+        default_save_name: en_of_commando
+        description: 'introduceert de logische operatoren: {and} en {or}'
+        levels:
+            10:
+                story_text: |-    
+                    We gaan nu `{and}` en `{or}` leren! Als je twee stellingen wilt controleren, hoef je geen twee `if`s te gebruiken, maar kun je `{and}` en `{or}` gebruiken.
+                    Als je `{and}` gebruikt, dan moeten beide stellingen, links en rechts van de `{and}`, waar zijn. We kunnen ook `{or}` gebruiken. Dan hoeft er maar één stelling correct te zijn.
+                    
+                example_code: |
+                    ```
+                    naam = {ask} 'wat is jouw naam?'
+                    leeftijd = {ask} 'wat is jouw leeftijd?'
+                    {if} naam {is} Hedy {and} leeftijd {is} 2
+                        {print} 'Jij bent de echte Hedy!'
+                    {elif} naam {is} Hedy {or} leeftijd {is} 2
+                        {print} 'Zo dichtbij.. maar jij bent niet Hedy!'
+                    {else}
+                        {print} 'Jij bent niet Hedy!'
+                    ```
+                answer_code: |
+                    Own Answer
     ask_command:
         default_save_name: vraag_commando
         description: Introductie {ask} (vraag) commando
@@ -471,6 +512,27 @@ adventures:
     calculator_2:
         name: rekenmachine 2
         levels:
+            10:
+                story_text: |
+                    ### Opdracht 1
+                    We maken het oefenprogramma wat moeilijker. De speler moet nu twee vragen correct beantwoorden.
+                    Maak het programma af door de streepjes in te vullen.
+
+                    ### Opdracht 2
+                    Soms heeft een rekensom meerdere goede antwoorden. Je kunt 10 bijvoorbeeld delen door 5, maar ook door 2.
+                    Op de vraag 'Door welk getal kun je 10 delen?' kun je dus zowel 2 als 5 antwoorden.
+
+                    Bedenk zelf een som met meerdere goede antwoorden en vraag deze aan de speler.
+                    Controleer daarna of het antwoord klopt. Gebruik daarbij `{or}`.
+
+                    Maak het programmeerveld leeg en maak jouw eigen programma.
+                example_code: |
+                    ```
+                    antwoord1 = {ask} 'Wat is 10 keer 7?'
+                    antwoord2 = {ask} 'Wat is 6 keer 7?'
+                    {if} _ _ _ _ _ _ _
+                        {print} _
+                    ```
             15:
                 story_text: |
                     ### Oefening 2
@@ -1283,7 +1345,7 @@ adventures:
 
                     ### Opdracht
                     Je spel is nu wel heel lastig te winnen... Kun jij je spel zo aanpassen dat er maar één foute deur is om te kiezen, in plaats van twee?
-                    Tip: Je moet goede_deur veranderen in foute_deur, en de `{if}` en `{else}` code omdraaien.
+                    Tip: Je moet de variabele _goede_deur_ veranderen in _foute_deur_, en de `{if}` en `{else}` code omdraaien.
                     En natuurlijk mag je ook je eigen draai aan het verhaal geven. Andere monsters, of juist cadeautjes?
                 example_code: |
                     ```
@@ -1691,6 +1753,16 @@ adventures:
                     {else}
                         {print} 'Je wil niet doorgaan'
                     ```
+                story_text_2: |
+                    ### Opdracht
+                    Software is tegenwoordig bijna altijd beveiligd met tweefactorauthenticatie. Je hebt niet één wachtwoord nodig, maar twee.
+                    Maak je eigen beveiligingssysteem dat twee correcte wachtwoorden vereist, door een `{if}` binnen een `{if}` te plaatsen.
+                example_code_2: |
+                    ```
+                    wachtwoord_1 =
+                    wachtwoord_2 =
+                    _
+                    ```
     in_command:
         default_save_name: in
         description: introduceert het {in} commando
@@ -1939,7 +2011,7 @@ adventures:
                     ```
             10:
                 story_text: |
-                    Vanaf dit level kun je - naast andere dingen- een {repeat} commando nesten in een ander `{repeat}` commando.
+                    Vanaf dit level kun je - naast andere dingen - een {repeat} commando nesten in een ander `{repeat}` commando.
                     Dat maakt liedjes als 'Happy Birthday' een stuk korter!
 
                     ### Opdracht
@@ -2518,9 +2590,9 @@ adventures:
             10:
                 story_text: |
                     In dit level kun je niet alleen meerdere regels gebruiken bij `{if}` en `{repeat}`, maar je kunt ze ook nog eens in elkaar zetten!
-                    Hiernaast zie je evoorbeeldje.
+                    Hiernaast zie je een voorbeeldje.
 
-                    Je mag het ook en een `{if}` in een `{if}` en een `{repeat}` in een `{repeat}` plaatsen.
+                    Je mag ook een `{if}` in een `{if}` en een `{repeat}` in een `{repeat}` plaatsen.
                     Probeer het maar eens!
                 example_code: |
                     ```
@@ -2746,10 +2818,11 @@ adventures:
 
                     ### Opdracht
                     Alle inspringcode is verdwenen! Kan jij het repareren?
-                    Het restaurant moet zo werken dat als de klant friet bestelt, moet Hedy vraagt welke saus de klant daarbij wil, maar niet bij pizza.
+                    
+                    Als de klant friet bestelt, dan moet die ook gevraagd worden of die er saus bij wil. Bij pizza wordt dit niet gevraagd.  
 
                     **Extra** Een restaurant heeft natuurlijk niet alles op voorraad. Maak een lijstje met sauzen en zeg bij iedere bestelling of je die saus wel verkoopt. <br>
-                    **Extra** Op een pizza kan ook van alles! Vraag de klant bij een pizza wat voor beleg hij wil.<br>
+                    **Extra** Op een pizza kan ook van alles! Vraag de klant bij een pizza wat voor beleg die wil.<br>
                     **Extra** Willen de klanten ook wat drinken? Vraag dat ook.<br>
                 example_code: |
                     ```
@@ -2774,6 +2847,28 @@ adventures:
                     _ prijs = prijs + 4
                     {print} 'Dat is dan ' prijs ' euro'
                     {print} 'Eet smakelijk!'
+                    ```
+                story_text_2: |
+                    In dit level leer je nieuwe commando's om jouw code nog verder uit te breiden.
+
+                    ### Opdracht 1
+                    Plaats een `{and}` en een `{or}` op de logische plekken in dit programma.
+
+                    ### Opdracht 2
+                    Breid je restaurant uit met ten minste nog een `{and}` en een `{or}`.
+                    Je kunt bijvoorbeeld een speciale kortingscode maken die alleen voor pizza geldt, of je kunt de klant een gratis drankje geven bij friet en pannenkoeken.
+                    Of bedenk zelf iets heel anders!
+                example_code_2: |
+                    ```
+                    prijs = 10
+                    maaltijd = {ask} 'Wat wil je eten?'
+                    drankje = {ask} 'Wat wil je drinken?'
+                    {if} maaltijd {is} broodje _ drankje {is} vruchtensap
+                        {print} 'Daar krijg je korting op'
+                        prijs = prijs - 3
+                    {if} drankje {is} water _ drankje {is} vruchtensap
+                        {print} 'Dat is een gezonde keuze'
+                    {print} 'Dat is dan ' prijs ' euro'
                     ```
             11:
                 story_text: |
@@ -2909,31 +3004,28 @@ adventures:
                     Vul op de streepjes eerst de goede code aan om te kijken of het gelijkspel is.
             10:
                 story_text: |
-                    In dit level kun je het hele steen, papier, schaar programma maken door de `{if}` commando's in elkaar te zetten!
+                    Met de `{and}` commando kun je jouw steen, papier, schaar code korter maken! Bekijk de voorbeeldcode.
 
                     ### Opdracht
                     Maak de code af zodat het programma bij iedere combinatie vertelt wie er heeft gewonnen.
-
-                    **Extra** Is één potje voor jou niet genoeg? Breid de code uit zodat je meerdere potjes kan spelen. Je kan zelfs met een `{ask}` beginnen en
-                    vragen hoeveel potjes er gespeeld gaan worden.
+                    Voer jouw code een paar keer uit om te controleren of er altijd een winnaar uitkomt.
                 example_code: |
                     ```
-                    #Computer en speler kiezen steen, papier of schaar:
-                    keuzes = steen, papier, schaar
-                    jouw_keuze = {ask} 'Wat kies jij?'
-                    computer_keuze = keuzes {at} {random}
-                    #Printen welke opties er gekozen zijn:
+                    # Computer en speler kiezen steen, papier of schaar:
+                    opties = steen, papier, schaar
+                    jouw_keuze = {ask} 'Wat kies je?'
+                    computer_keuze = opties {at} {random}
+                    # De gekozen opties printen:
                     {print} 'Jij kiest ' jouw_keuze
                     {print} 'De computer kiest ' computer_keuze
-                    #Printen wie er gewonnen heeft:
-                    {if} computer_keuze {is} jouw_keuze
+                    # De winnaar printen:
+                    {if} jouw_keuze {is} jouw_keuze
                         {print} 'Gelijkspel'
-                    {if} computer_keuze {is} steen
-                        {if} jouw_keuze {is} papier
-                            {print} 'Jij wint!'
-                        {if} jouw_keuze {is} schaar
-                            {print} 'De computer wint!'
-                    # Maak deze code af
+                    {elif} jouw_keuze {is} steen {and} jouw_keuze {is} papier
+                        {print} 'Jij wint!'
+                    {elif} jouw_keuze {is} steen {and} jouw_keuze {is} schaar
+                        {print} 'De computer wint!'
+                    _
                     ```
             11:
                 story_text: |
