@@ -44,7 +44,7 @@ jobs:
       name: 'Python requirements'
     - run: doit run _offline
     - name: Smoke test the build
-      run: cd dist && offlinehedy/run-hedy-server --smoketest
+      run: cd dist && offlinehedy/hedy --smoketest
 
     - name: Install zip
       run: sudo apt-get install zip
@@ -80,7 +80,7 @@ jobs:
       name: 'Python requirements'
     - run: doit run _offline
     - name: Smoke test the build
-      run: cd dist && offlinehedy/run-hedy-server --smoketest
+      run: cd dist && offlinehedy/hedy --smoketest
 
     - name: Create zip file
       # Because we're on Windows
@@ -114,7 +114,7 @@ jobs:
       name: 'Python requirements'
     - run: doit run _offline_macos
     - name: Smoke test the build
-      run: cd dist && offlinehedy/run-hedy-server --smoketest
+      run: cd dist && offlinehedy/hedy --smoketest
 
     - name: Create zip file
       run: |
@@ -146,7 +146,7 @@ jobs:
       name: 'Python requirements'
     - run: doit run _offline_macos
     - name: Smoke test the build
-      run: cd dist && offlinehedy/run-hedy-server --smoketest
+      run: cd dist && offlinehedy/hedy --smoketest
 
     - name: Create zip file
       run: |

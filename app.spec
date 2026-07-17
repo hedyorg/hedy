@@ -11,7 +11,7 @@ import sys
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 dirname = 'offlinehedy'
-appname = 'Hedy'
+appname = 'hedy'
 
 # Find the venv directory. We need to be able to pass this to
 # pyinstaller, otherwise it will not bundle the libraries we installed
