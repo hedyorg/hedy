@@ -160,22 +160,12 @@ teacher-guide:
                     {print} Weil ich die Großbuchstaben entfernt habe!
         -   title: Schülerinnen und Schüler benutzen echo ohne frage
             example:
-                error_text: Echo ist gemacht um Antworten wiederzugeben nachdem man sie mit dem frage-Befehl eingelesen hat. Ohne frage würde echo nichts tun.
-                error_code: "{echo} Dein Name ist"
+                error_text: Antwort ist gemacht um Antworten wiederzugeben nachdem man sie mit dem frage-Befehl eingelesen hat. Ohne frage würde antwort nichts tun.
+                error_code: "{print} Dein Name ist {answer}"
                 solution_text: Füge einen frage-Befehl hinzu, um es zum Laufen zu bringen.
                 solution_code: |-
                     {ask} Was ist dein Name?
-                    {echo} Dein Name ist
-        -   title: Schülerinnen und Schüler möchten ihr echo Wort (Variable) in der Mitte eines Satzes
-            example:
-                error_text: Und sie haben Recht! Deshalb werden sie im nächsten Level lernen echte Variablen zu benutzen.
-                error_code: |-
-                    {ask} Welche Programmiersprache macht am meisten Spaß?
-                    {echo} ist die Beste!
-                solution_text: "In Level 1 müssen wir es wie folgt belassen:"
-                solution_code: |-
-                    {ask} Welche Programmiersprache macht am meisten Spaß?
-                    {echo} Die Beste ist...
+                    {print} Dein Name ist {answer}
         -   title: "Schildkröte: Schülerinnen und Schüler lassen die Schildkröte vom Bildschirm runter laufen"
             example:
                 error_text: Schülerinnen und Schüler probieren oft große Zahlen mit der Schildkröte aus, was dazu führt, dass der Pfeil aus der Bildfläche geht.

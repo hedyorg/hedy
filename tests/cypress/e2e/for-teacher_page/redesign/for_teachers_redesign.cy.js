@@ -13,8 +13,14 @@ describe('For Teachers redesign landing and classes pages', () => {
       .should('be.visible')
       .and('have.attr', 'href', '/for-teachers/class/new');
 
+    const adventureName = uniqueName('redesign-adventure');
+
     cy.getDataCy('create_adventure_button').should('be.visible').click();
-    cy.url().should('include', '/for-teachers/customize-adventure');
+    cy.getDataCy('redesign_prompt_modal').should('be.visible');
+    cy.getDataCy('redesign_prompt_input').should('be.visible').clear().type(adventureName);
+    cy.getDataCy('redesign_prompt_ok_button').click();
+
+    cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
   });
 
   it('shows class list and links to redesigned class overview', () => {

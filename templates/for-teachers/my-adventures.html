@@ -1,0 +1,31 @@
+{% extends "auth.html" %}
+
+{% block regular_content %}
+{% from 'incl/breadcrumb.html' import breadcrumb %}
+<div class="flex-col md:px-16">
+  {{ breadcrumb([
+      {'label': _('adventures'), 'url': '/for-teachers/adventures'},
+      {'label': _('my_adventures')}
+    ], 'mt-2 mb-4') }}
+
+  <h1 class="my-5">{{ _('my_adventures') }}</h1>
+  
+  {{ render_partial('for-teachers/my-adventures-table.html', my_adventures=my_adventures) }}
+
+  <div class="my-4 flex justify-start">
+    <button type="button"
+       class="blue-btn-new inline-flex items-center"
+       id="create_new_adventure_button"
+       data-cy="create_new_adventure_button"
+       data-prompt="{{ _('name') }}"
+       data-title="{{ _('create_adventure') }}"
+       data-empty-name-error="{{ _('adventure_empty') }}"
+       data-modal-variant="redesign"
+       data-level="1"
+       onclick="return hedyApp.create_adventure_with_name(event, this)"
+      {% if second_teacher and role == 'viewer' %}disabled{% endif %}>{{ _('create_adventure') }}
+    </button>
+  </div>
+
+</div>
+{% endblock %}
