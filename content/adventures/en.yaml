@@ -318,7 +318,7 @@ adventures:
 
                     ### Exercise
 
-                    Look at <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> the story</a> if you do not know it, and make sure it is printed as in the book.
+                    Look at <a href="https://fliphtml5.com/jmlya/nquy"> the story</a> if you do not know it, and make sure it is printed as in the book.
                 example_code: "```\nanimals = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
                 answer_code: |
                     ```
@@ -3276,7 +3276,7 @@ adventures:
                     amount_patients = 7
 
                     new_patients = {ask} 'Are there any new patients today?'
-                    {if} new_patients {is} 'yes'
+                    {if} new_patients {is} yes
                         amount_new_patients = {ask} 'How many?'
                         amount_patients = amount_patients + amount_new_patients
                         {repeat} amount_new_patients {times}
@@ -6059,11 +6059,11 @@ adventures:
                     ```
             11:
                 story_text: |
-                    With `{for}` you can print make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
+                    With `{for}` you can make the whole baby shark song (including all the other sharks in the family) in only 6 lines!
 
                     ### Exercise 1
                     Can you make the baby shark code even shorter by using a `{for}` command? Finish the example code.
-                example_code: "```\nfamily = baby, mammy, daddy, grandma, grandpa\n_ _ _ _ \n  {print} _\n```\n"
+                example_code: "```\nfamily = baby, mammy, daddy, grandma, grandpa\n_ _ _ _ \n    {print} _\n```\n"
                 story_text_2: |
                     ### Exercise 2
                     Print the song Five little monkeys jumping on the bed. Look up the text if you don't remember.
@@ -6078,7 +6078,7 @@ adventures:
                     ```
                     family = baby, mammy, daddy, grandma, grandpa
                     {for} name {in} family
-                      {print} name " shark doo, doo, doo, doo, doo, doo."
+                        {print} name " shark doo, doo, doo, doo, doo, doo."
                     ```
 
                     Exercise 2
