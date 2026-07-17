@@ -72,7 +72,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon="static/images/Hedy-logo.icns",
+    icon="static/images/Hedy-logo.ico",
 )
 coll = COLLECT(
     exe,
