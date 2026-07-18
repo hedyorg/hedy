@@ -25,7 +25,7 @@ jobs:
         id: daily-version
 
 
-  build_ubuntu:
+  build_ubuntu_x64:
     runs-on: ubuntu-latest
     needs: setup_release
     steps:
@@ -50,16 +50,50 @@ jobs:
       run: sudo apt-get install zip
     - name: Create zip file
       run: |
-        cd dist/offlinehedy && zip -r ../../offlinehedy-${{ needs.setup_release.outputs.version }}-ubuntu.zip .
+        cd dist/offlinehedy && zip -r ../../offlinehedy-${{ needs.setup_release.outputs.version }}-ubuntu-x64.zip .
 
     - name: Upload zip file as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ubuntu_build
-        path: offlinehedy-${{ needs.setup_release.outputs.version }}-ubuntu.zip
+        name: ubuntu_build_x64
+        path: offlinehedy-${{ needs.setup_release.outputs.version }}-ubuntu_x64.zip
 
 
-  build_windows:
+  build_ubuntu_arm64:
+    runs-on: ubuntu-latest
+    needs: setup_release
+    steps:
+    - uses: actions/checkout@v6
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+    - name: Set up NodeJS 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+    - run: pip install -r requirements.txt
+      name: 'Python requirements'
+    - run: doit run _offline
+    - name: Smoke test the build
+      run: cd dist && offlinehedy/hedy --smoketest
+
+    - name: Install zip
+      run: sudo apt-get install zip
+    - name: Create zip file
+      run: |
+        cd dist/offlinehedy && zip -r ../../offlinehedy-${{ needs.setup_release.outputs.version }}-ubuntu-arm64.zip .
+
+    - name: Upload zip file as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ubuntu_build_arm64
+        path: offlinehedy-${{ needs.setup_release.outputs.version }}-ubuntu-arm64.zip
+
+
+  build_windows_x64:
     runs-on: windows-latest
     needs: setup_release
     steps:
@@ -85,14 +119,50 @@ jobs:
     - name: Create zip file
       # Because we're on Windows
       run: |
-        cd dist/offlinehedy &&  Compress-Archive -Path . -Destination ../../offlinehedy-${{ needs.setup_release.outputs.version }}-windows.zip
+        cd dist/offlinehedy &&  Compress-Archive -Path . -Destination ../../offlinehedy-${{ needs.setup_release.outputs.version }}-windows-x64.zip
 
 
     - name: Upload zip file as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: windows_build
-        path: offlinehedy-${{ needs.setup_release.outputs.version }}-windows.zip
+        name: windows_build_x64
+        path: offlinehedy-${{ needs.setup_release.outputs.version }}-windows-x64.zip
+
+
+  build_windows_arm64:
+    runs-on: windows-11-arm
+    needs: setup_release
+    steps:
+    - uses: actions/checkout@v6
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+    - name: Set up NodeJS 18
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+    - name: 'Install npx'
+      run: npm install -g npx
+    - run: pip install -r requirements.txt
+      name: 'Python requirements'
+    - run: doit run _offline
+    - name: Smoke test the build
+      run: cd dist && offlinehedy/hedy --smoketest
+
+    - name: Create zip file
+      # Because we're on Windows
+      run: |
+        cd dist/offlinehedy &&  Compress-Archive -Path . -Destination ../../offlinehedy-${{ needs.setup_release.outputs.version }}-windows-arm64.zip
+
+
+    - name: Upload zip file as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows_build_arm64
+        path: offlinehedy-${{ needs.setup_release.outputs.version }}-windows-arm64.zip
 
 
   build_macos_silicon:
@@ -161,7 +231,7 @@ jobs:
 
   deploy_release:
     runs-on: ubuntu-latest
-    needs: [setup_release, build_ubuntu, build_windows, build_macos_silicon, build_macos_intel]
+    needs: [setup_release, build_ubuntu_x64, build_ubuntu_arm64, build_windows_x64, build_windows_arm64, build_macos_silicon, build_macos_intel]
     steps:
     - if: needs.setup_release.outputs.created
       name: Create release
@@ -172,15 +242,25 @@ jobs:
         generate_release_notes: true
 
 
-    - name: Download Ubuntu build
+    - name: Download Ubuntu-x64 build
       uses: actions/download-artifact@v5
       with:
-        name: ubuntu_build
+        name: ubuntu_build_x64
 
-    - name: Download Windows build
+    - name: Download Ubuntu-arm64 build
       uses: actions/download-artifact@v5
       with:
-        name: windows_build
+        name: ubuntu_build_arm64
+
+    - name: Download Windows-x64 build
+      uses: actions/download-artifact@v5
+      with:
+        name: windows_build_x64
+
+    - name: Download Windows-arm64 build
+      uses: actions/download-artifact@v5
+      with:
+        name: windows_build_arm64
 
     - name: Download MacOS Silicon build
       uses: actions/download-artifact@v5
