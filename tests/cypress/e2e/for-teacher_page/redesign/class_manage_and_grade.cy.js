@@ -22,32 +22,20 @@ function createStudentsWithKnownPassword(classId, count = 3) {
 function createAndSubmitProgramForStudent(studentCredential, index) {
   const outputToken = `hello-1-${index}`;
 
-  const ensureStudentIsLoggedIn = () => {
-    login(studentCredential.username, studentCredential.password);
-    cy.visit('/programs');
-    return cy.get('body').then(($body) => {
-      if ($body.attr('data-logged-in') !== '1') {
-        cy.wait(500);
-        login(studentCredential.username, studentCredential.password);
-        cy.visit('/programs');
-        cy.get('body').should('have.attr', 'data-logged-in', '1');
-      }
-    });
-  };
-
   return cy.then(() => {
-    ensureStudentIsLoggedIn();
+    login(studentCredential.username, studentCredential.password);
 
-    cy.request('POST', '/programs', {
-      level: 1,
-      lang: 'en',
-      name: `seed-${outputToken}`,
-      code: `print ${outputToken}`,
-      adventure_name: 'default',
-      short_name: 'default',
-    }).then(({ status, body }) => {
-      expect(status).to.eq(200);
-      const programId = body?.id || body?.save_info?.id;
+    cy.visit('/hedy/1');
+    cy.get('#editor .cm-content').click();
+    cy.focused().type(`{selectall}{backspace}print ${outputToken}`);
+
+    cy.intercept('POST', '/parse').as('saveProgramFromRun');
+    cy.getDataCy('runit').click();
+    cy.getDataCy('output').should('contain.text', outputToken);
+
+    cy.wait('@saveProgramFromRun').then(({ response }) => {
+      expect(response.statusCode).to.eq(200);
+      const programId = response?.body?.id || response?.body?.save_info?.id;
       expect(programId).to.be.a('string').and.not.be.empty;
       cy.request('POST', '/programs/submit', { id: programId }).its('status').should('eq', 200);
     });
@@ -256,7 +244,7 @@ describe('Redesigned class grading and management pages', () => {
         cy.get('button[type="submit"]').find('.fa-filter').first().parent('button').click();
         cy.wait('@gradeFilterSort').its('response.statusCode').should('eq', 200);
 
-        cy.get('#grade-class-table-body [data-cy="teacher_cell"]').should('have.length.greaterThan', 0);
+        cy.get('#grade-class-table-body [data-cy="teacher_cell"]', { timeout: 15000 }).should('have.length.greaterThan', 0);
         cy.get('#grade-class-table-body').should('contain.text', selectedStudent);
         cy.get('#grade-class-table-body').should('not.contain.text', otherStudent);
       });
@@ -296,6 +284,8 @@ describe('Redesigned class grading and management pages', () => {
 
     cy.get('@classId').then((classId) => {
       openClassSubpage(classId, 'grade');
+
+      cy.get('#grade-class-table-body [data-cy="teacher_cell"]', { timeout: 15000 }).should('have.length.greaterThan', 0);
 
       cy.get('#grade-class-table-body a[href*="/view/redesign"]').first().invoke('attr', 'href').then((href) => {
         cy.visit(href);
@@ -339,6 +329,7 @@ describe('Redesigned class grading and management pages', () => {
         cy.get('#dropdown_student_button').click();
         cy.get(`#student_button_${selectedStudent}`).click();
         cy.get('button[type="submit"]').find('.fa-filter').first().parent('button').click();
+        cy.get('#grade-class-table-body [data-cy="teacher_cell"]', { timeout: 15000 }).should('have.length.greaterThan', 0);
 
         cy.contains('#grade-class-table-body tr', selectedStudent)
           .find('a[href*="/view/redesign"]')

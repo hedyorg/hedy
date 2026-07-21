@@ -22,8 +22,10 @@ teachers.forEach((teacher) => {
       const students = Array.from({length:5}, (_, index) => `student_${index}_${seed}`)
       cy.getDataCy('create_accounts_input').type(students.join('\n'));
 
+      cy.intercept('POST', '/for-teachers/create-accounts').as('createAccounts');
       cy.getDataCy('create_accounts_button').click();
       cy.getDataCy('modal_yes_button').click();
+      cy.wait('@createAccounts').its('response.statusCode').should('eq', 200);
 
       ensureStudentsCreatedSuccessfully(students);
     })
@@ -39,9 +41,8 @@ teachers.forEach((teacher) => {
 
 function ensureStudentsCreatedSuccessfully(students)
 {
-  // Accounts are created successfully when the input textarea is hidden and the results table is displayed
-  cy.getDataCy('create_accounts_output').should('be.visible');
-  cy.getDataCy('create_accounts_input').should('not.be.visible');
+  // After successful creation, the output table should contain one header row + created student rows.
+  cy.getDataCy('create_accounts_output').find('tr').should('have.length', students.length + 1);
 
   // Go back to the class overview and check that all students appear in the class table
   cy.getDataCy('go_back_button').click();

@@ -1,7 +1,22 @@
 import { loginForTeacher } from '../../tools/login/login';
 
 export function loginAndOpenClasses(username = 'teacher1') {
+  const visitClasses = () => cy.request({
+    method: 'GET',
+    url: '/for-teachers/class/all',
+    failOnStatusCode: false,
+  });
+
   loginForTeacher(username);
+  visitClasses().then((response) => {
+    if (response.status !== 200) {
+      loginForTeacher(username);
+      return visitClasses().its('status').should('eq', 200);
+    }
+
+    expect(response.status).to.eq(200);
+  });
+
   cy.visit('/for-teachers/class/all');
   cy.url().should('include', '/for-teachers/class/all');
 }
