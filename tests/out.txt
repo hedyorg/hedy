@@ -1,0 +1,2543 @@
+
+===========================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:        13.17.0                                                                        │
+  │ Browser:        Electron 118 (headless)                                                        │
+  │ Node Version:   v23.9.0 (/opt/homebrew/Cellar/node/23.9.0/bin/node)                            │
+  │ Specs:          64 found (home_page/footer_buttons.cy.js, home_page/language_dropdown.cy.js, h │
+  │                 ome_page/menubar_buttons.cy.js, home_page/start_buttons.cy.js, hedy_page/debug │
+  │                 ger.cy.js, hedy_page/dropdown_level.cy.js, hedy_page/editor_box.cy.js, hedy_pa │
+  │                 ge/hour-of-code.cy.js, ...)                                                    │
+  │ Searched:       cypress/e2e/**/*.cy.{js,jsx,ts,tsx}                                            │
+  │ Experiments:    experimentalMemoryManagement=true                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  home_page/footer_buttons.cy.js                                                 (1 of 64)
+
+
+  ✓ Is able to click on all footer buttons (3869ms)
+
+  1 passing (4s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     4 seconds                                                                        │
+  │ Spec Ran:     home_page/footer_buttons.cy.js                                                   │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  home_page/language_dropdown.cy.js                                              (2 of 64)
+
+
+  ✓ Is able to search a language, see all languages and add a language (9502ms)
+
+  1 passing (10s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     9 seconds                                                                        │
+  │ Spec Ran:     home_page/language_dropdown.cy.js                                                │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  home_page/menubar_buttons.cy.js                                                (3 of 64)
+
+
+  Navigation buttons
+    ✓ When not logged in: Is able to click all menubar buttons (2522ms)
+    ✓ As a teacher: Is able to click all menubar buttons (2196ms)
+    ✓ As a student: Is able to click all menubar buttons (1821ms)
+    ✓ As a user: Is able to click all menubar buttons (2018ms)
+
+
+  4 passing (9s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     8 seconds                                                                        │
+  │ Spec Ran:     home_page/menubar_buttons.cy.js                                                  │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  home_page/start_buttons.cy.js                                                  (4 of 64)
+
+
+  Start buttons
+    ✓ When not logged in: start_learning goes to hedy, start_teaching goes to signup (1301ms)
+    ✓ As a teacher: start_learning goes to hedy, start_teaching goes to teachers page (1422ms)
+    ✓ As a student: start_learning goes to hedy, start_teaching goes to profile (1425ms)
+    ✓ As a user: start_learning goes to hedy, start_teaching goes to profile (1448ms)
+
+
+  4 passing (6s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     5 seconds                                                                        │
+  │ Spec Ran:     home_page/start_buttons.cy.js                                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/debugger.cy.js                                                       (5 of 64)
+
+
+  Test editor box functionality
+    ✓ Test echo, print, ask level 1 (1995ms)
+    ✓ Test is, ask and sleep level 2 (2553ms)
+    ✓ Test sleep, clear level 4 (2235ms)
+    ✓ Test if and else level 5, with condition true (1783ms)
+    ✓ Test if and else level 5, with condition false (2212ms)
+    ✓ Test flat if split between lines (1745ms)
+    ✓ Test disabling the continue button when the program is sleeping (2121ms)
+    Test play with no variables
+      ✓ Test play no variables level 1 (2146ms)
+      ✓ Test play no variables level 2 (2126ms)
+      ✓ Test play no variables level 3 (2233ms)
+      ✓ Test play no variables level 4 (2116ms)
+      ✓ Test play no variables level 5 (2133ms)
+      ✓ Test play no variables level 6 (2082ms)
+      ✓ Test play no variables level 7 (2268ms)
+      ✓ Test play no variables level 8 (2444ms)
+      ✓ Test play no variables level 9 (2302ms)
+      ✓ Test play no variables level 10 (2272ms)
+    Test play with variables
+      ✓ Test play variables level 2 (2863ms)
+      ✓ Test play variables level 3 (2908ms)
+      ✓ Test play variables level 4 (2896ms)
+      ✓ Test play variables level 5 (2915ms)
+      ✓ Test play variables level 6 (2843ms)
+      ✓ Test play variables level 7 (2902ms)
+      ✓ Test play variables level 8 (3026ms)
+      ✓ Test play variables level 9 (2869ms)
+      ✓ Test play variables level 10 (2875ms)
+      ✓ Test play variables level 11 (3005ms)
+
+
+  27 passing (1m)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        27                                                                               │
+  │ Passing:      27                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 minute, 6 seconds                                                              │
+  │ Spec Ran:     hedy_page/debugger.cy.js                                                         │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/dropdown_level.cy.js                                                 (6 of 64)
+
+
+  Go to level dropdown
+    ✓ Is not able to go to disabled level 7 (10888ms)
+
+
+  1 passing (11s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     10 seconds                                                                       │
+  │ Spec Ran:     hedy_page/dropdown_level.cy.js                                                   │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/editor_box.cy.js                                                     (7 of 64)
+
+
+  Is able to type in the editor box
+    ✓ Language en should run (1745ms)
+    ✓ Language ar should run (1451ms)
+    ✓ Language bg should run (1337ms)
+    ✓ Language bn should run (1356ms)
+    ✓ Language ca should run (1328ms)
+    ✓ Language cs should run (1384ms)
+    ✓ Language cy should run (1305ms)
+    ✓ Language da should run (1369ms)
+    ✓ Language de should run (1354ms)
+    ✓ Language el should run (1333ms)
+    ✓ Language eo should run (1358ms)
+    ✓ Language es should run (1332ms)
+    ✓ Language et should run (1391ms)
+    ✓ Language fa should run (1351ms)
+    ✓ Language fi should run (1368ms)
+    ✓ Language fr should run (1360ms)
+    ✓ Language fy should run (1351ms)
+    ✓ Language he should run (1333ms)
+    ✓ Language hi should run (1356ms)
+    ✓ Language hu should run (1368ms)
+    ✓ Language id should run (1323ms)
+    ✓ Language it should run (1332ms)
+    ✓ Language ja should run (1383ms)
+    ✓ Language kmr should run (1328ms)
+    ✓ Language ko should run (1374ms)
+    ✓ Language nb_NO should run (1331ms)
+    ✓ Language nl should run (1379ms)
+    ✓ Language pa_PK should run (1342ms)
+    ✓ Language pl should run (1364ms)
+    ✓ Language pt_BR should run (1345ms)
+    ✓ Language pt_PT should run (1435ms)
+    ✓ Language ro should run (1371ms)
+    ✓ Language ru should run (1354ms)
+    ✓ Language sq should run (1334ms)
+    ✓ Language sr should run (1418ms)
+    ✓ Language sv should run (1338ms)
+    ✓ Language sw should run (1346ms)
+    ✓ Language te should run (1294ms)
+    ✓ Language th should run (1374ms)
+
+  Test editor box functionality
+    ✓ Ask modal should hold input and the answer should be shown in output (1744ms)
+    ✓ Ask modal shpuld be shown even when editing the program after clicking run and not answering the modal (1731ms)
+    ✓ When making an error the error modal should be shown (1140ms)
+    ✓ When making an error the keywords must be highligted (1282ms)
+
+
+  43 passing (1m)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        43                                                                               │
+  │ Passing:      43                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 minute, 0 seconds                                                              │
+  │ Spec Ran:     hedy_page/editor_box.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/hour-of-code.cy.js                                                   (8 of 64)
+
+
+  Testing subset passed through the URL
+    ✓ Level 1 should have 5 adventures (1449ms)
+    ✓ has a tracking pixel (743ms)
+    ✓ Level 6 should have 5 adventures (808ms)
+    ✓ has a tracking pixel (713ms)
+
+
+  4 passing (4s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 seconds                                                                        │
+  │ Spec Ran:     hedy_page/hour-of-code.cy.js                                                     │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/invalid_program.cy.js                                                (9 of 64)
+
+
+  Error code gives correct error
+    ✓ Missing Command (1032ms)
+    ✓ Invalid Argument Type (743ms)
+    ✓ Invalid Argument (614ms)
+    Misspelled Keyword
+      ✓ tests the print keyword (760ms)
+      ✓ tests the ask keyword (956ms)
+
+
+  5 passing (4s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        5                                                                                │
+  │ Passing:      5                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     4 seconds                                                                        │
+  │ Spec Ran:     hedy_page/invalid_program.cy.js                                                  │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/keyword_language.cy.js                                              (10 of 64)
+
+
+  when the user changes their language to Arabic
+    ✓ initially has keywords in Arabic (1825ms)
+    ✓ the keyword language switcher at the top can switch keywords to English (1716ms)
+
+
+  2 passing (4s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 seconds                                                                        │
+  │ Spec Ran:     hedy_page/keyword_language.cy.js                                                 │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/programs.cy.js                                                      (11 of 64)
+
+
+  Test commands
+    ✓ The input of ask is converted to a number in level 12 (1460ms)
+    ✓ The input of ask is converted to a boolean in level 15 (1956ms)
+
+
+  2 passing (4s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 seconds                                                                        │
+  │ Spec Ran:     hedy_page/programs.cy.js                                                         │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/run_code_button.cy.js                                               (12 of 64)
+
+
+  Is able to run code
+    ✓ Show OK box only on the first program run (1234ms)
+    ✓ Show error box for incorrect program (954ms)
+    ✓ Show a warning dialog about logging in after clicking the run button X times (1183ms)
+    ✓ Old programs do not execute after cancellation (2773ms)
+    ✓ Hide the stop button after executing a program (2131ms)
+    ✓ Running a program with the turtle, still should show the variables (5245ms)
+
+
+  6 passing (14s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        6                                                                                │
+  │ Passing:      6                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     13 seconds                                                                       │
+  │ Spec Ran:     hedy_page/run_code_button.cy.js                                                  │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/speech.cy.js                                                        (13 of 64)
+
+
+  the hedy page
+    ✓ has a dropdown to pick speech language (702ms)
+
+
+  1 passing (752ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     hedy_page/speech.cy.js                                                           │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/student_login_and_editor.cy.js                                      (14 of 64)
+
+
+  Student access to Hedy editor
+    ✓ Make sure that the page is accessible for a student who is served old customizations (1617ms)
+
+
+  1 passing (2s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     hedy_page/student_login_and_editor.cy.js                                         │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/sub_level_buttons.cy.js                                             (15 of 64)
+
+
+  Is able to go to different sublevels
+    ✓ Passes (808ms)
+
+
+  1 passing (870ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     hedy_page/sub_level_buttons.cy.js                                                │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  hedy_page/syntax_highlighting.cy.js                                           (16 of 64)
+
+
+  chai-colors
+    The Hedy level 1 print adventure page
+      ✓ has the word print highlighted in examples (677ms)
+      ✓ highlights answer as a variable after ask in level 1 (1300ms)
+      ✓ highlights translated answer keyword after ask in level 1 (1440ms)
+
+
+  3 passing (4s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        3                                                                                │
+  │ Passing:      3                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 seconds                                                                        │
+  │ Spec Ran:     hedy_page/syntax_highlighting.cy.js                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  login_page/other_buttons.cy.js                                                (17 of 64)
+
+
+  ✓ Is able to click on forgot password (788ms)
+
+  1 passing (823ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     login_page/other_buttons.cy.js                                                   │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  public_adventures/public_adventures.cy.js                                     (18 of 64)
+
+
+  Able to browse all public adventures and use filters
+    ✓ should have the language of the user as the default (1434ms)
+    ✓ should be able to filter by levels (1100ms)
+    ✓ should be able to filter by language (1084ms)
+    ✓ should be able to filter by tags (1124ms)
+    ✓ should be able to filter by searching (2619ms)
+    ✓ should be able to clone another teacher's adventure (1458ms)
+
+
+  6 passing (9s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        6                                                                                │
+  │ Passing:      6                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     8 seconds                                                                        │
+  │ Spec Ran:     public_adventures/public_adventures.cy.js                                        │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  public_programs/programs_page.cy.js                                           (19 of 64)
+
+
+  General tests for my programs page (with both custom teacher and built-in adventure)
+    ✓ create adventure, run its code, and see it in my programs (16336ms)
+    ✓ should not be added to my programs when running a program with copied code (1732ms)
+    ✓ should be added to my programs when running a program with modified code (2331ms)
+    ✓ delete created program (1570ms)
+    Test filters
+      ✓ The level filter should show the appropiate programs (1728ms)
+      ✓ The adventure filter show the appropiate programs (1851ms)
+
+
+  6 passing (26s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        6                                                                                │
+  │ Passing:      6                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     25 seconds                                                                       │
+  │ Spec Ran:     public_programs/programs_page.cy.js                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  public_programs/view_programs.cy.js                                           (20 of 64)
+
+
+  Tests for viewing programs
+    ✓ Seeing a program that contains an error in a different language, shouldnt result in a crash (1426ms)
+    ✓ We can translate from any two languages that dont involve english (956ms)
+
+
+  2 passing (2s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     2 seconds                                                                        │
+  │ Spec Ran:     public_programs/view_programs.cy.js                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/keyword_curly_braces.cy.js                                        (21 of 64)
+
+
+  Adds curly braces around keywords, mainting the original code as much as possible
+    Level 1 tests
+      ✓ print, ask and echo should work correctly (22ms)
+      ✓ print, ask and echo should work correctly in Spanish (4ms)
+      ✓ Code containing errors should still be added correctly (4ms)
+      ✓ Code containing errors should still be added correctly in Spanish (4ms)
+      ✓ print, ask and echo should work correctly in French (4ms)
+      ✓ print, ask and echo should work correctly in Dutch (3ms)
+      ✓ print, ask and echo should work correctly in Arabic (6ms)
+      ✓ code already containing curly braces should remain unchanged (3ms)
+    Level 3 tests
+      ✓ add ... to command (4ms)
+    Level 9 tests
+      ✓ Spaces are maintained (4ms)
+      ✓ Not in should be reduced to just one keyword (5ms)
+    Level 12 tests
+      ✓ Spaces inside calculations should be maintained (6ms)
+    Inline keyword tests
+      ✓ wraps multi-word keyword not in (5ms)
+      ✓ wraps direct keyword key not_in (3ms)
+      ✓ leaves unknown inline text unchanged (5ms)
+      ✓ wraps translated print keyword in Spanish (3ms)
+      ✓ wraps translated ask keyword in French (4ms)
+      ✓ wraps translated ask keyword in Dutch (3ms)
+      ✓ wraps translated print keyword in Arabic (4ms)
+
+
+  19 passing (276ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        19                                                                               │
+  │ Passing:      19                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     lezer-tests/keyword_curly_braces.cy.js                                           │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_01.cy.js                                                    (22 of 64)
+
+
+  Lezer parser tests for level 1
+    Successfull tests
+      Print tests
+        ✓ Test print with text for level 1 (24ms)
+        ✓ Test print with text for level 2 (4ms)
+        ✓ Test print with text for level 3 (4ms)
+      Ask tests
+        ✓ Test ask (5ms)
+      Echo tests
+        ✓ Test echo (3ms)
+      Turtle tests
+        ✓ Test turtle commands: forward, turn, color (3ms)
+      Combined tests
+        ✓ Test print, ask, echo combined (2ms)
+    Error tests
+      Misspelled command gives ErrorInvalid
+        ✓ Test misspelled command for level 1 (4ms)
+        ✓ Test misspelled command for level 2 (4ms)
+        ✓ Test misspelled command for level 3 (4ms)
+        ✓ Test misspelled command for level 4 (3ms)
+        ✓ Test misspelled command for level 5 (3ms)
+        ✓ Test misspelled command for level 6 (3ms)
+        ✓ Test misspelled command for level 7 (3ms)
+        ✓ Test misspelled command for level 8 (3ms)
+        ✓ Test misspelled command for level 9 (4ms)
+        ✓ Test misspelled command for level 10 (4ms)
+        ✓ Test misspelled command for level 11 (3ms)
+        ✓ Test misspelled command for level 12 (2ms)
+        ✓ Test misspelled command for level 13 (3ms)
+        ✓ Test misspelled command for level 14 (3ms)
+        ✓ Test misspelled command for level 15 (4ms)
+        ✓ Test misspelled command for level 16 (4ms)
+      Correct command after error parses correctly
+        ✓ Test command after error parses correctly for level 1 (4ms)
+        ✓ Test command after error parses correctly for level 2 (4ms)
+        ✓ Test command after error parses correctly for level 3 (3ms)
+    Max amount of lines for level 1
+      ✓ Typing more than 100 lines should not be posible (1583ms)
+
+
+  27 passing (2s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        27                                                                               │
+  │ Passing:      27                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     2 seconds                                                                        │
+  │ Spec Ran:     lezer-tests/level_01.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_02.cy.js                                                    (23 of 64)
+
+
+  Lezer parser tets for level 2
+    Successfull tests level 2
+      Test assign with keyword inside
+        ✓ Test assign with keyword inside for level 2 (39ms)
+        ✓ Test assign with keyword inside for level 3 (7ms)
+        ✓ Test assign with keyword inside for level 4 (6ms)
+        ✓ Test assign with keyword inside for level 5 (5ms)
+      Test ask assignment
+        ✓ Test ask assignment for level 2 (3ms)
+        ✓ Test ask assignment for level 3 (3ms)
+      Test sleep with number
+        ✓ Test sleep with number for level 2 (3ms)
+        ✓ Test sleep with number for level 3 (3ms)
+        ✓ Test sleep with number for level 4 (3ms)
+        ✓ Test sleep with number for level 5 (4ms)
+      Tests empty sleep
+        ✓ Test empty sleep for level 2 (3ms)
+        ✓ Test empty sleep for level 3 (3ms)
+        ✓ Test empty sleep for level 4 (2ms)
+        ✓ Test empty sleep for level 5 (3ms)
+        ✓ Test empty sleep for level 6 (4ms)
+        ✓ Test empty sleep for level 7 (4ms)
+        ✓ Test empty sleep for level 8 (5ms)
+        ✓ Test empty sleep for level 9 (3ms)
+        ✓ Test empty sleep for level 10 (3ms)
+        ✓ Test empty sleep for level 11 (3ms)
+        ✓ Test empty sleep for level 12 (4ms)
+        ✓ Test empty sleep for level 13 (3ms)
+        ✓ Test empty sleep for level 14 (3ms)
+        ✓ Test empty sleep for level 15 (4ms)
+        ✓ Test empty sleep for level 16 (5ms)
+      Test turtle assignment
+        ✓ Test turtle assignment for level 2 (3ms)
+        ✓ Test turtle assignment for level 3 (3ms)
+        ✓ Test turtle assignment for level 4 (3ms)
+        ✓ Test turtle assignment for level 5 (4ms)
+    Error tests level 2
+      Ask without is gives error
+        ✓ Test ask without is gives error for level 2 (3ms)
+        ✓ Test ask without is gives error for level 3 (3ms)
+      echo gives error
+        ✓ Test echo gives error (3ms)
+
+
+  32 passing (607ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        32                                                                               │
+  │ Passing:      32                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     lezer-tests/level_02.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_03.cy.js                                                    (24 of 64)
+
+
+  Lezer parser tests for level 3
+    Successful tests
+      List tests
+        Test assign list
+          ✓ Test assign list for level 3 (26ms)
+          ✓ Test assign list for level 4 (9ms)
+          ✓ Test assign list for level 5 (4ms)
+        Test list random access inside print
+          ✓ Test list random access inside print for level 3 (4ms)
+          ✓ Test list random access inside print for level 4 (6ms)
+          ✓ Test list random access inside print for level 5 (4ms)
+        Test list access with number
+          ✓ Test list random access inside print for level 3 (3ms)
+          ✓ Test list random access inside print for level 4 (5ms)
+          ✓ Test list random access inside print for level 5 (3ms)
+        Assign with list access
+          ✓ Assign with list access for level 3 (3ms)
+          ✓ Assign with list access for level 4 (4ms)
+          ✓ Assign with list access for level 5 (4ms)
+      Add tests
+        Add single word to list
+          ✓ Add single word to list for level 3 (5ms)
+          ✓ Add single word to list for level 4 (3ms)
+          ✓ Add single word to list for level 5 (3ms)
+          ✓ Add single word to list for level 6 (3ms)
+          ✓ Add single word to list for level 7 (2ms)
+          ✓ Add single word to list for level 8 (6ms)
+          ✓ Add single word to list for level 9 (4ms)
+          ✓ Add single word to list for level 10 (3ms)
+          ✓ Add single word to list for level 11 (4ms)
+        Add multiple words to list
+          ✓ Add multiple words to list for level 3 (4ms)
+          ✓ Add multiple words to list for level 4 (3ms)
+          ✓ Add multiple words to list for level 5 (3ms)
+          ✓ Add multiple words to list for level 6 (3ms)
+          ✓ Add multiple words to list for level 7 (3ms)
+          ✓ Add multiple words to list for level 8 (4ms)
+          ✓ Add multiple words to list for level 9 (4ms)
+          ✓ Add multiple words to list for level 10 (3ms)
+          ✓ Add multiple words to list for level 11 (3ms)
+        Remove single word from list
+          ✓ Remove single word from list for level 3 (5ms)
+          ✓ Remove single word from list for level 4 (4ms)
+          ✓ Remove single word from list for level 5 (4ms)
+          ✓ Remove single word from list for level 6 (3ms)
+          ✓ Remove single word from list for level 7 (4ms)
+          ✓ Remove single word from list for level 8 (4ms)
+          ✓ Remove single word from list for level 9 (3ms)
+          ✓ Remove single word from list for level 10 (3ms)
+          ✓ Remove single word from list for level 11 (3ms)
+        Remove multiple words from list
+          ✓ Remove multiple words from list for level 3 (7ms)
+          ✓ Remove multiple words from list for level 4 (3ms)
+          ✓ Remove multiple words from list for level 5 (3ms)
+          ✓ Remove multiple words from list for level 6 (5ms)
+          ✓ Remove multiple words from list for level 7 (3ms)
+          ✓ Remove multiple words from list for level 8 (3ms)
+          ✓ Remove multiple words from list for level 9 (3ms)
+          ✓ Remove multiple words from list for level 10 (3ms)
+          ✓ Remove multiple words from list for level 11 (3ms)
+      Play tests
+        Play note
+          ✓ Play note for level 3 (2ms)
+          ✓ Play note for level 4 (4ms)
+          ✓ Play note for level 5 (4ms)
+        Play int
+          ✓ Play note for level 3 (3ms)
+          ✓ Play note for level 4 (3ms)
+          ✓ Play note for level 5 (3ms)
+        Play list access random
+          ✓ Play note for level 3 (5ms)
+          ✓ Play note for level 4 (3ms)
+          ✓ Play note for level 5 (2ms)
+          ✓ Play note for level 6 (3ms)
+          ✓ Play note for level 7 (2ms)
+          ✓ Play note for level 8 (2ms)
+          ✓ Play note for level 9 (3ms)
+          ✓ Play note for level 10 (3ms)
+          ✓ Play note for level 11 (4ms)
+          ✓ Play note for level 12 (4ms)
+        Play list access index
+          ✓ Play note for level 3 (2ms)
+          ✓ Play note for level 4 (2ms)
+          ✓ Play note for level 5 (6ms)
+
+
+  67 passing (1s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        67                                                                               │
+  │ Passing:      67                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     lezer-tests/level_03.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_05.cy.js                                                    (25 of 64)
+
+
+  Lezer parser tests for level 5
+    Successfull tests
+      If Tests
+        Test if clause with print same line
+          ✓ Test simple if clause (24ms)
+        Test if clause with else same line
+          ✓ Test if clause with else (5ms)
+        Test if clause with else and if different line
+          ✓ Test if clause with else and if different line (4ms)
+        Test if clause with every command different line
+          ✓ Test if clause with every command different line (4ms)
+        Test if clause with pressit
+          ✓ Test if clause with pressit for level 5 (3ms)
+          ✓ Test if clause with pressit for level 6 (3ms)
+          ✓ Test if clause with pressit for level 7 (3ms)
+        Test print command after if
+          ✓ Test print command after if (4ms)
+
+
+  8 passing (275ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        8                                                                                │
+  │ Passing:      8                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     lezer-tests/level_05.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_06.cy.js                                                    (26 of 64)
+
+
+  Lezer parser tets for level 6
+    Successfull tests level 6
+      Test assign with keyword inside
+        ✓ Test assign with keyword inside (25ms)
+      Test sleep with number
+        ✓ Test sleep with number (5ms)
+      If Tests
+        Test if clause with print same line
+          ✓ Test simple if clause (4ms)
+        Test if clause with else and if different line
+          ✓ Test if clause with else and if different line (4ms)
+        Test if clause with every command different line
+          ✓ Test if clause with every command different line (3ms)
+      Test introduction adventure
+        ✓ Test introduction adventure (3ms)
+      Test elif clause
+        ✓ Test elif clause (3ms)
+      Test equality check equal sign
+        ✓ Test equality check equal sign (3ms)
+
+
+  8 passing (245ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        8                                                                                │
+  │ Passing:      8                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     lezer-tests/level_06.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_07.cy.js                                                    (27 of 64)
+
+
+  Lezer parser tets for level 7
+    Successful tests
+      Test assign with keyword inside
+        ✓ Test assign with keyword inside for level 7 (23ms)
+        ✓ Test assign with keyword inside for level 8 (5ms)
+        ✓ Test assign with keyword inside for level 9 (4ms)
+        ✓ Test assign with keyword inside for level 10 (4ms)
+        ✓ Test assign with keyword inside for level 11 (4ms)
+      Test sleep with number
+        ✓ Test sleep with number for level 7 (3ms)
+        ✓ Test sleep with number for level 8 (3ms)
+        ✓ Test sleep with number for level 9 (4ms)
+        ✓ Test sleep with number for level 10 (3ms)
+        ✓ Test sleep with number for level 11 (3ms)
+        ✓ Test sleep with number for level 12 (4ms)
+      If Tests
+        Test if clause with print same line
+          ✓ Test simple if clause for level 7 (3ms)
+          ✓ Test simple if clause for level 8 (3ms)
+        Test if clause with every command different line
+          ✓ Test if clause with every command different line for level 7 (5ms)
+          ✓ Test if clause with every command different line for level 8 (3ms)
+      Test expressions
+        ✓ Test expressions for level 7 (5ms)
+        ✓ Test expressions for level 8 (5ms)
+        ✓ Test expressions for level 9 (4ms)
+        ✓ Test expressions for level 10 (3ms)
+        ✓ Test expressions for level 11 (3ms)
+      Test assignment with expression
+        ✓ Test assignment with expression for level 7 (5ms)
+        ✓ Test assignment with expression for level 8 (5ms)
+        ✓ Test assignment with expression for level 9 (2ms)
+        ✓ Test assignment with expression for level 10 (3ms)
+        ✓ Test assignment with expression for level 11 (2ms)
+      Test if number in list print
+        ✓ Test if number in list print (3ms)
+      Test if number not in list print
+        ✓ Test if number not in list print (3ms)
+      Test elif clause
+        ✓ Test elif clause for level 7 (4ms)
+        ✓ Test elif clause for level 8 (3ms)
+      Test if pressed with number
+        ✓ Test if pressed with number for level 7 (3ms)
+        ✓ Test if pressed with number for level 8 (3ms)
+      Play tests
+        Play note
+          ✓ Play note for level 7 (3ms)
+          ✓ Play note for level 8 (3ms)
+          ✓ Play note for level 9 (4ms)
+          ✓ Play note for level 10 (5ms)
+          ✓ Play note for level 11 (3ms)
+          ✓ Play note for level 12 (2ms)
+          ✓ Play note for level 13 (3ms)
+          ✓ Play note for level 14 (3ms)
+          ✓ Play note for level 15 (3ms)
+          ✓ Play note for level 16 (3ms)
+        Play int
+          ✓ Play note for level 7 (3ms)
+          ✓ Play note for level 8 (13ms)
+          ✓ Play note for level 9 (2ms)
+          ✓ Play note for level 10 (3ms)
+          ✓ Play note for level 11 (3ms)
+          ✓ Play note for level 12 (3ms)
+          ✓ Play note for level 13 (4ms)
+          ✓ Play note for level 14 (2ms)
+          ✓ Play note for level 15 (3ms)
+          ✓ Play note for level 16 (3ms)
+        Play list access index
+          ✓ Play note for level 7 (5ms)
+          ✓ Play note for level 8 (3ms)
+          ✓ Play note for level 9 (3ms)
+          ✓ Play note for level 10 (3ms)
+          ✓ Play note for level 11 (3ms)
+          ✓ Play note for level 12 (4ms)
+
+
+  57 passing (1s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        57                                                                               │
+  │ Passing:      57                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     lezer-tests/level_07.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_08.cy.js                                                    (28 of 64)
+
+
+  Lezer parser tests for level 8
+    Successful tests
+      Test repeat with integer
+        ✓ Test repeat with integer  (32ms)
+      Test repeat with text
+        ✓ Test repeat with text (4ms)
+      Test repeat with if inside
+        ✓ Test repeat with if inside (4ms)
+      Test repeat with if and else inside
+        ✓ Test repeat with if and else inside (3ms)
+      Test repeat with if and else inside, if command on new line
+        ✓ Test repeat with if and else inside, if command on new line (4ms)
+      Test repeat with if and else inside, if command on new line
+        ✓ Test repeat with if and else inside, if command on new line (5ms)
+      Test if with repeat inside
+        ✓ Test if with repeat inside (3ms)
+      Combined test
+        ✓ Combined test (3ms)
+
+
+  8 passing (229ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        8                                                                                │
+  │ Passing:      8                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     lezer-tests/level_08.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_09.cy.js                                                    (29 of 64)
+
+
+  Tests level 9
+    Test elif clause
+      ✓ Test elif clause for level 9 (23ms)
+      ✓ Test elif clause for level 10 (4ms)
+      ✓ Test elif clause for level 11 (4ms)
+      ✓ Test elif clause for level 12 (4ms)
+    Test if clause with print same line
+      ✓ Test simple if clause for level 9 (4ms)
+      ✓ Test simple if clause for level 10 (3ms)
+      ✓ Test simple if clause for level 11 (3ms)
+      ✓ Test simple if clause for level 12 (3ms)
+    Test if clause with every command different line
+      ✓ Test if clause with every command different line for level 9 (3ms)
+      ✓ Test if clause with every command different line for level 10 (3ms)
+      ✓ Test if clause with every command different line for level 11 (3ms)
+      ✓ Test if clause with every command different line for level 12 (4ms)
+    Test if text in list print
+      ✓ Test if text in list print for level 9 (4ms)
+      ✓ Test if text in list print for level 10 (3ms)
+      ✓ Test if text in list print for level 11 (3ms)
+    Test if number in list print
+      ✓ Test if number in list print for level 9 (4ms)
+      ✓ Test if number in list print for level 10 (3ms)
+      ✓ Test if number in list print for level 11 (4ms)
+    Test if text not in list print
+      ✓ Test if text not in list print for level 9 (2ms)
+      ✓ Test if text not in list print for level 10 (3ms)
+      ✓ Test if text not in list print for level 11 (3ms)
+    Test if number not in list print
+      ✓ Test if number not in list print for level 9 (3ms)
+      ✓ Test if number not in list print for level 10 (2ms)
+      ✓ Test if number not in list print for level 11 (3ms)
+    Test if pressed with number
+      ✓ Test if pressed with number for level 9 (2ms)
+      ✓ Test if pressed with number for level 10 (4ms)
+      ✓ Test if pressed with number for level 11 (3ms)
+      ✓ Test if pressed with number for level 12 (3ms)
+    Test equality check equal sign
+      ✓ Test equality check equal sign for level 9 (3ms)
+      ✓ Test equality check equal sign for level 10 (3ms)
+      ✓ Test equality check equal sign for level 11 (4ms)
+    Max amount of lines for level 9
+      ✓ Typing more than 200 lines should not be posible (3345ms)
+
+
+  32 passing (4s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        32                                                                               │
+  │ Passing:      32                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 seconds                                                                        │
+  │ Spec Ran:     lezer-tests/level_09.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_10.cy.js                                                    (30 of 64)
+
+
+  Tests level 10
+    Test and clause
+      ✓ Test and clause for level 10 (21ms)
+      ✓ Test and clause for level 11 (6ms)
+      ✓ Test and clause for level 12 (5ms)
+    Test or clause
+      ✓ Test or clause for level 10 (5ms)
+      ✓ Test or clause for level 11 (3ms)
+      ✓ Test or clause for level 12 (4ms)
+
+
+  6 passing (138ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        6                                                                                │
+  │ Passing:      6                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     lezer-tests/level_10.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_11.cy.js                                                    (31 of 64)
+
+
+  Test for Spanish
+    ✓ Test for Spanish for level 11 (31ms)
+    ✓ Test for Spanish for level 12 (5ms)
+
+
+  2 passing (75ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     lezer-tests/level_11.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_12.cy.js                                                    (32 of 64)
+
+
+  Tests level 12
+    Test simple call function
+      ✓ Test simple call function level  (28ms)
+    Test simple call function with parameters
+      ✓ Test simple call function with parameters with level (8ms)
+    Test simple call function with parameters
+      ✓ Test simple call function with parameters with level (4ms)
+
+
+  3 passing (109ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        3                                                                                │
+  │ Passing:      3                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     lezer-tests/level_12.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  lezer-tests/level_13.cy.js                                                    (33 of 64)
+
+
+  Lezer parser tests for level 13
+    Successful tests
+      Boolean tests
+        Assign boolean True
+          ✓ Assign boolean True for level 13 (23ms)
+          ✓ Assign boolean True for level 14 (7ms)
+          ✓ Assign boolean True for level 15 (3ms)
+          ✓ Assign boolean True for level 16 (3ms)
+        Assign boolean true
+          ✓ Assign boolean true for level 13 (3ms)
+          ✓ Assign boolean true for level 14 (4ms)
+          ✓ Assign boolean true for level 15 (3ms)
+          ✓ Assign boolean true for level 16 (3ms)
+        Assign boolean False
+          ✓ Assign boolean False for level 13 (5ms)
+          ✓ Assign boolean False for level 14 (3ms)
+          ✓ Assign boolean False for level 15 (2ms)
+          ✓ Assign boolean False for level 16 (4ms)
+        Assign boolean false
+          ✓ Assign boolean false for level 13 (3ms)
+          ✓ Assign boolean false for level 14 (3ms)
+          ✓ Assign boolean false for level 15 (3ms)
+          ✓ Assign boolean false for level 16 (3ms)
+        Print boolean literal true
+          ✓ Print boolean literal true for level 13 (5ms)
+          ✓ Print boolean literal true for level 14 (3ms)
+          ✓ Print boolean literal true for level 15 (3ms)
+          ✓ Print boolean literal true for level 16 (3ms)
+        Print boolean literal false
+          ✓ Print boolean literal false for level 13 (4ms)
+          ✓ Print boolean literal false for level 14 (2ms)
+          ✓ Print boolean literal false for level 15 (2ms)
+          ✓ Print boolean literal false for level 16 (3ms)
+        AssignList boolean values
+          ✓ AssignList boolean values for level 13 (4ms)
+          ✓ AssignList boolean values for level 14 (3ms)
+          ✓ AssignList boolean values for level 15 (2ms)
+          ✓ AssignList boolean values for level 16 (2ms)
+        While with boolean equality
+          ✓ AssignList boolean values for level 13 (5ms)
+          ✓ AssignList boolean values for level 14 (3ms)
+          ✓ AssignList boolean values for level 15 (3ms)
+          ✓ AssignList boolean values for level 16 (3ms)
+      Test if pressed with number
+        ✓ Test if pressed with number for level 13 (5ms)
+        ✓ Test if pressed with number for level 14 (5ms)
+        ✓ Test if pressed with number for level 15 (4ms)
+        ✓ Test if pressed with number for level 16 (3ms)
+      Play tests
+        Play list access random
+          ✓ Play note for level 13 (5ms)
+          ✓ Play note for level 14 (3ms)
+          ✓ Play note for level 15 (3ms)
+          ✓ Play note for level 16 (3ms)
+        Play list access index
+          ✓ Play note for level 13 (5ms)
+          ✓ Play note for level 14 (3ms)
+          ✓ Play note for level 15 (4ms)
+          ✓ Play note for level 16 (3ms)
+      AssignList tests
+        Assign empty list
+          ✓ Assign empty list for level 13 (3ms)
+          ✓ Assign empty list for level 14 (3ms)
+          ✓ Assign empty list for level 15 (3ms)
+          ✓ Assign empty list for level 16 (3ms)
+        Assign list with number
+          ✓ Assign list with number for level 13 (3ms)
+          ✓ Assign list with number for level 14 (3ms)
+          ✓ Assign list with number for level 15 (5ms)
+          ✓ Assign list with number for level 16 (3ms)
+        Assign list with float
+          ✓ Assign list with float for level 13 (3ms)
+          ✓ Assign list with float for level 14 (3ms)
+          ✓ Assign list with float for level 15 (5ms)
+          ✓ Assign list with float for level 16 (4ms)
+        Assign list with string
+          ✓ Assign list with string for level 13 (3ms)
+          ✓ Assign list with string for level 14 (2ms)
+          ✓ Assign list with string for level 15 (5ms)
+          ✓ Assign list with string for level 16 (5ms)
+        Assign list with var
+          ✓ Assign list with var for level 13 (3ms)
+          ✓ Assign list with var for level 14 (2ms)
+          ✓ Assign list with var for level 15 (3ms)
+          ✓ Assign list with var for level 16 (5ms)
+        Assign list with multiple items
+          ✓ Assign list with multiple items for level 13 (2ms)
+          ✓ Assign list with multiple items for level 14 (3ms)
+          ✓ Assign list with multiple items for level 15 (3ms)
+          ✓ Assign list with multiple items for level 16 (2ms)
+        AssignList boolean values
+          ✓ AssignList boolean values for level 13 (3ms)
+          ✓ AssignList boolean values for level 14 (4ms)
+          ✓ AssignList boolean values for level 15 (3ms)
+          ✓ AssignList boolean values for level 16 (3ms)
+        List with quotes tests
+          ✓ List with quotes tests for level 13 (3ms)
+          ✓ List with quotes tests for level 14 (3ms)
+          ✓ List with quotes tests for level 15 (3ms)
+          ✓ List with quotes tests for level 16 (3ms)
+      Function call tests
+        Test simple call function level 
+          ✓ Test simple call function level  for level 13 (4ms)
+          ✓ Test simple call function level  for level 14 (3ms)
+          ✓ Test simple call function level  for level 15 (3ms)
+          ✓ Test simple call function level  for level 16 (3ms)
+        Test simple call function with parameters 
+          ✓ Test simple call with parameters for level 13 (3ms)
+          ✓ Test simple call with parameters for level 14 (3ms)
+          ✓ Test simple call with parameters for level 15 (2ms)
+          ✓ Test simple call with parameters for level 16 (4ms)
+
+
+  84 passing (2s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        84                                                                               │
+  │ Passing:      84                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     lezer-tests/level_13.cy.js                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  recover_page/recover_account.cy.js                                            (34 of 64)
+
+
+  Recover account
+    ✓ Is not able to recover non existing account (1073ms)
+    ✓ Is able to recover existing account (486ms)
+
+
+  2 passing (2s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     recover_page/recover_account.cy.js                                               │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  signup_page/other_buttons.cy.js                                               (35 of 64)
+
+
+  Test other buttons sign up page
+    ✓ As a student (1380ms)
+    ✓ As a teacher (898ms)
+
+
+  2 passing (2s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     2 seconds                                                                        │
+  │ Spec Ran:     signup_page/other_buttons.cy.js                                                  │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  signup_page/signup.cy.js                                                      (36 of 64)
+
+
+  Test signing up
+    ✓ Is able to sign up as a student (5103ms)
+    ✓ Is able to sign up as a teacher (5036ms)
+
+
+  2 passing (10s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     10 seconds                                                                       │
+  │ Spec Ran:     signup_page/signup.cy.js                                                         │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  subscribe_page/subscribe.cy.js                                                (37 of 64)
+
+
+  ✓ Is able to subscribe to newsletter (2252ms)
+
+  1 passing (2s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     2 seconds                                                                        │
+  │ Spec Ran:     subscribe_page/subscribe.cy.js                                                   │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  admin_page/adventures_page/return_to_admin_page_button.cy.js                  (38 of 64)
+
+
+  ✓ should return to admin page button (1442ms)
+
+  1 passing (1s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     admin_page/adventures_page/return_to_admin_page_button.cy.js                     │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  admin_page/adventures_page/view_adventure_button.cy.js                        (39 of 64)
+
+
+  ✓ adventure button should be visible (1159ms)
+
+  1 passing (1s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     admin_page/adventures_page/view_adventure_button.cy.js                           │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  admin_page/user_overview/return_to_admin_page.cy.js                           (40 of 64)
+
+
+  ✓ should return to admin page (1459ms)
+
+  1 passing (1s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     admin_page/user_overview/return_to_admin_page.cy.js                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  admin_page/user_overview/view_all_users.cy.js                                 (41 of 64)
+
+
+  Test for users page within admins UI
+    ✓ should view all users (1500ms)
+    ✓ should be able to use the filter (1610ms)
+
+
+  2 passing (3s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 seconds                                                                        │
+  │ Spec Ran:     admin_page/user_overview/view_all_users.cy.js                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  admin_page/user_overview/visible_attributes_checkboxes.cy.js                  (42 of 64)
+
+
+  ✓ checkboxes should be visible (2858ms)
+
+  1 passing (3s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     2 seconds                                                                        │
+  │ Spec Ran:     admin_page/user_overview/visible_attributes_checkboxes.cy.js                     │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/class_page/other_buttons.cy.js                               (43 of 64)
+
+
+  other buttons test for teacher1
+    ✓ Is able to click on customize class page button (2876ms)
+    ✓ Is able to click on go back button (2410ms)
+
+  other buttons test for teacher4
+    ✓ Is able to click on customize class page button (2314ms)
+    ✓ Is able to click on go back button (2242ms)
+
+
+  4 passing (10s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     9 seconds                                                                        │
+  │ Spec Ran:     for-teacher_page/class_page/other_buttons.cy.js                                  │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/class_page/second_teachers_invites.cy.js                     (44 of 64)
+
+
+  ✓ Is able to invite second teachers by username, accept it and check it (10522ms)
+
+  1 passing (11s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     10 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/class_page/second_teachers_invites.cy.js                        │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/customize_adventure_page/autosave.cy.js                      (45 of 64)
+
+
+  ✓ Is able to auto save when changing the name field. (2676ms)
+
+  1 passing (3s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     2 seconds                                                                        │
+  │ Spec Ran:     for-teacher_page/customize_adventure_page/autosave.cy.js                         │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/customize_adventure_page/general_settings.cy.js              (46 of 64)
+
+
+  ✓ Is able to name adventure, select a class, select level, agree public checkbox, go back and delete adventure for teacher1 (3259ms)
+  ✓ Is able to name adventure, select a class, select level, agree public checkbox, go back and delete adventure for teacher4 (2944ms)
+
+  2 passing (6s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     6 seconds                                                                        │
+  │ Spec Ran:     for-teacher_page/customize_adventure_page/general_settings.cy.js                 │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/customize_adventure_page/tags.cy.js                          (47 of 64)
+
+
+  Tags of adventures
+    ✓ has tags input and button (1866ms)
+    ✓ adds a tag to adventure by pressing enter within the input field (2134ms)
+    ✓ adds a tag to adventure by pressing the add button (2152ms)
+    ✓ declines adding duplicate (1625ms)
+    ✓ removes a tag (1992ms)
+
+
+  5 passing (10s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        5                                                                                │
+  │ Passing:      5                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     9 seconds                                                                        │
+  │ Spec Ran:     for-teacher_page/customize_adventure_page/tags.cy.js                             │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/customize_class_page/customize_class.cy.js                   (48 of 64)
+
+
+  customize class page for teacher1
+    ✓ Is able to switch to level 2 (3312ms)
+    ✓ Is able to open the opening date container, check the option checkboxes, fill in the dates and level disabled text should be visible (4258ms)
+    ✓ Is able to remove adventure (3084ms)
+    ✓ Is able to reset the adventures and create a new adventure (3234ms)
+    ✓ Is able to be re-added from the right dropdown list (4557ms)
+
+  customize class page for teacher4
+    ✓ Is able to switch to level 2 (2598ms)
+    ✓ Is able to open the opening date container, check the option checkboxes, fill in the dates and level disabled text should be visible (3930ms)
+    ✓ Is able to remove adventure (2886ms)
+    ✓ Is able to reset the adventures and create a new adventure (3056ms)
+    ✓ Is able to be re-added from the right dropdown list (4417ms)
+
+
+  10 passing (36s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        10                                                                               │
+  │ Passing:      10                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     35 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/customize_class_page/customize_class.cy.js                      │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/customize_class_page/preview_class.cy.js                     (49 of 64)
+
+
+  ✓ teacher1 is able to preview class (3799ms)
+  ✓ teacher4 is able to preview class (2908ms)
+
+  2 passing (7s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     6 seconds                                                                        │
+  │ Spec Ran:     for-teacher_page/customize_class_page/preview_class.cy.js                        │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/general/duplicate_class.cy.js                                (50 of 64)
+
+
+  Duplicate class tests
+    ✓ Is able to duplicate a class without second teachers (5548ms)
+    ✓ Is able to duplicate class with second teachers, but do not add them (2447ms)
+    ✓ Is able to duplicate class with second teachers, do add them (2461ms)
+    ✓ Is able to click on duplicate button of main teacher's class when second teacher, should not be able to add teachers (1675ms)
+
+
+  4 passing (12s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     12 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/general/duplicate_class.cy.js                                   │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/general/preview_adventure.cy.js                              (51 of 64)
+
+
+  ✓ Is able to preview adventures (2399ms)
+  ✓ Is able to preview adventures (1956ms)
+
+  2 passing (4s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     4 seconds                                                                        │
+  │ Spec Ran:     for-teacher_page/general/preview_adventure.cy.js                                 │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/general/remove_button.cy.js                                  (52 of 64)
+
+
+  ✓ Is able to remove a class (3484ms)
+  ✓ Is able to remove an adventure (3696ms)
+
+  2 passing (7s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     7 seconds                                                                        │
+  │ Spec Ran:     for-teacher_page/general/remove_button.cy.js                                     │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/general/see_teacher_page.cy.js                               (53 of 64)
+
+
+  teacher login redirect behavior
+    ✓ redirects a teacher to for-teachers when login starts from home (1934ms)
+    ✓ keeps a teacher on their original page when login starts away from home (1611ms)
+
+
+  2 passing (4s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     3 seconds                                                                        │
+  │ Spec Ran:     for-teacher_page/general/see_teacher_page.cy.js                                  │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  teacher_page/Manual/teacher_page.cy.js                                        (54 of 64)
+
+
+  Teacher page
+    ✓ contains a YouTube video (1255ms)
+    ✓ contains a link to Discord (847ms)
+    ✓ contains a link to Introduction (802ms)
+    ✓ contains a link to Frequently Made Mistakes (775ms)
+    ✓ contains Levels under Frequently Made Mistakes (3410ms)
+
+
+  5 passing (7s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        5                                                                                │
+  │ Passing:      5                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     7 seconds                                                                        │
+  │ Spec Ran:     teacher_page/Manual/teacher_page.cy.js                                           │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/redesign/class_configure_customize_level.cy.js               (55 of 64)
+
+
+  Redesigned class configure and customize-level pages
+    ✓ renders configure controls and navigates to customize-level (2998ms)
+    ✓ toggles level availability and updates through HTMX (2797ms)
+    ✓ opens level dropdown and navigates to another level from customize-level page (2626ms)
+    ✓ opens and closes add-adventures modal, then restores default adventures (2915ms)
+    ✓ loads remove-all-adventures modal endpoint and handles invalid level URL (2598ms)
+    ✓ invites a newly created teacher, accepts invitation, and shows teacher in configure table (8976ms)
+
+
+  6 passing (23s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        6                                                                                │
+  │ Passing:      6                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     23 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/redesign/class_configure_customize_level.cy.js                  │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/redesign/class_manage_and_grade.cy.js                        (56 of 64)
+
+
+  Redesigned class grading and management pages
+    ✓ shows all students in the manage students table (6259ms)
+    ✓ sorts the manage students table by student name (5891ms)
+    ✓ resets a student password from the manage students table (6325ms)
+    ✓ deletes a student from the manage students table (6027ms)
+    ✓ invites a student from the manage students modal and shows the pending invite in the table (12208ms)
+    ✓ filters programs on grade page using selected student (11387ms)
+    ✓ grades and ungrades a student program from grade page (10773ms)
+    ✓ views student program, toggles approval, and unsubmits program (11640ms)
+    ✓ navigates from view-program page using next adventure and next student buttons (11647ms)
+
+
+  9 passing (1m)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        9                                                                                │
+  │ Passing:      9                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 minute, 22 seconds                                                             │
+  │ Spec Ran:     for-teacher_page/redesign/class_manage_and_grade.cy.js                           │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/redesign/class_overview_navigation.cy.js                     (57 of 64)
+
+
+  Redesigned class overview navigation
+    ✓ shows links to all redesigned class subpages (2738ms)
+    ✓ renders danger zone controls with delete endpoint (2208ms)
+    ✓ loads performance graph canvas and supports level links (2218ms)
+    ✓ opens classes table context menu and follows grading/configure actions (3322ms)
+    ✓ toggles classes table context menu open/close with animation classes (2809ms)
+    ✓ hides classes table context menu when delete modal opens (2750ms)
+    ✓ keeps context menu functional after archiving one class and allows archiving another (4511ms)
+    ✓ shows unarchive action in archived classes table and moves class back to active (3666ms)
+    ✓ toggles archive/unarchive button and archived badge on class overview page (2862ms)
+    ✓ positions classes table context menu within viewport on mobile/tablet/desktop (3291ms)
+    ✓ opens classes table delete confirmation and cancel keeps class (2597ms)
+    ✓ renames a class from the configure page (3414ms)
+    ✓ returns 404 for non-existing redesigned class id (2029ms)
+    ✓ deletes a class from overview and ensures it is gone (2685ms)
+
+
+  14 passing (41s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        14                                                                               │
+  │ Passing:      14                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     41 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/redesign/class_overview_navigation.cy.js                        │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/redesign/class_performance_graph.cy.js                       (58 of 64)
+
+
+  Redesigned class performance graph page
+    ✓ serializes seeded graph data for the default level (8370ms)
+    ✓ changes level through the dropdown and updates the graph payload (1625ms)
+    ✓ loads a selected student programs panel for the graph (1098ms)
+    ✓ loads multiple student program panels for overlapping graph points (1085ms)
+    ✓ shows the no programs state for an unseeded level (1103ms)
+    ✓ does not show a destructive close button on loaded student programs panel (1111ms)
+    ✓ returns 404 for a non-existing redesigned class graph id (931ms)
+
+
+  7 passing (15s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        7                                                                                │
+  │ Passing:      7                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     15 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/redesign/class_performance_graph.cy.js                          │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/redesign/customize_adventure_autosave.cy.js                  (59 of 64)
+
+
+  Customize adventure redesign autosave
+    ✓ uploads latest local draft content and solution to backend (6711ms)
+    ✓ uploads successfully when editor content is emptied (6358ms)
+    ✓ uploads formatted_content with curly braces for snippets and inline keywords, using minimum selected level (6327ms)
+    ✓ uploads usage settings changes (public and levels) through redesign autosave (2172ms)
+    ✓ shows and hides public adventure options when public is toggled (2075ms)
+    ✓ adds tags in redesigned customize adventure usage tab (2639ms)
+
+
+  6 passing (27s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        6                                                                                │
+  │ Passing:      6                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     26 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/redesign/customize_adventure_autosave.cy.js                     │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/redesign/customize_adventure_manage_flow.cy.js               (60 of 64)
+
+
+  Redesign manage adventures flow
+    ✓ creates an adventure from manage page and removes it from the same table (2763ms)
+    ✓ renames a redesigned adventure from the page and reflects the new name in manage table (3120ms)
+    ✓ adds a newly created adventure to a redesigned class and keeps it scoped to selected levels (4326ms)
+
+
+  3 passing (10s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        3                                                                                │
+  │ Passing:      3                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     10 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/redesign/customize_adventure_manage_flow.cy.js                  │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/redesign/for_teachers_redesign.cy.js                         (61 of 64)
+
+
+  For Teachers redesign landing and classes pages
+    ✓ loads redesign landing page with key CTA links (1604ms)
+    ✓ shows class list and links to redesigned class overview (2360ms)
+    ✓ new class form enforces required fields and supports standard creation (2337ms)
+    ✓ creates plain class without adventures at level 1 (2236ms)
+    ✓ new class form supports copy mode and submits duplicate endpoint (3348ms)
+    ✓ removes class row immediately after delete without page refresh (2863ms)
+
+
+  6 passing (15s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        6                                                                                │
+  │ Passing:      6                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     14 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/redesign/for_teachers_redesign.cy.js                            │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/redesign/slides_behavior.cy.js                               (62 of 64)
+
+
+  Teacher slides behavior
+    ✓ teacher landing remains accessible and does not expose the legacy slides toggle UI (1197ms)
+    ✓ opens a slides page with rendered sections (3716ms)
+    ✓ slides PDF endpoint is available for download (916ms)
+
+
+  3 passing (6s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        3                                                                                │
+  │ Passing:      3                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     5 seconds                                                                        │
+  │ Spec Ran:     for-teacher_page/redesign/slides_behavior.cy.js                                  │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/class_page/add_students/create_accounts.cy.js                (63 of 64)
+
+
+  Testing creating accounts for teacher1
+    ✓ Is able to create student accounts with usernames (7121ms)
+    ✓ Is able to create student accounts with usernames and passwords (5984ms)
+
+  Testing creating accounts for teacher4
+    ✓ Is able to create student accounts with usernames (6611ms)
+    ✓ Is able to create student accounts with usernames and passwords (6046ms)
+
+
+  4 passing (26s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     25 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/class_page/add_students/create_accounts.cy.js                   │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  for-teacher_page/class_page/add_students/invite_by_username.cy.js             (64 of 64)
+
+
+  ✓ Is able to add student by name for teacher1 (9532ms)
+  ✓ Is able to add student by name for teacher4 (8703ms)
+
+  2 passing (18s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     18 seconds                                                                       │
+  │ Spec Ran:     for-teacher_page/class_page/add_students/invite_by_username.cy.js                │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+===========================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✔  home_page/footer_buttons.cy.js           00:04        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  home_page/language_dropdown.cy.js        00:09        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  home_page/menubar_buttons.cy.js          00:08        4        4        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  home_page/start_buttons.cy.js            00:05        4        4        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/debugger.cy.js                 01:06       27       27        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/dropdown_level.cy.js           00:10        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/editor_box.cy.js               01:00       43       43        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/hour-of-code.cy.js             00:03        4        4        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/invalid_program.cy.js          00:04        5        5        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/keyword_language.cy.js         00:03        2        2        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/programs.cy.js                 00:03        2        2        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/run_code_button.cy.js          00:13        6        6        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/speech.cy.js                   753ms        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/student_login_and_editor.      00:01        1        1        -        -        - │
+  │    cy.js                                                                                       │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/sub_level_buttons.cy.js        870ms        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  hedy_page/syntax_highlighting.cy.js      00:03        3        3        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  login_page/other_buttons.cy.js           824ms        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  public_adventures/public_adventures      00:08        6        6        -        -        - │
+  │    .cy.js                                                                                      │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  public_programs/programs_page.cy.js      00:25        6        6        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  public_programs/view_programs.cy.js      00:02        2        2        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/keyword_curly_braces.cy      277ms       19       19        -        -        - │
+  │    .js                                                                                         │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_01.cy.js               00:02       27       27        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_02.cy.js               607ms       32       32        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_03.cy.js               00:01       67       67        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_05.cy.js               276ms        8        8        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_06.cy.js               246ms        8        8        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_07.cy.js               00:01       57       57        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_08.cy.js               229ms        8        8        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_09.cy.js               00:03       32       32        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_10.cy.js               139ms        6        6        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_11.cy.js                76ms        2        2        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_12.cy.js               110ms        3        3        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  lezer-tests/level_13.cy.js               00:01       84       84        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  recover_page/recover_account.cy.js       00:01        2        2        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  signup_page/other_buttons.cy.js          00:02        2        2        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  signup_page/signup.cy.js                 00:10        2        2        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  subscribe_page/subscribe.cy.js           00:02        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  admin_page/adventures_page/return_t      00:01        1        1        -        -        - │
+  │    o_admin_page_button.cy.js                                                                   │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  admin_page/adventures_page/view_adv      00:01        1        1        -        -        - │
+  │    enture_button.cy.js                                                                         │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  admin_page/user_overview/return_to_      00:01        1        1        -        -        - │
+  │    admin_page.cy.js                                                                            │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  admin_page/user_overview/view_all_u      00:03        2        2        -        -        - │
+  │    sers.cy.js                                                                                  │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  admin_page/user_overview/visible_at      00:02        1        1        -        -        - │
+  │    tributes_checkboxes.cy.js                                                                   │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/class_page/other_b      00:09        4        4        -        -        - │
+  │    uttons.cy.js                                                                                │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/class_page/second_      00:10        1        1        -        -        - │
+  │    teachers_invites.cy.js                                                                      │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/customize_adventur      00:02        1        1        -        -        - │
+  │    e_page/autosave.cy.js                                                                       │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/customize_adventur      00:06        2        2        -        -        - │
+  │    e_page/general_settings.cy.js                                                               │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/customize_adventur      00:09        5        5        -        -        - │
+  │    e_page/tags.cy.js                                                                           │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/customize_class_pa      00:35       10       10        -        -        - │
+  │    ge/customize_class.cy.js                                                                    │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/customize_class_pa      00:06        2        2        -        -        - │
+  │    ge/preview_class.cy.js                                                                      │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/general/duplicate_      00:12        4        4        -        -        - │
+  │    class.cy.js                                                                                 │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/general/preview_ad      00:04        2        2        -        -        - │
+  │    venture.cy.js                                                                               │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/general/remove_but      00:07        2        2        -        -        - │
+  │    ton.cy.js                                                                                   │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/general/see_teache      00:03        2        2        -        -        - │
+  │    r_page.cy.js                                                                                │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  teacher_page/Manual/teacher_page.cy      00:07        5        5        -        -        - │
+  │    .js                                                                                         │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/redesign/class_con      00:23        6        6        -        -        - │
+  │    figure_customize_level.cy.js                                                                │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/redesign/class_man      01:22        9        9        -        -        - │
+  │    age_and_grade.cy.js                                                                         │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/redesign/class_ove      00:41       14       14        -        -        - │
+  │    rview_navigation.cy.js                                                                      │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/redesign/class_per      00:15        7        7        -        -        - │
+  │    formance_graph.cy.js                                                                        │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/redesign/customize      00:26        6        6        -        -        - │
+  │    _adventure_autosave.cy.js                                                                   │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/redesign/customize      00:10        3        3        -        -        - │
+  │    _adventure_manage_flow.cy.js                                                                │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/redesign/for_teach      00:14        6        6        -        -        - │
+  │    ers_redesign.cy.js                                                                          │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/redesign/slides_be      00:05        3        3        -        -        - │
+  │    havior.cy.js                                                                                │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/class_page/add_stu      00:25        4        4        -        -        - │
+  │    dents/create_accounts.cy.js                                                                 │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  for-teacher_page/class_page/add_stu      00:18        2        2        -        -        - │
+  │    dents/invite_by_username.cy.js                                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ✔  All specs passed!                        10:58      587      587        -        -        -  
+
