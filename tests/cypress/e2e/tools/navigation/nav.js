@@ -65,7 +65,7 @@ export function goToHedyLevel(level) {
 export function goToAdminUsersPage()
 {
     loginForAdmin();
-    cy.get('#users_button').click();
+    goToPage(Cypress.env('admin_users_page'));
 }
 
 export function goToAdminAdventuresPage()
