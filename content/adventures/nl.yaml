@@ -93,15 +93,15 @@ adventures:
                     Let op: De variabelen die je in jouw eigen verhaal gebruikt moeten buiten de aanhalingstekens. Net als bij de tweede regel van de voorbeeldcode. Daar staat de variabele naam ook buiten de aanhalingstekens.
                 example_code: |
                     ```
-                    naam {is} {ask} _Hoe heet de hoofdpersoon_
-                    {print} _De hoofdpersoon heet _ naam
+                    naam {is} {ask} _ Hoe heet de hoofdpersoon _
+                    {print} _ De hoofdpersoon heet _ naam
                     _
                     _
-                    {print} naam _ gaat nu in het bos lopen_
-                    {print} naam _ is wel een beetje bang_
+                    {print} naam _ gaat nu in het bos lopen _
+                    {print} naam _ is wel een beetje bang _
                     dieren {is} 🦔, 🦉, 🐿, 🦇
-                    {print} _Hij hoort het geluid van een _ dieren {at} {random}
-                    {print} naam _ is bang dat dit een spookbos is_
+                    {print} _ Hij hoort het geluid van een _ dieren {at} {random}
+                    {print} naam _ is bang dat dit een spookbos is _
                     ```
             5:
                 story_text: |
@@ -2523,9 +2523,10 @@ adventures:
                     In het voorbeeldje hieronder zie je wat er gebeurt als je de hoge komma's wel gewoon blijft gebruiken.
                 example_code_2: |
                     ```
-                    _ Let op dit voorbeeld laat zien hoe het NIET moet_
+                    _ Let op dit voorbeeld laat zien hoe het NIET moet _
                     {print} 'Daar rijden twee oma's in hun auto's '
                     {print} 'Zouden zij liever 's middags of 's avonds rijden?'
+                    
                     _ Dit is hoe het WEL moet _
                     {print} "Daar rijden twee oma's in hun auto's"
                     {print} "Zouden zij liever 's middags of 's avonds rijden?"
@@ -2976,7 +2977,7 @@ adventures:
                 example_code: |
                     ```
                     keuzes {is} steen, papier, schaar
-                    {print} _De computer kiest..._ keuzes {at} {random}
+                    {print} _ De computer kiest... _ keuzes {at} {random}
                     ```
             5:
                 story_text: |
