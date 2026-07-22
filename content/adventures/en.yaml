@@ -281,13 +281,13 @@ adventures:
 
                     ### Exercise 2
                     Find a story from a previous level, and add one `{and}` or `{or}`.
-                    example_code: |
+                example_code_2: |
                     ```
                     {print} 'Our hero is walking through the forest'
                     {print} 'The path splits two ways'
                     path = {ask} 'Which path should she choose?'
                     weapon = {ask} 'What weapon does she draw?'
-                    {if} path {is} 'left' {and} weapon {is} 'sword'
+                    {if} path {is} left {and} weapon {is} sword
                         _
                     ```
                 answer_code: |
@@ -311,6 +311,22 @@ adventures:
                             {print} 'Its delicious'
                         {else}
                             {print} 'She goes straight home'
+                    ```
+                answer_code_2: |
+                    ```
+                    {print} 'Our hero is walking through the forest'
+                    {print} 'The path splits two ways'
+                    path = {ask} 'Which path should she choose?'
+                    weapon = {ask} 'What weapon does she draw?'
+
+                    {if} path {is} left {and} weapon {is} sword
+                        {print} 'no monster dares to approach the hero.'
+
+                    {if} path {is} left {and} weapon {is} slingshot
+                        {print} 'the hero is attacked by an owlbear.'
+
+                    {if} path {is} right {or} weapon {is} spellbook
+                        {print} 'the hero is approached by a mysterious wizard.'
                     ```
             11:
                 story_text: |
@@ -886,7 +902,7 @@ adventures:
             10:
                 story_text: |
                     ### Exercise 1
-                    Let's make the practice program a bit harder. The player now has to answers two questions correctly. Fill out the blanks to complete the program.
+                    Let's make the practice program a bit harder. The player now has to answer two questions correctly. Fill out the blanks to complete the program.
 
                     ### Exercise 2
                     Sometimes, calculations have multiple correct answers. For example, 10 can be divided by 5 and by 2. So the question 'What number divides 10?' can be answered by 2 and by 5.
@@ -3408,6 +3424,7 @@ adventures:
                     * Did you break a bone?
                     * Do you have a serious allergic reaction?
                     * Are you in severe pain?
+                    
                     If the patient answers 'yes' to any of these questions, the program will tell them to go to the emergency room a.s.a.p.. It will not ask any other questions, because time is of the essence.
                     If the patient answers 'no' to all the questions the program will ask:
                     * Can it wait till tomorrow?
@@ -3839,7 +3856,7 @@ adventures:
                 story_text_2: |
                     ### Exercise
                     Software is almost always secured with two factor authentication nowadays. You don't need one password but you'll need two.
-                    Make your own security system that requires two correct passwords, by putting an {if} inside an {if}.
+                    Make your own security system that requires two correct passwords, by putting an `{if}` inside an `{if}`.
                 example_code_2: |
                     ```
                     password_1 =
@@ -6041,7 +6058,7 @@ adventures:
                 example_code: |
                     ```
                     #Computer and player choosing rock, paper or scissors:
-                    options = 'rock', 'paper', 'scissors'
+                    options = rock, paper, scissors
                     your_choice = {ask} 'What do you choose?'
                     computer_choice = options {at} {random}
                     #Printing which options were chosen:
@@ -6050,9 +6067,9 @@ adventures:
                     #Printing who is the winner:
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'
-                    {elif} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
+                    {elif} computer_choice {is} rock {and} your_choice {is} paper
                         {print} 'You win!'
-                    {elif} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
+                    {elif} computer_choice {is} rock {and} your_choice {is} scissors
                         {print} 'The computer wins!'
                     _
                     ```
@@ -6065,17 +6082,17 @@ adventures:
                     {print} 'The computer chooses ' computer_choice
                     {if} computer_choice {is} your_choice
                         {print} 'Tie'
-                    {elif} computer_choice {is} 'rock' {and} your_choice {is} 'paper'
+                    {elif} computer_choice {is} rock {and} your_choice {is} paper
                         {print} 'You win!'
-                    {elif} computer_choice {is} 'rock' {and} your_choice {is} 'scissors'
+                    {elif} computer_choice {is} rock {and} your_choice {is} scissors
                         {print} 'The computer wins!'
-                    {elif} computer_choice {is} 'paper' {and} your_choice {is} 'scissors'
+                    {elif} computer_choice {is} paper {and} your_choice {is} scissors
                         {print} 'You win!'
-                    {elif} computer_choice {is} 'paper' {and} your_choice {is} 'rock'
+                    {elif} computer_choice {is} paper {and} your_choice {is} rock
                         {print} 'The computer wins!'
-                    {elif} computer_choice {is} 'scissors' {and} your_choice {is} 'rock'
+                    {elif} computer_choice {is} scissors {and} your_choice {is} rock
                         {print} 'You win!'
-                    {elif} computer_choice {is} 'scissors' {and} your_choice {is} 'paper'
+                    {elif} computer_choice {is} scissors {and} your_choice {is} paper
                         {print} 'The computer wins!'
                     ```
             11:
@@ -6184,7 +6201,7 @@ adventures:
                     name = {ask} 'What is your name?'
                     password = {ask} 'What is your password?'
 
-                    {if} name {is} 'Agent007' {and} password {is} 'TOPSECRET'
+                    {if} name {is} Agent007 {and} password {is} TOPSECRET
                         {print} 'Go to the airport at 02.00'
                     {else}
                         {print} 'Go to ' fake_locations {at} {random} 'at ' fake_times {at} {random}
