@@ -192,23 +192,9 @@ adventures:
                     Titta på <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> berättelsen</a> om du inte känner till den, och se till att den skrivs ut som i boken.
                 example_code: "```\ndjur = _ , _ , _ , _ \n{print} 'Brunbjörn, brunbjörn'\n {print} 'Vad ser du?'\n```\n"
             13:
-                story_text: |
-                    Vi ska skriva ut en annan historia, men nu måste vi använda parenteser med `{print}`.
-
-                    ### Övning 1
-                    Skapa en berättelse med minst fem meningar. Du behöver inte använda 'namn' än.
                 example_code: |
                     ```
-                    {print}('Välkommen till den här berättelsen!')
-                    ```
-                story_text_2: |
-                    ### Övning 2
-                    Vi har redan förberett en `{input}` åt dig. Använd först variabeln `name` i din berättelse.
-                    Lägg sedan till en andra `{ask}` och använd den variabeln också.
-                    Tips: Kom ihåg kommatecken i en `{print}` mellan text och variabler!
-                example_code_2: |
-                    ```
-                    namn = {input}("Vad heter du?")
+                    namn = _
                     {print}('Välkommen till den här berättelsen!')
                     ```
             16:
@@ -1068,15 +1054,15 @@ adventures:
                     franska_ord = ['bonjour', 'ordinateur', 'pomme de terre']
                     översättning = ['hej', 'dator', 'potatis']
                     poäng = 0
-                    {for} i {in} {range} 1 {to} 3
-                        svar = {ask} 'Vad betyder ' franska_ord[i] '?'
+                    {for} i {in} {range}(1, 3)
+                        svar = {input}('Vad betyder ', franska_ord[i], '?')
                         rätt = översättning[i]
-                        {if} svar == rätt
-                            {print} 'Rätt!'
+                        {if} svar == rätt:
+                            {print}('Rätt!')
                             poäng = poäng + 1
-                        {else}
-                            {print} 'Fel, ' franska_ord[i] ' betyder ' översättning[i]
-                    {print} 'Du gav ' poäng ' rätta svar.'
+                        {else}:
+                            {print}('Fel, ', franska_ord[i], ' betyder ', översättning[i])
+                    {print}('Du gav ', poäng, ' rätta svar.')
                     ```
     maths:
         name: matte
@@ -1201,25 +1187,6 @@ adventures:
                     att_spara = pris - sparat
                     veckor = att_spara / fickpeng
                     {print} 'Du kan köpa en ' _ ' om ' _ ' veckor.'
-                    ```
-            15:
-                example_code: |
-                    ```
-                    _ calculate_budget with wish, money, allowance
-                        to_save = wish - money
-                        weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
-                        {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
-
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
-
-                    {call} calculate_budget with _, _, _
                     ```
     print_command:
         default_save_name: skriv
@@ -1635,13 +1602,13 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print} 'Välkommen till McHedy'
+                    {print}('Välkommen till McHedy')
                     mer = 'ja'
                     _
-                        order = {ask} 'Vad vill du beställa?'
-                        {print} order
-                        mer = {ask} 'Vill du beställa något mer?'
-                    {print} 'Tack!'
+                        order = {input}('Vad vill du beställa?')
+                        {print}(order)
+                        mer = {input}('Vill du beställa något mer?')
+                    {print}('Tack!')
                     ```
     rock:
         name: Sten, sax, påse
