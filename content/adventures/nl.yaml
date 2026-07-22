@@ -1469,7 +1469,7 @@ adventures:
                     De vochtbalans moet positief blijven. Als de vochtbalans negatief is, moet de verpleegkundige meer infuusvloeistof toedienen.
                     Kun je onze verpleegkundigen helpen door een programma te maken dat ze kunnen gebruiken om de vochtbalans van hun patiënten te berekenen?
 
-                    ### Oefening
+                    ### Opdracht
                     Het programma moet:
 
                     * Vragen hoeveel vocht de patiënt die dag heeft binnengekregen door te drinken.
@@ -1845,7 +1845,39 @@ adventures:
         name: rekenen
         default_save_name: rekenen
         description: introduceert rekenen
-        levels: {}
+        levels:
+            7:
+                story_text: |
+                    In dit level leer je iets nieuws: je kunt nu rekenen.
+
+                    Optellen is eenvoudig, je schrijft het zoals bij wiskunde: `5 + 5` bijvoorbeeld. De min werk ook goed, dat is `5 - 5`.
+
+                    Vermenigvuldigen gaat een beetje anders, omdat er geen toets met een kruisje voor vermenigvuldigen op je toetsenbord zit. Kijk maar eens goed!
+                    Daarom gebruiken we de asterisk (een soort sterretje) boven 8: `5 * 5`. Lees dit als "5 keer 5", dan onthoud je dit het best.
+                example_code: |
+                    ```
+                    {print} '5 plus 5 is ' 5 + 5
+                    {print} '5 min 5 is ' 5 - 5
+                    {print} '5 keer 5 is ' 5 * 5
+                    {print} '5 gedeeld door 5 is ' 5 / 5
+                    ```
+                story_text_2: |-
+                    **Kommagetallen**
+                    Tot nu toe kon Hedy geen kommagetallen zoals 1,5 gebruiken. Vanaf nu kan dat wel. Let op dat computers de `.` (punt) gebruiken voor kommagetallen. Kommagetallen in de computer zou je puntgetallen kunnen noemen, maar dat doet niemand.
+                example_code_2: |
+                    ```
+                    {print} 'Tweeëneenhalf plus tweeënhalf is...'
+                    {print} 2.5 + 2.5
+                    ```
+                story_text_3: |-
+                    **Rekenen met variabelen**
+                example_code_3: |
+                    ```
+                    {print} 'Een kaartje kost €2'
+                    mensen = {ask} 'Hoeveel kaartjes wil je?'
+                    prijs = mensen * 2
+                    {print} 'Dat is €' prijs
+                    ```
     music:
         name: muziek
         default_save_name: muziek
@@ -3263,6 +3295,8 @@ adventures:
                     Misschien heb je op school al geleerd dat een heel rondje rond draaien 360 graden is. Zo niet, dan weet je het nu!
                     Daarom gebruik je voor een vierkant ook 90 graden. 360 gedeeld door 4 is 90.
                     Nu we met Hedy kunnen rekenen, kunnen we alle figuren tekenen die we maar willen!
+                    ### Opdracht
+                    Maak je eigen vormen!
                 example_code: |
                     ```
                     #de hoeken van de figuur definiëren:
