@@ -205,22 +205,14 @@ adventures:
                     ```
             13:
                 story_text: |
-                    We gaan weer een verhaal printen, maar we moeten daarbij steeds haakjes gebruiken bij de `{print}`.
+                    We gaan een verhaal maken, we moeten daarbij steeds haakjes gebruiken bij de `{print}`.
 
                     ### Opdracht 1
-                    Maak een verhaal van minstens 5 zinnen. Je hoeft `naam` nog niet te gebruiken.
+                    Maak een verhaal van minstens 5 zinnen. Gebruik eerst de variabele `naam` in je verhaal. Maak dan nog 2 variabelen en gebruik die ook.
+                    Tip: Denk aan de komma's in een `{print}` tussen tekst en variabelen!
                 example_code: |
                     ```
-                    {print}('Welkom bij dit verhaal!')
-                    ```
-                story_text_2: |
-                    ### Opdracht 2
-                    We hebben al een `{input}` voor jou klaargezet. Gebruik eerst de variabele `naam` in je verhaal.
-                    Voeg daarna een tweede `{ask}` toe en gebruik die variabele ook.
-                    Tip: Denk aan de komma's in een `{print}` tussen tekst en variabelen!
-                example_code_2: |
-                    ```
-                    naam = {input}('Hoe heet jij?')
+                    naam = _ 
                     {print}('Welkom bij dit verhaal!')
                     ```
             6:
@@ -432,6 +424,84 @@ adventures:
                             {else}
                                 {print} 'Fout! Het antwoord is ' correct
                     ```
+            13: 
+                story_text: |
+                    In dit level ga vermenigvuldigingen oefenen.
+                    Je kunt kiezen welke getallen je wilt vermenigvuldigingen. 
+                    Maak de code af: Print of het antwoord goed of fout is en print het goede antwoord als het verkeerde antwoord werd gegeven. 
+
+                example_code: |
+                    ```
+                    #Vragen met welke getallen je wil oefenen:
+                    getal_1 = {input}('wat is het eerste getal dat wil vermenigvuldigen?')
+                    getal_2 = {input}('wat is het tweede getal dat wil vermenigvuldigen?')
+
+                    #Vragen het antwoord en controleer het:
+                    antwoord = {input}('Hoeveel is ', getal_1, ' keer ', getal_2, '?' )
+                        goede_antwoord = getal_1 * getal_2
+                        {if} antwoord _
+                            {print}('Ja dat klopt!')
+                        _
+                    ```
+                answer_code: |
+                    ```
+                    #Vragen met welke getallen je wil oefenen:
+                    getal_1 = {input}('wat is het eerste getal dat wil vermenigvuldigen?')
+                    getal_2 = {input}('wat is het tweede getal dat wil vermenigvuldigen?')
+
+                    #Vragen het antwoord en controleer het:
+                    antwoord = {input}('Hoeveel is ', getal_1, ' keer ', getal_2, '?' )
+                    goede_antwoord = getal_1 * getal_2
+                    {if} antwoord == goed_antwoord:
+                        {print}('Ja dat klopt!')
+                    {else}:
+                        {print}('Helaas, dat klopt niet. Het goede antwoord is: ', goede_antwoord)
+                    ```
+            14: 
+                story_text: |
+                    In dit level ga je een programma schrijven om de tafels van 10 (of hoger!) te oefenen.
+                    Je kunt kiezen welke tafel je wil oefenen en daarna moet je alle vermenigvuldigingen tot en met tien beantwoorden. 
+                    Maak de code af: Print of het antwoord goed of fout is en print het goede antwoord als het verkeerde antwoord werd gegeven. 
+                    Geef ook punten voor elke goede antwoorden en laat de totale score zien. 
+
+                example_code: |
+                    ```
+                    #Vragen welke tafel je wil oefenen :
+                    getal = {input}('Van welk getal wil je de tafel van vermenigvuldiging wil je oefenen?')
+                    score = 0
+
+                    #Vragen stellen:
+                    {for} i {in} {range}(1,10):
+                        antwoord = {input}('Hoeveel is ', i, ' keer ', getal, '?' )
+                        goede_antwoord = getal * i
+                        {if} antwoord _
+                            score = 
+                            {print}('Ja dat klopt!')
+                        _
+
+                    #De score printen:
+                    ```
+                answer_code: |
+                    ```
+                    #Vragen welke tafel je wil oefenen :
+                    getal = {input}('Van welk getal wil je de tafel van vermenigvuldiging wil je oefenen?')
+                    score = 0
+
+                    #Vragen stellen:
+                    {for} i {in} {range}(1,10):
+                        antwoord = {input}('Hoeveel is ', i, ' keer ', getal, '?' )
+                        goede_antwoord = getal * i
+                        {if} antwoord == goed_antwoord
+                            score = score + 1
+                            {print}('Ja dat klopt!')
+                        {else}:
+                            {print}('Helaas, dat klopt niet. Het goede antwoord is: ', goede_antwoord)
+
+                    #De score printen:
+                    {print}('Je bent klaar')
+                    {print}('Je totale score is: ', score)
+
+                    ```
             15:
                 story_text: |
                     In dit avontuur leer je een rekenmachine bouwen die het gemiddelde cijfer voor jou berekent. Als je de rekenmachine aan de praat krijgt, kun je doorgaan naar het volgende avontuur. Daar leer je hoe je extra functies toevoegt aan je rekenmachine.
@@ -473,7 +543,7 @@ adventures:
                 example_code: |
                     ```
                     #Een vraag definiëren:
-                    {define} nieuwe_vraag
+                    {def} nieuwe_vraag():
                         nummers = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
                         nummer_1 = nummers {at} {random}
                         nummer_2 = nummers {at} {random}
@@ -482,13 +552,13 @@ adventures:
                         _
                         _
                         _
-                        {print} 'Well done!'
+                        {print}('Goed gedaan!')
                     
                     #De vragen stellen:
-                    {print} 'Geef 10 goede antwoorden om te winnen!'
-                    {for} i {in} {range} 1 {to} 10
+                    {print}('Geef 10 goede antwoorden om te winnen!')
+                    {for} i {in} {range}(1, 10):
                         _
-                    {print} 'Je hebt gewonnen!'
+                    {print}('Je hebt gewonnen!')
                     ```
     calculator_2:
         name: rekenmachine 2
@@ -511,6 +581,95 @@ adventures:
                 example_code: |
                     ```
                     # Gebruik je eigen code van het vorige avontuur
+                    ```
+    carnival:
+        name: kermis
+        default_save_name: kermis
+        description: kermis
+        levels:
+            13:
+                story_text: |
+                    Welkom op de Hedy kermis! We gaan blikgooien. Gooi zo veel mogelijk blikjes om en kies een leuke prijs!
+
+                    ### Opdracht
+                    Vul de juiste commando's in na de {if} om het programma te laten werken.
+
+                    * Het programma moet werken als de speler nog niet aan de beurt is geweest en jonger is dan 18.
+                    * Daarna wordt er een lijstje gemaakt van welke prijzen de speler kan kiezen.
+                    * Als de speler genoeg punten heeft voor een prijs (zie prijslijst) moet hij geprint worden.
+                    * De speler kan de videogame alleen winnen als die 14 jaar of ouder is.
+                    * De speler kan de ballon alleen winnen als die 5 jaar of jonger is.
+
+                example_code: |
+                    ```
+                    #prijslijst
+                    ballon = 1
+                    lolly = 2
+                    videogame = 8
+                    beer = 10
+
+                    {print} ('Blikgooien!')
+                    leeftijd = {input}('Hoe oud ben je?')
+                    al_geweest = {input}('Ben je al een keer aan de beurt geweest?')
+
+                    #Welke prijzen kan de speler kiezen
+                    {if} _ :
+                        {print}('Je mag meedoen')
+                        punten = {input}('Hoeveel punten heb je?')
+                        {print}('Deze prijzen kun je kiezen:')
+
+                        {if} _ :
+                            {print}('beer')
+
+                        {if} _ :
+                            {print}('lolly')
+
+                        {if} _:
+                            {print}('videogame')
+
+                        {if} _:
+                            {print}('ballon')
+
+                        gekozen_prijs = {input}('Welke prijs kies je?')
+                        {print}('Van harte gefeliciteerd met je ', gekozen_prijs)
+
+                    {else}:
+                        {print}('Je mag helaas niet meedoen')
+                    ```
+                answer_code: |
+                    ```
+                    #prijslijst
+                    ballon = 1
+                    lolly = 2
+                    videogame = 8
+                    beer = 10
+
+                    {print} ('Blikgooien!')
+                    leeftijd = {input}('Hoe oud ben je?')
+                    al_geweest = {input}('Ben je al een keer aan de beurt geweest?')
+
+                    {if} al_geweest != 'ja' {or} leeftijd > 18:
+                        {print}('Je mag meedoen')
+                        punten = {input}('Hoeveel punten heb je?')
+                        {print}('Deze prijzen kun je kiezen:')
+
+                        {if} punten >= beer:
+                            {print}('beer')
+
+                        {if} punten >= lolly:
+                            {print}('lolly')
+
+                        {if} leeftijd >= 14 {and} punten >= videogame:
+                            {print}('videogame')
+
+                        {if} leeftijd <= 5 {and} punten >= ballon:
+                            {print}('ballon')
+
+                        gekozen_prijs = {input}('Welke prijs kies je?')
+                        {print}('Van harte gefeliciteerd met je ', gekozen_prijs)
+
+                    {else}:
+                        {print}('Je mag helaas niet meedoen')
                     ```
     clear_command:
         levels:
@@ -1094,10 +1253,10 @@ adventures:
                     #Vragen stellen:
                     antwoord = {input}('Wat is 2 + 2?')
                     {if} antwoord == 4:
-                        {print} 'Goed!'
+                        {print}('Goed!')
                         speel_blij_deuntje()
-                    {else}
-                        {print} 'Fout!'
+                    {else}:
+                        {print}('Fout!')
                     ```
                 answer_code: |
                     ```
@@ -1113,10 +1272,10 @@ adventures:
 
                     antwoord = {input}('Wat is 2 + 2?')
                     {if} antwoord == 4:
-                        {print} 'Goed!'
+                        {print}('Goed!')
                         speel_blij_deuntje()
-                    {else}
-                        {print} 'Fout!'
+                    {else}:
+                        {print}('Fout!')
                         speel_sip_deuntje()
                     ```
     functions_2:
@@ -1374,23 +1533,23 @@ adventures:
                     wapens = ['rauwe ham', 'aansteker', 'knoflook']
 
                     #Het verhaal van het spookhuis vertellen:
-                    {print} 'Je staat bij een oude verlaten villa'
-                    {print} 'Iets is hier niet pluis...'
-                    {print} 'Je hoort ' _
-                    {print} 'Je gaat op ontdekking'
-                    {print} 'Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook'
-                    jouw_wapen = {ask} 'Wat neem je mee?'
-                    {print} 'Met je ' jouw_wapen ' loop je door naar de woonkamer'
-                    {print} 'Daar zie je een ' _
+                    {print}('Je staat bij een oude verlaten villa')
+                    {print}('Iets is hier niet pluis...')
+                    {print}('Je hoort ', _)
+                    {print}('Je gaat op ontdekking')
+                    {print}('Je stapt de keukendeur binnen en ziet daar een aansteker, een rauwe ham en een knoflook')
+                    jouw_wapen = {input}('Wat neem je mee?')
+                    {print}('Met je ', jouw_wapen, ' loop je door naar de woonkamer')
+                    {print}('Daar zie je een ', _)
                     benodigde_wapen = _
                     {if} jouw_wapen == benodigde_wapen
-                        {print} 'Je gebruikt je ' jouw_wapen
+                        {print}('Je gebruikt je ', jouw_wapen)
                         {print} _
-                        {print} 'Jij wint!'
+                        {print}('Jij wint!')
                     {else}
-                        {print} 'Je hebt helaas het verkeerde wapen'
+                        {print}('Je hebt helaas het verkeerde wapen')
                         {print} _
-                        {print} 'GAME OVER'
+                        {print}('GAME OVER')
                     ```
     hospital:
         name: ziekenhuis
@@ -1847,6 +2006,65 @@ adventures:
                     {for} i {in} {range} 1 {to} 3:
                        {print}('het geluksgetal van ', vrienden[i], 'is ', geluksgetallen[i])
                     ```
+    market:
+        name: markt
+        default_save_name: markt
+        description: markt
+        levels:
+            13:
+                story_text: | 
+                    In dit avontuur ga je een code schrijven voor een markt. Kijk naar de voorbeeld code. 
+                    Deze markt verkoopt brood, appels en kaas. Kan je de klanten vertellen hoeveel elk product kost en ze vragen hoeveel ze van het product willen kopen?
+                    Eventueel kan je ook nog extra producten aan deze markt toevoegen. Zorg ervoor dat je de klant ook vertelt hoeveel deze moet betalen.
+                example_code: |
+                    ```
+                    #Introduceren van de Hedy markt:
+                    {print}('Welkom bij de Hedy markt!')
+                    {print}('We verkopen hier brood, appels en kaas')
+                    
+                    #Vragen hoeveel je wil kopen:
+                    prijs_brood = 5
+                    {print}('Één brood kost ', _ )
+                    brood_aantal = {input}('Hoeveel broden wil je kopen?')
+                    totaal_brood = prijs_brood * _
+
+                    prijs_appel =
+
+
+                    #Totale prijs vertellen:
+
+
+
+
+                    ```
+                answer_code: |
+                    ```
+                    Introduceren van de Hedy markt:
+                    {print}('Welkom bij de Hedy markt!')
+                    {print}('We verkopen hier brood, appels en kaas')
+                    
+                    #Vragen hoeveel je wil kopen:
+                    prijs_brood = 5
+                    {print}('Één brood kost ', prijs_brood )
+                    brood_aantal = {input}('Hoeveel broden wil je kopen?')
+                    totaal_brood = prijs_bread*brood_aantal
+
+                    prijs_appel = 1
+                    {print}('Één appel kost', prijs_appel)
+                    appel_aantal = {input}('Hoeveel broden wil je kopen?')
+                    totaal_appel = prijs_appel*appel_aantal
+
+                    prijs_kaas = 8
+                    {print}('Één stuk kaas kost ', prijs_kaas)
+                    kaas_aantal = {input}('Hoeveel stukken kaas wil je kopen?')
+                    totaal_kaas= prijs_kaas*kaas_aantal
+
+                    #Totale prijs vertellen:
+                    totaal = totaal_brood + totaal_appel + totaal_kaas
+                    print('Dat wordt dan samen ', total )
+                    print('Fijne dag verder!')
+
+                    ```
     maths:
         name: rekenen
         default_save_name: rekenen
@@ -2113,19 +2331,17 @@ adventures:
                     Zorg dat het brandalarm afgaat als er brand is!
                 example_code: |
                     ```
-                    {define} brandalarm
-                        {print} 'BRAND!'
+                    {def} brandalarm():
+                        {print}('BRAND!')
                         noot = 40
-                        {for} i {in} {range} 1 {to} 100
-                            {if} noot _ 50
-                                noot = noot + 5
-                                {play} _
-                            {else}
-                                noot = 40
+                        {for} i {in} {range}_
+                            {play} 45
+                            {play} 50
 
-                    brand = {ask} 'Is er brand?'
-                    {if} brand _ 'ja'
-                        {call} brandalarm
+
+                    brand = {input}('Is er brand?')
+                    {if} brand _
+                        _
                     ```
             16:
                 story_text: |
@@ -2137,13 +2353,13 @@ adventures:
                 example_code: |
                     ```
                     #Een liedje schrijvenL
-                    {def} lied
+                    {def} lied():
                         {play} _
                     #Het liedje afspelen:
                     ja_of_nee = {input}('Wil je mijn liedje zonder einde horen?')
                     {while} ja_of_nee = 'ja':
                         lied()
-                        {print} '🥳'
+                        {print}('🥳')
                     ```
     music_2:
         name: muziek 2
@@ -2174,12 +2390,12 @@ adventures:
                     {def} line_3():
                     _
 
-                    {print} ('De dronken zeeman')
-                    {print} ('Wat zullen we doen met de dronken zeeman?')
+                    {print}('De dronken zeeman')
+                    {print}('Wat zullen we doen met de dronken zeeman?')
                     line_1()
                     line_2()
                     line_3()
-                    {print} ('s Morgens in de vroegte')
+                    {print}('s Morgens in de vroegte')
                     ```
                 answer_code: |
                     ```
@@ -2212,12 +2428,12 @@ adventures:
                         {play} D
                         {play} D
 
-                    {print} ('De dronken zeeman')
-                    {print} ('Wat zullen we doen met de dronken zeeman?')
+                    {print}('De dronken zeeman')
+                    {print}('Wat zullen we doen met de dronken zeeman?')
                     line_1()
                     line_2()
                     line_3()
-                    {print} ('s Morgens in de vroegte')
+                    {print}('s Morgens in de vroegte')
                     line_4()
                     ```
     music_3:
@@ -2235,7 +2451,7 @@ adventures:
                     Kun je een ander liedje programmeren op deze manier?
                 example_code: |
                     ```
-                    {print} 'Yankee Doodle'
+                    {print}('Yankee Doodle')
                     {def} _ (noot_1, noot_2, noot_3):
                         {play} C4
                         {play} C4
@@ -2260,7 +2476,7 @@ adventures:
                 answer_code: |
                     ```
                     ```
-                    {print} 'Yankee Doodle'
+                    {print}('Yankee Doodle')
                     {def} deuntje(noot_1, noot_2, noot_3):
                         {play} C4
                         {play} C4
@@ -2283,6 +2499,77 @@ adventures:
                     {play} C4
                     ```
                     ```
+    park:
+        name: pretpark
+        default_save_name: pretpark
+        description: pretpark
+        levels:
+            13:
+                story_text: | 
+                    Dit avontuur gaat over een pretpark met attracties. Je kunt niet zomaar in de attracties, maar je moet bijvoorbeeld een bepaalde leeftijd of lengte hebben.
+                    Maak de voorbeeldcode af. Voor het spookhuis is er een minimumleeftijd. Je mag natuurlijk niet in de achtbaan als je hoogtevrees hebt. Voeg ook nog een minimum lengte toe aan de achtbaan.
+                    De draaimolen is de attractie voor jonge kinderen. Zorg daarom dat je daar een maximum leeftijd aan toevoegt. Als je wil kan je ook nog meer attracties toevoegen!
+                example_code: |
+                    ```
+                    {print}("Welkom bij het pretpark: 'Hedy Hoog'")
+                    {print}("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
+
+                    #Probeer een van de drie attracties uit:
+                    attractie = {input}('Welke attractie wil je proberen?')
+
+                    {if} attractie == 'spookhuis':
+                        leeftijd = {input}('Hoe oud ben je?')
+                        {if} leeftijd > 12:
+                            {print}('Je bent out genoeg. Geniet ervan!')
+                        _ :
+                            {print}('Sorry, je bent nu nog niet oud genoeg. ')
+                    
+                    {if} attractie == 'Achtbaan':
+                        angst = {input}('Heb je hoogtevrees?')
+                        {if} angst == 'ja':
+                            {print}('Sorry, het is better als je op de grond blijft.')
+                        {elif} _ :
+                            lengte = _
+
+                    {if} attractie == 'Draaimolen':
+                        _
+
+                    ```
+                answer_code: |
+                        ```
+                        {print}("Welkom bij het pretpark: 'Hedy Hoog'")
+                        {print}("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
+
+                        #Probeer een van de drie attracties uit:
+                        attractie = {input}('Welke attractie wil je proberen?')
+
+                        {if} attractie == 'spookhuis':
+                            leeftijd = {input}('Hoe oud ben je?')
+                            {if} leeftijd > 12:
+                                {print}('Je bent out genoeg. Geniet ervan!')
+                            _ :
+                                {print}('Sorry, je bent nu nog niet oud genoeg. ')
+                        
+                        {if} attractie == 'Achtbaan':
+                            angst = {input}('Heb je hoogtevrees?')
+                            {if} angst == 'ja':
+                                {print}('Sorry, het is better als je op de grond blijft.')
+                            {elif} angst == 'nee' :
+                                lengte = {input}('Wat is je lengte in centimeters')
+                                {if} lengte > 150:
+                                    {print}('Geniet van het ritje!')
+                                {else}:
+                                    {print}('Sorry, je bent niet lang genoeg')
+
+
+                        {if} attractie == 'draaimolen':
+                            leeftijd = {input}('Hoe oud ben je?')
+                            {if} leeftijd < 10:
+                                {print}('Dit is de perfecte attractie voor jou. Veel plezier!')
+                            {else}:
+                                {print}('Helaas, je bent al te oud.')
+
+                        ```
     parrot:
         name: papegaai
         default_save_name: Papegaai
@@ -2408,21 +2695,21 @@ adventures:
                     Maak de code af door de lege plekken in te vullen!
                 example_code: |
                     ```
-                    _ bereken_budget {with} wens, geld, zakgeld
+                    _ bereken_budget(wens, geld, zakgeld):
                         sparen = wens - geld
                         weken = sparen / zakgeld
-                        {if} wens _ geld
-                            {print} 'Helaas even doorsparen!'
-                            {print} 'Je moet nog ' weken ' weken.'
-                        {else}
-                            {print} 'Hoera, je hebt genoeg!'
-                            {print} 'Op naar de winkel!'
+                        {if} wens _ geld:
+                            {print}('Helaas even doorsparen!')
+                            {print}('Je moet nog ' weken ' weken.')
+                        {else}:
+                            {print}('Hoera, je hebt genoeg!')
+                            {print}('Op naar de winkel!')
 
-                    geld = {ask} 'Hoeveel geld heb je al gespaard?'
-                    wens = {ask} 'Hoeveel geld heb je nodig?'
-                    zakgeld = {ask} 'Hoeveel zakgeld krijg je per week?'
+                    geld = {input}('Hoeveel geld heb je al gespaard?')
+                    wens = {input}('Hoeveel geld heb je nodig?')
+                    zakgeld = {input}('Hoeveel zakgeld krijg je per week?')
 
-                    {call} _
+                    _
                     ```
     print_command:
         description: Introductie print commando
@@ -2465,7 +2752,7 @@ adventures:
                     ```
                     ```
                     naam = 'Hedy'
-                    {print}('Mijn naam is ', naam)
+                    {print} _ 'Mijn naam is ', naam _
                     ```
     quizmaster:
         name: quizmaster
@@ -2479,27 +2766,27 @@ adventures:
                     Je kunt een quiz maken over wat je dan maar leuk vindt: je hobby, je favoriete dier, je favoriete boek en ga zo maar door!
                 example_code: |
                     ```
-                    {print} ('Maak je eigen quiz')
+                    {print}('Maak je eigen quiz')
                     points_a = 0
                     points_b = 0
 
                     #Stellen van quizvragen:
-                    {print} ('Vraag')
-                    {print} ('Antwoord optie A')
-                    {print} ('Antwoord optie B')
-                    antwoord = {ask} 'Welk antwoord?'
-                    {if} antwoord {is} 'A':
+                    {print}('Vraag')
+                    {print}('Antwoord optie A')
+                    {print}('Antwoord optie B')
+                    antwoord = {input}('Welk antwoord?')
+                    {if} antwoord == 'A':
                         punten_a = punten_a + 1
-                    {if} antwoord {is} 'B':
+                    {if} antwoord == 'B':
                         punten_b = punten_b + 1
                     
                     #Uitslag van de quiz printen:
-                    {print} 'Eind van de quiz!'
-                    {print} 'Laten we de uitslag bekijken!'
+                    {print}('Eind van de quiz!')
+                    {print}('Laten we de uitslag bekijken!')
                     {if} punten_a > punten_b:
-                        {print} ('Welkom bij de A club!')
+                        {print}('Welkom bij de A club!')
                     {if} points_b > points_a:
-                        {print} ('Welkom bij de B club')
+                        {print}('Welkom bij de B club')
                     ```
     quotation_marks:
         name: '''aanhalingstekens'''
@@ -2571,12 +2858,12 @@ adventures:
                     ```
             14:
                 story_text_2: |-
-                    Nu je hebt geleerd om de rechte haken te gebruiken bij je lijstjes, kun je ook `{at} {random}` leren gebruiken op de Python-manier!
+                    Nu je hebt geleerd om de rechte haken te gebruiken bij je lijstjes, kun je ook `{at} {random}` leren gebruiken op een andere manier!
                     Je typt simpelweg de naam van de lijst en typt er `[random]` achter.
                 example_code_2: |-
                     ```
                     fruit = ['appel', 'banaan', 'kers']
-                    {print} fruit[random]
+                    {print}(fruit[random])
                     ```
     repeat_command:
         default_save_name: herhaal
@@ -2909,13 +3196,13 @@ adventures:
                     Voeg het `{while}` commando op de juiste wijze toe aan deze code.
                 example_code: |
                     ```
-                    {print} 'Welkom bij McHedy'
+                    {print}('Welkom bij McHedy')
                     meer = 'ja'
                     _
-                        bestelling = {ask} 'Wat wil je bestellen?'
-                        {print} bestelling
-                        meer = {ask} 'Wilt u nog iets bestellen?'
-                    {print} 'Bedankt!'
+                        bestelling = {input}('Wat wil je bestellen?')
+                        {print}(bestelling)
+                        meer = {input}('Wilt u nog iets bestellen?')
+                    {print}('Bedankt!')
                     ```
     rock:
         name: steen, papier, schaar
@@ -3191,6 +3478,34 @@ adventures:
                         {print} 'Ik stond erbij en ik keek er naar'
                         {sleep} 5
                         {clear}
+                    ```
+            14: 
+                story_text: |
+                    We beginnen met het liedje van de visjes. Het liedje begint met tien visjes die naar de zee zwemmen, maar er gaat er steeds eentje af.
+                    Maak de code af. Schrijf een {for}-loop met de tien verzen die je wilt zingen.
+                example_code: |
+                    ```
+                    #Het eendjes liedje zingen:
+
+                    {for} i _ :
+                        eendjes = 10-i
+                        {print}( _ , ' kleine visjes, die zwommen naar de zee')
+                        {print}("'Nee',  zei de moeder ik ga niet mee")
+                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
+                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
+                        
+
+                    ```
+                answer_code: |
+                    ```
+
+                    {for} i {in} {range}(0, 10) :
+                        eendjes = 10-i
+                        {print}(_, ' kleine visjes, die zwommen naar de zee')
+                        {print}("'Nee',  zei de moeder ik ga niet mee")
+                        {print}("Ik blijf liever zwemmen in die vieze oude sloot")
+                        {print}("Want in de zee daar zwemmen haaien en die bijten je: 'blub'. ")
+
                     ```
     turtle:
         name: tekenen
@@ -3607,11 +3922,11 @@ adventures:
                     </div>
                 example_code: |
                     ```
-                    {def} bereken_graden(hoeveel_kanten)
+                    {def} bereken_graden(hoeveel_kanten):
                         graden = 360 / _
                         _ graden
 
-                    {def} teken_figuur(graden, hoeveel_kanten)
+                    {def} teken_figuur(graden, hoeveel_kanten):
                         {for} i {in} {range} _
                             {forward} 70
                             {turn} _
@@ -3649,7 +3964,7 @@ adventures:
                     Spiraal
                     ```
                     afstand = 5
-                    {while} afstand < 200
+                    {while} afstand < 200:
                         afstand = afstand + 5
                          _
                     ```
@@ -3658,14 +3973,14 @@ adventures:
                 example_code_2: |
                     Waaier
                     ```
-                    {define} teken_een_vierkant {with} zijde
+                    {def} teken_een_vierkant(zijde):
                     _
 
                     i = 100
-                    {while} i > 1
-                        _ {with} i
+                    {while} i > 1:
+                        _ (i)
                         _
-                        i {is} i - 3
+                        i = i - 3
                     ```
                 story_text_3: |
                     Ster <img src="https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93" width="150">
