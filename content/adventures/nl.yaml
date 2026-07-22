@@ -742,7 +742,7 @@ adventures:
                     Maak je eigen versie van het afwasprogramma. Maak eerst een lijst van jouw gezinsleden.
                     Daarna bedenk je een taak die gedaan moet worden en laat je de computer kiezen wie de taak moet doen met het `{at} {random}` commando.
 
-                    **Extra** Heb jij geen zin om de afwas te doen? Hack dan het programma door jouw naam van het lijstje te halen met `{remove}`.
+                    **Extra** Heb jij geen zin om de afwas te doen? Hack dan het programma door jouw naam van het lijstje te halen met het `{remove}` `{from}` commando.
             4:
                 story_text: |
                     Met aanhalingstekens kun je je afwasprogramma beter maken.
@@ -1266,6 +1266,12 @@ adventures:
                     In het vorige level heb je een spannende intro bedacht voor je spookhuis, maar een echt spel is het nog niet: Het loopt namelijk altijd hetzelfde af.
                     In dit level kun je je verhaal interactiever maken door verschillende eindes te bedenken: soms word je opgepeuzeld door een verschrikkelijk monster en soms ontsnap je!
                     Hedy kiest willekeurig of je overleeft of niet...
+
+                    ### Opdracht
+                    Kopieer de voorbeeldcode, vul code in op de streepjes en zorg dat het gaat werken!
+
+                    **Extra** Dit verhaal is nog best een beetje suf, pimp het verhaal door er spannende dingen aan toe te voegen.
+                    Het aantal antwoorden is ook beperkt, achter de deuren zitten maar 3 verschillende enge dingen. Kun jij meer griezels bedenken en die aan de lijst toevoegen?
                 example_code: |
                     ```
                     _ Ontsnap uit het spookhuis!
@@ -1421,7 +1427,7 @@ adventures:
                     Er is een probleem op de verpleegkundigenafdeling. Alle verpleegkundigen klagen dat het rooster voor de nachtdiensten oneerlijk is. Sommige verpleegkundigen moeten twee nachtdiensten per week werken, terwijl anderen helemaal geen nachtdiensten werken.
                     Kun je onze verpleegkundigen helpen door een programma te maken dat een eerlijk rooster voor de nachtdiensten opstelt?
 
-                    ### Oefening
+                    ### Opdracht
                     Het programma moet:
 
                     * Tonen welke verpleegkundige op welke dag van de week de nachtdienst heeft.
@@ -2538,14 +2544,14 @@ adventures:
             3:
                 story_text: |
                     ## Maak een lijstje!
-                    In level 3 kan je ook een lijstje maken. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `{at} {random}`.
+                    In dit level kan je een lijstje maken met het `{is}` commando. Uit de lijst kun je dan iets willekeurigs kiezen. Dat doe je met `{at} {random}`.
                 example_code: |
                     ```
                     dieren {is} hond, kat, kangoeroe
                     {print} dieren {at} {random}
                     ```
                 story_text_2: |
-                    Je kunt {at} {random} ook in een zin gebruiken.
+                    Je kunt `{at} {random}` ook in een zin gebruiken.
                 example_code_2: |
                     ```
                     eten {is} broodje, pizza, salade, burrito
@@ -2554,7 +2560,7 @@ adventures:
                 story_text_3: |
                     ### Opdracht
                     Probeer het `{at} {random}` commando uit door je eigen gameshow te maken (zoals Miljoenenjacht op tv). De kandidaat kiest een koffer of een deur waarachter een grote prijs verstopt kan zitten!
-                    Lukt het jou om zo'n programma te maken? De eerste regels zijn alvast te vinden in het voorbeeld
+                    Lukt het jou om zo'n programma te maken? De eerste regels staan al in het voorbeeld.
                 example_code_3: |
                     ```
                     {print} Win een prijs!
