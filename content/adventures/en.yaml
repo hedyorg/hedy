@@ -189,7 +189,7 @@ adventures:
                     Or you could have your player choose which road to take, which door to open, or which magical potion to drink...
 
                     ### Exercise
-                    Create your own story with 3 or more options using the {elif}.
+                    Create your own story with 3 or more options using the `{elif}`.
                 example_code: |
                     ```
                     character {is} {ask} 'Who will help you on your quest?'
@@ -340,27 +340,19 @@ adventures:
                     ```
             13:
                 story_text: |
-                    We are going to print another story, but now we have to use brackets with `{print}`.
+                    We are going to print a story, and we have to use brackets with `{print}`.
 
-                    ### Exercise 1
-                    Create a story of at least 5 sentences. You don't have to use 'name' just yet.
+                    ### Exercise
+                    Create a story of at least 5 sentences. First, use the `name` variable in your story. Then create two other variabele and use them as well.
+                    Tip: Remember the commas in a `{print}` between text and variables!
                 example_code: |
                     ```
-                    {print}('Welcome to this story!')
-                    ```
-                story_text_2: |
-                    ### Exercise 2
-                    We have already prepared an `{input}` for you. First, use the `name` variable in your story.
-                    Then add a second `{ask}` and use that variable as well.
-                    Tip: Remember the commas in a `{print}` between text and variables!
-                example_code_2: |
-                    ```
-                    name = {input}("What's your name?")
+                    name = _
                     {print}('Welcome to this story!')
                     ```
                 answer_code: |
                     ```
-                    name = {input}("What's your name?")
+                    name = 'Hedy'
                     {print}('Welcome to this story!')
                     {print}('Once upon a time there was a parrot called ', name '.')
                     {print}(name, ' loved programming!')
@@ -727,6 +719,83 @@ adventures:
                             {else}
                                 {print} 'That is wrong. The right answer is ' correct
                     ```
+            13: 
+                story_text: |
+                    In this level you will make a program to practice multiplication. 
+                    You choose which numbers you want to multiply. 
+                    Finish the code: Print whether the answer is correct or incorrect and print the correct answer if a mistake was made.
+
+                example_code: |
+                    ```
+                    #Asking for the multiplication variables:
+                    number_1 = {input}('what is the first number you want to multiply?')
+                    number_2 = {input}('what is the second number you want to multiply?')
+                    
+                    #Ask for the answer and check it:
+                    answer = {input}('How much is ',number_1, ' times ', number_2, '?' )
+                    correct_answer = number_1 * number_2
+                    {if} answer _
+                        {print}('Yes, that is correct!')
+                    _
+                    ```
+                answer_code: |
+                    ```
+                    #Asking for the multiplication variables:
+                    number_1 = {input}('what is the first number you want to multiply?')
+                    number_2 = {input}('what is the second number you want to multiply?')
+                    
+                    #Ask for the answer and check it:
+                    answer = {input}('How much is ',number_1, ' times ', number_2, '?' )
+                    correct_answer = number_1 * number_2
+                    {if} answer == correct_answer:
+                        {print}('Yes, that is correct!')
+                    {else}:
+                        {print}('Sorry that was wrong, the correct answer is: ', correct_answer)
+                    ```
+            14:
+                story_text: |
+                    In this level you will make a program to practice multiplication tables. 
+                    You choose which multiplication table you want to practice and than get asked all the multiplications until 10.
+                    Finish the code: Print whether the answer is correct or incorrect and print the correct answer if a mistake was made. 
+                    Also, give points for every correct answer and show the final score.
+
+                example_code: |
+                    ```
+                    #Asking for the multiplication table:
+                    number = {input}('Of which number do you want to practice the multiplications?')
+                    score = 0
+
+                    #Asking the questions:
+                    {for} i {in} {range}(1,10):
+                        answer = {input}('How much is ', i, ' times ', number, '?' )
+                        correct_answer = number * i
+                        {if} answer _
+                            score = 
+                            {print}('Yes, that is correct!')
+                        _
+
+                    #Printing the score:
+                    ```
+                answer_code: |
+                    ```
+                     #Asking for the multiplication table:
+                    number = {input}('Of which number do you want to practice the multiplications?')
+                    score = 0
+
+                    #Asking the questions:
+                    {for} i {in} {range}(1,10):
+                        answer = {input}('How much is ', i, ' times ', number, '?' )
+                        correct_answer = number * i
+                        {if} answer == correct_answer:
+                            score = score + 1
+                            {print}('Yes, that is correct!')
+                        {else}:
+                            {print}('Sorry that was wrong, the correct answer is: ', correct_answer)
+
+                    #Printing the score:
+                    {print}('You are finished.')
+                    {print}('Your final score is: ', score)
+                    ```
             15:
                 story_text: |
                     In this adventure you will build a calculator that calculates your mean grade for you. If you get your calculator to work, you can move on to the next adventure, which allows you to add two extra features.
@@ -774,7 +843,7 @@ adventures:
                 example_code: |
                     ```
                     #Defining a question:
-                    {define} new_question():
+                    {def} new_question():
                         numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                         number_1 = numbers[random]
                         number_2 = numbers[random]
@@ -787,7 +856,7 @@ adventures:
 
                     #Asking the questions:
                     {print}('Give 10 correct answers to win!')
-                    {for} i {in} {range} 1 {to} 10:
+                    {for} i {in} {range}(1, 10):
                         _
                     {print}('You win!')
                     ```
@@ -896,6 +965,95 @@ adventures:
                         subject = {input}('For which subject do you want to calculate your mean grade?')
                         mean_grade = calculate_mean_grade(subject)
                         {print} ('Your mean grade for ', subject, ' is ', mean_grade)
+                    ```
+    carnival:
+        name: carnival
+        default_save_name: carnival
+        description: carnival
+        levels:
+            13:
+                story_text: |
+                    Welcome to the Hedy carnival! We are going to play Tin Can Alley! Knock over the tin cans and choose your price!
+
+                    ### Exercise
+                    Fill in the correct commands after the {if} to get the program to work.
+
+                    * The program should work if the player has not had a turn yet and is younger than 18.
+                    * Then, a list should be displayed showing which prizes the player can choose from.
+                    * If the player has enough points for a prize (see the prize list), that prize should be printed.
+                    * The player can only win the video game if they are 14 years old or older.
+                    * The player can only win the balloon if they are 5 years old or younger.
+
+                example_code: |
+                    ```
+                    #prize list
+                    balloon = 1
+                    lollipop = 2
+                    video_game = 8
+                    teddy_bear = 10
+
+                    {print}('Tin Can Alley!')
+                    age = {input}('How old are you?')
+                    already_had_turn = {input}('Have you already had a turn?')
+
+                    # Which prizes can the player choose?
+                    {if} _ {or} _:
+                        {print}('You may play')
+                        points = {input}('How many points did you score?')
+                        {print}('You can choose from these prizes:')
+
+                        {if} _ :
+                            {print}('teddy bear')
+
+                        {if} _ :
+                            {print}('lollipop')
+
+                        {if} _ {and} _ :
+                            {print}('video game')
+
+                        {if} _ {and} :
+                            {print}('balloon')
+
+                        chosen_prize = {input}('Which prize would you like?')
+                        {print}('Congratulations on your', chosen_prize)
+
+                    {else}:
+                        {print}('Sorry, you may not play')
+                    ```
+                answer_code: |
+                    ```
+                    #prize list
+                    balloon = 1
+                    lollipop = 2
+                    video_game = 8
+                    teddy_bear = 10
+
+                    {print}('Tin Can Alley!')
+                    age = {input}('How old are you?')
+                    already_had_turn = {input}('Have you already had a turn?')
+
+                    {if} already_had_turn != 'yes' {or} age > 18:
+                        {print}('You may play')
+                        points = {input}('How many points did you score?')
+                        {print}('You can choose from these prizes:')
+
+                        {if} points >= teddy_bear:
+                            {print}('teddy bear')
+
+                        {if} points >= lollipop:
+                            {print}('lollipop')
+
+                        {if} age >= 14 {and} points >= video_game:
+                            {print}('video game')
+
+                        {if} age <= 5 {and} points >= balloon:
+                            {print}('balloon')
+
+                        chosen_prize = {input}('Which prize would you like?')
+                        {print}('Congratulations on your', chosen_prize)
+
+                    {else}:
+                        {print}('Sorry, you may not play')
                     ```
     clear_command:
         name: '{clear}'
@@ -2375,10 +2533,10 @@ adventures:
                     #Asking questions:
                     answer = {input}('What is 2 + 2?')
                     {if} answer == 4:
-                        {print} 'Right!'
+                        {print}('Right!')
                         play_happy_tune()
-                    {else}
-                        {print} 'Wrong!'
+                    {else}:
+                        {print}('Wrong!')
                     ```
                 answer_code: |-
                     ```
@@ -2394,10 +2552,10 @@ adventures:
 
                     answer = {input}('What is 2 + 2?')
                     {if} answer == 4:
-                        {print} 'Right!'
+                        {print}('Right!')
                         play_happy_tune()
                     {else}
-                        {print} 'Wrong!'
+                        {print}('Wrong!')
                         play_sad_tune()
                     ```
     functions_2:
@@ -2470,8 +2628,8 @@ adventures:
                         discount_amount = amount * percentage
                         {return} amount - discount_amount
 
-                    old_price = {input} ('How much is on the price tag?')
-                    discount = {input} ('What percentage is the discount?')
+                    old_price = {input}('How much is on the price tag?')
+                    discount = {input}('What percentage is the discount?')
 
                     new_price = _ calculate_new_price(old_price, _)
                     {print}('The new price is ', new_price, ' dollar')
@@ -2490,6 +2648,32 @@ adventures:
                     {print}('The new price is ', new_price ', dollar')
 
                     ```
+    greater_than_command:
+        name: greater than and less than
+        default_save_name: greater than and less than
+        description: greater than and less than command
+        levels:
+            13:
+                story_text: |
+                    From mathematics, you might already know the symbols the `<` and `>`.
+                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
+                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
+                    Try it!
+                example_code: |
+                    ```
+                    age = {input}('How old are you?')
+                    {if} age > 12:
+                        {print}('You are older than I am!')
+                    ```
+                    ```
+                    age = {input}('How old are you?')
+                    {if} age < 12:
+                        {print}('You are younger than me!')
+                    {else}:
+                        {print}('You are older than me!')
+                    ```
+                answer_code: |
+                    Own answer
     guess_my_number:
         name: guess my number
         default_save_name: guess my number
@@ -2510,32 +2694,32 @@ adventures:
                     game = 'on'
 
                     #Playing the game:
-                    {for} i {in} {range} (1, 10):
+                    {for} i {in} {range}(1, 10):
                         {if} game == 'on':
                             guess = {input}('Which number do you think it is?')
-                            {if} guess _ number
-                                {print} ('Lower!')
-                            {if} guess _ number
-                                {print} ('Higher!')
-                            {if} guess _ number
-                                {print} '(You win!')
+                            {if} guess _ number:
+                                {print}('Lower!')
+                            {if} guess _ number:
+                                {print}('Higher!')
+                            {if} guess _ number:
+                                {print}('You win!')
                                 game = 'over'
                     ```
                 answer_code: |
                     ```
-                    {print} 'Guess my number between 1 and 10'
+                    {print}('Guess my number between 1 and 10')
                     numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                    number = numbers[random]
+                    number = numbers[{random}]
                     game = 'on'
-                    {for} i {in} {range} (1,10):
+                    {for} i {in} {range}(1,10):
                         {if} game == 'on':
-                            guess = {ask} 'Which number do you think it is?'
+                            guess = {input}('Which number do you think it is?')
                             {if} guess > number:
-                                {print} 'Lower!'
+                                {print}('Lower!')
                             {if} guess < number:
-                                {print} 'Higher!'
+                                {print}('Higher!')
                             {if} guess == number:
-                                {print} 'You win!'
+                                {print}('You win!')
                                 game = 'over'
                     ```
     harry_potter:
@@ -2591,7 +2775,7 @@ adventures:
                     {print} But how did I end up on the floor...?
                     {print} My head hurts like Ive been hit by a baseball bat!
                     {print} What's that sound?
-                    {print} Oh no! I feel like Im not alone in this house!
+                    {print} Oh no! I feel like I'm not alone in this house!
                     {print} I need to get out of here!
                     {print} There are 3 doors in front of me..
                     {ask} Which door should i pick?
@@ -2827,23 +3011,23 @@ adventures:
                     weapons = ['ham', 'lighter', 'garlic']
 
                     #Telling the story of the haunted house:
-                    {print} ('You are standing in front of an old mansion')
-                    {print} ('Something is not right here')
-                    {print} ('You hear ', _)
-                    {print} ('You are going to explore it')
-                    {print} ('You enter the kitchen and see a lighter, a raw ham and a garlic.')
-                    your_weapon = {input} ('What do you bring with you?')
-                    {print} ('With your ', your_weapon, ' you enter the living room')
-                    {print} ('There you find a ', _)
+                    {print}('You are standing in front of an old mansion')
+                    {print}('Something is not right here')
+                    {print}('You hear ', _)
+                    {print}('You are going to explore it')
+                    {print}('You enter the kitchen and see a lighter, a raw ham and a garlic.')
+                    your_weapon = {input}('What do you bring with you?')
+                    {print}('With your ', your_weapon, ' you enter the living room')
+                    {print}('There you find a ', _)
                     needed_weapon = _
                     {if} your_weapon == needed_weapon:
-                        {print} ('You use your ', your_weapon)
+                        {print}('You use your ', your_weapon)
                         {print} _
-                        {print} ('YOU WIN!')
+                        {print}('YOU WIN!')
                     {else}:
-                        {print} ('You have chosen the wrong weapon...')
+                        {print}('You have chosen the wrong weapon...')
                         {print} _
-                        {print} ('GAME OVER')
+                        {print}('GAME OVER')
                     ```
                 answer_code: |
                     ```
@@ -2854,23 +3038,23 @@ adventures:
                     bad_fate = ['Your brain is eaten', 'You are forever cursed', 'You are bitten']
                     good_fate = ['You throw the ham. The zombie is distracted and starts eating it.', 'You set the curtains on fire. The witch flees out of fear for the fire', 'The vampire hates garlic and flees']
                     weapons = ['ham', 'lighter', 'garlic']
-                    {print} ('You are standing in front of an old mansion')
-                    {print} ('Something is not right here')
-                    {print} ('You hear ', hint[i])
-                    {print} ('You are going to explore it')
-                    {print} ('You enter the kitchen and see a lighter, a raw ham and a garlic.')
-                    your_weapon = input ('What do you bring with you?')
-                    {print} ('With your ', your_weapon, ' you enter the living room')
-                    {print} ('There you find a ', monsters[i])
+                    {print}('You are standing in front of an old mansion')
+                    {print}('Something is not right here')
+                    {print}('You hear ', hint[i])
+                    {print}('You are going to explore it')
+                    {print}('You enter the kitchen and see a lighter, a raw ham and a garlic.')
+                    your_weapon = {input}('What do you bring with you?')
+                    {print}('With your ', your_weapon, ' you enter the living room')
+                    {print}('There you find a ', monsters[i])
                     needed_weapon = weapons[i]
                     {if} your_weapon == needed_weapon:
-                        {print} ('You use your ', your_weapon)
-                        {print} good_fate[i]
-                        {print} ('YOU WIN!')
+                        {print}('You use your ', your_weapon)
+                        {print}(good_fate[i])
+                        {print}('YOU WIN!')
                     {else}:
-                        {print} ('You have chosen the wrong weapon...')
-                        {print} bad_fate[i]
-                        {print} ('GAME OVER')
+                        {print}('You have chosen the wrong weapon...')
+                        {print}(bad_fate[i])
+                        {print}('GAME OVER')
                     ```
     hospital:
         name: hospital
@@ -3195,7 +3379,7 @@ adventures:
                     The program should:
                     * Paint a red cross with the drawing turtle.
                     * Make a siren sound after finishing the red cross.
-                    HINT: use the repeat command.
+                    HINT: use the `{repeat}` command.
                 answer_code: |
                     ```
                     {color} red
@@ -3553,18 +3737,18 @@ adventures:
                 example_code: |
                     ```
                     {def} welcome_message(title, last_name, country, room_number):
-                        {print} ('Welcome to Hotel Hedy, ', title, ' ', last_name)
-                        nice_trip {is} {input} ('Did you have a nice trip from ', country, '?')
+                        {print}('Welcome to Hotel Hedy, ', title, ' ', last_name)
+                        nice_trip = {input}('Did you have a nice trip from ', country, '?')
                         {if} nice_trip == 'yes':
-                            {print} ('Lovely!')
+                            {print}('Lovely!')
                         {else}:
-                            {print} ('Sorry to hear that.')
-                            {print} ('Hopefully you can take a nice rest in you room.')
-                        {print} ('Your room number is ', room_number)
+                            {print}('Sorry to hear that.')
+                            {print}('Hopefully you can take a nice rest in you room.')
+                        {print}('Your room number is ', room_number)
 
-                    {print} ('Hello. Please fill in your information to check in.')
-                    title = {input} ('What is your title (mr, mrs, ms, dr, etc.)?')
-                    name = {input} ('What is your last name?')
+                    {print}('Hello. Please fill in your information to check in.')
+                    title = {input}('What is your title (mr, mrs, ms, dr, etc.)?')
+                    name = {input}('What is your last name?')
                     homecountry = {input}('What country do you come from?')
 
                     welcome_message(title, name, homecountry, 105)
@@ -3693,6 +3877,13 @@ adventures:
                     {else}:
                         {print}("Meh, I don't agree")
                     ```
+                    ```
+                    name = {input}('What is your name?')
+                    {if} name _ 'Hedy':
+                        {print}('You are cool!')
+                    {else} _
+                        {print} ('Nice to meet you!')
+                    ```
                 answer_code: |
                     Own answer
     in_command:
@@ -3785,34 +3976,6 @@ adventures:
                     ```
                 answer_code: |
                     Own answer
-            13:
-                story_text: |
-                    From mathematics, you might already know the symbols the `<` and `>`.
-                    The `<` checks if the first number is smaller than the second, for example age `<` 12 checks if age is smaller than 12.
-                    The `>` checks if the first number is bigger than the second, for example points `>` 10 checks if points is larger than 10.
-                    Try it!
-                example_code: |
-                    ```
-                    age = {input}('How old are you?')
-                    {if} age > 12:
-                        {print}('You are older than I am!')
-                    ```
-                    ```
-                    age = {input}('How old are you?')
-                    {if} age < 12:
-                        {print}('You are younger than me!')
-                    {else}:
-                        {print}('You are older than me!')
-                    ```
-
-                    ```
-                    name = {input}('What is your name?')
-                    {if} name __ 'Hedy':
-                        {print}('You are cool!')
-                    {else}_
-                        {print} ('Nice to meet you!')
-                answer_code: |
-                    Own answer
     language:
         name: language
         default_save_name: Language
@@ -3867,17 +4030,17 @@ adventures:
 
                     #Practising the words:
                     score = 0
-                    {for} i {in} {range} (1,3):
-                        answer = {input} ('What does ', french_words[i], ' mean?')
+                    {for} i {in} {range}(1,3):
+                        answer = {input}('What does ', french_words[i], ' mean?')
                         correct = translation[i]
                         {if} answer == correct:
-                            {print} ('Correct!')
+                            {print}('Correct!')
                             score = score + 1
                         {else}:
-                            {print} ('Wrong, ', french_words[i], ' means ', translation[i])
+                            {print}('Wrong, ', french_words[i], ' means ', translation[i])
                     
                     #Printing the score:
-                    {print} ('You gave ', score, ' correct answers.')
+                    {print}('You gave ', score, ' correct answers.')
                     ```
                 answer_code: |
                     ```
@@ -3885,14 +4048,14 @@ adventures:
                     translation = ['hello', 'okay', 'I love you']
                     score = 0
                     {for} i {in} {range}(1,3):
-                        answer = {ask} 'What does ' spanish_words[i] ' mean?'
+                        answer = {input}('What does ', spanish_words[i], ' mean?')
                         correct_answer = translation[i]
-                        {if} answer == correct_answer
-                            {print} 'Correct!'
+                        {if} answer == correct_answer:
+                            {print}('Correct!')
                             score = score + 1
-                        {else}
-                            {print} 'Wrong, ' spanish_words[i] ' means ' translation[i]
-                    {print} 'You gave ' score ' correct answers.'
+                        {else}:
+                            {print}('Wrong, ', spanish_words[i], ' means ', translation[i])
+                    {print}('You gave ', score, ' correct answers.')
                     ```
     lists:
         name: lists
@@ -3908,25 +4071,84 @@ adventures:
                 example_code: |
                     ```
                     friends = ['Ahmed', 'Ben', 'Cayden']
-                    {print} (friends[1], ' is the first friend on the list.')
-                    {print} (friends[2], ' is the second friend on the list.')
-                    {print} (friends[3], ' is the third friend on the list.')
+                    {print}(friends[1], ' is the first friend on the list.')
+                    {print}(friends[2], ' is the second friend on the list.')
+                    {print}(friends[3], ' is the third friend on the list.')
                     ```
                 story_text_2: |
                     You can also still check if an element is in the list. Like in the example:
 
                 example_code_2: |
                     ```
-                    {print} ('Welcome in our shop!')
+                    {print}('Welcome in our shop!')
                     product = {input}('What would you like to buy?')
                     stock = ['apple', 'milk', 'cheese']
                     {if} product {in} stock:
-                        {print} ('Great. That is possible!')
+                        {print}('Great. That is possible!')
                     {else}:
-                        {print} ('Unfortunately, we do not have ', product)
+                        {print}('Unfortunately, we do not have ', product)
                     ```
                 answer_code: |
                     Own answer
+    market:
+        name: market
+        default_save_name: market
+        description: market
+        levels:
+            13:
+                story_text: | 
+                    In this adventure you can write a code for a market. Take a look at the example code. 
+                    In this market they sell apples, bread and cheese. Can you tell customers how much each product costs and ask them how much they want to buy?
+                    Maybe you can even add extra products to this market. Make sure you also tell the customer how much he has to pay.
+                example_code: |
+                    ```
+                    #Introducing to the Hedy market:
+                    {print}('Welcome to the Hedy market!')
+                    {print}('Here, we sell bread, apples and cheese')
+                    
+                    #Asking how much you want to buy:
+                    price_bread = 5
+                    {print}('One bread costs ', _ )
+                    bread_number = {input}('How many loafs of bread would you like to buy?')
+                    total_bread = price_bread * _
+
+                    price_apple =
+
+
+                    #Telling to total price:
+
+
+
+
+                    ```
+                answer_code: |
+                    ```
+                    #Introducing to the Hedy market:
+                    {print}('Welcome to the Hedy market!')
+                    {print}('Here, we sell bread, apples and cheese')
+                    
+                    #Asking how much you want to buy:
+                    price_bread = 5
+                    {print}('One bread costs ', price_bread)
+                    bread_number = {input}('How many loafs of bread would you like to buy?')
+                    total_bread = price_bread*bread_number
+
+                    price_apple = 1
+                    {print}('One apple costs ', price_apple)
+                    apple_number = {input}('How many loafs of bread would you like to buy?')
+                    total_apple = price_apple*apple_number
+
+                    price_cheese = 8
+                    {print}('One piece of cheese costs ', price_cheese )
+                    cheese_number = {input}('How many pieces of cheese would you like to buy?')
+                    total_cheese = price_cheese*cheese_number
+
+                    #Telling to total price:
+                    total = total_bread + total_apple + total_cheese
+                    print('That will be ', total, ' in total.' )
+                    print('Have a nice day!')
+
+                    ```
     maths:
         name: maths
         default_save_name: maths
@@ -4456,7 +4678,7 @@ adventures:
                 example_code: |
                     ```
                     {def} fire_alarm():
-                        {print} 'FIRE!'
+                        {print}('FIRE!')
                         {for} i {in} {range} _
                             {play} 45
                             {play} 50
@@ -4468,13 +4690,13 @@ adventures:
                 answer_code: |
                     ```
                     {def} fire_alarm():
-                        {print} 'FIRE!'
-                        {for} i {in} {range} (1,20)
+                        {print}('FIRE!')
+                        {for} i {in} {range}(1,20):
                             {play} 45
                             {play} 50
 
-                    fire = {ask} 'Is there a fire?'
-                    {if} fire == 'yes'
+                    fire = {input}('Is there a fire?')
+                    {if} fire == 'yes':
                         fire_alarm()
                     ```
             16:
@@ -4486,17 +4708,17 @@ adventures:
                     Finish the never-ending song.
                 example_code: |
                     ```
-                    {def} song
+                    {def} song():
                         {play} _
 
                     yes_or_no = {input}('Do you want to hear my never-ending song?')
                     {while} yes_or_no = 'yes':
                         song()
-                        {print} '🥳'
+                        {print}('🥳')
                     ```
                 answer_code: |
                     ```
-                    {def} song ():
+                    {def} song():
                         {play} C3
                         {play} D3
                         {play} E3
@@ -4540,12 +4762,12 @@ adventures:
                     {def} line_3():
                     _
 
-                    {print} ('The drunken sailor')
-                    {print} ('What shall we do with the drunken sailor?')
+                    {print}('The drunken sailor')
+                    {print}('What shall we do with the drunken sailor?')
                     line_1()
                     line_2()
                     line_3()
-                    {print} ('Early in the morning')
+                    {print}('Early in the morning')
                     ```
                 answer_code: |
                     ```
@@ -4578,12 +4800,12 @@ adventures:
                         {play} D
                         {play} D
 
-                    {print} ('The drunken sailor')
-                    {print} ('What shall we do with the drunken sailor?')
+                    {print}('The drunken sailor')
+                    {print}('What shall we do with the drunken sailor?')
                     line_1()
                     line_2()
                     line_3()
-                    {print} ('Early in the morning')
+                    {print}('Early in the morning')
                     line_4()
                     ```
     music_3:
@@ -4601,7 +4823,7 @@ adventures:
                     Can you think of another song to program this way?
                 example_code: |
                     ```
-                    {print} 'Yankee Doodle'
+                    {print}('Yankee Doodle')
                     {def} _ (note_1, note_2, note_3):
                         {play} C4
                         {play} C4
@@ -4625,7 +4847,7 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} 'Yankee Doodle'
+                    {print}('Yankee Doodle')
                     {def} tune (note_1, note_2, note_3):
                         {play} C4
                         {play} C4
@@ -4675,6 +4897,77 @@ adventures:
                     ```
                 answer_code: |
                     Own answer
+    park:
+        name: amusement park
+        default_save_name: amusement park
+        description: amusement park
+        levels:
+            13:
+                story_text: | 
+                    This adventure is about an amusment park with some attractions. However, to attend the attractions you need to meet certain requirements concerning height and age for example.
+                    Finish the example code. For the haunted house there is a minimum age. The rollercoaster you cannot ride if you have fear of heights of course. Add a minimum length to the rollercoaster.
+                    The carousel is the attraction for the little kids. So, add a maximum age for it. Feel free to add more attractions!
+                example_code: |
+                    ```
+                    {print}("Welcome to our amsument park: 'Hedy High'")
+                    {print}("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
+
+                    #Try one of the three attractions:
+                    attraction = {input}('Which attraction would you like to try?')
+
+                    {if} attraction == 'Haunted house':
+                        age = {input}('How old are you?')
+                        {if} age > 12:
+                            {print}('You are old enough. Enjoy getting scared!')
+                        _ :
+                            {print}('Sorry, you have to wait till you are old enough.')
+                    
+                    {if} attraction == 'Rollercoaster':
+                        fear = {input}('Are you afraid of heights?')
+                        {if} fear == 'yes':
+                            {print}('Sorry, it is better for you to stay on the ground.')
+                        {elif} _ :
+                            height = _
+
+                    {if} attraction == 'Carousel':
+                        _
+
+                        ```
+                answer_code: |
+                        ```
+                        {print}("Welcome to our amsument park: 'Hedy High'")
+                        {print}("In this park we have three main atractions: Haunted house, Rollercoaster and Carousel." )
+
+                        #Try one of the three attractions:
+                        attraction = {input}('Which attraction would you like to try?')
+
+                        {if} attraction == 'Haunted house':
+                            age = {input}('How old are you?')
+                            {if} age > 12:
+                                {print}('You are old enough. Enjoy getting scared!')
+                            {else}:
+                                {print}('Sorry, you have to wait till you are old enough.')
+                        
+                        {if} attraction == 'Rollercoaster':
+                            fear = {input}('Are you afraid of heights?')
+                            {if} fear == 'yes':
+                                {print}('Sorry, it is better for you to stay on the ground.')
+                            {elif} fear == 'no' :
+                                height = {input}('What is your length in centimetres')
+                                {if} height > 150:
+                                    {print}('Enjoy your ride!')
+                                {else}:
+                                    {print}('Sorry you are not tall enough')
+
+
+                        {if} attraction == 'Carousel':
+                            age = {input}('How old are you?')
+                            {if} age < 10:
+                                {print}('This is a perfect attraction for you. Enjoy!')
+                            {else}:
+                                {print}('Sorry you are too old.')
+
+                        ```
     parrot:
         name: parrot
         default_save_name: Parrot
@@ -4685,7 +4978,7 @@ adventures:
                     Create your own online pet parrot that will copy you!
                 example_code: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} I'm Hedy the parrot
                     {ask} What's your name?
                     {print} {answer}
                     {print} {answer}
@@ -4697,13 +4990,13 @@ adventures:
                     **Extra** You can also let the parrot ask multiple questions. Type in some more lines of code beneath your own code.
                 example_code_2: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} I'm Hedy the parrot
                     {ask} _
                     {print} {answer}
                     {print} {answer}
                 answer_code: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} I'm Hedy the parrot
                     {ask} What is your favorite word?
                     {print} {answer}
                     {print} {answer}
@@ -4717,7 +5010,7 @@ adventures:
                     We will also make the parrot more life-like by adding `{sleep}` commands after something is said.
                 example_code: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} I'm Hedy the parrot
                     name _ _ what is your name?
                     {print} name
                     _
@@ -4733,7 +5026,7 @@ adventures:
                     **Extra** Can you make the parrot ask for more then only your name by adding more lines of code?
                 answer_code: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} I'm Hedy the parrot
                     name is {ask} what is your name?
                     {print} name
                     {sleep} 2
@@ -4775,7 +5068,7 @@ adventures:
                     {print} _ Train your parrot! _
                     new_word {is} {ask} _ Which word do you want to teach them? _
                     {add} new_word {to_list} words
-                    {print} _ 🧒 Say _ new_word _, Hedy!_
+                    {print} _ 🧒 Say _ new_word _ , Hedy! _
                     {print} _ 🦜 _ words {at} {random}
                     ```
                 answer_code: |
@@ -4864,11 +5157,11 @@ adventures:
                         to_save = wish - money
                         weeks = to_save / allowance
                         {if} wish _ money:
-                            {print} ('You need to save up some more!')
-                            {print} ("You'll need ', weeks, ' more weeks.")
+                            {print}('You need to save up some more!')
+                            {print}("You'll need ', weeks, ' more weeks.")
                         {else}:
-                            {print} ('Great! You have enough')
-                            {print} ("Let's go shopping!")
+                            {print}('Great! You have enough')
+                            {print}("Let's go shopping!")
 
                     money = {input}('How much money have you saved?')
                     wish = {input}('How much money do you need?')
@@ -4947,7 +5240,7 @@ adventures:
                     ```
                     ```
                     name = 'Hedy'
-                    {print}_'My name is ', name_
+                    {print} _ 'My name is ', name _
                     ```
                 answer_code: |
                     Own answer
@@ -4963,27 +5256,27 @@ adventures:
                     You can make a quiz about anything you like: your hobby, your favorite animal, your favorite book or anything at all!
                 example_code: |
                     ```
-                    {print} ('Make your own quiz')
+                    {print}('Make your own quiz')
                     points_a = 0
                     points_b = 0
 
                     #Playing the quiz:
-                    {print} ('Question')
-                    {print} ('Answer option A')
-                    {print} ('Answer option B')
-                    answer = {ask} 'Which answer?'
-                    {if} answer {is} 'A':
+                    {print}('Question')
+                    {print}('Answer option A')
+                    {print}('Answer option B')
+                    answer = {input}('Which answer?')
+                    {if} answer == 'A':
                         points_a = points_a + 1
-                    {if} answer {is} 'B':
+                    {if} answer == 'B':
                         points_b = points_b + 1
 
                     #Printing the endresults:
-                    {print} 'End of the quiz!'
-                    {print} 'Lets see the results!'
+                    {print}('End of the quiz!')
+                    {print}('Lets see the results!')
                     {if} points_a > points_b:
-                        {print} ('You belong to the A club')
+                        {print}('You belong to the A club')
                     {if} points_b > points_a:
-                        {print} ('You belong to the B club')
+                        {print}('You belong to the B club')
                     ```
                 answer_code: |
                     Own answer
@@ -5008,7 +5301,7 @@ adventures:
                 story_text_2: |
                     ## Contractions
                     Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to use double quotes when you're using an apostrophe in you line!
+                    Make sure to use double quotes when you're using an apostrophe in your line!
                     Check out the example code to see the wrong way of using apostrophes.
                 example_code_2: |
                     ```
@@ -5069,7 +5362,7 @@ adventures:
                 example_code: |-
                     ```
                     fruit = ['apple', 'banana', 'cherry']
-                    {print} (fruit[random])
+                    {print}(fruit[random])
                     ```
                 story_text_2: |-
                     ### Exercise
@@ -5077,12 +5370,12 @@ adventures:
                 example_code_2: |-
                     ```
                     names = _'Sarah', 'Jason', 'Meghan'_
-                    {print} ('The winner is:' _ )
+                    {print}('The winner is:' _ )
                     ```
                 answer_code: |
                     ```
                     names = ['Sarah', 'Jason', 'Meghan']
-                    {print} ('The winner is:' names[random] )
+                    {print}('The winner is:' names[random] )
                     ```
     repeat_command:
         name: '{repeat}'
@@ -5606,13 +5899,13 @@ adventures:
                     ```
                 answer_code: |
                     ```
-                    {print} ('Welcome at McHedy')
+                    {print}('Welcome at McHedy')
                     more = 'yes'
                     {while} more == 'yes':
                         order = {input}('What would you like to order?')
-                        {print} ( order )
+                        {print}( order )
                         more = {input}('Would you like to order anything else?')
-                    {print} ('Thank you!')
+                    {print}('Thank you!')
                     ```
     rock:
         name: rock, paper, scissors
@@ -5699,7 +5992,7 @@ adventures:
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
-                    {print} _The computer chooses..._ choices {at} {random}
+                    {print} _ The computer chooses... _ choices {at} {random}
                     ```
                 answer_code: |
                     ```
@@ -6131,46 +6424,46 @@ adventures:
                     sounds = ['oink', 'woof', 'moo']
 
                     #Singing Old MacDonald with three animals:
-                    {for} i {in} {range} (1, 3)
+                    {for} i {in} {range}(1, 3):
                         animal = _
                         sound = _
-                        {print} 'Old MacDonald had a farm'
-                        {print} 'E I E I O!'
-                        {print} 'and on that farm he had a ' animal
-                        {print} 'E I E I O!'
-                        {print} 'with a ' sound sound ' here'
-                        {print} 'and a ' sound sound ' there'
-                        {print} 'here a ' sound
-                        {print} 'there a ' sound
-                        {print} 'everywhere a ' sound sound
+                        {print}('Old MacDonald had a farm')
+                        {print}('E I E I O!')
+                        {print}('and on that farm he had a ', animal)
+                        {print}('E I E I O!')
+                        {print}('with a ', sound sound, ' here')
+                        {print}('and a ', sound sound, ' there')
+                        {print}('here a ', sound)
+                        {print}('there a ', sound)
+                        {print}('everywhere a ', sound sound)
                     ```
 
                     ```
                     lines = ['what shall we do with the drunken sailor', 'shave his belly with a rusty razor', "put him in a long boat till he's sober"]
-                    {for} line {in} lines
-                        {for} i {in} {range} (1, 3)
-                            {print} line
-                        {print} 'early in the morning'
-                        {for} i {in} {range} (1, 3)
-                            {print} 'way hay and up she rises'
-                        {print} 'early in the morning'
+                    {for} line {in} lines:
+                        {for} i {in} {range}(1, 3):
+                            {print}(line)
+                        {print}('early in the morning')
+                        {for} i {in} {range}(1, 3):
+                            {print}('way hay and up she rises')
+                        {print}('early in the morning')
                     ```
                 answer_code: |
                     ```
                     animals = ['pig', 'dog', 'cow']
                     sounds = ['oink', 'woof', 'moo']
-                    {for} i {in} {range} (1, 3):
+                    {for} i {in} {range}(1, 3):
                         animal = animals[i]
                         sound = sounds[i]
-                        {print} 'Old MacDonald had a farm'
-                        {print} 'E I E I O!'
-                        {print} 'and on that farm he had a ' animal
-                        {print} 'E I E I O!'
-                        {print} 'with a ' sound sound ' here'
-                        {print} 'and a ' sound sound ' there'
-                        {print} 'here a ' sound
-                        {print} 'there a ' sound
-                        {print} 'everywhere a ' sound sound
+                        {print}('Old MacDonald had a farm')
+                        {print}('E I E I O!')
+                        {print}('and on that farm he had a ', animal)
+                        {print}('E I E I O!')
+                        {print}('with a ', sound sound, ' here')
+                        {print}('and a ', sound sound, ' there')
+                        {print}('here a ', sound)
+                        {print}('there a ', sound)
+                        {print}('everywhere a ', sound sound)
                     ```
             15:
                 story_text: |
@@ -6180,15 +6473,15 @@ adventures:
                     Create a similar interactive program with the childrens' song 'Down by the bay'.
                 example_code: |
                     ```
-                    {define} song (place)
-                        {print} 'My Bonnie is ' place
+                    {def} song(place):
+                        {print}('My Bonnie is ', place)
 
-                    chosen_place = {ask} 'Where do you want Bonnie to be?'
-                    synonym = {ask} 'What is another word for that?'
+                    chosen_place = {input}('Where do you want Bonnie to be?')
+                    synonym = {input}('What is another word for that?')
 
                     song(chosen_place)
                     song(synonym)
-                    song (chosen_place)
+                    song(chosen_place)
                     ```
                 example_code_2: |
                     ```
@@ -6293,6 +6586,38 @@ adventures:
                     {print} 'Up above the world so high'
                     {print} 'Like a diamond in the sky'
                     {call} twinkle
+                    ```
+            14: 
+                story_text: |
+                    We start with singing the song about ducks, starting with a ten ducks but one by one they get lost. 
+                    Finish the code. Write a for-loop with the ten verses you want to sing. At the end of every verse, make sure that one duck less comes back.
+                example_code: |
+                    ```
+                    #singing the duck song:
+
+                    {for} i _ :
+                        ducks = 10-i
+                        {print}( _ , ' little ducks went swimming one day')
+                        {print}('Over the hill and far away')
+                        {print}("Mother duck said: 'quack, quack, quack' ")
+                        ducks_minus = ducks-1
+                        {print}('But only ' _ )
+                        
+
+                    ```
+                answer_code: |
+                    ```
+                    #singing the duck song:
+
+                    {for} i {in} {range}(0, 10):
+                        ducks = 10-i
+                        {print}(ducks, ' little ducks went swimming one day')
+                        {print}('Over the hill and far away')
+                        {print}("Mother duck said: 'quack, quack, quack' ")
+                        ducks_minus = ducks-1
+                        {print}('But only ', ducks_minus, ' came back.' )
+                        
+
                     ```
     turtle:
         name: turtle
@@ -7579,11 +7904,11 @@ adventures:
                     </div>
                 example_code: |
                     ```
-                    {def} calculate_degrees(amount_of_sides)
+                    {def} calculate_degrees(amount_of_sides):
                         degrees = 360 / _
                         _ degrees
 
-                    {def} draw_figure(degrees, amount_of_sides)
+                    {def} draw_figure(degrees, amount_of_sides):
                         {for} i {in} {range} _
                             {forward} 70
                             {turn} _
@@ -7621,7 +7946,7 @@ adventures:
                     Spiral
                     ```
                     distance = 5
-                    {while} distance < 200
+                    {while} distance < 200:
                         distance = distance + 5
                          _
                     ```
@@ -7630,11 +7955,11 @@ adventures:
                 example_code_2: |
                     Fan
                     ```
-                    {define} draw_a_square(side)
+                    {def} draw_a_square(side):
                     _
 
                     i = 100
-                    {while} i > 1
+                    {while} i > 1:
                         _(i)
                         _
                         i = i - 3
@@ -7647,7 +7972,7 @@ adventures:
                 answer_code: |
                     ```
                     distance = 5
-                    {while} distance < 200
+                    {while} distance < 200:
                         distance = distance + 5
                         {forward} distance
                         {turn} 90
@@ -7660,7 +7985,7 @@ adventures:
                             {turn} 90
 
                     i = 100
-                    {while} i > 1
+                    {while} i > 1:
                         draw_a_square(i)
                         {turn} 10
                         i = i - 3
