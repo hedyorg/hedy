@@ -189,7 +189,7 @@ adventures:
                     Or you could have your player choose which road to take, which door to open, or which magical potion to drink...
 
                     ### Exercise
-                    Create your own story with 3 or more options using the {elif}.
+                    Create your own story with 3 or more options using the `{elif}`.
                 example_code: |
                     ```
                     character {is} {ask} 'Who will help you on your quest?'
@@ -4775,7 +4775,7 @@ adventures:
                     {print} _ Train your parrot! _
                     new_word {is} {ask} _ Which word do you want to teach them? _
                     {add} new_word {to_list} words
-                    {print} _ 🧒 Say _ new_word _, Hedy!_
+                    {print} _ 🧒 Say _ new_word _ , Hedy! _
                     {print} _ 🦜 _ words {at} {random}
                     ```
                 answer_code: |
@@ -5008,7 +5008,7 @@ adventures:
                 story_text_2: |
                     ## Contractions
                     Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to use double quotes when you're using an apostrophe in you line!
+                    Make sure to use double quotes when you're using an apostrophe in your line!
                     Check out the example code to see the wrong way of using apostrophes.
                 example_code_2: |
                     ```
@@ -5699,7 +5699,7 @@ adventures:
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
-                    {print} _The computer chooses..._ choices {at} {random}
+                    {print} _ The computer chooses... _ choices {at} {random}
                     ```
                 answer_code: |
                     ```
