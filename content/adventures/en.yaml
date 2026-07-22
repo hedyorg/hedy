@@ -189,7 +189,7 @@ adventures:
                     Or you could have your player choose which road to take, which door to open, or which magical potion to drink...
 
                     ### Exercise
-                    Create your own story with 3 or more options using the {elif}.
+                    Create your own story with 3 or more options using the `{elif}`.
                 example_code: |
                     ```
                     character {is} {ask} 'Who will help you on your quest?'
@@ -2775,7 +2775,7 @@ adventures:
                     {print} But how did I end up on the floor...?
                     {print} My head hurts like Ive been hit by a baseball bat!
                     {print} What's that sound?
-                    {print} Oh no! I feel like Im not alone in this house!
+                    {print} Oh no! I feel like I'm not alone in this house!
                     {print} I need to get out of here!
                     {print} There are 3 doors in front of me..
                     {ask} Which door should i pick?
@@ -4978,7 +4978,7 @@ adventures:
                     Create your own online pet parrot that will copy you!
                 example_code: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} I'm Hedy the parrot
                     {ask} What's your name?
                     {print} {answer}
                     {print} {answer}
@@ -4990,13 +4990,13 @@ adventures:
                     **Extra** You can also let the parrot ask multiple questions. Type in some more lines of code beneath your own code.
                 example_code_2: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} I'm Hedy the parrot
                     {ask} _
                     {print} {answer}
                     {print} {answer}
                 answer_code: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} I'm Hedy the parrot
                     {ask} What is your favorite word?
                     {print} {answer}
                     {print} {answer}
@@ -5010,7 +5010,7 @@ adventures:
                     We will also make the parrot more life-like by adding `{sleep}` commands after something is said.
                 example_code: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} I'm Hedy the parrot
                     name _ _ what is your name?
                     {print} name
                     _
@@ -5026,7 +5026,7 @@ adventures:
                     **Extra** Can you make the parrot ask for more then only your name by adding more lines of code?
                 answer_code: |
                     ```
-                    {print} Im Hedy the parrot
+                    {print} I'm Hedy the parrot
                     name is {ask} what is your name?
                     {print} name
                     {sleep} 2
@@ -5068,7 +5068,7 @@ adventures:
                     {print} _ Train your parrot! _
                     new_word {is} {ask} _ Which word do you want to teach them? _
                     {add} new_word {to_list} words
-                    {print} _ 🧒 Say _ new_word _, Hedy!_
+                    {print} _ 🧒 Say _ new_word _ , Hedy! _
                     {print} _ 🦜 _ words {at} {random}
                     ```
                 answer_code: |
@@ -5301,7 +5301,7 @@ adventures:
                 story_text_2: |
                     ## Contractions
                     Important! Mind that now that we're using quotation marks, Hedy will get confused when you use the apostrophe for contractions like I'm or What's.
-                    Make sure to use double quotes when you're using an apostrophe in you line!
+                    Make sure to use double quotes when you're using an apostrophe in your line!
                     Check out the example code to see the wrong way of using apostrophes.
                 example_code_2: |
                     ```
@@ -5992,7 +5992,7 @@ adventures:
                 example_code: |
                     ```
                     choices {is} rock, paper, scissors
-                    {print} _The computer chooses..._ choices {at} {random}
+                    {print} _ The computer chooses... _ choices {at} {random}
                     ```
                 answer_code: |
                     ```
