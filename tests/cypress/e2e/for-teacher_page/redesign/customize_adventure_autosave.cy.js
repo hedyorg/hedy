@@ -153,12 +153,14 @@ describe('Customize adventure redesign autosave', () => {
     });
 
     let expectedLevel;
+    let expectedLevelIncluded;
     cy.get('input[name="adventure_levels"]').then(($levels) => {
       const levelElements = Array.from($levels);
       const uncheckedLevel = levelElements.find((element) => !element.checked);
 
       if (uncheckedLevel) {
         expectedLevel = uncheckedLevel.value;
+        expectedLevelIncluded = true;
         cy.wrap(uncheckedLevel).check({ force: true });
         return;
       }
@@ -169,12 +171,17 @@ describe('Customize adventure redesign autosave', () => {
       }
 
       expectedLevel = checkedLevel.value;
-      cy.wrap(checkedLevel).check({ force: true });
+      expectedLevelIncluded = false;
+      cy.wrap(checkedLevel).uncheck({ force: true });
     });
 
     waitForSingleUpload('@uploadAdventureDraft', (body) => {
       expect(Array.isArray(body.levels)).to.eq(true);
-      expect(body.levels).to.include(expectedLevel);
+      if (expectedLevelIncluded) {
+        expect(body.levels).to.include(expectedLevel);
+      } else {
+        expect(body.levels).to.not.include(expectedLevel);
+      }
     });
   });
 

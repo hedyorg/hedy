@@ -1,5 +1,17 @@
 import { goToTeachersPage } from "../navigation/nav";
 
+function clickVisibleConfirmButton() {
+    cy.get('body').then(($modalBody) => {
+        if ($modalBody.find('[data-cy="htmx_modal_yes_button"]:visible').length > 0) {
+            cy.getDataCy('htmx_modal_yes_button').click();
+        } else if ($modalBody.find('[data-cy="redesign_confirm_yes_button"]:visible').length > 0) {
+            cy.getDataCy('redesign_confirm_yes_button').click();
+        } else {
+            cy.getDataCy('modal_yes_button').should('be.visible').click();
+        }
+    });
+}
+
 export function createAdventure(name)
 {
     if (name) {
@@ -48,7 +60,7 @@ export function deleteAdventure(name) {
             cy.contains('tr', name).within(() => {
                 cy.get('[data-cy^="delete_adventure_"]').first().click();
             });
-            cy.getDataCy('modal_yes_button').click();
+            clickVisibleConfirmButton();
             cy.getDataCy('adventures_table').should('be.visible');
             return;
         }
@@ -58,13 +70,7 @@ export function deleteAdventure(name) {
             cy.get('[data-cy^="manage_adventure_actions_"]').first().click();
             cy.get('[data-cy^="remove_adventure_"]').first().click();
         });
-        cy.get('body').then(($modalBody) => {
-            if ($modalBody.find('[data-cy="htmx_modal_yes_button"]').length > 0) {
-                cy.getDataCy('htmx_modal_yes_button').click();
-            } else {
-                cy.getDataCy('modal_yes_button').click();
-            }
-        });
+        clickVisibleConfirmButton();
         cy.contains('tr', name).should('not.exist');
     });
 }
