@@ -152,17 +152,16 @@ levels:
                 Zorg dat je leerlingen door hebben dat de computer enkel je instructies zal volgen en zelf niets doet.
                 Als je wilt dat je computer het antwoord print moet je dus expliciet die instructie geven.
         5:
-            header: '{echo}'
+            header: '{answer}'
             text: |-
-                Om het antwoord in het uitvoerscherm te laten zien kan je `{echo}` gebruiken.
-                `{echo}` kan niet los worden gebruikt, maar gaat altijd samen met `{ask}`.
+                Om het antwoord in het uitvoerscherm te laten zien kan je `{answer}` gebruiken.
+                `{answer}` kan niet los worden gebruikt, maar gaat altijd samen met `{ask}`.
             code: |-
                 {print} Hallo!
                 {ask} Wat is je naam?
-                {echo} Hallo
+                {print} Hallo {answer}
             notes: |-
-                Om te zorgen dat de computer het antwoord tegen je herhaalt gebruikt je het commando 'echo.
-                Wijs je leerlingen erop dat het antwoord dat je getypt hebt bij de 'echo' opdracht achter de zin verschijnt.
+                Om te zorgen dat de computer het antwoord tegen je herhaalt gebruikt je het commando 'answer'.
         6:
             header: Programmeren maar!
             text: Hier kan je een lijst van de avonturen vinden.
@@ -179,11 +178,11 @@ levels:
         8:
             header: Laten we beginnen!
             text: |-
-                Dit is een goed moment om de 'Papegaai', 'Spookhuis', 'Verhaal' en 'Steen, Papier, Schaar' avonturen te proberen.
+                Dit is een goed moment om de avonturen te proberen.
                 Gebruik het menu om naar het volgende avontuur te gaan. Wil je de uitleg van een keyword nog eens bekijken, ga dan naar het avontuur met het gloeilampjesicoontje.
             editor: /hedy/1
             notes: |-
-                Dit zijn avonturen om mee te beginnen. Als (de meeste van) je leerlingen klaar zijn, kan je de tekenende schildpad en het '{play}' keywoord aan ze introduceren met de volgende slides.Maar daarvoor is er nog een slide met een debugvoorbeeld.
+                Dit zijn avonturen om mee te beginnen.
         9:
             header: Foutenzoeken
             text: Foutenzoeken (debuggen) in een code betekent dat je de fouten eruit gaat halen.
@@ -193,7 +192,7 @@ levels:
                 Ik ben DJ Hedy
                 {print} Welk liedje wil je horen?
                 {ask} Dat liedje vind ik ook leuk!
-                {print} Het volgende nummer is ... {echo}
+                {print} Het volgende nummer is ... {answer}
             debug: 'True'
             notes: |-
                 **Hoe debug je je code**
@@ -227,8 +226,6 @@ levels:
             notes: |-
                 Laat de leerlingen zien hoe ze het '{play}' commando in Hedy kunnen gebruiken.
                 Dit is ook een goed moment om met je leerlingen te praten over de regels rondom het gebruik van koptelefoons.
-                De leerlingen kunnen nu verder met het muziek avontuur.
-
         11:
             header: 'Tekenen met de schildpad: {forward}'
             text: Met `{forward}` kun je de schildpad vooruit laten bewegen.
@@ -260,8 +257,6 @@ levels:
             debug: 'True'
             notes: |-
                 De debugger kan handig zijn als je een tekening wilt maken.
-                De leerlingen kunnen nu verdergaan met de rest van de avonturen in dit level.
-                The debugger can come in handy when making a drawing. The leerlings can now continue with the rest of the adventures of this level.
         15:
             header: Een korte terugblik...
             text: Wat hebben jullie vandaag geleerd?
@@ -292,7 +287,7 @@ levels:
             header: Welkom bij level 2
             text: |-
                 Aan het eind van deze les kan je:
-                * Iets opslaan in een veriabele
+                * Iets opslaan in een variabele
                 * Een verhaal of tekening maken met behulp van variabelen
             notes: |-
                 Wellicht vinden je leerlingen het lastig om het concept van een variabele te begrijpen.
@@ -305,64 +300,59 @@ levels:
             code: |-
                 {print} Welkom bij ons restaurant!
                 {ask} Wat wil je eten?
-                {echo} Je wil dit graag eten ...
+                {print} Je wil dit graag eten ... {answer}
                 {ask} Wat wil je drinken?
-                {echo} Je wil dit graag drinken ...
+                {print} Je wil dit graag drinken ... {answer}
                 {print} Bedankt voor je bestelling!
-                {echo} Geniet van je ...
+                {print} Geniet van je ... {answer}
             notes: |-
                 Let op: Deze code werkt niet meer in dit level.
                 Laat de leerlingen het programma bekijken en de uitvoer voorspellen.
                 Hopelijk komen ze tot de conclusie dat in de laatste zin alleen wordt gezegd 'Geniet van je (drinken dat ze hebben gekozen)' en dat de computer het eten is vergeten.
-                Met 'echo' kan je maar één item opslaan in het computergeheugen, maar het zou toch veel fijner zijn als dat er meer zouden zijn?! Daarom leren we in dit level werken met variabelen.
+                Met 'ask' kan je maar één item opslaan in het computergeheugen, maar het zou toch veel fijner zijn als dat er meer zouden zijn?! Daarom leren we in dit level werken met variabelen.
         3:
             header: Wat is een variabele?
             text: |-
                 Een variabele is een woord waarin de computer een stukje informatie kan opslaan, zoals jouw antwoorden.
                 Dit klinkt lastig, maar kijk maar eens naar het voorbeeld.
             code: |-
-                eten {is} hamburger
-                drinken {is} water
-                {print} Je wil graag een eten en drinken bestellen.
+                antwoord {is} {ask} Wat is je naam?
+                {print} Hallo antwoord
             notes: |-
                 We gebruiken het woord variabele bij het programmeren om een plek te omschrijven in een computergeheugen waarin informatie wordt opgeslagen, die steeds kan veranderen.
                 De variabele is een soort doos, waarin je de antwoorden stopt. De doos blijft hetzelfde, maar de inhoud kan steeds veranderen.
 
-                Laat aan je leerlingen zien hoe variabelen werken. Laat zien dat de namen van de variabelen in de laatste regel vervangen worden door de waarde van de desbetreffende variabele.
-                Laat ook zien dat je variabelen dus in het midden van een zin kunt gebruiken, in plaats van alleen aan het einde van de zin zoals bij echo.
+                Laat aan je leerlingen zien hoe variabelen werken. Laat zien dat de naam van de variabele in de laatste regel vervangen worden door de waarde van die variabele.
+                
                 Het blauwe vlak dat in je uitvoerscherm verschijnt laat zient welke variabele in jouw programma gebruikt worden en waarop ze zijn ingesteld.
         4:
+            header: Het `{is}` commando
+            text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando. De naam van de variabele komt voor '{is}' en het `{ask}` commando komt erachter. We kunnen zelf de naam van de variabele kiezen en iets anders gebruiken dan `antwoord`.
+            code: |-
+                naam {is} {ask} Wat is je naam?
+                {print} Hallo naam
+            notes: |-
+                Vraag de leerlingen om hun eigen voorbeelden te verzinnen.
+        5:
             header: Variabelen
-            text: Om een variabele te maken of 'in te stellen' gebruiken we het `{is}` commando. De naam van de variabele komt voor '{is}' en de waarde van de variabele komt erachter.
+            text: |-
+                We kunnen ook een variabele instellen zonder een vraag te stellen.
+                De naam van de variabele komt voor `{is}` en de waarde van de variabele komt erachter.
+            code: |-
+                eten {is} hamburger
+                drinken {is} water
+                {print} Ik wil graag een eten.
+                {print} Ik wil graag een beetje drinken.
+            notes: |-
+                Vraag de leerlingen om hun eigen voorbeelden te verzinnen.
+        6:
+            header: Meerdere variabelen
+            text: Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in plaats van maar één `antwoord`.
             code: |-
                 naam {is} Hedy
                 leeftijd {is} 15
                 {print} naam is leeftijd jaar
             notes: |-
-                De leerlingen kunnen nu het Steen, papier, schaar avontuur maken.
-        5:
-            header: Interactief
-            text: |-
-                We kunnen ook een variabele instellen door vragen te stellen.
-                Het antwoord op de vraag wordt dan opgeslagen in de variabele.
-                Zo hebben we het `{echo}` commando niet meer nodig.
-            code: |-
-                naam {is} {ask} Wat is je naam?
-                {print} Hallo naam
-            notes: |-
-                Nu kunnen onze programma's echt interactief worden. De gebruker kan input geven die vervolgens in het programma gebruikt wordt.
-                Vraag de leerlingen om hun eigen voorbeelden te verzinnen.
-        6:
-            header: Meerdere variabelen
-            text: Nu we variabelen kunnen gebruiken, kunnen we meteen ook meerdere variabelen gebruiken in plaats van maar één `{echo}` commando.
-            code: |-
-                "naam {is} {ask} Wat is je naam ?
-                {print} Hallo naam
-                leeftijd {is} {ask} Hoe oud ben je?
-                {print} naam is leeftijd jaar."
-            notes: |-
-                Wijs de leerlingen er op dat het '{echo}' commando nu niet meer nodig is. Het werkt daarom ook niet meer in Hedy.
-                De leerlingen kunnen nu Steen, papier schaar deel 2 maken en het spookhuis
         7:
             header: Het '{sleep}' commando
             text: Je kunt het `{sleep}` commando gebruiken om de code een tijdje op pauze te zetten.
@@ -386,8 +376,6 @@ levels:
                 {print} groen!
             notes: |-
                 Laat de code zien. Als je wil kan je de 10 zelfs veranderen in een '{ask}' commando.
-                De leerlingen kunnen nu aan het Papegaai, Verhaal, Muziek en Restaurant avontuur werken.
-
         9:
             header: Tekenen met variabelen
             text: |-
@@ -435,7 +423,7 @@ levels:
                 {turn} graden
                 {forward} 100
             notes: |-
-                Laat de leerlingen zien dat je van het aantal graden ook een veriabele kunt maken.
+                Laat de leerlingen zien dat je van het aantal graden ook een variabele kunt maken.
         13:
             header: Foutzoeken
             text: Foutenzoeken van de code betekent het oplossen van fouten in de code. Laten we deze code samen debuggen.
@@ -452,7 +440,6 @@ levels:
             debug: 'True'
             notes: |-
                 Voorbeeld voor hoe je de foutzoeker kan gebruiken.
-                De leerlingen kunnen nu alle avonturen van dit level afmaken.
         14:
             header: Een korte terugblik...
             text: Wat heb je vandaag geleerd?
@@ -522,9 +509,9 @@ levels:
         5:
             header: Laten we beginnen
             text: |-
-                Dit is een goed moment om het Dobbelsteen, Steen, papier, schaar, Muziek, Waarzegger en Restaurant avontuur te proberen.
+                Aan de slag met de avonturen!
             notes: |-
-                Dit zijn de eerste avonturen om mee te beginnen. Als (de meeste van) je leerlingen klaar zijn, kan je het {add} en {remove} commando introduceren met de volgende slides.
+                Dit zijn de eerste avonturen om mee te beginnen.
         6:
             header: Toevoegen aan
             text: |-
@@ -685,7 +672,6 @@ levels:
                 {print} "Alle oma's kunnen dit ook!"
             notes: |-
                 Het is belangrijk om de leerlingen te laten weten dat ze met hetzelfde teken moeten beginnen en eindigen. Ze kunnen hun regel dus niet beginnen met ' en eindigen met ".
-                Je kunt nu de leerlingen alle avonturen laten maken tot aan het 'Verwijder commando' avontuur
         10:
             header: '{clear}'
             text: |-
@@ -1187,7 +1173,7 @@ levels:
             header: Klaar voor de start, af!
             text: Veel plezier met de avonturen in level 8!
             notes: |-
-                Je leerlingen kunnen nu alle werboekopdrachten en alle avonturen van dit level maken.
+                .
         8:
             header: Een korte terugblik...
             text: Wat heb je vandaag geleerd?
@@ -1263,7 +1249,6 @@ levels:
                 Vraag de leerlingen welke regels ze denken dat herhaald worden en voer daarna de code uit
                 Leg uit: Als je wil kan je na het `{repeat}` commando door zonder inspringing.
                 De regels die geen inspringing hebben worden niet herhaald.
-                De leerlingen kunnen aan deze avonturen werken: Waarzegger, zing een liedje and muziek.
         5:
             header: '{if} en {else} hiervoor'
             text: |-
@@ -1602,7 +1587,7 @@ levels:
             header: Programmeertijd!
             text: Veel plezier met de avonturen in level 11!
             notes: |-
-                Je leerlingen kunnen nu alle avonturen in level 11 maken.
+                Je leerlingen kunnen nu alle avonturen in dit level maken.
         6:
             header: Een korte terugblik...
             text: Wat heb je vandaag geleerd?

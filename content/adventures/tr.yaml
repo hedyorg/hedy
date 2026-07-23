@@ -9,14 +9,11 @@ adventures:
                     Seviye 1'de, kendi oluşturduğunuz farklı bir ana karakterle bir hikaye oluşturabilirsiniz.
 
                     İlk satırda `{ask}` kullanın ve hikayenin ana karakterinin kim olacağını sorun.
-
-                    Bu ilk satırdan sonra, cümlenin yazdırılması gerekiyorsa `{print}` ile başlayın.
-                    Ana karakterinizin cümlenin sonunda olmasını istiyorsanız `{echo}` kullanırsınız.
                 example_code: |
                     ```
                     {ask} Bu hikayenin ana karakteri kim?
                     {print} Ana karakter şimdi ormanda yürüyecek
-                    {echo} Biraz korkmuşlar,
+                    {print} Biraz korkmuşlar, {answer}
                     {print} Her yerde çılgın sesler duyuyorlar.
                     {print} Buranın perili bir orman olmasından korkuyorlar.
                     ```
@@ -24,7 +21,7 @@ adventures:
                     ### Alıştırma
                     Şimdi en az 6 satır koddan oluşan kendi hikayenizi oluşturun.
                     Bu hikaye örnek kod ile aynı olamaz.
-                    En az bir tane `{ask}` ve bir tane `{echo}` komutu kullanın.
+                    En az bir tane `{ask}` ve bir tane `{answer}` komutu kullanın.
                     İstediğiniz herhangi bir konu hakkında yapabilirsiniz.
                     Aklınıza bir konu gelmiyorsa, seçeneklerimizden birini kullanın: sinemaya gitmek, bir spor karşılaşması veya hayvanat bahçesinde bir gün.
             2:
@@ -43,15 +40,6 @@ adventures:
                     {sleep}
                     {print} isim buranın perili bir orman olmasından korkuyor
                     ```
-                story_text_2: |
-                    ### Alıştırma
-                    Şimdi sırada bir önceki seviyede oluşturduğunuz kendi hikayenize değişkenler ekleme zamanı.
-                    'Programlarım'a gidin, 1. seviye hikaye maceranızı bulun ve kodunuzu kopyalayın. Kodu bu seviyedeki giriş ekranınıza yapıştırın.
-
-                    Bu kod bu seviyede çalışmayacaktır, çünkü henüz değişkenleri kullanmadınız.
-                    Kodunuzdaki `{ask}` komutlarını ve `{echo}` komutlarını bu seviyede öğrendiğiniz doğru şekilleriyle değiştirin.
-
-                    **Ek Görev** Hikayenizde gerilim oluşturmak için kodunuza bir `{sleep}` komutu ekleyin.
             3:
                 story_text: |
                     Seviye 3'te, hikayenizi artık daha eğlenceli hale getirebilirsiniz. Bunun gibi herhangi bir canavar, hayvan veya diğer engeller için rastgelelik kullanabilirsiniz:
@@ -204,23 +192,9 @@ adventures:
                     Eğer bilmiyorsanız <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> hikayeye bir göz atın</a> , ve kitapta yazıldığı gibi yazdığınızdan emin olun. (Bunun gibi bir Türkçe kitap biliyorsanız onu da yazabilirsiniz)
                 example_code: "```\nhayvanlar = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n {print} 'What do you see?'\n```\n"
             13:
-                story_text: |
-                    Başka bir hikaye yazdıracağız, ancak şimdi `{print}` ile parantez kullanmak zorundayız.
-
-                    ### Alıştırma 1
-                    En az 5 cümlelik bir hikaye oluşturun. Henüz herhangi bir 'isim' kullanmak zorunda değilsiniz.
                 example_code: |
                     ```
-                    {print}('Bu hikayeye hoş geldiniz!')
-                    ```
-                story_text_2: |
-                    ### Alıştırma 2
-                    Sizin için zaten bir `{input}` hazırladık. Öncelikle hikayenizde `isim` değişkenini kullanın.
-                    Ardından ikinci bir `{ask}` ekleyin ve bu değişkeni de kullanın.
-                    İpucu: `{print}` içinde, metin ve değişkenler arasındaki virgülleri unutmayın!
-                example_code_2: |
-                    ```
-                    isim = {input}("Senin adın ne?")
+                    isim = _
                     {print}('Bu hikayeye hoş geldin!')
                     ```
             16:
@@ -300,48 +274,13 @@ adventures:
                     {print} Merhaba!
                     {ask} Senin adın ne?
                     ```
-                story_text_2: "## `{echo}` komutu \nEğer bilgisayarın cevabı size tekrar etmesini istiyorsanız, `{echo}` komutunu kullanabilirsiniz. Cevabın cümlenin sonunda yankılandığını unutmayın, yani bu örnek için merhaba'dan sonra.\n"
-                example_code_2: |
-                    ```
-                    {print} Merhaba!
-                    {ask} Senin adın ne?
-                    {echo} merhaba
-                    ```
-                story_text_3: |
-                    ### Alıştırma
-                    `{ask}` ve `{echo}` komutlarını deneyin. İlk olarak, bu programı çalıştırmak için boşlukları doldurun.
-                    Daha sonra `{ask}` komutunu kullanarak 2 soru daha sorun, her `{ask}` komutundan sonra cevabı ekrana yazdırmak için bir `{echo}` kullanın.
-                example_code_3: |
-                    ```
-                    _ Nasılsın?
-                    _
-                    ```
             2:
-                story_text: |
-                    ## sor komutu
-                    Artık kodlarımızda **değişkenleri** kullanabildiğimize göre, `{echo}` komutuna artık ihtiyacımız yok.
-                    Sorularımızın cevaplarını saklamak için değişkenler kullanabiliriz ve bu şekilde kodlarımızda birden fazla sorunun cevabını kullanabiliriz.
-                    Şuna bir bakın:
-
-                    Bu şekilde kodunuz etkileşimli hale geliyor!
                 example_code: |
                     ```
                     isim {is} {ask} Senin adın ne?
                     {print} Merhaba isim
                     yaş {is} {ask} Kaç yaşındasın?
                     {print} isim yaş yaşındadır.
-                    ```
-                story_text_2: |
-                    ### Alıştırma
-                    Önceki sekmede `{is}` komutu ile değişkenleri ayarlama alıştırması yaptınız.
-                    En az 3 değişken oluşturdunuz ve bunları bir yazdır komutu ile kullandınız.
-                    Şimdi, değişkenleri ayarlamak yerine, örneğimizde yaptığımız gibi değişkenleri etkileşimli hale getirmenizi istiyoruz.
-
-                    Kodunuzu önceki sekmeden kopyalayın ve `{ask}` komutlarını kullanarak değişkenleri etkileşimli hale getirin.
-                example_code_2: |
-                    ```
-                    favori_hayvan {is} {ask} En sevdiğin hayvan hangisi?
-                    {print} En sevdiğim hayvan favori_hayvan
                     ```
             13:
                 story_text: Python kodunu elde etmek için yapmamız gereken son değişiklik `{ask}` ifadesini `{input}` olarak değiştirmektir.
@@ -693,7 +632,7 @@ adventures:
                     O zaman muhtemelen geleceğinizi gerçekten tahmin edemeyeceklerini biliyorsunuzdur, ama yine de oynamak eğlenceli!
 
                     İlerleyen seviyelerde kendi fal makinenizi nasıl yaratacağınızı öğrenebilirsiniz!
-                    1. seviyede, Hedy'nin kendini falcı olarak tanıtmasını ve oyuncuların cevaplarını `{echo}` ile yankılamasını sağlayarak kolay bir başlangıç yapabilirsiniz.
+                    1. seviyede, Hedy'nin kendini falcı olarak tanıtmasını ve oyuncuların cevaplarını `{answer}` ile yankılamasını sağlayarak kolay bir başlangıç yapabilirsiniz.
                     Bunun gibi:
                 example_code: |
                     ```
@@ -701,7 +640,7 @@ adventures:
                     _ Peki sen kimsin?
                     _ Kristal küreme bir göz atayım
                     _ Görüyorum... Evet görüyorum...
-                    _ Senin adın
+                    _ Senin adın _
                     ```
                 story_text_2: |
                     ### Alıştırma
@@ -709,7 +648,7 @@ adventures:
                     **Ek Görev** Kodu değiştirin ve falcının yalnızca adınızı değil, yaşınızı, tuttuğunuz spor takımını veya kendinizle ilgili başka bir şeyi de tahmin etmesini sağlayın.
             3:
                 story_text: |
-                    Önceki seviyelerde ilk fal makinenizi yapmıştınız, ancak Hedy gerçekten hiçbir şey tahmin edemedi, sadece `{echo}` kullandı.
+                    Önceki seviyelerde ilk fal makinenizi yapmıştınız, ancak Hedy gerçekten hiçbir şey tahmin edemedi.
                     Bu seviyede, Hedy'nin sizin için bir cevap seçmesini gerçekten sağlamak için bir değişken ve `{at} {random}` komutunu kullanabilirsiniz. Örneğin bu koda göz atın:
                 example_code: |
                     ```
@@ -882,7 +821,7 @@ adventures:
                     {print} Buradan çıkmam lazım!
                     {print} Önümde 3 kapı var...
                     {ask} Hangi kapıyı seçmeliyim?
-                    {echo} Seçtiğim kapı
+                    {print} Seçtiğim kapı {answer}
                     {print} ...?
                     ```
                 story_text_2: |
@@ -1116,24 +1055,11 @@ adventures:
         description: eşit komutuna giriş
         levels:
             2:
-                story_text: |
-                    ## Değişkenler
-                    Bir kelimeyi `{is}` ile isimlendirebilirsiniz. Buna bir **değişken** denir. Bu örnekte isim adında bir değişken ile yaş adında bir değişken oluşturduk. Kodunuzun herhangi bir yerinde isim kelimesini kullanabilirsiniz ve Hedy bu kelimeyi değiştirilecektir, bunun gibi:
                 example_code: |
                     ```
                     isim {is} Hedy
                     yaş {is} 15
                     {print} isim yaş yaşındadır
-                    ```
-                story_text_2: |
-                    ### Alıştırma
-                    Kendi değişkenlerinizi oluşturma zamanı!
-                    Örnek kodda `favori_hayvan` değişkeni ile bir örnek yaptık. Satır 1'de değişken ayarlandı ve satır 2'de değişkeni bir `{print}` komutunda kullandık.
-                    Öncelikle, boşluklara en sevdiğiniz hayvanı doldurarak örneğimizi tamamlayın. Daha sonra bu kodlardan en az 3 tane daha kendiniz ekleyin. Bir değişken seçin ve bu değişkeni `{is}` komutu ile ayarlayın. Daha sonra tıpkı bizim yaptığımız gibi `{print}` komutu ile kullanın.
-                example_code_2: |
-                    ```
-                    favori_hayvan {is} _
-                    {print} En sevdiğim havyan favori_hayvan
                     ```
             7:
                 story_text: |
@@ -1171,15 +1097,15 @@ adventures:
                     fransızca_kelimeler = ['bonjour', 'ordinateur', 'pomme de terre']
                     çevirisi = ['merhaba', 'bilgisayar', 'patates']
                     puan = 0
-                    {for} i {in} {range} 1 {to} 3
-                        cevap = {ask} fransızca_kelimeler[i] ' kelimesinin anlamı nedir?'
+                    {for} i {in} {range}(1, 3)
+                        cevap = {input}(fransızca_kelimeler[i], ' kelimesinin anlamı nedir?')
                         doğrusu = çevirisi[i]
-                        {if} cevap == doğrusu
-                            {print} 'Doğru bildin!'
+                        {if} cevap == doğrusu:
+                            {print}('Doğru bildin!')
                             puan = puan + 1
                         {else}
-                            {print} 'Yanlış, ' fransızca_kelimeler[i] ' kelimesi ' çevirisi[i] ' anlamına geliyor'
-                    {print} 'Toplam ' puan ' doğru cevap verdin.'
+                            {print}('Yanlış, ', fransızca_kelimeler[i], ' kelimesi ', çevirisi[i], ' anlamına geliyor')
+                    {print}('Toplam ', puan, ' doğru cevap verdin.')
                     ```
     maths:
         name: matematik
@@ -1202,8 +1128,8 @@ adventures:
                     ```
                     {print} Ben papağan Hedy.
                     {ask} Adın ne senin?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Alıştırma
@@ -1214,8 +1140,8 @@ adventures:
                     ```
                     {print} Ben papağan Hedy.
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     Bir önceki seviyede, sizden sonra tekrar eden bir papağan yapmıştınız. Bu seviyede papağanı bir değişken ve `{ask}` komutu kullanarak etkileşimli hale getireceğiz.
@@ -1304,25 +1230,6 @@ adventures:
                     birikmesi_gereken = fiyat - biriken
                     haftalar = birikmesi_gereken / haftalık
                     {print} 'Yeni bir ' _ ' almak için ' _ ' hafta biriktirmek gerekiyor.'
-                    ```
-            15:
-                example_code: |
-                    ```
-                    _ calculate_budget with wish, money, allowance
-                        to_save = wish - money
-                        weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
-                        {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
-
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
-
-                    {call} calculate_budget with _, _, _
                     ```
     print_command:
         default_save_name: yazdır
@@ -1533,13 +1440,13 @@ adventures:
                     ```
                     {print} Hedy'nin restoranına hoş geldiniz 🍟
                     _ Ne sipariş etmek istersiniz?
-                    {echo} Yani siparişiniz
+                    {print} Yani siparişiniz {answer}
                     {print} Siparişiniz için teşekkür ederiz!
                     {print} Şimdi hazırlıyoruz!
                     ```
             2:
                 story_text: |
-                    Seviye 2'de, değişkenler kullanarak restoranınızı genişletebilirsiniz. Seviye 1'de Hedy siparişi sadece bir kez `{echo}` yapabiliyordu ve sadece en son sipariş edilen şeyi hatırlayabiliyordu.
+                    Seviye 2'de, değişkenler kullanarak restoranınızı genişletebilirsiniz. Seviye 1'de Hedy sipariş edilen şeyi hatırlayabiliyordu.
                     Artık değişkenleri kullanabilirsiniz ve Hedy'nin hem yemeği hem de sosları hatırlamasını sağlayayabilirsiniz!
                 example_code: |
                     ```
@@ -1550,17 +1457,6 @@ adventures:
                     sos {is} {ask} Et mi yoksa sebze mi istersiniz?
                     {print} sos içeren yemek hemen geliyor!
                     ```
-                story_text_2: |
-                    ### Alıştırma
-                    Kendi restoran kodunuzu bir önceki seviyeden kopyalayıp aşağıdaki girdi ekranına yapıştırın.
-                    Bu seviyede öğrendiğiniz gibi, `{ask}` ve `{echo}` komutlarını değiştirerek ve değişkenleri kullanarak kodu düzeltin.
-
-                    Artık kodunuz tekrar çalıştığına göre, bir şeyler daha eklemenin zamanı geldi.
-                    Örnek kodun son satırına bakın: `{print} sos içeren yemek hemen geliyor!`
-                    Bu tek satırda, siparişin bir özetini oluşturmak için 2 değişken kullanılmıştır.
-                    Şimdi müşteriniz tarafından sipariş edilen yiyecek ve içeceklerin özetini kendiniz ekleyin.
-
-                    **Ek Görev** Artık değişkenleri nasıl kullanacağınızı öğrendiğinize göre, bir satırda istediğiniz kadar değişken kullanabilirsiniz. Kodunuza daha fazla değişken ekleyebilir misiniz, örneğin masada yemek ya da paket servis, nakit ya da kart, pipetli ya da pipetsiz gibi.
             3:
                 story_text: |
                     Akşam yemeğinde ne yemek istediğinize karar vermekte zorlanıyor musunuz? Hedy'nin sizin için seçmesini sağlayabilirsiniz!
@@ -1747,13 +1643,13 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print} "McHedy'ye Hoş Geldiniz"
+                    {print}("McHedy'ye Hoş Geldiniz")
                     dahafazla = 'evet'
                     _
-                        sipariş = {ask} 'Ne sipariş etmek istersiniz?'
-                        {print} sipariş
-                        dahafazla = {ask} 'Başka bir şey sipariş etmek ister misiniz?'
-                    {print} 'Teşekkür ederiz!'
+                        sipariş = {input}('Ne sipariş etmek istersiniz?')
+                        {print}(sipariş)
+                        dahafazla = {input}('Başka bir şey sipariş etmek ister misiniz?')
+                    {print}('Teşekkür ederiz!')
                     ```
     rock:
         name: Taş, kağıt, makas
@@ -1763,12 +1659,12 @@ adventures:
                 story_text: |
                     Seviye 1'de, taş, kağıt, makas oyunu yazmaya başlayabilirsiniz.
 
-                    `{ask}` ile bir seçim yapabilir ve `{echo}` ile bu seçimi tekrarlayabilirsiniz.
+                    `{ask}` ile bir seçim yapabilir ve `{answer}` ile bu seçimi tekrarlayabilirsiniz.
                 example_code: |
                     ```
                     {print} Neyi seçiyorsun?
                     {ask} taş, kağıt veya makas arasından seçim yap
-                    {echo} Demek senin seçimin:
+                    {print} Demek senin seçimin: {answer}
                     ```
                 story_text_2: |
                     ### Alıştırma
@@ -1778,18 +1674,7 @@ adventures:
                     ```
                     {print} Neyi seçiyorsun?
                     {ask} Bunlardan birini seçin _
-                    {echo} Demek senin seçimin:
-                    ```
-            2:
-                story_text: |
-                    Bu seviyede değişkenleri kullanarak pratik yapabilir, böylece taş, kağıt, makas oyununuzu yeni bir seviyeye taşımız olursunuz!
-                    ### Alıştırma
-                    Boşluklardaki **değişkeni** doldurarak kodu tamamlayın.
-                    Bu oyun çok etkileşimli değil, ama endişelenmeyin! Bir sonraki sekmede oyununuzu etkileşimli hale getirmek için değişkenleri `{ask}` komutu ile birlikte nasıl kullanacağınızı öğreneceksiniz!
-                example_code: |-
-                    ```
-                    seçim {is} taş
-                    {print} Benim seçimim _
+                    {print} Demek senin seçimin: {answer}
                     ```
             3:
                 story_text: |
@@ -1892,10 +1777,6 @@ adventures:
                             kazandı = 'evet'
                     _
                     ```
-    rock_2:
-        name: Taş, kağıt, makas 2
-        description: Taş, kağıt, makasın 2. bölümü
-        levels:
             2:
                 story_text: |
                     Artık `{ask}` komutunu nasıl kullanacağınızı öğrendiğinize göre, taş, kağıt, makas kodunuzu da etkileşimli hale getirebilirsiniz!

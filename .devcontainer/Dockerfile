@@ -27,7 +27,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     libgtk-3-0 \
     libgbm-dev \
     libnotify-dev \
-    libgconf-2-4 \
     libnss3 \
     libxss1 \
     libasound2 \
@@ -41,8 +40,9 @@ RUN npm ci
 FROM main
 
 # Setup python packages
-COPY requirements.txt /tmp/requirements.txt
-RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
+COPY requirements.txt requirements-prod.txt /tmp/requirements.txt
+RUN pip3 install --no-cache-dir -r /tmp/requirements.txt \
+    && pip3 install --no-cache-dir pre-commit
 
 # Copy node modules to a tmp folder
 COPY --from=node_builder /app/node_modules /var/tmp/node_modules
