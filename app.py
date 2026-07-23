@@ -956,13 +956,7 @@ def get_frontend_feature_flags_context():
     """Return the frontend feature-flag context used by templates and transpilation."""
     return {
         "frontend_environment": envs.frontend_environment(),
-        "feature_flags": {
-            "answer_interpolation": {
-                "production": False,
-                "local": True,
-                "alpha": True,
-            }
-        },
+        "feature_flags": {},
     }
 
 
