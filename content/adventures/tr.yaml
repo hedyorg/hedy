@@ -192,23 +192,9 @@ adventures:
                     Eğer bilmiyorsanız <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> hikayeye bir göz atın</a> , ve kitapta yazıldığı gibi yazdığınızdan emin olun. (Bunun gibi bir Türkçe kitap biliyorsanız onu da yazabilirsiniz)
                 example_code: "```\nhayvanlar = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n {print} 'What do you see?'\n```\n"
             13:
-                story_text: |
-                    Başka bir hikaye yazdıracağız, ancak şimdi `{print}` ile parantez kullanmak zorundayız.
-
-                    ### Alıştırma 1
-                    En az 5 cümlelik bir hikaye oluşturun. Henüz herhangi bir 'isim' kullanmak zorunda değilsiniz.
                 example_code: |
                     ```
-                    {print}('Bu hikayeye hoş geldiniz!')
-                    ```
-                story_text_2: |
-                    ### Alıştırma 2
-                    Sizin için zaten bir `{input}` hazırladık. Öncelikle hikayenizde `isim` değişkenini kullanın.
-                    Ardından ikinci bir `{ask}` ekleyin ve bu değişkeni de kullanın.
-                    İpucu: `{print}` içinde, metin ve değişkenler arasındaki virgülleri unutmayın!
-                example_code_2: |
-                    ```
-                    isim = {input}("Senin adın ne?")
+                    isim = _
                     {print}('Bu hikayeye hoş geldin!')
                     ```
             16:
@@ -1111,15 +1097,15 @@ adventures:
                     fransızca_kelimeler = ['bonjour', 'ordinateur', 'pomme de terre']
                     çevirisi = ['merhaba', 'bilgisayar', 'patates']
                     puan = 0
-                    {for} i {in} {range} 1 {to} 3
-                        cevap = {ask} fransızca_kelimeler[i] ' kelimesinin anlamı nedir?'
+                    {for} i {in} {range}(1, 3)
+                        cevap = {input}(fransızca_kelimeler[i], ' kelimesinin anlamı nedir?')
                         doğrusu = çevirisi[i]
-                        {if} cevap == doğrusu
-                            {print} 'Doğru bildin!'
+                        {if} cevap == doğrusu:
+                            {print}('Doğru bildin!')
                             puan = puan + 1
                         {else}
-                            {print} 'Yanlış, ' fransızca_kelimeler[i] ' kelimesi ' çevirisi[i] ' anlamına geliyor'
-                    {print} 'Toplam ' puan ' doğru cevap verdin.'
+                            {print}('Yanlış, ', fransızca_kelimeler[i], ' kelimesi ', çevirisi[i], ' anlamına geliyor')
+                    {print}('Toplam ', puan, ' doğru cevap verdin.')
                     ```
     maths:
         name: matematik
@@ -1244,25 +1230,6 @@ adventures:
                     birikmesi_gereken = fiyat - biriken
                     haftalar = birikmesi_gereken / haftalık
                     {print} 'Yeni bir ' _ ' almak için ' _ ' hafta biriktirmek gerekiyor.'
-                    ```
-            15:
-                example_code: |
-                    ```
-                    _ calculate_budget with wish, money, allowance
-                        to_save = wish - money
-                        weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
-                        {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
-
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
-
-                    {call} calculate_budget with _, _, _
                     ```
     print_command:
         default_save_name: yazdır
@@ -1676,13 +1643,13 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print} "McHedy'ye Hoş Geldiniz"
+                    {print}("McHedy'ye Hoş Geldiniz")
                     dahafazla = 'evet'
                     _
-                        sipariş = {ask} 'Ne sipariş etmek istersiniz?'
-                        {print} sipariş
-                        dahafazla = {ask} 'Başka bir şey sipariş etmek ister misiniz?'
-                    {print} 'Teşekkür ederiz!'
+                        sipariş = {input}('Ne sipariş etmek istersiniz?')
+                        {print}(sipariş)
+                        dahafazla = {input}('Başka bir şey sipariş etmek ister misiniz?')
+                    {print}('Teşekkür ederiz!')
                     ```
     rock:
         name: Taş, kağıt, makas
