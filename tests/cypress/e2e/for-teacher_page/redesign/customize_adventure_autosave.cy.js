@@ -31,7 +31,7 @@ function openNewAdventureInRedesign(adventureName = `redesign-flow-${Date.now()}
   cy.getDataCy('redesign_prompt_modal').should('be.visible');
   cy.getDataCy('redesign_prompt_input').should('be.visible').clear().type(adventureName);
   cy.getDataCy('redesign_prompt_ok_button').click();
-  cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+  cy.url().should('include', '/for-teachers/customize-adventure/');
 }
 
 function waitForUploadWithEmptyContent(alias, remainingAttempts = 6) {
@@ -65,7 +65,7 @@ describe('Customize adventure redesign autosave', () => {
       .should('be.visible')
       .click();
 
-    cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+    cy.url().should('include', '/for-teachers/customize-adventure/');
 
     const contentMarker = `autosave-redesign-content-${Date.now()}`;
     const solutionMarker = `autosave-redesign-solution-${Date.now()}`;
@@ -93,7 +93,7 @@ describe('Customize adventure redesign autosave', () => {
       .should('be.visible')
       .click();
 
-    cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+    cy.url().should('include', '/for-teachers/customize-adventure/');
 
     cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
 
@@ -113,7 +113,7 @@ describe('Customize adventure redesign autosave', () => {
       .should('be.visible')
       .click();
 
-    cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+    cy.url().should('include', '/for-teachers/customize-adventure/');
 
     cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
 
@@ -153,12 +153,14 @@ describe('Customize adventure redesign autosave', () => {
     });
 
     let expectedLevel;
+    let expectedLevelIncluded;
     cy.get('input[name="adventure_levels"]').then(($levels) => {
       const levelElements = Array.from($levels);
       const uncheckedLevel = levelElements.find((element) => !element.checked);
 
       if (uncheckedLevel) {
         expectedLevel = uncheckedLevel.value;
+        expectedLevelIncluded = true;
         cy.wrap(uncheckedLevel).check({ force: true });
         return;
       }
@@ -169,12 +171,17 @@ describe('Customize adventure redesign autosave', () => {
       }
 
       expectedLevel = checkedLevel.value;
-      cy.wrap(checkedLevel).check({ force: true });
+      expectedLevelIncluded = false;
+      cy.wrap(checkedLevel).uncheck({ force: true });
     });
 
     waitForSingleUpload('@uploadAdventureDraft', (body) => {
       expect(Array.isArray(body.levels)).to.eq(true);
-      expect(body.levels).to.include(expectedLevel);
+      if (expectedLevelIncluded) {
+        expect(body.levels).to.include(expectedLevel);
+      } else {
+        expect(body.levels).to.not.include(expectedLevel);
+      }
     });
   });
 

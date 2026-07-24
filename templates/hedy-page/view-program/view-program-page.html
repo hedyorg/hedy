@@ -6,8 +6,8 @@
     {% if class_id is defined and class_id and class_info is defined and class_info %}
         {{ breadcrumb(
             [{'label': _('classes'), 'url': '/for-teachers/class/all'},
-             {'label': class_info.name, 'url': '/for-teachers/redesign/class/' ~ (class_id|default(''))},
-             {'label': _('grading'), 'url': '/for-teachers/redesign/class/' ~ (class_id|default('')) ~ '/grade'},
+             {'label': class_info.name, 'url': '/for-teachers/class/' ~ (class_id|default(''))},
+             {'label': _('grading'), 'url': '/for-teachers/class/' ~ (class_id|default('')) ~ '/grade'},
              {'label': _('level_title') ~ ' ' ~ level}]
             + ([{'label': adventure.name}] if adventure else []),
             wrapper_class='mt-2 mb-4') }}

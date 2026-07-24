@@ -322,11 +322,10 @@ function addEditorExplanationButton(editor: ClassicEditor, explanationId: string
 }
 
 export async function initializeCustomAdventurePage(_options: InitializeCustomizeAdventurePage) {
-    const isLegacyAdventureEditPage =
-        window.location.pathname.startsWith('/for-teachers/customize-adventure/') &&
-        !window.location.pathname.startsWith('/for-teachers/redesign/');
+    const isAdventureEditPage =
+        window.location.pathname.startsWith('/for-teachers/customize-adventure/');
 
-    if (isLegacyAdventureEditPage) {
+    if (isAdventureEditPage) {
         autoSave('customize_adventure');
         window.addEventListener('pageshow', () => autoSave('customize_adventure'));
     }

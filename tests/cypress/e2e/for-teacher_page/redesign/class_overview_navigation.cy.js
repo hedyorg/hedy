@@ -1,7 +1,7 @@
 import { loginAndOpenClasses, createRedesignClass, openClassOverview, assertBreadcrumbLinks, uniqueName } from './helpers';
 
 function openClassesContextMenuForClass(classId) {
-  cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).closest('tr').as('targetRow');
+  cy.get(`a[href="/for-teachers/class/${classId}"]`).closest('tr').as('targetRow');
   cy.get('@targetRow').find('button.blue-btn-new').first().click();
   cy.get('@targetRow').find('div[id^="menu-"]').as('contextMenu');
   cy.get('@contextMenu').should('be.visible').and('not.have.class', 'hidden').and('have.class', 'menu-content-open');
@@ -19,10 +19,10 @@ describe('Redesigned class overview navigation', () => {
     cy.get('@classId').then((classId) => {
       openClassOverview(classId);
       assertBreadcrumbLinks(['/for-teachers/class/all']);
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}/graph"]`).should('be.visible');
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}/grade"]`).should('be.visible');
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}/manage"]`).should('be.visible');
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}/configure"]`).should('be.visible');
+      cy.get(`a[href="/for-teachers/class/${classId}/graph"]`).should('be.visible');
+      cy.get(`a[href="/for-teachers/class/${classId}/grade"]`).should('be.visible');
+      cy.get(`a[href="/for-teachers/class/${classId}/manage"]`).should('be.visible');
+      cy.get(`a[href="/for-teachers/class/${classId}/configure"]`).should('be.visible');
     });
   });
 
@@ -38,31 +38,31 @@ describe('Redesigned class overview navigation', () => {
 
   it('loads performance graph canvas and supports level links', () => {
     cy.get('@classId').then((classId) => {
-      cy.visit(`/for-teachers/redesign/class/${classId}/graph`);
-      assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/redesign/class/${classId}`]);
-      cy.location('pathname').should('include', `/for-teachers/redesign/class/${classId}/graph`);
+      cy.visit(`/for-teachers/class/${classId}/graph`);
+      assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/class/${classId}`]);
+      cy.location('pathname').should('include', `/for-teachers/class/${classId}/graph`);
 
       cy.get('#dropdown_level_button').click();
-      cy.get(`#level_button_2`).should('have.attr', 'href', `/for-teachers/redesign/class/${classId}/graph?level=2`);
+      cy.get(`#level_button_2`).should('have.attr', 'href', `/for-teachers/class/${classId}/graph?level=2`);
     });
   });
 
   it('opens classes table context menu and follows grading/configure actions', () => {
     cy.get('@classId').then((classId) => {
       cy.visit('/for-teachers/class/all');
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).closest('tr').as('targetRow');
+      cy.get(`a[href="/for-teachers/class/${classId}"]`).closest('tr').as('targetRow');
 
       cy.get('@targetRow').find('button.blue-btn-new').first().click();
       cy.get('@targetRow').find('div[id^="menu-"]').should('be.visible').and('not.have.class', 'hidden');
       cy.get('@targetRow').find('a[href*="/grade"]').should('be.visible').click();
-      cy.url().should('include', `/for-teachers/redesign/class/${classId}/grade`);
+      cy.url().should('include', `/for-teachers/class/${classId}/grade`);
 
       cy.visit('/for-teachers/class/all');
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).closest('tr').as('targetRow');
+      cy.get(`a[href="/for-teachers/class/${classId}"]`).closest('tr').as('targetRow');
       cy.get('@targetRow').find('button.blue-btn-new').first().click();
       cy.get('@targetRow').find('div[id^="menu-"]').should('be.visible').and('not.have.class', 'hidden');
       cy.get('@targetRow').find('a[href*="/configure"]').should('be.visible').click();
-      cy.url().should('include', `/for-teachers/redesign/class/${classId}/configure`);
+      cy.url().should('include', `/for-teachers/class/${classId}/configure`);
     });
   });
 
@@ -143,14 +143,14 @@ describe('Redesigned class overview navigation', () => {
       cy.getDataCy('redesign_confirm_yes_button').click();
       cy.wait('@archiveClass').its('response.statusCode').should('eq', 200);
 
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).closest('tr').as('archivedRow');
+      cy.get(`a[href="/for-teachers/class/${classId}"]`).closest('tr').as('archivedRow');
       cy.get('@archivedRow').find('button.blue-btn-new').first().click();
       cy.get('@archivedRow').find('div[id^="menu-"]').should('be.visible').and('not.have.class', 'hidden');
       cy.get('@archivedRow').find('button[data-cy="unarchive_class"]').should('be.visible').click();
       cy.getDataCy('redesign_confirm_yes_button').click();
       cy.wait('@unarchiveClass').its('response.statusCode').should('eq', 200);
 
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).closest('tr').as('activeRow');
+      cy.get(`a[href="/for-teachers/class/${classId}"]`).closest('tr').as('activeRow');
       cy.get('@activeRow').find('button.blue-btn-new').first().click();
       cy.get('@activeRow').find('button[data-cy="archive_class"]').should('be.visible');
     });
@@ -208,7 +208,7 @@ describe('Redesigned class overview navigation', () => {
   it('opens classes table delete confirmation and cancel keeps class', () => {
     cy.get('@classId').then((classId) => {
       cy.visit('/for-teachers/class/all');
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).closest('tr').as('targetRow');
+      cy.get(`a[href="/for-teachers/class/${classId}"]`).closest('tr').as('targetRow');
 
       cy.get('@targetRow').find('button.blue-btn-new').first().click();
       cy.get('@targetRow').find('div[id^="menu-"]').should('be.visible').and('not.have.class', 'hidden');
@@ -217,7 +217,7 @@ describe('Redesigned class overview navigation', () => {
       cy.getDataCy('redesign_confirm_modal').should('be.visible');
       cy.getDataCy('redesign_confirm_no_button').should('be.visible').click();
       cy.getDataCy('redesign_confirm_modal').should('not.be.visible');
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).should('exist');
+      cy.get(`a[href="/for-teachers/class/${classId}"]`).should('exist');
     });
   });
 
@@ -225,7 +225,7 @@ describe('Redesigned class overview navigation', () => {
     cy.get('@classId').then((classId) => {
       const renamedClass = uniqueName('renamed-overview');
 
-      cy.visit(`/for-teachers/redesign/class/${classId}/configure`);
+      cy.visit(`/for-teachers/class/${classId}/configure`);
       cy.intercept('PUT', `/class/${classId}`).as('renameClass');
 
       cy.get('h1 i.fa-pencil').should('be.visible').click();
@@ -235,16 +235,16 @@ describe('Redesigned class overview navigation', () => {
 
       cy.wait('@renameClass').its('response.statusCode').should('eq', 200);
       cy.get('h1').should('contain.text', renamedClass);
-      assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/redesign/class/${classId}`]);
+      assertBreadcrumbLinks(['/for-teachers/class/all', `/for-teachers/class/${classId}`]);
 
       cy.visit('/for-teachers/class/all');
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).should('contain.text', renamedClass);
+      cy.get(`a[href="/for-teachers/class/${classId}"]`).should('contain.text', renamedClass);
     });
   });
 
   it('returns 404 for non-existing redesigned class id', () => {
     cy.request({
-      url: '/for-teachers/redesign/class/non-existing-redesign-class-id',
+      url: '/for-teachers/class/non-existing-redesign-class-id',
       failOnStatusCode: false,
     }).its('status').should('eq', 404);
   });
@@ -264,10 +264,10 @@ describe('Redesigned class overview navigation', () => {
       // Should be redirected to the classes list
       cy.url().should('include', '/for-teachers/class/all');
       // The class should no longer be in the list
-      cy.get(`a[href="/for-teachers/redesign/class/${classId}"]`).should('not.exist');
+      cy.get(`a[href="/for-teachers/class/${classId}"]`).should('not.exist');
       // Direct navigation should 404
       cy.request({
-        url: `/for-teachers/redesign/class/${classId}`,
+        url: `/for-teachers/class/${classId}`,
         failOnStatusCode: false,
       }).its('status').should('eq', 404);
     });

@@ -21,15 +21,34 @@ export function loginForAdmin() {
 }
 
 export function login(username, password) {
-    cy.intercept('/auth/login').as('login')
+    const submitLoginForm = () => {
+        cy.intercept('POST', '/auth/login').as('loginUi')
+        goToLogin();
+        cy.getDataCy('username', { timeout: 15000 }).clear().type(username);
+        cy.getDataCy('password', { timeout: 15000 }).clear().type(password, { parseSpecialCharSequences: false });
+        cy.getDataCy('login_button').click();
+
+        return cy.wait('@loginUi').then(({ response }) => response?.statusCode);
+    };
+
     cy.clearCookies();
     cy.clearAllLocalStorage()
     cy.clearAllSessionStorage();
-    goToLogin();
-    cy.getDataCy('username', { timeout: 15000 }).type(username);
-    cy.getDataCy('password', { timeout: 15000 }).type(password);
-    cy.getDataCy('login_button').click();
-    cy.wait('@login');
+
+    cy.request({
+        method: 'POST',
+        url: '/auth/login',
+        failOnStatusCode: false,
+        body: { username, password },
+    }).then((response) => {
+        if (response.status === 200) {
+            return;
+        }
+
+        submitLoginForm().then((statusCode) => {
+            expect(statusCode).to.eq(200);
+        });
+    });
 }
 
 export function logout()

@@ -23,7 +23,7 @@ def _init_class_customizations(client, class_id):
 
     This is required before calling endpoints that read customizations["sorted_adventures"].
     """
-    client.get(f'/for-teachers/redesign/class/{class_id}/customize-level/1')
+    client.get(f'/for-teachers/class/{class_id}/customize-level/1')
 
 
 def _unwrap_route(method):
@@ -109,7 +109,7 @@ class TestAuthEnforcement:
 
 
 # ---------------------------------------------------------------------------
-# GET /for-teachers/class/<class_id>  (returns JSON in testing mode)
+# GET /for-teachers/legacy/class/<class_id>  (returns JSON in testing mode)
 # ---------------------------------------------------------------------------
 
 class TestGetClass:
@@ -117,7 +117,7 @@ class TestGetClass:
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
 
-        response = client.get(f'/for-teachers/class/{cls["id"]}')
+        response = client.get(f'/for-teachers/legacy/class/{cls["id"]}')
         assert_useful_response(response)
         body = response.get_json()
         assert body['id'] == cls['id']
@@ -126,20 +126,20 @@ class TestGetClass:
         assert 'students' in body
 
         anon_client = client.__class__(client.client.application.test_client())
-        response = anon_client.get(f'/for-teachers/class/{cls["id"]}', check=False)
+        response = anon_client.get(f'/for-teachers/legacy/class/{cls["id"]}', check=False)
         assert response.status_code == 401
 
         _clear_session(client)
         given.logged_in_as_new_student()
-        response = client.get(f'/for-teachers/class/{cls["id"]}', check=False)
+        response = client.get(f'/for-teachers/legacy/class/{cls["id"]}', check=False)
         assert response.status_code == 401
 
         _clear_session(client)
         given.logged_in_as_new_teacher()
-        response = client.get('/for-teachers/class/doesnotexist', check=False)
+        response = client.get('/for-teachers/legacy/class/doesnotexist', check=False)
         assert response.status_code == 404
 
-        response = client.get(f'/for-teachers/class/{cls["id"]}', check=False)
+        response = client.get(f'/for-teachers/legacy/class/{cls["id"]}', check=False)
         assert response.status_code == 404
 
 
@@ -220,7 +220,7 @@ class TestUnarchiveClass:
 
 
 # ---------------------------------------------------------------------------
-# GET /for-teachers/redesign/class/<class_id>  (view-class)
+# GET /for-teachers/class/<class_id>  (view-class)
 # ---------------------------------------------------------------------------
 
 class TestRedesignClassPages:
@@ -228,12 +228,12 @@ class TestRedesignClassPages:
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
         cases = [
-            (f'/for-teachers/redesign/class/{cls["id"]}', 200),
-            (f'/for-teachers/redesign/class/{cls["id"]}/manage', 200),
-            (f'/for-teachers/redesign/class/{cls["id"]}/configure', 200),
-            (f'/for-teachers/redesign/class/{cls["id"]}/grade', 200),
-            (f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1', 200),
-            (f'/for-teachers/redesign/class/{cls["id"]}/customize-level/9999', 404),
+            (f'/for-teachers/class/{cls["id"]}', 200),
+            (f'/for-teachers/class/{cls["id"]}/manage', 200),
+            (f'/for-teachers/class/{cls["id"]}/configure', 200),
+            (f'/for-teachers/class/{cls["id"]}/grade', 200),
+            (f'/for-teachers/class/{cls["id"]}/customize-level/1', 200),
+            (f'/for-teachers/class/{cls["id"]}/customize-level/9999', 404),
         ]
         for url, expected in cases:
             response = client.get(url, check=False)
@@ -243,7 +243,7 @@ class TestRedesignClassPages:
         cls = given.a_class(owner['username'])
         _clear_session(client)
         given.logged_in_as_new_teacher()
-        response = client.get(f'/for-teachers/redesign/class/{cls["id"]}', check=False)
+        response = client.get(f'/for-teachers/class/{cls["id"]}', check=False)
         assert response.status_code == 404
 
 
@@ -326,7 +326,7 @@ class TestUpdateCustomizations:
 
 
 # ---------------------------------------------------------------------------
-# POST /for-teachers/redesign/class/<class_id>/manage/invite  (invite_users)
+# POST /for-teachers/class/<class_id>/manage/invite  (invite_users)
 # ---------------------------------------------------------------------------
 
 class TestInviteUsers:
@@ -335,7 +335,7 @@ class TestInviteUsers:
         cls = given.a_class(teacher['username'])
         student = given.a_student_account()
         response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/manage/invite',
+            f'/for-teachers/class/{cls["id"]}/manage/invite',
             data={'usernames': student['username']},
         )
         assert_useful_response(response)
@@ -344,7 +344,7 @@ class TestInviteUsers:
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
         response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/manage/invite',
+            f'/for-teachers/class/{cls["id"]}/manage/invite',
             data={},
             check=False
         )
@@ -354,7 +354,7 @@ class TestInviteUsers:
         teacher = given.a_teacher_account()
         cls = given.a_class(teacher['username'])
         response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/manage/invite',
+            f'/for-teachers/class/{cls["id"]}/manage/invite',
             data={'usernames': 'someuser'},
             check=False
         )
@@ -362,7 +362,7 @@ class TestInviteUsers:
 
 
 # ---------------------------------------------------------------------------
-# POST /for-teachers/redesign/class/<class_id>/configure/invite
+# POST /for-teachers/class/<class_id>/configure/invite
 # ---------------------------------------------------------------------------
 
 class TestInviteSecondTeacher:
@@ -371,7 +371,7 @@ class TestInviteSecondTeacher:
         cls = given.a_class(teacher['username'])
         second_teacher = given.a_teacher_account()
         response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/configure/invite',
+            f'/for-teachers/class/{cls["id"]}/configure/invite',
             data={'usernames': second_teacher['username']},
         )
         assert_useful_response(response)
@@ -380,7 +380,7 @@ class TestInviteSecondTeacher:
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
         response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/configure/invite',
+            f'/for-teachers/class/{cls["id"]}/configure/invite',
             data={},
             check=False
         )
@@ -659,13 +659,11 @@ class TestCustomizeAdventure:
 # ---------------------------------------------------------------------------
 
 class TestAdditionalForTeachersCoverage:
-    def test_for_teachers_redesign_page_teacher_returns_200(self, client, given, template_variables):
+    def test_for_teachers_redesign_page_teacher_redirects(self, client, given):
         given.logged_in_as_new_teacher()
-        response = client.get('/for-teachers/redesign')
-        assert_useful_response(response)
-        context = template_variables[-1]
-        assert context['current_page'] == 'for-teachers'
-        assert context['javascript_page_options']['page'] == 'for-teachers'
+        response = client.get('/for-teachers/redesign', check=False)
+        assert response.status_code == 302
+        assert response.headers.get('Location', '').endswith('/for-teachers/')
 
     def test_for_teachers_redesign_page_anonymous_returns_401(self, client):
         response = client.get('/for-teachers/redesign', check=False)
@@ -675,7 +673,7 @@ class TestAdditionalForTeachersCoverage:
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
         response = client.get(
-            f'/for-teachers/redesign/class/{cls["id"]}/grade/filter_sort'
+            f'/for-teachers/class/{cls["id"]}/grade/filter_sort'
             '?filter_level=all&filter_student=all&filter_adventure=all&student=ascendent'
         )
         assert_useful_response(response)
@@ -688,7 +686,7 @@ class TestAdditionalForTeachersCoverage:
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
         response = client.get(
-            f'/for-teachers/redesign/class/{cls["id"]}/manage/filter_sort?student=ascendent&timestamp=descendent'
+            f'/for-teachers/class/{cls["id"]}/manage/filter_sort?student=ascendent&timestamp=descendent'
         )
         assert_useful_response(response)
         context = template_variables[-1]
@@ -698,7 +696,7 @@ class TestAdditionalForTeachersCoverage:
     def test_configure_class_returns_200_for_owner(self, client, given, template_variables):
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
-        response = client.get(f'/for-teachers/redesign/class/{cls["id"]}/configure')
+        response = client.get(f'/for-teachers/class/{cls["id"]}/configure')
         assert_useful_response(response)
         context = template_variables[-1]
         assert context['class_info']['id'] == cls['id']
@@ -708,7 +706,7 @@ class TestAdditionalForTeachersCoverage:
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
         response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/9999/availability',
+            f'/for-teachers/class/{cls["id"]}/customize-level/9999/availability',
             data={'enabled': 'true'},
             check=False,
         )
@@ -718,7 +716,7 @@ class TestAdditionalForTeachersCoverage:
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
         response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1/add-adventure',
+            f'/for-teachers/class/{cls["id"]}/customize-level/1/add-adventure',
             data={},
             check=False,
         )
@@ -728,7 +726,7 @@ class TestAdditionalForTeachersCoverage:
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
         response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1/remove-adventure',
+            f'/for-teachers/class/{cls["id"]}/customize-level/1/remove-adventure',
             check=False,
         )
         assert response.status_code == 400
@@ -738,7 +736,7 @@ class TestAdditionalForTeachersCoverage:
         given.logged_in_as(teacher)
         cls = given.a_class(teacher['username'])
         response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1/sort-adventures',
+            f'/for-teachers/class/{cls["id"]}/customize-level/1/sort-adventures',
             data={'adventure': []},
         )
         assert_useful_response(response)
@@ -747,7 +745,7 @@ class TestAdditionalForTeachersCoverage:
         teacher = given.logged_in_as_new_teacher()
         cls = given.a_class(teacher['username'])
         response = client.get(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1/remove-all-adventures-modal'
+            f'/for-teachers/class/{cls["id"]}/customize-level/1/remove-all-adventures-modal'
         )
         assert_useful_response(response)
 
@@ -801,13 +799,13 @@ class TestAdditionalForTeachersCoverage:
         _init_class_customizations(client, cls['id'])
 
         enable_response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1/availability',
+            f'/for-teachers/class/{cls["id"]}/customize-level/1/availability',
             data={'enabled': 'true'},
         )
         assert_useful_response(enable_response)
 
         disable_response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1/availability',
+            f'/for-teachers/class/{cls["id"]}/customize-level/1/availability',
             data={'enabled': 'false'},
         )
         assert_useful_response(disable_response)
@@ -821,24 +819,24 @@ class TestAdditionalForTeachersCoverage:
         teacher_adventure = given.some_saved_adventure(teacher['username'], level='1')
 
         add_response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1/add-adventure',
+            f'/for-teachers/class/{cls["id"]}/customize-level/1/add-adventure',
             data={'adventure_id': teacher_adventure['id']},
         )
         assert_useful_response(add_response)
 
         restore_response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1/restore-default-adventures',
+            f'/for-teachers/class/{cls["id"]}/customize-level/1/restore-default-adventures',
         )
         assert_useful_response(restore_response)
 
         default_adv = hedy_content.adventures_order_per_level()[1][0]
         remove_response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1/remove-adventure?adventure_id={default_adv}',
+            f'/for-teachers/class/{cls["id"]}/customize-level/1/remove-adventure?adventure_id={default_adv}',
         )
         assert_useful_response(remove_response)
 
         sort_response = client.post(
-            f'/for-teachers/redesign/class/{cls["id"]}/customize-level/1/sort-adventures',
+            f'/for-teachers/class/{cls["id"]}/customize-level/1/sort-adventures',
             data={'adventure': [default_adv]},
         )
         assert_useful_response(sort_response)
@@ -899,7 +897,7 @@ class TestLegacyCustomizeClassFlows:
         response_old = client.post(f'/for-teachers/update-content/{cls["id"]}')
         assert_useful_response(response_old)
 
-        response_new = client.post(f'/for-teachers/redesign/update-content/{cls["id"]}')
+        response_new = client.post(f'/for-teachers/update-content/{cls["id"]}')
         assert_useful_response(response_new)
 
 

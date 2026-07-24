@@ -27,7 +27,7 @@
 
                 <form
                     class="p-4 overflow-y-auto flex flex-col gap-4"
-                    hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/add-adventure"
+                    hx-post="/for-teachers/class/{{ class_id }}/customize-level/{{ level }}/add-adventure"
                     hx-target="#level_adventures_panel"
                     hx-swap="outerHTML"
                     hx-indicator="#level_adventures_indicator"
@@ -119,7 +119,7 @@
         id="level_{{ level }}"
         class="flex flex-col gap-1 sortable mt-0"
         hx-trigger="end"
-        hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/sort-adventures"
+        hx-post="/for-teachers/class/{{ class_id }}/customize-level/{{ level }}/sort-adventures"
         hx-target="#level_adventures_panel"
         hx-swap="outerHTML"
         hx-include="[name='adventure']"
@@ -143,7 +143,7 @@
                     type="button"
                     class="text-red-600 hover:text-red-700 transition-colors mx-1 md:mx-1 inline-flex items-center justify-center w-11 md:w-fit md:h-fit h-11 rounded-full"
                     aria-label="{{ _('remove') }}"
-                    hx-post="/for-teachers/redesign/class/{{ class_id }}/customize-level/{{ level }}/remove-adventure?adventure_id={{ adventure.short_name }}"
+                    hx-post="/for-teachers/class/{{ class_id }}/customize-level/{{ level }}/remove-adventure?adventure_id={{ adventure.short_name }}"
                     hx-target="#level_adventures_panel"
                     hx-swap="outerHTML"
                     hx-indicator="#level_adventures_indicator"

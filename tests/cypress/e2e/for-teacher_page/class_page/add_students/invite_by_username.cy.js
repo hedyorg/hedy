@@ -1,5 +1,5 @@
 import {loginForTeacher, logout, login} from '../../../tools/login/login.js'
-import { navigateToClass } from "../../../tools/classes/class.js";
+import { createClass } from "../../../tools/classes/class.js";
 import { goToProfilePage } from "../../../tools/navigation/nav.js";
 
 const teachers = ["teacher1", "teacher4"];
@@ -42,7 +42,16 @@ teachers.forEach((teacher) => {
   it(`Is able to add student by name for ${teacher}`, () => {
     signUpStandaloneStudent().then(({ username, password }) => {
       loginForTeacher(teacher);
-      navigateToClass();
+      const className = createClass();
+      cy.visit('/for-teachers/class/all');
+      cy.getDataCy('view_class_link')
+        .contains(className)
+        .invoke('attr', 'href')
+        .then((href) => {
+          const classId = href.split('/').pop();
+          cy.wrap(classId).as('classId');
+          cy.visit(`/for-teachers/legacy/class/${classId}`);
+        });
 
       cy.getDataCy('add_student').click();
       cy.get('#add_students_options').should('be.visible');
@@ -72,7 +81,9 @@ teachers.forEach((teacher) => {
 
       logout();
       loginForTeacher(teacher);
-      navigateToClass();
+      cy.get('@classId').then((classId) => {
+        cy.visit(`/for-teachers/legacy/class/${classId}`);
+      });
 
       cy.getDataCy(`student_${username}`).should(($div) => {
         const text = $div.text()
