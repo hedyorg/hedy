@@ -68,7 +68,7 @@ def test_create_class_duplicate_name_returns_200(client: Client, given: Given):
 def test_create_class_redesign_invalid_creation_type_returns_400(client: Client, given: Given):
     teacher = given.a_user_with_email()
     given.logged_in_as(teacher)
-    response = client.post_json('/class/redesign', {
+    response = client.post_json('/class', {
         'name': 'Redesign Class',
         'creation_type': 123,
     }, check=False)
@@ -78,14 +78,14 @@ def test_create_class_redesign_invalid_creation_type_returns_400(client: Client,
 def test_create_class_redesign_invalid_body_type_returns_400(client: Client, given: Given):
     teacher = given.a_user_with_email()
     given.logged_in_as(teacher)
-    response = client.post('/class/redesign', data='[]', content_type='application/json', check=False)
+    response = client.post('/class', data='[]', content_type='application/json', check=False)
     assert response.status_code == 400
 
 
 def test_create_class_redesign_missing_name_returns_400(client: Client, given: Given):
     teacher = given.a_user_with_email()
     given.logged_in_as(teacher)
-    response = client.post_json('/class/redesign', {'creation_type': 'standard'}, check=False)
+    response = client.post_json('/class', {'creation_type': 'standard'}, check=False)
     assert response.status_code == 400
 
 

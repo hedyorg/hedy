@@ -28,7 +28,7 @@ function promptByPageVariant(
     modal.prompt(message, defaultValue, confirmCb, modalVariantOverride, title);
     return;
   }
-  const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
+  const isRedesignPage = window.location.pathname.includes('/for-teachers/');
   modal.prompt(message, defaultValue, confirmCb, isRedesignPage ? 'redesign' : 'legacy', title);
 }
 
@@ -45,7 +45,7 @@ function confirmByPageVariant(
   },
 ) {
   closeOpenContextMenus();
-  const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
+  const isRedesignPage = window.location.pathname.includes('/for-teachers/');
   if (isRedesignPage) {
     modal.confirmRedesign(message, confirmCb, declineCb, redesignOptions);
     return;
@@ -147,14 +147,14 @@ export function create_class_redesign(form: HTMLFormElement) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      window.location.pathname = '/for-teachers/redesign/class/' + response.id ;
+      window.location.pathname = '/for-teachers/class/' + response.id ;
     }).fail(function (err) {
       modal.notifyError(err.responseText);
     });
   } else if (radio.value === 'standard' || radio.value === 'plain') {
     $.ajax({
       type: 'POST',
-      url: '/class/redesign',
+      url: '/class',
       data: JSON.stringify({
         creation_type: radio?.value,
         name: className?.value,
@@ -163,7 +163,7 @@ export function create_class_redesign(form: HTMLFormElement) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      window.location.pathname = '/for-teachers/redesign/class/' + response.id ;
+      window.location.pathname = '/for-teachers/class/' + response.id ;
     }).fail(function (err) {
       return modal.notifyError(err.responseText);
     })
@@ -1190,7 +1190,7 @@ export function loadPerformanceGraphPrograms(usernames: string[], level: number 
   if (isRedesign) {
     htmx.ajax(
       'GET',
-      '/for-teachers/redesign/get_student_programs',
+      '/for-teachers/get_student_programs',
       {
         target: '#programs_container',
         values: {
@@ -1469,7 +1469,7 @@ export function invite_to_class_redesign(class_id: string, prompt: string, type:
     'hx-vals': JSON.stringify(vals)
   }
   const ok_button_attributes = {
-    'hx-post': `/for-teachers/redesign/class/${class_id}/manage/invite`,
+    'hx-post': `/for-teachers/class/${class_id}/manage/invite`,
     'hx-target': '#manage-students-table-body',
     'hx-include': "[name='usernames']",
     'hx-swap': 'innerHTML'
@@ -1494,7 +1494,7 @@ export function invite_second_teacher_to_configure_class(class_id: string, promp
     'hx-vals': JSON.stringify(vals)
   }
   const ok_button_attributes = {
-    'hx-post': `/for-teachers/redesign/class/${class_id}/configure/invite`,
+    'hx-post': `/for-teachers/class/${class_id}/configure/invite`,
     'hx-target': '#configure-teachers-table-body',
     'hx-include': "[name='usernames']",
     'hx-swap': 'innerHTML'

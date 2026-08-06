@@ -4,7 +4,7 @@
     {% from 'incl/breadcrumb.html' import breadcrumb %}
     {{ breadcrumb([
         {'label': _('classes'), 'url': '/for-teachers/class/all'},
-        {'label': _class.name, 'url': '/for-teachers/redesign/class/' ~ _class.id},
+        {'label': _class.name, 'url': '/for-teachers/class/' ~ _class.id},
         {'label': _('performance_graph')}
     ]) }}
     <h1 style="overflow-wrap: anywhere;">{{ _class.name }}</h1>
@@ -29,7 +29,7 @@
                 <a id="level_button_{{dropdown_level}}" class="flex flex-row  w-full justify-between items-center text-lg font-extralight py-1 px-2 text-center text-blue-900 ease-in transition duration-100
                 {% if loop.index == graph_options.level|int %} rounded-t-lg bg-blue-200 bg-green-200{% else %}rounded-lg{% endif %} no-underline
                 hover:bg-blue-200" {% if dropdown_level==graph_options.level %}disabled{% endif %}
-                    href="/for-teachers/redesign/class/{{ _class.id }}/graph?level={{ dropdown_level}}">
+                    href="/for-teachers/class/{{ _class.id }}/graph?level={{ dropdown_level}}">
                     <div class="flex-grow h-min" tabindex=0>
                         {{ _('level_title') }} {{ dropdown_level }}
                     </div>

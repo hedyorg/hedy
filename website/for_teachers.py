@@ -99,53 +99,6 @@ class ForTeachersModule(WebsiteModule):
                 slides.append(level)
 
         return render_template(
-            "for-teachers.html",
-            current_page="for-teachers",
-            page_title=gettext("title_for-teacher"),
-            teacher_classes=teacher_classes,
-            class_customizations=class_customizations,
-            teacher_adventures=adventures,
-            welcome_teacher=welcome_teacher,
-            slides=slides,
-            last_content_version=hedy_content.LAST_CONTENT_VERSION,
-            javascript_page_options=dict(
-                page='for-teachers',
-                welcome_teacher=welcome_teacher,
-            ))
-
-    @route("/redesign", methods=["GET"])
-    @requires_teacher
-    def for_teachers_page_redesign(self, user):
-        welcome_teacher = session.get("welcome-teacher") or False
-        session.pop("welcome-teacher", None)
-
-        teacher_classes = self.db.get_teacher_classes(user["username"], True)
-        adventures = []
-        teacher_adventures = self.db.get_teacher_adventures(user["username"])
-        # Get the adventures that are created by my second teachers.
-        second_teacher_adventures = self.db.get_second_teacher_adventures(teacher_classes, user["username"])
-        for adventure in list(teacher_adventures) + second_teacher_adventures:
-            adventures.append(
-                {
-                    "id": adventure.get("id"),
-                    "name": adventure.get("name"),
-                    "creator": adventure.get("creator"),
-                    "author": adventure.get("author"),
-                    "date": utils.localized_date_format(adventure.get("date")),
-                    "level": adventure.get("level"),
-                    "levels": adventure.get("levels"),
-                    "why": adventure.get("why"),
-                    "why_class": render_why_class(adventure),
-                }
-            )
-
-        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
-        slides = []
-        for level in range(hedy.HEDY_MAX_LEVEL + 1):
-            if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
-                slides.append(level)
-
-        return render_template(
             "for-teachers/for-teachers.html",
             current_page="for-teachers",
             page_title=gettext("title_for-teacher"),
@@ -157,6 +110,16 @@ class ForTeachersModule(WebsiteModule):
                 page='for-teachers',
                 welcome_teacher=welcome_teacher,
             ))
+
+    @route("/redesign", methods=["GET"])
+    @requires_teacher
+    def for_teachers_page_redesign(self, user):
+        return redirect("/for-teachers/")
+
+    @route("/redesign/<path:subpath>", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    def redirect_redesign_paths(self, subpath):
+        query_suffix = f"?{request.query_string.decode('utf-8')}" if request.query_string else ""
+        return redirect(f"/for-teachers/{subpath}{query_suffix}", code=307)
 
     @route("/adventures", methods=["GET"])
     @requires_teacher
@@ -571,7 +534,7 @@ class ForTeachersModule(WebsiteModule):
                 page='new-class'
             ))
 
-    @route("/redesign/class/<class_id>", methods=["GET"])
+    @route("/class/<class_id>", methods=["GET"])
     @requires_login
     def get_class_redesign(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -593,7 +556,7 @@ class ForTeachersModule(WebsiteModule):
             )
         )
 
-    @route("/redesign/class/<class_id>/graph", methods=["GET"])
+    @route("/class/<class_id>/graph", methods=["GET"])
     @requires_login
     def get_class_graph(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -623,7 +586,7 @@ class ForTeachersModule(WebsiteModule):
             )
         )
 
-    @route("/redesign/class/<class_id>/grade", methods=["GET"])
+    @route("/class/<class_id>/grade", methods=["GET"])
     @requires_login
     def get_grading_page(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -846,7 +809,7 @@ class ForTeachersModule(WebsiteModule):
 
         return student_information
 
-    @route("/redesign/class/<class_id>/grade/filter_sort", methods=["GET"])
+    @route("/class/<class_id>/grade/filter_sort", methods=["GET"])
     @requires_login
     def filter_sort_grading_page(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -892,7 +855,7 @@ class ForTeachersModule(WebsiteModule):
             sort_orders=sort_orders
         )
 
-    @route("/redesign/class/<class_id>/configure", methods=["GET"])
+    @route("/class/<class_id>/configure", methods=["GET"])
     @requires_login
     def configure_class(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -1006,7 +969,7 @@ class ForTeachersModule(WebsiteModule):
 
         return make_response(response, 200)
 
-    @route("/redesign/class/<class_id>/customize-level/<level>", methods=["GET"])
+    @route("/class/<class_id>/customize-level/<level>", methods=["GET"])
     @requires_login
     def customize_level(self, user, class_id, level):
         if not is_teacher(user) and not is_admin(user):
@@ -1059,7 +1022,7 @@ class ForTeachersModule(WebsiteModule):
             available_adventures=available_adventures[level],
         )
 
-    @route("/redesign/class/<class_id>/customize-level/<level>/availability", methods=["POST"])
+    @route("/class/<class_id>/customize-level/<level>/availability", methods=["POST"])
     @requires_login
     def update_customize_level_availability(self, user, class_id, level):
         """Enable or disable one level for a class and return refreshed availability UI."""
@@ -1098,7 +1061,7 @@ class ForTeachersModule(WebsiteModule):
             customizations=customizations,
         )
 
-    @route("/redesign/class/<class_id>/customize-level/<level>/add-adventure", methods=["POST"])
+    @route("/class/<class_id>/customize-level/<level>/add-adventure", methods=["POST"])
     @requires_login
     def add_adventure_customize_level(self, user, class_id, level):
         if not is_teacher(user) and not is_admin(user):
@@ -1152,7 +1115,7 @@ class ForTeachersModule(WebsiteModule):
             class_id, level, adventures, available_adventures
         )
 
-    @route("/redesign/class/<class_id>/customize-level/<level>/restore-default-adventures", methods=["POST"])
+    @route("/class/<class_id>/customize-level/<level>/restore-default-adventures", methods=["POST"])
     @requires_login
     def restore_default_adventures_customize_level(self, user, class_id, level):
         if not is_teacher(user) and not is_admin(user):
@@ -1189,7 +1152,7 @@ class ForTeachersModule(WebsiteModule):
             class_id, level, adventures, available_adventures
         )
 
-    @route("/redesign/class/<class_id>/customize-level/<level>/remove-adventure", methods=["POST"])
+    @route("/class/<class_id>/customize-level/<level>/remove-adventure", methods=["POST"])
     @requires_login
     def remove_adventure_customize_level(self, user, class_id, level):
         if not is_teacher(user) and not is_admin(user):
@@ -1230,7 +1193,7 @@ class ForTeachersModule(WebsiteModule):
             class_id, level, adventures, available_adventures
         )
 
-    @route("/redesign/class/<class_id>/customize-level/<level>/sort-adventures", methods=["POST"])
+    @route("/class/<class_id>/customize-level/<level>/sort-adventures", methods=["POST"])
     @requires_login
     def sort_adventures_customize_level(self, user, class_id, level):
         if not is_teacher(user) and not is_admin(user):
@@ -1271,7 +1234,7 @@ class ForTeachersModule(WebsiteModule):
             class_id, level, adventures, available_adventures
         )
 
-    @route("/redesign/class/<class_id>/customize-level/<level>/remove-all-adventures-modal", methods=["GET"])
+    @route("/class/<class_id>/customize-level/<level>/remove-all-adventures-modal", methods=["GET"])
     @requires_login
     def get_remove_all_adventures_customize_level_modal(self, user, class_id, level):
         if not is_teacher(user) and not is_admin(user):
@@ -1288,7 +1251,7 @@ class ForTeachersModule(WebsiteModule):
             return make_response(gettext("request_invalid"), 400)
 
         modal_text = gettext("remove_customizations_prompt")
-        htmx_endpoint = f"/for-teachers/redesign/class/{class_id}/customize-level/{level}/sort-adventures"
+        htmx_endpoint = f"/for-teachers/class/{class_id}/customize-level/{level}/sort-adventures"
         htmx_target = "#level_adventures_panel"
         htmx_swap = "outerHTML"
         htmx_indicator = "#level_adventures_indicator"
@@ -1303,7 +1266,7 @@ class ForTeachersModule(WebsiteModule):
             modal_variant="redesign",
         )
 
-    @route("/redesign/class/<class_id>/manage", methods=["GET"])
+    @route("/class/<class_id>/manage", methods=["GET"])
     @requires_login
     def manage_class(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -1324,7 +1287,7 @@ class ForTeachersModule(WebsiteModule):
             ),
         )
 
-    @route("/redesign/class/<class_id>/manage/filter_sort", methods=["GET"])
+    @route("/class/<class_id>/manage/filter_sort", methods=["GET"])
     @requires_login
     def sort_management_page(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -1349,7 +1312,7 @@ class ForTeachersModule(WebsiteModule):
             students=student_information,
         )
 
-    @route("/redesign/class/<class_id>/manage/invite", methods=["POST"])
+    @route("/class/<class_id>/manage/invite", methods=["POST"])
     @requires_teacher
     def invite_users(self, user, class_id):
         if not isinstance(request.form.getlist('usernames'), list):
@@ -1390,7 +1353,7 @@ class ForTeachersModule(WebsiteModule):
             students=student_information,
         )
 
-    @route("/redesign/class/<class_id>/configure/invite", methods=["POST"])
+    @route("/class/<class_id>/configure/invite", methods=["POST"])
     @requires_teacher
     def invite_second_teachers_configure(self, user, class_id):
         if not isinstance(request.form.getlist('usernames'), list):
@@ -1440,7 +1403,7 @@ class ForTeachersModule(WebsiteModule):
             second_teacher_invites=second_teacher_invites,
         )
 
-    @route("/redesign/program/<class_id>/grade", methods=["POST"])
+    @route("/program/<class_id>/grade", methods=["POST"])
     @requires_login
     def tick_student_adventure(self, user, class_id):
         level = request.args.get("level")
@@ -1493,9 +1456,9 @@ class ForTeachersModule(WebsiteModule):
             class_adventures_formatted[key] = adventure_list
         return students, class_adventures_formatted, adventure_names
 
-    @route("/class/<class_id>", methods=["GET"])
+    @route("/legacy/class/<class_id>", methods=["GET"])
     @requires_login
-    def get_class(self, user, class_id):
+    def get_class_legacy(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
@@ -1806,7 +1769,7 @@ class ForTeachersModule(WebsiteModule):
                               htmx_target=htmx_target,
                               hyperscript=hyperscript)
 
-    @route("/redesign/class/<class_id>/manage/remove_student_modal/<student_id>", methods=["GET"])
+    @route("/class/<class_id>/manage/remove_student_modal/<student_id>", methods=["GET"])
     @requires_teacher
     def get_remove_student_modal_redesign(self, user, class_id, student_id):
         is_invite = request.args.get('is_invite', type=int)
@@ -1819,7 +1782,7 @@ class ForTeachersModule(WebsiteModule):
             modal_text = modal_text_template.format(student='', student_name='')
         except (KeyError, IndexError, ValueError):
             modal_text = modal_text_template
-        htmx_endpoint = f'/for-teachers/redesign/class/{class_id}\
+        htmx_endpoint = f'/for-teachers/class/{class_id}\
             /manage/remove_student/{student_id}?is_invite={is_invite}'.replace(" ", "")
         htmx_target = "#students-table"
         hyperscript = ""
@@ -1839,7 +1802,7 @@ class ForTeachersModule(WebsiteModule):
         )
 
     @route(
-        "/redesign/class/<class_id>/manage/remove_student/<student_id>",
+        "/class/<class_id>/manage/remove_student/<student_id>",
         methods=["POST"],
     )
     @requires_login
@@ -1931,7 +1894,7 @@ class ForTeachersModule(WebsiteModule):
                                              students_info=students_info
                                              )
 
-    @route("/redesign/get_student_programs", methods=["GET"])
+    @route("/get_student_programs", methods=["GET"])
     @requires_teacher
     def show_students_programs_performance_graph(self, user):
         """
@@ -2201,9 +2164,9 @@ class ForTeachersModule(WebsiteModule):
 
         self.db.update_class_customizations(customizations)
 
-    @route("/update-content/<class_id>", methods=["POST"])
+    @route("/legacy/update-content/<class_id>", methods=["POST"])
     @requires_login
-    def update_class_content(self, user, class_id):
+    def update_class_content_legacy(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(
                 error=401, ui_message=gettext("retrieve_class_error")
@@ -2223,7 +2186,7 @@ class ForTeachersModule(WebsiteModule):
             last_content_version=hedy_content.LAST_CONTENT_VERSION,
         )
 
-    @route("/redesign/update-content/<class_id>", methods=["POST"])
+    @route("/update-content/<class_id>", methods=["POST"])
     @requires_login
     def update_class_content_redesign(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -2919,7 +2882,6 @@ class ForTeachersModule(WebsiteModule):
         class_id = request.args.get("class_id")
         level = request.args.get("level")
         adventure_name = request.args.get("name", "")
-        ui_variant = request.args.get("ui")
 
         adventure_id = uuid.uuid4().hex
         adventure = self.create_basic_adventure(user, adventure_id)
@@ -2936,9 +2898,7 @@ class ForTeachersModule(WebsiteModule):
             adventure["name"] = adventure_name.strip()
 
         session["new_adventure"] = adventure
-        if ui_variant == "legacy":
-            return redirect(f"/for-teachers/customize-adventure/{adventure['id']}?new_adventure=1")
-        return redirect(f"/for-teachers/redesign/customize-adventure/{adventure['id']}?new_adventure=1")
+        return redirect(f"/for-teachers/customize-adventure/{adventure['id']}?new_adventure=1")
 
     def _render_customize_adventure_page(
         self,
@@ -3056,18 +3016,18 @@ class ForTeachersModule(WebsiteModule):
             ),
         )
 
-    @route("/customize-adventure/<adventure_id>", methods=["GET"])
+    @route("/legacy/customize-adventure/<adventure_id>", methods=["GET"])
     @requires_teacher
-    def get_adventure_info(self, user, adventure_id,):
+    def get_adventure_info_legacy(self, user, adventure_id,):
         return self._render_customize_adventure_page(
             user,
             adventure_id,
             "customize-adventure.html",
         )
 
-    @route("/redesign/customize-adventure/<adventure_id>", methods=["GET"])
+    @route("/customize-adventure/<adventure_id>", methods=["GET"])
     @requires_teacher
-    def get_adventure_info_redesign(self, user, adventure_id):
+    def get_adventure_info(self, user, adventure_id):
         return self._render_customize_adventure_page(
             user,
             adventure_id,

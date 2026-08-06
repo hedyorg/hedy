@@ -1,17 +1,14 @@
 import {loginForTeacher} from '../../tools/login/login.js'
-import { openAdventureView } from '../../tools/adventures/adventure.js';
+import { createAdventure } from '../../tools/adventures/adventure.js';
 
-const adventures = ["adventure1", "adventure3"];
+const adventures = ["adventure_preview_one", "adventure_preview_three"];
 
 adventures.forEach((adventure) => {
   it('Is able to preview adventures', () => {
+    const uniqueAdventureName = `${adventure}_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
     loginForTeacher();
-    openAdventureView();
-    cy.getDataCy(`preview_${adventure}`).click();
-    // now it should be visible in code-page.
-    cy.getDataCy(adventure)
-      .should("be.visible")
-      .should("contain.text", adventure)
-    cy.getDataCy('adventures_tab').should("be.visible")
+    createAdventure(uniqueAdventureName);
+    cy.getDataCy('preview').click();
+    cy.get('.tab_content.preview').should('be.visible');
   })
 })

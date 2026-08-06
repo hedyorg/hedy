@@ -36,7 +36,7 @@
         <h1 class="text-4xl font-semibold mt-0" style="overflow-wrap: anywhere;">{{ adventure.name }}
             <i class="fa-solid fa-pencil cursor-pointer text-2xl mx-2"
             data-adventure-id="{{ adventure.id }}"
-            data-prompt="{{ _('name') }}"
+            data-prompt="{{ _('set_adventure_name') }}"
             data-title="{{ _('title_customize-adventure') }}"
             data-default-name="{{ adventure.name }}"
             onclick="hedyApp.rename_adventure(this.dataset.adventureId, this.dataset.prompt, this.dataset.title, this.dataset.defaultName)">
