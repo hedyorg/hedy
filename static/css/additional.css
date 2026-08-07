@@ -328,3 +328,96 @@ kbd {
   background-color: rgba(192, 192, 192, 0.5);
 }
 
+.teacher-table-shell {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.teacher-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.teacher-table-head {
+  background-color: #edf2f7;
+}
+
+.teacher-table-head .teacher-table-th {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+@media (min-width: 640px) {
+  .teacher-table-head .teacher-table-th {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.teacher-table-head tr {
+  border-bottom: 1px solid #cbd5e0;
+}
+
+.teacher-table-body {
+  background-color: #ffffff;
+}
+
+.teacher-table-body tr + tr {
+  border-top: 1px solid #edf2f7;
+}
+
+.teacher-table-td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .teacher-table-td {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.teacher-menu-button {
+  padding: 0.375rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 9999px;
+}
+
+.teacher-context-menu {
+  z-index: 30;
+  width: 14rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.teacher-context-menu-item {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  color: #2c5282;
+  transition: background-color 100ms ease-in;
+}
+
+.teacher-context-menu-item:hover {
+  background-color: #edf2f7;
+}
+
+.teacher-context-menu-item:active {
+  background-color: #cbd5e0;
+}
+
+.teacher-context-menu-item-danger,
+.teacher-context-menu-item-danger span,
+.teacher-context-menu-item-danger i {
+  color: #c53030;
+}
+

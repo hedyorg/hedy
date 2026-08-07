@@ -1,7 +1,22 @@
 import { loginForTeacher } from '../../tools/login/login';
 
 export function loginAndOpenClasses(username = 'teacher1') {
+  const visitClasses = () => cy.request({
+    method: 'GET',
+    url: '/for-teachers/class/all',
+    failOnStatusCode: false,
+  });
+
   loginForTeacher(username);
+  visitClasses().then((response) => {
+    if (response.status !== 200) {
+      loginForTeacher(username);
+      return visitClasses().its('status').should('eq', 200);
+    }
+
+    expect(response.status).to.eq(200);
+  });
+
   cy.visit('/for-teachers/class/all');
   cy.url().should('include', '/for-teachers/class/all');
 }
@@ -29,19 +44,19 @@ export function createRedesignClass(options = {}) {
     return cy.wait('@duplicateClass').then(({ response }) => {
       expect(response.statusCode).to.be.oneOf([200, 201]);
       const classId = response.body.id;
-      cy.url().should('include', `/for-teachers/redesign/class/${classId}`);
+      cy.url().should('include', `/for-teachers/class/${classId}`);
       return cy.wrap({ classId, className });
     });
   }
 
-  cy.intercept('POST', '/class/redesign').as('createClass');
+  cy.intercept('POST', '/class').as('createClass');
   cy.get(`input[name="creation_type"][value="${creationType}"]`).check({ force: true });
   cy.get('#create_class_form button.green-btn-new').click();
 
   return cy.wait('@createClass').then(({ response }) => {
     expect(response.statusCode).to.be.oneOf([200, 201]);
     const classId = response.body.id;
-    cy.url().should('include', `/for-teachers/redesign/class/${classId}`);
+    cy.url().should('include', `/for-teachers/class/${classId}`);
     return cy.wrap({ classId, className });
   });
 }
@@ -62,17 +77,17 @@ export function createStudentsForClass(classId, count = 2) {
 }
 
 export function openClassOverview(classId) {
-  cy.visit(`/for-teachers/redesign/class/${classId}`);
-  cy.url().should('include', `/for-teachers/redesign/class/${classId}`);
+  cy.visit(`/for-teachers/class/${classId}`);
+  cy.url().should('include', `/for-teachers/class/${classId}`);
 }
 
 export function openClassSubpage(classId, segment) {
-  cy.visit(`/for-teachers/redesign/class/${classId}/${segment}`);
-  cy.url().should('include', `/for-teachers/redesign/class/${classId}/${segment}`);
+  cy.visit(`/for-teachers/class/${classId}/${segment}`);
+  cy.url().should('include', `/for-teachers/class/${classId}/${segment}`);
 }
 
 export function assertBreadcrumbLinks(expectedHrefs = []) {
-  cy.get('div.mt-2, div.-mb-4').find('a[href="/for-teachers/redesign"]').should('exist');
+  cy.get('div.mt-2, div.-mb-4').find('a[href="/for-teachers/"]').should('exist');
   expectedHrefs.forEach((href) => {
     cy.get('a').filter(`[href="${href}"]`).should('exist');
   });

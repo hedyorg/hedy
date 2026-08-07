@@ -161,8 +161,25 @@ class Adventure:
         return getattr(self, key, default)
 
     @staticmethod
+    def _pick_visible_content(row):
+        raw_content = row.get("content", "")
+        formatted_content = row.get("formatted_content")
+
+        # Fallback to the raw content when formatted_content is present but effectively empty.
+        if not formatted_content:
+            return raw_content
+
+        formatted_text = BeautifulSoup(formatted_content, 'html.parser').get_text(separator='').strip()
+        raw_text = BeautifulSoup(raw_content, 'html.parser').get_text(separator='').strip()
+        if formatted_text == '' and raw_text != '':
+            return raw_content
+
+        return formatted_content
+
+    @staticmethod
     def from_teacher_adventure_database_row(row):
-        text, example_code = halve_adventure_content(row.get("formatted_content", row["content"]))
+        content_to_show = Adventure._pick_visible_content(row)
+        text, example_code = halve_adventure_content(content_to_show)
         solution = None
         if row.get("solution_example"):
             solution_text, solution_code = halve_adventure_content(row.get("solution_example"))

@@ -205,24 +205,14 @@ teacher-guide:
                 solution_code: |-
                     {ask} Waarom werkt mijn code nu wel?
                     {print} Omdat ik de hoofdletters weggehaald heb!
-        -   title: Leerlingen gebruiken echo zonder ask
+        -   title: Leerlingen gebruiken {answer} zonder ask
             example:
-                error_text: Het commando echo herhaalt het antwoord van een ask commando. Zonder ask werkt de echo dus niet.
-                error_code: "{echo} Jouw naam is"
+                error_text: Het commando antwoord herhaalt het antwoord van een ask commando. Zonder ask werkt antwoord dus niet.
+                error_code: "{print} Jouw naam is {answer}"
                 solution_text: Voeg een vraag toe met een ask commando.
                 solution_code: |-
                     {ask} Hoe heet jij?
-                    {echo} Jouw naam is
-        -   title: Leerlingen willen hun echo-woord (variabele) in het midden van de zin in plaats van aan het einde
-            example:
-                error_text: En groot gelijk hebben ze! Daarom leren ze in het volgende level variabelen gebruiken.
-                error_code: |-
-                    {ask} Wat is de leukste programmeertaal?
-                    {echo} is de beste!
-                solution_text: "In level 1 moeten we het hier op houden:"
-                solution_code: |-
-                    {ask} Wat is de leukste programmeertaal?
-                    {echo} De beste is...
+                    {print} Jouw naam is {answer}
         -   title: "Tekenschildpad: Leerlingen laten het pijltje uit beeld lopen"
             example:
                 error_text: Vaak vinden leerlingen het leuk om hoge getallen uit te testen in de turtle, waardoor het pijltje uit beeld loopt.

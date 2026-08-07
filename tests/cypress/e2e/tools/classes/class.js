@@ -2,15 +2,18 @@ import { goToTeachersPage } from "../navigation/nav";
 
 export function createClass(classname=`test class ${Math.random()}`)
 {
-    goToTeachersPage();
-    cy.wait(500);
+    cy.request({
+        method: 'POST',
+        url: '/class',
+        body: {
+            creation_type: 'standard',
+            name: classname,
+        },
+        failOnStatusCode: true,
+    }).its('status').should('be.oneOf', [200, 201]);
 
-    cy.getDataCy('create_class_button').click();
-    cy.getDataCy('modal_prompt_input').type(classname);
-    cy.getDataCy('modal_ok_button').click();
-
-    goToTeachersPage();
-    cy.wait(500);
+    cy.visit('/for-teachers/class/all');
+    cy.url().should('include', '/for-teachers/class/all');
 
     return classname;
 }
@@ -43,7 +46,8 @@ export function ensureClass()
 }
 
 export function addStudents(classname, count) {
-    const students = Array.from({length:count}, (_, index) => `student_${index}_${Math.random()}`)
+    const seed = Date.now();
+    const students = Array.from({length:count}, (_, index) => `student_${index}_${seed}`)
     goToTeachersPage();
     cy.wait(500);
 
@@ -66,20 +70,29 @@ export function addStudents(classname, count) {
 }
 
 export function openClassView(classname=null){
-    cy.get('body').then(($body) => {
-        const hasVisibleClassLink = $body.find('[data-cy="view_class_link"]:visible').length > 0;
-        if (!hasVisibleClassLink && $body.find('[data-cy="view_classes"]').length > 0) {
-            cy.getDataCy('view_classes').click();
-        }
-    });
+    cy.visit('/for-teachers/class/all');
+    cy.url().should('include', '/for-teachers/class/all');
+    cy.getDataCy('view_class_link').should('exist');
 
     if (classname) {
-        openClass(classname)
+        cy.getDataCy('view_class_link')
+            .contains(classname)
+            .invoke('attr', 'href')
+            .then((href) => {
+                const classId = href.split('/').pop();
+                cy.visit(`/for-teachers/legacy/class/${classId}`);
+            });
     }
 }
 
 export function openClass(classname) {
-    cy.getDataCy('view_class_link').contains(classname).click();
+    cy.getDataCy('view_class_link')
+        .contains(classname)
+        .invoke('attr', 'href')
+        .then((href) => {
+            const classId = href.split('/').pop();
+            cy.visit(`/for-teachers/legacy/class/${classId}`);
+        });
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide());
 }
 
@@ -107,7 +120,6 @@ export function addCustomizations(classname){
     cy.wait('@updateCustomizations');
 
     cy.getDataCy('back_to_class').click();
-    cy.getDataCy('go_back_button').click();
 }
 
 export function createClassAndAddStudents(){
@@ -119,27 +131,16 @@ export function createClassAndAddStudents(){
 export function navigateToClass(classname=null) {
     goToTeachersPage();
     cy.wait(500);
-    openClassView();
-
-    cy.get('body').then(($body) => {
-        const classLinks = $body.find('[data-cy="view_class_link"]');
-
-        if (classname && classLinks.filter((_, el) => Cypress.$(el).text().trim() === classname).length > 0) {
-            cy.getDataCy('view_class_link').contains(classname).first().click();
-            return;
-        }
-
-        if (classLinks.length > 0) {
-            cy.wrap(classLinks[0]).click();
-            return;
-        }
-
-        const fallbackClassName = classname || `test class ${Math.random()}`;
-        createClass(fallbackClassName);
-        goToTeachersPage();
-        openClassView();
-        cy.getDataCy('view_class_link').contains(fallbackClassName).first().click();
-    });
+    openClassView(classname);
+    if (!classname) {
+        cy.getDataCy('view_class_link')
+            .first()
+            .invoke('attr', 'href')
+            .then((href) => {
+                const classId = href.split('/').pop();
+                cy.visit(`/for-teachers/legacy/class/${classId}`);
+            });
+    }
 
     cy.wait(500);
     cy.get('body').then($b => $b.find('[data-cy="survey"]')).then($s => $s.length && $s.hide())

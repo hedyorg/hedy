@@ -195,22 +195,11 @@ teacher-guide:
                     {print} ¡Porque eliminé las mayúsculas!
         -   title: Alumnos utilizan echo sin preguntar
             example:
-                error_text: El comando echo se utiliza para repetir una respuesta después de un comando ask. Sin ask, echo no hará nada.
-                error_code: '{echo} Tu nombre es'
+                error_code: '{print} Tu nombre es {answer}'
                 solution_text: Añade un comando «pregunta» para que funcione.
                 solution_code: |-
                     {ask} ¿Cómo te llamas?
-                    {echo} Tu nombre es
-        -   title: Los alumnos quieren su palabra eco (variable) en el medio de una frase
-            example:
-                error_text: ¡Y tienen razón! Por eso, en el siguiente nivel aprenderán a utilizar las variables adecuadas.
-                error_code: |-
-                    {ask} ¿Qué lenguaje de programación es el más divertido?
-                    {echo} ¡es el mejor!
-                solution_text: 'En el nivel 1 tenemos que llegar hasta aquí:'
-                solution_code: |-
-                    {ask} ¿Qué lenguaje de programación es el más divertido?
-                    {echo} El mejor es...
+                    {print} Tu nombre es {answer}
         -   title: 'Tortuga: los alumnos hacen que la tortuga se salga de la pantalla'
             example:
                 error_text: A menudo, a los alumnos les encanta probar números grandes cuando usan la tortuga, lo que hace que la flecha se salga de la pantalla.

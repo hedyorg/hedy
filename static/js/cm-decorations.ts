@@ -4,7 +4,8 @@ import { IndentContext } from '@codemirror/language'
 import {syntaxTree} from "@codemirror/language"
 import { WidgetType } from "@codemirror/view"
 import { SyntaxNode } from "@lezer/common"
-import { level as levelFacet } from './cm-editor';
+import { keywordLanguage as keywordLanguageFacet, level as levelFacet } from './cm-editor';
+import { traductionMap } from './lezer-parsers/tokens';
 
 export const addErrorLine = StateEffect.define<{ row: number }>();
 export const addErrorWord = StateEffect.define<{ row: number, col: number }>();
@@ -327,7 +328,9 @@ function highlightVariables(view: EditorView) {
     const level = view.state.facet(levelFacet);
     // double equals because level is actually an array with just one element
     // like: [1]
-    if (level == 1) return Decoration.none;
+    if (level == 1) {
+        return highlightLevelOneAnswerVariable(view);
+    }
     let variableDeco = new RangeSetBuilder<Decoration>();
     let variableData: VariableData[] = []
     let functionsNames = new Set<string>()

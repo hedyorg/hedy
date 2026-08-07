@@ -9,14 +9,11 @@ adventures:
                     En el nivel 1 puedes crear una historia con un protagonista que tú elijas.
 
                     En la primera línea, usa `{ask}` y pregunta quién es el personaje principal de tu historia.
-
-                    A continuación, utiliza `{print}` si necesitas mostrar una frase por pantalla.
-                    Utiliza `{echo}` si quieres que el nombre de tu personaje aparezca al final de la frase.
                 example_code: |
                     ```
                     {ask} El protagonista de esta historia es
-                    {print} El protagonista camina por un bosque
-                    {echo} Está bastante asustado
+                    {print} {answer} camina por un bosque
+                    {print} Está bastante asustado {answer}
                     {print} Por todos lados se oyen extraños ruidos
                     {print} Tiene miedo de que éste sea un bosque encantado
                     ```
@@ -43,15 +40,6 @@ adventures:
                     {sleep}
                     {print} nombre tiene miedo de que éste sea un bosque encantado
                     ```
-                story_text_2: |
-                    ### Ejercicio
-                    Ahora es momento de añadir variables a la historia que hiciste en el nivel anterior.
-                    Ve a 'Mis Programas', busca tu historia del nivel 1 y copia el código. Pega el código en tu pantalla de entrada en este nivel.
-
-                    Este código no funcionará en este nivel, porque no has usado variables aún.
-                    Cambia los comandos `{ask}` y `{echo}` en tu código a la forma correcta que aprendiste en este nivel.
-
-                    **Extra** añade un comando `{sleep}` a tu código para crear tensión en la historia.
             3:
                 story_text: |
                     En el nivel 3 puedes hacer tu historia más divertida. Puedes usar aleatoriedad para cualquier monstruo, animal, o cualquier otro obstáculo, como este:
@@ -237,23 +225,9 @@ adventures:
                     {print} '¡Ahora puedes entrar en la casa'
                     ```
             13:
-                story_text: |
-                    Vamos a hacer otra historia, pero ahora usaremos paréntesis con `{print}`.
-
-                    ### Ejercicio 1
-                    Crea una historia de mínimo 5 oraciones. No tienes que usar 'nombre' aún.
                 example_code: |
                     ```
-                    {print}('Bienvenido a esta historia!')
-                    ```
-                story_text_2: |
-                    ### Ejercicio 2
-                    Ya preparamos un `{input}` para ti. Primero usa la variable `name` en tu historia.
-                    Luego añade un segundo `{ask}` y usa esa variable también.
-                    Tip: Recuerda las comas en el `{print}` entre texto y variables
-                example_code_2: |
-                    ```
-                    nombre = {input}("Cual es tu nombre?")
+                    nombre = _
                     {print}('Bienvenido a esta historia!')
                     ```
             8:
@@ -321,50 +295,13 @@ adventures:
                     {print} ¡Hola!
                     {ask} ¿Cómo te llamas?
                     ```
-                story_text_2: |
-                    ## El comando `{echo}`
-                    Si quieres que el ordenador te repita la respuesta, puedes usar el comando `{echo}`. Se hará eco de la respuesta al final de la frase. En este ejemplo después de hola.
-                example_code_2: |
-                    ```
-                    {print} ¡Hola!
-                    {ask} ¿Cómo te llamas?
-                    {echo} hola
-                    ```
-                story_text_3: |
-                    ### Ejercicio
-                    Prueba los comandos `{ask}` y `{echo}`. Lo primero, rellena los huecos en blanco para hacer que el programa funcione.
-                    Después, haz 2 preguntas más usando el comando `{ask}`, tras cada `{ask}` usa un `{echo}` para imprimir la respuesta en pantalla.
-                example_code_3: |
-                    ```
-                    _ ¿Qué tal estás?
-                    _
-                    ```
             2:
-                story_text: |
-                    ## El comando `{ask}`
-                    Ahora que podemos usar **variables** en nuestros códigos, ya no necesitamos el comando `{echo}`.
-                    Podemos usar variables para almacenar las respuestas a nuestras pregunta y de esta manera podemos usar la respuesta a varias preguntas en nuestros códigos.
-                    Compruébalo:
-
-                    ¡De esta manera tu código se convierte interactivo!
                 example_code: |
                     ```
                     nombre {is} {ask} ¿Cómo te llamas?
                     {print} Hola nombre
                     edad {is} {ask} ¿Cuántos años tienes?
                     {print} nombre tiene edad años.
-                    ```
-                story_text_2: |
-                    ### Ejercicio
-                    En la aventura anterior has practicado estableciendo variables con el comando `{is}`.
-                    Has creado al menos 3 variables y las has usado con el comando `{print}`.
-                    Ahora, en vez de establecer las variables queremos que hagas las variables interactivas, como hicimos en nuestro ejemplo.
-
-                    Copia tu código de la aventura anterior y haz las variables interactivas usando el comando `{ask}`.
-                example_code_2: |
-                    ```
-                    favorite_animal {is} {ask} ¿Cuál es tu animal favorito?
-                    {print} Me gusta favorite_animal
                     ```
             13:
                 story_text: El último cambio que tenemos que hacer para conseguir el código en Python es cambiar `{ask}` por `{input}`.
@@ -418,6 +355,9 @@ adventures:
                     {print} 'Tu nota media es ' nota_media
                     ```
                 story_text: "En esta aventura vamos a crear una calculadora que calcule tu nota media por ti. Si consigues que tu calculadora funcione, puedes avanzar a la siguiente aventura, que te permitirá añadir dos funciones adicionales.\n\n### Ejercicio 1\nRellena los huecos en blanco para hacer que la calculadora funcione.\n* Empieza por la cuarta línea, añade una pregunta para averiguar que nota obtuvo el alumno.\n* En la quinta línea, querrás calcular el total de todas las notas, así que total = total + nota.\n* Después tenemos que establecer el valor devuelto. Queremos devolver la media, así que el total dividio por la cantidad de pruebas (4).\n* Por último completamos el código llamando a la función de la línea 8.\n\n¿Lo conseguiste? ¡Increíble! ¿Quieres añadir aún más a tu calculadora? **¡Esta aventura continúa en la siguiente aventura!**\n"
+            11:
+                example_code: "```\nnumeros = 1, 2, 3\n{for} _\n    {for} _\n        respuesta = {ask} _\n        correcta = numero_1 * numero_2\n        {if} respuesta {is} correcta\n            {print} '¡Gran trabajo!'\n        {else}\n            {print} 'No es correcto. La respuesta correcta es ' correcta\n```\n"
+                story_text: "¡Este juego de calculadora te ayuda a practicar las tablas de multiplicación!\n### Ejercicio\nRellena los huecos en blanco. Queremos que este programa pregunte al jugador las siguientes preguntas:\n```\n¿Cuánto es 1 veces 1?\n¿Cuánto es 1 veces 2?\n¿Cuánto es 1 veces 3?\n¿Cuánto es 2 veces 1?\n¿Cuánto es 2 veces 2?\n¿Cuánto es 2 veces 3?\n¿Cuánto es 3 veces 1?\n¿Cuánto es 3 veces 2?\n¿Cuánto es 3 veces 3?\n_\n```\n"
             16:
                 story_text: |
                     Puedes agregar el bucle `{while}` al jugo de la calculadora que aprendiste a hacer en el nivel anterior.
@@ -426,10 +366,24 @@ adventures:
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
                     Then `{call}` the function.
-                example_code: "```\n{define} nueva_pregunta\n    numeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n    numero_1 = numeros {at} {random}\n    numero_2 = numeros {at} {random}\n    correcta = numero_1 * numero_2\n    respuesta = 0\n    _\n    _\n    _\n    {print} '¡Bien hecho!'\n\n{print} 'Da 10 respuestas correctas para ganar!'\n{for} i {in} {range} 1 {to} 10\n    _\n{print} '¡Ganaste!'\n```\n"
-            11:
-                example_code: "```\nnumeros = 1, 2, 3\n{for} _\n    {for} _\n        respuesta = {ask} _\n        correcta = numero_1 * numero_2\n        {if} respuesta {is} correcta\n            {print} '¡Gran trabajo!'\n        {else}\n            {print} 'No es correcto. La respuesta correcta es ' correcta\n```\n"
-                story_text: "¡Este juego de calculadora te ayuda a practicar las tablas de multiplicación!\n### Ejercicio\nRellena los huecos en blanco. Queremos que este programa pregunte al jugador las siguientes preguntas:\n```\n¿Cuánto es 1 veces 1?\n¿Cuánto es 1 veces 2?\n¿Cuánto es 1 veces 3?\n¿Cuánto es 2 veces 1?\n¿Cuánto es 2 veces 2?\n¿Cuánto es 2 veces 3?\n¿Cuánto es 3 veces 1?\n¿Cuánto es 3 veces 2?\n¿Cuánto es 3 veces 3?\n_\n```\n"
+                example_code: |
+                    ```
+                    {def} nueva_pregunta:
+                        numeros = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                        numero_1 = numeros {at} {random}
+                        numero_2 = numeros {at} {random}
+                        correcta = numero_1 * numero_2
+                        respuesta = 0
+                        _
+                        _
+                        _
+                        {print}('¡Bien hecho!')
+
+                    {print}('Da 10 respuestas correctas para ganar!')
+                    {for} i {in} {range}(1, 10):
+                        _
+                    {print} '¡Ganaste!'
+                    ```
     clear_command:
         default_save_name: comando_limpiar
         description: Comando {clear}
@@ -470,9 +424,9 @@ adventures:
                     ```
                     {print} Me encanta programar
                     ¿También te encanta programar?
-                    {echo}
+                    {answer}
                     {print} ¿Cuáles son tus aficiones?
-                    {echo} Tus aficiones son
+                    {print} Tus aficiones son
                     ```
             2:
                 story_text: |-
@@ -488,7 +442,7 @@ adventures:
                     destino {ask} ¿A dónde vas de vacaciones?
                     {print} El vuelo a dstino sale a las 3 pm.
                     {ask} ¿Has facturado ya tu equipaje?
-                    {echo}
+                    {answer}
                     {print} Déjeme imprimirle su tarjeta de embarque.
                     {sleep}
                     ¡Aquí tiene! ¡Buen viaje!
@@ -754,7 +708,7 @@ adventures:
                     Entonces probablemente sepas que realmente no pueden predecir tu futuro, ¡pero sigue siendo divertido jugar!
 
                     ¡En los próximos niveles puedes aprender a crear tu propia máquina de la fortuna!
-                    En el nivel 1 puedes comenzar fácil dejando que Hedy se presente como adivina y dejes que haga `{echo}` de las respuestas de los jugadores.
+                    En el nivel 1 puedes comenzar fácil dejando que Hedy se presente como adivina y dejes que haga `{answer}` de las respuestas de los jugadores.
                     Así:
                 example_code: |
                     ```
@@ -762,7 +716,7 @@ adventures:
                     _ ¿Quién eres tú?
                     _ Déjame echar un vistazo a mi bola de cristal.
                     _ Veo... Veo...
-                    _ Tu nombre es
+                    _ Tu nombre es _
                     ```
                 story_text_2: |
                     ### Ejercicio
@@ -770,7 +724,7 @@ adventures:
                     **Extra** Cambia el código y deja que el adivino no sólo prediga tu nombre, sino también tu edad, tu equipo favorito de deporte o cualquier otra cosa sobre ti mismo.
             3:
                 story_text: |
-                    En los niveles anteriores has creado tu primera máquina de la fortuna, pero Hedy realmente no podía predecir nada, sólo `{echo}`.
+                    En los niveles anteriores has creado tu primera máquina de la fortuna, pero Hedy realmente no podía predecir nada.
                     En este nivel puedes utilizar una variable y el comando `{at} {random}` para dejar que Hedy escoja una respuesta para ti. Mira este código, por ejemplo:
                 example_code: |
                     ```
@@ -980,7 +934,7 @@ adventures:
                     {print} ¡Necesito salir de aquí!
                     {print} Hay 3 puertas...
                     {ask} ¿Cuál puerta debería escoger?
-                    {echo} Escoge la puerta
+                    {print} Escoge la puerta {answer}
                     {print} …?
                     ```
                 story_text_2: |
@@ -1115,7 +1069,33 @@ adventures:
                     ```
             14:
                 story_text: "### Ejercicio\nEste juego de la casa encantada utiliza la conexión entre las listas que puedes usar en este nivel.\nPor ejemplo: todas las propiedades que pertenecen al zombi son las primeras en todas las listas, la bruja las segundas y el vampiro las terceras.\n¡Revisa el código y rellena  `weapons[i]`, `monsters[i]` , `bad_fate[i]`, `good_fate[i]`, `hint[i]` en los huecos correctos para hacer que el código funcione!\n"
-                example_code: "```\nnumeros = [1, 2, 3]\ni = numeros[{random}]\nsugerencia = ['gruñir', 'una carcajada', 'aleteo de alas de murciélago']\nmonstruos= ['zombi', 'bruja', 'vampiro']\nmal_destino = ['Se comen tu cerebro', 'Estás maldecido para siempre', 'Te muerden']\nbuen_destino = ['Lanzas el jamón. El zombi se distrae y empieza a comérselo.', 'Prendes fuego a las cortinas. La brujaThe witch huye por miedo al fuego', 'El vampiro odia el ajo y huye']\narmas = ['jamón', 'mechero', 'ajo']\n{print} 'Te encuentras frente a una mansión antigua'\n{print} 'Algo no va bien aquí'\n{print} 'Oyes ' _\n{print} 'Vas a explorar qué es'\n{print} 'Entras en la cocina y ves un mechero, un jamón crudo y un ajo.'\ntu_arma = {ask} '¿Qué traes contigo?'\n{print} 'Con tu ' tu_arma ' entras en el salón'\n{print} 'Allí te encuentras un ' _\narma_necesaria = _\n{if} tu_arma == arma_necesaria\n    {print} 'Utilizas tu ' tu_arma\n    {print} _\n    {print} '¡GANASTE!'\n{else}\n    {print} 'Es elegido el arma equivocada...'\n    {print} _\n    {print} 'FIN DEL JUEGO'\n```\n"
+                example_code: |
+                    ```
+                    numeros = [1, 2, 3]
+                    i = numeros[{random}]
+                    sugerencia = ['gruñir', 'una carcajada', 'aleteo de alas de murciélago']
+                    monstruos= ['zombi', 'bruja', 'vampiro']
+                    mal_destino = ['Se comen tu cerebro', 'Estás maldecido para siempre', 'Te muerden']
+                    buen_destino = ['Lanzas el jamón. El zombi se distrae y empieza a comérselo.', 'Prendes fuego a las cortinas. La brujaThe witch huye por miedo al fuego', 'El vampiro odia el ajo y huye']
+                    armas = ['jamón', 'mechero', 'ajo']
+                    {print}('Te encuentras frente a una mansión antigua')
+                    {print}('Algo no va bien aquí')
+                    {print}('Oyes ', _)
+                    {print}('Vas a explorar qué es')
+                    {print}('Entras en la cocina y ves un mechero, un jamón crudo y un ajo.')
+                    tu_arma = {input}('¿Qué traes contigo?')
+                    {print}('Con tu ', tu_arma ', entras en el salón')
+                    {print}('Allí te encuentras un ', _)
+                    arma_necesaria = _
+                    {if} tu_arma == arma_necesaria
+                        {print}('Utilizas tu ', tu_arma)
+                        {print} _
+                        {print}('¡GANASTE!')
+                    {else}
+                        {print}('Es elegido el arma equivocada...')
+                        {print} _
+                        {print}('FIN DEL JUEGO')
+                    ```
     if_command:
         default_save_name: comando_si
         description: Introducción al comando {if}
@@ -1217,24 +1197,11 @@ adventures:
         description: introducción al comando {is}
         levels:
             2:
-                story_text: |
-                    ## Variables
-                    Puedes nombrar una palabra con `{is}`. A esto se le llama **variable**. En este ejemplo creamos una variable llamada nombre y una variable llamada edad. Puedes usar la palabra nombre en cualquier parte de tu código y será reemplazada por Hedy, tal que así:
                 example_code: |
                     ```
                     nombre {is} Hedy
                     edad {is} 15
                     {print} nombre tiene edad años
-                    ```
-                story_text_2: |
-                    ### Ejercicio
-                    ¡Es hora de hacer tus propias variables!
-                    En el código de ejemplo hemos hecho un ejemplo de la variable `favorite_animal`. En la línea 1 la variable está establecida, y en la línea 2 usamos la variable en un comando `{print}`.
-                    En primer lugar, terminar nuestro ejemplo rellenando su animal favorito en el blanco. Luego haga al menos 3 de estos códigos usted mismo. Escoge una variable, y establece la variable con el comando `{is}`. Luego úsala con un comando `{print}`, tal como hicimos.
-                example_code_2: |
-                    ```
-                    animal_favorito {is} _
-                    {print} me gusta animal_favorito
                     ```
             7:
                 story_text: |
@@ -1273,15 +1240,15 @@ adventures:
                     palabras_francesas = ['bonjour', 'ordinateur', 'pomme de terre']
                     traducción = ['hola', 'computadora', 'papa']
                     puntuación = 0
-                    {for} i {in} {range} 1 {to} 3
-                        respuesta = {ask} '¿Qué significa ' palabras_francesas[i] '?'
+                    {for} i {in} {range}(1, 3):
+                        respuesta = {input}('¿Qué significa ', palabras_francesas[i], '?')
                         correcta = traducción[i]
-                        {if} respuesta == correcta
-                            {print} '¡Correcto!'
+                        {if} respuesta == correcta:
+                            {print}('¡Correcto!')
                             puntuación = puntuación + 1
-                        {else}
-                            {print} 'No, ' palabras_francesas[i] ' significa ' traducción[i]
-                    {print} 'Tuviste ' puntuación ' respuestas correctas.'
+                        {else}:
+                            {print}('No, ', palabras_francesas[i], ' significa ', traducción[i])
+                    {print}('Tuviste ', puntuación, ' respuestas correctas.')
                     ```
                 story_text: "### Ejercicio\nEcha un vistazo al código de ejemplo. Este es un programa para practicar vocabulario en francés. Ahora haz tu propio programa para practicar tu vocabulario en tu nuevo idioma.\nSi no sabes ningún otro idioma, puedes utilizar el traductor de Google o puedes utilizar emojis y tu idioma materno.\n"
     lists:
@@ -1298,6 +1265,9 @@ adventures:
         default_save_name: música
         description: ¡Toca una nota!
         levels:
+            1:
+                example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
+                story_text: "¡En este nivel aprenderás a como utilizar el comando `{play}` para tocar una nota!\n\nEscribe `{play}` seguido de la nota que quieras tocar. La escala es C-D-E-F-G-A-B.\nComo puedes ver hay 7 letras diferentes, pero podemos tocar más que solo 7 notas.\nEscribe un número entre 0 y 9 detras de la letra para elegir la escala, por ejemplo, después de B4 viene C5.\nC0 es la nota más grave que puedes tocar, B9 es la más aguda.\n\n### Ejercicio\n¡Prueba el código de ejemplo y después juega con él! ¿Puedes crear tu propia melodía?\nEn el siguiente nivel aprenderás a como tocar algunas canciones existentes."
             2:
                 story_text: |
                     ### Exercise
@@ -1453,12 +1423,18 @@ adventures:
             12:
                 example_code: "```\n{define} primera_linea\n    {play} C\n    {play} C\n    {play} G\n    {play} G\n    {play} A\n    {play} A\n    {play} G\n    {sleep}\n\n{define} segunda_linea\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {play} D\n    {play} C\n    {sleep}\n\n{define} tercera_linea\n    {play} G\n    {play} G\n    {play} F\n    {play} F\n    {play} E\n    {play} E\n    {play} D\n    {sleep}\n\n{call} _\n{call} _\n{call} _\n{call} _\n{call} _\n{call} _\n```\n"
                 story_text: "'Utiliza las funciones en tus canciones! Como puedes ver en el código de ejemplo, puedes hacer una función por cada estrofa de Estrellita Dónde Estás. Una vez que has programado las tres primeras estrofas, todo lo que tienes que hacer es llamar a las funciones en el orden en el que quieres que suenen.\n\n### Ejercicio\nCompleta la canción Estrellita Dónde Estás.\nDespués echa un vistazo a las canciones que has programado en los niveles anteriores, ¿puedes mejorar y acortar también esos códigos utilizando las funciones?\n"
-            1:
-                example_code: "```\n{play} C4\n{play} D4\n{play} E4\n{play} F4\n{play} G4\n{play} A4\n{play} B4\n{play} C5\n```"
-                story_text: "¡En este nivel aprenderás a como utilizar el comando `{play}` para tocar una nota!\n\nEscribe `{play}` seguido de la nota que quieras tocar. La escala es C-D-E-F-G-A-B.\nComo puedes ver hay 7 letras diferentes, pero podemos tocar más que solo 7 notas.\nEscribe un número entre 0 y 9 detras de la letra para elegir la escala, por ejemplo, después de B4 viene C5.\nC0 es la nota más grave que puedes tocar, B9 es la más aguda.\n\n### Ejercicio\n¡Prueba el código de ejemplo y después juega con él! ¿Puedes crear tu propia melodía?\nEn el siguiente nivel aprenderás a como tocar algunas canciones existentes."
             16:
                 story_text: "**Precaución** ¡Esta aventura puede ser extremadamente molesta!\nTambién podemos utilizar el comando {while} para repetir una canción para siempre.\n\n### Ejercicio\nCompleta la canción interminable.\n"
-                example_code: "```\n{def} cancion\n    {play} _\n\nsi_o_no = {input}('¿Quieres oír mi canción interminable?')\n{while} si_o_no = 'sí':\n    cancion()\n    {print} '🥳'\n```\n"
+                example_code: |
+                    ```
+                    {def} cancion():
+                        {play} _
+
+                    si_o_no = {input}('¿Quieres oír mi canción interminable?')
+                    {while} si_o_no = 'sí':
+                        cancion()
+                        {print}('🥳')
+                    ```
     parrot:
         name: Loro
         default_save_name: Loro
@@ -1471,8 +1447,8 @@ adventures:
                     ```
                     {print} Soy Hedy la lora
                     {ask} ¿Cuál es tu nombre?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Desafío
@@ -1483,8 +1459,8 @@ adventures:
                     ```
                     {print} Soy Hedy el loro
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     En el nivel anterior has hecho un loro que repetirá todo después de ti. En este nivel harás que el loro interactivo usando una variable y el comando `{ask}`.
@@ -1576,7 +1552,24 @@ adventures:
                     ```
             15:
                 story_text: "### Ejercicio\n¡En este nivel puedes dejar que Hedy te diga si has ahorrado suficiente dinero!\n¡Completa el código rellenando los huecos en blanco!\n"
-                example_code: "```\n_ calcular_presupuesto {with} deseo, dinero, asignación\n    para_ahorrar = deseo - dinero\n    semanas = para_ahorrar / asignación\n    {if} deseo _ dinero\n        {print} '¡Tienes que ahorrar un poco más!'\n        {print} 'Necesitarás ' semanas ' semanas más.'\n    {else}\n        {print} '¡Genial! Tienes suficiente'\n        {print} '¡Vayamos de compras!'\n\ndinero = {ask} '¿Cuánto dinero has ahorrado?'\ndeseo = {ask} '¿Cuánto dinero necesitas?'\nasignación = {ask} '¿Cuánto dinero ahorras cada semana?'\n\n{call} _\n```\n"
+                example_code: |
+                    ```
+                    _ calcular_presupuesto(deseo, dinero, asignación):
+                        para_ahorrar = deseo - dinero
+                        semanas = para_ahorrar / asignación
+                        {if} deseo _ dinero:
+                            {print}('¡Tienes que ahorrar un poco más!')
+                            {print}('Necesitarás ' semanas ' semanas más.')
+                        {else}:
+                            {print}('¡Genial! Tienes suficiente')
+                            {print}('¡Vayamos de compras!')
+
+                    dinero = {input}('¿Cuánto dinero has ahorrado?')
+                    deseo = {input}('¿Cuánto dinero necesitas?')
+                    asignación = {input}('¿Cuánto dinero ahorras cada semana?')
+
+                    _
+                    ```
     print_command:
         default_save_name: imprimir
         description: Introducción al comando imprimir
@@ -1688,7 +1681,7 @@ adventures:
                     ```
             14:
                 story_text: "Ahora que has aprendido a utilizar los corchetes en las listas, ¡también puedes utilizar el comando {at} {random} al estilo Python!\n¡Simplemente escribe el nombre de tu lista con `[random]` detrás de ella!"
-                example_code: "```\nfruta = ['manzana', 'plátano', 'cereza']\n{print} fruta[random]\n```"
+                example_code: "```\nfruta = ['manzana', 'plátano', 'cereza']\n{print}(fruta[random])\n```"
         name: '{random}'
     repeat_command:
         default_save_name: comando_repetir
@@ -1796,13 +1789,13 @@ adventures:
                     ```
                     {print} Bienvenido al restaurante Hedy's
                     _ ¿Qué te gustaría pedir?
-                    {echo} Así que te gustaría ordenar
+                    {print} Así que te gustaría ordenar {answer}
                     {print} ¡Gracias por su pedido!
                     {print} ¡Está en camino!
                     ```
             2:
                 story_text: |
-                    En el nivel 2 puedes ampliar su restaurante usando variables. En el nivel 1 Hedy sólo podía `{echo}` la orden una vez y sólo podía recordar lo último que se le pidió.
+                    En el nivel 2 puedes ampliar su restaurante usando variables. En el nivel 1 Hedy sólo podía recordar lo último que se le pidió.
                     ¡Ahora puedes usar variables y Hedy puede recordar tanto la comida como los ingredientes!
                 example_code: |
                     ```
@@ -1813,17 +1806,6 @@ adventures:
                     cobertura {is} {ask} ¿Te gustaría carne o verduras en eso?
                     {print} ¡La comida con cobertura está en camino!
                     ```
-                story_text_2: |
-                    ### Ejercicio
-                    Copia tu propio código del restaurante del nivel anterior a la pantalla de entrada de abajo.
-                    Corrige el código reemplazando los comandos `{ask}` y  `{echo}` y usando variables, como las que has aprendido en este nivel.
-
-                    Ahora que tu código funciona otra vez, es hora de añadir más cosas.
-                    Observa la última línea de código del ejemplo: ¡Marchando la comida `{print}` con cobertura!
-                    En esta línea se han usado 2 variables para crear un resumen de tu pedido.
-                    Ahora añade tu propio resumen de la comida y las bebidas pedidas por el cliente.
-
-                    **Extra** Ahora que has aprendido a usar variables, puedes usar tantas variables como quieras en una línea de código. ¿Puedes añadir más variables a tu código, como comer aquí o para llevar, efectivo o tarjeta, con o sin pajita etc.?
             3:
                 story_text: |
                     ¿Tienes problemas para decidir qué quieres cenar? ¡Puedes dejar que Hedy elija por ti!
@@ -2003,13 +1985,13 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print} 'Bienvenido a McHedy'
+                    {print}('Bienvenido a McHedy')
                     más = 'sí'
                     _
-                        pedido = {ask} '¿Qué te gustaría ordenar?'
-                        {print} pedido
-                        más = {ask} '¿Te gustaría pedir algo más?'
-                    {print} '¡Gracias!'
+                        pedido = {input}('¿Qué te gustaría ordenar?')
+                        {print}(pedido)
+                        más = {input}('¿Te gustaría pedir algo más?')
+                    {print}('¡Gracias!')
                     ```
     rock:
         name: Piedra, papel o tijera
@@ -2020,12 +2002,12 @@ adventures:
                 story_text: |
                     En el nivel 1 comenzamos el juego de piedra, papel o tijera.
 
-                    Con `{ask}` puedes tomar una opción, y con `{echo}` puedes repetir la opción elegida.
+                    Con `{ask}` puedes tomar una opción, y con `{answer}` puedes repetir la opción elegida.
                 example_code: |
                     ```
                     {print} ¿Qué eliges?
                     {ask} elige piedra, papel o tijera
-                    {echo} has elegido:
+                    {print} has elegido: {answer}
                     ```
                 story_text_2: |
                     ### Ejercicio
@@ -2035,18 +2017,7 @@ adventures:
                     ```
                     {print} ¿Qué escoges?
                     {ask} escoge _
-                    {echo} tu elección fue
-                    ```
-            2:
-                story_text: |
-                    En este nivel puedes practicar el uso de las variables, ¡para poder hacer el juego de piedra, papel o tijera en el siguiente nivel!
-                    ### Ejercicio
-                    Termina el código rellenando la **variable** en el espacio en blanco.
-                    Este juego no es muy interactivo, ¡pero no te preocupes! En la siguiente aventura aprenderás a usar variables con el comando `{ask}` ¡para hacer tu juego interactivo!
-                example_code: |-
-                    ```
-                    opción {is} piedra
-                    {print} Yo elijo _
+                    {print} tu elección fue {answer}
                     ```
             3:
                 story_text: |
@@ -2141,11 +2112,6 @@ adventures:
                             ganó = 'sí'
                     _
                     ```
-    rock_2:
-        name: Piedra, papel, tijeras 2
-        default_save_name: piedra_2
-        description: Parte 2 de piedra, papel, tijeras
-        levels:
             2:
                 story_text: |
                     Ahora que has aprendido a utilizar el comando `{ask}`, ¡también puedes hacer que tu código de piedra, papel o tijera sea interactivo!
@@ -2709,7 +2675,7 @@ adventures:
                     Espiral
                     ```
                     distancia = 5
-                    {while} distancia < 200
+                    {while} distancia < 200:
                         distancia = distancia + 5
                          _
                     ```
@@ -2718,12 +2684,12 @@ adventures:
                 example_code_2: |
                     Abanico
                     ```
-                    {define} dibuja_un_cuadrado {with} lado
+                    {def} dibuja_un_cuadrado(lado):
                     _
 
                     i = 100
-                    {while} i > 1
-                        _ {with} i
+                    {while} i > 1:
+                        _ (i)
                         _
                         i = i - 3
                     ```
@@ -2758,7 +2724,25 @@ adventures:
         levels:
             15:
                 story_text: "En la aventura anterior has aprendido a utilizar un argumento en una función, y has aprendido a cómo combinarlo con un {ask}.\nTe estarás preguntando por qué utilizar las funciones, porque en el ejemplo las funciones en el son de una línea de código.\nAhora te mostraremos como es una función más grande y también utilizaremos varios argumentos. Verás como es mucho mejor utilizar una función una vez que se vuelve más grande.\nAquí tienes un ejemplo de una función con argumentos combinada con comandos {ask}.\n"
-                example_code: "```\n{define} mensaje_bienvenida {with} titulo, apellido, pais, numero_habitacion\n    {print} 'Bienvenido al Hotel Hedy, ' titulo ' ' apellido\n    buen_viaje {is} {ask} '¿Tuviste un buen viaje desde ' pais '?'\n    {if} buen_viaje {is} 'sí'\n        {print} '¡Maravilloso!'\n    {else}\n        {print} 'Siento oir eso.'\n        {print} 'Espero que puedas tener un buen descanso en tu habitación'\n    {print} 'Tu número de habitación es ' numero_habitacion\n\n{print} 'Hola. Por favor, rellena tu información para registrarte.'\ntitulo = {ask} '¿Cuál es tu título (Sr., Sra., Dña., D., etc.)?'\nnombre = {ask} '¿Cómo te apellidas?'\npais_procedencia = {ask} '¿De qué país procede?'\n\n{call} mensaje_bienvenida {with} titulo, nombre, pais_procedencia, 105\n```\n\ntitulo = {ask} '¿Cuál es tu título (Sr., Sra., Dña., D., etc.)?'\nnombre = {ask} '¿Cómo te apellidas?'\npais_procedencia = {ask} '¿De qué país procede?'\n\n{call} mensaje_bienvenida {with} titulo, nombre, pais_procedencia, 105\n"
+                example_code: |
+                    ```
+                    {def} mensaje_bienvenida (titulo, apellido, pais, numero_habitacion):
+                        {print}('Bienvenido al Hotel Hedy, ', titulo, ' ', apellido)
+                        buen_viaje = {input}('¿Tuviste un buen viaje desde ', pais, '?')
+                        {if} buen_viaje == 'sí':
+                            {print}('¡Maravilloso!')
+                        {else}:
+                            {print}('Siento oir eso.')
+                            {print}('Espero que puedas tener un buen descanso en tu habitación')
+                        {print}('Tu número de habitación es ', numero_habitacion)
+
+                    {print}('Hola. Por favor, rellena tu información para registrarte.')
+                    titulo = {input}('¿Cuál es tu título (Sr., Sra., Dña., D., etc.)?')
+                    nombre = {input}('¿Cómo te apellidas?')
+                    pais_procedencia = {input}('¿De qué país procede?')
+
+                    mensaje_bienvenida(titulo, nombre, pais_procedencia, 105)
+                    ```
     calculator_2:
         name: Calculadora 2
         default_save_name: Calculadora 2

@@ -9,19 +9,16 @@ adventures:
                     Në nivelin 1, ju mund të krijoni një tregim me një tjetër personazh kryesor që mund ta shtoni vetë.
 
                     Në rreshtin e parë, përdorni komandën `{ask}` dhe pyetni cili do jetë personazhi kryesor në tregim.
-
-                    Pas rreshtit të parë, filloni me `{print}` nëse fjalia duhet të printohet.
-                    Përdorni `{echo}` Nëse doni që personazhi kryesor të jetë në fund të fjalisë.
                 example_code: |
                     ```
                     {ask} Personazhi kryesor në tregim është
-                    {print} Personazhi kryesor tani ecën në pyll
-                    {echo} Ai është i pak i frikësuar,
+                    {print} {answer} tani ecën në pyll
+                    {print} Ai është i pak i frikësuar, {answer}
                     {print} Ai dëgjon zëra kudo
-                    {print} Ai frikësohet se ky pyll është me fantazma
+                    {print} {answer} frikësohet se ky pyll është me fantazma
                     ```
                 story_text_2: |
-                    A mund ta bëni historinë tuaj në Hedy tani duke përdorur `{print}`, `{ask}` dhe `{echo}`?
+                    A mund ta bëni historinë tuaj në Hedy tani duke përdorur `{print}`, `{ask}` dhe `{answer}`?
             2:
                 story_text: |
                     Në nivelin e 2, ju mund ta bëni tregimin më jetë më argëtues. Emri i personazhit tuaj kryesor mund të jetë kudo në fjali.
@@ -444,15 +441,15 @@ adventures:
                     Atëherë ju ndoshta e dini se ata nuk mund ta parashikojnë vërtetë të ardhmen tuaj, por është akoma argëtuese të luash!
 
                     Në nivelet e ardhshme mund të mësoni se si të krijoni makinën tuaj të tregimit të fatit!
-                    Në nivelin 1 mund të filloni lehtësisht duke e lënë Hedy-n të prezantohet si një fallxhore dhe ta lini të {echo} përgjigjet e lojtarëve.
+                    Në nivelin 1 mund të filloni lehtësisht duke e lënë Hedy-n të prezantohet si një fallxhore dhe ta lini të `{answer}` përgjigjet e lojtarëve.
                     Si kjo:
                 example_code: |
                     ```
-                    {print} Përshëndetje, unë jam Hedy fallxhori!
-                    {ask} Kush jeni ju?
-                    {print} Më lejoni t'i hedh një sy topit tim të kristaltë
-                    {print} Ah po e shoh.. e shoh...
-                    {echo} Emri yt është
+                    _ Përshëndetje, unë jam Hedy fallxhori!
+                    _ Kush jeni ju?
+                    _ Më lejoni t'i hedh një sy topit tim të kristaltë
+                    _ Ah po e shoh.. e shoh...
+                    _ Emri yt është _
                     ```
                 story_text_2: |
                     Hedy tani ju tregon vetëm emrin tuaj. A mund ta zgjeroni kodin në mënyrë që Hedy të mund të parashikojë më shumë gjëra për ju?
@@ -460,7 +457,7 @@ adventures:
                     Hidhni një sy në nivelin 2 për të përmirësuar parashikuesin tuaj të fatit.
             3:
                 story_text: |
-                    Në nivelet e mëparshme ju keni krijuar makinën tuaj të parë të tregimit të fatit, por Hedy nuk mund të parashikonte asgjë, vetëm {echo}.
+                    Në nivelet e mëparshme ju keni krijuar makinën tuaj të parë të tregimit të fatit, por Hedy nuk mund të parashikonte asgjë.
                     Në këtë nivel, ju mund të përdorni një variabël dhe komandën `{at} {random}` për ta lënë Hedy-n të zgjedhë një përgjigje për ju. Shikoni këtë kod për shembull:
                 example_code: |
                     Në këtë shembull, lojtari mund të {ask} Hedy-t një pyetje po-jo dhe Hedy do të zgjedhë një përgjigje të rastësishme për ju.
@@ -615,7 +612,7 @@ adventures:
                     {print} Më duhet të iki nga këtu!
                     {print} Janë 3 dyer para meje..
                     {ask} Cilën derë duhet të zgjedh?
-                    {echo} Zgjedh derën
+                    {print} Zgjedh derën {answer}
                     {print} ...?
                     ```
                 story_text_2: |
@@ -754,15 +751,15 @@ adventures:
                     fjalë_franceze = ['bonjour', 'ordinator', 'pomme de terre']
                     përkthimi = ['përshëndetje', 'kompjuter', 'patate']
                     rezultati = 0
-                    {for} i {in} {range} 1 {to} 3
-                        përgjigje = {ask} 'Çfarë do të thotë 'fjalë_franceze[i]'?'
+                    {for} i {in} {range}(1, 3):
+                        përgjigje = {input}('Çfarë do të thotë ', fjalë_franceze[i], '?')
                         saktë = përkthimi[i]
-                        {if} përgjigje == saktë
-                            {print} 'E saktë!'
+                        {if} përgjigje == saktë:
+                            {print}('E saktë!')
                             rezultati = rezultati + 1
-                        {else}
-                            {print} 'E gabuar, 'fjalë_franceze[i]' do të thotë 'përkthimi[i]
-                    {print} 'Ju dhatë ' rezultati ' përgjigje të sakta.'
+                        {else}:
+                            {print}('E gabuar, ', fjalë_franceze[i], ' do të thotë ', përkthimi[i])
+                    {print}('Ju dhatë ', rezultati, ' përgjigje të sakta.')
                     ```
     maths:
         levels: {}
@@ -780,8 +777,8 @@ adventures:
                     ```
                     {print} Jam Hedy papagalli
                     {ask} Si e keni emrin?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     A mund ta bëni papagallin të bëjë një pyetje tjetër? Plotësoni vendet bosh në shembull!
@@ -789,8 +786,8 @@ adventures:
                     ```
                     {print} Jam Hedy papagalli
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     Krijo papagallin tuaj online që do të ju kopjojë!
@@ -883,14 +880,14 @@ adventures:
                 example_code_2: |
                     ```
                     {print} Mirë se erdhët në Restorantin e Hedy-it🍟
-                    {ask} Çfarë doni të porositni?
-                    {echo} Pra ju doni të porositni
+                    _ Çfarë doni të porositni?
+                    {print} Pra ju doni të porositni {answer}
                     {print} Faleminderit për porosinë tuaj!
                     {print} Është duke u bërë!
                     ```
             2:
                 story_text: |
-                    Në nivelin 2 mund ta zmadhoni kodin e restorantin duke përdorur variabla. Në nivelin 1 Hedy vetëm mund të përdorte komandën {echo} dhe të shfaq porosinë një herë dhe vetëm e mban mend porosinë e fundit.
+                    Në nivelin 2 mund ta zmadhoni kodin e restorantin duke përdorur variabla. Në nivelin 1 Hedy vetëm e mban mend porosinë e fundit.
                     Tani mund të përdorni variabla dhe Hedy mund të mbaje mend ushqimin dhe ëmëlsirat!
                 example_code: |
                     ```
@@ -901,8 +898,6 @@ adventures:
                     majë {is} {ask} Dëshironi mish apo perime në të?
                     {print} ushqimi me majë është duke u bërë!
                     ```
-                story_text_2: |
-                    A mund ta bëni këtë kod më të përpunuar? Për shembull duke shtuar pije në porosi? Apo...?
             3:
                 example_code: |
                     ```
@@ -1095,13 +1090,13 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print} 'Mirë se vini në McHedy'
+                    {print}('Mirë se vini në McHedy')
                     më_shumë = 'po'
                     _
-                        porosia = {ask} 'Çfarë dëshironi të porosisni?'
-                        {print} porosia
-                        më_shumë = {ask} 'A dëshironi diçka {else}(tjetër)?'
-                    {print} 'Falemenderit!'
+                        porosia = {input}('Çfarë dëshironi të porosisni?')
+                        {print}(porosia)
+                        më_shumë = {input}('A dëshironi diçka {else}(tjetër)?')
+                    {print}('Falemenderit!')
                     ```
     rock:
         name: Gur, letër, gërshërë
@@ -1112,13 +1107,12 @@ adventures:
                 story_text: |
                     Në nivelin 1, ju mund të filloni me lojën gur, letër, gërshërë.
 
-                    Me komandën `{ask}` ju mund të bëni një zgjidhje, dhe me komandën `{echo}` ju mund ta përsëritni atë zgjidhje.
+                    Me komandën `{ask}` ju mund të bëni një zgjidhje, dhe me komandën `{answer}` ju mund ta përsëritni atë zgjidhje.
                 example_code: |
                     ```
                     {print} çfarë zgjidhni?
                     {ask} zgjidhni gur, letër apo gërshërë
-                    {echo} zgjidhja e juaj ishte:
-                    ```
+                    {print} zgjidhja e juaj ishte: {answer}             ```
                 story_text_2: |
                     Në vend që të përdorni fjalë, mund të përdorni edhe emoji: ✊✋✌
                     A mund të krijoni një kod duke përdorur emojis?
@@ -1126,15 +1120,7 @@ adventures:
                     ```
                     {print} çfarë zgjidhni?
                     {ask} zgjidhni nga _
-                    {echo} kështu që zgjedhja juaj ishte:
-                    ```
-            2:
-                story_text: |
-                    Në këtë nivel mund ti praktikoni variablat, kështu që mund ta bëni lojën gur, letër, gërshërë në nivelin tjetër!
-                example_code: |
-                    ```
-                    _ {is} {ask} gur, letër, ose gërshërë?
-                    {print} Unë zgjedh _
+                    {print} kështu që zgjedhja juaj ishte: {answer}
                     ```
             3:
                 story_text: |
@@ -1225,8 +1211,6 @@ adventures:
                             fituat = 'po'
                     _
                     ```
-    rock_2:
-        levels: {}
     secret:
         name: Super spiuni
         default_save_name: Super spiuni
