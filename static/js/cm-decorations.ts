@@ -450,68 +450,6 @@ function highlightVariables(view: EditorView) {
     return variableDeco.finish()
 }
 
-function highlightLevelOneAnswerVariable(view: EditorView) {
-    const answerRegex = getLevelOneAnswerKeywordRegex(view);
-    if (!answerRegex) return Decoration.none;
-
-    const variableDeco = new RangeSetBuilder<Decoration>();
-    let hasSeenAsk = false;
-    const commandsUsingAnswer = new Set(["Ask", "Print"]);
-
-    for (let {from, to} of view.visibleRanges) {
-        syntaxTree(view.state).iterate({
-            from,
-            to,
-            enter: (node) => {
-                if (node.name === "Ask") {
-                    if (hasSeenAsk) {
-                        const children = node.node.getChildren("Text");
-                        for (const child of children) {
-                            const text = view.state.doc.sliceString(child.from, child.to);
-                            addLevelOneAnswerHighlights(text, child.from, answerRegex, variableDeco);
-                        }
-                    }
-                    hasSeenAsk = true;
-                    return false;
-                }
-
-                if (!hasSeenAsk || !commandsUsingAnswer.has(node.name)) {
-                    return;
-                }
-
-                const children = node.node.getChildren("Text");
-                for (const child of children) {
-                    const text = view.state.doc.sliceString(child.from, child.to);
-                    addLevelOneAnswerHighlights(text, child.from, answerRegex, variableDeco);
-                }
-
-                return false;
-            }
-        })
-    }
-
-    return variableDeco.finish();
-}
-
-function addLevelOneAnswerHighlights(text: string, offset: number, answerRegex: RegExp, variableDeco: RangeSetBuilder<Decoration>) {
-    answerRegex.lastIndex = 0;
-    for (const match of text.matchAll(answerRegex)) {
-        const matchedText = match[0];
-        const index = match.index;
-        if (index === undefined) continue;
-        variableDeco.add(offset + index, offset + index + matchedText.length, highlightVariableMarker)
-    }
-}
-
-function getLevelOneAnswerKeywordRegex(view: EditorView): RegExp | null {
-    const keywordLanguage = view.state.facet(keywordLanguageFacet) || 'en';
-    const translatedAnswer = traductionMap(keywordLanguage).get('answer');
-
-    if (!translatedAnswer) return null;
-
-    return new RegExp(`(?<![\\p{L}\\p{N}_])(?:${translatedAnswer})(?![\\p{L}\\p{N}_])`, 'gu');
-}
-
 function getVarNames(name: string) {
     const varRegex = /^[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+([\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+|[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+)*$/gmu
     return name.match(varRegex);

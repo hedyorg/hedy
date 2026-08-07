@@ -124,8 +124,6 @@
               level:  '{{  level }}',
               keyword_language: '{{ keyword_language }}',
               staticRoot: {{ static('')|tojson|safe }},
-              environment: {{ frontend_environment|tojson|safe }},
-              featureFlags: {{ feature_flags|tojson|safe }},
               javascriptPageOptions: {{ javascript_page_options|tojson|safe }},
             })
 
