@@ -48,11 +48,11 @@ export class IndexTabs {
     $('*[data-tab]').on('click', (e) => {
       const tab = $(e.target).closest('*[data-tab]');
       const tabName = tab.data('tab') as string;
-      const level = tab.data('level')
+      const level = tab.data('level');
+      const parsedLevel = typeof level === 'number' ? level : Number(level);
       e.preventDefault();
-      if (this._currentLevel == Number(level))
-        this.switchToTab(tabName, Number(level), );
-      else {
+
+      if (this._currentLevel != null && !Number.isNaN(parsedLevel) && this._currentLevel !== parsedLevel) {
         let endpoint = ''
         try {
           endpoint = window.location.pathname.split('/')[1];
@@ -60,7 +60,8 @@ export class IndexTabs {
           endpoint = 'hedy';
         }
         location.href = `/${endpoint}/${level}#${tabName}`
-
+      } else {
+        this.switchToTab(tabName, parsedLevel);
       }
     });
 
@@ -82,7 +83,7 @@ export class IndexTabs {
     }
   }
 
-  public switchToTab(tabName: string, level: number) {
+  public switchToTab(tabName: string, level?: number) {
     const doSwitch = () => {
       // Once the javascript has loeaded, we can remove the loading spinner
       // and show the content
@@ -94,31 +95,43 @@ export class IndexTabs {
       const hashFragment = tabName !== 'level' ? tabName : '';
       if (window.history) { window.history.replaceState(null, '', '#' + hashFragment); }
 
-      // Find the tab that leads to this selection, and its siblings
-      const tab = $(`*[data-tab="${tabName}"][data-level="${level}"]`);
+      const matchingTabs = $(`*[data-tab="${tabName}"]`);
+      const tab = level != null && !Number.isNaN(level)
+        ? matchingTabs.filter(`[data-level="${level}"]`).first()
+        : matchingTabs.first();
       const allTabs = tab.siblings('*[data-tab]');
 
       // Find the target associated with this selection, and its siblings
-      const target = $('*[data-tabtarget="' + tabName + '"]');
+      const target = $(`*[data-tabtarget="${tabName}"]`).first();
       const allTargets = target.siblings('*[data-tabtarget]');
 
-      allTabs.removeClass('adv-selected');
-      allTabs.addClass('not-selected-adv')
-      tab.removeClass('not-selected-adv')
-      tab.addClass('adv-selected');
-      let tab_title = document.getElementById('adventure_name')!
-      let level_adventure_title = document.getElementById('level_adventure_title')
-      tab_title.textContent = tab.text().trim()
-      const type = tab.data('type');
-      level_adventure_title?.classList.remove('border-green-300', 'border-[#fdb2c5]', 'border-blue-300', 'border-blue-900')
-      if (type == 'teacher') {
-        level_adventure_title?.classList.add('border-green-300');
-      } else if(type == 'command') {
-        level_adventure_title?.classList.add('border-[#fdb2c5]')
-      } else if (type == 'special') {
-        level_adventure_title?.classList.add('border-blue-300')
+      const activeClass = tab.attr('data-activeclass');
+      if (activeClass) {
+        allTabs.each((_, siblingTab) => {
+          const siblingActiveClass = $(siblingTab).attr('data-activeclass') ?? 'tab-selected';
+          $(siblingTab).removeClass(siblingActiveClass);
+        });
+        tab.addClass(activeClass);
       } else {
-        level_adventure_title?.classList.add('border-blue-900')
+        allTabs.removeClass('adv-selected');
+        allTabs.addClass('not-selected-adv')
+        tab.removeClass('not-selected-adv')
+        tab.addClass('adv-selected');
+      }
+
+      const tabTitle = document.getElementById('adventure_name');
+      tabTitle && (tabTitle.textContent = tab.text().trim())
+      const levelAdventureTitle = document.getElementById('level_adventure_title')
+      const type = tab.data('type');
+      levelAdventureTitle?.classList.remove('border-green-300', 'border-[#fdb2c5]', 'border-blue-300', 'border-blue-900')
+      if (type == 'teacher') {
+        levelAdventureTitle?.classList.add('border-green-300');
+      } else if(type == 'command') {
+        levelAdventureTitle?.classList.add('border-[#fdb2c5]')
+      } else if (type == 'special') {
+        levelAdventureTitle?.classList.add('border-blue-300')
+      } else {
+        levelAdventureTitle?.classList.add('border-blue-900')
       }
 
       allTargets.addClass('hidden');
