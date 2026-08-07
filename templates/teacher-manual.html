@@ -7,6 +7,17 @@
         </div>
     </div>
     <div class="copy-container text-business-copy" id="teacher_documentation">
+        <div id="manual-out-of-date-banner" class="mb-4 flex items-start justify-between gap-4 rounded-md border border-yellow-400 bg-yellow-100 p-4 text-yellow-800">
+            <div>{{ _('manual_out_of_date') }}</div>
+            <button
+                type="button"
+                class="text-yellow-700 hover:text-yellow-900"
+                aria-label="{{ _('close') }}"
+                _="on click add .hidden to #manual-out-of-date-banner"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
         <div class="flex gap-8">
             <div class="flex-0 text-links-plain rounded-md bg-gray-200 p-4">
                 {# Section nav #}

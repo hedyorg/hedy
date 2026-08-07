@@ -588,6 +588,14 @@ class TestCustomizeAdventure:
         response = client.get('/for-teachers/customize-adventure', check=False)
         assert response.status_code == 302
 
+    def test_new_adventure_page_includes_solution_template(self, client, given):
+        given.logged_in_as_new_teacher()
+        response = client.get('/for-teachers/customize-adventure', check=False)
+
+        page = client.get(response.headers['Location'])
+
+        assert 'This is the solution of my adventure!' in page.get_data(as_text=True)
+
     def test_update_adventure_success(self, client, given):
         teacher = given.logged_in_as_new_teacher()
         adventure = given.some_saved_adventure(teacher['username'])
