@@ -941,6 +941,8 @@ def hedy_error_to_response(ex):
         "Error": get_error_text(ex, keyword_lang),
         "Location": ex.error_location
     }
+
+
 def get_frontend_feature_flags_context():
     """Return the frontend feature-flag context used by templates and transpilation."""
     return {
@@ -975,6 +977,8 @@ def initialize_hedylang_feature_flags_for_request():
     logger.warning(
         "hedy.external has no supported frontend feature-flag initializer; skipping initialization"
     )
+
+
 @app.route('/report_error', methods=['POST'])
 def report_error():
     post_body = request.json
