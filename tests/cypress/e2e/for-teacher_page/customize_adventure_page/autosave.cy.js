@@ -15,8 +15,7 @@ it('Is able to auto save when changing the name field.', () => {
     .clear()
     .type('changed')
 
-  // there's a debouncing of 1000 second before we issue an update.
-  cy.wait(1000)
+  cy.get('#submit_adventure').click();
   cy.wait("@customizeAdventure").should('have.nested.property', 'response.statusCode', 200)
 
   cy.getDataCy('modal_alert_container')
@@ -28,6 +27,6 @@ it('Is able to auto save when changing the name field.', () => {
   cy.getDataCy('custom_adventure_name')
     .clear()
     .type('adventure1')
-  cy.wait(1000)
+  cy.get('#submit_adventure').click();
   cy.wait('@customizeAdventure').should('have.nested.property', 'response.statusCode', 200);
 })

@@ -16,9 +16,19 @@ declare const htmx: typeof import('./htmx');
 declare let window: CustomWindow;
 const editorCreator = new HedyCodeMirrorEditorCreator();
 
-function promptByPageVariant(message: string, defaultValue: string, confirmCb: (value: string) => void, title: string = '') {
+function promptByPageVariant(
+  message: string,
+  defaultValue: string,
+  confirmCb: (value: string) => void,
+  title: string = '',
+  modalVariantOverride?: 'legacy' | 'redesign',
+) {
   closeOpenContextMenus();
-  const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
+  if (modalVariantOverride) {
+    modal.prompt(message, defaultValue, confirmCb, modalVariantOverride, title);
+    return;
+  }
+  const isRedesignPage = window.location.pathname.includes('/for-teachers/');
   modal.prompt(message, defaultValue, confirmCb, isRedesignPage ? 'redesign' : 'legacy', title);
 }
 
@@ -35,7 +45,7 @@ function confirmByPageVariant(
   },
 ) {
   closeOpenContextMenus();
-  const isRedesignPage = window.location.pathname.includes('/for-teachers/redesign/');
+  const isRedesignPage = window.location.pathname.includes('/for-teachers/');
   if (isRedesignPage) {
     modal.confirmRedesign(message, confirmCb, declineCb, redesignOptions);
     return;
@@ -137,14 +147,14 @@ export function create_class_redesign(form: HTMLFormElement) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      window.location.pathname = '/for-teachers/redesign/class/' + response.id ;
+      window.location.pathname = '/for-teachers/class/' + response.id ;
     }).fail(function (err) {
       modal.notifyError(err.responseText);
     });
   } else if (radio.value === 'standard' || radio.value === 'plain') {
     $.ajax({
       type: 'POST',
-      url: '/class/redesign',
+      url: '/class',
       data: JSON.stringify({
         creation_type: radio?.value,
         name: className?.value,
@@ -153,7 +163,7 @@ export function create_class_redesign(form: HTMLFormElement) {
       contentType: 'application/json',
       dataType: 'json'
     }).done(function(response) {
-      window.location.pathname = '/for-teachers/redesign/class/' + response.id ;
+      window.location.pathname = '/for-teachers/class/' + response.id ;
     }).fail(function (err) {
       return modal.notifyError(err.responseText);
     })
@@ -176,6 +186,60 @@ export function rename_class(id: string, class_name_prompt: string, prompt_title
           return modal.notifyError(err.responseText);
         });
     }, prompt_title);
+}
+
+export function rename_adventure(
+  adventureId: string,
+  adventureNamePrompt: string,
+  promptTitle: string = '',
+  defaultValue: string = '',
+) {
+  promptByPageVariant(adventureNamePrompt, defaultValue, function (adventureName) {
+    $.ajax({
+      type: 'PUT',
+      url: '/for-teachers/customize-adventure/' + adventureId + '/name',
+      data: JSON.stringify({
+        name: adventureName,
+      }),
+      contentType: 'application/json',
+      dataType: 'json'
+    }).done(function () {
+      location.reload();
+    }).fail(function (err) {
+      return modal.notifyError(err.responseText);
+    });
+  }, promptTitle);
+}
+
+export function create_adventure_with_name(event: Event, triggerElement: HTMLElement) {
+  event.preventDefault();
+
+  const adventureNamePrompt = triggerElement.dataset['prompt'] || 'Name';
+  const promptTitle = triggerElement.dataset['title'] || '';
+  const classId = triggerElement.dataset['classId'];
+  const level = triggerElement.dataset['level'];
+  const emptyNameError = triggerElement.dataset['emptyNameError'] || 'Please enter a name.';
+  const modalVariant = triggerElement.dataset['modalVariant'] as ('legacy' | 'redesign' | undefined);
+
+  promptByPageVariant(adventureNamePrompt, '', function (adventureName) {
+    const trimmedName = adventureName.trim();
+    if (!trimmedName) {
+      return modal.notifyError(emptyNameError);
+    }
+
+    const params = new URLSearchParams();
+    params.set('name', trimmedName);
+    if (classId) {
+      params.set('class_id', classId);
+    }
+    if (level) {
+      params.set('level', level);
+    }
+
+    window.location.assign('/for-teachers/customize-adventure?' + params.toString());
+  }, promptTitle, modalVariant);
+
+  return false;
 }
 
 export function duplicate_class(id: string, teacher_classes: string[], second_teacher_prompt: string, prompt: string, defaultValue: string = '') {
@@ -476,6 +540,23 @@ export function update_adventure(adventure_id: string, first_edit: boolean, prom
    } else {
        update_db_adventure(adventure_id);
    }
+}
+
+export function update_adventure_language(adventure_id: string) {
+  const language = (document.querySelector('#languages_dropdown') as HedySelect).selected[0]
+
+  $.ajax({
+    type: 'PUT',
+    url: '/for-teachers/customize-adventure/' + adventure_id + '/language',
+    data: JSON.stringify({
+      language,
+    }),
+    contentType: 'application/json',
+    dataType: 'json'
+  }).done(function () {
+  }).fail(function (err) {
+    modal.notifyError(err.responseText, 0);
+  });
 }
 
 function show_preview(content: string) {
@@ -1109,7 +1190,7 @@ export function loadPerformanceGraphPrograms(usernames: string[], level: number 
   if (isRedesign) {
     htmx.ajax(
       'GET',
-      '/for-teachers/redesign/get_student_programs',
+      '/for-teachers/get_student_programs',
       {
         target: '#programs_container',
         values: {
@@ -1388,7 +1469,7 @@ export function invite_to_class_redesign(class_id: string, prompt: string, type:
     'hx-vals': JSON.stringify(vals)
   }
   const ok_button_attributes = {
-    'hx-post': `/for-teachers/redesign/class/${class_id}/manage/invite`,
+    'hx-post': `/for-teachers/class/${class_id}/manage/invite`,
     'hx-target': '#manage-students-table-body',
     'hx-include': "[name='usernames']",
     'hx-swap': 'innerHTML'
@@ -1413,7 +1494,7 @@ export function invite_second_teacher_to_configure_class(class_id: string, promp
     'hx-vals': JSON.stringify(vals)
   }
   const ok_button_attributes = {
-    'hx-post': `/for-teachers/redesign/class/${class_id}/configure/invite`,
+    'hx-post': `/for-teachers/class/${class_id}/configure/invite`,
     'hx-target': '#configure-teachers-table-body',
     'hx-include': "[name='usernames']",
     'hx-swap': 'innerHTML'
@@ -1491,7 +1572,7 @@ export function add_user_to_invite_list(username: string, button: HTMLButtonElem
 }
 
 export interface InitializeContextMenuPageOptions {
-  readonly page: 'classes' | 'manage-students';
+  readonly page: 'classes' | 'manage-students' | 'my-adventures';
 }
 
 let contextMenuClickListenerInitialized = false;

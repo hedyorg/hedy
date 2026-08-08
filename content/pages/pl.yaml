@@ -89,24 +89,6 @@ teacher-guide:
                 solution_code: |-
                     {ask} Czemu mój kod teraz działa?
                     {print} Bo używam tylko małych liter!
-        -   title: Uczniowie używają 'dołącz' bez ' zapytaj'
-            example:
-                error_text: Komenda 'dołącz' powtarza odpowiedź do pytania zadanego komendą 'zapytaj'. Bez 'zapytaj', 'powtórz' nie ma czego powtórzyć.
-                error_code: "{echo} Nazywasz się"
-                solution_text: Dodaj komendę 'zapytaj'.
-                solution_code: |-
-                    {ask} Jak się nazywasz?
-                    {echo} Nazywasz się
-        -   title: Uczniowie próbują wykorzystać komendę 'dołącz' do dodania wartości w środku zdania
-            example:
-                error_text: I mają rację! Jednak by to osiągnąć, potrzebne będą zmienne, wprowadzone dopiero w następnym poziomie.
-                error_code: |-
-                    {ask} Jaki język programowania jest najlepszy?
-                    {echo} jest najlepszy!
-                solution_text: "By zachować spójność przekazu, na potrzeby poziomu 1 ograniczymy się do:"
-                solution_code: |-
-                    {ask} Jaki język programowania jest najlepszy?
-                    {echo} Najlepszy jest...
         -   title: "Żółw: Uczniowie wyprowadzają żółwia poza ekran"
             example:
                 error_text: Uczniowie często lubią wykorzystywać duże liczby podczas zabawy z żółwiem, powodując tym samym przesunięcie poza widok ekranu.

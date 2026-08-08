@@ -10,13 +10,11 @@ adventures:
 
                     På første linje, brug `{ask}` til at spørge hvem hovedpersonen skal være.
 
-                    Efter den første linje, start med `{print}` hvis sætningen skal printes.
-                    Brug `{echo}` hvis du vil have din hovedpersonen i slutningen af sætningen.
                 example_code: |
                     ```
                     {ask} Hovedpersonen i denne historie er
-                    {print} Hovedpersonen går nu ind i skoven
-                    {echo} De er lidt bange,
+                    {print} {answer} går nu ind i skoven
+                    {print} De er lidt bange, {answer}
                     {print} De hører mærkelige lyde alle steder
                     {print} De er bange for at det en hjemsøgt skov
                     ```
@@ -43,15 +41,6 @@ adventures:
                     {sleep}
                     {print} navn er bange for at det er en hjemsøgt skov
                     ```
-                story_text_2: |
-                    ### Opgave
-                    Nu er det tid til at tilføje variabler til din egen historie, som du lavede i det forrige niveau.
-                    Gå til 'My programs', se efter din niveau 1 historie og kopier koden. Indsæt koden i din inputskærm på dette niveau.
-
-                    Koden vil ikke virke på dette niveau, fordi du ikke har brugt variabler endnu.
-                    Ændr `{ask}` kommandoen og `{echo}` kommandoen i din kode, til den korrekte form som du har lært på dette niveau.
-
-                    **Ekstra** Tilføj en `{sleep}` kommando til din kode for at opbygge spænding i din historie.
             3:
                 story_text: |
                     På niveau 3 kan du gøre din historie endnu sjovere. Du kan bruge tilfældighed til et monster, dyr eller anden forhindring, sådan her:
@@ -128,18 +117,7 @@ adventures:
     and_or_command:
         levels: {}
     ask_command:
-        description: Introduction ask command
-        levels:
-            1:
-                story_text_2: |
-                    ## The echo command
-                    If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
-            2:
-                example_code_2: |
-                    ```
-                    yndlingsdyr {is} {ask} Hvad er dit yndlingsdyr?
-                    {print} Jeg elsker yndlingsdyr
-                    ```
+        levels: {}
     calculator:
         levels: {}
     calculator_2:
@@ -316,12 +294,6 @@ adventures:
     is_command:
         description: introducing is command
         levels:
-            2:
-                example_code_2: |
-                    ```
-                    yndlingsdyr {is} _
-                    {print} Jeg kan godt lide yndlingsdyr
-                    ```
             7:
                 example_code: |
                     ```
@@ -356,8 +328,6 @@ adventures:
         levels: {}
     rock:
         levels: {}
-    rock_2:
-        levels: {}
     secret:
         levels: {}
     sleep_command:
@@ -365,7 +335,34 @@ adventures:
     songs:
         levels:
             14:
-                example_code: "```\nalle_dyr = ['gris', 'hund', 'ko']\nlyde = ['øh', 'vuf', 'muh']\n{for} i {in} {range} 1 {to} 3\n    dyr = alle_dyr[i]\n    lyd = lyde[i]\n    {print} 'Jens Hansen havde en bondegård'\n    {print} 'ih ah ih ah oh!'\n    {print} 'og på den gård der var en ' dyr\n    {print} 'ih ah ih ah oh!'\n    {print} 'Der var ' lyd lyd' her'\n    {print} 'og ' lyd lyd' der'\n    {print} lyde ' her'\n    {print} lyde ' der'\n    {print} 'alle steder ' lyde lyde\n```\n\n```\nlinjer = ['Hvad skal vi gøre med den fulde sømand', 'Smid ham i brummen til han vågner', 'Han skal klynges op i masten']\n{for} linje {in} linjer\n    {for} i {in} {range} 1 {to} 3\n        {print} linje \n    {print} 'Tidligt om morgnen.'\n    {for} i {in} {range} 1 {to} 3\n        {print} 'Hu hej, se hun sejler'\n    {print} 'Tidligt om morgnen.'\n```\n"
+                example_code: |
+                    ```
+                    alle_dyr = ['gris', 'hund', 'ko']
+                    lyde = ['øh', 'vuf', 'muh']
+                    {for} i {in} {range}(1, 3)
+                        dyr = _
+                        lyd = _
+                        {print}('Jens Hansen havde en bondegård')
+                        {print}('ih ah ih ah oh!')
+                        {print}('og på den gård der var en ', dyr)
+                        {print}('ih ah ih ah oh!')
+                        {print}('Der var ', lyd lyd, ' her')
+                        {print}('og ', lyd lyd, ' der')
+                        {print}(lyde, ' her')
+                        {print}(lyde, ' der')
+                        {print}('alle steder ', lyde lyde)
+                    ```
+
+                    ```
+                    linjer = ['Hvad skal vi gøre med den fulde sømand', 'Smid ham i brummen til han vågner', 'Han skal klynges op i masten']
+                    {for} linje {in} linjer:
+                        {for} i {in} {range}(1, 3)
+                            {print}(linje)
+                        {print}('Tidligt om morgnen.')
+                        {for} i {in} {range}(1, 3)
+                            {print}('Hu hej, se hun sejler')
+                        {print}('Tidligt om morgnen.')
+                    ```
     songs_2:
         levels: {}
     turtle:

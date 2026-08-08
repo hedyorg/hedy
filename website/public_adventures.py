@@ -106,7 +106,12 @@ class PublicAdventuresModule(WebsiteModule):
         adventure['tags'] = list(sorted(adventure.get('tags', [])))
         adventure['cloned_stars'] = cloned_times_to_stars(adventure.setdefault('cloned_times', 0))
         adventure['creator'] = adventure.get('creator', adventure.get('username'))
-        adventure['solution_example'] = adventure.get('solution_example', '').strip()
+        solution_example = adventure.get('solution_example')
+        if solution_example is None:
+            solution_example = ''
+        elif not isinstance(solution_example, str):
+            solution_example = str(solution_example)
+        adventure['solution_example'] = solution_example.strip()
 
         # The solution_example is already HTML, with keyword markers. If it is empty HTML, remove it. If it is non-empty
         # HTML, render the keywords to the current language.

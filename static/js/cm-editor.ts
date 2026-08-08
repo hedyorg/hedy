@@ -33,6 +33,7 @@ import { Tag, styleTags, tags as t } from "@lezer/highlight";
 // CodeMirror requires # of indentation to be in spaces.
 const indentSize = ' '.repeat(4);
 export const level = Facet.define<number, number>();
+export const keywordLanguage = Facet.define<string, string>();
 
 export class HedyCodeMirrorEditorCreator implements HedyEditorCreator {
     /**
@@ -85,6 +86,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
     private incorrectLineMapping: Record<string, number> = {};
 
     constructor(element: HTMLElement, isReadOnly: boolean, editorType: EditorType, __: string = "ltr") {
+        const lang = $(element).closest('[data-kwlang]').attr('data-kwlang') ?? 'en';
         let state: EditorState;
         if (editorType === EditorType.MAIN) {
 
@@ -145,6 +147,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                     Prec.high(decorationsTheme),
                     placeholders,
                     theLevel ? level.of(theLevel) : [],
+                    keywordLanguage.of(lang),
                     Prec.highest(variableHighlighter)
                 ]
             });
@@ -164,6 +167,7 @@ export class HedyCodeMirrorEditor implements HedyEditor {
                 this.readMode.of(EditorState.readOnly.of(isReadOnly)),
                 placeholders,
                 theLevel ? level.of(theLevel) : [],
+                keywordLanguage.of(lang),
                 Prec.high(decorationsTheme),
                 Prec.highest(variableHighlighter)
             ];
@@ -227,7 +231,6 @@ export class HedyCodeMirrorEditor implements HedyEditor {
         });
 
         const levelStr = $(element).closest('[data-level]').attr('data-level');
-        const lang = $(element).closest('[data-kwlang]').attr('data-kwlang') ?? 'en';
         const levelInt = levelStr ? parseInt(levelStr, 10) : theLevel;
 
         if (levelInt) {

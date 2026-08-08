@@ -20,3 +20,17 @@ def test_cloning_public_adventure(client: Client, given: Given):
     # THEN - now t3 owns an adventure still authored by t2
     advs = given.db.get_teacher_adventures(t3['username'])
     assert advs[0]['author'] == t2['username']
+
+
+def test_preview_public_adventure_without_solution_example(client: Client, given: Given):
+    # GIVEN
+    teacher = given.a_teacher_account()
+    given.logged_in_as(teacher)
+    public_adv = given.some_saved_adventure(teacher['username'], public=1, solution_example=None)
+
+    # WHEN
+    response = client.get(f'/public-adventures/preview/{public_adv["id"]}', headers={'Hx-Request': 'true'})
+
+    # THEN
+    assert response.status_code == 200
+    assert 'An adventure' in response.get_data(as_text=True)
