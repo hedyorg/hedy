@@ -5,14 +5,14 @@
     <div
       class="cust-adv-tab cust-adv-tab-text active flex items-center justify-center whitespace-nowrap px-2"
       tabindex="0"
-      data-tab="adventure-preview" data-activeclass="active">
+      data-tab="adventure-preview" data-level="{{ adventure.level }}" data-activeclass="active">
       {{ _('adventure') }}
     </div>
     {% if adventure.solution_example %}
     <div
       class="cust-adv-tab cust-adv-tab-text flex items-center justify-center whitespace-nowrap px-2"
       tabindex="0"
-      data-tab="adventure-answer" data-activeclass="active">
+      data-tab="adventure-answer" data-level="{{ adventure.level }}" data-activeclass="active">
       {{ _('solution_example') }}
     </div>
     {% endif %}

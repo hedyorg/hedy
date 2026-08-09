@@ -18,7 +18,7 @@ function waitForUploadContaining(alias, marker, getValue, remainingAttempts = 6)
   });
 }
 
-function waitForSingleUpload(alias, assertions) {
+function waitForSingleUpload(alias, assertions = () => {}) {
   cy.wait(alias, { timeout: 20000 }).then(({ request, response }) => {
     expect(response?.statusCode).to.eq(200);
     assertions(request.body);
@@ -194,12 +194,12 @@ describe('Customize adventure redesign autosave', () => {
     cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
 
     cy.get('input[name="adventure_public"]').click({ force: true });
-    cy.wait('@uploadAdventureDraft');
+    waitForSingleUpload('@uploadAdventureDraft');
     cy.get('#public_adventure_options').should('be.visible');
     cy.get('#public_adventure_options').find('#languages_dropdown').should('exist');
 
     cy.get('input[name="adventure_public"]').click({ force: true });
-    cy.wait('@uploadAdventureDraft');
+    waitForSingleUpload('@uploadAdventureDraft');
     cy.get('#public_adventure_options').should('have.class', 'hidden');
   });
 
@@ -212,7 +212,7 @@ describe('Customize adventure redesign autosave', () => {
     cy.intercept('POST', '/for-teachers/customize-adventure').as('uploadAdventureDraft');
 
     cy.get('input[name="adventure_public"]').click({ force: true });
-    cy.wait('@uploadAdventureDraft');
+    waitForSingleUpload('@uploadAdventureDraft');
     cy.get('#public_adventure_options').should('be.visible');
 
     const tagName = uniqueName('adv-tag');
