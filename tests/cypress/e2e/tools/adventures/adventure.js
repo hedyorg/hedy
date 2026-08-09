@@ -66,11 +66,13 @@ export function deleteAdventure(name) {
         }
 
         cy.visit('/for-teachers/adventures/manage');
+        cy.intercept('GET', '/for-teachers/adventures/*/remove-modal').as('removeAdventureModal');
         cy.contains('tr', name).within(() => {
             cy.get('[data-cy^="manage_adventure_actions_"]').first().click();
             cy.get('[data-cy^="remove_adventure_"]').first().click();
         });
-        clickVisibleConfirmButton();
+        cy.wait('@removeAdventureModal').its('response.statusCode').should('eq', 200);
+        cy.getDataCy('htmx_modal_yes_button').should('be.visible').click();
         cy.contains('tr', name).should('not.exist');
     });
 }
