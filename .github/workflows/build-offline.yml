@@ -35,10 +35,10 @@ jobs:
       with:
         python-version: '3.12'
         cache: 'pip'
-    - name: Set up NodeJS 18
+    - name: Set up NodeJS 22
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 22
         cache: 'npm'
     - run: pip install -r requirements.txt
       name: 'Python requirements'
@@ -69,10 +69,10 @@ jobs:
       with:
         python-version: '3.12'
         cache: 'pip'
-    - name: Set up NodeJS 18
+    - name: Set up NodeJS 22
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 22
         cache: 'npm'
     - run: pip install -r requirements.txt
       name: 'Python requirements'
@@ -103,10 +103,10 @@ jobs:
       with:
         python-version: '3.12'
         cache: 'pip'
-    - name: Set up NodeJS 18
+    - name: Set up NodeJS 22
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 22
         cache: 'npm'
     - name: 'Install npx'
       run: npm install -g npx
@@ -138,10 +138,10 @@ jobs:
       with:
         python-version: '3.12'
         cache: 'pip'
-    - name: Set up NodeJS 18
+    - name: Set up NodeJS 22
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 22
         cache: 'npm'
     - run: pip install -r requirements.txt
       name: 'Python requirements'
@@ -170,10 +170,10 @@ jobs:
       with:
         python-version: '3.12'
         cache: 'pip'
-    - name: Set up NodeJS 18
+    - name: Set up NodeJS 22
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 22
         cache: 'npm'
     - run: pip install -r requirements.txt
       name: 'Python requirements'

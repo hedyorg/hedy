@@ -22,10 +22,10 @@ jobs:
       with:
         python-version: 3.12
         cache: 'pip'
-    - name: Set up NodeJS 16
+    - name: Set up NodeJS 22
       uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 22
         cache: 'npm'
     - name: Install Python dependencies
       run: |
