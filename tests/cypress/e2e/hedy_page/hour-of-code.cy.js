@@ -13,7 +13,9 @@ describe("Testing subset passed through the URL", () => {
         it(`Level ${level} should have ${subset.length} adventures`, () => {
             cy.visit(`/hour-of-code/${level}`);
             cy.get(`#level_${level}_adventures`).children().then(($children) => {
-                const actual = [...$children].map(el => el.getAttribute('data-cy'));
+                const actual = [...$children]
+                    .filter(el => el.getAttribute('data-cy'))
+                    .map(el => el.getAttribute('data-cy'));
                 expect(actual).to.deep.equal(subset);
             })
         })
