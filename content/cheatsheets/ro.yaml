@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Ask something with `{ask}`.
     demo_code: '{ask} What is your favorite color?'
--   name: '{echo}'
-    explanation: Repeat something using `{echo}`.
+-   name: '{answer}'
+    explanation: Repeat something using `{answer}`.
     demo_code: |-
         {ask} What is your favorite color?
-        {echo} so your favorite color is
--   name: '{print} emojis'
-    explanation: Print an emoji with `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} so your favorite color is {answer}
 -   name: '{forward}'
     explanation: Draw a line with `{forward}`.
     demo_code: '{forward} 100'
@@ -29,106 +26,8 @@
     demo_code: |-
         Numele {is} Hedy
         {print} salutare nume
--   name: '{ask}'
-    explanation: Intreaba ceva cu `{ask}`. Atentie! Raspunsul trebuie sa contina `{is}`.
-    demo_code: |-
-        color {is} {ask} What is your favorite color?
-        {print} color is your favorite!
 -   name: '{sleep}'
     explanation: '`{sleep}` let Hedy pause for a (couple of) second(s).'
     demo_code: |-
-        {print} Let me think for one second...
-        {sleep}
-        {print} Hmm.. I need 3 more seconds...
         {sleep} 3
-        {print} Eureka! Ive got it!
--   name: '{is} with turtle'
-    explanation: Give a number a name using `{is}`. You can choose the name yourself.
-    demo_code: |-
-        angle {is} 90
-        {turn} angle
-        {forward} 100
-5:
--   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''Hello welcome to Hedy.'''
--   name: '{ask}'
-    explanation: Ask something with `{ask}`.
-    demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {print} color ' is your favorite!'
--   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: |-
-        color {is} {ask} 'What is your favorite color?'
-        {if} color {is} green {print} 'pretty!' {else} {print} 'meh'
--   name: '{if} with turtle'
-    explanation: Make a choice with `{if}`.
-    demo_code: |-
-        answer {is} {ask} 'How far should I walk?'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Check elements with `{in}`.
-    demo_code: |-
-        pretty_colors {is} green, yellow
-        color {is} {ask} 'What {is} your favorite color?'
-        {if} color {in} pretty_colors {print} 'pretty!' {else} {print} 'meh'
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
-6:
--   name: '{print}'
-    explanation: Print exactly using quotation marks.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
--   name: '{ask}'
-    explanation: Ask for a calculation and check whether it is correct.
-    demo_code: |-
-        answer = {ask} 'What is 10 plus 10?'
-        {if} answer {is} 20 {print} 'Yes!' {else} {print} 'Oops'
--   name: '{ask} and {if} with turtle'
-    explanation: Ask the user how many angles they want.
-    demo_code: |-
-        angles = {ask} 'How many angles?'
-        angle = 360 / angles
-        {forward} 50
-12:
--   name: float directly
-    explanation: Decimal numbers.
-    demo_code: |-
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
-        {print} 2.5 + 2.5
--   name: assign text
-    explanation: Text with quotation marks after `=`
-    demo_code: |-
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: quotes after {if} comparison
-    explanation: Text with quotation marks after `{if}`.
-    demo_code: |-
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
--   name: quotes in list
-    explanation: A list with quotation marks.
-    demo_code: |-
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
-16:
--   name: square brackets
-    explanation: Lists with square brackets.
-    demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
--   name: Get an item from a list
-    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: Get a random item from a list
-    explanation: To get a random item from a list we use [random] so fruit[random] means, get a random fruit from the list!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[{random}]
-        {print} random_fruit
+
