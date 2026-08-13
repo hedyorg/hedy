@@ -1061,33 +1061,7 @@ adventures:
                 example_code: "```\n{print} \"Escapa de la casa embruixada!\"\njugador = viu\nportes = 1, 2, 3\nmonsters = zombie, vampir, aranya gegant\n{repeat} 3 {times}\n    {if} jugador {is} viu\n        porta_correcta {is} portes {at} {random}\n        {print} \"Hi ha tres portes davant teu...\"\n        porta_escollida = {ask} \"Quina porta esculls?\"\n        {if} porta_escollida {is} porta_correcta\n            {print} \"No hi ha monstres aquí!\"\n        {else}\n            {print} \"Se t'ha menjat un \" monsters {at} {random}\n            jugador = mort\n    {else}\n        {print} \"GAME OVER\"\n{if} jugador {is} viu\n    {print} \"Fantastic! Has sobreviscut!\"\n```\n"
             14:
                 story_text: "### Exercici\nAquest joc de la casa embruixada utilitza la connexió entre les llistes que pots fer servir en aquest nivell.\nPer exemple: totes les propietats que pertanyen al zombi són primeres en totes les llistes, la bruixa segona i el vampir tercer.\nConsulta el codi i omple els espais buits amb `armes[i]`, `monstres[i]`, `mala_sort[i]`, `bona_sort[i]`, `pista[i]` als llocs correctes perquè el codi funcioni!\n"
-                example_code: \
-                    ```
-                    numeros = [1, 2, 3]
-                    i = numeros[{random}]
-                    pista = ["uns grunyits", "una rialla malèfica", "l'aleteig de les ales d'un ratpenat"]
-                    monstres = ["un zombie", "una bruixa", "un vampir"]
-                    mala_sort = ["Se't menjen el cervell", "Estas maleït per sempre més", "Et mossega el coll"]
-                    bona_sort = ["Llençes el penil. El zombie es distreu menjant-se'l.", "Cales foc a les cortines. La bruixa fuig volant pel temor al foc.", "El vampir respira el teu alè d'all i fuig."]
-                    armes = ["pernil", "encenedor", "allioli"]
-                    {print}("Estàs davant d'una antiga mansió")
-                    {print}("Quelcom no acaba de funcionar bé")
-                    {print}("Sents un soroll com ", _)
-                    {print}("T'apropes a explorar-ho")
-                    {print}("Entres a la cuina i et trobes un encenedor, un tall de pernil i un pot d'allioli.")
-                    arma_escollida = {input}("Què t'emportes de la cuina?")
-                    {print}("Am el ", arma_escollida, " entres al menjador")
-                    {print}("Et trobes de sobte ", _)
-                    arma_necessaria = _
-                    {if} arma_escollida == arma_necessaria
-                        {print}("Utilitzes el ", arma_escollida)
-                        {print} _
-                        {print}("Guanyes!")
-                    {else}
-                        {print}("Has seleccionat una arma equivocada...")
-                        {print} _
-                        {print}("GAME OVER")
-                    ```
+                example_code: \ ``` numeros = [1, 2, 3] i = numeros[{random}] pista = ["uns grunyits", "una rialla malèfica", "l'aleteig de les ales d'un ratpenat"] monstres = ["un zombie", "una bruixa", "un vampir"] mala_sort = ["Se't menjen el cervell", "Estas maleït per sempre més", "Et mossega el coll"] bona_sort = ["Llençes el penil. El zombie es distreu menjant-se'l.", "Cales foc a les cortines. La bruixa fuig volant pel temor al foc.", "El vampir respira el teu alè d'all i fuig."] armes = ["pernil", "encenedor", "allioli"] {print}("Estàs davant d'una antiga mansió") {print}("Quelcom no acaba de funcionar bé") {print}("Sents un soroll com ", _) {print}("T'apropes a explorar-ho") {print}("Entres a la cuina i et trobes un encenedor, un tall de pernil i un pot d'allioli.") arma_escollida = {input}("Què t'emportes de la cuina?") {print}("Am el ", arma_escollida, " entres al menjador") {print}("Et trobes de sobte ", _) arma_necessaria = _ {if} arma_escollida == arma_necessaria {print}("Utilitzes el ", arma_escollida) {print} _ {print}("Guanyes!") {else} {print}("Has seleccionat una arma equivocada...") {print} _ {print}("GAME OVER") ```
     hotel:
         name: hotel
         default_save_name: hotel
@@ -1148,7 +1122,7 @@ adventures:
                     {else}
                     {print} "Buu"
                     ```
-                    
+
                 story_text_2: "### Exercici\nCompleta el codi d'exemple omplint els buits amb les comandes que has après.\nQuan hagis acabat el codi, intenta crear un programa propi i fes servir una pregunta que hagis pensat tu mateix.\n"
                 example_code_2: |
                     ```
@@ -1369,10 +1343,7 @@ adventures:
                             {print}("Malament, ", paraules_frances[i], " significa ", traduccio[i])
                     {print}("Has encertat ", punts, " respostes.")
                     ```
-                story_text: "### Exercici
-                    Dona un cop d'ull al codi d'exemple. Aquest és un programa per practicar vocabulari en francès. Ara crea el teu propi programa per practicar el teu vocabulari en un nou idioma.
-                    Si no coneixes cap altre idioma, pots utilitzar Google Translate o fer servir emojis i la teva llengua materna.
-                    "
+                story_text: "### Exercici Dona un cop d'ull al codi d'exemple. Aquest és un programa per practicar vocabulari en francès. Ara crea el teu propi programa per practicar el teu vocabulari en un nou idioma. Si no coneixes cap altre idioma, pots utilitzar Google Translate o fer servir emojis i la teva llengua materna. "
         name: llengua
         description: Practica paraules amb una llengua estrangera
     lists:
@@ -1473,7 +1444,7 @@ adventures:
                     ```
                     {def} cançó():
                         {play} _
-                    
+
                     si_o_no = {input}("Vols sentir la cançó que mai s'acaba?")
                     {while} si_o_no = "sí":
                         cançó()
