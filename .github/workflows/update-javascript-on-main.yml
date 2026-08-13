@@ -52,12 +52,18 @@ jobs:
     # Make a distinction between Pull Request checkout and Push checkout. Push checkout
     # works mostly automatically, but for PRs we must be very explicit to get the right
     # branch and also support forks.
+    # actions/checkout@v6 refuses to check out fork code from a
+    # 'pull_request_target' workflow unless we opt in explicitly. Opting in is
+    # safe *for this job specifically*: it declares 'permissions: contents: read'
+    # and receives no secrets, which is exactly the mitigation GitHub recommends
+    # for running untrusted code. The privileged half lives in 'postupdate'.
     - uses: actions/checkout@v6
       name: Checkout branch
       with:
         fetch-depth: 1
         ref: ${{ steps.branch.outputs.branch }}
         repository: ${{ steps.branch.outputs.repo }}
+        allow-unsafe-pr-checkout: true
 
     #----------------------------------------------------------------------
     #  Actual build
@@ -123,12 +129,19 @@ jobs:
     steps:
 
     # Checkout source again
+    #
+    # NOTE: this job *does* hold a write token, so the same opt-in is a weightier
+    # decision here than in 'updatefiles'. It is acceptable because no fork code
+    # is executed in this job: we only check out the branch so that the commit
+    # lands on it, overlay the artifact, and commit. Keep it that way -- do not
+    # add build or test steps to this job.
     - uses: actions/checkout@v6
       name: Checkout branch
       with:
         fetch-depth: 1
         ref: ${{ needs.updatefiles.outputs.branch }}
         repository: ${{ needs.updatefiles.outputs.repo }}
+        allow-unsafe-pr-checkout: true
 
     - name: Download build artifacts
       uses: actions/download-artifact@v4
