@@ -28,7 +28,7 @@ adventures:
 
                     Ezt a nevet bárhol elhelyezheted a mondatban.
 
-                example_code: |
+                example_code: |-
                     ```
                     nev {is} {ask} Mi a neve a főszereplőnek?
                     {print} nev most futni fog az erdőben
@@ -159,7 +159,7 @@ adventures:
         description: Készítsd el a saját kockádat
         levels:
             3:
-                story_text: |-
+                story_text: |
                     A 2. szinten választhatunk egy listából. Ezzel hagyhatjuk, hogy a számítógép válassza ki
                     a kocka egyik oldalát.
                     Vess egy pillantást azokra a játékokra, amelyek otthon vannak a szekrényedben.
@@ -188,7 +188,7 @@ adventures:
                     földigilisztát dobtál.
                     De lehet, hogy újra létre akarsz hozni egy kockát egy teljesen más játékból. Ez is
                     rendben van! Ezután állítsd be a saját reakcióját. Pl. „Igen” 6-ra és „kár” valami másra.
-                example_code: |-
+                example_code: |
                     ```
                     dobasok {is} 1, 2, 3, 4, 5, giliszta
                     dobasok {is} 1, 2, 3, 4, 5, giliszta
@@ -228,7 +228,7 @@ adventures:
                     Próbáld meg befejezni a mintakódot! A kötőjeleknek több parancsot és karaktert
                     kell tartalmazniuk.
                     De talán teljesen más kockát akarsz készíteni. Természetesen lehet!
-                example_code: |-
+                example_code: |
                     ```
                     dobások {is} 1, 2, 3, 4, 5, giliszta
                     {repeat} _ _ {print} _ _
@@ -252,7 +252,7 @@ adventures:
         description: Használd a számítógépet, hogy lásd, ki mosogat (Kezdd a 2. szinten)
         levels:
             3:
-                story_text: |-
+                story_text: |
                     Otthon általában nem értesz egyet abban, hogy kinek kell ma mosogatnia vagy kicserélnie az alomdobozt?
 
                     Ezután hagyhatod, hogy a számítógép nagyon tisztességesen válasszon. Ezt beprogramozhatod a 2. szinten!
@@ -294,7 +294,7 @@ adventures:
                     Befejezheted a kódot úgy, hogy „túl rosszul” írja ki, amikor rajtad a sor, és egyébként
                     „igen!”?
                     Ne felejtsd el az idézeteket!
-                example_code: |-
+                example_code: |
                     ```
                     emberek {is} anya, apa, Edit, Gizi
                     mosogato {is} emberek {at} {random}
@@ -370,7 +370,7 @@ adventures:
                     A 2. szinten használhatsz egy változót és az `at random`  parancsot, hogy valóban engedd, hogy Hedy válaszoljon Neked. Nézd meg például ezt a kódot:
 
                     Most Hedy csak igennel, nemmel vagy talán válaszolhat. Adhatsz Hedynek több válaszlehetőséget, például „határozottan” vagy „kérdezz újra”
-                example_code: |-
+                example_code: |
                     Ebben a példában a játékos igen-nem kérdést tehet fel Hedynek, és Hedy véletlenszerű választ ad.
                     ```
                     {print} Szia Hedy a jósnő vagyok!
@@ -572,7 +572,7 @@ adventures:
                     {print} Már úton van!
                     ```
             2:
-                example_code: |-
+                example_code: |
                     ```
                     {print} Üdvözlünk a Hedy étteremben!
                     {print} Ma pizzát vagy lasagnat szolgálunk fel.
@@ -759,7 +759,7 @@ adventures:
                     Például. ```{print} Az enyém: valasztas```. Próbáld ki, ha még nem tetted meg.
                     Ez nem működik megfelelően! Aztán megkapod: a [kő, papír, olló] közül választottam.
                     Ezt meg tudod majd oldani a 3. szinten.
-                example_code: |-
+                example_code: |
                     ```
                     valasztas {is} kő, papír, olló
                     {print} valasztas {at} {random}
@@ -774,7 +774,7 @@ adventures:
                     Befejezed a kódot?
 
                     Először töltsd ki a helyes kódot a pontok helyén, és nézd meg, hogy döntetlen-e.
-                example_code: |-
+                example_code: |
                     ```
                     lehetoseg {is} kő, papír, olló
                     szamitogepe {is} _
@@ -794,7 +794,7 @@ adventures:
         description: Dal kiíratása
         levels:
             7:
-                story_text: |-
+                story_text: |
                     A dalok gyakran sok ismétlést tartalmaznak. Néha az ismétlés alapja a számlálás is.
                     Például a jól ismert dalban „üveg sör”. Programozhatod azt a dalt egy kis matekkal.
 
