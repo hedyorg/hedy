@@ -237,7 +237,7 @@ adventures:
                 story_text: |-
                     Nu we  `{elif}` kunnen gebruiken, kun je een interactief verhaal maken! Je kunt bijvoorbeeld verschillende karakters kiezen, die allemaal verschillende eigenschappen hebben.
                     Of je kunt de speler laten kiezen welke weg ze inslaan, welke deur ze willen openen of welk toverdrankje ze willen drinken...
-                
+
                     ### Opdracht
                     Maak je eigen verhaal met 3 of meer opties door `{elif}` te gebruiken.
                 example_code: |
@@ -291,10 +291,10 @@ adventures:
         description: 'introduceert de logische operatoren: {and} en {or}'
         levels:
             10:
-                story_text: |-    
+                story_text: |-
                     We gaan nu `{and}` en `{or}` leren! Als je twee stellingen wilt controleren, hoef je geen twee `if`s te gebruiken, maar kun je `{and}` en `{or}` gebruiken.
                     Als je `{and}` gebruikt, dan moeten beide stellingen, links en rechts van de `{and}`, waar zijn. We kunnen ook `{or}` gebruiken. Dan hoeft er maar één stelling correct te zijn.
-                    
+
                 example_code: |
                     ```
                     naam = {ask} 'wat is jouw naam?'
@@ -465,7 +465,7 @@ adventures:
                             {else}
                                 {print} 'Fout! Het antwoord is ' correct
                     ```
-            13: 
+            13:
                 story_text: |
                     In dit level ga vermenigvuldigingen oefenen.
                     Je kunt kiezen welke getallen je wilt vermenigvuldigingen. 
@@ -498,7 +498,7 @@ adventures:
                     {else}:
                         {print}('Helaas, dat klopt niet. Het goede antwoord is: ', goede_antwoord)
                     ```
-            14: 
+            14:
                 story_text: |
                     In dit level ga je een programma schrijven om de tafels van 10 (of hoger!) te oefenen.
                     Je kunt kiezen welke tafel je wil oefenen en daarna moet je alle vermenigvuldigingen tot en met tien beantwoorden. 
@@ -594,7 +594,7 @@ adventures:
                         _
                         _
                         {print}('Goed gedaan!')
-                    
+
                     #De vragen stellen:
                     {print}('Geef 10 goede antwoorden om te winnen!')
                     {for} i {in} {range}(1, 10):
@@ -1320,7 +1320,7 @@ adventures:
                         {play} C4
                         {play} C5
                         {play} C6
-                    
+
                     #Vragen stellen:
                     antwoord = {input}('Wat is 2 + 2?')
                     {if} antwoord == 4:
@@ -2094,7 +2094,7 @@ adventures:
         description: markt
         levels:
             13:
-                story_text: | 
+                story_text: |
                     In dit avontuur ga je een code schrijven voor een markt. Kijk naar de voorbeeld code. 
                     Deze markt verkoopt brood, appels en kaas. Kan je de klanten vertellen hoeveel elk product kost en ze vragen hoeveel ze van het product willen kopen?
                     Eventueel kan je ook nog extra producten aan deze markt toevoegen. Zorg ervoor dat je de klant ook vertelt hoeveel deze moet betalen.
@@ -2103,7 +2103,7 @@ adventures:
                     #Introduceren van de Hedy markt:
                     {print}('Welkom bij de Hedy markt!')
                     {print}('We verkopen hier brood, appels en kaas')
-                    
+
                     #Vragen hoeveel je wil kopen:
                     prijs_brood = 5
                     {print}('Één brood kost ', _ )
@@ -2124,7 +2124,7 @@ adventures:
                     Introduceren van de Hedy markt:
                     {print}('Welkom bij de Hedy markt!')
                     {print}('We verkopen hier brood, appels en kaas')
-                    
+
                     #Vragen hoeveel je wil kopen:
                     prijs_brood = 5
                     {print}('Één brood kost ', prijs_brood )
@@ -2587,7 +2587,7 @@ adventures:
         description: pretpark
         levels:
             13:
-                story_text: | 
+                story_text: |
                     Dit avontuur gaat over een pretpark met attracties. Je kunt niet zomaar in de attracties, maar je moet bijvoorbeeld een bepaalde leeftijd of lengte hebben.
                     Maak de voorbeeldcode af. Voor het spookhuis is er een minimumleeftijd. Je mag natuurlijk niet in de achtbaan als je hoogtevrees hebt. Voeg ook nog een minimum lengte toe aan de achtbaan.
                     De draaimolen is de attractie voor jonge kinderen. Zorg daarom dat je daar een maximum leeftijd aan toevoegt. Als je wil kan je ook nog meer attracties toevoegen!
@@ -2605,7 +2605,7 @@ adventures:
                             {print}('Je bent out genoeg. Geniet ervan!')
                         _ :
                             {print}('Sorry, je bent nu nog niet oud genoeg. ')
-                    
+
                     {if} attractie == 'Achtbaan':
                         angst = {input}('Heb je hoogtevrees?')
                         {if} angst == 'ja':
@@ -2618,40 +2618,40 @@ adventures:
 
                     ```
                 answer_code: |
-                        ```
-                        {print}("Welkom bij het pretpark: 'Hedy Hoog'")
-                        {print}("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
+                    ```
+                    {print}("Welkom bij het pretpark: 'Hedy Hoog'")
+                    {print}("In dit park hebben we drie attracties: spookhuis, achtbaan en de draaimolen." )
 
-                        #Probeer een van de drie attracties uit:
-                        attractie = {input}('Welke attractie wil je proberen?')
+                    #Probeer een van de drie attracties uit:
+                    attractie = {input}('Welke attractie wil je proberen?')
 
-                        {if} attractie == 'spookhuis':
-                            leeftijd = {input}('Hoe oud ben je?')
-                            {if} leeftijd > 12:
-                                {print}('Je bent out genoeg. Geniet ervan!')
-                            _ :
-                                {print}('Sorry, je bent nu nog niet oud genoeg. ')
-                        
-                        {if} attractie == 'Achtbaan':
-                            angst = {input}('Heb je hoogtevrees?')
-                            {if} angst == 'ja':
-                                {print}('Sorry, het is better als je op de grond blijft.')
-                            {elif} angst == 'nee' :
-                                lengte = {input}('Wat is je lengte in centimeters')
-                                {if} lengte > 150:
-                                    {print}('Geniet van het ritje!')
-                                {else}:
-                                    {print}('Sorry, je bent niet lang genoeg')
+                    {if} attractie == 'spookhuis':
+                        leeftijd = {input}('Hoe oud ben je?')
+                        {if} leeftijd > 12:
+                            {print}('Je bent out genoeg. Geniet ervan!')
+                        _ :
+                            {print}('Sorry, je bent nu nog niet oud genoeg. ')
 
-
-                        {if} attractie == 'draaimolen':
-                            leeftijd = {input}('Hoe oud ben je?')
-                            {if} leeftijd < 10:
-                                {print}('Dit is de perfecte attractie voor jou. Veel plezier!')
+                    {if} attractie == 'Achtbaan':
+                        angst = {input}('Heb je hoogtevrees?')
+                        {if} angst == 'ja':
+                            {print}('Sorry, het is better als je op de grond blijft.')
+                        {elif} angst == 'nee' :
+                            lengte = {input}('Wat is je lengte in centimeters')
+                            {if} lengte > 150:
+                                {print}('Geniet van het ritje!')
                             {else}:
-                                {print}('Helaas, je bent al te oud.')
+                                {print}('Sorry, je bent niet lang genoeg')
 
-                        ```
+
+                    {if} attractie == 'draaimolen':
+                        leeftijd = {input}('Hoe oud ben je?')
+                        {if} leeftijd < 10:
+                            {print}('Dit is de perfecte attractie voor jou. Veel plezier!')
+                        {else}:
+                            {print}('Helaas, je bent al te oud.')
+
+                    ```
     parrot:
         name: papegaai
         default_save_name: Papegaai
@@ -2861,7 +2861,7 @@ adventures:
                         punten_a = punten_a + 1
                     {if} antwoord == 'B':
                         punten_b = punten_b + 1
-                    
+
                     #Uitslag van de quiz printen:
                     {print}('Eind van de quiz!')
                     {print}('Laten we de uitslag bekijken!')
@@ -2901,7 +2901,7 @@ adventures:
                     _ Let op dit voorbeeld laat zien hoe het NIET moet _
                     {print} 'Daar rijden twee oma's in hun auto's '
                     {print} 'Zouden zij liever 's middags of 's avonds rijden?'
-                    
+
                     _ Dit is hoe het WEL moet _
                     {print} "Daar rijden twee oma's in hun auto's"
                     {print} "Zouden zij liever 's middags of 's avonds rijden?"
@@ -2967,7 +2967,7 @@ adventures:
                     Dit doe je door deze regels te laten beginnen met vier spaties.
                     Dit noemen we ook wel: "de regels **inspringen**". De ingesprongen regels vormen dan samen een blok van code dat herhaald zal worden.
                     Ook als je maar één regel wilt herhalen, zal je die moeten inspringen.
-                    
+
                 example_code: |
                     ```
                     {repeat} 5 {times}
@@ -3205,7 +3205,7 @@ adventures:
 
                     ### Opdracht
                     Alle inspringcode is verdwenen! Kan jij het repareren?
-                    
+
                     Als de klant friet bestelt, dan moet die ook gevraagd worden of die er saus bij wil. Bij pizza wordt dit niet gevraagd.  
 
                     **Extra** Een restaurant heeft natuurlijk niet alles op voorraad. Maak een lijstje met sauzen en zeg bij iedere bestelling of je die saus wel verkoopt. <br>
@@ -3559,7 +3559,7 @@ adventures:
                     ```
                     #Bepalen welke dieren in elk vers wat doen
                     dieren = 'beren broodjes smeren', 'apen lekker slapen', 'bijen autorijden', _
-                    
+
                     #Het liedje herhalen met de verschillende dieren:
                     _
                         {print} 'Ik zag twee ' _
@@ -3572,7 +3572,7 @@ adventures:
                         {sleep} 5
                         {clear}
                     ```
-            14: 
+            14:
                 story_text: |
                     We beginnen met het liedje van de visjes. Het liedje begint met tien visjes die naar de zee zwemmen, maar er gaat er steeds eentje af.
                     Maak de code af. Schrijf een {for}-loop met de tien verzen die je wilt zingen.
@@ -3786,7 +3786,7 @@ adventures:
                         {repeat} 4 {times}
                             {turn} _
                             {forward} _
-                    
+
                     #Drie vierkanten tekenen:
                     {call} vierkant
                     {forward} 50
