@@ -26,7 +26,7 @@ describe('Teacher slides behavior', () => {
   it('slides page lists every level and previews the first one by default', () => {
     cy.visit('/for-teachers/slides');
     cy.get('#slides_level_list a').its('length').should('be.greaterThan', 1);
-    cy.getDataCy('slides_preview').should('have.attr', 'src', '/slides/0');
+    cy.getDataCy('slides_preview').should('have.attr', 'src', '/slides/0?embed=1');
     cy.getDataCy('present_slides')
       .should('have.attr', 'href', '/slides/0')
       .and('have.attr', 'target', '_blank');
@@ -37,7 +37,7 @@ describe('Teacher slides behavior', () => {
     cy.getDataCy('slides_level_5').click();
 
     cy.url().should('include', '/for-teachers/slides/5');
-    cy.getDataCy('slides_preview').should('have.attr', 'src', '/slides/5');
+    cy.getDataCy('slides_preview').should('have.attr', 'src', '/slides/5?embed=1');
     cy.getDataCy('present_slides').should('have.attr', 'href', '/slides/5');
     cy.getDataCy('slides_level_5').should('have.class', 'slides-level-item-active');
   });
@@ -59,6 +59,35 @@ describe('Teacher slides behavior', () => {
       .find('.slides section')
       .its('length')
       .should('be.greaterThan', 0);
+  });
+
+  it('shows a whole slide at once, editor and output together', () => {
+    // Slides are 1018px tall, well over Reveal's 700px default, so an embedded deck has
+    // to be told their real height or everything below the code editor is cut off.
+    cy.visit('/for-teachers/slides/6');
+    cy.getDataCy('slides_preview').should(($f) => {
+      expect($f[0].contentWindow.Reveal, 'deck is initialised').to.exist;
+    });
+    cy.getDataCy('slides_preview').then(($f) => {
+      const win = $f[0].contentWindow;
+      win.Reveal.slide(1, 0);
+      for (let i = 0; i < 6; i++) win.Reveal.nextFragment();
+    });
+    cy.getDataCy('slides_preview').should(($f) => {
+      const win = $f[0].contentWindow;
+      const slide = win.document.querySelectorAll('.slides section')[1];
+      const box = slide.getBoundingClientRect();
+      expect(box.top, 'slide top is inside the frame').to.be.at.least(0);
+      expect(box.bottom, 'slide bottom is inside the frame').to.be.at.most(win.innerHeight);
+    });
+  });
+
+  it('presenting is left untouched by the preview tweak', () => {
+    cy.visit('/slides/6');
+    cy.window().its('Reveal').should('exist');
+    cy.window().then((win) => {
+      expect(win.Reveal.getConfig().height).to.eq(700);
+    });
   });
 
   it('a level without slides is not found', () => {

@@ -43,6 +43,11 @@
         // - https://revealjs.com/config/
         Reveal.initialize({
             hash: true,
+            {# Slide sections are 1018px tall, well over Reveal's 700px default, so in a
+               small embedded frame their bottom half falls outside the viewport. Telling
+               Reveal their real height makes it scale the whole slide down to fit instead.
+               Without ?embed=1 nothing changes, so presenting is untouched. #}
+            {% if request.args.get('embed') %}height: 1100,{% endif %}
             transition: 'none',
             slideNumber: true,
             keyboard: true,
