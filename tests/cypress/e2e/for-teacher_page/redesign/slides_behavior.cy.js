@@ -3,13 +3,68 @@ import { loginForTeacher } from '../../tools/login/login';
 describe('Teacher slides behavior', () => {
   beforeEach(() => {
     loginForTeacher();
-    cy.visit('/for-teachers');
   });
 
-  it('teacher landing remains accessible and does not expose the legacy slides toggle UI', () => {
-    cy.url().should('include', '/for-teachers');
+  it('teacher landing links to teaching materials and does not expose the legacy slides toggle UI', () => {
+    cy.visit('/for-teachers');
     cy.get('#view_slides').should('not.exist');
     cy.get('#slides_table').should('not.exist');
+
+    cy.getDataCy('teaching_materials_link').click();
+    cy.url().should('include', '/for-teachers/teaching-materials');
+  });
+
+  it('teaching materials page links to the manual and to the slides', () => {
+    cy.visit('/for-teachers/teaching-materials');
+    cy.getDataCy('background_information_link').should('have.attr', 'href', '/for-teachers/manual');
+    cy.getDataCy('slides_link').should('have.attr', 'href', '/for-teachers/slides');
+
+    cy.getDataCy('slides_link').click();
+    cy.url().should('include', '/for-teachers/slides');
+  });
+
+  it('slides page lists every level and previews the first one by default', () => {
+    cy.visit('/for-teachers/slides');
+    cy.get('#slides_level_list a').its('length').should('be.greaterThan', 1);
+    cy.getDataCy('slides_preview').should('have.attr', 'src', '/slides/0');
+    cy.getDataCy('present_slides')
+      .should('have.attr', 'href', '/slides/0')
+      .and('have.attr', 'target', '_blank');
+  });
+
+  it('selecting a level previews that level and marks it as current', () => {
+    cy.visit('/for-teachers/slides');
+    cy.getDataCy('slides_level_5').click();
+
+    cy.url().should('include', '/for-teachers/slides/5');
+    cy.getDataCy('slides_preview').should('have.attr', 'src', '/slides/5');
+    cy.getDataCy('present_slides').should('have.attr', 'href', '/slides/5');
+    cy.getDataCy('slides_level_5').should('have.class', 'slides-level-item-active');
+  });
+
+  it('scrolls the selected level into view in a long list', () => {
+    cy.visit('/for-teachers/slides/16');
+    cy.getDataCy('slides_level_16').should('be.visible');
+    cy.get('#slides_level_list').then(($nav) => {
+      expect($nav[0].scrollTop).to.be.greaterThan(0);
+    });
+  });
+
+  it('the embedded preview renders the actual deck', () => {
+    cy.visit('/for-teachers/slides/1');
+    cy.getDataCy('slides_preview')
+      .its('0.contentDocument.body')
+      .should('not.be.empty')
+      .then(cy.wrap)
+      .find('.slides section')
+      .its('length')
+      .should('be.greaterThan', 0);
+  });
+
+  it('a level without slides is not found', () => {
+    cy.request({ url: '/for-teachers/slides/99', failOnStatusCode: false })
+      .its('status')
+      .should('eq', 404);
   });
 
   it('opens a slides page with rendered sections', () => {
