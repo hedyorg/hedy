@@ -61,9 +61,7 @@ describe('Teacher slides behavior', () => {
       .should('be.greaterThan', 0);
   });
 
-  it('shows a whole slide at once, editor and output together', () => {
-    // Slides are 1018px tall, well over Reveal's 700px default, so an embedded deck has
-    // to be told their real height or everything below the code editor is cut off.
+  it('shows a whole slide at once, editor and output side by side', () => {
     cy.visit('/for-teachers/slides/6');
     cy.getDataCy('slides_preview').should(($f) => {
       expect($f[0].contentWindow.Reveal, 'deck is initialised').to.exist;
@@ -73,6 +71,9 @@ describe('Teacher slides behavior', () => {
       win.Reveal.slide(1, 0);
       for (let i = 0; i < 6; i++) win.Reveal.nextFragment();
     });
+
+    // The whole slide has to sit inside the frame: teachers need to see the output
+    // pane, not just the editor that produces it.
     cy.getDataCy('slides_preview').should(($f) => {
       const win = $f[0].contentWindow;
       const slide = win.document.querySelectorAll('.slides section')[1];
@@ -80,13 +81,27 @@ describe('Teacher slides behavior', () => {
       expect(box.top, 'slide top is inside the frame').to.be.at.least(0);
       expect(box.bottom, 'slide bottom is inside the frame').to.be.at.most(win.innerHeight);
     });
+
+    // And the editor must keep the two-column layout it has when presenting. Stacking
+    // it would double the slide height and force everything to shrink to fit.
+    cy.getDataCy('slides_preview').should(($f) => {
+      const win = $f[0].contentWindow;
+      const editorFrame = win.document.querySelectorAll('.slides section')[1].querySelector('iframe');
+      const area = editorFrame.contentDocument.getElementById('editor_area');
+      const columns = win.getComputedStyle(area).gridTemplateColumns.split(' ');
+      expect(columns, 'editor and output are side by side').to.have.length(2);
+    });
   });
 
-  it('presenting is left untouched by the preview tweak', () => {
+  it('presenting is left untouched by the preview tweaks', () => {
     cy.visit('/slides/6');
     cy.window().its('Reveal').should('exist');
     cy.window().then((win) => {
-      expect(win.Reveal.getConfig().height).to.eq(700);
+      expect(win.Reveal.getConfig().width, 'slides still size to the window').to.eq('90%');
+      expect(
+        win.document.querySelector('.slides section').style.height,
+        'slides keep their full height',
+      ).to.eq('1018px');
     });
   });
 
