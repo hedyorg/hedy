@@ -899,55 +899,9 @@ class ForTeachersModule(WebsiteModule):
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
 
-        if hedy_content.Adventures(g.lang).has_adventures():
-            default_adventures = hedy_content.Adventures(g.lang).get_adventure_keyname_name_levels()
-        else:
-            default_adventures = hedy_content.Adventures("en").get_adventure_keyname_name_levels()
-
-        teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
-        second_teacher_adventures = self.db.get_second_teacher_adventures(
-            [self.db.get_class(class_id)], user["username"])
-        teacher_adventures += second_teacher_adventures
-
-        customizations = self.db.get_class_customizations(class_id)
-        # START HERE
-        # Check how to deal with usages of this endpoint through other endpoints
-        migrate_customizations = False
-        if migrate_customizations:
-            if customizations:
-                # in case this class has thew new way to select adventures
-                if 'sorted_adventures' in customizations:
-                    # remove from customizations adventures that we have removed
-                    self.purge_customizations(customizations['sorted_adventures'],
-                                              default_adventures, teacher_adventures)
-                # it uses the old way so convert it to the new one
-                elif 'adventures' in customizations:
-                    customizations['sorted_adventures'] = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
-                    for adventure, levels in customizations['adventures'].items():
-                        for level in levels:
-                            customizations['sorted_adventures'][str(level)].append(
-                                {"name": adventure, "from_teacher": False})
-                customizations["updated_by"] = user["username"]
-                self.db.update_class_customizations(customizations)
-            else:
-                # Since it doesn't have customizations loaded, we create a default customization object.
-                # This makes further updating with HTMX easier
-                adventures_to_db = {}
-                for level, default_adventures in hedy_content.adventures_order_per_level().items():
-                    adventures_to_db[str(level)] = [{'name': adventure, 'from_teacher': False}
-                                                    for adventure in default_adventures]
-
-                customizations = {
-                    "id": class_id,
-                    "levels": [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)],
-                    "opening_dates": {},
-                    "other_settings": [],
-                    "level_thresholds": {},
-                    "sorted_adventures": adventures_to_db,
-                    "updated_by": user["username"],
-                    "quiz_parsons_tabs_migrated": True,
-                }
-                self.db.update_class_customizations(customizations)
+        # Classes that were never customized have no record yet. Create one, otherwise this page
+        # would draw every level as closed and the first toggle would have nothing to update.
+        customizations = get_customizations(self.db, class_id)
 
         second_teacher_invites = [
             invite
@@ -978,24 +932,33 @@ class ForTeachersModule(WebsiteModule):
         # Validations
         if not isinstance(body, dict):
             return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("levels"), list):
+
+        customizations = get_customizations(self.db, class_id)
+
+        if "level" in body:
+            # One level was toggled. Only touching that level means two teachers working on
+            # the same class at the same time can no longer overwrite each other's levels.
+            try:
+                level = int(body["level"])
+            except (TypeError, ValueError):
+                return make_response(gettext("request_invalid"), 400)
+            if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+                return make_response(gettext("request_invalid"), 400)
+            _set_level_availability(customizations, level, bool(body.get("enabled")))
+        elif isinstance(body.get("levels"), list):
+            # The whole set of levels at once, as sent by older (cached) front-ends.
+            try:
+                levels = {int(i) for i in body["levels"]}
+            except (TypeError, ValueError):
+                return make_response(gettext("request_invalid"), 400)
+            newly_opened = levels - set(customizations.get("levels", []))
+            customizations["levels"] = sorted(levels)
+            for level in newly_opened:
+                _clear_opening_date(customizations, level)
+        else:
             return make_response(gettext("request_invalid"), 400)
 
-        # Values are always strings from the front-end -> convert to numbers
-        levels = [int(i) for i in body["levels"]]
-
-        customizations = self.db.get_class_customizations(class_id)
-        customizations = {
-            "id": class_id,
-            "levels": levels,
-            "opening_dates": {},
-            "other_settings": [],
-            "level_thresholds": {},
-            "sorted_adventures": customizations["sorted_adventures"],
-            "dashboard_customization": {},
-            "updated_by": user["username"],
-        }
-
+        customizations["updated_by"] = user["username"]
         self.db.update_class_customizations(customizations)
         add_class_customized_to_subscription(user["email"])
         response = {"success": gettext("class_customize_success")}
@@ -1076,14 +1039,7 @@ class ForTeachersModule(WebsiteModule):
         enabled = enabled_raw in {"1", "true", "on", "yes"}
 
         customizations = get_customizations(self.db, class_id)
-        levels = set(customizations.get("levels", []))
-        if enabled:
-            levels.add(level)
-        else:
-            levels.discard(level)
-
-        customizations["levels"] = sorted(levels)
-        print(customizations['levels'])
+        _set_level_availability(customizations, level, enabled)
         customizations["updated_by"] = user["username"]
         self.db.update_class_customizations(customizations)
         add_class_customized_to_subscription(user["email"])
@@ -3339,6 +3295,30 @@ class ForTeachersModule(WebsiteModule):
             self.add_adventure_to_class_level(user, class_id, adventure_id, str(level), False)
 
         return adventure["id"], 200
+
+
+def _clear_opening_date(customizations, level):
+    """Drop the scheduled opening date of a level, if it has one.
+
+    Opening dates can only be set on the legacy customize-class page. The redesigned pages
+    have no way to show or change them, so a level with a date in the future would read as
+    open there while students silently keep getting sent back to the first open level.
+    Toggling a level is an explicit statement about that level, so its schedule goes.
+    """
+    customizations.get("opening_dates", {}).pop(str(level), None)
+
+
+def _set_level_availability(customizations, level, enabled):
+    """Open or close a single level, leaving every other level untouched."""
+    levels = set(customizations.get("levels", []))
+    if enabled:
+        levels.add(level)
+    else:
+        levels.discard(level)
+
+    customizations["levels"] = sorted(levels)
+    _clear_opening_date(customizations, level)
+    return customizations
 
 
 def get_customizations(db, class_id):

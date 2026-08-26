@@ -25,7 +25,7 @@
 				<div class="flex items-center gap-2">
 					<h3 class="m-0 text-2xl">{{ _('available_levels') }}</h3>
 				</div>
-				<form id="configure_class" onsubmit="event.preventDefault(); hedyApp.save_customizations_levels('{{class_info.id}}')">
+				<form id="configure_class" onsubmit="event.preventDefault()">
 					<div class="flex flex-wrap gap-x-4 gap-y-3">
 						{% for level in range(1, max_level + 1) %}
 						<label class="flex flex-col items-center gap-1 text-sm text-blue-900">
@@ -33,7 +33,7 @@
 							<span class="switch">
 								<input type="checkbox" id="enable_level_{{ level }}"
 									  {% if customizations and level in customizations['levels'] %}checked{% endif %}
-								   onchange="hedyApp.enable_level({{level}}); hedyApp.save_customizations_levels('{{ class_info.id }}')"
+								   onchange="hedyApp.save_customizations_levels('{{ class_info.id }}', {{ level }})"
 								   data-level="{{ level }}"
 								   level="{{ level }}"
 								>
