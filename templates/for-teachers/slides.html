@@ -51,15 +51,6 @@
           <i class="fa-solid fa-expand"></i>
           <span>{{ _('present') }}</span>
         </a>
-        <button type="button"
-                class="white-btn-new inline-flex items-center gap-2"
-                id="download_slides_button"
-                data-cy="download_slides_button"
-                onclick="hedyApp.downloadSlides({{ selected_level }})">
-          <i class="fa-solid fa-download"></i>
-          <span>{{ _('download') }}</span>
-        </button>
-        <iframe class="hidden" id="level_{{ selected_level }}_slides" src="about:blank" aria-hidden="true" tabindex="-1"></iframe>
       </div>
     </div>
   </div>
