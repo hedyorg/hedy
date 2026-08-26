@@ -470,3 +470,49 @@ kbd {
     animation: none;
   }
 }
+
+/* --- Teacher slides overview (for-teachers/slides.html) --- */
+.slides-level-list {
+  max-height: 32rem;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .slides-level-list {
+    width: 14rem;
+    flex: 0 0 14rem;
+  }
+}
+
+.slides-level-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #2b6cb0;
+  text-decoration: none;
+}
+
+.slides-level-item:hover {
+  background-color: #ebf8ff;
+  text-decoration: none;
+}
+
+.slides-level-item-active,
+.slides-level-item-active:hover {
+  background-color: #bee3f8;
+  color: #2a4365;
+  font-weight: 600;
+}
+
+.slides-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.slides-preview iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

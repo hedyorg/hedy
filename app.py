@@ -2235,7 +2235,10 @@ def get_slides(level):
         add_used_slides_to_subscription(email)
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
-    return render_template('slides.html', level=level, slides=slides)
+    # Embedded in the slides preview on /for-teachers/slides rather than presented
+    # full screen; see the comments in slides.html for what that changes.
+    embed = bool(request.args.get('embed'))
+    return render_template('slides.html', level=level, slides=slides, embed=embed)
 
 
 @app.route('/translate_keywords', methods=['POST'])

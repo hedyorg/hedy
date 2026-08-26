@@ -92,12 +92,6 @@ class ForTeachersModule(WebsiteModule):
                 }
             )
 
-        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
-        slides = []
-        for level in range(hedy.HEDY_MAX_LEVEL + 1):
-            if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
-                slides.append(level)
-
         return render_template(
             "for-teachers/for-teachers.html",
             current_page="for-teachers",
@@ -105,11 +99,50 @@ class ForTeachersModule(WebsiteModule):
             teacher_classes=teacher_classes,
             teacher_adventures=adventures,
             welcome_teacher=welcome_teacher,
-            slides=slides,
             javascript_page_options=dict(
                 page='for-teachers',
                 welcome_teacher=welcome_teacher,
             ))
+
+    @route("/teaching-materials", methods=["GET"])
+    def get_teaching_materials(self):
+        return render_template(
+            "for-teachers/teaching-materials.html",
+            current_page="for-teachers",
+            page_title=gettext("teaching_materials"))
+
+    @route("/slides", methods=["GET"])
+    def get_slides_overview(self):
+        return self._render_slides_page(None)
+
+    @route("/slides/<level>", methods=["GET"])
+    def get_slides_for_level(self, level):
+        return self._render_slides_page(level)
+
+    def _render_slides_page(self, level):
+        """Render the slides overview: a list of every level that has slides, plus a preview of one of them."""
+        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+        levels = [lvl for lvl in range(hedy.HEDY_MAX_LEVEL + 1)
+                  if SLIDES[g.lang].get_slides_for_level(lvl, keyword_language)]
+        if not levels:
+            return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+        if level is None:
+            selected_level = levels[0]
+        else:
+            try:
+                selected_level = int(level)
+            except ValueError:
+                return utils.error_page(error=404, ui_message="Slides do not exist!")
+            if selected_level not in levels:
+                return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+        return render_template(
+            "for-teachers/slides.html",
+            current_page="for-teachers",
+            page_title=gettext("slides"),
+            levels=levels,
+            selected_level=selected_level)
 
     @route("/redesign", methods=["GET"])
     @requires_teacher
