@@ -731,25 +731,26 @@ export function save_customizations(class_id: string) {
     });
 }
 
-export function save_customizations_levels(class_id: string) {
-    let levels: (string | undefined)[] = [];
-    $('[id^=enable_level_]').each(function() {
-        if ($(this).is(":checked")) {
-            levels.push(<string>$(this).attr('level'));
-        }
-    });
+export function save_customizations_levels(class_id: string, level: number) {
+    // Only send the level that was just toggled. Sending the state of every checkbox would
+    // overwrite levels another teacher opened or closed while this page was sitting open.
+    const checkbox = $('#enable_level_' + level);
+    const enabled = checkbox.is(":checked");
 
     $.ajax({
       type: 'POST',
       url: '/for-teachers/customize-levels/' + class_id,
       data: JSON.stringify({
-          levels: levels,
+          level: level,
+          enabled: enabled,
       }),
       contentType: 'application/json',
       dataType: 'json'
     }).done(function (response) {
-      modal.notifySuccess(response.success);  
+      modal.notifySuccess(response.success);
     }).fail(function (err) {
+      // Put the switch back where the server is, so it can't claim a level is open when it isn't
+      checkbox.prop('checked', !enabled);
       modal.notifyError(err.responseText);
     });
 
