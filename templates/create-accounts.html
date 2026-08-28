@@ -2,21 +2,21 @@
 
 {% block regular_content %}
 {% from 'incl/breadcrumb.html' import breadcrumb %}
-{% set is_redesign = request.args.get('modal') == 'redesign' or '/for-teachers/redesign/' in (request.args.get('return_to') or '') %}
+{% set is_redesign = request.args.get('modal') == 'redesign' or '/for-teachers/' in (request.args.get('return_to') or '') %}
 {% set primary_button_class = 'blue-btn-new' if is_redesign else 'blue-btn' %}
 <div>
     {% if is_redesign %}
     {% if '/manage' in (request.args.get('return_to') or '') %}
     {{ breadcrumb([
         {'label': _('classes'), 'url': '/for-teachers/class/all'},
-        {'label': current_class.name, 'url': '/for-teachers/redesign/class/' ~ current_class.id},
+        {'label': current_class.name, 'url': '/for-teachers/class/' ~ current_class.id},
         {'label': _('manage_students'), 'url': request.args.get('return_to')},
         {'label': _('create_accounts')}
     ]) }}
     {% else %}
     {{ breadcrumb([
         {'label': _('classes'), 'url': '/for-teachers/class/all'},
-        {'label': current_class.name, 'url': '/for-teachers/redesign/class/' ~ current_class.id},
+        {'label': current_class.name, 'url': '/for-teachers/class/' ~ current_class.id},
         {'label': _('create_accounts')}
     ]) }}
     {% endif %}

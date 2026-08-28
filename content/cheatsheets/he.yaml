@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: שאלו משהו עם `{ask}`.
     demo_code: '{ask} מה הצבע האהוב עליך?'
--   name: '{echo}'
-    explanation: חזרו על משהו באמצעות `{echo}`.
+-   name: '{answer}'
+    explanation: חזרו על משהו באמצעות `{answer}`.
     demo_code: |-
         {ask} מה הצבע האהוב עליך?
-        {echo} אז הצבע האהוב עליך הוא
--   name: '{print} אמוג׳י'
-    explanation: הדפיסו אמוג'י עם `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} אז הצבע האהוב עליך הוא {answer}
 -   name: '{forward}'
     explanation: ציירו קו עם `{forward}`.
     demo_code: '{forward} 100'
@@ -29,25 +26,10 @@
     demo_code: |-
         שם {is} הֶדִי
         {print} ברוכה הבאה שם
--   name: '{ask}'
-    explanation: שאלו משהו באמצעות `{ask}`. שימו לב! עליכם.ן להשיב עם שם באמצעות `{is}`.
-    demo_code: |-
-        צבע {is} {ask} מה הצבע האהוב עליך?
-        {print} צבע הוא הצבע האהוב עליך!
 -   name: '{sleep}'
     explanation: '`{sleep}` נותן להֶדִי לעצור למספר שניות.'
     demo_code: |-
-        {print} תנו לי שנייה לחשוב...
-        {sleep}
-        {print} הממ.. אני צריכה עוד 3 שניות...
         {sleep} 3
-        {print} אאוריקה! הצלחתי!
--   name: '{is} עם צב'
-    explanation: תנו למספר שם באמצעות `{is}`. בחרו איזה שם שתרצו.
-    demo_code: |-
-        זווית {is} 90
-        {turn} זווית
-        {forward} 100
 3:
 -   name: בחר באקראי
     explanation: בחרו באקראי מילה מתוך קבוצה באמצעות `{at}` ו `{random}`.
@@ -73,98 +55,6 @@
     demo_code: |-
         שמי {is} הֶדִי
         {print} 'שמי הוא ' שמי
--   name: '{ask}'
-    explanation: שאלו משהו עם `{ask}`.
-    demo_code: |-
-        צבע {is} {ask} 'מה הצבע האהוב עליך?'
-        {print} צבע ' הוא הצבע האהוב עליך!'
-5:
--   name: '{print}'
-    explanation: הדפיסו את הטקסט בדיוק עם מירכאות.
-    demo_code: '{print} ''ברוכים.ות הבאים.ות להֶדִי.'''
--   name: '{ask}'
-    explanation: שאלו משהו עם `{ask}`.
-    demo_code: |-
-        צבע {is} {ask} 'מה הצבע האהוב עליך?'
-        {print} צבע ' הוא הצבע האהוב עליך!'
--   name: '{if}'
-    explanation: בצעו בחירה באמצעות `{if}`.
-    demo_code: |-
-        צבע {is} {ask} 'מה הצבע האהוב עליך?'
-        {if} צבע {is} ירוק {print} 'יפה!' {else} {print} 'טוב, נו.'
--   name: '{if} עם צב'
-    explanation: בצעו בחירה באמצעות `{if}`.
-    demo_code: |-
-        תשובה {is} {ask} 'כמה רחוק ללכת?'
-        {if} תשובה {is} רחוק {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: בדוק פריטים באמצעות `{in}`.
-    demo_code: |-
-        צבעים_יפים {is} ירוק, צהוב
-        צבע {is} {ask} 'מה הצבע האהוב עליך?'
-        {if} צבע {in} צבעים_יפים {print} 'יפה!' {else} {print} 'טוב נו...'
--   name: '{pressed}'
-    explanation: בדוק אם מקש נתון במקלדת כן `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
-6:
--   name: '{print}'
-    explanation: הדפיסו את הטקסט בדיוק עם מירכאות.
-    demo_code: '{print} ''5 פעמים 5 זה '' 5 * 5'
--   name: '{ask}'
-    explanation: בקשו תוצאה של חישוב ואז בידקו אם הוא נכון.
-    demo_code: |-
-        תשובה = {ask} 'כמה זה 10 ועוד 10?'
-        {if} תשובה {is} 20 {print} 'נכון!' {else} {print} 'אופס!'
--   name: '`{ask}` ו `{if}` עם צב'
-    explanation: שאלו את המשתמש כמה זוויות הם.ן רוצים.ות.
-    demo_code: |-
-        זוויות = {ask} 'כמה זוויות?'
-        זווית = 360 / זוויות
-        {forward} 50
-7:
--   name: '{print}'
-    explanation: הדפיסו בדיוק באמצעות במירכאות.
-    demo_code: '{print} ''ברוכים.ות הבאים.ות להֶדִי.'''
--   name: '{ask}'
-    explanation: שאלו משהו עם `{ask}`.
-    demo_code: |-
-        צבע = {ask} 'מה הצבע האהוב עליך?'
-        {print} צבע 'הוא הצבע האהוב עליך!'
--   name: '{if}'
-    explanation: בצעו בחירה באמצעות `{if}`.
-    demo_code: |-
-        צבע = {ask} 'מה הצבע האהוב עליך?'
-        {if} צבע {is} ירוק {print} 'יפה!' {else} {print} 'טוב נו...'
--   name: '{repeat} עם הצב'
-    explanation: חזרו על שורה של קוד עם `{repeat}`.
-    demo_code: '{repeat} 3 {times} {forward} 10'
-8:
--   name: '{print}'
-    explanation: הדפיסו משהו. זיכרו להשתמש במירכאות בשביל להדפיס מילולית.
-    demo_code: '{print} ''5 פעמים 5 זה '' 5 * 5'
--   name: '{ask}'
-    explanation: בקשו את התשובה לתרגיל חיבור ובדקו אם היא נכונה. עכשיו אנחנו יכולים להדפיס שתי שורות.
-    demo_code: |-
-        תשובה = {ask} 'כמה זה 5 ועוד 5?'
-        {if} תשובה {is} 10
-            {print} 'כל הכבוד!'
-            {print} 'בהחלט, התשובה היא ' תשובה
-        {else}
-            {print} 'אופס!'
-            {print} 'התשובה היא 10'
--   name: '{repeat} עם הצב'
-    explanation: חזרו על מספר שורות.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: בדוק האם המקש הנתון במקלדת הוא `{pressed}`.
-    demo_code: |-
-        {if} א {is} {pressed}
-            {print} 'לחצת על א'
-        {else}
-            {print} 'לחצת על מקש אחר!'
 9:
 -   name: '{if} עם מספר שורות'
     explanation: קבלו את התשובה למספר שאלות עם `{ask}` ובדקו שהיא נכונה. עכשיו ביכולתנו להדפיס מספר שורות.
@@ -176,132 +66,21 @@
         {else}
             {print} 'טעות.'
             {print} 'התשובה היא 20'
--   name: '{repeat} עם הצב'
+-   name: '{repeat} עם מספר שורות'
     explanation: חזרו על מספר שורות.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
-10:
--   name: '{print}'
-    explanation: הדפיסו משהו. זיכרו להשתמש במירכאות בשביל להדפיס מילולית.
-    demo_code: '{print} ''5 פעמים 5 זה '' 5 * 5'
--   name: '{for} עם רשימה'
-    explanation: מדפיס את כל האיברים ברשימה.
-    demo_code: |-
-        חיות {is} כלב, חתול, דינוזאור
-        {for} חיה {in} חיות
-            {print} 'אני אוהב ' חיה
-11:
--   name: לולאת {for}
-    explanation: ביכולתנו להשתמש ב`{for}` יחד עם `{range}`.
-    demo_code: |-
-        {for} מונה {in} {range} 1 {to} 5
-            {print} מונה
--   name: '{ask}'
-    explanation: בקשו את התשובה לתרגיל חיבור ובדקו אם היא נכונה. עכשיו אנחנו יכולים להדפיס שתי שורות.
-    demo_code: |-
-        תשובה = {ask} 'כמה זה 5 ועוד 5?'
-        {if} תשובה {is} 10
-            {print} 'כל הכבוד!'
-            {print} 'בהחלט, התשובה היא ' תשובה
-        {else}
-            {print} 'אופס!'
-            {print} 'התשובה היא 10'
-12:
--   name: float directly
-    explanation: מספרים עשרוניים.
-    demo_code: |-
-        {print} 'יאללה חישובים!'
-        {print} 'שתיים וחצי ועוד שתיים וחצי זה...'
-        {print} 2.5 + 2.5
--   name: הצב טקסט
-    explanation: טקסט במירכאות אחרי `=`
-    demo_code: |-
-        שם = 'הֶדִי הרובוטית'
-        {print} 'שלום ' שם
--   name: מירכאות אחרי בדיקה עם `{if}`.
-    explanation: טקסט במירכאות אחרי `{if}`.
-    demo_code: |-
-        שם = {ask} 'מה שמך?'
-        {if} שם = 'הדי'
-            {print} 'שלום!'
--   name: מירכאות ברשימה
-    explanation: רשימה עם מירכאות.
-    demo_code: |-
-        גיבורי_על = 'איירון-מן', 'באטמן', 'סופרמן'
-        {print} גיבורי_על {at} {random}
+            {print} 'Hello!'
 13:
--   name: '{and}'
-    explanation: על שני החלקים להיות נכונים.
-    demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
-        {else}
-            {print} 'At least one answer is wrong!'
--   name: '{or}'
-    explanation: לפחות אחד משני החלקים צריך להיות נכון. זה בסדר גם אם שניהם נכונים.
-    demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {or} answer2 {is} 4
-            {print} 'At least one answer is correct!'
-        {else}
-            {print} 'Both answers are wrong!'
-14:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: קטן יותר
     explanation: אנחנו משתמשים ב-`<` כדי לבדוק אם המספר הראשון קטן מהמספר השני.
     demo_code: |-
-        גיל = {ask} 'בת כמה את?'
-        {if} גיל < 13
-            {print} 'את יותר קטנה ממני!'
+        גיל = {input}('בת כמה את?')
+        {if} גיל < 13:
+            {print}('את יותר קטנה ממני!')
 -   name: גדול יותר
     explanation: אנחנו משתמשים ב-`>` כדי לבדוק אם המספר הראשון גדול מהמספר השני.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age > 13
-            {print} 'You are older than me!'
--   name: Equal
-    explanation: We use the `==` to check if two things are the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That is correct!'
--   name: Not equal
-    explanation: We use the `!=` to check if two things are not the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
--   name: Smaller or equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
-16:
--   name: square brackets
-    explanation: Lists with square brackets.
-    demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
--   name: Get an item from a list
-    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: Get a random item from a list
-    explanation: כדי לקבל פריט רנדומאלי מרשימה אנחנו משתמשים ב{random} כך ש - פירות[{random}] פירושו, קבל פריט רנדומאלי מרשימת הפירות!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[random]
-        {print} random_fruit

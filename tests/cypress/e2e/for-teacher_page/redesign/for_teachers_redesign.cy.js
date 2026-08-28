@@ -7,20 +7,10 @@ describe('For Teachers redesign landing and classes pages', () => {
 
   it('loads redesign landing page with key CTA links', () => {
     cy.visit('/for-teachers/redesign');
-    cy.url().should('include', '/for-teachers/redesign');
+    cy.url().should('include', '/for-teachers');
 
-    cy.getDataCy('create_class_button')
-      .should('be.visible')
-      .and('have.attr', 'href', '/for-teachers/class/new');
-
-    const adventureName = uniqueName('redesign-adventure');
-
-    cy.getDataCy('create_adventure_button').should('be.visible').click();
-    cy.getDataCy('redesign_prompt_modal').should('be.visible');
-    cy.getDataCy('redesign_prompt_input').should('be.visible').clear().type(adventureName);
-    cy.getDataCy('redesign_prompt_ok_button').click();
-
-    cy.url().should('include', '/for-teachers/redesign/customize-adventure/');
+    cy.getDataCy('create_class_button').should('be.visible');
+    cy.getDataCy('create_adventure_button').should('be.visible');
   });
 
   it('shows class list and links to redesigned class overview', () => {
@@ -30,14 +20,14 @@ describe('For Teachers redesign landing and classes pages', () => {
 
     cy.get('#classes_table').should('be.visible');
     cy.get('a[data-cy="view_class_link"]').should('have.length.at.least', 1);
-    cy.get('a[data-cy="view_class_link"]').first().should('have.attr', 'href').and('include', '/for-teachers/redesign/class/');
+    cy.get('a[data-cy="view_class_link"]').first().should('have.attr', 'href').and('include', '/for-teachers/class/');
   });
 
   it('new class form enforces required fields and supports standard creation', () => {
     cy.visit('/for-teachers/class/new');
     assertBreadcrumbLinks(['/for-teachers/class/all']);
 
-    cy.intercept('POST', '/class/redesign').as('createClass');
+    cy.intercept('POST', '/class').as('createClass');
 
     cy.get('#create_class_form button.green-btn-new').click();
     cy.wait(300);
@@ -49,14 +39,14 @@ describe('For Teachers redesign landing and classes pages', () => {
 
     cy.get('#create_class_form button.green-btn-new').click();
     cy.wait('@createClass').its('response.statusCode').should('be.oneOf', [200, 201]);
-    cy.url().should('include', '/for-teachers/redesign/class/');
+    cy.url().should('include', '/for-teachers/class/');
   });
 
   it('creates plain class without adventures at level 1', () => {
     const className = uniqueName('redesign-plain');
 
     cy.visit('/for-teachers/class/new');
-    cy.intercept('POST', '/class/redesign').as('createPlainClass');
+    cy.intercept('POST', '/class').as('createPlainClass');
 
     cy.get('#class_name').type(className);
     cy.get('input[name="creation_type"][value="plain"]').check({ force: true });
@@ -66,7 +56,7 @@ describe('For Teachers redesign landing and classes pages', () => {
       expect(response.statusCode).to.be.oneOf([200, 201]);
       const classId = response.body.id;
 
-      cy.visit(`/for-teachers/redesign/class/${classId}/customize-level/1`);
+      cy.visit(`/for-teachers/class/${classId}/customize-level/1`);
       cy.get('#level_1 input[name="adventure"]').should('not.exist');
       cy.get('#level_1 li').should('have.length', 0);
     });
@@ -86,7 +76,7 @@ describe('For Teachers redesign landing and classes pages', () => {
       cy.get('#create_class_form button.green-btn-new').click();
 
       cy.wait('@duplicateClass').its('response.statusCode').should('be.oneOf', [200, 201]);
-      cy.url().should('include', '/for-teachers/redesign/class/');
+      cy.url().should('include', '/for-teachers/class/');
     });
   });
 

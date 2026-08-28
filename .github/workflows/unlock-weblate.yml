@@ -5,17 +5,25 @@
 name: Unlock Weblate when PR is closed
 on:
   workflow_dispatch: { }
-#  Temporarily disabling automatic unlocking of Weblate until hedy levels are redesigned #6342
-#  pull_request_target:
-#    types:
-#      - closed
+  pull_request_target:
+    types:
+      - closed
 
 jobs:
   if_merged:
-    if:
+    # On 'pull_request_target' this runs for every closed PR, so only continue for the
+    # translation ones. On 'workflow_dispatch' there is no pull request in the event at
+    # all, and without the first clause the job would silently skip -- which is what made
+    # the manual escape hatch useless while the trigger above was disabled.
+    if: >
+        github.event_name == 'workflow_dispatch' ||
         github.event.pull_request.user.login == 'weblate' ||
         contains(github.event.pull_request.labels.*.name, 'translations')
     runs-on: ubuntu-latest
+    # This job only talks to the Weblate API; it never touches the repository, so it
+    # needs nothing from GITHUB_TOKEN. That matters because 'pull_request_target' runs
+    # in the context of the base repository, with access to our secrets.
+    permissions: {}
     steps:
     # These are all the same as in 'update-weblate.yml'
     - name: Set up Python 3.12

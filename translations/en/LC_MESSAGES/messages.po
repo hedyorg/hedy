@@ -187,19 +187,16 @@ msgid "adventure_cloned"
 msgstr "Adventure is cloned"
 
 msgid "adventure_code_button"
-msgstr "Use this button when you want to add inline code snippets in your teacher notes. For larger code blocks, use the button below."
+msgstr "Shows a command inside a sentence, like <code>print</code>. Students cannot run it. For code students should run, use the button below."
 
 msgid "adventure_codeblock_button"
-msgstr "Use this button when you want to create a block of code that students can run in your adventure. Tip: put the selection at the end of the last line of the code block and <kbd>Enter</kbd> 3 times to type after a code block."
+msgstr "Adds a block of example code that students can send to their own editor and run. <b>To leave the block:</b> put your cursor at the end of the last line and press the down arrow key."
 
 msgid "adventure_duplicate"
 msgstr "You already have an adventure with this name."
 
 msgid "adventure_empty"
 msgstr "You didn't enter an adventure name!"
-
-msgid "adventure_exp_3"
-msgstr "Make sure you always surround keywords with { } when you write them outside of code blocks, then they are recognized correctly. You can use the \"preview\" button to view a styled version of your adventure. To view the adventure on a dedicated page, select \"view\" from the teachers page."
 
 msgid "adventure_exp_classes"
 msgstr "Your adventure is used within the following classes"
@@ -232,7 +229,7 @@ msgid "adventures_completed"
 msgstr "Adventures completed: {number_of_adventures}"
 
 msgid "adventures_info"
-msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"https://hedy.org/for-teachers/manual/features\">here</a>."
+msgstr "Each Hedy level has built-in exercises for students, which we call adventures. You can create your own adventures and add them to your classes. With your own adventures you can create adventures that are relevant and interesting for your students. You can find more information about creating your own adventures <a href=\"/for-teachers/manual\">here</a>."
 
 msgid "adventures_restored"
 msgstr "The default adventures have been restored."
@@ -305,6 +302,12 @@ msgstr "Available levels"
 
 msgid "back_to_class"
 msgstr "Go back to class"
+
+msgid "background_information"
+msgstr "Background information"
+
+msgid "background_information_info"
+msgstr "Everything you need to know before you start teaching with Hedy: the didactic ideas behind the language, tips per level, common mistakes students make and how to deal with them."
 
 msgid "become_a_sponsor"
 msgstr "Become a sponsor"
@@ -400,7 +403,7 @@ msgid "classes"
 msgstr "Classes"
 
 msgid "classes_info"
-msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"https://hedy.org/for-teachers/manual/preparations#for-teachers\">teacher manual</a>."
+msgstr "Create a class to follow the progress of each student in dashboard, and to customize the adventures your students see, and even adding your own! You can create as many classes as you like, and each class can have multiple teachers each one with different roles. You can also add as many students as you want, but mind that each student can only be in one class at a time. You can find more information about classes in the <a href=\"/for-teachers/manual\">teacher manual</a>."
 
 msgid "clone"
 msgstr "Clone"
@@ -1081,6 +1084,9 @@ msgstr "Manage Students"
 msgid "manage_students_info"
 msgstr "Here you can add students by creating their accounts, invite them, or remove them from your class."
 
+msgid "manual_out_of_date"
+msgstr "This version of the manual is out of date with respect to the current UI."
+
 msgid "more_adventures"
 msgstr "More adventures"
 
@@ -1350,6 +1356,9 @@ msgstr "Preferred keyword language"
 
 msgid "preferred_language"
 msgstr "Preferred language"
+
+msgid "present"
+msgstr "Present"
 
 msgid "preview"
 msgstr "Preview"
@@ -1624,6 +1633,9 @@ msgstr "This invitation is sent by"
 msgid "sent_password_recovery"
 msgstr "You should soon receive an email with instructions on how to reset your password."
 
+msgid "set_adventure_name"
+msgstr "What is the name you want to give to your adventure?"
+
 msgid "settings"
 msgstr "My personal settings"
 
@@ -1657,11 +1669,14 @@ msgstr "Sleeping..."
 msgid "slides"
 msgstr "Slides"
 
+msgid "slides_card_info"
+msgstr "Ready-made slides for every Hedy level, to use while you teach. You can present them straight from your browser or download them."
+
 msgid "slides_for_level"
 msgstr "Slides for level"
 
 msgid "slides_info"
-msgstr "For each level of Hedy, we have created slides to help you teach. The slides contain explanations of each level, and Hedy examples that you can run inside the slides. Just click the link and get started! the Introduction slides are a general explanation of Hedy before level 1 The slides were created using <a href=\"https://slides.com\">slides.com</a>. If you want to adapt them yourself, you can download them, and then upload the resulting zip file to <a href=\"https://slides.com\">slides.com</a>. You can find more information about the slides in the <a href=\"https://hedy.org/for-teachers/manual/features\">teacher's manual</a>."
+msgstr "For each level of Hedy, we have created slides to help you teach. The slides contain explanations of each level, and Hedy examples that you can run inside the slides. Just click the link and get started! the Introduction slides are a general explanation of Hedy before level 1. You can find more information about the slides in the <a href=\"https://hedy.org/for-teachers/manual/features\">teacher's manual</a>."
 
 msgid "social_media"
 msgstr "Social media"
@@ -1834,7 +1849,17 @@ msgstr ""
 "But sometimes I might want to show a piece of code, like this:\n"
 "<pre>\n"
 "ask What's your name?\n"
-"echo so your name is \n"
+"print so your name is _\n"
+"</pre>"
+
+msgid "template_code_solution"
+msgstr ""
+"This is the solution of my adventure!\n"
+"\n"
+"And this is the correct code:\n"
+"<pre>\n"
+"ask What's your name?\n"
+"print so your name is answer\n"
 "</pre>"
 
 msgid "this_adventure_has_an_example_solution"
@@ -2742,4 +2767,7 @@ msgstr "Your program"
 
 #~ msgid "view_teaching_materials_of_level"
 #~ msgstr ""
+
+#~ msgid "adventure_exp_3"
+#~ msgstr "Make sure you always surround keywords with { } when you write them outside of code blocks, then they are recognized correctly. You can use the \"preview\" button to view a styled version of your adventure. To view the adventure on a dedicated page, select \"view\" from the teachers page."
 

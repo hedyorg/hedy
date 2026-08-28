@@ -5,7 +5,6 @@ import {syntaxTree} from "@codemirror/language"
 import { WidgetType } from "@codemirror/view"
 import { SyntaxNode } from "@lezer/common"
 import { keywordLanguage as keywordLanguageFacet, level as levelFacet } from './cm-editor';
-import { isFeatureEnabled } from './feature-flags';
 import { traductionMap } from './lezer-parsers/tokens';
 
 export const addErrorLine = StateEffect.define<{ row: number }>();
@@ -330,7 +329,6 @@ function highlightVariables(view: EditorView) {
     // double equals because level is actually an array with just one element
     // like: [1]
     if (level == 1) {
-        if (!isFeatureEnabled('answer_interpolation')) return Decoration.none;
         return highlightLevelOneAnswerVariable(view);
     }
     let variableDeco = new RangeSetBuilder<Decoration>();

@@ -421,3 +421,98 @@ kbd {
   color: #c53030;
 }
 
+
+/* ---------------------------------------------------------------------------
+   Editor explanation panel (adventure content / solution tabs)
+
+   The glyphs in this panel illustrate CKEditor toolbar buttons; they are not
+   controls. Teachers reported pressing them instead of the real toolbar
+   buttons, so they deliberately carry no button chrome: no background, no
+   border, no hover fill, no focus ring. Hovering or clicking one highlights
+   the matching toolbar button instead of doing anything to the content.
+   --------------------------------------------------------------------------- */
+
+.hedy-tool-hint {
+  margin: 0.75rem 0;
+}
+
+.hedy-tool-glyph {
+  display: inline-flex;
+  vertical-align: -0.15em;
+  margin-inline-end: 0.35em;
+  cursor: help;
+}
+
+.hedy-tool-glyph svg {
+  width: 1.15em;
+  height: 1.15em;
+  fill: currentColor;
+}
+
+/* Spotlight applied to the real toolbar button while its glyph is hovered or
+   was just clicked. Deliberately not one of CKEditor's own state classes, so
+   it never reads as "this tool is currently on". */
+.hedy-tool-spotlight {
+  position: relative;
+  outline: 2px solid #2b6cb0;
+  outline-offset: 1px;
+  border-radius: var(--ck-border-radius, 2px);
+  animation: hedy-tool-pulse 0.6s ease-out 2;
+}
+
+@keyframes hedy-tool-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(43, 108, 176, 0.5); }
+  100% { box-shadow: 0 0 0 6px rgba(43, 108, 176, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hedy-tool-spotlight {
+    animation: none;
+  }
+}
+
+/* --- Teacher slides overview (for-teachers/slides.html) --- */
+.slides-level-list {
+  max-height: 32rem;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .slides-level-list {
+    width: 14rem;
+    flex: 0 0 14rem;
+  }
+}
+
+.slides-level-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #2b6cb0;
+  text-decoration: none;
+}
+
+.slides-level-item:hover {
+  background-color: #ebf8ff;
+  text-decoration: none;
+}
+
+.slides-level-item-active,
+.slides-level-item-active:hover {
+  background-color: #bee3f8;
+  color: #2a4365;
+  font-weight: 600;
+}
+
+.slides-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.slides-preview iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

@@ -235,23 +235,9 @@ adventures:
                     {print} 'Jetzt kannst Du ins Haus!'
                     ```
             13:
-                story_text: |
-                    Wir werden eine andere Geschichte ausgeben, aber nun müssen wir Klammern mit `{print}` benutzen.
-
-                    ### Übung 1
-                    Erstelle eine Geschichte mit mindestens 5 Sätzen. Du musst 'name' noch nicht benutzen.
                 example_code: |
                     ```
-                    {print}('Willkommen in dieser Geschichte!')
-                    ```
-                story_text_2: |
-                    ### Übung 2
-                    Wir haben bereits einen `{input}` Befehl für dich vorbereitet. Benutze zuerst die `name` Variable in deiner Geschichte.
-                    Füge dann einen zweiten `{ask}` Befehl hinzu und benutze diese Variable ebenfalls.
-                    Tipp: Denke an die Kommas im `{print}` Befehl zwischen Text und Variablen!
-                example_code_2: |
-                    ```
-                    name = {input}("Wie ist dein Name?")
+                    name = _
                     {print}('Willkommen in dieser Geschichte!')
                     ```
             6:
@@ -458,7 +444,24 @@ adventures:
                     ### Übung
                     Ergänze die `{while}` Schleife in der Funktion, frage die Spieler, was zahl_1 mal zahl_2 ist und drucke ihre Antwort.
                     Dann rufe die Funktion auf.
-                example_code: "```\n{define} new_question():\n    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n    number_1 = numbers[random]\n    number_2 = numbers[random]\n    correct = number_1 * number_2\n    answer = 0\n    _\n    _\n    _\n    {print} ('Gut gemacht!')\n\n{print} ('Gib 10 richtige Antworten, um zu gewinnen!')\n{for} i {in} {range} 1 {to} 10:\n    _\n{print} ('Gewonnen!')\n```\n"
+                example_code: |
+                    ```
+                    {def} new_question():
+                        numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        number_1 = numbers[random]
+                        number_2 = numbers[random]
+                        correct = number_1 * number_2
+                        answer = 0
+                        _
+                        _
+                        _
+                        {print}('Gut gemacht!')
+
+                    {print}('Gib 10 richtige Antworten, um zu gewinnen!')
+                    {for} i {in} {range}(1, 10):
+                        _
+                    {print} ('Gewonnen!')
+                    ```
     calculator_2:
         name: Taschenrechner 2
         levels:
@@ -1745,14 +1748,14 @@ adventures:
                 example_code: |
                     ```
                     {def} feueralarm():
-                        {print} 'FEUER!'
+                        {print}('FEUER!')
                         note = 40
                         {for} i {in} {range} _
                             {play} 45
                             {play} 50
 
                     feuer = {input}('Brennt es?')
-                    {if} feuer _ 'ja'
+                    {if} feuer _ 'ja':
                         _
                     ```
             16:
@@ -1764,13 +1767,13 @@ adventures:
                     Vervollständige das Lied-das-niemals-endet.
                 example_code: |
                     ```
-                    {def} lied
+                    {def} lied():
                         {play} _
 
                     ja_oder_nein = {input}('Willst du mein Lied-das-niemals-endet hören?')
                     {while} ja_oder_nein = 'ja':
                         lied()
-                        {print} '🥳'
+                        {print}('🥳')
                     ```
     parrot:
         name: Papagei
@@ -1890,21 +1893,21 @@ adventures:
                     Vervollständige den Code, in dem du die Leerstellen füllst.
                 example_code: |
                     ```
-                    _ berechne_budget {with} wunsch, erspartes, taschengeld
+                    _ berechne_budget(wunsch, erspartes, taschengeld):
                         zu_sparen = wunsch - erspartes
                         wochen = zu_sparen / taschengeld
-                        {if} wunsch _ erspartes
-                            {print} 'Du musst noch weiter sparen!'
-                            {print} 'Du brauchst noch ' wochen ' weitere Wochen.'
-                        {else}
-                            {print} 'Großartige! Du hast genug'
-                            {print} 'Kommt, wir gehen einkaufen!'
+                        {if} wunsch _ erspartes:
+                            {print}('Du musst noch weiter sparen!')
+                            {print}('Du brauchst noch ', wochen, ' weitere Wochen.')
+                        {else}:
+                            {print}('Großartige! Du hast genug')
+                            {print}('Kommt, wir gehen einkaufen!')
 
-                    erspartes = {ask} 'Wie viel Geld hast du gespart?'
-                    wunsch = {ask} 'Wie viel Geld brauchst du?'
-                    taschengeld = {ask} 'Wie viel Taschengeld bekommst du jede Woche?'
+                    erspartes = {input}('Wie viel Geld hast du gespart?')
+                    wunsch = {input}('Wie viel Geld brauchst du?')
+                    taschengeld = {input}('Wie viel Taschengeld bekommst du jede Woche?')
 
-                    {call} _
+                    _
                     ```
     print_command:
         levels:
@@ -2300,13 +2303,13 @@ adventures:
             16:
                 example_code: |
                     ```
-                    {print} 'Willkommen bei McHedy'
+                    {print}('Willkommen bei McHedy')
                     mehr = 'ja'
                     _
-                        Bestellung = {ask} 'Was würden Sie gerne bestellen?'
-                        {print} Bestellung
-                        mehr = {ask} 'Würden Sie gerne noch etwas bestellen?'
-                    {print} 'Dankeschön!'
+                        Bestellung = {input}('Was würden Sie gerne bestellen?')
+                        {print}(Bestellung)
+                        mehr = {input}('Würden Sie gerne noch etwas bestellen?')
+                    {print}('Dankeschön!')
                     ```
                 story_text: "Mit `{while}` kannst du sicherstellen, dass deine Kunden Bestellungen aufgeben bis sie fertig sind.\n\n### Übung\nFüge den `{while}` Befehl dem Code hinzu.\n"
         default_save_name: Restaurant
@@ -2978,7 +2981,7 @@ adventures:
                     Spirale
                     ```
                     entfernung = 5
-                    {while} entfernung < 200
+                    {while} entfernung < 200:
                         entfernung = entfernung + 5
                          _
                     ```
@@ -2987,12 +2990,12 @@ adventures:
                 example_code_2: |
                     Fächer
                     ```
-                    {define} zeichne_ein_quadrat {with} seitenlänge
+                    {def} zeichne_ein_quadrat(seitenlänge)
                     _
 
                     i = 100
-                    {while} i > 1
-                        _ {with} i
+                    {while} i > 1:
+                        _ (i)
                         _
                         i = i - 3
                     ```
