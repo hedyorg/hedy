@@ -178,40 +178,6 @@ teacher-guide:
     levels:
     -   level: '1'
         sections:
-        -   title: 学生忘记键入命令
-            example:
-                error_text: 例如，他们在不使用打印命令的情况下键入句子。
-                error_code: Hedy 无法打印此内容
-                solution_text: 教您的学生始终以命令开始一行代码。
-                solution_code: 打印Hedy可以打印此内容!
-        -   title: 学生在键入命令时使用大写字母
-            example:
-                error_text: 如果用大写字母键入命令，那么这个命令将不起作用。
-                error_code: |-
-                    询问 为什么我的代码会失败？
-                    打印 因为我使用大写字母键入命令。
-                solution_text: 删除大写字母。
-                solution_code: |-
-                    询问为什么我的代码现在有效？
-                    打印 因为我删除了大写字母！
-        -   title: 学生在没有使用询问的情况下使用了回声命令
-            example:
-                error_text: 回声命令的作用是在发出询问命令后重复一个答案。没有询问命令，回声命令就不会做任何事情。
-                error_code: 回声 你的名字是
-                solution_text: 添加 询问命令以使其正常工作。
-                solution_code: |-
-                    询问 你叫什么名字？
-                    回声 你的名字是
-        -   title: 学生希望他们的回声词（变量）位于句子的中间
-            example:
-                error_text: 而他们是对的! 这就是为什么他们将在下一阶段学习如何使用适当的变量。
-                error_code: |-
-                    询问哪种编程语言最有趣？
-                    回声是最好的！
-                solution_text: 在级别 1 中，我们必须将其保持在以下位置：
-                solution_code: |-
-                    询问 哪种编程语言最有趣？
-                    回声 最好的是...
         -   title: 海龟：学生让海龟走出屏幕
             example:
                 error_text: 通常学生喜欢在使用海龟时尝试比较大的数字，这会导致箭头走出屏幕。

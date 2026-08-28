@@ -15,7 +15,10 @@
     <div class="reveal">
       <div class="slides">
           {% for index, slide in slides.items() %}
-            <section data-markdown style="text-align: left; height: 1018px; font-size:0.8em">
+            {# Embedded previews get shorter slides: with the editor laid out side by
+               side there is no need for the full 1018px, and a shorter slide means
+               Reveal scales it down far less, so the preview stays readable. #}
+            <section data-markdown style="text-align: left; height: {{ '640px' if embed else '1018px' }}; font-size:0.8em">
                 {{ slide['header'] }}
                 <textarea data-template>
                     ### {{ slide['header'] }}
@@ -46,7 +49,12 @@
             transition: 'none',
             slideNumber: true,
             keyboard: true,
-            width: "90%",
+            {# A preview frame is narrower than a browser window, and Reveal sizes slides
+               relative to it, so a percentage width would drop the embedded Hedy editor
+               below its 1024px breakpoint and stack editor and output on top of each
+               other. Pin a wide slide instead and let Reveal scale it down: the editor
+               then lays out side by side exactly as it does when presenting. #}
+            width: {% if embed %}1200{% else %}"90%"{% endif %},
             // Learn about plugins: https://revealjs.com/plugins/
             plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
         });

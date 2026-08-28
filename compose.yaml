@@ -1,0 +1,8 @@
+name: hedy
+services:
+  hedy:
+    build: .
+    ports:
+      - "8080:8000"
+    command: --access-logfile - --log-file -
+    container_name: hedy

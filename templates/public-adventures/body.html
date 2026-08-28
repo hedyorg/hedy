@@ -86,7 +86,7 @@
       <div class="grid p-5 text-center bg-white shadow-md rounded-lg transition-shadow hover:shadow-lg outline-blue-400 hover:outline hover:outline-2">
         {{_('no_adventures_yet')}}
         <button id="create_adventure_button" class="green-btn mt-4"
-          _="on click window.open('/for-teachers/customize-adventure', '_self')"
+          _="on click window.open('/for-teachers/customize-adventure?ui=legacy', '_self')"
           data-cy="edit_link"
           {% if second_teacher and role == 'viewer' %}disabled{% endif %}
           >{{_('create_adventure')}}</button>

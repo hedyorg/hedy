@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Küsi midagi kasutades `{ask}` käsku.
     demo_code: '{ask} Mis on sinu lemmikvärv?'
--   name: '{echo}'
-    explanation: Korda midagi kasutades `{echo}` käsku.
+-   name: '{answer}'
+    explanation: Korda midagi kasutades `{answer}` käsku.
     demo_code: |-
         {ask} Mis on su lemmikvärv?
-        {echo} nii et su lemmikvärv on
--   name: '{print} emotikonid'
-    explanation: Prindi emotikon `{print}` käsuga.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} nii et su lemmikvärv on {answer}
 -   name: '{forward}'
     explanation: Tõmba joon kasutades `{forward}` käsku.
     demo_code: '{forward} 100'
@@ -29,25 +26,10 @@
     demo_code: |-
         nimi {is} Hedy
         {print} tere nimi
--   name: '{ask}'
-    explanation: Küsi midagi kasutades `{ask}` käsku. Pea meeles! Sa pead vastuse andma kasutades `{is}` käsku.
-    demo_code: |-
-        värv {is} {ask} Mis on su lemmikvärv?
-        {print} värv on su lemmik!
 -   name: '{sleep}'
     explanation: '`{sleep}` Lase Hedy''l mõni sekund oodata.'
     demo_code: |-
-        {print} Lase mul üks sekund mõelda...
-        {sleep}
-        {print} Hmm.. Mul läheb veel 3 sekundit aega...
         {sleep} 3
-        {print} Eureka! Sain hakkama!
--   name: '{is} kilpkonnaga'
-    explanation: Anna arvule nimi võtmesõnaga `{is}`. Nime võid ise valida.
-    demo_code: |-
-        nurk {is} 90
-        {turn} nurk
-        {forward} 100
 3:
 -   name: Vali juhuslikult
     explanation: Vali juhuslik sõna rühmast `{at}` ja `{random}` käske kasutades.
@@ -73,98 +55,6 @@
     demo_code: |-
         nimi {is} Hedy
         {print} 'minu nimi on ' nimi
--   name: '{ask}'
-    explanation: Küsi midagi kasutades `{ask}` käsku.
-    demo_code: |-
-        värv {is} {ask} 'Mis on su lemmikvärv?'
-        {print} värv ' on su lemmik!'
-5:
--   name: '{print}'
-    explanation: Prindi täpselt, kasutades jutumärke.
-    demo_code: '{print} ''Teretulemast Hedy juurde.'''
--   name: '{ask}'
-    explanation: Küsi midagi kasutades `{ask}` käsku.
-    demo_code: |-
-        värv {is} {ask} 'Mis on su lemmikvärv?'
-        {print} värv ' on su lemmik!'
--   name: '{if}'
-    explanation: Vali midagi kasutades `{if}` käsku.
-    demo_code: |-
-        värv {is} {ask} 'Mis on su lemmikvärv?'
-        {if} värv {is} roheline {print} 'ilus!' {else} {print} 'mhh'
--   name: '{if} kilpkonnaga'
-    explanation: Tee valik kasutades `{if}` käsku.
-    demo_code: |-
-        vastus {is} {ask} 'Kui kaugele peaksin jalutama?'
-        {if} vastus {is} kaugele {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Kontrolli elemente, kasutades võtmesõna `{in}`.
-    demo_code: |-
-        ilusad_värvid {is} roheline, kollane
-        värv {is} {ask} 'Mis on su lemmikvärv?'
-        {if} värv {in} ilusad_värvid {print} 'ilus!' {else} {print} 'pähh'
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
-6:
--   name: '{print}'
-    explanation: Prindi täpselt, kasutades jutumärke.
-    demo_code: '{print} ''5 korda 5 on '' 5 * 5'
--   name: '{ask}'
-    explanation: Küsi tehte vastus ja kontrolli, kas see on õige.
-    demo_code: |-
-        vastus = {ask} 'Kui palju on 10 pluss 10?'
-        {if} vastus {is} 20 {print} 'Õige!' {else} {print} 'Oih'
--   name: '`{ask}` ja `{if}` kilpkonnaga'
-    explanation: Küsi kasutajalt mitut nurka ta tahab.
-    demo_code: |-
-        nurki = {ask} 'Mitu nurka?'
-        nurk = 360 / nurki
-        {forward} 50
-7:
--   name: '{print}'
-    explanation: prindi täpselt, kasutades jutumärke.
-    demo_code: '{print} ''Teretulemast Hedy juurde.'''
--   name: '{ask}'
-    explanation: Küsi midagi kasutades `{ask}` käsku.
-    demo_code: |-
-        värv = {ask} 'Mis on su lemmikvärv?'
-        {print} värv ' on su lemmik!'
--   name: '{if}'
-    explanation: Make a choice with `{if}`.
-    demo_code: |-
-        värv = {ask} 'Mis on su lemmikvärv?'
-        {if} värv {is} roheline {print} 'ilus!' {else} {print} 'pähh'
--   name: '{repeat} kilpkonnaga'
-    explanation: Korda koodirida kasutades sõna `{repeat}`.
-    demo_code: '{repeat} 3 {times} {forward} 10'
-8:
--   name: '{print}'
-    explanation: Prindi midagi. Pea meeles, et sõna-sõnalt täpseks printimiseks on vaja jutumärke.
-    demo_code: '{print} ''5 korda 5 on '' 5 * 5'
--   name: '{ask}'
-    explanation: Palu sisestada tehte vastus ja kontrolli, kas sisestatud vastus on õige. Nüüd on võimalik printida 2 rida.
-    demo_code: |-
-        vastus = {ask} 'Mis on 5 pluss 5?'
-        {if} vastus {is} 10
-            {print} 'Tubli!'
-            {print} 'Vastus on tõepoolest ' vastus
-        {else}
-            {print} 'Oi!'
-            {print} 'Õige vastus on 10'
--   name: '{repeat} kilpkonnaga'
-    explanation: Korda mitut rida.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
 9:
 -   name: '{if} mitme reaga'
     explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
@@ -176,192 +66,8 @@
         {else}
             {print} 'Vale'
             {print} 'Õige vastus on 20'
--   name: '{repeat} kilpkonnaga'
+-   name: '{repeat} mitme reaga'
     explanation: Korda mitut rida.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
-10:
--   name: '{print}'
-    explanation: Prindi midagi. Pea meeles, et sõna-sõnalt täpseks printimiseks on vaja jutumärke.
-    demo_code: '{print} ''5 korda 5 on '' 5 * 5'
--   name: '{for} koos nimistuga'
-    explanation: Prindi kõik nimistus sisalduv.
-    demo_code: |-
-        loomad {is} koer, kass, kala
-        {for} loom {in} loomad
-          {print} 'Mulle meeldib ' loom
-11:
--   name: '{for} tsükkel'
-    explanation: '`{for}` saab kasutada koos `{range}`-ga.'
-    demo_code: |-
-        {for} loendur {in} {range} 1 {to} 5
-            {print} loendur
--   name: '{ask}'
-    explanation: ask for the answer to a sum and check if it is correct. We can now print 2 lines.
-    demo_code: |-
-        answer = {ask} 'What is 5 plus 5?'
-        {if} answer {is} 10
-            {print} 'Well done!'
-            {print} 'Indeed, the answer was ' answer
-        else
-            {print} 'Oops!'
-            {print} 'The answer is 10'
-12:
--   name: float directly
-    explanation: Kümnendarvud.
-    demo_code: |-
-        {print} 'Calculate away!'
-        {print} 'Two and a half plus two and a half is...'
-        {print} 2.5 + 2.5
--   name: assign text
-    explanation: '`=`-le järgnev jutumärkidega tekst'
-    demo_code: |-
-        name = 'Hedy the Robot'
-        {print} 'Hello ' name
--   name: quotes after `{if}` comparison
-    explanation: '`{if}`-le järgnev jutumärkidega tekst .'
-    demo_code: |-
-        name = {ask} 'Who are you?'
-        {if} name = 'Hedy'
-            {print} 'Hi there!'
--   name: quotes in list
-    explanation: Jutumärkidega nimistu.
-    demo_code: |-
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
-13:
--   name: '{and}'
-    explanation: Two parts both need to be correct
-    demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {and} answer2 {is} 4
-            {print} 'Both answers are correct!'
-        else
-            {print} 'At least one answer is wrong!'
--   name: '{or}'
-    explanation: At least 1 of the two parts need to be correct. If both are correct, it is also fine.
-    demo_code: |-
-        answer1 = {ask} 'What is 3+2?'
-        answer2 = {ask} 'What is 2+2?'
-        {if} answer1 {is} 5 {or} answer2 {is} 4
-            {print} 'At least one answer is correct!'
-        else
-            {print} 'Both answers are wrong!'
-14:
--   name: Smaller
-    explanation: We use the `<` to check if the first number is smaller than the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age < 13
-            {print} 'You are younger than me!'
--   name: Bigger
-    explanation: We use the `>` to check if the first number is bigger than the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age > 13
-            {print} 'You are older than me!'
--   name: Equal
-    explanation: We use the `==` to check if two things are the same.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer == 25
-            {print} 'That {is} correct!'
--   name: Not equal
-    explanation: Kontrollimaks, et kaks asja on erinevad, kasuta `!=`.
-    demo_code: |-
-        answer = {ask} 'What is 5 * 5?'
-        {if} answer != 25
-            {print} 'That is not correct!'
--   name: Smaller {or} equal
-    explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
--   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
-15:
--   name: '{while}'
-    explanation: We can use the `{while}` loop with not equal
-    demo_code: |-
-        answer = 0
-        {while} answer != 25
-            answer = {ask} 'What is 5 times 5?'
-        {print} 'A correct answer has been given'
--   name: Smaller {while}
-    explanation: '`{while}` tsüklit saab kasutada ka võrdlustehetega `<` ja `>`.'
-    demo_code: |-
-        count = 1
-        {while} count < 3
-            {print} 'We do this ' 3 - count ' more times'
-            count = count + 1
-        {print} 'We are done'
-16:
--   name: square brackets
-    explanation: Kantsulgudega nimistud.
-    demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
--   name: Get an item from a list
-    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: Get a random item from a list
-    explanation: To get a random item from a list we use [{random}] so fruit[{random}] means, get a random fruit from the list!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[random]
-        {print} random_fruit
-17:
--   name: '{elif}'
-    explanation: '`{elif}`'
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a is 1'
-        {elif} a == 2:
-            {print} 'a is 2'
-        {else}:
-            {print} 'a is not 1 or 2'
--   name: '{print}'
-    explanation: When we use a `{for}`, we need to put a `:` behind the `{for}` statement!
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Ready or not, here I come!'
--   name: '{if}'
-    explanation: We need to do the same with all of our `{if}` statements
-    demo_code: |-
-        colour = {ask} 'What is your favorite color?'
-        {if} colour == 'green':
-            {print} 'Your favorite colour is green'
-        {else}:
-            {print} 'Your favorite colour is not green'
-18:
--   name: '{print}'
-    explanation: '`{print}` järel on vaja kasutade sulge.'
-    demo_code: '{print}(''hi!'')'
--   name: '{range}'
-    explanation: '`{range}` järel on vaja kasutada sulge.'
-    demo_code: |-
-        {for} i {in} {range} (1,10):
-            {print}('Hello, times ', i)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
-    demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)
+            {print} 'Hello!'
