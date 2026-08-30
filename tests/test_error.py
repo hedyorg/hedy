@@ -2,7 +2,7 @@ from parameterized import parameterized
 
 from app import create_app
 from hedy import exceptions
-from website_content import ALL_LANGUAGES
+from website_content import ALL_KEYWORD_LANGUAGES, ALL_LANGUAGES
 from hedy.error import get_error_text, _highlight, _get_missing_arguments
 from tests.Tester import HedyTester
 
@@ -39,9 +39,11 @@ class TestErrors(HedyTester):
     # The test ensures the error templates can be formatted with the arguments of the hedy exceptions in all languages
     @parameterized.expand(exception_language_input(), name_func=custom_name_func)
     def test_translate_hedy_exception(self, exception, language):
-        if not language == 'enm':
-            with create_app().test_request_context(headers={'Accept-Language': language}):
-                get_error_text(exception, language)
+        with create_app().test_request_context(headers={'Accept-Language': language}):
+            # Not every interface language has keyword translations, so fall back to the English
+            # keywords, just like the website does when it picks a keyword language.
+            keyword_language = language if language in ALL_KEYWORD_LANGUAGES else 'en'
+            get_error_text(exception, keyword_language)
 
     def test_error_text_format_fails_on_unknown_key(self):
         lang = 'en'
