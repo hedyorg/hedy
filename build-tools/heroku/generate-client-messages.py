@@ -88,15 +88,17 @@ def validate_gettext_hackfile():
     with open(filename) as f:
         messages = set(x.strip() for x in f.read().split('\n'))
 
-    oopsie = False
+    missing_gettext = []
 
     for additional_key in ADDITIONAL_GETTEXT_KEYS:
         gettext_line = f"gettext('{additional_key}')"
         if gettext_line not in messages:
-            oopsie = True
-            print(f'Put the following line into content/client-messages.txt:   {gettext_line}')
+            missing_gettext.append(gettext_line)
 
-    if oopsie:
+    if missing_gettext:
+        print(f'Put the following {'lines' if len(missing_gettext) > 1 else 'line'} into content/client-messages.txt:')
+        for missing in missing_gettext:
+            print(missing)
         sys.exit(1)
 
 
