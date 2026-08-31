@@ -38,6 +38,12 @@ ADDITIONAL_GETTEXT_KEYS = [
     'invite',
     'program_size_too_long',
     'copy_to_editor',
+    'copy_code_to_editor_description',
+    'edit_code',
+    'code',
+    'example_code',
+    'workbook',
+    'common_mistakes',
 ]
 
 
