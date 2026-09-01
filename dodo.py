@@ -501,20 +501,36 @@ def task_container():
 def task__offline():
     """Build the offline Hedy distribution."""
 
-    return dict(
-        title=lambda _: 'Build offline Hedy',
-        task_dep=['backend', 'frontend'],
-        actions=[
-            'pyinstaller -y app.spec',
-            # We copy this here instead of in the 'spec' file so that we can rename
-            # the file (spec file copies cannot do that).
-            'cp data-for-testing.json dist/offlinehedy/database.json',
-            'cp OFFLINE_README.txt dist/offlinehedy/README.txt',
-            # There are some research papers in the distribution that take up a lot
-            # of space.
-            'rm -rf dist/offlinehedy/_internal/content/research/*',
-        ],
-    )
+    if platform.system() == 'Windows':
+        return dict(
+            title=lambda _: 'Build offline Hedy',
+            task_dep=['backend', 'frontend'],
+            actions=[
+                'pyinstaller -y app.spec',
+                # We copy this here instead of in the 'spec' file so that we can rename
+                # the file (spec file copies cannot do that).
+                'cp data-for-testing.json dist/offlinehedy/database.json',
+                'cp OFFLINE_README_WINDOWS.txt dist/offlinehedy/README.txt',
+                # There are some research papers in the distribution that take up a lot
+                # of space.
+                'rm -rf dist/offlinehedy/_internal/content/research/*',
+            ],
+        )
+    else:
+        return dict(
+            title=lambda _: 'Build offline Hedy',
+            task_dep=['backend', 'frontend'],
+            actions=[
+                'pyinstaller -y app.spec',
+                # We copy this here instead of in the 'spec' file so that we can rename
+                # the file (spec file copies cannot do that).
+                'cp data-for-testing.json dist/offlinehedy/database.json',
+                'cp OFFLINE_README_UBUNTU.txt dist/offlinehedy/README.txt',
+                # There are some research papers in the distribution that take up a lot
+                # of space.
+                'rm -rf dist/offlinehedy/_internal/content/research/*',
+            ],
+        )
 
 
 def task__offline_macos():
@@ -528,7 +544,7 @@ def task__offline_macos():
             # We copy this here instead of in the 'spec' file so that we can rename
             # the file (spec file copies cannot do that).
             'cp data-for-testing.json dist/offlinehedy/database.json',
-            'cp OFFLINE_README.txt dist/offlinehedy/README.txt',
+            'cp OFFLINE_README_MACOS.txt dist/offlinehedy/README.txt',
             # There are some research papers in the distribution that take up a lot
             # of space.
             'rm -rf dist/offlinehedy/_internal/content/research/*',

@@ -1311,7 +1311,7 @@ def hour_of_code(level, program_id=None):
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
-        lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
+        lang_switch_table=hedy_translation.lang_switch_table(level, get_syntax_language(g.lang)),
         latest=version(),
         cheatsheet=cheatsheet,
         blur_button_available=False,
@@ -1435,7 +1435,7 @@ def index(level, program_id):
         loaded_program=loaded_program,
         adventures=adventures,
         initial_tab=initial_tab,
-        lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
+        lang_switch_table=hedy_translation.lang_switch_table(level, get_syntax_language(g.lang)),
         latest=version(),
         cheatsheet=cheatsheet,
         blur_button_available=False,
@@ -1805,7 +1805,7 @@ def render_code_in_editor(level):
         raw=True,
         menu=False,
         blur_button_available=False,
-        lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
+        lang_switch_table=hedy_translation.lang_switch_table(level, get_syntax_language(g.lang)),
         # See initialize.ts
         javascript_page_options=dict(
             page='view_adventure',
@@ -1870,7 +1870,7 @@ def get_specific_adventure(name, level, mode):
         "code-page.html",
         specific_adventure=True,
         level_nr=str(level),
-        lang_switch_table=hedy_translation.lang_switch_table(level, g.lang),
+        lang_switch_table=hedy_translation.lang_switch_table(level, get_syntax_language(g.lang)),
         level=level,
         prev_level=prev_level,
         next_level=next_level,
@@ -2235,7 +2235,10 @@ def get_slides(level):
         add_used_slides_to_subscription(email)
 
     slides = SLIDES[g.lang].get_slides_for_level(level, keyword_language)
-    return render_template('slides.html', level=level, slides=slides)
+    # Embedded in the slides preview on /for-teachers/slides rather than presented
+    # full screen; see the comments in slides.html for what that changes.
+    embed = bool(request.args.get('embed'))
+    return render_template('slides.html', level=level, slides=slides, embed=embed)
 
 
 @app.route('/translate_keywords', methods=['POST'])
