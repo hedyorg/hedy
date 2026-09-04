@@ -188,6 +188,17 @@ teacher-guide:
         Van fouten kun je leren en dat geldt al helemaal bij programmeren! Fouten maken is onvermijdelijk en helemaal niet erg, maar het kan als leerkrachten soms nog knap lastig zijn om foutjes van leerlingen op te sporen en op te lossen. Vooral als de programma's almaar langer worden, wanneer de leerlingen hogere levels bereiken. Daarom hebben wij hier per level een lijst gemaakt van de meest gemaakte fouten en de oplossingen.
     levels:
     -   level: "1"
+        concepts_and_changes: |-
+            Level 1 is waar leerlingen hun allereerste regels code schrijven en uitvoeren.
+            Er is nog geen interpunctie om je zorgen over te maken: elke regel begint met een commando en de rest van de regel is gewone tekst.
+            De les draait eigenlijk om één concept: een computer doet precies wat je hem opdraagt, niet meer en niet minder.
+
+            Nieuw in dit level:
+
+            * Tekst tonen met `{print}`
+            * Vragen stellen met `{ask}` en het antwoord gebruiken met `{antwoord}`
+            * Tekenen met de tekenschildpad met `{forward}` en `{turn}`
+            * Muzieknoten spelen met `{play}`
         sections:
         -   title: Leerlingen vergeten de commando's te typen
             example:
@@ -230,6 +241,16 @@ teacher-guide:
                 solution_text: "Om de schildpad terug te laten gaan, gebruik het forward commando en een min-getal. Bijvoorbeeld:"
                 solution_code: "{forward} -100"
     -   level: "2"
+        concepts_and_changes: |-
+            In level 1 hebben de leerlingen geleerd hoe ze de variabele `{answer}` kunnen gebruiken. In dit level leren ze meerdere variabelen te gebruiken.
+            Dit is het eerste abstracte concept van programmeren waarmee ze te maken krijgen: een naam die staat voor een waarde die kan veranderen.
+            Omdat de leerlingen meerdere variabelen kunnen gebruiken, moeten ze ook leren hoe ze deze definiëren. Dit betekent dat `{ask}` is veranderd en voorafgegaan moet worden door de variabele waarin ze het antwoord willen opslaan.
+
+            Nieuw in dit level:
+            * Een waarde opslaan in een variabele met `{is}`
+            * Het antwoord op een vraag opslaan in een variabele die je zelf kiest: naam `{is}` `{ask}` Wat is je naam?
+            * Het programma pauzeren met `{sleep}`
+            * De tekenschildpad draaien met een aantal graden: `{turn}` 90
         sections:
         -   title: Leerlingen maken spelfouten in de commando's
             example:
@@ -237,22 +258,26 @@ teacher-guide:
                 error_code: prinnt Maak geen spelfouten
                 solution_text: Leer de leerlingen aan om de foutmeldingen te lezen. Deze geven namelijk aan welk woord fout gespeld is.
                 solution_code: "{print} Maak geen spelfouten"
-        -   title: Leerlingen vergeten dat het ask commando is veranderd
+        -   title: Leerlingen vergeten dat het `{ask}` commando is veranderd
             example:
                 error_text: In dit level leren de leerlingen werken met variabelen. Ook het ask commando gebruikt variabelen in dit level, wat nogal eens wordt vergeten door leerlingen.
                 error_code: ask Wat wil je bestellen
                 solution_text: In dit level moet je altijd aangeven waarin Hedy jouw antwoord moet opslaan, zodat je het later kunt gebruiken. Dat waarin noemt men dus een variabele.
                 solution_code: bestelling {is} {ask} Wat wil je bestellen
-        -   title: Leerlingen gebruiken het echo commando, wat niet werkt in level 2
+        -   title: Leerlingen gebruiken `{answer}` voor meerdere vragen
             example:
-                error_text: Voor sommige leerlingen kan het frusterend zijn dat het `{echo}` commando niet meer werkt. Het is daarom belangrijk om de voordelen van variabelen uit te leggen. Zo kun je bijvoorbeeld meerdere variabelen gebruiken, en kun je variabelen in een zin gebruiken, overal in een zin, meerdere variabelen, waar je maar wilt!
+                error_text: De variabele {answer} werkt nog steeds, maar deze slaat steeds maar één antwoord tegelijk op. Leerlingen zullen soms proberen om meerdere antwoorden in één variabele op te slaan.
                 error_code: |-
-                    antwoord {is} {ask} Waarom werkt echo niet meer
-                    echo
-                solution_text: Gebruik in plaats van echo een variabele.
+                    antwoord {is} {ask} Wat is je naam?
+                    antwoord {is} {ask} Hoe oud ben je?
+                    {print} Hoi {answer}.
+                    {print} Je bent {answer} jaar oud.
+                solution_text: Leer de leerlingen aan om goede namen te kiezen voor hun variabelen.
                 solution_code: |-
-                    antwoord {is} {ask} Waarom werkt echo niet meer
-                    {print} antwoord
+                    naam {is} {ask} Wat is je naam?
+                    leeftijd {is} {ask} Hoe oud ben je?
+                    {print} Hoi naam.
+                    {print} Je bent leeftijd jaar oud.
         -   title: Leerlingen gebruiken de naam van een variabele in een printcommando als woord
             example:
                 error_text: In het voorbeeld hieronder wordt 'naam' gebruikt als variabele, maar ook als gewone tekst. De uitvoer van deze code wordt 'hoi mijn Hedy is Hedy', wat natuurlijk niet de bedoeling is.
@@ -282,6 +307,14 @@ teacher-guide:
                     naam {is} {ask} Hoe heet jouw paard
                     {print} Jouw paard heet naam
     -   level: "3"
+        concepts_and_changes: |-
+            In level 3 maken de leerlingen kennis met lijsten en willekeurige keuzes. Dit is het eerste level waarin het uitvoeren van hetzelfde programma twee keer een verschillend resultaat kan opleveren. Dat kan verrassend zijn voor leerlingen die ervan uitgaan dat een programma een vast recept is. Het is een goed moment om ze hun code meerdere keren te laten uitvoeren voordat ze bepalen of deze werkt.
+
+            Nieuw in dit level:
+
+            * Een lijst maken met `{is}` en een willekeurige keuze maken met `{at} {random}`
+            * Een item aan een lijst toevoegen met `{add} {to}`
+            * Een item van een lijst verwijderen met `{remove} {from}`
         sections:
         -   title: Leerlingen proberen lijstjes te printen
             example:
@@ -388,6 +421,20 @@ teacher-guide:
                     {remove} dobbelsteen {from} avonturen
                     {print} Ik hou van avonturen {at} {random}
     -   level: "4"
+        concepts_and_changes: |-
+ |-
+            In level 4 maken de leerlingen voor het eerst kennis met het belang van syntax in het programmeren. Aanhalingstekens worden dit level geïntroduceerd rond tekst een `{print}` en `{ask}`.
+            Niet het meest spannende level, maar wel een heel belangrijke vaardigheid om goed in de vingers te krijgen voordat ze doorgaan naar de volgende levels.
+            Leerlingen kunnen dit level als lastig ervaren, vooral als er variabelen in de tekst voorkomen. We raden aan expliciete instructie te geven en samen met de leerlingen te oefenen.
+
+            Nieuw in dit level:
+
+            * Aanhalingstekens gebruiken om tekst na `{print}` en `{ask}`
+            * Variabelen buiten de aanhalingstekens houden
+            * Dubbele aanhalingstekens gebruiken bij het gebruik van hoge komma's in de tekst
+            * Het scherm wissen met `{clear}`
+            * Kleuren gebruiken bij de tekenschildpad met `{color}`
+
         sections:
         -   title: Leerlingen vergeten de aanhalingstekens aan beide kanten te zetten
             example:
@@ -404,7 +451,7 @@ teacher-guide:
                 error_text: Het is van belang om aan het begin van de les te demonstreren hoe je het correcte aanhalingsteken typt. Veel leerlingen weten dit teken namelijk nog niet te vinden op hun toetsenbord en kiezen dan een enkele aanhalingsteken ('') of de dubbele aanhalingstekens (""). Enkele schuine aanhalingstekens (``) zijn geen geldige aanhalingstekens op Hedy.
                 error_code: |-
                     {print} `Welkom in het restaurant`
-                    eten {is} {ask} "Wat wil je bestellen?"
+                    eten {is} {ask} ,Wat wil je bestellen?,
                 solution_text: "Zo gebruik je de aanhalingstekens correct:"
                 solution_code: |-
                     {print} 'Welkom in het restaurant'
@@ -418,6 +465,12 @@ teacher-guide:
                     {print} 'Er lopen twee omas door het park'
                     {print} 'Er lopen twee oma`s door het park'
     -   level: "5"
+        concepts_and_changes: |-
+|-
+            In dit level leren de leerlingen `{if}` en `{else}` te gebruiken in hun programma's.
+
+            Nieuw in dit level:
+            * Make a choice with `{if}` en `{else}`
         sections:
         -   title: Leerlingen vergeten het print commando in een if commando
             example:
@@ -500,443 +553,70 @@ teacher-guide:
                     {if} geheim_wachtwoord {is} wachtwoord {print} 'Je mag er door!'
                     {else} {print} 'Verboden toegang!'
     -   level: "6"
+        concepts_and_changes: |-
+|-
+            Dit level bouwt verder op de nieuwe commando's `{if}` en `{else}` van het vorige level. Met `{if}` en `{else}` voeg je twee keuzeopties toe aan je code.
+            In dit level leren de leerlingen meer opties toe te voegen met `{elif}`. Het is hierbij belangrijk dat de leerlingen de {if}, {elif} en {else} op verschillende regels leren plaatsen.
+            Daarnaast leren de leerlingen `{in}` gebruiken om te checken of een antwoord in een lijst staat.
+
+            Nieuw in dit level:
+
+            * Meerdere keuzes toevoegen met {elif}
+            * Checken of iets in een lijst staat met {in}
         sections:
-        -   title: Students struggle with quotation marks
+        -   title: Leerlingen gebruiken 1 regel voor een `{if}`-statement
             example:
-                error_text: Some students struggle with adding quotattion marks or not. If you add quotation marks, the output screen will literally show '5+5'.
-                error_code: "{print} '5 + 5'"
-                solution_text: In this code the output screen will print '10'.
-                solution_code: "{print} 5 + 5"
-        -   title: Students struggle with the concept of doing maths with a variable
-            example:
-                error_text: "Some students will find it hard to do maths with variables. Try to show them very simple examples, like:"
+                error_text: Leerlingen proberen soms alles op één regel te proppen. Dit is niet langer toegestaan.
                 error_code: |-
-                    age = {ask} 'How old are you?'
-                    {print} 'Next year you will be ' age + 1
-                solution_text: Or take it a step further like this.
-                solution_code: |-
-                    price = 0
-                    {print} 'Welcome to our burger restaurant'
-                    burger = {ask} 'Would you like a burger?'
-                    {if} burger = yes price = price + 10
-                    drink = {ask} 'Would you like a drink?'
-                    {if} drink = yes price = price + 4
-                    {print} 'That will be ' price ' euros please'
-    -   level: "7"
-        sections:
-        -   title: Students forget one of the word of the repeat command, or they forget the print command
-            example:
-                error_text: Make sure that the students know to use both the full repeat command and the print command.
-                error_code: |-
-                    {repeat} 3 {times}  For he`s a jolly good fellow
-                    {repeat} 3 print
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    {repeat} 3 {times} {print} 'For he`s a jolly good fellow'
-                    {repeat} 3 {times} {print} 'Which nobody can deny!'
-        -   title: Students try to repeat multiple lines
-            example:
-                error_text: In this level you can only repeat one line of code multiple times. In this code the student wanted to print 3 different drinks, but it won't work. It will ask the question 3 times and only print the last answer.
-                error_code: |-
-                    {repeat} 3 {times} drink = {ask} 'What would you like to drink?'
-                    {print} drink
-                solution_text: You should go to the next level to be able to repeat multiple lines. So on this level you'll have to print everything seperately.
-                solution_code: |-
-                    drink = {ask} 'What would you like to drink?'
-                    {print} drink
-                    drink = {ask} 'What would you like to drink?'
-                    {print} drink
-                    drink = {ask} 'What would you like to drink?'
-                    {print} drink
-        -   title: Students make programs that take too long to run
-            example:
-                error_text: In this level it's very easy to make long-running programs. The students aren't allowed to make programs that take to long to load (to save our servers).
-                error_code: "{repeat} 100 {times} {print} 'How many times can I repeat this?'"
-                solution_text: Make sure the programs aren't too long
-                solution_code: "{repeat} 20 {times} {print} 'This is enough'"
-    -   level: "8"
-        sections:
-        -   title: Students use the indentation wrong
-            example:
-                error_text: Indentation is a new concept in this level, that is hard to use for some students. Make sure they practise some simple snippets before making a whole program with it.
-                error_code: |-
-                    {repeat} 3 {times}
-                    {print} 'hello'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    {repeat} 3 {times}
-                        {print} 'hello'
-        -   title: Students only repeat 1 line when they wanted to repeat multiple lines
-            example:
-                error_text: For instance, in the code below the student wanted to take the drinks order of 3 people. But insted the program asked 3 times, but only wrote down one order.
-                error_code: |-
-                    {repeat} 3 {times}
-                        drink = {ask} 'What would you like to drink?'
-                    {print} drink
-                solution_text: |-
-                    In the correct code the third line starts with indentation too. This way it belongs to the repeat block and therefore it will be repeated 3 times.
-                    Showing your students these differences can help them understand why we need indentation to make our programs work.
-                solution_code: |-
-                    {repeat} 3 {times}
-                        drink = {ask} 'What would you like to drink?'
-                        {print} drink
-        -   title: Students want to nest if statements, or put if statements inside a loop
-            example:
-                error_text: |-
-                    In this level students aren't allowed yet to put if statements inside other if statements or inside repeat loops.
-                    In the next level this is allowed.
-                error_code: |-
-                    birthday = {ask} 'Is it you birthday?'
-                    {if} birthday = yes
-                        {repeat} 3 {times}
-                            {print} 'Hip Hip Hooray!'
-                solution_text: "This is the correct code for this level:"
-                solution_code: |-
-                    birthday = {ask} 'Is it you birthday?'
-                    {if} birthday = yes
-                        {print} 'Hip Hip Hooray!'
-                        {print} 'Hip Hip Hooray!'
-                        {print} 'Hip Hip Hooray!'
-        -   title: Students make programs that take too long to run
-            example:
-                error_text: In this level it's very easy to make long-running programs. The students aren't allowed to make programs that take to long to load (to save our servers).
-                error_code: |-
-                    {repeat} 100 {times}
-                        {print} 'How many times can I repeat this?'
-                solution_text: Make sure the programs aren't too long
-                solution_code: |-
-                    {repeat} 20 {times}
-                        {print} 'This is enough'
-        -   title: Students use the if command to check if the variable value is the same as the variable name
-            example:
-                error_text: |-
-                    We hebben een gemeenschappelijke fout onder onze studenten gemerkt, ze proberen een programma te creëren dat een wachtwoord controleert, maar ze maken het wachtwoord 'password'.
-                    In lijn 2 wordt de computer gevraagd te controleren of het variabele wachtwoord hetzelfde is als het variabele wachtwoord, dus zelf. Wat betekent dat het antwoord altijd ja is.
-                    Dus met deze code is het antwoord altijd 'je kunt binnenkomen' wat de speler ook invult.
-                error_code: |-
-                    password {is} {ask} 'What is the password?'
-                    {if} password {is} password
-                        {print} 'You can come in'
+                    dieren {is} {ask} 'Wat is je lievelingsdier?'
+                    {if} dieren {is} hond {print} 'Ik houd ook van katten!'
+                    {elif} dieren {is} kat {print} 'Katten zijn oke'
+                    {else} {print} 'Cool dier'
+                solution_text: "Vanaf dit level moet je niet alleen `{if}` en `{else}` op afzonderlijke regels zetten. Je moet ook de voorwaarde en het commando op afzonderlijke regels zetten. Zo:"
+                solution_code:
+                    dieren {is} {ask} 'Wat is je lievelingsdier?'
+                    {if} dieren {is} hond
+                    {print} 'Ik houd ook van honden!'
+                    {elif} dieren {is} kat
+                    {print} 'Katten zijn oke'
                     {else}
-                        {print} 'You are not allowed'
-                solution_text: You can fix this mistake by adding quotation marks. This way the computer knows that the second password in `if password is 'password'` is a string value (so normal text) and not the variable name.
-                solution_code: |-
-                    password {is} {ask} 'What is the password?'
-                    {if} password {is} 'password'
-                        {print} 'You can come in'
-                    {else}
-                        {print} 'You are not allowed'
-    -   level: "9"
-        sections:
-        -   title: Students make mistakes with indentation
+                    {print} 'Cool dier'
+        -   title: Studenten gebruiken `{elif}` net als `{else}`, dus zonder voorwaarde
             example:
-                error_text: The hardest part about this level is getting the indentation right. Students love nesting if statements, sometimes even inside other nested if statements. Keeping track of indentation can get pretty tough.
+                error_text: Studenten vergeten dat ze een voorwaarde nodig hebben
                 error_code: |-
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                            {if} book {is} yes
-                    {print} 'Robin buys the book and goes home'
-                    {else}
-                        {print} 'Robin leaves the shop and goes home'
-                    {else}
-                        {print} 'Robin goes home'
-                solution_text: This is the correct code. Try to keep track of all the different constructions when putting if statements inside other if statements.
-                solution_code: |-
-                    {print} 'Robin is walking downtown'
-                    location = {ask} 'Is Robin going into a shop, or does she go home?'
-                    {if} location {is} shop
-                        {print} 'She enters the shop.'
-                        {print} 'Robin sees an interesting looking book'
-                        book = {ask} 'Does Robin buy the book?'
-                        {if} book {is} yes
-                            {print} 'Robin buys the book and goes home'
-                        {else}
-                            {print} 'Robin leaves the shop and goes home'
-                    {else}
-                        {print} 'Robin goes home'
-    -   level: "10"
-        sections:
-        -   title: Leerlingen gebruiken het `{for}` commando niet correct
-            example:
-                error_text: We often see that students try to print the list (in the example animals) instead of the items of the list.
-                error_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animals
-                solution_text: The word animals in the last line should be changed into animal.
-                solution_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
-        -   title: Students forget the indentation
-            example:
-                error_text: Students tend to forget to use indentation after a for command.
-                error_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                    {print} 'I love ' animals
-                solution_text: You should use indentation after a for command.
-                solution_code: |-
-                    animals {is} dog, cat, blobfish
-                    {for} animal {in} animals
-                      {print} 'I love ' animal
-    -   level: "11"
-        sections:
-        -   title: Students forget to use indentation
-            example:
-                error_text: Make sure that the students use indentation.
-                error_code: |-
-                    {for} i {in} {range} 1 {to} 5
-                    {print} i
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    {for} i {in} {range} 1 {to} 5
-                        {print} i
-        -   title: Students don't understand the i
-            example:
-                error_text: |-
-                    Some students don't understand that i is a variable. i is chosen, because it is used in Python programming, but you could just as easily use a different variable name.
-                    For example, this code:
-                error_code: |-
-                    {for} i {in} {range} 1 {to} 5
-                    {print} i
-                solution_text: Could just as well be replaced with this code. It works the same.
-                solution_code: |-
-                    {for} banana {in} {range} 1 {to} 5
-                        {print} banana
-    -   level: "12"
-        sections:
-        -   title: Students forget quotation marks
-            example:
-                error_text: Students need more quotation marks now than in the previous levels. In this example quotation marks were forgotten in the list and in the if command.
-                error_code: |-
-                    superheroes = Spiderman, Batman, Iron Man
-                    superhero = superheroes {at} {random}
-                    {if} superhero = Batman
-                        {print} 'IM BATMAN!'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    superheroes = 'Spiderman', 'Batman', 'Iron Man'
-                    superhero = superheroes {at} {random}
-                    {if} superhero {is} 'Batman'
-                        {print} 'IM BATMAN!'
-        -   title: Students use quotation marks on numbers they want to use for calculations
-            example:
-                error_text: |-
-                    You can use quotation marks on numbers, but only if you want the computer to think of them as text. This means you can't do calculations with the number.
-                    In the example below, you can't do maths with the number 25, because it's in quotation marks.
-                error_code: |-
-                    score = '25'
-                    answer {is} {ask} 'Do you want a point?'
-                    {if} answer {is} 'yes'
-                        score = score + 1
-                        {print} score
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    score = 25
-                    answer {is} {ask} 'Do you want a point?'
-                    {if} answer {is} 'yes'
-                        score = score + 1
-                        {print} score
-        -   title: Students use commas instead of periods in decimal numbers
-            example:
-                error_text: Decimal numbers can be used from this level on, but you can't use commas.
-                error_code: "{print} 2,5 + 2,5"
-                solution_text: "This is the correct code:"
-                solution_code: "{print} 2.5 + 2.5"
-    -   level: "13"
-        sections:
-        -   title: Leerlingen verwarren`{and}` met `{or}`
-            example:
-                error_text: Both commands might appear similar, but their functions are very different.
-                error_code: |-
-                    game {is} {ask} 'Do you want to play a game?'
-                    time {is} {ask} 'Do you have time to play?'
-                    {if} game {is} 'yes' {or} time {is} 'yes'
-                        {print} 'Lets play!'
-                solution_text: In this case, the person should answer yes on both questions, so you should use `and`.
-                solution_code: |-
-                    game {is} {ask} 'Do you want to play a game?'
-                    time {is} {ask} 'Do you have time to play?'
-                    {if} game {is} 'yes' {and} time {is} 'yes'
-                        {print} 'Lets play!'
-    -   level: "14"
-        sections:
-        -   title: Students confuse the < and > signs
-            example:
-                error_text: Often, students are already familiar with these signs from maths class. But if your students don't know these signs yet, they might have a challenge with it.
-                error_code: |-
-                    age = {ask} 'How old are you?'
-                    {if} age < 12
-                        {print} 'You are older than I am!'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    age = {ask} 'How old are you?'
-                    {if} age > 12
-                        {print} 'You are older than I am!'
-        -   title: Students use the wrong signs for `!=` `<=` and `>=`
-            example:
-                error_text: These signs are probably new for most students. Make sure to explain these signs to your students.
-                error_code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name =  'Hedy'
-                        {print} 'You are not Hedy'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name != 'Hedy'
-                        {print} 'You are not Hedy'
-        -   title: Students forget to use the == sign
-            example:
-                error_text: In this level, students are still allowed to use = or is. But on other levels, or in python, they might get in trouble for that. So it is best to train them to use it.
-                error_code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name = 'Hedy'
-                        {print} 'You are cool!'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    name = {ask} 'What is your name?'
-                    {if} name == 'Hedy'
-                        {print} 'You are cool!'
-    -   level: "15"
-        sections:
-        -   title: Students forget indentation in the while loop
-            example:
-                error_text: Indentation is often hard for students.
-                error_code: |-
-                    answer = 0
-                    {while} answer != 25
-                    answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    answer = 0
-                    {while} answer != 25
-                        answer = {ask} 'What is 5 times 5?'
-                    {print} 'A correct answer has been given'
-    -   level: "16"
-        sections:
-        -   title: Students forget the brackets
-            example:
-                error_text: From this level on lists should be in brackets.
-                error_code: |-
-                    icecream = 'starwberry', 'chocolate'
-                    {print} 'I love ' icecream[{random}] ' icecream'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
-        -   title: Students use the wrong brackets
-            example:
-                error_text: From this level on lists should be in brackets.
-                error_code: |-
-                    icecream = ('starwberry', 'chocolate')
-                    {print} 'I love ' icecream[{random}] ' icecream'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
-        -   title: Students forget the quotation marks while focussing on the brackets
-            example:
-                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
-                error_code: |-
-                    icecream = [starwberry, chocolate]
-                    {print} 'I love ' icecream[{random}] ' icecream'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
-        -   title: Students still use the old at random command
-            example:
-                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
-                error_code: |-
-                    icecream = [starwberry, chocolate]
-                    {print} 'I love ' icecream at random ' icecream'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
-        -   title: Students forget the quotation marks while focussing on the brackets
-            example:
-                error_text: Students are sometimes very focussed on the new aspect of the syntax, that they forget the quotation marks.
-                error_code: |-
-                    icecream = [starwberry, chocolate]
-                    {print} 'I love ' icecream[{random}] ' icecream'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    icecream = ['starwberry', 'chocolate']
-                    {print} 'I love ' icecream[{random}] ' icecream'
-    -   level: "17"
-        sections:
-        -   title: Students use elif like else, so without a condition
-            example:
-                error_text: The elif command needs a condition behind it. It cannot be used like else, without a condition.
-                error_code: |-
-                    color = {ask} 'What is your favorite color?'
-                    {if} color == 'green':
-                        {print} 'green is nice'
+                    kleur {is} {ask} 'Wat is je lievelingskleur?
+                    {if} kleur {is} groen
+                    {print} 'Ik houd ook van groen!'
                     {elif}
-                        {print} 'I like green'
-                solution_text: "This is the correct code:"
+                    {print} 'Ik heb liever groen'
+                solution_text: Voeg een voorwaarde toe
                 solution_code: |-
-                    color = {ask} 'What is your favorite color?'
-                    {if} color == 'green':
-                        {print} 'green is nice'
-                    {elif} color == yellow:
-                        {print} 'yellow is alright'
-                    {else}:
-                        {print} 'I like green'
-        -   title: Students forget the colon
-            example:
-                error_text: After each command that requires indentation, a colon should be used.
-                error_code: |-
-                    answer = {ask} 'How are you doing?'
-                    {if} answer {is} 'great'
-                        {print} 'Me too!'
-                    {elif} answer {is} 'bad'
-                        {print} 'Let me cheer you up!'
+                    kleur {is} {ask} 'Wat is je lievelingskleur?
+                    {if} kleur {is} groen
+                    {print} 'Ik houd ook van groen!'
+                    {elif} kleur {is} blue
+                    {print} 'Blauw is oke'
                     {else}
-                        {print} 'Im great!'
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    answer = {ask} 'How are you doing?'
-                    {if} answer {is} 'great':
-                        {print} 'Me too!'
-                    {elif} answer {is} 'bad':
-                        {print} 'Let me cheer you up!'
-                    {else}:
-                        {print} 'Im great!'
-    -   level: "18"
-        sections:
-        -   title: Students forget to use the brackets
+                    {print} 'Ik houd van groen'
+        -   title: Leerlingen gebruiken `{in}` zonder een lijst
             example:
-                error_text: Students will forget to put brackets around their text.
-                error_code: "{print} 'my name is Hedy!'"
-                solution_text: "This is the correct code:"
-                solution_code: "{print}('my name is Hedy!')"
-        -   title: Students will still use the ask command
-            example:
-                error_text: The ask command has been used since level 1. So it might be hard for the students to switch to input instead of ask.
+                error_text: Leerlingen vergeten dat ze een lijst nodig hebben
                 error_code: |-
-                    {print}('My name is Hedy!')
-                    name = ask('What is your name?')
-                    {print}('So your name is ', name)
-                solution_text: "This is the correct code:"
+                    {if} gekozen_kleur {in} mooie_kleuren
+                    {print} 'Goede keuze!'
+                solution_text: Voeg een lijst toe
                 solution_code: |-
-                    {print}('My name is Hedy!')
-                    name = {input}('What is your name?')
-                    {print}('So your name is ', name)
-        -   title: Students might use the brackets as quotation marks
-            example:
-                error_text: They have learned to keep the variables outside of the quotation marks, so they might do the same with the brackets. Which is not the correct way to use them.
-                error_code: |-
-                    temperature = 25
-                    {print}('It is ') temperature ('degrees outside')
-                solution_text: "This is the correct code:"
-                solution_code: |-
-                    temperatuur = 25
-                    {print}('Het is ', temperatuur, 'graden buiten')
+                    mooie_kleuren {is} blauw, groen, paars
+                    {if} gekozen_kleur {in} mooie_kleuren
+                    {print} 'Goede keuze!'
+    -   level: "7"
+        concepts_and_changes: |-
+|-
+            In dit level leren de leerlingen rekenen in hun programma's. Ze leren rekenen met variablen en kunnen vanaf nu ook kommagetallen gebruiken.
+
+            Nieuw in dit level:
+            * Rekensymbolen gebruiken:  + - * en /
+            * Kommagetallen gebruiken
+            * Rekenen met variabelen
+            * Het = symbool gebruiken in plaats van `{is}`
