@@ -82,6 +82,8 @@ class TestPublicPages:
                     assert context['section_title']
                     assert context['section_key'] in ('intro', 'this_does_not_exist')
 
+
+
     def test_teacher_manual_section_resolves_in_every_language(self, client, template_variables):
         """Weblate translates the section keys, so a manual URL has to work in any language."""
         cases = [
@@ -103,7 +105,6 @@ class TestPublicPages:
 # ---------------------------------------------------------------------------
 # Authentication enforcement on teacher-only pages
 # ---------------------------------------------------------------------------
-
 
 class TestAuthEnforcement:
     def test_teacher_only_pages(self, client, given):
