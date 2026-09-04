@@ -188,6 +188,18 @@ teacher-guide:
         You can learn from your mistakes, especially in coding! Making mistakes is unavoidable, and a great opportunity to learn, but for teachers, it can be a challenge to find the correct fix for a mistake! Especially as the programs get longer and longer as the students progress through the levels. That's why we've made a list with frequently made mistakes in each level, and their solutions.
     levels:
     -   level: '1'
+        concepts_and_changes: |-
+            Level 1 is where students write and run their very first lines of code. There is no
+            punctuation to worry about yet: every line starts with a command and the rest of the
+            line is plain text. The lesson is really about one idea, that a computer does exactly
+            what you tell it to do, no more and no less.
+
+            New in this level:
+
+            * Showing text on the screen with `{print}`
+            * Asking a question with `{ask}` and using the reply with `{answer}`
+            * Drawing with the turtle using `{forward}` and `{turn}`
+            * Playing a note with `{play}`
         sections:
         -   title: Students forget to type commands
             example:
@@ -230,6 +242,17 @@ teacher-guide:
                 solution_text: 'To make the turtle go backwards, you use the forward command and a negative number. For example:'
                 solution_code: '{forward} -100'
     -   level: '2'
+        concepts_and_changes: |-
+            Variables arrive in level 2, and with them the first real abstraction of the course:
+            a name that stands for a value that can change. `{ask}` now stores its reply in a
+            variable your students pick themselves, instead of the fixed `{answer}` of level 1,
+            so programs can hold on to more than one thing at a time.
+
+            New in this level:
+
+            * Storing a value in a variable with `{is}`
+            * Saving the reply to a question in a variable of your own choosing
+            * Pausing the program with `{sleep}`
         sections:
         -   title: Students make typos in their commands
             example:
@@ -280,6 +303,17 @@ teacher-guide:
                     name {is} {ask} What is your horse called
                     {print} Your horse is called name
     -   level: '3'
+        concepts_and_changes: |-
+            Level 3 adds lists and randomness. This is the first level where running the same
+            program twice can give a different result, which surprises students who assume a
+            program is a fixed recipe. It is a good moment to have them run their code several
+            times before deciding whether it works.
+
+            New in this level:
+
+            * Making a list with `{is}` and picking from it with `{at} {random}`
+            * Adding an item to a list with `{add}`
+            * Taking an item out of a list with `{remove}`
         sections:
         -   title: Students try to print whole lists
             example:
@@ -386,6 +420,7 @@ teacher-guide:
                     {remove} dice {from} adventures
                     {print} I love adventures {at} {random}
     -   level: '4'
+        concepts_and_changes: ''
         sections:
         -   title: Students forget to use quotation marks on both sides of the text
             example:
@@ -416,6 +451,7 @@ teacher-guide:
                     {print} 'Youre allowed to type this'
                     {print} 'And you`re able to do this'
     -   level: '5'
+        concepts_and_changes: ''
         sections:
         -   title: Students forget to use `{print}` in an `{if}` command
             example:
@@ -497,6 +533,7 @@ teacher-guide:
                     {if} secret_password {is} password {print} 'Access granted!'
                     {else} {print} 'Access denied!'
     -   level: '6'
+        concepts_and_changes: ''
         sections:
         -   title: Students struggle with quotation marks
             example:
@@ -520,6 +557,7 @@ teacher-guide:
                     {if} drink = yes price = price + 4
                     {print} 'That will be ' price ' euros please'
     -   level: '7'
+        concepts_and_changes: ''
         sections:
         -   title: Students forget one of the word of the repeat command, or they forget the print command
             example:
@@ -552,6 +590,7 @@ teacher-guide:
                 solution_text: Make sure the code doesn't take too long to execute
                 solution_code: "{repeat} 20 {times} {print} 'This is enough'"
     -   level: '8'
+        concepts_and_changes: ''
         sections:
         -   title: Students use the indentation wrong
             example:
@@ -624,6 +663,7 @@ teacher-guide:
                     {else}
                         {print} 'You are not allowed'
     -   level: '9'
+        concepts_and_changes: ''
         sections:
         -   title: Students make mistakes with indentation
             example:
@@ -656,6 +696,7 @@ teacher-guide:
                     {else}
                         {print} 'Robin goes home'
     -   level: '10'
+        concepts_and_changes: ''
         sections:
         -   title: Students do not use the `{for}` command correctly
             example:
@@ -682,6 +723,7 @@ teacher-guide:
                     {for} animal {in} animals
                       {print} 'I love ' animal
     -   level: '11'
+        concepts_and_changes: ''
         sections:
         -   title: Students forget to use indentation
             example:
@@ -706,6 +748,7 @@ teacher-guide:
                     {for} banana {in} {range} 1 {to} 5
                         {print} banana
     -   level: '12'
+        concepts_and_changes: ''
         sections:
         -   title: Students forget quotation marks
             example:
@@ -746,6 +789,7 @@ teacher-guide:
                 solution_text: 'This is the correct code:'
                 solution_code: '{print} 2.5 + 2.5'
     -   level: '13'
+        concepts_and_changes: ''
         sections:
         -   title: Students confuse `{and}` with `{or}`
             example:
@@ -762,6 +806,7 @@ teacher-guide:
                     {if} game {is} 'yes' {and} time {is} 'yes'
                         {print} 'Lets play!'
     -   level: '14'
+        concepts_and_changes: ''
         sections:
         -   title: Students confuse the < and > signs
             example:
@@ -800,6 +845,7 @@ teacher-guide:
                     {if} name == 'Hedy'
                         {print} 'You are cool!'
     -   level: '15'
+        concepts_and_changes: ''
         sections:
         -   title: Students forget indentation in the while loop
             example:
@@ -816,6 +862,7 @@ teacher-guide:
                         answer = {ask} 'What is 5 times 5?'
                     {print} 'A correct answer has been given'
     -   level: '16'
+        concepts_and_changes: ''
         sections:
         -   title: Students forget the brackets
             example:
@@ -868,6 +915,7 @@ teacher-guide:
                     icecream = ['strawberry', 'chocolate']
                     {print} 'I love ' icecream[{random}] ' icecream'
     -   level: '17'
+        concepts_and_changes: ''
         sections:
         -   title: Students use `{elif}` like `{else}`, so without a condition
             example:
@@ -908,6 +956,7 @@ teacher-guide:
                     {else}:
                         {print} 'Im great!'
     -   level: '18'
+        concepts_and_changes: ''
         sections:
         -   title: Students forget to use the brackets
             example:

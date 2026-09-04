@@ -51,6 +51,54 @@ for lang in hedy_content.ALL_LANGUAGES.keys():
     WORKBOOKS[lang] = hedy_content.Workbooks(lang)
 
 
+def _teacher_guide_level_list(content):
+    """Return the levels of the one teacher guide section that has them."""
+    for section in content.get("teacher-guide") or []:
+        if isinstance(section, dict) and isinstance(section.get("levels"), list):
+            return section["levels"]
+    return []
+
+
+def teacher_guide_levels(language):
+    """Return the per-level content of the teacher guide, one entry per Hedy level.
+
+    Weblate translates the *value* of every field it is given, `key` and `level`
+    included, so neither can be used to look anything up: in most languages the
+    section key reads something like `häufige_fehler`, and the `level` fields come
+    back empty. Position is the only thing a translation is guaranteed to preserve,
+    so a level is found by its index in the list.
+
+    Fields that a translation does not have fall back to English, because
+    `PageTranslations` merges only the top-level keys: a language that has any
+    teacher guide at all shadows the English one completely, so content added here
+    would be invisible everywhere else until Weblate has been around.
+    """
+    translations = hedyweb.PageTranslations("for-teachers")
+    english = _teacher_guide_level_list(translations.get_page_translations("en"))
+    translated = _teacher_guide_level_list(translations.get_page_translations(language))
+
+    # The guide still carries entries for levels that Hedy has since dropped, and the manual
+    # shows all of them, so follow the content rather than HEDY_MAX_LEVEL -- but never return
+    # fewer entries than there are levels, so that indexing by level is always safe.
+    count = max(len(english), hedy.HEDY_MAX_LEVEL)
+
+    levels = []
+    for index in range(count):
+        en_level = english[index] if index < len(english) else {}
+        level = translated[index] if index < len(translated) else {}
+        if not isinstance(en_level, dict):
+            en_level = {}
+        if not isinstance(level, dict):
+            level = {}
+        levels.append({
+            "level": index + 1,
+            "concepts_and_changes": (level.get("concepts_and_changes")
+                                     or en_level.get("concepts_and_changes") or ""),
+            "sections": level.get("sections") or en_level.get("sections") or [],
+        })
+    return levels
+
+
 class ForTeachersModule(WebsiteModule):
     def __init__(self, db: Database, auth: AuthModule):
         super().__init__("teachers", __name__, url_prefix="/for-teachers")
@@ -349,17 +397,38 @@ class ForTeachersModule(WebsiteModule):
     @route("/manual", methods=["GET"], defaults={'section_key': 'intro'})
     @route("/manual/<section_key>", methods=["GET"])
     def get_teacher_manual(self, section_key):
-        content = hedyweb.PageTranslations("for-teachers").get_page_translations(g.lang)
+        translations = hedyweb.PageTranslations("for-teachers")
+        content = translations.get_page_translations(g.lang)
+        english = translations.get_page_translations('en')
 
         # Code very defensively around types here -- Weblate has a tendency to mess up the YAML,
         # so the structure cannot be trusted.
         page_title = content.get('title', '')
-        sections = {section['key']: section for section in content['teacher-guide']}
-        section_titles = [(section['key'], section.get('title', '')) for section in content['teacher-guide']]
-        try:
-            current_section = sections[section_key]
-        except KeyError:
-            current_section = content['teacher-guide'][0]
+        guide = content['teacher-guide']
+        english_guide = english['teacher-guide']
+
+        # Weblate translates the value of `key` along with everything else, so in several
+        # languages this section is called `häufige_fehler` or `erreurs_courantes`. Look the
+        # requested key up in both the translated and the English guide, and address the
+        # section by the position the two agree on. The nav below then links to the English
+        # keys, so a manual URL means the same thing in every language.
+        def index_of(sections, key):
+            return next((i for i, section in enumerate(sections)
+                         if isinstance(section, dict) and section.get('key') == key), None)
+
+        index = index_of(guide, section_key)
+        if index is None:
+            index = index_of(english_guide, section_key)
+        if index is None or index >= len(guide):
+            index = 0
+
+        section_titles = [
+            (english_guide[i].get('key', '') if i < len(english_guide) else section.get('key', ''),
+             section.get('title', ''))
+            for i, section in enumerate(guide)
+        ]
+        section_key = section_titles[index][0] if index < len(section_titles) else section_key
+        current_section = guide[index]
 
         if not current_section:
             return utils.error_page(error=404, ui_message=gettext("page_not_found"))
@@ -371,7 +440,10 @@ class ForTeachersModule(WebsiteModule):
         subsections = current_section.get('subsections', [])
         for subsection in subsections:
             subsection.setdefault('title', '')
-        levels = current_section.get('levels', [])
+        # The per-level entries are rebuilt from scratch rather than read off this section,
+        # so that every language gets the same 18 levels with English as a fallback, and so
+        # that the titles below are not written back into the cached YAML.
+        levels = teacher_guide_levels(g.lang) if current_section.get('levels') else []
         for level in levels:
             level['title'] = gettext('level') + ' ' + str(level['level'])
 
