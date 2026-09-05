@@ -1,0 +1,128 @@
+start: program
+program: _EOL* (command _EOL+)* command?
+command: print | ask | echo | play | turtle | error_invalid_space | error_invalid | empty_line
+
+play: _PLAY (textwithoutspaces)?
+print: _PRINT (text)?
+_color_literal : black | blue | brown | gray | green | orange | pink | purple | red | white | yellow
+ask: _ASK _SPACE? (text)?
+echo: _ECHO (text)?
+turtle: _FORWARD ((NUMBER | text))? -> forward | _TURN ((left | right ))? -> turn | _COLOR (_color_literal | text)? -> color
+error_invalid_space: _SPACE any
+
+// We give the error_invalid rule below a priority of -100,
+// just to be sure that if Lark tries to resolve ambiguity, error_invalid will be considered last
+error_invalid.-100: textwithoutspaces text?
+
+
+text: /([^\n#ـ])([^\n#]*)/ -> text //anything can be parsed except for a newline and a comment hash
+// to properly deal with tatweels, we also need to prevent text from starting with a tatweel,
+// otherwise we might parse  قولـــ  as the printing of ___ (see #2699)
+textwithoutspaces: /([^\n #]+)/ -> text //anything can be parsed except for a new line, spaces and a comment hash
+
+_DEFINE: ("define" | "define") _SPACE?
+_CALL: ("call" | "call") _SPACE?
+_WITH: ("with" | "with") _SPACE?
+_DEF: ("def" | "def") _SPACE?
+_RETURN: ("return" | "return") _SPACE?
+_PRINT: ("print" | "print") _SPACE?
+_PLAY: ("play" | "play") _SPACE
+_ASK: ("ask" | "ask")
+_ECHO: ("echo" | "echo") _SPACE?
+_FORWARD: ("forward" | "forward") _SPACE?
+_TURN: ("turn" | "turn") _SPACE?
+left: ("left" | "left") _SPACE?
+right: ("right" | "right") _SPACE?
+black: ("black" | "black") _SPACE?
+blue: ("blue" | "blue") _SPACE?
+brown: ("brown" | "brown") _SPACE?
+gray: ("gray" | "gray") _SPACE?
+green: ("green" | "green") _SPACE?
+orange: ("orange" | "orange") _SPACE?
+pink: ("pink" | "pink") _SPACE?
+purple: ("purple" | "purple") _SPACE?
+red: ("red" | "red") _SPACE?
+white: ("white" | "white") _SPACE?
+yellow: ("yellow" | "yellow") _SPACE?
+_IS: _SPACE ("is" | "is") _SPACE
+_STANDALONE_IS: ("is" | "is")
+_SLEEP: ("sleep" | "sleep") _SPACE?
+_ADD_LIST: ("add" | "add") _SPACE
+_TO_LIST: _SPACE? ("to" | "to")
+_REMOVE: ("remove" | "remove") _SPACE
+_FROM: _SPACE? ("from" | "from")
+_AT: _SPACE ("at" | "at") _SPACE
+random: ("random" | "random") _SPACE?
+_IN: _SPACE ("in" | "in") _SPACE
+_NOT_IN: _SPACE ("not in" | "not in") _SPACE
+_IF: ("if" | "if") _SPACE
+_ELSE: "else" | "else"
+_AND: _SPACE? ("and" | "and") _SPACE
+_REPEAT: ("repeat" | "repeat") _SPACE
+_TIMES: _SPACE ("times" | "times")
+_FOR: ("for" | "for") _SPACE
+_RANGE: ("range" | "range") _SPACE?
+_TO: _SPACE ("to" | "to") _SPACE
+_STEP: "step" | "step"
+_ELIF: _SPACE? ("elif" | "elif") _SPACE
+_INPUT: ("input" | "input")
+_OR: _SPACE? ("or" | "or") _SPACE
+_WHILE: ("while" | "while") _SPACE
+_LENGTH: "length" | "length"
+_COLOR : ("color" | "color") _SPACE?
+_PRESSED: ("pressed" | "pressed") _SPACE?
+clear: ("clear" | "clear") _SPACE?
+TRUE: ("true" | "True" | "true" | "True") _SPACE?
+FALSE: ("false" | "False" | "false" | "False") _SPACE?
+
+// If the comment takes up the whole line, it should also encompass its leading newline. In this way the whole
+// comment line can be skipped for the commands containing it. Comments should escape ENDBLOCKS not only in the start
+// but at any point, because if the body of a command (e.g. `if`) ends up with a comment, the ENDBLOCK would appear
+// right after it. Therefore, the ENDBLOCK should not be counted as a part of the comment.
+COMMENT: /[\n ]*\#(?!ENDBLOCK)(?:[^\n#]|#(?!ENDBLOCK))*/
+%ignore COMMENT
+
+// Internal symbol added by the preprocess_blocks function to indicate the end of blocks
+_END_BLOCK: "#ENDBLOCK"
+
+NEGATIVE_NUMBER: _MINUS /\p{Nd}+/ ("." /\p{Nd}+/)?
+POSITIVE_NUMBER: /\p{Nd}+/ ("." /\p{Nd}+/)?
+NUMBER: NEGATIVE_NUMBER | POSITIVE_NUMBER
+INT: _MINUS? /\p{Nd}+/
+NON_DECIMAL: _MINUS? /[\p{Nl}\p{No}]+/
+
+// FH Sept 2021: More info on this variable format: https://www.unicode.org/reports/tr31/tr31-1.html
+// Exact grammar stolen from: https://lark-parser.readthedocs.io/en/latest/classes.html
+
+NAME: LETTER_OR_UNDERSCORE LETTER_OR_NUMERAL*
+LETTER_OR_UNDERSCORE: /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nl}_]+/
+LETTER_OR_NUMERAL: LETTER_OR_UNDERSCORE | /[\p{Mn}\p{Mc}\p{Nd}\p{Pc}·]+/
+
+//symbols. they start with an underscore so they don't appear in the parse tree (Lark convention)
+_EOL: "\r"?"\n"+
+_SPACE: " "+
+_COMMA: _SPACE? (","|"،"|"，"|"、") _SPACE? //support latin and arabic and Chinese commas and always allow these to be surrounded by spaces
+_COLON: _SPACE? ":" _SPACE? | _SPACE? "：" _SPACE?
+_LEFT_BRACKET : _SPACE? "(" _SPACE? | _SPACE? "（" _SPACE?
+_RIGHT_BRACKET : _SPACE? ")" _SPACE? | _SPACE? "）" _SPACE?
+_LEFT_SQUARE_BRACKET :  _SPACE? "[" _SPACE?
+_RIGHT_SQUARE_BRACKET : _SPACE? "]" _SPACE?
+_HASH: "#"
+_SMALLER : _SPACE? "<" _SPACE?
+_LARGER: _SPACE? ">" _SPACE?
+_EQUALS: _SPACE? "=" _SPACE? //always allow = to be surrounded by spaces
+_DOUBLE_EQUALS: _SPACE? "==" _SPACE?
+_NOT_EQUALS: _SPACE? "!=" _SPACE?
+_SMALLER_EQUALS : _SPACE? "<=" _SPACE?
+_LARGER_EQUALS: _SPACE? ">=" _SPACE?
+_SINGLE_QUOTE: "'" | "‘" | "’"
+_DOUBLE_QUOTE: "\"" | "“" | "”"
+_QUOTE: _SINGLE_QUOTE | _DOUBLE_QUOTE
+_PLUS: _SPACE? "+" _SPACE?
+_MINUS: _SPACE? "-" _SPACE?
+_MULTIPLY: _SPACE? "*" _SPACE?
+_DIVIDE: _SPACE? "/" _SPACE?
+
+
+empty_line: _SPACE
+any: /.+/ -> text

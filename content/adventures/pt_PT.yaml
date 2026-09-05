@@ -10,14 +10,12 @@ adventures:
 
                     Na primeira linha, usa `{ask}` e pergunta à personagem principal como será a história.
 
-                    Após a primeira linha, começa com `{print}` se precisares que a frase seja escrita.
-                    Utilizas `{echo}` se quiseres colocar o teu personagem principal no final da frase.
-                example_code: "```\n{ask} O(A) personagem principal desta história é\n{print} O(A) personagem principal vai caminhar agora na floresta\n{echo} Estão um pouco assustados,\n{print} Ouvem barulhos estranhos por toda a parte\n{print} Receiam que esta floresta seja assombrada\n```\n"
+                example_code: "```\n{ask} O(A) personagem principal desta história é\n{print} O(A) {answer} vai caminhar agora na floresta\n{print} Estão um pouco assustados, {answer}\n{print} Ouvem barulhos estranhos por toda a parte\n{print} Receiam que esta floresta seja assombrada\n```\n"
                 story_text_2: |
                     ### Exercício
                     Agora, cria a tua própria história com pelo menos 6 linhas de código.
                     Esta história não pode ser igual ao código de exemplo.
-                    Usa pelo meno um comando `{ask}` e um `{echo}`.
+                    Usa pelo meno um comando `{ask}` e um `{answer}`.
                     Podes escolher o tema que preferires.
                     Se não conseguires lembrar-te de um tema, escolhe uma das nossas opções: ir ao cinema, um evento desportivo ou um dia no zoo.
             2:
@@ -36,15 +34,6 @@ adventures:
                     {sleep}
                     {print} nome receia que esta floresta seja assombrada
                     ```
-                story_text_2: |
-                    ### Exercício
-                    Chegou o momento de adicionar variáveis à tua história, que construíste no nível anterior.
-                    Vai até 'Os meus programas', procura pela história aventura do nível 1 e copia o código. Cola o código na tua janela de introdução neste nível.
-
-                    Este código não irá funcionar neste nível, porque ainda não usaste variáveis.
-                    Altera os comandos `{ask}` e `{echo}` no teu código para a forma correcta, que aprendeste neste nível.
-
-                    **Extra** Adiciona um comando `{sleep}` ao teu código, para aumentar o nervosismo na tua história.
             3:
                 story_text: |
                     No nível 3 podes tornar a tua história mais divertida. Podes usar a aleatoriedade para qualquer monstro, animal ou outro obstáculo, da seguinte forma:
@@ -115,6 +104,9 @@ adventures:
                     Copia a história que criaste na tua própria história aventura, nos níveis anteriores.
                     Encontra uma forma de incluíres na tua história, pelo menos, 2 comandos `{if}` e `{else}`.
                     Podes fazê-lo com um final feliz e outro triste, mas podes também experimentar outras maneiras de incorporar os comandos.
+                example_code: "```\nnome {is} {ask} 'Quem está a andar na floresta?'\n{print} nome 'caminha pela floresta'\n{print} nome 'encontra um monstro'\nfim {is} {ask} 'Preferes um final bom ou mau?'\n{if} fim {is}bom{print} nome 'pega na espada e o monstro foge rapidamente'\n{else} {print} 'O monstro comeu' nome\n"
+            6:
+                story_text: "Agora que podes usar `{elif}` podes criar uma história ainda mais interativa! Podes criar múltiplos personagens que tenham por exemplo, diferentes personalidades\n\n###Exercício\nCria a tua própria história com 3 ou mais opções usando o {elif}."
             8:
                 story_text: |
                     Numa históra, alguém pode repetir palavras várias vezes. Por exemplo, quando gritam por ajuda ou cantam uma canção.
@@ -187,6 +179,12 @@ adventures:
 
                     Vai ver <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> a história</a>, se ainda não a conheces, e assegura-te que é escrita conforme está no livro.
                 example_code: "```\nanimais = _ , _, ­­­_  \n{print} 'Urso Castanho, Urso Castanho'\n{print} 'O que vês aqui?'\n```\n"
+            13:
+                example_code: |
+                    ```
+                    nome = _
+                    {print}('Bem-vindo(a) a esta história!')
+                    ```
             16:
                 story_text: |
                     Recorrendo ao ciclo `{while}` podes tornar as tuas histórias mais interessantes. Por exemplo, podes usar `{while} game == 'on'` para que possas jogar até o jogo chegar ao fim.
@@ -194,26 +192,30 @@ adventures:
 
                     ### Exercício
                     O código de exemplo mostra-te como usar o ciclo `{while}` numa história. Agora, **pensa no teu próprio cenário** no qual o jogador tem de encontrar algo antes que possa continuar.
-            13:
-                story_text: |
-                    Vamos agora escrever outra história, mas agora temos de usar chavetas com o `{print}`.
-
-                    ### Exercício 1
-                    Cria uma história com pelo menos 5 frases. Não precisas de usar já a variável 'nome'.
-                example_code: |
-                    ```
-                    {print}('Bem-vindo(a) a esta história!')
-                    ```
-                story_text_2: |
-                    ### Exercício 2
-                    Já preparamos um `{input}` para ti. Primeiro, usa a variável `name` na tua história.
-                    Depois, adiciona um segundo `{ask}` e usa a variável também.
-                    Dica: Lembra-te das vírgulas no `{print}` entre o texto e as variáveis!
-                example_code_2: |
-                    ```
-                    nome = {input}("Qual é o teu nome?")
-                    {print}('Bem-vindo(a) a esta história!')
-                    ```
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
+    ask_command:
+        levels: {}
+    calculator:
+        levels: {}
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
+    dice:
+        levels: {}
+    dishes:
+        levels: {}
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
     fortune:
         levels:
             3:
@@ -228,3 +230,64 @@ adventures:
                     {sleep} 2
                     {print} respostas {at} {random}
                     ```
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
+    haunted:
+        levels: {}
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
+    is_command:
+        levels: {}
+    language:
+        levels: {}
+    maths:
+        levels: {}
+    music:
+        levels: {}
+    parrot:
+        levels: {}
+    piggybank:
+        levels: {}
+
+    print_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    restaurant:
+        levels: {}
+    rock:
+        levels: {}
+    secret:
+        levels: {}
+    sleep_command:
+        levels: {}
+    songs:
+        levels: {}
+    songs_2:
+        levels: {}
+    turtle:
+        levels: {}
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}
+    years:
+        levels: {}

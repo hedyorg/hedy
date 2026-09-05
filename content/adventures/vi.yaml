@@ -9,14 +9,11 @@ adventures:
                     Ở cấp độ thứ nhất bạn có thể tạo ra một câu chuyện với nhân vật chính do bạn tự tạo nên
 
                     Ở dòng đầu tiên, sử dụng `{ask}`và đặt câu hỏi ai sẽ là nhân vật chính của câu chuyện.
-
-                    Sau đó, bắt đầu với `{print}` nếu câu lệnh cần được in.
-                    Sử dụng  `{echo}`nếu bạn muốn ký tự chính nằm ở cuối câu lệnh.
                 example_code: |
                     ```
                     {ask} Nhân vật chính của câu chuyện là
-                    {print} Nhân vật chính đang đi dạo trong rừng
-                    {echo} Họ có chút sợ,
+                    {print} {answer} đang đi dạo trong rừng
+                    {print} Họ có chút sợ, {answer}
                     {print} Họ nghe thấy tiếng ồn kinh khủng ở khắp mọi nơi
                     {print} Họ sợ rằng đây là khu rừng ma ám
                     ```
@@ -43,15 +40,6 @@ adventures:
                     {sleep}
                     {print} tên lo sợ rằng đây là một khu rừng ma ám
                     ```
-                story_text_2: |
-                    ### Bài tập
-                    Đã đến làm cho câu chuyện của bạn trở nên phong phú hơn cấp độ trước.
-                    Chọn 'My programs', tìm cấp độ 1 trong câu chuyện trinh thám của bạn và sao chép code. Dán phần code vào màn hình chính ở mức độ này.
-
-                    Code sẽ không hoạt động nếu bạn vẫn chưa mở rộng nhé.
-                    Thay đổi câu lệnh `{ask}` và câu lệnh`{echo}` trong dòng code của bạn để sửa theo mẫu mà bạn được học ở cấp độ này.
-
-                    **Extra** để thêm câu lệnh  `{sleep}` vào dòng code để tạo nên sự gay cấn cho câu chuyện.
             3:
                 story_text: |
                     Ở cấp độ 3 này bạn có thể làm câu chuyện trở nên thú vị hơn nữa. Bạn có thể chọn ngẫu nhiên một con quái vật, động vật hay chướng ngại vật, như này:
@@ -97,13 +85,13 @@ adventures:
                 example_code: |
                     ```
                     tên {is} {ask} _ Tên bạn là gì? _
-                    {print}  _ Nhân vật chính được gọi là _ tên
+                    {print} _ Nhân vật chính được gọi là _ tên
                     _
                     _
-                    {print} tên  _ đang đi dạo trong rừng_
-                    {print} tên _có chút sợ hãi_
-                    nhữngthú {is} 🦔, 🐿, 🦉, 🦇
-                    {print} _ Anh ấy nghe thấy âm thanh của một_ nhữngthú {at} {random}
+                    {print} tên _ đang đi dạo trong rừng_
+                    {print} tên_có chút sợ hãi_
+                    những con thú {is} 🦔, 🐿, 🦉, 🦇
+                    {print}_ Anh ấy nghe thấy âm thanh của một_ những con thú {at} {random}
                     {print} tên _lo sợ rằng đây là khu rừng ma ám _
                     ```
             5:
@@ -111,14 +99,14 @@ adventures:
                     Ở cấp độ này ban có thể lập trình ra nhiều cái kết khác nhau, khiến câu chuyện của bạn trở nên thú vị hơn.
                     Phần code ví dụ bạn có thể thấy hai cái kết khác nhau.
 
-                    ###Bài tập 1
+                    ### Bài tập 1
                     Viết một câu chuyện mới với ít nhất 6 dòng code về một chủ đề mà bạn chọn.
                     Không có cảm hứng? Chọn một trong những chủ đề sau đây: siêu anh hùng, một ngày đi học buồn chán, lạc trên đảo hoang.
 
                     Cho người chơi lựa chọn cái kết có hậu và cái kết buồn, như code ví dụ.
                     Lập trình cả hai cái kết.
 
-                    ###Bài tập 2
+                    ### Bài tập 2
                     Sao chép câu chuyện trinh thám mà bạn vừa tạo nên ở những cấp độ trước.
                     Tìm cách thêm vào ít nhất 2 câu lệnh  `{if}` và `{else}`  trong câu chuyện của bạn.
                     Đây có thể là kết thúc vui hoặc buồn, nhưng bạn cũng có thể tìm nhiều cách khác để kết hợp các câu lệnh.
@@ -131,13 +119,31 @@ adventures:
                     {if} kếtthúc {is} vui {print} tên ' nắm lấy thanh kiếm và con quái vật nhanh chóng chạy đi mất'
                     {else} {print} 'Con quái vật nuốt chửng' tên
                     ```
+            6:
+                story_text: |-
+                    Bây giờ bạn có thể dùng `{elif}`để tăng sự tương tác của câu chuyện! Bạn có thể tạo nhiều nhân vật với tính cách khác nhau. 
+                    Hoặc bạn có thể cho nhân vật của bạn lựa chọn đi đường nào, mở cánh cửa nào, hoặc uống loại nước thần kì nào... 
+
+                    ### Bài tập
+                    Dựng một câu chuyện với ít nhất ba lựa chọn bằng cách dùng {elif}.
+                example_code: |
+                    ```
+                    nhân vật {is} {ask} 'Ai sẽ giúp bạn trong cuộc hành trình của bạn?'
+                    {if} nhân vật {is} 'Daisy'
+                    {print} 'Bạn đã chọn Daisy! Cô ấy là người thông minh nhất!'
+                    {elif} nhân vật {is} 'Jason'
+                    {print} 'Bạn đã chọn Jason! Anh ấy là người mạnh nhất!'
+                    {elif} nhân vật {is} 'Sam'
+                    {print} 'Bạn đã chọn Sam! Đây là người nhanh nhất!'
+                    ```
             8:
                 story_text: |
                     Trong một câu chuyện, đôi lúc sẽ có người nói. Ví dụ, khi có người kêu cứu hoặc hát một bài.
                     Bạn có thể lặp lại điều này trong câu chuyện ở cấp độ này bằng cách dùng `{repeat}`.
 
                     ### Bài tập
-                    Thêm phần lặp lại vào trong câu chuyện của bạn. Quay lại để lưu chương trình, chọn lập trình cho câu truyện từ cấp độ trước cấp 6 và tìm dòng có chứa `{print}` để lặp lại nó!
+                    Thêm phần lặp lại vào trong câu chuyện của bạn. Quay lại để lưu chương trình, chọn lập trình cho câu truyện từ cấp độ trước cấp 6 và
+                    tìm dòng có chứa `{print}` để lặp lại nó!
                 example_code: |
                     ```
                     {print} 'Chàng hoàng tử liên tục cầu cứu'
@@ -179,4 +185,146 @@ adventures:
 
                     ### Bài tập 3
                     Quay lại cấp độ 8 trong câu chuyện và sử dụng ít nhất 2 lần `{if}` ở trong 1 `{if}`khác.
-                example_code: "```\n{print} 'Robin đang đi bọ xuống trung tâm thành phố'\nlocation = {ask}'Liệu Robin sẽ vào 1 cửa hàng, hay cố ấy nên đi về nhà?'\n{if} location {is} \"cửa hàng\"\n    {print} 'Cố ấy vào trong cửa hàng'\n    {print} 'Robin thấy 1 cuốn chuyện trông rất hay'\n```\n"
+                example_code: "```\n{print} 'Robin đang đi bọ xuống trung tâm thành phố'\nlocation = {ask}'Liệu Robin sẽ vào 1 cửa hàng, hay cô ấy sẽ đi về nhà?'\n{if} location {is} \"cửa hàng\"\n    {print} 'Cô ấy vào trong cửa hàng'\n    {print} 'Robin thấy 1 cuốn sách trông rất thú vị'\n    sách = {ask} 'Robin có mua sách không?'\n    {if} sách {is} có\n    _{print} 'Robin mua quyển sách và đi về nhà'\n    _{else}\n    _{print} 'Robin rời cửa hàng và về nhà'\n{else} \n    {print}'Robin về nhà'    \n```\n"
+            11:
+                example_code: |
+                    ```
+                    con thú = _ , _ , _ 
+                    {print} 'Gấu nâu, gấu nâu ơi'
+                    {print} 'Bạn nhìn thấy gì?'
+                    ```
+            13:
+                example_code: |
+                    ```
+                    tên = _
+                    {print}('Chào mừng đến với câu chuyện!')
+                    ```
+            16:
+                story_text: |
+                    Bạn có thể dùng vòng lặp `{while}` để làm câu chuyện của bạn thêm thú vị. Ví dụ như, bạn có thể dùng `{while} game == 'on'` để chơi đến ghi trò chơi kết thúc.
+                    Hoặc bạn có thể dùng `{while} sword == 'lost'` để người chơi không thể tiếp tục đến khi họ tìm được thứ gì đấy. 
+
+                    ### Bài tập
+                    Code ví dụ sau đây sẽ cho bạn thấy làm thế nào để dùng vòng lặp `{while}` trong một câu chuyện. Bây giờ, hãy **nghĩ về một cảnh** mà người chơi phải tìm được một thứ gì đó trước khi họ có thể tiếp tục.
+    add_remove_command:
+        name: '{add} {to_list} & {remove} {from}'
+        default_save_name: add_remove_command
+        description: giới thiệu {add} {to_list} và {remove} {from}
+        levels:
+            3:
+                example_code: |
+                    ```
+                    những con thú {is} chó, mèo, kangaroo
+                    thích {is} {ask} Con vật yêu thích của bạn là gì?
+                    {add} thích {to_list} những con thú
+                    {print} Tôi chọn những con thú {at} {random}
+                    ```
+                story_text_2: |
+                    ## {remove} {from}
+                    Nếu bạn có thể thêm một món đồ vào danh sách, đương nhiên bạn cũng có thể xóa nó đi. Bạn có thể làm vậy với mã lệnh `{remove} {from}`.
+                example_code_2: |
+                    ```
+                    những con thú {is} chó, mèo, kangaroo
+                    không thích {is} {ask} Bạn không thích con thú nào?
+                    {remove} không thích {from} những con thú
+                    {print} Tôi chọn những con thú {at} {random}
+                    ```
+                story_text_3: |
+                    ### Bài tập
+                    Thử những câu lệnh mới ở nhà hàng này. Thêm những hương vị người chơi mong muốn vào danh sách và bỏ những hương vị người chơi bị dị ứng khỏi danh sách.
+                example_code_3: |
+                    ```
+                    {print} Kem sữa bí ẩn
+                    những hương vị {is} dâu, socola, vani
+                    hi vọng {is} {ask} Bạn đang hi vọng những hương vị nào?
+                    _
+                    dị ứng {is} {ask} Bạn có bị dị ứng với hương vị nào không?
+                    _
+                    {print} Bạn nhận được sữa lắc với hương vị {at} {random}
+                    ```
+    and_or_command:
+        levels: {}
+    ask_command:
+        description: Giới thiệu mã lệnh {ask}
+        levels: {}
+    calculator:
+        levels: {}
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
+    dice:
+        levels: {}
+    dishes:
+        levels: {}
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
+    fortune:
+        levels: {}
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
+    haunted:
+        levels: {}
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
+    is_command:
+        levels: {}
+    language:
+        levels: {}
+    maths:
+        levels: {}
+    music:
+        levels: {}
+    parrot:
+        levels: {}
+    piggybank:
+        levels: {}
+
+    print_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    restaurant:
+        levels: {}
+    rock:
+        levels: {}
+    secret:
+        levels: {}
+    sleep_command:
+        levels: {}
+    songs:
+        levels: {}
+    songs_2:
+        levels: {}
+    turtle:
+        levels: {}
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}
+    years:
+        levels: {}

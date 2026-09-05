@@ -61,8 +61,8 @@ tests/coverage/
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
-db.sqlite3-journal
+*.sqlite3
+*.sqlite3-journal
 
 # Flask stuff:
 instance/
@@ -85,7 +85,6 @@ profile_default/
 ipython_config.py
 
 # pyenv
-.python-version
 .run
 
 # pipenv
@@ -152,13 +151,14 @@ node_modules
 _*
 !__init__.py
 # Ignore pickled versions of YAML files
-*.yaml.pickle
+*.pickle
+*.pkl
 dev_database.json
 
 batchhedy/input/*
 batchhedy/output_*
 #generated grammars
-grammars-Total/*.lark
+hedy/data/grammars-Total/*.lark
 *.tsbuildinfo
 !/content/adventures-transformed/
 !/content/level-defaults-transformed/
@@ -191,7 +191,14 @@ file_logger.json
 # More info in #4540
 foo.txt
 
+coverage/
+.coverage
+
 # Generated schema json files
 *.generated.schema.json
+.env*
+!.env-dev
+throwaway-scripts
+machine_files
 
 workbook-*.pdf

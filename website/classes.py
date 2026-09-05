@@ -2,6 +2,7 @@ import uuid
 
 from flask import make_response, request, session
 from jinja_partials import render_partial
+import website_content as hedy_content
 from website.flask_hedy import g_db
 from website.flask_helpers import gettext_with_fallback as gettext
 import utils
@@ -25,6 +26,7 @@ class ClassModule(WebsiteModule):
         self.db = db
 
     @route("/", methods=["POST"])
+    @route("/redesign", methods=["POST"])
     @requires_teacher
     def create_class(self, user):
         body = request.json
@@ -35,6 +37,9 @@ class ClassModule(WebsiteModule):
             return make_response(gettext("class_name_invalid"), 400)
         if len(body.get("name")) < 1:
             return make_response(gettext("class_name_empty"), 400)
+        creation_type = body.get("creation_type")
+        if creation_type is not None and not isinstance(creation_type, str):
+            return make_response(gettext("request_invalid"), 400)
 
         # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
         Classes = self.db.get_teacher_classes(user["username"])
@@ -46,6 +51,7 @@ class ClassModule(WebsiteModule):
             "id": uuid.uuid4().hex,
             "date": utils.timems(),
             "teacher": user["username"],
+            "archived": False,
             # TODO: remove once we deploy new redesign
             "link": utils.random_id_generator(7),
             "name": body["name"],
@@ -53,43 +59,10 @@ class ClassModule(WebsiteModule):
 
         self.db.store_class(Class)
         add_class_created_to_subscription(user['email'])
-        response = {"id": Class["id"]}
-        return make_response(response, 200)
-
-    @route("/redesign", methods=["POST"])
-    @requires_teacher
-    def create_class_redesign(self, user):
-        body = request.json
-        # Validations
-        if not isinstance(body, dict):
-            return make_response(gettext("ajax_error"), 400)
-        if not isinstance(body.get("name"), str):
-            return make_response(gettext("class_name_invalid"), 400)
-        if len(body.get("name")) < 1:
-            return make_response(gettext("class_name_empty"), 400)
-        if not isinstance(body.get("creation_type"), str):
-            return make_response(gettext("request_invalid"), 400)
-        response = {}
-        if body.get("creation_type") in ("standard", "plain"):
-            # We use this extra call to verify if the class name doesn't already exist, if so it's a duplicate
-            Classes = self.db.get_teacher_classes(user["username"])
-            for Class in Classes:
-                if Class["name"] == body["name"]:
-                    return make_response(gettext("class_name_duplicate"), 200)
-
-            Class = {
-                "id": uuid.uuid4().hex,
-                "date": utils.timems(),
-                "teacher": user["username"],
-                # TODO: remove once we deploy new redesign
-                "link": utils.random_id_generator(7),
-                "name": body["name"],
-            }
-            self.db.store_class(Class)
-            add_class_created_to_subscription(user['email'])
-            include_adventures = body.get("creation_type") == "standard"
+        if creation_type in ("standard", "plain"):
+            include_adventures = creation_type == "standard"
             _create_customizations(g_db(), Class["id"], include_adventures=include_adventures)
-            response = {"id": Class["id"]}
+        response = {"id": Class["id"]}
         return make_response(response, 200)
 
     @route("/<class_id>", methods=["PUT"])
@@ -126,12 +99,26 @@ class ClassModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class:
             return make_response(gettext("no_such_class"), 404)
-        if Class["teacher"] != user["username"]:  # only teachers can remove their classes.
+        if (
+            Class["teacher"] != user["username"]
+        ):  # only teachers can remove their classes.
             return make_response(gettext("unauthorized"), 401)
 
         self.db.delete_class(Class)
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
-        return render_partial('htmx-classes-table.html', teacher_classes=teacher_classes)
+        class_customizations = [
+            self.db.get_class_customizations(_class["id"]) for _class in teacher_classes
+        ]
+        class_customizations = {
+            customizations["id"]: customizations
+            for customizations in class_customizations
+        }
+        return render_partial(
+            "htmx-classes-table.html",
+            class_customizations=class_customizations,
+            teacher_classes=teacher_classes,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
+        )
 
     @route('join/<class_id>', methods=["POST"])
     @requires_login
@@ -266,6 +253,7 @@ class MiscClassPages(WebsiteModule):
             "id": class_id,
             "date": utils.timems(),
             "teacher": user["username"],
+            "archived": False,
             # TODO: remove once we deploy new redesign
             "link": utils.random_id_generator(7),
             "name": body.get("name"),
@@ -300,8 +288,9 @@ class MiscClassPages(WebsiteModule):
         search = request.args.get('search', '')
         user_type = request.args.get('user_type')
         class_id = request.args.get('class_id')
+        modal_variant = request.args.get('modal_variant', '')
         if search == '':
-            return render_template('modal/htmx-search-results-list.html', usernames=[])
+            return render_template('modal/htmx-search-results-list.html', usernames=[], modal_variant=modal_variant)
         if user_type == 'student':
             results = g_db().get_student_that_starts_with(search.lower())
         elif user_type == 'second_teacher':
@@ -311,12 +300,20 @@ class MiscClassPages(WebsiteModule):
         # Get sets of usernames
         usernames = set(r['username'] for r in results)
         already_invited = set(inv['username'] for inv in self.db.get_class_invites(class_id=class_id))
+        class_users = set()
+        Class = self.db.get_class(class_id) if class_id else None
+        if Class:
+            if user_type == 'student':
+                class_users = set(Class.get('students', []))
+            elif user_type == 'second_teacher':
+                class_users = set(teacher.get('username') for teacher in Class.get('second_teachers', []))
+                class_users.add(Class.get('teacher'))
         # Set computation to come up with who can still be invited
-        invitable = usernames - already_invited - set([user['username']])
+        invitable = usernames - already_invited - class_users - set([user['username']])
         # Turn into a sorted list
         usernames = list(sorted(invitable))
         usernames = sorted(usernames)
-        return render_template('modal/htmx-search-results-list.html', usernames=usernames)
+        return render_template('modal/htmx-search-results-list.html', usernames=usernames, modal_variant=modal_variant)
 
     @route("/invite", methods=["POST"])
     @requires_teacher

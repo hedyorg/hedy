@@ -1,21 +1,19 @@
 from flask import session, request, make_response
 from website.flask_helpers import render_template
-from bs4 import BeautifulSoup
 import contextlib
 import datetime
 import time
 import functools
 import os
 from io import StringIO
-from os import path
 import re
 import string
 import random
 import uuid
 import unicodedata
-import sys
 import traceback
 import collections
+import envs
 
 from email_validator import EmailNotValidError, validate_email
 from flask_babel import format_date, format_datetime, format_timedelta
@@ -27,25 +25,6 @@ commonmark_parser = commonmark.Parser()
 commonmark_renderer = commonmark.HtmlRenderer()
 
 IS_WINDOWS = os.name == 'nt'
-
-prefixes_dir = path.join(path.dirname(__file__), 'prefixes')
-
-# Define code that will be used if some turtle command is present
-with open(f'{prefixes_dir}/turtle.py', encoding='utf-8') as f:
-    TURTLE_PREFIX_CODE = f.read()
-
-# Preamble that will be used for non-Turtle programs
-# numerals list generated from: https://replit.com/@mevrHermans/multilangnumerals
-with open(f'{prefixes_dir}/normal.py', encoding='utf-8') as f:
-    NORMAL_PREFIX_CODE = f.read()
-
-# Define code that will be used if a pressed command is used
-with open(f'{prefixes_dir}/pressed.py', encoding='utf-8') as f:
-    PRESSSED_PREFIX_CODE = f.read()
-
-# Define code that will be used if music code is used
-with open(f'{prefixes_dir}/music.py', encoding='utf-8') as f:
-    MUSIC_PREFIX_CODE = f.read()
 
 
 class Timer:
@@ -89,29 +68,8 @@ def times():
     return int(round(time.time()))
 
 
-DEBUG_MODE = False
-
-
-def is_debug_mode():
-    """Return whether or not we're in debug mode.
-
-    We do more expensive things that are better for development in debug mode.
-    """
-    return DEBUG_MODE
-
-
-def is_offline_mode():
-    """Return whether or not we're in offline mode.
-
-    Offline mode is a special build of Hedy that teachers can download and run
-    on their own computers.
-    """
-    return getattr(sys, 'frozen', False) and offline_data_dir() is not None
-
-
 def offline_data_dir():
-    """Return the data directory in offline mode."""
-    return getattr(sys, '_MEIPASS')
+    return envs.offline_data_dir()
 
 
 def set_debug_mode(debug_mode):
@@ -166,7 +124,7 @@ def is_testing_request(request):
 
     Test requests are only allowed on non-Heroku instances.
     """
-    return not is_heroku() and bool('X-Testing' in request.headers and request.headers['X-Testing'])
+    return bool('X-Testing' in request.headers and request.headers['X-Testing']) and envs.current_env().allow_x_testing
 
 
 def is_redesign_enabled():
@@ -184,36 +142,16 @@ def isoformat(timestamp):
     return dt.isoformat() + 'Z'
 
 
-def is_production():
-    """Whether we are serving production traffic."""
-    return os.getenv('IS_PRODUCTION', '') != ''
-
-
-def is_heroku():
-    """Whether we are running on Heroku.
-
-    Only use this flag if you are making a decision that really has to do with
-    Heroku-based hosting or not.
-
-    If you are trying to make a decision whether something needs to be done
-    "for real" or not, prefer using:
-
-    - `is_production()` to see if we're serving customer traffic and trying to
-      optimize for safety and speed.
-    - `is_debug_mode()` to see if we're on a developer machine and we're trying
-      to optimize for developer productivity.
-
-    """
-    return os.getenv('DYNO', '') != ''
-
-
 def version():
     # """Get the version from the Heroku environment variables."""
-    if not is_heroku():
+    if envs.is_dev():
         return 'DEV'
 
+    if not envs.is_heroku():
+        return 'NO_VERSION_INFO'
+
     vrz = os.getenv('HEROKU_RELEASE_CREATED_AT')
-    the_date = datetime.date.fromisoformat(vrz[:10]) if vrz else datetime.date.today()
+    the_date = datetime.date.fromisoformat(vrz.split('T')[0]) if vrz else datetime.date.today()
 
     commit = os.getenv('HEROKU_SLUG_COMMIT', '????')[0:6]
     return the_date.strftime('%Y %b %d') + f'({commit})'
@@ -292,7 +230,6 @@ def localized_date_format(date, short_format=False, only_date=False):
 
 
 def datetotimeordate(date):
-    print(date)
     return date.replace("T", " ")
 
 
@@ -316,16 +253,6 @@ def random_password_generator(size=6):
     return random_id_generator(size, base_58_chars)
 
 
-def markdown_to_html_tags(markdown):
-    """
-    This function takes a Markdown string and returns a list with each of the HTML elements obtained
-    by rendering the Markdown into HTML.
-    """
-    _html = commonmark_renderer.render(commonmark_parser.parse(markdown))
-    soup = BeautifulSoup(_html, 'html.parser')
-    return soup.find_all()
-
-
 MarkdownCode = collections.namedtuple('MarkdownCode', ('code', 'info'))
 
 
@@ -343,32 +270,74 @@ def code_blocks_from_markdown(markdown):
             yield MarkdownCode(node.literal.strip(), node.info)
 
 
-def error_page(error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None):
+def error_page(
+    error=404, page_error=None, ui_message=None, menu=True, iframe=None, exception=None
+):
     if error not in [400, 403, 404, 500, 401]:
         error = 404
-    default = gettext('default_404')
+    default = gettext("default_404")
     error_image = error
     if error == 401:
-        default = gettext('default_401')
+        default = gettext("default_401")
         error_image = 403
     if error == 403:
-        default = gettext('default_403')
+        default = gettext("default_403")
     elif error == 500:
-        default = gettext('default_500')
+        default = gettext("default_500")
+    # The exception sent by flask is a wrapper around the original exception
+    original_exception = (
+        exception.original_exception
+        if exception and hasattr(exception, "original_exception")
+        else exception
+    )
+    original_exception = (
+        "".join(
+            traceback.TracebackException.from_exception(
+                original_exception, capture_locals=False
+            ).format()
+        )
+        if original_exception
+        else None
+    )
 
-    hx_request = bool(request.headers.get('Hx-Request'))
+    hx_request = bool(request.headers.get("Hx-Request"))
     if hx_request:
-        # For HTMX-request, just return the error as plain text body
-        return make_response(f'{default} {exception}', error)
+        # Return a json response, so we have access to the exception in the frontend
+        return make_response(
+            {
+                "code": error,
+                "message": default,
+                "stack_trace": original_exception,
+            },
+            error,
+        )
 
-    if request.accept_mimetypes.accept_json and not request.accept_mimetypes.accept_html:
+    if (
+        request.accept_mimetypes.accept_json
+        and not request.accept_mimetypes.accept_html
+    ):
         # Produce a JSON response instead of an HTML response
-        return make_response({"code": error,
-                              "error": default,
-                              "exception": traceback.format_exception(type(exception), exception, exception.__traceback__) if exception else None}, error)
+        return make_response(
+            {
+                "code": error,
+                "message": default,
+                "stack_trace": original_exception,
+            },
+            error,
+        )
 
-    return render_template("error-page.html", menu=menu, error_image=error_image, iframe=iframe,
-                           page_error=page_error or ui_message or default or '', default=default), error
+    return (
+        render_template(
+            "error-page.html",
+            menu=menu,
+            error_image=error_image,
+            iframe=iframe,
+            page_error=page_error or ui_message or default or "",
+            default=default,
+            stack_trace=original_exception,
+        ),
+        error,
+    )
 
 
 def session_id():

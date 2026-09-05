@@ -45,10 +45,6 @@ join-sections:
     text: |-
         Hedy a été crée pour apporter un support pour les enseignants voulant offrir des leçons de programmations durant leurs cours . Nous avons des options spécifiques pour les enseignants , comme l'option pour créer des classes, customisez les et observez la progression de vos élèves .
         Si vous aimez Hedy , Vous pouvez en parler aux écoles que vous connaissez pour aider les enseignants! Nous pouvons vous aider à trouver des écoles ou des enseignants via [Discord](https://discord.gg/8yY7dEme9r).
-learn-more-sections:
--   {}
--   {}
--   {}
 start-sections:
 -   title: Commencez avec Hedy
     text: "*Quelque chose a propos des comptes Enseignants, présentation etc*"
@@ -113,24 +109,14 @@ teacher-guide:
                 solution_code: |-
                     {ask} Pourquoi mon code marche-t-il ?
                     {print} Parce que j'ai enlevé les majuscules !
-        -   title: Les élèves utilisent `{echo}` sans `{ask}`
+        -   title: Les élèves utilisent `{answer}` sans `{ask}`
             example:
-                error_text: "`{echo}` est fait pour répéter une réponse après une commande `{ask}`. Sans `{ask}`, `{echo}` ne fera rien."
-                error_code: "{echo} Ton nom est"
+                error_text: "`{answer}` est fait pour répéter une réponse après une commande `{ask}`. Sans `{ask}`, `{answer}` ne fera rien."
+                error_code: "{print} Ton nom est {answer}"
                 solution_text: Ajoute une commande `{ask}` pour que cela fonctionne.
                 solution_code: |-
                     {ask} Quel est votre nom ?
-                    {echo} Ton nom est
-        -   title: Les élèves veulent que le mot (la variable) répété par la commande `{echo}` se trouve au milieu d'une phrase
-            example:
-                error_text: Et ils ont raison ! C'est pourquoi ils apprendront à utiliser les variables au niveau suivant.
-                error_code: |-
-                    {ask} Quel est le langage de programmation le plus amusant ?
-                    {echo} est le meilleur !
-                solution_text: "Au niveau 1, nous devons nous en tenir à cela :"
-                solution_code: |-
-                    {ask} Quel est le langage de programmation le plus amusant ?
-                    {echo} Le meilleur est...
+                    {print} Ton nom est {answer}
         -   title: "Tortue : Les élèves laissent la tortue sortir de l'écran"
             example:
                 error_text: Souvent, les élèves aiment essayer les grands nombres en utilisant la tortue, ce qui fait sortir la flèche de l'écran.
@@ -341,7 +327,58 @@ teacher-guide:
                 error_code: |-
                     si nom est Hedy  Super!
                     sinon  Hedy est mieux!
-        -   {}
+        -   example: {}
         -   title: Les élèves oublient encore les guillemets des deux côtés
+            example: {}
         -   title: Les élèves utilisent des guillemets autour des noms de variables
+            example: {}
         -   title: Les élèves utilisent des noms de variable longs contenant 2 mots
+            example: {}
+        -   example: {}
+        -   example: {}
+    -   sections:
+        -   example: {}
+        -   example: {}
+    -   sections:
+        -   example: {}
+        -   example: {}
+        -   example: {}
+    -   sections:
+        -   example: {}
+        -   example: {}
+        -   example: {}
+        -   example: {}
+        -   example: {}
+    -   sections:
+        -   example: {}
+    -   sections:
+        -   example: {}
+        -   example: {}
+    -   sections:
+        -   example: {}
+        -   example: {}
+    -   sections:
+        -   example: {}
+        -   example: {}
+        -   example: {}
+    -   sections:
+        -   example: {}
+    -   sections:
+        -   example: {}
+        -   example: {}
+        -   example: {}
+    -   sections:
+        -   example: {}
+    -   sections:
+        -   example: {}
+        -   example: {}
+        -   example: {}
+        -   example: {}
+        -   example: {}
+    -   sections:
+        -   example: {}
+        -   example: {}
+    -   sections:
+        -   example: {}
+        -   example: {}
+        -   example: {}

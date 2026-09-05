@@ -15,12 +15,12 @@ describe('Tests for viewing programs', () => {
 
     it("We can translate from any two languages that dont involve english", () => {
         login('user1', '123456') // the language of user1 is French
-        cy.visit('/hedy/4386f49502344c5cb915b37acb959a27/view')
+        cy.visit('/hedy/8d439bc7d0f8410395333c96fdf5e647/view')
         codeMirrorContent().should('have.text', 'répète 5 fois    affiche "Salut tout le monde"    affiche"Tout ceci sera répété 5 fois"');
         logout()
         login('user2', '123456') // the language of user1 is Dutch
         cy.url().should('eq', Cypress.config('baseUrl') + '/', {timeout: 10000})
-        cy.visit('/hedy/4386f49502344c5cb915b37acb959a27/view')
+        cy.visit('/hedy/8d439bc7d0f8410395333c96fdf5e647/view')
         codeMirrorContent().should('have.text', 'herhaal 5 keer    print "Salut tout le monde"    print"Tout ceci sera répété 5 fois"');
     })
 })

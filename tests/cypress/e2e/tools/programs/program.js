@@ -3,6 +3,21 @@ export function codeEditorContent() {
     return cy.get('#editor > .cm-editor > .cm-scroller > .cm-content');
 }
 
+function clickRunButtonWhenUncovered() {
+    cy.get('body').then(($body) => {
+        if ($body.find('#dropdown-level:visible').length > 0) {
+            cy.getDataCy('dropdown_open_button').click();
+        }
+    });
+
+    cy.get('#dropdown-level').should('not.be.visible');
+    cy.getDataCy('runit')
+        .scrollIntoView({ block: 'center' })
+        .should('be.visible')
+        .should('not.be.disabled')
+        .click()
+}
+
 export function executeHelloWorldProgram(name) {
     cy.visit(`${Cypress.env('hedy_page')}#${name}`);
     // make sure to navigate to the wanted program tab.
@@ -16,7 +31,7 @@ export function executeHelloWorldProgram(name) {
     cy.focused().clear()
     cy.focused().type('print Hello world');
     cy.get('#editor .cm-content').should('contain.text', 'print Hello world');
-    cy.getDataCy('runit').click();
+    clickRunButtonWhenUncovered()
     cy.getDataCy('output').should('contain.text', 'Hello world');
     cy.visit(`${Cypress.env('programs_page')}`);
     cy.getDataCy('programs').should("contain.text", name)

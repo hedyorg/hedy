@@ -4,7 +4,8 @@ import { IndentContext } from '@codemirror/language'
 import {syntaxTree} from "@codemirror/language"
 import { WidgetType } from "@codemirror/view"
 import { SyntaxNode } from "@lezer/common"
-import { level as levelFacet } from './cm-editor';
+import { keywordLanguage as keywordLanguageFacet, level as levelFacet } from './cm-editor';
+import { traductionMap } from './lezer-parsers/tokens';
 
 export const addErrorLine = StateEffect.define<{ row: number }>();
 export const addErrorWord = StateEffect.define<{ row: number, col: number }>();
@@ -16,7 +17,7 @@ export const addDebugWords = StateEffect.define<{ from: number, to: number }>({
 });
 export const removeDebugLine = StateEffect.define<void>();
 
-const breakpointGutterEffect = StateEffect.define<{ pos: number, on: boolean }>({
+const eyeMarkerGutterEffect = StateEffect.define<{ pos: number, on: boolean }>({
     map: (val, mapping) => ({ pos: mapping.mapPos(val.pos), on: val.on })
 });
 
@@ -114,23 +115,7 @@ export const incorrectLineField = StateField.define<DecorationSet>({
     provide: f => EditorView.decorations.from(f)
 })
 
-export const breakpointGutterState = StateField.define<RangeSet<GutterMarker>>({
-    create() { return RangeSet.empty },
-    update(set, transaction) {
-        set = set.map(transaction.changes)
-        for (let e of transaction.effects) {
-            if (e.is(breakpointGutterEffect)) {
-                if (e.value.on)
-                    set = set.update({ add: [deactivateGutterMarker.range(e.value.pos)] })
-                else
-                    set = set.update({ filter: from => from != e.value.pos })
-            }
-        }
-        return set
-    }
-});
-
-const deactivateLineState = StateField.define<DecorationSet>({
+export const deactivateLineState = StateField.define<DecorationSet>({
     create() { return Decoration.none },
     update(set, transaction) {
         set = set.map(transaction.changes);
@@ -181,41 +166,101 @@ export const decorationsTheme = EditorView.theme({
     }
 });
 
-
-const deactivateGutterMarker = new class extends GutterMarker {
-    toDOM() { return document.createTextNode("😴") }
+class EyeGutterMarker extends GutterMarker {
+    constructor(readonly isVisible: boolean) { 
+        super(); 
+    }
+    
+    toDOM() {
+        let e = document.createElement("i");
+        e.className = this.isVisible 
+            ? ["fa-solid", "fa-eye-slash", "cursor-pointer"].join(" ") // Active State
+            // We split it into multiple lines for readability.
+            // This is the default state when the eye is not visible
+            : [
+                "fa-solid",
+                "fa-eye-slash",
+                "cursor-pointer",
+                "opacity-0",
+                "hover:opacity-50",
+                "transition-opacity",
+                "duration-150"
+              ].join(" ");
+        return e;
+    }
 }
+
+const eyeMarkerHidden = new EyeGutterMarker(false);
+const eyeMarkerVisible = new EyeGutterMarker(true);
+
+
+const eyeMarkerStateField = StateField.define<RangeSet<GutterMarker>>({
+    create() { return RangeSet.empty },
+    update(set, transaction) {
+        set = set.map(transaction.changes)
+        for (let e of transaction.effects) {
+            if (e.is(eyeMarkerGutterEffect)) {
+                // We only keep track of the on state, i.e when the eye is visible
+                // for the hidden decorators, we let the lineMarker handle that
+                if (e.value.on) {
+                    set = set.update({ filter: from => from != e.value.pos });
+                    set = set.update({ add: [eyeMarkerVisible.range(e.value.pos)] });
+                } else {
+                    set = set.update({ filter: from => from != e.value.pos });
+                }
+            }
+        }
+        return set
+    }
+});
 
 function toggleLine(view: EditorView, pos: number) {
-    let breakpoints = view.state.field(breakpointGutterState)
-    let isDeactivated = false
-    breakpoints.between(pos, pos, () => { isDeactivated = true })
+    let isCurrentlyVisible = false;
+    const eyeMarkers = view.state.field(eyeMarkerStateField);
+    eyeMarkers.between(pos, pos, () => { isCurrentlyVisible = true });
+    const nextState = !isCurrentlyVisible;
     view.dispatch({
         effects: [
-            breakpointGutterEffect.of({ pos, on: !isDeactivated }),
-            deactivateLineEffect.of({ pos, on: !isDeactivated })
+            eyeMarkerGutterEffect.of({ pos: pos, on: nextState }),
+            deactivateLineEffect.of({ pos: pos, on: nextState })
         ]
-    })
+    });
 }
 
-export const breakpointGutter = [
-    breakpointGutterState,
+export const eyeMarkerGutter = [
+    eyeMarkerStateField,
     deactivateLineState,
     gutter({
-        class: "cm-breakpoint-gutter",
-        markers: v => v.state.field(breakpointGutterState),
-        initialSpacer: () => deactivateGutterMarker,
+        class: "cm-eye-marker-gutter",
+
+        lineMarker: (_, __, otherMarkers) => {
+            // If there's already a visible eye marker, don't add another one
+            // This prevents having two eye icons at the same time
+            const hasVisibleEye = otherMarkers.some(m => m instanceof EyeGutterMarker);
+            if (hasVisibleEye) return null;
+            return eyeMarkerHidden;
+        },
+
+        markers: v => v.state.field(eyeMarkerStateField),
+        
+        initialSpacer: () => eyeMarkerVisible,
+        
         domEventHandlers: {
             mousedown(view, line) {
-                toggleLine(view, line.from)
-                return true
+                toggleLine(view, line.from);
+                return true;
             }
         }
     }),
     EditorView.baseTheme({
-        ".cm-breakpoint-gutter .cm-gutterElement": {
+        ".cm-eye-marker-gutter .cm-gutterElement": {
             paddingLeft: "5px",
-            cursor: "default"
+            paddingRight: "5px",
+            cursor: "default",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minWidth: "20px"
         },
         ".cm-disabled-line": {
             textDecoration: "line-through"
@@ -283,7 +328,9 @@ function highlightVariables(view: EditorView) {
     const level = view.state.facet(levelFacet);
     // double equals because level is actually an array with just one element
     // like: [1]
-    if (level == 1) return Decoration.none;
+    if (level == 1) {
+        return highlightLevelOneAnswerVariable(view);
+    }
     let variableDeco = new RangeSetBuilder<Decoration>();
     let variableData: VariableData[] = []
     let functionsNames = new Set<string>()
@@ -401,6 +448,68 @@ function highlightVariables(view: EditorView) {
     })
 
     return variableDeco.finish()
+}
+
+function highlightLevelOneAnswerVariable(view: EditorView) {
+    const answerRegex = getLevelOneAnswerKeywordRegex(view);
+    if (!answerRegex) return Decoration.none;
+
+    const variableDeco = new RangeSetBuilder<Decoration>();
+    let hasSeenAsk = false;
+    const commandsUsingAnswer = new Set(["Ask", "Print"]);
+
+    for (let {from, to} of view.visibleRanges) {
+        syntaxTree(view.state).iterate({
+            from,
+            to,
+            enter: (node) => {
+                if (node.name === "Ask") {
+                    if (hasSeenAsk) {
+                        const children = node.node.getChildren("Text");
+                        for (const child of children) {
+                            const text = view.state.doc.sliceString(child.from, child.to);
+                            addLevelOneAnswerHighlights(text, child.from, answerRegex, variableDeco);
+                        }
+                    }
+                    hasSeenAsk = true;
+                    return false;
+                }
+
+                if (!hasSeenAsk || !commandsUsingAnswer.has(node.name)) {
+                    return;
+                }
+
+                const children = node.node.getChildren("Text");
+                for (const child of children) {
+                    const text = view.state.doc.sliceString(child.from, child.to);
+                    addLevelOneAnswerHighlights(text, child.from, answerRegex, variableDeco);
+                }
+
+                return false;
+            }
+        })
+    }
+
+    return variableDeco.finish();
+}
+
+function addLevelOneAnswerHighlights(text: string, offset: number, answerRegex: RegExp, variableDeco: RangeSetBuilder<Decoration>) {
+    answerRegex.lastIndex = 0;
+    for (const match of text.matchAll(answerRegex)) {
+        const matchedText = match[0];
+        const index = match.index;
+        if (index === undefined) continue;
+        variableDeco.add(offset + index, offset + index + matchedText.length, highlightVariableMarker)
+    }
+}
+
+function getLevelOneAnswerKeywordRegex(view: EditorView): RegExp | null {
+    const keywordLanguage = view.state.facet(keywordLanguageFacet) || 'en';
+    const translatedAnswer = traductionMap(keywordLanguage).get('answer');
+
+    if (!translatedAnswer) return null;
+
+    return new RegExp(`(?<![\\p{L}\\p{N}_])(?:${translatedAnswer})(?![\\p{L}\\p{N}_])`, 'gu');
 }
 
 function getVarNames(name: string) {

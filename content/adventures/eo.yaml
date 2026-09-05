@@ -9,14 +9,11 @@ adventures:
                     En la 1-a nivelo vi povas krei rakonton kun malsama ĉeffiguro, kiun vi mem enigas.
 
                     En la unua linio, uzu `{ask}` kaj demandu, kiu estos la ĉeffiguro de la rakonto.
-
-                    Post tiu unua linio, komencu per `{print}` se la frazo bezonas esti presita.
-                    Vi uzas `{echo}` se vi volas, ke via ĉeffiguro estu ĉe la fino de la frazo.
                 example_code: |
                     ```
                     {ask} La ĉefrolulo de ĉi tiu rakonto estas
-                    {print} La ĉefrolulo nun promenas en la arbaro
-                    {echo} Li timetas
+                    {print} {answer} nun promenas en la arbaro
+                    {print} Li timetas {answer}
                     {print} Li aŭdas ĉie frenezajn bruojn
                     {print} Li timas, ke ĉi tie estas hantata arbaro
                     ```
@@ -176,6 +173,12 @@ adventures:
                             {print} 'Ne, ĝi ne estas ĉe la ' loko
                     {print} 'Nun vi povas eniri la domon!'
                     ```
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
+    ask_command:
+        levels: {}
     calculator:
         name: Kalkulilo
         default_save_name: Kalkulilo
@@ -231,6 +234,14 @@ adventures:
                             poentaro = poentaro + 1
                     {print} 'Bonege! Jen via poentaro: ' poentaro '/10!'
                     ```
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
     dice:
         name: Ĵetkuboj
         default_save_name: Ĵetkuboj
@@ -277,7 +288,10 @@ adventures:
                     poentaro = 0
                     ĵeto = elektoj {at} {random}
                     {print} 'la rezulto de via ĵeto estas' ĵeto
-                    {if} ĵeto {is} lumbriko poentaro = poentaro + 5 {else} poentaro = poentaro + ĵeto
+                    {if} ĵeto {is} lumbriko 
+                    poentaro = poentaro + 5 
+                    {else} 
+                    poentaro = poentaro + ĵeto
                     {print} 'those are' poentaro ' point'
                     ```
                     Can you make the code so that you get the total score for 8 dice? To do that, you have to cut and paste some lines of the code.
@@ -399,6 +413,10 @@ adventures:
                     {for} tago {in} tagoj
                         {print} nomoj {at} {random} ' lavas telerojn je ' tago
                     ```
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
     fortune:
         name: Aŭguristo
         default_save_name: Aŭguristo
@@ -410,15 +428,15 @@ adventures:
                     Tiam vi verŝajne scias, ke ili vere ne povas antaŭdiri vian estontecon, sed estas tamen amuze ludi!
 
                     En la venontaj niveloj vi povas lerni kiel krei vian propran aŭguran maŝinon!
-                    En nivelo 1 vi povas komenci facile lasante Hedy prezenti sin kiel aŭguristo kaj lasi ŝin {echo} la respondojn de la ludantoj.
+                    En nivelo 1 vi povas komenci facile lasante Hedy prezenti sin kiel aŭguristo kaj lasi ŝin `{answer}` la respondojn de la ludantoj.
                     Jene:
                 example_code: |
                     ```
-                    {print} Saluton, mi estas Hedy la aŭguristo!
-                    {ask} Kiu vi estas?
-                    {print} Mi rigardu mian kristalan globon
-                    {print} Mi vidas… mi vidas…
-                    {echo} Via nomo estas
+                    _ Saluton, mi estas Hedy la aŭguristo!
+                    _ Kiu vi estas?
+                    _ Mi rigardu mian kristalan globon
+                    _ Mi vidas… mi vidas…
+                    _ Via nomo estas _
                     ```
                 story_text_2: |
                     ### Exercise
@@ -426,9 +444,6 @@ adventures:
                     Obviously, Hedy isn't a very good fortune teller yet, as she can only repeat the answers that were given by the players!
                     Take a look in level 2 to improve your fortune teller.
             3:
-                story_text: |
-                    In the previous levels you've created your first fortune telling machine, but Hedy couldn't really predict anything, only {echo}.
-                    In this level you can use a variable and the `{at} {random}` command to really let Hedy choose an answer for you. Check out this code for instance:
                 example_code: |
                     En ĉi tiu ekzemplo, la ludanto povas demandi Hedy ĉu-demandon, kaj Hedy elektos hazardan respondon por vi.
                     ```
@@ -452,7 +467,10 @@ adventures:
                     {print} 'Mi estas Hedy la aŭguristo!'
                     {print} 'Mi povas aŭguri, ĉu vi gajnos la loterion morgaŭ!'
                     homo {is} {ask} 'Kiu vi estas?'
-                    {if} homo {is} Hedy {print} 'Vi certe gajnos!🤩' {else} {print} 'Misfortune, aliulo gajnos!😭'
+                    {if} homo {is} Hedy 
+                    {print} 'Vi certe gajnos!🤩' 
+                    {else} 
+                    {print} 'Misfortune, aliulo gajnos!😭'
                     ```
             7:
                 story_text: |
@@ -514,6 +532,12 @@ adventures:
             11:
                 story_text: |
                     En ĉi tiu nivelo, vi povas montri plurvortajn aŭguraĵojn jene:
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
     haunted:
         name: Hantata domo
         default_save_name: Hantata domo
@@ -537,7 +561,7 @@ adventures:
                     {print} Mi devas eliri de ĉi tie!
                     {print} Estas 3 pordoj antaŭ mi..
                     {ask} Kiun pordon mi elektu?
-                    {echo} Mi elektas pordon
+                    {print} Mi elektas pordon {answer}
                     {print} ...?
                     ```
                 story_text_2: |
@@ -560,7 +584,16 @@ adventures:
                 story_text: |
                     En ĉi tiu nivelo vi lernas kiel uzi citilojn en viaj ludoj.
                     Ĉu vi povas igi vian Hantatan Domon rulebla en Nivelo 4?
-
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
+    is_command:
+        levels: {}
     language:
         name: Lingvo
         default_save_name: Lingvo
@@ -585,16 +618,20 @@ adventures:
                     francaj_vortoj = ['bonjour', 'ordinateur', 'pomme de terre']
                     traduko = ['saluton', 'komputilo', 'terpomo']
                     poentaro = 0
-                    {for} i {in} {range} 1 {to} 3
-                        respondo = {ask} 'Kion signifas ' francaj_vortoj[i] '?'
+                    {for} i {in} {range}(1, 3)
+                        respondo = {input}('Kion signifas ', francaj_vortoj[i], '?')
                         ĝusta = traduko[i]
-                        {if} respondo == ĝusta
-                            {print} 'Ĝuste!'
+                        {if} respondo == ĝusta:
+                            {print}('Ĝuste!')
                             poentaro = poentaro + 1
-                        {else}
-                            {print} 'Malĝuste, ' francaj_vortoj[i] ' signifas la jenon: ' traduko[i]
-                    {print} 'Vi respondis ' poentaro ' fojojn ĝuste.'
+                        {else}:
+                            {print}('Malĝuste, ', francaj_vortoj[i], ' signifas la jenon: ', traduko[i])
+                    {print}('Vi respondis ', poentaro, ' fojojn ĝuste.')
                     ```
+    maths:
+        levels: {}
+    music:
+        levels: {}
     parrot:
         name: Papago
         default_save_name: Papago
@@ -607,8 +644,8 @@ adventures:
                     ```
                     {print} Mi estas Hedy la papago
                     {ask} kio estas via nomo?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
             2:
                 story_text: |
@@ -654,11 +691,20 @@ adventures:
         name: Ŝparujo
         default_save_name: Ŝparujo
         description: Kalkulu vian poŝmonon!
+        levels: {}
+
+    print_command:
+        levels: {}
     quizmaster:
-        name: Kvizmajstro
-        default_save_name: Kvizmajstro
-        description: Faru vian propran kvizon!
-        levels:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
     restaurant:
         name: Restoracio
         default_save_name: Restoracio
@@ -670,8 +716,8 @@ adventures:
                 example_code_2: |
                     ```
                     {print} Bonvenon al Restoracio Hedy 🍟
-                    {ask} Kion vi volas mendi?
-                    {echo} Do vi volas mendi
+                    _ Kion vi volas mendi?
+                    {print}  Do vi volas mendi {answer}
                     {print} Dankon pro via mendo!
                     {print} Ĝi estas kuirata!
                     ```
@@ -736,16 +782,28 @@ adventures:
                     ```
                     {print} 'Bonvenon al Restoracio Hedy!'
                     special {is} {ask} 'Would you like to hear our specials today?'
-                    {if} special {is} jes {print} 'Todays special is chicken piri piri and rice.' {else} {print} 'No problem.'
+                    {if} special {is} jes 
+                    {print} 'Todays special is chicken piri piri and rice.' 
+                    {else} 
+                    {print} 'No problem.'
                     manĝaĵo {is} {ask} 'What would you like to eat?'
                     {print} 'Unu ' manĝaĵo ', coming right up!'
                     trinkaĵo {is} {ask} 'What would you like to drink with that?'
-                    {if} trinkaĵo {is} cola {print} 'Im sorry, we are out of cola!' {else} {print} 'Great choice!'
+                    {if} trinkaĵo {is} cola 
+                    {print} 'Im sorry, we are out of cola!' 
+                    {else} 
+                    {print} 'Great choice!'
                     anything {is} {ask} 'Would you like anything {else}?'
                     {print} 'Mi ripetos vian mendon…'
                     {print} 'Unu ' manĝaĵo
-                    {if} trinkaĵo {is} cola {print} 'kaj…' {else} {print} 'Unu ' trinkaĵo
-                    {if} anything {is} ne {print} 'Thats it!' {else} {print} 'Unu ' anything
+                    {if} trinkaĵo {is} cola 
+                    {print} 'kaj…' 
+                    {else} 
+                    {print} 'Unu ' trinkaĵo
+                    {if} anything {is} ne 
+                    {print} 'Thats it!' 
+                    {else} 
+                    {print} 'Unu ' anything
                     {print} 'Dankon pro via mendo. Ĝuu vian manĝon!'
                     ```
             7:
@@ -822,13 +880,13 @@ adventures:
             16:
                 example_code: |
                     ```
-                    {print} 'Bonvenon al McHedy'
+                    {print}('Bonvenon al McHedy')
                     pli = 'jes'
                     _
-                        mendo = {ask} 'Kion vi volas mendi?'
-                        {print} mendo
-                        pli = {ask} 'Ĉu vi volas mendi ion pli?'
-                    {print} 'Dankon!'
+                        mendo = {input}('Kion vi volas mendi?')
+                        {print}(mendo)
+                        pli = {input}('Ĉu vi volas mendi ion pli?')
+                    {print}('Dankon!')
                     ```
     rock:
         name: Roko, papero, tondilo
@@ -839,22 +897,15 @@ adventures:
                 story_text: |
                     En Nivelo 1, vi komencu per la ludo «roko, papero, tondilo».
 
-                    Per `{ask}` oni povas fari elekton, kaj per `{echo}` oni povas ripeti tiun elekton.
+                    Per `{ask}` oni povas fari elekton, kaj per `{answer}` oni povas ripeti tiun elekton.
                 example_code: |
                     ```
                     {print} kion vi elektas?
                     {ask} elektu el roko, papero aŭ tondilo
-                    {echo} do via elekto estis:
+                    {print} do via elekto estis: {answer}
                     ```
+                story_text_2: |
                     Anstataŭ vortoj, vi ankaŭ povus uzi vinjetosignojn kompreneble: ✊✋✌
-            2:
-                story_text: |
-                    En ĉi tiu nivelo, vi povas praktiki uzi la variablojn, por ke vi povu fari la ludon de roko, papero kaj tondilo en la sekva nivelo!
-                example_code: |
-                    ```
-                    elekto {is} _
-                    {print} Mi elektas elekto
-                    ```
             3:
                 story_text: |
                     En ĉi tiu nivelo ni povas eniri listojn kaj elekti aferojn el ili.
@@ -951,6 +1002,8 @@ adventures:
                     {else}
                         {print} 'Iru al la stacidomo je la 10a horo'
                      ```
+    sleep_command:
+        levels: {}
     songs:
         name: Kantu!
         default_save_name: Kanto
@@ -1122,9 +1175,9 @@ adventures:
                 example_code_2: |
                     ```
                     direction {is} {ask} 'Do you want to go left, right, or straight ahead?'
-                    if direction is left turn _
-                    if direction is right turn _
-                    forward 100
+                    {if} direction {is} left {turn} _
+                    {if} direction {is} right {turn} _
+                    {forward} 100
                     ```
             7:
                 story_text: |
@@ -1164,3 +1217,9 @@ adventures:
                     Ankaŭ ni nun povas plibonigi la programon, kiu desegnas malsamajn figurojn.
                     Ĉu vi povas eltrovi kiom malproksimen la testudo devas turni ĉi tien? Finu la kodon kaj vi povas desegni ajnan plurangulon, kiun vi ŝatus!
                 example_code_2: "```\nanguloj = {ask} 'Kiom da anguloj mi desegnu?'\nangulo = 360 / anguloj \n{repeat} anguloj {times}\n    {turn} _\n    {forward} _\n```\n"
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}
+    years:
+        levels: {}

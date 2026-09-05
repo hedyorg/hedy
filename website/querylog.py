@@ -222,7 +222,7 @@ def emergency_shutdown():
 
 
 def dtfmt(timestamp):
-    dt = datetime.datetime.utcfromtimestamp(timestamp)
+    dt = datetime.datetime.fromtimestamp(timestamp, datetime.UTC)
     return dt.isoformat() + "Z"
 
 

@@ -1,18 +1,17 @@
 1:
--   name: print
-    explanation: Εμφάνισε κάτι με την `print`.
-    demo_code: print Γεια, καλωσήλθες στη Hedy!
--   name: ask
-    explanation: Ρώτησε κάτι με την `ask`.
-    demo_code: ask Ποιο είναι το αγαπημένο σου χρώμα;
--   name: echo
-    explanation: Eπανάλαβε κάτι χρησιμοποιώντας την `{echo}`.
+-   name: {print}
+    explanation: Εμφάνισε κάτι με την `{print}`.
+    demo_code: |-
+        {print} Γεια, καλωσήλθες στη Hedy!
+-   name: {ask}
+    explanation: Ρώτησε κάτι με την `{ask}`.
     demo_code: |-
         {ask} Ποιο είναι το αγαπημένο σου χρώμα;
-        {echo} ώστε το αγαπημένο σου χρώμα είναι το
--   name: '{print} emojis'
-    explanation: εμφάνιση ενός emoji με `{print}`
-    demo_code: '{print} 🙋 🌍 ❗'
+-   name: {answer}
+    explanation: Eπανάλαβε κάτι χρησιμοποιώντας την `{answer}`.
+    demo_code: |-
+        {ask} Ποιο είναι το αγαπημένο σου χρώμα;
+        {print} ώστε το αγαπημένο σου χρώμα είναι το {answer}
 -   name: '{forward}'
     explanation: Σχεδίασε μια γραμμή με `{forward}`.
     demo_code: '{forward} 100'
@@ -29,25 +28,10 @@
     demo_code: |-
         name is Hedy
         print καλωσήλθες name
--   name: '{ask}'
-    explanation: Ρώτησε κάτι με την `ask`. Πρόσεξε! Πρέπει να δώσεις στην απάντηση ένα όνομα με την `is`.
-    demo_code: |-
-        color {is} {ask} Ποιο είναι το αγαπημένο σου χρώμα;
-        print το color είναι το αγαπημένο σου!
 -   name: '{sleep}'
     explanation: Ας κάνουμε τη Hedy να σταματήσει για (λίγα) δευτερόλεπτα.
     demo_code: |-
-        {print} Άσε με να σκεφτώ για ένα δευτερόλεπτο...
-        {sleep}
-        {print} Χμμ.. Χρειάζομαι ακόμα 3 more δευτερόλεπτα...
         {sleep} 3
-        {print} Εύρηκα! Το έχω!
--   name: is - turtle
-    explanation: Δώσε ένα όνομα σε έναν αριθμό με την  `{is}`. Μπορείς να επιλέξεις ένα δικό σου όνομα.
-    demo_code: |-
-        angle {is} 90
-        {turn} angle
-        {forward} 100
 3:
 -   name: choose_random
     explanation: Επίλεξε μια τυχαία λέξη από μια ομάδα με τις `{at}` και `{random}`
@@ -65,303 +49,64 @@
         animals {is} γάτα, σκύλος, αγελάδα
         {remove} σκύλος {from} animals
 4:
--   name: print
+-   name: {print}
     explanation: Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά
-    demo_code: print 'Γειά, καλωσήλθες στη Hedy.'
--   name: is
-    explanation: Δώσε ένα όνομα σε κάποιο κείμενο και εμφάνισε με την `print` χωρίς εισαγωγικά
     demo_code: |-
-        name is Hedy
-        print 'Το όνομά μου είναι ' name
--   name: ask
-    explanation: Ρώτησε κάτι με την `ask`.
+        {print} 'Γειά, καλωσήλθες στη Hedy.'
+-   name: {is}
+    explanation: Δώσε ένα όνομα σε κάποιο κείμενο και εμφάνισε με την `{print}` χωρίς εισαγωγικά
     demo_code: |-
-        color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;?'
-        print 'το ' color ' είναι το αγαπημένο σου!'
-5:
--   name: print
-    explanation: Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά
-    demo_code: print 'Γειά, καλωσήλθες στη Hedy.'
--   name: ask
-    explanation: Ρώτησε κάτι με την `ask`.
-    demo_code: |-
-        color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
-        print 'το ' color ' είναι το αγαπημένο σου!'
--   name: if
-    explanation: Κάνε μια επιλογή με την `if`
-    demo_code: |-
-        color is ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
-        if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
--   name: '{if} με χελώνα'
-    explanation: Κάνε μια επιλογή με `{if}`
-    demo_code: |-
-        answer {is} {ask} 'Πόσο μακρυά πρέπει να περπατήσω;'
-        {if} answer {is} far {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Έλεγξε τα στοιχεία με `{in}`
-    demo_code: |-
-        pretty_colors {is} πράσινο, κίτρινο
-        color {is} {ask} 'Ποιο είναι το αγαπημένο σου χρώμα;'
-        {if} color {in} pretty_colors {print} 'ωραίο!' {else} {print} 'ωχ'
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''You pressed A!'' {else} {print} ''You pressed another key!'''
-6:
--   name: print
-    explanation: Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά
-    demo_code: print '5 επί 5 είναι ' 5 * 5
--   name: Οι `ask` και `if` με υπολογισμούς
-    explanation: Ρώτησε σχετικά με έναν υπολογισμό και έλεγξε ότι είναι σωστός.
-    demo_code: |-
-        answer = ask 'Πόσο είναι 10 + 10;'
-        if answer is 20 print 'Ναι!' else print 'Ουπς'
--   name: '`ask` and `if` turtle'
-    explanation: Ask the user how many angles they want
-    demo_code: |-
-        angles = ask 'How many angles?'
-        angle = 360 / angles
-        forward 50
-7:
--   name: print
-    explanation: Εμφάνισε κάτι ακριβώς, χρησιμοποιώντας εισαγωγικά
-    demo_code: print 'Γειά, καλωσήλθες στη Hedy.'
--   name: ask
-    explanation: Ρώτησε κάτι με την `ask`.
-    demo_code: |-
-        color = ask 'Ποιό είναι το αγαπημένο σου χρώμα;?'
-        print 'το ' color ' είναι το αγαπημένο σου!'
--   name: if
-    explanation: Κάνε μια επιλογή με την `if`
-    demo_code: |-
-        color = ask 'Ποιό είναι το αγαπημένο σου χρώμα;'
-        if color is green print 'όμορφο!' else print 'έτσι κι έτσι'
--   name: repeat - turtle
-    explanation: Repeat a line of code with `repeat`.
-    demo_code: repeat 3 times forward 10
-8:
--   name: print
-    explanation: Εμφάνισε κάτι. Θυμήσου να χρησιμοποιήσεις εισαγωγικά για ακριβή εμφάνιση.
-    demo_code: print '5 επί 5 ίσον με ' 5 * 5
--   name: Η `if` με πολλαπλές γραμμές
-    explanation: Ρώτησε την απάντηση σε ένα άθροισμα και έλεγξε αν είναι σωστή. Μπορούμε τώρα να εμφανίσουμε 2 γραμμές.
-    demo_code: |-
-        answer = ask 'Πόσο είναι 5 συν 5;'
-        if answer is 10
-            print 'Μπράβο!'
-            print 'Πράγματι, η απάντηση ήταν ' answer
-        else
-            print 'Ουπς!'
-            print 'Η απάντηση είναι 10'
--   name: '`{repeat}` με χελώνα'
-    explanation: '{repeat} πολλές γραμμές'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Check whether a given key on the keyboard is `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'You pressed A!'
-        {else}
-            {print} 'You pressed another key!'
-9:
--   name: '`{if}` with multiple lines'
-    explanation: The answer of a sum of questions with '{ask}' and see if it is correct. Now we print out two lines.
-    demo_code: |-
-        answer = {ask} 'What is 20 plus 20?'
-        {if} answer {is} 20
-            {print} 'Well done!!'
-            {print} 'The answer is indeed' answer
-        else
-            {print} 'Wrong'
-            {print} 'The answer is 20'
--   name: '`{repeat}` and turtle'
-    explanation: '{repeat} multiple lines'
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
-10:
--   name: '{print}'
-    explanation: print something. Remember to use a quotation mark for literal printing.
-    demo_code: '{print} ''5 times 5 is '' 5 * 5'
--   name: '{for} with a list'
-    explanation: print all things in a list
-    demo_code: |-
-        animals {is} dog, cat, blobfish
-        {for} animal {in} animals
-          {print} 'I love ' animal
-11:
--   name: repeat
-    explanation: αντικαθιστούμε τη `repeat` με τη `for`
-    demo_code: |-
-        {for} counter {in} {range} 1 {to} 5
-            {print} counter
--   name: '{ask}'
-    explanation: ζήτα μια απάντηση για ένα  άθροισμα  και έλεγξε αν είναι σωστή. Μπορείς τώρα να εμφανίσεις 2 γραμμές.
-    demo_code: |-
-        answer = {ask} 'Πόσο κάνει 5 και 5;'
-        {if} answer {is} 10
-            {print} 'Πολύ σωστά!'
-            {print} 'Πράγματι, η απάντηση ήταν  ' answer
-        else
-            {print} 'Λάθος!'
-            {print} 'Η απάντηση είναι 10'
-12:
--   name: float directly
-    explanation: Calculation with decimals
-    demo_code: |-
-        print 'Calculate away!'
-        print 'Two and a half plus two and a half is...'
-        print 2.5 + 2.5
--   name: float in var
-    explanation: Storing a calculation with decimals
-    demo_code: |-
-        name = 'Hedy τοΡομπότ'
-        {print} 'Γεια ' name
--   name: εισαγωγικά μετά μια σύγκριση {if}
-    explanation: Κείμενο σε εισαγωγικά μετά το {if}
-    demo_code: |-
-        name = {ask} 'Ποιος είσαι;'
-        {if} name = 'Hedy'
-            {print} 'Γεια σου!'
--   name: εισαγωγικά σε λίστα
-    explanation: Μια λίστα με εισαγωγικά
-    demo_code: |-
-        superheroes = 'Iron Man', 'Batman', 'Superman'
-        {print} superheroes {at} {random}
+        name {is} Hedy
+        {print} 'Το όνομά μου είναι ' name
 13:
--   name: Και
-    explanation: Και οι δύο προτάσεις (αριστερά και δεξιά από το `and`) πρέπει να είναι αληθείς.
-    demo_code: |-
-        answer1 = ask 'Πόσο κάνει 3+2;'
-        answer2 = ask 'Πόσο κάνει 2+2;'
-        if answer1 is 5 and answer2 is 4
-            print 'Και οι δύο απαντήσεις είναι σωστές!'
-        else
-            print 'Τουλάχιστον μια απάντηση είναι λανθασμένη!'
--   name: Ή
-    explanation: '`Or` Τουλάχιστον 1 από τις προτάσεις αριστερά και δεξιά από το `or`, οφείλει να είναι αληθής, αν και οι δύο είναι σωστές και αυτό είναι μια χαρά.'
-    demo_code: |-
-        answer1 = ask 'Πόσο κάνει 3+2;'
-        answer2 = ask 'Πόσο κάνει 2+2;'
-        if answer1 is 5 or answer2 is 4
-            print 'Τουλάχιστον μία απάντηση είναι σωστή!'
-        else
-            print 'Και οι δύο απαντήσεις είναι λανθασμένες!'
-14:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Μικρότερο
     explanation: Χρησιμοποιούμε το `<` για να ελέγξουμε αν ο πρώτος αριθμός είναι μικρότερος από το δεύτερο αριθμό. Για παράδειγμα, αν θέλουμε να δούμε αν μια μεταβλητή είναι μικρότερη από 15, χρησιμοποιούμε `variable < 15`
     demo_code: |-
-        age = ask 'Πόσο χρονών είσαι;'
-        if age < 13
-            print 'Είσαι νεότερη από εμένα!'
+        age = {input}('Πόσο χρονών είσαι;')
+        {if} age < 13:
+            {print}('Είσαι νεότερη από εμένα!')
 -   name: Μεγαλύτερο
     explanation: Χρησιμοποιούμε το `>` για να ελέγξουμε αν ο πρώτος αριθμός είναι μεγαλύτερος από το δεύτερο αριθμό. Για παράδειγμα, αν θέλουμε να δούμε αν μια μεταβλητή είναι μεγαλύτερη από 15, χρησιμοποιούμε `variable > 15`
     demo_code: |-
-        age = ask 'Πόσο χρονών είσαι;'
-        if age > 13
-            print 'Είσαι μεγαλύτερη από εμένα!'
+        age = {input}('Πόσο χρονών είσαι;')
+        {if} age > 13:
+            {print}('Είσαι μεγαλύτερη από εμένα!')
 -   name: Ισότητα
     explanation: Χρησιμοποιούμε το σύμβολο  `==` για να ελέγξουμε αν 2 πράματα είναι ίδια.
     demo_code: |-
-        answer = {ask} 'Πόσο κάνει 5 x 5;'
-        {if} answer == 25
-            {print} 'Πολύ σωστά!'
+        answer = {input}('Πόσο κάνει 5 x 5;')
+        {if} answer == 25:
+            {print}('Πολύ σωστά!')
 -   name: Ανισότητα
     explanation: Χρησιμοποιούμε το σύμβολο  `!=` για να ελέγξουμε αν δυο πράγματα δεν είναι ίδια.
     demo_code: |-
-        answer = {ask} 'Πόσο κάνει 5 x 5;'
-        {if} answer != 25
-            {print} 'Δεν είναι σωστό!'
+        answer = {input}('Πόσο κάνει 5 x 5;')
+        {if} answer != 25:
+            {print}('Δεν είναι σωστό!')
 -   name: Μικρότερο ή ίσο
     explanation: We use the `<=` to check if the first number is smaller than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age <= 12
-            {print} 'You are younger than me!'
 -   name: Bigger or equal
-    explanation: We use the `>=` to check if the first number is bigger than or equal to the second number.
-    demo_code: |-
-        age = {ask} 'How old are you?'
-        {if} age >= 14
-            {print} 'You are older than me!'
-15:
--   name: Boolean while
-    explanation: Μπορούμε να χρησιμοποιήσουμε το βρόχο `while` με το `True` και `False`
-    demo_code: |-
-        answer = 0
-        while answer != 25
-            answer = ask 'Πόσο κάνει 5 φορές το 5;'
-        print 'Δόθηκε η σωστή απάντηση'
--   name: Μικρότερο while
-    explanation: Μπορούμε επίσης να χρησιμοποιήσουμε το βρόχο `while` με το `<` και το `>`. Προσοχή όμως, θα χρειαστεί να αλλάζετε τον αριθμό ώστε να τελειώσει ο βρόχος. Το κάνουμε αυτό με το count = count + 1.
-    demo_code: |-
-        count = 1
-        while count < 3
-            print 'Το κάνουμε αυτό ' 3 - count ' ακόμα φορές'
-            count = count + 1
-        print 'Τελειώσαμε'
-16:
--   name: Αγκύλες γύρω από λίστες
+14:
+-   name: 'creating a list'
     explanation: Θα βάλουμε αγκύλες γύρω από τις λίστες! Επίσης θα πρέπει να βάλουμε μονά εισαγωγικά (') γύρω από κάθε αντικείμενο στις λίστες.
     demo_code: |-
         fruit = ['μήλο', 'μπανάνα', 'κεράσι']
-        print fruit
--   name: Πάρε ένα αντικείμενο από μία λίστα
-    explanation: Για να πάρουμε ένα αντικείμενο από μια λίστα χρησιμοποιούμε [αριθμός] έτσι fruit[1] σημαίνει, πάρε το πρώτο φρούτο από τη λίστα!
+16:
+-   name: '{while}'
     demo_code: |-
-        fruit = ['μήλο', 'μπανάνα', 'κεράσι']
-        firstfruit = fruit[1]
-        print firstfruit
--   name: Πάρε ένα τυχαίο αντικείμενο από μία λίστα
-    explanation: Για να πάρουμε ένα τυχαίο αντικείμενο από τη λίστα χρησιμοποιούμε [random] έτσι fruit[random] σημαίνει, πάρε ένα τυχαίο φρούτο από τη λίστα!
+        answer = 0
+        {while} answer != 25:
+            answer = {input}('Πόσο κάνει 5 φορές το 5;')
+        {print}('Δόθηκε η σωστή απάντηση')
+-   name: Μικρότερο {while}
+    explanation: Μπορούμε επίσης να χρησιμοποιήσουμε το βρόχο `{while}` με το `<` και το `>`. Προσοχή όμως, θα χρειαστεί να αλλάζετε τον αριθμό ώστε να τελειώσει ο βρόχος. Το κάνουμε αυτό με το count = count + 1.
     demo_code: |-
-        fruit = ['μήλο', 'μπανάνα', 'κεράσι']
-        random_fruit = fruit[random]
-        print random_fruit
-17:
--   name: 'for με :'
-    explanation: Όταν χρησιμοποιούμε μια `for`, πρέπει να προσθέσουμε ένα `:` ύστερα από τη δήλωση `for`!
-    demo_code: |-
-        a = 2
-        {if} a == 1:
-            {print} 'a είναι 1'
-        {elif} a == 2:
-            {print} 'a είναι 2'
-        {else}:
-            {print} 'a δεν είναι 1 ή 2'
--   name: 'if με :'
-    explanation: Θα πρέπει να κάνουμε το ίδιο με όλες μας τις δηλώσεις `if`
-    demo_code: |-
-        {for} i {in} {range} 1 {to} 12:
-            {print} i
-        {print} 'Έτοιμος ή όχι, έρχομαι!'
--   name: (Προαιρετικό) elif
-    explanation: 'Θα σου δείξουμε μια νέα εντολή που επιτρέπεται να χρησιμοποιείς: την `elif`. H `elif` σημαίνει "else if" ( αλλιώς αν ). Θα ξεκινήσουμε ελέγχοντας αν η `if` είναι αληθής. Αν αυτή δεν είναι αληθής, ελέγχουμε την `elif` και αν επίσης δεν είναι αληθής, πηγαίνουμε στην `else`.'
-    demo_code: |-
-        colour = {ask} 'Ποιο είναι το αγαπημένο σου χρώμα;'
-        {if} colour == 'πράσινο':
-            {print} 'Το αγαπημένο σου χρώμα είναι πράσινο'
-        {else}:
-            {print} 'Το αγαπημένο σου χρώμα δεν είναι πράσινο'
-18:
--   name: '{print}'
-    explanation: With `{print}` you need to use parentheses
-    demo_code: '{print}(''hi!'')'
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: '{print} with var'
-    explanation: With `{print}` you need to use parentheses and commas if you {print} more items
-    demo_code: |-
-        name = 'Hedy'
-        {print}('my name is ', name)
--   name: ask something with {input}
-    explanation: Use `{input}` instead of `{ask}` to ask something
-    demo_code: |-
-        name = {input}('What is your name?')
-        {print}('So your name is ', name)
+        count = 1
+        {while} count < 3:
+            {print} ('Το κάνουμε αυτό ', 3 - count, ' ακόμα φορές')
+            count = count + 1
+        {print}('Τελειώσαμε')

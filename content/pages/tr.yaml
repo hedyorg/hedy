@@ -51,8 +51,8 @@ join-sections:
         Hedy, öğretmenlerin sınıfta programlama dersleri vermelerini desteklemek için tasarlanmıştır. Bir sınıf oluşturma, onu özelleştirme ve öğrencilerinizin neler yaptığını görme seçeneği gibi belirli öğretmen özelliklerine sahibiz.
         Hedy'yi beğendiyseniz, öğretmenlerin başlamasına yardımcı olmak için tanıdığınız okullara ulaşabilirsiniz! <a href="https://discord.gg/8yY7dEme9r" target="_blank">Discord</a> aracılığı ile okul veya öğretmen bulmanıza yardımcı olabiliriz.
 learn-more-sections:
--   text: "Hedy, Hedy Vakfı (Stichting Hedy) tarafından desteklenmektedir. Sportmanstaat 8, 2341 JG Oegstgeest, Hollanda Ticaret Odası numarası 94013985.\n\nVakfın yönetim kurulu şu kişilerden oluşmaktadır:\n\n *Felienne Hermans**, başkan\n *Eelko Huizing**, mali işler\n *Renée Merbis**, sekreter\n\nStichting Hedy yönetim kurulu, görevleri için herhangi bir maddi karşılık almamaktadır. "
-    title: Hedy Vakfı
+-   title: Hedy Vakfı
+    text: "Hedy, Hedy Vakfı (Stichting Hedy) tarafından desteklenmektedir. Sportmanstaat 8, 2341 JG Oegstgeest, Hollanda Ticaret Odası numarası 94013985.\n\nVakfın yönetim kurulu şu kişilerden oluşmaktadır:\n\n *Felienne Hermans**, başkan\n *Eelko Huizing**, mali işler\n *Renée Merbis**, sekreter\n\nStichting Hedy yönetim kurulu, görevleri için herhangi bir maddi karşılık almamaktadır. "
 -   title: Derin bir dalış!
     text: |-
         Hedy'nin felsefesi ve tasarımı hakkında daha fazla bilgi edinmek ister misiniz? Felienne'in 2022'de StrangeLoop Konferansında yaptığı bu konuşmaya göz atın:
@@ -194,24 +194,6 @@ teacher-guide:
                 solution_code: |-
                     {ask} Kodum şimdi neden çalışıyor?
                     {print} Çünkü büyük harfleri kaldırdım!
-        -   title: Öğrenciler yakıla'yı sor olmadan kullanmış olabilir
-            example:
-                error_text: Bu seviyede, yankıla komutu bir sor komutundan sonra alınan cevabı tekrarlamak için yapıldı. sor komutu olmadan yankıla hiçbir şey yapmaz.
-                error_code: "{echo} Senin ismin"
-                solution_text: Kodun çalışabilmesi için bir sor komutu ekleyin.
-                solution_code: |-
-                    {ask} Adınız nedir?
-                    {echo} Demek adınız
-        -   title: Öğrenciler yankılanan kelimelerin (değişken) bir cümlenin ortasında olmasını istiyorlar
-            example:
-                error_text: Ve bunda haklılar! İşte bu yüzden değişkenleri kullanmayı öğrenecekler, ama bir sonraki seviyede.
-                error_code: |-
-                    {ask} En eğlenceli programlama dili hangisidir?
-                    {echo} dili en iyisidir!
-                solution_text: "1. seviye için bunu şu şekilde kullanmak gerekiyor:"
-                solution_code: |-
-                    {ask} En eğlenceli programlama dili hangisidir?
-                    {echo} En iyi olan dil...
         -   title: "Kaplumbağa: Öğrenciler kaplumbağanın ekrandan çıkıp gitmesine sebep olmuştur"
             example:
                 error_text: Genellikle öğrenciler kaplumbağayı kullanırken büyük sayıları denemeyi severler, ama bu onun ekrandan çıkmasına neden olur.

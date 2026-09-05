@@ -12,13 +12,12 @@ adventures:
 
                     אחרי השורה הראשונה, כתוב `{print}`   אם צריך להדפיס את המשפט
 
-                    השתמשו ב `{echo}`  אם אתם רוצים שהדמות הראשית תהיה בסוף המשפט
+                    השתמשו ב `{answer}`  אם אתם רוצים שהדמות הראשית תהיה בסוף המשפט
                 example_code: |
                     ```
-                    {ask} הדמות הראשית בסיפור היא 
-
+                    {ask} הדמות הראשית בסיפור היא
                     {print}  גיבור הסיפור הולך לטיול ביער
-                    {echo}  הוא קצת מפחד,
+                    {print}  הוא קצת מפחד,{answer}
                     {print}  הוא שומע קולות מפחידים בכל עבר
                     {print}  הוא מפחד שהיער רדוף רוחות
                     ```
@@ -26,7 +25,7 @@ adventures:
                     ### תרגול
                     עכשיו תצרו סיפור משלכם עם  6 שורות קוד לפחות
                     הסיפור לא יהיה זהה לדוגמא
-                    השתמשו בפקודת `{ask}` ופקודת `{echo}`
+                    השתמשו בפקודת `{ask}` ופקודת `{answer}`
                     הסיפור יהיה על איזה נושא שאתם בוחרים
                     אם קשה לכם לבחור נושא, השתמשו באחת מאלו: ללכת לסרט, משחק ספורט, או יום בגן חיות
             2:
@@ -45,15 +44,6 @@ adventures:
                     {sleep}
                     {print} שם מפחד שהיער רדוף רוחות
                     ```
-                story_text_2: |
-                    ### תרגיל
-                    עכשיו הזמן להוסיף משתנים לסיפור שהכנת ברמה הקודמת.
-                    לך ל'תוכניות שלי', חפש את הסיפור שלך ברמה 1 והעתק את הקוד משם. הדבק אותו באזור כתיבת הקוד ברמה הזאת.
-
-                    הקוד שהעתקת לא יעבוד ברמה הזאת עדיין, כי עדיין לא השתמשת במשתנים.
-                    שנה את הפקודה `{ask}` ואת הפקודה `{echo}` בקוד שלך, בהתאם למה שלמדת ברמה הזאת.
-
-                    **בונוס** הוסף את הפקודה `{sleep}` לקוד שלך כדי לבנות מתח בסיפור.
             3:
                 story_text: |
                     בשלב 3 תוכל להפוך את הסיפור שלך למהנה יותר. תוכל להשתמש באקראיות עבור כל מפלצת, חיה או מכשול אחר, כמו זה:
@@ -201,8 +191,57 @@ adventures:
                     חיות = _ , _ , _ 
                     {print} 'דוב חום, דוב חום'
                     {print} 'מה אתה רואה?'
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
     ask_command:
         description: הצגת הפקודה {ask}
+        levels: {}
+    calculator:
+        levels: {}
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
+    dice:
+        levels: {}
+    dishes:
+        levels: {}
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
+    fortune:
+        levels: {}
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
+    haunted:
+        levels: {}
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
+    is_command:
+        levels: {}
+    language:
+        levels: {}
+    maths:
+        levels: {}
+    music:
+        levels: {}
     parrot:
         name: תוכי
         default_save_name: תוכי
@@ -215,8 +254,8 @@ adventures:
                     ```
                     {print} אני הֶדִי התוכי
                     {ask} מה שמך?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Exercise
@@ -268,3 +307,38 @@ adventures:
                     {if} מילה_שנאמרה {is} מילה_חדשה {print} '🧒עבודה טובה, הֶדִי! 🍪'
                     {else} {print} '🧒 לא, הֶדִי! תגידי ' מילה_חדשה
                     ```
+    piggybank:
+        levels: {}
+
+    print_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    restaurant:
+        levels: {}
+    rock:
+        levels: {}
+    secret:
+        levels: {}
+    sleep_command:
+        levels: {}
+    songs:
+        levels: {}
+    songs_2:
+        levels: {}
+    turtle:
+        levels: {}
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}
+    years:
+        levels: {}

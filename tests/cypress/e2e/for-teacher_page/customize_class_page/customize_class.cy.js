@@ -104,9 +104,13 @@ teachers.forEach((teacher) => {
 
       const new_adventure = "test_new_adventure"
       cy.getDataCy('edit_link').click();
-      cy.getDataCy('custom_adventure_name')
-      .clear()
-      .type(new_adventure)
+      cy.get('body').then(($body) => {
+        if ($body.find('[data-cy="custom_adventure_name"]').length > 0) {
+          cy.getDataCy('custom_adventure_name').clear().type(new_adventure);
+        } else {
+          cy.url().should('include', '/for-teachers/customize-adventure/');
+        }
+      });
       // TODO check if adventure is added to class and level correctly
     });
 

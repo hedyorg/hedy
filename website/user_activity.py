@@ -9,7 +9,7 @@ from website.auth import requires_login, is_teacher
 
 from .database import Database
 from .website_module import WebsiteModule, route
-import utils
+import envs
 
 from website import s3_logger
 
@@ -18,7 +18,8 @@ invite_length = config["session"]["invite_length"] * 60
 
 
 # Add LOG_USER_ACTIVITY=True to your env. to log the data for testing
-if utils.is_heroku():
+
+if envs.current_env().cloud_services:
     logger = s3_logger.S3Logger(name="activity", config_key="s3-activity-logs")
 elif os.getenv("LOG_USER_ACTIVITY"):
     logger = s3_logger.FileLogger()

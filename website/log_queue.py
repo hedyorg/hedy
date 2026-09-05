@@ -50,6 +50,9 @@ class LogQueue:
         with self.mutex:
             self.records_queue[bucket].append(data)
 
+    def clear(self):
+        self.records_queue = collections.defaultdict(list)
+
     def set_transmitter(self, transmitter):
         """Configure a function that will be called for every set of records.
 

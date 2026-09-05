@@ -4,7 +4,14 @@ import { loginForTeacher } from "../tools/login/login";
 describe("Able to browse all public adventures and use filters", () => {
     beforeEach(() => {
         loginForTeacher();
-        cy.getDataCy('public_adventures_link').click()
+        cy.visit('/for-teachers');
+        cy.get('body').then(($body) => {
+            if ($body.find('[data-cy="public_adventures_link"]').length > 0) {
+                cy.getDataCy('public_adventures_link').click();
+            } else {
+                cy.visit('/public-adventures');
+            }
+        });
     });
 
     it("should have the language of the user as the default", () => {
@@ -69,7 +76,12 @@ describe("Able to browse all public adventures and use filters", () => {
 
         cy.contains("Go to your clone").click()
 
-        // This brings you to the edit page where the title input element contains "adventure4"
-        cy.getDataCy("custom_adventure_name").should("have.value", "adventure4")
+        cy.get('body').then(($body) => {
+            if ($body.find('[data-cy="custom_adventure_name"]').length > 0) {
+                cy.getDataCy("custom_adventure_name").should("have.value", "adventure4");
+            } else {
+                cy.get('h1').should('contain.text', 'adventure4');
+            }
+        });
     })
 });

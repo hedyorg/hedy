@@ -4,8 +4,9 @@ import { initializeMyProfilePage, InitializeMyProfilePage } from './profile';
 import { initializeApp, initializeCodePage, InitializeCodePageOptions, initializeViewProgramPage, InitializeViewProgramPageOptions } from './app';
 import { initializeFormSubmits } from './auth';
 import { setClientMessageLanguage } from './client-messages';
+import { FeatureFlags, FrontendEnvironment, initializeFeatureFlags } from './feature-flags';
 import { logs } from './logs';
-import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeAllClassesPageOptions, initializeAllClassesPage, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage, InitializeGradePageOptions, initializeGradePage } from './teachers';
+import { initializeClassOverviewPage, InitializeClassOverviewPageOptions, initializeCustomizeClassPage, InitializeCustomizeClassPageOptions, initializeConfigureClassPage, InitializeConfigureClassPageOptions, initializeCustomizeLevelPage, InitializeCustomizeLevelPageOptions, initializeTeacherPage, InitializeTeacherPageOptions, initializeCreateAccountsPage, InitializeCreateAccountsPageOptions, InitializeContextMenuPageOptions, initializeContextMenuEventHandler, InitializeClassPerformanceGraphPageOptions, initializePerformanceGraphPage, InitializeGradePageOptions, initializeGradePage } from './teachers';
 
 export interface InitializeOptions {
   /**
@@ -44,12 +45,17 @@ export interface InitializeOptions {
    */
   readonly staticRoot?: string;
 
+  readonly environment?: FrontendEnvironment;
+
+  readonly featureFlags?: FeatureFlags;
+
   readonly javascriptPageOptions?: InitializePageOptions;
 }
 
 type InitializePageOptions =
   | InitializeCodePageOptions
   | InitializeCustomizeClassPageOptions
+  | InitializeConfigureClassPageOptions
   | InitializeTeacherPageOptions
   | InitializeCreateAccountsPageOptions
   | InitializeViewProgramPageOptions
@@ -57,9 +63,10 @@ type InitializePageOptions =
   | InitializeAdminUsersPageOptions
   | InitializeCustomizeAdventurePage
   | InitializeMyProfilePage
-  | InitializeAllClassesPageOptions
+  | InitializeContextMenuPageOptions
   | InitializeClassPerformanceGraphPageOptions
   | InitializeGradePageOptions
+  | InitializeCustomizeLevelPageOptions
   ;
 
 
@@ -68,6 +75,7 @@ type InitializePageOptions =
  */
 export function initialize(options: InitializeOptions) {
   setClientMessageLanguage(options.lang);
+  initializeFeatureFlags(options.featureFlags, options.environment);
 
   let level = options.level;
 
@@ -91,6 +99,14 @@ export function initialize(options: InitializeOptions) {
 
     case 'customize-class':
       initializeCustomizeClassPage(options.javascriptPageOptions);
+      break;
+
+    case 'customize-level':
+      initializeCustomizeLevelPage(options.javascriptPageOptions);
+      break;
+
+    case 'configure-class':
+      initializeConfigureClassPage(options.javascriptPageOptions);
       break;
 
     case 'for-teachers':
@@ -121,7 +137,9 @@ export function initialize(options: InitializeOptions) {
       initializeMyProfilePage(options.javascriptPageOptions);
       break;
     case 'classes':
-      initializeAllClassesPage(options.javascriptPageOptions);
+    case 'manage-students':
+    case 'my-adventures':
+      initializeContextMenuEventHandler(options.javascriptPageOptions);
       break;
     
     case 'performance-graph':

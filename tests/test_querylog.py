@@ -1,13 +1,18 @@
 import unittest
+from .lock import Lock
 
 from website import log_queue, querylog
+
+lock = Lock()
 
 
 class TestQueryLog(unittest.TestCase):
     def setUp(self):
         self.records = []
         querylog.LOG_QUEUE.set_transmitter(self._fake_transmitter)
+        querylog.LOG_QUEUE.clear()
 
+    @lock.synchronized
     def _fake_transmitter(self, ts, records):
         self.records.extend(records)
 

@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import pickle
 import hashlib
 import hedy
-import hedy_translation
+import hedy.translation as hedy_translation
 import re
 import sys
 import io
@@ -12,18 +12,17 @@ import os
 from contextlib import contextmanager
 import inspect
 import unittest
-import utils
 import typing
-from hedy_content import ALL_KEYWORD_LANGUAGES, KEYWORDS
+from hedy.content import ALL_KEYWORD_LANGUAGES, KEYWORDS
 
-from hedy_sourcemap import SourceRange
+from hedy.sourcemap import SourceRange
 from functools import cache
 
-from app import create_app
-from hedy_error import get_error_text
-from flask_babel import force_locale
+from hedy.error import get_error_text
+import hedy
 
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(hedy.__file__)))
+HEDY_PACKAGE_DIR = os.path.dirname(os.path.abspath(hedy.__file__))
 
 
 class Snippet:
@@ -101,19 +100,19 @@ class YamlSnippet:
 class SkippedMapping:
     """ Class used to test if a certain source mapping contains an exception type """
 
-    def __init__(self, source_range: SourceRange, exception_type: type(Exception)):
+    def __init__(self, source_range: SourceRange, exception_type: type[Exception]):
         self.source_range = source_range
         self.exception_type = exception_type
 
 
 @cache
 def get_hedy_source_hash():
-    grammars_dir = os.path.join(ROOT_DIR, 'grammars')
+    grammars_dir = hedy.content.grammars_dir()
 
     files_affecting_parsing = (
         [os.path.join(grammars_dir, filename) for filename in os.listdir(grammars_dir)] +
-        [os.path.join(ROOT_DIR, 'hedy.py')] +
-        [os.path.join(ROOT_DIR, file) for file in os.listdir(ROOT_DIR) if re.fullmatch('hedy_.*\\.py', file)]
+        [os.path.join(HEDY_PACKAGE_DIR, '__init__.py')] +
+        [os.path.join(HEDY_PACKAGE_DIR, file) for file in os.listdir(HEDY_PACKAGE_DIR) if re.fullmatch('.*\\.py', file)]
     )
 
     files_affecting_parsing.sort()
@@ -136,12 +135,16 @@ class HedyTester(unittest.TestCase):
     number_comparison_commands = ['>', '>=', '<', '<=']
     comparison_commands = number_comparison_commands + ['!=']
     arithmetic_operations = ['+', '-', '*', '/']
+    # addition accepts strings, while the others do not
+    # leading to different errors in some tests
+    arithmetic_operations_but_addition = ['-', '*', '/']
     in_not_in_list_commands = ['in', 'not in']
     quotes = ["'", '"']
     booleans = [('true', True), ('True', True), ('false', False), ('False', False)]
-    commands_level_4 = [("print 'hello'", "print(f'hello')"),
-                        ("name is ask 'who?'", "name = input(f'who?')"),
-                        ('name is Harry', "name = 'Harry'")]
+    commands_level_4 = [
+        ("print 'hello'", "print(f'hello')"),
+        ('name is Harry', "name = 'Harry'")
+    ]
 
     @classmethod
     def setUpClass(cls):
@@ -171,10 +174,10 @@ class HedyTester(unittest.TestCase):
 
     @staticmethod
     def run_code(parse_result):
-        code = utils.NORMAL_PREFIX_CODE
+        code = hedy.lang_utils.NORMAL_PREFIX_CODE
 
         if parse_result.has_turtle:
-            code += utils.TURTLE_PREFIX_CODE
+            code += hedy.lang_utils.TURTLE_PREFIX_CODE
 
         code += parse_result.code
         # remove sleep comments to make program execution less slow
@@ -288,6 +291,7 @@ class HedyTester(unittest.TestCase):
 
         all_args = locals()
         del all_args["self"]
+        del all_args["extra_check_function"]
         try:
             # we use pickle instead of hash for consistency across test-runs
             # see PYTHONHASHSEED
@@ -407,7 +411,8 @@ class HedyTester(unittest.TestCase):
             pass
         except OSError:
             return True  # programs with ask cannot be tested with output :(
-        except Exception:
+        except Exception as e:
+            print(e)
             return False
         return True
 
@@ -452,7 +457,7 @@ class HedyTester(unittest.TestCase):
                 {var_name} = input(f'{text}')
                 __ns = get_num_sys({var_name})
                 {var_name} = Value({var_name}, num_sys=__ns)""")
-        elif self.level < 15:
+        elif self.level == 12:
             return textwrap.dedent(f"""\
                 {var_name} = input(f'''{text}''')
                 __ns = get_num_sys({var_name})
@@ -655,12 +660,9 @@ class HedyTester(unittest.TestCase):
         except BaseException:
             location = 'No Location Found'
 
-        # Must run this in the context of the Flask app, because FlaskBabel requires that.
-        with create_app().app_context():
-            with force_locale('en'):
-                error_message = get_error_text(E, 'en')
-                error_message = error_message.replace('<span class="command-highlighted">', '`')
-                error_message = error_message.replace('</span>', '`')
+        error_message = get_error_text(E, 'en')
+        error_message = error_message.replace('<span class="command-highlighted">', '`')
+        error_message = error_message.replace('</span>', '`')
 
         def add_arrow(code):
             """Adds an arrow to the given code snippet on the line that caused the error."""

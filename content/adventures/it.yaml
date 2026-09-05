@@ -9,14 +9,11 @@ adventures:
                     Nel livello 1 puoi creare una storia con un personaggio principale diverso che inserisci tu stesso.
 
                     Nella prima riga, usa `{ask}` e chiedi chi sarà il personaggio principale della storia.
-
-                    Dopo la prima riga, inizia con `{print}`  se la frase deve essere stampata.
-                    Usa `{echo}`  se vuoi che il tuo personaggio principale sia alla fine della frase.
                 example_code: |
                     ```
                     {ask} Il personaggio principale di questa storia è
                     {print} Il personaggio principale ora camminerà nella foresta
-                    {echo} È un po' spaventato,
+                    {print} È un po' spaventato,{answer}
                     {print} Sente rumori terrificanti ovunque
                     {print} Ha paura che questa sia una foresta infestata
                     ```
@@ -24,7 +21,7 @@ adventures:
                     ### Esercizio
                     Ora crea la tua storia di almeno 6 righe di codice.
                     Questa storia non può essere uguale al codice di esempio.
-                    Utilizza almeno un comando `{ask}` e un comando `{echo}`.
+                    Utilizza almeno un comando `{ask}` e un comando `{answer}`.
                     Puoi farlo su qualsiasi argomento che ti piace.
                     Se non riesci a pensare a un argomento, usa una delle nostre scelte: andare al cinema, una partita sportiva o una giornata allo zoo.
             2:
@@ -34,15 +31,6 @@ adventures:
                     Devi programmare un po' di più per quello. Ora devi prima nominare il tuo personaggio principale.
 
                     Puoi quindi inserire quel nome ovunque in una frase.
-                story_text_2: |
-                    ### Esercizio
-                    Ora è il momento di aggiungere variabili alla tua storia che hai creato nel livello precedente.
-                    Vai su 'I miei programmi', cerca la tua avventura storia di livello 1 e copia il codice. Incolla il codice nella schermata di input in questo livello.
-
-                    Questo codice non funzionerà in questo livello perché non hai ancora utilizzato le variabili.
-                    Modifica i comandi `{ask}` e `{echo}` nel tuo codice nella forma corretta che hai imparato in questo livello.
-
-                    **Extra** Aggiungi un comando `{sleep}` al tuo codice per aumentare la tensione nella tua storia.
                 example_code: "```\nnome {is} {ask} Qual è il nome del personaggio principale?\n{print} nome sta per correre nel bosco\n{print} nome è un po' spaventato\n{print} All'improvviso sente un rumore inquietante...\n{sleep}\n{print} nome teme che questa sia un bosco infestato\n```"
             3:
                 story_text: |
@@ -179,22 +167,30 @@ adventures:
             13:
                 example_code: |
                     ```
-                    {print}('Benvenuti in questa storia!')
-                    ```
-                story_text_2: |
-                    ### Esercizio 2
-                    Abbiamo già preparato un `{input}` per te. Innanzitutto, utilizza la variabile `name` nella tua storia.
-                    Quindi aggiungi un secondo `{ask}` e usa anche quella variabile.
-                    Suggerimento: ricorda le virgole in `{print}` tra testo e variabili!
-                example_code_2: |
-                    ```
-                    nome = {input}("Come ti chiami?")
+                    nome = _ 
                     {print}('Benvenuti in questa storia!')
                     ```
                 story_text: "Scriveremo un'altra storia, ma ora dobbiamo usare le parentesi con `{print}`.\n\n### Esercizio 1\nCrea una storia di almeno 5 frasi. Non devi ancora usare 'nome'.\n"
             16:
                 story_text: "Usando la funzione `{while}`  puoi rendere le tue storie più interessanti. Per esempio puoi usare `{while} game == 'on'` in modo da giocare fino alla fine della partita.\nO puoi usare `{while} sword == 'lost'` in modo che il giocatore non possa continuare la partita fino a quando non hanno trovato qualcosa.\n\n###  Esercizio\nIl codice di esempio ti mostra come usare la funzione `{while}`  in una storia. Ora **pensa ad un tuo scenario** in cui il giocatore deve trovare qualcosa per continuare.\n"
                 example_code: "```\nkeys = 'lost'\n{print} 'You are standing in your garden and you have lost your keys.'\n{print} 'Where do you want to look for them?'\n{print} 'You can choose: tree, flowerbed, rock, postbox'\n{while} keys == 'lost'\n    location = {ask} 'Where do you want to look?'\n    {if} location == 'flowerbed'\n        {print} 'Here they are!'\n        keys = 'found'\n    {else}\n        {print} 'Nope they are not at the ' location\n{print} 'Now you can enter the house!'\n```\n"
+            6:
+                story_text: |-
+                    Ora che puoi usare `{elif}` puoi creare una storia ancora più interattiva! Potresti creare più personaggi con diversi tratti per esempio.
+                    Oppure potresti far scegliere al tuo giocatore quale strada prendere, quale porta apire o quale pozione magica bere...
+
+                    ### Esercizio
+                    Crea la tua storia con 3 o più opzioni usando {elif}.
+                example_code: |
+                    ```
+                    personaggio {is}{ask} 'Chi ti aiuterà in questa sfida?'
+                    {if} personaggio {is} 'Daisy'
+                    {print} 'Hai scelto Daisy! Lei è la più intelligente di tutti!'
+                    {elif} personaggio {is} 'Jason'
+                    {print} 'Hai scelto Jason! Lui è il più forte di tutti!'
+                    {elif} personaggio {is} 'Sam'
+                    {print} 'Hai scelto Sam! Lui è il più veloce di tutti!'
+                    ```
     add_remove_command:
         default_save_name: aggiungi_rimuovi_comando
         description: introducendo {add} {to_list} e {remove} {from}
@@ -245,24 +241,6 @@ adventures:
                     ```
                     {print} Ciao!
                     {ask} Come ti chiami?
-                    ```
-                story_text_2: |
-                    ## The  `{echo}` command
-                    If you want the computer to repeat the answer, you can use the `{echo}` command. The answer will then be echoed back at the end of the sentence, so in this example after hello.
-                example_code_2: |
-                    ```
-                    {print} Ciao!
-                    {ask} Come ti chiami?
-                    {echo} ciao
-                    ```
-                story_text_3: |
-                    ### Esercizio
-                    Prova i comandi `{ask}` e `{echo}` . Prima di tutto, riempi i campi vuoti per far funzionare il programna.
-                    Quindi, formula 2 altre domande utilizzando il comando `{ask}` e, dopo ciascun `{ask}`, utilizza  `{echo}` per far visualizzare a schermo la risposta.
-                example_code_3: |
-                    ```
-                    _ Come va?
-                    _
                     ```
             2:
                 story_text: |
@@ -481,10 +459,6 @@ adventures:
                     dishwasher {is} people {at} {random}
                     {if} dishwasher {is} Sophie {print} _ too bad I have to do the dishes _ {else} {print} 'luckily no dishes because' _ 'is already washing up'
                     ```
-    for_command:
-        description: for command
-        levels:
-        default_save_name: per
     fortune:
         name: Indovino
         levels:
@@ -494,7 +468,7 @@ adventures:
                     Allora probabilmente saprai che non possono davvero predire il tuo futuro, ma è comunque divertente giocarci!
 
                     Nei prossimi livelli potrai imparare a creare la tua macchina per predire il futuro!
-                    Nel livello 1 puoi iniziare in modo semplice lasciando che Hedy si presenti come un'indovino e lasci che `{echo}` le risposte dei giocatori.
+                    Nel livello 1 puoi iniziare in modo semplice lasciando che Hedy si presenti come un'indovino e lasci che `{answer}` le risposte dei giocatori.
                     Come questo:
     haunted:
         name: Casa stregata
@@ -515,8 +489,8 @@ adventures:
                     ```
                     {print} Sono Hedy il pappagallo
                     {ask} Come ti chiami?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Esercizio
@@ -527,8 +501,8 @@ adventures:
                     ```
                     {print} Sono Hedy il pappagallo
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     Crea il tuo amico pappagallo che ripeterà ciò che dici!
@@ -616,13 +590,7 @@ adventures:
     rock:
         name: Sasso, carta, forbice
         default_save_name: Rock
-        levels:
-            2:
-                example_code: |-
-                    ```
-                    la scelta {is} rock
-                    {print} Scelgo _
-                    ```
+        levels: {}
     songs:
         name: Canta una canzone!
         levels:
@@ -636,13 +604,6 @@ adventures:
                     {print} 'Prendine uno e passalo in giro'
                     verso = verso - 1
                     {print} versetto 'bottiglie di birra sul muro'
-                    ```
-            11:
-                example_code: |
-                    ```
-                    famiglia = bambino, mamma, papà, nonna, nonno
-                    _ _ _ _
-                      {print}_
                     ```
         default_save_name: Canzone
     turtle:
@@ -663,9 +624,9 @@ adventures:
                 example_code: |
                     ```
                     risposta = 0
-                    {while} risposta != 25
-                        risposta = {ask} 'Quanto fa 5 per 5?'
-                    {print} 'La risposta é corretta'
+                    {while} risposta != 25:
+                        risposta = {input}('Quanto fa 5 per 5?')
+                    {print}('La risposta é corretta')
                     ```
     years:
         name: Anno nuovo
@@ -700,18 +661,10 @@ adventures:
         description: funzioni
         name: funzioni
         default_save_name: funzioni
-    turtle_draw_it:
-        levels:
-            16:
-                story_text_3: "Stella <img src=\"https://github.com/hedyorg/hedy/assets/80678586/17564e0a-63e1-4794-8d41-15ac8c1a5a93\" width=\"150\">\n"
-        name: Disegnalo!
-        default_save_name: Disegnalo
     harry_potter:
         name: Harry Potter
         default_save_name: Harry Potter
         description: Avventure di Harry Potter
-    rock_2:
-        name: Sasso, carta, forbici 2
     in_command:
         name: '{in}'
 

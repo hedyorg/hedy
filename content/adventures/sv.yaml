@@ -9,22 +9,19 @@ adventures:
                     På nivå 1 kan du göra en berättelse där du får ange namnet på huvudkaraktären själv.
 
                     På första raden, använd `{ask}` för att fråga vem huvudkaraktären i din saga ska vara.
-
-                    Efter den första raden, börja med `{print}` om en mening ska skrivas ut på skärmen.
-                    Du använder `{echo}` om du vill att namnet på huvudkaraktären ska vara på slutet av meningen.
                 example_code: |
                     ```
                     {ask} Huvudkaraktären i den här berättelsen är
-                    {print} Huvudkaraktären kommer nu att ta en promenad i skogen
-                    {echo} De är lite rädda,
+                    {print} {answer} kommer nu att ta en promenad i skogen
+                    {print} De är lite rädda, {answer}
                     {print} De hör galna ljud överallt
-                    {print} De är rädda för att detta är en hemsökt skog
+                    {print} {answer} är rädda för att detta är en hemsökt skog
                     ```
                 story_text_2: |
                     ### Övning
                     Gör nu en egen berättelse med minst sex kodrader.
                     Berättelsen får inte vara samma som exempelkoden.
-                    Använd minst ett `{ask}` - och ett `{echo}` -kommando.
+                    Använd minst ett `{ask}` och ett `{answer}`.
                     Du kan göra den om vilket ämne som helst.
                     Om du inte kan komma på något ämne kan du använda ett av våra val: ett biobesök, en sportmatch eller en dag i djurparken.
             2:
@@ -43,15 +40,6 @@ adventures:
                     {sleep}
                     {print} namn är rädd att detta är en hemsökt skog
                     ```
-                story_text_2: |
-                    ### Övning
-                    Dags att lägga till variabler till din egen berättelse som du skapade på föregående nivå.
-                    Gå till 'Mina program', leta efter ditt nivå 1-äventyr och kopiera koden. Klistra in koden på din inmatningsskärm på den här nivån.
-
-                    Den här koden fungerar inte på den här nivån eftersom du inte har använt variabler än.
-                    Ändra kommandona `{ask}` och `{echo}` i din kod till rätt form som du har lärt dig på den här nivån.
-
-                    **Extra** Lägg till ett {sleep}-kommando i din kod för att bygga upp spänningen i berättelsen.
             3:
                 story_text: |
                     I nivå 3 kan du göra din berättelse lite roligare. Du kan använda slumpen för monster, djur, eller annat hinder, så här:
@@ -203,6 +191,12 @@ adventures:
 
                     Titta på <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> berättelsen</a> om du inte känner till den, och se till att den skrivs ut som i boken.
                 example_code: "```\ndjur = _ , _ , _ , _ \n{print} 'Brunbjörn, brunbjörn'\n {print} 'Vad ser du?'\n```\n"
+            13:
+                example_code: |
+                    ```
+                    namn = _
+                    {print}('Välkommen till den här berättelsen!')
+                    ```
             16:
                 story_text: |
                     Med `{while}`-loopen kan du göra dina berättelser mer intressanta. Du kan t.ex. använda `{while} game == 'on'` så att du kan spela tills spelet är slut.
@@ -224,26 +218,6 @@ adventures:
                         {else}
                             {print} 'Nej, de är inte här: ' plats
                     {print} 'Nu kan du gå in i huset!'
-                    ```
-            13:
-                story_text: |
-                    Vi ska skriva ut en annan historia, men nu måste vi använda parenteser med `{print}`.
-
-                    ### Övning 1
-                    Skapa en berättelse med minst fem meningar. Du behöver inte använda 'namn' än.
-                example_code: |
-                    ```
-                    {print}('Välkommen till den här berättelsen!')
-                    ```
-                story_text_2: |
-                    ### Övning 2
-                    Vi har redan förberett en `{input}` åt dig. Använd först variabeln `name` i din berättelse.
-                    Lägg sedan till en andra `{ask}` och använd den variabeln också.
-                    Tips: Kom ihåg kommatecken i en `{print}` mellan text och variabler!
-                example_code_2: |
-                    ```
-                    namn = {input}("Vad heter du?")
-                    {print}('Välkommen till den här berättelsen!')
                     ```
     add_remove_command:
         name: '{add} {to} & {remove} {from}'
@@ -284,6 +258,8 @@ adventures:
                     _
                     {print} Du får en milkshake med smaker {at} {random}
                     ```
+    and_or_command:
+        levels: {}
     ask_command:
         default_save_name: kommandot_fråga
         description: Introduktion till kommandot fråga
@@ -297,50 +273,13 @@ adventures:
                     {print} Hej!
                     {ask} Vad heter du?
                     ```
-                story_text_2: |
-                    ## Kommandot eko
-                    Om du vill att datorn ska upprepa svaret kan du använda kommandot `{echo}`. Tänk på att svaret återges i slutet av meningen, så i det här exemplet efter hej.
-                example_code_2: |
-                    ```
-                    {print} Hej!
-                    {ask} Vad heter du?
-                    {echo} hej
-                    ```
-                story_text_3: |
-                    ### Övning
-                    Prova kommandona `{ask}` och `{echo}`. Fyll först i de tomma fälten för att få programmet att fungera.
-                    Ställ sedan ytterligare två frågor med kommandot `{ask}`. Efter varje `{ask}` använder du ett `{echo}` för att skriva ut svaret på skärmen.
-                example_code_3: |
-                    ```
-                    _ Hur mår du?
-                    _
-                    ```
             2:
-                story_text: |
-                    ## Kommandot fråga
-                    Nu när vi kan använda **variabler** i vår kod behöver vi inte längre kommandot `{echo}`.
-                    Vi kan använda variabler för att lagra svaren på våra frågor och på så sätt kan vi använda svaret på flera frågor i vår kod.
-                    Kolla in det:
-
-                    På så sätt blir din kod interaktiv!
                 example_code: |
                     ```
                     namn {is} {ask} Vad heter du?
                     {print} Hej namn
                     ålder {is} {ask} Hur gammal är du?
                     {print} namn är ålder år gammal.
-                    ```
-                story_text_2: |
-                    ### Övning
-                    I förra fliken övade du på att tilldela variabler med kommandot `{is}`.
-                    Du har skapat minst tre variabler och använt dem med ett print-kommando.
-                    Nu vill vi att du istället för att sätta variablerna gör dem interaktiva, som vi gjorde i vårt exempel.
-
-                    Kopiera din kod från föregående flik och gör variablerna interaktiva med `{ask}`-kommandon.
-                example_code_2: |
-                    ```
-                    favoritdjur is ask Vilket är ditt favoritdjur?
-                    print Jag gillar favoritdjur
                     ```
             13:
                 story_text: |
@@ -438,6 +377,8 @@ adventures:
                     ### Exercise
                     Add the `{while}` loop in the function, ask the player what number_1 times number_2 is and print their answer.
                     Then `{call}` the function.
+    calculator_2:
+        levels: {}
     clear_command:
         default_save_name: kommandot_sudda
         description: kommandot sudda
@@ -446,6 +387,10 @@ adventures:
                 story_text: |
                     Dags för ett nytt kommando! Med `{clear}` kan du sudda all text från utdataskärmen. På så sätt kan du hindra att skärmen blir för full med text.
                     Se upp! Om du använder ett `{clear}`-kommando, så kom ihåg att använda ett `{sleep}` ovanför det. Annars kommer Hedy att sudda skärmen utan att ge dig tid att läsa!
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
     dice:
         name: Tärning
         default_save_name: Tärning
@@ -508,7 +453,10 @@ adventures:
                     poäng = 0
                     kast = val {at} {random}
                     {print} 'du kastade ' kast
-                    {if} kast {is} daggmask poäng = poäng + 5 {else} poäng = poäng + kast
+                    {if} kast {is} daggmask 
+                    poäng = poäng + 5 
+                    {else} 
+                    poäng = poäng + kast
                     {print} 'det är ' poäng ' poäng'
                     ```
                 example_code_2: |
@@ -643,7 +591,7 @@ adventures:
     elif_command:
         default_save_name: annarsom
         description: annarsom
-        levels:
+        levels: {}
     for_command:
         default_save_name: för
         description: kommandot för
@@ -670,7 +618,7 @@ adventures:
                     Då vet du säkert att de inte riktigt kan förutse din framtid, men det är ändå kul att spela!
 
                     På de kommande nivåerna kan du lära dig hur du skapar din egen spåmaskin!
-                    På nivå 1 kan du börja enkelt genom att låta Hedy presentera sig som en spådam och låta henne `{echo}` spelarnas svar.
+                    På nivå 1 kan du börja enkelt genom att låta Hedy presentera sig som en spådam och låta henne `{answer}` spelarnas svar.
                     Så här:
                 example_code: |
                     ```
@@ -678,7 +626,7 @@ adventures:
                     _ Vem är du?
                     _ Låt mig ta en titt i min kristallkula.
                     _ Jag ser ... Jag ser ...
-                    _ Ditt namn är
+                    _ Ditt namn är _
                     ```
                 story_text_2: |
                     ### Övning
@@ -686,7 +634,7 @@ adventures:
                     **Extra** Ändra koden och låt spådamen inte bara förutsäga ditt namn utan även din ålder, ditt favoritsportlag eller något annat om dig själv.
             3:
                 story_text: |
-                    På de tidigare nivåerna har du skapat din första spåmaskin, men Hedy kunde inte förutsäga någonting, bara `{echo}`.
+                    På de tidigare nivåerna har du skapat din första spåmaskin, men Hedy kunde inte förutsäga någonting.
                     På den här nivån kan du använda en variabel och kommandot `{at} {random}` för att verkligen låta Hedy välja ett svar åt dig. Titta till exempel på den här koden:
                 example_code: |
                     ```
@@ -739,8 +687,10 @@ adventures:
                     person {is} {ask} 'Vem är du?'
                     bra_svar {is} Hurra! Du vinner!, Du kommer definitivt att vinna!, Vi har en vinnare!
                     dåligt_svar {is} Otur! Försök igen!, En annan person kommer att vinna, Du förlorar!
-                    {if} person {in} vänner {print} bra_svar {at} {random}
-                    {else} {print} dåligt_svar {at} {random}
+                    {if} person {in} vänner 
+                    {print} bra_svar {at} {random}
+                    {else} 
+                    {print} dåligt_svar {at} {random}
                     ```
             7:
                 story_text: |
@@ -811,6 +761,10 @@ adventures:
                         {print} namn ' kommer att få en ' husdjur {at} {random} ' som husdjur.
                        {sleep}
                     ```
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
     harry_potter:
         description: Harry Potter-äventyr
         levels:
@@ -849,7 +803,7 @@ adventures:
                     {print} Jag måste ta mig ut härifrån!
                     {print} Det finns tre dörrar framför mig …
                     {ask} Vilken dörr ska jag välja?
-                    {echo} Jag väljer dörr
+                    {print} Jag väljer dörr {answer}
                     {print} …?
                     ```
                 story_text_2: |
@@ -975,6 +929,10 @@ adventures:
                     {if} spelare {is} lever
                         {print} 'Bra! Du överlevde!'
                     ```
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
     if_command:
         default_save_name: kommandot_if
         description: Introduktion till kommandot if
@@ -1039,8 +997,10 @@ adventures:
                     ```
                     snygga_färger {is} grönt, gult
                     favoritfärg {is} {ask} 'Vilken är din favoritfärg?'
-                    {if} favoritfärg {in} snygga_färger {print} 'snyggt!'
-                    {else} {print} 'meh'
+                    {if} favoritfärg {in} snygga_färger 
+                    {print} 'snyggt!'
+                    {else} 
+                    {print} 'meh'
                     ```
                 story_text_2: |
                     ### Övning
@@ -1050,32 +1010,21 @@ adventures:
                     ```
                     djur är hund, ko, får
                     svaret är fråga 'Vilket är ditt favoritdjur?'
-                    _ svar _ djur _ 'Mitt också!'
-                    _ _ 'Mina favoritdjur är hundar, kor och får'
+                    _ svar _ djur 
+                    _ 'Mitt också!'
+                    _ 
+                    _ 'Mina favoritdjur är hundar, kor och får'
                     ```
     is_command:
         default_save_name: kommandot_är
         description: introduktion till kommandot är
         levels:
             2:
-                story_text: |
-                    ## Variabler
-                    Du kan döpa ett ord med `{is}`. Det kallas för en **variabel**. I det här exemplet har vi skapat en variabel som heter namn och en variabel som heter ålder. Du kan använda ordet namn var som helst i din kod och det kommer att ersättas med Hedy, till exempel så här:
                 example_code: |
                     ```
                     namn {is} Hedy
                     ålder {is} 15
                     {print} namn är ålder år gammal
-                    ```
-                story_text_2: |
-                    ### Övning
-                    Dags att göra dina egna variabler!
-                    I exempelkoden gjorde vi ett exempel på variabeln `favoritdjur`. På rad 1 sätts (tilldelas) variabeln och på rad 2 har vi använt variabeln i ett skriv-kommando.
-                    Avsluta först vårt exempel genom att fylla i ditt favoritdjur i de tomma fälten. Gör sedan minst tre av dessa koder själv. Välj en variabel och sätt variabeln med kommandot {is}. Använd den sedan med ett {print}-kommando, precis som vi gjorde.
-                example_code_2: |
-                    ```
-                    favoritdjur är _
-                    {print} Jag gillar favoritdjur
                     ```
     language:
         name: Språk
@@ -1105,15 +1054,15 @@ adventures:
                     franska_ord = ['bonjour', 'ordinateur', 'pomme de terre']
                     översättning = ['hej', 'dator', 'potatis']
                     poäng = 0
-                    {for} i {in} {range} 1 {to} 3
-                        svar = {ask} 'Vad betyder ' franska_ord[i] '?'
+                    {for} i {in} {range}(1, 3)
+                        svar = {input}('Vad betyder ', franska_ord[i], '?')
                         rätt = översättning[i]
-                        {if} svar == rätt
-                            {print} 'Rätt!'
+                        {if} svar == rätt:
+                            {print}('Rätt!')
                             poäng = poäng + 1
-                        {else}
-                            {print} 'Fel, ' franska_ord[i] ' betyder ' översättning[i]
-                    {print} 'Du gav ' poäng ' rätta svar.'
+                        {else}:
+                            {print}('Fel, ', franska_ord[i], ' betyder ', översättning[i])
+                    {print}('Du gav ', poäng, ' rätta svar.')
                     ```
     maths:
         name: matte
@@ -1136,8 +1085,8 @@ adventures:
                     ```
                     {print} Jag heter papegojan Hedy
                     {ask} vad heter du?
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
                     ```
                 story_text_2: |
                     ### Övning
@@ -1148,8 +1097,8 @@ adventures:
                     ```
                     {print} Jag heter papegojan Hedy
                     {ask} _
-                    {echo}
-                    {echo}
+                    {print} {answer}
+                    {print} {answer}
             2:
                 story_text: |
                     På förra nivån skapade du en papegoja som härmar dig. På den här nivån kommer vi att göra papegojan interaktiv med en variabel och `{ask}`-kommandot.
@@ -1239,75 +1188,6 @@ adventures:
                     veckor = att_spara / fickpeng
                     {print} 'Du kan köpa en ' _ ' om ' _ ' veckor.'
                     ```
-            15:
-                example_code: |
-                    ```
-                    _ calculate_budget with wish, money, allowance
-                        to_save = wish - money
-                        weeks = to_save / allowance
-                        {if} wish _ money
-                            {print} 'You need to save up some more!'
-                            {print} 'Youll need ' weeks ' more weeks.'
-                        {else}
-                            {print} 'Great! You have enough'
-                            {print} 'Lets go shopping!'
-
-                    money = {ask} 'How much money have you saved?'
-                    wish = {ask} 'How much money do you need?'
-                    allowance = {ask} 'How much pocket money do you get each week?'
-
-                    {call} calculate_budget with _, _, _
-                    ```
-    pressit:
-        name: Knapptryckningar
-        default_save_name: Tryckt
-        description: Prova att koppla en tangent till ett kommando!
-        levels:
-            6:
-                story_text: |
-                    På den här nivån finns ytterligare ett nytt nyckelord: `{pressed}`!
-                    Med `{pressed}` kan du använda tangenterna på ditt tangentbord för att styra vilka rader som används.
-
-                    ### Övning
-                    Titta på exemplet och lägg till ytterligare en kodrad som reagerar på en tangenttryckning.
-                example_code: |
-                    ```
-                    {print} 'Vill du ha ett lyckligt (l) eller olyckligt (o) slut?'
-                    {if} l {is} {pressed} {print} 'De levde lyckliga i alla sina dagar ❤'
-                    {else} {print} 'Prinsen blev uppäten av en flodhäst 😭'
-                    ```
-                story_text_2: |
-                    Du kan också koppla sköldpaddskommandon till knappar.
-
-                    ### Övning
-                    Kopiera raderna några gånger så att du kan skapa en större ritning.
-            8:
-                story_text: |
-                    Nu när du har lärt dig om `{repeat}`, kan vi trycka på tangenterna flera gånger.
-                    Du kan använda det för att få sköldpaddan att gå framåt och vända sig.
-
-                    ### Övning
-                    Koden som du har sett på nivå 5 kontrollerar bara tangenten en gång. Kopiera exempelkoden och lägg till en `{repeat}` till den, så att du kan trycka på tangenterna många gånger.
-                    Använd denna kod för att rita något snyggt.
-            10:
-                story_text: |
-                    Nu när du vet hur man kombinerar påståenden kan du skapa ett verktyg för att skriva på tangentbord med `{pressed}`-kommandot.
-
-                    ### Övning
-                    Gör klart koden. Varje gång ska en slumpmässig bokstav väljas, som du måste trycka på. Du får en poäng för en korrekt tryckning och två poängs avdrag för en felaktig tryckning.
-                    **Extrauppgift** Rensa skärmen efter varje bokstav, och visa användaren hur många poäng de har fått.
-                example_code: |
-                    ```
-                    poäng = 0
-                    bokstäver = a, b, c, d, e
-                    {repeat} 10 {times}
-                        bokstav = _ _ _
-                        {print} 'Tryck på bokstaven ' bokstav
-                        {if} bokstav {is} {pressed}
-                        _
-                        _
-                        _
-                    ```
     print_command:
         default_save_name: skriv
         description: Introduktion till kommandot print
@@ -1354,7 +1234,7 @@ adventures:
         name: Quizmästare
         default_save_name: Quizmästare
         description: Gör ditt eget quiz!
-        levels:
+        levels: {}
     quotation_marks:
         name: '''citattecken'''
         default_save_name: citattecken
@@ -1522,13 +1402,13 @@ adventures:
                     ```
                     {print} Välkommen till Hedys restaurang 🍟
                     _ Vad vill du beställa?
-                    {echo} Så du vill beställa
+                    {print} Så du vill beställa {answer}
                     {print} Tack för din beställning!
                     {print} Den är på väg!
                     ```
             2:
                 story_text: |
-                    På nivå 2 kan du utöka din restaurang genom att använda variabler. På nivå 1 kunde Hedy bara `{echo}` beställningen en gång och bara komma ihåg det sista som beställdes.
+                    På nivå 2 kan du utöka din restaurang genom att använda variabler. På nivå 1 kunde Hedy bara komma ihåg det sista som beställdes.
                     Nu kan du använda variabler och Hedy kan komma ihåg både maten och påläggen!
                 example_code: |
                     ```
@@ -1539,17 +1419,6 @@ adventures:
                     topping {is} {ask} Vill du ha kött eller grönsaker till?
                     {print} mat med topping är på väg!
                     ```
-                story_text_2: |
-                    #### Övning
-                    Kopiera din egen restaurangkod från föregående nivå till inmatningsskärmen nedan.
-                    Rätta koden genom att byta ut kommandona `{ask}` och `{echo}` och använda variabler, som du har lärt dig på den här nivån.
-
-                    Nu när din kod fungerar igen är det dags att lägga till något mer.
-                    Titta på den sista raden i exempelkoden: `{print} mat med topping är på väg!`
-                    På den raden används två variabler för att skapa en sammanfattning av beställningen.
-                    Lägg nu till din egen sammanfattning av den mat och dryck som kunden beställt.
-
-                    **Extra** Nu när du har lärt dig hur man använder variabler kan du använda så många variabler i en rad som du vill. Kan du lägga till fler variabler i din kod, till exempel äta på plats eller take away, kontant eller kort, med eller utan sugrör osv.
             3:
                 story_text: |
                     Har du svårt att bestämma vad du vill äta till middag? Du kan låta Hedy välja åt dig!
@@ -1611,8 +1480,10 @@ adventures:
                     ```
                     drycker_i_lager {is} vatten, läsk, cola, apelsinjuice
                     dryck {is} {ask} 'Vad vill du dricka?'
-                    {if} dryck {in} drycker_i_lager {print} 'En' dryck 'på väg!'
-                    {else} {print} 'Tyvärr, vi har inte det'
+                    {if} dryck {in} drycker_i_lager 
+                    {print} 'En' dryck 'på väg!'
+                    {else} 
+                    {print} 'Tyvärr, vi har inte det'
                     ```
             7:
                 story_text: |
@@ -1731,13 +1602,13 @@ adventures:
                     Correctly add the `{while}` command to this code.
                 example_code: |
                     ```
-                    {print} 'Välkommen till McHedy'
+                    {print}('Välkommen till McHedy')
                     mer = 'ja'
                     _
-                        order = {ask} 'Vad vill du beställa?'
-                        {print} order
-                        mer = {ask} 'Vill du beställa något mer?'
-                    {print} 'Tack!'
+                        order = {input}('Vad vill du beställa?')
+                        {print}(order)
+                        mer = {input}('Vill du beställa något mer?')
+                    {print}('Tack!')
                     ```
     rock:
         name: Sten, sax, påse
@@ -1748,12 +1619,12 @@ adventures:
                 story_text: |
                     I nivå 1 kan du börja med ett sten, sax, påse-spel.
 
-                    Med `{ask}` kan du göra ett val, och med `{echo}` kan du upprepa det valet.
+                    Med `{ask}` kan du göra ett val, och med `{answer}` kan du upprepa det valet.
                 example_code: |
                     ```
                     {print} Vad väljer du?
                     {ask} Välj mellan sten, sax eller påse.
-                    {echo} Så ditt val var:
+                    {print} Så ditt val var: {answer}
                     ```
                 story_text_2: |
                     ### Övning
@@ -1763,18 +1634,7 @@ adventures:
                     ```
                     {print} vad väljer du?
                     {ask} välj bland _
-                    {echo} så ditt val var:
-                    ```
-            2:
-                story_text: |
-                    På den här nivån kan du öva på att variablerna, så att du kan göra spelet sten, sax, påse på nästa nivå!
-                    ### Övning
-                    Avsluta koden genom att fylla i **variabeln** i tomrummen.
-                    Det här spelet är inte särskilt interaktivt, men inga bekymmer! På nästa flik kommer du att lära dig hur du använder variabler med kommandot `{ask}` för att göra ditt spel interaktivt!
-                example_code: |
-                    ```
-                    val är sten
-                    {print} Jag väljer _
+                    {print} så ditt val var: {answer}
                     ```
             3:
                 story_text: |
@@ -1871,11 +1731,6 @@ adventures:
                             vunnit = 'ja'
                     _
                     ```
-    rock_2:
-        name: Sten, sax, påse 2
-        default_save_name: sten_2
-        description: Del 2 av sten, sax, påse
-        levels:
             2:
                 story_text: |
                     Nu när du har lärt dig använda kommandot `{ask} kan du göra din sten, sax, påse-kod interaktiv också!
@@ -1998,16 +1853,6 @@ adventures:
                     ```
                     apor = 5, 4, 3, 2, 1
                     ```
-            13:
-                story_text: |
-                    På nivå 16 gjorde vi låtar med hjälp av listor. De programmen fungerar inte längre korrekt på denna nivå. Kolonen från nivå 17 och parenteserna från nivå 18 behöver fortfarande läggas till.
-
-                    ### Övning 1
-                    Drunken sailor-låten ges som exempelkod, men fungerar inte än.
-                    Kan du se till att allt fungerar igen? För att hjälpa dig har vi placerat _ på platsen för _några_ av felen.
-
-                    ### Övning 2
-                    Slå nu också upp din Old MacDonald-låt från nivå 16 och korrigera den.
     songs_2:
         levels:
             12:
@@ -2189,13 +2034,13 @@ adventures:
                     ```
                     colors = red, blue, orange, yellow, pink, purple, green, brown, black
                     distance = 120
-                    repeat 5 times
+                    {repeat} 5 times
                     _
                     ```
                     Hint for the flags:
                     ```
-                    country = ask 'which country would you like to see the flag of?'
-                    if country is 'the Netherlands'
+                    country = {ask} 'which country would you like to see the flag of?'
+                    {if} country is 'the Netherlands'
                         color_1 = red
                         color_2 = white
                         color_3 = blue
@@ -2213,7 +2058,7 @@ adventures:
                     ```
                     colors = red, yellow, green
                     {for} chosen_color {in} colors
-                        color _
+                        {color} _
                         {repeat} _
                     ```
             12:
@@ -2233,7 +2078,7 @@ adventures:
                     {forward} 300
                     {turn} 180
 
-                    {for} i {in} {range} 1 {to} 5
+                    {repeat} 5 {times}
                         {color} gray
                         {forward} 100
                         shape = {ask} 'What kind of shape would you like next on the bracelet?'
@@ -2256,12 +2101,12 @@ adventures:
                 example_code: |
                     ``
                     svar = 0
-                    {while} svar != 25
-                        svar = {ask} 'Vad är 5 gånger 5?'
-                    {print} 'Ett korrekt svar har getts'
+                    {while} svar != 25:
+                        svar = {input}('Vad är 5 gånger 5?')
+                    {print}('Ett korrekt svar har getts')
                     ```
     years:
         name: Nyårsdagen
         default_save_name: Nedräkning till nyår
         description: Nedräkning till det nya året!
-        levels:
+        levels: {}

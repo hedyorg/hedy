@@ -9,14 +9,11 @@ adventures:
                     Tasolla 1 voit luoda tarinan, jonka päähahmon voit nimetä itse.
 
                     Ensimmäisellä rivillä, käytä `{ask}` ja kysy mikä tarinan päähahmon nimi on.
-
-                    Ensimmäisen rivin jälkeen, aloita rivi `{print}` komennolla jos haluat, että lause tulostetaan.
-                    Voit käyttää myös `{echo}` komentoa jos haluat, että päähahmon nimi tulostetaan lauseen lisäksi lauseen loppuun.
                 example_code: |
                     ```
                     {ask} Tarinan päähahmo on
-                    {print} Päähahmo tulee kävelemään metsässä
-                    {echo} Häntä pelottaa vähän,
+                    {print} {answer} tulee kävelemään metsässä
+                    {print} Häntä pelottaa vähän, {answer}
                     {print} Hän kuulee hulluja ääniä kaikkialla
                     {print} Häntä pelottaa, että tässä metsässä kummittelee
                     ```
@@ -24,7 +21,7 @@ adventures:
                     ### Harjoitus
                     Luo oma tarinasi jossa on vähintään 6 riviä koodia.
                     Tämä tarina ei voi olla sama kuin esimerkissä.
-                    Käytä ainakin yden kerran `{ask}` ja `{echo}` komentoja.
+                    Käytä ainakin yden kerran `{ask}` ja `{answer}`.
                     Tarinan aiheena voi olla mitä vain.
                     Jos et keksi tarinalle aihetta, käytä vaikka jotain näistä: menossa elokuviin, urheiluottelu, tai päivä eläintarhassa.
             2:
@@ -43,16 +40,6 @@ adventures:
                     {sleep}
                     {print} nimi pelkää, että metsässä kummittelee
                     ```
-                story_text_2: |
-                    ### Harjoitus
-                    Nyt on aika lisätä muuttujia omaan tarinaasi, jonka teit aiemmalla tasolla.
-
-                    Mene 'Minun ohjelmani', etsi sinun taso 1 tarina seikkailu ja kopioi koodi. Liitä koodi tämän tason ruudulle.
-
-                    Koodi ei toimi tällä tasolla, koska et ole käyttänyt muuttujia vielä.
-                    Muuta `{ask}` komennot ja `{echo}` komennot koodissasi oikeaan muotoon, jonka olet oppinut tällä tasolla.
-
-                    **Lisätehtävä** Lisää `{sleep}` komento koodiin lisätäksesi jännitystä tarinaasi.
             3:
                 story_text: |
                     Tasolla 3 voit tehdä tarinastasi vieläkin hauskemman. Voit käyttää satunnaisuutta mille tahansa hirviölle, eläimelle tai muulle esteelle, tällä tavalla:
@@ -132,6 +119,8 @@ adventures:
                     {if} loppu {is} hyvä {print} nimi 'tarttuu miekkaan ja hirviö juoksee vikkelään pois'
                     {else} {print} nimi 'joutuu hirviön syömäksi'
                     ```
+            6:
+                story_text: "Nyt kun voit käyttää `{elif}`, voit luoda entistä interaktiivisemman tarinan! Voisit esimerkiksi luoda useita hahmoja, joilla kaikilla on erilaisia ominaisuuksia.\nTai voit antaa pelaajan valita, minkä tien hän ottaa, minkä oven hän avaa tai minkä taikajuoman hän juo...\n\n### Harjoitus\nLuo oma tarinasi, jossa on 3 tai useampia vaihtoehtoja käyttäen {elif}."
             8:
                 story_text: |
                     Tarinassa joku sanoo sanan monta kertaa. Esimerkiksi, kun joku huutaa apua tai laulaa laulun.
@@ -204,6 +193,12 @@ adventures:
 
                     Vilkaise <a href="https://www.yonkerspublicschools.org/cms/lib/NY01814060/Centricity/Domain/1621/Brown%20Bear%20Book.pdf"> tarinaa</a> jos et tunne sitä, ja varmista, että tulostat sen kuten se on kirjassa.
                 example_code: "```\neläimet = _ , _ , _ \n{print} 'Brown bear, Brown bear'\n{print} 'What do you see?'\n```\n"
+            13:
+                example_code: |
+                    ```
+                    nimi = _ 
+                    {print}('Tervetuloa tähän tarinaan!')
+                    ```
             16:
                 story_text: |
                     Jos käytät `{while}` looppia voit tehdä tarinoistasi mielenkiintoisempia. Esimerkiksi, voit käyttää `{while} game == 'on'` jolloin voit pelata kunnes peli päättyy.
@@ -225,23 +220,96 @@ adventures:
                             {print} sijainti ' - Ne eivät olleet siellä.'
                     {print} 'Nyt voit mennä taloon!'
                     ```
+    add_remove_command:
+        levels: {}
+    and_or_command:
+        levels: {}
+    ask_command:
+        levels:
+            2:
+                example_code: "```\nnimi {is} {ask} Mikä on nimesi?  \n{print} Hei nimi  \nikä {is} {ask} Kuinka vanha olet?  \n{print} nimi on ikä vuotta vanha.\n```\n"
             13:
-                story_text: |
-                    Nyt tulostamme uuden tarinan, mutta tällä kertaa meidän täytyy käyttää sulkeita `{print}` komennon kanssa.
+                story_text: "```\nlemmikki {is} {ask} Mikä on lempieläimesi?  \n{print} Minä pidän lemmikki\n```"
+    calculator:
+        levels: {}
+    calculator_2:
+        levels: {}
+    clear_command:
+        levels: {}
+    congratulations:
+        levels: {}
+    debugging:
+        levels: {}
+    dice:
+        levels: {}
+    dishes:
+        levels: {}
+    elif_command:
+        levels: {}
+    for_command:
+        levels: {}
+    fortune:
+        levels: {}
+    functions:
+        levels: {}
+    guess_my_number:
+        levels: {}
+    harry_potter:
+        levels: {}
+    haunted:
+        levels:
+            2:
+                example_code_2: "```\nhirviö_1 {is} _\nhirviö_2 {is} _\nhirviö_3 {is} _\n{print} Astut kummitustaloon.\n{print} Yhtäkkiä näet hirviö_1\n{print} Juokset toiseen huoneeseen...\n{print} Mutta siellä odottaa hirviö_2!\n{print} Voi ei! Mene nopeasti keittiöön.\n{print} Mutta kun astut sisään, hirviö_3 hyökkää kimppuusi!\n```\n"
+    hospital:
+        levels: {}
+    hotel:
+        levels: {}
+    if_command:
+        levels: {}
+    in_command:
+        levels: {}
+    is_command:
+        levels: {}
+    language:
+        levels: {}
+    maths:
+        levels: {}
+    music:
+        levels: {}
+    parrot:
+        levels: {}
+    piggybank:
+        levels: {}
 
-                    ### Harjoitus 1
-                    Luo tarina jossa on ainakin 5 lausetta. Sinun ei tarvitse käyttää 'nimi' vielä.
-                example_code: |
-                    ```
-                    {print}('Tervetuloa tähän tarinaan!')
-                    ```
-                story_text_2: |
-                    ### Harjoitus 2
-                    Me olemme valmistelleet `{input}` sinua varten. Ensin, käytä `name` muuttujaa tarinassasi.
-                    Sitten lisää toinen `{ask}` ja käytä sitä muuttujaa myös.
-                    Vinkki: Muista pilkut `{print}` komennossa tekstin ja muuttujien välillä!
-                example_code_2: |
-                    ```
-                    nimi = {input}("Mikä on nimesi?")
-                    {print}('Tervetuloa tähän tarinaan!')
-                    ```
+    print_command:
+        levels: {}
+    quizmaster:
+        levels: {}
+    quotation_marks:
+        levels: {}
+    random_command:
+        levels: {}
+    repeat_command:
+        levels: {}
+    repeat_command_2:
+        levels: {}
+    restaurant:
+        levels: {}
+    rock:
+        levels: {}
+    secret:
+        levels: {}
+    sleep_command:
+        levels: {}
+    songs:
+        levels: {}
+    songs_2:
+        levels: {}
+    turtle:
+        levels: {}
+    turtle_draw_it:
+        levels: {}
+    while_command:
+        levels: {}
+    years:
+        levels: {}

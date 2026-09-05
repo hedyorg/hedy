@@ -39,7 +39,9 @@
             hedyApp.initialize({
                 lang: '{{ g.lang }}',
                 level: {{ level }},
-                keyword_language: "{{ g.keyword_lang }}"
+                keyword_language: "{{ g.keyword_lang }}",
+                environment: {{ frontend_environment|tojson|safe }},
+                featureFlags: {{ feature_flags|tojson|safe }}
             });
         </script>
     </body>

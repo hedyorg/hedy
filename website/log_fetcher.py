@@ -4,7 +4,7 @@ from collections import namedtuple
 
 import boto3
 from retrying import retry
-from utils import is_heroku
+import envs
 
 from config import config
 
@@ -26,7 +26,8 @@ class AwsAthenaClient:
             database = config["athena"]["database"]
             s3_output = config["athena"]["s3_output"]
             return AwsAthenaClient(db, database, s3_output)
-        if is_heroku():
+
+        if envs.current_env().cloud_services:
             logger.warning("Unable to initialize Athena client (missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY)")
         return None
 

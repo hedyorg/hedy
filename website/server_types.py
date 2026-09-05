@@ -11,6 +11,8 @@ class SortedAdventure:
     long_name: str
     is_teacher_adventure: bool
     is_command_adventure: bool
+    is_second_teacher_adventure: bool = False
+    shared_class_name: str = ""
     levels: list = field(default_factory=list)
 
     # Meant to be used when testing membership against

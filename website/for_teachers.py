@@ -3,6 +3,7 @@ from difflib import SequenceMatcher
 import functools
 import os
 import re
+import time
 import uuid
 from venv import logger
 
@@ -14,11 +15,11 @@ from website.flask_helpers import gettext_with_fallback as gettext
 import jinja_partials
 
 import hedy
-import hedy_content
+import website_content as hedy_content
 import hedyweb
 import utils
-from safe_format import safe_format
-from datetime import date
+from hedy.safe_format import safe_format
+from datetime import date, datetime
 
 from website.server_types import SortedAdventure
 from website.flask_helpers import render_template
@@ -30,8 +31,6 @@ from website.auth import (
     requires_login,
     requires_teacher,
     store_new_student_account,
-    prepare_user_db,
-    remember_current_user,
 )
 from .database import Database
 from .auth_pages import AuthModule
@@ -65,6 +64,15 @@ class ForTeachersModule(WebsiteModule):
         session.pop("welcome-teacher", None)
 
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        class_customizations = [
+            self.db.get_class_customizations(_class["id"]) for _class in teacher_classes
+        ]
+        class_customizations_dict = {}
+        for customizations in class_customizations:
+            if not customizations or "id" not in customizations:
+                continue
+            class_customizations_dict[customizations["id"]] = customizations
+        class_customizations = class_customizations_dict
         adventures = []
         teacher_adventures = self.db.get_teacher_adventures(user["username"])
         # Get the adventures that are created by my second teachers.
@@ -83,57 +91,6 @@ class ForTeachersModule(WebsiteModule):
                     "why_class": render_why_class(adventure),
                 }
             )
-
-        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
-        slides = []
-        for level in range(hedy.HEDY_MAX_LEVEL + 1):
-            if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
-                slides.append(level)
-
-        return render_template(
-            "for-teachers.html",
-            current_page="for-teachers",
-            page_title=gettext("title_for-teacher"),
-            teacher_classes=teacher_classes,
-            teacher_adventures=adventures,
-            welcome_teacher=welcome_teacher,
-            slides=slides,
-            javascript_page_options=dict(
-                page='for-teachers',
-                welcome_teacher=welcome_teacher,
-            ))
-
-    @route("/redesign", methods=["GET"])
-    @requires_teacher
-    def for_teachers_page_redesign(self, user):
-        welcome_teacher = session.get("welcome-teacher") or False
-        session.pop("welcome-teacher", None)
-
-        teacher_classes = self.db.get_teacher_classes(user["username"], True)
-        adventures = []
-        teacher_adventures = self.db.get_teacher_adventures(user["username"])
-        # Get the adventures that are created by my second teachers.
-        second_teacher_adventures = self.db.get_second_teacher_adventures(teacher_classes, user["username"])
-        for adventure in list(teacher_adventures) + second_teacher_adventures:
-            adventures.append(
-                {
-                    "id": adventure.get("id"),
-                    "name": adventure.get("name"),
-                    "creator": adventure.get("creator"),
-                    "author": adventure.get("author"),
-                    "date": utils.localized_date_format(adventure.get("date")),
-                    "level": adventure.get("level"),
-                    "levels": adventure.get("levels"),
-                    "why": adventure.get("why"),
-                    "why_class": render_why_class(adventure),
-                }
-            )
-
-        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
-        slides = []
-        for level in range(hedy.HEDY_MAX_LEVEL + 1):
-            if SLIDES[g.lang].get_slides_for_level(level, keyword_language):
-                slides.append(level)
 
         return render_template(
             "for-teachers/for-teachers.html",
@@ -142,11 +99,180 @@ class ForTeachersModule(WebsiteModule):
             teacher_classes=teacher_classes,
             teacher_adventures=adventures,
             welcome_teacher=welcome_teacher,
-            slides=slides,
             javascript_page_options=dict(
                 page='for-teachers',
                 welcome_teacher=welcome_teacher,
             ))
+
+    @route("/teaching-materials", methods=["GET"])
+    def get_teaching_materials(self):
+        return render_template(
+            "for-teachers/teaching-materials.html",
+            current_page="for-teachers",
+            page_title=gettext("teaching_materials"))
+
+    @route("/slides", methods=["GET"])
+    def get_slides_overview(self):
+        return self._render_slides_page(None)
+
+    @route("/slides/<level>", methods=["GET"])
+    def get_slides_for_level(self, level):
+        return self._render_slides_page(level)
+
+    def _render_slides_page(self, level):
+        """Render the slides overview: a list of every level that has slides, plus a preview of one of them."""
+        keyword_language = request.args.get('keyword_language', default=g.keyword_lang, type=str)
+        levels = [lvl for lvl in range(hedy.HEDY_MAX_LEVEL + 1)
+                  if SLIDES[g.lang].get_slides_for_level(lvl, keyword_language)]
+        if not levels:
+            return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+        if level is None:
+            selected_level = levels[0]
+        else:
+            try:
+                selected_level = int(level)
+            except ValueError:
+                return utils.error_page(error=404, ui_message="Slides do not exist!")
+            if selected_level not in levels:
+                return utils.error_page(error=404, ui_message="Slides do not exist!")
+
+        return render_template(
+            "for-teachers/slides.html",
+            current_page="for-teachers",
+            page_title=gettext("slides"),
+            levels=levels,
+            selected_level=selected_level)
+
+    @route("/redesign", methods=["GET"])
+    @requires_teacher
+    def for_teachers_page_redesign(self, user):
+        return redirect("/for-teachers/")
+
+    @route("/redesign/<path:subpath>", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])
+    def redirect_redesign_paths(self, subpath):
+        query_suffix = f"?{request.query_string.decode('utf-8')}" if request.query_string else ""
+        return redirect(f"/for-teachers/{subpath}{query_suffix}", code=307)
+
+    @route("/adventures", methods=["GET"])
+    @requires_teacher
+    def for_teachers_adventures_page(self, user):
+        return render_template(
+            "for-teachers/adventures.html",
+            current_page="for-teachers",
+            page_title=gettext("adventures"),
+            user=user,
+        )
+
+    def _get_my_adventures(self, user):
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        class_names_by_id = {
+            teacher_class.get("id"): teacher_class.get("name")
+            for teacher_class in teacher_classes
+            if teacher_class.get("id")
+        }
+
+        my_adventures = []
+        teacher_adventures = self.db.get_teacher_adventures(user["username"])
+        for adventure in teacher_adventures:
+            levels = adventure.get("levels") or []
+            if levels:
+                if len(levels) > 3:
+                    displayed_levels = ", ".join(str(level) for level in levels[:3])
+                    level_display = f"{displayed_levels}..."
+                else:
+                    level_display = ", ".join(str(level) for level in levels)
+            elif adventure.get("level"):
+                level_display = str(adventure.get("level"))
+            else:
+                level_display = "-"
+
+            adventure_classes = adventure.get("classes") or []
+            used_in = [
+                class_names_by_id[class_id]
+                for class_id in adventure_classes
+                if class_id in class_names_by_id
+            ]
+
+            my_adventures.append(
+                {
+                    "id": adventure.get("id"),
+                    "name": adventure.get("name"),
+                    "level_display": level_display,
+                    "date": utils.localized_date_format(adventure.get("date")),
+                    "used_in": ", ".join(used_in) if used_in else "-",
+                    "public": bool(adventure.get("public")),
+                }
+            )
+
+        return my_adventures
+
+    @route("/adventures/manage", methods=["GET"])
+    @requires_teacher
+    def for_teachers_my_adventures_page(self, user):
+        return render_template(
+            "for-teachers/my-adventures.html",
+            current_page="for-teachers",
+            page_title=gettext("my_adventures"),
+            my_adventures=self._get_my_adventures(user),
+            user=user,
+            javascript_page_options=dict(
+                page="my-adventures",
+            ),
+        )
+
+    def _delete_my_adventure_and_render_table(self, user, adventure_id):
+        adventure = self.db.get_adventure(adventure_id)
+        if not adventure:
+            return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
+        if adventure.get("creator") != user["username"]:
+            return make_response(gettext("unauthorized"), 401)
+
+        self.db.delete_adventure(adventure_id)
+
+        tags = self.db.read_tags(adventure.get("tags", []))
+        for tag in tags:
+            tagged_in = [tagged_adventure for tagged_adventure in tag["tagged_in"]
+                         if tagged_adventure["id"] != adventure_id]
+            if len(tag["tagged_in"]) != len(tagged_in):
+                self.db.update_tag(tag["id"], {"tagged_in": tagged_in})
+
+        return render_partial(
+            "for-teachers/my-adventures-table.html",
+            my_adventures=self._get_my_adventures(user),
+        )
+
+    @route("/adventures/<adventure_id>/remove-modal", methods=["GET"])
+    @requires_teacher
+    def get_remove_adventure_modal(self, user, adventure_id):
+        adventure = self.db.get_adventure(adventure_id)
+        if not adventure:
+            return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
+        if adventure.get("creator") != user["username"]:
+            return make_response(gettext("unauthorized"), 401)
+
+        return render_partial(
+            "modal/htmx-modal-confirm.html",
+            modal_text=gettext("delete_adventure_prompt"),
+            htmx_endpoint=f"/for-teachers/adventures/{adventure_id}/remove",
+            htmx_target="#my-adventures-table-wrapper",
+            htmx_swap="outerHTML",
+            confirm_button_label=gettext("remove"),
+            confirm_button_class="red-btn-new",
+            modal_title=gettext("remove"),
+            modal_title_name=adventure.get("name", ""),
+            modal_variant="redesign",
+        )
+
+    @route("/adventures/<adventure_id>/remove", methods=["POST"])
+    @requires_teacher
+    def remove_my_adventure(self, user, adventure_id):
+        return self._delete_my_adventure_and_render_table(user, adventure_id)
+
+    @route("/adventures/<adventure_id>", methods=["DELETE"])
+    @requires_teacher
+    def delete_my_adventure(self, user, adventure_id):
+        return self._delete_my_adventure_and_render_table(user, adventure_id)
 
     @route("/workbooks/<level>", methods=["GET"])
     def get_workbooks(self, level):
@@ -233,18 +359,165 @@ class ForTeachersModule(WebsiteModule):
     @requires_teacher
     def get_classes(self, user):
         if not is_teacher(user) and not is_admin(user):
-            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
         teacher_classes = self.db.get_teacher_classes(user["username"], True)
-        for _class in teacher_classes:
-            _class['date'] = utils.localized_date_format(_class['date'], only_date=True)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
+        active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
         logger.info(teacher_classes)
-        return render_template("for-teachers/classes/classes.html",
-                               current_page="classes",
-                               page_title=gettext("classes"),
-                               teacher_classes=teacher_classes,
-                               javascript_page_options=dict(
-                                   page='classes',
-                               ))
+        return render_template(
+            "for-teachers/classes/classes.html",
+            current_page="classes",
+            page_title=gettext("classes"),
+            active_classes=active_classes,
+            archived_classes=archived_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
+            javascript_page_options=dict(
+                page="classes",
+            ),
+        )
+
+    @staticmethod
+    def _split_teacher_classes_by_archive_state(teacher_classes):
+        active_classes = []
+        archived_classes = []
+
+        for _class in teacher_classes:
+            _class["date"] = utils.localized_date_format(_class["date"], only_date=True)
+            if _class.get("archived"):
+                archived_classes.append(_class)
+            else:
+                active_classes.append(_class)
+
+        return active_classes, archived_classes
+
+    def _get_class_customizations_map(self, teacher_classes):
+        class_customizations = [
+            self.db.get_class_customizations(_class["id"])
+            for _class in teacher_classes
+        ]
+        return {
+            customizations["id"]: customizations
+            for customizations in class_customizations
+            if customizations and "id" in customizations
+        }
+
+    def _get_teacher_classes_after_class_update(
+        self,
+        username,
+        class_id,
+        *,
+        expected_archived=None,
+        should_exist=True,
+        max_retries=5,
+        retry_delay_s=0.1,
+    ):
+        """Fetch teacher classes and retry briefly until a class mutation is visible.
+
+        Class lists are queried through an index and can be eventually consistent.
+        Retrying here prevents HTMX responses from lagging one action behind.
+        """
+        teacher_classes = []
+
+        for attempt in range(max_retries + 1):
+            teacher_classes = self.db.get_teacher_classes(username, True)
+            matching_class = next((c for c in teacher_classes if c.get("id") == class_id), None)
+
+            if should_exist is False and matching_class is None:
+                return teacher_classes
+
+            if should_exist is True and matching_class is not None:
+                if expected_archived is None:
+                    return teacher_classes
+                if bool(matching_class.get("archived", False)) == expected_archived:
+                    return teacher_classes
+
+            if attempt < max_retries:
+                time.sleep(retry_delay_s)
+
+        return teacher_classes
+
+    @route("/class/<class_id>", methods=["DELETE"])
+    @requires_login
+    def delete_class_redesign(self, user, class_id):
+        Class = self.db.get_class(class_id)
+        if not Class:
+            return make_response(gettext("no_such_class"), 404)
+        if Class["teacher"] != user["username"]:
+            return make_response(gettext("unauthorized"), 401)
+
+        self.db.delete_class(Class)
+        teacher_classes = self._get_teacher_classes_after_class_update(
+            user["username"],
+            class_id,
+            should_exist=False,
+        )
+        active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
+
+        return render_partial(
+            "for-teachers/classes/htmx-classes-sections.html",
+            active_classes=active_classes,
+            archived_classes=archived_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
+        )
+
+    @route("/class/<class_id>/archive", methods=["POST"])
+    @requires_login
+    def archive_class_redesign(self, user, class_id):
+        Class = self.db.get_class(class_id)
+        if not Class:
+            return make_response(gettext("no_such_class"), 404)
+        if Class["teacher"] != user["username"]:
+            return make_response(gettext("unauthorized"), 401)
+
+        self.db.update_class_data(class_id, {"archived": True})
+        teacher_classes = self._get_teacher_classes_after_class_update(
+            user["username"],
+            class_id,
+            expected_archived=True,
+            should_exist=True,
+        )
+        active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
+
+        return render_partial(
+            "for-teachers/classes/htmx-classes-sections.html",
+            active_classes=active_classes,
+            archived_classes=archived_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
+        )
+
+    @route("/class/<class_id>/unarchive", methods=["POST"])
+    @requires_login
+    def unarchive_class_redesign(self, user, class_id):
+        Class = self.db.get_class(class_id)
+        if not Class:
+            return make_response(gettext("no_such_class"), 404)
+        if Class["teacher"] != user["username"]:
+            return make_response(gettext("unauthorized"), 401)
+
+        self.db.update_class_data(class_id, {"archived": False})
+        teacher_classes = self._get_teacher_classes_after_class_update(
+            user["username"],
+            class_id,
+            expected_archived=False,
+            should_exist=True,
+        )
+        active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
+
+        return render_partial(
+            "for-teachers/classes/htmx-classes-sections.html",
+            active_classes=active_classes,
+            archived_classes=archived_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
+        )
 
     @route("/class/new", methods=["GET"])
     @requires_teacher
@@ -261,7 +534,7 @@ class ForTeachersModule(WebsiteModule):
                 page='new-class'
             ))
 
-    @route("/redesign/class/<class_id>", methods=["GET"])
+    @route("/class/<class_id>", methods=["GET"])
     @requires_login
     def get_class_redesign(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -283,7 +556,7 @@ class ForTeachersModule(WebsiteModule):
             )
         )
 
-    @route("/redesign/class/<class_id>/graph", methods=["GET"])
+    @route("/class/<class_id>/graph", methods=["GET"])
     @requires_login
     def get_class_graph(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -313,7 +586,7 @@ class ForTeachersModule(WebsiteModule):
             )
         )
 
-    @route("/redesign/class/<class_id>/grade", methods=["GET"])
+    @route("/class/<class_id>/grade", methods=["GET"])
     @requires_login
     def get_grading_page(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -466,7 +739,77 @@ class ForTeachersModule(WebsiteModule):
         sorted_adventures = sorted(student_adventures.items(), key=functools.cmp_to_key(cmp_items))
         return dict(sorted_adventures)
 
-    @route("/redesign/class/<class_id>/grade/filter_sort", methods=["GET"])
+    @staticmethod
+    def _normalize_manage_class_sort_timestamp(timestamp):
+        if timestamp is None:
+            return float("-inf")
+        if isinstance(timestamp, datetime):
+            return timestamp.timestamp()
+        try:
+            normalized_timestamp = int(timestamp)
+        except (TypeError, ValueError):
+            return float("-inf")
+        if normalized_timestamp > 10_000_000_000:
+            return normalized_timestamp / 1000
+        return normalized_timestamp
+
+    def _build_manage_class_rows(self, Class):
+        student_information = []
+
+        for student_username in Class.get("students", []):
+            student_info = self.db.user_by_username(student_username)
+            if not student_info:
+                continue
+
+            last_login = student_info.get("last_login")
+            normalized_student = dict(student_info)
+            normalized_student["is_invite"] = False
+            normalized_student["_sort_name"] = (normalized_student.get("username") or "").lower()
+            normalized_student["_sort_timestamp"] = self._normalize_manage_class_sort_timestamp(last_login)
+            normalized_student["last_login"] = (
+                utils.localized_date_format(last_login)
+                if last_login is not None
+                else gettext("never")
+            )
+            student_information.append(normalized_student)
+
+        invites = self.db.get_class_invites(class_id=Class["id"])
+        for invite in invites:
+            if invite.get("invited_as") != "student":
+                continue
+            normalized_invite = dict(invite)
+            normalized_invite["is_invite"] = True
+            normalized_invite["_sort_name"] = (normalized_invite.get("username") or "").lower()
+            normalized_invite["_sort_timestamp"] = self._normalize_manage_class_sort_timestamp(
+                normalized_invite.get("unformatted_timestamp")
+            )
+            normalized_invite["last_login"] = normalized_invite.get("timestamp") or gettext("never")
+            student_information.append(normalized_invite)
+
+        return student_information
+
+    def _sort_manage_class_rows(self, student_information, student_order, timestamp_order):
+        sort_instructions = []
+        if timestamp_order in ["ascendent", "descendent"]:
+            sort_instructions.append(("timestamp", timestamp_order == "descendent"))
+        if student_order in ["ascendent", "descendent"]:
+            sort_instructions.append(("student", student_order == "descendent"))
+
+        for sort_field, reverse in sort_instructions:
+            if sort_field == "timestamp":
+                student_information.sort(
+                    key=lambda item: item.get("_sort_timestamp", float("-inf")),
+                    reverse=reverse,
+                )
+            else:
+                student_information.sort(
+                    key=lambda item: item.get("_sort_name", ""),
+                    reverse=reverse,
+                )
+
+        return student_information
+
+    @route("/class/<class_id>/grade/filter_sort", methods=["GET"])
     @requires_login
     def filter_sort_grading_page(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
@@ -502,7 +845,7 @@ class ForTeachersModule(WebsiteModule):
         filtered_adventures = self.sort_student_adventures(
             filtered_adventures, sort_orders
         )
-        print("Filtered adventures:", filtered_adventures)
+
         return render_partial(
             "for-teachers/classes/htmx-grade-class-table-body.html",
             class_id=class_id,
@@ -512,13 +855,516 @@ class ForTeachersModule(WebsiteModule):
             sort_orders=sort_orders
         )
 
-    @route("/redesign/program/<class_id>/grade", methods=["POST"])
+    @route("/class/<class_id>/configure", methods=["GET"])
+    @requires_login
+    def configure_class(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        # Classes that were never customized have no record yet. Create one, otherwise this page
+        # would draw every level as closed and the first toggle would have nothing to update.
+        customizations = get_customizations(self.db, class_id)
+
+        second_teacher_invites = [
+            invite
+            for invite in self.db.get_class_invites(class_id=class_id)
+            if invite.get("invited_as") == "second_teacher"
+        ]
+
+        return render_template(
+            "for-teachers/classes/configure-class.html",
+            class_id=class_id,
+            class_info=Class,
+            customizations=customizations,
+            second_teacher_invites=second_teacher_invites,
+            max_level=hedy.HEDY_MAX_LEVEL,
+            javascript_page_options=dict(
+                page="configure-class",
+            ),
+        )
+
+    @route("/customize-levels/<class_id>", methods=["POST"])
+    @requires_teacher
+    def update_class_customization_level(self, user, class_id):
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        body = request.json
+        # Validations
+        if not isinstance(body, dict):
+            return make_response(gettext("ajax_error"), 400)
+
+        customizations = get_customizations(self.db, class_id)
+
+        if "level" in body:
+            # One level was toggled. Only touching that level means two teachers working on
+            # the same class at the same time can no longer overwrite each other's levels.
+            try:
+                level = int(body["level"])
+            except (TypeError, ValueError):
+                return make_response(gettext("request_invalid"), 400)
+            if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+                return make_response(gettext("request_invalid"), 400)
+            _set_level_availability(customizations, level, bool(body.get("enabled")))
+        elif isinstance(body.get("levels"), list):
+            # The whole set of levels at once, as sent by older (cached) front-ends.
+            try:
+                levels = {int(i) for i in body["levels"]}
+            except (TypeError, ValueError):
+                return make_response(gettext("request_invalid"), 400)
+            newly_opened = levels - set(customizations.get("levels", []))
+            customizations["levels"] = sorted(levels)
+            for level in newly_opened:
+                _clear_opening_date(customizations, level)
+        else:
+            return make_response(gettext("request_invalid"), 400)
+
+        customizations["updated_by"] = user["username"]
+        self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user["email"])
+        response = {"success": gettext("class_customize_success")}
+
+        return make_response(response, 200)
+
+    @route("/class/<class_id>/customize-level/<level>", methods=["GET"])
+    @requires_login
+    def customize_level(self, user, class_id, level):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return utils.error_page(error=404, ui_message=gettext("no_such_level"))
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return utils.error_page(error=404, ui_message=gettext("no_such_level"))
+
+        session["class_id"] = class_id
+        customizations, adventures, _, available_adventures, _ = self.get_class_info(
+            user, class_id, migrate_customizations=True
+        )
+        return render_template(
+            "for-teachers/classes/customize-level.html",
+            class_id=class_id,
+            class_info=Class,
+            level=level,
+            customizations=customizations,
+            adventures=adventures,
+            available_adventures=available_adventures,
+            javascript_page_options=dict(
+                page="customize-level",
+            ),
+        )
+
+    def _get_teacher_adventures_for_class(self, user, class_id):
+        """Return own + second-teacher adventures for a class."""
+        teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
+        second_teacher_adventures = self.db.get_second_teacher_adventures(
+            [self.db.get_class(class_id)], user["username"]
+        )
+        return teacher_adventures + second_teacher_adventures
+
+    def _render_customize_level_adventures_partial(self, class_id, level, adventures, available_adventures):
+        """Render only the single-level sortable block used by HTMX updates."""
+        return render_partial(
+            "for-teachers/classes/htmx-customize-level-adventures.html",
+            class_id=class_id,
+            level=level,
+            adventures=adventures[level],
+            available_adventures=available_adventures[level],
+        )
+
+    @route("/class/<class_id>/customize-level/<level>/availability", methods=["POST"])
+    @requires_login
+    def update_customize_level_availability(self, user, class_id, level):
+        """Enable or disable one level for a class and return refreshed availability UI."""
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return make_response(gettext("request_invalid"), 400)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return make_response(gettext("request_invalid"), 400)
+
+        enabled_raw = str(request.form.get("enabled", "false")).strip().lower()
+        enabled = enabled_raw in {"1", "true", "on", "yes"}
+
+        customizations = get_customizations(self.db, class_id)
+        _set_level_availability(customizations, level, enabled)
+        customizations["updated_by"] = user["username"]
+        self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user["email"])
+
+        return render_partial(
+            "for-teachers/classes/htmx-customize-level-availability-status.html",
+            level=level,
+            customizations=customizations,
+        )
+
+    @route("/class/<class_id>/customize-level/<level>/add-adventure", methods=["POST"])
+    @requires_login
+    def add_adventure_customize_level(self, user, class_id, level):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return make_response(gettext("request_invalid"), 400)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return make_response(gettext("request_invalid"), 400)
+
+        adventure_ids = [
+            adventure_id.strip()
+            for adventure_id in request.form.getlist("adventure_id")
+            if adventure_id and adventure_id.strip()
+        ]
+        if not adventure_ids:
+            return make_response(gettext("request_invalid"), 400)
+
+        customizations, adventures, _, available_adventures, _ = self.get_class_info(
+            user, class_id, migrate_customizations=True
+        )
+        teacher_adventures = self._get_teacher_adventures_for_class(user, class_id)
+        teacher_adventure_ids = {adventure["id"] for adventure in teacher_adventures}
+
+        level_key = str(level)
+        added_any = False
+        for adventure_id in adventure_ids:
+            next_item = {
+                "name": adventure_id,
+                "from_teacher": adventure_id in teacher_adventure_ids,
+            }
+            if next_item not in customizations["sorted_adventures"][level_key]:
+                customizations["sorted_adventures"][level_key].append(next_item)
+                added_any = True
+
+        if added_any:
+            self.reorder_adventures(customizations["sorted_adventures"][level_key])
+            self.db.update_class_customizations(customizations)
+            add_class_customized_to_subscription(user["email"])
+
+            customizations, adventures, _, available_adventures, _ = self.get_class_info(
+                user, class_id, migrate_customizations=True
+            )
+
+        return self._render_customize_level_adventures_partial(
+            class_id, level, adventures, available_adventures
+        )
+
+    @route("/class/<class_id>/customize-level/<level>/restore-default-adventures", methods=["POST"])
+    @requires_login
+    def restore_default_adventures_customize_level(self, user, class_id, level):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return make_response(gettext("request_invalid"), 400)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return make_response(gettext("request_invalid"), 400)
+
+        customizations, adventures, _, available_adventures, _ = self.get_class_info(
+            user, class_id, migrate_customizations=True
+        )
+
+        level_key = str(level)
+        customizations["sorted_adventures"][level_key] = [
+            {"name": adventure_id, "from_teacher": False}
+            for adventure_id in hedy_content.adventures_order_per_level().get(level, [])
+        ]
+
+        self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user["email"])
+
+        customizations, adventures, _, available_adventures, _ = self.get_class_info(
+            user, class_id, migrate_customizations=True
+        )
+
+        return self._render_customize_level_adventures_partial(
+            class_id, level, adventures, available_adventures
+        )
+
+    @route("/class/<class_id>/customize-level/<level>/remove-adventure", methods=["POST"])
+    @requires_login
+    def remove_adventure_customize_level(self, user, class_id, level):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return make_response(gettext("request_invalid"), 400)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return make_response(gettext("request_invalid"), 400)
+
+        adventure_id = request.args.get("adventure_id")
+        if not adventure_id:
+            return make_response(gettext("request_invalid"), 400)
+
+        customizations, adventures, _, available_adventures, _ = self.get_class_info(
+            user, class_id, migrate_customizations=True
+        )
+        teacher_adventures = self._get_teacher_adventures_for_class(user, class_id)
+        is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
+
+        level_key = str(level)
+        remove_item = {"name": adventure_id, "from_teacher": is_teacher_adventure}
+        if remove_item in customizations["sorted_adventures"][level_key]:
+            customizations["sorted_adventures"][level_key].remove(remove_item)
+            self.db.update_class_customizations(customizations)
+            add_class_customized_to_subscription(user["email"])
+
+            customizations, adventures, _, available_adventures, _ = self.get_class_info(
+                user, class_id, migrate_customizations=True
+            )
+
+        return self._render_customize_level_adventures_partial(
+            class_id, level, adventures, available_adventures
+        )
+
+    @route("/class/<class_id>/customize-level/<level>/sort-adventures", methods=["POST"])
+    @requires_login
+    def sort_adventures_customize_level(self, user, class_id, level):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return make_response(gettext("request_invalid"), 400)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return make_response(gettext("request_invalid"), 400)
+
+        adventures_from_request = request.form.getlist("adventure")
+        customizations, adventures, _, available_adventures, _ = self.get_class_info(
+            user, class_id, migrate_customizations=True
+        )
+        teacher_adventures = self._get_teacher_adventures_for_class(user, class_id)
+
+        level_key = str(level)
+        customizations["sorted_adventures"][level_key] = []
+        for adventure_id in adventures_from_request:
+            is_teacher_adventure = self.is_adventure_from_teacher(adventure_id, teacher_adventures)
+            customizations["sorted_adventures"][level_key].append(
+                {"name": adventure_id, "from_teacher": is_teacher_adventure}
+            )
+
+        self.reorder_adventures(customizations["sorted_adventures"][level_key])
+        self.db.update_class_customizations(customizations)
+        add_class_customized_to_subscription(user["email"])
+
+        customizations, adventures, _, available_adventures, _ = self.get_class_info(
+            user, class_id, migrate_customizations=True
+        )
+        return self._render_customize_level_adventures_partial(
+            class_id, level, adventures, available_adventures
+        )
+
+    @route("/class/<class_id>/customize-level/<level>/remove-all-adventures-modal", methods=["GET"])
+    @requires_login
+    def get_remove_all_adventures_customize_level_modal(self, user, class_id, level):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        try:
+            level = int(level)
+        except (TypeError, ValueError):
+            return make_response(gettext("request_invalid"), 400)
+        if level < 1 or level > hedy.HEDY_MAX_LEVEL:
+            return make_response(gettext("request_invalid"), 400)
+
+        modal_text = gettext("remove_customizations_prompt")
+        htmx_endpoint = f"/for-teachers/class/{class_id}/customize-level/{level}/sort-adventures"
+        htmx_target = "#level_adventures_panel"
+        htmx_swap = "outerHTML"
+        htmx_indicator = "#level_adventures_indicator"
+
+        return render_partial(
+            "modal/htmx-modal-confirm.html",
+            modal_text=modal_text,
+            htmx_endpoint=htmx_endpoint,
+            htmx_target=htmx_target,
+            htmx_swap=htmx_swap,
+            htmx_indicator=htmx_indicator,
+            modal_variant="redesign",
+        )
+
+    @route("/class/<class_id>/manage", methods=["GET"])
+    @requires_login
+    def manage_class(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        student_information = self._build_manage_class_rows(Class)
+        return render_template(
+            "for-teachers/classes/manage-class.html",
+            class_id=class_id,
+            class_info=Class,
+            students=student_information,
+            javascript_page_options=dict(
+                page="manage-students",
+            ),
+        )
+
+    @route("/class/<class_id>/manage/filter_sort", methods=["GET"])
+    @requires_login
+    def sort_management_page(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        student_order = request.args.get("student")
+        timestamp_order = request.args.get("timestamp")
+        student_information = self._build_manage_class_rows(Class)
+        student_information = self._sort_manage_class_rows(
+            student_information,
+            student_order,
+            timestamp_order,
+        )
+
+        return render_partial(
+            "for-teachers/classes/manage-class-table-body.html",
+            class_info=Class,
+            students=student_information,
+        )
+
+    @route("/class/<class_id>/manage/invite", methods=["POST"])
+    @requires_teacher
+    def invite_users(self, user, class_id):
+        if not isinstance(request.form.getlist('usernames'), list):
+            return make_response(gettext("username_invalid"), 400)
+        if len(request.form.getlist('usernames')) < 1:
+            return make_response(gettext("username_empty"), 400)
+        usernames = request.form.getlist('usernames')
+        invite_as = 'student'
+        Class = self.db.get_class(class_id)
+
+        if not Class or not (utils.can_edit_class(user, Class)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        users = self.db.users_by_username(usernames)
+        existing_students = set(Class.get("students", []))
+        existing_invites = {
+            invite.get("username")
+            for invite in self.db.get_class_invites(class_id=class_id)
+            if invite.get("invited_as") == "student"
+        }
+
+        for user in users:
+            username = user.get("username")
+            if not username:
+                continue
+            if username in existing_students or username in existing_invites:
+                continue
+            self.db.add_class_invite(
+                username=username,
+                class_id=class_id,
+                invited_as=invite_as,
+                invited_as_text=gettext(invite_as)
+            )
+        student_information = self._build_manage_class_rows(Class)
+        return render_partial(
+            "for-teachers/classes/manage-class-table-body.html",
+            class_info=Class,
+            students=student_information,
+        )
+
+    @route("/class/<class_id>/configure/invite", methods=["POST"])
+    @requires_teacher
+    def invite_second_teachers_configure(self, user, class_id):
+        if not isinstance(request.form.getlist('usernames'), list):
+            return make_response(gettext("username_invalid"), 400)
+        if len(request.form.getlist('usernames')) < 1:
+            return make_response(gettext("username_empty"), 400)
+
+        usernames = request.form.getlist('usernames')
+        Class = self.db.get_class(class_id)
+        if not Class or not (utils.can_edit_class(user, Class)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        users = self.db.users_by_username(usernames)
+        existing_invites = {
+            invite.get("username")
+            for invite in self.db.get_class_invites(class_id=class_id)
+            if invite.get("invited_as") == "second_teacher"
+        }
+        existing_second_teachers = {
+            teacher.get("username")
+            for teacher in Class.get("second_teachers", [])
+        }
+
+        for invited_user in users:
+            username = invited_user.get("username")
+            if not username:
+                continue
+            if username == Class.get("teacher"):
+                continue
+            if username in existing_second_teachers or username in existing_invites:
+                continue
+            self.db.add_class_invite(
+                username=username,
+                class_id=class_id,
+                invited_as="second_teacher",
+                invited_as_text=gettext("second_teacher")
+            )
+
+        second_teacher_invites = [
+            invite
+            for invite in self.db.get_class_invites(class_id=Class["id"])
+            if invite.get("invited_as") == "second_teacher"
+        ]
+        return render_partial(
+            "for-teachers/classes/configure-class-teachers-table-body.html",
+            class_info=Class,
+            second_teacher_invites=second_teacher_invites,
+        )
+
+    @route("/program/<class_id>/grade", methods=["POST"])
     @requires_login
     def tick_student_adventure(self, user, class_id):
         level = request.args.get("level")
         student_name = request.args.get("student", type=str)
         adventure_name = request.args.get("adventure_name", type=str)
-        print(student_name, adventure_name, level)
         student_adventure_id = f"{student_name}-{adventure_name}-{level}"
         student_adventure = self.db.student_adventure_by_id(student_adventure_id)
         if not student_adventure:
@@ -566,9 +1412,9 @@ class ForTeachersModule(WebsiteModule):
             class_adventures_formatted[key] = adventure_list
         return students, class_adventures_formatted, adventure_names
 
-    @route("/class/<class_id>", methods=["GET"])
+    @route("/legacy/class/<class_id>", methods=["GET"])
     @requires_login
-    def get_class(self, user, class_id):
+    def get_class_legacy(self, user, class_id):
         if not is_teacher(user) and not is_admin(user):
             return utils.error_page(error=401, ui_message=gettext("retrieve_class_error"))
         Class = self.db.get_class(class_id)
@@ -694,6 +1540,9 @@ class ForTeachersModule(WebsiteModule):
                 # Old programs sometimes don't have adventures associated to them
                 # So skip them
                 if 'adventure_name' not in program:
+                    continue
+
+                if str(program['level']) not in class_adventures_formatted:
                     continue
                 adventures_tried += 1
                 name = adventure_names.get(program['adventure_name'], program['adventure_name'])
@@ -876,6 +1725,69 @@ class ForTeachersModule(WebsiteModule):
                               htmx_target=htmx_target,
                               hyperscript=hyperscript)
 
+    @route("/class/<class_id>/manage/remove_student_modal/<student_id>", methods=["GET"])
+    @requires_teacher
+    def get_remove_student_modal_redesign(self, user, class_id, student_id):
+        is_invite = request.args.get('is_invite', type=int)
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        modal_text_template = gettext('remove_student_prompt')
+        try:
+            modal_text = modal_text_template.format(student='', student_name='')
+        except (KeyError, IndexError, ValueError):
+            modal_text = modal_text_template
+        htmx_endpoint = f'/for-teachers/class/{class_id}\
+            /manage/remove_student/{student_id}?is_invite={is_invite}'.replace(" ", "")
+        htmx_target = "#students-table"
+        hyperscript = ""
+        htmx_success_message = gettext("student_removed_successfully")
+        return render_partial(
+            'modal/htmx-modal-confirm.html',
+            modal_text=modal_text,
+            htmx_endpoint=htmx_endpoint,
+            htmx_target=htmx_target,
+            hyperscript=hyperscript,
+            htmx_success_message=htmx_success_message,
+            confirm_button_label=gettext('remove'),
+            confirm_button_class='red-btn-new',
+            modal_title=gettext('remove'),
+            modal_title_name=student_id,
+            modal_variant='redesign'
+        )
+
+    @route(
+        "/class/<class_id>/manage/remove_student/<student_id>",
+        methods=["POST"],
+    )
+    @requires_login
+    def remove_student_from_class_redesign(self, user, class_id, student_id):
+        is_invite = bool(request.args.get("is_invite", type=int))
+        Class = self.db.get_class(class_id)
+        if not Class or not (utils.can_edit_class(user, Class)):
+            return make_response(gettext("ajax_error"), 400)
+
+        if is_invite:
+            self.db.remove_user_class_invite(student_id, class_id)
+        else:
+            self.db.remove_student_from_class(Class["id"], student_id)
+
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+        student_information = self._build_manage_class_rows(Class)
+        return jinja_partials.render_partial(
+            "for-teachers/classes/manage-class-table.html",
+            class_id=class_id,
+            class_info=Class,
+            students=student_information,
+        )
+
     @route("/class/<class_id>/remove_student/<student_id>", methods=["POST"])
     @requires_login
     def leave_class(self, user, class_id, student_id):
@@ -938,7 +1850,7 @@ class ForTeachersModule(WebsiteModule):
                                              students_info=students_info
                                              )
 
-    @route("/redesign/get_student_programs", methods=["GET"])
+    @route("/get_student_programs", methods=["GET"])
     @requires_teacher
     def show_students_programs_performance_graph(self, user):
         """
@@ -1043,10 +1955,15 @@ class ForTeachersModule(WebsiteModule):
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        preview_level = request.args.get("level", default=None, type=int)
         session["preview_class"] = {
             "id": Class["id"],
             "name": Class["name"],
         }
+
+        if preview_level and 1 <= preview_level <= hedy.HEDY_MAX_LEVEL:
+            return redirect(f"/hedy/{preview_level}")
         return redirect("/hedy")
 
     @route("/clear-preview-class", methods=["GET"])
@@ -1054,37 +1971,6 @@ class ForTeachersModule(WebsiteModule):
     def clear_preview_class(self):
         utils.remove_class_preview()
         return redirect("/for-teachers")
-
-    @route("/preview-teacher-mode", methods=["GET"])
-    def preview_teacher_mode(self):
-        id = uuid.uuid4().hex[:5]
-        username = f"testteacher_{id}"
-        user = self.db.user_by_username(username)
-        if not user:
-            user_pass = os.getenv("PREVIEW_TEACHER_MODE_PASSWORD", "")
-            username, hashed, _ = prepare_user_db(username, user_pass)
-            user = {
-                "username": username,
-                "password": hashed,
-                "is_teacher": 1,
-                "created": utils.timems(),
-                "last_login": utils.timems(),
-            }
-            self.db.store_user(user)
-        else:
-            self.db.forget_user(username)
-
-        session["preview_teacher_mode"] = {
-            "username": username,
-        }
-        remember_current_user(user)
-        return redirect("/for-teachers")
-
-    @route("/exit-preview-teacher-mode", methods=["GET"])
-    # Note: we explicitly do not need login here, anyone can exit preview mode
-    def exit_teacher_mode(self):
-        self.auth.logout()
-        return redirect("/hedy")
 
     @route("/class/<class_id>/programs/<username>", methods=["GET", "POST"])
     @requires_teacher
@@ -1191,6 +2077,94 @@ class ForTeachersModule(WebsiteModule):
                 page='customize-class',
                 class_id=class_id
             ))
+
+    def _update_class_content_to_latest(self, user, class_id):
+        session["class_id"] = class_id
+        customizations, _, _, _, _ = self.get_class_info(
+            user, class_id, migrate_customizations=True
+        )
+
+        content_adventures = hedy_content.adventures_order_per_level()
+        db_adventures = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
+        for level, default_adventures in content_adventures.items():
+            for adventure in default_adventures:
+                db_adventures[str(level)].append(
+                    {"name": adventure, "from_teacher": False}
+                )
+        if "levels" in customizations:
+            levels = [
+                level
+                for level in customizations["levels"]
+                if level <= hedy.HEDY_MAX_LEVEL
+            ]
+        else:
+            levels = [i for i in range(1, hedy.HEDY_MAX_LEVEL + 1)]
+        customizations["levels"] = levels
+        opening_dates = {
+            level: date
+            for level, date in customizations.get("opening_dates", {}).items()
+            if int(level) <= hedy.HEDY_MAX_LEVEL
+        }
+        customizations["opening_dates"] = opening_dates
+        for level, adventures_list in customizations.get(
+            "sorted_adventures", {}
+        ).items():
+            if int(level) > hedy.HEDY_MAX_LEVEL:
+                continue
+            for adventure in adventures_list:
+                if adventure["from_teacher"]:
+                    db_adventures[level].append(adventure)
+
+        customizations["sorted_adventures"] = db_adventures
+        _set_customizations_content_version(customizations)
+
+        self.db.update_class_customizations(customizations)
+
+    @route("/legacy/update-content/<class_id>", methods=["POST"])
+    @requires_login
+    def update_class_content_legacy(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        self._update_class_content_to_latest(user, class_id)
+
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
+        return render_partial(
+            "htmx-classes-table.html",
+            teacher_classes=teacher_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
+        )
+
+    @route("/update-content/<class_id>", methods=["POST"])
+    @requires_login
+    def update_class_content_redesign(self, user, class_id):
+        if not is_teacher(user) and not is_admin(user):
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_class_error")
+            )
+        Class = self.db.get_class(class_id)
+        if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
+            return utils.error_page(error=404, ui_message=gettext("no_such_class"))
+
+        self._update_class_content_to_latest(user, class_id)
+
+        teacher_classes = self.db.get_teacher_classes(user["username"], True)
+        class_customizations = self._get_class_customizations_map(teacher_classes)
+        active_classes, archived_classes = self._split_teacher_classes_by_archive_state(teacher_classes)
+        return render_partial(
+            "for-teachers/classes/htmx-classes-sections.html",
+            active_classes=active_classes,
+            archived_classes=archived_classes,
+            class_customizations=class_customizations,
+            last_content_version=hedy_content.LAST_CONTENT_VERSION,
+        )
 
     # Disabling the load-survey route until the survey UI is redesigned
     # Explicitly not removing the code because it should be used again after the redesign
@@ -1433,8 +2407,13 @@ class ForTeachersModule(WebsiteModule):
                     "updated_by": user["username"],
                     "quiz_parsons_tabs_migrated": True,
                 }
+                _set_customizations_content_version(customizations)
                 self.db.update_class_customizations(customizations)
-        for level, sorted_adventures in customizations['sorted_adventures'].items():
+        sorted_adventures = {
+            k: v for k, v in customizations.get('sorted_adventures', {}).items() if int(k) <= hedy.HEDY_MAX_LEVEL
+        }
+
+        for level, sorted_adventures in sorted_adventures.items():
             for adventure in sorted_adventures:
                 if adventure['name'] in adventure_names:
                     sorted_adventure = SortedAdventure(short_name=adventure['name'],
@@ -1475,9 +2454,13 @@ class ForTeachersModule(WebsiteModule):
             adventure = SortedAdventure(short_name=teacher_adventure['id'],
                                         long_name=teacher_adventure['name'],
                                         is_teacher_adventure=True,
-                                        is_command_adventure=False,)
+                                        is_command_adventure=False,
+                                        is_second_teacher_adventure=teacher_adventure.get('why') == 'shared_class',
+                                        shared_class_name=teacher_adventure.get('why_class', ''),)
             # levels=teacher_adventure.get("levels", []))
             for level in teacher_adventure.get("levels", [teacher_adventure.get("level")]):
+                if int(level) > hedy.HEDY_MAX_LEVEL:
+                    continue
                 teacher_adventures[int(level)].add(adventure)
 
         for level in range(1, hedy.HEDY_MAX_LEVEL + 1):
@@ -1499,33 +2482,44 @@ class ForTeachersModule(WebsiteModule):
     @route("/restore-customizations", methods=["POST"])
     @requires_teacher
     def restore_customizations_to_default(self, user):
-        class_id = session['class_id']
-        level = request.args.get('level')
+        class_id = session["class_id"]
+        level = request.args.get("level")
 
         Class = self.db.get_class(class_id)
         if not Class or (not utils.can_edit_class(user, Class) and not is_admin(user)):
             return utils.error_page(error=404, ui_message=gettext("no_such_class"))
         teacher_adventures = list(self.db.get_teacher_adventures(user["username"]))
-        second_teacher_adventures = self.db.get_second_teacher_adventures([Class], user["username"])
+        second_teacher_adventures = self.db.get_second_teacher_adventures(
+            [Class], user["username"]
+        )
         teacher_adventures += second_teacher_adventures
 
-        customizations, adventures, adventure_names, available_adventures, _ = self.get_class_info(
-            user, session['class_id'])
+        customizations, adventures, adventure_names, available_adventures, _ = (
+            self.get_class_info(user, session["class_id"])
+        )
 
         db_adventures = {str(i): [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
         adventures = {i: [] for i in range(1, hedy.HEDY_MAX_LEVEL + 1)}
-        for lvl, default_adventures in hedy_content.adventures_order_per_level().items():
+        for (
+            lvl,
+            default_adventures,
+        ) in hedy_content.adventures_order_per_level().items():
             for adventure in default_adventures:
-                db_adventures[str(lvl)].append({'name': adventure, 'from_teacher': False})
-                sorted_adventure = SortedAdventure(short_name=adventure,
-                                                   long_name=adventure_names.get(adventure, adventure),
-                                                   is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES,
-                                                   is_teacher_adventure=False)
+                db_adventures[str(lvl)].append(
+                    {"name": adventure, "from_teacher": False}
+                )
+                sorted_adventure = SortedAdventure(
+                    short_name=adventure,
+                    long_name=adventure_names.get(adventure, adventure),
+                    is_command_adventure=adventure in hedy_content.KEYWORDS_ADVENTURES,
+                    is_teacher_adventure=False,
+                )
                 adventures[lvl].append(sorted_adventure)
 
         for adventure in teacher_adventures:
-            available_adventures[int(adventure['level'])].append(
-                {"name": adventure['id'], "from_teacher": True})
+            available_adventures[int(adventure["level"])].append(
+                {"name": adventure["id"], "from_teacher": True}
+            )
 
         customizations = {
             "id": class_id,
@@ -1535,21 +2529,26 @@ class ForTeachersModule(WebsiteModule):
             "level_thresholds": {},
             "sorted_adventures": db_adventures,
             "restored_by": user["username"],
-            "updated_by": user["username"]
+            "updated_by": user["username"],
         }
+        _set_customizations_content_version(customizations)
 
         self.db.update_class_customizations(customizations)
-        available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
+        available_adventures = self.get_unused_adventures(
+            adventures, teacher_adventures, adventure_names
+        )
 
-        return render_partial('customize-class/partial-sortable-adventures.html',
-                              level=level,
-                              customizations=customizations,
-                              adventures=adventures,
-                              max_level=hedy.HEDY_MAX_LEVEL,
-                              adventure_names=adventure_names,
-                              adventures_default_order=hedy_content.adventures_order_per_level(),
-                              available_adventures=available_adventures,
-                              class_id=session['class_id'])
+        return render_partial(
+            "customize-class/partial-sortable-adventures.html",
+            level=level,
+            customizations=customizations,
+            adventures=adventures,
+            max_level=hedy.HEDY_MAX_LEVEL,
+            adventure_names=adventure_names,
+            adventures_default_order=hedy_content.adventures_order_per_level(),
+            available_adventures=available_adventures,
+            class_id=session["class_id"],
+        )
 
     @route("/restore-adventures/level/<level>", methods=["POST"])
     @requires_teacher
@@ -1579,6 +2578,8 @@ class ForTeachersModule(WebsiteModule):
                 adventures[lvl].append(sorted_adventure)
 
         customizations['sorted_adventures'] = db_adventures
+        _set_customizations_content_version(customizations)
+
         available_adventures = self.get_unused_adventures(adventures, teacher_adventures, adventure_names)
         self.db.update_class_customizations(customizations)
 
@@ -1836,6 +2837,7 @@ class ForTeachersModule(WebsiteModule):
     def get_new_adventure(self, user):
         class_id = request.args.get("class_id")
         level = request.args.get("level")
+        adventure_name = request.args.get("name", "")
 
         adventure_id = uuid.uuid4().hex
         adventure = self.create_basic_adventure(user, adventure_id)
@@ -1848,12 +2850,20 @@ class ForTeachersModule(WebsiteModule):
             session['class_id'] = class_id
             adventure["classes"] = [class_id]
 
+        if isinstance(adventure_name, str):
+            adventure["name"] = adventure_name.strip()
+
         session["new_adventure"] = adventure
         return redirect(f"/for-teachers/customize-adventure/{adventure['id']}?new_adventure=1")
 
-    @route("/customize-adventure/<adventure_id>", methods=["GET"])
-    @requires_teacher
-    def get_adventure_info(self, user, adventure_id,):
+    def _render_customize_adventure_page(
+        self,
+        user,
+        adventure_id,
+        template_name,
+        *,
+        javascript_page="customize-adventure",
+    ):
         if not adventure_id:
             return make_response(gettext("adventure_empty"), 400)
         if not isinstance(adventure_id, str):
@@ -1861,44 +2871,82 @@ class ForTeachersModule(WebsiteModule):
 
         adventure = self.db.get_adventure(adventure_id)
         if not adventure and request.args.get("new_adventure"):
-            adventure = session.get("new_adventure", self.create_basic_adventure(user, adventure_id))
+            adventure = session.get(
+                "new_adventure", self.create_basic_adventure(user, adventure_id)
+            )
 
         if not adventure:
-            return utils.error_page(error=404, ui_message=gettext("retrieve_adventure_error"))
+            return utils.error_page(
+                error=404, ui_message=gettext("retrieve_adventure_error")
+            )
         if adventure["creator"] != user["username"] and not is_teacher(user):
-            return utils.error_page(error=401, ui_message=gettext("retrieve_adventure_error"))
+            return utils.error_page(
+                error=401, ui_message=gettext("retrieve_adventure_error")
+            )
 
-        adventure['content'] = safe_format(adventure['content'],
-                                           **hedy_content.KEYWORDS.get(g.keyword_lang))
-        adventure['solution_example'] = safe_format(adventure.get('solution_example', ''),
-                                                    **hedy_content.KEYWORDS.get(g.keyword_lang))
+        adventure["content"] = safe_format(
+            adventure["content"], **hedy_content.KEYWORDS.get(g.keyword_lang)
+        )
+        adventure["solution_example"] = safe_format(
+            adventure.get("solution_example", ""),
+            **hedy_content.KEYWORDS.get(g.keyword_lang),
+        )
 
         # We don't change adventure["content"] because it's used in the editor, while this is for previwing only.
-        preview_content, adventure["example_code"] = halve_adventure_content(adventure["content"])
+        preview_content, adventure["example_code"] = halve_adventure_content(
+            adventure["content"]
+        )
 
         # Now it gets a bit complex, we want to get the teacher classes as well as the customizations
         # This is a quite expensive retrieval, but we should be fine as this page is not called often
         # We only need the name, id and if it already has the adventure set as data to the front-end
         classes = self.db.get_teacher_classes(user["username"], True)
         adventure_used_in_classes = []
+        current_levels = {str(level) for level in adventure.get("levels", [])}
+
+        def level_sort_key(level_value):
+            try:
+                return int(level_value)
+            except (TypeError, ValueError):
+                return level_value
+
         for Class in classes:
-            customizations = self.db.get_class_customizations(Class.get("id"))
-            for level in adventure.get("levels", []):
-                # TODO: change name to id in sorted_adventures (probably it's only teachers' adventures!)
-                adventures_for_level = customizations.get(
-                    "sorted_adventures", {}).get(level, []) if customizations else []
-                if any(adv for adv in adventures_for_level if adv.get("name") == adventure.get("id")):
-                    adventure_used_in_classes.append({
-                        "name": Class.get("name"),
-                        "id": Class.get("id"),
-                        "teacher": Class.get("teacher"),
-                        "students": Class.get("students", []),
-                        "date": Class.get("date")
-                    })
-                    break
+            customizations = self.db.get_class_customizations(Class.get("id")) or {}
+            sorted_adventures = customizations.get("sorted_adventures", {})
+            used_levels = []
+
+            for level, adventures_for_level in sorted_adventures.items():
+                if any(
+                    adv
+                    for adv in adventures_for_level
+                    if adv.get("name") == adventure.get("id")
+                ):
+                    used_levels.append(str(level))
+
+            if not used_levels:
+                continue
+
+            used_levels = sorted(set(used_levels), key=level_sort_key)
+            invalid_levels = sorted(
+                [level for level in used_levels if level not in current_levels],
+                key=level_sort_key,
+            )
+
+            adventure_used_in_classes.append(
+                {
+                    "name": Class.get("name"),
+                    "id": Class.get("id"),
+                    "teacher": Class.get("teacher"),
+                    "students": Class.get("students", []),
+                    "date": Class.get("date"),
+                    "used_levels": used_levels,
+                    "invalid_levels": invalid_levels,
+                    "has_invalid_levels": len(invalid_levels) > 0,
+                }
+            )
 
         return render_template(
-            "customize-adventure.html",
+            template_name,
             page_title=gettext("title_customize-adventure"),
             adventure=adventure,
             adventure_classes=adventure_used_in_classes,
@@ -1914,13 +2962,32 @@ class ForTeachersModule(WebsiteModule):
                 lang=g.lang,
             ),
             javascript_page_options=dict(
-                page='customize-adventure',
+                page=javascript_page,
                 lang=g.lang,
                 level=adventure.get("level", ""),
                 adventures=[adventure],
-                initial_tab='',
-                current_user_name=user['username'],
-            )
+                initial_tab="",
+                current_user_name=user["username"],
+                form_id="customize_adventure",
+            ),
+        )
+
+    @route("/legacy/customize-adventure/<adventure_id>", methods=["GET"])
+    @requires_teacher
+    def get_adventure_info_legacy(self, user, adventure_id,):
+        return self._render_customize_adventure_page(
+            user,
+            adventure_id,
+            "customize-adventure.html",
+        )
+
+    @route("/customize-adventure/<adventure_id>", methods=["GET"])
+    @requires_teacher
+    def get_adventure_info(self, user, adventure_id):
+        return self._render_customize_adventure_page(
+            user,
+            adventure_id,
+            "for-teachers/adventures/customize-adventure.html",
         )
 
     @route("/customize-adventure", methods=["POST"])
@@ -1939,7 +3006,9 @@ class ForTeachersModule(WebsiteModule):
             return make_response(gettext("level_invalid"), 400)
         if not isinstance(body.get("content"), str):
             return make_response(gettext("content_invalid"), 400)
-        if len(body.get("content")) < 20:
+        content_text = BeautifulSoup(body.get("content"), features="html.parser").get_text()
+        content_text = content_text.replace("\xa0", "").strip()
+        if content_text != "" and len(body.get("content")) < 20:
             return make_response(gettext("adventure_length"), 400)
         if not isinstance(body.get("public"), bool) and not isinstance(body.get("public"), int):
             return make_response(gettext("public_invalid"), 400)
@@ -1989,6 +3058,7 @@ class ForTeachersModule(WebsiteModule):
             "public": 1 if body["public"] else 0,
             "language": body["language"],
             "content": body["content"],
+            "formatted_content": body.get("formatted_content", body["content"]),
             "solution_example": body.get("formatted_solution_code"),
         }
 
@@ -2016,6 +3086,70 @@ class ForTeachersModule(WebsiteModule):
                     self.add_adventure_to_class_level(user, class_id, body["id"], level, False)
 
         return make_response({"success": gettext("adventure_updated")}, 200)
+
+    @route("/customize-adventure/<adventure_id>/name", methods=["PUT"])
+    @requires_teacher
+    def rename_adventure(self, user, adventure_id):
+        body = request.json
+        if not isinstance(body, dict):
+            return make_response(gettext("ajax_error"), 400)
+
+        new_name = body.get("name")
+        if not isinstance(new_name, str):
+            return make_response(gettext("adventure_name_invalid"), 400)
+
+        new_name = new_name.strip()
+        if len(new_name) < 1:
+            return make_response(gettext("adventure_empty"), 400)
+
+        adventure = self.db.get_adventure(adventure_id)
+        if not adventure:
+            session_adventure = session.get("new_adventure")
+            if isinstance(session_adventure, dict) and session_adventure.get("id") == adventure_id:
+                session_adventure["name"] = new_name
+                session["new_adventure"] = session_adventure
+                return make_response({}, 200)
+            return make_response(gettext("retrieve_adventure_error"), 404)
+
+        if adventure.get("creator") != user["username"]:
+            return make_response(gettext("unauthorized"), 401)
+
+        adventures = self.db.get_teacher_adventures(user["username"])
+        for teacher_adventure in adventures:
+            if teacher_adventure.get("name") == new_name and teacher_adventure.get("id") != adventure_id:
+                return make_response(gettext("adventure_duplicate"), 400)
+
+        self.db.update_adventure(adventure_id, {"name": new_name})
+        return make_response({}, 200)
+
+    @route("/customize-adventure/<adventure_id>/language", methods=["PUT"])
+    @requires_teacher
+    def update_adventure_language(self, user, adventure_id):
+        body = request.json
+        if not isinstance(body, dict):
+            return make_response(gettext("ajax_error"), 400)
+
+        language = body.get("language")
+        if not isinstance(language, str) or language not in hedy_content.ALL_LANGUAGES.keys():
+            return make_response(gettext("language_invalid"), 400)
+
+        try:
+            adventure = self.db.get_adventure(adventure_id)
+            if not adventure:
+                session_adventure = session.get("new_adventure")
+                if isinstance(session_adventure, dict) and session_adventure.get("id") == adventure_id:
+                    session_adventure["language"] = language
+                    session["new_adventure"] = session_adventure
+                    return make_response({}, 200)
+                return make_response(gettext("retrieve_adventure_error"), 404)
+
+            if adventure.get("creator") != user["username"]:
+                return make_response(gettext("unauthorized"), 401)
+
+            self.db.update_adventure(adventure_id, {"language": language})
+            return make_response({}, 200)
+        except Exception:
+            return make_response(gettext("saving_language_failed"), 500)
 
     @route("/customize-adventure/<adventure_id>", methods=["DELETE"])
     @route("/customize-adventure/<adventure_id>/<owner>", methods=["DELETE"])
@@ -2130,6 +3264,30 @@ class ForTeachersModule(WebsiteModule):
         return adventure["id"], 200
 
 
+def _clear_opening_date(customizations, level):
+    """Drop the scheduled opening date of a level, if it has one.
+
+    Opening dates can only be set on the legacy customize-class page. The redesigned pages
+    have no way to show or change them, so a level with a date in the future would read as
+    open there while students silently keep getting sent back to the first open level.
+    Toggling a level is an explicit statement about that level, so its schedule goes.
+    """
+    customizations.get("opening_dates", {}).pop(str(level), None)
+
+
+def _set_level_availability(customizations, level, enabled):
+    """Open or close a single level, leaving every other level untouched."""
+    levels = set(customizations.get("levels", []))
+    if enabled:
+        levels.add(level)
+    else:
+        levels.discard(level)
+
+    customizations["levels"] = sorted(levels)
+    _clear_opening_date(customizations, level)
+    return customizations
+
+
 def get_customizations(db, class_id):
     """
     Retrieves the customizations for a specific class from the database.
@@ -2185,7 +3343,15 @@ def _create_customizations(db, class_id, include_adventures=True):
             "selected_levels": [1]
         },
     }
+    _set_customizations_content_version(customizations)
     db.update_class_customizations(customizations)
+    return customizations
+
+
+def _set_customizations_content_version(customizations, content_version=None):
+    if content_version is None:
+        content_version = hedy_content.LAST_CONTENT_VERSION
+    customizations["content_version"] = content_version
     return customizations
 
 

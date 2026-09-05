@@ -5,14 +5,11 @@
 -   name: '{ask}'
     explanation: Kysy jotain komennolla `{ask}`.
     demo_code: '{ask} Mikä on lempivärisi?'
--   name: '{echo}'
-    explanation: Toista jotain komennolla `{echo}`.
+-   name: '{answer}'
+    explanation: Toista jotain komennolla `{answer}`.
     demo_code: |-
         {ask} Mikä on lempivärisi?
-        {echo} lempivärisi on siis
--   name: '{print} emojit'
-    explanation: Tulosta emoji komennolla `{print}`.
-    demo_code: '{print} 🙋 🌍 ❗'
+        {print} lempivärisi on siis {answer}
 -   name: '{forward}'
     explanation: Piirrä viiva komennolla `{forward}`.
     demo_code: '{forward} 100'
@@ -29,25 +26,10 @@
     demo_code: |-
         nimi {is} Hedy
         {print} Tervetuloa nimi
--   name: '{ask}'
-    explanation: Kysy jotain komennolla `{ask}`. Huomaa että sinun on annettava vastaukselle nimi käyttämällä komentoa `{is}`.
-    demo_code: |-
-        väri {is} {ask} Mikä on lempivärisi?
-        {print} väri on lempivärisi!
 -   name: '{sleep}'
     explanation: '`{sleep}`:lla voit antaa Hedyn pysähtyä pariksi sekunniksi.'
     demo_code: |-
-        {print} Annas kun ajattelen sekunnin...
-        {sleep}
-        {print} Hmm.. Tarvitsen vielä 3 sekuntia...
         {sleep} 3
-        {print} Heureka! Keksin sen!
--   name: '{is} kilpikonnan kanssa'
-    explanation: Anna numerolle nimi käyttäen komentoa `{is}`. Voit valita nimen itse.
-    demo_code: |-
-        kulma {is} 90
-        {turn} kulma
-        {forward} 100
 3:
 -   name: Valitse satunnainen
     explanation: Valitse satunnainen sana listasta komennoilla `{at}` ja `{random}`.
@@ -73,98 +55,6 @@
     demo_code: |-
         nimi {is} Hedy
         {print} 'minun nimeni on' nimi
--   name: '{ask}'
-    explanation: Kysy jotain komennolla `{ask}`.
-    demo_code: |-
-        väri {is} {ask} 'Mikä on lempivärisi?'
-        {print} väri ' on lempivärisi!'
-5:
--   name: '{print}'
-    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
-    demo_code: '{print} ''Tervetuloa Hedyn pariin.'''
--   name: '{ask}'
-    explanation: Kysy jotain komennolla `{ask}`.
-    demo_code: |-
-        väri {is} {ask} 'Mikä on lempivärisi?'
-        {print} väri ' on lempivärisi!'
--   name: '{if}'
-    explanation: Tee valinta komennolla `{if}`.
-    demo_code: |-
-        väri {is} {ask} 'Mikä on lempivärisi?'
-        {if} väri {is} vihreä {print} 'hieno!' {else} {print} 'plääh'
--   name: '{if} kilpikonnan kanssa'
-    explanation: Tee valinta komennolla `{if}`.
-    demo_code: |-
-        vastaus {is} {ask} 'Kuinka pitkälle minun pitäisi kävellä?'
-        {if} vastaus {is} kauas {forward} 100 {else} {forward} 5
--   name: '{in}'
-    explanation: Tarkista onko asia listassa komennolla `{in}`.
-    demo_code: |-
-        hienot_värit {is} vihreä, keltainen
-        väri {is} {ask} 'Mikä on lempivärisi?'
-        {if} väri {in} hienot_värit {print} 'hieno!' {else} {print} 'plääh'
--   name: '{pressed}'
-    explanation: Tarkista, onko näppäimistön tietty näppäin `{pressed}`.
-    demo_code: '{if} a {is} {pressed} {print} ''Painoit A!'' {else} {print} "Painoit toista näppäintä!"'
-6:
--   name: '{print}'
-    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
-    demo_code: '{print} ''5 kertaa 5 on '' 5 * 5'
--   name: '{ask}'
-    explanation: Kysy laskun tulos ja tarkista onko se oikein.
-    demo_code: |-
-        vastaus = {ask} 'Paljonko on 10 plus 10?'
-        {if} vastaus {is} 20 {print} 'Kyllä!' {else} {print} 'Oho'
--   name: '`{ask}` ja `{if}` kilpikonnan kanssa'
-    explanation: Ask the user how many angles they want.
-    demo_code: |-
-        angles = {ask} 'How many angles?'
-        angle = 360 / angles
-        {forward} 50
-7:
--   name: '{print}'
-    explanation: Tulosta tarkasti käyttäen heittomerkkejä.
-    demo_code: '{print} ''Tervetuloa Hedyn pariin.'''
--   name: '{ask}'
-    explanation: Kysy jotain komennolla `{ask}`.
-    demo_code: |-
-        väri = {ask} 'Mikä on lempivärisi?'
-        {print} väri ' on lempivärisi!'
--   name: '{if}'
-    explanation: Tee valinta komennolla `{if}`.
-    demo_code: |-
-        väri = {ask} 'Mikä on lempivärisi?'
-        {if} väri {is} vihreä {print} 'hieno!' {else} {print} 'plääh'
--   name: '{repeat} kilpikonnan kanssa'
-    explanation: Toista koodirivi komennolla `{repeat}`.
-    demo_code: '{repeat} 3 {times} {forward} 10'
-8:
--   name: '{print}'
-    explanation: Tulosta jotain. Muista käyttää lainausmerkkejä.
-    demo_code: '{print} ''5 kertaa 5 on '' 5 * 5'
--   name: '{ask}'
-    explanation: Kysy vastausta ja tarkista, onko se oikein. Voimme nyt tulostaa 2 riviä.
-    demo_code: |-
-        vastaus = {ask} 'Paljonko on 5 + 5?'
-        {if} vastaus {is} 10
-            {print} 'Hienoa!'
-            {print} 'Vastaus on tosiaan ' vastaus
-        {else}
-            {print} 'Oho!'
-            {print} 'Vastaus on 10'
--   name: '{repeat} kilpikonnan kanssa'
-    explanation: Toista monta riviä.
-    demo_code: |-
-        {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
--   name: '{pressed}'
-    explanation: Tarkista, onko näppäimistön tietty näppäin `{pressed}`.
-    demo_code: |-
-        {if} a {is} {pressed}
-            {print} 'Painoit A!'
-        {else}
-            {print} 'Painoit toista näppäintä!'
 9:
 -   name: '{if} monelle riville'
     explanation: The answer of a sum of questions with `{ask}` and see if it is correct. Now we print out two lines.
@@ -176,148 +66,66 @@
         {else}
             {print} 'Väärin'
             {print} 'Vastaus on 10'
--   name: '{repeat} kilpikonnan kanssa'
+-   name: '{repeat} monelle riville'
     explanation: Toista monta riviä.
     demo_code: |-
         {repeat} 4 {times}
-            {turn} 90
-            {forward} 50
-10:
--   name: '{print}'
-    explanation: Print something. Remember to use a quotation mark for literal printing.
-    demo_code: '{print} ''5 kertaa 5 on '' 5 * 5'
--   name: '{for} listojen kanssa'
-    explanation: Tulosta kaikki asiat listasta.
-    demo_code: |-
-        eläimet {is} koira, kissa, kala
-        {for} eläin {in} eläimet
-          {print} eläin 'on ihana'
-11:
--   name: '{for} silmukka'
-    explanation: Voimme käyttää komentoa `{for}` komennon `{range}` kanssa.
-    demo_code: |-
-        {for} laskuri {in} {range} 1 {to} 5
-            {print} laskuri
--   name: '{ask}'
-    explanation: Kysy vastausta ja tarkista, onko se oikein. Voimme nyt tulostaa 2 riviä.
-    demo_code: |-
-        vastaus = {ask} 'Paljonko on 5 + 5?'
-        {if} vastaus {is} 10
-            {print} 'Hienoa!'
-            {print} 'Vastaus on tosiaan ' vastaus
-        {else}
-            {print} 'Oho!'
-            {print} 'Vastaus on 10'
-12:
--   name: float directly
-    explanation: Desimaaliluvut.
-    demo_code: |-
-        {print} 'Laskehan!'
-        {print} 'Kaksi ja puoli plus kaksi ja puoli on yhteensä...'
-        {print} 2.5 + 2.5
--   name: assign text
-    explanation: Teksti lainausmerkeissä merkin `=` jälkeen
-    demo_code: |-
-        nimi = 'Hedy robotti'
-        {print} 'Hei ' nimi
--   name: heittomerkit `{if}` vertailun jälkeen
-    explanation: Teksti lainausmerkeissä komennon `{if}` jälkeen.
-    demo_code: |-
-        nimi = {ask} 'Kuka olet?'
-        {if} nimi = 'Hedy'
-            {print} 'Moikka!'
--   name: lainausmerkit listassa
-    explanation: Lista käyttäen lainausmerkkejä.
-    demo_code: |-
-        supersankarit = 'Iron Man', 'Batman', 'Superman'
-        {print} supersankarit {at} {random}
+            {print} 'Hello!'
 13:
--   name: '{and}'
-    explanation: Kaksi osaa joiden molempien on oltava oikein.
-    demo_code: |-
-        vastaus1 = {ask} 'Paljonko on 3+2'
-        vastaus2 = {ask} 'Paljonko on 2+2?'
-        {if} vastaus1 {is} 5 {and} vastaus2 {is} 4
-            {print} 'Molemmat vastaukset ovat oikein!'
-        {else}
-            {print} 'Ainakin toinen vastauksista on väärin!'
--   name: '{or}'
-    explanation: Ainakin toisen vastauksista on oltava oikein. Jos molemmat vastaukset ovat oikein, sekin on ok.
-    demo_code: |-
-        vastaus1 = {ask} 'Paljonko on 3+2'
-        vastaus2 = {ask} 'Paljonko on 2+2?'
-        {if} vastaus1 {is} 5 {or} vastaus2 {is} 4
-            {print} 'Ainakin toinen vastauksista on oikein!'
-        {else}
-            {print} 'Molemmat vastaukset ovat väärin!'
-14:
+-   name: '{print}'
+-   name: '{print} with a variable'
+-   name: 'ask something with {input}'
+-   name: '{if} {elif} {else}'
 -   name: Pienempi
     explanation: Käytämme merkkiä `<` tarkistaaksemme onko ensimmäinen numero toista numeroa pienempi.
     demo_code: |-
-        ikä = {ask} 'Kuinka vanha olet?'
-        {if} ikä < 13
-            {print} 'Olet minua nuorempi!'
+        ikä = {input}('Kuinka vanha olet?')
+        {if} ikä < 13:
+            {print}('Olet minua nuorempi!')
 -   name: Suurempi
     explanation: Käytämme merkkiä `>` tarkistaaksemme onko ensimmäinen numero toista numeroa suurempi.
     demo_code: |-
-        ikä = {ask} 'Kuinka vanha olet?'
-        {if} ikä > 13
-            {print} 'Olet minua vanhempi!'
+        ikä = {input}('Kuinka vanha olet?')
+        {if} ikä > 13:
+            {print}('Olet minua vanhempi!')
 -   name: Yhtä suuri
     explanation: Käytämme merkkejä `==` tarkistaaksemme ovatko kaksi asiaa samoja.
     demo_code: |-
-        vastaus = {ask} 'Paljonko on 5 * 5?'
-        {if} vastaus == 25
-            {print} 'Oikein!'
+        vastaus = {input}('Paljonko on 5 * 5?')
+        {if} vastaus == 25:
+            {print}('Oikein!')
 -   name: Eivät yhtä suuret
     explanation: Käytämme merkkejä `!=` tarkistaaksemme ettei kaksi asiaa ole samoja.
     demo_code: |-
-        vastaus = {ask} 'Paljonko on 5 * 5?'
-        {if} vastaus != 25
-            {print} 'Väärin!'
+        vastaus = {input}('Paljonko on 5 * 5?')
+        {if} vastaus != 25:
+            {print}('Väärin!')
 -   name: Pienempi tai yhtäsuuri
     explanation: Käytämme merkkejä `<=` tarkistaaksemme onko ensimmäinen numero pienempi tai yhtäsuuri kuin jälkimmäinen numero.
     demo_code: |-
-        ikä = {ask} 'Kuinka vanha olet?'
-        {if} ikä <= 12
-            {print} 'Olet minua nuorempi!'
+        ikä = {input}('Kuinka vanha olet?')
+        {if} ikä <= 12:
+            {print}('Olet minua nuorempi!')
 -   name: Suurempi tai yhtäsuuri
     explanation: Käytämme merkkejä `>=` tarkistaaksemme onko ensimmäinen numero suurempi tai yhtäsuuri kuin jälkimmäinen numero.
     demo_code: |-
-        ikä = {ask} 'Kuinka vanha olet?'
-        {if} ikä >= 14
-            {print} 'Olet minua vanhempi!'
-15:
+        ikä = {input}('Kuinka vanha olet?')
+        {if} ikä >= 14:
+            {print}('Olet minua vanhempi!')
+16:
 -   name: '{while}'
     explanation: Voimme käyttää `{while}` silmukkaa erisuuruuden kanssa.
     demo_code: |-
         vastaus = 0
-        {while} vastaus != 25
-            vastaus = {ask} 'Paljonko on 5 kertaa 5?'
+        {while} vastaus != 25:
+            vastaus = {input}('Paljonko on 5 kertaa 5?')
         {print} 'Oikea vastaus on annettu'
 -   name: Pienempi {while}
     explanation: We can also use the `{while}` loop with `<` and `>`.
     demo_code: |-
         count = 1
-        {while} count < 3
-            {print} 'We do this ' 3 - count ' more times'
+        {while} count < 3:
+            {print}('We do this ', 3 - count, ' more times')
             count = count + 1
-        {print} 'We are done'
-16:
--   name: square brackets
-    explanation: Lists with square brackets.
-    demo_code: |-
-        fruit = ['apple', 'banana', 'cherry']
-        {print} fruit
--   name: Get an item from a list
-    explanation: To get an item from a list we use [number] so fruit[1] means, get the first fruit from the list!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        firstfruit = fruit[1]
-        {print} firstfruit
--   name: Get a random item from a list
-    explanation: Saadaksesi satunnaisen kohteen luettelosta käytämme [{random}], joten hedelmä[{random}] tarkoittaa, että ota satunnainen hedelmä luettelosta!
-    demo_code: |-
-        fruit = ['banana', 'apple', 'cherry']
-        random_fruit = fruit[{random}]
-        {print} random_fruit
+        {print}('We are done')
+

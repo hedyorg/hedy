@@ -5,7 +5,7 @@ from typing import Optional
 from flask import g, make_response, request
 from website.flask_helpers import gettext_with_fallback as gettext
 import jinja_partials
-import hedy_content
+import website_content as hedy_content
 
 import hedy
 import utils
@@ -291,6 +291,13 @@ class ProgramsModule(WebsiteModule):
         result = self.db.program_by_id(body["id"])
         if not result:
             return make_response(gettext("request_invalid"), 400)
+
+        student_adventure_id = (
+            f"{result.get('username')}-{result.get('adventure_name')}-{result.get('level')}"
+        )
+        student_adventure = self.db.student_adventure_by_id(student_adventure_id)
+        if student_adventure:
+            self.db.set_student_adventure_ticked(student_adventure_id, False)
 
         program = self.db.submit_program_by_id(body["id"], False)
 

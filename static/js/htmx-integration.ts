@@ -4,6 +4,7 @@
 import { initializeHighlightedCodeBlocks } from './app';
 import { ClientMessages } from './client-messages';
 import { modal } from './modal';
+import { closeOpenContextMenus } from './teachers';
 import Sortable from 'sortablejs';
 
 declare const htmx: typeof import('./htmx');
@@ -67,7 +68,19 @@ htmx.on('htmx:responseError', (ev) => {
     const event = ev as CustomEvent<HtmxEvent>;
     const xhr: XMLHttpRequest = event.detail.xhr;
     const genericError = event.detail.error;
-    modal.notifyError(xhr.responseText.length < 1000 ? xhr.responseText : genericError);
+    try {
+        const jsonResponse = JSON.parse(xhr.response)
+        const message = jsonResponse?.message ?? genericError
+        const stack_trace = jsonResponse?.stack_trace ?? "";
+        console.error('======================================');
+        console.error('There was a server error, please report to the maintainers at hello@hedy.org');
+        console.error(stack_trace);
+        console.error('======================================');
+        modal.notifyError(message.length < 1000 ? message : genericError);
+    } catch (e) {
+        modal.notifyError(genericError);
+        return;
+    }
 });
 
 htmx.on('htmx:sendError', () => {
@@ -76,15 +89,49 @@ htmx.on('htmx:sendError', () => {
 
 htmx.on("htmx:confirm", function(e: any) {
     e.preventDefault();
-    const modalPrompt = e.target.getAttribute("hx-confirm");
+    const eventTarget = e.target as HTMLElement;
+    const confirmElement = eventTarget.closest('[hx-confirm]') as HTMLElement | null;
+    const modalElement = confirmElement ?? eventTarget;
+    const modalPrompt = modalElement.getAttribute("hx-confirm");
     // this is to prevent window.confirm. Just passing true to issueRequest isn't enough.
     if (!modalPrompt) {
         // if no confirm attribute was attached, just continue with the  request.
         e.detail.issueRequest(true);
         return;
     }
-    modal.confirm(modalPrompt, () => {
-        e.target.removeAttribute("hx-confirm");
+    const confirmModalVariant = modalElement.getAttribute('data-confirm-modal');
+    const confirmFn = confirmModalVariant === 'redesign' ? modal.confirmRedesign.bind(modal) : modal.confirm.bind(modal);
+    const confirmButtonClass = modalElement.getAttribute('data-confirm-button-class') ?? undefined;
+    const confirmButtonLabel = modalElement.getAttribute('data-confirm-button-label') ?? undefined;
+    const confirmActionsClass = modalElement.getAttribute('data-confirm-actions-class') ?? undefined;
+    const confirmTitle = modalElement.getAttribute('data-confirm-title') ?? undefined;
+    const confirmTitleName = modalElement.getAttribute('data-confirm-title-name') ?? undefined;
+
+    closeOpenContextMenus();
+
+    confirmFn(modalPrompt, () => {
         e.detail.issueRequest(true);
+        const success_message = modalElement.getAttribute("data-success-message")
+        if (success_message) {
+            modal.notifySuccess(success_message);
+        }
+    }, undefined, {
+        confirmButtonClass,
+        confirmButtonLabel,
+        confirmActionsClass,
+        confirmTitle,
+        confirmTitleName,
     });
+});
+
+htmx.on('htmx:beforeRequest', function (e: any) {
+    const requestElement = e.detail?.elt as HTMLElement | undefined;
+    if (!requestElement) {
+        return;
+    }
+
+    const targetSelector = requestElement.getAttribute('hx-target');
+    if (targetSelector === '#modal_target') {
+        closeOpenContextMenus();
+    }
 });

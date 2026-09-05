@@ -257,17 +257,23 @@ export function update_user_tags() {
  * - Otherwise redirect to "my programs".
  */
 async function afterLogin(loginData: Dict<boolean>) {
-  const { url } = localLoadOnce(REDIRECT_AFTER_LOGIN_KEY) ?? {};
-  if (url && !loginData['first_time']) {
-    window.location = url;
-    return;
-  }
-
   const joinClassString = localStorage.getItem('hedy-join');
   const joinClass = joinClassString ? JSON.parse(joinClassString) : undefined;
   if (joinClass) {
     localStorage.removeItem('hedy-join');
     return join_class(joinClass.id, joinClass.name);
+  }
+
+  const { url } = localLoadOnce(REDIRECT_AFTER_LOGIN_KEY) ?? {};
+  if (url && !loginData['first_time']) {
+    const redirectUrl = new URL(url, window.location.origin);
+
+    if (loginData['teacher'] && redirectUrl.pathname === '/') {
+      return redirect('for-teachers');
+    }
+
+    window.location = url;
+    return;
   }
 
   // If the user logs in for the first time and is a teacher -> redirect to the for teacher page
@@ -286,6 +292,7 @@ async function afterLogin(loginData: Dict<boolean>) {
   if (loginData['teacher']) {
     return redirect('for-teachers');
   }
+
   // Otherwise, redirect to the programs page
   redirect('');
 }

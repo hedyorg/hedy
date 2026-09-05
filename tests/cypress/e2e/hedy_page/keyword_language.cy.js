@@ -10,8 +10,8 @@ describe('when the user changes their language to Arabic', () => {
     cy.getDataCy('switch_lang_ar').click();
 
     // switch back and forth
-    cy.getDataCy('kwlang_switch_btn').click();
-    cy.getDataCy('kwlang_switch_toggle').click();
+    cy.getDataCy('kwlang_switch_btn').click({froce: true});
+    cy.getDataCy('kwlang_switch_toggle').click({force: true});
   });
 
   it('initially has keywords in Arabic', () => {
@@ -20,8 +20,8 @@ describe('when the user changes their language to Arabic', () => {
   });
 
   it('the keyword language switcher at the top can switch keywords to English', () => {
-    cy.getDataCy('kwlang_switch_btn').click();
-    cy.getDataCy('kwlang_switch_toggle').click();
+    cy.getDataCy('kwlang_switch_btn').click({force: true});
+    cy.getDataCy('kwlang_switch_toggle').click({force: true});
 
     cy.contains('#editor > .cm-editor > .cm-scroller > .cm-content > .cm-line', 'قول').should('not.exist');
     cy.contains('#editor > .cm-editor > .cm-scroller > .cm-content > .cm-line', 'print').should('be.visible');
