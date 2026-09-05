@@ -14,19 +14,31 @@
 {# The mistakes teachers can expect in this level, with an example of each. #}
 {% macro common_mistakes(sections, level) %}
 {% for mistake_section in sections %}
+{#
+  Every field here is optional: the content is written level by level, so an entry can
+  carry only its code examples while the prose around it is still being written.
+#}
 <div data-cy="common_mistake">
-  <h4>{{ mistake_section.title|commonmark }}</h4>
+  {% if mistake_section.title %}<h4>{{ mistake_section.title|commonmark }}</h4>{% endif %}
   {% if mistake_section.example %} <!-- In this case we expect an error/solution combination -->
-    <p>{{ mistake_section.example.error_text|commonmark }}</p>
-    <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-      <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
-    </div>
-    <p>{{ mistake_section.example.solution_text|commonmark }}</p>
-    <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
-      <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
-    </div>
+    {% if mistake_section.example.error_text %}
+      <p>{{ mistake_section.example.error_text|commonmark }}</p>
+    {% endif %}
+    {% if mistake_section.example.error_code %}
+      <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+        <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.error_code }}</pre>
+      </div>
+    {% endif %}
+    {% if mistake_section.example.solution_text %}
+      <p>{{ mistake_section.example.solution_text|commonmark }}</p>
+    {% endif %}
+    {% if mistake_section.example.solution_code %}
+      <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
+        <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.example.solution_code }}</pre>
+      </div>
+    {% endif %}
   {% else %}
-    <p>{{ mistake_section.text|commonmark }}</p>
+    {% if mistake_section.text %}<p>{{ mistake_section.text|commonmark }}</p>{% endif %}
     {% if mistake_section.code %}
       <div class="w-full lg:w-1/2 turn-pre-into-ace my-5">
         <pre class="common-mistakes" level="{{ level }}" style="font-size: 0.95em;">{{ mistake_section.code }}</pre>
