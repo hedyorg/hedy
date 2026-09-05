@@ -2,6 +2,26 @@
 
 {% block regular_content %}
 {% from 'incl/breadcrumb.html' import breadcrumb %}
+
+{#
+  A single entry in the list of teaching materials.  Pass a `url` once the page
+  behind the card exists; without one the card renders as a plain heading.
+#}
+{% macro material_card(title, info, url=None, cy=None) %}
+<div class="flex flex-row gap-4 mt-6">
+  <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8">
+    <h2 class="m-0">
+      {%- if url -%}
+        <a href="{{ url }}" data-cy="{{ cy }}">{{ title }}</a>
+      {%- else -%}
+        {{ title }}
+      {%- endif -%}
+    </h2>
+    <div class="text-black text-base">{{ info }}</div>
+  </div>
+</div>
+{% endmacro %}
+
 <div class="flex-col md:px-16">
   {{ breadcrumb([
       {'label': _('teaching_materials')}
@@ -9,18 +29,30 @@
 
   <h1 class="my-5">{{ _('teaching_materials') }}</h1>
 
-  <div class="flex flex-row gap-4">
-    <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8">
-      <h2 class="m-0"><a href="/for-teachers/manual" data-cy="background_information_link">{{ _('background_information') }}</a></h2>
-      <div class="text-black text-base">{{ _('background_information_info') }}</div>
-    </div>
+  <h2 class="mt-8 mb-3">{{ _('prepare_per_level') }}</h2>
+  <div class="flex flex-row flex-wrap items-center gap-3">
+    <label for="prepare_level_select" class="text-base">{{ _('pick_level_to_prepare') }}</label>
+    <select id="prepare_level_select"
+            data-cy="prepare_level_select"
+            class="border border-gray-400 rounded px-3 py-2">
+      {% for level in levels %}
+      <option value="{{ level }}">{{ _('level') }} {{ level }}</option>
+      {% endfor %}
+    </select>
+    <button type="button"
+            class="blue-btn-new inline-flex items-center"
+            id="prepare_level_button"
+            data-cy="prepare_level_button"
+            onclick="window.location.href='/for-teachers/teaching-materials/' + document.getElementById('prepare_level_select').value">
+      {{ _('prepare') }}
+    </button>
   </div>
 
-  <div class="flex flex-row gap-4 mt-10">
-    <div class="flex flex-col items-left gap-3 bg-white border border-gray-400 shadow-md rounded-lg w-full p-8">
-      <h2 class="m-0"><a href="/for-teachers/slides" data-cy="slides_link">{{ _('slides') }}</a></h2>
-      <div class="text-black text-base">{{ _('slides_card_info') }}</div>
-    </div>
+  <div data-cy="teaching_materials_cards">
+    {{ material_card(_('background_information'), _('background_information_info'),
+                     '/for-teachers/manual', 'background_information_link') }}
+    {{ material_card(_('slides'), _('slides_card_info'), '/for-teachers/slides', 'slides_link') }}
+    {{ material_card(_('workbooks'), _('workbooks_info')) }}
   </div>
 </div>
 {% endblock %}

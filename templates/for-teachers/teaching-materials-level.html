@@ -1,0 +1,135 @@
+{% extends "auth.html" %}
+
+{% block regular_content %}
+{% from 'incl/breadcrumb.html' import breadcrumb %}
+{% from 'incl/level-guide.html' import concepts_and_changes, common_mistakes %}
+
+{#
+  One material a teacher can use to prepare this level, with the context menu
+  that holds its actions.  Actions we cannot offer yet (no page behind them, or
+  no material for this level) are still listed, but disabled.
+#}
+{% macro material(index, label, cy, view_url=None, downloadable=False) %}
+<li class="flex flex-row items-center gap-4">
+  {# As big as the section headings below it, so the materials read as a section of their own. #}
+  <h2 class="m-0 w-72 flex-none">
+    {%- if view_url -%}
+      <a href="{{ view_url }}" data-cy="{{ cy }}_link">{{ label }}</a>
+    {%- else -%}
+      <span class="text-gray-600" data-cy="{{ cy }}_link">{{ label }}</span>
+    {%- endif -%}
+  </h2>
+  <div class="relative inline-block text-left" name="menu">
+    <button type="button" class="blue-btn-new teacher-menu-button" data-cy="{{ cy }}_actions"
+            aria-label="{{ label }}"
+            _="on click
+            remove .menu-content-open from <div.menu:not(#menu-{{ index }})/>
+            add .hidden .menu-content-closed to <div.menu:not(#menu-{{ index }})/>
+            if #menu-{{ index }} matches .hidden
+                remove .hidden from #menu-{{ index }}
+                call hedyApp.positionContextMenu(me)
+                wait 10ms
+                toggle .menu-content-open .menu-content-closed on #menu-{{ index }}
+            else
+                call hedyApp.teardownContextMenu(me)
+                toggle .menu-content-open .menu-content-closed on #menu-{{ index }}
+                wait 180ms
+                add .hidden to #menu-{{ index }}
+                ">
+      <i class="fa-solid fa-ellipsis"></i>
+    </button>
+    <div id="menu-{{ index }}" data-cy="{{ cy }}_menu"
+         class="teacher-context-menu hidden menu origin-top-right absolute grid menu-content-closed grow-0
+                ease-in transition-opacity transition-transform duration-150">
+      <ul class="list-none divide-y divide-gray-200 p-2">
+        {% if downloadable %}
+        <li>
+          {# Downloading a workbook is not built yet, so the action is shown but cannot be used. #}
+          <span class="teacher-context-menu-item flex items-center gap-4 opacity-50 cursor-not-allowed"
+                aria-disabled="true" data-cy="{{ cy }}_download">
+            <i class="fa-solid fa-download text-sm"></i>
+            <span>{{ _('download') }}</span>
+          </span>
+        </li>
+        {% endif %}
+        <li>
+          {% if view_url %}
+          <a href="{{ view_url }}" class="teacher-context-menu-item flex items-center gap-4 no-underline"
+             data-cy="{{ cy }}_view">
+            <i class="fa-solid fa-eye text-sm"></i>
+            <span>{{ _('view') }}</span>
+          </a>
+          {% else %}
+          <span class="teacher-context-menu-item flex items-center gap-4 opacity-50 cursor-not-allowed"
+                aria-disabled="true" data-cy="{{ cy }}_view">
+            <i class="fa-solid fa-eye text-sm"></i>
+            <span>{{ _('view') }}</span>
+          </span>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</li>
+{% endmacro %}
+
+<div class="flex-col md:px-16">
+  {{ breadcrumb([
+      {'label': _('teaching_materials'), 'url': '/for-teachers/teaching-materials'},
+      {'label': _('prepare_level') + ' ' + selected_level|string}
+    ], 'mt-2 mb-4') }}
+
+  <div class="flex flex-row flex-wrap items-center gap-4 my-5">
+    <h1 class="m-0">{{ _('teaching_materials') }}</h1>
+    {#
+      The level picker doubles as the title of the page, the same way it does on the
+      level page.  It reuses the ids that hedyApp.open_index_dropdown() toggles, so no
+      extra JavaScript is needed here.
+    #}
+    <div class="dropdown relative">
+      <button type="button" id="dropdown_open_button"
+              data-cy="teaching_materials_level_dropdown"
+              aria-label="{{ _('level') }}"
+              class="blue-btn-new text-4xl font-light text-blue-800"
+              onclick="hedyApp.open_index_dropdown()">
+        <span>{{ _('level_title') }} {{ selected_level }}</span>
+        <i class="fa-solid fa-chevron-down transition-all ease-in duration-300 text-3xl"
+           id="dropdown_index_arrow"></i>
+      </button>
+      <div id="dropdown-level" data-cy="teaching_materials_level_options"
+           class="absolute block rounded-md ltr:left-0 rtl:right-0 w-max overflow-y-auto p-2 shadow-lg
+                  dropdown-blue z-30 min-w-full max-h-96"
+           style="display: none;">
+        {% for level in levels %}
+        <a href="/for-teachers/teaching-materials/{{ level }}"
+           data-cy="teaching_materials_level_{{ level }}"
+           class="flex flex-row items-center justify-between rounded-lg px-3 py-1 text-lg font-extralight
+                  text-blue-900 no-underline ease-in transition duration-100 hover:bg-blue-200
+                  {% if level == selected_level %}bg-blue-200{% endif %}">
+          {{ _('level_title') }} {{ level }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {{ concepts_and_changes(level_concepts_and_changes) }}
+
+  <ul class="list-none m-0 p-0 flex flex-col gap-6 mt-8" data-cy="teaching_materials_list">
+    {{ material(1, _('slides'), 'teaching_materials_slides',
+                '/for-teachers/slides/' ~ selected_level if has_slides else None) }}
+    {{ material(2, _('workbook'), 'teaching_materials_workbook',
+                '/for-teachers/workbooks/' ~ selected_level if has_workbook else None,
+                downloadable=True) }}
+    {{ material(3, _('workbook_solutions'), 'teaching_materials_workbook_solutions',
+                downloadable=True) }}
+  </ul>
+
+  {% if common_mistakes_sections %}
+  <h2 class="mt-10 mb-3" data-cy="teaching_materials_common_mistakes">{{ _('common_mistakes') }}</h2>
+  <div data-cy="common_mistakes_list">
+    {{ common_mistakes(common_mistakes_sections, selected_level) }}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
